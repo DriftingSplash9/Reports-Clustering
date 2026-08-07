@@ -299,12 +299,30 @@ open**: all items on all three files' own lists. None were touched.
    will become a quoted `basis`. Confirmed clean this session on
    `ec.europa.eu/eurostat` and `sdmx.org`.
 
-**Git state:** this session's work is committed locally. **It was not pushed** —
-the working environment has no write credentials for `origin`, and `origin/main`
-was already two commits behind before this session started (the AU G.3 and NZ
-G.5 sessions are also unpushed). Three commits are now waiting. Per the
-2026-08-07 git policy, this is recorded rather than silently skipped: **Thomas
-needs to `git push` from the device**, or a future session needs credentials.
+**Git state: resolved — `origin/main` is up to date.** This session committed
+locally (`f53890e`) and could not push; Thomas pushed from the device the same
+day, taking `origin/main` from `22a9a9e` to `f53890e` and carrying the two
+previously-stranded commits (AU G.3 `0dbaa33`, NZ G.5 `1c5905a`) with it. The
+public repo now matches the corpus.
+
+**Why the session could not push, so the next one does not waste time on it.**
+The sandbox has a `GITHUB_TOKEN`, but its git proxy refuses to use it for this
+repo: *"DriftingSplash9/Reports-Clustering is not in this session's authorized
+repository set, so the proxy will not inject a credential for it"* — HTTP 403,
+not an auth prompt. `device_bash` cannot push either, having no network. The
+route that *does* work, if a future session needs to move commits out: `git
+bundle create <file> origin/main..HEAD` on the device, stage the bundle into the
+container, `git fetch <bundle> HEAD:<branch>` — this was done and verified this
+session, and preserves exact history rather than re-creating it. Only the final
+push leg is blocked. **Do not re-create commits in the container and push those
+instead** — it would diverge from the device's history and leave Thomas unable
+to fast-forward.
+
+**Standing consequence for the 2026-08-07 git policy:** sessions in this
+environment can satisfy the "commit" half and not the "push" half. Say so in the
+hand-off and tell Thomas, rather than leaving it silent — GitHub Desktop opens on
+whatever repository it last had selected, which on 2026-08-07 was a different
+project entirely, so "there are commits waiting" is worth stating explicitly.
 
 ---
 

@@ -320,3 +320,14 @@ raid this list when a session has capacity left)
 * **Git policy (decided 2026-08-07, Thomas)**: every session ends by
   committing its own work with a descriptive message and pushing to
   origin/main. Can't push? Commit locally and say so in the hand-off.
+  **Amended 2026-08-07 (`EU/G.50.md`): cloud sessions can do the commit half
+  and not the push half.** The sandbox git proxy refuses to inject its
+  `GITHUB_TOKEN` for this repo ("not in this session's authorized repository
+  set", HTTP 403), and `device_bash` has no network. So commit, then **say in
+  the reply that commits are waiting** — GitHub Desktop opens on whatever
+  repository it last had selected, and on 2026-08-07 that was a different
+  project, which is how three commits sat unpushed for two days. To move
+  commits off the device without re-creating them: `git bundle create <f>
+  origin/main..HEAD` there, stage the bundle, `git fetch <f> HEAD:<branch>` in
+  the container. Never re-create the commits in the container and push those —
+  it diverges from the device's history.
