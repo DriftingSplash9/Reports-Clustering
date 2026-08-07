@@ -222,3 +222,24 @@ scene as a distinct unweighted line style following the `implied` precedent. Non
 was built, deliberately — with one relation in the corpus there is nothing to look at, and
 the session had no way to see the render. Revisit when the Tokelau and UKSPF nodes exist
 and the count is above one.
+
+---
+
+## Addendum 2026-08-07 — `supersedes` minted, and a `caveat` reason
+
+Two closures in one session, both decided by Thomas the same evening:
+
+1. **The corpus's first `supersedes` relation exists**:
+   `gb-ukspf-prospectus -[supersedes]-> eu-esif-common-provisions-regulation`
+   (src/data/research/gb-ukspf-succession.json). The type had been added to
+   `RelationType` on 2026-08-06; what was missing was the two nodes. Both were
+   built and verified first-hand, the prospectus's succession sentence and its
+   own FAQ's counter-framing ("not a direct replacement") are BOTH in the
+   basis per §3's report-both-sides rule, and the Orkney / North East
+   Lincolnshire council citations were finally verified and folded in.
+2. **`caveat` is now a `DroppedReason`** — an annotation ON a minted edge,
+   whose endpoints must name a real edge (validator-enforced, both ways: a
+   caveat naming a missing edge fails, a plain `note` naming an existing edge
+   still fails). The six nulled-endpoint workaround notes got their endpoints
+   back. The workaround this retires was this document's own invention;
+   retiring it here closes the loop.

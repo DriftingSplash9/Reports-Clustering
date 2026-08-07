@@ -38,7 +38,9 @@ mark it here AND in whatever branch file owns it.
    collisions); the two scoping-template files in the same folder are
    research *targets*, not data. Read the bundled session logs first.
    (Source: rolling-todo Now #1.)
-2. **Settle the `Research.1.md` version string.** Header says v3.0; four
+2. ~~Settle the `Research.1.md` version string~~ **DONE 2026-08-07** —
+   Thomas chose deletion; the git history is the version record now.
+   Original claim: Header says v3.0; four
    branch files describe v3.3/v3.4. Carried by five sessions and counting.
    One edit by Thomas (fix it or delete the version line). Two minutes.
    (Source: NZ/G.4 Corrections 1.)
@@ -54,7 +56,13 @@ mark it here AND in whatever branch file owns it.
 
 ## P1 — Branch frontiers (each is one good session)
 
-4. **NZ — the G.4 list, in its own order.** (a) Stats NZ national-accounts
+4. **NZ — the G.4 list, in its own order.** *(Cheap checks 1–2 DONE
+   2026-08-07: XRB A1 → Public Audit Act 2001 minted (methodology_depends_on,
+   para 6 verified first-hand) and Wellington → Public Audit Act 2001 minted
+   (cites, re-fetched at source); the OAG back half was reached via its HTML
+   pages and the PBE-IPSAS edge was correctly REFUSED — the report says only
+   "Tier 1 PBE Standards", naming no standard-setter document. Items (a) and
+   (c) remain.)* (a) Stats NZ national-accounts
    pass from `nz-statsnz-aes` — five downstream products named in DataInfo+,
    none in the corpus, domain reliably fetchable. (b) Cheap checks first if
    short on time: mint the XRB A1 and Wellington edges to
@@ -87,19 +95,29 @@ mark it here AND in whatever branch file owns it.
 
 ## P2 — Decisions only Thomas can make (each blocks something concrete)
 
-9. **A `supersedes` relationship type?** The UKSPF/EU-structural-funds case
+9. ~~A `supersedes` relationship type?~~ **DONE 2026-08-07** — the type
+   already existed (added 2026-08-06); the missing nodes were built and the
+   corpus's first `supersedes` relation is minted, with the Orkney/NE-Lincs
+   citations verified and folded in (gb-ukspf-succession.json). Original: The UKSPF/EU-structural-funds case
    is ready to build the moment this is decided, and the Orkney/NE-Lincs
    ERDF citations are blocked on it. Same decision style as the `audits`
    one already made. (Source: EU/G.49 Finding 3, cheap checks 3–4.)
 10. **Mint the Public Finance Act 1989 — and decide its edge policy.** It
     plausibly sits under a large fraction of NZ fiscal nodes; the question
     is how many edges it collects on arrival, not whether it exists.
-    (Source: NZ/G.4 priority 5.)
-11. **Branch hand-off lettering.** Does EU's A–G lettered-priorities
+    (Source: NZ/G.4 priority 5.) **Stronger as of 2026-08-07**: the OAG
+    annual report's own compliance statement hangs NZ GAAP on the Public
+    Finance Act, not the Public Audit Act (see nz-government-finance.json's
+    newest _dropped record).
+11. ~~Branch hand-off lettering~~ **DECIDED 2026-08-07** — plain numbers
+    per branch; EU keeps its historical A–G. Recorded in Research.1.md §2.
+    Original: Does EU's A–G lettered-priorities
     convention carry to NZ/AU or do branches letter their own? Carried
     unanswered by five sessions; costs a paragraph of every hand-off.
     (Source: AU/G.1 priority 4; NZ/G.4.)
-12. **A `reason` value for caveat-notes.** `_dropped` entries that annotate
+12. ~~A `reason` value for caveat-notes~~ **DONE 2026-08-07** — `caveat`
+    added to DroppedReason with validator enforcement both ways; the six
+    nulled notes got their endpoints back. Original: `_dropped` entries that annotate
     a real edge must fake null endpoints to pass the validator (Montenegro
     was converted this way 2026-08-07 and the pattern will recur). Add a
     proper `caveat` reason to the schema + validator, or bless the null

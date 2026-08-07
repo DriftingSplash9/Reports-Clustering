@@ -641,6 +641,16 @@ export type DroppedReason =
   | 'deferred'
   /** Not a dropped edge at all — an observation about the corpus. */
   | 'note'
+  /**
+   * Also not a dropped edge: an annotation ON a minted edge — an unresolved
+   * discrepancy, a supersession story, a remap explanation. Decided
+   * 2026-08-07 (was NZ/G.4 cheap check 5). Unlike every other reason, a
+   * caveat's source/target MUST name a real edge; the validator checks that
+   * the edge exists, where for a plain `note` an existing edge is an error.
+   * Before this existed, caveats faked null endpoints to pass validation,
+   * which lost the one thing that made them findable.
+   */
+  | 'caveat'
 
 /** The reasons that are research leads rather than answers. */
 export const DROPPED_LEAD_REASONS: readonly DroppedReason[] = ['no-node-yet', 'deferred']

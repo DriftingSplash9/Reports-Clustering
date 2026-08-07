@@ -1,4 +1,8 @@
-# Research.1.md — standing brief (v3.0, adopted 2026-08-05)
+# Research.1.md — standing brief (adopted 2026-08-05)
+
+<!-- The version string was deleted 2026-08-07 on Thomas's decision: it had
+drifted (header said v3.0 while four branch files described v3.3/v3.4) and
+the repo is under git now, so the history IS the version record. -->
 
 **This is the governing brief**, adopted by Thomas on 2026-08-05, replacing the
 prior `Research.1.md` (v1.0). This is a merge of that prior brief with
@@ -122,6 +126,18 @@ location**. The least valuable thing you can send back is a summary of what a
 document is about.
 
 ---
+
+**Caveat-notes (decided 2026-08-07, Thomas).** A `_dropped` entry with reason
+`caveat` is not a dropped edge: it is an annotation ON a minted edge — an
+unresolved discrepancy in the evidence, a supersession story, a remap
+explanation. Its `source`/`target` must name the real edge, and the validator
+checks the edge exists (the pre-2026-08-07 workaround of nulling the endpoints
+is retired). A plain `note` whose endpoints name an existing edge is still an
+error.
+
+**Branch hand-off priorities (decided 2026-08-07, Thomas).** Branches number
+their own priority lists plainly (1, 2, 3 …). The EU branch's A–G lettering is
+its own history and stays; it does not carry to NZ, AU or any new branch.
 
 ## 3. Extract; do not adjudicate
 

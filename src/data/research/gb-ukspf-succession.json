@@ -1,0 +1,65 @@
+{
+  "_slice": "ukspf-supersession",
+  "_researched": "2026-08-05",
+  "_merged": "2026-08-07",
+  "_note": "The UKSPF supersession case, decided by the project owner 2026-08-07. Origin: EU/G.49.md Finding 3 and the `no-node-yet` entry in src/data/research/uk-local-government-finance.json's _dropped array (updated 2026-08-06 when `supersedes` became a RelationType). This slice mints both missing ends and the relation. Everything here was re-verified 2026-08-07 by WebFetch against the live documents: the UKSPF prospectus and FAQ on gov.uk, Regulation (EU) No 1303/2013 on legislation.gov.uk (EUR-Lex was unreachable through the fetch proxy this session — see _dropped), and both council corroborations (Orkney Islands Council committee report PDF; North East Lincolnshire Council news page), which verified first-hand and are folded into the relation's basis rather than minted as edges of their own (neither council document is a corpus node and neither claim is a dependency). 2 new reports, 1 relation, 0 dependencies. At integration, the UKSPF `no-node-yet` entry in uk-local-government-finance.json's _dropped array is resolved by this slice and can be retired or annotated as such.",
+  "reports": [
+    {
+      "id": "gb-ukspf-prospectus",
+      "title": "UK Shared Prosperity Fund: prospectus and allocations",
+      "publisher": "Ministry of Housing, Communities and Local Government",
+      "country": "GB",
+      "jurisdiction_level": "federal",
+      "region": "United Kingdom",
+      "description": "The prospectus, technical notes and per-authority allocations for the £2.6 billion UK Shared Prosperity Fund, the UK government's domestic successor to EU structural funding, allocated to lead local authorities across England, Scotland, Wales and Northern Ireland. The ministerial foreword states, VERIFIED DIRECTLY (gov.uk, 2026-08-07): 'This is our vision and ambition for the new £2.6 billion UK Shared Prosperity Fund (UKSPF), which succeeds the old EU structural funds.' The companion FAQ, same publication series, holds the other framing of the same relationship, also VERIFIED DIRECTLY: 'The UKSPF is not a direct replacement for EU structural funds.' Both quotes are current gov.uk text and the conflict is recorded rather than adjudicated, per this project's convention.",
+      "releases_per_year": 2,
+      "cadence_note": "First published 13 April 2022 as a prospectus; maintained as a recurring release rather than a one-off. The gov.uk publication's own update history (read 2026-08-07) shows nine dated updates through 17 December 2025, including '13 December 2024: Added 2025-26 Technical Note and allocations documents', '4 March 2025: Added 2025-26 additional information and indicators' and '17 December 2025: Updated sections on expenditure deadline extension' — an annual technical-note/allocations rhythm plus in-year amendments. Publisher shown on gov.uk as MHCLG together with its predecessor name, Department for Levelling Up, Housing and Communities, which published the 2022 original. Nine dated updates 2022-2025 (~2 a year), including annual technical-note and allocations additions; treated as the release rate since the page is the publication.",
+      "last_updated": null,
+      "url": "https://www.gov.uk/government/publications/uk-shared-prosperity-fund-prospectus",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "eu-esif-common-provisions-regulation",
+      "title": "Common Provisions Regulation (EU) No 1303/2013 (ERDF, ESF, Cohesion Fund, EAFRD, EMFF)",
+      "publisher": "European Parliament and Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The framework regulation for the 2014-2020 European Structural and Investment Funds — the instrument that constitutes 'the Structural Funds' the UKSPF succeeded in the UK. Full title, VERIFIED DIRECTLY (legislation.gov.uk, 2026-08-07): 'Regulation (EU) No 1303/2013 of the European Parliament and of the Council of 17 December 2013 laying down common provisions on the European Regional Development Fund, the European Social Fund, the Cohesion Fund, the European Agricultural Fund for Rural Development and the European Maritime and Fisheries Fund and laying down general provisions on the European Regional Development Fund, the European Social Fund, the Cohesion Fund and the European Maritime and Fisheries Fund and repealing Council Regulation (EC) No 1083/2006.' Article 1 as adopted, VERIFIED DIRECTLY, defines the term this case turns on: Part Three 'lays down the general rules governing the ERDF, the ESF (together referred to as the \"Structural Funds\")'. NOTE ON SOURCE: verified from legislation.gov.uk's retained-EU-law copy (whose current revised text is amended post-Brexit — the as-adopted version carries the original Article 1); EUR-Lex, the canonical publisher, was unreachable through this session's fetch proxy (persistent HTTP 429) — see _dropped.",
+      "releases_per_year": 0.14,
+      "cadence_note": "Consolidated regulation, re-made each seven-year Multiannual Financial Framework programming period — Council Regulation (EC) No 1083/2006 (2007-2013, repealed by this instrument's own title), Regulation (EU) No 1303/2013 (2014-2020), Regulation (EU) 2021/1060 (2021-2027) — and amended within-period (legislation.gov.uk shows the retained copy last modified 29 July 2025, revised as of 29 December 2020). Modelled at the per-programming-cycle rate, the same convention as other versioned framework instruments in this corpus. 1303/2013 rather than 2021/1060 is the correct target here because the UK left the framework under the 2014-2020 cycle: it is the ERDF/ESF programmes under this regulation that the UKSPF succeeded.",
+      "last_updated": null,
+      "url": "https://www.legislation.gov.uk/eur/2013/1303/contents",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "relations": [
+    {
+      "source_report_id": "gb-ukspf-prospectus",
+      "target_report_id": "eu-esif-common-provisions-regulation",
+      "relation_type": "supersedes",
+      "basis": "VERIFIED DIRECTLY by the minting session (2026-08-07, all four documents WebFetched live), converting the `no-node-yet` entry in uk-local-government-finance.json's `_dropped` array on the day the project owner decided the case. THE OPERATIVE QUOTE, the UKSPF prospectus's ministerial foreword: 'This is our vision and ambition for the new £2.6 billion UK Shared Prosperity Fund (UKSPF), which succeeds the old EU structural funds.' The prospectus body corroborates continuity in its allocation method ('This ensures that all places get an allocation that allows for significant continuity with EU structural funds') and names the ESF directly ('Lead local authorities should take account of the Adult Education Budget and remaining European Social Fund investments, which operate at larger geographies'). THE RECORDED CONFLICT, unchanged and still live on gov.uk (FAQ, same publication, updated 17 December 2025, re-verified this session): 'The UKSPF is not a direct replacement for EU structural funds.' Two primary UK-government documents in the same publication series hold different framings of the same relationship; per this project's convention the conflict is reported, not adjudicated — 'succeeds' (the foreword's word, and this schema's relation_type) asserts temporal succession, which both documents are compatible with; 'not a direct replacement' denies equivalence of design, which this relation does not assert. WHY THE TARGET IS REGULATION 1303/2013: neither gov.uk document names ERDF or ESF as the predecessor programmes, but two council documents, both previously subagent-read only and both RE-VERIFIED FIRST-HAND this session, do. Orkney Islands Council, Policy and Resources Committee, 'Replacement of Previous EU Structural Funding', 20 September 2022 (https://www.orkney.gov.uk/media/gyfbbbcr/item-20-replacement-of-previous-eu-structural-funding.pdf): 'The UK Shared Prosperity Fund, alongside the Levelling up Fund (LUF), is intended to replace EU funding provided through the European structural and investment funds, namely European Regional Development Fund (ERDF), and European Social Fund (ESF).' North East Lincolnshire Council, 'Council to submit investment plan to Government', 21 July 2022 (https://www.nelincs.gov.uk/council-to-submit-investment-plan-to-government/): 'The UKSPF is allocated to local authorities to replace the \"European Structural Funds\" programmes, ERDF and ESIF which this area has previously benefited from.' Regulation (EU) No 1303/2013's Article 1 as adopted is the instrument that defines exactly those two programmes as the term the foreword uses — the ERDF and 'the ESF (together referred to as the \"Structural Funds\")' — and it governed the 2014-2020 programmes still winding down in the UK when the UKSPF launched. The council documents are corroboration inside this basis rather than edges of their own: neither is a corpus node, and 'replaces' is not a dependency.",
+      "evidence_url": "https://www.gov.uk/government/publications/uk-shared-prosperity-fund-prospectus/uk-shared-prosperity-fund-prospectus"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "eu-esif-common-provisions-regulation",
+      "target": null,
+      "reason": "note",
+      "why": "EUR-Lex, the canonical publisher of Regulation (EU) No 1303/2013, could not be fetched this session: three WebFetch attempts against eur-lex.europa.eu (consolidated text CELEX:02013R1303-20240301 twice, document-information page CELEX:32013R1303 twice) returned persistent HTTP 429 from the fetch proxy plus one read timeout, spread over several minutes, while gov.uk and legislation.gov.uk fetched cleanly in between — the block is EUR-Lex-specific, not a general rate limit. The node was therefore verified and anchored on legislation.gov.uk's retained-EU-law copy (title page, Article 1 as adopted, and /contents landing all fetched and confirmed), which is a faithful official mirror for the as-adopted text. A future session with EUR-Lex access may prefer to repoint the node's `url` to https://eur-lex.europa.eu/eli/reg/2013/1303/oj after confirming it resolves; nothing in the minted content depends on that."
+    },
+    {
+      "source": "gb-ukspf-prospectus",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLUTION RECORD for the `no-node-yet` UKSPF entry in src/data/research/uk-local-government-finance.json's `_dropped` array (the 'UPDATED 2026-08-06' entry). Everything that entry said was blocking is now unblocked and done in this slice: both ends exist (gb-ukspf-prospectus, eu-esif-common-provisions-regulation) and the relation is minted with the foreword quote as its operative basis and the FAQ conflict recorded inside the basis. The two subagent-only council leads (Orkney Islands Council committee report; North East Lincolnshire Council page) — EU/G.49.md cheap check 3 — were independently re-verified first-hand this session and their verbatim quotes are preserved in the relation's basis; they support the relation (identifying ERDF/ESF as the succeeded programmes), not any dependency, and neither council document qualifies as a node (a one-off committee paper and a news page). At integration the src entry should be retired or annotated as resolved by this slice; this slice does not edit src/ itself."
+    }
+  ]
+}

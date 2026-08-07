@@ -262,11 +262,25 @@ for (const n of droppedNotes) {
 const leads = droppedNotes.filter((n) => DROPPED_LEAD_REASONS.includes(n.reason))
 const contradictions = droppedNotes.filter(
   (n) =>
+    n.reason !== 'caveat' &&
     n.source !== null &&
     n.target !== null &&
     dependencies.some(
       (d) => d.source_report_id === n.source && d.target_report_id === n.target,
     ),
+)
+
+// The mirror-image rule for caveats: a caveat annotates a minted edge, so the
+// edge it names must exist (and the endpoints must not be null — that was the
+// pre-2026-08-07 workaround this reason exists to retire).
+const danglingCaveats = droppedNotes.filter(
+  (n) =>
+    n.reason === 'caveat' &&
+    (n.source === null ||
+      n.target === null ||
+      !dependencies.some(
+        (d) => d.source_report_id === n.source && d.target_report_id === n.target,
+      )),
 )
 
 console.log(`DROPPED — ${droppedNotes.length} dependencies looked for and not taken`)
@@ -280,6 +294,13 @@ console.log(
 )
 for (const c of contradictions) console.log(`      ${c.source} -> ${c.target} (${c.reason})`)
 if (contradictions.length) invariantFailures++
+console.log(
+  danglingCaveats.length === 0
+    ? '  ✓ every caveat names an edge that exists'
+    : `  ✗ ${danglingCaveats.length} caveat(s) with null endpoints or naming a missing edge:`,
+)
+for (const c of danglingCaveats) console.log(`      ${c.source} -> ${c.target}`)
+if (danglingCaveats.length) invariantFailures++
 console.log(
   `  ${leads.length} are research leads rather than answers — evidence described as existing, node or pass missing`,
 )
