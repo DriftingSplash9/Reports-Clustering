@@ -1,0 +1,175 @@
+{
+  "_slice": "City of Calgary — municipal template replication",
+  "_researched": "2026-07-30",
+  "_merged": "2026-08-07",
+  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff, verified against primary sources 2026-08-07. The Grande Prairie six-document template replicates cleanly on Calgary with two corrections. (1) The handoff's ab-dip-requisition report duplicates the live node of the same id — not re-emitted here; the edge is wired into the existing node. (2) The handoff's calgary-municipal-census node is wrong: Calgary discontinued its civic census (last conducted 2019; the handoff URL 404s) and the 2026 budget sources population from the City's own Corporate Economics projections and Statistics Canada instead — the census node is dropped and replaced by calgary-economic-outlook, which the budget names verbatim. Three of the five handoff edges verified against Bylaw 9M2026, the council report C2026-0172 and the 2025 Annual Financial Report; one remapped, one dropped. Four additional verbatim-documented edges added wiring Calgary into existing provincial/institutional nodes (ab-education-property-tax-requisition, psab-psas, ab-tbf-fiscal-plan) and the statements into the budget, matching the Grande Prairie pattern.",
+  "reports": [
+    {
+      "id": "calgary-tax-rate-bylaw",
+      "title": "Property Tax Bylaw (Rates of Taxation)",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Annual bylaw setting the tax rate for each assessment class, passed under section 353 of the Municipal Government Act. Recites the estimated municipal expenditure excess it must raise, the taxable assessment on the assessment roll it levies against, the provincial education requisition it collects on the province's behalf, and the ministerially set designated industrial property requisition rate. The 2026 instance is Bylaw 9M2026, passed 31 March 2026.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.calgary.ca/property-owners/taxes/bill-rate-calculation.html",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "calgary-assessment-roll",
+      "title": "Property Assessment Roll",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Annual valuation of every assessable property in the city under the Municipal Government Act, with a valuation date of 1 July of the prior year; assessment notices are mailed in early January. Bylaw 9M2026 records the 2026 roll at $450.8 billion total assessment. The base against which every property tax rate in the city is levied, and published in machine-readable form annually on data.calgary.ca.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.calgary.ca/property-owners/assessment/roll-highlights.html",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "calgary-budget",
+      "title": "Service Plans and Budgets",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Multi-year operating and capital budget adopted by Council (the 2023-2026 cycle, adjusted annually — the 2026 Budget Adjustments were approved December 2025 as C2025-0901). Sets the municipal tax revenue requirement the Property Tax Bylaw is then calibrated to raise, and names its population and inflation sources.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/plans-budgets-and-financial-reports/2023-2026-service-plans-budgets/2026-budget-as-approved-dec-3-2025.pdf",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "calgary-financial-statements",
+      "title": "Annual Financial Report (Consolidated Audited Financial Statements)",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Annual audited consolidated financial statements required of every Alberta municipality by the Municipal Government Act, prepared in accordance with Canadian Public Sector Accounting Standards. Reports actuals beside the Council-approved budget throughout, and discloses the provincial property taxes The City collects on the Government of Alberta's behalf. The 2025 report was released in spring 2026.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/2025-Annual-Financial-Report.pdf",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "calgary-economic-outlook",
+      "title": "Calgary and Region Economic Outlook (incl. Calgary and Region Population Projections)",
+      "publisher": "City of Calgary, Corporate Economics",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Semi-annual economic forecast by The City's Corporate Economics division, comprising the Calgary and Region Population Projections/Outlook and forecast tables for inflation, housing starts and other indicators. The population and inflation assumptions named in the City budget are drawn from it. Replaces the municipal census in Calgary's budget process — the civic census was last conducted in 2019 and has been discontinued.",
+      "releases_per_year": 2,
+      "cadence_note": "Spring and fall editions, with interim updates to the forecast tables and population projections (the 2026 budget cites a January 2025 update).",
+      "last_updated": null,
+      "url": "https://www.calgary.ca/research/economic-outlook.html",
+      "domains": [
+        "population",
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "calgary-tax-rate-bylaw",
+      "target_report_id": "calgary-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "Bylaw 9M2026 recites 'the assessed value of all property for the purpose of this Bylaw in the City of Calgary as shown on the 2026 assessment roll' ($450.8 billion, tabulated by class), then authorizes the Municipal Assessor 'to impose the following rates of taxation on the assessed value of all taxable property as shown on the 2026 assessment roll of the City'.",
+      "evidence_url": "https://municipalaffairs.gov.ab.ca/cfml/FinancialTaxRateSearch/pdf/tr_bylaws/2026_Bylaw_CALGARY_0046.pdf"
+    },
+    {
+      "source_report_id": "calgary-tax-rate-bylaw",
+      "target_report_id": "calgary-budget",
+      "relationship_type": "calculated_from",
+      "basis": "Bylaw 9M2026 recites that 'the excess of the estimated expenses for municipal purposes, over the estimated probable revenue for such municipal purposes, for the year 2026 will be: $2,520,865,034'. Council report C2026-0172 closes the loop to the budget by name: 'The funding of $2,520.9 million generated through the Property Tax Bylaw will meet the 2026 operating budget requirements contained in the approved 2026 Budget Adjustments to the 2023-2026 Business Plans and Budgets (C2025-0901).'",
+      "evidence_url": "https://pub-calgary.escribemeetings.com/filestream.ashx?DocumentId=354907"
+    },
+    {
+      "source_report_id": "calgary-tax-rate-bylaw",
+      "target_report_id": "ab-dip-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Bylaw 9M2026 s. 5: 'For the purposes of collecting the portion of the requisition defined in section 326(1)(a)(vi) of the Act, the Municipal Assessor is hereby authorized to impose the tax rate set by the Minister in accordance with section 359.3 of the Act on the assessed value of all taxable designated industrial property shown on the 2026 assessment roll of the City.' The city collects it; the province sets it.",
+      "evidence_url": "https://municipalaffairs.gov.ab.ca/cfml/FinancialTaxRateSearch/pdf/tr_bylaws/2026_Bylaw_CALGARY_0046.pdf"
+    },
+    {
+      "source_report_id": "calgary-tax-rate-bylaw",
+      "target_report_id": "ab-education-property-tax-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Bylaw 9M2026 recites 'the excess of the funds required to be raised for education purposes under the Education Act ... for the year 2026 ... will be: $1,235,731,200' and levies education rates for the 'Alberta School Foundation Fund and The Board of Trustees of Calgary Roman Catholic Separate School Division'. Council report C2026-0172: the provincial portion reflects 'the Government of Alberta's direction, which The City is legally required to collect on behalf of the Government of Alberta and remit in quarterly payments'.",
+      "evidence_url": "https://municipalaffairs.gov.ab.ca/cfml/FinancialTaxRateSearch/pdf/tr_bylaws/2026_Bylaw_CALGARY_0046.pdf"
+    },
+    {
+      "source_report_id": "calgary-financial-statements",
+      "target_report_id": "calgary-budget",
+      "relationship_type": "uses_data_from",
+      "basis": "Note 17 of the 2025 Annual Financial Report: 'Budget data presented in these consolidated financial statements are based upon the 2025 operating and capital budgets as approved by Council', with a full reconciliation of the Council-approved budget to the PSAS budget figures reported on the Consolidated Statement of Operations.",
+      "evidence_url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/2025-Annual-Financial-Report.pdf"
+    },
+    {
+      "source_report_id": "calgary-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Note 1: 'The consolidated financial statements of The City are prepared by Administration in accordance with Canadian Public Sector Accounting Standards (PSAS)', and the auditor's opinion is rendered against the same standards. The standards decide what the statements may recognise — a methodology dependency, mirroring the Grande Prairie edge.",
+      "evidence_url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/2025-Annual-Financial-Report.pdf"
+    },
+    {
+      "source_report_id": "calgary-budget",
+      "target_report_id": "calgary-economic-outlook",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2026 budget's own source lines: 'Population from Calgary and Region Population Projections 2025-2030, January 2025 Update and inflation from 2025 Fall Forecast Tables, City of Calgary, Corporate Economics' — the population and inflation assumptions behind the expenditure-growth analysis and the per-1,000-population staffing metrics are drawn from these Corporate Economics products.",
+      "evidence_url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/plans-budgets-and-financial-reports/2023-2026-service-plans-budgets/2026-budget-as-approved-dec-3-2025.pdf"
+    },
+    {
+      "source_report_id": "calgary-budget",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "cites",
+      "basis": "The budget benchmarks Calgary's expenditure growth against the province's, sourcing 'Alberta Expenditure Growth: Government of Alberta Fiscal Plan (25-28) Schedule 25 Historical Fiscal Summary'. Context for the fiscal argument rather than a computational input, hence a citation.",
+      "evidence_url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/plans-budgets-and-financial-reports/2023-2026-service-plans-budgets/2026-budget-as-approved-dec-3-2025.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "calgary-budget",
+      "target": "calgary-municipal-census",
+      "reason": "wrong-target",
+      "why": "Handoff claimed 'Budget documents use official population figures for growth forecasts, per-capita service metrics, and grant eligibility calculations' from a Municipal Census / Official Population Estimate node (releases_per_year 1, url calgary.ca/csps/cns/census.html). The claim about population use is true but the target is wrong: Calgary's civic census was last conducted in 2019 and discontinued, and the handoff URL returns 404. The 2026 budget sources population verbatim from 'Calgary and Region Population Projections 2025-2030, January 2025 Update ... City of Calgary, Corporate Economics'. Replaced by the verified edge calgary-budget -> calgary-economic-outlook; the calgary-municipal-census report is dropped with it."
+    },
+    {
+      "source": "calgary-financial-statements",
+      "target": "calgary-tax-rate-bylaw",
+      "reason": "no-document",
+      "why": "Handoff claimed 'Audited financial statements report the actual tax levy raised under the Property Tax Bylaw against the adopted budget.' The 2025 Annual Financial Report reports the levies and cites section 353 of the Municipal Government Act for the provincial collection obligation, but never names the Property Tax Bylaw — searched the full text. Certain in law, absent from the document, exactly as in Grande Prairie, where the equivalent edge was later promoted to evidence:'implied' in V0.7. Per the merge guide implied is not available to this pass; the integrator may choose to mirror the Grande Prairie promotion for symmetry."
+    },
+    {
+      "source": "calgary-budget",
+      "target": "statcan-census-subdivision-population-estimates",
+      "reason": "no-node-yet",
+      "why": "Not in the handoff, but the budget's municipal comparison charts are sourced 'Municipalities' 2025 property tax bylaws; Statistics Canada 2024 population estimates for census subdivisions'. The live node statcan-population-estimates is scoped to the quarterly provincial/territorial series (Table 17-10-0009) used for federal transfers; the census-subdivision estimates are a distinct annual subprovincial release under the same Demographic Estimates Program. Recording rather than force-mapping into a node whose description excludes it. Would be a cites edge if a subprovincial estimates node is ever built."
+    },
+    {
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Not dropped — housekeeping note: the handoff re-minted ab-dip-requisition as a report in this slice. That node already exists in the live corpus (from the Grande Prairie slice), so the report is not re-emitted here and the verified edge above points at the existing id. The handoff's proposed domain 'provincial-requisition' is not in the closed domain list and was discarded with the duplicate. [Caveat-note on the minted/live edge calgary-tax-rate-bylaw -> ab-dip-requisition; endpoints nulled per the caveat convention (see NZ/G.3.md schema note).]"
+    }
+  ]
+}

@@ -1,0 +1,500 @@
+{
+  "_slice": "orgs (financing-international-orgs + soft-power-and-isolated-orgs)",
+  "_researched": "2026-07-30",
+  "_merged": "2026-08-07",
+  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff, verified against primary sources 2026-08-07. TRIAGE of two org-heavy slices that used organisations as nodes and 'publishes'/'funds'/'ritual' edges — all off-model for this corpus. Salvage: 3 genuine recurrent flagship reports (IMF WEO, IMF Fiscal Monitor, OECD Economic Outlook) and 4 report-to-report dependencies verified verbatim against the Fiscal Monitor Methodological and Statistical Appendix (April 2025) and the OECD Economic Outlook Database Inventory (EO107). Everything else — 6 organisation nodes, 2 meeting nodes, 8 financing line-item pseudo-nodes, 12 unwired report candidates, and all 38 handoff edges — is recorded in _dropped. This large drop rate is the intended outcome of the triage.",
+  "reports": [
+    {
+      "id": "imf-weo",
+      "title": "World Economic Outlook (WEO)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IMF's twice-yearly flagship survey of global macroeconomic prospects, with a country-level database of output, inflation, fiscal and external indicators. Historical data and projections are compiled by IMF country desk officers from information gathered in missions to member countries.",
+      "releases_per_year": 2,
+      "cadence_note": "Full editions in April and October, with shorter WEO Updates in January and July.",
+      "last_updated": null,
+      "url": "https://www.imf.org/en/Publications/WEO",
+      "domains": [
+        "national-accounts",
+        "inflation"
+      ]
+    },
+    {
+      "id": "imf-fiscal-monitor",
+      "title": "Fiscal Monitor",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "One of the IMF's flagship trilogy, surveying public finance developments and projecting fiscal balances and government debt across the membership. Fiscal data follow GFSM 2014 (or SNA 2008 / ESA 2010 based national methodologies) and country projections are drawn from the WEO database.",
+      "releases_per_year": 2,
+      "cadence_note": "Published twice yearly alongside the WEO, in April and October.",
+      "last_updated": null,
+      "url": "https://www.imf.org/en/Publications/FM",
+      "domains": [
+        "national-accounts",
+        "taxation"
+      ]
+    },
+    {
+      "id": "oecd-economic-outlook",
+      "title": "OECD Economic Outlook",
+      "publisher": "OECD",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The OECD's twice-yearly analysis of major global economic trends and prospects for the next two years, with projections for output, employment, prices, fiscal and current balances. The underlying database draws historical data from national statistical agencies and OECD statistical databases, on SNA 2008 / ESA 2010 and BPM6 concepts.",
+      "releases_per_year": 2,
+      "cadence_note": "Two full editions per year (roughly June and November/December), plus Interim Economic Outlook updates.",
+      "last_updated": null,
+      "url": "https://www.oecd.org/en/publications/oecd-economic-outlook_16097408.html",
+      "domains": [
+        "national-accounts",
+        "inflation",
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "imf-fiscal-monitor",
+      "target_report_id": "imf-weo",
+      "relationship_type": "uses_data_from",
+      "basis": "Fiscal Monitor Methodological and Statistical Appendix (April 2025): 'Country-specific data and projections for key fiscal variables are based on the April 2025 World Economic Outlook database, unless indicated otherwise, and compiled by IMF staff.'",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/fiscal-monitor/2025/english/msa.pdf"
+    },
+    {
+      "source_report_id": "imf-fiscal-monitor",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Fiscal Monitor Methodological and Statistical Appendix (April 2025): 'In many economies, fiscal data follow the IMF's Government Finance Statistics Manual 2014'; also 'In most advanced economies, and in some large emerging market and middle-income economies, fiscal data follow the GFSM 2014'.",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/fiscal-monitor/2025/english/msa.pdf"
+    },
+    {
+      "source_report_id": "oecd-economic-outlook",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "OECD Economic Outlook Database Inventory (EO107): 'All OECD countries have implemented the SNA 2008 methodology (or ESA 2010, its European equivalent)', with historical data sourced from 'publications of national statistical agencies and OECD statistical databases such as the OECD Quarterly National Accounts, OECD Annual National Accounts'.",
+      "evidence_url": "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=dfa0d77f-5427-4f76-9772-1b30d464b5ba"
+    },
+    {
+      "source_report_id": "oecd-economic-outlook",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "OECD Economic Outlook Database Inventory (EO107): 'All countries follow the BPM6 methodology; BPM6 is the acronym for the sixth edition of the \"Balance of Payments and International Investment Position Manual\".'",
+      "evidence_url": "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=dfa0d77f-5427-4f76-9772-1b30d464b5ba"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "org-bis",
+      "target": "bis-annual-report",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: BIS publishes its Annual Report (official BIS publication list). Organisations are not nodes and 'publishes' is not a dependency in this corpus."
+    },
+    {
+      "source": "org-bis",
+      "target": "bis-quarterly-review",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: BIS publishes the BIS Quarterly Review (official BIS publication list)."
+    },
+    {
+      "source": "org-bis",
+      "target": "bis-annual-economic-report",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: BIS publishes the BIS Annual Economic Report (official BIS publication list)."
+    },
+    {
+      "source": "org-wto",
+      "target": "wto-world-trade-report",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: WTO publishes the World Trade Report (official WTO flagship series)."
+    },
+    {
+      "source": "org-wto",
+      "target": "wto-annual-report",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: WTO publishes the WTO Annual Report (official WTO publication)."
+    },
+    {
+      "source": "org-wto",
+      "target": "wto-trade-monitoring",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: WTO publishes Trade Monitoring Reports under the TPRM mandate (peer-review exercise; joint G20 version with OECD/UNCTAD)."
+    },
+    {
+      "source": "org-imf",
+      "target": "imf-weo",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: IMF publishes the WEO (IMF flagship trilogy). The WEO itself survives as a node; the publishes edge does not."
+    },
+    {
+      "source": "org-imf",
+      "target": "imf-gfsr",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: IMF publishes the Global Financial Stability Report (IMF flagship trilogy)."
+    },
+    {
+      "source": "org-imf",
+      "target": "imf-fiscal-monitor",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: IMF publishes the Fiscal Monitor (IMF flagship trilogy). The Fiscal Monitor itself survives as a node; the publishes edge does not."
+    },
+    {
+      "source": "org-imf",
+      "target": "imf-article-iv",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: IMF publishes Article IV consultation reports under the Articles of Agreement surveillance obligation."
+    },
+    {
+      "source": "org-imf",
+      "target": "imf-article-iv-canada-2025",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: IMF published Canada's 2025 Article IV consultation (IMF Country Report No. 26/12, Board consideration January 2026)."
+    },
+    {
+      "source": "org-wef",
+      "target": "wef-davos",
+      "reason": "note",
+      "why": "Off-model: org node / hosts edge. Handoff claim: WEF hosts the Annual Meeting (Davos), its central ritual. Meetings are not published reports and are not nodes."
+    },
+    {
+      "source": "org-wef",
+      "target": "wef-global-risks",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: WEF publishes the Global Risks Report, a regular WEF flagship."
+    },
+    {
+      "source": "org-oecd",
+      "target": "oecd-economic-surveys",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: OECD publishes country Economic Surveys, a country peer-review series."
+    },
+    {
+      "source": "org-oecd",
+      "target": "oecd-economic-survey-canada-2025",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: OECD published Economic Surveys: Canada 2025 (Volume 2025/12, May 2025), explicit country instance of the series."
+    },
+    {
+      "source": "org-oecd",
+      "target": "oecd-economic-outlook",
+      "reason": "note",
+      "why": "Off-model: org node / publishes edge. Handoff claim: OECD publishes the Economic Outlook, a regular OECD flagship. The Economic Outlook itself survives as a node; the publishes edge does not."
+    },
+    {
+      "source": "org-g20",
+      "target": "g20-leaders-summit",
+      "reason": "note",
+      "why": "Off-model: org node / hosts edge. Handoff claim: G20 hosts the annual Leaders' Summit and communique, core ritual of the G20 process."
+    },
+    {
+      "source": "org-imf",
+      "target": "org-wef",
+      "reason": "note",
+      "why": "Off-model: org-to-org interpretive edge (mutual_consideration, political_inference). Handoff claim: senior overlapping participation, shared language on risks/resilience, reciprocal citation patterns in public remarks; not a formal dependency."
+    },
+    {
+      "source": "org-wef",
+      "target": "org-imf",
+      "reason": "note",
+      "why": "Off-model: org-to-org interpretive edge (mutual_consideration, political_inference). Handoff claim: WEF provides a multi-stakeholder stage, IMF provides macroeconomic orthodoxy; mutual awareness observable but not contractual."
+    },
+    {
+      "source": "org-bis",
+      "target": "org-imf",
+      "reason": "note",
+      "why": "Off-model: org-to-org edge (ritual_peer_forum, documented_citation). Handoff claim: heavy cross-citation and overlapping central-bank membership; BIS hosts the Basel process national supervisors (incl. OSFI) implement; IMF surveillance frequently references BIS statistics and research. The Basel-to-OSFI channel already exists in the live graph via bis-basel-framework / osfi-car-guideline; a future documented edge from a specific IMF surveillance report to a specific BIS statistical release could be built, but no such report-to-report claim was made here."
+    },
+    {
+      "source": "org-imf",
+      "target": "org-oecd",
+      "reason": "note",
+      "why": "Off-model: org-to-org edge (ritual_peer_forum, documented_citation). Handoff claim: regular cross-references in flagships and shared work on structural indicators, productivity, fiscal frameworks; both produce country surveillance products."
+    },
+    {
+      "source": "org-wto",
+      "target": "org-oecd",
+      "reason": "note",
+      "why": "Off-model: org-to-org edge (ritual_peer_forum). Handoff claim: joint G20 Trade Monitoring reports (WTO + OECD + UNCTAD), an explicit collaborative product. If the joint monitoring report is ever added as a node, a documented uses_data_from edge might be constructible; the org-to-org form is not."
+    },
+    {
+      "source": "org-g20",
+      "target": "org-imf",
+      "reason": "note",
+      "why": "Off-model: org-to-org interpretive edge (agenda_resonance, political_inference). Handoff claim: G20 communiques routinely task or endorse IMF work (SDR channeling, debt frameworks); IMF staff papers often respond to G20 priorities."
+    },
+    {
+      "source": "org-g20",
+      "target": "org-oecd",
+      "reason": "note",
+      "why": "Off-model: org-to-org interpretive edge (agenda_resonance, political_inference). Handoff claim: OECD frequently acts as analytical support for G20 workstreams (tax, structural reform, investment)."
+    },
+    {
+      "source": "org-g20",
+      "target": "org-wto",
+      "reason": "note",
+      "why": "Off-model: org-to-org interpretive edge (agenda_resonance, political_inference). Handoff claim: G20 trade and investment monitoring mandates feed into WTO/OECD/UNCTAD joint products."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-imf-quota",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge from a placeholder node to a contribution line-item; neither end is a recurrently published report. Handoff claim: Canada's IMF quota subscription (SDR 11,023.9 million, ~2.31% of quotas) is a standing obligation under the IMF Articles, reflected in Finance Canada management and IMF member financial position data."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-imf-nab-bba",
+      "reason": "note",
+      "why": "Off-model: financing edge (contingent_commitment) between non-report nodes. Handoff claim: NAB and bilateral borrowing agreements are formal commitments reported in IMF and Canadian official materials (NAB historically SDR 7-8 billion)."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-imf-trusts-ukraine",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge between non-report nodes. Handoff claim: explicit line items and narrative in the Report to Parliament on International Assistance and Department of Finance disclosures cover PRGT/RST SDR channeling and Ukraine facilities (multi-billion CAD)."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-wbg-ida",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge between non-report nodes. Handoff claim: Public Accounts record cumulative (~CAD 15.67 billion to 31 Mar 2025) and annual IDA contributions; IDA21 pledge C$1.6 billion; year figures from the Statistical Report on International Assistance."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-wbg-ibrd",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge between non-report nodes. Handoff claim: IBRD capital subscription (~USD 8.5 billion subscribed, ~USD 619.5 million paid-in) appears in Public Accounts Section 9 with paid-in vs callable split."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-oecd-assessed",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge between non-report nodes. Handoff claim: assessed OECD contribution (CAD 17-19 million range; Public Accounts 2025 Vol. II Section 13 Global Affairs transfer-payments line: allotment CAD 18,330,168, expenditures CAD 17,804,695) is a non-discretionary membership obligation."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-wef-projects",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge between non-report nodes. Handoff claim: order-paper responses and departmental disclosures document project-level payments to WEF initiatives ($17-23+ million cumulative since 2015; Global Alliance for Trade Facilitation, Global Plastic Action Partnership, etc.); voluntary/project-based, not treaty-assessed."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "fin-un-regular-budget",
+      "reason": "note",
+      "why": "Off-model: financing 'funds' edge between non-report nodes. Handoff claim: assessed UN regular-budget contribution at 2.543% scale for 2025-2027 (A/RES/79/249; ST/ADM/SER.B/1096; ~USD 86-87 million net in 2025), reported in Global Affairs transfer payments."
+    },
+    {
+      "source": "fin-imf-quota",
+      "target": "org-imf",
+      "reason": "note",
+      "why": "Off-model: supports_membership edge to an org node. Handoff claim: the quota is the primary financial basis of IMF membership and voting power."
+    },
+    {
+      "source": "fin-wbg-ida",
+      "target": "org-wbg-approx",
+      "reason": "note",
+      "why": "Off-model: supports_membership edge to an org placeholder node. Handoff claim: IDA replenishments are Canada's main recurring cash contribution channel to the World Bank Group."
+    },
+    {
+      "source": "fin-oecd-assessed",
+      "target": "org-oecd",
+      "reason": "note",
+      "why": "Off-model: supports_membership edge to an org node. Handoff claim: the assessed contribution is the formal price of OECD membership."
+    },
+    {
+      "source": "fin-wef-projects",
+      "target": "org-wef",
+      "reason": "note",
+      "why": "Off-model: project_support edge to an org node. Handoff claim: project grants create a financial relationship with WEF but do not constitute membership dues."
+    },
+    {
+      "source": "fin-un-regular-budget",
+      "target": "org-un-approx",
+      "reason": "note",
+      "why": "Off-model: supports_membership edge to an org placeholder node. Handoff claim: scale-based assessed contribution is the formal financial basis of UN regular-budget membership."
+    },
+    {
+      "source": "imf-weo",
+      "target": "imf-gfsm",
+      "reason": "wrong-target",
+      "why": "Considered during salvage (not in the handoff): the WEO FAQ defines general government gross debt such that 'all liabilities in the GFSM 2001 system are debt, except for equity and investment fund shares and financial derivatives and employee stock options' (https://www.imf.org/external/pubs/ft/weo/faq.htm). The live node imf-gfsm is GFSM 2014, a different edition, so the quote does not support an edge to it. No fetched document tied WEO to SNA 2008 or GFSM 2014 by name; WEO's documented sourcing is 'information gathered by the IMF country desk officers in the context of their missions to IMF member countries', which names no target report."
+    },
+    {
+      "source": "bis-annual-economic-report",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Genuine recurrent flagship (annual, distinct from the institutional BIS Annual Report) and would qualify as a node, but no report-to-report dependency was claimed or verifiable in this triage, and its presence in the handoff was as a branch of the off-model org-bis cluster rather than a deliberate isolated node. Rebuild with an edge (e.g. into BIS statistics or from a verified citing report) if wanted."
+    },
+    {
+      "source": "bis-annual-report",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Institutional annual report of the BIS; recurrent but administrative in character, no claimed or verifiable dependency, only existed as a branch of org-bis. Dropped."
+    },
+    {
+      "source": "bis-quarterly-review",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Genuine recurrent BIS publication (Mar/Sep/Dec core, June conditional) but no claimed or verifiable report-to-report dependency in this slice; existed only as a branch of org-bis. Dropped."
+    },
+    {
+      "source": "wto-world-trade-report",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Genuine annual WTO flagship but no claimed or verifiable dependency; branch of off-model org-wto cluster. Dropped."
+    },
+    {
+      "source": "wto-annual-report",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Institutional WTO annual report; no claimed or verifiable dependency; branch of off-model org-wto cluster. Dropped."
+    },
+    {
+      "source": "wto-trade-monitoring",
+      "target": "(node)",
+      "reason": "deferred",
+      "why": "WTO Trade Monitoring Reports (WTO-wide + joint G20 version with OECD/UNCTAD) are recurrent and the joint authorship suggests documentable uses_data_from edges, but verifying them was out of scope for this triage and the node only existed as a branch of org-wto. Best candidate in the slice for a future rebuild."
+    },
+    {
+      "source": "imf-gfsr",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Genuine twice-yearly IMF flagship but no claimed or verifiable report-to-report dependency was established in this triage; existed only as a branch of org-imf. Could be rebuilt later with a verified edge (e.g. to the WEO database, as done for the Fiscal Monitor)."
+    },
+    {
+      "source": "imf-article-iv",
+      "target": "(node)",
+      "reason": "deferred",
+      "why": "Article IV consultation reports are a genuine recurrent surveillance series (roughly annual per member) and the Canada series would fit the corpus, but the handoff node was generic (all members), hung off org-imf, and no document was fetched tying a Canada Article IV report to specific StatCan releases. A Canada-specific series node with a verified uses_data_from edge (the staff report's data tables name Statistics Canada sources) is a plausible future addition."
+    },
+    {
+      "source": "imf-article-iv-canada-2025",
+      "target": "(node)",
+      "reason": "note",
+      "why": "One-off instance (IMF Country Report No. 26/12, published 21 January 2026) of the Article IV series — single editions are off-model; the recurrent series is the nodeable unit. Claim preserved: staff report completed 18 December 2025 after discussions ending 4 December 2025; Informational Annex carries Fund-relations quota data."
+    },
+    {
+      "source": "oecd-economic-surveys",
+      "target": "(node)",
+      "reason": "deferred",
+      "why": "OECD country Economic Surveys (roughly every 1.5-2 years per member) are a genuine recurrent series; a Canada-specific series node with verified data-source edges is plausible, but no document was fetched here and the node existed only as a branch of org-oecd."
+    },
+    {
+      "source": "oecd-economic-survey-canada-2025",
+      "target": "(node)",
+      "reason": "note",
+      "why": "One-off instance (OECD Economic Surveys: Canada 2025, Volume 2025/12, May 2025, DOI 10.1787/28f9e02c-en; EDRC discussion 21 January 2025, data cut-off 16 May 2025) — single editions are off-model; the series is the nodeable unit."
+    },
+    {
+      "source": "wef-global-risks",
+      "target": "(node)",
+      "reason": "no-document",
+      "why": "Recurrent annual publication of a private organisation (could be source_kind commercial), but no claimed or verifiable dependency and no deliberate isolated-node case; existed only as a branch of org-wef. Dropped."
+    },
+    {
+      "source": "wef-davos",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: a meeting (WEF Annual Meeting, Davos, each January), not a published report or statistical release."
+    },
+    {
+      "source": "g20-leaders-summit",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: a summit and communique series, not a recurrently published report or statistical release."
+    },
+    {
+      "source": "org-bis",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: organisation node (Bank for International Settlements). The corpus already carries BIS output where it matters via bis-basel-framework."
+    },
+    {
+      "source": "org-wto",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: organisation node (World Trade Organization)."
+    },
+    {
+      "source": "org-imf",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: organisation node (IMF). IMF output enters the corpus as reports/manuals: imf-bpm6, imf-gfsm, and now imf-weo and imf-fiscal-monitor."
+    },
+    {
+      "source": "org-wef",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: organisation node (World Economic Forum, a private foundation)."
+    },
+    {
+      "source": "org-oecd",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: organisation node (OECD). OECD output enters the corpus as reports/manuals: oecd-frascati-manual, oecd-icio, and now oecd-economic-outlook."
+    },
+    {
+      "source": "org-g20",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: organisation node (G20, informal grouping, not a treaty body)."
+    },
+    {
+      "source": "fin-imf-quota",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: a contribution line-item (Canada IMF quota subscription), not a recurrently published report. The evidence documents behind it (IMF Members' Quotas and Voting Power table, Article IV Informational Annex) could support future report nodes, but the line-item itself cannot."
+    },
+    {
+      "source": "fin-imf-nab-bba",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: contingent commitment line-item (NAB / bilateral borrowing agreements), not a published report."
+    },
+    {
+      "source": "fin-imf-trusts-ukraine",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: voluntary contribution line-item (IMF trusts / Ukraine facilities), not a published report."
+    },
+    {
+      "source": "fin-wbg-ida",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: replenishment contribution line-item (IDA), not a published report."
+    },
+    {
+      "source": "fin-wbg-ibrd",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: capital subscription line-item (IBRD), not a published report."
+    },
+    {
+      "source": "fin-oecd-assessed",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: assessed contribution line-item (OECD), not a published report."
+    },
+    {
+      "source": "fin-wef-projects",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: project grant tally (WEF initiatives), not a published report."
+    },
+    {
+      "source": "fin-un-regular-budget",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model: assessed contribution line-item (UN regular budget), not a published report."
+    },
+    {
+      "source": "canada-federal-budget-or-estimates",
+      "target": "(node)",
+      "reason": "note",
+      "why": "Off-model placeholder standing in for the Main Estimates / Supplementary Estimates / Public Accounts / International Assistance Report constellation. The Public Accounts of Canada and the Statistical Report on International Assistance are genuine recurrent publications and could be built as real nodes in a future federal-finance slice; the placeholder itself cannot merge."
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "_slice": "equalization-named-products-closed",
+  "_researched": "2026-07-30",
+  "_merged": "2026-08-07",
+  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff, verified against primary sources 2026-08-07. Closes the no-node-yet leads recorded in src/data/research/equalization-named-products.json by building the Statistics Canada (and one commercial) products named in SOR/2007-303, the Federal-Provincial Fiscal Arrangements Regulations, 2007. All nine statutory citations were re-verified verbatim against the consolidated regulation on laws-lois.justice.gc.ca. Eight of nine handoff reports became new nodes; the ninth (Provincial Supply and Use Tables) was remapped to the existing statcan-sut node (both are IMDB record 1401, which the handoff itself cites). The handoff's source node fiscal-equalization-program already exists (health-funding.json) and was reused. All nine edges survived, retyped from the handoff's uses_data_from to calculated_from to match the house treatment of statutory formula terms (see equalization-payroll-base.json). Corrections to the handoff: Government Finance Statistics is IMDB record 5174 (quarterly), not 5218; table 23-10-0066-01 was formerly CANSIM 405-0002; the agricultural balance sheet is survey record 5029, not a bare table.",
+  "reports": [
+    {
+      "id": "statcan-provincial-economic-accounts",
+      "title": "Provincial and Territorial Gross Domestic Product by Income and by Expenditure Accounts",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual provincial and territorial counterpart of the national income and expenditure accounts (IMDB record 1902), producing GDP by income and by expenditure, household income and consumption, and government sector accounts for each province and territory. SOR/2007-303 adopts its definitions by name in the DIVISION 1 interpretation section that governs the all-provinces Equalization formula, which is what makes this the highest-value node in the equalization cluster.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, released as part of the provincial and territorial economic accounts cycle (typically November for the preceding reference year).",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1902",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "statcan-government-finance-statistics",
+      "title": "Canadian Government Finance Statistics (CGFS)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Statistics of revenue, expense, assets and liabilities for the federal, provincial, territorial and local governments and the Canada and Quebec pension plans (IMDB record 5174), compiled under the IMF's Government Finance Statistics accounting framework. Named in SOR/2007-303's DIVISION 1 revenue base at s. 5(b)(ii) and in the Territorial Formula Financing part at s. 19(1)(b)(ii), and it completes a chain from a statutory transfer formula through a national statistical programme to the imf-gfsm standard already in the corpus.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly per IMDB record 5174; the equalization and TFF calculations draw on the annual consolidated figures.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=5174",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "statcan-oil-gas-extraction",
+      "title": "Annual Oil and Gas Extraction Survey (OGEX)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual survey of companies engaged in oil and gas exploration, development and production in Canada (IMDB record 2178), collecting financial and operating statistics including the volume and value of marketable production. SOR/2007-303's Nova Scotia division names it in seven provisions of s. 8 — more than any other survey in the section — as the determination of oil, heavy oil, mined oil and natural gas volumes and values, the same physical production the corpus's Alberta energy-royalty cluster values through NYMEX WTI, ICE Brent and Argus.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2178",
+      "domains": [
+        "energy-royalties",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-road-fuel-sales",
+      "title": "Sales of fuel used for road motor vehicles, annual (table 23-10-0066-01)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual net and gross sales of gasoline and net sales of diesel fuel for road use by province and territory, produced from the Gasoline and Other Petroleum Fuels Sold programme (survey 2746); formerly CANSIM 405-0002. SOR/2007-303 cites the table by its modern number in the general Interpretation section at s. 1(1), where the defined fuel quantities used throughout the instrument's motive-fuel tax bases are pinned to it.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2310006601",
+      "domains": [
+        "taxation",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "statcan-alcohol-sales",
+      "title": "Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (table 10-10-0011-01)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual value and volume of spirits, wine and beer sold by liquor authorities and other retail outlets, by province and territory, from the Control and Sale of Alcoholic Beverages programme (IMDB record 1726). The live table is the direct successor of CANSIM 183-0024, and SOR/2007-303 cites it under both numbers: the Territorial Formula Financing part uses the modern number at s. 19(1)(f) while the unrevised Nova Scotia division still cites the retired CANSIM number at s. 8(1)(j).",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1010001101",
+      "domains": [
+        "taxation",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "statcan-agriculture-balance-sheet",
+      "title": "Balance sheet of the agricultural sector as at December 31st (table 32-10-0056-01)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual assets, liabilities and equity of the Canadian agricultural sector by province, including the current-dollar value of farm land, from the Balance Sheet of the Agricultural Sector programme (survey record 5029); formerly CANSIM 002-0020, the number SOR/2007-303's Nova Scotia division still cites at s. 8(1)(z) for the farm-land component of the property-tax revenue base. The Territorial Formula Financing parallel measures the same conceptual farm value from the Census of Agriculture instead.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210005601",
+      "domains": [
+        "assessment",
+        "taxation"
+      ]
+    },
+    {
+      "id": "statcan-vehicle-registrations",
+      "title": "Vehicle Registrations",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual count of road motor vehicle registrations by vehicle type, province and territory, compiled from provincial and territorial administrative records (IMDB record 2747). SOR/2007-303's Nova Scotia division cites its output under the retired CANSIM number 405-0004 at s. 8(1)(h) and (i) for the motor vehicle licensing revenue bases, with an explicit statutory fallback for the Minister to substitute 'if Statistics Canada does not make the determination'.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2747",
+      "domains": [
+        "taxation",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "rl-polk-registration-manual",
+      "title": "Canadian and International Registration Manual",
+      "publisher": "R.L. Polk & Co.",
+      "country": "US",
+      "jurisdiction_level": "institutional",
+      "source_kind": "commercial",
+      "region": "Canada",
+      "description": "A recurring commercial reference manual of vehicle registration and licence fee schedules by jurisdiction, published by R.L. Polk & Co. of Detroit. SOR/2007-303 names it verbatim at s. 8(1)(i) as the source of the licence-fee data behind the weighted average licence fee in the Nova Scotia division's motor vehicle licensing revenue base — the third commercial publication found inside a government funding formula, after J.D. Power in the US CPI and ICE Brent in Alberta's bitumen valuation.",
+      "releases_per_year": 1,
+      "cadence_note": "Historically issued as a recurring multi-volume manual. R.L. Polk & Co. was acquired by IHS in 2013 (now S&P Global Mobility) and no live publisher landing page for the manual could be found in 2026; the URL is a bibliographic record. The regulation continues to name it as the operative source, and the statutory citation, not the publisher's marketing page, is the evidence for the edge.",
+      "last_updated": null,
+      "url": "https://books.google.com/books/about/Polk_s_Canadian_and_International_Regist.html?id=7PewDAEACAAJ",
+      "domains": [
+        "taxation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-provincial-economic-accounts",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 3.1, the DIVISION 1 interpretation section governing the all-provinces formula, adopts the accounts' definitions by name: 'household final consumption expenditures as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts, net of any taxes on products, also as determined by Statistics Canada', with the same 'for the purpose of its Provincial and Territorial Economic Accounts' construction pinning residential renovations, residential housing transfers and the housing expenditure categories to the same product. The Nova Scotia division uses it too, at s. 8(1)(z.2)-(z.4), e.g. 'household disposable income in the province ... as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts'. `calculated_from` because these are defined terms of the statutory payment formula, not background data.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-2.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-sut",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 3.1 (DIVISION 1) cites the tables down to the individual matrix: capital expenditures are 'expenditures on commodities, as determined by Statistics Canada for the purpose of its Provincial Supply and Use Tables' summary level final demand matrix' and intermediate input expenditures are 'expenditures on intermediate inputs, as determined by Statistics Canada for the purpose of its Provincial Supply and Use Tables' summary level intermediate input matrix'. The Nova Scotia division draws GDP at factor cost from the same tables at s. 8(1)(z). Remapped from the handoff's proposed statcan-provincial-supply-use-tables node onto the existing statcan-sut node: both are IMDB record 1401 — the handoff itself cites record 1401 and table 36-10-0478-01, which is a record 1401 product — and the provincial tables are the provincial detail of that one programme, not a separate release.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-2.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-government-finance-statistics",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 5(b)(ii), in the DIVISION 1 all-provinces business-income revenue base, computes 'the product, as determined on the basis of data prepared by Statistics Canada for the purpose of the Government Finance Statistics, of' the government business enterprise profit terms, and uses the same construction a second time in the same subparagraph ('the difference, as determined on the basis of data prepared by Statistics Canada for the purpose of the Government Finance Statistics'). The identical wording recurs in the Territorial Formula Financing part at s. 19(1)(b)(ii). `calculated_from` because the GFS data are operands of the statutory product, not context.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-3.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-oil-gas-extraction",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 8(1)(m) through (s), the Nova Scotia division's oil and gas revenue bases, repeatedly pin production volumes and values to the survey by name — representative wording from s. 8(1)(p), mined oil revenues: 'the total value of the marketable production of synthetic petroleum from hydrocarbon deposits in the province in the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its survey Oil and Gas Extraction'. The survey also carries the statutory definitions of value of oil (s. 8(4)) and value of natural gas (s. 8(6)). Scope: DIVISION 2 (Nova Scotia additional-equalization calculation) only, not the live all-provinces formula.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-road-fuel-sales",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 1(1), the general Interpretation section, defines the fuel quantities used across the instrument's motive-fuel tax bases against the table by its modern number: the 'adjusted number of litres of diesel fuel taxed at road-use rate' and 'adjusted number of litres of gasoline taxed at road-use rate' are each the quantities 'sold in the province or territory during the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of table 23-10-0066-01, Sales of fuel used for road motor vehicles, annual (x 1,000)'. Being a s. 1 definition, the citation applies wherever those defined terms are used in the Regulations.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-1.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-alcohol-sales",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 19(1)(f) (Territorial Formula Financing) measures the alcohol revenue base against the modern table three times over: the volume of spirits, of wine and of beer 'sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (x 1,000)'. The Nova Scotia division cites the same product under its retired predecessor number at s. 8(1)(j), 'as determined by Statistics Canada for the purpose of CANSIM table 183-0024' — StatCan's own table page confirms 10-10-0011-01 was 'formerly CANSIM 183-0024', so both citations resolve to this node.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-agriculture-balance-sheet",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 8(1)(z), the Nova Scotia division's property-tax revenue base, takes 'the value of farm land in the province, measured in current dollars as of the end of the calendar year that ends in the preceding fiscal year, as determined by Statistics Canada for the purpose of CANSIM table 002-0020, Balance sheet of the agricultural sector, at December 31'. StatCan's table page confirms 32-10-0056-01 was 'formerly CANSIM 002-0020'. Scope: DIVISION 2 only — the Territorial Formula Financing parallel at s. 19(1)(h) measures farm value from the Census of Agriculture instead.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-vehicle-registrations",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 8(1)(h) and (i), the Nova Scotia division's motor vehicle licensing revenue bases, count registered vehicles by category 'each as determined by Statistics Canada for the purpose of CANSIM table 405-0004, Road motor vehicles, registrations, or by the Minister if Statistics Canada does not make the determination'. The trailing clause is a statutory fallback for a discontinued source — the second such found in this corpus after the Oil Sands Royalty Regulation's Bank of Canada exchange-rate provision. The CANSIM number is retired; the producing programme is Statistics Canada's Vehicle Registrations programme, IMDB record 2747, which remains active. Scope: DIVISION 2 only.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "rl-polk-registration-manual",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 8(1)(i), the commercial-vehicle licensing revenue base in the Nova Scotia division, multiplies registration counts by 'the weighted average licence fee for that category over all provinces, as calculated on the basis of data respecting licence fees charged by each province contained in the R.L. Polk & Co. publication Canadian and International Registration Manual'. A titled, recurring commercial publication named verbatim in a federal regulation — admitted under the same commercial-source rule as jd-power-valuation-services and ICE Brent. Scope: DIVISION 2 only.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "fiscal-equalization-program",
+      "target": "statcan-provincial-supply-use-tables",
+      "reason": "note",
+      "why": "Not dropped — remapped. The handoff proposed minting statcan-provincial-supply-use-tables as a new node for the Provincial Supply and Use Tables. The corpus already has statcan-sut (Supply, Use and Input-Output Tables, IMDB record 1401), and the handoff's own metadata gives IMDB record 1401 and example table 36-10-0478-01, which is published under record 1401: the provincial tables are the provincial detail of the same annual programme, not a separate release with its own record. The edge was therefore wired into statcan-sut. The earlier equalization-named-products.json _dropped note argued the two were distinct ('that one is IMDB record 1401 at the national level, this one is the provincial and territorial tables'), but record 1401 covers both levels, so the distinction is within one node under this corpus's model. If a later pass decides provincial detail deserves its own node, the s. 3.1 matrix-level quotes preserved on the statcan-sut edge are the evidence to move.",
+      "original_claim": "fiscal-equalization-program -> statcan-provincial-supply-use-tables (uses_data_from): SOR/2007-303 s. 3.1 (DIVISION 1): capital and intermediate input expenditures from the Provincial Supply and Use Tables' summary level final demand matrix and intermediate input matrix; also s. 8(1)(z) (DIVISION 2) for GDP at factor cost."
+    }
+  ]
+}

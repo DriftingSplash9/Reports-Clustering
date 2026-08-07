@@ -56,6 +56,12 @@ import realmGovernmentFinance from './research/realm-government-finance.json'
 import associatedStatesGovernmentFinance from './research/associated-states-government-finance.json'
 import brFpmPopulation from './research/br-fpm-population.json'
 import anzsicIndustryClassification from './research/anzsic-industry-classification.json'
+import grokH1Equalization from './research/grok-h1-equalization-named-products.json'
+import grokH1Calgary from './research/grok-h1-calgary-municipal.json'
+import grokH1Classification from './research/grok-h1-classification-hubs.json'
+import grokH1Housing from './research/grok-h1-housing-benefits.json'
+import grokH1MunicipalOnQc from './research/grok-h1-municipal-ontario-quebec.json'
+import grokH1International from './research/grok-h1-international-reports.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -145,6 +151,12 @@ const slices: ResearchSlice[] = [
   associatedStatesGovernmentFinance as unknown as ResearchSlice,
   brFpmPopulation as unknown as ResearchSlice,
   anzsicIndustryClassification as unknown as ResearchSlice,
+  grokH1Equalization as unknown as ResearchSlice,
+  grokH1Calgary as unknown as ResearchSlice,
+  grokH1Classification as unknown as ResearchSlice,
+  grokH1Housing as unknown as ResearchSlice,
+  grokH1MunicipalOnQc as unknown as ResearchSlice,
+  grokH1International as unknown as ResearchSlice,
 ]
 
 function assemble() {

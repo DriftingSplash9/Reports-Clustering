@@ -1,0 +1,180 @@
+{
+  "_slice": "classification-hubs",
+  "_researched": "2026-07-30",
+  "_merged": "2026-08-07",
+  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff (classification-hubs-slice.json), verified against primary sources 2026-08-07. Of 10 handoff reports, 3 remapped to already-live ids (naics, noc, statcan-lfs) and 7 are new; the umbrella 'Annual Survey of Service Industries (and sub-surveys)' was narrowed to the specific survey its evidence record (IMDB 2425) describes. Of 7 handoff edges, 5 verified (with relationship_type corrected to methodology_depends_on for classification-coding edges, matching live-corpus precedent) and 2 dropped as exact duplicates of edges already live. One bonus edge (ASSI Amusement and Recreation -> Business Register) was verified from the same IMDB 2425 record.",
+  "reports": [
+    {
+      "id": "statcan-business-register",
+      "title": "Business Register",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Statistics Canada's continuously maintained central repository of baseline information on businesses and institutions operating in Canada (IMDB record 1105). It is the sampling frame from which most of the agency's economic surveys draw their populations, and every establishment on it carries a NAICS industry code.",
+      "releases_per_year": 2,
+      "cadence_note": "The register is maintained continuously; published outputs from it (business counts) are released twice per year.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1105",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-assi-amusement-recreation",
+      "title": "Annual Survey of Service Industries: Amusement and Recreation",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual survey of establishments in NAICS subsector 713 (amusement, gambling and recreation industries), IMDB record 2425. Narrowed from the handoff's umbrella 'Annual Survey of Service Industries (and sub-surveys)' node to the specific survey the evidence record describes; it stands here as the documented example of the ASSI family pattern of drawing NAICS-coded establishments from the Business Register.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2425",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-qsfs",
+      "title": "Quarterly Survey of Financial Statements",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Quarterly enterprise-level survey of the financial position and performance of incorporated businesses by industry (IMDB record 2501), collected to support Canada's System of Macroeconomic Accounts. Enterprises are classified to a single NAICS code by predominant value-added activity.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2501",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-cimt",
+      "title": "Canadian International Merchandise Trade (Customs Basis)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Monthly customs-basis statistics on Canada's merchandise exports and imports by commodity, province or territory, and partner country (IMDB record 2201). Commodities are classified under the Harmonized System, extended to eight digits for exports and ten digits for imports.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2201",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "cihi-dad",
+      "title": "Discharge Abstract Database (DAD)",
+      "publisher": "Canadian Institute for Health Information",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "CIHI's database of administrative, clinical and demographic information on hospital discharges (and some day surgery) across Canada, released annually. It is the primary vehicle for ICD-10-CA and CCI coded hospital data.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.cihi.ca/en/discharge-abstract-database-dad-metadata",
+      "domains": [
+        "health"
+      ]
+    },
+    {
+      "id": "hs",
+      "title": "Harmonized Commodity Description and Coding System (HS)",
+      "publisher": "World Customs Organization",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The multipurpose international product nomenclature developed by the World Customs Organization: more than 5,000 commodity groups, each identified by a six-digit code. The commodity-side counterpart to the industry classifications already in this corpus — national trade statistics, including Canada's, are coded to it, with countries adding digits beyond six for tariff and statistical detail.",
+      "releases_per_year": 0.2,
+      "cadence_note": "The WCO's Harmonized System Committee 'prepares amendments updating the HS every 5 – 6 years' — editions 2002, 2007, 2012, 2017, 2022. Not an annual release; releases_per_year is nominal.",
+      "last_updated": null,
+      "url": "https://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "icd-10-ca",
+      "title": "ICD-10-CA and the Canadian Classification of Health Interventions (CCI)",
+      "publisher": "Canadian Institute for Health Information",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The companion Canadian clinical classifications maintained and published by CIHI: ICD-10-CA (the Canadian enhancement of the WHO's ICD-10 for diseases and health problems) and CCI (health interventions). Published together as versioned classification releases with accompanying Canadian Coding Standards, they are the coding standard for hospital data submissions.",
+      "releases_per_year": 0.3,
+      "cadence_note": "Versioned releases roughly every three years — v2015, v2018, v2022, with v2025/v2027 enhancement cycles under way — with coding-standard updates in between. releases_per_year is nominal.",
+      "last_updated": null,
+      "url": "https://www.cihi.ca/en/submit-data-and-view-standards/codes-classifications-and-terminologies/classification-resources",
+      "domains": [
+        "health"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "statcan-business-register",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMDB record 1105: 'Establishments are coded based on the concept of major business activity in a manner consistent with the approach outlined by the North American Industry Classification System (NAICS).'",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1105"
+    },
+    {
+      "source_report_id": "statcan-assi-amusement-recreation",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMDB record 2425: 'The target population consists of establishments classified to the subsector 713 - Amusement, gambling and recreation industries, according to the North American Industry Classification System (NAICS) 2022.'",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2425"
+    },
+    {
+      "source_report_id": "statcan-assi-amusement-recreation",
+      "target_report_id": "statcan-business-register",
+      "relationship_type": "uses_data_from",
+      "basis": "IMDB record 2425: the observed population consists of all establishments classified to subsector 713 of the NAICS 2022 'found on the Statistics Canada Business Register as of the last day of the reference year.'",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2425"
+    },
+    {
+      "source_report_id": "statcan-qsfs",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMDB record 2501: 'Under the North American Industry Classification System (NAICS), such an enterprise is classified to the individual NAICS code that relates to the activity that provides the most value-added.'",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2501"
+    },
+    {
+      "source_report_id": "statcan-cimt",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Reference Guide to Canadian International Merchandise Trade Statistics: 'The first six digits of the HS (Harmonized System) code are globally assigned by the WCO (World Customs Organization)'; 'Canadian import HS (Harmonized System) codes have an additional two digits for tariffs assigned by the Department of Finance Canada and two more digits for statistical purposes assigned by Statistics Canada, resulting in a ten-digit code. For exports, two digits are added for statistical purposes, resulting in an eight-digit code.' The IMDB record 2201 methodology also applies edits 'for each Harmonized System (HS) code'.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/13-605-x/2025001/article/00003-eng.htm"
+    },
+    {
+      "source_report_id": "cihi-dad",
+      "target_report_id": "icd-10-ca",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CIHI DAD metadata: 'Since 2004–2005, all DAD records have been reported in ICD-10-CA and CCI.'",
+      "evidence_url": "https://www.cihi.ca/en/discharge-abstract-database-dad-metadata"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Duplicate of an edge already live in src/data/research/manufacturing-and-classifications.json (statcan-lfs -> noc, methodology_depends_on). The handoff claim ('The LFS uses the 2021 National Occupational Classification (NOC) v1.0 and estimates of employment are coded up to the five-digit level', cited to IMF SDDS DQAF / LFS documentation) is consistent with the live edge; nothing new to add. [Caveat-note on the minted/live edge statcan-lfs -> noc; endpoints nulled per the caveat convention (see NZ/G.3.md schema note).]"
+    },
+    {
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Duplicate of an edge already live in src/data/research/international-frameworks.json (statcan-lfs -> naics, methodology_depends_on). The handoff claim ('industry estimates coded using the 2022 North American Industry Classification System (NAICS) v1.0 up to the four-digit level', cited to IMF SDDS DQAF / LFS documentation) is consistent with the live edge; nothing new to add. [Caveat-note on the minted/live edge statcan-lfs -> naics; endpoints nulled per the caveat convention (see NZ/G.3.md schema note).]"
+    },
+    {
+      "source": "statcan-assi",
+      "target": "naics",
+      "reason": "wrong-target",
+      "why": "The handoff node 'statcan-assi' was an umbrella for 'Annual Survey of Service Industries (and sub-surveys)' — a family of surveys, not a single recurrently published release, so it is off-model as a node. Its cited evidence (IMDB record 2425) is in fact the specific survey 'Annual Survey of Service Industries: Amusement and Recreation'; the claim survives, narrowed, as the edges statcan-assi-amusement-recreation -> naics and statcan-assi-amusement-recreation -> statcan-business-register in this slice. Other ASSI sub-surveys (accommodation, food services, etc.) would need their own IMDB records fetched before adding."
+    }
+  ]
+}

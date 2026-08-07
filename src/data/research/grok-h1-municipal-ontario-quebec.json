@@ -1,0 +1,125 @@
+{
+  "_slice": "onqc",
+  "_researched": "2026-07-30",
+  "_merged": "2026-08-07",
+  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff (municipal-ontario-quebec-slice.json), verified against primary sources 2026-08-07. Of 6 proposed reports and 6 proposed edges: 2 reports (on-ompf, mpac-assessment) and 2 edges already exist in the live corpus (ontario-ompf-mpac.json) and are not re-proposed; 1 edge was remapped to a corrected source node (the ISQ vitality index is consumed by the QST-growth apportionment regulation M-22.1 r. 1.2, not by the péréquation regulation F-2.1 r. 11); 1 edge verified as proposed (on-hpp -> statcan-census-population via the Auditor General follow-up); 1 edge had a null target by the handoff's own admission; 1 edge (Legal Aid Ontario -> statcan-census-population) failed on wrong target — the Low Income Measure is not a Census product. Net new: 4 reports, 2 edges. qc-perequation is kept as a deliberate isolated node (a consolidated regulation, the Quebec half of the slice's point). The handoff's own _dropped array was empty; nothing to carry forward from it.",
+  "reports": [
+    {
+      "id": "qc-perequation",
+      "title": "Règlement sur le régime de péréquation (Regulation respecting the equalization scheme)",
+      "publisher": "Gouvernement du Québec",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Quebec",
+      "description": "Consolidated regulation (CQLR c. F-2.1, r. 11) under the Act respecting municipal taxation establishing Quebec's municipal equalization scheme. Standardized property wealth is established under s. 9 'conformément à la section I du chapitre XVIII.1 de la Loi' from the municipal property assessment roll, and population under s. 8 is 'la plus élevée entre celle relative à cet exercice et celle relative à l'un ou l'autre des 3 exercices précédant l'exercice de référence'. The regulation names no external statistical agency for its inputs, which is why this node is isolated: its inputs are municipal rolls and decree-based population figures, not published statistical releases.",
+      "releases_per_year": 1,
+      "cadence_note": "A consolidated regulation, reprinted on amendment rather than published on a schedule; allocations under it run annually.",
+      "last_updated": null,
+      "url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/F-2.1,%20r.%2011",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance",
+        "assessment"
+      ]
+    },
+    {
+      "id": "qc-partage-croissance-tvq",
+      "title": "Règlement sur la répartition entre les municipalités du montant représentant la croissance d'une partie de la taxe de vente du Québec",
+      "publisher": "Gouvernement du Québec",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Quebec",
+      "description": "Consolidated regulation (CQLR c. M-22.1, r. 1.2) apportioning among municipalities the amount established under s. 21.26 of the Act respecting the Ministère des Affaires municipales, des Régions et de l'Occupation du territoire, representing the growth of a portion of Quebec sales tax (QST) revenue. Distribution runs through two components (90% / 10% from fiscal 2030 onward), and the second component apportions by an economic vitality index whose source the regulation names outright.",
+      "releases_per_year": 1,
+      "cadence_note": "A consolidated regulation, reprinted on amendment rather than published on a schedule; the apportionment it governs runs annually.",
+      "last_updated": null,
+      "url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/M-22.1,%20r.%201.2",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "isq-vitalite-economique",
+      "title": "Indice de vitalité économique des territoires",
+      "publisher": "Institut de la statistique du Québec",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Quebec",
+      "description": "Composite index of the economic vitality of Quebec municipalities and regional county municipalities (MRCs), computed as a geometric mean of three normalized indicators: rate of workers, median total income of individuals, and average annual population growth over five years. Consumed by name in the QST-growth apportionment regulation, which takes 'la dernière liste publiée par l'Institut de la statistique du Québec' as of 1 September of the preceding fiscal year.",
+      "releases_per_year": 0.5,
+      "cadence_note": "Refreshed every two years (handoff said annual; the ISQ page states biennial, next update March 2027; most recent edition released 26 February 2025 covering 2022 data).",
+      "last_updated": null,
+      "url": "https://statistique.quebec.ca/en/document/economic-vitality-index",
+      "domains": [
+        "population",
+        "labour"
+      ]
+    },
+    {
+      "id": "on-hpp",
+      "title": "Homelessness Prevention Program — allocations and program guidelines",
+      "publisher": "Ontario Ministry of Municipal Affairs and Housing",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Ontario's consolidated provincial funding program supporting the province's 47 municipal service managers 'to provide affordable housing and support services for people at risk of or experiencing homelessness'. Service managers 'are required to complete an annual investment plan outlining how they plan to use their HPP allocations each year for ministry approval'. The post-2023 allocation model, documented by the Auditor General of Ontario's 2023 follow-up, weights four Census-derived socioeconomic indicators for half of the allocation calculation alongside Ontario Works and ODSP caseload data.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual allocations and investment-plan cycle; the allocation model itself was rebuilt in 2023.",
+      "last_updated": null,
+      "url": "https://www.ontario.ca/page/addressing-homelessness",
+      "domains": [
+        "municipal-finance",
+        "benefits"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "qc-partage-croissance-tvq",
+      "target_report_id": "isq-vitalite-economique",
+      "relationship_type": "uses_data_from",
+      "basis": "REMAPPED SOURCE. The handoff attached this edge to qc-perequation; the citing regulation is not the péréquation regulation but the QST-growth apportionment regulation, M-22.1, r. 1.2, whose s. 3(2°) defines the economic vitality index of a municipality as 'celui établi dans la dernière liste publiée par l'Institut de la statistique du Québec' for that index as of 1 September of the fiscal year preceding the given fiscal year ('au 1er septembre de l'année financière qui précède l'année financière donnée', per the handoff's fuller extract of the same provision, whose opening words were verified verbatim against legisquebec 2026-08-07). This is a named institution and a named recurring publication ('la dernière liste publiée'), read on a dated schedule — the strongest evidence class short of a statutory formula.",
+      "evidence_url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/M-22.1,%20r.%201.2"
+    },
+    {
+      "source_report_id": "on-hpp",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Auditor General of Ontario, 2023 follow-up on homelessness (report 1-07FU), describing the ministry's rebuilt HPP funding model: changes included 'replacing the outdated historical spending with measures of homelessness and supportive housing from Ontario Works and Ontario Disability Support Program caseload data, measures of supportive housing units using a survey administered to municipalities, and updated Statistics Canada data', and 'the updated funding model used four socioeconomic indicators (deep core housing need, low-income measure, Indigenous population, youth population), which accounted for half of the allocation calculation. All four indicators were updated using 2021 census data.' The final sentence names the release — the 2021 Census — which is what carries the edge past the agency-only test that removed five of six Statistics Canada rows from the OMPF Technical Guide. The primary statute (Housing Services Act, 2011 / O. Reg. 367/11) does not name the series; the model lives in program guidelines and transfer payment agreements, and the Auditor General is the published document that states it.",
+      "evidence_url": "https://www.auditor.on.ca/en/content/annualreports/arreports/en23/1-07FU_homelessness_en23.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "DUPLICATE OF A LIVE EDGE, not a failure. The handoff proposed on-ompf -> mpac-assessment on the 2026 OMPF Technical Guide Appendix F rows (Weighted Assessment, Number of Households, Farm Land Area). The live corpus already carries exactly this edge in src/data/research/ontario-ompf-mpac.json, adjudicated with fuller verbatim quotation and a reference_period block. Nothing in the handoff adds to the live edge; not re-proposed to avoid a duplicate the loader would reject. [Caveat-note on the minted/live edge on-ompf -> mpac-assessment; endpoints nulled per the caveat convention (see NZ/G.3.md schema note).]"
+    },
+    {
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "DUPLICATE OF A LIVE EDGE, AND THE HANDOFF'S BROAD BASIS WAS ALREADY ADJUDICATED DOWN. The handoff justified this edge on all six Appendix F Statistics Canada rows (Median Household Income, Rural and Small Community Measure, Per Cent of Population Above Low-Income Threshold, Ratio of Working Age to Dependent Population, Employment Rate, Municipal Land Area). The live edge in ontario-ompf-mpac.json rests deliberately on the single row that names a release — Appendix G's Rural and Small Community Measure, 'based on Statistics Canada data from the 2021 Census' — and the other five are already recorded in that file's _dropped as agency-only. Re-adding the handoff's version would silently re-broaden a basis the live corpus narrowed on purpose. Not re-proposed. [Caveat-note on the minted/live edge on-ompf -> statcan-census-population; endpoints nulled per the caveat convention (see NZ/G.3.md schema note).]"
+    },
+    {
+      "source": "qc-perequation",
+      "target": null,
+      "reason": "no-document",
+      "why": "The handoff itself filed this with a null target: F-2.1, r. 11 s. 9 establishes standardized property value from the property assessment roll as reproduced in the municipal summary, and s. 8 takes the highest population of the current or prior three fiscal years as of 1 January (decree-based). Verified against legisquebec 2026-08-07: the regulation 'does not name Statistics Canada or ISQ' and 'identifies no specific statistical agency as the source' — inputs are municipal rolls and summaries, not published statistical releases. No named target, no edge. The qc-perequation node is kept as a deliberate isolated node because the regulation itself is the Quebec half of this slice's point and clearly qualifies as a consolidated-regulation node."
+    },
+    {
+      "source": "qc-perequation",
+      "target": "isq-vitalite-economique",
+      "reason": "note",
+      "why": "WRONG SOURCE, EDGE SURVIVES REMAPPED. The handoff attached the ISQ economic vitality index edge to qc-perequation while citing M-22.1, r. 1.2 as evidence — and its own _notes conceded 'the ISQ link is confined to the separate QST-growth apportionment regulation'. Verified 2026-08-07: M-22.1, r. 1.2 is the 'Règlement sur la répartition entre les municipalités du montant représentant la croissance d'une partie de la taxe de vente du Québec', a distinct transfer from the péréquation scheme under F-2.1, r. 11, and F-2.1, r. 11 nowhere names ISQ. The dependency is real but belongs to the QST-growth regulation, so a new node qc-partage-croissance-tvq was minted and the edge re-issued from it (see dependencies). Recorded so a later pass does not re-propose the péréquation version."
+    },
+    {
+      "source": "on-legal-aid-ontario",
+      "target": "statcan-census-population",
+      "reason": "wrong-target",
+      "why": "THE QUOTE IS REAL AND THE TARGET IS WRONG. Legal Aid Ontario's 2023-24 Annual Report states, verified verbatim 2026-08-07: 'LAO's current financial eligibility thresholds are aligned with the 2011 Low Income Measure', with the report explaining the LIM as a Statistics Canada threshold of households below 50% of average Canadian household income. But the Low Income Measure is an income-statistics product (historically SLID/T1FF, now the Canadian Income Survey family), not a Census of Population release — pointing this at statcan-census-population is the same substitution the corpus has previously rejected (the statcan-hfce case). It fails twice more: the alignment is to a frozen 2011 vintage rather than a recurring reading (the report's own point is that thresholds have NOT tracked the LIM since — sitting tens of percentage points below the 2020 LIM), and the operative thresholds are dollar amounts prescribed in the Legal Aid Services Rules, not computed from any release. If a statcan LIM/income-survey node is ever built, the right claim would be a historical methodology_depends_on at best. The on-legal-aid-ontario node is dropped with the edge: with no surviving dependency it would be an isolated node whose corpus fit is doubtful (the thresholds live inside the Legal Aid Services Rules, and the handoff's 'municipal-finance' domain tag did not fit it either)."
+    }
+  ]
+}
