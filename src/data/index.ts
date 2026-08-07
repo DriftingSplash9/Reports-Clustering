@@ -42,6 +42,7 @@ import eurostatEdpGfsEcbStatistics from './research/eurostat-edp-gfs-ecb-statist
 import euMetaDocxBatches from './research/eu-meta-docx-batches.json'
 import essQualityFramework from './research/ess-quality-framework.json'
 import edpInventoryRegulation4792009 from './research/edp-inventory-regulation-479-2009.json'
+import esa2010QualityReporting from './research/esa2010-quality-reporting.json'
 import deBundesbankFinancialAccounts from './research/de-bundesbank-financial-accounts.json'
 import deDestatisSourceSurveys from './research/de-destatis-source-surveys.json'
 import grokR1 from './research/grok-r1-nordic-nato-fr-oecd.json'
@@ -142,6 +143,7 @@ const slices: ResearchSlice[] = [
   euMetaDocxBatches as unknown as ResearchSlice,
   essQualityFramework as unknown as ResearchSlice,
   edpInventoryRegulation4792009 as unknown as ResearchSlice,
+  esa2010QualityReporting as unknown as ResearchSlice,
   deBundesbankFinancialAccounts as unknown as ResearchSlice,
   deDestatisSourceSurveys as unknown as ResearchSlice,
   grokR1 as unknown as ResearchSlice,

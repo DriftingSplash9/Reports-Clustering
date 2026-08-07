@@ -1242,3 +1242,86 @@ This section is meant to grow from an actual post-merge gap scan (comparing
 what Research.1.md defines as in-scope against what nodes/domains actually
 exist), not from guessing — treat the three bullets above as placeholders,
 not findings.
+
+### Added 2026-08-07 (EU slice S1 session; `EU/EDPInventory_PartA_2026-08-07.md`)
+
+**Not guesses.** Each was found while reading staging material for the EDP
+inventory slice, and each names the batch it came out of. Not scoped, per the
+instruction that produced them.
+
+Two of the placeholders above can also be updated. **"The CA↔US-vs-EU
+comparison"** has now had a third instrument put through it — Council
+Regulation (EC) No 479/2009 — and the answer is a new shape rather than a
+yes or no: the EU layer *creates* a published national document class rather
+than *naming* an existing publication, and the edge direction is still
+national → EU. **"EU statistical governance"** is largely built as of
+`EU/G.50.md`.
+
+- **NACE and CPA.** Neither is a node. `naics`, `isic` and `anzsic` all are,
+  and `isic` was minted precisely because the parent of a national
+  classification was missing. NACE is the EU's NAICS and is named by nearly
+  every EU business statistic; Regulation (EC) No 451/2008 defines CPA by its
+  structural relationship to NACE. Staging batches 6–9, 33 records, unused.
+  Probably the largest single hole on this list.
+- **EU methodological manuals as a document class.** The Manual on Government
+  Deficit and Debt (2022 ed.), the Eurostat Manual of Supply, Use and
+  Input-Output Tables, the Handbook on Quarterly National Accounts, the Manual
+  on MFI Balance Sheet Statistics, the Balance of Payments Vademecum, and the
+  Manual on Quarterly Non-financial Accounts for General Government — whose
+  2006 and 2011 editions are named side by side in one staged record, which is
+  cadence evidence on a plate. Re-editioned on a cycle and named by name as the
+  method other releases follow. The corpus has exactly one
+  (`eu-manual-rd-esa2010`).
+- **The 27 national EDP inventories.** Compelled by Article 9 of Council
+  Regulation (EC) No 479/2009, published under Article 9(4), revised under
+  Article 9(3), one per member state, all 27 linked from Eurostat's own page.
+  Germany's names five German statistics by title. Only Germany is in staging.
+  See `EU/slices/cross-layer/edp-inventory-regulation-479-2009.json`.
+- **The 27 national ESA 2010 quality reports.** ~~A second compelled national
+  document class, under Commission Implementing Regulation (EU) 2016/2304, and
+  a stronger candidate than the inventories because the Regulation states the
+  interval.~~ **CORRECTED SAME DAY by slice S2, which read the instrument in
+  full.** The interval is real — *"Member States shall provide the quality
+  report on an annual basis"* — but **2016/2304 contains no publication
+  requirement at all** (searched "shall be made public", "publish",
+  "publication", "public" across all 24,942 characters; the only hits are
+  Eurostat's own standards and the Regulation's entry into force). So this is
+  *not* a candidate node class as written. **The two instruments are
+  complementary failures**: Regulation 479/2009 Article 9(4) compels a
+  *published* national document but states no interval, and 2016/2304 states the
+  interval and compels no publication. Neither supplies both, which is why two
+  slices covering 54 potential national documents produced zero member-state
+  nodes. What survives as a lead is narrower and better: Annex 4.2 indicator 2
+  requires each report to carry a *"List of national publications on the data
+  sources used and methodology applied containing the titles of these
+  publications and links to them"*, so **if any NSI publishes its quality report
+  voluntarily, that one document is a data-sources table**. Now `MISSION-TODO-2`
+  P2 item 9z. Distinct from `eurostat-edp-gfs-quality-report`, which is the
+  Article 8(3) report Eurostat itself writes — do not conflate; and note
+  Eurostat's *own* consolidated version of the report is now a node,
+  `eurostat-national-accounts-quality-report`.
+- **NACE and CPA — upgraded from "probably the largest hole" to evidenced.**
+  S2 found Eurostat stating it directly, in the *Quality report on national and
+  regional accounts* §3.2, under the heading "Classifications used in ESA 2010":
+  *"Statistical Classification of Economic Activities in the European Community
+  (NACE), Rev. 2 (2008) • Statistical Classification of Products by Activity,
+  Version 2.1 (CPA) • Classification of Individual Consumption by Purpose
+  (COICOP), COICOP 2018 • Classifications of functions of government (COFOG) •
+  Nomenclature of territorial units for statistics (NUTS), 2024 version"*. Five
+  classifications used by a node this corpus already holds, and not one of them
+  is a node. Build them from the programmes coded to them, per `Research.1.md`
+  §7 — not from this list.
+- **The European Banking Authority.** EBA Risk Dashboard, EBA Risk Assessment
+  Report, the Implementing Technical Standards on supervisory reporting. A
+  whole EU agency with recurrent titled publications, entirely absent from the
+  corpus. Staging batches 52–54 and 62.
+- **The Alert Mechanism Report / MIP scoreboard.** `ess-escb-mip-quality-report`
+  is a node; the annual AMR the scoreboard feeds is not. Staging batch 63 lists
+  all 23 auxiliary indicators for the 2026 AMR with their named source
+  institutions (Eurostat, DG ECFIN, OECD, ECB, IMF) — a data-sources table,
+  which `Research.1.md` §7 calls the strongest evidence class there is.
+- **National debt-management-agency statistics.** SFGD and the Report on Loan
+  Notes by Creditors of Central Government are published by the German finance
+  agency (Bundesrepublik Deutschland Finanzagentur GmbH), not by Destatis — a
+  publisher type this corpus has no instance of. Every member state has a debt
+  agency.

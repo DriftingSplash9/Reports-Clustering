@@ -73,20 +73,75 @@ notes at the bottom.*
 ## P1 — Branch frontiers (each is one good session; read the named G-file
 first, in full)
 
-5. **EU — the blob's judgment half. STARTED 2026-08-07 (`EU/G.50.md`): 22 of
-   73 batches built, 51 remain.** The first pass took batches 16–26, 30–37, 44,
-   45 and 66 — which turned out to be one subject, the ESS quality-and-metadata
-   standards stack — and produced `ess-quality-framework.json` (5 reports, 6
-   dependencies, 9 dropped). **Two things the next batch session must know.**
+5. **EU — the blob's judgment half. STARTED 2026-08-07 (`EU/G.50.md`), two
+   further passes the same day (S1 and S2): 26 of 73 batches built, 47 remain —
+   and 46 distinct, because two are byte-identical duplicates.** The first pass
+   took batches 16–26, 30–37, 44, 45 and 66 — which turned out to be one
+   subject, the ESS quality-and-metadata standards stack — and produced
+   `ess-quality-framework.json` (5 reports, 6 dependencies, 9 dropped). **S1**
+   took 3, 4 and 64 → `cross-layer/edp-inventory-regulation-479-2009.json`
+   (1 report, 1 dependency, 11 dropped), Part A at
+   `EU/EDPInventory_PartA_2026-08-07.md`. **S2** took 67 →
+   `eu-level/esa2010-quality-reporting.json` (2 reports, 4 dependencies,
+   8 dropped), Part A at `EU/ESA2010QualityReports_PartA_2026-08-07.md`.
+   Corpus **366 reports / 434 dependencies**, `validate` exit 0.
+   **Six things the next batch session must know.**
    (a) Read `01-manifest.json` by its `scope` strings, **not** by batch number:
    the material is grouped by subject across scattered numbers, and working in
-   numeric order would have produced five thin slices instead of one. (b) The
-   unlabelled middle block, batches 46–62, carries **no scope strings at all**
-   and nobody has characterised it — it is the only part of the backlog whose
-   size cannot currently be estimated, which is why `G.50.md` names it as where
-   to go next. Also unbuilt and coherent: batches 0–15 (ESA 2010 and the
-   national-accounts methodology stack) and 68–72 (ECB/Eurosystem collateral and
-   balance sheets, which is priority C's own material).
+   numeric order would have produced five thin slices instead of one.
+   (b) **CORRECTION to the (b) that stood here, and to `G.50.md`'s own
+   recommendation.** This file previously said batches 46–62 "carry no scope
+   strings at all and nobody has characterised it", and named that block as
+   where to go next. Half of that is wrong and the rest is worse than stated.
+   **Batches 47–62 are precisely characterised** — they carry `batch_id` and
+   `strand` fields instead of `scope` (e.g. `FIGARO-2026-08-03-A1` / "Finances /
+   Monetary & Price Statistics – FIGARO EU inter-country supply, use and
+   input-output tables"); the manifest reader only surfaces `scope`, so they
+   *look* blank and are not. **Batch 46 is the one genuinely unlabelled block,
+   and it is the most expensive thing in the backlog, not the cheapest**: 29
+   country peer-review records, every one carrying no `url`, no `location` and
+   no `names` — e.g. `{"id": "pr-germany", "country": "Germany", "quote": "high
+   level of compliance with the European Statistics Code of Practice"}`. Under
+   §2 and §6 those are uncitable, so all 29 need their sources re-fetched from
+   scratch. **Do it last, not first.**
+   (c) **Staged quotes from badly-typeset PDFs need re-reading.** `G.50.md`
+   Correction 2 found the staging pipeline's extraction clean across six ESS
+   documents. S1 found **five of six records in batch 64 not verbatim** — two
+   misquoted nouns, one two-passage weld with no ellipsis, one truncation that
+   removed the only cadence sentence in its passage, one reversed sentence
+   order. The failures cluster on one PDF with broken intra-word spacing. The
+   operational rule is narrower than "staging is unreliable": re-read anything
+   whose source is a poorly-extracted PDF before it becomes a `basis`.
+   (d) **EUR-Lex works again.** `G.50.md` Finding 4 recorded it serving HTTP 202
+   zero-byte bodies to `curl` and silently redirecting a real browser to
+   TodayOJ. Retried 2026-08-07 and both the legal-content and ELI forms return
+   HTTP 200 with full text. The outage was transient; keep the once-per-session
+   retry rule. `G.50.md` Cheap check 3 is discharged: the Regulation 223/2009
+   node was minted in S2 and **enters the graph at weighted authority rank #2
+   overall**, behind only ESA 2010, because ESA 2010 passes rank through to it.
+   (e) **THE STAGED BATCHES ARE ORGANISED AROUND INSTRUMENTS, AND THE
+   INSTRUMENTS ARE USUALLY NOT THE NODES.** Both slices hit this from opposite
+   directions. Batch 64 was a national document whose five named national
+   statistics are not in staging. Batch 67 was an Implementing Regulation, and
+   the eight-edition Eurostat publication that Regulation produces is not in the
+   blob at all — it was found by asking what the instrument makes. In both cases
+   the mintable material was one search away from the staged material, and in
+   neither case would working the batch alone have found it. **Budget one
+   "what does this instrument produce?" search per batch.**
+   (f) **Two documented conflicts were opened and neither was resolved**, per
+   §3. The German EDP inventory, titled "according to ESA2010", quotes
+   Article 8.1 of its own Regulation in the superseded "ESA 95" wording. And the
+   European Statistics Code of Practice describes itself as a "self-regulatory"
+   framework that **"complements"** the legal framework based on Regulation
+   223/2009 — §5a language — while Regulation 223/2009 Article 11 asserts
+   authority over the Code. That second one settles `G.50.md`'s deferred
+   CoP → Regulation edge, and settles it as *do not mint*, which is not what
+   G.50 expected when it filed the item as a retrieval problem.
+   Also unbuilt and coherent: the rest of batches 0–15 (ESA 2010 and the
+   national-accounts methodology stack — 3 and 4 are now done) and 68–72
+   (ECB/Eurosystem collateral and balance sheets, which is priority C's own
+   material). Note batches 53 and 54 are **byte-identical duplicates** of each
+   other, so the manifest's remaining count is one higher than the real one.
    The project's largest known backlog by
    volume. The mechanical split is done and waiting in
    `EU/slices/_staging/`: `01-manifest.json` lists **73 batches**; work them
@@ -183,6 +238,57 @@ first, in full)
 ## P2 — Cheap checks (single lookups, ordered by value per unit effort;
 raid this list when a session has capacity left)
 
+9z. **Does ANY Member State publish its own ESA 2010 quality report?** THE
+    HIGHEST-VALUE ITEM ON THIS LIST, added 2026-08-07 (S2), and it is a search
+    rather than a lookup. Implementing Regulation (EU) 2016/2304 compels every
+    Member State to send Eurostat, by 31 May every year, a quality report
+    containing — Annex 4.2, indicator 2 — a *"List of national publications on
+    the data sources used and methodology applied containing the titles of these
+    publications and links to them, if available"*. **Nothing in the instrument
+    requires those reports to be published** (searched: "shall be made public",
+    "publish", "publication", "public" across all 24,942 characters), and
+    nothing forbids it either. **One such document, published voluntarily by one
+    NSI, is a data-sources table in `Research.1.md` §7's strongest-evidence-class
+    sense — national publications by title, with links, for one country,
+    refreshed annually.** It would open the member-state layer by a route Annex
+    B, Annex XI and Article 9 of Regulation 479/2009 all failed to open. A
+    measured "none of the 27 publishes it" is worth nearly as much. Start with
+    the NSIs whose transparency is already documented in this corpus — Destatis,
+    CBS, STATEC, INSEE — and with the phrase "quality report" plus "national
+    accounts" on each NSI's own site.
+9a. **Open Germany's EDP inventory on CIRCABC, in a real browser.** Added
+    2026-08-07 (S1). Eurostat's EDP
+    inventories page carries a live "Inventory" link for every member state,
+    and Germany's points at
+    `s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/413ddad4-653f-4632-99d8-35475ddb23f8/details`.
+    To `curl` that returns HTTP 404 with a 49,532-byte single-page-app shell,
+    and the REST form returns an Alfresco 404 — a failure mode easily misread
+    as "the document is gone". **What turns on it:** the copy Destatis serves
+    is dated December 2015, and one observed edition is not an interval, so
+    `de-destatis-edp-inventory` is currently `no-node-yet` on cadence alone.
+    If CIRCABC holds a newer edition, two editions exist, an interval becomes
+    derivable, and the node is mintable on the same observed-record basis
+    Thomas approved for `sdmx-glossary` and
+    `eurostat-remuneration-mission-expenses-report` — which in turn unblocks
+    two documented edges (`→ eu-reg-479-2009`, `→ esa-2010`) and, in principle,
+    26 more member states. Add CIRCABC to the branch's site-behaviour list.
+9b. **Find publication pages for the five German statistics named in the EDP
+    inventory.** Added 2026-08-07 (S1), and logged as its own item rather than
+    done inline because finding five publication pages is a research task, not
+    a conversion task. All five are named by title with a publisher, and four
+    with a stated quarterly cadence; all five lack only a `url`, which the
+    `Report` interface requires. In descending order of promise: the quarterly
+    debt statistics (QDS, "compiled by Destatis on a quarterly basis"); the
+    Statistic of Federal Government Debt (SFGD / Statistik der Bundesschuld,
+    German finance agency); the Report on Loan Notes by Creditors of Central
+    Government (Meldung zu Schuldscheindarlehen nach Glaeubigerklassen, same
+    publisher); the annual debt statistics (ADS); and the Bundesbank's
+    Securities holdings statistics (Statistik über Wertpapierinvestments,
+    formerly Depotstatistik) — which is *not* `de-bundesbank-financial-accounts`.
+    Quotes are in `EU/EDPInventory_PartA_2026-08-07.md` C8–C10. **These five are
+    what corrects `EU/AnnexB_assessment_2026-08-05.md` §4's "not one German
+    publication is named"** — true of the transmission passage it read, not of
+    the document.
 10. **Re-anchor `au-abs-seifa -> au-abs-census`** to ABS's own SEIFA
     methodology page. One fetch. The edge currently rests on the CGC's and
     VLGGC's third-party statements and says so in its own `basis`
