@@ -102,7 +102,17 @@ first, in full)
    works it alone under the standing rules (verbatim Part A quote or it
    doesn't exist; conflicts reported, never resolved), producing a findings
    file Thomas reviews before anything is imported. Do not fold it into
-   batch work. Branch authority: **`EU/G.50.md`** (read `G.49.md` behind it)
+   batch work. **Prompt written 2026-08-07: `EU/prompts/PROMPT-prose-section.md`
+   — paste it into a fresh session.** The file was opened and characterised that
+   day: **399 Part A entries in two batches**, not the "one ECB/Eurosystem batch"
+   the slices README claimed. 23 are ECB General Documentation Guideline
+   (Guideline (EU) 2015/510) entries citing one EUR-Lex consolidated text; 376
+   are EU Draft Budget entries carrying a `FILE:` field naming an uploaded PDF
+   (SEC00/01/02/03/07/09/10) with **no URL at all**. Verification list for an
+   outside reader: `EU/prose-verification-list.md`. **Blocked on one of two
+   things**: EUR-Lex serving again (for the 23), and the SEC PDFs being
+   re-uploaded (for the 376) — without them the session can catalogue but not
+   mint. Branch authority: **`EU/G.50.md`** (read `G.49.md` behind it)
    (and `EU/slices/README.md` for the branch's central
    disclosure-runs-upward finding — which `G.50.md` narrows rather than
    refutes: where the EU binds by Regulation it names nobody, where it

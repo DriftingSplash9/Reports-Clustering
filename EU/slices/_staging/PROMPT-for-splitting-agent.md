@@ -48,7 +48,7 @@ A mechanical pre-split has already been run. In `EU\slices\_staging\`:
 | `10-loose-record.ndjson` | 301 records that were not inside a batch |
 | `10-batch-header.ndjson` | 8 batch headers (scope/session metadata, no records) |
 | `10-part-b-soft-connections.ndjson` | 1 object — draft soft connections |
-| `20-prose-sections.txt` | ~399k chars of Part A delivered as **prose, not JSON** — one ECB/Eurosystem batch dated 2026-08-03. Needs a human-supervised read; no script can do it. |
+| `20-prose-sections.txt` | ~399k chars of Part A delivered as **prose, not JSON**. **Corrected 2026-08-07 (`EU/G.50.md`): two batches, not one, and 399 Part A entries** — 23 ECB General Documentation Guideline entries citing one EUR-Lex text, and 376 EU Draft Budget entries carrying `FILE:` and no URL (SEC00/01/02/03/07/09/10). Runs as its own session: `EU/prompts/PROMPT-prose-section.md`. |
 
 Coverage: 67.4% of the blob parsed as valid JSON. The rest is the prose section
 plus array-separator noise.
