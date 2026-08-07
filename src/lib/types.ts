@@ -250,6 +250,7 @@ export type Domain =
   | 'energy-royalties'
   | 'banking'
   | 'financial-regulation'
+  | 'construction'          // added 2026-08-07 (Thomas): building/construction releases; first customer au-abs-building-approvals
 
 /**
  * How one report depends on another.

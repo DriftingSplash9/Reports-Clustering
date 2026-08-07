@@ -139,6 +139,18 @@ error.
 their own priority lists plainly (1, 2, 3 …). The EU branch's A–G lettering is
 its own history and stays; it does not carry to NZ, AU or any new branch.
 
+**Hand-off spec adoption (decided 2026-08-07, Thomas, via the decisions doc).**
+The EU `G.*.md` hand-off spec is adopted wholesale for AU, NZ and any future
+branch — copied spec block, JSON sidecar, corrections discipline, all of it.
+The "should this branch adopt the EU conventions?" item carried since
+`AU/G.1.md` priority 4 is closed everywhere; do not carry it forward again.
+
+**Session git policy (decided 2026-08-07, Thomas, via the decisions doc).**
+Every working session ends by committing its own work to git with a
+descriptive message and pushing to origin/main — the public repo tracks the
+corpus. A session that cannot push (auth, environment) commits locally and
+says so in its hand-off.
+
 ## 3. Extract; do not adjudicate
 
 This was tested. An earlier round asked for verdicts — "does this edge exist,

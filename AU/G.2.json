@@ -1,0 +1,89 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.2.md",
+  "number": 2,
+  "title": "G.2.md — Australia/SAO galaxy hand-off",
+  "date": "2026-08-07",
+  "governing_briefs": "`Research.1.md` (root, general rules §§1–11) — read in full.",
+  "predecessor": "`AU/G.1.md` (2026-08-06).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**Both of G.1's gated leads are now directly readable, via the same fix:\nwhen a government PDF is unscriptable in-browser, check whether the same\npublisher also ships a `.docx` of the same document.** Neither `cgc.gov.au`\nnor `localgovernment.vic.gov.au` actually blocks automated access the way\nG.1's session conditions suggested (TLS resets, 403s) — this session hit\nneither. What blocks it is Chrome's own PDF handling, a client-side wall\nthat a same-publisher format swap gets around entirely. Worth trying\nfirst, before more exotic fetch methods, anywhere else in this corpus a\nPDF has resisted reading.",
+  "findings": [
+    {
+      "heading": "1. The CGC's core Estimated Resident Population quote is confirmed verbatim, with exact location, and no attached footnote",
+      "body": "**What this rests on**: the CGC Population chapter's DOCX, downloaded\ndirectly and extracted with `python-docx` — a raw byte-for-byte read, not\nan AI summary. Population chapter, \"Estimated Resident Population\"\nsection, its opening sentence: *\"The population data used in the\nestimation of GST relativities is Estimated Resident Population, produced\nby the ABS.\"* No footnote is attached to this sentence, or to the words\n\"Estimated Resident Population\" within it — confirmed by reading the\nparagraph and its immediate neighbours directly, not inferred. The edge\n`au-cgc-gst-relativities` → `au-abs-erp` is updated in the JSON to VERIFIED\nDIRECTLY on this basis, evidence_url repointed at the DOCX (the document\nactually opened, per `Research.1.md` §6's own instruction)."
+    },
+    {
+      "heading": "2. A second, genuine citation was found in the same chapter, distinct from the footnote G.1 reported",
+      "body": "**What this rests on**: the same DOCX. Figure 1 (\"Age structure of state\npopulations, June 2023\") carries its own source note: *\"Source: ABS,\nNational, state and territory population, December 2023.\"* This is a real,\ntitled ABS release, and it is the same release `au-abs-erp`'s own `url`\nalready points at (`abs.gov.au/statistics/people/population/national-state-and-territory-population`).\nIt is attached to the age-structure figure specifically, not to the general\nERP statement in Finding 1 — recorded in the edge's `basis` as corroboration,\nnot folded into the main quote."
+    },
+    {
+      "heading": "3. The VLGGC's Annual Allocation Report is confirmed, directly, as AGENCY ONLY — G.1's characterisation holds",
+      "body": "**What this rests on**: the VLGGC 2025-26 Annual Allocation Report Part 1\nDOCX, downloaded directly (`localgovernment.vic.gov.au`'s 403 from G.1 did\nnot reproduce this session — see Session conditions) and extracted in full,\nincluding table cells. The Acknowledgements section thanks, by name:\n*\"Commonwealth Grants Commission\"*, *\"Office of the Valuer-General\"*,\n*\"Australian Bureau of Statistics\"*, *\"Commonwealth Department of Human\nServices (Centrelink)\"* and *\"Tourism Research Australia.\"* Section 4\nstates: *\"Major inputs for the 2025-26 allocation include Australian\nBureau of Statistics' population estimates, valuations data and the most\nrecent information on council expenditure and revenue,\"* and separately:\n*\"the available general purpose grants pool for Victorian councils\nrepresents, on average, $87.69 per head of population (using ABS\npopulation estimates as at 30 June 2024).\"* Agency named repeatedly,\nspecifically, and with a date in the last case — but no titled release\nanywhere in Part 1. G.1's proxy-reader report of this same document turns\nout to have been accurate in substance; this session upgrades it from\nreported to directly confirmed, and the `_dropped` entry now says so.\nPart 2 (the per-council data appendix) was not read this session."
+    },
+    {
+      "heading": "4. A new, unbuilt lead: NISEIFA, an ABS index built for the CGC that shares SEIFA's indicators",
+      "body": "**What this rests on**: the same CGC Population chapter DOCX as Finding 1.\n*\"The Non-Indigenous Socio-Economic Index for Areas (NISEIFA) was\ndeveloped for the Commission by the ABS. This index uses the same\nindicators as the Socio-Economic Indexes for Areas (SEIFA) Index of\nrelative socio-economic disadvantage.\"* Not built into an edge: NISEIFA has\nno node yet, and \"uses the same indicators as\" sits close enough to the\n`Research.1.md` §5a comparability trap that it deserves a second look\nbefore minting rather than a same-session build. Recorded as a\n`no-node-yet` lead."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`AU/G.1.md`, Finding 1 — overstated, now corrected.** G.1 reported that the CGC's ERP sentence carried \"a footnote citing 'ABS (2021), Census of Population and Housing, Socio Economic Indexes for Areas, Australia, released 27 April 2023' by exact title and release date.\" Directly reading the same chapter this session (see Finding 1, above) finds no such footnote anywhere in it. That citation concerns SEIFA — a different index, covered in the CGC's separate Socio-economic status chapter — and was evidently conflated with the ERP passage by G.1's proxy-reader tool, an AI-summarising fetch this project's own standing guidance already warns against for exactly this reason (`Research.1.md`, \"prefer direct fetch + text extraction over an AI-summarising fetch tool for anything that will become a quoted basis field,\" carried in G.1's own \"What to pass\" section). The edge's `basis` is corrected in the JSON; no node or edge is removed, since the underlying ERP relationship itself is confirmed independently correct."
+    }
+  ],
+  "priorities": [],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Build out a second Australian state** — see priority 2. Victoria is now the lower-effort candidate; the VLGGC Annual Allocation Report itself (2025-26, `.docx`, both parts downloaded this session — Part 2 not yet read) is the obvious starting document, the direct structural analog to Tasmania's own methodology manual already in the corpus."
+    },
+    {
+      "n": 2,
+      "text": "Read the VLGGC Part 2 appendix** — per-council data tables, not read this session; may or may not contain anything citable beyond what Part 1 already gave (Finding 3)."
+    },
+    {
+      "n": 3,
+      "text": "NISEIFA** — see Finding 4. Worth a search for whether it is published on its own citable cadence anywhere, or only exists inside CGC working papers with no independent title."
+    },
+    {
+      "n": 4,
+      "text": "Carried unchanged from G.1: search directly for a NSW Local Government Grants Commission methodology manual (not confirmed exhaustive); retry the four 403'd NSW council Revenue Policy PDFs, now with the DOCX-swap trick in hand if any offer one; the `au-abs-gfs` node-split question."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`AU/G.2.md`)** and **`AU/G.1.md`** — both, in order; this file corrects one thing in G.1 but does not replace its Orientation."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — unchanged this session."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/au-government-finance.json`** — its `_dropped` array is the direct continuation point for cheap checks 1–3 above."
+    },
+    {
+      "n": 4,
+      "text": "A browser, plus the DOCX-swap trick**: when a government PDF won't render or won't script, check the same publisher's page for a `.docx` of the same document before trying anything more exotic. Confirmed working on both `cgc.gov.au` and `localgovernment.vic.gov.au` this session."
+    },
+    {
+      "n": 5,
+      "text": "If extracting a `.docx` programmatically**: check `len(document.tables)` before trusting a paragraphs-only read — see Secondary observations. ---"
+    }
+  ],
+  "session_conditions": "Picked up directly from Thomas naming this branch's P1 item: \"AU — get past\nthe CGC wall, then a second state.\" This session addressed the first half\nonly. **The second state (Victoria or NSW) was not started** — see\nThomas's stated priority, below.\n\n**What was read in full this session, and how**: the CGC's \"Population\"\nmethodology chapter and the VLGGC's 2025-26 Annual Allocation Report\n(Part 1), both downloaded as `.docx` via a real browser and extracted\nbyte-for-byte with `python-docx` (paragraphs *and* table cells — the VLGGC\nreport's entire body sits inside Word tables, which a naive\nparagraphs-only extraction misses almost completely; this cost one dead\nend before it was caught). Also read directly: the CGC's publications page\n(`cgc.gov.au/publications/commissions-assessment-methodology`) and the\nVictorian Commission's landing and publications pages\n(`localgovernment.vic.gov.au`), both plain HTML, no gating encountered.\n\n**What was tried and did not work, worth recording so a future session\ndoes not repeat it**: `cgc.gov.au`'s PDFs render inside Chrome's own\nbuilt-in PDF viewer (a `chrome-extension://` page) rather than downloading\n— a genuinely different failure from G.1's forced-download dialog, and one\nno browser-automation content-reading tool can script into, because Chrome\ndoes not let one extension read another's DOM. Google's document viewer\n(`docs.google.com/viewer?url=...`) was tried against the same PDF and\nreturned \"No preview available\" — a dead end, not attempted further. An\nAI-summarising fetch tool *did* get through to the PDF's content and its\nanswers were substantively correct, but it also **introduced an error**\n(see Corrections, below) — consistent with this project's own standing\nwarning against AI-summarising reads for anything that becomes a quoted\n`basis`. The fix that actually worked: the CGC publishes every methodology\nchapter in both PDF and DOCX side by side, and the DOCX triggers a genuine\nfile download rather than an in-browser viewer. The same trick resolved\nthe VLGGC document, which also ships PDF and DOCX in parallel."
+}

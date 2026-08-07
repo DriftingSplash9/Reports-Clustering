@@ -1,3 +1,5 @@
+**SUPERSEDED 2026-08-07 by `planning/MISSION-TODO-2.md`** — that file is now the mission's entry point. This one stays as the record of the 2026-08-07 consolidation wave (its strikethroughs are the done-list; git history has the rest). Do not add new items here.
+
 # MISSION-TODO — the consolidated list
 
 Written 2026-08-07 by the first session to have the whole repo in view at
@@ -87,11 +89,43 @@ mark it here AND in whatever branch file owns it.
    verbatim Part A quote. The 399k-char prose section
    (`20-prose-sections.txt`) needs its own supervised session. This is the
    project's largest known backlog by volume. (Source: rolling-todo Now #2.)
-6. **AU — get past the CGC wall, then a second state.** Re-fetch the CGC
-   GST Revenue Sharing Relativities (Australia's most important fiscal
-   document; every fetch method failed in AU/G.1 — try the browser, which
-   NZ/G.4 proved changes everything). Then Victoria (VLGGC found, not
-   verified) or NSW. (Source: AU/G.1 priorities 1–2, cheap checks 1–3, 5.)
+6. **AU — get past the CGC wall, then a second state.** *(CGC wall DONE
+   2026-08-07: the browser alone still doesn't render cgc.gov.au's PDFs —
+   they load only inside Chrome's own unscriptable built-in PDF viewer,
+   a different wall than AU/G.1 hit — but the CGC publishes every
+   methodology chapter as DOCX too, which downloads cleanly; the
+   Population chapter's Estimated Resident Population quote is now
+   VERIFIED DIRECTLY by byte-for-byte extraction, and a footnote
+   misattribution in AU/G.1's own extraction was caught and corrected.
+   Cheap check 5 also DONE 2026-08-07: localgovernment.vic.gov.au's 403
+   didn't reproduce; the VLGGC Annual Allocation Report is now directly
+   confirmed as AGENCY ONLY, matching G.1's original characterisation.
+   Bonus: `scripts/handoff-to-json.py`'s priority-block parser only
+   recognises the EU's lettered `**A — Label**` convention and silently
+   produces an empty `priorities` array for AU's and presumably NZ's
+   plain-numbered lists — a real gap, not yet fixed, see AU/G.2.md
+   Secondary observations.)* Then Victoria (VLGGC found and now
+   accessible, not yet built into a full state pass) or NSW. (Source:
+   AU/G.1 priorities 1–2, cheap checks 1–3, 5; AU/G.2.)
+   **SECOND STATE DONE 2026-08-07 (AU/G.3)** — the Victoria pass ran: both
+   parts of the VLGGC 2025-26 Annual Allocation Report read in full
+   directly, Part 2 for the first time (Cloudflare now challenges
+   container-side fetches, so the DOCX was unzipped and text-extracted
+   INSIDE the browser page — recipe in G.3 Session conditions). Part 2's
+   Appendix 4L data-sources table overturned the AGENCY ONLY verdict: 8 new
+   nodes (the VLGGC report, both governing Acts, ABS Regional population /
+   Census / Building Approvals, DSS payment demographics, and the council
+   questionnaire as a terminus) and 10 new edges, including the corpus's
+   first CGC→SEIFA edge (Socio-economic status chapter read directly; the
+   NISEIFA lead resolved as not-mintable, with a genuine CGC
+   self-contradiction documented — G.3 Finding 4). Corpus 354/415, checks
+   green. Still open in this branch: the second council (four 403'd NSW
+   Revenue Policies), the NEW Victorian valuation chain lead (Valuation of
+   Land Act 1960 (Vic) + Valuer-General Victoria — G.3 priority 3), the
+   NSW GC manual search, the `au-abs-gfs` split — and one decision for
+   Thomas: whether to mint an `au-federal-budget` node (named as the grants
+   pool's origin; would immediately collect a documented edge — G.3
+   priority 4).
 7. ~~EU wide — Norway's KOSTRA~~ **DONE 2026-08-07** — full chain built
    (no-government-finance.json): KOSTRA, its regulation (via the ministry's
    own Veileder, lovdata being robots-blocked — flagged as a judgement
