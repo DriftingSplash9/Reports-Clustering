@@ -44,9 +44,11 @@ mark it here AND in whatever branch file owns it.
    branch files describe v3.3/v3.4. Carried by five sessions and counting.
    One edit by Thomas (fix it or delete the version line). Two minutes.
    (Source: NZ/G.4 Corrections 1.)
-3. **Publish the repo to GitHub.** *(START-HERE.md refreshed to 335/392
-   with the new galaxy list, 2026-08-07 — the remaining work is Thomas
-   creating the GitHub repo and pushing, one GitHub Desktop session.)* Thomas's stated goal is outside use and
+3. ~~Publish the repo to GitHub~~ **DONE 2026-08-07** — private repo at
+   github.com/DriftingSplash9/Reports-Clustering, full history published,
+   origin/main verified in sync. Flip to public (or invite collaborators by
+   username) on github.com → Settings when ready for outside input.
+   START-HERE.md was refreshed for that audience. Original: Thomas's stated goal is outside use and
    input; the hidden page at thomascheesman.ca/reports-graph is live but the
    source isn't shareable. GitHub Desktop is installed and working. Before
    flipping it public: refresh `START-HERE.md` (still says 124/205; corpus
