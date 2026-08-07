@@ -19,7 +19,14 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
   { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
 ]
 
-const SLIDERS: { key: 'fog' | 'glow' | 'spread'; label: string; hint: string }[] = [
+const SLIDERS: {
+  key: 'fog' | 'glow' | 'spread'
+  label: string
+  hint: string
+  /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 50%–250%. */
+  min?: number
+  max?: number
+}[] = [
   {
     key: 'fog',
     label: 'Distance haze',
@@ -33,7 +40,9 @@ const SLIDERS: { key: 'fog' | 'glow' | 'spread'; label: string; hint: string }[]
   {
     key: 'spread',
     label: 'Cluster spread',
-    hint: 'How much room the layout gives clusters. Rebuilds the layout when released, so it costs a beat; position still encodes nothing but the edges',
+    hint: 'How much room the layout gives clusters, as a multiplier on the baseline. Rebuilds the layout when released, so it costs a beat; position still encodes nothing but the edges',
+    min: 0.5,
+    max: 2.5,
   },
 ]
 
@@ -141,20 +150,22 @@ export default function ViewControls({
         </label>
       ))}
 
-      {SLIDERS.map(({ key, label, hint }) => (
+      {SLIDERS.map(({ key, label, hint, min, max }) => (
         <label key={key} style={{ ...sliderRow, marginTop: 8 }} title={hint}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span style={{ fontSize: 11, color: view[key] > 0 ? '#8fa3c0' : '#5e6f8a' }}>
               {label}
             </span>
             <span style={{ fontSize: 11, color: '#5e6f8a' }}>
-              {view[key] <= 0.005 ? 'off' : Math.round(view[key] * 100) + '%'}
+              {(min ?? 0) === 0 && view[key] <= 0.005
+                ? 'off'
+                : Math.round(view[key] * 100) + '%'}
             </span>
           </div>
           <input
             type="range"
-            min={0}
-            max={1}
+            min={min ?? 0}
+            max={max ?? 1}
             step={0.01}
             value={view[key]}
             onChange={(e) => set(key, Number(e.target.value) as never)}

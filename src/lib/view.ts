@@ -54,14 +54,16 @@ export interface ViewSettings {
    */
   zoom: number
   /**
-   * Layout spread, 0 to 1 — how much room the force layout gives clusters.
+   * Layout spread — the multiplier applied to the whole layout scale, 0.5 to
+   * 2.5, shown to the viewer as 50%–250%.
    *
    * A slider for the same reason haze and glow are: the right amount depends
    * on the corpus. At 124 nodes the tight layout read as one constellation;
-   * at 335 it read as a nest. 0 is the old dense physics, 1 is fully airy;
-   * moving it rebuilds the layout (charge, repulsion cap, link rest lengths
-   * all scale together, and links touching hubs get extra room), so the
-   * change costs a beat before the camera refits.
+   * at 335 it read as a nest. 1 is the baseline tuned 2026-08-07; below it
+   * approaches the old dense physics, above it goes airy. Moving it rebuilds
+   * the layout (charge, repulsion cap, link rest lengths all scale together,
+   * and links touching hubs get extra room), so the change costs a beat
+   * before the camera refits.
    */
   spread: number
 }
@@ -96,7 +98,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   focusBuiltFrom: true,
   focusFeedsInto: true,
   zoom: 1,
-  spread: 1 / 3,
+  spread: 1,
 }
 
 /** Scene background. Fog resolves to this, so the two must agree. */

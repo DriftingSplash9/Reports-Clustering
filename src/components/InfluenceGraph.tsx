@@ -416,9 +416,9 @@ export default function InfluenceGraph({
     // Retuned 2026-08-07 at 335 nodes (was -230 / 260 / 38-68, chosen at 124).
     // The old cap meant clusters more than 260 units apart felt no repulsion
     // at all while the centering force kept pulling them in — so every galaxy
-    // piled into the middle. `spread` scales the whole layout: 0 is dense,
-    // 1 is airy; the default sits where 335 nodes read as clusters.
-    const m = 0.5 + 1.5 * spreadApplied
+    // piled into the middle. `spread` IS the layout multiplier (0.5–2.5,
+    // default 1); the baseline below is where 335 nodes read as clusters.
+    const m = spreadApplied
     const charge = fg.d3Force('charge') as unknown as
       | { strength(s: number): void; distanceMax(d: number): void }
       | undefined
