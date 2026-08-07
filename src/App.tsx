@@ -80,7 +80,10 @@ export default function App() {
       console.info('[data] isolated reports, kept and shelved:', loadIssues.orphans)
     }
     if (loadIssues.duplicateEdges.length) {
-      console.warn('[data] edges defined twice, first kept:', loadIssues.duplicateEdges)
+      console.warn('[data] edges defined twice, last kept:', loadIssues.duplicateEdges)
+    }
+    if (loadIssues.duplicateIds.length) {
+      console.warn('[data] report ids defined twice, first kept:', loadIssues.duplicateIds)
     }
     const issues = validate(reports, dependencies)
     for (const i of issues) {

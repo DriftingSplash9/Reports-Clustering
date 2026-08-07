@@ -196,8 +196,8 @@ answer.
 
 **What the EU branch found, stated plainly:** two binding EU instruments were
 followed to the member-state boundary and both named their national inputs only
-by institution, never by publication (`AGENCY ONLY` — see `EU/AnnexXI_PartA_*.md`
-and `EU/AnnexB_assessment_*.md`). But run the query the other way and the answer
+by institution, never by publication (`AGENCY ONLY` — see `EU/extraction/AnnexXI_PartA_*.md`
+and `EU/extraction/AnnexB_assessment_*.md`). But run the query the other way and the answer
 is sharp and citable: **Germany and Luxembourg both name EU regulations as the
 legal basis of their own national statistics**, in structured metadata, with a
 title, a URL, and a stated periodicity. That is a documented instance of a

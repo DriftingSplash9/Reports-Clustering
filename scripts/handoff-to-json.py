@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Convert an EU hand-off note (`EU/G.<n>.md`) into a machine-readable sidecar
-(`EU/G.<n>.json`).
+Convert a branch hand-off note (`EU/G.<n>.md`, `NZ/G.<n>.md`, `AU/G.<n>.md`)
+into a machine-readable sidecar (`<branch>/G.<n>.json`). Branches: EU, NZ, AU —
+add new branch folder names to BRANCHES below.
 
 The Markdown stays the document of record — it is what a human or an agent
 reads. The JSON is a structured index of it: the state of the branch, the
@@ -10,8 +11,8 @@ can be queried without re-reading prose, and so nothing depends on remembering
 to do it by hand.
 
 Usage:
-    python scripts/handoff-to-json.py                 # convert every G.*.md
-    python scripts/handoff-to-json.py EU/G.19.md      # convert one
+    python scripts/handoff-to-json.py                 # convert every G.*.md in all branches
+    python scripts/handoff-to-json.py NZ/G.4.md       # convert one
     python scripts/handoff-to-json.py --check         # report drift, write nothing
 
 Idempotent: re-running on unchanged input rewrites identical output.
@@ -25,7 +26,8 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-EU = os.path.join(ROOT, "EU")
+BRANCHES = ["EU", "NZ", "AU"]
+EU = os.path.join(ROOT, "EU")  # kept for backwards compatibility in messages
 
 # Sections the spec in G.18 requires. Order matters; it is the spec's order.
 KNOWN_SECTIONS = [
@@ -230,9 +232,13 @@ def targets(argv):
     if explicit:
         return [os.path.abspath(a) for a in explicit]
     found = []
-    for name in os.listdir(EU):
-        if re.fullmatch(r"G[._]\d+(\.md)?\.md", name) or re.fullmatch(r"G[._]\d+\.md", name):
-            found.append(os.path.join(EU, name))
+    for branch in BRANCHES:
+        branch_dir = os.path.join(ROOT, branch)
+        if not os.path.isdir(branch_dir):
+            continue
+        for name in os.listdir(branch_dir):
+            if re.fullmatch(r"G[._]\d+\.md", name):
+                found.append(os.path.join(branch_dir, name))
     return sorted(found)
 
 
@@ -259,7 +265,7 @@ def hook_mode() -> int:
         return 0
 
     norm = path.replace("\\", "/")
-    if not re.search(r"/EU/G[._]\d+(\.md)?\.md$", norm):
+    if not re.search(r"/(EU|NZ|AU)/G[._]\d+\.md$", norm):
         return 0
     if not os.path.exists(path):
         return 0
@@ -287,7 +293,7 @@ def main():
     check_only = "--check" in argv
     paths = targets(argv)
     if not paths:
-        print("no G.*.md hand-off files found in", EU)
+        print("no G.*.md hand-off files found in", ", ".join(BRANCHES))
         return 0
 
     problems = 0

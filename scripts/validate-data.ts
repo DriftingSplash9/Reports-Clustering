@@ -7,6 +7,11 @@
  */
 import { dependencies, droppedNotes, loadIssues, relations, reports } from '../src/data'
 import { DROPPED_LEAD_REASONS } from '../src/lib/types'
+
+// Invariant (✗) failures below print AND fail the run. Before 2026-08-07 they
+// printed but exited 0, which let a red validator pass unnoticed for three
+// sessions (see NZ/G.4.md, Secondary observations).
+let invariantFailures = 0
 import {
   buildGraph,
   contains,
@@ -31,6 +36,11 @@ if (loadIssues.orphans.length) {
   // islands has added territory in the most literal sense.
   console.log('\nISOLATED — reports with no surviving edge, kept and shelved')
   for (const o of loadIssues.orphans) console.log(`  · ${o}`)
+}
+if (loadIssues.duplicateIds.length) {
+  console.log('\nDUPLICATE IDS — report defined in more than one slice (first wins, later copy dropped)')
+  for (const d of loadIssues.duplicateIds) console.log(`  · ${d}`)
+  invariantFailures++
 }
 if (loadIssues.duplicateEdges.length) {
   console.log(
@@ -114,6 +124,7 @@ if (commercial.length) {
       ? '  ✓ official scores identical with and without them — the toggle reshuffles nothing'
       : `  ✗ official scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
   )
+  if (!(worst < 1e-12)) invariantFailures++
   if (notSinks.length) {
     console.log(
       `  ! not a sink: ${notSinks.map((r) => r.id).join(', ')} — check the exclusion still holds`,
@@ -179,6 +190,7 @@ if (termini.length) {
       ? '  ✓ ranked scores identical with and without them — a terminus accrues no rank'
       : `  ✗ ranked scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
   )
+  if (!(worst < 1e-12)) invariantFailures++
   console.log()
 }
 
@@ -220,6 +232,7 @@ if (implied.length) {
       ? '  ✓ scores identical with and without them — showing them reshuffles nothing'
       : `  ✗ scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
   )
+  if (!(worst < 1e-12)) invariantFailures++
 
   // An implied edge is a research lead, not a resting place. Anything sitting
   // here for a long time is either findable or wrong.
@@ -267,6 +280,7 @@ console.log(
     : `  ✗ ${contradictions.length} note(s) describe an edge that IS in the graph — resolve or delete:`,
 )
 for (const c of contradictions) console.log(`      ${c.source} -> ${c.target} (${c.reason})`)
+if (contradictions.length) invariantFailures++
 console.log(
   `  ${leads.length} are research leads rather than answers — evidence described as existing, node or pass missing`,
 )
@@ -302,6 +316,7 @@ console.log(
     ? '  ✓ every relation carries a basis and an evidence_url — required, unlike a dependency'
     : `  ✗ ${unevidencedRelations.length} relation(s) missing basis or evidence_url:`,
 )
+if (unevidencedRelations.length) invariantFailures++
 for (const r of unevidencedRelations) {
   console.log(`      ${r.source_report_id} -[${r.relation_type}]-> ${r.target_report_id}`)
 }
@@ -376,6 +391,7 @@ console.log(
     ? `  ✓ every one keeps exactly ${(RETAINED_FRACTION * 100).toFixed(1)}% of its own rank — disclosure changes where authority goes, not how much is kept`
     : `  ✗ retained fraction VARIES from ${(retainedMin * 100).toFixed(1)}% to ${(retainedMax * 100).toFixed(1)}% — the proportional-retention property is broken`,
 )
+if (!(retainedMax - retainedMin < 1e-12)) invariantFailures++
 console.log()
 
 /**
@@ -480,4 +496,4 @@ if (disagreements.length) {
 }
 console.log()
 
-process.exit(errors.length ? 1 : 0)
+process.exit(errors.length || invariantFailures ? 1 : 0)

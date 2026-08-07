@@ -195,10 +195,10 @@ This is the plain-language one. The rest are working documents:
 | File | What it is |
 |---|---|
 | `REPORTS.md` | The design rules and the reasoning behind them. The document that matters most. |
-| `BACKLOG.md` | What to add next and why, in priority order. |
+| `planning/BACKLOG.md` | What to add next and why, in priority order. |
 | `README.md` | How to run it and where the code lives. |
 | `sessions/` | The running log — one `V0.*.md` per working session, newest is the current state and to-do list, plus the `V1.5`/`V2.10` rollups. |
-| `EU/` | The EU branch — its own `G.*.md` session logs and the source budget PDFs. |
+| `EU/`, `NZ/`, `AU/` | The research branches — each with its own `G.*.md` session logs; the EU's source PDFs now live in `EU/sources/`. |
 
 The `V0.*` files are a running log, one per working session; the `V1.5`/`V2.10`
 files consolidate every five of them so the reading never gets longer. If you're

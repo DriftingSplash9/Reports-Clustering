@@ -93,22 +93,27 @@ src/components/            the 3D graph, room, search box, and controls
 scripts/validate-data.ts   what `npm run validate` runs
 ```
 
-**The documents** — reorganised 2026-08-04; the six files at root are the ones
-worth opening first, everything else is filed by what it *is*:
+**The documents** — reorganised 2026-08-07 (see `notes/REORG-2026-08-07.md`
+for the old-path → new-path map); the four files at root are the ones worth
+opening first, everything else is filed by what it *is*:
 
 ```
 REPORTS.md                 the design rules. The document that matters most
 START-HERE.md              plain-language explanation, for sending to people
-BACKLOG.md                 what to add next and why, in priority order
-EXPANSION-V1.md            the going-wide proposal
 Research.1.md              standing brief pasted into every research thread
 README.md                  this file
 
-sessions/                  V0.*.md session logs + V1.5/V2.10 rollups
+sessions/                  V0.*.md app session logs + V1.5/V2.10 rollups
+EU/  NZ/  AU/              research branches: G.*.md hand-offs + G.*.json sidecars
+  EU/slices/               EU staging area cited by slice provenance (do not move)
+  EU/sources/              source PDFs (SEC00-10) and .docx source material
+  EU/extraction/           Part A/B extraction notes, superseded Research drafts
+  EU/prompts/              prompts sent to the external researcher
+  EU/legacy-handoffs/      early EU hand-offs that exist only as .docx
 research-input/            raw external research — Grok briefs and handoffs
-EU/                        the EU branch: G.*.md session logs + SEC00-10 PDFs
-TODO LISTS/                rolling working queue
-notes/                     scratch — unlogged notes, open questions
+planning/                  BACKLOG.md, EXPANSION-V1.md, rolling-todo.md
+notes/                     scratch — unlogged notes, open questions, reorg map
+archive/                   inert scratch files kept for reference
 ```
 
 ## Adding data
