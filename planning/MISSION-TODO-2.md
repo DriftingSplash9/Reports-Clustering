@@ -37,15 +37,15 @@ the EU hand-off spec is **adopted wholesale** for all branches (now in
 Research.1.md §2). Session git policy is also now standing — see the method
 notes at the bottom.*
 
-1. ~~Mint the Public Finance Act 1989 (NZ)?~~ — **DECIDED 2026-08-07
-   (Thomas, decisions doc, option A)**: mint it, and the next NZ session
-   adds every edge it can verify with a direct quote in that same session —
-   no cap, nothing minted on inference. The node may sit under-connected
-   for a while; each edge is airtight. Evidence trail: the OAG annual
-   report's compliance statement hangs NZ GAAP on the Public Finance Act,
-   not the Public Audit Act (`nz-government-finance.json`, newest `_dropped`
-   record). **Execution now owned by the next NZ session** (fold into P1
-   item 7's session, or its own if the council pass runs long).
+1. ~~Mint the Public Finance Act 1989 (NZ)?~~ — **DECIDED AND EXECUTED
+   2026-08-07 (Thomas, decisions doc, option A; executed same day, `NZ/G.5.md`)**:
+   minted `nz-public-finance-act-1989` with five verified edges (not one) —
+   `nz-treasury-fsgnz`, `nz-treasury-befu` and `nz-oag-annual-report` each
+   depend on it, and it turned out to cross-reference the Public Audit Act
+   2001 bidirectionally (`nz-public-audit-act-2001 <-> nz-public-finance-act-1989`,
+   each direction its own independent quote). Enters the corpus at weighted
+   authority rank #4 overall. See `NZ/G.5.md` Finding 1 for the full quote
+   trail.
 
 2. ~~Mint an `au-federal-budget` node?~~ — **DECIDED AND DONE 2026-08-07
    (Thomas, decisions doc, option A; executed same day)**: one node for the
@@ -111,20 +111,22 @@ first, in full)
    hop-for-hop and give `au-vlggc-annual-allocation-report` its valuation
    input.
 
-7. **NZ — the second exemplar council: Auckland.** Branch authority:
-   `NZ/G.4.md`. Thomas picked Auckland (decisions doc, 2026-08-07) —
-   the amalgamated "super city" and its CCOs; browser required (known to
-   work). Same session should also execute the PFA 1989 mint per P0 item
-   1's decided policy. The
-   Wellington chain is built; a second council tests whether its
-   rating-chain shape generalises. Two tooling warnings for whoever goes
-   (1.0 recorded them for the next NZ hand-off — that hand-off is now
-   this file, and they must ALSO be recorded in `NZ/G.5.md` when it gets
-   written, per the branch's own convention): Stats NZ **DataInfo+ is only
-   intermittently fetchable** (went robots-blocked mid-session on
-   2026-08-07), and **archive.stats.govt.nz DNS is flaky**. Also carried:
-   `legislation.govt.nz` blocks non-browser clients — the PCO PDFs via the
-   Wayback `id_` endpoint worked before.
+7. ~~NZ — the second exemplar council: Auckland.~~ — **DONE 2026-08-07
+   (`NZ/G.5.md`)**: Auckland researched from its own Volume 3 financial
+   statements. Result is genuinely mixed, not a clean confirmation —
+   the accounting-standard chain (PBE IPSAS 1) and a new statutory layer
+   Wellington cannot have (Local Government (Auckland Council) Act 2009,
+   newly minted as `nz-lgaca-2009`, governing Watercare's CCO structure)
+   both generalise, but the Public Audit Act 2001 and Rating Valuations Act
+   1998 edges Wellington carries do **not** transfer — Auckland's own
+   documents never name either by title, recorded `denied`. Same session
+   also executed P0 item 1's PFA 1989 mint. See `NZ/G.5.md` Findings 2–3.
+   Two new leads opened by this pass, not yet acted on: mint Watercare
+   Services Limited as a node (`NZ/G.5.md` priority 6), and decide the
+   Local Government Act 2002 the same way PFA 1989 was just decided
+   (priority 7). A third exemplar council (Christchurch) remains possible
+   but is no longer scoped as urgent — the generalisation question already
+   has one real answer with both a yes and a no in it.
 
 8. **Beyond-Europe briefs — Grok XI items 25, 27, 28.** Still assigned,
    still `not_attempted` across two NZ sessions; source:
