@@ -1,0 +1,417 @@
+{
+  "_slice": "Canadian federal benefit, tax and statistical programmes",
+  "_researched": "2026-07-28",
+  "_note": "This slice covers the Canadian federal parameter-setting machinery: the annual and quarterly decisions that turn statistical series into dollar amounts people actually receive or pay. Its shape is a narrow funnel. Almost everything ultimately rests on just two Statistics Canada series - the Consumer Price Index and the average weekly earnings of the industrial aggregate from the Survey of Employment, Payrolls and Hours - and the connections are unusually well documented because most of them are written into statute rather than administrative practice. The Employment Insurance Act s. 4(5) and the Canada Pension Plan s. 18(5) both name the industrial aggregate average weekly earnings in nearly identical language, which is why the EI maximum insurable earnings and the CPP Year's Maximum Pensionable Earnings move together; Income Tax Act s. 117.1(4) and s. 122.61(5) both name the Consumer Price Index for Canada and both use a 12-month period ending 30 September, while CPP uses 12 months ending 31 October and OAS uses rolling three-month averages, so the same index is read on three different clocks. The most valuable finding is what feeds the CPI itself, which the graph previously showed as a source with no inputs: the annual basket-update paper (catalogue 62F0014M) states plainly that basket weights are derived primarily from the national Household Final Consumption Expenditure series, supplemented by the Survey of Household Spending for low-level and geographic detail. That makes the Canadian CPI a downstream product of the national accounts, which is the reverse of how it is usually pictured. The one genuinely two-stage structure in the slice is EI: the regional unemployment rates come from the Labour Force Survey via s. 17 of the EI Regulations, and they then determine both the best-weeks divisor in the benefit calculation and the number of weeks payable, so labour market statistics enter the benefit amount twice over.",
+  "reports": [
+    {
+      "id": "statcan-shs",
+      "title": "Survey of Household Spending (SHS)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual national household survey collecting detailed information on what Canadian households spend on food, shelter, clothing, transportation and other categories. Its principal downstream use is to supply the expenditure detail used to construct Consumer Price Index basket weights, particularly at low levels of product and geographic aggregation. Results are released as Table 11-10-0222-01 and associated Daily articles.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.statcan.gc.ca/en/survey/household/3508",
+      "domains": [
+        "inflation",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-hfce",
+      "title": "Household Final Consumption Expenditure (HFCE)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The household final consumption expenditure series of the Canadian System of Macroeconomic Accounts, measuring total spending by the household sector on goods and services by detailed product category. Since the 2019 CPI basket update it has been the primary source of Consumer Price Index basket weights, replacing the Survey of Household Spending in that role. Published quarterly with annual benchmarks.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly series with annual benchmark levels; CPI basket updates use the annual national HFCE series for a single calendar reference year.",
+      "part_of": "statcan-national-accounts",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1901",
+      "domains": [
+        "national-accounts",
+        "inflation"
+      ]
+    },
+    {
+      "id": "statcan-cpi-basket-update",
+      "title": "An Analysis of the Consumer Price Index Basket Update",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual analytical and methodological paper (catalogue 62F0014M) describing the composition of the CPI basket and the changes introduced with each basket update, including the expenditure weights by major component and the data sources used to derive them. It is the document of record for what feeds the Canadian CPI's weighting structure. The 2026 update is based on 2025 expenditures.",
+      "releases_per_year": 1,
+      "last_updated": "2026-06-15",
+      "url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ei-premium-rate",
+      "title": "Employment Insurance Premium Rate (Canada Employment Insurance Commission annual rate setting)",
+      "publisher": "Canada Employment Insurance Commission / Employment and Social Development Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Each September the Canada Employment Insurance Commission sets the Employment Insurance premium rate for the following calendar year, expressed in dollars per $100 of insurable earnings for employees, with employers paying 1.4 times the employee rate and a separate lower rate applying in Quebec. The rate is legislatively required to be the seven-year break-even rate forecast by the EI Senior Actuary. For 2026 the rate was set at $1.63 (employee) and $2.28 (employer).",
+      "releases_per_year": 1,
+      "cadence_note": "Announced by mid-September each year for the following calendar year, alongside the maximum insurable earnings.",
+      "last_updated": "2025-09-12",
+      "url": "https://www.canada.ca/en/employment-social-development/news/2025/09/canada-employment-insurance-commission-sets-the-2026-employment-insurance-premium-rate.html",
+      "domains": [
+        "benefits",
+        "taxation",
+        "labour"
+      ]
+    },
+    {
+      "id": "ei-actuarial-report-premium-rate",
+      "title": "Actuarial Report on the Employment Insurance Premium Rate",
+      "publisher": "Office of the Chief Actuary, Office of the Superintendent of Financial Institutions",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual statutory report by the EI Senior Actuary forecasting the seven-year break-even premium rate that would balance the Employment Insurance Operating Account, together with the projected maximum insurable earnings, premium revenues and benefit expenditures. It is the binding technical input to the Commission's rate-setting decision. Accompanied in recent years by an addendum reflecting policy announcements made after the main report was finalised.",
+      "releases_per_year": 1,
+      "last_updated": "2025-09-12",
+      "url": "https://www.osfi-bsif.gc.ca/en/oca/actuarial-reports/2026-actuarial-report-employment-insurance-premium-rate",
+      "domains": [
+        "benefits",
+        "labour"
+      ]
+    },
+    {
+      "id": "ei-maximum-insurable-earnings",
+      "title": "Employment Insurance Maximum Insurable Earnings (MIE)",
+      "publisher": "Canada Employment Insurance Commission / Employment and Social Development Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual ceiling on earnings on which EI premiums are payable and on which EI benefits are calculated, announced each September for the following year. It is set by a formula in section 4 of the Employment Insurance Act driven by Statistics Canada's Average Weekly Earnings of the Industrial Aggregate, and is rounded down to the nearest $100. The 2026 MIE is $68,900, up from $65,700 in 2025.",
+      "releases_per_year": 1,
+      "last_updated": "2025-09-12",
+      "url": "https://www.canada.ca/en/employment-social-development/programs/ei/ei-list/ei-employers/premium-reduction-program/2026-maximum-insurable-earnings.html",
+      "domains": [
+        "benefits",
+        "taxation",
+        "labour"
+      ]
+    },
+    {
+      "id": "cra-indexation-adjustment",
+      "title": "Indexation adjustment for personal income tax and benefit amounts",
+      "publisher": "Canada Revenue Agency",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The CRA's annual publication of the federal indexation factor and the resulting indexed values of federal tax bracket thresholds, non-refundable credit amounts, the OAS repayment threshold, the Canada child benefit, the Canada workers benefit and other income-tested amounts. Tax bracket and credit changes take effect on 1 January; income-tested benefit amounts such as the CCB take effect on 1 July to align with the benefit year. The 2026 indexation increase was 2.0%.",
+      "releases_per_year": 1,
+      "last_updated": "2026-03-12",
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/frequently-asked-questions-individuals/adjustment-personal-income-tax-benefit-amounts.html",
+      "domains": [
+        "taxation",
+        "benefits",
+        "inflation"
+      ]
+    },
+    {
+      "id": "ei-regional-unemployment-rates",
+      "title": "Employment Insurance monthly regional rates of unemployment",
+      "publisher": "Employment and Social Development Canada / Service Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The table of unemployment rates for each of the 62 EI economic regions, published monthly and effective for claims established in the following four-week period. These rates determine the number of insurable hours a claimant needs to qualify, the number of weeks of regular benefits payable, and the divisor used in calculating the weekly benefit rate. They are derived from Statistics Canada's seasonally adjusted regional unemployment estimates as prescribed by section 17 of the Employment Insurance Regulations.",
+      "releases_per_year": 13,
+      "cadence_note": "Published for each four-week EI period, so 13 sets of rates per year rather than 12 calendar months.",
+      "last_updated": null,
+      "url": "https://srv129.services.gc.ca/eiregions/eng/rates_cur.aspx",
+      "domains": [
+        "labour",
+        "benefits"
+      ]
+    },
+    {
+      "id": "cpp-pension-index",
+      "title": "Canada Pension Plan annual benefit adjustment (Pension Index)",
+      "publisher": "Employment and Social Development Canada / Service Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual cost-of-living adjustment applied to all Canada Pension Plan benefits in payment - retirement, disability, survivor, children's and death benefits - effective each January. The Pension Index is legislated under the Canada Pension Plan and is computed from the change in the average CPI All-items index between two consecutive 12-month periods ending 31 October. Benefits never decrease: a negative calculation leaves amounts unchanged. The January 2026 increase was 2.0%.",
+      "releases_per_year": 1,
+      "last_updated": "2025-12-30",
+      "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html",
+      "domains": [
+        "benefits",
+        "inflation"
+      ]
+    },
+    {
+      "id": "canada-child-benefit",
+      "title": "Canada Child Benefit (CCB) payment amounts",
+      "publisher": "Canada Revenue Agency",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The tax-free monthly payment to eligible families with children under 18, delivered by the CRA. Maximum amounts, the two phase-out thresholds and the phase-out rates are set out in Income Tax Act s. 122.61(1) and are re-indexed each 1 July, the start of the CCB benefit year, using the same CPI-based adjustment factor as the personal income tax system. For the 2026 benefit year the maximum is $8,157 per child under six and $6,883 per child aged 6 to 17.",
+      "releases_per_year": 1,
+      "cadence_note": "Amounts are re-set once a year effective 1 July (the start of the benefit year), even though payments are made monthly.",
+      "last_updated": null,
+      "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit-overview.html",
+      "domains": [
+        "benefits",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ei-regular-benefit-rate",
+      "title": "Employment Insurance regular benefits weekly benefit rate",
+      "publisher": "Employment and Social Development Canada / Service Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The rules and published parameters governing how much a claimant receives in EI regular benefits: 55% of average weekly insurable earnings computed over a 'best weeks' divisor of 14 to 22 weeks, capped by the maximum insurable earnings, and payable for 14 to 45 weeks. As of 1 January 2026 the maximum weekly benefit is $729, derived from the $68,900 MIE. Both the divisor and the number of weeks payable are keyed to the claimant's regional rate of unemployment.",
+      "releases_per_year": 1,
+      "cadence_note": "Parameter tables are stable; the dollar maximum changes each 1 January with the MIE, while the divisor applied to an individual claim changes with the monthly regional unemployment rate.",
+      "last_updated": "2025-12-31",
+      "url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html",
+      "domains": [
+        "benefits",
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ei-premium-rate",
+      "target_report_id": "ei-actuarial-report-premium-rate",
+      "relationship_type": "calculated_from",
+      "basis": "The Commission's own news release states: 'The rate is set based on the 2026 Actuarial Report on the Employment Insurance Premium Rate and its addendum, which were made available today, as well as the Commission's summary of the reports,' and 'Each year, the Commission is responsible for setting the annual premium rate based on a seven-year break-even rate forecast by the EI Senior Actuary.' The 2026 rate of $1.63 is exactly the actuary's seven-year forecast break-even rate that would balance the EI Operating Account at the end of 2032.",
+      "evidence_url": "https://www.canada.ca/en/employment-social-development/news/2025/09/canada-employment-insurance-commission-sets-the-2026-employment-insurance-premium-rate.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "'Each year, the Commission is responsible for setting the annual premium rate based on a seven-year break-even rate forecast by the EI Senior Actuary.'"
+      }
+    },
+    {
+      "source_report_id": "ei-maximum-insurable-earnings",
+      "target_report_id": "statcan-seph",
+      "relationship_type": "calculated_from",
+      "basis": "Employment Insurance Act s. 4(3) sets the MIE as the previous year's MIE 'multiplied by the ratio that the average for the 12-month period ending on April 30 in that preceding year of the Average Weekly Earnings for each month in that 12-month period bears to the average for the 12-month period ending 12 months prior to April 30 of that preceding year'. Section 4(5) defines the term: 'The Average Weekly Earnings for a month is the average weekly earnings of the Industrial Aggregate in Canada for the month as published by Statistics Canada under the authority of the Statistics Act.' That series is the industrial aggregate average weekly earnings published by the Survey of Employment, Payrolls and Hours.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/acts/E-5.6/section-4.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "04-30",
+        "stated_as": "'the average for the 12-month period ending on April 30 in that preceding year of the Average Weekly Earnings' — Employment Insurance Act s.4(3)."
+      }
+    },
+    {
+      "source_report_id": "cra-indexation-adjustment",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "The CRA page opens: 'Each year, certain personal income tax and benefit amounts are indexed to inflation using the Consumer Price Index data as reported by Statistics Canada.' The statutory mechanism is Income Tax Act s. 117.1(1)(b)(ii), which sets the adjustment factor as (A/B) - 1 where 'A is the Consumer Price Index for the 12 month period that ended on September 30 next before that year, and B is the Consumer Price Index for the 12 month period immediately preceding'; s. 117.1(4) defines that index as 'the Consumer Price Index for Canada, as published by Statistics Canada under the authority of the Statistics Act' averaged over the twelve months of the period. The published indexation factors (2.0% for 2026, 2.7% for 2025, 4.7% for 2024, 6.3% for 2023) are the direct output and drive every indexed bracket threshold and credit amount in the CRA table. See also https://laws-lois.justice.gc.ca/eng/acts/I-3.3/section-117.1.html",
+      "evidence_url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/frequently-asked-questions-individuals/adjustment-personal-income-tax-benefit-amounts.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "09-30",
+        "stated_as": "'A is the Consumer Price Index for the 12 month period that ended on September 30 next before that year' — Income Tax Act s.117.1(1)(b)(ii)."
+      }
+    },
+    {
+      "source_report_id": "cpp-ympe",
+      "target_report_id": "statcan-seph",
+      "relationship_type": "calculated_from",
+      "basis": "Canada Pension Plan s. 18(1)(c) sets the Year's Maximum Pensionable Earnings for each year as the preceding year's YMPE multiplied by the ratio of the average Wage Measure for the twelve months ending 30 June of the preceding year to the same average a year earlier. Section 18(5) defines the term: 'The Wage Measure for a month is the average weekly wages and salaries of (a) the Industrial Aggregate in Canada for the month as published by Statistics Canada under the authority of the Statistics Act.' That industrial-aggregate average weekly earnings series is the output of the Survey of Employment, Payrolls and Hours. Section 18(6) further requires that the most recently published Statistics Canada revision of the Industrial Aggregate be used, and s. 18(7) requires the Minister to adjust the series, on the advice of the Chief Statistician, if Statistics Canada changes the time or content basis of the Industrial Aggregate by more than one per cent.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/acts/C-8/section-18.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "06-30",
+        "stated_as": "'the average Wage Measure for the twelve months ending 30 June of the preceding year' — Canada Pension Plan s.18(1)(c)."
+      }
+    },
+    {
+      "source_report_id": "ei-regional-unemployment-rates",
+      "target_report_id": "statcan-lfs",
+      "relationship_type": "calculated_from",
+      "basis": "Employment Insurance Regulations s. 17(1)(a): 'the regional rate of unemployment that applies to a claimant is ... the average of the seasonally adjusted monthly rates of unemployment for the last three-month period for which statistics were produced by Statistics Canada'; for the regions in sections 12 to 14 of Schedule I it is the greater of that three-month average and the corresponding 12-month average. Subsection 17(4) adds that the rates 'shall be obtained by using the regional rates of unemployment produced by Statistics Canada that incorporate an estimate of the rates of unemployment for status Indians living on Indian reserves.' Those seasonally adjusted regional unemployment rates are Labour Force Survey output.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-96-332/section-17.html",
+      "reference_period": {
+        "readings_per_year": 13,
+        "window_months": 3,
+        "ends": null,
+        "stated_as": "'the average of the seasonally adjusted monthly rates of unemployment for the last three-month period' — EI Regulations s.17(1)(a), read once per four-week EI period."
+      }
+    },
+    {
+      "source_report_id": "esdc-oas-indexation",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "The Old Age Security payment amounts page states: 'Old Age Security payment amounts are reviewed each year in January, April, July and October to ensure they reflect cost of living increases, as measured by the Consumer Price Index (CPI)' and that 'the quarterly adjustment for all OAS benefits, including the Guaranteed Income Supplement (GIS), is based on the difference between the average CPI for two periods of three months each'. The July-September 2026 worked example compares the average CPI for February to April 2026 (167.1) with the average for November 2025 to January 2026 (165.1), giving the 1.2% increase, and prints the monthly CPI values used. Rates increase but never decrease when the CPI falls.",
+      "evidence_url": "https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/payments.html",
+      "reference_period": {
+        "readings_per_year": 4,
+        "window_months": 3,
+        "ends": null,
+        "stated_as": "'reviewed each year in January, April, July and October', on 'the difference between the average CPI for two periods of three months each'."
+      }
+    },
+    {
+      "source_report_id": "canada-child-benefit",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "Income Tax Act s. 122.61(5) requires that 'each amount expressed in dollars in subsection (1) shall be adjusted' by the factor (A/B) - 1 where 'A is the Consumer Price Index (within the meaning assigned by subsection 117.1(4)) for the 12-month period that ended on September 30 of the base taxation year, and B is the Consumer Price Index for the 12 month period preceding'. Subsection 117.1(4) in turn defines that index as the Consumer Price Index for Canada published by Statistics Canada under the Statistics Act. This indexes the base amounts, both phase-out thresholds and the child disability supplement.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/acts/I-3.3/section-122.61.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "09-30",
+        "stated_as": "'A is the Consumer Price Index ... for the 12-month period that ended on September 30 of the base taxation year' — Income Tax Act s.122.61(5)."
+      }
+    },
+    {
+      "source_report_id": "canada-child-benefit",
+      "target_report_id": "cra-indexation-adjustment",
+      "relationship_type": "calculated_from",
+      "basis": "The CRA indexation page publishes the CCB base benefit amounts, the adjusted family net income at which phase-out begins, the second phase-out threshold and the base phase-out amounts for one to four-plus children as part of the same annual indexation table as the tax brackets, and notes that 'increases in amounts for certain income-tested benefits like the goods and services tax credit, the Canada child benefit and Child disability benefit, take effect on July 1 to coincide with the beginning of the program year for payments of these benefits.'",
+      "evidence_url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/frequently-asked-questions-individuals/adjustment-personal-income-tax-benefit-amounts.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "Indexed benefit amounts 'take effect on July 1 to coincide with the beginning of the program year for payments of these benefits'."
+      }
+    },
+    {
+      "source_report_id": "ei-regular-benefit-rate",
+      "target_report_id": "ei-maximum-insurable-earnings",
+      "relationship_type": "calculated_from",
+      "basis": "Service Canada: 'the basic rate for calculating Employment Insurance (EI) benefits is 55% of their average insurable weekly earnings, up to a maximum amount. As of January 1, 2026, the maximum yearly insurable earnings amount is $68,900. This means that you can receive a maximum amount of $729 per week.' The weekly ceiling is arithmetically 55% of the MIE divided by 52.",
+      "evidence_url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html"
+    },
+    {
+      "source_report_id": "ei-regular-benefit-rate",
+      "target_report_id": "ei-regional-unemployment-rates",
+      "relationship_type": "calculated_from",
+      "basis": "Service Canada describes the calculation: 'we determine the divisor (number of best weeks) that corresponds to your regional rate of unemployment', ranging from 22 best weeks where the regional rate is 6% or less down to 14 best weeks where it is 13.1% or more. The same page's entitlement table sets the number of weeks of regular benefits payable (from 14 to 45) as a joint function of insurable hours and the regional rate of unemployment band.",
+      "evidence_url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html"
+    },
+    {
+      "source_report_id": "cpp-pension-index",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "Service Canada states: 'Canada Pension Plan (CPP) benefit increases are calculated once a year using the Consumer Price Index (CPI) All-Items Index. The new amounts come into effect each January.' The page shows the arithmetic explicitly: the January 2026 adjustment compares the average CPI for November 2024 to October 2025 (163.6) with the average for November 2023 to October 2024 (160.4), giving 2.0%, and it prints the individual monthly CPI values used.",
+      "evidence_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html"
+    },
+    {
+      "source_report_id": "cpp-disability-amount",
+      "target_report_id": "cpp-pension-index",
+      "relationship_type": "calculated_from",
+      "basis": "The Service Canada page on CPP amounts and the Consumer Price Index states that 'Canada Pension Plan (CPP) benefit increases are calculated once a year using the Consumer Price Index (CPI) All-Items Index' and that 'these increases are legislated under the Canada Pension Plan so that benefits keep up with the cost of living', with the new amounts effective each January. The disability benefit is one of the CPP benefits carried forward by that single annual adjustment factor (2.0% for 2026).",
+      "evidence_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "'CPP benefit increases are calculated once a year using the Consumer Price Index', with the new amounts effective each January."
+      }
+    },
+    {
+      "source_report_id": "statcan-cpi",
+      "target_report_id": "statcan-hfce",
+      "relationship_type": "calculated_from",
+      "basis": "Statistics Canada's basket-update methodology paper states under 'Data sources' that 'The updated basket weights were derived primarily using consumer expenditures from the 2025 national Household Final Consumption Expenditure (HFCE) series, replacing those derived from the 2024 national HFCE series.' The CPI is a Laspeyres-type index whose upper-level aggregation weights are exactly these expenditure shares, so HFCE determines the relative influence of every component on headline CPI.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+    },
+    {
+      "source_report_id": "statcan-cpi",
+      "target_report_id": "statcan-shs",
+      "relationship_type": "uses_data_from",
+      "basis": "The same 'Data sources' section states that 'Household expenditures reported in the Survey of Household Spending (SHS) are used to supplement the HFCE expenditure data, mainly providing expenditure detail at lower levels of aggregation, including geographic aggregation.' SHS therefore supplies the sub-provincial and detailed-product weight structure that HFCE cannot resolve.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+    },
+    {
+      "source_report_id": "statcan-cpi-basket-update",
+      "target_report_id": "statcan-hfce",
+      "relationship_type": "calculated_from",
+      "basis": "The paper's own Data sources section names the national HFCE series as the primary input from which the published basket weights were derived.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+    },
+    {
+      "source_report_id": "statcan-cpi-basket-update",
+      "target_report_id": "statcan-shs",
+      "relationship_type": "uses_data_from",
+      "basis": "The paper states SHS expenditures are used to supplement HFCE data, mainly providing expenditure detail at lower levels of aggregation including geographic aggregation.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+    },
+    {
+      "source_report_id": "ei-actuarial-report-premium-rate",
+      "target_report_id": "statcan-seph",
+      "relationship_type": "uses_data_from",
+      "basis": "Section 4.1.1 of the 2026 Actuarial Report on the EI Premium Rate: 'The MIE represents the income level up to which EI premiums are paid and up to which EI benefits are calculated and is a key element in determining the earnings base. Section 4 of the EI Act provides details on how to determine the yearly MIE. In accordance with this section, the MIE increases annually based on increases in the average weekly earnings, as reported by Statistics Canada.' The report computes the 2026 MIE of $68,900 in its Appendix C from that series, and the resulting earnings base drives the break-even premium rate.",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/oca/actuarial-reports/2026-actuarial-report-employment-insurance-premium-rate"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ei-actuarial-report-premium-rate -> Finance Canada economic and fiscal projections",
+      "source": "ei-actuarial-report-premium-rate",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The actuarial report is explicit that several of its most influential assumptions come from the Department of Finance - section 4.2.2 says of the unemployment rate 'This assumption is provided by the Minister of Finance', and Table 2 footnotes the increase in average employment income the same way. But it names no specific published Finance Canada document, and there is no Finance Canada economic and fiscal projection node in the graph to point at, so there is nothing to attach the edge to."
+    },
+    {
+      "edge": "statcan-hfce -> statcan-shs",
+      "source": "statcan-hfce",
+      "target": "statcan-shs",
+      "reason": "no-document",
+      "why": "Household final consumption expenditure benchmarking plausibly draws on the Survey of Household Spending, but the CPI basket-update paper treats HFCE and SHS as two parallel sources and says nothing about one feeding the other. No StatCan methodology document I found states the relationship, so the edge is not recorded."
+    },
+    {
+      "edge": "statcan-cpi -> retail scanner data",
+      "source": "statcan-cpi",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "The 2026 basket-update paper states that 'the use of retail scanner data was expanded with the 2025 basket and is now the primary data source for the food from stores component weights'. This is a real and documented input, but retail scanner data is a commercial data feed rather than an official report or statistical release, so it does not qualify as a node in this graph."
+    },
+    {
+      "edge": "ei-premium-rate -> ei-maximum-insurable-earnings",
+      "source": "ei-premium-rate",
+      "target": "ei-maximum-insurable-earnings",
+      "reason": "no-document",
+      "why": "The two are announced in the same September news release and multiply together to give the published maximum annual contribution, but the premium rate is set by the seven-year break-even forecast and the MIE by the section 4 average-weekly-earnings formula. No document states that the rate depends on the MIE, so this is co-publication rather than dependency."
+    },
+    {
+      "edge": "cra-indexation-adjustment -> statcan-cpi-basket-update",
+      "source": "cra-indexation-adjustment",
+      "target": "statcan-cpi-basket-update",
+      "reason": "no-document",
+      "why": "Tax indexation depends on the level of the CPI, which in turn depends on the basket weights, but the indexation authority (Income Tax Act s. 117.1(4)) refers only to 'the Consumer Price Index for Canada, as published by Statistics Canada' and no document connects the indexation factor to the basket-update paper. The path runs through statcan-cpi and is already captured there."
+    },
+    {
+      "edge": "esdc-oas-indexation -> cra-indexation-adjustment",
+      "source": "esdc-oas-indexation",
+      "target": "cra-indexation-adjustment",
+      "reason": "no-document",
+      "why": "The OAS recovery tax repayment threshold appears in the CRA indexation table ($95,323 for 2026) while OAS benefit amounts are indexed quarterly by ESDC on a different CPI reference period. The two are separate mechanisms indexed off the same source index, and no document says the OAS payment adjustment uses the CRA factor, so no edge."
+    },
+    {
+      "edge": "cpp-ympe -> cpp-actuarial-report",
+      "source": "cpp-ympe",
+      "target": null,
+      "reason": "denied",
+      "why": "The Chief Actuary's triennial Actuarial Report on the Canada Pension Plan projects the YMPE, but s. 18 of the Canada Pension Plan makes the YMPE a purely mechanical function of the Statistics Canada Wage Measure with no actuarial input. The actuarial report governs the contribution rate, not the YMPE, so the edge would misstate the relationship."
+    }
+  ]
+}

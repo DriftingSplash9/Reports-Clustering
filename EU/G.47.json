@@ -1,0 +1,202 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.47.md",
+  "number": 47,
+  "title": "G.47.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "`Research.1.md` v3.0 → **v3.1 this session** — §9 amended",
+  "predecessor": "G.46.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**Breadth across \"Europe\" (EU membership, EEA/EFTA, former membership,\ncandidacy) is now complete at the shallowest useful depth — one edge per\ncountry, all to the same target, `esa-2010`. Depth is now the frontier, not\nbreadth.** Every one of the 41 European countries in this corpus (27 EU + 14\nnon-EU) has exactly the same shape of edge: `<country> national accounts →\nesa-2010`, `methodology_depends_on` for members and EEA/bilateral states,\n`cites` for candidates. That uniformity is itself informative — three\ndistinct categories of relationship language were found and held apart\n(binding member, binding-but-not-member via EEA or bilateral treaty,\naspirational candidate) — but it means the *next* useful unit of work is\nnever \"the 42nd country's first edge.\" It is either a second document for a\ncountry that already has one, or a domain this sweep never touched at all.\n\nGermany is the one exception, and it is the template: `G.44.md`–`G.46.md`'s\nEVAS sub-graph work found a **69-row source table** inside Germany's own GNI\ninventory — surveys, registers, and central-bank links, each named and\nnumbered. Every other country in this corpus has, at most, the equivalent of\nGermany's *first* document (the ESMS-metadata-page level); none has had its\nown Chapter 10 found and opened. That gap, repeated ~40 times, is priority G\nbelow.",
+  "findings": [
+    {
+      "heading": "1. Every EU member state now has a documented ESA 2010 edge — a completed sweep, not a partial one",
+      "body": "**What this rests on**: Grok round 7 (`GROK-PROMPT-7_finish-eu`) closed the\nfinal fourteen member states in one batch, following rounds that had already\ncovered thirteen. **Zero surprises across all 27** — every member state uses\nbinding obligation language (*\"shall,\"* *\"must,\"* *\"in compliance with,\"*\n*\"applies as law\"*), with no exceptions found. That absence of exceptions is\nitself the result: EU membership predicts binding-language framing with\nperfect consistency across the full set, which could not have been claimed\nconfidently at 13/27 or even 20/27."
+    },
+    {
+      "heading": "2. The asymmetry generalises past statistics, and past the EU itself",
+      "body": "**What this rests on**: two results, both from Grok rounds reviewed and\nconverted this session.\n\n- **NATO** (round 1/2, `nato-defence-expenditure`) shows the identical\n  obligation-without-naming shape found repeatedly for EU instruments, in a\n  completely different policy domain: *\"Each Ally's Ministry of Defence\n  reports current and estimated future defence expenditure according to an\n  agreed definition\"* — an institution, not a titled publication. This is\n  the first confirmation that the pattern isn't statistics-specific.\n- **Candidate-country language is a real third category, and duration\n  doesn't convert it.** Serbia (round 6) used *\"harmonised with\"* rather\n  than binding language; round 8 tested this across eight more\n  candidates/potential candidates and confirmed it generalises — Turkey,\n  a candidate since 1999, still uses voluntary alignment language after\n  twenty-five years. Recorded as `cites` rather than\n  `methodology_depends_on` throughout, consistently, per a correction made\n  during this session's consolidation (see Corrections)."
+    },
+    {
+      "heading": "3. The palette is now continent-based, and four families are reserved with zero nodes behind them",
+      "body": "**What this rests on**: direct instruction from Thomas, implemented and\nverified via `colorsys` hue/saturation/lightness computation, not eyeballed.\nFull reasoning is in `src/lib/palette.ts`'s `ColourFamily` docstring and\n`REPORTS.md`'s Decisions section — not repeated here in full, but the\nconsequence for this branch's own work is real: **`ASIA`, `SAO` (South Asia\n+ Oceania), `AFR` and `SA` (South America) now exist as colour families with\nno country mapped to any of them.** If a future EU-branch session ever\ntouches a country outside Europe — Mexico was named explicitly by Thomas as\ncoming — the family already exists; only `COUNTRY_FAMILY` needs a new line,\nnot a colour decision made in a hurry.\n\nOne collision was caught and fixed during this pass, worth knowing if you\never add a grey-toned family again: a first draft of `SA`'s hue sat at 210°\nand rendered visually identical to `COMMERCIAL_COLOUR` (`#8b93a4`, 221°).\nMoved to 90°, the genuine free gap between Asia's warm end and Europe's\ngreen start."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "Netherlands and Poland were reviewed but never imported — corrected this session.** `nl-cbs-gni-inventory-2010`, `nl-cbs-sbs`, `nl-dnb-bop`, `nl-cbs-sbr` and `pl-gus-national-accounts` were all researched via Grok round 3 and reviewed carefully at the time (their `de-*`-parallel findings — Netherlands' DNB-as-BoP-compiler link is the same shape as Germany's Bundesbank link) but the resulting slice was never actually written or wired into `src/data/index.ts`. Caught only when country labels were being filled in and these two countries turned up missing from the corpus entirely. Fixed in `grok-r3-netherlands-poland.json`. **This is exactly the failure mode `Research.1.md`'s Part B Output Rule and this file's own \"write as you go\" instruction exist to prevent** — a finding that was genuinely established and then quietly lost between review and import. No prior `G.*.md` claimed this was done, so nothing here contradicts an earlier hand-off; it contradicts an earlier *turn* of this session's own parent conversation."
+    },
+    {
+      "n": 2,
+      "text": "`XEU`'s colour, decided earlier the same day, is superseded.** Not a research correction, but worth recording in this chain since it touches files this branch's work depends on: `XEU` was tan-brown for approximately one turn before the continent redesign moved it to green. `REPORTS.md`'s Decisions section carries both steps, in order, rather than silently overwriting the first."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping: merge `Research.2.md` and `Research.EU.md`. Closed",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph. Opened, not closed.",
+      "items": []
+    },
+    {
+      "letter": "G",
+      "label": "NEW. The wide-Europe depth pass.",
+      "items": [
+        {
+          "n": 2010,
+          "text": "The EU regulates far more than national accounts, each with its own transmission-programme-shaped instrument and, presumably, the same national-office-names-the-EU-instrument pattern: - Labour force statistics (the EU Labour Force Survey Regulation) - Government finance statistics / Excessive Deficit Procedure — partially touched (`eurostat-edp-gfs-quality-report`, `eurostat-edp-notification-tables` already exist) but not tested per-country the way national accounts was. - Structural business statistics (touched for Germany/Italy/Netherlands as a *source*, not tested as its own EU-regulated domain with its own national-office-to-EU edges). - Trade statistics (Intrastat/Extrastat, named in passing for Italy — `S05`-era EU sections already reference this; not swept per-country). - Farm Structure Survey — `eurostat-farm-structure-survey` exists at the EU level; never tested for a per-country national-office edge the way national accounts was. **Recommended order: G2 before G1 before G3.** G2 is the cheapest (well-precedented, one lookup per country) and most likely to produce clean new edges fast. G1 is higher-value per hit but needs a real document search per country, not just a name lookup. G3 is the largest but least certain payoff — it may turn out that non-national-accounts domains show a different, less uniform pattern, which would itself be worth knowing, but it should not be started before G1/G2 give this thread more data to compare it against."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Verify Montenegro's regulation-number citation** (`Regulation (EU) No 1306/2010`, should almost certainly be 549/2013) against MONSTAT's own source PDF directly. One document, one lookup."
+    },
+    {
+      "n": 2,
+      "text": "Spot-check `grok-r3-netherlands-poland.json`** against the original Grok round-3 response (still recoverable from the parent conversation's history) — this slice was reconstructed from this session's own prior transcription, not re-verified against the primary JSON a second time."
+    },
+    {
+      "n": 3,
+      "text": "Pick one of G1's four candidate countries (Netherlands, Czechia, Croatia, Italy) and actually try the Chapter-10 search** — the fastest way to learn whether the method generalises or whether Germany's document happens to be unusually good. **Carried forward from `G.46.md`, unchanged, still open:**"
+    },
+    {
+      "n": 4,
+      "text": "Continue sc-75 from `de-destatis-source-surveys.json`'s `_dropped` array."
+    },
+    {
+      "n": 5,
+      "text": "Resolve `oecd-icio`'s cadence."
+    },
+    {
+      "n": 6,
+      "text": "Check cadence for WIOD, EXIOBASE, EORA, GTAP-MRIO, OECD TiVA."
+    },
+    {
+      "n": 7,
+      "text": "Investigate Annex I row 4 of Guideline (EU) 2024/2941."
+    },
+    {
+      "n": 8,
+      "text": "Fetch Guideline ECB/2021/14's own frequency article."
+    },
+    {
+      "n": 9,
+      "text": "Check cadence for Supervisory Banking Statistics, Investment Funds statistics, Insurance Corporations statistics."
+    },
+    {
+      "n": 10,
+      "text": "Open the Alert Mechanism Report's own governing instrument."
+    },
+    {
+      "n": 11,
+      "text": "Verify and mint Eurobarometer (S03-23)."
+    },
+    {
+      "n": 12,
+      "text": "The second joint ECB-Eurostat report (ECB-07)."
+    },
+    {
+      "n": 13,
+      "text": "Read EBS Regulation 2019/2152."
+    },
+    {
+      "n": 14,
+      "text": "Regulation (EU) 2021/1058 / 2021/1060 (Title 05 GDP/GNI lead)."
+    },
+    {
+      "n": 15,
+      "text": "FSDN founding instruments (S03-12)."
+    },
+    {
+      "n": 16,
+      "text": "Sweep the full `_staging/` directory beyond indices already processed."
+    },
+    {
+      "n": 17,
+      "text": "Fetch and hash SEC01/02/03/06/07/08/09/10 against local copies."
+    },
+    {
+      "n": 18,
+      "text": "Split `list-main-stats-2025-na` into nine records (sc-71, since G.24)."
+    },
+    {
+      "n": 19,
+      "text": "Pull the `[NA-Pen] / Table 29` thread (sc-73, since G.24)."
+    },
+    {
+      "n": 20,
+      "text": "Check ISSAI 300/400 cadence from INTOSAI (sc-53, since G.21)."
+    },
+    {
+      "n": 21,
+      "text": "Read Art. 11 of the loi modifiée du 22 juin 1963."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.47.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — v3.1, §9 now 85 ids, note above the id block explains the shift from breadth to depth."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/grok-r6-mixed-categories.json`** — the clearest single example of all three relationship-language categories in one file."
+    },
+    {
+      "n": 4,
+      "text": "One of `GROK-PROMPT-6` through `-8`** — if the next session is going to write a new Grok prompt for the G1/G2/G3 work above, these are the template: scope tightly, name the exact do-not-duplicate id list, name the exact do-not-reopen list, require the corrected schema (separate `quote`/`location`/`tense` fields, never a bundled `relationship_type` Grok assigns itself)."
+    },
+    {
+      "n": 5,
+      "text": "A browser**, for cheap checks 1–2 and most of the carried-forward list."
+    },
+    {
+      "n": 6,
+      "text": "`destatis.de`, and by extension every national statistics office's own site** — all directly reachable from a standard browser; only `eur-lex.europa.eu` has been found gated in this branch's history. ---"
+    }
+  ],
+  "session_conditions": "**Two unrelated pieces of work, both requested directly by Thomas, both\nsubstantial.** Not a research session in the sense the rest of this file's\nchain means it — no PDF was opened, no primary source was read first-hand.\n\n1. **Consolidation.** Eight rounds of Grok output (prompts written and\n   reviewed across several turns of a separate conversation) were converted\n   into five schema-valid slices and imported. Every quote in those slices\n   traces to Grok's own transcription, not a fresh read of the primary\n   source by this session. One gap was caught and closed: Netherlands and\n   Poland were reviewed carefully in an earlier turn of that same\n   conversation but never actually converted into a slice — the omission\n   surfaced only when adding country labels found them missing. That\n   sixth slice (`grok-r3-netherlands-poland.json`) is reconstructed from\n   this session's own prior transcription, not a second read of the\n   original — flagged in its own `_note` field for a spot-check.\n2. **Palette redesign.** `src/lib/palette.ts`'s `ColourFamily` was extended\n   once (a fifth family, `XEU`, for non-EU Europe) and then substantially\n   rewritten a second time the same day, when Thomas asked for the whole\n   scheme reassessed as one slice of the spectrum per continent. See\n   Finding 3."
+}

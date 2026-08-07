@@ -1,0 +1,84 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.1.md",
+  "number": 1,
+  "title": "G.1.md — Australia/SAO galaxy hand-off",
+  "date": "2026-08-06",
+  "governing_briefs": "`Research.1.md` v3.3 → **v3.4 this session** — §9 amended",
+  "predecessor": "**none — first hand-off in this series.** This file adopts the",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**Thomas's prediction held: Australia's system is structurally close enough\nto both Canada's and the UK's that the same research method — three parallel\nsubagents, then direct primary-source re-verification — produced a\ncomparable-depth result in one session, with one genuine structural\ndifference worth having found.** The Netherlands' BBV and the UK's CIPFA\nCode both explicitly bind local government by name; Australia's equivalent\nstandard, AASB 1049, explicitly does **not** — its own Appendix A defines\n\"government\" as the Commonwealth, state and territory governments only, and\na real Australian council's own financial statements confirm this by citing\ngeneral \"Australian Accounting Standards\" rather than AASB 1049 by name.\nThat is a documented negative result, not a research failure, and it is the\nkind of finding this project's own philosophy (`Research.1.md` §3, §4) says\nis exactly as valuable as a positive edge.",
+  "findings": [
+    {
+      "heading": "1. The Commonwealth Grants Commission names ABS releases by exact title — where it could be verified",
+      "body": "**What this rests on**: a subagent's own extraction, via a proxy-reader\nafter direct access failed twice (`curl` TLS reset, browser forced-download).\nReported, from the CGC's \"Commission's Assessment Methodology — Population\"\nchapter: *\"The population data used in the estimation of GST relativities is\nEstimated Resident Population, produced by the ABS\"*, plus a footnote citing\n*\"ABS (2021), Census of Population and Housing, Socio Economic Indexes for\nAreas, Australia, released 27 April 2023\"* by exact title and release date.\n**Not independently re-verified this session** — recorded in the JSON with\nan explicit lower-confidence flag on both the node (`au-cgc-gst-relativities`)\nand the one edge that depends on it, rather than silently trusted or\nsilently omitted."
+    },
+    {
+      "heading": "2. AASB 1049 does not bind local government, and a real council's own accounts confirm the gap from the other side",
+      "body": "**What this rests on**: two independently-fetched primary sources, both\nVERIFIED DIRECTLY this session. AASB 1049's own Appendix A, entry A[4]:\n*\"government\"* is defined as *\"The Australian Government, the Government of\nthe Australian Capital Territory, New South Wales, the Northern Territory,\nQueensland, South Australia, Tasmania, Victoria or Western Australia.\"* — nine\njurisdictions, no local government. Brisbane City Council's own Consolidated\nFinancial Statements 2023-24, Note 1(c): *\"These financial statements have\nbeen prepared in accordance with all Australian Accounting Standards and\nInterpretations issued by the Australian Accounting Standards Board (AASB),\nas applicable to not-for-profit entities\"* — general AAS/AASB compliance,\nnever \"AASB 1049\" by name, and separately grounded in the *City of Brisbane\nAct 2010* and its Regulation, not a national accounting standard the way\nDutch/UK councils cite their BBV/CIPFA Code by name and edition. No edge\nconnects `au-brisbane-financial-statements` to `au-aasb1049` — deliberately,\nrecorded as a `denied`-reason `_dropped` entry rather than as an omission.\nThis is why `au-brisbane-financial-statements` shows as an isolated node in\n`npm run validate`'s output — the isolation itself is the finding, the same\nconvention `EU/G.47.md` already established for `nordic-statistics-database`\nand `nato-defence-expenditure`."
+    },
+    {
+      "heading": "3. The NSW property-valuation chain is a clean three-hop parallel to the Netherlands' WOZ chain, fully self-verified",
+      "body": "**What this rests on**: legislation.nsw.gov.au fetched via a real browser\n(Cloudflare-gated against `curl`) and read directly; nsw.gov.au and Georges\nRiver Council's own pages fetched directly. The chain: the Valuation of\nLand Act 1916 establishes the Valuer-General's role (s.8(4): *\"The general\nrole of the Valuer-General is— (a) to exercise functions with respect to\nthe valuation of land in the State...\"*) and requires annual valuation\n(s.14A(1)). The Local Government Act 1993 s.498's own note states rates are\nlevied on land value *\"determined specially for rating purposes by the\nValuer-General under the Valuation of Land Act 1916\"* — an explicit\ncross-Act citation, the same shape as the Netherlands' OZB ordinance citing\nWet WOZ. Georges River Council's own page confirms the mechanism in\npractice: *\"Land values are set by the NSW Valuer General every three\nyears.\"* And the Valuer-General's own sales-data pipeline is named directly:\n*\"NSW property sales information comes from Notices of Sale lodged with\nLand Registry Services\"* — the exact structural parallel to the\nNetherlands' Kadaster naming in the Waarderingsinstructie."
+    }
+  ],
+  "corrections": [],
+  "priorities": [],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Re-fetch the CGC GST Revenue Sharing Relativities PDF and its Population Assessment chapter** by a method that gets past the current block — highest priority, see priority item 1 above."
+    },
+    {
+      "n": 2,
+      "text": "Search directly for a NSW Local Government Grants Commission methodology manual** — this session's search came back empty but is not confirmed exhaustive."
+    },
+    {
+      "n": 3,
+      "text": "Find an accessible copy of one of the four NSW council Revenue Policy PDFs that 403'd this session** (Tamworth, Yass Valley, Federation, Wollongong) — would let a council's own document, rather than a general nsw.gov.au explainer page, carry the NSW LRS edge."
+    },
+    {
+      "n": 4,
+      "text": "Split `au-abs-gfs` into two nodes** if a future session wants the \"ABS GFS Manual\" methodology publication (2005/2015 editions) represented separately from the annual \"Government Finance Statistics, Australia\" release — see Secondary Observations."
+    },
+    {
+      "n": 5,
+      "text": "Independently verify the Victorian Local Government Grants Commission's Annual Allocation Report** — `localgovernment.vic.gov.au` returned HTTP 403 this session; real content was surfaced via a subagent but never built into an edge, see the JSON's own `_dropped` array."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`AU/G.1.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — v3.4, §9's new \"Australia / SAO galaxy\" block."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/au-government-finance.json`** — its own `_dropped` array is the direct continuation point for cheap checks 2, 3 and 5 above."
+    },
+    {
+      "n": 4,
+      "text": "A browser**, specifically for cheap check 1 — a `curl`-only session will hit the same CGC wall this one did."
+    },
+    {
+      "n": 5,
+      "text": "The same caution `EU/G.48.md` and `EU/G.49.md` already carry**: prefer direct fetch + text extraction over an AI-summarising fetch tool for anything that will become a quoted `basis` field. This session confirmed the method works cleanly on legislation.gov.au, abs.gov.au and standards.aasb.gov.au (not gated), and that legislation.nsw.gov.au's Cloudflare gate is passable via a real browser's rendered text (also not an AI summary) — but that `cgc.gov.au` and `localgovernment.vic.gov.au` resisted every method tried this session. ---"
+    }
+  ],
+  "session_conditions": "Direct continuation of the same working session that produced `EU/G.48.md`\nand `EU/G.49.md` — not a new thread. No light-scout phase this time (unlike\nthe Switzerland/Norway/UK scouting that preceded the UK deep-dive in\n`EU/G.49.md`): Thomas named Australia directly with a stated rationale, so\nthis session went straight to the same three-parallel-subagent research\npattern used for the Netherlands and UK, followed by direct primary-source\nre-verification of every quote before minting.\n\n**What was read in full this session**: the Local Government (Financial\nAssistance) Act 1995 (Cth) s.6, s.3, s.4A (legislation.gov.au, fetched\ndirectly via `curl` — this domain is not gated); the Valuation of Land Act\n1916 (NSW) ss.8, 14A and the Local Government Act 1993 (NSW) ss.497-498\n(legislation.nsw.gov.au — Cloudflare-gated against `curl`, so fetched via a\nreal browser and its rendered DOM text read directly, the same workaround\n`EU/G.49.md` used nowhere but worth recording as now-precedented); AASB\n1049's full compiled standard (standards.aasb.gov.au, fetched directly); the\nABS Government Finance Statistics methodology page (abs.gov.au, fetched\ndirectly); Brisbane City Council's 63-page Consolidated Financial Statements\n2023-24 (downloaded, `pypdf`-extracted in full); Georges River Council's and\ntwo NSW government pages' own published rates/valuation text (fetched\ndirectly).\n\n**What was not independently re-verified, and is flagged explicitly in the\nJSON**: the Commonwealth Grants Commission's own GST Relativities\nmethodology material — `cgc.gov.au` blocked every access method tried this\nsession (`curl` got a TLS connection reset; a real browser was offered a\nforced file-download dialog rather than a rendered page) — so its quotes\nrest on a subagent's own proxy-summarised extraction. The Tasmanian State\nGrants Commission's methodology manual was read natively by a subagent (not\nproxy-summarised) but not independently re-read by this session's own\ntooling — a middle confidence tier, distinct from both the fully-verified\nmaterial and the CGC material. The Victorian Local Government Grants\nCommission's Annual Allocation Report was found (`localgovernment.vic.gov.au`\nreturned HTTP 403) but not built into any edge at all — recorded only as a\n`_dropped` lead."
+}

@@ -1,0 +1,259 @@
+import { ZOOM_MAX, ZOOM_MIN, type ViewSettings } from '../lib/view'
+
+/**
+ * View controls. Deliberately plain — this is instrumentation, not chrome, and
+ * it should never draw attention away from the graph.
+ */
+
+const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
+  { key: 'showPulses', label: 'Pulses', hint: 'Travelling teardrops, pointing the way influence moves. With arrows gone these are the only direction cue' },
+  {
+    key: 'showEdges',
+    label: 'Edges',
+    hint: 'The dependency lines. Pulses are independent — turn these off to see influence move with nothing else drawn',
+  },
+  { key: 'showHorizon', label: 'Horizon', hint: 'Sky gradient meeting the ground' },
+  { key: 'showGroundGrid', label: 'Ground grid', hint: 'Infinite grid, fixed cell size — the scale ruler' },
+  { key: 'showCube', label: 'Bounding box', hint: 'Wireframe extent of the network' },
+  { key: 'showDropLines', label: 'Drop lines', hint: 'Vertical stems down to the ground plane' },
+  { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
+]
+
+const SLIDERS: { key: 'fog' | 'glow'; label: string; hint: string }[] = [
+  {
+    key: 'fog',
+    label: 'Distance haze',
+    hint: 'Fades the far side of the graph. The long lens deliberately suppresses depth, so at this many nodes this is most of what is left of it',
+  },
+  {
+    key: 'glow',
+    label: 'Glow',
+    hint: 'Only the most depended-upon reports bleed light, so this reads as a second take on size rather than as atmosphere',
+  },
+]
+
+/**
+ * Kept in their own section because they do nothing until a node is selected,
+ * and a toggle that appears inert is worse than one that is explained.
+ */
+const FOCUS_TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
+  {
+    key: 'focusBuiltFrom',
+    label: 'Built from',
+    hint: 'Keep everything the selected report rests on, all the way down',
+  },
+  {
+    key: 'focusFeedsInto',
+    label: 'Feeds into',
+    hint: 'Keep everything ultimately built on the selected report',
+  },
+]
+
+/**
+ * Which edges exist, by how well they are evidenced.
+ *
+ * A pair rather than a three-way choice, and shaped exactly like the focus
+ * toggles above it, because the four states are all worth having:
+ *
+ *   documented only — the graph as the record supports it. The default, and
+ *                     the view that honours the project's central rule.
+ *   both            — what is probably true.
+ *   implied only    — the research backlog, drawn. Every relationship someone
+ *                     is confident about and nobody has found a source for.
+ *   neither         — the nodes alone, which is the quickest way to see how
+ *                     much of the picture is structure and how much is dots.
+ */
+const EVIDENCE_TOGGLES: {
+  key: 'showDocumented' | 'showImplied'
+  label: string
+  hint: string
+}[] = [
+  {
+    key: 'showDocumented',
+    label: 'Documented',
+    hint: 'Edges where a document explicitly states the dependency. Every one carries a link to it',
+  },
+  {
+    key: 'showImplied',
+    label: 'Implied',
+    hint: 'Believed on strong grounds, with no document saying so. Drawn dashed, never pulsed, and excluded from the authority ranking — turning these on cannot change any size',
+  },
+]
+
+export default function ViewControls({
+  view,
+  onChange,
+  evidence,
+  onEvidenceChange,
+  impliedCount,
+  hasSelection,
+}: {
+  view: ViewSettings
+  onChange: (next: ViewSettings) => void
+  evidence: { showDocumented: boolean; showImplied: boolean }
+  onEvidenceChange: (key: 'showDocumented' | 'showImplied') => void
+  impliedCount: number
+  /** Only affects how the focus section is captioned. */
+  hasSelection: boolean
+}) {
+  const set = <K extends keyof ViewSettings>(key: K, value: ViewSettings[K]) =>
+    onChange({ ...view, [key]: value })
+
+  return (
+    <div style={panel}>
+      <div style={heading}>View</div>
+
+      <label style={{ ...sliderRow, marginBottom: 12 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 11, color: '#8fa3c0' }}>Zoom</span>
+          <span style={{ fontSize: 11, color: '#5e6f8a' }}>
+            {view.zoom < 0.97 ? 'in' : view.zoom > 1.03 ? 'out' : 'fit'}
+          </span>
+        </div>
+        <input
+          type="range"
+          min={ZOOM_MIN}
+          max={ZOOM_MAX}
+          step={0.01}
+          // Inverted so dragging right zooms in, which is what everyone expects.
+          value={ZOOM_MIN + ZOOM_MAX - view.zoom}
+          onChange={(e) =>
+            set('zoom', ZOOM_MIN + ZOOM_MAX - Number(e.target.value))
+          }
+          style={slider}
+        />
+      </label>
+
+      {TOGGLES.map(({ key, label, hint }) => (
+        <label key={key} style={row} title={hint}>
+          <input
+            type="checkbox"
+            checked={view[key] as boolean}
+            onChange={(e) => set(key, e.target.checked as never)}
+            style={checkbox}
+          />
+          <span style={{ color: view[key] ? '#c2cfe4' : '#5e6f8a' }}>{label}</span>
+        </label>
+      ))}
+
+      {SLIDERS.map(({ key, label, hint }) => (
+        <label key={key} style={{ ...sliderRow, marginTop: 8 }} title={hint}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span style={{ fontSize: 11, color: view[key] > 0 ? '#8fa3c0' : '#5e6f8a' }}>
+              {label}
+            </span>
+            <span style={{ fontSize: 11, color: '#5e6f8a' }}>
+              {view[key] <= 0.005 ? 'off' : Math.round(view[key] * 100) + '%'}
+            </span>
+          </div>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            value={view[key]}
+            onChange={(e) => set(key, Number(e.target.value) as never)}
+            style={slider}
+          />
+        </label>
+      ))}
+
+      <div style={{ ...heading, marginTop: 14 }}>Focus</div>
+      {FOCUS_TOGGLES.map(({ key, label, hint }) => (
+        <label key={key} style={row} title={hint}>
+          <input
+            type="checkbox"
+            checked={view[key] as boolean}
+            onChange={(e) => set(key, e.target.checked as never)}
+            style={checkbox}
+          />
+          <span style={{ color: view[key] ? '#c2cfe4' : '#5e6f8a' }}>{label}</span>
+        </label>
+      ))}
+      <div style={note}>
+        {hasSelection
+          ? 'Esc or click empty space to clear.'
+          : 'Click a node to trace its chain.'}
+      </div>
+
+      <div style={{ ...heading, marginTop: 14 }}>Evidence</div>
+      {EVIDENCE_TOGGLES.map(({ key, label, hint }) => (
+        <label key={key} style={row} title={hint}>
+          <input
+            type="checkbox"
+            checked={evidence[key]}
+            onChange={() => onEvidenceChange(key)}
+            style={checkbox}
+          />
+          <span style={{ color: evidence[key] ? '#c2cfe4' : '#5e6f8a' }}>
+            {label}
+            {key === 'showImplied' && (
+              <span style={{ color: '#5e6f8a' }}> · {impliedCount}</span>
+            )}
+          </span>
+        </label>
+      ))}
+      <div style={note}>
+        {evidence.showImplied && !evidence.showDocumented
+          ? 'The research backlog: believed, unsourced.'
+          : evidence.showImplied
+            ? 'Dashed edges have no document behind them. No size changes either way.'
+            : 'Every edge shown has a source attached.'}
+      </div>
+    </div>
+  )
+}
+
+// Positioning moved to PanelShell, which owns the roll-away. Width lives there
+// too — the slide distance is computed from it, so two copies of the number is
+// two chances for the panel to stop short of the edge.
+const panel: React.CSSProperties = {
+  padding: '14px 16px',
+  background: 'rgba(10, 14, 24, 0.72)',
+  border: '1px solid rgba(90, 115, 160, 0.22)',
+  borderRadius: 10,
+  backdropFilter: 'blur(8px)',
+  userSelect: 'none',
+}
+
+const heading: React.CSSProperties = {
+  fontSize: 10,
+  letterSpacing: '0.09em',
+  textTransform: 'uppercase',
+  color: '#556785',
+  marginBottom: 10,
+}
+
+const row: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 8,
+  fontSize: 12,
+  lineHeight: 1.9,
+  cursor: 'pointer',
+}
+
+const sliderRow: React.CSSProperties = {
+  display: 'block',
+  cursor: 'pointer',
+}
+
+const slider: React.CSSProperties = {
+  width: '100%',
+  marginTop: 4,
+  accentColor: '#6ea8ff',
+  cursor: 'ew-resize',
+}
+
+const note: React.CSSProperties = {
+  fontSize: 10.5,
+  color: '#4d5c74',
+  lineHeight: 1.5,
+  marginTop: 6,
+}
+
+const checkbox: React.CSSProperties = {
+  accentColor: '#6ea8ff',
+  cursor: 'pointer',
+  margin: 0,
+}

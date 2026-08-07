@@ -1,0 +1,97 @@
+{
+  "_slice": "Canadian interest rate transmission",
+  "_researched": "2026-07-28",
+  "_note": "How the policy rate reaches the rates people actually pay. The Bank of Canada's own explainer states the chain in plain words: the target for the overnight rate is 'the starting point for setting many of the interest rates in the economy that matter for Canadians', and it names the prime rate of commercial banks as one of them. Two edges of very different strength come out of this — the Bank Rate is arithmetic, and the prime rate is influence — which makes it a useful test of whether the relationship types are doing real work.",
+  "reports": [
+    {
+      "id": "boc-bank-rate",
+      "title": "Bank Rate and Deposit Rate (Operating Band)",
+      "publisher": "Bank of Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The rates at which financial institutions can borrow from, or deposit overnight with, the Bank of Canada. Together they bracket the target for the overnight rate as the operating band — currently a floor system 30 basis points wide, with the deposit rate 5 points below the target and the Bank Rate 25 points above it.",
+      "releases_per_year": 8,
+      "cadence_note": "Moves with the policy rate on the same eight fixed announcement dates. Filed as monthly for the same reason the policy rate is, and wrongly for the same reason.",
+      "last_updated": null,
+      "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-interest-rates/",
+      "domains": [
+        "interest-rates",
+        "monetary-policy",
+        "banking"
+      ]
+    },
+    {
+      "id": "boc-prime-rate",
+      "title": "Chartered Bank Prime Lending Rate",
+      "publisher": "Bank of Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The rate Canadian chartered banks quote as the basis for variable-rate lending — mortgages, lines of credit, most consumer and small business borrowing. Set by each bank rather than by the central bank, and published by the Bank of Canada as part of Canadian interest rates. In practice the single number through which monetary policy reaches a household budget.",
+      "releases_per_year": 52,
+      "changes_per_year": 8,
+      "cadence_note": "Published weekly, but changes only when banks move it, which is normally within a day of a policy rate change. Cadence of publication and cadence of change are different things — a distinction the pulse simulation currently cannot express.",
+      "last_updated": null,
+      "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-interest-rates/",
+      "domains": [
+        "interest-rates",
+        "banking",
+        "monetary-policy"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "boc-bank-rate",
+      "target_report_id": "boc-policy-rate",
+      "relationship_type": "calculated_from",
+      "basis": "Pure arithmetic on the target. The Bank's explainer works the example: 'if the Bank sets the policy interest rate at 2.25% ... the lower end of the range is 2.20%—our deposit rate; the higher end of the range is 2.5%—our bank rate.' The offsets are policy choices that change rarely — the deposit rate moved from equal to the target to 5 basis points below it in January 2025 — but between such changes the band is a fixed spread and nothing else.",
+      "evidence_url": "https://www.bankofcanada.ca/2025/06/understanding-policy-interest-rate/"
+    },
+    {
+      "source_report_id": "boc-prime-rate",
+      "target_report_id": "boc-policy-rate",
+      "relationship_type": "uses_data_from",
+      "basis": "The Bank names this transmission directly: the policy rate 'is the starting point for setting many of the interest rates in the economy that matter for Canadians', and 'by encouraging financial institutions to borrow and lend among themselves at close to the policy rate, the Bank affects interest rates on all kinds of other borrowing in the economy, including the prime rate of commercial banks (used for loans such as mortgages and lines of credit)'. Deliberately not calculated_from: no bank is obliged to move prime, and the Bank's own word is 'affects'. The spread has been stable for years by convention, not by rule.",
+      "evidence_url": "https://www.bankofcanada.ca/2025/06/understanding-policy-interest-rate/"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "banking regulation cluster -> this chain",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "SUPERSEDED IN PART, V0.8. The OSFI/Basel and H.8/Call Report pairs are no longer separate components; the graph is one component even over documented edges alone. The gap this note was really recording is unchanged and is the part worth keeping: the graph describes what banks charge and what capital banks must hold, with nothing documented between the two. Being in one component is not the same as that seam being described."
+    },
+    {
+      "edge": "boc-prime-rate -> corra",
+      "source": "boc-prime-rate",
+      "target": "boc-corra",
+      "reason": "no-document",
+      "why": "CORRA, the Canadian Overnight Repo Rate Average administered by the Bank of Canada, became the country's risk-free benchmark after CDOR ceased in 2024 and now underpins floating-rate lending and derivatives. It belongs in this chain and was not researched this pass. Its relationship to the policy rate is also conceptually interesting — the target is the rate CORRA measures, so the edge may run the opposite way to intuition."
+    },
+    {
+      "edge": "mortgage-rates -> boc-prime-rate",
+      "source": null,
+      "target": "boc-prime-rate",
+      "reason": "deferred",
+      "why": "Variable mortgage rates are quoted as prime plus or minus a spread, which is the last link between a central bank decision and a household payment. The Bank publishes an explainer on what is behind a mortgage rate; it was not read this pass. Posted mortgage rates are also published in the same Canadian interest rates table, so the node has an obvious home."
+    },
+    {
+      "edge": "boc-mpr -> statcan-national-accounts",
+      "source": "boc-mpr",
+      "target": "statcan-national-accounts",
+      "reason": "no-document",
+      "why": "Searched and refuted rather than merely unfound. The July 2026 Monetary Policy Report was read in full and **the phrase 'national accounts' does not appear in it once**, nor does 'by industry'. Every GDP chart in the Report is attributed only as 'Sources: Statistics Canada and Bank of Canada calculations and estimates', which names the agency and not the release — Statistics Canada publishes hundreds of releases and the attribution does not choose between them. This is the exact distinction that separates this edge from boc-mpr -> statcan-cpi and boc-mpr -> statcan-lfs, both of which the same document supports because both name the release in the text. An external assistant returned this edge as DOCUMENTED while quoting the agency-level source line as its proof; the quote was checked against the PDF and disproves the verdict it was offered for."
+    },
+    {
+      "edge": "boc-mpr -> (Haver Analytics)",
+      "source": "boc-mpr",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Surfaced while evidencing boc-mpr -> bea-gdp. The Report's US charts read 'Sources: US Bureau of Economic Analysis via Haver Analytics and Bank of Canada calculations, estimates and projections'. Haver Analytics is a commercial data redistributor, not a publisher of a recurring release with its own cadence and public url, so it cannot become a node under the V0.5 commercial-source rule — that rule admits published commercial sources such as J.D. Power and ICE Brent, and Haver publishes nothing of its own. Recorded because it is a real and named link in the chain, and because it is the first time the corpus has caught a redistributor sitting between two official statistical agencies."
+    }
+  ]
+}

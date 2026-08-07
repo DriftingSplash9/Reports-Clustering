@@ -1,0 +1,253 @@
+{
+  "_slice": "City of Grande Prairie — the municipal template",
+  "_researched": "2026-07-28",
+  "_note": "The first genuinely municipal nodes in the graph. Grande Prairie is mapped in full rather than broadly because the point is the pattern: budget, tax rate bylaw, assessment, municipal census, audited financial statements and the FIR filing are the same six documents in every Alberta municipality, published under the same statute. Establishing the shape here is what makes the other ~330 a replication job with per-instance URL verification, rather than 330 separate research problems. The tax rate bylaw is the keystone — by statute it must state the assessment it levies against and the requisitions it collects on behalf of others, so it names its own inputs in a way most municipal documents do not.",
+  "reports": [
+    {
+      "id": "gp-tax-rate-bylaw",
+      "title": "Property Tax Bylaw (Rates of Taxation)",
+      "publisher": "City of Grande Prairie",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Grande Prairie, Alberta",
+      "description": "Annual bylaw setting the mill rate for each property class, passed under section 353 of the Municipal Government Act. States the assessment base it levies against and every requisition it collects on behalf of another body — the Alberta School Foundation Fund, opted-out school boards, the seniors housing management body and the designated industrial property requisition.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://cityofgp.com/property-taxes/taxation-info",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "gp-budget",
+      "title": "City Budget Report",
+      "publisher": "City of Grande Prairie",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Grande Prairie, Alberta",
+      "description": "Annual operating and capital budget, adopted as the detailed estimates of revenue and expenditure that the tax rate bylaw is then set to fund. Names its population and demographic sources, its provincial and federal capital grant amounts, and the inflation measure it benchmarks spending against.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://cityofgp.com/city-government/budget-finance",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "gp-municipal-census",
+      "title": "Municipal Census",
+      "publisher": "City of Grande Prairie",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Grande Prairie, Alberta",
+      "description": "Municipal population count conducted under the Municipal Government Act, giving population, private dwellings and median age between federal census years. Run at the municipality's discretion rather than on a fixed cycle; Grande Prairie's most recent was 2024.",
+      "releases_per_year": 0.25,
+      "cadence_note": "Not annual. Conducted at the city's discretion — 2024 was the most recent. The enum has no bucket for an irregular multi-year count; releases_per_year carries the truth.",
+      "last_updated": null,
+      "url": "https://cityofgp.com/city-government/census",
+      "domains": [
+        "population",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "gp-assessment-roll",
+      "title": "Property Assessment Roll",
+      "publisher": "City of Grande Prairie",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Grande Prairie, Alberta",
+      "description": "Annual valuation of every assessable property in the city, prepared under the Municipal Government Act and mailed to owners as assessment notices in the first week of March. Reassessed annually to track market movement; each property inspected on roughly a five-year cycle. The base every property tax rate in the city is levied against, and the data the province audits to set the equalized assessment.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://cityofgp.com/city-services/property-taxes/assessment-info",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "gp-financial-statements",
+      "title": "Consolidated Audited Financial Statements",
+      "publisher": "City of Grande Prairie",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Grande Prairie, Alberta",
+      "description": "Annual audited statements of financial position, operations and cash flow, required of every Alberta municipality by the Municipal Government Act and due to Municipal Affairs by May 1. Reports the year's tax levy against the adopted budget and discloses each requisition collected on another body's behalf.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://cityofgp.com/city-government/budget-finance",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ab-dip-requisition",
+      "title": "Designated Industrial Property Requisition",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual provincial requisition recovering the cost of centrally assessing designated industrial property. The province assesses this class itself rather than leaving it to local assessors, and bills municipalities a rate against that assessment to fund the work.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.alberta.ca/designated-industrial-property-assessment",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "psab-psas",
+      "title": "Public Sector Accounting Standards (CPA Canada Public Sector Accounting Handbook)",
+      "publisher": "Public Sector Accounting Board, CPA Canada",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Canada",
+      "description": "The accounting standards every Canadian government and government organisation prepares its financial statements under, set by the Public Sector Accounting Board and published in the CPA Canada Public Sector Accounting Handbook. Not a government body and not a statistical release — a standard that determines what the financial statements of every municipality, province and territory are permitted to say.",
+      "releases_per_year": 1,
+      "cadence_note": "The Handbook is amended continuously through exposure drafts and annual improvements rather than issued as a dated edition. Filed as annual because that is the rhythm at which preparers absorb changes.",
+      "last_updated": null,
+      "url": "https://www.frascanada.ca/en/public-sector",
+      "domains": [
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gp-tax-rate-bylaw",
+      "target_report_id": "gp-budget",
+      "relationship_type": "calculated_from",
+      "basis": "Bylaw C-1486 recites that 'the City of Grande Prairie has prepared and adopted detailed estimates of the municipal revenue and expenditures as required' before setting any rate. The mill rate is the budget divided by the assessment base; the bylaw is the arithmetic of the budget landing on property.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/C-1486%202025%20Property%20Tax%20-%20web.pdf"
+    },
+    {
+      "source_report_id": "gp-tax-rate-bylaw",
+      "target_report_id": "gp-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "Bylaw C-1486 authorises the Chief Administrative Officer 'to levy the following rates of taxation on the assessed value of all property as shown on the assessment roll of the City of Grande Prairie', then tabulates the assessment behind each class — $7.2 billion of low density residential, $2.96 billion non-residential, and so on.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/C-1486%202025%20Property%20Tax%20-%20web.pdf"
+    },
+    {
+      "source_report_id": "gp-tax-rate-bylaw",
+      "target_report_id": "ab-dip-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Bylaw C-1486 levies a Designated Industrial Property Requisition of 0.0701 against $246,988,150 of assessment. The city collects it; the province sets it and keeps it.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/C-1486%202025%20Property%20Tax%20-%20web.pdf"
+    },
+    {
+      "source_report_id": "gp-tax-rate-bylaw",
+      "target_report_id": "ab-education-property-tax-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Bylaw C-1486 levies a separate Alberta School Foundation Fund rate on residential and non-residential assessment, plus a matching rate for opted-out school boards. The city collects these amounts on the province's behalf; the requisition sets them.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/C-1486%202025%20Property%20Tax%20-%20web.pdf"
+    },
+    {
+      "source_report_id": "gp-budget",
+      "target_report_id": "gp-municipal-census",
+      "relationship_type": "uses_data_from",
+      "basis": "The budget report's community profile attributes population, private dwellings and median age to the 2024 Municipal Census by name, and the per-capita spending metric Council is asked to judge the budget by is computed from that population.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-12/2026%20Budget%20Report%20-%20Public%20Version%20-%20Web_0.pdf"
+    },
+    {
+      "source_report_id": "gp-budget",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "The same community profile attributes median household income to the 2021 Federal Census by name. The municipal census does not collect income, so the federal one fills the gap.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-12/2026%20Budget%20Report%20-%20Public%20Version%20-%20Web_0.pdf"
+    },
+    {
+      "source_report_id": "gp-budget",
+      "target_report_id": "ab-municipalaffairs-lgff-capital",
+      "relationship_type": "uses_data_from",
+      "basis": "Local Government Fiscal Framework funding appears as a named capital funding source in the 2026 budget at $8,401,000, 18.4% of the capital plan, and is carried forward at $8,317,000 a year across the five-year capital forecast. Named road rehabilitation programs are funded from it directly.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-12/2026%20Budget%20Report%20-%20Public%20Version%20-%20Web_0.pdf"
+    },
+    {
+      "source_report_id": "gp-budget",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "cites",
+      "basis": "The budget benchmarks ten years of tax increases and per-capita spending against Alberta CPI, quoted at 25.9% cumulatively. Context for the fiscal argument rather than a computational input, hence a citation rather than a calculation.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-12/2026%20Budget%20Report%20-%20Public%20Version%20-%20Web_0.pdf"
+    },
+    {
+      "source_report_id": "gp-financial-statements",
+      "target_report_id": "gp-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "Note 1 states plainly: 'Property tax revenues are based on property tax assessment values provided by the City of Grande Prairie.' The largest revenue line in the statements is the assessment roll multiplied by the rates.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/2024%20City%20Of%20Grande%20Prairie%20Consolidated%20Audited%20Financial%20Statements.pdf"
+    },
+    {
+      "source_report_id": "gp-financial-statements",
+      "target_report_id": "gp-budget",
+      "relationship_type": "uses_data_from",
+      "basis": "Every statement of operations in the document carries a Budget column beside the actual — net municipal property taxes of $129,935,024 budgeted against $131,071,106 collected. The statements are in part a report card on the budget, so they carry it.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/2024%20City%20Of%20Grande%20Prairie%20Consolidated%20Audited%20Financial%20Statements.pdf"
+    },
+    {
+      "source_report_id": "gp-financial-statements",
+      "target_report_id": "ab-education-property-tax-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Schedule 3 nets the Alberta School Foundation Fund requisition of $30,181,579 out of gross property taxes to arrive at net municipal property taxes. The notes further explain that over-levies and under-levies against the requisition are accrued and corrected in the following year's requisition rates.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/2024%20City%20Of%20Grande%20Prairie%20Consolidated%20Audited%20Financial%20Statements.pdf"
+    },
+    {
+      "source_report_id": "gp-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The auditor's report and note 1 both state the statements are prepared in accordance with Canadian public sector accounting standards as established by the Public Sector Accounting Board. The standards decide what the statements are permitted to recognise, which is why this is a methodology dependency rather than a data one.",
+      "evidence_url": "https://cityofgp.com/sites/default/files/2025-05/2024%20City%20Of%20Grande%20Prairie%20Consolidated%20Audited%20Financial%20Statements.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-fir",
+      "target_report_id": "gp-financial-statements",
+      "relationship_type": "uses_data_from",
+      "basis": "Municipal Affairs states that the Municipal Government Act requires each municipality to prepare both annual audited financial statements and a financial information return, both returned by May 1, and that 'the completed FIR should be submitted with the signed and dated copy of the audited financial statements'. The FIR is the same year's audited figures restated in the province's standard schedule.",
+      "evidence_url": "https://www.alberta.ca/annual-financial-reporting-for-municipalities"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-equalized-assessment",
+      "target_report_id": "gp-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "The Recording and Reporting Information for Assessment Audit and Equalized Assessment Manual describes an annual submission of data from municipalities to Municipal Affairs containing 'the information about every assessable property in the municipality for the purposes of conducting the annual audit and for determining the equalized assessment'. The province divides the municipality's taxable assessment by its audited assessment level to reach 100% of market value.",
+      "evidence_url": "https://open.alberta.ca/publications/1718-1771"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-population-list",
+      "target_report_id": "gp-municipal-census",
+      "relationship_type": "uses_data_from",
+      "basis": "The population list's own usage note: 'The information in the lists is based on municipal census results (Alberta municipalities may choose to conduct a census in any year) or federal census counts. Municipalities that choose to conduct a census are required to report the results to Municipal Affairs by September 1 of that year, and those results are reflected in the population lists.'",
+      "evidence_url": "https://open.alberta.ca/opendata/alberta-municipal-affairs-population-list"
+    },
+    {
+      "source_report_id": "gp-financial-statements",
+      "target_report_id": "gp-tax-rate-bylaw",
+      "relationship_type": "uses_data_from",
+      "evidence": "implied",
+      "basis": "The statements report the tax levy the bylaw produced, and by statute no levy can exist without a rate bylaw — the Municipal Government Act requires council to pass one annually before taxes can be imposed. The statements never name the bylaw, so the relationship is certain in law and absent from the document. Promoted from _dropped as implied in V0.7. A council report reconciling the levy to the bylaw would settle it and make this documented."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gp-tax-rate-bylaw -> grande-spirit-foundation-requisition",
+      "source": "gp-tax-rate-bylaw",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Bylaw C-1486 levies $1,030,421 for the Grande Spirit Foundation, the seniors housing management body. The requisition is clearly documented in the bylaw, but no stable published landing page for the foundation's annual requisition was found, so the node has no honest url. Worth revisiting — it would be a second institutional node."
+    },
+    {
+      "edge": "gp-budget -> canada-community-building-fund",
+      "source": "gp-budget",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The 2026 budget names the Canada Community-Building Fund as a capital source at $5,160,000. The federal fund itself has not been researched as a node yet, so the edge has nothing to point at. Dropped for now rather than half-defined."
+    }
+  ]
+}

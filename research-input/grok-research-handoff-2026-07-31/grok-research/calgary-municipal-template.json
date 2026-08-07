@@ -1,0 +1,119 @@
+{
+  "_slice": "City of Calgary — municipal template replication",
+  "_researched": "2026-07-31",
+  "_note": "Replication of the Grande Prairie municipal template pattern on Calgary. The same six core documents exist under the same Municipal Government Act obligations: Property Tax Bylaw (keystone), assessment roll, budget, audited financial statements, municipal census (or population estimate), and the provincial Designated Industrial Property requisition. Establishing the second large-city instance proves the template is portable.",
+  "reports": [
+    {
+      "id": "calgary-tax-rate-bylaw",
+      "title": "Property Tax Bylaw 9M2026 (Rates of Taxation)",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Annual bylaw setting the tax rate for each assessment class, passed under section 353 of the Municipal Government Act. States the assessment base it levies against and the provincial education and other requisitions it collects on behalf of the Province. Approved 31 March 2026.",
+      "releases_per_year": 1,
+      "url": "https://www.calgary.ca/property-owners/taxes/bill-rate-calculation.html",
+      "bylaw": "9M2026",
+      "domains": ["municipal-finance", "taxation", "assessment"]
+    },
+    {
+      "id": "calgary-assessment-roll",
+      "title": "Property Assessment Roll",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Annual valuation of every assessable property in the city under the Municipal Government Act. Assessment notices mailed mid-January; 2026 roll totalled $457 billion. Valuation date is 1 July of the prior year. The base against which every property tax rate is levied and the data the province audits for equalized assessment.",
+      "releases_per_year": 1,
+      "url": "https://www.calgary.ca/property-owners/assessment/roll-highlights.html",
+      "open_data": "https://data.calgary.ca/Government/Current-Year-Property-Assessments-Parcel-/4bsw-nn7w",
+      "domains": ["assessment", "taxation", "municipal-finance"]
+    },
+    {
+      "id": "calgary-budget",
+      "title": "Service Plans and Budgets (2023-2026 cycle, 2026 adjustments)",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Multi-year operating and capital budget adopted by Council. The 2026 adjustments set the municipal tax revenue requirement that the Property Tax Bylaw is then calibrated to raise. Names population growth, inflation assumptions, and provincial/federal grant inputs.",
+      "releases_per_year": 1,
+      "url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/plans-budgets-and-financial-reports/2023-2026-service-plans-budgets/2026-budget-as-approved-dec-3-2025.pdf",
+      "domains": ["municipal-finance", "taxation"]
+    },
+    {
+      "id": "calgary-financial-statements",
+      "title": "Consolidated Audited Financial Statements (Annual Financial Report)",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Annual audited consolidated financial statements prepared under Public Sector Accounting Board standards and required by the Municipal Government Act. Reports the year's tax levy against the adopted budget and discloses requisitions collected on behalf of other bodies. 2025 report released May 2026.",
+      "releases_per_year": 1,
+      "url": "https://www.calgary.ca/content/dam/www/cfod/finance/documents/2025-Annual-Financial-Report.pdf",
+      "domains": ["municipal-finance", "taxation"]
+    },
+    {
+      "id": "calgary-municipal-census",
+      "title": "Municipal Census / Official Population Estimate",
+      "publisher": "City of Calgary",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "Calgary, Alberta",
+      "description": "Official population figure used for per-capita calculations, grant eligibility, and budget forecasting. Calgary has conducted periodic municipal censuses; in intervening years it relies on Statistics Canada estimates and civic administrative sources.",
+      "releases_per_year": 1,
+      "url": "https://www.calgary.ca/csps/cns/census.html",
+      "domains": ["population", "municipal-finance"]
+    },
+    {
+      "id": "ab-dip-requisition",
+      "title": "Designated Industrial Property Requisition",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual provincial requisition recovering the cost of centrally assessing designated industrial property. The province assesses this class itself and bills municipalities a rate against that assessment. Shared node with the Grande Prairie template.",
+      "releases_per_year": 1,
+      "url": "https://www.alberta.ca/designated-industrial-property-assessment",
+      "domains": ["assessment", "provincial-requisition", "municipal-finance"]
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "calgary-tax-rate-bylaw",
+      "to": "calgary-assessment-roll",
+      "type": "calculated_from",
+      "basis": "Municipal Government Act s. 353 and Bylaw 9M2026: tax rates are applied to the taxable assessment on the assessment roll to produce the municipal and provincial portions of the tax bill."
+    },
+    {
+      "from": "calgary-tax-rate-bylaw",
+      "to": "calgary-budget",
+      "type": "calculated_from",
+      "basis": "The municipal tax revenue requirement set in the approved Service Plans and Budgets (and 2026 adjustments) is the numerator used to calculate the municipal tax rates in Bylaw 9M2026."
+    },
+    {
+      "from": "calgary-tax-rate-bylaw",
+      "to": "ab-dip-requisition",
+      "type": "uses_data_from",
+      "basis": "The Property Tax Bylaw incorporates the provincial Designated Industrial Property requisition rate set by Alberta Municipal Affairs."
+    },
+    {
+      "from": "calgary-financial-statements",
+      "to": "calgary-tax-rate-bylaw",
+      "type": "uses_data_from",
+      "basis": "Audited financial statements report the actual tax levy raised under the Property Tax Bylaw against the adopted budget."
+    },
+    {
+      "from": "calgary-budget",
+      "to": "calgary-municipal-census",
+      "type": "uses_data_from",
+      "basis": "Budget documents use official population figures for growth forecasts, per-capita service metrics, and grant eligibility calculations."
+    }
+  ],
+  "notes": [
+    "Template replication successful. The same six-document pattern observed in Grande Prairie appears in Calgary under identical MGA obligations.",
+    "Property Tax Bylaw 9M2026 is the keystone node, exactly as in the Grande Prairie instance.",
+    "Provincial education requisition and DIP requisition flow through the same bylaw structure.",
+    "Open data assessment roll is published annually on data.calgary.ca, providing a machine-readable edge that Grande Prairie does not yet match at the same scale."
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.3.md",
+  "number": 3,
+  "title": "G.3.md — New Zealand/SAO galaxy hand-off",
+  "date": "2026-08-06",
+  "governing_briefs": "`Research.1.md` — §9 amended once this session (an \"ANZSIC /",
+  "predecessor": "`G.2.md` (2026-08-06, same day, immediately prior thread).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**One of the three \"free\" New Zealand edges `G.2.md` recommended was not free,\nand should not be minted.** `G.2.md` item 1 listed `nz-statsnz-gfs -> sna-2008`\nalongside two others as verified and ready to build. The sentence it rests on is:\n\n> \"In 2018, we implemented the Government Finance Statistics Manual 2014\n> (GFSM2014), which follows the GFSM 2001 and is consistent with the System of\n> National Accounts 2008 (SNA08).\"\n\nThe subject of \"is consistent with the System of National Accounts 2008\" is\nGFSM2014, not Stats NZ's release. The sentence documents a relation between two\ninternational manuals and Stats NZ's adoption of one of them. It does not say the\nNew Zealand release takes SNA 2008 as an input, and \"is consistent with\" is in\nany case weaker than any of the four `relationship_type` values, every one of\nwhich describes an input. Compare the four edges the corpus already holds into\n`sna-2008` — `ck-national-accounts`, `statcan-national-accounts`, `bea-gdp`,\n`fed-z1` — each of which is a first-person statement by a producer about its own\nproduct.\n\nThe other two were free and are built. The count for the session is therefore\n**two edges minted from three recommended, and the third recorded as a `note`\ndrop with the reasoning**, in `nz-government-finance.json`.\n\nThat is what the session *established*. What it *built* is larger and belongs to\nThomas rather than to the research: the `audits` / `supersedes` schema question\nwas put to him mid-session, he chose the parallel unweighted `relations` list, and\nit is implemented. Findings 4 — including the part where building it proved the\nschema was never the binding constraint.\n\nThis is a small result and it is the honest one. It also says something about the\nchain: the error was not in the research, which quoted the sentence correctly in\n`G.1.md` and `G.2.md`. It was in the reading of a correctly quoted sentence, one\nhand-off later, by a session working from its own summary. The verification\ndiscipline this branch applies to external researchers has now caught its own\npredecessors twice in two sessions.",
+  "findings": [
+    {
+      "heading": "1. The two genuinely free New Zealand edges are built, and New Zealand is no longer an island",
+      "body": "**What this rests on:** both quotes confirmed character for character against the\nminting session's own extractions, still present in this sandbox at\n`/tmp/gfsdi.txt` and `/tmp/pbeipsas1.txt`; neither independently re-fetched, for\nthe reasons in Session conditions. Flagged in both `basis` fields.\n\n`nz-statsnz-gfs -> imf-gfsm`, `methodology_depends_on`, on the precedent of\n`statcan-national-accounts -> imf-gfsm` and `ck-budget-estimates -> imf-gfsm`.\nThe DataInfo+ item does not stop at the adoption sentence — it states classifica­\ntion decisions in GFSM terms three more times (\"This is consistent with the GFSM\n2014\"; \"According to the GFSM 2014, net debt includes all financial assets and\nliabilities except shares and other equity and financial derivatives\";\n\"Generally, the layout of the tables is consistent with the GFSM 2014\nrecommendations\"), which is what makes it a methodological dependence rather than\na citation.\n\n`nz-pbe-ipsas-1 -> ipsas`, `methodology_depends_on`, matching\n`ck-government-financial-statements -> ipsas` and `psab-psas -> ipsas`. The\nappendix \"Comparison with IPSAS 1\" opens \"PBE IPSAS 1 Presentation of Financial\nReports is drawn from IPSAS 1 Presentation of Financial Statements.\" and then\nenumerates the departures, which is what distinguishes adoption-with-amendment\nfrom a reference. This session did independently re-fetch the current compiled\nstandard and confirm the appendix still exists in its contents list, but the PDF\nextraction truncated before the appendix body."
+    },
+    {
+      "heading": "2. ANZSIC is built, and `G.2.md` was wrong about what building it would achieve",
+      "body": "**What this rests on:** everything in this finding was fetched and read by this\nsession, directly, from `abs.gov.au`, `unstats.un.org` and\n`datainfoplus.stats.govt.nz`. No external input, no predecessor extraction.\n\n`G.2.md` item 2 said minting ANZSIC \"would tie `AU` and `NZ` together directly\".\nMinting the node alone would not have. The joint authorship is real and verified —\nthe Preface reads \"The Australian Bureau of Statistics and Statistics New Zealand\njointly developed this classification to improve the comparability of industry\nstatistics between the two countries and with the rest of the world\", signed\n\"Dennis Trewin / Brian Pink — Australian Statistician / Government Statistician\" —\nbut that is a `publisher` fact, and this corpus draws no edge from an authorship\nfact. A classification does not take its own authors as inputs.\n\nSo the bridge required two more nodes, and the slice mints four:\n\n* `anzsic` — the corpus's second jointly-owned classification after `naics`, and\n  its structural twin.\n* `isic` — the UN's classification and the acknowledged parent of ANZSIC and of\n  both its predecessors (the 1969 ASIC \"was based at the broader levels on the\n  ISIC\"; the 1970 NZSIC was \"based on ISIC, Rev.2\"). Its absence was a hole of\n  exactly the shape `gasb-standards` filled for the associated-states pass:\n  `naics` sat in the corpus with eight inbound edges while the classification\n  NAICS is itself aligned to was not represented at all.\n* `au-abs-australian-industry` — \"Estimates in this release are classified by:\n  Industry, in accordance with the Australian and New Zealand Standard Industrial\n  Classification (ANZSIC), 2006 edition.\" ANZSIC also defines the survey's scope\n  and its data-splitting thresholds, stated in ANZSIC Divisions with numbers.\n* `nz-statsnz-aes` — \"Survey designed and published on an ANZSIC06 basis\" (2007),\n  with the adoption dated to 1998, \"replacing the New Zealand Standard Industrial\n  Clasification (NZSIC)\" [sic, the source's typo].\n\nFour edges: `anzsic -> isic`, `anzsic -> naics`,\n`au-abs-australian-industry -> anzsic`, `nz-statsnz-aes -> anzsic`. The\n`-> naics` edge is the weaker of the two upward ones and is labelled as such:\nNAICS is a peer consulted for comparability, not a parent, though the alignment\nis asserted at a named level of the hierarchy (\"at the subdivision level as far\nas practicable\") and used to justify two named Divisions.\n\n**A hazard recorded rather than resolved.** ANZSIC 2006 is designed against a\ndocument that did not exist when it was published — \"aligning the classification,\nas far as possible, with the **upcoming** revision of the ISIC (Revision 4)\" —\nand ships correspondences to a different revision again, Rev. 3.1. ISIC is now at\nRev. 5, endorsed 2023. `isic` is therefore modelled as one node across revisions,\non the `naics` convention, with the detail in a `_dropped` note.\n\n**ANZSCO deliberately not attempted.** Item 26c. This session does not know\nwhether ANZSCO is still jointly maintained, and if it is not, it is not a bridge\nnode and should not be minted as one. The governance question comes before the\nISCO-parentage question."
+    },
+    {
+      "heading": "3. The Cook Islands split is made, and it surfaced ISIC's second and third inbound edges",
+      "body": "**What this rests on:** both `stats.gov.ck` release pages fetched and read\ndirectly by this session. The Budget quote is inherited from the minting session\nand was not re-extracted; the `basis` says so.\n\n`G.2.md` cheap check 2 asked for `ck-national-accounts` to be split, because the\nBudget forecasts from the quarterly series and not the annual one. Done:\n`ck-national-accounts-quarterly` is now a node, and\n`ck-budget-estimates -> ck-national-accounts-quarterly` carries the model-inputs\nquote (\"The key data sets used for the model are: • Real and nominal GDP –\nquarterly data to June 2025...\"). The pre-existing edge to the annual release is\nkept and not retargeted, because it rests on a different quote — the generic\nsource note beneath the Budget's economic tables — and the two together are the\nhonest picture: the Budget cites the programme and feeds its model from the\nquarterly series.\n\nThe unplanned part is better. Both Cook Islands release pages state, under their\nown bolded heading, \"International Standard Industrial Classifications (ISIC Rev\n4) – is used to classify the principal economic activity (industry) of\nestablishments and enterprises\", and then set out the three broad groupings —\nprimary, secondary, tertiary — that the release's own headline commentary is\nwritten in. So `isic`, minted an hour earlier for Australia and New Zealand,\nimmediately picked up two more inbound edges from an unrelated jurisdiction and\nan unrelated pass. **That is the argument for minting parent frameworks even when\none pass needs them: the second user arrives without being looked for.**\n\n**And a caveat that generalises.** The Cook Islands Statistics Office publishes\none methodology block and attaches it, unaltered, to both the quarterly and the\nannual release page — and the block is written for the quarterly series (\"The\nproduction approach (GDP (P)) is being used to calculate the Cook Islands GDP on\na quarterly basis\"; \"the methodology of compiling the Cook Islands quarterly GDP\non request\"). The consequence is that the two nodes now carry duplicate edges to\n`sna-2008` and `isic` which look like two independent disclosures and are one.\nRecorded as a note rather than fixed by deleting the annual edges, because the\nannual release does publish the claim under its own title. **Anyone computing\ndisclosure counts should net one of each pair out**, and should expect this shape\nwherever a small statistics office runs one boilerplate block across several\nreleases."
+    },
+    {
+      "heading": "4. The schema question was decided, built, and corrected its own premise",
+      "body": "**What this rests on:** the decision is Thomas's, taken mid-session on\n`notes/SCHEMA-DECISION-relationship-types.md`. Everything after it is this\nsession's own code and data, verified by a before/after authority snapshot.\n\nThe note went to Thomas with four options costed. He chose **C — a parallel,\nunweighted `relations` list with its own type union, never passed to\n`buildGraph`** — and it was built the same session, data layer and validator\nonly, no rendering.\n\nThe argument that produced option C is worth carrying forward on its own, because\nit is the second time it has decided a schema question here. The comment around\n`part_of` in `src/lib/types.ts` says containment was made a field on `Report` and\ndeliberately *not* a `component_of` relationship type, because \"`RelationshipType`\nis defined as *how one report depends on another* and every value of it feeds\n`RELATIONSHIP_WEIGHT`. Containment is not a dependency, and giving it a weight\nwould convert a bounded 15.2% understatement into an unbounded overstatement.\"\n`audits` fails that test identically — assurance is not an input, and the arrow\narguably points the wrong way for authority flow, since the audit office gains\nstanding from signing while the statements gain no content from it. A parallel\nlist has no weight to invent, and `Record<RelationshipType, number>` makes the\ninvention unavoidable rather than optional if you widen the union instead.\n\n**Then implementing it found that the ontology gap was never the binding\nconstraint.** Seven documented instances went into the note. **One** came out as a\nrelation:\n\n```\nnu-ag-report-assembly -[audits]-> nu-government-financial-statements\n```\n\nThe other six are blocked on the node inventory, not the type union. **There is\nno node for the auditor.** Tokelau's Finance Rules install the Auditor-General of\nNew Zealand and the quote is unambiguous, but no Tokelau opinion and no recurring\npublication of the New Zealand Auditor-General is a node. FSM, the Marshall\nIslands, Palau and Greenland are audited by private firms whose opinions are bound\ninto the statements they audit — not recurrently published official reports, so\nthey fail `Research.1.md` §4.2, the same disqualifier that keeps J.D. Power, ICE\nBrent and Darroch Limited out of the corpus. **Those four will never be\nmintable.** The UKSPF `supersedes` case has no node at either end.\n\nSo: **the constraint on representing assurance in this corpus is that a node must\nbe a recurrently published official report, and auditors mostly are not.** Where a\npublic audit office publishes recurrently — the Controller and Auditor-General of\nNew Zealand does, which is the only reason `nu-ag-report-assembly` exists — the\nrelation is mintable. Where the auditor is a private firm it never will be, and\nthe honest representation stays what it already was: the three\n`-> us-gao-yellow-book` dependencies, which say the statements depend on the\nAmerican auditing standard rather than that a named firm audits them. That is a\nstructural fact about public-sector assurance and is worth more than the six edges\nwould have been.\n\nThe change earned itself anyway, on three grounds that are not the instance count.\nIt closes a question two hand-off chains had carried for three sessions and that\nhad been re-written as the same paragraph six times. It converted a blanket `note`\ninto precise leads that name the missing node and what unblocks each case. And the\none relation minted is the informative one — Niue's is where the appointment runs\nthe unexpected way, and it demonstrates that a dependency and a relation over the\nsame pair are different claims, since `nu-ag-report-assembly` both\n`uses_data_from` and `audits` the same statements. The validator prints that\noverlap on purpose.\n\n**Verification:** `npm run check` clean; a before/after snapshot of `authority`,\n`size_score`, `in_degree` and `out_degree` across all 300 nodes to twelve decimal\nplaces is byte-identical. That is the property option C was chosen for and it is\nworth re-running after any future change to this list."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`G.1.md` Corrections 1 / `G.2.md` Corrections 1 — confirmed, still open, and now carried by four sessions.** `Research.1.md`'s header still reads \"v3.0 (adopted 2026-08-05)\" while `EU/G.49.md`, `AU/G.1.md`, `G.1.md` and `G.2.md` describe it as v3.3 or v3.4. This session amended §9 once and again did not bump the header, for the same reason each predecessor gave: the numbering convention is undocumented and guessing makes the drift worse. Four sessions is enough. Someone who owns the brief should settle it in one edit, or delete the version string."
+    },
+    {
+      "n": 2,
+      "text": "`G.2.md` \"Thomas's stated priority\" item 1 — overstated.** It listed three edges as verified and free. Two were; the third, `nz-statsnz-gfs -> sna-2008`, is not supported by the quote offered for it and has been recorded as a `note` drop rather than minted. See Headline result. The predecessor's *quotation* was accurate in both `G.1.md` and `G.2.md`; the error was in the reading."
+    },
+    {
+      "n": 3,
+      "text": "`G.2.md` \"Thomas's stated priority\" item 2 — overstated in the same direction.** Minting ANZSIC \"would tie `AU` and `NZ` together directly\" is not true of the node alone, because joint authorship is a publisher attribute and carries no edge. The tie required two additional nodes, which this session minted. Recorded in the slice's `_dropped` as well as here, because a later session reading only the JSON should find it too."
+    },
+    {
+      "n": 4,
+      "text": "`G.2.md` Session conditions — incomplete rather than wrong.** It recorded `datainfoplus.stats.govt.nz` as server-rendered and working, which is true, but not that the item path is case-sensitive on at least some fetch routes. `/item/...` returns zero bytes where `/Item/...` returns the page."
+    },
+    {
+      "n": 5,
+      "text": "This session's own `notes/SCHEMA-DECISION-relationship-types.md` — its central premise was wrong, corrected in place before the file was handed on.** The note argued the six `audits` instances were blocked by the type union. Building the change proved they are blocked by the node inventory: six of the seven cases have no node for the auditor, and four of those never will, because a private audit firm is not a recurrently published official report. The note now carries a `What implementing it actually found` section saying so, and the original text above it is left unedited on purpose — a decision document that quietly rewrites its own premises is worth nothing. Recorded here on the same convention `G.2.md` Corrections 3 used for errors a session caught in its own live work."
+    },
+    {
+      "n": 6,
+      "text": "No prior substantive claim was found wrong.** Every finding in `G.1.md` and `G.2.md` that this session touched — the New Zealand rating chain, the five-answers result, the Cook Islands Budget's use of quarterly GDP, the two ANZSIC passages `Grok-Research-Brief-XI.md` says Thomas verified himself — checked out. The two ANZSIC passages in particular were re-verified from the ABS primary source and are correct as quoted."
+    }
+  ],
+  "priorities": [],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Fix `node_modules` or document the scratch-install workaround in the README.** Promoted from the bottom of `G.2.md`'s list to the top of this one. It has now cost three consecutive sessions the same five minutes, which is the definition of the cheapest available win."
+    },
+    {
+      "n": 2,
+      "text": "Re-fetch the two inherited quotes** — the Stats NZ DataInfo+ GFSM block and the PBE IPSAS 1 \"Comparison with IPSAS 1\" appendix — from their primary sources, by a session with Wayback access or a browser. Both are labelled in their `basis` fields. Neither is doubted; both are one grade below this branch's standard."
+    },
+    {
+      "n": 3,
+      "text": "Open NZSIOC's defining document** and mint it between `nz-statsnz-aes` and `anzsic`. Stats NZ classification pages, unlike release pages, are likely fetchable."
+    },
+    {
+      "n": 4,
+      "text": "Add a `reason` value or a §2 line for caveat-notes** — `_dropped` entries that annotate a minted edge rather than record a dropped one. Currently they must set `source` and `target` to `null` to pass the validator, which loses the information about which edge they annotate. Carried from `G.2.md`, untouched or blocked:"
+    },
+    {
+      "n": 5,
+      "text": "Re-read Financial Reporting Act 2013 ss.5 and 8 from `legislation.govt.nz` directly. STILL NOT DONE, AND NOW HARDER.** This is the hinge of the New Zealand slice's headline result — the statutory chain LGA 2002 s.111 → s.5 → FRA 2013 s.8 → XRB standards — and it is still the only load-bearing citation in that slice resting on a proxy read. This session tried `legislation.govt.nz` directly (zero bytes, as documented), the whole-act view (zero bytes), NZLII as an independent mirror (zero bytes) and the Wayback route (blocklisted). **It needs a browser.** Until then the claim stands where `G.1.md` left it: verified by a subagent through a text-extraction proxy, and flagged as such in the slice."
+    },
+    {
+      "n": 6,
+      "text": "Mint the Census Annual Survey of State and Local Government Finance, cited by title and vintage in Puerto Rico's fiscal plan."
+    },
+    {
+      "n": 7,
+      "text": "Locate the Puerto Rico Planning Board forecasts as a titled recurring release."
+    },
+    {
+      "n": 8,
+      "text": "Find the June 2026 revised Puerto Rico fiscal plan; the Drive ID in the research is the 2024 plan."
+    },
+    {
+      "n": 9,
+      "text": "Decode the Wayback replay of the OAG's New Zealand long-term-plan observations — gzip binary, never decoded, and now unreachable by this toolset. Carried from `G.1.md`, untouched: all seven of its own items, in particular the full re-extraction of LGA 2002 Schedule 10 and the current-consolidation check on s.106(2C)."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`NZ/G.3.md`) — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`G.2.md`, `G.1.md` and `AU/G.1.md` — the frontier, the method, and the comparison case."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md` — §9's five blocks from this branch."
+    },
+    {
+      "n": 4,
+      "text": "`notes/SCHEMA-DECISION-relationship-types.md` — the decision, and the section at the bottom recording what building it corrected."
+    },
+    {
+      "n": 5,
+      "text": "The five slices named in Orientation. Read the `_dropped` arrays."
+    },
+    {
+      "n": 6,
+      "text": "`research-input/Grok-Research-Brief-XI.md` — items 25, 27 and 28 are the outstanding assignment; item 26 is closed. Briefs VI-X for the protocol and its failure history."
+    },
+    {
+      "n": 7,
+      "text": "A browser.** Non-negotiable for the next round. Without one, `legislation.govt.nz`, `nzta.govt.nz`, `paclii.org`, `oag.parliament.nz`, `aucklandcouncil.govt.nz`, `ccc.govt.nz` and `portal.tcu.gov.br` are all unreachable, and so is the Wayback `id_` fallback that used to substitute for them. Three of the five priority items above are blocked on this."
+    },
+    {
+      "n": 8,
+      "text": "The verification rule, which is the whole thing: prefer direct fetch and text extraction over any summarising tool for anything that will become a quoted `basis` field, and re-read every externally supplied quote against its source before minting. **And, as of this session, read the sentence as well as fetching it** — the one bad recommendation this session had to refuse came from a correctly quoted sentence whose grammatical subject nobody had checked."
+    }
+  ],
+  "session_conditions": "Direct continuation of `G.2.md`, same day. **Extraction and verification only —\nno external researcher, no subagents.** Every quote minted this session was\nfetched and read by this session, with two flagged exceptions named below. That\nis a change from the previous two sessions and it is why this one produced fewer\nedges.\n\n**The fetch tooling was materially weaker than the predecessors', and this\nconstrains what can be trusted from it.** Two routes that `G.1.md` and `G.2.md`\nrelied on were unavailable:\n\n* **The Wayback `id_` endpoint is blocklisted** for this session's fetch tool. It\n  returns HTTP 403 \"URL is on blocklist\" before reaching the network. That single\n  fact removes the workaround this branch used for `legislation.govt.nz`,\n  `nzta.govt.nz`, `paclii.org`, `oag.parliament.nz`, `mbie.govt.nz` and\n  `portal.tcu.gov.br`. Every one of those domains is now unreachable to a session\n  with this toolset.\n* **No browser.** The Chrome extension reported zero connected browsers, so the\n  escalation path for JavaScript-rendered pages did not exist either.\n\nWhat still worked, and is worth recording as positive routes:\n\n* `abs.gov.au` serves its classification volumes and methodology pages as\n  ordinary server-rendered HTML, chapter by chapter. The whole ANZSIC front\n  matter and Introduction read cleanly.\n* `unstats.un.org` serves the ISIC landing page directly.\n* `stats.gov.ck` is WordPress and serves both the quarterly and annual GDP\n  release pages in full, methodology block included.\n* `datainfoplus.stats.govt.nz` serves item pages — **but the path is\n  case-sensitive on this route**: `/Item/nz.govt.stats/<guid>` returns the page,\n  `/item/nz.govt.stats/<guid>` returns zero bytes, as do every `/<revision>` and\n  `/ddi` suffix. `G.2.md` recorded the domain as working without recording the\n  case; a successor should not lose an hour to this twice.\n* `xrb.govt.nz` and `standards.xrb.govt.nz` serve PDFs, but this session's fetch\n  tool truncates large PDF extractions — PBE IPSAS 1 truncated at paragraph 137\n  of 155 and never reached the appendix that carries the quote.\n\n**Two edges rest on a predecessor's extraction rather than this session's, and\nboth say so in their `basis` field.** The sandbox from the 2026-08-06 morning\nsession persisted, so `/tmp/gfsdi.txt` and `/tmp/pbeipsas1.txt` — the minting\nsession's own byte-level extractions of the DataInfo+ item and the XRB standard —\nwere still on disk and the quotes were confirmed against them character for\ncharacter. That is stronger than trusting a hand-off's transcription and weaker\nthan a fresh read, and it is labelled as such in both edges. Anyone who can reach\nWayback or a browser should redo both.\n\nNot done, by clock: `Grok-Research-Brief-XI.md` items 25 (Colombia, Chile, Peru),\n27 (nineteen unscouted jurisdictions) and 28 (Faroes, Compact budgets), all still\n`not_attempted`. Item 26c (ANZSCO) was scoped and deliberately left — see\nFindings 2."
+}

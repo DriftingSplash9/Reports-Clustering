@@ -1,0 +1,133 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.49.md",
+  "number": 49,
+  "title": "G.49.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "`Research.1.md` v3.2 → **v3.3 this session** — §9 amended",
+  "predecessor": "G.48.md (2026-08-05, same day).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The UK depth pass replicates the Netherlands pass's core finding — a\nnational funding-formula document that names its own inputs by exact\ntitled release, not just by agency — in a completely different country,\nlanguage environment and government structure, which is modest evidence\nthis pattern generalises rather than being a Dutch/Anglo-Netherlands-\nspecific accident.** The Adult Social Care Relative Needs Formula technical\nannex names ONS releases, Census 2021 Nomis table codes, and an NHS England\nDigital report by exact table number, the same shape as the Dutch Toelichting\nand Ontario's OMPF Appendix F. Separately, the UK's unique status in this\ncorpus (the only former EU member) produced a real, well-evidenced finding —\nthe UK Shared Prosperity Fund succeeding EU structural funds — that could\nNOT be built into a graph edge, because this corpus's `relationship_type`\nschema (`calculated_from` / `uses_data_from` / `methodology_depends_on` /\n`cites`) has no type for \"supersedes.\" That is itself a finding worth having,\nnot a failure: the corpus's own ontology has a documented gap.",
+  "findings": [
+    {
+      "heading": "1. Switzerland, Norway and the UK all scouted as strong candidates; UK picked on two grounds neither purely evidentiary",
+      "body": "**What this rests on**: three parallel scouting subagents, deliberately\nlight-touch (characterize what exists, don't extract verbatim yet). All\nthree came back with real candidate documents for all four of the Dutch\npattern's pieces (national equalization transfer + technical guide; property\ntax + valuation law; government accounting standard; compiled municipal\nfinancial-return dataset). Switzerland's National Fiscal Equalization (NFA)\ntechnical report and Norway's KOSTRA system (flagged by its own scout as\n\"your strongest candidate... bilingual\") were both credible alternatives.\n**The UK was picked for two reasons that are not about which system is\nrichest**: (1) zero language barrier, directly responsive to this session's\nown finding two hand-offs' worth of work earlier that quote fidelity is the\nmain risk in this kind of research; (2) it is the corpus's only former EU\nmember, which no other candidate offers and which connects directly to this\nbranch's own long-running \"asymmetry\" research thread (`G.47.md` Finding 2 —\nEU instruments oblige without naming, members name without being asked).\nSwitzerland and Norway were not tested against the UK empirically — this is\na judgement call, stated plainly as one, exactly as `G.48.md` Finding 3 did\nfor Netherlands vs. Germany vs. Italy."
+    },
+    {
+      "heading": "2. The Adult Social Care Relative Needs Formula technical annex is a clean, fully-verified \"Appendix F\"-class document",
+      "body": "**What this rests on**: direct download and full-text extraction (`pypdf`)\nof the 24-page annex PDF. Its §5 \"Data and technical definitions\" names, per\nindicator: ONS's \"Estimates of the population for England and Wales\" (exact\ntitle), Census 2021 by exact Nomis table code (RM066 \"Living arrangements by\nage\", RM121 \"Sex by age\", RM201 \"Tenure by age\"), and NHS England Digital's\n\"Adult Social Care Activity and Finance Report\" by exact table number (Table\n38). All VERIFIED DIRECTLY against the extracted PDF text, not accepted from\nthe subagent's report. This is markedly more specific than the sibling\nChildren and Young People's Services annex, which names datasets\n(\"National Pupil Database\", \"Children in Need (CiN)\", \"Children Looked After\n(CLA)\") by title/acronym only, without table-level codes — recorded as a\n`no-node-yet` lead in the JSON's `_dropped` array rather than built, since\nthe two annexes are evidently not uniform in citation quality and this\nsession only verified the stronger one."
+    },
+    {
+      "heading": "3. UKSPF succeeding EU structural funds is real and well-evidenced, but does not fit this corpus's edge ontology — recorded as a schema-limitation finding, not an edge",
+      "body": "**What this rests on**: two UK-government primary sources, both VERIFIED\nDIRECTLY (gov.uk fetched and HTML-parsed). The UKSPF prospectus's ministerial\nforeword: *\"This is our vision and ambition for the new £2.6 billion UK\nShared Prosperity Fund (UKSPF), which succeeds the old EU structural funds.\"*\nThe UKSPF's own FAQ page, same status, different framing: *\"The UKSPF is not\na direct replacement for EU structural funds.\"* Both are genuine, current\ngov.uk text — reported per `Research.1.md` §3's instruction to report\nconflicts rather than adjudicate them. Neither document names the specific\npredecessor programmes (ERDF/ESF) — a targeted acronym search came back\nNOT FOUND in both. A subagent (not independently re-verified) separately\nfound an Orkney Islands Council committee report naming ERDF and ESF\nexplicitly as the programmes replaced, and a North East Lincolnshire Council\nwebpage naming \"ERDF and ESIF.\" **None of this was minted as a graph edge**,\nbecause the relationship these documents describe — one funding mechanism\nsucceeding/replacing another — has no home in this corpus's four\n`relationship_type` values, all of which describe one document being used as\na computational or methodological *input* to another, not one programme\nsuperseding another in time. Recorded verbatim in the JSON's `_dropped`\narray as a `note`-type entry, flagged explicitly for whoever next wants to\npropose a `supersedes` relationship type rather than force-fitting `cites`."
+    },
+    {
+      "heading": "4. The CIPFA Code citation chain needed two legislative hops, not one — and the two hops are in different Acts",
+      "body": "**What this rests on**: direct legislation.gov.uk reads of Local Government\nAct 2003 s.21(2) (VERIFIED DIRECTLY: *\"reference to proper practices... is\nto those accounting practices... which are contained in a code of practice\nor other document which is identified for the purposes of this provision by\nregulations made by the Secretary of State\"* — creates the concept, names no\none) and The Local Authorities (Capital Finance and Accounting) (England)\nRegulations 2003, reg. 31 (VERIFIED DIRECTLY: *\"...'Code of Practice on Local\nAuthority Accounting in the United Kingdom' published by CIPFA...\"* — the SI\nthat actually names CIPFA). The Accounts and Audit Regulations 2015, checked\ndirectly (regs. 2-4), uses the phrase \"proper practices\" but does not itself\nname CIPFA in the sections read. Worth knowing before assuming a single\ncitation will do the job for a UK accounting-standard edge the way one\ncitation did for the Netherlands' BBV."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "This session's own first edit to `Research.1.md`'s §9 id block was wrong and was caught and fixed within the same session, before this hand-off was written.** The ten new `gb-*` ids were initially inserted immediately after `cz-cnb-bop`, breaking the block's alphabetical ordering (the correct position, next to the pre-existing `gb-ons-national-accounts`, is between `fr-insee-national-accounts` and `gr-elstat-national-accounts`). No `G.*.md` file was written or published with the wrong ordering in place — caught during the same session's own review before this hand-off — but recorded here anyway per this project's own convention that a session finding itself wrong and not recording it \"has actively damaged the corpus.\" In this case the correction is to the session's own live edit, not to a predecessor's, but the same transparency rule applies."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping: merge `Research.2.md` and `Research.EU.md`. Closed",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph. Opened, not closed.",
+      "items": []
+    },
+    {
+      "letter": "G",
+      "label": "The wide-Europe depth pass.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Build the CYPS (Children and Young People's Services) RNF annex properly** — Census 2021, National Pupil Database, CiN and CLA datasets are named but not yet verified with the same table-code precision as the ASC annex. See `uk-local-government-finance.json`'s `_dropped` array."
+    },
+    {
+      "n": 2,
+      "text": "Mint a second council's CIPFA-Code citation** (York was found but not independently re-verified) to corroborate Wolverhampton's."
+    },
+    {
+      "n": 3,
+      "text": "Independently verify the Orkney Islands Council / North East Lincolnshire Council ERDF/ESF/ESIF citations** — real leads, subagent- read only, and in any case blocked on the `supersedes` relationship-type gap (Finding 3) until that's resolved."
+    },
+    {
+      "n": 4,
+      "text": "Propose (or decide against) a `supersedes` relationship_type** for this corpus's schema — the concrete UKSPF/EU-structural-funds case is ready to go the moment this is decided; it is a data-modelling decision, not a research one, and belongs to Thomas or whoever owns the schema."
+    },
+    {
+      "n": 5,
+      "text": "Norway's KOSTRA** — the scouting report's own top pick, bilingual, flagged as likely the fastest of the un-built candidates to verify. **Carried forward from `G.48.md` and `G.47.md`, unchanged, still open**: all items on both files' own lists. None were touched this session."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.49.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — v3.3, §9 now 105 ids."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/uk-local-government-finance.json`** and **`src/data/research/nl-municipal-finance.json`** — both slices' own `_dropped` arrays are the direct continuation points for cheap checks 1-3 above and `G.48.md`'s own outstanding items."
+    },
+    {
+      "n": 4,
+      "text": "A browser**, for the outstanding cheap checks."
+    },
+    {
+      "n": 5,
+      "text": "The same caution `G.48.md` already carries**: prefer `curl` + direct text extraction (`pypdf` for PDFs, HTML-tag-stripping for web pages) over WebFetch's AI-summariser for anything that will become a quoted `basis` field. This session confirmed the method works cleanly on legislation.gov.uk and gov.uk, the same way it worked on wetten.overheid.nl and CBS for the Netherlands pass — UK government sites are not gated."
+    },
+    {
+      "n": 6,
+      "text": "Unresolved cross-cutting question for whoever owns the schema**: does this corpus want a `supersedes` relationship_type? The UKSPF/EU- structural-funds finding (Finding 3) is ready to become an edge the moment that's decided. ---"
+    }
+  ],
+  "session_conditions": "**Direct continuation of the same working session as `G.48.md`**, not a new\nthread — Thomas asked, after the Netherlands pass, to pick three more\nnon-EU European countries and begin analyzing them the same way. Two-stage\napproach, chosen by Thomas from an explicit menu of options (light-scout-\nthen-deep-dive-one / deep-dive-all-three / just-log-the-picks): first a fast\nreconnaissance pass (one subagent per country, Switzerland/Norway/UK,\nexplicitly told NOT to extract verbatim quotes yet, just characterize what\nexists), then a full deep-dive on the winner using the same three-subagent\nresearch pattern as the Netherlands pass, followed by direct primary-source\nre-verification of every quote before minting.\n\n**What was read in full this session**: every legislation.gov.uk statute\nsection cited below (downloaded via `curl`, HTML tag-stripped with a Python\nregex — the same clean, gate-free method that worked for wetten.overheid.nl\non the Netherlands pass); the Adult Social Care Relative Needs Formula\ntechnical annex PDF (24 pages, `pypdf`-extracted in full); the City of\nWolverhampton Statement of Accounts 2024-25 (311 pages, `pypdf`-extracted in\nfull); the Stevenage Borough Council NNDR1 tax-base report (22 pages,\n`pypdf`-extracted in full); the RO-returns technical notes page and the\nUKSPF prospectus/FAQ pages (gov.uk, HTML tag-stripped directly).\n\n**What was not independently re-verified**: the Switzerland and Norway\nscouting reports (deliberately — scouting is not meant to be\nverification-grade, see below); the Children and Young People's Services\nRelative Needs Formula annex (only the Adult Social Care annex was fully\nverified); City of York Council's own CIPFA-Code citation (a second,\nuncorroborated example — Wolverhampton alone carries the minted edge); the\nOrkney Islands Council and North East Lincolnshire Council documents naming\nERDF/ESF/ESIF explicitly (subagent-read only, and in any case not usable as\nedge evidence — see Findings 3)."
+}

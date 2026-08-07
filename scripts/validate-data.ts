@@ -1,0 +1,483 @@
+/**
+ * Data integrity check. Run with `npm run validate`.
+ *
+ * Prints structural problems, then both authority rankings side by side.
+ * The two rankings disagreeing sharply is usually a sign of bad edge data,
+ * not of the weighting being clever — that comparison is the point of this.
+ */
+import { dependencies, droppedNotes, loadIssues, relations, reports } from '../src/data'
+import { DROPPED_LEAD_REASONS } from '../src/lib/types'
+import {
+  buildGraph,
+  contains,
+  isDocumented,
+  isOfficial,
+  isRanked,
+  isTerminus,
+  RELATIONSHIP_WEIGHT,
+  RETAINED_FRACTION,
+  rolledUpAuthority,
+  SELF_RETENTION,
+  validate,
+} from '../src/lib/graph'
+
+if (loadIssues.dangling.length) {
+  console.log('\nDROPPED — edges pointing at reports not yet researched')
+  for (const d of loadIssues.dangling) console.log(`  · ${d}`)
+}
+if (loadIssues.orphans.length) {
+  // No longer dropped, as of V0.12 — they are kept and shelved in a margin. The
+  // count is still printed because it is worth watching: a sweep that adds fifty
+  // islands has added territory in the most literal sense.
+  console.log('\nISOLATED — reports with no surviving edge, kept and shelved')
+  for (const o of loadIssues.orphans) console.log(`  · ${o}`)
+}
+if (loadIssues.duplicateEdges.length) {
+  console.log(
+    '\nSUPERSEDED — edges defined twice (last wins; the earlier copy was dropped)',
+  )
+  for (const d of loadIssues.duplicateEdges) console.log(`  · ${d}`)
+}
+
+const issues = validate(reports, dependencies)
+const errors = issues.filter((i) => i.severity === 'error')
+const warnings = issues.filter((i) => i.severity === 'warning')
+
+console.log(`\n${reports.length} reports, ${dependencies.length} dependencies\n`)
+
+if (errors.length) {
+  console.log('ERRORS')
+  for (const e of errors) console.log(`  ✗ ${e.message}`)
+  console.log()
+}
+if (warnings.length) {
+  console.log('WARNINGS')
+  for (const w of warnings) console.log(`  ! ${w.message}`)
+  console.log()
+}
+if (!issues.length) console.log('No structural issues.\n')
+
+const graph = buildGraph(reports, dependencies)
+
+/**
+ * The commercial-source invariant.
+ *
+ * The whole case for offering a toggle that hides commercial sources is that
+ * hiding them cannot reshuffle the graph — no size changes, no rank changes, no
+ * re-layout — so the two views differ only in which nodes are drawn. That rests
+ * on commercial nodes being outside the authority calculation, which is easy to
+ * state and easy to break later: one outgoing edge from a commercial node, or
+ * one caller reaching past `isOfficial`, and the property quietly dies.
+ *
+ * So it is checked rather than asserted. Build the graph again with the
+ * commercial nodes and their edges removed entirely, and every official score
+ * must come back identical.
+ */
+const commercial = reports.filter((r) => !isOfficial(r))
+
+if (commercial.length) {
+  const officialOnly = reports.filter(isOfficial)
+  const officialIds = new Set(officialOnly.map((r) => r.id))
+  const withoutCommercial = buildGraph(
+    officialOnly,
+    dependencies.filter(
+      (d) =>
+        officialIds.has(d.source_report_id) && officialIds.has(d.target_report_id),
+    ),
+  )
+
+  let worst = 0
+  let worstId = ''
+  for (const n of withoutCommercial.nodes) {
+    const drift = Math.abs(n.authority - (graph.byId.get(n.id)?.authority ?? 0))
+    if (drift > worst) {
+      worst = drift
+      worstId = n.id
+    }
+  }
+
+  // Commercial nodes that depend on something would transfer rank if anyone
+  // ever put them back in the calculation, so flag the shape, not just the sum.
+  const notSinks = commercial.filter(
+    (r) => (graph.byId.get(r.id)?.out_degree ?? 0) > 0,
+  )
+
+  console.log(
+    `COMMERCIAL SOURCES — ${commercial.length} node${commercial.length === 1 ? '' : 's'}, outside the authority calculation`,
+  )
+  for (const r of commercial) {
+    const n = graph.byId.get(r.id)
+    console.log(`  · ${r.title} — ${n?.in_degree ?? 0} depend on it`)
+  }
+  console.log(
+    worst < 1e-12
+      ? '  ✓ official scores identical with and without them — the toggle reshuffles nothing'
+      : `  ✗ official scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
+  )
+  if (notSinks.length) {
+    console.log(
+      `  ! not a sink: ${notSinks.map((r) => r.id).join(', ')} — check the exclusion still holds`,
+    )
+  }
+  console.log()
+}
+
+/**
+ * The terminus invariant.
+ *
+ * Identical in shape to the commercial one and asserted for the same reason: a
+ * terminus is a sink by construction — nothing published sits behind it — and a
+ * sink accruing rank is the sink-leak bug. If this ever drifts, the ranking has
+ * started to depend on how many unpublishable inputs we happened to write down,
+ * which is a fact about our reading and not about the world.
+ *
+ * Printed even when it holds, because a property nothing checks is a property
+ * that quietly stops being true.
+ */
+const termini = reports.filter(isTerminus)
+
+if (termini.length) {
+  const ranked = reports.filter(isRanked)
+  const rankedIds = new Set(ranked.map((r) => r.id))
+  const withoutTermini = buildGraph(
+    ranked,
+    dependencies.filter(
+      (d) => rankedIds.has(d.source_report_id) && rankedIds.has(d.target_report_id),
+    ),
+  )
+
+  let worst = 0
+  let worstId = ''
+  for (const n of withoutTermini.nodes) {
+    const drift = Math.abs(n.authority - (graph.byId.get(n.id)?.authority ?? 0))
+    if (drift > worst) {
+      worst = drift
+      worstId = n.id
+    }
+  }
+
+  const byReason = new Map<string, number>()
+  for (const r of termini) {
+    const k = r.terminal_reason ?? '?'
+    byReason.set(k, (byReason.get(k) ?? 0) + 1)
+  }
+
+  console.log(
+    `TERMINI — ${termini.length} node${termini.length === 1 ? '' : 's'} where a documented chain stops, outside the authority calculation`,
+  )
+  for (const r of termini) {
+    const n = graph.byId.get(r.id)
+    console.log(
+      `  · ${r.title} — ${r.terminal_reason}, ${n?.in_degree ?? 0} depend on it`,
+    )
+  }
+  console.log(
+    `  ${[...byReason].map(([k, v]) => `${v} ${k}`).join(', ')}`,
+  )
+  console.log(
+    worst < 1e-12
+      ? '  ✓ ranked scores identical with and without them — a terminus accrues no rank'
+      : `  ✗ ranked scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
+  )
+  console.log()
+}
+
+/**
+ * The implied-edge invariant.
+ *
+ * Same argument as the commercial one, and load-bearing for a different reason.
+ * If an undocumented edge could move a score, the ranking would depend on what
+ * somebody found plausible, and the evidence standard would quietly stop being
+ * the rule the project is built on. Drawing implied edges at all is only
+ * defensible while this holds.
+ */
+const implied = dependencies.filter((d) => !isDocumented(d))
+
+if (implied.length) {
+  const documentedOnly = buildGraph(
+    reports,
+    dependencies.filter(isDocumented),
+  )
+
+  let worst = 0
+  let worstId = ''
+  for (const n of documentedOnly.nodes) {
+    const drift = Math.abs(n.authority - (graph.byId.get(n.id)?.authority ?? 0))
+    if (drift > worst) {
+      worst = drift
+      worstId = n.id
+    }
+  }
+
+  console.log(
+    `IMPLIED EDGES — ${implied.length}, believed but unsourced, outside the authority calculation`,
+  )
+  for (const d of implied) {
+    console.log(`  · ${d.source_report_id} → ${d.target_report_id}`)
+  }
+  console.log(
+    worst < 1e-12
+      ? '  ✓ scores identical with and without them — showing them reshuffles nothing'
+      : `  ✗ scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
+  )
+
+  // An implied edge is a research lead, not a resting place. Anything sitting
+  // here for a long time is either findable or wrong.
+  const noBasis = implied.filter((d) => (d.basis?.trim().length ?? 0) < 80)
+  if (noBasis.length) {
+    console.log(
+      `  ! thin basis on ${noBasis.length}: an implied edge earns its place by explaining why it is believed`,
+    )
+  }
+  console.log()
+}
+
+/**
+ * The `_dropped` block, read rather than written.
+ *
+ * Three things this catches, all of which had already happened:
+ *   - a note whose edge now exists, which is how BACKLOG.md and V0.7 came to
+ *     recommend researching the Survey of Household Spending edge twice after it
+ *     had been built;
+ *   - a note asserting an edge is unsupportable while that edge sits in the graph
+ *     marked documented, which the corpus asserted both ways for three sessions;
+ *   - research leads filed indistinguishably from settled negatives.
+ */
+const droppedByReason = new Map<string, number>()
+for (const n of droppedNotes) {
+  droppedByReason.set(n.reason, (droppedByReason.get(n.reason) ?? 0) + 1)
+}
+const leads = droppedNotes.filter((n) => DROPPED_LEAD_REASONS.includes(n.reason))
+const contradictions = droppedNotes.filter(
+  (n) =>
+    n.source !== null &&
+    n.target !== null &&
+    dependencies.some(
+      (d) => d.source_report_id === n.source && d.target_report_id === n.target,
+    ),
+)
+
+console.log(`DROPPED — ${droppedNotes.length} dependencies looked for and not taken`)
+for (const [reason, count] of [...droppedByReason].sort((a, b) => b[1] - a[1])) {
+  console.log(`  ${String(count).padStart(3)}  ${reason}`)
+}
+console.log(
+  contradictions.length === 0
+    ? '  ✓ no note describes an edge that now exists'
+    : `  ✗ ${contradictions.length} note(s) describe an edge that IS in the graph — resolve or delete:`,
+)
+for (const c of contradictions) console.log(`      ${c.source} -> ${c.target} (${c.reason})`)
+console.log(
+  `  ${leads.length} are research leads rather than answers — evidence described as existing, node or pass missing`,
+)
+console.log()
+
+/**
+ * Relations — documented relationships that are not dependencies.
+ *
+ * The invariant worth asserting here is a negative one: relations must not be
+ * able to move the ranking. That is guaranteed structurally rather than by
+ * convention, because `buildGraph` takes `(reports, dependencies)` and there is
+ * no overload that accepts relations. The check below is therefore a *type-level*
+ * guarantee restated as prose, plus the two things that can actually go wrong in
+ * the data — a relation missing its evidence, and a relation whose ends do not
+ * both exist as nodes.
+ */
+console.log(`RELATIONS — ${relations.length} documented, non-dependency, unweighted`)
+if (relations.length) {
+  const byType = new Map<string, number>()
+  for (const r of relations) {
+    byType.set(r.relation_type, (byType.get(r.relation_type) ?? 0) + 1)
+  }
+  for (const [type, count] of [...byType].sort((a, b) => b[1] - a[1])) {
+    console.log(`  ${String(count).padStart(3)}  ${type}`)
+  }
+  for (const r of relations) {
+    console.log(`      ${r.source_report_id} -[${r.relation_type}]-> ${r.target_report_id}`)
+  }
+}
+const unevidencedRelations = relations.filter((r) => !r.evidence_url || !r.basis)
+console.log(
+  unevidencedRelations.length === 0
+    ? '  ✓ every relation carries a basis and an evidence_url — required, unlike a dependency'
+    : `  ✗ ${unevidencedRelations.length} relation(s) missing basis or evidence_url:`,
+)
+for (const r of unevidencedRelations) {
+  console.log(`      ${r.source_report_id} -[${r.relation_type}]-> ${r.target_report_id}`)
+}
+if (loadIssues.danglingRelations.length) {
+  // Not necessarily an error. The corpus has more documented `audits` instances
+  // than auditor nodes, and this is where an over-eager conversion shows up.
+  console.log('  ! relations dropped because one end is not a node:')
+  for (const r of loadIssues.danglingRelations) console.log(`      ${r}`)
+}
+if (loadIssues.duplicateRelations.length) {
+  console.log('  ! exact duplicate relations, dropped:')
+  for (const r of loadIssues.duplicateRelations) console.log(`      ${r}`)
+}
+const relationPairsAlsoEdges = relations.filter((r) =>
+  dependencies.some(
+    (d) =>
+      d.source_report_id === r.source_report_id &&
+      d.target_report_id === r.target_report_id,
+  ),
+)
+console.log(
+  `  ${relationPairsAlsoEdges.length} pair(s) carry both a dependency and a relation — legitimate, and worth seeing`,
+)
+for (const r of relationPairsAlsoEdges) {
+  console.log(`      ${r.source_report_id} -> ${r.target_report_id}`)
+}
+console.log(
+  '  ✓ relations never reach buildGraph — its signature is (reports, dependencies)',
+)
+console.log()
+
+/**
+ * The retention invariant.
+ *
+ * Retention became proportional to outgoing weight in V0.8, and the whole point
+ * of that change is that **every report which discloses anything keeps the same
+ * fraction of its own rank**, so disclosing more inputs no longer costs a report
+ * authority and describing an input vaguely no longer earns any.
+ *
+ * Checked rather than trusted, because the property is invisible in the rendered
+ * graph and the previous behaviour survived four sessions of review by looking
+ * exactly like a reasonable constant. Under the old fixed retention this check
+ * would have failed loudly: single-weak-edge nodes kept 66.7% while a node with
+ * three documented inputs kept 30.3%.
+ *
+ * Recomputed here from the edge data rather than read back out of the graph, so
+ * it is an independent statement about the maths and not a tautology.
+ */
+const outWeightById = new Map<string, number>()
+for (const d of dependencies.filter(isDocumented)) {
+  const src = graph.byId.get(d.source_report_id)
+  const tgt = graph.byId.get(d.target_report_id)
+  // Mirror the authority subgraph: commercial nodes and their edges sit outside
+  // the calculation entirely, so they are outside this property too.
+  if (!src || !tgt || !isOfficial(src) || !isOfficial(tgt)) continue
+  const w = d.strength ?? RELATIONSHIP_WEIGHT[d.relationship_type]
+  outWeightById.set(d.source_report_id, (outWeightById.get(d.source_report_id) ?? 0) + w)
+}
+
+const retainedSpread = [...outWeightById.values()].map(
+  (outWeight) => (SELF_RETENTION * outWeight) / (SELF_RETENTION * outWeight + outWeight),
+)
+const retainedMin = Math.min(...retainedSpread)
+const retainedMax = Math.max(...retainedSpread)
+
+console.log('RETENTION')
+console.log(
+  `  ${outWeightById.size} reports disclose at least one input, out-degree-weighted span ${Math.min(...outWeightById.values()).toFixed(2)}–${Math.max(...outWeightById.values()).toFixed(2)}`,
+)
+console.log(
+  retainedMax - retainedMin < 1e-12
+    ? `  ✓ every one keeps exactly ${(RETAINED_FRACTION * 100).toFixed(1)}% of its own rank — disclosure changes where authority goes, not how much is kept`
+    : `  ✗ retained fraction VARIES from ${(retainedMin * 100).toFixed(1)}% to ${(retainedMax * 100).toFixed(1)}% — the proportional-retention property is broken`,
+)
+console.log()
+
+/**
+ * Cadence coverage.
+ *
+ * The reference period is the transmission rate — when a dependent actually
+ * reads its source — and it is what milestone 3's calendar will run on. Absent
+ * means no document read so far states it, so this number is a research
+ * backlog rather than a defect, and it is worth watching it climb.
+ */
+const withPeriod = dependencies.filter((d) => d.reference_period)
+const changeRate = reports.filter((r) => r.changes_per_year !== undefined)
+
+console.log('CADENCE')
+console.log(
+  `  transmission — ${withPeriod.length} of ${dependencies.length} edges state when the reading happens (${Math.round((withPeriod.length / dependencies.length) * 100)}%)`,
+)
+console.log(
+  changeRate.length === 1
+    ? '  change rate  — 1 node publishes more often than it moves'
+    : `  change rate  — ${changeRate.length} nodes publish more often than they move`,
+)
+
+const anchors = new Map<string, number>()
+for (const d of withPeriod) {
+  const p = d.reference_period!
+  const key =
+    p.window_months === 0
+      ? `point at ${p.ends ?? 'no fixed date'}`
+      : `${p.window_months}mo to ${p.ends ?? 'rolling'}`
+  anchors.set(key, (anchors.get(key) ?? 0) + 1)
+}
+console.log('  documented reference periods:')
+for (const [k, n] of [...anchors].sort((a, b) => b[1] - a[1])) {
+  console.log(`    ${String(n).padStart(3)}  ${k}`)
+}
+console.log()
+
+// Containment. Printed rather than left in the data because the whole point of
+// `part_of` is that the split it records is invisible in the ranking below —
+// see the field comment in types.ts for the measurement that decided it.
+const containers = [...new Set(reports.filter((r) => r.part_of).map((r) => r.part_of!))]
+if (containers.length) {
+  console.log('CONTAINMENT — one programme, more than one node')
+  for (const id of containers) {
+    const parent = graph.byId.get(id)
+    if (!parent) continue
+    const parts = contains(graph, id)
+    const rolled = rolledUpAuthority(graph, id)
+    console.log(`  ${parent.title} — ${parent.authority.toFixed(3)} on its own`)
+    for (const p of parts) {
+      console.log(`    contains  ${p.title} — ${p.authority.toFixed(3)}`)
+    }
+    console.log(`    under one masthead: ${rolled.toFixed(3)}`)
+  }
+  console.log(
+    '  · a reading aid only — nothing here sizes a node or moves a rank\n' +
+      '  · a true merge scores higher still, because rank compounds through the\n' +
+      '    upstreams and a sum cannot: 0.841 merged against 0.731 summed',
+  )
+  console.log()
+}
+
+const byAuthority = [...graph.nodes].sort((a, b) => b.authority - a.authority)
+const byInDegree = [...graph.nodes].sort((a, b) => b.in_degree - a.in_degree)
+
+console.log('RANKING — weighted authority (drives node size) vs raw in-degree')
+console.log(
+  '  ' +
+    'weighted'.padEnd(34) +
+    'auth'.padStart(6) +
+    '   ' +
+    'raw in-degree'.padEnd(34) +
+    'in',
+)
+console.log('  ' + '-'.repeat(83))
+for (let i = 0; i < graph.nodes.length; i++) {
+  const a = byAuthority[i]
+  const b = byInDegree[i]
+  console.log(
+    '  ' +
+      `${i + 1}. ${a.title}`.slice(0, 33).padEnd(34) +
+      a.authority.toFixed(3).padStart(6) +
+      '   ' +
+      `${i + 1}. ${b.title}`.slice(0, 33).padEnd(34) +
+      String(b.in_degree),
+  )
+}
+
+const disagreements = graph.nodes.filter((n) => {
+  const wRank = byAuthority.findIndex((x) => x.id === n.id)
+  const dRank = byInDegree.findIndex((x) => x.id === n.id)
+  return Math.abs(wRank - dRank) >= 4
+})
+
+console.log()
+if (disagreements.length) {
+  console.log('Rank disagreements of 4+ places (inspect these edges):')
+  for (const d of disagreements) console.log(`  ? ${d.title}`)
+} else {
+  console.log('No large rank disagreements between weighted and raw.')
+}
+console.log()
+
+process.exit(errors.length ? 1 : 0)

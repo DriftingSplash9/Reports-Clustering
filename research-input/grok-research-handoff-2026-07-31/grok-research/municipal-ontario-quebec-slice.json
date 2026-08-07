@@ -1,0 +1,126 @@
+{
+  "_layer": "MAIN DOCUMENTED / MUNICIPAL FUNDING FORMULAS",
+  "_status": "DRAFT SLICE — Part B only; every claim must be backed by a Part A quote already extracted. Do not promote without adjudication.",
+  "_note": "Ontario OMPF 2026 Technical Guide Appendix F + Quebec F-2.1 r. 11 and M-22.1 r. 1.2 + HPP funding-model update (Auditor General) + Legal Aid Ontario LIM reference. Compact slice. Isolated / sparse nodes allowed.",
+  "reports": [
+    {
+      "id": "on-ompf",
+      "title": "Ontario Municipal Partnership Fund (OMPF)",
+      "publisher": "Ontario Ministry of Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Province’s main unconditional grant to municipalities. 2026 program $600 million. Allocations calculated from a defined set of data elements listed in the Technical Guide Appendix F.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual allocation notices and Technical Guide.",
+      "url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "mpac-assessment",
+      "title": "Municipal Property Assessment Corporation assessment roll / Returned Roll",
+      "publisher": "Municipal Property Assessment Corporation (MPAC)",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Property assessment data used as direct input to OMPF (Weighted Assessment, Number of Households, Farm Land Area).",
+      "domains": ["assessment", "municipal-finance"]
+    },
+    {
+      "id": "qc-perequation",
+      "title": "Régime de péréquation (municipal equalization scheme)",
+      "publisher": "Québec (Ministère des Affaires municipales et de l’Habitation)",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Quebec",
+      "description": "Three-part equalization scheme under the Act respecting municipal taxation. Uses standardized property value per inhabitant and average value of dwellings derived from municipal assessment rolls and population figures.",
+      "releases_per_year": 1,
+      "url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/F-2.1,%20r.%2011",
+      "domains": ["municipal-finance", "assessment"]
+    },
+    {
+      "id": "isq-vitalite-economique",
+      "title": "Indice de vitalité économique (Institut de la statistique du Québec)",
+      "publisher": "Institut de la statistique du Québec",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Quebec",
+      "description": "Economic vitality index published by ISQ; used as an explicit input in the apportionment of the amount established under the Act respecting the Ministere des Affaires municipales (M-22.1, r. 1.2).",
+      "releases_per_year": 1,
+      "domains": ["municipal-finance", "population"]
+    },
+    {
+      "id": "on-hpp",
+      "title": "Ontario Homelessness Prevention Program (HPP)",
+      "publisher": "Ontario Ministry of Municipal Affairs and Housing",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Consolidated provincial funding program for Service Managers addressing homelessness. Post-2023 allocation model uses socioeconomic indicators drawn from Statistics Canada and residual provincial benefit caseloads.",
+      "releases_per_year": 1,
+      "domains": ["municipal-finance", "health"]
+    },
+    {
+      "id": "on-legal-aid-ontario",
+      "title": "Legal Aid Ontario financial eligibility thresholds",
+      "publisher": "Legal Aid Ontario",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Financial eligibility thresholds for certificates and duty counsel. Historically aligned with Statistics Canada Low Income Measure (LIM).",
+      "domains": ["municipal-finance"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "on-ompf",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "2026 OMPF Technical Guide Appendix F: Weighted Assessment sourced from ‘2025 Returned Roll and 2026 starting tax ratios — Municipal Property Assessment Corporation (MPAC) and municipal tax rate bylaws’; Number of Households from ‘MPAC Returned Roll’; Farm Land Area from ‘MPAC and Ontario Parcel’.",
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+    },
+    {
+      "source_report_id": "on-ompf",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "2026 OMPF Technical Guide Appendix F lists multiple 2021 Statistics Canada series as direct inputs: Median Household Income, Rural and Small Community Measure, Per Cent of Population Above Low-Income Threshold, Ratio of Working Age to Dependent Population, Employment Rate, Municipal Land Area.",
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+    },
+    {
+      "source_report_id": "qc-perequation",
+      "target_report_id": null,
+      "relationship_type": "uses_data_from",
+      "basis": "F-2.1, r. 11 s. 9: standardized property value is established from the property assessment roll as reproduced in the municipal summary. Population under s. 8 is the highest of the current or prior three years as it exists on 1 January (decree-based). No named statistical agency in the core regulation.",
+      "evidence_url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/F-2.1,%20r.%2011"
+    },
+    {
+      "source_report_id": "qc-perequation",
+      "target_report_id": "isq-vitalite-economique",
+      "relationship_type": "uses_data_from",
+      "basis": "Companion regulation M-22.1, r. 1.2 s. 3(2°): the economic vitality index is ‘celui établi dans la dernière liste publiée par l’Institut de la statistique du Québec pour cet indice au 1er septembre de l’année financière qui précède l’année financière donnée’.",
+      "evidence_url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/M-22.1,%20r.%201.2"
+    },
+    {
+      "source_report_id": "on-hpp",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Governing framework: Housing Services Act, 2011 and O. Reg. 367/11. The specific post-2023 allocation model (four socioeconomic indicators from Statistics Canada Census data — deep core housing need, low-income measure, Indigenous population, youth population — plus Ontario Works and ODSP caseload data) is documented in the Auditor General of Ontario follow-up (2023) as implemented via HPP Program Guidelines and Transfer Payment Agreements. The primary statute itself does not name the statistical series.",
+      "evidence_url": "https://www.auditor.on.ca/en/content/annualreports/arreports/en23/1-07FU_homelessness_en23.pdf"
+    },
+    {
+      "source_report_id": "on-legal-aid-ontario",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Legal Aid Services Act, 2020 and Legal Aid Services Rules (s. 12, as amended by Rule 2025/1 of 24 January 2025). The Rules prescribe the dollar thresholds. Conceptual alignment with the Statistics Canada Low Income Measure (LIM) is stated in Legal Aid Ontario’s 2023-24 Annual Report: ‘LAO’s current financial eligibility thresholds are aligned with the 2011 Low Income Measure (LIM). The Low Income Measure threshold developed by Statistics Canada is defined as households with an annual income that is less than 50% of the average income of Canadian households.’",
+      "evidence_url": "https://www.legalaid.on.ca/wp-content/uploads/2023-24-Annual-Report_EN.pdf"
+    }
+  ],
+  "_dropped": [],
+  "_notes": [
+    "statcan-census-population is used as a convenient existing node id for the cluster of 2021 Statistics Canada measures named in OMPF Appendix F and for the LIM / core-housing-need indicators used by HPP and LAO; individual table identifiers can be refined later if needed.",
+    "Quebec core equalization does not name Statistics Canada or ISQ for the primary assessment/population inputs; the ISQ link is confined to the separate QST-growth apportionment regulation.",
+    "Municipal FIR and OPTA appear in OMPF Appendix F but are left as AGENCY ONLY / unnamed for now (no stable publication title extracted).",
+    "HPP also consumes Ontario Works and ODSP caseload data (residual benefit programs already examined in Session 1).",
+    "No soft or financing edges introduced."
+  ]
+}

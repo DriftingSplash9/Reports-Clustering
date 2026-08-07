@@ -1,0 +1,164 @@
+{
+  "slice": "equalization-named-products-closed",
+  "version": "1.0",
+  "date": "2026-07-31",
+  "description": "Closes the highest-value named-product leads from SOR/2007-303 (Equalization and Territorial Formula Financing). Nodes and edges are limited to products explicitly named in the regulation and matched to live Statistics Canada programmes or tables. DIVISION 1 vs DIVISION 2 (Nova Scotia) scope is recorded on every edge. Commercial-source rule applied to R.L. Polk.",
+  "reports": [
+    {
+      "id": "statcan-provincial-territorial-economic-accounts",
+      "name": "Provincial and Territorial Economic Accounts (Provincial and Territorial GDP by Income and by Expenditure Accounts)",
+      "publisher": "Statistics Canada",
+      "imdb_record": "1902",
+      "cadence": "Annual",
+      "domains": ["national-accounts", "provincial-accounts", "equalization"],
+      "notes": "Primary product named in DIVISION 1 definitions of household final consumption expenditures, residential renovations, and residential housing transfers."
+    },
+    {
+      "id": "statcan-provincial-supply-use-tables",
+      "name": "Provincial Supply and Use Tables (detail under Supply, Use and Input-Output Tables)",
+      "publisher": "Statistics Canada",
+      "imdb_record": "1401",
+      "table_example": "36-10-0478-01",
+      "cadence": "Annual",
+      "domains": ["national-accounts", "supply-use", "equalization"],
+      "notes": "Names specific matrices (summary level final demand matrix and intermediate input matrix) in DIVISION 1. Also used for GDP at factor cost in DIVISION 2."
+    },
+    {
+      "id": "statcan-canadian-government-finance-statistics",
+      "name": "Canadian Government Finance Statistics",
+      "publisher": "Statistics Canada",
+      "imdb_record": "5218",
+      "cadence": "Annual",
+      "domains": ["government-finance", "equalization", "gfs"],
+      "notes": "Named in both DIVISION 1 and Territorial Formula Financing sections for fiscal capacity measures."
+    },
+    {
+      "id": "statcan-oil-gas-extraction-survey",
+      "name": "Annual Oil and Gas Extraction Survey (OGEX)",
+      "publisher": "Statistics Canada",
+      "imdb_record": "2178",
+      "cadence": "Annual",
+      "domains": ["energy", "manufacturing", "equalization"],
+      "notes": "Named in DIVISION 2 for oil and gas volume and value bases. Directly relevant to the existing Alberta energy-royalty cluster."
+    },
+    {
+      "id": "statcan-fuel-sales-road-vehicles",
+      "name": "Sales of fuel used for road motor vehicles, annual",
+      "publisher": "Statistics Canada",
+      "table": "23-10-0066-01",
+      "cadence": "Annual",
+      "domains": ["transportation", "energy", "equalization"],
+      "notes": "Modern table number already used in the general Interpretation section of SOR/2007-303 (s. 1(1))."
+    },
+    {
+      "id": "statcan-alcoholic-beverage-sales",
+      "name": "Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type",
+      "publisher": "Statistics Canada",
+      "table": "10-10-0011-01",
+      "former_cansim": "183-0024",
+      "cadence": "Annual",
+      "domains": ["retail", "government-business-enterprises", "equalization"],
+      "notes": "Live table is the direct successor of the CANSIM number still cited in DIVISION 2. TFF uses the modern number."
+    },
+    {
+      "id": "statcan-agricultural-balance-sheet",
+      "name": "Balance sheet of the agricultural sector as at December 31st",
+      "publisher": "Statistics Canada",
+      "table": "32-10-0056-01",
+      "former_cansim": "002-0020",
+      "cadence": "Annual",
+      "domains": ["agriculture", "equalization"],
+      "notes": "DIVISION 2 only. TFF measures the same conceptual farm value from the Census of Agriculture instead."
+    },
+    {
+      "id": "statcan-vehicle-registrations",
+      "name": "Vehicle Registrations (legacy CANSIM 405-0004 / Survey 2747)",
+      "publisher": "Statistics Canada",
+      "imdb_record": "2747",
+      "legacy_cansim": "405-0004",
+      "cadence": "Annual",
+      "domains": ["transportation", "equalization"],
+      "notes": "DIVISION 2 only. Regulation contains an explicit Ministerial fallback if Statistics Canada ceases to produce the determination."
+    },
+    {
+      "id": "rl-polk-canadian-international-registration-manual",
+      "name": "R.L. Polk & Co. publication Canadian and International Registration Manual",
+      "publisher": "R.L. Polk & Co. (later World Data Corp / Polk)",
+      "cadence": "Recurring commercial publication",
+      "domains": ["commercial-source", "transportation", "equalization"],
+      "notes": "Commercial-source rule. Named verbatim in SOR/2007-303 s. 8(1)(i) for weighted average licence fees. Third commercial product found inside a Canadian federal funding formula."
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-provincial-territorial-economic-accounts",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 3.1 (DIVISION 1): household final consumption expenditures, residential renovations, and residential housing transfers 'as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts'",
+      "scope": "DIVISION 1 (all ten provinces)"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-provincial-supply-use-tables",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 3.1 (DIVISION 1): capital and intermediate input expenditures from the Provincial Supply and Use Tables’ summary level final demand matrix and intermediate input matrix; also s. 8(1)(z) (DIVISION 2) for GDP at factor cost",
+      "scope": "DIVISION 1 + DIVISION 2"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-canadian-government-finance-statistics",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 5(b)(ii) (DIVISION 1) and s. 19(1)(b)(ii) (TFF): data prepared by Statistics Canada for the purpose of the Government Finance Statistics",
+      "scope": "DIVISION 1 + Territorial Formula Financing"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-oil-gas-extraction-survey",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 8(1)(p) and parallel oil/gas provisions (DIVISION 2): volume and value 'as determined by Statistics Canada on the basis of its survey Oil and Gas Extraction'",
+      "scope": "DIVISION 2 (Nova Scotia)"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-fuel-sales-road-vehicles",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 1(1) (general Interpretation): fuel quantities 'as determined by Statistics Canada for the purpose of table 23-10-0066-01'",
+      "scope": "General (applies across the instrument)"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-alcoholic-beverage-sales",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 19(1)(f) (TFF) uses modern table 10-10-0011-01; DIVISION 2 s. 8(1)(j) still cites predecessor CANSIM 183-0024",
+      "scope": "Primarily TFF + DIVISION 2 succession"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-agricultural-balance-sheet",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 8(1)(z) (DIVISION 2): farm land value from CANSIM table 002-0020 (now 32-10-0056-01)",
+      "scope": "DIVISION 2 only"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "statcan-vehicle-registrations",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 8(1)(h) and (i) (DIVISION 2): registrations from CANSIM table 405-0004 (current Vehicle Registrations programme, Survey 2747). Regulation includes Ministerial fallback.",
+      "scope": "DIVISION 2 only"
+    },
+    {
+      "from": "fiscal-equalization-program",
+      "to": "rl-polk-canadian-international-registration-manual",
+      "type": "uses_data_from",
+      "basis": "SOR/2007-303 s. 8(1)(i) (DIVISION 2): weighted average licence fees calculated from data in the R.L. Polk & Co. publication Canadian and International Registration Manual",
+      "scope": "DIVISION 2 only",
+      "commercial_source": true
+    }
+  ],
+  "notes": [
+    "All edges are strictly limited to products named in SOR/2007-303. No inference or soft methodology edges.",
+    "DIVISION 2 (Nova Scotia) retains several CANSIM-era citations that have modern successors; succession is recorded but not treated as a new statutory edge.",
+    "R.L. Polk is admitted under the commercial-source rule already used for J.D. Power and ICE Brent.",
+    "This slice closes the highest-value leads identified in equalization-named-products.json. Remaining lower-priority or ambiguous leads stay in the original file."
+  ]
+}

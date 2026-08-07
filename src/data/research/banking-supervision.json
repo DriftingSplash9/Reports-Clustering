@@ -1,0 +1,117 @@
+{
+  "_slice": "Banking and financial regulation",
+  "_researched": "2026-07-28",
+  "_note": "The first banking nodes in the graph, and the first international standard with national implementations on both sides of the border. Read the two chains together and the shape is the same one SNA 2008 already shows: a standard written in Basel that no legislature voted on, implemented as binding capital rules on Canadian banks, and separately as a weekly balance sheet aggregate in Washington. Note what this slice does NOT do: it does not connect to the rest of the graph. See _dropped.",
+  "reports": [
+    {
+      "id": "bis-basel-framework",
+      "title": "Basel Framework",
+      "publisher": "Basel Committee on Banking Supervision, Bank for International Settlements",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The consolidated international standard for bank capital, liquidity and risk measurement, maintained by the Basel Committee and published by the BIS. Not law anywhere; adopted into binding national rules by member jurisdictions, which is why national capital guidelines carry Basel paragraph numbers in their margins.",
+      "releases_per_year": 1,
+      "cadence_note": "Maintained as a living consolidated framework with dated amendments rather than issued editions. Filed as annual for the same reason SNA 2008 is — the enum has no bucket for a standard.",
+      "last_updated": null,
+      "url": "https://www.bis.org/basel_framework/",
+      "domains": [
+        "financial-regulation",
+        "banking"
+      ]
+    },
+    {
+      "id": "osfi-car-guideline",
+      "title": "Capital Adequacy Requirements (CAR) Guideline",
+      "publisher": "Office of the Superintendent of Financial Institutions",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The binding capital rules for Canadian banks, federal credit unions, and federally regulated trust and loan companies. Reissued each year across nine chapters covering the definition of capital, credit risk, operational risk, securitization, counterparty risk and market risk. Determines how much capital every Canadian bank must hold against every exposure.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/capital-adequacy-requirements-car-guideline-2027",
+      "domains": [
+        "financial-regulation",
+        "banking"
+      ]
+    },
+    {
+      "id": "ffiec-call-report",
+      "title": "Consolidated Reports of Condition and Income (Call Report)",
+      "publisher": "Federal Financial Institutions Examination Council",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The quarterly regulatory filing every US commercial bank must submit, giving a full balance sheet and income statement per institution. The authoritative census of American banking against which higher-frequency estimates are benchmarked.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.fdic.gov/resources/bankers/bank-financial-reports/index.html",
+      "domains": [
+        "banking",
+        "financial-regulation"
+      ]
+    },
+    {
+      "id": "fed-h8",
+      "title": "Assets and Liabilities of Commercial Banks in the United States (H.8)",
+      "publisher": "Federal Reserve Board of Governors",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Weekly estimated aggregate balance sheet for all US commercial banks, published each Friday afternoon. The Federal Reserve's oldest data collection, originating in the needs of the First World War, and the highest-frequency read on bank credit conditions available anywhere.",
+      "releases_per_year": 52,
+      "last_updated": null,
+      "url": "https://www.federalreserve.gov/releases/h8/current/default.htm",
+      "domains": [
+        "banking",
+        "monetary-policy"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "osfi-car-guideline",
+      "target_report_id": "bis-basel-framework",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Chapter 1 states it directly: 'This chapter is drawn from the Basel Committee on Banking Supervision (BCBS) Basel Framework published on the Bank for International Settlements (BIS) website.' The dependency is visible on almost every page — individual requirements carry their Basel paragraph number in square brackets, so 'RBC 20.4' sits at the end of a rule binding on Canadian banks.",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/capital-adequacy-requirements-car-2026-chapter-1-overview-risk-based-capital-requirements"
+    },
+    {
+      "source_report_id": "fed-h8",
+      "target_report_id": "ffiec-call-report",
+      "relationship_type": "calculated_from",
+      "basis": "'The H.8 estimates are primarily based on the FR 2644 reporting form ... and quarterly Consolidated Reports of Condition and Income (Call Reports) for those commercial banks that are not included in the FR 2644 panel.' The large-bank panel is defined by ranking 'based on the commercial bank Call Reports to which the H.8 release data had been most recently benchmarked' — the weekly estimate is a sample tethered to the quarterly census.",
+      "evidence_url": "https://www.federalreserve.gov/releases/h8/about.htm",
+      "reference_period": {
+        "readings_per_year": 4,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "The weekly H.8 sample is tethered to the 'quarterly Consolidated Reports of Condition and Income', against which it is benchmarked."
+      }
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "banking cluster -> rest of graph",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "SUPERSEDED IN PART, V0.8. The structural claim is no longer true: the graph is one connected component, and remains so over documented edges alone, because later slices found bridges (fed-z1 reaches ffiec-call-report on one side and sna-2008 and bea-gdp on the other; osfi-car-guideline reaches bis-basel-framework). Kept because the substantive half still stands and is still worth research: no document has been found putting bank credit conditions into the macroeconomic releases, even though the Monetary Policy Report and the Fed's decisions plainly rest on them. What was a component boundary is now a thin seam — several of these bridges are single edges whose removal would split the graph again."
+    },
+    {
+      "edge": "fed-h8 -> fr-2644",
+      "source": "fed-h8",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "The H.8's primary input is the FR 2644 weekly reporting form from a panel of about 850 banks. It is not modelled because the individual respondent micro data is confidential and the form is a collection instrument rather than a published release. The graph's node rule is 'real, named, recurring official release' — a confidential form fails it, even though it is the single largest input to a weekly public number."
+    },
+    {
+      "edge": "us-basel-implementation -> bis-basel-framework",
+      "source": null,
+      "target": "bis-basel-framework",
+      "reason": "no-node-yet",
+      "why": "The Federal Reserve maintains its own Basel Regulatory Framework page and US capital rules are Basel-derived in the same way OSFI's are. Not read this pass, so the American half of the Basel chain is missing. It would be the obvious symmetry and would strengthen Basel considerably."
+    }
+  ]
+}

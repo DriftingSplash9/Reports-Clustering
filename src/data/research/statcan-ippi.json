@@ -1,0 +1,114 @@
+{
+  "_slice": "statcan-ippi",
+  "_scope": "The Industrial Product Price Index as a node, record 2318, and the edges into and out of it. Closes the no-node-yet lead recorded in statcan-supply-use-tables.json, which called this 'the strongest unrepresented deflator dependency in the Canadian accounts'. Owns the IPPI node and every edge incident to it; owns nothing in records 1301, 1401 or 1901 beyond what touches the IPPI. Also corrects one citation in the lead that created it — see _dropped.",
+  "reports": [
+    {
+      "id": "statcan-ippi",
+      "title": "Industrial Product Price Index (IPPI)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Monthly measure of price change for major commodities sold by manufacturers operating in Canada, record 2318, produced by the Prices Division alongside the Consumer Price Index. Prices are collected at the factory gate, so they are what the producer receives rather than what a purchaser pays: record 2318 states they 'exclude all indirect taxes, such as sales taxes, customs duties and tariffs as this money does not go to the factors of production', and exclude common-carrier transport and retail or wholesale distribution beyond the gate. That is the whole reason the accounts need it as well as the CPI — the supply and use tables are built at basic prices, and the CPI measures purchasers' prices. The IPPI is the deflator the Canadian accounts actually run on: it is named in 64 rows of the monthly GDP by industry source table against the CPI's 27, and the input-output deflation guide calls it 'the main data source of deflators for manufactured goods'. Record 2318 states the role in its own words: 'the IPPI series supports the Canadian System of Macro-Economic Accounts (CSMA), where it is used in the calculation of real Gross Domestic Product (GDP).' It replaced the Industry Selling Price Index in the early 1980s.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, reference period month. Two lags worth knowing before this node is used for timing. Collection: 'For most products included in the IPPI, the collection process occurs over a three-week period starting during the third week of the reference month.' Revision: 'price indexes remain subject to revision for six months after publication of a given month's data', so any dependent reading a recent month is reading a provisional number. The weighting structure moves on a far slower clock than the index — 'The entire weighting scheme for the IPPI is generally revised every 5 years' — which is what the reference period on the edge to the supply and use tables records.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318",
+      "domains": ["inflation", "national-accounts"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "statcan-gdp-monthly",
+      "target_report_id": "statcan-ippi",
+      "relationship_type": "uses_data_from",
+      "basis": "The monthly programme's industry-by-industry source table, 'National monthly gross domestic product by industry, summary of Methods and data sources' (2021), names the IPPI by title and by IMDB record number in 64 separate rows. Representative row, NAICS 3111 Animal food manufacturing, under 'Gross output': 'Sales and inventory change in constant prices, Monthly Survey of Manufacturing, Record no (number). 2101. Industrial product price indexes, Record no (number). 2318.' Record 2318 is the IPPI. `uses_data_from` follows the type already taken for statcan-gdp-monthly -> statcan-cpi, which rests on the identical evidence in the identical document. WORTH STATING PLAINLY: this is the best-evidenced deflator edge in the Canadian corpus and it was the last one built. The same table names the CPI in 27 rows and SEPH in 37, and both of those became edges two sessions before this one — the IPPI was invisible only because nobody had grepped for it. Note also that record 1301's own IMDB page never mentions the IPPI at all; the release-level disclosure lives entirely in this attached table, which is the disclosure asymmetry doctrine operating within a single statistical programme.",
+      "evidence_url": "https://www.statcan.gc.ca/en/statistical-programs/document/1301_D1_V4"
+    },
+    {
+      "source_report_id": "statcan-sut",
+      "target_report_id": "statcan-ippi",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Catalogue 15F0077GIE, 'A Guide to Deflating the Input-Output Accounts: Sources and Methods' (2001), which record 1301 cites as the description of the double-deflation method used to produce constant-price GDP by industry. Under the heading 'Sources of deflators', unhedged: 'The main data source of deflators for manufactured goods is the Industrial Product Price Indexes (IPPI) produced by Statistics Canada's Prices Division. Prior to 1981, deflators were based on Industry Selling Price Indexes (ISPI).' Earlier in the same chapter, on why basic-price deflation is possible where purchaser-price deflation is not: 'the commodity price information collected by the Prices Division to compile industry product price indexes can be used to construct deflators for values at basic prices. These Industrial Product Price Indexes (IPPI), aggregated where necessary to the input-output classification, constitute the main source of deflators for manufactured commodities.' Both passages verified verbatim against the PDF. `methodology_depends_on` matches the type taken for statcan-sut -> statcan-cpi from the same document. ONE HEDGE, STATED, AND IT IS THE ONLY ONE: the guide is a 2001 edition marked ARCHIVED, twenty-five years old, and it remains the document record 1301 points at for this method. The 'can be used' softness that qualifies the CPI edge does not apply here — the 'Sources of deflators' sentence says 'is'.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/15f0077g/15f0077g2001001-eng.pdf"
+    },
+    {
+      "source_report_id": "statcan-ippi",
+      "target_report_id": "statcan-sut",
+      "relationship_type": "uses_data_from",
+      "basis": "The reverse direction, and the graph's second mutual pair. Record 2318, under Estimation: 'For the IPPI, commodity and industry weights are derived from a combination of the 2019 Supply and Use Tables that closely reflect actual economic transactions by industry and the sales of goods manufactured by companies as reported for the 2019 ASML.' The same section adds that the industry indexes are 'aggregated to the level required for the input-output tables and the measurement of Gross Domestic Product', so the tables set the aggregation structure as well as the weights. Admissible under the V0.10 mutual-partner rule on its own terms: each direction is stated by a different document in its own words, each carries its own evidence_url, and the two are asymmetric in kind rather than restatements of one relationship — the tables take the IPPI as a price measure, the IPPI takes the tables as a weighting frame. `relationship_type` records the asymmetry as the rule requires: `methodology_depends_on` outbound from the tables against `uses_data_from` here, because the SUT figures are a direct numerical input to the weights rather than a method the IPPI follows. THE MECHANISM IS NOT SIMULTANEOUS AND THAT MATTERS FOR READING THE CYCLE: the 2019 tables weight today's index, and today's index deflates a later vintage of the tables. Nothing circular happens in any single calculation; the loop closes only across vintages, five years apart.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318",
+      "reference_period": {
+        "readings_per_year": 0.2,
+        "window_months": 12,
+        "ends": null,
+        "stated_as": "'The entire weighting scheme for the IPPI is generally revised every 5 years.' The weights in force are derived from the 2019 Supply and Use Tables and from the 2019 ASML, so the window is a single calendar reference year and the reading recurs roughly once every five. Record 2318 adds an unusual note of intent — 'In the future, we will explore increasing the frequency to every two years' — which is a stated plan and not a rate, so it is not in the numbers."
+      }
+    },
+    {
+      "source_report_id": "statcan-ippi",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Record 2318, under Estimation: 'The second set of indexes covers the total commodity output of individual industries. These reflect the sales of goods manufactured in 2019 in each industry. The industry indexes are classified according to the NAICS 2022v1, aggregated to the level required for the input-output tables and the measurement of Gross Domestic Product.' And under Target population: 'the industry universe corresponds to the North American Industry Classification System (NAICS).' Same type as the five NAICS edges already in the graph, which rest on the same kind of statement — a classification the release is compiled against rather than a figure it reads.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "statcan-sut -> statcan-ippi — the chapter number in the lead was wrong",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "CORRECTION TO THIS SLICE'S OWN PARENT. The no-node-yet lead in statcan-supply-use-tables.json placed the decisive quotation 'unhedged, in chapter 3 under the heading Sources of deflators'. It is in chapter 2. The document's table of contents lists 'Sources of deflators' at page 28 under 'Chapter 2 Sources and Methods Used to Compile Input-Output Accounts at Constant Prices', and chapter 3, 'Deflators for Goods', starts at page 31; in the extracted text the heading appears at line 1537 and 'CHAPTER 3 DEFLATORS FOR GOODS' at line 1775. The quotation itself is verbatim and the edge is unaffected. Recorded because it is the third citation-location error found in three sessions — V0.10 caught two section numbers one subsection out in the Equalization round, and inverted a recommendation that had put an H.15 quotation in the wrong footnotes. All three share a shape: the substance was right and the address was wrong, and in every case the address was written from a summary rather than from the document. The V0.10 rule that a recommendation is a hypothesis about a document applies to a _dropped note as much as to a recommended next step, and neither carries an evidence_url that would catch it."
+    },
+    {
+      "edge": "statcan-ippi -> (Annual Survey of Manufacturers and Logging)",
+      "source": "statcan-ippi",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Named by title, twice, in two different roles. Under Sampling: 'The sampling frame for the IPPI is based on the 2022 Annual Survey of Manufacturers and Logging (ASML).' Under Estimation, as half of the weighting basis alongside the supply and use tables: 'the sales of goods manufactured by companies as reported for the 2019 ASML'. And under Data accuracy, the dependency stated as a quality constraint: 'Shipment value data mainly rests on other sample surveys produced by Statistics Canada, such as the ASML. Therefore, these data are subject to their own errors.' The ASML is an annual Statistics Canada release with its own IMDB record, so this is a node that can exist and does not, not an unpublishable source. Deliberately not built here to keep the slice to one node — but note it would arrive already carrying two edges, since the 2019 ASML weights sit beside the 2019 Supply and Use Tables in the same sentence."
+    },
+    {
+      "edge": "statcan-ippi -> (Monthly Survey of Manufacturing, record 2101)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Not an IPPI input — the opposite direction, and recorded here because the evidence surfaced while reading the IPPI's 64 rows and would otherwise be lost. The monthly GDP source table pairs record 2101, the Monthly Survey of Manufacturing, with the IPPI in row after row: 'Sales and inventory change in constant prices, Monthly Survey of Manufacturing, Record no (number). 2101. Industrial product price indexes, Record no (number). 2318.' Record 1301's own IMDB page names it too: 'data from the Monthly Survey of Manufacturing are used for most (but not all) manufacturing industries.' So statcan-gdp-monthly -> (record 2101) is documented twice over and blocked only on the node. Together with the ASML above, the manufacturing side of the accounts is the densest cluster of buildable-and-unbuilt nodes now visible."
+    },
+    {
+      "edge": "statcan-ippi -> (North American Product Classification System)",
+      "source": "statcan-ippi",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Record 2318: 'Elemental price indexes are calculated for groups of the North American Product Classification System (NAPCS) 2022v1', and the commodity index set is 'classified according to the NAPCS 2022v1'. NAPCS is the product-side sibling of NAICS, which is already a node with five incoming edges, so this is a straightforward addition rather than a judgement — and it will not stay a one-edge node, because the supply and use tables are a product-by-industry structure. Note that NAPCS appears nowhere in the monthly GDP source table, which is organised by NAICS industry throughout: the two classifications divide the corpus along a line nothing in the graph currently shows."
+    },
+    {
+      "edge": "statcan-ippi -> (proxy series borrowed from other agencies)",
+      "source": "statcan-ippi",
+      "target": null,
+      "reason": "no-document",
+      "why": "Record 2318 admits an input and declines to name it: 'In cases where there are no prices collected due to either an insignificant level of production in Canada or a lack of respondent co-operation, proxy series are constructed. Proxy series may consist of several other reported series combined together, or use similar representative price indexes from another program or statistical agency.' 'Another statistical agency' is agency-level attribution with the agency left out — weaker even than H.15's 'Source: U.S. Treasury', which at least named the department. The same section quantifies how much of the index this covers: 'Extraction of data from other sources (10%)' by weight. So a tenth of a headline national price index comes from somewhere the release does not say, and this is a `no-document` finding rather than a research gap: the search is complete and the answer is that the document declines. Also under Sampling, the same silence about internal borrowing: 'The price movement for the other NAPCS groups is estimated indirectly from either directly priced NAPCS or through borrowing price movements from other price series.'"
+    },
+    {
+      "edge": "statcan-ippi -> (CRA and other administrative files)",
+      "source": "statcan-ippi",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Record 2318, Data sources: 'Data are collected directly from survey respondents, extracted from administrative files and derived from other Statistics Canada surveys and/or other sources.' Administrative files are not publications, and here they are not even named — unlike record 1401, which at least enumerates its CRA forms by number. Recorded for the disclosure denominator, since a report's input list should not read as short when the source has said there is more and not said what."
+    },
+    {
+      "edge": "(Canadian System of Macroeconomic Accounts) -> statcan-ippi",
+      "source": null,
+      "target": "statcan-ippi",
+      "reason": "no-node-yet",
+      "why": "A fourth document now names the CSMA framework, and this one names it as a consumer of the IPPI rather than as a definitional authority. Record 2318, Description: 'the IPPI series supports the Canadian System of Macro-Economic Accounts (CSMA), where it is used in the calculation of real Gross Domestic Product (GDP).' Record 1301 describes itself the same way — its estimates 'constitute an extension (on a monthly basis) of the Canadian System of Macroeconomic Accounts Supply and Use Tables (SUT)' — against the four Division 1 Equalization revenue-base components already recorded in equalization-named-products.json. The framework node was blocked on the containment question, which V0.11 has now decided: `part_of` exists, it carries no weight, and the triple-counting objection was measured and found to have the wrong sign. THE BLOCK IS LIFTED AND THE NODE IS THE NEXT OBVIOUS PIECE OF WORK, with statcan-national-accounts and statcan-sut as its documented members and six citing documents in hand."
+    },
+    {
+      "edge": "statcan-ippi -> (petroleum ARIMA GARCH estimates)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Not a dependency and recorded so it is not proposed as one. Record 2318, Imputation: 'Because petroleum data is unavailable at the beginning of the month, it is estimated using ARIMA GARCH models and later revised with respondent data prior to the release.' A statistical model applied to the programme's own missing observations is internal method, not an external input — the same category as X-12-ARIMA seasonal adjustment in record 1301. Worth a line because a graph about where numbers come from will keep meeting sentences of this shape, and a model is not a source."
+    }
+  ]
+}

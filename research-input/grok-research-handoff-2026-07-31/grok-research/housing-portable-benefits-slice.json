@@ -1,0 +1,173 @@
+{
+  "_layer": "MAIN DOCUMENTED / HOUSING PORTABLE BENEFITS & RESIDUAL RENT FORMULAS",
+  "_status": "DRAFT SLICE — Part B only. Every claim backed by a Part A quote already extracted in this session. Do not promote without adjudication.",
+  "_note": "Covers the major provincial residual and portable housing benefits that name CMHC AMR/MMR or a residual income percentage. Isolated nodes allowed. Soft/financing edges excluded.",
+  "reports": [
+    {
+      "id": "cmhc-rental-market-survey",
+      "title": "CMHC Rental Market Survey (Average and Median Market Rents)",
+      "publisher": "Canada Mortgage and Housing Corporation",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Annual survey of the primary rental market (privately initiated structures with ≥3 units). Produces both average rent (AMR) and median rent (MMR / rent_median) series used by multiple provincial residual formulas.",
+      "releases_per_year": 1,
+      "cadence_note": "Conducted each October; results published in the following months.",
+      "domains": ["housing", "rental-market"]
+    },
+    {
+      "id": "on-cohb",
+      "title": "Canada-Ontario Housing Benefit (portable housing benefit)",
+      "publisher": "Ontario Ministry of Municipal Affairs and Housing / Ministry of Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Portable residual benefit under the National Housing Strategy. Formula set in O. Reg. 367/11.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "mb-rent-assist",
+      "title": "Manitoba Rent Assist",
+      "publisher": "Manitoba Families / Housing",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Manitoba",
+      "description": "Residual benefit calculated against CMHC Median Market Rent. Separate treatment for EIA and non-EIA recipients.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "ab-rab",
+      "title": "Alberta Rent Assistance Benefit (RAB) / Canada-Alberta Housing Benefit",
+      "publisher": "Alberta Assisted Living and Social Services / Housing management bodies",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Long-term rent subsidy jointly funded under the National Housing Strategy. Residual calculation now based on 30% of total household income (including AISH) effective October 2025.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "bc-safer",
+      "title": "British Columbia Shelter Aid for Elderly Renters (SAFER)",
+      "publisher": "BC Housing",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "British Columbia",
+      "description": "Residual benefit for seniors. Formula set in the Shelter Aid for Elderly Renters Regulation.",
+      "domains": ["housing", "residual-income", "seniors"]
+    },
+    {
+      "id": "bc-rap",
+      "title": "British Columbia Rental Assistance Program (RAP)",
+      "publisher": "BC Housing",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "British Columbia",
+      "description": "Residual benefit for low-income families with dependent children. Uses 30% of gross household income residual against maximum rent ceilings.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "qc-pslq",
+      "title": "Programme de supplément au loyer Québec (PSLQ)",
+      "publisher": "Société d'habitation du Québec",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Quebec",
+      "description": "Residual rent set at 25% of total household income under the Règlement sur les conditions de location des logements à loyer modique.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "ns-cns-thb",
+      "title": "Canada-Nova Scotia Targeted Housing Benefit",
+      "publisher": "Nova Scotia Housing",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Nova Scotia",
+      "description": "Portable residual benefit. Formula: actual rent (capped at CMHC AMR) minus 30% of total household income. Eligibility threshold 40% of income on AMR.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "nb-rent-supplement",
+      "title": "New Brunswick Rent Supplement Program",
+      "publisher": "Housing NB",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "New Brunswick",
+      "description": "Rent reduced to 30% of adjusted household income; program covers the difference up to market rent.",
+      "domains": ["housing", "residual-income"]
+    },
+    {
+      "id": "sk-housing-benefit",
+      "title": "Saskatchewan Housing Benefit",
+      "publisher": "Saskatchewan Housing Corporation",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Saskatchewan",
+      "description": "Fixed monthly top-up under the National Housing Strategy based on shelter-cost-to-income ratio (≥35%). Co-funded federal-provincial.",
+      "domains": ["housing"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "on-cohb",
+      "target_report_id": "cmhc-rental-market-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "O. Reg. 367/11 (Housing Services Act, 2011): formula 80% AMR – [(AFNI × 0.30)/12]. AMR defined as CMHC average market rent data posted on the Ministry website, sourced from the annual Rental Market Survey.",
+      "evidence_url": "https://www.ontario.ca/laws/regulation/110367"
+    },
+    {
+      "source_report_id": "mb-rent-assist",
+      "target_report_id": "cmhc-rental-market-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "Manitoba Rent Assist program materials: benefits calculated as difference between 80% of Median Market Rent and 30% of net household income. Explicit statement that Median Market Rent is established by the Canada Mortgage and Housing Corporation.",
+      "evidence_url": "https://www.gov.mb.ca/fs/static/estimator.html"
+    },
+    {
+      "source_report_id": "ns-cns-thb",
+      "target_report_id": "cmhc-rental-market-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "Nova Scotia 2024 program update: benefit calculated as actual rent (capped at average monthly rent for the area) minus 30% of total household income. Explicitly adopts CMHC household income levels and average market rents.",
+      "evidence_url": "https://news.novascotia.ca/en/2024/08/23/rent-supplement-program-expands-aligns-benefits-rent-paid"
+    },
+    {
+      "source_report_id": "bc-safer",
+      "target_report_id": null,
+      "relationship_type": "calculated_from",
+      "basis": "Shelter Aid for Elderly Renters Regulation s. 5: rent gap = lesser of rent or maximum rent minus 30% of eligible renter’s income; benefit is 90% of gap (or sliding percentage). Maximum rents set administratively; base income tied to OAS+GIS+provincial supplement.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/loo93/loo93/10_298_77"
+    },
+    {
+      "source_report_id": "qc-pslq",
+      "target_report_id": null,
+      "relationship_type": "calculated_from",
+      "basis": "Programme de supplément au loyer Québec: household pays 25% of total income (calculated under Règlement sur les conditions de location des logements à loyer modique). Loyers médians du marché adjusted jointly by SHQ and SCHL from SCHL survey data.",
+      "evidence_url": "https://www.quebec.ca/habitation-territoire/location/aides-financieres-logement/programme-supplement-loyer-quebec/a-propos-du-programme"
+    },
+    {
+      "source_report_id": "ab-rab",
+      "target_report_id": null,
+      "relationship_type": "calculated_from",
+      "basis": "Alberta Rent Assistance Benefit under Canada-Alberta Housing Benefit (NHS). Effective October 2025: rent / benefit based on 30% of total household income, including AISH and Income Support. Amount previously described as calculated from household income and local market rent.",
+      "evidence_url": "https://www.alberta.ca/rent-assistance"
+    },
+    {
+      "source_report_id": "nb-rent-supplement",
+      "target_report_id": null,
+      "relationship_type": "calculated_from",
+      "basis": "New Brunswick Rent Supplement Program: tenant rent reduced to 30% of adjusted household income; program funds the difference to market rent.",
+      "evidence_url": "https://www.gnb.ca/en/topic/family-home-community/housing-property/rent-suppplement.html"
+    },
+    {
+      "source_report_id": "sk-housing-benefit",
+      "target_report_id": null,
+      "relationship_type": "uses_data_from",
+      "basis": "Saskatchewan Housing Benefit (NHS cost-shared): fixed monthly amounts determined by household size and whether shelter costs equal 35–45% or >45% of before-tax income. Eligibility requires ≥35% of income spent on shelter.",
+      "evidence_url": "Saskatchewan Housing Corporation fact sheets (2026 rates)"
+    }
+  ],
+  "_notes": [
+    "CMHC Rental Market Survey is the single most frequently named external statistical input across residual housing benefits.",
+    "AMR (mean) vs MMR (median) distinction is documented: Ontario/Nova Scotia use average; Manitoba uses median. Same underlying survey.",
+    "Alberta’s October 2025 change fully includes AISH in the 30% residual calculation — relevant to earlier disability-benefit extractions.",
+    "Quebec uses a lower residual (25%) than the common 30% residual used elsewhere.",
+    "No soft or financing edges included. Isolated residual nodes retained where the statute does not name an external series."
+  ]
+}

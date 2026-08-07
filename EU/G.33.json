@@ -1,0 +1,160 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.33.md",
+  "number": 33,
+  "title": "G.33.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "Research.1.md v1.0 — re-read in full this session. Research.2.md",
+  "predecessor": "G.32.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**`eurostat-hicp` is minted, cleanly, and is the fastest-cadence node in the\nEU branch** — Eurostat's own metadata page states \"the data are\ndisseminated monthly, around the middle of the month that follows the\nreference month,\" with a flash estimate even faster. It clears all three of\n`Research.1.md` §4's conditions from a single authoritative source, the\nsame evidence class as `eurostat-farm-structure-survey`.\n\n**The dependency that motivated finding it — Annex XI's Joint Index\ndepending on HICP — is recorded but not yet mintable**, because the EU side\nof that edge (the annual Commission decision applying Annex XI) has no\nnode to attach to. This is the honest state of the branch's best\ncross-layer lead: one end is now solid, the other end needs its own\nmodelling decision.",
+  "findings": [
+    {
+      "heading": "1. HICP clears all three node conditions from Eurostat's own metadata",
+      "body": "Record HICP-01 in `EU/HICP_PartA_2026-08-05.md`. **What this rests on**:\ndirect reading of Eurostat's own metadata page, first-hand this session."
+    },
+    {
+      "heading": "2. The HICP→Annex XI edge is blocked on a modelling decision, not on evidence",
+      "body": "The evidence is as strong as anything in the corpus (Annex XI's own text,\nquoted verbatim at AXI-02 in the predecessor session's record). What is\nmissing is a node for the dependent side. **This is a scoping question for\nwhoever picks this up next**, not a research gap: does the branch model\n\"the annual EU staff salary/pension update\" as a recurring series (the way\n`eu-draft-budget` models the whole Draft Budget as one series with the\nedition in the description), or does it model Annex XI's mechanism itself\nas a node? Either choice is defensible; neither has been made. **What this\nrests on**: direct comparison against the existing `eu-draft-budget.json`\nprecedent, read this session."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": [
+        {
+          "n": 44,
+          "text": "0bn) is the largest remaining Title. **Item 0, ahead of further SEC03 work, now split into two cheap sub-tasks:**"
+        },
+        {
+          "n": 1,
+          "text": "Fetch Luxembourg's own CPI metadata from STATEC** (Luxembourg's national statistical institute) to establish its own node conditions, the same way this session did for HICP. One browser fetch, likely fifteen minutes of work."
+        },
+        {
+          "n": 2,
+          "text": "Decide how to model the EU staff salary/pension update mechanism as a node** (or decide not to, and record why) so the HICP/CPI→[mechanism] edges can actually be minted. This is a real design decision, not a lookup — flag it to Thomas if the next session isn't confident making the call alone."
+        }
+      ]
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads, after B.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Fetch Luxembourg's national CPI from STATEC.** See priority item 0.1."
+    },
+    {
+      "n": 2,
+      "text": "Resolve the ten-vs-eleven Member States discrepancy** (`G.32.md` finding 2)."
+    },
+    {
+      "n": 3,
+      "text": "Read EBS Regulation 2019/2152 as a third test of the asymmetry."
+    },
+    {
+      "n": 4,
+      "text": "Fetch and hash SEC01/02/03/06/07/08/09/10 against local copies — confirm the browser technique extends to PDF downloads, not just HTML."
+    },
+    {
+      "n": 5,
+      "text": "Retry `agridata.ec.europa.eu` / `agriculture.ec.europa.eu` for FADN's own metadata."
+    },
+    {
+      "n": 6,
+      "text": "Split `list-main-stats-2025-na` into nine records."
+    },
+    {
+      "n": 7,
+      "text": "Re-measure E4 keying on quote, not id, and reconcile."
+    },
+    {
+      "n": 8,
+      "text": "Delete `scripts/eu-schema-smoke.ts` — its stated condition has lapsed (six EU nodes now import)."
+    },
+    {
+      "n": 9,
+      "text": "Pull the `[NA-Pen] / Table 29` thread."
+    },
+    {
+      "n": 10,
+      "text": "Check whether SEC09's total-level sign flip has a stated explanation elsewhere (`G.28.md` finding 1)."
+    },
+    {
+      "n": 11,
+      "text": "Search for a titled GNI deflator publication, following SEC01's S01-02 lead."
+    },
+    {
+      "n": 12,
+      "text": "Reconcile `EU Meta jsons.docx`'s SEC09/SEC10 batches against `SEC08-SEC09-SEC10_PartA_2026-08-05.md`."
+    },
+    {
+      "n": 13,
+      "text": "Check whether sc-47–sc-50 exist anywhere; characterise the 155 non-`S` loose records; match the 8 record-less batch headers; enumerate the `9`-series tags beyond `SPEC`/`DAG`/`PPPA`/`OTH`."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.33.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — the standing brief, and the only carrier of the §9 id list."
+    },
+    {
+      "n": 3,
+      "text": "`EU/HICP_PartA_2026-08-05.md`** and **`EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md`** — this session's and the predecessor's finding, and the modelling decision they leave open."
+    },
+    {
+      "n": 4,
+      "text": "`src/data/research/eurostat-hicp.json`** and **`eurostat-farm-structure-survey.json`** — the two newest slices."
+    },
+    {
+      "n": 5,
+      "text": "A browser** (the `Claude_Browser` tool) — for STATEC, the ten-vs-eleven discrepancy, EBS Regulation 2019/2152, and the PDF-hash question."
+    },
+    {
+      "n": 6,
+      "text": "The next target if a browser session**: STATEC for Luxembourg's CPI, then the modelling decision in priority item 0.2. **If no browser**: SEC03 Title 05 (Regional Development) is the fallback. ---"
+    }
+  ],
+  "session_conditions": "**One short browser-research session, following directly on `G.32.md`'s\ntop priority.** Fetched and read Eurostat's own HICP metadata page\n(`https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm`),\nconfirmed HICP clears `Research.1.md` §4's node conditions, drafted and\nvalidated a sixth EU slice. **This session was deliberately time-boxed** —\nthe conversation producing it is being handed to a fresh agent for\ncontext-budget reasons, so work stopped at a clean, fully-documented point\nrather than continuing to chase every open thread.\n\nWhat was read first-hand: `Research.1.md` in full (re-read); Eurostat's\nHICP metadata page, in full.\n\nWhat was **not** done, and is the natural next work:\n\n- **Luxembourg's own national CPI (STATEC) was not reached.** Time-boxed in\n  favour of writing up HICP and handing off cleanly. This is now the single\n  cheapest remaining piece of the HICP/CPI lead — one browser fetch to\n  STATEC's own site.\n- **The HICP→salary-mechanism edge was not minted**, because the dependent\n  end (the annual Commission report/decision applying Annex XI) is not\n  itself modelled as a node in this corpus. Recorded as `no-node-yet` in\n  `eurostat-hicp.json`'s own `_dropped` block, not invented.\n- **The ten-vs-eleven Member States discrepancy from `G.32.md` was not\n  investigated further.**\n- **EBS Regulation 2019/2152 was not read.**\n- **No PDF binary was hash-verified via the browser** — still only HTML\n  pages have been fetched this way.\n- **`Research.2.md` and `Research.EU.md` were not re-opened.** Last\n  first-hand read: G.24, ten sessions back.\n- **The blob was not sliced. No further SEC03 Titles were extracted.**"
+}

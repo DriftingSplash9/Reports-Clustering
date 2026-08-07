@@ -1,0 +1,47 @@
+{
+  "_slice": "eurostat-remuneration-mission-expenses-report",
+  "_researched": "2026-08-05",
+  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts.",
+  "_note": "Same-day continuation of the eurostat-remuneration-satellite-series session -- the sixth and last Eurostat Publications-page category, not named by Thomas's original request but the cheapest remaining item flagged in G.36.md's cheap-checks list. One report, one dependency, one _dropped. Full quotes in EU/EurostatRemunerationReport_PartA_2026-08-05.md's second addendum (ERR-10, ERR-11).",
+  "_headline": "Clears Research.1.md §4 on named-ness and title, but is the branch's first EU node whose cadence comes from counting an irregular observed publication record rather than from a document stating a rate -- flagged honestly rather than smoothed into a false regularity.",
+  "_open_questions": [
+    "CADENCE HONESTY: releases_per_year (0.45) is computed from five observed publications across an eleven-year span (2015-2026), not from a stated periodicity -- see ERR-10's own NOTES. If a future session finds a document stating an actual review interval (the Methodology page hints at ad hoc review by the 'Article 64 and 65 expert Working Group' rather than a fixed schedule), replace this with the stated rate.",
+    "DOMAIN: 'labour' used, same least-wrong placeholder as the rest of the eurostat-remuneration-* nodes."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-remuneration-mission-expenses-report",
+      "title": "Eurostat Report on Mission Expenses",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's own Methodology page: 'In the EU context, with effect from 2014 the mission expense values for hotel ceilings and for daily subsistence allowances are regularly reviewed on the basis of a Eurostat report.' (ERR-10). Sets hotel ceilings and daily subsistence allowances for EU staff on official mission travel. Publications page lists five linked reports (2015, 2019, 2021, 2024, 2026) under file titles varying informally by year: 'Eurostat Report on Mission Expenses' (2024), 'Eurostat Mission Expenses Report 2021' (2021).",
+      "releases_per_year": 0.45,
+      "cadence_note": "No document read states a fixed periodicity -- 'regularly reviewed' (Methodology page) is present-tense but not numeric. releases_per_year is an approximation from the observed publication record: five reports across 2015-2026 (an eleven-year span), at irregular intervals (4, 2, 3, 2 years). See ERR-10's own NOTES for the full reasoning; this is the branch's first EU node cadenced this way rather than from a stated rate.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/publications",
+      "domains": [
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eurostat-remuneration-mission-expenses-report",
+      "target_report_id": "eurostat-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat Methodology page, 'Mission expenses' section (ERR-11): 'Where possible the updating methodology uses information already established, including relevant sub indices of the harmonised index of consumer prices (to measure temporal evolution) and purchasing power parities (to measure spatial differences).' 'Uses information already established, including... the harmonised index of consumer prices' is a direct input statement, not a Research.1.md §5a 'comparable with' trap -- same shape as the rent survey's 'based on' language.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/methodology"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "eurostat-remuneration-mission-expenses-report -> [United Nations International Civil Service Commission data, Extra-EU destinations]",
+      "source": "eurostat-remuneration-mission-expenses-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "ERR-11: 'For Extra-EU mission destinations, the calculation integrates information obtained from the United Nations International Civil Service Commission.' AGENCY ONLY -- the UN ICSC is named as a body, no specific titled UN ICSC publication is given. Same treatment as every other international-organisation-by-function citation in this branch."
+    }
+  ]
+}

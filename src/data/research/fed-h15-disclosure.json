@@ -1,0 +1,43 @@
+{
+  "_slice": "fed-h15-disclosure",
+  "_scope": "What H.15 actually discloses about its own inputs, read off the live release. Creates no edges: the finding is that it cannot. Supersedes V0.9's recommendation 3.",
+  "reports": [],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "fed-h15 -> (a U.S. Treasury publication)",
+      "source": "fed-h15",
+      "target": null,
+      "reason": "no-document",
+      "why": "V0.9 recorded a cheap way to restore fed-h15 to the graph: 'H.15's footnotes 9 and 10 both read \"Source: U.S. Treasury\" for the constant maturity series, and describe the yields as \"interpolated by the U.S. Treasury from the daily yield curve.\" The evidence exists; the Treasury release has never been researched as a node. One research pass restores H.15.' The release was read directly (release date 2026-07-29) and that plan does not work. TWO SEPARATE ERRORS IN THE V0.9 NOTE. First, the quotation is misattributed. Footnote 9 reads: 'Yields on actively traded non-inflation-indexed issues adjusted to constant maturities. The 30-year Treasury constant maturity series was discontinued on February 18, 2002, and reintroduced on February 9, 2006. From February 18, 2002, to February 9, 2006, the U.S. Treasury published a factor for adjusting the daily nominal 20-year constant maturity in order to estimate a 30-year nominal rate. The historical adjustment factor can be found at home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics. Source: U.S. Treasury.' Footnote 10 reads: 'Yields on Treasury inflation protected securities (TIPS) adjusted to constant maturities. Source: U.S. Treasury. Additional information on both nominal and inflation-indexed yields may be found at home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics.' Neither contains the phrase about interpolation. That phrase is in a separate unnumbered section at the foot of the release headed 'Description of the Treasury Nominal and Inflation-Indexed Constant Maturity Series': 'Yields on Treasury nominal securities at “constant maturity” are interpolated by the U.S. Treasury from the daily yield curve for non-inflation-indexed Treasury securities.' Second, and fatally, NEITHER LOCATION NAMES A TREASURY PUBLICATION. 'Source: U.S. Treasury' is agency-level attribution, which is the exact test that killed boc-mpr -> statcan-national-accounts in V0.9. 'the daily yield curve for non-inflation-indexed Treasury securities' describes a curve, not a titled release, and the url given is a landing page for interest-rate statistics rather than a named publication. So H.15's own text supports no edge to a Treasury node even if that node existed."
+    },
+    {
+      "edge": "fed-h15 -> (Report of Selected Money Market Rates, FR 2420)",
+      "source": "fed-h15",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Footnote 1, verbatim: 'As of March 1, 2016, the daily effective federal funds rate (EFFR) is a volume-weighted median of transaction-level data collected from depository institutions in the Report of Selected Money Market Rates (FR 2420). Prior to March 1, 2016, the EFFR was a volume-weighted mean of rates on brokered trades.' Named precisely, including the form number, and an administrative reporting form rather than a recurring publication — the same category as the FR 2644 form behind H.8 and the CIRO repo feed behind CORRA. This is excellent disclosure of an input that cannot become a node. It also confirms the V0.9 deletion of fed-h15 -> fed-fomc-statement: the release's only federal funds line is sourced to a reporting form, not to the FOMC's target range."
+    },
+    {
+      "edge": "fed-h15 -> (DTCC commercial paper trade data)",
+      "source": "fed-h15",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Footnote 5, verbatim: 'Interest rates interpolated from data on certain commercial paper trades settled by The Depository Trust Company. The trades represent sales of commercial paper by dealers or direct issuers to investors (that is, the offer side). The 1-, 2-, and 3-month rates are equivalent to the 30-, 60-, and 90-day dates reported on the Board’s Commercial Paper Web page (www.federalreserve.gov/releases/cp/).' Two things worth separating. The operative input is DTCC-settled transaction data, which is private clearing-house data with no publication or cadence, so unpublishable. The reference to the Board's own Commercial Paper release is TEMPTING AND NOT AN EDGE: 'equivalent to' is a comparability statement, not a dependency — H.15 does not say it takes these numbers from the CP release, it says its rates equal the ones reported there, both being derived from the same DTCC data. This is the identical trap as statcan-national-accounts -> statcan-gdp-monthly, where 'more comparable with' was read as dependency for several sessions."
+    },
+    {
+      "edge": "fed-h15 -> (Federal Reserve Bank of New York quote composites)",
+      "source": "fed-h15",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "From the 'Description of the Treasury Nominal and Inflation-Indexed Constant Maturity Series' section: 'This curve, which relates the yield on a security to its time to maturity, is based on the closing market bid yields on actively traded Treasury securities in the over-the-counter market. These market yields are calculated from composites of quotations obtained by the Federal Reserve Bank of New York.' A named institution and no publication, and over-the-counter quote composites are not published on a cadence. Recorded because it completes the picture: the constant maturity series has a three-step provenance — OTC quotations gathered by the New York Fed, a curve fitted by Treasury, values read off it and republished by the Board — and not one of the three steps is a citable publication."
+    },
+    {
+      "edge": "fed-h15 — why it cannot be restored from its own release",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The conclusion the four entries above add up to, stated once so a later pass does not re-run the search. H.15 names its inputs unusually thoroughly for a Federal Reserve release — eleven footnotes plus a methodological description — and EVERY SOURCE IT NAMES falls outside the node rule: an agency without a publication (U.S. Treasury, twice; the Federal Reserve Bank of New York), an administrative reporting form (FR 2420), private clearing-house transaction data (DTCC), or a rate posted by unnamed banks (footnote 7: 'Rate posted by a majority of top 25 (by assets in domestic offices) insured U.S.-chartered commercial banks'). So fed-h15 is not an under-researched node. It is a well-disclosing release whose entire input set is unpublishable, which is precisely the distinction the `determination` field and the disclosure ratio exist to make visible — and a case where the disclosure ratio's denominator is now genuinely populated. THE PRACTICAL CONSEQUENCE INVERTS V0.9's RECOMMENDATION 3: H.15 cannot be reconnected by researching what it depends on, because it depends on nothing citable. It can only be reconnected from downstream, by a document that cites H.15 as its own source. US financial regulation references the H.15 series routinely and none of it has been researched. That is a different and larger job than 'one research pass', and the Treasury yield curve node — while still worth having on its own merits — will not do it."
+    }
+  ]
+}

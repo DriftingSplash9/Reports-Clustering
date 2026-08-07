@@ -1,0 +1,279 @@
+{
+  "_slice": "Health funding chain: Canada Health Transfer to Alberta institutions",
+  "_researched": "2026-07-28",
+  "_note": "This slice traces the money for health care from the federal statute that sizes it down to the institution that spends it, and it turns out to be one of the best-documented chains in the whole graph because almost every link is written into legislation rather than administrative practice. The Federal-Provincial Fiscal Arrangements Act does two separate things to the Canada Health Transfer and it uses two different Statistics Canada products to do them. Section 24.1(1)(a)(v) sizes the national pot: the previous year's cash contribution times the greater of 1.03 and one plus the three-year moving average of nominal GDP growth, determined by the Minister at least three months before the fiscal year begins. Section 24.21 then splits that pot strictly by population share. Crucially, the population is not the Census: section 2 of the Canada Health Transfer, Canada Social Transfer and Wait Times Reduction Transfer Regulations prescribes 'Statistics Canada's official estimate of the population of the province on ... July 1 of that fiscal year' (changed from June 1 for fiscal years beginning after March 31, 2024), which is the postcensal Quarterly Demographic Estimates programme, not the census count. That distinction mattered enough that the graph needed a new node for it: the postcensal estimates are themselves derived from the census adjusted for net undercoverage plus births, deaths and migration, so the census sits one hop further back than it looks. Statistics Canada confirms the relationship from its own side, describing the estimates as playing 'a vital role under the Federal-Provincial Fiscal Arrangements and Federal Post-Secondary Education and Health Contributions Act ... in determining the amounts of federal-provincial-territorial transfers.' Equalization runs on the identical population definition under section 11 of the Federal-Provincial Fiscal Arrangements Regulations, 2007, with the Chief Statistician certifying the numbers to the Minister by December 1 each year. Downstream, Alberta's Fiscal Plan books the CHT and CST as named revenue lines and explains movements in them by revisions to Alberta's share of national population, which makes the population estimate the single quantity that appears at both ends of the chain. At the institutional end, Alberta Health Services' business plan states outright that its annual budget is built 'based on the Government of Alberta's budget and fiscal plan', and its consolidated financial statements are prepared under PSAS with the government transfer standard applied to the $15.1 billion of Alberta Health transfers that make up the bulk of its revenue. The one thing that has become harder to trace since 2024 is the Alberta delivery layer itself: the Provincial Health Agencies Act split AHS into four sector agencies with AHS surviving as a provincial health corporation accountable to Acute Care Alberta, and the ministry that approves the AHS budget has changed name twice in two years, so the institutional nodes here are less stable than the federal ones above them.",
+  "reports": [
+    {
+      "id": "canada-health-transfer",
+      "title": "Canada Health Transfer",
+      "publisher": "Department of Finance Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The largest major federal transfer to provinces and territories, providing federal cash support for health care and backing the criteria of the Canada Health Act. The national cash contribution is set in statute at section 24.1 of the Federal-Provincial Fiscal Arrangements Act and escalates each year by a three-year moving average of nominal GDP growth subject to a 3 per cent floor; the national amount is then divided among provinces on an equal per capita basis under section 24.21. Finance Canada publishes provincial and territorial entitlement amounts each year before the start of the fiscal year.",
+      "releases_per_year": 1,
+      "cadence_note": "The escalator must be determined by the Minister of Finance not later than three months before the beginning of the fiscal year, i.e. by the end of December for the fiscal year starting the following April 1. Entitlements are re-estimated several times during and after the year under the CHT/CST Regulations, but there is one authoritative annual determination.",
+      "last_updated": null,
+      "url": "https://www.canada.ca/en/department-finance/programs/federal-transfers/canada-health-transfer.html",
+      "domains": [
+        "health",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "canada-social-transfer",
+      "title": "Canada Social Transfer",
+      "publisher": "Department of Finance Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Federal block transfer supporting provincial post-secondary education, social assistance and social services, and early learning and child care. Unlike the Canada Health Transfer its national amount grows by a fixed 3 per cent legislated escalator rather than a GDP-linked one, but like the CHT it is allocated among provinces strictly on an equal per capita basis. Set out at sections 24.3 to 24.51 of the Federal-Provincial Fiscal Arrangements Act.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.canada.ca/en/department-finance/programs/federal-transfers/canada-social-transfer.html",
+      "domains": [
+        "fiscal-transfers",
+        "post-secondary",
+        "benefits"
+      ]
+    },
+    {
+      "id": "fiscal-equalization-program",
+      "title": "Equalization Program",
+      "publisher": "Department of Finance Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The federal unconditional transfer that brings provinces with below-average fiscal capacity up to a per capita standard, calculated under Part I of the Federal-Provincial Fiscal Arrangements Act. Every quantity in the formula is expressed per capita and weighted through a three-year 'average annual population' term, so provincial population estimates are as structurally central here as they are to the Canada Health Transfer. Alberta has not received an Equalization payment in recent years, but the same statute, the same certificate from the Chief Statistician and the same population series drive it and the health transfer.",
+      "releases_per_year": 1,
+      "cadence_note": "Entitlements are announced in December for the fiscal year beginning the following April 1, based on the Chief Statistician's certificate submitted on or before December 1.",
+      "last_updated": null,
+      "url": "https://www.canada.ca/en/department-finance/programs/federal-transfers/equalization.html",
+      "domains": [
+        "fiscal-transfers",
+        "taxation"
+      ]
+    },
+    {
+      "id": "statcan-population-estimates",
+      "title": "Quarterly Demographic Estimates (Population estimates, quarterly)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Statistics Canada's official population estimates for Canada, the provinces and the territories, produced by the Demographic Estimates Program (record number 3601) and published as Table 17-10-0009-01. The estimates are postcensal: they take the most recent Census of Population counts adjusted for census net undercoverage and add births, deaths, and international and interprovincial migration. The July 1 estimate of each fiscal year is the legally prescribed population figure used to allocate the Canada Health Transfer, the Canada Social Transfer and Equalization among provinces, which Statistics Canada itself flags as a primary use of the programme.",
+      "releases_per_year": 4,
+      "cadence_note": "Four quarterly releases; the July 1 reference-date estimate is the one written into the transfer regulations, and the Chief Statistician certifies figures to the Minister of Finance by December 1 each year.",
+      "last_updated": "2026-06-17",
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=3601",
+      "domains": [
+        "population",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ahs-business-plan",
+      "title": "Alberta Health Services Business Plan and Health Plan",
+      "publisher": "Alberta Health Services",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Alberta",
+      "description": "The annual business plan and accompanying budget that Alberta Health Services is required to prepare and submit to the Minister under sections 9(1) and 9.1(1) of the Provincial Health Agencies Act, with the business plan itself required under section 10 of the Sustainable Fiscal Planning and Reporting Act. It states the funding AHS expects to receive from Alberta Health and from Mental Health and Addiction for the coming year and sets the service and performance commitments those funds buy. It is the document that converts a provincial budget number into an operating plan for the province's largest health delivery organization.",
+      "releases_per_year": 1,
+      "cadence_note": "Board-approved in late March, immediately after the provincial budget is tabled in February, then submitted to the Minister for approval.",
+      "last_updated": null,
+      "url": "https://www.albertahealthservices.ca/assets/about/org/ahs-org-bp-2024-2025.pdf",
+      "domains": [
+        "health"
+      ]
+    },
+    {
+      "id": "ahs-financial-statements",
+      "title": "Alberta Health Services Annual Report and Consolidated Financial Statements",
+      "publisher": "Alberta Health Services",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Alberta",
+      "description": "The audited consolidated financial statements of Alberta Health Services, established under the Regional Health Authorities Act and now restructured under the Provincial Health Agencies Act. Revenue is dominated by a single line, 'Alberta Health transfers - Base operating', which was $15.1 billion of roughly $18 billion in total 2024-25 revenue; Note 25 states plainly that 'the viability of AHS' operations depends on transfers from AH'. The statements are prepared under Canadian Public Sector Accounting Standards plus additional disclosures required by financial directives issued by Alberta Health, and the budget column is the AHS Board-approved annual budget subsequently approved by the Minister.",
+      "releases_per_year": 1,
+      "cadence_note": "Fiscal year ends March 31; statements are tabled with the AHS annual report the following summer.",
+      "last_updated": null,
+      "url": "https://www.albertahealthservices.ca/about/page2220.aspx",
+      "domains": [
+        "health"
+      ]
+    },
+    {
+      "id": "cihi-nhex",
+      "title": "National Health Expenditure Trends (National Health Expenditure Database)",
+      "publisher": "Canadian Institute for Health Information",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Canada",
+      "description": "CIHI's annual accounting of total health spending in Canada by source of finance and by use of funds, from 1975 forward, classified consistently with the OECD's A System of Health Accounts. It is a 'top down' compilation: provincial and territorial government health spending is extracted each year from the public accounts of those governments and supplemented by departmental annual reports and special data requests to ministries of health. The two most-quoted figures in Canadian health policy debate, health spending per capita and health spending as a share of GDP, are produced here, which makes an arm's-length institution the authority on numbers that governments then cite back at each other.",
+      "releases_per_year": 1,
+      "cadence_note": "Released each autumn, with the current and prior year as forecasts and earlier years as actuals.",
+      "last_updated": null,
+      "url": "https://www.cihi.ca/en/national-health-expenditure-trends",
+      "domains": [
+        "health",
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "canada-health-transfer",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "calculated_from",
+      "basis": "Federal-Provincial Fiscal Arrangements Act s. 24.1(1)(a)(v): for each fiscal year beginning after March 31, 2017 the cash contribution is the previous year's contribution multiplied by 'the greater of 1.03 and the amount determined by the formula (1 + A) where A is the average of the annual rates of growth of the nominal gross domestic product of Canada for the calendar year that ends during the fiscal year in question and for the two previous calendar years, as determined by the Minister not later than three months before the beginning of that fiscal year.' Section 2(3.1) names the source: 'the gross domestic product of Canada for a calendar year is the gross domestic product of Canada for the year as determined by the Chief Statistician of Canada in prescribed manner.' Finance Canada's public page states the same rule: 'Since 2017-18, total CHT funding has been legislated to grow in line with a three-year moving average of nominal gross domestic product (GDP), with total funding guaranteed to increase by at least 3 per cent per year.'",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/acts/f-8/page-8.html"
+    },
+    {
+      "source_report_id": "canada-health-transfer",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "Federal-Provincial Fiscal Arrangements Act s. 24.21(1) sets the provincial share as 'A x B / C where A is the cash contribution determined under the applicable subparagraph for that fiscal year; B is the population of that province for that fiscal year; and C is the total of the population of all provinces for that fiscal year.' Section 2 of the Canada Health Transfer, Canada Social Transfer and Wait Times Reduction Transfer Regulations then prescribes which series that is: 'For the purposes of these Regulations and Part V.1 of the Act, the manner in which the Chief Statistician of Canada shall determine the population of a province for a fiscal year is by basing that determination on Statistics Canada's official estimate of the population of the province on (a) June 1 of that fiscal year, for any fiscal year ending before April 1, 2024; or (b) July 1 of that fiscal year, for any fiscal year beginning after March 31, 2024.'",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2004-62/FullText.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "'Statistics Canada's official estimate of the population of the province on ... July 1 of that fiscal year' — CHT/CST Regulations s.2."
+      }
+    },
+    {
+      "source_report_id": "canada-social-transfer",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "Federal-Provincial Fiscal Arrangements Act s. 24.51: the CST cash contribution provided to a province is the national amount 'multiplied by the quotient obtained by dividing (a) the population of the province for that fiscal year by (b) the total of the population of all provinces for that fiscal year.' Section 2 of the CHT/CST Regulations prescribes that population as 'Statistics Canada's official estimate of the population of the province on ... July 1 of that fiscal year' for fiscal years beginning after March 31, 2024.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2004-62/FullText.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "'Statistics Canada's official estimate of the population of the province on ... July 1 of that fiscal year' — CHT/CST Regulations s.2."
+      }
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "Federal-Provincial Fiscal Arrangements Regulations, 2007, s. 11: 'For the purposes of Part I of the Act and this Part, the manner in which the Chief Statistician of Canada shall determine the population of a province for a fiscal year is by basing that determination on Statistics Canada's official estimate of the population of the province on ... (b) July 1 of that fiscal year, for any fiscal year beginning after March 31, 2024.' Section 12 requires that 'the Chief Statistician of Canada shall, in each fiscal year, prepare and submit a certificate to the Minister on or before December 1 of the fiscal year', based on the most recent Statistics Canada publication available on or before November 22.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/FullText.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "'... on July 1 of that fiscal year, for any fiscal year beginning after March 31, 2024' — Federal-Provincial Fiscal Arrangements Regulations, 2007 s.11."
+      }
+    },
+    {
+      "source_report_id": "statcan-population-estimates",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "calculated_from",
+      "basis": "Statistics Canada's Quarterly Demographic Estimates programme description: 'Postcensal estimates are based on the 2021 Census counts adjusted for census net undercoverage and incompletely enumerated reserves and settlements.' The methodology section adds that estimates are 'produced by the component method. This method consists in taking the population figures from the most recent census, adjusted for CNU (including IERS), and adding or subtracting the number of births, deaths, and components of international and interprovincial migration.' The same page confirms the downstream use: 'Estimated population counts play a vital role under the Federal-Provincial Fiscal Arrangements and Federal Post-Secondary Education and Health Contributions Act, as well as with the Canada Student Loans Act, in determining the amounts of federal-provincial-territorial transfers.'",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=3601"
+    },
+    {
+      "source_report_id": "ab-tbf-fiscal-plan",
+      "target_report_id": "canada-health-transfer",
+      "relationship_type": "uses_data_from",
+      "basis": "2026-29 Fiscal Plan, revenue chapter: 'Revenue from federal transfers steadily increases due to the increase in Canada Health Transfer and Canada Social Transfer, which will grow by 5.6 per cent to reach $9.2 billion in 2026-27. Alberta's share of Canada's total population continues to rise, which in turn increases Alberta's revenue share of the major federal transfers.' Canada Health Transfer appears as its own named revenue line ($6,633 million in 2026-27), and the forecast update attributes 'a combined $96 million increase in the Canada Health Transfer (CHT) and Canada Social Transfer (CST) due to a prior year adjustment and an upward revision of Alberta's provincial share of the national population in 2025.'",
+      "evidence_url": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf"
+    },
+    {
+      "source_report_id": "ab-tbf-fiscal-plan",
+      "target_report_id": "canada-social-transfer",
+      "relationship_type": "uses_data_from",
+      "basis": "2026-29 Fiscal Plan carries Canada Social Transfer as a separate named revenue line ($2,113 million in 2026-27) alongside the Canada Health Transfer, and explains the change in both as arising from 'a prior year adjustment and an upward revision of Alberta's provincial share of the national population in 2025.'",
+      "evidence_url": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf"
+    },
+    {
+      "source_report_id": "ahs-business-plan",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "calculated_from",
+      "basis": "AHS 2024-25 Business Plan, Governance and Accountability: 'Based on the Government of Alberta's budget and fiscal plan, and the funding targets received by the Minister of Health, the 2024-25 budget was approved by the AHS Board on March 28, 2024.' The same section quantifies the dependence: 'In 2024-25, AHS will receive $16.4 billion of funding from Alberta Health and $1.2 billion of funding from Mental Health and Addiction - representing the largest allocation of the entities within these two Ministries.'",
+      "evidence_url": "https://www.albertahealthservices.ca/assets/about/org/ahs-org-bp-2024-2025.pdf"
+    },
+    {
+      "source_report_id": "ahs-financial-statements",
+      "target_report_id": "ahs-business-plan",
+      "relationship_type": "uses_data_from",
+      "basis": "AHS consolidated financial statements Note 4 Budget: 'The 2024-25 original annual budget was approved by the former AHS Board on March 28, 2024 for submission to the Minister who approved it on June 24, 2024' - the same board-approved budget the business plan describes, and the source of the Budget column reported against actuals in the Consolidated Statement of Operations. Note 25 adds that 'the viability of AHS' operations depends on transfers from AH.'",
+      "evidence_url": "https://www.albertahealthservices.ca/assets/about/publications/ahs-pub-2024-2025-financials.pdf"
+    },
+    {
+      "source_report_id": "ahs-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Note 2(a) Basis of Presentation: 'These consolidated financial statements have been prepared in accordance with Canadian Public Sector Accounting Standards. In addition, the consolidated financial statements include certain disclosures required by the financial directives issued by Alberta Health (AH).' Note 2(i) applies the PSAS government transfer standard to the Alberta Health money: transfers 'are recorded as deferred revenue when the stipulations together with AHS' actions and communications as to the use of the transfer, create a liability', and 'all other government transfers, without stipulations for the use of the transfer, are recorded as revenue when the transfer is authorized and AHS meets the eligibility criteria.' Note 2(n) lists the PSAB Conceptual Framework and PS 1202 Financial Statement Presentation as standards AHS will adopt on April 1, 2026.",
+      "evidence_url": "https://www.albertahealthservices.ca/assets/about/publications/ahs-pub-2024-2025-financials.pdf"
+    },
+    {
+      "source_report_id": "cihi-nhex",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "National Health Expenditure Trends 2024 Methodology Notes, forecasting section: the public-sector model 'uses independent variables of 1-year lagged public-sector health expenditure; 1-, 2- and 3-year lagged nominal GDP; population; population age 65+; current, 1- and 2-year lagged health and social transfers; and total provincial/territorial program spending', and 'Statistics Canada data is used for the variables population and population age 65+.' Population is also the denominator of CIHI's headline per capita health spending series.",
+      "evidence_url": "https://www.cihi.ca/sites/default/files/document/nhex-trends-2024-meth-notes-en.pdf"
+    },
+    {
+      "source_report_id": "cihi-nhex",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "National Health Expenditure Trends 2024 Methodology Notes: 'GDP figures at both the national and provincial/territorial levels are forecast for 2023 and 2024 by applying The Conference Board of Canada's forecasted growth rate of GDP for the year to the previous year's GDP figures from Statistics Canada.' GDP is defined in the notes as 'the sum of gross value-added originating within the boundaries of Canada' valued at market prices, and is the denominator of CIHI's health-spending-as-a-share-of-GDP series as well as an input to the public-sector forecasting model at one-, two- and three-year lags.",
+      "evidence_url": "https://www.cihi.ca/sites/default/files/document/nhex-trends-2024-meth-notes-en.pdf"
+    },
+    {
+      "source_report_id": "cihi-nhex",
+      "target_report_id": "statcan-shs",
+      "relationship_type": "uses_data_from",
+      "basis": "National Health Expenditure Trends 2024 Methodology Notes: 'Out-of-pocket health expenditures are based mostly on data from the Survey of Household Spending (SHS), formerly the Family Expenditure Survey, fielded by Statistics Canada. From the SHS health care category, only data on direct costs is used ... National health expenditure estimates are equal to the average expenditure per household for each category multiplied by the estimated number of households.'",
+      "evidence_url": "https://www.cihi.ca/sites/default/files/document/nhex-trends-2024-meth-notes-en.pdf"
+    },
+    {
+      "source_report_id": "cihi-nhex",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "National Health Expenditure Trends 2024 Methodology Notes: 'The health component of the consumer price index (CPI) is forecast to December of the latest year based on the average of the monthly index up to April of the same year', and the price-adjustment discussion identifies the health component of the CPI as the index 'which is used to deflate private-sector health care spending.'",
+      "evidence_url": "https://www.cihi.ca/sites/default/files/document/nhex-trends-2024-meth-notes-en.pdf"
+    },
+    {
+      "source_report_id": "cihi-nhex",
+      "target_report_id": "canada-health-transfer",
+      "relationship_type": "uses_data_from",
+      "evidence": "implied",
+      "basis": "The NHEX methodology notes say the public-sector forecasting model includes 'current, 1- and 2-year lagged health and social transfers' and that 'GDP and health and social services data are sourced from Finance Canada', which almost certainly means the CHT and CST — they are the health and social transfers Finance Canada publishes. The document never names either by name, so the identification is inference. Strong inference, but inference."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cihi-nhex -> provincial public accounts",
+      "source": "cihi-nhex",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Real and explicitly documented - 'For the provincial/territorial government sector, data is extracted annually from the public accounts of provincial/territorial governments' - but the graph has no node for the Public Accounts of Alberta or for any other province's public accounts, and inventing one for a single edge would be out of scope for this slice. This is the strongest missing node adjacent to the slice."
+    },
+    {
+      "edge": "ahs-financial-statements -> ab-hshs-business-plan",
+      "source": "ahs-financial-statements",
+      "target": null,
+      "reason": "no-document",
+      "why": "The 2026-29 Hospital and Surgical Health Services ministry business plan says the department is responsible for 'setting operational funding for Acute Care Alberta (ACA)' and that AHS is a provincial health corporation delivering acute care under ACA, and AHS' own Note 1 confirms the new AHS PHC 'is accountable to Acute Care Alberta'. But the two facts come from two different documents describing two different fiscal years mid-restructuring, and no single source states that AHS' reported figures depend on that business plan. Dropped rather than assembled."
+    },
+    {
+      "edge": "canada-health-transfer -> statcan-gdp-monthly",
+      "source": "canada-health-transfer",
+      "target": "statcan-gdp-monthly",
+      "reason": "wrong-target",
+      "why": "The escalator uses the annual rate of growth of nominal GDP for a calendar year, which is the annual/quarterly national accounts measure, not the monthly real GDP by industry series. Routing the edge to statcan-national-accounts instead."
+    },
+    {
+      "edge": "canada-health-transfer -> statcan-census-population",
+      "source": "canada-health-transfer",
+      "target": "statcan-census-population",
+      "reason": "wrong-target",
+      "why": "Not dropped so much as re-routed. The regulations prescribe Statistics Canada's official July 1 population *estimate*, not the census count, so the census is one hop further back through the postcensal estimates. Wiring the CHT directly to the census would misstate which release actually moves the money."
+    }
+  ]
+}

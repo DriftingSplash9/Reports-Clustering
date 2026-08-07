@@ -1,0 +1,154 @@
+{
+  "_layer": "MAIN DOCUMENTED / CLASSIFICATION HUBS",
+  "_status": "DRAFT SLICE — Part B only. Every claim backed by a Part A quote already extracted. Do not promote without adjudication.",
+  "_note": "Follows Research.1 instruction: do not research the classification by reading the classification; read the programmes that are coded to it. Isolated / sparse nodes allowed.",
+  "reports": [
+    {
+      "id": "statcan-business-register",
+      "title": "Business Register",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Central frame of enterprises and establishments. Record number 1105.",
+      "domains": ["business-frame", "classification"]
+    },
+    {
+      "id": "statcan-assi",
+      "title": "Annual Survey of Service Industries (and sub-surveys)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Family of annual surveys of service-industry establishments drawn from the Business Register.",
+      "domains": ["services", "classification"]
+    },
+    {
+      "id": "statcan-qsfs",
+      "title": "Quarterly Survey of Financial Statements / Quarterly Financial Statistics for Enterprises",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Enterprise-level financial statistics. Record number 2501.",
+      "domains": ["finance", "classification"]
+    },
+    {
+      "id": "statcan-cimt",
+      "title": "Canadian International Merchandise Trade (Customs Basis)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Customs-basis merchandise trade statistics. Record number 2201.",
+      "domains": ["trade", "classification"]
+    },
+    {
+      "id": "cihi-dad",
+      "title": "Discharge Abstract Database (DAD)",
+      "publisher": "Canadian Institute for Health Information",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Hospital discharge (and some day-surgery) abstracts. Primary vehicle for ICD-10-CA and CCI coded data.",
+      "domains": ["health", "classification"]
+    },
+    {
+      "id": "statcan-lfs",
+      "title": "Labour Force Survey",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Monthly household survey of employment, unemployment and labour-force characteristics.",
+      "domains": ["labour", "classification"]
+    },
+    {
+      "id": "naics",
+      "title": "North American Industry Classification System (NAICS)",
+      "publisher": "Statistics Canada / partners",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Industry classification system. Functions as a hub because multiple statistical programmes code their units to it.",
+      "domains": ["classification"]
+    },
+    {
+      "id": "hs-harmonized-system",
+      "title": "Harmonized Commodity Description and Coding System (HS)",
+      "publisher": "World Customs Organization (implemented by CBSA / Statistics Canada)",
+      "country": "CA",
+      "jurisdiction_level": "international / federal",
+      "description": "International commodity classification used for merchandise trade statistics.",
+      "domains": ["classification", "trade"]
+    },
+    {
+      "id": "icd-10-ca",
+      "title": "ICD-10-CA / Canadian Classification of Health Interventions (CCI)",
+      "publisher": "Canadian Institute for Health Information",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Canadian adaptations of the international disease and intervention classifications used to code hospital data.",
+      "domains": ["classification", "health"]
+    },
+    {
+      "id": "noc",
+      "title": "National Occupational Classification (NOC)",
+      "publisher": "Statistics Canada / ESDC",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "description": "Canadian occupational classification. Functions as a hub because labour surveys code employment to it.",
+      "domains": ["classification", "labour"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "statcan-business-register",
+      "target_report_id": "naics",
+      "relationship_type": "uses_data_from",
+      "basis": "Business Register methodology: 'Establishments are coded based on the concept of major business activity in a manner consistent with the approach outlined by the North American Industry Classification System (NAICS).'",
+      "evidence_url": "https://www.statcan.gc.ca/imdb-bmdi/1105-eng.htm"
+    },
+    {
+      "source_report_id": "statcan-assi",
+      "target_report_id": "naics",
+      "relationship_type": "uses_data_from",
+      "basis": "Annual Survey of Service Industries target-population statements: establishments are classified according to the North American Industry Classification System (NAICS) and drawn from the Business Register by NAICS code.",
+      "evidence_url": "https://www.statcan.gc.ca/imdb-bmdi/2425-eng.htm"
+    },
+    {
+      "source_report_id": "statcan-qsfs",
+      "target_report_id": "naics",
+      "relationship_type": "uses_data_from",
+      "basis": "Quarterly Survey of Financial Statements: enterprises are classified under the North American Industry Classification System (NAICS) to the code that relates to the activity providing the most value-added. Series from Q1 2023 forward based on NAICS 2022.",
+      "evidence_url": "https://www.statcan.gc.ca/imdb-bmdi/2501-eng.htm"
+    },
+    {
+      "source_report_id": "statcan-cimt",
+      "target_report_id": "hs-harmonized-system",
+      "relationship_type": "uses_data_from",
+      "basis": "Canadian International Merchandise Trade (Customs Basis) and CIMT commodity classification documentation: merchandise is classified under the Harmonized System (HS), extended to 8 digits for exports and 10 digits for imports; unit-value edits applied by HS code.",
+      "evidence_url": "https://www.statcan.gc.ca/imdb-bmdi/2201-eng.htm"
+    },
+    {
+      "source_report_id": "cihi-dad",
+      "target_report_id": "icd-10-ca",
+      "relationship_type": "uses_data_from",
+      "basis": "Discharge Abstract Database metadata: 'Since 2004–2005, all DAD records have been reported in ICD-10-CA and CCI.' Canadian Coding Standards for ICD-10-CA and CCI apply to DAD and NACRS submissions.",
+      "evidence_url": "https://www.cihi.ca/en/discharge-abstract-database-dad-metadata"
+    },
+    {
+      "source_report_id": "statcan-lfs",
+      "target_report_id": "noc",
+      "relationship_type": "uses_data_from",
+      "basis": "Labour Force Survey classification statement: 'The LFS uses the 2021 National Occupational Classification (NOC) v1.0 and estimates of employment are coded up to the five-digit level.' Also coded to NAICS 2022.",
+      "evidence_url": "IMF SDDS DQAF / LFS documentation"
+    },
+    {
+      "source_report_id": "statcan-lfs",
+      "target_report_id": "naics",
+      "relationship_type": "uses_data_from",
+      "basis": "Labour Force Survey: industry estimates coded using the 2022 North American Industry Classification System (NAICS) v1.0 up to the four-digit level.",
+      "evidence_url": "IMF SDDS DQAF / LFS documentation"
+    }
+  ],
+  "_notes": [
+    "All edges follow the Research.1 rule: the programme names the classification; the classification document itself is not treated as the source of the edge.",
+    "Business Register is the common upstream frame for many of the economic surveys that then inherit NAICS codes.",
+    "Health (ICD-10-CA/CCI) and occupational (NOC) hubs are now documented alongside the industry and commodity hubs.",
+    "No soft or financing edges introduced."
+  ]
+}

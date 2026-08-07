@@ -1,0 +1,596 @@
+{
+  "_slice": "nz-government-finance",
+  "_researched": "2026-08-06",
+  "_status": "NEW 2026-08-06. First New Zealand nodes in the corpus, and the second country in the `SAO` ('South Asia + Oceania') colour family after Australia (src/lib/palette.ts). Depth pass on central -> local government finance, on the same model as the Netherlands, UK and Australia passes. Same working session as `AU/G.1.md`; Thomas asked for New Zealand directly after Australia.",
+  "_note": "Three general-purpose subagents researched this in parallel (central->local funding: NZTA Funding Assistance Rates, LGA 2002, LGFA, central grant methodologies / the rating-valuation chain / accounting standards + statistics). EVERY quote below was then independently re-fetched and re-verified by this session's own tooling before minting: xrb.govt.nz, treasury.govt.nz, datainfoplus.stats.govt.nz, wellington.govt.nz, lgfa.co.nz and linz.govt.nz all served raw bytes to plain curl (HTML tag-stripped, or pypdf-extracted for PDFs). legislation.govt.nz is behind an AWS WAF that returns HTTP 202 with zero bytes to every non-browser client tried, so the two Acts were read from the Parliamentary Counsel Office's own PDFs replayed byte-for-byte through the Wayback `id_` endpoint (Local Government (Rating) Act 2002, version as at 27 November 2025; Rating Valuations Act 1998, version as at 23 December 2023), and the Local Government Act 2002 from a FAOLEX mirror of the PCO reprint as at 26 March 2020 -- flagged per-edge where the version matters. nzta.govt.nz and mbie.govt.nz returned HTTP 403 to direct curl and were likewise read via Wayback `id_` raw replay of the official pages. No AI-summarising fetch tool produced any quote in this file.\n\nADDENDUM 2026-08-06 (second thread, browser session). The `legislation.govt.nz` blocker described above is RESOLVED and the slice's load-bearing statutory chain has been re-read first-hand from the current consolidation, replacing the Wayback and FAOLEX proxy reads. The site renders normally in a browser; note for successors that its article-text extractor returns nothing, so the working route is DOM extraction against `div.prov`, and a session that only tries a text extractor will wrongly conclude the domain is dead. The chain, verified link by link and quoted verbatim: LGA 2002 s 111(1) \"All information that is required by any provision of this Part or of Schedule 10 to be included in any plan, report, or other document must be prepared in accordance with generally accepted accounting practice if that information is of a form or nature for which generally accepted accounting practice has developed standards.\" -> LGA 2002 s 5(1) \"generally accepted accounting practice has the same meaning as in section 8 of the Financial Reporting Act 2013\" -> FRA 2013 s 8 \"In this Act, financial statements, group financial statements, a report, or other information complies with generally accepted accounting practice only if the report, statements, or information comply with— (a) applicable financial reporting standards; and (b) in relation to matters for which no provision is made in applicable financial reporting standards, an authoritative notice.\" -> FRA 2013 s 5(1) \"financial reporting standard means a financial reporting standard issued by the Board under section 12\" and \"Board means the External Reporting Board continued under section 11\". The chain therefore terminates in the XRB by statutory definition, as `G.1.md` claimed, and the claim no longer rests on a proxy read of any kind. IMPORTANT VERSION POINT: the earlier LGA 2002 read was of a reprint as at 26 March 2020; this read is of the current consolidation, and s 111(2) (\"Subsection (1) does not apply to the preparation of a funding impact statement\", added 27 November 2010) is present and unchanged. Cheap check 5 of `NZ/G.3.md` is closed. What remains unverified is the exhaustive Schedule 10 sweep, which is still a subagent's grep — see the `_dropped` entry for it.",
+  "reports": [
+    {
+      "id": "nz-treasury-fsgnz",
+      "title": "Financial Statements of the Government of New Zealand",
+      "publisher": "The Treasury (Te Tai Ōhanga)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The audited annual financial statements of the whole New Zealand government reporting entity, presented to Parliament as paper B.11. New Zealand's analog of Canada's Public Accounts. Prepared under the Public Finance Act 1989 and NZ GAAP as defined in the Financial Reporting Act 2013, on Public Sector PBE Accounting Standards Tier 1. The Treasury also publishes interim (monthly, year-to-date) financial statements through the year; `releases_per_year` counts the audited year-end set only.",
+      "releases_per_year": 1,
+      "cadence_note": "One audited year-end set (B.11), plus roughly eleven interim monthly year-to-date sets on the same basis; `releases_per_year` counts the audited set only, since the interim statements are the same document unaudited rather than a separate release.",
+      "last_updated": null,
+      "url": "https://www.treasury.govt.nz/publications/year-end/financial-statements-2025",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "nz-treasury-befu",
+      "title": "Budget Economic and Fiscal Update",
+      "publisher": "The Treasury (Te Tai Ōhanga)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The Treasury's Budget-day economic and fiscal forecasts, parliamentary paper B.3, required by the Public Finance Act 1989. Its forecasts become the 'Budget 20XX' comparatives in the following year's Financial Statements of the Government. A Half Year Economic and Fiscal Update (HYEFU) on the same statutory footing appears each December, and a Pre-election Update in election years; `releases_per_year` counts BEFU alone.",
+      "releases_per_year": 1,
+      "cadence_note": "BEFU annually in May; the companion HYEFU each December makes two statutory Updates a year, three in election years.",
+      "last_updated": null,
+      "url": "https://www.treasury.govt.nz/publications/efu/budget-economic-and-fiscal-update-2025",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "nz-statsnz-gfs",
+      "title": "Government finance statistics (general government)",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's annual consolidation of central and local government financial activity on the IMF's GFS framework — the direct counterpart of Australia's `au-abs-gfs`. Its own DataInfo+ metadata sets out a two-source split that is unusually explicit for this corpus: central government from the Treasury's CFISnet database, local government from the annual Local Authority Census supplemented by individual councils' annual reports.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/information-releases/government-finance-statistics-general-government-year-ended-june-2025/",
+      "domains": [
+        "national-accounts",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-statsnz-qlas",
+      "title": "Local authority statistics (quarterly)",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Quarterly income and expenditure statistics for New Zealand's 11 regional councils and 68 territorial authorities, collected through the Quarterly Local Authority Survey (QLAS, questionnaire BS/QS/01). Provisional until benchmarked against the annual Local Authority Census, and fed forward into the national accounts and into Government finance statistics as the provisional local-government estimate.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/information-releases/local-authority-statistics-june-2025-quarter/",
+      "domains": [
+        "municipal-finance",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-statsnz-lac",
+      "title": "Local Authority Census / Local Authority Financial Statistics",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The annual census of all city, district and regional councils and their non-market council-controlled organisations, and the Local Authority Financial Statistics (LAFS) compiled from it — the more comprehensive, less timely annual counterpart to QLAS. Stats NZ's own metadata states that LAFS is 'no longer published in the information release format used for 2009-13' and directs users to Infoshare instead, so the release exists as a data update rather than as a titled information release; kept as one node for that reason.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, released around May for the June year ending 11 months earlier. Distributed via Infoshare rather than as a titled information release since the 2009-13 series ended.",
+      "last_updated": null,
+      "url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/9a6701e3-f1d3-4480-b879-5eea7716979b/101",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-statsnz-national-accounts-income",
+      "title": "National accounts (income, saving, assets, and liabilities)",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's quarterly institutional-sector accounts, including the net operating surplus series that the Treasury uses to uplift company tax estimates in the Financial Statements of the Government. Named in FSGNZ 2025 by its exact release URL rather than by title — the most specific Treasury-to-Stats-NZ citation found this session.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/experimental/national-accounts-income-saving-assets-and-liabilities-march-2025-quarter/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-la-annual-reports",
+      "title": "Local authority annual reports",
+      "publisher": "New Zealand local authorities",
+      "country": "NZ",
+      "jurisdiction_level": "municipal",
+      "region": "New Zealand",
+      "description": "The audited annual report every local authority must adopt under Local Government Act 2002 s.98, containing the information required by Part 3 of Schedule 10 (including, per clause 29, audited financial statements, and per clause 30A the district's rating-unit count and total capital and land values). Held as a class node — the exact counterpart of Australia's `au-la-annual-statements` — because Stats NZ, the LGFA and MBIE all name the class rather than any one council's report. `nz-wellington-annual-report` is this slice's specific exemplar.",
+      "releases_per_year": 1,
+      "cadence_note": "One per local authority per financial year, adopted within four months of 30 June (LGA 2002 s.98(3)).",
+      "last_updated": null,
+      "url": "https://www.legislation.govt.nz/act/public/2002/0084/latest/DLM172329.html",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-wellington-annual-report",
+      "title": "Wellington City Council Annual Report (Te Pūrongo ā-Tau)",
+      "publisher": "Wellington City Council",
+      "country": "NZ",
+      "jurisdiction_level": "municipal",
+      "region": "Wellington, New Zealand",
+      "description": "This slice's exemplar council annual report, Volume 2 (Financial Statements) of the 2024/25 report. Chosen over Auckland and Christchurch on availability grounds: Auckland Council's site returns HTTP 406 and Christchurch's HTTP 403 to every non-browser client tried, while wellington.govt.nz serves the PDF to plain curl. Its Statement of Compliance and its Note 1 together close the New Zealand accounting-standard chain from the council's own side — see the `nz-pbe-ipsas-1` edge, and contrast Brisbane's refusal to name AASB 1049 in `au-government-finance.json`.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://wellington.govt.nz/-/media/your-council/plans-policies-and-bylaws/plans-and-policies/annualreport/2024-25/annual-report-2024-25-volume-2.pdf",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-wellington-rates",
+      "title": "Wellington City Council rating valuations and rates",
+      "publisher": "Wellington City Council",
+      "country": "NZ",
+      "jurisdiction_level": "municipal",
+      "region": "Wellington, New Zealand",
+      "description": "Wellington City Council's own published account of how its rates are struck on rating values — the New Zealand counterpart to `au-georges-river-rates`. States that values are determined by Quotable Value on a three-yearly cycle, that the process is governed by the Rating Valuations Act 1998 and audited by the Office of the Valuer-General, and that the council sends building-consent details to QV between revaluations. NOTE: the page writes 'Rating Valuation Act 1998', dropping the 's' from the Act's actual short title 'Rating Valuations Act 1998' — quoted verbatim in the edge basis rather than silently corrected.",
+      "releases_per_year": 1,
+      "cadence_note": "Rates are set annually; the underlying rating valuation behind them is revised three-yearly (latest effective 1 September 2024, next 2027).",
+      "last_updated": null,
+      "url": "https://www.wellington.govt.nz/property-rates-and-building/rates/rates-explained/how-rates-are-calculated/rating-valuations",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "nz-district-valuation-roll",
+      "title": "District valuation roll (general revaluation)",
+      "publisher": "New Zealand territorial authorities; certified by the Valuer-General",
+      "country": "NZ",
+      "jurisdiction_level": "municipal",
+      "region": "New Zealand",
+      "description": "The roll of every rating unit in a territorial authority's district, prepared and maintained under Rating Valuations Act 1998 s.7 and revalued in full at intervals of not more than three years under s.9. The rating equivalent of the Netherlands' WOZ beschikking and NSW's Valuer-General land values. Its statutory gate is unusually hard: s.11(2) forbids assessing any rate on the proposed values until the Valuer-General has certified approval of the general revaluation.",
+      "releases_per_year": 0.33,
+      "cadence_note": "Three-yearly per territorial authority (RVA 1998 s.9(1)), staggered across the 66 territorial authorities, so several fall due nationally each year.",
+      "last_updated": null,
+      "url": "https://www.linz.govt.nz/guidance/property-valuation/audits-rating-valuations",
+      "domains": [
+        "assessment",
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "nz-rva1998",
+      "title": "Rating Valuations Act 1998",
+      "publisher": "Parliamentary Counsel Office (administered by Toitū Te Whenua Land Information New Zealand)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The Act creating the Valuer-General (s.3), setting the Valuer-General's standard-setting, monitoring and certification functions (s.4), empowering the Rating Valuations Rules (s.5), requiring each territorial authority to keep a district valuation roll (s.7), requiring three-yearly general revaluation (s.9) and forbidding rates to be assessed on uncertified values (s.11(2)). Structural counterpart of New South Wales' `au-vola1916`, minted on the same convention that a periodically reprinted statute is a node when downstream documents cite it by name.",
+      "releases_per_year": 1,
+      "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule; version read this session is 'as at 23 December 2023'.",
+      "last_updated": null,
+      "url": "https://www.legislation.govt.nz/act/public/1998/0069/latest/whole.html",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-rvr2008",
+      "title": "Rating Valuations Rules 2008 (LINZS30300)",
+      "publisher": "Office of the Valuer-General, Toitū Te Whenua Land Information New Zealand",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The Valuer-General's secondary legislation prescribing what the district valuation roll must contain, how sale details must be captured and coded, and the statistical rules a proposed revaluation must satisfy against market sales evidence (rule 5.5.1: coefficient of dispersion ≤ 12, median value price ratio 0.9–1.1, price related differential 0.98–1.03). Version date 1 October 2010; LINZ's own review page (fetched 2026-08) says replacement rules were expected to go to formal consultation in 2026, so this node's edition is likely to move.",
+      "releases_per_year": 0.1,
+      "cadence_note": "Amended rarely — Version 3.0 (2002), 3.1 (2003), 2008 issue, 31 March 2009 issue, 1 October 2010 issue. A review was under way as at July 2025.",
+      "last_updated": null,
+      "url": "https://www.linz.govt.nz/regulatory/30300",
+      "domains": [
+        "assessment",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-xrb-a1",
+      "title": "XRB A1 Application of the Accounting Standards Framework",
+      "publisher": "External Reporting Board (XRB)",
+      "country": "NZ",
+      "jurisdiction_level": "institutional",
+      "region": "New Zealand",
+      "description": "The XRB standard that allocates every reporting entity to a tier and to a for-profit / public-benefit-entity track, and defines 'public sector PBE' by cross-reference to the Public Audit Act 2001. THE FINDING OF THIS SLICE LIVES HERE: XRB A1 never uses the words 'local authority' or 'Local Government Act' anywhere in its 43 pages (grep of the full extracted text, 0 hits) — like Australia's AASB 1049 and unlike the Netherlands' BBV or the UK's CIPFA Code, the standard does not name local government in its own scope.",
+      "releases_per_year": 0.2,
+      "cadence_note": "Issued 10 December 2015; compiled version read this session 'incorporates amendments to 31 March 2024'.",
+      "last_updated": null,
+      "url": "https://www.xrb.govt.nz/standards/accounting-standards/accounting-standards-framework/",
+      "domains": [
+        "municipal-finance",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-pbe-ipsas-1",
+      "title": "PBE IPSAS 1 Presentation of Financial Reports",
+      "publisher": "New Zealand Accounting Standards Board / External Reporting Board (XRB)",
+      "country": "NZ",
+      "jurisdiction_level": "institutional",
+      "region": "New Zealand",
+      "description": "The presentation standard for Tier 1 and Tier 2 public benefit entities, which is what New Zealand councils report under. Like XRB A1, it names no local authority: grep of its full 54 pages returns 0 hits for 'local authority', 'Local Government Act' and 'Public Audit Act'. The only local-government hook in its text is the word 'ratepayers' in the list of users of general purpose financial reports (para 3), which is not a scope binding. The binding is achieved instead by a statutory chain outside the standard — see the `nz-wellington-annual-report` edge.",
+      "releases_per_year": 0.2,
+      "cadence_note": "Issued September 2014; version read this session incorporates amendments to 31 January 2022 with further amendments effective 1 January 2026.",
+      "last_updated": null,
+      "url": "https://www.xrb.govt.nz/standards/accounting-standards/public-sector-standards/standards-list/pbe-ipsas-1/",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-lgfa-annual-report",
+      "title": "LGFA Annual Report",
+      "publisher": "New Zealand Local Government Funding Agency (LGFA)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The annual report of the joint council-and-Crown-owned agency that raises debt on behalf of New Zealand councils — an institution with no direct Australian, Dutch or UK counterpart in this corpus. Names councils' own statutory planning documents as the material it monitors against its lending covenants. NEGATIVE FINDING recorded here: grep of the full 77-page 2025 report returns 0 hits for 'Statistics New Zealand', 'Stats NZ' and 'census' — LGFA's covenants are defined on accounting aggregates, not on any named statistical release.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.lgfa.co.nz/",
+      "domains": [
+        "municipal-finance",
+        "banking"
+      ]
+    },
+    {
+      "id": "nz-nzta-far-policy",
+      "title": "Funding Assistance Rates (FAR) Policy",
+      "publisher": "NZ Transport Agency Waka Kotahi",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The policy that sets, once per three-year National Land Transport Programme, the share of each council's land transport programme the National Land Transport Fund co-invests. New Zealand's closest structural analog to the funding-formula technical annexes that anchored the Netherlands, UK, Ontario and Tasmania slices — and it is DELIBERATELY ISOLATED in this graph, because it names none of its four inputs to a titled source. See this slice's `_dropped` array for the verbatim negative. The isolation is the finding, on the convention `EU/G.47.md` established for `nordic-statistics-database` and `AU/G.1.md` reused for `au-brisbane-financial-statements`.",
+      "releases_per_year": 0.33,
+      "cadence_note": "Normal FARs are recalculated once per three-year NLTP cycle; the policy page itself is a living document (issued February 2021, last updated August 2023).",
+      "last_updated": null,
+      "url": "https://www.nzta.govt.nz/planning-and-investment/planning-and-investment-knowledge-base/202427-nltp-investment-requirements/202427-nltp-principles-and-policies/funding-2/funding-assistance-rates-far-policy",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-mbie-tif",
+      "title": "Tourism Infrastructure Fund: application and assessment process",
+      "publisher": "Ministry of Business, Innovation & Employment (MBIE)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "MBIE's published assessment process for the Tourism Infrastructure Fund, which allocates central-government co-funding to councils for visitor-related infrastructure. The only New Zealand central-government allocation document found this session that names its own territorial-authority-level data inputs by exact title. CADENCE CAVEAT: TIF ran in numbered rounds (Round 7 opened April 2023) rather than on a fixed schedule, and the round cadence is the weakest part of this node's claim to be a recurrent release.",
+      "releases_per_year": 1,
+      "cadence_note": "Round-based rather than periodic — roughly annual rounds, with the assessment page revised per round.",
+      "last_updated": null,
+      "url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-mbie-accommodation-data",
+      "title": "Accommodation Data Programme",
+      "publisher": "Ministry of Business, Innovation & Employment (MBIE)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "MBIE's monthly commercial-accommodation guest-night series, collected from accommodation providers and reported at territorial-authority level. Successor to the Stats NZ Accommodation Survey. Named by exact title in the Tourism Infrastructure Fund's assessment process as the source of the guest-night half of its eligibility ratio.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism-research-and-data/tourism-data-releases/accommodation-data-programme",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-mbie-tect",
+      "title": "Tourism Electronic Card Transactions (TECTs)",
+      "publisher": "Ministry of Business, Innovation & Employment (MBIE)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "MBIE's monthly estimates of tourism spending derived from electronic card transaction data, published by territorial authority and region. Named by exact title and acronym in the Tourism Infrastructure Fund's assessment process as the source of the regional tourism-revenue eligibility test.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism-research-and-data/tourism-data-releases/monthly-regional-tourism-estimates",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-oag-annual-report",
+      "title": "Annual Report of the Controller and Auditor-General",
+      "publisher": "Controller and Auditor-General of New Zealand (Office of the Auditor-General / The Audit Office)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The Auditor-General's statutory annual report to the House of Representatives, required by section 37 of the Public Audit Act 2001. Minted 2026-08-06 to close the branch's highest-value single gap: the corpus held no node for the New Zealand Auditor-General's own recurring output, which is what blocked the Tokelau half of the export-of-institution finding. The report is where the office states, in its own words and every year, the extent of its mandate, including the two jurisdictions outside New Zealand it serves.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual and statutory. Public Audit Act 2001 s 37(1): \"As soon as practicable after the end of each financial year, the Auditor-General must prepare and present an annual report to the House of Representatives in accordance with section 43 of the Public Finance Act 1989.\" s 37(2) requires it to include \"an account of the implementation of the annual plan required under section 36\" and \"a list of entities audited by the Auditor-General under an arrangement in accordance with section 19\". The 2024/25 edition is 108 pages.",
+      "last_updated": "2025",
+      "url": "https://ao.parliament.nz/2025/annual-report/",
+      "domains": [
+        "national-accounts",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "nz-public-audit-act-2001",
+      "title": "Public Audit Act 2001",
+      "publisher": "Parliamentary Counsel Office (administered by the Office of the Auditor-General)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "The statute that constitutes the Auditor-General, defines 'public entity', and requires the annual plan (s 36) and the annual report (s 37). Minted 2026-08-06 because it was already load-bearing in this corpus without a node: XRB A1 defines 'public sector PBE' by cross-reference to it, Wellington City Council self-classifies under it, and the Tokelau audit mandate turns on it. Schedule 2, 'Specific public entities not falling within any class' (s 5(1)(d)), lists \"Tokelau Administration\" by name. A full-text search of the current consolidation returns one occurrence of 'Tokelau' and zero of 'Niue' — which is the sharpest single piece of evidence for the export-of-institution finding, because it shows New Zealand statute reaching into Tokelau and being silent on Niue, whose Constitution instead reaches out.",
+      "releases_per_year": 1,
+      "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule. Version read 2026-08-06 is the current consolidation on legislation.govt.nz, which carries amendments through the Taranaki Maunga Collective Redress Act 2025 in Schedule 2.",
+      "last_updated": null,
+      "url": "https://www.legislation.govt.nz/act/public/2001/0010/latest/whole.html",
+      "domains": [
+        "national-accounts",
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "nz-statsnz-gfs",
+      "target_report_id": "nz-statsnz-lac",
+      "relationship_type": "calculated_from",
+      "basis": "VERIFIED DIRECTLY (DataInfo+ page fetched with plain curl and HTML-tag-stripped). Under the heading \"Data sources\": \"Local government: We derived the data in the accompanying Excel tables from our annual Local Authority Census (LAC), supplemented with information from individual local authority annual reports and subsequent enquiries to councils. LAC data was unavailable for the latest GFS published year so we used a combination of methods and surveys to create provisional estimates.\"",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/f5d83be3-c55c-4343-a850-35a9009d9b5c"
+    },
+    {
+      "source_report_id": "nz-statsnz-gfs",
+      "target_report_id": "nz-la-annual-reports",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (same DataInfo+ \"Data sources\" section, same fetch). \"...supplemented with information from individual local authority annual reports and subsequent enquiries to councils.\" The document class is named, not any one council's report — the same shape as `au-abs-gfs -> au-la-annual-statements`.",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/f5d83be3-c55c-4343-a850-35a9009d9b5c"
+    },
+    {
+      "source_report_id": "nz-statsnz-gfs",
+      "target_report_id": "nz-statsnz-qlas",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (QLAS DataInfo+ page fetched with plain curl and HTML-tag-stripped). \"The Quarterly Local Authority Survey (QLAS) is used in GFS to create provisional estimates for the latest published year in the absence of LAC data.\" Note this is stated on the QLAS page, i.e. by the input about itself, and is corroborated from the GFS side by that page's own \"LAC data was unavailable for the latest GFS published year so we used a combination of methods and surveys to create provisional estimates.\"",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/f0e135ea-1e3b-466d-a4dd-5eb83238605c"
+    },
+    {
+      "source_report_id": "nz-statsnz-qlas",
+      "target_report_id": "nz-statsnz-lac",
+      "relationship_type": "calculated_from",
+      "basis": "VERIFIED DIRECTLY (QLAS DataInfo+ page, plain curl + tag-strip). \"Quarterly results are reconciled to annual values provided by the annual Local Authority Census (LAC) and validated against annual reports. Each year, we publish annual local authority financial statistics based on the LAC. Results presented in this release are provisional for recent quarters and the most recent annual result, until these annual reconciliation and validation processes are complete.\"",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/f0e135ea-1e3b-466d-a4dd-5eb83238605c"
+    },
+    {
+      "source_report_id": "nz-statsnz-qlas",
+      "target_report_id": "nz-la-annual-reports",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (QLAS DataInfo+ page, plain curl + tag-strip). \"Quarterly results are reconciled to annual values provided by the annual Local Authority Census (LAC) and validated against annual reports.\" — the annual reports are named as the validation input, not merely as context.",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/f0e135ea-1e3b-466d-a4dd-5eb83238605c"
+    },
+    {
+      "source_report_id": "nz-statsnz-lac",
+      "target_report_id": "nz-la-annual-reports",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (Local Authority Census DataInfo+ page, plain curl + tag-strip). Under \"Data Source\": \"For most local authorities, the requested data will be based on their audited financial accounts, supplemented by information from individual local authority annual reports and subsequent enquiries to councils.\"",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/9a6701e3-f1d3-4480-b879-5eea7716979b/101"
+    },
+    {
+      "source_report_id": "nz-treasury-fsgnz",
+      "target_report_id": "nz-statsnz-national-accounts-income",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (fsgnz-2025.pdf downloaded from treasury.govt.nz with plain curl, 177 pages, pypdf-extracted). Note 2, Key Assumptions and Estimation, tax revenue: \"This assumption is derived from Statistics New Zealand's (Stats NZ) quarterly data series released in July 2025. Details of the quarterly release can be found at: https://www.stats.govt.nz/experimental/national-accounts-income-saving-assets-and-liabilities-march-2025-quarter/. Net operating surplus is derived from gross operating surplus and gross mixed income less consumption of fixed capital.\" The release is identified by exact URL rather than by title — recorded as such rather than paraphrased into a title the Treasury did not write.",
+      "evidence_url": "https://www.treasury.govt.nz/sites/default/files/2025-10/fsgnz-2025.pdf"
+    },
+    {
+      "source_report_id": "nz-treasury-fsgnz",
+      "target_report_id": "nz-treasury-befu",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (fsgnz-2025.pdf, pypdf-extracted). Glossary of Terms, \"Comparatives (Budget 2024 and Budget 2025)\": \"Comparatives referred to as Budget 2024 were forecasts for the year ended 30 June 2025 published in the 2024 Budget Economic and Fiscal Update in May 2024 while comparatives referred to as Budget 2025 were forecasts for the year ended 30 June 2025 published in the 2025 Budget Economic and Fiscal Update in May 2025.\" Corroborated in the body: \"The Treasury's most recent forecast for the 30 June 2025 fiscal year was released on 22 May 2025 as part of the Budget Economic and Fiscal Update 2025 (Budget 2025).\"",
+      "evidence_url": "https://www.treasury.govt.nz/sites/default/files/2025-10/fsgnz-2025.pdf"
+    },
+    {
+      "source_report_id": "nz-pbe-ipsas-1",
+      "target_report_id": "nz-xrb-a1",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (PBE IPSAS 1 PDF downloaded from xrb.govt.nz with plain curl, 54 pages, pypdf-extracted). Preamble: \"PBE IPSAS 1 should be read in the context of its objective, the NZASB's Basis for Conclusions on PBE IPSAS 1, the IPSASB's Basis for Conclusions on IPSAS 1, the Public Benefit Entities' Conceptual Framework and Standard XRB A1 Application of the Accounting Standards Framework.\" Named by exact title. XRB A1 is what decides which tier and which track an entity reports on, so PBE IPSAS 1's own scope clause (\"This Standard applies to Tier 1 and Tier 2 public benefit entities\") is unusable without it.",
+      "evidence_url": "https://www.xrb.govt.nz/dmsdocument/3802/"
+    },
+    {
+      "source_report_id": "nz-wellington-annual-report",
+      "target_report_id": "nz-pbe-ipsas-1",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (Volume 2 PDF fetched from wellington.govt.nz with plain curl, 162 pages, pypdf-extracted). Statement of Compliance: \"Wellington City Council's Governing Body and management team confirm they have complied with all of the statutory requirements in relation to the Annual Report, as outlined in Schedule 10 of the Local Government Act 2002 (LGA 2002), including the requirement to comply with New Zealand Generally Accepted Accounting Practice (NZ GAAP)... The financial statements have been prepared to comply with Public Sector Public Benefit Entity Accounting Standards (PBE Accounting Standards) for a Tier 1 entity...\" Note 1, Basis of Reporting: \"As a defined public entity under the Public Audit Act 2001, the Council is audited by the Office of the Auditor General and is classed as a Public Sector Public Benefit Entity (PBE) for financial reporting purposes.\" And, naming this standard by exact title, \"Changes to PBE accounting standards\": \"Disclosure of Fees for Audit Firms' Services (Amendments to PBE IPSAS 1 – Presentation of financial reports)\" and \"2024 Omnibus Amendments to PBE Standards (amendments to PBE IPSAS 1)\". THIS IS THE EDGE THE AUSTRALIAN SLICE COULD NOT MINT: Brisbane City Council never names AASB 1049; Wellington names PBE IPSAS 1 by title and self-classifies into exactly the category XRB A1 defines.",
+      "evidence_url": "https://wellington.govt.nz/-/media/your-council/plans-policies-and-bylaws/plans-and-policies/annualreport/2024-25/annual-report-2024-25-volume-2.pdf"
+    },
+    {
+      "source_report_id": "nz-wellington-rates",
+      "target_report_id": "nz-rva1998",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (wellington.govt.nz page fetched with plain curl and HTML-tag-stripped). \"To provide fair, transparent property rates, we use standard rating valuations governed by the Rating Valuation Act 1998 and audited by the Office of the Valuer-General.\" Quoted exactly as published, including the council's own dropped 's' — the Act's short title is 'Rating Valuations Act 1998'. Corroborated on the same page: \"Rates are based on the rating value of your property, which is determined by Quotable Value (QV). It must be done every 3 years.\"",
+      "evidence_url": "https://www.wellington.govt.nz/property-rates-and-building/rates/rates-explained/how-rates-are-calculated/rating-valuations"
+    },
+    {
+      "source_report_id": "nz-wellington-rates",
+      "target_report_id": "nz-district-valuation-roll",
+      "relationship_type": "calculated_from",
+      "basis": "VERIFIED DIRECTLY (Local Government (Rating) Act 2002, version as at 27 November 2025, read from the Parliamentary Counsel Office's own PDF replayed byte-for-byte through the Wayback `id_` endpoint because legislation.govt.nz's WAF returns HTTP 202 with zero bytes to non-browser clients; pypdf-extracted, 129 pages). The chain is entirely in statute, in four hops. s.13(3): \"For the purposes of this section, the rateable value of the land— (a) must be— (i) the annual value of the land; or (ii) the capital value of the land; or (iii) the land value of the land; and (b) must be identified in the local authority's funding impact statement as the value for setting a general rate.\" s.5 pins each of those three to the other Act: \"capital value has the meaning set out in section 2(1) of the Rating Valuations Act 1998\" (identically for annual value and land value). s.27(4): \"The database must include, in relation to each rating unit within the local authority's district,— (a) all information that relates to the unit that is included in the district valuation roll for the district\". s.5 again: \"district valuation roll means,— (a) in relation to a territorial authority, a roll prepared for a district under section 7 of the Rating Valuations Act 1998 and approved under section 11 of that Act\". This is New Zealand's exact counterpart to NSW Local Government Act 1993 s.498's cross-Act citation of the Valuation of Land Act 1916.",
+      "evidence_url": "https://www.legislation.govt.nz/act/public/2002/0006/latest/whole.html"
+    },
+    {
+      "source_report_id": "nz-district-valuation-roll",
+      "target_report_id": "nz-rva1998",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (Rating Valuations Act 1998, version as at 23 December 2023, PCO PDF via Wayback `id_` raw replay, pypdf-extracted, 43 pages). s.7(1): \"Each territorial authority must prepare and maintain a district valuation roll for its own district in accordance with rules made under this Act.\" s.9(1): \"A territorial authority must revise its district valuation roll at intervals of not more than 3 years by revaluing every rating unit within its district to ensure that the roll represents values current as at the date of the revaluation.\" s.11(2), the hard gate: \"No rate may be assessed on the basis of the values proposed in the general revaluation unless the Valuer-General has certified his or her approval of the general revaluation under this section.\" s.4(1)(b) gives the Valuer-General the function \"to set minimum quality standards and specifications necessary for the maintenance and upkeep of district valuation rolls...\"",
+      "evidence_url": "https://www.legislation.govt.nz/act/public/1998/0069/latest/whole.html"
+    },
+    {
+      "source_report_id": "nz-district-valuation-roll",
+      "target_report_id": "nz-rvr2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (both documents read this session — RVA 1998 as above; Rating Valuations Rules 2008 LINZS30300 version date 1 October 2010, the official linz.govt.nz PDF replayed through Wayback `id_`, pypdf-extracted, 79 pages). RVA s.7(1) requires the roll to be maintained \"in accordance with rules made under this Act\" and s.7(2) that \"Each roll must contain the information in respect of each rating unit within the district that is required by the rules\"; s.9(3) requires each general revaluation to \"comply with rules made by the Valuer-General for the purpose\". The Rules then set the content (rule 2.1), the sale-detail capture (rule 4.4.2: \"The territorial authority must enter sale details in the DVR supporting information, as set out in rule 2.2, within 15 working days of receiving the necessary documentation\") and the acceptance test (rule 5.5.1: \"Where capital values or only land values are assessed, the proposed values, when compared to the market sales evidence, must satisfy the following statistical rules where appropriate: (a) coefficient of dispersion, which must be equal to or less than 12, (b) median value price ratio, which must be within the range 0.9 to 1.1, (c) price related differential which must be within the range 0.98 and 1.03, and (d) comparison of average value changes between sold and unsold properties, which must be equal to or less than 5 %.\").",
+      "evidence_url": "https://www.linz.govt.nz/regulatory/30300"
+    },
+    {
+      "source_report_id": "nz-rvr2008",
+      "target_report_id": "nz-rva1998",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (LINZS30300 PDF, pypdf-extracted). Signature page: \"Under section 5 of the Rating Valuations Act 1998 I hereby make the Rating Valuations Rules 2008.\" Foreword: \"The Rating Valuations Rules (Rules) are issued by the Valuer-General under ss 5 to 5C of the Rating Valuations Act 1998 (RVA) in the interests of ensuring a nationally consistent, impartial, independent, and equitable rating valuation system that can be monitored and audited.\" The Act is also listed under the Rules' own \"References\" heading: \"The following documents are necessary for the application of these Rules... Rating Valuations Act 1998\".",
+      "evidence_url": "https://www.linz.govt.nz/regulatory/30300"
+    },
+    {
+      "source_report_id": "nz-lgfa-annual-report",
+      "target_report_id": "nz-la-annual-reports",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (LGFA Annual Report 2025, 77 pages, pypdf-extracted). \"All member councils are required to complete a compliance certificate each year which certifies that the council has complied with LGFA's financial covenants. In addition, LGFA monitors all councils and CCOs annual reports, annual plans and long-term plans on an ongoing basis to ensure that the financial forecasts are consistent with the LGFA financial covenants.\" Corroborated in the performance section: \"Over the twelve months, we reviewed council annual plans, agendas and management reports on an ongoing basis for all members on the LGFA borrower watchlist... A small number of certificates were provided based upon unaudited financial statements given a delay in providing final audit signoff. These have subsequently been verified following the eventual publication of the council's annual report.\" The annual plans and long-term plans named in the same sentence are not yet nodes — see this slice's `_dropped` array.",
+      "evidence_url": "https://www.lgfa.co.nz/"
+    },
+    {
+      "source_report_id": "nz-mbie-tif",
+      "target_report_id": "nz-mbie-accommodation-data",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (mbie.govt.nz returns HTTP 403 to direct curl; the official page was replayed byte-for-byte through the Wayback `id_` endpoint and HTML-tag-stripped). Under \"Eligibility and assessment\", introduced by \"We interpret 'region' as the area for which the applicant (eg, local council) is responsible. We will refer to the following territorial authority level data:\" — \"Guest nights to rating unit ratio: To determine the ratio, guest night numbers can be obtained from the Accommodation Data Programme.\" Named by exact title.",
+      "evidence_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process"
+    },
+    {
+      "source_report_id": "nz-mbie-tif",
+      "target_report_id": "nz-mbie-tect",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (same page and fetch method). \"ECT Tourism Revenue: To determine revenue from tourism, MBIE will use the Tourism Electronic Card Transaction (TECT) for the different TAs.\" And, on other inputs: \"Other data sources: Applicants are encouraged to use the TECTs or any other data from reliable sources that supports their application.\" Named by exact title and acronym.",
+      "evidence_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process"
+    },
+    {
+      "source_report_id": "nz-mbie-tif",
+      "target_report_id": "nz-la-annual-reports",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (same page and fetch method). \"Rating unit figures will be sourced from TAs' annual reports (note this is the number of rateable properties and not the population figure).\" This lands exactly on Local Government Act 2002 Schedule 10 clause 30A, which requires the annual report to state \"the number of rating units within the district or region of the local authority at the end of the preceding financial year\" — so the grant document and the statute are describing the same figure, though MBIE does not cite clause 30A itself.",
+      "evidence_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process"
+    },
+    {
+      "source_report_id": "nz-statsnz-gfs",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED (quote confirmed character-for-character against this sandbox's own text extraction of the DataInfo+ item, made by the minting session on 2026-08-06 and still present at /tmp/gfsdi.txt / gfsdi.html; NOT independently re-fetched by this session, because the DataInfo+ HTML render available to this session's fetch tool omits the collapsed methodology block and the Wayback `id_` route used by predecessors is unavailable here). Under the heading \"Consistency with other periods or datasets\", sub-heading \"Change from GFSM 2001 to GFSM 2014\": \"All GFS releases prior to and including Government finance statistics (general government): Year ended June 2017 compiled information in accordance with the IMF's Government Finance Statistics Manual 2001 (GFSM 2001). In 2018, we implemented the Government Finance Statistics Manual 2014 (GFSM2014), which follows the GFSM 2001 and is consistent with the System of National Accounts 2008 (SNA08). Implementing the GFSM 2014 is important for ensuring that New Zealand's GFS are consistent with international best practice and can be internationally compared.\" The same page adds, of the classification decisions: \"This is consistent with the GFSM 2014\"; \"According to the GFSM 2014, net debt includes all financial assets and liabilities except shares and other equity and financial derivatives\"; and \"Generally, the layout of the tables is consistent with the GFSM 2014 recommendations.\" Typed `methodology_depends_on` on the precedent of `statcan-national-accounts -> imf-gfsm` and `ck-budget-estimates -> imf-gfsm`.",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/f5d83be3-c55c-4343-a850-35a9009d9b5c"
+    },
+    {
+      "source_report_id": "nz-pbe-ipsas-1",
+      "target_report_id": "ipsas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED (quote confirmed character-for-character against this sandbox's own pypdf extraction of the XRB standard, made by the minting session on 2026-08-06 and still present at /tmp/pbeipsas1.pdf / pbeipsas1.txt; this session independently re-fetched the current compiled PDF at standards.xrb.govt.nz/assets/dms-assets/PBE-IPSAS-1-Jan24.pdf and confirmed the appendix still exists in the current version's contents list as \"Comparison with IPSAS 1\", but that fetch truncated at paragraph 137 and did not reach the appendix body). Appendix \"Comparison with IPSAS 1\", opening sentence: \"PBE IPSAS 1 Presentation of Financial Reports is drawn from IPSAS 1 Presentation of Financial Statements.\" The appendix then enumerates the departures, which confirms this is adoption-with-amendment rather than a passing reference: \"The significant differences between PBE IPSAS 1 and IPSAS 1 are: (a) The title of PBE IPSAS 1 reflects the fact that it establishes presentation requirements for both financial statements and service performance information. (b) PBE IPSAS 1 reflects the New Zealand regulatory environment, including the requirements in the Financial Reporting Act 2013 regarding compliance with accounting standards. (c) PBE IPSAS 1 requires an assertion of compliance with PBE Standards rather than an assertion of compliance with IPSASs.\" Typed `methodology_depends_on`, matching `ck-government-financial-statements -> ipsas` and `psab-psas -> ipsas`.",
+      "evidence_url": "https://www.xrb.govt.nz/standards/accounting-standards/public-sector-standards/standards-list/pbe-ipsas-1/"
+    },
+    {
+      "source_report_id": "nz-oag-annual-report",
+      "target_report_id": "nz-public-audit-act-2001",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY by this session (2026-08-06, second thread): the Act read in a browser on legislation.govt.nz, the annual report's own text extracted from the 108-page PDF at ao.parliament.nz. The report states its governing instruments in its own front matter: \"The annual report informs our stakeholders – Parliament, New Zealanders, and public organisations – about our strategic intentions, priorities, and performance for the year 1 July 2024 to 30 June 2025. It has been prepared in keeping with the requirements of the Public Audit Act 2001 and the Public Finance Act 1989, as well as recent guidance provided by the Treasury.\" The Act supplies both the obligation and the required contents — s 37(1): \"As soon as practicable after the end of each financial year, the Auditor-General must prepare and present an annual report to the House of Representatives in accordance with section 43 of the Public Finance Act 1989.\" s 37(2): \"The report must include— ... (b) an account of the implementation of the annual plan required under section 36; and (c) a list of entities audited by the Auditor-General under an arrangement in accordance with section 19.\" This is methodology_depends_on rather than cites because the statute dictates the report's contents, not merely its existence. NOTE the Public Finance Act 1989 is named in the same sentence and is not a node; recorded as a lead in `_dropped`.",
+      "evidence_url": "https://www.legislation.govt.nz/act/public/2001/0010/latest/whole.html"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "nz-nzta-far-policy -> any titled data source",
+      "source": "nz-nzta-far-policy",
+      "target": null,
+      "reason": "no-document",
+      "why": "VERIFIED DIRECTLY (the official NZTA page replayed through Wayback `id_` raw bytes after nzta.govt.nz returned HTTP 403 to direct curl). This is the New Zealand equivalent of the document that carried the Netherlands, UK, Ontario and Tasmania slices — a national formula deciding how much central money each council gets — and it names none of its inputs to a titled release. Verbatim, the whole of its \"Inputs\" section: \"Inputs for each approved organisation are: centreline kilometres, which provide a measure of the length of the road network to be maintained and services to be available to all transport users / capital value, which is used by most local authorities to set rates, and provides a measure of the asset base from which local authorities raise their local share / inverse of rating units, which identifies local authorities that have the smallest number of ratepayers from which to source their local share / index of deprivation, a demographic index published by the University of Otago and used by the Ministry of Health, which provides a measure of the relative wealth of communities / total cost of all activities for a recent period, which is the actual total costs incurred by approved organisations for the last 3 to 5 years.\" And \"Setting normal FARs\": \"A year before the start of each NLTP, we recalculate the normal FAR for each approved organisation by inputting the latest available information. The changes in FARs, if any, will reflect movements in centreline kilometres, capital values, rating units and the index of deprivation.\" Two publishers are named for the deprivation index and no title; the other three inputs are sourced anonymously, even though 'capital value' and 'rating units' are exactly the figures LGA 2002 Schedule 10 clause 30A makes councils publish. `nz-nzta-far-policy` is therefore minted and left isolated, on the `au-brisbane-financial-statements` convention — the absence is the result."
+    },
+    {
+      "edge": "NZTA FAR review: Options discussion document 2013 -> NZDep2006 Index of Deprivation",
+      "source": null,
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "A real, exactly-titled citation that cannot become an edge because the citing document is a one-off. A subagent found, in NZTA's 2013 'Funding assistance rates (FAR) review: Options discussion document' (footnote 6, p.36 of the printed document): \"Source: NZDep2006 Index of Deprivation, C Salmond, P Crampton and J Atkinson, August 2007, page 21.\" NOT INDEPENDENTLY RE-VERIFIED this session — the PDF was read by a subagent via Wayback replay and this session did not re-fetch it, since the finding is unusable either way. Recorded because it shows the deprivation index NZTA still uses does have a titled source; the recurring policy page simply stopped naming it."
+    },
+    {
+      "edge": "council long-term plan / development contributions policy -> Producers Price Index Outputs for Construction",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "VERIFIED DIRECTLY (Local Government Act 2002, PCO reprint as at 26 March 2020, read from a FAOLEX mirror PDF because legislation.govt.nz's WAF blocks non-browser clients; pypdf-extracted, 469 pages). s.106(2C): \"A development contribution may be increased under subsection (2B) only if— (a) the increase does not exceed the result of multiplying together— (i) the rate of increase (if any), in the Producers Price Index Outputs for Construction provided by Statistics New Zealand since the development contribution was last set or increased...\" This is the ONLY place in the whole Act where a Stats NZ release is named by title rather than by agency, and it is a real formula link. Not minted because neither endpoint is a node yet: the citing side is a council's development contributions policy (part of the long-term plan), and the cited side is a series inside the Producers Price Index rather than a standalone release. Note also a title-drift problem for whoever builds it — the modern Stats NZ product is 'Producers price index' with a construction-industry outputs series, not a release called 'Producers Price Index Outputs for Construction'. VERSION CAVEAT: the reprint read is five years old; re-check s.106(2C) against the current consolidation before building."
+    },
+    {
+      "edge": "Rating Valuations Rules 2008 -> a titled land-registry sales dataset",
+      "source": "nz-rvr2008",
+      "target": null,
+      "reason": "no-document",
+      "why": "VERIFIED DIRECTLY (full 79-page LINZS30300 text grepped case-insensitively). New Zealand has NO counterpart to the NSW chain's \"NSW property sales information comes from Notices of Sale lodged with Land Registry Services\" or to the Netherlands' Waarderingsinstructie naming Kadaster. Hits: 'Landonline' 0, 'notice of sale' 0, 'Registrar-General' 0, 'tax statement' 0, 'Quotable' 0. The Rules require sale details to be captured and coded (rules 2.2, 4.4.2, Appendix G) and the Valuer-General to analyse \"All market sales and market rentals for whole rating units that are relevant to the effective date of the revaluation\" (rule 5.5 commentary) — but they name a data CATEGORY and never a register, form or titled release. Building consents are likewise named as a category held by the territorial authority itself (rules 4.7.6, 4.7.7), corroborated from the council side by Wellington City Council's \"Between three-yearly revaluations, we send details of all building consents to Quotable Value\". This is a genuine structural difference from both the Australian and Dutch chains, not a search failure."
+    },
+    {
+      "edge": "LINZ property transfers and tax residency data -> the rating valuation chain",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "VERIFIED DIRECTLY (linz.govt.nz page fetched with plain curl). The obvious candidate for the missing sales-evidence source is LINZ's transfer tax statement data, whose quarterly reports Stats NZ took over in 2018. LINZ's own page rules it out: \"Information on the size or value of the property being transferred is not included in this report as this is not collected in the tax statements.\" No value and no size means it cannot be the input to a mass-appraisal revaluation. Recorded so a future session does not spend the same hour rediscovering it."
+    },
+    {
+      "edge": "XRB A1 / PBE IPSAS 1 -> local authorities, by name",
+      "source": "nz-xrb-a1",
+      "target": null,
+      "reason": "denied",
+      "why": "VERIFIED DIRECTLY (both standards downloaded from xrb.govt.nz with plain curl and pypdf-extracted in full, then grepped). XRB A1, 43 pages: 'local authorit' 0 hits, 'Local Government Act' 0 hits. PBE IPSAS 1, 54 pages: 'local authorit' 0, 'Local Government Act' 0, 'Public Audit Act' 0. The only local-government word anywhere in PBE IPSAS 1 is 'ratepayers', in para 3's list of users of general purpose financial reports — not a scope clause. New Zealand's accounting standards bind councils the way Australia's AASB 1049 does not and the Netherlands' BBV and the UK's CIPFA Code do: NOT by naming them. What differs from Australia is that the binding still happens, transitively and entirely in statute — LGA 2002 s.111 (\"All information that is required by any provision of this Part or of Schedule 10 to be included in any plan, report, or other document must be prepared in accordance with generally accepted accounting practice...\") → LGA 2002 s.5 (\"generally accepted accounting practice has the same meaning as in section 8 of the Financial Reporting Act 2013\") → Financial Reporting Act 2013 s.8 → XRB standards; and the Financial Reporting Act's own definition of 'entity' expressly includes \"a local authority (within the meaning of section 5(1) of the Local Government Act 2002)\". The LGA quotes are VERIFIED DIRECTLY from the FAOLEX mirror of the PCO reprint as at 26 March 2020; the Financial Reporting Act 2013 text was NOT independently re-verified this session (legislation.govt.nz blocked; a subagent read it through a text-extraction proxy) and should be re-read before being relied on. The one XRB-published document that does name local government is the XRB website's own Accounting Standards Framework page — \"Local bodies and council controlled organisations (CCOs) under the Local Government Act 2002\" — VERIFIED DIRECTLY, but a web page rather than a standard, so it carries no edge."
+    },
+    {
+      "edge": "nz-lgfa-annual-report -> council long-term plans and annual plans",
+      "source": "nz-lgfa-annual-report",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The same LGFA sentence that carries the minted annual-reports edge also names \"annual plans and long-term plans\" — the LGA 2002 s.95 and s.93 documents. Neither is a node yet. The long-term plan in particular is the richest unbuilt New Zealand node available: three-yearly, statutorily required to contain a financial strategy (s.101A), an infrastructure strategy (s.101B) and a funding impact statement, and separately audited by the Auditor-General, who publishes an observations report per cycle. Deliberately left for a second New Zealand session rather than half-built here."
+    },
+    {
+      "edge": "Office of the Auditor-General LTP observations -> councils' long-term plans",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "A subagent found the OAG's \"Observations from our audits of councils' 2024-34 long-term plans\" (20 February 2025), a genuinely recurring publication — one per three-year LTP cycle, with 2022 and 2019 predecessors — which states \"This report describes the audit results and trends from the 58 long-term plans that councils adopted between June and October 2024.\" NOT INDEPENDENTLY RE-VERIFIED: oag.parliament.nz returned HTTP 403 to direct curl this session and the Wayback replay came back gzip-encoded binary that was not decoded before time ran out. Blocked in any case on the long-term plan not being a node."
+    },
+    {
+      "edge": "Local Government (Financial Reporting and Prudence) Regulations 2014 -> Stats NZ subnational population projections",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT INDEPENDENTLY RE-VERIFIED (subagent read the regulations through a Wayback replay of the PCO PDF; this session did not re-fetch). Reported, reg 3 interpretation: \"high-growth local authority means a local authority whose population is expected to grow at or above the national population growth rate according to the projections of Statistics New Zealand that are the most recent projections at the commencement of...\". Agency named, publication not — the intended product is evidently Subnational population projections but the regulation does not say so. Recorded as the New Zealand instance of the pattern the Australian slice found in the Local Government (Financial Assistance) Act 1995 (Cth) s.4A, which likewise refers only to 'the Statistician'."
+    },
+    {
+      "edge": "Local Government Act 2002 Schedule 10 -> any named statistical or accounting publication",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT INDEPENDENTLY RE-VERIFIED as an exhaustive sweep — a subagent extracted the full Schedule 10 (Parts 1-4, clauses 1-37) and grepped it, reporting zero occurrences of any Stats NZ release, Valuer-General document, LINZ product or accounting standard, with every external reference being to another Act. This session verified the two specific clauses it relied on (s.111 and s.106(2C)) directly but did not re-extract the whole schedule. Worth confirming before anyone builds an LTP or annual-report node on the assumption that the statute names its own data inputs: on the evidence so far it does not, and the naming happens only downstream in councils' own documents."
+    },
+    {
+      "edge": "nz-statsnz-gfs -> sna-2008",
+      "source": "nz-statsnz-gfs",
+      "target": "sna-2008",
+      "reason": "note",
+      "why": "NOT MINTED, against the recommendation of `NZ/G.2.md` item 1, which listed this as one of three 'free' edges. The single sentence offered as its basis is: \"In 2018, we implemented the Government Finance Statistics Manual 2014 (GFSM2014), which follows the GFSM 2001 and is consistent with the System of National Accounts 2008 (SNA08).\" Read carefully, the subject of 'is consistent with the System of National Accounts 2008' is GFSM2014, not Stats NZ's release: the sentence documents a relation between two international manuals and Stats NZ's adoption of one of them. It does not state that the New Zealand GFS release takes SNA 2008 as an input, and 'is consistent with' is in any case a weaker claim than any of the four `relationship_type` values, all of which describe an input. Compare the four edges the corpus already holds into `sna-2008` — `ck-national-accounts` (\"The conceptual framework used to compile the Cook Islands GDP is based on the System of National Accounts 2008\"), `statcan-national-accounts`, `bea-gdp` and `fed-z1` — every one of which is a first-person statement by the producer about its own product. Grep of every New Zealand source cached by the minting session returns SNA 2008 in this one sentence only. The honest edge available from this sentence is `imf-gfsm -> sna-2008`, a framework-to-framework link the corpus has no precedent for and which should be sourced to the IMF's own manual rather than to a third country's metadata page; left for a session that can read GFSM 2014 directly. If Stats NZ's national accounts releases are ever scouted, `nz-statsnz-national-accounts-income -> sna-2008` is the likely real edge."
+    },
+    {
+      "edge": "nz-xrb-a1 -> nz-public-audit-act-2001; nz-wellington-annual-report -> nz-public-audit-act-2001; nz-oag-annual-report -> Public Finance Act 1989",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "THREE LEADS OPENED BY MINTING `nz-public-audit-act-2001` on 2026-08-06, none minted, all cheap. (1) XRB A1 is described in this slice as defining 'public sector PBE' by cross-reference to the Public Audit Act 2001. If so that is a methodology_depends_on edge, but the cross-reference has not been quoted verbatim by any session and this one did not re-open XRB A1, so it is not minted. (2) Wellington City Council's Note 1 already carries a verbatim first-person statement in this slice's own dependency basis: \"As a defined public entity under the Public Audit Act 2001, the Council is audited by the Office of the Auditor General and is classed as a Public Sector Public Benefit Entity (PBE) for financial reporting purposes.\" That is a documented dependency of the council's annual report on the Act, and the only reason it is not minted here is that the quote is a predecessor's extraction rather than this session's read, and this session held itself to first-hand reads. Re-fetch Wellington Volume 2 and mint it; it is one lookup. (3) The Auditor-General's annual report names the Public Finance Act 1989 in the same sentence as the Public Audit Act 2001, and s 37(1) routes the presentation obligation through PFA s 43. The PFA is not a node and is a larger question than this slice, because it would sit under a great many New Zealand fiscal releases at once — deferred deliberately, and it is probably the right next statute to mint."
+    }
+  ]
+}

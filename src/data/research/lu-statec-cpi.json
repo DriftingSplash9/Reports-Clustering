@@ -1,0 +1,70 @@
+{
+  "_slice": "lu-statec-cpi",
+  "_researched": "2026-08-05",
+  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts.",
+  "_note": "Luxembourg's first node. Two reports (STATEC's harmonised and national CPIs), one dependency, two _dropped. Found via G.33.md priority item 0.1, following the AXI-02 lead (Annex XI to the Staff Regulations names 'the Consumer Prices Index (CPI) in the case of Luxembourg' as one input to the EU staff Joint Index). Extracted from the primary legal instrument on Legilux (Règlement grand-ducal du 20 décembre 1999), read first-hand this session via a browser. Full quotes in EU/STATEC-CPI_PartA_2026-08-05.md.",
+  "_headline": "STATEC establishes two distinctly named, monthly series in one statute -- an IPCH conforming to the EU's harmonised-index regulation, and a separate IPCN limited to resident consumption -- matching the exact HICP/CPI split in Annex XI Article 1(2)'s wording ('HICP... in the case of Belgium and... CPI... in the case of Luxembourg'). Which one Annex XI's 'CPI' actually names is a reading, not yet a documented identification -- see EU/STATEC-CPI_PartA_2026-08-05.md.",
+  "_open_questions": [
+    "Whether Annex XI's 'Consumer Prices Index (CPI) in the case of Luxembourg' identifies lu-statec-ipcn by name is not documented anywhere read so far -- flagged, not resolved, in EU/STATEC-CPI_PartA_2026-08-05.md.",
+    "DOMAIN: 'inflation' fits both, same as eurostat-hicp."
+  ],
+  "reports": [
+    {
+      "id": "lu-statec-ipch",
+      "title": "Indice des prix à la consommation harmonisé (IPCH)",
+      "publisher": "Service central de la statistique et des études économiques (STATEC)",
+      "country": "LU",
+      "jurisdiction_level": "federal",
+      "region": "Luxembourg",
+      "description": "Luxembourg's own contribution to the EU's harmonised consumer price framework. Règlement grand-ducal du 20 décembre 1999, Art. 1er: 'Le Service central de la statistique et des études économiques, dénommé ci-après STATEC, établit chaque mois un indice des prix à la consommation conformément aux dispositions du Règlement (CE) n° 2494/95 du Conseil du 23 octobre 1995 relatif aux indices des prix à la consommation harmonisés et des règlements du Conseil et de la Commission pris en son exécution.'",
+      "releases_per_year": 12,
+      "cadence_note": "Règlement grand-ducal du 20 décembre 1999, Art. 1er: STATEC 'établit chaque mois' [establishes each month] the index.",
+      "last_updated": null,
+      "url": "http://legilux.public.lu/eli/etat/leg/rgd/1999/12/20/n3/jo",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "lu-statec-ipcn",
+      "title": "Indice des prix à la consommation national (IPCN)",
+      "publisher": "Service central de la statistique et des études économiques (STATEC)",
+      "country": "LU",
+      "jurisdiction_level": "federal",
+      "region": "Luxembourg",
+      "description": "Luxembourg's national-only consumer price index, published alongside the IPCH but scoped to resident consumption only. Règlement grand-ducal du 20 décembre 1999, Art. 1er: 'En complément à l'indice des prix à la consommation harmonisé (IPCH), le STATEC établit un indice des prix à la consommation national (IPCN), qui se conforme aux mêmes principes et concepts méthodologiques. Toutefois, la couverture géographique de l'IPCN se limite à la seule population résidante; elle exclut la consommation des non-résidants.' Named as the input to Luxembourg's own wage/salary indexation mechanism at Art. 4(1) of the same regulation: 'Pour les besoins de l'échelle mobile des salaires et traitements, l'indice national des prix à la consommation (IPCN)... est raccordé à la base 100 au 1er janvier 1948.'",
+      "releases_per_year": 12,
+      "cadence_note": "Same monthly cadence as lu-statec-ipch -- both established by the same Art. 1er, 'chaque mois'.",
+      "last_updated": null,
+      "url": "http://legilux.public.lu/eli/etat/leg/rgd/1999/12/20/n3/jo",
+      "domains": [
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "lu-statec-ipch",
+      "target_report_id": "eurostat-hicp",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Règlement grand-ducal du 20 décembre 1999, Art. 1er: STATEC 'établit chaque mois un indice des prix à la consommation conformément aux dispositions du Règlement (CE) n° 2494/95 du Conseil du 23 octobre 1995 relatif aux indices des prix à la consommation harmonisés' [establishes monthly a consumer price index in accordance with the provisions of Council Regulation (EC) No 2494/95 of 23 October 1995 on harmonised indices of consumer prices]. Same shape as de-destatis-national-accounts -> esa-2010: a binding EU regulation supplies the definitions and methodology a national release conforms to, not figures. eurostat-hicp's own description states it is 'calculated according to a harmonised approach and definitions as laid down in Regulations and Recommendations' -- the same regulatory framework named here. Not extended to lu-statec-ipcn: Art. 1er says the IPCN merely 'se conforme aux mêmes principes et concepts méthodologiques' [conforms to the same methodological principles and concepts] as the IPCH, without itself being subject to Regulation 2494/95 -- a Research.1 §5a 'comparable with' shape, not a documented dependency, so no edge is drawn for the IPCN side.",
+      "evidence_url": "http://legilux.public.lu/eli/etat/leg/rgd/1999/12/20/n3/jo"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "[Luxembourg wage/salary indexation, 'échelle mobile des salaires et traitements' -- loi du 27 mai 1975] -> lu-statec-ipcn",
+      "source": null,
+      "target": "lu-statec-ipcn",
+      "reason": "no-node-yet",
+      "why": "Règlement grand-ducal du 20 décembre 1999, Art. 4(1): 'Pour les besoins de l'échelle mobile des salaires et traitements, l'indice national des prix à la consommation (IPCN)... est raccordé à la base 100 au 1er janvier 1948.' Names the mechanism (Luxembourg's general private- and public-sector wage indexation scheme, generalised by the loi du 27 mai 1975) but that mechanism is not modelled as a node in this corpus. Full quote at STATEC-02, EU/STATEC-CPI_PartA_2026-08-05.md. Note: this is a distinct mechanism from the EU staff Joint Index in Annex XI to the Staff Regulations (AXI-02) -- do not conflate the two if this is minted later."
+    },
+    {
+      "edge": "[Luxembourg civil servant salary regime, loi modifiée du 22 juin 1963, Art. 11 al. 3] -> lu-statec-ipcn",
+      "source": null,
+      "target": "lu-statec-ipcn",
+      "reason": "no-node-yet",
+      "why": "Règlement grand-ducal du 20 décembre 1999, Art. 4(2): 'L'indice mensuel raccordé à la base 100 au 1er janvier 1948 et la moyenne semestrielle prévue à l'article 11, alinéa 3 de la loi modifiée du 22 juin 1963 fixant le régime des traitements des fonctionnaires de l'Etat, sont publiés chaque mois au Mémorial.' Names a specific statutory provision (Art. 11(3) of the 1963 law) as the site where a six-month average of the IPCN-derived index is used for state civil servants' salary regime, but neither that provision nor the semestrial figure it prescribes is modelled as a node. Full quote at STATEC-03, EU/STATEC-CPI_PartA_2026-08-05.md. Art. 11 itself was not read first-hand this session."
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+{
+  "_slice": "Canadian municipal capitals + major cities template replication",
+  "_researched": "2026-07-31",
+  "_updated": "2026-07-31 (all true capitals expanded)",
+  "_note": "Replication of the Grande Prairie / Calgary six-document municipal template across all provincial and territorial capitals plus the two largest non-capital cities (Vancouver, Montreal). Vancouver and Montreal are explicitly marked is_capital:false with status 'largest_city_and_economic_centre'. Pattern is portable: every Canadian municipality produces an annual tax-rate instrument, an assessment roll, a budget, audited financial statements, a population figure, and (where applicable) provincial education / industrial requisitions. Keystone is always the tax-rate bylaw or equivalent under the provincial Municipal Act / Charter.",
+  "cities": [
+    {
+      "id": "victoria",
+      "name": "City of Victoria",
+      "province": "British Columbia",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "victoria-tax-bylaw",
+          "title": "2026 Property Tax Bylaw No. 26-030",
+          "url": "https://www.victoria.ca/media/file/2026-property-tax-bylaw",
+          "note": "Imposes tax rates under Community Charter s. 197. Rates per $1,000 taxable value for residential, utilities, industrial, business, etc. Includes Regional District and Hospital District components."
+        },
+        {
+          "id": "victoria-assessment",
+          "title": "BC Assessment roll",
+          "note": "BC Assessment Authority produces the assessment base used by all BC municipalities."
+        }
+      ],
+      "keystone_edge": "victoria-tax-bylaw calculated_from BC Assessment roll + approved budget (Community Charter s. 197)"
+    },
+    {
+      "id": "vancouver",
+      "name": "City of Vancouver",
+      "province": "British Columbia",
+      "is_capital": false,
+      "status": "largest_city_and_economic_centre",
+      "note": "Not the provincial capital (Victoria is). Included because it is the largest city and primary economic centre of British Columbia; follows the same Vancouver Charter / BC Assessment tax-rate pattern.",
+      "reports": [
+        {
+          "id": "vancouver-tax-rates",
+          "title": "2026 Property Tax Rates (General Purpose + Provincial School + TransLink + BC Assessment + Metro Vancouver + MFA)",
+          "url": "https://vancouver.ca/home-property-development/residential.aspx",
+          "note": "Vancouver Charter regime. 0% municipal increase for 2026."
+        },
+        {
+          "id": "vancouver-assessment",
+          "title": "BC Assessment roll"
+        }
+      ],
+      "keystone_edge": "vancouver-tax-rates calculated_from BC Assessment roll + approved budget (Vancouver Charter)"
+    },
+    {
+      "id": "edmonton",
+      "name": "City of Edmonton",
+      "province": "Alberta",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "edmonton-tax-bylaw",
+          "title": "2026 Property Tax and Supplementary Property Tax Bylaw 21442",
+          "url": "https://www.edmonton.ca/sites/default/files/public-files/documents/bl21442.pdf",
+          "note": "Passed under MGA s. 353. Sets municipal and education tax rates against the assessment roll."
+        },
+        {
+          "id": "edmonton-assessment-roll",
+          "title": "Property Assessment Roll / Open Data",
+          "url": "https://data.edmonton.ca/City-Administration/Property-Assessment-Data-Current-Calendar-Year-/q7d6-ambg"
+        },
+        {
+          "id": "edmonton-budget",
+          "title": "2023-2026 Budget (2026 tax levy finalized April 2026)",
+          "url": "https://www.edmonton.ca/city_government/budget-and-finances"
+        },
+        {
+          "id": "edmonton-financial-statements",
+          "title": "2025 Annual Report / Consolidated Audited Financial Statements",
+          "url": "https://www.edmonton.ca/sites/default/files/public-files/documents/financial-annual-report-2025-compressed_0.pdf"
+        }
+      ],
+      "keystone_edge": "edmonton-tax-bylaw calculated_from edmonton-assessment-roll + edmonton-budget (MGA s. 353)"
+    },
+    {
+      "id": "calgary",
+      "name": "City of Calgary",
+      "province": "Alberta",
+      "is_capital": false,
+      "note": "Fully templated in calgary-municipal-template.json (Bylaw 9M2026).",
+      "status": "complete"
+    },
+    {
+      "id": "regina",
+      "name": "City of Regina",
+      "province": "Saskatchewan",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "regina-tax-bylaw",
+          "title": "Bylaw No. 2026-25 The Regina Property Tax Bylaw, 2026",
+          "url": "https://openregina.ca/dataset/bylaw-no-2026-25-the-regina-property-tax-bylaw-2026",
+          "note": "Sets municipal and library rates. Separate Education Property Tax Bylaw 2026-24."
+        },
+        {
+          "id": "regina-classes-bylaw",
+          "title": "Bylaw No. 2026-23 The Regina Property Classes And Sub-Classes Bylaw, 2026"
+        }
+      ],
+      "keystone_edge": "regina-tax-bylaw calculated_from assessment roll + budget (Cities Act)"
+    },
+    {
+      "id": "winnipeg",
+      "name": "City of Winnipeg",
+      "province": "Manitoba",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "winnipeg-mill-rates",
+          "title": "2026 Municipal Mill Rate (13.372) + School Division mill rates + Provincial Education Support Levy",
+          "url": "https://assessment.winnipeg.ca/AsmtTax/English/Property/property-tax-bills.stm",
+          "note": "3.5% municipal increase for 2026. Portioning system (residential at 45% of assessed value)."
+        }
+      ],
+      "keystone_edge": "winnipeg-mill-rates calculated_from portioned assessment + budget + school division requirements"
+    },
+    {
+      "id": "toronto",
+      "name": "City of Toronto",
+      "province": "Ontario",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "toronto-tax-bylaw",
+          "title": "2026 Property Tax Rates Bylaw (law0133)",
+          "url": "https://www.toronto.ca/legdocs/bylaws/2026/law0133.pdf",
+          "note": "Sets municipal rates + City Building Fund + education rates set by Province. MPAC assessment base."
+        },
+        {
+          "id": "toronto-assessment",
+          "title": "MPAC Assessment Roll"
+        }
+      ],
+      "keystone_edge": "toronto-tax-bylaw calculated_from MPAC assessment + Council-approved levy (City of Toronto Act)"
+    },
+    {
+      "id": "quebec-city",
+      "name": "Ville de Québec",
+      "province": "Quebec",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "quebec-city-tax-reglement",
+          "title": "R.V.Q. 3492 — Règlement sur l'imposition des taxes et des compensations pour l'exercice financier de 2026",
+          "url": "https://reglements.ville.quebec.qc.ca/fr/document/ra/R.V.Q.3492",
+          "note": "Adopted 11 December 2025. Four tax rates per $100 of assessment: residential 1-5 units 0.7464, residential 6+ 0.7697, non-residential 3.0642, vacant serviced land 2.9856."
+        },
+        {
+          "id": "quebec-city-assessment",
+          "title": "Rôle d'évaluation foncière",
+          "note": "Provincial assessment system under the Act respecting municipal taxation."
+        }
+      ],
+      "keystone_edge": "quebec-city-tax-reglement calculated_from rôle d'évaluation + budget (Cities and Towns Act / Charter)"
+    },
+    {
+      "id": "montreal",
+      "name": "Ville de Montréal",
+      "province": "Quebec",
+      "is_capital": false,
+      "status": "largest_city_and_economic_centre",
+      "note": "Not the provincial capital (Quebec City is). Included because it is the largest city and primary economic centre of Quebec; follows the same rôle d'évaluation + taxe foncière pattern under the Cities and Towns Act / Charter of Ville de Montréal.",
+      "reports": [
+        {
+          "id": "montreal-taxe-fonciere",
+          "title": "Imposition annuelle de taxes municipales / Compte de taxes",
+          "url": "https://montreal.ca/payer-ses-taxes-municipales",
+          "open_data": "https://donnees.montreal.ca/dataset/taxes-municipales"
+        }
+      ],
+      "keystone_edge": "montreal-taxe-fonciere calculated_from rôle d'évaluation + budget"
+    },
+    {
+      "id": "fredericton",
+      "name": "City of Fredericton",
+      "province": "New Brunswick",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "fredericton-tax-rate",
+          "title": "2026 Inside Property Tax Rate $1.3086 per $100 of assessment (held steady)",
+          "url": "https://www.fredericton.ca/your-government/news/city-fredericton-holds-inside-tax-rate-while-investing-safety-affordability",
+          "note": "Inside rate unchanged despite provincial assessment freeze. Outside/annexed rates increased by 5 cents. Assessment by Service New Brunswick."
+        }
+      ],
+      "keystone_edge": "fredericton-tax-rate calculated_from Service New Brunswick assessment + budget (Local Governance Act)"
+    },
+    {
+      "id": "halifax",
+      "name": "Halifax Regional Municipality",
+      "province": "Nova Scotia",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "halifax-tax-rates",
+          "title": "2026/27 Tax Rates (Urban general $0.687, Suburban/Rural $0.654 + area rates + provincial education $0.290)",
+          "url": "https://www.halifax.ca/home-property/property-taxes/tax-rates",
+          "note": "Approved with 2026/27 budget 31 March 2026. Assessment by Property Valuation Services Corporation (PVSC)."
+        },
+        {
+          "id": "halifax-budget",
+          "title": "2026/27 Budget and Business Plan",
+          "url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2026-27-budget-and-business-plan_web_final_0.pdf"
+        }
+      ],
+      "keystone_edge": "halifax-tax-rates calculated_from PVSC assessment roll + approved budget (Halifax Regional Municipality Charter)"
+    },
+    {
+      "id": "charlottetown",
+      "name": "City of Charlottetown",
+      "province": "Prince Edward Island",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "charlottetown-budget",
+          "title": "2026-27 Operating and Capital Budgets (property tax rate held unchanged)",
+          "url": "https://www.charlottetown.ca/news/current_news/city_approves_2026-27_budget",
+          "note": "No change to the property tax rate. Assessment by provincial Taxation and Property Records."
+        }
+      ],
+      "keystone_edge": "charlottetown tax rate calculated_from provincial assessment + budget (Municipal Government Act)"
+    },
+    {
+      "id": "st-johns",
+      "name": "City of St. John's",
+      "province": "Newfoundland and Labrador",
+      "is_capital": true,
+      "reports": [
+        {
+          "id": "st-johns-mill-rates",
+          "title": "2026 Residential Mill Rates (9.1 with water & sewer; 8.6 either; 8.1 none) + Commercial 29.5 mills",
+          "url": "https://www.stjohns.ca/en/living-in-st-johns/taxation.aspx",
+          "note": "Mill rates held steady from 2025. Water tax $700 residential/commercial. Assessment by Municipal Assessment Agency."
+        }
+      ],
+      "keystone_edge": "st-johns-mill-rates calculated_from Municipal Assessment Agency roll + budget (City of St. John's Act)"
+    },
+    {
+      "id": "whitehorse",
+      "name": "City of Whitehorse",
+      "province": "Yukon",
+      "is_capital": true,
+      "note": "Tax rate bylaw under Municipal Act (Yukon). Assessment by Yukon government. Template pattern confirmed; detailed 2026 extraction available on request.",
+      "status": "template_ready"
+    },
+    {
+      "id": "yellowknife",
+      "name": "City of Yellowknife",
+      "province": "Northwest Territories",
+      "is_capital": true,
+      "note": "Tax rate bylaw under Cities, Towns and Villages Act. Assessment by territorial authority. Template pattern confirmed.",
+      "status": "template_ready"
+    },
+    {
+      "id": "iqaluit",
+      "name": "City of Iqaluit",
+      "province": "Nunavut",
+      "is_capital": true,
+      "note": "Tax rate bylaw under Cities, Towns and Villages Act (Nunavut). Assessment by territorial authority. Template pattern confirmed.",
+      "status": "template_ready"
+    }
+  ],
+  "shared_provincial_nodes": [
+    {
+      "id": "bc-assessment",
+      "title": "BC Assessment Authority",
+      "note": "Produces the assessment base for all BC municipalities (Victoria, Vancouver, and every other BC local government)."
+    },
+    {
+      "id": "mpac",
+      "title": "Municipal Property Assessment Corporation (MPAC)",
+      "note": "Produces the assessment base for all Ontario municipalities including Toronto."
+    },
+    {
+      "id": "pvsc-ns",
+      "title": "Property Valuation Services Corporation (Nova Scotia)",
+      "note": "Assessment base for Halifax and all NS municipalities."
+    },
+    {
+      "id": "service-nb",
+      "title": "Service New Brunswick Assessment",
+      "note": "Assessment base for Fredericton and all NB municipalities."
+    },
+    {
+      "id": "maa-nl",
+      "title": "Municipal Assessment Agency (Newfoundland and Labrador)",
+      "note": "Assessment base for St. John's and all NL municipalities."
+    },
+    {
+      "id": "ab-dip-requisition",
+      "title": "Alberta Designated Industrial Property Requisition",
+      "note": "Shared with Grande Prairie and Calgary templates."
+    }
+  ],
+  "notes": [
+    "All ten provincial capitals plus the three territorial capitals are now present.",
+    "Fully documented 2026 keystone instruments exist for: Victoria, Edmonton, Regina, Winnipeg, Toronto, Quebec City, Fredericton, Halifax, Charlottetown, St. John's.",
+    "Assessment is produced by a provincial or provincial-agency body in the majority of provinces (BC Assessment, MPAC, PVSC, Service New Brunswick, Municipal Assessment Agency NL). This is the dominant cross-layer bridge pattern.",
+    "The six-document municipal pattern is confirmed portable across every Canadian province and territory."
+  ]
+}

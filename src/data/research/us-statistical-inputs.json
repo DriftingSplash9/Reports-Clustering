@@ -1,0 +1,130 @@
+{
+  "_slice": "US federal statistical inputs — what the headline numbers rest on",
+  "_researched": "2026-07-28",
+  "_note": "Researched to correct a curation imbalance rather than to add a region. Before this slice the graph knew Grande Prairie's tax base in more detail than it knew the CPI, and the authority ranking said so: a single city's assessment roll outranked the index that adjusts social security for eighty million Americans. The two most-cited releases in the graph were pure sinks, not because nothing feeds them but because nothing had been researched. The BLS Handbook of Methods states their inputs plainly, which makes this the least ambiguous evidence in the project so far.",
+  "reports": [
+    {
+      "id": "bls-cex",
+      "title": "Consumer Expenditure Surveys",
+      "publisher": "US Bureau of Labor Statistics",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Ongoing survey of what urban households actually spend, covering out-of-pocket expenditure on all consumer products and services. Determines both the weights of every category in the CPI and the sample of outlets where prices are collected — the survey that decides what the basket contains.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.bls.gov/cex/",
+      "domains": [
+        "inflation",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "uscensus-decennial",
+      "title": "Decennial Census of Population and Housing",
+      "publisher": "US Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The constitutionally mandated ten-yearly count of the US population. Beyond apportionment, it defines the urban areas in which federal statistical programmes sample and supplies the population counts those samples are weighted to.",
+      "releases_per_year": 0.1,
+      "cadence_note": "Every ten years. The enum's coarsest bucket is annual, which is off by a factor of ten here — the same failure the Canadian census already exposes, now with a worse ratio.",
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/decennial-census.html",
+      "domains": [
+        "population"
+      ]
+    },
+    {
+      "id": "bls-qcew",
+      "title": "Quarterly Census of Employment and Wages",
+      "publisher": "US Bureau of Labor Statistics",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "A near-universe count of employment and wages compiled from state unemployment insurance quarterly tax records, covering nearly all US employers. Not a sample — which is why it serves as the frame and the benchmark for the monthly employment estimates that move markets.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.bls.gov/cew/",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "jd-power-valuation-services",
+      "title": "J.D. Power Valuation Services Vehicle Price Data",
+      "publisher": "J.D. Power",
+      "country": "US",
+      "jurisdiction_level": "institutional",
+      "source_kind": "commercial",
+      "region": "United States",
+      "description": "Commercial used-vehicle valuations and new-vehicle transaction data, sold by subscription. The BLS Handbook of Methods states that every used car and truck price in the US Consumer Price Index comes from J.D. Power Valuation Services, and that new vehicle prices come from J.D. Power transaction data — so an entire component of the headline national inflation number is sourced from one private company.",
+      "releases_per_year": 12,
+      "cadence_note": "Valuations are maintained continuously and drawn on monthly for the CPI. There is no public release calendar; the data is a paid feed, and only the BLS methodology naming it is public.",
+      "last_updated": null,
+      "url": "https://www.jdpower.com/business/valuation-services",
+      "domains": [
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bls-cpi",
+      "target_report_id": "bls-cex",
+      "relationship_type": "calculated_from",
+      "basis": "The Handbook of Methods is explicit: 'The CPI uses data from the Consumer Expenditure (CE) survey to determine the weights of the different categories of goods and services in the CPI... Annual CE data are used for the CPI-U and CPI-W weights; these expenditure weights are updated annually.' The CE survey also selects the outlets where prices are collected. Without it there is no basket.",
+      "evidence_url": "https://www.bls.gov/opub/hom/cpi/data.htm"
+    },
+    {
+      "source_report_id": "bls-cpi",
+      "target_report_id": "uscensus-decennial",
+      "relationship_type": "uses_data_from",
+      "basis": "'Using 2010 census population data, we select the urban areas from which data on prices are collected and choose the housing units within each area that are eligible for use in the shelter component of the CPI. The census data also provide information on the number of consumers represented by each area.' Geography and shelter weighting both come from the census.",
+      "evidence_url": "https://www.bls.gov/opub/hom/cpi/data.htm"
+    },
+    {
+      "source_report_id": "bls-employment-situation",
+      "target_report_id": "bls-qcew",
+      "relationship_type": "calculated_from",
+      "basis": "The CES sampling frame 'is built from unemployment insurance (UI) quarterly tax records', and the net birth–death model that fills the gap left by firms too new to sample is derived from 'the Quarterly Census of Employment and Wages (QCEW) universe employment series' via an ARIMA projection on ten years of QCEW history. The annual benchmark revises the estimates against QCEW Q1 data. The monthly payroll number is a sample tethered at both ends to a near-universe count.",
+      "evidence_url": "https://www.bls.gov/opub/hom/ces/calculation.htm",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 3,
+        "ends": "03-31",
+        "stated_as": "'The annual benchmark revises the estimates against QCEW Q1 data.'"
+      }
+    },
+    {
+      "source_report_id": "bls-cpi",
+      "target_report_id": "jd-power-valuation-services",
+      "relationship_type": "uses_data_from",
+      "basis": "The BLS Handbook of Methods CPI data sources chapter states that price information for used cars and trucks is obtained from J.D. Power Valuation Services, and that new vehicle price data comes from J.D. Power transaction data, rather than from the CPI's own outlet sample. Promoted from _dropped in V0.5 under the commercial-source decision. This was never an evidence problem — BLS documents it more plainly than many edges already in the graph — it was the node rule excluding a private supplier, and the node rule is what bent.",
+      "evidence_url": "https://www.bls.gov/opub/hom/cpi/data.htm"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bls-employment-situation -> uscensus-population-estimates",
+      "source": "bls-employment-situation",
+      "target": "uscensus-population-estimates",
+      "reason": "deferred",
+      "why": "The household side of the Employment Situation comes from the CPS, whose estimates are controlled to independent population estimates. The CES calculation page covers the establishment survey only, and the CPS methodology page was not read this pass. Almost certainly real, not yet cited."
+    },
+    {
+      "edge": "bls-cpi -> USPS Household Diary Survey / DOT airline origin-destination database",
+      "source": "bls-cpi",
+      "target": null,
+      "reason": "deferred",
+      "why": "Named in the same BLS Handbook chapter as J.D. Power and left out for a different reason. Both are government products rather than commercial ones, so the V0.5 commercial-source decision does not apply to them; they simply have not been researched as nodes. Straightforwardly addable, unlike the confidential feeds."
+    },
+    {
+      "edge": "bea-gdp -> bls-cpi",
+      "source": "bea-gdp",
+      "target": "bls-cpi",
+      "reason": "wrong-target",
+      "why": "Deleted in V0.9 as a two-hop path recorded as one edge. The seed basis was 'NIPA deflators draw on BLS price index detail', which is true of the PCE component specifically — and bea-pce -> bls-cpi already exists as a documented calculated_from edge with an evidence_url. With bea-gdp -> bea-pce now also documented from NIPA Handbook Chapter 5, the relationship is fully represented as GDP -> PCE -> CPI. Keeping the direct edge as well double-counted the CPI's authority through the same mechanism and stated it more weakly than the path it duplicates."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "_slice": "International statistical standards",
+  "_researched": "2026-07-28",
+  "_note": "The root layer. These are not reports that consume statistics — they are the manuals that define how statistics are built, cited by name in the methodology documents of national statistical agencies. SNA 2008 is also the first documented link between the Canadian and US clusters: both national accounts programmes are built on it.",
+  "reports": [
+    {
+      "id": "sna-2008",
+      "title": "System of National Accounts 2008 (SNA 2008)",
+      "publisher": "United Nations, European Commission, IMF, OECD and World Bank",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The internationally agreed standard set of concepts, definitions, classifications and accounting rules for compiling national accounts. The organising framework beneath essentially every country's GDP.",
+      "releases_per_year": 0.05,
+      "cadence_note": "Revised roughly once a generation — previous editions 1953, 1968 and 1993. Not an annual release; releases_per_year is nominal so the pulse rate reads as near-static.",
+      "last_updated": null,
+      "url": "https://unstats.un.org/UNSD/nationalaccount/sna2008.asp",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "icls-work-statistics-resolution",
+      "title": "ICLS Resolution concerning statistics of work, employment and labour underutilization",
+      "publisher": "International Labour Organization",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The international standard defining employment, unemployment and labour force participation. Adopted by the International Conference of Labour Statisticians; the 19th ICLS resolution of 2013 supersedes the 13th ICLS resolution of 1982.",
+      "releases_per_year": 0.2,
+      "cadence_note": "The ICLS convenes roughly every five years; resolutions on labour force statistics are revised far less often than that.",
+      "last_updated": null,
+      "url": "https://ilostat.ilo.org/methods/concepts-and-definitions/description-work-statistics-icls19/",
+      "domains": [
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "statcan-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Canadian National Economic Accounts are compiled using SNA 2008 as the organising framework, which supplies the concepts, classifications and methods used to measure production, income, saving and investment.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/13-607-x/2016001/36-eng.htm"
+    },
+    {
+      "source_report_id": "bea-gdp",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The NIPAs and the SNA share a common accounting framework, and BEA prepares estimates on an SNA basis annually for the OECD questionnaire. BEA documents specific definitional departures, so this is a shared framework rather than strict conformity.",
+      "evidence_url": "https://www.bea.gov/national/sna-and-nipas"
+    },
+    {
+      "source_report_id": "statcan-lfs",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Labour Force Survey adopts concepts and definitions of employment and unemployment endorsed by the ILO, drawn from the ICLS resolutions on labour force statistics.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/71-543-g/71-543-g2025001-eng.htm"
+    }
+  ]
+}

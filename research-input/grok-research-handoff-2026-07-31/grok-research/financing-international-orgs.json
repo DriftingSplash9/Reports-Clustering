@@ -1,0 +1,222 @@
+{
+  "_layer": "FINANCING / ASSESSED + VOLUNTARY CONTRIBUTIONS",
+  "_status": "COMPANION TO soft-power-and-isolated-orgs.json — higher documentary confidence than pure agenda-resonance edges. Cross-layer links to org-imf, org-oecd and org-wef confirmed 2026-07-30.",
+  "_note_for_claude": "Thomas asked for the financing sub-layer next (option A). This file captures the actual money Canada sends. Keep it cleanly separated from the main documented statistical graph and from pure soft-influence edges. Treaty/assessed obligations (IMF quota, OECD contribution, IDA) are stronger evidence than project grants (WEF). Do not promote any of these into calculated_from edges for CPI, tax brackets, or benefit rates. Talk to Thomas before any merge. These edges answer 'who pays for the institution?' not 'whose methodology does the number follow?'.",
+  "_design_rules": [
+    "Use only publicly reported figures from International Assistance Reports, Public Accounts, IMF member data, order-paper responses, or official grants databases.",
+    "Distinguish assessed/treaty obligations from voluntary or project funding.",
+    "WEF is project-based only — never treat it as an assessed membership fee.",
+    "All amounts should carry a source note and approximate date range.",
+    "This layer can sit beside the soft-power layer; it does not replace it."
+  ],
+  "_cross_layer_links": {
+    "companion_file": "soft-power-and-isolated-orgs.json",
+    "linked_org_nodes": ["org-imf", "org-oecd", "org-wef"],
+    "note": "The organisation nodes org-imf, org-oecd and org-wef are defined in the soft-power layer. Financing edges (supports_membership / project_support) point to those exact ids. Soft-layer edges remain interpretive and do not feed main-graph authority. org-wbg-approx remains a financing-only placeholder until a corresponding soft-power organisation node is deliberately added."
+  },
+  "reports": [
+    {
+      "id": "fin-imf-quota",
+      "title": "Canada IMF Quota Subscription",
+      "publisher": "IMF / Department of Finance Canada",
+      "scope": "International bodies",
+      "type": "assessed_contribution",
+      "amount_note": "Quota = SDR 11,023.9 million (≈ 2.31% of total IMF quotas as of mid-2026 data)",
+      "source": "IMF Members' Quotas and Voting Power table; IMF Financial Position for Canada; Canada Article IV Informational Annex 2025/26",
+      "notes": "Core treaty obligation under the IMF Articles of Agreement. Creates voting share and reserve tranche position. Managed by Department of Finance."
+    },
+    {
+      "id": "fin-imf-nab-bba",
+      "title": "Canada commitments under NAB and Bilateral Borrowing Agreements",
+      "publisher": "IMF / Department of Finance Canada",
+      "scope": "International bodies",
+      "type": "contingent_commitment",
+      "amount_note": "NAB commitment historically in the SDR 7–8 billion range; bilateral arrangements also active. Drawn amounts are usually zero or low in normal times.",
+      "source": "IMF Financial Position reports; earlier International Assistance / Bretton Woods reports",
+      "notes": "Second- and third-line resources for the Fund. Not a regular annual cash outlay unless activated."
+    },
+    {
+      "id": "fin-imf-trusts-ukraine",
+      "title": "Canada contributions to IMF trusts and Ukraine facilities",
+      "publisher": "Department of Finance Canada",
+      "scope": "International bodies",
+      "type": "voluntary_contribution",
+      "amount_note": "Multi-billion CAD in recent years (PRGT/RST channeling of SDRs + large Ukraine administered-account and loan support). Exact annual figures appear in the Report to Parliament on International Assistance.",
+      "source": "Report to Parliament on the Government of Canada’s International Assistance (various years); Department of Finance disclosures",
+      "notes": "Voluntary / policy-driven rather than pure assessed quota. High political visibility."
+    },
+    {
+      "id": "fin-wbg-ida",
+      "title": "Canada contributions to International Development Association (IDA)",
+      "publisher": "World Bank Group / Department of Finance Canada",
+      "scope": "International bodies",
+      "type": "replenishment_contribution",
+      "amount_note": "Cumulative participation ≈ CAD 15.67 billion as of 31 March 2025. Fiscal-year flows (Department of Finance Canada, Statistical Report on International Assistance): 2022–23 CAD 911.44 m; 2023–24 CAD 486.92 m; 2024–25 CAD 486.92 m. Canada announced a C$1.6 billion contribution to the 21st replenishment of IDA (IDA21).",
+      "source": "Public Accounts of Canada 2025 Vol. I Section 9; Statistical Report on International Assistance 2024–2025; Report to Parliament on International Assistance 2024–2025; World Bank IDA replenishment statements",
+      "notes": "Largest regular Canadian contribution to the World Bank Group. Concessional window for the poorest countries. Year-by-year figures drawn from the official Statistical Report tables for Finance Canada multilateral programming."
+    },
+    {
+      "id": "fin-wbg-ibrd",
+      "title": "Canada capital subscription — IBRD (World Bank)",
+      "publisher": "World Bank Group / Department of Finance Canada",
+      "scope": "International bodies",
+      "type": "capital_subscription",
+      "amount_note": "Total subscribed ≈ USD 8.5 billion of which paid-in ≈ USD 619.5 million; remainder is callable capital.",
+      "source": "Public Accounts of Canada 2025; Report to Parliament on International Assistance (capital subscription tables)",
+      "notes": "Most of the subscription is contingent (callable). Paid-in portion is the cash exposure."
+    },
+    {
+      "id": "fin-oecd-assessed",
+      "title": "Canada assessed contribution to OECD",
+      "publisher": "Global Affairs Canada / OECD",
+      "scope": "International bodies",
+      "type": "assessed_contribution",
+      "amount_note": "Public Accounts of Canada 2025 (Global Affairs transfer payments): Organisation for Economic Cooperation and Development line (12,580,328 Euro) shows allotment CAD 18,330,168 and expenditures CAD 17,804,695 for the reporting period. Prior periods fall in the CAD 17–19 million range. Exact annual total fluctuates with the OECD budget scale and exchange rates.",
+      "source": "Public Accounts of Canada 2025 Volume II, Section 13 (Global Affairs) — Transfer payments table; Open Canada Grants and Contributions database; Global Affairs departmental plans",
+      "notes": "Legally binding membership obligation. Non-discretionary. Covers general budget, some investment, and publications. Year-specific figures taken from the official Public Accounts transfer-payment line."
+    },
+    {
+      "id": "fin-wef-projects",
+      "title": "Canada project grants and contributions to World Economic Forum initiatives",
+      "publisher": "Global Affairs Canada / Environment and Climate Change Canada / other departments",
+      "scope": "International bodies",
+      "type": "project_grant",
+      "amount_note": "Cumulative project funding since 2015 documented in the low-to-mid tens of millions CAD (order-paper responses have cited figures in the $17–23+ million range across multiple initiatives). Individual agreements include multi-year packages for Global Alliance for Trade Facilitation, Global Plastic Action Partnership, and nature/economy reports.",
+      "source": "House of Commons order-paper responses (Leslyn Lewis questions); Global Affairs and ECCC disclosures; secondary reporting of the tabled figures",
+      "notes": "NOT an assessed membership fee. Project-specific, time-limited, and discretionary. WEF remains a private multi-stakeholder organisation. These edges are weaker in legal character than IMF/OECD/IDA obligations."
+    },
+    {
+      "id": "fin-un-regular-budget",
+      "title": "Canada assessed contribution to the United Nations regular budget",
+      "publisher": "United Nations / Global Affairs Canada",
+      "scope": "International bodies",
+      "type": "assessed_contribution",
+      "amount_note": "Scale of assessment 2.543 % for 2025–2027 (A/RES/79/249). Recent annual net contribution approximately USD 86–87 million (2025). Working Capital Fund advance for 2026: USD 6,357,500 under the same scale (ST/ADM/SER.B/1096).",
+      "source": "General Assembly resolution 79/249 (scale of assessments 2025–2027); ST/ADM/SER.B/1096 (Assessment of Member States’ advances to the Working Capital Fund for 2026 and contributions to the United Nations regular budget for 2026); UN Committee on Contributions",
+      "notes": "Assessed obligation under the UN Charter and subsequent General Assembly resolutions. Distinct from voluntary funds and from peacekeeping assessments. Managed through Global Affairs Canada."
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-imf-quota",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Quota subscription is a standing obligation under the IMF Articles; reflected in Finance Canada management of the relationship and in IMF member financial position data."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-imf-nab-bba",
+      "type": "contingent_commitment",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "New Arrangements to Borrow and bilateral borrowing agreements are formal commitments reported in IMF and Canadian official materials."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-imf-trusts-ukraine",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Explicit line items and narrative in the Report to Parliament on International Assistance and Department of Finance disclosures."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-wbg-ida",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Public Accounts record cumulative and annual IDA contributions; replenishment pledges are announced and tracked in International Assistance reporting."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-wbg-ibrd",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Capital subscriptions appear in Public Accounts Section 9 (loans, investments and advances) with paid-in vs callable split."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-oecd-assessed",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Assessed contribution is a non-discretionary membership obligation; appears in Global Affairs grants/contributions reporting and departmental transfer-payment tables."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-wef-projects",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Specific contribution agreements and order-paper tallies show project-level payments. Character is voluntary/project-based, not treaty-assessed."
+    },
+    {
+      "from": "fin-imf-quota",
+      "to": "org-imf",
+      "type": "supports_membership",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Quota is the primary financial basis of IMF membership and voting power."
+    },
+    {
+      "from": "fin-wbg-ida",
+      "to": "org-wbg-approx",
+      "type": "supports_membership",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "IDA replenishments are the main recurring cash contribution channel to the World Bank Group for Canada."
+    },
+    {
+      "from": "fin-oecd-assessed",
+      "to": "org-oecd",
+      "type": "supports_membership",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Assessed contribution is the formal price of OECD membership."
+    },
+    {
+      "from": "fin-wef-projects",
+      "to": "org-wef",
+      "type": "project_support",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Project grants create a financial relationship but do not constitute membership dues."
+    },
+    {
+      "from": "canada-federal-budget-or-estimates",
+      "to": "fin-un-regular-budget",
+      "type": "funds",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Assessed contribution under the UN scale of assessments (A/RES/79/249) and annual assessment documents (e.g. ST/ADM/SER.B/1096). Appears in Global Affairs transfer-payment reporting."
+    },
+    {
+      "from": "fin-un-regular-budget",
+      "to": "org-un-approx",
+      "type": "supports_membership",
+      "layer": "financing",
+      "confidence": "documented",
+      "justification": "Scale-based assessed contribution is the formal financial basis of UN membership for the regular budget."
+    }
+  ],
+  "_placeholder_nodes": [
+    "canada-federal-budget-or-estimates — stands in for the constellation of Main Estimates, Supplementary Estimates, Public Accounts, and International Assistance Report that actually authorise the flows",
+    "org-wbg-approx — World Bank Group as a whole; can be split later into IBRD / IDA / IFC / MIGA if needed",
+    "org-un-approx — United Nations as a whole (regular budget focus); peacekeeping and voluntary funds can be separated later if required"
+  ],
+  "_confidence_ranking": [
+    "Highest: IMF quota, OECD assessed contribution, IDA replenishments, UN regular-budget assessed contribution (treaty or formal membership obligations with clear public accounting)",
+    "High: IBRD paid-in capital, NAB/BBA commitments",
+    "Medium: Voluntary IMF trust / Ukraine facilities (policy-driven but well documented)",
+    "Lower (still documented): WEF project grants (discretionary, project-specific, private organisation)"
+  ],
+  "_next_possible_additions": [
+    "Exact year-by-year IDA and OECD figures pulled from the latest full International Assistance statistical annex",
+    "EBRD and other regional development bank capital",
+    "Create a formal org-un or org-wbg node in the soft-power layer if ritual or flagship material is required",
+    "UN peacekeeping assessments (separate scale)"
+  ]
+}

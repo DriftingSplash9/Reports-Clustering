@@ -1,0 +1,322 @@
+{
+  "_slice": "US federal policy indexation — the rules that turn statistical releases into money",
+  "_researched": "2026-07-28",
+  "_note": "This slice is about the rules that convert a statistical release into a payment, and about the survey machinery underneath the headline numbers. The shape that emerged is that the US does not have one inflation index driving policy — it has at least four, and which one applies to you is an artefact of when your programme was legislated. Social Security benefits move on the CPI-W, third quarter to third quarter, under a 1972 statute. The federal poverty guidelines move on the CPI-U, annual average to annual average, under a 1981 statute — and they move on it twice, because Census already inflates the poverty thresholds by CPI-U before HHS inflates the published thresholds forward again. Tax brackets move on the C-CPI-U, twelve months ending August 31, under the 2017 act, an index that runs about 0.2 points a year slower and is still being revised for ten months after the value the IRS is required to use is fixed. And the Federal Reserve's 2 percent target is defined on none of these — it is the BEA's PCE price index, which is itself largely a reweighting of the same BLS price quotes onto national-accounts expenditure weights. The other structural fact worth recording is that the Social Security system is indexed on both sides but to different things: benefits to prices via the CPI-W, the taxable wage base and the PIA bend points to wages via SSA's own national average wage index. When wages and prices diverge, the programme's finances move in ways neither index alone predicts. On the survey side, the CPS cannot produce a population level at all; it produces rates, and the levels come from Census population estimates, which are a carry-forward of the decennial count. That is why the January Employment Situation carries a discontinuity every year that has nothing to do with the labour market.",
+  "reports": [
+    {
+      "id": "ssa-national-average-wage-index",
+      "title": "National Average Wage Index (AWI)",
+      "publisher": "US Social Security Administration, Office of the Chief Actuary",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual index of average wages tabulated by SSA from wages subject to federal income tax plus contributions to deferred compensation plans. It is the wage-side counterpart to the CPI in the Social Security system: it indexes a worker's lifetime earnings when their initial benefit is computed, and it drives the taxable maximum, the earnings test exempt amounts, the PIA bend points and the quarter-of-coverage amount. Published roughly a year in arrears — the index for a calendar year is announced in October of the following year.",
+      "releases_per_year": 1,
+      "cadence_note": "Announced each October alongside the COLA, for the calendar year two years prior to the year the indexed amounts take effect.",
+      "last_updated": null,
+      "url": "https://www.ssa.gov/oact/cola/AWI.html",
+      "domains": [
+        "benefits",
+        "labour",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ssa-contribution-benefit-base",
+      "title": "OASDI Contribution and Benefit Base (Social Security taxable maximum)",
+      "publisher": "US Social Security Administration, Office of the Chief Actuary",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The annual ceiling on earnings subject to the Social Security portion of payroll tax, and the ceiling on earnings credited toward benefits. Announced each October in the same release as the COLA — but indexed to wages, not prices, which is why it can rise in a year when the COLA is small and vice versa. Published in the Federal Register as an automatic determination under section 230 of the Social Security Act.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.ssa.gov/oact/cola/cbb.html",
+      "domains": [
+        "taxation",
+        "benefits"
+      ]
+    },
+    {
+      "id": "cps-current-population-survey",
+      "title": "Current Population Survey (CPS)",
+      "publisher": "US Census Bureau and US Bureau of Labor Statistics",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The monthly household survey of about 60,000 eligible households, collected by the Census Bureau and estimated by BLS. It is the sole source of the official unemployment rate and of every labour force measure broken down by age, sex, race, education or reason for unemployment. On average one CPS respondent stands for about 2,500 people, so the survey cannot produce a level on its own — it produces a rate, and the level comes from population controls supplied by Census.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www.bls.gov/cps/",
+      "domains": [
+        "labour",
+        "population"
+      ]
+    },
+    {
+      "id": "uscensus-population-estimates",
+      "title": "Population Estimates Program (Vintage Estimates)",
+      "publisher": "US Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual estimates of the resident population for the nation, states and counties, produced between decennial censuses. Each vintage starts from the most recent decennial census count and carries it forward with administrative records on births, deaths and net international migration. Distinct from the decennial census itself: the census is a count, this is a model built on top of the count, and it is the model rather than the count that most federal programmes and surveys actually use year to year.",
+      "releases_per_year": 1,
+      "cadence_note": "A new vintage is released each December for the nation and states, with county and sub-county detail following through the following spring.",
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/popest.html",
+      "domains": [
+        "population"
+      ]
+    },
+    {
+      "id": "hhs-poverty-guidelines",
+      "title": "Annual Update of the HHS Poverty Guidelines",
+      "publisher": "US Department of Health and Human Services, Office of the Assistant Secretary for Planning and Evaluation",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The federal poverty level, published each January in the Federal Register as a simple table of income by household size. It is not a measurement — it is an administrative simplification of the Census Bureau's poverty thresholds, inflated forward by the CPI-U and then rounded so the interval between family sizes is uniform. Medicaid, ACA premium subsidies, SNAP, Head Start and dozens of other programmes set eligibility as a percentage multiple of it.",
+      "releases_per_year": 1,
+      "cadence_note": "Published mid-January each year, effective on the date of publication unless an administering programme specifies otherwise.",
+      "last_updated": null,
+      "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+      "domains": [
+        "benefits",
+        "health",
+        "inflation"
+      ]
+    },
+    {
+      "id": "uscensus-poverty-thresholds",
+      "title": "Census Bureau Poverty Thresholds (Income and Poverty in the United States)",
+      "publisher": "US Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The official statistical poverty measure: a matrix of thresholds by family size, number of children and (for one- and two-person units) age of householder, used to count how many Americans are in poverty. Published each September for the prior calendar year, using income data from the CPS Annual Social and Economic Supplement. The thresholds are a statistical instrument; the HHS guidelines are the administrative simplification of them.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html",
+      "domains": [
+        "population",
+        "benefits"
+      ]
+    },
+    {
+      "id": "bls-c-cpi-u",
+      "title": "Chained Consumer Price Index for All Urban Consumers (C-CPI-U)",
+      "publisher": "US Bureau of Labor Statistics",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "A superlative price index built from the same price quotes as the CPI-U but using a Tornqvist formula with expenditure weights from both the current and the comparison period, so it captures consumers substituting between categories as relative prices change. It therefore rises more slowly than the CPI-U. Published monthly alongside the CPI, but initially as an estimate: values are revised twice and only become final about a year later, which is why the tax code pins the values used to those published as of the initial August release.",
+      "releases_per_year": 12,
+      "cadence_note": "Released with the monthly CPI news release, but each month's value is initial and subject to three interim revisions, with final data posted 10 to 12 months later.",
+      "last_updated": null,
+      "url": "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "irs-annual-inflation-adjustments",
+      "title": "Annual Inflation Adjustments Revenue Procedure (Rev. Proc. 2025-32 and successors)",
+      "publisher": "US Internal Revenue Service",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The revenue procedure issued each autumn that sets the dollar figures for the following tax year: rate bracket thresholds, the standard deduction, the AMT exemption, the earned income credit, the estate tax exclusion, HSA and FSA limits and dozens of other provisions. Since the 2017 tax act the escalator is the chained CPI rather than the CPI-U, which slows bracket growth relative to the pre-2018 rule and quietly raises revenue over time.",
+      "releases_per_year": 1,
+      "cadence_note": "Normally issued in October or November for the following tax year; the 2026 figures were reissued as Rev. Proc. 2025-32 after the July 2025 tax act changed the underlying provisions.",
+      "last_updated": null,
+      "url": "https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026",
+      "domains": [
+        "taxation",
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ssa-cola",
+      "target_report_id": "bls-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "SSA states the statutory formula outright: 'The Social Security Act specifies a formula for determining each COLA. According to the formula, COLAs are based on increases in the Consumer Price Index for Urban Wage Earners and Clerical Workers (CPI-W). CPI-Ws are calculated on a monthly basis by the Bureau of Labor Statistics. A COLA effective for December of the current year is equal to the percentage increase (if any) in the CPI-W from the average for the third quarter of the current year to the average for the third quarter of the last year in which a COLA became effective.' The arithmetic is shown in full: the 2.8 percent COLA effective December 2025 is (317.265 - 308.729) / 308.729 x 100, using the July, August and September CPI-W values for 2024 and 2025. Note the index is CPI-W, a subpopulation index for urban wage earners and clerical workers, not the headline CPI-U.",
+      "evidence_url": "https://www.ssa.gov/oact/cola/latestCOLA.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 3,
+        "ends": "09-30",
+        "stated_as": "'the percentage increase (if any) in the CPI-W from the average for the third quarter of the current year to the average for the third quarter of the last year in which a COLA became effective'."
+      }
+    },
+    {
+      "source_report_id": "ssa-contribution-benefit-base",
+      "target_report_id": "ssa-national-average-wage-index",
+      "relationship_type": "calculated_from",
+      "basis": "SSA lists the amounts driven by the wage index and puts the taxable maximum first: 'We use the average wage indexing series to update several amounts that are important to the operation of Social Security's Old-Age, Survivors, and Disability Insurance (OASDI) program. — OASDI contribution and benefit base (also known as the taxable maximum); Retirement earnings test exempt amounts; Formulas for a primary insurance amount and maximum family benefits; Amount of earnings needed to earn a quarter of coverage.' This is the interesting structural fact about the Social Security system: benefits are indexed to prices, the tax base is indexed to wages, and the two indices diverge.",
+      "evidence_url": "https://www.ssa.gov/oact/cola/AWI.html"
+    },
+    {
+      "source_report_id": "cps-current-population-survey",
+      "target_report_id": "uscensus-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "The Handbook of Methods is unambiguous that the survey cannot produce population levels by itself: 'Population controls are independent estimates of the population that are used to weight the CPS sample results so that estimates reflect the civilian noninstitutional population ages 16 and older. The Census Bureau develops the CPS population controls, which are based on decennial census population counts, supplemented with birth and death data and estimates of net international migration. The Census Bureau reviews and adjusts the population estimates every year. BLS introduces the Census Bureau's annual population control adjustments into CPS estimates for January.' This is why the January Employment Situation carries a break in the household series each year — the level jumps by whatever the new vintage says, independent of anything that happened in the labour market.",
+      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "'BLS introduces the Census Bureau's annual population control adjustments into CPS estimates for January.'"
+      }
+    },
+    {
+      "source_report_id": "uscensus-population-estimates",
+      "target_report_id": "uscensus-decennial",
+      "relationship_type": "calculated_from",
+      "basis": "The population controls are 'based on decennial census population counts, supplemented with birth and death data and estimates of net international migration' — the estimates programme is a carry-forward of the decennial base, which is why a census undercount or overcount propagates into every intercensal year until the next census resets it.",
+      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm"
+    },
+    {
+      "source_report_id": "bls-employment-situation",
+      "target_report_id": "cps-current-population-survey",
+      "relationship_type": "calculated_from",
+      "basis": "The Employment Situation news release is two surveys stapled together. The household half — the unemployment rate, the participation rate, and all demographic detail — is the CPS. BLS: 'When the Census Bureau's processing activities are completed, the microdata file is securely transferred to the U.S. Bureau of Labor Statistics (BLS) for estimation of labor force statistics.' The establishment half (payroll employment) is the CES, already linked to QCEW elsewhere in the graph.",
+      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm"
+    },
+    {
+      "source_report_id": "hhs-poverty-guidelines",
+      "target_report_id": "bls-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "The statute names the index: 'Section 673(2) of the Omnibus Budget Reconciliation Act (OBRA) of 1981 (42 U.S.C. 9902(2)) requires the Secretary of the Department of Health and Human Services to update the poverty guidelines at least annually, adjusting them on the basis of the Consumer Price Index for All Urban Consumers (CPI-U). ... As required by law, this update is accomplished by increasing the latest published Census Bureau poverty thresholds by the applicable percentage change in the Consumer Price Index for All Urban Consumers (CPI-U). The guidelines in this 2026 notice reflect the 2.63 percent price increase between calendar years 2024 and 2025.' Note this is CPI-U, annual average to annual average — a different index and a different reference period from the CPI-W third-quarter comparison that drives the Social Security COLA.",
+      "evidence_url": "https://www.federalregister.gov/documents/2026/01/15/2026-00755/annual-update-of-the-hhs-poverty-guidelines",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "'the applicable percentage change in the Consumer Price Index for All Urban Consumers (CPI-U)' between calendar-year averages."
+      }
+    },
+    {
+      "source_report_id": "hhs-poverty-guidelines",
+      "target_report_id": "uscensus-poverty-thresholds",
+      "relationship_type": "calculated_from",
+      "basis": "The guidelines are not an independent measure — they are the Census thresholds inflated and smoothed: 'The poverty guidelines issued here are a simplified version of the poverty thresholds that the Census Bureau uses to prepare its estimates of the number of individuals and families in poverty. ... this update is accomplished by increasing the latest published Census Bureau poverty thresholds by the applicable percentage change in the CPI-U. ... The poverty guidelines continue to be derived from the Census Bureau's current official poverty thresholds; they are not derived from the Census Bureau's Supplemental Poverty Measure (SPM).' The notice even states the guidelines are 'roughly equal to the poverty thresholds for calendar year 2025, which the Census Bureau expects to publish in final form in September 2026' — the administrative number arrives eight months before the statistical number it approximates.",
+      "evidence_url": "https://www.federalregister.gov/documents/2026/01/15/2026-00755/annual-update-of-the-hhs-poverty-guidelines"
+    },
+    {
+      "source_report_id": "uscensus-poverty-thresholds",
+      "target_report_id": "cps-current-population-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "The Census Bureau's own methodology page labels the published threshold table 'Poverty Thresholds by Size of Family and Number of Related Children Under 18 Years — Source: Current Population Survey (CPS)'. The threshold matrix is carried forward by CPI-U, but the income distribution it is applied to, and the official count of people in poverty, come from the CPS Annual Social and Economic Supplement.",
+      "evidence_url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html"
+    },
+    {
+      "source_report_id": "uscensus-poverty-thresholds",
+      "target_report_id": "bls-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "'The official poverty thresholds do not vary geographically, but they are updated for inflation using the Consumer Price Index (CPI-U)... Thresholds are updated annually for inflation using the Consumer Price Index for All Urban Consumers (CPI-U).' Worth noting the doubling-up: the thresholds are CPI-indexed, and then HHS indexes the published thresholds forward by CPI again to get the guidelines, so the CPI enters the eligibility rule for Medicaid twice, a year apart.",
+      "evidence_url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html"
+    },
+    {
+      "source_report_id": "irs-annual-inflation-adjustments",
+      "target_report_id": "bls-c-cpi-u",
+      "relationship_type": "calculated_from",
+      "basis": "Rev. Proc. 2025-32 says the figures 'are generally determined by reference to § 1(f)', and 26 U.S.C. § 1(f) names the index and the reference period exactly: '(3)(A) The cost-of-living adjustment for any calendar year is the percentage (if any) by which (i) the C-CPI-U for the preceding calendar year, exceeds (ii) the CPI for calendar year 2016, multiplied by the amount determined under subparagraph (B).' '(6)(A) The term \"C-CPI-U\" means the Chained Consumer Price Index for All Urban Consumers (as published by the Bureau of Labor Statistics of the Department of Labor). The values ... shall be the latest values so published as of the date on which such Bureau publishes the initial value of the Chained Consumer Price Index for All Urban Consumers for the month of August for the preceding calendar year.' '(6)(B) The C-CPI-U for any calendar year is the average of the C-CPI-U as of the close of the 12-month period ending on August 31 of such calendar year.' The August cut-off is why the IRS can publish next year's brackets in October, and the freeze on 'latest values as of' the initial August release is how the statute copes with the fact that the chained index is revised for a year after first publication.",
+      "evidence_url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section1&num=0&edition=prelim",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "08-31",
+        "stated_as": "'The C-CPI-U for any calendar year is the average of the C-CPI-U as of the close of the 12-month period ending on August 31 of such calendar year' — 26 U.S.C. s.1(f)(6)(B)."
+      }
+    },
+    {
+      "source_report_id": "bls-c-cpi-u",
+      "target_report_id": "bls-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "The chained index is not a separate collection — it is the CPI's own price quotes reaggregated. BLS: 'all three of the CPI indexes are built in two stages. In the first stage, prices for each of the 7,776 item-area combinations (243 item categories X 32 geographic areas) are averaged together to form 7,776 basic indexes... The geometric mean estimator is used in the C-CPI-U in the same item categories in which it is used in the CPI-U and CPI-W. In the second stage... It is at this second stage where the C-CPI-U is different from the CPI-U and CPI-W. The use of a superlative formula for upper-level aggregation... is designed to address consumer substitution across item categories.' BLS also confirms the policy use: 'Since 2017, the C-CPI-U has been used to adjust Federal tax brackets for inflation.' The average gap is about 0.2 percentage points a year, which compounds.",
+      "evidence_url": "https://www.bls.gov/cpi/additional-resources/chained-cpi-questions-and-answers.htm"
+    },
+    {
+      "source_report_id": "bea-pce",
+      "target_report_id": "bls-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "NIPA Handbook Chapter 5 lists the CPI among the principal inputs — 'The following are among the principal source data used for the PCE estimates: BEA's Benchmark Input-Output (I-O) Accounts... the Census Bureau's Annual Retail Trade Survey, Service Annual Survey, Quarterly Services Survey, and Monthly Retail Trade Survey; and the Bureau of Labor Statistics' Consumer Price Indexes (CPIs)' — and then explains the mechanism: 'The estimates of quantities purchased, or real spending, for most of the detailed PCE categories are prepared by deflation. In this method, the quantities are calculated by dividing the current-dollar value of the component by an appropriate price index... For most PCE categories, the closest matching price index is a consumer price index or indexes.' Tables 5.A and 5.B name the specific CPI series component by component (CPI for new cars, CPI for used cars and trucks, CPI for food at home, and so on). The Fed's preferred inflation gauge is therefore largely a reweighting of BLS price quotes onto national-accounts expenditure weights.",
+      "evidence_url": "https://www.bea.gov/resources/methodologies/nipa-handbook/pdf/chapter-05.pdf"
+    },
+    {
+      "source_report_id": "fed-fomc-statement",
+      "target_report_id": "bea-pce",
+      "relationship_type": "uses_data_from",
+      "basis": "The FOMC's Statement on Longer-Run Goals and Monetary Policy Strategy, reaffirmed effective January 27, 2026, names the series that defines the target: 'The Committee reaffirms its judgment that inflation at the rate of 2 percent, as measured by the annual change in the price index for personal consumption expenditures, is most consistent over the longer run with the Federal Reserve's statutory maximum employment and price stability mandates.' The 2 percent goal is not defined on the CPI — a distinction that matters because the two indexes routinely differ by several tenths.",
+      "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf"
+    },
+    {
+      "source_report_id": "fed-sep",
+      "target_report_id": "bea-pce",
+      "relationship_type": "uses_data_from",
+      "basis": "The Summary of Economic Projections reports each participant's projection of inflation as the percent change in the PCE price index and in the core PCE price index, precisely because the FOMC's longer-run goal is stated as '2 percent, as measured by the annual change in the price index for personal consumption expenditures'. The projection variable is defined by the statement of goals, so the SEP inherits BEA's index by construction.",
+      "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ssa-national-average-wage-index -> (W-2 / Form 1040 earnings records)",
+      "source": "ssa-national-average-wage-index",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "SSA states the AWI is derived from 'annual wage data we tabulated. The wage data are based on wages subject to Federal income taxes and contributions to deferred compensation plans.' That is an administrative tabulation of W-2 and Schedule SE records, not a published statistical release with a cadence, so there is no node to point at. Same category as the QCEW-versus-UI-records problem: the ultimate source is a tax file, not a report."
+    },
+    {
+      "edge": "us-federal-minimum-wage -> bls-cpi",
+      "source": null,
+      "target": "bls-cpi",
+      "reason": "denied",
+      "why": "Deliberately not created. The federal minimum wage is set by statute at $7.25 and has no indexation provision at all — it has not moved since 2009. The absence of an edge is the finding, but a node with no dependencies and no cadence is noise in a dependency graph. Several states do index their minimums to the CPI; that would be a state-level slice."
+    },
+    {
+      "edge": "ssa-ssi-federal-benefit-rate -> ssa-cola",
+      "source": null,
+      "target": "ssa-cola",
+      "reason": "deferred",
+      "why": "SSA's latest COLA page states that 'Federal SSI payment levels will also increase by 2.8 percent effective for payments made for January 2026', so SSI rides the same determination. Not given its own node because it would be a near-duplicate of ssa-cola with the same driver and the same announcement date; the same is true of the retirement earnings test exempt amounts and the quarter-of-coverage amount on the wage-index side. If the graph later wants programme-level granularity these are the obvious four to add."
+    },
+    {
+      "edge": "bea-pce -> uscensus-retail-and-services-surveys",
+      "source": "bea-pce",
+      "target": null,
+      "reason": "deferred",
+      "why": "NIPA Handbook Chapter 5 names the Census Bureau's Annual Retail Trade Survey, Service Annual Survey, Quarterly Services Survey and Monthly Retail Trade Survey as principal source data for the current-dollar PCE estimates — better documented than most edges in this file. Left out only because it is expenditure-side plumbing rather than policy indexation, and adding four Census economic surveys would unbalance the slice. Clearly real; worth a future pass."
+    },
+    {
+      "edge": "irs-annual-inflation-adjustments -> hhs-poverty-guidelines",
+      "source": "irs-annual-inflation-adjustments",
+      "target": "hhs-poverty-guidelines",
+      "reason": "wrong-target",
+      "why": "The ACA premium tax credit under section 36B is computed from household income as a percentage of the federal poverty line, so the IRS revenue procedure's 36B tables do interact with the HHS guidelines. But the revenue procedure sets the applicable percentage table rather than the poverty line itself, and the linkage runs through the tax return rather than through the revenue procedure's inflation adjustments. Not clean enough to assert on the evidence read."
+    },
+    {
+      "edge": "fed-h15 -> fed-fomc-statement",
+      "source": "fed-h15",
+      "target": "fed-fomc-statement",
+      "reason": "unpublishable-source",
+      "why": "Deleted in V0.9, and the seed edge's premise turned out to be false rather than merely unevidenced. The basis claimed H.15 'reports the current federal funds target range set by the FOMC alongside observed market rates'. It does not: the H.15 release carries no target-range series at all. Its only federal funds line is 'Federal funds (effective)', and footnote 1 states that since March 1 2016 the EFFR 'is a volume-weighted median of transaction-level data collected from depository institutions in the Report of Selected Money Market Rates (FR 2420)'. So H.15's fed funds number is built from an administrative reporting form, not from the FOMC's announcement — the same shape as FR 2644 behind H.8, and unpublishable for the same reason. Checked against the release of 2026-07-28."
+    },
+    {
+      "edge": "fed-fomc-statement -> bls-cpi",
+      "source": "fed-fomc-statement",
+      "target": "bls-cpi",
+      "reason": "no-document",
+      "why": "Deleted in V0.9. The seed basis hedged in its own wording — 'CPI inflation is referenced as context even though the target is PCE-based' — and V0.8 had already flagged that an edge whose reasoning hedges is not one to go hunting for a URL to justify. The Committee's longer-run goals statement names PCE inflation, and the documented edge fed-fomc-statement -> bea-pce already carries that relationship with evidence. Nothing states the FOMC Statement takes the CPI as an input, so what remained was a plausible-looking link with a documented sibling doing the real work."
+    },
+    {
+      "edge": "fed-h15 -> (U.S. Treasury daily yield curve)",
+      "source": "fed-h15",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "A live lead, opened by deleting fed-h15 -> fed-fomc-statement in V0.9 and worth taking because that deletion left H.15 with no surviving edge, so the node now drops from the graph on every build. H.15 does name a source explicitly: footnotes 9 and 10 both read 'Source: U.S. Treasury' for the Treasury nominal and inflation-indexed constant maturity series, and the release describes those yields as 'interpolated by the U.S. Treasury from the daily yield curve'. That is a documented dependency by this project's standard — better evidenced than many edges already in the graph. What is missing is the node: the Treasury daily yield curve / interest rate statistics release has not been researched. Researching it reconnects H.15 and is the cheapest route to doing so."
+    }
+  ]
+}

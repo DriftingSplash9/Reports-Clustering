@@ -1,0 +1,117 @@
+{
+  "_slice": "Structural bridges",
+  "_researched": "2026-07-28",
+  "_note": "Both isolated islands connected. Island 1 (fed-h8 / ffiec-call-report) is bridged by one new node, fed-z1 (Financial Accounts of the United States, Z.1), which aggregates Call Report data on one side and is built on SNA 2008 sector/instrument codes and BEA NIPA table 5.1 on the other: ffiec-call-report <- fed-z1 -> sna-2008 and fed-z1 -> bea-gdp. Island 2 (ssa-national-average-wage-index / ssa-contribution-benefit-base) is bridged by one new node, ssa-pia-formula, whose bend points are computed arithmetically from the AWI series and which is then escalated by the annual COLA: ssa-national-average-wage-index <- ssa-pia-formula -> ssa-cola. Ruled out: a Call Report -> Basel Framework edge (confirmed absent), an outward edge from H.8 itself, and FDIC QBP as a bridge (it is a second leaf, not a bridge). See _dropped.",
+  "reports": [
+    {
+      "id": "ssa-pia-formula",
+      "title": "Primary Insurance Amount (PIA) Formula and Bend Points",
+      "publisher": "Social Security Administration, Office of the Chief Actuary",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual automatic determination of the Primary Insurance Amount formula bend points used to convert a worker's Average Indexed Monthly Earnings (AIME) into a Social Security retirement, disability or survivor benefit. The bend points are wage-indexed each year by the ratio of the National Average Wage Index two years prior to the 1977 AWI value. Published by the Office of the Chief Actuary alongside the other October automatic determinations.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.ssa.gov/oact/cola/piaformula.html",
+      "domains": [
+        "benefits"
+      ]
+    },
+    {
+      "id": "fed-z1",
+      "title": "Financial Accounts of the United States (Z.1)",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Quarterly release presenting the flow of funds, balance sheets and integrated macroeconomic accounts for the United States, covering financial assets and liabilities of every institutional sector. Depository institution sector data are aggregated from the quarterly FFIEC Call Reports. Since the June 2026 release, Z.1 tables are numbered using System of National Accounts sector and instrument codes.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.federalreserve.gov/releases/z1/",
+      "domains": [
+        "national-accounts",
+        "banking"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ssa-pia-formula",
+      "target_report_id": "ssa-national-average-wage-index",
+      "relationship_type": "calculated_from",
+      "basis": "SSA's PIA page shows the bend points are computed directly from the Average Wage Index series: 'Computation of bend points for 2026: First bend point $180 times 69,846.57 divided by 9,779.44 equals $1,285.59, which rounds to $1,286', where 69,846.57 is the AWI for 2024 and 9,779.44 the AWI for 1977. The page links explicitly to the 'Average wage indices' series.",
+      "evidence_url": "https://www.ssa.gov/oact/cola/piaformula.html"
+    },
+    {
+      "source_report_id": "ssa-pia-formula",
+      "target_report_id": "ssa-cola",
+      "relationship_type": "calculated_from",
+      "basis": "SSA 'Application of COLA to a Retirement Benefit': 'Each Social Security benefit is based on a \"primary insurance amount,\" or PIA. The PIA in turn is directly related to the primary beneficiary's earnings through a benefit formula. It is the PIA that is increased by the COLA, with the result truncated to the next lower dime.' The page links directly to the PIA formula page. So the PIA carried forward each year is the prior PIA escalated by the annual COLA.",
+      "evidence_url": "https://www.ssa.gov/oact/cola/colaapplic.html",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "12-01",
+        "stated_as": "'It is the PIA that is increased by the COLA', carried forward each year with the COLA effective for December."
+      }
+    },
+    {
+      "source_report_id": "fed-z1",
+      "target_report_id": "ffiec-call-report",
+      "relationship_type": "uses_data_from",
+      "basis": "Federal Reserve Z.1 Technical Q&A (posted 3/7/2024), answering how Z.1 depository institution coverage aligns with H.8: 'Z.1 depository institution data are aggregated from Call Reports and do not involve estimation from a sample' and 'Z.1 private depository institutions data are from quarterly Call Reports.' Z.1 tables F.111/L.111 (U.S.-chartered depository institutions) and F.112/L.112 (foreign banking offices in the U.S.) are built by grouping Call Report line items.",
+      "evidence_url": "https://www.federalreserve.gov/releases/z1/z1_technical_qa.htm",
+      "reference_period": {
+        "readings_per_year": 4,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "'Z.1 private depository institutions data are from quarterly Call Reports.'"
+      }
+    },
+    {
+      "source_report_id": "fed-z1",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Federal Reserve Z.1 Technical Q&A: 'Line items on Z.1 tables F.111, L.111, F.112, and L.112 group Call Report line items into instrument categories that better align with the System of National Accounts (SNA 2008) accounting framework.' The same page (posted 5/22/2026) states that 'In the June 11, 2026, release of the Financial Accounts, tables were renumbered to align more closely with the System of National Accounts (SNA) coding guidelines for sectors and instruments,' and gives the example 'Table S122.1.t ... \"S122\" corresponds to SNA sector S122 (depository institutions).'",
+      "evidence_url": "https://www.federalreserve.gov/releases/z1/z1_technical_qa.htm"
+    },
+    {
+      "source_report_id": "fed-z1",
+      "target_report_id": "bea-gdp",
+      "relationship_type": "uses_data_from",
+      "basis": "Footnote 1 to Z.1 table F.4 (Saving and investment by sector), in the release itself: 'This table is based on NIPA table 5.1 in the Survey of Current Business, Bureau of Economic Analysis (www.bea.gov). It is consistent with the Integrated Macroeconomic Accounts of the United States jointly compiled by the Federal Reserve Board and the Bureau of Economic Analysis.' Z.1 lines 21 and 42 are labelled 'NIPAs' and are taken from the BEA national accounts.",
+      "evidence_url": "https://www.federalreserve.gov/releases/z1/preview/html/f4.htm"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ffiec-call-report -> bis-basel-framework",
+      "source": "ffiec-call-report",
+      "target": "bis-basel-framework",
+      "reason": "denied",
+      "why": "Confirming an earlier agent's negative result. Call Report Schedule RC-R (regulatory capital) instructions never use the word 'Basel'; the instructions cite only US CFR regulatory capital rules (12 CFR part 3 / 217 / 324). The US implementation of Basel is via domestic rulemaking, and the Call Report instructions reference the domestic rule, not the international standard. No honest edge available at this evidence standard."
+    },
+    {
+      "edge": "fed-h8 -> bis-basel-framework / fed-h8 -> anything outside the island",
+      "source": "fed-h8",
+      "target": "bis-basel-framework",
+      "reason": "no-document",
+      "why": "H.8 is a statistical release built from the weekly FR 2644 report form, not a regulatory or methodological product. The Z.1 Technical Q&A confirms its only cross-release input relationship is to the Call Report ('H.8 weekly data are benchmarked to the quarterly Call Reports' and the FR 2644 sample 'in conjunction with Reports of Condition and Income (Call Reports), are used to estimate the remaining ... banks in the H.8 universe'), which is the already-existing intra-island edge. H.8 is bridged to the main graph indirectly: it shares ffiec-call-report with fed-z1."
+    },
+    {
+      "edge": "fdic-quarterly-banking-profile as a bridge node",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Not added. The QBP is compiled from Call Reports, so an fdic-qbp -> ffiec-call-report edge is easy, but that only adds a second leaf hanging off the island; nothing in the existing main graph was found citing the QBP, so it would not bridge anything. Dropped in favour of fed-z1, which reaches sna-2008 and bea-gdp."
+    },
+    {
+      "edge": "ssa-national-average-wage-index -> (its own source)",
+      "source": "ssa-national-average-wage-index",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "AWI's input is W-2 / Form 1040 SE administrative earnings records held by SSA, which are not a published statistical release and so cannot be a node. The island was instead bridged downstream, via the PIA formula."
+    }
+  ]
+}

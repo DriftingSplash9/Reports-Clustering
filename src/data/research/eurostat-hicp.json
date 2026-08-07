@@ -1,0 +1,31 @@
+{
+  "_slice": "eurostat-hicp",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Staged in EU/slices/eu-level/, checked, moved here and registered in src/data/index.ts.",
+  "_note": "Sixth EU slice. One node. Found via Annex XI to the Staff Regulations (EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md, record AXI-02), which names the HICP directly as the Belgian component of the 'Joint Index' behind EU staff salary updates -- the branch's first named national-level statistical release found at the primary-source end of a supranational instrument. Assessed from Eurostat's own metadata page for the HICP, fetched and read first-hand this session via a browser. Full quotes in EU/HICP_PartA_2026-08-05.md. UPDATE 2026-08-05 (later session): the _dropped no-node-yet lead recorded here (the EU staff salary/pension update mechanism as the dependent end) is resolved -- see src/data/research/eurostat-remuneration-update-report.json, which now carries the built edge `eurostat-remuneration-update-report -> eurostat-hicp`. This node's own dependencies stay empty; the edge lives in the source's file, per the corpus convention de-destatis-national-accounts.json set.",
+  "_headline": "THE BRANCH'S FASTEST-CADENCE EU NODE, AND THE ONE THAT PRODUCED THE FIRST NAMED SUPRANATIONAL-TO-NATIONAL STATISTICAL CITATION. Annex XI's own text (never read first-hand in this branch until this session) names 'the Harmonised Indices of Consumer Prices (HICP) in the case of Belgium' as an actual input to the EU staff salary-update mechanism, correcting a prior AGENCY ONLY reading (G.22.md) that was based on a secondary report rather than the primary instrument.",
+  "_open_questions": [
+    "DOMAIN GAP, same shape as every other EU node so far. 'inflation' is the obvious and clean fit here -- unlike eurostat-farm-structure-survey's 'population' placeholder, this one is not a stretch.",
+    "GRAIN: modelled here as the single EU-wide HICP series (matching how bls-cpi/statcan-cpi are each one national release), even though Annex XI cites 'the case of Belgium' specifically -- Belgium's own national component of the harmonised measure. If a future session wants country-level granularity for HICP the way the branch already splits Germany out under de-destatis-national-accounts.json, this node may need to be split or renamed be-hicp with eurostat-hicp as an aggregate parent (see Report.part_of in src/lib/types.ts for the precedent mechanism)."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-hicp",
+      "title": "Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's own metadata states: 'The Harmonised Index of Consumer Prices (HICP) gives comparable measures of inflation for the countries and country groups for which it is produced... a set of consumer price indices (CPIs) calculated according to a harmonised approach and definitions as laid down in Regulations and Recommendations. In addition, the HICP provides the official measure of consumer price inflation in the euro area [for] monetary policy purpose[s].' Named directly by Annex XI to the Staff Regulations of Officials of the European Union as the Belgian component of the 'Joint Index' used to calculate the annual update of EU staff remuneration and pensions (Article 1(2)) -- see _dropped.",
+      "releases_per_year": 12,
+      "cadence_note": "'The data are disseminated monthly, around the middle of the month that follows the reference month' (Eurostat metadata page, 'Frequency of dissemination'). A flash estimate for the euro area is disseminated even earlier, on or near the last working day of the reference month.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm",
+      "domains": [
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": []
+}

@@ -1,0 +1,45 @@
+{
+  "_slice": "de-bundesbank-financial-accounts",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Closes sc-74 (PartB_soft_connections_2026-08-04.md), flagged since G.26.md as 'the obvious second German node' and never minted. Registered in src/data/index.ts.",
+  "_note": "de-destatis-national-accounts.json's own _dropped array already named this target verbatim ('...bridge to the financial accounts by sector, which the Deutsche Bundesbank (German Central Bank) is responsible for compiling') but withheld the edge for want of a researched node. This session found and live-verified that node on bundesbank.de. sc-75 (the EVAS-numbered German source-statistics sub-graph, also flagged since G.26.md) is explicitly NOT chased here -- it is a whole sub-graph in its own right and deserves its own session.",
+  "_headline": "Germany's second node closes a 20-plus-session-old backlog item and gives the branch its first Bundesbank/NCB-to-Destatis edge, structurally the same shape as the Bank of Canada material already in the Canada/US galaxy.",
+  "_open_questions": [
+    "The direction of the de-destatis-national-accounts -> de-bundesbank-financial-accounts edge rests on an inference from 'bridge to', not an explicit 'X uses Y's data' statement -- recorded as uses_data_from because Destatis's own sector-accounts framework is described as the integrating structure that bridges to Bundesbank's financial accounts, but the underlying quote does not spell out which side consumes which side's output. Flagged, not silently treated as certain."
+  ],
+  "reports": [
+    {
+      "id": "de-bundesbank-financial-accounts",
+      "title": "Financial Accounts (Gesamtwirtschaftliche Finanzierungsrechnung)",
+      "publisher": "Deutsche Bundesbank",
+      "country": "DE",
+      "jurisdiction_level": "federal",
+      "region": "Germany",
+      "description": "Quarterly balance sheets of financial flows and outstanding amounts by institutional sector and financial instrument, published in press releases, the Bundesbank's Monthly Report, and its dedicated Statistical Series. Bundesbank's own page: 'The Bundesbank compiles the financial accounts on a quarterly basis... Their methodological basis is the latest version of the European System of Accounts (ESA 2010).' Passed on to the ECB, which uses it (with other euro-area countries' contributions) to compile the euro-area financial accounts.",
+      "releases_per_year": 4,
+      "cadence_note": "Live-verified directly on bundesbank.de/en/statistics/macroeconomic-accounting-systems/financial-accounts -- 'The Bundesbank compiles the financial accounts on a quarterly basis.'",
+      "last_updated": null,
+      "url": "https://www.bundesbank.de/en/statistics/macroeconomic-accounting-systems/financial-accounts",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "de-bundesbank-financial-accounts",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Bundesbank's own page: 'Their methodological basis is the latest version of the European System of Accounts (ESA 2010).' Live-verified 2026-08-05.",
+      "evidence_url": "https://www.bundesbank.de/en/statistics/macroeconomic-accounting-systems/financial-accounts"
+    },
+    {
+      "source_report_id": "de-destatis-national-accounts",
+      "target_report_id": "de-bundesbank-financial-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Destatis's own GNI inventory (already quoted in de-destatis-national-accounts.json's _dropped array): 'sector accounts shed a light on the transactions between the institutional sectors of the economy. They also serve as an important instrument ensuring coherence in the system of national accounts as well as bridge to the financial accounts by sector, which the Deutsche Bundesbank (German Central Bank) is responsible for compiling.' Direction inferred from context (Destatis's own accounts framework is the integrating structure); not independently re-fetched this session -- carried from the existing slice's own quote.",
+      "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/_node.html"
+    }
+  ],
+  "_dropped": []
+}

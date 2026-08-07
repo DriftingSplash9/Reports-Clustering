@@ -1,0 +1,332 @@
+{
+  "_slice": "Canadian credit, mortgage and lending infrastructure",
+  "_researched": "2026-07-28",
+  "_note": "This slice covers the plumbing that sits between the Bank of Canada's policy rate and what a Canadian household or small lender actually pays: the CORRA benchmark family, the mortgage stress test, government-backed mortgage insurance, and deposit insurance pricing. Its shape is unusual. The benchmark side (CORRA, Term CORRA) is exceptionally well documented because IOSCO benchmark principles force administrators to publish methodology, so those edges are precise and mechanical. The mortgage side is documented in bursts: the rules are public, but the ONLY places that state what feeds what are the transition documents written when a rule changed - the Department of Finance's February 2020 backgrounder replacing the Bank of Canada 5-Year Benchmark Posted Mortgage Rate, and OSFI's 2020-21 letters replacing the same rate with a fixed 5.25 percent floor. Both of those edges are historical: Canada has spent the last five years deliberately cutting the mortgage stress test loose from any published market rate, so the current stress test for uninsured mortgages depends on nothing at all - it is a number OSFI announces. The provincial credit union chain is the darkest corner: Alberta's Credit Union Deposit Guarantee Corporation publishes a full Standards of Sound Business and Financial Practices that never once names Basel, OSFI, or a federal guideline, so it could not be attached to the graph on evidence and was dropped. The two documents that actually bind bank prudential regulation to the macroeconomic graph turned out to be CMHC's Residential Mortgage Industry Report (which footnotes the national accounts and defines the stress test by reference to OSFI B-20) and CDIC's Differential Premiums Manual (which reads its capital inputs out of OSFI's BCAR return).",
+  "reports": [
+    {
+      "id": "boc-corra",
+      "title": "Canadian Overnight Repo Rate Average (CORRA)",
+      "publisher": "Bank of Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "CORRA is Canada's designated risk-free reference rate, measuring the cost of overnight general collateral funding in Canadian dollars using Government of Canada treasury bills and bonds as repo collateral. The Bank of Canada has calculated and published it since June 15, 2020, as a daily trimmed volume-weighted median of eligible overnight repo transactions reported to CIRO through the Market Trade Reporting System. It became Canada's principal interest rate benchmark after CDOR ceased publication in June 2024.",
+      "releases_per_year": 250,
+      "cadence_note": "Published each Canadian business day by 10:00 ET, postponable to 11:00 ET.",
+      "last_updated": null,
+      "url": "https://www.bankofcanada.ca/rates/interest-rates/corra/",
+      "domains": [
+        "interest-rates",
+        "banking",
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "term-corra",
+      "title": "Term CORRA",
+      "publisher": "CanDeal Benchmark Administration Services (distributed by TMX Datalinx)",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Canada",
+      "description": "Term CORRA is Canada's forward-looking term reference rate for 1- and 3-month tenors, created on CARR's recommendation to give the loan and trade finance market a CDOR replacement. It is calculated by CanDeal Benchmark Administration Services from transactions and executable bids and offers in the central limit order book of One-Month (COA) and Three-Month (CRA) CORRA Futures on the Montreal Exchange, and published at 13:00 ET each business day. Its approved use cases are deliberately narrow: loans, trade finance, and single-currency derivatives hedging Term CORRA loans.",
+      "releases_per_year": 250,
+      "cadence_note": "Published same-day (T+0) at 13:00 ET each Canadian business day.",
+      "last_updated": null,
+      "url": "https://www.tmxinfoservices.com/benchmarks-and-indices/candeal-tmx-term-corra",
+      "domains": [
+        "interest-rates",
+        "banking"
+      ]
+    },
+    {
+      "id": "osfi-b20",
+      "title": "Residential Mortgage Underwriting Practices and Procedures – Guideline B-20",
+      "publisher": "Office of the Superintendent of Financial Institutions",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Guideline B-20 sets OSFI's expectations for prudent residential mortgage underwriting by all federally regulated financial institutions engaged in residential mortgage underwriting or the acquisition of residential mortgage loan assets in Canada. It is organised around five principles covering governance, borrower due diligence, collateral valuation, loan-to-value ratio management, and credit and counterparty risk management including mortgage insurance. It is the instrument through which the minimum qualifying rate (mortgage stress test) for uninsured mortgages is imposed.",
+      "releases_per_year": 1,
+      "cadence_note": "The guideline itself is revised only occasionally (2012, 2017, 2018, 2021, 2023); OSFI commits to reviewing the qualifying rate calibration at least annually.",
+      "last_updated": null,
+      "url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/residential-mortgage-underwriting-practices-procedures-guideline-2017",
+      "domains": [
+        "financial-regulation",
+        "banking",
+        "interest-rates"
+      ]
+    },
+    {
+      "id": "osfi-mqr-uninsured",
+      "title": "Minimum Qualifying Rate for Uninsured Mortgages",
+      "publisher": "Office of the Superintendent of Financial Institutions",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The MQR is the mortgage stress test rate OSFI requires federally regulated lenders to apply to uninsured (down payment of 20 percent or more) residential mortgage borrowers. It has two separately calibrated components: a buffer, currently 2 percent above the contract rate, and a floor, currently 5.25 percent. OSFI reviews and announces both components at least annually.",
+      "releases_per_year": 1,
+      "cadence_note": "OSFI committed in 2021 to review and communicate the qualifying rate at a minimum annually, every December.",
+      "last_updated": null,
+      "url": "https://www.osfi-bsif.gc.ca/en/supervision/financial-institutions/banks/minimum-qualifying-rate-uninsured-mortgages",
+      "domains": [
+        "financial-regulation",
+        "interest-rates",
+        "banking"
+      ]
+    },
+    {
+      "id": "cmhc-mortgage-loan-insurance",
+      "title": "CMHC Mortgage Loan Insurance – Homeowner and Small Rental Programs (eligibility requirements and premium schedule)",
+      "publisher": "Canada Mortgage and Housing Corporation",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "CMHC's published mortgage loan insurance product rules set the eligibility criteria and premium schedule for government-backed mortgage default insurance, which is required by law on residential mortgages with a loan-to-value ratio above 80 percent. The rules define maximum Gross Debt Service (39 percent) and Total Debt Service (44 percent) ratios, minimum down payments, maximum property values and amortization limits, and a premium table running from roughly 0.60 to 4.50 percent of the loan amount by loan-to-value band. These are the operative underwriting standards for the insured segment of the Canadian mortgage market.",
+      "releases_per_year": 1,
+      "cadence_note": "Revised as government mortgage insurance policy changes rather than on a fixed schedule.",
+      "last_updated": null,
+      "url": "https://www.cmhc-schl.gc.ca/professionals/project-funding-and-mortgage-financing/mortgage-loan-insurance/mortgage-loan-insurance-homeownership-programs/mortgage-loan-insurance-quick-reference-guide",
+      "domains": [
+        "banking",
+        "financial-regulation"
+      ]
+    },
+    {
+      "id": "boc-mortgage-qualifying-rate",
+      "title": "Mortgage Qualifying Rate (Benchmark Rate for Insured Mortgages)",
+      "publisher": "Bank of Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Since April 6, 2020 the Bank of Canada has published a weekly benchmark rate used to determine the minimum qualifying rate for government-backed insured mortgages. It is calculated as the weekly median 5-year fixed insured mortgage rate drawn from federally backed mortgage insurance applications adjudicated by mortgage insurers, plus a buffer set by the Minister of Finance (initially 200 basis points). It is published on a Wednesday and takes effect the following Monday, replacing the older Bank of Canada 5-Year Benchmark Posted Mortgage Rate for this purpose.",
+      "releases_per_year": 52,
+      "last_updated": null,
+      "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-interest-rates/",
+      "domains": [
+        "interest-rates",
+        "banking"
+      ]
+    },
+    {
+      "id": "boc-posted-chartered-bank-rates",
+      "title": "Interest Rates Posted for Selected Products by the Major Chartered Banks",
+      "publisher": "Bank of Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "A weekly Bank of Canada table of the interest rates posted by the six major Canadian chartered banks on conventional mortgages (1- through 5-year terms), GICs, personal loans and deposit products. The published figure for each product is the statistical mode of the rates posted by the six largest banks, so it is a compilation of commercial bank submissions rather than a market-transaction rate. Its 5-year conventional mortgage series was the Bank of Canada 5-Year Benchmark Posted Mortgage Rate that governed the Canadian mortgage stress test until 2020-21.",
+      "releases_per_year": 52,
+      "last_updated": null,
+      "url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/posted-interest-rates-offered-by-chartered-banks/",
+      "domains": [
+        "interest-rates",
+        "banking"
+      ]
+    },
+    {
+      "id": "cmhc-residential-mortgage-industry-report",
+      "title": "Residential Mortgage Industry Report",
+      "publisher": "Canada Mortgage and Housing Corporation",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "CMHC's semi-annual survey of the Canadian residential mortgage market, covering originations, renewals, arrears, and the traditional (chartered bank, credit union, mortgage finance company) and alternative (mortgage investment corporation, private) lending segments. It is assembled from CMHC's own NHA MBS issuer reporting and Survey of Non-Bank Mortgage Lenders together with Statistics Canada and Bank of Canada series, Equifax credit data and Canadian Bankers Association data. It is the main published bridge between mortgage-market outcomes and the prudential rules that govern them.",
+      "releases_per_year": 2,
+      "cadence_note": "Published twice a year (spring and fall editions); the companion Residential Mortgage Industry Data Dashboard updates quarterly.",
+      "last_updated": null,
+      "url": "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report",
+      "domains": [
+        "banking",
+        "interest-rates",
+        "financial-regulation",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "cdic-differential-premiums-manual",
+      "title": "CDIC Differential Premiums Manual and Differential Premiums By-law",
+      "publisher": "Canada Deposit Insurance Corporation",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "CDIC's annual manual implements the Differential Premiums By-law, which sorts every CDIC member institution into one of five premium categories and sets the deposit insurance premium each pays. Scoring is split between quantitative factors (capital ratios, leverage, asset concentration, earnings, liquidity) and qualitative factors (OSFI's supervisory Overall Risk Rating and stage of intervention). Members file a Differential Premiums Return each April, largely auto-populated from returns already filed with OSFI through the Regulatory Reporting System.",
+      "releases_per_year": 1,
+      "cadence_note": "Manual reissued each March for the premium year; returns due April 30.",
+      "last_updated": null,
+      "url": "https://www.cdic.ca/financial-community/deposit-insurance-premiums/",
+      "domains": [
+        "financial-regulation",
+        "banking"
+      ]
+    },
+    {
+      "id": "dof-insured-mortgage-qualifying-rules",
+      "title": "Minimum Qualifying Rate for Insured Mortgages (Government-Backed Mortgage Insurance Guarantee Framework)",
+      "publisher": "Department of Finance Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The Minister of Finance, not OSFI, sets the qualification rules for insured mortgages under Canada's government-backed mortgage insurance guarantee framework. Since April 6, 2020 the minimum qualifying rate for an insured mortgage has been the greater of the borrower's contract rate or the Bank of Canada's published Benchmark Rate. The Minister retains authority to adjust the buffer built into that benchmark.",
+      "releases_per_year": 1,
+      "cadence_note": "Changed by ministerial decision rather than on a schedule; major changes in 2016, 2020.",
+      "last_updated": null,
+      "url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html",
+      "domains": [
+        "financial-regulation",
+        "interest-rates",
+        "banking"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "boc-corra",
+      "target_report_id": "boc-policy-rate",
+      "relationship_type": "calculated_from",
+      "basis": "CORRA's published methodology defines a contingency fallback computed directly from the Bank's policy rate: \"The fallback rate is equal to the Bank of Canada target for the overnight rate for that day plus the mean spread over the previous five business days between CORRA and the Bank of Canada target on those days.\" If technical issues prevent calculation by 11:00 ET, CORRA is set at this fallback rate. The methodology page works a numeric example beginning \"Bank of Canada target for the overnight rate: 1.75 percent\". Note the causality is unusual: the Bank targets the overnight rate that CORRA measures, so CORRA normally depends on the policy rate only economically - but the documented, mechanical dependency is this fallback.",
+      "evidence_url": "https://www.bankofcanada.ca/rates/interest-rates/corra/methodology-calculating-corra/"
+    },
+    {
+      "source_report_id": "term-corra",
+      "target_report_id": "boc-corra",
+      "relationship_type": "calculated_from",
+      "basis": "The CanDeal Term CORRA Methodology states Term CORRA \"is a forward-looking measurement of overnight CORRA for 1- and 3-month tenors, based on market-implied expectations from CORRA derivatives markets. The rate is calculated from 1- and 3-month CORRA futures trading on the Montreal Exchange\", and that it \"is designed to complement both overnight CORRA and the CORRA Compounded Index that are administered and published by the Bank of Canada.\" The contract specifications annexed to the methodology close the loop mechanically: the futures' \"final settlement price... is 100 minus the compounded daily CORRA rate over the reference quarter\" (and over the reference month for the one-month contract).",
+      "evidence_url": "https://www.candeal.com/sites/default/files/2025-02/CanDeal_CBAS_Term%20CORRA%20Methodology_20250218_EN-1.pdf"
+    },
+    {
+      "source_report_id": "osfi-b20",
+      "target_report_id": "osfi-car-guideline",
+      "relationship_type": "cites",
+      "basis": "Section IV \"Other guidance\" of Guideline B-20 states: \"This Guideline is complementary to, and should be read in conjunction with, other OSFI guidance\" and then lists, among others, the \"Capital Adequacy Requirements Guideline\" and the \"Leverage Requirements Guideline\". B-20 also provides that where a lender fails to control residential mortgage risk, \"OSFI can take, or require the FRFI to take, corrective measures... including... the discretionary authority to adjust the FRFI's capital requirements or authorized leverage ratio\".",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/residential-mortgage-underwriting-practices-procedures-guideline-2017"
+    },
+    {
+      "source_report_id": "osfi-b20",
+      "target_report_id": "cmhc-mortgage-loan-insurance",
+      "relationship_type": "cites",
+      "basis": "Guideline B-20 defers to CMHC's published insurance rules for the debt-serviceability standard on insured mortgages: \"for insured mortgages, the Canada Mortgage Housing Corporation (CMHC) defines GDS and TDS ratios and sets maximum GDS and TDS limits.\" It adds that \"For insured residential mortgages, OSFI expects FRFIs to meet mortgage insurers' requirements in regard to debt serviceability\" and that B-20 \"complements... the Government of Canada's mortgage insurance guarantee framework, which establishes the rules for government-backed insured mortgages.\"",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/residential-mortgage-underwriting-practices-procedures-guideline-2017"
+    },
+    {
+      "source_report_id": "osfi-b20",
+      "target_report_id": "osfi-mqr-uninsured",
+      "relationship_type": "uses_data_from",
+      "basis": "B-20 does not itself contain the stress-test number; it points at OSFI's separately announced calibration: \"At a minimum, the qualifying rate for all uninsured mortgages should be the greater of the contractual mortgage rate plus a buffer, as set by the Superintendent or the minimum (or 'floor') rate, as set by the Superintendent\", and \"OSFI will review the calibration of the qualifying rate (both the buffer and floor) at least annually and will issue announcements if there are any calibration changes.\"",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/residential-mortgage-underwriting-practices-procedures-guideline-2017"
+    },
+    {
+      "source_report_id": "osfi-mqr-uninsured",
+      "target_report_id": "boc-posted-chartered-bank-rates",
+      "relationship_type": "calculated_from",
+      "basis": "Historical but explicitly documented. OSFI's February 18, 2020 news release states: \"OSFI's mortgage underwriting guideline (B-20) sets the minimum qualifying rate for uninsured mortgages... currently the minimum qualifying rate is the higher of the contractual mortgage rate plus two percent, or the five-year benchmark rate published by the Bank of Canada.\" That five-year benchmark rate was the Bank of Canada 5-Year Benchmark Posted Mortgage Rate from the posted chartered bank rate table. The link was severed on June 1, 2021 when OSFI replaced the Bank of Canada benchmark with a fixed 5.25 percent floor.",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/news/osfi-seeks-comments-proposed-new-benchmark-rate-qualifying-uninsured-mortgages"
+    },
+    {
+      "source_report_id": "dof-insured-mortgage-qualifying-rules",
+      "target_report_id": "boc-mortgage-qualifying-rate",
+      "relationship_type": "calculated_from",
+      "basis": "Department of Finance Canada backgrounder: \"The minimum qualifying rate for insured mortgages will now be the greater of: The borrower's contract rate... or The new Benchmark Rate.\" \"The new Benchmark Rate for insured mortgages will be published weekly on the Bank of Canada's website, and will be based on submitted mortgage insurance application contract rates.\"",
+      "evidence_url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html"
+    },
+    {
+      "source_report_id": "dof-insured-mortgage-qualifying-rules",
+      "target_report_id": "boc-posted-chartered-bank-rates",
+      "relationship_type": "calculated_from",
+      "basis": "Historical but explicitly documented in the same backgrounder, which describes the rule it was replacing: \"borrowers taking on an insured mortgage must qualify at the greater of the: Borrower's Contract Rate... or Bank of Canada 5-Year Benchmark Posted Mortgage Rate, which is the mode of the posted 5-year conventional mortgage rates offered by the six largest banks.\" The document gives OSFI's and Finance's reason for dropping it: the posted rate \"is also less representative of average contract rates as it only considers Canada's six largest banks, and the 'posted', and not 'actual' rates offered to borrowers by those banks.\"",
+      "evidence_url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html"
+    },
+    {
+      "source_report_id": "cmhc-mortgage-loan-insurance",
+      "target_report_id": "dof-insured-mortgage-qualifying-rules",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CMHC does not set its own qualification rules for insured mortgages; the Minister of Finance does. OSFI's May 2021 MQR letter states plainly: \"The Minister of Finance sets the qualification rules for insured mortgages.\" The Department of Finance backgrounder describes the same framework: \"Mortgage insurance standards include requirements for a minimum down payment, and maximum mortgage amortization period, along with other factors such as minimum credit scores and maximum debt servicing levels. The standards also include minimum qualifying rates for insured mortgages\", and notes the review was conducted by Finance \"in consultation with the Office of the Superintendent of Financial Institutions, the Bank of Canada, and the Canada Mortgage and Housing Corporation.\"",
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/amendments-minimum-qualifying-rate-uninsured-mortgages-letter-2021"
+    },
+    {
+      "source_report_id": "boc-mortgage-qualifying-rate",
+      "target_report_id": "cmhc-mortgage-loan-insurance",
+      "relationship_type": "uses_data_from",
+      "basis": "The Bank of Canada does not observe these rates itself; the benchmark is built from mortgage insurers' application files. Department of Finance backgrounder: \"The new Benchmark Rate will be: The weekly median 5-year fixed insured mortgage rate as calculated by the Bank of Canada from federally-backed mortgage insurance applications adjudicated by mortgage insurers; plus a buffer of 200 basis points to be set by the Minister of Finance.\" CMHC is the dominant federally backed insurer adjudicating those applications.",
+      "evidence_url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html"
+    },
+    {
+      "source_report_id": "cdic-differential-premiums-manual",
+      "target_report_id": "osfi-car-guideline",
+      "relationship_type": "uses_data_from",
+      "basis": "CDIC's premium scoring reads its capital inputs straight out of OSFI's capital framework. The 2026 Manual instructs: \"1.1.4 Supervisory Target CET1 Capital Ratio (%) - Indicate the supervisory target CET1 capital ratio (including the capital conservation buffer, DSIB surcharge and domestic stability buffer as applicable) as set by the regulator for the member institution in accordance with the Capital Adequacy Requirements guideline (i.e., OSFI Target CET1 capital ratio (%) as set out in Schedule 10.010 - Ratio Calculations of the BCAR form)\". Members must file with CDIC \"the Basel Capital Adequacy Return (BCAR)\" and \"the Leverage Requirements Return (LRR form)\" that they submitted \"to the Superintendent... in accordance with the financial reporting instructions published by OSFI\", and CDIC states that returns already filed with OSFI \"by means of the RRS system\" need not be refiled.",
+      "evidence_url": "https://www.cdic.ca/wp-content/uploads/Differential-Premiums-Manual-2026.pdf"
+    },
+    {
+      "source_report_id": "cmhc-residential-mortgage-industry-report",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "The report's household-debt and mortgage-debt figures are footnoted directly to the Canadian System of National Accounts: \"Source: Statistics Canada. Table 36-10-0639-01 Credit liabilities of households (x 1,000,000)\" (footnotes 1 and 4, Fall 2024 edition). Table 36-10-0639-01 is a national balance sheet / financial flow accounts table released within Statistics Canada's quarterly national economic accounts program. The same report also footnotes \"Statistics Canada. Table 10-10-0006-01 Funds advanced, outstanding balances, and interest rates for new and existing lending, Bank of Canada\" for its interest-rate charts.",
+      "evidence_url": "https://assets.cmhc-schl.gc.ca/sites/cmhc/professional/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report/2024/residential-mortgage-industry-report-fall-2024-en.pdf"
+    },
+    {
+      "source_report_id": "cmhc-residential-mortgage-industry-report",
+      "target_report_id": "osfi-b20",
+      "relationship_type": "cites",
+      "basis": "The report's glossary defines the concept it uses throughout to segment the market by reference to the OSFI guideline: \"Stress test: The stress test, introduced in January 2018 under OSFI's B-20 Guideline, requires borrowers with uninsured mortgages to qualify at the higher of the Bank of Canada's five-year benchmark rate or their mortgage rate plus 2%. A similar stress test was required for insured loans beginning in 2016.\" The glossary further defines chartered banks and federally regulated financial institutions by OSFI's supervisory perimeter, and the report's lender taxonomy separates \"Non-bank OSFI regulated\" lenders.",
+      "evidence_url": "https://assets.cmhc-schl.gc.ca/sites/cmhc/professional/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report/2024/residential-mortgage-industry-report-fall-2024-en.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cudgc-standards-of-sound-business-and-financial-practices -> bis-basel-framework",
+      "source": null,
+      "target": "bis-basel-framework",
+      "reason": "denied",
+      "why": "Alberta's Credit Union Deposit Guarantee Corporation is the obvious provincial counterpart to OSFI, and its capital standards are widely described as Basel-influenced. But its published Standards of Sound Business and Financial Practices (2016 and 2026 editions, ~220KB of text) contain zero occurrences of 'Basel', 'OSFI' or 'Superintendent'. Every capital and liquidity requirement is referred only to 'the Credit Union Act and Regulations' - provincial legislation, not a report. CUDGC's own annual report financial statements are prepared under IFRS Accounting Standards, not PSAS, so there is no accounting-standards edge either. No CUDGC node was created rather than leave a permanently isolated one. This is the single biggest documented gap in the slice: Canada's provincial credit union supervisory chain is genuinely disconnected in public documents from the federal one."
+    },
+    {
+      "edge": "osfi-mqr-uninsured -> boc-policy-rate / statcan-cpi",
+      "source": "osfi-mqr-uninsured",
+      "target": null,
+      "reason": "no-document",
+      "why": "OSFI describes its MQR-setting inputs only in the abstract: 'We factor in data collected from Canada's financial institutions. We also consider a range of vulnerability indicators in the housing market and the economic environment. Lastly, we consult with the Department of Finance Canada and the Bank of Canada.' Consulting an institution is not depending on a release, and no specific published series is ever named. Since June 2021 the MQR floor has been a fixed 5.25 percent with no formula behind it."
+    },
+    {
+      "edge": "osfi-car-guideline -> cmhc-mortgage-loan-insurance",
+      "source": "osfi-car-guideline",
+      "target": "cmhc-mortgage-loan-insurance",
+      "reason": "no-document",
+      "why": "CAR Guideline Chapter 4 does recognise mortgage insurance as a credit risk mitigant and gives special treatment where 'a mortgage is comprehensively insured by a private sector mortgage insurer that has a backstop guarantee provided by the Government of Canada'. But it treats mortgage insurance generically and never cites CMHC's published product rules as a document, so this reads as a legal-status reference rather than a report dependency. The equivalent edge from Guideline B-20, which names CMHC explicitly as the source of the GDS and TDS limits, was kept instead."
+    },
+    {
+      "edge": "boc-corra -> CIRO Market Trade Reporting System repo submissions",
+      "source": "boc-corra",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "CORRA's real input is transaction-level repo data that government securities distributors and the six largest federally regulated financial institutions submit to the Canadian Investment Regulatory Organization through MTRS, reported under the MTRS 2.0 User Guide and CIRO Rule 2800C. This is the most important dependency in CORRA's methodology, but MTRS is a confidential regulatory data feed, not a published statistical release, so there is no node to point at."
+    },
+    {
+      "edge": "boc-posted-chartered-bank-rates -> chartered bank posted rate sheets",
+      "source": "boc-posted-chartered-bank-rates",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "The Bank of Canada states the published figure for each product is 'the most typical of those offered by the six major chartered banks', computed as the statistical mode of the six largest banks' posted rates. The underlying inputs are commercial rate sheets from RBC, TD, BMO, CIBC, Scotiabank and National Bank, which have no stable public landing pages and are not reports in this graph's sense. This is the general shape of the problem in this slice: commercial lenders publish far less than governments do."
+    },
+    {
+      "edge": "cdic-deposit-insurance-coverage-limit -> statcan-cpi",
+      "source": null,
+      "target": "statcan-cpi",
+      "reason": "denied",
+      "why": "CDIC's $100,000 per-category coverage limit looks like the kind of threshold that would be indexed, but it is fixed in the Canada Deposit Insurance Corporation Act and changed only by Parliament (last raised in 2005, with new eligible categories added in 2020 and 2022). It is not indexed to CPI or to any published series, so there is no dependency to record."
+    },
+    {
+      "edge": "term-corra -> Montreal Exchange CORRA futures market data",
+      "source": "term-corra",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Term CORRA is calculated from transactions and executable bids and offers in the central limit order book of the COA and CRA futures contracts. That order-book data is a live exchange feed rather than a periodic release, so the dependency was recorded one step further back, against overnight CORRA, which the futures settle to."
+    },
+    {
+      "edge": "variable-rate mortgage and HELOC pricing -> boc-prime-rate",
+      "source": null,
+      "target": "boc-prime-rate",
+      "reason": "unpublishable-source",
+      "why": "The most economically important relationship in Canadian consumer lending - that variable mortgages, HELOCs and most personal credit are priced as prime plus or minus a spread - has no report on the dependent side. Individual lenders' rate schedules are commercial documents. The Bank of Canada explains the mechanism in its 'What's behind your mortgage rate' explainer, but an explainer describing a market convention is not a release that depends on another release."
+    }
+  ]
+}

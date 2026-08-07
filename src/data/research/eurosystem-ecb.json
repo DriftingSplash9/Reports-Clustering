@@ -1,0 +1,79 @@
+{
+  "_slice": "eurosystem-ecb",
+  "_researched": "2026-08-05",
+  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts.",
+  "_note": "Opens priority item C, 'Independent ECB/Eurosystem threads', unchanged in ranking across nineteen hand-offs (G.20.md through G.38.md), on Thomas's own direction this session. Three reports, zero dependencies, two _dropped. Two reports (the annual balance sheet and weekly financial statement) verify and promote a previously-staged batch (EU/slices/_staging/10-batch-with-records.ndjson, index 68) against live primary sources this session. The third (the ESS-ESCB MIP quality report) is freshly read first-hand from a saved PDF, correcting the staged batch's title ordering along the way. Full quotes in EU/Eurosystem-ECB_PartA_2026-08-05.md.",
+  "_headline": "The Eurosystem's own balance-sheet publications are the fastest-cadence nodes in the whole EU branch (weekly, 52/year), and the joint ESS-ESCB quality report is the first EU node in this corpus whose cadence rests on the document's own stated edition count ('12th joint annual') rather than a counted publication list or a metadata cadence statement.",
+  "_open_questions": [
+    "DOMAIN: 'monetary-policy' for the two ECB balance-sheet nodes is a clean fit -- the first genuinely clean domain match an EU-branch node has had. 'national-accounts' for the MIP quality report is a reach (it assesses national accounts among other domains, but is not itself a national-accounts release) -- flagged as the least-wrong choice, same treatment every EU domain gap has had.",
+    "Whether ECB-05 (the MIP quality report) should carry an edge to esa-2010 or eurostat-hicp for the domains it assesses is a genuine scoping question, not resolved here -- see EU/Eurosystem-ECB_PartA_2026-08-05.md's own 'What this record does not do'. None of RelationshipType's four values cleanly captures 'assesses the quality of' as distinct from 'depends on'.",
+    "RESOLVED (follow-up session, 2026-08-05): ECB-04's Annex citation was independently re-verified -- it is Annex I, footnote (1), attached to a distinct row 5 ('Monthly and quarterly financial information of the Eurosystem'), not to either of this slice's two published nodes. The hypothesised edge is refuted, not merely unverified -- see the _dropped entry. Row 4 of the same Annex I table ('Disaggregated monthly financial statement of the Eurosystem', status Published) is a new, uninvestigated lead noticed in passing during that verification."
+  ],
+  "reports": [
+    {
+      "id": "ecb-eurosystem-annual-balance-sheet",
+      "title": "Annual Consolidated Balance Sheet of the Eurosystem",
+      "publisher": "European Central Bank (ECB)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The consolidated year-end balance sheet of the Eurosystem (the ECB and the euro area national central banks), with intra-Eurosystem claims and liabilities netted out. Governed by Annex VII to Guideline (EU) 2024/2941 of the European Central Bank (ECB/2024/31): 'the consolidated annual balance sheet of the Eurosystem' (Article 26(3)(c)). ECB's own landing page lists one dated entry per year, unbroken, from 1999 to 2025.",
+      "releases_per_year": 1,
+      "cadence_note": "27 consecutive years of linked publication (1999-2025) confirmed directly on the ECB's own landing page, each dated in February for the preceding year-end -- e.g. '26 February 2026 -- Consolidated balance sheet of the Eurosystem as at 31 December 2025'.",
+      "last_updated": null,
+      "url": "https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/balance/html/all_balance_sheets.en.html",
+      "domains": [
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "ecb-eurosystem-weekly-financial-statement",
+      "title": "Weekly Financial Statement of the Eurosystem",
+      "publisher": "European Central Bank (ECB)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The consolidated weekly financial statement of the Eurosystem, published under Annexes V and VI to Guideline (EU) 2024/2941 (ECB/2024/31): 'the published consolidated weekly financial statement of the Eurosystem after quarter end' and '... during the quarter' (Article 26(3)(a)-(b)). ECB's own landing page: 'The weekly financial statements of the Eurosystem are published on a Tuesday, and they relate to the preceding Friday.'",
+      "releases_per_year": 52,
+      "cadence_note": "Stated directly by the ECB: published every Tuesday, relating to the preceding Friday, except the first statement of each quarter, which 'will normally be a Wednesday (instead of Tuesday) in order to allow more time to complete the quarterly revaluation of assets and liabilities'. The fastest-cadence node in the EU branch, faster than eurostat-hicp's monthly cadence.",
+      "last_updated": null,
+      "url": "https://www.ecb.europa.eu/press/annual-reports-financial-statements/wfs/html/index.en.html",
+      "domains": [
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "ess-escb-mip-quality-report",
+      "title": "ESS-ESCB Quality Assessment Report on Statistics Underlying the Macroeconomic Imbalance Procedure",
+      "publisher": "European Statistical System (ESS) and European System of Central Banks (ESCB)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "A joint annual quality assessment of the statistics underlying the EU's Macroeconomic Imbalance Procedure (MIP) scoreboard and auxiliary indicators, produced jointly by Eurostat/the national statistical institutes (ESS) and the ECB/national central banks (ESCB). The report's own cover, 26 June 2026 edition: 'This 12th joint annual quality report presents a transparent description and assessment of the quality of the statistics underlying the MIP indicators.' Legal/institutional basis: a Memorandum of Understanding between Eurostat and the ECB DG Statistics (November 2016), and Commission Implementing Regulation (EU) 2019/2180, which 'specifies the detailed arrangements and content for the quality reports pursuant to Regulation (EU) 2019/1700.'",
+      "releases_per_year": 1,
+      "cadence_note": "Cadence rests on the report's own stated edition count -- 'This 12th joint annual quality report' -- rather than a counted publication list or a metadata cadence statement, the first EU node in this corpus evidenced this way.",
+      "last_updated": null,
+      "url": "https://www.ecb.europa.eu/pub/pdf/other/ESCB-ESS_quality_assessment_report_on_statistics_underlying_the_MIP_June_2026.en.pdf",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "ecb-eurosystem-weekly-financial-statement / annual-balance-sheet -> ecb-mfi-balance-sheet-items",
+      "source": "ecb-eurosystem-weekly-financial-statement",
+      "target": "ecb-mfi-balance-sheet-items",
+      "reason": "wrong-target",
+      "why": "REFUTED, not merely unverified -- the target node now exists (eurostat-edp-gfs-ecb-statistics.json, this branch) and the citation has been independently re-verified live against eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024O2941. The footnote is Annex I, footnote (1), attached specifically to row 5 of Annex I's table ('Financial statements for the Eurosystem'): 'Monthly and quarterly financial information of the Eurosystem' -- Internal/published status 'Published and internal', Source of legal requirement 'Statistical regulations, according to which MFIs have to deliver data' (i.e. the same Regulation ECB/2021/2 / Guideline ECB/2021/11 already cited as ecb-mfi-balance-sheet-items's own legal basis). It is NOT attached to row 3 (Consolidated weekly financial statement, 'Article 15.2 of the Statute of the ESCB' -- ecb-eurosystem-weekly-financial-statement) or row 6 (Consolidated annual balance sheet, 'Article 26.3' -- ecb-eurosystem-annual-balance-sheet). The footnote describes the Eurosystem central banks' own dual role as MFI statistical reporters (row 5, governed by the BSI regulations themselves) feeding the published BSI aggregate -- not a dependency of BSI on either of this slice's two accounting-framework nodes. Minting the edge to either existing node would have been a wrong-target error; not minted. Row 5 itself is not proposed as a fifth node -- its 'source of legal requirement' column names the same instruments already governing ecb-mfi-balance-sheet-items, so a separate node would likely duplicate it rather than add a distinct publication. Row 4 ('Disaggregated monthly financial statement of the Eurosystem', status Published, purpose stated as central-bank-level transparency) was noticed in passing and is a genuinely distinct, uninvestigated lead -- not chased this pass."
+    },
+    {
+      "edge": "ess-escb-mip-quality-report -> [BOP-NA ROW consistency report, joint ECB-Eurostat]",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "ECB-05's own text: 'Eurostat and the ECB regularly present joint reports on the consistency of the two datasets to the CMFB. The most recent joint ECB-Eurostat \"BOP-NA ROW consistency report\" was presented to the CMFB plenary in January 2026 and published on the CMFB website in February 2026.' A second, named, dated, apparently-recurring joint ECB-Eurostat publication, deliberately not chased this session per Research.1.md §8's one-item-at-a-time discipline. The branch's best next lead in this thread. Full quote at ECB-07, EU/Eurosystem-ECB_PartA_2026-08-05.md."
+    }
+  ]
+}

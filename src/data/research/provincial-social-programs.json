@@ -1,0 +1,367 @@
+{
+  "_slice": "Alberta provincial social and benefit programs",
+  "_researched": "2026-07-28",
+  "_note": "Alberta's income-tested social programmes turn out to have a much tidier shape than expected, because in 2025-26 the province collapsed almost all of its benefit indexation onto a single parameter. From 2023 to 2025, AISH, Income Support and the Alberta Seniors Benefit were each separately indexed to the Alberta all-items CPI published by Statistics Canada, with an explicit October-to-September averaging formula written into each policy manual. Bill 32 (Financial Statutes Amendment Act, 2024) replaced that with the 'Alberta escalator' defined in s. 44.2 of the Alberta Personal Income Tax Act - the lesser of 2% and the same Alberta CPI change - and then had the AISH Act, the Income and Employment Supports Act and the Seniors Benefit Act all point at that one definition. The result is a hub-and-spoke pattern: statcan-cpi feeds the Alberta escalator, which feeds AISH/ADAP rates, Income Support core essential and core shelter rates, the Alberta Child and Family Benefit parameters, and the Alberta Seniors Benefit cash benefit, with the 2% cap biting in both 2025 and 2026. Two things sit outside that hub and are the more interesting findings. First, accommodation charges are deliberately carved out of every benefit's escalator and pinned instead to the maximum charge set under the Continuing Care Act, so the AISH modified living allowance, Income Support for continuing care residents, and the Seniors Benefit Supplementary Accommodation Benefit all depend on an Alberta Health price table. Second, the Seniors Benefit Act escalates its non-deductible income amount by the federal Canada Pension Plan Pension Index, not the Alberta escalator, and writes federal OAS and GIS maximums directly into its benefit formulas. Health-side programmes (Alberta Adult Health Benefit, Alberta Aids to Daily Living) are the opposite case: their income thresholds carry no documented indexation rule at all, and the AAHB table has not moved since 2015 - those non-edges are recorded in _dropped. This slice runs slightly above the suggested edge count because the escalator reform gave several programmes two separately documented indexation edges (the pre-2026 direct CPI rule and the post-2026 escalator rule); both are kept because both are stated in the source documents.",
+  "reports": [
+    {
+      "id": "ab-aish-benefit-rates",
+      "title": "AISH/ADAP Financial Benefits Summary (benefit rate schedule)",
+      "publisher": "Alberta Assisted Living and Social Services",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The annual schedule of dollar amounts paid under Assured Income for the Severely Handicapped (AISH) and, from July 2026, the Alberta Disability Assistance Program (ADAP). It sets the monthly living allowance, modified living allowance personal allowance, child benefit, personal benefit maximums and the employment and passive-income exemption thresholds. Rates are revised effective January 1 each year and republished as a fact sheet alongside the Disability Income Assistance Policy Manual.",
+      "releases_per_year": 1,
+      "cadence_note": "Rates take effect January 1; the summary fact sheet is revised at that date (the 2026 edition is marked 'Rev. 2026-01'). Off-cycle republication occurs when the programme itself changes, as with the July 2, 2026 AISH/ADAP split.",
+      "last_updated": "2026-01-01",
+      "url": "https://www.alberta.ca/aish-what-you-get",
+      "domains": [
+        "benefits",
+        "inflation"
+      ]
+    },
+    {
+      "id": "ab-tbf-alberta-escalator",
+      "title": "Alberta Escalator (Alberta Personal Income Tax Act indexation factor)",
+      "publisher": "Alberta Treasury Board and Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The annual indexation factor defined in section 44.2 of the Alberta Personal Income Tax Act and published each year by Treasury Board and Finance alongside the personal income tax bracket table. For years after 2025 it is either a percentage prescribed by regulation before January 1, or, absent a prescription, the lesser of 2% and the year-over-year change in the Alberta Consumer Price Index over the 12 months ending September 30. It is the single escalator that now drives Alberta tax brackets and credit amounts, the Alberta Child and Family Benefit, and AISH/ADAP benefit rates.",
+      "releases_per_year": 1,
+      "cadence_note": "One factor per taxation year, effective January 1; published in the personal income tax bracket table and in the Budget tax plan.",
+      "last_updated": "2026-01-01",
+      "url": "https://www.alberta.ca/personal-income-tax",
+      "domains": [
+        "taxation",
+        "inflation",
+        "benefits"
+      ]
+    },
+    {
+      "id": "ab-child-family-benefit",
+      "title": "Alberta Child and Family Benefit (ACFB) maximum benefit amounts and thresholds",
+      "publisher": "Alberta Treasury Board and Finance (delivered by the Canada Revenue Agency)",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The schedule of base component and working component maximum amounts, the working-income entry threshold, and the family net income phase-out thresholds for the Alberta Child and Family Benefit. The dollar amounts sit in section 30.2(2) of the Alberta Personal Income Tax Act and are restated each year on alberta.ca. The benefit year runs July to June and payments are issued quarterly by the CRA on Alberta's behalf.",
+      "releases_per_year": 1,
+      "cadence_note": "Amounts are set for a July-to-June benefit year and adjusted once a year; the CRA pays them out in four quarterly instalments (August, November, February, May).",
+      "last_updated": "2026-07-01",
+      "url": "https://www.alberta.ca/alberta-child-and-family-benefit",
+      "domains": [
+        "benefits",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ab-seniors-benefit-rates",
+      "title": "Alberta Seniors Benefit maximum benefit amounts, income thresholds and phase-out rates",
+      "publisher": "Alberta Assisted Living and Social Services (Seniors Financial Assistance)",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The annual schedule of maximum Alberta Seniors Benefit amounts by accommodation category and marital status, the income guideline thresholds, and the phase-out rates applied per dollar of non-deductible income. It also governs the Supplementary Accommodation Benefit for seniors in continuing care homes. Amounts take effect at the start of each July-to-June benefit year and are calculated from the applicant's previous calendar year income as reported to the Canada Revenue Agency.",
+      "releases_per_year": 1,
+      "cadence_note": "Benefit year runs July 1 to June 30 (the current schedule is stated as 'Effective July 1, 2026'); benefits are paid monthly.",
+      "last_updated": "2026-07-01",
+      "url": "https://www.alberta.ca/alberta-seniors-benefit",
+      "domains": [
+        "benefits",
+        "population"
+      ]
+    },
+    {
+      "id": "ab-income-support-rates",
+      "title": "Alberta Income Support core benefit rate schedule (core essential and core shelter)",
+      "publisher": "Alberta Assisted Living and Social Services",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The schedule of Income Support core essential payments (including the comforts allowance) and core shelter payments by household composition, set under the Income and Employment Supports Act and the Income Support, Training and Health Benefits Regulation, together with the supplementary benefit maximums. Rates apply to both the Expected to Work (ETW) and Barriers to Full Employment (BFE) client streams and are revised effective January 1 each year through the 'Benefit Rate Adjustments' policy in the Income and Employment Supports Policy Manual.",
+      "releases_per_year": 1,
+      "cadence_note": "Rate adjustment takes effect January 1 each year; the manual's Core Shelter Rate Adjustment and Core Essential Rate Adjustment pages carry the year-specific tables.",
+      "last_updated": "2026-01-01",
+      "url": "https://www.alberta.ca/income-support",
+      "domains": [
+        "benefits",
+        "inflation"
+      ]
+    },
+    {
+      "id": "ab-continuing-care-accommodation-charges",
+      "title": "Continuing Care Resident Accommodation Charges (maximum charges, types A and B)",
+      "publisher": "Alberta Health",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The table of maximum daily resident accommodation charges that type A and type B continuing care homes may charge, set by the Alberta government under the Continuing Care (Ministerial) Regulation. It also fixes the Alternate Level of Care charge for hospital patients awaiting a continuing care space. These charges are the accommodation component of the AISH/ADAP modified living allowance and of Income Support benefits for clients in continuing care, and they set the ceiling for the Alberta Seniors Benefit Supplementary Accommodation Benefit.",
+      "releases_per_year": 1,
+      "cadence_note": "Adjusted annually for inflation; the 2026 adjustment took effect August 1, 2026 (a 1.8% increase) rather than on the previous April 1 cycle, so the effective date has moved between years.",
+      "last_updated": "2026-08-01",
+      "url": "https://www.alberta.ca/continuing-care-accommodation-charges",
+      "domains": [
+        "health",
+        "benefits"
+      ]
+    },
+    {
+      "id": "ab-adult-health-benefit-income-levels",
+      "title": "Health Benefits: Qualifying Income Levels Ministerial Order (Alberta Adult Health Benefit and Alberta Child Health Benefit)",
+      "publisher": "Alberta Assisted Living and Social Services",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The Ministerial Order made under the Income and Employment Supports Act that sets the maximum qualifying income levels by household type for the Alberta Adult Health Benefit (dental, optical, prescription drug, ambulance and diabetic supply coverage) and the Alberta Child Health Benefit. Financial eligibility at application and at annual renewal is tested against total combined household net income plus non-taxable child support. The order is reproduced in the Income and Employment Supports Policy Manual.",
+      "releases_per_year": 1,
+      "cadence_note": "Amended by Ministerial Order rather than on a fixed calendar. The qualifying income level table in the policy manual is still dated July 1, 2015, so in most years the order is re-affirmed rather than re-issued; the AAHB benefit period itself runs October 1 to September 30 with an automated annual renewal.",
+      "last_updated": "2015-07-01",
+      "url": "https://www.alberta.ca/alberta-adult-health-benefit",
+      "domains": [
+        "health",
+        "benefits"
+      ]
+    },
+    {
+      "id": "ab-aadl-cost-share",
+      "title": "Alberta Aids to Daily Living cost-share amounts and cost-share exemption income thresholds",
+      "publisher": "Alberta Health (Alberta Aids to Daily Living)",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The published cost-share rules for the Alberta Aids to Daily Living programme: clients pay 25% of the cost of most benefits up to a maximum of $500 per family per benefit year, and the taxable-income thresholds below which a client is exempt. It also lists the provincial income programmes whose recipients may be exempt from cost-sharing. The benefit year runs July 1 to June 30.",
+      "releases_per_year": 1,
+      "cadence_note": "Cost-share maximum and exemption thresholds are stated per benefit year (July 1 to June 30) and revised when Alberta Health changes them; the 25%/$500 structure has been stable for years while the exemption thresholds move.",
+      "last_updated": "2026-07-01",
+      "url": "https://www.alberta.ca/aadl-cost-sharing-of-benefits",
+      "domains": [
+        "health",
+        "benefits"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "The archived 2023-2025 version of the 'Indexing of Benefits' policy in the Alberta AISH policy manual (retained on the current Benefit Rate Adjustments page) states: 'AISH benefits are adjusted annually using the Alberta Consumer Price Index (CPI) starting on January 1, 2023 ... Annual benefit rate changes are calculated using the Alberta CPI (All-items, not seasonally adjusted). The Alberta CPI is published monthly by Statistics Canada and measures the change in price for goods and services bought by Albertans.' It sets out the formula X = A/B - 1, where A is the sum of the monthly Alberta CPI indexes for the 12 months ending September 30 before the adjustment date and B is the sum for the preceding 12 months. From January 1, 2026 the dependence on Alberta CPI is mediated by the Alberta escalator, which is capped at 2%.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/benefits/benefit-rate-adjustments/",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "09-30",
+        "stated_as": "'A is the sum of the monthly Alberta CPI indexes for the 12 months ending September 30 before the adjustment date'."
+      }
+    },
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "ab-tbf-alberta-escalator",
+      "relationship_type": "calculated_from",
+      "basis": "The current 'Benefit Rate Adjustments' policy (last updated July 2, 2026) in the Disability Income Assistance Policy Manual states: 'AISH and ADAP benefit rates are adjusted annually, effective January 1st of each year. Starting January 1, 2026, the rate of adjustment is based on the standard escalator amount established under section 44.2 of the Alberta Personal Income Tax Act.' It adds: 'Annual benefit rate changes are calculated using the standard escalator amount established in the Alberta Personal Income Tax Act, which is the lesser of either two per cent, or the Alberta Consumer Price Index (CPI) amount from October through September year-over-year.' The policy cites as authority the AISH Act s. 3.1(2), the AISH General Regulations s. 7(3) and the Alberta Personal Income Tax Act s. 44.2. Living allowance, the modified living allowance personal allowance, the child benefit and most personal benefits are adjusted; health benefits and actual-cost benefits are not.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/benefits/benefit-rate-adjustments/",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "'AISH and ADAP benefit rates are adjusted annually, effective January 1st of each year', on the s.44.2 escalator."
+      }
+    },
+    {
+      "source_report_id": "ab-tbf-alberta-escalator",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "Alberta Personal Income Tax Act, RSA 2000 c A-30, s. 44.2(0.1)(b) defines the Alberta escalator, absent a prescribed percentage, as the lesser of 2% and the amount determined by the formula A/B - 1, 'where A is the Consumer Price Index for Alberta for the 12-month period that ended on the last September 30 before that year, and B is the Consumer Price Index for Alberta for the 12-month period immediately preceding'. Subsection 44.2(3) then defines that index explicitly: 'the Consumer Price Index for Alberta for any 12-month period is the result arrived at by (a) aggregating the Consumer Price Index for Alberta, as published by Statistics Canada under the authority of the Statistics Act (Canada) ... for each month in that period, (b) dividing the aggregate ... by 12'.",
+      "evidence_url": "https://kings-printer.alberta.ca/documents/Acts/A30.pdf",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "09-30",
+        "stated_as": "'A is the Consumer Price Index for Alberta for the 12-month period that ended on the last September 30 before that year' — Alberta Personal Income Tax Act s.44.2(0.1)(b)."
+      }
+    },
+    {
+      "source_report_id": "ab-child-family-benefit",
+      "target_report_id": "ab-tbf-alberta-escalator",
+      "relationship_type": "calculated_from",
+      "basis": "Alberta Personal Income Tax Act, RSA 2000 c A-30, s. 44.2(2): 'Where the base taxation year ... in relation to a particular month is after 2024, each of the amounts expressed in dollars in section 30.2(2), except the amount of $2760, is to be adjusted so that the amount to be used under that subsection for the month is the total of (a) the amount that would, but for subsection (4), be the amount used under section 30.2(2) for the month that is one year before the particular month, and (b) the product obtained by multiplying (i) the amount referred to in clause (a) by (ii) the Alberta escalator for the taxation year following the base taxation year.' Section 30.2(2) is the Alberta Child and Family Benefit formula, containing the per-child base and working component amounts and the net income phase-out thresholds. The $2,760 working-income entry threshold is expressly excluded from indexation.",
+      "evidence_url": "https://kings-printer.alberta.ca/documents/Acts/A30.pdf"
+    },
+    {
+      "source_report_id": "ab-seniors-benefit-rates",
+      "target_report_id": "esdc-oas-indexation",
+      "relationship_type": "calculated_from",
+      "basis": "The Seniors Benefit Act (RSA 2000 c S-7) Schedule puts federal OAS and GIS amounts directly inside the Alberta formulas. Schedule s. 9(2)(b)(ii) sets the special needs component income test as 'the sum of (A) the single senior non-deductible income amount under section 8 for the benefit adjustment year, plus (B) an amount equal to the maximum annual amount, not including retroactive payments and not adjusted for deferral, of the monthly pension payable to a single senior under the Old Age Security Act (Canada) in the calendar year that ended before the commencement of the benefit adjustment year.' Schedule s. 7(4) defines term C of the supplementary accommodation assistance formula as 'the combined maximum annual amount ... of Old Age Security, not adjusted for deferral, and Guaranteed Income Supplement payable to a single senior and the maximum benefit payable to a single senior under section 4, in the previous calendar year.' The programme page corroborates that receipt of OAS is an eligibility condition and that lines 11300 (OAS) and 14600 (net federal supplements: GIS and Allowance) are deducted in arriving at non-deductible income (https://www.alberta.ca/alberta-seniors-benefit).",
+      "evidence_url": "https://kings-printer.alberta.ca/documents/Acts/S07.pdf"
+    },
+    {
+      "source_report_id": "ab-seniors-benefit-rates",
+      "target_report_id": "ab-tbf-alberta-escalator",
+      "relationship_type": "calculated_from",
+      "basis": "Seniors Benefit Act, RSA 2000 c S-7, s. 1(a.21): \"'Alberta escalator' means the Alberta escalator as defined in section 44.2 of the Alberta Personal Income Tax Act\". The Schedule, s. 2 ('Calculation of adjusted benefit amounts'), then provides: 'A benefit or an amount used to calculate a benefit or eligibility for a benefit that is to be adjusted under section 2.1(3)(b), (3.1)(b) or (5)(a)(ii) or 2.2(3)(b) or (5)(b) of this Act must be adjusted by an amount equal to (a) the benefit amount or amount as of December 31 of the previous calendar year, including any increase to that amount made under this Act or the regulations, multiplied by (b) the Alberta escalator.' So the Alberta Seniors Benefit annual cash benefit and the amounts used to calculate eligibility for it move with the same 2%-capped escalator as AISH, Income Support and the ACFB.",
+      "evidence_url": "https://kings-printer.alberta.ca/documents/Acts/S07.pdf"
+    },
+    {
+      "source_report_id": "ab-seniors-benefit-rates",
+      "target_report_id": "cpp-pension-index",
+      "relationship_type": "calculated_from",
+      "basis": "Seniors Benefit Act Schedule, s. 8: '(1) The non-deductible income amount is (a) $23 020 for single seniors, and (b) $34 460 for senior couples. (2) Effective the benefit adjustment date of each benefit adjustment year, the non-deductible income amount is the non-deductible income amount in the previous benefit adjustment year increased annually by a percentage equivalent to the Pension Index under the Canada Pension Plan (Canada) that was applicable for the calendar year that ended before the commencement of the benefit adjustment year.' Subsection (3) adds a fallback: the Minister, in consultation with the Minister responsible for the Financial Administration Act, determines the adjustment 'if (a) the method of calculating the Pension Index is modified by the Government of Canada, or (b) the change in the Pension Index cannot be determined for any reason.' This is a rare case of an Alberta benefit threshold being escalated by a federal index rather than the Alberta escalator.",
+      "evidence_url": "https://kings-printer.alberta.ca/documents/Acts/S07.pdf"
+    },
+    {
+      "source_report_id": "ab-income-support-rates",
+      "target_report_id": "ab-tbf-alberta-escalator",
+      "relationship_type": "calculated_from",
+      "basis": "The 'Benefit Rate Adjustments' policy in the Income and Employment Supports Policy Manual cites as authority the Income and Employment Supports Act s. 1(a.01), the Income Support, Training and Health Benefits Regulation s. 24.2, and the Alberta Personal Income Tax Act s. 44.2, and states: 'Income Support benefit rates are adjusted annually, effective January 1st of each year. Starting January 1, 2026, the rate of adjustment is based on the standard escalator amount established under section 44.2 of the Alberta Personal Income Tax Act.' It specifies that the adjusted core benefits are 'Core essential payment including the comforts allowance' and 'Core shelter payment', and that supplementary benefits are adjusted except where they are actual-cost, set by agreement, or set in separate legislation.",
+      "evidence_url": "https://manuals.alberta.ca/income-and-employment-supports-policy-manual/income-support-program/etw-and-bfe-policy-procedures/01-income-support-overview/benefit-rate-adjustments/",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "'Income Support benefit rates are adjusted annually, effective January 1st of each year'."
+      }
+    },
+    {
+      "source_report_id": "ab-income-support-rates",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "The archived 2023-2025 version of the same 'Benefit Rate Adjustments' / 'Indexing of Benefits' policy, retained on the page, states: 'Income Support benefits are adjusted annually using the Alberta Consumer Price Index (CPI) starting on January 1, 2023 ... Annual benefit rate changes are calculated using the Alberta CPI (All-items, not seasonally adjusted). The Alberta CPI is published monthly by Statistics Canada'. It gives the same X = A/B - 1 formula over 12-month periods ending September 30, and notes that 'Benefits are not adjusted in a year where the change in the Alberta CPI is a negative number'. From 2026 the CPI link runs through the Alberta escalator's 2% cap.",
+      "evidence_url": "https://manuals.alberta.ca/income-and-employment-supports-policy-manual/income-support-program/etw-and-bfe-policy-procedures/01-income-support-overview/benefit-rate-adjustments/",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "09-30",
+        "stated_as": "The X = A/B - 1 formula over 12-month periods ending September 30, per the archived indexing policy."
+      }
+    },
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "ab-continuing-care-accommodation-charges",
+      "relationship_type": "calculated_from",
+      "basis": "The AISH/ADAP 'Benefit Rate Adjustments' policy carves the accommodation component of the modified living allowance out of the escalator and points it at the continuing care regulation instead: the adjusted core benefits are the living allowance and the 'Personal allowance of the modified living allowance', with the note 'Accommodation rates are adjusted separately in accordance with section 11(1)(2) of the Continuing Care (Ministerial) Regulation.' The AISH Financial Benefits Summary makes the same point about the modified living allowance: 'The accommodation room rate charges are established under the Continuing Care Act.' The Alberta Health accommodation charges page confirms it is the government that 'sets the maximum resident accommodation charge in type A and type B continuing care homes'.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/benefits/benefit-rate-adjustments/"
+    },
+    {
+      "source_report_id": "ab-income-support-rates",
+      "target_report_id": "ab-continuing-care-accommodation-charges",
+      "relationship_type": "calculated_from",
+      "basis": "The Income Support 'Benefit Rate Adjustments' policy states: 'For client household units living in a Type A or Type B continuing care home, the accommodation rates are adjusted separately in accordance with section 11(1)(2) of the Continuing Care (Ministerial) Regulation.' The accommodation component of an Income Support client's benefit therefore tracks the Alberta Health maximum accommodation charge table rather than the Alberta escalator.",
+      "evidence_url": "https://manuals.alberta.ca/income-and-employment-supports-policy-manual/income-support-program/etw-and-bfe-policy-procedures/01-income-support-overview/benefit-rate-adjustments/"
+    },
+    {
+      "source_report_id": "ab-seniors-benefit-rates",
+      "target_report_id": "ab-continuing-care-accommodation-charges",
+      "relationship_type": "calculated_from",
+      "basis": "Seniors Benefit Act Schedule, s. 7(4) makes the continuing care charge a literal term in the formula: the maximum supplementary accommodation assistance component is adjusted annually 'by an amount determined by the following formula: X = A + B - (C/12) where ... A is the maximum monthly accommodation charge set under the Continuing Care Act in respect of a private room that is in effect on the first day of the month after the accommodation adjustment date; B is the monthly disposable income amount added to the maximum monthly accommodation charge under subsection (2)(a)'. The programme page restates this in plain language - the Supplementary Accommodation Benefit is determined by 'the maximum monthly accommodation charge for a private room in a continuing care home' and 'the monthly disposable income amount of at least $373' - and the Alberta Health charges page confirms it from the other side: 'accommodation charges may be fully or partly covered for low-income residents who are either eligible for the Alberta Seniors Benefit [or] clients of the Assured Income for the Severely Handicapped (AISH) program ... residents who are eligible for benefits through these programs will be assured of at least $373 per month in disposable income after their monthly accommodation charge is paid.'",
+      "evidence_url": "https://kings-printer.alberta.ca/documents/Acts/S07.pdf"
+    },
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "cpp-disability-amount",
+      "relationship_type": "uses_data_from",
+      "basis": "The Disability Income Assistance Policy Manual 'Pension Income' policy (authority: AISH Act s. 3.2; AISH General Regulation s. 2.01(1)(c) and Schedule 1) lists 'CPP Disability' among the pension income sources and states: 'Applicants and clients pension income is non-exempt and deducted dollar for dollar as this type of income is intended to cover basic living needs, similar to AISH and ADAP.' It also states the interaction at the margin: 'If clients' Canada Pension Plan - Disability benefits increase to the point where they are no longer eligible for the AISH or ADAP monthly living allowance, they will continue to receive the same health coverage they had on AISH or ADAP through the Alberta Adult Health Benefit (AAHB) program.' The CPP-D amount is therefore a direct, dollar-for-dollar input to the AISH/ADAP payment calculation.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/income/pension-income/"
+    },
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "esdc-oas-indexation",
+      "relationship_type": "uses_data_from",
+      "basis": "The same 'Pension Income' policy lists 'Guaranteed Income Supplement (GIS)', 'Old Age Security', 'Old Age Security Allowance (spouse)' and 'Old Age Security Supplement (survivor)' as pension income, and then makes federal OAS/GIS receipt a hard eligibility bar: 'Applicants and clients receiving the following pension income(s) are not eligible to receive AISH or ADAP: Alberta Seniors Benefits (except for where the applicant or client is 65 years old or older and they have not lived in Canada long enough to receive Old Age Security); Guaranteed Income Supplement (GIS); or Old Age Security.' Where it is not disqualifying, pension income is 'non-exempt and deducted dollar for dollar'.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/income/pension-income/"
+    },
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "ab-seniors-benefit-rates",
+      "relationship_type": "uses_data_from",
+      "basis": "The 'Pension Income' policy lists 'Alberta Seniors Benefits' as a source of pension income for AISH/ADAP purposes, and names it first among the 'Pension Income Types That Cause AISH and ADAP Ineligibility': 'Applicants and clients receiving the following pension income(s) are not eligible to receive AISH or ADAP: Alberta Seniors Benefits (except for where the applicant or client is 65 years old or older and they have not lived in Canada long enough to receive Old Age Security)'. Receipt of the Alberta Seniors Benefit is thus an input to AISH/ADAP eligibility determination.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/income/pension-income/"
+    },
+    {
+      "source_report_id": "ab-adult-health-benefit-income-levels",
+      "target_report_id": "cpp-disability-amount",
+      "relationship_type": "uses_data_from",
+      "basis": "The Disability Income Assistance Policy Manual's 'Alberta Adult Health Benefit' policy (authority: Income and Employment Supports Act, Part 2, Division 2; Income Supports, Training and Health Benefits Regulation ss. 73-90) states: 'The Alberta Adult Health Benefit (AAHB) program provides health benefits to clients who no longer qualify for AISH or ADAP due to income from: Employment or self-employment income of a cohabiting partner; The Canada Pension Plan Disability (CPP-D) program; or a combination of these and other types of income that are not exempt through AISH or ADAP.' CPP-D is named explicitly as one of the three income sources that route a person into AAHB, so the federal CPP-D amount determines who falls under the AAHB qualifying income levels.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/benefits/health-benefits/alberta-adult-health-benefit/"
+    },
+    {
+      "source_report_id": "ab-adult-health-benefit-income-levels",
+      "target_report_id": "ab-aish-benefit-rates",
+      "relationship_type": "uses_data_from",
+      "basis": "The AAHB policy in the Disability Income Assistance Policy Manual states its purpose as 'To assist eligible former AISH and ADAP clients to maintain health benefits when they no longer qualify for AISH or ADAP', and describes the handover mechanically: 'When an AISH or ADAP client enrols in the AAHB program, health coverage transitions from AISH or ADAP to the AAHB program without interruption.' Entry to AAHB is triggered by the AISH/ADAP income test - that is, by the AISH exemption thresholds and living allowance in the AISH benefit rate schedule - and clients can return to AISH or ADAP from AAHB without a new application in most circumstances.",
+      "evidence_url": "https://manuals.alberta.ca/dia-policy-manual/aish-adap-program-policy/benefits/health-benefits/alberta-adult-health-benefit/"
+    },
+    {
+      "source_report_id": "ab-aadl-cost-share",
+      "target_report_id": "ab-aish-benefit-rates",
+      "relationship_type": "uses_data_from",
+      "basis": "The AADL cost-sharing page states that 'client[s] pay 25% of the cost of program benefits up to a maximum of $500 per family per benefit year (July 1 to June 30)' and that 'Clients receiving income supplement benefits from the following Alberta government programs may be exempt from cost-sharing: Income Support Program benefits; Assured Income for the Severely Handicapped (AISH); Alberta Adult Health Benefits (AAHB); Child and Youth Support Program; Children and Family Services (minors in foster care).' Enrolment in AISH (or Income Support, or AAHB) is therefore a direct input to whether a client owes the AADL cost-share; the page also instructs clients to contact AADL if they receive AISH or Alberta Works health benefits. The alternative test is a taxable income threshold on line 26000 of the most recent income tax return.",
+      "evidence_url": "https://www.alberta.ca/aadl-cost-sharing-of-benefits"
+    },
+    {
+      "source_report_id": "ab-aish-benefit-rates",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2026-29 Fiscal Plan (Budget 2026) is where the new disability assistance rate structure is set out: 'On July 1, 2026, the new Alberta Disability Assistance Program (ADAP) will start ... The maximum ADAP benefit rate will be set at $1,740 per month. Clients who transition from AISH to ADAP will receive a transition benefit of $200 per month, maintaining the maximum total benefit at the same level as AISH until December 31, 2027. As with AISH, ADAP benefit rates will be subject to the Alberta escalator policy annually, and former ADAP clients will continue to receive ongoing health benefits until age 65, regardless of employment income.' The Budget therefore sets the starting level that the escalator subsequently indexes.",
+      "evidence_url": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf"
+    },
+    {
+      "source_report_id": "ab-seniors-benefit-rates",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2026-29 Fiscal Plan sets the Alberta Seniors Benefit income thresholds directly: 'Effective July 1, 2026, the start of the 2026-27 benefit year, seniors' income thresholds for the Alberta Seniors Benefit will be reduced by 9 per cent, along with corresponding reductions for Special Needs Assistance for Seniors, and the grant component of the Seniors Home Adaptation and Repair Program thresholds, resulting in estimated savings of $23 million in 2026-27 and $31 million in 2027-28 and beyond.' A discretionary Budget decision can therefore override the statutory escalator in either direction for this programme.",
+      "evidence_url": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf"
+    },
+    {
+      "source_report_id": "ab-child-family-benefit",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2026-29 Fiscal Plan carries the 'Alberta Child and Family Benefit Program Parameters' table in its Tax Plan chapter, footnoted: 'Benefit amounts and phase-out thresholds have increased by 2% from 2025 due to the Alberta escalator.' The expense chapter explains the same movement in dollar terms: 'The Alberta Child and Family Benefit is budgeted at $405 million in 2026-27, an increase of $30 million, or 8 per cent from 2025-26 reflecting population growth, a 2 per cent escalator to benefit rates, and higher phase-out income thresholds.' The Budget is where the year's ACFB parameter table is authoritatively published.",
+      "evidence_url": "https://open.alberta.ca/dataset/3393a7b5-07bf-4b9f-8aaf-a6d89273297b/resource/58a8d024-398f-482e-b1c2-81a754a97253/download/budget-2026-fiscal-plan-2026-29.pdf"
+    },
+    {
+      "source_report_id": "ab-child-family-benefit",
+      "target_report_id": "canada-child-benefit",
+      "relationship_type": "uses_data_from",
+      "evidence": "implied",
+      "basis": "The ACFB page states plainly that 'You are automatically considered for the ACFB when you file your annual tax return and qualify for the federal government's Canada Child Benefit' and that 'The ACFB program is administered by the Canada Revenue Agency (CRA) on Alberta's behalf.' Eligibility for the provincial benefit therefore runs through the federal one. What is missing is a document stating that the ACFB *amount* depends on any CCB figure, which is what an edge in this graph asserts."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ab-continuing-care-accommodation-charges -> statcan-cpi",
+      "source": "ab-continuing-care-accommodation-charges",
+      "target": "statcan-cpi",
+      "reason": "no-document",
+      "why": "The Alberta Health page says only that 'Effective August 1, 2026, the maximum accommodation charges will increase by 1.8% to reflect the annual inflation adjustment' - it names neither the index nor the reference period, and the AISH and Income Support manuals only point at 'section 11(1)(2) of the Continuing Care (Ministerial) Regulation' without reproducing it. I could not retrieve the regulation text from Alberta King's Printer (the numbered PDF URLs I tried returned HTML error pages). Would be settled by the text of s. 11 of the Continuing Care (Ministerial) Regulation, or by a Ministerial Order stating the index used."
+    },
+    {
+      "edge": "ab-adult-health-benefit-income-levels -> ab-tbf-alberta-escalator (or statcan-cpi)",
+      "source": "ab-adult-health-benefit-income-levels",
+      "target": null,
+      "reason": "denied",
+      "why": "Unlike AISH, Income Support, the Alberta Seniors Benefit and the ACFB, the Alberta Adult Health Benefit qualifying income levels carry no indexation rule anywhere I could find. The policy manual page is still stamped 'Last updated on Jul 01, 2015' and simply says the 'Health Benefits: Qualifying Income Levels Ministerial Order sets out the maximum qualifying income levels'. The honest reading is that these thresholds are frozen, not indexed. Would be settled by the text of the Ministerial Order itself, or by a Budget statement adding the AAHB to the escalator."
+    },
+    {
+      "edge": "ab-aadl-cost-share -> statcan-cpi",
+      "source": "ab-aadl-cost-share",
+      "target": "statcan-cpi",
+      "reason": "denied",
+      "why": "The AADL 25% / $500-per-family cost-share maximum and the line-26000 exemption thresholds ($20,970 single, $33,240 family without children, $39,250 family with children) are published without any stated indexation rule. They plainly move over time, but no document I found says what moves them. Would be settled by an AADL policy manual page or Ministerial Order describing the adjustment method."
+    },
+    {
+      "edge": "ab-income-support-rates -> ab-tbf-fiscal-plan",
+      "source": "ab-income-support-rates",
+      "target": "ab-tbf-fiscal-plan",
+      "reason": "no-document",
+      "why": "Budget 2026 does change Income Support ('In 2026-27, a legislated maximum duration of six months will be implemented for all Income Support Expected to Work clients who are not meeting program obligations ... expected to save $44 million in 2026-27'), but this is an eligibility-duration rule rather than a statement that the Budget sets the core essential or core shelter rate schedule. I left it out rather than stretch the edge; the AISH, Seniors Benefit and ACFB Budget edges are on firmer ground because the Fiscal Plan states actual rates and thresholds for those."
+    },
+    {
+      "edge": "node: cpp-pension-index (defined here)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "This slice defined the CPP Pension Index because the Seniors Benefit escalates its non-deductible income amount by it. The federal-canada slice defined the same node independently, and the loader flagged the duplicate. The federal slice is the natural owner, so the definition is removed here; the edges from this slice still point at it and still resolve. Two agents converging on one node is a sign the slice boundaries overlap."
+    }
+  ]
+}

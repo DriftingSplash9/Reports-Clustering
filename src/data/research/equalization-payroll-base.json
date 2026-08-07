@@ -1,0 +1,91 @@
+{
+  "_slice": "equalization-payroll-base",
+  "_scope": "The payroll-tax revenue base in the Federal-Provincial Fiscal Arrangements Regulations, 2007 (SOR/2007-303). Closes the SEPH question left outstanding by V0.9. Owns only the two edges out of fiscal-equalization-program that this provision establishes; the Territorial Formula Financing parallel and the other publications named in s. 19 are recorded as leads, not built.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-seph",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 8(1)(y), the payroll-tax revenue base, makes SEPH a named term in a statutory formula: 'P is the gross dollar value, before deductions, of the payrolls of all employers in the province for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours, other than the payrolls of (i) employers not included in that survey, and (ii) employers in the following industry classifications, as defined by the North American Industry Classification System: (A) the elementary and secondary schools industry group, (B) the hospitals subsector, (C) the nursing and residential care facilities subsector, (D) the provincial and territorial public administration subsector, and (E) the local, municipal and regional public administration subsector'. `calculated_from` because P is a term in the formula, not a consideration — the same test that makes boc-bank-rate calculated_from the policy rate. Note the provision also carves out its own exclusions by NAICS classification, so the edge to `naics` is stated in the same sentence. SCOPE, stated because the section number alone overstates it: s. 8 sits in DIVISION 2 — Nova Scotia, and defines revenue base 'For the purpose of sections 3.71 to 3.9 of the Act', which are the Nova Scotia additional-equalization provisions. SEPH does NOT appear in the DIVISION 1 all-provinces revenue base at s. 5 — the phrase 'payrolls' occurs nowhere in ss. 1 through 8(1)(j), because the 2007 reform folded payroll taxes into the personal-income base. So this is the Equalization Program depending on SEPH through one division of the Regulations, not through the general formula.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "for the calendar year that ends in the fiscal year"
+      },
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    },
+    {
+      "source_report_id": "fiscal-equalization-program",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "calculated_from",
+      "basis": "Two further terms of the same formula at SOR/2007-303 s. 8(1)(y) are pinned to the national accounts. 'A is the total wages and salaries excluding supplementary labour income, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts, paid in the province in the calendar year that ends in the fiscal year, other than the wages and salaries paid by (i) the federal general government sector to employees in the defence industry, and (ii) the provincial and territorial general government sector and the local general government sector to their employees'. And 'M is military pay and allowances, excluding supplementary labour income, paid in the province in the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. ONE INFERENCE, stated rather than hidden: the Regulations name the *System of Macroeconomic Accounts*, which is the accounting framework, and this graph has no node for the framework. Wages and salaries excluding supplementary labour income is an income-based GDP component, and the release that publishes the income-based accounts is IMDB record 1901, which is what statcan-national-accounts points at. The mapping from the named framework to that release is a judgement, not a quotation, and it interacts with the unresolved statcan-hfce / statcan-national-accounts duplication recorded in statcan-macro-accounts.json — both are the same question about whether a node is a release or a named series within one.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "for the calendar year that ends in the fiscal year"
+      },
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "(Territorial Formula Financing) -> statcan-seph",
+      "source": null,
+      "target": "statcan-seph",
+      "reason": "no-node-yet",
+      "why": "The best single lead this pass produced. SOR/2007-303 s. 19(1)(g) is the payroll-tax revenue base for PART 1.1 — Territorial Formula Financing Payments, and it cites SEPH twice, once in each of two formula terms. Term D: 'data on the gross payroll of employers in the province or territory — other than those referred to in subparagraphs (i) and (ii) of the description of G — for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours'. Term G: 'is the gross dollar value, before deductions, of the payrolls of all employers in the province or territory for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours, other than the payrolls of (i) employers not included in that survey, and (ii) employers in the following industry classifications, as defined by the North American Industry Classification System'. TFF is a real recurring federal transfer with annual published entitlements and no node in this graph, which is a gap on its own terms — the corpus has the Canada Health Transfer, the Canada Social Transfer and Equalization but not the fourth major transfer. One node buys this edge plus the six below."
+    },
+    {
+      "edge": "(Territorial Formula Financing) -> statcan-national-accounts",
+      "source": null,
+      "target": "statcan-national-accounts",
+      "reason": "no-node-yet",
+      "why": "Same provision, SOR/2007-303 s. 19(1)(g), terms F and H, mirroring s. 8(1)(y)'s A and M. F: 'is the total wages and salaries excluding supplementary labour income, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts, paid in the province or territory in the calendar year that ends in the fiscal year, other than the wages and salaries paid by (i) the federal general government sector to employees in the defence industry, and (ii) the provincial and territorial general government sector and the local general government sector to their employees'. H: 'is military pay and allowances, excluding supplementary labour income, paid in the province or territory in the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. Carries the same framework-to-release inference noted on the corresponding live edge."
+    },
+    {
+      "edge": "(Territorial Formula Financing) -> (Census of Agriculture)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "SOR/2007-303 s. 19(1)(h), the property-tax revenue base, sub-base B3: 'F is the value of farm land and buildings in a province or territory, measured in current dollars, as determined by Statistics Canada for the purpose of its publication entitled Census of Agriculture, and adjusted to exclude farm residences, for the most recent calendar year available in the publication'. Note 'its publication entitled' — the Regulations are naming a publication explicitly, which is the strongest form of citation this project accepts. Neither endpoint is a node. The Census of Agriculture is quinquennial and would sit naturally beside statcan-census-population."
+    },
+    {
+      "edge": "(Territorial Formula Financing) -> (Gasoline and Other Petroleum Fuels Sold)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Named twice as a survey by title. SOR/2007-303 s. 19(1)(d)(ii): 'the number of litres of aviation fuel sold in the province or territory in that year, as determined by Statistics Canada on the basis of data from its survey Gasoline and Other Petroleum Fuels Sold'. And s. 19(1)(e)(ii)(A), for railway fuel: 'in the case where railway fuel is taxed in the province or territory throughout that year and data on the tax is complete and available, by Statistics Canada on the basis of data from its survey Gasoline and Other Petroleum Fuels Sold'. A recurring StatCan survey, not yet a node."
+    },
+    {
+      "edge": "(Territorial Formula Financing) -> (Report on Energy Supply and Demand in Canada)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "SOR/2007-303 s. 19(1)(e)(ii)(B), the fallback where railway fuel tax data is incomplete: 'in any other case, by the Minister on the basis of data prepared by Statistics Canada for the purpose of its publication entitled Report on Energy Supply and Demand in Canada'. Worth recording as its own entry rather than folding into the fuel-survey note above, because the two provisions are alternatives — the statute names a primary source and a named fallback publication, which is the same shape as the Oil Sands Royalty Regulation's statutory fallback for the day the Bank of Canada stops publishing an exchange rate."
+    },
+    {
+      "edge": "(Territorial Formula Financing) -> (StatCan table 10-10-0011-01)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "SOR/2007-303 s. 19(1)(f), alcoholic beverage revenues, cites a specific numbered StatCan table three times, once each for spirits, wine and beer. From subparagraph (i): 'the volume of spirits sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (× 1,000)'. Subparagraphs (ii) and (iii) repeat the identical citation for wine and beer. A statute citing a table number rather than a programme is a new form in this corpus and raises the release-versus-series question again: a numbered table is finer-grained than anything currently modelled as a node."
+    },
+    {
+      "edge": "(Territorial Formula Financing) -> (Government Finance Statistics)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "SOR/2007-303 s. 19(1)(b)(ii), the government business enterprise component: 'the product, as determined on the basis of data prepared by Statistics Canada for the purpose of the Government Finance Statistics, of ...'. Note the graph already contains imf-gfsm, the IMF's Government Finance Statistics Manual, as a standard that statcan-national-accounts depends on — so the Canadian GFS programme, if made a node, would sit between a statutory formula and an international standard already present. That is the shape the cross-border and international clusters are short of."
+    },
+    {
+      "edge": "SOR/2007-303 — how far the SEPH search actually reached",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Recorded so a later pass does not read this as an exhaustive sweep. The phrase 'Survey of Employment, Payrolls and Hours' was confirmed present at s. 8(1)(y) term P and at s. 19(1)(g) terms D and G — three occurrences in two provisions. Confirmed ABSENT from ss. 1 to 8(1)(j), which includes the DIVISION 1 all-provinces revenue base at s. 5; the strings 'payrolls', 'gross dollar value' and 'military pay and allowances' all return zero occurrences across that range. NOT SWEPT: ss. 9 to 45, other than s. 19 itself — that covers Revenues to Be Equalized, Simulated Yield, Population, Certificate, Elections, Payments, the rest of PART 1.1, and PART 2 Fiscal Stabilization. Retrieval of the consolidated FullText is capped at roughly 126 KB against a 525 KB document, so whole-document greps on that file are not evidence of absence — this is the same truncation that made the V0.9 SEPH claim unverifiable, and it caught the count above at 'at least three' rather than 'exactly three'."
+    }
+  ]
+}

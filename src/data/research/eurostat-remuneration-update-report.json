@@ -1,0 +1,61 @@
+{
+  "_slice": "eurostat-remuneration-update-report",
+  "_researched": "2026-08-05",
+  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts.",
+  "_note": "Closes G.33.md/G.34.md's flagged item 0.2. One report, two dependencies, two _dropped. The node itself was effectively proposed by a predecessor session (C736-03, EU/AnnexXI_PartA_2026-08-05.md) but withheld for want of a retrievable URL. This session found Eurostat's own 'Civil servants remuneration' web section and retrieved it. Full quotes in EU/EurostatRemunerationReport_PartA_2026-08-05.md.",
+  "_headline": "The EU staff salary/pension update mechanism is now a node, which lets two independently-documented member-state inputs (Belgium's HICP via eurostat-hicp, and the GDP-weighting standard via esa-2010) attach to it as real edges instead of sitting as no-node-yet leads.",
+  "_open_questions": [
+    "DOMAIN: no value in Research.1.md's Domain union fits 'EU staff remuneration administration' cleanly. 'labour' used as least-wrong, same treatment domain gaps have had throughout the EU branch.",
+    "UPDATE, same-day continuation session: the Intermediate reports and the estate agency rent survey are now modelled -- see eurostat-remuneration-satellite-series.json. The Detailed A64/A65 reports were investigated and found to be appendices of this report, not a separate series (ERR-08). The mission-expenses report remains unmodelled."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-remuneration-update-report",
+      "title": "Report on the Annual Update of the Remuneration and Pensions of Officials and Other Servants of the European Union",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's statutory annual report under Annex XI, Article 1(1) to the Staff Regulations, which drives the mechanical calculation (Joint Index × Specific Indicator) behind the annual update of EU staff pay and pensions. Named in full at footnote 3 of COM(2025) 736: 'Eurostat Report of 31 October 2025 on the 2025 annual update of remuneration and pensions of EU officials in accordance with Articles 64 and 65 and Annexes XI to the Staff Regulations...' (C736-03). Eurostat's own publications page lists one linked report per year from 2004 to 2025 under file titles of the pattern 'Eurostat Remuneration Report [year]' (ERR-02).",
+      "releases_per_year": 1,
+      "cadence_note": "Eurostat's own Publications page: 'Reports are typically released in late October, with reference date July' (ERR-01), confirmed by 22 consecutive years of linked reports (2004-2025). Matches Annex XI Article 1(1): Eurostat 'shall draw up every year before the end of October a report' (AXI-01).",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/publications",
+      "domains": [
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eurostat-remuneration-update-report",
+      "target_report_id": "eurostat-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Annex XI to the Staff Regulations, Article 1(2) (AXI-02, EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md): 'Eurostat shall draw up an index to measure changes in the cost of living for officials of the Union in Belgium and Luxembourg. That index (hereinafter the \"Joint Index\") shall be calculated by weighting national inflation (as measured by the Harmonised Indices of Consumer Prices (HICP) in the case of Belgium and the Consumer Prices Index (CPI) in the case of Luxembourg) between June of the previous year and June of the current year according to the distribution of the staff serving in those Member States.' The Joint Index is itself an attribute of this report, not a separate publication (AXI-05 NOTES), and Article 3(2) states the update 'shall be obtained by multiplying the Joint Index by the specific indicator' (AXI-05) -- so HICP's figures reach the report's own arithmetic through the Joint Index. Resolves the no-node-yet lead recorded in eurostat-hicp.json's _dropped block.",
+      "evidence_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:01962R0031-20240101"
+    },
+    {
+      "source_report_id": "eurostat-remuneration-update-report",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Annex XI, Article 1(4) (AXI-04, EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md): 'The results per country shall be weighted in proportion to the appropriate national GDP aggregate measured using purchasing power parities as shown in the most recent statistics published in accordance with the national accounts definitions in the European System of Accounts currently in force... One such indicator shall be in the form of data on real per capita emoluments in central government, drawn up in accordance with the national accounts definitions in the European System of Accounts currently in force.' methodology_depends_on rather than uses_data_from, matching the esa-2010 precedent already in the corpus (de-destatis-national-accounts.json): ESA 2010 supplies accounting definitions and classifications, not figures.",
+      "evidence_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:01962R0031-20240101"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "eurostat-remuneration-update-report -> [Consumer Prices Index (CPI), Luxembourg]",
+      "source": "eurostat-remuneration-update-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "Annex XI Article 1(2) names 'the Consumer Prices Index (CPI) in the case of Luxembourg' as the Luxembourg-side component of the Joint Index, alongside Belgium's HICP. Whether this 'CPI' identifies lu-statec-ipcn (Luxembourg's national CPI) or lu-statec-ipch (Luxembourg's harmonised CPI) -- both minted this session, EU/STATEC-CPI_PartA_2026-08-05.md -- is not stated in any document read in this branch. STATEC's own regulation's parallel HICP/CPI split (STATEC-01) reads as consistent with 'CPI' meaning the IPCN specifically, but that is a reading, not a documented identification. Searched: Annex XI's own text, COM(2025) 736, and Luxembourg's Règlement grand-ducal du 20 décembre 1999 -- none names the equivalence. UPDATE, same-day continuation session (ERR-09, EU/EurostatRemunerationReport_PartA_2026-08-05.md): Eurostat's own Methodology page describes the Joint Index calculation's starting point as 'the Belgium HICP (national concept) and the Luxembourg CPI (domestic concept)' -- 'domestic concept' reads as consistent with STATEC's own description of the IPCN's resident-population-only coverage. Corroborating, still not a documented identification -- no document anywhere in this branch writes 'IPCN' and 'domestic concept' as the same thing. Reason stays no-document."
+    },
+    {
+      "edge": "eurostat-remuneration-update-report -> [national civil-service pay and economic-parity data, ten Member States]",
+      "source": "eurostat-remuneration-update-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "The Specific Indicator (Article 1(4)) and the economic parities (Article 1(3)) are both calculated 'on the basis of information supplied' or 'in agreement with' national statistical institutes -- AGENCY ONLY, no titled national release named, per AXI-03, AXI-04, and COM(2025) 736's own restatement (C736-07, C736-09, C736-10, EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md and EU/AnnexXI_PartA_2026-08-05.md). Consolidated here rather than re-quoted at length -- unchanged from prior sessions' findings, now attached to the node those findings were always waiting on."
+    }
+  ]
+}

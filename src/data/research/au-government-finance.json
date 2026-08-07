@@ -1,0 +1,237 @@
+{
+  "_slice": "au-government-finance",
+  "_researched": "2026-08-06",
+  "_status": "NEW 2026-08-06. First Australian nodes in the corpus, and the corpus's first non-Europe/non-Canada/US country — SAO ('South Asia + Oceania') colour family staffed for the first time (src/lib/palette.ts). Depth pass on federal -> state -> local government finance, on the same model as the Netherlands and UK passes.",
+  "_note": "Three general-purpose subagents researched this in parallel (Commonwealth Grants Commission / Financial Assistance Grants; NSW property-rating chain; AASB 1049 / ABS Government Finance Statistics). Most quotes were then independently re-verified by this session directly against primary sources — legislation.gov.au and legislation.nsw.gov.au (the latter Cloudflare-gated against curl, so fetched via a real browser and its rendered DOM text, not an AI summary), standards.aasb.gov.au, abs.gov.au, and NSW council/government pages, all via curl HTML-tag-stripping or pypdf PDF extraction. TWO sources remained gated even via browser (cgc.gov.au forces a file-download dialog rather than rendering; the Victoria Local Government Grants Commission PDF host returned HTTP 403 to every method tried) — their quotes rest on a subagent's own extraction (one via a proxy-summarised read, flagged explicitly on each affected edge/node) and are NOT treated as equivalent in reliability to the self-verified material.",
+  "reports": [
+    {
+      "id": "au-cgc-gst-relativities",
+      "title": "GST Revenue Sharing Relativities",
+      "publisher": "Commonwealth Grants Commission (CGC)",
+      "country": "AU",
+      "jurisdiction_level": "federal",
+      "region": "Australia",
+      "description": "The Commonwealth Grants Commission's periodic recommendation on how GST revenue is distributed among Australia's states and territories, using horizontal fiscal equalisation — the Australian analog to Canada's federal equalization program (`fiscal-equalization-program`). NOT INDEPENDENTLY VERIFIED THIS SESSION: cgc.gov.au blocked both curl (TLS reset) and a real browser (forces a file-download dialog rather than rendering) — quotes rest on a subagent's own extraction via a proxy-reader tool, not a raw byte-for-byte read. Treat with lower confidence than the other nodes in this slice until a future session can access the PDF directly.",
+      "releases_per_year": 1,
+      "cadence_note": "Published as a periodic Review (e.g. '2025 Review', 'GST Relativities 2025-26') rather than a fixed annual schedule.",
+      "last_updated": null,
+      "url": "https://www.cgc.gov.au/publications/commissions-assessment-methodology",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "au-tas-sgc-methodology",
+      "title": "Financial Assistance Grant Distribution Methodology (Tasmania)",
+      "publisher": "Tasmanian State Grants Commission",
+      "country": "AU",
+      "jurisdiction_level": "provincial",
+      "region": "Tasmania, Australia",
+      "description": "Tasmania's own technical methodology manual for distributing Commonwealth Financial Assistance Grants among its councils, implementing the National Principles set by the Local Government (Financial Assistance) Act 1995 (Cth) s.6. Structured per cost-adjustor (population, employment, SEIFA disadvantage, valuation, rainfall, freight, climate), each with its own named data source — the closest Australian analog found this session to the Dutch Toelichting / Ontario OMPF Appendix F pattern. A subagent read this PDF natively (not via a proxy-summariser) and reported it as the most reliably-extracted source in its research batch; NOT independently re-read by this session's own tooling, so treated as a middle confidence tier — more reliable than the CGC/VLGGC material, not yet re-verified the way the NSW legislation and ABS/AASB material was.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.treasury.tas.gov.au/Documents/Financial%20Assistance%20Grants%20Distribution%20Methodology.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "au-abs-erp",
+      "title": "Estimated Resident Population",
+      "publisher": "Australian Bureau of Statistics (ABS)",
+      "country": "AU",
+      "jurisdiction_level": "federal",
+      "region": "Australia",
+      "description": "ABS's population estimate series, named by exact title in CGC methodology material as the population figure underlying GST relativity calculations. NOT INDEPENDENTLY VERIFIED THIS SESSION — see `au-cgc-gst-relativities`'s own confidence note; this node's citation rests on the same subagent extraction.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population",
+      "domains": ["population"]
+    },
+    {
+      "id": "au-abs-seifa",
+      "title": "Socio-Economic Indexes for Areas (SEIFA)",
+      "publisher": "Australian Bureau of Statistics (ABS)",
+      "country": "AU",
+      "jurisdiction_level": "federal",
+      "region": "Australia",
+      "description": "ABS's index of relative socio-economic advantage/disadvantage by area, derived from Census data and named by exact title (including the specific index, IRSD) in Tasmania's Grants Commission methodology as a cost adjustor.",
+      "releases_per_year": 0.2,
+      "cadence_note": "Released once per Census cycle (nominally every 5 years), tied to Census processing rather than a fixed annual schedule.",
+      "last_updated": null,
+      "url": "https://www.abs.gov.au/statistics/people/people-and-communities/socio-economic-indexes-areas-seifa-australia",
+      "domains": ["population"]
+    },
+    {
+      "id": "au-abs-gfs",
+      "title": "Government Finance Statistics, Australia",
+      "publisher": "Australian Bureau of Statistics (ABS)",
+      "country": "AU",
+      "jurisdiction_level": "federal",
+      "region": "Australia",
+      "description": "ABS's compiled national statistics on the financial activities of Commonwealth, state and local government, built on the IMF's Government Finance Statistics Manual (GFSM) and the 2008 System of National Accounts (SNA) — a genuine cross-corpus tie back to this branch's existing international-standard nodes. VERIFIED DIRECTLY: methodology page fetched and HTML-parsed in full.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.abs.gov.au/methodologies/government-finance-statistics-annual-methodology/2023-24",
+      "domains": ["municipal-finance", "fiscal-transfers"]
+    },
+    {
+      "id": "au-la-annual-statements",
+      "title": "Local government annual statements of accounts (Australia)",
+      "publisher": "Individual Australian local government authorities",
+      "country": "AU",
+      "jurisdiction_level": "municipal",
+      "region": "Australia",
+      "description": "The audited annual accounts every Australian local council prepares — the Australian counterpart to Alberta's FIR, the Netherlands' Iv3-rapportage, and the UK's Revenue Outturn forms. VERIFIED DIRECTLY: named as ABS's own local-government data source in the ABS GFS methodology page. NOTE: the same ABS methodology page describes the local-government source differently in two separate sections — the current 'Data sources' section says 'annual statements of accounts completed by local authorities,' while an older 'Institutional environment' section on the same page says 'annual local government consolidated data collections conducted on behalf of a range of stakeholders by departments of local government in each of the jurisdictions, as well as published financial statements.' Both quoted verbatim below rather than silently reconciled, per this project's own convention for internally-inconsistent source documents.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.abs.gov.au/methodologies/government-finance-statistics-annual-methodology/2023-24",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "au-aasb1049",
+      "title": "AASB 1049 Whole of Government and General Government Sector Financial Reporting",
+      "publisher": "Australian Accounting Standards Board (AASB)",
+      "country": "AU",
+      "jurisdiction_level": "institutional",
+      "region": "Australia",
+      "description": "The accounting standard governing whole-of-government and General Government Sector financial statements — the Australian counterpart to `psab-psas`, the Netherlands' `nl-bbv` and the UK's `gb-cipfa-code`, with one structural difference from all three: VERIFIED DIRECTLY (standards.aasb.gov.au, full standard text fetched and parsed), Appendix A's own definition of 'government' (the term the whole Standard's scope turns on) lists only 'The Australian Government, the Government of the Australian Capital Territory, New South Wales, the Northern Territory, Queensland, South Australia, Tasmania, Victoria or Western Australia' — Commonwealth, state and territory governments, but NOT local government. Unlike the Dutch BBV and UK CIPFA Code, this standard does not by its own text extend down to councils — see `au-brisbane-financial-statements` and the `_dropped` note explaining why no edge connects the two.",
+      "releases_per_year": 1,
+      "cadence_note": "Issued in compiled dated editions (e.g. 'Dec 2019' compilation checked this session), amended periodically.",
+      "last_updated": null,
+      "url": "https://standards.aasb.gov.au/aasb-1049-dec-2019",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "au-brisbane-financial-statements",
+      "title": "Consolidated Financial Statements 2023-24 (Brisbane City Council)",
+      "publisher": "Brisbane City Council",
+      "country": "AU",
+      "jurisdiction_level": "municipal",
+      "region": "Brisbane, Queensland, Australia",
+      "description": "Chosen as the exemplar Australian council, the way Wolverhampton and Nijmegen are the exemplar UK/Dutch ones — but its own accounting-basis note cites general 'Australian Accounting Standards and Interpretations issued by the Australian Accounting Standards Board (AASB)' plus the City of Brisbane Act 2010 and Regulation 2012, not AASB 1049 by name — consistent with AASB 1049's own local-government-excluding scope (see `au-aasb1049`). VERIFIED DIRECTLY: 63-page PDF downloaded and text-extracted in full (pypdf).",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://docs.brisbane.qld.gov.au/Council%20and%20Committees/2024/09-September/10%20September%202024/Tabled%20document%201%20-%2020-sep-2024.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "au-vola1916",
+      "title": "Valuation of Land Act 1916 (NSW)",
+      "publisher": "New South Wales Government",
+      "country": "AU",
+      "jurisdiction_level": "institutional",
+      "region": "New South Wales, Australia",
+      "description": "The NSW law establishing the office of Valuer-General and requiring an annual land valuation for every NSW property (other than Crown/unrated Western Division land) — functions in this corpus the way the Netherlands' `nl-wet-woz` and the UK's `gb-voa-rating-lists` do: a legally-established valuation standard other documents cite as their rating base, not a periodical. VERIFIED DIRECTLY: legislation.nsw.gov.au fetched via a real browser (the site is Cloudflare-gated against curl) and its rendered text parsed directly.",
+      "releases_per_year": 1,
+      "cadence_note": "Land values are re-determined on a cycle set by the Valuer-General, confirmed by council sources (below) as 'every three years' in current practice — the Act's own s.14A requires annual ascertainment, so the three-year cycle is an operational choice, not a statutory maximum; flagged rather than reconciled.",
+      "last_updated": null,
+      "url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-1916-002",
+      "domains": ["assessment", "taxation", "municipal-finance"]
+    },
+    {
+      "id": "au-georges-river-rates",
+      "title": "Land valuations and rating categories (Georges River Council)",
+      "publisher": "Georges River Council",
+      "country": "AU",
+      "jurisdiction_level": "municipal",
+      "region": "Georges River, New South Wales, Australia",
+      "description": "Chosen as the exemplar NSW council, the way Nijmegen and Wolverhampton are the exemplar Dutch/UK ones — its own published rates page names the NSW Valuer General as the source of the land values its rates are calculated on. VERIFIED DIRECTLY: council webpage fetched and HTML-parsed.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.georgesriver.nsw.gov.au/Council/Rates-and-Payments/Land-valuations-and-rating-categories",
+      "domains": ["municipal-finance", "taxation", "assessment"]
+    },
+    {
+      "id": "au-nsw-lrs",
+      "title": "NSW Land Registry Services",
+      "publisher": "NSW Land Registry Services",
+      "country": "AU",
+      "jurisdiction_level": "provincial",
+      "region": "New South Wales, Australia",
+      "description": "The NSW land-titles registry, named as the specific source of Notices of Sale feeding the Valuer-General's mass property valuation — the direct structural analog to the Netherlands' Kadaster in the WOZ valuation chain. VERIFIED DIRECTLY: nsw.gov.au page fetched and HTML-parsed.",
+      "releases_per_year": 365,
+      "cadence_note": "A continuously-maintained transaction register, not a periodic release — filed at a high nominal frequency for lack of a better fit, the same treatment this project gives other continuously-updated base registries (see the Netherlands slice's own Kadaster/BRK note, not yet minted there either).",
+      "last_updated": null,
+      "url": "https://www.nsw.gov.au/housing-and-construction/land-values-nsw/how-to-find-property-sales-information",
+      "domains": ["assessment"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "au-cgc-gst-relativities",
+      "target_report_id": "au-abs-erp",
+      "relationship_type": "uses_data_from",
+      "basis": "NOT INDEPENDENTLY VERIFIED THIS SESSION (cgc.gov.au gated against both curl and browser rendering; quote rests on a subagent's own proxy-summarised extraction). Reported: \"The population data used in the estimation of GST relativities is Estimated Resident Population, produced by the ABS.\" (CGC 'Commission's Assessment Methodology — Population' chapter). Kept because the underlying relationship — GST relativities use ABS population data — is well-precedented and plausible, but flagged for direct re-verification before being treated as fully confirmed.",
+      "evidence_url": "https://www.cgc.gov.au/sites/default/files/2025-03/2025R_Commissions%20Assessment%20Methodology_Population.pdf"
+    },
+    {
+      "source_report_id": "au-tas-sgc-methodology",
+      "target_report_id": "au-abs-seifa",
+      "relationship_type": "uses_data_from",
+      "basis": "MIDDLE CONFIDENCE — subagent read the source PDF natively (not via a proxy-summariser) but this session did not independently re-read it. Reported, §3.4.3(vi): \"The Commission calculates a cost adjustor to reflect the rate of socio-economic disadvantage within a municipality using the Australian Bureau of Statistics (ABS) Socio-Economic Indexes For Areas (SEIFA) Index of Relative Socio-Economic Disadvantage (IRSD).\"",
+      "evidence_url": "https://www.treasury.tas.gov.au/Documents/Financial%20Assistance%20Grants%20Distribution%20Methodology.pdf"
+    },
+    {
+      "source_report_id": "au-abs-gfs",
+      "target_report_id": "au-la-annual-statements",
+      "relationship_type": "calculated_from",
+      "basis": "VERIFIED DIRECTLY (methodology page fetched and HTML-parsed). \"For local government, the main data sources are annual statements of accounts completed by local authorities. There are no local government bodies in the ACT.\" See `au-la-annual-statements`'s own description for the page's own internal inconsistency about this same claim elsewhere on the page.",
+      "evidence_url": "https://www.abs.gov.au/methodologies/government-finance-statistics-annual-methodology/2023-24"
+    },
+    {
+      "source_report_id": "au-aasb1049",
+      "target_report_id": "au-abs-gfs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (both documents fetched and parsed independently, both sides of the relationship confirmed). AASB 1049 itself, para 13: \"where compliance with the ABS GFS Manual would not conflict with Australian Accounting Standards, the principles and rules in the ABS GFS Manual shall be applied.\" Confirmed from the other side, ABS's own GFS methodology page: \"From 2008-09 onwards, Australian Accounting Standard Board 1049 Whole of Government and General Government Sector Financial Reporting (AASB 1049) replaced Australian Accounting Standard 31 Financial Reporting by Government (AAS 31) as the standard Governments should follow in the preparation of their financial statements.\" NOTE: AASB 1049's own Appendix A defines 'ABS GFS Manual' as the 2005-edition 'Australian System of Government Finance Statistics: Concepts, Sources and Methods' — a distinct methodology publication from the annual 'Government Finance Statistics, Australia' release this edge points at; the two are treated as one node here for scope reasons, flagged rather than silently merged.",
+      "evidence_url": "https://standards.aasb.gov.au/aasb-1049-dec-2019"
+    },
+    {
+      "source_report_id": "au-georges-river-rates",
+      "target_report_id": "au-vola1916",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (council page and the NSW Local Government Act 1993 both fetched and parsed independently). Georges River's own page: \"Land values are set by the NSW Valuer General every three years.\" The general mechanism this instantiates is stated in the Local Government Act 1993 (NSW) s.498, note: \"Land value is defined in the Dictionary for this Act. Generally, it is a value determined specially for rating purposes by the Valuer-General under the Valuation of Land Act 1916.\" — the Valuer-General is the statutory office the Valuation of Land Act 1916 itself establishes (s.8(4)).",
+      "evidence_url": "https://www.georgesriver.nsw.gov.au/Council/Rates-and-Payments/Land-valuations-and-rating-categories"
+    },
+    {
+      "source_report_id": "au-vola1916",
+      "target_report_id": "au-nsw-lrs",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (nsw.gov.au page fetched and HTML-parsed). \"NSW property sales information comes from Notices of Sale lodged with Land Registry Services.\" Attributed to the Valuer-General's own valuation process (\"How we use property sales data\" section of the page, published under Value NSW / Valuer-General branding), the direct structural parallel to the Netherlands' Kadaster naming in the Waarderingsinstructie.",
+      "evidence_url": "https://www.nsw.gov.au/housing-and-construction/land-values-nsw/how-to-find-property-sales-information"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "au-brisbane-financial-statements -> au-aasb1049",
+      "source": "au-brisbane-financial-statements",
+      "target": "au-aasb1049",
+      "reason": "denied",
+      "why": "Not minted, deliberately — a real negative result, not an oversight. AASB 1049's own Appendix A defines the 'government' its scope applies to as Commonwealth, state and territory governments only (nine named jurisdictions), excluding local government. Brisbane's own Statement of Accounts confirms this from the other side: its accounting-basis note cites general 'Australian Accounting Standards and Interpretations issued by the Australian Accounting Standards Board (AASB)' and the City of Brisbane Act 2010/Regulation 2012 — never 'AASB 1049' by name. Both VERIFIED DIRECTLY this session. This is the structural difference from the Netherlands (BBV) and UK (CIPFA Code), where the equivalent standard explicitly does bind municipalities and is cited by name and edition in council accounts."
+    },
+    {
+      "edge": "Local Government (Financial Assistance) Act 1995 (Cth) s.4A population figure -> a specific titled ABS release",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "VERIFIED DIRECTLY (legislation.gov.au fetched and parsed). The Act's own population-estimate provision, s.4A, refers throughout to 'the Statistician' (defined elsewhere as 'the Australian Statistician') and 'an estimate... made by the Statistician' — AGENCY ONLY, no titled ABS publication named in the Act's own text, in contrast to the Commonwealth Grants Commission's own methodology material naming 'Estimated Resident Population' by exact title for the same underlying figure (see `au-cgc-gst-relativities` -> `au-abs-erp`, itself unverified this session)."
+    },
+    {
+      "edge": "Victorian Local Government Grants Commission Annual Allocation Report -> ABS population estimates / Office of the Valuer-General",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "A subagent (via a proxy-reader after direct fetch returned HTTP 403) reported the VLGGC's 2025-26 Annual Allocation Report naming 'Australian Bureau of Statistics' population estimates' and 'Office of the Valuer-General' as major inputs, and separately thanking the Commonwealth Grants Commission, ABS, Centrelink and Tourism Research Australia by name in its acknowledgements. AGENCY ONLY throughout (no titled ABS release named, unlike the Tasmania and CGC material) and not independently re-verified — flagged as a lead for a future session with better access to localgovernment.vic.gov.au, not built into an edge."
+    },
+    {
+      "edge": "NSW Local Government Grants Commission's own methodology manual",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Searched directly this session (multiple search-term variants) and could not locate a NSW Grants Commission-authored methodology manual equivalent to Tasmania's — the NSW Office of Local Government's own grants-commission resource page 404'd. A regional Joint Organisation's own submission/critique document referencing NSW's FAG methodology was found but is not the Commission's own primary document. NSW may not publish an equivalent public methodology manual, or it may simply not have been findable this session — a genuine open question, not a confirmed absence in the `NOT FOUND` sense Research.1.md reserves for an exhausted search."
+    },
+    {
+      "edge": "an Australian council's rates document naming NSW Land Registry Services or another state's land-titles registry directly",
+      "source": null,
+      "target": "au-nsw-lrs",
+      "reason": "no-node-yet",
+      "why": "The Georges River / nsw.gov.au chain establishes VOLA1916 -> NSW LRS at the state level, but no specific council's own rates document was found this session naming the land registry directly (councils cite 'the Valuer General' only). Worth a second pass if a council's own Revenue Policy document — several were found this session but blocked by 403s (Tamworth, Yass Valley, Federation, Wollongong) — becomes accessible."
+    }
+  ]
+}

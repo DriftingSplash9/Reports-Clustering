@@ -1,0 +1,145 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.48.md",
+  "number": 48,
+  "title": "G.48.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "`Research.1.md` v3.1 → **v3.2 this session** — §9 amended",
+  "predecessor": "G.47.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**Two of `G.47.md`'s own top-ranked cheap checks are closed, and one of them\nuncovered a live, unfixed reliability problem in an existing corpus file\nthat has now been corrected in place — with the fix itself flagged as\nscoped, not exhaustive.** Separately, the Netherlands now has the EU\nbranch's first genuine multi-level government-finance chain outside\nGermany's EVAS sub-graph: a national equalization-transfer mechanism with a\ndocument that names its own inputs (the Dutch equivalent of Ontario's OMPF\nAppendix F), a property-valuation-to-municipal-tax chain with a verified\nkeystone document, and an accounting-standard-to-financial-return pipeline\nstructurally identical to Alberta's FIR system. This is evidence, not yet\nproof, that the \"Chapter 10 generalises past Germany\" question `G.47.md`'s\nG1 track posed can be answered with a *different* kind of document (a\ntransfer-formula technical guide, not a GNI inventory) if the search widens\nbeyond national-accounts documents to fiscal-transfer ones.",
+  "findings": [
+    {
+      "heading": "1. Montenegro's ESA 2010 citation is confirmed as MONSTAT's own error — and the same document is internally inconsistent about it",
+      "body": "**What this rests on**: downloaded MONSTAT's \"Quality report 2021 AGDP.pdf\"\ndirectly (`curl`, 10 pages, `pypdf`-extracted in full) rather than relying on\nGrok's transcription. §1.2 (p.2) reads, verbatim: *\"National accounts are\ncompiled in accordance with the European System of Accounts (ESA 2010),\nwhich is published in the Official Journal of the European Commission as\nAnnex A to Regulation (EU) No 1306/2010.\"* — matching `grok-r8-accession-\nbelt.json`'s quoted text exactly. This settles `G.47.md`'s cheap check 1:\nthe error is MONSTAT's own, not introduced in transcription. **New this\nsession**: the same PDF, §6.1 (p.8), separately states *\"By applying\nRegulation (EC) No 549/2013 which prescribes the application of ESA 2010\nmethodology...\"* — the correct regulation number (though with the wrong\n\"EC\"/\"EU\" prefix). One MONSTAT document cites its own governing regulation\ntwo different, inconsistent ways. Not yet recorded as a correction in the\ncorpus JSON itself — this finding is new information, not a correction to\nwhat's already there; flagged as a cheap-check candidate for whoever picks\nthis up (add a `_dropped` note to `grok-r8-accession-belt.json` recording\nthe internal inconsistency)."
+    },
+    {
+      "heading": "2. The `grok-r3-netherlands-poland.json` spot-check found Poland clean and Netherlands materially unreliable — now corrected",
+      "body": "**What this rests on**: Thomas's original Grok conversation thread was not\naccessible this session, so the check was done against primary sources\ninstead of the original transcript. Poland: independently verified against\nEurostat's ESMS metadata page directly — the quoted regulation citation\n(549/2013) and compilation-basis language are both genuinely present.\nNetherlands: downloaded CBS's GNI Inventory PDF (420 pages, `pypdf`-extracted\nin full) and checked all four quoted dependency claims. One\n(`nl-dnb-bop`) was exact. **Three of four were not verbatim**: two were\nreworded paraphrases of real sentences, and one — the first sentence\nsupporting the `esa-2010` edge, claiming \"all member states of the European\nUnion must comply with the requirements of the European System of Accounts\n2010\" — does not appear anywhere in the 420-page document under any close\nvariant searched. All three have been corrected in place in\n`grok-r3-netherlands-poland.json`, with exact PDF page numbers (both the\ndocument's own internal pagination and the PDF's own page count) and a\n`CORRECTED 2026-08-05` marker on each affected `basis` field, per this\nproject's own convention of recording corrections rather than silently\noverwriting. `npm run validate`/`check` both exit 0 after the edit."
+    },
+    {
+      "heading": "3. Netherlands, Germany and Italy were weighed for the municipal-finance depth pass; Netherlands was picked, not tested against the alternatives",
+      "body": "**What this rests on**: a judgement call, stated plainly as one. Three\nfactors favoured the Netherlands: (a) it already had a toehold in the corpus\n(`nl-cbs-gni-inventory-2010` and three related nodes), lowering the setup\ncost; (b) its Gemeentefonds is structurally the closest available analog to\nOntario's OMPF, the corpus's strongest existing municipal-finance model,\nwhich made it plausible a similar \"Appendix F\"-style document existed to\nfind — and one did (Finding 4); (c) English-language secondary commentary on\nDutch government finance is unusually good, though the primary sources\npulled here are almost entirely Dutch-language (wetten.overheid.nl,\nrijksoverheid.nl, individual gemeente ordinances). Germany was set aside\nspecifically because `G.47.md` already flagged it as the branch's existing\ntemplate — a fourth Destatis-shaped result would have been less informative\nthan a genuinely different EU country's system. Italy was set aside only for\nscope (a five-layer government structure — state/region/province/metro\ncity/comune — was judged more complex to document well in one session than\nthe Netherlands' national/provincial/municipal three-layer structure).\nNeither alternative was actually researched this session, so this is not a\nfinding about which would have worked better — only about why one was tried."
+    },
+    {
+      "heading": "4. The Netherlands has a genuine \"Appendix F\" equivalent — the Toelichting document — independently confirmed by two different primary sources",
+      "body": "**What this rests on**: this session's own direct download and full-text\nextraction (`pypdf`) of the \"Toelichting op de berekening van de uitkering\nuit het gemeentefonds 2024\" PDF (77 pages), which contains roughly 50\nstandardised per-maatstaf (distribution-criterion) data cards, each with\nfields for Wet- en regelgeving / Definitie / Bron / Methode / Publicatie /\nPeildatum. Confirmed directly: the OZB-woningen-eigenaren maatstaf card\nreads *\"Bron De benodigde gegevens worden door het CBS onttrokken aan de\nLandelijke Voorziening WOZ\"* — naming a specific national register by name,\nnot just an agency. **Independently confirmed a second way**: this session\nalso fetched a completely different document — CBS's own StatLine table\n\"Maatstaven Financiële-verhoudingswet (Fvw), regio\" — and found its own\n\"Tabeltoelichting\" cross-references the Toelichting document by its exact\nfull title as where the calculation units are documented, and separately\nstates in its own words that the table \"bevat gegevens die mede als\ngrondslag dienen bij het bepalen van de hoogte van de Algemene Uitkeringen\naan gemeenten en provincies\" (feeds both the municipal and provincial\nfunds). Two independently-fetched documents naming the same relationship, in\ntheir own words, is stronger evidence than either alone."
+    },
+    {
+      "heading": "5. The WOZ property-valuation-to-municipal-tax chain is a clean, fully-verified structural parallel to Grande Prairie's tax rate bylaw",
+      "body": "**What this rests on**: Wet WOZ (the national property-valuation law) was\ndownloaded and parsed directly from wetten.overheid.nl. Art. 22 lid 1: *\"De\nin artikel 1, tweede lid, bedoelde ambtenaar van de gemeente waarin de\nonroerende zaak is gelegen, stelt de waarde van de onroerende zaak vast bij\neen voor bezwaar vatbare beschikking\"* — the municipal official must\nformally determine the value. Nijmegen's own OZB tax ordinance (fetched\ndirectly from lokaleregelgeving.overheid.nl) states its tax base\n(\"heffingsmaatstaf\") *\"is de op de voet van hoofdstuk IV van de Wet\nwaardering onroerende zaken voor de onroerende zaak vastgestelde waarde\"* —\nnaming the law by chapter, the same way Grande Prairie's tax rate bylaw\nnames the Municipal Government Act. The Bfv 2001 decree (also fetched and\nparsed directly) confirms the Gemeentefonds formula itself draws on the same\nWOZ-determined values for its own OZB-capacity maatstaven."
+    },
+    {
+      "heading": "6. The BBV/Iv3 pipeline is a structural match for Alberta's FIR system",
+      "body": "**What this rests on**: direct fetch of data.overheid.nl's own dataset\ndescription page for \"Gemeenten 2025 onbewerkte Iv3-data,\" which states in\nits own words that CBS receives the data \"in het kader van de rapportages\nInformatie voor Derden (Iv3),\" that the table's own coding scheme derives\nfrom the BBV (\"Besluit begroting en verantwoording provincies en\ngemeenten\"), and that \"Het BBV bevat onder meer de regelgeving voor de\nleveringen van Iv3-data aan het CBS\" (the BBV itself contains the rules\nrequiring Iv3 delivery to CBS). This is the same three-tier shape as\nAlberta's `ab-municipalaffairs-fir` → `ab-municipalaffairs-financial-\nstatistical-data`, with the BBV playing PSAB's role as the governing\naccounting standard."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`grok-r3-netherlands-poland.json`'s three Netherlands `basis` quotes were not verbatim — REFUTED and corrected.** See Finding 2 above for the full account. This is exactly the failure mode `Research.1.md` §3 exists to catch — quoted text presented as verbatim that on inspection was paraphrased, or in one case, absent from the source entirely. The underlying edges (the relationships themselves) all still hold; only the quoted evidence supporting them was wrong and has been replaced with verbatim text at confirmed page locations."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping: merge `Research.2.md` and `Research.EU.md`. Closed",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph. Opened, not closed.",
+      "items": []
+    },
+    {
+      "letter": "G",
+      "label": "The wide-Europe depth pass.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Add a `_dropped` note to `grok-r8-accession-belt.json`** recording Montenegro's own internal inconsistency (Finding 1) — the citation error is now fully confirmed but the corpus file doesn't yet record the second half of the finding (the correct-number citation existing elsewhere in the same PDF)."
+    },
+    {
+      "n": 2,
+      "text": "Mint a Kadaster/Basisregistratie Kadaster node** and complete the `nl-waarderingskamer-waarderingsinstructie → Kadaster` edge — closes the one isolated node this session created. Sources already gathered, see `nl-municipal-finance.json`'s own `_dropped` array."
+    },
+    {
+      "n": 3,
+      "text": "Verify and mint a specific province's own budget** (Noord-Brabant was surfaced by a subagent but not independently re-verified) citing its Provinciefonds allocation and the BBV — completes the parallel to Alberta's `ab-tbf-fiscal-plan`/`gp-financial-statements`."
+    },
+    {
+      "n": 4,
+      "text": "Verify and mint a specific municipality's own jaarrekening** (Waalwijk was surfaced by a subagent but not independently re-verified) citing the BBV — same completeness goal as #3, one level down."
+    },
+    {
+      "n": 5,
+      "text": "Mint the CBS population StatLine table** named in the Toelichting's \"Maatstaf Inwoners sociaal\" card (verified directly this session, see `nl-municipal-finance.json`'s `_dropped` array) — the Dutch counterpart to `statcan-census-population`, currently missing from the EU branch entirely."
+    },
+    {
+      "n": 6,
+      "text": "Open Waarderingskamer's \"Staat van de WOZ 2025\"** — surfaced but not read this session; likely an annual report with its own data-source disclosures. **Carried forward from `G.47.md`, unchanged, still open:** all 21 items — see `G.47.md`'s own list. None were touched this session."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.48.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — v3.2, §9 now 95 ids."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/nl-municipal-finance.json`** — its own `_dropped` array is the direct continuation point for cheap checks 2, 3, 4 and 5 above."
+    },
+    {
+      "n": 4,
+      "text": "A browser**, for the outstanding cheap checks."
+    },
+    {
+      "n": 5,
+      "text": "wetten.overheid.nl, rijksoverheid.nl, cbs.nl, data.overheid.nl, lokaleregelgeving.overheid.nl** — all directly reachable via `curl`, no gating found. wetten.overheid.nl in particular parses cleanly with a simple HTML-tag-strip; no need for a browser or WebFetch's summariser for Dutch statutory text."
+    },
+    {
+      "n": 6,
+      "text": "A caution, not a target**: this session's own experience is that WebFetch's AI-summarised fetch is not reliable for verbatim quote extraction — Finding 2 exists because of it. Prefer `curl` + direct text extraction (`pypdf` for PDFs, tag-stripping for HTML) for anything that will become a quoted `basis` field, and treat subagent-reported quotes as leads to re-verify, not citations to trust. ---"
+    }
+  ],
+  "session_conditions": "Two unrelated pieces of work, both requested directly by Thomas.\n\n**Part 1 — the two priority checks `G.47.md` itself flagged as most urgent.**\nNeither Grok's original conversation thread nor the original round-3 JSON\nresponse was available to this session, so both checks were done by pulling\nthe actual primary-source documents directly (MONSTAT's PDF; the CBS GNI\nInventory PDF; Eurostat's Poland ESMS page) rather than by comparing two\ntranscriptions of each other — a stronger check than the one originally\nspecified, though a different one. **Full PDF/HTML text extraction was done\ndirectly by this session** (`curl` + `pypdf`/HTML-tag-stripping, the same\nmethod `G.46.md` used for the German GNI inventory), not WebFetch's\nAI-summarised fetch — because this same session's own first attempt using\nWebFetch's summariser on the Netherlands material is what surfaced the\nproblem being checked for in the first place (see Corrections).\n\n**Part 2 — the Netherlands municipal-finance depth pass.** Three\ngeneral-purpose subagents were run in parallel, each briefed with this\nproject's own extraction rules (verbatim quotes, URL, location, `AGENCY\nONLY`/`NOT FOUND` conventions, no verdicts) and a specific research question\n(Gemeentefonds/verdeelmodel; WOZ/OZB property-tax chain; Provinciefonds/BBV/\nIv3). Their combined output covered wetten.overheid.nl statutory text,\nrijksoverheid.nl circulaires and technical guides, CBS StatLine tables,\nWaarderingskamer's own valuation-instruction manual, a municipal tax\nordinance (Nijmegen), and a data.overheid.nl dataset description. **Every\nquote that ended up in a minted edge was then independently re-verified by\nthis session directly against the primary source** — downloading the actual\nPDF/HTML and grepping the extracted text — rather than trusted from the\nsubagents' reports as-is. This was a deliberate reaction to Part 1's own\nfinding: subagent/WebFetch-summarised quotes are not reliably verbatim, so\nnothing from this pass was minted into an edge without a second, direct\nread. Two secondary facts (both flagged in the slice's own JSON) rest on\nsubagent extraction only and were kept as corroboration, never as sole\nevidence for an edge.\n\n**What this session did not do**: no other EU-branch priority (SEC03, the\nGerman EVAS backlog, ECB/Eurosystem threads, G1/G2/G3's other tracks) was\ntouched. Germany and Italy, the two other municipal-finance-depth candidates\nconsidered, were not researched — the choice of the Netherlands over them is\nrecorded in Findings 3 but is a judgement call, not something this session\ntested empirically against the alternatives."
+}

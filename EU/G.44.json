@@ -1,0 +1,176 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.44.md",
+  "number": 44,
+  "title": "G.44.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "`Research.1.md` v3.0. Read §§2, 3, 6 before writing this",
+  "predecessor": "G.43.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The edge does not exist, and this is a good result, not a failed\nerrand.** Precise verification is exactly what `G.39.md`'s hedge was\nwithholding judgement for, and precision reveals the hypothesis was wrong,\nnot merely unconfirmed. `Research.1.md` §3 is explicit that a refuted\nhypothesis is a good outcome; this is that, four hand-offs later than the\nquestion was first raised, because nobody had opened the primary source to\nthe specific footnote until this session.",
+  "findings": [
+    {
+      "heading": "1. The ECB-04 citation points at a third, distinct Annex I item, not at either of the corpus's two Eurosystem-accounting nodes",
+      "body": "**What this rests on**: `eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024O2941`,\nread in full live this session. Annex I (\"Financial statements for the\nEurosystem\") is a six-row table (Type of report / Internal-published /\nSource of legal requirement / Purpose):\n\n1. Daily financial statement — Internal\n2. Disaggregated weekly financial statement — Internal\n3. **Consolidated weekly financial statement of the Eurosystem** — Published,\n   Article 15.2 of the Statute of the ESCB — **this is\n   `ecb-eurosystem-weekly-financial-statement`**\n4. Disaggregated monthly financial statement of the Eurosystem — Published,\n   no cited legal-requirement instrument — **not investigated, see below**\n5. **Monthly and quarterly financial information of the Eurosystem** —\n   \"Published and internal\", legal basis \"Statistical regulations, according\n   to which MFIs have to deliver data\" — **this is where footnote (1) is\n   attached**\n6. **Consolidated annual balance sheet of the Eurosystem** — Published,\n   Article 26.3 — **this is `ecb-eurosystem-annual-balance-sheet`**\n\nFootnote (1), attached to row 5 only: *\"The monthly data feed into the\npublished aggregated statistical data required from monetary financial\ninstitutions (MFIs) in the Union. Moreover, as MFIs, the central banks also\nhave to provide, on a quarterly basis, more detailed information than is\nprovided in the monthly data.\"* Row 5's own \"source of legal requirement\" —\nthe BSI statistical regulations — is the same instrument already cited as\n`ecb-mfi-balance-sheet-items`'s own legal basis (`eurostat-edp-gfs-ecb-statistics.json`,\nthis branch, `G.43.md`). The footnote describes the Eurosystem central\nbanks' own dual role as MFI statistical reporters (row 5) feeding the\npublished BSI aggregate — a relationship internal to how BSI is itself\ncompiled, not a dependency of BSI on either of `eurosystem-ecb.json`'s two\npublished nodes (rows 3 and 6)."
+    },
+    {
+      "heading": "2. No fifth node is proposed for row 5",
+      "body": "Row 5's legal-requirement column names the same regulations already\ngoverning `ecb-mfi-balance-sheet-items`. Minting it separately would risk\nexactly the \"same programme under two ids\" duplication `Research.1.md` §9\nwarns against, not add a distinct publication. Not minted."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`eurosystem-ecb.json`'s ECB-04 `_dropped` entry (`G.39.md`) is corrected from `no-node-yet` to `wrong-target`.** Not refuted in content — the quote is real and correctly transcribed — but the entry's framing (\"blocked only on the target node not existing yet\") is superseded: the target node now exists (`G.43.md`) and the citation, once precisely located, does not point at it or at either of `eurosystem-ecb.json`'s two nodes. Updated in place in the JSON slice itself (data, not a hand-off file — editable per normal practice, unlike a `G.*.md` predecessor)."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping: merge `Research.2.md` and `Research.EU.md`. Closed",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Investigate Annex I row 4, \"Disaggregated monthly financial statement of the Eurosystem\"** (Guideline (EU) 2024/2941) — Published, monthly, no cited legal instrument, purpose stated as central-bank-level transparency. A candidate sixth EU-branch node in the same family as the two already minted from this Guideline, needing only a live ECB landing-page check for its own URL and cadence confirmation, the same pattern used for `ecb-eurosystem-annual-balance-sheet` and `ecb-eurosystem-weekly-financial-statement`. **Unchanged from `G.43.md`, by value per unit effort:**"
+    },
+    {
+      "n": 2,
+      "text": "Fetch Guideline ECB/2021/14's own frequency article to resolve the Consolidated Banking Data cadence conflict (`G.43.md` Findings 2)."
+    },
+    {
+      "n": 3,
+      "text": "Check cadence for Supervisory Banking Statistics, Investment Funds statistics, and Insurance Corporations statistics."
+    },
+    {
+      "n": 4,
+      "text": "Open the Alert Mechanism Report's own governing instrument to confirm the MIP scoreboard's annual cadence from the primary source."
+    },
+    {
+      "n": 5,
+      "text": "Verify and mint Eurobarometer (S03-23)."
+    },
+    {
+      "n": 6,
+      "text": "The second joint ECB-Eurostat report (ECB-07, \"BOP-NA ROW consistency report\")."
+    },
+    {
+      "n": 7,
+      "text": "Read EBS Regulation 2019/2152."
+    },
+    {
+      "n": 8,
+      "text": "Regulation (EU) 2021/1058 / 2021/1060 — Title 05's GDP/GNI classification lead."
+    },
+    {
+      "n": 9,
+      "text": "Regulation (EC) No 1217/2009 / (EU) 2023/2674 / (EU) 2018/1091 — the Farm Sustainability Data Network's founding instruments (S03-12)."
+    },
+    {
+      "n": 10,
+      "text": "Any staging batches not among 47, 51–56, 61–62, 69–72 (`G.43.md` did not sweep the full `_staging/` directory)."
+    },
+    {
+      "n": 11,
+      "text": "Fetch and hash SEC01/02/03/06/07/08/09/10 against local copies."
+    },
+    {
+      "n": 12,
+      "text": "Retry `agridata.ec.europa.eu` / `agriculture.ec.europa.eu` for FADN's own metadata."
+    },
+    {
+      "n": 13,
+      "text": "Split `list-main-stats-2025-na` into nine records."
+    },
+    {
+      "n": 14,
+      "text": "Re-measure E4 keying on quote, not id, and reconcile."
+    },
+    {
+      "n": 15,
+      "text": "Delete `scripts/eu-schema-smoke.ts`."
+    },
+    {
+      "n": 16,
+      "text": "Pull the `[NA-Pen] / Table 29` thread."
+    },
+    {
+      "n": 17,
+      "text": "Check whether SEC09's total-level sign flip has a stated explanation elsewhere (`G.28.md` finding 1)."
+    },
+    {
+      "n": 18,
+      "text": "Search for a titled GNI deflator publication, following SEC01's S01-02 lead."
+    },
+    {
+      "n": 19,
+      "text": "Reconcile `EU Meta jsons.docx`'s SEC09/SEC10 batches."
+    },
+    {
+      "n": 20,
+      "text": "Read Art. 11 of the loi modifiée du 22 juin 1963."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.44.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — v3.0, unchanged."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/eurosystem-ecb.json`** — its `_dropped`/`_open_questions` entries now carry the resolved finding."
+    },
+    {
+      "n": 4,
+      "text": "A browser** (the `Claude_Browser` tool) — for cheap check 1 especially, a direct continuation of this session (same Guideline, next row of the same table)."
+    },
+    {
+      "n": 5,
+      "text": "The next target**: cheap check 1 (Annex I row 4) is the most direct continuation and likely cheap — same source document, same verification pattern already used twice on this Guideline. Otherwise resume the CBD cadence conflict (check 2) or the three no-cadence ECB dataset leads (check 3). ---"
+    }
+  ],
+  "session_conditions": "**Tenth part of today's continuation**, on Thomas's direct instruction to\n\"wire the `ecb-mfi-balance-sheet-items` edge\" — the single cheap check\n`G.43.md` had flagged as highest value-per-effort. Read Guideline (EU)\n2024/2941 (ECB/2024/31) in full, live, via EUR-Lex\n(`CELEX:32024O2941`) — all 33 articles and the opening of Annex I and Annex\nII, located via in-page text search once `get_page_text`'s truncation made\nscrolling to the specific footnote impractical. This is a narrow,\nsingle-question session: one citation, checked precisely, nothing else\nopened."
+}

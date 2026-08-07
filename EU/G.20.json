@@ -1,0 +1,225 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.20.md",
+  "number": 20,
+  "title": "G.20.md — EU galaxy hand-off",
+  "date": "2026-08-04",
+  "governing_briefs": "Research.EU.md v0.1 (fixed) + Research.2.md v2.1 (fixed) — **read in full this session. Four-session blocker closed.**",
+  "predecessor": "G.19.md (2026-08-04).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The branch had no orphans. It had an unread instruction.**\n\nG.19's headline was that `EU Meta jsons.docx` is \"two research strands\naccumulating in the same file\", only one of which the `G.*` chain discusses. The\nmeasurement was right and the framing was wrong. Both bodies of work are\ninstruction-following: the institutional strand executes Thomas's A-list, and the\nEurostat strand executes `Research.EU.md` §10 **in order, including its\ninstruction to stop** — one high-authority NSI and no second one. `Soft\nConnections.docx` turns out to be a single list spanning both, not the\ninstitutional-only list three hand-offs describe.\n\nNothing was accumulating by accident. What was lost was provenance, and it was\nlost for one reason: **the governing briefs went unread for four sessions while\nsitting readable on disk.** Every \"surprise\" in G.19 dissolves on reading them.\n\nSecondarily, and more concretely: **the schema blocker is resolved and EU slices\nare no longer blocked from import.** Thomas took the decision this session; it is\nimplemented, tested and recorded.",
+  "findings": [
+    {
+      "heading": "1. The governing briefs, read at last — and one of them carries a rule nobody has followed",
+      "body": "`Research_2_md.docx` and `Research_eu.docx` were converted with `python-docx` and\nread in full. They were never unavailable; from G.16 onward they were on disk.\n\n**`Research.2.md` v2.1 is `Research.1.md` with two sections removed and one rule\nadded.** §§1–7 and §10 are substantively identical. Removed: **§8** (the entire\nCanada/US work queue, Items 1–4) and **§9's node-id list** — the heading and its\nwarning survive:\n\n> Use these exact strings when a document names something already here. Do not\n> invent variants … This has happened twice.\n\nwith **no list under it**. An agent handed only `Research.2.md` therefore gets the\nduplicate-id warning and nothing to check against, which is the exact failure mode\nthe warning describes. `Research.1.md` remains the only carrier of the id list.\n\n**Added, and new — the Part B Output Rule (2026-08-02):**\n\n> Whenever a research batch or session window is closed, or whenever a G.*.md\n> handover note is requested, the agent **must** also produce a standalone,\n> savable list of all current Part B soft connections and provisional\n> observations.\n\nIt specifies id / from / to / nature / strength / evidence pointer / notes, and a\nfilename shape (`PartB_soft_connections_YYYY-MM-DD.md`). **No `G.*` log mentions\nit and no session has produced one.** It went unmet because it sits *after* §10's\n\"eight things that matter\" summary — past the point where the brief reads as\nfinished — and because nobody opened the file for four sessions. Honoured this\nsession; see finding 4.\n\n**`Research.EU.md` v0.1** is short (45 lines) and is the origin of finding 3. Its\nclosing line, written 2026-08-02, is now stale: *\"No extraction has been\nperformed. Future agents start here.\"*"
+    },
+    {
+      "heading": "2. The schema blocker is resolved, implemented and tested",
+      "body": "G.19 finding 5 recorded that `src/lib/types.ts` could not express an EU node and\nthat the decision was Thomas's. **He took it this session:** `country` becomes an\nopen ISO-3166 alpha-2 code, plus a new `supranational` jurisdiction level.\n\nWhat shipped, all in `src/`:\n\n- `Country` is now `'CA' | 'US' | 'INT' | 'EU' | (string & {})` — the literals\n  survive as an autocomplete hint list, the open arm accepts `'DE'`, `'FR'`,\n  `'IT'` and the rest. **Adding a member state is a data change, not a schema\n  change**, which the planned China galaxy will need too.\n- `JurisdictionLevel` gained `supranational`, and it is **not** a synonym for\n  `international`. The difference is legal force: an international body publishes\n  a standard adopted by choice; a supranational body legislates. Filing the EU as\n  `international` would erase precisely the property the Canada/US pair was\n  measured to lack.\n- **Colour is keyed to a hue *family*, not a country.** 27 families cannot be\n  told apart at fit zoom, so all member states draw from one green EU family\n  (100°–158°, the only free arc wide enough for five steps). Which member state\n  is carried by the label, the flag and the region filter. **This is a deliberate\n  loss of one discrimination** and should be revisited if the member-state layer\n  ever gets deep enough to need it.\n- **The compiler check it cost was replaced, not dropped.** A closed union used\n  to guarantee every country had a colour. `validate` now errors on any country\n  with no `COUNTRY_FAMILY` entry, and both fill and rim fall to a flat\n  unclassified grey rather than into a family — so an unmapped country is visible\n  rather than absorbed. Absorbing unknowns into a bucket is how nine\n  international bodies were recorded as Canadian for five sessions.\n\n**Verified, not assumed:** `npm run check` passes; `npm run validate` passes with\nthe corpus unchanged at 133 reports / 213 dependencies. Because the corpus\ncontains no EU node, none of the new paths are exercised by real data, so\n`scripts/eu-schema-smoke.ts` fires them against doctored data — 20 checks, all\npassing, including both new validator guards. That follows the house precedent\nset by the terminus rules, which were also fired against doctored data before\nbeing trusted.\n\nRecorded in `REPORTS.md` under *Decisions*; `EU/slices/README.md`'s blocker\nmarked resolved with the original kept in a `<details>` block."
+    },
+    {
+      "heading": "3. The Eurostat strand is `Research.EU.md` §10 being executed, not an orphan",
+      "body": "G.19 described the statistical strand as \"an entirely separate Eurostat programme\nthat no `G.*` log discusses at all\". True as stated — and it reads as accidental\naccumulation, which it is not.\n\n`Research.EU.md` §10 is a four-item priority queue. Every item is in the blob:\n\n| §10 item | What is in the blob |\n|---|---|\n| 1. Statistical Requirements Compendium (latest) | SRC 2026 — 47 records, the largest single batch |\n| 2. ESA 2010 transmission programme + national quality reports | The ESA 2010 / Annex B material, finding 6 |\n| 3. One high-authority NSI methodology page | Destatis GNI and QNA inventories |\n| 4. **\"Stop and report before expanding to a second member state\"** | See the counts below |\n\nThe fourth is the one that settles it. Raw string counts over\n`_staging/00-blob-fulltext.txt`:\n\n| Agency | Mentions |\n|---|---|\n| Destatis | **159** |\n| INSEE | 8 |\n| Statistics Austria | 4 |\n| ISTAT | 3 |\n| Statistics Finland | 3 |\n| Statistics Netherlands | 3 |\n| Statistics Poland | 1 |\n| Statistics Sweden | 0 |\n\nOne member state worked, the rest incidental mentions. `Research.EU.md` §9 names\nGermany, France and Italy as the first three NSIs and §10 says stop after one.\n**That is a completed, instruction-following work programme**, not an orphan.\n\n**What this rests on:** the counts are raw string matches, not records read for\nmeaning, and I did not open the Destatis records to confirm they are extraction\nrather than discussion. The claim is about provenance, not quality."
+    },
+    {
+      "heading": "4. `Soft Connections.docx` is one list across both strands, and it is 46 entries with no gaps",
+      "body": "G.18 and G.19 both describe Part B as institutional material \"stuck at sc-46\".\nThe number is right; the description is not. Measured this session:\n\n- **46 distinct ids, sc-1 … sc-46, no missing numbers in the range.**\n- **56 entries in 8 top-level blocks** — sc-01…sc-10 appear twice.\n- The split between strands is sharp: **sc-1…sc-35 are the statistical /\n  Eurostat strand** (SIMS, ESA 2010, Destatis, SRC 2026, DGINS, the quality\n  framework) and **sc-36…sc-46 are the institutional budget strand** (Section\n  III, Horizon Europe, MFF codes, SEC03). So Part B is *mostly* the strand the\n  `G.*` chain does not discuss.\n- `_staging/10-part-b-soft-connections.ndjson` is a **subset duplicate** of\n  sc-01…sc-10, not new material.\n- Three ids differ between their two copies (sc-06, sc-07, sc-09) and all three\n  differences are cosmetic — an abbreviation expanded, a regulation number\n  written out. **No substantive conflict.** The richer copy is kept.\n- **One block is not valid JSON**: sc-03's `notes` string is unterminated. Every\n  record in it survives in a clean duplicate, so nothing was lost, but the docx\n  cannot be machine-read as-is without recovery.\n\nWritten out to `EU/PartB_soft_connections_2026-08-04.md` (+ `.json`), which\ndischarges the Part B Output Rule for the first time. **It is a transcription,\nnot a verification** — no entry was checked against a Part A quote."
+    },
+    {
+      "heading": "5. Cheap check #9 — the Annex B material is real; the prediction is not yet scored",
+      "body": "G.19's finding 6 predicted that ESA 2010's Annex B transmission programme would\nsupply the documented supranational-to-national edge shape the Canada/US pair\nlacks, and listed a grep as the cheap test. Run: **82 hits** for\n`Annex B` / `transmission programme` in `_staging/00-blob-fulltext.txt`.\n\nThe material behind them is the operative provision itself, quoted verbatim in\nthe blob's own Part A records:\n\n> \"The Member States shall transmit to the Commission (Eurostat) the accounts and\n> tables set out in Annex B within the time limits specified therein for each\n> table.\"\n\nwith the transmission programme's own presentation document, a full overview\ntable of it, and a dated first-application clause (\"to be transmitted from 1\nSeptember 2014\"). Records naming Tables 1–29 are present.\n\n**Explicitly not scored, in either direction.** Whether Annex B's *tables* satisfy\n`Research.1.md` §4's third binding condition — it has a title — is a judgement\nabout the records, and this session read none of them for meaning. If the\nprogramme names obligations and table numbers but no *publications*, that is\n`AGENCY ONLY` at scale and the prediction fails. **Per `Research.1.md` §3 that\nadjudication is not the research role**, so it is left standing as G.19 framed it:\na logged prediction with confirmed material behind it, awaiting a session that\nreads the records."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "G.19's headline framing — overstated.** \"It is two research strands that were accumulating in the same file\" is accurate as measurement and misleading as description: both strands are instruction-following, and the Eurostat one executes `Research.EU.md` §10 in order. The *\"Neither strand knew about the other\"* line should be read as a fact about the hand-off chain, not about the work. See finding 3."
+    },
+    {
+      "n": 2,
+      "text": "G.19's account of Part B — refuted in substance, confirmed in number.** \"Part B is untouched, still stuck at sc-46\" gives the right count and the wrong content: `Soft Connections.docx` is one list across both strands, and sc-1…sc-35 are the *statistical* strand, not the institutional one. See finding 4."
+    },
+    {
+      "n": 3,
+      "text": "G.19 finding 5 — resolved.** The `Country` / `JurisdictionLevel` schema blocker is decided, implemented, tested and recorded. `EU/slices/README.md`'s ⚠ Blocker section no longer applies and is marked so."
+    },
+    {
+      "n": 4,
+      "text": "G.19's *Session conditions* — closed.** \"The governing briefs still did not arrive … four sessions outstanding\" is discharged. G.19 was already explicit that the blocker was self-inflicted rather than external; that judgement is confirmed. Nothing prevented any of the previous four sessions from opening them."
+    },
+    {
+      "n": 5,
+      "text": "G.19's *What to pass* item 4 — closed.** \"Fourth time of asking\" is answered; the briefs are read and this file records what they say."
+    },
+    {
+      "n": 6,
+      "text": "No substantive finding in G.16, G.17 or G.18 was checked this session**, and none should be treated as revisited. In particular DISC-07-03, the MFF code taxonomy, stands exactly as G.18 left it: very well evidenced, and still an inference in the one narrow respect that no document states the rule."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections (SEC00–SEC10), finish first.",
+      "items": [
+        {
+          "n": 1,
+          "text": "SEC05 (Court of Auditors)** — read in full in G.18 for checks, **not extracted**. Still the recommended next extraction target, and still cheap: the PDF is directly readable and its content is characterised in G.18's findings 1–6. **SEC08 (Ombudsman)** — still not held."
+        },
+        {
+          "n": 2,
+          "text": "SEC06, SEC07** — same position as SEC05. Read, characterised, not extracted."
+        },
+        {
+          "n": 3,
+          "text": "SEC01 (Parliament), SEC02 (Council)** — headline level only. Approach SEC02's headcount gap with SEC07's narrative-vs-table mismatch (498/497) in hand as a worked example of a benign cause."
+        },
+        {
+          "n": 4,
+          "text": "SEC00** — headline level only, and still the likeliest place for a printed MFF nomenclature key, which is the one thing that would convert DISC-07-03 from inference to documented rule."
+        },
+        {
+          "n": 5,
+          "text": "Soft_Connections.docx (Part B)** — **transcribed but not advanced.** Now written out to `PartB_soft_connections_2026-08-04.md`. Still missing sc-47–sc-50 from G.16; SEC04 still owes an addendum; G.18's two new candidates (the SEC07 Title 2 joint-services note, the SEC07 item 2 6 0 3 three-institution remark) still have no sc-numbers."
+        },
+        {
+          "n": 6,
+          "text": "SEC07_batch.md** — **no longer needed**, per G.18. Unchanged."
+        },
+        {
+          "n": 7,
+          "text": "SEC06_batch.md** — still wanted once, format check only."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog, after A.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads, after B.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping, whenever convenient.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": [
+        {
+          "n": 1,
+          "text": "~~**The `Country` / `JurisdictionLevel` schema decision.**~~ **DONE** — finding 2. No longer gates anything."
+        },
+        {
+          "n": 2,
+          "text": "Verify and slice the staged Eurostat strand** — 814 distinct Part A records. One slice at a time, per `EU/slices/_staging/PROMPT-for-splitting-agent.md`. Suggested first slice: the ESA 2010 transmission-programme material, because it is the test of finding 5 and the material is confirmed present. **This is now the largest body of unworked material in the branch and nothing blocks it.**"
+        },
+        {
+          "n": 3,
+          "text": "The prose section** — `_staging/20-prose-sections.txt`, its own session."
+        },
+        {
+          "n": 4,
+          "text": "Reconcile the 49 duplicate and 77 id-less records** before anything is built on them."
+        },
+        {
+          "n": 5,
+          "text": "NEW — reconcile the two priority queues.** See *Secondary observations*. A one-paragraph decision, best folded into the D merge."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "SEC00, SEC09, SEC10 MFF codes** — confirm `7.2.0xx` / `7.2.9xx` / `7.2.Xxx` and look for `9SPEC` variants. Also the only remaining test of `7.1.2<section>`, since SEC05 and SEC07 have no European Schools line."
+    },
+    {
+      "n": 2,
+      "text": "SEC00 for a printed nomenclature key.** Still the single highest-value item in this list if it exists."
+    },
+    {
+      "n": 3,
+      "text": "SEC09 and SEC10 item 3 0 1 1** — settles whether the SEC05/SEC06 form is the majority."
+    },
+    {
+      "n": 4,
+      "text": "SEC04 Chapter 10 0 verbatim** — resolve the housing-allowance placement divergence against SEC05's Chapters 12/14."
+    },
+    {
+      "n": 5,
+      "text": "SEC04 item 1 6 5 6 heading verbatim** — establish whether it is the same instrument as SEC06's item 1 6 4 0."
+    },
+    {
+      "n": 6,
+      "text": "SEC06 Title 2 re-read for a reciprocal joint-services note** — underpins the asymmetry claim in G.18 finding 4. Carried from G.19, still outstanding:"
+    },
+    {
+      "n": 7,
+      "text": "Characterise the 155 non-`S` loose records.** 49 are known duplicates of batch content; the rest are unclassified. One pass over `10-loose-record.ndjson`."
+    },
+    {
+      "n": 8,
+      "text": "Match the 8 record-less batch headers to their records** by session window, and establish whether the 251 loose-only records are their missing bodies. Done this session:"
+    },
+    {
+      "n": 9,
+      "text": "~~**Grep `00-blob-fulltext.txt` for `Annex B` and `transmission programme`.**~~ **DONE** — 82 hits, material confirmed present. See finding 5. Added this session:"
+    },
+    {
+      "n": 10,
+      "text": "Read ten of the ESA 2010 / Annex B records for meaning** and settle whether Annex B names *publications* or only tables and deadlines. This scores G.19's finding 6 either way, and a refutation is worth as much as a confirmation. Highest value per unit effort in this list."
+    },
+    {
+      "n": 11,
+      "text": "Confirm the Destatis records are extraction rather than discussion.** Finding 3 rests on string counts; one pass over the Destatis records upgrades it from provenance to substance."
+    },
+    {
+      "n": 12,
+      "text": "Check whether sc-47–sc-50 exist anywhere** — G.16 generated them and they are not in `Soft Connections.docx`. Grep `00-blob-fulltext.txt` and the `G.*` sidecars before assuming they were lost."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.20.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — the standing brief. Non-negotiable, and no summary substitutes for it. **Note it is now the only carrier of the §9 node-id list**; `Research.2.md` dropped it."
+    },
+    {
+      "n": 3,
+      "text": "`EU/slices/README.md`** — layout. The blocker in it is resolved."
+    },
+    {
+      "n": 4,
+      "text": "The next target PDF** — `SEC05.pdf` per priority A1. Already in `EU/`."
+    },
+    {
+      "n": 5,
+      "text": "`PartB_soft_connections_2026-08-04.md`** — the current Part B list, in place of `Soft Connections.docx`, which is larger, duplicated and not valid JSON."
+    },
+    {
+      "n": 6,
+      "text": "~~`Research_2_md.docx` and `Research_eu.docx`~~ — **no longer needed.** Read this session; finding 1 records what they say. Pass them only if the D-item merge is the work being done. ---"
+    }
+  ],
+  "session_conditions": "Session type: **infrastructure and schema, not research.** This session read no\nsource document for evidence, extracted no Part A record, verified no edge and\nproposed no node. Treat the corpus as unchanged since G.18 in every respect the\nevidence standard cares about.\n\nWhat was available and used: **full filesystem access, working Python with\n`python-docx`, and a working npm toolchain** (`npm run check`, `npm run\nvalidate`). The second session in the branch's history with a filesystem, and the\nfirst able to run the app's own tooling.\n\nWhat **was** read in full, stated plainly because the positive claims depend on\nit: `Research.2.md.docx`, `Research.eu.docx`, `Soft Connections.docx`,\n`EU/slices/README.md`, `Research.1.md`, `G.19.md`, and the parts of `src/` that\nthe schema change touched.\n\nWhat was **not** done, stated plainly because everything downstream inherits it:\n\n- **No `SEC*.pdf` was opened.** The six cheap checks G.18 left outstanding are\n  all still outstanding, unchanged, now three sessions old.\n- **No content of the blob was judged.** The 82 `Annex B` hits in finding 6 were\n  counted and their surrounding records read *as text*; no record was assessed\n  for meaning, no id minted, nothing mapped to the graph schema.\n- **No Part B entry was verified against Part A.** The list produced this session\n  is a faithful transcription of what `Soft Connections.docx` already claimed,\n  and nothing more. Its `evidence` column is a pointer, not a quote.\n- **The D-item merge was not performed.** The briefs were *read*; merging them\n  into one governing document is still to do."
+}

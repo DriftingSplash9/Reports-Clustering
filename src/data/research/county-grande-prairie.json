@@ -1,0 +1,255 @@
+{
+  "_slice": "County of Grande Prairie No. 1 — the template tested",
+  "_researched": "2026-07-28",
+  "_note": "The second municipality, researched to find out whether the Grande Prairie template replicates. It does: the same six documents exist, published under the same statute, naming their inputs in the same places. A rural municipality adds two things a city does not have in quantity — regulated property assessment (farmland, machinery and equipment, linear) valued under provincial Minister's Guidelines rather than by the local assessor, and a seniors housing requisition large enough to appear as its own line. Both are additions to the pattern, not departures from it. The template holds.",
+  "reports": [
+    {
+      "id": "cgp-tax-rate-bylaw",
+      "title": "Property Tax Bylaw (Rates of Taxation)",
+      "publisher": "County of Grande Prairie No. 1",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "County of Grande Prairie, Alberta",
+      "description": "Annual bylaw setting tax rates for each property class in the county, passed under the Municipal Government Act. States the total to be raised by taxation, the assessment behind each class including farmland, machinery and equipment and linear property, and every requisition collected for another body — with prior-year under-levies carried forward and corrected.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.countygp.ab.ca/home-property-environment/property-taxes/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "cgp-budget",
+      "title": "County Budget",
+      "publisher": "County of Grande Prairie No. 1",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "County of Grande Prairie, Alberta",
+      "description": "Annual operating and capital budget adopted at a dedicated budget council meeting, setting the net funding requirement that the tax rate bylaw then raises. The 2025 budget set that requirement at $154,133,907.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.countygp.ab.ca/council-administration/budget-and-financial-documents/",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "cgp-assessment-roll",
+      "title": "Property Assessment Roll",
+      "publisher": "County of Grande Prairie No. 1",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "County of Grande Prairie, Alberta",
+      "description": "Annual valuation of every assessable property in the county, notices mailed by the end of May. Unlike a city roll, most of its value sits in classes the local assessor does not value at market: $2.27 billion of machinery and equipment, $2.46 billion of linear property, and $122 million of farmland, all valued under provincial Minister's Guidelines.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.countygp.ab.ca/home-property-environment/property-assessments/",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "cgp-financial-statements",
+      "title": "Consolidated Audited Financial Statements",
+      "publisher": "County of Grande Prairie No. 1",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "County of Grande Prairie, Alberta",
+      "description": "Annual audited statements required by the Municipal Government Act and returned to Municipal Affairs by May 1. Schedule 3 separates real property taxes from linear property taxes and nets out each requisition collected for an external body.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.countygp.ab.ca/council-administration/budget-and-financial-documents/",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "cgp-municipal-census",
+      "title": "Municipal Census",
+      "publisher": "County of Grande Prairie No. 1",
+      "country": "CA",
+      "jurisdiction_level": "municipal",
+      "region": "County of Grande Prairie, Alberta",
+      "description": "Municipal population count conducted at the county's discretion under the Municipal Government Act, most recently in 2024, and reported to Municipal Affairs for the population list.",
+      "releases_per_year": 0.25,
+      "cadence_note": "Irregular and discretionary, like the city's. Two adjacent municipalities both happened to count in 2024, which is coincidence rather than a cycle.",
+      "last_updated": null,
+      "url": "https://www.countygp.ab.ca/news/posts/county-of-grande-prairie-releases-2024-census-results/",
+      "domains": [
+        "population",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "grande-spirit-requisition",
+      "title": "Grande Spirit Foundation Seniors Housing Requisition",
+      "publisher": "Grande Spirit Foundation",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Grande Prairie region, Alberta",
+      "description": "Annual requisition levied on member municipalities in the Grande Prairie region to fund seniors housing, collected through their property tax bylaws. A housing management body under the Alberta Housing Act — neither a government nor a department, but able to requisition tax from one.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.grandespirit.org/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "health"
+      ]
+    },
+    {
+      "id": "ab-regulated-property-guidelines",
+      "title": "Regulated Property Assessment Minister's Guidelines",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The Minister's Guidelines that set assessed values for regulated property — farmland, machinery and equipment, linear property and railway. These classes are not valued at market by the local assessor; the province prescribes the procedure and the rates, and the municipality applies them. Issued as ministerial orders and updated for each assessment year.",
+      "releases_per_year": 1,
+      "cadence_note": "Published as a set of four guidelines per assessment year. Modelled as one node because Alberta publishes and revises them together as 'regulated property minister's guidelines'; splitting them would add three nodes with identical edges.",
+      "last_updated": null,
+      "url": "https://www.alberta.ca/municipal-property-assessment-legislation-and-publications",
+      "domains": [
+        "assessment",
+        "taxation",
+        "energy-royalties"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cgp-tax-rate-bylaw",
+      "target_report_id": "cgp-budget",
+      "relationship_type": "calculated_from",
+      "basis": "Bylaw 3250 recites that the County 'has prepared and adopted detailed estimates of the municipal revenue, expenses and expenditures as required, at the Budget Council meeting held on April 15, 16 and 17, 2025', tabulates those estimates line by line, and concludes 'the total amount to be raised by taxation is $154,133,907'. The bylaw is that number turned into rates.",
+      "evidence_url": "https://www.countygp.ab.ca/media/b1znezer/3250-2025-property-tax-bylaw.pdf"
+    },
+    {
+      "source_report_id": "cgp-tax-rate-bylaw",
+      "target_report_id": "cgp-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "The bylaw directs the County Manager 'to levy the following rates of taxation of the assessed value of all property as shown on the assessment roll of County of Grande Prairie No. 1', then sets out $12,013,900,730 of taxable assessment split by class.",
+      "evidence_url": "https://www.countygp.ab.ca/media/b1znezer/3250-2025-property-tax-bylaw.pdf"
+    },
+    {
+      "source_report_id": "cgp-tax-rate-bylaw",
+      "target_report_id": "ab-education-property-tax-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "The bylaw levies a 2025 Alberta School Fund requisition of $27,418,579 and an opted-out school board requisition of $1,249,833, each adjusted by the prior year's under-levy.",
+      "evidence_url": "https://www.countygp.ab.ca/media/b1znezer/3250-2025-property-tax-bylaw.pdf"
+    },
+    {
+      "source_report_id": "cgp-tax-rate-bylaw",
+      "target_report_id": "ab-dip-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "The bylaw levies a designated industrial property requisition of $359,764 at a rate of 0.00007010 against $5,132,150,940 of DIP assessment, and carries a DIP appeal reversal of $130,489 against the prior year.",
+      "evidence_url": "https://www.countygp.ab.ca/media/b1znezer/3250-2025-property-tax-bylaw.pdf"
+    },
+    {
+      "source_report_id": "cgp-tax-rate-bylaw",
+      "target_report_id": "grande-spirit-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "The bylaw levies $1,061,850 for the Grande Spirit Foundation at 0.00008841 against $12,010,520,340 of assessment. The County's own tax page states plainly that 'requisition amounts to the Grande Spirit Foundation are set by the Province of Alberta' — the municipality collects a figure it does not set.",
+      "evidence_url": "https://www.countygp.ab.ca/media/b1znezer/3250-2025-property-tax-bylaw.pdf"
+    },
+    {
+      "source_report_id": "cgp-assessment-roll",
+      "target_report_id": "ab-regulated-property-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Nearly 40% of the county's taxable assessment is machinery and equipment and linear property, with farmland on top — all regulated classes. Alberta publishes annual Minister's Guidelines for each, and the assessment regulations require an assessor preparing a regulated assessment to follow the procedures set out in the applicable guideline rather than value at market.",
+      "evidence_url": "https://www.alberta.ca/municipal-property-assessment-legislation-and-publications"
+    },
+    {
+      "source_report_id": "gp-assessment-roll",
+      "target_report_id": "ab-regulated-property-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The city's roll carries the same regulated classes at much smaller scale — $1.45 million of farmland and $44.4 million of machinery and equipment in Bylaw C-1486 — and they are valued under the same provincial guidelines. The dependency is structural, not proportional to size.",
+      "evidence_url": "https://www.alberta.ca/municipal-property-assessment-legislation-and-publications"
+    },
+    {
+      "source_report_id": "cgp-financial-statements",
+      "target_report_id": "cgp-budget",
+      "relationship_type": "uses_data_from",
+      "basis": "Every operating schedule carries a budget column headed '(Budget - Note 26)' beside the actual — taxation of $154,224,852 budgeted against $152,165,231 collected.",
+      "evidence_url": "https://www.countygp.ab.ca/media/fkzfbdf4/county-of-grande-prairie-no-1-2025-financial-statements-audit.pdf"
+    },
+    {
+      "source_report_id": "cgp-financial-statements",
+      "target_report_id": "ab-education-property-tax-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Schedule 3 nets provincial school of $27,396,849 and separate school of $1,249,833 out of gross taxes, noting that the schedule 'also includes requisitions for education and other external organizations that are not part of the municipal reporting entity'.",
+      "evidence_url": "https://www.countygp.ab.ca/media/fkzfbdf4/county-of-grande-prairie-no-1-2025-financial-statements-audit.pdf"
+    },
+    {
+      "source_report_id": "cgp-financial-statements",
+      "target_report_id": "ab-dip-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Schedule 3 nets designated industrial properties of $359,713 actual against $359,764 budgeted.",
+      "evidence_url": "https://www.countygp.ab.ca/media/fkzfbdf4/county-of-grande-prairie-no-1-2025-financial-statements-audit.pdf"
+    },
+    {
+      "source_report_id": "cgp-financial-statements",
+      "target_report_id": "grande-spirit-requisition",
+      "relationship_type": "uses_data_from",
+      "basis": "Schedule 3 nets a senior foundation requisition of $1,054,798 actual against $1,061,836 budgeted. This schedule is also what disambiguates the two requisitions in the tax bylaw, where the PDF's table layout leaves the Grande Spirit and DIP figures adjacent and easy to transpose.",
+      "evidence_url": "https://www.countygp.ab.ca/media/fkzfbdf4/county-of-grande-prairie-no-1-2025-financial-statements-audit.pdf"
+    },
+    {
+      "source_report_id": "cgp-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Prepared in accordance with Canadian public sector accounting standards established by the Public Sector Accounting Board. The auditor's other-matter paragraph records that the prior year's statements carried a modified opinion for a departure from those standards on asset retirement obligations — the standard binding in the breach.",
+      "evidence_url": "https://www.countygp.ab.ca/media/fkzfbdf4/county-of-grande-prairie-no-1-2025-financial-statements-audit.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-fir",
+      "target_report_id": "cgp-financial-statements",
+      "relationship_type": "uses_data_from",
+      "basis": "The same statutory requirement that binds the city: each municipality prepares annual audited financial statements and a financial information return, submitted together to Municipal Affairs by May 1.",
+      "evidence_url": "https://www.alberta.ca/annual-financial-reporting-for-municipalities"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-equalized-assessment",
+      "target_report_id": "cgp-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "Each municipality submits information on every assessable property annually for the audit that determines its equalized assessment. The county's is the same submission as the city's, against a very different mix of property.",
+      "evidence_url": "https://open.alberta.ca/publications/1718-1771"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-population-list",
+      "target_report_id": "cgp-municipal-census",
+      "relationship_type": "uses_data_from",
+      "basis": "Municipalities that choose to conduct a census report the results to Municipal Affairs by September 1 and those results are reflected in the population list. The county counted in 2024.",
+      "evidence_url": "https://open.alberta.ca/opendata/alberta-municipal-affairs-population-list"
+    },
+    {
+      "source_report_id": "cgp-financial-statements",
+      "target_report_id": "cgp-assessment-roll",
+      "relationship_type": "uses_data_from",
+      "evidence": "implied",
+      "basis": "The city's statements say outright that property tax revenues are based on assessment values; the county's carry no equivalent sentence, so the same edge is not available on the same terms. This is a difference in disclosure wording, not in reality — the county levies against the same assessment roll the city does, under the same statute. The clearest case in the graph of the evidence standard tracking what got written down rather than what is true."
+    },
+    {
+      "source_report_id": "cgp-budget",
+      "target_report_id": "ab-municipalaffairs-lgff-capital",
+      "relationship_type": "uses_data_from",
+      "evidence": "implied",
+      "basis": "The county receives LGFF capital funding — the programme is formula-allocated to every Alberta municipality and the city's budget names its own allocation to the dollar. The county's budget documents were not read line by line, so the allocation figure has not been seen in a county document. Implied rather than documented until that PDF is checked; this is the weakest of the implied set and the easiest to resolve."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "grande-spirit-requisition -> ab-municipalaffairs-equalized-assessment",
+      "source": null,
+      "target": "ab-municipalaffairs-equalized-assessment",
+      "reason": "no-document",
+      "why": "A regional housing requisition is apportioned among member municipalities on some measure of assessment, and equalized assessment is the obvious candidate. No document naming the basis was found. This is exactly the sort of plausible link the evidence standard exists to keep out."
+    }
+  ]
+}

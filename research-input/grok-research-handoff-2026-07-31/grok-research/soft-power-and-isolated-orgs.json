@@ -1,0 +1,434 @@
+{
+  "_layer": "SOFT / INTERPRETIVE / RITUAL-PEER",
+  "_status": "PROPOSAL — discuss with Thomas before promoting any edge into the main documented graph. Cross-layer links to financing file confirmed 2026-07-30 for org-imf, org-oecd, org-wef.",
+  "_note_for_claude": "Thomas wants to talk ASAP about expanding soft-power / interpretive connections. He is comfortable with isolated clusters and 'lone soldier' org nodes. He sees value in organisations that hold regular, relatively inclusive ritual releases or meetings (flagships, annual reports, ministerial conferences, central-bank gatherings). He notes that dates rarely line up cleanly and that large orgs move slowly. IMF ↔ WEF mutual awareness is an example of the kind of implied consideration he wants captured here, not in the hard calculated_from layer. Keep this layer strictly separated: different evidence flag, never feed main-graph authority rankings. Financing edges (quotas, assessed contributions) can stay higher-confidence; pure agenda-resonance stays soft. Talk to him before merging anything.",
+  "_design_rules": [
+    "Org is the central node; major recurring reports and standing meetings are children / branches.",
+    "Edges of type 'interpreted_influence', 'ritual_peer_forum', 'agenda_resonance', or 'mutual_consideration' only.",
+    "Every soft edge must carry a short justification and a confidence tag (documented_financing | documented_citation | political_inference | ritual_overlap).",
+    "Isolated clusters and lone soldiers are intentional and allowed.",
+    "Do not invent arithmetic dependencies. Do not claim soft edges change the authority score of CPI, LFS, etc."
+  ],
+  "_cross_layer_links": {
+    "companion_file": "financing-international-orgs.json",
+    "linked_org_nodes": ["org-imf", "org-oecd", "org-wef"],
+    "note": "Financing edges for these organisations (quota, assessed contribution, project grants) live exclusively in the financing layer. Soft edges remain interpretive only. No soft edge is promoted to calculated_from or uses_data_from. World Bank Group financing currently uses the placeholder org-wbg-approx; no corresponding soft-power organisation node has been created yet."
+  },
+  "reports": [
+    {
+      "id": "org-bis",
+      "title": "Bank for International Settlements (BIS)",
+      "publisher": "BIS",
+      "scope": "International bodies",
+      "type": "organisation",
+      "notes": "Central bankers' bank. Hosts Basel Committee. Regular research and statistics that feed national prudential frameworks (already partially linked via OSFI CAR / Basel in main graph)."
+    },
+    {
+      "id": "bis-annual-report",
+      "title": "BIS Annual Report",
+      "publisher": "BIS",
+      "scope": "International bodies",
+      "cadence": "Annual (typically late June)",
+      "type": "flagship_report",
+      "parent_org": "org-bis"
+    },
+    {
+      "id": "bis-quarterly-review",
+      "title": "BIS Quarterly Review",
+      "publisher": "BIS",
+      "scope": "International bodies",
+      "cadence": "Quarterly (Mar/Sep/Dec core; June conditional)",
+      "type": "flagship_report",
+      "parent_org": "org-bis"
+    },
+    {
+      "id": "bis-annual-economic-report",
+      "title": "BIS Annual Economic Report",
+      "publisher": "BIS",
+      "scope": "International bodies",
+      "cadence": "Annual",
+      "type": "flagship_report",
+      "parent_org": "org-bis",
+      "notes": "Distinct from the institutional Annual Report; focuses on economic analysis."
+    },
+    {
+      "id": "org-wto",
+      "title": "World Trade Organization (WTO)",
+      "publisher": "WTO",
+      "scope": "International bodies",
+      "type": "organisation",
+      "notes": "Treaty-based. Trade Policy Review Mechanism and monitoring reports create regular peer-review pressure on members."
+    },
+    {
+      "id": "wto-world-trade-report",
+      "title": "World Trade Report",
+      "publisher": "WTO",
+      "scope": "International bodies",
+      "cadence": "Annual",
+      "type": "flagship_report",
+      "parent_org": "org-wto"
+    },
+    {
+      "id": "wto-annual-report",
+      "title": "WTO Annual Report",
+      "publisher": "WTO",
+      "scope": "International bodies",
+      "cadence": "Annual",
+      "type": "flagship_report",
+      "parent_org": "org-wto"
+    },
+    {
+      "id": "wto-trade-monitoring",
+      "title": "WTO Trade Monitoring Reports (WTO-wide + G20)",
+      "publisher": "WTO",
+      "scope": "International bodies",
+      "cadence": "Annual (Nov/Dec since 2024 appraisal)",
+      "type": "monitoring_report",
+      "parent_org": "org-wto",
+      "notes": "Peer-review transparency exercise. Joint G20 version with OECD/UNCTAD."
+    },
+    {
+      "id": "org-imf",
+      "title": "International Monetary Fund (IMF)",
+      "publisher": "IMF",
+      "scope": "International bodies",
+      "type": "organisation",
+      "notes": "Quota-based membership. Article IV consultations + flagship trilogy create the strongest formal soft-power channel among the set."
+    },
+    {
+      "id": "imf-weo",
+      "title": "World Economic Outlook (WEO)",
+      "publisher": "IMF",
+      "scope": "International bodies",
+      "cadence": "Twice yearly (Apr + Oct)",
+      "type": "flagship_report",
+      "parent_org": "org-imf"
+    },
+    {
+      "id": "imf-gfsr",
+      "title": "Global Financial Stability Report (GFSR)",
+      "publisher": "IMF",
+      "scope": "International bodies",
+      "cadence": "Twice yearly (Apr + Oct)",
+      "type": "flagship_report",
+      "parent_org": "org-imf"
+    },
+    {
+      "id": "imf-fiscal-monitor",
+      "title": "Fiscal Monitor",
+      "publisher": "IMF",
+      "scope": "International bodies",
+      "cadence": "Twice yearly (Apr + Oct)",
+      "type": "flagship_report",
+      "parent_org": "org-imf"
+    },
+    {
+      "id": "imf-article-iv",
+      "title": "Article IV Consultation Reports (country)",
+      "publisher": "IMF",
+      "scope": "International bodies",
+      "cadence": "Usually annual per member",
+      "type": "surveillance",
+      "parent_org": "org-imf",
+      "notes": "Direct bilateral soft pressure channel. Canada receives these."
+    },
+    {
+      "id": "imf-article-iv-canada-2025",
+      "title": "Canada: 2025 Article IV Consultation—Press Release and Staff Report",
+      "publisher": "IMF",
+      "scope": "International bodies",
+      "cadence": "Country consultation (Board consideration 16 January 2026; published 21 January 2026)",
+      "type": "surveillance",
+      "parent_org": "org-imf",
+      "notes": "IMF Country Report No. 26/12 (2026/012). Staff report completed 18 December 2025 following discussions ending 4 December 2025. Soft-layer Canada-specific instance. See also Informational Annex for Fund relations (quota data)."
+    },
+    {
+      "id": "org-wef",
+      "title": "World Economic Forum (WEF)",
+      "publisher": "WEF",
+      "scope": "International bodies",
+      "type": "organisation",
+      "notes": "Private foundation / multi-stakeholder. Not treaty-based. Influence via agenda-setting, partnership programmes, and Davos ritual. Canadian departments have funded specific WEF projects (documented in order papers)."
+    },
+    {
+      "id": "wef-davos",
+      "title": "WEF Annual Meeting (Davos)",
+      "publisher": "WEF",
+      "scope": "International bodies",
+      "cadence": "Annual (January)",
+      "type": "ritual_meeting",
+      "parent_org": "org-wef"
+    },
+    {
+      "id": "wef-global-risks",
+      "title": "Global Risks Report",
+      "publisher": "WEF",
+      "scope": "International bodies",
+      "cadence": "Annual",
+      "type": "flagship_report",
+      "parent_org": "org-wef"
+    },
+    {
+      "id": "org-oecd",
+      "title": "Organisation for Economic Co-operation and Development (OECD)",
+      "publisher": "OECD",
+      "scope": "International bodies",
+      "type": "organisation",
+      "notes": "Already has hard methodology edges in main graph (SNA, etc.). Soft layer captures Economic Surveys and peer-review processes."
+    },
+    {
+      "id": "oecd-economic-surveys",
+      "title": "OECD Economic Surveys (country)",
+      "publisher": "OECD",
+      "scope": "International bodies",
+      "cadence": "Roughly every 1.5–2 years per member",
+      "type": "surveillance",
+      "parent_org": "org-oecd"
+    },
+    {
+      "id": "oecd-economic-survey-canada-2025",
+      "title": "OECD Economic Surveys: Canada 2025",
+      "publisher": "OECD",
+      "scope": "International bodies",
+      "cadence": "Country survey (this edition May 2025; Volume 2025/12)",
+      "type": "surveillance",
+      "parent_org": "org-oecd",
+      "notes": "DOI https://doi.org/10.1787/28f9e02c-en. Draft discussed by Economic and Development Review Committee 21 January 2025; data cut-off 16 May 2025. Soft-layer Canada-specific instance of the generic country surveys series."
+    },
+    {
+      "id": "oecd-economic-outlook",
+      "title": "OECD Economic Outlook",
+      "publisher": "OECD",
+      "scope": "International bodies",
+      "cadence": "Twice yearly",
+      "type": "flagship_report",
+      "parent_org": "org-oecd"
+    },
+    {
+      "id": "org-g20",
+      "title": "G20",
+      "publisher": "G20",
+      "scope": "International bodies",
+      "type": "organisation",
+      "notes": "Informal but highly consequential. Communiqués and working groups create ritual coordination pressure. Not a formal treaty body."
+    },
+    {
+      "id": "g20-leaders-summit",
+      "title": "G20 Leaders' Summit & Communiqué",
+      "publisher": "G20",
+      "scope": "International bodies",
+      "cadence": "Annual (host-driven)",
+      "type": "ritual_meeting",
+      "parent_org": "org-g20"
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "org-bis",
+      "to": "bis-annual-report",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Official BIS publication list."
+    },
+    {
+      "from": "org-bis",
+      "to": "bis-quarterly-review",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Official BIS publication list."
+    },
+    {
+      "from": "org-bis",
+      "to": "bis-annual-economic-report",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Official BIS publication list."
+    },
+    {
+      "from": "org-wto",
+      "to": "wto-world-trade-report",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Official WTO flagship series."
+    },
+    {
+      "from": "org-wto",
+      "to": "wto-annual-report",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Official WTO publication."
+    },
+    {
+      "from": "org-wto",
+      "to": "wto-trade-monitoring",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "TPRM mandate; peer-review exercise."
+    },
+    {
+      "from": "org-imf",
+      "to": "imf-weo",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "IMF flagship trilogy."
+    },
+    {
+      "from": "org-imf",
+      "to": "imf-gfsr",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "IMF flagship trilogy."
+    },
+    {
+      "from": "org-imf",
+      "to": "imf-fiscal-monitor",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "IMF flagship trilogy."
+    },
+    {
+      "from": "org-imf",
+      "to": "imf-article-iv",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Articles of Agreement surveillance obligation."
+    },
+    {
+      "from": "org-wef",
+      "to": "wef-davos",
+      "type": "hosts",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Annual Meeting is the central ritual."
+    },
+    {
+      "from": "org-wef",
+      "to": "wef-global-risks",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Regular WEF flagship."
+    },
+    {
+      "from": "org-oecd",
+      "to": "oecd-economic-surveys",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Country peer-review series."
+    },
+    {
+      "from": "org-oecd",
+      "to": "oecd-economic-outlook",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Regular OECD flagship."
+    },
+    {
+      "from": "org-g20",
+      "to": "g20-leaders-summit",
+      "type": "hosts",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Core ritual of the G20 process."
+    },
+    {
+      "from": "org-imf",
+      "to": "org-wef",
+      "type": "mutual_consideration",
+      "layer": "soft",
+      "confidence": "political_inference",
+      "justification": "Senior overlapping participation, shared language on risks/resilience, and reciprocal citation patterns in public remarks. Not a formal dependency. Dates and agendas rarely align tightly."
+    },
+    {
+      "from": "org-wef",
+      "to": "org-imf",
+      "type": "mutual_consideration",
+      "layer": "soft",
+      "confidence": "political_inference",
+      "justification": "Same as reverse edge. WEF provides a multi-stakeholder stage; IMF provides the macroeconomic orthodoxy. Mutual awareness is observable but not contractual."
+    },
+    {
+      "from": "org-bis",
+      "to": "org-imf",
+      "type": "ritual_peer_forum",
+      "layer": "soft",
+      "confidence": "documented_citation",
+      "justification": "Heavy cross-citation and overlapping central-bank membership. BIS hosts the Basel process that national supervisors (including OSFI) implement; IMF surveillance frequently references BIS statistics and research."
+    },
+    {
+      "from": "org-imf",
+      "to": "org-oecd",
+      "type": "ritual_peer_forum",
+      "layer": "soft",
+      "confidence": "documented_citation",
+      "justification": "Regular cross-references in flagships and shared work on structural indicators, productivity, and fiscal frameworks. Both produce country surveillance products."
+    },
+    {
+      "from": "org-wto",
+      "to": "org-oecd",
+      "type": "ritual_peer_forum",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "Joint G20 Trade Monitoring reports (WTO + OECD + UNCTAD). Explicit collaborative product."
+    },
+    {
+      "from": "org-g20",
+      "to": "org-imf",
+      "type": "agenda_resonance",
+      "layer": "soft",
+      "confidence": "political_inference",
+      "justification": "G20 communiqués routinely task or endorse IMF work (e.g. SDR channeling, debt frameworks). IMF staff papers often respond to G20 priorities. Soft coordination, not hierarchy."
+    },
+    {
+      "from": "org-g20",
+      "to": "org-oecd",
+      "type": "agenda_resonance",
+      "layer": "soft",
+      "confidence": "political_inference",
+      "justification": "OECD frequently acts as analytical support for G20 workstreams (tax, structural reform, investment). Ritual rather than legal."
+    },
+    {
+      "from": "org-g20",
+      "to": "org-wto",
+      "type": "agenda_resonance",
+      "layer": "soft",
+      "confidence": "political_inference",
+      "justification": "G20 trade and investment monitoring mandates feed into WTO/OECD/UNCTAD joint products."
+    },
+    {
+      "from": "org-imf",
+      "to": "imf-article-iv-canada-2025",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "IMF Country Report No. 26/12; Board consideration of the 2025 Article IV consultation with Canada (January 2026)."
+    },
+    {
+      "from": "org-oecd",
+      "to": "oecd-economic-survey-canada-2025",
+      "type": "publishes",
+      "layer": "soft",
+      "confidence": "documented",
+      "justification": "OECD Economic Surveys: Canada 2025 (Volume 2025/12, May 2025). Explicit country instance of the Economic Surveys series."
+    }
+  ],
+  "_isolated_or_sparse_nodes_ok": true,
+  "_next_possible_additions": [
+    "UNCTAD (joint monitoring with WTO/OECD)",
+    "FSB (Financial Stability Board) — closely linked to BIS/G20",
+    "Specific Canadian Article IV and OECD Economic Survey nodes once dates and titles are pulled",
+    "World Bank Group organisation node (to match financing-layer placeholder org-wbg-approx) if ritual or flagship material is desired"
+  ]
+}

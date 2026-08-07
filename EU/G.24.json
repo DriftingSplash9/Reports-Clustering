@@ -1,0 +1,213 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.24.md",
+  "number": 24,
+  "title": "G.24.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "Research.1.md v1.0, **Research.2.md v2.1 and Research.EU.md",
+  "predecessor": "G.23.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**Two independent binding EU instruments have now been followed to their national\nboundary, and both stop at `AGENCY ONLY`.**\n\n`EU/slices/README.md` set this branch up as the test of whether the Canada/US\nfinding — zero standard-compliant direct official cross-border edges — is a fact\nabout those two countries or about national statistical systems generally. ESA\n2010's Annex B was the best candidate for the opposite case: a *Regulation*, not\na standard countries opt into, with a binding transmission programme.\n\n**It names table numbers, subjects and deadlines. It names no publications.** The\nRegulation describes Annex B in its own words as *\"a programme (Annex B) setting\nout the time limits by which Member States shall transmit…\"*, and the programme's\ntable overview has four columns — number, subject, deadline, period — with no\ncolumn for a publication or a publisher. At the national end, Destatis describes\nits own transmission by naming **ten ESA table numbers and not one German\npublication.**\n\nThat is the second chain to fail this way, after the Annex XI salary chain\n(G.22 finding 1). Two instruments, chosen independently, both binding, both\n`AGENCY ONLY` at the boundary.\n\n**Secondarily but concretely: the import blocker is gone.** Priority A8 is closed\n— the `SEC*.pdf` URL pattern is confirmed by SHA-256 match. All 43 institutional\nPart A records are now importable.",
+  "findings": [
+    {
+      "heading": "1. Priority A8 is closed — the URL pattern is confirmed by hash",
+      "body": "G.21 finding 5 raised it, G.22 finding 3 identified the pattern and could not\nverify it, G.23 carried it as the one item an agent here could not do. **Thomas\nfetched it.**\n\n```\nhttps://eur-lex.europa.eu/budget/data/DB/2027/en/SEC05.pdf\n```\n\nThe downloaded file and `EU/SEC05.pdf` are **byte-identical**:\n`sha256 = 585c28fc682c0ed99e9feb65d65c7f74276c1ee2b8e8d6920feb566f789ad874`,\n894 024 bytes both. Not a size match or a spot-check — the same file.\n\nSo the pattern `eur-lex.europa.eu/budget/data/DB/<year>/en/SEC<nn>.pdf` is\nestablished for the whole set, `SEC00`–`SEC10`, and the 2026 siblings that\nsurfaced in search are the same scheme a year back.\n\n**What this unblocks:** every Part A record in `SEC05_PartA_2026-08-04.md` (19)\nand `SEC06-SEC07_PartA_2026-08-05.md` (9) can have its `URL:` field filled with a\nreal retrieval URL, and `Research.1.md` §2's requirement that every edge carry a\nURL can be met for the institutional strand. **43 records across four files stop\nbeing un-importable.**\n\n**One caveat, and it is worth a line.** Only `SEC05` was hash-verified. The other\nten URLs are constructed by pattern. Verifying them is ten fetches and should be\ndone before import, not assumed — this branch has been wrong about a filename\nconvention before."
+    },
+    {
+      "heading": "2. Cheap check 1 — Annex B names tables, not publications. The prediction fails.",
+      "body": "`EU/AnnexB_assessment_2026-08-05.md`. Carried unchanged since G.20; top of the\nlist for two sessions.\n\nThe decisive quote is the Regulation describing its own annex:\n\n> \"The ESA 2010 provides for: […] (b) a programme (Annex B) setting out the time\n> limits by which Member States shall transmit to the Commission (Eurostat) the\n> accounts and tables to be compiled in accordance with the methodology referred\n> to in point (a).\"  — Regulation (EU) No 549/2013, Article 1(2)\n\nAnd the programme's own table overview, whose four columns are the whole answer:\n\n> \"Table No | Subject of the tables | Deadline t + months (days where specified)\n> | Period covered\n> 1 | Main aggregates — quarterly | 2 | 1995Q1 onwards […]\"\n\nNo column for a publication, a publisher or a title. **\"Main aggregates —\nquarterly\" is a data-delivery slot, not the name of anything anyone publishes.**\n`Research.1.md` §4.3 is explicit that *\"'Statistics Canada' is not a node\"* — and\nAnnex B is the first kind of thing all the way down.\n\n**The strongest test is the national end, and it fails cleanest.** Destatis,\ndescribing its own transmission of government accounts, names **ten items, every\none an ESA table number** (`Table 2`, `Table 6`, `Table 7`, `Table 801`, …), and\nnot one German publication. If a member state were ever going to name its own\nreleases, that is the record where it would have happened.\n\n**Scored against G.19 finding 6:**\n\n| Limb | Outcome |\n|---|---|\n| Annex B exists, binding, creates an obligation | **Confirmed** |\n| The material is in the corpus | **Confirmed** — 43 records, 22 ids |\n| Annex B names **publications** | **Refuted** |\n| Member-state records name their **own releases** | **Refuted** |\n| A supranational→named-national-release edge | **Not produced** |\n\n**The counterweight, reported per §3 because it cuts the other way.** The\n*2025 List of main statistics produced and disseminated by Eurostat* names\nproducts with stable codes (NAMA, NAMQ, NASA, NASQ, GovQ, GovD&D, NA-Pen, BoP,\nMUFA), each with a stated cadence and a named legal basis. That is genuinely\nnode-shaped — three of §4's conditions in one table. **But they are Eurostat's\nown dissemination products, not member-state releases**, so it points the same\nway as G.22 finding 1 rather than rescuing the prediction.\n\n**What this licenses.** Two chains now point at \"the Canada/US result is a fact\nabout national statistical systems generally\". That is the branch's most\nsubstantive result and it is no longer a single data point. **It is still not\nproof:** both chains were assessed at one remove — Annex XI was never retrieved,\nand Annex B was read as staged records plus a presentation document, not as\nenacted. A third instrument of a different kind (EBS Regulation 2019/2152, named\nin `Research.EU.md` §1, untouched) is the natural check.\n\n**And there is a real edge here, pointing inward.** Eurostat's own products cite\nRegulation 549/2013 as their legal basis. The EU graph's first importable edges\nare likelier to run *inside* the EU layer than across it."
+    },
+    {
+      "heading": "3. Both governing briefs read first-hand — G.20's account confirmed exactly",
+      "body": "G.23 correction 5 flagged that three consecutive hand-offs had relied on G.20\nfinding 1's second-hand account. Both files converted and read.\n\n**G.20 finding 1 is confirmed in every particular:**\n\n- **§8 is gone.** The heading sequence in `Research.2.md` runs\n  `…7 → 9 → 10`. The entire Canada/US work queue is absent.\n- **§9's heading survives with no list under it.** The warning is there verbatim —\n  *\"Use these exact strings when a document names something already here. Do not\n  invent variants … This has happened twice.\"* — followed immediately by `---`\n  and `## 10`. An agent handed only `Research.2.md` gets the duplicate-id warning\n  and nothing to check against. **`Research.1.md` remains the sole carrier.**\n- **The Part B Output Rule is real and sits after §10**, as a `###` subsection\n  under the closing summary — past the point where the brief reads as finished,\n  which is G.20's explanation for four sessions of non-compliance.\n\n**Two details no `G.*` log has recorded**, both from first-hand reading:\n\n- The rule's closing line is **\"Thomas should include the part b with the initial\n  files so awareness can be brought to it.\"** That makes the Part B list a\n  *packing-list* item by instruction, not by convention. G.21-G.23 already do\n  this at item 5 of *What to pass*, so practice matches — but nobody knew it was\n  required.\n- The rule also says **\"The Part B list should be updated incrementally as new\n  soft connections become visible from Part A records.\"** Incremental append to\n  one file is therefore correct, and the current practice of adding `sc-51`…\n  onward to a single dated file is what the rule asks for.\n\n**One correction to G.20's own summary of `Research.EU.md` §10** — see correction\n2."
+    },
+    {
+      "heading": "4. Two corpus defects, both feeding priority E4",
+      "body": "Surfaced while counting for finding 2, and both are actionable.\n\n**A confirmed duplicate, with a visible cause.** `esa-reg-article1` and\n`esa2010-art1-2` carry **byte-identical quotes at the same location**\n(Article 1(2)) under two different ids; same for `esa-reg-article3` /\n`esa2010-art3-1`. The cause is legible: **two id-naming schemes for the same\ninstrument**, `esa-reg-*` and `esa2010-*`. E4 (\"reconcile the 49 duplicate and 77\nid-less records\") now has a worked example and a probable mechanism — this is\n`Research.1.md` §9's duplicate-id failure occurring one level up, on record ids\nrather than node ids.\n\n**14 of the 43 matched records carry no `id` at all** — a third of the subset,\nagainst 77 id-less records corpus-wide. Under §6 they cannot be cited and would\nbe discarded whole.\n\n**And the single most valuable record in the Eurostat staging area is bundled.**\n`list-main-stats-2025-na` puts **nine products under one heading**, which is\nexactly the failure §6 describes: *\"fourteen good quotes under one heading marked\n'illustrative cluster'; none carried its own section number, so none could be\ncited, so all fourteen were discarded.\"* **It should be split into nine before\nanything is built on it.**"
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "G.19 finding 6 — refuted.** \"ESA 2010's Annex B will supply the documented supranational-to-national edge shape the Canada/US pair lacks.\" It does not. G.20 finding 5 predicted precisely this failure mode (*\"if the programme names obligations and table numbers but no publications, that is `AGENCY ONLY` at scale and the prediction fails\"*) and was right. Finding 2."
+    },
+    {
+      "n": 2,
+      "text": "G.20 finding 3's table — one item understated.** It renders `Research.EU.md` §10 item 1 as \"Statistical Requirements Compendium (latest)\". The brief actually says **\"Eurostat Statistical Requirements Compendium (latest) *and the list of main statistics*\"**. The omitted half turns out to be the most node-shaped material found this session (`list-main-stats-2025-na`), so the omission mattered. G.20's wider claim — that the Eurostat strand is §10 executed in order — is **confirmed**, and this makes it slightly stronger, since item 1 was executed in both halves."
+    },
+    {
+      "n": 3,
+      "text": "G.23 correction 5 — discharged.** Both briefs read first-hand; G.20 finding 1 confirmed in every particular. Finding 3."
+    },
+    {
+      "n": 4,
+      "text": "G.21 finding 5 / G.22 finding 3 / G.23 priority A8 — closed.** The `SEC*.pdf` retrieval URL is established and hash-verified. Finding 1."
+    },
+    {
+      "n": 5,
+      "text": "No finding in G.15-G.18 was checked this session**, and none should be treated as revisited."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections (SEC00–SEC10).",
+      "items": [
+        {
+          "n": 1,
+          "text": "~~**SEC05**~~ DONE (G.21). ~~**SEC06, SEC07**~~ DONE (G.23). ~~**SEC00 nomenclature key**~~ CLOSED (G.22). ~~**A8, retrieval URL**~~ **CLOSED this session** — finding 1."
+        },
+        {
+          "n": 2,
+          "text": "NEW, and it is now the cheapest high-value item in the branch: backfill the URLs and import.** 43 Part A records across four files are ready, the pattern is confirmed, and nothing blocks it. Verify the other ten URLs by fetch first (finding 1's caveat), then write the first `EU/slices/eu-level/` slice. **This would be the branch's first imported data in its entire history.**"
+        },
+        {
+          "n": 3,
+          "text": "SEC01 (Parliament), SEC02 (Council)** — next extraction targets. SEC01 (53 pp) is the outlier: 14 `7.2.19SPEC` lines with no analogue elsewhere. SEC02 (38 pp) carries the G.18 headcount gap. Both come with cheap check 5 for free."
+        },
+        {
+          "n": 4,
+          "text": "SEC08 (29 pp), SEC09 (31 pp), SEC10 (38 pp)** — the three smallest, all on disk, never opened for extraction. SEC10 first: only section using the literal `X` numeral and the only `PPPA` code."
+        },
+        {
+          "n": 5,
+          "text": "Part B** — `sc-51`…`sc-57` (G.21), `sc-58`…`sc-62` (G.22), `sc-63`…`sc-68` (G.23), **`sc-69`…`sc-73` this session**. `sc-47`…`sc-50` remain **reserved**. Still outstanding: recovering those, and SEC04's addendum."
+        },
+        {
+          "n": 6,
+          "text": "SEC06_batch.md** — still wanted once, format check only."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog, after A.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads, after B.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": [
+        {
+          "n": 1,
+          "text": "~~**Schema decision.**~~ DONE — G.20."
+        },
+        {
+          "n": 2,
+          "text": "Verify and slice the staged Eurostat strand** — 814 records. **The suggested first slice has changed.** G.20-G.23 suggested the ESA 2010 transmission-programme material because it was the test of finding 6. That test is now run and the answer is negative, so the TP material is *less* attractive as a first slice. **Start instead with `list-main-stats-2025-na` split into its nine products** — it is the most node-shaped material in the staging area (codes, cadences, legal bases) and it is where the branch's first real edges are."
+        },
+        {
+          "n": 3,
+          "text": "The prose section** — `_staging/20-prose-sections.txt`, its own session."
+        },
+        {
+          "n": 4,
+          "text": "Reconcile the 49 duplicate and 77 id-less records.** **Upgraded from housekeeping to a prerequisite**, and it now has a worked example and a probable mechanism — two id-naming schemes for the same instrument. Finding 4."
+        },
+        {
+          "n": 5,
+          "text": "Reconcile the two priority queues.** Fold into the D merge."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Verify the other ten `SEC*.pdf` URLs by fetch.** Ten requests, gates priority A2. The pattern is confirmed for SEC05 only."
+    },
+    {
+      "n": 2,
+      "text": "Split `list-main-stats-2025-na` into nine records.** Mechanical, and it converts the branch's best staged material from discardable to importable."
+    },
+    {
+      "n": 3,
+      "text": "Retrieve Annex XI Article 1(4)** and check whether the ten Member States' sources are named by title. Closes G.22 finding 1's open limb, and now also tests whether the two-chain convergence holds at the annex level."
+    },
+    {
+      "n": 4,
+      "text": "Retrieve the Eurostat Report of 31 October** and establish its URL and whether the title recurs annually. Converts C736-03 into a mintable node."
+    },
+    {
+      "n": 5,
+      "text": "Pull the `[NA-Pen] / Table 29` thread** — the only table-to-publication tie in the corpus (secondary observations)."
+    },
+    {
+      "n": 6,
+      "text": "Read the EBS Regulation 2019/2152** as the third independent test of the two-chain convergence. Named in `Research.EU.md` §1, never touched."
+    },
+    {
+      "n": 7,
+      "text": "Confirm the Destatis records are extraction rather than discussion.** G.20 finding 3 rests on string counts."
+    },
+    {
+      "n": 8,
+      "text": "Check whether sc-47–sc-50 exist anywhere.** The four numbers stay reserved until this is run."
+    },
+    {
+      "n": 9,
+      "text": "Check whether SEC01/SEC02 show the request-vs-table gap** (G.23 finding 2). Two sections is a pattern; four would be a rule. Free with priority A3."
+    },
+    {
+      "n": 10,
+      "text": "Characterise the 155 non-`S` loose records**; **match the 8 record-less batch headers**; **enumerate the `9`-series tags** beyond `SPEC`/`DAG`/`PPPA`."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.24.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — the standing brief, and **the only carrier of the §9 node-id list** (finding 3)."
+    },
+    {
+      "n": 3,
+      "text": "`EU/AnnexB_assessment_2026-08-05.md`** — the branch's central result."
+    },
+    {
+      "n": 4,
+      "text": "`EU/SEC05_PartA_2026-08-04.md`** — the format exemplar."
+    },
+    {
+      "n": 5,
+      "text": "`PartB_soft_connections_2026-08-04.md`** — required by the Part B Output Rule's own closing line, not merely conventional (finding 3)."
+    },
+    {
+      "n": 6,
+      "text": "`EU/slices/README.md`** — layout; blocker resolved."
+    },
+    {
+      "n": 7,
+      "text": "The next target PDFs** — `SEC01.pdf`, `SEC02.pdf`. Already in `EU/`."
+    },
+    {
+      "n": 8,
+      "text": "`Research_2_md.docx` / `Research_eu.docx` — **only if doing the D merge.** Read and summarised in finding 3; no longer needed for routine work. ---"
+    }
+  ],
+  "session_conditions": "Session type: **verification and assessment.** No new source document was\nextracted.\n\nWhat was read in full: **`Research.2.md` and `Research.EU.md`** (converted from\n`.docx`, first-hand, first time in the branch's history at first hand); twelve\nstaged Part A records on ESA 2010 Annex B; `G.23.md`.\n\nWhat was **not** done, stated plainly:\n\n- **No source document was opened for the Annex B check.** Finding 2 is an\n  assessment of **staged records**, not an extraction. The quotes carry URLs and\n  are verbatim as staged, but a mis-transcription upstream would pass through\n  unnoticed. 31 of the 43 matched records were not read.\n- **Annex B itself was not read as enacted.** The table overview quoted is the\n  programme's own presentation document (KS-01-13-429). Tables 11-29 are\n  referenced but only 1-10 are quoted in the staged overview.\n- **No slice was written and nothing was imported.** Corpus unchanged at 133\n  reports / 213 dependencies; `npm run check` and `npm run validate` clean.\n- **No node was proposed**, including from the `list-main-stats-2025` record,\n  which must be split first (finding 2).\n- **SEC01, SEC02, SEC08, SEC09, SEC10 remain unextracted.**"
+}

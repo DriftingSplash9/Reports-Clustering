@@ -1,0 +1,111 @@
+{
+  "_slice": "grok-r3-netherlands-poland",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Spot-checked 2026-08-05 (post-G.47) against the primary sources directly (CBS GNI Inventory PDF, Eurostat Poland ESMS page) rather than against the original Grok transcript, which was not accessible this session. Poland held up clean; three of the four Netherlands `basis` quotes did not — corrected below, see _note.",
+  "_note": "Netherlands and Poland were assigned together with France in the round-3 prompt (GROK-PROMPT-3_national-depth) and the response was reviewed in full in an earlier session, with quotes copied out at the time. That response was never converted into a slice during the main consolidation pass (grok-r1/r4/r6/r7/r8) — an omission caught only when Netherlands and Poland turned out to be missing from the country-label sweep, and reconstructed from that session's own prior transcription rather than a fresh read. G.47.md flagged this reconstruction for a spot-check. THIS SESSION'S SPOT-CHECK (2026-08-05): downloaded the CBS GNI Inventory PDF directly and checked all four NL dependency quotes against it. Poland's quote was independently verified against Eurostat's ESMS metadata page and is accurate. Of the four NL quotes: `nl-dnb-bop`'s was exact and required no change. The other three were paraphrases, not verbatim — reworded, or in one case (the `esa-2010` edge's first sentence, 'all member states of the European Union must comply with the requirements of the European System of Accounts 2010') not present anywhere in the document at all. All three have been corrected below to verbatim text with exact page numbers, pulled from the source PDF's own internal pagination. The relationships themselves hold — the corrected quotes still support the same edges — but the original basis text should not be treated as reliable for any NL entry this session did not re-verify.",
+  "reports": [
+    {
+      "id": "nl-cbs-gni-inventory-2010",
+      "title": "Gross National Income Inventory (ESA 2010), 2010, The Netherlands",
+      "publisher": "Statistics Netherlands (CBS)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "Extended methodological description of sources and methods for Dutch national accounts under ESA 2010, prepared for Eurostat's GNI verification process; covers the production, expenditure and income approaches with process tables.",
+      "releases_per_year": 0.2,
+      "last_updated": null,
+      "url": "https://www.cbs.nl/-/media/_pdf/2017/13/gni-inventory-2010-march-2017-web.pdf",
+      "domains": ["national-accounts"]
+    },
+    {
+      "id": "nl-cbs-sbs",
+      "title": "Structural Business Statistics (SBS) / Production Statistics",
+      "publisher": "Statistics Netherlands (CBS)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "Annual survey-based statistics on enterprises, coordinated on the Statistical Business Register; the primary source for output, intermediate consumption and value added in the Dutch production approach to GDP.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.cbs.nl/en-gb/our-services/methods/surveys",
+      "domains": ["national-accounts", "banking"]
+    },
+    {
+      "id": "nl-dnb-bop",
+      "title": "Balance of Payments and International Investment Position",
+      "publisher": "De Nederlandsche Bank (DNB)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "Dutch balance-of-payments and IIP statistics, compiled by the central bank under BPM6/ESA 2010; named source for the property-income transition items from GDP to GNI, the same shape as Deutsche Bundesbank's role for Germany and Banca d'Italia's for Italy.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.dnb.nl/en/statistics/background-information/methodology-guidelines",
+      "domains": ["national-accounts", "banking"]
+    },
+    {
+      "id": "nl-cbs-sbr",
+      "title": "Statistical Business Register (SBR) / General Business Register",
+      "publisher": "Statistics Netherlands (CBS)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "Register of legal units, enterprises and enterprise groups maintained by CBS from Chambers of Commerce, tax and other administrative sources; frames the SBS sampling frame and supplies NACE industry coding used in national accounts.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://www.cbs.nl/en-gb/our-services/methods/statistical-programmes/business-register",
+      "domains": ["national-accounts", "banking"]
+    },
+    {
+      "id": "pl-gus-national-accounts",
+      "title": "National accounts (ESA 2010)",
+      "publisher": "Statistics Poland (GUS)",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "region": "Poland",
+      "description": "Polish national accounts, compiled under ESA 2010. Documentation is thinner than the German/Dutch/Italian set — no public GNI Inventory at comparable granularity was found, a result later shown NOT to be a general newer-member pattern once Czechia and Croatia (also 2004/2013 accessions) came back as granular as the strongest-documented members.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_gdp_esms_pl.htm",
+      "domains": ["national-accounts"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "nl-cbs-gni-inventory-2010",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CORRECTED 2026-08-05 (spot-check against source PDF; original basis's first sentence was not found in the document and has been dropped, the other two were reworded and are now verbatim): \"ESA2010 is the successor of ESA1995 and has the power of law within the EU. From September 2014 onwards the NA data of all member states of the EU have to be compiled in conformity with the ESA2010 regulation.\" LOCATION: p.34 (document's own pagination) / PDF page 36, opening paragraph of the ESA2010 methodology section, immediately preceding §2.1.",
+      "evidence_url": "https://www.cbs.nl/-/media/_pdf/2017/13/gni-inventory-2010-march-2017-web.pdf"
+    },
+    {
+      "source_report_id": "nl-cbs-gni-inventory-2010",
+      "target_report_id": "nl-cbs-sbs",
+      "relationship_type": "uses_data_from",
+      "basis": "CORRECTED 2026-08-05 (spot-check against source PDF; original basis's two quoted sentences were not found in the document — neither \"most important data source for the annual supply and use tables\" nor \"Production Statistics (PS)\" appear anywhere in it — and have been replaced with the passage the document actually contains): \"For the production approach the main data source is the Structural Business Statistics (SBS). This is why the SBS is separately discussed in chapter 3.\" LOCATION: p.29 (document's own pagination) / PDF page 31, §1.10 \"Main data sources used\". NOTES: the document calls the earlier, related survey the \"Structural Business Survey\" (p.19/PDF21, §1.3) when describing it as the starting point for output/intermediate-consumption/value-added estimates — not \"Production Statistics (PS)\", which does not appear in this document at all; the `nl-cbs-sbs` node's title may be conflating two distinct CBS survey names and is worth a second look.",
+      "evidence_url": "https://www.cbs.nl/-/media/_pdf/2017/13/gni-inventory-2010-march-2017-web.pdf"
+    },
+    {
+      "source_report_id": "nl-cbs-gni-inventory-2010",
+      "target_report_id": "nl-dnb-bop",
+      "relationship_type": "uses_data_from",
+      "basis": "\"The Dutch Central Bank (DNB) is responsible for compiling the Balance of Payments (BoP), which is an important source for the transition items from GDP to GNI in National Accounts.\" Data from DNB also named as a source for financial institutions in the production approach.",
+      "evidence_url": "https://www.cbs.nl/-/media/_pdf/2017/13/gni-inventory-2010-march-2017-web.pdf"
+    },
+    {
+      "source_report_id": "nl-cbs-gni-inventory-2010",
+      "target_report_id": "nl-cbs-sbr",
+      "relationship_type": "uses_data_from",
+      "basis": "CORRECTED 2026-08-05 (spot-check against source PDF; original basis put quotation marks around paraphrased fragments — \"coordinates SBS\" reversed the actual relation, the SBR is the frame the survey is coordinated on, not something that itself coordinates the survey — replaced with the actual verbatim passage): \"The structural business survey is coordinated on the basis of a Statistical Business Register (SBR). The SBR records are obtained from the obligatory subscription of all businesses with the Chambers of Commerce (Nieuw Handelsregisters) including the unincorporated business. All businesses have to report on the nature of their activities in terms of NACE coding. Data on employment is integrally obtained from the employers' tax register. Its coordination is equally based on the SBR.\" LOCATION: p.19 (document's own pagination) / PDF page 21, §1.3 \"Outline of the production approach\".",
+      "evidence_url": "https://www.cbs.nl/-/media/_pdf/2017/13/gni-inventory-2010-march-2017-web.pdf"
+    },
+    {
+      "source_report_id": "pl-gus-national-accounts",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Eurostat ESMS metadata for Poland: national accounts compiled in accordance with ESA 2010 as defined in Annex B of Council Regulation (EU) No 549/2013, and a 2014 GUS implementation note on adopting ESA 2010 into Polish national accounts, citing the same Regulation.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_gdp_esms_pl.htm"
+    }
+  ],
+  "_dropped": []
+}

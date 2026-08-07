@@ -1,0 +1,241 @@
+{
+  "_slice": "nl-municipal-finance",
+  "_researched": "2026-08-05",
+  "_status": "NEW 2026-08-05. Depth pass on the Netherlands per G.47.md's G1/G9 tracks — the municipal/regional government-finance layer, on the Canada branch's own model (municipal tax bylaw -> provincial equalization/assessment -> national statistics/accounting standard).",
+  "_note": "Three general-purpose subagents researched this in parallel (Gemeentefonds/verdeelmodel; WOZ/OZB property-tax chain; Provinciefonds/BBV/Iv3), each briefed with this project's extraction rules (verbatim quotes, URL, location, AGENCY ONLY / NOT FOUND conventions, no verdicts). Their raw findings were then independently re-verified against primary sources directly (wetten.overheid.nl statutory text downloaded and grepped; the 2024 Toelichting PDF downloaded and text-extracted with pypdf; the CBS StatLine table and data.overheid.nl dataset pages fetched directly) rather than trusted as reported — this was done specifically because a prior spot-check the same session (grok-r3-netherlands-poland.json) found that AI-summarized WebFetch quotes are NOT reliably verbatim. EVERY quote below marked 'VERIFIED DIRECTLY' was re-confirmed by this session against the primary source's own raw text (HTML stripped of tags, or PDF text-extracted with pypdf), not just accepted from a subagent's report. Two supporting facts (the meicirculaire 2026 footnote in edge #4's secondary citation) rest on a subagent's WebFetch summary only and are flagged as such — kept because they corroborate an already-independently-verified edge, not as sole evidence for any edge.",
+  "reports": [
+    {
+      "id": "nl-gemeentefonds",
+      "title": "Gemeentefonds — Algemene Uitkering (Municipal Fund General Grant)",
+      "publisher": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK) / Ministerie van Financiën",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "The Dutch national government's main unconditional equalization transfer to all Dutch municipalities, distributed under the Financiële-verhoudingswet via a formula (the 'verdeelmodel') set out in the Besluit financiële verhouding 2001 (Bfv 2001). The structural Dutch analog to Ontario's OMPF and Alberta's LGFF — the closest EU parallel this branch has found yet to the Canada branch's own provincial-to-municipal fiscal-transfer nodes.",
+      "releases_per_year": 3,
+      "cadence_note": "Distributed via three annual circulaires (meicirculaire, septembercirculaire, decembercirculaire), each updating the allocation for the current and future years.",
+      "last_updated": null,
+      "url": "https://www.rijksoverheid.nl/documenten/2026/05/29/meicirculaire-gemeentefonds-2026",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "nl-provinciefonds",
+      "title": "Provinciefonds — Algemene Uitkering (Provincial Fund General Grant)",
+      "publisher": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK) / Ministerie van Financiën",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "The provincial-level counterpart to the Gemeentefonds — the national equalization transfer to the Netherlands' 12 provinces, distributed under the same Financiële-verhoudingswet (confirmed: wetten.overheid.nl's own list of delegated regulations under the Fvw includes both the Besluit financiële verhouding 2001, whose Bijlage 1 governs provinces and Bijlage 2 governs municipalities, and separate year-specific 'Besluit vaststelling bedragen per eenheid uitkering provinciefonds' decrees).",
+      "releases_per_year": 3,
+      "cadence_note": "Same three-circulaire annual cadence as the Gemeentefonds.",
+      "last_updated": null,
+      "url": "https://www.rijksoverheid.nl/documenten/2026/05/29/meicirculaire-provinciefonds-2026",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "nl-bzk-toelichting-gemeentefonds",
+      "title": "Toelichting op de berekening van de uitkering uit het gemeentefonds",
+      "publisher": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "Annual technical companion document to the Gemeentefonds circulaires: one standardised data-source card per 'maatstaf' (distribution criterion) — roughly 50 of them — each carrying fields for Wet- en regelgeving / Definitie / Bron / Methode / Publicatie / Peildatum. This is the Dutch functional equivalent of Ontario's OMPF Technical Guide Appendix F ('Data sources') — a document that names its own inputs in a structured, repeatable table, which Research.1.md §7 identifies as the strongest evidence class in this corpus. VERIFIED DIRECTLY: downloaded the 2024 edition PDF and text-extracted it in full (77 pages, pypdf) to confirm the per-maatstaf source citations quoted below.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "nl-cbs-maatstaven-fvw",
+      "title": "Maatstaven Financiële-verhoudingswet (Fvw), regio",
+      "publisher": "Statistics Netherlands (CBS)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "CBS StatLine table publishing the regional unit values (maatstaven) CBS supplies for the Fvw distribution formulas. VERIFIED DIRECTLY (cbs.nl fetched and parsed): the table's own 'Tabeltoelichting' states its purpose and cross-references the Toelichting document by full title.",
+      "releases_per_year": 1,
+      "cadence_note": "Table's own text: \"Nieuwe cijfers worden onregelmatig gepubliceerd\" (new figures are published irregularly).",
+      "last_updated": null,
+      "url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "nl-bbv",
+      "title": "Besluit begroting en verantwoording provincies en gemeenten (BBV)",
+      "publisher": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
+      "country": "NL",
+      "jurisdiction_level": "institutional",
+      "region": "Netherlands",
+      "description": "The accounting standard (an algemene maatregel van bestuur issued under Gemeentewet art. 186 and Provinciewet art. 190) that governs how every Dutch municipality and province must prepare its budget, multi-year estimate and annual financial statements. The Dutch functional equivalent of `psab-psas` — a standing instrument other documents cite as their accounting basis, not a periodical. VERIFIED DIRECTLY: wetten.overheid.nl BWBR0014606 downloaded and parsed.",
+      "releases_per_year": 1,
+      "cadence_note": "Amended periodically rather than issued as dated editions, the same pattern `psab-psas` is filed under in this corpus; version checked was the 2025-04-17 consolidation.",
+      "last_updated": null,
+      "url": "https://wetten.overheid.nl/BWBR0014606/2025-04-17",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "nl-cbs-iv3-gemeenten",
+      "title": "Gemeenten — onbewerkte Iv3-data (Informatie voor Derden)",
+      "publisher": "Statistics Netherlands (CBS)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "CBS's published, unprocessed compilation of every Dutch municipality's Iv3 financial returns for a reporting year — the direct structural parallel to Alberta's `ab-municipalaffairs-financial-statistical-data`, which is itself compiled from the municipal Financial Information Return (`ab-municipalaffairs-fir`). VERIFIED DIRECTLY: data.overheid.nl dataset page fetched and parsed in full.",
+      "releases_per_year": 12,
+      "cadence_note": "Dataset's own text: six report types per year (begroting + four kwartalen + jaarrekening), each published twice — a first placement ~10 days after the submission deadline and a second ~70 days after, to allow corrected resubmissions.",
+      "last_updated": null,
+      "url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "nl-iv3-rapportage",
+      "title": "Iv3-rapportage (Informatie voor Derden)",
+      "publisher": "Individual Dutch municipalities and provinces",
+      "country": "NL",
+      "jurisdiction_level": "municipal",
+      "region": "Netherlands",
+      "description": "The standardised financial return every Dutch municipality and province submits to CBS/BZK under BBV-mandated reporting rules — the direct Dutch counterpart to Alberta's Municipal Financial Information Return (FIR). CBS's own compiled table (`nl-cbs-iv3-gemeenten`) is calculated directly from these individual submissions.",
+      "releases_per_year": 6,
+      "cadence_note": "Begroting (budget), four kwartaalrapportages (quarterly), and one jaarrekening (annual account) per year, per data.overheid.nl's own description of the underlying 'verslagsoorten'.",
+      "last_updated": null,
+      "url": "https://www.cbs.nl/nl-nl/onze-diensten/open-data/iv3",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "nl-wet-woz",
+      "title": "Wet waardering onroerende zaken (Wet WOZ)",
+      "publisher": "Dutch national government (Rijksoverheid)",
+      "country": "NL",
+      "jurisdiction_level": "institutional",
+      "region": "Netherlands",
+      "description": "The national law requiring every Dutch municipality to determine an annual market value ('WOZ-waarde') for every real-estate object in its territory, executed by the municipal college van burgemeester en wethouders. Functions in this corpus the way `esa-2010` or `sna-2008` do — a legally-established methodology standard other documents cite as their valuation basis, rather than a periodical release. VERIFIED DIRECTLY: wetten.overheid.nl BWBR0007119 downloaded and parsed for the operative articles.",
+      "releases_per_year": 1,
+      "cadence_note": "Art. 22 lid 2: the value fixed by a municipality's beschikking 'geldt voor een kalenderjaar' (applies for one calendar year) — an annual valuation cycle.",
+      "last_updated": null,
+      "url": "https://wetten.overheid.nl/BWBR0007119/2025-01-01",
+      "domains": ["assessment", "taxation", "municipal-finance"]
+    },
+    {
+      "id": "nl-waarderingskamer-waarderingsinstructie",
+      "title": "Waarderingsinstructie",
+      "publisher": "Waarderingskamer",
+      "country": "NL",
+      "jurisdiction_level": "institutional",
+      "region": "Netherlands",
+      "description": "The Waarderingskamer's (the national body supervising municipal WOZ valuations) own 316-page technical instruction manual for how municipalities must determine WOZ values — market analysis method, required base-registry sources, data quality criteria. Names Kadaster explicitly as the source of all sales-transaction data used in valuation (see _dropped — Kadaster is not yet a node in this corpus, so that specific edge cannot be built yet).",
+      "releases_per_year": 1,
+      "cadence_note": "Exact revision cadence NOT CONFIRMED this session — filed as annual conservatively, consistent with how this corpus treats similarly-situated standing technical-guidance documents; flag for correction if a stated cadence is found.",
+      "last_updated": null,
+      "url": "https://www.waarderingskamer.nl/documenten/03.-Voor-gemeenten/06.-Hulpmiddelen-gemeenten/Waarderingsinstructie.pdf",
+      "domains": ["assessment", "municipal-finance"]
+    },
+    {
+      "id": "nl-ozb-nijmegen",
+      "title": "Verordening op de heffing en de invordering van onroerende-zaakbelastingen (Nijmegen)",
+      "publisher": "Gemeente Nijmegen",
+      "country": "NL",
+      "jurisdiction_level": "municipal",
+      "region": "Nijmegen, Netherlands",
+      "description": "Nijmegen's own annual OZB (property tax) ordinance — chosen as the exemplar Dutch municipality the way Grande Prairie is the exemplar Alberta municipality in this corpus. By statute it must name the WOZ-determined value as its own tax base ('heffingsmaatstaf'), the same structural role Grande Prairie's tax rate bylaw plays for its assessment roll.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://lokaleregelgeving.overheid.nl/CVDR752073/1",
+      "domains": ["municipal-finance", "taxation", "assessment"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "nl-ozb-nijmegen",
+      "target_report_id": "nl-wet-woz",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (wetten.overheid.nl / lokaleregelgeving.overheid.nl text extracted and grepped). \"De heffingsmaatstaf is de op de voet van hoofdstuk IV van de Wet waardering onroerende zaken voor de onroerende zaak vastgestelde waarde voor het kalenderjaar bedoeld in artikel 1.\" LOCATION: Artikel 3, lid 1 (\"Maatstaf van heffing\"). English gloss: 'The tax base is the value established for the property under Chapter IV of the Wet WOZ, for the calendar year referred to in Article 1.'",
+      "evidence_url": "https://lokaleregelgeving.overheid.nl/CVDR752073/1"
+    },
+    {
+      "source_report_id": "nl-gemeentefonds",
+      "target_report_id": "nl-wet-woz",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (wetten.overheid.nl BWBR0012216 text extracted and grepped). Besluit financiële verhouding 2001, Bijlage 2, maatstaf 1 (\"Ozb woningen eigenaren\"): \"De waarde van de onroerende zaken wordt bepaald op grond van hoofdstuk IV van de Wet waardering onroerende zaken.\" (\"Bron\" field for this maatstaf, immediately following: \"CBS\" — AGENCY ONLY for the processing channel, but the value itself is explicitly WOZ-derived by law.) Also Artikel 23, lid 2 (the art.12 'aanmerkelijk en structureel tekort' supplementary-payment test): \"De belastingcapaciteit wordt bepaald door het totaal van de vastgestelde waarden bedoeld in artikel 22 van de Wet waardering onroerende zaken, in de gemeente...\"",
+      "evidence_url": "https://wetten.overheid.nl/BWBR0012216/2024-01-01"
+    },
+    {
+      "source_report_id": "nl-bzk-toelichting-gemeentefonds",
+      "target_report_id": "nl-wet-woz",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (2024 Toelichting PDF downloaded, pypdf full-text extracted). Per-maatstaf card for \"Inkomstenmaatstaf onroerendezaakbelasting; woningen eigenaren\" (and repeated verbatim for the niet-woningen eigenaren/gebruikers variants): \"Bron De benodigde gegevens worden door het CBS onttrokken aan de Landelijke Voorziening WOZ.\" NOTES: names the specific operational register — Landelijke Voorziening WOZ (LV WOZ) — that CBS draws from, itself populated by municipal WOZ determinations under this law. The register itself is not minted as a separate node this session (see _dropped).",
+      "evidence_url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024"
+    },
+    {
+      "source_report_id": "nl-gemeentefonds",
+      "target_report_id": "nl-bzk-toelichting-gemeentefonds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (cbs.nl fetched and parsed). PRIMARY: `nl-cbs-maatstaven-fvw`'s own 'Tabeltoelichting' states: \"De hiervoor gebruikte eenheden die het CBS levert voor de definitieve en voorlopige cijfers van de maatstaven worden beschreven in de 'Toelichting op de berekeningen van de uitkeringen uit het gemeentefonds 1997 e.v. jaren', uitgave Ministerie van Binnenlandse Zaken en Koninkrijksrelaties.\" SECONDARY, not independently re-verified this session (subagent WebFetch extraction only, kept as corroboration not sole evidence): meicirculaire gemeentefonds 2026, p.23 §2.5.2, footnote 7 reportedly reads: \"Meer informatie over de berekeningswijze van de verdeelmaatstaven van de algemene uitkering voor dat uitkeringsjaar kunt u vinden in de toelichting op de berekening van de uitkering uit het gemeentefonds 2026.\"",
+      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw"
+    },
+    {
+      "source_report_id": "nl-gemeentefonds",
+      "target_report_id": "nl-cbs-maatstaven-fvw",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (cbs.nl fetched and parsed). \"Deze tabel bevat gegevens die mede als grondslag dienen bij het bepalen van de hoogte van de Algemene Uitkeringen aan gemeenten en provincies.\" (\"This table contains data that partly serves as the basis for determining the level of General Grants to municipalities and provinces.\") \"Het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties bepaalt deze uitkeringen aan gemeenten en provincies aan de hand van verdeelmodellen.\"",
+      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw"
+    },
+    {
+      "source_report_id": "nl-provinciefonds",
+      "target_report_id": "nl-cbs-maatstaven-fvw",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (cbs.nl fetched and parsed). Same table description as the Gemeentefonds edge covers provinces too (\"...aan gemeenten en provincies\"), plus a provincie-specific line: \"Het aantal inwoners in stedelijke en landelijke gebieden wordt berekend ten behoeve van het verdeelstelsel gehanteerd door het Provinciefonds. Dit verdeelstelsel is op 1 januari 1998 in werking getreden (Staatsblad, 1997, 526).\"",
+      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw"
+    },
+    {
+      "source_report_id": "nl-cbs-iv3-gemeenten",
+      "target_report_id": "nl-bbv",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (data.overheid.nl fetched and parsed). \"De in de tabel gebruikte coderingen voor de categorieën enerzijds en de taakvelden en balansposten anderzijds, zijn evenals hun betekenis ontleend aan het 'Besluit begroting en verantwoording provincies en gemeenten' (BBV) van het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties. Het BBV bevat onder meer de regelgeving voor de leveringen van Iv3-data aan het CBS.\"",
+      "evidence_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data"
+    },
+    {
+      "source_report_id": "nl-cbs-iv3-gemeenten",
+      "target_report_id": "nl-iv3-rapportage",
+      "relationship_type": "calculated_from",
+      "basis": "VERIFIED DIRECTLY (data.overheid.nl fetched and parsed). \"Het CBS ontvangt de gegevens van gemeenten in het kader van de rapportages Informatie voor Derden (Iv3). De gegevens in de tabel zijn niet bewerkt door het CBS.\" Also: \"De tabel bevat onbewerkte Iv3-data van alle verslagsoorten van één verslagjaar. De verslagsoorten zijn de begroting, de vier kwartalen en de jaarrekening.\"",
+      "evidence_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "nl-waarderingskamer-waarderingsinstructie -> Kadaster / Basisregistratie Kadaster (BRK)",
+      "source": "nl-waarderingskamer-waarderingsinstructie",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The Waarderingsinstructie names Kadaster explicitly and repeatedly as the source of sales-transaction data used in WOZ valuation: p.34 \"Alle verkoopgegevens worden aangeleverd door het Kadaster.\"; p.94-95 names \"Basisregistratie Kadaster\" among base registries municipalities are legally obliged to use executing the Wet WOZ. No Kadaster/BRK node exists in this corpus yet — same category question as Ontario's SDI/Ontario Parcel (geographic/cadastral reference infrastructure rather than a periodical release). Worth building; would also open a path toward other WOZ-chain edges."
+    },
+    {
+      "edge": "nl-bzk-toelichting-gemeentefonds -> (CBS population statistic, named)",
+      "source": "nl-bzk-toelichting-gemeentefonds",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The 'Maatstaf Inwoners sociaal' card names \"Wet basisregistraties personen\" / \"Besluit basisregistraties personen\", the BRP register, and cites the specific titled StatLine table \"Bevolking op 1 januari en gemiddelde; geslacht, leeftijd en regio\" (VERIFIED DIRECTLY, present at line 452 of the extracted 2024 Toelichting text). No CBS population-statistic node exists in the EU branch of this corpus yet (unlike Canada's `statcan-census-population`). Real, well-evidenced, deferred only for scope."
+    },
+    {
+      "edge": "a provincial begroting/jaarrekening naming its Gemeentefonds/Provinciefonds allocation by amount, citing the circular",
+      "source": null,
+      "target": "nl-provinciefonds",
+      "reason": "deferred",
+      "why": "A subagent (not independently re-verified this session) reported Provincie Noord-Brabant's own Begroting 2024 stating \"Uitkering provinciefonds: 372.166\" and \"De begrotingsbedragen 2024 zijn gebaseerd op de meicirculaire 2023,\" and its Begroting 2022 citing the BBV directly (\"De begroting is opgesteld met inachtneming van de voorschriften van het Besluit begroting en verantwoording provincies en gemeenten (BBV)\"). This is the natural next step to complete the chain the way `gp-budget`/`gp-financial-statements` complete Alberta's — a specific province's own budget node, parallel to `ab-tbf-fiscal-plan`. Not built this session; needs its own direct verification pass, not just the subagent's WebFetch summary."
+    },
+    {
+      "edge": "a municipal jaarrekening citing the BBV as its accounting basis",
+      "source": null,
+      "target": "nl-bbv",
+      "reason": "deferred",
+      "why": "A subagent (not independently re-verified this session) reported Gemeente Waalwijk's Jaarrekening 2021 stating \"De jaarrekening is opgemaakt met inachtneming van de voorschriften die het Besluit begroting en verantwoording provincies en gemeenten daarvoor geeft.\" The `nl-cbs-iv3-gemeenten -> nl-bbv` edge above already documents the BBV's binding force on Dutch municipal accounting from a source I verified directly, so this is corroborating rather than load-bearing — flagged for completeness, not urgency."
+    },
+    {
+      "edge": "Waarderingskamer's own annual report ('Staat van de WOZ')",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "A subagent surfaced https://www.waarderingskamer.nl/documenten/02.-Over-ons/Staat-van-de-WOZ/Staat-van-de-WOZ-2025.pdf as a likely annual-report candidate but did not open it. Not minted as a node this session because Research.1.md's rule against inventing facts extends to inventing a description of a document nobody has actually read — this is a lead, not a finding."
+    }
+  ]
+}

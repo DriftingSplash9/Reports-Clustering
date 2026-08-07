@@ -1,0 +1,80 @@
+{
+  "_slice": "eurostat-remuneration-satellite-series",
+  "_researched": "2026-08-05",
+  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts.",
+  "_note": "Same-day continuation of the eurostat-remuneration-update-report session, requested directly by Thomas: mint the other Eurostat civil-servants-remuneration series (intermediate reports, A64/A65 detail, rent surveys). Three reports minted (Intra-EU interim, Extra-EU interim, EARS rent survey), one dependency (rent survey -> main report). A64/A65 'detailed reports' investigated and found to be appendices of the already-minted main report, not a separate series -- deliberately not minted, see ERR-08. Full quotes in EU/EurostatRemunerationReport_PartA_2026-08-05.md's addendum (ERR-05 through ERR-09).",
+  "_headline": "Two of the three candidate series clear Research.1.md §4 cleanly and are minted with no data-input edges of their own (isolated on import, standard for a new EU node); the third (the rent survey) clears §4 AND carries a documented uses_data_from edge into the already-minted annual report. The fourth candidate (A64/A65 detail) turned out not to be a distinct series at all -- a finding, not a gap.",
+  "_open_questions": [
+    "DOMAIN: 'labour' used for all three, same least-wrong placeholder as eurostat-remuneration-update-report.",
+    "Whether the Intra-EU and Extra-EU interim reports themselves draw on eurostat-hicp or esa-2010 the way the annual report does was not established this session -- the Methodology page describes HICP sub-indices updating correction coefficients 'between surveys' in general terms, not tied to a specific report in the way AXI-02/AXI-04 tie the annual report's arithmetic to named inputs. Left isolated rather than stretched into an edge.",
+    "The mission-expenses report (the sixth Publications-page category) was not researched this session -- out of scope for this continuation, which was scoped to the three categories Thomas named."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-remuneration-intra-eu-interim-report",
+      "title": "Eurostat Intermediate Report",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "A twice-cycle companion to the annual Eurostat Remuneration Report, updating Intra-EU correction-coefficient inputs between full annual recalculations. Eurostat's own Publications page: 'Reports are typically released in May with reference date January' (ERR-05). Titled from the series' own file metadata -- 'Eurostat_Intermediate_Report_[year]' -- confirmed across 14 linked years (2013-2026).",
+      "releases_per_year": 1,
+      "cadence_note": "Eurostat Publications page: 'Reports are typically released in May with reference date January' (ERR-05) -- a distinct reference date and release month from the annual report (which reports as at July, released late October).",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/publications",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "eurostat-remuneration-extra-eu-interim-report",
+      "title": "Eurostat Report on the Interim Update of Weightings (Correction Coefficients) for Extra-EU Delegations",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Named in full at footnote 3, item 2 of COM(2025) 736 (C736-04, EU/AnnexXI_PartA_2026-08-05.md): 'Eurostat Reports of 3 June 2025 and 31 October 2025 on the interim update of weightings (correction coefficients) applicable to the remuneration of officials, temporary staff and contract staff of the European Union serving in Extra-EU Delegations in accordance with Article 64 and Annex X and Annex XI of the Staff Regulations...' Eurostat's own Publications page confirms the twice-yearly pattern generalises across years and lists 15 years of paired releases (2011-2026).",
+      "releases_per_year": 2,
+      "cadence_note": "Eurostat Publications page: 'Reports are typically released in May with reference date January, and in October with reference date July' (ERR-06). C736-04 dates the 2025 pair as 3 June and 31 October.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/publications",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "eurostat-remuneration-rent-survey",
+      "title": "Estate Agency Rent Surveys (EARS)",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's own Methodology page: 'Estate agency rent surveys (EARS) are done in the context of the wider work done to compare the relative cost of living of international civil servants between their place of employment and that of Brussels, the reference city. Because of the importance of housing costs in the overall expenditure of a household, specific rent surveys are carried out annually through estate agencies.' (ERR-07). Publications page lists 23 linked years (2003-2025).",
+      "releases_per_year": 1,
+      "cadence_note": "Eurostat Methodology page: 'specific rent surveys are carried out annually through estate agencies' (ERR-07), confirmed by 23 consecutive linked years on the Publications page.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/methodology",
+      "domains": [
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eurostat-remuneration-update-report",
+      "target_report_id": "eurostat-remuneration-rent-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat Methodology page, 'Correction coefficients' section (ERR-07): 'For housing, which is the largest single item of expenditure for many people, a specific methodology has been set up and constantly improved over time by Eurostat with the national statistical institutes. Rent parities are based on market rents obtained from special surveys of estate agencies.' 'Based on' is a direct input statement, not a Research.1.md §5a 'comparable with' trap. Housing/rent parities are part of the correction-coefficient calculation that feeds the annual report's own arithmetic (Methodology page, Correction coefficients formula section).",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/civil-servants-remuneration/methodology"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "[Detailed reports: A64 Annex 3 analytical category reports / A65 Annex 2 country-by-country reports] -> not minted",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Investigated as candidate nodes and found, from their own file names retrieved via the Publications page's DOM, to be Appendix 2 and Appendix 3 of the same annual 'Eurostat Remuneration Report [year]' already minted as eurostat-remuneration-update-report -- not an independent series. See ERR-08, EU/EurostatRemunerationReport_PartA_2026-08-05.md. Not minted, per the measured part_of/double-counting finding documented in src/lib/types.ts (Report.part_of): splitting a component from its parent release understates the parent's authority rather than adding information."
+    }
+  ]
+}

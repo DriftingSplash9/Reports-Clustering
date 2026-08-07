@@ -1,0 +1,99 @@
+{
+  "_slice": "Alberta provincial fiscal spine",
+  "_researched": "2026-07-28",
+  "_note": "The hub layer. The Local Government Fiscal Framework Act indexes municipal capital funding to provincial revenue from three years prior — a statutory link running straight from Alberta's fiscal position to every municipality's road-repair budget. This slice also closes the detached education pair by connecting the K-12 funding manual to the budget that sets its grant rates.",
+  "reports": [
+    {
+      "id": "ab-tbf-fiscal-plan",
+      "title": "Alberta Budget — Fiscal Plan",
+      "publisher": "Alberta Treasury Board and Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The centrepiece of Alberta's annual budget, setting out revenue, expense and the fiscal position across a three-year horizon. Contains the economic outlook, capital plan and tax plan chapters, and is the source of the provincial revenue figures that statutory funding formulas key off.",
+      "releases_per_year": 1,
+      "cadence_note": "Tabled in late February for the fiscal year beginning 1 April.",
+      "last_updated": null,
+      "url": "https://www.alberta.ca/budget-documents",
+      "domains": [
+        "fiscal-transfers",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ab-tbf-fiscal-update",
+      "title": "Fiscal Update and Economic Statement",
+      "publisher": "Alberta Treasury Board and Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "In-year revision of Alberta's revenue, expense and deficit forecasts against the tabled budget. The vehicle by which future municipal funding envelopes are communicated in advance.",
+      "releases_per_year": 3,
+      "cadence_note": "Three per year — on or before the last day of August, November and February. A Final Results year-end report follows by the end of June.",
+      "last_updated": null,
+      "url": "https://www.alberta.ca/budget-documents",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ab-tbf-economic-outlook",
+      "title": "Alberta Economic Outlook",
+      "publisher": "Alberta Treasury Board and Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "The province's forecast for growth, employment, inflation, population and energy prices. Published as a chapter of the fiscal plan; the assumptions underneath every provincial revenue projection.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.alberta.ca/economic-outlook",
+      "domains": [
+        "national-accounts",
+        "energy-royalties"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "calculated_from",
+      "basis": "The LGFF Act sets a Revenue Index Factor comparing provincial revenue three years prior against four years prior, and municipal capital funding rises or falls by exactly that percentage. 2025 funding rose 13.6% to $820 million on the strength of 13.6% revenue growth between 2021-22 and 2022-23.",
+      "evidence_url": "https://open.alberta.ca/publications/l21p5"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-tbf-fiscal-update",
+      "relationship_type": "uses_data_from",
+      "basis": "Aggregate LGFF funding amounts must be communicated to municipalities two years in advance, and are announced through the quarterly fiscal update.",
+      "evidence_url": "https://www.alberta.ca/system/files/ma-lgff-capital-funding-allocation-formula-fact-sheet.pdf"
+    },
+    {
+      "source_report_id": "ab-tbf-fiscal-plan",
+      "target_report_id": "ab-tbf-economic-outlook",
+      "relationship_type": "calculated_from",
+      "basis": "The economic outlook is a chapter of the fiscal plan and supplies the growth, employment, inflation and energy price assumptions from which every revenue line is forecast.",
+      "evidence_url": "https://www.alberta.ca/budget-documents"
+    },
+    {
+      "source_report_id": "ab-tbf-fiscal-update",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "uses_data_from",
+      "basis": "Each quarterly update revises the revenue, expense and deficit forecasts set out in the tabled fiscal plan, and is reported against it.",
+      "evidence_url": "https://www.alberta.ca/budget-documents",
+      "reference_period": {
+        "readings_per_year": 3,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "'Each quarterly update revises the revenue, expense and deficit forecasts set out in the tabled fiscal plan' — three updates a year despite the name."
+      }
+    },
+    {
+      "source_report_id": "ab-education-funding-manual",
+      "target_report_id": "ab-tbf-fiscal-plan",
+      "relationship_type": "calculated_from",
+      "basis": "Grant rates in the Funding Manual for School Authorities are set by the K-12 education allocation voted in the provincial budget; the manual distributes the envelope the fiscal plan establishes.",
+      "evidence_url": "https://www.alberta.ca/k-12-education-funding-framework"
+    }
+  ]
+}

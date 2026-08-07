@@ -1,0 +1,137 @@
+{
+  "_slice": "anzsic-industry-classification",
+  "_researched": "2026-08-06",
+  "_status": "NEW 2026-08-06. Item 2 of `NZ/G.2.md`'s priority list and item 26 of `research-input/Grok-Research-Brief-XI.md`, which the external researcher returned `not_attempted`. Extracted and verified entirely by this session, directly, with no external research input. Adds the Australian and New Zealand Standard Industrial Classification and its international parent ISIC, plus the two citing releases that make ANZSIC an actual bridge between the `AU` and `NZ` sub-graphs rather than a node whose bi-national character lives only in its `publisher` field.",
+  "_note": "FETCH CONDITIONS. abs.gov.au serves its classification volume as ordinary server-rendered HTML and was read directly, page by page (the ANZSIC front matter and Introduction, and the Australian Industry methodology page for 2024-25); every ANZSIC quote below comes from a page this session fetched itself. unstats.un.org likewise served the ISIC landing page directly. datainfoplus.stats.govt.nz is server-rendered and served the Annual Enterprise Survey metadata item in full, but note that the item path is case-sensitive to the fetch route used here: `/Item/nz.govt.stats/<guid>` returns the page and `/item/nz.govt.stats/<guid>` returns zero bytes, as do all `/<revision>` and `/ddi` suffixes. The `stats.govt.nz` release pages remain JavaScript and gave nothing, and the Wayback `id_` route that earlier sessions in this branch relied on was unavailable to this session's fetch tooling — see `NZ/G.3.md` Session conditions.",
+  "reports": [
+    {
+      "id": "anzsic",
+      "title": "Australian and New Zealand Standard Industrial Classification (ANZSIC)",
+      "publisher": "Australian Bureau of Statistics and Statistics New Zealand (Tatauranga Aotearoa)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Australia and New Zealand",
+      "description": "The single industry classification used by both Australian and New Zealand official statistics, and the structural twin of `naics` — a classification agreed and maintained jointly by the statistical agencies of more than one country, from which each publishes national statistics. Its Preface is signed by both national statisticians: \"Dennis Trewin / Brian Pink — Australian Statistician / Government Statistician — Australian Bureau of Statistics, Statistics New Zealand\". Catalogue no. 1292.0; hierarchical, four levels (Division, Subdivision, Group, Class), 19 divisions and 86 subdivisions in the 2006 edition. Replaced two separate national classifications, the Australian Standard Industrial Classification (ASIC, 1969/1978/1983) and the New Zealand Standard Industrial Classification (NZSIC, 1970/1975/1987), both of which were themselves derived from ISIC.",
+      "releases_per_year": 0.05,
+      "cadence_note": "Two editions in thirty-plus years — 1993 and 2006 — with a Revision 1.0 (Feb 2006) and Revision 2.0 (26 June 2013) of the 2006 edition. Next release listed by the ABS as 'Unknown'. Not an annual release; releases_per_year is nominal, and deliberately lower than `naics`'s 0.2 because ANZSIC has no five-year cycle.",
+      "last_updated": null,
+      "url": "https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-industrial-classification-anzsic/latest-release",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "isic",
+      "title": "International Standard Industrial Classification of All Economic Activities (ISIC)",
+      "publisher": "United Nations Statistics Division",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The United Nations' industry classification and the acknowledged parent of most national industrial classifications, including ANZSIC and its two predecessors. Its absence from this corpus was a hole of the same shape as the missing `gasb-standards` that the associated-states pass had to fill: `naics` was present with eight inbound edges while the classification NAICS itself is aligned to was not represented at all. Adopted 1948; revisions 1 (1958), 2 (1968), 3 (1990), 3.1 (2002), 4 (2007) and 5 (endorsed 2023, publication forthcoming).",
+      "releases_per_year": 0.05,
+      "cadence_note": "Six revisions in seventy-five years. Rev. 5 was endorsed by the UN Statistical Commission at its 54th session in 2023 and, as of this session's read of the UNSD page, is 'forthcoming' in published form while being distributed as introduction, explanatory notes and structure files. releases_per_year is nominal.",
+      "last_updated": null,
+      "url": "https://unstats.un.org/unsd/classifications/Econ/isic",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "au-abs-australian-industry",
+      "title": "Australian Industry",
+      "publisher": "Australian Bureau of Statistics",
+      "country": "AU",
+      "jurisdiction_level": "federal",
+      "region": "Australia",
+      "description": "The ABS's annual industry-performance release — employment, industry value added, sales and income by ANZSIC division — compiled from the Economic Activity Survey and Business Activity Statement data supplied to the Australian Taxation Office. Minted here for one purpose: it is the Australian end of the ANZSIC bridge, and the first `AU` node in this corpus that is not part of the government-finance pass.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.abs.gov.au/statistics/industry/industry-overview/australian-industry/latest-release",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-statsnz-aes",
+      "title": "Annual Enterprise Survey",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's annual financial-performance and financial-position survey of New Zealand businesses, running since the 1985/86 survey year and covering, on its own account, around 80% of GDP. The New Zealand end of the ANZSIC bridge. Its DataInfo+ metadata is unusually forthcoming about its own downstream use — it names the national accounts, the Tourism Satellite Account, the Non-profit Institutions Satellite Account, Business Price Indexes and Regional GDP as consumers — which makes it a promising source node for a later Stats NZ pass; see `_dropped`.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/36809771-984d-4e6b-89a1-576f2118b05b",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "anzsic",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (abs.gov.au fetched as ordinary server-rendered HTML; the Preface sits on the volume's landing page and the following passages on its Introduction page). Preface: \"International comparability has been enhanced by aligning the classification, as far as possible, with the upcoming revision of the International Standard Industrial Classification of All Economic Activities (ISIC) (Revision 4).\" Introduction, under 'International standards': \"The International Standard Industrial Classification of All Economic Activities (ISIC) was adopted by the United Nations in 1948 and is used as the international standard for guiding work on national industrial classifications.\" And: \"Australia and New Zealand have for many years endeavoured to align their industrial classifications with the ISIC as far as possible. However, the degree of alignment able to be achieved is sometimes adversely affected by competing classification principles e.g. a different organisation or structure of Australian or New Zealand industry, or a lack of significance of some internationally recognised economic activities in the two economies.\" The parentage is stated for the predecessors too: the 1969 ASIC \"was based at the broader levels on the ISIC\", the 1970 NZSIC was \"based on ISIC, Rev.2\", and the driver for a single joint classification was \"the need to update each country's classifications to align with ISIC, Rev.3 issued in 1990.\" Typed `methodology_depends_on` rather than `cites`: ISIC supplies the structure the classification is built against, and the ANZSIC volume ships correspondences to it.",
+      "evidence_url": "https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-industrial-classification-anzsic/2006-revision-2-0/introduction"
+    },
+    {
+      "source_report_id": "anzsic",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (abs.gov.au Introduction page, fetched as ordinary server-rendered HTML). Under 'Alignment with international standards': \"In the interests of international statistical comparability, ANZSIC 2006 aligns with the ISIC and the North American Industry Classification System (NAICS) at the subdivision level as far as practicable.\" The next paragraph makes this a design input rather than a remark: \"In the ANZSIC review, close consideration was given to the work undertaken in recent years on the ISIC and the NAICS. Australia and New Zealand have been involved in international meetings reviewing the bases of these classifications. To the extent considered appropriate to Australian and New Zealand conditions, ANZSIC 2006 therefore reflects the latest international work on industrial classifications.\" The 'Changes from ANZSIC 1993' section then names NAICS twice as the corroborating precedent for specific structural decisions — the new Information Media and Telecommunications Division (\"The proposed ISIC, Rev.4 and NAICS 2002 also recognise this as a separate Division\") and the break-up of Property and Business Services into three divisions (\"The three separate divisions again align with the proposed ISIC, Rev.4 and NAICS 2002\"). Weaker than the ISIC edge — NAICS is a peer consulted for comparability, not a parent — but the alignment is asserted at a named level of the hierarchy and used to justify named divisions, which is more than 'consistent with'.",
+      "evidence_url": "https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-industrial-classification-anzsic/2006-revision-2-0/introduction"
+    },
+    {
+      "source_report_id": "au-abs-australian-industry",
+      "target_report_id": "anzsic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (ABS Australian Industry methodology, 2024-25, fetched as ordinary server-rendered HTML). Under 'Classifications': \"Estimates in this release are classified by: Industry, in accordance with the Australian and New Zealand Standard Industrial Classification (ANZSIC), 2006 edition.\" ANZSIC is not decorative here — it defines the survey's scope as well as its output: \"Businesses in scope of EAS are determined based on their ANZSIC industry and institutional sector classifications\", the out-of-scope list is stated in ANZSIC subdivisions (\"Entities classified to ANZSIC Subdivisions 62 Finance and 63 Insurance and superannuation funds\"; \"75 Public administration, 76 Defence and 96 Private households employing staff...\"), and the rule for splitting a unit's reported data is stated in ANZSIC terms with numeric thresholds: \"3% or more, where the industries of the primary and secondary activities are in the same ANZSIC Division. 2% or more, where the industries of the primary and secondary activities are in different ANZSIC Divisions.\" The release's own headline table is titled by ANZSIC Division.",
+      "evidence_url": "https://www.abs.gov.au/methodologies/australian-industry-methodology/2024-25"
+    },
+    {
+      "source_report_id": "nz-statsnz-aes",
+      "target_report_id": "anzsic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (Stats NZ DataInfo+ item fetched in full; the passages sit in the 'Significant events impacting this study series' chronology, which is server-rendered and not behind the collapsed sections). 2007: \"Sample re-optimised in response to the classification change from Australian and New Zealand Standard Industrial Classification (ANZSIC96 to ANZSIC06). Survey designed and published on an ANZSIC06 basis. 2005 and 2006 data backdated on an ANZSIC06 basis.\" The adoption is dated: 1998: \"The Annual Enterprise Survey sample based on the Australian and New Zealand Standard Industrial Classification (ANZSIC) classification, replacing the New Zealand Standard Industrial Clasification (NZSIC).\" [sic — 'Clasification' is the source's own typo]. And 2006: \"Sample boost to help with the revisions due to the introduction of the Australian and New Zealand Standard Industrial Classification (ANZSIC06).\" The 2012 entry then uses ANZSIC as the working unit of the survey's own documentation — \"industries other than agriculture, forestry, and fishing division (ANZSIC06 division A)\". Note the survey publishes at NZSIOC level 4, a New Zealand output classification layered on top of ANZSIC and not yet a node here; see `_dropped`.",
+      "evidence_url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/36809771-984d-4e6b-89a1-576f2118b05b"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "anzsic -> (an AU/NZ tie asserted from joint authorship alone)",
+      "source": "anzsic",
+      "target": null,
+      "reason": "note",
+      "why": "A correction to `NZ/G.2.md` item 2, which said minting ANZSIC \"would tie `AU` and `NZ` together directly\". Minting the node alone would not have. The joint ABS/Stats NZ authorship — \"The Australian Bureau of Statistics and Statistics New Zealand jointly developed this classification to improve the comparability of industry statistics between the two countries and with the rest of the world\", verified directly by this session in the volume's Preface — is a property of the node's `publisher` field, and this corpus draws no edge from an authorship fact. `Research.1.md`'s one rule is that an edge is a documented statement that one report uses another as an input, and a classification does not take its own authors as inputs. The tie exists only because this session also minted `au-abs-australian-industry` and `nz-statsnz-aes`, one citing release on each side, so that a path now runs AU release -> anzsic <- NZ release. Recorded because the distinction between a bi-national publisher and a bi-national edge is the sort of thing a later session would otherwise assume had been checked."
+    },
+    {
+      "edge": "nz-statsnz-aes -> nz-statsnz-national-accounts-income",
+      "source": "nz-statsnz-aes",
+      "target": "nz-statsnz-national-accounts-income",
+      "reason": "no-node-yet",
+      "why": "The direction is the other way and the target is not the right node. The AES DataInfo+ item states, under 'Main users of the data': \"The Annual Enterprise Survey data forms the basis of Statistics New Zealand's national accounts statistics including: Production/Industry Accounts, Institutional Sector Accounts, Inter-Industry Study, Provisional National Accounts.\" And in the objectives: the AES provides \"the main accounting aggregates needed to compile the National Accounts estimates\", including \"annual benchmarks for the reconciliation of quarterly and annual Gross Domestic Product (GDP) estimates\" and \"annual updates of Input - Output tables\". That is a producer-side claim of a real edge running national accounts -> AES, but the corpus holds only `nz-statsnz-national-accounts-income`, which is the quarterly institutional-sector income release, and the passage names four national-accounts products of which that is at best one. Minting `nz-statsnz-national-accounts-income -> nz-statsnz-aes` off a list that does not name it by release title would be exactly the kind of loose match this branch has been catching in external research. Left for a Stats NZ national-accounts pass, which now has an obvious starting point."
+    },
+    {
+      "edge": "nz-statsnz-aes -> NZSIOC (New Zealand Standard Industrial Output Categories)",
+      "source": "nz-statsnz-aes",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The AES is designed and published not at ANZSIC level but at NZSIOC level 4 — \"The AES data is to be used with caution below industry design level (NZSIOC level 4). The survey is not designed to support analysis below this level\", and \"Additional tables were released at level 4 of the New Zealand Standard Industrial Output Classification (NZSIOC)\" (2011). NZSIOC is a New Zealand-only output classification built on top of ANZSIC, so there is a genuine two-step NZSIOC -> ANZSIC chain here that this slice does not represent. Not minted because NZSIOC's own defining document was not opened this session and the corpus should not carry a node whose front matter nobody has read. Cheap check for a successor: NZSIOC is documented on Stats NZ's classification pages and, unlike the release pages, those are likely to be fetchable."
+    },
+    {
+      "edge": "anzsic -> isic, at a named revision (caveat on a minted edge, not a dropped one)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The edge is minted but the revision is deliberately not pinned, and the reason is worth recording because it is a general hazard for classification nodes. ANZSIC 2006's Preface aligns it to \"the upcoming revision of the ISIC (Revision 4)\" — that is, to a document that did not yet exist when ANZSIC 2006 was published in February 2006, ISIC Rev.4 having been expected in 2007. The volume's own shipped correspondences are to a different revision again: \"Correspondences (or concordances) between ANZSIC 2006 and ANZSIC 1993 are shown in the Correspondences section, together with correspondences between ANZSIC 2006 and ISIC Rev. 3.1.\" So the classification is designed against Rev.4 and machine-mapped to Rev.3.1, while ISIC itself is now at Rev.5 (endorsed 2023) and ANZSIC has not been re-based. `isic` is therefore modelled as one node covering the classification across revisions, on the same convention as `naics`, and the revision detail is left in this note rather than forced into the edge."
+    },
+    {
+      "edge": "anzsco -> isco",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Item 26c of `research-input/Grok-Research-Brief-XI.md`: ANZSCO, the occupational twin of ANZSIC, and whether its front matter names ISCO as parent. Not attempted this session — the ANZSIC work took the available fetching budget. Flagged rather than assumed: this session did not open ANZSCO and does not know whether it is still jointly maintained by both agencies. If it is not, it is not a bridge node and should not be minted as one — so the first question for a successor is the governance, not the ISCO parentage. Left on the list."
+    }
+  ]
+}

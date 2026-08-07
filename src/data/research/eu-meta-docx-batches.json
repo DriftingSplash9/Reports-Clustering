@@ -1,0 +1,187 @@
+{
+  "_slice": "eu-meta-docx-batches",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Extracted from EU/EU Meta jsons.docx (staged batches never copied into EU/slices/_staging/), verified live where noted, registered in src/data/index.ts.",
+  "_note": "Backlog pass over EU/EU Meta jsons.docx, prompted by Thomas asking whether everything useful from it and Soft Connections.docx had actually been added -- it had not. Seven distinct staged batches inside the docx (SUT-IOT, FIGARO, GLOBAL-IO, PEER-REVIEWS-3RD-ROUND, REC-2023-397, ESGAB-ANNUAL-REPORTS, WP-SMP-ESAC) had never been copied into the staging ndjson pipeline that fed prior sessions' work, so no G-file session had ever read them. Seven reports minted, three edges, several leads dropped. Full record in EU/EU-Meta-Docx-Batches_PartA_2026-08-05.md.",
+  "_headline": "Two of the seven new nodes -- eurostat-suiot and eurostat-figaro -- give esa-2010 its first structurally distinct EU-to-EU dependency chain (SUIOT depends on ESA 2010 methodology; FIGARO depends on both SUIOT and ESA 2010), and esgab-annual-report is evidenced by a live, unbroken 17-year release listing (2009-2025), the cleanest cadence evidence any EU-branch node has had.",
+  "_open_questions": [
+    "oecd-icio's cadence is not cleanly annual on the evidence in hand -- the OECD's own documentation names a '2023 edition' and a '2025 edition' two years apart, not a stated annual commitment. releases_per_year is set to 0.5 pending a clearer statement; do not treat this as confidently established the way eurostat-figaro's 'produced annually' claim is.",
+    "esac-opinion-work-programme -> eurostat-annual-work-programme is recorded with relationship_type 'cites', the closest available value, but ESAC's own language ('welcomes... underlines') is advisory commentary, not citation in the normal sense -- the same RelationshipType gap already flagged for ess-escb-mip-quality-report in eurosystem-ecb.json.",
+    "ess-peer-review-final-report's cadence (0.13/year, roughly once per 7-8 years) rests on three data points (2006-08, 2013-15, 2021-23) with an 8th round-based interval, the same generational-cadence treatment as esa-2010 and sna-2008 -- flagged, not silently treated as precise.",
+    "WIOD, EXIOBASE, EORA, GTAP-MRIO and OECD TiVA are named parallel global input-output databases in the GLOBAL-IO batch, none independently verified live this session -- see _dropped."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-suiot",
+      "title": "Supply, Use and Input-Output Tables (SUIOTs)",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Matrices balancing supply and use of products across the economy to compile a single coherent GDP estimate. Eurostat's own page: 'Supply, use and input-output tables (SUIOTs) are matrices that provide a detailed picture of how goods and services are supplied and used in an economy.' Every country compiles its own SUIOTs and delivers them to Eurostat, which compiles the consolidated EU/euro-area version. Governed by the ESA 2010 transmission programme (Regulation (EU) No 549/2013, amended by Regulation (EU) 2023/734).",
+      "releases_per_year": 1,
+      "cadence_note": "Live-verified on Eurostat's own naio_10_n metadata page. Core tables (supply table, use table) are annual, delivered at t+36 months under the ESA 2010 transmission programme; a further set (use table at basic prices, margin tables, input-output tables) is delivered every 5 years (years ending in 0 or 5). releases_per_year reflects the annual core product.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/naio_10_n_esms.htm",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eurostat-figaro",
+      "title": "FIGARO — EU Inter-Country Supply, Use and Input-Output Tables",
+      "publisher": "Eurostat and the Joint Research Centre (JRC), European Commission",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "'Full International and Global Accounts for Research in Input-Output analysis.' The EU's inter-country supply, use and input-output tables, covering the 27 EU Member States, EFTA, EU candidate countries, 15 major trading partners and a 'Rest of the world' region, broken down by 64 products and industries. Eurostat's own page: 'The FIGARO tables have been developed by Eurostat and the Joint Research Centre of the European Commission (JRC). Since 2021, they are produced annually, covering the period from 2010 up to year T-2.'",
+      "releases_per_year": 1,
+      "cadence_note": "Live-verified on Eurostat's own naio_10_fcp metadata page -- 'Since 2021, they are produced annually.'",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/naio_10_fcp_esms.htm",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "oecd-icio",
+      "title": "OECD Inter-Country Input-Output (ICIO) Tables",
+      "publisher": "Organisation for Economic Co-operation and Development (OECD)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "A globally balanced view of inter-country and inter-industry flows of goods and services used as intermediate inputs and final demand. Built from national accounts main aggregates, SUTs/IOTs, balance of payments, and bilateral merchandise and services trade statistics for each country. OECD's own 2025-edition documentation: 'The new database covers all years from 1995 to 2022' -- an earlier-cited 2023 edition covered a shorter span. Reachable and confirmed current at oecd.org.",
+      "releases_per_year": 0.5,
+      "cadence_note": "NOT cleanly established as annual -- flagged in _open_questions. Two named editions in hand ('2023 edition', '2025 edition') are two years apart; releases_per_year of 0.5 is a placeholder pending a clearer statement of OECD's own release schedule.",
+      "last_updated": null,
+      "url": "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=a9868f6c-31ed-4943-95cd-6c42afa2c2a9",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eurostat-annual-work-programme",
+      "title": "Annual Work Programme for European Statistics",
+      "publisher": "European Commission (Eurostat)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Annex IV to the Commission's annual financing decision for the Single Market Programme, implementing the SMP's European-statistics objective under Regulation (EU) 2021/690 and submitted to the Statistical System Committee under Article 17 of Regulation (EC) No 223/2009. The 2026 edition's own text: 'The 2026 WP will be the sixth one implementing the Single Market Programme 2021-2027.'",
+      "releases_per_year": 1,
+      "cadence_note": "Edition count stated directly by the document itself ('the sixth one'), the same evidentiary shape as ess-escb-mip-quality-report and esgab-annual-report.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/3948917/22849758/PN1-2026.pdf/a0d67cce-bee9-95d9-cdcf-08a5c781628b?version=1.0&t=1767970396570&download=true",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "esac-opinion-work-programme",
+      "title": "ESAC Opinion on the Draft Work Programme for European Statistics",
+      "publisher": "European Statistical Advisory Committee (ESAC)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Annual advisory opinion by ESAC (established under Decision No 234/2008/EC) on the Commission's draft annual Work Programme for European Statistics, required by Article 2 of that Decision. Live-listed on ESAC's own opinions page with one dated entry per year.",
+      "releases_per_year": 1,
+      "cadence_note": "Live-verified on ESAC's own opinions page -- one Work Programme opinion per year, 2015 through 2026 confirmed by dated entries ('Opinion on the Draft 2027 Work Programme...(13 July 2026)' down to 'Opinion on Work Programme 2017 (1 March 2016)').",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/european-statistical-advisory-committee-esac/opinions",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ess-peer-review-final-report",
+      "title": "Final Report on the ESS Peer Reviews",
+      "publisher": "Eurostat, for the European Statistical System (ESS)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's consolidated final report to the European Parliament and Council on each round of ESS peer reviews against the European Statistics Code of Practice, covering every ESS member (NSIs and selected other national authorities) plus Eurostat itself (reviewed separately by ESGAB). Eurostat's own page: 'Eurostat prepared a final report on the third round of the European Statistical System peer reviews, which has been transmitted to the European Parliament and the Council.'",
+      "releases_per_year": 0.13,
+      "cadence_note": "Round-based, not annual -- three rounds confirmed live on Eurostat's own page: 2006-2008, 2013-2015, 2021-2023. Roughly once every 7-8 years; releases_per_year approximates the observed interval, same generational-cadence treatment as esa-2010 and sna-2008.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "esgab-annual-report",
+      "title": "Annual Report by the European Statistical Governance Advisory Board",
+      "publisher": "European Statistical Governance Advisory Board (ESGAB)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "ESGAB's mandated annual report to the European Parliament and Council on the implementation of the European Statistics Code of Practice by Eurostat and the European Statistical System as a whole. Established by Decision No 235/2008/EC, Article 2(1): 'The Board's tasks shall be to: (a) prepare an annual report for the European Parliament and the Council on the implementation of the Code of Practice...' Individual reports self-identify by edition ('Sixteenth annual report', 'Seventeenth annual report').",
+      "releases_per_year": 1,
+      "cadence_note": "Live-verified two ways: Article 2(1) of the founding Decision (EUR-Lex) states the annual-report mandate verbatim; the ESGAB annual-reports landing page (ec.europa.eu/eurostat/web/esgab/annual-reports) lists one dated report per year, unbroken, 2009 through 2025 -- 17 consecutive years.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/esgab/annual-reports",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eurostat-suiot",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Eurostat's own metadata page: 'SUIOTs follow the statistical concepts and definitions of the European System of Accounts - ESA 2010 as implemented through Regulation (EU) No 549/2013 and amended by Regulation (EU) 2023/734.' Live-verified 2026-08-05.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/naio_10_n_esms.htm"
+    },
+    {
+      "source_report_id": "eurostat-figaro",
+      "target_report_id": "eurostat-suiot",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's own metadata page: 'The compilation of FIGARO tables relies on several data sources, including: National supply and use tables...' Live-verified 2026-08-05.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/naio_10_fcp_esms.htm"
+    },
+    {
+      "source_report_id": "eurostat-figaro",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "'The methodology underlying the FIGARO tables corresponds to the \"European Systems of Accounts 2010\" (ESA 2010) methodology.'",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/esa-supply-use-input-tables/methodology"
+    },
+    {
+      "source_report_id": "esac-opinion-work-programme",
+      "target_report_id": "eurostat-annual-work-programme",
+      "relationship_type": "cites",
+      "basis": "ESAC's 2026 opinion: 'ESAC welcomes the ambitious 2026 draft Work Programme for European statistics which will be the 6th Annual Work Programme under the Single Market Programme 2021-2027.' relationship_type 'cites' is the closest available value -- ESAC advises on/reviews the Work Programme rather than using its data or deriving from its methodology; flagged in _open_questions as an imperfect fit, the same gap already logged for ess-escb-mip-quality-report.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/735541/749923/esac-opinion-2026.pdf/38afca7e-a056-4aff-f16b-7e2b2c1bc19d?t=1751292266760"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Commission Recommendation (EU) 2023/397 -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "A soft-law instrument (replacing Recommendation 2009/498/EC) inviting Member States to apply the Single Integrated Metadata Structure (SIMS). Not itself a recurrently published document -- it is a one-off legal act, same category as the Eurosystem collateral Guidelines excluded in G.43.md. Already recorded as context in PartB_soft_connections_2026-08-04.md (sc-02, sc-04, sc-05); no new node."
+    },
+    {
+      "edge": "[WIOD / EXIOBASE / EORA / GTAP-MRIO / OECD TiVA] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Named as parallel global multi-regional input-output databases in the GLOBAL-IO batch, each with a plausible title, but none independently verified live this session -- WIOD's own cited update ('recently updated to 2014', from a document written c. 2019) reads as possibly discontinued rather than confirmed recurring. Filed as leads, not chased further."
+    },
+    {
+      "edge": "eurostat-annual-work-programme -> [Regulation (EU) 2021/690 / Regulation (EC) No 223/2009]",
+      "source": "eurostat-annual-work-programme",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The Work Programme names its own legal basis explicitly (Reg. 2021/690 Annex II, Reg. 223/2009 Article 17), but neither regulation is itself a node in this corpus -- both are legal-spine instruments, same category as the EBS Regulation and Regulation 223/2009 already excluded elsewhere in the branch."
+    },
+    {
+      "edge": "ess-peer-review-final-report -> esgab-annual-report",
+      "source": null,
+      "target": null,
+      "reason": "wrong-target",
+      "why": "ESGAB conducts Eurostat's own peer review within the third-round process ('Eurostat's peer review was carried out by ESGAB'), but this is ESGAB acting as reviewer for one ESS member's review, not a citation between the two published report series. Not the same relationship as an edge between the two documents' own content -- no edge minted."
+    }
+  ]
+}

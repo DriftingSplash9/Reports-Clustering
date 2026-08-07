@@ -1,0 +1,98 @@
+{
+  "_slice": "Grande Prairie Public School Division — the education layer",
+  "_researched": "2026-07-28",
+  "_note": "School authorities complete the local picture: the city and county tax bylaws collect an education requisition, and this is where that money lands. Alberta requires every school jurisdiction to file its budget on a standard provincial template, which makes this layer unusually easy to trace — the template itself names the Funding Manual, the enrolment counts, and the prior year's audited statements. Post-secondary was attempted and abandoned this pass; see _dropped.",
+  "reports": [
+    {
+      "id": "gppsd-budget",
+      "title": "Approved Budget Report",
+      "publisher": "Grande Prairie Public School Division",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Grande Prairie, Alberta",
+      "description": "Annual budget filed on Alberta Education's standard template for school jurisdiction 3240, covering roughly $117 million of revenue against $118 million of expense for about 8,300 funded students. Discloses its own key assumptions, its enrolment projection, and the reserve limits it is tested against.",
+      "releases_per_year": 1,
+      "cadence_note": "School year ending August 31, so its cycle is offset from every municipal and provincial document in the graph by four months.",
+      "last_updated": null,
+      "url": "https://www.gppsd.ab.ca/our-division/division-planning",
+      "domains": [
+        "education",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "gppsd-financial-statements",
+      "title": "Audited Financial Statements",
+      "publisher": "Grande Prairie Public School Division",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Grande Prairie, Alberta",
+      "description": "Annual audited statements to August 31, establishing the accumulated surplus and reserve balances that the following year's budget opens from and is judged against.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.gppsd.ab.ca/our-division/division-planning",
+      "domains": [
+        "education",
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gppsd-budget",
+      "target_report_id": "ab-education-funding-manual",
+      "relationship_type": "calculated_from",
+      "basis": "The budget template cites the manual by name and is structured around it: 'As per the 2024/25 Funding Manual, a formal request for an exemption to exceed the 2024/25 maximum operating reserve must be approved by the board and submitted to the Minister.' The 6% maximum operating reserve limit the division is tested against, and the grant rates its revenue is built from, both come from the manual — the budget notes ongoing deficits caused by 'rising operational costs ... without corresponding increases in grant rates'.",
+      "evidence_url": "https://www.gppsd.ab.ca/download/561452"
+    },
+    {
+      "source_report_id": "gppsd-budget",
+      "target_report_id": "ab-education-student-enrolment",
+      "relationship_type": "calculated_from",
+      "basis": "The Projected Student Statistics schedule reports 8,261 eligible funded students as 'Grade 1 to 12 students eligible for base instruction funding from Alberta Education', counted as at September 30 and reported to the province through PASI, alongside disability counts on the same basis. Nearly all of the division's $113 million of Government of Alberta revenue is these counts multiplied by rates.",
+      "evidence_url": "https://www.gppsd.ab.ca/download/561452",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "09-30",
+        "stated_as": "Eligible funded students 'counted as at September 30' and reported to the province through PASI."
+      }
+    },
+    {
+      "source_report_id": "gppsd-budget",
+      "target_report_id": "gppsd-financial-statements",
+      "relationship_type": "uses_data_from",
+      "basis": "The accumulated surplus schedule opens from 'Actual balances per AFS at August 31, 2024' of $16,363,413 and carries audited actuals as a comparative column throughout. The budget cannot be built without the prior year's audit closing first.",
+      "evidence_url": "https://www.gppsd.ab.ca/download/561452",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "08-31",
+        "stated_as": "Opens from 'Actual balances per AFS at August 31' of the prior year."
+      }
+    },
+    {
+      "source_report_id": "gppsd-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "implied",
+      "basis": "Alberta school authorities prepare their financial statements under Canadian public sector accounting standards, as both municipalities already in the graph do and as provincial reporting requirements oblige. The GPPSD statements themselves were not read this pass, so the edge rests on the pattern rather than on the document. One PDF away from being documented."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "northwestern-polytechnic-annual-report -> *",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The post-secondary half of this slice failed, and for a structural reason worth recording. Northwestern Polytechnic publishes its annual report, strategic plan and master academic plan only through Issuu, a third-party page-flipping viewer, with no text-extractable copy on its own domain. The documents exist and are public, but nothing in them can be read or cited the way a municipal PDF can. Municipal reporting turned out to be markedly more machine-readable than post-secondary reporting — a finding about the corpus rather than about the institution."
+    },
+    {
+      "edge": "gp-tax-rate-bylaw -> gpcsd-education-requisition",
+      "source": "gp-tax-rate-bylaw",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Both the city and county bylaws levy an 'Opted Out School Board' requisition, and the opted-out board in this region is Grande Prairie & District Catholic Schools. But neither bylaw names it. Identifying the board would be inference from local knowledge, which is exactly what the evidence standard excludes."
+    }
+  ]
+}

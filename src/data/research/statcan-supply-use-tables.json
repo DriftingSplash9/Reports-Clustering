@@ -1,0 +1,73 @@
+{
+  "_slice": "statcan-supply-use-tables",
+  "_scope": "The Supply, Use and Input-Output Tables as a node, and the two documented benchmark edges that had nowhere to point. Closes the no-node-yet lead recorded in statcan-macro-accounts.json. Owns the SUT node and edges into and out of it; owns nothing in records 1301 or 1901 beyond what points at the SUT.",
+  "reports": [
+    {
+      "id": "statcan-sut",
+      "title": "Supply, Use and Input-Output Tables",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual benchmark of the Canadian System of Macroeconomic Accounts. The supply and use tables trace the production of products by domestic industries, combined with imports, through their use as intermediate inputs or as final consumption, investment or exports, and yield gross value added by industry; the symmetric industry-by-industry input-output tables are derived from them. Record 1401's own description states the tables 'can be used to calculate economy-wide gross domestic product (GDP) either directly, by summing value added over the industries, or indirectly, by summing to the economy-wide cost of primary inputs (income-based GDP) or by computing the grand total of the flow of products into final use categories (expenditure-based GDP) - the link to the national income and expenditure accounts.' Both the monthly GDP by industry programme and the quarterly income and expenditure accounts are projections off this benchmark, which is the actual shape of the Canadian accounts and was not representable in this graph until now.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, reference period calendar year, but with an unusually long lag: record 1401 states the tables 'are available about two and half years after the end of the reference year; this is because of the delay in obtaining the needed source data and by the complex nature of producing such a detailed account.' The programme also releases derived products on separate dates — the 2026 release schedule lists April 15 for the input-output tables, May 4 for value added in exports and June 16 for the economic impact of wireless telecommunications carriers — so releases_per_year 1 counts the benchmark tables and not the satellite products.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401",
+      "domains": ["national-accounts"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "statcan-gdp-monthly",
+      "target_report_id": "statcan-sut",
+      "relationship_type": "calculated_from",
+      "basis": "Record 1301 states the anchoring three separate ways in its own words. Under Estimation: 'The monthly estimates are benchmarked to annually chained Fisher volume indexes of GDP obtained from the constant-price supply and use tables.' Under Data accuracy: 'GDP by industry depends on the Supply and Use tables to which it is anchored', and 'as the monthly GDP by industry program relies on the annual estimates of real GDP obtained from the Supply and Use tables, the quality of these estimates has a direct influence on the quality of the monthly GDP measures.' Record 1401 says the same from the other side: 'two industry-based programs - one producing the country's current monthly GDP figures (record no. 1301), the other annual provincial-territorial estimates (record no. 1303) have been set up. These two programs, which can be viewed as extensions of the supply and use tables, use a set of indicators to project the GDP by industry benchmarks from the supply and use tables'. `calculated_from` because the monthly figure is literally a projection of a benchmark drawn from these tables, not merely informed by them — and note the release identifies the dependent by record number, which is the strongest cross-reference in the StatCan corpus so far.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1496491"
+    },
+    {
+      "source_report_id": "statcan-national-accounts",
+      "target_report_id": "statcan-sut",
+      "relationship_type": "calculated_from",
+      "basis": "Record 1901, under Estimation: 'The National Gross Domestic Product (GDP) by Income and by Expenditure Accounts are estimated by taking the most complete and high quality data sources available to establish annual benchmark estimates. ... The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use. These tables present the most complete and accurate depiction of Canadian economic activity.' The same record's Revisions section adds that statistical revisions incorporate 'the annual benchmarking process of the supply and use tables'. This is the edge that makes the V0.10 deletion of statcan-national-accounts -> statcan-gdp-monthly legible rather than merely correct: the quarterly and monthly programmes do not read each other, they are two projections off this common annual benchmark.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222"
+    },
+    {
+      "source_report_id": "statcan-sut",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Catalogue 15F0077GIE, 'A Guide to Deflating the Input-Output Accounts: Sources and Methods' (2001), which record 1301 cites as the description of the double-deflation method used to produce constant-price GDP by industry. Chapter 2, in the passage on trade margins: 'Consumer price indexes can be used to deflate the purchaser value of commodities sold for personal expenditure. Similarly, industry product price indexes are used to deflate the basic values of the same commodities. This has made it possible to calculate the trade margin for commodities bought for personal expenditure as a residual using both of these observed prices.' `methodology_depends_on` rather than `uses_data_from` because this document is the accounts' deflation methodology and the index is named as the price measure the method takes, which is the case the type comment describes. ONE HEDGE REMAINS, AND ONE WAS RETIRED IN V0.11. Retired: the 'can be used' softness above is not the document's last word on the CPI. Four sentences later in the same passage, unhedged and read while verifying the IPPI quotations, the guide states the mechanism outright: 'The total trade margin at constant prices is calculated as the difference between the purchaser value, deflated with the appropriate Consumer Price Index (CPI), and the sum of the basic value and the ...'. 'Deflated with' is a statement of what deflates what, which is exactly what the hedged sentence was recorded as lacking, so this edge is stronger than V0.10 believed and was under-rated by a first reading that stopped at the first mention. Still standing: the guide is a 2001 edition marked ARCHIVED — it remains the document record 1301 points at for this method, but it is twenty-five years old and a later methodology note may supersede it.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/15f0077g/15f0077g2001001-eng.pdf"
+    },
+    {
+      "source_report_id": "statcan-sut",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The reverse of statcan-national-accounts -> statcan-sut, and taken deliberately under the V0.10 decision that a node may be a mutual definitional partner. Record 1401, Quality evaluation: 'The input-output framework is validated for accuracy, coherence and overall reasonableness. The major components of the framework, such as the income and expenditure-based GDP components are reconciled to the national and provincial-territorial income and expenditure accounts.' Record 1901 states the converse in its own Estimation section: 'The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use.' Neither statement is a mistake and neither supersedes the other — annual benchmarking is an iterative balancing process in which each side constrains the other, which is what the accounts mean by coherence. The pair is asymmetric in strength and the `relationship_type` records that: 1901 discloses the SUT as the source of its benchmark levels (`calculated_from`), while 1401 describes reconciliation as a validation step rather than an input (`methodology_depends_on`), so the cycle is not symmetric in weight and does not assert that the two are interchangeable.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "statcan-sut -> (Industrial Product Price Index)",
+      "source": "statcan-sut",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED in V0.11 — statcan-ippi is a node, record 2318, and this edge exists. Kept as a note rather than deleted because the prediction it made is worth scoring: it said the IPPI 'would immediately carry edges from the SUT and probably from the monthly GDP programme', and both landed, the second one carrying 64 rows of release-level citation against the 27 behind the CPI. One thing it got wrong, corrected in statcan-ippi.json: the decisive quotation is in chapter 2, not chapter 3. ORIGINAL TEXT FOLLOWS. The strongest unrepresented deflator dependency in the Canadian accounts, and better evidenced than the CPI edge that was taken. Catalogue 15F0077GIE chapter 2: 'the commodity price information collected by the Prices Division to compile industry product price indexes can be used to construct deflators for values at basic prices. These Industrial Product Price Indexes (IPPI), aggregated where necessary to the input–output classification, constitute the main source of deflators for manufactured commodities. The IPPIs cover commodities that are the output of domestic manufacturers.' And unhedged, in chapter 3 under the heading 'Sources of deflators': 'The main data source of deflators for manufactured goods is the Industrial Product Price Indexes (IPPI) produced by Statistics Canada's Prices Division. Prior to 1981, deflators were based on Industry Selling Price Indexes (ISPI).' Note the second passage says 'is', not 'can be'. The IPPI is a monthly Statistics Canada release with its own IMDB record and is a sibling of the CPI in the Prices Division; it belongs in this graph and would immediately carry edges from the SUT and probably from the monthly GDP programme. Its predecessor, the Industry Selling Price Indexes, is named too and is discontinued — worth recording only as history."
+    },
+    {
+      "edge": "statcan-sut -> (CRA administrative files: T1, T2, T3010, T4, T5013)",
+      "source": "statcan-sut",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Record 1401's Data sources section is unusually specific about its administrative inputs and every one of them is a tax form rather than a publication: 'The program uses survey and administrative data collected by other Statistics Canada programs — T1 Income Tax and Benefit Return (CRA), T2 Corporations Incorporated Businesses (CRA), T3010 Registered Charity Information Return (CRA), T4 Statement of Pension, Retirement, Annuity and Other Income (CRA), T4 Statement of Remuneration Paid (CRA), T5013 Partnership Financial Return (CRA). Combining data from multiple sources, as part of the creation of integrated statistics.' Same category as the FR 2420 form behind H.15 and the FR 2644 form behind H.8 — named precisely, real, and not a recurring publication with a cadence. The remainder of the section, 'derived from other Statistics Canada surveys and/or other sources', is agency-level and names nothing."
+    },
+    {
+      "edge": "statcan-sut <-> statcan-national-accounts — the first mutual pair in the graph",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED. This entry was written as a deliberate omission, on the ground that creating both directions would put a two-node cycle into the authority calculation on asymmetric evidence. The mutual-definitional-partner question was then decided in the affirmative — see the decision in REPORTS.md — and both edges now exist. Kept as a note because the pair is the graph's first cycle and a later reader should know it is intentional rather than a data error. What made it safe is the V0.8 proportional-retention rule, and the argument is worth stating because it is the reason the objection above no longer bites: every node with outgoing edges keeps exactly 50% of its own rank regardless of how many edges it has or how strongly they are typed, so two nodes pointing at each other each pass on half and retain half. A mutual pair therefore converges instead of inflating, and cannot pump rank into itself the way a self-retaining sink could under the pre-V0.8 fixed retention. Measured effect on the corpus is recorded in the session log."
+    }
+  ]
+}

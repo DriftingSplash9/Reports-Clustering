@@ -1,0 +1,67 @@
+{
+  "_slice": "esa-2010",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Staged in EU/slices/eu-level/, checked, moved here and registered in src/data/index.ts.",
+  "_note": "Second EU slice. One node, ZERO dependencies, four _dropped. It exists because the node is real and fully documented while every edge around it currently fails a condition — and the failures are the finding. Written after a predicted edge (esa-2010 -> sna-2008) was refuted by Research.1.md 5a, and after a better relationship was found running the other way. Assessed from staged Part A records in EU/slices/_staging/, not from sources opened this session.",
+  "_headline": "DISCLOSURE RUNS UPWARD, NOT DOWNWARD. Two EU instruments have been followed to the national boundary and neither names a member-state publication (Annex XI, Annex B — both recorded as _dropped in eu-draft-budget.json). But member-state documents DO name the EU instrument: two German inventories each state they compile GDP/GNI 'in compliance with' ESA 2010, which is an obligation and not Research.1.md 5a agreement language. The asymmetry is the result — the supranational layer does not name its inputs, and the national layer does name its obligations.",
+  "_open_questions": [
+    "CADENCE for the two Destatis inventories is not stated by either document, so neither is minted — see the no-node-yet entries. Evidence exists for a five-year cycle (HERP benchmark revisions at reference years ending 0/5 and implementation years ending 4/9; 'most recent major revision took place in 2024, and the next is scheduled for 2029'; 'Eurostat GNI verification cycle 2020 to 2024') but that is the REVISION cycle, not a stated publication cadence for the inventories, and the two inventories in hand are Edition 2025 and Edition 2024 — one year apart, which the five-year reading does not explain. Deliberately not guessed: ISSAI 300/400 were refused on the same ground in eu-draft-budget.json and consistency is worth more here than one extra node.",
+    "ESA 2010's releases_per_year of 0.05 mirrors sna-2008 exactly (also 0.05, also a generational standard). Observed ESA intervals are shorter than that implies — ESA 1995 to ESA 2010 is 15 years, and a further revision is already named in an ESAC opinion ('the revised European System of Accounts (ESA) in line with the newly endorsed System of National Accounts (SNA 2025)'). 0.067 would fit the observed intervals better. Matched to the corpus precedent rather than the arithmetic; flag if the precedent is the thing that is wrong."
+  ],
+  "reports": [
+    {
+      "id": "esa-2010",
+      "title": "European System of Accounts 2010 (ESA 2010)",
+      "publisher": "European Parliament and Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The EU's national accounts framework, enacted as Regulation (EU) No 549/2013. Article 1(2) sets out its two parts: 'a methodology (Annex A) on common standards, definitions, classifications and accounting rules that shall be used for compiling accounts and tables on comparable bases for the purposes of the Union' and 'a programme (Annex B) setting out the time limits by which Member States shall transmit to the Commission (Eurostat) the accounts and tables'. Unlike the international standards already in this corpus, ESA 2010 is a Regulation — member states do not adopt it by choice — which is why the EU branch was expected to produce supranational-to-national edges the Canada/US pair lacks. Annex B turned out to name tables and deadlines rather than publications; see the _dropped entries here and in eu-draft-budget.json.",
+      "releases_per_year": 0.05,
+      "cadence_note": "A generational standard, revised roughly once every fifteen to twenty years: ESA 1995 preceded it, and a further revision is already anticipated. releases_per_year matches sna-2008 (0.05) so the two read at the same pulse rate; see _open_questions.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2013/549",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "esa-2010 -> sna-2008",
+      "source": "esa-2010",
+      "target": "sna-2008",
+      "reason": "no-document",
+      "why": "A PREDICTED EDGE, REFUTED BY Research.1.md 5a. ESA 2010's own text says: 'The ESA 2010 is consistent with the worldwide guidelines on national accounting set out in the System of National Accounts 2008 (2008 SNA)' (Annex A, Chapter 1, paragraph 1.05). 'Consistent with' is verbatim on 5a's watchlist and is agreement between two frameworks, not derivation of one from the other. Two further records say it the same way and were already flagged by the original extractor: the supply-and-use manual — 'The ESA 1995 is fully consistent with the world-wide System of National Accounts (SNA 1993)' — and Eurostat's national accounts page — 'This system is fully consistent with the worldwide guidelines on national accounting, the System of national accounts (SNA).' Three independent statements, all agreement language, none a dependency. Per 5a this is worth recording precisely because the link is plausible enough to be re-proposed every few months; it was re-proposed this session."
+    },
+    {
+      "edge": "ESA 2010 methods and sources for the German GNI and its components (Destatis) -> esa-2010",
+      "source": null,
+      "target": "esa-2010",
+      "reason": "no-node-yet",
+      "why": "THE BEST CROSS-LAYER CANDIDATE FOUND SO FAR, and the direction is the surprise. Destatis: 'The present document contains the detailed description of the methods and sources used for the compilation of the gross domestic product and the gross national income of the Federal Republic of Germany in compliance with the European System of National Accounts (ESA) 2010.' A second record from the same document: 'describes the methods and statistical sources used to calculate GDP and GNI at market prices for the Federal Republic of Germany based on the European System of Accounts (ESA) 2010.' 'In compliance with' and 'based on' are obligation and derivation language, NOT 5a agreement language — a real methodology_depends_on running from a member-state publication to the EU instrument. NOT MINTED, and the cadence question was looked up on 2026-08-05 rather than left open. THE ANSWER IS A DOCUMENTED CONFLICT, reported per 3 and not adjudicated. The publication's own colophon states 'Periodicity: non-recurring' (Statistisches Bundesamt, published March 2026), which is Research.1.md 4.2's exact disqualifier — 'something published once is not a node'. But the SAME DOCUMENT names its own predecessor: section 1.2 is headed 'Revisions policy and major revisions since the 2021 inventory', and the Destatis landing page carries an 'Older editions' heading. So a 2021 edition and a 2025 edition demonstrably exist, four years apart, consistent with the Eurostat GNI verification cycle documented elsewhere in the corpus ('Eurostat action points from the GNI verification cycle 2020 to 2024'). Reading: 'non-recurring' is most likely a per-publication metadata label meaning 'not a scheduled series release' rather than a claim that no further inventory will appear — but that is an inference about what the publisher meant, and 6 says do not guess a cadence to make the JSON validate. If the other end of the process reads 'non-recurring' as a metadata artefact, releases_per_year 0.25 is the number the observed 2021->2025 interval supports."
+    },
+    {
+      "edge": "Quarterly national accounts inventory (Destatis) -> esa-2010",
+      "source": null,
+      "target": "esa-2010",
+      "reason": "no-node-yet",
+      "why": "The same shape as the GNI inventory, independently stated in a different document: 'The present document contains the detailed description of the quarterly methods and sources used for the compilation of the gross domestic product of Germany in compliance with the European System of Accounts 2010 (ESA 2010). The inventory refers to the status as at August 2024. The structure of the description follows a uniform European standard that was developed by the Statistical Office of the European Communities.' Note the second sentence — the inventory's own STRUCTURE is set by Eurostat, a further and different documented dependency. NOT MINTED: checked on 2026-08-05, this document carries NO periodicity statement at all (unlike the GNI inventory, which declares 'non-recurring') and names no predecessor edition. Cadence therefore unestablished in either direction — a weaker position than the GNI inventory's documented conflict, not a stronger one."
+    },
+    {
+      "edge": "esa-2010 -> any named member-state statistical release",
+      "source": "esa-2010",
+      "target": null,
+      "reason": "no-document",
+      "why": "A corpus observation carried here so it sits next to the node it concerns. ESA 2010 obliges transmission but names no member-state publication: Annex B is 'a programme setting out the time limits by which Member States shall transmit the accounts and tables', its table overview has four columns (number, subject, deadline, period) and no column for a publication, and Destatis describing its own transmission names ten ESA table numbers and no German publication. Combined with the Annex XI salary chain, that is two independent binding instruments stopping at AGENCY ONLY at the national boundary. Both are recorded in full in eu-draft-budget.json's _dropped list; full assessments in EU/AnnexB_assessment_2026-08-05.md and EU/AnnexXI_PartA_2026-08-05.md. Read against the two no-node-yet entries above, which run the other way and do name their target."
+    },
+    {
+      "edge": "German quarterly national accounts release (t+30 flash / t+55 detail) -> esa-2010",
+      "source": null,
+      "target": "esa-2010",
+      "reason": "deferred",
+      "why": "NEW LEAD, opened 2026-08-05 while closing the inventory cadence question, and it looks more promising than either inventory. The inventories are METHODOLOGY documents whose cadence is contested; the RELEASE they describe has a documented timetable: 'First quarterly results of GDP without particular breakdown are published as press release 30 days after the end of a reporting quarter. The more detailed figures are published around 55 days after the end of the reporting quarter.' That is a stated quarterly cadence, which is what 4.2 wants, and the transmission record ties it to the EU instrument: 'The German QNA are transmitted to Eurostat in accordance with the mandatory ESA transmission program.' Two things are missing before it can be minted: an exact published TITLE for the release (the records call it 'the German QNA', a category rather than a title — 4.3), and its own URL, distinct from the inventory PDF that describes it. Both are one Destatis lookup away."
+    }
+  ]
+}

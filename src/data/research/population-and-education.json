@@ -1,0 +1,85 @@
+{
+  "_slice": "Population counts and the Alberta K-12 funding spine",
+  "_researched": "2026-07-28",
+  "_note": "The two population edges here are the joins between the federal statistical cluster and the Alberta municipal cluster — before this slice the graph was two disconnected components.",
+  "reports": [
+    {
+      "id": "statcan-census-population",
+      "title": "Census of Population",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The complete enumeration of Canada's population, required every five years by the Statistics Act. Supplies the population counts that provincial and municipal funding formulas ultimately rest on.",
+      "releases_per_year": 0.2,
+      "cadence_note": "Quinquennial — every five years. The coarse enum has no bucket for this; releases_per_year carries the truth. Collection for the 2026 Census began 4 May 2026; population counts release 10 February 2027.",
+      "last_updated": null,
+      "url": "https://www.statcan.gc.ca/en/census",
+      "domains": [
+        "population"
+      ]
+    },
+    {
+      "id": "ab-education-funding-manual",
+      "title": "Funding Manual for School Authorities",
+      "publisher": "Alberta Education",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual rulebook setting every grant rate and formula by which Alberta's school authorities are funded. Defines the enrolment methodology that base instruction funding is calculated from.",
+      "releases_per_year": 1,
+      "cadence_note": "Published per school year, with in-year updates.",
+      "last_updated": null,
+      "url": "https://www.alberta.ca/k-to-12-education-funding-model",
+      "domains": [
+        "education"
+      ]
+    },
+    {
+      "id": "ab-education-student-enrolment",
+      "title": "Student Enrolment by School, Authority and Grade Level",
+      "publisher": "Alberta Education",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual enrolment counts reported to Alberta Education by public, separate, francophone, charter and private school authorities. Preliminary data is replaced by final data when available.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://open.alberta.ca/opendata/student-enrolment-by-school-authority-and-grade-level",
+      "domains": [
+        "education",
+        "population"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ab-municipalaffairs-population-list",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "The Municipal Affairs Population List is based on municipal census results or federal census data, and federal census counts are used where a municipality has not run its own census.",
+      "evidence_url": "https://www.alberta.ca/municipal-census"
+    },
+    {
+      "source_report_id": "ab-tbf-population-estimates",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Alberta's municipal population estimation model is built on a standard methodology drawing on provincial administrative data together with federal government sources, specifically the federal census.",
+      "evidence_url": "https://www.alberta.ca/municipal-census"
+    },
+    {
+      "source_report_id": "statcan-lfs",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "methodology_depends_on",
+      "basis": "LFS population control totals start as a base estimate derived from the census, then updated monthly for births, deaths and migration. Every five years the entire series back to the previous census is re-weighted on the new counts.",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/71-543-g/71-543-g2025001-eng.htm"
+    },
+    {
+      "source_report_id": "ab-education-funding-manual",
+      "target_report_id": "ab-education-student-enrolment",
+      "relationship_type": "calculated_from",
+      "basis": "Base instruction grants are allocated from an averaged enrolment figure for each school authority — a three-year Weighted Moving Average up to 2024/25, replaced by the Adjusted Enrolment Method from 2025/26.",
+      "evidence_url": "https://www.alberta.ca/k-to-12-education-funding-model"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "_slice": "eurostat-edp-gfs-ecb-statistics",
+  "_researched": "2026-08-05",
+  "_status": "IMPORTED 2026-08-05. Verified from staged batches in EU/slices/_staging/10-batch-with-records.ndjson (indices 47, 51, 52, 53, 54, 55, 56, 61, 62), registered in src/data/index.ts.",
+  "_note": "Priority C (ECB/Eurosystem staging batches), G.41.md/G.42.md cheap check. Four nodes, two dependencies. A representative sample of the strongest staged quotes was live-verified against primary sources (Regulation (EC) 479/2009 on EUR-Lex, the Eurostat EDP/GFS pages, the ECB's own BSI and Consolidated Banking Data methodology pages) rather than promoting all staged records unchecked. Full record in EU/ECB-Staging-Batches_PartA_2026-08-05.md.",
+  "_headline": "Found a real, live, unreconciled contradiction on the ECB's own Consolidated Banking Data methodology page (four times a year vs. semi-annual/annual in the same document) and confirmed the first edge into esa-2010 from an EU-level document rather than a member-state one.",
+  "_open_questions": [
+    "The ecb-consolidated-banking-data cadence conflict (4x/year vs semi-annual+annual) is not resolved -- releases_per_year is set to 4, the figure stated first and most prominently, but cadence_note records both statements as found on the live page. Guideline ECB/2021/14's own frequency article would likely resolve this; the EUR-Lex fetch for it failed with a file-download response this session (see Part A) and was not chased further via WebFetch+pypdf.",
+    "ecb-mfi-balance-sheet-items resolves the target half of a _dropped no-node-yet entry already in eurosystem-ecb.json (ECB-04, G.39.md) -- a node now exists, but the edge itself (Eurosystem accounting data -> BSI statistics) is deliberately NOT added here, because the specific Annex citation for that quote was never independently re-verified, in either session. Cheapest next step on this thread: re-verify that citation, then wire the edge.",
+    "Three real, named ECB datasets (Supervisory Banking Statistics, Investment Funds statistics, Insurance Corporations statistics) were found in the same staged batches but not minted -- no cadence statement was found or checked for any of the three. See Part A 'Not minted, and why'."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-edp-notification-tables",
+      "title": "EDP Notification Tables (Government Deficit and Debt)",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Harmonised tables in which EU Member States report their planned and actual government deficit and debt levels to Eurostat under the excessive deficit procedure (EDP). Council Regulation (EC) No 479/2009, Article 3(1): 'Member States shall report to the Commission (Eurostat) their planned and actual government deficits and levels of government debt twice a year, the first time before 1 April of the current year (year n) and the second time before 1 October of year n.' Eurostat's own page: 'In April and October of each year, Eurostat publishes the notification tables as transmitted by EU Member States in accordance with EU regulation 479/2009.'",
+      "releases_per_year": 2,
+      "cadence_note": "Live-verified against both the Regulation text and the Eurostat page's own current release listing -- 'April 2026' and 'October 2025' dated release blocks visible on the live page.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/excessive-deficit-procedure/edp-notification-tables",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eurostat-edp-gfs-quality-report",
+      "title": "Report on the Quality of Fiscal Data Reported by EU Member States",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Article 8(3) of Council Regulation (EC) No 479/2009 (as amended): 'The Commission (Eurostat) shall report regularly to the European Parliament and to the Council on the quality of the actual data reported by Member States.' Eurostat's own page characterizes the resulting output as annual reports and currently lists 'Staff working document reporting to the European Parliament and the Council on the quality of fiscal data reported by Member States (MS) in 2025'. Note: the Regulation's own text says 'regularly', not 'annually' -- the annual framing is Eurostat's own practice, not a statutory requirement.",
+      "releases_per_year": 1,
+      "cadence_note": "Live-verified on Eurostat's own quality page; current edition assesses 2025 data. Statutory basis says 'regularly', not 'annually' -- recorded as a distinction, not resolved.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/quality",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ecb-mfi-balance-sheet-items",
+      "title": "MFI Balance Sheet Items (BSI) Statistics",
+      "publisher": "European Central Bank (ECB) / National Central Banks (NCBs)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "ECB's own methodology page: 'Monetary financial institution (MFI) balance sheet items (BSI) statistics are compiled by the ECB and include monthly and quarterly data.' All MFIs in the euro area are legally obliged to report to their national central bank, which in turn reports national aggregates to the ECB. Governed by Regulation ECB/2021/2 (recast) and Guideline ECB/2021/11.",
+      "releases_per_year": 12,
+      "cadence_note": "Live-verified on the ECB's own methodology page -- monthly data, with further breakdowns available quarterly.",
+      "last_updated": null,
+      "url": "https://data.ecb.europa.eu/methodology/mfi-aggregated-balance-sheet",
+      "domains": [
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "ecb-consolidated-banking-data",
+      "title": "Consolidated Banking Data (CBD2)",
+      "publisher": "European Central Bank (ECB) / National Central Banks (NCBs)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Aggregate consolidated profitability, balance sheets, asset quality, liquidity, funding, capital adequacy and solvency data for EU banks by size group, built from European Banking Authority Implementing Technical Standards (FINREP/COREP) supervisory reporting. Governed by Guideline ECB/2021/14.",
+      "releases_per_year": 4,
+      "cadence_note": "UNRESOLVED CONFLICT, recorded as found: the ECB's own live methodology page states, in one place, 'Data are published four times a year' and, further down the same page, 'The data are semi-annual, except for certain detailed breakdowns which are collected only annually.' Both sentences confirmed present on the live page 2026-08-05. releases_per_year uses the figure stated first and most prominently; not adjudicated. See EU/ECB-Staging-Batches_PartA_2026-08-05.md.",
+      "last_updated": null,
+      "url": "https://data.ecb.europa.eu/methodology/consolidated-banking-data",
+      "domains": [
+        "banking"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Eurostat, 'Information on data': 'EDP statistics should be fully consistent with the GFS data supplied through the ESA 2010 transmission programme. GFS are part of national accounts.' Live-verified 2026-08-05.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/information-data"
+    },
+    {
+      "source_report_id": "eurostat-edp-gfs-quality-report",
+      "target_report_id": "eurostat-edp-notification-tables",
+      "relationship_type": "uses_data_from",
+      "basis": "Council Regulation (EC) No 479/2009, Article 8(2): the 'statistical information' Eurostat draws on for the quality assessment is limited to '(a) data from national accounts; (b) inventories; (c) EDP notification tables; (d) additional questionnaires and clarification related to the notifications.' Live-verified 2026-08-05.",
+      "evidence_url": "https://eur-lex.europa.eu/eli/reg/2009/479/oj/eng"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ecb-mfi-balance-sheet-items -> ecb-eurosystem-weekly-financial-statement / ecb-eurosystem-annual-balance-sheet",
+      "source": "ecb-mfi-balance-sheet-items",
+      "target": null,
+      "reason": "deferred",
+      "why": "eurosystem-ecb.json already carries this as a _dropped no-node-yet entry (ECB-04, G.39.md), quoting Guideline (EU) 2024/2941: 'The monthly data feed into the published aggregated statistical data required from monetary financial institutions (MFIs) in the Union.' A target node now exists (this slice), but the specific Annex citation for that quote was never independently re-verified in either session -- wiring the edge now would just move the same hedge to a new file. Re-verify the citation first."
+      },
+    {
+      "edge": "ecb-consolidated-banking-data / SUP / IVF / ICB -> [European Banking Authority ITS/FINREP-COREP framework]",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "All three (and Supervisory Banking Statistics, not minted) are built from EBA Implementing Technical Standards on supervisory reporting (FINREP/COREP). The EBA ITS framework is an institutional/regulatory source, not itself a recurrently published titled report -- AGENCY ONLY equivalent. No node proposed for it."
+    },
+    {
+      "edge": "[Supervisory Banking Statistics (SUP)] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Named and described (data.ecb.europa.eu/data/datasets/sup/data-information) but no cadence statement found in the staged batches or checked live this session. Filed as a lead, not minted."
+    },
+    {
+      "edge": "[Investment funds statistics (IVF)] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Named, with a stated legal basis (Regulation ECB/2013/38, Guideline ECB/2021/12, Manual on IVF statistics), but no cadence statement found or checked live this session. Filed as a lead."
+    },
+    {
+      "edge": "[Insurance corporations statistics (ICB/ICO)] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Named, with a stated legal basis (Regulation ECB/2014/50), but no cadence statement found or checked live this session. Filed as a lead."
+    },
+    {
+      "edge": "[MIP scoreboard / Alert Mechanism Report statistical annex] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "A news item ('Eurostat published today the statistical annex to the alert mechanism report') evidences recurrence but is not itself a cadence statement, and the AMR's own governing instrument was not opened this session. Filed as a lead."
+    },
+    {
+      "edge": "[Euro area monetary aggregates (M1/M2/M3)] -> ecb-mfi-balance-sheet-items",
+      "source": null,
+      "target": "ecb-mfi-balance-sheet-items",
+      "reason": "no-node-yet",
+      "why": "Well documented as calculated_from the consolidated MFI balance sheet ('These are derived from the consolidated balance sheet of monetary financial institutions'), but no record names a distinct titled, cadenced publication for the aggregates separate from the BSI dataset itself. Treated as a derived series inside ecb-mfi-balance-sheet-items rather than a second node."
+    },
+    {
+      "edge": "[Eurosystem collateral framework: margin calls, valuation haircuts, fixed-term deposits] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Four fully-read staged batches (Guideline (EU) 2015/510 and its amendments -- margin calls, the 2026 haircut amendment, NCB implementation duty, fixed-term deposits) are correctly extracted and well-sourced but describe operational law governing collateral management, not a recurrently published titled report. Fails the node test on the same grounds as EBS Regulation 2019/2152 and the rest of the branch's legal-spine material. See EU/ECB-Staging-Batches_PartA_2026-08-05.md."
+    },
+    {
+      "edge": "[Institutional cooperation material: IAG, SDMX, Eurostat-OECD Technical Arrangement, ESS-ESCB MoU, UK-Eurostat arrangement] -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Standing cooperation agreements and coordinating bodies, not recurrently published titled documents -- same category as the already-closed Priority A institutional material (G.28.md)."
+    }
+  ]
+}

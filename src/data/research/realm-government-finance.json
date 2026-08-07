@@ -1,0 +1,383 @@
+{
+  "_slice": "realm-government-finance",
+  "_researched": "2026-08-06",
+  "_status": "NEW 2026-08-06. The Realm of New Zealand — Cook Islands (CK), Niue (NU) and Tokelau (TK). Three new countries, all in the `SAO` colour family alongside NZ and AU. Built the same day as `nz-government-finance.json` and directly out of it: New Zealand was mapped first, found to be an island in the graph, and this slice is the first attempt at the surrounding water.",
+  "_note": "Research by Grok across two rounds against Research Briefs VI and VII (`research-input/`), then re-verified in full by this session. EVERY quote below was re-fetched from its primary source by this session's own tooling — mfem.gov.ck, stats.gov.ck, mof.gov.nu and bills.parliament.nz all serve raw bytes to plain curl (pypdf for PDFs, HTML tag-stripping for pages); paclii.org returns HTTP 403 to non-browser clients, so the Tokelau Finance Rules 1998 and the Niue Public Revenues Ordinance 1959 were read through the Wayback `id_` raw-bytes endpoint. ROUND-TWO CAVEAT, recorded because it changed what could be minted: round one's quotes were verbatim and all eighteen verified exactly; round two's were near-verbatim but paraphrased in five places, including the Niue Note 2.2 that carries this slice's headline finding. Every `basis` field below is this session's own re-read of the document, not the researcher's transcription, and differs from the submitted text wherever the two disagreed.",
+  "reports": [
+    {
+      "id": "ck-government-financial-statements",
+      "title": "Financial Statements of the Government of the Cook Islands",
+      "publisher": "Ministry of Finance and Economic Management (MFEM), Cook Islands",
+      "country": "CK",
+      "jurisdiction_level": "federal",
+      "region": "Cook Islands",
+      "description": "The audited whole-of-government financial statements of the Cook Islands, prepared by the Treasury under the Ministry of Finance and Economic Management Act 1995-96. Reports on IPSAS and cites individual standards by number (IPSAS 17, 21, 35, 36, 39, 40 all appear). Audited by the Cook Islands' own Audit Office under the Public Expenditure Review Committee and Audit (PERCA) Act 1995-96 — not by New Zealand, unlike Niue and Tokelau. SEVERE ARREARS: the most recent full set located this session covers FY2018 and was signed by the Financial Secretary and audited by the Director of Audit on the same day, 30 November 2020 — a twenty-nine-month lag. `releases_per_year` records the statutory intent; the cadence note records the practice.",
+      "releases_per_year": 1,
+      "cadence_note": "Statutorily annual. In practice heavily lagged: the FY2018 statements were authorised for issue and audited on 30 November 2020. The 2018 audit opinion is qualified on four matters, including inability to confirm taxation revenue.",
+      "last_updated": null,
+      "url": "https://www.mfem.gov.ck/_files/ugd/dbdf40_63fa572e061e4e98869fea5015cf5ce8.pdf",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ck-budget-estimates",
+      "title": "Cook Islands Government Budget Estimates",
+      "publisher": "Ministry of Finance and Economic Management (MFEM), Cook Islands",
+      "country": "CK",
+      "jurisdiction_level": "federal",
+      "region": "Cook Islands",
+      "description": "The annual appropriation estimates and commentary, Book 1. Punctual where the audited statements are not — the 2026/27 edition is dated May 2026, with the Minister's Statement of Responsibility dated Thursday 21 May 2026. Contains the economic forecasts, a forecasting model built with Asian Development Bank technical assistance, and an explicit statement that the fiscal information follows the IMF's Government Finance Statistics Manual 2014.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.mfem.gov.ck/_files/ugd/110dc2_5f66a3c6623d486da14bd488317aa721.pdf",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ck-hyefu",
+      "title": "Cook Islands Government Half-Year Economic and Fiscal Update",
+      "publisher": "Ministry of Finance and Economic Management (MFEM), Cook Islands",
+      "country": "CK",
+      "jurisdiction_level": "federal",
+      "region": "Cook Islands",
+      "description": "The mid-year fiscal and economic update, structurally the Cook Islands analog of New Zealand's own HYEFU (`nz-treasury-befu`'s December counterpart). Carries its own Accounting Policies chapter for the forecast financial statements, whose Statement of Compliance names the IPSASB and — unusually candidly — points at a list of IPSAS standards the Government does not yet comply with.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, published in December: the 2023/24 edition is dated 14 December 2023 and the 2024/25 edition 10 December 2024.",
+      "last_updated": null,
+      "url": "https://www.mfem.gov.ck/_files/ugd/dbdf40_0b09bedbe4e34a11b1a405f3ff0dc903.pdf",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ck-national-accounts",
+      "title": "National Accounts — Annual (Gross Domestic Product)",
+      "publisher": "Cook Islands Statistics Office",
+      "country": "CK",
+      "jurisdiction_level": "federal",
+      "region": "Cook Islands",
+      "description": "The Cook Islands' annual GDP release, compiled mainly from VAT data on the production approach. Names SNA 2008 as its conceptual framework. NOTE THE INTERNAL CONFLICT this node resolves: the Statistics Office's own 'National Classifications' methodology page still describes the national accounts as 'largely based on' SNA68 with a series published 'from the year 1982-2001', while this release names SNA 2008 and carries data to 2024. Both are live on the same site. The methodology page is treated as stale and the release as current — see this slice's `_dropped` array, where the conflict is recorded rather than silently resolved.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual release (the 2024 edition published 31 December 2025); quarterly GDP is also produced and is what the Budget forecasts from.",
+      "last_updated": null,
+      "url": "https://stats.gov.ck/national-accounts-annual-2024/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ck-national-accounts-quarterly",
+      "title": "National Accounts — Quarterly (Gross Domestic Product)",
+      "publisher": "Cook Islands Statistics Office (Ministry of Finance and Economic Management)",
+      "country": "CK",
+      "jurisdiction_level": "federal",
+      "region": "Cook Islands",
+      "description": "The quarterly GDP release, split out from `ck-national-accounts` on 2026-08-06 because the Budget's forecasting model takes the quarterly series and not the annual one. Published roughly two to three quarters in arrears — the September quarter 2025 release is dated 18 June 2026. Compiled on the production approach at constant 2016 prices. Note that the Cook Islands Statistics Office attaches an identical 'More information on National Accounts' methodology block to both the quarterly and the annual release page, and that block is written for the quarterly series; see `_dropped`.",
+      "releases_per_year": 4,
+      "cadence_note": "Four releases a year, each roughly eight to nine months after the quarter it reports. The annual release is a separate publication on the same programme, dated 31 December 2025 for reference year 2024.",
+      "last_updated": null,
+      "url": "https://stats.gov.ck/national-accounts-september-quarter-2025/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ck-cpi",
+      "title": "Cook Islands Consumer Price Index",
+      "publisher": "Cook Islands Statistics Office",
+      "country": "CK",
+      "jurisdiction_level": "federal",
+      "region": "Cook Islands",
+      "description": "Quarterly consumer price index covering households on Rarotonga only, base year 2005, 205 priced items, weighted from the 2005 Household Income and Expenditure Survey and computed on the Laspeyres formula. NEGATIVE FINDING recorded on the node: the Statistics Office's own methodology text names the HIES as its weighting source but names NO external methodology manual — the IMF/ILO Consumer Price Index Manual (`cpi-manual`, already in this corpus) is not cited, unlike the SNA 2008 citation the national accounts carry.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://stats.gov.ck/national-classifications/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "nu-government-financial-statements",
+      "title": "Government of Niue Consolidated Financial Statements",
+      "publisher": "Government of Niue (Ministry of Finance)",
+      "country": "NU",
+      "jurisdiction_level": "federal",
+      "region": "Niue",
+      "description": "Niue's whole-of-government consolidated financial statements. THE MOST STRUCTURALLY UNUSUAL NODE IN THIS SLICE: its Statement of Compliance names no external accounting framework at all, defining compliance by reference to the Government's own policies plus the Constitution of Niue and the Public Revenues Act 1959. Verified by grep over the full text of two separate sets — FY2023/FY2024 (26pp) and the five-year FY2017-21 document (37pp): zero occurrences of 'IPSAS', 'International Public Sector', 'XRB', 'New Zealand GAAP' or 'generally accepted accounting' in either. Niue has therefore never named an external standard back to FY2016 at least, which makes this a settled practice rather than an omission. Audited by the Controller and Auditor-General of New Zealand under Article 60 of the Constitution of Niue — so Niue imports New Zealand's auditor while importing nobody's accounting standards.",
+      "releases_per_year": 1,
+      "cadence_note": "Nominally annual and in severe arrears until recently. FY2017-21 were reported as a SINGLE five-year document under the Public Revenues (Financial Reporting and Audit Special Provisions) Amendment Act 2022, a statute passed specifically to permit it. FY2023 was authorised for issue on 19 May 2025 and FY2024 on 22 May 2025 — two years of accounts signed three days apart.",
+      "last_updated": null,
+      "url": "https://mof.gov.nu/wp-content/uploads/2025/09/GoN-24J-A1-Consolidated-Financial-StatementsComp.pdf",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "nu-ag-report-assembly",
+      "title": "Report to the Assembly, Government of Niue (Controller and Auditor-General of New Zealand)",
+      "publisher": "Controller and Auditor-General of New Zealand",
+      "country": "NU",
+      "jurisdiction_level": "federal",
+      "region": "Niue",
+      "description": "The New Zealand Auditor-General's periodic report to the Niue Assembly on the audits of the Government of Niue and its State-Owned Entities. Published by a New Zealand office about a Niue government, under Niue's own constitutional appointment — one of the few documents in this corpus whose publisher and subject are in different countries by constitutional design rather than by choice. The most recent edition covers three financial years at once and describes the backlog it was clearing.",
+      "releases_per_year": 0.33,
+      "cadence_note": "Irregular, driven by the audit backlog rather than a schedule: the edition read this session covers the years ended 30 June 2022, 2023 and 2024 together and is dated 19 May 2025.",
+      "last_updated": null,
+      "url": "https://mof.gov.nu/wp-content/uploads/2025/06/Report-to-the-Assembly-22J-23J-24J-Final-signed-19-May-2025.pdf",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "nu-public-revenues-act-1959",
+      "title": "Public Revenues Act 1959 (Niue)",
+      "publisher": "Government of Niue",
+      "country": "NU",
+      "jurisdiction_level": "federal",
+      "region": "Niue",
+      "description": "Niue's public finance statute, originally the Public Revenues Ordinance 1959. Section 25 requires the annual accounts to be furnished, audited and presented to the Assembly; section 40 requires a statement of public moneys and investments. NEGATIVE FINDING: neither section names an accounting basis or a standard. Together with the Constitution's Articles 58-60 this is the whole of the legal specification of Niue's public accounts — it fixes who prepares them, who audits them and who receives them, and says nothing about how they are measured. That silence is what leaves `nu-government-financial-statements` free to define its own compliance.",
+      "releases_per_year": 1,
+      "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule.",
+      "last_updated": null,
+      "url": "https://paclii.org/nu/legis/num_act/pro1959232/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "tk-financial-statements",
+      "title": "Financial Statements of the Government of Tokelau",
+      "publisher": "Tokelau Administration / General Fono",
+      "country": "TK",
+      "jurisdiction_level": "federal",
+      "region": "Tokelau",
+      "description": "The annual financial statements required by Rule 9 of the Tokelau Finance Rules 1998, prepared for the General Fono and audited by the Controller and Auditor-General of New Zealand. CADENCE WARNING, and it is severe: the most recent publicly located instance covers FY2004 and reached this corpus through a New Zealand parliamentary paper (the Administrator of Tokelau's report, E.14), not through a Tokelau publication channel. This node rests on a live statutory requirement plus a twenty-two-year-old published instance. Treat its currency as unestablished until a future session finds a recent set — see this slice's `_dropped` array.",
+      "releases_per_year": 1,
+      "cadence_note": "Rule 9 requires preparation 'no later than 1 September in every year'. The most recent instance this session could locate covers the year ended 30 June 2004, published inside a New Zealand parliamentary paper.",
+      "last_updated": null,
+      "url": "https://bills.parliament.nz/download/Paper/84973b8a-e424-4b50-aeab-561634c722cc",
+      "domains": [
+        "national-accounts",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "tk-finance-rules",
+      "title": "Tokelau Finance Rules 1998",
+      "publisher": "General Fono of Tokelau",
+      "country": "TK",
+      "jurisdiction_level": "federal",
+      "region": "Tokelau",
+      "description": "Tokelau's public finance rules. Requires annual financial statements prepared 'in accordance with generally accepted accounting practice' — WITHOUT SAYING WHOSE, which is the third distinct answer the Realm gives to the same question (Cook Islands names IPSAS; Niue names nothing and says so; Tokelau names an undefined GAAP). Separately installs the Auditor-General of New Zealand as auditor and requires every auditor in Tokelau to be qualified to act as an auditor in New Zealand.",
+      "releases_per_year": 0.1,
+      "cadence_note": "Made 1998, consolidated 2016. Amended rarely.",
+      "last_updated": null,
+      "url": "https://www.paclii.org/tk/legis/consol_act_2016/fr1998115/",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ck-government-financial-statements",
+      "target_report_id": "ipsas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (PDF fetched from mfem.gov.ck with plain curl, 79 pages, pypdf-extracted). Three separate passages, in three different parts of the document. Statement of responsibility: \"These financial statements have been prepared by the Treasury in accordance with the provisions of the Ministry of Finance and Economic Act 1995-96. The financial statements comply with International Public Sector Accounting Standards, unless otherwise specified in the financial statements.\" (NOTE: the document's own text says 'Ministry of Finance and Economic Act 1995-96', dropping 'Management' from the Act's short title — quoted as published.) Note 1, Basis of reporting: \"These financial statements have been prepared in accordance with the Ministry of Finance and Economic Management Act 1995/96 and the International Public Sector Accounting Standards (IPSAS).\" And the Director of Audit's own opinion: \"comply with generally accepted accounting practices as defined by the Ministry of Finance and Economic Management Act 1995-96 and International Public Sector Accounting Standards (IPSAS) issued by the International Public Sector Accounting Standards Board.\" The document also names individual standards by number — IPSAS 17 Property Plant and Equipment, IPSAS 21 Impairment of Non-Cash-Generating Assets, and IPSAS 35, 36, 39 and 40 in its not-yet-adopted list.",
+      "evidence_url": "https://www.mfem.gov.ck/_files/ugd/dbdf40_63fa572e061e4e98869fea5015cf5ce8.pdf"
+    },
+    {
+      "source_report_id": "ck-hyefu",
+      "target_report_id": "ipsas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (2023/24 HYEFU PDF fetched from mfem.gov.ck with plain curl, 125 pages, pypdf-extracted). Section 10.1, Statement of Compliance, under 'Accounting Policies for the Forecast Financial Statements of the Government of the Cook Islands': \"These forecast financial statements have been prepared in accordance with the Ministry of Finance and Economic Management (MFEM) Act 1995-96 and Generally Accepted Accounting Practice (GAAP) with the International Public Sector Accounting Standards Board (IPSASB). The IPSAS standards which the Government does not comply and have yet to adopt are noted at the end of these accounting policies. The use of public resources by the Government is primarily governed by the MFEM Act 1995-96.\" The second sentence is worth keeping: the Cook Islands states in its own forecast accounts that its IPSAS compliance is partial, and points at the list.",
+      "evidence_url": "https://www.mfem.gov.ck/_files/ugd/dbdf40_0b09bedbe4e34a11b1a405f3ff0dc903.pdf"
+    },
+    {
+      "source_report_id": "ck-budget-estimates",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (2026/27 Budget Estimates Book 1 fetched from mfem.gov.ck with plain curl, 250 pages, pypdf-extracted). Financial Secretary's Statement of Responsibility: \"This document includes a comprehensive Statement of Fiscal Responsibility, which clearly articulates the fiscal position in alignment with the requirements of section 23(2)(a) of the MFEM Act 1995-96. The financial information relating to national public finances is also consistent with the standards outlined in the International Monetary Fund's Government Finance Statistics manual 2014.\" Named by publisher, title and edition. This is the Cook Islands' single clearest citation of an international framework and it sits in the budget, not the statistics.",
+      "evidence_url": "https://www.mfem.gov.ck/_files/ugd/110dc2_5f66a3c6623d486da14bd488317aa721.pdf"
+    },
+    {
+      "source_report_id": "ck-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY (release page fetched from stats.gov.ck with plain curl and HTML-tag-stripped). Under the heading 'System of National Accounts': \"The conceptual framework used to compile the Cook Islands GDP is based on the System of National Accounts 2008.\" The same page's 'Data Source' section adds: \"VAT data is the main data source in the compilation of GDP. Other data sources and methods are found in the table for the methodology of compiling the Cook Islands quarterly GDP on request.\" — the fuller methodology is explicitly available only on request, which is why this edge rests on the framework citation and not on a data-source table.",
+      "evidence_url": "https://stats.gov.ck/national-accounts-annual-2024/"
+    },
+    {
+      "source_report_id": "ck-budget-estimates",
+      "target_report_id": "ck-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (2026/27 Budget Estimates, pypdf-extracted). Recurring source note beneath the economic figures: \"Source: Cook Islands Statistics Office, National accounts (gross domestic product – GDP at constant prices; MFEM estimates and forecasts.\" (unclosed parenthesis in the original). The forecasting model's own data list confirms the dependency operationally: \"The key data sets used for the model are: • Real and nominal GDP – quarterly data to June 2025...\". RESOLVED 2026-08-06: the split flagged here has been made. `ck-national-accounts-quarterly` is now a separate node and carries the model-inputs quote; this edge is retained on the strength of the generic source note alone.",
+      "evidence_url": "https://www.mfem.gov.ck/_files/ugd/110dc2_5f66a3c6623d486da14bd488317aa721.pdf"
+    },
+    {
+      "source_report_id": "ck-budget-estimates",
+      "target_report_id": "ck-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (2026/27 Budget Estimates, pypdf-extracted). The macroeconomic model's data list: \"This model has been developed using technical assistance from the A sian Development Bank, and utilising a wide range of data sources. Data The key data sets used for the model are: • Real and nominal GDP – quarterly data to June 2025, • Trade, imports, and exports – monthly data to December 2025, • Consumer Price Index (CPI) – quarterly index data to December 2025, • International arrivals – Customs and Immigration monthly data to February 2026, and • Building approvals – quarterly data to September 2025.\" Quoted with the PDF text layer's own broken word 'A sian' intact. The ADB is named as the source of technical assistance for the model, not of any data — see `_dropped`.",
+      "evidence_url": "https://www.mfem.gov.ck/_files/ugd/110dc2_5f66a3c6623d486da14bd488317aa721.pdf"
+    },
+    {
+      "source_report_id": "nu-ag-report-assembly",
+      "target_report_id": "nu-government-financial-statements",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (Report to the Assembly PDF fetched from mof.gov.nu with plain curl, pypdf-extracted). Opening: \"I am pleased to report that the financial statements and associated audits of the Government of Niue (the Government) and its State-Owned Entities (SOEs) for the years ended 30 June 2022, and 30 June 2023 have now been completed and the audit opinions issued. The audits of the Government and SOEs for the year ended 30 June 2024 are also substantially complete and we expect to issue our audit opinions in May 2025. This means all Government and SOE audits will shortly be up to date.\" The report is about those statements and names them by year.",
+      "evidence_url": "https://mof.gov.nu/wp-content/uploads/2025/06/Report-to-the-Assembly-22J-23J-24J-Final-signed-19-May-2025.pdf"
+    },
+    {
+      "source_report_id": "nu-government-financial-statements",
+      "target_report_id": "nu-public-revenues-act-1959",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY (FY2023 consolidated statements fetched from mof.gov.nu with plain curl, pypdf-extracted; identical wording confirmed in the FY2024 set). Note 2.2, Statement of Compliance, quoted from the document's own text layer including its OCR artefacts: \"The Consolidated Financial Statements and the Financial Statements of the individual reporting entities are prepared in accordance with the accounting policies of the Government of Niue. The Consolidated Financial Statements also comply with specific requirements in the Constitution of Niue and with applicable statutes: - Article 58('l) of the Constitution requires all expenditure of public money to be appropriated by the Assembly... - Article 60 of the Constitution appoints the Office of the Auditor General of New Zealand as the auditor of the Governments Financial Statements. - Section 25 of the Public Revenues Act 1959 requires the Financial Secretary to prepare Financial Statements as soon as possible after the end of the financial year, which should then be audited and submitted (with audit report) to the Assembly. - Section 40 of the Public Revenues Act 1959 requires a statement showing details of public moneys and investments...\" `cites` and not `methodology_depends_on` deliberately: the Act supplies the obligation to produce the statements and supplies no measurement basis whatever, which is precisely this slice's finding. The Act's own s.25 text was read separately: \"As soon as possible after the close of the financial year, the Treasurer shall furnish to the Resident Commissioner a statement of receipts and payments for that year...\" — no accounting basis named there either.",
+      "evidence_url": "https://mof.gov.nu/wp-content/uploads/2025/06/GoN-23J-A1-Consolidated-Financial-Statements-Signed-medium.pdf"
+    },
+    {
+      "source_report_id": "tk-financial-statements",
+      "target_report_id": "tk-finance-rules",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY (New Zealand parliamentary paper E.14 downloaded from bills.parliament.nz with plain curl, 72 pages, pypdf-extracted). The Auditor-General's report on Tokelau's FY2004 statements: \"REPORT OF THE CONTROLLER AND AUDITOR-GENERAL TO THE READERS OF THE FINANCIAL STATEMENTS OF THE GOVERNMENT OF TOKELAU FOR THE YEAR ENDED 30 JUNE 2004 I have audited the financial statements of the Government of Tokelau (the Government) on pages 14 to 30 using the staff and resources of Audit New Zealand. The financial statements provide information about the past financial performance of the Government of Tokelau and its financial position as at 30 June 2004, pursuant to Rule 9 of the Tokelau Finance Rules 1998.\" The Rules themselves, read via Wayback `id_` raw replay because paclii.org returns HTTP 403: \"The Tokelau Administration shall no later than 1 September in every year, prepare the annual financial statements for the General Fono for the previous financial year. (2) The annual financial statements shall be prepared in accordance with generally accepted accounting practice and shall include...\" — GAAP required, no definer named.",
+      "evidence_url": "https://www.paclii.org/tk/legis/consol_act_2016/fr1998115/"
+    },
+    {
+      "source_report_id": "ck-national-accounts-quarterly",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (release page fetched from stats.gov.ck as ordinary server-rendered HTML). Under the heading 'System of National Accounts': \"The conceptual framework used to compile the Cook Islands GDP is based on the System of National Accounts 2008.\" Both the quarterly and the annual release page carry a character-identical 'More information on National Accounts – (Gross Domestic Product)' block, and that block is written for the quarterly series: \"The production approach (GDP (P)) is being used to calculate the Cook Islands GDP on a quarterly basis.\" Its 'Data Source' paragraph likewise refers only to the quarterly compilation: \"VAT data is the main data source in the compilation of GDP. Other data sources and methods are found in the table for the methodology of compiling the Cook Islands quarterly GDP on request.\" So the annual release's stated methodology is the quarterly release's methodology, reproduced. This edge is therefore the primary one and the identically-worded `ck-national-accounts -> sna-2008` is its inheritance, not an independent statement.",
+      "evidence_url": "https://stats.gov.ck/national-accounts-september-quarter-2025/"
+    },
+    {
+      "source_report_id": "ck-national-accounts-quarterly",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (release page fetched from stats.gov.ck as ordinary server-rendered HTML). Under its own bolded heading: \"International Standard Industrial Classifications (ISIC Rev 4) – is used to classify the principal economic activity (industry) of establishments and enterprises.\" The page then sets out the three broad industry groupings it aggregates ISIC to — primary (\"agriculture, fishing and pearl\"), secondary (\"mining and manufacturing; electricity and water supply; and construction\") and tertiary — and those groupings are the ones the release's own headline commentary is written in, so the classification is doing work rather than being name-checked. Found incidentally while splitting the annual and quarterly series for `NZ/G.2.md` cheap check 2; `isic` was minted the same session in `anzsic-industry-classification.json` and this is its second inbound edge, from a third jurisdiction and an unrelated pass.",
+      "evidence_url": "https://stats.gov.ck/national-accounts-september-quarter-2025/"
+    },
+    {
+      "source_report_id": "ck-national-accounts",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY BY THIS SESSION (annual release page fetched from stats.gov.ck as ordinary server-rendered HTML). Identical wording to the quarterly release: \"International Standard Industrial Classifications (ISIC Rev 4) – is used to classify the principal economic activity (industry) of establishments and enterprises.\" Both the quarterly and the annual release page carry a character-identical 'More information on National Accounts – (Gross Domestic Product)' block, and that block is written for the quarterly series: \"The production approach (GDP (P)) is being used to calculate the Cook Islands GDP on a quarterly basis.\" Its 'Data Source' paragraph likewise refers only to the quarterly compilation: \"VAT data is the main data source in the compilation of GDP. Other data sources and methods are found in the table for the methodology of compiling the Cook Islands quarterly GDP on request.\" So the annual release's stated methodology is the quarterly release's methodology, reproduced. Minted anyway rather than dropped as a duplicate, because the annual release does publish the statement on its own page under its own title and a reader of that release is entitled to rely on it — but a successor should treat this edge and `ck-national-accounts-quarterly -> isic` as one disclosure counted twice, not two disclosures.",
+      "evidence_url": "https://stats.gov.ck/national-accounts-annual-2024/"
+    },
+    {
+      "source_report_id": "ck-budget-estimates",
+      "target_report_id": "ck-national-accounts-quarterly",
+      "relationship_type": "uses_data_from",
+      "basis": "INHERITED QUOTE, NEW TARGET. The quote is the minting session's pypdf extraction of the 2026/27 Budget Estimates and was not re-extracted here; what this session did was split the target. The Budget's forecasting model lists its own inputs: \"The key data sets used for the model are: • Real and nominal GDP – quarterly data to June 2025...\". 'Quarterly data to June 2025' can only be the quarterly release, which this session has now minted as a separate node after confirming directly that the Cook Islands Statistics Office publishes quarterly and annual GDP as two distinct titled releases on two distinct pages with two distinct cadences. The pre-existing `ck-budget-estimates -> ck-national-accounts` edge is kept and not retargeted, because it rests on a different quote — the recurring source note beneath the Budget's economic tables, which names the programme generically rather than either release — and the two edges together are the honest representation: the Budget cites the programme and feeds its model from the quarterly series.",
+      "evidence_url": "https://www.mfem.gov.ck/_files/ugd/110dc2_5f66a3c6623d486da14bd488317aa721.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "nz-oag-annual-report -[audits]-> tk-financial-statements (MINTED)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "CLOSED 2026-08-06 (second thread). This note is retained rather than deleted because its reasoning was corrected twice and the correction is the useful part. It first argued the ontology could not express 'X audits Y'; that was accepted and a parallel unweighted `relations` list was added to types.ts. It then argued the remaining blocker was the node inventory — correct, and now resolved: `nz-oag-annual-report` was minted in nz-government-finance.json from the Auditor-General's statutory annual report (Public Audit Act 2001 s 37), and `nz-oag-annual-report -[audits]-> tk-financial-statements` is in this slice's `relations`. Its third claim, that neither auditor is installed by New Zealand law, is WRONG for Tokelau and is corrected in that relation's `basis`: Tokelau Administration is named in Schedule 2 of the Public Audit Act 2001. See NZ/G.4.md Corrections."
+    },
+    {
+      "edge": "nu-government-financial-statements -> any external accounting framework",
+      "source": "nu-government-financial-statements",
+      "target": null,
+      "reason": "no-document",
+      "why": "VERIFIED DIRECTLY by full-text grep of two separate document sets fetched this session. FY2023/FY2024 consolidated statements (26pp each) and the five-year FY2017-21 statements (37pp): ZERO occurrences of 'IPSAS', 'International Public Sector', 'XRB', 'New Zealand GAAP' or 'generally accepted accounting' in any of them. Note 2.1 Basis of Preparation defines the basis from first principles — \"prepared on a historical cost basis, except for financial instruments which are recorded at fair value... The lncome Statement, the Balance Sheet and the Statement of Changes in Equity are prepared on an accrual basis\" — and note 2.10 draws an explicit boundary around what the policies contain: \"(These estimated useful lives and resulting depreciation rates result from application of the Group's accounting policies, but are themselves not part of these accounting policies.)\" The auditor then opines against those same self-defined policies: \"the financial statements of the Government and group for the year ended 30 June 2024 have been prepared, in all material respects, in accordance with the accounting policies described in note 2, Summary of Significant Accounting Policies.\" A closed loop, sustained across at least nine reporting years, in a jurisdiction whose auditor is the New Zealand Auditor-General and whose currency is the New Zealand dollar. This is a documented negative of the same class as Australia's AASB 1049 result, and stronger: Australia's standard merely fails to name local government, whereas Niue's accounts name no standard-setter at all."
+    },
+    {
+      "edge": "nu-government-financial-statements -> Darroch Limited, Registered Valuers",
+      "source": "nu-government-financial-statements",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "VERIFIED DIRECTLY (FY2023 statements, note 2.10). \"Land and Buildings were first recognised in the Financial Statements in the year ended 30 June 1998. The valuation was performed by Darroch Limited, Registered Valuers, on 30 March 1998. This valuation is considered an apropriate estimate of deemed costs as at 1 July 1997.\" (misspelling as published). A named private valuer whose 1998 work still underpins the deemed cost of Niue's land and buildings twenty-seven years later. Not a node: a one-off engagement, not a recurring publication — the same reasoning that keeps other named-but-unpublished inputs out. Recorded because named commercial sources are a category this corpus collects (`jd-power-valuation-services`, `ice-brent-futures-settlement`, `argus-mexico-maya-spot`), and because this one was nearly lost: the researcher's submitted transcription of note 2.10 paraphrased the sentence and dropped the valuer's name entirely. It survived only because every quote in this slice was re-read against the source."
+    },
+    {
+      "edge": "Cook Islands Statistics Office 'National Classifications' page -> SNA68 vs the current release's SNA 2008",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "A live internal conflict on one publisher's own site, recorded rather than adjudicated per `Research.1.md` §3. The 'National Classifications' methodology page states: \"The Cook Islands National Accounts are largely based on the United Nations Systems of National Accounts 1968 (SNA68).\" and \"The series is published from the year 1982-2001 at the 1990 price (i.e 1990 base year).\" The National Accounts – Annual 2024 release states: \"The conceptual framework used to compile the Cook Islands GDP is based on the System of National Accounts 2008.\" Both VERIFIED DIRECTLY this session; the methodology page carries no visible last-updated date. This slice treats the release as current and the page as stale, and mints the SNA 2008 edge only. NOTE FOR ANY FUTURE SESSION: SNA68 is a different document from SNA 2008 and there is no `sna-1968` node; do not resolve the conflict by pointing the page's quote at `sna-2008`. The same page is the source for `ck-cpi`'s methodology description, so the staleness question touches that node too."
+    },
+    {
+      "edge": "ck-national-accounts quarterly release as a separate node",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "The Cook Islands publish quarterly GDP as well as the annual release minted here, and the Budget forecasts from the quarterly series (\"Real and nominal GDP – quarterly data to June 2025\"), not the annual one. Held as one node for scope reasons, with the edge basis flagging the mismatch — the same treatment `AU/G.1.md` gave the ABS GFS Manual versus the annual GFS release. Worth splitting if a future session wants the quarterly programme as its own citable release."
+    },
+    {
+      "edge": "ck-budget-estimates -> a published Asian Development Bank technical assistance report",
+      "source": "ck-budget-estimates",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "VERIFIED DIRECTLY that the ADB is named, and only as a provider of assistance: \"This model has been developed using technical assistance from the A sian Development Bank, and utilising a wide range of data sources.\" No ADB publication is named, and no ADB document is a node in this corpus. If a published TA report behind the Cook Islands macroeconomic model exists, it would be a genuine methodology edge. Brief VII item 11d asked for it; the round did not reach item 11."
+    },
+    {
+      "edge": "ck-cpi -> cpi-manual",
+      "source": "ck-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "VERIFIED DIRECTLY (Statistics Office methodology text read in full). The Cook Islands CPI description names its weighting source — \"Individual prices are combined using weights from the Household Income and Expenditure Survey conducted in 2005\" — and its formula — \"The CPI is computed using the Laspeyres price index formula\" — but names NO external methodology manual. The corpus already holds `cpi-manual` (Consumer Price Index Manual: Concepts and Methods) and the edge would have been natural; it is not documented, so it does not exist. Worth contrasting with the national accounts on the same site, which do name SNA 2008: within one small statistics office, one programme cites its international framework and the other does not."
+    },
+    {
+      "edge": "tk-financial-statements — currency of the node itself",
+      "source": "tk-financial-statements",
+      "target": null,
+      "reason": "note",
+      "why": "Flagged against this slice's own node rather than against an edge. The Tokelau financial statements are minted on a live statutory requirement (Finance Rules 1998 Rule 9, 'no later than 1 September in every year') plus one published instance from FY2004, reached through a New Zealand parliamentary paper. No recent Tokelau-published instance was located. This is the weakest node in the slice and the first place a future session should either strengthen it or retire it. Brief VII item 8 asked for the full publication record of all three jurisdictions and the round returned it for Niue only."
+    },
+    {
+      "edge": "Tokelau appropriations inside the New Zealand Estimates of Appropriations",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Asked twice (Brief VI item 3c, Brief VII item 13) and not closed either time; the researcher correctly marked it NOT FOUND on `search-snippet-only` rather than guessing. This would be a New Zealand document naming a Tokelau function — the opposite direction to everything else in this slice, and therefore the most valuable single addition available. The document is The Estimates of Appropriations for the Government of New Zealand, Vote Foreign Affairs and Trade, published annually by the New Zealand Treasury, whose site serves PDFs to plain curl."
+    },
+    {
+      "edge": "New Zealand - Tokelau 'Joint Declaration on Principles of Partnership'; the Niue bilateral instrument",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Two titled bilateral instruments surfaced but were not obtained. The Tokelau one is named in the Administrator of Tokelau's own report to the New Zealand Parliament, VERIFIED DIRECTLY: \"The period also saw fundamental changes in the way New Zealand discharges its responsibilities to Tokelau, with the signing of a formal 'Joint Declaration on Principles of Partnership'\". For Niue, the Auditor-General's Report to the Assembly describes the relationship without naming an instrument: \"the Government has noted the reliance on the New Zealand Government's ongoing support, which included annual budget support, annual sector support, annual funding for administrative and technical assistance, funding for specified development projects and contributions to the NITF.\" The open question for both is whether the instrument obliges either side to PUBLISH anything, or only to pay — Brief VII item 12d. Unanswered."
+    },
+    {
+      "edge": "Government of Niue Budget as a node",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "The Government of Niue Fiscal Strategy and National Budget Overview exists and its masthead was verified by the researcher (FY2025-26, June 2025, published by the Ministry of Finance). Not minted, because no passage from inside it has been read and it would enter the graph with no documented edge in either direction — an isolated node whose isolation would carry no finding, unlike `nz-nzta-far-policy` or `au-brisbane-financial-statements` where the absence is the result. Mint it when there is something to connect it to."
+    },
+    {
+      "edge": "ck-national-accounts / ck-national-accounts-quarterly — shared methodology boilerplate (caveat on minted edges)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The Cook Islands Statistics Office publishes one methodology block and attaches it, unaltered, to both the quarterly and the annual release pages, and the block is written for the quarterly series: \"The production approach (GDP (P)) is being used to calculate the Cook Islands GDP on a quarterly basis\". The consequence for this corpus is that `ck-national-accounts` and `ck-national-accounts-quarterly` now carry duplicate edges to `sna-2008` and `isic` which look like two independent disclosures and are one. Recorded rather than resolved by deleting the annual edges, because the annual release does publish the claim under its own title. Anyone computing disclosure counts across the Realm slice should net one of each pair out. This is also worth watching for as a general pattern: a statistics office with one boilerplate methodology block and several releases will inflate its own apparent disclosure in a corpus built the way this one is."
+    }
+  ],
+  "relations": [
+    {
+      "source_report_id": "nu-ag-report-assembly",
+      "target_report_id": "nu-government-financial-statements",
+      "relation_type": "audits",
+      "basis": "VERIFIED DIRECTLY by the minting session (Report to the Assembly and the FY2024 consolidated statements, both fetched from mof.gov.nu with plain curl and pypdf-extracted); converted from a `_dropped` note to a `Relation` on 2026-08-06 when the schema question was decided. EXPORT OF INSTITUTION, and the appointment runs the unexpected way. The FY2024 audit report is signed \"John Ryan / Controller and Auditor-General / Wellington, New Zealand\", and his independence statement reads: \"Other than in exercising functions and powers under Article 60 of the Constitution of Niue, I have no relationships with or interests in the Government of any of its subsidiaries.\" So a New Zealand statutory officer audits Niue's public accounts under NIUE'S OWN constitution, not under New Zealand law — Niue appoints the New Zealand Auditor-General, New Zealand does not impose him. The Report to the Assembly opens: \"I am pleased to report that the financial statements and associated audits of the Government of Niue (the Government) and its State-Owned Entities (SOEs) for the years ended 30 June 2022, and 30 June 2023 have now been completed and the audit opinions issued.\" NOTE that this pair also carries a `uses_data_from` dependency in the same slice, and the duplication is correct rather than an error: the Auditor-General's report both takes the statements as its data and assures them, and only the first of those is a dependency. This is the corpus's first `Relation` and the pair was chosen partly because it demonstrates that a dependency and a relation over the same two nodes are different claims.",
+      "evidence_url": "https://mof.gov.nu/wp-content/uploads/2025/06/Report-to-the-Assembly-22J-23J-24J-Final-signed-19-May-2025.pdf"
+    },
+    {
+      "source_report_id": "nz-oag-annual-report",
+      "target_report_id": "tk-financial-statements",
+      "relation_type": "audits",
+      "basis": "VERIFIED DIRECTLY by this session (2026-08-06, second thread) from two separate recurring publications of the Office of the Auditor-General, both read in a browser after oag.parliament.nz was found to redirect to a rebranded ao.parliament.nz. Annual report 2024/25, Part 1: About us: \"The Auditor-General is also the Auditor-General of the governments of Niue and Tokelau, and the Secretary-General of the Pacific Association of Supreme Audit Institutions (PASAI), which works to strengthen supreme audit institutions throughout the Pacific.\" The Auditor-General's strategic intentions to 2031, Part 1: \"The Auditor-General of New Zealand also serves as Auditor-General for the governments of Niue and Tokelau, and as Secretary-General of the Pacific Association of Supreme Audit Institutions (PASAI).\" The receiving instrument was already verified by the minting session and is unchanged — Tokelau Finance Rules 1998: \"(1) There shall be an auditor of accounts for the Tokelau Administration. (2) The Auditor-General of New Zealand shall be the auditor of accounts which contain public money, and, unless legislation otherwise directs, of each body corporate of Tokelau.\" CORRECTION TO THIS SLICE'S OWN FRAMING, established this session and recorded in NZ/G.4.md Corrections. The `_dropped` note that this relation replaces said Tokelau's auditor is installed \"by an instrument of the Tokelau Administration, Niue's by Niue's own Constitution, and neither by New Zealand law\". The last clause is wrong for Tokelau. \"Tokelau Administration\" is listed by name in Schedule 2 of the New Zealand Public Audit Act 2001, \"Specific public entities not falling within any class\", referenced to s 5(1)(d) — so Tokelau is a New Zealand public entity by New Zealand statute, and is audited on that footing as well as under its own Finance Rules. Niue appears nowhere in the Act: a full-text search of the current consolidation returns one occurrence of \"Tokelau\" and zero of \"Niue\". The contrast therefore survives but runs the OTHER WAY from how the note stated it. Niue is the pure export-of-institution case — New Zealand law is silent and Niue's own Constitution reaches out to appoint a New Zealand statutory officer. Tokelau is doubly installed, and one of the two instruments is New Zealand's own.",
+      "evidence_url": "https://ao.parliament.nz/2025/annual-report/part-1-about-us"
+    }
+  ]
+}

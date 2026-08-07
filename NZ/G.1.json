@@ -1,0 +1,109 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.1.md",
+  "number": 1,
+  "title": "G.1.md — New Zealand/SAO galaxy hand-off",
+  "date": "2026-08-06",
+  "governing_briefs": "`Research.1.md` — §9 amended only (a new \"New Zealand / SAO",
+  "predecessor": "**none in this series.** Immediate predecessor in working",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**New Zealand's accounting standards do not name local authorities — and its\ncouncils cite those standards by name anyway. That combination is new to this\ncorpus, and it splits the difference between the two patterns the branch had\nfound so far.** Neither XRB A1 nor PBE IPSAS 1 contains the string \"local\nauthority\" or \"Local Government Act\" anywhere (0 hits across 43 and 54 pages,\ngrepped in full this session), exactly like Australia's AASB 1049 and unlike\nthe Netherlands' BBV or the UK's CIPFA Code. But where Brisbane City Council's\nown accounts pointedly never say \"AASB 1049\", Wellington City Council's\nStatement of Compliance and Note 1 name PBE IPSAS 1 by title, self-classify\ninto the precise category XRB A1 defines (\"classed as a Public Sector Public\nBenefit Entity\"), and cite the statutes that put them there. So the binding is\nreal, is achieved entirely by a transitive statutory chain outside the\nstandards themselves, and is visible only from the council's side. **The\nedge Australia could not mint, New Zealand mints — and the standard is just\nas silent in both countries.** That is a documented distinction between \"the\nstandard names the councils\" and \"the councils name the standard\", and the\ncorpus previously had no case that separated them.",
+  "findings": [
+    {
+      "heading": "1. New Zealand's national local-transport funding formula names none of its inputs — the first depth-pass country where the formula document comes back empty",
+      "body": "**What this rests on**: the official NZTA page, VERIFIED DIRECTLY this\nsession via Wayback `id_` raw replay (nzta.govt.nz 403s direct `curl`).\nEvery previous depth-pass country produced a formula document that named\ntitled data: the Dutch Toelichting, the UK's Adult Social Care RNF technical\nannex, Ontario's OMPF Appendix F, Tasmania's Grants Commission methodology.\nNew Zealand's structural equivalent — the Funding Assistance Rates Policy,\nwhich sets how much of each council's land-transport programme the National\nLand Transport Fund co-invests — lists its inputs in full and sources none\nof them. Verbatim: *\"Inputs for each approved organisation are: centreline\nkilometres... capital value, which is used by most local authorities to set\nrates... inverse of rating units... index of deprivation, a demographic index\npublished by the University of Otago and used by the Ministry of Health...\ntotal cost of all activities for a recent period.\"* And: *\"A year before the\nstart of each NLTP, we recalculate the normal FAR for each approved\norganisation by inputting the latest available information.\"* Two publishers\nare named for the deprivation index and no title; the other three inputs are\nanonymous — even though \"capital value\" and \"rating units\" are precisely the\nfigures LGA 2002 Schedule 10 clause 30A obliges every council to publish in\nits annual report. `nz-nzta-far-policy` is therefore minted and left\nisolated, on the `au-brisbane-financial-statements` convention: the absence\nis the result, and hiding it by not minting the node would hide the finding.\n\nA subagent separately found that NZTA's **2013** FAR review discussion\ndocument does cite *\"NZDep2006 Index of Deprivation, C Salmond, P Crampton\nand J Atkinson, August 2007, page 21\"* by exact title and authors. NOT\nre-verified this session, and unusable regardless — the citing document is a\none-off consultation paper, not a recurring release. Recorded in `_dropped`\nbecause it shows the index has a titled source and the recurring policy\nsimply stopped naming it."
+    },
+    {
+      "heading": "2. The standards are silent; the statutes and the council are not",
+      "body": "**What this rests on**: both standards downloaded from `xrb.govt.nz` and\ngrepped in full, VERIFIED DIRECTLY; Wellington's Annual Report Volume 2\ndownloaded from `wellington.govt.nz` and `pypdf`-extracted, VERIFIED\nDIRECTLY; LGA 2002 ss.5 and 111 VERIFIED DIRECTLY from the FAOLEX mirror of\nthe PCO reprint; **the Financial Reporting Act 2013 link NOT independently\nverified** (see Session conditions). XRB A1 defines \"public sector PBE\" by\ncross-reference to the *Public Audit Act 2001*, never to the Local Government\nAct. PBE IPSAS 1's only local-government word is \"ratepayers\", in para 3's\nlist of users of general purpose financial reports — not a scope clause. The\nchain that binds councils runs LGA 2002 s.111 (*\"All information that is\nrequired by any provision of this Part or of Schedule 10... must be prepared\nin accordance with generally accepted accounting practice\"*) → LGA 2002 s.5\n(*\"generally accepted accounting practice has the same meaning as in section\n8 of the Financial Reporting Act 2013\"*) → FRA 2013 s.8 → XRB standards, with\nFRA 2013's own definition of \"entity\" expressly including *\"a local authority\n(within the meaning of section 5(1) of the Local Government Act 2002)\"*.\nWellington closes it from the other end: *\"The financial statements have been\nprepared to comply with Public Sector Public Benefit Entity Accounting\nStandards (PBE Accounting Standards) for a Tier 1 entity\"*, *\"As a defined\npublic entity under the Public Audit Act 2001, the Council is audited by the\nOffice of the Auditor General and is classed as a Public Sector Public\nBenefit Entity (PBE) for financial reporting purposes\"*, and, naming the\nstandard itself, *\"Disclosure of Fees for Audit Firms' Services (Amendments\nto PBE IPSAS 1 – Presentation of financial reports)\"*.\n\n**One inference is still inference, and it is worth naming**: the\n*transitivity* of that four-hop chain is not asserted by any single document.\nEach hop is quoted, but no New Zealand document says \"therefore councils must\napply PBE IPSAS 1\". The minted edge does not rest on the chain — it rests on\nWellington naming the standard directly. The chain is recorded in `_dropped`\nas context, not used as evidence."
+    },
+    {
+      "heading": "3. The rating-valuation chain is the cleanest four-hop statutory chain the branch has found, and it dead-ends where NSW's did not",
+      "body": "**What this rests on**: both Acts and the Rules read in full this session\nfrom publisher PDFs via Wayback `id_` raw replay, VERIFIED DIRECTLY. Local\nGovernment (Rating) Act 2002 s.13(3) requires rates to be struck on annual,\ncapital or land value and requires that value to *\"be identified in the local\nauthority's funding impact statement\"*; s.5 pins each of those three to\n*\"the meaning set out in section 2(1) of the Rating Valuations Act 1998\"*;\ns.27(4)(a) requires the rating information database to include *\"all\ninformation that relates to the unit that is included in the district\nvaluation roll\"*; and s.5 again defines that roll as *\"a roll prepared for a\ndistrict under section 7 of the Rating Valuations Act 1998 and approved under\nsection 11 of that Act\"*. RVA s.9(1) requires revaluation *\"at intervals of\nnot more than 3 years\"* and s.11(2) supplies a gate with no NSW equivalent:\n*\"No rate may be assessed on the basis of the values proposed in the general\nrevaluation unless the Valuer-General has certified his or her approval.\"*\n\n**Where it dead-ends**: the Rating Valuations Rules 2008 name no\nsales-evidence source. Grepped in full: `Landonline` 0 hits, `notice of sale`\n0, `Registrar-General` 0, `tax statement` 0. There is no New Zealand\ncounterpart to NSW's *\"Notices of Sale lodged with Land Registry Services\"*\nor to the Dutch Waarderingsinstructie naming Kadaster. The Rules require\nsale details to be captured and coded and require the Valuer-General to\nanalyse *\"All market sales and market rentals for whole rating units that are\nrelevant to the effective date of the revaluation\"* — a data *category*, never\na register or a titled release. The obvious candidate, LINZ's transfer tax\nstatement data, is ruled out by LINZ's own page: *\"Information on the size or\nvalue of the property being transferred is not included in this report as\nthis is not collected in the tax statements.\"* Recorded as a `denied` drop so\nnobody spends the same hour on it twice."
+    },
+    {
+      "heading": "4. The one central-government grant document that does name titled data is in tourism, not local government",
+      "body": "**What this rests on**: the official MBIE page, VERIFIED DIRECTLY via\nWayback `id_` raw replay after a direct 403. The Tourism Infrastructure\nFund's assessment process names three inputs at territorial-authority level:\n*\"guest night numbers can be obtained from the Accommodation Data\nProgramme\"*; *\"MBIE will use the Tourism Electronic Card Transaction (TECT)\nfor the different TAs\"*; and *\"Rating unit figures will be sourced from TAs'\nannual reports (note this is the number of rateable properties and not the\npopulation figure)\"* — which lands exactly on LGA 2002 Schedule 10 clause\n30A without citing it. Two exact titles and a document class, in a grant\nprogramme, from a ministry with no local-government mandate. **Caveat stated\nplainly in the node**: TIF ran in numbered rounds rather than on a schedule,\nand that is the weakest part of its claim to be a recurrent release. If a\nfuture session decides round-based programmes are not nodes, this is the\nfirst casualty and the three edges go with it."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`Research.1.md`'s stated version and its actual header disagree, and have for at least three sessions — *confirmed*, not resolved.** `EU/G.49.md` records the brief as \"v3.2 → v3.3 this session\" and `AU/G.1.md` as \"v3.3 → v3.4 this session\", but the file's own first line still reads `# Research.1.md — standing brief (v3.0, adopted 2026-08-05)`. Neither session bumped the header when it amended §9. This session amended §9 as well and **also** did not bump the header, deliberately — the version-numbering convention is not documented anywhere and guessing at it would make the drift worse rather than better. Recorded here so it is on the record and so whoever owns the brief can settle it in one edit."
+    },
+    {
+      "n": 2,
+      "text": "`npm run validate` reports one `✗` that is not this session's — *not a correction to a claim, but worth not misattributing*.** The message is `1 note(s) describe an edge that IS in the graph — resolve or delete: me-monstat-national-accounts -> esa-2010 (note)`. This session confirmed it is pre-existing by re-running the validator with the New Zealand slice unregistered: the same `✗` appears against the pre-New-Zealand corpus of 249 reports and 303 dependencies. It belongs to the Montenegro material in the EU branch. Not fixed here — it is not this branch's to fix, and silently editing another branch's slice would break the \"never edit a predecessor\" spirit even though it is data rather than a hand-off. No prior *claim* about New Zealand exists to confirm or refute; this is the first session in the branch."
+    }
+  ],
+  "priorities": [],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Re-read Financial Reporting Act 2013 ss.5 and 8 from `legislation.govt.nz` directly** — highest value per unit effort, see priority 2."
+    },
+    {
+      "n": 2,
+      "text": "Re-extract LGA 2002 Schedule 10 in full and confirm it names no external publication.** A subagent reported this; this session verified only the two clauses it used. The claim is load-bearing for any future LTP or annual-report node."
+    },
+    {
+      "n": 3,
+      "text": "Re-check LGA 2002 s.106(2C) against the current consolidation.** The reprint read this session is as at 26 March 2020, and s.106(2C) is the only place in the whole Act that names a Stats NZ release by title (*\"Producers Price Index Outputs for Construction provided by Statistics New Zealand\"*). Note the title has drifted from the modern Stats NZ product name."
+    },
+    {
+      "n": 4,
+      "text": "Decode the Wayback replay of the OAG's \"Observations from our audits of councils' 2024-34 long-term plans\"** — it came back gzip-encoded binary this session and was not decoded. Blocked on priority 1 anyway."
+    },
+    {
+      "n": 5,
+      "text": "Fetch an Auckland or Christchurch annual report** by a method that gets past HTTP 406 / 403."
+    },
+    {
+      "n": 6,
+      "text": "Confirm whether the Rating Valuations Rules have been replaced.** LINZ's own review page said consultation on a final draft was expected in 2026; this session read the 1 October 2010 version. If new rules are out, check whether they name a sales-evidence source — that would overturn Findings 3."
+    },
+    {
+      "n": 7,
+      "text": "Fix `node_modules`, or record the workaround as standard.** The Windows esbuild binary makes `npm run validate` unusable from a Linux sandbox without a scratch reinstall. This is going to cost every future session the same five minutes."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`NZ/G.1.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — §9's new \"New Zealand / SAO galaxy\" block."
+    },
+    {
+      "n": 3,
+      "text": "`AU/G.1.md`** — the comparison case. Several findings here are only meaningful against it."
+    },
+    {
+      "n": 4,
+      "text": "`src/data/research/nz-government-finance.json`** — its `_dropped` array is the direct continuation point for cheap checks 2-6."
+    },
+    {
+      "n": 5,
+      "text": "A browser**, specifically for cheap checks 1 and 5 — a `curl`-only session will hit the same `legislation.govt.nz` WAF and the same council 403s this one did."
+    },
+    {
+      "n": 6,
+      "text": "The same caution `AU/G.1.md`, `EU/G.48.md` and `EU/G.49.md` all carry**: prefer direct fetch plus text extraction over an AI-summarising fetch tool for anything that will become a quoted `basis` field. This session confirmed the method works cleanly on `xrb.govt.nz`, `treasury.govt.nz`, `datainfoplus.stats.govt.nz`, `wellington.govt.nz`, `lgfa.co.nz` and `linz.govt.nz`; that `legislation.govt.nz`, `nzta.govt.nz`, `mbie.govt.nz` and `oag.parliament.nz` all block non-browser clients but that the first three are readable through Wayback's `id_` raw-bytes endpoint, which returns the publisher's own file unmodified and is **not** a summary; and that `aucklandcouncil.govt.nz` and `ccc.govt.nz` resisted every method tried. ---"
+    }
+  ],
+  "session_conditions": "Direct continuation of the same working session that produced `AU/G.1.md` —\nnot a new thread. Scope was settled with Thomas up front rather than\nassumed: a new `NZ/` branch (not folded into `AU/`), the same\ngovernment-finance angle as the Netherlands/UK/Australia passes (not a\nbroader statistics sweep), and the same rigour setting (three parallel\nresearch subagents, then direct primary-source re-verification of every quote\nbefore minting). All three were his explicit choices.\n\n**What was read in full and re-verified by this session's own tooling**:\nXRB A1 (43pp) and PBE IPSAS 1 (54pp), both downloaded from `xrb.govt.nz`\nwith plain `curl` and `pypdf`-extracted, then grepped in full; the Treasury's\n*Financial Statements of the Government of New Zealand 2025* (177pp) and\n*Budget Economic and Fiscal Update 2025* (165pp), same method from\n`treasury.govt.nz`; Wellington City Council's *Annual Report 2024/25 Volume\n2* (162pp), same method; the LGFA *Annual Report 2025* (77pp); the *Local\nGovernment (Rating) Act 2002* (129pp, version as at 27 November 2025), the\n*Rating Valuations Act 1998* (43pp, as at 23 December 2023) and the\n*Rating Valuations Rules 2008* LINZS30300 (79pp, version date 1 October\n2010) — all three from the publisher's own PDF replayed byte-for-byte\nthrough the Wayback `id_` endpoint, because `legislation.govt.nz` sits behind\nan AWS WAF that returns HTTP 202 with zero bytes to every non-browser client\ntried; the *Local Government Act 2002* (469pp, PCO reprint as at 26 March\n2020) from a FAOLEX mirror; Stats NZ's DataInfo+ metadata pages for GFS,\nQLAS and the Local Authority Census (raw `curl`, HTML tag-stripped — note\nthat `stats.govt.nz` *release* pages are JS-rendered and useless to `curl`,\nwhile DataInfo+ is server-rendered and is where the data-source text\nactually lives); Wellington City Council's rating-valuations page; LINZ's\naudits and property-valuation guidance pages; and the NZTA FAR Policy and\nMBIE Tourism Infrastructure Fund pages via Wayback `id_` raw replay after\nboth returned HTTP 403 to direct `curl`.\n\n**What was not independently re-verified, and is flagged in the JSON**: the\n*Financial Reporting Act 2013* ss.5 and 8 (subagent read it through a\ntext-extraction proxy; `legislation.govt.nz` blocked) — this matters because\nthose two sections are the hinge of Findings 2; the *Local Government\n(Financial Reporting and Prudence) Regulations 2014* reg 3; the claim that\nLGA 2002 Schedule 10 in full names no external publication (a subagent\ngrepped the whole schedule; this session verified only the two clauses it\nrelied on, s.111 and s.106(2C)); the OAG's long-term-plan observations report\n(`oag.parliament.nz` 403'd, and the Wayback replay came back gzip binary that\nwas not decoded); and NZTA's 2013 FAR review discussion document.\n\n**Not attempted at all**: Auckland Council and Christchurch City Council,\nboth of which block non-browser clients (HTTP 406 and 403 respectively).\nWellington was chosen as the exemplar council on availability grounds and the\nchoice is stated as such in the node's own description."
+}

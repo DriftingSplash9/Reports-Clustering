@@ -1,0 +1,168 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.31.md",
+  "number": 31,
+  "title": "G.31.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "Research.1.md v1.0 — re-read in full this session. Research.2.md",
+  "predecessor": "G.30.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The Farm Structure Survey (FSS) is a ready-to-mint node, and its own\nmetadata states a documented dependency on it from the Farm Accountancy Data\nNetwork (FADN) — the closest thing to a genuine EU-internal\nstatistics-to-statistics edge this branch has found in eleven sessions.**\n\nEurostat's own metadata page for \"Farm structure (ef)\" states plainly: *\"The\ndata describe the structure of agricultural holdings [...] The aggregated\nresults are disseminated through statistical tables,\"* with an explicit\ncadence — *\"Results are disseminated 2 years after the reference year\"* —\nand a stated pattern of roughly 2–3 years between surveys on a 10-year\ncensus cycle, tied by name to Regulation (EU) 2018/1091. That clears all\nthree of `Research.1.md` §4's node conditions (named, cadenced, titled) from\na single, authoritative, official source — the strongest node candidate\nthis branch has produced, and the first time a full cadence statement this\nexplicit has been found anywhere in the EU sub-branch.\n\nThe same page states: *\"Both the censuses and the sample surveys [of the\nFSS] are aimed at producing a variety of information on specific CAP\ntargets, as well as providing a basis for extrapolating Farm Accountancy\nData Network (FADN) data.\"* That is Eurostat itself documenting that one\nnamed EU statistical product supplies the extrapolation framework for\nanother — a real, citable `methodology_depends_on`-shaped relationship,\ninternal to the EU statistical system rather than running to a member state.\n\n**Secondarily, and possibly more consequential for the branch's unfinished\nwork than the FSS finding itself: `eur-lex.europa.eu` loaded normally\nthrough a browser this session, three separate times, with no anti-bot\ngating encountered.** Every prior session's characterisation of EUR-Lex as\n\"anti-bot gated to every client here\" was based on non-browser HTTP fetches.\nThis changes the cost-benefit of several queued cheap checks that were\nfiled as \"needs a browser\" — they may simply need *this* browser tool,\nuntried until now.",
+  "findings": [
+    {
+      "heading": "1. The Farm Structure Survey clears all three node conditions",
+      "body": "Discussed in full above, records FSS-01 and FSS-02 in\n`EU/FSDN_FSS_PartA_2026-08-05.md`. **What this rests on**: Eurostat's own\n\"Farm structure (ef)\" metadata page, read first-hand this session, same\nevidence class as the Destatis quality reports that produced the branch's\nexisting German cross-layer edge."
+    },
+    {
+      "heading": "2. The FSDN's annual-report duty to Parliament and Council was replaced, not extended, in 2023",
+      "body": "Council Regulation (EC) No 1217/2009's original Article 1(3) required the\nCommission to submit reports on the situation of agriculture and farm\nincomes *\"annually to the European Parliament and the Council.\"* Regulation\n(EU) 2023/2674 replaced Article 1 wholesale; the replacement text (read in\nfull) contains no equivalent annual-report-to-the-institutions clause, only\na duty to make analysis results \"publicly available\" with no stated\ncadence. **Flagged as a documented change, not adjudicated** — whether the\nannual-report duty survives elsewhere in the current consolidated text of\nRegulation (EC) No 1217/2009 was not checked; only the amending regulation's\nown replacement text was read. Records FSDN-01, FSDN-02. **What this rests\non**: direct reading of both the 2009 codified text and the 2023 amending\nregulation's Article 1 replacement, both first-hand this session."
+    },
+    {
+      "heading": "3. EUR-Lex's anti-bot gate does not appear to block browser-driven fetches",
+      "body": "Three separate CELEX documents (32018R1091, 32009R1217, 32023R2674) all\nloaded with full text through the `Claude_Browser` tool on the first\nattempt, no HTTP 202/empty-body pattern encountered at any point. **What\nthis rests on**: direct observation this session, contrasted against every\nprior session's characterisation of the same domain (G.20 onward) based on\nnon-browser fetch attempts. Not yet re-tested against a member-state or\ninternational-body PDF (this session only fetched EUR-Lex regulation text,\nnot a large binary like `SEC06.pdf`'s equivalent) — worth confirming the\ntechnique generalises before assuming every browser-EUR-Lex fetch will\nsucceed."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog. Underway",
+      "items": [
+        {
+          "n": 1,
+          "text": "The FSDN/FSS lead (G.30's top item) is now resolved to the point of a ready-to-mint node** — see new item 0 below, which now outranks it."
+        },
+        {
+          "n": 2,
+          "text": "Titles 02–07, 09–16, 20, 21, 30 — still open. Title 05 (Regional Development and Cohesion, EUR 44.0bn CA) is the largest remaining Title."
+        },
+        {
+          "n": 3,
+          "text": "Annex \"Staff\", Annexed Offices, Revenue Titles 3/4/6 — still open. **NEW, item 0, ahead of everything in B: mint `eurostat-farm-structure-survey` as a node in a Part B slice, and record the FSS→FADN `methodology_depends_on` lead as `no-node-yet` in `_dropped` until FADN itself clears §4.** This is a dedicated, bounded task: draft `EU/slices/eu-level/eurostat-farm-structure-survey.json` following the `eu-draft-budget.json`/`esa-2010.json` pattern, validate against the schema (country `EU`, jurisdiction_level `supranational`, domain — note `Research.1.md` §6's domain list has no clean `agriculture` value, same gap class as the `fiscal-transfers`-as-least-wrong precedent), check id collision against the full corpus id list, then move to `src/data/research/` and register in `src/data/index.ts` per the proven workflow."
+        }
+      ]
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads, after B.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "NEW, now cheap given finding 3: retrieve Annex XI Article 1(4)** via the `Claude_Browser` tool at its EUR-Lex CELEX URL. Closes `G.26.md` finding 1's open limb. Try the same technique that worked this session."
+    },
+    {
+      "n": 2,
+      "text": "NEW, now cheap: retrieve the Eurostat Report of 31 October** and establish its URL, same technique."
+    },
+    {
+      "n": 3,
+      "text": "NEW, now cheap: read EBS Regulation 2019/2152** as a third test of the asymmetry, same technique."
+    },
+    {
+      "n": 4,
+      "text": "Fetch and hash SEC01/02/03/06/07/08/09/10 against local copies — these are large PDF binaries, not EUR-Lex HTML pages, so confirm the browser technique extends to PDF downloads before assuming it will work the same way."
+    },
+    {
+      "n": 5,
+      "text": "Split `list-main-stats-2025-na` into nine records."
+    },
+    {
+      "n": 6,
+      "text": "Re-measure E4 keying on quote, not id, and reconcile."
+    },
+    {
+      "n": 7,
+      "text": "Delete `scripts/eu-schema-smoke.ts` — its stated condition has lapsed."
+    },
+    {
+      "n": 8,
+      "text": "Pull the `[NA-Pen] / Table 29` thread."
+    },
+    {
+      "n": 9,
+      "text": "Check whether SEC09's total-level sign flip has a stated explanation elsewhere (`G.28.md` finding 1)."
+    },
+    {
+      "n": 10,
+      "text": "Search for a titled GNI deflator publication, following SEC01's S01-02 lead."
+    },
+    {
+      "n": 11,
+      "text": "Reconcile `EU Meta jsons.docx`'s SEC09/SEC10 batches against `SEC08-SEC09-SEC10_PartA_2026-08-05.md`."
+    },
+    {
+      "n": 12,
+      "text": "Retry `agridata.ec.europa.eu` / `agriculture.ec.europa.eu` for FADN's own metadata, in case this session's denial was transient."
+    },
+    {
+      "n": 13,
+      "text": "Check whether sc-47–sc-50 exist anywhere; characterise the 155 non-`S` loose records; match the 8 record-less batch headers; enumerate the `9`-series tags beyond `SPEC`/`DAG`/`PPPA`/`OTH`."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.31.md`)** — paste as text, do not attach. **Read the Headline result first.**"
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — the standing brief, and the only carrier of the §9 id list."
+    },
+    {
+      "n": 3,
+      "text": "`EU/FSDN_FSS_PartA_2026-08-05.md`** — this session's extraction, the reason to prioritise minting `eurostat-farm-structure-survey` next."
+    },
+    {
+      "n": 4,
+      "text": "`EU/SEC03_Title08_PartA_2026-08-05.md`**, record S03-12 — the original lead this session followed."
+    },
+    {
+      "n": 5,
+      "text": "`src/data/research/de-destatis-national-accounts.json`** and **`esa-2010.json`** — the import pattern to copy for the FSS slice."
+    },
+    {
+      "n": 6,
+      "text": "A browser** (the `Claude_Browser` tool specifically, per finding 3) — for minting-adjacent verification and for the newly-cheap EUR-Lex checks (Annex XI, Eurostat Report of 31 October, EBS Regulation)."
+    },
+    {
+      "n": 7,
+      "text": "The next target if a browser session**: draft and validate the FSS slice (priority item 0), then retry Annex XI Article 1(4) with the same technique. **If no browser**: SEC03 Title 05 (Regional Development, the largest remaining Title) is the fallback extraction target. ---"
+    }
+  ],
+  "session_conditions": "**One browser-research session, no PDF extraction.** Fetched and read four\ndocuments in full through the `Claude_Browser` tool: Regulation (EU)\n2018/1091 (integrated farm statistics), Council Regulation (EC) No 1217/2009\n(the original 2009 Farm Accountancy Data Network regulation), Regulation\n(EU) 2023/2674 (the 2023 FSDN conversion), and Eurostat's own \"Farm\nstructure (ef)\" metadata page. All read directly, first-hand, via\n`get_page_text` and targeted `javascript_tool` string searches against the\nfull page text (not just the visible viewport — page lengths of 41,000–\n72,000 characters were returned in full each time).\n\nWhat was read first-hand: all four documents above, in full or to the\nextent their length required targeted search (`Regulation (EU) 2023/2674` at\n64,939 characters was searched rather than read start-to-end, but every\nsection quoted was located and read in context).\n\nWhat was **not** done:\n\n- **FADN's own dedicated site (distinct from Eurostat's FSS pages) was not\n  reached.** `agridata.ec.europa.eu` and `agriculture.ec.europa.eu` were both\n  denied. FADN's own title/cadence/URL from an authoritative primary source\n  remains unestablished — everything known about FADN's current public-facing\n  cadence comes from the legal instruments (EUR-Lex) and Eurostat's\n  cross-reference, not from FADN's own metadata.\n- **No slice was drafted or written.** `eurostat-farm-structure-survey` is\n  assessed as ready-to-mint but minting was deliberately left to a dedicated\n  pass — see priority section.\n- **The other EUR-Lex-gated cheap checks were not attempted this session**\n  despite the gate apparently not applying to browser fetches — Annex XI\n  Article 1(4), the Eurostat Report of 31 October, and EBS Regulation\n  2019/2152 are all now candidates for the same technique, untried.\n- **`Research.2.md` and `Research.EU.md` were not re-opened.** Last\n  first-hand read: G.24, eight sessions back.\n- **The blob was not sliced.** Still 960 staged records, unworked.\n- **No further SEC03 Titles were extracted.**"
+}

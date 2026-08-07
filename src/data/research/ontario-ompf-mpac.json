@@ -1,0 +1,156 @@
+{
+  "_slice": "ontario-ompf-mpac",
+  "_scope": "Ontario's first two nodes: the Municipal Property Assessment Corporation and the Ontario Municipal Partnership Fund, plus the two edges that survived adjudication of a large submitted artifact. Owns both nodes and every edge out of on-ompf. Supersedes one alberta-municipal.json edge with a verified quotation — see the note in dependencies. Does NOT own the Equalization or Calgary material in the submitted artifact, which was declined; the reasoning is in _dropped so it is not re-proposed.",
+  "_provenance": "Adjudicated from a submitted consolidated artifact under the V0.9 rule that a second reader extracts and this project adjudicates. The artifact arrived carrying finished verdicts rather than extractions — 17 reports and 24 edges, already typed and with basis written as paraphrase. Two edges survived. Every quotation below was read against its own source: the OMPF Technical Guide in full, the Assessment Act via ontario.ca e-Laws, MPAC's own pages, and alberta.ca. What failed is recorded in _dropped at the same length as what passed, because the failures are the more useful half.",
+  "reports": [
+    {
+      "id": "mpac-assessment",
+      "title": "Property Assessment Notice and Assessment Roll (Current Value Assessment)",
+      "publisher": "Municipal Property Assessment Corporation",
+      "country": "CA",
+      "jurisdiction_level": "institutional",
+      "region": "Ontario",
+      "description": "Ontario's single province-wide property assessment, prepared by a not-for-profit corporation funded by all Ontario municipalities rather than by a government department. This is the structural difference from Alberta, where each municipality prepares its own roll and the province must then run an explicit equalization step to make them comparable. Ontario needs no equalization because there is one assessor. The standard is Current Value, defined in the Assessment Act s. 1(1) as 'the amount of money the fee simple, if unencumbered, would realize if sold at arm's length by a willing seller to a willing buyer'. MPAC states it uses 'one of three approaches to value properties: direct comparison approach, income approach, cost approach', with the direct comparison approach 'the most commonly used' and the choice depending on 'property type, and the number of recent comparable sales of similar properties in the area'. The returned roll and its household counts are what the Ontario Municipal Partnership Fund allocates against.",
+      "releases_per_year": 1,
+      "changes_per_year": 0.25,
+      "cadence_note": "The roll returns annually; the values in it have not been re-based since 2016, and the gap between those two facts is the point. The Assessment Act s. 19.2(1) sets a four-year cycle by schedule, and para 4 assigns 1 January 2016 to 'the four taxation years from 2017 to 2020'. MPAC states the schedule has been suspended: 'On August 16, 2023, the Ontario government filed a regulation to amend the Assessment Act, extending the postponement of a province-wide reassessment through the end of the 2021-2024 assessment cycle. Property assessments for the 2026 property tax year will continue to be based on fully phased-in January 1, 2016 current values.' So `releases_per_year` 1 counts the returned roll, which does move for new construction, demolition and change of use; `changes_per_year` 0.25 is the statutory reassessment cycle, which is the rate at which the valuation basis is supposed to move and has not moved in ten years. Both numbers are true and neither alone describes this node.",
+      "last_updated": null,
+      "url": "https://www.mpac.ca/en/UnderstandingYourAssessment/AssessmentCycle",
+      "domains": ["assessment", "municipal-finance"]
+    },
+    {
+      "id": "on-ompf",
+      "title": "Ontario Municipal Partnership Fund — Allocations and Technical Guide",
+      "publisher": "Ontario Ministry of Finance",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Ontario",
+      "description": "Ontario's main unconditional transfer to municipalities, described in its own Technical Guide as 'the Province's main general assistance grant to municipalities'. The 2026 programme provides 'a total of $600 million in unconditional funding to 388 municipalities' through four core grant components plus Transitional Assistance. It earns a place in this graph for a reason unrelated to its size: the Technical Guide carries an Appendix F headed 'Data sources', a literal table of every data element the allocation formula consumes and where each one comes from. Documents that name their own inputs in a table are the strongest evidence class this project recognises, and they are rare outside statute.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "on-ompf",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "2026 OMPF Technical Guide, Appendix F 'Data sources', which names MPAC in three of its twelve rows: 'Weighted Assessment | 2025 Returned Roll and 2026 starting tax ratios | Municipal Property Assessment Corporation (MPAC) and municipal tax rate bylaws'; 'Number of Households | 2025 | MPAC (Municipal Property Assessment Corporation) Returned Roll'; and 'Farm Land Area | 2024 | MPAC (Municipal Property Assessment Corporation) and Ontario Parcel'. The guide body states the dependency again in prose for the farm measure: the land 'must be assessed and valued as farm land by the Municipal Property Assessment Corporation (MPAC)'. This is a named organisation *and* a named product — the Returned Roll — which is what distinguishes it from the five agency-only Statistics Canada rows in the same table that were declined. Weighted Assessment per Household is also the primary indicator in the Municipal Fiscal Circumstances Index, so this is not a peripheral input: it is the measure the allocation turns on.",
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "Annual, but the three MPAC rows read three different vintages in the same allocation year: Weighted Assessment takes the '2025 Returned Roll and 2026 starting tax ratios', Number of Households takes 2025, and Farm Land Area takes 2024 — the guide specifying 'acres of land for properties in the farm property tax class, as of December 31st, 2024'. `ends` is null rather than 12-31 because that date governs only the farm row. One edge carrying three reading dates is a limitation of the model recorded rather than smoothed over."
+      }
+    },
+    {
+      "source_report_id": "on-ompf",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "NARROW, AND THE NARROWNESS IS THE FINDING. Appendix F attributes six separate indicators to 'Statistics Canada' and names no release for any of them, which is agency-level attribution and the same test that removed `boc-mpr -> statcan-national-accounts` in V0.9 and killed the H.15 restoration in V0.10. Five of the six are therefore declined and recorded in _dropped. Exactly one names a publication, in Appendix G's definition of the Rural and Small Community Measure: 'The measure is based on Statistics Canada data from the 2021 Census.' That is a named recurring release and it carries this edge, alone. The basis is written this way because the edge would otherwise be read as covering all six, and a later pass finding the other five undocumented would think this edge had been demoted rather than that it had always been this narrow. STRUCTURAL NOTE: this single sentence is also the only documented link between Ontario and the rest of the corpus. Without it the two nodes in this slice would form a second connected component, breaking an invariant held since V0.8. The graph stays at one component on the strength of one clause in an appendix definition.",
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+    },
+    {
+      "source_report_id": "ab-education-property-tax-requisition",
+      "target_report_id": "ab-municipalaffairs-equalized-assessment",
+      "relationship_type": "calculated_from",
+      "basis": "SUPERSEDES the copy in alberta-municipal.json under the V0.8 later-definition-wins rule, which exists precisely so a better-evidenced copy can replace a thinner one. The earlier basis asserted the relationship in one sentence with no quotation, and its evidence_url pointed at the equalized assessment report rather than at any document stating the dependency. Alberta's education property tax page states the mechanism directly: 'Municipal Affairs establishes the provincial mill rate used to determine each municipality's share of the provincial education tax. The provincial equalized assessment base used to determine education property taxes this year reflects 2024 property values.' It gives the rates in force: 'Education property tax rates will increase to $2.84 per $1,000 of equalized assessment for residential/farmland properties and $4.17 per $1,000 of equalized assessment for non-residential properties in 2026-27', raising the requisition 'from $3.1 billion in 2025-26 to $3.6 billion in 2026-27'. Both figures verified verbatim. This is the Alberta half of the comparison the submitted artifact was drawing, and it is the only part of that artifact's Alberta material that survived: everything else duplicated nodes already in the graph.",
+      "evidence_url": "https://www.alberta.ca/education-property-tax",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "Annual, with a two-year lag stated outright: 'The provincial equalized assessment base used to determine education property taxes this year reflects 2024 property values.' The reading is once a year against a base two years stale, which is a documented lag rather than an inferred one."
+      }
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "on-ompf -> statcan-lfs",
+      "source": "on-ompf",
+      "target": null,
+      "reason": "wrong-target",
+      "why": "The submitted artifact proposed this with the basis that Employment Rate is a 'Statistics Canada measure of employed persons ÷ population aged 15+'. Appendix G says exactly that and no more: 'Employment Rate — Statistics Canada's measure of number of employed persons, divided by persons aged 15 and over.' No release is named, so it fails on agency-only grounds before the target is even considered. It also fails on the target: Appendix F dates the Employment Rate to 2021 alongside the other Census-year indicators, and a municipality-level employment rate for 388 municipalities is a Census product, not a Labour Force Survey one — the LFS is a monthly sample that does not publish at that geography. Filed `wrong-target` rather than `no-document` because the underlying dependency is real and almost certainly runs to the Census; what is missing is a document saying so. If a later pass finds one, this becomes a second Census edge, not an LFS edge."
+    },
+    {
+      "edge": "on-ompf -> (Statistics Canada, five unnamed products)",
+      "source": "on-ompf",
+      "target": null,
+      "reason": "no-document",
+      "why": "AGENCY ONLY, five times over, in a table whose entire purpose is to disclose sources. Appendix F attributes Median Household Income, Per Cent of Population Above Low-Income Threshold, Ratio of Working Age to Dependent Population, Employment Rate and Municipal Land Area to 'Statistics Canada' with no publication named, and Appendix G's definitions repeat the pattern in prose — 'Statistics Canada's measure of median income for all private households in 2020', 'the Statistics Canada measure of the population in private households above the low-income threshold', 'Statistics Canada's measure of working age population (aged 15 to 64)'. All five are plainly Census 2021 products to anyone who works with this data, and that is exactly why they are not edges. This is the H.15 finding in a provincial grant formula: a thoroughly-disclosing document whose disclosure stops one level short of a title. Worth recording as a corpus fact, because the OMPF is otherwise the best-disclosing municipal funding document found so far and it still fails five times out of six."
+    },
+    {
+      "edge": "on-ompf -> (Spatial Data Infrastructure, Statistics Canada)",
+      "source": "on-ompf",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The one Statistics Canada row that names something other than the agency, and it names a product rather than a release: Municipal Land Area 'is based on the Spatial Data Infrastructure (SDI) from Statistics Canada and excludes bodies of water'. The SDI is a named, published Statistics Canada geographic product with its own catalogue presence, so a node can exist for it. Whether it should is a genuine question — it is a boundary file rather than a recurring statistical release, and the corpus has no geographic-infrastructure nodes at all. Recorded as a lead rather than built, and flagged as the first case where the node rule meets a reference product rather than a periodical."
+    },
+    {
+      "edge": "on-ompf -> (Municipal Financial Information Return)",
+      "source": "on-ompf",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Named in Appendix F and missed entirely by the submitted artifact: 'PIL Weighted Assessment | 2023 or 2024 | Municipal FIR (Financial Information Return)'. Ontario's FIR is a mandatory annual municipal financial return, published province-wide, and it is the direct counterpart of `ab-municipalaffairs-fir` which is already a node in this graph. So this is not merely buildable, it is a symmetry the corpus is currently missing — the same instrument in two provinces, one represented and one not. Best Ontario lead available after the two nodes built here."
+    },
+    {
+      "edge": "on-ompf -> (Online Property Tax Analysis System)",
+      "source": "on-ompf",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Appendix F: 'Average Annual Change in Assessment (New Construction) | 2020–2025 | Online Property Tax Analysis System (OPTA)'. Named by title, so it clears the naming test, but OPTA is a subscription analytics system operated for Ontario municipalities rather than a published release — it may well turn out to be `unpublishable-source` on inspection, in the same family as the FR 2420 form behind H.15. Recorded as a lead with that caveat stated, because filing it as unpublishable without looking would be asserting a negative nobody has checked."
+    },
+    {
+      "edge": "on-ompf -> (Ontario Parcel)",
+      "source": "on-ompf",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Appendix F names it alongside MPAC in the Farm Land Area row: 'MPAC (Municipal Property Assessment Corporation) and Ontario Parcel'. Ontario Parcel is a mapping dataset jointly maintained by the province, MPAC and Teranet. Same category question as the SDI above — a geographic reference product rather than a recurring release. Two of these arriving in one document is enough to notice that municipal funding formulas consume geography as well as statistics, and that the corpus currently has no way to represent that."
+    },
+    {
+      "edge": "mpac-assessment -> (Assessment Act valuation-date schedule)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "A THIRD STATUTE THAT ANTICIPATES ITS OWN SUSPENSION, and the submitted artifact had the outcome right and the mechanism wrong. It attributed the 2016 valuation date for the 2026 taxation year to 'successive postponements', citing nothing. The Act's own schedule says something narrower. Assessment Act s. 19.2(1) para 4: 'For the period consisting of the four taxation years from 2017 to 2020, land is valued as of January 1, 2016', and para 5 provides that after 2020 each four-year period is valued as of 'January 1 of the year that precedes the period by two years'. Read alone, the Act does not put 2016 anywhere near 2026. The bridge is s. 19.2(5): 'Subsection (1) does not apply in respect of the valuation of land for a taxation year after 2004 if the Minister prescribes a different day as of which land is valued for that year.' MPAC confirms that is what happened — a regulation filed 16 August 2023. So the statute contains a clause permitting its own timetable to be set aside, and that clause has now been used to hold a valuation date six years past the schedule it was written into. This belongs with the Canada Pension Plan Act's splice clause and the Oil Sands Royalty Regulation's provision for the day the Bank of Canada stops publishing an exchange rate: three instances now, and enough to call it a pattern rather than a curiosity. Legislation about numbers routinely writes in what to do when the number stops behaving, and the graph has no way to show it."
+    },
+    {
+      "edge": "statcan-supply-use-tables (submitted) -> the existing statcan-sut",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "DECLINED AS A DUPLICATE, and it is the `statcan-hfce` failure arriving a second time. The submitted artifact proposed a node `statcan-supply-use-tables` with the title 'Supply, Use and Input-Output Tables', publisher Statistics Canada, and url 'https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401' — character-for-character the url of `statcan-sut`, added in V0.10, which is IMDB record 1401. Same record, same release, different id. The loader's duplicate check cannot see it, exactly as it could not see that `statcan-hfce` and `statcan-national-accounts` were both record 1901, which took two sessions to catch. Its two proposed edges also duplicate live edges. One of the two carried a real error worth keeping: `statcan-national-accounts -> statcan-supply-use-tables` was justified as 'annual provincial-territorial estimates programme projects benchmarks from the supply and use tables', but record 1401's sentence about the two projecting programmes names record 1301 and record 1303 — the monthly national and the annual provincial-territorial. Record 1901, which is what `statcan-national-accounts` is, is neither. The basis was attached to the wrong node. The live edge from V0.10 rests on record 1901's own Estimation section instead and is unaffected."
+    },
+    {
+      "edge": "fiscal-equalization-program -> (twelve StatCan products, as submitted)",
+      "source": "fiscal-equalization-program",
+      "target": null,
+      "reason": "deferred",
+      "why": "DECLINED AS SUBMITTED, NOT AS SUBJECT MATTER. The twelve StatCan product nodes the Equalization cluster has been blocked on since V0.10 are real, wanted, and remain the best-evidenced expansion available — but not on this evidence, for three reasons each of which is independently disqualifying. FIRST, the section numbers are the uncorrected ones. The submitted artifact cites s. 8(3) and s. 8(5) for the oil and gas edges. V0.10 already caught the second reader on precisely these two and corrected them to 8(4) and 8(6) after reading the sections. Their reappearance means this artifact was produced without the project's own corrections in hand, which is a fact about the artifact rather than about the regulation. SECOND, nine of the twelve cite s. 8 as though it were the all-provinces formula. V0.10 established that s. 8 sits in DIVISION 2 — Nova Scotia, defining the revenue base 'For the purpose of sections 3.71 to 3.9 of the Act', and retains the pre-2007 thirty-three-source structure. The live `fiscal-equalization-program -> statcan-seph` edge already carries a basis warning that 's. 8(1)(y) of the Equalization Regulations reads like the main formula and is not'. THIRD, every one of the twelve gives `FullText.html` as its evidence_url. V0.10 measured that page truncating at roughly 126 KB against a 525 KB document and recorded `/section-N.html` as the method that works. Most of what is cited is not visible at the URL offered as proof of it. The right way to do this cluster is section by section against the DIVISION 1 provisions, with each edge carrying its own section URL, and it is worth a full pass."
+    },
+    {
+      "edge": "fiscal-equalization-program -> statcan-hfce (as submitted)",
+      "source": null,
+      "target": null,
+      "reason": "wrong-target",
+      "why": "Separated from the block above because it fails differently and would have done real damage. The submitted basis reads 'household final consumption expenditures from Provincial and Territorial Economic Accounts' — and then points the edge at `statcan-hfce`. The Provincial and Territorial Economic Accounts is a different release from record 1901, and V0.10 recorded it as one of three missing nodes blocking this cluster. Pointing a provincial-accounts citation at the national HFCE series is a substitution, not a reading. It is now also worse than it was: V0.11 marked `statcan-hfce` as `part_of` `statcan-national-accounts`, so this edge would attribute a provincial product to a series inside the national quarterly accounts and the containment display would compound the error. The node this wants is Provincial and Territorial Economic Accounts, and it does not exist yet."
+    },
+    {
+      "edge": "calgary-budget / calgary-tax-bylaw / calgary-assessment",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Declined this pass and worth doing properly. Calgary is the obvious next Alberta municipality and REPORTS.md already records the method — start from the tax rate bylaw, which by statute must name the assessment it levies against and every requisition it collects, and which yielded six edges apiece at Grande Prairie and the County. The submitted material does not do that: `calgary-tax-bylaw` carries `url: null`, so the keystone document is not cited at all, and the edge from it to the education requisition is evidenced by a City newsroom press release. That release is also the source given for 'Calgary's 2026 education requisition rose ~20% to over $1.2 billion', a figure which does not appear on the alberta.ca page the artifact cites for it and which was not verified anywhere. Three of the artifact's Alberta nodes duplicate existing ones outright — `ab-equalized-assessment` shadows `ab-municipalaffairs-equalized-assessment`, `ab-education-property-tax` shadows `ab-education-property-tax-requisition`, and `ab-regulated-property-guidelines` is an exact id collision that the loader would have silently dropped under first-wins, losing the differing content without a warning."
+    },
+    {
+      "edge": "the submitted artifact's format",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "PROCESS FINDING, recorded because the format question was settled in V0.9 and this is the first regression. V0.9 established that a second reader extracts and this project adjudicates: no verdict field, verbatim quotes, `AGENCY ONLY` where only an institution is named. Three rounds in V0.10 under that format produced zero adjudication errors. This artifact arrived in the pre-V0.9 shape — 17 finished report objects and 24 finished edges with `relationship_type` already chosen and `basis` written as paraphrase rather than quotation. Two edges of the twenty-four survived. The paraphrasing is what did the damage: not one of the twelve Equalization bases contains a quoted string, so there was nothing to check against the source except the section number, and the section numbers were the ones already known to be wrong. Where the artifact did quote — the Appendix F rows, the Assessment Act current-value definition — it was accurate, and those are the parts that became edges. The rule holds and has now been tested from the other side: a verbatim quote is checkable in minutes, a paraphrase is not checkable at all. It also under-reported its own best source. Appendix F names twelve data elements; the artifact used three of them, ignored Municipal FIR, OPTA and Ontario Parcel entirely, and spent its effort on the six Statistics Canada rows that name no release."
+    }
+  ]
+}

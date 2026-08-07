@@ -1,0 +1,156 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.42.md",
+  "number": 42,
+  "title": "G.42.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "`Research.1.md` v3.0 — **amended by this session** (§9 only;",
+  "predecessor": "G.41.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The §9 gap flagged in `G.41.md` is closed the same day it was found.** The\nextraction was mechanical and exhaustive rather than a hand-copy: every report\nobject across all 36 files in `src/data/research/` was parsed by its `country`\nfield, not grepped by filename, so member-state nodes whose filename doesn't\nself-announce a country (none turned up, but the method would have caught one)\nwould not have been missed. `Research.1.md` §9 is now a complete two-galaxy\nlist for the first time in the branch's history.",
+  "findings": [
+    {
+      "heading": "1. The EU-branch id count is 17, not the \"30+\" `G.41.md` estimated",
+      "body": "**What this rests on**: a Python pass over every `src/data/research/*.json`\nfile's `reports[].id`, filtered on `reports[].country` in `{EU, DE, LU}`\n(country, not filename or id prefix, so nothing with an EU-branch id but a\nmismatched filename would slip through). Cross-checked two ways: (a) against\n`src/data/index.ts`'s import list, confirming all 12 EU-related files are\nactually registered, not just present on disk; (b) a full country-code\ntally across every research file (`CA 87, US 17, INT 11, EU 14, DE 1, LU 2`\n— 132 total, consistent with `G.39.md`'s \"150 reports\" once the seed set in\n`src/data/reports.ts` — confirmed `CA`/`US` only, no EU-branch nodes hiding\nthere — is added). **`G.41.md`'s \"30+\" figure was an unverified guess made\nwithout running the extraction**; the real number is under a third of that.\nOne filename/id mismatch was caught in passing: `eu-draft-budget.json` also\ncontains a second report, `ec-statement-of-estimates`, not visible from the\nfilename alone — exactly the kind of thing a filename-based backfill would\nhave missed and the country-field method did not."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`G.41.md`'s estimate of \"30+\" EU-branch ids needing backfill is overstated.** The actual count, exhaustively extracted, is 17. Not a content error — `G.41.md` explicitly declined to guess-transcribe rather than risk drift — but the stated figure was an unverified guess and is corrected here."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping: merge `Research.2.md` and `Research.EU.md`. Closed",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Verify and mint Eurobarometer (S03-23, `SEC03_Title06-07_PartA_2026-08-05.md`)."
+    },
+    {
+      "n": 2,
+      "text": "The second joint ECB-Eurostat report (ECB-07, \"BOP-NA ROW consistency report\")."
+    },
+    {
+      "n": 3,
+      "text": "Read EBS Regulation 2019/2152."
+    },
+    {
+      "n": 4,
+      "text": "Regulation (EU) 2021/1058 / 2021/1060 — Title 05's GDP/GNI classification lead."
+    },
+    {
+      "n": 5,
+      "text": "Regulation (EC) No 1217/2009 / (EU) 2023/2674 / (EU) 2018/1091 — the Farm Sustainability Data Network's founding instruments (S03-12)."
+    },
+    {
+      "n": 6,
+      "text": "Staging batches 47, 51–56, 61–62, 69–72."
+    },
+    {
+      "n": 7,
+      "text": "Fetch and hash SEC01/02/03/06/07/08/09/10 against local copies."
+    },
+    {
+      "n": 8,
+      "text": "Retry `agridata.ec.europa.eu` / `agriculture.ec.europa.eu` for FADN's own metadata."
+    },
+    {
+      "n": 9,
+      "text": "Split `list-main-stats-2025-na` into nine records."
+    },
+    {
+      "n": 10,
+      "text": "Re-measure E4 keying on quote, not id, and reconcile."
+    },
+    {
+      "n": 11,
+      "text": "Delete `scripts/eu-schema-smoke.ts`."
+    },
+    {
+      "n": 12,
+      "text": "Pull the `[NA-Pen] / Table 29` thread."
+    },
+    {
+      "n": 13,
+      "text": "Check whether SEC09's total-level sign flip has a stated explanation elsewhere (`G.28.md` finding 1)."
+    },
+    {
+      "n": 14,
+      "text": "Search for a titled GNI deflator publication, following SEC01's S01-02 lead."
+    },
+    {
+      "n": 15,
+      "text": "Reconcile `EU Meta jsons.docx`'s SEC09/SEC10 batches."
+    },
+    {
+      "n": 16,
+      "text": "Read Art. 11 of the loi modifiée du 22 juin 1963."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.42.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — **v3.0, §9 now complete for both galaxies.** Cite it without caveat."
+    },
+    {
+      "n": 3,
+      "text": "No new JSON slice this session.**"
+    },
+    {
+      "n": 4,
+      "text": "A browser** (the `Claude_Browser` tool) — for the cheap checks list above, unchanged from `G.41.md`."
+    },
+    {
+      "n": 5,
+      "text": "The next target**: no housekeeping items remain open. Resume priority C (ECB/Eurosystem staging batches) or Eurobarometer (cheap check 1) as the next research thread. ---"
+    }
+  ],
+  "session_conditions": "**Eighth part of today's continuation**, directly on Thomas's instruction to\ndo the §9 backfill flagged in `G.41.md`. No document was read first-hand;\nthis was a data-extraction session against the corpus's own JSON, not\nresearch."
+}

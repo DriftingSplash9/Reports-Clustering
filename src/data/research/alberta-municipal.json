@@ -1,0 +1,185 @@
+{
+  "_slice": "Alberta municipal funding and assessment",
+  "_researched": "2026-07-28",
+  "_note": "Every dependency below carries an evidence_url pointing at a document that explicitly names its source. The LGFF Capital Funding Allocation Formula fact sheet is unusually good evidence: it lists its input data sources by name, with links.",
+  "reports": [
+    {
+      "id": "ab-municipalaffairs-lgff-capital",
+      "title": "Local Government Fiscal Framework — Capital Funding Allocations",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual allocation of provincial capital funding to Alberta local governments, calculated by a formula set out in the Local Government Fiscal Framework Act. $800 million in 2026.",
+      "releases_per_year": 1,
+      "cadence_note": "Aggregate amounts must be communicated by September 30 two years in advance; individual allocations follow some weeks later.",
+      "last_updated": null,
+      "url": "https://www.alberta.ca/local-government-fiscal-framework-capital-funding",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "ab-municipalaffairs-lgff-operating",
+      "title": "Local Government Fiscal Framework — Operating Funding",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual operating funding component of the Local Government Fiscal Framework, $60 million per year, distributed to Alberta local governments.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.alberta.ca/local-government-fiscal-framework-operating-funding",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "ab-municipalaffairs-population-list",
+      "title": "Municipal Affairs Population List (MAPL)",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual official population counts for Alberta municipalities, Metis Settlements and First Nations communities, drawn from municipal or federal census results. Used by provincial ministries to determine municipal grants.",
+      "releases_per_year": 1,
+      "cadence_note": "Discontinued in 2020 with the repeal of the Determination of Population Regulation; resumed in 2023 under the Municipal Census Regulation.",
+      "last_updated": null,
+      "url": "https://open.alberta.ca/dataset/alberta-municipal-affairs-population-list",
+      "domains": [
+        "population"
+      ]
+    },
+    {
+      "id": "ab-tbf-population-estimates",
+      "title": "Municipal (Census Subdivision) Population Estimates",
+      "publisher": "Alberta Treasury Board and Finance, Office of Statistics and Information",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual population estimates for Alberta census subdivisions by year, age and gender, including permanent and non-permanent residents.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.alberta.ca/demographic-statistics",
+      "domains": [
+        "population"
+      ]
+    },
+    {
+      "id": "ab-municipalaffairs-fir",
+      "title": "Municipal Financial Information Return (FIR)",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Standardised annual return summarising each municipality's audited financial statements — assets, liabilities, revenue, expenses, long term debt and property taxes. Required from every Alberta municipality by May 1.",
+      "releases_per_year": 1,
+      "cadence_note": "Due May 1 for the preceding financial year.",
+      "last_updated": null,
+      "url": "https://www.alberta.ca/annual-financial-reporting-for-municipalities",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "ab-municipalaffairs-financial-statistical-data",
+      "title": "Municipal Financial and Statistical Data",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual compilation of every Alberta municipality's financial and statistical returns, including tangible capital assets, accumulated amortization, road length, assessment and tax rates.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.alberta.ca/municipal-financial-and-statistical-data",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "ab-municipalaffairs-equalized-assessment",
+      "title": "Provincial Equalized Assessment Report",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual adjustment of every municipality's taxable assessment to a common basis, producing a uniform provincial measure of property wealth. Determines each municipality's share of requisitions.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://open.alberta.ca/opendata/equalized-assessment-report",
+      "domains": [
+        "assessment",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ab-education-property-tax-requisition",
+      "title": "Education Property Tax Requisition Comparison Report",
+      "publisher": "Alberta Municipal Affairs",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Alberta",
+      "description": "Annual statement of the education property tax requisition levied on each Alberta municipality, split between residential/farm and non-residential. Municipalities are obliged to collect it on the province's behalf. $3.1 billion in 2025.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://open.alberta.ca/publications/education-property-tax-requisition-comparison-report",
+      "domains": [
+        "taxation",
+        "education"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-tbf-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "Calgary and Edmonton allocations weight population at 48 per cent, and the fact sheet names Municipal (Census Subdivision) Population Estimates as the data source.",
+      "evidence_url": "https://www.alberta.ca/system/files/ma-lgff-capital-funding-allocation-formula-fact-sheet.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-education-property-tax-requisition",
+      "relationship_type": "calculated_from",
+      "basis": "Calgary and Edmonton allocations weight education property tax requisitions at 48 per cent, sourced from the Education Property Tax Requisition Comparison Report.",
+      "evidence_url": "https://www.alberta.ca/system/files/ma-lgff-capital-funding-allocation-formula-fact-sheet.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-municipalaffairs-population-list",
+      "relationship_type": "calculated_from",
+      "basis": "Allocations to local governments other than Calgary and Edmonton weight population at 65 per cent, taken from the Municipal Affairs Population List.",
+      "evidence_url": "https://www.alberta.ca/system/files/ma-lgff-capital-funding-allocation-formula-fact-sheet.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-municipalaffairs-financial-statistical-data",
+      "relationship_type": "calculated_from",
+      "basis": "Tangible capital assets (15 per cent), five-year average cumulative amortization (10 per cent) and length of local roads (10 per cent) are all drawn from named schedules of the Municipal Financial and Statistical Data.",
+      "evidence_url": "https://www.alberta.ca/system/files/ma-lgff-capital-funding-allocation-formula-fact-sheet.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-lgff-capital",
+      "target_report_id": "ab-municipalaffairs-equalized-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "Needs-based funding eligibility is set by comparing a municipality's equalized assessment per capita, or per kilometre of road, against the provincial average.",
+      "evidence_url": "https://www.alberta.ca/system/files/ma-lgff-capital-funding-allocation-formula-fact-sheet.pdf"
+    },
+    {
+      "source_report_id": "ab-municipalaffairs-financial-statistical-data",
+      "target_report_id": "ab-municipalaffairs-fir",
+      "relationship_type": "calculated_from",
+      "basis": "The dataset is compiled from the financial information return and statistical information return submitted annually by every Alberta municipality.",
+      "evidence_url": "https://www.alberta.ca/municipal-financial-and-statistical-data"
+    },
+    {
+      "source_report_id": "ab-education-property-tax-requisition",
+      "target_report_id": "ab-municipalaffairs-equalized-assessment",
+      "relationship_type": "calculated_from",
+      "basis": "Equalized assessment is the means by which the province determines each municipality's contribution to the provincial education property tax requisition.",
+      "evidence_url": "https://open.alberta.ca/opendata/equalized-assessment-report"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "reports": [
+    {
+      "id": "statcan-msm",
+      "title": "Monthly Survey of Manufacturing (MSM)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Monthly survey of Canadian manufacturing sales, inventories, unfilled orders and capacity utilisation, IMDB record 2101. Named as an indicator source by the monthly GDP-by-industry programme for most manufacturing industries, and named alongside the IPPI in the deflation rows of that programme's source table. The target population is drawn from the Business Register and classified by NAICS: 'The target population for the MSM consists of all statistical establishments on the Business Register that are classified to the manufacturing sector (by NAICS), which are categorized into over 156 industries.' Sales for low-revenue establishments are derived from GST files rather than collected, which is an administrative input with no publication behind it.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly. Record 2101 states 'Frequency: Monthly'. Two things about the historical record are worth keeping: the MSM was benchmarked to the Annual Survey of Manufacturing and Logging only 'up to and including 2003', so that specific arrangement has not held for two decades, and the present-tense relationship in the other direction is stated by the annual survey's own record rather than by this one.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101",
+      "domains": ["national-accounts", "inflation"]
+    },
+    {
+      "id": "statcan-asml",
+      "title": "Annual Survey of Manufacturing and Logging Industries (ASML)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Annual census-and-sample survey of establishments primarily engaged in manufacturing and logging, IMDB record 2103. It is the annual anchor for the manufacturing side of the Canadian accounts and it names its own consumers in its own words: 'Within Statistics Canada, the data are used by the Canadian System of National Accounts, the Monthly Survey of Manufacturing (record number 2101) and Prices programs.' That sentence is the only present-tense statement of the ASML-to-MSM relationship found; the MSM's own record describes the arrangement in the past tense and dates it to 2003. Survey data are substituted with T1, T2, T3010 and T5013 tax data under the Integrated Business Statistics Program, which is an administrative input with no publication behind it. The IPPI's own record 2318 names the 2019 ASML as one of two weighting sources, which is why this node is worth more than a manufacturing statistic normally would be.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual. Record 2103 states 'Frequency: Annual'. Reference year, published with a lag; the lag is not stated in the quoted passages and has not been verified.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
+      "domains": ["national-accounts"]
+    },
+    {
+      "id": "noc",
+      "title": "National Occupational Classification (NOC) 2021 Version 1.0",
+      "publisher": "Employment and Social Development Canada / Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The Canadian occupational classification standard, and the occupational counterpart to NAICS. Jointly maintained: 'The NOC has been developed and maintained as part of a collaborative partnership between Employment and Social Development Canada and Statistics Canada.' As of 10 August 2021 it is 'the departmental standard for data collection and dissemination for occupations at Statistics Canada'. Its own introduction names what a revision reaches: 'the redesign of the NOC can have significant implications for several Surveys, such as the Labour Force Survey (LFS), and ESDC programs such as the Temporary Foreign Worker Program and Employment Insurance program.' Note what it does NOT support: the classification is described as 'comparable to' ISCO, and the same passage records that 'certain conceptual differences between the NOC 2021 Version 1.0 and ISCO-08 limit comparability' — comparability is not derivation, so no edge to ISCO exists here.",
+      "releases_per_year": 1,
+      "changes_per_year": 0.1,
+      "cadence_note": "Two clocks, and the validator corrected which field takes which. Content updates are roughly annual and structural revision is decennial: 'NOC structural revisions are planned every 10 years and content was updated every 5 years to respond to labour market changes. Starting in 2017, the NOC 2016 has undergone content updates approximately every year.' A new version of the classification appears about once a year, so that is releases_per_year; the structure — the thing a dependent's methodology actually tracks — moves about once a decade, so that is changes_per_year. The first attempt had these reversed and the validator's changes-cannot-exceed-releases rule caught it, which is the rule earning its keep on a node type it was not written for.",
+      "last_updated": null,
+      "url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/introductionV1",
+      "domains": ["labour", "population"]
+    },
+    {
+      "id": "napcs",
+      "title": "North American Product Classification System (NAPCS) Canada 2022 Version 1.0",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The product-side counterpart to NAICS, approved as a departmental standard on 24 September 2021. It is a trilateral standard by origin — 'a joint project of the national statistical agencies of Canada, Mexico and the United States' — developed after NAICS 'to serve the same purpose but for product statistics'. Two relationships it is commonly assumed to have and does not: it is parallel to NAICS rather than derived from it, and it is explicitly NOT compatible with the UN Central Product Classification ('NAPCS Canada is not fully compatible with the CPC'). Its live connection to the accounts runs through the Supply and Use Product Classification, which its introduction states is 'largely embedded at the level of NAPCS Canada' — that is a containment relationship rather than a dependency, and the SUPC is not yet a node.",
+      "releases_per_year": 0.4,
+      "changes_per_year": 0.2,
+      "cadence_note": "Nominally a five-year revision cycle moving toward continuous update: 'Since the creation of this product classification, NAPCS Canada, has been revised on a 5-year cycle, in 2012, 2017 and 2022. NAPCS Canada was also revised in 2018 with NAPCS Canada 2017 Version 2.0, as Canada has started evolving towards adopting a permanent \"evergreen\" practice with regards to NAPCS, which means the updating of NAPCS Canada on an as-needed basis, with version updates between the standard 5-year revision milestones.' Four versions are named across roughly a decade — 2012, 2017, 2017 V2.0 in 2018, and 2022 — so releases_per_year is 0.4 counting published versions. changes_per_year 0.2 is the structural five-year cycle the document states.",
+      "last_updated": null,
+      "url": "https://www.statcan.gc.ca/en/subjects/standard/napcs/2022/introduction",
+      "domains": ["national-accounts"]
+    },
+    {
+      "id": "cra-pd7-accounts",
+      "title": "CRA payroll deduction (PD7) accounts",
+      "publisher": "Canada Revenue Agency",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The administrative remittance records behind SEPH, and the first terminus in the graph. IMDB record 2612 names them as the primary input: 'Administrative information for total gross monthly payrolls and the total number of employees for the last pay period in the month are obtained from payroll deduction (PD7 form) accounts maintained by Canada Revenue Agency.' SEPH is a census of these records rather than a survey of employers, so the entire monthly payroll estimate — which four federal and provincial benefit formulas are calculated from — rests on a remittance form. There is no PD7 publication, no release schedule and no url: what exists is a form employers file and an agency that holds the results.",
+      "releases_per_year": 12,
+      "cadence_note": "A terminus has no publication cadence, so this number is the collection rhythm rather than a release rate: PD7 remittances are monthly, and record 2612 describes the payroll figure as covering 'the last pay period in the month'. Read it as how often the data behind this node changes, not as how often anything appears.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612",
+      "domains": ["labour"],
+      "terminal_reason": "unpublishable"
+    },
+    {
+      "id": "cra-gst-files",
+      "title": "Goods and Services Tax (GST) administrative files",
+      "publisher": "Canada Revenue Agency",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "GST remittance records, used to avoid surveying small manufacturers. IMDB record 2101: 'Managing response burden is an ongoing challenge for Statistics Canada. In an attempt to alleviate response burden, especially for small businesses, the MSM derives sales data for low-revenue establishments from Goods and Service Tax (GST) files using a ratio estimator.' So part of the monthly manufacturing sales figure — which the monthly GDP programme uses as its indicator for most manufacturing industries — is not collected at all but estimated from tax remittances.",
+      "releases_per_year": 4,
+      "cadence_note": "A terminus has no publication cadence. GST filing frequency is set by the filer's revenue — monthly, quarterly or annually — and record 2101 does not state which vintage the MSM reads. 4 is the middle case and is a guess, flagged as such rather than left to look measured.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101",
+      "domains": ["taxation", "national-accounts"],
+      "terminal_reason": "unpublishable"
+    },
+    {
+      "id": "cra-ibsp-tax-data",
+      "title": "T1, T2, T3010 and T5013 tax data (Integrated Business Statistics Program)",
+      "publisher": "Canada Revenue Agency",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Four named corporate and unincorporated tax returns that substitute for survey responses across the Integrated Business Statistics Program. IMDB record 2103 states both the mechanism and the motive: 'A strategy to replace survey data with tax data has been introduced to reduce the respondent burden and survey costs... As part of the Integrated Business Statistics Program (IBSP), T1 tax data are used for unincorporated businesses, T2 tax data for incorporated businesses, T3010 tax data for registered charities and T5013 tax data for partnerships. Data replacement may be used to correct outliers or to replace partially or completely missing data. Tax data may also be used to reconcile survey data.' Worth noting how thoroughly record 2103 discloses while naming nothing citable — the fed-h15 pattern arriving in a manufacturing survey. Named here for the ASML specifically, but the IBSP spans most StatCan business surveys, so this node will gain in-degree as the corpus grows rather than staying a leaf.",
+      "releases_per_year": 1,
+      "cadence_note": "A terminus has no publication cadence. Annual tax filings; the number is the filing rhythm, not a release rate.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
+      "domains": ["taxation", "national-accounts"],
+      "terminal_reason": "unpublishable"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "statcan-seph",
+      "target_report_id": "cra-pd7-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 2612, Data sources: 'The statistics compiled by SEPH are based on a census of administrative records for all in-scope establishments with employees that can be found on the Business Register. Administrative information for total gross monthly payrolls and the total number of employees for the last pay period in the month are obtained from payroll deduction (PD7 form) accounts maintained by Canada Revenue Agency.' A census of these records rather than a sample of employers, which makes this the strongest available characterisation short of calculated_from. Held at uses_data_from because SEPH applies estimation on top — the same record describes model groups and a Business Payrolls Survey filling gaps — so the payroll figure is not arithmetic on the remittances alone.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612"
+    },
+    {
+      "source_report_id": "statcan-msm",
+      "target_report_id": "cra-gst-files",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 2101, Use of Administrative Data: 'In an attempt to alleviate response burden, especially for small businesses, the MSM derives sales data for low-revenue establishments from Goods and Service Tax (GST) files using a ratio estimator.' The word 'derives' plus a named estimator is a direct-input claim; it applies to a stated subset of establishments rather than the whole, which is why this is uses_data_from and not calculated_from.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101"
+    },
+    {
+      "source_report_id": "statcan-asml",
+      "target_report_id": "cra-ibsp-tax-data",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 2103, Data sources: 'As part of the Integrated Business Statistics Program (IBSP), T1 tax data are used for unincorporated businesses, T2 tax data for incorporated businesses, T3010 tax data for registered charities and T5013 tax data for partnerships. Data replacement may be used to correct outliers or to replace partially or completely missing data. Tax data may also be used to reconcile survey data.' Three distinct uses in one passage — substitution, outlier correction and reconciliation — all of which are the target's figures entering the source.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103"
+    },
+    {
+      "source_report_id": "statcan-gdp-monthly",
+      "target_report_id": "statcan-msm",
+      "relationship_type": "uses_data_from",
+      "basis": "IMDB record 1301, the monthly GDP-by-industry programme, states its indicator sources by name: 'Data from the Monthly Survey of Manufacturing are used as indicators for most manufacturing industries. Data from the Survey of Employment, Payrolls and Hours are used for many service industries.' The same sentence is the basis for the already-existing edge to statcan-seph, so `uses_data_from` follows that precedent. Corroborated independently by the programme's own source table, which names 'Monthly Survey of Manufacturing, Record no. 2101' in the gross-output rows for manufacturing industries — the same table and the same rows that produced the IPPI edge in V0.11.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1301"
+    },
+    {
+      "source_report_id": "statcan-msm",
+      "target_report_id": "statcan-asml",
+      "relationship_type": "uses_data_from",
+      "basis": "Stated by the annual survey rather than by the monthly one, in the present tense. IMDB record 2103: 'Within Statistics Canada, the data are used by the Canadian System of National Accounts, the Monthly Survey of Manufacturing (record number 2101) and Prices programs.' This is a reverse-direction disclosure — the target naming its consumers — and it is the only present-tense statement available. Record 2101's own account of the relationship is past tense and expired: 'Up to and including 2003, the MSM was benchmarked to the Annual Survey of Manufactures and Logging (ASML)', which is recorded in the `_dropped` block rather than used here, because a benchmarking arrangement that ended in 2003 is not a live dependency.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103"
+    },
+    {
+      "source_report_id": "statcan-msm",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Record 2101 states it twice, in the target population and in the estimation method. Target population description: 'The target population for the MSM consists of all statistical establishments on the Business Register that are classified to the manufacturing sector (by NAICS), which are categorized into over 156 industries.' Estimation description: 'The estimation system generates estimates using the NAICS.' `methodology_depends_on` matches the type on every other NAICS edge in the graph.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101"
+    },
+    {
+      "source_report_id": "statcan-asml",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Record 2103, target population: 'The target population of the Annual Survey of Manufacturing and Logging (ASML) comprises all establishments primarily engaged in manufacturing and logging activities. The data are classified by industry based on the North American Industry Classification System (NAICS). Under the NAICS, logging establishments are classified to NAICS code 1133 and manufacturing establishments to NAICS sectors 31, 32 and 33.' Restated in the sampling description: 'Prior to the selection of a random sample, enterprises are classified into homogeneous groups (i.e., groups with the same North American Industry Classification System codes and same geography) based on the characteristics of their establishments.'",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103"
+    },
+    {
+      "source_report_id": "statcan-lfs",
+      "target_report_id": "noc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "THE WEAKEST EDGE IN THIS SLICE, and flagged rather than buried. The NOC 2021 introduction states: 'It is important to note that the redesign of the NOC can have significant implications for several Surveys, such as the Labour Force Survey (LFS), and ESDC programs such as the Temporary Foreign Worker Program and Employment Insurance program.' This is a statement that a revision reaches the LFS, not a statement that the LFS uses the NOC, and the direction has to be read out of it rather than off it. It is taken on the precedent already set for boc-prime-rate -> boc-policy-rate, which rests on the Bank of Canada's word 'affects' and was accepted as `uses_data_from` on exactly that reasoning. It is also corroborated structurally by NOC being 'the departmental standard for data collection and dissemination for occupations at Statistics Canada' as of 10 August 2021. The clean version of this edge is a passage in the LFS's own record 3701 saying it codes occupation to NOC; that passage has not been retrieved, and the `_dropped` block records it as the lead to close.",
+      "evidence_url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/introductionV1"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "statcan-seph -> statcan-lfs",
+      "source": "statcan-seph",
+      "target": "statcan-lfs",
+      "reason": "denied",
+      "why": "Record 2612's Quality evaluation section says 'Prior to the release, comparisons with independent sources such as the Labour Force Survey are performed.' A comparison against an independent source is the opposite of a dependency claim — the word 'independent' is doing the work. This is the third recorded instance of the 'comparable with is not a dependency claim' family, after record 1301's 'more comparable with' and H.15's 'are equivalent to'."
+    },
+    {
+      "edge": "an IMDB page can date its own arrangement in the past tense",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Not a dropped edge — the edge exists, on other evidence. Recorded because record 2101 describes the relationship in the past tense and dates its end: 'Up to and including 2003, the MSM was benchmarked to the Annual Survey of Manufactures and Logging (ASML). Benchmarking was the regular review of the MSM estimates in the context of the annual data provided by the ASML.' Taking that quote as the basis would have put a 2003 arrangement in the graph as a live dependency. The edge is instead sourced to record 2103's present-tense 'the data are used by'. New corpus rule implied: an IMDB methodology page can describe a superseded arrangement in the same register as a current one, and the tense is the only signal."
+    },
+    {
+      "edge": "statcan-asml -> statcan-msm",
+      "source": "statcan-asml",
+      "target": "statcan-msm",
+      "reason": "denied",
+      "why": "Record 2103's quality section says 'The survey estimates are also analyzed with trends observed in related Statistics Canada data series (e.g., Monthly Survey of Manufacturing (record number 2101), sub-annual manufacturing commodity surveys).' Analysis against a related series is a validation check, not an input, and reading it as an edge would have created a false mutual pair with the real ASML edge — which matters more than usual now that mutual pairs are known to move the ranking."
+    },
+    {
+      "edge": "noc -> isco-08",
+      "source": "noc",
+      "target": null,
+      "reason": "denied",
+      "why": "The single most tempting edge in this slice and the document refuses it. NOC 2021's introduction: 'The NOC is comparable to the International Standard Classification of Occupations (ISCO) published by the International Labour Organization (ILO).' The same passage then limits it: 'certain conceptual differences between the NOC 2021 Version 1.0 and ISCO-08 limit comparability. For instance, differences in the classification criteria and classification structure exist between NOC 2021 Version 1.0 and ISCO-08. Additionally, subsistence occupations included in ISCO are not part of the NOC.' The relationship is parallel development with cross-team communication in the 1980s, not derivation. A correspondence table 'will be developed and published' — a concordance between two standards is not a dependency of either on the other."
+    },
+    {
+      "edge": "napcs -> naics",
+      "source": "napcs",
+      "target": "naics",
+      "reason": "denied",
+      "why": "NAPCS is NAICS's sibling, not its dependent. The introduction: 'The NAPCS project followed the adoption by the three countries of a common industry classification, the North American Industry Classification System (NAICS) in 1997. The purpose of the NAICS project was to develop a standard that allowed comparisons of industry data among the three participating countries. The development of NAPCS was meant to serve the same purpose but for product statistics.' Same programme, same participants, same purpose, different axis. Historical sequence is not derivation."
+    },
+    {
+      "edge": "napcs -> cpc",
+      "source": "napcs",
+      "target": null,
+      "reason": "denied",
+      "why": "An explicit documented non-dependency, and the strongest kind. NAPCS's introduction: 'NAPCS Canada is not fully compatible with the CPC. In order to do so, it would have been necessary for the most detailed categories of NAPCS Canada to coincide with, be grouped or be subset of, the most detailed categories of the CPC. This would have required changes to the national classification not possible at this time.' The document states the relationship does not hold and says why."
+    },
+    {
+      "edge": "statcan-sut -> statcan-supc",
+      "source": "statcan-sut",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "LEAD, and the best one in this slice. The Supply and Use Product Classification is what actually connects NAPCS to the accounts, and NAPCS's introduction states both halves. The dependency: 'The Supply and Use Product Classification (SUPC) is the basis for the commodity accounts' and 'the Supply and Use Product Classification (SUPC) used for the production of input-output tables is largely embedded at the level of NAPCS Canada.' The containment: 'The SUPC has been integrated into NAPCS Canada at the class level (5-digit) where conceptually and practically feasible... More than 80% of the remaining categories of NAPCS classes coincide with those of SUPC.' So the honest model is a statcan-supc node with part_of set to napcs and an edge from statcan-sut to it — the second use of part_of, and the first between two classifications. Blocked on publication facts for the SUPC: no title page, publisher or revision cadence has been retrieved. Deliberately NOT shortcut into a statcan-sut -> napcs edge, because that would justify an edge with a quote about a different release, which is the substitution error V0.11 refused an Equalization edge for."
+    },
+    {
+      "edge": "the LFS-side passage that would strengthen statcan-lfs -> noc",
+      "source": "statcan-lfs",
+      "target": null,
+      "reason": "deferred",
+      "why": "A lead, not a dropped edge — the edge exists, weakly, on the NOC's own wording, and this is the passage that would make it strong. IMDB record 3701's Data sources section was retrieved and describes only collection method: 'Data are collected directly from survey respondents... by in-person interview; by telephone interview; or by self-completed electronic questionnaire.' It names no classification and no release at all. The passage wanted is in the LFS's variable or classification documentation rather than its Data sources block, and it has not been retrieved."
+    },
+    {
+      "edge": "statcan-seph -> statcan-bps",
+      "source": "statcan-seph",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "LEAD. Record 2612 names the Business Payrolls Survey as a live input in its own words: 'The Business Payrolls Survey (BPS) conducted monthly, is used to collect SEPH variables not available from administrative sources.' That is a clean uses_data_from with a stated monthly cadence. Blocked only on publication facts for the BPS — its own IMDB record number has not been retrieved and inventing a URL for it is not acceptable."
+    },
+    {
+      "edge": "statcan-seph -> provincial, territorial and federal payroll records",
+      "source": "statcan-seph",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "The second administrative input in record 2612, and the one that stays dropped: 'Information for general government services is provided to SEPH on a monthly basis by the provincial, territorial and federal governments in the form of electronic files extracted from their payroll records.' Unlike the PD7 accounts — now a terminus node — this names no instrument at all, only a transfer of files from an unspecified number of governments. A terminus still has to be one identifiable thing that a document names; 'electronic files extracted from their payroll records' across fourteen governments is not one thing, and inventing a node for it would be inventing the boundary."
+    },
+    {
+      "edge": "statcan-lfs -> (any named release)",
+      "source": "statcan-lfs",
+      "target": null,
+      "reason": "no-document",
+      "why": "A confirmed and useful absence. Record 3701's Data sources section names no publication of any kind: 'Statistics Canada collects LFS information from the working-age population aged 15 and older... Data are collected directly from survey respondents.' The Labour Force Survey is a primary collection with no upstream release, which is a fact about the programme and not a gap in the research. This is exactly the case the determination field and the disclosure ratio exist to render, and it is a cleaner worked example than fed-h15 because there is nothing unpublishable behind it either — there is simply nothing behind it."
+    },
+    {
+      "edge": "statcan-cchs (Canadian Community Health Survey) as a node",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "LEAD, and a record-number correction. IMDB record 3226 was requested as Canadian International Merchandise Trade and is actually 'Canadian Community Health Survey - Annual Component (CCHS)', annual. Its Data sources section names no release — collection is by EQ, CATI and CAPI, with linkage to 'the personal tax records (T1, T1FF or T4) of respondents'. So the CCHS would enter the graph as an island: a real annual programme, in health, with no documented upstream release and no documented downstream consumer yet found. Deferred pending the standing-alone-nodes decision, since under the current loader an island node is dropped from every build. The record number for Canadian International Merchandise Trade remains unknown and was not guessed at."
+    },
+    {
+      "edge": "classification standards as an entry strategy",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "A correction to EXPANSION-V1's stated plan, from the first attempt at executing it. The plan said to enter new territory through its classification hub, on the grounds that a classification is a hub by construction. Half right: NAICS gained two incoming edges from this slice, but NOC and NAPCS between them produced one weak edge and four documented non-dependencies, because a classification document describes alignment, comparability and concordance rather than derivation. The hub is a hub because other documents name it, not because it names things. So the entry move is not 'read the classification', it is 'find the programmes coded on it and read their methodology pages' — which is what produced every NAICS edge in the corpus, including both of this slice's."
+    }
+  ]
+}

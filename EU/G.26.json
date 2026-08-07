@@ -1,0 +1,243 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.26.md",
+  "number": 26,
+  "title": "G.26.md — EU galaxy hand-off",
+  "date": "2026-08-05",
+  "governing_briefs": "Research.1.md v1.0, Research.2.md v2.1, Research.EU.md v0.1 —",
+  "predecessor": "G.25.md (2026-08-05).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The EU does not name its national inputs. Its member states name the EU.**\n\nThat asymmetry is now the branch's central finding and it has three independent\nsupports. Two EU instruments were followed to the national boundary and both stop\nat `AGENCY ONLY`: Annex XI's salary method names \"the Belgian and Luxembourgish\nauthorities\" and \"the ten Member States referred to in Article 1(4)\", and ESA\n2010's Annex B — the better test, a Regulation with a binding transmission\nprogramme — turns out to be \"a programme setting out the **time limits** by which\nMember States shall transmit\", whose table overview has four columns and no\ncolumn for a publication.\n\nRunning the other way, the disclosure is explicit and citable. Germany's\nstatistical office states ESA 2010 as the **legal basis of its own national\naccounts**, in structured metadata, with a periodicity beside it. That is now an\nedge in the graph.\n\n`EU/slices/README.md` framed this branch as the test of whether the Canada/US\nresult — zero standard-compliant direct official cross-border edges — is a fact\nabout those two countries or about national statistical systems generally. **The\nanswer forming is: neither, quite.** The obligation is real and binding; what is\nmissing is *naming*, and it is missing in one direction only.\n\nSecondarily and concretely: **the branch imported its first data.** 133 → 137\nreports, including the first cross-layer edge.",
+  "findings": [
+    {
+      "heading": "1. The asymmetry — and a prediction of mine refuted along the way",
+      "body": "**The negative half.** Cheap check 1, carried since G.20, is discharged in\n`EU/AnnexB_assessment_2026-08-05.md`. Regulation (EU) No 549/2013 describes its\nown annex:\n\n> \"The ESA 2010 provides for: […] (b) a programme (Annex B) setting out the time\n> limits by which Member States shall transmit to the Commission (Eurostat) the\n> accounts and tables to be compiled in accordance with the methodology referred\n> to in point (a).\" — Article 1(2)\n\nThe programme's table overview has four columns — number, subject, deadline,\nperiod. No publication, no publisher. The cleanest test is the national end and\nit fails hardest: **Destatis, describing its own transmission of government\naccounts, names ten ESA table numbers and not one German publication.**\n\nThat scores G.19 finding 6 as **refuted**, in exactly the manner G.20 finding 5\npredicted it would fail if it failed.\n\n**The positive half**, and it is new. Destatis's own quality report:\n\n> \"Scope of the statistics: national accounts of the Federation (EVAS No 81) …\n> **Legal bases: Regulation (EC) No 549/2013, European System of National and\n> Regional Accounts (ESA) 2010**, and supplementary and amending regulations …\n> **Periodicity: quarterly, annual**\"\n\nTitle, cadence and legal basis in one structured block. Corroborated\nindependently by both German inventories — *\"in compliance with the European\nSystem of National Accounts (ESA) 2010\"* and *\"based on the European System of\nAccounts (ESA) 2010\"* — which are obligation and derivation language, **not** the\n§5a agreement language that rules a link out.\n\n**A prediction of mine was refuted in between, on that exact trap.** I proposed\n`esa-2010 → sna-2008` as the near-certain first bridge. ESA 2010's own text:\n\n> \"The ESA 2010 **is consistent with** the worldwide guidelines on national\n> accounting set out in the System of National Accounts 2008 (2008 SNA).\"\n> — Annex A, ch. 1, ¶1.05\n\n\"Consistent with\" is verbatim on §5a's watchlist. Two further records say it the\nsame way and the original extractor had already flagged all three. §5a says to\nrecord these *because the link keeps being re-proposed*; it was re-proposed by me.\nRecorded as `_dropped` in `esa-2010.json` so the next person does not.\n\n**What this rests on.** The negative half is assessed from **staged records**, not\nsources: Annex B was never read as enacted, and 31 of the 43 matched records were\nnot read. Annex XI was never retrieved at all. The positive half is first-hand."
+    },
+    {
+      "heading": "2. First cross-layer edge, and the route that got past the blocker",
+      "body": "`src/data/research/de-destatis-national-accounts.json` — 1 report, 1 dependency,\n4 `_dropped`. First member-state node; filename matches `EU/slices/README.md`'s\nown worked example.\n\n> `de-destatis-national-accounts` **methodology_depends_on** `esa-2010`\n\n`methodology_depends_on` rather than `uses_data_from` because ESA 2010 supplies\nno figures — it supplies \"the common standards, definitions, classifications and\naccounting rules that shall be used for compiling accounts and tables\"\n(Art. 1(2)(a)).\n\n**The blocker and the way round it, which generalises.** The obvious sources were\nthe two German *methodology* documents, and both are unmintable: the GNI\ninventory's colophon says **\"Periodicity: non-recurring\"** — §4.2's exact\ndisqualifier — while the same document names its own predecessor (\"major\nrevisions since the 2021 inventory\") and its landing page carries an \"Older\neditions\" heading. Documented conflict, reported per §3 and not adjudicated. The\nQNA inventory is weaker still: no periodicity statement at all.\n\n**The published release states plainly what the methodology documents do not.**\nRouting the edge through the release sidesteps the conflict entirely. **When a\nmember-state dependency looks blocked on cadence, check whether the release\nstates what the methodology document does not.** Recorded in the README."
+    },
+    {
+      "heading": "3. Three slices imported — and the `_dropped` list is where the value is",
+      "body": "| Slice | Reports | Deps | `_dropped` |\n|---|---|---|---|\n| `eu-draft-budget` | 2 | 1 | 11 |\n| `esa-2010` | 1 | **0** | 5 |\n| `de-destatis-national-accounts` | 1 | 1 | 4 |\n\n**Twenty dropped notes against two edges.** That ratio is the honest output of\napplying §4 to this material, and both central negatives now live in the graph's\nown dropped-edge record rather than only in prose — `validate` reports them and\nflags the `deferred` / `no-node-yet` ones as leads.\n\n`esa-2010` imported with **zero edges** and sat under `validate`'s *ISOLATED —\nreports with no surviving edge, kept and shelved* until the German slice gave it\nan in-edge. The loader keeps isolated reports deliberately (*\"as of V0.12\"*),\nafter dropping them was measured to lose well-researched nodes.\n\nEach slice was structurally validated before import — schema, `supranational ⇒\nEU`, palette membership, all three enum unions, dangling refs, and **id\ncollisions against every corpus id**. Note the seed set lives in\n`src/data/reports.ts`, not JSON: globbing `src/data/**/*.json` finds only 115 of\nthe ids and would miss a clash."
+    },
+    {
+      "heading": "4. The staging counts have been wrong since G.20, by about 3×",
+      "body": "Every hand-off since G.20 says the staging area holds *\"814 distinct Part A\nrecords\"* and *\"49 duplicate and 77 id-less records\"*. Measured directly:\n\n| | Recorded | Actual |\n|---|---|---|\n| Part A records staged | 814 | **960** |\n| Records with no `id` | 77 | 77 ✓ |\n| Duplicate extra copies | 49 | **69 by id — but 150 by identical quote** |\n\n**814 is the distinct-*id* count**, not the record count, and it has been read as\nthe latter for six sessions. Worse: deduping by id misses records staged twice\nunder **different** ids — `esa-reg-article1` and `esa2010-art1-2` carry\nbyte-identical quotes at the same location, as do `esa-reg-article3` and\n`esa2010-art3-1`. The cause is legible: **two id-naming schemes for the same\ninstrument**.\n\nSo **E4 is ~150 extra copies, not 49 — 16% of the staging area** — and any dedupe\nmust key on quote, not id.\n\nOther inherited numbers check out: 8 record-less batch headers, 301 loose\nrecords, ~394k chars of prose."
+    },
+    {
+      "heading": "5. Provenance — one URL verified, ten inferred",
+      "body": "G.24 closed priority A8: `https://eur-lex.europa.eu/budget/data/DB/2027/en/SEC05.pdf`\nis **byte-identical** to `EU/SEC05.pdf` (`sha256 585c28fc…`, 894 024 bytes).\nURLs were then backfilled across **28 Part A records**; zero local paths remain.\n\n**Only SEC05 is hash-verified.** SEC04, SEC06 and SEC07 — which carry live\nrecords — are constructed by pattern. The inference is strong and was\nstrengthened without fetching: **PDF creation metadata shows ten of the eleven\nproduced on 2026-07-08 inside a 50-minute window, in section order, all at\nUTC+02:00** — one publisher's production run; SEC00 five days later, consistent\nwith it being the general introduction. All eleven were pulled locally in one\n3-minute batch. Recorded in `eu-draft-budget.json`'s `_provenance` field as\ninference, explicitly not verification.\n\n**One fetch closes it: `SEC06.pdf`.** Not ten. It is 800 kB and carries live\nrecords."
+    },
+    {
+      "heading": "6. The domain filter was dead code, and is gone",
+      "body": "Investigating why the first EU slice had no honest domain to declare turned up\nthat `FilterState.domains` was declared, defaulted to `null`, counted in\n`isFiltering` and compiled into a node predicate — and **nothing anywhere ever\nset it.** No UI control populated the field, so the predicate short-circuited\nevery time and had never hidden a node. `DOMAIN_LABEL` was exported and imported\nnowhere. The file's docstring shows why: scaffolding written ahead of a UI\n(\"domain and jurisdiction filters are the next\"), of which only the jurisdiction\nhalf was ever built.\n\nRemoved from `src/lib/filter.ts` and `src/lib/palette.ts`. **Kept:** the `Domain`\ntype and `Report.domains`, which are research metadata required by §6 and\npopulated on all 137 reports — `Domain` now has exactly one consumer, that field.\nRecorded in `REPORTS.md` under *Decisions*, with milestone 6's row corrected.\n\n**One guardrail went knowingly.** `DOMAIN_LABEL` was `Record<Domain, string>`, so\nadding a `Domain` value used to fail `npm run check` until a label was supplied.\nNothing enforces that now. If a domain view is ever built, **restore the label map\nbefore adding values** or the union and the labels drift apart silently.\n`COUNTRY_FAMILY` still works this way for `Country` and is the pattern to copy."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "G.19 finding 6 — refuted.** Annex B supplies no supranational-to-national edge; it names tables and deadlines. G.20 finding 5 called this failure mode exactly. Finding 1."
+    },
+    {
+      "n": 2,
+      "text": "G.25 finding 1 — overstated, and the reasoning was wrong.** It called the domain gap \"the one that matters — every future EU institutional node hits it\", written believing `domains` drove a live filter. It did not and never had. The gap is **data hygiene only** and never blocked import. Finding 6."
+    },
+    {
+      "n": 3,
+      "text": "Every hand-off since G.20 — the staging counts are wrong by ~3×.** \"814 records / 49 duplicates\" should be **960 records / ~150 duplicate copies / 77 id-less**, and dedupe must key on quote rather than id. Finding 4."
+    },
+    {
+      "n": 4,
+      "text": "G.20 finding 3's table — one item understated.** It renders `Research.EU.md` §10 item 1 as \"Statistical Requirements Compendium (latest)\"; the brief says \"…**and the list of main statistics**\". The omitted half is the most node-shaped material in staging. G.20's wider claim is confirmed."
+    },
+    {
+      "n": 5,
+      "text": "`EU/slices/README.md`'s framing of `cross-layer/` — revised.** Secondary observations, above."
+    },
+    {
+      "n": 6,
+      "text": "My own prediction in the G.25 wrap — refuted.** `esa-2010 → sna-2008` was called \"near-certain\"; it is §5a agreement language. Finding 1."
+    },
+    {
+      "n": 7,
+      "text": "No finding in G.15–G.18 was checked**, and none should be treated as revisited."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections (SEC00–SEC10).",
+      "items": [
+        {
+          "n": 1,
+          "text": "~~SEC05~~ (G.21) · ~~SEC06, SEC07~~ (G.23) · ~~SEC00 key~~ (G.22) · ~~A8 retrieval URL~~ (G.24) · ~~first import~~ (this file) — closed."
+        },
+        {
+          "n": 2,
+          "text": "SEC01 (Parliament, 53 pp), SEC02 (Council, 38 pp)** — next extraction targets. SEC01 is the outlier: 14 `7.2.19SPEC` lines with no analogue elsewhere. Both come with cheap check 6 free."
+        },
+        {
+          "n": 3,
+          "text": "SEC08 (29 pp), SEC09 (31 pp), SEC10 (38 pp)** — the three smallest, on disk, never opened. SEC10 first: only section using the literal `X` numeral and the only `PPPA` code."
+        },
+        {
+          "n": 4,
+          "text": "Part B** — `sc-51`…`sc-73`. `sc-47`…`sc-50` remain **reserved**. Still outstanding: recovering those, and SEC04's addendum. **Nothing has been added for the three imported slices**, and the Part B Output Rule asks for it."
+        },
+        {
+          "n": 5,
+          "text": "SEC06_batch.md** — still wanted once, format check only."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog, after A.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads, after B.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": [
+        {
+          "n": 1,
+          "text": "~~Schema decision.~~ DONE — G.20."
+        },
+        {
+          "n": 2,
+          "text": "Verify and slice the staged Eurostat strand — 960 records, not 814.** Start with `list-main-stats-2025-na` split into its nine products."
+        },
+        {
+          "n": 3,
+          "text": "The prose section** — `_staging/20-prose-sections.txt`, its own session."
+        },
+        {
+          "n": 4,
+          "text": "Reconcile the duplicates — ~150, not 49, and key on quote not id.** Upgraded to a prerequisite; mechanism known. Finding 4."
+        },
+        {
+          "n": 5,
+          "text": "Reconcile the two priority queues.** Fold into the D merge."
+        }
+      ]
+    },
+    {
+      "letter": "F",
+      "label": "NEW: the German sub-graph.",
+      "items": [
+        {
+          "n": 1,
+          "text": "Deutsche Bundesbank financial accounts by sector** — named twice, \"responsible for compiling\". Same shape as the Bank of Canada material."
+        },
+        {
+          "n": 2,
+          "text": "The German source statistics, named by title *and* EVAS register number** — Microcensus, EVAS 47410, EVAS 31211, EVAS 13111 (Federal Employment Agency), VAT statistics, and more. `Research.1.md` §7's strongest evidence class, and `destatis.de` is fully reachable from this environment."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Fetch `SEC06.pdf`** and hash it against `EU/SEC06.pdf`. Converts 28 records from inferred provenance to verified. Needs a browser."
+    },
+    {
+      "n": 2,
+      "text": "Split `list-main-stats-2025-na` into nine records.** Mechanical; unlocks the best remaining staging material."
+    },
+    {
+      "n": 3,
+      "text": "Re-measure E4 keying on quote, not id**, and reconcile. Finding 4."
+    },
+    {
+      "n": 4,
+      "text": "Delete `scripts/eu-schema-smoke.ts`** — its stated condition has lapsed."
+    },
+    {
+      "n": 5,
+      "text": "Retrieve Annex XI Article 1(4)** — closes finding 1's open limb. EUR-Lex is gated; a parliament register is how `COM(2025) 736` was obtained."
+    },
+    {
+      "n": 6,
+      "text": "Check whether SEC01/SEC02 show the request-vs-table gap** (G.23 finding 2). Two sections is a pattern; four would be a rule. Free with priority A2."
+    },
+    {
+      "n": 7,
+      "text": "Retrieve the Eurostat Report of 31 October** and establish its URL."
+    },
+    {
+      "n": 8,
+      "text": "Read EBS Regulation 2019/2152** as a third test of the asymmetry, from the EU side."
+    },
+    {
+      "n": 9,
+      "text": "Pull the `[NA-Pen] / Table 29` thread** — the only table-to-publication tie in the corpus."
+    },
+    {
+      "n": 10,
+      "text": "Check whether sc-47–sc-50 exist anywhere**; **characterise the 155 non-`S` loose records**; **match the 8 record-less batch headers**; **enumerate the `9`-series tags** beyond `SPEC`/`DAG`/`PPPA`."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.26.md`)** — paste as text, do not attach."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md`** — the standing brief, and the only carrier of the §9 id list."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/de-destatis-national-accounts.json`** — the pattern that works, and the first cross-layer edge."
+    },
+    {
+      "n": 4,
+      "text": "`EU/AnnexB_assessment_2026-08-05.md`** — the central negative result."
+    },
+    {
+      "n": 5,
+      "text": "`EU/SEC05_PartA_2026-08-04.md`** — the Part A format exemplar."
+    },
+    {
+      "n": 6,
+      "text": "`PartB_soft_connections_2026-08-04.md`** — required by the Part B Output Rule's own closing line, not merely conventional."
+    },
+    {
+      "n": 7,
+      "text": "`EU/slices/README.md`** — the revised folder rule and the methodology-vs-release lesson."
+    },
+    {
+      "n": 8,
+      "text": "The next target PDFs** — `SEC01.pdf`, `SEC02.pdf`. Already in `EU/`."
+    },
+    {
+      "n": 9,
+      "text": "A browser**, for cheap checks 1, 5 and 7. EUR-Lex is gated here; `destatis.de` is not. ---"
+    }
+  ],
+  "session_conditions": "**This file covers six working sessions, not one.** G.21–G.25 were written one\nper session on the same day, which was over-servicing the chain — five hand-offs\nagainst a branch that had imported nothing. That was flagged in a review and this\nfile is the correction: one hand-off per batch of real work.\n\nSession types covered: two extraction, one assessment, two plumbing, one code\nchange.\n\nWhat was read first-hand: the **Destatis Quality Report for National Accounts**\n(19 pp), the **German GNI inventory** (372 pp) and the **QNA inventory** (54 pp),\nall fetched from `destatis.de`; twelve staged Part A records on ESA 2010 Annex B;\n`Research.2.md` and `Research.EU.md`; the relevant parts of `src/`.\n\nWhat was **not** done:\n\n- **No new `SEC*.pdf` was extracted.** SEC01, SEC02, SEC08, SEC09, SEC10 remain\n  untouched beyond searching.\n- **Annex B was never read as enacted**, and **Annex XI was never retrieved at\n  all** (EUR-Lex). Finding 1's negative half rests on staged records plus a\n  presentation document, and on an operative report rather than the annex.\n- **Ten of the eleven `SEC*.pdf` URLs are inferred, not verified.** See finding 5.\n- **The blob was not sliced.** 960 staged records still unworked.\n- **The D-item merge was not performed**, sixth session running."
+}
