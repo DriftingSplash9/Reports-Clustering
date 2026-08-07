@@ -12,11 +12,20 @@ then moves.
 Nothing in `_staging/` is verified. Nothing anywhere here is wired into
 `src/data/index.ts` yet.
 
-## Current contents (2026-08-05)
+## Current contents (2026-08-07)
+
+**2026-08-07 — `ess-quality-framework.json` graduated (`EU/G.50.md`).** 5 reports,
+6 dependencies, 9 `_dropped`; built from staging batches 16–26, 30–37, 44, 45 and
+66, which turned out to be one subject rather than twenty-two. Corpus 363/429,
+`validate` and `check` green. The slice file is kept here as well as in
+`src/data/research/` — it is the first `eu-level/` slice not deleted after import,
+because its Part A record (`EU/ESSQualityFramework_PartA_2026-08-07.md`) is
+referenced from it. **It also puts the folder's central asymmetry finding under
+pressure from a new direction** — see the note appended to that section below.
 
 | File | State |
 |---|---|
-| `eu-level/` | **Empty — seven slices have graduated.** `eu-draft-budget.json` (2 reports, 1 dependency, 11 `_dropped`), `esa-2010.json` (1 report, **0** dependencies, 4 `_dropped`), `eurostat-farm-structure-survey.json` (1 report, **0** dependencies, 3 `_dropped`), `eurostat-hicp.json` (1 report, now **0** dependencies of its own — see below — `_dropped` cleared, imported 2026-08-05, found via `EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md`), `eurostat-remuneration-update-report.json` (1 report, **2 dependencies**, 2 `_dropped`, imported 2026-08-05, found via `EU/EurostatRemunerationReport_PartA_2026-08-05.md`), `eurostat-remuneration-satellite-series.json` (3 reports — Intra-EU interim, Extra-EU interim, Estate Agency Rent Surveys — **1 dependency**, 1 `_dropped`, imported 2026-08-05) and, **new this session**, `eurostat-remuneration-mission-expenses-report.json` (1 report, **1 dependency**, 1 `_dropped`, imported 2026-08-05) — all staged here, checked, and imported to `src/data/research/` and registered in `src/data/index.ts`. **The mission-expenses node is the branch's first EU cadence derived by counting an irregular observed publication record** (five reports across 2015–2026) rather than from a document stating a rate — flagged honestly in its own `cadence_note` rather than smoothed over. It carries a documented edge, `eurostat-remuneration-mission-expenses-report → eurostat-hicp` (`uses_data_from`), on the Methodology page's "uses information already established, including... the harmonised index of consumer prices." The satellite slice's own record stands: the Publications page's "A64 Annex 3" and "A65 Annex 2" detailed reports turned out to be appendices of `eurostat-remuneration-update-report` itself, not a separate series — investigated and deliberately not minted, per the `Report.part_of` double-counting finding already in `src/lib/types.ts`. |
+| `eu-level/` | **`ess-quality-framework.json` (2026-08-07) is here; eight earlier slices have graduated.** `eu-draft-budget.json` (2 reports, 1 dependency, 11 `_dropped`), `esa-2010.json` (1 report, **0** dependencies, 4 `_dropped`), `eurostat-farm-structure-survey.json` (1 report, **0** dependencies, 3 `_dropped`), `eurostat-hicp.json` (1 report, now **0** dependencies of its own — see below — `_dropped` cleared, imported 2026-08-05, found via `EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md`), `eurostat-remuneration-update-report.json` (1 report, **2 dependencies**, 2 `_dropped`, imported 2026-08-05, found via `EU/EurostatRemunerationReport_PartA_2026-08-05.md`), `eurostat-remuneration-satellite-series.json` (3 reports — Intra-EU interim, Extra-EU interim, Estate Agency Rent Surveys — **1 dependency**, 1 `_dropped`, imported 2026-08-05) and, **new this session**, `eurostat-remuneration-mission-expenses-report.json` (1 report, **1 dependency**, 1 `_dropped`, imported 2026-08-05) — all staged here, checked, and imported to `src/data/research/` and registered in `src/data/index.ts`. **The mission-expenses node is the branch's first EU cadence derived by counting an irregular observed publication record** (five reports across 2015–2026) rather than from a document stating a rate — flagged honestly in its own `cadence_note` rather than smoothed over. It carries a documented edge, `eurostat-remuneration-mission-expenses-report → eurostat-hicp` (`uses_data_from`), on the Methodology page's "uses information already established, including... the harmonised index of consumer prices." The satellite slice's own record stands: the Publications page's "A64 Annex 3" and "A65 Annex 2" detailed reports turned out to be appendices of `eurostat-remuneration-update-report` itself, not a separate series — investigated and deliberately not minted, per the `Report.part_of` double-counting finding already in `src/lib/types.ts`. |
 | `member-states/` | **Empty — two slices graduated.** `de-destatis-national-accounts.json` (1 report, **1 dependency**, 4 `_dropped`) — the branch's **first cross-layer edge** and first member-state node, imported 2026-08-05. `lu-statec-cpi.json` (2 reports, **1 dependency**, 2 `_dropped`, imported 2026-08-05, found via `EU/STATEC-CPI_PartA_2026-08-05.md`, following the AXI-02 lead) — Luxembourg's first node, and the branch's second `methodology_depends_on` member-state→EU edge (`lu-statec-ipch → eurostat-hicp`), same shape as the German one. The corpus is now **150 reports, 220 dependencies, 165 dropped notes**. **New this session**: `eurosystem-ecb.json` (3 reports — the Eurosystem's annual consolidated balance sheet, its weekly financial statement, and the joint ESS-ESCB MIP quality report — 0 dependencies, 2 `_dropped`, opening priority item C after nineteen hand-offs unchanged) and `ecfin-business-consumer-surveys.json` (1 report, 0 dependencies, 0 `_dropped`, found sampling SEC03 Title 07 — a 1961-vintage monthly DG ECFIN survey programme, confirmed live). |
 | `cross-layer/` | Empty **for a documented reason, and the reason has now changed** — see below. |
 
@@ -114,6 +123,18 @@ stop at `AGENCY ONLY`.**
 
 Both are recorded as `_dropped` entries with `reason: "no-document"` in
 `eu-draft-budget.json`, which is where a searched-for-and-not-found edge belongs.
+
+**Added 2026-08-07 (`EU/G.50.md`) — the asymmetry is about the legislative layer,
+and the self-regulatory layer runs the other way.** The ESS quality stack built
+this session is four documents deep and every link is stated by the *dependent*
+document about itself, downward and outward: the ESS Handbook names SIMS
+(*"fully incorporates SIMS 2.0 … within the overarching SIMS framework"*), and
+SIMS's own concepts are, in Eurostat's words, *"derived from the statistical data
+and metadata exchange (SDMX) cross-domain concepts published in the SDMX
+glossary"* — an international standard nobody legislated. No Regulation appears
+anywhere in the chain. The upward-disclosure finding above is not refuted; it is
+narrowed. Where the EU binds by Regulation it names nobody; where it coordinates
+by agreement it names its sources freely.
 
 **This does not mean the folder was a mistake.** It means the prior stated in
 this README — that the EU would be the opposite case — is under real pressure,

@@ -1,0 +1,145 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.50.md",
+  "number": 50,
+  "title": "G.50.md — EU galaxy hand-off",
+  "date": "2026-08-07",
+  "governing_briefs": "`Research.1.md` v3.3 — read this session for §2 (the one rule,",
+  "predecessor": "G.49.md (2026-08-05). Two days and three sessions elapsed on other",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The EU layer's quality framework is a four-deep chain in which every link is\nstated by the dependent document about itself, and its bottom link leaves the\nEU entirely — SIMS's concepts are \"derived from\" the SDMX cross-domain concepts\npublished in the SDMX Glossary, an international standard nobody legislated.**\nThat is a new shape for this branch. `EU/slices/README.md`'s central finding is\nthat disclosure runs *upward* — national documents name EU instruments, EU\ninstruments name nobody. This chain runs *downward and outward*: an EU standard\nnaming an international one as the source of its own concepts, in Eurostat's own\nwords, with no Regulation anywhere in it. The asymmetry finding is about the\n*legislative* layer; the self-regulatory layer behaves the opposite way, and\nthat is worth more than the six edges.",
+  "findings": [
+    {
+      "heading": "1. Twenty-two staged batches were one subject, and it was the ESS quality stack",
+      "body": "**What this rests on**: reading `01-manifest.json`'s scope lines for all 73\nbatches and cross-checking the 109 `names`-bearing records in them against the\n340 ids already in the corpus. Batches 16–26, 30–37, 44, 45 and 66 all describe\nthe same five documents from different angles — Code of Practice, Quality\nAssurance Framework, ESS Handbook for Quality and Metadata Reports, SIMS, and\nthe SDMX material SIMS derives from — and **not one of the five was a node.**\nThe seven batches a prior session did mine (`eu-meta-docx-batches.json`, G-file\nsessions never having read them) were a different, disjoint set. **Practical\nconsequence for whoever takes the next batch:** the manifest's `scope` strings\nare a usable index, the batch numbering is not — the material is grouped by\nsubject across scattered batch numbers, and taking batches in numeric order\nwould have produced five thin slices instead of one coherent one."
+    },
+    {
+      "heading": "2. Two of the six edges would have been built from the wrong sentence, and the wrong sentence was the more prominent one",
+      "body": "**What this rests on**: direct reads of both documents. The QAF's own\nintroduction says it *\"follows and aligns with the 2017 revision of the European\nStatistics Code of Practice\"* — front matter, first paragraph, exactly where an\nedge-bearing statement sits, and squarely in `Research.1.md` §5a's banned list.\nThe sentence that carries the edge is on Eurostat's QAF page instead: *\"The QAF\nserves as complementary guidance for how to implement the CoP\"* and *\"The aim of\nthe QAF is to accompany the CoP.\"* The same pattern, in the same slice, from\nEurostat's metadata-standards page: *\"The concepts defined in the SIMS standard\nare compatible with the common terminology established by the SDMX standard\"* is\n§5a language, and the very next sentence — *\"The 19 high-level concepts are\nderived from the statistical data and metadata exchange (SDMX) cross-domain\nconcepts published in the SDMX glossary\"* — is the edge. **Both traps sit\nimmediately adjacent to their own antidote.** Recorded as a `caveat` on the QAF\nedge and inside the SIMS edge's own `basis`, so neither can be re-proposed from\nthe weaker sentence later."
+    },
+    {
+      "heading": "3. The tense trap ran forwards, and the live release resolved it — the route `EU/slices/README.md` predicted",
+      "body": "**What this rests on**: the SIMS 2.0 cover page (December 2015) states *\"SIMS\nwill be the standard for quality reporting according to Article 12 of Regulation\n223/2009 on European statistics.\"* Future tense in a 2015 document — an\nannounced status, not a stated one, and unusable under §5b. The present-tense\nconfirmation is on Eurostat's live quality-reporting page: *\"The ESS quality\nreporting standard is the Single Integrated Metadata Structure (SIMS).\"* This is\nexactly the route `EU/slices/README.md` recorded from the German GNI inventory\n(\"when a member-state dependency looks blocked on cadence, check whether the\n*release* states what the *methodology document* does not\") — **its first\nconfirmation on a different document type, in a different direction, for a\ndifferent field.** Prediction logged and settled in the same session."
+    },
+    {
+      "heading": "4. EUR-Lex no longer serves consolidated texts to either a container or a real browser",
+      "body": "**What this rests on**: six URL forms tried this session, all failing, listed in\nfull in the Part A record §G1. `curl` returns **HTTP 202 with a zero-byte body**\nfor every `eur-lex.europa.eu` legal-content and ELI form. In Chrome, all three\nlegal-content forms **silently redirect to `eur-lex.europa.eu/TodayOJ/index.html`**\n— today's Official Journal — preserving the requested CELEX id as an ignored\nquery parameter. `publications.europa.eu/resource/celex/32009R0223` returns\nHTTP 400. **This contradicts the branch's own standing note**, carried in\n`MISSION-TODO-2.md`'s method notes, that \"EUR-Lex and several EU agency sites\ngate non-browser HTTP but work in a real browser.\" The browser no longer works\neither. Consequence for this session: `Regulation (EC) No 223/2009` was not\nminted as a node and the `eu-statistics-code-of-practice → Regulation` edge was\nnot built, though the staging records carry Article 11(1) and 11(2) verbatim and\nwould support both. Filed `deferred`, not `no-document` — the document exists and\nsays it; this branch simply could not open it today. **Whoever hits this next\nshould not conclude the quotes are wrong.** Worth one retry per session before\nassuming it is permanent; if it is, a mirror route (a national consolidated\ntext, or the OJ PDF via a Wayback `id_` endpoint, which worked for\n`legislation.govt.nz` on the NZ branch) is the thing to find."
+    },
+    {
+      "heading": "5. The direction between the Code of Practice and the peer reviews is documented both ways, and only one way was minted",
+      "body": "**What this rests on**: Eurostat's peer-review page says the reviews exist *\"to\nmonitor the implementation of the European Statistics Code of Practice\"* — which\nis the minted edge, peer-review report → CoP. Eurostat's CoP page says, in its\n\"History of the CoP\" table, *\"September 2011 Revision of the CoP based on the\nresults of the 1st round of ESS peer reviews\"* and *\"November 2017 Revision of\nthe CoP based on the results of the 2nd round of ESS peer reviews\"* — which is\nthe opposite edge. **It was not minted**, because the quote names *the results\nof a round*, not the titled final report that is the node, and this corpus does\nnot bridge from an exercise to its publication by inference. Both may well hold;\na graph cycle between a standard and its own assessment programme would be a\ntrue fact about how the ESS works, not an error. Recorded as a `note` in the\nslice. Settling it needs SWD(2024) 136 itself — see Cheap checks 2."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`MISSION-TODO-2.md`'s method note on EUR-Lex is now wrong and this file supersedes it.** The note reads \"EUR-Lex and several EU agency sites gate non-browser HTTP but work in a real browser.\" As of 2026-08-07 the browser route fails too — see Findings 4 for the exact failure signature. Status: **refuted for EUR-Lex specifically**; the note's claim about \"several EU agency sites\" was not tested this session and is untouched. The predecessor file was not edited; the correction lives here, per the spec."
+    },
+    {
+      "n": 2,
+      "text": "No claim in `G.49.md` or any earlier EU hand-off was found wrong this session. The prior sessions' staging records were spot-checked against source for six documents and every quote re-read matched what the record carried — including the two §5a-adjacent sentences the records had already flagged in their own `notes` fields. **The staging pipeline's extraction quality is good**; what it cannot do is the judgement, which is why the batches were staged rather than imported."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping: merge `Research.2.md` and `Research.EU.md`. Closed",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph. Opened, not closed.",
+      "items": []
+    },
+    {
+      "letter": "G",
+      "label": "The wide-Europe depth pass.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Re-extract `Research.1.md` §9's EU id list.** It was stale before this session and is five ids staler now (`eu-statistics-code-of-practice`, `ess-quality-assurance-framework`, `ess-handbook-quality-metadata-reports`, `ess-sims`, `sdmx-glossary`). §9's own instruction is to re-run the extraction across `src/data/research/*.json` rather than append by hand — this is `MISSION-TODO-2.md` P3 item 20 and it now covers all three branches."
+    },
+    {
+      "n": 2,
+      "text": "Open SWD(2024) 136 itself** — the ESS peer-review final report. Two things turn on it: upgrading the peer-review → CoP edge from a two-sentence same-page chain to the report's own words, and settling the both-ways direction question in Findings 5. Register link: `ec.europa.eu/transparency/documents-register/detail?ref=SWD(2024)136&lang=en`."
+    },
+    {
+      "n": 3,
+      "text": "Retry EUR-Lex once.** If it serves consolidated 223/2009 again, the Regulation node and the CoP → Regulation edge are ready to mint from quotes already staged and re-checkable in minutes."
+    },
+    {
+      "n": 4,
+      "text": "The Catalogue of ESS standards** — one page, to find out how many documents are in it. It may be a large, cheap seam or a short list."
+    },
+    {
+      "n": 5,
+      "text": "SIMS Guidelines v2.0 (2019)** — named on Eurostat's quality-reporting page and not opened this session. Would firm up `ess-sims`'s cadence, which currently rests on three dated points and no stated interval. **Carried forward from `G.49.md`, `G.48.md` and `G.47.md`, unchanged, still open**: all items on all three files' own lists. None were touched."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.50.md`)**."
+    },
+    {
+      "n": 2,
+      "text": "`planning/MISSION-TODO-2.md`** — the cross-branch entry point, new since G.49."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md`** — v3.3, §9 stale by at least five EU ids."
+    },
+    {
+      "n": 4,
+      "text": "`EU/ESSQualityFramework_PartA_2026-08-07.md`** and **`EU/slices/eu-level/ess-quality-framework.json`**."
+    },
+    {
+      "n": 5,
+      "text": "`EU/slices/_staging/01-manifest.json`** — and the warning from Findings 1: read it by `scope`, not by batch number."
+    },
+    {
+      "n": 6,
+      "text": "A browser** — though note it no longer helps with EUR-Lex."
+    },
+    {
+      "n": 7,
+      "text": "The same caution every predecessor carries**: `curl` plus direct text extraction (`pypdf` for PDFs, HTML-tag-stripping for pages) for anything that will become a quoted `basis`. Confirmed clean this session on `ec.europa.eu/eurostat` and `sdmx.org`. **Git state:** this session's work is committed locally. **It was not pushed** — the working environment has no write credentials for `origin`, and `origin/main` was already two commits behind before this session started (the AU G.3 and NZ G.5 sessions are also unpushed). Three commits are now waiting. Per the 2026-08-07 git policy, this is recorded rather than silently skipped: **Thomas needs to `git push` from the device**, or a future session needs credentials. --- ---"
+    }
+  ],
+  "session_conditions": "**Extraction-and-build session**, one branch only, on a working copy in a cloud\ncontainer synced from the device's git HEAD (`1c5905a`) before starting and\ncommitted back after. Thomas picked the item from a menu at the top of the\nsession and confirmed Chrome was available; he approved the slice before it was\nwritten to disk, per `_staging/PROMPT-for-splitting-agent.md`'s \"wait for my\ngo-ahead\" rule, and made the one judgement call the slice needed (mint\n`sdmx-glossary` on observed-version cadence rather than shelve it).\n\n**What was read in full this session**: the European Statistics Code of Practice\n2017 PDF (11 pages, `pypdf`); the ESS Quality Assurance Framework V2.0 PDF (58\npages, `pypdf`); the ESS Handbook for Quality and Metadata Reports 2021\nre-edition PDF (316 pages, `pypdf`); the SIMS 2.0 revised-standards PDF\n(9 pages, `pypdf`); the SDMX Content-Oriented Guidelines Introduction, February\n2016 (18 pages, `pypdf`); the 2021 ESGAB Annual Report PDF (44 pages, `pypdf`);\nand, HTML-tag-stripped from `curl` output, five Eurostat pages (reference\nmetadata reporting standards, quality reporting, quality assurance framework,\nEuropean Statistics Code of Practice, third-round peer reviews) plus\n`sdmx.org/guidelines/`.\n\n**What was not read**: SWD(2024) 136, the peer-review final report itself — the\npeer-review edge rests on Eurostat's page instead and says so. No UK, Dutch or\nGerman work was touched, and none of `G.49.md`'s cheap checks were raided — this\nsession stayed inside its one item. The prose section\n(`_staging/20-prose-sections.txt`, 399k chars) was not opened — it is its own\nsession by Thomas's 2026-08-07 decision and must not be folded into batch work.\n\n**What broke**: EUR-Lex, in a way the branch has not recorded before. See\nFindings 4."
+}

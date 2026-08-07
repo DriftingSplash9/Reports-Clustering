@@ -40,6 +40,7 @@ import eurosystemEcb from './research/eurosystem-ecb.json'
 import ecfinBusinessConsumerSurveys from './research/ecfin-business-consumer-surveys.json'
 import eurostatEdpGfsEcbStatistics from './research/eurostat-edp-gfs-ecb-statistics.json'
 import euMetaDocxBatches from './research/eu-meta-docx-batches.json'
+import essQualityFramework from './research/ess-quality-framework.json'
 import deBundesbankFinancialAccounts from './research/de-bundesbank-financial-accounts.json'
 import deDestatisSourceSurveys from './research/de-destatis-source-surveys.json'
 import grokR1 from './research/grok-r1-nordic-nato-fr-oecd.json'
@@ -138,6 +139,7 @@ const slices: ResearchSlice[] = [
   ecfinBusinessConsumerSurveys as unknown as ResearchSlice,
   eurostatEdpGfsEcbStatistics as unknown as ResearchSlice,
   euMetaDocxBatches as unknown as ResearchSlice,
+  essQualityFramework as unknown as ResearchSlice,
   deBundesbankFinancialAccounts as unknown as ResearchSlice,
   deDestatisSourceSurveys as unknown as ResearchSlice,
   grokR1 as unknown as ResearchSlice,

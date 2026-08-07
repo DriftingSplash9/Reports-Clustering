@@ -9,7 +9,8 @@ MISSION-TODO 1.0's surviving items, `AU/G.3.md` (today's Victoria pass),
 25/27/28, and the corpus itself.
 
 **State of the corpus as this is written**: 354 reports / 415 dependencies /
-3 relations (Niue and Tokelau `audits`, UKSPF `supersedes`). `npm run check`
+3 relations — **updated 2026-08-07 after the NZ G.5 and EU G.50 sessions:
+363 reports / 429 dependencies / 3 relations** (Niue and Tokelau `audits`, UKSPF `supersedes`). `npm run check`
 and `npm run validate` both exit 0 — and a red validator now FAILS (exit 1)
 by design; never ignore one. The repo is a PUBLIC GitHub repo
 (github.com/DriftingSplash9/Reports-Clustering — public for a while, Thomas
@@ -18,8 +19,8 @@ Git policy is now standing (2026-08-07): sessions commit and push their own
 work — see the method notes.
 
 **How to use this file**: it is the mission's entry point, not the authority
-on any branch — each branch's newest `G.*.md` (currently `EU/G.49.md`,
-`NZ/G.4.md`, `AU/G.3.md`) governs its own frontier; this file indexes them.
+on any branch — each branch's newest `G.*.md` (currently `EU/G.50.md`,
+`NZ/G.5.md`, `AU/G.3.md`) governs its own frontier; this file indexes them.
 When an item below is done, mark it here AND in whatever branch file owns
 it. When starting a session, read this header, pick ONE item, read the
 branch file it names, and go. Do not start two branches in one session.
@@ -72,8 +73,22 @@ notes at the bottom.*
 ## P1 — Branch frontiers (each is one good session; read the named G-file
 first, in full)
 
-5. **EU — the blob's judgment half.** The project's largest known backlog by
-   volume, unchanged from 1.0. The mechanical split is done and waiting in
+5. **EU — the blob's judgment half. STARTED 2026-08-07 (`EU/G.50.md`): 22 of
+   73 batches built, 51 remain.** The first pass took batches 16–26, 30–37, 44,
+   45 and 66 — which turned out to be one subject, the ESS quality-and-metadata
+   standards stack — and produced `ess-quality-framework.json` (5 reports, 6
+   dependencies, 9 dropped). **Two things the next batch session must know.**
+   (a) Read `01-manifest.json` by its `scope` strings, **not** by batch number:
+   the material is grouped by subject across scattered numbers, and working in
+   numeric order would have produced five thin slices instead of one. (b) The
+   unlabelled middle block, batches 46–62, carries **no scope strings at all**
+   and nobody has characterised it — it is the only part of the backlog whose
+   size cannot currently be estimated, which is why `G.50.md` names it as where
+   to go next. Also unbuilt and coherent: batches 0–15 (ESA 2010 and the
+   national-accounts methodology stack) and 68–72 (ECB/Eurosystem collateral and
+   balance sheets, which is priority C's own material).
+   The project's largest known backlog by
+   volume. The mechanical split is done and waiting in
    `EU/slices/_staging/`: `01-manifest.json` lists **73 batches**; work them
    one at a time with `_staging/PROMPT-for-splitting-agent.md` as the
    governing prompt; the raw material is `00-blob-fulltext.txt` (1.3 MB)
@@ -87,9 +102,11 @@ first, in full)
    works it alone under the standing rules (verbatim Part A quote or it
    doesn't exist; conflicts reported, never resolved), producing a findings
    file Thomas reviews before anything is imported. Do not fold it into
-   batch work. Branch authority: `EU/G.49.md`
+   batch work. Branch authority: **`EU/G.50.md`** (read `G.49.md` behind it)
    (and `EU/slices/README.md` for the branch's central
-   disclosure-runs-upward finding).
+   disclosure-runs-upward finding — which `G.50.md` narrows rather than
+   refutes: where the EU binds by Regulation it names nobody, where it
+   coordinates by agreement it names its sources freely).
 
 6. **AU — the second council, and the Victorian valuation chain.** Branch
    authority: `AU/G.3.md` (read G.2 and G.1 behind it). Two sub-items, in
@@ -279,9 +296,13 @@ raid this list when a session has capacity left)
   browser's rendered text; legislation.govt.nz blocks non-browser clients
   (PCO PDFs via Wayback `id_` worked); lovdata.no is robots-blocked (use
   the ministry's own mirrors, e.g. the Veileder); Stats NZ DataInfo+ is
-  intermittently fetchable and archive.stats.govt.nz DNS is flaky; EUR-Lex
-  and several EU agency sites gate non-browser HTTP but work in a real
-  browser; many government sites lazy-load behind "Expand all".
+  intermittently fetchable and archive.stats.govt.nz DNS is flaky; **EUR-Lex
+  no longer works in a browser either — corrected 2026-08-07, `EU/G.50.md`
+  Findings 4: `curl` gets HTTP 202 with a zero-byte body and Chrome silently
+  redirects every legal-content and ELI form to `eur-lex.europa.eu/TodayOJ`,
+  ignoring the CELEX id; retry once per session, then find a mirror** (several
+  other EU agency sites still gate non-browser HTTP but pass in a real
+  browser); many government sites lazy-load behind "Expand all".
 * **Tense trap** (Research.1.md §5b) runs forwards too: an announced future
   dependency (Vicmap) is `deferred`, not an edge, until a document states
   it in the present tense.
