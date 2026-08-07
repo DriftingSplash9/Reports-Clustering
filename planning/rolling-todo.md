@@ -1,5 +1,9 @@
 # Rolling todo — maintained by Claude Code
 
+> **2026-08-07: superseded as the entry point by `planning/MISSION-TODO.md`**,
+> the consolidated cross-branch list. This file keeps its Merged history and
+> its Candidate categories; start reading over there.
+
 Started 2026-08-04. This is the working queue: specific, concrete next actions,
 added to and checked off across sessions. It is **not** `BACKLOG.md` — that's
 Thomas's own tier-ranked strategic plan and stays his. This file tracks the
