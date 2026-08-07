@@ -16,7 +16,10 @@
       "cadence_note": "The roll returns annually; the values in it have not been re-based since 2016, and the gap between those two facts is the point. The Assessment Act s. 19.2(1) sets a four-year cycle by schedule, and para 4 assigns 1 January 2016 to 'the four taxation years from 2017 to 2020'. MPAC states the schedule has been suspended: 'On August 16, 2023, the Ontario government filed a regulation to amend the Assessment Act, extending the postponement of a province-wide reassessment through the end of the 2021-2024 assessment cycle. Property assessments for the 2026 property tax year will continue to be based on fully phased-in January 1, 2016 current values.' So `releases_per_year` 1 counts the returned roll, which does move for new construction, demolition and change of use; `changes_per_year` 0.25 is the statutory reassessment cycle, which is the rate at which the valuation basis is supposed to move and has not moved in ten years. Both numbers are true and neither alone describes this node.",
       "last_updated": null,
       "url": "https://www.mpac.ca/en/UnderstandingYourAssessment/AssessmentCycle",
-      "domains": ["assessment", "municipal-finance"]
+      "domains": [
+        "assessment",
+        "municipal-finance"
+      ]
     },
     {
       "id": "on-ompf",
@@ -29,7 +32,10 @@
       "releases_per_year": 1,
       "last_updated": null,
       "url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
-      "domains": ["fiscal-transfers", "municipal-finance"]
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
     }
   ],
   "dependencies": [
@@ -52,19 +58,6 @@
       "relationship_type": "uses_data_from",
       "basis": "NARROW, AND THE NARROWNESS IS THE FINDING. Appendix F attributes six separate indicators to 'Statistics Canada' and names no release for any of them, which is agency-level attribution and the same test that removed `boc-mpr -> statcan-national-accounts` in V0.9 and killed the H.15 restoration in V0.10. Five of the six are therefore declined and recorded in _dropped. Exactly one names a publication, in Appendix G's definition of the Rural and Small Community Measure: 'The measure is based on Statistics Canada data from the 2021 Census.' That is a named recurring release and it carries this edge, alone. The basis is written this way because the edge would otherwise be read as covering all six, and a later pass finding the other five undocumented would think this edge had been demoted rather than that it had always been this narrow. STRUCTURAL NOTE: this single sentence is also the only documented link between Ontario and the rest of the corpus. Without it the two nodes in this slice would form a second connected component, breaking an invariant held since V0.8. The graph stays at one component on the strength of one clause in an appendix definition.",
       "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
-    },
-    {
-      "source_report_id": "ab-education-property-tax-requisition",
-      "target_report_id": "ab-municipalaffairs-equalized-assessment",
-      "relationship_type": "calculated_from",
-      "basis": "SUPERSEDES the copy in alberta-municipal.json under the V0.8 later-definition-wins rule, which exists precisely so a better-evidenced copy can replace a thinner one. The earlier basis asserted the relationship in one sentence with no quotation, and its evidence_url pointed at the equalized assessment report rather than at any document stating the dependency. Alberta's education property tax page states the mechanism directly: 'Municipal Affairs establishes the provincial mill rate used to determine each municipality's share of the provincial education tax. The provincial equalized assessment base used to determine education property taxes this year reflects 2024 property values.' It gives the rates in force: 'Education property tax rates will increase to $2.84 per $1,000 of equalized assessment for residential/farmland properties and $4.17 per $1,000 of equalized assessment for non-residential properties in 2026-27', raising the requisition 'from $3.1 billion in 2025-26 to $3.6 billion in 2026-27'. Both figures verified verbatim. This is the Alberta half of the comparison the submitted artifact was drawing, and it is the only part of that artifact's Alberta material that survived: everything else duplicated nodes already in the graph.",
-      "evidence_url": "https://www.alberta.ca/education-property-tax",
-      "reference_period": {
-        "readings_per_year": 1,
-        "window_months": 0,
-        "ends": null,
-        "stated_as": "Annual, with a two-year lag stated outright: 'The provincial equalized assessment base used to determine education property taxes this year reflects 2024 property values.' The reading is once a year against a base two years stale, which is a documented lag rather than an inferred one."
-      }
     }
   ],
   "_dropped": [
@@ -151,6 +144,12 @@
       "target": null,
       "reason": "note",
       "why": "PROCESS FINDING, recorded because the format question was settled in V0.9 and this is the first regression. V0.9 established that a second reader extracts and this project adjudicates: no verdict field, verbatim quotes, `AGENCY ONLY` where only an institution is named. Three rounds in V0.10 under that format produced zero adjudication errors. This artifact arrived in the pre-V0.9 shape — 17 finished report objects and 24 finished edges with `relationship_type` already chosen and `basis` written as paraphrase rather than quotation. Two edges of the twenty-four survived. The paraphrasing is what did the damage: not one of the twelve Equalization bases contains a quoted string, so there was nothing to check against the source except the section number, and the section numbers were the ones already known to be wrong. Where the artifact did quote — the Appendix F rows, the Assessment Act current-value definition — it was accurate, and those are the parts that became edges. The rule holds and has now been tested from the other side: a verbatim quote is checkable in minutes, a paraphrase is not checkable at all. It also under-reported its own best source. Appendix F names twelve data elements; the artifact used three of them, ignored Municipal FIR, OPTA and Ontario Parcel entirely, and spent its effort on the six Statistics Canada rows that name no release."
+    },
+    {
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "2026-08-07: this file used to carry a deliberately-superseding copy of ab-education-property-tax-requisition -> ab-municipalaffairs-equalized-assessment, relying on the V0.8 last-wins rule and on this slice registering after alberta-municipal.json. That made the winning basis depend on import order (flagged in the 2026-08-07 review). The better-evidenced copy now lives in alberta-municipal.json itself, where the edge belongs; the override is gone and the duplicate-edge report is empty again."
     }
   ]
 }

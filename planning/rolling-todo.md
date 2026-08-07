@@ -19,7 +19,7 @@ they're real work items).
 
 ## Now
 
-1. **Verify + merge `research-input/grok-research-handoff-2026-07-31/grok-research/`**
+1. ~~**Verify + merge `research-input/grok-research-handoff-2026-07-31/grok-research/`**~~ **DONE 2026-08-07 — see Merged.** Original scoping kept below for the record.
    — 9 files, produced 2026-07-30/31, never wired into `src/data/index.ts`.
    Split into two groups:
    - **7 look like finished, mergeable slices** (standard-ish `reports`/
@@ -146,6 +146,16 @@ they're real work items).
    matches, not records read for meaning.
 
 ## Merged
+
+- **2026-08-07 — the 2026-07-31 Grok handoff, verified and merged.** Six
+  parallel verification agents, one per slice; every edge checked against a
+  fetched primary source before minting. +33 reports / +34 dependencies →
+  corpus 335/392; ~60 handoff claims preserved in `_dropped` rather than
+  discarded. The org-heavy slices (financing-international-orgs,
+  soft-power) were correctly almost entirely off-model — 3 new report
+  nodes (IMF WEO, IMF Fiscal Monitor, OECD Economic Outlook) and 4 edges
+  survived from 31 nodes / 38 edges proposed. Was item #1 under Now.
+
 
 - **2026-08-05 (Grok consolidation + continent palette redesign) —
   `G.47.md` written. Corpus 165 → 218 reports, 231 → 283 dependencies.**

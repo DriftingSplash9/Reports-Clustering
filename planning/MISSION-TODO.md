@@ -18,7 +18,17 @@ mark it here AND in whatever branch file owns it.
 
 ## P0 — Unblock the mission (do these before more corpus growth)
 
-1. **Merge the 2026-07-31 Grok handoff.** ~72 reports / ~73 dependencies in
+1. ~~**Merge the 2026-07-31 Grok handoff.**~~ **DONE 2026-08-07** — all nine
+   files triaged; 7 data slices verified edge-by-edge against primary
+   sources by six parallel agents and merged as `src/data/research/
+   grok-h1-*.json`: **+33 reports, +34 dependencies (corpus 335/392)**, with
+   every unverifiable or off-model claim preserved in `_dropped` (the two
+   org-heavy slices correctly collapsed from 38 proposed edges to 4 real
+   ones). Loose ends now tracked in P3 below: the Calgary
+   statements→bylaw `implied` question, the symmetric provincial-side
+   Calgary edges, the BC SAFER rebuild lead, an OAS/GIS-maximum-rates node
+   that would immediately pick up a documented edge, and the two scoping
+   templates folded back as research targets. Original claim: ~72 reports / ~73 dependencies in
    7 finished-looking slices sitting in
    `research-input/grok-research-handoff-2026-07-31/grok-research/`, never
    verified, never wired into `src/data/index.ts`. This is the largest
@@ -32,7 +42,9 @@ mark it here AND in whatever branch file owns it.
    branch files describe v3.3/v3.4. Carried by five sessions and counting.
    One edit by Thomas (fix it or delete the version line). Two minutes.
    (Source: NZ/G.4 Corrections 1.)
-3. **Publish the repo to GitHub.** Thomas's stated goal is outside use and
+3. **Publish the repo to GitHub.** *(START-HERE.md refreshed to 335/392
+   with the new galaxy list, 2026-08-07 — the remaining work is Thomas
+   creating the GitHub repo and pushing, one GitHub Desktop session.)* Thomas's stated goal is outside use and
    input; the hidden page at thomascheesman.ca/reports-graph is live but the
    source isn't shareable. GitHub Desktop is installed and working. Before
    flipping it public: refresh `START-HERE.md` (still says 124/205; corpus
@@ -95,14 +107,15 @@ mark it here AND in whatever branch file owns it.
 
 ## P3 — Code and data hygiene (from the 2026-08-07 review; none urgent)
 
-13. The RETENTION "invariant" in `validate-data.ts` is a tautology — it
-    recomputes the same expression on both sides and can never fail.
-    Rewrite it to measure retained rank from the built graph, or drop it.
-14. The Alberta edge `ab-education-property-tax-requisition →
-    ab-municipalaffairs-equalized-assessment` is defined in two slices with
-    different documented bases; import order silently picks the winner.
-    Pick the better basis, delete the other, and let the (now-printed)
-    duplicate-edge report stay empty.
+13. ~~RETENTION tautology~~ **DONE 2026-08-07** — replaced with a
+    behavioural check: scores must be invariant under per-node out-weight
+    scaling, which fails loudly under fixed retention.
+14. ~~Duplicate edges~~ **DONE 2026-08-07, expanded** — all SIX
+    seed-vs-slice duplicate edges resolved at their homes (the Alberta one
+    moved to alberta-municipal.json; ssa-cola, fed-sep, fed-fomc, bea-pce,
+    cpp-ympe, esdc-oas seed copies removed in favour of the better slice
+    copies). The SUPERSEDED report now prints nothing; any future entry is
+    a genuine accident.
 15. Isolated-node shelving in the 3D view treats implied-only nodes
     inconsistently with the validator's definition — reconcile.
 16. Searching during layout warmup silently does nothing (flyTo during

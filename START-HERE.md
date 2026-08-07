@@ -15,9 +15,14 @@ graph where each sphere is a real published report, each line is a documented
 dependency between two of them, and a report's size is how much everything else
 rests on it.
 
-Right now it holds **124 reports and 205 dependencies**, all real, all sourced,
-covering Canadian and American federal statistics, Alberta's provincial finances,
-two Alberta municipalities in full detail, and a first foothold in Ontario.
+Right now it holds **335 reports and 392 dependencies**, all real, all sourced.
+It began with Canadian and American federal statistics, Alberta's provincial
+finances and three Alberta municipalities in full detail, and has since grown
+galaxies: the European Union and its member states, candidates and neighbours;
+New Zealand and the three jurisdictions of its Realm plus the Pacific states
+that borrow its institutions; Australia; Brazil; the United Kingdom and the
+Netherlands; and the international bodies — IMF, OECD, BIS-adjacent — whose
+reports consume everyone else's numbers.
 
 ---
 
@@ -30,8 +35,10 @@ institutions, grey for private companies.
 
 Size is the whole point. A big sphere is a report that lots of other reports are
 built on. A small one is an endpoint — something calculated *from* other things
-that nothing else uses. The biggest sphere in the graph is the Census of
-Population.
+that nothing else uses. The biggest sphere in the graph is now the European
+System of Accounts — the EU regulation every member state's statistics must
+follow — with Canada's Consumer Price Index and Census of Population close
+behind.
 
 Little teardrops travel along the lines, moving outward from each report to
 everything downstream of it, at the rate that report actually gets published.

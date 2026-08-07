@@ -86,34 +86,6 @@ export const dependencies: Dependency[] = [
 
   // ── Canada: statistics feeding benefit calculations ───────────────────────
   {
-    source_report_id: 'esdc-oas-indexation',
-    target_report_id: 'statcan-cpi',
-    relationship_type: 'calculated_from',
-    basis:
-      'OAS amounts are adjusted quarterly by a statutory formula applied to the CPI.',
-    reference_period: {
-      readings_per_year: 4,
-      window_months: 3,
-      ends: null,
-      stated_as:
-        "'reviewed each year in January, April, July and October', on 'the difference between the average CPI for two periods of three months each'.",
-    },
-  },
-  {
-    source_report_id: 'cpp-ympe',
-    target_report_id: 'statcan-seph',
-    relationship_type: 'calculated_from',
-    basis:
-      'The YMPE is set from the industrial aggregate average weekly earnings series produced by SEPH.',
-    reference_period: {
-      readings_per_year: 1,
-      window_months: 12,
-      ends: '06-30',
-      stated_as:
-        "'the average Wage Measure for the twelve months ending 30 June of the preceding year' — Canada Pension Plan s.18(1)(c).",
-    },
-  },
-  {
     source_report_id: 'cpp-disability-amount',
     target_report_id: 'cpp-ympe',
     relationship_type: 'calculated_from',
@@ -141,13 +113,6 @@ export const dependencies: Dependency[] = [
 
   // ── United States: statistics feeding statistics ──────────────────────────
   {
-    source_report_id: 'bea-pce',
-    target_report_id: 'bls-cpi',
-    relationship_type: 'uses_data_from',
-    basis:
-      'The PCE price index is built largely from CPI detailed price series as source data.',
-  },
-  {
     source_report_id: 'bea-gdp',
     target_report_id: 'bea-pce',
     relationship_type: 'calculated_from',
@@ -160,13 +125,6 @@ export const dependencies: Dependency[] = [
   // ── United States: statistics feeding monetary policy ─────────────────────
   {
     source_report_id: 'fed-fomc-statement',
-    target_report_id: 'bea-pce',
-    relationship_type: 'uses_data_from',
-    basis:
-      "The Federal Reserve's 2% inflation objective is defined on the PCE price index.",
-  },
-  {
-    source_report_id: 'fed-fomc-statement',
     target_report_id: 'bls-employment-situation',
     relationship_type: 'uses_data_from',
     basis: 'The employment half of the dual mandate is assessed from this release.',
@@ -176,12 +134,6 @@ export const dependencies: Dependency[] = [
     target_report_id: 'bea-gdp',
     relationship_type: 'uses_data_from',
     basis: 'Assessment of economic activity rests on the NIPA GDP estimates.',
-  },
-  {
-    source_report_id: 'fed-sep',
-    target_report_id: 'bea-pce',
-    relationship_type: 'uses_data_from',
-    basis: 'SEP inflation projections are stated in PCE terms.',
   },
   {
     source_report_id: 'fed-sep',
@@ -197,20 +149,6 @@ export const dependencies: Dependency[] = [
   },
 
   // ── United States: statistics feeding benefit calculations ────────────────
-  {
-    source_report_id: 'ssa-cola',
-    target_report_id: 'bls-cpi',
-    relationship_type: 'calculated_from',
-    basis:
-      'The COLA is set by statute from the third-quarter average of CPI-W. No discretion is involved.',
-    reference_period: {
-      readings_per_year: 1,
-      window_months: 3,
-      ends: '09-30',
-      stated_as:
-        "'the percentage increase (if any) in the CPI-W from the average for the third quarter of the current year to the average for the third quarter of the last year in which a COLA became effective'.",
-    },
-  },
 
   // ── Cross-border ──────────────────────────────────────────────────────────
   // Deliberately thin. Canadian and US statistical systems rarely consume each

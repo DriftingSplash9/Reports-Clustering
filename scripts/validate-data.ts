@@ -22,7 +22,6 @@ import {
   RELATIONSHIP_WEIGHT,
   RETAINED_FRACTION,
   rolledUpAuthority,
-  SELF_RETENTION,
   validate,
 } from '../src/lib/graph'
 
@@ -376,22 +375,43 @@ for (const d of dependencies.filter(isDocumented)) {
   outWeightById.set(d.source_report_id, (outWeightById.get(d.source_report_id) ?? 0) + w)
 }
 
-const retainedSpread = [...outWeightById.values()].map(
-  (outWeight) => (SELF_RETENTION * outWeight) / (SELF_RETENTION * outWeight + outWeight),
-)
-const retainedMin = Math.min(...retainedSpread)
-const retainedMax = Math.max(...retainedSpread)
-
-console.log('RETENTION')
+// The property, tested behaviourally rather than re-derived: proportional
+// retention means every node's retained share is independent of the absolute
+// scale of its outgoing weights. So scaling each node's out-edges by an
+// arbitrary per-node factor must leave every score untouched. Under the old
+// fixed retention this fails immediately (the retained share depended on
+// out-degree). The previous version of this check recomputed
+// S*w/(S*w + w) from the edge data, which reduces algebraically to S/(S+1)
+// for every w — a tautology that could never fail (found 2026-08-07).
+const scaleFor = new Map<string, number>()
+{
+  let i = 0
+  for (const r of reports) scaleFor.set(r.id, 1 + (i++ % 5))
+}
+const scaledDeps = dependencies.map((d) => ({
+  ...d,
+  strength:
+    (d.strength ?? RELATIONSHIP_WEIGHT[d.relationship_type]) *
+    (scaleFor.get(d.source_report_id) ?? 1),
+}))
+const scaledGraph = buildGraph(reports, scaledDeps)
+let retainWorst = 0
+let retainWorstId = ''
+for (const nScaled of scaledGraph.nodes) {
+  const drift = Math.abs(
+    nScaled.authority - (graph.byId.get(nScaled.id)?.authority ?? 0),
+  )
+  if (drift > retainWorst) {
+    retainWorst = drift
+    retainWorstId = nScaled.id
+  }
+}
 console.log(
-  `  ${outWeightById.size} reports disclose at least one input, out-degree-weighted span ${Math.min(...outWeightById.values()).toFixed(2)}–${Math.max(...outWeightById.values()).toFixed(2)}`,
+  retainWorst < 1e-9
+    ? `  \u2713 every one keeps exactly ${(RETAINED_FRACTION * 100).toFixed(1)}% of its own rank \u2014 scores invariant under per-node out-weight scaling (behavioural check)`
+    : `  \u2717 retention is NOT proportional \u2014 per-node out-weight scaling moved scores by up to ${retainWorst.toExponential(2)} (worst: ${retainWorstId})`,
 )
-console.log(
-  retainedMax - retainedMin < 1e-12
-    ? `  ✓ every one keeps exactly ${(RETAINED_FRACTION * 100).toFixed(1)}% of its own rank — disclosure changes where authority goes, not how much is kept`
-    : `  ✗ retained fraction VARIES from ${(retainedMin * 100).toFixed(1)}% to ${(retainedMax * 100).toFixed(1)}% — the proportional-retention property is broken`,
-)
-if (!(retainedMax - retainedMin < 1e-12)) invariantFailures++
+if (!(retainWorst < 1e-9)) invariantFailures++
 console.log()
 
 /**
