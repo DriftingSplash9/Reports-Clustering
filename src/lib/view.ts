@@ -53,6 +53,17 @@ export interface ViewSettings {
    * 1 is the framing chosen on load; below 1 moves in, above 1 moves out.
    */
   zoom: number
+  /**
+   * Layout spread, 0 to 1 — how much room the force layout gives clusters.
+   *
+   * A slider for the same reason haze and glow are: the right amount depends
+   * on the corpus. At 124 nodes the tight layout read as one constellation;
+   * at 335 it read as a nest. 0 is the old dense physics, 1 is fully airy;
+   * moving it rebuilds the layout (charge, repulsion cap, link rest lengths
+   * all scale together, and links touching hubs get extra room), so the
+   * change costs a beat before the camera refits.
+   */
+  spread: number
 }
 
 /**
@@ -85,6 +96,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   focusBuiltFrom: true,
   focusFeedsInto: true,
   zoom: 1,
+  spread: 1 / 3,
 }
 
 /** Scene background. Fog resolves to this, so the two must agree. */

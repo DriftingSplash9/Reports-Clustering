@@ -19,7 +19,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
   { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
 ]
 
-const SLIDERS: { key: 'fog' | 'glow'; label: string; hint: string }[] = [
+const SLIDERS: { key: 'fog' | 'glow' | 'spread'; label: string; hint: string }[] = [
   {
     key: 'fog',
     label: 'Distance haze',
@@ -29,6 +29,11 @@ const SLIDERS: { key: 'fog' | 'glow'; label: string; hint: string }[] = [
     key: 'glow',
     label: 'Glow',
     hint: 'Only the most depended-upon reports bleed light, so this reads as a second take on size rather than as atmosphere',
+  },
+  {
+    key: 'spread',
+    label: 'Cluster spread',
+    hint: 'How much room the layout gives clusters. Rebuilds the layout when released, so it costs a beat; position still encodes nothing but the edges',
   },
 ]
 

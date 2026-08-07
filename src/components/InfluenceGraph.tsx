@@ -53,6 +53,13 @@ interface LinkDatum {
   /** Drawn dashed, and never pulsed. See EvidenceKind in types.ts. */
   implied: boolean
   /**
+   * Extra rest length for links touching high-degree nodes, precomputed at
+   * build time (the d3 distance accessor sees mutated link objects, so
+   * anything derived from the raw edge list has to be carried on the datum).
+   * sqrt-scaled so the CPI's forty edges fan out without exiling its leaves.
+   */
+  hubRoom: number
+  /**
    * Key in the *data model's* direction, not the rendered one.
    *
    * Links are rendered reversed (see below), so this cannot be derived from
@@ -185,6 +192,17 @@ export default function InfluenceGraph({
   const { camera, controls, scene } = useThree()
 
   /**
+   * The spread slider rebuilds the whole layout (forces, warmup, camera
+   * refit), which costs a visible beat at 335 nodes. Debounced so a drag
+   * costs one rebuild at the end, not one per pixel of travel.
+   */
+  const [spreadApplied, setSpreadApplied] = useState(view.spread)
+  useEffect(() => {
+    const t = setTimeout(() => setSpreadApplied(view.spread), 300)
+    return () => clearTimeout(t)
+  }, [view.spread])
+
+  /**
    * Node meshes by report id, so focus changes can mutate materials in place.
    *
    * The alternative — re-calling `nodeThreeObject` — rebuilds every sphere and
@@ -239,6 +257,15 @@ export default function InfluenceGraph({
     // the effect propagates outward to everything indexed to it. Arrows and
     // pulses both need to show that direction, so rendering flips the edge.
     // The data model is untouched — only what you see is reversed.
+    // Node degree, for link rest lengths: a hub's neighbourhood needs more
+    // room than a chain's, and at 335 nodes the difference is the difference
+    // between a readable cluster and a hairball.
+    const degree = new Map<string, number>()
+    for (const e of graph.edges) {
+      degree.set(e.source_report_id, (degree.get(e.source_report_id) ?? 0) + 1)
+      degree.set(e.target_report_id, (degree.get(e.target_report_id) ?? 0) + 1)
+    }
+
     const links: LinkDatum[] = graph.edges.map((e) => {
       const upstream = graph.byId.get(e.target_report_id)
       const downstream = graph.byId.get(e.source_report_id)
@@ -250,6 +277,10 @@ export default function InfluenceGraph({
         colour: upstream ? colourForReport(upstream) : '#7f9ad0',
         endColour: downstream ? colourForReport(downstream) : '#7f9ad0',
         implied: !isDocumented(e),
+        hubRoom:
+          3.5 *
+          (Math.sqrt(degree.get(e.source_report_id) ?? 1) +
+            Math.sqrt(degree.get(e.target_report_id) ?? 1)),
         key: edgeKey(e.source_report_id, e.target_report_id),
       }
     })
@@ -381,23 +412,31 @@ export default function InfluenceGraph({
       )
 
     // d3Force() is typed loosely upstream, hence the casts.
+    //
+    // Retuned 2026-08-07 at 335 nodes (was -230 / 260 / 38-68, chosen at 124).
+    // The old cap meant clusters more than 260 units apart felt no repulsion
+    // at all while the centering force kept pulling them in — so every galaxy
+    // piled into the middle. `spread` scales the whole layout: 0 is dense,
+    // 1 is airy; the default sits where 335 nodes read as clusters.
+    const m = 0.5 + 1.5 * spreadApplied
     const charge = fg.d3Force('charge') as unknown as
       | { strength(s: number): void; distanceMax(d: number): void }
       | undefined
-    charge?.strength(-230)
-    // Without a cap, repulsion never falls off and linear chains get flung out.
-    charge?.distanceMax(260)
+    charge?.strength(-300 * m)
+    // Without a cap, repulsion never falls off and linear chains get flung
+    // out — but the cap has to grow with the layout or it recreates the pile.
+    charge?.distanceMax(420 * m)
 
     const linkForce = fg.d3Force('link') as unknown as
       | { distance(fn: (l: LinkDatum) => number): void }
       | undefined
-    linkForce?.distance((l) => 38 + (1 - l.weight) * 30)
+    linkForce?.distance((l) => (40 + (1 - l.weight) * 28 + l.hubRoom) * m)
 
     // Nothing in the default force set stops two spheres occupying the same
     // point, and overlapping nodes read as one node of the wrong size.
     fg.d3Force(
       'collide',
-      forceCollide((node: unknown) => radiusFor((node as ScoredReport).size_score) + 4)
+      forceCollide((node: unknown) => radiusFor((node as ScoredReport).size_score) + 3 + 3 * m)
         .strength(0.85)
         .iterations(2) as unknown as never,
     )
@@ -407,7 +446,7 @@ export default function InfluenceGraph({
     // by what it depends on and what depends on it.
 
     return fg
-  }, [graph])
+  }, [graph, spreadApplied])
 
   useEffect(() => {
     ref.current = forceGraph
