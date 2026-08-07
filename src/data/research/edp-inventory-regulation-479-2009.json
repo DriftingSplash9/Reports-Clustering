@@ -1,0 +1,120 @@
+{
+  "_slice": "edp-inventory-regulation-479-2009",
+  "_researched": "2026-08-07",
+  "_status": "STAGED in EU/slices/cross-layer/. First occupant of that folder. Built from staging batches 3, 4 and 64; batch 67 assessed and held back for its own slice. Part A record: EU/EDPInventory_PartA_2026-08-07.md.",
+  "_note": "EVERY QUOTE RE-FETCHED AND RE-READ FROM SOURCE THIS SESSION, per the discipline G.50.md established, and it paid harder than expected: FIVE OF THE SIX STAGED RECORDS FOR BATCH 64 DO NOT MATCH THEIR SOURCE. Two misquoted nouns, one two-passage weld with no ellipsis, one truncation that dropped the only cadence sentence in its passage, one reversed sentence order. None changes what the German inventory means; all five would have put a non-verbatim string into a basis field. Full table in the Part A record, section E. This narrows rather than overturns G.50.md's Correction 2 ('the staging pipeline's extraction quality is good') — the three Regulation records and all three Eurostat records here matched exactly, and the failures cluster on one badly-typeset PDF.",
+  "_headline": "ARTICLE 9 DOES WHAT ANNEX B COULD NOT, AND STILL DOES NOT REVERSE THE ASYMMETRY. EU/slices/README.md records two binding instruments followed to the national boundary and both stopping at AGENCY ONLY — Annex XI and ESA 2010's Annex B. Annex B failed for a structural reason: it obliges DATA. Article 9 of Regulation 479/2009 obliges a DOCUMENT ('a detailed inventory of the methods, procedures and sources'), requires it to be updated, and — the nine words that matter — 'Member States shall make their inventories public.' Eurostat's own page carries a live Inventory link for every EU member state. So the supranational layer here CREATES a published national document class rather than naming an existing publication. That is a third shape, alongside the README's 'legislative layer names nobody' and G.50's 'self-regulatory layer names its sources freely'. BUT THE DIRECTION IS UNCHANGED: the Regulation still names no member state's inventory by title (AGENCY ONLY, Article 9(1)), and the edge, if it were mintable, would still run national -> EU. The asymmetry finding survives. What changes is the mechanism, not the direction.",
+  "_correction": "EU/AnnexB_assessment_2026-08-05.md section 4 says of the German inventory's transmission passage: 'This is the strongest test and it fails cleanly... Not one German publication is named. If the member-state end were ever going to name its own releases, this is the record where it would have happened.' The reading of THAT PASSAGE is correct and is confirmed here (record C7). But the assessment read one staged record where Research.1.md section 7 says to sweep the whole document, and the staged record it read had been truncated one sentence early. Read in full, the same inventory names FIVE German statistics by title elsewhere in its own text — SFGD, the Report on Loan Notes by Creditors of Central Government, the annual debt statistics, the quarterly debt statistics, and the Bundesbank's Securities holdings statistics — each with a publisher and, for four of them, a stated quarterly cadence. They are named as DATA SOURCES for compiling Maastricht debt, not as things transmitted, so the assessment's sentence is right about transmission and wrong about the document. Records C7, C8, C9, C10. Status: OVERSTATED, not refuted. The same correction applies to the fourth _dropped entry in esa-2010.json, which carries the same sentence.",
+  "_open_questions": [
+    "THE GERMAN INVENTORY IS NOT MINTED, AND THAT IS THE MAIN COST OF THIS SLICE. Research.1.md section 4.2 requires a cadence and the Report interface requires releases_per_year as a number. Article 9(3) supplies an event trigger and not an interval — 'The inventories shall be updated following revisions in the methods, procedures and sources' — the document itself states no periodicity, and the copy Destatis serves today, on 2026-08-07, is still dated December 2015. That is the same position as the Destatis quarterly national accounts inventory, which esa-2010.json refused to mint on exactly this ground ('this document carries NO periodicity statement at all... Cadence therefore unestablished in either direction'). Refusing a third Destatis inventory is the consistent call, not a cautious one. The one sentence that bears on it is the inventory's own 'This version introduces references to the ESA 2010', which establishes that a predecessor edition existed and nothing more.",
+    "THE CHEAPEST CHECK THAT WOULD FIX THAT IS BLOCKED ON A BROWSER. Eurostat's EDP inventories page carries a live 'Inventory' link for Germany, and it points at CIRCABC. Both hrefs return HTTP 404 with a 49,532-byte single-page-app shell to curl, and the REST form returns an Alfresco 404. So I could not check whether Eurostat serves a NEWER German inventory than the December 2015 one Destatis serves. If it does, two observed editions exist, an interval becomes derivable, and the node is mintable on the same observed-record basis Thomas approved for sdmx-glossary and eurostat-remuneration-mission-expenses-report. This is one browser fetch. Part A record, section D1.",
+    "releases_per_year 0.12 for the Regulation is derived from an observed amendment record, not from any stated rate — the same honest-but-derived basis flagged on eurostat-remuneration-mission-expenses-report. EUR-Lex lists exactly two consolidated versions of this instrument, 19/08/2010 and 01/09/2014, against adoption on 25 May 2009: two amendments across the 17 years to date. The last was twelve years ago, so 0.12 may overstate the current rate. Compare esa-2010 at 0.05. Flag if the observed-record basis is the thing that is wrong.",
+    "NO member-states/ FILE WAS WRITTEN, though the split into two files was the agreed plan. The plan assumed a German node; re-verification killed it on cadence, so a member-states/de-edp-inventory.json would have contained an empty reports array and nothing else. The German material is recorded here instead, next to the instrument it concerns — which is the same choice esa-2010.json made for the two German inventories it refused."
+  ],
+  "reports": [
+    {
+      "id": "eu-reg-479-2009",
+      "title": "Council Regulation (EC) No 479/2009 on the application of the Protocol on the excessive deficit procedure",
+      "publisher": "Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The EDP Regulation — the instrument that turns the Treaty's excessive deficit procedure into a statistical reporting regime, and the second EU Regulation in this corpus to be modelled as a node after esa-2010. It matters here for Article 9, which compels into existence a published national document class that no other instrument this branch has followed produces: 'Member States shall provide the Commission (Eurostat) with a detailed inventory of the methods, procedures and sources used to compile actual deficit and debt data and the underlying government accounts' (Art. 9(1)), 'The inventories shall be updated following revisions in the methods, procedures and sources adopted by Member States' (Art. 9(3)), and 'Member States shall make their inventories public' (Art. 9(4)). Eurostat's own EDP inventories page states the consequence — 'Pursuant to Article 9 of Council regulation 479/2009 (as amended), all EU Member States are required to prepare and publish an EDP inventory' — and carries a live Inventory link for each of the 27. EUR-Lex titles it a '(Codified version)', codifying Council Regulation (EEC) No 3605/93. Note that the Regulation names no member state's inventory by title: AGENCY ONLY at exactly the point where a title would have produced a downward edge.",
+      "releases_per_year": 0.12,
+      "cadence_note": "Derived from an observed amendment record, not from a stated rate — see _open_questions. Adopted 25 May 2009; EUR-Lex lists exactly two consolidated versions, 19/08/2010 and 01/09/2014, with 01/09/2014 flagged as the current version. Two amendments across the 17 years to 2026.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R0479-20140901",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eu-reg-479-2009",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Council Regulation (EC) No 479/2009, consolidated text of 01/09/2014, Article 1(1): 'For the purposes of the Protocol on the excessive deficit procedure and of this Regulation, the terms in paragraphs 2 to 6 are defined according to Regulation (EU) No 549/2013 of the European Parliament and the Council of 21 May 2013 on the European system of national and regional accounts in the European Union (hereinafter referred to as ESA 2010). The codes in brackets refer to ESA 2010.' The dependence is operative, not decorative: Article 1(2) defines 'Government' as 'the sector of general government (S.13)... as defined in ESA 2010', Article 1(3) defines 'Government deficit (surplus)' as 'the net borrowing (net lending) (B.9) of the sector of general government (S.13), as defined in ESA 2010', and Article 1(5) defines 'Government debt' by ESA 2010 categories 'currency and deposits (AF.2); debt securities (AF.3) and loans (AF.4)'. 'Are defined according to' is derivation language and is not on Research.1.md section 5a's watchlist. Direction: the EDP Regulation is the dependent, ESA 2010 the depended-on. Re-fetched and re-read from EUR-Lex 2026-08-07 after G.50.md Finding 4 recorded the site serving nothing; the outage was transient. Quoted with EUR-Lex's in-line amendment markers stripped — the unstripped Article 1(1) reads with the whole clause inside a M2 insertion marker, because the original 2009 text referred to ESA 95.",
+      "evidence_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R0479-20140901"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "German EDP inventory (Destatis) -> eu-reg-479-2009",
+      "source": null,
+      "target": "eu-reg-479-2009",
+      "reason": "no-node-yet",
+      "why": "THE EDGE THIS SLICE WAS BUILT TO FIND, AND IT IS BLOCKED ON CADENCE ALONE. The German inventory states the dependence in its own words, on page 2: 'Compilation and publishing of the Inventory of the methods, procedures and sources used to compile actual deficit and debt data is foreseen by Council Regulation 479/2009, as amended... In line with the provisions of the Regulation set up in Article 9, \"Member States shall provide the Commission (Eurostat) with a detailed inventory of the methods, procedures and sources used to compile actual deficit and debt data and the underlying government accounts.\"' That is obligation language from the dependent document about itself — the same shape as de-destatis-national-accounts -> esa-2010, and the only place in this corpus where a member-state document quotes Regulation 479/2009's operative text verbatim. It is not minted because Research.1.md section 4.2 wants a cadence and none is stated: Article 9(3) gives an event trigger, the document gives no periodicity, and the copy Destatis serves on 2026-08-07 is still dated December 2015. Title, publisher, region, url and description are all in hand; only releases_per_year is missing, and section 6 forbids guessing it. See _open_questions for the one browser fetch that would settle it."
+    },
+    {
+      "edge": "German EDP inventory (Destatis) -> esa-2010",
+      "source": null,
+      "target": "esa-2010",
+      "reason": "no-node-yet",
+      "why": "Blocked by the same missing cadence, and recorded separately because it rests on different words. The inventory's title page reads 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA2010. Germany. December 2015', and its transmission passage cites 'the related EU legislation' with a footnote resolving to OJ L 174 of 2013 — the ESA 2010 Regulation. 'According to' is derivation language. NOTE THE CONTRADICTION INSIDE THIS DOCUMENT, reported and not adjudicated per Research.1.md section 3: a document titled 'according to ESA2010' quotes Article 8.1 of the Regulation in the superseded wording, 'compiled according to ESA 95....' — and the ellipsis is in the original. The live consolidated Regulation reads 'ESA 2010' at that point. Both readings I can see — a pre-M2 draft left un-updated, or a deliberate quotation of the 2009 original — are guesses, and the document states neither."
+    },
+    {
+      "edge": "Five named German statistics -> nodes",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "THE MATERIAL THAT CORRECTS THE ANNEX B ASSESSMENT, and none of it can be minted, because the Report interface requires a url and the inventory names these statistics without linking them. All five are quoted in full in the Part A record, C8 to C10. (1) 'Statistic of Federal Government Debt' (SFGD; Statistik der Bundesschuld) — 'provided by the German finance agency (Bundesrepublik Deutschland Finanzagentur GmbH) at least on a quarterly basis with a time-lag of about one month'. (2) 'Report on Loan Notes by Creditors of Central Government' (Meldung zu Schuldscheindarlehen nach Glaeubigerklassen) — same publisher, 'on a quarterly basis'. (3) The annual debt statistics (ADS) — 'one of the main underlying statistical sources for government debt'. (4) The quarterly debt statistics (QDS) — 'compiled by Destatis on a quarterly basis with a time-lag of about two and a half months'; the best node candidate of the five, having a named publisher and a stated cadence. (5) Securities holdings statistics (Statistik ueber Wertpapierinvestments, formerly named Depotstatistik) — 'provided by the Department S - Statistics of Deutsche Bundesbank'; not de-bundesbank-financial-accounts, which is already a node and is a different series. Each needs one publication page found. Logged as its own queue item rather than done here, deliberately: finding five publication pages is a research task, not a conversion task, and the finding these quotes carry does not depend on the nodes existing. Note also that the inventory describes the relationship between (1) and (2) as 'is consistent with SFGD' — section 5a language, which would not support an edge between them even once both were nodes."
+    },
+    {
+      "edge": "SFK4-report -> node (terminus)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "TERMINUS CANDIDATE, kind unpublishable, offered as observation and not verdict. 'Main data sources for short- and long-term securities as well as loans of state governments are the so-called SFK4-report and the (preliminary) quarterly debt statistics (QDS). The SFK4-report is provided by the MoF on a quarterly basis with a time-lag of about two months.' Named, real, load-bearing, and 'provided by the MoF' reads as an internal return rather than a release — the CRA PD7 shape from Research.1.md section 4. Kept apart from the five above because if it is a terminus it is a node of a different kind, not a node awaiting a url."
+    },
+    {
+      "edge": "Article 9(2) guidelines -> node (terminus)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "TERMINUS CANDIDATE, kind unidentified — the provision names a slot and something outside it fills the slot, the same shape as Alberta's 'commodity brokers specified' case. Article 9(2): 'The inventories shall be prepared in accordance with guidelines adopted by the Commission (Eurostat) after consultation of CMFB.' An unnamed instrument that determines the content of all 27 inventories. The German inventory confirms it from the national end and still gives it no title: 'The content of the Inventory and the related guideline have been endorsed by the Committee on Monetary, Financial and Balance of Payments statistics in June 2012 and are followed by all EU Member States.' Dated, endorsed, universal, untitled."
+    },
+    {
+      "edge": "eurostat-edp-gfs-quality-report -> the national EDP inventories",
+      "source": "eurostat-edp-gfs-quality-report",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "DOCUMENTED FROM THE REGULATION, NOT FROM THE REPORT, and therefore not minted. Article 8(1): 'The assessment will focus on areas specified in the inventories of Member States such as the delimitation of the government sector, the classification of government transactions and liabilities, and the time of recording.' Article 8(2) lists what Member States must supply for that assessment: '(a) data from national accounts; (b) inventories; (c) EDP notification tables; (d) additional questionnaires and clarification related to the notifications.' Article 8(3) then creates the report that is already a node as eurostat-edp-gfs-quality-report. So the chain is: the Regulation says the assessment uses the inventories, and the Regulation says Eurostat reports on the assessment. That is two steps, and this corpus does not bridge from an exercise to its publication by inference — the same reasoning G.50.md applied to the peer-review-to-CoP direction. Settling it needs the quality report's own text, which was not read this session. Note that Article 8(3) also declines to name the report it creates: AGENCY ONLY at the point where a title would close this."
+    },
+    {
+      "edge": "eurostat-edp-notification-tables -> German source data",
+      "source": "eurostat-edp-notification-tables",
+      "target": null,
+      "reason": "wrong-direction",
+      "why": "RECORDED BECAUSE THE DIRECTION IS THE INTERESTING PART. Every other edge in this chain runs national -> EU, the dependent naming its obligation. This one runs the other way and cannot be minted for a different reason. The inventory: 'Data on government deficits and debt levels are reported to Eurostat twice a year (in April and October) in EDP notification tables.' Germany is the input and the Eurostat tables are the output, so eurostat-edp-notification-tables would be the source — but 'data on government deficits and debt levels' is not a titled German release, so the edge has no target to point at. This sentence is also the one the staged record truncated away (Part A record, E3), and it is the only cadence statement in its passage."
+    },
+    {
+      "edge": "26 further national EDP inventories -> eu-reg-479-2009",
+      "source": null,
+      "target": "eu-reg-479-2009",
+      "reason": "deferred",
+      "why": "THE SCALE OF WHAT ARTICLE 9 CREATES, recorded so the size of the seam is on the record rather than rediscovered. Eurostat's EDP inventories page carries an 'Inventory' and an 'Annex I' link for every EU member state — Belgium, Bulgaria, Czechia, Denmark, Germany, Estonia, Ireland, Greece, Spain, France, Croatia, Italy, Cyprus, Latvia, Lithuania, Luxembourg, Hungary, Malta, Netherlands, Austria, Poland, Portugal and the rest. Each is a compelled, published, revisable national methodology document naming its own national sources, and Germany's names five. If the cadence question is answerable for one it is answerable for all 27. Deferred and not dropped: this is a documented document class, not a speculative one. All 27 links point at CIRCABC, which does not serve to a non-browser client — see _open_questions."
+    },
+    {
+      "edge": "Finanz- und Personalstatistikgesetz (FPStatG) and Gesetz ueber die Statistik fuer Bundeszwecke (BStatG) -> nodes",
+      "source": null,
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Two German statutes named by the inventory as the legal basis for the data it compiles, neither a publication on a cadence. 'In Germany, the Law on the Statistics of Public Finance and Public Service Personnel (Finanz- und Personalstatistikgesetz - FPStatG) regulates the statistical collection and compilation of national fiscal data, which are the main data source for the general government sector in national accounts. The national responsibility for the provision of government finance statistics (GFS) data according to ESA 2010 is set out in the Federal Statistics Law (Gesetz ueber die Statistik fuer Bundeszwecke - BStatG). According to section 3(1) No. 7 BStatG it is the duty of the Federal Statistical Office to compile and to publish national accounts data for national purposes. According to section 19 BStatG the Federal Statistical Office has to compile national accounts data for purposes of the European Union and of international organisations and to transmit these data to the European Union.' BStatG section 19 is the national mirror of ESA 2010 Article 3(1) — a domestic statute obliging transmission to the EU — and it is absent from the staged records entirely, recovered only by re-reading the source. Worth knowing that the obligation is doubly grounded, in EU and national law, even though neither statute is a node."
+    },
+    {
+      "edge": "Working Party on Tax Revenue Estimates, Zentrale Datenstelle der Landesfinanzminister (ZDL), reports from the budget committee",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "AGENCY ONLY at scale, recorded because Research.1.md section 6 says the frequency of AGENCY ONLY is itself a measurement. 'For the compilation of GFS data, the public finance statistics as unique data source is not sufficient. To provide the relevant information, numerous different data sources have to be integrated for the compilation process based on different accounting systems. Examples are data directly provided by the Ministry of Finance, annual and quarterly business reports, balance of payments data, reports from the budget committee, direct information from certain units, Working Party on Tax Revenue Estimates, Zentrale Datenstelle der Landesfinanzminister (ZDL) etc.' Seven named inputs, not one of them a titled publication: two bodies, four descriptions, and an 'etc.' that declines to claim the list is complete. ZDL is a terminus candidate of kind redistributed — a data-collection office publishing nothing of its own. This passage is the second half of what the staged record welded to the FPStatG sentence (Part A record, E2)."
+    },
+    {
+      "edge": "Commission Implementing Regulation (EU) 2016/2304 and the 27 national ESA 2010 quality reports",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "HELD BACK DELIBERATELY, and it is the stronger of the two candidates. Staging batch 67 carries Implementing Regulation 2016/2304, which governs a second compelled national document class: 'The quality report on national and regional accounts referred to in Article 4(2) of Regulation (EU) No 549/2013 shall cover the data sent by Member States in accordance with the ESA 2010 transmission programme as laid down in Annex B to Regulation (EU) No 549/2013 in the year preceding the report. Member States shall provide the quality report on an annual basis.' That last sentence is the stated interval this slice's inventory lacks, which makes it mintable where the inventory is not. Not folded in here because it is a DIFFERENT report from the one already in the corpus — eurostat-edp-gfs-quality-report is the Article 8(3) report Eurostat writes about fiscal data, while 2016/2304 governs a report each Member State writes about national and regional accounts — and conflating them in one pass is exactly how a duplicate id gets made. Its EUR-Lex ELI url works again as of 2026-08-07."
+    }
+  ]
+}
