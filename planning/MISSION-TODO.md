@@ -61,8 +61,16 @@ mark it here AND in whatever branch file owns it.
    para 6 verified first-hand) and Wellington → Public Audit Act 2001 minted
    (cites, re-fetched at source); the OAG back half was reached via its HTML
    pages and the PBE-IPSAS edge was correctly REFUSED — the report says only
-   "Tier 1 PBE Standards", naming no standard-setter document. Items (a) and
-   (c) remain.)* (a) Stats NZ national-accounts
+   "Tier 1 PBE Standards", naming no standard-setter document.)*
+   **Item (a) DONE 2026-08-07**: the Stats NZ pass ran — AES DataInfo+
+   fetched first-hand, 5 new nodes (quarterly GDP, Regional GDP, TSA,
+   NPISA, BPI), 7 edges incl. two bonus Local Authority Census edges;
+   BPI→AES and national-accounts-income→AES honestly refused (see
+   verification-2026-08-07/statsnz.report.md). Two tooling notes for the
+   next NZ hand-off (do NOT edit G.4 — record in G.5): DataInfo+ is only
+   INTERMITTENTLY fetchable (went robots-blocked mid-session), and
+   archive.stats.govt.nz DNS is flaky. Item (c) (second exemplar council)
+   remains. (a) Stats NZ national-accounts
    pass from `nz-statsnz-aes` — five downstream products named in DataInfo+,
    none in the corpus, domain reliably fetchable. (b) Cheap checks first if
    short on time: mint the XRB A1 and Wellington edges to
@@ -82,10 +90,14 @@ mark it here AND in whatever branch file owns it.
    document; every fetch method failed in AU/G.1 — try the browser, which
    NZ/G.4 proved changes everything). Then Victoria (VLGGC found, not
    verified) or NSW. (Source: AU/G.1 priorities 1–2, cheap checks 1–3, 5.)
-7. **EU wide — Norway's KOSTRA.** The scouts' own top pick: bilingual,
-   "as strong as the Dutch Toelichting", likely the fastest un-built
-   country. Alternative: close the Netherlands/UK `_dropped` leads instead.
-   (Source: EU/G.49 priority G, cheap check 5.)
+7. ~~EU wide — Norway's KOSTRA~~ **DONE 2026-08-07** — full chain built
+   (no-government-finance.json): KOSTRA, its regulation (via the ministry's
+   own Veileder, lovdata being robots-blocked — flagged as a judgement
+   call), the Green Book grant edge ("Utgiftsbehovet for 2026 er berekna
+   med rekneskapstal ... henta frå KOSTRA/SSB"), and the ESA 2010 bridge
+   correctly routed through the general-government statistic. Remaining
+   Norway lead: the municipal årsregnskap node. Netherlands/UK _dropped
+   leads still open.
 8. **Beyond-Europe briefs — XI items 25, 27, 28.** 25c first (Chile's SII
    avalúo fiscal — a fourth property-valuation legal tradition), then
    Colombia/Chile-FCM/Peru; item 27's nineteen unscouted jurisdictions,

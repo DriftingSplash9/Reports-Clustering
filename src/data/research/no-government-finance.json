@@ -1,0 +1,123 @@
+{
+  "_slice": "norway",
+  "_researched": "2026-07-30",
+  "_merged": "2026-08-07",
+  "_note": "Norway KOSTRA chain, built per EU/G.49.md priority G(a) from the 2026-07-30 scouting result ('as strong as the Dutch Toelichting') and verified against primary sources 2026-08-07. Reproduces the Netherlands government-finance shape (nl-municipal-finance.json): the recurring compiled release (KOSTRA), the regulation mandating municipal reporting into it (KOSTRA-forskriften), the grant system that names KOSTRA as its data source (Gront hefte), and the SSB general-government statistic that bridges KOSTRA to ESA 2010. All four edges carry verbatim Norwegian quotes from documents actually fetched. Caveat recorded honestly: lovdata.no is robots.txt-disallowed to WebFetch, so the KOSTRA-forskriften node's operative text was verified via the ministry's own Veileder til KOSTRA-forskriften PDF on regjeringen.no, which reproduces the forskrift's citation, scope and reporting duties; the node's url points to the canonical lovdata consolidation, which could not be fetch-verified. Norway is NOT an EU member; no supranational jurisdiction claims are made (matches how the corpus files no-ssb-national-accounts: country NO, jurisdiction_level federal). The existing node no-ssb-national-accounts was left untouched; the ESA 2010 bridge runs through the new general-government-finances node, whose own About-the-statistics page names both KOSTRA and ESA 2010.",
+  "reports": [
+    {
+      "id": "no-ssb-kostra",
+      "title": "KOSTRA (Municipality-State Reporting) — key figures",
+      "publisher": "Statistics Norway (SSB)",
+      "country": "NO",
+      "jurisdiction_level": "federal",
+      "region": "Norway",
+      "description": "SSB's compiled release of key figures on Norwegian municipal and county-municipal activity — finance, schools, health, culture, environment, social services, housing, technical services, transport — built from mandatory electronic reporting by all municipalities and county authorities. 'KOSTRA is an abbreviation for municipality-state reporting. Through KOSTRA, all Norwegian municipalities and county authorities submit data from their service areas to Statistics Norway.' The Norwegian functional counterpart to CBS's Iv3 tables (nl-cbs-iv3-gemeenten) and Alberta's compiled FIR data.",
+      "releases_per_year": 2,
+      "cadence_note": "Preliminary figures each 15 March, audited/revised figures each 15 June (per the kostrahoved statistic page; last updated 15 June 2026, next update 15 March 2027).",
+      "last_updated": null,
+      "url": "https://www.ssb.no/en/offentlig-sektor/statistikker/kostrahoved",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "no-kostra-forskriften",
+      "title": "Forskrift om rapportering fra kommuner og fylkeskommuner mv. (KOSTRA-forskriften)",
+      "publisher": "Kommunal- og distriktsdepartementet",
+      "country": "NO",
+      "jurisdiction_level": "institutional",
+      "region": "Norway",
+      "description": "Regulation of 18 October 2019 no. 1412, issued under kommuneloven (Act of 22 June 2018 no. 83) § 16-1 and IKS-loven § 42, prescribing what economic and service data municipalities, county authorities and inter-municipal companies must report and requiring that all KOSTRA reporting be made electronically to Statistics Norway. In force 1 January 2020. The Norwegian functional equivalent of the Dutch BBV/Iv3 reporting rules (nl-bbv) in this corpus.",
+      "releases_per_year": 1,
+      "cadence_note": "Amended periodically rather than issued as dated editions (e.g. amending regulation FOR-2023-11-04-1859), the same pattern nl-bbv and psab-psas are filed under. Canonical consolidation is on lovdata.no, which is robots.txt-blocked to this pipeline; operative text verified via the ministry's Veileder til KOSTRA-forskriften (regjeringen.no PDF, fetched).",
+      "last_updated": null,
+      "url": "https://lovdata.no/dokument/SF/forskrift/2019-10-18-1412",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "no-kdd-gront-hefte",
+      "title": "Inntektssystemet for kommunar og fylkeskommunar — Grønt hefte (Beregningsteknisk dokumentasjon)",
+      "publisher": "Kommunal- og distriktsdepartementet",
+      "country": "NO",
+      "jurisdiction_level": "federal",
+      "region": "Norway",
+      "description": "Annual technical documentation of the income system for municipalities and county authorities, published as an attachment to the state budget proposal (Prop. 1 S): 'Beregningsteknisk dokumentasjon (Grønt hefte) viser fordelingen av rammetilskuddet for den enkelte kommune og fylkeskommune.' Shows the block-grant (rammetilskudd) distribution, cost keys and the criteria data behind each municipality's calculated expenditure need. The Norwegian functional counterpart to the Dutch Toelichting (nl-bzk-toelichting-gemeentefonds) and Ontario's OMPF Technical Guide.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.regjeringen.no/no/tema/kommuner-og-regioner/kommuneokonomi/gront-hefte/id547024/",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "no-ssb-general-government-finances",
+      "title": "General government revenue and expenditure (Offentlig forvaltnings inntekter og utgifter)",
+      "publisher": "Statistics Norway (SSB)",
+      "country": "NO",
+      "jurisdiction_level": "federal",
+      "region": "Norway",
+      "description": "SSB's statistic on revenue and expenditure in central and local government, compiled within the national-accounts framework (SNA 2008 / ESA 2010) and reported internationally to Eurostat, the OECD and the IMF under EEA commitments. The local-government side is built from municipal and county accounts reported through KOSTRA's reporting portal — the documented bridge from Norway's municipal-finance chain into the national-accounts / ESA world.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly releases roughly 75-80 days after each reference quarter; preliminary annual figures in March, updated in June and December. Live: last updated 8 June 2026, next release 7 September 2026.",
+      "last_updated": null,
+      "url": "https://www.ssb.no/en/offentlig-sektor/statistikker/offinnut",
+      "domains": [
+        "national-accounts",
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "no-ssb-kostra",
+      "target_report_id": "no-kostra-forskriften",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SSB's Om statistikken for KOSTRA gives the collection's legal basis as 'Lov om kommuner og fylkeskommuner (kommuneloven) av 22.06.2018 nr. 83, § 16-1', the provision KOSTRA-forskriften is issued under; the ministry's guide to the forskrift ('Forskrift 18. oktober 2019 nr. 1412 om rapportering fra kommuner og fylkeskommuner mv.') states that under it 'all rapportering til KOSTRA skal foregå elektronisk til Statistisk sentralbyrå (SSB)' [all reporting to KOSTRA must be made electronically to Statistics Norway], with 'fristen for å rapportere opplysninger om ressursbruk og tjenester er 15. februar' and 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret' [deadlines of 15 February for resource-use/service data and 22 February for the annual accounts]. The forskrift thus prescribes what enters KOSTRA, how and when.",
+      "evidence_url": "https://www.regjeringen.no/contentassets/457fbe59592248e1a2b3b57ebe033e97/veileder-til-kostra-forskriften.pdf"
+    },
+    {
+      "source_report_id": "no-kdd-gront-hefte",
+      "target_report_id": "no-ssb-kostra",
+      "relationship_type": "calculated_from",
+      "basis": "Grønt hefte 2026 (Inntektssystemet for kommunar og fylkeskommunar): 'Utgiftsbehovet for 2026 er berekna med rekneskapstal for 2024 henta frå KOSTRA/SSB' [the 2026 expenditure need is calculated with 2024 accounting figures taken from KOSTRA/SSB]; the sector-weight table for the municipal cost key cites its source as 'Netto driftsutgifter ekskl. avskrivingar KOSTRA 2024' [net operating expenditure excl. depreciation, KOSTRA 2024]; and generally 'Kriteriedata er baserte på statistikk frå mellom anna Statistisk sentralbyrå (SSB)...' [criteria data are based on statistics from, among others, Statistics Norway].",
+      "evidence_url": "https://www.regjeringen.no/contentassets/744de1ad6f0f4df09311c33edd01ae99/2026/h-2570-n_inntektssystemet_2026_pdfts.pdf"
+    },
+    {
+      "source_report_id": "no-ssb-general-government-finances",
+      "target_report_id": "no-ssb-kostra",
+      "relationship_type": "uses_data_from",
+      "basis": "SSB's Om statistikken for Offentlig forvaltnings inntekter og utgifter, on sources for the local-government sector: 'Kommunene, fylkeskommunene, de kommunale og fylkeskommunale foretakene, de interkommunale samarbeidene og kirkelige fellesrådene rapporterer uttrekk fra sine regnskaper direkte til SSB gjennom KOSTRAs rapporteringsportal' [municipalities, county authorities, their enterprises, inter-municipal cooperations and joint church councils report extracts of their accounts directly to SSB through KOSTRA's reporting portal].",
+      "evidence_url": "https://www.ssb.no/offentlig-sektor/statistikker/offinnut/aar/2015-02-26?fane=om"
+    },
+    {
+      "source_report_id": "no-ssb-general-government-finances",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SSB's Om statistikken for Offentlig forvaltnings inntekter og utgifter: 'Statistikken er basert på internasjonale standarder for nasjonalregnskap og statistikk om offentlige finanser. Disse er først og fremst FNs System of National Accounts 2008 (SNA2008) og EUs European System of Accounts 2010 (ESA2010)' [the statistics are based on international standards for national accounts and government finance statistics, first and foremost the UN's SNA 2008 and the EU's ESA 2010]; the same page records reporting to Eurostat, the OECD and the IMF under EEA commitments — an EEA obligation, not EU membership: Norway is not an EU member.",
+      "evidence_url": "https://www.ssb.no/offentlig-sektor/statistikker/offinnut/aar/2015-02-26?fane=om"
+    }
+  ],
+  "_dropped": [
+    {
+      "source": "no-ssb-kostra",
+      "target": "no-kommuneloven",
+      "reason": "unreadable-source",
+      "why": "Kommuneloven (LOV-2018-06-22-83) § 16-1 is the statutory root of the whole chain — regjeringen.no's 'Regelverk om rapportering i KOSTRA' page states 'Kommuner og fylkeskommuner plikter etter kommuneloven å gi departementet løpende informasjon om ressursbruk og tjenesteyting' and SSB's Om statistikken lists '...kommuneloven av 22.06.2018 nr. 83, § 16-1' as the collection's hjemmel. But the statute's own text lives on lovdata.no, which is disallowed by robots.txt to WebFetch (ROBOTS_DISALLOWED on every lovdata URL tried), and no official full-text mirror of the act was found; per the minting rule (fetch and quote the instrument itself) no kommuneloven node was minted. The obligation is not lost: it is captured in the no-ssb-kostra -> no-kostra-forskriften edge, since the forskrift is issued under § 16-1 and its operative duties were verified via the ministry's veileder PDF."
+    },
+    {
+      "source": "no-ssb-kostra",
+      "target": "no-kommune-arsregnskap",
+      "reason": "no-node-yet",
+      "why": "KOSTRA's inputs are the municipalities' own annual accounts: SSB's Om statistikken lists 'Kommuneregnskap (KOSTRA, skjema 0A, 0B, 0I, 0J, 0M, 0N)' among the data sources and states 'Data fra kommuner og fylkeskommuner rapporteres elektronisk til SSB'; the veileder gives the deadline 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret'. The Netherlands slice minted the analogous municipal-level node (nl-iv3-rapportage); a Norwegian 'kommuneregnskap/årsregnskap' node would need its own landing URL and cadence work (per-municipality publication under kommuneloven ch. 14) and was out of this pass's three-piece scope. Quotes preserved here so the node can be minted later and this edge promoted."
+    },
+    {
+      "source": "no-ssb-kostra",
+      "target": "esa-2010",
+      "reason": "no-document",
+      "why": "The scouting framing suggested KOSTRA itself might link to an international standard, but SSB's own Om statistikken for KOSTRA answers the international-reporting question 'Ikke relevant' [not relevant] — KOSTRA as such carries no EEA/EU/international reporting obligation. The ESA 2010 bridge is real but runs one step downstream: no-ssb-general-government-finances uses KOSTRA data and is compiled to ESA 2010 (both edges verified above). Recording the direct KOSTRA->ESA edge would overstate the documentation."
+    }
+  ]
+}

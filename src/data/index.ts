@@ -63,6 +63,8 @@ import grokH1Housing from './research/grok-h1-housing-benefits.json'
 import grokH1MunicipalOnQc from './research/grok-h1-municipal-ontario-quebec.json'
 import grokH1International from './research/grok-h1-international-reports.json'
 import gbUkspfSuccession from './research/gb-ukspf-succession.json'
+import nzStatsnzNationalAccounts from './research/nz-statsnz-national-accounts.json'
+import noGovernmentFinance from './research/no-government-finance.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -159,6 +161,8 @@ const slices: ResearchSlice[] = [
   grokH1MunicipalOnQc as unknown as ResearchSlice,
   grokH1International as unknown as ResearchSlice,
   gbUkspfSuccession as unknown as ResearchSlice,
+  nzStatsnzNationalAccounts as unknown as ResearchSlice,
+  noGovernmentFinance as unknown as ResearchSlice,
 ]
 
 function assemble() {

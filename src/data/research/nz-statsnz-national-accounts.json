@@ -1,0 +1,176 @@
+{
+  "_slice": "statsnz-national-accounts",
+  "_researched": "2026-08-06",
+  "_merged": "2026-08-07",
+  "_note": "NZ/G.4.md priority item 1: the Stats NZ national-accounts pass, starting from nz-statsnz-aes. Provenance: the lead comes from the AES DataInfo+ metadata first surfaced in anzsic-industry-classification.json's _dropped array (2026-08-06); every quote below was re-fetched first-hand by this session on 2026-08-07. FETCH CONDITIONS, recorded because they will otherwise be rediscovered: (1) all quotes were obtained through WebFetch with explicit verbatim-transcription prompts — no raw-bytes fetch tool was available to this session, so key quotes were cross-checked by fetching the same document twice; one minor transcription variance is flagged in the nz-statsnz-gdp -> nz-statsnz-bpi basis. (2) datainfoplus.stats.govt.nz served the AES item, the TSA item (/96) and the Business Price Index item early in the session and then began returning robots.txt-disallowed for EVERY subsequent URL including robots.txt itself, in both /Item/ and /item/ casings — the domain is intermittently fetchable, not reliably fetchable, and the NZSIOC item could not be opened as a result. (3) archive.stats.govt.nz served two pages (the TSA 2016 Appendix 2 and the Regional GDP introduction) and then began failing DNS resolution; the PPI concepts-sources-and-methods 2015 methodology chapter could not be reached. (4) www.stats.govt.nz information-release pages are JavaScript shells (meta tags only) but resolve, and its /assets/ PDFs extract, with the usual ~60-page truncation limit (the NPISA 2018 PDF truncated at p.62, before its p.70 AES subsection; the 2004 edition carried the needed sentence instead). What survived: five new nodes (quarterly GDP, Regional GDP, Tourism Satellite Account, Non-profit Institutions Satellite Account, Business Price Indexes), seven edges, all product-side documented except where noted. The BPI -> AES edge and the nz-statsnz-national-accounts-income -> AES edge were both dropped with the claims preserved.",
+  "reports": [
+    {
+      "id": "nz-statsnz-gdp",
+      "title": "Gross domestic product (quarterly)",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's quarterly GDP information release, New Zealand's official measure of economic activity, compiled per the 'Quarterly gross domestic product: Sources and methods' (fifth edition). The quarterly series is benchmarked annually to annual accounts whose industry data comes largely from the Annual Enterprise Survey: the sources-and-methods document states that new annual data is incorporated once a year at the September-quarter release. Minted as the corpus's representative of the 'national accounts' family the AES metadata names as its principal consumer; the legacy product titles that metadata lists (Production/Industry Accounts, Institutional Sector Accounts, Inter-Industry Study, Provisional National Accounts) are predecessors of the current GDP and national-accounts release set.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly, roughly 11 weeks after the reference quarter. Annual benchmark data is incorporated once a year: \"The new annual data is incorporated into the quarterly accounts once a year for the September quarter information release, published in December.\"",
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/information-releases/gross-domestic-product-march-2025-quarter/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-statsnz-regional-gdp",
+      "title": "Regional gross domestic product",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's annual geographic breakdown of national GDP by region and industry, published for years ended March. Its own introduction page states, in one sentence, all four of its main inputs by name: the Annual Enterprise Survey, Linked Employer-Employee Data, the Crown Financial Information System, and the Local Authority Census — two of which are already nodes in this corpus, making this the most efficiently documented node in the New Zealand slice.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, for years ended March; editions verified for 2016, 2018, 2022 and 2024.",
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/information-releases/regional-gross-domestic-product-year-ended-march-2024/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-statsnz-tsa",
+      "title": "Tourism satellite account",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's annual satellite account measuring tourism's contribution to the New Zealand economy. Its DataInfo+ metadata describes it as providing \"a picture of the role tourism plays in New Zealand, with information on the changing levels and impact of tourism activity\", published annually. Its published methodology derives industry output and scales household tourism expenditure using Annual Enterprise Survey data, which is the edge that brought it into this corpus.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, for years ended March; the 2025 edition (year ended March 2025) is current.",
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/information-releases/tourism-satellite-account-year-ended-march-2025/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-statsnz-npisa",
+      "title": "Non-profit institutions satellite account",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's periodic satellite account of the non-profit sector's contribution to GDP, supplementing the New Zealand System of National Accounts. Three editions exist — for the 2004 year (published 2007), 2013 and 2018 — which the 2018 edition itself confirms: \"the NPISA, first published in 2007 and presenting statistics for the 2004 year\". The weakest recurrence claim among this pass's nodes, held as a node because the editions form a deliberate series with cross-edition comparisons rather than a one-off.",
+      "releases_per_year": 0.15,
+      "cadence_note": "Irregular: editions for 2004, 2013 and 2018, roughly every five to nine years. releases_per_year is nominal.",
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/reports/non-profit-institutions-satellite-account-2018/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nz-statsnz-bpi",
+      "title": "Business price indexes",
+      "publisher": "Stats NZ (Tatauranga Aotearoa)",
+      "country": "NZ",
+      "jurisdiction_level": "federal",
+      "region": "New Zealand",
+      "description": "Stats NZ's quarterly producer-side price release. Its DataInfo+ metadata states: \"The BPI release includes the PPI, CGPI, and farm expenses price index (FEPI).\" The PPI measures output and input price change for industries, the CGPI capital goods prices. Named by exact title in the AES's own metadata as a consumer of AES data, but no product-side document reachable this session corroborates that (see _dropped); the node instead anchors a documented inbound edge from the quarterly GDP release, whose sources-and-methods uses PPI sub-indexes for inventory revaluation.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.stats.govt.nz/information-releases/business-price-indexes-march-2026-quarter/",
+      "domains": [
+        "inflation",
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "nz-statsnz-tsa",
+      "target_report_id": "nz-statsnz-aes",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (TSA 2016 Appendix 2, the account's own data-sources appendix, fetched from archive.stats.govt.nz 2026-08-07). Under 'Production of tourism goods and services': \"Without balanced supply and use accounts, we derive total output by industry using a variety of indicators, including GST sales, the Retail Trade Survey, the Annual Enterprise Survey, the Accommodation Survey, and annual reports.\" And under 'Scaling household tourism expenditure data to total economy': \"This is calculated as the difference between electronic card spending and total economy spending based on ANZSIC industry information supplied from our Annual Enterprise Survey (AES).\" Corroborated from the input side by the AES DataInfo+ metadata (fetched this session), 'Usage and limitations of the data': \"In addition to its use in the national accounts, the Annual Enterprise Survey is also a data source for other Statistics NZ existing and upcoming outputs, including: ... Tourism Satellite Account ...\".",
+      "evidence_url": "http://archive.stats.govt.nz/browse_for_stats/industry_sectors/Tourism/tourism-satellite-account-2016/appendix-2.aspx"
+    },
+    {
+      "source_report_id": "nz-statsnz-regional-gdp",
+      "target_report_id": "nz-statsnz-aes",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (Stats NZ's own Regional GDP introduction page, fetched from archive.stats.govt.nz 2026-08-07): \"Regional GDP statistics are derived by industry using data from the annual enterprise survey (AES), Linked Employer-Employee Data (LEED), Crown Financial Information System, and the Local Authority Census.\" Corroborated from the input side by the AES DataInfo+ metadata (fetched this session), which names \"Regional Gross Domestic Product (GDP)\" by title among the outputs the AES is a data source for.",
+      "evidence_url": "http://archive.stats.govt.nz/browse_for_stats/economic_indicators/NationalAccounts/intro-regional-gdp.aspx"
+    },
+    {
+      "source_report_id": "nz-statsnz-regional-gdp",
+      "target_report_id": "nz-statsnz-lac",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (same page and fetch as the AES edge): \"Regional GDP statistics are derived by industry using data from the annual enterprise survey (AES), Linked Employer-Employee Data (LEED), Crown Financial Information System, and the Local Authority Census.\" The Local Authority Census is named as a compilation input in the same sentence as the AES; nz-statsnz-lac is the existing corpus node for that census and the Local Authority Financial Statistics compiled from it.",
+      "evidence_url": "http://archive.stats.govt.nz/browse_for_stats/economic_indicators/NationalAccounts/intro-regional-gdp.aspx"
+    },
+    {
+      "source_report_id": "nz-statsnz-npisa",
+      "target_report_id": "nz-statsnz-aes",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (Non-profit Institutions Satellite Account: 2004, the account's own report, Chapter 5 'Data sources', PDF fetched from stats.govt.nz 2026-08-07): \"The main data source for financial data is the Annual Enterprise Survey.\" The 2018 edition's technical chapter likewise carries a dedicated 'Annual Enterprise Survey' subsection under 'Data sources and methods' (p.70), confirmed from its table of contents, though the PDF extraction truncated at p.62 before the subsection body could be read — the 2004 edition's sentence is the quoted basis. Corroborated from the input side by the AES DataInfo+ metadata (fetched this session), which names \"Non-profit Institutions Satellite Account\" by title among the outputs the AES is a data source for.",
+      "evidence_url": "https://www.stats.govt.nz/assets/Uploads/Retirement-of-archive-website-project-files/Reports/Non-Profit-Institutions-Satellite-Account-2004/npisa-04.pdf"
+    },
+    {
+      "source_report_id": "nz-statsnz-gdp",
+      "target_report_id": "nz-statsnz-aes",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (Quarterly gross domestic product: Sources and methods, fifth edition — the release's own methodology document, PDF fetched from stats.govt.nz 2026-08-07, key passages cross-checked by a second fetch). Table 7 (production approach, by industry), annual method: \"Book value inventories data is from AES.\" (stated for forestry and logging, and again for manufacturing). Table 8 (expenditure approach), gross fixed capital formation, residential and non-residential buildings, annual method: \"Estimated using Annual Enterprise Survey data.\" Other construction (private): \"Purchases are estimated from survey sources including AES, tax return data for agriculture related industries, Economic Survey of Manufacturing\". The annual route into the quarterly series is stated in the same document: \"The new annual data is incorporated into the quarterly accounts once a year for the September quarter information release, published in December.\" Corroborated from the input side by the AES DataInfo+ metadata (fetched this session), 'Main users of the data': \"The Annual Enterprise Survey data forms the basis of Statistics New Zealand's national accounts statistics including : Production/Industry Accounts, Institutional Sector Accounts, Inter-Industry Study, Provisional National Accounts.\"",
+      "evidence_url": "https://www.stats.govt.nz/assets/Uploads/Methods/Quarterly-gross-domestic-product-Sources-and-methods-fifth-edition/quarterly-gross-domestic-product-sources-and-methods-fifth-edition.pdf"
+    },
+    {
+      "source_report_id": "nz-statsnz-gdp",
+      "target_report_id": "nz-statsnz-lac",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (same sources-and-methods document and fetches as the AES edge). Table 8, Other construction, local government, annual method: \"Purchases derived from the Local Authority Census for non-market units and AES for market units.\" The Local Authority Census is named as the annual data source for the local-government construction component; nz-statsnz-lac is the existing corpus node for it.",
+      "evidence_url": "https://www.stats.govt.nz/assets/Uploads/Methods/Quarterly-gross-domestic-product-Sources-and-methods-fifth-edition/quarterly-gross-domestic-product-sources-and-methods-fifth-edition.pdf"
+    },
+    {
+      "source_report_id": "nz-statsnz-gdp",
+      "target_report_id": "nz-statsnz-bpi",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (same sources-and-methods document, fetched twice 2026-08-07). Table 7, inventories, annual method, immediately following the AES sentence: \"Book value inventories data is from AES. Sub-indexes of the PPI are used.\" — the first of the two fetches transcribed the second sentence with a longer tail (\"Sub-indexes of the PPI are used for revaluation.\" and, for manufacturing, \"Revaluation is carried out at the industry level using sub-index of PPI.\"); the words common to both extractions are quoted as the operative basis and the variance is recorded here rather than silently resolved. The PPI is published within the Business price indexes release — the BPI's own DataInfo+ metadata (fetched this session): \"The BPI release includes the PPI, CGPI, and farm expenses price index (FEPI).\" — so the release-level target is nz-statsnz-bpi. That same metadata lists \"Statistics New Zealand National Accounts\" first among the BPI's main users, corroborating the direction.",
+      "evidence_url": "https://www.stats.govt.nz/assets/Uploads/Methods/Quarterly-gross-domestic-product-Sources-and-methods-fifth-edition/quarterly-gross-domestic-product-sources-and-methods-fifth-edition.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "nz-statsnz-bpi -> nz-statsnz-aes",
+      "source": "nz-statsnz-bpi",
+      "target": "nz-statsnz-aes",
+      "reason": "deferred",
+      "why": "The input-side claim is real and verbatim — the AES DataInfo+ metadata (fetched this session), 'Usage and limitations of the data': \"In addition to its use in the national accounts, the Annual Enterprise Survey is also a data source for other Statistics NZ existing and upcoming outputs, including: ... Business Price Indexes ...\" — but no product-side document reachable this session corroborates it, and this pass's operating rule was that the AES's own list of consumers suffices only when the product's side also documents the input (the QLAS precedent in nz-government-finance.json had corroboration from both sides). Checked and negative: the Business Price Index DataInfo+ item (fetched — names PPI/CGPI/FEPI contents and main users, no data sources naming AES) and the 'Producers price index: concepts, sources, and methods' second-edition PDF (fetched in full prompt — the summarising extractor reported no AES mention, with weights sourced from the Commodity Data Collection Survey and national-accounts supply-use reconciliation). Not checked: the 2015 CS&M methodology chapter on archive.stats.govt.nz, which failed DNS/robots on four attempts this session — AES may well appear there as a weights source, so this is deferred rather than denied. One fetch of one candidate document stands between this and a verdict either way."
+    },
+    {
+      "edge": "nz-statsnz-national-accounts-income -> nz-statsnz-aes",
+      "source": "nz-statsnz-national-accounts-income",
+      "target": "nz-statsnz-aes",
+      "reason": "no-document",
+      "why": "Task item 3 of this pass: can the existing income release now be given a documented edge to AES? No. The release's own 'National accounts (income, saving, assets, and liabilities): Sources and methods' (third edition, PDF fetched from stats.govt.nz 2026-08-07) mentions the AES exactly once, and as a discrepancy to investigate rather than an input — section 2.2.2 (Insurance): \"There are some differences between RBNZ data, BoP data, and Annual Enterprise Survey (AES) data on insurance that will require further investigation and may lead to some changes in methods for both the quarterly and annual accounts.\" And the AES's own downstream list does not name this release by title — its 'Main users' names \"Production/Industry Accounts, Institutional Sector Accounts, Inter-Industry Study, Provisional National Accounts\", legacy titles of which the income release is at best a partial successor. The anzsic-industry-classification.json _dropped judgment (2026-08-06) that minting this edge would be a loose match is CONFIRMED from the product side. The fourth edition of the sources and methods exists (its stats.govt.nz methods landing page is a JavaScript shell and no PDF URL could be located); re-check it before treating this as permanently closed."
+    },
+    {
+      "edge": "nz-nzsioc node + nz-statsnz-aes -> nz-nzsioc -> anzsic",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "NZ/G.4.md cheap check 4, attempted and blocked by access, not by evidence. The NZSIOC DataInfo+ item (nz.govt.stats/0381a627-927b-4d60-bce3-bba549bf5a2d) was located but datainfoplus.stats.govt.nz, after serving three items early in this session, began returning robots-disallowed for every URL in both /Item/ and /item/ casings, including robots.txt itself; the data.govt.nz catalogue mirror is behind Incapsula. G.4's 'DataInfo+ is fetchable' should be read as 'intermittently fetchable'. What was obtained instead, from Stats NZ's own presentation to the 2025 UN ECLAC classifications workshop (Andrew Hancock, 'Australian and New Zealand Standard Industrial Classification (ANZSIC)', unstats.un.org, fetched this session): ANZSIC \"Is supported by an output classification (NZSIOC) and forms the basis of the Business Industry Classification (BIC)\"; \"In the New Zealand context it has become a minor input classification as NZSIOC is used for sample survey design and all outputs\"; \"In addition to assist implementation, a separate New Zealand Standard Industrial Output Classification (NZSIOC) was created for all aggregated data such as working or published industries of the National Accounts\". That supports the NZSIOC-on-ANZSIC relationship but is a one-off conference paper, not the classification's defining document, and the branch rule since 2026-08-06 is that the corpus should not carry a node whose front matter nobody has read. One successful fetch of the DataInfo+ item closes this."
+    },
+    {
+      "edge": "AES 'Main users' legacy titles (Production/Industry Accounts, Institutional Sector Accounts, Inter-Industry Study, Provisional National Accounts) -> separate nodes",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "A modelling decision, recorded so it is not mistaken for an omission. The AES DataInfo+ 'Main users' passage (fetched verbatim this session) names four national-accounts products by titles that do not correspond to current stats.govt.nz information releases — they are legacy names from the pre-2018 release taxonomy. Rather than mint four nodes for titles that no longer front a release, this pass minted one node, nz-statsnz-gdp, for the current quarterly GDP release, whose own sources-and-methods document names the AES as an annual input, and represented the satellite accounts and Regional GDP separately where each has its own release and its own product-side documentation. If a later pass minted the annual 'National accounts (industry production and investment)' release, its edge to AES would likely be even more direct than GDP's; its DataInfo+ item was robots-blocked this session."
+    },
+    {
+      "edge": "nz-statsnz-tsa methodology DataInfo+ item (2dcbc40b-adcb-4a7c-80be-d8badcf937ba)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The TSA's dedicated methodology item on DataInfo+ was robots-blocked on every attempt this session (while the TSA's main item at /96 served). The minted TSA -> AES edge therefore rests on the 2016 edition's Appendix 2 on archive.stats.govt.nz. If the current methodology item becomes fetchable, re-basing the edge on the current edition's wording would be a strict improvement; the 2016 appendix wording is not expected to have been reversed, since the AES's own current metadata still names the TSA as a consumer."
+    }
+  ]
+}
