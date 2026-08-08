@@ -151,6 +151,23 @@ descriptive message and pushing to origin/main — the public repo tracks the
 corpus. A session that cannot push (auth, environment) commits locally and
 says so in its hand-off.
 
+**Agents do not run git commands against this repo at all, decided
+2026-08-08 (Thomas, `G.54.md`).** Not `git status`, not `git log`, nothing —
+diagnostic or otherwise. Editing files (the actual research and corpus work)
+never required git in the first place; committing and pushing is Thomas's
+own action through GitHub Desktop, not an agent's. This isn't a style
+preference — it's a correctness rule. On this repo, accessed over the
+device bridge, git cannot clean up its own `index.lock` after an operation
+finishes (every git command this session printed `warning: unable to
+unlink ... Operation not permitted`, lock present or not), so *any* git
+command an agent runs — even a read-only `git status` just to check
+something — leaves a fresh stale lock behind. `G.53.md`/`G.54.md`'s
+session spent real time diagnosing a "recurring lock file" problem that
+turned out to be caused by the diagnostic checks themselves: clearing a
+lock and then running `git status` to confirm it was clear recreated it.
+**If you think you need to check git state, ask Thomas what it shows
+instead of running the command yourself.**
+
 ## 3. Extract; do not adjudicate
 
 This was tested. An earlier round asked for verdicts — "does this edge exist,
