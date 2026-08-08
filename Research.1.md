@@ -184,8 +184,9 @@ The split plays to that.
 
 ## 4. What counts as a node
 
-A node is **a recurrently published document that another document names as an
-input to itself.**
+A node is **a published document that another document names as an input to
+itself** — and it is one of two shapes: a **recurring publication**, cadenced,
+or a **one-off foundational instrument**, which is not.
 
 Subject matter is not the boundary. This started as an economics project and the
 economics turned out to be an accident of where documented chains happened to be —
@@ -193,17 +194,69 @@ municipal tax bylaws and provincial assessment guidelines are among the best
 material in it. Health, environment, justice, education, trade and occupational
 material are all in scope now, **provided the chains are written down.**
 
-Three things bind instead:
+Two things bind regardless of shape:
 
 1. **A document names it.** Section 2.
-2. **It is published on a cadence.** Once a day, once a month, once every five
-   years — fractional is fine, "about once a generation" is a real answer. But
-   something published once is not a node.
-3. **It has a title.** "Statistics Canada" is not a node. *Survey of Employment,
+2. **It has a title.** "Statistics Canada" is not a node. *Survey of Employment,
    Payrolls and Hours* is.
 
-Point 3 is the one that comes up constantly, and it has its own instruction in
+Point 2 is the one that comes up constantly, and it has its own instruction in
 section 6: `AGENCY ONLY`.
+
+### Cadence, for the recurring shape
+
+**Recast 2026-08-08, Thomas's ruling.** Until this date, a third rule bound
+every node without exception: *"it is published on a cadence... something
+published once is not a node."* That rule now applies only to documents that
+are themselves recurring in nature — statistical releases, quality reports,
+inventories, anything with a next edition. For that shape, nothing has
+changed: once a day, once a month, once every five years — fractional is
+fine, "about once a generation" is a real answer, and a single edition with
+no second one anywhere in sight is still not a node.
+
+**A one-off foundational instrument does not need a cadence at all.** A
+treaty, a trade deal, a piece of government policy or regulation adopted once
+and never revisited in that form again is eligible on points 1 and 2 alone —
+named, and titled — the same evidentiary bar as everything else, just without
+a rate attached. This was opened specifically because the EU branch kept
+running into single-adoption Regulations and Decisions that are plainly
+load-bearing (cited, binding, structurally central to the chains around them)
+and were being excluded on cadence alone. `releases_per_year` becomes
+optional for this shape; when it is absent, treat the node as evergreen
+rather than guessing a rate to satisfy the schema.
+
+**Recasts and successor instruments are the recurring shape, not the one-off
+shape, even when the current edition itself has never been amended.** If a
+document explicitly repeals or replaces a named predecessor — "repealing
+Regulation (EU) No 1291/2013," a recital naming the act it recasts — and that
+predecessor itself had its own predecessor, the *class* is recurring even
+though each individual generation is typically adopted once and left alone.
+Cadence for this shape comes from the interval between the two most recent
+generations, the same "latest observed interval" rule already used for
+irregular recurring documents (`de-edp-inventory`, `de-destatis-gni-inventory`)
+— not from amendments within one generation. The EU's Financial Regulation
+(2024/2509, recasting 2018/1046, recasting 2012/966...) is the case that
+opened this: read in isolation it has exactly one consolidated version and
+looks like a one-off; read as a lineage it is a document class the EU
+re-adopts wholesale roughly once a Multiannual Financial Framework period.
+**Do not assume every recast lines up with the 7-year MFF cycle** — that is
+a live research question per act, not a rule to apply by default (see
+`EU/prompts/GROK-PROMPT-9_legal-instrument-lineage_2026-08-08.md` for the
+first pass at it; the European Union Recovery Instrument, 2020/2094, is
+already a known exception — a one-off crisis instrument with no real
+predecessor).
+
+**This reopens prior exclusions.** Several documents across the corpus were
+dropped specifically under the old rule's exact wording — `_dropped` entries
+citing "published once is not a node" or "Periodicity: non-recurring" as the
+disqualifier. Implementing Regulation (EU) 2016/2304 (`esa2010-quality-reporting.json`)
+and the ESS Quality and Performance Indicators / Quality Glossary / DESAP
+checklist (`ess-quality-framework.json`) are the two on record so far. They
+are not retroactively minted by this edit — each still needs the same
+foundational-instrument test applied on its own merits (named, titled, and
+genuinely load-bearing, not merely mentioned) — but they are no longer
+excluded on cadence alone, and a future session should revisit them under
+this section rather than treat the old `_dropped` reasoning as settled.
 
 ### Termini — things that are named but cannot be published
 
