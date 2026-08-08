@@ -763,41 +763,55 @@ term-corra, un-census-principles, uscensus-decennial,
 uscensus-population-estimates, uscensus-poverty-thresholds
 ```
 
-**EU/Europe galaxy — backfilled `G.41.md`, updated `G.43.md`, `G.46.md`, and
-three times more on 2026-08-05 (Grok consolidation; Netherlands
-municipal-finance depth pass; United Kingdom municipal-finance depth pass,
-all same day).** 33 ids as of `G.46.md`; 85 after the Grok consolidation; 95
-after the Netherlands pass; **105 as of this update**, following a session
-that scouted Switzerland, Norway and the UK as non-EU depth-pass candidates
-and picked the UK — the corpus's first *former*-EU-member government-finance
-chain — see `src/data/research/uk-local-government-finance.json`. Extracted
-directly from the `"id"` field of every report object in
-`src/data/research/*.json` whose `country` is `EU`, one of the 27 EU member
-codes, or one of the non-EU European codes now in `COUNTRY_FAMILY`'s `XEU`
-family (`NO IS LI CH GB RS ME MK AL BA TR UA MD XK`), **plus** `oecd-icio`,
-`oecd-frascati-manual`, `nordic-statistics-database` and
-`nato-defence-expenditure` (`country: "INT"`, minted by this branch's own
-work, same treatment the Canada/US list already gives `imf-bpm6`/`sna-2008`/
-etc.) — cross-checked against `src/data/index.ts`'s import list so nothing
-recently added was missed. Use these exact strings; do not invent variants.
+**EU/Europe galaxy — regenerated in full 2026-08-08 (`G.56.md`), replacing
+the block wholesale rather than patching it.** 126 ids. History of the
+count: 33 (`G.41.md`/`G.43.md`/`G.46.md`), 85 (Grok consolidation,
+2026-08-05), 95 (Netherlands municipal-finance depth pass, same day), 105
+(United Kingdom depth pass, same day) — and then nine sessions of drift,
+flagged as stale twice (`G.53.md`, `G.55.md`) without being regenerated.
+**21 ids were missing**; none of the 105 turned out to be wrong or
+retired, so this is purely additive.
+
+Extraction method, unchanged from the 2026-08-05 pass and re-run in one
+go: every `"id"` field from every report object in
+`src/data/research/*.json` whose `country` is `EU`, one of the 27 EU
+member codes, or one of the non-EU European codes in `COUNTRY_FAMILY`'s
+`XEU` family (`NO IS LI CH GB RS ME MK AL BA TR UA MD XK`), **plus** the
+four `country: "INT"` ids minted by this branch's own work (`oecd-icio`,
+`oecd-frascati-manual`, `nordic-statistics-database`,
+`nato-defence-expenditure`), the same treatment the Canada/US list gives
+`imf-bpm6`/`sna-2008`. Cross-checked against `src/data/index.ts`: 67
+research files on disk, 67 imported, no file missing from either side, and
+no duplicate id across files. Use these exact strings; do not invent
+variants.
 
 ```
 al-instat-national-accounts, at-statistik-austria-national-accounts,
-ba-bhas-national-accounts, be-nbb-national-accounts, bg-nsi-national-accounts,
-ch-bfs-national-accounts, cy-cystat-national-accounts, cz-cnb-bop,
-cz-csu-national-accounts, de-bundesbank-financial-accounts, de-destatis-cpi,
+ba-bhas-national-accounts, be-nbb-national-accounts,
+bg-nsi-national-accounts, ch-bfs-national-accounts,
+cy-cystat-national-accounts, cz-cnb-bop, cz-csu-national-accounts,
+de-bundesbank-financial-accounts, de-destatis-cpi,
 de-destatis-labour-cost-survey, de-destatis-national-accounts,
 de-destatis-quarterly-production-survey, dk-dst-national-accounts,
-ec-statement-of-estimates, ecb-consolidated-banking-data,
-ecb-eurosystem-annual-balance-sheet,
-ecb-eurosystem-weekly-financial-statement, ecb-mfi-balance-sheet-items,
+dk-pris-og-loenforudsaetninger, ec-statement-of-estimates,
+ecb-consolidated-banking-data, ecb-eurosystem-annual-balance-sheet,
+ecb-eurosystem-weekly-financial-statement,
+ecb-insurance-corporations-assets-liabilities,
+ecb-insurance-corporations-operations,
+ecb-investment-funds-balance-sheet-statistics,
+ecb-mfi-balance-sheet-items, ecb-supervisory-banking-statistics,
 ecfin-business-consumer-surveys, ee-statistics-estonia-national-accounts,
 es-ine-national-accounts, esa-2010, esac-opinion-work-programme,
 esgab-annual-report, ess-escb-mip-quality-report,
-ess-peer-review-final-report, eu-draft-budget, eu-manual-rd-esa2010,
-eurostat-annual-work-programme, eurostat-edp-gfs-quality-report,
-eurostat-edp-notification-tables, eurostat-farm-structure-survey,
-eurostat-figaro, eurostat-hicp, eurostat-remuneration-extra-eu-interim-report,
+ess-handbook-quality-metadata-reports, ess-peer-review-final-report,
+ess-qpi-guidelines, ess-quality-assurance-framework, ess-sims,
+eu-draft-budget, eu-esif-common-provisions-regulation,
+eu-manual-rd-esa2010, eu-reg-2016-2304, eu-reg-223-2009, eu-reg-479-2009,
+eu-statistics-code-of-practice, eurostat-annual-work-programme,
+eurostat-edp-gfs-quality-report, eurostat-edp-notification-tables,
+eurostat-farm-structure-survey, eurostat-figaro, eurostat-hicp,
+eurostat-national-accounts-quality-report,
+eurostat-remuneration-extra-eu-interim-report,
 eurostat-remuneration-intra-eu-interim-report,
 eurostat-remuneration-mission-expenses-report,
 eurostat-remuneration-rent-survey, eurostat-remuneration-update-report,
@@ -805,9 +819,9 @@ eurostat-suiot, fi-statfin-national-accounts, fr-insee-base2020-methodo,
 fr-insee-esane, fr-insee-national-accounts, gb-census-2021, gb-cipfa-code,
 gb-la-ro-form, gb-mhclg-asc-rnf-annex, gb-mhclg-ro-returns,
 gb-nhs-asc-activity-finance-report, gb-ons-national-accounts,
-gb-ons-population-estimates, gb-stevenage-nndr1, gb-voa-rating-lists,
-gb-wolverhampton-statement-of-accounts, gr-elstat-national-accounts,
-hr-dzs-national-accounts,
+gb-ons-population-estimates, gb-stevenage-nndr1, gb-ukspf-prospectus,
+gb-voa-rating-lists, gb-wolverhampton-statement-of-accounts,
+gl-selvstyrelov, gr-elstat-national-accounts, hr-dzs-national-accounts,
 hu-hcso-national-accounts, ie-cso-national-accounts,
 is-hagstofa-national-accounts, it-bdi-bop, it-istat-asia-enterprises,
 it-istat-frame-sbs, it-istat-national-accounts, li-amt-statistik-vgr,
@@ -819,30 +833,50 @@ nl-bzk-toelichting-gemeentefonds, nl-cbs-gni-inventory-2010,
 nl-cbs-iv3-gemeenten, nl-cbs-maatstaven-fvw, nl-cbs-sbr, nl-cbs-sbs,
 nl-dnb-bop, nl-gemeentefonds, nl-iv3-rapportage, nl-ozb-nijmegen,
 nl-provinciefonds, nl-waarderingskamer-waarderingsinstructie, nl-wet-woz,
-no-ssb-national-accounts,
-nordic-statistics-database, oecd-frascati-manual, oecd-icio,
-pl-gus-national-accounts, pt-ine-national-accounts, ro-ins-national-accounts,
+no-kdd-gront-hefte, no-kostra-forskriften,
+no-ssb-general-government-finances, no-ssb-kostra,
+no-ssb-national-accounts, nordic-statistics-database,
+oecd-frascati-manual, oecd-icio, pl-gus-national-accounts,
+pt-ine-national-accounts, ro-ins-national-accounts,
 rs-sors-national-accounts, se-scb-national-accounts,
 si-surs-national-accounts, sk-susr-national-accounts,
 tr-turkstat-national-accounts, ua-sssu-national-accounts,
 xk-kas-national-accounts
 ```
 
-**Known stale as of `G.53.md` (2026-08-08) — not re-audited, just flagged.**
-This list was last regenerated for the 2026-08-05 depth pass and has not been
-kept current since (ids from at least `G.47.md` through `G.52.md` are
-already missing from it). Five more were added to the corpus by `G.53.md`
-and are not folded in above: `eu-reg-2016-2304`,
-`ecb-supervisory-banking-statistics`,
-`ecb-insurance-corporations-operations`,
-`ecb-investment-funds-balance-sheet-statistics`,
-`ecb-insurance-corporations-assets-liabilities`. A sixth was added
-2026-08-08 by the session after that one and is likewise not folded in:
-`ess-qpi-guidelines`. A full regeneration (same
-method as the 2026-08-05 pass: extract every `"id"` field from
-`src/data/research/*.json` whose `country` matches the EU/XEU set) is
-worth doing in one pass rather than patched incrementally — flagging rather
-than doing it here, since it touches nothing this session actually worked on.
+**The 21 additions, by source file** — four sessions' worth of minting
+plus four slices the earlier passes simply never reached:
+`ess-quality-framework.json` (`ess-handbook-quality-metadata-reports`,
+`ess-qpi-guidelines`, `ess-quality-assurance-framework`, `ess-sims`);
+`no-government-finance.json` (`no-kdd-gront-hefte`,
+`no-kostra-forskriften`, `no-ssb-general-government-finances`,
+`no-ssb-kostra`); `eurostat-edp-gfs-ecb-statistics.json` (the four
+`G.53.md` ECB series); `esa2010-quality-reporting.json`
+(`eu-reg-2016-2304`, `eu-reg-223-2009`,
+`eurostat-national-accounts-quality-report`);
+`gb-ukspf-succession.json` (`eu-esif-common-provisions-regulation`,
+`gb-ukspf-prospectus`); `edp-inventory-regulation-479-2009.json`
+(`eu-reg-479-2009`); `associated-states-government-finance.json`
+(`dk-pris-og-loenforudsaetninger`, `gl-selvstyrelov`).
+
+**Two of those are here on the mechanical rule, not because the EU branch
+minted them.** `dk-pris-og-loenforudsaetninger` and `gl-selvstyrelov` are
+`country: "DK"` and belong to the Greenland block-grant chain in the
+associated-states slice — Danish-coded, so the country filter catches
+them, but they are SAO-galaxy work. Left in, because the filter is the
+definition and hand-exceptions are how a list starts drifting again; noted
+here so nobody re-derives the surprise.
+
+**One id deliberately not folded in, flagged for Thomas rather than
+decided**: `sdmx-glossary` (`country: "INT"`, minted in
+`ess-quality-framework.json` — an EU-branch slice). It fits the "branch-
+minted `INT` id" description that puts `oecd-icio` on this list, but it
+was not on the hand-written four, and extending that hand-list is a
+judgement call, not an extraction. Same question, less clearly, for `hs`,
+`imf-fiscal-monitor`, `imf-weo` and `oecd-economic-outlook` in the
+`grok-h1-*` files. If the answer is "yes, any `INT` id a branch slice
+mints belongs on that branch's list," the rule should be written down here
+so the next regeneration is mechanical too.
 
 **Almost every one of the 85 pre-2026-08-05-depth-pass ids is the same node
 shape** — `<country> national accounts → esa-2010`, `methodology_depends_on`
