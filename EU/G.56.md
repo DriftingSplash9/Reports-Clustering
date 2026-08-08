@@ -40,7 +40,18 @@ Predecessor: `G.55.md` (2026-08-08, same day).
    is what to read; the docx is the raw form. **Do not re-derive any of
    them.** And read Finding 6 before acting on them — the three proposal
    files they review no longer exist.
-6. `G.55.md` is still the substantive predecessor for the ESS quality slice;
+6. **Sweep junk to `_to_delete/` on sight, without asking** — Thomas's
+   standing instruction, 2026-08-08: "if you just make a habit of sweeping to
+   the to delete folder I will dump it now and then so you stop looking at
+   that crap." Agents cannot delete on this machine at all (the bridge allows
+   write and move, not delete), which is why the folder exists. It is
+   gitignored, so moving a *tracked* file there registers as a deletion in
+   git — the intended effect. **Log every sweep with a dated entry in
+   `notes/sweep-log.md`, including what you deliberately did not sweep and
+   why** — not inside `_to_delete/`, which he empties (he emptied it within
+   minutes of the first sweep, taking the log with it). Relocate research material to the right folder rather than sweeping
+   it, and never sweep his personal files.
+7. `G.55.md` is still the substantive predecessor for the ESS quality slice;
    `G.52.md` is where the node rule changed; `G.51.md` is the last
    spec-conforming hand-off and the source of the spec block at the end of
    this file.
@@ -325,11 +336,19 @@ instance of MISSION-TODO-2 item 21 rather than a new bug. Folded in as item
   validator reports 391 dropped entries *in total*. The two 391s are
   unrelated. Anyone comparing them will conclude the two sources agree when
   they do not.
-- Root-directory clutter is now material: a **30 MB** German NIR PDF,
-  `SEC05.pdf` (while its siblings live in `EU/sources/`), two dead git
-  bundles from the pre-GitHub era, `diary.csv`, `country afrikans.docx`, and
-  a Word lock file `~$-open-questions_2026-08-08.docx`. The 30 MB PDF slows
-  every clone for the outside readers the repo was made public for.
+- Root-directory clutter — **found and cleared the same session.** Swept to
+  `_to_delete/`: `SEC05.pdf` (verified byte-identical to
+  `EU/sources/SEC05.pdf` by md5; the root copy was the stray) and both
+  `session-2026-08-07-*.bundle` git bundles from before the repo was
+  published, referenced by nothing. The Word lock file
+  `~$-open-questions_2026-08-08.docx` was in `notes/`, not the root, and
+  `.gitignore`'s `~$*` meant it had never been committed. **Relocated rather
+  than swept**: the 30 MB `germany-national-inventory-report-nir-2026…pdf`
+  → `EU/sources/`, because it is a UNFCCC greenhouse-gas National Inventory
+  Report and plausible future material for the emissions chain in its EU
+  form. That also removes the clone-size penalty for the outside readers the
+  repo was made public for. `diary.csv`, `country afrikans.docx` and
+  `notes/country.docx` are Thomas's own files and were left alone.
 - `MISSION-TODO-2.md`'s numbering now runs `4a, 4b, … 9z, 9z, … 23b, 23a`.
   Harmless to read, annoying to cite.
 

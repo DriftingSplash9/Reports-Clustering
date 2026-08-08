@@ -7,8 +7,9 @@ grouped by who can do it and how big it is. It is not a replacement for
 each item, and its numbering is referenced from branch hand-offs. This is
 the index you read to decide what to pick up.
 
-**Total: 51 threads, of which 2 were closed as this file was written**
-(1.4 and 1.6 — see below). 5 are yours alone. 14 are housecleaning. The
+**Total: 51 threads, of which 4 were closed the day it was written**
+(1.4, 1.6, 1.9 and part of 1.12 — see below), and one (0.3) was absorbed
+into the standing sweep habit. 5 are yours alone. 14 are housecleaning. The
 rest is real work, and most of it is not urgent.
 
 Format: `[size]` is rough — **XS** minutes, **S** under an hour, **M** part
@@ -21,8 +22,8 @@ of a session, **L** a whole session, **XL** more than one.
 | # | Thread | Size | Blocks |
 |---|---|---|---|
 | 0.1 | **The two stuck commits (`8295de1`, `b41bee9`)** and the `.git/*.lock.stale*` pile-up (25+ files, none deletable through the bridge). Close GitHub Desktop, delete every `*.lock.stale*` plus any `index.lock`/`HEAD.lock` in `.git`, reopen, retry. | S | nothing downstream, but it's noise on every commit |
-| 0.2 | **Empty `_to_delete/`.** The folder exists only because the device bridge can move files but cannot delete them. | XS | tidiness |
-| 0.3 | **Delete `~$-open-questions_2026-08-08.docx`** — a Word lock file, committed by accident. | XS | tidiness |
+| 0.2 | **Empty `_to_delete/` whenever you feel like it.** Standing, not a task: agents cannot delete on this machine, so junk lands there instead of being raised with you. You emptied it within minutes of the first sweep, so the durable record of what was swept and why lives in `notes/sweep-log.md`, not inside the folder. | XS | nothing |
+| 0.3 | ~~Delete `~$-open-questions_2026-08-08.docx`~~ — **swept to `_to_delete/` 2026-08-08.** It was in `notes/`, not the root, and `.gitignore`'s `~$*` meant it was never committed. Nothing to do but empty the folder. | — | closed |
 | 0.4 | **Decide: does `sdmx-glossary` belong on §9's EU id list?** It is `country: "INT"` but was minted by an EU-branch slice, which is the same argument that puts `oecd-icio` there. Same question, weaker, for `hs`, `imf-weo`, `imf-fiscal-monitor`, `oecd-economic-outlook`. Answering it makes the next regeneration fully mechanical. | XS | §9 stays a judgement call otherwise |
 | 0.5 | **Decide: add an `insurance` `Domain` value?** Two ECB nodes are tagged `financial-regulation` for want of it (`G.53.md`). Also standing: the three adopted-but-unadded tags `research-innovation` / `agriculture` / `external-action` go in with their first tagged node, not before. | XS | cosmetic until File C returns |
 
@@ -101,14 +102,18 @@ gone; fourteen of your answers now review artefacts that no longer exist.
 The rule: **a draft not in the repo does not exist.** An unimported file in
 the working tree costs nothing.
 
-**1.9 — Root-directory clutter.** `[S]` Sitting in the project root:
-`germany-national-inventory-report-nir-2026_…pdf` (**30 MB**), `SEC05.pdf`
-(0.9 MB, while its siblings live properly in `EU/sources/`), two
-`session-2026-08-07-*.bundle` files (git bundles from the pre-GitHub era —
-the repo is published now, so they are dead weight), `diary.csv`,
-`country afrikans.docx`. Decide per file: `EU/sources/`, `archive/`, or
-gone. The 30 MB PDF in particular makes every clone slower for the outside
-readers the repo was made public for.
+**1.9 — Root-directory clutter. — DONE 2026-08-08.** `[S]` Swept to
+`_to_delete/`: `SEC05.pdf` (verified byte-identical to `EU/sources/SEC05.pdf`
+by md5 — the root copy was the stray) and both
+`session-2026-08-07-*.bundle` files (git bundles from before the repo was
+published; referenced by nothing). **Relocated, not swept**: the 30 MB
+`germany-national-inventory-report-nir-2026…pdf` → `EU/sources/germany-national-inventory-report-nir-2026.pdf`
+— it is a UNFCCC greenhouse-gas National Inventory Report and plausible
+future material for the emissions chain in its EU form, so it keeps its
+place as a source document, just not in the root. That also removes the
+clone-size penalty for outside readers. **Left alone, deliberately**:
+`diary.csv` and `country afrikans.docx` look like your own files, unrelated
+to the project — say the word and they go too.
 
 **1.10 — Three superseded planning files still on disk.** `[XS]`
 `planning/MISSION-TODO.md` (1.0, superseded), `planning/rolling-todo.md`
@@ -123,10 +128,12 @@ contains `4a`, `4b`, two consecutive items both numbered `9z`, and `23b`
 printed before `23a`. Harmless to read, annoying to reference. Renumber
 once, or accept it and stop appending letters.
 
-**1.12 — Stale docx artefacts in `notes/`.** `[XS]` `notes/g.55.docx`,
-`notes/Questions-for-Thomas.docx`, `notes/country.docx` — the first two look
-like superseded working copies of things now in Markdown. Confirm and
-archive.
+**1.12 — Stale docx artefacts in `notes/`.** `[XS]` The Word lock file is
+swept. Remaining: `notes/g.55.docx` and
+`notes/Questions-for-Thomas.docx` look like superseded working copies of
+things that now exist as Markdown — **needs one word from you and they go**;
+they were not swept because "looks superseded" is not the same as "is".
+`notes/country.docx` is yours and stays.
 
 **1.13 — Staging batches 53 and 54 are byte-identical duplicates.** `[XS]`
 So `01-manifest.json`'s remaining count is one higher than the real one.
@@ -234,6 +241,18 @@ Kadaster/BRK node is explicitly not-yet-minted).
 5.4 **EU**: two documented conflicts opened and deliberately unresolved, per `Research.1.md` §3 — the German EDP inventory quoting its own Regulation in superseded "ESA 95" wording, and the Code of Practice "complementing" a Regulation that asserts authority over it. Both are correctly *not* adjudicated; listed so they are not mistaken for oversights. `[—]`
 
 ---
+
+## Standing habits, not tasks
+
+- **Junk goes to `_to_delete/` on sight, without asking** (your instruction,
+  2026-08-08). Duplicates verified by hash, Word lock files, dead bundles,
+  stale locks, superseded generated artefacts. Every sweep gets a dated entry in
+  `notes/sweep-log.md` — **not** inside `_to_delete/`, which gets emptied —
+  including what was *not* swept and why. Research material gets **relocated** to the right folder, never
+  swept. Your personal files are never swept without being told.
+- **Agents cannot delete on this machine at all** — the device bridge allows
+  write and move, not delete. That is the whole reason `_to_delete/` exists,
+  and also why the `.git` lock files piled up.
 
 ## What is NOT open, so nobody reopens it
 

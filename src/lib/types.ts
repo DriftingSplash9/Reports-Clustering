@@ -251,6 +251,7 @@ export type Domain =
   | 'banking'
   | 'financial-regulation'
   | 'construction'          // added 2026-08-07 (Thomas): building/construction releases; first customer au-abs-building-approvals
+  | 'insurance'             // added 2026-08-08 (Thomas, OPEN-THREADS 0.5): splits off financial-regulation for insurance-specific series; first customers ecb-insurance-corporations-operations, ecb-insurance-corporations-assets-liabilities
 
 /**
  * How one report depends on another.

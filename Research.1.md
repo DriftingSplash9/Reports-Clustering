@@ -577,19 +577,21 @@ isn't a node yet), `deferred`, `note`.
 `domains`: `inflation`, `labour`, `monetary-policy`, `national-accounts`,
 `benefits`, `interest-rates`, `municipal-finance`, `education`, `post-secondary`,
 `health`, `fiscal-transfers`, `population`, `taxation`, `assessment`,
-`energy-royalties`, `banking`, `financial-regulation`, `construction`. If
-nothing fits, say so in Part A — the list can be extended, but only at the
-other end.
+`energy-royalties`, `banking`, `financial-regulation`, `construction`,
+`insurance`. If nothing fits, say so in Part A — the list can be extended,
+but only at the other end.
 
 **Three further values are adopted but not yet added**: `research-innovation`,
 `agriculture` and `external-action` (Thomas, 2026-08-08, open-questions D1 —
 "name as is"). They have no customers until the held EU legal-instrument
 lineage work is rebuilt and verified, so they go into the `Domain` union in
 `src/lib/types.ts` and into this list **in the same commit as their first
-tagged node**, not before. An `insurance` value is wanted and *not* decided —
+tagged node**, not before. `insurance` was the same kind of pending value —
 `ecb-insurance-corporations-operations` and
-`ecb-insurance-corporations-assets-liabilities` are both tagged
-`financial-regulation` for want of it (`G.53.md`).
+`ecb-insurance-corporations-assets-liabilities` were both tagged
+`financial-regulation` for want of it (`G.53.md`) — and is now **decided and
+added** (Thomas, 2026-08-08, OPEN-THREADS 0.5): both nodes retagged
+`insurance` in `eurostat-edp-gfs-ecb-statistics.json`.
 
 ---
 
@@ -793,13 +795,15 @@ uscensus-population-estimates, uscensus-poverty-thresholds
 ```
 
 **EU/Europe galaxy — regenerated in full 2026-08-08 (`G.56.md`), replacing
-the block wholesale rather than patching it.** 126 ids. History of the
-count: 33 (`G.41.md`/`G.43.md`/`G.46.md`), 85 (Grok consolidation,
-2026-08-05), 95 (Netherlands municipal-finance depth pass, same day), 105
-(United Kingdom depth pass, same day) — and then nine sessions of drift,
-flagged as stale twice (`G.53.md`, `G.55.md`) without being regenerated.
-**21 ids were missing**; none of the 105 turned out to be wrong or
-retired, so this is purely additive.
+the block wholesale rather than patching it.** 127 ids (126 from the
+regeneration pass, plus `sdmx-glossary`, added the same day once Thomas
+ruled on it — see below). History of the count: 33 (`G.41.md`/`G.43.md`/
+`G.46.md`), 85 (Grok consolidation, 2026-08-05), 95 (Netherlands
+municipal-finance depth pass, same day), 105 (United Kingdom depth pass,
+same day) — and then nine sessions of drift, flagged as stale twice
+(`G.53.md`, `G.55.md`) without being regenerated. **21 ids were missing**;
+none of the 105 turned out to be wrong or retired, so this is purely
+additive.
 
 Extraction method, unchanged from the 2026-08-05 pass and re-run in one
 go: every `"id"` field from every report object in
@@ -867,7 +871,7 @@ no-ssb-general-government-finances, no-ssb-kostra,
 no-ssb-national-accounts, nordic-statistics-database,
 oecd-frascati-manual, oecd-icio, pl-gus-national-accounts,
 pt-ine-national-accounts, ro-ins-national-accounts,
-rs-sors-national-accounts, se-scb-national-accounts,
+rs-sors-national-accounts, sdmx-glossary, se-scb-national-accounts,
 si-surs-national-accounts, sk-susr-national-accounts,
 tr-turkstat-national-accounts, ua-sssu-national-accounts,
 xk-kas-national-accounts
@@ -896,16 +900,15 @@ them, but they are SAO-galaxy work. Left in, because the filter is the
 definition and hand-exceptions are how a list starts drifting again; noted
 here so nobody re-derives the surprise.
 
-**One id deliberately not folded in, flagged for Thomas rather than
-decided**: `sdmx-glossary` (`country: "INT"`, minted in
-`ess-quality-framework.json` — an EU-branch slice). It fits the "branch-
-minted `INT` id" description that puts `oecd-icio` on this list, but it
-was not on the hand-written four, and extending that hand-list is a
-judgement call, not an extraction. Same question, less clearly, for `hs`,
+**Decided 2026-08-08 (Thomas, OPEN-THREADS 0.4)**: `sdmx-glossary`
+(`country: "INT"`, minted in `ess-quality-framework.json` — an EU-branch
+slice) is **added** to the list above, on the same "branch-minted `INT`
+id" reasoning that puts `oecd-icio` there. The weaker case — `hs`,
 `imf-fiscal-monitor`, `imf-weo` and `oecd-economic-outlook` in the
-`grok-h1-*` files. If the answer is "yes, any `INT` id a branch slice
-mints belongs on that branch's list," the rule should be written down here
-so the next regeneration is mechanical too.
+`grok-h1-*` files — is **not** added. This was not decided as a general
+rule ("any `INT` id a branch slice mints belongs on that branch's list");
+it was decided case by case, so it stays a judgement call at the next
+regeneration too, not a mechanical extraction.
 
 **Almost every one of the 85 pre-2026-08-05-depth-pass ids is the same node
 shape** — `<country> national accounts → esa-2010`, `methodology_depends_on`
