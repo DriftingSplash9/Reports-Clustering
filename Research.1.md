@@ -92,10 +92,13 @@ national accounts, structural business statistics, labour-force aggregates and
 fiscal-surveillance indicators used by the Commission, the Council and the
 member states should be visible the same way.
 
-**As of `G.39.md` (2026-08-05), the corpus holds 150 reports and 220
-dependencies** — no longer just Canadian federal and Alberta material plus a
-US federal cluster and international standards, but a genuine second galaxy:
-the EU branch, Eurostat, the European Central Bank/ESCB, DG ECFIN, one member
+**As of the 2026-08-08 validator run the corpus holds 372 reports, 436
+dependencies and 3 relations** (`validator-2026-08-08.txt`, run on Windows
+by Thomas — the validator cannot run through the device bridge). The
+paragraph below describes the shape it took when it first became two
+galaxies, at 150 reports and 220 dependencies (`G.39.md`, 2026-08-05) — no
+longer just Canadian federal and Alberta material plus a US federal cluster
+and international standards, but a genuine second galaxy: the EU branch, Eurostat, the European Central Bank/ESCB, DG ECFIN, one member
 state (Germany) with a second (Luxembourg) begun, and Section III of the EU's
 own Draft Budget, partially sampled.
 
@@ -318,9 +321,19 @@ adjudicating it rather than have it decided by proxy. It is not retroactively
 minted by this edit — it still needs the same foundational-instrument test
 applied on its own merits (named, titled, and genuinely load-bearing, not
 merely mentioned) — but a future session should revisit it under this
-section rather than treat the old `_dropped` reasoning as settled. The
-broader sweep (the other 391 dropped entries not closely checked) remains
-queued.
+section rather than treat the old `_dropped` reasoning as settled. **The
+broader sweep is no longer merely queued — Thomas ruled on 2026-08-08
+(`notes/Decisions-2026-08-08_EU-open-questions.md`, D3) that a dedicated
+sweep is the next task "before going further", ahead of new-country
+research.** `G.53.md` read 25 entries in full out of the ~416 then on
+file; the rest have never been individually read. **Scope it from the
+validator, not from prose**: the 2026-08-08 run reports 391 dropped
+entries of which **122 "are research leads rather than answers — evidence
+described as existing, node or pass missing"**, and breaks them down by
+reason (87 `no-node-yet`, 72 `no-document` are the two to start with). Do
+it file-by-file over the ~15 files with the most `_dropped` entries,
+reading each array in full; **do not run another keyword pass** — the
+third category above is invisible to one by construction.
 
 ### Termini — things that are named but cannot be published
 
@@ -564,8 +577,19 @@ isn't a node yet), `deferred`, `note`.
 `domains`: `inflation`, `labour`, `monetary-policy`, `national-accounts`,
 `benefits`, `interest-rates`, `municipal-finance`, `education`, `post-secondary`,
 `health`, `fiscal-transfers`, `population`, `taxation`, `assessment`,
-`energy-royalties`, `banking`, `financial-regulation`. If nothing fits, say so in
-Part A — the list can be extended, but only at the other end.
+`energy-royalties`, `banking`, `financial-regulation`, `construction`. If
+nothing fits, say so in Part A — the list can be extended, but only at the
+other end.
+
+**Three further values are adopted but not yet added**: `research-innovation`,
+`agriculture` and `external-action` (Thomas, 2026-08-08, open-questions D1 —
+"name as is"). They have no customers until the held EU legal-instrument
+lineage work is rebuilt and verified, so they go into the `Domain` union in
+`src/lib/types.ts` and into this list **in the same commit as their first
+tagged node**, not before. An `insurance` value is wanted and *not* decided —
+`ecb-insurance-corporations-operations` and
+`ecb-insurance-corporations-assets-liabilities` are both tagged
+`financial-regulation` for want of it (`G.53.md`).
 
 ---
 
@@ -670,6 +694,11 @@ number of documented direct CA↔US edges is one. The Fed's H.15 footnotes and
 the US Treasury daily par yield curve are worth doing if you get here.
 
 ### EU galaxy
+
+**Item 4a — the corpus-wide `_dropped` sweep, before Items 5–9.** Thomas's
+2026-08-08 ruling (D3, see §4). Not a research item and not optional
+ordering: 391 entries unread, method constrained as §4 describes. Full
+scoping in `planning/MISSION-TODO-2.md` P1 item 4a.
 
 **Item 5 — Eurostat's own structural publications.** The Statistical
 Requirements Compendium and its data-requirement tables; the ESA 2010

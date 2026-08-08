@@ -8,11 +8,18 @@ MISSION-TODO 1.0's surviving items, `AU/G.3.md` (today's Victoria pass),
 `NZ/G.4.md`, `EU/G.49.md`, `research-input/Grok-Research-Brief-XI.md` items
 25/27/28, and the corpus itself.
 
-**State of the corpus as this is written**: 354 reports / 415 dependencies /
-3 relations — **updated 2026-08-07 after the NZ G.5 and EU G.50 sessions:
-363 reports / 429 dependencies / 3 relations** (Niue and Tokelau `audits`, UKSPF `supersedes`). `npm run check`
-and `npm run validate` both exit 0 — and a red validator now FAILS (exit 1)
-by design; never ignore one. The repo is a PUBLIC GitHub repo
+**State of the corpus** — **372 reports / 436 dependencies / 3 relations,
+measured 2026-08-08** by an actual validator run (Thomas, locally; full
+output `validator-2026-08-08.txt`). Earlier figures for the record: 354/415
+as this file was written, 363/429 after the NZ G.5 and EU G.50 sessions.
+**`npm run validate` is GREEN as of 2026-08-08 — zero ✗, all eight
+behavioural checks pass.** That closes the check that had been outstanding
+since the 2026-08-08 schema change, which no agent session could run
+(esbuild win32/linux mismatch through the device bridge — an environment
+limit, not a code one; it must be run on Windows). A red validator FAILS
+(exit 1) by design; never ignore one. The 25 warnings are all
+"no edges in either direction" and are expected — see the note under P1
+item 4a. The repo is a PUBLIC GitHub repo
 (github.com/DriftingSplash9/Reports-Clustering — public for a while, Thomas
 confirmed 2026-08-07); origin/main was in sync as of 1.0's publication entry,
 Git policy is now standing (2026-08-07): sessions commit and push their own
@@ -29,6 +36,17 @@ branch file it names, and go. Do not start two branches in one session.
 
 ## P0 — Decisions only Thomas can make (each is minutes of his time and
 blocks concrete work; ask at the top of any session he is present for)
+
+*A second batch was answered via `notes/EU-open-questions_2026-08-08.docx`,
+returned 2026-08-08 — **all fourteen answers are recorded in
+`notes/Decisions-2026-08-08_EU-open-questions.md`**, which is what to read;
+the docx itself is the raw form. Consequences are folded into the items they
+govern: the corpus-wide `_dropped` sweep is now P1 item 4a (D3), the four
+UI/filter additions are P3 item 23a (D4, not greenlit), and the three new
+domain tags are adopted-but-deferred (D1). **Note the loss recorded there:
+the three proposal files those answers review no longer exist** — `G.52.md`
+left them in a sandbox `/tmp`. Files A and B have to be re-researched to the
+rulings; File C is held pending verification anyway.*
 
 *All four below were answered via `planning/Decisions-2026-08-07.docx`
 (returned same day). Three further decisions from that doc are folded into
@@ -68,10 +86,71 @@ notes at the bottom.*
    from data, so nothing else needed touching. Future construction/housing
    releases (housing starts, NZ building consents) use it too.
 
+5. **The two stuck commits (`8295de1`, `b41bee9`) — Thomas only.**
+   Reported 2026-08-08 (open-questions D5): "the last 2 commits are giving
+   me troubles. Idk what to do." **No agent may run a git command here**
+   (Research.1.md §2 — git on this repo cannot unlink its own
+   `index.lock`, so even `git status` leaves a fresh stale lock). The
+   likely cause is on record: `G.53.md` counted 25+ `.git/*.lock.stale*`
+   files accumulated across sessions, none deletable through the device
+   bridge, plus a live `index.lock`. Fix is manual, in File Explorer and
+   GitHub Desktop: delete everything matching `.git/*.lock.stale*` and any
+   `.git/index.lock` / `.git/HEAD.lock`, with GitHub Desktop closed, then
+   retry the commit. An agent can advise from what Thomas reports seeing;
+   it cannot look.
+
 ---
 
 ## P1 — Branch frontiers (each is one good session; read the named G-file
 first, in full)
+
+4a. **THE CORPUS-WIDE `_dropped` SWEEP — do this before any new-country
+    research.** Thomas, 2026-08-08 (open-questions D3): "its worth a
+    dedicated sweep next before going further." Scope: 416 `_dropped`
+    entries across 66 files; **391 have never been individually read.**
+    `G.53.md` did a keyword pass and read 25. **Do not repeat the keyword
+    pass** — `G.55.md` proved it is blind to the largest remaining class:
+    entries wrongly dropped on too narrow a search, whose stated reason
+    reads perfectly sound until the source is reopened (Research.1.md §4,
+    third category — the ESS QPI Guidelines were sitting behind "no second
+    edition found" after a search confined to one webpage and a foreword).
+    Method: go file-by-file over the ~15 files with the most `_dropped`
+    entries and read each array in full. When an entry's blocker is
+    NOT FOUND or "no cadence stated", check *what was actually searched*
+    before accepting it — a foreword, a webpage and a PDF body are three
+    different searches.
+    **The validator already scopes this better than any prose estimate**
+    (`validator-2026-08-08.txt`, DROPPED section): 391 dropped entries, of
+    which **122 "are research leads rather than answers — evidence
+    described as existing, node or pass missing"**. That 122 is the real
+    work-list. By reason: 112 `note`, **87 `no-node-yet`**, **72
+    `no-document`**, 35 `deferred`, 29 `unpublishable-source`, 24 `denied`,
+    16 `wrong-target`, 10 `caveat`, 4 `wrong-direction`, 2
+    `unreadable-source`. Start with `no-node-yet` (documented but one end
+    wasn't a node — the category the loosened node rule most directly
+    unblocks) and `no-document` (the category §4's third lesson says is
+    least trustworthy on its stated reason). Re-run the validator after the
+    sweep: the two counts moving is the measure of whether it worked. Two specific entries are already known-open:
+    Commission Recommendation (EU) 2023/397 in `eu-meta-docx-batches.json`
+    (soft law, deliberately deferred by Thomas, needs the
+    foundational-instrument test on its own merits) and the 52 entries the
+    broad-but-not-tight keyword pass caught and nobody read.
+
+4b. **Rebuild proposal Files A and B to the 2026-08-08 rulings.** The
+    drafts are gone (see the P0 header note). File A (German EDP + GNI
+    inventories, German public-debt statistics): rebuild with the EDP
+    inventory as **two dated nodes**, Dec 2015 and Oct 2025, each with its
+    own `releases_per_year` justification, and the 'ESA 95' wording
+    inconsistency recorded as a `note` only. File B (DE/IE
+    national-accounts quality reports): **Germany only** — Ireland is held
+    until its 2018 PDF is actually opened, and the Ireland → `esa-2010`
+    edge is approved in principle but still needs the Irish methodology
+    section read. The Destatis → own-release edge is `cites` (settled).
+    Worth re-deriving rather than trusting this summary: the original
+    Wayback corroboration and the Luxembourg/Netherlands colophon finding
+    (`Publications Office of the European Union` / `ISBN 978-92-` prefix =
+    a hosted copy of Eurostat's report, not a national document) survive
+    only as prose in `G.52.md`.
 
 5. **EU — the blob's judgment half. STARTED 2026-08-07 (`EU/G.50.md`), two
    further passes the same day (S1 and S2): 26 of 73 batches built, 47 remain —
@@ -380,10 +459,17 @@ raid this list when a session has capacity left)
     Same file, second task: its no-argument mode only scans `EU/`
     (hardcoded `BRANCHES`) — add AU and NZ, and remember to add any new
     branch folder when a new galaxy opens.
-20. **Backfill `Research.1.md` §9's id lists by re-extraction.** The AU
-    list is stale (11 ids on file; 19 exist after the Victoria pass), and
-    the NZ list predates the Stats NZ national-accounts pass (+5 nodes)
-    and Norway. §9's own instruction: re-run the extraction (report
+20. **Backfill `Research.1.md` §9's id lists by re-extraction.**
+    **EU/Europe half DONE 2026-08-08 (`G.56`)** — regenerated in one pass,
+    105 → 126 ids, block replaced wholesale, cross-checked against
+    `src/data/index.ts` (67 files, 67 imports, no duplicate ids). Two
+    judgement calls surfaced there for Thomas rather than decided: two
+    `country: "DK"` Greenland-chain ids now land on the EU list by the
+    mechanical filter, and `sdmx-glossary` (`INT`, minted by an EU slice)
+    was deliberately *not* folded in. **Still to do: the AU and NZ lists.**
+    The AU list is stale (11 ids on file; 19 exist after the Victoria
+    pass), and the NZ list predates the Stats NZ national-accounts pass
+    (+5 nodes) and Norway. §9's own instruction: re-run the extraction (report
     objects by `country` across `src/data/research/*.json`), never append
     by hand.
 21. **Isolated-node shelving inconsistency** (1.0 item 15): the 3D view
@@ -399,6 +485,33 @@ raid this list when a session has capacity left)
     `supersedes`). The agreed shape when the threshold is hit: Option C's
     fuller form — hover card + search + a distinct unweighted line style
     (`NZ/G.3.md`–`G.4.md` have the discussion).
+
+23b. **The 25 isolated-node warnings, and one real disagreement in them.**
+    From `validator-2026-08-08.txt`. Most are simply nodes minted without
+    edges yet — including all four ECB series `G.53.md` added, which
+    currently contribute nothing to the graph and are cheap inbound-edge
+    follow-ups. But two, `gb-ukspf-prospectus` and
+    `eu-esif-common-provisions-regulation`, are joined to each other by the
+    corpus's only `supersedes` relation and *still* report "no edges in
+    either direction". That is the schema working as designed (relations
+    never reach `buildGraph`, and the validator confirms it: "✓ relations
+    never reach buildGraph"), but it means the shelving logic and the
+    relation model disagree about what "connected" means. Fold into item 21
+    rather than treating it as a new bug.
+
+23a. **Four UI/filter additions — NOT greenlit, parked by decision.**
+    Thomas, 2026-08-08 (open-questions D4): "leave the idea for now, just
+    add to the to do list." Listed so they are not re-proposed as new
+    ideas: (a) a **domain filter** — `domains` is populated on every node
+    and completely unused in the UI (`src/lib/filter.ts`,
+    `ViewControls.tsx`); (b) a **rendering path for `supersedes`/`audits`**
+    in `InfluenceGraph.tsx`, which currently has none at all — overlaps
+    item 23, which sets the five-relation threshold; (c) an
+    **evergreen-node visual treatment** for the one-off foundational
+    shape (`releases_per_year` absent — `App.tsx`'s `Detail` already says
+    "once, as a standing instrument", the graph shows nothing); (d)
+    **relationship-type and cadence-range filters**. Do not start any of
+    these without Thomas saying so.
 
 ---
 
