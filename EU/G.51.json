@@ -1,0 +1,149 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.51.md",
+  "number": 51,
+  "title": "G.51.md — EU galaxy hand-off",
+  "date": "2026-08-07",
+  "governing_briefs": "`Research.1.md` v3.3 — not re-read line by line this",
+  "predecessor": "G.50.md (2026-08-07). Same day — this is the prose-section",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The prose section is done, not partial: 399 of 399 Part A entries\nchecked, 395 verified word-for-word against primary sources, 0 mismatches,\n0 not-founds, 1 real citation error caught (wrong article number, right\nquote).** Both blockers G.50-era planning assumed were still open — EUR-Lex\nbeing down, the SEC PDFs being missing — turned out to already be resolved\nbefore this session started. All three P2 cheap checks (9z, 9a, 9b) also\nresolved, one fully negative-for-two/positive-for-two, one fully positive,\none partial. **Nothing from any of this is in the data graph yet** — per\nthe standing review-gate decision, this session's whole output is findings\nfiles for Thomas to review before anything is imported. The corpus is\nunchanged at 366 reports / 434 dependencies / 3 relations; `npm run\nvalidate` exits 0.",
+  "findings": [
+    {
+      "heading": "1. The prose section's stated blockers were both already cleared",
+      "body": "`MISSION-TODO-2.md`'s P1 item 5 read \"blocked on one of two things: EUR-Lex\nserving again... and the SEC PDFs being re-uploaded... without them the\nsession can catalogue but not mint.\" Neither was true by the time this\nsession ran: EUR-Lex returned the ECB Guideline cleanly, and all eleven\n`SEC00.pdf`–`SEC10.pdf` files (not just the seven actually cited) were\nalready sitting in `EU/sources/`, real content, not stubs. It is not known\nfrom this session when they were re-uploaded or by whom. Whoever did it\nshould get credit — it is what made the 40-minutes-of-nothing retry finish\nin one pass."
+    },
+    {
+      "heading": "2. One real citation error, caught by verifying instead of trusting the extractor",
+      "body": "Block A entry A19 (`EU/prose-verification-list.md`) cites Art. 6(6)(a) of\nGuideline (EU) 2015/510 for a \"business day\" definition. The quoted text is\naccurate — but Article 6 is \"Main refinancing operations\" and has nothing\nto do with business-day definitions. The actual location is Art. 2(6)(a).\n**Rests on**: my own read of the live EUR-Lex consolidated text, not the\nstaged record. Full detail in `EU/prose-verification-RESULTS_2026-08-07.md`."
+    },
+    {
+      "heading": "3. 9z — two NSIs publish, two near-misses, one clean negative",
+      "body": "Germany (Destatis) and Ireland (CSO) both voluntarily publish their own\nESA 2010 national-accounts quality report, each with multiple dated\neditions — a cadence, and a node, is derivable for both. Luxembourg\n(STATEC) and the Netherlands (CBS) each surfaced a page that looks like a\nnational report; opening the PDF in both cases showed an ISBN /\nPublications-Office colophon and a Eurostat product code (KS-FT-...) — a\nhosted copy of Eurostat's own report, not a national document. Flagging\nthis explicitly so a future session doesn't re-claim them as hits. France\n(INSEE): nothing found. **Rests on**: my own read of each PDF's title page,\nnot a summary of the search results. Detail: `EU/cheap-checks-9z-9a-9b_2026-08-07.md`."
+    },
+    {
+      "heading": "4. 9a — a newer German EDP inventory edition exists, and CIRCABC's URLs are not stable per country",
+      "body": "A live browser session against CIRCABC found a \"Germany, October 2025\"\nedition (188pp), newer than the known December 2015 copy (170pp, served via\nDestatis) — two dated editions now exist, which is what the cadence\nquestion needed. **The exact URL on file in `MISSION-TODO-2.md` now\nresolves to a Denmark document, not Germany's** — CIRCABC's node/library IDs\nare evidently not stable per-country identifiers over time. The German\nentry had to be found by browsing the folder tree by name, not by reusing\nthe recorded URL. Add this to the branch's site-behaviour list: CIRCABC\nURLs age out."
+    },
+    {
+      "heading": "5. 9b — three of five found; two Finanzagentur items look genuinely uncitable",
+      "body": "Live URLs found for Destatis's quarterly and annual debt statistics and the\nBundesbank's \"Statistik über Wertpapierinvestments.\" The two Deutsche\nFinanzagentur items (Statistik der Bundesschuld; the Schuldscheindarlehen\nreport by creditor class) do not exist under those titles anywhere findable\non Finanzagentur's current site. A full-text search of Finanzagentur's own\nKreditaufnahmebericht PDF found them appearing only as line items inside\nthat other public report — suggesting they may be internal administrative\nreturns that were named in Germany's EDP inventory but never had their own\npublic-facing page. Recorded as a probable dead end, not a retrieval\nfailure — a future session shouldn't keep searching the same way."
+    },
+    {
+      "heading": "6. The device bridge can move commits across, but cannot finish a merge — refines G.50's push-only finding",
+      "body": "G.50 recorded that the cloud sandbox's git proxy blocks pushes to this repo\n(HTTP 403, \"not in this session's authorized repository set\") and that\n`device_bash` has no network, so the fix is: commit in the container, bundle\nthe new commits, transfer the bundle to the device, `git fetch <bundle>\nHEAD:<branch>` there, and let Thomas finish the push natively. That much\nstill works exactly as G.50 described — the fetch succeeds and the commits\nland as a local ref on the device, no network needed for that step.\n**What's new this session**: attempting to go one step further and run\n`git merge --ff-only <branch>` *through the device bridge itself* fails,\nbecause the bridge's filesystem access is read/write but cannot unlink\nexisting files — and completing a merge that changes an already-tracked\nfile (in this case `planning/MISSION-TODO-2.md`) requires an unlink-and-\nrewrite, which the bridge's permission model refuses (\"Operation not\npermitted\"). The failure is recoverable (renaming, not deleting, the stray\nlock files it leaves behind works fine, and `git status` afterward showed a\nclean, undamaged `main` at the pre-merge commit) but it means **the merge\nstep, not just the push step, has to happen in a normal terminal or GitHub\nDesktop on Thomas's machine — not through this bridge.** Worth stating\nplainly so the next session doesn't spend time trying to automate it\nfurther."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`MISSION-TODO-2.md`'s P1 item 5 blocker note was overtaken by events, not wrong when written.** It said the prose section was blocked on EUR-Lex and the SEC PDFs; both were already resolved by the time this session ran (Finding 1). Status: **resolved**, not refuted — the note was accurate when G.50-era planning wrote it. Updated in place in `MISSION-TODO-2.md` per this session (the file's own convention allows status notes prepended to backlog items; the original item text is kept below each note for context, per the file's existing pattern elsewhere)."
+    },
+    {
+      "n": 2,
+      "text": "No claim in `G.50.md` itself was found wrong this session — this session's material (the ECB Guideline, the EU Draft Budget sections, the three P2 checks) doesn't overlap with what G.50 minted, so nothing in G.50's own findings was re-tested."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Institutional sections. Closed.",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "SEC03 meta backlog.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Independent ECB/Eurosystem threads.",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "Housekeeping.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "Everything the blob split created.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The German sub-graph. Opened, not closed.",
+      "items": []
+    },
+    {
+      "letter": "G",
+      "label": "The wide-Europe depth pass.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Re-extract `Research.1.md` §9's EU id list (now further stale by whatever this session's findings add once minted)."
+    },
+    {
+      "n": 2,
+      "text": "Open SWD(2024) 136, the ESS peer-review final report."
+    },
+    {
+      "n": 3,
+      "text": "~~Retry EUR-Lex once~~ — moot; this session used it live for Block A with no issues, on top of G.50's own confirmed retry."
+    },
+    {
+      "n": 4,
+      "text": "The Catalogue of ESS standards — still unopened."
+    },
+    {
+      "n": 5,
+      "text": "SIMS Guidelines v2.0 (2019) — still unopened. **New from this session:**"
+    },
+    {
+      "n": 6,
+      "text": "Import the prose-section verification results.** 395 verified entries in `EU/prose-verification-RESULTS_2026-08-07.md`, ready to convert into report/dependency JSON once Thomas has reviewed them — correct the A19 location (Finding 2) rather than propagating it."
+    },
+    {
+      "n": 7,
+      "text": "CIRCABC URLs age out — do not trust a recorded CIRCABC link without re-browsing.** Add to the branch's known-site-behaviour list formally (currently only noted here and in `MISSION-TODO-2.md`'s 9a status note)."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file (`G.51.md`)** and **`G.50.md`** behind it."
+    },
+    {
+      "n": 2,
+      "text": "`planning/MISSION-TODO-2.md`** — read the updated P1 item 5 and P2 9z/9a/9b status notes first; they point at the two new files below."
+    },
+    {
+      "n": 3,
+      "text": "`EU/prose-verification-RESULTS_2026-08-07.md`** — the 399-entry verification record, ready for import review."
+    },
+    {
+      "n": 4,
+      "text": "`EU/cheap-checks-9z-9a-9b_2026-08-07.md`** — the three findings."
+    },
+    {
+      "n": 5,
+      "text": "`EU/sources/SEC00.pdf`–`SEC10.pdf`** — confirmed present and real; stop assuming they need re-uploading. **Git state: NOT resolved, and this is the part a new session must handle correctly.** This session's four commits (`0a2f219`, `caa33b9`, `6cf9505`, `e412bde`) plus this hand-off's own commit are on `main` in the cloud container but not on `origin/main` — same authorization block G.50 hit, confirmed again this session (`git push` → HTTP 403, \"not in this session's authorized repository set\"). They were bundled and transferred to the device (`git bundle create ... origin/main..HEAD`, staged via the device bridge, `git fetch <bundle> HEAD:cloud-session-2026-08-07` run successfully on the device — the objects are there). **The merge into the device's own `main` did not complete** — see Finding 6 — because the device bridge cannot unlink an existing tracked file to update it. The commits are safe (nothing was lost, `main` on the device is clean and undamaged at the pre-merge commit) but **someone needs to run, from a normal terminal or GitHub Desktop's terminal on the device, not through this bridge**: ``` git merge --ff-only cloud-session-2026-08-07 git push ``` A few harmless `.git/*.lock.stale*` files and duplicate copies of the two results files in `_to_delete/` are left over from the failed automated attempt — safe to delete, not required to. ---"
+    }
+  ],
+  "session_conditions": "This was **not** a batch-work session. It ran the prose section (separate\ntrack by design, per `MISSION-TODO-2.md`) and three P2 cheap checks — the\ntwo items a prior attempt this same day had gotten stuck on for 40 minutes\nwith nothing committed. Sources read in full this session: the EUR-Lex\nconsolidated text of Guideline (EU) 2015/510 (all 23 cited articles/\nparagraphs); all seven `EU/sources/SEC*.pdf` files cited by the 376\nbudget-section entries (`pdftotext` extraction, full text); a live CIRCABC\nbrowse session for Germany's EDP inventory; web searches for four NSIs'\nquality-report pages and five German debt-statistics publication pages.\n**Not touched**: any of the 73 staged batches, `Research.1.md` itself,\nG.50's ESS quality framework slice, the German sub-graph (priority F).\n\n**Two operational findings, both worth carrying forward — see Findings 5\nand 6.**"
+}
