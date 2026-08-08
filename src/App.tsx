@@ -456,13 +456,21 @@ function Detail({
   const feeds = dependents(graph, report.id)
   const built = dependsOn(graph, report.id)
 
-  const cadence = describeRate(report.releases_per_year)
+  // Absent releases_per_year is the one-off-foundational-instrument shape
+  // (Research.1.md §4, 2026-08-08) — a treaty, a trade deal, a piece of
+  // government policy or regulation with no next edition. describeRate takes
+  // a rate to describe; there isn't one here, so this is not delegated to it.
+  const cadence =
+    report.releases_per_year !== undefined
+      ? describeRate(report.releases_per_year)
+      : 'once, as a standing instrument'
   // Shown only when it differs. For most releases the number moves whenever the
   // document appears, and saying so twice would be noise; the prime rate, which
   // is published weekly and changes eight times a year, is the case worth the
   // extra line.
   const changes =
     report.changes_per_year !== undefined &&
+    report.releases_per_year !== undefined &&
     report.changes_per_year !== report.releases_per_year
       ? describeRate(report.changes_per_year)
       : null

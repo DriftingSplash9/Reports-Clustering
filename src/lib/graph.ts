@@ -96,10 +96,12 @@ export function validate(
       issues.push({ severity: 'error', message: `Duplicate report id: ${r.id}` })
     }
     ids.add(r.id)
-    if (r.releases_per_year <= 0) {
+    // Absent is the one-off-foundational-instrument shape (Research.1.md §4,
+    // 2026-08-08) and is valid; a present-but-non-positive value is not.
+    if (r.releases_per_year !== undefined && r.releases_per_year <= 0) {
       issues.push({
         severity: 'error',
-        message: `${r.id}: releases_per_year must be positive`,
+        message: `${r.id}: releases_per_year must be positive when present`,
       })
     }
     // An international body does not belong to a country. This exists because
@@ -136,11 +138,21 @@ export function validate(
           `add it to COUNTRY_FAMILY in src/lib/palette.ts`,
       })
     }
+    // changes_per_year presupposes a publication rate to differ from — it is
+    // meaningless on the evergreen shape, so flag that combination too rather
+    // than let it silently pass now that releases_per_year can be absent.
+    if (r.changes_per_year !== undefined && r.releases_per_year === undefined) {
+      issues.push({
+        severity: 'error',
+        message: `${r.id}: changes_per_year set but releases_per_year is absent (evergreen node) — remove one or the other`,
+      })
+    }
     // A number cannot move more often than it is published. If it looks like it
     // does, one of the two is wrong — usually the publication rate, which is
     // the easier of the pair to find.
     if (
       r.changes_per_year !== undefined &&
+      r.releases_per_year !== undefined &&
       r.changes_per_year > r.releases_per_year
     ) {
       issues.push({

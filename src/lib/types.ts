@@ -295,8 +295,18 @@ export interface Report {
    * Fractional below annual, and deliberately so: the decennial US census is
    * 0.1, SNA 2008 is 0.05, a discretionary municipal census is 0.25. A number
    * can say "once a generation"; a bucket cannot.
+   *
+   * Optional as of 2026-08-08 (Research.1.md §4). A node is one of two shapes:
+   * a recurring publication, which carries this field, or a one-off
+   * foundational instrument — a treaty, a trade deal, a piece of government
+   * policy or regulation adopted once and never revisited in that form again
+   * — which does not. Absent means evergreen, not unknown; do not fill in a
+   * guessed rate to satisfy this field. A recast or successor instrument
+   * (one that repeals/replaces a named predecessor, which itself had a
+   * predecessor) is the recurring shape, not this one — see §4 for how its
+   * cadence is derived from the interval between generations.
    */
-  releases_per_year: number
+  releases_per_year?: number
   /**
    * **Change rate** — how often the published number actually moves, per year,
    * where that differs from how often it is published.
