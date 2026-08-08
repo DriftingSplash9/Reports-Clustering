@@ -164,10 +164,22 @@ first, in full)
    (Guideline (EU) 2015/510) entries citing one EUR-Lex consolidated text; 376
    are EU Draft Budget entries carrying a `FILE:` field naming an uploaded PDF
    (SEC00/01/02/03/07/09/10) with **no URL at all**. Verification list for an
-   outside reader: `EU/prose-verification-list.md`. **Blocked on one of two
-   things**: EUR-Lex serving again (for the 23), and the SEC PDFs being
-   re-uploaded (for the 376) — without them the session can catalogue but not
-   mint. Branch authority: **`EU/G.50.md`** (read `G.49.md` behind it)
+   outside reader: `EU/prose-verification-list.md`. **UNBLOCKED AND RUN
+   2026-08-07 — both blockers cleared and all 399 entries checked, awaiting
+   Thomas's review before anything is imported.** EUR-Lex was serving again
+   (confirmed), and the SEC PDFs turned out to already be present at
+   `EU/sources/SEC00.pdf`–`SEC10.pdf` (11 files, real content, not the
+   missing uploads this item assumed). Results: **395/399 verified
+   word-for-word**, 4 had no independent quote to check (duplicates by the
+   extractor's own note), 0 mismatches, 0 not-founds, 0 retrieval failures.
+   One real error surfaced: Block A entry A19 cites Art. 6(6)(a) for a
+   "business day" definition that is actually at Art. 2(6)(a) (the quoted
+   text itself is accurate, only the location is wrong). Full record, entry
+   by entry: `EU/prose-verification-RESULTS_2026-08-07.md`. This is a
+   findings file only — per the standing review-gate decision, nothing from
+   it has been imported into `src/data/research/*.json` or `EU/slices/*.json`
+   yet; that is the next session's job once Thomas has looked at it. Branch
+   authority: **`EU/G.50.md`** (read `G.49.md` behind it)
    (and `EU/slices/README.md` for the branch's central
    disclosure-runs-upward finding — which `G.50.md` narrows rather than
    refutes: where the EU binds by Regulation it names nobody, where it
@@ -238,6 +250,17 @@ first, in full)
 ## P2 — Cheap checks (single lookups, ordered by value per unit effort;
 raid this list when a session has capacity left)
 
+9z. **RESEARCHED 2026-08-07 — awaiting a mint decision, not yet minted.**
+    Findings: `EU/cheap-checks-9z-9a-9b_2026-08-07.md`. Yes — Germany
+    (Destatis) and Ireland (CSO) both voluntarily publish their own ESA 2010
+    national-accounts quality report, each with multiple dated editions
+    (so a cadence, and a node, is derivable for both). Two near-misses worth
+    recording so nobody re-claims them: Luxembourg (STATEC) and the
+    Netherlands (CBS) each have a page that *looks* like a national report
+    but the PDF itself is a hosted copy of Eurostat's own report (ISBN /
+    Publications-Office colophon, product code KS-FT-...) — not a national
+    document. France (INSEE): nothing found. Original item text follows for
+    context.
 9z. **Does ANY Member State publish its own ESA 2010 quality report?** THE
     HIGHEST-VALUE ITEM ON THIS LIST, added 2026-08-07 (S2), and it is a search
     rather than a lookup. Implementing Regulation (EU) 2016/2304 compels every
@@ -256,6 +279,16 @@ raid this list when a session has capacity left)
     the NSIs whose transparency is already documented in this corpus — Destatis,
     CBS, STATEC, INSEE — and with the phrase "quality report" plus "national
     accounts" on each NSI's own site.
+9a. **RESOLVED 2026-08-07 — a newer edition exists, awaiting a mint
+    decision.** Findings: `EU/cheap-checks-9z-9a-9b_2026-08-07.md`. A
+    "Germany, October 2025" edition (188pp, vs. 170pp for the known Dec 2015
+    copy) was found and read in a real browser session — two dated editions
+    now exist, so the cadence blocker is cleared. **Trap for the next
+    session**: the exact CIRCABC URL on file resolves to a Denmark document,
+    not Germany's — CIRCABC's node IDs are not stable per-country
+    identifiers, so re-find Germany's entry by browsing the folder tree
+    rather than reusing the URL below. Original item text follows for
+    context.
 9a. **Open Germany's EDP inventory on CIRCABC, in a real browser.** Added
     2026-08-07 (S1). Eurostat's EDP
     inventories page carries a live "Inventory" link for every member state,
@@ -272,6 +305,16 @@ raid this list when a session has capacity left)
     `eurostat-remuneration-mission-expenses-report` — which in turn unblocks
     two documented edges (`→ eu-reg-479-2009`, `→ esa-2010`) and, in principle,
     26 more member states. Add CIRCABC to the branch's site-behaviour list.
+9b. **PARTIALLY RESOLVED 2026-08-07 — 3 of 5 found, 2 look uncitable.**
+    Findings: `EU/cheap-checks-9z-9a-9b_2026-08-07.md`. Live URLs found for
+    Destatis's quarterly debt statistics, Destatis's annual debt statistics,
+    and the Bundesbank's "Statistik über Wertpapierinvestments." The two
+    Deutsche Finanzagentur items (Statistik der Bundesschuld, and the
+    Schuldscheindarlehen-by-creditor-class report) do not exist under those
+    titles anywhere on Finanzagentur's current site — confirmed by a
+    full-text search of the Kreditaufnahmebericht PDF, where they appear to
+    surface only as line items inside other public reports, not as their own
+    citable publication. Original item text follows for context.
 9b. **Find publication pages for the five German statistics named in the EDP
     inventory.** Added 2026-08-07 (S1), and logged as its own item rather than
     done inline because finding five publication pages is a research task, not
