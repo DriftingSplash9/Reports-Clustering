@@ -44,6 +44,20 @@
       "domains": [
         "national-accounts"
       ]
+    },
+    {
+      "id": "eu-reg-2016-2304",
+      "title": "Commission Implementing Regulation (EU) 2016/2304 of 19 December 2016 on the modalities, structure, periodicity and assessment indicators of the quality reports on data transmitted pursuant to Regulation (EU) No 549/2013 of the European Parliament and of the Council",
+      "publisher": "European Commission",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The Implementing Regulation that structures the annual national-accounts quality reports Member States submit under ESA 2010 (Regulation 549/2013) — the same instrument eurostat-national-accounts-quality-report's own description already names as what it is 'structured by'. Article 1 sets the periodicity for the underlying obligation, not for itself: 'Member States shall provide the quality report on an annual basis' with reports due no later than 31 May each year. Minted 2026-08-08 as a one-off foundational instrument under Research.1.md §4 (Thomas's ruling): adopted once (19 December 2016) and never amended — EUR-Lex shows no consolidated version — which is exactly the shape the new rule was written to admit; previously excluded under the old §4.2 language ('something published once is not a node'), recorded in this file's _dropped array until today. No predecessor is named anywhere in the instrument or in G.50/G.52's research, so it is not read as a recast — a genuine one-off, not a lineage's current edition.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R2304",
+      "domains": [
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [
@@ -74,6 +88,12 @@
       "relationship_type": "methodology_depends_on",
       "basis": "Regulation (EU) No 549/2013, consolidated text of 24/08/2015, Article 4(1) ('Quality assessment'): 'For the purpose of this Regulation, the quality criteria set out in Article 12(1) of Regulation (EC) No 223/2009 shall apply to the data to be transmitted in accordance with Article 3 of this Regulation.' 'Shall apply' is application of one instrument's criteria by another, not comparability — §5a does not reach it. Direction: ESA 2010 is the dependent, taking its quality criteria from the framework Regulation. NOTE THAT THIS IS esa-2010'S FIRST OUTGOING DEPENDENCY IN THE CORPUS: it was imported with zero, and its only previously proposed outgoing edge (esa-2010 -> sna-2008) is refused by §5a in esa-2010.json and refused again by a fourth independent statement found this session (see _dropped). Read from EUR-Lex 2026-08-07.",
       "evidence_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02013R0549-20150824"
+    },
+    {
+      "source_report_id": "eurostat-national-accounts-quality-report",
+      "target_report_id": "eu-reg-2016-2304",
+      "relationship_type": "methodology_depends_on",
+      "basis": "eurostat-national-accounts-quality-report's own description: 'produced under Article 4 of Regulation (EU) No 549/2013 and structured by Commission Implementing Regulation (EU) 2016/2304.' The Regulation sets the modalities, structure, periodicity and assessment indicators the report follows — method, not raw data input, hence methodology_depends_on rather than uses_data_from. Added 2026-08-08 alongside minting the target node; the edge was implicit in the source node's description since the file was drafted but could not be minted while the target had no node."
     }
   ],
   "_dropped": [
@@ -102,8 +122,8 @@
       "edge": "Commission Implementing Regulation (EU) 2016/2304 as a node",
       "source": null,
       "target": null,
-      "reason": "no-node-yet",
-      "why": "DELIBERATELY NOT MINTED, and the reasoning should be reusable. EUR-Lex shows no consolidated versions of 2016/2304 — on the observed-record basis used for eu-reg-479-2009 and eu-reg-223-2009 it has been published once and never amended, and Research.1.md §4.2 is explicit that 'something published once is not a node'. It appears in three basis fields instead, which is where an instrument that determines a method but does not recur belongs. This is the same call, made the same way, as the corpus's treatment of one-off implementing decisions. Revisit if a future session finds it amended."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-08 — Research.1.md §4's rule change (Thomas's ruling) admits one-off foundational instruments (treaty, trade deal, government policy/regulation, adopted once) as nodes without a cadence. This entry's original blocker was the old §4.2 language, 'something published once is not a node' — that is the exact clause the ruling replaced. Re-checked against EUR-Lex this session: still no consolidated/amended version, still a genuine one-off, not a recast (no predecessor named anywhere). Minted as eu-reg-2016-2304, releases_per_year absent (evergreen, not guessed), with a methodology_depends_on edge from eurostat-national-accounts-quality-report added in the same pass. Original note preserved below for the research trail. ORIGINAL: DELIBERATELY NOT MINTED, and the reasoning should be reusable. EUR-Lex shows no consolidated versions of 2016/2304 — on the observed-record basis used for eu-reg-479-2009 and eu-reg-223-2009 it has been published once and never amended, and Research.1.md §4.2 is explicit that 'something published once is not a node'. It appears in three basis fields instead, which is where an instrument that determines a method but does not recur belongs. This is the same call, made the same way, as the corpus's treatment of one-off implementing decisions. Revisit if a future session finds it amended."
     },
     {
       "edge": "esa-2010 -> sna-2008",

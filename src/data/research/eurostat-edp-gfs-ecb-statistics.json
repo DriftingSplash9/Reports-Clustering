@@ -73,6 +73,70 @@
       "domains": [
         "banking"
       ]
+    },
+    {
+      "id": "ecb-supervisory-banking-statistics",
+      "title": "Supervisory Banking Statistics (SUP)",
+      "publisher": "European Central Bank (ECB) / National Central Banks (NCBs)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Aggregate prudential data on significant institutions under ECB Banking Supervision — capital, leverage, liquidity, asset quality and profitability — built from European Banking Authority Implementing Technical Standards (FINREP/COREP) supervisory reporting, on the same institutional basis as ecb-consolidated-banking-data. Legal basis: Commission Implementing Regulation (EU) 2021/451 (ITS on supervisory reporting), ECB Regulation ECB/2015/13, Council Regulation (EU) No 1024/2013 (SSM Regulation) and Directive 2013/36/EU (CRD IV).",
+      "releases_per_year": 4,
+      "cadence_note": "ECB Data Portal, checked live 2026-08-08: 'The supervisory banking dataset is updated on a quarterly basis. With each update of the database figures for the previous four quarters can also be revised, as banks may resubmit data.' Note some general-government exposure breakdowns are collected only semi-annually, not the whole dataset — flagged, not adjudicated, same shape as the CBD2 conflict on the sibling node. Named but not minted since G.39.md/this file's original drafting for lack of a cadence statement; resolved 2026-08-08 by checking the live page.",
+      "last_updated": null,
+      "url": "https://data.ecb.europa.eu/data/datasets/SUP/data-information",
+      "domains": [
+        "banking"
+      ]
+    },
+    {
+      "id": "ecb-insurance-corporations-operations",
+      "title": "Insurance Corporations Operations (ICO)",
+      "publisher": "European Central Bank (ECB) / National Central Banks (NCBs)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Euro area insurance corporations' transactions, revaluations and other flows (premiums, claims, technical reserves and related operations), companion series to the insurance corporations' balance-sheet statistics. Legal basis: ECB Regulation ECB/2014/50 (reporting requirements and exemptions for insurance corporations) and Guideline ECB/2021/12 on financial intermediaries other than monetary financial institutions.",
+      "releases_per_year": 1,
+      "cadence_note": "ECB Data Portal, checked live 2026-08-08: metadata states 'Time period: Annual' and 'Frequency of data collection: Annual.' Domain tagged financial-regulation rather than a dedicated insurance tag — the corpus has no 'insurance' Domain value yet and this is the first candidate for one; flagged as a judgement call rather than added unilaterally. Named but not minted since this file's original drafting for lack of a cadence statement; resolved 2026-08-08 by checking the live page.",
+      "last_updated": null,
+      "url": "https://data.ecb.europa.eu/data/datasets/ICO/data-information",
+      "domains": [
+        "financial-regulation"
+      ]
+    },
+    {
+      "id": "ecb-investment-funds-balance-sheet-statistics",
+      "title": "Investment Funds Balance Sheet Statistics (IVF)",
+      "publisher": "European Central Bank (ECB) / National Central Banks (NCBs)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Euro area investment funds' assets and liabilities by investment policy and type (equity, bond, mixed, real estate, hedge and other funds), reported by NCBs and aggregated by the ECB. Legal basis: Regulation (EU) No 1073/2013 (ECB/2013/38) concerning statistics on the assets and liabilities of investment funds, and Guideline ECB/2014/15 on monetary and financial statistics, which sets NCB reporting procedures.",
+      "releases_per_year": 12,
+      "cadence_note": "ECB Data Portal, checked live 2026-08-08: 'Time period: Monthly, except for certain detailed breakdowns which are collected quarterly' and 'Frequency of data collection: Monthly and quarterly.' releases_per_year uses the monthly headline balance-sheet series; the quarterly sub-breakdowns are a more granular secondary tier, not a second nodeable series, same treatment as CBD2's semi-annual detail breakdowns on a sibling node. Named but not minted since this file's original drafting for lack of a cadence statement; resolved 2026-08-08 by checking the live page.",
+      "last_updated": null,
+      "url": "https://data.ecb.europa.eu/data/datasets/IVF/data-information",
+      "domains": [
+        "banking"
+      ]
+    },
+    {
+      "id": "ecb-insurance-corporations-assets-liabilities",
+      "title": "Insurance Corporations Assets and Liabilities (ICB)",
+      "publisher": "European Central Bank (ECB) / National Central Banks (NCBs)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Euro area insurance corporations' balance-sheet statistics — assets and liabilities by instrument and counterpart sector — companion series to ecb-insurance-corporations-operations. Legal basis: Guideline ECB/2021/12 on financial intermediaries other than monetary financial institutions, same governing instrument as its companion node.",
+      "releases_per_year": 4,
+      "cadence_note": "ECB Data Portal, checked live 2026-08-08: 'Quarterly data are reported by close of business on the 40th working day... following the end of the quarter,' disseminated approximately 9-10 weeks after the reference period. Completes the ICB/ICO pair this file originally filed as one bundled lead; ICO was resolved and minted earlier this session, ICB resolved now.",
+      "last_updated": null,
+      "url": "https://data.ecb.europa.eu/data/datasets/ICB/data-information",
+      "domains": [
+        "financial-regulation"
+      ]
     }
   ],
   "dependencies": [
@@ -98,7 +162,7 @@
       "target": null,
       "reason": "deferred",
       "why": "eurosystem-ecb.json already carries this as a _dropped no-node-yet entry (ECB-04, G.39.md), quoting Guideline (EU) 2024/2941: 'The monthly data feed into the published aggregated statistical data required from monetary financial institutions (MFIs) in the Union.' A target node now exists (this slice), but the specific Annex citation for that quote was never independently re-verified in either session -- wiring the edge now would just move the same hedge to a new file. Re-verify the citation first."
-      },
+    },
     {
       "edge": "ecb-consolidated-banking-data / SUP / IVF / ICB -> [European Banking Authority ITS/FINREP-COREP framework]",
       "source": null,
@@ -110,22 +174,22 @@
       "edge": "[Supervisory Banking Statistics (SUP)] -> node",
       "source": null,
       "target": null,
-      "reason": "no-document",
-      "why": "Named and described (data.ecb.europa.eu/data/datasets/sup/data-information) but no cadence statement found in the staged batches or checked live this session. Filed as a lead, not minted."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-08 — checked the live ECB Data Portal page this session: 'The supervisory banking dataset is updated on a quarterly basis.' Minted as ecb-supervisory-banking-statistics, releases_per_year 4. Original note preserved below. ORIGINAL: Named and described (data.ecb.europa.eu/data/datasets/sup/data-information) but no cadence statement found in the staged batches or checked live this session. Filed as a lead, not minted."
     },
     {
       "edge": "[Investment funds statistics (IVF)] -> node",
       "source": null,
       "target": null,
-      "reason": "no-document",
-      "why": "Named, with a stated legal basis (Regulation ECB/2013/38, Guideline ECB/2021/12, Manual on IVF statistics), but no cadence statement found or checked live this session. Filed as a lead."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-08 — checked the live ECB Data Portal page this session: 'Time period: Monthly, except for certain detailed breakdowns which are collected quarterly.' Minted as ecb-investment-funds-balance-sheet-statistics, releases_per_year 12 (monthly headline series; quarterly breakdowns treated as a secondary tier, not a second node). Original note preserved below. ORIGINAL: Named, with a stated legal basis (Regulation ECB/2013/38, Guideline ECB/2021/12, Manual on IVF statistics), but no cadence statement found or checked live this session. Filed as a lead."
     },
     {
       "edge": "[Insurance corporations statistics (ICB/ICO)] -> node",
       "source": null,
       "target": null,
-      "reason": "no-document",
-      "why": "Named, with a stated legal basis (Regulation ECB/2014/50), but no cadence statement found or checked live this session. Filed as a lead."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-08, PARTIALLY — checked the live ECB Data Portal page this session for ICO (Insurance Corporations Operations): 'Time period: Annual', 'Frequency of data collection: Annual.' Minted as ecb-insurance-corporations-operations, releases_per_year 1. ICB (Insurance Corporations Assets and Liabilities) was NOT checked this session and remains a lead — this entry named both under one heading; only the ICO half is resolved. Original note preserved below. ORIGINAL: Named, with a stated legal basis (Regulation ECB/2014/50), but no cadence statement found or checked live this session. Filed as a lead. UPDATE 2026-08-08: the ICB half is now also resolved — live ECB Data Portal page confirms quarterly ('Quarterly data are reported by close of business on the 40th working day... following the end of the quarter'). Minted as ecb-insurance-corporations-assets-liabilities, releases_per_year 4. Both halves of this entry (ICO and ICB) are now minted; nothing left open here."
     },
     {
       "edge": "[MIP scoreboard / Alert Mechanism Report statistical annex] -> node",

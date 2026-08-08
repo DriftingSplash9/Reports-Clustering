@@ -250,13 +250,37 @@ predecessor).
 dropped specifically under the old rule's exact wording — `_dropped` entries
 citing "published once is not a node" or "Periodicity: non-recurring" as the
 disqualifier. Implementing Regulation (EU) 2016/2304 (`esa2010-quality-reporting.json`)
-and the ESS Quality and Performance Indicators / Quality Glossary / DESAP
-checklist (`ess-quality-framework.json`) are the two on record so far. They
-are not retroactively minted by this edit — each still needs the same
-foundational-instrument test applied on its own merits (named, titled, and
-genuinely load-bearing, not merely mentioned) — but they are no longer
-excluded on cadence alone, and a future session should revisit them under
-this section rather than treat the old `_dropped` reasoning as settled.
+was the first one identified, and as of `G.53.md` (2026-08-08) it has been
+minted as `eu-reg-2016-2304`, one-off foundational instrument, no
+`releases_per_year`, with a `methodology_depends_on` edge added from
+`eurostat-national-accounts-quality-report`. The same session ran a targeted
+sweep of `_dropped` arrays across the corpus (25 entries checked closely, out
+of 416 total dropped entries — not exhaustive, see `G.53.md` for method and
+scope) and minted four ECB series that were sitting as under-researched leads
+in `eurostat-edp-gfs-ecb-statistics.json` once their live cadence was
+actually checked: `ecb-supervisory-banking-statistics` (quarterly),
+`ecb-insurance-corporations-operations` (annual),
+`ecb-investment-funds-balance-sheet-statistics` (monthly, headline series),
+`ecb-insurance-corporations-assets-liabilities` (quarterly). None of these
+were blocked by cadence under the new rule at all — they simply hadn't been
+checked live; worth remembering that "reopened by the rule change" and
+"worth re-checking now that it's cheaper to qualify" are two different
+categories of `_dropped` entry, and the sweep found examples of both.
+
+The ESS Quality and Performance Indicators / Quality Glossary / DESAP
+checklist (`ess-quality-framework.json`) is still open — named in the
+original 2026-08-08 ruling as a candidate but not checked by `G.53.md`'s
+sweep. A Commission Recommendation (EU) 2023/397, dropped in
+`eu-meta-docx-batches.json` as "a one-off legal act," is also still open —
+soft law (a Recommendation) is a step below what the ruling names (treaty,
+trade deal, government policy/regulation), and Thomas deliberately deferred
+adjudicating it rather than have it decided by proxy. Neither is retroactively
+minted by this edit — each still needs the same foundational-instrument test
+applied on its own merits (named, titled, and genuinely load-bearing, not
+merely mentioned) — but a future session should revisit them under this
+section rather than treat the old `_dropped` reasoning as settled. The
+broader sweep (the other 391 dropped entries not closely checked, and the
+`ess-quality-framework.json` candidate specifically) remains queued.
 
 ### Termini — things that are named but cannot be published
 
@@ -763,6 +787,20 @@ si-surs-national-accounts, sk-susr-national-accounts,
 tr-turkstat-national-accounts, ua-sssu-national-accounts,
 xk-kas-national-accounts
 ```
+
+**Known stale as of `G.53.md` (2026-08-08) — not re-audited, just flagged.**
+This list was last regenerated for the 2026-08-05 depth pass and has not been
+kept current since (ids from at least `G.47.md` through `G.52.md` are
+already missing from it). Five more were added to the corpus by `G.53.md`
+and are not folded in above: `eu-reg-2016-2304`,
+`ecb-supervisory-banking-statistics`,
+`ecb-insurance-corporations-operations`,
+`ecb-investment-funds-balance-sheet-statistics`,
+`ecb-insurance-corporations-assets-liabilities`. A full regeneration (same
+method as the 2026-08-05 pass: extract every `"id"` field from
+`src/data/research/*.json` whose `country` matches the EU/XEU set) is
+worth doing in one pass rather than patched incrementally — flagging rather
+than doing it here, since it touches nothing this session actually worked on.
 
 **Almost every one of the 85 pre-2026-08-05-depth-pass ids is the same node
 shape** — `<country> national accounts → esa-2010`, `methodology_depends_on`
