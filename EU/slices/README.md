@@ -12,6 +12,20 @@ then moves.
 Nothing in `_staging/` is verified. Nothing anywhere here is wired into
 `src/data/index.ts` yet.
 
+**2026-08-08 — `eu-level/` and `cross-layer/` archived.** The three files kept
+here after import for their Part A back-references
+(`esa2010-quality-reporting.json`, `ess-quality-framework.json`,
+`edp-inventory-regulation-479-2009.json`) were snapshots by design, not a
+live mirror — but nothing said so, and one of them was found to have drifted
+from its canonical copy in `src/data/research/` (`G.56.md` Finding 7).
+Thomas's call (OPEN-THREADS 0.1/1.1, 2026-08-08): move both folders to
+`archive/EU-slices-mirror/` rather than fix or keep syncing them — they were
+reference snapshots, not something that needed to track the canonical files.
+**`member-states/` stays here, empty**, and **`_staging/` stays here
+untouched** — see the note immediately below the folder table: `_staging/` is
+not a mirror of anything, it's the unprocessed blob split (OPEN-THREADS 2.5),
+and archiving it would bury live backlog, not tidy a duplicate.
+
 ## Current contents (2026-08-07)
 
 **2026-08-07 — `ess-quality-framework.json` graduated (`EU/G.50.md`).** 5 reports,
@@ -149,10 +163,10 @@ is the natural check before anyone treats it as settled.
 
 | Folder | What goes in it | Example filename |
 |---|---|---|
-| `eu-level/` | Nodes published by an EU body — Eurostat, ECB, Commission, the institutional budget sections | `eurostat-national-accounts.json` |
+| `eu-level/` | **Archived 2026-08-08 to `archive/EU-slices-mirror/eu-level/`.** Was: nodes published by an EU body — Eurostat, ECB, Commission, the institutional budget sections | `eurostat-national-accounts.json` |
 | `member-states/` | Nodes published by one member state's own bodies. **One file per country**, prefixed with the ISO code | `de-destatis-national-accounts.json` |
-| `cross-layer/` | Edges where an EU instrument obliges or feeds a member state, or a member state feeds an EU aggregate. **This is the interesting layer** — see below | `esa2010-transmission-programme.json` |
-| `_staging/` | Mechanical output of the blob split. Read-only working area, never imported | — |
+| `cross-layer/` | **Archived 2026-08-08 to `archive/EU-slices-mirror/cross-layer/`.** Was: edges where an EU instrument obliges or feeds a member state, or a member state feeds an EU aggregate. **This is the interesting layer** — see below | `esa2010-transmission-programme.json` |
+| `_staging/` | Mechanical output of the blob split. Read-only working area, never imported. **Not archived** — this is live backlog (OPEN-THREADS 2.5), not a mirror | — |
 
 ### The cross-layer folder is the point
 

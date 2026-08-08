@@ -7,10 +7,18 @@ grouped by who can do it and how big it is. It is not a replacement for
 each item, and its numbering is referenced from branch hand-offs. This is
 the index you read to decide what to pick up.
 
-**Total: 51 threads, of which 4 were closed the day it was written**
-(1.4, 1.6, 1.9 and part of 1.12 — see below), and one (0.3) was absorbed
-into the standing sweep habit. 5 are yours alone. 14 are housecleaning. The
-rest is real work, and most of it is not urgent.
+**Total: 51 threads, of which 18 were closed the day it was written or the
+day after**: 1.4, 1.6, 1.9, 1.12 fully closed same day; 0.4, 0.5, 1.1, 1.10,
+1.11 answered via `Open-Questions-2026-08-08.docx` (returned 2026-08-08);
+and 1.2, 1.3, 1.5, 1.7, 1.8, 1.13, 1.14 closed in the housecleaning pass
+that followed — see below. One (0.3) was absorbed into the standing sweep
+habit. 5 are yours alone, unchanged (0.1 still needs you at the keyboard;
+see its note). **All 14 housecleaning items are now done.** Everything
+left open is either real research/frontier work (section 2), a cheap
+single-lookup check (section 3), low-priority code/UI (section 4), or
+verification debt (section 5) — none of it urgent, per your own priority
+order the next thing up is block B, the corpus-wide `_dropped` sweep
+(2.1).
 
 Format: `[size]` is rough — **XS** minutes, **S** under an hour, **M** part
 of a session, **L** a whole session, **XL** more than one.
@@ -24,8 +32,8 @@ of a session, **L** a whole session, **XL** more than one.
 | 0.1 | **The two stuck commits (`8295de1`, `b41bee9`)** and the `.git/*.lock.stale*` pile-up (25+ files, none deletable through the bridge). Close GitHub Desktop, delete every `*.lock.stale*` plus any `index.lock`/`HEAD.lock` in `.git`, reopen, retry. | S | nothing downstream, but it's noise on every commit |
 | 0.2 | **Empty `_to_delete/` whenever you feel like it.** Standing, not a task: agents cannot delete on this machine, so junk lands there instead of being raised with you. You emptied it within minutes of the first sweep, so the durable record of what was swept and why lives in `notes/sweep-log.md`, not inside the folder. | XS | nothing |
 | 0.3 | ~~Delete `~$-open-questions_2026-08-08.docx`~~ — **swept to `_to_delete/` 2026-08-08.** It was in `notes/`, not the root, and `.gitignore`'s `~$*` meant it was never committed. Nothing to do but empty the folder. | — | closed |
-| 0.4 | **Decide: does `sdmx-glossary` belong on §9's EU id list?** It is `country: "INT"` but was minted by an EU-branch slice, which is the same argument that puts `oecd-icio` there. Same question, weaker, for `hs`, `imf-weo`, `imf-fiscal-monitor`, `oecd-economic-outlook`. Answering it makes the next regeneration fully mechanical. | XS | §9 stays a judgement call otherwise |
-| 0.5 | **Decide: add an `insurance` `Domain` value?** Two ECB nodes are tagged `financial-regulation` for want of it (`G.53.md`). Also standing: the three adopted-but-unadded tags `research-innovation` / `agriculture` / `external-action` go in with their first tagged node, not before. | XS | cosmetic until File C returns |
+| 0.4 | ~~Decide: does `sdmx-glossary` belong on §9's EU id list?~~ — **DECIDED AND DONE 2026-08-08.** Added; the weaker four (`hs`, `imf-weo`, `imf-fiscal-monitor`, `oecd-economic-outlook`) stay out, decided case by case rather than as a rule (`Research.1.md` §9, now 127 ids). | — | closed |
+| 0.5 | ~~Decide: add an `insurance` `Domain` value?~~ — **DECIDED AND DONE 2026-08-08.** Added to `src/lib/types.ts` and `Research.1.md` §6; both ECB nodes retagged from `financial-regulation`. The three adopted-but-unadded tags `research-innovation` / `agriculture` / `external-action` are unaffected. | — | closed |
 
 ---
 
@@ -33,34 +41,37 @@ of a session, **L** a whole session, **XL** more than one.
 
 **Do these roughly in this order.** 1.1–1.4 are correctness; the rest is tidiness.
 
-**1.1 — A mirror slice has silently diverged from its canonical copy.** `[S]`
-`EU/slices/eu-level/esa2010-quality-reporting.json` is missing
-`eu-reg-2016-2304` and one dependency that `src/data/research/esa2010-quality-reporting.json`
-has. `G.53.md` edited the canonical copy and did not mirror it. Only
-`src/data/research/` is loaded by `src/data/index.ts`, so the graph is
-correct and the *mirror* is stale — but a future session reading the mirror
-would draw the wrong conclusion. Audit result 2026-08-08: 4 mirror files,
-2 identical, **1 diverged**, 1 (`_staging/01-manifest.json`) has no
-canonical twin by design. **Decide the policy while you are in there**: are
-`EU/slices/*` copies meant to stay in sync, or are they a historical staging
-record that should stop being updated? Right now nothing enforces either
-answer, which is why this happened.
+**1.1 — A mirror slice has silently diverged from its canonical copy. —
+DECIDED AND DONE 2026-08-08.** `[S]` `EU/slices/eu-level/esa2010-quality-reporting.json`
+was missing `eu-reg-2016-2304` and one dependency that
+`src/data/research/esa2010-quality-reporting.json` has. `G.53.md` edited the
+canonical copy and did not mirror it. Only `src/data/research/` is loaded by
+`src/data/index.ts`, so the graph was always correct — the *mirror* was
+stale. **Your call: don't sync it, archive it.** `EU/slices/eu-level/` and
+`EU/slices/cross-layer/` (the 3 files that were kept-after-import as
+verification snapshots, not a live mirror) moved to
+`archive/EU-slices-mirror/`. `EU/slices/README.md` updated to say so.
+**One thing this surfaced, worth knowing**: `EU/slices/_staging/` is a
+different thing entirely — it's the raw output of the staging-blob split
+(the source material for 2.5's 47 remaining batches), not a mirror of
+anything, and it was **not** touched. Your instinct that "the slices were
+meant to be parts of blob" was right for `_staging/`, just not for
+`eu-level/`/`cross-layer/`, which really were stale verification copies.
 
 **1.2 — `START-HERE.md` says the corpus holds "335 reports and 392
-dependencies".** `[XS]` It is 372/436. This is the document written for
-outside readers of a public GitHub repo, so it is the worst place for a
-stale number. `REPORTS.md` also carries several 121/122/133-node figures,
-but those are dated narrative about past states and are fine as history.
+dependencies". — DONE 2026-08-08.** `[XS]` Fixed to 372/436. `REPORTS.md`
+also carries several 121/122/133-node figures, but those are dated
+narrative about past states and are fine as history — left alone.
 
 **1.3 — `MISSION-TODO-2.md` contradicts itself about EUR-Lex, twice in the
-same file, both dated 2026-08-07.** `[XS]` P1 item 5(d): "**EUR-Lex works
-again** … both the legal-content and ELI forms return HTTP 200 with full
-text." Standing method notes: "**EUR-Lex no longer works in a browser
-either** … `curl` gets HTTP 202 with a zero-byte body and Chrome silently
-redirects every legal-content and ELI form to `eur-lex.europa.eu/TodayOJ`."
-One of these is wrong and a session will lose time to it. Resolve with one
-fetch and delete the loser. (`Research.1.md` §7 sides with "reachable via a
-real browser", for what that's worth.)
+same file, both dated 2026-08-07. — RESOLVED 2026-08-08.** `[XS]` Settled
+by direct check: plain `curl`, no browser UA, gets HTTP 200 with full text
+on both the ELI and legal-content forms — no 202, no zero-byte body, no
+redirect to TodayOJ. The "**EUR-Lex works again**" note (P1 item 5(d)) was
+right; the "**no longer works**" standing method note described a
+transient outage that was never corrected — now fixed in place in
+`MISSION-TODO-2.md`, and `Research.1.md` §7's parallel note updated too.
+EUR-Lex is reliable; don't re-flag it without a fresh failure.
 
 **1.4 — No JSON sidecars for `G.52`–`G.55`. — DONE 2026-08-08.** `[XS]`
 `EU/` had `G.50.json` and `G.51.json` and then stopped. Rebuilt every
@@ -72,10 +83,19 @@ sections outright. `G.56.json` writes 8 findings, 7 corrections, 7 priority
 blocks, 11 cheap checks, no missing sections.
 
 **1.5 — `scripts/handoff-to-json.py`'s priority-block parser is broken for
-plain-numbered priority lists.** `[S]` It only recognises the EU's lettered
-`**A — Label**` convention and silently emits `priorities: []` for AU and
-NZ. Same file, second bug: no-argument mode only scans `EU/` (hardcoded
-`BRANCHES`). (= MISSION-TODO-2 item 19.)
+plain-numbered priority lists. — FIXED 2026-08-08.** `[S]` It only
+recognised the EU's lettered `**A — Label**` convention and silently
+emitted `priorities: []` for AU and NZ, which use a plain numbered list
+instead. Fixed: falls back to `numbered_items`/`bullet_items` when no
+lettered blocks are found, same as every other section. All sidecars
+regenerated (`python3 scripts/handoff-to-json.py`, no args) — AU/NZ
+G-files now carry 1 priority block each instead of 0; EU's lettered
+parsing unaffected (checked against `G.56.json`). **The second bug
+described here — no-argument mode only scanning `EU/` — was already not
+true**: `BRANCHES = ["EU", "NZ", "AU"]` and `targets()` already iterates
+all three; confirmed by the regeneration run picking up AU/NZ files
+without any code change to that part. Stale claim, not a live bug — don't
+re-flag it. (= MISSION-TODO-2 item 19.)
 
 **1.6 — `G.52`–`G.55` drifted off the hand-off spec. — DRIFT STOPPED
 2026-08-08; the four predecessors stay as they are.** `[S]` `G.51.md` was
@@ -91,16 +111,19 @@ script's priority-block regex only matches `**A — Label**`, so writing
 `**Block A — …**` silently yields `priorities: []` — that is item 1.5, and
 it bit this very file before being caught.
 
-**1.7 — §9's AU and NZ id lists are still stale.** `[S]` The EU/Europe half
-was regenerated 2026-08-08 (105 → 126 ids). AU shows 11 ids and 19 exist;
-the NZ list predates the Stats NZ national-accounts pass and Norway. Same
-one-pass extraction, `country`-matched. (= item 20 remainder.)
+**1.7 — §9's AU and NZ id lists are still stale. — DONE 2026-08-08.** `[S]`
+Both regenerated wholesale, same method as the EU/Europe pass. AU: 11 → 21
+ids. NZ: 18 → 30 ids (predated the Stats NZ national-accounts pass — 5
+ids — and several later additions: `nz-oag-annual-report`,
+`nz-public-audit-act-2001`, `nz-public-finance-act-1989`, `nz-lgaca-2009`,
+`nz-auckland-annual-report`, `nz-statsnz-aes`). Cross-checked: no
+duplicate ids anywhere in the corpus, all 67 research files imported.
+`Research.1.md` §9 updated. (= item 20 remainder, now closed.)
 
-**1.8 — Institute `EU/proposals/` and write the rule down.** `[XS]`
-`G.52.md`'s three proposal files were written to a sandbox `/tmp` and are
-gone; fourteen of your answers now review artefacts that no longer exist.
-The rule: **a draft not in the repo does not exist.** An unimported file in
-the working tree costs nothing.
+**1.8 — Institute `EU/proposals/` and write the rule down. — DONE
+2026-08-08.** `[XS]` `EU/proposals/README.md` created, stating the rule:
+**a draft not in the repo does not exist.** Empty otherwise — first
+expected occupants are proposal Files A and B (2.2).
 
 **1.9 — Root-directory clutter. — DONE 2026-08-08.** `[S]` Swept to
 `_to_delete/`: `SEC05.pdf` (verified byte-identical to `EU/sources/SEC05.pdf`
@@ -115,46 +138,93 @@ clone-size penalty for outside readers. **Left alone, deliberately**:
 `diary.csv` and `country afrikans.docx` look like your own files, unrelated
 to the project — say the word and they go too.
 
-**1.10 — Three superseded planning files still on disk.** `[XS]`
-`planning/MISSION-TODO.md` (1.0, superseded), `planning/rolling-todo.md`
-(superseded as entry point, keeps its Merged history), and now this file
-alongside `MISSION-TODO-2.md`. Each has a pointer at its top, so nothing is
-actually ambiguous — but consider moving 1.0 and `rolling-todo.md` into
-`archive/` so `planning/` holds only live documents. `BACKLOG.md` is yours
-and stays.
+**1.10 — Three superseded planning files still on disk. — DECIDED AND DONE
+2026-08-08.** `[XS]` `planning/MISSION-TODO.md` (1.0) and
+`planning/rolling-todo.md` moved to `archive/planning/`, your call ("move
+them to an archive folder"). `OPEN-THREADS_2026-08-08.md` (this file) and
+`MISSION-TODO-2.md` stay where they are — they're current, not superseded.
+`BACKLOG.md` is yours and stays.
 
-**1.11 — `MISSION-TODO-2.md`'s numbering has gone ragged.** `[XS]` It now
-contains `4a`, `4b`, two consecutive items both numbered `9z`, and `23b`
-printed before `23a`. Harmless to read, annoying to reference. Renumber
-once, or accept it and stop appending letters.
+**1.11 — `MISSION-TODO-2.md`'s numbering has gone ragged. — DECIDED
+2026-08-08: leave it.** `[XS]` It still contains `4a`, `4b`, two items both
+numbered `9z`, and `23b` printed before `23a`. Harmless to read, annoying to
+reference, but not worth a renumbering pass that would touch every hand-off
+and index that cites these numbers. Just stop appending new letters going
+forward.
 
-**1.12 — Stale docx artefacts in `notes/`.** `[XS]` The Word lock file is
-swept. Remaining: `notes/g.55.docx` and
-`notes/Questions-for-Thomas.docx` look like superseded working copies of
-things that now exist as Markdown — **needs one word from you and they go**;
-they were not swept because "looks superseded" is not the same as "is".
+**1.12 — Stale docx artefacts in `notes/`. — DONE 2026-08-08.** `[XS]` The
+Word lock file is swept. `notes/g.55.docx` and
+`notes/Questions-for-Thomas.docx` — your word arrived ("yes, sweep both") —
+moved to `_to_delete/`, logged in `notes/sweep-log.md`.
 `notes/country.docx` is yours and stays.
 
-**1.13 — Staging batches 53 and 54 are byte-identical duplicates.** `[XS]`
-So `01-manifest.json`'s remaining count is one higher than the real one.
-Note it in the manifest so nobody works the same batch twice.
+**1.13 — Staging batches 53 and 54 are byte-identical duplicates. — NOTED
+2026-08-08.** `[XS]` Confirmed: `batches[53]` and `batches[54]` (0-indexed)
+share batch_id, strand, `n_records` and `record_ids` — only `char_offset`
+differs. `_known_duplicate_batches` added to `01-manifest.json` recording
+it, so nobody works batch 54 as if it were distinct from 53 when picking up
+2.5. Not fixed at the source (the manifest is mechanical output of
+`split_blob.py` and would need re-running to actually dedupe) — the note
+is the cheap fix; re-splitting isn't.
 
-**1.14 — `EU/legacy-handoffs/` G.00–G.13 exist only as `.docx`.** `[M]`
-Convert to `.md` so the chain's early history is greppable. (= item 26.)
+**1.14 — `EU/legacy-handoffs/` G.00–G.13 exist only as `.docx`. — DONE
+2026-08-08.** `[M]` All 10 on disk (`G.00`, `G.02`–`G.05`, `G.07`–`G.09`,
+`G.11`, `G.13` — the numbering gaps are real, not a conversion miss)
+converted with `pandoc -t markdown`. Originals left in place; `.md`
+siblings added alongside. Spot-checked for completeness (word counts,
+tail content) rather than diffed line-by-line — the source docs had
+literal `**`/`-` characters typed as text rather than real Word
+formatting, so pandoc escapes them (`\*\*`, `\-\--`); that's a faithful,
+if slightly ugly, rendering of what was actually in the docx, not a
+conversion bug. (= item 26.)
 
 ---
 
 ## 2. Research frontiers — real work, one session each
 
-**2.1 — THE CORPUS-WIDE `_dropped` SWEEP.** `[XL]` **Your stated next
-priority** (2026-08-08: "its worth a dedicated sweep next before going
-further"). The validator scopes it: 391 dropped entries, **122 of which
-"are research leads rather than answers"** — that 122 is the work-list, not
-the 391. By reason: 87 `no-node-yet`, 72 `no-document`, 112 `note`, 35
-`deferred`. Start with `no-node-yet` and `no-document`. **File-by-file, full
-arrays, no keyword pass** — keyword passes are blind to the largest
+**2.1 — THE CORPUS-WIDE `_dropped` SWEEP. — IN PROGRESS, equalization pair
+done 2026-08-08.** `[XL]` **Your stated next priority** (2026-08-08: "its
+worth a dedicated sweep next before going further"). Scoping document:
+`planning/dropped-sweep-scoping_2026-08-08.md` — ranks all 58 files with
+`_dropped` entries, previews every priority-reason entry in the top 19,
+gives a suggested execution order. **Also corrects an imprecision**: the
+"122 research leads" figure is code-computed as `no-node-yet` (87) +
+`deferred` (35), not `no-node-yet` + `no-document` as the prose elsewhere
+implies — `no-document` (72) is a real, separate priority (checking
+whether a confirmed negative held up), just not part of that 122. Full
+reasoning in the scoping doc and in `Research.1.md` §4. **File-by-file,
+full arrays, no keyword pass** — keyword passes are blind to the largest
 remaining class (`Research.1.md` §4, third category). Re-run the validator
-after: the two counts moving is the measure.
+after each block, not just at the end: the two counts moving is the
+measure.
+
+**First session done 2026-08-08 — `equalization-named-products.json` +
+`equalization-payroll-base.json`.** Two findings, not one. First, 8 of the
+9 `no-node-yet` entries in `equalization-named-products.json` were already
+stale before this session touched them: a companion file,
+`grok-h1-equalization-named-products.json`, had closed them on 2026-08-07
+(a Grok research handoff, merged and verified against SOR/2007-303), but
+the original file's `_dropped` block was never updated to match, so the
+scoping pass — and the 122-leads figure — counted 8 leads that were
+already answered. Caught, not fixed by luck: the validator's stale-note
+check can't see this class of staleness, because it only fires when a
+note's own source/target resolve to a real edge, and these entries carried
+`target: null` by design (see the consolidated note now in that file).
+Second, the actual remaining work — the 7 Territorial Formula Financing
+leads in `equalization-payroll-base.json` — got done for real: minted
+`territorial-formula-financing` as a node (the fourth major federal
+transfer, previously absent from the graph entirely) plus three new
+StatCan nodes (Census of Agriculture, Gasoline and Other Petroleum Fuels
+Sold, Report on Energy Supply and Demand in Canada), wired all 7 edges,
+re-verified every citation against the consolidated regulation at
+laws-lois.justice.gc.ca. **Net effect on the corpus, by my count — you
+still need to run the validator to confirm**: reports 372 → ~376,
+dependencies 436 → ~443, `no-node-yet` 87 → ~72 (8 stale + 7 resolved),
+total leads 122 → ~107. The System of Macroeconomic Accounts entry in
+`equalization-named-products.json` stays open — it's a framework, not a
+release, and still blocked on the same node-rule question the scoping doc
+flagged. **Next in the suggested order**: `edp-inventory-regulation-479-2009.json`
++ `esa-2010.json`.
 
 **2.2 — Rebuild proposal Files A and B to your rulings.** `[L]` File A:
 German EDP inventory as **two dated nodes** (Dec 2015, Oct 2025), 'ESA 95'
@@ -256,8 +326,19 @@ Kadaster/BRK node is explicitly not-yet-minted).
 
 ## What is NOT open, so nobody reopens it
 
-- **`npm run validate`** — green as of 2026-08-08, first clean run since the schema change. Zero ✗, all eight behavioural checks pass. Must be run on Windows; the device bridge cannot (esbuild native-binary mismatch).
-- **§9's EU/Europe id registry** — regenerated in full 2026-08-08, 126 ids, cross-checked against `index.ts`.
+- **`npm run validate`** — green as of 2026-08-08, first clean run since the schema change. Zero ✗, all eight behavioural checks pass. Must be run on Windows; the device bridge cannot (esbuild native-binary mismatch). **Not yet re-run against today's edits** (id registries, insurance domain, the archive moves, the sidecar regeneration) — worth a fresh run before trusting counts again; none of today's edits touched `src/data/`, so a red run would mean something else broke.
+- **§9's EU/Europe id registry** — regenerated in full 2026-08-08, then `sdmx-glossary` added same day, 127 ids, cross-checked against `index.ts`.
+- **§9's AU and NZ id registries** — regenerated in full 2026-08-08, AU 11→21, NZ 18→30, same cross-check.
+- **The `insurance` Domain value** — added 2026-08-08, both ECB nodes retagged.
+- **`EU/slices/eu-level/` and `cross-layer/`** — archived 2026-08-08 to `archive/EU-slices-mirror/`, not kept in sync. `_staging/` is unaffected and still live (it's 2.5's backlog, not a mirror).
+- **The three superseded planning files** — `MISSION-TODO.md` and `rolling-todo.md` archived 2026-08-08 to `archive/planning/`.
+- **`MISSION-TODO-2.md`'s ragged numbering** — leaving it as-is, your call 2026-08-08. Don't propose renumbering again.
+- **`scripts/handoff-to-json.py`'s priority-block parser** — fixed 2026-08-08, all sidecars regenerated. The "no-argument mode only scans EU/" half of that bug report was already false when checked; don't re-flag it.
+- **The EUR-Lex "does it work" contradiction** — resolved 2026-08-08 by direct check: it works, plain `curl` included. Both `MISSION-TODO-2.md` and `Research.1.md` §7 corrected.
+- **`START-HERE.md`'s stale corpus count** — fixed to 372/436, 2026-08-08.
+- **`EU/proposals/` and its rule** — instituted 2026-08-08.
+- **Staging batches 53/54 being duplicates** — noted in `01-manifest.json`, 2026-08-08. Not re-split.
+- **`EU/legacy-handoffs/` G.00–G.13 as `.md`** — converted from `.docx` 2026-08-08, originals kept alongside.
 - **The ESS Quality Framework candidates** — QPI Guidelines minted; Quality Glossary and DESAP closed on rewritten reasons. Do not reopen (`G.55.md`).
 - **FP6 behind FP7** — confirmed dead end, your call.
 - **The one-off foundational instrument rule** — settled `G.52.md`.

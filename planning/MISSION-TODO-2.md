@@ -97,7 +97,45 @@ notes at the bottom.*
    GitHub Desktop: delete everything matching `.git/*.lock.stale*` and any
    `.git/index.lock` / `.git/HEAD.lock`, with GitHub Desktop closed, then
    retry the commit. An agent can advise from what Thomas reports seeing;
-   it cannot look.
+   it cannot look. **2026-08-08: Thomas reports GitHub Desktop closed.**
+   Still not verified committed/pushed — no agent can check (§2); ask him.
+
+*A third batch, answered via `Open-Questions-2026-08-08.docx`, returned
+2026-08-08 — folded straight into the items they govern (OPEN-THREADS 0.4,
+0.5, 1.1, 1.10, 1.11, all marked closed there).*
+
+6. ~~Decide: does `sdmx-glossary` belong on §9's EU id list?~~ — **DECIDED
+   AND DONE 2026-08-08 (Thomas, option: add sdmx-glossary only)**: added to
+   `Research.1.md` §9 (127 ids); the weaker four (`hs`, `imf-weo`,
+   `imf-fiscal-monitor`, `oecd-economic-outlook`) stay out, decided case by
+   case rather than as a standing rule.
+
+7. ~~Decide: add an `insurance` Domain value?~~ — **DECIDED AND DONE
+   2026-08-08 (Thomas, option: yes)**: added to the `Domain` union in
+   `src/lib/types.ts` and to `Research.1.md` §6; both ECB nodes
+   (`ecb-insurance-corporations-operations`,
+   `ecb-insurance-corporations-assets-liabilities`) retagged from
+   `financial-regulation`.
+
+8. ~~Decide: sync or freeze the diverged `EU/slices` mirror?~~ — **DECIDED
+   AND DONE 2026-08-08 (Thomas: "drop them in the archive folder")**:
+   `EU/slices/eu-level/` and `EU/slices/cross-layer/` moved to
+   `archive/EU-slices-mirror/`; `EU/slices/README.md` updated. **Not**
+   archived: `EU/slices/_staging/` — Thomas's hunch that "the slices were
+   meant to be parts of blob" turned out to be right about `_staging/`
+   specifically (it's the literal staging-blob split behind item 4a/OPEN-
+   THREADS 2.5, not a mirror of anything) — archiving it would have buried
+   live backlog, not tidied a duplicate. `member-states/` (empty) also left
+   in place.
+
+9. ~~OK to archive the two superseded planning files?~~ — **DECIDED AND
+   DONE 2026-08-08 (Thomas: yes)**: `MISSION-TODO.md` (1.0) and
+   `rolling-todo.md` moved to `archive/planning/`.
+
+10. ~~Renumber this file's ragged item numbers (`9z`/`23b`/`23a`)?~~ —
+    **DECIDED 2026-08-08 (Thomas: leave as-is)**: not renumbering — it would
+    touch every hand-off and index citing these numbers for a cosmetic fix.
+    Stop appending new letters going forward.
 
 ---
 
@@ -135,6 +173,40 @@ first, in full)
     (soft law, deliberately deferred by Thomas, needs the
     foundational-instrument test on its own merits) and the 52 entries the
     broad-but-not-tight keyword pass caught and nobody read.
+
+    **SCOPED 2026-08-08, IN PROGRESS**:
+    `planning/dropped-sweep-scoping_2026-08-08.md`. Ranks all 58 files with
+    `_dropped` entries by count, previews every priority-reason entry in the
+    top 19 (the "~15 files" this item asks for, plus ties at the cutoff),
+    and gives a suggested execution order. **Correction to the paragraph
+    above**: "122" is code-computed (`DROPPED_LEAD_REASONS` in
+    `src/lib/types.ts`) as `no-node-yet` + `deferred`, not `no-node-yet` +
+    `no-document` — `no-document` is a real, separate priority (checking
+    whether a confirmed negative was actually exhaustively searched), just
+    not part of the 122 itself. See the scoping doc's "clarification"
+    section for the full reasoning; `Research.1.md` §4 carries the same
+    correction.
+
+    **First file pair done 2026-08-08**: `equalization-named-products.json`
+    + `equalization-payroll-base.json`. Turned up a second correction on
+    top of the one above — 8 of the 87 `no-node-yet` entries counted in
+    that figure were already stale, closed a day earlier by a companion
+    file (`grok-h1-equalization-named-products.json`, merged 2026-08-07)
+    whose sibling file's `_dropped` block was never updated to match. The
+    validator's own stale-note check can't catch this class, because it
+    only checks notes whose source/target already resolve to a real edge,
+    and these carried `target: null` by design — worth remembering for the
+    rest of this sweep: a `no-node-yet` lead can be closed elsewhere in the
+    corpus without the file that recorded it ever finding out. The other 7
+    leads (all in `equalization-payroll-base.json`, all hanging off
+    Territorial Formula Financing) were genuine and got built for real:
+    TFF minted as a node — the fourth major federal transfer, previously
+    missing from the graph entirely — plus three new StatCan nodes, seven
+    edges, all citations re-verified against the consolidated regulation.
+    Estimated effect on the corpus (you still need to run the validator to
+    confirm): 87 `no-node-yet` → ~72, 122 leads → ~107, 372 reports → ~376,
+    436 dependencies → ~443. Full account in
+    `planning/OPEN-THREADS_2026-08-08.md` under 2.1.
 
 4b. **Rebuild proposal Files A and B to the 2026-08-08 rulings.** The
     drafts are gone (see the P0 header note). File A (German EDP + GNI
@@ -450,28 +522,32 @@ raid this list when a session has capacity left)
 
 ## P3 — Code and tooling (none urgent; each is self-contained)
 
-19. **Fix `scripts/handoff-to-json.py`'s priority-block parser.** It only
-    recognises the EU's lettered `**A — Label**` convention and silently
-    emits `priorities: []` for the plain-numbered lists that the 2026-08-07
+19. ~~Fix `scripts/handoff-to-json.py`'s priority-block parser.~~ —
+    **FIXED 2026-08-08 (OPEN-THREADS 1.5).** It only recognised the EU's
+    lettered `**A — Label**` convention and silently emitted
+    `priorities: []` for the plain-numbered lists that the 2026-08-07
     branch-numbering decision (Research.1.md §2) made standard for AU and
-    NZ. Confirmed against `AU/G.1.json`–`G.3.json`. After fixing, re-run
-    the script over `AU/G.*.md` and `NZ/G.*.md` to regenerate sidecars.
-    Same file, second task: its no-argument mode only scans `EU/`
-    (hardcoded `BRANCHES`) — add AU and NZ, and remember to add any new
-    branch folder when a new galaxy opens.
-20. **Backfill `Research.1.md` §9's id lists by re-extraction.**
-    **EU/Europe half DONE 2026-08-08 (`G.56`)** — regenerated in one pass,
-    105 → 126 ids, block replaced wholesale, cross-checked against
-    `src/data/index.ts` (67 files, 67 imports, no duplicate ids). Two
-    judgement calls surfaced there for Thomas rather than decided: two
-    `country: "DK"` Greenland-chain ids now land on the EU list by the
+    NZ. Now falls back to `numbered_items`/`bullet_items` when no lettered
+    blocks are found. Re-ran the script over every branch — AU/NZ
+    G-files now carry a real priority block instead of an empty one; EU's
+    lettered parsing unaffected (checked against `G.56.json`). **The
+    second task described here — no-argument mode only scanning `EU/` —
+    turned out to already be false**: `BRANCHES` already listed all three
+    branches and `targets()` already scanned them; no code change needed
+    there. Don't re-flag it.
+20. ~~Backfill `Research.1.md` §9's id lists by re-extraction.~~ —
+    **DONE 2026-08-08, both halves.** EU/Europe half done 2026-08-08
+    (`G.56`) — regenerated in one pass, 105 → 126 ids (127 after
+    `sdmx-glossary`, item 6 above), block replaced wholesale, cross-checked
+    against `src/data/index.ts` (67 files, 67 imports, no duplicate ids).
+    Two judgement calls surfaced there for Thomas rather than decided: two
+    `country: "DK"` Greenland-chain ids land on the EU list by the
     mechanical filter, and `sdmx-glossary` (`INT`, minted by an EU slice)
-    was deliberately *not* folded in. **Still to do: the AU and NZ lists.**
-    The AU list is stale (11 ids on file; 19 exist after the Victoria
-    pass), and the NZ list predates the Stats NZ national-accounts pass
-    (+5 nodes) and Norway. §9's own instruction: re-run the extraction (report
-    objects by `country` across `src/data/research/*.json`), never append
-    by hand.
+    was decided case by case (item 6). **AU and NZ done 2026-08-08
+    (OPEN-THREADS 1.7)**: AU 11 → 21 ids, NZ 18 → 30 ids (the Stats NZ
+    national-accounts pass — 5 ids — plus six later additions). Same
+    re-extraction method, same cross-check, no duplicates anywhere in the
+    corpus.
 21. **Isolated-node shelving inconsistency** (1.0 item 15): the 3D view
     treats implied-only nodes differently from the validator's definition
     of isolated — reconcile (`src/components/InfluenceGraph.tsx` vs
@@ -523,9 +599,10 @@ raid this list when a session has capacity left)
 25. **Empty `_to_delete/`** — needs Thomas on Windows; the device bridge
     cannot delete files, only move them there, which is why the folder
     exists.
-26. **EU legacy hand-offs G.00–G.13** exist only as .docx in
-    `EU/legacy-handoffs/` — convert to .md someday so the chain's early
-    history is greppable.
+26. ~~EU legacy hand-offs G.00–G.13 exist only as .docx.~~ — **DONE
+    2026-08-08 (OPEN-THREADS 1.14).** All 10 (`G.00`, `G.02`–`G.05`,
+    `G.07`–`G.09`, `G.11`, `G.13`) converted with `pandoc -t markdown` to
+    `.md` siblings in `EU/legacy-handoffs/`; originals kept alongside.
 27. **The `au-abs-gfs` node-split question** (G.1 Secondary observations,
     carried through G.3): the 2005 "ABS GFS Manual" methodology publication
     vs the annual "Government Finance Statistics, Australia" release are
@@ -568,13 +645,19 @@ raid this list when a session has capacity left)
   browser's rendered text; legislation.govt.nz blocks non-browser clients
   (PCO PDFs via Wayback `id_` worked); lovdata.no is robots-blocked (use
   the ministry's own mirrors, e.g. the Veileder); Stats NZ DataInfo+ is
-  intermittently fetchable and archive.stats.govt.nz DNS is flaky; **EUR-Lex
-  no longer works in a browser either — corrected 2026-08-07, `EU/G.50.md`
-  Findings 4: `curl` gets HTTP 202 with a zero-byte body and Chrome silently
-  redirects every legal-content and ELI form to `eur-lex.europa.eu/TodayOJ`,
-  ignoring the CELEX id; retry once per session, then find a mirror** (several
-  other EU agency sites still gate non-browser HTTP but pass in a real
-  browser); many government sites lazy-load behind "Expand all".
+  intermittently fetchable and archive.stats.govt.nz DNS is flaky. **EUR-Lex:
+  this file previously carried two contradictory notes on the same date
+  (2026-08-07) — this one claiming outage, and P1 item 5(d) above claiming
+  it works. RESOLVED 2026-08-08 (OPEN-THREADS 1.3), by direct check**: plain
+  `curl`, no browser UA, gets HTTP 200 with full text on both forms tested
+  (`eli/reg/2009/479/oj/eng`, `legal-content/EN/TXT/?uri=CELEX:02009R0223-20241226`)
+  — no 202, no zero-byte body, no redirect to TodayOJ. The outage this note
+  described was transient, same conclusion P1 item 5(d) already recorded;
+  this note was simply never corrected. EUR-Lex does **not** need the
+  once-per-session-retry-then-mirror treatment; treat it as reliable and
+  investigate afresh only if it actually fails again. (Several other EU
+  agency sites still gate non-browser HTTP but pass in a real browser); many
+  government sites lazy-load behind "Expand all".
 * **Tense trap** (Research.1.md §5b) runs forwards too: an announced future
   dependency (Vicmap) is `deferred`, not an edge, until a document states
   it in the present tense.

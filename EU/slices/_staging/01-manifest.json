@@ -4,6 +4,10 @@
   "_extracted_chars": 1290691,
   "_top_level_json_objects": 383,
   "_coverage_pct": 67.4,
+  "_known_duplicate_batches": {
+    "_added": "2026-08-08 (OPEN-THREADS 1.13)",
+    "_note": "batches[53] and batches[54] (0-indexed) are byte-identical apart from char_offset: same batch_id (NONBANK-EBA-SUP-2026-08-03-A1), same strand, same n_records (8), same record_ids. The blob split produced this section twice. Treat batches[54] as a duplicate of batches[53] -- do not work it as a separate batch when processing the remaining backlog (OPEN-THREADS 2.5). counts.batch-with-records (73) is one higher than the real distinct count (72) because of this. This note is hand-added and will be lost if _staging/split_blob.py is re-run to regenerate this manifest -- re-add it if so."
+  },
   "counts": {
     "batch-header": 8,
     "batch-with-records": 73,

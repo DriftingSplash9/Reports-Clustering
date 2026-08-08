@@ -335,6 +335,20 @@ it file-by-file over the ~15 files with the most `_dropped` entries,
 reading each array in full; **do not run another keyword pass** — the
 third category above is invisible to one by construction.
 
+**Scoped 2026-08-08** (OPEN-THREADS 2.1, not yet worked):
+`planning/dropped-sweep-scoping_2026-08-08.md` ranks every file by
+`_dropped` count, previews the priority entries in the top 19, and
+**corrects an imprecision in the paragraph above**: the validator's "122"
+is computed from `DROPPED_LEAD_REASONS = ['no-node-yet', 'deferred']`
+in `src/lib/types.ts` — it is `no-node-yet` (87) + `deferred` (35), **not**
+`no-node-yet` + `no-document`. `no-document` (72) is a separate,
+equally-real starting category, but for a different reason: those entries
+claim a confirmed negative, and the task there is checking whether the
+search behind that negative was actually exhaustive, not doing more
+forward research. Treat the sweep as three piles — 122 confirmed leads,
+72 negatives to re-check, ~197 lower-priority entries still subject to the
+same file-by-file read — not one undifferentiated 122.
+
 ### Termini — things that are named but cannot be published
 
 Some inputs are real, named, load-bearing and impossible to point at: the CRA
@@ -635,12 +649,18 @@ Bought expensively. Follow these before general searching.
   publications until their own file names identified them as Appendix 2/3 of
   the report already modelled (`eurostat-remuneration-update-report.json`).
   Check a candidate series' own file metadata before minting it.
-- **EU-specific: EUR-Lex and several EU-agency sites gate non-browser HTTP
-  clients but are reachable via a real browser.** Confirmed repeatedly
-  (`G.31.md` finding 3 onward) for `eur-lex.europa.eu`; two further sites
-  (`u4unity.eu`, `ecb.europa.eu`'s PDF host) trigger a file-download response
-  to direct browser navigation but are fetchable via `WebFetch`, whose saved
-  binary can then be read with `pypdf`.
+- **EU-specific: several EU-agency sites gate non-browser HTTP clients but
+  are reachable via a real browser.** Confirmed repeatedly (`G.31.md`
+  finding 3 onward). Two sites (`u4unity.eu`, `ecb.europa.eu`'s PDF host)
+  trigger a file-download response to direct browser navigation but are
+  fetchable via `WebFetch`, whose saved binary can then be read with `pypdf`.
+  **`eur-lex.europa.eu` no longer belongs on this list — resolved
+  2026-08-08 (OPEN-THREADS 1.3)**: plain `curl`, no browser UA, gets HTTP
+  200 with full text on both the `eli/reg/...` and `legal-content/EN/TXT/...`
+  URL forms. `planning/MISSION-TODO-2.md` carried two contradictory notes
+  about this dated the same day (2026-08-07); the "works" one was correct
+  and the "outage" one described a transient state that was never corrected.
+  Treat EUR-Lex as reliable; only re-investigate if it actually fails again.
 - **EU-specific: many government and agency sites lazy-load detail behind an
   "Expand all" control.** Confirmed for Legilux (`G.34.md`) and Eurostat's
   civil-servants-remuneration Publications/Methodology pages (`G.35.md`,
@@ -941,11 +961,22 @@ rates and financial statements) — see
 `src/data/research/au-government-finance.json` and `AU/G.1.md`, the first
 hand-off in a new series parallel to `EU/G.*.md`.
 
+**Regenerated in full 2026-08-08 (OPEN-THREADS 1.7), replacing the block
+wholesale like the EU/Europe pass.** 21 ids, up from 11 — stale since the
+2026-08-06 minting, never updated as the Victoria pass and later sessions
+added nodes. Same method as the EU pass: every `"id"` from every report
+object in `src/data/research/*.json` whose `country` is `AU`. Cross-checked
+against `src/data/index.ts`: all 67 research files on disk are imported, no
+duplicate id anywhere in the corpus.
+
 ```
-au-aasb1049, au-abs-erp, au-abs-gfs, au-abs-seifa,
-au-brisbane-financial-statements, au-cgc-gst-relativities,
-au-georges-river-rates, au-la-annual-statements, au-nsw-lrs,
-au-tas-sgc-methodology, au-vola1916
+au-aasb1049, au-abs-australian-industry, au-abs-building-approvals,
+au-abs-census, au-abs-erp, au-abs-gfs, au-abs-regional-population,
+au-abs-seifa, au-brisbane-financial-statements, au-cgc-gst-relativities,
+au-dss-payment-demographics, au-federal-budget, au-georges-river-rates,
+au-la-annual-statements, au-lgfa-act-1995, au-nsw-lrs,
+au-tas-sgc-methodology, au-vlggc-act-1976, au-vlggc-agi-questionnaire,
+au-vlggc-annual-allocation-report, au-vola1916
 ```
 
 **Two of these ids rest on unverified subagent extraction, not this
@@ -969,13 +1000,26 @@ report and rates documents, and the LGFA). See
 `src/data/research/nz-government-finance.json` and `NZ/G.1.md`, a third
 hand-off series parallel to `EU/G.*.md` and `AU/G.1.md`.
 
+**Regenerated in full 2026-08-08 (OPEN-THREADS 1.7), replacing the block
+wholesale like the EU/Europe pass.** 30 ids, up from 18 — predated the
+Stats NZ national-accounts pass (`nz-statsnz-national-accounts.json`: 5
+ids) and several later additions (`nz-oag-annual-report`,
+`nz-public-audit-act-2001`, `nz-public-finance-act-1989`, `nz-lgaca-2009`,
+`nz-auckland-annual-report`, `nz-statsnz-aes`). Same method: every `"id"`
+from every report object in `src/data/research/*.json` whose `country` is
+`NZ`. Cross-checked the same way as AU, above — no duplicates, all files
+imported.
+
 ```
-nz-district-valuation-roll, nz-la-annual-reports, nz-lgfa-annual-report,
-nz-mbie-accommodation-data, nz-mbie-tect, nz-mbie-tif,
-nz-nzta-far-policy, nz-pbe-ipsas-1, nz-rva1998, nz-rvr2008,
+nz-auckland-annual-report, nz-district-valuation-roll, nz-la-annual-reports,
+nz-lgaca-2009, nz-lgfa-annual-report, nz-mbie-accommodation-data,
+nz-mbie-tect, nz-mbie-tif, nz-nzta-far-policy, nz-oag-annual-report,
+nz-pbe-ipsas-1, nz-public-audit-act-2001, nz-public-finance-act-1989,
+nz-rva1998, nz-rvr2008, nz-statsnz-aes, nz-statsnz-bpi, nz-statsnz-gdp,
 nz-statsnz-gfs, nz-statsnz-lac, nz-statsnz-national-accounts-income,
-nz-statsnz-qlas, nz-treasury-befu, nz-treasury-fsgnz,
-nz-wellington-annual-report, nz-wellington-rates, nz-xrb-a1
+nz-statsnz-npisa, nz-statsnz-qlas, nz-statsnz-regional-gdp, nz-statsnz-tsa,
+nz-treasury-befu, nz-treasury-fsgnz, nz-wellington-annual-report,
+nz-wellington-rates, nz-xrb-a1
 ```
 
 **`nz-nzta-far-policy` is deliberately isolated**, on the same convention as

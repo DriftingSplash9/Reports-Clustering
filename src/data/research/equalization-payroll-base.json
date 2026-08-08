@@ -1,7 +1,75 @@
 {
   "_slice": "equalization-payroll-base",
-  "_scope": "The payroll-tax revenue base in the Federal-Provincial Fiscal Arrangements Regulations, 2007 (SOR/2007-303). Closes the SEPH question left outstanding by V0.9. Owns only the two edges out of fiscal-equalization-program that this provision establishes; the Territorial Formula Financing parallel and the other publications named in s. 19 are recorded as leads, not built.",
-  "reports": [],
+  "_scope": "The payroll-tax revenue base in the Federal-Provincial Fiscal Arrangements Regulations, 2007 (SOR/2007-303). Closes the SEPH question left outstanding by V0.9. Originally owned only the two edges out of fiscal-equalization-program that this provision establishes, with the Territorial Formula Financing parallel and the other publications named in s. 19 recorded as leads. EXTENDED 2026-08-08: mints Territorial Formula Financing itself as a node and closes all seven of those leads — two onto pre-existing seed nodes (statcan-seph, statcan-national-accounts), two onto nodes the 2026-08-07 grok-h1-equalization-named-products.json merge had already built for a different provision of the same regulation (statcan-alcohol-sales, statcan-government-finance-statistics), and three onto new nodes (Census of Agriculture, Gasoline and Other Petroleum Fuels Sold, Report on Energy Supply and Demand in Canada). All seven citations were re-verified against the consolidated regulation at laws-lois.justice.gc.ca before building.",
+  "reports": [
+    {
+      "id": "territorial-formula-financing",
+      "title": "Territorial Formula Financing",
+      "publisher": "Department of Finance Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The federal unconditional transfer to Yukon, the Northwest Territories and Nunavut that closes the gap between what a territory could raise on its own and what it needs to provide services comparable to those in the provinces, calculated under Part I.1 of the Federal-Provincial Fiscal Arrangements Act and Part 1.1 of SOR/2007-303. The fourth major federal transfer alongside the Canada Health Transfer, the Canada Social Transfer and Equalization, and until this entry the only one of the four with no node in this graph. Its revenue-base formula at s. 19 mirrors the DIVISION 2 Nova Scotia formula at s. 8 term for term in several places (SEPH, the System of Macroeconomic Accounts wage terms, Government Finance Statistics), which is what made this pass cheap once the equalization-named-products cluster had already verified the parallel citations.",
+      "releases_per_year": 1,
+      "cadence_note": "Entitlements are announced in December for the fiscal year beginning the following April 1, alongside Equalization, from the same certificate process.",
+      "last_updated": null,
+      "url": "https://www.canada.ca/en/department-finance/programs/federal-transfers/territorial-formula-financing.html",
+      "domains": [
+        "fiscal-transfers",
+        "taxation"
+      ]
+    },
+    {
+      "id": "statcan-census-agriculture",
+      "title": "Census of Agriculture",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The quinquennial census of Canadian farms, aligned with the population census years (2021, 2026, ...), producing farm land and building values among its outputs (IMDB record 3438). SOR/2007-303 s. 19(1)(h) names it explicitly as a publication — 'the value of farm land and buildings in a province or territory ... as determined by Statistics Canada for the purpose of its publication entitled Census of Agriculture' — for the farm sub-base of the Territorial Formula Financing property-tax revenue base, the counterpart to the Nova Scotia division's use of the agricultural balance sheet (CANSIM 002-0020 / table 32-10-0056-01) for the same conceptual measure.",
+      "releases_per_year": 0.2,
+      "cadence_note": "Every five years, in the same years as the Census of Population (2021, 2026); not an annual release.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=3438",
+      "domains": [
+        "assessment",
+        "taxation"
+      ]
+    },
+    {
+      "id": "statcan-gasoline-other-petroleum-fuels-sold",
+      "title": "Gasoline and Other Petroleum Fuels Sold",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The annual survey of gasoline, diesel, aviation and other petroleum fuel volumes sold by province and territory (IMDB record 2746), reported each year in The Daily as 'Motor vehicle fuel sales'. SOR/2007-303 s. 19(1)(d)(ii) and s. 19(1)(e)(ii)(A) both name the survey by title for the aviation-fuel and railway-fuel components of the Territorial Formula Financing motive-fuel tax base, distinct from the general fuel-volume definition in s. 1(1) that runs through the fixed table 23-10-0066-01 (statcan-road-fuel-sales) instead.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2746",
+      "domains": [
+        "taxation",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "statcan-energy-supply-demand-report",
+      "title": "Report on Energy Supply and Demand in Canada",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Statistics Canada's annual publication (catalogue 57-003-X) reconciling Canadian energy supply and demand by fuel type and province. SOR/2007-303 s. 19(1)(e)(ii)(B) names it as the fallback source for the railway-fuel component of the Territorial Formula Financing motive-fuel tax base, used 'in any other case' where the primary railway fuel tax data is incomplete — the same statutory-fallback shape as the Oil Sands Royalty Regulation's provision for a discontinued Bank of Canada exchange rate.",
+      "releases_per_year": 1,
+      "cadence_note": "Published with a lag behind its reference year; catalogue 57-003-X was still being issued as of the 2025 edition. The regulation cites it as a named fallback publication, not as the primary source for this revenue base.",
+      "last_updated": null,
+      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/57-003-X",
+      "domains": [
+        "taxation",
+        "fiscal-transfers"
+      ]
+    }
+  ],
   "dependencies": [
     {
       "source_report_id": "fiscal-equalization-program",
@@ -28,58 +96,70 @@
         "stated_as": "for the calendar year that ends in the fiscal year"
       },
       "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-5.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-seph",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 19(1)(g) is the payroll-tax revenue base for PART 1.1 — Territorial Formula Financing Payments, and it cites SEPH twice, once in each of two formula terms. Term D: 'data on the gross payroll of employers in the province or territory — other than those referred to in subparagraphs (i) and (ii) of the description of G — for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours'. Term G: 'is the gross dollar value, before deductions, of the payrolls of all employers in the province or territory for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours, other than the payrolls of (i) employers not included in that survey, and (ii) employers in the following industry classifications, as defined by the North American Industry Classification System'.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "for the calendar year that ends in the fiscal year"
+      },
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "calculated_from",
+      "basis": "Same provision, SOR/2007-303 s. 19(1)(g), terms F and H, mirroring s. 8(1)(y)'s A and M. F: 'is the total wages and salaries excluding supplementary labour income, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts, paid in the province or territory in the calendar year that ends in the fiscal year, other than the wages and salaries paid by (i) the federal general government sector to employees in the defence industry, and (ii) the provincial and territorial general government sector and the local general government sector to their employees'. H: 'is military pay and allowances, excluding supplementary labour income, paid in the province or territory in the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. Carries the same framework-to-release inference noted on the corresponding live edge from fiscal-equalization-program.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "for the calendar year that ends in the fiscal year"
+      },
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-census-agriculture",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 19(1)(h), the property-tax revenue base, sub-base B3: 'F is the value of farm land and buildings in a province or territory, measured in current dollars, as determined by Statistics Canada for the purpose of its publication entitled Census of Agriculture, and adjusted to exclude farm residences, for the most recent calendar year available in the publication'. The regulation names the publication explicitly ('its publication entitled'), the strongest form of citation this project accepts.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-gasoline-other-petroleum-fuels-sold",
+      "relationship_type": "calculated_from",
+      "basis": "Named twice as a survey by title. SOR/2007-303 s. 19(1)(d)(ii): 'the number of litres of aviation fuel sold in the province or territory in that year, as determined by Statistics Canada on the basis of data from its survey Gasoline and Other Petroleum Fuels Sold'. And s. 19(1)(e)(ii)(A), for railway fuel: 'in the case where railway fuel is taxed in the province or territory throughout that year and data on the tax is complete and available, by Statistics Canada on the basis of data from its survey Gasoline and Other Petroleum Fuels Sold'.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-energy-supply-demand-report",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 19(1)(e)(ii)(B), the fallback where railway fuel tax data is incomplete: 'in any other case, by the Minister on the basis of data prepared by Statistics Canada for the purpose of its publication entitled Report on Energy Supply and Demand in Canada'. An alternative to the Gasoline and Other Petroleum Fuels Sold edge above, not a duplicate of it — the statute names a primary source and a named fallback publication, the same shape as the Oil Sands Royalty Regulation's statutory fallback for the day the Bank of Canada stops publishing an exchange rate.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-alcohol-sales",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 19(1)(f), alcoholic beverage revenues, cites the table three times, once each for spirits, wine and beer. From subparagraph (i): 'the volume of spirits sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (× 1,000)'. Subparagraphs (ii) and (iii) repeat the identical citation for wine and beer. Target node statcan-alcohol-sales was built 2026-08-07 in grok-h1-equalization-named-products.json for the Nova Scotia division's parallel citation of the same table under its retired CANSIM number (183-0024) at s. 8(1)(j); this is the second, independently-verified provision reaching the same node.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
+    },
+    {
+      "source_report_id": "territorial-formula-financing",
+      "target_report_id": "statcan-government-finance-statistics",
+      "relationship_type": "calculated_from",
+      "basis": "SOR/2007-303 s. 19(1)(b)(ii), the government business enterprise component: 'the product, as determined on the basis of data prepared by Statistics Canada for the purpose of the Government Finance Statistics, of ...'. Target node statcan-government-finance-statistics was built 2026-08-07 in grok-h1-equalization-named-products.json for the identical wording in the DIVISION 1 all-provinces revenue base at s. 5(b)(ii); this is the second provision reaching the same node, and it completes the same chain — a statutory transfer formula through a national statistical programme to the imf-gfsm standard already in the corpus — for the territorial transfer rather than just the provincial one.",
+      "evidence_url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2007-303/page-9.html"
     }
   ],
   "_dropped": [
-    {
-      "edge": "(Territorial Formula Financing) -> statcan-seph",
-      "source": null,
-      "target": "statcan-seph",
-      "reason": "no-node-yet",
-      "why": "The best single lead this pass produced. SOR/2007-303 s. 19(1)(g) is the payroll-tax revenue base for PART 1.1 — Territorial Formula Financing Payments, and it cites SEPH twice, once in each of two formula terms. Term D: 'data on the gross payroll of employers in the province or territory — other than those referred to in subparagraphs (i) and (ii) of the description of G — for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours'. Term G: 'is the gross dollar value, before deductions, of the payrolls of all employers in the province or territory for the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its Survey of Employment, Payrolls and Hours, other than the payrolls of (i) employers not included in that survey, and (ii) employers in the following industry classifications, as defined by the North American Industry Classification System'. TFF is a real recurring federal transfer with annual published entitlements and no node in this graph, which is a gap on its own terms — the corpus has the Canada Health Transfer, the Canada Social Transfer and Equalization but not the fourth major transfer. One node buys this edge plus the six below."
-    },
-    {
-      "edge": "(Territorial Formula Financing) -> statcan-national-accounts",
-      "source": null,
-      "target": "statcan-national-accounts",
-      "reason": "no-node-yet",
-      "why": "Same provision, SOR/2007-303 s. 19(1)(g), terms F and H, mirroring s. 8(1)(y)'s A and M. F: 'is the total wages and salaries excluding supplementary labour income, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts, paid in the province or territory in the calendar year that ends in the fiscal year, other than the wages and salaries paid by (i) the federal general government sector to employees in the defence industry, and (ii) the provincial and territorial general government sector and the local general government sector to their employees'. H: 'is military pay and allowances, excluding supplementary labour income, paid in the province or territory in the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. Carries the same framework-to-release inference noted on the corresponding live edge."
-    },
-    {
-      "edge": "(Territorial Formula Financing) -> (Census of Agriculture)",
-      "source": null,
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "SOR/2007-303 s. 19(1)(h), the property-tax revenue base, sub-base B3: 'F is the value of farm land and buildings in a province or territory, measured in current dollars, as determined by Statistics Canada for the purpose of its publication entitled Census of Agriculture, and adjusted to exclude farm residences, for the most recent calendar year available in the publication'. Note 'its publication entitled' — the Regulations are naming a publication explicitly, which is the strongest form of citation this project accepts. Neither endpoint is a node. The Census of Agriculture is quinquennial and would sit naturally beside statcan-census-population."
-    },
-    {
-      "edge": "(Territorial Formula Financing) -> (Gasoline and Other Petroleum Fuels Sold)",
-      "source": null,
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "Named twice as a survey by title. SOR/2007-303 s. 19(1)(d)(ii): 'the number of litres of aviation fuel sold in the province or territory in that year, as determined by Statistics Canada on the basis of data from its survey Gasoline and Other Petroleum Fuels Sold'. And s. 19(1)(e)(ii)(A), for railway fuel: 'in the case where railway fuel is taxed in the province or territory throughout that year and data on the tax is complete and available, by Statistics Canada on the basis of data from its survey Gasoline and Other Petroleum Fuels Sold'. A recurring StatCan survey, not yet a node."
-    },
-    {
-      "edge": "(Territorial Formula Financing) -> (Report on Energy Supply and Demand in Canada)",
-      "source": null,
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "SOR/2007-303 s. 19(1)(e)(ii)(B), the fallback where railway fuel tax data is incomplete: 'in any other case, by the Minister on the basis of data prepared by Statistics Canada for the purpose of its publication entitled Report on Energy Supply and Demand in Canada'. Worth recording as its own entry rather than folding into the fuel-survey note above, because the two provisions are alternatives — the statute names a primary source and a named fallback publication, which is the same shape as the Oil Sands Royalty Regulation's statutory fallback for the day the Bank of Canada stops publishing an exchange rate."
-    },
-    {
-      "edge": "(Territorial Formula Financing) -> (StatCan table 10-10-0011-01)",
-      "source": null,
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "SOR/2007-303 s. 19(1)(f), alcoholic beverage revenues, cites a specific numbered StatCan table three times, once each for spirits, wine and beer. From subparagraph (i): 'the volume of spirits sold in the province or territory in the fiscal year, as determined by Statistics Canada for the purpose of table 10-10-0011-01, Value of sales of alcoholic beverages of liquor authorities and other retail outlets, by beverage type (× 1,000)'. Subparagraphs (ii) and (iii) repeat the identical citation for wine and beer. A statute citing a table number rather than a programme is a new form in this corpus and raises the release-versus-series question again: a numbered table is finer-grained than anything currently modelled as a node."
-    },
-    {
-      "edge": "(Territorial Formula Financing) -> (Government Finance Statistics)",
-      "source": null,
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "SOR/2007-303 s. 19(1)(b)(ii), the government business enterprise component: 'the product, as determined on the basis of data prepared by Statistics Canada for the purpose of the Government Finance Statistics, of ...'. Note the graph already contains imf-gfsm, the IMF's Government Finance Statistics Manual, as a standard that statcan-national-accounts depends on — so the Canadian GFS programme, if made a node, would sit between a statutory formula and an international standard already present. That is the shape the cross-border and international clusters are short of."
-    },
     {
       "edge": "SOR/2007-303 — how far the SEPH search actually reached",
       "source": null,

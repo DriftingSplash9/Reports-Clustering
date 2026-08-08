@@ -1,22 +1,15 @@
 {
   "_slice": "equalization-named-products",
-  "_scope": "Every Statistics Canada product named by SOR/2007-303 that has no node to point at. One lead per missing publication, with the provisions that name it and a verbatim quote. Creates no edges — the cluster is blocked on node coverage, not on evidence. Companion to equalization-payroll-base.json, which took the two edges whose targets already exist.",
+  "_scope": "Every Statistics Canada product named by SOR/2007-303 that has no node to point at. One lead per missing publication, with the provisions that name it and a verbatim quote. Creates no edges of its own — the cluster was blocked on node coverage, not on evidence. Companion to equalization-payroll-base.json, which took the two edges whose targets already exist. UPDATE 2026-08-08: eight of the nine no-node-yet leads recorded here were closed on 2026-08-07 by src/data/research/grok-h1-equalization-named-products.json, a companion file this file's own _dropped block was never updated to reflect — the leads sat here reading as open for a day after the edges existed. See the consolidated note in _dropped below.",
   "reports": [],
   "dependencies": [],
   "_dropped": [
     {
-      "edge": "fiscal-equalization-program -> (Provincial and Territorial Economic Accounts)",
-      "source": "fiscal-equalization-program",
+      "edge": "eight of this file's original nine no-node-yet leads",
+      "source": null,
       "target": null,
-      "reason": "no-node-yet",
-      "why": "The single highest-value missing node in this cluster, because it is named in the DIVISION 1 definitions that apply to all ten provinces rather than in the Nova Scotia division. SOR/2007-303 s. 3.1, definition of household final consumption expenditures: 'household final consumption expenditures as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts, net of any taxes on products, also as determined by Statistics Canada'. The same section pins two housing components to it: 'residential renovations as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts' and 'residential housing transfers as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts'. Also named at s. 8(1)(z.2) for the Nova Scotia division: 'household disposable income in the province for the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of its Provincial and Territorial Economic Accounts'. Note the construction 'for the purpose of its X' throughout — the Regulations do not merely cite a number, they adopt Statistics Canada's definition of it for a named product, which is why these are definitional and apply to every province's revenue base at once."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (Provincial Supply and Use Tables)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "Named in the DIVISION 1 definitions at s. 3.1 and again in the Nova Scotia division, and it cites the tables down to the individual matrix. From s. 3.1, capital expenditures: 'expenditures on commodities, as determined by Statistics Canada for the purpose of its Provincial Supply and Use Tables’ summary level final demand matrix'. And intermediate input expenditures: 'expenditures on intermediate inputs, as determined by Statistics Canada for the purpose of its Provincial Supply and Use Tables’ summary level intermediate input matrix'. At s. 8(1)(z): 'the current dollar gross domestic product at factor cost in the province for the calendar year that ends in the preceding fiscal year … as determined by Statistics Canada on the basis of data from its Provincial Supply and Use Tables'. Naming a matrix inside a table inside a programme is the finest-grained citation in the corpus so far, and it sharpens the release-versus-series question rather than answering it. Related to but distinct from the national Supply, Use and Input-Output Tables lead in statcan-macro-accounts.json — that one is IMDB record 1401 at the national level, this one is the provincial and territorial tables."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-07, caught stale 2026-08-08. Eight of the nine no-node-yet entries this file originally recorded were built as real nodes and wired to fiscal-equalization-program in the companion file src/data/research/grok-h1-equalization-named-products.json — a same-day merge of a 2026-07-31 Grok research handoff, verified edge-by-edge against SOR/2007-303 on 2026-08-07. This file's own _dropped block was never updated to match, so it went on reading as eight open leads for a day after the edges existed; nothing in the validator's stale-note check caught it, because that check only fires when a note's own source/target resolve to a real edge, and these entries carried target: null by design. Mapping, for anyone tracing a lead back: Provincial and Territorial Economic Accounts -> statcan-provincial-economic-accounts; Provincial Supply and Use Tables -> remapped onto the existing statcan-sut node (both are IMDB record 1401) rather than a new node; Government Finance Statistics -> statcan-government-finance-statistics; Oil and Gas Extraction survey -> statcan-oil-gas-extraction; R.L. Polk & Co. Canadian and International Registration Manual -> rl-polk-registration-manual (commercial); CANSIM table 405-0004 (Road motor vehicles, registrations) -> statcan-vehicle-registrations; CANSIM table 002-0020 (Balance sheet of the agricultural sector) -> statcan-agriculture-balance-sheet; table 23-10-0066-01 (Sales of fuel used for road motor vehicles) -> statcan-road-fuel-sales. All nine of the original verbatim SOR/2007-303 quotes survive as the `basis` text on the corresponding edges in the companion file; not repeated here. Only System of Macroeconomic Accounts, below, is still genuinely open — it is a framework, not a release, and the companion file left it alone for the same reason this file did."
     },
     {
       "edge": "fiscal-equalization-program -> (System of Macroeconomic Accounts, as a framework)",
@@ -24,48 +17,6 @@
       "target": null,
       "reason": "no-node-yet",
       "why": "The most frequently named product in the Regulations and the one this graph is least able to represent. Named in the DIVISION 1 definitions at s. 3.1 three times over, for the three capital-formation aggregates: 'gross fixed capital formation in intellectual property products, as determined by Statistics Canada on the basis of data for or from its System of Macroeconomic Accounts'; 'gross fixed capital formation in machinery and equipment, as determined by Statistics Canada on the basis of data for or from its System of Macroeconomic Accounts'; 'gross fixed capital formation in non-residential structures, as determined by Statistics Canada on the basis of data for or from its System of Macroeconomic Accounts'. And in the DIVISION 1 revenue base at s. 5(b)(i): 'the portion of the aggregate of corporate profits in Canada, before the payment of income taxes and without any deduction of the aggregate of corporate losses in Canada, that is attributable to any of the 10 provinces for the calendar year that ends in the fiscal year, as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. The CSMA is an accounting framework, not a release with a cadence, so it cannot become a node under the current model — but four separate revenue-base components depend on it definitionally, so leaving it unrepresented understates the Equalization Program's real input set. This is the same problem as the statcan-hfce / statcan-national-accounts duplication and the same problem as bea-gdp -> bea-pce, arriving from a third direction. THREE THINGS ARE NOW BLOCKED ON ONE DECISION: whether a node may be a named series or framework rather than a release."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (Government Finance Statistics)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "Upgrades the lead already recorded in equalization-payroll-base.json from the territorial provision to the DIVISION 1 all-provinces revenue base, which is a materially stronger citation. SOR/2007-303 s. 5(b)(ii): 'as determined on the basis of data prepared by Statistics Canada for the purpose of the Government Finance Statistics'. Also at s. 19(1)(b)(ii) for Territorial Formula Financing. Worth building because imf-gfsm — the IMF manual the Canadian programme implements — is already a node, so this would complete a chain from a statutory transfer formula through a national statistical programme to an international standard, which is the shape the international cluster currently lacks."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (Oil and Gas Extraction survey)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "Seven occurrences in s. 8, more than any other named survey in the section, across the oil, heavy oil, mined oil, natural gas and volume-based revenue bases. Representative, s. 8(1)(p): 'in the case of mined oil revenues described in paragraph 7(1)(p), the total value of the marketable production of synthetic petroleum from hydrocarbon deposits in the province in the calendar year that ends in the fiscal year, as determined by Statistics Canada on the basis of its survey Oil and Gas Extraction'. The survey also carries the statutory definitions of value of oil at s. 8(4) and value of natural gas at s. 8(6). CITATION CORRECTION: those two definitions were reported as sitting at s. 8(3) and s. 8(5); they are in s. 8(4) and s. 8(6), which are the subsections defining the terms used in (3) and (5). One subsection out. Of direct interest because the corpus already has a dense Alberta energy-royalty cluster whose valuation runs through NYMEX WTI, ICE Brent and Argus, and this is the federal statistical measure of the same physical production."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (R.L. Polk & Co., Canadian and International Registration Manual)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "A commercial publication named verbatim in a federal regulation, which is the exact shape the V0.5 commercial-source decision was written for. SOR/2007-303 s. 8(1)(i): 'the aggregate, over the following categories of vehicles, of the number of registered vehicles in each category, as determined by Statistics Canada for the purpose of CANSIM table 405-0004, Road motor vehicles, registrations, multiplied by the weighted average licence fee for that category over all provinces, as calculated on the basis of data respecting licence fees charged by each province contained in the R.L. Polk & Co. publication Canadian and International Registration Manual'. Note the regulation says 'the R.L. Polk & Co. publication' — it is a published, titled, recurring commercial product, so it qualifies as a node under the same rule that admits J.D. Power and ICE Brent, and unlike Haver Analytics it publishes something of its own. This was found while checking the alcoholic-beverage rows and was not in the returned research; it is the third commercial source found sitting inside a government funding formula, after J.D. Power in the US CPI and ICE Brent in Alberta's bitumen valuation."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (CANSIM table 405-0004, Road motor vehicles, registrations)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "Named twice, at s. 8(1)(h) and s. 8(1)(i), for the non-commercial and commercial motor vehicle licensing revenue bases. From s. 8(1)(h): 'the sum of the following numbers in the province in the calendar year that ends in the fiscal year, each as determined by Statistics Canada for the purpose of CANSIM table 405-0004, Road motor vehicles, registrations, or by the Minister if Statistics Canada does not make the determination'. The trailing clause is worth keeping: the regulation provides for the Minister to substitute if Statistics Canada stops producing the table, which is the second statutory fallback-for-a-discontinued-source found in this corpus after the Oil Sands Royalty Regulation's provision for the day the Bank of Canada stops publishing an exchange rate."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (CANSIM table 002-0020, Balance sheet of the agricultural sector)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "SOR/2007-303 s. 8(1)(z), the property-tax revenue base: 'the value of farm land in the province, measured in current dollars as of the end of the calendar year that ends in the preceding fiscal year, as determined by Statistics Canada for the purpose of CANSIM table 002-0020, Balance sheet of the agricultural sector, at December 31, and ratios'. Note this is the Nova Scotia division's farm measure, where the Territorial Formula Financing parallel at s. 19(1)(h) uses the Census of Agriculture instead — two divisions of one regulation measuring farm value from two different StatCan products."
-    },
-    {
-      "edge": "fiscal-equalization-program -> (table 23-10-0066-01, Sales of fuel used for road motor vehicles)",
-      "source": "fiscal-equalization-program",
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "SOR/2007-303 s. 1(1), in the general Interpretation section rather than a revenue base, defining the fuel quantities used throughout: 'as determined by Statistics Canada for the purpose of table 23-10-0066-01, Sales of fuel used for road motor vehicles, annual (× 1,000)'. Cited with the modern table number, unlike the CANSIM-era citations elsewhere in the same instrument — see the vintage note below."
     },
     {
       "edge": "fiscal-equalization-program -> (Canadian Pari-Mutuel Agency)",

@@ -191,7 +191,8 @@ def parse(path: str) -> dict:
         elif sec == "Corrections to prior sessions":
             out["corrections"] = numbered_items(b["body"]) or bullet_items(b["body"])
         elif sec == "Thomas's stated priority for the remaining work":
-            # Lettered blocks (A/B/C/D) appear as bold lines or H3s.
+            # Lettered blocks (A/B/C/D) appear as bold lines or H3s -- the EU
+            # branch's convention.
             blocks_found = []
             for m in re.finditer(
                 r"\*\*([A-Z])\s*[—–-]\s*(.+?)\*\*(.*?)(?=\*\*[A-Z]\s*[—–-]|\Z)",
@@ -214,6 +215,16 @@ def parse(path: str) -> dict:
                         "items": numbered_items(c["body"]) or bullet_items(c["body"]),
                     }
                 )
+            if not blocks_found:
+                # No lettered blocks or H3s found -- AU and NZ instead write a
+                # plain numbered list directly under this heading. Fixed
+                # 2026-08-08 (OPEN-THREADS 1.5): this used to silently yield
+                # priorities: [] for both branches. Represent it as one
+                # unlettered block rather than inventing letters that were
+                # never in the source.
+                plain_items = numbered_items(b["body"]) or bullet_items(b["body"])
+                if plain_items:
+                    blocks_found = [{"letter": None, "label": None, "items": plain_items}]
             out["priorities"] = blocks_found
         elif sec == "Cheap checks still outstanding":
             out["cheap_checks"] = numbered_items(b["body"]) or bullet_items(b["body"])
