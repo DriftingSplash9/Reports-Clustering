@@ -1,0 +1,205 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.56.md",
+  "number": 56,
+  "title": "G.56.md — EU galaxy hand-off",
+  "date": "2026-08-08",
+  "governing_briefs": "`Research.1.md` — **read in full this session, and edited**",
+  "predecessor": "`G.55.md` (2026-08-08, same day).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The branch's bookkeeping was further out of date than any single file\nadmitted, and one instance of it was a data-integrity problem rather than\ntidying.** §9's EU registry was 21 ids stale after being flagged twice\nwithout action; `Research.1.md` §1 was quoting a corpus 60% of its real\nsize; `MISSION-TODO-2.md` was 9 nodes behind and **contradicts itself about\nEUR-Lex twice in the same file on the same date**; and\n`EU/slices/eu-level/esa2010-quality-reporting.json` has silently diverged\nfrom its canonical twin, missing a node and an edge that `G.53.md` added to\none copy only. All are now either fixed or listed with a named owner.\n\nSet against that: the validator is **green**, for the first time since the\nschema change — so the corpus itself is sound and it was only the paperwork\nthat had rotted.",
+  "findings": [
+    {
+      "heading": "1. §9's EU/Europe id registry regenerated in one pass: 105 → 126 ids",
+      "body": "Replaced wholesale, not patched, per §9's own instruction. Method unchanged\nfrom the 2026-08-05 pass: every `\"id\"` from every report object in\n`src/data/research/*.json` whose `country` is `EU`, an EU-27 code, or an\n`XEU` code, plus the four branch-minted `INT` ids. **21 were missing; none\nof the 105 was wrong or retired**, so the change is purely additive.\nCross-check: 67 research files on disk, 67 imported in `src/data/index.ts`,\nnothing missing either way, no duplicate id across files.\n\nTwo judgement calls were **surfaced rather than decided**, which is the\nwhole reason this list keeps drifting:\n\n- `dk-pris-og-loenforudsaetninger` and `gl-selvstyrelov` are `country: \"DK\"`\n  and belong to the Greenland block-grant chain in the associated-states\n  slice — SAO-galaxy work that the country filter catches anyway. Left in,\n  because the filter *is* the definition and hand-exceptions are how the\n  list drifted the first time.\n- `sdmx-glossary` is `country: \"INT\"` and was minted by an EU-branch slice,\n  which is the argument that puts `oecd-icio` on the list. **Not added.**\n  Extending a hand-written list of four is a judgement, not an extraction.\n  Same question, weaker, for `hs`, `imf-weo`, `imf-fiscal-monitor` and\n  `oecd-economic-outlook` in the `grok-h1-*` files. Answering it once makes\n  every future regeneration mechanical."
+    },
+    {
+      "heading": "2. The Catalogue of ESS standards: scoped, 12 members, nothing minted",
+      "body": "Full record: `EU/CatalogueOfESSStandards_scoping_2026-08-08.md`.\n\n**It is not a document and not a webpage list.** CROS says only that \"The\nCatalogue of ESS Standards is currently hosted on ShowVoc\" and links out.\nShowVoc is a JavaScript app over a SKOS dataset whose Semantic Turkey API\nanswers GET with `HttpRequestMethodNotSupportedException: Request method\n'GET' is not supported` on every data service — so no plain HTTP client can\nread it. Read instead by POSTing SPARQL from inside a browser page:\n\n```\nfetch('/semanticturkey/it.uniroma2.art.semanticturkey/st-core-services/SPARQL/evaluateQuery',\n  {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},\n   body:new URLSearchParams({ctx_project:'ESTAT_Catalogue_of_ESS_Standards', query:'<SPARQL>'}),\n   credentials:'include'})\n```\n\n`Projects/listProjects` and `Projects/getProjectInfo` *are* GET-able and are\nhow you find the project name and base URI (`http://data.europa.eu/9jo/statmanuals/`).\n**This belongs in `Research.1.md` §7's list of EU retrieval findings**,\nalongside EUR-Lex's browser-gating and the \"Expand all\" lazy-loading note:\n*a named EU collection may exist only as a SKOS dataset behind a POST-only\nAPI.*\n\nThe scheme's own `dct:description`, verbatim:\n\n> \"The Catalogue of ESS Standards is a collection of normative documents\n> (referred to as “standards”), established by consensus among ESS members\n> and approved by the ESSC according to the procedure of ESS\n> standardisation. The Standards listed in the catalogue are not legally\n> binding but merely intended to provide rules, guidelines, or\n> characteristics for the development, production, and dissemination of\n> European Statistics for common and repeated use by several actors in the\n> ESS.\"\n\n`versionInfo` **2022**, `modified` 2026-01-19. **Exactly 12 members, and it\nhas been 12 for at least four years** — EFGS 2022: \"It currently contains 12\nstandards\", and the live dataset returns 12 `skos:Concept`s in August 2026.\nA small near-static register, not a growing series.\n\n**The catalogue itself should not be a node**, on the reasoning already\napplied to the ESS Quality Glossary: a SKOS dataset in a vocabulary register\nwith a `versionInfo` is not a standalone document. It is a finding aid for\nnodes.\n\nTen of the twelve are unexamined. Best candidates, in order: the **European\nbusiness statistics methodological manual for business registers (2021)** —\nsits directly on the unread EBS Regulation thread; **ESS guidelines on\nseasonal adjustment**, where the catalogue is itself out of date (a 2024\nedition exists, `ks-gq-24-012`, 13 June 2024, giving a confirmed 2015→2024\ninterval and `releases_per_year` ≈0.11 on the irregular-cadence rule — a\n2009 first edition is plausible and was **not** verified, do not assert it);\n**temporal disaggregation guidelines**; the **precision/variance handbook**\n(note: issued 2013, ESSC-approved 2017, only one edition found); **Methodology\nfor data validation 2.0**. Then `INT` territory: **GSBPM 5.1** (UNECE) and\n**ISCED 2011** (UNESCO), both classification hubs and therefore subject to\n§7's counter-intuitive rule — research them from the programmes coded to\nthem, never by reading them. **EDAMIS** is a transmission system, not a\npublication: the same call already made for the ESS Metadata Handler."
+    },
+    {
+      "heading": "3. The branch believed it had covered four catalogue members. It has covered two.",
+      "body": "`ess-quality-framework.json` holds six nodes, and its own `_dropped` entry\nsays \"none of the catalogue's members other than the [three] minted here\nhave ever been looked at\". **Only two of the six are catalogue members** —\n`ess-handbook-quality-metadata-reports` and `ess-sims`. The **European\nStatistics Code of Practice**, the **ESS Quality Assurance Framework**, the\n**ESS QPI Guidelines** and the **SDMX Glossary** are *not* in the Catalogue\nof ESS standards. So the EHQMR's \"included in the Catalogue of ESS\nstandards\" line points at a set the branch has barely touched: 10 of 12\nunexamined, not 8 or 9."
+    },
+    {
+      "heading": "4. The catalogue asserts one usable-shaped relationship, and it is the wrong speaker",
+      "body": "`SIMS 2.0` carries `eli:based_on http://data.europa.eu/eli/reg/2009/223/oj` —\nRegulation (EC) No 223/2009, **already a node** (`eu-reg-223-2009`, and at\nweighted authority rank #2 overall). Right shape for\n`ess-sims -> eu-reg-223-2009`. **Not proposed**, because the statement is\nmade by the catalogue's metadata, not by SIMS about itself, and the slice\nalready records SIMS's own Article 12 claim as future-tense and unusable\n(`Research.1.md` §5b running forwards). A present-tense statement in SIMS\n2.0 itself, or on Eurostat's live quality-reporting page, would settle it —\nthat is the exact route that already worked once for this pair of documents.\nThe only other relation in the dataset is `coos:informs`, which points at\nGSBPM *phases*, not documents. No edges there."
+    },
+    {
+      "heading": "5. The validator is green, and it scopes the sweep better than any hand-off has",
+      "body": "Run by Thomas on Windows, 2026-08-08, output committed as\n`validator-2026-08-08.txt`. **Zero `✗`. All eight behavioural checks pass**:\ncommercial sources and termini provably move no rank; showing implied edges\nreshuffles nothing; every `caveat` names an edge that exists and no `note`\ndescribes an edge that now exists; every relation carries both `basis` and\n`evidence_url`; relations provably never reach `buildGraph`; and the\nretention check holds at exactly 50%.\n\n**Real corpus size: 372 reports / 436 dependencies / 3 relations.**\n`MISSION-TODO-2.md` claimed 363/429 and `Research.1.md` §1 still quoted\n150/220. Both corrected.\n\n**The DROPPED section is the sweep's actual work-list**: 391 dropped\nentries, of which **122 \"are research leads rather than answers — evidence\ndescribed as existing, node or pass missing.\"** By reason: 112 `note`, 87\n`no-node-yet`, 72 `no-document`, 35 `deferred`, 29 `unpublishable-source`,\n24 `denied`, 16 `wrong-target`, 10 `caveat`, 4 `wrong-direction`, 2\n`unreadable-source`. Start on `no-node-yet` (the category the loosened node\nrule most directly unblocks) and `no-document` (the category §4's third\nlesson says is least trustworthy on its stated reason). **Re-running the\nvalidator after the sweep is the measure of whether it worked.** Folded into\n`Research.1.md` §4 and MISSION-TODO-2 item 4a.\n\nAlso: **all 25 warnings are \"no edges in either direction\"** — see Finding 8."
+    },
+    {
+      "heading": "6. `G.52.md`'s three proposal files no longer exist. Fourteen answers now review nothing.",
+      "body": "`G.52.md` wrote them to that session's `/tmp/eu-proposal/` and said plainly\nthey would need re-creating \"since `/tmp` doesn't persist across sessions.\"\nThey were never committed and are not on disk anywhere under the project\n(searched 2026-08-08). `GROK-PROMPT-9` and `GROK-PROMPT-10` are likewise\nabsent from `EU/prompts/`.\n\nSo Thomas's answers are **rulings without artefacts**. Smaller loss than it\nsounds for File C, which he held pending verification anyway and which was\nentirely Grok-sourced. A real loss for Files A and B: the Wayback-corroborated\nGerman cadence figures and the Luxembourg/Netherlands colophon finding\n(`Publications Office of the European Union` / `ISBN 978-92-` prefix = a\nhosted copy of Eurostat's report, not a national document) survive only as\nprose in `G.52.md` and in\n`EU/cheap-checks-9z-9a-9b_2026-08-07.md`.\n\n**Standing rule this earns: a draft that is not in the repo does not exist.**\nWrite proposals to `EU/proposals/` on the device, even unreviewed. An\nunimported file in the working tree costs nothing; a lost one costs a\nsession.\n\nTwo of his answers also needed narrowing rather than executing, and both are\nrecorded in the decisions file:\n- **A1** (\"2 dated nodes\") quietly conflicts with how the cadence was\n  derived — ≈0.1/yr was the *interval between* the two editions, a property\n  of the pair. Split into two nodes and each needs its own\n  `releases_per_year` justification.\n- **B2** (\"yes\" to the Ireland → `esa-2010` edge) is approved in principle\n  but gated by B1 and by its own evidence: only Ireland's title page was\n  ever opened, so the methodology section must be read first. \"Yes\" is not a\n  licence to mint on Germany's parallel.\n- **B3** was left blank in the docx, but `G.53.md` records the verbal\n  answer: `cites` is correct, matching existing precedent. Treated as\n  closed; do not re-ask."
+    },
+    {
+      "heading": "7. A mirror slice has silently diverged from its canonical copy",
+      "body": "`EU/slices/eu-level/esa2010-quality-reporting.json` is missing\n`eu-reg-2016-2304` and one dependency that\n`src/data/research/esa2010-quality-reporting.json` has. `G.53.md` edited the\ncanonical copy and did not mirror it — and `G.55.md`, which *did* mirror its\nown edit and said so, gave no reason to suspect the sibling file had not\nbeen.\n\nAudited all four mirror files: **2 identical, 1 diverged, 1**\n(`_staging/01-manifest.json`) **has no canonical twin by design.** Only\n`src/data/research/` is loaded by `src/data/index.ts`, so **the graph is\ncorrect and the validator is right to be green** — the mirror is what is\nstale. But a future session reading `EU/slices/` would draw a wrong\nconclusion about the corpus.\n\n**The underlying problem is that no policy says which copy is authoritative\nand nothing enforces either answer.** That is a decision, not a fix: either\n`EU/slices/*` is a live mirror that must be kept in sync (and then the\nvalidator or a script should check it), or it is a historical staging record\nthat should stop being updated and say so at the top of each file."
+    },
+    {
+      "heading": "8. The isolated-node warnings contain one real model disagreement",
+      "body": "Of the 25, most are simply nodes minted without edges yet — including **all\nfour ECB series `G.53.md` added**, which currently contribute nothing to the\ngraph and are cheap inbound-edge follow-ups. But `gb-ukspf-prospectus` and\n`eu-esif-common-provisions-regulation` are joined to each other by the\ncorpus's only `supersedes` relation and *still* report \"no edges in either\ndirection\" — while the same run separately confirms \"✓ relations never reach\nbuildGraph\".\n\nBoth statements are correct and both are by design (`Research.1.md` §6:\nrelations buy no authority maths). But the shelving logic and the relation\nmodel disagree about what \"connected\" means, and that is now the **second**\ninstance of MISSION-TODO-2 item 21 rather than a new bug. Folded in as item\n23b."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`ess-quality-framework.json`'s own `_dropped` entry, and the after-`G.55` starting prompt — OVERSTATED.** Both say the catalogue's members \"other than the [three/four] minted here\" are unexamined, implying most of the slice's nodes are catalogue members. Only **two of six** are. Corrected in Finding 3; the `_dropped` entry itself was **not** edited, because no `src/data/` file was touched this session — the next session to open that file should fix the wording."
+    },
+    {
+      "n": 2,
+      "text": "`planning/MISSION-TODO-2.md` — SELF-CONTRADICTORY, unresolved.** P1 item 5(d): \"**EUR-Lex works again** … both the legal-content and ELI forms return HTTP 200 with full text.\" Standing method notes, same file, same date: \"**EUR-Lex no longer works in a browser either** … Chrome silently redirects every legal-content and ELI form to `eur-lex.europa.eu/TodayOJ`.\" One is wrong and a session will lose time to it. **Not resolved here** — it needs one fetch, and this session had no EUR-Lex work to hang it on. Logged as OPEN-THREADS 1.3. (`Research.1.md` §7 sides with \"reachable via a real browser\".)"
+    },
+    {
+      "n": 3,
+      "text": "`planning/MISSION-TODO-2.md` corpus counts — STALE, now fixed.** Said 363/429; actual 372/436/3."
+    },
+    {
+      "n": 4,
+      "text": "`Research.1.md` §1 corpus counts — STALE, now fixed.** Said 150/220 as of `G.39.md`; rewritten to give the measured 2026-08-08 figure and keep the 150/220 sentence as dated history."
+    },
+    {
+      "n": 5,
+      "text": "`START-HERE.md` — STALE, not fixed.** Says \"335 reports and 392 dependencies\". It is the document written for outside readers of a public repo, so it is the worst place for a stale number. Left for the housecleaning block rather than edited mid-session. `REPORTS.md`'s 121/122/133-node figures are dated narrative about past states and are fine as history."
+    },
+    {
+      "n": 6,
+      "text": "`G.53.md`'s closing advice — NOW FORBIDDEN.** It tells a fresh agent to \"run `git status` and check for `.git/index.lock` … first\". `G.54.md` established that doing so *creates* the problem, and `Research.1.md` §2 now forbids it outright. The predecessor is not edited; this is the correction of record."
+    },
+    {
+      "n": 7,
+      "text": "`EU/slices/eu-level/esa2010-quality-reporting.json` — DIVERGED.** See Finding 7. Not repaired this session, deliberately: repairing it without first deciding whether the mirror is authoritative would just re-create the same ambiguity."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "A",
+      "label": "Housecleaning.",
+      "items": []
+    },
+    {
+      "letter": "B",
+      "label": "The corpus-wide `_dropped` sweep.",
+      "items": []
+    },
+    {
+      "letter": "C",
+      "label": "Rebuild proposal Files A and B",
+      "items": []
+    },
+    {
+      "letter": "D",
+      "label": "The prose-section verification results, unimported since 2026-08-07.",
+      "items": []
+    },
+    {
+      "letter": "E",
+      "label": "The eight unexamined Catalogue of ESS standards members.",
+      "items": []
+    },
+    {
+      "letter": "F",
+      "label": "The staging blob's remaining 47 batches (46 distinct).",
+      "items": []
+    },
+    {
+      "letter": "G",
+      "label": "The other branches and beyond-Europe.",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Inbound edges for the four isolated ECB series** `G.53.md` minted. They are nodes contributing nothing to the graph; the ECB Data Portal pages were already open once."
+    },
+    {
+      "n": 2,
+      "text": "A present-tense source for `ess-sims -> eu-reg-223-2009`.** Finding 4 has the exact shape and the exact reason the catalogue's own assertion is not enough."
+    },
+    {
+      "n": 3,
+      "text": "One EUR-Lex fetch** to settle Correction 2. Cheapest correctness win on the list."
+    },
+    {
+      "n": 4,
+      "text": "Re-anchor `au-abs-seifa -> au-abs-census` to ABS's own SEIFA methodology page (one fetch)."
+    },
+    {
+      "n": 5,
+      "text": "Tasmania methodology → `au-lgfa-act-1995` (one targeted quote)."
+    },
+    {
+      "n": 6,
+      "text": "NZSIOC → `anzsic` mint (one page)."
+    },
+    {
+      "n": 7,
+      "text": "NZ s 106(2C) current-consolidation **content** check."
+    },
+    {
+      "n": 8,
+      "text": "OAG long-term-plan observations from `ao.parliament.nz`."
+    },
+    {
+      "n": 9,
+      "text": "Puerto Rico: Census SLGF mint, Planning Board forecasts, June-2026 revised fiscal plan."
+    },
+    {
+      "n": 10,
+      "text": "Tourism Research Australia cadence; ARIA+ citable home; NSW Grants Commission manual (then a proper `NOT FOUND` with search strings)."
+    },
+    {
+      "n": 11,
+      "text": "Dated, September 2026**: when the 2026-27 VLGGC edition appears, check whether the Vicmap road-data transition happened."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "`planning/OPEN-THREADS_2026-08-08.md`** — read first. All 51 threads, sized, with owners, and a closing list of what is settled."
+    },
+    {
+      "n": 2,
+      "text": "This file**, then `G.55.md`, then `G.52.md` if a rule question comes up. `G.51.md` only if the hand-off spec itself is in question."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md`** — §2 for the git prohibition, §4 for the node rule and the sweep scoping, §6 for the schema and the domain-tag state, §9 for the regenerated id registry."
+    },
+    {
+      "n": 4,
+      "text": "`notes/Decisions-2026-08-08_EU-open-questions.md`** — the fourteen answers and what each now blocks. Never re-derive these."
+    },
+    {
+      "n": 5,
+      "text": "`validator-2026-08-08.txt`** — the green run, and the only trustworthy source for corpus counts and for the `_dropped` breakdown."
+    },
+    {
+      "n": 6,
+      "text": "`EU/CatalogueOfESSStandards_scoping_2026-08-08.md`** — if picking up block E."
+    },
+    {
+      "n": 7,
+      "text": "`planning/MISSION-TODO-2.md`** — the reasoning and the stable item numbers behind everything in OPEN-THREADS."
+    },
+    {
+      "n": 8,
+      "text": "Two things only Thomas can do: the stuck commits / `.git` lock cleanup, and running `npm run validate` (which he now has a `validate.bat` for). **Ask him; never look.** ---"
+    }
+  ],
+  "session_conditions": "A **housekeeping, scoping and record-keeping session.** No new nodes, no new\nedges, **no file under `src/data/` was touched at all.** The corpus is\nbyte-identical to what `G.55.md` left, and the validator run confirming it\ngreen was made against exactly that state.\n\nRead in full this session: `Research.1.md`, `EU/G.53.md`, `EU/G.52.md`,\n`planning/MISSION-TODO-2.md`, `planning/MISSION-TODO.md`,\n`src/data/research/ess-quality-framework.json`, `package.json`,\n`run.bat`/`setup-and-run.bat`, `scripts/handoff-to-json.py`'s spec section,\n`EU/G.51.md`'s spec block, `validator-2026-08-08.txt`, and\n`notes/EU-open-questions_2026-08-08.docx`. `G.55.md` arrived in the starting\nprompt. **Not read**: `REPORTS.md`, `BACKLOG.md`, `rolling-todo.md` beyond\nhead and tail, the staging blob, the prose-verification results file, any\nbranch file outside `EU/`.\n\n**One retrieval route was new and needed the user's browser.** The Catalogue\nof ESS standards is only published as a SKOS dataset in ShowVoc, whose API\nrejects GET on every data service, so it was read by running SPARQL POSTs\nfrom inside a real browser session on `showvoc.op.europa.eu`. Full recipe in\nFinding 2. One tab, opened and closed.\n\n**Two counts in this file come from Thomas's own machine, not from an agent**:\nthe validator output, and the fact that the work is committed. Both are\nstated as his report, not as an agent's observation."
+}
