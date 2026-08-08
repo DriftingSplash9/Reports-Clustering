@@ -1,14 +1,15 @@
 {
   "_slice": "ess-quality-framework",
   "_researched": "2026-08-07",
-  "_status": "STAGED 2026-08-07. Built from EU/slices/_staging batches 16-26, 30-37, 44, 45, 66. Every quote re-fetched and re-read at source this session; full record in EU/ESSQualityFramework_PartA_2026-08-07.md.",
+  "_status": "STAGED 2026-08-07. Built from EU/slices/_staging batches 16-26, 30-37, 44, 45, 66. Every quote re-fetched and re-read at source this session; full record in EU/ESSQualityFramework_PartA_2026-08-07.md. UPDATED 2026-08-08 (G.55): the file's own bundled no-node-yet entry on the QPIs / Quality Glossary / DESAP was read in full and re-checked at source; one of the three (the QPI Guidelines) is minted, the other two stay dropped on rewritten reasons. Part A record: EU/ESSQPI_PartA_2026-08-08.md.",
   "_note": "The ESS's self-regulatory quality stack, which the blob had staged across twenty-two batches and no session had ever built. The Code of Practice names its own composition ('the common quality framework ... is composed of the European Statistics Code of Practice, the Quality Assurance Framework ... and the general quality management principles'), and each layer below it names the layer above in its own words, ending outside the EU entirely at the SDMX Glossary.",
   "_headline": "A five-node chain in which every link is stated by the dependent document about itself: EHQMR -> SIMS -> SDMX Glossary, with QAF -> CoP alongside, and the two existing EU governance nodes (ESGAB annual report, ESS peer review final report) attaching to the CoP. It is the EU branch's first documented chain that leaves the EU layer downward into an international standard rather than upward into a Regulation.",
   "_open_questions": [
     "Direction is genuinely two-way between the CoP and the peer reviews and this session minted only one leg. Eurostat's own 'History of the CoP' table says each revision was 'based on the results of' a peer-review round, which would be eu-statistics-code-of-practice -> ess-peer-review-final-report. It was not minted because the quote names the results of a round, not the titled final report. Both may hold; a future session with the SWD text in hand should settle it.",
     "ess-handbook-quality-metadata-reports -> eu-statistics-code-of-practice is recorded as 'cites' on 'It supports compliance with the European Statistics Code of Practice'. That is a purpose statement, and the choice between 'cites' and 'methodology_depends_on' is a judgement, flagged rather than resolved.",
     "The EHQMR contradicts itself about its own edition inside one document: the cover says '2021 re-edition', the foreword says 'This 2020 edition'. Both quoted in Part A; not adjudicated.",
-    "sdmx-glossary is the corpus's first SDMX node and its cadence is the weakest of the five: the document says it is a 'living' document that 'will grow and be updated' but states no interval. releases_per_year is derived from observed versions, not from a stated commitment."
+    "sdmx-glossary is the corpus's first SDMX node and its cadence is the weakest of the five: the document says it is a 'living' document that 'will grow and be updated' but states no interval. releases_per_year is derived from observed versions, not from a stated commitment.",
+    "ess-qpi-guidelines' cadence is genuinely two-readings and not adjudicated: two revision events across 2010-2014 (roughly one every two years) versus two revisions and then twelve years of silence to 2026. releases_per_year is the second, conservative reading (0.13); the first is recorded in the cadence_note. If a Version 1.5 or a post-2014 edition exists anywhere, it was not found this session and it would change the number."
   ],
   "reports": [
     {
@@ -90,6 +91,22 @@
       "domains": [
         "national-accounts"
       ]
+    },
+    {
+      "id": "ess-qpi-guidelines",
+      "title": "ESS Guidelines for the Implementation of the ESS Quality and Performance Indicators",
+      "publisher": "Eurostat",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "The document that defines the sixteen standard ESS Quality and Performance Indicators (QPIs) and states how each is computed. Its own title page reads 'ESS GUIDELINES FOR THE IMPLEMENTATION OF THE ESS QUALITY AND PERFORMANCE INDICATORS (QPI)' and 'Version 1.4'. The ESS Handbook for Quality and Metadata Reports names it as the source of the definitions: 'The definitions and compilation methods for the QPIs are specified in the ESS Guidelines for the Implementation of the ESS Quality and Performance Indicators.' NOTE, and this is the reason the node is the Guidelines document and not 'the QPIs': the indicators themselves live inside SIMS and the ESQRS as sub-concepts ('SIMS incorporates the 16 standard ESS Quality and Performance Indicators (QPIs) within the sub-concepts (for user reports) and as sub-concepts of their own (for producer reports)'), which is the same part_of shape that keeps ESMS and ESQRS out of this slice. The indicator set is part of SIMS; the document that defines it is not.",
+      "releases_per_year": 0.13,
+      "cadence_note": "Versions, not issues, and the rate is a judgement between two readings that the document does not settle. Its own p.1: 'These indicators were reviewed by the Eurostat Expert Group on Quality Indicators in 2010 and then slightly updated by the Task Force on Quality Reporting in 2012-2013' - producing Version 1.4, which Eurostat's Tools and standards list dates as 'ESS Quality and Performance Indicators (2014)'. Read narrowly, that is two revision events across 2010-2014, roughly one every two years. Read across the observed lifetime, it is two revisions and then nothing at all for the twelve years to 2026. 0.13 is the lifetime reading (2 revisions / 16 years), chosen as the conservative one and the same treatment ess-quality-assurance-framework already carries; the narrow reading is recorded here rather than discarded. No stated review interval was found in the document or on Eurostat's quality-reporting page.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/4373903/02-ESS-Quality-and-performance-Indicators-2014.pdf",
+      "domains": [
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [
@@ -134,6 +151,13 @@
       "relationship_type": "methodology_depends_on",
       "basis": "Eurostat's third-round peer-review page, two statements on the same page. On the exercise: 'Peer reviews form part of the European Statistical System (ESS) strategy to monitor the implementation of the European Statistics Code of Practice (CoP). Their objective is to review the compliance/alignment of the ESS with the CoP and help the statistical authorities to further improve and develop the national statistical systems.' On the report: 'As in previous rounds, Eurostat prepared a final report on the third round of the European Statistical System peer reviews, which has been transmitted to the European Parliament and the Council. This report summarises the results of the peer reviews in all members of the ESS.' This is a two-sentence chain rather than one statement inside the report itself - weaker than the ESGAB edge, and stated as such; SWD(2024) 136 was not opened this session.",
       "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "ess-handbook-quality-metadata-reports",
+      "target_report_id": "ess-qpi-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ESS handbook for quality and metadata reports, s. 3.2.2 (p.25): 'The definitions and compilation methods for the QPIs are specified in the ESS Guidelines for the Implementation of the ESS Quality and Performance Indicators.' The Handbook takes the definitions and the compilation methods for the indicators it requires from the named document, which is methodology_depends_on rather than cites. Deliberately NOT built on the adjacent 'SIMS incorporates the 16 standard ESS Quality and Performance Indicators (QPIs)' sentence, which is a part_of statement about the indicator set and not an input claim about the document; see the caveat entry.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/13925930/KS-GQ-21-021-EN-N.pdf"
     }
   ],
   "_dropped": [
@@ -173,11 +197,32 @@
       "why": "Both are named repeatedly and neither is minted, deliberately. Eurostat: 'the Euro-SDMX metadata structure (ESMS): the ESMS is a subset of SIMS that focusses on general methodological and quality aspects of the statistical production process' and 'the ESS standard quality report structure (ESQRS): the ESQRS is a subset of SIMS focusing on detailed quality concepts'. The EHQMR says the same from the other side: the two 'are unified in SIMS'. Minting them would double-count against ess-sims - the Report.part_of finding recorded in src/lib/types.ts, and the same call already made for the Eurostat remuneration annexes."
     },
     {
-      "edge": "ESS Quality and Performance Indicators (2014), ESS Quality Glossary, DESAP checklist as nodes",
+      "edge": "ESS Quality and Performance Indicators as a node",
       "source": null,
       "target": null,
-      "reason": "no-node-yet",
-      "why": "All three are named in Eurostat's own 'Tools and standards' list alongside the three documents minted here, and the EHQMR states that the QPIs 'have been incorporated in the Single Integrated Metadata Structure (SIMS)'. Each is one dated publication with no second edition and no stated review interval found, which fails Research.1.md section 4(2). Strings searched on the quality-reporting page and in the EHQMR foreword: 'Quality and Performance Indicators', 'QPI', 'revised', 'edition', '2014'. NOT FOUND."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-08 - minted as ess-qpi-guidelines, with a methodology_depends_on edge from ess-handbook-quality-metadata-reports. NOTE FOR THE RECORD: this was NOT reopened by Research.1.md section 4's one-off-foundational-instrument rule, which is what that section's own forward pointer implied. It qualifies on the ordinary recurring shape. The original blocker ('one dated publication with no second edition and no stated review interval found') rested on a search confined to Eurostat's quality-reporting page and the EHQMR foreword; the QPI document itself states its own revision history on p.1 ('These indicators were reviewed by the Eurostat Expert Group on Quality Indicators in 2010 and then slightly updated by the Task Force on Quality Reporting in 2012-2013') and carries 'Version 1.4' on its title page. The naming evidence the original entry could not find is in the EHQMR body rather than its foreword, s. 3.2.2. The nodeable object is the Guidelines document, not the indicator set - the set is incorporated into SIMS and minting it would double-count, the same call already made for ESMS and ESQRS. ORIGINAL (covering all three candidates as one bundled entry): All three are named in Eurostat's own 'Tools and standards' list alongside the three documents minted here, and the EHQMR states that the QPIs 'have been incorporated in the Single Integrated Metadata Structure (SIMS)'. Each is one dated publication with no second edition and no stated review interval found, which fails Research.1.md section 4(2). Strings searched on the quality-reporting page and in the EHQMR foreword: 'Quality and Performance Indicators', 'QPI', 'revised', 'edition', '2014'. NOT FOUND."
+    },
+    {
+      "edge": "ESS Quality Glossary as a node",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "RE-CHECKED 2026-08-08 AND STILL NOT A NODE, ON A DIFFERENT REASON THAN THE ORIGINAL. The original blocker was cadence, and cadence is not the problem: the EHQMR s. 2.5.2 says 'The ESS Quality Glossary, first published in 2003, was transferred to the Concepts and Definitions Database (CODED), where it is now available as a theme', and the Publications Office's EU Vocabularies register carries an 'ESS Quality Glossary' dataset whose latest version is 2023, maintained by Eurostat with the Working Group on Quality in Statistics - so there are dated points twenty years apart. The problem is publication shape, twice over. As published by Eurostat it stopped being a standalone document and became a theme inside a database (CODED) / a dataset in a vocabulary register. As used by the Handbook it is an in-document supplement: 'for the purposes of this Handbook, the Glossary has been revised and expanded to become the ESS Quality and Metadata Glossary', supplied as Supplementary Document A of the EHQMR itself. Either route is part_of something else - the same reasoning that keeps ESMS and ESQRS out. And nothing read names it as an input to a report; the EHQMR mentions it descriptively. Revisit if Eurostat republishes it as a titled standalone document. ORIGINAL (bundled entry): All three are named in Eurostat's own 'Tools and standards' list alongside the three documents minted here, and the EHQMR states that the QPIs 'have been incorporated in the Single Integrated Metadata Structure (SIMS)'. Each is one dated publication with no second edition and no stated review interval found, which fails Research.1.md section 4(2). Strings searched on the quality-reporting page and in the EHQMR foreword: 'Quality and Performance Indicators', 'QPI', 'revised', 'edition', '2014'. NOT FOUND."
+    },
+    {
+      "edge": "Checklist for Survey Managers (DESAP) as a node",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "RE-CHECKED 2026-08-08 AND STILL NOT A NODE, ON A CLEANER REASON THAN THE ORIGINAL. Cadence: Eurostat's own publication record dates 'The European Self Assessment Checklist for Survey Managers' to 29 March 2004 as Annex VII of the final project report 'Development of a Self-Assessment Programme for Surveys', and the document carries no version, no date and no revision statement of any kind - so the original cadence objection holds, but it is not the operative one. The operative one is Research.1.md section 4 point 1: nothing names it as an input to itself. The EHQMR names it, at s. 2.5.4, purely descriptively - 'The European Self-Assessment Checklist for Survey Managers (DESAP) enables the conduct of quick but systematic and comprehensive quality assessments of a statistical process (survey, census or administrative data process) and its outputs and identification of potential improvements' - which describes what a tool does rather than claiming the Handbook takes anything from it. Strings searched in the EHQMR: 'DESAP', 'self assessment', 'self-assessment', 'checklist'; the only other hits are the electronic/condensed variants listed at s. 2.5.4 and a peer-review self-assessment questionnaire at s. 2.4.2, which is a different thing. It is also a blank checklist a survey manager fills in rather than a document that publishes anything of its own. ORIGINAL (bundled entry): All three are named in Eurostat's own 'Tools and standards' list alongside the three documents minted here, and the EHQMR states that the QPIs 'have been incorporated in the Single Integrated Metadata Structure (SIMS)'. Each is one dated publication with no second edition and no stated review interval found, which fails Research.1.md section 4(2). Strings searched on the quality-reporting page and in the EHQMR foreword: 'Quality and Performance Indicators', 'QPI', 'revised', 'edition', '2014'. NOT FOUND."
+    },
+    {
+      "edge": "ESS Handbook for Quality and Metadata Reports -> ESS Guidelines for the Implementation of the QPIs (the 'SIMS incorporates the 16 standard QPIs' phrasing)",
+      "source": "ess-handbook-quality-metadata-reports",
+      "target": "ess-qpi-guidelines",
+      "reason": "caveat",
+      "why": "The EHQMR s. 3.2.2 says 'SIMS incorporates the 16 standard ESS Quality and Performance Indicators (QPIs) within the sub-concepts (for user reports) and as sub-concepts of their own (for producer reports)', and s. 3.2.3 says 'The ESQRS includes all 16 standard QPIs as separate sub-concepts, as indicated in Table 3.2'. Neither sentence supports the minted edge and neither should be used to re-propose an ess-sims -> ess-qpi-guidelines edge: both describe the indicator SET living inside SIMS, which is a part_of relationship this corpus does not draw an edge from (see the ESMS/ESQRS entry in this same array). The minted edge rests only on s. 3.2.2's separate sentence, 'The definitions and compilation methods for the QPIs are specified in the ESS Guidelines...', which names the document. Recorded so nobody reads the strong sentence as resting on the weak ones, or mints 'the QPIs' as a second node alongside ess-sims."
     },
     {
       "edge": "ESS Metadata Handler as a node",

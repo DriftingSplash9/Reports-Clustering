@@ -285,19 +285,42 @@ checked live; worth remembering that "reopened by the rule change" and
 categories of `_dropped` entry, and the sweep found examples of both.
 
 The ESS Quality and Performance Indicators / Quality Glossary / DESAP
-checklist (`ess-quality-framework.json`) is still open — named in the
-original 2026-08-08 ruling as a candidate but not checked by `G.53.md`'s
-sweep. A Commission Recommendation (EU) 2023/397, dropped in
-`eu-meta-docx-batches.json` as "a one-off legal act," is also still open —
+checklist (`ess-quality-framework.json`) **is now checked and closed
+(2026-08-08, same day) — and it was never a case for this rule.** Named in
+the original ruling as a reopened candidate, it turned out to be three
+separate candidates dropped as one bundled entry, on a search confined to a
+single webpage and the ESS Handbook's *foreword*. The ESS Quality and
+Performance Indicators are minted as `ess-qpi-guidelines`, on the ordinary
+**recurring** shape and not this section's one-off route: the document
+carries "Version 1.4" and its own dated revision history (reviewed 2010,
+updated 2012–13), and the Handbook's *body* (s. 3.2.2) names it by exact
+title as where "the definitions and compilation methods for the QPIs are
+specified". The Quality Glossary and DESAP stay dropped, on reasons the
+cadence rule never touched: the Glossary was absorbed into a database
+(CODED) and into the Handbook itself as a supplement, which is the `part_of`
+shape that already excludes ESMS and ESQRS; DESAP is named only
+descriptively by everything that mentions it, so it fails point 1, and it is
+a blank checklist that publishes nothing of its own. Full record:
+`EU/ESSQPI_PartA_2026-08-08.md`.
+
+**The general lesson is worth more than the one node.** `G.53.md`'s two
+categories — "reopened by the rule change" and "worth re-checking now that
+it's cheaper to qualify" — need a third: *wrongly dropped in the first place,
+on too narrow a search*. A keyword pass over `_dropped` text cannot detect
+that class at all, because the stated reason reads perfectly sound until the
+source is reopened.
+
+A Commission Recommendation (EU) 2023/397, dropped in
+`eu-meta-docx-batches.json` as "a one-off legal act," is still open —
 soft law (a Recommendation) is a step below what the ruling names (treaty,
 trade deal, government policy/regulation), and Thomas deliberately deferred
-adjudicating it rather than have it decided by proxy. Neither is retroactively
-minted by this edit — each still needs the same foundational-instrument test
+adjudicating it rather than have it decided by proxy. It is not retroactively
+minted by this edit — it still needs the same foundational-instrument test
 applied on its own merits (named, titled, and genuinely load-bearing, not
-merely mentioned) — but a future session should revisit them under this
+merely mentioned) — but a future session should revisit it under this
 section rather than treat the old `_dropped` reasoning as settled. The
-broader sweep (the other 391 dropped entries not closely checked, and the
-`ess-quality-framework.json` candidate specifically) remains queued.
+broader sweep (the other 391 dropped entries not closely checked) remains
+queued.
 
 ### Termini — things that are named but cannot be published
 
@@ -813,7 +836,9 @@ and are not folded in above: `eu-reg-2016-2304`,
 `ecb-supervisory-banking-statistics`,
 `ecb-insurance-corporations-operations`,
 `ecb-investment-funds-balance-sheet-statistics`,
-`ecb-insurance-corporations-assets-liabilities`. A full regeneration (same
+`ecb-insurance-corporations-assets-liabilities`. A sixth was added
+2026-08-08 by the session after that one and is likewise not folded in:
+`ess-qpi-guidelines`. A full regeneration (same
 method as the 2026-08-05 pass: extract every `"id"` field from
 `src/data/research/*.json` whose `country` matches the EU/XEU set) is
 worth doing in one pass rather than patched incrementally — flagging rather
