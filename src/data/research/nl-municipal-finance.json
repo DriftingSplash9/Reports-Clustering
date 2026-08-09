@@ -315,28 +315,28 @@
       "edge": "nl-waarderingskamer-waarderingsinstructie -> Kadaster / Basisregistratie Kadaster (BRK)",
       "source": "nl-waarderingskamer-waarderingsinstructie",
       "target": "nl-kadaster-brk",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #13). Kadaster's own materials confirm the BRK is a continuously-maintained authentic base registry with no publication cadence or edition structure — the same category as Ontario's SDI terminus. Minted as nl-kadaster-brk, terminal_reason unpublishable, and wired nl-waarderingskamer-waarderingsinstructie -> nl-kadaster-brk, uses_data_from, on the same quote this entry already had. Original entry follows.\n\nThe Waarderingsinstructie names Kadaster explicitly and repeatedly as the source of sales-transaction data used in WOZ valuation: p.34 \"Alle verkoopgegevens worden aangeleverd door het Kadaster.\"; p.94-95 names \"Basisregistratie Kadaster\" among base registries municipalities are legally obliged to use executing the Wet WOZ. No Kadaster/BRK node exists in this corpus yet — same category question as Ontario's SDI/Ontario Parcel (geographic/cadastral reference infrastructure rather than a periodical release). Worth building; would also open a path toward other WOZ-chain edges."
     },
     {
       "edge": "nl-bzk-toelichting-gemeentefonds -> (CBS population statistic, named)",
       "source": "nl-bzk-toelichting-gemeentefonds",
       "target": "nl-cbs-population-statistics",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #13). CBS's own table page (03759ned) confirms an annual update cadence. Minted as nl-cbs-population-statistics and wired nl-bzk-toelichting-gemeentefonds -> nl-cbs-population-statistics, uses_data_from, on the same citation this entry already had verified. Original entry follows.\n\nThe 'Maatstaf Inwoners sociaal' card names \"Wet basisregistraties personen\" / \"Besluit basisregistraties personen\", the BRP register, and cites the specific titled StatLine table \"Bevolking op 1 januari en gemiddelde; geslacht, leeftijd en regio\" (VERIFIED DIRECTLY, present at line 452 of the extracted 2024 Toelichting text). No CBS population-statistic node exists in the EU branch of this corpus yet (unlike Canada's `statcan-census-population`). Real, well-evidenced, deferred only for scope."
     },
     {
       "edge": "a provincial begroting/jaarrekening naming its Gemeentefonds/Provinciefonds allocation by amount, citing the circular",
       "source": "nl-noord-brabant-begroting",
       "target": "nl-provinciefonds",
-      "reason": "deferred",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #13). Fetched begroting.brabant.nl's 2024 edition directly rather than relying on the earlier subagent summary. The amount matches ('Uitkering provinciefonds' €372,166 thousand), but the basis-of-estimate sentence reads slightly differently under direct reading than the subagent had reported: this session found 'De raming van de algemene uitkering is gebaseerd op de meicirculaire 2023,' not the subagent's 'De begrotingsbedragen 2024 zijn gebaseerd op de meicirculaire 2023' — same substance, different exact wording, which is exactly why this entry withheld the subagent's unverified quote in the first place. Minted nl-noord-brabant-begroting and wired nl-noord-brabant-begroting -> nl-provinciefonds, uses_data_from, on the directly-verified quote. The BBV-citing Begroting 2022 quote was not independently re-checked this session (out of scope — the jaarrekening/BBV corroboration is separately covered by the Waalwijk entry below). Original entry follows.\n\nA subagent (not independently re-verified this session) reported Provincie Noord-Brabant's own Begroting 2024 stating \"Uitkering provinciefonds: 372.166\" and \"De begrotingsbedragen 2024 zijn gebaseerd op de meicirculaire 2023,\" and its Begroting 2022 citing the BBV directly (\"De begroting is opgesteld met inachtneming van de voorschriften van het Besluit begroting en verantwoording provincies en gemeenten (BBV)\"). This is the natural next step to complete the chain the way `gp-budget`/`gp-financial-statements` complete Alberta's — a specific province's own budget node, parallel to `ab-tbf-fiscal-plan`. Not built this session; needs its own direct verification pass, not just the subagent's WebFetch summary."
     },
     {
       "edge": "a municipal jaarrekening citing the BBV as its accounting basis",
       "source": "nl-waalwijk-jaarrekening",
       "target": "nl-bbv",
-      "reason": "deferred",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #13). Fetched waalwijk.begrotingsapp.nl's 2021 jaarrekening directly and confirmed the subagent's quote verbatim, word for word. Minted nl-waalwijk-jaarrekening and wired nl-waalwijk-jaarrekening -> nl-bbv, methodology_depends_on, as corroboration of the already-independently-verified nl-cbs-iv3-gemeenten -> nl-bbv edge. Original entry follows.\n\nA subagent (not independently re-verified this session) reported Gemeente Waalwijk's Jaarrekening 2021 stating \"De jaarrekening is opgemaakt met inachtneming van de voorschriften die het Besluit begroting en verantwoording provincies en gemeenten daarvoor geeft.\" The `nl-cbs-iv3-gemeenten -> nl-bbv` edge above already documents the BBV's binding force on Dutch municipal accounting from a source I verified directly, so this is corroborating rather than load-bearing — flagged for completeness, not urgency."
     },
     {

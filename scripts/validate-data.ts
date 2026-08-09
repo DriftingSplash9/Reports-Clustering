@@ -6,7 +6,7 @@
  * not of the weighting being clever — that comparison is the point of this.
  */
 import { dependencies, droppedNotes, loadIssues, relations, reports } from '../src/data'
-import { DROPPED_LEAD_REASONS } from '../src/lib/types'
+import { DROPPED_LEAD_REASONS, DROPPED_REASONS } from '../src/lib/types'
 
 // Invariant (✗) failures below print AND fail the run. Before 2026-08-07 they
 // printed but exited 0, which let a red validator pass unnoticed for three
@@ -260,9 +260,16 @@ for (const n of droppedNotes) {
   droppedByReason.set(n.reason, (droppedByReason.get(n.reason) ?? 0) + 1)
 }
 const leads = droppedNotes.filter((n) => DROPPED_LEAD_REASONS.includes(n.reason))
+// A reason outside the union is not a category, it is a typo that this script
+// was until 2026-08-09 (EU/G.73.md) happy to tally and print as though it were.
+const unknownReasons = droppedNotes.filter((n) => !DROPPED_REASONS.includes(n.reason))
+// `resolved` joins `caveat` here for the same reason (added 2026-08-09,
+// EU/G.73.md): both name an edge that is *supposed* to be in the graph, so the
+// live edge is the point, not a contradiction. See DroppedReason in types.ts.
+const EDGE_ANNOTATING_REASONS = ['caveat', 'resolved']
 const contradictions = droppedNotes.filter(
   (n) =>
-    n.reason !== 'caveat' &&
+    !EDGE_ANNOTATING_REASONS.includes(n.reason) &&
     n.source !== null &&
     n.target !== null &&
     dependencies.some(
@@ -272,10 +279,12 @@ const contradictions = droppedNotes.filter(
 
 // The mirror-image rule for caveats: a caveat annotates a minted edge, so the
 // edge it names must exist (and the endpoints must not be null — that was the
-// pre-2026-08-07 workaround this reason exists to retire).
+// pre-2026-08-07 workaround this reason exists to retire). `resolved` carries
+// the identical obligation: it claims an edge was wired, and an unwired claim
+// is a false one.
 const danglingCaveats = droppedNotes.filter(
   (n) =>
-    n.reason === 'caveat' &&
+    EDGE_ANNOTATING_REASONS.includes(n.reason) &&
     (n.source === null ||
       n.target === null ||
       !dependencies.some(
@@ -288,6 +297,13 @@ for (const [reason, count] of [...droppedByReason].sort((a, b) => b[1] - a[1])) 
   console.log(`  ${String(count).padStart(3)}  ${reason}`)
 }
 console.log(
+  unknownReasons.length === 0
+    ? '  ✓ every reason is a DroppedReason'
+    : `  ✗ ${unknownReasons.length} note(s) carry a reason that is not a DroppedReason:`,
+)
+for (const u of unknownReasons) console.log(`      "${u.reason}" — ${u.edge}`)
+if (unknownReasons.length) invariantFailures++
+console.log(
   contradictions.length === 0
     ? '  ✓ no note describes an edge that now exists'
     : `  ✗ ${contradictions.length} note(s) describe an edge that IS in the graph — resolve or delete:`,
@@ -296,8 +312,8 @@ for (const c of contradictions) console.log(`      ${c.source} -> ${c.target} ($
 if (contradictions.length) invariantFailures++
 console.log(
   danglingCaveats.length === 0
-    ? '  ✓ every caveat names an edge that exists'
-    : `  ✗ ${danglingCaveats.length} caveat(s) with null endpoints or naming a missing edge:`,
+    ? '  ✓ every caveat and resolved note names an edge that exists'
+    : `  ✗ ${danglingCaveats.length} caveat/resolved note(s) with null endpoints or naming a missing edge:`,
 )
 for (const c of danglingCaveats) console.log(`      ${c.source} -> ${c.target}`)
 if (danglingCaveats.length) invariantFailures++

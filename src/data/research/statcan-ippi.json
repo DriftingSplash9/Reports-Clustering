@@ -87,21 +87,21 @@
       "edge": "statcan-ippi -> (Annual Survey of Manufacturers and Logging)",
       "source": "statcan-ippi",
       "target": "statcan-asml",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #14). `statcan-asml` was minted the same session, one file earlier (Tier-2 item #12, manufacturing-and-classifications.json), closing the node-availability blocker. Wired statcan-ippi -> statcan-asml, uses_data_from, on the entry's own already-verified quotes. Original entry follows.\n\nNamed by title, twice, in two different roles. Under Sampling: 'The sampling frame for the IPPI is based on the 2022 Annual Survey of Manufacturers and Logging (ASML).' Under Estimation, as half of the weighting basis alongside the supply and use tables: 'the sales of goods manufactured by companies as reported for the 2019 ASML'. And under Data accuracy, the dependency stated as a quality constraint: 'Shipment value data mainly rests on other sample surveys produced by Statistics Canada, such as the ASML. Therefore, these data are subject to their own errors.' The ASML is an annual Statistics Canada release with its own IMDB record, so this is a node that can exist and does not, not an unpublishable source. Deliberately not built here to keep the slice to one node — but note it would arrive already carrying two edges, since the 2019 ASML weights sit beside the 2019 Supply and Use Tables in the same sentence."
     },
     {
       "edge": "statcan-ippi -> (Monthly Survey of Manufacturing, record 2101)",
       "source": "statcan-gdp-monthly",
       "target": "statcan-msm",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED-ELSEWHERE 2026-08-09 (sweep session, Tier-2 item #14). `statcan-msm` was minted, and this exact edge (statcan-gdp-monthly -> statcan-msm, uses_data_from) already wired, in manufacturing-and-classifications.json — the same file that closed the ASML lead below, and a companion this entry's own file never cross-referenced. Not re-added here to avoid a duplicate dependency object for the same edge; recorded as resolved rather than deleted so this file's own history is complete. Original entry follows.\n\nNot an IPPI input — the opposite direction, and recorded here because the evidence surfaced while reading the IPPI's 64 rows and would otherwise be lost. The monthly GDP source table pairs record 2101, the Monthly Survey of Manufacturing, with the IPPI in row after row: 'Sales and inventory change in constant prices, Monthly Survey of Manufacturing, Record no (number). 2101. Industrial product price indexes, Record no (number). 2318.' Record 1301's own IMDB page names it too: 'data from the Monthly Survey of Manufacturing are used for most (but not all) manufacturing industries.' So statcan-gdp-monthly -> (record 2101) is documented twice over and blocked only on the node. Together with the ASML above, the manufacturing side of the accounts is the densest cluster of buildable-and-unbuilt nodes now visible."
     },
     {
       "edge": "statcan-ippi -> (North American Product Classification System)",
       "source": "statcan-ippi",
       "target": "napcs",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #14). `napcs` was minted the same session, one file earlier (Tier-2 item #12, manufacturing-and-classifications.json), closing the node-availability blocker. Wired statcan-ippi -> napcs, methodology_depends_on, on the entry's own already-verified quotes. Original entry follows.\n\nRecord 2318: 'Elemental price indexes are calculated for groups of the North American Product Classification System (NAPCS) 2022v1', and the commodity index set is 'classified according to the NAPCS 2022v1'. NAPCS is the product-side sibling of NAICS, which is already a node with five incoming edges, so this is a straightforward addition rather than a judgement — and it will not stay a one-edge node, because the supply and use tables are a product-by-industry structure. Note that NAPCS appears nowhere in the monthly GDP source table, which is organised by NAICS industry throughout: the two classifications divide the corpus along a line nothing in the graph currently shows."
     },
     {
@@ -122,7 +122,7 @@
       "edge": "(Canadian System of Macroeconomic Accounts) -> statcan-ippi",
       "source": "statcan-system-macroeconomic-accounts",
       "target": "statcan-ippi",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #14). This entry called the CSMA node 'the next obvious piece of work' — it was already built the very next day: `statcan-system-macroeconomic-accounts` was minted 2026-08-08 in statcan-macro-accounts.json, per Thomas's Open-Questions-2026-08-08-sweep.docx Q1 ruling, in a companion file this entry's own _dropped block never cross-referenced. The fourth instance this sweep has found of the same staleness shape (after G.56.md, G.57.md, G.58.md, NZ/G.6.md each catching one). Wired statcan-system-macroeconomic-accounts -> statcan-ippi, uses_data_from, on the entry's own already-verified quote. Original entry follows.\n\nA fourth document now names the CSMA framework, and this one names it as a consumer of the IPPI rather than as a definitional authority. Record 2318, Description: 'the IPPI series supports the Canadian System of Macro-Economic Accounts (CSMA), where it is used in the calculation of real Gross Domestic Product (GDP).' Record 1301 describes itself the same way — its estimates 'constitute an extension (on a monthly basis) of the Canadian System of Macroeconomic Accounts Supply and Use Tables (SUT)' — against the four Division 1 Equalization revenue-base components already recorded in equalization-named-products.json. The framework node was blocked on the containment question, which V0.11 has now decided: `part_of` exists, it carries no weight, and the triple-counting objection was measured and found to have the wrong sign. THE BLOCK IS LIFTED AND THE NODE IS THE NEXT OBVIOUS PIECE OF WORK, with statcan-national-accounts and statcan-sut as its documented members and six citing documents in hand."
     },
     {

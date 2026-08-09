@@ -1,0 +1,157 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.73.md",
+  "number": 73,
+  "title": "G.73.md — EU galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "**`Research.1.md` was NOT read this session** — stated plainly because it is a real limit on everything below. This session did no research: it touched no source document, minted no node, and wrote no new claim about the world, so §2's verbatim-quote rule and §6's citability test had nothing to bite on. Every change here is schema conformance and data-integrity repair against `src/lib/types.ts`, which WAS read in full (twice — before and after editing it). `EU/G.72.md` and its sidecar `EU/G.72.json` read in full; `EU/R2.72.md` read in full — the three arrived as chat uploads rather than being read off the device, which is worth stating because it means the device copies were assumed identical and not diffed. `EU/R1.68.md` not reopened. `planning/MISSION-TODO-2.md` not read and not appended to: item 5 is closed and nothing here belongs to it.",
+  "predecessor": "`G.72.md` (2026-08-09)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**`npm run validate` exits 0 for the first time in this branch's recorded history, and `tsc --noEmit` is clean alongside it.** Getting there closed both cheap checks Thomas named and three further defects the same pass surfaced, across 17 files: 29 reports carrying a `jurisdiction_level` outside the type's own union (28 `\"national\"`, 1 `\"territorial\"`), two country codes (`EL`/`UK`) the palette has never had entries for, 20 `_dropped` notes whose diagnosis turned out to be neither of the two the validator offered, one duplicate report id silently collapsing two records into one, one dependency defined three times across two slices with two of its three statutory citations silently discarded, and one `_dropped` reason (`\"duplicate\"`) that is not a member of `DroppedReason` at all and was being tallied and printed as though it were a category.\n\n**The corpus's own totals did not move: 473 reports, 605 dependencies, before and after.** That is the point rather than a disappointment — every one of these was a defect in how the corpus described itself, not in what it contains, and a repair pass that moved the counts would have meant something was being lost or invented. Three schema-level guards were added so that each class is caught next time rather than re-discovered.",
+  "findings": [
+    {
+      "heading": "1. 29 reports carried a `jurisdiction_level` that is not a `JurisdictionLevel` — `G.72.md` found one of them",
+      "body": "`G.72.md`'s cheap check 9 named `sk-ess-peer-review-report`'s `jurisdiction_level: \"national\"` as \"the same category of pre-existing, cheap, validate-catchable defect\" as the `EL`/`UK` palette errors. It was right about the category and wrong about the scale by a factor of 29: a corpus-wide scan found 28 reports on `\"national\"` (27 EDP inventories in `edp-inventory-regulation-479-2009.json`, plus that one ESS peer-review report) and one on `\"territorial\"` (`pr-planning-board-informe-economico`). Neither string is a member of the union.\n\n**It was not validate-catchable.** That is the finding. `G.72.md` reasonably assumed the validator would flag it once someone looked; it would not have, because `validate()` had no rule for the field. The union is closed, so this looks like the compiler's job — but the slices are *cast*, not parsed, so the compiler never sees the hand-typed string, and the only runtime consumer is `SCOPE_COLOUR`'s own lookup, where a miss falls back silently to unclassified grey rather than complaining. All 29 nodes have therefore been rendering in the flat grey reserved for \"belongs to no system I know about\" — the exact failure mode `palette.ts`'s own `isKnownCountry` comment describes for countries (\"nine international bodies were Canadian for five sessions\"), one field over and undetected for longer.\n\nFixed by taking the corpus's own answer rather than inventing one. `de-edp-inventory` sits in the same file as the 27 and already uses `\"federal\"`; `G.72.md`'s Secondary observations already recorded `\"federal\"` as the corpus-wide convention for a central-government publisher in a unitary state, naming `de-ess-peer-review-report`, `no-ssb-kostra` and `lu-statec-ipch`. All 28 `\"national\"` records → `\"federal\"`. For Puerto Rico, the sibling node `pr-fomb-fiscal-plan` in the same file uses `\"provincial\"`, and `palette.ts` files `PR` under the `US` family where the comment states `provincial` still means \"state\"; `\"territorial\"` → `\"provincial\"`.\n\nGuarded: `JURISDICTION_LEVELS` added to `types.ts`, checked in `validate()`."
+    },
+    {
+      "heading": "2. `EL` and `UK` are Eurostat's codes, not this corpus's — the records were wrong, not the palette",
+      "body": "`G.72.md`'s cheap check 9 offered the fork honestly (\"either add the two palette entries, or confirm `GR`/`GB` is the corpus's actual intended code\"). The corpus answers it unambiguously and without a fetch: `COUNTRY_FAMILY` carries `GR: 'EU'` among the 27 member states and `GB: 'XEU'` with a comment naming it \"the former member\", both hand-written and both deliberate. Corpus-wide the codes run 12 × `GB` against 1 × `UK`, and 2 × `GR` against 1 × `EL`. The two odd ones out are both in `edp-inventory-regulation-479-2009.json` and both trace to the same source: CIRCABC's own filenames, which the records quote verbatim (`'EL - EDP Inventory (2025.12).pdf'`, `'UK - EDP Inventory (2015.12).pdf'`). `EL` and `UK` are Eurostat's own country codes; the corpus uses ISO. Records fixed, palette untouched.\n\n**The node ids `el-edp-inventory` and `uk-edp-inventory` were deliberately NOT renamed.** They are opaque keys, they are referenced by four dependency objects and by `_dropped` basis prose within the same file, and — the deciding reason — they are named as such in `G.72.md`, `R2.72.md` and this file, so renaming them would silently break the hand-off chain's own references for a cosmetic gain. Recorded here rather than left as an unexplained inconsistency: the id prefix no longer matches the country field for exactly these two nodes."
+    },
+    {
+      "heading": "3. All 20 note/graph mismatches diagnose the same way, and it is neither diagnosis the validator offered",
+      "body": "Cheap check 10 asked for a triage of the 20 `_dropped` notes whose `source`/`target` pair the live graph contains, and framed it as the validator does: \"either the drop note is stale (the edge was added later and the note never removed) or the edge is a duplicate that should not exist.\"\n\nNeither. All 20 are the same thing, and it is deliberate. Every one carries a preamble of the form `RESOLVED 2026-08-09 (sweep session, Tier-N item #M). Minted <node> and wired <edge>. Original entry follows.` followed by the untouched original text. They are the Block B `_dropped` sweep's own resolution records — and one of them states the convention explicitly, in its own words: *\"recorded as resolved rather than deleted so this file's own history is complete.\"* The edges are real, singular and correctly wired; every claim each note makes about having wired an edge checks out against the graph.\n\nSo the sweep that closed at `G.68.md` produced output its own validator rejects, and both remedies the validator names would have damaged the corpus — deleting the notes discards the original blocker text (the most useful thing in a resolved lead, since it records what a future session would otherwise re-derive), and \"resolving\" them means nothing when they are already resolved.\n\nPut to Thomas as a four-way choice; he took the schema addition. **`resolved` is now a `DroppedReason`**, carrying `caveat`'s edge-must-exist obligation in both directions, and all 20 notes re-reasoned to it (from `no-node-yet` ×13, `note` ×4, `deferred` ×2, `no-document` ×1). The alternative of overloading `caveat` was available and cheaper and was rejected on the grounds that it would have worked mechanically and lied semantically: `caveat` is documented as an *unresolved* discrepancy on a minted edge, and these are its exact opposite.\n\nThe wider point, and the reason this is a finding rather than a chore: **`caveat` was added on 2026-08-07 for precisely this shape of problem — a note class the schema could not express, faking a different reason to pass validation — and the same thing happened again nine days later in a different corner.** Two instances is a pattern worth naming: when the validator rejects deliberate, well-reasoned data, suspect the vocabulary before the data."
+    },
+    {
+      "heading": "4. `statcan-qsfs` was minted twice, and the second minting is a tenth instance of the cross-file blind spot",
+      "body": "`npm run validate` prints a `DUPLICATE IDS` block and increments its failure count on it, so this was failing the run before this session and was not mentioned in `G.72.md`'s account of that run. `statcan-qsfs` is defined in both `grok-h1-classification-hubs.json` and `statcan-macro-accounts.json`; loading keeps the first and silently drops the second.\n\nThe provenance is legible from the records themselves. The `statcan-macro-accounts.json` copy's own description says it was `Minted 2026-08-09 (sweep session, Tier-2 item #15)`, closing a `no-node-yet` lead — and the `grok-h1-classification-hubs.json` copy, from the earlier `grok-h1` research generation, was already there. **This is the same failure `[[cheap-check-grep-first]]` names and `G.70.md` proved at batch-cluster scale: the sweep never grepped the corpus for the id before minting it.** By the running count that memory keeps, this makes ten.\n\nMerged into one record rather than one deleted. The `statcan-macro-accounts.json` copy carries the fuller citation trail (three independent namings across IMDB records 1901 and 1301) and was kept; the classification-hubs copy's only unique sentence — the NAICS single-classification rule, which is exactly the kind of fact a classification-hubs slice exists to record — was folded into it, along with a dated correction recording the duplication. The classification-hubs copy was deleted."
+    },
+    {
+      "heading": "5. One dependency was defined three times and two of its three statutory citations were being discarded",
+      "body": "`fiscal-equalization-program -> statcan-system-macroeconomic-accounts` (`calculated_from`) is defined twice in `equalization-named-products.json` and once in `equalization-payroll-base.json`. The loader's rule is last-wins, so two of the three objects were dropped on every build — and they were not redundant copies. Each cited a *different* provision of SOR/2007-303: s. 3.1's three capital-formation aggregates, s. 5(b)(i)'s all-provinces corporate-profits revenue base, and s. 8(1)(y)'s wages-and-salaries and military-pay terms. Two of those three verbatim statutory quotations were being silently thrown away.\n\nThe validator did print this — `SUPERSEDED — edges defined twice (last wins; the earlier copy was dropped)` — but unlike `DUPLICATE IDS` it does not increment the failure count, so it has been scrolling past as informational output. It is worse than the duplicate-id case, not better: a duplicate id loses a record you could recover from the other copy, while a superseded edge loses *evidence for a claim that stays in the graph looking fully cited*.\n\nMerged to one object, kept in `equalization-payroll-base.json` because it is the only one of the three carrying a `reference_period`. All three bases and all three `evidence_url`s are preserved in the surviving `basis` field, labelled (a)/(b)/(c) under a dated merge note; the two duplicates were deleted from `equalization-named-products.json`.\n\nNot changed, and flagged instead: the `SUPERSEDED` block still does not fail the run. Whether it should is a judgement call about how often a deliberate override is a legitimate pattern in this corpus, and this session had no basis for making it. See Cheap checks."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`G.72.md`'s cheap check 9 understated its own finding by a factor of 29.** It named `sk-ess-peer-review-report`'s `jurisdiction_level` as a single \"same category\" defect alongside the two palette errors. There were 29 such records corpus-wide (Finding 1). **Confirmed and extended, not refuted** — the diagnosis was exactly right and the scope was not checked. The specific mechanism worth carrying: `G.72.md` filed it as \"validate-catchable\", and it was not, because no rule existed for the field. An assumption that the validator would have caught something is itself a claim, and this corpus's own discipline says to check claims against the artefact rather than the expectation."
+    },
+    {
+      "n": 2,
+      "text": "`G.72.md`'s account of its own validator run was incomplete.** It reported two errors and a 20-item mismatch list. The same run also printed a `DUPLICATE IDS` block (which increments the failure count, so it was one of the reasons that run was red) and a `SUPERSEDED` block naming a triple-defined edge. **Not refuted — under-reported.** Both are Findings 4 and 5 here. No blame attaches: that session's assignment was batch 46 and the validator run was incidental to it, which is precisely when a long output gets skimmed."
+    },
+    {
+      "n": 3,
+      "text": "`R2.72.md`'s \"Live problems\" section inherits both understatements**, since it summarised `G.72.md` faithfully. Its three-item list (\"two validator errors… a 20-item mismatch list… `sk-ess-peer-review-report`'s `jurisdiction_level`\") should be read as six items, of which all six are now closed. The rollup itself is not wrong about anything it saw; noted so a future reader of `R2.72.md` alone is not surprised by this file."
+    },
+    {
+      "n": 4,
+      "text": "The Block B `_dropped` sweep (closed `G.68.md`) left the corpus in a state its own validator rejected, and this was invisible until `G.72.md`.** Not a research error and not a judgement error — the convention of preserving resolved leads is right and has been kept. It is a schema gap, and `R2.72.md`'s own observation stands confirmed with a second instance: every \"arithmetic, not a validator run\" caveat this chain carried was an unconfirmed *schema*, not just an unconfirmed number."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        "**Cheap checks 9 and 10 — CLOSED this session**, along with three further defects found in the same pass (Findings 4, 5, and the Secondary observation). `npm run validate` exits 0.",
+        "B — the corpus-wide `_dropped` sweep. Fully closed since `G.68.md`. Its output was repaired this session (Finding 3) without reopening the sweep itself.",
+        "Item 5 (EU staging-blob batch backlog) — closed at `G.72.md`. Unchanged.",
+        "Item 2 (archive) and Item 3 (rollup) — closed at `G.69.md`; the cadence gap `G.72.md` flagged as four sessions overdue was closed by `R2.72.md`. Per the five-per-`G.*.md` precedent the next rollup is due around `G.77`/`G.78`.",
+        "A, C, D, E, F, G — untouched, now across five consecutive sessions (`G.69`–`G.73`). See `G.56.md`–`G.62.md` for their current state. **There is again no standing next item.** `G.72.md` said \"a future session should look to Thomas for the next item\"; this session was that instruction being given, and it is now spent. The same three candidates offered at the start of this session remain the obvious menu: a survey of blocks A and C–G to find out what is actually left in them, the Portugal / Liechtenstein / Switzerland peer-review coverage gaps, or a new assignment. Cheap checks 1–8 and 11–13 below are the raidable list, not a plan."
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Reread page 2 (Article 9 background section) directly for 20 of the 21 evergreen CIRCABC countries whose `eu-reg-479-2009` edge currently rests on the boilerplate's confirmed presence in eight other countries' copies. Low value, cheap."
+    },
+    {
+      "n": 2,
+      "text": "Two filename-vs-title-page date mismatches (UK, NL) in `edp-inventory-regulation-479-2009.json` remain unadjudicated, per `Research.1.md` §3."
+    },
+    {
+      "n": 3,
+      "text": "Greece's own CIRCABC metadata still reads ESA95 against the document body's ESA 2010, unresolved."
+    },
+    {
+      "n": 4,
+      "text": "`ess-peer-review-final-report -> de/sk-ess-peer-review-report`'s `relationship_type` (`uses_data_from`, `G.69.md`'s judgment call) could be revisited against `cites` if a future session reads SWD(2024)136's own body text on how it aggregates member reports. Applies equally to `G.72.md`'s 26 new `uses_data_from` edges from the same source node."
+    },
+    {
+      "n": 5,
+      "text": "Find the edge (if any) for the MIP scoreboard / Alert Mechanism Report. `EU/ECB-Staging-Batches_PartA_2026-08-05.md` is the cheapest place to look first."
+    },
+    {
+      "n": 6,
+      "text": "NACE's own Article text (per `G.71.md` cheap check 6) — unchanged this session, not attempted."
+    },
+    {
+      "n": 7,
+      "text": "The Destatis QNA-specific EVAS source list (per `G.71.md` cheap check 7) — unchanged this session, not attempted."
+    },
+    {
+      "n": 8,
+      "text": "Portugal's third-round peer-review report PDF (per `G.72.md` cheap check 8) — try the `ine.pt` page again (the failure was a connect timeout, possibly transient), or search Statistics Portugal's own document library rather than its landing page. Unchanged this session, not attempted."
+    },
+    {
+      "n": 9,
+      "text": "NEW.** `RelationshipType`, `SourceKind`, `TerminalReason` and `EvidenceKind` are closed unions with no runtime list and no validator rule, exactly as `JurisdictionLevel` and `DroppedReason` were before this session. Both of those turned out to have live violations. Cheap: one scan per union against the corpus, and if clean, add the guard anyway — the guard is four lines and the scan is the expensive half."
+    },
+    {
+      "n": 10,
+      "text": "NEW.** Should `SUPERSEDED` (an edge defined twice, last wins) fail the run the way `DUPLICATE IDS` does? Finding 5 shows it can silently discard verbatim statutory evidence for a claim that stays in the graph looking fully cited. The counter-argument is that a deliberate override may be a legitimate pattern somewhere in this corpus — but there are now zero superseded edges, so the rule could be tightened at no cost and would be a live check rather than a scroll-past line. Thomas's call."
+    },
+    {
+      "n": 11,
+      "text": "NEW.** The two `edp-inventory` node ids whose prefix no longer matches their country field (`el-edp-inventory`/`GR`, `uk-edp-inventory`/`GB`, Finding 2). Deliberately left; if a future session decides to rename them, it must also update four dependency objects, the `_dropped` prose in the same file, and accept that `G.72.md`/`R2.72.md`/`G.73.md` will name ids that no longer exist."
+    },
+    {
+      "n": 12,
+      "text": "Carried from the general list: the `statcan-hfce` / `statcan-national-accounts` duplication question recorded in `statcan-macro-accounts.json` remains open on its own terms — Finding 5's merge explicitly sidesteps rather than resolves it."
+    },
+    {
+      "n": 13,
+      "text": "NEW.** 24 reports are isolated (no edge in either direction) and 80 `_dropped` entries are research leads. Neither is a defect and neither is new, but the isolated list is now printed on a green run where it used to be buried in a red one, and several entries on it (`ecb-*`, `oecd-icio`, `nato-defence-expenditure`) look like one afternoon's work each."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `EU/R2.72.md` per the standing convention — the rollup is current as of `G.72` and this file is the only thing after it. `EU/R1.68.md` is superseded for the `G.64`–`G.68` window but still the only record of it."
+    },
+    {
+      "n": 2,
+      "text": "`npm run validate` exits 0 as of this session.** If it does not for you, something changed after 2026-08-09 and the diff is worth finding before doing anything else. The procedure is Orientation §4 and it now has two independent successful runs behind it."
+    },
+    {
+      "n": 3,
+      "text": "Files touched this session, all committed to the device: `src/lib/types.ts` (added `JURISDICTION_LEVELS`, `DROPPED_REASONS`, and the `resolved` member of `DroppedReason`), `src/lib/graph.ts` (jurisdiction-level rule in `validate()`), `scripts/validate-data.ts` (unknown-reason rule; `resolved` folded into the caveat rules), and 14 slices under `src/data/research/`. `tsc --noEmit` is clean."
+    },
+    {
+      "n": 4,
+      "text": "`reason: \"resolved\"` exists now** (Orientation §5). A future sweep that closes a lead should use it rather than leaving a `no-node-yet` note pointing at a live edge — which is what produced Finding 3."
+    },
+    {
+      "n": 5,
+      "text": "Cheap check 9 is the direct sequel to this session's work and the cheapest thing on the list: four more closed unions that nothing checks, in a corpus where the two that were checked this session both turned out to have violations."
+    },
+    {
+      "n": 6,
+      "text": "`planning/MISSION-TODO-2.md` was not touched this session and needs no update — item 5 is closed and nothing here belongs to it."
+    }
+  ],
+  "session_conditions": "A single-focus repair session with no research component, opened by Thomas choosing cheap checks 9 and 10 from `G.72.md`'s own list over the two alternatives offered (a survey of the untouched blocks A/C–G, or the Portugal / Liechtenstein / Switzerland coverage gaps). No web fetch was made and no primary source was read; every claim below rests on the corpus's own files and on `npm run validate`'s output, both read directly in the cloud sandbox.\n\nThe working method was `G.72.md`'s procedure applied unchanged, then a deliberate widening: rather than fix only the three defects `G.72.md` named, this session read the validator's *entire* output — including the blocks `G.72.md` printed but did not comment on — and treated every `✗` and every silent-data-loss block as in scope. That widening is where three of this session's five findings came from, and it cost almost nothing: the expensive part is the staging and the `npm install`, not the reading.\n\nWhat was NOT done, stated so downstream work inherits the limit: no source document was reopened to confirm that any *research* claim in the edited files is still correct. Where a description or basis field was edited, the edit appends a dated correction and leaves the original text intact; no existing sentence about the world was rewritten or deleted."
+}

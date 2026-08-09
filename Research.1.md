@@ -66,8 +66,12 @@ that made this merge overdue in the first place.
 decided 2026-08-09.** The `G.*.md` chain had run 52 files with every one
 read individually by every new session and no consolidation, the exact gap
 `sessions/START-HERE.md` closes for the renderer project's `V0.*.md` logs.
-`EU/R1.68.md` is the first EU rollup, covering `G.64`-`G.68` (the
-corpus-wide `_dropped` sweep closing). **It does not replace the newest
+`EU/R1.68.md` was the first EU rollup, covering `G.64`-`G.68` (the
+corpus-wide `_dropped` sweep closing). **`EU/R2.72.md`, added 2026-08-09,
+is the newest, covering `G.69`-`G.72`** (the EU staging-blob batch
+backlog -- `planning/MISSION-TODO-2.md` item 5 -- closing in full, plus
+`npm run validate` running successfully from this branch's tooling for
+the first time). **It does not replace the newest
 individual hand-off -- read both.** Unlike the renderer project, this branch
 has no single REPORTS.md-equivalent that absorbs promoted methodology, so
 the working set for a new session is `Research.1.md` plus the newest rollup

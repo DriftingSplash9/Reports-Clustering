@@ -111,6 +111,33 @@ export type JurisdictionLevel =
   | 'institutional'
 
 /**
+ * The same six values at runtime, so they can be checked rather than assumed.
+ *
+ * `JurisdictionLevel` is a closed union, so the compiler exhausts it everywhere
+ * inside the app. But every report enters through a hand-written JSON slice
+ * that is *cast*, not parsed, so the compiler never sees the string that was
+ * actually typed. That gap let 29 reports carry `"national"` (27 EDP
+ * inventories plus one ESS peer-review report) and one carry `"territorial"` —
+ * neither a member of this union — sit undetected corpus-wide until
+ * 2026-08-09 (`EU/G.73.md`), because nothing but `SCOPE_COLOUR`'s own lookup
+ * ever tested the value and a miss there falls back silently to unclassified
+ * grey rather than complaining.
+ *
+ * This is the same failure and the same fix as `isKnownCountry` in palette.ts,
+ * whose own comment already says it out loud: opening a field to hand-written
+ * strings costs you the compiler, and nothing but an explicit runtime rule
+ * stops a typo reaching the renderer.
+ */
+export const JURISDICTION_LEVELS: readonly JurisdictionLevel[] = [
+  'international',
+  'supranational',
+  'federal',
+  'provincial',
+  'municipal',
+  'institutional',
+]
+
+/**
  * Whether a source is an official release or a published commercial one.
  *
  * The scope rule used to say "official reports", which quietly excluded two
@@ -663,6 +690,57 @@ export type DroppedReason =
    * which lost the one thing that made them findable.
    */
   | 'caveat'
+  /**
+   * A lead that was later worked and closed, kept rather than deleted so the
+   * slice's own history survives. Decided 2026-08-09 (`EU/G.73.md`), on
+   * exactly the precedent `caveat` set two days earlier, and for the same
+   * reason: the corpus already had the shape and was faking a different reason
+   * to carry it.
+   *
+   * The Block B `_dropped` sweep (closed `EU/G.68.md`) did not delete the
+   * entries it resolved. It rewrote each one in place — a `RESOLVED <date>`
+   * preamble naming the node minted and the edge wired, then `Original entry
+   * follows` and the untouched original text — because, in one entry's own
+   * words, that is "recorded as resolved rather than deleted so this file's
+   * own history is complete". That convention is right and worth keeping: the
+   * original blocker is the most useful thing in a resolved lead, since it
+   * says what a future session would otherwise re-derive.
+   *
+   * It also left 20 notes whose `source`/`target` now name a live edge, which
+   * is an error for every reason except `caveat` — so the sweep's own output
+   * failed the validator from `G.72.md`'s first successful run onward, with
+   * neither of the two remedies the validator offers ("resolve or delete")
+   * being the right one. Overloading `caveat` would have worked mechanically
+   * and lied semantically: a caveat is an *unresolved* discrepancy on a minted
+   * edge, and these are the exact opposite.
+   *
+   * Like `caveat`, and unlike every other reason: a `resolved` note's
+   * source/target MUST name a real edge. That is what makes it checkable — if
+   * the edge it claims to have wired is not there, the claim is false.
+   */
+  | 'resolved'
+
+/**
+ * Every reason at runtime, for the same reason `JURISDICTION_LEVELS` exists:
+ * the union is closed but the slices are cast, so nothing checked the string
+ * that was actually typed. One `_dropped` entry sat on `"duplicate"` — a value
+ * this union has never had — and the validator counted it happily under its own
+ * per-reason tally, printing `1  duplicate` as though it were a category
+ * (found and fixed 2026-08-09, `EU/G.73.md`).
+ */
+export const DROPPED_REASONS: readonly DroppedReason[] = [
+  'denied',
+  'no-document',
+  'wrong-target',
+  'wrong-direction',
+  'unpublishable-source',
+  'unreadable-source',
+  'no-node-yet',
+  'deferred',
+  'note',
+  'caveat',
+  'resolved',
+]
 
 /** The reasons that are research leads rather than answers. */
 export const DROPPED_LEAD_REASONS: readonly DroppedReason[] = ['no-node-yet', 'deferred']

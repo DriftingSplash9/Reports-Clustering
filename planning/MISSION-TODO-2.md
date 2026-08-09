@@ -461,6 +461,33 @@ first, in full)
    flag — and is the one item left in the 16-batch backlog this item
    opened. Full account: `EU/G.71.md`.
 
+   **UPDATE 2026-08-09 (EU/G.72.md).** Batch 46 worked -- the last of the
+   16-batch instruction, closing item 5 entirely. Of the 29 uncitable
+   country peer-review records, 2 (Germany, Slovakia) duplicated nodes
+   already minted from batch 40; the remaining 27 were re-fetched from
+   primary sources via live WebSearch + WebFetch. 26 confirmed and minted
+   (verbatim executive-summary compliance statement, author names, date,
+   working PDF url each), cross-checked against the batch stub's own quote
+   and recommendation counts -- all 26 matched, confirming the stubs were
+   accurate and only their citations were missing. Portugal (the 29th)
+   could not be re-cited this session -- confirmed to exist via Eurostat's
+   own news announcement, but no direct PDF url was retrievable live from
+   either Eurostat's document store or Statistics Portugal's own site --
+   logged `_dropped`/`no-node-yet` per the same standard NACE was held to
+   in `G.71.md`. All added to `ess-peer-review-country-reports.json`
+   (29 reports, 57 dependencies total after this session). **This session
+   also ran `npm run validate` successfully for the first time in this
+   branch's history** (prior sessions never had a working path to it from
+   the device bridge) -- caught and fixed a schema defect inherited from
+   `G.69.md` (`releases_per_year: null` instead of the field being omitted,
+   on all 3 of that session's original entries in this file, now fixed
+   alongside this session's own 26) and surfaced two unrelated pre-existing
+   errors elsewhere in the corpus (`el-edp-inventory` / `uk-edp-inventory`
+   country codes missing palette entries) and a 20-item dropped-note/graph
+   mismatch, neither touched this session -- flagged for a future session.
+   **Item 5 (the EU staging-blob batch backlog) is now fully closed.**
+   Full account: `EU/G.72.md`.
+
 6. **AU — the second council, and the Victorian valuation chain.** Branch
    authority: `AU/G.3.md` (read G.2 and G.1 behind it). Two sub-items, in
    order:

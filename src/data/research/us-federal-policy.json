@@ -339,7 +339,7 @@
       "edge": "fed-h15 -> (U.S. Treasury daily yield curve)",
       "source": "fed-h15",
       "target": "treasury-daily-yield-curve",
-      "reason": "no-node-yet",
+      "reason": "resolved",
       "why": "RESOLVED 2026-08-09 (sweep session, Tier-3 item), and treated as urgent per this project's own scoping notes — this was the one entry in the corpus-wide sweep flagged as a live correctness bug rather than a missed opportunity, since fed-h15 had no surviving edge and dropped from every build. Treasury's own FAQ confirms the mechanism named in H.15's footnotes: 'CMT yields are read directly from the Treasury's daily par yield curve, which is derived from indicative closing bid market price quotations on Treasury securities.' Minted treasury-daily-yield-curve (releases_per_year 250, matching fed-h15's own daily cadence_note convention in src/data/reports.ts) and wired fed-h15 -> treasury-daily-yield-curve, uses_data_from. Original entry follows.\n\nA live lead, opened by deleting fed-h15 -> fed-fomc-statement in V0.9 and worth taking because that deletion left H.15 with no surviving edge, so the node now drops from the graph on every build. H.15 does name a source explicitly: footnotes 9 and 10 both read 'Source: U.S. Treasury' for the Treasury nominal and inflation-indexed constant maturity series, and the release describes those yields as 'interpolated by the U.S. Treasury from the daily yield curve'. That is a documented dependency by this project's standard — better evidenced than many edges already in the graph. What is missing is the node: the Treasury daily yield curve / interest rate statistics release has not been researched. Researching it reconnects H.15 and is the cheapest route to doing so."
     }
   ]

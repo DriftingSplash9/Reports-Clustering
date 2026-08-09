@@ -9,6 +9,10 @@ import type {
   SourceKind,
   TerminalReason,
 } from './types'
+// Same argument as the palette import below: the list of valid jurisdiction
+// levels lives with the type it belongs to, and is imported rather than
+// restated here so the two cannot drift.
+import { JURISDICTION_LEVELS } from './types'
 // Validation reaches into the palette deliberately. The rule being enforced is
 // literally "this country has a hand-written palette entry", so the palette is
 // the only honest source for it; asserting it against a second list here would
@@ -136,6 +140,21 @@ export function validate(
         message:
           `${r.id}: country ${r.country} has no palette entry — ` +
           `add it to COUNTRY_FAMILY in src/lib/palette.ts`,
+      })
+    }
+    // The same gap one field over, and it cost more: `jurisdiction_level` IS a
+    // closed union, so this looks like the compiler's job — but the slices are
+    // cast rather than parsed, so the compiler never sees the hand-typed
+    // string. 29 reports carried `"national"` or `"territorial"` corpus-wide
+    // and nothing complained, because the only consumer is `SCOPE_COLOUR`'s
+    // own lookup and a miss there falls back silently. Added 2026-08-09,
+    // EU/G.73.md.
+    if (!JURISDICTION_LEVELS.includes(r.jurisdiction_level)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `${r.id}: jurisdiction_level "${r.jurisdiction_level}" is not a ` +
+          `JurisdictionLevel — one of ${JURISDICTION_LEVELS.join(', ')}`,
       })
     }
     // changes_per_year presupposes a publication rate to differ from — it is
