@@ -1,4 +1,5 @@
 {
+  "_status": "Swept 2026-08-09 as part of the corpus-wide _dropped sweep (Tier 2, item 12; see planning/dropped-sweep-scoping_2026-08-08.md). One node minted (statcan-bps) and one edge wired (statcan-seph -> statcan-bps) closing a no-node-yet lead. Three other leads re-checked and reconfirmed still open with new detail recorded (statcan-sut -> statcan-supc still blocked on missing publication facts for SUPC; the LFS-side passage for statcan-lfs -> noc still not found; the Canadian International Merchandise Trade record-number correction for the CCHS entry found candidate records 2201/2202 but not independently verified). The eight remaining entries (six denied, one no-document, one unpublishable-source, plus the two note entries) were not re-touched — already correctly settled. Non-branch file (Canada/US galaxy); no dedicated hand-off, tracked here and in planning/OPEN-THREADS_2026-08-08.md thread 2.1.",
   "reports": [
     {
       "id": "statcan-msm",
@@ -102,6 +103,20 @@
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
       "domains": ["taxation", "national-accounts"],
       "terminal_reason": "unpublishable"
+    },
+    {
+      "id": "statcan-bps",
+      "title": "Business Payrolls Survey (BPS)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Monthly collection instrument for the Survey of Employment, Payrolls and Hours, IMDB record 2614. Statistics Canada's own record: the BPS is 'the collection instrument for the Survey of Employment, Payrolls and Hours (SEPH) (record number 2612)'; BPS results are merged with administrative data to produce SEPH's monthly estimates of earnings, jobs and hours worked by industry at national, provincial and territorial levels. Minted 2026-08-09 (sweep session, Tier-2 item #12) closing a `no-node-yet` lead: record 2612 itself names the BPS as a live input ('The Business Payrolls Survey (BPS) conducted monthly, is used to collect SEPH variables not available from administrative sources'), and this session retrieved the BPS's own IMDB record confirming a monthly cadence.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly. Statistics Canada's own record 2614 states 'Frequency: Monthly'.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2614",
+      "domains": ["labour"]
     }
   ],
   "dependencies": [
@@ -160,6 +175,13 @@
       "relationship_type": "methodology_depends_on",
       "basis": "THE WEAKEST EDGE IN THIS SLICE, and flagged rather than buried. The NOC 2021 introduction states: 'It is important to note that the redesign of the NOC can have significant implications for several Surveys, such as the Labour Force Survey (LFS), and ESDC programs such as the Temporary Foreign Worker Program and Employment Insurance program.' This is a statement that a revision reaches the LFS, not a statement that the LFS uses the NOC, and the direction has to be read out of it rather than off it. It is taken on the precedent already set for boc-prime-rate -> boc-policy-rate, which rests on the Bank of Canada's word 'affects' and was accepted as `uses_data_from` on exactly that reasoning. It is also corroborated structurally by NOC being 'the departmental standard for data collection and dissemination for occupations at Statistics Canada' as of 10 August 2021. The clean version of this edge is a passage in the LFS's own record 3701 saying it codes occupation to NOC; that passage has not been retrieved, and the `_dropped` block records it as the lead to close.",
       "evidence_url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/introductionV1"
+    },
+    {
+      "source_report_id": "statcan-seph",
+      "target_report_id": "statcan-bps",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 2612 names the Business Payrolls Survey as a live input in its own words: 'The Business Payrolls Survey (BPS) conducted monthly, is used to collect SEPH variables not available from administrative sources.' Held at uses_data_from rather than calculated_from because the BPS supplies only the variables the PD7/administrative sources cannot, i.e. a supplementary rather than arithmetic input.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612"
     }
   ],
   "_dropped": [
@@ -210,21 +232,21 @@
       "source": "statcan-sut",
       "target": null,
       "reason": "no-node-yet",
-      "why": "LEAD, and the best one in this slice. The Supply and Use Product Classification is what actually connects NAPCS to the accounts, and NAPCS's introduction states both halves. The dependency: 'The Supply and Use Product Classification (SUPC) is the basis for the commodity accounts' and 'the Supply and Use Product Classification (SUPC) used for the production of input-output tables is largely embedded at the level of NAPCS Canada.' The containment: 'The SUPC has been integrated into NAPCS Canada at the class level (5-digit) where conceptually and practically feasible... More than 80% of the remaining categories of NAPCS classes coincide with those of SUPC.' So the honest model is a statcan-supc node with part_of set to napcs and an edge from statcan-sut to it — the second use of part_of, and the first between two classifications. Blocked on publication facts for the SUPC: no title page, publisher or revision cadence has been retrieved. Deliberately NOT shortcut into a statcan-sut -> napcs edge, because that would justify an edge with a quote about a different release, which is the substitution error V0.11 refused an Equalization edge for."
+      "why": "RE-CHECKED 2026-08-09 (sweep session, Tier-2 item #12), still blocked. Searched specifically for a dedicated SUPC publication page (title, publisher statement, revision cadence). Statistics Canada's own 'Industry, product and final demand classifications' guide (13-607-x) mentions SUPC only in passing — identifying it as the product classification used in supply and use tables and noting it is 'anchored to' NAPCS and the Harmonized System — with no publisher statement, formal title page or stated revision cadence of its own. Nothing else searched surfaced a dedicated SUPC record either. Confirms the original blocker rather than resolving it: SUPC appears only ever as a component described inside other classifications' own documentation (NAPCS's introduction, the supply-and-use accounts guide), never as a document with its own publication facts to cite. Original entry follows.\n\nLEAD, and the best one in this slice. The Supply and Use Product Classification is what actually connects NAPCS to the accounts, and NAPCS's introduction states both halves. The dependency: 'The Supply and Use Product Classification (SUPC) is the basis for the commodity accounts' and 'the Supply and Use Product Classification (SUPC) used for the production of input-output tables is largely embedded at the level of NAPCS Canada.' The containment: 'The SUPC has been integrated into NAPCS Canada at the class level (5-digit) where conceptually and practically feasible... More than 80% of the remaining categories of NAPCS classes coincide with those of SUPC.' So the honest model is a statcan-supc node with part_of set to napcs and an edge from statcan-sut to it — the second use of part_of, and the first between two classifications. Blocked on publication facts for the SUPC: no title page, publisher or revision cadence has been retrieved. Deliberately NOT shortcut into a statcan-sut -> napcs edge, because that would justify an edge with a quote about a different release, which is the substitution error V0.11 refused an Equalization edge for."
     },
     {
       "edge": "the LFS-side passage that would strengthen statcan-lfs -> noc",
       "source": "statcan-lfs",
       "target": null,
       "reason": "deferred",
-      "why": "A lead, not a dropped edge — the edge exists, weakly, on the NOC's own wording, and this is the passage that would make it strong. IMDB record 3701's Data sources section was retrieved and describes only collection method: 'Data are collected directly from survey respondents... by in-person interview; by telephone interview; or by self-completed electronic questionnaire.' It names no classification and no release at all. The passage wanted is in the LFS's variable or classification documentation rather than its Data sources block, and it has not been retrieved."
+      "why": "RE-CHECKED 2026-08-09 (sweep session, Tier-2 item #12), still open. Searched for LFS variable/classification documentation naming NOC directly (as opposed to the NOC's own introduction naming the LFS, which is the weak direction already wired). Results returned only LFS output tables cross-tabulated by 'National Occupational Classification for Statistics (NOC-S)' — confirming the LFS does code occupation to some NOC-derived scheme in its published output, but not a methodology or variable-documentation passage stating that the LFS's own occupation variable is built on the NOC standard, which is the specific passage this entry wants. Confirms the original finding rather than changing it. Original entry follows.\n\nA lead, not a dropped edge — the edge exists, weakly, on the NOC's own wording, and this is the passage that would make it strong. IMDB record 3701's Data sources section was retrieved and describes only collection method: 'Data are collected directly from survey respondents... by in-person interview; by telephone interview; or by self-completed electronic questionnaire.' It names no classification and no release at all. The passage wanted is in the LFS's variable or classification documentation rather than its Data sources block, and it has not been retrieved."
     },
     {
       "edge": "statcan-seph -> statcan-bps",
       "source": "statcan-seph",
-      "target": null,
+      "target": "statcan-bps",
       "reason": "no-node-yet",
-      "why": "LEAD. Record 2612 names the Business Payrolls Survey as a live input in its own words: 'The Business Payrolls Survey (BPS) conducted monthly, is used to collect SEPH variables not available from administrative sources.' That is a clean uses_data_from with a stated monthly cadence. Blocked only on publication facts for the BPS — its own IMDB record number has not been retrieved and inventing a URL for it is not acceptable."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #12). The BPS's own IMDB record (SDDS 2614) was retrieved: title 'Business Payrolls Survey (BPS)', publisher Statistics Canada, frequency monthly, and its own description confirms it as 'the collection instrument for the Survey of Employment, Payrolls and Hours (SEPH) (record number 2612)'. Minted as statcan-bps, releases_per_year 12, and wired statcan-seph -> statcan-bps, uses_data_from. Original entry follows.\n\nLEAD. Record 2612 names the Business Payrolls Survey as a live input in its own words: 'The Business Payrolls Survey (BPS) conducted monthly, is used to collect SEPH variables not available from administrative sources.' That is a clean uses_data_from with a stated monthly cadence. Blocked only on publication facts for the BPS — its own IMDB record number has not been retrieved and inventing a URL for it is not acceptable."
     },
     {
       "edge": "statcan-seph -> provincial, territorial and federal payroll records",
@@ -245,7 +267,7 @@
       "source": null,
       "target": null,
       "reason": "deferred",
-      "why": "LEAD, and a record-number correction. IMDB record 3226 was requested as Canadian International Merchandise Trade and is actually 'Canadian Community Health Survey - Annual Component (CCHS)', annual. Its Data sources section names no release — collection is by EQ, CATI and CAPI, with linkage to 'the personal tax records (T1, T1FF or T4) of respondents'. So the CCHS would enter the graph as an island: a real annual programme, in health, with no documented upstream release and no documented downstream consumer yet found. Deferred pending the standing-alone-nodes decision, since under the current loader an island node is dropped from every build. The record number for Canadian International Merchandise Trade remains unknown and was not guessed at."
+      "why": "RECORD NUMBER FOUND 2026-08-09 (sweep session, Tier-2 item #12) for the missing half of this entry. Statistics Canada's IMDB lists Canadian International Merchandise Trade under two separate record numbers depending on basis, neither of which is 3226: SDDS 2201 for 'Canadian International Merchandise Trade (Customs Basis)' and SDDS 2202 for 'Canadian International Merchandise Trade (Balance of Payments Basis)' (a third, related record, SDDS 5295, covers 'Canadian international merchandise trade by industry for all countries'). Not independently re-verified against either record's own page this session — only located via search — so treat as a lead on where to look, not a confirmed replacement citation. Does not change the CCHS finding itself (record 3226 is still confirmed as the Canadian Community Health Survey) or the standing-alone-nodes blocker, which remains open. Original entry follows.\n\nLEAD, and a record-number correction. IMDB record 3226 was requested as Canadian International Merchandise Trade and is actually 'Canadian Community Health Survey - Annual Component (CCHS)', annual. Its Data sources section names no release — collection is by EQ, CATI and CAPI, with linkage to 'the personal tax records (T1, T1FF or T4) of respondents'. So the CCHS would enter the graph as an island: a real annual programme, in health, with no documented upstream release and no documented downstream consumer yet found. Deferred pending the standing-alone-nodes decision, since under the current loader an island node is dropped from every build. The record number for Canadian International Merchandise Trade remains unknown and was not guessed at."
     },
     {
       "edge": "classification standards as an entry strategy",

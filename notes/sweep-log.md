@@ -68,3 +68,21 @@ Swept:
   arrived (OPEN-THREADS 1.12: "yes, sweep both"). Superseded working copies
   of content that now exists as Markdown (`EU/G.55.md` and the decisions/
   open-questions files respectively).
+
+## 2026-08-09 (G.58)
+
+Swept:
+
+- `EU/sources/SEC05_copy_for_read.pdf` — a working copy this session made
+  of `EU/sources/SEC05.pdf` (byte-identical, not independently verified by
+  hash but created by direct `cp` this same session) solely to break a
+  hardlink (`nlink > 1`) that was blocking the file-staging tool from
+  reading the original. Junk from the moment it was created; never
+  referenced by anything. The original `EU/sources/SEC05.pdf` is untouched.
+
+Not swept, `~$-open-questions_2026-08-08.docx` still present:
+
+- Same Word-lock file `G.56`'s entry above already flagged as "probably
+  still open because Word has a handle on it" — still there as of this
+  session. Not re-attempted; a lock file held open by a running
+  application isn't something a file-move can fix.

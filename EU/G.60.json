@@ -1,0 +1,95 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.60.md",
+  "number": 60,
+  "title": "G.60.md — EU galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "`Research.1.md` read in full at the start of this overall",
+  "predecessor": "`G.59.md` (2026-08-09).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**All five of this file's `_dropped` entries closed in one session — three\non straightforward publication-fact lookups the original session had\nalready substantially researched, and two by independently re-verifying a\npredecessor subagent's unverified quotes, one of which did not survive\nre-verification word-for-word even though its substance held.** No stale\ncross-file targets were found this time (a first among this session's four\nsweep files); the blockers here were all \"real lead, missing publication\nfacts\" rather than \"already resolved elsewhere and not updated.\"",
+  "findings": [
+    {
+      "heading": "1. `nl-kadaster-brk` minted as a terminus, same category as Ontario's SDI",
+      "body": "*What this rests on*: Kadaster's own catalogus and public-facing pages\n(`catalogus.kadaster.nl`, `kadaster.nl`).\n\nThe Waarderingsinstructie names Kadaster as the source of WOZ\nsales-transaction data (\"Alle verkoopgegevens worden aangeleverd door het\nKadaster.\"), but the original entry withheld a node for want of a category\ndecision — is a national cadastral base registry a node under this corpus's\nrule? Kadaster's own materials confirm the BRK is a continuously-maintained\nauthentic register with no stated publication cadence or edition\nstructure — the same shape as Ontario's Spatial Data Infrastructure\nterminus (`G.` sweep, `ontario-ompf-mpac.json`). **Minted `nl-kadaster-brk`,\nterminal_reason `unpublishable`** (not `confidential` — the BRK is a public\nregister, openly described, just not \"published\" in discrete editions;\n`unpublishable` better matches the \"administrative system with no\npublication to point at\" family than `confidential`'s \"collected and\ndeliberately never released\"). Wired `nl-waarderingskamer-waarderingsinstructie\n-> nl-kadaster-brk`, `uses_data_from`, on the entry's own already-verified\nquote."
+    },
+    {
+      "heading": "2. `nl-cbs-population-statistics` minted, closing a lead the file's own prior session had already fully evidenced",
+      "body": "*What this rests on*: CBS's own StatLine table detail page (`cbs.nl/nl-nl/cijfers/detail/03759ned`).\n\nThe 2024 Toelichting's \"Maatstaf Inwoners sociaal\" card names the specific\ntitled table \"Bevolking op 1 januari en gemiddelde; geslacht, leeftijd en\nregio\" as its Bron — a citation the file's own 2026-08-05 session had\nalready verified directly (line 452 of its pypdf extraction), leaving only\nthe node's own publication facts (cadence) unconfirmed. This session found\nthose facts directly on the table's own page: \"In het tweede kwartaal van\n2027 worden de cijfers van 1 januari 2027 en de gemiddelde cijfers over\n2026 in deze publicatie opgenomen\" — an annual update. **Minted\n`nl-cbs-population-statistics`**, wired `nl-bzk-toelichting-gemeentefonds ->\nnl-cbs-population-statistics`, `uses_data_from`."
+    },
+    {
+      "heading": "3. `nl-waarderingskamer-staat-van-de-woz` minted, isolated, after actually opening the document a predecessor only surfaced",
+      "body": "*What this rests on*: a direct `WebFetch` of the 2025 edition PDF itself.\n\nThe original entry explicitly withheld this mint because \"Research.1.md's\nrule against inventing facts extends to inventing a description of a\ndocument nobody has actually read\" — a subagent had found the URL but never\nopened it. This session opened it: the 2025 edition states \"In deze Staat\nvan de WOZ 2025 gaan we achtereenvolgens in op de actuele stand van zaken\nvan de WOZ-uitvoering\" and references its own 2024 predecessor by name\n(\"In de Staat van de WOZ 2024 schreven wij over de lopende evaluatie\"),\nconfirming a genuine annual series. **Minted\n`nl-waarderingskamer-staat-van-de-woz`, isolated (`fed-h15`-style)** — no\ndocument read so far names it as an input to, or output of, anything else\nin this file's material, so no edge is wired. A documented isolated mint,\nnot an ungrounded one: the node itself is independently well-evidenced even\nwithout a connection."
+    },
+    {
+      "heading": "4. `nl-noord-brabant-begroting` minted, but the re-verification changed the quote, not the finding",
+      "body": "*What this rests on*: a direct `WebFetch` of `begroting.brabant.nl`'s 2024\nedition.\n\nThis entry's earlier subagent report gave two quotes: the amount\n(\"Uitkering provinciefonds: 372.166\") and a basis-of-estimate sentence\n(\"De begrotingsbedragen 2024 zijn gebaseerd op de meicirculaire 2023\").\nRe-fetched directly this session: **the amount matches exactly** (€372,166\nthousand), **but the basis-of-estimate sentence does not match word for\nword** — the live page reads \"De raming van de algemene uitkering is\ngebaseerd op de meicirculaire 2023,\" not the subagent's wording. Same\nsubstance (the 2024 estimate rests on the May 2023 circular), different\nexact sentence — precisely the kind of paraphrase drift this file's own\n`_note` flagged as a known failure mode of AI-summarized `WebFetch` quotes,\nnow demonstrated on its own material rather than only on the earlier\n`grok-r3-netherlands-poland.json` spot-check that originally motivated the\nstandard. **Minted `nl-noord-brabant-begroting`, wired\n`nl-noord-brabant-begroting -> nl-provinciefonds`, `uses_data_from`, on the\ndirectly-verified quote, not the subagent's.**"
+    },
+    {
+      "heading": "5. `nl-waalwijk-jaarrekening` minted; the subagent's quote survived this time, verbatim",
+      "body": "*What this rests on*: a direct `WebFetch` of `waalwijk.begrotingsapp.nl`'s\n2021 jaarrekening.\n\nUnlike Finding 4, this one held up exactly: \"De jaarrekening is opgemaakt\nmet inachtneming van de voorschriften die het Besluit begroting en\nverantwoording provincies en gemeenten daarvoor geeft\" was confirmed\nword-for-word against the live page. **Minted `nl-waalwijk-jaarrekening`,\nwired `nl-waalwijk-jaarrekening -> nl-bbv`, `methodology_depends_on`**, as\ncorroboration of the already-independently-verified\n`nl-cbs-iv3-gemeenten -> nl-bbv` edge — not load-bearing on its own, but now\nresting on a directly-confirmed rather than subagent-only quote."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`nl-municipal-finance.json`'s Noord-Brabant `_dropped` entry — quote CORRECTED**, from the subagent's \"De begrotingsbedragen 2024 zijn gebaseerd op de meicirculaire 2023\" to the primary source's actual \"De raming van de algemene uitkering is gebaseerd op de meicirculaire 2023.\" Not a claim that the earlier session was wrong to flag this as deferred — it explicitly declined to promote the subagent's quote without direct verification, which is exactly the caution that caught the drift. See Finding 4."
+    },
+    {
+      "n": 2,
+      "text": "No claim in `G.56.md`–`G.59.md` is disputed.** This session did not re-touch any of their files."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "B",
+      "label": "the corpus-wide `_dropped` sweep",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 8,
+      "text": "New, this session**: `nl-waarderingskamer-staat-van-de-woz` is isolated except for no edges at all — worth a look for any document naming it as an input to, or output of, something else, the same shape as `G.53.md`'s and `G.58.md`'s isolated-node cheap checks."
+    },
+    {
+      "n": 9,
+      "text": "New, this session**: `nl-noord-brabant-begroting`'s Begroting 2022 BBV-citation (reported by the original subagent alongside the Begroting 2024 figures) was not independently re-checked this session — only the 2024 figures were. Worth a direct fetch if that specific quote is ever load-bearing."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "`planning/OPEN-THREADS_2026-08-08.md`** — read first, thread 2.1. Like `G.58.md`/`G.59.md`, this file's session (2026-08-09) has not yet been folded into OPEN-THREADS."
+    },
+    {
+      "n": 2,
+      "text": "This file**, then `G.59.md`, `G.58.md`, `G.57.md`, `G.56.md` for everything else in the branch."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md`** §2 (git), §3 (extract, don't adjudicate), §4 (node rule and sweep scoping), §6 (output format)."
+    },
+    {
+      "n": 4,
+      "text": "`src/data/research/nl-municipal-finance.json`** — every `_dropped` entry this session touched carries its resolution inline, original text preserved below each one."
+    },
+    {
+      "n": 5,
+      "text": "`planning/dropped-sweep-scoping_2026-08-08.md`** — for the remaining Tier-2 files (`statcan-ippi.json`, `statcan-macro-accounts.json`). ---"
+    }
+  ],
+  "session_conditions": "**A `_dropped`-sweep session, corpus-wide thread 2.1, Tier-2 item #13.** One\nfile touched: `nl-municipal-finance.json` — five nodes minted, four new\nedges wired, all five of the file's `_dropped` entries resolved (none left\nopen).\n\n**Read in full this session**: the current `nl-municipal-finance.json`\n(before and after editing). **Not read this session**: any other `EU/`\nresearch JSON, `REPORTS.md`, `BACKLOG.md`.\n\n**This file's own `_note` states a verification standard from its\n2026-08-05 origin session** — that AI-summarized `WebFetch` quotes are not\nreliably verbatim, so every load-bearing quote must be independently\nre-verified against primary text, not trusted from a subagent's report.\nThis session inherited and applied that standard to its two most consequential\nfindings (Findings 4 and 5 below): both of the file's remaining\nsubagent-sourced `deferred` leads (Noord-Brabant's Begroting, Waalwijk's\nJaarrekening) were re-fetched directly rather than promoted on the earlier\nsummary alone, and one of the two turned up exactly the kind of paraphrase\ndrift the standard exists to catch (see Finding 4). All other retrieval this\nsession (Kadaster, CBS population table, Staat van de WOZ) was done via\n`WebSearch` + `WebFetch` directly against primary sources, with no\nintervening subagent."
+}

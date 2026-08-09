@@ -1,6 +1,6 @@
 {
   "_slice": "statcan-macro-accounts",
-  "_scope": "Resolution of the two StatCan edges held unverified at the end of V0.9, read from the two programs' own Integrated Metadatabase (IMDB) methodology records rather than from a secondary summary. Owns nothing else: no new nodes, and no edges outside statcan-national-accounts and statcan-gdp-monthly. EXTENDED 2026-08-08: now also owns the statcan-system-macroeconomic-accounts framework node, minted per Thomas's Q1 ruling on Open-Questions-2026-08-08-sweep.docx -- see that node's own description for the reasoning. Its User Guide is Catalogue no. 13-606-G; a companion Methodological Guide exists at Catalogue no. 13-607-X, not yet opened.",
+  "_scope": "Resolution of the two StatCan edges held unverified at the end of V0.9, read from the two programs' own Integrated Metadatabase (IMDB) methodology records rather than from a secondary summary. Owns nothing else: no new nodes, and no edges outside statcan-national-accounts and statcan-gdp-monthly. EXTENDED 2026-08-08: now also owns the statcan-system-macroeconomic-accounts framework node, minted per Thomas's Q1 ruling on Open-Questions-2026-08-08-sweep.docx -- see that node's own description for the reasoning. Its User Guide is Catalogue no. 13-606-G; a companion Methodological Guide exists at Catalogue no. 13-607-X, not yet opened. SWEPT 2026-08-09 as part of the corpus-wide _dropped sweep (Tier 2, item 15; see planning/dropped-sweep-scoping_2026-08-08.md). Three of eight _dropped entries resolved: statcan-msm (already minted elsewhere this sweep session) wired in, and two new nodes minted directly (statcan-qsfs, statcan-rcs) with four new edges. The statcan-rcs mint surfaced a name discrepancy between the corpus's citing documents ('Quarterly Retail Commodity Survey') and the survey's current IMDB title ('Retail Commodity Survey') — flagged, not adjudicated. The remaining four entries (one deleted no-document, one already-resolved note, one searched-and-not-found no-document, one curation-problem note, one implied-edge note) were re-read and found already correctly settled. This file is explicitly within CA branch's stated scope (CA/G.1.md orientation: 'the StatCan macro-accounts chains') — see CA/G.2.md for the branch hand-off.",
   "reports": [
     {
       "id": "statcan-system-macroeconomic-accounts",
@@ -12,6 +12,38 @@
       "description": "The overarching accounting framework Statistics Canada operates under for macroeconomic statistics -- the umbrella that the quarterly income-and-expenditure accounts (statcan-national-accounts, IMDB record 1901), monthly GDP by industry (statcan-gdp-monthly), the Supply and Use Tables (statcan-sut) and the National Balance Sheet Accounts all sit inside, per the User Guide's own chapter structure and per record 1901's language describing the annual benchmarks as arising 'through the construction of annual supply and use tables' within this system. Minted as a node in its own right 2026-08-08 because two federal fiscal-transfer regulations (SOR/2007-303, both the Equalization and Territorial Formula Financing divisions) name the framework itself -- not a specific release -- as the thing a statutory wage/salary term is 'determined... for the purpose of': 'as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. Thomas's ruling (2026-08-08, Open-Questions-2026-08-08-sweep.docx Q1): frameworks and legislative instruments a regulation is built on are worth a node even with no cadence of their own -- 'its sole role is broadcasting and that needs represented.' No releases_per_year: this is an evergreen framework, not a periodic release, the same shape as the one-off foundational instruments already in the corpus.",
       "last_updated": null,
       "url": "https://www150.statcan.gc.ca/n1/en/catalogue/13-606-G",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-qsfs",
+      "title": "Quarterly Survey of Financial Statements (QSFS)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Quarterly survey (IMDB record 2501) of the financial position and performance of Canadian incorporated businesses, collected roughly 30 days after the end of each quarter. Named in record 1901's 'Data sources' list among the quarterly national accounts' 'more notable sources', named again in record 1901's 'Estimation' section as one of the sub-annual surveys whose movements are applied to annual benchmarks, and named a third time in the monthly GDP by industry source table as the input behind financial intermediation and insurance industry output. Minted 2026-08-09 (sweep session, Tier-2 item #15), closing a `no-node-yet` lead that had already identified the record number but not confirmed its own publication facts.",
+      "releases_per_year": 4,
+      "cadence_note": "Statistics Canada's own record 2501: 'Frequency: Quarterly'; collection occurs approximately 30 days after quarter-end.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2501",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "statcan-rcs",
+      "title": "Retail Commodity Survey (RCS)",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Statistics Canada's own IMDB record 2008 names this the Retail Commodity Survey (RCS), a monthly survey of retail commodity sales in Canada by outlet type, which 'produces more detailed quarterly estimates' at the commodity level. Named in record 1901's 'Data sources' list as one of the quarterly national accounts' 'more notable sources' under the name 'Quarterly Retail Commodity Survey', and appearing repeatedly in the monthly GDP by industry source table alongside the CPI for retail-trade industries as 'Retail commodity survey, Record no. 2008'. NAME DISCREPANCY, recorded rather than resolved: both citing documents call it the 'Quarterly Retail Commodity Survey,' but the survey's own current IMDB record names it the 'Retail Commodity Survey' with a monthly base frequency and quarterly commodity-level detail. Whether this reflects a historical rename (older Daily articles from 1999-2012 do use the 'Quarterly Retail Commodity Survey' name) or the citing documents using an informal name for the quarterly detail specifically is not adjudicated here. Minted 2026-08-09 (sweep session, Tier-2 item #15) under the record's own current title.",
+      "releases_per_year": 12,
+      "cadence_note": "Record 2008's own current page: 'Frequency: Monthly', with quarterly commodity-level detail as a secondary tier — the same shape as several ECB series this corpus already treats as one node with a headline cadence rather than two.",
+      "last_updated": null,
+      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2008",
       "domains": [
         "national-accounts"
       ]
@@ -38,6 +70,41 @@
       "relationship_type": "uses_data_from",
       "basis": "Record 1901 — the same IMDB record this node's own url points at — names SEPH twice. Under 'Data sources': 'Some of the more notable sources include: the Quarterly Survey of Financial Statements, the monthly Survey of Employment, Payrolls and Hours, the Quarterly Retail Commodity Survey, annual business surveys, banking information, Government Finance Statistics, the balance of payments statistics, and the T4 remuneration file from the Canada Revenue Agency.' Under 'Estimation': 'The sub-annual estimates are generated by applying the movements of sub-annual surveys such as the Quarterly Survey of Financial Statements, the Monthly Survey of Manufacturing and the monthly Survey of Employment, Payrolls and Hours to the benchmark estimates.' Named release, stated use, publisher's own methodology record.",
       "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222"
+    },
+    {
+      "source_report_id": "statcan-national-accounts",
+      "target_report_id": "statcan-msm",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 1901's 'Estimation' section: 'The sub-annual estimates are generated by applying the movements of sub-annual surveys such as the Quarterly Survey of Financial Statements, the Monthly Survey of Manufacturing and the monthly Survey of Employment, Payrolls and Hours to the benchmark estimates.' `statcan-msm` already exists as a corpus node (manufacturing-and-classifications.json, IMDB record 2101), closing the node-availability blocker this entry was filed under.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222"
+    },
+    {
+      "source_report_id": "statcan-national-accounts",
+      "target_report_id": "statcan-qsfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 1901's 'Data sources' list: 'Some of the more notable sources include: the Quarterly Survey of Financial Statements...' and the 'Estimation' section names it again as a sub-annual movement source. `statcan-qsfs` minted this session (IMDB record 2501, quarterly).",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222"
+    },
+    {
+      "source_report_id": "statcan-gdp-monthly",
+      "target_report_id": "statcan-qsfs",
+      "relationship_type": "uses_data_from",
+      "basis": "The monthly GDP by industry source table names the input behind financial intermediation and insurance output: 'Quarterly survey of financial statements, Record no. 2501.'",
+      "evidence_url": "https://www.statcan.gc.ca/en/statistical-programs/document/1301_D1_V4"
+    },
+    {
+      "source_report_id": "statcan-national-accounts",
+      "target_report_id": "statcan-rcs",
+      "relationship_type": "uses_data_from",
+      "basis": "Record 1901's 'Data sources' list names 'the Quarterly Retail Commodity Survey' among 'the more notable sources' for the quarterly accounts. `statcan-rcs` minted this session under its current IMDB title (record 2008) — see the node's own description for the name discrepancy this citation surfaced.",
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222"
+    },
+    {
+      "source_report_id": "statcan-gdp-monthly",
+      "target_report_id": "statcan-rcs",
+      "relationship_type": "uses_data_from",
+      "basis": "The monthly GDP by industry source table names 'Retail commodity survey, Record no. 2008' repeatedly alongside the CPI for retail-trade industries.",
+      "evidence_url": "https://www.statcan.gc.ca/en/statistical-programs/document/1301_D1_V4"
     }
   ],
   "_dropped": [
@@ -65,23 +132,23 @@
     {
       "edge": "statcan-national-accounts -> (Monthly Survey of Manufacturing)",
       "source": "statcan-national-accounts",
-      "target": null,
+      "target": "statcan-msm",
       "reason": "no-node-yet",
-      "why": "Named in record 1901's 'Estimation' section as one of the sub-annual surveys whose movements are applied to the annual benchmarks: 'The sub-annual estimates are generated by applying the movements of sub-annual surveys such as the Quarterly Survey of Financial Statements, the Monthly Survey of Manufacturing and the monthly Survey of Employment, Payrolls and Hours to the benchmark estimates.' Record 1301 names the same survey independently for the monthly programme: 'data from the Monthly Survey of Manufacturing are used for most (but not all) manufacturing industries.' Two documented edges from one node, and it is a recurring monthly StatCan release with its own IMDB record. Not researched as a node."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #15). `statcan-msm` was minted the same session, in manufacturing-and-classifications.json (Tier-2 item #12) — a companion file this entry never cross-referenced. Wired statcan-national-accounts -> statcan-msm, uses_data_from, on the entry's own already-verified quote. Original entry follows.\n\nNamed in record 1901's 'Estimation' section as one of the sub-annual surveys whose movements are applied to the annual benchmarks: 'The sub-annual estimates are generated by applying the movements of sub-annual surveys such as the Quarterly Survey of Financial Statements, the Monthly Survey of Manufacturing and the monthly Survey of Employment, Payrolls and Hours to the benchmark estimates.' Record 1301 names the same survey independently for the monthly programme: 'data from the Monthly Survey of Manufacturing are used for most (but not all) manufacturing industries.' Two documented edges from one node, and it is a recurring monthly StatCan release with its own IMDB record. Not researched as a node."
     },
     {
       "edge": "statcan-national-accounts -> (Quarterly Survey of Financial Statements)",
       "source": "statcan-national-accounts",
-      "target": null,
+      "target": "statcan-qsfs",
       "reason": "no-node-yet",
-      "why": "Named in the same sentence of record 1901's 'Estimation' section — 'sub-annual surveys such as the Quarterly Survey of Financial Statements, the Monthly Survey of Manufacturing and the monthly Survey of Employment, Payrolls and Hours' — and again in the record's 'Data sources' list, where it is the first of the 'more notable sources'. It also appears in the monthly GDP source table as the input behind financial intermediation and insurance output ('Quarterly survey of financial statements, Record no. 2501'), so it would carry an edge from statcan-gdp-monthly as well. Not researched as a node."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #15). Statistics Canada's own IMDB record 2501 confirms a quarterly cadence. Minted statcan-qsfs and wired both edges this entry predicted: statcan-national-accounts -> statcan-qsfs and statcan-gdp-monthly -> statcan-qsfs, both uses_data_from. Original entry follows.\n\nNamed in the same sentence of record 1901's 'Estimation' section — 'sub-annual surveys such as the Quarterly Survey of Financial Statements, the Monthly Survey of Manufacturing and the monthly Survey of Employment, Payrolls and Hours' — and again in the record's 'Data sources' list, where it is the first of the 'more notable sources'. It also appears in the monthly GDP source table as the input behind financial intermediation and insurance output ('Quarterly survey of financial statements, Record no. 2501'), so it would carry an edge from statcan-gdp-monthly as well. Not researched as a node."
     },
     {
       "edge": "statcan-national-accounts -> (Quarterly Retail Commodity Survey)",
       "source": "statcan-national-accounts",
-      "target": null,
+      "target": "statcan-rcs",
       "reason": "no-node-yet",
-      "why": "Named in record 1901's 'Data sources' list among 'the more notable sources' for the quarterly accounts. A retail commodity survey (record 2008) also appears repeatedly in the monthly GDP by industry source table alongside the CPI for retail-trade industries. Not researched as a node, and lower priority than the Supply and Use Tables."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-2 item #15), WITH A NAME DISCREPANCY FLAGGED. IMDB record 2008's own current page names the survey the 'Retail Commodity Survey (RCS)', monthly, not 'Quarterly' — the 'Quarterly Retail Commodity Survey' name both citing documents use may be a historical name (older Daily articles 1999-2012 do use it) or an informal reference to the survey's quarterly commodity-level detail; not adjudicated. Minted statcan-rcs under the record's current title and wired both edges this entry predicted: statcan-national-accounts -> statcan-rcs and statcan-gdp-monthly -> statcan-rcs, both uses_data_from. Original entry follows.\n\nNamed in record 1901's 'Data sources' list among 'the more notable sources' for the quarterly accounts. A retail commodity survey (record 2008) also appears repeatedly in the monthly GDP by industry source table alongside the CPI for retail-trade industries. Not researched as a node, and lower priority than the Supply and Use Tables."
     },
     {
       "edge": "statcan-hfce and statcan-national-accounts are the same IMDB record",

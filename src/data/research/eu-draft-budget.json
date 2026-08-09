@@ -1,11 +1,11 @@
 {
   "_slice": "eu-draft-budget",
   "_researched": "2026-08-05",
-  "_status": "IMPORTED 2026-08-05. Staged in EU/slices/eu-level/, checked, moved here and registered in src/data/index.ts.",
-  "_note": "First EU slice in the branch's history, and the first EU data in the graph. Deliberately small: two nodes and one edge, every field traceable to a verbatim quote in EU/SEC05_PartA_2026-08-04.md. The _dropped list is five times longer than the slice and is the point — it records eleven relationships that were looked for and not taken, including both of the branch's central negative results (the Annex XI and Annex B chains, which each stop at AGENCY ONLY at the national boundary). These two nodes are currently a DISCONNECTED COMPONENT: one edge between them, zero edges to the other 133 reports. That is the expected state, not a defect — the EU branch has no documented link to the Canada/US corpus yet, and whether one exists is the question the branch was created to answer.",
+  "_status": "IMPORTED 2026-08-05. Staged in EU/slices/eu-level/, checked, moved here and registered in src/data/index.ts. Touched again 2026-08-09 (corpus-wide `_dropped` sweep, thread 2.1, Tier-1 item #6) — see EU/G.58.md.",
+  "_note": "First EU slice in the branch's history, and the first EU data in the graph. Deliberately small: two nodes and one edge, every field traceable to a verbatim quote in EU/SEC05_PartA_2026-08-04.md. The _dropped list is five times longer than the slice and is the point — it records eleven relationships that were looked for and not taken, including both of the branch's central negative results (the Annex XI and Annex B chains, which each stop at AGENCY ONLY at the national boundary). These two nodes are currently a DISCONNECTED COMPONENT: one edge between them, zero edges to the other 133 reports. That is the expected state, not a defect — the EU branch has no documented link to the Canada/US corpus yet, and whether one exists is the question the branch was created to answer. UPDATE 2026-08-09: SEC05 is the European Court of Auditors' own section of the Draft Budget (Section V of ten — I Parliament, II European Council/Council, III Commission, IV Court of Justice, V Court of Auditors, VI EESC, VII Committee of the Regions, VIII Ombudsman, IX EDPS, X EEAS, inferred from the section order named in this file's own description field and confirmed against SEC05's own ECA-specific content). That is why `eu-draft-budget` (whose `url` points specifically at SEC05.pdf) is a legitimate `source` for SEC05/ECA-sourced dropped entries but was correctly left `null` for the SEC06/EESC-sourced ones below — SEC06 is a different Institution's section, not yet separately modelled. Worth stating plainly since no prior session in this branch wrote the section-to-institution mapping down anywhere.",
   "_provenance": "URLs follow the pattern eur-lex.europa.eu/budget/data/DB/<year>/en/SEC<nn>.pdf. SEC05 is hash-verified against that URL (sha256 585c28fc…, 894 024 bytes, byte-identical to EU/SEC05.pdf). The pattern is INFERRED for the other ten sections, on three grounds: the eleven local PDFs share the exact filename convention; they were downloaded in one 3-minute batch on 2026-08-03; and their embedded PDF creation timestamps show ten of the eleven produced on 2026-07-08 within a 50-minute window in section order, all at UTC+02:00, i.e. one publisher's production run. One further fetch of any other section would convert this from inference to verified.",
   "_open_questions": [
-    "DOMAIN GAP — DOWNGRADED 2026-08-05, no longer blocks import. Neither node has a real domain: Research.1.md's Domain union has 17 subject areas and no 'public-finance' or 'budget' value, and these are administrative expenditure (MFF heading 7, 'European Public Administration'), not transfers. Both nodes carry 'fiscal-transfers' as least-wrong, alongside the Canada Health Transfer and Equalization. WHY IT NO LONGER BLOCKS: the domain filter was removed from src/lib/filter.ts the same day (see REPORTS.md Decisions) after it was found to be unfinished scaffolding — FilterState.domains was declared and compiled into a predicate but nothing ever set it, so it had never hidden a node. 'domains' is now inert metadata: still required on every report, consumed by nothing. Extending the union with 'public-administration' is a data-hygiene question for the Research.2/Research.EU merge, not a prerequisite.",
+    "DOMAIN GAP — DOWNGRADED 2026-08-05, no longer blocks import. Neither node has a real domain: Research.1.md's Domain union has 17 subject areas and no 'public-finance' or 'budget' value, and these are administrative expenditure (MFF heading 7, 'European Public Administration'), not transfers. Both nodes carry 'fiscal-transfers' as least-wrong, alongside the Canada Health Transfer and Equalization. WHY IT NO LONGER BLOCKS: the domain filter was removed from src/lib/filter.ts the same day (see REPORTS.md Decisions) after it was found to be unfinished scaffolding — FilterState.domains was declared and compiled into a predicate but nothing ever set it, so it had never hidden a node. 'domains' is now inert metadata: still required on every report, consumed by nothing. Extending the union with 'public-administration' is a data-hygiene question for the Research.2/Research.EU merge, not a prerequisite. UPDATE 2026-08-09: the same gap now applies to all five nodes minted this session (intosai-issai-300, intosai-issai-400, eca-annual-work-programme, eca-strategy-2026-2030, eu-reg-2023-2841) — none of 'auditing standard', 'institutional administration' or 'cybersecurity' fit any of the 19 current Domain values either. All five carry 'fiscal-transfers'/'financial-regulation' as least-wrong for the same inert-metadata reason; not re-litigated per node below.",
     "URL GRANULARITY: eu-draft-budget's url points at Section V (the document actually opened, per Research.1.md 6), not at the whole Draft Budget. If a directory-level URL is preferred, it is https://eur-lex.europa.eu/budget/data/DB/2027/en/ — unverified.",
     "EDITION vs SERIES: both nodes are modelled as the recurring series, with the 2027 edition named in the description. sna-2008 in the existing corpus is modelled the other way (edition in the title). Confirm which convention wins for annuals."
   ],
@@ -37,6 +37,72 @@
       "last_updated": null,
       "url": "https://commission.europa.eu/document/download/03151b4e-301f-4f2e-9db1-74adcde9b88f_en?filename=draft-budget-2027-statement-estimates_v2.pdf",
       "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "intosai-issai-300",
+      "title": "ISSAI 300 – Performance Audit Principles",
+      "publisher": "International Organisation of Supreme Audit Institutions (INTOSAI)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "One of the INTOSAI Framework of Professional Pronouncements' Fundamental Principles documents, cited by the European Court of Auditors as one of the standards its performance-auditing work follows. Named in full, with page number, in SEC05 footnote 4: 'See ISSAI 300, Fundamental Principles of Performance Auditing, INTOSAI, page 41, and ISSAI 400, Fundamental Principles of Compliance Auditing, INTOSAI, page 28.' Minted 2026-08-09 (corpus-wide `_dropped` sweep) once a live cadence could be established directly from issai.org — same evidentiary shape as sna-2008 / imf-bpm6 / ipsas already in the corpus.",
+      "releases_per_year": 0.17,
+      "cadence_note": "issai.org's own pronouncement page for ISSAI 300: 'Endorsed as Field standards in government auditing and standards with ethical significance' (2001); 'Content reformulated and endorsed as Fundamental Principles of Financial Performance Auditing' (2013); 'renamed as Performance Audit Principles with editorial changes' (2019). Rate estimated from the latest observed interval (2013→2019, 6 years → ~0.17/yr), per Research.1.md §4's 'latest observed interval' convention for irregular recurring documents; the earlier interval (2001→2013) was 12 years, so this estimate is imprecise and should be revisited if a post-2019 edition surfaces. Retrieved via WebFetch (an AI-summarising intermediary, not a direct page render) — flagged per the AU branch's standing caution against trusting a summarising reader uncritically; the quoted fragments read as exact section headings rather than paraphrase, but a future session should confirm against the raw HTML/PDF if this cadence estimate is ever load-bearing for something more than an isolated node.",
+      "last_updated": null,
+      "url": "https://www.issai.org/pronouncements/issai-300-performance-audit-principles/",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "intosai-issai-400",
+      "title": "ISSAI 400 – Compliance Audit Principles",
+      "publisher": "International Organisation of Supreme Audit Institutions (INTOSAI)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The compliance-auditing counterpart to ISSAI 300 in the same INTOSAI Fundamental Principles set, cited alongside it in the same SEC05 footnote 4. Minted 2026-08-09 for the same reason as intosai-issai-300.",
+      "releases_per_year": 0.17,
+      "cadence_note": "issai.org's own pronouncement page for ISSAI 400 gives the same three-point history as ISSAI 300: 'Endorsed as Reporting Standards in Government Auditing' (2001); 'Content reformulated and endorsed as Fundamental Principles of Compliance Auditing' (2013); 'renamed Compliance Audit Principles with editorial changes' (2019). Same latest-interval estimate and same WebFetch-intermediary caveat as intosai-issai-300.",
+      "last_updated": null,
+      "url": "https://www.issai.org/pronouncements/issai-400-compliance-audit-principles/",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "eca-annual-work-programme",
+      "title": "Work Programme of the European Court of Auditors",
+      "publisher": "European Court of Auditors",
+      "country": "EU",
+      "jurisdiction_level": "institutional",
+      "region": "European Union",
+      "description": "The ECA's own annual statement of its planned audit work, published under a 'WP-<year>+' naming pattern (confirmed live for 2024, 2025 and 2026 editions on eca.europa.eu). SEC05 quotes the 2026 edition directly: 'Our 2026+ work programme coincides with the first year of the new ECA 2026-2030 Strategy, which calls for us to Target our audits where we add most value. We will therefore focus our work on what we consider to be four strategic areas.' Minted 2026-08-09, resolving the branch's 'ECA annual work programme -> ECA 2026-2030 Strategy' deferred lead.",
+      "releases_per_year": 1,
+      "cadence_note": "Confirmed via three consecutive editions retrieved live: WP-2024, WP-2025, WP-2026 (each 'EN <year>+ Work Programme', the 2026 edition dated October 2025 on its own title page).",
+      "last_updated": null,
+      "url": "https://www.eca.europa.eu/ECAPublications/WP-2026/WP-2026_EN.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "eca-strategy-2026-2030",
+      "title": "ECA Strategy 2026-2030 — Reinforcing Trust Through Audit",
+      "publisher": "European Court of Auditors",
+      "country": "EU",
+      "jurisdiction_level": "institutional",
+      "region": "European Union",
+      "description": "The ECA's multiannual strategy document, named and quoted in SEC05 as the frame the 2026+ Work Programme was written against: '...which calls for us to Target our audits where we add most value.' Modelled as a one-off foundational instrument under Research.1.md §4's 2026-08-08 recast: the document itself was checked (via WebFetch) for a stated predecessor ('replaces', 'succeeds', a named 2021-2025 strategy) and none was found, so it is not treated as the recurring/recast shape here. Worth revisiting if a future session finds the ECA has in fact issued a strategy of this kind on a regular multi-year cycle — Research.1.md §4 explicitly warns not to assume a recast cadence without checking each case.",
+      "last_updated": null,
+      "url": "https://www.eca.europa.eu/ECAPublications/STRATEGY2026-2030/STRATEGY2026-2030_EN.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "eu-reg-2023-2841",
+      "title": "Regulation (EU, Euratom) 2023/2841 (Cybersecurity Regulation)",
+      "publisher": "European Parliament and Council",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Regulation of 13 December 2023 laying down measures for a high common level of cybersecurity at the institutions, bodies, offices and agencies of the Union. SEC06 names it directly with a quantified target and shortfall: 'The Cybersecurity Regulation (EU, Euratom) 2023/2841 ... with a long-term indicative target of at least 10% of the total ICT budget. Despite the repeated requests ... only 3.95% of the DIIT budget was allocated.' Minted 2026-08-09 as a one-off foundational instrument under Research.1.md §4's 2026-08-08 recast (the cadence blocker that held this back in the original entry no longer applies). ISOLATED DELIBERATELY, fed-h15-style: the edge from EESC IT appropriations is NOT minted this session — see the corrected `_dropped` entry below for the two reasons it stays open (relationship_type, and which node, if any, is the correct source given SEC06 is not yet separately modelled from `eu-draft-budget`).",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32023R2841",
+      "domains": ["financial-regulation"]
     }
   ],
   "dependencies": [
@@ -46,6 +112,27 @@
       "relationship_type": "uses_data_from",
       "basis": "Article 314(1) TFEU, quoted verbatim at the head of every section of the Draft Budget: '[...] each Institution shall [...] draw up estimates of its expenditure for the following financial year. The Commission shall consolidate these estimates in a draft budget, which may contain different estimates.' The same paragraph opens: 'The introduction to the budget request has been provided by each Institution together with the statement of estimate for its respective budget section.' Direction: the Draft Budget is the dependent — it consumes the statements of estimates. Authority accrues at the estimates. Part A record S05-01.",
       "evidence_url": "https://eur-lex.europa.eu/budget/data/DB/2027/en/SEC05.pdf"
+    },
+    {
+      "source_report_id": "eu-draft-budget",
+      "target_report_id": "intosai-issai-300",
+      "relationship_type": "cites",
+      "basis": "SEC05 footnote 4 (Section V, the ECA's own section, which is what `eu-draft-budget`'s `url` field points at): 'See ISSAI 300, Fundamental Principles of Performance Auditing, INTOSAI, page 41, and ISSAI 400, Fundamental Principles of Compliance Auditing, INTOSAI, page 28.' A footnote citation to a named standard with a page number, not a statement that ISSAI 300 is the source of any figure in the section — `cites` rather than `methodology_depends_on`, matching Research.1.md's own definition ('Referenced as context, not as a computational input'). Part A record S05-08.",
+      "evidence_url": "https://eur-lex.europa.eu/budget/data/DB/2027/en/SEC05.pdf"
+    },
+    {
+      "source_report_id": "eu-draft-budget",
+      "target_report_id": "intosai-issai-400",
+      "relationship_type": "cites",
+      "basis": "Same footnote as the ISSAI 300 edge above — SEC05 footnote 4 names both standards in the same sentence. Part A record S05-08.",
+      "evidence_url": "https://eur-lex.europa.eu/budget/data/DB/2027/en/SEC05.pdf"
+    },
+    {
+      "source_report_id": "eca-annual-work-programme",
+      "target_report_id": "eca-strategy-2026-2030",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SEC05 quotes the ECA's own 2026+ Work Programme: 'Our 2026+ work programme coincides with the first year of the new ECA 2026-2030 Strategy, which calls for us to Target our audits where we add most value. We will therefore focus our work on what we consider to be four strategic areas.' Independently corroborated against the Work Programme's own text (retrieved live, WP-2026_EN.pdf): 'This year the publication of our 2026 Work Programme coincides with the publication of the new ECA 2026-2030 Strategy, which calls for us to \"Target our audits where we add most value\".' Research.1.md 5a's trap noted and set aside: 'coincides with' is agreement language, but the operative clause is 'which calls for us to ... We will therefore' — the Strategy's stated priority directly sets the Work Programme's own four focus areas, which is a method the Work Programme relies on rather than a fact it merely echoes. Part A records S05-06, S05-07, plus this session's live WP-2026 retrieval.",
+      "evidence_url": "https://www.eca.europa.eu/ECAPublications/WP-2026/WP-2026_EN.pdf"
     }
   ],
   "_dropped": [
@@ -54,77 +141,77 @@
       "source": null,
       "target": null,
       "reason": "no-document",
-      "why": "THE BRANCH'S CENTRAL NEGATIVE RESULT, first of two. COM(2025) 736 final, applying Annex XI to the Staff Regulations, names every national input by institution and never by publication: 'Eurostat calculates this index on the basis of price information provided by the Belgian and Luxembourgish authorities'; 'on the basis of information supplied by the ten Member States referred to in Article 1(4) of Annex XI'; 'in agreement with the national statistical bodies'. Three AGENCY ONLYs. Caveat: Annex XI itself was never retrieved (eur-lex.europa.eu is anti-bot gated), so this refutes the operative document, not the rule. Part A: EU/AnnexXI_PartA_2026-08-05.md."
+      "why": "THE BRANCH'S CENTRAL NEGATIVE RESULT, first of two. COM(2025) 736 final, applying Annex XI to the Staff Regulations, names every national input by institution and never by publication: 'Eurostat calculates this index on the basis of price information provided by the Belgian and Luxembourgish authorities'; 'on the basis of information supplied by the ten Member States referred to in Article 1(4) of Annex XI'; 'in agreement with the national statistical bodies'. Three AGENCY ONLYs. Caveat: Annex XI itself was never retrieved (eur-lex.europa.eu is anti-bot gated), so this refutes the operative document, not the rule. Part A: EU/AnnexXI_PartA_2026-08-05.md. READ, NOT RE-VERIFIED 2026-08-09 (sweep session, Tier-1 item #6) — nothing found to reopen this; it reads as a genuinely settled negative, and EUR-Lex's own anti-bot gating for Annex XI specifically was not retested."
     },
     {
       "edge": "ESA 2010 Annex B transmission programme -> a named member-state statistical release",
       "source": null,
       "target": null,
       "reason": "no-document",
-      "why": "THE BRANCH'S CENTRAL NEGATIVE RESULT, second of two, and the one that was predicted to go the other way. Regulation (EU) No 549/2013 Article 1(2) describes its own annex as 'a programme (Annex B) setting out the time limits by which Member States shall transmit to the Commission (Eurostat) the accounts and tables'. The programme's table overview has four columns — number, subject, deadline, period — and no column for a publication or publisher. Cleanest test: Destatis, describing its own transmission of government accounts, names ten ESA table numbers (Table 2, 6, 7, 801, 9, 11, 25, 26, 27, 28) and not one German publication. Assessed from staged records, not from Annex B as enacted. Part A: EU/AnnexB_assessment_2026-08-05.md."
+      "why": "THE BRANCH'S CENTRAL NEGATIVE RESULT, second of two, and the one that was predicted to go the other way. Regulation (EU) No 549/2013 Article 1(2) describes its own annex as 'a programme (Annex B) setting out the time limits by which Member States shall transmit to the Commission (Eurostat) the accounts and tables'. The programme's table overview has four columns — number, subject, deadline, period — and no column for a publication or publisher. Cleanest test: Destatis, describing its own transmission of government accounts, names ten ESA table numbers (Table 2, 6, 7, 801, 9, 11, 25, 26, 27, 28) and not one German publication. Assessed from staged records, not from Annex B as enacted. Part A: EU/AnnexB_assessment_2026-08-05.md. READ, NOT RE-VERIFIED 2026-08-09 — same as the entry above, no reason found to reopen."
     },
     {
       "edge": "eu-draft-budget -> Eurostat Report of 31 October on the annual update of remuneration and pensions",
       "source": "eu-draft-budget",
-      "target": null,
+      "target": "eurostat-remuneration-update-report",
       "reason": "deferred",
-      "why": "A lead, and the best one in the branch. The chain is real and three documents long: the institutions' staff chapters rest on a salary adjustment; the adjustment is set under Annex XI to the Staff Regulations; and Annex XI Article 1 requires a Eurostat report which COM(2025) 736 names in full, dated and annual. It clears all three of Research.1.md 4's conditions from the quote alone. NOT MINTED because no URL for the Eurostat report has been retrieved and Research.1.md 2 requires one. Part A record C736-03."
+      "why": "STALE TARGET, CORRECTED 2026-08-09 (sweep session, Tier-1 item #6) — the 'no URL retrieved' half of this blocker no longer holds: `eurostat-remuneration-update-report.json` (a sibling EU-branch file, `_researched: 2026-08-05`) already minted this exact report as a node — id `eurostat-remuneration-update-report`, url `https://ec.europa.eu/eurostat/web/civil-servants-remuneration/publications` — and it is live in `src/data/index.ts`. This session independently retrieved the 2025 edition's own PDF (`https://ec.europa.eu/eurostat/documents/6939681/0/Ares_2025_9371644+Eurostat+Remuneration+Report+2025+v7+complete+A64+and+A65+_cln.pdf`), confirming the node is real and current. THE EDGE ITSELF IS STILL NOT MINTED, and for a sharper reason than 'no URL': SEC05's own text does not cite this Eurostat report anywhere — it cites 'the guidelines issued by the Commission' (a letter of 18 December 2025 from Commissioner Serafin, unpublishable, see the entry below) as the source of the +2.2%/+2.3% salary-adjustment assumptions actually used in the section. The chain from that unpublished guidance letter back to Eurostat's Annex XI report is real in substance (COM(2025) 736 documents that Annex XI mechanism generally) but is not stated by any single document connecting SEC05's own guidelines letter to this specific Eurostat report — it is an inference bridging two separate documentary contexts, not a quotable link. ORIGINAL TEXT, preserved: 'A lead, and the best one in the branch. The chain is real and three documents long: the institutions' staff chapters rest on a salary adjustment; the adjustment is set under Annex XI to the Staff Regulations; and Annex XI Article 1 requires a Eurostat report which COM(2025) 736 names in full, dated and annual. It clears all three of Research.1.md 4's conditions from the quote alone. NOT MINTED because no URL for the Eurostat report has been retrieved and Research.1.md 2 requires one. Part A record C736-03.' FLAGGED FOR THOMAS: whether the multi-document inferential chain (SEC05 guidelines letter → Annex XI mechanism → Eurostat report) clears the evidence bar the way some other multi-hop chains already in the corpus do, or whether it should stay unwired until SEC05 itself names the report."
     },
     {
       "edge": "eu-draft-budget -> ISSAI 300 / ISSAI 400 (INTOSAI)",
       "source": "eu-draft-budget",
       "target": null,
-      "reason": "deferred",
-      "why": "SEC05 footnote 4 names both with titles, publisher and page numbers — the only place in the section where an external standard is fully cited: 'See ISSAI 300, Fundamental Principles of Performance Auditing, INTOSAI, page 41, and ISSAI 400, Fundamental Principles of Compliance Auditing, INTOSAI, page 28.' Same shape as sna-2008 / imf-bpm6 / ipsas already in the corpus. NOT MINTED because cadence is not stated anywhere in SEC05, so Research.1.md 4's second condition is unmet from this source; establish it from INTOSAI first. Part A record S05-08."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-1 item #6) — minted as `intosai-issai-300` and `intosai-issai-400`, both wired to `eu-draft-budget` with relationship_type `cites`. See the `reports`/`dependencies` arrays above. ORIGINAL TEXT, preserved: 'SEC05 footnote 4 names both with titles, publisher and page numbers — the only place in the section where an external standard is fully cited: \"See ISSAI 300, Fundamental Principles of Performance Auditing, INTOSAI, page 41, and ISSAI 400, Fundamental Principles of Compliance Auditing, INTOSAI, page 28.\" Same shape as sna-2008 / imf-bpm6 / ipsas already in the corpus. NOT MINTED because cadence is not stated anywhere in SEC05, so Research.1.md 4's second condition is unmet from this source; establish it from INTOSAI first. Part A record S05-08.' Cadence established this session directly from issai.org (see both nodes' `cadence_note`), which is what unblocked the mint."
     },
     {
       "edge": "ECA annual work programme -> ECA 2026-2030 Strategy",
       "source": null,
       "target": null,
-      "reason": "deferred",
-      "why": "Documented in SEC05 but neither endpoint has a retrieved URL. The quote is 'Our 2026+ work programme coincides with the first year of the new ECA 2026-2030 Strategy, which calls for us to Target our audits where we add most value. We will therefore focus our work on what we consider to be four strategic areas.' Note the trap: 'coincides with' is Research.1.md 5a language doing no dependency work; the dependency is in the 'which calls for us to ... We will therefore' clause. Part A records S05-06, S05-07."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-1 item #6) — minted as `eca-annual-work-programme` and `eca-strategy-2026-2030`, wired `eca-annual-work-programme -> eca-strategy-2026-2030`, `methodology_depends_on`. See the `reports`/`dependencies` arrays above; the WP-2026 PDF and the Strategy PDF were both retrieved live this session. ORIGINAL TEXT, preserved: 'Documented in SEC05 but neither endpoint has a retrieved URL. The quote is \"Our 2026+ work programme coincides with the first year of the new ECA 2026-2030 Strategy, which calls for us to Target our audits where we add most value. We will therefore focus our work on what we consider to be four strategic areas.\" Note the trap: \"coincides with\" is Research.1.md 5a language doing no dependency work; the dependency is in the \"which calls for us to ... We will therefore\" clause. Part A records S05-06, S05-07.'"
     },
     {
       "edge": "eu-draft-budget mission appropriations -> ECA multi-annual work programming exercise",
       "source": "eu-draft-budget",
       "target": null,
       "reason": "unpublishable-source",
-      "why": "SEC05 point 2.2 states the input plainly and with a lag: 'the ECA estimates its needs based on the results of its multi-annual work programming exercise, carried out in October of year n-2.' But the target is an internal exercise, not a publication. The same sentence names the annual work programme, which IS a publication — and the estimate is NOT said to be based on it. Terminus, kind unpublishable. Part A record S05-06."
+      "why": "SEC05 point 2.2 states the input plainly and with a lag: 'the ECA estimates its needs based on the results of its multi-annual work programming exercise, carried out in October of year n-2.' But the target is an internal exercise, not a publication. The same sentence names the annual work programme, which IS a publication — and the estimate is NOT said to be based on it. Terminus, kind unpublishable. Part A record S05-06. READ 2026-08-09 — still correct; the 'annual work programme' this sentence carefully distinguishes itself from is now the separately-minted `eca-annual-work-programme` node above, which only sharpens why this specific edge (to the *programming exercise*, not the *programme*) stays a terminus."
     },
     {
       "edge": "eu-draft-budget salary chapters -> the Commission's budget guidelines",
       "source": "eu-draft-budget",
       "target": null,
       "reason": "unpublishable-source",
-      "why": "The input is real, dated and load-bearing, and has no title. SEC05: 'In accordance with the guidelines issued by the Commission, the budget for Members emoluments (Chapter 10) and for the salaries and allowances of permanent and temporary staff (Chapter 12) and other servants (Chapter 14) is based on the following assumptions: an adjustment of salaries and allowances of + 2,2 % as of 1 July 2026; ... + 2,3 % as of 1 July 2027.' The guidelines are footnoted as a letter of 18 December 2025 from Commissioner Serafin and a note of 12 December 2025 from DG BUDG — identified by sender and date, never by title. Research.1.md 7's 'disclosure stops one level short of a title', in pure form. Part A records S05-02, S05-03."
+      "why": "The input is real, dated and load-bearing, and has no title. SEC05: 'In accordance with the guidelines issued by the Commission, the budget for Members emoluments (Chapter 10) and for the salaries and allowances of permanent and temporary staff (Chapter 12) and other servants (Chapter 14) is based on the following assumptions: an adjustment of salaries and allowances of + 2,2 % as of 1 July 2026; ... + 2,3 % as of 1 July 2027.' The guidelines are footnoted as a letter of 18 December 2025 from Commissioner Serafin and a note of 12 December 2025 from DG BUDG — identified by sender and date, never by title. Research.1.md 7's 'disclosure stops one level short of a title', in pure form. Part A records S05-02, S05-03. READ 2026-08-09 — this is the terminus that blocks the Eurostat-report edge above from being drawn directly; see that entry's correction."
     },
     {
       "edge": "eu-draft-budget standard abatement -> the ECA's vacancy rate at January 2026",
       "source": "eu-draft-budget",
       "target": null,
       "reason": "unpublishable-source",
-      "why": "A specific unpublished internal figure moving EUR 3.8m of appropriations. SEC05: 'Taking into account the current vacancy rate (in January 2026), the standard abatement in the Draft budget 2027 is set at 2,4 %', applied at Chapter 1 2 (EUR 158 147 000, the largest chapter in the section). Terminus, kind unpublishable, and directly comparable to cra-pd7-accounts and the Fed's FR 2644 already in the corpus. Internally consistent: 2,4 % of 881 posts = 21,14. Part A record S05-14."
+      "why": "A specific unpublished internal figure moving EUR 3.8m of appropriations. SEC05: 'Taking into account the current vacancy rate (in January 2026), the standard abatement in the Draft budget 2027 is set at 2,4 %', applied at Chapter 1 2 (EUR 158 147 000, the largest chapter in the section). Terminus, kind unpublishable, and directly comparable to cra-pd7-accounts and the Fed's FR 2644 already in the corpus. Internally consistent: 2,4 % of 881 posts = 21,14. Part A record S05-14. READ 2026-08-09 — still correct, no change."
     },
     {
       "edge": "EESC IT appropriations -> Regulation (EU, Euratom) 2023/2841 (Cybersecurity Regulation)",
       "source": null,
-      "target": null,
-      "reason": "no-node-yet",
-      "why": "The best-evidenced instrument-to-budget-line relationship found in any institutional section: a named act, a quantified target and the institution's own measured shortfall in one provision. SEC06: 'The Cybersecurity Regulation (EU, Euratom) 2023/2841 ... with a long-term indicative target of at least 10% of the total ICT budget. Despite the repeated requests ... only 3.95% of the DIIT budget was allocated'. NOT MINTED for two reasons: a Regulation is published once and amended, which fails Research.1.md 4's cadence condition; and relationship_type is genuinely unclear — the regulation supplies no data, so uses_data_from is wrong, and 'long-term indicative target' is weaker than a method. Flagged, not picked, per Research.1.md 6. Part A record S06-01."
+      "target": "eu-reg-2023-2841",
+      "reason": "deferred",
+      "why": "PARTIALLY RESOLVED 2026-08-09 (sweep session, Tier-1 item #6) — the cadence blocker is gone: Research.1.md §4's 2026-08-08 recast makes a one-off foundational instrument eligible without a stated cadence, and Regulation (EU, Euratom) 2023/2841 is now minted on that basis as `eu-reg-2023-2841`. THE EDGE ITSELF STAYS UNWIRED, on the second reason the original entry gave plus a new one this session surfaced: (1) relationship_type is still genuinely unclear — the regulation sets a spending target, not a method or a data input, and none of `calculated_from`/`uses_data_from`/`methodology_depends_on`/`cites` fits cleanly; (2) SEC06 (the EESC's section) is not the section `eu-draft-budget`'s own `url` field points at (that is SEC05, the ECA's section — see this file's `_note`), so there is no minted node yet that SEC06-sourced content can legitimately be attributed to as `source`. Both are flagged, not picked, per Research.1.md §6. ORIGINAL TEXT, preserved: 'The best-evidenced instrument-to-budget-line relationship found in any institutional section: a named act, a quantified target and the institution's own measured shortfall in one provision. SEC06: \"The Cybersecurity Regulation (EU, Euratom) 2023/2841 ... with a long-term indicative target of at least 10% of the total ICT budget. Despite the repeated requests ... only 3.95% of the DIIT budget was allocated\". NOT MINTED for two reasons: a Regulation is published once and amended, which fails Research.1.md 4's cadence condition; and relationship_type is genuinely unclear — the regulation supplies no data, so uses_data_from is wrong, and \"long-term indicative target\" is weaker than a method. Flagged, not picked, per Research.1.md 6. Part A record S06-01.'"
     },
     {
       "edge": "EESC members' allowance budget lines -> an price index",
       "source": null,
       "target": null,
       "reason": "no-document",
-      "why": "A documented ABSENCE of a formula, which Research.1.md 8 item 1b asks for explicitly. SEC06: the EUR 367 daily allowance 'was updated by the Council on 21 June 2024 with Decision (EU) 2024/1809, the first adjustment in 11 years. This represents a 26.55% increase in the daily allowance compared to 2013.' Frozen eleven years, then adjusted once by a dated instrument, with no index named anywhere in the section. The opposite of an indexed rate, and the EU counterpart to the Canadian escalator material. Part A record S06-02."
+      "why": "A documented ABSENCE of a formula, which Research.1.md 8 item 1b asks for explicitly. SEC06: the EUR 367 daily allowance 'was updated by the Council on 21 June 2024 with Decision (EU) 2024/1809, the first adjustment in 11 years. This represents a 26.55% increase in the daily allowance compared to 2013.' Frozen eleven years, then adjusted once by a dated instrument, with no index named anywhere in the section. The opposite of an indexed rate, and the EU counterpart to the Canadian escalator material. Part A record S06-02. CORRECTION, 2026-08-09 (no-document re-check, sweep session Tier-1 item #6) — the negative is narrower than SEC06 alone suggests once the underlying Decision itself is read directly rather than through SEC06's summary of it. Council Decision (EU) 2024/1809, Article 9(2), retrieved live: 'Following a request by the Committee, the Council may also consider an adjustment of the amounts referred to in Article 2(1), Article 3(1) and Article 7 when the accumulated yearly inflation has exceeded 6 % according to Eurostat's Harmonised Index of Consumer Prices (HICP) for the EU27 since the last adjustment agreed by the Council.' A price index (`eurostat-hicp`, already a node in this corpus) IS named in the primary legal instrument — just not as an automatic formula and not in SEC06's own text. It is a discretionary REVIEW TRIGGER (the Council 'may consider' a review once cumulative HICP inflation exceeds 6%, not an automatic recalculation), which is a materially different thing from a formula and does not overturn Research.1.md 8 item 1b's point about the absence of an index-driven rate — but it is not a clean 'no index named anywhere' either, and the original entry's search (SEC06 only) was not exhaustive of the instrument it was describing. NOT MINTED, for the same source-node reason as the Cybersecurity Regulation entry above (SEC06 is not yet separately modelled), and because a discretionary trigger is arguably not a `uses_data_from`/`calculated_from` dependency even once a source node exists. Flagged for whoever next reads this file alongside the Cybersecurity Regulation entry — both are blocked on the same SEC06-modelling gap."
     },
     {
       "edge": "any institutional budget section -> any named statistical release",
       "source": null,
       "target": null,
       "reason": "note",
-      "why": "A corpus observation, not a dropped edge. Across SEC05, SEC06 and SEC07 read in full — 114 pages — the strings 'Eurostat', 'HICP', 'consumer price' and 'index' as a standalone word return ZERO hits, while 'indexation' returns 10, 3 and 3 respectively, every one unqualified. Three institutional sections out of three name no statistical release, no price index and no Eurostat product, while budgeting explicitly for indexation. The institutional strand's administrative machinery is documented in detail and its statistical inputs are not named anywhere in it."
+      "why": "A corpus observation, not a dropped edge. Across SEC05, SEC06 and SEC07 read in full — 114 pages — the strings 'Eurostat', 'HICP', 'consumer price' and 'index' as a standalone word return ZERO hits, while 'indexation' returns 10, 3 and 3 respectively, every one unqualified. Three institutional sections out of three name no statistical release, no price index and no Eurostat product, while budgeting explicitly for indexation. The institutional strand's administrative machinery is documented in detail and its statistical inputs are not named anywhere in it. READ 2026-08-09 — worth a footnote now: the zero-hits-for-'index'-as-a-standalone-word finding is about SEC05/06/07's own text, and is consistent with (not contradicted by) this session's finding that Decision 2024/1809 itself names Eurostat's HICP — SEC06 quotes the Decision's *outcome* (the 26.55% increase) without quoting the Decision's own Article 9(2) inflation-trigger language. The asymmetry this note describes is about what the budget *sections* disclose, not about whether the underlying instruments name an index at all."
     }
   ]
 }

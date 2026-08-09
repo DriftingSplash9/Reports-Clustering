@@ -1,0 +1,120 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.58.md",
+  "number": 58,
+  "title": "G.58.md — EU galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "`Research.1.md` read in relevant part this session (§2 git",
+  "predecessor": "`G.57.md` (2026-08-08).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**A stale cross-file target, the same failure shape `G.56.md`/`G.57.md`/`NZ/G.6.md`\nhave each now caught once, showed up a fourth time — and a live re-check of\na primary legal instrument (rather than the budget document that merely\nsummarises it) surfaced a real, if narrow, correction to a confirmed\nnegative.** The branch's own file already contained a fully-minted node for\nthe \"best lead in the branch\" (`eurostat-remuneration-update-report`,\nminted 2026-08-05 in a sibling file) that `eu-draft-budget.json`'s own\n`_dropped` block never updated to point at — but unlike the three prior\nstaleness catches, resolving the target did **not** make the edge\nmintable, because the actual blocker was never the missing URL; it is that\nSEC05 itself never names the Eurostat report, only an unpublished\nguidelines letter. Separately, reading Council Decision (EU) 2024/1809\ndirectly (rather than through SEC06's summary of it) found that Article\n9(2) does name a price index — Eurostat's HICP — as a discretionary review\ntrigger, which the original \"no-document\" entry's SEC06-only search could\nnot have found. Three nodes were also minted on genuinely new ground: two\nINTOSAI auditing-principles documents (ISSAI 300/400) once a live cadence\ncheck unblocked them, and the ECA's own annual Work Programme, wired to its\n2026-2030 Strategy on a quote independently corroborated against the\nWork Programme's own text.",
+  "findings": [
+    {
+      "heading": "1. `eurostat-remuneration-update-report` already existed; the deferred edge stays unwired for a sharper reason than the one originally given",
+      "body": "*What this rests on*: `eurostat-remuneration-update-report.json` (sibling\nEU-branch file, `_researched: 2026-08-05`), grep-confirmed against\n`src/data/index.ts` line 36 (imported), and a live retrieval of the 2025\nedition's own PDF this session.\n\nThe `_dropped` entry \"eu-draft-budget -> Eurostat Report of 31 October...\"\ncalled this \"the best lead in the branch,\" blocked only on \"no URL for the\nEurostat report has been retrieved.\" That premise was already false when\nthis session started: the report has had a minted, registered node —\n`eurostat-remuneration-update-report`, url\n`https://ec.europa.eu/eurostat/web/civil-servants-remuneration/publications`\n— since 2026-08-05, four days before this session, in a file this branch's\nown `eu-draft-budget.json` never cross-referenced. **Corrected the entry's\n`target` field from `null` to `eurostat-remuneration-update-report`.**\n**The edge itself is still not minted**, and re-reading SEC05's own text\nshows why the original \"clears all three conditions from the quote alone\"\nframing overstated what SEC05 actually says: SEC05 attributes its\n+2.2%/+2.3% salary-adjustment assumptions to \"the guidelines issued by the\nCommission\" — a letter of 18 December 2025, unpublishable, already\ncorrectly recorded elsewhere in this same file's `_dropped` block — and\nnever mentions the Eurostat report by name. The chain from that letter back\nto Annex XI's Eurostat mechanism is almost certainly real in substance, but\nno single document states it; it is an inference bridging SEC05 and\nCOM(2025) 736, not a quotable link. Flagged for Thomas rather than decided:\nwhether this project's evidence bar tolerates that kind of bridged\ninference (some multi-hop chains elsewhere in the corpus are accepted on\nweaker single documents) or requires SEC05 itself to name the report."
+    },
+    {
+      "heading": "2. Council Decision (EU) 2024/1809, read directly, narrows the EESC-allowance \"no-document\" finding without overturning it",
+      "body": "*What this rests on*: a live `WebFetch` retrieval of\n`eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401809`, cross-checked\nagainst a second fetch of the same instrument's PDF rendering.\n\nThe original entry's search was confined to SEC06, which states only the\noutcome of the 2024 adjustment (a 26.55% increase after eleven years frozen)\nand names no index. Reading the Decision itself finds Article 9(2): \"the\nCouncil may also consider an adjustment of the amounts ... when the\naccumulated yearly inflation has exceeded 6 % according to Eurostat's\nHarmonised Index of Consumer Prices (HICP) for the EU27 since the last\nadjustment agreed by the Council.\" **This is a real correction to the\nsearch's exhaustiveness, not to its conclusion**: a price index\n(`eurostat-hicp`, already a corpus node) is named in the primary\ninstrument, but only as a discretionary review trigger — the Council \"may\nconsider\" a review past a 6% threshold, not an automatic recalculation —\nwhich is a different thing from the indexed formula Research.1.md §8 item\n1b was originally asking whether this corpus had an EU counterpart to.\n**Reason code left as `no-document`** (a corrected nuance, not a reversed\nfinding) and the edge stays unwired, on the same SEC06-modelling gap as\nFinding 3."
+    },
+    {
+      "heading": "3. Two nodes minted on `eu-draft-budget`'s own citation, once a live cadence check unblocked them",
+      "body": "*What this rests on*: `issai.org`'s own pronouncement pages for ISSAI 300\nand ISSAI 400, each fetched once and cross-checked once against a related\nINTOSAI page (`ISSAI-100-EN-rev.pdf`) that corroborates the same\n2001/2013/2019 revision pattern for the wider Fundamental Principles set.\n\nSEC05 footnote 4 names both standards with page numbers — already flagged\nin the prior entry as \"the only place in the section where an external\nstandard is fully cited\" — but was withheld for want of a stated cadence.\nissai.org's own history for ISSAI 300 (\"Endorsed as Field standards in\ngovernment auditing... 2001\"; \"reformulated and endorsed as Fundamental\nPrinciples of Financial Performance Auditing\" 2013; \"renamed as Performance\nAudit Principles with editorial changes\" 2019) and the parallel history for\nISSAI 400 give a latest observed interval of six years (2013→2019),\nestimated `releases_per_year: 0.17` per Research.1.md §4's convention for\nirregular recurring documents. Minted `intosai-issai-300` and\n`intosai-issai-400`, wired `eu-draft-budget -> {both}`, `cites` (a footnote\ncitation to a named standard, not a claim that either supplies a figure in\nthe section)."
+    },
+    {
+      "heading": "4. `eca-annual-work-programme` and `eca-strategy-2026-2030` minted and wired to each other, independently corroborated",
+      "body": "*What this rests on*: live retrieval of `WP-2026_EN.pdf` and\n`STRATEGY2026-2030_EN.pdf` from `eca.europa.eu`, plus a search confirming\n`WP-2024`/`WP-2025`/`WP-2026` as three consecutive annual editions.\n\nSEC05 quotes the ECA's own Work Programme: \"Our 2026+ work programme\ncoincides with the first year of the new ECA 2026-2030 Strategy, which\ncalls for us to Target our audits where we add most value. We will\ntherefore focus our work on what we consider to be four strategic areas.\"\nThe original entry flagged both endpoints as unretrieved. This session\nretrieved both directly and, going further than the original entry, also\nretrieved the Work Programme's *own* text independently: \"This year the\npublication of our 2026 Work Programme coincides with the publication of\nthe new ECA 2026-2030 Strategy, which calls for us to 'Target our audits\nwhere we add most value'\" — an independent corroboration, not a\nre-quotation of SEC05. Minted both as nodes (`eca-annual-work-programme`\nrecurring, `releases_per_year: 1`; `eca-strategy-2026-2030` as a one-off\nfoundational instrument under the 2026-08-08 recast — checked directly for\na stated predecessor and found none, so not modelled as the recast/recurring\nshape). Wired `eca-annual-work-programme -> eca-strategy-2026-2030`,\n`methodology_depends_on`, noting and setting aside the Research.1.md §5a\n\"coincides with\" trap (the operative clause is \"which calls for us to ...\nWe will therefore,\" not \"coincides with\")."
+    },
+    {
+      "heading": "5. `eu-reg-2023-2841` minted in isolation; its edge stays exactly as unresolved as the original entry left it, plus a newly-identified second reason",
+      "body": "*What this rests on*: `eur-lex.europa.eu`'s own page for CELEX:32023R2841,\nconfirming the Regulation's existence, title and date.\n\nThe original entry withheld this mint on two grounds: cadence (a\nRegulation \"published once and amended\" failed the pre-2026-08-08 node\nrule) and an unclear `relationship_type`. The cadence ground is gone —\nResearch.1.md §4's 2026-08-08 recast makes a one-off foundational\ninstrument eligible without a stated cadence, and this Regulation reads as\nsquarely in scope (named, titled, cited with a quantified target).\n**Minted `eu-reg-2023-2841` in isolation, fed-h15-style — the edge is\ndeliberately not drawn.** The `relationship_type` problem is exactly as\nopen as before. A second problem, not previously written down: `eu-draft-\nbudget`'s own `url` field points at SEC05 (the ECA's section, see\nOrientation item 4), and this entry's source material is SEC06 (the\nEESC's), so there is no node yet that a SEC06-sourced edge can legitimately\nuse as `source`. Both reasons are named in the corrected `_dropped` entry."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`eu-draft-budget.json`'s \"eu-draft-budget -> Eurostat Report of 31 October\" entry — target field CORRECTED**, from `null` to `eurostat-remuneration-update-report`. Not a claim that any prior session was wrong about the edge (it wasn't mintable then and still isn't now) — the correction is narrowly that the entry's own stated blocker (no URL, no node) stopped being true on 2026-08-05, four days before anyone updated this file to say so. See Finding 1."
+    },
+    {
+      "n": 2,
+      "text": "No claim in `G.57.md`, `NZ/G.6.md`, `AU/G.4.md` or `CA/G.1.md` is disputed.** This session did not re-touch any of their files."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "B",
+      "label": "the corpus-wide `_dropped` sweep",
+      "items": [
+        {
+          "n": 1,
+          "text": "The Eurostat-report bridged-inference question** (Finding 1) — does a chain that spans SEC05's own unpublished guidelines letter and a separate document's (COM(2025) 736's) description of the general Annex XI mechanism clear this project's evidence bar, or does it need SEC05 itself to name the Eurostat report?"
+        },
+        {
+          "n": 2,
+          "text": "Whether SEC06 (and by extension SEC07-SEC10) should be modelled as their own report nodes**, distinct from `eu-draft-budget`/SEC05 — this is now blocking two separate `_dropped` entries (the Cybersecurity Regulation edge and the EESC-allowance edge), not just one, and is a modelling decision rather than a research one. **Blocks A, C, D, E, F, G untouched this session** — see `G.56.md`/`G.57.md` for their current state."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Inbound edges for the four isolated ECB series `G.53.md` minted. Not attempted this session."
+    },
+    {
+      "n": 2,
+      "text": "A present-tense source for `ess-sims -> eu-reg-223-2009`. Not attempted."
+    },
+    {
+      "n": 3,
+      "text": "~~One EUR-Lex fetch to settle a correction~~ — closed since `G.56.md`."
+    },
+    {
+      "n": 4,
+      "text": "Find a citable publication page for the German EDP inventory document itself. Not attempted this session (out of this file's scope)."
+    },
+    {
+      "n": 5,
+      "text": "New, this session**: `eca-annual-work-programme` and `eca-strategy-2026-2030` are isolated except for the one edge between them, `fed-h15`-style — worth a look for any document naming either as an input to something else in the graph, the way `G.53.md`'s isolated ECB series still need inbound edges (cheap check 1 above)."
+    },
+    {
+      "n": 6,
+      "text": "New, this session**: `intosai-issai-300`/`400`'s cadence estimate rests on a `WebFetch`-intermediated read of issai.org, not a direct render — worth a direct confirmation if this cadence is ever load-bearing for more than an isolated `cites` edge (see each node's own `cadence_note`)."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "`planning/OPEN-THREADS_2026-08-08.md`** — read first, thread 2.1, for the fuller day-by-day sweep narrative this file's single-branch slice summarises from (note: this file's own session happened 2026-08-09, the day after OPEN-THREADS' filename date — it has not been updated to reflect this session; whoever next touches OPEN-THREADS should fold this file's headline result in)."
+    },
+    {
+      "n": 2,
+      "text": "This file**, then `G.57.md`, `G.56.md` for everything else in the branch."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md`** §2 (git), §3 (extract, don't adjudicate), §4 (node rule and sweep scoping), §6 (output format, esp. `relationship_type`)."
+    },
+    {
+      "n": 4,
+      "text": "`src/data/research/eu-draft-budget.json`** — every `_dropped` entry this session touched carries its correction inline, original text preserved below each one."
+    },
+    {
+      "n": 5,
+      "text": "`planning/dropped-sweep-scoping_2026-08-08.md`** — for the next two files in the suggested order (`ontario-ompf-mpac.json`, `realm-government-finance.json`). ---"
+    }
+  ],
+  "session_conditions": "**A `_dropped`-sweep session, corpus-wide thread 2.1, EU's third file in the\nsuggested execution order (Tier-1 item #6)**\n(`planning/dropped-sweep-scoping_2026-08-08.md`). One file touched:\n`eu-draft-budget.json` — five nodes minted, three new edges wired, six\n`_dropped` entries corrected in place (two fully resolved, one target\nidentified but edge deliberately left unwired, two partially resolved and\nleft unwired on remaining grounds, one given a corrective nuance without\nchanging its reason code), three entries read and reconfirmed unchanged.\n\n**Read in full this session**: the current `eu-draft-budget.json` (before\nand after editing), `src/lib/types.ts`, `src/data/index.ts` (grep only, to\nconfirm `eurostat-remuneration-update-report` is actually registered),\n`eurostat-remuneration-update-report.json`, `eurostat-remuneration-satellite-series.json`,\n`eurostat-hicp.json`. **Not read this session**: `REPORTS.md`, `BACKLOG.md`,\nany other `EU/` research JSON, the staging blob, `SEC05.pdf`/`SEC06.pdf`\nthemselves (the primary-source verification below was done live against\nthe web, not against the local PDFs — see Corrections item 3 for why that\nmatters).\n\n**All primary-source retrieval this session was done via `WebFetch`/`WebSearch`\nagainst live EU/INTOSAI sites, not via direct document parsing.** `WebFetch`\nprocesses fetched content through a small intermediary model before\nreturning it, which is a materially different evidentiary posture than the\ndirect-extraction standard `AU/G.3.md` established this project prefers\n(that session caught the intermediary model fabricating a plausible\ncitation). Every quote below is reported as returned by that tool, in\nquotation marks, and cross-checked once against a second independent\nfetch where the finding was consequential (the ISSAI 300/400 cadence, the\nArticle 9(2) HICP text); none was checked against a raw PDF/HTML render.\nFlagged plainly, per the branch's own convention, because everything\ndownstream inherits this limit."
+}
