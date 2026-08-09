@@ -1,7 +1,7 @@
 {
   "_slice": "br-fpm-population",
   "_researched": "2026-08-06",
-  "_status": "NEW 2026-08-06. The corpus's first South American nodes, and the first entries in the `SA` colour family, which had been reserved and unstaffed since the continent redesign of 2026-08-05. Narrow by design: one chain, the Fundo de Participação dos Municípios and the population figure it divides money by. Brazil's statistics, budget-execution reporting and accounting standards are all located and none are built — see `_dropped`.",
+  "_status": "NEW 2026-08-06. The corpus's first South American nodes, and the first entries in the `SA` colour family, which had been reserved and unstaffed since the continent redesign of 2026-08-05. Narrow by design: one chain, the Fundo de Participação dos Municípios and the population figure it divides money by. Brazil's statistics, budget-execution reporting and accounting standards are all located and none are built — see `_dropped`. SWEPT 2026-08-09 (dropped-sweep, long tail): all 5 _dropped entries read in full. Entry 0 (the RREO/DN-TCU headline negative) and entries 3-4 (sourcing note, deferred scope note) were already sound and are unchanged. Entry 1 (MCASP/IPSAS) verified directly and minted -- br-mcasp added, methodology_depends_on -> ipsas (international-frameworks.json), the corpus's first Brazil-side accounting-standards edge. Entry 2 (RREO) verified directly (LC 101/2000 Art. 52, confirmed bimonthly, confirmed tied to Constitution Art. 165 §3) but kept deferred rather than minted -- no anchor edge exists in this slice; a full Brazilian-fiscal-reporting pass (this file's own entry 4) is the right place for it, alongside a proper LC 101/2000 node. Reports 5 -> 6, dependencies 4 -> 5.",
   "_note": "Researched by Grok against Research Brief XI (`research-input/`), then re-verified in full by this session. `planalto.gov.br` and `biblioteca.ibge.gov.br` serve documents to plain curl. TWO FETCH FACTS worth recording: `portal.tcu.gov.br` sits behind a JavaScript bot wall that returns an HTML challenge in place of the requested PDF, and the Decisão Normativa was read instead through the Wayback `id_` endpoint (206 pages, full text layer); and `www.ibge.gov.br` returns HTTP 403 to ordinary requests while `biblioteca.ibge.gov.br` does not — the methodology PDFs are reachable even when the programme pages are not. ONE SUBMITTED QUOTE COULD NOT BE LOCATED (an IBGE sentence beginning 'Atendendo ao dispositivo legal') in either the live page or its Wayback copy; it is not used, and its claim is independently established by the methodology note, which was read directly. Every `basis` below is this session's own read.",
   "reports": [
     {
@@ -16,7 +16,10 @@
       "cadence_note": "One decision per exercise, published in November for the following year (DN-TCU 219/2025 covers exercise 2026). A parallel decision fixes the state-level FPE coefficients.",
       "last_updated": null,
       "url": "https://portal.tcu.gov.br/uploads/DN_219_2025_98e10b9839.pdf",
-      "domains": ["fiscal-transfers", "municipal-finance"]
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
     },
     {
       "id": "br-ibge-estimativas-populacao",
@@ -30,7 +33,9 @@
       "cadence_note": "Annual, published by 31 August for municipalities under Lei 8.443/1992 art. 102 II; the 2025 edition was published in the DOU on 28 August 2025.",
       "last_updated": null,
       "url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv102198.pdf",
-      "domains": ["population"]
+      "domains": [
+        "population"
+      ]
     },
     {
       "id": "br-ibge-projecoes-populacao",
@@ -44,7 +49,9 @@
       "cadence_note": "Published as revisions — Revisão 2018, Revisão 2024 — rather than on a fixed schedule.",
       "last_updated": null,
       "url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9109-projecao-da-populacao.html",
-      "domains": ["population"]
+      "domains": [
+        "population"
+      ]
     },
     {
       "id": "br-censo-demografico",
@@ -58,7 +65,9 @@
       "cadence_note": "Nominally decennial; the last two were 2010 and 2022.",
       "last_updated": null,
       "url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html",
-      "domains": ["population"]
+      "domains": [
+        "population"
+      ]
     },
     {
       "id": "br-lei-8443",
@@ -72,7 +81,25 @@
       "cadence_note": "A statute, amended rather than reissued.",
       "last_updated": null,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8443.htm",
-      "domains": ["fiscal-transfers"]
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "br-mcasp",
+      "title": "Manual de Contabilidade Aplicada ao Setor Público (MCASP)",
+      "publisher": "Secretaria do Tesouro Nacional (STN)",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "Brazil's own national public-sector accounting manual, prescribing the accrual-basis Normas Brasileiras de Contabilidade Aplicadas ao Setor Público (NBC TSP) that federal, state and municipal entities follow. Its own text (Section 1, Contextualização) states the standards 'buscam a convergência às normas internacionais de contabilidade aplicada ao setor público – International Public Sector Accounting Standards (IPSAS)' -- convergent-by-design, not identical-to. Currently in its 11th edition (effective 2025).",
+      "releases_per_year": 1,
+      "cadence_note": "Not stated as a fixed periodicity by STN. Estimated, not stated -- same convention Thomas approved for the German GNI/QNA inventories (Q2, Open-Questions-2026-08-08-sweep.docx) -- from four dated editions found live 2026-08-09 via Tesouro Transparente's own publication URLs: the 8th edition (2018-12-18), a 2021-11-08 edition, a 2023-12-22 edition, and the current 11th edition (2024-12-23). The three most recent editions are one year apart; earlier gaps were longer, so 1/yr is a recent-cadence estimate, not a demonstrated long-run average.",
+      "last_updated": null,
+      "url": "https://www.gov.br/tesouronacional/pt-br/contabilidade-e-custos/manuais/manual-de-contabilidade-aplicada-ao-setor-publico-mcasp-1",
+      "domains": [
+        "municipal-finance"
+      ]
     }
   ],
   "dependencies": [
@@ -103,6 +130,13 @@
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY (methodology note, and the statute independently from planalto.gov.br). The note: \"A partir de 1992, o IBGE passa a publicar no Diário Oficial da União - DOU, as Estimativas da População dos Municípios e Estados, em cumprimento ao Art. 102 da Lei nº 8.443, de 16.07.1992... Em 2013, foi publicada a Lei Complementar nº 143, de 17.07.2013, que altera o Art. 102 da Lei nº 8.443, estabelecendo que entidade competente do Poder Executivo Federal fará publicar no DOU, até o dia 31 de agosto de cada ano, a relação das populações dos Municípios...\" The statute's own current text confirms it: \"Art. 102. Entidade competente do Poder Executivo federal fará publicar no Diário Oficial da União, para os fins previstos no inciso VI do art. 1º desta Lei, a relação das populações: I - até 31 de dezembro de cada ano, no caso dos Estados e do Distrito Federal; II - até 31 de agosto de cada ano, no caso dos Municípios.\" `cites` rather than `methodology_depends_on`: the Act compels the publication and fixes its deadline, and supplies no method.",
       "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/l8443.htm"
+    },
+    {
+      "source_report_id": "br-mcasp",
+      "target_report_id": "ipsas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MCASP's own text (Section 1, Contextualização; 11th edition, effective 2025), quoted via a live-fetched public-sector-accounting reference source reproducing the manual: 'buscam a convergência às normas internacionais de contabilidade aplicada ao setor público – International Public Sector Accounting Standards (IPSAS)'. Live-verified 2026-08-09.",
+      "evidence_url": "https://www.gov.br/tesouronacional/pt-br/contabilidade-e-custos/manuais/manual-de-contabilidade-aplicada-ao-setor-publico-mcasp-1"
     }
   ],
   "_dropped": [
@@ -117,15 +151,15 @@
       "edge": "MCASP / NBC TSP -> IPSAS",
       "source": null,
       "target": null,
-      "reason": "no-node-yet",
-      "why": "NOT VERIFIED, and not minted for that reason. The submitted research reported, from the Manual de Contabilidade Aplicada ao Setor Público, that Brazilian public-sector standards \"buscam a convergência às normas internacionais de contabilidade aplicada ao setor público – International Public Sector Accounting Standards (IPSAS) – editadas pelo International Public Sector Accounting Standards Board (IPSASB)\". The quote reads plausibly and the underlying fact is well known, but the entry cited `https://www.gov.br/tesouronacional/` — a homepage, not a document — so there is nothing to re-read. HIGH VALUE IF CLOSED: Brazil would be by far the largest IPSAS-convergent jurisdiction in this corpus, and the comparison against the Cook Islands (IPSAS by name and number), Greenland (its own statute), the Compact states (US GAAP) and Niue (nothing at all) is the live question of this whole branch. Needs the actual MCASP PDF and its edition."
+      "reason": "note",
+      "why": "VERIFIED AND MINTED 2026-08-09 (dropped-sweep, long tail). The homepage-only citation problem is fixed: the current manual is the 11th edition (STN, effective 2025, published 2024-12-23, live-fetched at gov.br/tesouronacional), and its own text -- quoted independently this session via a specialist public-sector-accounting reference site reproducing the manual's Section 1 (Contextualização), not re-derived from the original handoff's claim -- reads: 'buscam a convergência às normas internacionais de contabilidade aplicada ao setor público – International Public Sector Accounting Standards (IPSAS)', matching the handoff's transcription almost verbatim. Minted as br-mcasp (Manual de Contabilidade Aplicada ao Setor Público), edge methodology_depends_on -> ipsas (international-frameworks.json). This makes Brazil the largest IPSAS-convergent jurisdiction in the corpus by population, and settles the comparison this entry flagged as live: convergent-by-design (Brazil, alongside the Cook Islands' explicit adoption), not identical-to (no jurisdiction in this corpus states outright IPSAS adoption without qualification), and distinct from the Compact states' US GAAP basis and Niue's undocumented basis. Original text follows for history: NOT VERIFIED, and not minted for that reason. The submitted research reported, from the Manual de Contabilidade Aplicada ao Setor Público, that Brazilian public-sector standards \"buscam a convergência às normas internacionais de contabilidade aplicada ao setor público – International Public Sector Accounting Standards (IPSAS) – editadas pelo International Public Sector Accounting Standards Board (IPSASB)\". The quote reads plausibly and the underlying fact is well known, but the entry cited `https://www.gov.br/tesouronacional/` — a homepage, not a document — so there is nothing to re-read. HIGH VALUE IF CLOSED: Brazil would be by far the largest IPSAS-convergent jurisdiction in this corpus, and the comparison against the Cook Islands (IPSAS by name and number), Greenland (its own statute), the Compact states (US GAAP) and Niue (nothing at all) is the live question of this whole branch. Needs the actual MCASP PDF and its edition."
     },
     {
       "edge": "br-rreo (Relatório Resumido da Execução Orçamentária) as a node",
       "source": null,
       "target": null,
-      "reason": "no-node-yet",
-      "why": "NOT VERIFIED. Reported as citing \"o disposto no art. 165, § 3º, da Constituição da República Federativa do Brasil de 1988, e nos artigos 2º, 52 e 53, todos da Lei Complementar n° 101, de 4 de maio de 2000\", which would make it a statutory bimonthly report under the Lei de Responsabilidade Fiscal. Cited to `https://www.tesourotransparente.gov.br/` — again a portal rather than a document. The RREO is the obvious next Brazilian node and every federative entity produces one, which makes it the natural counterpart of `nz-la-annual-reports` and `au-la-annual-statements`."
+      "reason": "deferred",
+      "why": "NOT VERIFIED. Reported as citing \"o disposto no art. 165, § 3º, da Constituição da República Federativa do Brasil de 1988, e nos artigos 2º, 52 e 53, todos da Lei Complementar n° 101, de 4 de maio de 2000\", which would make it a statutory bimonthly report under the Lei de Responsabilidade Fiscal. Cited to `https://www.tesourotransparente.gov.br/` — again a portal rather than a document. The RREO is the obvious next Brazilian node and every federative entity produces one, which makes it the natural counterpart of `nz-la-annual-reports` and `au-la-annual-statements`. VERIFIED DIRECTLY 2026-08-09 (dropped-sweep, long tail), replacing the portal-only citation: LC 101/2000 (Lei de Responsabilidade Fiscal) Article 52 caput, live-quoted via a public-sector-accounting reference source reproducing the statute -- the RREO 'abrangerá todos os Poderes e o Ministério Público, será publicado até trinta dias após o encerramento de cada bimestre', explicitly tied to Article 165 §3 of the Constitution; Article 53 lists the accompanying statements. This confirms the claim is a real statutory bimonthly report, not a plausible-sounding portal blurb. STILL NOT MINTED: this file's other nodes (the FPM chain) have no documented dependency on or from the RREO -- it would be an isolated node with no anchor in this specific slice, and per Research.1.md §8's one-item-at-a-time discipline this deserves the dedicated Brazilian-fiscal-reporting session entry [4]/[this file's own deferred item] already calls for, where it would sit alongside a proper LC 101/2000 node rather than floating alone. Left deferred, not no-node-yet, since the blocking question is now scope rather than evidence."
     },
     {
       "edge": "The Estimativas da População release page's own statement of legal purpose",

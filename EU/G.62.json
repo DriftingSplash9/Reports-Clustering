@@ -1,0 +1,87 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.62.md",
+  "number": 62,
+  "title": "G.62.md — EU galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "`Research.1.md` read in full earlier this overall working",
+  "predecessor": "`G.61.md` (2026-08-09).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The CIRCABC browser gate that `edp-inventory-regulation-479-2009.json`\nflagged as \"the cheapest check that would fix\" its main cadence blocker\nactually works, and it closes that file's stated headline cost.** A\nClaude-in-Chrome session clicked through Eurostat's EDP-inventories page\n(EU countries → Germany → Inventory) to a CIRCABC library item — 404 to\ncurl and WebFetch, loads cleanly in a real browser — titled \"DE EDP\nInventory 2025,\" title page \"Germany\" / \"October 2025,\" uploaded\n2026-01-08. Against Destatis's own copy, still dated December 2015, that\nis a second observed edition, 9.83 years apart. Minted as `de-edp-inventory`\n(releases_per_year 0.1, estimated from that interval, the same treatment\nThomas's Q2 ruling already applied to the ESA 2010 German GNI/QNA\ninventories) with four edges: `-> eu-reg-479-2009` and `-> esa-2010`\n(both re-verified in the October 2025 PDF text, not just carried over from\nthe 2015-edition Part A record), and `-> de-destatis-debt-annual` /\n`-> de-destatis-debt-quarterly` (the two nodes minted 2026-08-08 that sat\nunwired specifically because the inventory that names them wasn't a node\nyet — both ADS/QDS source sentences re-read fresh in the current edition,\npp.34 and 36, not reused from the corrected-staging-error 2015 quote).",
+  "findings": [
+    {
+      "heading": "1. `ess-quality-framework.json` — the Catalogue of ESS standards entry closed, nothing minted",
+      "body": "*What this rests on*: `EU/CatalogueOfESSStandards_scoping_2026-08-08.md`\n(G.56's scoping work, read in full), a corpus-wide grep, and two fresh\nWebFetch/WebSearch attempts this session.\n\nG.56 scoped but did not adjudicate the Catalogue of ESS standards (a\n12-entry SKOS dataset on ShowVoc). This session closed the entry: 2 of 12\ncatalogue members are already nodes, 1 (EDAMIS) is correctly a technical\nsystem rather than a publication, 1 (ISCED 2011) is a classification hub\nsubject to §7's rule against researching a hub by reading it, and the\nstrongest of the remaining 8 candidates (ESS guidelines on seasonal\nadjustment, two confirmed editions 2015/2024) is a genuine isolated mint —\na corpus-wide grep for \"seasonal adjustment\" found it named nowhere else\nin `src/data/`, no proposed edge anywhere. Declined to mint on the same\nreasoning that keeps `international-frameworks.json`'s StatCan\n13-608-X candidate out. The one soft connection G.56 flagged\n(`ess-sims -eli:based_on-> eu-reg-223-2009`, from the catalogue's own\nmetadata rather than SIMS's own words) was chased further: no present-tense\nstatement found on Eurostat's reference-metadata-reporting-standards page\nor in the SIMS 2.0 PDF beyond the already-recorded future-tense sentence.\nNot minted. 6 reports, 7 dependencies, 12 dropped — unchanged counts, one\nentry's text updated."
+    },
+    {
+      "heading": "2. `edp-inventory-regulation-479-2009.json` — the German EDP inventory, minted via a browser session",
+      "body": "*What this rests on*: a live Claude-in-Chrome session on\n`ec.europa.eu/eurostat/web/government-finance-statistics/excessive-deficit-procedure/edp-inventories`\nand the resulting CIRCABC PDF, both read directly this session — not\ninherited from any prior session's staging.\n\nFull detail in the JSON's own updated entries; the mechanism is the\nheadline result above. One detail worth flagging for anyone auditing this:\nthe two new `uses_data_from` edges (`de-edp-inventory` → the annual and\nquarterly German debt statistics) reuse the *substance* of a quote already\nverified in `G.50`-era work (Part A record ID C9) but were **re-read fresh\nin the current October 2025 edition** rather than just cited from the old\nrecord — search hits for \"annual debt statistics,\" \"main underlying\nstatistical sources,\" and \"SFK4\" all landed on live text in the new PDF,\nconfirmed on pp.34 and 36 respectively. This matters because the same file\ncarries a standing correction (`_note`) that five of six staged records\nfrom this document's original ingestion were misquoted — re-reading at\nsource rather than trusting an old citation is the discipline that\ncorrection established, and it was followed here even though reusing the\nold quote would have been faster. 4 reports (was 3), 5 dependencies (was\n1), 12 dropped (unchanged count, four entries' text updated with\nresolutions)."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`G.61.md`'s orientation section, \"Tier-1 and Tier-2 are entirely closed as of this overall session.\"** CONFIRMED, not overstated. This session briefly doubted it on a flawed check (see the false-alarm note in Session conditions above) and then re-confirmed the original claim was correct. Recorded here only so the doubt doesn't get rediscovered — `G.61.md` itself needed no correction."
+    },
+    {
+      "n": 2,
+      "text": "`edp-inventory-regulation-479-2009.json`'s own `_open_questions`, \"THE CHEAPEST CHECK THAT WOULD FIX THAT IS BLOCKED ON A BROWSER.\"** REFUTED, in the useful sense: not blocked on a browser, blocked on *having tried* a browser. curl and WebFetch still 404; Claude-in-Chrome does not. Recorded in the file's own updated entry rather than just here, so it survives independently of this hand-off."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "B",
+      "label": "the corpus-wide `_dropped` sweep",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 11,
+      "text": "New, this session**: the other 26 national EDP inventories on Eurostat's EDP-inventories page are all CIRCABC links, same gate, same fix now proven for Germany. A future session could click through each (EU countries → country → Inventory) checking for a second dated edition the way this session did for Germany — if even a handful clear the cadence bar, `eu-reg-479-2009`'s \"26 further national EDP inventories\" deferred entry stops being 26 speculative leads and starts being a mechanical wiring job, the same shape as the equalization files."
+    },
+    {
+      "n": 12,
+      "text": "New, this session**: the German EDP inventory's own body text (Table 1, institutional-responsibilities matrix) explicitly assigns compilation duties to NSI/MOF/NCB by row and column, but this session did not resolve those abbreviations to named institutions for every row — only enough to write `de-edp-inventory`'s publisher field generically. A future session with more time could read Table 1 in full and possibly split or refine the publisher attribution."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "`planning/OPEN-THREADS_2026-08-08.md`** — read first, thread 2.1. Like this overall session's other 2026-08-09 hand-offs, this file's session has not yet been folded into OPEN-THREADS."
+    },
+    {
+      "n": 2,
+      "text": "This file**, then `G.61.md`, `G.60.md`, `G.59.md`, `G.58.md`, `G.57.md`, `G.56.md` for everything else in the branch."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md`** §2 (git), §3 (extract, don't adjudicate), §4 (node rule and sweep scoping)."
+    },
+    {
+      "n": 4,
+      "text": "`src/data/research/edp-inventory-regulation-479-2009.json`** — the mint and four edges this session added; every touched entry carries its resolution inline, original text preserved below it."
+    },
+    {
+      "n": 5,
+      "text": "`src/data/research/ess-quality-framework.json`** — the Catalogue of ESS standards entry's closure, same convention."
+    },
+    {
+      "n": 6,
+      "text": "`planning/dropped-sweep-scoping_2026-08-08.md`** — current status: Tier-1, Tier-2 and Tier-3 all closed. Only the long tail remains — roughly 39 files with fewer than 5 priority entries each, ranked but not individually previewed by the scoping document, not yet touched by any session. ---"
+    }
+  ],
+  "session_conditions": "**A `_dropped`-sweep session, corpus-wide thread 2.1.** Continues directly\nfrom the same overall working session as `G.59.md`–`G.61.md`. Two files\ntouched this stretch: `ess-quality-framework.json` (Tier-3, no mint —\nclosed out the Catalogue-of-ESS-standards entry on `G.56`'s scoping work\nplus one more round of checking, found nothing further) and\n`edp-inventory-regulation-479-2009.json` (Tier-1, one mint, four edges).\n\n**A FALSE ALARM THIS SESSION BRIEFLY RAISED AND THEN RETRACTED, kept here\nso nobody re-raises it.** Checking whether `G.61.md`'s \"Tier-1 and Tier-2\nare entirely closed\" claim actually held, this session first grepped every\nTier-1/Tier-2 file's `_status` field for a `2026-08-09` marker with `grep -o`\ncapped at ~80 characters — a method that only catches a sweep note if it\nsits near the *start* of the field. On that basis six files looked\nuntouched. **That check was wrong, not the files.** Re-checked properly\n(full-field reads and `_dropped`-array greps, not truncated `_status`\nsnippets): every one of the six — `nz-government-finance.json` (see\n`NZ/G.6.md`), `au-government-finance.json` (see `AU/G.4.md`),\n`eu-draft-budget.json` (see `G.58.md`, Tier-1 #6), `ontario-ompf-mpac.json`\n(Tier-1 #7), `realm-government-finance.json` (Tier-1 #8) and\n`eurostat-edp-gfs-ecb-statistics.json` (Tier-2 #9) — carries genuine,\nsubstantive `2026-08-08`/`2026-08-09` sweep work: mints, wired edges,\nre-verified `no-document` negatives, all recorded inline in each file's own\n`_dropped` entries or in a sweep note appended *later* in a long `_status`\nstring rather than at its start. `G.61.md` was right. The only Tier-1 item\nthat was genuinely still open going into this session was item #5,\n`edp-inventory-regulation-479-2009.json` — correctly identified below, and\nclosed by this session's own work. **Lesson for whoever runs this kind of\naudit next: grep the whole field, or better, grep the `_dropped` array's\n`why` text directly — a truncated `_status` snippet will produce false\nnegatives on files where the sweep note was appended rather than\nprepended.**\n\n**Read in full this session**: `ess-quality-framework.json` (before/after),\n`edp-inventory-regulation-479-2009.json` (before/after), `esa-2010.json`\n(read, not edited — cross-referenced for the German-inventory naming\nconvention), `equalization-named-products.json` and\n`equalization-payroll-base.json` (read, not edited — already resolved),\n`EU/CatalogueOfESSStandards_scoping_2026-08-08.md`,\n`EU/EDPInventory_PartA_2026-08-07.md` (for the exact C9 quote wording).\n**Read partially, to check for sweep markers only, not researched**:\n`nz-government-finance.json`, `au-government-finance.json`,\n`eu-draft-budget.json`, `ontario-ompf-mpac.json`,\n`realm-government-finance.json`, `eurostat-edp-gfs-ecb-statistics.json` —\nall confirmed already swept (see the false-alarm note above), none needed\nthis session's own research."
+}

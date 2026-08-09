@@ -1,7 +1,7 @@
 {
   "_slice": "eurosystem-ecb",
   "_researched": "2026-08-05",
-  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts.",
+  "_status": "STAGED 2026-08-05. Not yet moved to src/data/research/ or registered in src/data/index.ts. SWEPT 2026-08-09 (dropped-sweep, long tail): both _dropped entries read in full. Entry 1 (BOP-NA ROW consistency report) live-verified and minted as ecb-eurostat-bop-na-consistency-report -- isolated node, no edge found. Entry 0 (wrong-target, weekly financial statement footnote) already correctly reasoned, unchanged. Reports 3 -> 4, dependencies unchanged (the new node has none).",
   "_note": "Opens priority item C, 'Independent ECB/Eurosystem threads', unchanged in ranking across nineteen hand-offs (G.20.md through G.38.md), on Thomas's own direction this session. Three reports, zero dependencies, two _dropped. Two reports (the annual balance sheet and weekly financial statement) verify and promote a previously-staged batch (EU/slices/_staging/10-batch-with-records.ndjson, index 68) against live primary sources this session. The third (the ESS-ESCB MIP quality report) is freshly read first-hand from a saved PDF, correcting the staged batch's title ordering along the way. Full quotes in EU/Eurosystem-ECB_PartA_2026-08-05.md.",
   "_headline": "The Eurosystem's own balance-sheet publications are the fastest-cadence nodes in the whole EU branch (weekly, 52/year), and the joint ESS-ESCB quality report is the first EU node in this corpus whose cadence rests on the document's own stated edition count ('12th joint annual') rather than a counted publication list or a metadata cadence statement.",
   "_open_questions": [
@@ -57,6 +57,22 @@
       "domains": [
         "national-accounts"
       ]
+    },
+    {
+      "id": "ecb-eurostat-bop-na-consistency-report",
+      "title": "Joint ECB-Eurostat Annual Report on the Consistency of National Accounts and Balance of Payments (Quarterly Financial and Non-Financial Accounts)",
+      "publisher": "European Central Bank and Eurostat, jointly, presented to the CMFB",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "A joint ECB-Eurostat report measuring the consistency between national accounts and balance-of-payments data on quarterly financial and non-financial accounts, presented annually to the Committee on Monetary, Financial and Balance of Payments Statistics (CMFB). CMFB's own page: 'this comparison has been carried out on a regular basis. Since January 2022 a single annual report covers both the financial accounts and the non-financial accounts.' The 2026 edition covers data through Q2 2025.",
+      "releases_per_year": 1,
+      "cadence_note": "CMFB's own page, live-verified 2026-08-09: 'a single annual report'.",
+      "last_updated": null,
+      "url": "https://www.cmfb.europa.eu/main-topics/bop-na-consistency/report",
+      "domains": [
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [],
@@ -72,8 +88,8 @@
       "edge": "ess-escb-mip-quality-report -> [BOP-NA ROW consistency report, joint ECB-Eurostat]",
       "source": null,
       "target": null,
-      "reason": "deferred",
-      "why": "ECB-05's own text: 'Eurostat and the ECB regularly present joint reports on the consistency of the two datasets to the CMFB. The most recent joint ECB-Eurostat \"BOP-NA ROW consistency report\" was presented to the CMFB plenary in January 2026 and published on the CMFB website in February 2026.' A second, named, dated, apparently-recurring joint ECB-Eurostat publication, deliberately not chased this session per Research.1.md §8's one-item-at-a-time discipline. The branch's best next lead in this thread. Full quote at ECB-07, EU/Eurosystem-ECB_PartA_2026-08-05.md."
+      "reason": "note",
+      "why": "MINTED 2026-08-09 (dropped-sweep, long tail). CMFB's own page (cmfb.europa.eu/main-topics/bop-na-consistency/report), live-fetched: titled '2026 Joint ECB-Eurostat annual report on the consistency of National Accounts and Balance of Payments concerning quarterly financial and non-financial accounts', purpose stated as 'to measure the degree of actual consistency between BOP and NA data', and cadence confirmed recurring: 'this comparison has been carried out on a regular basis. Since January 2022 a single annual report covers both the financial accounts and the non-financial accounts.' This confirms the ECB-05 quote this entry originally recorded (presented to the CMFB plenary January 2026, published February 2026) is one instance of a genuinely recurring annual series, not a one-off. Minted as ecb-eurostat-bop-na-consistency-report. Isolated, fed-h15-shape: no document in this file or elsewhere in the branch cites it as an input or is cited by it; ess-escb-mip-quality-report (this same file) is topically adjacent -- also a joint quality report to the CMFB -- but no citation relationship between the two was found this session. Row 4 from the ECB-05 material ('Disaggregated monthly financial statement of the Eurosystem', noticed in eurosystem-ecb.json's own dropped[0]) remains a distinct, uninvestigated lead. Original text follows for history: ECB-05's own text: 'Eurostat and the ECB regularly present joint reports on the consistency of the two datasets to the CMFB. The most recent joint ECB-Eurostat \"BOP-NA ROW consistency report\" was presented to the CMFB plenary in January 2026 and published on the CMFB website in February 2026.' A second, named, dated, apparently-recurring joint ECB-Eurostat publication, deliberately not chased this session per Research.1.md §8's one-item-at-a-time discipline. The branch's best next lead in this thread. Full quote at ECB-07, EU/Eurosystem-ECB_PartA_2026-08-05.md."
     }
   ]
 }

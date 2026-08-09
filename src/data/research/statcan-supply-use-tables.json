@@ -14,7 +14,9 @@
       "cadence_note": "Annual, reference period calendar year, but with an unusually long lag: record 1401 states the tables 'are available about two and half years after the end of the reference year; this is because of the delay in obtaining the needed source data and by the complex nature of producing such a detailed account.' The programme also releases derived products on separate dates — the 2026 release schedule lists April 15 for the input-output tables, May 4 for value added in exports and June 16 for the economic impact of wireless telecommunications carriers — so releases_per_year 1 counts the benchmark tables and not the satellite products.",
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401",
-      "domains": ["national-accounts"]
+      "domains": [
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [
@@ -69,5 +71,6 @@
       "reason": "note",
       "why": "RESOLVED. This entry was written as a deliberate omission, on the ground that creating both directions would put a two-node cycle into the authority calculation on asymmetric evidence. The mutual-definitional-partner question was then decided in the affirmative — see the decision in REPORTS.md — and both edges now exist. Kept as a note because the pair is the graph's first cycle and a later reader should know it is intentional rather than a data error. What made it safe is the V0.8 proportional-retention rule, and the argument is worth stating because it is the reason the objection above no longer bites: every node with outgoing edges keeps exactly 50% of its own rank regardless of how many edges it has or how strongly they are typed, so two nodes pointing at each other each pass on half and retain half. A mutual pair therefore converges instead of inflating, and cannot pump rank into itself the way a self-retaining sink could under the pre-V0.8 fixed retention. Measured effect on the corpus is recorded in the session log."
     }
-  ]
+  ],
+  "_status": " SWEPT 2026-08-09 (dropped-sweep, long tail): all 3 _dropped entries read in full. All three are historical/resolved notes kept deliberately (the IPPI prediction that landed, the confidential-tax-form input, and the mutual-cycle decision) -- none is an open lead. No reports or dependencies changed."
 }

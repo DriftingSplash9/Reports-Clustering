@@ -1,6 +1,7 @@
 {
   "_slice": "US federal policy indexation — the rules that turn statistical releases into money",
   "_researched": "2026-07-28",
+  "_status": "Swept 2026-08-09 as part of the corpus-wide _dropped sweep (Tier 3; see planning/dropped-sweep-scoping_2026-08-08.md, which flagged this file's fed-h15 entry as live and urgent — a correctness bug, not just a missed lead, since V0.9's deletion of fed-h15's only edge left it dropping from every build). Minted treasury-daily-yield-curve and wired fed-h15 -> treasury-daily-yield-curve, closing that entry. The other seven _dropped entries were re-read and found already correctly settled as deliberate scope/evidence decisions (two unpublishable-source, one denied, one no-document, two deferred-for-scope-balance, one wrong-target) — none re-opened.",
   "_note": "This slice is about the rules that convert a statistical release into a payment, and about the survey machinery underneath the headline numbers. The shape that emerged is that the US does not have one inflation index driving policy — it has at least four, and which one applies to you is an artefact of when your programme was legislated. Social Security benefits move on the CPI-W, third quarter to third quarter, under a 1972 statute. The federal poverty guidelines move on the CPI-U, annual average to annual average, under a 1981 statute — and they move on it twice, because Census already inflates the poverty thresholds by CPI-U before HHS inflates the published thresholds forward again. Tax brackets move on the C-CPI-U, twelve months ending August 31, under the 2017 act, an index that runs about 0.2 points a year slower and is still being revised for ten months after the value the IRS is required to use is fixed. And the Federal Reserve's 2 percent target is defined on none of these — it is the BEA's PCE price index, which is itself largely a reweighting of the same BLS price quotes onto national-accounts expenditure weights. The other structural fact worth recording is that the Social Security system is indexed on both sides but to different things: benefits to prices via the CPI-W, the taxable wage base and the PIA bend points to wages via SSA's own national average wage index. When wages and prices diverge, the programme's finances move in ways neither index alone predicts. On the survey side, the CPS cannot produce a population level at all; it produces rates, and the levels come from Census population estimates, which are a carry-forward of the decennial count. That is why the January Employment Situation carries a discontinuity every year that has nothing to do with the labour market.",
   "reports": [
     {
@@ -135,6 +136,22 @@
         "taxation",
         "inflation"
       ]
+    },
+    {
+      "id": "treasury-daily-yield-curve",
+      "title": "Daily Treasury Par Yield Curve Rates",
+      "publisher": "US Department of the Treasury",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The Treasury's daily par yield curve for its own securities, from which Constant Maturity Treasury (CMT) rates at specific maturities are read directly. Treasury's own FAQ: 'CMT yields are read directly from the Treasury's daily par yield curve, which is derived from indicative closing bid market price quotations on Treasury securities.' Minted 2026-08-09 (sweep session, Tier-3 item, us-federal-policy.json) to close a `no-node-yet` lead that was flagged urgent: deleting `fed-h15 -> fed-fomc-statement` in V0.9 had left the Fed's H.15 release with no surviving edge, meaning it dropped from the graph on every build. H.15's own footnotes 9 and 10 read 'Source: U.S. Treasury' for its Treasury nominal and inflation-indexed constant maturity series, describing those yields as 'interpolated by the U.S. Treasury from the daily yield curve' — this node is that source.",
+      "releases_per_year": 250,
+      "cadence_note": "Every business day — the corpus's own convention for daily releases, matching fed-h15's own cadence_note ('Every business day.').",
+      "last_updated": null,
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+      "domains": [
+        "monetary-policy"
+      ]
     }
   ],
   "dependencies": [
@@ -259,6 +276,13 @@
       "relationship_type": "uses_data_from",
       "basis": "The Summary of Economic Projections reports each participant's projection of inflation as the percent change in the PCE price index and in the core PCE price index, precisely because the FOMC's longer-run goal is stated as '2 percent, as measured by the annual change in the price index for personal consumption expenditures'. The projection variable is defined by the statement of goals, so the SEP inherits BEA's index by construction.",
       "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf"
+    },
+    {
+      "source_report_id": "fed-h15",
+      "target_report_id": "treasury-daily-yield-curve",
+      "relationship_type": "uses_data_from",
+      "basis": "H.15's own footnotes 9 and 10 both read 'Source: U.S. Treasury' for the Treasury nominal and inflation-indexed constant maturity series, and the release describes those yields as 'interpolated by the U.S. Treasury from the daily yield curve'. Treasury's own FAQ confirms the mechanism: 'CMT yields are read directly from the Treasury's daily par yield curve, which is derived from indicative closing bid market price quotations on Treasury securities.' This reconnects fed-h15 to the graph after V0.9's deletion of fed-h15 -> fed-fomc-statement left it with no surviving edge.",
+      "evidence_url": "https://www.federalreserve.gov/releases/h15/"
     }
   ],
   "_dropped": [
@@ -314,9 +338,9 @@
     {
       "edge": "fed-h15 -> (U.S. Treasury daily yield curve)",
       "source": "fed-h15",
-      "target": null,
+      "target": "treasury-daily-yield-curve",
       "reason": "no-node-yet",
-      "why": "A live lead, opened by deleting fed-h15 -> fed-fomc-statement in V0.9 and worth taking because that deletion left H.15 with no surviving edge, so the node now drops from the graph on every build. H.15 does name a source explicitly: footnotes 9 and 10 both read 'Source: U.S. Treasury' for the Treasury nominal and inflation-indexed constant maturity series, and the release describes those yields as 'interpolated by the U.S. Treasury from the daily yield curve'. That is a documented dependency by this project's standard — better evidenced than many edges already in the graph. What is missing is the node: the Treasury daily yield curve / interest rate statistics release has not been researched. Researching it reconnects H.15 and is the cheapest route to doing so."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-3 item), and treated as urgent per this project's own scoping notes — this was the one entry in the corpus-wide sweep flagged as a live correctness bug rather than a missed opportunity, since fed-h15 had no surviving edge and dropped from every build. Treasury's own FAQ confirms the mechanism named in H.15's footnotes: 'CMT yields are read directly from the Treasury's daily par yield curve, which is derived from indicative closing bid market price quotations on Treasury securities.' Minted treasury-daily-yield-curve (releases_per_year 250, matching fed-h15's own daily cadence_note convention in src/data/reports.ts) and wired fed-h15 -> treasury-daily-yield-curve, uses_data_from. Original entry follows.\n\nA live lead, opened by deleting fed-h15 -> fed-fomc-statement in V0.9 and worth taking because that deletion left H.15 with no surviving edge, so the node now drops from the graph on every build. H.15 does name a source explicitly: footnotes 9 and 10 both read 'Source: U.S. Treasury' for the Treasury nominal and inflation-indexed constant maturity series, and the release describes those yields as 'interpolated by the U.S. Treasury from the daily yield curve'. That is a documented dependency by this project's standard — better evidenced than many edges already in the graph. What is missing is the node: the Treasury daily yield curve / interest rate statistics release has not been researched. Researching it reconnects H.15 and is the cheapest route to doing so."
     }
   ]
 }

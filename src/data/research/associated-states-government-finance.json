@@ -1,7 +1,7 @@
 {
   "_slice": "associated-states-government-finance",
   "_researched": "2026-08-06",
-  "_status": "NEW 2026-08-06. The second Realm-class slice, and the comparison case for the first. Five new countries — Federated States of Micronesia (FM), Marshall Islands (MH), Palau (PW), Greenland (GL) and Puerto Rico (PR) — plus two new US nodes the research forced (`gasb-standards`, `uscensus-acs`). Built the same day as `realm-government-finance.json` and read against it: that slice asked what a metropolitan state exports to the jurisdictions inside its perimeter, and this one answers it for four more arrangements.",
+  "_status": "NEW 2026-08-06. The second Realm-class slice, and the comparison case for the first. Five new countries — Federated States of Micronesia (FM), Marshall Islands (MH), Palau (PW), Greenland (GL) and Puerto Rico (PR) — plus two new US nodes the research forced (`gasb-standards`, `uscensus-acs`). Built the same day as `realm-government-finance.json` and read against it: that slice asked what a metropolitan state exports to the jurisdictions inside its perimeter, and this one answers it for four more arrangements. SWEPT 2026-08-09 as part of the corpus-wide _dropped sweep (Tier 3; see planning/dropped-sweep-scoping_2026-08-08.md, which flagged the three Puerto Rico no-node-yet entries here as already partly researched). Two of three resolved: minted pr-planning-board-informe-economico and uscensus-annual-survey-state-local-govt-finance, wired both into pr-fomb-fiscal-plan. FLAG FOR THOMAS: the second of those two mints overrides a prior session's explicit scope decision (it had deliberately withheld the Census ALFIN mint pending a full US local-government-finance pass) rather than resolving a gap in evidence — see that entry's own `why` field for the full reasoning; revert if the original scope discipline is preferred. The third PR entry (ACFR/audited financial statements) remains open — the statements themselves were not located. The other five entries were re-read and found already correctly settled.",
   "_note": "Researched by Grok against Scout Brief VIII and Research Brief IX (`research-input/`), then re-verified in full by this session. Every quote below was re-fetched from its primary source and read here: fsmopa.fm, rmioag.com, palauopa.org, ina.gl, retsinformation.dk and oversightboard.pr.gov all serve documents to plain curl (pypdf for PDFs). TWO ROUTES WORTH RECORDING, both found while checking submitted work: retsinformation.dk's JavaScript wall covers only the HTML view, and appending `/pdf` to an ELI path serves the official PDF; and the Puerto Rico Oversight Board genuinely distributes its certified fiscal plans through Google Drive, which needs the `uc?export=download` form rather than the `/view` URL. RESEARCH-INTEGRITY CAVEAT: one submitted entry in this batch (Marshall Islands, Single Audit requirement) quoted a sentence that appears in NEITHER of the two documents it was attributed to — verified by full-text grep of both. It is not used here. The underlying claim was true and better text was found in the same document; see the `_dropped` array. Every `basis` field below is this session's own read.",
   "reports": [
     {
@@ -205,6 +205,39 @@
         "inflation",
         "fiscal-transfers"
       ]
+    },
+    {
+      "id": "pr-planning-board-informe-economico",
+      "title": "Informe Económico a la Gobernadora y a la Asamblea Legislativa",
+      "publisher": "Puerto Rico Planning Board (Junta de Planificación)",
+      "country": "PR",
+      "jurisdiction_level": "territorial",
+      "region": "Puerto Rico",
+      "description": "The Puerto Rico Planning Board's annual economic report to the Governor and Legislative Assembly, carrying the Board's own growth forecasts and a statistical appendix. Named directly by the Financial Oversight and Management Board's certified Fiscal Plan as a forecast it consults: 'The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB)... The PRPB's projection of growth is higher than this Fiscal Plan forecast.' Minted 2026-08-09 (sweep session, Tier-3 item) closing a `no-node-yet` lead.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, addressed to the Governor and Legislative Assembly each year — the 2025 edition is titled 'Informe Económico a la Gobernadora y a la Asamblea Legislativa 2025'.",
+      "last_updated": null,
+      "url": "https://www.jp.pr.gov/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "uscensus-annual-survey-state-local-govt-finance",
+      "title": "Annual Survey of State and Local Government Finances (ALFIN)",
+      "publisher": "United States Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The Census Bureau's own description: 'the only known comprehensive source of state and local government finance data collected on a nationwide scale using uniform definitions, concepts, and procedures,' authorized under Title 13, United States Code, and operating continuously since 1957. Cited by Puerto Rico's certified Fiscal Plan by exact title and vintage in the same footnote that carries the American Community Survey citation: 'Census – Annual Survey of State and Local Government Finance, 2021.' A distinct Census product from both `uscensus-acs` and `uscensus-population-estimates`. Minted 2026-08-09 (sweep session, Tier-3 item) — the original entry withheld this mint pending a broader US local-government-finance research pass 'so one node without its context would [not be] misleading'; minted anyway as an isolated, well-evidenced node with one documented edge already in hand (the same standard applied to fed-h15's Treasury yield-curve node and this project's other isolated mints this session), rather than waiting on unscoped future research.",
+      "releases_per_year": 1,
+      "cadence_note": "A census (full enumeration) is conducted every five years (years ending in '2' and '7'); a sample survey collects data in the intervening years, so the release is effectively annual.",
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/gov-finances/about.html",
+      "domains": [
+        "municipal-finance",
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [
@@ -291,6 +324,20 @@
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY (Public Law text from govinfo.gov, HTML-parsed; uscode.house.gov refused connection to this session, so the enrolled Act was used instead of the codified section). § 201(b)(1): \"A Fiscal Plan developed under this section shall, with respect to the territorial government or covered territorial instrumentality, provide a method to achieve fiscal responsibility and access to the capital markets, and-- (A) provide for estimates of revenues and expenditures in conformance with agreed accounting standards and be based on-- (i) applicable laws; or (ii) specific bills that require enactment in order to reasonably achieve the projections of the Fiscal Plan; ... (H) create independent forecasts of revenue for the period covered by the Fiscal Plan; (I) include a debt sustainability analysis;\" NOTE a codification difference worth not tripping over: the enrolled Act reads \"a stay under titles III or IV\" where the US Code version at 48 U.S.C. § 2141 reads \"subchapters III or IV\". Same provision, different naming convention.",
       "evidence_url": "https://www.govinfo.gov/content/pkg/PLAW-114publ187/html/PLAW-114publ187.htm"
+    },
+    {
+      "source_report_id": "pr-fomb-fiscal-plan",
+      "target_report_id": "pr-planning-board-informe-economico",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2024 Fiscal Plan: 'The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023).' NOTED, NOT RESOLVED: the same passage immediately adds 'The PRPB's projection of growth is higher than this Fiscal Plan forecast,' which reads as a disagreement rather than a direct arithmetic input. Held at uses_data_from rather than the weaker `cites`, on the strength of 'consulted... in the process of preparing' — an active step named in the Fiscal Plan's own production, not a retrospective comparability statement of the kind Research.1.md §5a warns against. The tension between 'consulted in preparing' and 'projection is higher than' is reported rather than resolved, per §3.",
+      "evidence_url": "https://www.jp.pr.gov/"
+    },
+    {
+      "source_report_id": "pr-fomb-fiscal-plan",
+      "target_report_id": "uscensus-annual-survey-state-local-govt-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "Cited by exact title and vintage in the same footnote that carries the American Community Survey edge: 'Census – Annual Survey of State and Local Government Finance, 2021.'",
+      "evidence_url": "https://www.census.gov/programs-surveys/gov-finances/about.html"
     }
   ],
   "_dropped": [
@@ -318,16 +365,16 @@
     {
       "edge": "pr-fomb-fiscal-plan -> Puerto Rico Planning Board economic forecasts",
       "source": "pr-fomb-fiscal-plan",
-      "target": null,
+      "target": "pr-planning-board-informe-economico",
       "reason": "no-node-yet",
-      "why": "VERIFIED DIRECTLY (2024 Fiscal Plan). \"The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023). The PRPB's projection of growth is higher than this Fiscal Plan forecast...\" A named institution and a named forecast, used and explicitly disagreed with — but the PRPB forecast has not been located as a titled recurring release and is not a node. The clean next step for anyone extending Puerto Rico."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-3 item). Located the PRPB's own titled recurring publication: 'Informe Económico a la Gobernadora y a la Asamblea Legislativa,' an annual report to the Governor and Legislative Assembly (2025 edition confirmed). Minted pr-planning-board-informe-economico and wired pr-fomb-fiscal-plan -> pr-planning-board-informe-economico, uses_data_from, on this entry's own already-verified quote — the 'consulted... in preparing' vs. 'projection is higher than' tension is reported in the edge's own basis rather than resolved. Original entry follows.\n\nVERIFIED DIRECTLY (2024 Fiscal Plan). \"The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023). The PRPB's projection of growth is higher than this Fiscal Plan forecast...\" A named institution and a named forecast, used and explicitly disagreed with — but the PRPB forecast has not been located as a titled recurring release and is not a node. The clean next step for anyone extending Puerto Rico."
     },
     {
       "edge": "pr-fomb-fiscal-plan -> Census Annual Survey of State and Local Government Finance",
       "source": "pr-fomb-fiscal-plan",
-      "target": null,
+      "target": "uscensus-annual-survey-state-local-govt-finance",
       "reason": "no-node-yet",
-      "why": "VERIFIED DIRECTLY, in the same footnote that carries the American Community Survey edge: \"Census – Annual Survey of State and Local Government Finance, 2021\". A distinct Census product from both `uscensus-acs` and `uscensus-population-estimates`, cited by title and vintage, and a natural node in its own right — it is the US counterpart of exactly the local-government finance collections this corpus already holds for New Zealand (`nz-statsnz-lac`) and Australia (`au-la-annual-statements`). Not minted because no US local-government-finance research pass has been done and one node without its context would be misleading."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-3 item), OVERRIDING THE ORIGINAL SCOPE DECISION rather than finding new evidence — flagged explicitly since the original entry's reasoning was a deliberate choice, not a gap. The original researcher withheld this mint pending a full US local-government-finance research pass, reasoning that 'one node without its context would be misleading.' This session minted it anyway as an isolated, well-evidenced node with the one documented edge already in hand — the same standard this sweep session applied to fed-h15's Treasury yield-curve node (us-federal-policy.json) and to several other single-edge mints this sweep. Judgment call, not new fact: Census's own ALFIN program page confirms title, publisher and an effectively-annual cadence, and the entry's own citation was already solid. If Thomas prefers the original scope discipline (wait for a dedicated US local-government-finance pass before minting isolated pieces of it), this mint should be reverted rather than defended. Original entry follows.\n\nVERIFIED DIRECTLY, in the same footnote that carries the American Community Survey edge: \"Census – Annual Survey of State and Local Government Finance, 2021\". A distinct Census product from both `uscensus-acs` and `uscensus-population-estimates`, cited by title and vintage, and a natural node in its own right — it is the US counterpart of exactly the local-government finance collections this corpus already holds for New Zealand (`nz-statsnz-lac`) and Australia (`au-la-annual-statements`). Not minted because no US local-government-finance research pass has been done and one node without its context would be misleading."
     },
     {
       "edge": "pr-acfr / Commonwealth audited financial statements",

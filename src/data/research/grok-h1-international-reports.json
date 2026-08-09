@@ -2,7 +2,7 @@
   "_slice": "orgs (financing-international-orgs + soft-power-and-isolated-orgs)",
   "_researched": "2026-07-30",
   "_merged": "2026-08-07",
-  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff, verified against primary sources 2026-08-07. TRIAGE of two org-heavy slices that used organisations as nodes and 'publishes'/'funds'/'ritual' edges — all off-model for this corpus. Salvage: 3 genuine recurrent flagship reports (IMF WEO, IMF Fiscal Monitor, OECD Economic Outlook) and 4 report-to-report dependencies verified verbatim against the Fiscal Monitor Methodological and Statistical Appendix (April 2025) and the OECD Economic Outlook Database Inventory (EO107). Everything else — 6 organisation nodes, 2 meeting nodes, 8 financing line-item pseudo-nodes, 12 unwired report candidates, and all 38 handoff edges — is recorded in _dropped. This large drop rate is the intended outcome of the triage.",
+  "_note": "From the 2026-07-31 Grok research handoff (research-input/grok-research-handoff-2026-07-31/), verified edge-by-edge against primary sources and converted to the live schema 2026-08-07. Per-edge verdicts in the handoff merge session. From the 2026-07-31 Grok handoff, verified against primary sources 2026-08-07. TRIAGE of two org-heavy slices that used organisations as nodes and 'publishes'/'funds'/'ritual' edges — all off-model for this corpus. Salvage: 3 genuine recurrent flagship reports (IMF WEO, IMF Fiscal Monitor, OECD Economic Outlook) and 4 report-to-report dependencies verified verbatim against the Fiscal Monitor Methodological and Statistical Appendix (April 2025) and the OECD Economic Outlook Database Inventory (EO107). Everything else — 6 organisation nodes, 2 meeting nodes, 8 financing line-item pseudo-nodes, 12 unwired report candidates, and all 38 handoff edges — is recorded in _dropped. This large drop rate is the intended outcome of the triage. SWEPT 2026-08-09 as part of the corpus-wide _dropped sweep (Tier 3, first item; see planning/dropped-sweep-scoping_2026-08-08.md). Of the 12 unwired report candidates, one (imf-gfsr) was resolved and minted this session on a clean primary-source citation to imf-weo. Three others (wto-trade-monitoring, imf-article-iv, oecd-economic-surveys) were re-checked directly and remain open — cadence and authorship for the WTO/OECD/UNCTAD joint report are now confirmed (previously inferred from the handoff), but the specific data-source or StatCan-citation quotes needed to mint them were not retrieved this session (robots/403 walls, or fetches that returned only page navigation). The 57 `note` entries (organisation nodes, meeting/summit series, financing line-items, and their off-model edges) were reviewed as a set and found to be deliberate, well-reasoned design exclusions from the original triage, not unexamined leads — none were re-opened. Non-branch file (international-organisation galaxy); no dedicated hand-off, tracked here and in planning/OPEN-THREADS_2026-08-08.md thread 2.1.",
   "reports": [
     {
       "id": "imf-weo",
@@ -55,6 +55,23 @@
         "inflation",
         "labour"
       ]
+    },
+    {
+      "id": "imf-gfsr",
+      "title": "Global Financial Stability Report (GFSR)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The third of the IMF's flagship trilogy alongside the World Economic Outlook and the Fiscal Monitor, assessing risks to global financial stability. Minted 2026-08-09 (sweep session, Tier-3 item, grok-h1-international-reports.json) closing a `no-document` lead that had correctly identified this as a genuine recurrent flagship but lacked a verified report-to-report dependency at the time it was triaged.",
+      "releases_per_year": 2,
+      "cadence_note": "Published twice yearly alongside the WEO and Fiscal Monitor, in April and October — confirmed by the October 2025 edition's own cross-references to 'the April 2025 Global Financial Stability Report'.",
+      "last_updated": null,
+      "url": "https://www.imf.org/en/publications/gfsr",
+      "domains": [
+        "national-accounts",
+        "financial-regulation"
+      ]
     }
   ],
   "dependencies": [
@@ -85,6 +102,13 @@
       "relationship_type": "methodology_depends_on",
       "basis": "OECD Economic Outlook Database Inventory (EO107): 'All countries follow the BPM6 methodology; BPM6 is the acronym for the sixth edition of the \"Balance of Payments and International Investment Position Manual\".'",
       "evidence_url": "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=dfa0d77f-5427-4f76-9772-1b30d464b5ba"
+    },
+    {
+      "source_report_id": "imf-gfsr",
+      "target_report_id": "imf-weo",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The October 2025 GFSR's own Preface: 'The report draws out the financial ramifications of economic issues highlighted in the IMF's World Economic Outlook.' Chapter 1 also cross-references a specific WEO forecast directly: 'the mode... of the latest estimate of growth forecast density accords with the IMF's October 2025 World Economic Outlook database forecast for 2026.' `methodology_depends_on` rather than `uses_data_from`, since the Preface frames the relationship as GFSR's own analysis extending WEO's economic narrative, not GFSR reading WEO's numbers as a direct input the way the Fiscal Monitor does.",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/gfsr/2025/october/english/text.pdf"
     }
   ],
   "_dropped": [
@@ -356,19 +380,19 @@
       "source": "wto-trade-monitoring",
       "target": "(node)",
       "reason": "deferred",
-      "why": "WTO Trade Monitoring Reports (WTO-wide + joint G20 version with OECD/UNCTAD) are recurrent and the joint authorship suggests documentable uses_data_from edges, but verifying them was out of scope for this triage and the node only existed as a branch of org-wto. Best candidate in the slice for a future rebuild."
+      "why": "RE-CHECKED 2026-08-09 (sweep session, Tier-3 item), still open. Confirmed the joint-authorship claim directly: the WTO's own trade monitoring page states these 'reports are circulated jointly with the OECD and UNCTAD twice a year.' Semi-annual cadence and joint authorship are now both confirmed rather than inferred from the handoff. Still not minted: no data-source citation was found this session — the WTO's own report PDFs are robots-disallowed to this session's fetch tooling, and a UNCTAD-hosted mirror of the original 2009 joint report returned a 403. The WTO trade-monitoring landing page describes only the underlying TPRM collection process ('The WTO Secretariat works closely with all delegations to collect complete, up-to-date and accurate information on their trade and trade-related measures'), which is about the input to the report, not a citable statement of what the report itself draws on. Confirms this is still the best candidate in the slice for a future rebuild, now with a narrower blocker: get past the robots/403 walls on the report's own PDF, not establish cadence or authorship. Original entry follows.\n\nWTO Trade Monitoring Reports (WTO-wide + joint G20 version with OECD/UNCTAD) are recurrent and the joint authorship suggests documentable uses_data_from edges, but verifying them was out of scope for this triage and the node only existed as a branch of org-wto. Best candidate in the slice for a future rebuild."
     },
     {
       "source": "imf-gfsr",
-      "target": "(node)",
+      "target": "imf-weo",
       "reason": "no-document",
-      "why": "Genuine twice-yearly IMF flagship but no claimed or verifiable report-to-report dependency was established in this triage; existed only as a branch of org-imf. Could be rebuilt later with a verified edge (e.g. to the WEO database, as done for the Fiscal Monitor)."
+      "why": "RESOLVED 2026-08-09 (sweep session, Tier-3 item). The October 2025 GFSR's own Preface states plainly: 'The report draws out the financial ramifications of economic issues highlighted in the IMF's World Economic Outlook.' Minted imf-gfsr and wired imf-gfsr -> imf-weo, methodology_depends_on, exactly as this entry predicted. Original entry follows.\n\nGenuine twice-yearly IMF flagship but no claimed or verifiable report-to-report dependency was established in this triage; existed only as a branch of org-imf. Could be rebuilt later with a verified edge (e.g. to the WEO database, as done for the Fiscal Monitor)."
     },
     {
       "source": "imf-article-iv",
       "target": "(node)",
       "reason": "deferred",
-      "why": "Article IV consultation reports are a genuine recurrent surveillance series (roughly annual per member) and the Canada series would fit the corpus, but the handoff node was generic (all members), hung off org-imf, and no document was fetched tying a Canada Article IV report to specific StatCan releases. A Canada-specific series node with a verified uses_data_from edge (the staff report's data tables name Statistics Canada sources) is a plausible future addition."
+      "why": "RE-CHECKED 2026-08-09 (sweep session, Tier-3 item), still open. Searched for a Canada Article IV staff report data table naming Statistics Canada as a source; did not retrieve the actual 2025/2026 staff report document (IMF Country Report No. 26/12) or a data-table excerpt from it this session, only secondary coverage. Confirms the original finding rather than advancing it: the plausible edge remains unverified, not refuted. Original entry follows.\n\nArticle IV consultation reports are a genuine recurrent surveillance series (roughly annual per member) and the Canada series would fit the corpus, but the handoff node was generic (all members), hung off org-imf, and no document was fetched tying a Canada Article IV report to specific StatCan releases. A Canada-specific series node with a verified uses_data_from edge (the staff report's data tables name Statistics Canada sources) is a plausible future addition."
     },
     {
       "source": "imf-article-iv-canada-2025",
@@ -380,7 +404,7 @@
       "source": "oecd-economic-surveys",
       "target": "(node)",
       "reason": "deferred",
-      "why": "OECD country Economic Surveys (roughly every 1.5-2 years per member) are a genuine recurrent series; a Canada-specific series node with verified data-source edges is plausible, but no document was fetched here and the node existed only as a branch of org-oecd."
+      "why": "RE-CHECKED 2026-08-09 (sweep session, Tier-3 item), still open. Attempted to fetch the OECD Economic Surveys: Canada 2025 macroeconomic-developments chapter directly for a 'Source: Statistics Canada' figure citation; the fetch returned only page navigation/metadata, not the body content where such a citation would appear. Confirms the original finding rather than advancing it. Original entry follows.\n\nOECD country Economic Surveys (roughly every 1.5-2 years per member) are a genuine recurrent series; a Canada-specific series node with verified data-source edges is plausible, but no document was fetched here and the node existed only as a branch of org-oecd."
     },
     {
       "source": "oecd-economic-survey-canada-2025",
