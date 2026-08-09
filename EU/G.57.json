@@ -1,0 +1,87 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.57.md",
+  "number": 57,
+  "title": "G.57.md — EU galaxy hand-off",
+  "date": "2026-08-08",
+  "governing_briefs": "`Research.1.md` — read in relevant part this turn (§2 git",
+  "predecessor": "`G.56.md` (2026-08-08, earlier the same day).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The cross-file staleness pattern `G.56.md` never named — a `_dropped`\nentry going stale because a *sibling* file resolved the same fact under a\ndifferent id — showed up a third time, this time inside a single branch\nrather than across the Canada/federal pair.** `esa-2010.json` carried a\n`deferred` entry for \"German quarterly national accounts release →\nesa-2010\" that `de-destatis-national-accounts.json` had already resolved,\nsame day, 2026-08-05, as a live `methodology_depends_on` edge under the id\n`de-destatis-national-accounts` — `esa-2010.json`'s own `_dropped` block\njust never said so. Corrected here, not by luck: the validator's stale-note\ncheck can't catch this class, because it only fires when a note's endpoints\nalready resolve to real ids, and this entry's `target` was `esa-2010`\n(real) but its `source` was `null` (by design, since the release itself had\nno id yet in this file's frame of reference). Set against that: the EDP\ninventory's \"five named German statistics\" lead, open since it was first\nlogged, closed two of five with clean mints and reported concrete findings\non the other three — not a rediscovery, real progress on a\nlong-standing item.",
+  "findings": [
+    {
+      "heading": "1. `esa-2010.json`'s German-QNA-release entry was stale, not deferred",
+      "body": "The entry's `reason` was `deferred`, its `source` was `null`. The document\nit was chasing — \"First quarterly results of GDP without particular\nbreakdown are published as press release 30 days after the end of a\nreporting quarter... the more detailed figures... around 55 days\" — is the\nsame t+30/t+55 timetable `de-destatis-national-accounts.json` already used\nto build `de-destatis-national-accounts` (releases_per_year 4) and wire it\nto `esa-2010` with a `methodology_depends_on` edge, on 2026-08-05, the same\ndate this entry itself was written. **Changed `reason` from `deferred` to\n`note`**, prefixed \"RESOLVED 2026-08-05, same day as this entry, by a\nsibling file — caught stale 2026-08-08\", original text preserved below the\ncorrection per the never-edit-a-predecessor convention (this is a\nsame-branch file, not a predecessor hand-off, but the retain-don't-delete\nhabit applies to `_dropped` entries generally). The two adjacent GNI/QNA\nmethods-inventory entries were left alone except for one-line \"SUPERSEDED\nAS A ROUTE\" pointer notes explaining that the release-level edge now\nexists even though the inventory document itself still doesn't — **the\nsubstantive conflict in the GNI inventory entry (colophon says\n\"Periodicity: non-recurring\"; the same document names a 2021 predecessor\nedition, four years before the 2025 one in hand) is untouched and still\nopen.** That conflict is now `Open-Questions-2026-08-08-sweep.docx`\nquestion 2."
+    },
+    {
+      "heading": "2. Two of the EDP inventory's five named German statistics are now nodes; the other three resolved to three different kinds of \"no\"",
+      "body": "*What this rests on*: Destatis's own \"Statistische Berichte\" theme listing\n(annual and quarterly public-sector debt series, both titled and\ncatalogued); a chain of dated quarterly press releases confirming the\nroughly t+3-to-4-month lag against the inventory's stated \"about two and a\nhalf months\"; the Finanzagentur's own English \"Outstanding Volumes\" page;\nBundesbank's English banking-statistics page for the securities-holdings\nseries. All read earlier in this session, before compaction; reproduced\nhere from the committed JSON.\n\nMinted `de-destatis-debt-annual` (\"Debt of the Public Sector Overall\nBudget\", releases_per_year 1) and `de-destatis-debt-quarterly` (\"Quarterly\nDebt of the Public Sector Overall Budget\", releases_per_year 4). Both\n**isolated for now, `fed-h15`-style** — the edge either belongs on runs\nfrom the German EDP inventory *document itself*, and that document still\nisn't a node (blocked on the same cadence question as the GNI/QNA\ninventories, unchanged). A new `deferred` entry records this explicitly so\nthe two new nodes aren't mistaken for finished work.\n\nThe other three, checked and **not** minted, for three different reasons —\nworth keeping distinct because they read alike at a glance:\n\n- **Statistic of Federal Government Debt (SFGD)** — a genuine three-way\n  discrepancy, not a missing lookup. The inventory says \"at least on a\n  quarterly basis with a time-lag of about one month\"; the Finanzagentur's\n  own English page says federal debt statistics \"are published in the\n  Bundesanzeiger in German language semi-annually\"; there is also a\n  separately-updated online dataset (\"Schulden des Bundes\") at monthly\n  granularity with no stated publication cadence. Three sources, three\n  rhythms, reported per §3 and not adjudicated.\n- **Securities holdings statistics** (formerly *Depotstatistik*) —\n  reclassified, not just unminted. Bundesbank's own English page files it\n  under \"reporting-systems/banking-statistics\" and describes bank-to-\n  Bundesbank submission deadlines (6th/8th working day after month-end) —\n  shape of a regulatory collection system feeding Bundesbank's internal\n  statistics, not a public release with its own schedule. Not filed as a\n  terminus outright; the distinction between \"the Department S\n  publication\" and \"the reporting system that feeds it\" wasn't run to\n  ground.\n- **Report on Loan Notes by Creditors of Central Government** — searched\n  under German and English phrasing, no public Finanzagentur page found.\n  Plain `NOT FOUND`, plausibly an internal return rather than a released\n  publication (inference, not confirmed)."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`esa-2010.json`'s own `_dropped` entry for the German QNA release — STALE, now corrected.** See Finding 1. Not a predecessor hand-off correction (no `G.<n>.md` claimed this), but logged here per the project's general staleness-catching habit, and because it's the same failure mode `G.56.md` documented for other files."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": "B",
+      "label": "the corpus-wide `_dropped` sweep",
+      "items": []
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Inbound edges for the four isolated ECB series `G.53.md` minted."
+    },
+    {
+      "n": 2,
+      "text": "A present-tense source for `ess-sims -> eu-reg-223-2009`."
+    },
+    {
+      "n": 3,
+      "text": "One EUR-Lex fetch to settle a correction — **closed since `G.56.md`**, per `planning/OPEN-THREADS_2026-08-08.md` 1.3: EUR-Lex works, confirmed by plain `curl`."
+    },
+    {
+      "n": 4,
+      "text": "New, this session**: find a citable publication page for the German EDP inventory document itself (Chapter/edition, dated) — the one lookup that would let `de-destatis-debt-annual` and `de-destatis-debt-quarterly` get wired to something."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "`planning/OPEN-THREADS_2026-08-08.md`** — read first, thread 2.1 specifically for the full day's sweep narrative across all three branch pairs plus the Canada/federal pair this file doesn't cover."
+    },
+    {
+      "n": 2,
+      "text": "This file**, then `G.56.md` for everything else in the branch."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md`** §2 (git), §3 (extract, don't adjudicate), §4 (sweep scoping)."
+    },
+    {
+      "n": 4,
+      "text": "`src/data/research/esa-2010.json`** and **`edp-inventory-regulation-479-2009.json`** — both `_dropped` arrays now carry the 2026-08-08 findings inline, original entries preserved below each correction."
+    },
+    {
+      "n": 5,
+      "text": "`Open-Questions-2026-08-08-sweep.docx`** — four decisions waiting on Thomas, two of which touch this branch (questions 2 and 4). ---"
+    }
+  ],
+  "session_conditions": "**A `_dropped`-sweep session, corpus-wide thread 2.1, EU's second file pair\nin the suggested execution order** (`planning/dropped-sweep-scoping_2026-08-08.md`).\nTwo files touched: `esa-2010.json` (one stale note fixed, nothing minted)\nand `edp-inventory-regulation-479-2009.json` (two new nodes, still\nunwired). Both edits, and the primary-source verification behind them\n(Destatis's own \"Statistische Berichte\" listing, live press-release dating,\nthe Finanzagentur's English \"Outstanding Volumes\" page, Bundesbank's\nbanking-statistics page), were done earlier in this same session, before a\ncontext compaction. **This file itself was written in the turn after that\ncompaction**, from the already-edited and already-committed JSON files\nrather than from a fresh primary-source pass — the quotes below are\nreproduced from what is now on disk in `src/data/research/`, not re-fetched\nthis turn. Flagged plainly because it is a different evidentiary posture\nthan a same-turn extraction, even though the extraction itself was\nfirst-hand.\n\n**Not read this turn**: `REPORTS.md`, `BACKLOG.md`, any `EU/` file other\nthan `G.56.md`, the staging blob, the prose-verification results file, any\nNZ or AU research JSON in full (only the two nodes/edges relevant to their\nown hand-offs, via targeted `grep`/`python3 -c` extraction against the\nstaged copies)."
+}

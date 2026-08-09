@@ -226,6 +226,96 @@ release, and still blocked on the same node-rule question the scoping doc
 flagged. **Next in the suggested order**: `edp-inventory-regulation-479-2009.json`
 + `esa-2010.json`.
 
+**Second session done 2026-08-08 — same pair.** Same stale-cross-file
+pattern found a third time, smaller: `esa-2010.json` had a `deferred`
+entry for the German quarterly-GDP-release → esa-2010 edge that
+`de-destatis-national-accounts.json` had already built the same day
+(2026-08-05) under a different node id — fixed, with pointer notes added
+to two adjacent still-genuinely-open entries (the GNI and QNA methods
+inventories, which stay blocked on a real "non-recurring" vs.
+demonstrated-predecessor-edition conflict — not adjudicated, still yours
+to rule on if you want to). Then worked the `edp-inventory-regulation-479-2009.json`
+"five named German statistics" lead: found and minted two (Destatis's
+annual and quarterly public-sector debt statistics, EVAS 71321 family,
+the quarterly one live-verified against a chain of dated press releases).
+They're isolated nodes for now, same shape as `fed-h15` — the edge they
+belong on runs from the German EDP inventory document itself, which still
+isn't a node (blocked on cadence, unchanged). The other three: the debt-
+level statistic (SFGD) turned up three different Finanzagentur
+publications with three different rhythms and no clean match to what the
+inventory claims — a genuine discrepancy, not a missing lookup. The
+Bundesbank securities-holdings statistic turned out, on its own English
+page, to be a bank-to-Bundesbank regulatory reporting system rather than
+a public release — closer to the terminus candidates already in this file
+than to an ordinary node. The loan-notes report: searched, not found,
+plausibly non-public. CIRCABC and the 26-further-inventories lead
+untouched — still blocked on the same non-browser-client 404. Full
+detail in both files' `_dropped` blocks.
+
+**Third session done 2026-08-08 — `nz-government-finance.json` +
+`au-government-finance.json`.** Softer pair, more judgment calls, fewer
+clean mints. Minted two NZ nodes: the Auditor-General's per-LTP-cycle
+observations report (title varies release to release — 'Matters arising
+from our audits of the 2021-31 long-term plans' in 2022, 'Observations
+from our audits of councils' 2024-34 long-term plans' in 2025 — both
+independently confirmed live, which also resolved a stale access block:
+oag.parliament.nz now redirects to ao.parliament.nz, so the 403 a prior
+session hit was against a retired domain) and Watercare's annual report
+(clean, confirmed 2010–2025 run). Both sit isolated, `fed-h15`-style: the
+edges they were found for need a source or target that still isn't a
+node (councils' long-term plans in one case; the German-EDP-style problem
+of the citing document itself not being a node in the other — for
+Watercare, I also found the specific edge as originally framed,
+`nz-lgaca-2009 -> Watercare's annual report`, isn't actually quotable —
+LGACA 2009 establishes the entity and the financial split, it doesn't
+name the annual report itself, so I left it unwired rather than force it).
+**Flagging rather than deciding**: `nz-lgaca-2009 -> Local Government Act
+2002` is still open, and the file itself says LGA 2002 "would sit under a
+very large fraction of the New Zealand slice at once... and deserves its
+own decision" — same shape as the Public Finance Act 1989 call you made
+2026-08-07. Worth a similar explicit ruling whenever you want to make it;
+I didn't mint it unasked. On the AU side, no new mints, but one important
+correction: the file's TRA-visitor-survey lead assumed the National
+Visitor Survey was still a live release "mintable by a future session" —
+it was retired end of 2024, replaced by TRA's Domestic Tourism Statistics
+(DoTS) collection. Caught before it became a wrong node, not after.
+ARIA+ checked again and still open; the specific URL found this session
+is now dead too.
+
+**Fourth session done 2026-08-08 — the four Open-Questions-2026-08-08-sweep.docx
+decisions executed, same day they came back answered.** Q1 (System of
+Macroeconomic Accounts): minted `statcan-system-macroeconomic-accounts` in
+`statcan-macro-accounts.json` as an evergreen framework node (no
+`releases_per_year`), and repointed the `fiscal-equalization-program` and
+`territorial-formula-financing` edges at it — removing the inference that
+previously mapped the statute's named framework onto a specific StatCan
+release. The arrow-toggle idea from the same answer is logged, not built —
+see §4.8. Q2 (German GNI/QNA inventories): minted
+`de-destatis-gni-inventory` and `de-destatis-qna-inventory` in
+`esa-2010.json` as regular nodes, both `releases_per_year: 0.25` —
+estimated, not stated, from the GNI inventory's demonstrated 2021-to-2025
+interval; the QNA inventory's own estimate is weaker, carried over rather
+than independently evidenced, flagged as such on the node. Both wired
+`methodology_depends_on -> esa-2010`. Q3 (NZ Local Government Act 2002):
+minted `nz-lga-2002` in `nz-government-finance.json`, following the Public
+Finance Act 1989 precedent — four edges in the same pass
+(`nz-la-annual-reports`, `nz-wellington-annual-report`,
+`nz-auckland-annual-report`, `nz-lgaca-2009`, all `methodology_depends_on`),
+built from quotes already extracted by documents that cite the Act, not
+from a fresh read of the Act's own text — legislation.govt.nz's plain-text
+extractor still returns nothing outside a browser session (NZ/G.4.md,
+reconfirmed) and one wasn't available this turn, so the reverse-cross-
+reference sweep that produced PFA 1989's best edge (NZ/G.5.md Finding 1)
+was not attempted here and is flagged as a follow-up, not assumed done. Q4
+(Canada/federal branch): `CA/` created, `CA/G.1.md` written — see that file
+for the branch's own orientation and priority list. **Net effect on the
+corpus, by my count — still needs a validator run**: reports +4 (the
+framework node, two German inventories, `nz-lga-2002`), dependencies +6
+(2 German, 4 NZ) plus 2 existing edges repointed rather than added. Validator
+run against this and the earlier three sessions combined is now the single
+most valuable five
+minutes anyone can spend on this corpus.
+
 **2.2 — Rebuild proposal Files A and B to your rulings.** `[L]` File A:
 German EDP inventory as **two dated nodes** (Dec 2015, Oct 2025), 'ESA 95'
 inconsistency flagged only. File B: **Germany only**, Ireland held until
@@ -300,6 +390,7 @@ Kadaster/BRK node is explicitly not-yet-minted).
 4.2 Search during layout warmup silently does nothing (`flyTo` dropped) — queue it or grey the box. `[S]`
 4.3 Rendering `relations` in the app — deferred by rule until there are five (currently 3). Agreed shape: hover card + search + distinct unweighted line style. `[M]`
 4.4–4.7 **The four parked UI additions — NOT greenlit** (your 2026-08-08 call, "leave the idea for now"): a domain filter (`domains` is populated everywhere and completely unused in the UI); a `supersedes`/`audits` render path; an evergreen-node visual treatment for the one-off shape; relationship-type and cadence-range filters. Listed so they are not re-proposed as new ideas.
+4.8 **Edge-direction arrows, toggleable — parked, not greenlit** (your 2026-08-08 answer to Open-Questions Q1). Framework/legislation nodes without their own cadence (`statcan-system-macroeconomic-accounts`, and the pattern generally) make direction ambiguous without an arrowhead; arrows were tried before and found confusing layered on top of the pulse animation, so the idea is a toggle — off by default, on when wanted — not a permanent addition. Explicitly deferred to a future UI pass; not to be implemented on the strength of this note alone.
 
 ---
 
@@ -343,3 +434,4 @@ Kadaster/BRK node is explicitly not-yet-minted).
 - **FP6 behind FP7** — confirmed dead end, your call.
 - **The one-off foundational instrument rule** — settled `G.52.md`.
 - **Branch hand-off lettering, hand-off spec adoption, the `caveat` reason, the `supersedes` type, `au-federal-budget`, the NZ Public Finance Act, the GitHub repo going public** — all decided and executed.
+- **The four Open-Questions-2026-08-08-sweep.docx decisions** — all answered and executed same day, 2026-08-08. System of Macroeconomic Accounts: node minted, no cadence, framework/legislation nodes generally get a node going forward on the same logic. German GNI/QNA inventories: minted as regular nodes, cadence estimated for the pulses. NZ Local Government Act 2002: minted, following the Public Finance Act 1989 precedent. Canada/federal branch: started — see `CA/G.1.md`. Don't re-ask any of these four.

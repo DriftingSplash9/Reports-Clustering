@@ -1,7 +1,22 @@
 {
   "_slice": "statcan-macro-accounts",
-  "_scope": "Resolution of the two StatCan edges held unverified at the end of V0.9, read from the two programs' own Integrated Metadatabase (IMDB) methodology records rather than from a secondary summary. Owns nothing else: no new nodes, and no edges outside statcan-national-accounts and statcan-gdp-monthly.",
-  "reports": [],
+  "_scope": "Resolution of the two StatCan edges held unverified at the end of V0.9, read from the two programs' own Integrated Metadatabase (IMDB) methodology records rather than from a secondary summary. Owns nothing else: no new nodes, and no edges outside statcan-national-accounts and statcan-gdp-monthly. EXTENDED 2026-08-08: now also owns the statcan-system-macroeconomic-accounts framework node, minted per Thomas's Q1 ruling on Open-Questions-2026-08-08-sweep.docx -- see that node's own description for the reasoning. Its User Guide is Catalogue no. 13-606-G; a companion Methodological Guide exists at Catalogue no. 13-607-X, not yet opened.",
+  "reports": [
+    {
+      "id": "statcan-system-macroeconomic-accounts",
+      "title": "Canadian System of Macroeconomic Accounts",
+      "publisher": "Statistics Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The overarching accounting framework Statistics Canada operates under for macroeconomic statistics -- the umbrella that the quarterly income-and-expenditure accounts (statcan-national-accounts, IMDB record 1901), monthly GDP by industry (statcan-gdp-monthly), the Supply and Use Tables (statcan-sut) and the National Balance Sheet Accounts all sit inside, per the User Guide's own chapter structure and per record 1901's language describing the annual benchmarks as arising 'through the construction of annual supply and use tables' within this system. Minted as a node in its own right 2026-08-08 because two federal fiscal-transfer regulations (SOR/2007-303, both the Equalization and Territorial Formula Financing divisions) name the framework itself -- not a specific release -- as the thing a statutory wage/salary term is 'determined... for the purpose of': 'as determined by Statistics Canada for the purpose of its System of Macroeconomic Accounts'. Thomas's ruling (2026-08-08, Open-Questions-2026-08-08-sweep.docx Q1): frameworks and legislative instruments a regulation is built on are worth a node even with no cadence of their own -- 'its sole role is broadcasting and that needs represented.' No releases_per_year: this is an evergreen framework, not a periodic release, the same shape as the one-off foundational instruments already in the corpus.",
+      "last_updated": null,
+      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/13-606-G",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
   "dependencies": [
     {
       "source_report_id": "statcan-gdp-monthly",

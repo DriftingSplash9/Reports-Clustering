@@ -208,6 +208,22 @@ first, in full)
     436 dependencies → ~443. Full account in
     `planning/OPEN-THREADS_2026-08-08.md` under 2.1.
 
+    **Second and third file pairs, plus decision execution, all 2026-08-08**:
+    `edp-inventory-regulation-479-2009.json` + `esa-2010.json`, then
+    `nz-government-finance.json` + `au-government-finance.json`, then —
+    same day, after Thomas returned `Open-Questions-2026-08-08-sweep.docx`
+    answered — all four of that document's decisions executed: the
+    System of Macroeconomic Accounts framework minted as a node (six edges
+    across two files repointed or built), the German GNI/QNA methods
+    inventories minted as regular nodes with an estimated cadence, New
+    Zealand's Local Government Act 2002 minted following the Public
+    Finance Act 1989 precedent, and a new `CA/` branch started with its own
+    `G.1.md`. Full accounts of all of this in
+    `planning/OPEN-THREADS_2026-08-08.md` under 2.1 (the fourth session
+    entry) and in `EU/G.57.md`, `NZ/G.6.md`, `AU/G.4.md`, `CA/G.1.md`.
+    Corpus estimate after all of it, still unconfirmed by the validator:
+    roughly 384 reports / 453 dependencies against the 372/436 baseline.
+
 4b. **Rebuild proposal Files A and B to the 2026-08-08 rulings.** The
     drafts are gone (see the P0 header note). File A (German EDP + GNI
     inventories, German public-debt statistics): rebuild with the EDP

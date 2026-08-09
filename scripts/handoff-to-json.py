@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Convert a branch hand-off note (`EU/G.<n>.md`, `NZ/G.<n>.md`, `AU/G.<n>.md`)
-into a machine-readable sidecar (`<branch>/G.<n>.json`). Branches: EU, NZ, AU —
-add new branch folder names to BRANCHES below.
+Convert a branch hand-off note (`EU/G.<n>.md`, `NZ/G.<n>.md`, `AU/G.<n>.md`,
+`CA/G.<n>.md`) into a machine-readable sidecar (`<branch>/G.<n>.json`).
+Branches: EU, NZ, AU, CA — add new branch folder names to BRANCHES below.
 
 The Markdown stays the document of record — it is what a human or an agent
 reads. The JSON is a structured index of it: the state of the branch, the
@@ -26,7 +26,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-BRANCHES = ["EU", "NZ", "AU"]
+BRANCHES = ["EU", "NZ", "AU", "CA"]
 EU = os.path.join(ROOT, "EU")  # kept for backwards compatibility in messages
 
 # Sections the spec in G.18 requires. Order matters; it is the spec's order.
@@ -276,7 +276,7 @@ def hook_mode() -> int:
         return 0
 
     norm = path.replace("\\", "/")
-    if not re.search(r"/(EU|NZ|AU)/G[._]\d+\.md$", norm):
+    if not re.search(r"/(EU|NZ|AU|CA)/G[._]\d+\.md$", norm):
         return 0
     if not os.path.exists(path):
         return 0
