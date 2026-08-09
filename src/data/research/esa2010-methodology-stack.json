@@ -1,0 +1,358 @@
+{
+  "_slice": "esa2010-methodology-stack",
+  "_researched": "2026-08-09",
+  "_status": "STAGED 2026-08-09. Item 5 (EU staging-blob batch backlog), the ESA-2010-methodology stack confirmed by EU/G.70.md's grep pass to have zero prior corpus coverage (batches 0, 1, 2, 5-15 of EU/slices/_staging/01-manifest.json). Built incrementally, cluster by cluster, per item 5(a)'s scope-not-index instruction. All 14 batches now worked: batches 8+9 (CPA/NACE), batches 6+7 (Annex A sector-classification and market/non-market rules -- no new nodes or edges), batches 5+11+12+13+14+15 (ESA 2010's own Articles 1/3 plus Annex A accrual-basis/time-of-recording rules -- no new nodes or edges), batches 1+2+10 (Eurostat's own methodology manuals -- five nodes, six dependencies), batch 0 (the Statistical Requirements Compendium, the ESA 2010 Transmission Programme document, Destatis GNI/QNA source material, the 2025 List of main statistics, the HERP revision-guidelines handbook, and the numerical-consistency guidelines handbook -- one node (eurostat-src) minted, two dependencies, closes the item 5 §8 'transmission programme tables' test explicitly). CLUSTER WORK COMPLETE for this stack's 14 batches. Total: 7 nodes, 9 dependencies, 22 dropped entries.",
+  "_note": "One node minted (cpa, from Regulation (EC) No 451/2008's own text, batch 8), one dependency (esa-2010 -> cpa). NACE itself is confirmed real and titled (Regulation (EC) No 1893/2006, live-checked at EUR-Lex) but NOT minted this pass -- no verbatim provision from NACE's own founding text was obtainable live this session (EUR-Lex's page for this older-form regulation would not render body text to WebFetch, unlike the CPA regulation's newer consolidated-form page, which did). Per Research.1.md §6, a title and a confirmed-real regulation number are not a substitute for a verbatim quote -- NACE stays open, logged in _dropped, for a session that can retrieve its Article text (or find NACE named the same way CPA was: a survey/programme's own methodology page stating it classifies by NACE, which would also satisfy §7's rule independently of the founding regulation).",
+  "_headline": "The corpus's biggest documented classification gap (esa2010-quality-reporting.json's dropped 'esa-2010 -> NACE, CPA, COICOP, COFOG, NUTS' entry, itself declined for citing a bulleted list rather than programme-level prose) now has its first resolved member: CPA is a real node, reached the way §7 prescribes -- not by reading CPA's own documentation for edges, but by reading a downstream programme (ESA 2010's own Annex A, a specific numbered paragraph, not a bulleted summary list) stating in flowing prose that it uses CPA for products.",
+  "_open_questions": [
+    "The esa-2010 -> cpa edge rests on ESA 2010 Annex A, Chapter 1, paragraph 1.22 as staged in EU/slices/_staging -- NOT independently re-verified live this session (a WebFetch attempt against the consolidated ESA 2010 PDF, eur-lex.europa.eu CELEX 32013R0549, could not locate paragraph 1.22 within the tool's read window; the document is long enough that this is inconclusive rather than a failed check). UPDATE: the same paragraph was independently staged THREE times, in three different batches, on the same original 2026-08-02 extraction session -- batch 8 (record esa2010-cpa-ref, the shorter form quoted in the dependency's basis), and batches 6 and 7 (records esa2010-a-1.22 / esa2010-nace-1.22, a longer form that includes a first sentence the batch-8 version omits: 'The ESA 2010 employs concepts and classifications (e.g. Statistical classification of economic activities in the European Union \"NACE rev. 2\" ...) that are used for other social and economic statistics of Member States ... Furthermore, the concepts and classifications in the ESA 2010 are harmonised with those of the United Nations. ...'). All three stagings agree verbatim on the operative sentence used as this edge's basis. Cross-batch agreement across three independent extraction passes is not the same as live re-verification, but it is real corroboration, and is noted here as such rather than left as a single unverified data point.",
+    "Judgement call, flagged for a future session to revisit rather than silently made: this dependency is structurally similar in kind (a document naming multiple classifications together, one of which was declined before) to the bundled-list entry esa2010-quality-reporting.json already declined to mint from -- e.g. 'contains EU-specific classifications, e.g. Classification of products by activity (CPA) ... for products and NACE Rev. 2 for industries'. The distinction drawn here: that declined entry came from a Eurostat *quality report about* ESA 2010 (a third document) citing a bulleted, multi-item heading with no per-item location; this one comes from ESA 2010's *own* Annex A text, in prose, at one specific numbered paragraph -- closer in kind to §7's naics precedent ('every edge into NAICS came from a survey's methodology page saying it classifies its respondents by NAICS') than to the declined list. If a future session judges this distinction wrong, this edge should be moved to _dropped with the same reasoning already on file for its four siblings (NACE, COICOP, COFOG, NUTS)."
+  ],
+  "reports": [
+    {
+      "id": "eurostat-src",
+      "title": "Statistical Requirements Compendium (SRC)",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Catalogue number KS-01-26-011 (2026 edition). Eurostat's own foreword: 'Eurostat, the statistical office of the European Union, publishes each year the Statistical Requirements Compendium (SRC), an essential reference document for the EU statistical acquis... It offers a comprehensive overview of the key reference elements required for the production of European statistics, including applicable legal acts, documentation needed for data compilation, methodological guidelines, data and metadata transmission requirements, and cooperation frameworks with international organisations across different thematic areas.' Its own summary adds it 'also serves as the framework for conducting compliance monitoring of the enlargement countries... in the field of statistics.' The item this file's own subject (item 5 of Research.1.md §8) was originally named for -- 'Eurostat's own structural publications. The Statistical Requirements Compendium and its data-requirement tables' -- now minted.",
+      "releases_per_year": 1,
+      "cadence_note": "Explicit annual cadence, stated directly by the document's own foreword ('publishes each year') and confirmed by the edition number (2026 edition, catalogue KS-01-26-011, following a 2024/2025 sequence the document's own summary references).",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/w/ks-01-26-011",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eurostat-manual-qna",
+      "title": "Handbook on Quarterly National Accounts",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's own methodological guidance for compiling quarterly national accounts (QNA), catalogue number KS-GQ-13-004. Its own introduction: 'This handbook is an update of the 1999 edition... including the update of ESA 2010 and associated transmission programme.' States that 'Chapter 12 of ESA 2010 describes and defines the major principles and characteristics of QNA' and that QNA's coverage 'is the same as that of ANA [annual national accounts]: they encompass the entire sequence of accounts and the corresponding aggregates as well as the supply and use framework.'",
+      "releases_per_year": 0.07,
+      "cadence_note": "Two editions confirmed by the document's own text: 1999 (original) and 2013 (the current, 'update' edition, catalogue KS-GQ-13-004). 14-year observed interval, releases_per_year 1/14 ≈ 0.07 -- the same 'latest observed interval' convention used elsewhere in this corpus for irregular recurring documents. Only one interval is known; a third edition would sharpen this.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/3859598/5936013/KS-GQ-13-004-EN.PDF/3544793c-0bde-4381-a7ad-a5cfe5d8c8d0",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eurostat-quarterly-nonfinancial-accounts-ggov",
+      "title": "Quarterly Non-Financial Accounts for General Government",
+      "publisher": "Eurostat (European Commission) / national statistical authorities",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's own ESMS metadata page (dataset gov_10q_ggnfa): 'The data correspond to quarterly non-financial accounts for the general government sector which are conceptually consistent with the corresponding annual data compiled on a national accounts (ESA 2010) basis.' Primarily derived from 'administrative and other records of general government', benchmarked against annual GFS data once more detailed annual information is available.",
+      "releases_per_year": 4,
+      "cadence_note": "Eurostat's own ESMS Timeliness section: 'Quarterly data are to be delivered three months after the end of the quarter to which the data relate. Quarterly data are released at around t+112 days after the reference quarter.'",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10q_ggnfa_esms.htm",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eu-manual-qnfagg",
+      "title": "Manual on Quarterly Non-Financial Accounts for General Government",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Methodological guidance and Member-State compilation-practice reference for the quarterly non-financial general-government accounts. Eurostat's own ESMS page (data compilation section): 'A Manual on Compilation of Taxes and Social Payments on a Quarterly Basis was first published in 2002. A Manual on Quarterly Non-Financial Accounts for General Government (2006) replaces the first manual providing methodological guidance and describing Member States' compilation practices for all ESA95 transactions. An updated Manual on Quarterly Non-Financial Accounts for General Government (2011 edition) was released in September 2011.' Treated here as the lineage beginning with the 2006 title (the 2002 predecessor carries a different title and is recorded as historical context, not the same node).",
+      "releases_per_year": 0.2,
+      "cadence_note": "2006 (first edition under this title) to 2011 (updated edition): 5-year observed interval, releases_per_year 1/5 = 0.2. The 2002 predecessor (different title, 'Manual on Compilation of Taxes and Social Payments on a Quarterly Basis') is not used in the interval calculation.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10q_ggnfa_esms.htm",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eu-manual-qfagg",
+      "title": "Manual on Quarterly Financial Accounts for General Government",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Catalogue number KS-GQ-17-012. Eurostat's own publication summary: 'The second edition of the Manual on Quarterly Financial Accounts for General Government provides a detailed insight into the sources and methods used by countries to compile the data on quarterly financial accounts for general government... It integrates ESA 2010 concepts and documents improvements in compilation practices achieved since the first edition... compiled under the supervision of the Government Finance Statistics Task Force and validated by the Excessive Deficit Procedure Working Group.' The manual's own preface: 'reflecting the change from ESA95 to ESA2010.' Background section: the material 'was later used to produce, in 2008, the first version of the Manual on sources and methods for quarterly financial accounts for general government. This version, the 2017 version, is the first update of the manual.'",
+      "releases_per_year": 0.11,
+      "cadence_note": "Two editions confirmed by the manual's own text: 2008 (first version) and 2017 (second edition, 'the first update'). 9-year observed interval, releases_per_year 1/9 ≈ 0.11.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/-/ks-gq-17-012",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "eu-manual-mgdd",
+      "title": "Manual on Government Deficit and Debt – Implementation of ESA 2010 (MGDD)",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Catalogue number KS-GQ-23-002 (2022 edition, current). Its own preface: 'Eurostat publishes the Manual on Government Deficit and Debt – ESA Implementation (MGDD) complementing or interpreting the general rules of ESA 2010... The MGDD, first published in 1999, provides guidance on the appropriate statistical treatment of specific government operations as well clarifications on the issues raised in the European Union regarding government finance statistics. It is an indispensable complement to ESA 2010.' Sets out that 'the reference values for deficit and debt are based on concepts defined in the European System of Accounts (ESA 2010)', that the government surplus/deficit is 'in national accounts referred to as the net lending (+)/borrowing (–) (B.9)', and that debt is 'the total consolidated gross debt at face value' in categories 'defined in ESA 2010'. States ESA 2010 records transactions 'on an accrual basis, i.e., when the economic activity takes place, rather than when the cash is paid.'",
+      "releases_per_year": 0.33,
+      "cadence_note": "First published 1999; current edition 2022 (KS-GQ-23-002). Live-checked this session (not in the staged batch) for intermediate editions, since a 1999-to-2022 span alone would be a poor cadence estimate: confirmed editions found at 2014 (KS-GQ-14-010), 2016 (KS-GQ-16-001), 2019 (KS-GQ-19-007), 2022 (KS-GQ-23-002). Using the latest observed interval (2019 to 2022, 3 years) per this corpus's standing convention: releases_per_year 1/3 ≈ 0.33.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/w/ks-gq-23-002",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "cpa",
+      "title": "Statistical Classification of Products by Activity in the European Economic Community (CPA)",
+      "publisher": "European Parliament and Council of the European Union",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Established by Regulation (EC) No 451/2008. Article 1(1): 'This Regulation establishes a new common CPA within the Community in order to ensure relevance with respect to the economic reality and comparability between national, Community and international classifications and hence national, Community and international statistics.' Article 3: 'The Commission shall use the CPA for all statistics classified according to products by activity.' A six-level hierarchical structure (Article 2(1)): sections, divisions, groups, classes, categories, subcategories. CPA Version 2.2 has applied for data transmissions since 1 January 2025. One-off foundational instrument per Research.1.md §4 (a classification standard, same shape as naics/isic/anzsic already in this corpus) -- amended periodically (2.1, 2.2) but read here from its current consolidated form, not as a recast lineage with its own cadence.",
+      "last_updated": null,
+      "url": "https://eur-lex.europa.eu/eli/reg/2008/451/2025-01-01/eng",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eurostat-src",
+      "target_report_id": "esa-2010",
+      "relationship_type": "cites",
+      "basis": "SRC 2026 edition, §2.1.4 LEGAL BASIS: 'Regulation (EU) No 549/2013 of the European Parliament and of the Council of 21 May 2013 on the European System of national and regional accounts in the European Union (ESA 2010), OJ L 174, 26.6.2013, p. 1.' A catalogue entry naming ESA 2010 as the legal basis for one of its own reference sections, not a computational input the SRC's own content is derived from -- cites, the same treatment eu-manual-mgdd's Regulation 479/2009 reference above received, for the same reason (a reference/index document's own legal-basis citations describe what it catalogs, not what it is built from).",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/23260479/KS-01-26-011-EN-N.pdf/88c6a29b-9346-c9c0-b92a-1883473c265d?version=1.0&t=1773941683844&download=true"
+    },
+    {
+      "source_report_id": "eurostat-src",
+      "target_report_id": "eu-reg-2016-2304",
+      "relationship_type": "cites",
+      "basis": "SRC 2026 edition, §2.1.4 LEGAL BASIS (continued): 'Commission Implementing Regulation (EU) 2016/2304 of 19 December 2016 on the modalities, structure, periodicity and assessment indicators of the quality reports on data transmitted pursuant to Regulation (EU) No 549/2013.' eu-reg-2016-2304 is already a node in this corpus (esa2010-quality-reporting.json, minted G.53.md). Same cites treatment as the esa-2010 edge above.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/23260479/KS-01-26-011-EN-N.pdf/88c6a29b-9346-c9c0-b92a-1883473c265d?version=1.0&t=1773941683844&download=true"
+    },
+    {
+      "source_report_id": "eurostat-manual-qna",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Handbook on Quarterly National Accounts (KS-GQ-13-004), p. 19: 'Chapter 12 of ESA 2010 describes and defines the major principles and characteristics of QNA.' Chapter 12 also 'identifies issues that are of special significance in QNA... time of recording; flash estimates; balancing and benchmarking; chain-linked volume estimates; seasonal and calendar adjustments.'",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/5936013/KS-GQ-13-004-EN.PDF/3544793c-0bde-4381-a7ad-a5cfe5d8c8d0"
+    },
+    {
+      "source_report_id": "eurostat-manual-qna",
+      "target_report_id": "eu-manual-qnfagg",
+      "relationship_type": "cites",
+      "basis": "Handbook on Quarterly National Accounts, near §2.194: 'Further guidance is provided in the Eurostat Manual on Quarterly Non-financial Accounts for General Government.' Pointer to further reading, not a computational input -- cites rather than methodology_depends_on.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/5936013/KS-GQ-13-004-EN.PDF/3544793c-0bde-4381-a7ad-a5cfe5d8c8d0"
+    },
+    {
+      "source_report_id": "eurostat-quarterly-nonfinancial-accounts-ggov",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ESMS metadata (gov_10q_ggnfa), Statistical concepts and definitions: 'For definitions of the transactions, see European system of accounts, 2010 edition (ESA2010).' Data compilation section adds that quarterly data are completed 'by conceptual adjustments in order to bring quarterly data in line with ESA2010 concepts', and the quarterly figures 'should be consistent' with the corresponding annual data transmitted under 'table 2 \"Main aggregates of general government\" of the ESA2010 transmission programme.'",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10q_ggnfa_esms.htm"
+    },
+    {
+      "source_report_id": "eu-manual-qfagg",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Manual on Quarterly Financial Accounts for General Government (2017 edition), Introduction/legal basis: 'The reporting requirements for quarterly financial accounts for general government are defined in the European Parliament and Council Regulation (EU) No 549/2013 of 21 May 2013 (the ESA2010 Regulation), specifically in its Annex B, the ESA Transmission Programme.'",
+      "evidence_url": "https://www.cbs.nl/-/media/_pdf/2019/39/manual-on-qfagg---2017-edition.pdf"
+    },
+    {
+      "source_report_id": "eu-manual-mgdd",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MGDD (2022 edition), Introduction -- Scope and Definitions: 'The reference values for deficit and debt are based on concepts defined in the European System of Accounts (ESA 2010).' Preface: MGDD is 'an indispensable complement to ESA 2010', 'complementing or interpreting the general rules of ESA 2010.'",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/16029761/KS-GQ-23-002-EN-N.pdf/77a75b07-61c3-7d34-5243-70d09bc00e44"
+    },
+    {
+      "source_report_id": "eu-manual-mgdd",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "cites",
+      "basis": "MGDD (2022 edition), Introduction -- The Excessive Deficit Procedure (EDP): 'Council Regulation (EC) No 479/2009, as amended by Council Regulation (EU) No 679/2010 and Commission Regulation (EU) No 220/2014, requires that EU Member States report EDP related data to Eurostat twice per year at end of March and at the end of September.' Cited as the legal framework the manual operates under, not a source the manual's own content is derived from -- cites, not methodology_depends_on.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/16029761/KS-GQ-23-002-EN-N.pdf/77a75b07-61c3-7d34-5243-70d09bc00e44"
+    },
+    {
+      "source_report_id": "esa-2010",
+      "target_report_id": "cpa",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ESA 2010, Annex A, Chapter 1, paragraph 1.22 (as staged, not independently re-verified live this session -- see _open_questions): 'The ESA 2010 contains EU-specific classifications, e.g. Classification of products by activity (CPA) ... for products and NACE Rev. 2 for industries (both are harmonised with the corresponding UN classifications).' The 'harmonised with the corresponding UN classifications' clause is the §5a trap (not a dependency, not used as one); the operative clause -- ESA 2010 'contains' and uses CPA for products -- is read as the dependency, on the same footing as a survey's methodology page stating it classifies respondents by NAICS.",
+      "evidence_url": "https://eur-lex.europa.eu/eli/reg/2013/549"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "esa-2010 -> NACE (Statistical Classification of Economic Activities, Rev. 2)",
+      "source": "esa-2010",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "NACE is real, titled and confirmed at EUR-Lex this session -- 'Regulation (EC) No 1893/2006 of the European Parliament and of the Council of 20 December 2006 establishing the statistical classification of economic activities NACE Revision 2 and amending Council Regulation (EEC) No 3037/90 as well as certain EC Regulations on specific statistical domains' -- but no verbatim article text was retrievable live this session (two WebFetch attempts against eur-lex.europa.eu's eli and legal-content forms for CELEX 32006R1893 both returned only metadata/navigation, not body text, unlike the CPA regulation's own newer-form page which rendered cleanly). Per Research.1.md §6 a confirmed title is not a substitute for a verbatim quote. The same ESA 2010 Annex A 1.22 paragraph names NACE Rev. 2 for industries in the same sentence that supports the cpa edge above -- once NACE's own Article text (or a national/EU release's own methodology page stating it classifies by NACE, the way grok-r3-netherlands-poland.json's SBR register already does in passing for a different node) is in hand, this edge is one step away, not a fresh search."
+    },
+    {
+      "edge": "CPA -> Central Product Classification (CPC, UN)",
+      "source": "cpa",
+      "target": null,
+      "reason": "note",
+      "why": "EUR-Lex summary, Key points: 'The CPA is connected to the United Nations' products and services classification, the Central Product Classification (CPC), via a correspondence table.' A correspondence/comparability table between two classifications, not a dependency -- same §5a shape as CPA's own 'consistent with'/'harmonised with' language toward NACE (see the minted edge's basis note). CPC is not a node in this corpus and this quote would not be grounds to mint one even if it were: correspondence tables document alignment, not derivation."
+    },
+    {
+      "edge": "CPA ↔ NACE structural alignment (four records: cpa-summary-nace-link, cpa-nace-structural, cpa-nace-summary, cpa-nace-alignment)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "All four staged records describe CPA and NACE as 'linked', 'consistent with', 'a structure parallel to', or 'aligned with' one another -- the staging batch's own notes field flagged the 'consistent with' language as a non-dependency on extraction, correctly, per §5a. No edge between cpa and nace is minted from this material; the two classifications' relationship is structural/taxonomic (CPA products map onto NACE activities down to the fourth level), not one input feeding another."
+    },
+    {
+      "edge": "CPA version-to-version and CPA-to-CN correspondence tables (cpa-corr-purpose, cpa-corr-listed)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "General description of what a correspondence table is, plus a listing of the two specific tables Eurostat currently publishes (CPA 2.1->2.2, and CPA 2.2-to-Combined-Nomenclature-2025). Context for the cpa node's own revision history, not independently node-worthy -- CPA 2.1/2.2 are versions of the one minted node, not separate publications, and the Combined Nomenclature (CN) is a customs/trade classification outside this batch's scope."
+    },
+    {
+      "edge": "ESA 2010 Annex A -- general government sector (S.13) definition, market/non-market producer test, control criteria (batches 6+7, 15 records: esa2010-a-1.34/1.35/2.35/2.38/2.39/2.111/2.113/3.19/3.24/3.26/3.37, esa2010-50pct-3.19/1.37/3.32/3.37)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "All fifteen records are ESA 2010's OWN definitional text -- how the Regulation itself defines the general government sector (S.13, Annex A 2.111: 'institutional units which are non-market producers whose output is intended for individual and collective consumption... financed by compulsory payments'), its four subsectors (2.113: S.1311-S.1314), the market/non-market boundary (the 50% cost-coverage-by-sales test, 3.19/3.32/1.37), and the control-criteria checklist that pulls a government-controlled corporation into or out of general government (2.38's eight indicators, 2.39's five non-profit indicators). No OTHER document is named anywhere in this material -- it is entirely ESA 2010 describing its own classification apparatus, the same shape Research.1.md §7 warns produces almost nothing when read for edges ('Do not research a classification standard by reading the classification'). Kept as one bundled entry rather than fifteen, per the same convention esa2010-quality-reporting.json's own classification-gap entry used, because it is one finding (this material yields no edges) rather than fifteen separate findings. Genuinely useful as corroborating detail for esa-2010's own description if a future session wants to enrich it, and as the primary-source backing for the 50% market/non-market rule that other EU-branch files already invoke by name (e.g. eurostat-edp-gfs-ecb-statistics.json's cadence notes reference 'general-government exposure breakdowns'); not pursued further here since enriching an existing node's description is not this item's task."
+    },
+    {
+      "edge": "NACE Rev. 2's use inside ESA 2010 at the local-KAU / four-digit-class level, and ESA 2010's own aggregated NACE groupings (esa2010-nace-1.58, esa2010-nace-ch23-intro, esa2010-nace-regrouping)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Further detail on how ESA 2010 uses NACE Rev. 2 internally (local KAUs classified 'at the class level (four digits) of the NACE Rev. 2'; Chapter 23 'sets out the classifications used for sectors, activities and products'; ESA 2010 uses aggregated NACE-based groupings A*3/A*10/A*21/A*38/A*64 for transmission). Reinforces, but does not add to, the esa-2010 -> NACE _dropped entry already logged above (still no-node-yet, still needs NACE's own Article text or a downstream programme's own citation)."
+    },
+    {
+      "edge": "Regulation (EU) No 549/2013 Articles 1(1)/1(2)/3(1) and Annex A 1.01/1.05/1.19(b)/2.111/2.113/8.100 (batch 5, 9 records)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "ESA 2010's own founding text -- what it is, what its two parts are (Annex A methodology, Annex B transmission programme), the Member States' transmission obligation, the general government sector (S.13) and its four subsectors, and the definition of net lending/net borrowing (B.9, Annex A 8.100) used as the ESA definition of government deficit/surplus feeding the excessive deficit procedure (Annex A 1.19(b)). No new node or edge: this batch substantially DUPLICATES material the corpus already holds -- esa-2010.json's own `description` field already quotes Article 1(2) nearly verbatim ('a methodology (Annex A) on common standards... a programme (Annex B) setting out the time limits...'), and esa-2010.json's own _dropped array already carries the identical Annex A 1.05 quote ('The ESA 2010 is consistent with the worldwide guidelines on national accounting set out in the System of National Accounts 2008 (2008 SNA)') under the esa-2010 -> sna-2008 entry, word for word. The S.13/subsector definitions (2.111, 2.113) duplicate batch 6's own esa2010-a-2.111/2.113 records above. The B.9 and EDP-link material (8.100, 1.19(b)) is genuine and useful but reinforces an edge already minted elsewhere in the corpus (eurostat-edp-notification-tables -> esa-2010 in eurostat-edp-gfs-ecb-statistics.json) rather than creating a new one."
+    },
+    {
+      "edge": "ESA 2010 Annex A accrual-basis / time-of-recording rules and their government/tax exceptions (batches 11, 12, 13, 14, 15 -- 8 distinct paragraphs, staged five times with heavy overlap)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "The fundamental accrual principle (1.101: flows recorded 'when economic value is created, transformed or extinguished'; 1.102: output/asset-sale/interest examples; 1.105: same-point-in-time recording across units), its explicit relaxation for government cash-basis source data (1.103), the exception for uncollectible taxes and social contributions so they do not distort net lending/borrowing (1.104), and the operational time-adjusted-cash method for taxes (4.26, 4.150(b)) are all ESA 2010's own internal accounting rules -- no other document is named anywhere across all five batches, so no edge is extractable, the same conclusion as batches 6+7's classification rules above and for the identical reason (Research.1.md §7). WORTH FLAGGING SEPARATELY FROM THE CONTENT FINDING: these five batches (11-15) are near-duplicates of one another, not five distinct threads -- all quote paragraph 1.101 identically (batches 11 and 14), all quote 1.103/1.104 identically (batches 11, 12, 13, 15), and 12/13/15 each also carry the same 4.26/4.150 time-adjusted-cash material under slightly different framing headers ('exceptions to the accrual basis', 'cash basis rules', 'exceptions to the accrual basis' again). This looks like an artifact of how the original 2026-08-02 splitting session scoped its stop conditions batch by batch rather than five genuinely different provisions -- worth knowing for whoever next reads 01-manifest.json's scope strings closely: a batch count is not the same as a distinct-content count, even within one coherent subject."
+    },
+    {
+      "edge": "Eurostat Manual of Supply, Use and Input-Output Tables (KS-RA-07-013, 2008) -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Real and titled -- own Foreword: 'By publishing this Manual, Eurostat is closing a gap for the European System of Accounts (ESA 1995).' Cited by name from the QNA Handbook (see qna-2013-sut-manual, batch 1) and still listed as Annex 3 to the current naio_10_n ESMS metadata page (live-checked this session), so it is still the live reference document. NOT MINTED: only one edition (2008, written against ESA 1995, superseded by ESA 2010 in 2013) is evidenced anywhere -- a live search this session for a later edition (WebSearch, 'Eurostat Manual of Supply, Use and Input-Output Tables edition ESA 2010 update') found no second edition, only the same 2008 KS-RA-07-013 document and its own table of contents. Per Research.1.md §4, 'a single edition with no second one anywhere in sight is still not a node.' Distinguished from eurostat-suiot (already minted, in eu-meta-docx-batches.json) -- that node is the recurring release (the tables themselves, produced annually); this is the one-off guidance manual describing how to compile them, and the two are not the same document."
+    },
+    {
+      "edge": "GNI inventories and 'Reports on the quality of GNI data' (EU-wide verification-cycle process description, batch 1: gni-inventories-def, gni-inventories-purpose, gni-inventories-annexes, gni-quality-reports, gni-gnig)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Eurostat's own landing page describing the general GNI-verification-cycle process: countries submit GNI inventories 'at the beginning of each multiannual verification cycle, which lasts about 5 years', plus an annual 'Reports on the quality of GNI data' alongside each year's GNI questionnaire, both checked by Eurostat and presented to the GNI expert group (GNIG) each November. Not minted as a new node: this is EU-process description on a landing page, not a specific titled document with its own URL distinct from what the corpus already holds -- it corroborates and gives useful process context for the already-minted de-destatis-gni-inventory / de-destatis-qna-inventory nodes (esa-2010.json) and their own 'Eurostat GNI verification cycle 2020 to 2024' reference, but does not itself name a new mintable release. The annual 'Reports on the quality of GNI data' is a genuine lead for a future session (each Member State submits one annually, alongside the GNI questionnaire) -- not pursued here since the landing page names it generically rather than giving one country's actual titled report."
+    },
+    {
+      "edge": "SUT/IOT Manual's own 'consistent with SNA 1993' language (sut-2008-1.1-sna) and QFAGG/QNFAGG 'conceptually consistent with ESA 2010' language (qnfagg-esms-consistent)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Two more instances of the §5a trap, both flagged in the staging batch's own notes on extraction: the SUT Manual states its ESA 1995 input-output framework 'is fully consistent with the world-wide System of National Accounts (SNA 1993)', and the quarterly non-financial accounts release states it is 'conceptually consistent with the corresponding annual data compiled on a national accounts (ESA 2010) basis.' Agreement/comparability language, not dependency language -- quoted for the record, not minted as edges."
+    },
+    {
+      "edge": "Source categories named without titles: business register (sut-2008-ch3-business-register), administrative and other government records (qnfagg-esms-sources), and the list of HBS/GFS/enterprise/capital-expenditure/construction surveys (qna-2013-sources)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "All three records name source CATEGORIES rather than specific titled publications -- 'a high quality business register', 'administrative and other records of general government', and a bare list of survey types ('Household budget survey (HBS)', 'Government finance statistics', 'Enterprise (or business) surveys', 'Capital expenditure survey', 'Building and engineering construction activity surveys') with no publication names attached. Fails §4 point 2 ('it has a title') -- these read as AGENCY-ONLY-shaped or terminus-shaped leads (the business register and administrative records in particular have the unpublishable/administrative-record flavour Research.1.md §4 describes under Termini) but none is specific enough to classify definitively without a follow-up search for the actual named register or survey release."
+    },
+    {
+      "edge": "Quarterly Financial Accounts for General Government release itself (dataset gov_10q_ggfa, qfagg-2017-dataset)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Named and given a dataset code ('Quarterly financial accounts for general government (gov_10q_ggfa)', published on Eurostat's public database once validated) -- the same shape as eurostat-quarterly-nonfinancial-accounts-ggov, which WAS minted this session from its sibling batch. NOT minted here: unlike the non-financial release's own ESMS page (which gave an explicit 't+112 days' timeliness statement), this batch's only source for the financial release is the QFAGG manual's own background section, which names the dataset but states no cadence. A future session should read gov_10q_ggfa's own ESMS metadata page directly (the same page family as gov_10q_ggnfa) rather than treat this as closed."
+    },
+    {
+      "edge": "Maastricht Treaty Article 104 / TFEU Article 126 (mgdd-2022-edp-mission)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "MGDD's own preface cites the EDP's treaty basis: 'originally defined by the Maastricht Treaty (Article 104) and currently defined in the 2012 consolidated version of the Treaty on the Functioning of the European Union (TFEU) (Article 126)... Eurostat, from 1994 onwards, has the mission to ensure a proper application of this conceptual reference framework.' Treaty articles, not minted as separate nodes -- consistent with this corpus's existing practice of treating foundational treaty provisions as legal-spine context rather than nodes in their own right (cf. Regulation 223/2009 and the EDP Regulation 479/2009, which ARE minted, being the operative secondary legislation the treaty provisions are implemented through)."
+    },
+    {
+      "edge": "ESA 2010 Transmission Programme document itself (esa-tp-intro, esa-tp-tables-overview) -> any named national or EU publication",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "THIS CLOSES THE SPECIFIC TEST Research.1.md §8 item 5 originally named this item for: 'the ESA 2010 transmission programme's own tables (the better test of the branch's central asymmetry finding than Annex XI turned out to be)'. Eurostat's own standalone Annex-B companion document (KS-01-13-429-3A-C-EN.PDF, 'This document presents the programme of national accounts data delivery within the framework of... ESA 2010, as defined in Annex B... (cf. also Article 3 of this regulation)') gives its full table-by-table overview: 'Table No | Subject of the tables | Deadline t + months | Period covered' -- e.g. 'Table 1 | Main aggregates -- quarterly | 2 | 1995Q1 onwards', 'Table 8 | Non-financial accounts by sector | 9 | 1995 onwards'. Every row names a TABLE NUMBER, a SUBJECT, and a DEADLINE -- never a publication title. RESULT: the test is now run on the transmission programme's own dedicated presentation document, not just Annex B's bare legal text (already tested and found the same way in eu-draft-budget.json's _dropped array) -- same finding, now with a second, independent primary source. Confirms rather than merely repeats the branch's central asymmetry finding (EU/slices/README.md): supranational instruments bind by naming table numbers and deadlines, not publications."
+    },
+    {
+      "edge": "SRC's own dataset/table codes (src-2026-data-requirements-main, src-2026-nasec, src-2026-namain-annual, src-2026-namain-quarterly -- ANA_GDP_A, QNA_GDP_Q, NASEC_T0800, NAMAIN_T01GDP_A/T0301_A/T0500_A/T2000_A/T2200_A, NAMAIN_T01GDP_Q/T01EMP_Q)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "The SRC's own data-requirement tables name eDAMIS dataset codes with explicit timeliness/periodicity metadata (e.g. 'NASEC_T0800: SDMX Non-Financial Accounts by Sector - Annual. Timeliness: T+9 months; Periodicity: A'). Same shape as the Annex B transmission-programme tables immediately above -- table/deadline codes, not separate titled publications. Not minted as nodes, consistent with the corpus's existing treatment of Annex B and its tables."
+    },
+    {
+      "edge": "Destatis GNI inventory Chapter 10 / QNA inventory source material (batch 0: destatis-gni-2025-1.02, destatis-gni-main-sources, destatis-gni-sector-accounts, destatis-gni-production-sources, destatis-gni-shd-backcast, destatis-gni-housing, destatis-gni-admin-sources, destatis-gni-revision-2024, destatis-qna-purpose, destatis-qna-transmission, destatis-qna-publication, destatis-qna-revisions)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "CONFIRMED SUBSTANTIALLY REDUNDANT with material already in the corpus, checked directly rather than assumed: destatis-gni-2025-summary's quote ('The present document contains the detailed description of the methods and sources used for the compilation of the gross domestic product and the gross national income of the Federal Republic of Germany in compliance with the European System of National Accounts (ESA) 2010') is WORD FOR WORD the same quote already used as this exact dependency's basis in esa-2010.json's de-destatis-gni-inventory node. The Chapter 10 source list this batch gestures at ('main sources overview', 'production sources') was already read in full by a prior session and preserved verbatim in de-destatis-source-surveys.json ('Its own Chapter 10... is a three-tier numbered table naming every source statistic by EVAS register number and title... 46 Destatis surveys (10.1), 16 other official sources (10.2), 7 non-government sources (10.3)'). Spot-checked this session: of the GNI-side EVAS codes named in this batch (42251, 47410, 45341, 31211, 31121), three (42251, 47410, 31211) already appear in de-destatis-source-surveys.json's preserved table; the QNA-side revision cadence statement (2024 revision, 2029 next) already appears in esa-2010.json's de-destatis-gni-inventory cadence_note. Not re-minted."
+    },
+    {
+      "edge": "Destatis QUARTERLY National Accounts inventory's OWN source list -- distinct from the GNI inventory's Chapter 10 (batch 0: destatis-qna-production-sources, destatis-qna-expenditure, destatis-qna-income-employment -- EVAS 42111, 42153, 45212, 45213, 45214, 47414, 53211, 71512, 71517, 83111, 841, 843, 13111)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "UNLIKE the GNI-inventory material immediately above, this IS genuinely new: these EVAS codes come from a SEPARATE Destatis document (the Quarterly National Accounts inventory, not the annual GNI inventory de-destatis-source-surveys.json already worked from) and NONE of them (checked directly: 42111, 42153, 45212, 45213, 45214, 47414, 53211, 71512, 71517, 83111, 841, 843 all absent from de-destatis-source-surveys.json) are yet in the corpus. Genuinely monthly/quarterly named surveys with EVAS register codes -- 'monthly report including orders received... (EVAS 42111)', 'monthly statistics of retail trade (EVAS 45212)', 'employment statistics (EVAS 13111) of the Federal Employment Agency' -- the same evidence shape (§7's strongest class, a source table naming inputs by register number) that de-destatis-source-surveys.json already mined successfully for three nodes from the GNI-side list. NOT minted this pass: each candidate needs the same individual verification (title, live cadence check) de-destatis-source-surveys.json gave its three GNI-side picks, which this batch's brief per-item quotes do not substitute for. Flagged as a real, ready-to-work lead for a focused follow-up session on the QNA-specific German source-survey list, distinct from (and smaller than) re-opening the already-exhausted GNI-side Chapter 10 table."
+    },
+    {
+      "edge": "2025 List of main statistics (batch 0: list-main-stats-2025-na, list-main-stats-2025-other -- NAMA, NAMQ, NASA, NASQ, GovQ, GovD&D, NA-Pen, BoP, MUFA, PEEIs, Price-HICP, STS-*, SBS, IntGood, EmplUnempl, LC, R&D)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Eurostat's own 'list of main statistics' (2025 edition, version 4 December 2024) catalogues seventeen statistic families with legal bases and frequencies, but as staged this batch only carries TWO bundled, summary-shaped records rather than a per-family breakdown -- NOT the 'nine-record split' Research.1.md §8 item 5 originally flagged as still owed ('the 2025 list of main statistics (already staged, still needing its nine-record split -- see cheap checks)'). THAT SPECIFIC CHEAP CHECK REMAINS OUTSTANDING -- this batch does not close it, and a future session should not assume it does just because 'list of main statistics' now appears in this file. Of the seventeen families named, most correspond to material already covered elsewhere in the corpus under other names (NAMA/NAMQ/NASA/NASQ/GovQ/GovD&D/NA-Pen are ESA 2010's own transmission-programme tables, already assessed as table-codes-not-publications above; Price-HICP is eurostat-hicp, already a minted node) or are too granular/bundled in this staging to mint individually (MUFA -- 'Quarterly Financial Accounts... collected and re-transmitted by the ECB' -- is a specific, real lead worth a dedicated look, since it is not obviously the same thing as any already-minted ECB series)."
+    },
+    {
+      "edge": "Practical guidelines for revising ESA 2010 data (HERP handbook, KS-GQ-18-012, 2019 edition) -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Real, titled Eurostat handbook, heavily cited BY other material already in this file (destatis-qna-revisions: 'the German NA follow the principles of the Harmonized European Revision Policy (HERP)'; consistency-org-recommendations: 'in line with the HERP') and load-bearing (sets the benchmark-revision cycle -- years ending 0/5, implementation 4/9 -- that de-destatis-gni-inventory's own cadence_note already references). NOT MINTED: only one edition (2019) is evidenced anywhere -- a live search this session (WebSearch, 'Practical guidelines for revising ESA 2010 data KS-GQ edition 2019 update') found only the same 2019 KS-GQ-18-012 document repeated across Eurostat's own site, the EU Publications Office, and the UN Statistics Division's mirror; no second edition. Per Research.1.md §4, a single edition with no second one anywhere in sight is still not a node, and this is not the 'one-off foundational instrument' shape either (a Eurostat guidance handbook, not a treaty/regulation/policy) -- same reasoning already applied to the SUT/IOT Manual above."
+    },
+    {
+      "edge": "Consistency of ESA 2010 based national accounts (guidelines, KS-GQ-20-004, 2020 edition) -> node",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Real, titled Eurostat handbook (twenty-seven numbered recommendations on numerical consistency across ESA 2010 tables, with a Member-State good-practice appendix explicitly flagged in its own staged notes as 'illustrative only'). NOT MINTED: only one edition (2020) is evidenced anywhere -- a live search this session (WebSearch, 'Consistency of ESA 2010 based national accounts KS-GQ-20-004 edition update') found only the same 2020 KS-GQ-20-004 document; no second edition. Same reasoning as the HERP handbook immediately above: single edition, not a foundational-instrument shape, not minted."
+    },
+    {
+      "edge": "ESA 2010 TP table codes and transaction codes cited inside the HERP and consistency-guidelines material (herp-quality-indicators' RI1/RI5 indicators, consistency-checks' T1/T2/T6/T8/T801/T25/T27 and P.3/P.5/D.1/B.9 transaction codes, consistency-ms-examples)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Internal ESA 2010 apparatus (revision-quality indicators, transmission-programme table numbers, transaction classification codes) and, for consistency-ms-examples, national good-practice illustrations the staging batch's own notes already flag as non-edge-producing ('These are illustrative only; edges remain governed by the EU-level rules, not by the national examples themselves'). No new document named in any of this material; logged for completeness, not pursued as leads."
+    },
+    {
+      "edge": "2026 Work Programme content re-staged in batch 38 (wp2026-legal-basis, wp2026-objectives, wp2026-focus-areas, wp2026-thematic-priorities)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Four of batch 38's six records are the SAME 2026 Work Programme document already fully covered via batches 60 and 65 (eurostat-annual-work-programme, eu-meta-docx-batches.json / G.70.md's earlier grep-pass finding) -- its legal basis (Regulation (EU) 2021/690, implementing Regulation (EC) No 223/2009 Article 4), its objectives, its focus on implementing Regulation (EU) 2024/3018 (amending Regulation (EC) No 223/2009), and its thematic priority list. No new node or edge; confirmed-redundant, not re-minted."
+    },
+    {
+      "edge": "ESS common position on future strategic priorities (May 2025) and the ESAC opinion on the draft post-2027 programming framework (August 2025) -> node (batch 38: ess-common-position-esp-link, esac-post2027-priorities)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "The genuinely new material in batch 38 -- two real, titled, dated documents about the SUCCESSOR to the current framework, not the current one. The ESS common position's own stated purpose: 'to serve as input for the preparation of the next draft framework of European statistics -- the European Statistical Programme (ESP) -- under the post-2027 Multiannual Financial Framework (MFF)... included in the new framework European statistical programme that will be part of the post-2027 MFF.' The ESAC opinion (29 August 2025) responds to that same draft framework with six lettered priorities (competitiveness/productivity statistics, macro-economic statistics including an ESA 2010 update 'to better reflect wellbeing and sustainability', defence statistics, climate/sustainability statistics, social/population statistics, ESS innovation). NOT MINTED: both documents are real and load-bearing in a strategic sense, but neither has anything to connect an edge TO -- the post-2027 European Statistical Programme they both feed does not exist yet (the post-2027 MFF period has not started), so there is no target node for either 'cites' or 'methodology_depends_on' to point at, and minting either as an isolated node with no edge risks the same 'ungrounded isolated addition' problem eurostat-edp-gfs-ecb-statistics.json's own MIP/AMR entry already flagged and declined for the same reason. Worth revisiting once the post-2027 ESP itself is adopted and staged -- at that point both documents become its natural predecessor citations."
+    }
+  ]
+}

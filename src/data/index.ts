@@ -69,6 +69,7 @@ import grokH1International from './research/grok-h1-international-reports.json'
 import gbUkspfSuccession from './research/gb-ukspf-succession.json'
 import nzStatsnzNationalAccounts from './research/nz-statsnz-national-accounts.json'
 import noGovernmentFinance from './research/no-government-finance.json'
+import esa2010MethodologyStack from './research/esa2010-methodology-stack.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -171,6 +172,7 @@ const slices: ResearchSlice[] = [
   gbUkspfSuccession as unknown as ResearchSlice,
   nzStatsnzNationalAccounts as unknown as ResearchSlice,
   noGovernmentFinance as unknown as ResearchSlice,
+  esa2010MethodologyStack as unknown as ResearchSlice,
 ]
 
 function assemble() {

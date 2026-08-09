@@ -363,6 +363,104 @@ first, in full)
    refutes: where the EU binds by Regulation it names nobody, where it
    coordinates by agreement it names its sources freely).
 
+   **UPDATE 2026-08-09 (`EU/G.69.md`).** An 11-batch cluster (27, 28, 29, 39,
+   40, 41, 42, 43, 57, 58, 59 — ESS governance / Code of Practice compliance
+   mechanism) worked: 91% (10/11) already covered by prior sessions
+   (`eu-meta-docx-batches.json`, `ess-quality-framework.json`); only batch 40
+   (Slovakia + Germany peer-review docs) was new, built as
+   `ess-peer-review-country-reports.json`. Running total after this cluster:
+   37 of 73 batches built or confirmed-redundant.
+
+   **CORRECTION 2026-08-09 (`EU/G.70.md`), and the reason this item's own
+   count was wrong.** A corpus-grep pass across every remaining batch's
+   `scope`/`batch_id`/`strand` keywords — done *before* deep-reading any of
+   them, per this item's own (a) and the lesson `G.69.md` Finding 1 first
+   stated — found that this tracker's "47 remain" / "68-72 unbuilt" figures
+   above were stale, not because the work was undone, but because two other
+   sessions did it under different tracking (`G.41.md`/`G.42.md`'s "Priority
+   C" pass and the separate `EU/EU Meta jsons.docx` backlog pass, both dated
+   2026-08-05, three days before this item's own batch-number tracking even
+   started on 2026-08-07) and this item's prose was never cross-checked
+   against them. Confirmed already done, no further work needed:
+   **batches 47, 48, 49, 50, 51, 52, 53, 55, 56, 60, 61, 62** (the whole
+   FIGARO/GFS/monetary-aggregates/CBD2 stack this item's own text called
+   "also unbuilt and coherent" — actually built via
+   `eurostat-edp-gfs-ecb-statistics.json` [indices 47, 51, 52, 53, 54, 55,
+   56, 61, 62] and `eu-meta-docx-batches.json` [SUT-IOT → `eurostat-suiot`,
+   FIGARO → `eurostat-figaro`, GLOBAL-IO → `oecd-icio`, WP-SMP-ESAC →
+   `eurostat-annual-work-programme` + `esac-opinion-work-programme`]);
+   **batch 65** (WP2026 Annex IV — same document as
+   `eurostat-annual-work-programme`, confirmed by matching record IDs);
+   **batches 68, 69, 70, 71, 72** (the ECB/Eurosystem collateral and
+   balance-sheet block this item also called "also unbuilt" — batch 68 built
+   as `ecb-eurosystem-annual-balance-sheet`/`ecb-eurosystem-weekly-financial-statement`
+   in `eurosystem-ecb.json` (which also already carries
+   `ess-escb-mip-quality-report`, matching batch 63's own
+   `mip-ess-escb-quality-report-2026` record — one more reason batch 63 is
+   half-open, not untouched); batches 69-72, all Guideline (EU) 2015/510 and its
+   amendments on margin calls/haircuts/NCB implementation/fixed-term
+   deposits, correctly read and dropped in
+   `eurostat-edp-gfs-ecb-statistics.json` as operational law, not a
+   recurring titled report — record IDs cross-checked and match exactly).
+   **Batch 63** (MIP auxiliary indicators / AMR statistical annex) is
+   half-open, not untouched: read and dropped 2026-08-05, cadence
+   re-verified live 2026-08-09 (sweep session), still not minted for want of
+   an edge context — a cheap check, not a fresh batch. **Batch 38** is
+   mostly redundant with the same WP2026 document (4 of its 6 records) but
+   carries two genuinely new record IDs (`ess-common-position-esp-link`,
+   `esac-post2027-priorities`) about the *next*, post-2027 European
+   Statistical Programme — a small, real remainder, not a full batch.
+   **Corrected remaining count: 16 batches actually need research**, not 46:
+   the fourteen-batch ESA-2010-methodology stack (**0, 1, 2, 5, 6, 7, 8, 9,
+   10, 11, 12, 13, 14, 15** — Annex A/B legal text, CPA/NACE Regulation
+   451/2008, the quarterly-financial-accounts-for-general-government manual,
+   the 2022-edition Manual on Government Deficit and Debt, the 2026
+   Statistical Requirements Compendium, the SUT/IOT and QNA handbooks —
+   confirmed by this session's grep pass to have **zero** existing corpus
+   coverage, genuinely the largest true remaining backlog), **batch 46**
+   (29 uncitable peer-review records, unchanged assessment, still do it
+   last), and **batch 38's post-2027 remainder**. Full account:
+   `EU/G.70.md`.
+
+   **UPDATE 2026-08-09 (`EU/G.71.md`).** The 14-batch ESA-2010-methodology
+   stack (0, 1, 2, 5–15) and batch 38's post-2027 remainder both worked,
+   producing `esa2010-methodology-stack.json` (7 reports, 9 dependencies,
+   24 dropped) — registered in `src/data/index.ts`. Minted: `eurostat-src`,
+   `eurostat-manual-qna`, `eurostat-quarterly-nonfinancial-accounts-ggov`,
+   `eu-manual-qnfagg`, `eu-manual-qfagg`, `eu-manual-mgdd`, and `cpa`
+   (Regulation (EC) No 451/2008, read as a classification hub per
+   Research.1.md §7 rather than by reading NACE itself). NACE was **not**
+   minted — its own Article text would not render via WebFetch (metadata
+   only, both the `eli` and `legal-content` URL forms), and per §6 a
+   confirmed title is not a substitute for a verbatim quote; logged
+   `no-node-yet`, not fabricated. Three further candidate manual nodes
+   (SUT/IOT Manual KS-RA-07-013, HERP guidelines KS-GQ-18-012, Consistency
+   guidelines KS-GQ-20-004) each got one extra live search for a second
+   edition per the recurring-shape rule, all three came back negative, all
+   three logged `no-node-yet`. The ESA 2010 Transmission Programme
+   companion PDF was read directly and closes the branch's standing "read
+   the programme's own tables" test from item 5(e): its table overview
+   lists only table numbers/deadlines/periods, never publication titles —
+   the same disclosure asymmetry finding, now corroborated by a second
+   independent primary source. One redundancy was confirmed, not assumed:
+   Destatis's GNI-inventory EVAS codes duplicate
+   `de-destatis-source-surveys.json` exactly (checked by direct string
+   membership, not title similarity) and were dropped `no-document`; a
+   sibling document's own **QNA-specific** EVAS source list did not
+   duplicate anything found and is logged `deferred` as a genuine unworked
+   lead. One judgment call is flagged, not silently made: `esa-2010 -> cpa`
+   looks structurally similar to a bundled classification-list edge this
+   corpus previously declined (`esa2010-quality-reporting.json`'s
+   `esa-2010 -> NACE/CPA/COICOP/COFOG/NUTS`), and was minted anyway on the
+   reasoning that this instance is a single numbered paragraph in ESA
+   2010's own primary text rather than a third-party quality report's
+   bulleted list — recorded in `_open_questions` for a future session to
+   overturn if that distinction is judged wrong. **Batch 46 was
+   deliberately not attempted** — 29 uncitable country peer-review records
+   needing per-country source re-fetching, per this item's own "do it last"
+   flag — and is the one item left in the 16-batch backlog this item
+   opened. Full account: `EU/G.71.md`.
+
 6. **AU — the second council, and the Victorian valuation chain.** Branch
    authority: `AU/G.3.md` (read G.2 and G.1 behind it). Two sub-items, in
    order:

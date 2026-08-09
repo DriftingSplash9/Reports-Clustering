@@ -1,0 +1,115 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.71.md",
+  "number": 71,
+  "title": "G.71.md — EU galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "`Research.1.md` read in full this session (1276 lines), specifically to re-apply §2 (verbatim-quote-or-nothing), §4 (node eligibility, recurring-shape vs. one-off-instrument), §5a (comparable-with is not a dependency), §6 (Part A/Part B format, `AGENCY ONLY`/`NOT FOUND` as valid results), and §7 (classification-hub rule — read the programme, not the classification) against material this stack repeatedly tested. `EU/G.70.md` read in full — it is the whole input to this session's starting state and named the ESA-2010-methodology stack as the clear next cluster. `planning/MISSION-TODO-2.md` item 5 read in full, then appended to (never edited) with this session's closing update. `EU/slices/_staging/01-manifest.json` and `10-batch-with-records.ndjson` read for all 14 target batches (0, 1, 2, 5–15) plus batch 38. `src/lib/types.ts` read to confirm `Report`/`Dependency` schema compliance before writing JSON. `EU/R1.68.md` not reopened this session — nothing in this session's work touches block B or the rollup itself, and `G.70.md` did not flag it as needed for item 5's own continuation.",
+  "predecessor": "`G.70.md` (2026-08-09)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**All 14 batches of the ESA-2010-methodology stack (0, 1, 2, 5–15) plus batch 38's post-2027 remainder are now worked, closing 15 of the 16 batches `G.70.md` identified as genuinely remaining.** Seven new nodes minted: `eurostat-src` (Statistical Requirements Compendium), `eurostat-manual-qna` (Handbook on Quarterly National Accounts), `eurostat-quarterly-nonfinancial-accounts-ggov`, `eu-manual-qnfagg` (Manual on Quarterly Non-Financial Accounts for General Government), `eu-manual-qfagg` (Manual on Quarterly Financial Accounts for General Government), `eu-manual-mgdd` (Manual on Government Deficit and Debt), and `cpa` (Regulation (EC) No 451/2008, the Statistical Classification of Products by Activity). Nine dependencies minted, the most consequential being `esa-2010 -> cpa` (`methodology_depends_on`) — the corpus's biggest documented classification gap (`esa2010-quality-reporting.json`'s previously-declined bundled \"esa-2010 -> NACE, CPA, COICOP, COFOG, NUTS\" entry) now has its first resolved member, reached the way §7 prescribes: not by reading CPA's own documentation, but by reading ESA 2010's own Annex A prose (paragraph 1.22) stating it uses CPA for products. NACE itself stays unminted — confirmed real and titled at EUR-Lex, but no verbatim Article text was retrievable live this session, and per §6 a confirmed title is not a substitute for a quote. Twenty-four `_dropped` entries logged, none silently discarded. **Batch 46 (29 uncitable country peer-review records) remains the one deliberately unworked item from the 16-batch instruction** — consistent with the standing \"do it last\" flag every prior session carrying this item has recorded.",
+  "findings": [
+    {
+      "heading": "1. CPA is a real node, reached via §7's classification-hub rule; NACE is real but not yet mintable",
+      "body": "Batches 8 and 9 staged both classifications together. CPA's founding regulation, (EC) No 451/2008, rendered cleanly via WebFetch at its EUR-Lex consolidated-form page, giving a verbatim title and adoption date sufficient for a one-off-instrument node per §4 (no cadence needed — this is a regulation, not a Eurostat guidance manual). ESA 2010's own Annex A, Chapter 1, paragraph 1.22 (staged three times independently, in batches 6, 7, and 8, all three agreeing verbatim on the operative sentence) states in flowing prose that ESA 2010 uses CPA for products — the programme-level statement §7's NAICS precedent requires, not a bulleted list naming five classifications at once (that shape was already correctly declined in `esa2010-quality-reporting.json`). NACE's founding regulation, (EC) No 1893/2006, is confirmed real and titled the same way, but two separate WebFetch attempts (the `eli` and `legal-content` URL forms) returned only metadata and navigation chrome, never body text — unlike CPA's page, which is in a newer consolidated form that rendered cleanly. Per §6, a confirmed title and regulation number are not a substitute for a verbatim quote, so NACE was logged `_dropped`/`no-node-yet` rather than minted on title alone. The same Annex A paragraph that supports the CPA edge also names NACE for industries in the same sentence — once NACE's own Article text is retrievable (or a downstream programme's methodology page names it directly, satisfying §7 independently of the founding regulation), this edge is one step away, not a fresh search."
+    },
+    {
+      "heading": "2. Five Eurostat/EU methodology manuals form a coherent `methodology_depends_on` cluster, all citing ESA 2010 directly",
+      "body": "Batches 1, 2, and 10 staged the Handbook on Quarterly National Accounts, the Quarterly Non-Financial Accounts for General Government (report itself, distinct from its manual), the Manual on Quarterly Non-Financial Accounts for General Government, the Manual on Quarterly Financial Accounts for General Government, and the Manual on Government Deficit and Debt (MGDD). Each carries its own verbatim statement of ESA 2010 dependency, minted as `methodology_depends_on` per the relationship-type ranking (methodology_depends_on outranks cites, and each manual's own text frames itself as implementing ESA 2010's rules rather than merely referencing them). Two secondary edges: the QNA Handbook cites the Manual on Quarterly Non-Financial Accounts for General Government directly (a cross-manual citation, not methodology dependence — the weaker relationship type was the correct call per the ranking), and MGDD cites Regulation 479/2009 (the EDP inventory regulation, already a node from an earlier session) directly in its own text."
+    },
+    {
+      "heading": "3. Batch 0 closes the branch's long-standing \"read the Transmission Programme's own tables\" test",
+      "body": "Item 5(e)'s standing note flagged the ESA 2010 Transmission Programme as \"the better test of the branch's central asymmetry finding\" — that where the EU binds by Regulation it names nobody, where it coordinates by agreement it names its sources freely. This session located and read the standalone Transmission Programme companion PDF directly (one extra search, within the item 5(e) budget) and confirmed its table overview lists only table numbers, deadlines, and reporting periods — never publication titles. This is the same disclosure asymmetry already established elsewhere in the corpus, now corroborated by an independent second primary source rather than resting on a single prior reading. One node was minted from batch 0's other material: `eurostat-src`, the Statistical Requirements Compendium, citing both ESA 2010 and Regulation (EU) 2016/2304 directly."
+    },
+    {
+      "heading": "4. One confirmed cross-file redundancy, one genuine new lead, distinguished by direct string comparison rather than title similarity",
+      "body": "Batch 0 also staged Destatis GNI-inventory source material. A direct Python string-membership check against the existing `de-destatis-source-surveys.json` (comparing specific EVAS survey codes, not just document titles) confirmed exact duplication — dropped `no-document` rather than re-minted. A sibling document in the same batch, Destatis's own QNA-specific EVAS source list, did not match anything in the existing file under the same check and is logged `deferred` as a genuine unworked lead — the distinction rests on code-level comparison, not an assumption from the documents' similar names."
+    },
+    {
+      "heading": "5. Three candidate manual nodes declined for want of a second edition, each after one extra search",
+      "body": "SUT/IOT Manual (KS-RA-07-013), HERP guidelines (KS-GQ-18-012), and the Consistency guidelines handbook (KS-GQ-20-004) were each staged with confirmed titles and single publication dates. Per §4's \"a single edition with no second one anywhere in sight is still not a node\" rule, each got one WebSearch checking for a later edition. All three came back negative. All three logged `_dropped`/`no-node-yet` rather than minted on the strength of a single confirmed edition."
+    },
+    {
+      "heading": "6. Batch 38's post-2027 remainder stays unmintable — no target node exists yet",
+      "body": "The two genuinely new records `G.70.md` flagged in batch 38 (`ess-common-position-esp-link`, `esac-post2027-priorities`, both about the next European Statistical Programme under the post-2027 MFF) were re-examined this session. Neither names, nor is named by, any existing node in the corpus — the documents describe a forward-looking policy process, not yet a published, cited instrument with a target to point at. Logged `_dropped`/`deferred`, consistent with §3's report-don't-resolve stance: this is not a failure to find an edge, it is a genuine absence of a target until a future session researches the post-2027 Programme itself."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        "B — the corpus-wide `_dropped` sweep. Fully closed since `G.68.md`. No change this session.",
+        "Item 5 (EU staging-blob batch backlog) — **15 of the 16 batches `G.70.md` identified now worked.** The fourteen-batch ESA-2010-methodology stack (0, 1, 2, 5–15) and batch 38's post-2027 remainder are done, producing `esa2010-methodology-stack.json` (7 reports, 9 dependencies, 24 dropped), registered in `src/data/index.ts`. **One batch remains: batch 46**, 29 uncitable country peer-review records (no `url`, no `location`, no `names` in any staged record), needing per-country source re-fetching from scratch. This is the natural next single-session task for whoever picks up item 5 next, and it is the last item of the original 16-batch instruction.",
+        "Item 2 (archive) and Item 3 (rollup) — closed at `G.69.md`. A second rollup is coming due per the five-per-`G.*.md` cadence noted there (`G.69` was one session out; this is now `G.71`, three out — worth flagging for whoever writes `G.72` or `G.73`, not yet urgent).",
+        "A, C, D, E, F, G — untouched this session. See `G.56.md`–`G.62.md` for their current state."
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Reread page 2 (Article 9 background section) directly for 20 of the 21 evergreen CIRCABC countries whose `eu-reg-479-2009` edge currently rests on the boilerplate's confirmed presence in eight other countries' copies. Low value, cheap."
+    },
+    {
+      "n": 2,
+      "text": "Two filename-vs-title-page date mismatches (UK, NL) in `edp-inventory-regulation-479-2009.json` remain unadjudicated, per `Research.1.md` §3."
+    },
+    {
+      "n": 3,
+      "text": "Greece's own CIRCABC metadata still reads ESA95 against the document body's ESA 2010, unresolved."
+    },
+    {
+      "n": 4,
+      "text": "`ess-peer-review-final-report -> de/sk-ess-peer-review-report`'s `relationship_type` (`uses_data_from`, `G.69.md`'s judgment call) could be revisited against `cites` if a future session reads SWD(2024)136's own body text on how it aggregates member reports."
+    },
+    {
+      "n": 5,
+      "text": "Find the edge (if any) for the MIP scoreboard / Alert Mechanism Report. Cadence is already well-evidenced; the only missing piece is what the AMR is an input to or output of. `EU/ECB-Staging-Batches_PartA_2026-08-05.md` is the cheapest place to look first."
+    },
+    {
+      "n": 6,
+      "text": "NEW.** Retrieve NACE's own Article text — either by finding a WebFetch/URL form of CELEX 32006R1893 that renders body text (the two forms tried this session did not), or by finding a downstream programme's own methodology page stating it classifies by NACE (satisfying §7 independently of the founding regulation, the way the CPA edge was reached). ESA 2010 Annex A ¶1.22 already names NACE in the same sentence that supports the `cpa` edge — once the text is in hand, minting is one step, not a fresh search."
+    },
+    {
+      "n": 7,
+      "text": "NEW.** The Destatis QNA-specific EVAS source list flagged `deferred` this session (batch 0, distinct from the already-catalogued GNI-inventory codes in `de-destatis-source-surveys.json`) is a genuine unworked lead — confirm what it is a source for and whether it belongs on an existing QNA-related node."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `EU/R1.68.md` per the standing convention (not reopened this session, since nothing here touches block B or the rollup — but the convention still calls for it at the start of the *next* session)."
+    },
+    {
+      "n": 2,
+      "text": "`planning/MISSION-TODO-2.md` item 5, freshly re-read — this session added an `**UPDATE 2026-08-09 (EU/G.71.md)**` block after `G.70.md`'s own correction block; both sit after the original 2026-08-07 prose, left unedited per the never-edit-a-predecessor convention."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/esa2010-methodology-stack.json` is new this session (7 reports, 9 dependencies, 24 dropped), registered in `src/data/index.ts`. Recommend running `npm run validate` before trusting it fully — this session validated JSON well-formedness only, not the project's own schema/dangling-edge checks, since no path to run `npm run validate` itself was exercised from the device bridge this session."
+    },
+    {
+      "n": 4,
+      "text": "Item 5 now has exactly **one batch remaining: batch 46** (29 uncitable country peer-review records). This is the natural next task, and it closes the 16-batch instruction Thomas gave to open this session and the one before it."
+    },
+    {
+      "n": 5,
+      "text": "Before starting batch 46, note it is a different shape of work from this session's — no methodology-document reading, but per-country primary-source re-fetching for records that currently carry no URL, no location, and no names at all. Budget accordingly; it will not go as fast as the manual-reading clusters did."
+    }
+  ],
+  "session_conditions": "A single-focus session executing Thomas's \"grind through the last 16 batches\" instruction. Worked by subject cluster per item 5(a), not by raw batch index: batches 8+9 (CPA/NACE), batches 6+7 (Annex A sector-classification and market/non-market rules), batches 5+11+12+13+14+15 (ESA 2010's own Articles and Annex A accrual-basis/time-of-recording rules), batches 1+2+10 (Eurostat's own methodology manuals), batch 0 (Statistical Requirements Compendium, Transmission Programme, Destatis source material, List of main statistics, HERP and consistency-guidelines handbooks), and batch 38's post-2027 remainder. Several live searches were used, consistent with item 5(e)'s \"one extra search per batch\" budget: WebFetch against EUR-Lex for the CPA regulation (succeeded) and NACE's founding regulation (failed — metadata only, both URL forms), WebFetch for the standalone ESA 2010 Transmission Programme companion PDF (succeeded), and three separate WebSearches checking for second editions of candidate manual nodes (SUT/IOT Manual, HERP guidelines, Consistency guidelines — all three came back negative). `npm run validate` was not run this session (no shell access to the actual npm project from the device bridge in a way that was exercised); every JSON addition was instead validated with `python3 -c \"json.load(...)\"` after each edit, which confirms well-formedness but not `validate`'s full schema/dangling-edge checks. **Recommend running `npm run validate` from the device or a connected environment before the next session, to confirm this file's edges resolve cleanly against the full corpus** — this is the one verification step this session could not perform itself."
+}
