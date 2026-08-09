@@ -6,7 +6,11 @@
  * not of the weighting being clever — that comparison is the point of this.
  */
 import { dependencies, droppedNotes, loadIssues, relations, reports } from '../src/data'
-import { DROPPED_LEAD_REASONS, DROPPED_REASONS } from '../src/lib/types'
+import {
+  DROPPED_LEAD_REASONS,
+  DROPPED_REASONS,
+  RELATION_TYPES,
+} from '../src/lib/types'
 
 // Invariant (✗) failures below print AND fail the run. Before 2026-08-07 they
 // printed but exited 0, which let a red validator pass unnoticed for three
@@ -41,11 +45,38 @@ if (loadIssues.duplicateIds.length) {
   for (const d of loadIssues.duplicateIds) console.log(`  · ${d}`)
   invariantFailures++
 }
+// Now fails the run, decided 2026-08-09 (EU/G.74.md, was G.73.md cheap check
+// 10, Thomas's standing "decide and document"). It used to print and exit 0,
+// which is how it scrolled past unremarked through G.72.md's account of its own
+// validator run.
+//
+// It is worse than DUPLICATE IDS, not better. A duplicate id loses a record you
+// could recover from the surviving copy; a superseded edge loses *evidence* for
+// a claim that stays in the graph looking fully cited. G.73.md's Finding 5 is
+// the worked case: `fiscal-equalization-program -> statcan-system-macroeconomic-
+// accounts` was defined three times, each copy citing a different provision of
+// SOR/2007-303, and two of the three verbatim statutory quotations were being
+// discarded on every build while the edge rendered as normal.
+//
+// The argument against, which is real and is being overruled rather than
+// ignored: a deliberate override — a slice intentionally restating an edge to
+// supersede an earlier one — is a legitimate pattern, and this rule forbids it
+// outright. It is overruled because there are currently zero superseded edges,
+// so the rule can be tightened at no cost today, and because the pattern has
+// never actually been used that way in this corpus: all three known instances
+// were accidents that lost data. If a future session finds a genuine need to
+// override, the honest fix is an explicit field saying so, not silence. Merge
+// the copies instead — keep every distinct basis and evidence_url, labelled,
+// under a dated merge note, which is what Finding 5 did.
 if (loadIssues.duplicateEdges.length) {
   console.log(
     '\nSUPERSEDED — edges defined twice (last wins; the earlier copy was dropped)',
   )
-  for (const d of loadIssues.duplicateEdges) console.log(`  · ${d}`)
+  for (const d of loadIssues.duplicateEdges) console.log(`  ✗ ${d}`)
+  console.log(
+    '  ✗ merge these into one object, preserving every distinct basis and evidence_url',
+  )
+  invariantFailures++
 }
 
 const issues = validate(reports, dependencies)
@@ -346,6 +377,22 @@ if (relations.length) {
     console.log(`      ${r.source_report_id} -[${r.relation_type}]-> ${r.target_report_id}`)
   }
 }
+// The sixth closed union, checked here rather than in validate() because
+// relations never reach buildGraph and validate()'s signature is
+// (reports, dependencies) — see RELATION_TYPES in types.ts. Added 2026-08-09
+// (EU/G.74.md); scanned clean, guarded anyway.
+const unknownRelationTypes = relations.filter(
+  (r) => !RELATION_TYPES.includes(r.relation_type),
+)
+console.log(
+  unknownRelationTypes.length === 0
+    ? '  ✓ every relation_type is a RelationType'
+    : `  ✗ ${unknownRelationTypes.length} relation(s) carry a relation_type that is not a RelationType:`,
+)
+for (const r of unknownRelationTypes) {
+  console.log(`      "${r.relation_type}" — ${r.source_report_id} -> ${r.target_report_id}`)
+}
+if (unknownRelationTypes.length) invariantFailures++
 const unevidencedRelations = relations.filter((r) => !r.evidence_url || !r.basis)
 console.log(
   unevidencedRelations.length === 0

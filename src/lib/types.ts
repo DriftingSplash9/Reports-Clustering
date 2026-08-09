@@ -165,6 +165,60 @@ export const JURISDICTION_LEVELS: readonly JurisdictionLevel[] = [
 export type SourceKind = 'official' | 'commercial'
 
 /**
+ * **The cast-not-parsed gap, and the runtime lists that close it.**
+ *
+ * Read this once; the five lists below and `JURISDICTION_LEVELS` /
+ * `DROPPED_REASONS` elsewhere in this file all exist for the reason stated
+ * here, and repeating it six times would be worse than pointing at it.
+ *
+ * Every closed union in this file looks like the compiler's problem. It is not.
+ * Reports, dependencies, relations and dropped notes all enter through
+ * hand-written JSON slices that `src/data/index.ts` **casts** — `as Report[]`,
+ * not a parse — so the string that was actually typed is never checked against
+ * the union it claims to belong to. `tsc --noEmit` passes on a slice full of
+ * invented values. Twice now that gap has been measured rather than assumed,
+ * and twice it was populated:
+ *
+ * - `Country`, opened deliberately on 2026-08-04, where the old closed union
+ *   had defaulted nine international bodies to Canadian for five sessions;
+ * - `JurisdictionLevel` and `DroppedReason` on 2026-08-09 (`EU/G.73.md`), where
+ *   29 reports carried `"national"` or `"territorial"` and one dropped note
+ *   carried `"duplicate"` — none of the three a member of anything.
+ *
+ * The remaining five unions were scanned corpus-wide on 2026-08-09
+ * (`EU/G.74.md`) and four came back clean; `Domain` had one violation
+ * (`"manufacturing"`, on `de-destatis-quarterly-production-survey`). They are
+ * guarded anyway, and the reasoning is worth stating because "the scan was
+ * clean, skip the guard" is the tempting move: the scan is the expensive half
+ * and it only describes the corpus as it stood that afternoon. A guard is four
+ * lines and describes it forever.
+ *
+ * Each union's exposure differs, and the differences are the argument for
+ * guarding the quiet ones too:
+ *
+ * - `RelationshipType` is the loudest. `RELATIONSHIP_WEIGHT[d.relationship_type]`
+ *   returns `undefined` on an off-union value, making that edge's weight `NaN`,
+ *   and `NaN` propagates through the whole PageRank iteration — every authority
+ *   score in the graph, not just that edge's. Silent and total.
+ * - `SourceKind`, `TerminalReason` and `EvidenceKind` all decide **exclusion
+ *   from the authority calculation**, and all three are read through helpers
+ *   (`isOfficial`, `isTerminus`, `isDocumented`) written so that absent means
+ *   the ordinary case. A typo therefore reads as "ordinary" and quietly puts a
+ *   node or edge back into a ranking it was meant to sit outside — which is the
+ *   sink-leak shape those exclusions exist to prevent.
+ * - `Domain` is the quietest, and it is the one that turned out to be wrong. It
+ *   is read by nothing outside this file — no filter, no legend, no colour — so
+ *   an invented value has no consumer to fail at, not even a grey fallback.
+ *   That is not a reason to leave it unchecked. It is the reason it was
+ *   unchecked.
+ * - `RelationType` is checked in `scripts/validate-data.ts` rather than in
+ *   `validate()`, because relations deliberately never reach `buildGraph`, and
+ *   `validate(reports, dependencies)` has no argument to hand them to. Keeping
+ *   it that way is the point — see the `Relation` interface comment.
+ */
+export const SOURCE_KINDS: readonly SourceKind[] = ['official', 'commercial']
+
+/**
  * Why a dependency chain stops here.
  *
  * Decided in V0.12, and the argument for it is the argument that admitted
@@ -212,6 +266,14 @@ export type TerminalReason =
   | 'redistributed'
   | 'confidential'
 
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const TERMINAL_REASONS: readonly TerminalReason[] = [
+  'unpublishable',
+  'unidentified',
+  'redistributed',
+  'confidential',
+]
+
 /**
  * National origin of the publisher, as an ISO-3166 alpha-2 code. `INT` covers
  * bodies belonging to no country; `EU` covers the supranational layer itself.
@@ -258,7 +320,21 @@ export type Country = 'CA' | 'US' | 'INT' | 'EU' | (string & {})
  * release is `'DE'`, and filing it as `INT` is now a bug rather than a shrug.
  */
 
-/** Economic domain tags. Used for filters and the legend, not for node colour. */
+/**
+ * Economic domain tags. Used for filters and the legend, not for node colour.
+ *
+ * **Correction, 2026-08-09 (`EU/G.74.md`):** the sentence above describes an
+ * intention, not the code. `Domain` is imported by nothing — not `filter.ts`,
+ * not any legend, not `palette.ts` — so as of this date the field is written
+ * on 473 reports and read by no one. Left as written rather than deleted
+ * because the intention is presumably still live and the tags are the work
+ * already done towards it; recorded here because a field nothing reads is a
+ * field nobody checks, which is the sentence `country` earned the hard way and
+ * this field then proved a second time. `"manufacturing"` sat on
+ * `de-destatis-quarterly-production-survey` undetected until the corpus-wide
+ * scan, because there was no consumer for it to fail at — not even the flat
+ * grey an unmapped country falls back to. `DOMAINS` below is now that consumer.
+ */
 export type Domain =
   | 'inflation'
   | 'labour'
@@ -280,6 +356,29 @@ export type Domain =
   | 'construction'          // added 2026-08-07 (Thomas): building/construction releases; first customer au-abs-building-approvals
   | 'insurance'             // added 2026-08-08 (Thomas, OPEN-THREADS 0.5): splits off financial-regulation for insurance-specific series; first customers ecb-insurance-corporations-operations, ecb-insurance-corporations-assets-liabilities
 
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const DOMAINS: readonly Domain[] = [
+  'inflation',
+  'labour',
+  'monetary-policy',
+  'national-accounts',
+  'benefits',
+  'interest-rates',
+  'municipal-finance',
+  'education',
+  'post-secondary',
+  'health',
+  'fiscal-transfers',
+  'population',
+  'taxation',
+  'assessment',
+  'energy-royalties',
+  'banking',
+  'financial-regulation',
+  'construction',
+  'insurance',
+]
+
 /**
  * How one report depends on another.
  * Ordered here from strongest to weakest; see RELATIONSHIP_WEIGHT in graph.ts.
@@ -289,6 +388,26 @@ export type RelationshipType =
   | 'uses_data_from'         // target's figures are a direct input
   | 'methodology_depends_on' // target defines a method/deflator the source relies on
   | 'cites'                  // referenced as context, not as a computational input
+
+/**
+ * See the cast-not-parsed note under `SOURCE_KINDS`. This is the one of the six
+ * whose failure mode is arithmetic rather than cosmetic: an off-union value
+ * makes `RELATIONSHIP_WEIGHT[...]` `undefined`, the edge weight `NaN`, and
+ * `NaN` spreads through the PageRank iteration to every score in the graph.
+ *
+ * Deliberately a second list rather than `Object.keys(RELATIONSHIP_WEIGHT)`,
+ * which would be shorter and would check nothing: the weights map is typed
+ * `Record<RelationshipType, number>`, so deriving the valid set from it makes
+ * the guard agree with whatever the map happens to contain instead of with the
+ * union. Two lists in one file that `tsc` cross-checks beats one list that is
+ * its own authority.
+ */
+export const RELATIONSHIP_TYPES: readonly RelationshipType[] = [
+  'calculated_from',
+  'uses_data_from',
+  'methodology_depends_on',
+  'cites',
+]
 
 export interface Report {
   id: string
@@ -450,6 +569,9 @@ export interface Report {
  */
 export type EvidenceKind = 'documented' | 'implied'
 
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const EVIDENCE_KINDS: readonly EvidenceKind[] = ['documented', 'implied']
+
 export interface Dependency {
   /** The report doing the referencing. */
   source_report_id: string
@@ -545,6 +667,15 @@ export type RelationType =
    * funds is the case that raised it.
    */
   | 'supersedes'
+
+/**
+ * See the cast-not-parsed note under `SOURCE_KINDS`. Checked in
+ * `scripts/validate-data.ts` rather than in `validate()`: relations never reach
+ * `buildGraph`, so `validate(reports, dependencies)` has nowhere to receive
+ * them, and adding a third parameter to let it would weaken the structural
+ * isolation this type's own comment argues for.
+ */
+export const RELATION_TYPES: readonly RelationType[] = ['audits', 'supersedes']
 
 /**
  * A non-dependency relationship. Same shape as `Dependency` minus everything

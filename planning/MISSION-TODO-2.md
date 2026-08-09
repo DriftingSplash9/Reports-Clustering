@@ -8,9 +8,11 @@ MISSION-TODO 1.0's surviving items, `AU/G.3.md` (today's Victoria pass),
 `NZ/G.4.md`, `EU/G.49.md`, `research-input/Grok-Research-Brief-XI.md` items
 25/27/28, and the corpus itself.
 
-**State of the corpus** — **372 reports / 436 dependencies / 3 relations,
-measured 2026-08-08** by an actual validator run (Thomas, locally; full
-output `validator-2026-08-08.txt`). Earlier figures for the record: 354/415
+**State of the corpus** — **473 reports / 605 dependencies / 3 relations,
+measured 2026-08-09** by an actual validator run (agent, cloud sandbox; see
+`EU/G.74.md` Orientation §3 for the procedure). Previously 372/436/3,
+measured 2026-08-08 (Thomas, locally; full output
+`validator-2026-08-08.txt`). Earlier figures for the record: 354/415
 as this file was written, 363/429 after the NZ G.5 and EU G.50 sessions.
 **`npm run validate` is GREEN as of 2026-08-08 — zero ✗, all eight
 behavioural checks pass.** That closes the check that had been outstanding
@@ -729,7 +731,13 @@ raid this list when a session has capacity left)
 
 23a. **Four UI/filter additions — NOT greenlit, parked by decision.**
     Thomas, 2026-08-08 (open-questions D4): "leave the idea for now, just
-    add to the to do list." Listed so they are not re-proposed as new
+    add to the to do list."
+    **Reconfirmed 2026-08-09**: asked specifically about the domain filter
+    (cheap check 12, "Domain is written on 473 reports and read by
+    nothing"); Thomas's answer was to leave it out of the UI for now —
+    "we will look deep into the ui in the near future... this belongs with
+    the other notes for when we get there." So item (a) below stays parked
+    with the rest, not promoted ahead of it. Listed so they are not re-proposed as new
     ideas: (a) a **domain filter** — `domains` is populated on every node
     and completely unused in the UI (`src/lib/filter.ts`,
     `ViewControls.tsx`); (b) a **rendering path for `supersedes`/`audits`**

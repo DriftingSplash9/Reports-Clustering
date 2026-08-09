@@ -1686,3 +1686,18 @@ Full official titles for the 22 entries not cross-referenced above were not indi
 the short EUR-Lex page identifier, given this block's explicit lowest-priority status — flagged as
 incomplete rather than padded out.
 
+
+---
+
+## Sign-off (2026-08-09)
+
+Thomas reviewed this file and signed off: 395/399 verified, zero mismatches
+accepted as final. The one known defect, A19 (citation given as Art.
+6(6)(a), correct location is Art. 2(6)(a)), is fixed at source: the
+`LOCATION` field for that entry in `EU/slices/_staging/20-prose-sections.txt`
+now reads `Art. 2(6)(a)`, with an inline note dating the correction. No
+corpus data file held this citation (the ECB Guideline (EU) 2015/510 batch
+this entry belongs to was `_dropped` — see
+`src/data/research/eurostat-edp-gfs-ecb-statistics.json` `_dropped[].why`),
+so the fix is confined to the staging record; nothing in `src/data/` needed
+a corresponding change.

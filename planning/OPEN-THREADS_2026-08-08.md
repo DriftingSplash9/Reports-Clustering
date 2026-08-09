@@ -343,11 +343,18 @@ temporal disaggregation, the precision/variance handbook, data validation
 from the programmes coded to them, never by reading them. EDAMIS is a
 system, not a publication.
 
-**2.5 — EU staging blob: 47 of 73 batches remain (46 distinct).** `[XL]`
-Read `01-manifest.json` by `scope` **and** by `batch_id`/`strand` — 47–62
-look unlabelled and are not. **Batch 46 is genuinely unlabelled and the most
-expensive thing in the backlog** (29 peer-review records with no url, no
-location, no names — all need re-fetching from scratch). Do it last.
+**2.5 — EU staging blob: 47 of 73 batches remain (46 distinct). — CLOSED
+2026-08-09 (`EU/G.72.md`).** `[XL]` All 72 distinct batches worked; batch 46
+— the genuinely unlabelled one, 29 peer-review records with no url, no
+location, no names — was the last, and produced 26 new country nodes and 52
+new dependencies. Left over, and not part of this thread: Portugal's 29th
+record could not be re-cited (`_dropped`/`no-node-yet`), and Liechtenstein
+and Switzerland remain uncovered. **= MISSION-TODO-2 item 5 = EU hand-off
+block F**, which is the same thread under three names; the EU chain carried
+"block F untouched" for three sessions after closing it as "item 5" without
+noticing (`EU/G.75.md` Correction 2). Original note, for the record: read
+`01-manifest.json` by `scope` **and** by `batch_id`/`strand` — 47–62 look
+unlabelled and are not.
 
 **2.6 — The prose-section verification results are sitting unimported.**
 `[M]` `EU/prose-verification-RESULTS_2026-08-07.md`: 395/399 entries verified
@@ -421,7 +428,7 @@ Kadaster/BRK node is explicitly not-yet-minted).
 
 ## What is NOT open, so nobody reopens it
 
-- **`npm run validate`** — green as of 2026-08-08, first clean run since the schema change. Zero ✗, all eight behavioural checks pass. Must be run on Windows; the device bridge cannot (esbuild native-binary mismatch). **Not yet re-run against today's edits** (id registries, insurance domain, the archive moves, the sidecar regeneration) — worth a fresh run before trusting counts again; none of today's edits touched `src/data/`, so a red run would mean something else broke.
+- **`npm run validate`** — green as of 2026-08-09 (`EU/G.74.md`), exiting 0 with `tsc --noEmit` clean alongside it and seven more invariants than at `G.73.md`; all six closed unions in the schema now have runtime guards. **Correction 2026-08-09**: "must be run on Windows" is wrong as stated. The device bridge cannot run it (its `node_modules` is a Windows build, so esbuild mismatches), but an agent can stage `src/` + `scripts/` to a cloud sandbox, `npm install` fresh and run it there — done four times now, procedure in `EU/G.74.md` Orientation §3. Do not treat a validator run as blocked on Thomas. Historical note from 2026-08-08 follows: green as of 2026-08-08, first clean run since the schema change; zero ✗, all eight behavioural checks pass. **Not yet re-run against today's edits** (id registries, insurance domain, the archive moves, the sidecar regeneration) — worth a fresh run before trusting counts again; none of today's edits touched `src/data/`, so a red run would mean something else broke.
 - **§9's EU/Europe id registry** — regenerated in full 2026-08-08, then `sdmx-glossary` added same day, 127 ids, cross-checked against `index.ts`.
 - **§9's AU and NZ id registries** — regenerated in full 2026-08-08, AU 11→21, NZ 18→30, same cross-check.
 - **The `insurance` Domain value** — added 2026-08-08, both ECB nodes retagged.

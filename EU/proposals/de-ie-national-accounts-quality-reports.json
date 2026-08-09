@@ -1,0 +1,56 @@
+{
+  "_slice": "de-ie-national-accounts-quality-reports",
+  "_researched": "2026-08-09",
+  "_status": "DRAFT, NOT IMPORTED. Rebuilds a file first drafted 2026-08-08 by G.52.md and lost (written only to that session's /tmp, never committed -- see notes/Decisions-2026-08-08_EU-open-questions.md, 'The thing to read first'). Thomas's ruling on the original file (B4): 'import with changes' -- Germany only, Ireland held back until its 2018 PDF is actually opened (B1). This rebuild re-fetches Germany's quality report directly (pdftotext extraction of the live PDF, this session) rather than trusting the lost file's summary. Ireland, Luxembourg, Netherlands and France are NOT re-researched this session -- their entries below carry forward G.52.md's own prose findings (Open proposals #2) verbatim, flagged as such, because the original investigation is real and documented even though its JSON artifact is gone. Sitting in EU/proposals/ per that folder's rule: promote to src/data/research/ once reviewed.",
+  "_note": "Mints Germany's own national-accounts quality report as a node distinct from the underlying release it describes (de-destatis-national-accounts, already imported in de-destatis-national-accounts.json since 2026-08-05). The two are different documents: one is the GDP/national-accounts release itself, the other is Destatis's own meta-report on the quality of that release. Per esa2010-quality-reporting.json's pre-existing finding, nothing in EU regulation compels a member state to publish a national-accounts quality report -- these are voluntary documents, which is part of why they are worth minting as their own node rather than folding into the release.",
+  "reports": [
+    {
+      "id": "de-destatis-na-quality-report",
+      "title": "Quality Report -- National Accounts",
+      "publisher": "Statistisches Bundesamt (Destatis)",
+      "country": "DE",
+      "jurisdiction_level": "federal",
+      "region": "Germany",
+      "description": "Destatis's own quality report on the German national accounts (EVAS No 81), covering 'domestic product calculation (production, use, and distribution approaches), input-output accounts, national wealth accounts, employment accounts, volume of labour accounts and financial accounts'. States its own legal basis as 'Regulation (EC) No 549/2013, European System of National and Regional Accounts (ESA) 2010, and supplementary and amending regulations'. Voluntary: nothing in EU regulation compels a member state to publish a report of this kind (esa2010-quality-reporting.json _second_finding); Destatis produces one on its own initiative.",
+      "releases_per_year": 1,
+      "cadence_note": "Document's own cover page: reference period '10/2024-09/2025', 'Periodicity: annual', 'Published: 24/10/2025'. Read directly this session via pdftotext extraction of the live PDF (destatis.de/EN/Methods/Quality/QualityReports/National-Accounts-Domestic-Product/national-accounts.pdf).",
+      "last_updated": "2025-10-24",
+      "url": "https://www.destatis.de/EN/Methods/Quality/QualityReports/National-Accounts-Domestic-Product/national-accounts.pdf?__blob=publicationFile",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "de-destatis-na-quality-report",
+      "target_report_id": "de-destatis-national-accounts",
+      "relationship_type": "cites",
+      "basis": "Per Decisions-2026-08-08_EU-open-questions.md B3 (answered verbally, recorded by G.53.md): 'cites is correct, it matches existing precedent in ess-quality-framework.json'. The quality report's own scope statement -- 'Scope of the statistics: national accounts of the Federation (EVAS No 81) ... Content of the statistics: domestic product calculation (production, use, and distribution approaches), input-output accounts, national wealth accounts, employment accounts, volume of labour accounts and financial accounts' -- describes the exact same statistical product as de-destatis-national-accounts (EVAS 81, Fachserie 18), confirming the two are the release and its own quality report about that release, not two independent documents.",
+      "evidence_url": "https://www.destatis.de/EN/Methods/Quality/QualityReports/National-Accounts-Domestic-Product/national-accounts.pdf?__blob=publicationFile"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ie-cso-national-accounts-quality-report (candidate node)",
+      "source": null,
+      "target": null,
+      "reason": "held",
+      "why": "Per Decisions-2026-08-08_EU-open-questions.md B1: 'hold Ireland back until it is opened' -- G.52.md's own investigation only opened the title page of CSO Ireland's 2018 quality-report PDF, not the methodology section, so its cadence and B2's proposed edge to esa-2010 (approved 'in principle' but gated on this) are both unusable until someone actually reads the document. Not attempted this session -- carried forward as the genuine next step on this file, not re-derived."
+    },
+    {
+      "edge": "lu-national-accounts-quality-report / nl-national-accounts-quality-report (candidates, rejected)",
+      "source": null,
+      "target": null,
+      "reason": "not-own-document",
+      "why": "CARRIED FORWARD FROM G.52.md (Open proposals #2), not independently re-verified this session -- the JSON artifact recording this investigation was lost, only the prose summary survives. G.52.md: 'Luxembourg and Netherlands were investigated and explicitly not minted -- both \"hits\" turned out to be the member state hosting a copy of Eurostat's own report, not writing their own (colophon check: Publications Office of the European Union / ISBN 978-92- prefix -- worth remembering as a standing check for future NSI-quality-report searches).' Flagging this colophon check as a standing method rather than a one-off finding."
+    },
+    {
+      "edge": "fr-national-accounts-quality-report (candidate, not found)",
+      "source": null,
+      "target": null,
+      "reason": "not-found",
+      "why": "CARRIED FORWARD FROM G.52.md (Open proposals #2), not independently re-verified this session. G.52.md: 'France was a clean miss, searched and logged.' No further detail survives; if this is revisited, treat it as an unsearched country rather than trusting this note's thoroughness."
+    }
+  ]
+}

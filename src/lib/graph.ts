@@ -9,10 +9,19 @@ import type {
   SourceKind,
   TerminalReason,
 } from './types'
-// Same argument as the palette import below: the list of valid jurisdiction
-// levels lives with the type it belongs to, and is imported rather than
-// restated here so the two cannot drift.
-import { JURISDICTION_LEVELS } from './types'
+// Same argument as the palette import below: the list of valid values lives
+// with the type it belongs to, and is imported rather than restated here so
+// the two cannot drift. See the cast-not-parsed note in types.ts for why the
+// lists exist at all. `RELATION_TYPES` is deliberately absent — relations never
+// reach this module, so that one is checked in scripts/validate-data.ts.
+import {
+  DOMAINS,
+  EVIDENCE_KINDS,
+  JURISDICTION_LEVELS,
+  RELATIONSHIP_TYPES,
+  SOURCE_KINDS,
+  TERMINAL_REASONS,
+} from './types'
 // Validation reaches into the palette deliberately. The rule being enforced is
 // literally "this country has a hand-written palette entry", so the palette is
 // the only honest source for it; asserting it against a second list here would
@@ -157,6 +166,48 @@ export function validate(
           `JurisdictionLevel — one of ${JURISDICTION_LEVELS.join(', ')}`,
       })
     }
+    // The other three report-level unions, added 2026-08-09 (EU/G.74.md) after
+    // a corpus-wide scan found `Domain` populated with `"manufacturing"` and the
+    // other two clean. All three are optional or plural, so `undefined` is not
+    // an error and only a present-and-wrong value is.
+    //
+    // `source_kind` and `terminal_reason` both decide exclusion from the
+    // authority calculation, and both are read through helpers that treat
+    // absent as the ordinary case — so a typo does not fail loudly, it silently
+    // reads as "official" or "not a terminus" and puts the node back into a
+    // ranking it was meant to sit outside.
+    if (r.source_kind !== undefined && !SOURCE_KINDS.includes(r.source_kind)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `${r.id}: source_kind "${r.source_kind}" is not a SourceKind — ` +
+          `one of ${SOURCE_KINDS.join(', ')} (or absent, meaning official)`,
+      })
+    }
+    if (
+      r.terminal_reason !== undefined &&
+      !TERMINAL_REASONS.includes(r.terminal_reason)
+    ) {
+      issues.push({
+        severity: 'error',
+        message:
+          `${r.id}: terminal_reason "${r.terminal_reason}" is not a ` +
+          `TerminalReason — one of ${TERMINAL_REASONS.join(', ')}`,
+      })
+    }
+    // `Domain` is read by nothing outside types.ts — no filter, no legend, no
+    // colour — so an invented tag has no consumer to fail at. This rule is that
+    // consumer, and it is the reason the field is checkable at all.
+    for (const d of r.domains ?? []) {
+      if (!DOMAINS.includes(d)) {
+        issues.push({
+          severity: 'error',
+          message:
+            `${r.id}: domain "${d}" is not a Domain — add it to Domain and ` +
+            `DOMAINS in src/lib/types.ts, or use an existing tag`,
+        })
+      }
+    }
     // changes_per_year presupposes a publication rate to differ from — it is
     // meaningless on the evergreen shape, so flag that combination too rather
     // than let it silently pass now that releases_per_year can be absent.
@@ -283,6 +334,39 @@ export function validate(
       issues.push({ severity: 'error', message: `Duplicate edge: ${key}` })
     }
     seen.add(key)
+    // The two edge-level unions, added 2026-08-09 (EU/G.74.md); both scanned
+    // clean corpus-wide, and guarded anyway because the scan describes one
+    // afternoon and the guard describes every afternoon after it.
+    //
+    // `relationship_type` is the most consequential unchecked value in the
+    // schema. It is required, so absent is already a compile error at the call
+    // sites that build edges by hand — but a hand-typed JSON slice reaches
+    // RELATIONSHIP_WEIGHT unexamined, an off-union key yields `undefined`, the
+    // weight becomes NaN, and NaN does not stay local: PageRank iterates over
+    // the whole edge set, so one typo poisons every authority score in the
+    // graph. Nothing downstream would report it as anything but a ranking that
+    // looks odd.
+    if (!RELATIONSHIP_TYPES.includes(d.relationship_type)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `Edge ${key}: relationship_type "${d.relationship_type}" is not a ` +
+          `RelationshipType — one of ${RELATIONSHIP_TYPES.join(', ')}. ` +
+          `An unrecognised value has no RELATIONSHIP_WEIGHT entry and would ` +
+          `make every authority score NaN`,
+      })
+    }
+    // `evidence` absent means documented, so a typo reads as documented and
+    // quietly readmits an edge to the ranking the evidence standard excluded it
+    // from — the same silent-inclusion shape as source_kind above.
+    if (d.evidence !== undefined && !EVIDENCE_KINDS.includes(d.evidence)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `Edge ${key}: evidence "${d.evidence}" is not an EvidenceKind — ` +
+          `one of ${EVIDENCE_KINDS.join(', ')} (or absent, meaning documented)`,
+      })
+    }
     if (!d.basis?.trim()) {
       issues.push({
         severity: 'warning',

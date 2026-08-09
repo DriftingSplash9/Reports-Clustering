@@ -109,9 +109,18 @@ national accounts, structural business statistics, labour-force aggregates and
 fiscal-surveillance indicators used by the Commission, the Council and the
 member states should be visible the same way.
 
-**As of the 2026-08-08 validator run the corpus holds 372 reports, 436
-dependencies and 3 relations** (`validator-2026-08-08.txt`, run on Windows
-by Thomas — the validator cannot run through the device bridge). The
+**As of the 2026-08-09 validator run the corpus holds 473 reports, 605
+dependencies and 3 relations** (`EU/G.74.md`; the previous figure recorded
+here, 372/436/3, was the 2026-08-08 run in `validator-2026-08-08.txt`).
+**Correction 2026-08-09 (`EU/G.75.md`)**: the parenthetical above used to
+add "run on Windows by Thomas — the validator cannot run through the device
+bridge". The second half is still true and the inference from it was not:
+the device's own `node_modules` is a Windows build so `npx tsx` fails there,
+but an agent can stage `src/` + `scripts/` into a cloud sandbox, `npm
+install` fresh and run both `scripts/validate-data.ts` and `tsc --noEmit`
+unaided. That has now been done four times (`G.72`–`G.75`); see `G.74.md`
+Orientation §3 for the procedure. Do not treat a validator run as blocked on
+Thomas. The
 paragraph below describes the shape it took when it first became two
 galaxies, at 150 reports and 220 dependencies (`G.39.md`, 2026-08-05) — no
 longer just Canadian federal and Alberta material plus a US federal cluster
