@@ -1,13 +1,14 @@
 {
   "_slice": "ess-peer-review-country-reports",
   "_researched": "2026-08-09",
-  "_status": "STAGED 2026-08-09. Item 5 (EU staging-blob batch backlog). Worked as a single scope-defined slice per MISSION-TODO-2.md item 5(a): the 11-batch cluster (batches 27, 28, 29, 39, 40, 41, 42, 43, 57, 58, 59 in EU/slices/_staging/01-manifest.json, batch_ids PEER-REVIEWS-3RD-ROUND-2026-08-03-A1 / REC-2023-397-2026-08-03-A1 / ESGAB-ANNUAL-REPORTS-2026-08-03-A1) grouped under the manifest's own scope strings as 'ESS governance / Code of Practice compliance mechanism'. All 139 distinct record_ids across the 11 batches were pulled from EU/slices/_staging/10-batch-with-records.ndjson and read in full this session. RESULT: 10 of the 11 batches (all but 40) turned out to be re-derived evidence for two nodes and one edge already minted in this corpus -- ess-peer-review-final-report and esgab-annual-report (both in eu-meta-docx-batches.json), plus eurostat-annual-work-programme and esac-opinion-work-programme (also already minted there), plus the Recommendation (EU) 2023/397 soft-law instrument (already correctly dropped as no-node-yet in eu-meta-docx-batches.json's own _dropped array). No new node or edge came from batches 27, 28, 29, 39, 41, 42, 43, 57, 58 or 59; see _dropped for the itemised mapping so this cluster is not reopened. Batch 40 alone (Slovakia peer-review report + Germany improvement-actions document) held genuinely new material: two individual ESS-member peer-review documents that had never been read at source anywhere in this corpus. Per item 5(e)'s 'what does this instrument actually produce' guidance, the Germany improvement-actions document's own recommendation text was traced back one hop to find what it was actually responding to -- a document not itself staged in batch 40 -- via one live web search plus a direct PDF fetch of Destatis's own site. That produced a third node (Germany's own January 2022 peer-review report) and confirmed a genuine document-to-document dependency (verbatim recommendation-1 text matches word-for-word between the two PDFs). 3 reports, 5 dependencies, 1 dropped (the 10-batch redundancy note, itemised).",
+  "_status": "STAGED 2026-08-09. Item 5 (EU staging-blob batch backlog). Worked as a single scope-defined slice per MISSION-TODO-2.md item 5(a): the 11-batch cluster (batches 27, 28, 29, 39, 40, 41, 42, 43, 57, 58, 59 in EU/slices/_staging/01-manifest.json, batch_ids PEER-REVIEWS-3RD-ROUND-2026-08-03-A1 / REC-2023-397-2026-08-03-A1 / ESGAB-ANNUAL-REPORTS-2026-08-03-A1) grouped under the manifest's own scope strings as 'ESS governance / Code of Practice compliance mechanism'. All 139 distinct record_ids across the 11 batches were pulled from EU/slices/_staging/10-batch-with-records.ndjson and read in full this session. RESULT: 10 of the 11 batches (all but 40) turned out to be re-derived evidence for two nodes and one edge already minted in this corpus -- ess-peer-review-final-report and esgab-annual-report (both in eu-meta-docx-batches.json), plus eurostat-annual-work-programme and esac-opinion-work-programme (also already minted there), plus the Recommendation (EU) 2023/397 soft-law instrument (already correctly dropped as no-node-yet in eu-meta-docx-batches.json's own _dropped array). No new node or edge came from batches 27, 28, 29, 39, 41, 42, 43, 57, 58 or 59; see _dropped for the itemised mapping so this cluster is not reopened. Batch 40 alone (Slovakia peer-review report + Germany improvement-actions document) held genuinely new material: two individual ESS-member peer-review documents that had never been read at source anywhere in this corpus. Per item 5(e)'s 'what does this instrument actually produce' guidance, the Germany improvement-actions document's own recommendation text was traced back one hop to find what it was actually responding to -- a document not itself staged in batch 40 -- via one live web search plus a direct PDF fetch of Destatis's own site. That produced a third node (Germany's own January 2022 peer-review report) and confirmed a genuine document-to-document dependency (verbatim recommendation-1 text matches word-for-word between the two PDFs). 3 reports, 5 dependencies, 1 dropped (the 10-batch redundancy note, itemised). UPDATED 2026-08-09 (EU/G.72.md): Batch 46 worked -- the 29-record 'uncitable country peer-review' block flagged by MISSION-TODO-2.md item 5 (no url/location/names on any staged record) and deliberately left for last since G.50.md. Two of the 29 records (pr-germany, pr-slovakia) duplicate the de-ess-peer-review-report and sk-ess-peer-review-report nodes already minted above from batch 40 -- not re-minted. The remaining 27 were re-fetched from primary sources this session via live WebSearch + WebFetch against Eurostat's document store (ec.europa.eu/eurostat/documents/64157/13566711/...) and, where Eurostat's own store did not surface a result, the country's own NSI hosting (Istat for Italy, CYSTAT for Cyprus). 26 of the 27 confirmed and minted with a verbatim executive-summary compliance statement, author names, date, and a working PDF url; each new report's quote and recommendation counts were cross-checked against the batch-46 stub's own quote/compliance_relevant/improvement_related fields and matched in all 26 cases -- the stub's content was accurate, only its citation was missing. Portugal (batch 46's 29th record) could not be re-cited this session: Eurostat's own news announcement (cn-20230818-1) and Statistics Portugal's own site were both located, but no direct PDF url was retrievable live from either; logged _dropped/no-node-yet rather than minted on the strength of the stub's uncited quote, per the same §6 standard NACE was held to in G.71.md. 26 reports, 52 dependencies (26 methodology_depends_on to eu-statistics-code-of-practice, 26 uses_data_from from ess-peer-review-final-report) added; 1 dropped (Portugal).",
   "_note": "This slice is a case of the staging batches turning out to be almost entirely re-coverage rather than new territory -- worth recording because it is the first time in the EU branch's blob-backlog work that a multi-batch scope cluster resolved to 'already done' rather than to new nodes. The genuine new material (batch 40) was small: one EU member's original peer-review report and its own improvement-actions follow-up, following the exact same document pair shape (report -> improvement action plan) that SWD(2024)136 itself describes as the standard fourth phase of the peer-review process ('the NSI drafted an improvement action plan for the NSS outlining the measures to be taken to address the recommendations of the peer-review report'). Slovakia's report (July 2023, from batch 40 directly) and Germany's report (January 2022, found one hop away via live search+fetch, not itself staged anywhere in the corpus) are minted as the first two of what the SWD(2024)136 final report says are 32 such individual member documents ('a peer review report is published on Eurostat's dedicated web page' for each of the 32 ESS members) -- 30 remain unbuilt and out of scope for this session.",
   "_headline": "Confirmed the 11-batch ESS-governance cluster was 91% (10/11 batches) redundant with prior sessions' work before minting anything -- then found, one hop outside the staged batches, the January 2022 Germany peer-review report that its own improvement-actions document (batch 40) responds to, with a verbatim-matching recommendation text confirming the edge.",
   "_open_questions": [
     "Cadence: neither de-ess-peer-review-report nor sk-ess-peer-review-report is given a releases_per_year figure. Each is evidenced by exactly one dated edition in this session's search (Germany's own text says 'since the last peer review' at points elsewhere in the report, implying an earlier round-2 edition exists, but that earlier Germany document was not located or read this session). The broader ESS peer-review round cadence (0.13/year, three rounds 2006-2008/2013-2015/2021-2023) is already recorded on the sibling aggregate node ess-peer-review-final-report; repeating that figure on a document this session has only one dated edition of would overclaim what was actually verified for Germany/Slovakia specifically, so these two are left evergreen (releases_per_year: null) rather than inheriting the aggregate's number.",
     "30 of the 32 ESS-member peer-review reports (per SWD(2024)136's own count) remain unbuilt. Whether they are worth minting as a full 32-country set, or whether two representative nodes plus the aggregate ess-peer-review-final-report is sufficient corpus coverage of this document type, was not decided this session -- flagged for Thomas.",
-    "ess-peer-review-final-report -> de/sk-ess-peer-review-report is recorded as 'uses_data_from' (the aggregate report's own words: 'This report summarises the results of the peer reviews in all members of the ESS'). This is a judgement call between 'uses_data_from' and 'cites' -- the aggregate genuinely draws its recommendation counts and thematic analysis from the member reports, which reads as a data input rather than contextual reference, but the exact mechanism (does the SWD tabulate each report's individual recommendations, or paraphrase) was not read at source in the SWD's own body this session."
+    "ess-peer-review-final-report -> de/sk-ess-peer-review-report is recorded as 'uses_data_from' (the aggregate report's own words: 'This report summarises the results of the peer reviews in all members of the ESS'). This is a judgement call between 'uses_data_from' and 'cites' -- the aggregate genuinely draws its recommendation counts and thematic analysis from the member reports, which reads as a data input rather than contextual reference, but the exact mechanism (does the SWD tabulate each report's individual recommendations, or paraphrase) was not read at source in the SWD's own body this session.",
+    "Portugal's third-round (2021-2023) ESS peer-review report is confirmed to exist and to have been announced (Eurostat news cn-20230818-1, 2023-08-18) but no direct PDF url was retrievable this session from either Eurostat's document store or Statistics Portugal's own site (both were checked). This is the one remaining gap in the 29-country batch-46 set (30 of 32 ESS peer-review reports now covered corpus-wide, counting the pre-existing de/sk nodes: DE, SK plus this session's 26 -- Liechtenstein and Switzerland remain the only members with no node at all, per G.69.md's original note)."
   ],
   "reports": [
     {
@@ -57,6 +58,422 @@
       "domains": [
         "national-accounts"
       ]
+    },
+    {
+      "id": "dk-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Denmark",
+      "publisher": "ESS third-round peer-review expert team (Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica), for Eurostat / the European Statistical System",
+      "country": "DK",
+      "jurisdiction_level": "federal",
+      "region": "Denmark",
+      "description": "The third-round ESS peer-review report assessing Denmark's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM DENMARK', Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica, April 2022. Executive summary: 'Generally, the peer review team considers that Statistics Denmark demonstrates a high level of compliance with the European Statistics Code of Practice (ES CoP), which is also applied across the national statistical system.' 4 compliance-relevant and 18 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+Review+Report+Denmark.pdf/ef5bf4e0-9c51-52c8-1dc3-13e079b800c7?t=1665737440746",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nl-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Netherlands",
+      "publisher": "ESS third-round peer-review expert team (Marko Krištof, Karin Blix, Daniele Lamarque, Axel Behrens), for Eurostat / the European Statistical System",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "The third-round ESS peer-review report assessing Netherlands's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM NETHERLANDS', Marko Krištof, Karin Blix, Daniele Lamarque, Axel Behrens, August 2022. Executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Dutch statistical system.' 2 compliance-relevant and 12 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+Netherlands.pdf/9e1d1476-3bc0-30c7-67b4-b2e5e3919863?t=1668695908886",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "at-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Austria",
+      "publisher": "ESS third-round peer-review expert team (Maria João Zilhão, Emanuele Baldacci, Heather Bergdahl, Kari Djerf), for Eurostat / the European Statistical System",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "The third-round ESS peer-review report assessing Austria's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM AUSTRIA', Maria João Zilhão, Emanuele Baldacci, Heather Bergdahl, Kari Djerf, May 2022. Executive summary: 'Statistics Austria demonstrates a high level of compliance with the European Statistics Code of Practice (ES CoP).' 1 compliance-relevant and 15 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+Austria.pdf/230eede8-0a5c-55ff-1dad-8d3a0b7b500d?t=1668187010944",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "it-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Italy",
+      "publisher": "ESS third-round peer-review expert team (Jonas Markelevičius, Thomas Burg, Jukka Jalava, Richard Laux), for Eurostat / the European Statistical System",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "The third-round ESS peer-review report assessing Italy's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM ITALY', Jonas Markelevičius, Thomas Burg, Jukka Jalava, Richard Laux, January 2023. Executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the National Statistical System.' 3 compliance-relevant and 17 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://www.istat.it/wp-content/uploads/2024/01/peer-review-report-2023.pdf",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "pl-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Poland",
+      "publisher": "ESS third-round peer-review expert team (Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg), for Eurostat / the European Statistical System",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "region": "Poland",
+      "description": "The third-round ESS peer-review report assessing Poland's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM POLAND', Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg, July 2022. Executive summary: 'the National Statistical System of Poland demonstrates high compliance with the European Statistics Code of Practice.' 1 compliance-relevant and 14 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+PL.pdf/19970550-09aa-4ea8-f4b6-e89e8215a29c?t=1674123961496",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "se-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Sweden",
+      "publisher": "ESS third-round peer-review expert team (Marko Krištof, Karin Blix, Daniele Lamarque, Pierre Bischoff), for Eurostat / the European Statistical System",
+      "country": "SE",
+      "jurisdiction_level": "federal",
+      "region": "Sweden",
+      "description": "The third-round ESS peer-review report assessing Sweden's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM SWEDEN', Marko Krištof, Karin Blix, Daniele Lamarque, Pierre Bischoff, December 2021. Executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Swedish statistical system.' 5 compliance-relevant and 17 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+report+SE+final.pdf/9bb25bba-a2c0-b897-8ba3-7ebffda7dcce?t=1652169027019",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "no-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Norway",
+      "publisher": "ESS third-round peer-review expert team (Marjo Bruun, Jordi Delbas, Helena Ottosson, Kees Zeelenberg), for Eurostat / the European Statistical System",
+      "country": "NO",
+      "jurisdiction_level": "federal",
+      "region": "Norway",
+      "description": "The third-round ESS peer-review report assessing Norway's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM NORWAY', Marjo Bruun, Jordi Delbas, Helena Ottosson, Kees Zeelenberg, December 2021. Executive summary: 'the Norwegian statistical system demonstrates a strong commitment to the European Statistics Code of Practice (ES CoP) and that progress since the last peer review has been significant.' 0 compliance-relevant and 15 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+report+Norway+final.pdf/7e776723-7215-bdc3-e116-aa45aff550f6?t=1656422160542",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "gr-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Greece",
+      "publisher": "ESS third-round peer-review expert team (Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica), for Eurostat / the European Statistical System",
+      "country": "GR",
+      "jurisdiction_level": "federal",
+      "region": "Greece",
+      "description": "The third-round ESS peer-review report assessing Greece's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM GREECE', Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica, November 2022. Executive summary: 'progress made by the Hellenic Statistical System in implementing the ES CoP in recent years is impressive, with the Hellenic Statistical Authority demonstrating a high level of adherence to the ES CoP. [...] the peer review team identified four compliance-relevant and thirteen improvement-related recommendations.' 4 compliance-relevant and 13 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/peer-review-report+Greece.pdf/7ca7790c-5382-7630-fe53-4da07106fe42?t=1689852957946",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "es-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Spain",
+      "publisher": "ESS third-round peer-review expert team (Jonas Markelevičius, Thomas Burg, Jukka Jalava, Richard Laux), for Eurostat / the European Statistical System",
+      "country": "ES",
+      "jurisdiction_level": "federal",
+      "region": "Spain",
+      "description": "The third-round ESS peer-review report assessing Spain's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM SPAIN', Jonas Markelevičius, Thomas Burg, Jukka Jalava, Richard Laux, July 2022. Executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Spanish statistical system. [...] four compliance-relevant and seventeen improvement-related recommendations grouped under six main headings.' 4 compliance-relevant and 17 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/spain-peer-review-report.pdf/12dc5a11-abf3-d2c7-506b-8038d8fec827?t=1681813096057",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "fr-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - France",
+      "publisher": "ESS third-round peer-review expert team (Jennifer Banim, Tina Steenvoorden, Michail Skaliotis, Pierre Bischoff), for Eurostat / the European Statistical System",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "The third-round ESS peer-review report assessing France's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM FRANCE', Jennifer Banim, Tina Steenvoorden, Michail Skaliotis, Pierre Bischoff, July 2021. Executive summary: 'Overall, there is a high level of compliance with the ES CoP throughout the SSP. [...] one compliance-relevant and fifteen improvement-related recommendations.' 1 compliance-relevant and 15 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+FR+Report+revised-13102021+final.pdf/3ebc5650-8ff8-8cee-e280-d569e24069a7?t=1635279978295",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "fi-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Finland",
+      "publisher": "ESS third-round peer-review expert team (Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica), for Eurostat / the European Statistical System",
+      "country": "FI",
+      "jurisdiction_level": "federal",
+      "region": "Finland",
+      "description": "The third-round ESS peer-review report assessing Finland's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM FINLAND', Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica, December 2021. Executive summary: 'Overall, the peer review team found Statistics Finland to be in compliance with the ES CoP. [...] Consequently, all recommendations mentioned below should be considered improvement-related.' 0 compliance-relevant and 14 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/finland-final-report_december-2021.pdf/87a9d72e-e03d-874a-db66-74e3009e3d3d?t=1681224144515",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "be-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Belgium",
+      "publisher": "ESS third-round peer-review expert team (Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg), for Eurostat / the European Statistical System",
+      "country": "BE",
+      "jurisdiction_level": "federal",
+      "region": "Belgium",
+      "description": "The third-round ESS peer-review report assessing Belgium's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM BELGIUM', Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg, January 2022. Executive summary: 'the Belgian statistical system has an overall high level of compliance with the European Statistics Code of Practice (ES CoP), despite the complexity of its multi-level governance structure.' 1 compliance-relevant and 12 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+Report+Belgium_.pdf/ed4cf05a-e67f-1e56-2f60-c22a024c4130?t=1662458453180",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "bg-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Bulgaria",
+      "publisher": "ESS third-round peer-review expert team (Marjo Bruun, Jordi del Bas, Helena Ottosson, Kees Zeelenberg), for Eurostat / the European Statistical System",
+      "country": "BG",
+      "jurisdiction_level": "federal",
+      "region": "Bulgaria",
+      "description": "The third-round ESS peer-review report assessing Bulgaria's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM BULGARIA', Marjo Bruun, Jordi del Bas, Helena Ottosson, Kees Zeelenberg, April 2022. Executive summary: 'the Bulgarian statistical system has a high level of compliance with the European Statistics Code of Practice (ES CoP)' 2 compliance-relevant and 20 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+Bulgaria.pdf/3b6debad-50b3-ebce-187d-babbf99adc95?t=1668092890598",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "cz-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Czechia",
+      "publisher": "ESS third-round peer-review expert team (Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg), for Eurostat / the European Statistical System",
+      "country": "CZ",
+      "jurisdiction_level": "federal",
+      "region": "Czechia",
+      "description": "The third-round ESS peer-review report assessing Czechia's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM CZECH REPUBLIC', Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg, April 2023. Executive summary: 'the Czech Statistical Office demonstrates a high level of compliance with the European Statistics Code of Practice.' 2 compliance-relevant and 19 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/czech-republic-peer-review-report.pdf/b9c1cc13-4e61-7e71-cd5c-a07d81b2332e?t=1695192749677",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ee-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Estonia",
+      "publisher": "ESS third-round peer-review expert team (Jorgen Elmeskov, Hana Slegrova, Daniela Stefanescu, Frantisek Bernadic), for Eurostat / the European Statistical System",
+      "country": "EE",
+      "jurisdiction_level": "federal",
+      "region": "Estonia",
+      "description": "The third-round ESS peer-review report assessing Estonia's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM ESTONIA', Jorgen Elmeskov, Hana Slegrova, Daniela Stefanescu, Frantisek Bernadic, October 2021. Executive summary: 'observed general compliance with the European Statistics Code of Practice (ES CoP)' 1 compliance-relevant and 18 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+EE+Report+final+17122021.pdf/7d103e50-5b29-927f-e81c-3415c3aeb2d9?t=1641393752933",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ie-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Ireland",
+      "publisher": "ESS third-round peer-review expert team (Jorgen Elmeskov, Hana Slegrova, Daniela Stefanescu, Frantisek Bernadic), for Eurostat / the European Statistical System",
+      "country": "IE",
+      "jurisdiction_level": "federal",
+      "region": "Ireland",
+      "description": "The third-round ESS peer-review report assessing Ireland's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM IRELAND', Jorgen Elmeskov, Hana Slegrova, Daniela Stefanescu, Frantisek Bernadic, March 2022. Executive summary: 'none of the recommendations concern compliance with the European Statistics Code of Practice' 0 compliance-relevant and 20 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+report+Ireland+Final.pdf/b2ffc12b-d1ec-44ee-0c4a-df6c04280f2f?t=1658322133756",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "hr-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Croatia",
+      "publisher": "ESS third-round peer-review expert team (Jonas Markelevičius, Thomas Burg, Richard Laux, Jarko Pasanen), for Eurostat / the European Statistical System",
+      "country": "HR",
+      "jurisdiction_level": "federal",
+      "region": "Croatia",
+      "description": "The third-round ESS peer-review report assessing Croatia's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM CROATIA', Jonas Markelevičius, Thomas Burg, Richard Laux, Jarko Pasanen, April 2023. Executive summary: 'Overall, there is a high level of compliance with the ES CoP throughout the Croatian Statistical System. [...] four compliance-relevant and twenty-two improvement-related recommendations under five headings.' 4 compliance-relevant and 22 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/croatia-peer-review-report.pdf/104001ff-be69-279f-0122-de9254dc38bb?t=1696403691553",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "lv-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Latvia",
+      "publisher": "ESS third-round peer-review expert team (Marko Krištof, Karin Blix, Danièle Lamarque, Gorja Bartsch), for Eurostat / the European Statistical System",
+      "country": "LV",
+      "jurisdiction_level": "federal",
+      "region": "Latvia",
+      "description": "The third-round ESS peer-review report assessing Latvia's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM LATVIA', Marko Krištof, Karin Blix, Danièle Lamarque, Gorja Bartsch, March 2023. Executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice throughout the National Statistical System in Latvia.' 2 compliance-relevant and 17 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/latvia-peer-review-report.pdf/a93b9799-414e-72c3-3d11-ea6a1aef649a?t=1698151668752",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "lt-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Lithuania",
+      "publisher": "ESS third-round peer-review expert team (Maria João Zilhão, Emanuele Baldacci, Heather Bergdahl, Kari Djerf), for Eurostat / the European Statistical System",
+      "country": "LT",
+      "jurisdiction_level": "federal",
+      "region": "Lithuania",
+      "description": "The third-round ESS peer-review report assessing Lithuania's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM LITHUANIA', Maria João Zilhão, Emanuele Baldacci, Heather Bergdahl, Kari Djerf, December 2021. Executive summary: 'Generally, the peer review team considers that Statistics Lithuania demonstrates a high level of compliance with the European Statistics Code of Practice. [...] two compliance-relevant and 23 improvement-related recommendations were identified and grouped under four major headings.' 2 compliance-relevant and 23 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+Report+Lithuania+final.pdf/07ddc2e1-20de-bab2-11d8-2f1260c647eb?t=1653858084141",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "lu-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Luxembourg",
+      "publisher": "ESS third-round peer-review expert team (Jennifer Banim, Tina Steenvoorden, Michail Skaliotis, Pierre Bischoff), for Eurostat / the European Statistical System",
+      "country": "LU",
+      "jurisdiction_level": "federal",
+      "region": "Luxembourg",
+      "description": "The third-round ESS peer-review report assessing Luxembourg's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM LUXEMBOURG', Jennifer Banim, Tina Steenvoorden, Michail Skaliotis, Pierre Bischoff, February 2022. Executive summary: 'Overall, there is general compliance with the ES CoP throughout the national statistical system.' 3 compliance-relevant and 14 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+Luxembourg+final+report.pdf/44699dd1-d80b-18f5-e3fa-b7b7637bab02?t=1656590064917",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "hu-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Hungary",
+      "publisher": "ESS third-round peer-review expert team (Marjo Bruun, Pierre Bischoff, Ann Lisbet Brathaug, Jordi del Bas), for Eurostat / the European Statistical System",
+      "country": "HU",
+      "jurisdiction_level": "federal",
+      "region": "Hungary",
+      "description": "The third-round ESS peer-review report assessing Hungary's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM HUNGARY', Marjo Bruun, Pierre Bischoff, Ann Lisbet Brathaug, Jordi del Bas, April 2023. Executive summary: 'Generally, the peer review team considers that the Hungarian Statistical System demonstrates compliance with the European Statistics Code of Practice.' 3 compliance-relevant and 19 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/hungary-peer-review-report.pdf/e9006533-ff06-ccdd-7ada-a31da989545e?t=1702590591971",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "mt-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Malta",
+      "publisher": "ESS third-round peer-review expert team (Maria João Zilhão, Emanuele Baldacci, Heather Bergdahl, Kari Djerf), for Eurostat / the European Statistical System",
+      "country": "MT",
+      "jurisdiction_level": "federal",
+      "region": "Malta",
+      "description": "The third-round ESS peer-review report assessing Malta's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM MALTA', Maria João Zilhão, Emanuele Baldacci, Heather Bergdahl, Kari Djerf, November 2022. Executive summary: 'the National Statistics Office demonstrates a high level of compliance with the European Statistics Code of Practice.' 2 compliance-relevant and 14 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/malta-peer-review-report.pdf/234493a5-eb35-a01c-f9c1-71ad724aec3e?t=1693828235608",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ro-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Romania",
+      "publisher": "ESS third-round peer-review expert team (Jennifer Banim, Tina Steenvoorden, Michail Skaliotis, Pierre Bischoff), for Eurostat / the European Statistical System",
+      "country": "RO",
+      "jurisdiction_level": "federal",
+      "region": "Romania",
+      "description": "The third-round ESS peer-review report assessing Romania's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM ROMANIA', Jennifer Banim, Tina Steenvoorden, Michail Skaliotis, Pierre Bischoff, March 2023. Executive summary: 'Overall, there is good compliance with the principles of the ES CoP throughout the national statistical system.' 2 compliance-relevant and 19 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/romania-peer-review-report.pdf/63ee663a-1187-7bd0-933e-fc399a87a6fd?t=1701351764339",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "si-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Slovenia",
+      "publisher": "ESS third-round peer-review expert team (Marko Krištof, Karin Blix, Daniele Lamarque, Pierre Bischoff), for Eurostat / the European Statistical System",
+      "country": "SI",
+      "jurisdiction_level": "federal",
+      "region": "Slovenia",
+      "description": "The third-round ESS peer-review report assessing Slovenia's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM SLOVENIA', Marko Krištof, Karin Blix, Daniele Lamarque, Pierre Bischoff, July 2023. Executive summary: 'there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Slovenian Statistical System. [...] one compliance-relevant and fourteen improvement-related recommendations.' 1 compliance-relevant and 14 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/slovenia-peer-review-report.pdf",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "cy-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Cyprus",
+      "publisher": "ESS third-round peer-review expert team (Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica), for Eurostat / the European Statistical System",
+      "country": "CY",
+      "jurisdiction_level": "federal",
+      "region": "Cyprus",
+      "description": "The third-round ESS peer-review report assessing Cyprus's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM CYPRUS', Stephan Moens, Martina Hahn, József Kárpáti, Jolanta Minkevica, April 2023. Executive summary: 'CYSTAT demonstrates a high level of compliance with the European Statistics Code of Practice (ES CoP). [...] four compliance-relevant and thirteen improvement-related recommendations.' 4 compliance-relevant and 13 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://library.cystat.gov.cy/NEW/Evaluation_Code_of_Practice-2023-EN-151123.pdf.pdf",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "is-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Iceland",
+      "publisher": "ESS third-round peer-review expert team (Jorgen Elmeskov, Hana Slegrova, Daniela Stefanescu, Frantisek Bernadic), for Eurostat / the European Statistical System",
+      "country": "IS",
+      "jurisdiction_level": "federal",
+      "region": "Iceland",
+      "description": "The third-round ESS peer-review report assessing Iceland's national statistical system against the European Statistics Code of Practice. Found via live search + direct PDF fetch this session (batch 46's own staged record for this country carried a quote but no url/location/names, so was uncitable per §2/§6 until re-fetched at source). Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM ICELAND', Jorgen Elmeskov, Hana Slegrova, Daniela Stefanescu, Frantisek Bernadic, June 2023. Executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the national statistical system. [...] seventeen recommendations, of which two are compliance-relevant and fifteen are improvement-related recommendations.' 2 compliance-relevant and 15 improvement-related recommendations.",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/iceland-peer-review-report.pdf",
+      "domains": [
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [
@@ -94,6 +511,370 @@
       "relationship_type": "uses_data_from",
       "basis": "Same basis as the Germany edge above -- SWD(2024)136 'summarises the results of the peer reviews in all members of the ESS', and Slovakia's report is one of the 32 named member reports.",
       "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "dk-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Generally, the peer review team considers that Statistics Denmark demonstrates a high level of compliance with the European Statistics Code of Practice (ES CoP), which is also applied across the national statistical system.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+Review+Report+Denmark.pdf/ef5bf4e0-9c51-52c8-1dc3-13e079b800c7?t=1665737440746"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "dk-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Denmark's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "nl-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Dutch statistical system.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+Netherlands.pdf/9e1d1476-3bc0-30c7-67b4-b2e5e3919863?t=1668695908886"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "nl-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Netherlands's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "at-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Statistics Austria demonstrates a high level of compliance with the European Statistics Code of Practice (ES CoP).' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+Austria.pdf/230eede8-0a5c-55ff-1dad-8d3a0b7b500d?t=1668187010944"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "at-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Austria's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "it-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the National Statistical System.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://www.istat.it/wp-content/uploads/2024/01/peer-review-report-2023.pdf"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "it-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Italy's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "pl-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the National Statistical System of Poland demonstrates high compliance with the European Statistics Code of Practice.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+PL.pdf/19970550-09aa-4ea8-f4b6-e89e8215a29c?t=1674123961496"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "pl-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Poland's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "se-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Swedish statistical system.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+report+SE+final.pdf/9bb25bba-a2c0-b897-8ba3-7ebffda7dcce?t=1652169027019"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "se-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Sweden's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "no-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the Norwegian statistical system demonstrates a strong commitment to the European Statistics Code of Practice (ES CoP) and that progress since the last peer review has been significant.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+report+Norway+final.pdf/7e776723-7215-bdc3-e116-aa45aff550f6?t=1656422160542"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "no-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Norway's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "gr-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'progress made by the Hellenic Statistical System in implementing the ES CoP in recent years is impressive, with the Hellenic Statistical Authority demonstrating a high level of adherence to the ES CoP. [...] the peer review team identified four compliance-relevant and thirteen improvement-related recommendations.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/peer-review-report+Greece.pdf/7ca7790c-5382-7630-fe53-4da07106fe42?t=1689852957946"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "gr-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Greece's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "es-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Spanish statistical system. [...] four compliance-relevant and seventeen improvement-related recommendations grouped under six main headings.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/spain-peer-review-report.pdf/12dc5a11-abf3-d2c7-506b-8038d8fec827?t=1681813096057"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "es-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Spain's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "fr-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the ES CoP throughout the SSP. [...] one compliance-relevant and fifteen improvement-related recommendations.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+FR+Report+revised-13102021+final.pdf/3ebc5650-8ff8-8cee-e280-d569e24069a7?t=1635279978295"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "fr-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' France's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "fi-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, the peer review team found Statistics Finland to be in compliance with the ES CoP. [...] Consequently, all recommendations mentioned below should be considered improvement-related.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/finland-final-report_december-2021.pdf/87a9d72e-e03d-874a-db66-74e3009e3d3d?t=1681224144515"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "fi-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Finland's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "be-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the Belgian statistical system has an overall high level of compliance with the European Statistics Code of Practice (ES CoP), despite the complexity of its multi-level governance structure.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+Report+Belgium_.pdf/ed4cf05a-e67f-1e56-2f60-c22a024c4130?t=1662458453180"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "be-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Belgium's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "bg-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the Bulgarian statistical system has a high level of compliance with the European Statistics Code of Practice (ES CoP)' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/Peer+review+Report+Bulgaria.pdf/3b6debad-50b3-ebce-187d-babbf99adc95?t=1668092890598"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "bg-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Bulgaria's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "cz-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the Czech Statistical Office demonstrates a high level of compliance with the European Statistics Code of Practice.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/czech-republic-peer-review-report.pdf/b9c1cc13-4e61-7e71-cd5c-a07d81b2332e?t=1695192749677"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "cz-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Czechia's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "ee-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'observed general compliance with the European Statistics Code of Practice (ES CoP)' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+EE+Report+final+17122021.pdf/7d103e50-5b29-927f-e81c-3415c3aeb2d9?t=1641393752933"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "ee-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Estonia's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "ie-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'none of the recommendations concern compliance with the European Statistics Code of Practice' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+report+Ireland+Final.pdf/b2ffc12b-d1ec-44ee-0c4a-df6c04280f2f?t=1658322133756"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "ie-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Ireland's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "hr-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the ES CoP throughout the Croatian Statistical System. [...] four compliance-relevant and twenty-two improvement-related recommendations under five headings.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/croatia-peer-review-report.pdf/104001ff-be69-279f-0122-de9254dc38bb?t=1696403691553"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "hr-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Croatia's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "lv-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice throughout the National Statistical System in Latvia.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/latvia-peer-review-report.pdf/a93b9799-414e-72c3-3d11-ea6a1aef649a?t=1698151668752"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "lv-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Latvia's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "lt-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Generally, the peer review team considers that Statistics Lithuania demonstrates a high level of compliance with the European Statistics Code of Practice. [...] two compliance-relevant and 23 improvement-related recommendations were identified and grouped under four major headings.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+Report+Lithuania+final.pdf/07ddc2e1-20de-bab2-11d8-2f1260c647eb?t=1653858084141"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "lt-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Lithuania's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "lu-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is general compliance with the ES CoP throughout the national statistical system.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/PR+Luxembourg+final+report.pdf/44699dd1-d80b-18f5-e3fa-b7b7637bab02?t=1656590064917"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "lu-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Luxembourg's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "hu-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Generally, the peer review team considers that the Hungarian Statistical System demonstrates compliance with the European Statistics Code of Practice.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/hungary-peer-review-report.pdf/e9006533-ff06-ccdd-7ada-a31da989545e?t=1702590591971"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "hu-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Hungary's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "mt-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the National Statistics Office demonstrates a high level of compliance with the European Statistics Code of Practice.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/malta-peer-review-report.pdf/234493a5-eb35-a01c-f9c1-71ad724aec3e?t=1693828235608"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "mt-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Malta's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "ro-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is good compliance with the principles of the ES CoP throughout the national statistical system.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/romania-peer-review-report.pdf/63ee663a-1187-7bd0-933e-fc399a87a6fd?t=1701351764339"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "ro-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Romania's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "si-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the Slovenian Statistical System. [...] one compliance-relevant and fourteen improvement-related recommendations.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/slovenia-peer-review-report.pdf"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "si-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Slovenia's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "cy-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'CYSTAT demonstrates a high level of compliance with the European Statistics Code of Practice (ES CoP). [...] four compliance-relevant and thirteen improvement-related recommendations.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://library.cystat.gov.cy/NEW/Evaluation_Code_of_Practice-2023-EN-151123.pdf.pdf"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "cy-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Cyprus's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "is-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a high level of compliance with the European Statistics Code of Practice (ES CoP) throughout the national statistical system. [...] seventeen recommendations, of which two are compliance-relevant and fifteen are improvement-related recommendations.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report, esgab-annual-report, de-ess-peer-review-report and sk-ess-peer-review-report to this same target.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/iceland-peer-review-report.pdf"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "is-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Iceland's report is one of the 32 named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
     }
   ],
   "_dropped": [
@@ -103,6 +884,13 @@
       "target": null,
       "reason": "duplicate",
       "why": "All 139 distinct record_ids across the 11-batch cluster were read this session; itemised mapping so the cluster is not reopened. Batches 27, 39, 43, 57 (SWD(2024)136 / third-round peer-review methodology and results) are re-derived evidence for ess-peer-review-final-report, already minted in eu-meta-docx-batches.json with the same cadence conclusion (round-based, 0.13/year, three rounds 2006-2008/2013-2015/2021-2023). Batches 29, 42, 59 (ESGAB Annual Reports 2024/2025, plus the 2026 Work Programme and ESAC opinions named alongside them) are re-derived evidence for esgab-annual-report, eurostat-annual-work-programme and esac-opinion-work-programme, all three already minted in the same file. Batches 28, 41, 58 (Commission Recommendation (EU) 2023/397) match an entry eu-meta-docx-batches.json's own _dropped array already carries verbatim: 'A soft-law instrument (replacing Recommendation 2009/498/EC) inviting Member States to apply the Single Integrated Metadata Structure (SIMS). Not itself a recurrently published document -- it is a one-off legal act... no new node.' Nothing in this session's re-read of the Recommendation's recitals and operative points changes that conclusion. Only batch 40 (Slovakia peer-review report + Germany improvement-actions document) held material not already covered; see reports/dependencies above."
+    },
+    {
+      "edge": "pr-portugal (batch 46 record) -- no citable third-round PDF located this session",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The staged batch-46 record (id pr-portugal) carries a quote ('Overall, there is a high level of compliance with the ES CoP throughout the Portuguese Statistical System.', compliance_relevant 1, improvement_related 14) but no url, location or names, per the standing note in MISSION-TODO-2.md about this batch. Eurostat's own news announcement confirms the report exists and was published (https://ec.europa.eu/eurostat/web/products-eurostat-news/w/cn-20230818-1, 'Peer review report on Portugal now online', 2023-08-18) and names a second location, Statistics Portugal's own site (https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_cont_inst&INST=623284698&xlang=en), but neither page exposes a direct PDF link retrievable by WebFetch this session (the ine.pt page also refused the fetch outright -- robots/connect-timeout), and a guessed url on Eurostat's document-store naming pattern (Peer+Review+Report+Portugal.pdf) 404'd. Per Research.1.md §6, a confirmed announcement and title are not a substitute for a verbatim quote read at its own source url, so this stays unminted rather than being promoted on the batch stub's uncited quote alone. One websearch/one direct-fetch attempt each, consistent with item 5(e)'s per-record budget; a future session should try the ine.pt page again (transient connect timeout) or search Statistics Portugal's own document library directly."
     }
   ]
 }
