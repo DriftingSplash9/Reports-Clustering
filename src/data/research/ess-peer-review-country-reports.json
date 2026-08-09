@@ -1,0 +1,108 @@
+{
+  "_slice": "ess-peer-review-country-reports",
+  "_researched": "2026-08-09",
+  "_status": "STAGED 2026-08-09. Item 5 (EU staging-blob batch backlog). Worked as a single scope-defined slice per MISSION-TODO-2.md item 5(a): the 11-batch cluster (batches 27, 28, 29, 39, 40, 41, 42, 43, 57, 58, 59 in EU/slices/_staging/01-manifest.json, batch_ids PEER-REVIEWS-3RD-ROUND-2026-08-03-A1 / REC-2023-397-2026-08-03-A1 / ESGAB-ANNUAL-REPORTS-2026-08-03-A1) grouped under the manifest's own scope strings as 'ESS governance / Code of Practice compliance mechanism'. All 139 distinct record_ids across the 11 batches were pulled from EU/slices/_staging/10-batch-with-records.ndjson and read in full this session. RESULT: 10 of the 11 batches (all but 40) turned out to be re-derived evidence for two nodes and one edge already minted in this corpus -- ess-peer-review-final-report and esgab-annual-report (both in eu-meta-docx-batches.json), plus eurostat-annual-work-programme and esac-opinion-work-programme (also already minted there), plus the Recommendation (EU) 2023/397 soft-law instrument (already correctly dropped as no-node-yet in eu-meta-docx-batches.json's own _dropped array). No new node or edge came from batches 27, 28, 29, 39, 41, 42, 43, 57, 58 or 59; see _dropped for the itemised mapping so this cluster is not reopened. Batch 40 alone (Slovakia peer-review report + Germany improvement-actions document) held genuinely new material: two individual ESS-member peer-review documents that had never been read at source anywhere in this corpus. Per item 5(e)'s 'what does this instrument actually produce' guidance, the Germany improvement-actions document's own recommendation text was traced back one hop to find what it was actually responding to -- a document not itself staged in batch 40 -- via one live web search plus a direct PDF fetch of Destatis's own site. That produced a third node (Germany's own January 2022 peer-review report) and confirmed a genuine document-to-document dependency (verbatim recommendation-1 text matches word-for-word between the two PDFs). 3 reports, 5 dependencies, 1 dropped (the 10-batch redundancy note, itemised).",
+  "_note": "This slice is a case of the staging batches turning out to be almost entirely re-coverage rather than new territory -- worth recording because it is the first time in the EU branch's blob-backlog work that a multi-batch scope cluster resolved to 'already done' rather than to new nodes. The genuine new material (batch 40) was small: one EU member's original peer-review report and its own improvement-actions follow-up, following the exact same document pair shape (report -> improvement action plan) that SWD(2024)136 itself describes as the standard fourth phase of the peer-review process ('the NSI drafted an improvement action plan for the NSS outlining the measures to be taken to address the recommendations of the peer-review report'). Slovakia's report (July 2023, from batch 40 directly) and Germany's report (January 2022, found one hop away via live search+fetch, not itself staged anywhere in the corpus) are minted as the first two of what the SWD(2024)136 final report says are 32 such individual member documents ('a peer review report is published on Eurostat's dedicated web page' for each of the 32 ESS members) -- 30 remain unbuilt and out of scope for this session.",
+  "_headline": "Confirmed the 11-batch ESS-governance cluster was 91% (10/11 batches) redundant with prior sessions' work before minting anything -- then found, one hop outside the staged batches, the January 2022 Germany peer-review report that its own improvement-actions document (batch 40) responds to, with a verbatim-matching recommendation text confirming the edge.",
+  "_open_questions": [
+    "Cadence: neither de-ess-peer-review-report nor sk-ess-peer-review-report is given a releases_per_year figure. Each is evidenced by exactly one dated edition in this session's search (Germany's own text says 'since the last peer review' at points elsewhere in the report, implying an earlier round-2 edition exists, but that earlier Germany document was not located or read this session). The broader ESS peer-review round cadence (0.13/year, three rounds 2006-2008/2013-2015/2021-2023) is already recorded on the sibling aggregate node ess-peer-review-final-report; repeating that figure on a document this session has only one dated edition of would overclaim what was actually verified for Germany/Slovakia specifically, so these two are left evergreen (releases_per_year: null) rather than inheriting the aggregate's number.",
+    "30 of the 32 ESS-member peer-review reports (per SWD(2024)136's own count) remain unbuilt. Whether they are worth minting as a full 32-country set, or whether two representative nodes plus the aggregate ess-peer-review-final-report is sufficient corpus coverage of this document type, was not decided this session -- flagged for Thomas.",
+    "ess-peer-review-final-report -> de/sk-ess-peer-review-report is recorded as 'uses_data_from' (the aggregate report's own words: 'This report summarises the results of the peer reviews in all members of the ESS'). This is a judgement call between 'uses_data_from' and 'cites' -- the aggregate genuinely draws its recommendation counts and thematic analysis from the member reports, which reads as a data input rather than contextual reference, but the exact mechanism (does the SWD tabulate each report's individual recommendations, or paraphrase) was not read at source in the SWD's own body this session."
+  ],
+  "reports": [
+    {
+      "id": "de-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Germany",
+      "publisher": "ESS third-round peer-review expert team (Jonas Markelevicius, Thomas Burg, Richard Laux, Jean-Pierre Poncelet), for Eurostat / the European Statistical System",
+      "country": "DE",
+      "jurisdiction_level": "federal",
+      "region": "Germany",
+      "description": "The third-round ESS peer-review report assessing Germany's national statistical system -- the Federal Statistical Office plus the 14 Statistical Offices of the Laender and a further 16 'other' Other National Authorities -- against the European Statistics Code of Practice. Not itself staged in EU/slices/_staging/ (found one hop outside the staged batches, via live search plus a direct PDF fetch of Destatis's own hosting page, while tracing what the staged Germany improvement-actions document was responding to). Title page, read directly at source: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM GERMANY Jonas Markelevicius Thomas Burg Richard Laux Jean-Pierre Poncelet January 2022.' Executive summary: 'Overall, there is a good level of compliance with the European Statistics Code of Practice (ES CoP) throughout the German statistical system. However, the peer review team identified eight compliance-relevant and fifteen improvement-related recommendations grouped under six main headings.' Recommendation 1, read directly at source and later confirmed to match the staged Germany improvement-actions document word-for-word: 'The Federal Statistical Office should formalise and publish National Guidelines to ensure quality in the development, production and dissemination of European Statistics, applicable to all Other National Authorities.'",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://www.destatis.de/DE/Ueber-uns/Peer-Review/report.pdf?__blob=publicationFile&v=6",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "de-ess-peer-review-improvement-actions",
+      "title": "Peer Reviewers' Recommendations and Improvement Actions of the National Statistical System of Germany",
+      "publisher": "Federal Statistical Office of Germany (Destatis), in agreement with Eurostat",
+      "country": "DE",
+      "jurisdiction_level": "federal",
+      "region": "Germany",
+      "description": "Germany's improvement action plan responding to the recommendations of its January 2022 ESS peer-review report -- the fourth phase of the standard ESS peer-review process (SWD(2024)136: 'the NSI drafted an improvement action plan for the NSS outlining the measures to be taken to address the recommendations of the peer-review report, setting a deadline and identifying an institution responsible'). Title/cover: 'PEER REVIEWERS' RECOMMENDATIONS AND IMPROVEMENT ACTIONS OF THE NATIONAL STATISTICAL SYSTEM OF GERMANY IN RESPONSE TO THE RECOMMENDATIONS.' Its own '1. Recommendation' restates the January 2022 report's Recommendation 1 verbatim -- 'The Federal Statistical Office should formalise and publish National Guidelines to ensure quality in the development, production and dissemination of European Statistics, applicable to all Other National Authorities. The implementation of these National Guidelines should be monitored and reviewed. The responsibility for ensuring compliance with the Guidelines rests solely with the heads of the Other National Authorities. (Compliance-relevant: ES CoP, indicator 1bis.2)' -- then sets out dated sub-actions: 'Improvement sub-action 1.1: A kick-off and 1-2 working meetings are planned by the end of 2023 to familiarize the ONAs with the applicable quality guidelines. Deadline: Q4 2023' and 'Improvement sub-action 1.2: The quality guidelines in force for the German official statistics network will be applied in at least 2 ONAs by the end of 2024. Deadline: Q4 2024.'",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/14414849/germany-improvement-actions.pdf/4cff731f-59f5-95b3-8f5a-8910ec9bc72b?t=1703000493417",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "sk-ess-peer-review-report",
+      "title": "Peer Review Report on Compliance with the European Statistics Code of Practice and Further Improvement and Development of the National Statistical System - Slovakia",
+      "publisher": "ESS third-round peer-review expert team (Jean-Michel Durr, Remi Prual, Nikolaos Roubanis, Paloma Seoane Spiegelberg), for Eurostat / the European Statistical System",
+      "country": "SK",
+      "jurisdiction_level": "national",
+      "region": "Slovakia",
+      "description": "The third-round ESS peer-review report assessing the Statistical Office of the Slovak Republic and the Slovak statistical system against the European Statistics Code of Practice. Title page: 'PEER REVIEW REPORT ON COMPLIANCE WITH THE EUROPEAN STATISTICS CODE OF PRACTICE AND FURTHER IMPROVEMENT AND DEVELOPMENT OF THE NATIONAL STATISTICAL SYSTEM Slovakia Jean-Michel Durr Remi Prual Nikolaos Roubanis Paloma Seoane Spiegelberg July 2023.' Executive summary: 'Overall, the peer review team considers that the Statistical Office of the Slovak Republic and the Slovak statistical system demonstrate a high level of compliance with the European statistics Code of Practice and have made good progress since the last peer review. However, one compliance-relevant and twenty improvement-related recommendations were identified and grouped under four major headings.' The sole compliance-relevant recommendation: 'The relevant authorities should amend the legislation to make the procedure for the recruitment and appointment of the President of the Statistical Office of the Slovak Republic more transparent and based on professional criteria. (Compliance-relevant: ES CoP, Indicator 1.8)'",
+      "releases_per_year": null,
+      "cadence_note": "",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/64157/13566711/slovakia-peer-review-report.pdf/cb7d59e0-1815-55dc-53d9-dd15fce4553a?t=1702551161339",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "de-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'Overall, there is a good level of compliance with the European Statistics Code of Practice (ES CoP) throughout the German statistical system.' The entire report is structured as an assessment against the CoP's 16 principles, the same relationship already recorded from ess-peer-review-final-report and esgab-annual-report to this same target.",
+      "evidence_url": "https://www.destatis.de/DE/Ueber-uns/Peer-Review/report.pdf?__blob=publicationFile&v=6"
+    },
+    {
+      "source_report_id": "sk-ess-peer-review-report",
+      "target_report_id": "eu-statistics-code-of-practice",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own executive summary: 'the Statistical Office of the Slovak Republic and the Slovak statistical system demonstrate a high level of compliance with the European statistics Code of Practice.'",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/13566711/slovakia-peer-review-report.pdf/cb7d59e0-1815-55dc-53d9-dd15fce4553a?t=1702551161339"
+    },
+    {
+      "source_report_id": "de-ess-peer-review-improvement-actions",
+      "target_report_id": "de-ess-peer-review-report",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Verbatim match confirmed by direct comparison of both PDFs this session. The improvement-actions document's '1. Recommendation' is the January 2022 report's Recommendation 1, word-for-word: 'The Federal Statistical Office should formalise and publish National Guidelines to ensure quality in the development, production and dissemination of European Statistics, applicable to all Other National Authorities. The implementation of these National Guidelines should be monitored and reviewed. The responsibility for ensuring compliance with the Guidelines rests solely with the heads of the Other National Authorities. (Compliance-relevant: ES CoP, indicator 1bis.2)' -- appearing in both documents identically. The improvement-actions document's own title states the relationship directly: 'IN RESPONSE TO THE RECOMMENDATIONS'.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/64157/14414849/germany-improvement-actions.pdf/4cff731f-59f5-95b3-8f5a-8910ec9bc72b?t=1703000493417"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "de-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "SWD(2024)136's own words on the aggregate report's relationship to the individual member reports: 'This report summarises the results of the peer reviews in all members of the ESS' and, on the underlying transparency mechanism, 'For the sake of transparency, the peer-review reports for each ESS member and Eurostat, and the corresponding improvement action plans to address the recommendations, are publicly available on the websites of both the ESS member reviewed and Eurostat.' Germany's January 2022 report is one of the named member reports the aggregate draws its recommendation counts and thematic conclusions from.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    },
+    {
+      "source_report_id": "ess-peer-review-final-report",
+      "target_report_id": "sk-ess-peer-review-report",
+      "relationship_type": "uses_data_from",
+      "basis": "Same basis as the Germany edge above -- SWD(2024)136 'summarises the results of the peer reviews in all members of the ESS', and Slovakia's report is one of the 32 named member reports.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/quality/peer-reviews/current-round-2021-2023"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "10 of the 11 clustered batches (27, 28, 29, 39, 41, 42, 43, 57, 58, 59) contribute nothing new",
+      "source": null,
+      "target": null,
+      "reason": "duplicate",
+      "why": "All 139 distinct record_ids across the 11-batch cluster were read this session; itemised mapping so the cluster is not reopened. Batches 27, 39, 43, 57 (SWD(2024)136 / third-round peer-review methodology and results) are re-derived evidence for ess-peer-review-final-report, already minted in eu-meta-docx-batches.json with the same cadence conclusion (round-based, 0.13/year, three rounds 2006-2008/2013-2015/2021-2023). Batches 29, 42, 59 (ESGAB Annual Reports 2024/2025, plus the 2026 Work Programme and ESAC opinions named alongside them) are re-derived evidence for esgab-annual-report, eurostat-annual-work-programme and esac-opinion-work-programme, all three already minted in the same file. Batches 28, 41, 58 (Commission Recommendation (EU) 2023/397) match an entry eu-meta-docx-batches.json's own _dropped array already carries verbatim: 'A soft-law instrument (replacing Recommendation 2009/498/EC) inviting Member States to apply the Single Integrated Metadata Structure (SIMS). Not itself a recurrently published document -- it is a one-off legal act... no new node.' Nothing in this session's re-read of the Recommendation's recitals and operative points changes that conclusion. Only batch 40 (Slovakia peer-review report + Germany improvement-actions document) held material not already covered; see reports/dependencies above."
+    }
+  ]
+}

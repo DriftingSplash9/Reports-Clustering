@@ -62,6 +62,19 @@ into the base document rather than keeping two files a future session has to
 read in sequence and reconcile by hand, which is exactly the failure mode
 that made this merge overdue in the first place.
 
+**The `sessions/`-style rollup convention now applies to this branch too,
+decided 2026-08-09.** The `G.*.md` chain had run 52 files with every one
+read individually by every new session and no consolidation, the exact gap
+`sessions/START-HERE.md` closes for the renderer project's `V0.*.md` logs.
+`EU/R1.68.md` is the first EU rollup, covering `G.64`-`G.68` (the
+corpus-wide `_dropped` sweep closing). **It does not replace the newest
+individual hand-off -- read both.** Unlike the renderer project, this branch
+has no single REPORTS.md-equivalent that absorbs promoted methodology, so
+the working set for a new session is `Research.1.md` plus the newest rollup
+plus the newest `G.*.md`, not the rollup alone. Every `G.*.md`'s Orientation
+section should carry a pointer to the newest rollup going forward, the same
+way it already carries a pointer to its immediate predecessor.
+
 **One substantive rule question, put to Thomas and decided 2026-08-05**:
 Research.eu.docx §2 stated "Every edge carries a URL (**or Official Journal
 reference**) pointing at the document that says so" — a relaxation of
@@ -321,33 +334,16 @@ adjudicating it rather than have it decided by proxy. It is not retroactively
 minted by this edit — it still needs the same foundational-instrument test
 applied on its own merits (named, titled, and genuinely load-bearing, not
 merely mentioned) — but a future session should revisit it under this
-section rather than treat the old `_dropped` reasoning as settled. **The
-broader sweep is no longer merely queued — Thomas ruled on 2026-08-08
-(`notes/Decisions-2026-08-08_EU-open-questions.md`, D3) that a dedicated
-sweep is the next task "before going further", ahead of new-country
-research.** `G.53.md` read 25 entries in full out of the ~416 then on
-file; the rest have never been individually read. **Scope it from the
-validator, not from prose**: the 2026-08-08 run reports 391 dropped
-entries of which **122 "are research leads rather than answers — evidence
-described as existing, node or pass missing"**, and breaks them down by
-reason (87 `no-node-yet`, 72 `no-document` are the two to start with). Do
-it file-by-file over the ~15 files with the most `_dropped` entries,
-reading each array in full; **do not run another keyword pass** — the
-third category above is invisible to one by construction.
-
-**Scoped 2026-08-08** (OPEN-THREADS 2.1, not yet worked):
-`planning/dropped-sweep-scoping_2026-08-08.md` ranks every file by
-`_dropped` count, previews the priority entries in the top 19, and
-**corrects an imprecision in the paragraph above**: the validator's "122"
-is computed from `DROPPED_LEAD_REASONS = ['no-node-yet', 'deferred']`
-in `src/lib/types.ts` — it is `no-node-yet` (87) + `deferred` (35), **not**
-`no-node-yet` + `no-document`. `no-document` (72) is a separate,
-equally-real starting category, but for a different reason: those entries
-claim a confirmed negative, and the task there is checking whether the
-search behind that negative was actually exhaustive, not doing more
-forward research. Treat the sweep as three piles — 122 confirmed leads,
-72 negatives to re-check, ~197 lower-priority entries still subject to the
-same file-by-file read — not one undifferentiated 122.
+section rather than treat the old `_dropped` reasoning as settled. **The broader sweep Thomas ruled on 2026-08-08
+(`notes/Decisions-2026-08-08_EU-open-questions.md`, D3) is CLOSED as of
+2026-08-09.** It ran file-by-file over every `_dropped` array in the
+corpus, not just the ~15 highest-count files originally scoped. Full
+outcome in project memory (`dropped-sweep-status.md`) and the closing
+hand-off (`EU/G.68.md`). The scoping document that governed the work,
+`planning/dropped-sweep-scoping_2026-08-08.md`, is archived at
+`archive/planning/dropped-sweep-scoping_2026-08-08.md` — read it only for
+historical method (how the 391-entry ranking was computed), not as a
+to-do list.
 
 ### Termini — things that are named but cannot be published
 

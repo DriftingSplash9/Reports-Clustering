@@ -182,12 +182,16 @@ conversion bug. (= item 26.)
 
 ## 2. Research frontiers — real work, one session each
 
-**2.1 — THE CORPUS-WIDE `_dropped` SWEEP. — IN PROGRESS, equalization pair
-done 2026-08-08.** `[XL]` **Your stated next priority** (2026-08-08: "its
-worth a dedicated sweep next before going further"). Scoping document:
-`planning/dropped-sweep-scoping_2026-08-08.md` — ranks all 58 files with
-`_dropped` entries, previews every priority-reason entry in the top 19,
-gives a suggested execution order. **Also corrects an imprecision**: the
+**2.1 — THE CORPUS-WIDE `_dropped` SWEEP. — CLOSED 2026-08-09.** `[XL]`
+**Your stated next priority** (2026-08-08: "its worth a dedicated sweep
+next before going further"), run to completion file-by-file over every
+`_dropped` array in the corpus. Full outcome in project memory
+(`dropped-sweep-status.md`) and `EU/G.68.md`. Scoping document:
+`planning/dropped-sweep-scoping_2026-08-08.md`, archived to
+`archive/planning/dropped-sweep-scoping_2026-08-08.md` — ranked all 58
+files with `_dropped` entries, previewed every priority-reason entry in
+the top 19, gave the execution order the sweep followed; read it now only
+for historical method, not as a to-do list. **Also corrects an imprecision**: the
 "122 research leads" figure is code-computed as `no-node-yet` (87) +
 `deferred` (35), not `no-node-yet` + `no-document` as the prose elsewhere
 implies — `no-document` (72) is a real, separate priority (checking

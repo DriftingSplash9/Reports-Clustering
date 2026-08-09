@@ -1,0 +1,160 @@
+# G.69.md — EU galaxy hand-off
+
+Date: 2026-08-09
+Governing briefs: `Research.1.md` not reopened in full this session — §4 (node rule, cadence, evergreen treatment) applied from prior sessions' own readings; the new rollup-convention paragraph this session added to `Research.1.md` itself (see Finding 3) was written, not read as a pre-existing rule. `G.68.md` read in full; it is the whole input to this session's item-5 work. `EU/R1.68.md` (this session's own output) covers `G.64`–`G.68` in full and is the authoritative summary of that window rather than repeating it here. `planning/MISSION-TODO-2.md` item 5 read in full this session (the EU staging-blob batch backlog section, plus its (a)–(f) methodology notes) and `EU/slices/_staging/01-manifest.json` read via `device_bash`/Python.
+Predecessor: `G.68.md` (2026-08-09)
+
+## Orientation — if you are a new agent, start here
+
+1. **Do not run any git command against this repo.** Not `git status`, not `git log`, not read-only. See `EU/G.54.md` / `Research.1.md` §2. Ask Thomas if you need git state. This session worked entirely over the device bridge and never touched `.git`.
+2. **Read `EU/R1.68.md` in addition to this file, not instead of it.** This session revived the `sessions/`-style rollup method for this branch (Thomas's direct instruction) and wrote the branch's first rollup, covering `G.64`–`G.68`. `Research.1.md` now carries a paragraph (added this session, in its "What changed" changelog section) stating the working set for a new session is `Research.1.md` plus the newest rollup plus the newest `G.*.md` — not the rollup alone, and not this file alone. **Carry this bullet forward into every future Orientation section until a second rollup exists**, at which point it should point at the newer one.
+3. `G.68.md` closed Block B (the corpus-wide `_dropped` sweep) entirely and left no scoped next item — it explicitly said the next session would need fresh direction from Thomas rather than a punch list. **Thomas gave three, in order**: continue item 5 (`planning/MISSION-TODO-2.md`'s EU staging-blob batch backlog — 26 of 73 batches built, 47 remaining before this session), archive the now-obsolete dropped-sweep scoping document, and write the EU rollup. This session worked all three, in that order.
+4. **New standing fact about `planning/MISSION-TODO-2.md` item 5**: batches in `EU/slices/_staging/01-manifest.json` are not numbered by subject — the same topic can be scattered across many batch numbers — so item 5(a) directs working by `scope`/`batch_id`/`strand` (subject-matter grouping), not by batch index. Batch 46 (29 uncitable country peer-review records, no URLs/locations/names) is explicitly the most expensive remaining batch and must be worked last. The prose-section review-gate (`20-prose-sections.txt`, 399 entries, already verified 395/399 word-for-word in a past session) is a **separate track**, not yet imported, awaiting Thomas's review — do not conflate it with the batch-number backlog.
+5. Mechanical facts, carried forward and re-confirmed: `device_stage_files`/`device_commit_files` cap at 50 files per call; `device_bash` gives read/write shell access to the mounted folder directly (`/sessions/<session>/mnt/Reports Clustering/` — quote the space). The actual JSON edit this session went through the established stage → build in `/tmp` with Python's `json` module → validate with `json.load` → `SendUserFile` → `device_commit_files` pipeline. Prose edits to living documents (`Research.1.md`, `planning/MISSION-TODO-2.md`, `planning/OPEN-THREADS_2026-08-08.md`, `src/data/index.ts`) were made **directly via `device_bash` Python string-replacement with an exact-match assertion before writing** — a lighter-weight pattern than the stage/commit pipeline, used here because these are plain-text/TypeScript files rather than JSON data files the corpus's schema depends on, and each replacement was verified read-back before moving on. `python3 -c "import docx"` confirmed available if a future session needs to read a `.docx` file directly (used in the pre-compaction portion of this session for `country afrikans.docx`).
+6. Sweep junk to `_to_delete/` on sight, log it in `notes/sweep-log.md`, never sweep Thomas's personal files. Unchanged; not exercised this session.
+
+## Session conditions — read this first
+
+A three-part session on Thomas's explicit ordered instruction ("let's do this in order. we are going to carry on with item 5, archive the sweep and let's go back to the sessions/rollup method"), not a punch-list or sweep session. Before this turn, the same session had already closed the corpus-wide `_dropped` sweep's CIRCABC batch (documented in `G.68.md`) and updated project memory to reflect it; this turn's work is the three follow-on items Thomas specified, worked in the order given.
+
+**Item 5 (EU blob batch backlog).** Scoped an 11-batch cluster (batches 27, 28, 29, 39, 40, 41, 42, 43, 57, 58, 59 — manifest `batch_id`s `PEER-REVIEWS-3RD-ROUND-2026-08-03-A1`/`REC-2023-397-2026-08-03-A1`/`ESGAB-ANNUAL-REPORTS-2026-08-03-A1`) grouped by the manifest's own scope strings as "ESS governance / Code of Practice compliance mechanism," per item 5(a)'s instruction to work by subject rather than batch index. All 139 distinct `record_ids` across the cluster were pulled from `EU/slices/_staging/10-batch-with-records.ndjson` and read in full. Cross-checked against the existing corpus (`ess-quality-framework.json`, `eu-meta-docx-batches.json`) before writing anything new — see Finding 1 for why that mattered.
+
+**Item 2 (archive).** `planning/dropped-sweep-scoping_2026-08-08.md` moved to `archive/planning/`, and all three living documents that pointed at it (`Research.1.md`, `planning/MISSION-TODO-2.md`, `planning/OPEN-THREADS_2026-08-08.md`) edited to point at the archived path and marked closed — closing a staleness this window's own rollup separately flagged (see `EU/R1.68.md`'s Live problems, "planning-document staleness"). The historical `G.*.md` hand-offs that also mention the scoping doc (`G.57.md`–`G.65.md`, plus `AU/G.4.md`, `CA/G.1.md`, `CA/G.2.md`, `NZ/G.6.md`) were deliberately **not edited** — they are point-in-time logs, not living documents, per `Research.1.md`'s "never edit a predecessor" convention extended to planning prose.
+
+**Item 3 (rollup).** `sessions/V1.5.md` and `sessions/V2.10.md` read in full for format, plus `START-HERE.md` for how the renderer project points a new agent at the rollup. `EU/R1.68.md` written, covering `G.64`–`G.68`, and `Research.1.md` updated with a standing pointer to the convention (see Orientation §2 and Finding 3).
+
+`npm run validate` was **not** run this session — same Windows-only esbuild/win32-linux mismatch through the device bridge noted in every hand-off back to `G.50.md`. This session's only data-file edit added one new file (`ess-peer-review-country-reports.json`: 3 reports, 5 dependencies, 1 `_dropped` entry) and registered it in `src/data/index.ts`; no existing `src/data/research/*.json` file was touched. Against `G.68.md`'s unconfirmed ~423/527/379 estimate, this session's edit implies **~426 reports / ~532 dependencies / ~380 `_dropped` entries** — arithmetic, not a validator run, same caveat as every hand-off in this chain since `G.50.md`.
+
+No decision was referred to Thomas this session — item 5's scope selection, the mint/no-mint calls on the ESS peer-review cluster, and the archival edits were all made on the corpus's existing evidentiary rules rather than needing a ruling.
+
+## Headline result
+
+**Item 5's chosen 11-batch cluster turned out to be 91% (10 of 11 batches) already covered by prior sessions' work before this session touched it** — the aggregate ESS peer-review final report and the ESGAB annual report were already minted (in `eu-meta-docx-batches.json`, dated 2026-08-05, before this branch's `_dropped`-sweep window even began), and Commission Recommendation (EU) 2023/397 was already correctly dropped as a one-off soft-law instrument in the same file. Only batch 40 (Slovakia's peer-review report plus Germany's improvement-actions follow-up) held genuinely new material. Per item 5(e)'s "what does this instrument actually produce" guidance, tracing the improvement-actions document's own recommendation text one hop back — via a live web search plus a direct PDF fetch, since it wasn't itself staged anywhere in the corpus — surfaced Germany's own January 2022 peer-review report and a verbatim-matching citation confirming the dependency between the two. **Net: 3 new report nodes, 5 new dependencies, and one clearly-itemised redundancy note that should prevent this cluster from being re-scoped by a future session.** Separately, the branch's first rollup now exists (`EU/R1.68.md`), and the corpus-wide sweep's own scoping document is archived with all living pointers to it corrected.
+
+## Findings
+
+### 1. Checking the existing corpus before researching a new batch cluster paid off immediately
+
+`src/data/research/eu-meta-docx-batches.json` (already existing, dated 2026-08-05) turned out to hold `ess-peer-review-final-report` and `esgab-annual-report` as minted nodes with cadence evidence, and `src/data/research/ess-quality-framework.json` (2026-08-07, with 2026-08-08/09 updates) held five more nodes in the same governance stack (`eu-statistics-code-of-practice`, `ess-quality-assurance-framework`, `ess-handbook-quality-metadata-reports`, `ess-sims`, `ess-qpi-guidelines`) plus a `_dropped` entry already refusing Commission Recommendation (EU) 2023/397 by name, verbatim: "A soft-law instrument... Not itself a recurrently published document — it is a one-off legal act... no new node." Grepping `src/data/research/*.json` for the cluster's own keywords (`Code of Practice`, `ESGAB`, `223/2009`, `peer review`) before reading any staged record would have surfaced this in one call; reading the manifest's scope strings and staged records first, then checking, worked but was the slower order. **Worth stating as a general lesson for item 5's remaining 46 batches**: grep the existing corpus for a candidate cluster's subject-matter keywords before pulling its staged records, not after.
+
+### 2. The genuinely new material was one hop outside the staged batch, not inside it
+
+Batch 40's scope covers "Peer Review Report... Slovakia (July 2023)" and "Peer Reviewers' recommendations and improvement actions... Germany (in response to the recommendations)" — the second document's own recommendation text visibly responds to an earlier report neither the batch nor any other staged batch contains. A web search plus a direct fetch of `destatis.de`'s hosting page (WebFetch could not read the PDF's own content; a direct `curl`+`pdfplumber` extraction in the cloud workspace was needed, since the destatis PDF apparently isn't served in a form the fetch tool's HTML-conversion step can parse) found the January 2022 Germany peer-review report. Its Recommendation 1 — "The Federal Statistical Office should formalise and publish National Guidelines to ensure quality in the development, production and dissemination of European Statistics, applicable to all Other National Authorities... (Compliance-relevant: ES CoP, indicator 1bis.2)" — matches the staged improvement-actions document's own "1. Recommendation" text word for word, confirmed by direct comparison of both PDFs' extracted text. This is `Research.1.md` §4's "what does this instrument actually produce" pattern (item 5(e)) working as intended: the mintable document was not the one staged, but one hop from it, and the hop was cheap once the batch's own recommendation text made clear something specific was being responded to.
+
+### 3. `Research.1.md` now documents the rollup convention as a standing pointer, not just this session's action
+
+Added this session, in the "What changed from Research.1.md, and why" changelog section: a dated paragraph stating the `sessions/`-style rollup convention now applies to the EU branch, naming `EU/R1.68.md` as the first instance, and stating explicitly that a new session's working set is `Research.1.md` plus the newest rollup plus the newest `G.*.md` — not the rollup alone, since (unlike the renderer project) this branch has no single REPORTS.md-equivalent that absorbs promoted methodology. This is the durable half of Thomas's "include a note to read that as well as the usual handoff" instruction; this file's own Orientation §2 is the other half, and both should be carried forward until a second rollup supersedes the pointer.
+
+### 4. Cadence discipline held under a plausible temptation to over-claim
+
+The new Slovakia and Germany peer-review nodes were deliberately given **no** `releases_per_year` despite the sibling aggregate node (`ess-peer-review-final-report`) already carrying a round-based cadence figure (0.13/year, three rounds). Each country node has exactly one dated edition confirmed at source this session; inheriting the aggregate's cadence would have asserted something specific to Germany or Slovakia that only the aggregate's evidence actually supports. Flagged in the new file's own `_open_questions` rather than silently resolved either way — the shape of judgment call `G.68.md`'s mint-anyway ruling made explicit is scoped, and this session treated it as scoped rather than as a precedent covering every future single-edition document.
+
+## Secondary observations (logged, low priority)
+
+- `country afrikans.docx` (uploaded by Thomas earlier in this session, pre-compaction) contains raw, unprocessed CPI-indexation/social-benefit research for seven African countries plus a continent-wide overview — not in this corpus's `reports`/`dependencies` schema, and confirmed via `planning/OPEN-THREADS_2026-08-08.md` §1.9 that a prior session already looked at it and deliberately left it untouched, believing it personal/unrelated. Not re-actioned this session; Thomas's question about it ("how much have we gone into Africa here?") was answered conversationally (zero presence in the corpus, confirmed by grep) rather than by importing the file.
+- WebFetch could not extract text from the Destatis-hosted Germany peer-review PDF (returned only page metadata, no body text, on two different prompts) even though the URL itself resolved and the file was a normal, uncorrupted PDF — confirmed by a direct `curl` download and `pdfplumber` extraction succeeding immediately after. Worth knowing for any future session hitting the same "WebFetch describes only navigation/metadata" symptom on a PDF URL: try a direct download and local extraction before concluding the document is unreadable.
+- `src/data/index.ts` has 71 `import` lines against 68 `as unknown as ResearchSlice,` array entries — a pre-existing 3-line gap, not something this session's single matched addition (one import, one array entry, confirmed by grep before and after) introduced or investigated further.
+
+## Corrections to prior sessions
+
+None. This session's item-5 work confirmed rather than corrected `eu-meta-docx-batches.json` and `ess-quality-framework.json`'s existing nodes, edges and `_dropped` reasoning — the Recommendation (EU) 2023/397 drop in particular held up unchanged under this session's own re-read of its recitals and operative points.
+
+## Thomas's stated priority for the remaining work
+
+Lettered blocks carried forward from `G.61.md`–`G.68.md`, with Block B now closed (per `G.68.md`) and this session's three explicit instructions folded in as their own line.
+
+- **B — the corpus-wide `_dropped` sweep. Fully closed since `G.68.md`.** No change this session.
+- **Item 5 (EU staging-blob batch backlog) — advanced by one cluster, most of it already done.** 27 of 73 batches now built or confirmed-redundant (26 before this session, plus this session's cluster of 11 — though 10 of those 11 needed no new build, only confirmation). **46 batches remain untouched or unconfirmed.** Per item 5(a)'s own guidance, the next cluster should be chosen by scope/subject grouping from `01-manifest.json`, not by batch index; the FIGARO/GFS/monetary-aggregates/CBD2 stack (batches 47–62 minus the known-duplicate 53/54) and the ESA-2010-methodology stack (batches 0–2, 5–15) are the two largest coherent unbuilt clusters identified in this session's earlier scoping pass (see the pre-compaction portion of this session, summarized above this file's own content). Batch 46 (29 uncitable records) stays explicitly last.
+- **Item 2 (archive) and Item 3 (rollup) — both closed this session.** No further action unless a second rollup is due (five more `G.*.md` files from `G.69.md`, i.e. due around `G.73.md`/`G.74.md`, per the renderer project's own five-per-rollup cadence — not a rule this branch has adopted formally, just the precedent it is now following).
+- A, C, D, E, F, G — untouched this session. See `G.56.md`–`G.62.md` for their current state.
+
+Worth putting to Thomas when he next picks this up: item 5's remaining 46 batches are now known to include a meaningful fraction of redundant coverage (this session's cluster was 91% already-done) — a quick corpus-grep pass across the remaining clusters' scope keywords, before deep-reading any of them, may close several more batches faster than this session's own order (research first, discover redundancy second) did.
+
+## Cheap checks still outstanding
+
+Carried forward from `EU/R1.68.md`'s own Live problems, not superseded by this session:
+
+1. **Reread page 2 (Article 9 background section) directly for 20 of the 21 evergreen CIRCABC countries** whose `eu-reg-479-2009` edge currently rests on the boilerplate's confirmed presence in eight *other* countries' copies. Low value, cheap.
+2. **Two filename-vs-title-page date mismatches (UK, NL)** in `edp-inventory-regulation-479-2009.json` remain unadjudicated, per `Research.1.md` §3.
+3. **Greece's own CIRCABC metadata still reads ESA95** against the document body's ESA 2010, unresolved.
+4. **`ess-peer-review-final-report -> de/sk-ess-peer-review-report`'s `relationship_type`** (`uses_data_from`, this session's judgment call) could be revisited against `cites` if a future session reads SWD(2024)136's own body text on how it aggregates member reports — flagged in the new file's `_open_questions`.
+5. **A corpus-wide grep pass across item 5's remaining 46 batches' scope keywords**, per this session's Finding 1 lesson, before deep-reading the next cluster — the single highest-value cheap check this session identified for whoever continues item 5.
+
+## What to pass at the start of next thread
+
+1. **`EU/R1.68.md` in full**, plus this file — per the new standing convention (Orientation §2, Finding 3), both are now required reading, not just the newest `G.*.md` alone.
+2. **`planning/MISSION-TODO-2.md` item 5**, freshly read in full this session — the (a)–(f) methodology notes govern how to pick the next batch cluster, and item 5(a)'s scope-not-index instruction is what made this session's own cluster choice defensible.
+3. **The one file changed this session**: `src/data/research/ess-peer-review-country-reports.json` (new, 3 reports, 5 dependencies, 1 `_dropped` entry), registered in `src/data/index.ts`.
+4. **Three prose files edited this session** (not through the stage/commit JSON pipeline — direct `device_bash` Python replacement, each verified read-back): `Research.1.md` (two edits: the closed-sweep note in §4's narrative block, and the new rollup-convention paragraph), `planning/MISSION-TODO-2.md` (item 4a marked closed, scoping-doc pointer updated), `planning/OPEN-THREADS_2026-08-08.md` (section 2.1 marked closed, scoping-doc pointer updated).
+5. **One file moved**: `planning/dropped-sweep-scoping_2026-08-08.md` → `archive/planning/dropped-sweep-scoping_2026-08-08.md`.
+6. **Item 5 has 46 batches remaining**, and this session's Finding 1 (grep the existing corpus before deep-reading a new cluster) is the single most valuable thing to carry into whichever cluster comes next.
+
+# How to write the next hand-off
+
+Added 2026-08-04. Copy this whole section verbatim into every successor, so the chain never depends on one file surviving. It is the spec, not an example — the file you are reading is the worked example. When Thomas says "write the next handoff", "write the next G file", "wrap this thread up" or anything close, this is what he is asking for. Do not ask which format.
+
+**Mechanics**
+
+* Filename: `G.<n>.md`, where `<n>` is one higher than the highest-numbered `G.*` file in `EU/`. Check the folder — the sequence has gaps (there is no G.01, G.06, G.10, G.12, G.14, G.16, G.17 as `.md`) and some predecessors are `.docx`. Take the highest number, not the count.
+* Write it as `.md`, plain text, in `EU/`. Earlier files are `.docx`; that was the chat workflow's doing, not a preference.
+* Then write the JSON sidecar. Every hand-off has a machine-readable twin at `EU/G.<n>.json`. Do not hand-write it — run:
+
+```
+python3 scripts/handoff-to-json.py EU/G.<n>.md
+```
+
+The Markdown stays the document of record; the JSON is a structured index of it (date, predecessor, findings, corrections, priorities, cheap checks, and which required sections are missing). It exists so branch state can be read without parsing prose, and so a future session can diff two hand-offs. `python3 scripts/handoff-to-json.py` with no arguments rebuilds every sidecar; `--check` reports which are stale without writing. If you are ever unsure whether the sidecar is current, just re-run it — it is idempotent.
+
+* Never edit a predecessor. Corrections to earlier sessions go in this file's Corrections section, where they are dated and attributable. The one exception is this spec block, which is copied forward unchanged.
+
+**Required structure, in this order**
+
+```
+# G.<n>.md — EU galaxy hand-off
+
+Date: YYYY-MM-DD
+Governing briefs: <which, and whether you actually saw them>
+Predecessor: G.<n-1>.md (date)
+
+## Orientation — if you are a new agent, start here
+## Session conditions — read this first
+## Headline result
+## Findings
+## Secondary observations (logged, low priority)
+## Corrections to prior sessions
+## Thomas's stated priority for the remaining work
+## Cheap checks still outstanding
+## What to pass at the start of next thread
+
+# How to write the next hand-off        ← this spec, copied verbatim
+```
+
+Drop a section only if it would be empty, and say so in one line rather than leaving a heading with nothing under it. Corrections and Thomas's stated priority are never dropped: an empty Corrections section is itself a claim (nothing earlier was found wrong) and should say that explicitly.
+
+**What each section is for**
+
+Orientation — carried forward and updated, not rewritten each time. A new agent must be able to read this section alone and know what to read next. If the folder layout or the tooling changed, that goes here.
+
+Session conditions — what constrained the work. Session type (extraction vs verification vs planning), what tooling was available, what did not arrive, what was left untouched by instruction. This is where "the sandbox failed" and "the governing briefs still did not arrive" belong. State plainly which sources you read in full, because everything downstream inherits that limit.
+
+Headline result — the single most important thing established, and how strongly. If the session established nothing, say that; a session that only refutes is still a result.
+
+Findings — numbered `###` subsections, one per finding. Each states what was checked, what was found, and what it rests on. Mark any claim that depends on a predecessor's reading rather than your own — the house convention is (SEC04 per G.17). Quote verbatim; `Research.1.md` §2 applies here exactly as it does to research output.
+
+Secondary observations — real but low-priority. Section fingerprints, oddities worth not rediscovering. Keep them short.
+
+Corrections to prior sessions — numbered, each naming the file and the claim being corrected, and whether it is confirmed, refuted, overstated or resolved. This section is the reason the chain is trustworthy. A session that finds a predecessor wrong and does not record it here has actively damaged the corpus.
+
+Thomas's stated priority for the remaining work — lettered blocks (A, B, C, D) carried forward from the predecessor, edited to reflect what moved. Mark items no longer needed explicitly and say why, rather than deleting them silently. This section is what a new agent reads to answer "what is next".
+
+Cheap checks still outstanding — ordered by value per unit effort, each one a single lookup. This is the list that gets raided when a session has capacity left.
+
+What to pass at the start of next thread — the packing list, for the case where the next agent has no filesystem access. If it does have access, say so and keep the list anyway; it doubles as an index of what matters.
+
+**Conventions that make these files worth reading**
+
+* Say what you did not do. Every one of these files carries an explicit not-read / not-verified statement. That is what makes the positive claims usable.
+* Predictions are logged and then scored. G.17 predicted a code pattern; G.18 recorded that it "landed". Make falsifiable calls and settle them.
+* Distinguish inference from documented fact, and say which narrow respect is still inference. G.18's headline rule is very well evidenced and still not printed in any document — it says so.
+* A refuted hypothesis is a good outcome. Report both sides of a conflict and pick neither; `Research.1.md` §3 is explicit that adjudication is not the research role.
+* Do not pad. These files are dense because every line earns its place.

@@ -86,3 +86,9 @@ Not swept, `~$-open-questions_2026-08-08.docx` still present:
   still open because Word has a handle on it" — still there as of this
   session. Not re-attempted; a lock file held open by a running
   application isn't something a file-move can fix.
+
+- G.69 session (2026-08-09): `tmp_work/ess_governance_records.json` — a scratch
+  file this session created under the repo root to transfer staged batch
+  records from the device bridge into the cloud workspace for reading, then
+  never cleaned up. Moved to `_to_delete/ess_governance_records_scratch.json`.
+  Not part of the corpus schema; safe to delete.

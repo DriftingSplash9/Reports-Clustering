@@ -142,8 +142,9 @@ notes at the bottom.*
 ## P1 — Branch frontiers (each is one good session; read the named G-file
 first, in full)
 
-4a. **THE CORPUS-WIDE `_dropped` SWEEP — do this before any new-country
-    research.** Thomas, 2026-08-08 (open-questions D3): "its worth a
+4a. **THE CORPUS-WIDE `_dropped` SWEEP — CLOSED 2026-08-09.** Full outcome
+    in project memory (`dropped-sweep-status.md`) and `EU/G.68.md`; the
+    account below is kept as the historical run log. Original framing:** Thomas, 2026-08-08 (open-questions D3): "its worth a
     dedicated sweep next before going further." Scope: 416 `_dropped`
     entries across 66 files; **391 have never been individually read.**
     `G.53.md` did a keyword pass and read 25. **Do not repeat the keyword
@@ -174,8 +175,11 @@ first, in full)
     foundational-instrument test on its own merits) and the 52 entries the
     broad-but-not-tight keyword pass caught and nobody read.
 
-    **SCOPED 2026-08-08, IN PROGRESS**:
-    `planning/dropped-sweep-scoping_2026-08-08.md`. Ranks all 58 files with
+    **SCOPED 2026-08-08, CLOSED 2026-08-09**:
+    `planning/dropped-sweep-scoping_2026-08-08.md`, archived to
+    `archive/planning/dropped-sweep-scoping_2026-08-08.md` now the sweep it
+    scoped is done — read it only for historical method, not as a to-do
+    list. Ranks all 58 files with
     `_dropped` entries by count, previews every priority-reason entry in the
     top 19 (the "~15 files" this item asks for, plus ties at the cutoff),
     and gives a suggested execution order. **Correction to the paragraph
@@ -223,6 +227,13 @@ first, in full)
     entry) and in `EU/G.57.md`, `NZ/G.6.md`, `AU/G.4.md`, `CA/G.1.md`.
     Corpus estimate after all of it, still unconfirmed by the validator:
     roughly 384 reports / 453 dependencies against the 372/436 baseline.
+
+    **CLOSED 2026-08-09.** The sweep ran to completion file-by-file over
+    every `_dropped` array in the corpus (not just the ~15 highest-count
+    files originally scoped), plus the CIRCABC 26-country single-edition
+    review it surfaced along the way (21 countries minted evergreen per
+    Thomas's ruling, closing item 11's outstanding tail). Full account:
+    project memory `dropped-sweep-status.md`, closing hand-off `EU/G.68.md`.
 
 4b. **Rebuild proposal Files A and B to the 2026-08-08 rulings.** The
     drafts are gone (see the P0 header note). File A (German EDP + GNI
