@@ -1,0 +1,129 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.63.md",
+  "number": 63,
+  "title": "G.63.md — EU galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "`Research.1.md` read in full earlier in this overall working session (per predecessor hand-offs); §2 (git prohibition), §3 (extract-don't-adjudicate), §4 (node rule, dropped-sweep method, third-category lesson), §8 (one-item-at-a-time discipline) all applied this session. `planning/OPEN-THREADS_2026-08-08.md`, `planning/MISSION-TODO-2.md` and `planning/dropped-sweep-scoping_2026-08-08.md` all read in full this session (not just referenced). `G.61.md` and `G.62.md` read in full for continuity. `G.61.md`'s hand-off spec (copied below) is followed exactly. Predecessor: `G.62.md` (2026-08-09).",
+  "predecessor": null,
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "The corpus-wide `_dropped` sweep is now **read-complete**: every file with a `_dropped` array has been genuinely re-examined since the sweep began. The long tail turned out to be exactly what the scoping document predicted — mostly correctly-reasoned, well-evidenced negatives — but it was not empty: four genuine finds surfaced, one of them (the stale-cross-file pattern) a sixth and seventh instance of a bug class this project has now caught seven times, and one (Brazil/MCASP) the corpus's first Brazil-side accounting-standards edge.",
+  "findings": [
+    {
+      "heading": "1. `de-destatis-national-accounts.json` — two more stale-cross-file entries, annotated not deleted",
+      "body": "The Bundesbank sector-accounts lead (entry 0) and the GNI-inventory-to-ESA-2010 lead (entry 1) were both already resolved elsewhere in the corpus — the Bundesbank edge lives in `de-bundesbank-financial-accounts.json`'s own `dependencies` array (built the same day, 2026-08-05, under that file's own `uses_data_from` edge back to `de-destatis-national-accounts`), and the GNI inventory is already minted as `de-destatis-gni-inventory` in `esa-2010.json` (2026-08-08, per Thomas's Q2 ruling). This file's own `_dropped` block was simply never told. Both entries are now annotated `note` with a `STALE — RESOLVED ELSEWHERE` prefix and the original text preserved below it, per the convention `equalization-named-products.json` established 2026-08-08. This is the **sixth and seventh** instance of this stale-cross-file bug class in this corpus (first two: `equalization-named-products.json`/`equalization-payroll-base.json`, 2026-08-08; third: `esa-2010.json`, 2026-08-08). A third entry (the EVAS sub-graph, entry 3) was cross-referenced rather than resolved: `de-destatis-source-surveys.json` is the same lead, already scoped in its own file with a longer list, and a note now points from one file to the other so a future session doesn't re-transcribe it. No reports or dependencies added to this file; `de-destatis-national-accounts` still has one report and one dependency."
+    },
+    {
+      "heading": "2. `br-fpm-population.json` — `br-mcasp` minted, the corpus's first Brazil-side accounting-standards edge",
+      "body": "Verified directly (not from the original handoff's homepage-only citation): the Manual de Contabilidade Aplicada ao Setor Público, 11th edition (STN, effective 2025, published 2024-12-23), states in its own Section 1 (Contextualização) — quoted via a live-fetched public-sector-accounting reference source reproducing the manual's text, matching the original handoff's transcription almost verbatim — that Brazilian public-sector standards \"buscam a convergência às normas internacionais de contabilidade aplicada ao setor público – International Public Sector Accounting Standards (IPSAS)\". Minted `br-mcasp`, edge `methodology_depends_on -> ipsas` (the existing `ipsas` node in `international-frameworks.json`). This settles the comparison the original entry flagged as \"the live question of this whole branch\": Brazil is convergent-by-design (like the Cook Islands' explicit IPSAS adoption), not identical-to, and distinct from the Compact states' US GAAP basis and Niue's undocumented basis. Separately, the RREO (Relatório Resumido da Execução Orçamentária) lead was verified directly too — LC 101/2000 (Lei de Responsabilidade Fiscal) Article 52 caput, live-quoted: the RREO \"abrangerá todos os Poderes e o Ministério Público, será publicado até trinta dias após o encerramento de cada bimestre\", tied explicitly to Constitution Article 165 §3 — confirming it as a real statutory bimonthly report, not a portal blurb. **Not minted**: this file's other nodes (the FPM population chain) have no documented dependency on or from the RREO, so it would be an isolated node with no anchor in this specific slice. Left `deferred` rather than `no-node-yet` — the blocker is now scope, not evidence — and pointed at this file's own existing entry calling for a dedicated Brazilian-fiscal-reporting session, where RREO would sit alongside a proper LC 101/2000 node. Reports 5→6, dependencies 4→5."
+    },
+    {
+      "heading": "3. `eurosystem-ecb.json` — the joint ECB-Eurostat BOP-NA consistency report minted, isolated",
+      "body": "CMFB's own page (cmfb.europa.eu/main-topics/bop-na-consistency/report), live-fetched: titled \"2026 Joint ECB-Eurostat annual report on the consistency of National Accounts and Balance of Payments concerning quarterly financial and non-financial accounts\", cadence confirmed recurring (\"this comparison has been carried out on a regular basis. Since January 2022 a single annual report covers both the financial accounts and the non-financial accounts.\"). This confirms the ECB-05 quote the entry already carried (presented to the CMFB plenary January 2026, published February 2026) as one instance of a genuine annual series. Minted `ecb-eurostat-bop-na-consistency-report`. **Isolated, `fed-h15`-shape**: no document in this file or elsewhere in the branch cites it as an input or is cited by it. `ess-escb-mip-quality-report` (same file) is topically adjacent — also a joint quality report to the CMFB — but no citation relationship between the two was found this session; flagged for a future pass rather than forced. Reports 3→4, dependencies unchanged."
+    },
+    {
+      "heading": "4. `uk-local-government-finance.json` — CYPS annex independently re-verified, verdict unchanged",
+      "body": "The Children and Young People's Services Relative Needs Formula technical annex's own landing page (gov.uk, fetched directly this session, not subagent-extracted) confirms the three named datasets — \"Census 2021, the National Pupil Database and the Children in Need (CiN) and Children Looked After (CLA) datasets\" — but, matching the entry's original finding, no table number, release code, or specific publication title accompanies any of the three names in the material actually reachable. Verdict unchanged (still `no-node-yet`), but the entry is upgraded from subagent-only to independently verified."
+    },
+    {
+      "heading": "5. Two Tier-3-catalogued files were never actually swept until this session",
+      "body": "`credit-and-mortgages.json` and `international-frameworks.json` both appear in `planning/dropped-sweep-scoping_2026-08-08.md`'s Tier 3 list (\"listed for completeness of the ≥8-total cutoff\") and both are referenced in passing in `G.62.md`'s own prose (\"the same reasoning that keeps `international-frameworks.json`'s StatCan 13-608-X candidate out\"). Neither file carried any sweep-date marker or recent mtime before this session. On reading both in full: all 16 entries between them (8 each) are well-evidenced — specific primary documents named, quoted, and in several cases directly re-fetched by the original researcher (CUDGC's Standards of Sound Business and Financial Practices; OSFI's CAR Guideline and MQR statements; CIRO's MTRS 2.0/Rule 2800C; the BLS Handbook of Methods; StatCan's CPI Reference Paper; PSAB's International Strategy). None show the narrow-search failure mode `G.55.md` found in the ESS QPI case. Both now carry `_status` sweep notes; no reports or dependencies changed in either."
+    },
+    {
+      "heading": "6. The other 32 long-tail files: read, judged, and recorded — mostly correctly dropped, several genuinely still open",
+      "body": "The remaining 32 files (`grok-h1-housing-benefits.json`, `alberta-energy.json`, `anzsic-industry-classification.json`, `fed-h15-disclosure.json`, `grok-h1-municipal-ontario-quebec.json`, `nz-statsnz-national-accounts.json`, `provincial-social-programs.json`, `rate-transmission.json`, `eu-meta-docx-batches.json`, `grok-h1-calgary-municipal.json`, `grok-r1-nordic-nato-fr-oecd.json`, `grok-r8-accession-belt.json`, `health-funding.json`, `structural-bridges.json`, `banking-supervision.json`, `eurostat-farm-structure-survey.json`, `grok-h1-classification-hubs.json`, `no-government-finance.json`, `statcan-supply-use-tables.json`, `us-statistical-inputs.json`, `eurostat-remuneration-update-report.json`, `gb-ukspf-succession.json`, `grande-prairie.json`, `lu-statec-cpi.json`, `regional-education.json`, `county-grande-prairie.json`, `eurostat-remuneration-mission-expenses-report.json`, `eurostat-remuneration-satellite-series.json`, `grok-h1-equalization-named-products.json`, `grok-r4-italy-czechia.json`, `grok-r6-mixed-categories.json`, `de-destatis-source-surveys.json`) were each read in full and given a dated `_status` note describing what was found — no reports or dependencies changed in any of them, because none needed to. This is not a rubber stamp: several genuinely open, not-yet-pursued leads surfaced and are called out by name in each file's own note and consolidated in Cheap checks below, rather than silently absorbed into a \"closed\" claim. `grok-h1-international-reports.json` (68 entries, the corpus's largest single `_dropped` pile) was checked and confirmed already swept earlier in this same overall working session — its `_status` already carries a 2026-08-09 note closing out the 57 `note` entries as deliberate design exclusions, plus one new mint (`imf-gfsr`) not otherwise recorded in any G-file; flagged here only so it isn't re-swept."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`planning/dropped-sweep-scoping_2026-08-08.md`'s Tier-3 listing of `credit-and-mortgages.json` and `international-frameworks.json` \"for completeness of the ≥8-total cutoff\" was read by at least one later session (`G.62.md`) as settled ground, without either file ever having actually been re-opened and read file-by-file. Not a wrong claim in the scoping document itself (it never claimed to have read them) but worth flagging because it is exactly the shape of the mtime false-alarm `G.62.md`'s own Session Conditions section describes from the opposite direction: there, files that looked untouched by a shallow check were actually swept; here, a file *referenced* in passing was assumed swept and was not. Both files are now genuinely read; see Findings 5."
+    },
+    {
+      "n": 2,
+      "text": "No other prior claim was found wrong this session. `G.62.md`'s claim that Tier-1 and Tier-2 were entirely closed is unaffected by this correction (it was about Tier 3 specifically) and is not re-examined here."
+    }
+  ],
+  "priorities": [],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "NZSIOC's own defining document** (`anzsic-industry-classification.json`, `nz-statsnz-national-accounts.json`) — Stats NZ's classification pages, flagged twice now as more likely fetchable than the robots-blocked DataInfo+ release pages. One successful fetch closes two files' worth of leads at once."
+    },
+    {
+      "n": 2,
+      "text": "The Federal Reserve's own Basel Regulatory Framework page** (`banking-supervision.json`) — the US-side symmetry to `osfi-car-guideline -> bis-basel-framework`, flagged as \"not read this pass\" and still not read."
+    },
+    {
+      "n": 3,
+      "text": "CORRA's relationship to the policy rate, and the Bank of Canada's mortgage-rate explainer** (`rate-transmission.json`) — two explicitly-flagged, never-attempted leads in the same file."
+    },
+    {
+      "n": 4,
+      "text": "FADN's own authoritative site** (`eurostat-farm-structure-survey.json`) — agridata.ec.europa.eu / agriculture.ec.europa.eu were unreachable in the original session (browser tool denial, cause not established); worth one retry, since this is \"THE BEST LEAD\" the file names."
+    },
+    {
+      "n": 5,
+      "text": "Montenegro/MONSTAT's regulation-number discrepancy** (`grok-r8-accession-belt.json`) — quoted as found per §2, needs a direct check of the primary MONSTAT PDF rather than Grok's transcription, to settle whether the error is MONSTAT's own or a transcription artefact."
+    },
+    {
+      "n": 6,
+      "text": "Alberta's Continuing Care (Ministerial) Regulation s.11** (`provincial-social-programs.json`) — Alberta King's Printer's numbered PDF URLs returned HTML error pages in the original session; worth one more attempt via a different route (search-engine cache, a different King's Printer URL pattern) before recording a proper `NOT FOUND`."
+    },
+    {
+      "n": 7,
+      "text": "ANZSCO's governance** (`anzsic-industry-classification.json`) — item 26c of Grok Brief XI, not attempted; the file's own note is explicit that governance, not ISCO parentage, is the first question."
+    },
+    {
+      "n": 8,
+      "text": "Luxembourg's IPCN/IPCH identification** (`eurostat-remuneration-update-report.json`) — three documents searched, none names the equivalence explicitly; may simply not exist as a documented identification, worth one more targeted search of STATEC's own methodology pages before accepting the negative permanently."
+    },
+    {
+      "n": 9,
+      "text": "The Canada Community-Building Fund's own publication status** (`grande-prairie.json`) — check whether it publishes a periodic allocation report before spending further research budget; if it's fund-only with no citable release, this entry should move from `no-node-yet` to a documented `no-document` or be closed on node-rule grounds."
+    },
+    {
+      "n": 10,
+      "text": "A future Brazilian-fiscal-reporting session** (`br-fpm-population.json` entries 2 and 4) — the RREO (now independently verified, just unanchored) and the deferred IBGE national-accounts/FPE-coefficient material are both real, both scoped, and both waiting on a dedicated session rather than a single cheap check."
+    },
+    {
+      "n": 11,
+      "text": "Everything carried in `G.61.md`/`G.62.md`'s own cheap-checks lists (the 26 further national EDP inventories via CIRCABC's browser-only gate; the Table 1 institutional-responsibilities matrix in the German EDP inventory) — unchanged, not attempted this session."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "`planning/OPEN-THREADS_2026-08-08.md` and `planning/MISSION-TODO-2.md` — both now understate how much of block B/item 4a is done; a future session should treat \"read-complete\" (this file's Headline result) as the current state rather than re-deriving it, and should update those two planning files' own text to say so rather than leaving this hand-off as the only place that says it."
+    },
+    {
+      "n": 2,
+      "text": "This file, then `G.62.md`, `G.61.md`, `G.60.md`, `G.59.md` for the rest of the corpus-wide sweep's history."
+    },
+    {
+      "n": 3,
+      "text": "`Research.1.md` §2 (git), §3 (extract, don't adjudicate), §4 (node rule, third-category lesson), §8 (one item at a time)."
+    },
+    {
+      "n": 4,
+      "text": "The four files with real content changes this session — `src/data/research/br-fpm-population.json`, `de-destatis-national-accounts.json`, `eurosystem-ecb.json`, `uk-local-government-finance.json` — each carries its resolution inline, original text preserved below it, same convention as every prior sweep session."
+    },
+    {
+      "n": 5,
+      "text": "The Cheap checks list above — this is now the actual punch list for finishing block B, not another file-by-file read. How to write the next hand-off Added 2026-08-04. Copy this whole section verbatim into every successor, so the chain never depends on one file surviving. It is the spec, not an example — the file you are reading is the worked example. When Thomas says \"write the next handoff\", \"write the next G file\", \"wrap this thread up\" or anything close, this is what he is asking for. Do not ask which format. Mechanics * Filename: `G.<n>.md`, where `<n>` is one higher than the highest-numbered `G.*` file in `EU/`. Check the folder — the sequence has gaps (there is no G.01, G.06, G.10, G.12, G.14, G.16, G.17 as `.md`) and some predecessors are `.docx`. Take the highest number, not the count. * Write it as `.md`, plain text, in `EU/`. Earlier files are `.docx`; that was the chat workflow's doing, not a preference. * Then write the JSON sidecar. Every hand-off has a machine-readable twin at `EU/G.<n>.json`. Do not hand-write it — run: ``` python3 scripts/handoff-to-json.py EU/G.<n>.md ``` The Markdown stays the document of record; the JSON is a structured index of it (date, predecessor, findings, corrections, priorities, cheap checks, and which required sections are missing). It exists so branch state can be read without parsing prose, and so a future session can diff two hand-offs. `python3 scripts/handoff-to-json.py` with no arguments rebuilds every sidecar; `--check` reports which are stale without writing. If you are ever unsure whether the sidecar is current, just re-run it — it is idempotent. * Never edit a predecessor. Corrections to earlier sessions go in this file's Corrections section, where they are dated and attributable. The one exception is this spec block, which is copied forward unchanged. Required structure, in this order ``` # G.<n>.md — EU galaxy hand-off Date: YYYY-MM-DD Governing briefs: <which, and whether you actually saw them> Predecessor: G.<n-1>.md (date) ## Orientation — if you are a new agent, start here ## Session conditions — read this first ## Headline result ## Findings ## Secondary observations (logged, low priority) ## Corrections to prior sessions ## Thomas's stated priority for the remaining work ## Cheap checks still outstanding ## What to pass at the start of next thread # How to write the next hand-off ← this spec, copied verbatim ``` Drop a section only if it would be empty, and say so in one line rather than leaving a heading with nothing under it. Corrections and Thomas's stated priority are never dropped: an empty Corrections section is itself a claim (nothing earlier was found wrong) and should say that explicitly. What each section is for Orientation — carried forward and updated, not rewritten each time. A new agent must be able to read this section alone and know what to read next. If the folder layout or the tooling changed, that goes here. Session conditions — what constrained the work. Session type (extraction vs verification vs planning), what tooling was available, what did not arrive, what was left untouched by instruction. This is where \"the sandbox failed\" and \"the governing briefs still did not arrive\" belong. State plainly which sources you read in full, because everything downstream inherits that limit. Headline result — the single most important thing established, and how strongly. If the session established nothing, say that; a session that only refutes is still a result. Findings — numbered `###` subsections, one per finding. Each states what was checked, what was found, and what it rests on. Mark any claim that depends on a predecessor's reading rather than your own — the house convention is (SEC04 per G.17). Quote verbatim; `Research.1.md` §2 applies here exactly as it does to research output. Secondary observations — real but low-priority. Section fingerprints, oddities worth not rediscovering. Keep them short. Corrections to prior sessions — numbered, each naming the file and the claim being corrected, and whether it is confirmed, refuted, overstated or resolved. This section is the reason the chain is trustworthy. A session that finds a predecessor wrong and does not record it here has actively damaged the corpus. Thomas's stated priority for the remaining work — lettered blocks (A, B, C, D) carried forward from the predecessor, edited to reflect what moved. Mark items no longer needed explicitly and say why, rather than deleting them silently. This section is what a new agent reads to answer \"what is next\". Cheap checks still outstanding — ordered by value per unit effort, each one a single lookup. This is the list that gets raided when a session has capacity left. What to pass at the start of next thread — the packing list, for the case where the next agent has no filesystem access. If it does have access, say so and keep the list anyway; it doubles as an index of what matters. Conventions that make these files worth reading * Say what you did not do. Every one of these files carries an explicit not-read / not-verified statement. That is what makes the positive claims usable. * Predictions are logged and then scored. G.17 predicted a code pattern; G.18 recorded that it \"landed\". Make falsifiable calls and settle them. * Distinguish inference from documented fact, and say which narrow respect is still inference. G.18's headline rule is very well evidenced and still not printed in any document — it says so. * A refuted hypothesis is a good outcome. Report both sides of a conflict and pick neither; `Research.1.md` §3 is explicit that adjudication is not the research role. * Do not pad. These files are dense because every line earns its place."
+    }
+  ],
+  "session_conditions": "A dropped-sweep session, corpus-wide thread 2.1, working the long tail specifically. Read in full this session: `planning/OPEN-THREADS_2026-08-08.md`, `planning/MISSION-TODO-2.md`, `planning/dropped-sweep-scoping_2026-08-08.md`, `G.62.md`. Every `_dropped` entry in all 38 long-tail files (listed under Findings) was read in full — not summarised, not keyword-filtered. Four of those 38 files received genuine new research and edits (`br-fpm-population.json`, `de-destatis-national-accounts.json`, `eurosystem-ecb.json`, `uk-local-government-finance.json`); the remaining 34 were read in full, judged against `Research.1.md` §4's third-category test (was the stated search actually as broad as it reads), and found to hold up — each received a dated `_status` note recording that judgment rather than a silent pass. No file was minted from cold; every mint this session extends an existing file. **`npm run validate` was NOT run this session** (Windows-only, esbuild win32/linux mismatch through the device bridge — an environment limit, unchanged since `G.50.md`). A direct count of `reports`/`dependencies` across every `src/data/research/*.json` file, done in this session's own sandbox after all edits, gives **389 reports / 463 dependencies / 378 remaining `_dropped` entries** — this is a file-count, not a validator run, and does not account for whatever de-duplication or graph-building logic `scripts/validate-data.ts` applies; treat it as an estimate to be confirmed, same caveat every recent hand-off has carried forward. The last confirmed-green validator run was 2026-08-08 at 372/436."
+}

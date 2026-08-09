@@ -176,6 +176,23 @@
         "interest-rates",
         "banking"
       ]
+    },
+    {
+      "id": "boc-new-existing-lending-rates",
+      "title": "Interest Rates Charged for New and Existing Lending by Chartered Banks",
+      "publisher": "Bank of Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "The Bank of Canada's own 'month-end statement of interest rates charged vis-a-vis new and existing loans, booked in Canada, in Canadian dollars only, to Canadian households and corporate sectors by chartered banks.' Rates are a volume-weighted average across reporting institutions, cross-sectioned for a given month. It breaks residential mortgages out by rate type, with a 'Residential variable rate mortgages' section ('Total variable rate mortgages, Total', further split into closed non-convertible, closed convertible, and open variable rate mortgages) alongside the fixed-rate breakdown. This is the missing near-end node flagged in this file's own _dropped entry and in rate-transmission.json: not an individual lender's commercial rate sheet (which cannot be a node), but the Bank's own aggregated published series of what banks actually charged, including on the variable-rate segment. Also redistributed by Statistics Canada as table 10-10-0006-01, 'Funds advanced, outstanding balances, and interest rates for new and existing lending, Bank of Canada', which states its source as the Bank of Canada.",
+      "releases_per_year": 12,
+      "cadence_note": "Typically published within the third week of the month.",
+      "last_updated": null,
+      "url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/",
+      "domains": [
+        "interest-rates",
+        "banking"
+      ]
     }
   ],
   "dependencies": [
@@ -269,6 +286,13 @@
       "relationship_type": "cites",
       "basis": "The report's glossary defines the concept it uses throughout to segment the market by reference to the OSFI guideline: \"Stress test: The stress test, introduced in January 2018 under OSFI's B-20 Guideline, requires borrowers with uninsured mortgages to qualify at the higher of the Bank of Canada's five-year benchmark rate or their mortgage rate plus 2%. A similar stress test was required for insured loans beginning in 2016.\" The glossary further defines chartered banks and federally regulated financial institutions by OSFI's supervisory perimeter, and the report's lender taxonomy separates \"Non-bank OSFI regulated\" lenders.",
       "evidence_url": "https://assets.cmhc-schl.gc.ca/sites/cmhc/professional/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report/2024/residential-mortgage-industry-report-fall-2024-en.pdf"
+    },
+    {
+      "source_report_id": "boc-new-existing-lending-rates",
+      "target_report_id": "boc-prime-rate",
+      "relationship_type": "uses_data_from",
+      "basis": "RESOLVED 2026-08-09 (browser/websearch session, closing G.64.md cheap check 2). The Bank of Canada's own explainer states the mechanism: 'What's behind your mortgage rate' (bankofcanada.ca, May 27, 2020) -- 'These include the prime rate, which is used by the banks as a basis for pricing variable-rate mortgages.' Typed uses_data_from rather than calculated_from, matching this file's own boc-prime-rate -> boc-policy-rate precedent: the explainer describes a market convention (prime plus or minus a lender-set spread), not a formula stated by the published series' own methodology page, and the published aggregate is a volume-weighted average of what banks actually charged rather than a recalculation of prime itself.",
+      "evidence_url": "https://www.bankofcanada.ca/2020/05/whats-behind-your-mortgage-rate/"
     }
   ],
   "_dropped": [
@@ -325,9 +349,9 @@
       "edge": "variable-rate mortgage and HELOC pricing -> boc-prime-rate",
       "source": null,
       "target": "boc-prime-rate",
-      "reason": "unpublishable-source",
-      "why": "The most economically important relationship in Canadian consumer lending - that variable mortgages, HELOCs and most personal credit are priced as prime plus or minus a spread - has no report on the dependent side. Individual lenders' rate schedules are commercial documents. The Bank of Canada explains the mechanism in its 'What's behind your mortgage rate' explainer, but an explainer describing a market convention is not a release that depends on another release."
+      "reason": "note",
+      "why": "RESOLVED 2026-08-09 (browser/websearch session) -- MINTED as `boc-new-existing-lending-rates -> boc-prime-rate` (`uses_data_from`). The original reasoning was correct about individual lenders' rate sheets (still unpublishable) but did not find the Bank of Canada's own aggregate: 'Interest rates charged for new and existing lending by chartered banks', a monthly, volume-weighted published series that breaks out 'Residential variable rate mortgages' as its own category. That is the near-end node this entry was missing -- an official published release, not a commercial rate sheet. See the minted node and edge for the full citation. ORIGINAL ENTRY BELOW.\n\nThe most economically important relationship in Canadian consumer lending - that variable mortgages, HELOCs and most personal credit are priced as prime plus or minus a spread - has no report on the dependent side. Individual lenders' rate schedules are commercial documents. The Bank of Canada explains the mechanism in its 'What's behind your mortgage rate' explainer, but an explainer describing a market convention is not a release that depends on another release."
     }
   ],
-  "_status": " SWEPT 2026-08-09 (dropped-sweep, long tail): all 8 _dropped entries read in full against Research.1.md §4's third-category test. All eight are well-evidenced (specific documents named and quoted -- CUDGC's Standards of Sound Business and Financial Practices, OSFI's CAR Guideline and MQR statements, CIRO's MTRS 2.0/Rule 2800C, the CDIC Act, Bank of Canada rate explainers) rather than thin searches; none show the narrow-search failure mode. This file was listed in the scoping document's Tier 3 'for completeness' but its mtime shows it was never actually re-read after being catalogued -- this session is its first genuine file-by-file pass. No reports or dependencies changed."
+  "_status": " SWEPT 2026-08-09 (dropped-sweep, long tail): all 8 _dropped entries read in full against Research.1.md §4's third-category test. All eight are well-evidenced (specific documents named and quoted -- CUDGC's Standards of Sound Business and Financial Practices, OSFI's CAR Guideline and MQR statements, CIRO's MTRS 2.0/Rule 2800C, the CDIC Act, Bank of Canada rate explainers) rather than thin searches; none show the narrow-search failure mode. This file was listed in the scoping document's Tier 3 'for completeness' but its mtime shows it was never actually re-read after being catalogued -- this session is its first genuine file-by-file pass. No reports or dependencies changed. BROWSER/WEBSEARCH SESSION 2026-08-09 (closing G.64.md cheap check 2): the missing variable-rate mortgage node is CLOSED. Minted `boc-new-existing-lending-rates` (Bank of Canada, monthly) and the edge `boc-new-existing-lending-rates -> boc-prime-rate` (`uses_data_from`). Reports 10->11; dependencies 13->14; _dropped unchanged in count (entry 4 annotated `note`, original text preserved). rate-transmission.json's mirrored entry updated in the same session to point here."
 }
