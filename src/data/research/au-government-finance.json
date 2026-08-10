@@ -327,6 +327,42 @@
       "domains": [
         "fiscal-transfers"
       ]
+    },
+    {
+      "id": "au-vic-vola1960",
+      "title": "Valuation of Land Act 1960 (Vic)",
+      "publisher": "Victorian Government",
+      "country": "AU",
+      "jurisdiction_level": "institutional",
+      "region": "Victoria, Australia",
+      "description": "The Victorian analog to NSW's Valuation of Land Act 1916: establishes the office of Valuer-General (Part I) and requires an annual general valuation of rateable land statewide. Section 11 (as substituted by No. 69/2011 s.53): a valuation authority must 'cause a general valuation of rateable land within an area to be made as at 1 January in each calendar year' and, 'before 30 April that year,' cause it to be returned and provided to the relevant council. VERIFIED DIRECTLY: the official source (legislation.vic.gov.au) is a JS-rendered SPA whose raw HTML doesn't yield section text via regex, and the AustLII mirror is Cloudflare-blocked in this environment; full consolidated text instead fetched and confirmed via a third-party legal mirror, the FAO Legal Office's legislation database (faolex.fao.org), then extracted with pdftotext.",
+      "releases_per_year": 1,
+      "cadence_note": "Section 11 mandates a genuinely annual valuation cycle (valuation date 1 January, return due before 30 April each calendar year) -- unlike NSW, where the Valuation of Land Act 1916 requires annual ascertainment in principle but current council practice runs on an operational three-year cycle. Victoria's own valuations-process page confirms the Valuer-General has been the single valuation authority for all 79 Victorian councils since 2023.",
+      "last_updated": null,
+      "url": "https://faolex.fao.org/docs/pdf/vic45844.pdf",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "au-vic-vbpsg",
+      "title": "Valuation Best Practice Specifications Guidelines (VBPSG)",
+      "publisher": "Valuer-General Victoria",
+      "country": "AU",
+      "jurisdiction_level": "institutional",
+      "region": "Victoria, Australia",
+      "description": "The methodology specification Victoria's Valuer-General is statutorily required to prepare for each general valuation, matching the structural role NSW's Notices-of-Sale sourcing from NSW Land Registry Services plays in that state's chain -- here the connecting document is a methodology standard rather than a raw-data registry, because that is what the Act itself names (s.5AA), not a substitution of convenience. The 2025 edition (revised and published 27 September 2024) is the seventh edition, building on a 'Valuation Best Practice' tradition dating to 1998 per its own foreword.",
+      "releases_per_year": 1,
+      "cadence_note": "Statutory basis is direct, not inferred: Act s.5AA(1), 'The valuer-general must prepare the Valuation Best Practice Specifications Guidelines at the commencement of every revaluation' -- and s.11 establishes revaluation (general valuation) as an annual event, so the two sections together fix VBPSG's cadence at once per year.",
+      "last_updated": "2024-09-27",
+      "url": "https://www.land.vic.gov.au/__data/assets/pdf_file/0023/719231/Valuation-Best-Practice-Specifications-Guidelines-2025-Revised-and-Published-27-Sept-2024.pdf",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
     }
   ],
   "dependencies": [
@@ -448,6 +484,13 @@
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY 2026-08-07 (VLGGC Part 1, byte-for-byte extraction — see slice _note). s.2 'Estimated Grant Allocations for 2025-26': \"The 2025 Federal Budget, which was handed down on 25 March 2025, contained an initial estimate of the total allocations to Victorian councils for 2025-26.\" s.6 'Total grants over time' corroborates: \"The 2025-26 Federal Budget estimated that the aggregate pool of funds for Victorian councils will increase by 5.2% in 2025-26, 4.4% in 2026-27 and 4.3% in 2026-27\" [sic — the document's own repeated year]. The Budget supplies the ESTIMATE the Commission allocates against; see the caveat entry for how the FINAL amount arrives.",
       "evidence_url": "https://www.localgovernment.vic.gov.au/__data/assets/word_doc/0030/219954/2025-26-VLGGC-Annual-Allocation-Report-Sept-2025-Part-1.docx"
+    },
+    {
+      "source_report_id": "au-vic-vbpsg",
+      "target_report_id": "au-vic-vola1960",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Direct statutory text, Valuation of Land Act 1960 (Vic) s.5AA(1): 'The valuer-general must prepare the Valuation Best Practice Specifications Guidelines at the commencement of every revaluation.' Confirmed against the Act's own full text (FAO Legal Office mirror, pdftotext-extracted), independent of the VBPSG document's own foreword.",
+      "evidence_url": "https://faolex.fao.org/docs/pdf/vic45844.pdf"
     }
   ],
   "_dropped": [

@@ -1,0 +1,111 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.5.md",
+  "number": 5,
+  "title": "G.5.md — Australia/SAO galaxy hand-off",
+  "date": "2026-08-09",
+  "governing_briefs": "`Research.1.md` §4 (recurring-vs-one-off node shape,",
+  "predecessor": "`G.4.md` (2026-08-08).",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**The Victorian valuation chain (AU priority item 3) is minted, matching\nNSW's chain shape but with one deliberate structural difference the\nsources justify rather than force**: NSW's chain names a specific external\ndata-source registry (NSW Land Registry Services) as its second hop\nbecause a council's own page names it explicitly; Victoria's equivalent\nsource material does not name any specific registry (the Valuer-General's\nown valuation-process page lists data categories — sales, inspections,\npermits, zoning, title records — without naming a specific database), so\nthe second hop here is instead the Valuation Best Practice Specifications\nGuidelines (VBPSG), the methodology document the Act itself directly and\nexplicitly requires (s.5AA). This is not a downgrade in rigor — it is what\n\"verify, don't force a parallel structure\" actually produces when the two\nstates' public records differ in what they name.\n\nPriority item 2 (a second AU council) is **not** advanced — the four\nblocked NSW councils remain blocked, now for individually confirmed\nreasons rather than a single generic \"403.\"",
+  "findings": [
+    {
+      "heading": "1. The four blocked NSW council PDFs are exhausted against every method tried; each fails for a distinct, now-confirmed reason",
+      "body": "*What this rests on*: direct `curl` fetches (with a real User-Agent) of\nall four councils' Revenue Policy documents in both PDF and, where\napplicable, DOCX form this session; a Claude-in-Chrome browser navigation\nattempt against Wollongong's PDF.\n\n- **Tamworth** (Elcom CMS): both `.pdf.aspx` and `.docx.aspx` return an\n  identical hard 403, \"Elcom | Something went wrong. Error 403\" —\n  confirmed this is a request-pattern block, not a content-type block, so\n  the DOCX-swap trick (which worked against `cgc.gov.au` and\n  `localgovernment.vic.gov.au` per `G.2.md`) does not apply here.\n- **Yass Valley** and **Federation Council**: both return an\n  Akamai-style \"Access Denied\" page. Federation Council's `ipart.nsw.gov.au`\n  mirror was also tried and failed at the connection level (HTTP 000, no\n  response) rather than with a 403.\n- **Wollongong**: blocked from `curl` by a Cloudflare \"Just a moment...\"\n  JS challenge, but a **real browser session (Claude in Chrome) passes the\n  challenge** — confirmed by the resulting tab's title matching the actual\n  PDF filename. This is a genuine partial win with a hard limit behind it:\n  Chrome's built-in PDF viewer renders the fetched document at a\n  `chrome-extension://` URL, and every extraction tool available this\n  session (`get_page_text`, `read_page`, `computer` screenshot/click/type)\n  explicitly refuses to interact with browser-internal URLs. A\n  `docs.google.com/viewer?url=...` proxy was tried as a workaround and\n  returned \"No preview available\" — Google's own fetcher could not or\n  would not retrieve it either.\n\n**Net effect: no new access method exists this session that didn't exist\nin `G.4.md`.** The Wollongong browser-challenge-pass is worth recording\nprecisely because it is *almost* a solution — the remaining gap is a tool\nlimitation (no extraction path for an in-browser PDF viewer), not a\nnetwork block, and would be worth revisiting if a different PDF-extraction\nroute becomes available in a future session."
+    },
+    {
+      "heading": "2. The Victorian valuation chain is minted: `au-vic-vola1960` and `au-vic-vbpsg`",
+      "body": "*What this rests on*: the Valuation of Land Act 1960 (Vic)'s own\nconsolidated text, fetched and read directly this session; the Valuer-\nGeneral Victoria's 2025 VBPSG PDF, fetched and read directly this session;\nthe Victorian government's own \"valuation process\" page, fetched and read\nthis session for corroborating context (not used as a citation source for\nany specific claim in the minted nodes).\n\n**Access note, since it is itself informative**: the official source,\n`legislation.vic.gov.au`, returned its landing page (200 OK) but is a\nJS-rendered single-page app whose raw HTML does not yield section text to\nregex extraction. The AustLII mirror (`austlii.edu.au`) is Cloudflare-\nblocked in this environment, the same block class documented for Wollongong\nabove. The full consolidated Act text was instead retrieved from a\nthird-party legal mirror, the FAO Legal Office's own legislation database\n(`faolex.fao.org/docs/pdf/vic45844.pdf`), converted with `pdftotext\n-layout`. This is a genuine substitution of source, not the primary\nlegislative repository, and is flagged as such in the minted node's own\n`description` field.\n\n- **`au-vic-vola1960`** — Valuation of Land Act 1960 (Vic). Direct quote,\n  s.11 (as substituted by No. 69/2011 s.53): a valuation authority must\n  \"cause a general valuation of rateable land within an area to be made as\n  at 1 January in each calendar year\" and, \"before 30 April that year,\"\n  cause it to be returned and provided to the relevant council. This is a\n  genuinely annual statutory cycle — a real point of difference from NSW,\n  where the 1916 Act requires annual ascertainment in principle but\n  current council practice runs a three-year operational cycle\n  (`au-vola1916`'s own `cadence_note`, unchanged this session). Victoria's\n  own valuation-process page states the Valuer-General has been the sole\n  valuation authority for all 79 Victorian councils since 2023 — quoted in\n  the node's `cadence_note` as corroborating context, not as the basis for\n  the cadence figure itself (the cadence figure rests on s.11 directly).\n  `releases_per_year: 1`.\n- **`au-vic-vbpsg`** — Valuation Best Practice Specifications Guidelines.\n  Direct quote, s.5AA(1): \"The valuer-general must prepare the Valuation\n  Best Practice Specifications Guidelines at the commencement of every\n  revaluation.\" The 2025 edition (published 27 September 2024) states it\n  is the seventh edition, building on a \"Valuation Best Practice\"\n  tradition dating to 1998 — read from the PDF's own foreword, not\n  asserted from the title alone. `releases_per_year: 1`, following\n  directly from s.5AA plus s.11's annual revaluation cycle — the two\n  sections together fix the cadence without needing a separate edition-\n  interval estimate the way some other files in this corpus have had to\n  use for irregular publications.\n- **One dependency**: `au-vic-vbpsg` → `methodology_depends_on` →\n  `au-vic-vola1960`, evidenced by the s.5AA quote above, read from the\n  Act's own text independently of the VBPSG document's own foreword\n  language about its statutory basis.\n\n**Deliberately not minted**: a Victoria-specific analog to NSW's Land\nRegistry Services second hop. The Victorian valuation-process page lists\nseveral data categories (transaction data, inspection records, permit and\nzoning information, title records) feeding the annual valuation but does\nnot name a specific registry the way NSW's council page names NSW LRS.\nMinting a `au-vic-land-registry`-style node here would mean asserting a\nstructural parallel the sources do not actually support — noted here so a\nfuture session does not treat this gap as an oversight."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "~~A second Australian state~~ — done, `G.3.md` (Victoria)."
+        },
+        {
+          "n": 2,
+          "text": "A second Australian council — **still unchanged, still blocked**. All four NSW Revenue Policy PDFs (Tamworth, Yass Valley, Federation, Wollongong) confirmed exhausted against `curl`, the DOCX-swap trick, and real-browser navigation this session (Finding 1). The one narrow remaining angle (Wollongong's PDF, fetchable via browser but unextractable by any tool available this session) is noted above as a tooling gap, not a research gap."
+        },
+        {
+          "n": 3,
+          "text": "~~The Victorian valuation chain~~ — **done this session** (Finding 2): `au-vic-vola1960` and `au-vic-vbpsg`, one dependency between them."
+        },
+        {
+          "n": 4,
+          "text": "Whether to mint an `au-federal-budget` node — Thomas's call, unchanged from `G.3.md`/`G.4.md`. Not raised with Thomas this session; still open."
+        },
+        {
+          "n": 5,
+          "text": "Carried from `G.1.md`/`G.2.md`: the NSW Grants Commission methodology manual search (not confirmed exhaustive), and the `au-abs-gfs` node-split question. Not attempted this session."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Re-anchor `au-abs-seifa -> au-abs-census` to ABS's own SEIFA methodology page. Not attempted."
+    },
+    {
+      "n": 2,
+      "text": "Domestic Tourism Statistics (DoTS)** — mint if a clean citable landing page exists (per `G.4.md` Finding 1: NVS is retired, DoTS is its replacement). Not attempted this session."
+    },
+    {
+      "n": 3,
+      "text": "ARIA+** — still open per `G.4.md` Finding 2. Not attempted this session."
+    },
+    {
+      "n": 4,
+      "text": "The 2026-27 VLGGC edition (expected September 2026) — check whether the Vicmap road-data transition happened. Not yet due."
+    },
+    {
+      "n": 5,
+      "text": "A Tasmania methodology → `au-lgfa-act-1995` edge — one targeted quote. Not attempted."
+    },
+    {
+      "n": 6,
+      "text": "`au-abs-gfs` split — carried, not attempted."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file**, then `G.4.md`, `G.3.md`, `G.2.md`, `G.1.md` in reverse order."
+    },
+    {
+      "n": 2,
+      "text": "`src/data/research/au-government-finance.json`** — now 22 reports, 18 dependencies. The two new nodes (`au-vic-vola1960`, `au-vic-vbpsg`) sit at the end of the `reports` array; the new dependency at the end of `dependencies`."
+    },
+    {
+      "n": 3,
+      "text": "Thomas's next-in-order instruction** (\"start au and then we will look at the africa file, then beyond europe\") — this file closes out the AU leg for now (priority item 2 stays legitimately blocked, item 3 is done). The next agent should move to \"the africa file\" (`country afrikans.docx`, identified in `EU/G.69.md` — raw, unprocessed CPI-indexation/social-benefit research for seven African countries plus a continent-wide overview, deliberately left untouched by a prior session, now to be revisited with Thomas's explicit go-ahead), then OPEN-THREADS 2.8 (beyond-Europe: Chile's SII avalúo fiscal, then Colombia/Peru, then item 27's nineteen jurisdictions starting with the Crown Dependencies)."
+    },
+    {
+      "n": 4,
+      "text": "The standing caution from `G.3.md`, still live**: prefer direct extraction over AI-summarising readers."
+    },
+    {
+      "n": 5,
+      "text": "The Wollongong tooling gap** (Finding 1) — worth surfacing to Thomas directly if a future session gets a different browser-automation toolset, since the network-level block is already solved and only extraction is missing. ---"
+    }
+  ],
+  "session_conditions": "**A research-and-mint session, one AU priority item.** Two things were\nattempted: retrying the four blocked NSW council PDFs (not re-solved, see\nFinding 1 — this is a documented dead end, not new progress), and\nresearching + minting the Victorian valuation chain (priority item 3,\nsucceeded — Finding 2). One file touched: `au-government-finance.json` —\ntwo new report nodes, one new dependency, no `_dropped` entries changed.\n\n**Not read this turn**: `REPORTS.md`, `BACKLOG.md`, any AU file besides\n`au-government-finance.json` and `G.4.md`. The rest of\n`au-government-finance.json`'s pre-existing 20 reports and 17 dependencies\nwere grepped for structure (to match the existing NSW valuation chain\n\"hop-for-hop,\" per Thomas's own phrasing) but not re-verified.\n\nPrimary sources for Finding 2 were fetched directly this session: the\nValuation of Land Act 1960 (Vic) full consolidated text (via a third-party\nmirror, since the two direct sources were both blocked — see below) and\nthe Valuer-General Victoria's 2025 Valuation Best Practice Specifications\nGuidelines PDF (fetched directly from `land.vic.gov.au`, no blocking\nencountered)."
+}

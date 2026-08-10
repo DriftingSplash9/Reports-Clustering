@@ -92,3 +92,9 @@ Not swept, `~$-open-questions_2026-08-08.docx` still present:
   records from the device bridge into the cloud workspace for reading, then
   never cleaned up. Moved to `_to_delete/ess_governance_records_scratch.json`.
   Not part of the corpus schema; safe to delete.
+
+## 2026-08-09 (post-import cleanup)
+Moved to `_to_delete/`: `de-ie-national-accounts-quality-reports.json`, `eu-legal-instrument-lineages.json`, `ess-catalogue-standards.json` (all three promoted from `EU/proposals/` into `src/data/research/` and registered in `src/data/index.ts` -- duplicates, safe to delete), `validate-bundle.tar.gz` (scratch tarball used to run `npm run validate` in the cloud sandbox, no longer needed).
+
+## 2026-08-09 (AU session, `AU/G.5.md`)
+Moved to `_to_delete/`: `validate-bundle_2026-08-09-au.tar.gz` (a second scratch tarball, same purpose as the one above, built fresh for this session's validator run rather than reusing the already-swept one since it was already gone from the working tree by the time this session started). Safe to delete.

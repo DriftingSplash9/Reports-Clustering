@@ -109,9 +109,16 @@ national accounts, structural business statistics, labour-force aggregates and
 fiscal-surveillance indicators used by the Commission, the Council and the
 member states should be visible the same way.
 
-**As of the 2026-08-09 validator run the corpus holds 473 reports, 605
-dependencies and 3 relations** (`EU/G.74.md`; the previous figure recorded
-here, 372/436/3, was the 2026-08-08 run in `validator-2026-08-08.txt`).
+**As of the 2026-08-09 validator run (this session, `AU/G.5.md`, after
+minting the Victorian valuation chain -- `au-vic-vola1960` and
+`au-vic-vbpsg` -- for AU priority item 3) the corpus holds 502 reports,
+609 dependencies and 3 relations** -- up from 500/608/3 recorded earlier
+the same day in `EU/G.76.md`, after also minting `no-kommune-arsregnskap`
+for OPEN-THREADS 2.9, which was itself up from 473/605/3 recorded earlier
+in `EU/G.74.md`, after Files B, the legal-instrument-lineages file, and
+the ESS catalogue file were imported.
+The previous figure before that, 372/436/3, was the 2026-08-08 run in
+`validator-2026-08-08.txt`.
 **Correction 2026-08-09 (`EU/G.75.md`)**: the parenthetical above used to
 add "run on Windows by Thomas — the validator cannot run through the device
 bridge". The second half is still true and the inference from it was not:
@@ -601,20 +608,22 @@ isn't a node yet), `deferred`, `note`.
 `benefits`, `interest-rates`, `municipal-finance`, `education`, `post-secondary`,
 `health`, `fiscal-transfers`, `population`, `taxation`, `assessment`,
 `energy-royalties`, `banking`, `financial-regulation`, `construction`,
-`insurance`. If nothing fits, say so in Part A — the list can be extended,
-but only at the other end.
+`insurance`, `research-innovation`, `agriculture`, `external-action`. If
+nothing fits, say so in Part A — the list can be extended, but only at the
+other end.
 
-**Three further values are adopted but not yet added**: `research-innovation`,
-`agriculture` and `external-action` (Thomas, 2026-08-08, open-questions D1 —
-"name as is"). They have no customers until the held EU legal-instrument
-lineage work is rebuilt and verified, so they go into the `Domain` union in
-`src/lib/types.ts` and into this list **in the same commit as their first
-tagged node**, not before. `insurance` was the same kind of pending value —
+`research-innovation`, `agriculture` and `external-action` (Thomas,
+2026-08-08, open-questions D1 — "name as is") were pending values with no
+customers until the held EU legal-instrument lineage work was rebuilt and
+verified. That happened 2026-08-09: `eu-legal-instrument-lineages.json`
+imported with 19 nodes tagged across the three, in the same commit as their
+addition to the `Domain` union in `src/lib/types.ts` and to this list, per
+the rule that added them. `insurance` was the same kind of pending value —
 `ecb-insurance-corporations-operations` and
 `ecb-insurance-corporations-assets-liabilities` were both tagged
-`financial-regulation` for want of it (`G.53.md`) — and is now **decided and
-added** (Thomas, 2026-08-08, OPEN-THREADS 0.5): both nodes retagged
-`insurance` in `eurostat-edp-gfs-ecb-statistics.json`.
+`financial-regulation` for want of it (`G.53.md`) — and was decided and
+added 2026-08-08 (OPEN-THREADS 0.5): both nodes retagged `insurance` in
+`eurostat-edp-gfs-ecb-statistics.json`.
 
 ---
 

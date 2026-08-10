@@ -68,6 +68,22 @@
         "national-accounts",
         "municipal-finance"
       ]
+    },
+    {
+      "id": "no-kommune-arsregnskap",
+      "title": "Kommunenes og fylkeskommunenes årsregnskap",
+      "publisher": "Individual Norwegian municipalities and county municipalities",
+      "country": "NO",
+      "jurisdiction_level": "municipal",
+      "region": "Norway",
+      "description": "Each Norwegian municipality's and county municipality's own annual accounts -- the primary filed document KOSTRA aggregates, analogous to the Dutch Iv3-rapportage (nl-iv3-rapportage) and Alberta's Municipal Financial Information Return. SSB's own KOSTRA veileder gives the reporting deadline: 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret'. SSB's Kommuneregnskap statistics page names the legal basis directly: 'Lov om kommuner og fylkeskommuner av 22. juni 2018 nr. 83 § 16-1' (the Municipality Act) and 'forskrift av 18. oktober 2019 nr. 1412 om rapportering fra kommuner og fylkeskommuner' (the KOSTRA reporting regulation) -- both confirmed by direct fetch of ssb.no this session. The underlying budsjett- og regnskapsforskrift itself (forskrift 2019-06-07-714) could not be independently opened -- lovdata.no is robots-disallowed, the same limitation already documented for the Kommuneloven statute in this file's own _status field.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, per municipality. SSB veileder: reporting deadline 22 February of the year following the accounting year.",
+      "last_updated": null,
+      "url": "https://www.ssb.no/offentlig-sektor/statistikker/kommregnko/aar",
+      "domains": [
+        "municipal-finance"
+      ]
     }
   ],
   "dependencies": [
@@ -98,6 +114,13 @@
       "relationship_type": "methodology_depends_on",
       "basis": "SSB's Om statistikken for Offentlig forvaltnings inntekter og utgifter: 'Statistikken er basert på internasjonale standarder for nasjonalregnskap og statistikk om offentlige finanser. Disse er først og fremst FNs System of National Accounts 2008 (SNA2008) og EUs European System of Accounts 2010 (ESA2010)' [the statistics are based on international standards for national accounts and government finance statistics, first and foremost the UN's SNA 2008 and the EU's ESA 2010]; the same page records reporting to Eurostat, the OECD and the IMF under EEA commitments — an EEA obligation, not EU membership: Norway is not an EU member.",
       "evidence_url": "https://www.ssb.no/offentlig-sektor/statistikker/offinnut/aar/2015-02-26?fane=om"
+    },
+    {
+      "source_report_id": "no-ssb-kostra",
+      "target_report_id": "no-kommune-arsregnskap",
+      "relationship_type": "uses_data_from",
+      "basis": "SSB's Om statistikken lists 'Kommuneregnskap (KOSTRA, skjema 0A, 0B, 0I, 0J, 0M, 0N)' among the data sources and states 'Data fra kommuner og fylkeskommuner rapporteres elektronisk til SSB'; the veileder gives the deadline 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret'.",
+      "evidence_url": "https://www.regjeringen.no/contentassets/457fbe59592248e1a2b3b57ebe033e97/veileder-til-kostra-forskriften.pdf"
     }
   ],
   "_dropped": [
@@ -110,8 +133,8 @@
     {
       "source": "no-ssb-kostra",
       "target": "no-kommune-arsregnskap",
-      "reason": "no-node-yet",
-      "why": "KOSTRA's inputs are the municipalities' own annual accounts: SSB's Om statistikken lists 'Kommuneregnskap (KOSTRA, skjema 0A, 0B, 0I, 0J, 0M, 0N)' among the data sources and states 'Data fra kommuner og fylkeskommuner rapporteres elektronisk til SSB'; the veileder gives the deadline 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret'. The Netherlands slice minted the analogous municipal-level node (nl-iv3-rapportage); a Norwegian 'kommuneregnskap/årsregnskap' node would need its own landing URL and cadence work (per-municipality publication under kommuneloven ch. 14) and was out of this pass's three-piece scope. Quotes preserved here so the node can be minted later and this edge promoted."
+      "reason": "resolved",
+      "why": "RESOLVED 2026-08-09 (EU/G.76.md, tackling OPEN-THREADS 2.9). Minted as no-kommune-arsregnskap and wired no-ssb-kostra -> no-kommune-arsregnskap (uses_data_from) on the same quote this entry already had, plus a freshly-fetched legal basis from SSB's Kommuneregnskap statistics page (Lov om kommuner og fylkeskommuner § 16-1; rapporteringsforskriften 2019-10-18-1412). Original entry follows.\n\nKOSTRA's inputs are the municipalities' own annual accounts: SSB's Om statistikken lists 'Kommuneregnskap (KOSTRA, skjema 0A, 0B, 0I, 0J, 0M, 0N)' among the data sources and states 'Data fra kommuner og fylkeskommuner rapporteres elektronisk til SSB'; the veileder gives the deadline 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret'. The Netherlands slice minted the analogous municipal-level node (nl-iv3-rapportage); a Norwegian 'kommuneregnskap/årsregnskap' node would need its own landing URL and cadence work (per-municipality publication under kommuneloven ch. 14) and was out of this pass's three-piece scope. Quotes preserved here so the node can be minted later and this edge promoted."
     },
     {
       "source": "no-ssb-kostra",

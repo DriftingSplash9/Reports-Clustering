@@ -355,6 +355,9 @@ export type Domain =
   | 'financial-regulation'
   | 'construction'          // added 2026-08-07 (Thomas): building/construction releases; first customer au-abs-building-approvals
   | 'insurance'             // added 2026-08-08 (Thomas, OPEN-THREADS 0.5): splits off financial-regulation for insurance-specific series; first customers ecb-insurance-corporations-operations, ecb-insurance-corporations-assets-liabilities
+  | 'research-innovation'   // added 2026-08-09 (Thomas, D1 2026-08-08 ruling, 'name as is'): first customer eu-horizon-europe and its lineage
+  | 'agriculture'           // added 2026-08-09 (Thomas, D1 2026-08-08 ruling, 'name as is'): first customer eu-cap-strategic-plans and its lineage
+  | 'external-action'       // added 2026-08-09 (Thomas, D1 2026-08-08 ruling, 'name as is'): first customer eu-ndici-global-europe and its lineage
 
 /** See the cast-not-parsed note under `SOURCE_KINDS`. */
 export const DOMAINS: readonly Domain[] = [
@@ -377,6 +380,9 @@ export const DOMAINS: readonly Domain[] = [
   'financial-regulation',
   'construction',
   'insurance',
+  'research-innovation',
+  'agriculture',
+  'external-action',
 ]
 
 /**

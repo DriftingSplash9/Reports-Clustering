@@ -372,9 +372,15 @@ avalúo fiscal first (a fourth property-valuation tradition), then
 Colombia/Chile-FCM/Peru, then item 27's nineteen jurisdictions (Crown
 Dependencies first). Still `not_attempted` across three sessions.
 
-**2.9 — Europe depth-pass leftovers.** `[M]` Norway's municipal
-**årsregnskap**; the Netherlands and UK `_dropped` leads (the Dutch
-Kadaster/BRK node is explicitly not-yet-minted).
+**2.9 — Europe depth-pass leftovers. -- MOSTLY CLOSED 2026-08-09** (`EU/G.76.md`).
+Norway's municipal **årsregnskap** minted (`no-kommune-arsregnskap`, wired to
+`no-ssb-kostra`). The Dutch Kadaster/BRK node was found ALREADY minted by an
+earlier, uncross-referenced sweep session (`nl-kadaster-brk`, resolved
+2026-08-09) -- this line was stale before this session touched it, same
+pattern as block A/F in `G.75.md` Finding 1. Left open: the UK `_dropped`
+lead (a second council, York, also citing the CIPFA Code -- already tracked
+as cheap check 3.-equivalent in `uk-local-government-finance.json`'s own
+`_dropped`, `reason: deferred`, not attempted this session).
 
 ---
 

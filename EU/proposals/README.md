@@ -17,5 +17,9 @@ Files move out once reviewed and either promoted (imported to
 `src/data/research/`) or rejected — leave a one-line note in the file
 itself, or here, saying which and when.
 
-Currently empty. First expected occupants: proposal Files A and B
-(OPEN-THREADS 2.2), rebuilt to Thomas's rulings in the decisions file.
+Currently holds one file: File-A-reconciliation-note_2026-08-09.md (not a
+promotable JSON -- File A needed no rebuild, see that note). File B
+(de-ie-national-accounts-quality-reports.json), the legal-instrument-lineages
+file, and the ESS catalogue file were all drafted here 2026-08-09, reviewed,
+and promoted into src/data/research/ the same day -- see EU/G.76.md Findings
+3, 5 and 6. Their EU/proposals/ copies were moved to _to_delete/.
