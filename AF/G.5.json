@@ -1,0 +1,123 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.5.md",
+  "number": 5,
+  "title": "G.5.md — Africa galaxy hand-off",
+  "date": "2026-08-10",
+  "governing_briefs": "`Research.1.md` §2/§3/§4, same as G.1-G.4. `AF/G.1.md` through `AF/G.4.md` all read this session (continuous with the G.4 session — see Session conditions).",
+  "predecessor": "G.4.md (2026-08-10)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "Nigeria is the first country in this branch where the core CPI-methodology claim (the Dutot-to-Jevons elementary-formula switch) was confirmed not just as a fact but with the source's own stated reasoning, quoted directly: NBS's own \"Highlights of CPI Rebasing\" document says \"The Jevon elementary Index is preferred to Dutot, because it passes all four economic criteria which are Transitivity, Reversibility, Commensurability and Proportionality\" — a level of primary-source precision neither the docx nor Grok's round had actually surfaced (both asserted the switch without this specific line). Nigeria also adds a new shape to the branch's running catalogue of how CPI-benefit links do or don't bind: the World Bank's NASSP-SU/ESR-CT programme is explicitly framed as a response to \"rising food prices and inflation\" but has no stated CPI formula at all — motivated by inflation without being mechanically linked to it, distinct from Ghana's real formula, Ethiopia's two real formulas (one suspended), and Kenya's unclear/possibly-unusable legal basis. Five nodes, four dependency edges, three documented non-dependencies, imported and validated live in the same session (`ng-cpi-pension-safety-net.json`).",
+  "findings": [
+    {
+      "heading": "1. Nigeria's CPI rebasing (Feb 2025) — the branch's most primary-source-verified mechanism yet, with one unresolved gap",
+      "body": "`ng-nbs-cpi-rebasing`, VERIFIED DIRECTLY via NBS's own \"Highlights of CPI Rebasing\" PDF (WebFetch could not render this PDF's binary content — worth noting as a tooling gap distinct from the JS-render/paywall problems logged for other countries; downloading with `curl` and extracting text with `pypdf` in the cloud sandbox worked cleanly and should be the fallback whenever WebFetch reports binary/unreadable content for a PDF URL). Confirms COICOP 2018 (13 Divisions, 45 Groups, 100 Classes, 164 Subclasses, 242 item-level observations tracking 934 product varieties), weight reference period 2023 (2023 Nigeria Living Standards Survey plus a 2024 Survey of Rare Items and administrative data from the Central Bank of Nigeria, NAICOM and NBS's own National Accounts division), price reference period 2024, monetary-only expenditure, and Modified Laspeyres/Young-index higher-level aggregation. The one detail from the docx that this document does NOT contain: the 12-month index-reference-period-maximisation citing IMF CPI Manual §9.125 and the ECOWAS HCPI framework — likely a later refinement (the docx itself frames it as \"around the December 2025 figures\"), not part of the original February 2025 announcement. Worth a direct look at NBS's December 2025 communications specifically if this needs closing."
+    },
+    {
+      "heading": "2. PenCom's pension-review chain: real statutory review obligations, explicitly no CPI formula, confirmed in the clearest terms yet",
+      "body": "`ng-pencom-federal-pension-review-circular`, VERIFIED DIRECTLY via direct fetch of PenCom's own 8 December 2025 circular. Quotes both its statutory anchors in full — Constitution s.173(3) (\"reviewed every five years or together with any Federal Civil Service salary reviews, whichever is earlier\") and Pension Reform Act 2014 s.15(4) — and then, critically, grounds the actual increase amounts in six prior National Salaries, Incomes and Wages Commission circulars carrying specific negotiated rates (15%, 33%, 20%, 28%, a flat N32,000) with no CPI calculation anywhere in the document. This is the cleanest documented instance in the branch so far of the general pattern first seen in Kenya (G.2) and confirmed again in Ghana's SSNIT node (G.4): a real, binding statutory obligation to review periodically, with the quantum left to negotiation or administrative discretion rather than a formula."
+    },
+    {
+      "heading": "3. NSITF legacy pensions: a large, real enforcement action, but resting entirely on secondary reporting",
+      "body": "`ng-nsitf-legacy-pension-enforcement` — PenCom directed a large increase (reportedly first since 2005) for legacy NSITF-scheme retirees around January 2026, invoking Pension Reform Act 2014 s.53. This session and Grok's round both tried and failed to locate the actual circular as a downloadable primary document — the node rests on PenCom's own statements as carried by contemporaneous Nigerian press coverage (aggregate monthly payments rising from roughly N12.56 million to N159.95 million across 2,116 retirees, N8.70 billion in arrears). Flagged explicitly in `_open_questions` rather than silently treated as equivalent in strength to the directly-fetched federal pension circular sitting right next to it in the same file."
+    },
+    {
+      "heading": "4. World Bank NASSP-SU: confirmed financing, and the branch's first \"inflation-motivated but not CPI-linked\" safety net",
+      "body": "`ng-nassp-su-worldbank`, VERIFIED DIRECTLY via the project's own text (P176935): development objective \"Expand coverage of shock responsive safety net support among the poor and vulnerable and strengthen the national safety net delivery system,\" US$800 million total cost with 100% IDA financing per this session's own fetch of a procurement-strategy document (no Nigerian government counterpart identified there, unlike Ghana's GPSNP2 where GoG funds the majority share, or Ethiopia's PSNP5 where GoG contributes roughly a third). Deliberately left as an isolated node — the programme is explicitly framed as a response to food-price and inflation shocks but has no stated formula tying transfer amounts to CPI, recorded as a documented non-dependency in `_dropped` rather than a plausible-looking edge."
+    },
+    {
+      "heading": "5. The ECOWAS HCPI Methodological Guide has now failed three independent verification attempts — recommend retiring it as a cheap check",
+      "body": "Carried forward from G.4's open question. Grok's Nigeria round tried multiple search angles and explicitly reported it could not find a primary document. This session's own searches (a fresh angle, not a repeat of G.4's) also came up empty. The claim keeps recurring in secondary form — Nigerian press coverage says the IMF called the rebasing consistent with \"the ECOWAS harmonised framework,\" and the original docx's own Nigeria material asserts the same June 2025 date — but every trace of it leads back to either vague unlinked prose or the docx's own Grok-authored origin, not a second independent source. Recorded in this session's `_note` as a recommendation: stop treating this as a cheap check to retry every country; it either needs someone reading raw ECOWAS Commission or AFRISTAT bulletins directly (not search-engine-mediated) or it stays permanently unconfirmed."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "Tanzania — the last unresearched country in the branch.** 4 raw docx entries (NBS CPI, National Social Protection Policy 2023). With Tanzania done, every country in `country afrikans.docx` will have been worked at least once. Good candidate for the same parallel-split pattern, though with only 4 raw entries it may not split as naturally as Nigeria's 9 — worth reading the entries first before committing to a specific two-lane split, same as every prior country."
+        },
+        {
+          "n": 2,
+          "text": "Whether to model the docx's regional-typology prose (WAEMU HCPI, AFRISTAT, and now the still-unconfirmed ECOWAS HCPI guide) as corpus nodes — raised since G.1, still not raised with Thomas directly. Lower urgency than before: Ghana confirmed non-membership in WAEMU, and the ECOWAS HCPI guide itself has now failed three verification attempts, so there may not be a clean node to mint even if Thomas says yes."
+        },
+        {
+          "n": 3,
+          "text": "Import review is, for the moment, **not a backlog** — everything researched through this session is already imported and validated live. Worth stating plainly since every prior hand-off through G.4 carried this as a standing, growing to-do; it is not one right now. It will become one again the moment Tanzania (or anything else) is researched and not immediately imported, so don't assume this stays true without checking."
+        },
+        {
+          "n": 4,
+          "text": "The `ng-ecowas-hcpi-guide-still-unconfirmed` and `ng-nsitf-circular-not-located` open questions (in the JSON) are both low-value cheap checks, not priorities — see Cheap checks below."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "NBS's December 2025 communications specifically, for the 12-month index-reference-period-maximisation detail (IMF CPI Manual §9.125 alignment) that the February 2025 Highlights document doesn't contain."
+    },
+    {
+      "n": 2,
+      "text": "The PenCom circular behind the NSITF legacy-pension enhancement (~January 2026) — not located as a primary PDF by either research half."
+    },
+    {
+      "n": 3,
+      "text": "The ECOWAS HCPI Methodological Guide — three failed attempts now; per this session's own recommendation (Finding 5), stop treating this as a cheap check unless someone is willing to read raw ECOWAS Commission/AFRISTAT material directly rather than search-engine-mediated."
+    },
+    {
+      "n": 4,
+      "text": "Constitution s.28 (South Africa, children's rights) — cited secondhand via the Western Cape DSD document (G.2), never independently fetched. Carried forward unchanged since G.2."
+    },
+    {
+      "n": 5,
+      "text": "`za-sassa-annual-report` → `za-social-assistance-act-2004` direct edge — open since G.1, still unresolved. Carried forward unchanged."
+    },
+    {
+      "n": 6,
+      "text": "IMF DSBB DQAF pages remain JS-rendered and unreachable for South Africa, Egypt, Kenya. Do not re-attempt per-country; batch-recheck if a JS-capable tool arrives."
+    },
+    {
+      "n": 7,
+      "text": "Ethiopia's PSNP5 wheat-equivalency figures and current COICOP vintage — carried forward unchanged from G.3, still low urgency."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `AF/G.1.md` through `AF/G.4.md` for full context — Orientation across all five still applies and has been kept current rather than rewritten from scratch."
+    },
+    {
+      "n": 2,
+      "text": "`country afrikans.docx` — Tanzania's 4 entries specifically, the last unresearched country."
+    },
+    {
+      "n": 3,
+      "text": "`feedback_grok-as-verification` (Claude's project memory) plus this file's Orientation item 4 — the mechanism is synchronous and conversational for this branch."
+    },
+    {
+      "n": 4,
+      "text": "`af-backlog-import-2026-08-10` and `npm-validate-procedure` (Claude's project memory) — the import mechanics and the fast tar-based validate procedure, worth using again after Tanzania rather than letting a DRAFT file sit."
+    },
+    {
+      "n": 5,
+      "text": "Nothing is currently sitting un-imported in `src/data/research/` for this branch — worth confirming that's still true, since it's a first for this hand-off chain."
+    }
+  ],
+  "session_conditions": "Continuous with the G.4 session (same sitting): G.4.md closed out Ghana, Thomas then asked to \"import the backlog\" (all seven pending DRAFT slices), which surfaced and fixed the `graph.ts` bug described in Orientation item 5, then asked for a Grok prompt for Nigeria with the enthusiasm to keep going, so Nigeria was researched, merged, and imported in the same session rather than deferred. This hand-off covers both the import and Nigeria in one file since they were one continuous unit of work — the import has its own detailed record in project memory ([[af-backlog-import-2026-08-10]]) rather than repeated here at length."
+}

@@ -194,6 +194,13 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   ET: 'AFR',
   GH: 'AFR',
 
+  // **Nigeria added 2026-08-10** (AF branch G.5, same session as Ghana) --
+  // the 2025 CPI rebasing (COICOP 2018, Jevons over Dutot, confirmed
+  // verbatim from NBS's own methodology document), the PenCom constitutional
+  // pension-review chain, and World Bank shock-responsive safety-net
+  // financing. See `src/data/research/ng-*.json`.
+  NG: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,
