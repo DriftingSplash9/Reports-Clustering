@@ -109,14 +109,18 @@ national accounts, structural business statistics, labour-force aggregates and
 fiscal-surveillance indicators used by the Commission, the Council and the
 member states should be visible the same way.
 
-**As of the 2026-08-09 validator run (this session, `AU/G.5.md`, after
-minting the Victorian valuation chain -- `au-vic-vola1960` and
-`au-vic-vbpsg` -- for AU priority item 3) the corpus holds 502 reports,
-609 dependencies and 3 relations** -- up from 500/608/3 recorded earlier
-the same day in `EU/G.76.md`, after also minting `no-kommune-arsregnskap`
-for OPEN-THREADS 2.9, which was itself up from 473/605/3 recorded earlier
-in `EU/G.74.md`, after Files B, the legal-instrument-lineages file, and
-the ESS catalogue file were imported.
+**As of the 2026-08-10 validator run (this session, `AF/G.1.md`, opening
+the new Africa branch and minting South Africa's CPI/social-grants slice
+-- `za-statssa-cpi`, `za-social-assistance-act-2004`, `za-sassa-act-2004`,
+`za-sassa-annual-report`, `za-national-treasury-budget-review`) the
+corpus holds 507 reports, 612 dependencies and 3 relations** -- up from
+502/609/3 recorded the prior day in `AU/G.5.md`, after minting the
+Victorian valuation chain (`au-vic-vola1960`, `au-vic-vbpsg`) for AU
+priority item 3, which was itself up from 500/608/3 recorded earlier that
+day in `EU/G.76.md`, after also minting `no-kommune-arsregnskap` for
+OPEN-THREADS 2.9, which was itself up from 473/605/3 recorded earlier in
+`EU/G.74.md`, after Files B, the legal-instrument-lineages file, and the
+ESS catalogue file were imported.
 The previous figure before that, 372/436/3, was the 2026-08-08 run in
 `validator-2026-08-08.txt`.
 **Correction 2026-08-09 (`EU/G.75.md`)**: the parenthetical above used to

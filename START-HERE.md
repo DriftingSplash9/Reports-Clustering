@@ -15,7 +15,7 @@ graph where each sphere is a real published report, each line is a documented
 dependency between two of them, and a report's size is how much everything else
 rests on it.
 
-Right now it holds **502 reports and 609 dependencies**, all real, all sourced.
+Right now it holds **507 reports and 612 dependencies**, all real, all sourced.
 It began with Canadian and American federal statistics, Alberta's provincial
 finances and three Alberta municipalities in full detail, and has since grown
 galaxies: the European Union and its member states, candidates and neighbours;

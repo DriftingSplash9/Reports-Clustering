@@ -176,6 +176,12 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // is one system, and the label and region filter carry the distinction.
   PR: 'US',
 
+  // **`AFR` staffed for the first time, 2026-08-10.** Reserved since the
+  // continent redesign, unstaffed until South Africa arrived through the
+  // "africa file" (`country afrikans.docx`) -- CPI, social grants, and the
+  // statutory bodies administering them. See `src/data/research/za-*.json`.
+  ZA: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

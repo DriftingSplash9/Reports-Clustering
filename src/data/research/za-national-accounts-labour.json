@@ -1,0 +1,96 @@
+{
+  "_slice": "za-national-accounts-labour",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Second extension of the South Africa pilot slice this session, after Thomas asked where else to look for SA nodes and edges and flagged the pattern that top-level 'broadcaster' nodes (foundational, no cadence) rarely reach internationally. Mirrors the existing 'root layer' pattern in international-frameworks.json -- statcan-national-accounts/bea-gdp -> sna-2008, statcan-lfs -> icls-work-statistics-resolution -- by finding South Africa's own GDP and Labour Force Survey and checking whether they carry the same edges. They do, plus a third, unrelated international edge found by accident while checking a second benefit scheme (UIF) for the same discretionary-adjustment pattern already confirmed for social grants.",
+  "_note": "Two of the three findings here are the SNA-2008 and ICLS pattern repeating cleanly for a third country (Canada, US, now South Africa). The third is different in kind: the Unemployment Insurance Act's own Gazette-notice power (s.12(3)(a)) benchmarks itself against an ILO Convention by name -- a genuine treaty-level international reference sitting inside ordinary domestic labour legislation, not a statistical methodology citation. Checked separately whether South Africa has actually ratified that Convention (it has not, per the ILO's own March 2026 workshop article -- still assessing feasibility), which matters for how the edge should be read: this is a domestic statute citing an unratified international benchmark voluntarily, not a treaty obligation. Filed as `cites` rather than `methodology_depends_on` for that reason -- it's a reference point for a discretionary ministerial power, not a rule the benefit calculation is derived from.",
+  "_open_questions": [
+    {
+      "id": "za-uia-1953-vs-1952",
+      "question": "The Unemployment Insurance Act's own text, as extracted this session, names 'the Social Security (Minimum Standards) Convention, 1953' -- but the ILO's own official designation for the only convention of this name is the Social Security (Minimum Standards) Convention, 1952 (No. 102). Not resolved this session: whether this is an extraction/OCR artifact from the PDF fetch, an error in the Act's own drafting, or a different instrument entirely. A second, cleaner read of s.12(3)(a) directly (SAFLII's copy 403'd this session; NATLEX or a different mirror worth trying) would settle it before minting this edge for real.",
+      "answer": "Not resolved. The node and edge below use '1952' (the ILO's own designation, matching the Convention this clearly refers to based on subject matter and number) but the description flags the discrepancy rather than silently correcting the Act's own extracted text."
+    },
+    {
+      "id": "za-qlfs-definitional-vs-questionnaire",
+      "question": "The QLFS technical note found this session states the questionnaire was revised in Q3 2025 'to adhere to the most recent international labour statistics standards' (citing the 19th/20th/21st ICLS by name), and separately states this revision 'does not affect the measurement or definition of employment and unemployment.' That's good evidence the questionnaire follows ICLS, but doesn't by itself confirm the core definitions of employed/unemployed were ever explicitly adopted from ICLS/ILO (as opposed to being a South Africa-specific definition that happens to be broadly compatible). StatCan's own edge to the same node is phrased more directly ('adopts concepts and definitions of employment and unemployment endorsed by the ILO'). Worth a second, more targeted read of the QLFS's own concepts-and-definitions section (not the revision technical note) before treating this as equally strong."
+    }
+  ],
+  "reports": [
+    {
+      "id": "za-statssa-gdp",
+      "title": "Gross Domestic Product (P0441)",
+      "publisher": "Statistics South Africa (Stats SA)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "South Africa's official quarterly GDP release. VERIFIED DIRECTLY this session (Stats SA's own National Accounts: Sources and Methods report, Report 04-04-04): 'SNA 2008 is the foundation and primary methodological source for Stats SA in calculating South Africa's GDP', and elsewhere the document describes 2015-benchmark improvements made 'to conform as closely as possible to the establishment basis (classification) recommended in the System of National Accounts (2008)'. Same shape as the existing statcan-national-accounts and bea-gdp edges into the same sna-2008 node.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly release, standard international convention for headline GDP -- not independently confirmed against Stats SA's own release calendar this session.",
+      "last_updated": null,
+      "url": "https://www.statssa.gov.za/publications/Report%2004-04-04/Report%2004-04-042021.pdf",
+      "domains": ["national-accounts"]
+    },
+    {
+      "id": "za-statssa-qlfs",
+      "title": "Quarterly Labour Force Survey (P0211)",
+      "publisher": "Statistics South Africa (Stats SA)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "South Africa's official quarterly labour force survey -- the source of the headline unemployment rate. VERIFIED DIRECTLY this session (the Q1 2026 release's own technical notes): the questionnaire 'was revised in Q3: 2025 in order to adhere to the most recent international labour statistics standards', naming the 19th ICLS (statistics on work, employment and labour underutilisation), 20th ICLS (statistics on work relationships) and 21st ICLS (statistics on the informal economy) by number. The same document also states the revision 'does not affect the measurement or definition of employment and unemployment' -- so headline definitions predate and are not derived from this specific revision. See _open_questions: this is solid evidence of ICLS alignment but a softer statement than StatCan's own edge to the same node, which names the ILO definitions directly.",
+      "releases_per_year": 4,
+      "last_updated": "2026-01",
+      "url": "https://www.statssa.gov.za/publications/P0211/P02111stQuarter2026.pdf",
+      "domains": ["labour"]
+    },
+    {
+      "id": "za-unemployment-insurance-act-2001",
+      "title": "Unemployment Insurance Act 63 of 2001",
+      "publisher": "Parliament of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The statute governing UIF short-term unemployment benefits, run by the Department of Employment and Labour (distinct from SASSA/DSD's social grants). VERIFIED DIRECTLY this session: benefits are calculated on a sliding Income Replacement Rate against prior daily income (Schedule 2), 'The maximum IRR is fixed at 60%. The minimum IRR is currently set at 38%', with a flat benefit above a transition income level. Confirms the same discretionary-adjustment pattern already found for social grants in za-social-assistance-act-2004: s.12(3)(a) lets 'the Minister... with the concurrence of the Minister of Finance, by notice in the Gazette... amend the scale of benefits contained in Schedule 3 in accordance with a maximum monthly rate of remuneration of a skilled manual labourer as determined by the Social Security (Minimum Standards) Convention, [1952 per ILO's own designation; the Act text as extracted this session reads '1953' -- see _open_questions, not resolved]'. No automatic CPI-indexation clause found in the Act for either benefit amounts or the contribution ceiling.",
+      "last_updated": null,
+      "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a63-010.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "ilo-c102-social-security-minimum-standards",
+      "title": "Social Security (Minimum Standards) Convention, 1952 (No. 102)",
+      "publisher": "International Labour Organization",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The ILO's foundational treaty setting minimum standards across nine branches of social security, including unemployment benefit. VERIFIED DIRECTLY this session that South Africa has NOT ratified this Convention -- the ILO's own site (March 2026 workshop article) describes South Africa as still assessing the feasibility of ratification against a comparative legal analysis, not as a ratifying state. The Unemployment Insurance Act nonetheless names it by name as the benchmark for the Minister's discretionary Gazette-notice power to adjust the benefit scale (s.12(3)(a)) -- a domestic statute voluntarily referencing an unratified international instrument as a reference point, not a treaty-driven obligation. Filed with an INT country code and international jurisdiction level per the schema's existing convention for standards bodies.",
+      "releases_per_year": 0.02,
+      "cadence_note": "A single 1952 instrument, not revised since; releases_per_year is nominal so the pulse rate reads as near-static, matching the treatment of sna-2008 and the cpi-manual node.",
+      "last_updated": null,
+      "url": "https://normlex.ilo.org/dyn/nrmlx_en/f?p=NORMLEXPUB%3A12100%3A0%3A%3ANO%3A%3AP12100_ILO_CODE%3AC102",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "za-statssa-gdp",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Stats SA's own National Accounts: Sources and Methods report: 'SNA 2008 is the foundation and primary methodological source for Stats SA in calculating South Africa's GDP.'",
+      "evidence_url": "https://www.statssa.gov.za/publications/Report%2004-04-04/Report%2004-04-042021.pdf"
+    },
+    {
+      "source_report_id": "za-statssa-qlfs",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The QLFS's own Q1 2026 technical notes: the questionnaire 'was revised in Q3: 2025 in order to adhere to the most recent international labour statistics standards', naming the 19th/20th/21st ICLS resolutions directly. Weaker than the equivalent statcan-lfs edge (see _open_questions) but real, national-side evidence of ICLS alignment.",
+      "evidence_url": "https://www.statssa.gov.za/publications/P0211/P02111stQuarter2026.pdf"
+    },
+    {
+      "source_report_id": "za-unemployment-insurance-act-2001",
+      "target_report_id": "ilo-c102-social-security-minimum-standards",
+      "relationship_type": "cites",
+      "basis": "s.12(3)(a): the Minister's Gazette-notice power to amend the UIF benefit scale is exercised 'in accordance with a maximum monthly rate of remuneration of a skilled manual labourer as determined by the Social Security (Minimum Standards) Convention' -- named as a reference benchmark for a discretionary power, not a formula the benefit is calculated from, and not a ratified treaty obligation. Filed as `cites` for both reasons.",
+      "evidence_url": "https://www.gov.za/sites/default/files/gcis_document/201409/a63-010.pdf"
+    }
+  ],
+  "_dropped": []
+}

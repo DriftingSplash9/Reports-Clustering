@@ -1,0 +1,115 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.1.md",
+  "number": 1,
+  "title": "G.1.md — Africa galaxy hand-off",
+  "date": "2026-08-10",
+  "governing_briefs": "`Research.1.md` §4 (recurring-vs-one-off node shape,",
+  "predecessor": "none — this is the first hand-off for this branch.",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "**South Africa's benefit-adjustment mechanism is discretionary by statute,\nnot automatically CPI-indexed — confirmed at the primary-source level,\nnot merely repeated from the docx's own (correct, as it turned out)\nframing.** Social Assistance Act 13 of 2004 s.32(3) gives the Minister of\nSocial Development, with the concurrence of the Minister of Finance, the\npower to set grant amounts \"by notice in the Gazette\" — a discretionary\nact, not a formula. The National Treasury's own 2026 Budget Review\nconfirms grants were \"adjusted down over the medium term in line with a\nlower inflation outlook\" — inflation is a stated factor in the decision,\nbut no document names a mechanical link between a specific CPI print and a\nspecific grant increase. This matches the docx's own continent-wide\nframing (discretionary is the norm; automatic indexation is the rare\nexception) for the one country checked directly this session.\n\n**Five nodes minted, three dependencies wired, all independently\nre-verified at source.** See Finding 2 for detail; the branch's schema\nplacement (a new `AFR` palette family, `ZA` country code) is a\nprerequisite the validator would otherwise reject on.",
+  "findings": [
+    {
+      "heading": "1. `country afrikans.docx` is 48 unverified Grok-research entries across seven countries, plus a genuinely useful continent-wide typology",
+      "body": "*What this rests on*: the docx's own text, read in full this session,\nreconstructed from its paragraph-per-line JSON encoding.\n\nThe file is not prose about Africa — it is raw JSON (an AI researcher's\nstructured output, delivered into a Word document one line per paragraph)\ncovering: Nigeria (9 entries — CPI rebasing, pension reviews, cash\ntransfers), Egypt (9 — CAPMAS CPI, Social Insurance and Pensions Law\n148/2019, Takaful and Karama), South Africa (11 — Stats SA CPI, Social\nAssistance Act, SASSA, disability grants, Budget Review), Kenya (7 — KNBS\nCPI, Social Protection Act 2025, Persons with Disabilities Act 2025,\nInua Jamii), Ethiopia (6 — PSNP5, ESS CPI), Tanzania (4 — NBS CPI,\nNational Social Protection Policy), Ghana (2 — LEAP indexation, GSS CPI\nmethodology). None of the 48 entries had been checked against a primary\nsource before this session, and 37 of them still have not been.\n\nThe docx's closing prose sections are a genuinely useful typology and\nregional overview, not a wrapper around the JSON — worth reading for its\nown sake by whichever agent picks up the next country, since it names the\nspecific mechanism-type for each country before any node-level research\nbegins (e.g. \"Ghana is the standout with an explicit LEAP indexation\nformula linked to GSS CPI. Nigeria is largely discretionary despite\nconstitutional review requirements\" — a claim this session did not check\nfor Nigeria, flagged as a lead rather than a fact)."
+    },
+    {
+      "heading": "2. South Africa: five nodes minted, all independently re-verified, one finding the docx itself had gotten right but not verified",
+      "body": "*What this rests on*: direct fetches this session of the Social Assistance\nAct 13 of 2004 and the South African Social Security Agency Act 9 of 2004\n(both via LawLibrary/Laws.Africa, since SAFLII's own act pages 301-redirect\nto WebFetch), the June 2026 Stats SA CPI release (P0141), the 2026\nNational Treasury Budget Review (Chapter 5), and SASSA's own 2024/25\nAnnual Report.\n\n- **`za-statssa-cpi`** — Stats SA's monthly CPI (P0141). The June 2026\n  release's own key findings (\"Annual consumer price inflation was 5,0% in\n  June 2026, up from 4,5% in May 2026\") matched the docx's citation\n  exactly — the one entry in this slice where independent verification\n  confirmed rather than corrected the source material.\n- **`za-social-assistance-act-2004`** — the statute governing South\n  Africa's social grants. Direct quote, s.32(3): \"The Minister, with the\n  concurrence of the Minister of Finance — (a) must determine amounts\n  payable in respect of social assistance; and (b) may determine\n  additional payments linked to a social grant, by notice in the Gazette.\"\n  No cadence (a one-off foundational instrument, per `Research.1.md` §4).\n- **`za-sassa-act-2004`** — **a separate statute from the one above**,\n  same year, easily confused, and the docx's own entries did not\n  distinguish them. Establishes SASSA itself: s.2(1), \"The South African\n  Social Security Agency is hereby established as a juristic person\";\n  s.3(a), its object is \"the efficient and effective management,\n  administration and payment of social assistance.\"\n- **`za-sassa-annual-report`** — SASSA's own annual report (2024/25\n  edition read directly). Its reporting obligation traces to the Public\n  Finance Management Act (a general public-entity requirement), confirmed\n  from the report's own PFMA-compliance section rather than assumed.\n- **`za-national-treasury-budget-review`** — the annual Budget Review.\n  Direct quote, 2026 Chapter 5: \"The social grant allocation has been\n  adjusted down over the medium term in line with a lower inflation\n  outlook and improved grant targeting and verification.\"\n\n**Three dependencies**, all `cites` or `methodology_depends_on`, never\n`uses_data_from` — deliberately, because nothing found this session names\na mechanical formula tying a grant figure to a CPI print. The Budget\nReview → CPI edge is `cites` for exactly that reason, recorded in the\nslice's own `_note` field so a future session does not silently upgrade it\nwithout new evidence.\n\n**Colonial-structure observation, since Thomas asked directly**: South\nAfrica's statutory architecture here is recognisably Westminster-derived\n(an Act of Parliament, a Minister, a Gazette-notice power, a juristic-\nperson statutory agency) — the same broad shape as the UK's own\nDepartment for Work and Pensions / benefit-uprating structure this corpus\nalready has in its `gb-*` files, rather than anything distinctly novel.\nNot independently compared against the UK slice this session; a genuine\ncomparison is a cheap check for later, not asserted here."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "Nigeria — 9 raw entries (CPI rebasing to 2024 base, PenCom pension reviews, National Social Safety Net Programme). Not started."
+        },
+        {
+          "n": 2,
+          "text": "Egypt — 9 raw entries (CAPMAS 10th CPI series, Social Insurance and Pensions Law 148/2019, Takaful and Karama). Not started. The docx flags Egypt as having \"the clearest statutory CPI definition for pension increases\" on the continent — possibly the next-most-interesting country after South Africa precisely because it may NOT be purely discretionary; worth prioritising to test that claim."
+        },
+        {
+          "n": 3,
+          "text": "Kenya — 7 raw entries (KNBS CPI rebasing, Social Protection Act 2025, Persons with Disabilities Act 2025, Inua Jamii). Not started. The 2025 Act is very recent and worth checking whether it has actually come into force yet."
+        },
+        {
+          "n": 4,
+          "text": "Ethiopia — 6 raw entries (PSNP5, a federal programme with woreda [district]-level implementation — genuinely different government structure from the other six, never colonised in the conventional sense bar a brief 1936–41 Italian occupation, worth flagging to Thomas directly since it breaks the \"colonial influence\" pattern he expected). Not started."
+        },
+        {
+          "n": 5,
+          "text": "Tanzania — 4 raw entries (NBS CPI, National Social Protection Policy"
+        },
+        {
+          "n": 2023,
+          "text": ". Not started."
+        },
+        {
+          "n": 6,
+          "text": "Ghana — 2 raw entries, but flagged by the docx's own regional overview as the one clear case of explicit automatic indexation (LEAP linked to GSS CPI) — small entry count, potentially high research value. Not started."
+        },
+        {
+          "n": 7,
+          "text": "Whether to model the docx's own regional-typology prose (North/ Southern/East/West Africa, WAEMU Harmonised CPI, AFRISTAT) as anything in the corpus, or leave it as narrative-only context the way similar overview material has been treated elsewhere. Not raised with Thomas."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Compare South Africa's Gazette-notice grant-setting structure against the UK's own benefit-uprating mechanism already in this corpus's `gb-*` files — the \"Westminster-derived\" observation in Finding 2 is asserted, not checked side by side."
+    },
+    {
+      "n": 2,
+      "text": "Confirm whether SAFLII's 301-redirect is a permanent site restructuring or a temporary issue — worth a one-off recheck before assuming LawLibrary/Laws.Africa is the permanent substitute for every future African-legislation fetch."
+    },
+    {
+      "n": 3,
+      "text": "Whether `za-sassa-annual-report` should also carry a direct edge to `za-social-assistance-act-2004` — flagged as an open question inside the slice's own `_open_questions` field, not resolved this session."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file** — the only predecessor."
+    },
+    {
+      "n": 2,
+      "text": "`country afrikans.docx`** — read section by section per country as each is tackled; do not re-parse the whole file into JSON again, the reconstruction method is recorded in Finding 1's own description if needed, but the entries themselves are just as easily read country by country directly from the file."
+    },
+    {
+      "n": 3,
+      "text": "`src/data/research/za-cpi-social-grants.json`** — the completed South Africa slice, 5 reports, 3 dependencies, template for the pattern (verify every docx claim at a primary source before minting; distinct `cites` vs `methodology_depends_on` vs `uses_data_from` chosen on what the source actually states, not on what would be tidier)."
+    },
+    {
+      "n": 4,
+      "text": "`src/lib/palette.ts`** — `AFR` is now staffed with `ZA`. Every new African country needs a `COUNTRY_FAMILY` entry in the same commit as its first node, or it renders unclassified grey and the validator should (but has not yet been tested to) catch it."
+    },
+    {
+      "n": 5,
+      "text": "The Westminster-structure observation** (Finding 2) — worth a direct comparison against the `gb-*` slice if a future session has room for a cheap check rather than new-country research."
+    },
+    {
+      "n": 6,
+      "text": "Thomas's own framing going in** — he does not know these countries' government structures and expects colonial influence; both the discretionary-Gazette-notice mechanism (South Africa) and the never-colonised woreda-federal structure (Ethiopia, flagged as a priority item, not yet researched) are worth explaining plainly in whatever session tackles them, not just minting silently. ---"
+    }
+  ],
+  "session_conditions": "**A pilot-country research-and-mint session**, opening a new branch.\n`country afrikans.docx` was read and parsed in full (converted from its\ndocx paragraph-per-line JSON encoding to structured data — the docx stores\na JSON array's worth of research entries as plain text, one line per\nparagraph, interspersed with prose regional-overview sections; a small\nPython pass reconstructed 7 top-level JSON arrays totalling 48 entries).\nOnly the South Africa entries (11 of 48) were independently re-verified\nand minted this session. **The other 37 entries, across Nigeria, Egypt,\nKenya, Ethiopia, Tanzania and Ghana, were read but not independently\nchecked against any primary source this session** — they remain exactly as\nGrok produced them, unverified.\n\n**Thomas's own stated position going in**: he does not know how these\ncountries' governments and statistical/benefit systems are structured, and\nexpects colonial influence to be visible in them. Both were true for South\nAfrica specifically (see Finding 2) and are worth stating plainly for a\nfuture session picking up the next country, since the shape of the\nverification work depends on it."
+}

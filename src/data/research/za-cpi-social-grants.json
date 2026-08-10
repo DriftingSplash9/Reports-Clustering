@@ -1,0 +1,108 @@
+{
+  "_slice": "za-cpi-social-grants",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. South Africa is the pilot country for the OPEN-THREADS Africa file (`country afrikans.docx`, raw Grok research covering Nigeria, Egypt, South Africa, Kenya, Ethiopia, Tanzania, Ghana -- 48 entries, none independently verified). This slice mints only the South African nodes, all independently re-verified at source this session rather than trusted from the docx's own quotes. Sitting in EU/proposals/ per that folder's promote-when-reviewed rule even though this is not an EU node -- no AF proposals folder exists yet; move to src/data/research/ once reviewed, at which point a new AF branch folder is also worth creating (see the accompanying hand-off).",
+  "_note": "The docx's own framing -- that most African countries run a discretionary, not automatically CPI-indexed, benefit-adjustment model -- held up under independent verification for South Africa specifically: Social Assistance Act s.32(3) gives the Minister (with Treasury's concurrence) a Gazette-notice power to set grant amounts, not a formula. This is why the dependency structure below uses the weakest relationship type (`cites`) between the Budget Review and the CPI rather than `uses_data_from` -- the Budget Review's own text references 'a lower inflation outlook' when explaining a grant adjustment, but nothes ties the adjustment to the CPI print by a stated formula. Two Acts named 'Social Assistance' vs 'Social Security Agency' are easily confused and were confirmed as genuinely separate statutes this session (the docx's own entries did not distinguish them).",
+  "reports": [
+    {
+      "id": "za-statssa-cpi",
+      "title": "Consumer Price Index (P0141)",
+      "publisher": "Statistics South Africa (Stats SA)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "South Africa's official monthly CPI, published as statistical release P0141. VERIFIED DIRECTLY: the June 2026 edition (embargoed until 22 July 2026, released under the standard P0141 numbering) was fetched and read at source. Its own key findings: 'Annual consumer price inflation was 5,0% in June 2026, up from 4,5% in May 2026. The CPI increased by 0,7% month-on-month in June 2026' -- matching the figures in the Africa research file exactly, confirming the file's citation was accurate for this entry even though it was not independently checked before this session.",
+      "releases_per_year": 12,
+      "last_updated": "2026-07-22",
+      "url": "https://www.statssa.gov.za/publications/P0141/P0141June2026.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "za-social-assistance-act-2004",
+      "title": "Social Assistance Act 13 of 2004",
+      "publisher": "Parliament of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The statute governing South Africa's social grants (old age, disability, child support, and others). VERIFIED DIRECTLY this session (LawLibrary/Laws.Africa, the free legislation archive run with the African Legal Information Institute -- SAFLII's own act pages 301-redirect and were not usable). Its own text, s.32(3): 'The Minister, with the concurrence of the Minister of Finance -- (a) must determine amounts payable in respect of social assistance; and (b) may determine additional payments linked to a social grant, by notice in the Gazette.' This is the key finding for the whole slice: there is no statutory CPI-indexation formula in the Act itself. Amounts are set by discretionary Gazette notice, jointly by the Minister of Social Development and the Minister of Finance -- confirming, at the primary-source level, the general pattern the Africa research file describes across the continent (discretionary adjustment, not automatic indexation), rather than merely repeating its claim.",
+      "last_updated": null,
+      "url": "https://lawlibrary.org.za/akn/za/act/2004/13/eng@2022-05-30",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "za-sassa-act-2004",
+      "title": "South African Social Security Agency Act 9 of 2004",
+      "publisher": "Parliament of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "A separate statute from the Social Assistance Act 13 of 2004 (same year, easily confused -- the docx's own entries did not distinguish them; this session did). Establishes the South African Social Security Agency (SASSA), the body that actually administers and pays grants. VERIFIED DIRECTLY: s.2(1), 'The South African Social Security Agency is hereby established as a juristic person'; s.3(a), the Agency's object is to 'act, eventually, as the sole agent that will ensure the efficient and effective management, administration and payment of social assistance.'",
+      "last_updated": null,
+      "url": "https://lawlibrary.org.za/akn/za/act/2004/9/eng@2004-06-02",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "za-sassa-annual-report",
+      "title": "South African Social Security Agency Annual Report",
+      "publisher": "South African Social Security Agency (SASSA)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "SASSA's own annual report. VERIFIED DIRECTLY: the 2024/25 edition (RP270/2025, ISBN 978-1-83491-131-1) was fetched and read at source. Its own text confirms the reporting obligation rests on the Public Finance Management Act (PFMA, Act 1 of 1999) rather than on the SASSA Act itself -- a general public-entity reporting requirement, not a SASSA-specific one, worth recording precisely rather than assuming the establishing Act itself mandates the report.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual reporting under the Public Finance Management Act, confirmed from the report's own PFMA-compliance section rather than assumed from the SASSA Act.",
+      "last_updated": "2025",
+      "url": "https://static.pmg.org.za/2/SASSA_Annual_Report_2024_25.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "za-national-treasury-budget-review",
+      "title": "Budget Review (National Treasury)",
+      "publisher": "National Treasury of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "South Africa's annual national Budget Review, the document that sets out the social grant allocation for the coming medium term. VERIFIED DIRECTLY: the 2026 edition, Chapter 5 (Consolidated Spending Plans), fetched and read at source. Its own text: 'The social grant allocation has been adjusted down over the medium term in line with a lower inflation outlook and improved grant targeting and verification, which is expected to yield savings of R2 billion in 2026/27 and R1 billion in 2027/28.' This confirms the docx's claim, quoted independently rather than trusted from its summary.",
+      "releases_per_year": 1,
+      "last_updated": "2026-02-25",
+      "url": "https://www.treasury.gov.za/documents/national%20budget/2026/review/Chapter%205.pdf",
+      "domains": ["benefits", "fiscal-transfers"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "za-national-treasury-budget-review",
+      "target_report_id": "za-statssa-cpi",
+      "relationship_type": "cites",
+      "basis": "Budget Review 2026, Chapter 5: 'The social grant allocation has been adjusted down over the medium term in line with a lower inflation outlook...' -- inflation is named as a factor in the allocation decision, but no formula ties the figure to a specific CPI print, so this is filed as `cites` (context) rather than `uses_data_from` (mechanical input). This absence of a formula is itself the finding, not an oversight in how the edge is drawn.",
+      "evidence_url": "https://www.treasury.gov.za/documents/national%20budget/2026/review/Chapter%205.pdf"
+    },
+    {
+      "source_report_id": "za-sassa-act-2004",
+      "target_report_id": "za-social-assistance-act-2004",
+      "relationship_type": "cites",
+      "basis": "SASSA Act s.3(a): the Agency's object is 'the efficient and effective management, administration and payment of social assistance' -- 'social assistance' being the scheme the Social Assistance Act 13 of 2004 establishes and defines. The two Acts were passed the same year and name two different things (a benefits scheme and the agency that pays it); this edge records the documented link between them rather than assuming one because of the similar names.",
+      "evidence_url": "https://lawlibrary.org.za/akn/za/act/2004/9/eng@2004-06-02"
+    },
+    {
+      "source_report_id": "za-sassa-annual-report",
+      "target_report_id": "za-sassa-act-2004",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SASSA Act s.2(1) establishes SASSA as a juristic person; the Annual Report is the Agency's own statutory report on its performance and finances as that juristic person, so its existence depends directly on the Act that creates the Agency.",
+      "evidence_url": "https://lawlibrary.org.za/akn/za/act/2004/9/eng@2004-06-02"
+    }
+  ],
+  "_dropped": [],
+  "_open_questions": [
+    {
+      "id": "sassa-annual-report-pfma-vs-sassa-act",
+      "question": "Should `za-sassa-annual-report` also carry a `methodology_depends_on` edge to `za-social-assistance-act-2004`, since the report covers grant payments made under that Act?",
+      "answer": "Not added this session -- the report's own text ties its reporting obligation to the PFMA (a general public-entity requirement) and to the SASSA Act (which establishes the reporting entity), not explicitly to the Social Assistance Act. The existing `za-sassa-act-2004 -> za-social-assistance-act-2004` edge already carries that connection one hop up; adding a second direct edge risked double-counting the same underlying fact. Worth revisiting if a future session reads the Annual Report's own text more closely for an explicit citation."
+    },
+    {
+      "id": "na-national-treasury-budget-review-cadence",
+      "question": "Is the Budget Review always tabled in February, or does the date move?",
+      "answer": "Not checked this session -- `last_updated` is set to the 2026 edition's tabling date (25 February 2026) without confirming this is the fixed annual date rather than this year's specific date. `releases_per_year: 1` is safe either way; the specific day is not."
+    }
+  ]
+}

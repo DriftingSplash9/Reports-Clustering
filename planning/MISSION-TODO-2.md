@@ -8,12 +8,13 @@ MISSION-TODO 1.0's surviving items, `AU/G.3.md` (today's Victoria pass),
 `NZ/G.4.md`, `EU/G.49.md`, `research-input/Grok-Research-Brief-XI.md` items
 25/27/28, and the corpus itself.
 
-**State of the corpus** — **502 reports / 609 dependencies / 3 relations,
-measured 2026-08-09** (this session, `AU/G.5.md`, after minting the
-Victorian valuation chain -- `au-vic-vola1960` and `au-vic-vbpsg` -- for
-AU priority item 3) by an actual validator run (agent, cloud sandbox; see
-`EU/G.74.md` Orientation §3 for the procedure). Previously 500/608/3,
-measured earlier the same day (`EU/G.76.md`, after also minting
+**State of the corpus** — **507 reports / 612 dependencies / 3 relations,
+measured 2026-08-10** (this session, `AF/G.1.md`, opening the new Africa
+branch and minting South Africa's CPI/social-grants slice) by an actual
+validator run (agent, cloud sandbox; see `EU/G.74.md` Orientation §3 for
+the procedure). Previously 502/609/3, measured the prior day (`AU/G.5.md`,
+after minting the Victorian valuation chain). Before that, 500/608/3,
+measured earlier that day (`EU/G.76.md`, after also minting
 `no-kommune-arsregnskap`). Before that, 473/605/3, measured earlier still
 the same day, after importing Files B, the legal-instrument-lineages file
 and the ESS catalogue file. Before that, 372/436/3,

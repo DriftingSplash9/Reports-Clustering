@@ -98,3 +98,6 @@ Moved to `_to_delete/`: `de-ie-national-accounts-quality-reports.json`, `eu-lega
 
 ## 2026-08-09 (AU session, `AU/G.5.md`)
 Moved to `_to_delete/`: `validate-bundle_2026-08-09-au.tar.gz` (a second scratch tarball, same purpose as the one above, built fresh for this session's validator run rather than reusing the already-swept one since it was already gone from the working tree by the time this session started). Safe to delete.
+
+## 2026-08-10 (AF session, `AF/G.1.md`)
+Moved to `_to_delete/`: `validate-bundle_2026-08-10-af.tar.gz` (same scratch-tarball pattern as above, this session's validator run). Safe to delete.

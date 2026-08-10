@@ -73,6 +73,7 @@ import esa2010MethodologyStack from './research/esa2010-methodology-stack.json'
 import deIeNationalAccountsQualityReports from './research/de-ie-national-accounts-quality-reports.json'
 import euLegalInstrumentLineages from './research/eu-legal-instrument-lineages.json'
 import essCatalogueStandards from './research/ess-catalogue-standards.json'
+import zaCpiSocialGrants from './research/za-cpi-social-grants.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -179,6 +180,7 @@ const slices: ResearchSlice[] = [
   deIeNationalAccountsQualityReports as unknown as ResearchSlice,
   euLegalInstrumentLineages as unknown as ResearchSlice,
   essCatalogueStandards as unknown as ResearchSlice,
+  zaCpiSocialGrants as unknown as ResearchSlice,
 ]
 
 function assemble() {

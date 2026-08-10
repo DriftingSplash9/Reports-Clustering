@@ -1,0 +1,146 @@
+{
+  "_slice": "za-fiscal-federalism",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Extends the South Africa pilot slice (`za-cpi-social-grants.json`) after Thomas asked for three things: more nodes generally, whether any top-level node connects internationally, and how municipalities/provinces/national government actually relate. All sources below were fetched and read directly this session, not taken from `country afrikans.docx` (which does not cover fiscal federalism or international CPI standards at all -- this is new ground, not verification of an existing docx entry). Sitting in src/data/research/ alongside the existing za slice pending review, matching that file's current location rather than the EU/proposals/ convention its own header describes (the header may be stale -- worth checking with Thomas).",
+  "_note": "Three findings worth stating plainly. (1) International connections are real and multiple: Stats SA's own CPI Sources and Methods document states outright that the CPI follows the IMF-ILO-OECD-Eurostat-UNECE-World Bank 2020 CPI Manual, adopted COICOP 2018 as its actual classification structure (not a side series -- this is the live basket structure since January 2025), and complies with the IMF's SDDS. All three are national-side statements, not inferred. (2) SARB's inflation target is explicitly defined in terms of Stats SA's CPI ('the headline change in the consumer price index, as calculated by Statistics South Africa') -- the same shape as the Canada/US 'CPI sets the policy rate' finding already in the graph. (3) Fiscal federalism has a real constitutional structure (Chapter 13: national/provincial/municipal equitable shares, given annual effect by the Division of Revenue Act) but it does NOT touch social grants. Grant amounts move through the National Revenue Fund directly under the Social Assistance Act's own Gazette-notice power (already documented in za-cpi-social-grants.json) -- DoRA's own conditional-grant schedules (read directly this session: infrastructure, health facilities, human settlements, roads, transport, school backlogs) do not name social assistance at all. The equitable share machinery exists for education, health, housing, roads and municipal free-basic-services -- not for the grant system this corpus is tracking. That absence is itself the finding, filed the same way the CPI/Budget Review edge already handles an absent formula.",
+  "_open_questions": [
+    {
+      "id": "za-schedule4-welfare-services-node",
+      "question": "Constitution Schedule 4 lists 'Welfare services', 'Health services' and 'Population development' as concurrent national/provincial competences, and DSD's own legislative-mandate page cites Schedule 4 alongside s.27(1)(c) as a second, distinct constitutional basis for its work -- separate from the national, exclusive cash-grant power in the Social Assistance Act. This looks like a real, documented distinction (grants vs. services) but no provincial Department of Social Development document was fetched this session to give Schedule 4 a concrete outgoing edge, so it was left out of `reports` rather than minted as a dangling node. Next session: fetch one provincial DSD annual report or budget vote (Free State's socdev.fs.gov.za and the National Treasury ENE Vote 19 Social Development document both turned up in search but were not read) to anchor this properly."
+    },
+    {
+      "id": "za-sarb-act-statutory-text",
+      "question": "SARB's own monetary-policy page states the mandate is 'set out in the Constitution' but doesn't quote the South African Reserve Bank Act itself. The Act's actual inflation-targeting clause (if the target itself is statutory rather than a Minister-SARB agreement, which is the more likely structure per other inflation-targeting central banks) was not fetched this session."
+    },
+    {
+      "id": "za-ene-vote19-social-development",
+      "question": "National Treasury publishes an annual Estimates of National Expenditure, Vote 19: Social Development -- department-level budget detail distinct from both the aggregate Budget Review (already in the graph) and SASSA's own Annual Report (already in the graph). Turned up in search, not fetched. Likely candidate for a `calculated_from` or `cites` edge to za-social-assistance-act-2004 and/or za-national-treasury-budget-review, but the actual relationship between ENE and the Budget Review numbers was not verified this session."
+    }
+  ],
+  "reports": [
+    {
+      "id": "za-constitution-ch13-finance",
+      "title": "Constitution of the Republic of South Africa, 1996 — Chapter 13 (Finance)",
+      "publisher": "Parliament of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The constitutional basis for how revenue is split among South Africa's three spheres of government. VERIFIED DIRECTLY this session. s.213: money raised nationally goes into the National Revenue Fund, and 'a province's equitable share of revenue raised nationally' is 'a direct charge against the National Revenue Fund'. s.214(1)(a): 'An Act of Parliament must provide for... the equitable division of revenue raised nationally among the national, provincial and local spheres of government'; s.214(2) lists the factors that Act must weigh, including provinces' and municipalities' ability to 'provide basic services' and 'fiscal capacity and efficiency'. s.226 gives each province its own Revenue Fund; s.227(1)(a) entitles local government and provinces to 'an equitable share of revenue raised nationally... to provide basic services'. ss.228-229 give provinces and municipalities limited own-revenue powers (no income tax, VAT or customs duty for either).",
+      "last_updated": null,
+      "url": "https://www.justice.gov.za/constitution/chp13.html",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "za-division-of-revenue-act",
+      "title": "Division of Revenue Act 24 of 2024",
+      "publisher": "Parliament of South Africa / National Treasury",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The annual Act that gives effect to s.214(1)(a)'s mandate -- the actual instrument dividing nationally raised revenue among national, provincial and local government for a given financial year, plus a set of conditional grants to provinces and municipalities. VERIFIED DIRECTLY this session (National Treasury's own gazetted copy). Its Schedules 4-7, read directly, list conditional grants including the Education Infrastructure Grant, Health Facility Revitalisation Grant, Human Settlements Development Grant, Provincial Roads Maintenance Grant, Public Transport Operations/Network Grants, School Infrastructure Backlogs Grant, Urban Settlements Development Grant and disaster-response allocations. Social assistance/grants are not named anywhere in the Act -- the cash-grant system this corpus tracks runs through the National Revenue Fund directly under the Social Assistance Act's own Gazette-notice power (s.32(3), already in za-cpi-social-grants.json), not through DoRA's conditional-grant machinery. Worth stating precisely rather than assumed: this is a real absence, checked directly, not an oversight in scope.",
+      "releases_per_year": 1,
+      "last_updated": "2024-06-03",
+      "url": "https://www.treasury.gov.za/legislation/GovernmentNotices/50743%2003-06%20DivisionofRevenueAct%2024%202024.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "za-municipal-indigent-framework",
+      "title": "National Framework for Municipal Indigent Policies",
+      "publisher": "Department of Provincial and Local Government (now COGTA)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The national policy framework municipalities build their own indigent/free-basic-services policies on (confirmed as the pattern by three individual municipal indigent policies found in search -- eThekwini, Govan Mbeki, George -- though only this national framework document was fetched and read directly). VERIFIED DIRECTLY this session: 'This policy framework provides a basis for the provision of free basic services to the indigent... The policy needs to be applied in conjunction with the equitable share policy being prepared by National Treasury', and the local government equitable share is described as 'an important component of the funding to be used to subsidise the provision of free basic services to the indigent'. No formula ties a specific equitable-share rand amount to a specific municipality's free-basic-services spend in this document -- it names the equitable share as the intended funding source, not a computed input -- so the edge below is filed as `cites`, matching the same caution already used for the Budget Review -> CPI edge in za-cpi-social-grants.json.",
+      "last_updated": null,
+      "url": "https://www.kgatelopele.gov.za/sites/default/files/2021-02/national_framework_for_municipal_indigent_policies.pdf",
+      "domains": ["municipal-finance", "benefits"]
+    },
+    {
+      "id": "za-sarb-monetary-policy",
+      "title": "Monetary Policy (Inflation-Targeting Framework)",
+      "publisher": "South African Reserve Bank (SARB)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "SARB's inflation-targeting framework and the Monetary Policy Committee (MPC) that sets the repo rate. VERIFIED DIRECTLY this session (SARB's own site): 'The SARB's mandate, set out in the Constitution, requires it to protect the value of the rand in the interest of balanced and sustainable growth... The inflation target is 3% with a tolerance band of plus or minus 1 percentage point. This target refers to the headline change in the consumer price index, as calculated by Statistics South Africa.' The exact statutory clause in the South African Reserve Bank Act itself was not fetched this session (see _open_questions) -- SARB's own page cites the Constitution, not the Act, as the mandate's source.",
+      "releases_per_year": 6,
+      "cadence_note": "MPC meets six times a year (confirmed via SARB's own public MPC-dates communications, not the monetary-policy page itself). Repo rate changes only on decision dates, so this is publication cadence, not a claim about how often the rate actually moves.",
+      "last_updated": null,
+      "url": "https://www.resbank.co.za/en/home/what-we-do/monetary-policy",
+      "domains": ["monetary-policy", "interest-rates"]
+    },
+    {
+      "id": "un-coicop-2018",
+      "title": "Classification of Individual Consumption According to Purpose (COICOP 2018)",
+      "publisher": "United Nations Statistics Division",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The UN's standard classification for household consumption expenditure. Deliberately not minted for the Canada or US CPI slices already in the graph (`international-frameworks.json`'s own dropped notes: StatCan's CPI never uses COICOP at all, and BLS only produces a COICOP mapping as a side series for the OECD, not something the headline release rests on -- 'It should return if a document is found where COICOP governs a primary release.'). South Africa is that document: Stats SA's own CPI Sources and Methods report states 'The South African CPI adopted the 2018 version of the Classification of Individual Consumption by Purpose (COICOP) for goods and services with effect from the January 2025 publication' -- COICOP 2018 is the actual basket structure of the live release, not a side output.",
+      "releases_per_year": 0.05,
+      "cadence_note": "Revised on a multi-decade cycle (prior editions predate 2018 by a similar span to SNA's revision cadence); not an annual release.",
+      "last_updated": null,
+      "url": "https://unstats.un.org/unsd/classifications/unsdclassifications/COICOP_2018_-_pre-edited_white_cover_version.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "imf-sdds",
+      "title": "IMF Special Data Dissemination Standard (SDDS)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IMF's voluntary standard for the coverage, periodicity, timeliness and advance-release-calendar practices of a country's official statistics. A parallel edge for Canada (`statcan-cpi -> imf-sdds-plus`, the stricter SDDS Plus tier) was scoped and dropped in `international-frameworks.json` for lack of national-side evidence -- every document naming the obligation was IMF-side, none from StatCan itself. South Africa has the national-side evidence Canada's case lacked: Stats SA's own CPI Sources and Methods report states plainly, 'The South African CPI complies with the IMF Special Data Dissemination Standard (SDDS)' -- the plain SDDS tier, not SDDS Plus, and not independently checked against South Africa's actual IMF DSBB country page this session (that page's landing view did not surface country-specific content when fetched directly).",
+      "releases_per_year": 0.06,
+      "cadence_note": "Standard itself revised rarely; not an annual release.",
+      "last_updated": null,
+      "url": "https://www.statssa.gov.za/publications/Report-01-41-01/Report-01-41-012025.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "za-division-of-revenue-act",
+      "target_report_id": "za-constitution-ch13-finance",
+      "relationship_type": "methodology_depends_on",
+      "basis": "DoRA is the Act s.214(1)(a) requires Parliament to pass each year; its allocation is required to weigh the factors s.214(2) lists (basic-services capacity, fiscal capacity and efficiency, economic disparities). The Constitution supplies the criteria the annual Act's formula must apply, not a computed figure itself.",
+      "evidence_url": "https://www.justice.gov.za/constitution/chp13.html"
+    },
+    {
+      "source_report_id": "za-municipal-indigent-framework",
+      "target_report_id": "za-constitution-ch13-finance",
+      "relationship_type": "cites",
+      "basis": "The framework names the local government equitable share (s.227(1)(a)) as the intended funding source for free basic services to the indigent, but states it is 'to be applied in conjunction with' equitable share policy rather than computed from a stated formula in this document -- filed as `cites`, same caution as the existing za-national-treasury-budget-review -> za-statssa-cpi edge.",
+      "evidence_url": "https://www.kgatelopele.gov.za/sites/default/files/2021-02/national_framework_for_municipal_indigent_policies.pdf"
+    },
+    {
+      "source_report_id": "za-sarb-monetary-policy",
+      "target_report_id": "za-statssa-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "SARB's own page: the inflation target 'refers to the headline change in the consumer price index, as calculated by Statistics South Africa' -- the repo-rate decision is defined directly in terms of Stats SA's CPI print, not merely informed by it. Same shape as the Bank of Canada / CPI edge already in the graph.",
+      "evidence_url": "https://www.resbank.co.za/en/home/what-we-do/monetary-policy"
+    },
+    {
+      "source_report_id": "za-statssa-cpi",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Stats SA's own methodology report: 'The South African CPI adopted the 2018 version of the Classification of Individual Consumption by Purpose (COICOP) for goods and services with effect from the January 2025 publication' -- COICOP 2018 structures the actual live basket, unlike the Canada/US cases where it was dropped for governing only a side series.",
+      "evidence_url": "https://www.statssa.gov.za/publications/Report-01-41-01/Report-01-41-012025.pdf"
+    },
+    {
+      "source_report_id": "za-statssa-cpi",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Stats SA's own methodology report: 'Stats SA largely follows the methodology guidelines of the 2020 Consumer Price Index Manual: Concepts and Methods published jointly by the International Monetary Fund (IMF), the International Labour Organization (ILO)...' -- the same `cpi-manual` node already in the graph (international-frameworks.json), now with a South African edge into it.",
+      "evidence_url": "https://www.statssa.gov.za/publications/Report-01-41-01/Report-01-41-012025.pdf"
+    },
+    {
+      "source_report_id": "za-statssa-cpi",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Stats SA's own methodology report: 'The South African CPI complies with the IMF Special Data Dissemination Standard (SDDS)' -- SDDS prescribes the release's coverage, periodicity, timeliness and advance-release-calendar practice, which is a dissemination-methodology obligation Stats SA states directly rather than one only asserted from the IMF side (the gap that got Canada's equivalent edge dropped).",
+      "evidence_url": "https://www.statssa.gov.za/publications/Report-01-41-01/Report-01-41-012025.pdf"
+    }
+  ],
+  "_dropped": []
+}
