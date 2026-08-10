@@ -1,0 +1,119 @@
+{
+  "_slice": "et-psnp-cpi-federalism",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED, MERGED. Ethiopia was researched as a parallel split this session: Claude took the core PSNP5 wage-rate/CPI mechanism and the federal-woreda constitutional structure; Grok took the donor/funding architecture, other Ethiopian benefit programmes, and Ethiopia's international-statistics standing. Both halves are combined here, per Thomas's standing instruction ([[feedback_grok-as-verification]]) that Grok's quoted, sourced, confidence-tagged answers are minted directly. Sitting in src/data/research/ alongside the other Africa drafts pending review.",
+  "_note": "The split paid off exactly the way it was meant to. Claude's constitutional finding (Ethiopia's Constitution does not establish woredas at all -- Article 50(4) leaves it to each regional state's own discretion) and Grok's funding finding (World Bank/donor money moves 'MoF... [to] federal and regional/woreda levels' via the government's own Channel 1 mechanism) describe the same administrative reality from two different documents. IMPORTANT: no edge was drawn between et-constitution-federal-structure and et-psnp5-worldbank-seasn, deliberately -- neither document names the other. The World Bank's fund-flow description is consistent with, and illustrates, the constitutional finding, but consistency is not the same as one document citing the other, and the corpus's own rule is explicit that plausible-sounding connections without textual support don't go in the graph. Recorded here as an observed consistency, not as a dependency edge. Separately, the headline finding from Grok's half: Ethiopia has a SECOND CPI-linked benefit programme (UPSNJP, urban) with an even more interesting shape than PSNP5's -- a formal financing covenant requiring CPI indexation that has been explicitly, temporarily suspended for fiscal reasons. Not 'the formula doesn't exist' (Kenya's shape) and not 'the formula is discretionary by design' (South Africa's shape) -- a real formula that exists and is currently switched off. A third distinct way a CPI-benefit link can fail to bind in practice.",
+  "_open_questions": [
+    {
+      "id": "et-wheat-equivalency-figures-unconfirmed",
+      "question": "The 15kg/16.95kg wheat-equivalency figures from the docx were not found in this session's own fetch of the PSNP5 Design Document, nor did Grok's round turn them up. Worth checking the Programme Implementation Manual (PIM) directly, or a more recent PSNP5 update document, before minting those specific numbers as verified."
+    },
+    {
+      "id": "et-coicop-vintage-too-weak-to-mint",
+      "question": "Grok found a CSA/ESS methodological note (dated 2013, so possibly stale) stating Ethiopia's CPI classification is 'COICOP... with few exceptions' -- vaguer and older than the specific, current-series confirmations found for South Africa (2018), Kenya (2018), and Egypt (1999/2000). Not minted as an edge this session; the source is too dated and imprecise about which COICOP vintage to place confidently next to those three. A current ESS methodology document, if one exists, would resolve this."
+    }
+  ],
+  "reports": [
+    {
+      "id": "et-psnp5-design-document",
+      "title": "Productive Safety Net Programme Phase 5 (PSNP5) Design Document",
+      "publisher": "Government of Ethiopia (Ministry of Agriculture) with donor partners",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "Ethiopia's flagship rural safety-net programme, now in its fifth phase. VERIFIED DIRECTLY this session (direct fetch of the Design Document, hosted via the EU's capacity4dev platform): Text Box 5 states 'Adequacy of transfers will be addressed through annual adjustments to the wage rate in line with consumer price index (CPI) to protect its real value.' Independently corroborated from the funding side (Grok's round): a World Bank results-framework indicator for the programme reads 'Increase in average wage rate relative to the annual general CPI increase, for cash transfers beneficiaries' -- two different documents, government-authored and donor-authored, both treating the wage-CPI link as real. This is a real-terms CPI-anchoring principle, similar in shape to Egypt's statutory pension floor, though PSNP5's own instrument is a programme design document rather than primary legislation -- a different evidentiary tier worth being precise about. The docx's more specific wheat-equivalency figures (15kg/16.95kg per month) remain unconfirmed -- see _open_questions.",
+      "releases_per_year": 1,
+      "cadence_note": "Wage-rate review conducted annually, before June each year per the docx's own quote (not independently re-confirmed this session against the fetched content).",
+      "last_updated": "2020-12",
+      "url": "https://capacity4dev.europa.eu/media/111773/download/4f737db2-9ade-41c3-8815-bf084f51b0db_en",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "et-ess-cpi",
+      "title": "Consumer Price Index (Ethiopian Statistics Services)",
+      "publisher": "Ethiopian Statistics Services (ESS)",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "Ethiopia's official monthly CPI, produced by ESS (formerly the Central Statistical Agency/CSA). VERIFIED DIRECTLY this session via ESS's own site: 'Published monthly', described as 'the principal measure of inflation'; ESS's own framing states its statistics 'support evidence-based policy decisions, wage and income adjustments, business planning, and economic research'. Confirmed via Grok's round: Ethiopia is on the IMF's e-GDDS dissemination tier (not full SDDS), per the IMF's own 2019 press release announcing Ethiopia's e-GDDS implementation -- the same weaker tier already found for Kenya, now a second country on this node. Also confirmed: Ethiopia is NOT bound by the East African Community's binding Harmonised CPI regulations (found for Kenya) -- Ethiopia is a geographic neighbour of EAC members but not a Partner State subject to that specific instrument, per Grok's search. COICOP classification is referenced in an older (2013) CSA methodological note as 'COICOP... with few exceptions' but not minted as an edge -- see _open_questions.",
+      "releases_per_year": 12,
+      "last_updated": "2026-02",
+      "url": "https://ess.gov.et/price/",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "et-constitution-federal-structure",
+      "title": "Constitution of the Federal Democratic Republic of Ethiopia, 1995 — Articles 47 and 50",
+      "publisher": "Federal Democratic Republic of Ethiopia",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "The constitutional basis for Ethiopia's federal structure. VERIFIED this session via a constitutional-law archive (servat.unibe.ch/ICL, not an Ethiopian-government-hosted copy -- flagged for that reason). Article 47 names the nine constituent member states directly: 'The State of Tigray, The State of Afar, The State of Amhara, The State of Oromia, The State of Somalia, The State of Benshangul/Gumuz, The State of the Southern Nations, Nationalities and Peoples, The State of the Gambela Peoples, The State of the Harari People.' Article 50(4): 'State government shall be established at State and other administrative levels that they find necessary.' Key structural finding: unlike South Africa's local government (constitutionally entitled to an equitable share under s.227), Ethiopia's woreda (district) level is NOT established or guaranteed by the federal Constitution at all -- it exists entirely at each regional state's own discretion. Consistent with, though not textually linked to, the practical fund-flow description found on the donor side (see et-psnp5-worldbank-seasn and _note) -- a genuinely different federal shape from every other country worked in this branch so far.",
+      "last_updated": null,
+      "url": "https://www.servat.unibe.ch/icl/et00000_.html",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "et-psnp5-worldbank-seasn",
+      "title": "Strengthen Ethiopia's Adaptive Safety Net (SEASN) Project — World Bank financing for PSNP5",
+      "publisher": "World Bank (IDA) with Multi-Donor Trust Fund partners",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The World Bank/IDA project financing PSNP5, alongside a Multi-Donor Trust Fund of thirteen named development partners. VERIFIED via Grok's round, quoting the project's own text: 'The SEASN project supports the Government of Ethiopia (GoE) flagship Productive Safety Net Programme Phase Five (PSNP 5)... managed by the GoE through its structures from federal to woreda levels and is supported by thirteen development partners -- Austrian Development Agency, Global Affairs Canada (GAC), Danish International Development Agency, European Union, Government of Ireland... United Kingdom Foreign, Commonwealth & Development Office, German Federal Ministry for Economic Cooperation and Development (BMZ), Embassy of the Kingdom of the Netherlands, Swedish International Development Cooperation Agency, United Nations Children's Fund (UNICEF), United States Agency for International Development (USAID), and World Food Programme (WFP).' IDA financing for PSNP5 via SEASN totals roughly US$900 million against a total PSNP5 budget of US$2,283-2,671 million; GoE committed US$590 million. Fund flow: 'The project follows the government's Channel 1 fund flow mechanism and MoF is responsible for the overall FM activities... IFMIS and IBEX software will be used for accounting purposes at federal and regional/woreda levels, respectively... The MoA through the FSCO[, Food Security Coordination Office,] will continue to lead overall coordination and management of the program... together with other partners, including at the regional and woreda levels.' This is the practical, administrative version of the money-flow question the constitutional structure (et-constitution-federal-structure) leaves open at the legal level -- see _note for why no edge connects the two directly.",
+      "last_updated": "2024",
+      "url": "https://documents1.worldbank.org/curated/en/099031924101538939/txt/BOSIB109ef103d0a81a3081922653bf9c46.txt",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "et-upsnjp",
+      "title": "Urban Productive Safety Net and Jobs Project (UPSNJP)",
+      "publisher": "Government of Ethiopia / World Bank",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "Ethiopia's urban parallel to PSNP5 (building on the earlier Urban Productive Safety Net Project/UPSNP) -- public-works wages, permanent direct support (covering elderly, persons with disabilities, chronically ill, and urban destitute beneficiaries), livelihood grants and related services. VERIFIED via Grok's round, quoting the project's own text: 'Given high levels of inflation in the country, the wage rate was adjusted in accordance with the evolution of food prices based on the official consumer price index (CPI) published by the Central Statistics Agency. The aim of this adjustment is not to increase the real value of the transfer but to make sure the purchasing power of the transfer remains constant over time.' A genuinely distinct finding from PSNP5's own mechanism: the parent project legal agreement carries 'a covenant... requiring benefit levels to be increased in line with the Consumer Price Index (CPI) -- through increased government contributions -- [that] will be temporarily waived... The resumption of CPI benefit indexation will depend on material improvements to the government's fiscal position.' A real, formal, CPI-linked indexation obligation that currently exists but is switched off -- a third distinct way a CPI-benefit mechanism can fail to bind, alongside South Africa's deliberate-discretion and Kenya's unclear-basis shapes. This is the closest thing to disability-benefit CPI indexation found across any country in this branch so far, and it is presently suspended.",
+      "last_updated": "2024",
+      "url": "https://documents1.worldbank.org/curated/en/099810012152126313/pdf/P17533402d12a1003094770715406a1723c.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "et-psnp5-design-document",
+      "target_report_id": "et-ess-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "The Design Document's own Text Box 5 ties the annual wage-rate adjustment directly to 'consumer price index (CPI)... to protect its real value' -- a direct, named input into the programme's own transfer-value calculation, not merely cited as background context.",
+      "evidence_url": "https://capacity4dev.europa.eu/media/111773/download/4f737db2-9ade-41c3-8815-bf084f51b0db_en"
+    },
+    {
+      "source_report_id": "et-psnp5-worldbank-seasn",
+      "target_report_id": "et-psnp5-design-document",
+      "relationship_type": "cites",
+      "basis": "The World Bank's SEASN project documents describe and finance the GoE's PSNP5 programme directly -- 'The SEASN project supports the Government of Ethiopia (GoE) flagship Productive Safety Net Programme Phase Five (PSNP 5)... managed by the GoE through its structures from federal to woreda levels' -- a donor financing instrument describing the programme it funds, not a computational input into the Design Document itself.",
+      "evidence_url": "https://documents1.worldbank.org/curated/en/099031924101538939/txt/BOSIB109ef103d0a81a3081922653bf9c46.txt"
+    },
+    {
+      "source_report_id": "et-psnp5-worldbank-seasn",
+      "target_report_id": "et-ess-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "The SEASN project's own results-framework indicator, 'Increase in average wage rate relative to the annual general CPI increase, for cash transfers beneficiaries', uses Ethiopia's CPI directly as a monitoring input -- independent, donor-side corroboration of the same CPI-wage link found in the Design Document itself.",
+      "evidence_url": "https://documents1.worldbank.org/curated/en/099031924101538939/txt/BOSIB109ef103d0a81a3081922653bf9c46.txt"
+    },
+    {
+      "source_report_id": "et-upsnjp",
+      "target_report_id": "et-ess-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "'The wage rate was adjusted in accordance with the evolution of food prices based on the official consumer price index (CPI) published by the Central Statistics Agency' -- a direct, named input, structurally identical to the PSNP5 edge but currently subject to a suspended covenant (see the node's own description and _note).",
+      "evidence_url": "https://documents1.worldbank.org/curated/en/099810012152126313/pdf/P17533402d12a1003094770715406a1723c.pdf"
+    },
+    {
+      "source_report_id": "et-ess-cpi",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The IMF's own 2019 press release announcing Ethiopia's e-GDDS implementation confirms Ethiopia's CPI is disseminated under this framework -- reuses the imf-e-gdds node first minted for Kenya, now a second country confirmed on the weaker (non-SDDS) IMF dissemination tier.",
+      "evidence_url": "https://www.imf.org/en/news/articles/2019/08/02/pr19310-ethiopia-the-federal-democratic-republic-of-ethiopia-implements-the-imfs-egdds"
+    }
+  ],
+  "_dropped": []
+}

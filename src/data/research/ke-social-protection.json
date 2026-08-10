@@ -1,0 +1,142 @@
+{
+  "_slice": "ke-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Kenya is the third country worked from `country afrikans.docx` (7 raw entries), following South Africa and Egypt. This is the second pass, after a Grok round covering everything Kenyan official sites blocked directly (kenyalaw.org 403'd every fetch this session, KNBS SSL-errored, ncpwd.go.ke served metadata but not extractable PDF content). Per Thomas's standing instruction ([[feedback_grok-as-verification]]), Grok's quoted, sourced, confidence-tagged answers are minted directly. Sitting in src/data/research/ alongside the other Africa drafts pending review.",
+  "_note": "Two related findings, both cutting against the docx's own framing of Kenya as a country 'moving toward formal indexation'. (1) The Social Protection Act 2025's s.39 is permissive only, no formula, already noted in the first pass. (2) More significant, found this round: the Persons with Disabilities Act 2025 -- which repealed the 2003 Act on 27 May 2025 -- does NOT restate the disability cash-transfer entitlement the old Act apparently carried. Its own s.57(2) makes the transfer discretionary ('the Cabinet Secretary... MAY... grant a long-term social assistance monthly cash transfer of such amount as may be prescribed'), and s.57(3) requires the Cabinet Secretary to make implementing regulations that, as far as this session could confirm, may not yet exist. The PWSD-CT programme itself (KES 2,000/month, unchanged for years, per NCPWD's own impact assessment) is currently running on an uncertain legal footing: its apparent original statutory hook was repealed four months ago and the replacement is optional pending regulations not yet located. This is a genuinely interesting instability the docx's summary gave no hint of.",
+  "_open_questions": [
+    {
+      "id": "ke-pwd-act-social-assistance-act-reference-unclear",
+      "question": "s.57(2) of the Persons with Disabilities Act 2025 conditions the cash-transfer amount on 'such amount as may be prescribed by the Cabinet Secretary in accordance with the Social Assistance Act' -- but no Kenyan statute by that exact name was independently confirmed to exist this session. It may be a drafting reference to the Social Protection Act 2025 itself (renamed or referenced loosely), an older/different instrument, or a genuine cross-reference this session hasn't located. Needs a direct check before any edge is drawn between the two Acts."
+    },
+    {
+      "id": "ke-pwd-act-s57-regulations-status-unknown",
+      "question": "s.57(3) requires the Cabinet Secretary to make regulations implementing the cash-transfer provision. Whether those regulations have actually been issued (as of August 2026) was not confirmed this session -- The Social Protection (General) Regulations, 2026 (commenced 14 April 2026) implement the *Social Protection Act*, a different parent statute, and are not confirmed to also cover s.57 of the PWD Act. If no PWD-Act-specific regulations exist yet, the cash-transfer power in s.57(2) may be currently unusable even on its own discretionary terms."
+    },
+    {
+      "id": "ke-nssf-pensions-leads-not-quote-verified",
+      "question": "Grok reports, without verbatim quotes, that the NSSF Act defines 'National Average Earnings' (feeding the contribution ceiling) by reference to KNBS's Economic Survey, and that a Pensions (Amendment) Bill proposes CPI-linked cost-of-living adjustment against the existing Pensions (Increase) Act's flat historical uplift. Real leads, not minted this session for lack of an actual quoted clause -- worth a direct follow-up."
+    }
+  ],
+  "reports": [
+    {
+      "id": "ke-social-protection-act-2025",
+      "title": "Social Protection Act, 2025 (No. 12 of 2025)",
+      "publisher": "Parliament of Kenya",
+      "country": "KE",
+      "jurisdiction_level": "federal",
+      "region": "Kenya",
+      "description": "Kenya's framework social protection statute. VERIFIED DIRECTLY this session against the official text hosted by the Ministry of Labour and Social Protection: commenced 19 August 2025. Section 7 establishes the National Board for Social Protection as a body corporate. Section 39: 'The Board may, in consultation with the National Treasury, periodically review the social assistance benefits provided under this Act to accommodate changes in real value.' No CPI formula, no obligation to review -- see _note. Implementing regulations (The Social Protection (General) Regulations, 2026) commenced 14 April 2026, confirming the Act is operative rather than merely assented-but-dormant.",
+      "last_updated": "2025-08-19",
+      "url": "https://www.socialprotection.go.ke/sites/default/files/Downloads/public%20participation%20docss/Social%20Protection%20Act%202025%20KE.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "ke-persons-with-disabilities-act-2025",
+      "title": "Persons with Disabilities Act, 2025 (No. 4 of 2025)",
+      "publisher": "Parliament of Kenya",
+      "country": "KE",
+      "jurisdiction_level": "federal",
+      "region": "Kenya",
+      "description": "Kenya's disability-rights statute, replacing the Persons with Disabilities Act No. 14 of 2003 (repealed by its own s.88). Assented 8 May 2025, commenced 27 May 2025. Largely silent on fixed cash-transfer amounts, indexation, or CPI -- the Act is mostly about rights, the restructured National Council for Persons with Disabilities, accessibility, and tax/employer incentives (Part V). The one cash-transfer clause found this session, s.57(2): 'The Cabinet Secretary responsible for matters relating to social protection may on application of a parent or guardian who is indigent and assumes full custody and care of a person certified with severe disability and incapable of catering for their basic needs, grant a long-term social assistance monthly cash transfer of such amount as may be prescribed by the Cabinet Secretary in accordance with the Social Assistance Act.' s.57(3): 'The Cabinet Secretary shall make regulations for the proper implementation of the provisions relating to this section.' Both the Cabinet Secretary's cross-referenced 'Social Assistance Act' and the status of the s.57(3) regulations are unresolved -- see _open_questions.",
+      "last_updated": "2025-05-27",
+      "url": "https://new.kenyalaw.org/akn/ke/act/2025/4/eng@2025-05-13",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "ke-pwsd-ct-programme",
+      "title": "Persons with Severe Disabilities Cash Transfer (PWSD-CT)",
+      "publisher": "National Council for Persons with Disabilities (NCPWD)",
+      "country": "KE",
+      "jurisdiction_level": "federal",
+      "region": "Kenya",
+      "description": "A component of the Inua Jamii / National Safety Net Programme, paying a fixed KES 2,000/month per beneficiary household regardless of the number of persons with severe disabilities in it -- unchanged in nominal terms since a 2015/16 scale-up to 47,000 households. NCPWD's own Impact Assessment Report (2024) states directly: 'The limited impact of the transfer on the beneficiaries is attributed to the transfer value against inflation... inflation has eroded the value of the benefit. A review of the effect of inflation on the purchasing power of the amount is to be done periodically however, this has never been done since the programme started.' The report recommends developing 'mechanisms to maintain transfer values in line with economic growth and inflation'. The specific claim in the original docx (146% CPI rise 2010-2023, counterfactual KES 4,920 transfer) traces to a UNICEF Kenya desk review (March 2025) rather than NCPWD's own report directly, which confirms the fixed amount and qualitative erosion but not that exact calculation. Legal basis is administrative/programmatic (operations manuals, budget allocations), historically anchored in the now-repealed 2003 PWD Act's allowance requirement -- its footing under the 2025 Act is unresolved, see _note and _open_questions.",
+      "last_updated": "2024-02",
+      "url": "https://ncpwd.go.ke/download/pwsd-ct-impact-assessment-report-final/",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "ke-constitution-article54",
+      "title": "Constitution of Kenya, 2010 — Article 54 (Persons with Disabilities)",
+      "publisher": "Republic of Kenya",
+      "country": "KE",
+      "jurisdiction_level": "federal",
+      "region": "Kenya",
+      "description": "The constitutional rights provision for persons with disabilities. Full text: '(1) A person with any disability is entitled -- (a) to be treated with dignity and respect and to be addressed and referred to in a manner that is not demeaning; (b) to access educational institutions and facilities for persons with disabilities that are integrated into society to the extent compatible with the interests of the person; (c) to reasonable access to all places, public transport and information; (d) to use Sign language, Braille or other appropriate means of communication; and (e) to access materials and devices to overcome constraints arising from the person's disability. (2) The State shall ensure the progressive implementation of the principle that at least five percent of the members of the public in elective and appointive bodies are persons with disabilities.' Notably contains no reference to cash assistance, social security, or benefit levels -- the constitutional hook for disability rights is dignity/access/representation, not income support (which sits instead in ordinary legislation and administrative programmes).",
+      "last_updated": null,
+      "url": "https://kenyalaw.org/kl/fileadmin/pdfdownloads/TheConstitutionOfKenya.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "ke-knbs-cpi",
+      "title": "Consumer Price Index (KNBS)",
+      "publisher": "Kenya National Bureau of Statistics (KNBS)",
+      "country": "KE",
+      "jurisdiction_level": "federal",
+      "region": "Kenya",
+      "description": "Kenya's official CPI, rebased in 2020 with February 2019 as the price/index reference period. KNBS's own Rebasing Report states directly: 'Use of the latest COICOP 2018 in categorisation of household expenditure', and that the rebasing was 'viewed as a good opportunity to bring in other improvements in the index so as to align it with internationally accepted best practices as well as the COMESA and EAC HCPI regulations.'",
+      "releases_per_year": 12,
+      "last_updated": "2020-03",
+      "url": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-Rebasing-Report-March-2020.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "eac-hcpi-regulations",
+      "title": "EAC Regulations for Compiling Harmonised Consumer Price Indices (HCPI)",
+      "publisher": "East African Community",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "East Africa",
+      "description": "A binding East African Community instrument (March 2022) requiring Partner States to compile and submit a Harmonised CPI to the EAC Secretariat, for regional comparability and East African Monetary Union convergence-criteria monitoring -- described as binding in its entirety and directly applicable, and classification 'shall be based on the most recent official United Nations Classification of Individual Consumption According to Purpose (COICOP)'. Filed `supranational` rather than `international` on the same reasoning the corpus already applies to the EU's ESA 2010: a regional body legislating a binding, directly-applicable obligation, not a standard adopted by choice. Distinct from Kenya's own domestic CPI, which aligns with these regulations' spirit (per KNBS's own rebasing report) without the regulations themselves directly governing the domestic release -- the binding obligation is to also produce the separate HCPI submission.",
+      "releases_per_year": 0.1,
+      "cadence_note": "The regulatory instrument itself, not an annual release; nominal cadence matching the treatment given to esa-2010 and other framework-level nodes.",
+      "last_updated": "2022-03",
+      "url": "https://www.eac.int/",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "imf-e-gdds",
+      "title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IMF's data-dissemination tier for countries not on the (stricter) SDDS/SDDS Plus standards already in the graph. Kenya implemented e-GDDS (with a National Summary Data Page) around 2018, per the IMF's own DSBB e-GDDS pages and confirmed via a related IMF press release. A notch below South Africa and Egypt, both confirmed on full SDDS -- worth having as a distinct node so the graph can actually show the tiering rather than treating every country's IMF dissemination status as equivalent.",
+      "releases_per_year": 0.06,
+      "cadence_note": "Standard itself revised rarely; not an annual release, matching the treatment given to imf-sdds.",
+      "last_updated": null,
+      "url": "https://dsbb.imf.org/egdds/dqaf-base/country/KEN/category/CPI00",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ke-knbs-cpi",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "KNBS's own Rebasing Report: 'Use of the latest COICOP 2018 in categorisation of household expenditure.' Reuses the un-coicop-2018 node first minted for South Africa/Nigeria (za-fiscal-federalism.json) -- a third country now confirmed on the current COICOP vintage, versus Egypt's older COICOP-HBS 1999/2000.",
+      "evidence_url": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-Rebasing-Report-March-2020.pdf"
+    },
+    {
+      "source_report_id": "ke-knbs-cpi",
+      "target_report_id": "eac-hcpi-regulations",
+      "relationship_type": "methodology_depends_on",
+      "basis": "KNBS's own Rebasing Report states the 2020 rebasing deliberately aligned the domestic CPI 'with internationally accepted best practices as well as the COMESA and EAC HCPI regulations' -- a national-side statement of alignment, distinct from (but motivated by) the separate binding obligation to also produce the parallel HCPI submission.",
+      "evidence_url": "https://www.knbs.or.ke/wp-content/uploads/2023/09/Kenya-Consumer-Price-Indices-Rebasing-Report-March-2020.pdf"
+    },
+    {
+      "source_report_id": "ke-knbs-cpi",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Kenya's CPI metadata is disseminated under the IMF's e-GDDS/DQAF framework on the DSBB, following Kenya's ~2018 e-GDDS implementation and National Summary Data Page.",
+      "evidence_url": "https://dsbb.imf.org/egdds/dqaf-base/country/KEN/category/CPI00"
+    },
+    {
+      "source_report_id": "ke-pwsd-ct-programme",
+      "target_report_id": "ke-persons-with-disabilities-act-2025",
+      "relationship_type": "cites",
+      "basis": "The programme's plausible current statutory hook is s.57(2) of the 2025 Act, but that clause is discretionary ('may... grant'), amount-unspecified ('such amount as may be prescribed'), and contingent on s.57(3) regulations not confirmed to exist yet -- filed as `cites` rather than a stronger relationship type precisely because the legal grounding itself is unresolved, not because the programme and the Act are unrelated. See _open_questions.",
+      "evidence_url": "https://new.kenyalaw.org/akn/ke/act/2025/4/eng@2025-05-13"
+    }
+  ],
+  "_dropped": []
+}

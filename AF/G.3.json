@@ -1,0 +1,107 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.3.md",
+  "number": 3,
+  "title": "G.3.md — Africa galaxy hand-off",
+  "date": "2026-08-10",
+  "governing_briefs": "`Research.1.md` §2/§3/§4, same as G.1/G.2. `AF/G.1.md` and `AF/G.2.md` both read in full this session.",
+  "predecessor": "G.2.md (2026-08-10)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "The Claude/Grok parallel-split pattern is validated, not just tried once. Ethiopia's merge produced a genuine cross-connection between two independently-researched halves (the constitutional finding and the funding-flow finding describe the same administrative reality, found by two different research paths) and surfaced a programme — UPSNJP's suspended CPI-indexation covenant — that neither the docx nor a single research pass would likely have found on its own. This is now the operating model for the rest of the branch, not an experiment to keep re-justifying each time.",
+  "findings": [
+    {
+      "heading": "1. Ethiopia closed: two CPI-linked programmes, one currently suspended, and a federal structure genuinely unlike South Africa's",
+      "body": "`et-psnp-cpi-federalism.json`, 5 nodes / 5 deps, fully merged. PSNP5's own Design Document ties its annual wage-rate adjustment to CPI directly (\"Adequacy of transfers will be addressed through annual adjustments to the wage rate in line with consumer price index (CPI) to protect its real value\") — independently corroborated from the donor side via a World Bank results-framework indicator naming the same link. A second programme, the Urban Productive Safety Net and Jobs Project (UPSNJP, found entirely via Grok's half), has a formal financing covenant requiring CPI indexation of its benefits that is explicitly, currently waived \"pending material improvements to the government's fiscal position\" — a real formula, temporarily switched off. That's now a third distinct shape for how a CPI-benefit mechanism fails to bind, alongside South Africa's built-in discretion and Kenya's post-repeal legal uncertainty.\n\nEthiopia's Constitution does not establish woredas (district-level government) at all — Article 50(4) leaves \"State and other administrative levels\" entirely to each regional state's own discretion, unlike South Africa's constitutionally-entitled local government. Grok's funding-side research independently found that World Bank/donor money actually flows federal → regional → woreda via the government's own \"Channel 1\" mechanism — describing the same practical reality the constitutional finding leaves open at the legal level, but from a different document. **No graph edge connects these two nodes**, deliberately: neither document cites the other, and the corpus's own rule (no edge without a document saying so) applies exactly as much to two independently-true findings that merely happen to agree as it does to anything else. Recorded as an observed consistency in the file's own `_note`, not as a dependency. This is worth internalising as the general lesson from the parallel-split pattern: cross-connection often means \"these two things are obviously part of the same story,\" not \"one document names the other\" — only the second kind goes in the graph.\n\nAlso confirmed: Ethiopia is on the IMF's e-GDDS tier (second country on that node, after Kenya) and is explicitly NOT bound by the EAC's binding Harmonised CPI regulations that govern Kenya — a clean negative contrast, useful precisely because it shows the EAC finding from G.2 wasn't a fluke of how Kenya specifically was researched."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "Ghana** — 2 raw docx entries. Small, but flagged by the docx's own regional overview as the one clear case of explicit automatic indexation on the continent (LEAP linked to GSS CPI, \"Ghana is the standout with an explicit LEAP indexation formula linked to GSS CPI\" per the docx's own prose). Explicitly next per Thomas's instruction closing this session. Good candidate for the parallel-split pattern: Claude could take the LEAP formula and GSS CPI methodology directly; Grok could take LEAP's funding/donor architecture (also World Bank-linked, per general knowledge, unverified) and any other Ghanaian benefit programmes and international-standards questions, mirroring the Ethiopia split."
+        },
+        {
+          "n": 2,
+          "text": "Tanzania — 4 raw entries (NBS CPI, National Social Protection Policy 2023). Not started."
+        },
+        {
+          "n": 3,
+          "text": "Nigeria — 9 raw entries (CPI rebasing, PenCom pension reviews, National Social Safety Net Programme). Not started. Nigeria's own CPI rebasing already appears indirectly in this session's and prior sessions' Findings (COICOP 2018 precedent, cited twice for South Africa and Kenya) — worth checking for existing Nigeria-adjacent nodes before starting fresh, though none are expected."
+        },
+        {
+          "n": 4,
+          "text": "Whether to model the docx's regional-typology prose (WAEMU Harmonised CPI, AFRISTAT) as corpus nodes — raised in G.1, still not raised with Thomas, still open. Now more clearly warranted: the EAC's binding HCPI regulation (G.2) is a real precedent, and WAEMU may be West Africa's equivalent — worth raising once Ghana (a WAEMU-adjacent but not WAEMU-member country, unconfirmed) is done, since Ghana's own regional CPI-harmonisation status is an obvious first check."
+        },
+        {
+          "n": 5,
+          "text": "Import review: six DRAFT JSON files sit un-imported in `src/data/research/`. Not on Thomas to review immediately, but worth surfacing every hand-off until it happens rather than letting it go silent."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Constitution s.28 (South Africa, children's rights) — cited secondhand via the Western Cape DSD document (G.2), never independently fetched."
+    },
+    {
+      "n": 2,
+      "text": "`za-sassa-annual-report` → `za-social-assistance-act-2004` direct edge — open since G.1, still unresolved."
+    },
+    {
+      "n": 3,
+      "text": "IMF DSBB DQAF pages are JS-rendered and have failed for South Africa, Egypt, and Kenya across every tool tried, Grok included (G.2). Do not re-attempt per-country; if a JS-capable browser tool becomes available, batch-recheck all countries at once."
+    },
+    {
+      "n": 4,
+      "text": "Ethiopia's PSNP5 wheat-equivalency figures (15kg/16.95kg) — two passes, still unconfirmed, low urgency (see Secondary observations)."
+    },
+    {
+      "n": 5,
+      "text": "Ethiopia's current COICOP vintage — only an old (2013), vague source found; needs a current ESS methodology document."
+    },
+    {
+      "n": 6,
+      "text": "Whether `EG`, `KE`, `ET` have `COUNTRY_FAMILY` palette entries — moot until any of their JSON files are actually imported."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `AF/G.1.md` and `AF/G.2.md` for full context — Orientation across all three still applies and has been kept current rather than rewritten from scratch each time."
+    },
+    {
+      "n": 2,
+      "text": "`country afrikans.docx` — Ghana's 2 entries specifically, plus the continent-wide regional-typology prose (relevant to Priority item 4 above)."
+    },
+    {
+      "n": 3,
+      "text": "The six DRAFT JSON files in `src/data/research/`, all still awaiting Thomas's review/import: `za-fiscal-federalism.json`, `za-national-accounts-labour.json`, `za-followup-gaps.json`, `eg-cpi-social-insurance.json`, `ke-social-protection.json`, `et-psnp-cpi-federalism.json`."
+    },
+    {
+      "n": 4,
+      "text": "`feedback_grok-as-verification` (Claude's project memory) — the standing rule that makes the parallel-split pattern possible. Read it before starting Ghana; it is now the default way to work, not an option to rediscover."
+    },
+    {
+      "n": 5,
+      "text": "A concrete instruction for how to run the Ghana split, so the next agent doesn't have to reinvent the pattern from scratch**: read Ghana's 2 docx entries first, identify the core LEAP-formula/GSS-CPI mechanism as one lane, then write a Grok prompt for the other lane (funding, other Ghanaian programmes, international standards) *before* doing deep independent research on the core lane — running both lanes concurrently is the point, not researching first and then discovering what to ask Grok afterward. Merge when both are back, and explicitly look for (but don't force) a cross-connection the way Ethiopia's fund-flow/constitution pair worked."
+    }
+  ],
+  "session_conditions": "Short session, closing out work in progress rather than opening new ground. G.2.md was written mid-session, before the Ethiopia parallel split (Claude's half + a Grok round) had actually finished; this session's only substantive work was merging that split into one file and writing this hand-off. No new country was started. Still true, and worth restating: **nothing described in G.1, G.2, or this file is live in the corpus.** Six DRAFT files sit un-imported in `src/data/research/`: `za-fiscal-federalism.json`, `za-national-accounts-labour.json`, `za-followup-gaps.json`, `eg-cpi-social-insurance.json`, `ke-social-protection.json`, `et-psnp-cpi-federalism.json`. All marked `DRAFT, NOT IMPORTED` in their own `_status` fields, all pending Thomas's review."
+}

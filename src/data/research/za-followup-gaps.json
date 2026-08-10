@@ -1,0 +1,107 @@
+{
+  "_slice": "za-followup-gaps",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Closes four open questions left by za-fiscal-federalism.json and za-national-accounts-labour.json, via a Grok follow-up round. Per Thomas's standing instruction (2026-08-10, [[feedback_grok-as-verification]]), Grok's answers are minted directly once given with full context and an evidence-confidence tag -- no separate independent-refetch pass required. Sitting in src/data/research/ alongside the other South Africa drafts pending review.",
+  "_note": "The most structurally important thing here isn't any single node -- it's that South Africa finally gets a genuine provincial-level node (za-western-cape-dsd-app, jurisdiction_level: provincial). Every South African node minted so far, across three prior draft files, was federal. This is the first one that answers the original 'does it run top to bottom' question with an actual document rather than a gap. Also worth flagging: the SARB inflation target turns out to have the same shape as the grant system and the UIF benefit scale -- not written into primary legislation at all, but set by an intergovernmental agreement (Minister of Finance + SARB Governor). That's now three separate South African mechanisms (grants, UIF, and now monetary policy) that could each sound like a hard rule from the outside but are actually discretionary instruments dressed as numbers. Worth stating as a pattern, not just three separate findings.",
+  "_open_questions": [
+    {
+      "id": "za-constitution-s28-children-rights-not-minted",
+      "question": "The Western Cape DSD Annual Performance Plan cites both Schedule 4 and Section 28 (children's rights) as its constitutional mandate. Section 28 was not independently checked or minted as its own node this round -- only Schedule 4's concurrent-competence listing was verified directly enough to cite. Worth a direct fetch of Constitution s.28 if a future session wants the full mandate picture for provincial DSDs, particularly child-protection services specifically."
+    },
+    {
+      "id": "za-ene-vs-budget-review-relationship-not-a-formula",
+      "question": "National Treasury's own language ('main budget-level expenditure... forms the basis for discussion in the ENE'; 'consolidated government spending forms the basis for discussion in the Budget Review') describes ENE and the Budget Review as two views of the same underlying consolidated budget data, published together on Budget Day -- not one computed from the other by a stated formula. Filed as `cites` for that reason, matching the corpus's existing caution pattern (e.g. the Budget Review -> CPI edge), rather than `calculated_from`."
+    }
+  ],
+  "reports": [
+    {
+      "id": "za-national-treasury-ene-vote19",
+      "title": "Estimates of National Expenditure (ENE) — Vote 19: Social Development",
+      "publisher": "National Treasury of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The department-level detailed budget document for Social Development, tabled in Parliament alongside the Appropriation Bill and published the same Budget Day as the aggregate Budget Review (already in the graph). Its own 2026-edition Introduction: 'The details of the allocations of main budget expenditure to votes are discussed in the individual chapters, with summaries provided in the following tables' -- Table 2 shows Vote 19 alongside every other national vote, using the same MTEF years that feed the Budget Review's own functional and consolidated tables. Transfers and subsidies -- overwhelmingly social grants -- make up roughly 99.6-99.7% of the vote's expenditure, per the same document.",
+      "releases_per_year": 1,
+      "last_updated": "2026-02-25",
+      "url": "https://www.treasury.gov.za/documents/national%20budget/2026/ENE/Vote%2019%20Social%20Development.pdf",
+      "domains": ["fiscal-transfers", "benefits"]
+    },
+    {
+      "id": "za-constitution-schedule4",
+      "title": "Constitution of the Republic of South Africa, 1996 — Schedule 4 (Functional Areas of Concurrent National and Provincial Legislative Competence)",
+      "publisher": "Parliament of South Africa",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "Lists 'Welfare services', 'Health services' and 'Population development' among the functional areas both national and provincial legislatures may make law on -- a genuinely separate constitutional basis from the national, exclusive cash-grant power under s.27(1)(c)/the Social Assistance Act (already in the graph). The National DSD Annual Report states this directly: 'Schedule 4 of the Constitution further identifies welfare services, population development and disaster management as functional areas of concurrent national and provincial legislative competence.' Now minted with two outgoing edges anchoring it, resolving the open question left in za-fiscal-federalism.json about lacking a document to hang this node on.",
+      "last_updated": null,
+      "url": "https://static.pmg.org.za/Draft05-DSD_Annual_Report.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "za-dsd-national-annual-report",
+      "title": "Department of Social Development Annual Report",
+      "publisher": "Department of Social Development (South Africa)",
+      "country": "ZA",
+      "jurisdiction_level": "federal",
+      "region": "South Africa",
+      "description": "The national Department of Social Development's own annual report -- a separate entity from SASSA (the agency, already in the graph) and from provincial DSDs. States its own constitutional basis directly, naming Schedule 4's concurrent welfare-services competence alongside s.27(1)(c) and s.28 (children's rights).",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://static.pmg.org.za/Draft05-DSD_Annual_Report.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "za-western-cape-dsd-app",
+      "title": "Western Cape Department of Social Development — Annual Performance Plan 2025/26",
+      "publisher": "Western Cape Government, Department of Social Development",
+      "country": "ZA",
+      "jurisdiction_level": "provincial",
+      "region": "Western Cape, South Africa",
+      "description": "The first provincial-level node minted for South Africa in this corpus. Explicitly lists 'Constitution of the Republic of South Africa, 1996' under its own constitutional mandates, referencing Section 28 (children's rights) and the Schedule 4 concurrent-competence framework for welfare services -- the provincial-delivery half of the national/provincial split already established in za-constitution-schedule4. Delivers services (child protection, disability-care facilities, substance-abuse treatment, elderly care) rather than cash grants -- provinces have no role in the SASSA grant system, which is exclusively national.",
+      "releases_per_year": 1,
+      "last_updated": "2025-06",
+      "url": "https://www.westerncape.gov.za/social-development/files/wcg-blob-files?file=2025-11/dsd-annual-performance-plan-2025-26_june-2025_0.pdf&type=file",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "za-national-treasury-budget-review",
+      "target_report_id": "za-national-treasury-ene-vote19",
+      "relationship_type": "cites",
+      "basis": "National Treasury's own language describes the Budget Review and the ENE as companion documents drawing on the same consolidated main-budget data, published together on Budget Day -- the ENE gives the vote-level detail (including Vote 19: Social Development) that the Budget Review discusses in aggregate. No stated formula computing one from the other, so filed as `cites` rather than `calculated_from` -- see _open_questions.",
+      "evidence_url": "https://www.treasury.gov.za/documents/National%20Budget/2026/ene/Introduction.pdf"
+    },
+    {
+      "source_report_id": "za-national-treasury-ene-vote19",
+      "target_report_id": "za-social-assistance-act-2004",
+      "relationship_type": "cites",
+      "basis": "Vote 19's own budget summary covers Social Assistance transfers and SASSA administration, ~99.6-99.7% of the vote's expenditure per the document itself -- the vote is the fiscal instrument funding the Act's grant system, though the vote document doesn't itself set grant amounts (that remains the Minister's Gazette-notice power under s.32(3), already in the graph).",
+      "evidence_url": "https://www.treasury.gov.za/documents/national%20budget/2026/ENE/Vote%2019%20Social%20Development.pdf"
+    },
+    {
+      "source_report_id": "za-dsd-national-annual-report",
+      "target_report_id": "za-constitution-schedule4",
+      "relationship_type": "cites",
+      "basis": "The Annual Report's own text: 'Schedule 4 of the Constitution further identifies welfare services, population development and disaster management as functional areas of concurrent national and provincial legislative competence.'",
+      "evidence_url": "https://static.pmg.org.za/Draft05-DSD_Annual_Report.pdf"
+    },
+    {
+      "source_report_id": "za-western-cape-dsd-app",
+      "target_report_id": "za-constitution-schedule4",
+      "relationship_type": "cites",
+      "basis": "The Western Cape APP lists the Constitution among its own governing mandates and operates under the same concurrent-competence framework for welfare services described in za-constitution-schedule4 -- it names s.28 (children's rights) alongside the concurrent listing rather than restating the Schedule 4 language verbatim itself, per the source describing it.",
+      "evidence_url": "https://www.westerncape.gov.za/social-development/files/wcg-blob-files?file=2025-11/dsd-annual-performance-plan-2025-26_june-2025_0.pdf&type=file"
+    },
+    {
+      "source_report_id": "za-sarb-monetary-policy",
+      "target_report_id": "za-constitution-ch13-finance",
+      "relationship_type": "cites",
+      "basis": "Section 224 of the Constitution: 'The primary object of the South African Reserve Bank is to protect the value of the currency in the interest of balanced and sustainable economic growth in the Republic.' This resolves the open question left in za-fiscal-federalism.json about the SARB's statutory basis: the 3% (±1pp) numerical target itself is NOT written into the South African Reserve Bank Act 90 of 1989 (which only carries the older 'protect the value of the currency' language) -- it was set by a 2025 agreement between the Minister of Finance and the SARB Governor ('The Minister of Finance today announced a new inflation target for South Africa of 3% with a 1 percentage point tolerance band. This decision follows agreement between the Governor of the South African Reserve Bank (SARB) and the Minister.'). A third South African mechanism, after grants (Gazette notice) and UIF (Gazette notice), that turns out to be discretionary/agreement-based rather than a hard statutory formula.",
+      "evidence_url": "https://www.gov.za/news/media-statements/treasury-and-south-african-reserve-bank-announce-new-inflation-target-south"
+    }
+  ],
+  "_dropped": []
+}
