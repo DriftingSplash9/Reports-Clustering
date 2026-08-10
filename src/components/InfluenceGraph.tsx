@@ -7,7 +7,6 @@ import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, isDocumented, radiusFor } from '../lib/graph'
 import { rimColourFor, colourForReport } from '../lib/palette'
 import {
-  flagGeometry,
   isStandingInstrument,
   nodeMaterial,
   setNodeRim,
@@ -362,9 +361,12 @@ export default function InfluenceGraph({
       particleObjects.set(
         l.key,
         new THREE.Mesh(
-          // Sized up 2026-08-10 (Thomas) — the previous 1.6-3.5 range read as
-          // near-invisible specks next to a full node; this is roughly 1.5x.
-          teardropGeometry(2.4 + l.weight * 2.9),
+          // Sized up twice on 2026-08-10, both times on Thomas looking at it:
+          // 1.6-3.5 read as near-invisible specks, 2.4-5.3 was still short, and
+          // this is 3.2-7.0. Worth noting the moving target underneath — nodes
+          // themselves grew that day too (see TARGET_LARGEST_FRACTION), so a
+          // pulse that was legible against the old node size no longer was.
+          teardropGeometry(3.2 + l.weight * 3.8),
           pulseMaterial(l.colour),
         ),
       )
@@ -373,7 +375,7 @@ export default function InfluenceGraph({
     // be a bug rather than a case to handle, so this is a visible fallback
     // rather than a silent one.
     const fallbackParticle = new THREE.Mesh(
-      teardropGeometry(3),
+      teardropGeometry(4),
       pulseMaterial('#7f9ad0'),
     )
 
@@ -410,21 +412,26 @@ export default function InfluenceGraph({
         // that ignores the focus for a frame or two reads as a flicker.
         const lit = !focusRef.current || focusRef.current.nodes.has(n.id)
 
-        // A one-off instrument is drawn as a flag rather than a sphere — see
-        // `flagGeometry`. Same colour, same rim, same size encoding; only the
-        // silhouette differs, which is the whole point of using shape here.
+        // A one-off instrument is drawn hollow — same sphere, emptied fill, and
+        // a border in its own scope colour rather than the country rim every
+        // other node carries. See `isStandingInstrument`.
+        //
+        // The border colour is `colour`, not `rimColourFor(n.country)`, and
+        // that is deliberate: on a hollow node the rim is the only colour
+        // there is, so it has to be the one the legend explains. A hollow
+        // node's ring is exactly the colour a solid node's fill would be.
+        const hollow = isStandingInstrument(n)
         const mesh = new THREE.Mesh(
-          isStandingInstrument(n)
-            ? flagGeometry(radius)
-            : new THREE.SphereGeometry(radius, 28, 20),
+          new THREE.SphereGeometry(radius, 28, 20),
           nodeMaterial({
             colour,
-            rimColour: rimColourFor(n.country),
+            rimColour: hollow ? colour : rimColourFor(n.country),
             radius,
             emissive,
             lit,
             dimOpacity: DIM_NODE_OPACITY,
             dimEmissive: DIM_NODE_EMISSIVE,
+            hollow,
           }),
         )
         mesh.scale.setScalar(nodeScale.current)
@@ -791,7 +798,9 @@ export default function InfluenceGraph({
       const lit = !focus || focus.nodes.has(id)
 
       setNodeRim(material, lit)
-      material.opacity = lit ? 1 : DIM_NODE_OPACITY
+      // `litOpacity` rather than 1 — a hollow node stays hollow when traced.
+      const litOpacity = material.userData.litOpacity ?? 1
+      material.opacity = lit ? litOpacity : Math.min(DIM_NODE_OPACITY, litOpacity)
       material.emissiveIntensity = lit
         ? // A small lift on the selection itself, so it is findable inside its
           // own cone. Still capped below 1 — bloom clips above that and the

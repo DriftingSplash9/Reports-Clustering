@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
 /**
  * The node material: a standard lit sphere with a country-coloured rim.
@@ -21,8 +20,24 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
   userData: {
     /** Rim intensity, dimmed along with the node when out of focus. */
     rim: { value: number }
+    /**
+     * The material's opacity when it *is* in focus.
+     *
+     * Not always 1: a hollow node is deliberately barely-there even when lit,
+     * and the focus pass has to restore it to that value rather than to full.
+     * Before this existed, lighting a hollow node filled it in solid, which
+     * meant the one-off instruments changed shape whenever they were traced.
+     */
+    litOpacity: number
   }
 }
+
+/**
+ * Fill opacity of a hollow node. Low enough to read as empty, high enough that
+ * the sphere still occludes what is directly behind it — at zero the rim reads
+ * as a ring floating in front of the graph rather than as a surface.
+ */
+const HOLLOW_FILL_OPACITY = 0.1
 
 /**
  * Rim sharpness scales with the node's radius.
@@ -46,6 +61,7 @@ export function nodeMaterial({
   lit,
   dimOpacity,
   dimEmissive,
+  hollow = false,
 }: {
   colour: string
   rimColour: string
@@ -54,6 +70,19 @@ export function nodeMaterial({
   lit: boolean
   dimOpacity: number
   dimEmissive: number
+  /**
+   * Draw the node as an outline rather than a solid — the treatment for a
+   * one-off instrument. See `isStandingInstrument`.
+   *
+   * Implemented by emptying the fill and thickening the existing fresnel rim
+   * rather than by swapping in ring geometry, which matters in a scene you can
+   * orbit: a torus or a disc vanishes edge-on, and a fifth of the nodes
+   * disappearing at certain angles would be worse than the problem being fixed.
+   * A fresnel rim follows the silhouette from every direction by construction,
+   * so a hollow sphere reads as a circle with a border no matter where the
+   * camera is.
+   */
+  hollow?: boolean
 }): NodeMaterial {
   const material = new THREE.MeshStandardMaterial({
     color: colour,
@@ -64,16 +93,24 @@ export function nodeMaterial({
     // Enabled up front. Switching `transparent` on a live material forces a
     // shader recompile, which stutters at the exact moment the user clicks.
     transparent: true,
-    opacity: lit ? 1 : dimOpacity,
+    opacity: lit ? (hollow ? HOLLOW_FILL_OPACITY : 1) : Math.min(dimOpacity, hollow ? HOLLOW_FILL_OPACITY : 1),
   }) as NodeMaterial
 
   const rim = { value: lit ? 1 : 0.25 }
-  material.userData = { rim }
+  material.userData = { rim, litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1 }
 
   material.onBeforeCompile = (shader) => {
     shader.uniforms.uRimColour = { value: new THREE.Color(rimColour) }
-    shader.uniforms.uRimPower = { value: rimPower(radius) }
+    // A hollow node's band is held wide and shallow on purpose. `rimPower`
+    // exists to keep a *thin* highlight constant across node sizes; here the
+    // rim is not a highlight, it is the whole node, so the exponent is pinned
+    // low to give a border with visible thickness instead of a hairline.
+    shader.uniforms.uRimPower = { value: hollow ? 1.5 : rimPower(radius) }
     shader.uniforms.uRim = rim
+    // How much the rim contributes to alpha. On a solid node this is a small
+    // top-up that keeps the silhouette from fading out when dimmed. On a hollow
+    // one it is doing all the work, because the fill has been emptied.
+    shader.uniforms.uRimAlpha = { value: hollow ? 0.95 : 0.45 }
 
     shader.fragmentShader = shader.fragmentShader
       .replace(
@@ -81,6 +118,7 @@ export function nodeMaterial({
         `uniform vec3 uRimColour;
          uniform float uRimPower;
          uniform float uRim;
+         uniform float uRimAlpha;
          void main() {`,
       )
       // Added after the lighting has resolved, so the rim is a light on top of
@@ -104,7 +142,7 @@ export function nodeMaterial({
          gl_FragColor.rgb = mix(gl_FragColor.rgb, uRimColour, fresnel * uRim);
          // Keep the silhouette from fading out with a dimmed node, or the rim
          // disappears exactly when the fill is hardest to read.
-         gl_FragColor.a = clamp(gl_FragColor.a + fresnel * uRim * 0.45, 0.0, 1.0);`,
+         gl_FragColor.a = clamp(gl_FragColor.a + fresnel * uRim * uRimAlpha, 0.0, 1.0);`,
       )
   }
 
@@ -117,52 +155,22 @@ export function setNodeRim(material: NodeMaterial, lit: boolean) {
 }
 
 /**
- * A flag, for a one-off instrument that will never be published again.
+ * A one-off instrument is drawn **hollow** — see the `hollow` option on
+ * `nodeMaterial`.
  *
- * Thomas's idea, 2026-08-10 (Q5), and the measurement backs it: 108 of the 555
- * nodes are treaties, statutes and standing instruments with no publication
- * rate. Only two of them are in the top 50 by authority and the most
- * depended-upon of the entire set has three dependents. They are not hubs —
- * they are a fifth of the graph drawn as though it were the same kind of thing
- * as a monthly index, and they pile up.
+ * This replaced a flag glyph on 2026-08-10, same day, on Thomas's second look:
+ * "I don't like how the flags stick out so much." He was right, and the reason
+ * is worth writing down rather than just deleting the code. A flag is a *loud*
+ * silhouette — it has a mast, an asymmetric banner and a preferred orientation,
+ * so at a fifth of the nodes it read as a field of markers planted in the
+ * graph, and it pulled attention in exact proportion to how little these nodes
+ * matter structurally. They are the least connected fifth of the corpus.
  *
- * **Shape carries this, not colour** (Q6). Blue was the obvious candidate and
- * is already reserved: 198°-234° is the Africa family in `palette.ts`, and that
- * file protects gaps between nine families with explicit do-not-touch warnings.
- * Hue is nearly exhausted; shape is a completely free channel. So a flag keeps
- * its own country's colour and its own country rim, and only its silhouette
- * says "instrument, not publication".
- *
- * Built as one merged geometry rather than a group, because everything
- * downstream — focus dimming, the hover raycast, the mesh registry — is typed
- * to a single Mesh, and a Group would have meant touching all of it.
- *
- * The banner has real depth (0.16r rather than a plane) for a reason that only
- * shows up in 3D: a flat quad vanishes edge-on, and in an orbiting scene a
- * fifth of the nodes disappearing at certain angles is worse than the pile-up
- * this is meant to fix.
+ * A hollow sphere is the opposite kind of distinction: it is quieter than a
+ * solid one, not louder, which matches what the thing actually is — a document
+ * that will never be published again and cannot therefore be a source of new
+ * influence. Absence of fill for absence of cadence.
  */
-export function flagGeometry(radius: number): THREE.BufferGeometry {
-  // Sized to occupy roughly the visual weight of the sphere it replaces, so
-  // authority still reads as size across both shapes.
-  const r = radius * 1.15
-
-  const pole = new THREE.CylinderGeometry(r * 0.11, r * 0.11, r * 2.9, 8)
-  pole.translate(-r * 0.55, 0, 0)
-
-  const banner = new THREE.BoxGeometry(r * 1.5, r * 0.95, r * 0.16)
-  banner.translate(r * 0.2, r * 0.92, 0)
-
-  const merged = mergeGeometries([pole, banner], false)
-  pole.dispose()
-  banner.dispose()
-
-  // mergeGeometries returns null only on attribute mismatch, which cannot
-  // happen for two of three.js's own primitives — but the type says it can.
-  return merged ?? new THREE.SphereGeometry(radius, 16, 12)
-}
-
-/** A report with no next edition. See `flagGeometry` and `releases_per_year`. */
 export function isStandingInstrument(report: { releases_per_year?: number }): boolean {
   return report.releases_per_year === undefined
 }
