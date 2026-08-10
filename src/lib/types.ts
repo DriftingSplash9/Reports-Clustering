@@ -7,9 +7,9 @@
  */
 
 /**
- * Cadence is three quantities, not one, and they live in three places.
+ * Cadence is four quantities, not one, and they live in four places.
  *
- * "How often does this update" turned out to be three different questions:
+ * "How often does this update" turned out to be four different questions:
  *
  * - **Publication rate** — how often the document appears. `releases_per_year`
  *   on the Report. The prime rate is published weekly.
@@ -20,6 +20,13 @@
  * - **Transmission rate** — how often a *dependent* actually reads it.
  *   `reference_period` on the Dependency. AISH reads the CPI once, over the 12
  *   months ending September 30, though the CPI publishes monthly.
+ * - **Phase** — when the next one actually lands. `release_schedule` on the
+ *   Report, added 2026-08-10 for the calendar view. The other three are all
+ *   rates, and a rate places nothing on a calendar: twelve a year does not say
+ *   which day, and 89 of Canada's 136 nodes are annual, which places them
+ *   nowhere at all. This is also the only one of the four that is a *forecast*
+ *   rather than a description, which is why it carries its own evidence basis
+ *   per entry — see SchedulePrecision and ScheduleKind.
  *
  * Transmission is a property of the **edge**, not of either node, which is the
  * part that took a while to see. The same CPI release reaches the Monetary
@@ -73,6 +80,157 @@ export interface ReferencePeriod {
    * auditable instead of merely confident.
    */
   stated_as: string
+}
+
+/**
+ * How precisely a future release is known.
+ *
+ * This is the field the calendar exists for. "How often" and "when" are
+ * different questions, and `releases_per_year` only ever answered the first:
+ * twelve a year says nothing about which day, and 89 of Canada's 136 nodes are
+ * annual, which on its own places them nowhere at all.
+ *
+ * The precision is per *entry*, not per report, because one report is routinely
+ * known to different depths at different distances. Statistics Canada names the
+ * exact day for the next few months and the month only after that; a
+ * departmental plan is "spring"; a five-yearly census is a year. Forcing one
+ * precision onto a whole report would mean either discarding the exact dates or
+ * inventing them, and inventing them is the failure `last_updated` is still
+ * null across all 555 nodes to avoid.
+ *
+ * Deliberately **not** an enum of cadences. `update_frequency` was exactly that
+ * and was removed in V0.6 for flattening a decennial census and a monthly index
+ * into the same word — see the cadence note at the top of this file. This
+ * enumerates how sharply a *date* is known, which is a property that genuinely
+ * has these six levels and nothing in between.
+ */
+export type SchedulePrecision =
+  | 'day'
+  | 'week'
+  | 'month'
+  | 'quarter'
+  | 'half'
+  | 'year'
+
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const SCHEDULE_PRECISIONS: readonly SchedulePrecision[] = [
+  'day',
+  'week',
+  'month',
+  'quarter',
+  'half',
+  'year',
+]
+
+/**
+ * Where a schedule's dates come from.
+ *
+ * This is the same distinction `evidence` draws for an edge, applied to time,
+ * and it exists for the same reason: the difference between a fact and a
+ * well-founded belief has to survive into the data or it is lost at the first
+ * hand-off.
+ *
+ * - `published-calendar` — the publisher operates a release calendar and these
+ *   dates are read off it. Statistics Canada, Eurostat, the ABS and the BLS all
+ *   do. The strongest case, and the one worth spending research effort on.
+ * - `stated-rule` — no calendar, but the publisher states a rule that generates
+ *   dates: "the third Thursday", "within 45 days of quarter end", "tabled with
+ *   the main estimates". The rule goes in `rule` close to verbatim and the
+ *   entries it produces are written out, because a rule engine that silently
+ *   mis-parses "the last business day" is worse than no calendar at all.
+ * - `observed-pattern` — neither, but past releases fall in a consistent window.
+ *   Every entry from this kind is `implied` and must be, which is what stops it
+ *   quietly becoming the default.
+ * - `irregular` — it recurs, and there is no pattern. `entries` is empty and
+ *   that is the honest answer. A discretionary municipal count belongs here,
+ *   not in a made-up annual window.
+ *
+ * A report with no schedule at all is the fifth case and needs no value: the
+ * field is absent, exactly as `releases_per_year` is absent on the one-off
+ * foundational instruments.
+ */
+export type ScheduleKind =
+  | 'published-calendar'
+  | 'stated-rule'
+  | 'observed-pattern'
+  | 'irregular'
+
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const SCHEDULE_KINDS: readonly ScheduleKind[] = [
+  'published-calendar',
+  'stated-rule',
+  'observed-pattern',
+  'irregular',
+]
+
+/**
+ * One expected release, as a window rather than a point.
+ *
+ * A window is the general case and a known day is the degenerate one where
+ * `from === to`, rather than the other way around. That choice is what lets the
+ * calendar render a Q3 estimate and a named Thursday side by side without a
+ * second code path, and it means the fuzziness is visible in the rendering
+ * instead of being flattened to a midpoint that looks like a fact.
+ */
+export interface ScheduledRelease {
+  /** First day the release may appear, `YYYY-MM-DD`. */
+  from: string
+  /**
+   * Last day it may appear, inclusive. Equal to `from` when the day is known.
+   * The validator rejects `to < from`, and rejects a `day`-precision entry
+   * whose ends differ, since that claims a precision it does not have.
+   */
+  to: string
+  precision: SchedulePrecision
+  /**
+   * `implied` where the date is inferred rather than published — this reuses
+   * `EvidenceKind` rather than paralleling it. Absent means documented,
+   * matching the edge convention.
+   *
+   * Every entry under `observed-pattern` is implied by construction. An entry
+   * under `published-calendar` that is implied is a real and useful thing: it
+   * is the publisher's calendar running out, and the next release being
+   * projected past its edge.
+   */
+  evidence?: EvidenceKind
+  /**
+   * What this release covers, where that differs from when it lands — "June
+   * 2026 reference month", "fiscal 2025-26". The reference period and the
+   * release date are routinely a year apart, and conflating them is how a
+   * calendar starts lying.
+   */
+  covers?: string
+  /** Overrides the schedule's `source_url` where one entry came from elsewhere. */
+  evidence_url?: string
+}
+
+/**
+ * When a report is next expected, and how sharply that is known.
+ *
+ * Absent on a report means no release is expected — the evergreen shape, which
+ * already omits `releases_per_year`. It does **not** mean unknown: a recurring
+ * report whose timing nobody has researched yet gets `irregular` with a note
+ * saying so, so that "not looked into" and "genuinely unpredictable" stay
+ * distinguishable in the corpus rather than collapsing into one missing field.
+ */
+export interface ReleaseSchedule {
+  kind: ScheduleKind
+  /**
+   * Expected releases, soonest first. Empty only when `kind` is `irregular`;
+   * the validator enforces that, because an empty schedule of any other kind is
+   * a research note wearing a data structure.
+   */
+  entries: ScheduledRelease[]
+  /**
+   * The publisher's rule, close to verbatim. Required by the validator when
+   * `kind` is `stated-rule`, and playing the part `basis` plays on an edge: it
+   * is what makes the generated dates auditable rather than merely confident.
+   */
+  rule?: string
+  /** The release calendar or statement these dates come from. */
+  source_url?: string
+  /** Free text where the structure still loses something. */
+  note?: string
 }
 
 /**
@@ -473,6 +631,15 @@ export interface Report {
   changes_per_year?: number
   /** Free text where the numbers still lose something. */
   cadence_note?: string
+  /**
+   * **Phase** — when the next releases actually land, as against how many there
+   * are in a year. See ReleaseSchedule.
+   *
+   * The third quantity the cadence note at the top of this file did not have.
+   * Rate, change rate and transmission rate were all there; none of them places
+   * a single release on a calendar, because none of them carries a date.
+   */
+  release_schedule?: ReleaseSchedule
   /**
    * The id of the release this one is published *inside*, where that is a
    * documented fact and both are legitimately nodes.

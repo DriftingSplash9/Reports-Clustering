@@ -231,6 +231,27 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // language. See `src/data/research/na-*.json`.
   NA: 'AFR',
 
+  // **Lesotho, Eswatini, Zambia, Malawi and Zimbabwe added 2026-08-10** (AF
+  // branch G.8, same session as G.7 -- closes out the docx's own Southern
+  // Africa list: South Africa, Botswana, Namibia, Lesotho, Eswatini, Zambia,
+  // Malawi, Zimbabwe, all eight now researched). Lesotho's Old Age Pensions
+  // Act, 2005 and Eswatini's CPI (June 2020 rebasing, 2016/17 HIES weights,
+  // two-stage geometric-Lowe formula) sit alongside the batch's two most
+  // explicit denials: the World Bank's own account of Eswatini's Old Age
+  // Grant ("not indexed to price inflation") and Malawi's own Social Cash
+  // Transfer Strategic Plan ("no systematic arrangement for adjusting the
+  // level of transfers for inflation... adjusted only three times" in 14
+  // years). Zambia's CPI and Social Cash Transfer factsheet, and Zimbabwe's
+  // CPI (notable for publishing three parallel indices -- ZiG, USD and
+  // Blended -- since the 2024 currency reform) round out the batch. See
+  // `src/data/research/ls-*.json`, `sz-*.json`, `zm-*.json`, `mw-*.json`,
+  // `zw-*.json`.
+  LS: 'AFR',
+  SZ: 'AFR',
+  ZM: 'AFR',
+  MW: 'AFR',
+  ZW: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

@@ -85,6 +85,11 @@ import ngCpiPensionSafetyNet from './research/ng-cpi-pension-safety-net.json'
 import tzCpiSocialProtection from './research/tz-cpi-social-protection.json'
 import bwCpiSocialProtection from './research/bw-cpi-social-protection.json'
 import naCpiSocialProtection from './research/na-cpi-social-protection.json'
+import lsCpiSocialProtection from './research/ls-cpi-social-protection.json'
+import szCpiSocialProtection from './research/sz-cpi-social-protection.json'
+import zmCpiSocialProtection from './research/zm-cpi-social-protection.json'
+import mwCpiSocialProtection from './research/mw-cpi-social-protection.json'
+import zwCpiSocialProtection from './research/zw-cpi-social-protection.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -203,6 +208,11 @@ const slices: ResearchSlice[] = [
   tzCpiSocialProtection as unknown as ResearchSlice,
   bwCpiSocialProtection as unknown as ResearchSlice,
   naCpiSocialProtection as unknown as ResearchSlice,
+  lsCpiSocialProtection as unknown as ResearchSlice,
+  szCpiSocialProtection as unknown as ResearchSlice,
+  zmCpiSocialProtection as unknown as ResearchSlice,
+  mwCpiSocialProtection as unknown as ResearchSlice,
+  zwCpiSocialProtection as unknown as ResearchSlice,
 ]
 
 function assemble() {

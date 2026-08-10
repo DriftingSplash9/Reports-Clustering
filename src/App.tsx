@@ -18,6 +18,8 @@ import SpaceFrame from './components/SpaceFrame'
 import Environment from './components/Environment'
 import ViewControls from './components/ViewControls'
 import SearchPanel from './components/SearchPanel'
+import CalendarPanel from './components/CalendarPanel'
+import { describeWindow, nextRelease } from './lib/schedule'
 import CameraZoom from './components/CameraZoom'
 import { PanelShell } from './components/PanelShell'
 import { Flag } from './components/Flag'
@@ -414,6 +416,18 @@ export default function App() {
 
       <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
 
+      {/*
+        Bottom edge, and collapsed by default. It answers a question nobody has
+        while first looking at the graph — the shape comes first and the timing
+        second — so it costs one click to open and nothing at all to ignore.
+      */}
+      <CalendarPanel
+        graph={graph}
+        dependencies={dependencies}
+        within={predicate}
+        onChoose={handleChoose}
+      />
+
       <PanelShell side="left" label="Reports" width={320}>
         <Hud
           nodeCount={graph.nodes.length}
@@ -490,6 +504,8 @@ function Detail({
   // reads 0.46 where the merged programme reads 0.84. A reader who cannot see
   // that two spheres are one masthead reads the lower number as the programme's
   // weight and is wrong by nearly half.
+  const next = nextRelease(report)
+
   const parent = report.part_of ? graph.byId.get(report.part_of) : undefined
   const parts = contains(graph, report.id)
   const rolledUp = parts.length > 0 ? rolledUpAuthority(graph, report.id) : null
@@ -515,6 +531,20 @@ function Detail({
         {report.publisher} · {report.region} · published {cadence}
         {changes && <span style={{ color: '#c2a86e' }}> · changes {changes}</span>}
       </div>
+      {/*
+        Phase, where it is known. A rate says how often and never says when, and
+        "next 17 August" is the thing anyone reading a cadence actually wanted.
+        Absent on most nodes for now, and silent when absent rather than saying
+        "unknown" on four hundred cards.
+      */}
+      {next && (
+        <div style={{ fontSize: 11, color: '#8fa4c4', marginTop: 3 }}>
+          next {describeWindow(next.from, next.to, next.precision)}
+          {next.evidence === 'implied' && (
+            <span style={{ color: '#8a7ab5' }}> · inferred, not published</span>
+          )}
+        </div>
+      )}
       {parent && (
         <div style={{ fontSize: 10.5, color: '#7d8ea8', marginTop: 5, lineHeight: 1.5 }}>
           A series published inside{' '}

@@ -19,6 +19,8 @@ import {
   EVIDENCE_KINDS,
   JURISDICTION_LEVELS,
   RELATIONSHIP_TYPES,
+  SCHEDULE_KINDS,
+  SCHEDULE_PRECISIONS,
   SOURCE_KINDS,
   TERMINAL_REASONS,
 } from './types'
@@ -27,6 +29,9 @@ import {
 // the only honest source for it; asserting it against a second list here would
 // just create two lists to keep in sync.
 import { isKnownCountry } from './palette'
+// Date realness lives with the calendar code that also needs it, rather than
+// being restated here — same argument as the value lists above.
+import { isRealDate } from './schedule'
 
 /**
  * Edge weights by relationship type.
@@ -243,6 +248,124 @@ export function validate(
         severity: 'error',
         message: `${r.id}: changes_per_year (${r.changes_per_year}) exceeds releases_per_year (${r.releases_per_year})`,
       })
+    }
+    // `release_schedule`, added 2026-08-10 with the calendar view. Two more
+    // closed unions cast rather than parsed, so the same treatment as the five
+    // above — and the dates need checking too, because unlike every other field
+    // in this file these are *rendered as claims about the future*. A malformed
+    // date does not fail loudly here; it falls out of the calendar silently and
+    // reads as "nothing is due", which is the one wrong answer a calendar can
+    // give that nobody notices.
+    const sched = r.release_schedule
+    if (sched) {
+      if (!SCHEDULE_KINDS.includes(sched.kind)) {
+        issues.push({
+          severity: 'error',
+          message:
+            `${r.id}: release_schedule.kind "${sched.kind}" is not a ` +
+            `ScheduleKind — one of ${SCHEDULE_KINDS.join(', ')}`,
+        })
+      }
+      // An empty schedule of any other kind is a research note wearing a data
+      // structure — it renders as nothing and asserts nothing, while occupying
+      // the field that would otherwise show the report has not been looked at.
+      if (sched.kind !== 'irregular' && sched.entries.length === 0) {
+        issues.push({
+          severity: 'error',
+          message: `${r.id}: release_schedule is "${sched.kind}" but carries no entries — use "irregular" with a note if the timing is genuinely unknown`,
+        })
+      }
+      if (sched.kind === 'irregular' && sched.entries.length > 0) {
+        issues.push({
+          severity: 'error',
+          message: `${r.id}: release_schedule is "irregular" but carries ${sched.entries.length} entr(ies) — if dates are known, it is not irregular`,
+        })
+      }
+      // The rule is what makes generated dates auditable. Without it the entries
+      // are indistinguishable from `observed-pattern`, but claim to be stronger.
+      if (sched.kind === 'stated-rule' && !sched.rule) {
+        issues.push({
+          severity: 'error',
+          message: `${r.id}: release_schedule is "stated-rule" but states no rule`,
+        })
+      }
+      if (
+        sched.kind === 'published-calendar' &&
+        !sched.source_url &&
+        !sched.entries.every((e) => e.evidence_url)
+      ) {
+        issues.push({
+          severity: 'error',
+          message: `${r.id}: release_schedule is "published-calendar" but cites no calendar — set source_url, or an evidence_url on every entry`,
+        })
+      }
+      for (const e of sched.entries) {
+        if (!SCHEDULE_PRECISIONS.includes(e.precision)) {
+          issues.push({
+            severity: 'error',
+            message:
+              `${r.id}: schedule entry precision "${e.precision}" is not a ` +
+              `SchedulePrecision — one of ${SCHEDULE_PRECISIONS.join(', ')}`,
+          })
+        }
+        // `YYYY-MM-DD` and nothing else. Date.parse accepts a great deal more
+        // than that and normalises some of it wrong across time zones, so the
+        // shape is checked by pattern first and only then for realness — a
+        // '2026-02-31' passes the pattern and has to be caught separately.
+        for (const [field, value] of [
+          ['from', e.from],
+          ['to', e.to],
+        ] as const) {
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+            issues.push({
+              severity: 'error',
+              message: `${r.id}: schedule entry ${field} "${value}" is not YYYY-MM-DD`,
+            })
+          } else if (!isRealDate(value)) {
+            issues.push({
+              severity: 'error',
+              message: `${r.id}: schedule entry ${field} "${value}" is not a real date`,
+            })
+          }
+        }
+        if (e.from > e.to) {
+          issues.push({
+            severity: 'error',
+            message: `${r.id}: schedule entry ends before it starts (${e.from} → ${e.to})`,
+          })
+        }
+        // A day-precision window is a contradiction: it claims the day is known
+        // and then names several. This is the guard that keeps the rendering
+        // honest, since the calendar draws precision as width.
+        if (e.precision === 'day' && e.from !== e.to) {
+          issues.push({
+            severity: 'error',
+            message: `${r.id}: schedule entry is "day" precision but spans ${e.from} → ${e.to}`,
+          })
+        }
+        // Inference cannot be laundered into fact by the kind above it. An
+        // `observed-pattern` schedule is inferred by definition, so an entry
+        // under one that does not say so is mislabelled.
+        if (sched.kind === 'observed-pattern' && e.evidence !== 'implied') {
+          issues.push({
+            severity: 'error',
+            message: `${r.id}: schedule entry under "observed-pattern" must be marked implied — the pattern is the inference`,
+          })
+        }
+      }
+      // Soonest first, so the calendar and the hover card can take the head of
+      // the list as "next" without re-sorting, and so a hand-edited slice that
+      // appends a date to the end is caught here rather than rendering as a
+      // next release that has already happened.
+      for (let i = 1; i < sched.entries.length; i++) {
+        if (sched.entries[i].from < sched.entries[i - 1].from) {
+          issues.push({
+            severity: 'error',
+            message: `${r.id}: schedule entries are not in date order (${sched.entries[i - 1].from} then ${sched.entries[i].from})`,
+          })
+          break
+        }
+      }
     }
   }
 

@@ -1,0 +1,61 @@
+{
+  "_slice": "sz-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Eswatini is part of the AF branch's Southern Africa expansion (G.7-G.8). No raw docx entries exist for this country; every document below was located and verified from scratch this session via WebSearch + WebFetch, no Grok round used. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "The cleanest, most explicit 'denied' finding in this batch, and arguably in the branch so far: the World Bank's 2021 discussion paper does not merely fail to mention CPI-indexation, it states outright that the Old Age Grant is not indexed. A genuine unresolved discrepancy, reported rather than adjudicated: the World Bank paper (June 2021, describing 2016/17-2020 data) gives the Old Age Grant's nominal history as rising from E80 (2005) to E500 (2020); the Ministry of Economic Planning & Development's own current Social Welfare Department webpage (gov.sz, fetched this session) states the amount as E240.00 per month. E240 is lower than the E500 the World Bank paper says was already reached by 2020, which reads as though the gov.sz page is stale content from an earlier period frozen in place (the same shape already seen with Botswana's gov.bw page, which similarly displayed a superseded lower figure -- G.7) rather than a real benefit cut, but that is inference, not confirmed. Both figures are quoted as found; neither is adjusted to match the other.",
+  "_open_questions": [
+    {
+      "id": "sz-oag-amount-discrepancy",
+      "question": "Which Old Age Grant figure is actually current as of 2026 -- the gov.sz Social Welfare Department page's E240/month, or something closer to or above the World Bank paper's E500 (already reached by 2020)? Not resolved this session; a 2025/26-dated primary source (a budget speech or Ministry circular) would settle it."
+    },
+    {
+      "id": "sz-oag-legal-instrument-unnamed",
+      "question": "The World Bank paper states plainly that 'none of the government's existing social assistance programs is covered by legal provisions' -- meaning there may be no dedicated Old Age Grant Act to find at all, only administrative/budgetary authority. Not independently confirmed by searching for a specific Act this session; worth one more targeted search before concluding no such Act exists."
+    }
+  ],
+  "reports": [
+    {
+      "id": "sz-cso-cpi",
+      "title": "Consumer Price Index (CPI) Report",
+      "publisher": "Central Statistical Office, Ministry of Economic Planning & Development, Kingdom of Eswatini",
+      "country": "SZ",
+      "jurisdiction_level": "federal",
+      "region": "Eswatini",
+      "description": "Eswatini's official monthly Consumer Price Index release. VERIFIED DIRECTLY this session via the February 2026 report (released 17 March 2026): base period 'June 2020 = 100'; weights 'based on data from the 2016/17 Household Income and Expenditure Survey (HIES)'; classification 'according to the Classification of Individual Consumption according to purpose (COICOP)'; a two-stage formula -- 'the lower level or elementary index... is calculated as a geometric mean of price changes' and 'the upper-level index is a geometric Lowe index -- the weighted geometric average of elementary indices'. Among the branch's most completely documented CPI methodologies so far, comparable in depth to Botswana's and Tanzania's.",
+      "releases_per_year": 12,
+      "last_updated": "2026-02",
+      "url": "https://www.gov.sz/images/planningministry/ESWATINI%20INFLATION%20REPORT_FEBRUARY%202026_20260318_153145.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "sz-worldbank-social-assistance-2021",
+      "title": "Social Assistance Programs and Household Welfare in Eswatini",
+      "publisher": "World Bank (Social Protection & Jobs Discussion Paper No. 2106)",
+      "country": "SZ",
+      "jurisdiction_level": "federal",
+      "region": "Eswatini",
+      "description": "World Bank discussion paper reviewing Eswatini's social assistance system, June 2021. VERIFIED DIRECTLY this session. On legal basis: 'None of the government's existing social assistance programs is covered by legal provisions.' On the Old Age Grant specifically, the paper states the benefit was 'E240 per month' during the 2016/17 reference period, rising nominally to E500 by 2020, and is explicit about the mechanism: 'While the grants are not indexed to price inflation, benefit amounts have been raised at irregular intervals since the program's inception in 2005.' This is a direct, affirmative statement that no indexation exists -- not merely a document silent on the question.",
+      "last_updated": "2021-06",
+      "url": "https://documents1.worldbank.org/curated/en/102961622793058313/pdf/Social-Assistance-Programs-and-Household-Welfare-in-Eswatini.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "sz-cso-cpi",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "February 2026 CPI Report: 'The CPI is classified according to the Classification of Individual Consumption according to purpose (COICOP).'",
+      "evidence_url": "https://www.gov.sz/images/planningministry/ESWATINI%20INFLATION%20REPORT_FEBRUARY%202026_20260318_153145.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "sz-worldbank-social-assistance-2021 -> sz-cso-cpi",
+      "source": "sz-worldbank-social-assistance-2021",
+      "target": "sz-cso-cpi",
+      "reason": "denied",
+      "why": "The paper states outright: 'While the grants are not indexed to price inflation, benefit amounts have been raised at irregular intervals since the program's inception in 2005.' An explicit denial, not an inference from silence -- the cleanest documented non-dependency of this batch."
+    }
+  ]
+}

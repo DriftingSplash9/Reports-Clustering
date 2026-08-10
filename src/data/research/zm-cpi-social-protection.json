@@ -1,0 +1,53 @@
+{
+  "_slice": "zm-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Zambia is part of the AF branch's Southern Africa expansion (G.7-G.8). No raw docx entries exist for this country; every document below was located and verified from scratch this session via WebSearch + WebFetch, no Grok round used. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "Zambia's Social Cash Transfer amounts (K200/month standard, K400/month for a household with a severely disabled member) are fixed nominal figures documented in the Ministry's own factsheet with no adjustment mechanism named anywhere. A January 2024 news report (Lusaka Times) records beneficiaries in Mambwe district publicly requesting higher amounts because 'the amount each beneficiary household is receiving is no longer adequate in face of the prevailing social-economic challenges' -- corroborating context for the fixed-amount finding, not minted as its own node (a beneficiary complaint reported by a newspaper is not a document another document names as an input to itself).",
+  "_open_questions": [
+    {
+      "id": "zm-cpi-coicop-formula-unconfirmed",
+      "question": "The Monthly Bulletin (Vol. 278, May 2026) names main expenditure groups (Food and Non-alcoholic Beverages, Housing/Water/Electricity, Transport, Communication, Education, etc.) that read as COICOP-shaped, but the bulletin does not explicitly cite COICOP by name or version, nor state an index formula or the weights survey's name/year. No `methodology_depends_on` edge to `un-coicop-2018` was minted this session because no verbatim quote actually names COICOP -- worth checking whether ZamStats publishes a separate technical/concepts report."
+    },
+    {
+      "id": "zm-sct-legal-instrument-not-found",
+      "question": "No dedicated Act or statutory instrument for the Social Cash Transfer Programme was located this session -- only a Ministry of Community Development and Social Services factsheet. Whether the programme runs on policy/administrative authority alone (as Eswatini's Old Age Grant does, per sz-worldbank-social-assistance-2021) or has an unfound legal basis was not checked further."
+    }
+  ],
+  "reports": [
+    {
+      "id": "zm-zamstats-cpi",
+      "title": "The Monthly (Consumer Price Index bulletin)",
+      "publisher": "Zambia Statistics Agency (ZamStats)",
+      "country": "ZM",
+      "jurisdiction_level": "federal",
+      "region": "Zambia",
+      "description": "Zambia's official monthly Consumer Price Index bulletin, branded 'The Monthly \"Quality Statistics for Development\"'. VERIFIED DIRECTLY this session via Volume 278 (May 2026): base period '2009 = 100'; released 'on the last Thursday of each month'; main expenditure groups named include Food and Non-alcoholic Beverages, Housing/Water/Electricity, Transport, Communication and Education. Thinner methodology documentation than Botswana's, Eswatini's or Lesotho's equivalents: the bulletin does not state the weights survey's name or year, does not explicitly name COICOP, and does not state an index formula (see _open_questions) -- the same kind of documentation gap already logged for Namibia (G.7) and, this session, Malawi and Zimbabwe.",
+      "releases_per_year": 12,
+      "last_updated": "2026-05",
+      "url": "https://www.zamstats.gov.zm/wp-content/uploads/2026/05/Vol-278-of-2026-The-Monthly-May.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "zm-social-cash-transfer-factsheet",
+      "title": "Social Cash Transfer Factsheet",
+      "publisher": "Republic of Zambia, Ministry of Community Development and Social Services",
+      "country": "ZM",
+      "jurisdiction_level": "federal",
+      "region": "Zambia",
+      "description": "The Zambian government's own factsheet on its Social Cash Transfer programme. VERIFIED DIRECTLY this session. Transfer amounts are stated as fixed nominal figures: 'Beneficiary households are entitled to 200 Kwacha per month which they receive every two months as a sum of 400 Kwacha,' and 'Beneficiary households with a member with severe disability receive double the amount, i.e., 400 Kwacha per month and 800 Kwacha every two months.' No statement anywhere in the factsheet about indexation to inflation, the Consumer Price Index, or any periodic review procedure -- the amounts are presented as static figures with no stated mechanism for change.",
+      "last_updated": null,
+      "url": "https://www.unicef.org/zambia/media/2571/file/Zambia-SCT-factsheet-2022.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "zm-social-cash-transfer-factsheet -> zm-zamstats-cpi",
+      "source": "zm-social-cash-transfer-factsheet",
+      "target": "zm-zamstats-cpi",
+      "reason": "no-document",
+      "why": "The factsheet states transfer amounts as fixed Kwacha figures with no adjustment mechanism of any kind named -- no CPI reference, no periodic-review clause, nothing. A January 2024 news report (Lusaka Times) shows beneficiaries themselves requesting increases on adequacy grounds, with no government response describing an existing formula."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "_slice": "mw-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Malawi is part of the AF branch's Southern Africa expansion (G.7-G.8). No raw docx entries exist for this country; every document below was located and verified from scratch this session via WebSearch + WebFetch, no Grok round used. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "The Social Cash Transfer Programme Strategic Plan is the most explicit, most self-critical 'denied' finding in this whole batch, more direct even than Eswatini's: the Government of Malawi's own strategic plan states in its own words that 'there is no systematic arrangement for adjusting the level of transfers for inflation', that 'the adjustment of transfer levels has been arbitrary and irregular: between 2006 and 2020 transfer levels were adjusted only three times', and commits to fixing it going forward -- 'A mechanism for regular adjustment of transfers will be instituted to account for inflation.' The same recommendation-reveals-absence shape as Botswana's 2020 Recovery Plan (G.7) and Tanzania's National Social Protection Policy 2023 (G.6), but stated even more bluntly, with a specific count of how rarely adjustment has actually happened.",
+  "_open_questions": [
+    {
+      "id": "mw-cpi-methodology-largely-unconfirmed",
+      "question": "This session confirmed only the CPI's base period ('Dec 2021=100', from an NSO news release) and monthly cadence. Weights survey, COICOP classification and index formula were not located after several attempts (NSO's own consumer-price-index page returned no methodology text on two different URLs; a direct Stats Flash PDF was not successfully located). Worth a dedicated retry, possibly via cms.nsomalawi.mw's document API (found in search but not explored) rather than the public-facing nsomalawi.mw pages tried this session."
+    },
+    {
+      "id": "mw-sctp-implementation-since-2022-not-checked",
+      "question": "The Strategic Plan (2022) commits to instituting a regular inflation-adjustment mechanism as a priority action. Whether that mechanism has actually been implemented in the four years since (2022-2026) was not checked this session -- a natural follow-up given how explicit the Plan's own admission of past failure is."
+    }
+  ],
+  "reports": [
+    {
+      "id": "mw-nso-cpi",
+      "title": "Consumer Price Index (Stats Flash)",
+      "publisher": "National Statistical Office of Malawi (NSO)",
+      "country": "MW",
+      "jurisdiction_level": "federal",
+      "region": "Malawi",
+      "description": "Malawi's official monthly Consumer Price Index release, published as a 'Stats Flash' bulletin. VERIFIED DIRECTLY this session via the NSO's October 2024 CPI news release: base period stated in-table as 'Overall CPI (Dec 2021=100)'. Monthly cadence confirmed (a Stats Flash is issued for each reference month). Weights survey, COICOP classification and index formula were not located this session despite multiple attempts -- the thinnest-documented CPI methodology in this Southern Africa batch (see _open_questions); NSO's public-facing CPI page returned no methodology text on two separate URLs tried.",
+      "releases_per_year": 12,
+      "last_updated": "2024-10",
+      "url": "https://www.nsomalawi.mw/news/october-2024-consumer-price-index",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "mw-sctp-strategic-plan-2022-2027",
+      "title": "Malawi Social Cash Transfer Programme Strategic Plan 2022-2027",
+      "publisher": "Government of Malawi, Ministry of Gender, Community Development and Social Welfare",
+      "country": "MW",
+      "jurisdiction_level": "federal",
+      "region": "Malawi",
+      "description": "The Government of Malawi's own strategic plan for its Social Cash Transfer Programme (SCTP), 2022. VERIFIED DIRECTLY this session. Current transfer levels are fixed nominal Kwacha figures by household size (MK4,000 for one member up to MK8,000 for four, plus MK1,000/MK2,000 primary/secondary school bonuses, averaging MK9,000/household). On adjustment, the Plan is explicit and self-critical: 'Despite a recent ad hoc increase, there is no systematic arrangement for adjusting the level of transfers for inflation,' and historically, 'the adjustment of transfer levels has been arbitrary and irregular: between 2006 and 2020 transfer levels were adjusted only three times.' The Plan commits to a fix: 'A mechanism for regular adjustment of transfers will be instituted to account for inflation,' naming this a 2022 priority action.",
+      "last_updated": "2022",
+      "url": "https://www.unicef.org/malawi/media/8346/file/Malawi%20Social%20Cash%20Transfer%20Programme%20Strategic%20Plan%202022%20-%202027%20.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "mw-sctp-strategic-plan-2022-2027 -> mw-nso-cpi",
+      "source": "mw-sctp-strategic-plan-2022-2027",
+      "target": "mw-nso-cpi",
+      "reason": "denied",
+      "why": "The Plan states outright: 'there is no systematic arrangement for adjusting the level of transfers for inflation' and that adjustments have happened only three times between 2006 and 2020. An explicit, self-critical denial from the implementing government itself, not an inference from silence."
+    }
+  ]
+}

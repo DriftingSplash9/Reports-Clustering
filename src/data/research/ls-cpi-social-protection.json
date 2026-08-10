@@ -1,0 +1,61 @@
+{
+  "_slice": "ls-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Lesotho is part of the AF branch's Southern Africa expansion (G.7-G.8), continuing past `country afrikans.docx`'s original seven countries. No raw docx entries exist for this country; every document below was located and verified from scratch this session via WebSearch + WebFetch, no Grok round used. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "The Old Age Pensions Act, 2005 was verified this session only via NATLEX's official abstract of the Act, not the Act's own full gazetted text -- flagged explicitly in _open_questions rather than claimed as a full-text read. The abstract itself states no adjustment mechanism (silence, not denial), consistent with the branch's dominant pattern. Corroborating context, not minted as a node (following the established precedent of not minting single news articles that merely report on a document/decision): the Lesotho News Agency reported the pension rising from M950 to M1,000, announced by the Minister of Finance and Development Planning 'in the 2026/27 budget', with the article's own framing citing 'economic pressures from global trade shocks, rising tariffs on exports, and falling diamond and textile prices' rather than inflation or cost-of-living as the reason -- budget/fiscal-pressure language, not CPI language, the same shape already documented for Botswana's P830-to-P1400 increase (G.7).",
+  "_open_questions": [
+    {
+      "id": "ls-old-age-pensions-act-full-text-not-read",
+      "question": "This session read NATLEX's official abstract of the Old Age Pensions Act, 2005 (Act No. 3 of 2005), not the Act's own full gazetted text. The abstract states no adjustment mechanism, but a full read (via lesotholii.org, which 404'd this session, or the Government Gazette Extraordinary of 16 March 2005 directly) might surface a provision the abstract omits."
+    },
+    {
+      "id": "ls-cpi-formula-unconfirmed",
+      "question": "The January 2026 CPI report (Report No. 3:2026) states the annual inflation rate calculation but does not name a specific index-construction formula (Laspeyres, Jevons, geometric mean, Lowe, etc.) the way Botswana's, Eswatini's and Tanzania's methodology documents do. Whether the Bureau of Statistics publishes a separate technical/concepts report was not checked."
+    }
+  ],
+  "reports": [
+    {
+      "id": "ls-bos-cpi",
+      "title": "Consumer Price Index",
+      "publisher": "Bureau of Statistics, Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Lesotho's official monthly Consumer Price Index release. VERIFIED DIRECTLY this session via Report No. 3:2026 (January 2026 edition): base period 'rebased using the price reference period as the yearly average, so that 2022 = 100'; weights reflect 'expenditure and shopping patterns from the 2017/2018 Household Budget Survey'; classification uses 'COICOP (Classification of Individual Consumption by Purpose)... organized into 12 divisions, with further breakdowns into groups and classes'; scope covers 'all the expenditures on goods and services in Lesotho by private households' using 'cash prices typically paid by the reference population'. The report states the annual inflation rate as 'the change in the CPI for all items of the relevant month of the current year compared with the CPI for all items of the same month in the previous year expressed as a percentage', but does not name a specific elementary-aggregate index formula (see _open_questions).",
+      "releases_per_year": 12,
+      "last_updated": "2026-01",
+      "url": "http://www.bos.gov.ls/New%20Folder/Copy%20of%20Economics/CPI_January_2026.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ls-old-age-pensions-act-2005",
+      "title": "Old Age Pensions Act, 2005 (Act No. 3 of 2005)",
+      "publisher": "Government of the Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Lesotho's foundational statute for its universal old-age pension, VERIFIED via NATLEX's official abstract this session (the Act's own full gazetted text was not read directly -- see _open_questions). Creates 'a tax-funded, non-contributory pension scheme' for citizens aged 70 or older not already receiving a pension or social grant from the Consolidated Fund; benefits are paid 'from the Consolidated Fund' monthly. The abstract specifies eligibility and payment mechanisms and a non-assignability provision ('Pensions cannot be assigned, transferred or hypothecated') but contains no statement about how the pension amount is calculated, set, or adjusted -- silence rather than a documented denial. Entered into force 1 November 2004; published in the Government Gazette Extraordinary, 16 March 2005.",
+      "last_updated": "2005-03-16",
+      "url": "https://natlex.ilo.org/dyn/natlex2/r/natlex/fe/details?p3_isn=73256",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ls-bos-cpi",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CPI Report No. 3:2026: 'The index employs the COICOP (Classification of Individual Consumption by Purpose) system, organized into 12 divisions, with further breakdowns into groups and classes.'",
+      "evidence_url": "http://www.bos.gov.ls/New%20Folder/Copy%20of%20Economics/CPI_January_2026.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ls-old-age-pensions-act-2005 -> ls-bos-cpi",
+      "source": "ls-old-age-pensions-act-2005",
+      "target": "ls-bos-cpi",
+      "reason": "no-document",
+      "why": "NATLEX's abstract of the Act specifies eligibility and payment mechanics but names no amount-setting or adjustment formula of any kind -- silence, not an explicit denial. Consistent with the discretionary pattern (M950-to-M1,000 increase this year framed in budget/fiscal-pressure language, not CPI), but the Act itself is simply quiet on the mechanism rather than affirmatively ruling one out."
+    }
+  ]
+}

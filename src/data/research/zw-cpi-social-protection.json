@@ -1,0 +1,37 @@
+{
+  "_slice": "zw-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Zimbabwe is part of the AF branch's Southern Africa expansion (G.7-G.8), and closes out the docx's original Southern Africa list (South Africa, Botswana, Namibia, Lesotho, Eswatini, Zambia, Malawi, Zimbabwe -- all eight now researched as of this session). No raw docx entries exist for this country; every document below was located and verified from scratch this session via WebSearch + WebFetch, no Grok round used. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "Zimbabwe's CPI methodology proved the hardest to document in this batch: ZIMSTAT's own CPI PDF releases failed to fetch twice (proxy/gateway errors, not a content-access refusal), a UNECE conference paper on the same topic returned a 403, and an IMF technical assistance report on national accounts mentioned the CPI only in passing. What is documented instead is a genuinely distinctive structural fact unique to Zimbabwe in this corpus so far: following the April 2024 introduction of the Zimbabwe Gold (ZiG) currency, ZIMSTAT publishes three parallel CPI series -- a ZiG index, a US dollar index, and a 'Blended Index' -- rather than the single series every other AF country publishes. On the social-protection side, no primary NSSA document was fetched this session (nssa.org.zw itself was not reached); the evidence is two news reports describing NSSA's 2026 pension increases as explicitly discretionary and ad hoc -- 'we increased by 100 percent in April, with further increases expected in July and October' toward a stated target of 'US$60 equivalent' monthly payouts, described as 'interim relief' while NSSA 'is assessing its capacity to implement a long-term pension adjustment.' Neither article is minted as a node (secondary reporting on an announcement, not a document another document names as an input), but the language -- interim relief, capacity assessment for a future long-term mechanism -- reads as the same recommendation-reveals-absence shape found explicitly in Botswana's, Malawi's and Tanzania's own primary documents, now corroborated by press coverage rather than a government document directly.",
+  "_open_questions": [
+    {
+      "id": "zw-cpi-methodology-not-located",
+      "question": "No weights survey, base year, COICOP classification or index formula was confirmed for Zimbabwe's CPI this session. ZIMSTAT's own PDF releases (zimstat.co.zw/wp-content/uploads/...) failed with proxy/gateway errors on two separate URLs and dates; a UNECE conference paper on Zimbabwe's cost-of-living indices (presented Geneva, April 2021) returned a 403. Worth a retry from a session whose tooling can reach zimstat.co.zw's PDF hosting, or via an alternative mirror (IMF Article IV consultation statistical annexes sometimes reproduce national CPI methodology in full)."
+    },
+    {
+      "id": "zw-nssa-act-not-fetched",
+      "question": "The National Social Security Authority's own founding legislation (the NSSA Act) was not located or fetched this session -- only news coverage of a 2026 discretionary pension increase. nssa.org.zw itself was found in search but not fetched. This would be the natural primary source for whether any adjustment mechanism is written into NSSA's statute, the same kind of check already done for Tanzania's PSSSF Act and Namibia's National Pensions Act."
+    },
+    {
+      "id": "zw-currency-context-unresolved",
+      "question": "Zimbabwe's multi-currency CPI structure (ZiG/USD/Blended) is itself a documented methodological fact but its implications for benefit-setting -- e.g. whether NSSA pensions are set/paid in ZiG, USD, or a blend, and against which of the three CPI series any future 'long-term pension adjustment' mechanism might be benchmarked -- was not explored this session."
+    }
+  ],
+  "reports": [
+    {
+      "id": "zw-zimstat-cpi",
+      "title": "Consumer Price Index",
+      "publisher": "Zimbabwe National Statistics Agency (ZIMSTAT)",
+      "country": "ZW",
+      "jurisdiction_level": "federal",
+      "region": "Zimbabwe",
+      "description": "Zimbabwe's official monthly Consumer Price Index release. VERIFIED DIRECTLY this session only as to structure, not full methodology: ZIMSTAT publishes 'three price indices' following the April 2024 introduction of the Zimbabwe Gold (ZiG) currency -- 'the ZiG index, US dollars Index and the Blended Index' -- with the ZiG series' own index reference period stated as 'April 2024' and month-on-month/year-on-year ZiG rates beginning May 2024 and April 2025 respectively, following 'international recommended methods' (unspecified beyond that phrase). ZIMSTAT's site lists monthly releases in both ZWG and USD through at least May 2026 and a 'July 2026 Price Statistics Release' covering 'inflation, poverty lines, producer prices, and construction-related price indices'. No weights survey, COICOP classification or elementary/aggregate index formula was confirmed this session -- see _open_questions; this is the thinnest-documented CPI methodology in the AF branch so far.",
+      "releases_per_year": 12,
+      "last_updated": "2026-05",
+      "url": "https://www.zimstat.co.zw/consumer-price-index/",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": []
+}
