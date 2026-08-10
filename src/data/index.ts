@@ -1,6 +1,7 @@
 import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
 import { reports as seedReports } from './reports'
 import { dependencies as seedDependencies } from './dependencies'
+import usSubnational from './research/us-subnational.json'
 import albertaMunicipal from './research/alberta-municipal.json'
 import populationAndEducation from './research/population-and-education.json'
 import internationalStandards from './research/international-standards.json'
@@ -134,6 +135,7 @@ interface ResearchSlice {
 }
 
 const slices: ResearchSlice[] = [
+  usSubnational as unknown as ResearchSlice,
   albertaMunicipal as unknown as ResearchSlice,
   populationAndEducation as unknown as ResearchSlice,
   internationalStandards as unknown as ResearchSlice,

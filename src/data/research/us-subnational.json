@@ -1,0 +1,1001 @@
+{
+  "_slice": "United States subnational — the state, county and municipal layer, with California and Los Angeles as the worked vertical",
+  "_researched": "2026-08-10",
+  "_note": "Built to correct the largest single distortion in the corpus. Before this slice the United States was 33 reports, of which 28 were federal and 5 institutional — zero state, zero county, zero municipal — against Canada's 41 provincial and 15 municipal. The graph was asserting that Canadian federalism has structure and American federalism does not, which is the opposite of true. The shape follows the Canadian branch deliberately: a federal statistical frame, one worked state, one worked county and city inside it. California and Los Angeles were chosen for documentation quality rather than size — the Board of Equalization writes to all 58 county assessors every December naming the inflation factor, which is as clean a documented dependency as this corpus contains. Two findings worth carrying forward. First, the Medicaid matching rate — the largest federal-to-state transfer mechanism in the country — is computed from BEA state per capita personal income over a Census population denominator, so two statistical series decide how federal health spending divides between fifty states. Second, California's constitutional spending limit on every city and county is a ratio whose numerator is a federal series published in the Survey of Current Business; a national statistical agency sets the growth rate of local government spending authority in a state that did not ask it to.",
+  "reports": [
+    {
+      "id": "uscensus-census-of-governments",
+      "title": "Census of Governments",
+      "publisher": "U.S. Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The complete enumeration of every state and local government in the United States, conducted every five years in years ending in 2 and 7 under Title 13 U.S.C. §161. Three components — Organization (the count and classification of counties, municipalities, townships, special districts and school districts), Public Employment and Payroll, and Public Finance. In census years the entire universe of roughly 90,000 local governments plus the 50 states is canvassed; in the four intervening years the Bureau collects from a sample instead, which is why the census functions as the benchmark for the annual series.",
+      "releases_per_year": 0.2,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Conducted every five years, in years ending in 2 and 7, under Title 13 U.S.C. §161.",
+        "source_url": "https://www.census.gov/programs-surveys/cog/about.html",
+        "note": "A year-precision entry, which is the honest width: the cycle year is fixed by statute and the month within it is not.",
+        "entries": [
+          {
+            "from": "2027-01-01",
+            "to": "2027-12-31",
+            "precision": "year",
+            "evidence": "implied",
+            "covers": "2027 Census of Governments cycle"
+          }
+        ]
+      },
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/cog.html",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "labour"
+      ]
+    },
+    {
+      "id": "uscensus-government-units-survey",
+      "title": "Government Units Survey (Census of Governments: Organization component)",
+      "publisher": "U.S. Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The organization component of the Census of Governments, described by the Bureau as \"the only source of periodic information that identifies and describes all units of government in the U.S.\" It collects location, name, legal status and organisational structure for every government, and maintains the Governments Master Address File — the frame from which every other Census public-sector survey draws its sample.",
+      "releases_per_year": 0.2,
+      "part_of": "uscensus-census-of-governments",
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/gus.html",
+      "domains": [
+        "municipal-finance",
+        "population"
+      ]
+    },
+    {
+      "id": "uscensus-annual-survey-state-govt-finances",
+      "title": "Annual Survey of State Government Finances (ASFIN)",
+      "publisher": "U.S. Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual revenue by source, expenditure by object and function, indebtedness, and cash and security holdings for state governments, conducted since 1951. Unlike the local-government side of the programme it is a complete enumeration rather than a sample: the technical documentation states the data \"are not subject to sampling error because this is a complete enumeration of all 50 State governments.\" Coverage extends to dependent state entities including state universities, pension systems and insurance trusts. Each state's own accounting records are recoded to a uniform Census classification so that states are comparable despite differing legal structures.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/state.html",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "uscensus-saipe",
+      "title": "Small Area Income and Poverty Estimates (SAIPE)",
+      "publisher": "U.S. Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual model-based estimates of median household income and of the number and rate of people in poverty for every state and county, plus school-age (5-17) poverty counts for all 13,000+ school districts. It exists because direct survey estimates for small areas are too imprecise: SAIPE combines direct American Community Survey estimates with regression predictions built from IRS exemption counts, SNAP participation, population estimates, BEA personal income and prior decennial counts, using shrinkage estimation weighted by the reliability of the survey component. It is the operative statistical input to Title I education funding.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/saipe.html",
+      "domains": [
+        "population",
+        "education",
+        "fiscal-transfers",
+        "benefits"
+      ]
+    },
+    {
+      "id": "uscensus-boundary-annexation-survey",
+      "title": "Boundary and Annexation Survey (BAS)",
+      "publisher": "U.S. Census Bureau",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The annual collection from tribal, state and local governments of \"the correct boundary, name, and status information\" for legally defined geographic areas — incorporated places, minor civil divisions, counties and equivalents, reservations and trust lands. It is the mechanism by which annexations, incorporations, disincorporations and consolidations enter the Census geographic database, and it is the named source of record for adds and deletes of general-purpose governments in the Governments Master Address File.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.census.gov/programs-surveys/bas.html",
+      "domains": [
+        "population",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "bea-state-personal-income",
+      "title": "Personal Income by State (State Personal Income and Employment)",
+      "publisher": "U.S. Bureau of Economic Analysis",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "BEA's measure of \"the income people living in each state and the District of Columbia get from wages, proprietors' income, dividends, interest, rents, and government benefits,\" on a place-of-residence basis and consistent with the national accounts. Published in total and per capita. The per capita figure is the operative input to the Medicaid matching formula, which is why the population denominator matters: BEA uses the Census Bureau's July 1 midyear estimates.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.bea.gov/data/income-saving/personal-income-by-state",
+      "domains": [
+        "national-accounts",
+        "labour",
+        "benefits"
+      ]
+    },
+    {
+      "id": "bea-local-area-personal-income",
+      "title": "Personal Income by County, Metro, and Other Areas",
+      "publisher": "U.S. Bureau of Economic Analysis",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Personal income below the state level — counties and county equivalents, metropolitan and micropolitan areas, and BEA economic areas — on the same conceptual basis as the state and national accounts. The estimates are hierarchically constrained rather than freely estimated: \"County estimates sum to state totals which, together with the estimate for the District of Columbia, sum to a national total which equals the NIPA estimate.\" Because county source data are thin, the estimates lean on state unemployment insurance wage records and on Census inputs.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.bea.gov/data/income-saving/personal-income-county-metro-and-other-areas",
+      "domains": [
+        "national-accounts",
+        "labour",
+        "benefits"
+      ]
+    },
+    {
+      "id": "hhs-fmap-notice",
+      "title": "Federal Medical Assistance Percentages (FMAP) — annual Federal Register notice",
+      "publisher": "U.S. Department of Health and Human Services, Office of the Secretary",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The annual notice announcing each state's Federal Medical Assistance Percentage, the enhanced FMAP for CHIP, and disaster-recovery adjustments for the coming federal fiscal year. Computed under §§1905(b) and 1101(a)(8) of the Social Security Act from state and national average per capita personal income, floored at 50 percent and capped at 83 percent. Governs federal matching for Medicaid, TANF Contingency Funds, Child Support, CCDF and Title IV-E foster care and adoption assistance — the single largest federal-to-state transfer mechanism in the United States.",
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "42 U.S.C. §1301(a)(8)(B): the Secretary shall promulgate the Federal percentage \"between October 1 and November 30 of each year\".",
+        "source_url": "https://www.law.cornell.edu/uscode/text/42/1301",
+        "note": "A statutory window rather than a date, and the schema renders it as one. The window is two months wide, so it is filed at quarter precision — the narrowest band that does not claim a day the statute does not give.",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-11-30",
+            "precision": "quarter",
+            "covers": "FY2028 matching rates"
+          },
+          {
+            "from": "2027-10-01",
+            "to": "2027-11-30",
+            "precision": "quarter",
+            "evidence": "implied",
+            "covers": "FY2029 matching rates"
+          }
+        ]
+      },
+      "last_updated": null,
+      "url": "https://www.federalregister.gov/documents/2025/11/28/2025-21332/federal-financial-participation-in-state-assistance-expenditures-federal-matching-shares-for",
+      "domains": [
+        "health",
+        "fiscal-transfers",
+        "benefits"
+      ]
+    },
+    {
+      "id": "ed-title-i-a-allocations",
+      "title": "Title I, Part A State and Local Educational Agency Allocations",
+      "publisher": "U.S. Department of Education, Office of Elementary and Secondary Education",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual allocations to states and local educational agencies under the four Title I-A formulas of the Elementary and Secondary Education Act — Basic, Concentration, Targeted, and Education Finance Incentive Grants. Driven by counts of children aged 5 to 17 in families below the poverty level, for counties and school districts.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www2.ed.gov/about/overview/budget/statetables/index.html",
+      "domains": [
+        "education",
+        "fiscal-transfers",
+        "benefits"
+      ]
+    },
+    {
+      "id": "cms-medicaid-dsh-allotments",
+      "title": "Medicaid Disproportionate Share Hospital (DSH) Allotments and IMD DSH Limits",
+      "publisher": "Centers for Medicare & Medicaid Services",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The Federal Register notice publishing each state's Medicaid DSH allotment — the cap on federal DSH matching — and the Institutions for Mental Diseases DSH limits, determined under §1923(f) of the Social Security Act. Each year's allotment is the prior year's escalated by the change in the CPI-U, with preliminary allotments using an estimated change and final allotments the actual.",
+      "releases_per_year": 1,
+      "cadence_note": "Nominally annual, published irregularly in practice — the most recent notice covered four fiscal years at once (FY2020 through FY2023).",
+      "last_updated": null,
+      "url": "https://www.federalregister.gov/documents/2023/04/14/2023-07927/medicaid-program-final-fy-2020-final-fy-2021-preliminary-fy-2022-and-preliminary-fy-2023",
+      "domains": [
+        "health",
+        "fiscal-transfers",
+        "inflation"
+      ]
+    },
+    {
+      "id": "cms-chip-state-allotments",
+      "title": "CHIP State Allotments",
+      "publisher": "Centers for Medicare & Medicaid Services",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Annual federal allotments of Children's Health Insurance Program funds to states, computed under §2104(m) of the Social Security Act by escalating the prior year's allotment (or the state's prior-year expenditures) by an \"allotment increase factor\" — the product of a per capita health care growth factor and a state child population growth factor.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.medicaid.gov/chip/financing/index.html",
+      "domains": [
+        "health",
+        "fiscal-transfers",
+        "population"
+      ]
+    },
+    {
+      "id": "cms-national-health-expenditure-projections",
+      "title": "National Health Expenditure Projections",
+      "publisher": "Centers for Medicare & Medicaid Services, Office of the Actuary",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "Ten-year projections of national health spending by payer and by service, produced by the CMS Office of the Actuary. The projected per capita figure is named in statute as one of the two factors escalating every state's CHIP allotment, which makes an actuarial projection a direct determinant of a federal transfer.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data/projected",
+      "domains": [
+        "health",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "nhtsa-section-402-apportionments",
+      "title": "Highway Safety Grant Program Funding Tables (Section 402 apportionments)",
+      "publisher": "National Highway Traffic Safety Administration",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The annual apportionment of Section 402 State and Community Highway Safety formula funds to the states, District of Columbia, territories and tribes. Under 23 U.S.C. §402(c)(2), 75 percent is apportioned on each state's share of national population as determined by the most recent decennial census, and 25 percent on each state's share of national public road mileage.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.nhtsa.gov/highway-safety-grants-program",
+      "domains": [
+        "fiscal-transfers",
+        "population"
+      ]
+    },
+    {
+      "id": "ca-dof-governors-budget",
+      "title": "Governor's Budget (California)",
+      "publisher": "California Department of Finance",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The Governor's annual proposed budget for the ensuing fiscal year, submitted to the Legislature under Article IV §12 of the California Constitution \"within the first 10 days of each calendar year\", with itemized statements of recommended expenditures and estimated revenues. Revised each May as the May Revision and enacted as the Budget Act, which the Legislature must pass by midnight on June 15.",
+      "releases_per_year": 2,
+      "last_updated": null,
+      "url": "https://ebudget.ca.gov/",
+      "domains": [
+        "taxation",
+        "fiscal-transfers",
+        "education",
+        "health"
+      ]
+    },
+    {
+      "id": "ca-sco-acfr",
+      "title": "State of California Annual Comprehensive Financial Report",
+      "publisher": "California State Controller's Office",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The state's GAAP-basis audited annual financial report — government-wide and fund statements, management discussion, notes and a statistical section — issued under Government Code §12460, which requires a report \"prepared strictly in accordance with 'Generally Accepted Accounting Principles'\". Issued alongside a separate budgetary-legal basis annual report.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.sco.ca.gov/ard_state_acfr.html",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ca-dof-price-population-factors",
+      "title": "Price Factor and Population Information (Article XIII B appropriations limit factors)",
+      "publisher": "California Department of Finance, Demographic Research Unit",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The annual letter transmitting to every California city and county the two factors that adjust the Article XIII B appropriations limit — the \"Gann limit\". Attachment A gives the price factor, the percentage change in California per capita personal income; Attachment B gives each city's and unincorporated county's population percentage change as of January 1. Revenue and Taxation Code §2227 requires transmission by May 1; the higher population estimate is certified to the State Controller by June 1.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://dof.ca.gov/forecasting/demographics/price-and-population-factors/",
+      "domains": [
+        "inflation",
+        "population",
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ca-dof-e1-population-estimates",
+      "title": "E-1 and E-5 Population and Housing Estimates for Cities, Counties and the State",
+      "publisher": "California Department of Finance, Demographic Research Unit",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "California's official January 1 population (E-1) and population-and-housing (E-5) estimates for the state, all 58 counties and every incorporated city, built from housing stock change, occupancy and persons-per-household, and administrative records. These are the statutory population figures for California per capita allocations, and the State Controller uses them to distribute state subventions to cities and counties.",
+      "releases_per_year": 2,
+      "last_updated": null,
+      "url": "https://dof.ca.gov/forecasting/demographics/estimates-e1/",
+      "domains": [
+        "population"
+      ]
+    },
+    {
+      "id": "ca-cde-principal-apportionment",
+      "title": "Principal Apportionment (Local Control Funding Formula)",
+      "publisher": "California Department of Education",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The certified allocation of state school funding to local educational agencies, dominated by the Local Control Funding Formula, computed from attendance reported by districts and property tax data reported by county auditors. Certified four times a year: Advance by July 20, First Principal Apportionment by February 20, Second Principal Apportionment by June 25, and Annual by the following February 20.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.cde.ca.gov/fg/aa/pa/",
+      "domains": [
+        "education",
+        "fiscal-transfers",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ca-dof-proposition-98-guarantee",
+      "title": "Proposition 98 Minimum Funding Guarantee calculation",
+      "publisher": "California Department of Finance",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The annual computation of the constitutional minimum funding level for school and community college districts under Article XVI §8 of the California Constitution, identifying which of Test 1, Test 2 or Test 3 operates and the resulting guarantee for the prior, current and budget years. Published inside the Governor's Budget, the May Revision and the enacted budget rather than as a document of its own.",
+      "releases_per_year": 2,
+      "last_updated": null,
+      "url": "https://ebudget.ca.gov/2026-27/pdf/BudgetSummary/TK-12Education.pdf",
+      "domains": [
+        "education",
+        "fiscal-transfers",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ca-cdtfa-local-tax-distributions",
+      "title": "Local Tax Distributions by City and County (Bradley-Burns)",
+      "publisher": "California Department of Tax and Fee Administration",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The distribution of the Bradley-Burns uniform local sales and use tax and district transactions taxes to cities, counties and districts, paid as two monthly advances plus a quarterly cleanup payment in February, May, August and November, together with the published statistics of amounts distributed by jurisdiction. Advances are computed from the prior year's like quarter; the cleanup reconciles to actual returns.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://cdtfa.ca.gov/dataportal/dataset.htm?url=SUTDRevDistCityCounty",
+      "domains": [
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "ca-sco-cities-annual-report",
+      "title": "Cities Annual Report / Cities Financial Transactions Report",
+      "publisher": "California State Controller's Office",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The Controller's compiled annual report of the financial transactions of California cities, with companion reports for counties and special districts, built from Financial Transactions Reports each local agency must file under Government Code §53891. Government Code §12463 requires the compilation to \"encompass appropriations limits and the total annual appropriations subject to limitation\" — which makes this the document where every city's Gann limit is recorded. The California analogue of a municipal financial information return.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://bythenumbers.sco.ca.gov/",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ca-boe-inflation-factor-lta",
+      "title": "Letter To Assessors: Annual Proposition 13 Inflation Factor",
+      "publisher": "California State Board of Equalization, Property Tax Department",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The annual letter instructing all 58 county assessors what inflation factor to apply to factored base year values on the coming roll. Revenue and Taxation Code §51 compounds base year values by this factor, which Article XIII A §2(b) of the California Constitution caps at 2 percent. One short letter, issued days before the lien date, that sets the growth rate of the property tax base for the whole state.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.boe.ca.gov/proptaxes/lta.htm",
+      "domains": [
+        "inflation",
+        "assessment",
+        "taxation"
+      ]
+    },
+    {
+      "id": "ca-dir-ccpi",
+      "title": "California Consumer Price Index",
+      "publisher": "California Department of Industrial Relations, Division of Labor Statistics and Research",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "California",
+      "description": "The California-specific consumer price index maintained by the Division of Labor Statistics and Research. It is a distinct series from the national CPI-U, and it is the index Revenue and Taxation Code §51(a)(1)(C) names as the source of the Proposition 13 inflation factor — so California property assessment tracks a state index, not a federal one.",
+      "releases_per_year": 12,
+      "cadence_note": "Filed as monthly on the strength of the published series; the exact release cycle was not confirmed from a DIR methodology page this pass. The statutory read is October to October regardless of how often it appears.",
+      "last_updated": null,
+      "url": "https://www.dir.ca.gov/oprl/capriceindex.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "la-county-assessment-roll",
+      "title": "Los Angeles County Annual Assessment Roll",
+      "publisher": "Los Angeles County Office of the Assessor",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Los Angeles County, California",
+      "description": "The annual roll of assessed value for all locally assessed real and personal property in Los Angeles County, valued as of the 12:01 a.m. January 1 lien date, comprising the regular secured and unsecured roll and the supplemental roll. Countywide assessed valuation was approximately $2.123 trillion for FY2024-25. The roll must be completed by July 1 and is then delivered to the County Auditor-Controller.",
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "BOE Publication 29 important dates: \"January 1 — Lien date for all property\"; \"July 1 — Deadline for county assessor to complete local assessment roll\".",
+        "source_url": "https://www.boe.ca.gov/proptaxes/pdf/pub29.pdf",
+        "note": "The deadline is a day, so this is day precision — but note it is a deadline rather than a publication date, which is the one case where an exact date can still be later than the truth.",
+        "entries": [
+          {
+            "from": "2027-07-01",
+            "to": "2027-07-01",
+            "precision": "day",
+            "covers": "roll for the January 1, 2027 lien date"
+          }
+        ]
+      },
+      "last_updated": null,
+      "url": "https://assessor.lacounty.gov/news-information/assessmentroll",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "la-county-property-tax-apportionment",
+      "title": "Los Angeles County Property Tax Apportionment and Allocation Reports",
+      "publisher": "Los Angeles County Auditor-Controller",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Los Angeles County, California",
+      "description": "The published apportionment and tax-rate report series dividing the 1 percent general levy and voter-approved debt levies among more than 1,300 local agencies — the County, cities, school districts, special districts and redevelopment successor agencies. Includes the AB 8 apportionment factor file, modified ATI ratios, assessed-valuation reports and tax-rate reports. The American counterpart of a provincial equalized assessment and requisition apportionment.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://auditor.lacounty.gov/property-tax-report-central/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "fiscal-transfers",
+        "assessment"
+      ]
+    },
+    {
+      "id": "la-county-acfr",
+      "title": "Los Angeles County Annual Comprehensive Financial Report",
+      "publisher": "Los Angeles County Auditor-Controller",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Los Angeles County, California",
+      "description": "The audited annual financial report of the County and its component districts, issued under California Government Code §25253 and prepared under GAAP for governmental entities. Its property tax note records the 1 percent levy limit, the county's 13,197 tax rate areas and the January 1 lien date, and its statistical section carries a ten-year assessed value schedule.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://auditor.lacounty.gov/annual-comprehensive-financial-report/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "la-city-revenue-outlook",
+      "title": "City of Los Angeles Revenue Outlook",
+      "publisher": "City of Los Angeles, City Administrative Officer",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Los Angeles, California",
+      "description": "The annual supplement to the Proposed Budget forecasting each General Fund revenue source. The property tax chapter — roughly a third of General Fund revenue — builds its forecast from County Assessor assessed-value growth for the City, County Auditor-Controller payment estimates, the Proposition 13 cap and Proposition 8 decline-in-value adjustments.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://cao.lacity.gov/budget.html",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "la-city-proposed-budget",
+      "title": "City of Los Angeles Proposed Budget",
+      "publisher": "City of Los Angeles, Mayor and City Administrative Officer",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Los Angeles, California",
+      "description": "The Mayor's proposed annual budget for the fiscal year beginning July 1, presented to Council in April, of which the Revenue Outlook is the revenue-estimate supplement.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://cao.lacity.gov/budget.html",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "lausd-adopted-budget",
+      "title": "Los Angeles Unified School District Adopted Budget",
+      "publisher": "Los Angeles Unified School District",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Los Angeles, California",
+      "description": "The district's adopted annual budget, approved by the Board of Education before the start of the fiscal year. Included as a node with no edges yet: its funding plainly flows through the Local Control Funding Formula and the county property tax apportionment, but the district's own budget pages are JavaScript-rendered and no statement of its documented inputs could be retrieved this pass. See the _dropped entries.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://budgetservices.lausd.org/",
+      "domains": [
+        "education",
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "uscensus-annual-survey-state-local-govt-finance",
+      "target_report_id": "uscensus-census-of-governments",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The annual survey is a sample drawn against, and benchmarked to, the quinquennial census universe rather than an independent collection. NCES's documentation of the Census government finance series states directly that \"The sample of local governments is drawn from the periodic Census of Governments (which is conducted in years ending in '2' and '7').\" The Census Bureau's own programme FAQ confirms the same structure from the other side: \"Every five years (years ending in '2' and '7') we conduct a census, in which we attempt to collect financial data from all local governments,\" and \"For the four years between our censuses, we collect data from a sample of governments.\"",
+      "evidence_url": "https://nces.ed.gov/programs/digest/d21/app_a4_3.asp"
+    },
+    {
+      "source_report_id": "uscensus-annual-survey-state-local-govt-finance",
+      "target_report_id": "uscensus-government-units-survey",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Government Units Survey FAQ states that \"The GUS provides critical information on organizational structure that we need to maintain the universe frame of governments. Public sector surveys that the Census Bureau conducts use the frame to draw their samples.\" The GUS about page adds that the Bureau uses the resulting Governments Master Address File \"as a benchmark for all our non-census year samples.\" The annual finance survey is one of those non-census-year public sector surveys, so its sample frame is the file GUS maintains.",
+      "evidence_url": "https://www.census.gov/programs-surveys/gus/about/faq.html"
+    },
+    {
+      "source_report_id": "uscensus-government-units-survey",
+      "target_report_id": "uscensus-boundary-annexation-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "The GUS methodology documentation names BAS as the source of record for changes to the government universe: \"The GMAF universe of county, municipal, and township governments is continuously updated as these units of governments become established, dissolved, or reorganized. Decisions to add or delete county, municipal, or township governments to the GMAF are made on the basis of information obtained through the annual Boundary and Annexation Survey, which the Census Bureau's Geography Division conducts.\"",
+      "evidence_url": "https://census.gov/programs-surveys/gus/technical-documentation/methodology/information-collection.html"
+    },
+    {
+      "source_report_id": "uscensus-annual-survey-state-govt-finances",
+      "target_report_id": "uscensus-census-of-governments",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The State Government Finances methodology page directs users to the Census of Governments for the definitional and organisational basis of the survey: \"See Chapter 1 of the Government Finance and Employment Classification Manual and the 2007 Census of Governments\" for information on government definitions and organization. The survey recodes each state's own administrative accounting records into the classification framework established for the census.",
+      "evidence_url": "https://www.census.gov/programs-surveys/state/technical-documentation/methodology.html"
+    },
+    {
+      "source_report_id": "uscensus-saipe",
+      "target_report_id": "uscensus-acs",
+      "relationship_type": "calculated_from",
+      "basis": "The ACS is the dependent variable in every SAIPE county model. The county-level estimation documentation specifies the modelled quantity as \"the log of the total number of people in poverty in each county as measured by the ACS\", and for children \"the log of the number of related children in poverty ages 5 to 17 in each county as measured by the ACS\". The methodology overview records the switchover: \"The most significant change was between 2004 and 2005, when SAIPE began using data from the American Community Survey, rather than from the Annual Social and Economic Supplement to the Current Population Survey.\"",
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+    },
+    {
+      "source_report_id": "uscensus-saipe",
+      "target_report_id": "uscensus-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "The county model includes as regression predictors \"the log of the estimated total resident population as of July 1\" and \"the log of the estimated resident population under age 18 as of July 1\", which are the Bureau's postcensal estimates. Population also enters as the denominator converting modelled poverty counts to poverty rates.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "Estimated resident population as of July 1 enters the model as a predictor and as the rate denominator."
+      },
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+    },
+    {
+      "source_report_id": "uscensus-saipe",
+      "target_report_id": "uscensus-poverty-thresholds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The official thresholds define both the concept SAIPE estimates and one of its regression predictors. The county model uses \"the log of the number of tax return exemptions (all ages) on returns whose adjusted gross income falls below the official poverty threshold\", and correspondingly the child-exemption equivalent. The IRS administrative predictor is thus constructed by applying the official poverty thresholds to tax return income.",
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+    },
+    {
+      "source_report_id": "uscensus-saipe",
+      "target_report_id": "uscensus-decennial",
+      "relationship_type": "uses_data_from",
+      "basis": "Decennial poverty and income counts enter the county models as regression predictors — the documentation names \"the log of the Census 2000 estimate of the total number of people in poverty\", the related-children equivalent, and \"the log of the Census 2000 estimate of county median household income\" — and the estimation strategy page lists \"decennial census estimates\" among the programme's input sources. Caveat carried forward from research: the published methodology names Census 2000 specifically, so the vintage should be re-checked against the current estimate year.",
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+    },
+    {
+      "source_report_id": "uscensus-saipe",
+      "target_report_id": "bea-local-area-personal-income",
+      "relationship_type": "uses_data_from",
+      "basis": "The SAIPE county median household income model uses two BEA-derived predictors: \"the log of the proportion of the Bureau of Economic Analysis (BEA) estimate of total personal income derived from government transfers\" and \"the log of the growth of BEA total personal income from 1999 through the target year\". These are county-level covariates in a county model, so the relevant BEA product is the local area series.",
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+    },
+    {
+      "source_report_id": "bea-local-area-personal-income",
+      "target_report_id": "uscensus-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "BEA's Local Area Personal Income and Employment: Concepts and Methods states: \"In computing annual per capita personal income for states and counties, BEA uses the Census Bureau's annual midyear (July 1) population estimates.\" Per capita personal income is a headline output of the local area series, so the Census estimates are a direct computational input.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "Census Bureau annual midyear (July 1) population estimates, used as the per capita denominator."
+      },
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf"
+    },
+    {
+      "source_report_id": "bea-local-area-personal-income",
+      "target_report_id": "uscensus-acs",
+      "relationship_type": "uses_data_from",
+      "basis": "BEA's local area methodology states: \"Estimates of rental income of persons are based on place of residence data from the American Community Survey (ACS).\" Rental income of persons is a component of the property income portion of personal income, so ACS is a named source for a component of the county estimates.",
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf"
+    },
+    {
+      "source_report_id": "bea-local-area-personal-income",
+      "target_report_id": "bea-state-personal-income",
+      "relationship_type": "calculated_from",
+      "basis": "The county estimates are constrained to the state accounts rather than estimated freely: \"County estimates sum to state totals which, together with the estimate for the District of Columbia, sum to a national total which equals the NIPA estimate.\" The county figures are therefore an allocation of independently estimated state totals.",
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf"
+    },
+    {
+      "source_report_id": "bea-state-personal-income",
+      "target_report_id": "uscensus-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "BEA's State Personal Income and Employment: Concepts and Methods carries the same statement for states: \"In computing annual per capita personal income for states and counties, BEA uses the Census Bureau's annual midyear (July 1) population estimates.\" Per capita personal income by state is the figure the Medicaid matching formula reads, so this denominator propagates into every state's FMAP.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "Census Bureau annual midyear (July 1) population estimates, used as the per capita denominator."
+      },
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf"
+    },
+    {
+      "source_report_id": "bea-state-personal-income",
+      "target_report_id": "uscensus-acs",
+      "relationship_type": "uses_data_from",
+      "basis": "The State Personal Income methodology states that \"Estimates of rental income of persons are based on place of residence data from the American Community Survey (ACS).\" ACS is a named source for the rental income component of state personal income.",
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf"
+    },
+    {
+      "source_report_id": "hhs-fmap-notice",
+      "target_report_id": "bea-state-personal-income",
+      "relationship_type": "calculated_from",
+      "basis": "The notice states that \"The Secretary calculates the percentages, using formulas set out in sections 1905(b) and 1101(a)(8), and calculations from the Department of Commerce of average income per person in each state and for the United States.\" 42 U.S.C. §1396d(b) supplies the formula: the FMAP is \"100 per centum less the State percentage; and the State percentage shall be that percentage which bears the same ratio to 45 per centum as the square of the per capita income of such State bears to the square of the per capita income of the continental United States\", floored at 50 and capped at 83 percent. Caveat: the notice names only \"the Department of Commerce\"; the identification of BEA as the publishing bureau comes from CRS R43847, which records that \"In its FY2025 FMAP calculations, HHS used state per capita personal income data for 2020, 2021, and 2022 that became available from the Department of Commerce's Bureau of Economic Analysis (BEA) in September 2023.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 36,
+        "ends": "11-30",
+        "stated_as": "42 U.S.C. 1301(a)(8)(B): promulgated \"between October 1 and November 30 of each year, on the basis of the average per capita income of each State and of the United States for the three most recent calendar years for which satisfactory data are available from the Department of Commerce\", and conclusive for the four quarters beginning the following October 1."
+      },
+      "evidence_url": "https://www.federalregister.gov/documents/2025/11/28/2025-21332/federal-financial-participation-in-state-assistance-expenditures-federal-matching-shares-for"
+    },
+    {
+      "source_report_id": "ed-title-i-a-allocations",
+      "target_report_id": "uscensus-saipe",
+      "relationship_type": "calculated_from",
+      "basis": "20 U.S.C. §6333(c) requires that \"the Secretary shall use updated data on the number of children, aged 5 to 17, inclusive, from families below the poverty level for counties or local educational agencies, published by the Department of Commerce, unless the Secretary and the Secretary of Commerce determine that the use of the updated population data would be inappropriate or unreliable.\" The Census Bureau names the product and the allocation in its own release: \"SAIPE statistics are used to allocate funding under Title I of the Elementary and Secondary Education Act... The U.S. Department of Education plans to use the 2021 estimates to calculate fiscal year 2023 allocations for Title I and several other federal education programs.\" The Department of Education's annual memorandum to State Title I Directors transmits the SAIPE tables directly and links census.gov/programs-surveys/saipe.html.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "A single SAIPE income-year vintage read with a two-year lag: the 2024 estimates, released 27 January 2026, feed FY2026 (school year 2026-27) allocations."
+      },
+      "evidence_url": "https://www.census.gov/newsroom/press-releases/2022/saipe.html"
+    },
+    {
+      "source_report_id": "cms-medicaid-dsh-allotments",
+      "target_report_id": "bls-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "42 U.S.C. §1396r-4(f)(3) provides that a state's DSH allotment for a fiscal year is the preceding year's allotment \"increased... by the percentage change in the consumer price index for all urban consumers (all items; U.S. city average), for the previous fiscal year.\" The CMS notice implementing it states that allotments are determined \"using the most recent available estimates of or actual medical assistance expenditures, including DSH expenditures and the most recent available CPI-U data for the FY in accordance with the methodology prescribed in the statute.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "09-30",
+        "stated_as": "The percentage change in CPI-U (all items, U.S. city average) over the previous federal fiscal year. Read twice: an estimated change before the fiscal year begins for preliminary allotments, and the actual change for final allotments."
+      },
+      "evidence_url": "https://www.federalregister.gov/documents/2023/04/14/2023-07927/medicaid-program-final-fy-2020-final-fy-2021-preliminary-fy-2022-and-preliminary-fy-2023"
+    },
+    {
+      "source_report_id": "cms-chip-state-allotments",
+      "target_report_id": "uscensus-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "42 U.S.C. §1397dd(m)(6)(B) defines the child population growth factor as \"1 plus the percentage increase (if any) in the population of children in the State from July 1 in the previous fiscal year to July 1 in the fiscal year involved, as determined by the Secretary based on the most recent published estimates of the Bureau of the Census before the beginning of the fiscal year involved, plus 1 percentage point.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "07-01",
+        "stated_as": "Year-over-year change in state child population measured July 1 to July 1, from the most recent Census estimates published before the fiscal year begins."
+      },
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXXI-sec1397dd.htm"
+    },
+    {
+      "source_report_id": "cms-chip-state-allotments",
+      "target_report_id": "cms-national-health-expenditure-projections",
+      "relationship_type": "calculated_from",
+      "basis": "42 U.S.C. §1397dd(m)(6)(A) defines the per capita health care growth factor as \"1 plus the percentage increase in the projected per capita amount of National Health Expenditures from the calendar year in which the previous fiscal year ends to the calendar year in which the fiscal year involved ends, as most recently published by the Secretary before the beginning of the fiscal year involved.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "Calendar-year-to-calendar-year change in projected per capita national health expenditure, read from the most recent publication issued before the fiscal year begins."
+      },
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXXI-sec1397dd.htm"
+    },
+    {
+      "source_report_id": "nhtsa-section-402-apportionments",
+      "target_report_id": "uscensus-decennial",
+      "relationship_type": "calculated_from",
+      "basis": "23 U.S.C. §402(c)(2)(B)(i) provides that \"75 percent shall be apportioned to each State based on the ratio that, as determined by the most recent decennial census — (aa) the population of the State; bears to (bb) the total population of all States\", with the remaining 25 percent on public road mileage. The mileage half is certified by each Governor rather than taken from a published statistical series, so only the population half is an edge here.",
+      "reference_period": {
+        "readings_per_year": 0.1,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "\"the most recent decennial census\" — a read that stays fixed between censuses, so the apportionment share moves once a decade however often the funds are apportioned."
+      },
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title23/html/USCODE-2023-title23-chap4-sec402.htm"
+    },
+    {
+      "source_report_id": "ca-dof-price-population-factors",
+      "target_report_id": "ca-dof-e1-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "Government Code §7901(a) defines the price factor as a ratio whose denominator is DOF's own population estimate: California personal income \"divided by the civilian population of the state on January 1 of the next calendar year, as estimated by the Department of Finance\". Section 7901(b) defines the local change in population as \"the percentage change in population between January 1 of the next calendar year and January 1 of the calendar year in question, as estimated by the Department of Finance.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "Civilian population as of January 1, compared with January 1 of the prior year."
+      },
+      "evidence_url": "https://codes.findlaw.com/ca/government-code/gov-sect-7901/"
+    },
+    {
+      "source_report_id": "ca-dof-price-population-factors",
+      "target_report_id": "bea-state-personal-income",
+      "relationship_type": "calculated_from",
+      "basis": "Government Code §7901(a): \"'Change in California per capita personal income' means the number resulting when the quotient of the California personal income, as published by the United States Department of Commerce in the Survey of Current Business for the fourth quarter of a calendar year divided by the civilian population of the state on January 1 of the next calendar year, as estimated by the Department of Finance, is divided by the similarly determined quotient for the next prior year.\" The Gann price factor is therefore a federal BEA series over a state population denominator — a constitutional spending limit on every Californian city and county driven by a national statistical agency.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 3,
+        "ends": "12-31",
+        "stated_as": "California personal income for the fourth quarter of the calendar year, as published in the Survey of Current Business."
+      },
+      "evidence_url": "https://codes.findlaw.com/ca/government-code/gov-sect-7901/"
+    },
+    {
+      "source_report_id": "ca-sco-cities-annual-report",
+      "target_report_id": "ca-dof-price-population-factors",
+      "relationship_type": "uses_data_from",
+      "basis": "Government Code §12463(a) requires the Controller to compile and publish the financial transactions reports of counties, cities and special districts, and provides that those reports \"shall encompass appropriations limits and the total annual appropriations subject to limitation\". The appropriations limit each city reports is the Article XIII B limit computed from the DOF price and population factors; DOF states it \"will certify the higher [population] estimate to the State Controller by June 1\".",
+      "evidence_url": "https://law.onecle.com/california/government/12463.html"
+    },
+    {
+      "source_report_id": "ca-sco-cities-annual-report",
+      "target_report_id": "gasb-standards",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The State Controller's City Financial Transactions Report Instructions state: \"The FTR requirements conform to Generally Accepted Accounting Principles (GAAP) as prescribed by the Governmental Accounting Standards Board (GASB).\" The instructions cite Government Code §12463 et seq. as the authority for the report and §53891(a) as the requirement that cities furnish it.",
+      "evidence_url": "https://www.sco.ca.gov/Files-ARD-Local/LocRep/City_FTR_Instructions_24-25_V3.pdf"
+    },
+    {
+      "source_report_id": "ca-sco-acfr",
+      "target_report_id": "gasb-standards",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Government Code §12460 requires the Controller to \"issue a comprehensive annual financial report prepared strictly in accordance with 'Generally Accepted Accounting Principles'\". The report states that it \"meets the requirements of Government Code section 12460 for an annual report prepared in accordance with generally accepted accounting principles\", and the auditor's opinion is rendered on that basis — which for a state government means the standards set by GASB.",
+      "evidence_url": "https://www.sco.ca.gov/Files-ARD/ACFR/acfr23web.pdf"
+    },
+    {
+      "source_report_id": "ca-sco-acfr",
+      "target_report_id": "ca-dof-governors-budget",
+      "relationship_type": "uses_data_from",
+      "basis": "Government Code §12460 requires the Controller to submit an annual report to the Governor containing \"a statement of the funds of the state, its revenues, and the public expenditures\" for the preceding fiscal year. The budgetary-legal basis annual report issued under the same section accounts for prior year adjustments, fund balances, encumbrances, revenues and expenditures on a basis aligned with the Governor's Budget and the Budget Act.",
+      "evidence_url": "https://california.public.law/codes/government_code_section_12460"
+    },
+    {
+      "source_report_id": "ca-dof-proposition-98-guarantee",
+      "target_report_id": "ca-dof-governors-budget",
+      "relationship_type": "calculated_from",
+      "basis": "Article XVI §8(b)(1) of the California Constitution sets the Test 1 guarantee as \"the amount which, as a percentage of General Fund revenues which may be appropriated pursuant to Article XIII B, equals the percentage of General Fund revenues appropriated for school districts and community college districts, respectively, in fiscal year 1986-87.\" The 2026-27 Governor's Budget applies this to the Department's own General Fund revenue forecast: \"The Guarantee continues to be in a Test 1 for 2024-25, 2025-26, and 2026-27. This means that the funding level of the Guarantee is equal to roughly 40 percent of General Fund revenues, plus local property tax revenues.\"",
+      "evidence_url": "https://ebudget.ca.gov/2026-27/pdf/BudgetSummary/TK-12Education.pdf"
+    },
+    {
+      "source_report_id": "ca-dof-proposition-98-guarantee",
+      "target_report_id": "ca-dof-price-population-factors",
+      "relationship_type": "calculated_from",
+      "basis": "Article XVI §8(b)(2)-(3) makes the guarantee turn on the same per capita personal income figure that drives the Gann limit: Test 3 applies instead of Test 2 when the change in California per capita personal income exceeds the change in per capita General Fund revenues plus one-half of one percent, in which case prior-year allocations are increased by per capita General Fund revenue growth plus 0.5 percent. The \"change in California per capita personal income\" is the figure defined by Government Code §7901(a) and published annually by the Department of Finance as the Article XIII B price factor.",
+      "evidence_url": "https://law.justia.com/constitution/california/article-xvi/section-8/"
+    },
+    {
+      "source_report_id": "ca-cde-principal-apportionment",
+      "target_report_id": "la-county-assessment-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Education Code §42238.02 reduces a district's Local Control Funding Formula entitlement by \"the property tax revenue received pursuant to Chapter 3.5 (commencing with Section 75) and Chapter 6 (commencing with Section 95) of Part 0.5 of Division 1 of the Revenue and Taxation Code\" — the supplemental roll and the AB 8 property tax apportionment each county auditor computes from the county assessment roll. The Department states the apportionment uses \"pupil attendance, tax, and other data\" reported by local educational agencies, special education local plan areas and \"county auditors\". So a rise in Los Angeles assessed value mechanically reduces the state aid the district receives.",
+      "reference_period": {
+        "readings_per_year": 3,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "County tax data are submitted three times a year — P-1 taxes by November 15, P-2 taxes in mid-April, and prior-year annual taxes by August 15 — against a roll valued as of the January 1 lien date."
+      },
+      "evidence_url": "https://www.cde.ca.gov/fg/aa/pa/"
+    },
+    {
+      "source_report_id": "la-county-assessment-roll",
+      "target_report_id": "ca-boe-inflation-factor-lta",
+      "relationship_type": "calculated_from",
+      "basis": "The Board of Equalization's annual Letter To Assessors, addressed \"TO COUNTY ASSESSORS\", states that \"Revenue and Taxation Code section 51 provides that base year values determined under section 110.1 shall be compounded annually by an inflation factor, not to exceed 2 percent\", and then instructs directly: \"Accordingly, please prepare your 2025 assessment roll using an inflation factor of 1.02.\" The enclosure notes the increase \"is limited to 2 percent pursuant to California Constitution, article XIII A, section 2(b)\".",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "Applied to the assessment year commencing January 1. The letter is dated 27 December, five days before the lien date it governs."
+      },
+      "evidence_url": "https://www.boe.ca.gov/proptaxes/pdf/lta24053.pdf"
+    },
+    {
+      "source_report_id": "ca-boe-inflation-factor-lta",
+      "target_report_id": "ca-dir-ccpi",
+      "relationship_type": "calculated_from",
+      "basis": "The Letter To Assessors quotes the statutory source: \"Section 51(a)(1)(C) provides that for any assessment year commencing on or after January 1, 1998, the inflation factor shall be the percentage change, rounded to the nearest one-thousandth of 1 percent, from October of the prior fiscal year to October of the current fiscal year in the California Consumer Price Index (CCPI) for all items, as determined by the California Department of Industrial Relations.\" It then applies it: \"Information from the Department of Industrial Relations shows that the CCPI increased from 335.150 in October 2023 to 343.575 in October 2024 ... an increase of 2.514 percent\", capped at 2 percent.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "10-31",
+        "stated_as": "October of the prior fiscal year to October of the current fiscal year, all items. The 2026-27 letter substituted August-to-August because October data was unavailable during the federal government shutdown — a documented deviation from the stated period."
+      },
+      "evidence_url": "https://www.boe.ca.gov/proptaxes/pdf/lta24053.pdf"
+    },
+    {
+      "source_report_id": "la-county-property-tax-apportionment",
+      "target_report_id": "la-county-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "The county property tax portal describes the handover: \"The Los Angeles County Assessor establishes the assessed value of your property\"; \"The Assessment Roll is then presented to the Los Angeles County Auditor-Controller for further processing\"; and \"The Los Angeles County Auditor-Controller adds direct assessments to the Assessment Roll then applies the tax rates, which consists of general (1%) levy and debt service (voter & bonded) tax rates.\" The Auditor-Controller's own page states it is \"responsible for tax rate computations, accounting for the apportionment and allocation of property tax collections to over 1,300 local agencies\".",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "\"California law prescribes a yearly ad valorem tax based on property as it exists at 12:01 AM on January 1 (tax lien date).\""
+      },
+      "evidence_url": "https://www.propertytax.lacounty.gov/Home/Overview/0"
+    },
+    {
+      "source_report_id": "la-county-acfr",
+      "target_report_id": "la-county-assessment-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "The County's property tax note states: \"Property is assessed at 100% of full cash or market value (with some exceptions) pursuant to Article XIIIA of the California State Constitution and statutory provisions by the County Assessor and State Board of Equalization. The total Fiscal Year (FY) 2024-2025 assessed valuation of the County approximated $2.123 trillion.\" It adds that the levy \"is limited to one percent (1%) of full cash value and is distributed in accordance with statutory formulae\", across 13,197 tax rate areas.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "Secured property taxes \"become a lien on real property on January 1 preceding the fiscal year for which taxes are levied.\""
+      },
+      "evidence_url": "https://auditor.lacounty.gov/wp-content/uploads/2026/01/Annual-Comprehensive-Financial-Report-FY-2024-2025.pdf"
+    },
+    {
+      "source_report_id": "la-county-acfr",
+      "target_report_id": "gasb-standards",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The letter of transmittal states that certain entities \"are considered part of the County for purposes of meeting the reporting entity requirements prescribed by the Governmental Accounting Standards Board\", and the auditor's emphasis of matter records that \"effective July 1, 2024, the County adopted the provisions of Governmental Accounting Standards Board Statement No. 101, Compensated Absences.\" The report is presented annually under Government Code §25253 in accordance with GAAP for governmental entities.",
+      "evidence_url": "https://auditor.lacounty.gov/wp-content/uploads/2026/01/Annual-Comprehensive-Financial-Report-FY-2024-2025.pdf"
+    },
+    {
+      "source_report_id": "la-city-revenue-outlook",
+      "target_report_id": "la-county-assessment-roll",
+      "relationship_type": "calculated_from",
+      "basis": "The Revenue Outlook states that \"Property tax is almost one-third of all City General Fund Revenue ... the primary determinant of City property tax receipts is the change in the City's assessed value (AV), which is calculated by the County\", and reports that \"The County Assessor's reported growth for the City's assessed value for receipts most applicable to the 2025-26 fiscal year was 3.5 percent.\" It also records the timing problem candidly: \"No preliminary estimate for Countywide growth in 2026 assessed valuations is available from the County Assessor, which would otherwise serve as the basis for City 2026-27 estimated property tax growth. The Assessor will release its assessment roll forecast in May.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "\"The levy of property taxes is based on the lien date of January 1.\" The City must finalise its April forecast before the Assessor releases the May roll forecast it would otherwise read."
+      },
+      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf"
+    },
+    {
+      "source_report_id": "la-city-revenue-outlook",
+      "target_report_id": "la-county-property-tax-apportionment",
+      "relationship_type": "uses_data_from",
+      "basis": "The Revenue Outlook states that \"The June 2025 payment is based on the County's Auditor-Controller's April estimate\", and that revised revenue \"is based on actual receipts and the County Auditor-Controller's estimate\" for the remainder of the period. It also notes that the \"County Auditor-Controller determines each local jurisdiction's proportionate share of the administrative costs\" charged against the City's property tax.",
+      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf"
+    },
+    {
+      "source_report_id": "la-city-proposed-budget",
+      "target_report_id": "la-city-revenue-outlook",
+      "relationship_type": "uses_data_from",
+      "basis": "The Revenue Outlook identifies itself in its own title block as \"a Supplement to the 2026-27 Proposed Budget\", published by the City Administrative Officer. It is the revenue-estimate volume on which the Proposed Budget's revenue assumptions rest, published alongside it in April.",
+      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ed-title-i-a-allocations -> uscensus-acs",
+      "source": "ed-title-i-a-allocations",
+      "target": "uscensus-acs",
+      "reason": "wrong-target",
+      "why": "The Department of Education memorandum does describe the ACS as an input to the counts it uses, but only by way of describing the SAIPE model that produces them. The path is already in the graph as ed-title-i-a-allocations -> uscensus-saipe -> uscensus-acs, and asserting the two-hop as an edge as well would double-count the ACS in the authority calculation. Same reasoning applies to the decennial census and population estimates named in that sentence."
+    },
+    {
+      "edge": "ca-cde-principal-apportionment -> bea-implicit-price-deflator-state-local",
+      "source": "ca-cde-principal-apportionment",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Education Code 42238.02 defines the LCFF base grant cost-of-living adjustment by reference to \"the percentage change in the annual average value of the Implicit Price Deflator for State and Local Government Purchases of Goods and Services for the United States\", for the 12-month period ending in the third quarter of the prior fiscal year, read as of a fixed May 10 date. Well evidenced and worth having. Not minted because the exact published BEA table for that specific deflator was not confirmed this pass, and inventing a URL for it would be worse than the missing edge. A federal price index setting a Californian school funding rate is a good node once someone pins the table down."
+    },
+    {
+      "edge": "la-city-revenue-outlook -> ca-boe-inflation-factor-lta",
+      "source": "la-city-revenue-outlook",
+      "target": "ca-boe-inflation-factor-lta",
+      "reason": "no-document",
+      "why": "The Revenue Outlook does reason about the Proposition 13 inflation cap — \"Growth in this category is capped at two percent by Proposition 13\" — but it forecasts from \"the western region consumer price index\", not the California CPI that Revenue and Taxation Code 51(a)(1)(C) actually prescribes and that the Board of Equalization letter applies. So the document evidences the City modelling the mechanism with a proxy of its own choosing, not the City reading the Board letter. Filed here rather than asserted, and it is not evidence for a bls-cpi edge either."
+    },
+    {
+      "edge": "lausd-adopted-budget -> ca-cde-principal-apportionment",
+      "source": "lausd-adopted-budget",
+      "target": "ca-cde-principal-apportionment",
+      "reason": "deferred",
+      "why": "Almost certainly real — LCFF is the district's principal revenue source. The district's budget pages are JavaScript-rendered and a direct fetch returns a 4.5 KB shell with none of the text, so nothing could be quoted. Re-run with a rendering browser against budget.lausd.org; the candidate pages were identified during research."
+    },
+    {
+      "edge": "lausd-adopted-budget -> la-county-property-tax-apportionment",
+      "source": "lausd-adopted-budget",
+      "target": "la-county-property-tax-apportionment",
+      "reason": "deferred",
+      "why": "LCFF is funded partly from local property tax apportioned by the county auditor, with state aid backfilling the difference, and the county apportionment pages name schools among the recipients. No LAUSD or county document was found stating that the district budget reads the auditor apportionment. Same rendering problem as above."
+    },
+    {
+      "edge": "uscensus-annual-survey-state-govt-finances -> uscensus-annual-survey-state-local-govt-finance",
+      "source": "uscensus-annual-survey-state-govt-finances",
+      "target": "uscensus-annual-survey-state-local-govt-finance",
+      "reason": "no-document",
+      "why": "The two are plainly the same collection instrument split into two published products, and the state survey is described as a supplement to the combined programme. No document states a directional data dependency, and \"supplement\" is ambiguous about which way it would run. Treated as sibling products of one collection."
+    },
+    {
+      "edge": "fed-z1 -> uscensus-annual-survey-state-local-govt-finance",
+      "source": "fed-z1",
+      "target": "uscensus-annual-survey-state-local-govt-finance",
+      "reason": "deferred",
+      "why": "The Z.1 state and local government tables are near-certainly built on Census government finance data, and the introductory text references \"detailed annual survey data ... from the Census Bureau\" for that sector, but it does not name the survey and could plausibly mean the Quarterly Survey of Public Pensions. The per-table source notes in the Financial Accounts Guide would settle it."
+    },
+    {
+      "edge": "uscensus-annual-survey-state-local-govt-finance -> gasb-standards",
+      "source": "uscensus-annual-survey-state-local-govt-finance",
+      "target": "gasb-standards",
+      "reason": "no-document",
+      "why": "The Census classification recodes financial reports that are themselves prepared under GASB, but the Census classification is deliberately independent of GAAP fund accounting, so the honest characterisation may be non-dependence rather than an uncited dependence. The Government Finance and Employment Classification Manual would settle it; the Census PDF path is robots-blocked from this environment."
+    },
+    {
+      "edge": "ca-dof-e1-population-estimates -> uscensus-population-estimates",
+      "source": "ca-dof-e1-population-estimates",
+      "target": "uscensus-population-estimates",
+      "reason": "no-document",
+      "why": "The E-1 release says the estimates are \"benchmarked to the 2020 decennial census\" and elsewhere mentions \"Census Bureau county proportions\", but the decennial census is a different product from the Population Estimates Program and no DOF methodology document naming which Census series is read could be found."
+    },
+    {
+      "edge": "nhtsa-section-402-apportionments -> public road mileage certification",
+      "source": "nhtsa-section-402-apportionments",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "The other 25 percent of the Section 402 apportionment runs on public road mileage which 23 U.S.C. 402(c)(2)(B)(ii) requires to be \"certified by the Governor of the State\" and approved by the Secretary. A state certification to a federal agency is not a published release and cannot be a node."
+    },
+    {
+      "edge": "highway trust fund apportionment -> any statistical series",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "A negative finding, and a useful one. Federal highway apportionment under 23 U.S.C. 104(c) reads no statistical series at all: each state's share is \"the proportion that (I) the amount of apportionments that the State received for fiscal year 2021 bears to (II) the amount of those apportionments received by all States for that fiscal year\". No population, VMT or lane-mile series enters it — the formula is frozen against a base year. Worth recording because the assumption that a big federal transfer must read a statistic is exactly the plausible-sounding link this project exists to exclude."
+    },
+    {
+      "edge": "community development block grant -> uscensus-acs",
+      "source": null,
+      "target": "uscensus-acs",
+      "reason": "no-document",
+      "why": "42 U.S.C. 5306(b) names the CDBG formula variables — population, extent of poverty, housing overcrowding, age of housing, growth lag — but names no data source for any of them, and 24 CFR 570.4 defers entirely to the statute. HUD research publications describe successive decennial and ACS vintages being used in practice, but descriptive research is not a document establishing the dependency. A HUD Federal Register notice or formula methodology document would settle it."
+    },
+    {
+      "edge": "cms-chip-state-allotments -> cps-current-population-survey",
+      "source": "cms-chip-state-allotments",
+      "target": "cps-current-population-survey",
+      "reason": "wrong-target",
+      "why": "42 U.S.C. 1397dd(b) does name \"the 3 most recent March supplements to the Current Population Survey\", but that provision governs the pre-2009 allotment formula, not the current section 2104(m) formula. It would be accurate only as a historical edge with an end date, which the model does not carry."
+    }
+  ],
+  "_status": "NEW 2026-08-10. Researched by four parallel passes (Census/BEA subnational frame, federal formula transfers, California state layer, Los Angeles county and city). Every edge carries an evidence_url; 13 candidate edges were declined and are recorded in _dropped, including one denial (federal highway apportionment reads no statistical series at all)."
+}
