@@ -16,8 +16,6 @@ export interface ViewSettings {
   showGroundGrid: boolean
   /** Sky gradient, so the ground has something to meet. */
   showHorizon: boolean
-  /** Vertical stems from each node down to the ground plane. */
-  showDropLines: boolean
   /**
    * Distance haze, 0 to 1.
    *
@@ -91,7 +89,6 @@ export const DEFAULT_VIEW: ViewSettings = {
   showCube: false,
   showGroundGrid: true,
   showHorizon: false,
-  showDropLines: false,
   fog: 0.35,
   glow: 0.55,
   autoRotate: false,
@@ -126,8 +123,22 @@ export const BLOOM_THRESHOLD_MAX = 0.44
  * diagram floating in a large empty room. The out-of-focus graph has to stay
  * legible as structure; it just must not compete.
  */
-export const DIM_NODE_OPACITY = 0.34
-export const DIM_NODE_EMISSIVE = 0.1
+/**
+ * Retuned 2026-08-10 (Thomas, Q2) from 0.34 / 0.1, and the emissive number is
+ * the one that mattered.
+ *
+ * The complaint was that selecting a node visibly changed the edges and barely
+ * touched the spheres. Opacity alone could never have fixed that: a dimmed node
+ * was still emitting at 0.1, bloom keys off luminance, and the glow pass was
+ * putting back at the silhouette what the alpha had just taken out of the fill.
+ * So the two move together — 0.15 to thin the fill, 0.03 so the bloom stops
+ * re-lighting it.
+ *
+ * Neither is zero, for the reason in the note above: the out-of-focus graph is
+ * the context that makes a focused chain mean anything.
+ */
+export const DIM_NODE_OPACITY = 0.15
+export const DIM_NODE_EMISSIVE = 0.03
 export const DIM_LINK_COLOUR = '#1b2437'
 
 /**

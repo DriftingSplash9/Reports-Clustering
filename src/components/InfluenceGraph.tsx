@@ -6,7 +6,13 @@ import { forceCollide } from 'd3-force-3d'
 import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, isDocumented, radiusFor } from '../lib/graph'
 import { rimColourFor, colourForReport } from '../lib/palette'
-import { nodeMaterial, setNodeRim, type NodeMaterial } from './nodeVisuals'
+import {
+  flagGeometry,
+  isStandingInstrument,
+  nodeMaterial,
+  setNodeRim,
+  type NodeMaterial,
+} from './nodeVisuals'
 import { edgeKey, type Focus } from '../lib/selection'
 import type { VisibleSet } from '../lib/filter'
 import {
@@ -24,7 +30,6 @@ import {
   type GradientLinkMaterial,
 } from './linkVisuals'
 import { frameGeometry } from './SpaceFrame'
-import DropLines from './DropLines'
 
 /**
  * The 3D force graph.
@@ -99,6 +104,42 @@ export const FOV = 24
 const WARMUP_TICKS = 400
 
 /**
+ * Node size, as a fraction of the cloud it sits in.
+ *
+ * `radiusFor` returns 2.2 to 8 world units, and those numbers were chosen at
+ * roughly 120 nodes. Measured on 2026-08-10 at 555: the connected cloud has a
+ * radius near 1,400 units and the fit camera sits about 8,000 back, which puts
+ * one screen pixel at 4.2 world units — so the smallest node was **1.0 pixel
+ * across** and the largest 3.8. The graph was invisible until you zoomed, and
+ * nothing was broken; the constants had simply been outgrown.
+ *
+ * A fixed radius cannot survive a growing corpus, because the cloud radius
+ * grows with node count and the node radius does not. So the *ratio* is the
+ * constant instead: the largest node is held at this fraction of the cloud
+ * radius, whatever the corpus size, and the whole 2.2-to-8 range scales with it
+ * so the authority encoding is untouched.
+ *
+ * 1.65% puts the largest node near 11 screen pixels and the smallest near 3 at
+ * the opening fit — legible without turning the cloud into a bag of marbles.
+ *
+ * **The collision radius is deliberately left alone** (Thomas, Q1). It also
+ * reads `radiusFor`, so scaling it too would push nodes apart, which grows the
+ * cloud, which grows the scale — the layout chasing its own tail. Visual size
+ * scales; spacing does not. The cost is that nodes may overlap more at high
+ * scale factors, which is a thing to look at rather than reason about.
+ */
+const TARGET_LARGEST_FRACTION = 0.0165
+const MAX_BASE_RADIUS = 8
+
+function nodeScaleFor(cloudRadius: number): number {
+  const wanted = (cloudRadius * TARGET_LARGEST_FRACTION) / MAX_BASE_RADIUS
+  // Never below 1: at small corpus sizes the original constants are already
+  // right, and shrinking them would undo a legibility fix in the other
+  // direction. Capped so a single far-flung cluster cannot inflate everything.
+  return Math.min(6, Math.max(1, wanted))
+}
+
+/**
  * Pulse speed, as a fraction of link length per frame.
  *
  * Anchored so an annual release crawls and a daily one streams. Logarithmic,
@@ -157,12 +198,20 @@ export default function InfluenceGraph({
   focus,
   visible,
   flyTo,
+  resetSignal,
   onHover,
   onSelect,
   onBounds,
 }: {
   graph: Graph
   view: ViewSettings
+  /**
+   * Bumped by the Reset control. Restores the opening camera from the values
+   * the fit already measured, rather than re-running the fit — a second fit
+   * would mean 400 more warmup ticks, and the layout would settle somewhere
+   * slightly different, so "reset the view" would silently move the graph.
+   */
+  resetSignal: number
   /** Null when nothing is selected, which means everything renders at full strength. */
   focus: Focus | null
   /**
@@ -186,9 +235,18 @@ export default function InfluenceGraph({
   /** Centre and radius of the node cloud, measured once the layout settles. */
   const cloud = useRef<{ centre: THREE.Vector3; radius: number } | null>(null)
   const fitted = useRef(false)
+  /**
+   * Visual scale for every node mesh, set once the fit has measured the cloud.
+   * Held in a ref rather than state because it is read inside
+   * `nodeThreeObject`, which the library calls at times React does not drive —
+   * a node rebuilt by a filter change has to be born at the current scale or it
+   * appears at the wrong size for a frame.
+   */
+  const nodeScale = useRef(1)
+  /** Where the fit put the camera, so Reset can go back without re-laying out. */
+  const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
   const fitDistance = useRef(0)
-  const [floorY, setFloorY] = useState(0)
   const { camera, controls, scene } = useThree()
 
   /**
@@ -352,8 +410,13 @@ export default function InfluenceGraph({
         // that ignores the focus for a frame or two reads as a flicker.
         const lit = !focusRef.current || focusRef.current.nodes.has(n.id)
 
+        // A one-off instrument is drawn as a flag rather than a sphere — see
+        // `flagGeometry`. Same colour, same rim, same size encoding; only the
+        // silhouette differs, which is the whole point of using shape here.
         const mesh = new THREE.Mesh(
-          new THREE.SphereGeometry(radius, 28, 20),
+          isStandingInstrument(n)
+            ? flagGeometry(radius)
+            : new THREE.SphereGeometry(radius, 28, 20),
           nodeMaterial({
             colour,
             rimColour: rimColourFor(n.country),
@@ -364,6 +427,7 @@ export default function InfluenceGraph({
             dimEmissive: DIM_NODE_EMISSIVE,
           }),
         )
+        mesh.scale.setScalar(nodeScale.current)
         mesh.userData.reportId = n.id
         mesh.userData.baseEmissive = emissive
         meshes.current.set(n.id, mesh)
@@ -455,6 +519,22 @@ export default function InfluenceGraph({
     ref.current = forceGraph
     fitted.current = false
   }, [forceGraph])
+
+  useEffect(() => {
+    // Zero is the initial value, not a request; resetting on mount would fight
+    // the fit that is about to run.
+    if (!resetSignal) return
+    const f = fitState.current
+    if (!f) return
+    flight.current = null
+    camera.position.set(f.centre.x, f.centre.y, f.centre.z + f.distance)
+    camera.lookAt(f.centre)
+    const orbit = controls as unknown as
+      | { target: THREE.Vector3; update(): void }
+      | undefined
+    orbit?.target.copy(f.centre)
+    orbit?.update()
+  }, [resetSignal, camera, controls])
 
   /**
    * Fit the camera and publish the scene bounds — once, as soon as the layout
@@ -624,7 +704,15 @@ export default function InfluenceGraph({
     // frame rather than baked once from the opening camera position.
     cloud.current = { centre: centre.clone(), radius: nodeRadius }
 
-    setFloorY(frame.bottom)
+    // Now that the cloud has been measured, the nodes can be sized against it.
+    // This is why the scale is applied here and not in `nodeThreeObject`: the
+    // meshes are built before the layout has settled, so at construction time
+    // there is nothing yet to be a fraction of.
+    nodeScale.current = nodeScaleFor(nodeRadius)
+    for (const m of meshes.current.values()) m.scale.setScalar(nodeScale.current)
+
+    fitState.current = { centre: centre.clone(), distance }
+
     fitDistance.current = distance
     onBounds({
       centre,
@@ -908,11 +996,6 @@ export default function InfluenceGraph({
         onPointerOut={() => onHover(null)}
         onPointerDown={handlePointerDown}
         onClick={handleClick}
-      />
-      <DropLines
-        forceGraph={forceGraph}
-        floorY={floorY}
-        visible={view.showDropLines}
       />
     </>
   )

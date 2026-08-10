@@ -15,7 +15,6 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
   { key: 'showHorizon', label: 'Horizon', hint: 'Sky gradient meeting the ground' },
   { key: 'showGroundGrid', label: 'Ground grid', hint: 'Infinite grid, fixed cell size — the scale ruler' },
   { key: 'showCube', label: 'Bounding box', hint: 'Wireframe extent of the network' },
-  { key: 'showDropLines', label: 'Drop lines', hint: 'Vertical stems down to the ground plane' },
   { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
 ]
 
@@ -101,6 +100,7 @@ export default function ViewControls({
   onEvidenceChange,
   impliedCount,
   hasSelection,
+  onReset,
 }: {
   view: ViewSettings
   onChange: (next: ViewSettings) => void
@@ -109,13 +109,36 @@ export default function ViewControls({
   impliedCount: number
   /** Only affects how the focus section is captioned. */
   hasSelection: boolean
+  /** `clearFilter` is true when the control was shift-clicked. See the button. */
+  onReset: (clearFilter: boolean) => void
 }) {
   const set = <K extends keyof ViewSettings>(key: K, value: ViewSettings[K]) =>
     onChange({ ...view, [key]: value })
 
   return (
     <div style={panel}>
-      <div style={heading}>View</div>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+        <div style={heading}>View</div>
+        {/*
+          Reset, added 2026-08-10 (Thomas, Q3). Recorded as open since V0.7 and
+          described in the notes as the single thing that most affects whether a
+          legibility check can be done at all — after orbiting into a corner
+          there was simply no way back to the opening frame.
+
+          Two depths on one control: click returns the camera and clears the
+          selection; shift-click also clears the filter. The filter is the one
+          piece of state a user may have spent a minute building, so it does not
+          get thrown away by the same gesture that undoes an accidental drag.
+        */}
+        <button
+          type="button"
+          onClick={(e) => onReset(e.shiftKey)}
+          title="Back to the opening view and clear the selection. Shift-click also clears the filter."
+          style={resetButton}
+        >
+          reset
+        </button>
+      </div>
 
       <label style={{ ...sliderRow, marginBottom: 12 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -272,4 +295,19 @@ const checkbox: React.CSSProperties = {
   accentColor: '#6ea8ff',
   cursor: 'pointer',
   margin: 0,
+}
+
+const resetButton: React.CSSProperties = {
+  marginLeft: 'auto',
+  fontFamily: 'inherit',
+  fontSize: 9.5,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  color: '#5e6f8a',
+  background: 'transparent',
+  border: '1px solid rgba(90, 115, 160, 0.22)',
+  borderRadius: 5,
+  padding: '3px 7px',
+  cursor: 'pointer',
+  lineHeight: 1,
 }

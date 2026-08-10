@@ -102,6 +102,12 @@ export default function App() {
   const [view, setView] = useState<ViewSettings>(DEFAULT_VIEW)
   const [filter, setFilter] = useState<FilterState>(NO_FILTER)
   const [flyTo, setFlyTo] = useState<FlyTo | null>(null)
+  /**
+   * Incremented to ask the scene for the opening camera back. A counter rather
+   * than a boolean because the same request has to be answerable twice in a
+   * row, and a boolean would need clearing afterwards.
+   */
+  const [resetSignal, setResetSignal] = useState(0)
   const tooltipRef = useRef<HTMLDivElement>(null)
   /**
    * Last pointer position, held in a ref rather than state so that placing the
@@ -236,6 +242,23 @@ export default function App() {
     setFlyTo((f) => ({ id: report.id, nonce: (f?.nonce ?? 0) + 1 }))
   }, [])
 
+  /**
+   * Back to the opening view. See the Reset button in ViewControls for why the
+   * filter is only cleared on a shift-click.
+   *
+   * The zoom slider is put back to 1 as well as the camera being moved, or the
+   * two would disagree — CameraZoom reconciles them from the camera side on the
+   * next frame, and letting it do that instead would animate a slider nobody
+   * touched.
+   */
+  const handleReset = useCallback((clearFilter: boolean) => {
+    setSelectedId(null)
+    setFlyTo(null)
+    setView((v) => ({ ...v, zoom: 1 }))
+    setResetSignal((n) => n + 1)
+    if (clearFilter) setFilter(NO_FILTER)
+  }, [])
+
   const toggleScope = useCallback((scope: Scope) => {
     setFilter((f) => ({ ...f, scopes: toggleIn(f.scopes, ALL_SCOPES, scope) }))
   }, [])
@@ -333,6 +356,7 @@ export default function App() {
         <InfluenceGraph
           graph={graph}
           view={view}
+          resetSignal={resetSignal}
           focus={focus}
           visible={visible}
           flyTo={flyTo}
@@ -411,6 +435,7 @@ export default function App() {
           onEvidenceChange={toggleEvidence}
           impliedCount={impliedCount}
           hasSelection={!!selected}
+          onReset={handleReset}
         />
       </PanelShell>
 
