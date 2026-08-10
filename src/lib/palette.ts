@@ -297,6 +297,38 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   MA: 'AFR',
   TN: 'AFR',
   LY: 'AFR',
+  // 2026-08-10 (AF/G.11): a first push into WAEMU/CEMAC/Sahel territory the
+  // source docx had only ever described in undifferentiated bloc-level
+  // prose ("Francophone (WAEMU)... automatic indexation is rare"; "Central
+  // Africa & Sahel: very limited national systems"), never by country name.
+  // Senegal, Cote d'Ivoire and Mali (WAEMU) plus Cameroon (CEMAC) all
+  // turned out to have real, functioning, well-documented CPI programmes --
+  // the "very limited" framing describes social-protection indexation, not
+  // the underlying statistics. The batch's standout finding: Senegal's own
+  // IMF SDDS metadata names AFRISTAT directly, twice, and names a WAEMU
+  // Commission methodological guide by exact title -- the strongest
+  // AFRISTAT citation found anywhere in this branch, stronger than the
+  // ECOWAS HCPI guide citation that has failed independent verification
+  // three times in the West Africa work. Cameroon's own CPI methodology
+  // names both AFRISTAT and a specific numbered CEMAC regulation directly.
+  // Mali, AFRISTAT's own headquarters city (Bamako), independently
+  // corroborates the institutional relationship via two workshop records
+  // with INSTAT Mali's own Director General presiding. This session also
+  // produced the branch's first genuinely bloc-level document actually
+  // opened and quoted rather than only cited: the UEMOA Commission's own
+  // note on the Union-wide Harmonised CPI (`uemoa-ihpc-note-2023`), shared
+  // across the Mali and Cote d'Ivoire slices. All four countries show the
+  // same non-CPI pension pattern as the rest of AFR -- Senegal's IPRES/FNR
+  // and Cote d'Ivoire's CNPS both revalue on points/wages/decree rather
+  // than CPI, Cameroon's INS states directly that wages are NOT indexed to
+  // prices, and Mali's flagship cash-transfer programme (Jigisemejiri)
+  // closed in 2023 after one ad hoc, non-formulaic inflation-linked
+  // increase in 2018. See `src/data/research/sn-*.json`, `ci-*.json`,
+  // `cm-*.json`, `ml-*.json`.
+  SN: 'AFR',
+  CI: 'AFR',
+  CM: 'AFR',
+  ML: 'AFR',
 
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a

@@ -1,0 +1,127 @@
+{
+  "_slice": "cm-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Cameroon researched as part of a push into CEMAC/Central-Africa-Sahel territory the branch's source docx had only described in undifferentiated bloc-level prose (\"Central Africa & Sahel: Very limited national systems...\") without naming individual countries. Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "The standout finding: INS Cameroon's own CPI methodology note names AFRISTAT and a CEMAC regulation directly and by number (Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021) -- the CEMAC analogue of the ECOWAS HCPI guide that has failed independent verification three times in this branch's West Africa work. The regulation's own text was not independently opened, but a separate, genuinely opened CEMAC Commission document (its own 2024 regional inflation note, cemac.int) independently names INS-Cameroun as a data-contributing institute and reports Cameroon-specific IHPC statistics sourced from INS -- giving a clean, non-composite, both-sides-opened edge that the West Africa equivalent never achieved. Also notable: INS Cameroon's own document states plainly that Cameroonian wages are NOT indexed to prices (\"les salaires ne sont pas indexes sur les prix\"), offered by INS itself as the explanation for eroding purchasing power -- a rare case of an official statistics agency stating a non-indexation fact about its own economy as context for its own release.",
+  "_open_questions": [
+    {
+      "id": "cm-cemac-reglement-2021-not-opened",
+      "question": "Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021 (the CEMAC harmonised-CPI regulation) is named by number and date in both INS Cameroon's own methodology note and the CEMAC Commission's 2024 inflation note, but its own text/URL was not located this session -- only citing documents were opened."
+    },
+    {
+      "id": "cm-2022-rebase-weight-survey-not-named",
+      "question": "INS Cameroon has rebased to a new 2022 base year (per the CEMAC Commission's 2024 note), but the household expenditure survey underlying that rebasing was not identified this session -- the only named weight survey (ECAM3, 2007) belongs to the now-superseded 2011-base generation."
+    },
+    {
+      "id": "cm-minfi-pensions-page-unreachable",
+      "question": "MINFI's own 'Pensions et rentes viageres' page, which likely holds administrative civil-service pension rules, refused both WebFetch (ROBOTS_DISALLOWED, then timeout) and direct curl (connection reset) on repeated attempts this session."
+    }
+  ],
+  "reports": [
+    {
+      "id": "cm-ins-cpi",
+      "title": "Note mensuelle sur l'évolution des prix à la consommation finale des ménages au Cameroun",
+      "publisher": "Institut National de la Statistique du Cameroun (INS)",
+      "country": "CM",
+      "jurisdiction_level": "federal",
+      "region": "Cameroon",
+      "description": "Cameroon's official consumer price index, produced monthly by INS. A mid-2025 hors-serie note describes the then-current base year as 2011 (\"2eme generation\", official since Jan 2012, COICOP-classified with no version stated, weights from the 2007 ECAM3 household survey). The May 2026 monthly note shows the index has since rebased to \"Base 100 annee 2022\", matching the CEMAC-wide harmonisation (IHPC) framework under CEMAC Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021 (per the CEMAC Commission's own 2024 inflation note). INS's own methodology text: \"La methodologie de l'IPC resulte des travaux et des arbitrages des experts nationaux et des organismes internationaux (AFRISTAT, CEMAC). Un reglement de la CEMAC definit tres precisement la maniere de calculer l'IPC et est partage avec les autres pays de la sous-region.\"",
+      "releases_per_year": 12,
+      "cadence_note": "\"Une note mensuelle est editee et diffusee au plus tard le 15 de chaque mois pour chacune des villes de Yaounde et de Douala\"; a national annual synthesis note follows within 40 days of year-end.",
+      "last_updated": null,
+      "url": "https://ins-cameroun.cm/wp-content/uploads/2026/06/Note-sur-les-prix-au-Cameroun-en-Mai-2026-Rev-DG-ok.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "cemac-inflation-note",
+      "title": "Note sur l'inflation dans les pays membres de la CEMAC",
+      "publisher": "Commission de la CEMAC",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "CEMAC (Central Africa)",
+      "description": "The CEMAC Commission's own regional note on inflation across its six member states (Cameroon, Central African Republic, Chad, Congo, Equatorial Guinea, Gabon), built on the harmonised CPI (IHPC) framework under Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021: \"Par Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021... la Commission de la CEMAC a rendu obligatoire la publication reguliere et la diffusion de l'IHPC des 2022.\" Names INS-Cameroun directly as a national-institute contributor (\"Source: INS des Etats membres\") and reports Cameroon-specific IHPC database statistics (1,163 varieties, 9,000 outlets, rebased to 2022 alongside Chad while the CEMAC-wide aggregate stays on base 2019); Cameroon carries the largest weight (52.4%) of any member state in the CEMAC aggregate index.",
+      "last_updated": null,
+      "url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "cm-imf-program-review-2025",
+      "title": "Cameroon: Eighth Reviews Under the Extended Arrangement Under the Extended Fund Facility and the Arrangement Under the Extended Credit Facility, and Third Review Under the Resilience and Sustainability Facility Arrangement",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "IMF Country Report No. 25/222 (August 2025). Its Technical Memorandum of Understanding requires monthly, disaggregated CPI data from INS as an IMF program-monitoring input: \"Consumer price indices disaggregated by city, product and at the national level. INS Monthly 6 weeks.\" Separately documents that civil-service pension reform is unresolved as of mid-2025 (2024 actuarial study completed, IMF technical-assistance report just submitted, no adjustment mechanism yet established).",
+      "last_updated": "2025-08",
+      "url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1cmrea2025002-source-pdf.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cemac-inflation-note",
+      "target_report_id": "cm-ins-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "CEMAC Commission's own 2024 inflation note names \"INS- Cameroun\" as a country contributor (p.29, \"CONTRIBUTION A LA PRODUCTION DE LA NOTE\") and presents Cameroon-specific IHPC database statistics with \"Source : INS des Etats membres\" (p.5, Tableau 1).",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "cm-imf-program-review-2025",
+      "target_report_id": "cm-ins-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "IMF Country Report No. 25/222, Technical Memorandum of Understanding, Table 1 (p.95): \"Consumer price indices disaggregated by city, product and at the national level. INS Monthly 6 weeks.\"",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1cmrea2025002-source-pdf.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cm-ins-cpi -> general wage level (Cameroon nominal wages indexed to CPI)",
+      "source": "cm-ins-cpi",
+      "target": null,
+      "reason": "denied",
+      "why": "INS's own hors-serie note states plainly: \"Il y a lieu de souligner que les salaires ne sont pas indexes sur les prix ; ce qui est une cause de l'erosion du pouvoir d'achat des populations concernees\" (p.1, INTRODUCTION) -- an explicit denial of wage-CPI indexation in Cameroon, offered by INS itself."
+    },
+    {
+      "edge": "CNPS old-age/invalidity/death pension revaluation -> cm-ins-cpi",
+      "source": null,
+      "target": "cm-ins-cpi",
+      "reason": "denied",
+      "why": "Decret n 74-733 du 19 aout 1974, Art. 37 (in CNPS's own 2021 compendium of base texts): pension revaluation coefficients are fixed by ministerial order \"chaque fois qu'intervient une mesure generale d'augmentation des salaires des travailleurs soumis au Code du Travail\" -- tied to general wage increases, not CPI/inflation. A regional CIPRES directive (Directive N 001/CM/CIPRES, Art. 54) separately names \"le cout de la vie\" as only one of several non-exclusive factors (alongside wages and \"any other relevant parameter\") a discretionary regulatory act may consider -- a concept, not a titled CPI report, so no edge is minted from that directive either. Individual historical revaluations found (Arrete 006/1983: +16%; Arrete 037/1984: +15%) are flat, ad hoc, discretionary coefficients with no CPI calculation shown."
+    },
+    {
+      "edge": "CNPS family allowances (allocations familiales) -> cm-ins-cpi",
+      "source": null,
+      "target": "cm-ins-cpi",
+      "reason": "denied",
+      "why": "Decret N 2016/034 du 21 janvier 2016, Art. 1er: family allowances revalued to a flat \"2.800 francs par enfant a charge et par mois\" by presidential decree, with no CPI or cost-of-living formula stated in the decree text."
+    },
+    {
+      "edge": "CNPS occupational-injury annuities (rente d'accident du travail) -> cm-ins-cpi",
+      "source": null,
+      "target": "cm-ins-cpi",
+      "reason": "no-document",
+      "why": "Decret n 74-733 du 19 aout 1974, Art. 24: \"Les montants des paiements periodiques en cours, attribues au titre de rente d'accident du travail peuvent etre revalorises par decret\" -- no criterion at all is stated, not even cost of living."
+    },
+    {
+      "edge": "World Bank Cameroon Social Safety Nets cash transfer amount -> cm-ins-cpi",
+      "source": null,
+      "target": "cm-ins-cpi",
+      "reason": "no-document",
+      "why": "World Bank Social Safety Nets for Crisis Response Additional Financing PAD (P164830, 2018), para 51: \"The current design of the transfer, notably amount and frequency, will be maintained\" -- amount held fixed, with no CPI/inflation-indexation language found in this document or the companion Adaptive Safety Nets and Economic Inclusion Project appraisal document."
+    },
+    {
+      "edge": "Cameroon civil-service pension system -> cm-ins-cpi",
+      "source": null,
+      "target": "cm-ins-cpi",
+      "reason": "deferred",
+      "why": "IMF Country Report No. 25/222, Supplementary MEFP para 26: civil-service pension reform is explicitly described as unresolved and in-progress as of mid-2025, with no adjustment mechanism documented yet. MINFI's own 'Pensions et rentes viageres' page, which likely holds the administrative rules, could not be retrieved this session (see cm-minfi-pensions-page-unreachable)."
+    },
+    {
+      "edge": "cm-ins-cpi -> CEMAC Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021",
+      "source": "cm-ins-cpi",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Named directly, by number and date, in both INS Cameroon's own methodology note (\"AFRISTAT, CEMAC... Un reglement de la CEMAC definit tres precisement la maniere de calculer l'IPC\") and the CEMAC Commission's own 2024 inflation note. The regulation's own text/URL was not independently located this session -- only citing documents were opened, consistent with this branch's standing caution about regional HCPI framework instruments (three prior failed attempts on the West Africa/ECOWAS equivalent)."
+    }
+  ]
+}

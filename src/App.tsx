@@ -29,17 +29,19 @@ import {
   DEFAULT_VIEW,
   type ViewSettings,
 } from './lib/view'
-import { dependencies, loadIssues, reports } from './data'
+import { dependencies, droppedNotes, loadIssues, reports } from './data'
 import {
   buildGraph,
   contains,
   dependents,
   dependsOn,
   describeRate,
+  disclosureByReport,
   isDocumented,
   isOfficial,
   rolledUpAuthority,
   validate,
+  type Disclosure,
 } from './lib/graph'
 import { buildFocusIndex, computeFocus } from './lib/selection'
 import {
@@ -63,6 +65,7 @@ import {
   scopeOf,
   type Scope,
 } from './lib/palette'
+import { DOMAINS, type Domain } from './lib/types'
 import type {
   Country,
   ReferencePeriod,
@@ -95,6 +98,18 @@ export default function App() {
     }
     return buildGraph(reports, dependencies)
   }, [])
+
+  /**
+   * Disclosure, computed once for the whole corpus rather than per hover.
+   *
+   * It walks every dropped note in the corpus, which is not something to do on
+   * a pointer move — and the result is a pure function of data that never
+   * changes during a session.
+   */
+  const disclosure = useMemo(
+    () => disclosureByReport(reports, dependencies, droppedNotes),
+    [],
+  )
 
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -259,6 +274,10 @@ export default function App() {
     if (clearFilter) setFilter(NO_FILTER)
   }, [])
 
+  const toggleDomain = useCallback((domain: Domain) => {
+    setFilter((f) => ({ ...f, domains: toggleIn(f.domains, DOMAINS, domain) }))
+  }, [])
+
   const toggleScope = useCallback((scope: Scope) => {
     setFilter((f) => ({ ...f, scopes: toggleIn(f.scopes, ALL_SCOPES, scope) }))
   }, [])
@@ -314,6 +333,16 @@ export default function App() {
     () => graph.nodes.filter((n) => !isOfficial(n)).length,
     [graph],
   )
+
+  // Counted over the whole graph, like scopeCounts, so a domain's number does
+  // not collapse to zero the moment you filter by it.
+  const domainCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const n of graph.nodes) {
+      for (const d of n.domains ?? []) counts[d] = (counts[d] ?? 0) + 1
+    }
+    return counts
+  }, [graph])
 
   const impliedCount = useMemo(
     () => graph.edges.filter((e) => !isDocumented(e)).length,
@@ -461,6 +490,8 @@ export default function App() {
           visibleEdgeCount={visible ? visible.edges.size : graph.edges.length}
           top={top}
           scopeCounts={scopeCounts}
+          domainCounts={domainCounts}
+          onToggleDomain={toggleDomain}
           commercialCount={commercialCount}
           filter={filter}
           onToggleScope={toggleScope}
@@ -477,7 +508,9 @@ export default function App() {
       </PanelShell>
 
       <div ref={tooltipRef} style={{ ...tooltip, opacity: hovered ? 1 : 0 }}>
-        {hovered && <Detail report={hovered} graph={graph} />}
+        {hovered && (
+          <Detail report={hovered} graph={graph} disclosure={disclosure} />
+        )}
       </div>
     </div>
   )
@@ -487,9 +520,12 @@ export default function App() {
 function Detail({
   report,
   graph,
+  disclosure,
 }: {
   report: ScoredReport
   graph: ReturnType<typeof buildGraph>
+  /** Corpus-wide disclosure counts, keyed by report id. See `Disclosure`. */
+  disclosure: Map<string, Disclosure>
 }) {
   const colour = colourForReport(report)
   const official = isOfficial(report)
@@ -635,6 +671,8 @@ function Detail({
         <Stat label="Built from" value={String(report.out_degree)} />
       </div>
 
+      <DisclosureBlock disclosure={disclosure.get(report.id)} />
+
       {feeds.length > 0 && (
         <ListBlock title="Feeds into" items={feeds.map((r) => ({ text: r.title }))} />
       )}
@@ -710,6 +748,179 @@ function describePeriod(period: ReferencePeriod | undefined): string | null {
   return when ? `${window} to ${when}` : `${window}, rolling`
 }
 
+/**
+ * How much of what this report is built from it is willing to name.
+ *
+ * `disclosureByReport` has existed in graph.ts since V0.11 and was imported by
+ * nothing until now. Shipped 2026-08-10 (Thomas, Q14) ahead of the next
+ * high-volume sweep, deliberately: the ratio is only meaningful where somebody
+ * has already searched and come up short, so arriving after a sweep would mean
+ * arriving into a graph where it is null nearly everywhere and reads as broken.
+ *
+ * **Silent when the ratio is null, which is most nodes.** Null does not mean
+ * "fully disclosed" — it means nothing was searched for and not found, so
+ * nobody has asked. Rendering a null as 100% would invert the reading and make
+ * an unexamined report present as the most transparent thing on screen; that
+ * distinction is the whole subtlety of the field and it dies here if the card
+ * flattens it. So the block simply does not appear.
+ *
+ * `denied` and `leads` are shown even though neither is in the ratio, and they
+ * are shown as different kinds of thing. A denial is a finding — a document
+ * saying "this is not an input" is among the most valuable facts in the corpus.
+ * A lead is our own backlog and says nothing about the publisher at all.
+ */
+function DisclosureBlock({ disclosure }: { disclosure: Disclosure | undefined }) {
+  if (!disclosure || disclosure.ratio === null) return null
+  const { documented, undisclosed, unpublishable, denied, leads, ratio } = disclosure
+  const known = documented + undisclosed + unpublishable
+
+  return (
+    <div style={{ marginTop: 10 }}>
+      <div style={section}>Disclosure</div>
+      {/*
+        A bar, because the number is a proportion and a proportion is the one
+        thing a bar says faster than text. Amber for what is named, flat grey
+        for what is not — deliberately not red: a publisher declining to name a
+        source is a fact about the source, not a fault to be scored.
+      */}
+      <div
+        style={{
+          display: 'flex',
+          height: 4,
+          borderRadius: 2,
+          overflow: 'hidden',
+          background: '#232a38',
+          margin: '3px 0 5px',
+        }}
+      >
+        <div style={{ width: `${ratio * 100}%`, background: '#c2a86e' }} />
+      </div>
+      <div style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
+        Names {documented} of {known} inputs known to exist
+        {undisclosed > 0 && `, ${undisclosed} stated by no document`}
+        {unpublishable > 0 && `, ${unpublishable} that cannot be a node`}.
+      </div>
+      {denied > 0 && (
+        <div style={{ fontSize: 11, color: '#7fa88b', lineHeight: 1.5, marginTop: 2 }}>
+          {denied} relationship{denied === 1 ? '' : 's'} a document explicitly
+          denies — a finding, not a gap.
+        </div>
+      )}
+      {leads > 0 && (
+        <div style={{ fontSize: 11, color: '#5e6f8a', lineHeight: 1.5, marginTop: 2 }}>
+          {leads} lead{leads === 1 ? '' : 's'} not yet researched — ours, not theirs.
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Subject-matter filter.
+ *
+ * Unparked 2026-08-10 (Thomas, Q12), having been deferred on 8 and 9 August.
+ * The brief was explicit that 24 domains is not 24 checkboxes, and that sorting
+ * was wanted as much as filtering.
+ *
+ * **Collapsed to a single line until opened**, because this is a second filter
+ * axis on a panel that already carries one, and the publisher scope is the axis
+ * people reach for first. Domains that no node carries are not listed at all —
+ * the union is open and half of it is unstaffed, so showing empty rows would
+ * make the list twice as long and tell you nothing.
+ *
+ * The sort is the part worth arguing about. By count answers "what is this
+ * corpus actually about", and the answer changes as it grows — it is a readout
+ * on the shape of the research, not just an ordering. Alphabetical answers "is
+ * the thing I want in here", which is the question you have when you already
+ * know what you are looking for. Both are wanted, neither is the obvious
+ * default, so it is a toggle and it defaults to count: the first time anyone
+ * opens this, they do not yet know what is in it.
+ */
+function DomainPanel({
+  counts,
+  selected,
+  onToggle,
+}: {
+  counts: Record<string, number>
+  selected: readonly Domain[] | null
+  onToggle: (domain: Domain) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [sort, setSort] = useState<'count' | 'name'>('count')
+
+  const present = useMemo(
+    () =>
+      DOMAINS.filter((d) => (counts[d] ?? 0) > 0).sort((a, b) =>
+        sort === 'count' ? (counts[b] ?? 0) - (counts[a] ?? 0) : a.localeCompare(b),
+      ),
+    [counts, sort],
+  )
+  if (present.length === 0) return null
+
+  const on = (d: Domain) => !selected || selected.includes(d)
+  const chosen = selected ? selected.length : present.length
+
+  return (
+    <div style={{ marginTop: 12, pointerEvents: 'auto' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+        <div
+          onClick={() => setOpen((o) => !o)}
+          style={{ ...section, cursor: 'pointer', marginBottom: 0 }}
+        >
+          {open ? '▾' : '▸'} Subject — {selected ? `${chosen} of ` : ''}
+          {present.length}
+        </div>
+        {open && (
+          <span
+            onClick={() => setSort((x) => (x === 'count' ? 'name' : 'count'))}
+            title="Sort by how many reports carry the domain, or alphabetically"
+            style={{
+              fontSize: 9.5,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: '#5e6f8a',
+              cursor: 'pointer',
+              marginLeft: 'auto',
+            }}
+          >
+            {sort === 'count' ? 'by count' : 'a-z'}
+          </span>
+        )}
+      </div>
+
+      {open && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginTop: 5 }}>
+          {present.map((d) => (
+            <span
+              key={d}
+              onClick={() => onToggle(d)}
+              title={`${counts[d]} report${counts[d] === 1 ? '' : 's'}`}
+              style={{
+                fontSize: 10.5,
+                padding: '2px 6px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                border: '1px solid',
+                borderColor: on(d)
+                  ? 'rgba(110, 168, 255, 0.4)'
+                  : 'rgba(90, 115, 160, 0.18)',
+                background: on(d) ? 'rgba(110, 168, 255, 0.12)' : 'transparent',
+                color: on(d) ? '#cfe0f8' : '#5e6f8a',
+                // Chips rather than rows: 24 rows is a scroll, 24 chips is a
+                // paragraph, and the eye reads a paragraph in one pass.
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {d.replace(/-/g, ' ')}
+              <span style={{ color: '#5e6f8a', marginLeft: 4 }}>{counts[d]}</span>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function ListBlock({
   title,
   items,
@@ -753,6 +964,8 @@ function Hud({
   visibleEdgeCount,
   top,
   scopeCounts,
+  domainCounts,
+  onToggleDomain,
   commercialCount,
   filter,
   onToggleScope,
@@ -770,6 +983,8 @@ function Hud({
   visibleEdgeCount: number
   top: { id: string; title: string; authority: number }[]
   scopeCounts: Record<string, number>
+  domainCounts: Record<string, number>
+  onToggleDomain: (domain: Domain) => void
   commercialCount: number
   filter: FilterState
   onToggleScope: (scope: Scope) => void
@@ -1012,6 +1227,12 @@ function Hud({
           </div>
         )
       })}
+
+      <DomainPanel
+        counts={domainCounts}
+        selected={filter.domains}
+        onToggle={onToggleDomain}
+      />
 
       {/*
         Commercial sources belong in the legend on their own terms: grey is a

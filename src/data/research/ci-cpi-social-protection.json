@@ -1,0 +1,105 @@
+{
+  "_slice": "ci-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Côte d'Ivoire researched as part of a push into WAEMU territory the branch's source docx had only described in undifferentiated bloc-level prose (\"Francophone (WAEMU): ...Automatic indexation is rare\") without naming individual countries -- Côte d'Ivoire is WAEMU's largest economy. Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "Two institutional-change findings worth flagging: (1) Côte d'Ivoire's statistics institute was dissolved and replaced mid-branch -- INS (Institut National de la Statistique) was dissolved by Council of Ministers decree on 12 June 2024 and replaced by ANStat (Agence Nationale de la Statistique), so ins.ci is now a dead legacy domain and anstat.ci is the live publisher going forward. (2) ANStat's own bulletin names a specific, dated UEMOA Council of Ministers decision (4th ordinary session 2024, Bamako, 20 December 2024) that adopted the guide governing the current base-2023 IHPC -- a real, Côte-d'Ivoire-specific citation of a UEMOA act, though the guide document itself was not independently located. On social protection: CNPS's own founding ordinance legally requires pension/benefit revaluation to consider \"l'evolution du cout de la vie\" (cost-of-living evolution) across three separate benefit types (pensions, minimum wage, family benefits) -- a real, repeated statutory linkage to a concept, but the mechanism is always a ministerial/administrative decree and no titled CPI report is ever named as the trigger, so no edge is minted under this corpus's own node rule. CGRAE's parallel civil-servant scheme could not be checked -- its founding ordinance exists only as a non-OCR'd scanned PDF.",
+  "_open_questions": [
+    {
+      "id": "ci-uemoa-base2023-guide-not-located",
+      "question": "ANStat's own bulletin names a specific UEMOA Council of Ministers decision (20 Dec 2024, Bamako) adopting 'le guide methodologique' for the current base-2023 IHPC, but gives it no title/regulation number the way the base-2014 predecessor had one (Reglement N 03/2017/CM/UEMOA). The base-2023 instrument itself was not located this session."
+    },
+    {
+      "id": "ci-cgrae-unreadable",
+      "question": "Ordonnance n 2012-303 du 4 avril 2012 (CGRAE, the civil-servant pension fund) exists only as a scanned, non-OCR'd PDF -- confirmed via two independent tools. Secondary sources (CLEISS, non-primary) claim a cost-of-living-based revaluation shift parallel to CNPS's, unverified against the primary text."
+    },
+    {
+      "id": "ci-filets-sociaux-productifs-indexation-unknown",
+      "question": "News sources repeatedly cite a 36,000 FCFA quarterly cash-transfer amount under Programme Filets Sociaux Productifs, but no primary document confirming whether that amount is fixed or subject to adjustment was retrieved this session."
+    },
+    {
+      "id": "ci-sdds-status-ambiguous",
+      "question": "dsbb.imf.org returned no content on direct navigation (confirmed via curl and a live browser tab). The IMF's 2024 Article IV staff report describes Côte d'Ivoire as working to 'align data standards with...e-GDDS' and that doing so 'furthers the prospects for...participation in [SDDS]' -- suggestive of e-GDDS-track/pre-SDDS status, but this is IMF characterization, not a direct DSBB record, and was not minted as a confirmed edge."
+    }
+  ],
+  "reports": [
+    {
+      "id": "ci-anstat-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Agence Nationale de la Statistique (ANStat)",
+      "country": "CI",
+      "jurisdiction_level": "federal",
+      "region": "Côte d'Ivoire",
+      "description": "Côte d'Ivoire's national CPI, base 100 = 2023 (rebased from base 2014 per a UEMOA Council of Ministers decision of 20 Dec 2024, in force from the January 2025 publication: \"la publication de janvier 2025 a inaugure la nouvelle serie de l'IHPC base 100 en 2023\"). Classification named directly as \"NOUVELLE NOMENCLATURE COICOP 2018\" -- a change from the prior base-2014 series, which UEMOA's own regional note describes as using \"NCOA-IHPC...derivee de la COICOP\" (a WAEMU-derived nomenclature, not COICOP itself). Covers 969 products across 12,754 observation points. Published by ANStat, successor to the dissolved Institut National de la Statistique (INS) as of a 12 June 2024 Council of Ministers decree.",
+      "releases_per_year": 12,
+      "cadence_note": "\"Chaque mois, 83 389 relevés de prix sont effectués par les agents enquêteurs de l'ANStat.\"",
+      "last_updated": null,
+      "url": "https://www.anstat.ci/assets/publications/files/File_val_indicateur1776176354.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ci-anstat-ehcvm",
+      "title": "Enquête Harmonisée sur les Conditions de Vie des Ménages (EHCVM) 2021-2022",
+      "publisher": "Agence Nationale de la Statistique (ANStat)",
+      "country": "CI",
+      "jurisdiction_level": "federal",
+      "region": "Côte d'Ivoire",
+      "description": "Household living-conditions/expenditure survey supplying the weights for the current (base 100 = 2023) IHPC: \"Les pondérations proviennent de l'Enquête Harmonisée sur les Conditions de Vie des Ménages (EHCVM), édition 2021/2022.\"",
+      "last_updated": null,
+      "url": "https://www.anstat.ci/assets/publications/files/File_val_indicateur1776176354.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ci-anstat-ihpc",
+      "target_report_id": "ci-anstat-ehcvm",
+      "relationship_type": "uses_data_from",
+      "basis": "ANStat's own IHPC bulletin (mars 2026, n°321), p.1: \"Les pondérations proviennent de l'Enquête Harmonisée sur les Conditions de Vie des Ménages (EHCVM), édition 2021/2022.\"",
+      "evidence_url": "https://www.anstat.ci/assets/publications/files/File_val_indicateur1776176354.pdf"
+    },
+    {
+      "source_report_id": "ci-anstat-ihpc",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ANStat's own IHPC bulletin, Tableau 1 header: \"NOUVELLE NOMENCLATURE COICOP 2018\" -- a documented change from the prior base-2014 series' WAEMU-derived NCOA-IHPC nomenclature.",
+      "evidence_url": "https://www.anstat.ci/assets/publications/files/File_val_indicateur1776176354.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ci-anstat-ihpc -> [UEMOA IHPC methodological guide, base 2023]",
+      "source": "ci-anstat-ihpc",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "ANStat's own bulletin names a specific UEMOA Council of Ministers decision directly: \"au cours de sa quatrieme session ordinaire pour l'annee 2024, tenue le 20 decembre 2024 a Bamako (MALI), le Conseil des Ministres de l'UEMOA a adopte les modalites d'elaboration, de calcul et de diffusion de l'Indice Harmonise des Prix a la Consommation (IHPC base 100 en 2023), telles que definies dans le guide methodologique.\" No title/number is given for that guide the way the base-2014 predecessor had one (Reglement N 03/2017/CM/UEMOA, per UEMOA's own April 2023 note). An AFRISTAT-authored guide with a different title was found and read but its evidenced base year (~2008, referencing the 1996 IHPC96 rollout) is a much earlier vintage -- not confirmed to be the same document."
+    },
+    {
+      "edge": "CNPS pension revalorization (Ordonnance 2012-03, Art. 154/95/50) -> ci-anstat-ihpc",
+      "source": null,
+      "target": "ci-anstat-ihpc",
+      "reason": "denied",
+      "why": "Code de Prevoyance Sociale (Ordonnance n2012-03 du 11 janvier 2012), Art. 154: \"un arrete du Ministre charge de la Prevoyance Sociale determine le niveau de revalorisation de la pension de retraite. La revalorisation doit tenir compte de l'evolution du cout de la vie...\" -- the same 'cout de la vie' (cost-of-living) concept, not a titled CPI report, recurs for the minimum annual wage and already-liquidated annuities (Art. 95) and for family benefits (Art. 50). Mechanism is a ministerial decree, at minimum every two years for the minimum-pension floor (Art. 155) -- confirmed as discretionary rather than automatic by a October 2025 government decision explicitly framed as an 'exceptional' 100% revaluation of the minimum pension, outside the ordinary biennial mechanism. Initial pension calculation itself (Art. 150) is a wage-replacement-rate formula on the best 15 contributory years, with no CPI input."
+    },
+    {
+      "edge": "CGRAE pension revalorization mechanism -> ci-anstat-ihpc",
+      "source": null,
+      "target": "ci-anstat-ihpc",
+      "reason": "unreadable-source",
+      "why": "Ordonnance n 2012-303 du 4 avril 2012 (CGRAE) and its 2017-107 amendment are only available as scanned, non-machine-readable PDFs (confirmed via two independent tools). Secondary reporting (CLEISS, non-primary) claims a cost-of-living-based revaluation shift parallel to CNPS's, but this could not be verified against primary text."
+    },
+    {
+      "edge": "Programme Filets Sociaux Productifs transfer amount -> ci-anstat-ihpc",
+      "source": null,
+      "target": "ci-anstat-ihpc",
+      "reason": "deferred",
+      "why": "News sources repeatedly cite a 36,000 FCFA quarterly transfer amount, but no primary document (program manual, project appraisal, or World Bank text) confirming fixed vs. indexed status was retrieved this session. The one fetchable World Bank restructuring paper for the underlying project (P175594) discusses coverage and delivery mechanics only, with no transfer-value or indexation language."
+    },
+    {
+      "edge": "Côte d'Ivoire SDDS/e-GDDS subscription status",
+      "source": "ci-anstat-ihpc",
+      "target": null,
+      "reason": "deferred",
+      "why": "dsbb.imf.org returned no content on direct navigation, confirmed via both curl and a live browser tab. IMF's 2024 Article IV staff report supplies indirect corroboration -- \"align data standards with the enhanced general data dissemination system (e-GDDS)...furthers the prospects for...participation in the Special Data Dissemination Standards\" -- suggesting e-GDDS-track/pre-SDDS status, but this is IMF commentary describing an aspiration, not DSBB's own primary subscription record, so no imf-e-gdds/imf-sdds edge is minted from it."
+    }
+  ]
+}

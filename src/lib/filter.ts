@@ -1,4 +1,4 @@
-import type { Dependency, Graph, ScoredReport } from './types'
+import type { Dependency, Domain, Graph, ScoredReport } from './types'
 import { isDocumented, isOfficial } from './graph'
 import { scopeOf, type Scope } from './palette'
 import { edgeKey } from './selection'
@@ -77,6 +77,25 @@ export interface FilterState {
    * much is furniture.
    */
   showImplied: boolean
+  /**
+   * Subject matter. Null for all.
+   *
+   * Unparked 2026-08-10 (Thomas, Q12) after being deferred twice. The field has
+   * been on every node since the seed set and was read by nothing, which is the
+   * exact condition that let `country` be silently wrong on nine nodes for five
+   * sessions — an attribute nothing renders is an attribute nobody checks.
+   *
+   * **A node matches if it carries *any* selected domain, not all of them.**
+   * `domains` is a list and most nodes carry two or three; requiring all would
+   * make selecting two domains almost always return nothing, and the question
+   * people actually ask is "show me inflation and labour", not "show me things
+   * that are simultaneously both".
+   *
+   * Kept as its own axis rather than folded into `scopes` because they compose:
+   * Canadian federal *and* inflation is a question this graph should be able to
+   * answer, and one combined list could not express it.
+   */
+  domains: readonly Domain[] | null
 }
 
 export const NO_FILTER: FilterState = {
@@ -84,6 +103,7 @@ export const NO_FILTER: FilterState = {
   scopes: null,
   showDocumented: true,
   showImplied: false,
+  domains: null,
 }
 
 /** True when the state would hide anything, so callers can skip the work. */
@@ -91,6 +111,7 @@ export function isFiltering(state: FilterState): boolean {
   return (
     !state.showCommercial ||
     state.scopes !== null ||
+    state.domains !== null ||
     !state.showDocumented ||
     state.showImplied
   )
@@ -99,10 +120,13 @@ export function isFiltering(state: FilterState): boolean {
 /** Compile the node half of the state down to a single predicate. */
 export function compile(state: FilterState): NodePredicate {
   const scopes = state.scopes && new Set<string>(state.scopes)
+  const domains = state.domains && new Set<string>(state.domains)
 
   return (r) => {
     if (!state.showCommercial && !isOfficial(r)) return false
     if (scopes && !scopes.has(scopeOf(r))) return false
+    // Any, not all — see `domains` on FilterState.
+    if (domains && !(r.domains ?? []).some((d) => domains.has(d))) return false
     return true
   }
 }

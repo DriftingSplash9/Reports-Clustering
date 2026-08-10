@@ -1,0 +1,129 @@
+{
+  "_slice": "sn-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Senegal researched as part of a push into WAEMU territory the branch's source docx had only described in undifferentiated bloc-level prose (\"Francophone (WAEMU): ...Automatic indexation is rare\") without naming individual countries. Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "The standout finding: Senegal's own SDDS metadata, as submitted to the IMF (dsbb.imf.org, a page the branch expected might be an unreadable JS-rendered SPA but which rendered fully via a live browser session), names AFRISTAT directly and by name twice, in two different DQAF sub-sections, and separately names a WAEMU Commission methodological guide by exact title (\"Harmonized Index of Consumer Prices in the WAEMU Member Countries -- Theory and Practice\"). This is the first time in this branch that a country's own primary document has named AFRISTAT this substantively -- stronger than the three-times-failed ECOWAS HCPI guide citation. Neither AFRISTAT nor the WAEMU guide could be minted as nodes (AFRISTAT is an institution without a title; the WAEMU guide's own text was not independently located, and a differently-titled, apparently earlier-vintage AFRISTAT-authored guide found separately is not confirmed to be the same document) -- both recorded as open citations, not forced edges. On social protection, IPRES's and the FNR's pension mechanisms both read as points/wage-based rather than CPI-indexed, but the supporting quotes trace to secondary sources (CLEISS, a French government liaison body; a Senegalese news article) because Senegal's own Journal Officiel site and IPRES's own site could not be reached this session -- flagged as leads pending primary-text confirmation, not settled denials.",
+  "_open_questions": [
+    {
+      "id": "sn-waemu-guide-title-not-located",
+      "question": "Senegal's own SDDS metadata names a WAEMU Commission guide by exact title (\"Harmonized Index of Consumer Prices in the WAEMU Member Countries -- Theory and Practice\") as its methodological reference. A differently-titled AFRISTAT guide (\"Guide methodologique de l'IHPC dans la zone UEMOA\") was found and read, but its evidenced base year (~2008) predates Senegal's current 2023-base IHPC, so it is very likely a superseded earlier edition rather than the document Senegal's metadata cites. The exact document Senegal cites was not located."
+    },
+    {
+      "id": "sn-release-date-conflict-10th-vs-30th",
+      "question": "Senegal's own SDDS metadata page states two different monthly release dates for the same IHPC on the same page: Sections 1.1.2/4.1.2 say the 30th of month m+1; Sections 5.1.3/5.1.4 say the 10th. ANSD's own December 2025 bulletin independently supports the 10th. The 30th-day language looks like unrevised legacy text but this is not confirmed."
+    },
+    {
+      "id": "sn-primary-legal-texts-unreachable",
+      "question": "jo.gouv.sn (Senegal's official gazette) and budget.sec.gouv.sn did not load this session, blocking direct verification of the pension code (Loi 81-52/2002-08) and the 2018 complementary-pension law's implementing arrete. IPRES's own site (secusociale.ipres.sn) also failed to load. Findings on both pension systems currently rest on secondary sources (CLEISS, a Senegalese news outlet) pending a session that can reach these primary hosts."
+    }
+  ],
+  "reports": [
+    {
+      "id": "sn-ansd-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Agence Nationale de la Statistique et de la Démographie (ANSD)",
+      "country": "SN",
+      "jurisdiction_level": "federal",
+      "region": "Senegal",
+      "description": "Senegal's official consumer price index, base 2023 (\"Base 100 en 2023\"). Classification stated directly as COICOP 2018 via a regional adaptation: \"L'indice est structure selon la nomenclature de consommation ouest africaine (NCOA) 2018, tiree de la classification des fonctions de consommation des menages (COICOP) 2018.\" Formula is a Young index, explicitly not Laspeyres (\"les indices de Young sont privilegies plutot que ceux de Laspeyres\"). Corroborated independently by Senegal's own IMF SDDS metadata submission, which restates the same base year, classification and formula.",
+      "releases_per_year": 12,
+      "cadence_note": "ANSD's own December 2025 bulletin states publication \"au plus tard le 10 du mois suivant\" -- but Senegal's SDDS metadata gives a conflicting \"30th of month m+1\" in two sections while agreeing with \"10th\" in two others on the same page (see sn-release-date-conflict-10th-vs-30th). Rebased on a 5-year cycle per the SDDS metadata: \"The HICP is updated every 5 years.\"",
+      "last_updated": null,
+      "url": "https://www.ansd.sn/sites/default/files/2026-01/IHPC_base2023_DEC-25.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "sn-ansd-ehcvm",
+      "title": "Enquête Harmonisée sur les Conditions de Vie des Ménages (EHCVM) 2021-2022",
+      "publisher": "Agence Nationale de la Statistique et de la Démographie (ANSD)",
+      "country": "SN",
+      "jurisdiction_level": "federal",
+      "region": "Senegal",
+      "description": "Household living-conditions/expenditure survey supplying the weights for Senegal's base-2023 IHPC. ANSD's own bulletin: \"les ponderations utilisees sont issues de l'Enquete Harmonisee sur les Conditions de Vie des Menages (EHCVM 2021-2022)\" -- independently corroborated by Senegal's own SDDS metadata, which states the same survey and round.",
+      "last_updated": null,
+      "url": "https://www.ansd.sn/sites/default/files/2026-01/IHPC_base2023_DEC-25.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "sn-ansd-ihpc",
+      "target_report_id": "sn-ansd-ehcvm",
+      "relationship_type": "uses_data_from",
+      "basis": "ANSD's own IHPC bulletin: \"les ponderations utilisees sont issues de l'Enquete Harmonisee sur les Conditions de Vie des Menages (EHCVM 2021-2022)\" -- independently reconfirmed on Senegal's own SDDS metadata page (dsbb.imf.org).",
+      "evidence_url": "https://www.ansd.sn/sites/default/files/2026-01/IHPC_base2023_DEC-25.pdf"
+    },
+    {
+      "source_report_id": "sn-ansd-ihpc",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ANSD's own bulletin: \"L'indice est structure selon la nomenclature de consommation ouest africaine (NCOA) 2018, tiree de la classification des fonctions de consommation des menages (COICOP) 2018\" -- corroborated on Senegal's SDDS metadata page: \"The classification... has been updated from 12 to 13 divisions in accordance with COICOP 2018.\"",
+      "evidence_url": "https://www.ansd.sn/sites/default/files/2026-01/IHPC_base2023_DEC-25.pdf"
+    },
+    {
+      "source_report_id": "sn-ansd-ihpc",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "cites",
+      "basis": "IMF SDDS Annual Report on Senegal: \"Senegal subscribed to the SDDS on November 20, 2017, and met all the SDDS requirements at the time of subscription.\" Table 1 of the same report lists \"Price index: Consumer prices\" under the SDDS's Real Sector category at monthly frequency, 1-month timeliness.",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2023/SEN_SDDS_AR2023.pdf"
+    },
+    {
+      "source_report_id": "sn-ansd-ihpc",
+      "target_report_id": "imf-dqaf",
+      "relationship_type": "cites",
+      "basis": "Senegal's own IMF DQAF metadata submission for \"Price index: consumer prices\" (dsbb.imf.org) supplies the methodology description reused throughout this slice, including the AFRISTAT and WAEMU-guide citations recorded in _dropped below.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/SEN/category/CPI00"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "sn-ansd-ihpc -> AFRISTAT (coordinating institution)",
+      "source": "sn-ansd-ihpc",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Senegal's own SDDS metadata names AFRISTAT directly, twice, in separate DQAF sub-sections: \"The Consumer Price Index is produced in the eight WAEMU member states on the basis of a common methodology. This activity is coordinated within the Union by the Economic and Statistical Observatory for Sub-Saharan Africa (AFRISTAT)\" and \"This function [quality monitoring] in particular is performed by AFRISTAT.\" AFRISTAT is an institution, not a titled publication, and per this branch's own node rule cannot be minted as a node on its own -- no AFRISTAT-published recurring release specific to Senegal's CPI was independently confirmed this session (a differently-titled AFRISTAT guide was found -- see sn-waemu-guide-title-not-located -- but is very plausibly an earlier, superseded edition)."
+    },
+    {
+      "edge": "sn-ansd-ihpc -> WAEMU Commission methodological guide ('Theory and Practice')",
+      "source": "sn-ansd-ihpc",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Senegal's own SDDS metadata: \"A methodological guide, published by the WAEMU Commission and entitled 'Harmonized Index of Consumer Prices in the WAEMU Member Countries -- Theory and Practice' is the methodological reference for the eight member countries.\" The citation itself is solid and Senegal-specific; the target document could not be independently retrieved or confirmed under this exact title this session."
+    },
+    {
+      "edge": "IPRES pension revaluation -> sn-ansd-ihpc",
+      "source": null,
+      "target": "sn-ansd-ihpc",
+      "reason": "denied",
+      "why": "\"La pension annuelle est calculee selon la formule suivante : (Points de cotisations + points gratuits - points de minoration + points de majoration) x valeur du point\", with the point value administratively set (\"parametres IPRES 2025\") -- CLEISS (French inter-agency social-security liaison body), describing Senegal's system. No CPI/inflation-indexation language found. Caveat: this is CLEISS's description of IPRES, not IPRES's own primary text -- IPRES's own site could not be reached this session (see sn-primary-legal-texts-unreachable); this denial should be re-verified against IPRES's own statutes."
+    },
+    {
+      "edge": "FNR civil/military pension code (Loi 81-52/2002-08) -> sn-ansd-ihpc",
+      "source": null,
+      "target": "sn-ansd-ihpc",
+      "reason": "denied",
+      "why": "\"la modification du mode de calcul de la pension basee sur la moyenne des emoluments des trois dernieres annees\" -- a Senegalese news article's account of Loi n2002-08 amending Loi n81-52. Wage-based (average of the final three years' pay), not CPI-indexed, per this source. Caveat: secondary news-article paraphrase, not the primary legal text itself (see sn-primary-legal-texts-unreachable)."
+    },
+    {
+      "edge": "FNR complementary pension scheme (Loi 2018-12) -> sn-ansd-ihpc",
+      "source": null,
+      "target": "sn-ansd-ihpc",
+      "reason": "deferred",
+      "why": "\"Modalites de gestion (indexation, rachat de cotisations, remuneration des reserves) fixees par arrete du Ministre charge des Finances\" -- the law itself (per a government summary page, not the full statute) defers the indexation mechanism to a ministerial order not located this session. Genuinely undetermined, not a denial."
+    },
+    {
+      "edge": "PNBSF (Bourse de Securite Familiale) -> sn-ansd-ihpc",
+      "source": null,
+      "target": "sn-ansd-ihpc",
+      "reason": "no-document",
+      "why": "World Bank Senegal Adaptive Safety Net Project document states the transfer as a flat \"CFAF 25,000 (US$42 equivalent) per quarter per household for five years\" with no adjustment formula anywhere in the document; inflation appears only as unrelated macroeconomic context elsewhere in the same document."
+    },
+    {
+      "edge": "PNBSF targeting/vulnerability calculation -> named ANSD publication",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "AGENCY ONLY, twice, in the same World Bank document: \"the overall vulnerability rate is estimated at 55 percent...as calculated by the World Bank Poverty team in partnership with the ANSD\" and \"the implementation of a nationwide survey conducted by the ANSD.\" ANSD named as a technical partner both times; no specific ANSD publication titled either time."
+    }
+  ]
+}
