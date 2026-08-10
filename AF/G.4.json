@@ -1,0 +1,127 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.4.md",
+  "number": 4,
+  "title": "G.4.md — Africa galaxy hand-off",
+  "date": "2026-08-10",
+  "governing_briefs": "`Research.1.md` §2/§3/§4, same as G.1-G.3. `AF/G.1.md`, `AF/G.2.md` and `AF/G.3.md` all read this session (G.3 was passed in directly as the session's starting context, per its own \"what to pass\" instruction).",
+  "predecessor": "G.3.md (2026-08-10)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "Ghana closes with the same \"real formula, already live in practice, statute still catching up\" shape found for Ethiopia's UPSNJP, not Kenya's \"permissive-only\" shape: the LEAP indexation formula (`LB_t+1 = LB_t(1+inf_t)`, GSS-CPI-based, capped at 50%) is quoted directly from a 2023 Ministry of Finance strategy paper and independently reported by Ghanaian press as having actually taken effect from late 2023/2024 — ahead of, not because of, the Social Protection Act, 2025 (Act 1148) that later covered LEAP by name. Six nodes, five dependency edges, two documented non-dependencies, written to `gh-leap-cpi-indexation.json` and delivered to Thomas along with this hand-off.",
+  "findings": [
+    {
+      "heading": "1. The LEAP indexation formula is real, specific, and already implemented — independent of the statute meant to back it",
+      "body": "`gh-mofep-leap-indexation-strategy`, VERIFIED DIRECTLY via the Ministry of Finance's own September 2023 strategy paper: `LB_t+1 = LB_t(1 + inf_t)`, where `inf_t` is \"the 12-month annual average inflation from October of previous year to September of current year estimated from Ghana Statistical Service (GSS) Consumer Price Index release\", with adjustments \"capped at 50%\". The paper itself states the mechanism \"will be backed by legislation... through the proposed Social Protection Bill\" — a forward reference to an as-yet-unnamed bill, not a citation of any Act by number, since Act 1148 did not exist in September 2023. Ghana's Graphic Online (independently found, not Grok-sourced) reports the mechanism actually took effect following a 100% benefit increase in 2023 and a further GH₵720 million committed in the 2024 budget — i.e. implemented as cabinet-level policy well before any statute addressed it directly."
+    },
+    {
+      "heading": "2. Social Protection Act, 2025 (Act 1148) — confirmed by both halves independently, but its operative text is paywalled",
+      "body": "`gh-social-protection-act-2025`: passed by Parliament 31 July 2025, assented and commenced 14 August 2025 — the exact date confirmed twice, independently, by Claude's own direct fetch of judy.legal's hosted text and by Grok's round citing the same source. Sections 1-2 (Application, Object) are freely readable and contain no indexation language; secondary reporting (MoGCSP, news) states the Act covers LEAP by name and establishes a Social Protection Fund, but neither this session's own tools nor Grok's round could get past judy.legal's paywall to the operative sections. The Legislative Instrument needed to translate the Act into practice was, per MoGCSP, submitted to Parliament and expected in force by June 2026 — meaning even if the Act itself doesn't contain a CPI formula, the LI might. Per `REPORTS.md`'s own rule (no edge without a document naming the relationship), **no edge connects the 2023 strategy paper to Act 1148** — treated exactly as G.3 treated Ethiopia's constitution/World-Bank-funding pair: an observed, plausible consistency, recorded in `_note`, not a graph edge."
+    },
+    {
+      "heading": "3. Ghana's CPI: confirmed COICOP 2018 and Jevons elementary aggregation, but the corpus is holding a stale base year until someone finds the rebase's own methodology note",
+      "body": "`gh-gss-cpi`: GSS's own CPI Technical Methodology Manual (v5, October 2020) directly confirms COICOP 2018 (\"GSS uses the United Nations Classification of Individual Consumption According to Purpose (COICOP) 2018 manual\") and Jevons-index elementary aggregation, on a 2018=100 base with GLSS7 (2016/17) weights. That manual is now out of date on the base year specifically: GSS's own September 2025 press release (published 1 October 2025) confirms the series has since been rebased to 2021=100 (weight reference period still 2017). No dedicated methodology document for the 2021=100 rebase — the kind of document that would let this be cited with the same precision as the COICOP/Jevons findings — was located by either half of the split. Ghana is now the fourth country in the corpus confirmed on COICOP 2018 (after South Africa, Nigeria, Kenya), and a third country on the IMF's weaker e-GDDS tier (after Kenya, Ethiopia), independently dated to November 2018 via Ghana's own Ministry of Finance press release — which happens to match the month Grok's round separately cited from a 2026 IMF Article IV report, a small but genuine cross-confirmation."
+    },
+    {
+      "heading": "4. World Bank financing for LEAP: Ghana's own government is now the majority funder, a different shape from Ethiopia's donor-led PSNP5",
+      "body": "`gh-gpsnp2-worldbank` (Grok-sourced project identification, independently verified this session via direct fetch of the project's own text): Ghana Productive Safety Net Project 2 (P175588, effective January 2022), Component 3 explicitly \"supports the continuation, expansion, and strengthening of the Livelihood Empowerment Against Poverty (LEAP) program\". Financing: US$100.0 million IDA credit against US$157.0 million Government of Ghana counterpart — Component 3 specifically is US$20 million IDA against US$157 million GoG, meaning Ghana's own government funds the large majority of its LEAP transfers, a different balance from Ethiopia's PSNP5/SEASN (roughly US$900 million IDA against US$590 million GoG, i.e. donor-majority). Two African flagship safety-net programmes, both World Bank-financed, opposite funding majorities."
+    },
+    {
+      "heading": "5. SSNIT pensions: CPI is one of four named statutory review factors, not a formula — a genuine third shape, distinct from LEAP's own pure formula",
+      "body": "`gh-ssnit-pensions`, VERIFIED DIRECTLY via SSNIT's own 2025 Pension Indexation Rate press release, which quotes its own governing provision: \"The Trust shall annually review the pension payment which shall be indexed to wage inflation rates of active contributors or another rate determined by the Trust in consultation with the Board of the Authority\" (Section 80, National Pensions Act, 2008 (Act 766) — the Act's own text was not independently fetchable, government registry blocks automated access, so this rests on SSNIT's own quotation of it). The same press release lists CPI as one of four factors actually used: \"Average salary of active contributors from the previous year\", \"Annual average Consumer Price Index (CPI) from the previous year\", affordability, and long-term sustainability. A genuinely different shape from LEAP's single-variable formula — CPI is a real, quoted, named input but explicitly one of several, with the statute's own default anchor being wage inflation rather than CPI."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "Nigeria — 9 raw docx entries (CPI rebasing February 2025, NISER cost-of-living brief, PenCom pension review circular tied to a constitutional 5-year review cycle). Largest remaining country by entry count. Good parallel-split candidate: the PenCom/constitutional review angle and the CPI rebasing/COICOP angle look like natural Claude/Grok lanes, similar to how Ghana split into LEAP-formula-mechanism vs funding/other-programmes."
+        },
+        {
+          "n": 2,
+          "text": "Tanzania — 4 raw entries (NBS CPI, National Social Protection Policy 2023). Not started."
+        },
+        {
+          "n": 3,
+          "text": "Whether to model the docx's regional-typology prose (WAEMU HCPI, AFRISTAT) as corpus nodes — raised in G.1, still not raised with Thomas. Ghana's own confirmed non-membership in WAEMU (Finding/Secondary observation above) answers the specific question G.3 flagged about Ghana's regional status, but the broader question of whether to model WAEMU itself (for whichever WAEMU-member country gets worked eventually) is still open."
+        },
+        {
+          "n": 4,
+          "text": "Import review: seven DRAFT JSON files now sit un-imported in `src/data/research/` (six carried from G.3, plus `gh-leap-cpi-indexation.json` from this session). Not on Thomas to review immediately, but worth surfacing every hand-off until it happens."
+        },
+        {
+          "n": 5,
+          "text": "The `gh-ecowas-hcpi-guide-unconfirmed` open question (below) is worth a direct Grok reprompt specifically asking for the regulation's exact title, number, and a working URL, before either minting or permanently dropping it."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "Ghana's CPI 2021=100 rebase — GSS's own dedicated methodology note (as opposed to a press-release mention of the new base year) was not located. Would let the corpus cite the rebase with the same precision as the COICOP/Jevons findings, rather than resting on a press-release aside."
+    },
+    {
+      "n": 2,
+      "text": "Act 1148's operative text, specifically any indexation clause — paywalled at judy.legal; a free official gazette or parliament.gh copy was searched for and not found. Worth a targeted retry if a JS-capable browsing tool becomes available (same caveat already logged for the IMF DSBB pages in G.2)."
+    },
+    {
+      "n": 3,
+      "text": "The ECOWAS HCPI Methodological Guide Grok reported (June 2025) — needs a direct reprompt for title/number/URL before it's trusted at all; see _open_questions in the JSON and Orientation item 5."
+    },
+    {
+      "n": 4,
+      "text": "Constitution s.28 (South Africa, children's rights) — cited secondhand via the Western Cape DSD document (G.2), never independently fetched. Carried forward unchanged from G.2/G.3."
+    },
+    {
+      "n": 5,
+      "text": "`za-sassa-annual-report` → `za-social-assistance-act-2004` direct edge — open since G.1, still unresolved. Carried forward unchanged."
+    },
+    {
+      "n": 6,
+      "text": "IMF DSBB DQAF pages remain JS-rendered and unreachable for South Africa, Egypt, Kenya (Ghana was not attempted against this specific page this session, since the MOFEP press release gave a cleaner primary source). Do not re-attempt per-country; batch-recheck if a JS-capable tool arrives."
+    },
+    {
+      "n": 7,
+      "text": "Ethiopia's PSNP5 wheat-equivalency figures and current COICOP vintage — carried forward unchanged from G.3, still unconfirmed, still low urgency."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `AF/G.1.md`, `AF/G.2.md`, and `AF/G.3.md` for full context — Orientation across all four still applies and has been kept current rather than rewritten from scratch."
+    },
+    {
+      "n": 2,
+      "text": "`country afrikans.docx` — Nigeria's 9 entries specifically, next up per Thomas's priority above."
+    },
+    {
+      "n": 3,
+      "text": "The seven DRAFT JSON files in `src/data/research/`, all still awaiting Thomas's review/import: `za-fiscal-federalism.json`, `za-national-accounts-labour.json`, `za-followup-gaps.json`, `eg-cpi-social-insurance.json`, `ke-social-protection.json`, `et-psnp-cpi-federalism.json`, `gh-leap-cpi-indexation.json`."
+    },
+    {
+      "n": 4,
+      "text": "`feedback_grok-as-verification` (Claude's project memory) plus this file's Orientation item 4 — the mechanism is synchronous and conversational for this branch, not file-based; don't go looking for a `research-input/` prompt file."
+    },
+    {
+      "n": 5,
+      "text": "A concrete instruction for how to run the Nigeria split: read Nigeria's 9 docx entries first (this is the largest single-country entry count in the branch so far — expect more than one candidate mechanism, not just one formula to find), identify the CPI-rebasing/COICOP angle and the PenCom constitutional-review angle as two plausible lanes, and write the Grok prompt for whichever lane isn't Claude's own before doing deep independent research on Claude's lane — running both concurrently is the point, established now on two countries running."
+    }
+  ],
+  "session_conditions": "This session opened with `AF/G.3.md` passed in directly as the starting message — its own \"What to pass at the start of next thread\" instruction, working as designed. No `AF/G.1.md`/`G.2.md` text was passed in directly, but both were staged and read in full this session (see Orientation item 3 in each). `country afrikans.docx` was staged and its two Ghana entries plus the closing regional-typology prose were read directly. `REPORTS.md`'s data-model and evidence-standard sections, `README.md`, and `START-HERE.md` were also read this session — worth noting because no prior AF hand-off records having read `REPORTS.md` directly (only referencing it), and it changed how strictly the Act 1148 / MOFEP-paper connection was ultimately handled (see Corrections). Ghana was worked as a genuine parallel split: Claude's own WebFetch/WebSearch tools were available and used extensively (roughly a dozen fetches) alongside, not instead of, Grok's round."
+}

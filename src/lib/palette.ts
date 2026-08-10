@@ -182,6 +182,18 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // statutory bodies administering them. See `src/data/research/za-*.json`.
   ZA: 'AFR',
 
+  // **Egypt, Kenya, Ethiopia and Ghana added in the same import pass,
+  // 2026-08-10** (AF branch hand-offs G.2-G.4), alongside South Africa's
+  // follow-up slices -- pension/CPI law (Egypt), a disability cash transfer
+  // and the EAC's binding regional CPI regulation (Kenya), PSNP5's wage-CPI
+  // mechanism and a second, currently-suspended CPI covenant (Ethiopia), and
+  // the LEAP indexation formula plus SSNIT pensions (Ghana). See
+  // `src/data/research/eg-*.json`, `ke-*.json`, `et-*.json`, `gh-*.json`.
+  EG: 'AFR',
+  KE: 'AFR',
+  ET: 'AFR',
+  GH: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

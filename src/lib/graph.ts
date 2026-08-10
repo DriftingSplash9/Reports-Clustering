@@ -128,11 +128,25 @@ export function validate(
         message: `${r.id}: international-level publisher claims country ${r.country}`,
       })
     }
-    // The same guard for the supranational layer, added 2026-08-04. `EU` is the
-    // only supranational body modelled; a member state publishing at that level
-    // is a mis-tag, and it is the specific mis-tag the EU branch is most likely
-    // to make — a Destatis release is 'DE' + 'federal', not 'EU' + anything.
-    if (r.jurisdiction_level === 'supranational' && r.country !== 'EU') {
+    // The same guard for the supranational layer, added 2026-08-04, widened
+    // 2026-08-10. `EU` was the only supranational body modelled at first; a
+    // member state publishing at that level is a mis-tag, and it is the
+    // specific mis-tag the EU branch is most likely to make — a Destatis
+    // release is 'DE' + 'federal', not 'EU' + anything. The AF branch then
+    // added a second supranational body without its own pseudo-country code —
+    // the EAC's binding HCPI regulation (`eac-hcpi-regulations`, ke-social-
+    // protection.json) is filed `country: 'INT'` on the same reasoning already
+    // applied to the IMF, the BIS and other bodies belonging to no single
+    // country. `INT` is added to the whitelist rather than minting an `EAC`
+    // pseudo-country, since unlike the EU (27 member states, its own colour
+    // family) the corpus has no other EAC-scoped nodes that would need one.
+    // The guard still catches the mistake it exists for: a member state
+    // (`DE`, `KE`, anything real) is neither `EU` nor `INT`.
+    if (
+      r.jurisdiction_level === 'supranational' &&
+      r.country !== 'EU' &&
+      r.country !== 'INT'
+    ) {
       issues.push({
         severity: 'error',
         message: `${r.id}: supranational-level publisher claims country ${r.country}`,

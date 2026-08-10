@@ -74,6 +74,13 @@ import deIeNationalAccountsQualityReports from './research/de-ie-national-accoun
 import euLegalInstrumentLineages from './research/eu-legal-instrument-lineages.json'
 import essCatalogueStandards from './research/ess-catalogue-standards.json'
 import zaCpiSocialGrants from './research/za-cpi-social-grants.json'
+import zaFiscalFederalism from './research/za-fiscal-federalism.json'
+import zaNationalAccountsLabour from './research/za-national-accounts-labour.json'
+import zaFollowupGaps from './research/za-followup-gaps.json'
+import egCpiSocialInsurance from './research/eg-cpi-social-insurance.json'
+import keSocialProtection from './research/ke-social-protection.json'
+import etPsnpCpiFederalism from './research/et-psnp-cpi-federalism.json'
+import ghLeapCpiIndexation from './research/gh-leap-cpi-indexation.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -181,6 +188,13 @@ const slices: ResearchSlice[] = [
   euLegalInstrumentLineages as unknown as ResearchSlice,
   essCatalogueStandards as unknown as ResearchSlice,
   zaCpiSocialGrants as unknown as ResearchSlice,
+  zaFiscalFederalism as unknown as ResearchSlice,
+  zaNationalAccountsLabour as unknown as ResearchSlice,
+  zaFollowupGaps as unknown as ResearchSlice,
+  egCpiSocialInsurance as unknown as ResearchSlice,
+  keSocialProtection as unknown as ResearchSlice,
+  etPsnpCpiFederalism as unknown as ResearchSlice,
+  ghLeapCpiIndexation as unknown as ResearchSlice,
 ]
 
 function assemble() {
