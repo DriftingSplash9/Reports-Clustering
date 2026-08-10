@@ -1,0 +1,153 @@
+{
+  "_slice": "td-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Chad researched as part of a second WAEMU/CEMAC push (following G.11's Senegal/Côte d'Ivoire/Mali/Cameroon batch) -- CEMAC's third member country in this branch, and a direct test of the source docx's 'Central Africa & Sahel: very limited national systems' framing given Chad's political instability (2021 presidential succession crisis, transitional military government). Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "Chad's own statistics office (INSEED) could not be read live this session -- its site is a JavaScript single-page app that returned only a loading shell or routing errors on every attempt -- so the CPI methodology description rests on a press report quoting an INSEED official directly, cross-checked against the IMF's own 2024 Article IV report rather than an INSEED-published document. Chad's e-GDDS participation (not SDDS) is solidly documented from two independent sources. Chad's own social-security fund (CNPS) publishes an exhaustive, self-authored list of every governing legal text, none of which contains a CPI/inflation-indexation provision -- a clean, well-evidenced denial rather than a gap. A genuine, unresolved tension: the IMF's November 2024 report says Chad's CPI was rebased to a 2019 base with no further change mentioned, but a CEMAC Commission note published roughly five months later states in a table footnote that Chad (with Cameroon) had by then moved to a 2022 base -- reported as a timeline discrepancy, not picked.",
+  "_open_questions": [
+    {
+      "id": "td-2022-rebasing-not-independently-confirmed",
+      "question": "No Chad-specific (INSEED) document confirms the CPI's move to a 2022 base or dates it -- only the CEMAC Commission's own April-2025 regional note states it, in a single footnote, for Cameroon and Chad jointly."
+    },
+    {
+      "id": "td-inseed-site-unreadable",
+      "question": "inseed.td is a React single-page app; curl returns only a loading-spinner shell and live browser rendering produced routing errors and, on two occasions, apparent cross-country content bleed (Gabon, then Burkina Faso content under a Chad URL). The 'Bulletins IHPC' series is confirmed to exist (search-engine indexed, dozens of entries) but was not readable this session."
+    },
+    {
+      "id": "td-bulletin-des-prix-producer-unconfirmed",
+      "question": "A separate ReliefWeb-hosted 'Tchad Bulletin des Prix' monthly series (2018-2024), likely a FEWS NET product based on title convention, returned 403 on every fetch attempt. Its relationship (if any) to INSEED's own CPI is unconfirmed."
+    }
+  ],
+  "reports": [
+    {
+      "id": "td-inseed-cpi",
+      "title": "Indice National Harmonisé des Prix à la Consommation (INHPC)",
+      "publisher": "Institut National de la Statistique, des Études Économiques et Démographiques (INSEED)",
+      "country": "TD",
+      "jurisdiction_level": "federal",
+      "region": "Chad",
+      "description": "Chad's official household consumer price index. Per INSEED's Dr Zakaria Baradine Moussa at a June 2023 validation workshop (press-quoted, not an INSEED-published document itself): \"cet indice est harmonisé et comparable à tous les pays de la sous-région\", base 100 = 2019, extended to seven cities beyond N'Djamena, weights from the ECOSIT4 (2019) consumption survey, calculated using the 'Phoenix' application. A CEMAC Commission note states Chad has since moved to a 2022 base (see td-2022-rebasing-not-independently-confirmed) -- not independently confirmed by a Chad-published source this session.",
+      "releases_per_year": 12,
+      "cadence_note": "IMF Country Report 24/335, Table IX.3: monthly data provision confirmed ('M' frequency), latest observation Aug-24 received Oct-24 as of the report -- meeting or beating e-GDDS-encouraged timeliness (1-month actual vs. 2-month encouraged).",
+      "last_updated": null,
+      "url": "https://www.inseed.td/index.php/statistiques-economiques/bulletins-ihpc",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "td-cnps-guide-assure-social",
+      "title": "Guide de l'Assuré Social",
+      "publisher": "Caisse Nationale de Prévoyance Sociale (CNPS) du Tchad",
+      "country": "TD",
+      "jurisdiction_level": "federal",
+      "region": "Chad",
+      "description": "CNPS's own guide to insured persons' rights (2019 edition), stating the pension calculation formula directly: \"La pension de retraite est calculée en pourcentage des salaires soumis à cotisation. Il est égal au produit du salaire moyen de trois ou cinq dernières années de la carrière par le [taux] de remplacement. Ce taux qui est de 30% pour le 15 premières années est majoré de 1,2% pour chaque année supplémentaire au délà de 15ème année.\" A one-time, final-average-wage-based calculation with no post-award revaluation clause found anywhere in the 763-line guide.",
+      "last_updated": "2019",
+      "url": "https://cnps-tchad.com/wp-content/uploads/2021/06/GUIDE-DE-LASURE-SOCIAL.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "td-imf-article-iv-2024",
+      "title": "Chad: 2024 Article IV Consultation-Press Release; Staff Report; and Statement by the Executive Director for Chad",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "IMF Country Report No. 24/335 (November 2024). Confirms CPI rebasing to a 2019 base (\"the CPI was rebased to 2019\"), Chad's e-GDDS participation since July 2022, an overall data-adequacy rating of 'C' with a 'Prices'-specific sub-rating of 'B', and social-registry development status.",
+      "releases_per_year": 1,
+      "cadence_note": "Approximately annual, per observed 2023 and 2024 Article IV consultation titles -- not independently verified further back this session.",
+      "last_updated": "2024-11",
+      "url": "https://www.elibrary.imf.org/downloadpdf/view/journals/002/2024/335/002.2024.issue-335-en.pdf",
+      "domains": ["inflation", "benefits"]
+    },
+    {
+      "id": "wb-chad-safety-nets-2016",
+      "title": "Chad Safety Nets Project (P156479) / Projet de filets sociaux",
+      "publisher": "World Bank (IDA) / Sahel Adaptive Social Protection Program multi-donor trust fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "Approved 1 September 2016, $10 million IDA grant. Fixed monthly transfer of 15,000 FCFA (~$25) to 6,200 households over 2 years, benchmarked once at design to a poverty-gap calculation: \"Ce transfert correspond à environ 50% de l'écart de pauvreté en matière de consommation alimentaire.\" No CPI-linkage stated. Superseded by wb-chad-adaptive-safety-nets-2024.",
+      "last_updated": "2016-09",
+      "url": "https://www.banquemondiale.org/fr/news/press-release/2016/09/01/chad-world-bank-safety-nets-program-benefits-15000-vulnerable-households",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "wb-chad-adaptive-safety-nets-2024",
+      "title": "Chad Adaptive and Productive Safety Nets Project (P502142)",
+      "publisher": "World Bank (IDA) / Programme de Protection Sociale Adaptative au Sahel",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "Approved 21 June 2024, $100M IDA + $20M Sahel Adaptive Social Protection Program trust fund. 62,200 households across nine provinces, including refugee and host-community households. Transfer amounts explicitly left to be \"determined jointly with the government team during the project preparation\" -- discretionary/negotiated, not CPI-linked.",
+      "last_updated": "2024-06",
+      "url": "https://www.banquemondiale.org/fr/news/press-release/2024/06/21/world-bank-is-helping-chad-strengthen-its-social-protection-system",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cemac-inflation-note",
+      "target_report_id": "td-inseed-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "CEMAC Commission's own 2024 inflation note (already in the corpus via Cameroon's G.11 slice) reports Chad-specific IHPC database statistics in its Tableau 1 (p.5) -- 634 varieties, 1,660 points de vente, 8,964 produits élémentaires -- with the table's own source line: \"Source : INS des Etats membres,\" and separately credits \"INSEED – Tchad\" as a named contributor in its front-matter credits.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "td-inseed-cpi",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF Country Report 24/335, Annex IX Table IX.2: \"Chad participates in the Enhanced General Data Dissemination System (e-GDDS) and publishes the data on its National Summary Data Page since July 2022.\" Confirmed live on dsbb.imf.org, which lists 'Price Indices: Consumer Price Index' under Chad's e-GDDS Encouraged Data Categories. Reuses the imf-e-gdds node already minted elsewhere in this branch.",
+      "evidence_url": "https://dsbb.imf.org/egdds/country/TCD/category"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "td-inseed-cpi -> CEMAC Règlement N° 03/21-CEMAC-UEAC-CM-36",
+      "source": "td-inseed-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "The regulation is named only by the CEMAC Commission's own document (which credits INSEED-Tchad as a data contributor to CEMAC's report, not the other way around) -- no Chad-published document was found this session naming the regulation or AFRISTAT directly, unlike Cameroon's own self-citation. The regulation's own text remains un-located branch-wide."
+    },
+    {
+      "edge": "td-cnps-guide-assure-social -> td-inseed-cpi",
+      "source": "td-cnps-guide-assure-social",
+      "target": "td-inseed-cpi",
+      "reason": "no-document",
+      "why": "CNPS's own exhaustive, self-published list of 12 governing legal texts contains no CPI/inflation-indexation provision. Searched 'indexation', 'revalorisation', 'inflation', 'prix à la consommation', 'IPC' against the full list and against the complete Guide de l'Assuré Social text -- zero hits outside the calculation-formula passage itself. The only economic peg found anywhere in CNPS's own material is the contribution floor pegged to SMIG (minimum wage) -- wage-linked, not price-linked."
+    },
+    {
+      "edge": "wb-chad-adaptive-safety-nets-2024 -> td-inseed-cpi",
+      "source": "wb-chad-adaptive-safety-nets-2024",
+      "target": "td-inseed-cpi",
+      "reason": "no-document",
+      "why": "The project's own document states transfer amounts are \"determined jointly with the government team during the project preparation\" -- a negotiated/discretionary process, no CPI or inflation reference found."
+    },
+    {
+      "edge": "wb-chad-safety-nets-2016 -> td-inseed-cpi",
+      "source": "wb-chad-safety-nets-2016",
+      "target": "td-inseed-cpi",
+      "reason": "no-document",
+      "why": "The 2016 transfer amount (15,000 FCFA/month) was benchmarked once, at design, to a poverty-gap calculation, fixed for the 2-year programme duration, with no ongoing CPI/inflation link stated."
+    },
+    {
+      "edge": "td-inseed-cpi -> un-coicop-2018",
+      "source": "td-inseed-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "Searched 'COICOP' across every Chad and CEMAC document retrieved this session (the Alwihda article, the IMF Country Report full text, the CEMAC 2024 inflation note) -- zero matches, unlike Tanzania's or Kenya's CPI documentation, which name COICOP 2018 directly."
+    },
+    {
+      "edge": "td-inseed-cpi -- CPI methodology detail beyond the press-quoted summary",
+      "source": "td-inseed-cpi",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "inseed.td (both the 'Bulletins IHPC' listing and the 'Diagnostic du Système Statistique' page) is a JavaScript single-page app that returned only a loading-spinner shell via curl and produced routing errors / apparent cross-tab content bleed via live browser rendering this session (see td-inseed-site-unreadable)."
+    },
+    {
+      "edge": "td-inseed-cpi -> ReliefWeb 'Tchad Bulletin des Prix' series",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "A separate, possibly FEWS NET-produced, monthly price bulletin series exists on ReliefWeb (2018-2024) but returned 403 on every fetch attempt. Producer unconfirmed; relationship (if any) to INSEED's own CPI unconfirmed."
+    }
+  ]
+}

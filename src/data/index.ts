@@ -2,6 +2,7 @@ import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
 import { reports as seedReports } from './reports'
 import { dependencies as seedDependencies } from './dependencies'
 import usCaliforniaLosAngeles from './research/us-california-los-angeles.json'
+import usTexasHouston from './research/us-texas-houston.json'
 import usSubnational from './research/us-subnational.json'
 import albertaMunicipal from './research/alberta-municipal.json'
 import populationAndEducation from './research/population-and-education.json'
@@ -102,6 +103,10 @@ import snCpiSocialProtection from './research/sn-cpi-social-protection.json'
 import ciCpiSocialProtection from './research/ci-cpi-social-protection.json'
 import cmCpiSocialProtection from './research/cm-cpi-social-protection.json'
 import mlCpiSocialProtection from './research/ml-cpi-social-protection.json'
+import bfCpiSocialProtection from './research/bf-cpi-social-protection.json'
+import tgCpiSocialProtection from './research/tg-cpi-social-protection.json'
+import gaCpiSocialProtection from './research/ga-cpi-social-protection.json'
+import tdCpiSocialProtection from './research/td-cpi-social-protection.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -137,6 +142,7 @@ interface ResearchSlice {
 
 const slices: ResearchSlice[] = [
   usSubnational as unknown as ResearchSlice,
+  usTexasHouston as unknown as ResearchSlice,
   usCaliforniaLosAngeles as unknown as ResearchSlice,
   albertaMunicipal as unknown as ResearchSlice,
   populationAndEducation as unknown as ResearchSlice,
@@ -237,6 +243,10 @@ const slices: ResearchSlice[] = [
   ciCpiSocialProtection as unknown as ResearchSlice,
   cmCpiSocialProtection as unknown as ResearchSlice,
   mlCpiSocialProtection as unknown as ResearchSlice,
+  bfCpiSocialProtection as unknown as ResearchSlice,
+  tgCpiSocialProtection as unknown as ResearchSlice,
+  gaCpiSocialProtection as unknown as ResearchSlice,
+  tdCpiSocialProtection as unknown as ResearchSlice,
 ]
 
 function assemble() {

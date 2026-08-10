@@ -1,0 +1,101 @@
+{
+  "_slice": "ga-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Gabon researched as part of a second WAEMU/CEMAC push (following G.11's Senegal/Côte d'Ivoire/Mali/Cameroon batch) -- CEMAC's second member country in this branch after Cameroon. Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "A clean country-level contrast with Cameroon: unlike Cameroon's own CPI methodology note, which names AFRISTAT and a specific numbered CEMAC regulation directly, Gabon's own IHPC bulletin does neither -- it asserts only that its methodology is 'identique dans les pays membres de la CEMAC et de l'UEMOA' without naming any specific instrument. AFRISTAT appears on Gabon's statistics site only as a partner logo, with no explanatory text. The CEMAC Commission's own 2024 inflation note (already in the corpus as cemac-inflation-note, from Cameroon's G.11 slice) independently corroborates Gabon from the other side, naming Gabon's national institute as a data contributor. Two documents disagree on Gabon's base-year status relative to Cameroon and Chad -- reported as a conflict, not resolved. The strongest finding of this slice is a direct IMF denial: Gabon's public-sector pension fund is wage-scale indexed, not CPI-indexed, per the IMF's own 2024 Article IV report -- and a March 2025 proposal to index the private-sector fund's pensions to inflation was not the version subsequently enacted in December 2025 reform decrees.",
+  "_open_questions": [
+    {
+      "id": "ga-base-year-table-conflict",
+      "question": "Gabon's own October 2024 bulletin states plainly 'IHPC base 2018 en remplacement de l'IHPC base 2004' with no mention of a 2022 base. The CEMAC Commission's own 2024 inflation note has a table footnote stating 'le Cameroun et le Tchad sont passés à la base 2022' (Cameroon and Chad moved to the 2022 base) -- implying by omission that Gabon has not. This is the opposite of what this session's own briefing assumed (that Gabon was ahead of Cameroon/Chad on rebasing). Not resolved -- two documents read together, neither adjudicated."
+    },
+    {
+      "id": "ga-cnamgs-legal-texts-not-retrieved",
+      "question": "A legal-text index page (legigabon.com) lists Gabon's health-insurance and family-benefits statutes (Loi n°034/PR/2007, Ordonnance n°0022/PR/2007, Loi n°035/PR/2007) plus a 2014 decree titled 'Filets de protection économique et revenus solidaires' -- the closest thing found to a named Gabonese safety-net legal instrument -- but none of these texts' actual content was retrieved this session."
+    },
+    {
+      "id": "ga-cnss-primary-code-not-retrieved",
+      "question": "CNSS's pension formula (via CLEISS, a secondary French source) rests on Code de Sécurité Sociale provisions (Loi n°6/75 du 25 novembre 1975, as amended by Loi n°037/2023) that could not be retrieved in readable primary form this session."
+    }
+  ],
+  "reports": [
+    {
+      "id": "ga-instat-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Direction Générale de la Statistique (DGS) / Institut National de la Statistique (INSTAT), Gabon",
+      "country": "GA",
+      "jurisdiction_level": "federal",
+      "region": "Gabon",
+      "description": "Gabon's monthly harmonised consumer price index, base 2018 (replacing base 2004). \"La Direction Générale de la Statistique a le plaisir de mettre à la disposition des utilisateurs l'Indice Harmonisé des Prix à la Consommation (IHPC) base 2018 en remplacement de l'IHPC base 2004... L'IHPC est un indice de Laspeyres calculé en utilisant le principe d'agrégations successives à partir des variétés jusqu'aux fonctions.\" Weights from the EGEP II poverty-monitoring survey (2017, updated 2018). 750 varieties tracked at 2,670 points of sale, ~27,452 monthly price collections, collected via tablets. Does not name COICOP by version anywhere in the document (searched, not found).",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly bulletin; October 2024 edition published 11 November 2024.",
+      "last_updated": null,
+      "url": "https://instatgabon.org/uploads/IHPC/IHPC_Publication_octobre_2024.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ga-imf-article-iv-2024",
+      "title": "Gabon: 2024 Article IV Consultation-Press Release; Staff Report; and Statement by the Executive Director for Gabon",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "IMF Article IV report, May 2024. States directly on public pension indexation: \"the authorities have already initiated the repayment of the pension arrears, indexed pension in line with the wage scale and are planning reforms of the public pension funds to preserve their sustainability.\" Searched directly for CNAMGS, safety net, cash transfer and social protection -- zero occurrences of all four terms.",
+      "last_updated": "2024-05",
+      "url": "https://www.elibrary.imf.org/downloadpdf/view/journals/002/2024/144/002.2024.issue-144-en.pdf",
+      "domains": ["inflation", "benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cemac-inflation-note",
+      "target_report_id": "ga-instat-ihpc",
+      "relationship_type": "uses_data_from",
+      "basis": "CEMAC Commission's own 2024 inflation note (already in the corpus via Cameroon's G.11 slice) reports Gabon-specific IHPC database statistics in its Tableau 1 (p.5) -- 750 varieties, 2,670 points de vente, matching Gabon's own bulletin exactly -- with the table's own source line: \"Source : INS des Etats membres.\"",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "ga-instat-ihpc",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Confirmed via live browser render of dsbb.imf.org: \"(As provided by Gabon as a participant in the e-GDDS)\", listing 'Price Indices: Consumer Price Index' among Gabon's e-GDDS Encouraged Data Categories. Reuses the imf-e-gdds node already minted elsewhere in this branch.",
+      "evidence_url": "https://dsbb.imf.org/egdds/country/GAB/category"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ga-instat-ihpc -> CEMAC Règlement N° 03/21-CEMAC-UEAC-CM-36",
+      "source": "ga-instat-ihpc",
+      "target": null,
+      "reason": "no-document",
+      "why": "Gabon's own IHPC bulletin states the methodology is 'identique dans les pays membres de la CEMAC et de l'UEMOA' and that the index 'a été adopté comme instrument de mesure de l'évolution des prix au sein des pays de la CEMAC' -- but never names the regulation by number, unlike Cameroon's own CPI note. Searched directly for 'AFRISTAT', 'Règlement', '03/21-CEMAC', 'UEAC-CM-36' in both the October 2024 and June 2023 IHPC bulletins -- none found. The regulation itself remains un-minted branch-wide; no session has yet located its own text directly (only the CEMAC Commission's separate inflation note names it)."
+    },
+    {
+      "edge": "CPPF (civil-service pension) -> ga-instat-ihpc",
+      "source": null,
+      "target": "ga-instat-ihpc",
+      "reason": "denied",
+      "why": "IMF 2024 Article IV, para. 32: \"the authorities have already initiated the repayment of the pension arrears, indexed pension in line with the wage scale...\" -- explicit wage-scale indexation, not CPI. A secondary regional source (CIPRES) separately describes a flat 150,000 FCFA guaranteed minimum for CPPF pensions plus an unspecified one-time revaluation, with no formula or index named -- consistent with a discretionary, non-CPI mechanism."
+    },
+    {
+      "edge": "CNSS (private-sector pension) -> ga-instat-ihpc",
+      "source": null,
+      "target": "ga-instat-ihpc",
+      "reason": "deferred",
+      "why": "A March 2025 CNSS reform proposal explicitly included 'la revalorisation des pensions selon l'inflation' (revaluation of pensions according to inflation), but the same article states this is a proposal under discussion: 'Reste à voir si ces mesures seront mises en application.' Subsequent December 2025 CNSS reform decrees describe only a hedged 'possible revalorisation' and a 'revalorisation régulière' with no inflation/CPI reference -- suggesting the inflation-indexation proposal was not the version enacted. A genuine non-enactment finding, not a live CPI edge."
+    },
+    {
+      "edge": "Gabon cash-transfer/safety-net programme -> ga-instat-ihpc",
+      "source": null,
+      "target": "ga-instat-ihpc",
+      "reason": "no-document",
+      "why": "No titled, indexed Gabonese cash-transfer programme was located. The Registre Social Unique (RSU) is a household-targeting database, not a benefit programme with a CPI-linked amount. A 2014 decree titled 'Filets de protection économique et revenus solidaires' is the closest named safety-net legal instrument found, but its content was not retrieved this session (see ga-cnamgs-legal-texts-not-retrieved)."
+    },
+    {
+      "edge": "ga-instat-ihpc -> imf-sdds / imf-sdds-plus",
+      "source": "ga-instat-ihpc",
+      "target": null,
+      "reason": "denied",
+      "why": "Confirmed via live browser render of dsbb.imf.org (cross-checked across a fresh tab after the site intermittently served other countries' content under Gabon's URL, browsing the 'G' section of both lists directly): Gabon does not appear in either the SDDS subscribing-countries list or the SDDS Plus adhering-countries list -- e-GDDS only (see dependencies above)."
+    }
+  ]
+}

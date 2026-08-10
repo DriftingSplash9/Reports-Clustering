@@ -1,0 +1,101 @@
+{
+  "_slice": "tg-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Togo researched as part of a second WAEMU/CEMAC push (following G.11's Senegal/Côte d'Ivoire/Mali/Cameroon batch). Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "This session resolves a standing branch-wide open question, carried across Senegal, Côte d'Ivoire and Mali in G.11: whether the UEMOA Council of Ministers ever formally adopted a base-2023 harmonised-CPI regulation, and if so, its number. It did: UEMOA's own Bulletin Officiel de l'Union N°123 (4e trimestre 2024) -- the Union's official gazette, obtained and OCR'd directly this session -- contains the full text of Règlement N°05/2024/CM/UEMOA du 20 décembre 2024, adopted at Bamako, effective 1 January 2025, which formally adopts the base-2023 IHPC methodological guide and abrogates both Règlement n°03/2017/CM/UEMOA (the base-2014 regulation Mali's session located and quoted secondhand) and Règlement n°08/2006/CM/UEMOA (underlying inflation calculation). Independently corroborated by BCEAO's own 20 December 2024 communiqué and by a UEMOA Commission official quoted in Niger's press. Togo's own INSEED, even in its most recent (June 2026) documents, does not itself cite this regulation by number -- the resolving document had to come from UEMOA's own gazette, not from Togo's statistics office, mirroring the pattern found for Burkina Faso and Côte d'Ivoire in this same round.",
+  "_open_questions": [
+    {
+      "id": "tg-1991-guide-not-located",
+      "question": "Togo's own 2018 IMF metadata names 'Harmonized Consumer Price Index for WAEMU Member Countries – Theory and Practice' (WAEMU Commission, near-identical title to Senegal's and Burkina Faso's own citations) as the reference methodology document. Still not located as a retrievable file by any of the three countries that have now named it."
+    },
+    {
+      "id": "tg-2018-dsbb-metadata-stale",
+      "question": "Togo's IMF DSBB CPI-specific metadata (dsbb.imf.org, CPI00 category) is dated 'Last Updated: Jul 08, 2018' and describes base year 2008 and Lomé-only coverage -- two rebasings and one coverage-expansion out of date relative to Togo's own current bulletins. Togo's e-GDDS participation status itself is confirmed current via a separate, live government data portal (togo.opendataforafrica.org), but the CPI-specific detail page has not been refreshed."
+    },
+    {
+      "id": "tg-crt-founding-texts-unreadable",
+      "question": "CRT's (Caisse de Retraites du Togo, civil-service pension fund) founding Loi N°91-11 du 23 mai 1991 and Décret N°91-208 du 6 septembre 1991 are listed by title on CRT's own site but their full text was not retrievable this session -- any indexation clause they may contain is unchecked."
+    }
+  ],
+  "reports": [
+    {
+      "id": "tg-inseed-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC) Togo",
+      "publisher": "Institut National de la Statistique et des Études Économiques et Démographiques (INSEED)",
+      "country": "TG",
+      "jurisdiction_level": "federal",
+      "region": "Togo",
+      "description": "Togo's monthly harmonised consumer price index under the common WAEMU/UEMOA methodology, base 2023 as of the June 2026 bulletin. \"Cet indice est dit harmonisé car il repose sur une méthodologie commune, adoptée en 1996 par les huit pays membres de l'Union Économique et Monétaire Ouest-Africaine (UEMOA), puis rénovée successivement en 2008 et 2023.\" 810 products tracked at 4,790 points of sale, ~29,200 monthly price collections, weights from EHCVM 2021.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly bulletin.",
+      "last_updated": null,
+      "url": "https://inseed.tg/download/7866/?tmstv=1786294751",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "uemoa-reg-2024-base2023",
+      "title": "Règlement N°05/2024/CM/UEMOA du 20 décembre 2024 portant adoption du Guide méthodologique définissant les modalités d'élaboration et de calcul de l'Indice Harmonisé des Prix à la Consommation au sein des États membres de l'UEMOA (IHPC base 100 en 2023)",
+      "publisher": "Conseil des Ministres de l'UEMOA",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "WAEMU (8 member states: Bénin, Burkina Faso, Côte d'Ivoire, Guinée-Bissau, Mali, Niger, Sénégal, Togo)",
+      "description": "One-off foundational instrument formally adopting the base-2023 IHPC methodological guide for all eight WAEMU member states, effective 1 January 2025, replacing the base-2014 regulation. Article premier: \"Est adopté le Guide méthodologique définissant les modalités d'élaboration, de calcul et de diffusion de l'indice Harmonisé des Prix à la Consommation au sein des États membres de l'UEMOA (IHPC base 100 en 2023)...\" Article 7: \"L'IHPC base 100 en 2023 sert de mesure officielle des variations des prix à la consommation dans les États membres de l'UEMOA, en remplacement de l'IHPC base 100 en 2014.\" Article 11: \"Le présent Règlement abroge le Règlement n°03/2017/CM/UEMOA du 31 mars 2017... et le Règlement n°08/2006/CM/UEMOA du 29 juin 2006...\" Article 12: \"Le présent Règlement prend effet à compter du 1er janvier 2025... Fait à Bamako, le 20 décembre 2024.\" Obtained from UEMOA's own official gazette, Bulletin Officiel de l'Union N°123 (4e trimestre 2024), via OCR of the scanned original.",
+      "last_updated": "2024-12-20",
+      "url": "https://www.uemoa.int/sites/default/files/bibliotheque/bulletin-officiel-ndeg-123-4eme-trimestre-2024.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "tg-inseed-ihpc",
+      "target_report_id": "uemoa-reg-2024-base2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Règlement N°05/2024/CM/UEMOA Article 2: \"Les États membres préservent le caractère national et harmonisé de la méthodologie de calcul de l'indice... A ce titre, ils s'appuient sur la méthodologie de l'IHPC base 100 en 2023 et utilisent exclusivement le progiciel mis à leur disposition par la Commission de l'UEMOA.\" Togo is a named UEMOA member state bound by this regulation (cover page of the Bulletin Officiel lists all eight, including Togo, by name). Note: Togo's own INSEED documents do not independently cite this regulation by number -- the dependency is established by the regulation's own binding text, not by a Togo self-citation.",
+      "evidence_url": "https://www.uemoa.int/sites/default/files/bibliotheque/bulletin-officiel-ndeg-123-4eme-trimestre-2024.pdf"
+    },
+    {
+      "source_report_id": "tg-inseed-ihpc",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Togo's own government data portal (Togo Data Portal, opendataforafrica.org): \"Data linked from this page correspond to data described in the International Monetary Fund's DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Togo participates...\" lists Consumer Price Index as a live e-GDDS category. Reuses the imf-e-gdds node already minted elsewhere in this branch. This is the live, current confirmation -- distinct from Togo's CPI-specific DSBB metadata, which is stale (see tg-2018-dsbb-metadata-stale).",
+      "evidence_url": "https://togo.opendataforafrica.org/weyhecc/national-summary-data-page-nsdp"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tg-cnss-pension -> tg-inseed-ihpc",
+      "source": null,
+      "target": "tg-inseed-ihpc",
+      "reason": "no-document",
+      "why": "CNSS's own regulatory-texts index (cnss.tg/documentation/textes-reglementaires/) lists the full Code de Sécurité Sociale plus every 2023 AMU decree, with no revalorization instrument. A detailed secondary compendium (CLEISS) states the CNSS pension formula fully (20% of last-5-years average + 1.33%/year beyond 180 months, floor/ceiling tied to the legal minimum wage) but never mentions CPI, inflation, or periodic revalorization. Searched and confirmed absent, not merely unresearched."
+    },
+    {
+      "edge": "tg-crt-pension -> tg-inseed-ihpc",
+      "source": null,
+      "target": "tg-inseed-ihpc",
+      "reason": "unreadable-source",
+      "why": "CRT's own site names only Loi 91-11 and Décret 91-208 as its governing texts and states a 20%/7% contribution split on its missions page, but gives no indexation clause there. Full statutory text of Loi 91-11/Décret 91-208 was not retrievable this session (titles only, see tg-crt-founding-texts-unreadable)."
+    },
+    {
+      "edge": "tg-novissi -> tg-inseed-ihpc",
+      "source": null,
+      "target": "tg-inseed-ihpc",
+      "reason": "no-document",
+      "why": "An IPA (Innovations for Poverty Action) design brief states the Novissi cash-transfer amount was set as 30% of the monthly minimum wage (SMIG, 35,000 FCFA), not linked to IHPC/inflation: 'The inter-ministerial committee determined that the transfer should approximate the minimum wage.' No CPI-linkage found. This is a secondary NGO/academic brief describing the 2020 emergency launch design, not a retrieved Togolese government primary document -- novissi.gouv.tg itself returned HTTP errors on every fetch attempt this session."
+    },
+    {
+      "edge": "tg-inseed-ihpc -> afristat",
+      "source": "tg-inseed-ihpc",
+      "target": null,
+      "reason": "no-document",
+      "why": "INSEED's own site names AFRISTAT only in an institutional/governance context -- Togo's 2024-2025 presidency of AFRISTAT's Council of Ministers -- never as a cited methodological source for the IHPC itself. Contrast with a UEMOA Commission official quoted in Niger's press, who credits AFRISTAT as 'maître d'œuvre technique' of the regional IHPC rebasing project Togo participated in as one of the eight member states."
+    },
+    {
+      "edge": "tg-inseed-ihpc -> un-coicop-2018",
+      "source": "tg-inseed-ihpc",
+      "target": null,
+      "reason": "deferred",
+      "why": "Togo's own 2018 e-GDDS DSBB submission states NCOA is 'derived directly from the international COICOP' -- a real methodology_depends_on candidate -- but that submission is stale (last updated 2018, still describing base-2008/Lomé-only IHPC). No 2023-era INSEED document re-confirms the COICOP linkage; the June 2026 bulletin names only 'NCOA-IHPC' without the COICOP cross-reference. Deferred rather than minted until a current-dated source is found."
+    }
+  ]
+}

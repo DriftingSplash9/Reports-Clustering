@@ -1,0 +1,779 @@
+{
+  "_slice": "Texas and Houston — the counter-sample to California and Los Angeles",
+  "_researched": "2026-08-10",
+  "_note": "Built from research Grok produced against a brief, then put through a citation-resolution pass because roughly two in five of its evidence_url fields were pointers rather than documents — \"TEA school finance pages\", \"PSF / SBOE materials\", \"TRS reports\". The structure it proposed held up; several of its specifics did not, and the corrections are recorded in _dropped rather than quietly fixed. Texas answers the same questions as California and answers them differently almost everywhere. California caps what a property is worth and lets the rate float; Texas caps what a jurisdiction may charge and lets the value float. California's counties appraise; Texas hands appraisal to independent districts and then has the state audit them, and the audited value rather than the local one drives school funding — the Property Value Study has no California equivalent at all. California legislates against five different price indexes; Texas mostly does not legislate against price indexes, preferring property value growth and fixed historical baselines, and the clearest exception is local: Houston's revenue cap, which reads a Houston-area CPI and a federal population estimate. The one structure that transfers cleanly is the pension chain — experience study, valuation, contribution rate, budget — and even there the two Texas systems differ, since the teacher system's current valuation is running on assumptions four years old while the state employee system's is in phase.",
+  "reports": [
+    {
+      "id": "bls-cpi-houston",
+      "title": "Consumer Price Index, Houston-The Woodlands-Sugar Land",
+      "publisher": "US Bureau of Labor Statistics, Southwest Information Office",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "Houston-The Woodlands-Sugar Land, Texas",
+      "description": "The metropolitan-area CPI-U for the Houston core based statistical area, and the index the City of Houston uses to adjust its property tax revenue cap. Published bimonthly rather than monthly, in even months, and not seasonally adjusted. The area has been renamed twice — from Houston-Galveston-Brazoria, and again under the 2023 delineation — while the underlying series identifier stayed put.",
+      "releases_per_year": 6,
+      "cadence_note": "Bimonthly, which matters less than it looks: the City reads the annual average for the preceding calendar year, so a six-a-year series still yields a usable yearly figure.",
+      "last_updated": null,
+      "url": "https://www.bls.gov/regions/southwest/tx_houston_msa.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "tx-tax-code-ch26",
+      "title": "Texas Tax Code Chapter 26 — Assessment and Truth-in-Taxation",
+      "publisher": "Texas Legislature",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The statutory machinery every Texas taxing unit runs each year: the chief appraiser certifies the appraisal roll, the assessor computes the no-new-revenue tax rate and the voter-approval tax rate, and a rate above the voter-approval rate requires an election. Texas's answer to the question California answers with Proposition 13, and a completely different answer — a cap on the rate rather than on the value.",
+      "last_updated": null,
+      "url": "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.26.htm",
+      "domains": [
+        "taxation",
+        "municipal-finance",
+        "assessment"
+      ]
+    },
+    {
+      "id": "tx-tax-code-23-23",
+      "title": "Texas Tax Code §23.23 — Limitation on Appraised Value of Residence Homestead",
+      "publisher": "Texas Legislature",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The one broad value cap in Texas law: a homestead's appraised value may not exceed the lesser of market value or the prior year's appraised value plus 10 percent plus the market value of new improvements. Narrower than Proposition 13 in three ways — it applies only to homesteads, it caps appraised rather than market value so market value keeps being determined underneath it, and it expires when the qualifying owner does.",
+      "last_updated": null,
+      "url": "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.23.htm",
+      "domains": [
+        "assessment",
+        "taxation"
+      ]
+    },
+    {
+      "id": "tx-govt-code-403-302",
+      "title": "Texas Government Code §403.302 — Determination of School District Property Values",
+      "publisher": "Texas Legislature",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The mandate for the Comptroller's study of school district property values. The provision that lets a state agency substitute its own valuation for a local appraisal district's when the local one fails an audit, for the purpose of distributing state education money.",
+      "last_updated": null,
+      "url": "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.403.htm",
+      "domains": [
+        "education",
+        "fiscal-transfers",
+        "assessment"
+      ]
+    },
+    {
+      "id": "tx-const-49g-esf",
+      "title": "Texas Constitution Article III §49-g — Economic Stabilization Fund",
+      "publisher": "Texas Legislature",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The constitutional formula transferring oil and gas production tax revenue above fiscal 1987 levels into the Economic Stabilization Fund, splitting the result with the State Highway Fund, and capping the fund's balance at 10 percent of the preceding biennium's general revenue deposits.",
+      "last_updated": null,
+      "url": "https://codes.findlaw.com/tx/constitution-of-the-state-of-texas-1876/const-sect-49-g.html",
+      "domains": [
+        "energy-royalties",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "tx-const-art7-5-psf",
+      "title": "Texas Constitution Article VII §5 — Permanent School Fund distribution",
+      "publisher": "Texas Legislature",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The total-return rule governing what the Permanent School Fund may distribute to the Available School Fund: not more than 6 percent of the average market value of the fund on the last day of each of the 16 state fiscal quarters preceding the regular legislative session before the biennium, subject to a 10-year total-return ceiling.",
+      "last_updated": null,
+      "url": "https://law.justia.com/constitution/texas/sections/cn000700-000500.html",
+      "domains": [
+        "education",
+        "energy-royalties",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "tceq-water-district-financial-guide",
+      "title": "Water District Financial Management Guide",
+      "publisher": "Texas Commission on Environmental Quality",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The accounting and audit framework Texas water districts — including the municipal utility districts that finance suburban Houston — keep their records under. The counterpart in this corpus to GASB's standards, but for a class of special district that has no equivalent anywhere else in the graph.",
+      "last_updated": null,
+      "url": "https://www.tceq.texas.gov/downloads/water-districts/financial/wdfmg.pdf",
+      "domains": [
+        "municipal-finance",
+        "financial-regulation"
+      ]
+    },
+    {
+      "id": "comptroller-pvs",
+      "title": "School District Property Value Study",
+      "publisher": "Texas Comptroller of Public Accounts, Property Tax Assistance Division",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The state's independent ratio study of taxable property value in every school district, conducted at least once every two years using comparable sales and audit sampling, and certified to the Commissioner of Education for use in school funding. The structure with no California equivalent: a state agency audits local appraisals, and where the local value fails the audit the state value is used instead — so the number that drives the money is not necessarily the one the appraisal district produced.",
+      "releases_per_year": 0.5,
+      "last_updated": null,
+      "url": "https://comptroller.texas.gov/taxes/property-tax/pvs/index.php",
+      "domains": [
+        "assessment",
+        "education",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "tea-foundation-school-program",
+      "title": "Foundation School Program state funding",
+      "publisher": "Texas Education Agency",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The core school funding system — basic allotment, Tier One entitlement, tax rate compression and the recapture of local revenue above entitlement. Recapture, in which a property-wealthy district sends local tax revenue back to the state for redistribution, has no analogue anywhere else in this corpus.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://tea.texas.gov/finance-and-grants/state-funding/foundation-school-program/foundation-school-program",
+      "domains": [
+        "education",
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "tea-maximum-compressed-rate",
+      "title": "Maximum Compressed Tax Rates letter to administrators",
+      "publisher": "Texas Education Agency",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The annual letter telling every school district the maximum maintenance and operations rate it may compress to, computed from state-certified property value growth. Structurally the twin of California's Board of Equalization letter to county assessors: one short annual document, addressed to every local unit at once, that sets a rate the whole state then runs on.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://tea.texas.gov/about-tea/news-and-multimedia/correspondence/taa-letters/2025-final-maximum-compressed-tax-rates-mcr-and-adoption-of-tax-rate",
+      "domains": [
+        "education",
+        "taxation",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "comptroller-bre",
+      "title": "Biennial Revenue Estimate",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The constitutionally required estimate of revenue available for the coming two-year budget period. Appropriations exceeding it are invalid without a four-fifths vote of both chambers, and no appropriation bill reaches the Governor without the Comptroller's certificate that it fits inside the estimate. A forecast with legal force, which the California budget documents do not have.",
+      "releases_per_year": 0.5,
+      "last_updated": null,
+      "url": "https://comptroller.texas.gov/transparency/reports/biennial-revenue-estimate/",
+      "domains": [
+        "fiscal-transfers",
+        "taxation",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "comptroller-certification-revenue-estimate",
+      "title": "Certification Revenue Estimate",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The updated revenue estimate issued after a legislative session, against which the Comptroller certifies the appropriations actually passed. The enforcement step the Biennial Revenue Estimate only sets up.",
+      "releases_per_year": 0.5,
+      "last_updated": null,
+      "url": "https://comptroller.texas.gov/transparency/reports/certification-revenue-estimate/2026-27/",
+      "domains": [
+        "fiscal-transfers",
+        "taxation"
+      ]
+    },
+    {
+      "id": "comptroller-state-revenue-watch",
+      "title": "Monthly State Revenue Watch",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "Monthly cash-basis reporting of state revenue by source, including net oil and natural gas production tax collections — the series the Economic Stabilization Fund transfer is computed against.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://comptroller.texas.gov/transparency/revenue/watch/",
+      "domains": [
+        "taxation",
+        "energy-royalties",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "comptroller-esf-transfer",
+      "title": "Economic Stabilization Fund and State Highway Fund severance tax transfers",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The annual computation and execution of the constitutional transfers of oil and gas production tax revenue into the Economic Stabilization Fund and the State Highway Fund. As of the 2026-27 estimate the fund has reached its constitutional ceiling, so the highway fund keeps its share while the stabilization fund's falls to zero in 2027 and the remainder goes to general revenue.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://comptroller.texas.gov/economy/fiscal-notes/government/2025/esf-info/",
+      "domains": [
+        "energy-royalties",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "sboe-psf-distribution-rate",
+      "title": "Permanent School Fund distribution rate to the Available School Fund",
+      "publisher": "Texas State Board of Education",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The distribution rate the State Board of Education adopts each biennium, moving investment returns and land and mineral royalties from the Permanent School Fund into the Available School Fund and thence to schools. Since 2023 the fund itself is managed by a separate Permanent School Fund Corporation, leaving the rate decision with the Board.",
+      "releases_per_year": 0.5,
+      "last_updated": null,
+      "url": "https://sboe.texas.gov/",
+      "domains": [
+        "education",
+        "energy-royalties",
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "comptroller-transit-sales-tax-allocation",
+      "title": "Transit District Sales and Use Tax allocation",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The monthly allocation of transit authority sales and use tax collections back to each authority, net of the state's 2 percent service charge. The channel through which a Houston retail sale becomes transit revenue.",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "url": "https://comptroller.texas.gov/transparency/local/allocations/sales-tax/transit/",
+      "domains": [
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "trs-actuarial-valuation",
+      "title": "TRS Actuarial Valuation Report",
+      "publisher": "Teacher Retirement System of Texas",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The annual valuation of the Teacher Retirement System, setting funded status and contribution requirements as of each August 31.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.trs.texas.gov/Pages/about_publications.aspx",
+      "domains": [
+        "benefits",
+        "education",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "trs-experience-study",
+      "title": "TRS Actuarial Experience Study",
+      "publisher": "Teacher Retirement System of Texas",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The four-yearly study of actual system experience against the standing assumptions, recommending the demographic and economic assumptions the valuations then use.",
+      "releases_per_year": 0.25,
+      "last_updated": null,
+      "url": "https://www.trs.texas.gov/Pages/about_publications.aspx",
+      "domains": [
+        "benefits",
+        "research-innovation",
+        "population"
+      ]
+    },
+    {
+      "id": "ers-actuarial-valuation",
+      "title": "ERS Actuarial Valuation Reports",
+      "publisher": "Employees Retirement System of Texas",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The annual valuation of the pension plans administered by the Employees Retirement System, covering the main plan, the law enforcement and custodial officer fund and the judicial retirement plan.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://ers.texas.gov/about-ers/reports-and-studies/ers-actuarial-valuation-reports",
+      "domains": [
+        "benefits",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "ers-experience-study",
+      "title": "ERS Actuarial Experience Study",
+      "publisher": "Employees Retirement System of Texas",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The four-yearly experience investigation from which the Board of Trustees adopts the assumptions used in subsequent valuations.",
+      "releases_per_year": 0.25,
+      "last_updated": null,
+      "url": "https://ers.texas.gov/about-ers/reports-and-studies/ers-actuarial-valuation-reports",
+      "domains": [
+        "benefits",
+        "research-innovation",
+        "population"
+      ]
+    },
+    {
+      "id": "hcad-appraisal-roll",
+      "title": "Harris Central Appraisal District Annual Appraisal Roll",
+      "publisher": "Harris Central Appraisal District",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Harris County, Texas",
+      "description": "The annual roll of appraised value for all taxable property in Harris County, valued as of January 1 and certified to the assessor for each taxing unit. Note what is unusual by California standards: the appraisal district is its own entity with its own board, not an office of the county.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://hcad.org/hcad-resources/hcad-reports/",
+      "domains": [
+        "assessment",
+        "taxation",
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "houston-revenue-cap",
+      "title": "City of Houston property tax revenue cap calculation",
+      "publisher": "City of Houston Finance Department",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Houston, Texas",
+      "description": "The annual computation of the ceiling on the City's property tax revenue under the 2004 charter amendment, as amended in 2006 to add $90 million for public safety. The limit is the lesser of the prior year's collections plus 4.5 percent, or the fiscal 2005 base adjusted cumulatively for inflation and population growth. The closest structural analogue in the corpus to California's Gann limit, and it reaches a different answer: a local price index and a federal population estimate rather than a state personal income measure.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.houstontx.gov/budget/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "inflation"
+      ]
+    },
+    {
+      "id": "houston-adopted-budget",
+      "title": "City of Houston Adopted Budget",
+      "publisher": "City of Houston",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Houston, Texas",
+      "description": "The City's annual operating and capital budget for the fiscal year beginning July 1, carrying the revenue cap computation and the property tax revenue estimate that follows from it.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.houstontx.gov/budget/",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "houston-acfr",
+      "title": "City of Houston Annual Comprehensive Financial Report",
+      "publisher": "City of Houston Controller",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Houston, Texas",
+      "description": "The City's audited annual financial statements for the fiscal year ended June 30, whose first note is where the revenue cap is described in the terms the bond market relies on.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.houstontx.gov/controller/financials.html",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "harris-county-adopted-budget",
+      "title": "Harris County Adopted Budget",
+      "publisher": "Harris County",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Harris County, Texas",
+      "description": "The county's annual operating budget for the fiscal year ending September 30 — a different fiscal calendar from the City of Houston inside the same territory, which is itself worth knowing when comparing the two.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://budget.harriscountytx.gov/budget.aspx",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "harris-county-acfr",
+      "title": "Harris County Annual Comprehensive Financial Report",
+      "publisher": "Harris County Auditor",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Harris County, Texas",
+      "description": "The county's audited annual financial statements for the fiscal year ended September 30.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://auditor.harriscountytx.gov/Pages/ACFRs.aspx",
+      "domains": [
+        "municipal-finance"
+      ]
+    },
+    {
+      "id": "metro-financial-reports",
+      "title": "Metropolitan Transit Authority of Harris County financial reports",
+      "publisher": "Metropolitan Transit Authority of Harris County",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Harris County, Texas",
+      "description": "The transit authority's annual financial reporting. Funded principally by a 1 percent sales and use tax authorised by voters in 1978, collected by the state and remitted to the authority. The counterpart to LA Metro, and unlike LA Metro its reports are not served as retrievable documents — see the _dropped entry.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.ridemetro.org/about/records-reports/financial-transparency/general-finance",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "houston-tirz-24",
+      "title": "Reinvestment Zone No. 24, City of Houston — annual financial statements",
+      "publisher": "Harris County Redevelopment Authority No. 24 / City of Houston",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Houston, Texas",
+      "description": "The audited statements of one of Houston's 27 active tax increment reinvestment zones, a component unit of the City. A zone captures the property tax revenue attributable to appraised value above a frozen base year and spends it inside its own boundary — a municipal-finance structure with no Los Angeles counterpart of comparable density.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://harriscountyrda24.org/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "assessment"
+      ]
+    },
+    {
+      "id": "hc-mud-285-audit",
+      "title": "Harris County Municipal Utility District No. 285 — annual audit report",
+      "publisher": "Harris County Municipal Utility District No. 285",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Harris County, Texas",
+      "description": "The audited annual financial report of one named municipal utility district, kept under the state water district financial management guide. Included as the concrete instance of a class that is enormous in suburban Houston and absent from every other region in this corpus: independent special districts that levy property tax and issue debt to finance water and wastewater infrastructure, each with its own fiscal year — this one ends March 31.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.hcmud285.org/",
+      "domains": [
+        "municipal-finance",
+        "assessment"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "houston-adopted-budget",
+      "target_report_id": "hcad-appraisal-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Tax Code §26.01(a) starts the chain: \"By July 25, the chief appraiser shall prepare and certify to the assessor for each taxing unit participating in the district that part of the appraisal roll for the district that lists the property taxable by the unit.\" §26.04(b) continues it: \"The assessor shall submit the appraisal roll for the taxing unit ... to the governing body of the taxing unit by August 1 or as soon thereafter as practicable.\" The certified roll is the denominator of every rate the City then calculates.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "Values as of the January 1 appraisal date, certified by July 25 in statute — though Harris Central certified on 16 August in 2024, so the statutory date is a floor rather than a description."
+      },
+      "evidence_url": "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.26.htm"
+    },
+    {
+      "source_report_id": "houston-adopted-budget",
+      "target_report_id": "tx-tax-code-ch26",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Tax Code §26.04(c) gives the formulas verbatim: \"NO-NEW-REVENUE TAX RATE = (LAST YEAR'S LEVY - LOST PROPERTY LEVY) / (CURRENT TOTAL VALUE - NEW PROPERTY VALUE)\", and \"VOTER-APPROVAL TAX RATE = (NO-NEW-REVENUE MAINTENANCE AND OPERATIONS RATE x 1.035) + (CURRENT DEBT RATE + UNUSED INCREMENT RATE)\" for ordinary taxing units. The Comptroller frames the purpose: truth-in-taxation \"requires local taxing units to make taxpayers aware of tax rate proposals and to afford taxpayers the opportunity to limit tax increases\", and the voter-approval rate is \"a calculated maximum rate allowed by law without voter approval\".",
+      "evidence_url": "https://comptroller.texas.gov/taxes/property-tax/truth-in-taxation/"
+    },
+    {
+      "source_report_id": "harris-county-adopted-budget",
+      "target_report_id": "hcad-appraisal-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "The same certification under Tax Code §26.01(a) runs to every taxing unit in the district, the county included. Harris Central's annual report states that the district \"provides each taxing unit with a list of its taxable property, together with the January 1 value of each property\", and that \"The appraisal roll was certified on August 16, 2024, with less than 4.74 percent of the total appraised value in the district remaining under protest.\"",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "Values as of the January 1 appraisal date."
+      },
+      "evidence_url": "https://hcad.org/assets/uploads/pdf/resources/2025/HCAD-2024-Annual-Report1.pdf"
+    },
+    {
+      "source_report_id": "harris-county-adopted-budget",
+      "target_report_id": "tx-tax-code-ch26",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Chapter 26 governs every Texas taxing unit, not only cities. The county computes the same no-new-revenue and voter-approval rates from the same certified roll, with the 3.5 percent multiplier for ordinary units, and must hold an election to exceed the voter-approval rate.",
+      "evidence_url": "https://comptroller.texas.gov/taxes/property-tax/truth-in-taxation/"
+    },
+    {
+      "source_report_id": "hcad-appraisal-roll",
+      "target_report_id": "tx-tax-code-23-23",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Tax Code §23.23(a): \"an appraisal office may increase the appraised value of a residence homestead for a tax year to an amount not to exceed the lesser of: (1) the market value of the property for the most recent tax year that the market value was determined by the appraisal office; or (2) the sum of: (A) 10 percent of the appraised value of the property for the preceding tax year; (B) the appraised value of the property for the preceding tax year; and (C) the market value of all new improvements to the property.\" §23.23(c) attaches the limitation on January 1 of the year after the owner first qualifies for a homestead exemption and expires it when neither that owner nor a surviving spouse still qualifies.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "The preceding tax year's appraised value, against market value determined as of January 1."
+      },
+      "evidence_url": "https://texas.public.law/statutes/tex._tax_code_section_23.23"
+    },
+    {
+      "source_report_id": "comptroller-pvs",
+      "target_report_id": "hcad-appraisal-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Government Code §403.302(a): \"The comptroller shall conduct a study using comparable sales and generally accepted auditing and sampling techniques to determine the total taxable value of all property in each school district.\" The study tests each appraisal district's values: under §403.302(c) a local value found valid \"is presumed to represent taxable value for the school district\", and where it is invalid the state value is used instead unless the local value is the higher of the two, with validity judged against a margin of error not exceeding 5 percent.",
+      "evidence_url": "https://texas.public.law/statutes/tex._gov't_code_section_403.302"
+    },
+    {
+      "source_report_id": "comptroller-pvs",
+      "target_report_id": "tx-govt-code-403-302",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The study exists because §403.302 requires it, and the section also fixes its publication and certification: \"The comptroller shall publish preliminary findings, listing values by district, before February 1 of the year following the year of the study ... Preliminary findings shall be delivered to each school district and shall be certified to the commissioner of education.\"",
+      "reference_period": {
+        "readings_per_year": 0.5,
+        "window_months": 0,
+        "ends": "01-31",
+        "stated_as": "Preliminary findings before February 1 of the year following the study year, then final findings after the protest period. The statutory floor is a study at least once every two years."
+      },
+      "evidence_url": "https://texas.public.law/statutes/tex._gov't_code_section_403.302"
+    },
+    {
+      "source_report_id": "tea-foundation-school-program",
+      "target_report_id": "comptroller-pvs",
+      "relationship_type": "calculated_from",
+      "basis": "The Agency's data elements and timelines document states it plainly: \"Property values are received from the Comptroller's Property Value Study (PVS) and are used for determining each district's local share of Tier One funding\", with local property estimate values \"updated in February / March with preliminary PVS results from the Comptroller\" and the near-final and final runs \"updated with final PVS results from the Comptroller\". The school finance overview corroborates the routing: \"TEA obtains information on district property values and tax rates from the Property Tax Assistance Division of the Texas Comptroller of Public Accounts.\" This is the load-bearing edge of the Texas system — state aid is computed on the audited value, not the appraisal district's.",
+      "reference_period": {
+        "readings_per_year": 2,
+        "window_months": 0,
+        "ends": "02-28",
+        "stated_as": "Read twice a year: preliminary study results in February and March, final results at the near-final and final settlement runs."
+      },
+      "evidence_url": "https://tea.texas.gov/finance-and-grants/state-funding/foundation-school-program/fsp-hot-topics/state-funding-data-elements-sources-and-timelines-feb2026.pdf"
+    },
+    {
+      "source_report_id": "tea-maximum-compressed-rate",
+      "target_report_id": "comptroller-pvs",
+      "relationship_type": "calculated_from",
+      "basis": "The Agency's annual letter setting maximum compressed rates states that it uses \"preliminary state-certified property values from the Comptroller's Property Tax Assistance Division\", under Education Code §§48.2551 and 48.2552 and 19 Texas Administrative Code §61.1000. Rate compression is driven by property value growth, so the audited value determines not only how much state aid a district receives but the rate it is permitted to levy.",
+      "evidence_url": "https://tea.texas.gov/about-tea/news-and-multimedia/correspondence/taa-letters/2025-final-maximum-compressed-tax-rates-mcr-and-adoption-of-tax-rate"
+    },
+    {
+      "source_report_id": "comptroller-certification-revenue-estimate",
+      "target_report_id": "comptroller-bre",
+      "relationship_type": "uses_data_from",
+      "basis": "Article III §49a(b) supplies the binding force the two estimates share: \"no appropriation in excess of the cash and anticipated revenue of the funds from which such appropriation is to be made shall be valid\" except on a four-fifths vote of both chambers, and \"No bill containing an appropriation shall be considered as passed or be sent to the Governor for consideration until and unless the Comptroller of Public Accounts endorses his certificate thereon showing that the amount appropriated is within the amount estimated to be available.\" The Biennial Revenue Estimate sets the ceiling before the session; the Certification Revenue Estimate updates it and is what the certification endorsement is measured against.",
+      "evidence_url": "https://codes.findlaw.com/tx/constitution-of-the-state-of-texas-1876/const-sect-49a.html"
+    },
+    {
+      "source_report_id": "comptroller-esf-transfer",
+      "target_report_id": "comptroller-state-revenue-watch",
+      "relationship_type": "calculated_from",
+      "basis": "The transfer is computed against actual net production tax collections, which the Comptroller reports monthly by revenue source. Article III §49-g(d) fixes the comparison: \"If in the preceding year the state received from oil production taxes a net amount greater than the net amount of oil production taxes received by the state in the fiscal year ending August 31, 1987, the comptroller shall transfer to the economic stabilization fund an amount equal to 75 percent of the difference between those amounts. The comptroller shall retain the remaining 25 percent of the difference as general revenue.\" §49-g(e) is the parallel provision for gas.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "08-31",
+        "stated_as": "Net collections for the preceding fiscal year, against the fiscal 1987 baseline. Oil and gas are two separate computations with separate baselines, so one can trigger while the other does not."
+      },
+      "evidence_url": "https://comptroller.texas.gov/transparency/revenue/watch/"
+    },
+    {
+      "source_report_id": "comptroller-esf-transfer",
+      "target_report_id": "tx-const-49g-esf",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Article III §49-g(c-1) splits the resulting amount: \"the comptroller shall allocate one-half to the economic stabilization fund and the remainder to the state highway fund.\" §49-g(g) caps the destination: \"During each fiscal biennium, the amount in the economic stabilization fund may not exceed an amount equal to 10 percent of the total amount, excluding investment income, interest income, and amounts borrowed from special funds, deposited in general revenue during the preceding biennium.\" The cap now binds — the Comptroller reports that the fund would have received about $5.1 billion from severance taxes in 2026-27 without it, and receives nothing in 2027, while the highway fund is unaffected.",
+      "evidence_url": "https://comptroller.texas.gov/economy/fiscal-notes/government/2025/esf-info/"
+    },
+    {
+      "source_report_id": "sboe-psf-distribution-rate",
+      "target_report_id": "tx-const-art7-5-psf",
+      "relationship_type": "calculated_from",
+      "basis": "Article VII §5(a)(1) sets the ceiling and the window: the distribution \"in each year of a state fiscal biennium must be an amount that is not more than six percent of the average of the market value of the permanent school fund, excluding real property belonging to the fund that is managed, sold, or acquired under Section 4 of this article, on the last day of each of the 16 state fiscal quarters preceding the regular session of the legislature that begins before that state fiscal biennium, in accordance with the rate adopted by\" the State Board of Education. §5(a)(2) adds the long-run test: distributions over the current and nine preceding fiscal years \"may not exceed the total return on all investment assets of the permanent school fund over the same 10-year period\".",
+      "reference_period": {
+        "readings_per_year": 0.5,
+        "window_months": 48,
+        "ends": null,
+        "stated_as": "The average market value on the last day of each of the 16 fiscal quarters preceding the regular session before the biennium — so the valuation window closes well before the money is distributed."
+      },
+      "evidence_url": "https://law.justia.com/constitution/texas/sections/cn000700-000500.html"
+    },
+    {
+      "source_report_id": "trs-actuarial-valuation",
+      "target_report_id": "trs-experience-study",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The valuation states: \"The actuarial methods and assumptions are primarily based on a study of actual experience for the period ending August 31, 2021 and adopted on July 15, 2022.\" The experience study for its part covers \"the four-year period from August 31, 2021 through August 31, 2025\" and \"includes our recommendations for new actuarial assumptions to be effective for the August 31, 2026 actuarial valuation.\"",
+      "reference_period": {
+        "readings_per_year": 0.25,
+        "window_months": 48,
+        "ends": "08-31",
+        "stated_as": "A four-year experience window. Note the phase: the August 2025 valuation still runs on assumptions adopted in July 2022 from the study ending August 2021; the February 2026 study does not take effect until the August 2026 valuation."
+      },
+      "evidence_url": "https://trs.texas.gov/files/documents/actuarial-valuation-report-2025.pdf"
+    },
+    {
+      "source_report_id": "ers-actuarial-valuation",
+      "target_report_id": "ers-experience-study",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The valuation states: \"The assumptions and methods applied in this actuarial valuation were adopted by the Board of Trustees on March 20, 2024 based on the experience investigation that covered the period ending August 31, 2023.\" The study itself covers \"the four-year period from August 31, 2020 through August 31, 2023\" with assumptions \"effective for the August 31, 2024 actuarial valuation\" — so unlike the teacher system, the state employee valuation and its experience study are in phase.",
+      "reference_period": {
+        "readings_per_year": 0.25,
+        "window_months": 48,
+        "ends": "08-31",
+        "stated_as": "A four-year experience window, adopted for the valuation two years after the window closes."
+      },
+      "evidence_url": "https://ers.texas.gov/about-ers/reports-and-studies/ers-actuarial-valuation-reports"
+    },
+    {
+      "source_report_id": "houston-revenue-cap",
+      "target_report_id": "bls-cpi-houston",
+      "relationship_type": "calculated_from",
+      "basis": "The City's budget states the sourcing in a footnote to the cap calculation: \"CPI increase based on the change in the CPI-U for Houston-The Woodlands-Sugar Land, Texas as published by the Bureau of Labor Statistics, for the preceding calendar year\", and reports applying \"the 2024 inflation rate of 2.4641%\". Note the standing this has: the charter language as quoted in the City's own bond disclosure says only \"inflation\", so naming this particular series is the Finance Department's documented implementation rather than a charter definition.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "The change in the index for the preceding calendar year, read as an annual average — which is what makes a bimonthly series usable."
+      },
+      "evidence_url": "https://www.houstontx.gov/budget/26budadopt/FY2026_Adopted_Budget.pdf"
+    },
+    {
+      "source_report_id": "houston-revenue-cap",
+      "target_report_id": "uscensus-population-estimates",
+      "relationship_type": "calculated_from",
+      "basis": "The same footnote: \"Population numbers based upon the US Census Bureau estimate most recently published when deciding limits of each respective year's property tax revenue budget increase\", with the City reporting \"population estimates as of July 1, 2024 of 3.28%\". The charter text as quoted in the City's financial report says \"the City's population growth (as determined by the U.S. Census)\", so the specific series is again the administrative implementation.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "07-01",
+        "stated_as": "The most recently published July 1 estimate at the time the limit is set."
+      },
+      "evidence_url": "https://www.houstontx.gov/budget/26budadopt/FY2026_Adopted_Budget.pdf"
+    },
+    {
+      "source_report_id": "houston-adopted-budget",
+      "target_report_id": "houston-revenue-cap",
+      "relationship_type": "calculated_from",
+      "basis": "The cap is not advisory: it fixes the property tax revenue the budget may assume. The City's financial report describes the mechanism — \"Proposition 1 limits increases in ad valorem tax revenues collected by the City by limiting such annual ad valorem collections to the lesser of (i) the actual ad valorem tax revenues collected in the preceding fiscal year, plus 4.5%, or (ii) actual ad valorem revenues received in fiscal year 2005, adjusted for the cumulative combined rates of inflation and the City's population growth (as determined by the U.S. Census).\" The second branch is a cumulative adjustment to a fiscal 2005 base, not to the prior year's cap, and a 2006 amendment adds $90 million for public safety.",
+      "evidence_url": "https://www.houstontx.gov/controller/acfr/acfr2024.pdf"
+    },
+    {
+      "source_report_id": "houston-acfr",
+      "target_report_id": "houston-revenue-cap",
+      "relationship_type": "cites",
+      "basis": "The revenue cap appears in the first note of the City's audited statements, in the terms the bond market relies on, and the same language is reproduced in the City's general obligation bond official statements. That the cap is described in the financial statements rather than only in the budget is what makes it a durable constraint rather than a budgeting convention.",
+      "evidence_url": "https://www.houstontx.gov/controller/acfr/acfr2024.pdf"
+    },
+    {
+      "source_report_id": "metro-financial-reports",
+      "target_report_id": "comptroller-transit-sales-tax-allocation",
+      "relationship_type": "uses_data_from",
+      "basis": "The authority's 1 percent rate is set under Transportation Code §451.404, which permits a board to impose the tax \"at the rate of: (1) one-quarter of one percent; (2) one-half of one percent; (3) three-quarters of one percent; or (4) one percent\", and the Comptroller lists the Houston authority at 1 percent effective 1 October 1978. Collection and remittance sit in Tax Code Chapter 322, not Chapter 451: §322.201(a) \"The comptroller shall administer, collect, and enforce the sales and use tax of a taxing entity\", §322.302 requires remittance \"at least quarterly during each state fiscal year and as often as feasible\", and §322.303 deducts \"two percent of the amount of the taxes collected ... as the state's charge for its services\".",
+      "evidence_url": "https://statutes.capitol.texas.gov/Docs/TX/htm/TX.322.htm"
+    },
+    {
+      "source_report_id": "houston-tirz-24",
+      "target_report_id": "hcad-appraisal-roll",
+      "relationship_type": "calculated_from",
+      "basis": "A zone captures the tax attributable to appraised value above a frozen base. Tax Code §311.016 requires the annual report to state \"the tax increment base and current captured appraised value retained by the zone\", along with \"the amount and source of revenue in the tax increment fund established for the zone\" and \"the amount and purpose of expenditures from the fund\", filed \"on or before the 150th day following the end of the fiscal year of the municipality or county\" with a copy to the Comptroller. The captured value is a direct function of the appraisal district's roll.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": "01-01",
+        "stated_as": "Captured appraised value against a frozen base year, on the January 1 appraisal date; reported within 150 days of fiscal year end."
+      },
+      "evidence_url": "https://texas.public.law/statutes/tex._tax_code_section_311.016"
+    },
+    {
+      "source_report_id": "hc-mud-285-audit",
+      "target_report_id": "tceq-water-district-financial-guide",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The district's audit states that it \"maintains accounting records generally in accordance with the Water District Financial Management Guide published by the Commission\" — the Texas Commission on Environmental Quality. The auditor's opinion is that the statements \"present fairly, in all material respects, the respective financial position of the governmental activities and each major fund of the District as of March 31, 2025 ... in accordance with accounting principles generally accepted in the United States of America.\"",
+      "evidence_url": "https://www.hcmud285.org/audit.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "texas -> any RHNA-equivalent housing allocation",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "A negative finding and a clean contrast. California requires the state to determine each region's housing need and each council of governments to allocate it among cities, which puts `ca-hcd-rhna-determination` and `scag-rhna-allocation-plan` in the graph. Texas has no statewide or regional housing allocation mandate, and Houston has no zoning ordinance at all, so there is nothing to model. The absence is the comparison."
+    },
+    {
+      "edge": "texas -> any Proposition 13 equivalent statewide value cap",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Recorded so the asymmetry is legible rather than looking like missing research. Texas constrains the rate, not the value: Chapter 26's no-new-revenue and voter-approval rates with a 3.5 percent multiplier for ordinary units, and a separate compressed-rate regime for school districts. The only broad value cap is §23.23's 10 percent homestead limitation, which is narrower on three counts — homesteads only, appraised rather than market value, and it expires when the qualifying owner does. California caps what a property is worth; Texas caps what a jurisdiction may charge."
+    },
+    {
+      "edge": "houston-revenue-cap -> the City Charter text itself",
+      "source": "houston-revenue-cap",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The operative charter language could not be retrieved from any static source. Houston's charter is served only through Municode's JavaScript viewer, which returns no body text to any fetcher, the Municode API endpoints 404, and no city-published PDF exists at any tested path. Every retrievable source — the annual financial report, the budget, the bond official statement, and the litigation over the cap — paraphrases rather than quotes. The charter section number is likewise unconfirmed. Consequence for the two edges above: the CPI and Census series they name are documented as the Finance Department's implementation, not as charter definitions, and the basis text says so."
+    },
+    {
+      "edge": "metro-financial-reports -> its own published ACFR",
+      "source": "metro-financial-reports",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The transit authority publishes no retrievable financial statements. Every document link on its finance page points into a JavaScript-gated asset manager that returns only a browser check to any fetcher, and there is no direct URL for its annual comprehensive financial report. The reliable path is continuing-disclosure filings on the municipal securities board's EMMA system. Worth contrasting with LA Metro, whose budget is a plain PDF: same kind of body, same kind of document, one publishable and one not."
+    },
+    {
+      "edge": "a generic \"MUD financials\" node",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Rejected as proposed. A generic aggregate of municipal utility district financials is not a report and cannot be a node — the districts have different fiscal year ends (No. 285 ends March 31, others vary), separate auditors and separate statements. Replaced with one named district. The systematic channel, per that district's own audit note, is EMMA: the district \"is required to provide to the Municipal Securities Rulemaking Board ... through its Electronic Municipal Market Access system (EMMA) continuing disclosure of certain annual financial information and operating data\", within six months of year end. A future pass wanting coverage rather than an instance should go to EMMA, not to district websites."
+    },
+    {
+      "edge": "hisd-adopted-budget -> tea-foundation-school-program",
+      "source": null,
+      "target": "tea-foundation-school-program",
+      "reason": "deferred",
+      "why": "The Houston Independent School District budget was proposed as a node and is not minted here: no verified URL and no documented statement of its funding inputs was obtained. The district is under state intervention, which may make its funding documentation unusually explicit, so it is worth a dedicated pass. Note the same failure mode already recorded for Los Angeles Unified — school district budget sites are consistently the least publishable documents in this corpus."
+    },
+    {
+      "edge": "comptroller-esf-transfer -> a severance tax summary page",
+      "source": "comptroller-esf-transfer",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The Comptroller's Severance Taxes page looks like the right source and is not: it is a static explainer last revised in October 2022, still reporting fiscal 2022 as the record year. The live series is the Monthly State Revenue Watch, which is what the edge points at. Recorded because the wrong page is the one a search returns first."
+    },
+    {
+      "edge": "ESF transfer as a single combined oil-and-gas threshold",
+      "source": null,
+      "target": null,
+      "reason": "wrong-direction",
+      "why": "A correction to the research this slice was built from, kept so it is not reintroduced. Three things were wrong in the original account. Oil and gas are two separate transfers under §49-g(d) and (e) with separate fiscal 1987 baselines, so one can trigger while the other does not. The 25 percent the state retains goes to general revenue, not to the highway fund — the highway fund's share comes from splitting the 75 percent afterwards under (c-1). And the $531.9 million and $599.8 million baseline figures are Comptroller-published, not constitutional text; the Constitution names only the fiscal year."
+    },
+    {
+      "edge": "the PVS as an unconditional override of local appraisal",
+      "source": null,
+      "target": null,
+      "reason": "wrong-direction",
+      "why": "Another correction carried forward. The state value does not simply replace an invalid local value: under §403.302(c) a valid local value \"is presumed to represent taxable value for the school district\", and where the local value is invalid the state value applies unless the local value is the higher of the two. Validity is judged against a margin of error not exceeding 5 percent. The override is conditional and asymmetric, which matters because the asymmetry always favours the larger number and therefore less state aid."
+    },
+    {
+      "edge": "harris-county-acfr -> hcad-appraisal-roll",
+      "source": "harris-county-acfr",
+      "target": "hcad-appraisal-roll",
+      "reason": "deferred",
+      "why": "The county's audited statements plainly rest on the certified appraisal roll — the property tax note in any Texas county ACFR describes the January 1 lien and the levy — but the notes to the financial statements were not read this pass, so nothing could be quoted. The node is therefore an intentional island for now. The same gap was recorded for the City of Los Angeles ACFR in the California pass, and it is the same fix in both cases: read the property tax note."
+    }
+  ],
+  "_status": "NEW 2026-08-10. Second-hand research (Grok) verified through an independent citation-resolution pass; every surviving edge carries a fetchable evidence_url and a quotation. 9 items declined, including one denial (no Texas equivalent of regional housing allocation) and two corrections to the source research that are kept so they are not reintroduced."
+}

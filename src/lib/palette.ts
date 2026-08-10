@@ -330,6 +330,34 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   CM: 'AFR',
   ML: 'AFR',
 
+  // 2026-08-10 (AF/G.12): second WAEMU/CEMAC batch, same day as G.11 --
+  // Burkina Faso, Togo (WAEMU) plus Gabon, Chad (CEMAC), rounding out CEMAC's
+  // representation in the corpus to three of six member states. The
+  // standout finding resolves a question G.11 left open across three
+  // countries: Togo's own regulator never names the base-2023 WAEMU CPI
+  // regulation, but UEMOA's own official gazette (Bulletin Officiel de
+  // l'Union N°123) does -- OCR'd directly from the scanned original --
+  // giving the branch its first fully independent capture of
+  // Reglement N deg 05/2024/CM/UEMOA, effective 1 January 2025 and
+  // abrogating the base-2014 regulation Mali's G.11 session could only cite
+  // secondhand (`uemoa-reg-2024-base2023`). Burkina Faso's own session
+  // independently reopened the same AFRISTAT guide URL Mali flagged in
+  // G.11 as "~2008 vintage, likely superseded" and found PDF metadata dating
+  // it to 2014-04-16 -- a refinement, not a contradiction, logged in
+  // G.12's Corrections section rather than edited into G.11. Gabon and Chad
+  // both name CEMAC's shared methodology in prose without citing the
+  // underlying regulation by number, matching Cameroon's pattern from G.11;
+  // the regulation itself stays un-minted branch-wide pending a country
+  // that opens it directly. All four continue the branch's non-CPI pension
+  // pattern: Gabon's public pension is wage-scale indexed per the IMF's own
+  // Article IV text, and Chad's CNPS exhaustive 12-text legal list contains
+  // zero CPI-indexation provisions. See `src/data/research/bf-*.json`,
+  // `tg-*.json`, `ga-*.json`, `td-*.json`.
+  BF: 'AFR',
+  TG: 'AFR',
+  GA: 'AFR',
+  TD: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,
