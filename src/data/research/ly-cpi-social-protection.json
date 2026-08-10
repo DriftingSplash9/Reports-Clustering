@@ -1,0 +1,99 @@
+{
+  "_slice": "ly-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Libya was flagged by AF/G.7 as 'likely too thin/unstable to source' without actually being attempted. This session retested that assumption rather than carrying it forward unchecked, per the branch's own standing lesson (see project memory on the third _dropped category -- entries wrongly excluded on too narrow a search). The assumption did not hold: Libya's Bureau of Statistics and Census has published an unbroken run of monthly CPI reports since December 2024, on a new base year, independently corroborated by the IMF's own 2025 Article IV report. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "Libya's own statistics homepage (bsc.ly) is misleading if read alone: its front-page widget still displays a stale December 2023 figure on the old 2008 base, which is exactly the outdated, Tripoli-only series the IMF's 2025 Article IV report describes as having 'a significant downward bias due to methodological deficiencies.' The actual current release sits in the site's archive, not the homepage, and shows a genuine methodological relaunch: 'The Bureau of Statistics and Census (BSC) has recently introduced a new CPI -- based on the new household spending survey -- that covers the entire country,' with IMF technical assistance (METAC) dated from a January 2022 roadmap mission through a January 2025 CPI-development mission. The IMF's own Data Adequacy Assessment rates Libya's price statistics 'B' (broadly adequate) even as national accounts, government finance, external-sector and inter-sectoral-consistency data are all rated 'D' -- CPI is the one bright spot in an otherwise weak national statistical system, the opposite of the 'too thin to source' framing carried forward unchecked since G.7. On social protection, Libya's Basic Pension Benefit is a flat, minimum-wage-pegged transfer with a documented benefit-adjustment rule that is explicitly NOT CPI-linked -- the ISSA country profile states plainly 'Not legally mandated. Indexed based on changes in civil servant salaries,' the same 'real mechanism, non-CPI' shape already found for Rwanda, Uganda, Morocco and Tunisia this batch.",
+  "_open_questions": [
+    {
+      "id": "ly-cpi-weight-survey-not-named-by-cpi-itself",
+      "question": "The IMF's 2025 Article IV report states the new CPI is 'based on the new household spending survey,' and BSC's own site separately hosts a 'Final Results of the 2022 Household Income and Expenditure Survey,' but the CPI reports themselves (as read this session) do not cite that survey by name or date -- so no uses_data_from edge is drawn between the two. Worth checking a fuller BSC methodology document, if one exists, for an explicit citation."
+    },
+    {
+      "id": "ly-sdds-egdds-status-unconfirmed",
+      "question": "dsbb.imf.org is a JavaScript-rendered single-page app that returned only navigation shell content to every fetch attempt this session (WebFetch and curl with a browser user-agent alike), and Wayback Machine snapshots could not be reached either. Libya's formal SDDS/e-GDDS participation status is genuinely unconfirmed, unlike every other North/East Africa country in this branch."
+    },
+    {
+      "id": "ly-april-2026-article-iv-not-read",
+      "question": "A more recent IMF Article IV concluding statement (dated April 2026, per a search hit) exists but returned an Akamai bot-block (\"Access Denied\") on direct fetch this session -- its content, which may update the June 2025 report's findings, was not read."
+    },
+    {
+      "id": "ly-civil-service-salary-schedule-not-located",
+      "question": "The Basic Pension Benefit's adjustment rule is tied to civil-servant salary changes (per ISSA/SSA), but no document naming the specific civil-service salary schedule/instrument itself was located this session -- so no edge could be drawn from the pension node to that instrument, only the denial that it is CPI-linked."
+    }
+  ],
+  "reports": [
+    {
+      "id": "ly-bsc-cpi",
+      "title": "Report about Inflation and Consumer Price Indices",
+      "publisher": "Bureau of Statistics and Census (BSC), Ministry of Planning, Libya",
+      "country": "LY",
+      "jurisdiction_level": "federal",
+      "region": "Libya",
+      "description": "Libya's official monthly Consumer Price Index report. VERIFIED DIRECTLY this session via the June 2026 edition and the BSC's own online archive, which shows an unbroken monthly run from December 2024 to June 2026 -- 18+ consecutive months, each on the new 'Base Year 2024.' Per the IMF's 2025 Article IV report: 'The Bureau of Statistics and Census (BSC) has recently introduced a new CPI -- based on the new household spending survey -- that covers the entire country. The reported inflation from the new series stood at 1.2 percent in 2025 Q1. However, the new index could have a significant downward bias due to methodological deficiencies.' A 12-group classification table (Food and Beverages, Tobacco, Clothing and Footwear, Housing/Water/Electricity/Gas, Furniture and Household Equipment, Health, Transport, Communication, Recreation and Culture, Education, Restaurants and Hotels, Miscellaneous Goods and Services) is structurally close to standard COICOP divisions, though no document read this session names COICOP explicitly. The BSC's own homepage widget still displays a stale December 2023 figure on the superseded 2008 base -- the current series lives in the site's archive, not the front page.",
+      "releases_per_year": 12,
+      "last_updated": "2026-06",
+      "url": "https://bsc.ly/economic_statistic/prices/",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ly-imf-art4-2025",
+      "title": "Libya: 2025 Article IV Consultation-Press Release; Staff Report",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "IMF Country Report No. 25/148, Board discussed 25 June 2025. VERIFIED DIRECTLY this session. Confirms and contextualizes Libya's CPI relaunch (see ly-bsc-cpi) and separately rates Libya's overall statistical system: 'Data Adequacy Assessment Rating: D' overall, but the 'Prices' domain specifically rated 'B' ('broadly adequate for surveillance') while National Accounts, Government Finance Statistics, External Sector Statistics and Inter-sectoral Consistency are all rated 'D' -- 'Most surveys for national accounts stopped in 2011... There is an urgent need to resume periodic surveys.' Documents IMF METAC technical assistance behind the CPI relaunch: a January 2022 roadmap mission and a January 2025 'Consumer Price Index Development' mission.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual Article IV consultation cycle.",
+      "last_updated": "2025-06",
+      "url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1lbyea2025001-print-pdf.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ly-worldbank-social-protection-crossroads",
+      "title": "Libya's Social Protection at a Crossroads",
+      "publisher": "World Bank",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "World Bank policy brief, April 2022 (predates the 2025 CPI relaunch -- background on the pension/cash-transfer landscape, not current-state statistics). VERIFIED DIRECTLY this session. Documents the Basic Pension Benefit (established 1969): 'provides eligible beneficiaries with a monthly cash transfer of 450 LYD, equivalent to the Libyan minimum wage.' No indexation mechanism is described for this transfer in the brief; it is pegged to the minimum wage. Also flags Libya's statistical-capacity gap directly: 'Strengthen data collection and analysis capabilities. Modernizing and raising capabilities of the Bureau of Statistics and Census.'",
+      "releases_per_year": 0.2,
+      "cadence_note": "An occasional policy brief, not a fixed release.",
+      "last_updated": "2022-04",
+      "url": "https://documents1.worldbank.org/curated/en/099050106292232957/pdf/P1776930ea19b1000aa3105da9874a49b8.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ly-imf-art4-2025",
+      "target_report_id": "ly-bsc-cpi",
+      "relationship_type": "cites",
+      "basis": "IMF Country Report 25/148 directly describes and assesses BSC's CPI relaunch: 'The Bureau of Statistics and Census (BSC) has recently introduced a new CPI... that covers the entire country,' and separately rates its data adequacy 'B.' A donor/IMF assessment document describing the programme it monitors, not a computational input into the CPI itself.",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1lbyea2025001-print-pdf.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ly-worldbank-social-protection-crossroads -> ly-bsc-cpi (Basic Pension Benefit indexed to CPI)",
+      "source": "ly-worldbank-social-protection-crossroads",
+      "target": "ly-bsc-cpi",
+      "reason": "denied",
+      "why": "ISSA Country Profile: Libya, 'Old-Age Pension Benefit Adjustment': 'Not legally mandated. Indexed based on changes in civil servant salaries.' Independently corroborated by the SSA/ISSA 'Social Security Programs Throughout the World: Africa, 2019 -- Libya' profile, verbatim: 'Benefits are indexed based on changes in civil servant salaries.' The World Bank brief's own figure (450 LYD, 'equivalent to the Libyan minimum wage') is consistent with a wage-pegged, not price-indexed, transfer. Governing statute named as 'Social Security Law no. 13 of 1 June 2013' -- not independently read this session (see _open_questions)."
+    },
+    {
+      "edge": "ly-bsc-cpi -> un-coicop-2018",
+      "source": "ly-bsc-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "The CPI's 12-group classification structure is close to standard COICOP divisions, but no BSC document read this session names COICOP explicitly by title or version -- treated as a structural resemblance, not a documented dependency."
+    },
+    {
+      "edge": "ly-bsc-cpi -> imf-sdds / imf-e-gdds",
+      "source": "ly-bsc-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "dsbb.imf.org's JavaScript-rendered pages returned only navigation shell content to every fetch attempt this session; Libya's formal SDDS/e-GDDS participation status could not be confirmed from any source reached. See ly-sdds-egdds-status-unconfirmed."
+    }
+  ]
+}

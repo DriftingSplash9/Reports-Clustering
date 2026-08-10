@@ -271,6 +271,33 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   UG: 'AFR',
   RW: 'AFR',
 
+  // **Algeria, Morocco, Tunisia and Libya added 2026-08-10** (AF branch
+  // G.10) -- North Africa, the last country list any prior session had
+  // actually offered by name, and the first AF batch of four in one
+  // sitting. Algeria's and Tunisia's own CPI documents both name a
+  // classification standard other than COICOP 2018 -- Algeria still ties
+  // to "le système de comptabilité nationale de 1970" even after its
+  // national accounts (a separate product) were rebased to the 2008 SNA;
+  // Tunisia names COICOP without a version, structured like the pre-2018
+  // vintage. Morocco is the one country in the batch whose own CPI
+  // document names an IMF manual directly (for missing-price imputation)
+  // and states its release calendar follows the SDDS by name. All three
+  // Maghreb countries' pension systems turned out to have real, statutory,
+  // non-CPI adjustment mechanisms -- civil-service salary scales (Morocco's
+  // CMR, Tunisia's CNRPS) or wage-level gaps and the minimum wage
+  // (Morocco's CNSS, Tunisia's CNSS, Algeria's CNR) -- the same shape
+  // already found for Rwanda and Uganda. Libya, flagged by G.7 as "likely
+  // too thin/unstable to source" and never actually attempted, turned out
+  // to be the batch's genuine surprise: a functioning, IMF-corroborated
+  // monthly CPI relaunched on a new 2024 base with technical assistance
+  // from the IMF's METAC, rated "broadly adequate" by the IMF even as
+  // Libya's other statistical domains are rated inadequate. See
+  // `src/data/research/dz-*.json`, `ma-*.json`, `tn-*.json`, `ly-*.json`.
+  DZ: 'AFR',
+  MA: 'AFR',
+  TN: 'AFR',
+  LY: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,
