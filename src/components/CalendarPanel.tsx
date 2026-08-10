@@ -77,6 +77,12 @@ export default function CalendarPanel({
     () =>
       events.filter((e) => {
         if (e.kind === 'read' && !showReads) return false
+        // The horizon is a rhythm, not just a window — see `cadenceBand`. A
+        // quarter view widened without this is three months of monthly releases
+        // with the quarterlies lost inside them, which is what the panel looked
+        // like on first sight. `all` is the escape hatch: same year-long window,
+        // no band filter, for when the question really is "everything".
+        if (horizon !== 'all' && e.band !== horizon) return false
         const r = byId.get(e.reportId)
         if (!r || !within(r)) return false
         if (e.readerId) {
@@ -87,7 +93,7 @@ export default function CalendarPanel({
         }
         return true
       }),
-    [events, showReads, within, byId],
+    [events, showReads, within, byId, horizon],
   )
 
   // Group by the window's own description, so a run of quarter-wide entries
@@ -173,7 +179,7 @@ export default function CalendarPanel({
           <div style={body}>
             {groups.length === 0 && (
               <div style={empty}>
-                Nothing scheduled in this horizon.
+                Nothing on this rhythm in this window.
                 {missing > 0 && ' Which is not the same as nothing happening — see below.'}
               </div>
             )}

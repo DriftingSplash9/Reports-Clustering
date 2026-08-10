@@ -70,7 +70,7 @@ function addMonthsIso(iso: string, months: number): string {
  * next week", "what's due this quarter" — rather than a day count, because the
  * unit is also what the rendering groups by.
  */
-export type Horizon = 'week' | 'month' | 'quarter' | 'half' | 'year'
+export type Horizon = 'week' | 'month' | 'quarter' | 'half' | 'year' | 'all'
 
 export const HORIZONS: readonly Horizon[] = [
   'week',
@@ -78,6 +78,7 @@ export const HORIZONS: readonly Horizon[] = [
   'quarter',
   'half',
   'year',
+  'all',
 ]
 
 export const HORIZON_MONTHS: Record<Horizon, number> = {
@@ -86,6 +87,43 @@ export const HORIZON_MONTHS: Record<Horizon, number> = {
   quarter: 3,
   half: 6,
   year: 12,
+  all: 12,
+}
+
+/**
+ * Which horizon a thing *belongs* to, by how often it happens.
+ *
+ * A horizon is two filters, not one, and this is the second. Widening the
+ * window alone does not work: the monthly releases recur inside every longer
+ * window, so a quarter view is three months of monthlies with the quarterlies
+ * buried in them, and a year view is twelve. The frequent items drown the
+ * infrequent ones precisely as the question moves from "this week" to "this
+ * year" — which is when the infrequent ones are the entire point.
+ *
+ * So each horizon shows only what recurs on roughly its own rhythm. The
+ * quarterly view is the quarterly releases. The annual view is the annual ones,
+ * and the vaguer-than-annual ones with them, which is also where an entry known
+ * only as "February" naturally lands.
+ *
+ * Boundaries are at the obvious places and the band is named for its floor:
+ * 52+ a year is weekly or faster, 12 to 51 is monthly, 4 to 11 is quarterly
+ * (which catches the Bank of Canada's eight-a-year, roughly six-weekly, and
+ * quarterly is the closest true thing to say about it), 2 to 3 is half-yearly,
+ * and anything under 2 a year is annual or rarer — the decennial census included.
+ *
+ * Absent rate means the evergreen one-off shape, which lands in `year`. That is
+ * not a claim it recurs annually; it is that if such a thing has a date at all,
+ * a reader looking a year out is the one who wants to see it.
+ */
+export type CadenceBand = 'week' | 'month' | 'quarter' | 'half' | 'year'
+
+export function cadenceBand(perYear: number | undefined): CadenceBand {
+  if (perYear === undefined) return 'year'
+  if (perYear >= 52) return 'week'
+  if (perYear >= 12) return 'month'
+  if (perYear >= 4) return 'quarter'
+  if (perYear >= 2) return 'half'
+  return 'year'
 }
 
 /** The window a horizon covers, starting today. Half-open at neither end. */
@@ -120,6 +158,13 @@ export interface CalendarEvent {
   reportId: string
   /** The dependent doing the reading. Set on reads only. */
   readerId?: string
+  /**
+   * The rhythm this event recurs on — see `cadenceBand`. For a release that is
+   * the report's own publication rate; for a read it is the *edge's*
+   * `readings_per_year`, because a monthly index read once a year is an annual
+   * event however often it is published.
+   */
+  band: CadenceBand
   /** What the release covers, or what the document says about the reading. */
   detail?: string
   sourceUrl?: string
@@ -194,6 +239,7 @@ export function calendarEvents(
         precision: e.precision,
         evidence: e.evidence,
         reportId: r.id,
+        band: cadenceBand(r.releases_per_year),
         detail: e.covers,
         sourceUrl: e.evidence_url ?? s.source_url,
       })
@@ -237,6 +283,11 @@ export function calendarEvents(
           evidence: rp.readings_per_year === 1 ? undefined : 'implied',
           reportId: d.target_report_id,
           readerId: d.source_report_id,
+          // The edge's rate, not the source's. A monthly index consumed once a
+          // year by a statutory escalator is an annual event, and filing it
+          // under "monthly" because the CPI is monthly would put it in the one
+          // view where it is guaranteed to be drowned.
+          band: cadenceBand(rp.readings_per_year),
           detail: rp.stated_as,
           sourceUrl: d.evidence_url,
         })

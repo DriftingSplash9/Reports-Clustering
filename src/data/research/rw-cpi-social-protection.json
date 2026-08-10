@@ -1,0 +1,225 @@
+{
+  "_slice": "rw-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Rwanda is the second of two East Africa remainder countries (AF/G.8 priority 2, alongside Uganda) -- the docx's own country list is exhausted, so this is from-scratch primary research like Lesotho/Eswatini/Zambia/Malawi/Zimbabwe before it. Researched by a subagent this session, all findings independently structured as Part A quote records before being minted here. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "Two findings worth flagging above the rest. (1) Rwanda's CPI is running on stale inputs by its own donor's account: a World Bank Eastern Africa Regional Statistics Program-for-Results supervision mission (September 2024) states plainly that 'rebasing and switch to the 2018 Classification of Individual Consumption According to Purpose (COICOP) are required to achieve compliance. These changes are expected to be completed in 2025' -- but the most recent CPI bulletin actually reachable this session (June 2026, published July 2026) still carries the same 'Feb 2014=100' base and the same EICV4 (2013-14) weights as the March 2024 and July 2025 editions, meaning the 2025 target was missed. Rwanda's own separate COICOP manual confirms it is still the '\"COICOP Rwanda 2014 edition\"', explicitly built on the 1993 SNA rather than the 2008 SNA already carried elsewhere in this corpus. (2) A genuine bidirectional relationship was found between the CPI and the household survey series that is new to this branch: EICV4's 2013-14 expenditure data supply the CPI's weights (the ordinary direction), while EICV7's own 2025 methodological note states as one of its explicit objectives to 'serve as a key input for updating the consumer price index (CPI)' and separately describes using NISR's own 'CPI prices' to deflate household consumption to real terms -- the same two publications feeding each other in opposite directions. On social protection, Rwanda's 2024-2029 Social Protection Sector Strategic Plan comes closer than most of this branch's prior findings to naming an inflation-adjustment intervention directly -- 'a mechanism to regularly adjust benefits based on inflation and market changes' -- but frames it explicitly as a planned 2024-2029 intervention rather than an operating one, the same recommendation-reveals-absence shape already seen in Botswana, Tanzania and Malawi. Rwanda Social Security Board's mandatory pension scheme, by contrast, has a real and currently operating benefit-adjustment clause, but it runs on a five-yearly actuarial study rather than CPI.",
+  "_open_questions": [
+    {
+      "id": "rw-coicop2018-completion-unconfirmed-post-june2026",
+      "question": "The World Bank's September 2024 Aide Memoire stated Rwanda's CPI rebasing and COICOP-2018 switch were 'expected to be completed in 2025.' The most recent CPI edition reachable this session (June 2026, published July 2026) still shows the old Feb-2014 base and EICV4 weights, meaning the target was missed as of that edition. Whether a rebased edition has appeared since was not checked (would require a session running after this one)."
+    },
+    {
+      "id": "rw-eicv7-coicop-table-header-weak-evidence",
+      "question": "The only textual link found between EICV7 and NISR's own Customized COICOP classification is a bare table column header ('COICOP') in Table 9.2, not a prose sentence naming a specific classification document or vintage. Worth checking EICV7's full methodology chapter (not just the deflation and food-conversion sections read this session) for a stronger, explicit citation."
+    },
+    {
+      "id": "rw-ssa-ptw-quote-tool-extracted-not-hand-verified",
+      "question": "The SSA/ISSA 'Social Security Programs Throughout the World: Africa, 2019 -- Rwanda' quote on presidential-decree benefit adjustment, and the 2017 IMF e-GDDS press release quote, were both extracted via the WebFetch tool's summarizer rather than hand-verified against raw page text by the researching session (ssa.gov and imf.org both returned access blocks to direct fetch/curl attempts). Both are independently corroborated by other primary sources already in this slice, but a session with different tooling access could re-verify the exact wording directly."
+    },
+    {
+      "id": "rw-pension-law-interim-adjustment-unchecked",
+      "question": "Law N deg 05/2015 Article 16 requires an actuarial study 'at least once every five (5) years' before any pension benefit increase. Whether any interim mechanism exists for the years between actuarial studies (e.g. a ministerial order, a partial top-up) was not checked -- only the base five-year mechanism itself was confirmed."
+    }
+  ],
+  "reports": [
+    {
+      "id": "rw-nisr-cpi",
+      "title": "Consumer Price Index (CPI)",
+      "publisher": "National Institute of Statistics of Rwanda (NISR)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "NISR's monthly Consumer Price Index publication. VERIFIED DIRECTLY this session via the June 2026 edition (published July 2026), cross-checked against the March 2024 and July 2025 editions for stability of wording. 'The Consumer Price Index (CPI) is a measure of the average change over time of goods and services purchased by households. The CPI uses a Modified Laspeyres formula to calculate the index.' Base: 'Index reference period (Feb 2014=100): The period with which all other periods are compared.' Weights: 'Weights used for the index are from the Household Living Conditions Survey (EICV4) results conducted in 2013-2014 with a sample of 14,419 households.' The word 'COICOP' does not appear anywhere in any of the three editions searched, nor do 'EAC', 'IMF', 'CPI Manual' or 'SNA' -- a genuine silence on external-framework citation, unlike Tanzania's and Kenya's own CPI documents.",
+      "releases_per_year": 12,
+      "last_updated": "2026-06",
+      "url": "https://statistics.gov.rw/sites/default/files/documents/2026-07/JUNE%202026%20CPI%20Report%20English.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "rw-eicv4-survey",
+      "title": "Integrated Household Living Conditions Survey 4 (EICV4)",
+      "publisher": "National Institute of Statistics of Rwanda (NISR)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "Household living-conditions/budget survey, 'conducted in 2013-2014 with a sample of 14,419 households' (per the CPI bulletin's own methodological notice), whose results supply the expenditure weights still used in Rwanda's CPI as of the June 2026 edition -- despite a 2024 World Bank supervision report stating a rebasing onto more current data was expected in 2025 (see rw-worldbank-pforr-aide-memoire).",
+      "releases_per_year": 0.2,
+      "cadence_note": "One round roughly every 3-5 years; part of the numbered EICV series (EICV1 through EICV7 to date).",
+      "last_updated": "2014",
+      "url": "https://statistics.gov.rw/data-sources/surveys/EICV/integrated-household-living-conditions-survey-4-eicv-4",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "rw-eicv7-methodological-note",
+      "title": "Integrated Household Living Conditions Survey 7 (EICV7) -- Methodological Note",
+      "publisher": "National Institute of Statistics of Rwanda (NISR)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "VERIFIED DIRECTLY this session. Methodological note for the seventh EICV round (2023/24). States its own objectives include to 'serve as a key input for updating the consumer price index (CPI)' -- the reverse-direction counterpart to the CPI's own reliance on EICV4's weights (see rw-eicv4-survey). Separately, on its own deflation method: 'Anticipating the need for good-quality price data nationwide, the NISR has, since October 2023, collected data on prices of hundreds of items in markets and shops in all thirty districts. These \"CPI prices\" were collected with careful attention to consistency in units and quality over time and space... Where unit values and self-reported prices are not available... we use CPI prices.' A genuine two-way relationship between the same pair of recurring publications.",
+      "releases_per_year": 0.2,
+      "cadence_note": "One round roughly every 3-5 years; part of the numbered EICV series.",
+      "last_updated": "2025-07",
+      "url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/EICV7_Methodological%20Note.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "rw-coicop-rwanda-2014",
+      "title": "Customized Classification of Individual Consumption According to Purpose (COICOP) -- Rwanda",
+      "publisher": "National Institute of Statistics of Rwanda (NISR)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "VERIFIED DIRECTLY this session. NISR's own Rwanda-customized COICOP classification manual: 'COICOP is an integral part of the 1993 SNA, but it is also intended for use in three other statistical areas: household budget surveys, consumer price indices and international comparisons of gross domestic product (GDP)...' Internally described as 'the COICOP Rwanda 2014 edittion [sic]... expanded to 6 digits' -- an older, 1993-SNA-based customized vintage, not COICOP 2018 (un-coicop-2018 elsewhere in this corpus). A separate document from the CPI bulletin itself, which never names COICOP by title at all.",
+      "releases_per_year": 0.05,
+      "cadence_note": "A standing classification manual, not a recurring release.",
+      "last_updated": "2014",
+      "url": "https://statistics.gov.rw/sites/default/files/documents/2025-02/COICOP.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "rw-nisr-nsdp",
+      "title": "Data Portals: E-GDDS/SDDS -- National Summary Data Page",
+      "publisher": "National Institute of Statistics of Rwanda (NISR)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "VERIFIED DIRECTLY this session. NISR's own statement of its IMF dissemination status: 'Rwanda National Statistical System (NSS) under the lead of NISR began publishing the required macroeconomic data on the National Summary Data Page (NSDP) as recommended by IMF's enhanced General Data Dissemination System (e-GDDS). This is the transition towards subscribing to Special Data Dissemination Standards (SDDS) in the near future.' Corroborated by a 2017 IMF press release announcing Rwanda's e-GDDS implementation and by IMF Country Report No. 24/141's Technical Memorandum of Understanding, which defines a programme monitoring variable 'consistent with the definition of the enhanced General Data Dissemination Standard (e-GDDS) template.' Places Rwanda on the same weaker dissemination tier already confirmed for Kenya, Nigeria, Ethiopia, Ghana and Uganda, rather than the stronger SDDS tier confirmed for South Africa, Egypt and Tanzania.",
+      "releases_per_year": 0.05,
+      "cadence_note": "A standing status page, not a recurring release.",
+      "last_updated": "2024",
+      "url": "https://statistics.gov.rw/data-portals-e-gddssdds",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "rw-worldbank-pforr-aide-memoire",
+      "title": "Eastern Africa Regional Statistics Program-for-Results (PforR) and Rwanda Poverty Policy Dialogue Mission -- Aide Memoire",
+      "publisher": "World Bank",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "VERIFIED DIRECTLY this session (mission of 4-6 September 2024). The primary source for Rwanda's own self-reported CPI compliance gap: 'Under DLI 1.1(c) \"Harmonized 5 dimensions of statistics according to applicable regional guidelines\", the NISR team provided the following updates: a. Consumer Price Index: rebasing and switch to the 2018 Classification of Individual Consumption According to Purpose (COICOP) are required to achieve compliance. These changes are expected to be completed in 2025 after using the results of the 7th Integrated Household Living Conditions Survey (EICV7).' Also states: 'CPI monthly reports from September 2022 to July 2024 were submitted to EAC for publishing' under a harmonized-CPI result indicator -- Rwanda's CPI functioning as an input to an EAC-level output, not evidence that Rwanda's own CPI methodology depends on the EAC HCPI Regulations. Also: 'For CPI, NISR is reviewing the software recommended by EAC to decide on its adoption after ensuring the data's security' (AGENCY ONLY -- no titled EAC document named).",
+      "releases_per_year": 0.5,
+      "cadence_note": "A periodic project-supervision mission report, not a fixed annual release.",
+      "last_updated": "2024-09",
+      "url": "https://documents1.worldbank.org/curated/en/099120424005016446/pdf/P176371-bb03a538-8942-4106-bce5-8fe37524b765.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "rw-sp-ssp-2024-2029",
+      "title": "Social Protection Sector Strategic Plan (SP-SSP) 2024-2029",
+      "publisher": "Government of Rwanda (MINALOC / MINECOFIN)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "VERIFIED DIRECTLY this session. Rwanda's social protection sector strategy covering the Vision Umurenge Programme (VUP), RSSB and the Imibereho social registry. Under Outcome 6: 'Reviewing Benefit Levels: An assessment of the adequacy of current benefits will be conducted, with adjustments to ensure that benefits meet the needs of beneficiaries. This includes a mechanism to regularly adjust benefits based on inflation and market changes' -- framed as a planned 2024-2029 intervention, not an operating mechanism, and never naming NISR's CPI as its intended data source. Also states the Imibereho Social Registry Information System (SRIS) 'replaces the \"Ubudehe categorisation\" previously used for targeting beneficiaries of social protection and graduation programmes,' adopting 'Proxy Means Testing (PMT)' -- a targeting/eligibility mechanism, not a benefit-level-setting one. Also admits generally that 'challenges persist in achieving coverage and adequacy targets, particularly exacerbated by shocks experienced during the NST1 period, including COVID-19, inflation, and climate change impacts.'",
+      "releases_per_year": 0.1,
+      "cadence_note": "A multi-year strategic plan, not a recurring release.",
+      "last_updated": "2024",
+      "url": "https://www.minecofin.gov.rw/index.php?eID=dumpFile&t=f&f=113402&token=dcf0020be749bda1c818d68fc4a5e7406882aad9",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "rw-pension-law-2015",
+      "title": "Law N deg 05/2015 of 03/03/2015 Governing the Organization of Pension Schemes",
+      "publisher": "Republic of Rwanda (Official Gazette n deg 20 of 18/05/2015)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "VERIFIED DIRECTLY this session. Statutory basis for the Rwanda Social Security Board's mandatory pension scheme. Article 16, 'Actuarial study for pension scheme': 'The public entity in charge of pension scheme shall carry out an actuarial study for pension scheme at least once every five (5) years... Basing on the findings of the actuarial study provided under the preceding paragraph, pension benefits may also be increased. A Presidential Order shall determine related implementation modalities.' A real, operating benefit-adjustment mechanism -- but actuarial and discretionary (via Presidential Order), not CPI-linked. Full text searched for 'adjust', 'index', 'revalor', 'cost of living' and 'inflation': no hits outside this actuarial mechanism. Independently corroborated by the SSA/ISSA 'Social Security Programs Throughout the World: Africa, 2019 -- Rwanda' country profile: 'Benefits are adjusted periodically by presidential decree based on an actuarial evaluation.'",
+      "releases_per_year": 0.05,
+      "cadence_note": "A standing statute, not a recurring release.",
+      "last_updated": "2015-05",
+      "url": "https://natlex.ilo.org/dyn/natlex2/natlex2/files/download/99143/RWA-99143.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "rw-nisr-cpi",
+      "target_report_id": "rw-eicv4-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "CPI June 2026 report (identical wording in the March 2024 and July 2025 editions), methodological notice: 'Weights used for the index are from the Household Living Conditions Survey (EICV4) results conducted in 2013-2014 with a sample of 14,419 households.'",
+      "evidence_url": "https://statistics.gov.rw/sites/default/files/documents/2026-07/JUNE%202026%20CPI%20Report%20English.pdf"
+    },
+    {
+      "source_report_id": "rw-eicv7-methodological-note",
+      "target_report_id": "rw-nisr-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "EICV7 Methodological Note: 'the NISR has, since October 2023, collected data on prices of hundreds of items in markets and shops in all thirty districts. These \"CPI prices\" were collected with careful attention to consistency...' and 'we use CPI prices' for household-level deflation of consumption to real terms -- the reverse-direction counterpart to the CPI's own reliance on EICV4.",
+      "evidence_url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/EICV7_Methodological%20Note.pdf"
+    },
+    {
+      "source_report_id": "rw-eicv7-methodological-note",
+      "target_report_id": "rw-coicop-rwanda-2014",
+      "relationship_type": "methodology_depends_on",
+      "basis": "WEAK EVIDENCE, flagged as such: Table 9.2 ('Food-Calorie Conversion Rates and Consumption Levels and Costs') carries a column literally headed 'COICOP' containing item codes (e.g. '01.1.7.5.01') matching NISR's Customized COICOP classification structure -- a bare table header, not a prose citation naming the document. See rw-eicv7-coicop-table-header-weak-evidence.",
+      "evidence_url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/EICV7_Methodological%20Note.pdf"
+    },
+    {
+      "source_report_id": "rw-nisr-nsdp",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "NISR's own page: 'Rwanda National Statistical System (NSS) under the lead of NISR began publishing the required macroeconomic data on the National Summary Data Page (NSDP) as recommended by IMF's enhanced General Data Dissemination System (e-GDDS).' Reuses the imf-e-gdds node.",
+      "evidence_url": "https://statistics.gov.rw/data-portals-e-gddssdds"
+    },
+    {
+      "source_report_id": "rw-worldbank-pforr-aide-memoire",
+      "target_report_id": "rw-nisr-cpi",
+      "relationship_type": "cites",
+      "basis": "The Aide Memoire directly describes and assesses NISR's CPI compliance status: 'Consumer Price Index: rebasing and switch to the 2018 Classification of Individual Consumption According to Purpose (COICOP) are required to achieve compliance' -- a donor supervision document describing the programme it monitors, not a computational input into the CPI itself.",
+      "evidence_url": "https://documents1.worldbank.org/curated/en/099120424005016446/pdf/P176371-bb03a538-8942-4106-bce5-8fe37524b765.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "rw-nisr-cpi -> un-coicop-2018",
+      "source": "rw-nisr-cpi",
+      "target": "un-coicop-2018",
+      "reason": "denied",
+      "why": "World Bank PforR Aide Memoire (Sept 2024): 'rebasing and switch to the 2018 Classification of Individual Consumption According to Purpose (COICOP) are required to achieve compliance... expected to be completed in 2025.' As of the June 2026 CPI report (the most recent edition reached this session), the base remains 'Feb 2014=100' and weights remain EICV4 -- the switch has not happened. Rwanda's own customized classification (rw-coicop-rwanda-2014) is explicitly the older, 1993-SNA-based 'COICOP Rwanda 2014' edition, not COICOP 2018."
+    },
+    {
+      "edge": "rw-nisr-cpi -> eac-hcpi-regulations",
+      "source": "rw-nisr-cpi",
+      "target": "eac-hcpi-regulations",
+      "reason": "no-document",
+      "why": "The word 'EAC' does not appear anywhere in the March 2024, July 2025 or June 2026 CPI bulletins (full text searched). The only EAC-CPI linkage found runs the opposite direction: the World Bank Aide Memoire states Rwanda's 'CPI monthly reports from September 2022 to July 2024 were submitted to EAC for publishing' as part of an EAC-level harmonized-CPI exercise -- Rwanda's CPI as an input to an EAC output, not evidence of the reverse."
+    },
+    {
+      "edge": "rw-nisr-cpi -> cpi-manual",
+      "source": "rw-nisr-cpi",
+      "target": "cpi-manual",
+      "reason": "no-document",
+      "why": "Full-text search of the March 2024, July 2025 and June 2026 CPI bulletins found zero occurrences of 'IMF' or 'CPI Manual'."
+    },
+    {
+      "edge": "rw-nisr-cpi -> sna-2008",
+      "source": "rw-nisr-cpi",
+      "target": "sna-2008",
+      "reason": "no-document",
+      "why": "Full-text search of the CPI bulletins found zero occurrences of 'SNA'. The only SNA reference found anywhere in Rwanda's CPI-adjacent documents is in the separate COICOP manual (rw-coicop-rwanda-2014), which cites the 1993 SNA, not the 2008 SNA: 'COICOP is an integral part of the 1993 SNA.'"
+    },
+    {
+      "edge": "rw-pension-law-2015 -> rw-nisr-cpi",
+      "source": "rw-pension-law-2015",
+      "target": "rw-nisr-cpi",
+      "reason": "denied",
+      "why": "Law N deg 05/2015, Article 16: pension benefit increases are triggered by 'the findings of the actuarial study,' not CPI or inflation. Full-text search of the law for 'adjust', 'index', 'revalor', 'cost of living', 'inflation' returned zero hits outside this actuarial mechanism. Independently corroborated by the SSA/ISSA country profile: 'Benefits are adjusted periodically by presidential decree based on an actuarial evaluation.'"
+    },
+    {
+      "edge": "rw-sp-ssp-2024-2029 -> rw-nisr-cpi",
+      "source": "rw-sp-ssp-2024-2029",
+      "target": "rw-nisr-cpi",
+      "reason": "no-document",
+      "why": "SP-SSP 2024-2029, Outcome 6: 'This includes a mechanism to regularly adjust benefits based on inflation and market changes' describes a planned intervention for 2024-2029, not an existing operating mechanism, and never names NISR's CPI publication as its intended data source. The same recommendation-reveals-absence shape already found in Botswana's, Tanzania's and Malawi's own policy documents."
+    },
+    {
+      "edge": "Ubudehe / Imibereho SRIS targeting depends on Rwanda's CPI",
+      "source": null,
+      "target": "rw-nisr-cpi",
+      "reason": "no-document",
+      "why": "SP-SSP 2024-2029 states the Imibereho SRIS (successor to Ubudehe categorisation) 'predicts a household's poverty status using variables such as demographics and assets, using consumption data and regression models to predict household welfare' -- no CPI/inflation linkage stated. This is a targeting (eligibility) mechanism, not a benefit-level-setting mechanism."
+    }
+  ]
+}

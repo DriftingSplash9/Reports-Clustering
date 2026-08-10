@@ -90,6 +90,8 @@ import szCpiSocialProtection from './research/sz-cpi-social-protection.json'
 import zmCpiSocialProtection from './research/zm-cpi-social-protection.json'
 import mwCpiSocialProtection from './research/mw-cpi-social-protection.json'
 import zwCpiSocialProtection from './research/zw-cpi-social-protection.json'
+import ugCpiSocialProtection from './research/ug-cpi-social-protection.json'
+import rwCpiSocialProtection from './research/rw-cpi-social-protection.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -213,6 +215,8 @@ const slices: ResearchSlice[] = [
   zmCpiSocialProtection as unknown as ResearchSlice,
   mwCpiSocialProtection as unknown as ResearchSlice,
   zwCpiSocialProtection as unknown as ResearchSlice,
+  ugCpiSocialProtection as unknown as ResearchSlice,
+  rwCpiSocialProtection as unknown as ResearchSlice,
 ]
 
 function assemble() {

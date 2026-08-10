@@ -252,6 +252,25 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   MW: 'AFR',
   ZW: 'AFR',
 
+  // **Uganda and Rwanda added 2026-08-10** (AF branch G.9) -- the East
+  // Africa remainder, the last of the docx-era regional groupings offered
+  // to Thomas across G.7/G.8, and the first two AF countries with no docx
+  // entry to anchor either of them at all. Uganda's own CPI documents are
+  // silent on every external framework this branch expects (no EAC, IMF or
+  // SNA citation anywhere), unlike Kenya's and Tanzania's; its Senior
+  // Citizens Grant went a decade with no nominal adjustment at all (World
+  // Bank, "has not been adjusted since the scheme started in 2010"), then
+  // rose on no documented formula. Rwanda's CPI is running on stale inputs
+  // by its own donor's account -- a 2025 rebasing onto COICOP 2018 that a
+  // World Bank supervision mission said was "expected" but had not
+  // happened by the June 2026 release -- and produced this branch's first
+  // documented bidirectional survey/CPI relationship (EICV4 feeds the
+  // CPI's weights; EICV7 in turn uses the CPI's own price collection to
+  // deflate its own consumption aggregates). See
+  // `src/data/research/ug-*.json`, `rw-*.json`.
+  UG: 'AFR',
+  RW: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,
