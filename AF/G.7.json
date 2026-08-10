@@ -1,0 +1,132 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.7.md",
+  "number": 7,
+  "title": "G.7.md — Africa galaxy hand-off",
+  "date": "2026-08-10",
+  "governing_briefs": "`Research.1.md` §§1-5 read directly and in full this session (§2 \"the one rule\", §3 extract-don't-adjudicate, §4 what counts as a node, §5 the two traps) -- the first time this session's own context read the brief directly rather than through a prior hand-off's summary. `AF/G.6.md` read directly (staged and read in full, including its own JSON sidecar, to confirm G.6's work had actually completed before this session's own work began -- see Session conditions). `AF/G.1.md` through `AF/G.5.md` were **not** re-read directly this session; this session relied on G.6.md's own Orientation section (which itself carries their content forward) and project memory. If that chain ever breaks, a future session should read them directly rather than assume.",
+  "predecessor": "G.6.md (2026-08-10)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "Botswana and Namibia both confirm the branch's dominant discretionary pattern, but in two genuinely different shapes, extending the branch's running documentation of *how* African benefit systems are discretionary rather than simply noting that they are. Botswana's own 2020 National Social Protection Recovery Plan (Ministry of Local Government and Rural Development, with UNDP) *recommends* introducing automatic indexation for the Old Age Pension \"so that the transfer value would be automatically adjusted each year\" -- a recommendation that is itself the evidence no such mechanism currently exists -- while the actual P830-to-P1400 increase this year was announced in budget-reprioritisation language, not CPI language. Namibia goes a level further: the National Pensions Act, 1992 does not merely lack a CPI-adjustment clause -- it explicitly assigns old-age pension amount-setting to ministerial regulation by statute (s.16(1)(b)), making it the branch's first **statutory**, not merely policy-level, confirmation of discretionary benefit-setting for a universal old-age pension. Namibia's own ISSA/SSA profile (2024-07 vintage) independently corroborates this with \"the benefit amount is reviewed and adjusted on an ad hoc basis\" -- a case where the secondary source agrees with the primary documents rather than conflicting with them, a genuine contrast with Tanzania's and (probably) Botswana's older-vintage ISSA claims of CPI-linkage that the primary sources do not support.",
+  "findings": [
+    {
+      "heading": "1. Botswana's CPI methodology and its current release are two separate documents, unlike Tanzania's single-document structure",
+      "body": "`bw-statsbots-cpi-technical-report-2018`, VERIFIED DIRECTLY via Statistics Botswana's CPI Technical Report (December 2018 rebasing): base period \"December 2018\" (p.7); weights \"derived from the 2015/16 BMTHS results...based on a national sample of 7199 households\" (p.13); classification \"adopted the Classification of Individual Consumption by Purpose (COICOP),\" 12 groups, 400 items (pp.10, 12); formula \"the geometric mean (Jevon's)...less influenced by extreme prices\" for elementary aggregates (p.26). The current monthly release, `bw-statsbots-cpi` (VERIFIED DIRECTLY via the June 2026 edition), still holds \"December 2018 = 100.0\" eight years on but states no methodology of its own (\"the primary CPI calculation methodology is not detailed in this publication\") -- so the two were minted as separate nodes with a `methodology_depends_on` edge between them, the same genre-split Tanzania's slice used between its monthly release and its separate Data Quality Assessment, applied here for the first time to a methodology-vs-release split specifically. Statistics Botswana's own website separately describes the release as using \"the Modified Laspeyres method\" for higher-level aggregation -- quoted from the website, not the release document itself, and not in tension with the Technical Report's elementary-aggregate formula (standard two-level index construction), but sourced and cited as a distinct claim rather than folded into the PDF's own text."
+    },
+    {
+      "heading": "2. Botswana's Old Age Pension: a government recommendation that is itself proof of absence",
+      "body": "`bw-national-social-protection-recovery-plan-2020` (Ministry of Local Government and Rural Development + UNDP, UNICEF, ILO, FAO, UNFPA; 30 June 2020), VERIFIED DIRECTLY. Executive Summary S.5.1 (p.xi): \"The value of the combined Older Persons Grant should be re-evaluated and benchmarked against the poverty line or consumption needs, so that the transfer value would be automatically adjusted each year to retain or increase its purchasing power over time.\" Framed as a recommendation, not a description of current practice -- the same inferential shape as Tanzania's National Social Protection Policy 2023, but reached by a document proposing a fix rather than one naming an absence outright. The government's own current Old Age Pension page (`gov.bw`) states only the amount (BWP830, now stale) and administering department (Department of Social Development), with no adjustment mechanism named anywhere. The actual increase to P1,400, announced in the Vice President/Finance Minister's \"maiden national budget speech\" (`dailynews.gov.bw`), was funded \"through reprioritisation and budget cuts within the existing allocations\" -- discretionary budget language, no CPI or cost-of-living reference at all."
+    },
+    {
+      "heading": "3. Namibia's CPI bulletin carries less stated methodology than any other AF country's CPI document so far",
+      "body": "`na-nsa-cpi`, VERIFIED DIRECTLY via the Namibia Statistics Agency's August 2025 NCPI Bulletin: base \"Dec 2012=100,\" \"last rebased in 2013, using household expenditure data collected in the 2009/10 Household Income and Expenditure Survey,\" \"12 categories and 55 sub-categories,\" \"over 350 items,\" prices \"collected monthly from more than 900 retail outlets,\" published \"approximately 15 days after the end of the reference month.\" Neither COICOP nor any named index formula appears anywhere in this bulletin, and `nsa.org.na`'s own inflation landing page and general CPI post (404) carried no link to a dedicated technical/methodology report of the kind Botswana and Tanzania both have. This reads as a genuine documentation gap on NSA's public-facing side rather than a search failure -- worth one more targeted look by a future session (see _open_questions) but not chased further this session once the bulletin's own stated ceiling was reached."
+    },
+    {
+      "heading": "4. Namibia's National Pensions Act, 1992 -- the branch's first statutory confirmation of discretionary benefit-setting",
+      "body": "`na-national-pensions-act-1992`, VERIFIED DIRECTLY, read via NamibLII. Purpose, per the Social Protection Policy 2021-2030's own citation (p.15, S.5.3): \"provides for national pensions to be paid to aged, visually impaired and persons with disability.\" On amount-setting, s.16(1)(b): \"the payment of national pensions including the maximum amount to be paid, the determination of the amount to be paid in any particular case\" is set by the Minister \"in consultation with the Minister of Finance\"; s.16(3) permits \"different pensions to be paid to different categories of aged persons according to their income and other assets\"; s.16(2) requires parliamentary approval only for reductions to aggregate pension entitlements. No section anywhere ties any amount to the CPI or any price index. This differs in kind from every other \"denied\" edge in the branch so far (Tanzania's PSSSF Act, Nigeria's various instruments): those documented an *absence* of a CPI clause in an otherwise-silent statute; this one documents an *explicit, affirmative delegation* to ministerial discretion, written into the founding law of the benefit itself rather than a supporting administrative fund."
+    },
+    {
+      "heading": "5. Namibia's Social Protection Policy 2021-2030 treats the Child Grant and the Old Age Pension differently, in the same document",
+      "body": "`na-social-protection-policy-2021-2030` (Ministry of Gender Equality, Poverty Eradication and Social Welfare; Cabinet Decision No. 4th/23.03.21/009, March 2021), VERIFIED DIRECTLY. The implementation plan sets old-age pension values as fixed nominal targets -- \"N$1 300 (2020)\" rising to \"N$1 350\" by 2025/26 -- with no formula. The Policy commits only the Child Grant to inflation language: \"adjustments will be made to the existing amount of the Child Grants to account for inflationary losses over time.\" The equivalent language is simply absent for the old-age pension anywhere in the document, despite the Policy noting elsewhere that \"the old-age pension has the best adequacy, covering 65% of the extremely poor consumption expenditure.\" Cites the National Pensions Act, 1992 by name as one of ten governing acts (S.5.3, p.15) -- minted as the branch's first `cites`-type edge in this pairing (`na-social-protection-policy-2021-2030 -> na-national-pensions-act-1992`), context rather than a computational input, per the `RelationshipType` definition."
+    },
+    {
+      "heading": "6. The older-ISSA-vintage CPI-claim pattern holds for Botswana, breaks (in a good way) for Namibia",
+      "body": "The SSA/ISSA 2018-2019 country profile makes the same shape of claim for Botswana that it made for Tanzania: \"Benefits are adjusted periodically based on changes in the cost of living\" (old-age pension, then 530 pula/month, and the War Veteran's Allowance). No document fetched this session for the *current* Botswana system corroborates that -- same unresolved-conflict treatment as Tanzania, not adjudicated, and neither ISSA vintage minted as a node (matching precedent). Namibia's equivalent secondary source, however, is the 2024-07 vintage ISSA profile (a full country-specific update, not the older Africa-wide 2018-2019 SSA edition used for the other eight AF countries so far) and it is *consistent* with the primary sources rather than contradicting them: \"Not legally mandated. The benefit amount is reviewed and adjusted on an ad hoc basis.\" This is the first AF country where the secondary compilation and the primary documents agree rather than conflict -- worth noting as a genuine methodological point in the corpus's favour (the older-vintage-claims-more-than-current-reality pattern is not universal), even though, per precedent, this ISSA profile is still not minted as a node."
+    }
+  ],
+  "corrections": [
+    {
+      "n": 1,
+      "text": "`AF/G.6.md`'s \"What to pass at the start of next thread\" item 3 cited the rest-of-Africa prose as being at \"paragraphs ~858-913.\"** This session located it by direct python-docx paragraph indexing at **paragraphs 686-717**. The docx has only 721 paragraphs total, so \"858-913\" was never reachable -- likely a stale estimate carried from a different counting method (e.g. counting runs or a different document revision) rather than a checked value. Not a finding-level error (G.6 never quoted the prose's content, only estimated its location), but worth fixing now that a session actually needed to find it."
+    }
+  ],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "Southern Africa is not finished.** Five countries remain from the docx's own regional list: Lesotho, Eswatini, Zambia, Malawi, Zimbabwe -- all described only as \"most others remain largely discretionary,\" no country-specific docx detail for any of them, meaning each is a from-scratch primary-research country like Botswana and Namibia were. Natural next batch, pending Thomas's confirmation to keep going in this region specifically."
+        },
+        {
+          "n": 2,
+          "text": "North Africa (Algeria, Morocco, Tunisia) and the East Africa remainder (Uganda, Rwanda) are still open alternatives** -- both were offered alongside Southern Africa this session and Thomas picked Southern Africa; neither has been touched."
+        },
+        {
+          "n": 3,
+          "text": "Carried forward unchanged from G.6: whether to model the docx's regional-typology prose (WAEMU HCPI, AFRISTAT, the ECOWAS HCPI guide) as corpus nodes -- still not raised with Thomas directly."
+        },
+        {
+          "n": 4,
+          "text": "Once Southern Africa (or whichever region Thomas picks next) is further along, the same branch-scope question recurs one level down: does AF eventually cover the whole continent, or does it stop at some deliberately chosen set? Not yet asked."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "`na-cpi-formula-unconfirmed` -- Namibia's NCPI bulletin names neither COICOP nor an index formula; a dedicated NSA technical/concepts-and-methods report, if one exists, was not located this session."
+    },
+    {
+      "n": 2,
+      "text": "`na-2025-26-nhies-rebasing-pending` -- NSA has announced conducting the 2025/2026 Household Income & Expenditure Survey; whether a CPI rebasing off the back of it has occurred (the August 2025 bulletin is still on a 2012 base) was not checked."
+    },
+    {
+      "n": 3,
+      "text": "`bw-sdds-status-unconfirmed` -- Bank of Botswana's own GDDS/SDDS page is not recently dated and IMF DSBB's country pages are JS-rendered (same recurring failure logged for South Africa, Egypt and Kenya); Botswana's current IMF data-standard tier is unconfirmed."
+    },
+    {
+      "n": 4,
+      "text": "`bw-cpi-rebasing-cadence` -- the 2018 Technical Report's own Appendix C implies a prior September 2016 base; whether a rebasing has occurred since December 2018 was not checked."
+    },
+    {
+      "n": 5,
+      "text": "`na-child-grant-vs-oap-mechanism` -- whether a Namibian policy revision since 2021 has extended a formal inflation-adjustment commitment to the old-age pension (currently only the Child Grant has one) was not checked."
+    },
+    {
+      "n": 6,
+      "text": "`na-gipf-not-checked` / `bw-budget-speech-not-located` / `bw-recovery-plan-part2-not-read` -- three smaller loose ends, one lookup each, detailed in the respective slice files' own `_open_questions`."
+    },
+    {
+      "n": 7,
+      "text": "Everything carried forward unchanged from G.6 (`tz-eac-guidelines-vs-regulations-naming`, `tz-zanzibar-scope-unconfirmed`, `tz-pssn-benefit-amounts-not-located`, the ECOWAS HCPI guide, and the older South Africa/Ethiopia items) -- not rechecked this session, listed in G.6.md so as not to be silently lost."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `AF/G.6.md` for the seven-country docx-closing context. `G.1.md`-`G.5.md` are one level further back; read directly only if this Orientation section stops being trustworthy."
+    },
+    {
+      "n": 2,
+      "text": "`Research.1.md` itself -- read directly this session for the first time in this session's own context; worth doing again directly rather than trusting a summary, per this session's own experience finding it genuinely informs node-shape decisions (e.g. the one-off-vs-recurring split behind Finding 1's two-node structure)."
+    },
+    {
+      "n": 3,
+      "text": "Thomas's answer on which region to continue with -- the rest of Southern Africa (Lesotho, Eswatini, Zambia, Malawi, Zimbabwe), or a switch to North Africa / East Africa remainder."
+    },
+    {
+      "n": 4,
+      "text": "`npm-validate-procedure` memory, plus this session's own fix (write the scratch tarball into an already-excluded subdirectory like `archive/`, not the repo root, or `tar` throws \"file changed as we read it\")."
+    },
+    {
+      "n": 5,
+      "text": "Nothing sitting un-imported in `src/data/research/` for this branch."
+    }
+  ],
+  "session_conditions": "This was a genuinely new session (not a continuation-in-context of G.6's own session), opening by verifying G.6's hand-off and JSON sidecar were actually complete and consistent on disk before doing anything else -- they were (`handoff-to-json.py --check` reported both files up to date, project memory matched, no stray draft files in `src/data/research/`). Thomas then said \"i wish to explore africa a lot more.\"\n\nGiven the scale a full continent expansion implies, this session first read `country afrikans.docx`'s own \"How the rest of Africa generally works\" section (paragraphs 686-717 by python-docx paragraph indexing -- not the \"~858-913\" estimate G.6 carried forward, which was wrong; see Corrections) to build a real candidate list, then used `AskUserQuestion` to let Thomas pick a starting region rather than guessing. He picked Southern Africa. This session then researched Botswana and Namibia in full, one after the other, rather than attempting the whole region at once -- each country's own research (multiple WebSearch/WebFetch rounds, cross-checking an older ISSA/SSA vintage against current primary sources, quote-level precision) took roughly the same effort as a single docx country did in earlier sessions, so five more countries in one sitting was judged unrealistic without cutting corners on the verification discipline Research.1.md §3 exists to enforce.\n\n**A new failure mode for this branch's tooling, logged once, worked around successfully:** the tar+cloud-sandbox validate procedure (`npm-validate-procedure` memory) failed the first time it was tried this session with `tar: .: file changed as we read it`, because the output tarball was being written into the same directory tree being archived. Writing the output into an already-`--exclude`d subdirectory (`archive/`) instead of the repo root fixed it. That first attempt also revealed the procedure's own past runs leave stray multi-hundred-megabyte tarballs behind (`device_bash` cannot delete files, only move them) -- `_to_delete/` already held six such orphaned tarballs from earlier sessions, none logged in its own README despite the branch's standing \"log why\" convention (`feedback_sweep-junk` memory). This session's own two tarballs were moved and logged; the six pre-existing ones were not investigated or logged (out of scope for this session, flagged here as a minor standing mess rather than fixed).\n\n`gov.bw`'s Old Age Pension allowance page and `dailynews.gov.bw`'s coverage of the P830-to-P1400 increase were both fetched cleanly via WebFetch, as was every Namibia source (`nsa.org.na`, `namiblii.org`, `civic264.org.na`, `issa.int`). The only fetch failure this session was `nsa.org.na`'s general CPI landing post returning a 404 -- worked around by finding NSA's actual monthly bulletin PDFs via search instead, which turned out to carry less methodology detail than Botswana's or Tanzania's equivalent documents (no COICOP name, no stated formula -- see Findings 3 and _open_questions)."
+}

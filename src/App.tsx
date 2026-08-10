@@ -52,6 +52,7 @@ import {
 import {
   ALL_SCOPES,
   COMMERCIAL_COLOUR,
+  focusPalette,
   rimColourFor,
   SCOPE_COLOUR,
   SCOPE_GROUPS,
@@ -730,6 +731,23 @@ function Hud({
   const allScopesOn = filter.scopes === null
   const noScopesOn = filter.scopes !== null && filter.scopes.length === 0
 
+  // Focus-adaptive recolouring (2026-08-10, Thomas): when the active filter
+  // touches exactly one group's own scopes — the common "one country only"
+  // move `onToggleGroup` already exists for — that group's own levels get a
+  // wider-spread palette than SCOPE_COLOUR's tight within-family band, since
+  // cross-country separation stops mattering once every other country is
+  // hidden. Sidebar only for now; the 3D scene's node/edge/pulse colours
+  // still come from SCOPE_COLOUR via `colourForReport`.
+  const focusedGroupCountry =
+    filter.scopes && filter.scopes.length > 0
+      ? (() => {
+          const countries = new Set(
+            filter.scopes!.map((s) => SCOPE_GROUPS.find((g) => g.scopes.includes(s))?.country),
+          )
+          return countries.size === 1 ? [...countries][0] : null
+        })()
+      : null
+
   // Scope groups are closed by default — nine families x up to six levels
   // each is 40+ rows, more than the panel's fixed height can show, and the
   // panel clips (`overflow: hidden`) rather than scrolls. A group opens
@@ -851,6 +869,11 @@ function Hud({
         const filterTouchesGroup =
           filter.scopes !== null && group.scopes.some((s) => filter.scopes!.includes(s))
         const isExpanded = manuallyExpanded.has(group.country) || filterTouchesGroup
+        // Only the one group the filter is actually narrowed to gets the
+        // wide-spread treatment — every other group keeps SCOPE_COLOUR, so a
+        // colour never means two different things on screen at once.
+        const focusColours =
+          group.country === focusedGroupCountry ? focusPalette(group.scopes) : null
         return (
           <div key={group.country} style={{ marginTop: 7 }}>
             <div
@@ -895,9 +918,9 @@ function Hud({
               >
                 <span
                   style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: 2,
+                    width: 11,
+                    height: 11,
+                    borderRadius: 3,
                     display: 'inline-block',
                     background:
                       shown.length === present.length
@@ -923,7 +946,7 @@ function Hud({
               present.map((s) => (
                 <div key={s} style={{ paddingLeft: 26 }}>
                   <LegendRow
-                    colour={SCOPE_COLOUR[s]}
+                    colour={focusColours ? focusColours[s] : SCOPE_COLOUR[s]}
                     label={SCOPE_LABEL[s]}
                     count={scopeCounts[s] ?? 0}
                     on={scopeOn(s)}
@@ -1012,17 +1035,17 @@ function LegendRow({
     >
       <span
         style={{
-          width: 8,
-          height: 8,
-          borderRadius: 8,
+          width: 12,
+          height: 12,
+          borderRadius: 12,
           display: 'inline-block',
           // Hollow when off. A greyed-out dot would collide with the grey that
           // already means "commercial". Half-filled for a partial selection,
           // which is the one state a checkbox cannot honestly show.
           background: on ? colour : 'transparent',
-          borderLeft: partial ? `4px solid ${colour}` : undefined,
-          border: partial ? undefined : `1px solid ${colour}`,
-          boxShadow: partial ? `inset 3px 0 0 ${colour}` : undefined,
+          borderLeft: partial ? `5px solid ${colour}` : undefined,
+          border: partial ? undefined : `1.5px solid ${colour}`,
+          boxShadow: partial ? `inset 4px 0 0 ${colour}` : undefined,
           opacity: on || partial ? 1 : 0.45,
         }}
       />

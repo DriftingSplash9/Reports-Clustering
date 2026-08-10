@@ -1,0 +1,107 @@
+{
+  "_slice": "bw-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Botswana is the first country researched beyond `country afrikans.docx`'s original seven -- opening the AF branch's Southern Africa expansion (Thomas's stated priority, 2026-08-10, resolving G.6's open branch-scope question in favour of continuing). No raw docx entries exist for this country; every document below was located and verified from scratch this session via WebSearch + WebFetch, with no Grok round used. Every report below is VERIFIED DIRECTLY. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "One cross-source tension, weaker than Tanzania's three-way conflict but the same shape. The older SSA/ISSA country profile (Social Security Programs Throughout the World: Africa, 2018-2019 vintage, ssa.gov) states for Botswana's universal old-age pension and War Veteran's Allowance: 'Benefits are adjusted periodically based on changes in the cost of living.' No document fetched this session corroborates that claim for the *current* system: the government's own Old Age Pension allowance page (gov.bw) states only the current amount and administering department, with no adjustment mechanism named; the discretionary jump from P830 to P1400 (dailynews.gov.bw, effective 1 April, announced in the Vice President/Finance Minister's budget speech) was framed as accommodated 'through reprioritisation and budget cuts within the existing allocations' -- budget language, not CPI or cost-of-living language; and the government's own 2020 National Social Protection Recovery Plan (bw-national-social-protection-recovery-plan-2020) recommends introducing automatic indexation for the Older Persons Grant precisely because, as a recommendation rather than a description of existing practice, it implies no such mechanism currently exists. Per Research.1.md S3, this is reported as an unresolved conflict rather than adjudicated -- it reads as though the ISSA profile's 'cost of living' claim was either loose paraphrase of ad-hoc discretionary increases (P530 in the 2018-2019 profile itself, since risen to P830 and then P1400) or described an arrangement not documented anywhere else found this session, but that is inference. Neither the 2018-2019 ISSA/SSA profile nor a newer vintage (none was found for Botswana specifically -- see _open_questions) is minted as a corpus node, matching Tanzania's precedent for the same source series.",
+  "_open_questions": [
+    {
+      "id": "bw-cpi-rebasing-cadence",
+      "question": "The CPI Technical Report's own Appendix C carries historical data on a prior September 2016 base, implying the December 2018 report is itself a rebasing rather than the series' first edition. The June 2026 release still shows 'December 2018 = 100.0', eight years on. Whether a further rebasing has occurred or is planned since December 2018 -- which would let this node's cadence be stated with more than one observed interval -- was not checked this session."
+    },
+    {
+      "id": "bw-sdds-status-unconfirmed",
+      "question": "The Bank of Botswana's own GDDS/SDDS participation page describes GDDS participation starting in 2001 and a 2006 follow-up ROSC finding SDDS subscription 'not yet feasible' -- but the page carries no recent-dated update, and the IMF's own DSBB country pages are JS-rendered and could not be fetched this session (the same failure mode already logged for South Africa, Egypt and Kenya in earlier AF sessions). Botswana's current (2026) IMF data-standard tier -- e-GDDS, SDDS, or SDDS Plus -- is unconfirmed."
+    },
+    {
+      "id": "bw-budget-speech-not-located",
+      "question": "The P830-to-P1400 Old Age Pension increase was announced in the Vice President/Finance Minister's 'maiden national budget speech' (dailynews.gov.bw), implying an FY2026/27 budget. The actual budget speech document -- the primary source for the 'reprioritisation and budget cuts' framing currently quoted second-hand from a news article -- was not located this session."
+    },
+    {
+      "id": "bw-recovery-plan-part2-not-read",
+      "question": "Part 2 (the Action Plan) of the National Social Protection Recovery Plan turned up in search alongside Part 1 (Analysis and Recommendations, the document actually fetched and quoted this session) but was not itself fetched. It may contain further detail on the proposed indexation mechanism or a timeline for adopting it."
+    }
+  ],
+  "reports": [
+    {
+      "id": "bw-statsbots-cpi",
+      "title": "Consumer Price Index",
+      "publisher": "Statistics Botswana",
+      "country": "BW",
+      "jurisdiction_level": "federal",
+      "region": "Botswana",
+      "description": "Botswana's official monthly Consumer Price Index release. VERIFIED DIRECTLY this session via the June 2026 edition: the base period is held at 'December 2018 = 100.0' across all tables -- the same base year Statistics Botswana's own CPI Technical Report established (see bw-statsbots-cpi-technical-report-2018), which this release does not itself restate ('the primary CPI calculation methodology is not detailed in this publication'). Statistics Botswana's own Prices Statistics webpage separately states 'Consumer Price Index (CPI) is computed using the Modified Laspeyres method which is in line with regional and international recommendations' -- website copy, quoted separately from the Technical Report's own elementary-aggregate formula (geometric mean/Jevons) because the two are different documents making distinct-but-compatible claims about different levels of the same index construction. The June 2026 release also documents Statistics Botswana's core-inflation method: it 'attempts to remove 8 percent (by weight) of the commodity subgroups price changes at each of the ends of an ordered series' (trimmed mean), alongside a separate administered-prices-exclusion measure.",
+      "releases_per_year": 12,
+      "last_updated": "2026-06",
+      "url": "https://www.statsbots.org.bw/sites/default/files/publications/Consumer%20Price%20Index%20June%202026.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "bw-statsbots-cpi-technical-report-2018",
+      "title": "Consumer Price Index Technical Report (December 2018 rebasing)",
+      "publisher": "Statistics Botswana",
+      "country": "BW",
+      "jurisdiction_level": "federal",
+      "region": "Botswana",
+      "description": "Statistics Botswana's technical methodology report for the December 2018 CPI rebasing, still the live base as of the June 2026 release (bw-statsbots-cpi). VERIFIED DIRECTLY this session: base price reference period -- 'The current Botswana CPI series has a base period of December 2018' (p.7), the new series having 'started with a value of 100.0' (p.33); weights -- 'used in the December 2018 index series were derived from the 2015/16 BMTHS results and were based on a national sample of 7199 households' (p.13), BMTHS being the Botswana Multi-Topic Household Survey; classification -- 'Statistics Botswana has adopted the Classification of Individual Consumption by Purpose (COICOP) for all items in the new basket', organised into '12 groups' covering 400 total items (pp.10, 12); elementary-aggregate formula -- 'the geometric mean (Jevon's)... [chosen because] it is less influenced by extreme prices (values)' than arithmetic means (p.26). The report's own Appendix C carries historical data on a prior September 2016 base, implying this is itself a rebasing instrument rather than the series' first edition -- see _open_questions on whether a further rebasing has occurred since.",
+      "last_updated": "2018-12",
+      "url": "https://www.statsbots.org.bw/sites/default/files/publications/Consumer%20Price%20Index%20%20Technical%20Report%20%202018.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "bw-national-social-protection-recovery-plan-2020",
+      "title": "National Social Protection Recovery Plan, Part 1: Analysis and Recommendations",
+      "publisher": "Ministry of Local Government and Rural Development (Botswana), with UNDP, UNICEF, ILO, FAO and UNFPA",
+      "country": "BW",
+      "jurisdiction_level": "federal",
+      "region": "Botswana",
+      "description": "Botswana's government-published, UNDP-supported social protection review, 30 June 2020. VERIFIED DIRECTLY this session. Section 5.1 of the Executive Summary (p.xi) recommends: 'The value of the combined Older Persons Grant should be re-evaluated and benchmarked against the poverty line or consumption needs, so that the transfer value would be automatically adjusted each year to retain or increase its purchasing power over time.' Framed as a recommendation rather than a description of current practice, this is the document affirmatively implying the absence of an automatic adjustment mechanism for the Old Age Pension (the 'Older Persons Grant') -- the same shape as Tanzania's National Social Protection Policy 2023 (tz-national-social-protection-policy-2023): a government social-protection review whose own proposed fix reveals what does not yet exist, rather than a document simply silent on the question. The document does not name Statistics Botswana or the CPI as an input anywhere; its own recommended benchmark is a poverty line/consumption-needs standard, not an existing CPI series.",
+      "last_updated": "2020-06-30",
+      "url": "https://files.acquia.undp.org/public/migration/africa/Undp-rba-COVID-response-recovery-Botswana.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "bw-worldbank-social-protection-review",
+      "title": "Botswana Social Protection Programs and Systems Review: Policy Brief",
+      "publisher": "World Bank",
+      "country": "BW",
+      "jurisdiction_level": "federal",
+      "region": "Botswana",
+      "description": "World Bank policy brief reviewing Botswana's social protection system. VERIFIED DIRECTLY this session. On the Old Age Pension: 'The OAP yields the highest contribution to the fight against poverty', covering 5.5% of the population, with no statement anywhere in the brief of how the benefit amount is set or adjusted. On the Ipelegeng public-works programme: 'The value of the Ipelegeng wage rate is 81 to 93 percent of the minimum wage in 2019 (not including the meal)' -- a relative-to-minimum-wage benchmark, not a CPI or price-index link -- and the brief criticises the wage as 'high in comparison with international benchmarks for public works programs' without proposing an indexation formula of any kind. No document located this session ties either programme's amount-setting to Statistics Botswana's CPI.",
+      "last_updated": null,
+      "url": "https://documents1.worldbank.org/curated/en/099645003062233961/pdf/P1721750bfaf150680a0210c89c915f3364.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bw-statsbots-cpi",
+      "target_report_id": "bw-statsbots-cpi-technical-report-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The June 2026 release holds the index at 'December 2018 = 100.0' and states no methodology of its own ('the primary CPI calculation methodology is not detailed in this publication'), while the Technical Report is the document that defines that base period, the 2015/16 BMTHS weights, the COICOP basket and the Jevons elementary-aggregate formula the ongoing series relies on.",
+      "evidence_url": "https://www.statsbots.org.bw/sites/default/files/publications/Consumer%20Price%20Index%20June%202026.pdf"
+    },
+    {
+      "source_report_id": "bw-statsbots-cpi-technical-report-2018",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Technical Report, p.12: 'Statistics Botswana has adopted the Classification of Individual Consumption by Purpose (COICOP) for all items in the new basket.'",
+      "evidence_url": "https://www.statsbots.org.bw/sites/default/files/publications/Consumer%20Price%20Index%20%20Technical%20Report%20%202018.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bw-national-social-protection-recovery-plan-2020 -> bw-statsbots-cpi",
+      "source": "bw-national-social-protection-recovery-plan-2020",
+      "target": "bw-statsbots-cpi",
+      "reason": "denied",
+      "why": "The Plan's own recommendation is proof the link does not currently exist: it proposes the Older Persons Grant 'be re-evaluated and benchmarked against the poverty line or consumption needs, so that the transfer value would be automatically adjusted each year' (p.xi) -- a future-tense fix, not a description of a live CPI or poverty-line indexation mechanism. Even the proposed benchmark is a poverty line, not Statistics Botswana's CPI by name."
+      },
+    {
+      "edge": "bw-worldbank-social-protection-review -> bw-statsbots-cpi",
+      "source": "bw-worldbank-social-protection-review",
+      "target": "bw-statsbots-cpi",
+      "reason": "no-document",
+      "why": "The brief benchmarks the Ipelegeng wage rate against the minimum wage (81-93% of it in 2019), not against CPI, and states no amount-setting mechanism at all for the Old Age Pension. Same shape as Tanzania's World Bank PSSN III factsheet (tz-pssn-worldbank) and Nigeria's NASSP-SU (ng-nassp-su-worldbank): a donor document describing a safety-net programme with no documented CPI-linked mechanism."
+    }
+  ]
+}

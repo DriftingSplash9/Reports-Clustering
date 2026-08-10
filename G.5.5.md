@@ -105,6 +105,70 @@ count only, no child rows), with:
 This does not touch `palette.ts` and carries none of Issue 1's colour-semantics risk, so it is
 safe to build ahead of a decision on Issue 1.
 
+## Resolution — implemented same session, after Thomas picked a direction
+
+Asked Thomas to pick between A and B above. He picked **A (focus-adaptive recolouring)**, plus
+three more items in the same message, rattled off live while watching the app: bigger swatches/
+dots regardless of focus, bigger edges, bigger pulses, and "the pulses... are oriented facing
+backwards lol." All implemented and pushed this session (`npm run check` + `npm run build` clean
+before each push, so his dev server's HMR should pick every one of these up live):
+
+- **Issue 2 (collapse)** — implemented as specified above: `src/App.tsx`'s `Hud` component now
+  tracks a `manuallyExpanded` set, chevron click toggles it independent of the existing
+  toggle-all-in-group click, and a group auto-expands when the active filter touches it. The
+  panel's own `overflow: hidden` (line ~1091) was also changed to `overflowY: 'auto'` as a safety
+  net — collapse fixes the common case, scrolling catches whatever's left if several groups are
+  open at once.
+- **Issue 1, direction A** — `focusPalette()` added to `src/lib/palette.ts`: when the sidebar
+  filter narrows to exactly one `SCOPE_GROUPS` country (detected from `filter.scopes` all
+  belonging to one group), that group's own levels get spread across 300° of hue at fixed
+  saturation/lightness instead of `SCOPE_COLOUR`'s tight within-family band. Deliberately a
+  second, sidebar-only palette layered on top rather than an edit to `SCOPE_COLOUR` itself — that
+  table's gaps carry explicit "do not raise/lower this" warnings for cross-family separation, and
+  this doesn't touch any of them. **Scope note: sidebar only.** The 3D scene's own node fill,
+  edge gradient and pulse colour all still come from `colourForReport`/`SCOPE_COLOUR` — extending
+  the focus palette into the actual spheres/edges would mean reaching into `InfluenceGraph.tsx`'s
+  memoized node/link construction, which is a bigger, more careful change than this pass; not
+  done yet, flagged below.
+- **Bigger dots** — `LegendRow`'s swatch (`App.tsx`) 8px → 12px, the group-header swatch 8px →
+  11px. Always on, not just when focused.
+- **Bigger edges** — `InfluenceGraph.tsx`'s `.linkWidth`: `0.3 + weight*0.7` → `0.5 + weight*1.2`,
+  roughly 1.7x across the range.
+- **Bigger pulses** — the teardrop particle size: `1.6 + weight*1.9` → `2.4 + weight*2.9` (and the
+  fallback-particle size 2 → 3), roughly 1.5x.
+- **Pulse orientation bug — found and fixed, not just resized.** Read
+  `node_modules/three-forcegraph/dist/three-forcegraph.js` directly rather than guessing: it
+  orients each particle with `photon.lookAt(pos.x, pos.y, pos.z)`, called *before* updating the
+  particle's own position to `pos` — so it is genuinely aiming at where it's about to go, exactly
+  as `linkVisuals.ts`'s old comment assumed. **What the old comment got wrong**: it assumed
+  `lookAt` points the object's `+Z` axis at the target. Three.js's actual convention (same as
+  every camera) is the opposite — `lookAt` points local **`-Z`** at the target. The teardrop
+  geometry had its rounded head built at `+Z`, so the pointed tail was always the end facing the
+  direction of travel — tail-first, exactly "backwards." Fix: `geometry.rotateX(Math.PI / 2)` →
+  `geometry.rotateX(-Math.PI / 2)` in `teardropGeometry()`, which puts the head at `-Z` instead.
+  Comments in both the function docblock and at the rotation call site rewritten to state the
+  correct convention, so a future edit doesn't reintroduce the same wrong assumption.
+
+## Open — cluster spacing ("Canada/US look jumbled")
+
+Raised in the same message, not yet acted on. **What's actually there**: the force layout
+(`InfluenceGraph.tsx` ~line 414-442) is generic — one charge/repulsion force, one link-distance
+force, one collision force, all applied uniformly to every node regardless of country or
+continent family. There is no force that specifically pulls same-family nodes together or pushes
+different families apart; any visual clustering by country is an accident of which nodes happen
+to share edges, not a deliberate layout rule. So "Canada and US look jumbled" is consistent with
+what the code does: two structurally-disconnected clusters have no dedicated reason to separate
+beyond generic charge repulsion, which is uniform for every pair regardless of family.
+
+**Why this one wasn't touched yet, unlike everything above**: it would mean either tuning the
+existing charge/distance constants (global, affects every cluster's spacing at once, hard to
+predict without seeing the result) or writing a genuinely new custom force (per-family
+attraction/repulsion) — more code, more risk, and the kind of change that's much cheaper to get
+right by looking at one live result than by reasoning through six unlabelled constants blind.
+Worth doing as its own pass once Thomas has seen how the sizing changes above already affect the
+apparent clustering — bigger nodes and thicker edges can themselves change how separated two
+groups look without touching the physics at all.
+
 ## Where this fits
 
 Renderer/UI, not corpus data — does not conflict with the AF branch's country-research work

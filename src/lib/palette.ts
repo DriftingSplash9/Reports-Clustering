@@ -212,6 +212,25 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // `src/data/research/tz-*.json`.
   TZ: 'AFR',
 
+  // **Botswana added 2026-08-10** (AF branch, first country beyond `country
+  // afrikans.docx`'s original seven -- opening the Southern Africa expansion) --
+  // Statistics Botswana's CPI (December 2018 rebasing: 2015/16 BMTHS weights,
+  // COICOP, Jevons geometric mean at the elementary level) and the government's
+  // own 2020 National Social Protection Recovery Plan, whose recommendation to
+  // "automatically adjust" the Old Age Pension each year is itself the evidence
+  // no such mechanism currently exists. See `src/data/research/bw-*.json`.
+  BW: 'AFR',
+
+  // **Namibia added 2026-08-10** (AF branch, same session as Botswana, second
+  // Southern Africa country) -- the National Pensions Act, 1992's own s.16
+  // assigns old-age pension amounts to ministerial regulation rather than any
+  // price index (the branch's clearest *statutory*, not just policy-level,
+  // confirmation of discretionary benefit-setting), and the Social Protection
+  // Policy 2021-2030's implementation plan sets fixed nominal targets while
+  // committing only the Child Grant, not the old-age pension, to inflation-loss
+  // language. See `src/data/research/na-*.json`.
+  NA: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,
@@ -538,6 +557,37 @@ export const SCOPE_GROUPS: {
 
 /** Every scope the legend can show, flattened. */
 export const ALL_SCOPES: Scope[] = SCOPE_GROUPS.flatMap((g) => g.scopes)
+
+/**
+ * Recoloured levels for a single focused country/group — 2026-08-10
+ * (Thomas), used only in the sidebar, and only while the scope filter is
+ * narrowed to exactly one group's own scopes.
+ *
+ * `SCOPE_COLOUR`'s within-family bands are deliberately narrow (see the
+ * "continent redesign" note above `SCOPE_COLOUR` itself) because every
+ * family has to leave eight others room on the same wheel, all the time.
+ * That constraint is exactly what stops mattering the instant a filter
+ * hides every other country: at that point there is nothing left to keep
+ * clear of, so this spreads the *focused* group's own levels across a much
+ * wider band instead of reusing the tight one. Deliberately not touching
+ * `SCOPE_COLOUR` itself — every one of its gaps has a documented reason and
+ * a "do not raise/lower this" warning attached; this is a second, temporary
+ * palette layered on top for one view, not a replacement for the first.
+ */
+export function focusPalette(scopes: Scope[]): Record<string, string> {
+  const n = scopes.length
+  const result: Record<string, string> = {}
+  scopes.forEach((s, i) => {
+    // Spread across 300 of the 360 degrees available, not the full circle —
+    // wrapping all the way round would put the first and last levels right
+    // back next to each other, which is the exact problem this exists to
+    // fix. A single-level group (nothing to contrast) gets one fixed hue
+    // rather than a division by zero.
+    const hue = n <= 1 ? 210 : (i / (n - 1)) * 300
+    result[s] = `hsl(${hue.toFixed(0)}, 72%, 58%)`
+  })
+  return result
+}
 
 /**
  * Commercial sources are drawn off the palette entirely.

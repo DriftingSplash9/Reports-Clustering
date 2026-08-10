@@ -144,12 +144,19 @@ export function setLinkFog(
 }
 
 /**
- * Teardrop pulse, pointing along +Z.
+ * Teardrop pulse, pointing along -Z.
  *
  * three-forcegraph orients any particle whose geometry is not a SphereGeometry
- * with `lookAt` toward its next position, and `lookAt` aims an object's +Z
- * axis. So a profile built around +Z arrives pointing the way it travels, with
- * no orientation code of our own.
+ * by calling the particle's own `lookAt(nextPosition)` every frame (confirmed
+ * by reading `three-forcegraph/dist/three-forcegraph.js` directly, the
+ * `photon.lookAt(pos.x, pos.y, pos.z)` call, made *before* the particle's
+ * position is advanced to `pos` — so it is genuinely looking toward where it
+ * is about to go). `THREE.Object3D.lookAt` follows the same convention as
+ * every camera in three.js: it points the object's local **-Z** axis at the
+ * target, not +Z — the opposite of what an earlier version of this comment
+ * assumed, which is exactly why the pulses flew tail-first (2026-08-10,
+ * Thomas). A profile built around -Z is what arrives pointing the way it
+ * travels, with no orientation code of our own.
  *
  * Round end leading, taper trailing — the shape of something moving through
  * something else, and the reading a falling drop gives. The direction of
@@ -181,8 +188,10 @@ export function teardropGeometry(width: number): THREE.LatheGeometry {
   ]
 
   const geometry = new THREE.LatheGeometry(profile, 10)
-  // +Y becomes +Z, so the head now leads along the axis lookAt will aim.
-  geometry.rotateX(Math.PI / 2)
+  // +Y becomes -Z (not +Z — see the block comment above), so the rounded
+  // head now leads along the axis `lookAt` actually aims: -Z, toward the
+  // next position, not away from it.
+  geometry.rotateX(-Math.PI / 2)
 
   teardropCache.set(key, geometry)
   return geometry

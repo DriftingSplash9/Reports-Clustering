@@ -304,7 +304,9 @@ export default function InfluenceGraph({
       particleObjects.set(
         l.key,
         new THREE.Mesh(
-          teardropGeometry(1.6 + l.weight * 1.9),
+          // Sized up 2026-08-10 (Thomas) — the previous 1.6-3.5 range read as
+          // near-invisible specks next to a full node; this is roughly 1.5x.
+          teardropGeometry(2.4 + l.weight * 2.9),
           pulseMaterial(l.colour),
         ),
       )
@@ -313,7 +315,7 @@ export default function InfluenceGraph({
     // be a bug rather than a case to handle, so this is a visible fallback
     // rather than a silent one.
     const fallbackParticle = new THREE.Mesh(
-      teardropGeometry(2),
+      teardropGeometry(3),
       pulseMaterial('#7f9ad0'),
     )
 
@@ -370,7 +372,8 @@ export default function InfluenceGraph({
       // Our shader, their cylinder. Colour and focus now live in uniforms, so
       // linkColor and linkOpacity no longer apply to the lines themselves.
       .linkMaterial((l: object) => linkMaterials.current.get((l as LinkDatum).key) ?? null)
-      .linkWidth((l: object) => 0.3 + (l as LinkDatum).weight * 0.7)
+      // Widened 2026-08-10 (Thomas) — roughly 1.7x the old 0.3-1.0 range.
+      .linkWidth((l: object) => 0.5 + (l as LinkDatum).weight * 1.2)
       // No arrowheads. They were drawn at 94% along a link, and links run
       // centre to centre, so on a typical 40-unit link the head sat about 2.4
       // units from the target's centre — inside a sphere whose radius is

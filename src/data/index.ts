@@ -83,6 +83,8 @@ import etPsnpCpiFederalism from './research/et-psnp-cpi-federalism.json'
 import ghLeapCpiIndexation from './research/gh-leap-cpi-indexation.json'
 import ngCpiPensionSafetyNet from './research/ng-cpi-pension-safety-net.json'
 import tzCpiSocialProtection from './research/tz-cpi-social-protection.json'
+import bwCpiSocialProtection from './research/bw-cpi-social-protection.json'
+import naCpiSocialProtection from './research/na-cpi-social-protection.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -199,6 +201,8 @@ const slices: ResearchSlice[] = [
   ghLeapCpiIndexation as unknown as ResearchSlice,
   ngCpiPensionSafetyNet as unknown as ResearchSlice,
   tzCpiSocialProtection as unknown as ResearchSlice,
+  bwCpiSocialProtection as unknown as ResearchSlice,
+  naCpiSocialProtection as unknown as ResearchSlice,
 ]
 
 function assemble() {
