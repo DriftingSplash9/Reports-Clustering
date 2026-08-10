@@ -1,0 +1,70 @@
+{
+  "_slice": "eg-cpi-social-insurance",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Egypt is the second country worked from `country afrikans.docx` (9 raw entries), following the South Africa pilot in `AF/G.1.md`. Every claim below was checked against a source independent of the docx's own quotes this session -- the docx itself is unverified Grok research and was used only to identify which documents to go find, per the same standard applied to South Africa. Sitting in src/data/research/ alongside the other South Africa drafts pending review.",
+  "_note": "The headline finding confirms the docx's own framing, independently: Egypt's pension system has a genuine statutory CPI floor (Law 148/2019 art.35 -- increase must be 'not less than the rate of inflation and not... more than 15%'), verified two ways this session (Andersen's official English translation of the Act, and the US Social Security Administration's own International Update, which independently describes it as 'automatically adjusted... based on changes in the national consumer price index, with a maximum annual increase of 15 percent'). This is a real contrast with South Africa's fully discretionary Gazette-notice model. But Egypt is not uniformly automatic: Takaful and Karama, the cash-transfer programme covering disability, elderly and child-poverty support, shows no such formula in anything read this session -- the ILO's own GIMI country profile states plainly that no automatic indexation mechanism is mentioned for cash transfers, and a funding-increase news report (Daily News Egypt) gave no inflation rationale for the FY2025/26 allocation jump at all. So the CPI-formula behaviour is specific to the pension system, not a national trait -- worth stating precisely rather than generalising from the one node that has it.",
+  "_open_questions": [
+    {
+      "id": "eg-capmas-cpi-methodology-unverified",
+      "question": "The docx's own CBE quote (10th CPI series, base FY2018/2019, weights from the 2017/2018 HIECS, released October 2019) was NOT independently re-verified this session -- cbe.org.eg blocked every WebFetch attempt (direct, Wayback Machine mirror, and a search for an independent mirror of the exact phrasing all failed or came up empty). What was independently confirmed is that CAPMAS is the CPI's publisher (named directly in Law 148/2019's own statutory text) and that a CPI-pension link exists (SSA's independent corroboration) -- but the specific base-year/HIECS methodology detail rests on the docx's own unverified quote until CBE's site becomes reachable or an alternative source is found."
+    },
+    {
+      "id": "eg-coicop-vintage-uncertain",
+      "question": "CAPMAS's own metadata catalog (censusinfo.capmas.gov.eg) does confirm COICOP alignment -- 'COICOP-HBS 2003' -- but that specific metadata page describes the CPI's 9th series (issued September 2010, January 2010 base), not the current 10th series (2019 base) the eg-capmas-cpi node below represents. Whether the 10th series retained COICOP-HBS 2003 or moved to a newer COICOP vintage (South Africa and Nigeria both cite COICOP 2018) was not confirmed this session. No COICOP edge was minted for Egypt for this reason -- would misrepresent currency if wrong."
+    },
+    {
+      "id": "eg-law-12-2025-citation-unconfirmed",
+      "question": "The docx cites 'Law No. 12 of 2025' (signed by President El-Sisi in April 2025) as the instrument that legally anchors Takaful and Karama as a statutory entitlement, replacing a 'Central Social Security Fund' established under Law 137 of 2010. This was NOT independently confirmed this session: Egypt's own State Information Service page returned an SSL error on every fetch attempt, and the one source that did load (an EgyptToday/ESCWA piece) describes the same reform without ever giving a law number, while the ILO's own GIMI country profile names a different instrument -- a 'Social Security and Cash Support Bill', January 2025 -- with no cross-reference to 'Law No. 12 of 2025'. These may be the same law described two different ways at two different stages (bill vs. signed act), or they may not be. Not minted as a node this session because the citation itself is unresolved, not just under-verified."
+    }
+  ],
+  "reports": [
+    {
+      "id": "eg-capmas-cpi",
+      "title": "General Consumer Price Index (CAPMAS)",
+      "publisher": "Central Agency for Public Mobilization and Statistics (CAPMAS)",
+      "country": "EG",
+      "jurisdiction_level": "federal",
+      "region": "Egypt",
+      "description": "Egypt's official monthly CPI, currently on its 10th series (2019 rebasing). CAPMAS's role as publisher was VERIFIED DIRECTLY this session via a source independent of the docx: Law 148/2019's own statutory definition of 'Inflation Rate' names CAPMAS as the index's publisher and sets its determination in April each year (see eg-social-insurance-pensions-law-148-2019). The specific base-period/HIECS-weights detail the docx quotes from CBE was NOT independently re-verified this session -- see _open_questions; CBE's own site blocked every fetch attempt.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly CPI release, consistent across every source read this session; not independently confirmed against a CAPMAS release calendar.",
+      "last_updated": null,
+      "url": "https://censusinfo.capmas.gov.eg/",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "eg-social-insurance-pensions-law-148-2019",
+      "title": "Social Insurance and Pensions Law No. 148 of 2019",
+      "publisher": "Parliament of Egypt (House of Representatives)",
+      "country": "EG",
+      "jurisdiction_level": "federal",
+      "region": "Egypt",
+      "description": "Egypt's unified pension and social insurance statute, replacing several prior fragmented schemes; effective 1 January 2020, executive regulations issued via Prime Ministerial Decree No. 2437 of 2021. VERIFIED DIRECTLY this session (Andersen's published official English translation of the Act) -- Article 35: 'Pensions due as of June 30 of each year shall be increased starting from July 1 by a percentage not less than the rate of inflation and not exceeding 15%', with 'the value of the increase must not exceed the proportionate increase relative to the maximum monthly contributory wage.' 'Inflation Rate' is defined in the Act itself as 'the relative change in the general consumer price index across the Republic for a given year, as published by [CAPMAS], determined each April.' Independently corroborated by the US Social Security Administration's own International Update (February 2020): 'The pension amount is automatically adjusted in July of each year based on changes in the national consumer price index, with a maximum annual increase of 15 percent' -- described there as a shift away from Egypt's prior case-by-case discretionary approach. This is the strongest statutory CPI-to-benefit link found in the corpus's Africa branch so far -- a genuine floor formula, not a Gazette-notice discretion.",
+      "last_updated": "2021",
+      "url": "https://eg.andersen.com/wp-content/uploads/2025/06/Law-No.-148-of-the-Year-2019-and-its-executive-regulation.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "eg-takaful-karama-programme",
+      "title": "Takaful and Karama Programme",
+      "publisher": "Ministry of Social Solidarity (Egypt)",
+      "country": "EG",
+      "jurisdiction_level": "federal",
+      "region": "Egypt",
+      "description": "Egypt's flagship cash-transfer programme: Takaful (conditional, families with children) and Karama (unconditional, covering elderly persons, persons with disabilities, and orphans). VERIFIED DIRECTLY this session via the ILO's own GIMI country profile for Egypt, which describes both schemes and separately states -- for pensions, not for this programme -- that adjustments follow a wage-band schedule; no automatic indexation or adjustment mechanism is mentioned anywhere in the profile for Takaful/Karama specifically. Funding figures independently confirmed via Daily News Egypt, quoting Prime Minister Madbouly directly: 'we are allocating EGP 41bn in the current FY 2025, up from EGP 24bn the previous year', rising to roughly EGP 55bn for FY 2025/26 -- but that reporting gives no inflation rationale for the increase, contrary to the docx's framing of these increases as explicitly 'in light of inflation'. Unlike eg-social-insurance-pensions-law-148-2019, no document read this session ties this programme's benefit levels to CAPMAS's CPI by any stated formula or explicit rationale.",
+      "last_updated": "2025-05",
+      "url": "https://www.social-protection.org/gimi/ShowCountryProfile.action?iso=EG",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eg-social-insurance-pensions-law-148-2019",
+      "target_report_id": "eg-capmas-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Article 35 sets the pension increase floor directly equal to 'the rate of inflation', and the Act's own definitions section defines 'Inflation Rate' as the change in CAPMAS's General Consumer Price Index, determined every April. CAPMAS's CPI print is a direct, named input into the statutory floor of the calculation (capped at 15%), not merely referenced as context -- the strongest-evidenced edge type available.",
+      "evidence_url": "https://eg.andersen.com/wp-content/uploads/2025/06/Law-No.-148-of-the-Year-2019-and-its-executive-regulation.pdf"
+    }
+  ],
+  "_dropped": []
+}
