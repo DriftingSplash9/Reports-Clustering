@@ -1,0 +1,115 @@
+{
+  "_generated_by": "scripts/handoff-to-json.py",
+  "_note": "Sidecar index of the Markdown hand-off. The .md is the document of record.",
+  "file": "G.6.md",
+  "number": 6,
+  "title": "G.6.md — Africa galaxy hand-off",
+  "date": "2026-08-10",
+  "governing_briefs": "`Research.1.md` §2/§3/§4, same as every prior AF session. `AF/G.1.md` through `AF/G.5.md` all read this session (continuous with the G.5 session — see Session conditions).",
+  "predecessor": "G.5.md (2026-08-10)",
+  "sections_present": [
+    "Orientation",
+    "Session conditions",
+    "Headline result",
+    "Findings",
+    "Secondary observations",
+    "Corrections to prior sessions",
+    "Thomas's stated priority for the remaining work",
+    "Cheap checks still outstanding",
+    "What to pass at the start of next thread"
+  ],
+  "sections_missing": [],
+  "headline_result": "Tanzania closes out `country afrikans.docx` as a source (all seven countries now researched) and produces the branch's cleanest three-way documented conflict yet on whether a benefit is CPI-adjusted: the National Social Protection Policy 2023 states outright that inflation has eroded benefits **\"due to the absence of mechanisms to adjust benefits\"**; the Public Service Social Security Fund Act, read section-by-section, confirms no such mechanism exists in the statute itself; and the older (2018-2019) SSA/ISSA country profile — the actual source the docx cited — claims old-age and disability pensions **are** \"adjusted periodically based on changes in the consumer price index.\" This session independently pulled the newer (2024) ISSA profile and found that claim dropped entirely from the current vintage. All three documents are quoted directly; none of the conflict is resolved, per the standing extract-don't-adjudicate rule.",
+  "findings": [
+    {
+      "heading": "1. Tanzania's NCPI methodology — clean primary-source confirmation, four sourced values",
+      "body": "`tz-nbs-ncpi`, VERIFIED DIRECTLY via NBS's own CPI Release (February 2026), Sections 1.2-1.4: base price reference period \"the average from January to December 2020\"; index reference period \"the year 2020\"; weights from \"the 2017/18 Household Budget Survey\" across \"26 mainland regions\"; COICOP \"2018 version... 13 COICOP divisions\"; formula \"the geometric mean of price relatives for elementary index aggregates and higher-level aggregates are compiled using Lowe Index formula, a type of Laspeyres index.\" All four docx-flagged methodology facts (base year, weight survey, COICOP vintage, formula) confirmed with exact section citations the docx itself did not carry."
+    },
+    {
+      "heading": "2. Tanzania's CPI Data Quality Assessment — the branch's first working EAC regional-instrument citation, plus a naming discrepancy",
+      "body": "`tz-nbs-cpi-dqa`, VERIFIED DIRECTLY via NBS's 2023 Data Quality Assessment. Confirms CPI compliance with the \"2008 SNA\" (S.2.3.1), the \"Consumer Price Index (CPI) Manual – Concept and Methods 2020\" (S.3.3.2), the IMF's \"Special Data Dissemination Standard (SDDS)\" (S.4.1.1) — placing Tanzania on the stronger SDDS tier alongside South Africa and Egypt, not the weaker e-GDDS tier confirmed for Kenya/Nigeria/Ethiopia/Ghana — and the IMF's own Data Quality Assessment Framework as its structural basis (\"The IMF Data Quality Assessment Framework (DQAF) identifies quality-related features,\" Introduction, p.2, minted this session as a new node `imf-dqaf`). Most notably, S.2.1.1 states CPI \"adhere[s] to the guidelines outlined in the EAC guidelines for compiling consumer price indices (HCPI)\" — and this session independently fetched the EAC's own binding instrument and confirmed Tanzania is named as a Partner State bound by it (Foreword: \"the United Republic of Tanzania (URT)\"; Article 2002: \"These regulations shall apply to all EAC Partner States\"). This reuses `eac-hcpi-regulations`, a node Kenya's session (`ke-social-protection.json`) minted first but could only back with a placeholder homepage URL — this session's fetch got specific Article citations (101, 2002, 109.2, 110.1) from the actual document, worth using to upgrade that node's `evidence_url` on review (see Secondary observations). The naming discrepancy itself — DQA says \"guidelines,\" the fetched primary document is titled \"REGULATIONS,\" and a separately-titled \"EAC Guidelines\" PDF exists but could not be fetched (SSL/robots failure, see Session conditions) — is recorded as `tz-eac-guidelines-vs-regulations-naming`, unresolved."
+    },
+    {
+      "heading": "3. The National Social Protection Policy 2023 admits the absence of an adjustment mechanism — a first for the branch",
+      "body": "`tz-national-social-protection-policy-2023`, VERIFIED DIRECTLY. Chapter Four (p.34) lists the governing legal instruments (Employment and Labour Relations Act 2004, Social Security Act Cap. 135, Public Service Social Security Fund Act 2018, and others). The load-bearing quote is p.28: **\"Inflation has eroded the value of benefits in contributory and non-contributory social protection due to the absence of mechanisms to adjust benefits.\"** This is not a document merely lacking a stated mechanism (the normal \"discretionary\" shape already documented across the branch for Nigeria's minimum wage, Ghana's minimum wage, and others) — it is the government's own policy affirmatively naming the absence as a problem. On the PSSN safety net specifically, the Policy flags donor-dependency risk (p.11) rather than a benefit-setting formula, and names NBS only as a future data-generation body (p.39), not a current input."
+    },
+    {
+      "heading": "4. The Public Service Social Security Fund Act confirms the Policy's own admission at statute level",
+      "body": "`tz-psssf-act` (Cap. 371), VERIFIED DIRECTLY, read section-by-section this session: ss.25-48 (benefits), s.30 (retirement pension rate), s.34 (invalidity pension rate), s.57 (triennial actuarial valuation), s.58 (financial-soundness restoration) — none ties a benefit to CPI or any price index. The one adjustment lever found, s.18(4) (Minister may adjust *contribution* rates \"taking into consideration of the actuarial valuation\"), is solvency-driven, not price-driven, and applies to contributions rather than paid pensions. A clean statute-level confirmation of Finding 3's policy-level admission."
+    },
+    {
+      "heading": "5. A CPI-adjustment claim that appears to have been silently dropped between ISSA profile vintages",
+      "body": "The docx's own cited source (SSA/ISSA country profile, 2018-2019 vintage) states for old-age and disability pensions: \"Benefits are adjusted periodically based on changes in the consumer price index.\" This session independently fetched the newer ISSA profile (2024-07 vintage) and found the old-age and disability sections there carry **no** \"Benefit adjustments\" subsection at all — the CPI-adjustment claim is not repeated. The survivor-pension section, present in both vintages, consistently describes actuarial review rather than CPI in both. Per Research.1.md §3, this is reported as an unresolved conflict rather than adjudicated: it reads as though the older claim was simply wrong (or described a since-discontinued arrangement), consistent with Findings 3 and 4's independent confirmation that no CPI mechanism currently exists, but that is inference. Neither ISSA/SSA profile is minted as a corpus node — same precedent as South Africa's docx entry for the same series, not minted in `za-cpi-social-grants.json` (a periodic secondary compilation is not itself something a primary document names as an input)."
+    }
+  ],
+  "corrections": [],
+  "priorities": [
+    {
+      "letter": null,
+      "label": null,
+      "items": [
+        {
+          "n": 1,
+          "text": "~~Tanzania — the last unresearched country in the branch.~~ **CLOSED this session.** All seven countries in `country afrikans.docx` are now researched and imported."
+        },
+        {
+          "n": 2,
+          "text": "Whether to model the docx's regional-typology prose (WAEMU HCPI, AFRISTAT, the ECOWAS HCPI guide) as corpus nodes — raised since G.1, still not raised with Thomas directly. Carried forward unchanged; East Africa's own regional instrument (`eac-hcpi-regulations`) is already modelled and working well, which may be a useful existence proof if Thomas wants to revisit this for the other regions."
+        },
+        {
+          "n": 3,
+          "text": "Import review is, for the moment, not a backlog — everything researched through this session is already imported and validated live (555 reports / 656 dependencies). This has now held true across two consecutive sessions (G.5, G.6) — worth treating as the new normal rather than restating as a fragile state each time, though still worth checking rather than assuming."
+        },
+        {
+          "n": 4,
+          "text": "With all seven `country afrikans.docx` countries done, the natural next question for Thomas is scope: does the AF branch continue with countries *not* in the original docx (the \"how the rest of Africa generally works\" prose names Botswana, Namibia, Algeria, Morocco, Tunisia, Uganda, Rwanda, Zambia, Malawi, Zimbabwe, and others as having real but unresearched systems), or does the branch pause here pending a different priority? Not decided this session — flagged as the first open branch-scope question since AF/G.1.md's opening."
+        }
+      ]
+    }
+  ],
+  "cheap_checks": [
+    {
+      "n": 1,
+      "text": "`tz-eac-guidelines-vs-regulations-naming` — a document titled \"EAC Guidelines for Compiling Harmonised Consumer Price Indices\" (distinct from the Regulations document this session fetched) turned up in search but failed on an SSL/robots error specific to that URL. Worth one retry from a session whose tooling can reach it, or confirmation from Thomas that \"guidelines\" in Tanzania's DQA is just loose language for the Regulations."
+    },
+    {
+      "n": 2,
+      "text": "`tz-zanzibar-scope-unconfirmed` — every Tanzania document in this slice scopes itself to Tanzania Mainland explicitly; whether Zanzibar publishes a separate CPI or social-protection policy was not checked."
+    },
+    {
+      "n": 3,
+      "text": "`tz-pssn-benefit-amounts-not-located` — the World Bank's PSSN III factsheet gives financing and objectives but no household transfer amounts; earlier PSSN phases (I, II) were not checked for whether a benefit-setting method was ever documented and later dropped."
+    },
+    {
+      "n": 4,
+      "text": "The ECOWAS HCPI Methodological Guide (Nigeria/Ghana) — still failed three times as of G.5; per that session's own recommendation, stop treating it as a cheap check. Carried forward unchanged, listed here only so it isn't silently lost."
+    },
+    {
+      "n": 5,
+      "text": "Constitution s.28 (South Africa, children's rights); `za-sassa-annual-report` → `za-social-assistance-act-2004` direct edge; IMF DSBB DQAF pages (South Africa, Egypt, Kenya, JS-rendered); Ethiopia's PSNP5 wheat-equivalency figures — all carried forward unchanged since earlier sessions (G.1-G.3), still low urgency, still not rechecked this session."
+    }
+  ],
+  "pass_to_next_thread": [
+    {
+      "n": 1,
+      "text": "This file, plus `AF/G.1.md` through `AF/G.5.md` for full context — Orientation across all six has been kept current rather than rewritten from scratch."
+    },
+    {
+      "n": 2,
+      "text": "If continuing within the original docx's scope: nothing — all seven countries are done, so the next session needs Thomas's answer to priority 4 above before picking a new country."
+    },
+    {
+      "n": 3,
+      "text": "If expanding beyond the docx: the \"how the rest of Africa generally works\" prose in `country afrikans.docx` (paragraphs ~858-913) as a candidate country list, though every one of those is Grok-sourced prose about *other* countries, not the country-specific entries the seven researched countries had — a new round of primary research would be needed from scratch, not just verification of existing docx quotes."
+    },
+    {
+      "n": 4,
+      "text": "`feedback_grok-as-verification` and `npm-validate-procedure` (Claude's project memory) — the Grok-split mechanism (not used this session, but still the branch default) and the fast tar-based validate procedure, used again this session for Tanzania's import."
+    },
+    {
+      "n": 5,
+      "text": "Nothing is currently sitting un-imported in `src/data/research/` for this branch."
+    }
+  ],
+  "session_conditions": "Continuous with the G.5 session (Thomas pasted G.5.md's content back into a new session to resume the branch). No new instruction was given beyond what G.5's own \"Thomas's stated priority\" section already specified — priority 1 there was Tanzania, so this session proceeded directly to it under the standing auto-mode guidance rather than waiting for an explicit re-ask.\n\n**No Grok round was used this session — a first for this branch.** Tanzania had only 4 raw docx entries (the thinnest of any country worked so far — contrast Nigeria's 9). All four were fetched directly and cleanly via `WebFetch` this session (NBS's CPI Release, NBS's Data Quality Assessment, the National Social Protection Policy 2023, and the ISSA/SSA country profile), and direct fetching kept working well beyond the four — the EAC's own Regulations PDF, the Public Service Social Security Fund Act, and a current World Bank PSSN III factsheet were all also fetched successfully without needing a Grok round to cover gaps. Given how much of the original material was directly verifiable and how thin the raw corpus was, a parallel split was judged unnecessary rather than skipped for lack of opportunity — worth a documented decision, since the branch's default has been the split for three sessions running.\n\nOne direct-fetch failure worth recording as a new, distinct failure mode: `eac.int` fails with a **certificate/robots error** (`ROBOTS_DISALLOWED` plus an SSL hostname-mismatch message) on at least one specific document URL on that domain, while a *different* URL on the same domain (the EAC Regulations PDF, a different `file=` parameter) fetched cleanly moments later. Per this session's system instructions, no `curl`/bash workaround was attempted for the failing URL — the earlier `webfetch-binary-pdf-fallback` project-memory precedent (curl+pypdf for WebFetch-reported binary-unreadable PDFs) does not extend to this failure class (SSL/robots) under the tool policy active this session. This is why the \"EAC Guidelines\" companion document (as distinct from the \"EAC Regulations\" document actually fetched) remains unconfirmed — see Findings and `tz-eac-guidelines-vs-regulations-naming`."
+}

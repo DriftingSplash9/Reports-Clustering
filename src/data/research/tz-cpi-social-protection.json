@@ -1,0 +1,182 @@
+{
+  "_slice": "tz-cpi-social-protection",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Tanzania is the seventh and last country in `country afrikans.docx` to be researched (AF/G.5.md priority 1) -- only 4 raw entries (thinnest of any country in the branch), all four independently re-verified at source this session via direct fetch, no Grok round used. Every report below is VERIFIED DIRECTLY. Sitting in src/data/research/ pending Thomas's review, following the established DRAFT-then-import pattern.",
+  "_note": "Two genuine cross-source findings. (1) A three-way tension on whether Tanzania's pension benefits are CPI-adjusted: the National Social Protection Policy 2023 states plainly that 'inflation has eroded the value of benefits ... due to the absence of mechanisms to adjust benefits' (p.28); the Public Service Social Security Fund Act (Cap. 371) itself, read section-by-section this session, contains no CPI or inflation-linked adjustment provision (only a triennial actuarial valuation under s.57 and a Minister's power to adjust contribution rates 'taking into consideration of the actuarial valuation' under s.18(4)); yet the older SSA/ISSA country profile (2018-2019 vintage, the one the docx actually cited) states for old-age and disability pensions that 'Benefits are adjusted periodically based on changes in the consumer price index.' This session independently fetched the newer ISSA profile (2024-07 vintage) and found that claim is NOT repeated there -- the old-age and disability sections in the 2024 profile carry no 'Benefit adjustments' subsection at all, while the survivor-pension section (present in both vintages) consistently describes actuarial review, not CPI. Per Research.1.md S3, this is reported as a conflict rather than resolved: it reads as though the 2018-2019 profile's CPI claim was simply wrong (or described a since-discontinued arrangement) and the correction shows up silently in the profile's own next vintage, but that is inference, not confirmed. Neither ISSA/SSA profile is minted as a corpus node (same precedent as South Africa's docx entry for the same series, not minted in za-cpi-social-grants.json) -- a periodic secondary compilation, not itself something another primary document names as an input. (2) `eac-hcpi-regulations` already exists in the corpus (first minted for Kenya, ke-social-protection.json) but with only a placeholder evidence URL (https://www.eac.int/, the bare homepage -- Kenya's own session could not reach the actual PDF). This session fetched the EAC Regulations for Compiling Harmonised Consumer Price Indices (March 2022) directly and successfully, and the dependency edges below cite specific Articles (101, 2002, 109.2, 110.1) with a working PDF URL -- worth using to upgrade the existing node's evidence_url when this slice is reviewed, since it is currently backed by a non-primary link.",
+  "_open_questions": [
+    {
+      "id": "tz-eac-guidelines-vs-regulations-naming",
+      "question": "Tanzania's own Data Quality Assessment (Section 2.1.1) says CPI 'adhere[s] to the guidelines outlined in the EAC guidelines for compiling consumer price indices (HCPI)' -- but the EAC document this session actually fetched and quoted from is titled 'EAC REGULATIONS FOR COMPILING HARMONISED CONSUMER PRICE INDICES (HCPI)' (March 2022). A companion document literally titled 'EAC Guidelines for Compiling Harmonised Consumer Price Indices' (same March 2022 date) also turned up in search but could not be fetched this session -- WebFetch failed on eac.int for that specific URL with a certificate/robots error, while the Regulations PDF (a different URL, same domain) fetched cleanly. Unresolved whether 'guidelines' in the DQA is loose language for the Regulations, or a genuinely separate document this session simply could not reach."
+    },
+    {
+      "id": "tz-zanzibar-scope-unconfirmed",
+      "question": "Every document in this slice (NCPI, DQA, National Social Protection Policy) explicitly scopes itself to Tanzania Mainland (the NCPI names '26 mainland regions' directly). The United Republic of Tanzania is a union of Mainland and Zanzibar with a partially separate statistical and social-policy apparatus; whether Zanzibar publishes its own CPI or social-protection policy, and whether either cites these Mainland documents or is fully independent of them, was not checked this session."
+    },
+    {
+      "id": "tz-pssn-benefit-amounts-not-located",
+      "question": "The World Bank's PSSN III factsheet (March 2026, $250 million IDA credit) states the programme's development objective but not household transfer amounts or any formula for setting them. Older World Bank PSSN documentation (PSSN II, PSSN I) was not checked this session for whether earlier phases specified a transfer-setting method later dropped, or whether one was ever documented at all."
+    }
+  ],
+  "reports": [
+    {
+      "id": "tz-nbs-ncpi",
+      "title": "Consumer Price Index (CPI) Release",
+      "publisher": "National Bureau of Statistics (Tanzania)",
+      "country": "TZ",
+      "jurisdiction_level": "federal",
+      "region": "Tanzania Mainland",
+      "description": "Tanzania's official monthly National Consumer Price Index (NCPI) release. VERIFIED DIRECTLY this session via the February 2026 edition, Sections 1.2-1.4 (Methodological Notes): 'The base price reference period is the average from January to December 2020' and 'the index reference period is the year 2020' (S.1.2). Weights: 'The NCPI weights are based on household monetary expenditure data from all 26 mainland regions, covering both urban and rural households. These weights are derived from the 2017/18 Household Budget Survey' (S.1.2). Classification: 'The NCPI follows the United Nations Classification of Individual Consumption by Purpose (COICOP), 2018 version, and is disseminated using 13 COICOP divisions' (S.1.3). Formula: 'The NCPI is compiled using the geometric mean of price relatives for elementary index aggregates and higher-level aggregates are compiled using Lowe Index formula, a type of Laspeyres index' (S.1.4). This particular release contains no statement regarding EAC HCPI guidelines/regulations or IMF CPI Manual compliance -- those citations belong to the separate Data Quality Assessment report (tz-nbs-cpi-dqa), not this monthly release, and no edge is drawn from this node to either.",
+      "releases_per_year": 12,
+      "last_updated": "2026-02",
+      "url": "https://www.nbs.go.tz/uploads/statistics/documents/en-1773057284-CPI%20%20Release_022026_English.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "tz-nbs-cpi-dqa",
+      "title": "Data Quality Assessment for Consumer Price Index 2023 – Tanzania Mainland",
+      "publisher": "National Bureau of Statistics (Tanzania)",
+      "country": "TZ",
+      "jurisdiction_level": "federal",
+      "region": "Tanzania Mainland",
+      "description": "VERIFIED DIRECTLY this session. States the CPI programme's own methodological compliance in detail: 'CPI adhere to the guidelines outlined in the EAC guidelines for compiling consumer price indices (HCPI)' (S.2.1.1, p.15) -- see tz-eac-guidelines-vs-regulations-naming for the title mismatch against the primary EAC document actually fetched. Same section also names 'Classification of Individual Consumption by Purpose (COICOP) 2018' (S.2.1.1, p.15) and elsewhere 'adheres to the 2008 SNA for classifying institutional units and transactions' (S.2.3.1, p.16). Names the 'Consumer Price Index (CPI) Manual – Concept and Methods 2020' directly (S.3.3.2, p.22). States dissemination practice: 'The CPI is disseminated on monthly basis that follows the IMF data dissemination standards (Special Data Dissemination Standard (SDDS))' (S.4.1.1, p.25) -- placing Tanzania on the same stronger SDDS tier as South Africa and Egypt, rather than the weaker e-GDDS tier confirmed for Kenya, Nigeria, Ethiopia and Ghana elsewhere in this branch. Frames its own assessment methodology explicitly: 'The IMF Data Quality Assessment Framework (DQAF) identifies quality-related features' (Introduction, p.2), 'rooted in the UN Fundamental Principles of Official Statistics' (Introduction, p.2, not independently minted as a node this session -- a passing citation, not a load-bearing one). Weights confirmed again independently of the CPI release itself: '2017/18 Household Budget Survey' (S.3.1.1, p.18).",
+      "releases_per_year": 0.2,
+      "cadence_note": "An ad-hoc data-quality assessment exercise, not a fixed annual release; this one covers the 2023 reference year.",
+      "last_updated": "2023",
+      "url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "tz-national-social-protection-policy-2023",
+      "title": "National Social Protection Policy 2023",
+      "publisher": "Government of Tanzania",
+      "country": "TZ",
+      "jurisdiction_level": "federal",
+      "region": "Tanzania Mainland",
+      "description": "VERIFIED DIRECTLY this session. Chapter Four (p.34) lists the governing legal instruments: 'Employment and Labour Relations Act No. 6 of 2004; the Labour Institutions Act No. 7 of 2004; the Occupational Safety and Health Act No. 5 of 2003; the Social Security Act Cap. 135; the Public Service Social Security Fund Act No. 2 of 2018 and the Persons with Disability (Rights and Privileges) Act No. 9 of 2010,' with further instruments named including 'National Social Security Fund Act Cap. 50 [R.E. 2018]' and 'the Universal Health Insurance Act of 2023.' Critically, the policy documents an admitted gap rather than a mechanism: 'Inflation has eroded the value of benefits in contributory and non-contributory social protection due to the absence of mechanisms to adjust benefits' (p.28) -- a direct, self-reported statement that no CPI-linked (or any other) adjustment process currently exists, alongside an unimplemented objective to 'ensure that the value of social insurance benefits, social assistance transfers, and support is adequate' (p.28). On the Productive Social Safety Net (PSSN), financing risk is flagged rather than a benefit-setting formula: 'The programme is limited in coverage due to inadequate resources, and high dependence on donor funding threatens its sustainability' (p.11); benefit structure is named ('a fixed transfer... vulnerable groups transfers (VGT)... and variable human capital transfers (VHCT)', p.10) but amounts are not specified in this document. NBS itself appears only as a future data-generation body (p.39): 'The bureau will generate, store and maintain adequate and up-to-date social protection statistics for planning purposes' -- not as a source the policy currently draws a benefit calculation from.",
+      "releases_per_year": 0.1,
+      "cadence_note": "A multi-year policy framework (November 2023), not a recurring release.",
+      "last_updated": "2023-11",
+      "url": "https://www.kazi.go.tz/uploads/documents/en-1770627976-National%20Social%20Protection%20Policy%202023%20-%20English.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "tz-psssf-act",
+      "title": "Public Service Social Security Fund Act, 2018 (Cap. 371)",
+      "publisher": "Parliament of Tanzania",
+      "country": "TZ",
+      "jurisdiction_level": "federal",
+      "region": "Tanzania Mainland",
+      "description": "VERIFIED DIRECTLY this session (R.E. 2023 consolidated text). Tanzania's main public-service pension statute, named by the National Social Protection Policy 2023 among its governing instruments (see dependency below). Read section-by-section for any inflation/CPI adjustment mechanism: s.30 (Rates of retirement pension) sets the calculation formula but delegates specifics to regulations, with no automatic adjustment clause; s.34 (Rate of invalidity pension) likewise delegates to regulations without mentioning review; ss.25-48 (Benefits under the Scheme) cover qualification, eligibility and payment procedure with no periodic-adjustment provision; s.57 (Actuarial valuation report) requires triennial valuations directed at fund soundness, not benefit levels; s.58 (Restoration of financial soundness) addresses deficit recovery, not indexation. The one adjustment-adjacent power found is s.18(4), letting the Minister adjust contribution rates 'taking into consideration of the actuarial valuation' -- a fund-solvency lever, not a benefit-indexation one, and confined to contributions rather than paid pensions. No CPI or inflation-linked benefit-adjustment provision exists anywhere in the Act -- confirming, at primary-statute level, the Policy's own admission (tz-national-social-protection-policy-2023) that no such mechanism exists.",
+      "last_updated": "2018",
+      "url": "https://www.vkadvocates.co.tz/LIBRARY/Cap.%20371%20Public%20Service%20Social%20Security%20Fund%20Act,%20R.E%202023.pdf",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "tz-pssn-worldbank",
+      "title": "Tanzania Productive Social Safety Net III (PSSN III)",
+      "publisher": "World Bank (IDA)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "VERIFIED DIRECTLY this session via the World Bank's own factsheet (dated 31 March 2026): '$250 million credit from the International Development Association (IDA).' Development objective: 'increase access to social protection and better jobs for targeted poor households while building a sustainable and adaptive social protection system that can respond to shocks like climate events.' No Government of Tanzania counterpart-financing figure is stated in this document (contrast Ghana's GPSNP2, majority GoG-funded, and Ethiopia's PSNP5, roughly a third GoG-funded). No statement anywhere in the factsheet ties transfer amounts to inflation, CPI, or cost-of-living -- the docx's own continent-wide typology classifies Tanzania's PSSN as 'Purely Discretionary / Project-based,' which this document does nothing to contradict.",
+      "last_updated": "2026-03",
+      "url": "https://www.worldbank.org/en/news/factsheet/2026/03/31/the-tanzania-productive-social-safety-net-iii-pssn-iii",
+      "domains": ["benefits"]
+    },
+    {
+      "id": "imf-dqaf",
+      "title": "Data Quality Assessment Framework (DQAF)",
+      "publisher": "International Monetary Fund",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IMF's framework for structured assessment of statistical output quality, named as the explicit methodological basis of Tanzania's own CPI Data Quality Assessment: 'The IMF Data Quality Assessment Framework (DQAF) identifies quality-related features' (tz-nbs-cpi-dqa, Introduction, p.2). First minted this session -- a distinct node from imf-sdds and imf-e-gdds (dissemination-standard tiers) and from cpi-manual (compilation methodology): DQAF governs how quality itself is assessed and reported, not how the index is compiled or disseminated.",
+      "releases_per_year": 0.05,
+      "cadence_note": "A standing framework document, revised infrequently; not an annual release.",
+      "last_updated": null,
+      "url": "https://dsbb.imf.org/dqrs/DQAF",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "tz-nbs-ncpi",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "NCPI Release, S.1.3: 'The NCPI follows the United Nations Classification of Individual Consumption by Purpose (COICOP), 2018 version, and is disseminated using 13 COICOP divisions.'",
+      "evidence_url": "https://www.nbs.go.tz/uploads/statistics/documents/en-1773057284-CPI%20%20Release_022026_English.pdf"
+    },
+    {
+      "source_report_id": "tz-nbs-cpi-dqa",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Data Quality Assessment, S.2.1.1 (p.15): names 'Classification of Individual Consumption by Purpose (COICOP) 2018' directly, independently of the CPI Release's own COICOP statement.",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf"
+    },
+    {
+      "source_report_id": "tz-nbs-cpi-dqa",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Data Quality Assessment, S.3.3.2 (p.22): names the 'Consumer Price Index (CPI) Manual – Concept and Methods 2020' directly as a methodological reference. Reuses the cpi-manual node already carried elsewhere in the corpus.",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf"
+    },
+    {
+      "source_report_id": "tz-nbs-cpi-dqa",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Data Quality Assessment, S.2.3.1 (p.16): 'adheres to the 2008 SNA for classifying institutional units and transactions,' with further 2008 SNA references at S.2.4-2.4.3 (pp.16-17) for valuation rules and recording procedures.",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf"
+    },
+    {
+      "source_report_id": "tz-nbs-cpi-dqa",
+      "target_report_id": "eac-hcpi-regulations",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Data Quality Assessment, S.2.1.1 (p.15): 'CPI adhere to the guidelines outlined in the EAC guidelines for compiling consumer price indices (HCPI).' This session independently fetched the EAC's own instrument and confirmed it applies to Tanzania by name: 'The East African Community (EAC) is the regional inter-governmental organisation of the Republics of Kenya, Uganda, the United Republic of Tanzania (URT), Republic of Rwanda, Republic of Burundi and Republic of South Sudan' (Foreword), with Article 2002 stating 'These regulations shall apply to all EAC Partner States for the compilation of Harmonised Consumer Price Indices' and Article 110.1: 'The classification used for the compilation of the HCPI and its sub-indices shall be based on the most recent official United Nations Classification of Individual Consumption According to Purpose (COICOP).' See tz-eac-guidelines-vs-regulations-naming for the title discrepancy between the DQA's own citation and the fetched primary text.",
+      "evidence_url": "https://www.eac.int/documents?controller=download&task=download.file&file=96589cc7-2c84-43e0-ba16-bf293f73781a&name=EAC+_+REGULATIONS_+FOR+COMPILING+HARMONISED+CONSUMER+PRICE+INDICES+MARCH_+2022+-+web.pdf"
+    },
+    {
+      "source_report_id": "tz-nbs-cpi-dqa",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Data Quality Assessment, S.4.1.1 (p.25): 'The CPI is disseminated on monthly basis that follows the IMF data dissemination standards (Special Data Dissemination Standard (SDDS)).' Reuses the imf-sdds node, placing Tanzania alongside South Africa and Egypt on the stronger SDDS tier rather than the e-GDDS tier confirmed for Kenya, Nigeria, Ethiopia and Ghana.",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf"
+    },
+    {
+      "source_report_id": "tz-nbs-cpi-dqa",
+      "target_report_id": "imf-dqaf",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Data Quality Assessment, Introduction (p.2): 'The IMF Data Quality Assessment Framework (DQAF) identifies quality-related features' -- the document names DQAF as the structural basis of its own assessment methodology.",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf"
+    },
+    {
+      "source_report_id": "tz-national-social-protection-policy-2023",
+      "target_report_id": "tz-psssf-act",
+      "relationship_type": "cites",
+      "basis": "Policy, Chapter Four (p.34): lists 'the Public Service Social Security Fund Act No. 2 of 2018' among the key legal instruments governing social protection in Tanzania Mainland.",
+      "evidence_url": "https://www.kazi.go.tz/uploads/documents/en-1770627976-National%20Social%20Protection%20Policy%202023%20-%20English.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tz-national-social-protection-policy-2023 -> tz-nbs-ncpi",
+      "source": "tz-national-social-protection-policy-2023",
+      "target": "tz-nbs-ncpi",
+      "reason": "denied",
+      "why": "The Policy's own text states the opposite of a CPI dependency: 'Inflation has eroded the value of benefits in contributory and non-contributory social protection due to the absence of mechanisms to adjust benefits' (p.28). A documented non-dependency, not an oversight -- Tanzania is the branch's clearest case yet of a government document affirmatively stating no indexation mechanism exists, rather than merely lacking a stated one."
+    },
+    {
+      "edge": "tz-psssf-act -> tz-nbs-ncpi",
+      "source": "tz-psssf-act",
+      "target": "tz-nbs-ncpi",
+      "reason": "denied",
+      "why": "Sections 18(4), 25-48, 30, 34, 57 and 58 were read directly this session; none ties a benefit or contribution-rate adjustment to CPI or any price index. The only adjustment lever found (s.18(4), contribution rates 'taking into consideration of the actuarial valuation') is solvency-driven, not price-driven."
+    },
+    {
+      "edge": "tz-pssn-worldbank -> tz-nbs-ncpi",
+      "source": "tz-pssn-worldbank",
+      "target": "tz-nbs-ncpi",
+      "reason": "no-document",
+      "why": "The PSSN III factsheet states financing and objectives but no transfer-amount-setting formula of any kind, CPI-linked or otherwise. Same shape as Nigeria's NASSP-SU (ng-cpi-pension-safety-net.json): a safety-net programme with no documented mechanical link to the national CPI series."
+    }
+  ]
+}

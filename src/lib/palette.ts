@@ -201,6 +201,17 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // financing. See `src/data/research/ng-*.json`.
   NG: 'AFR',
 
+  // **Tanzania added 2026-08-10** (AF branch G.6, following the G.5 hand-off's
+  // priority 1) -- the last of the seven countries in `country afrikans.docx`
+  // to be researched. Its NCPI methodology (geometric mean / Lowe index,
+  // COICOP 2018) and Data Quality Assessment (confirming the EAC's binding
+  // regional HCPI Regulations, IMF's CPI Manual 2020, SNA 2008, IMF SDDS and
+  // DQAF), plus the National Social Protection Policy 2023's own admission
+  // that no benefit-adjustment mechanism exists and the Public Service Social
+  // Security Fund Act's confirmed absence of a CPI-linked provision. See
+  // `src/data/research/tz-*.json`.
+  TZ: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

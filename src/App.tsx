@@ -730,6 +730,22 @@ function Hud({
   const allScopesOn = filter.scopes === null
   const noScopesOn = filter.scopes !== null && filter.scopes.length === 0
 
+  // Scope groups are closed by default — nine families x up to six levels
+  // each is 40+ rows, more than the panel's fixed height can show, and the
+  // panel clips (`overflow: hidden`) rather than scrolls. A group opens
+  // either because it was clicked open, or because the active filter
+  // actually touches one of its own levels — selecting a level from search
+  // or elsewhere should never leave it hidden inside a collapsed header.
+  const [manuallyExpanded, setManuallyExpanded] = useState<Set<string>>(new Set())
+  const toggleExpanded = (country: string) => {
+    setManuallyExpanded((prev) => {
+      const next = new Set(prev)
+      if (next.has(country)) next.delete(country)
+      else next.add(country)
+      return next
+    })
+  }
+
   return (
     <div style={panel}>
       <div style={{ fontSize: 15, fontWeight: 600, color: '#e6edfa' }}>
@@ -829,53 +845,92 @@ function Hud({
         if (total === 0) return null
         const shown = group.scopes.filter((s) => scopeOn(s) && (scopeCounts[s] ?? 0) > 0)
         const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
+        // Open if clicked open, or if the active filter actually selects
+        // some-but-not-all of this group (a level picked from elsewhere
+        // should never be hidden inside a collapsed header).
+        const filterTouchesGroup =
+          filter.scopes !== null && group.scopes.some((s) => filter.scopes!.includes(s))
+        const isExpanded = manuallyExpanded.has(group.country) || filterTouchesGroup
         return (
           <div key={group.country} style={{ marginTop: 7 }}>
             <div
-              onClick={() => onToggleGroup(group.country)}
               style={{
                 ...row,
                 alignItems: 'center',
-                cursor: 'pointer',
                 pointerEvents: 'auto',
               }}
             >
+              {/*
+                Two separate click targets sharing one row: the chevron
+                opens/closes the breakdown, everything else toggles the whole
+                group on/off — same as before. Keeping them apart means
+                neither click has to guess what the other one meant.
+              */}
               <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: 2,
-                  display: 'inline-block',
-                  background:
-                    shown.length === present.length
-                      ? rimColourFor(group.country)
-                      : 'transparent',
-                  border: `1px solid ${rimColourFor(group.country)}`,
-                  opacity: shown.length ? 1 : 0.45,
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleExpanded(group.country)
                 }}
-              />
-              <span
                 style={{
-                  flex: 1,
-                  color: shown.length ? '#c2cfe4' : '#4d5c74',
-                  letterSpacing: '0.04em',
+                  cursor: 'pointer',
+                  color: '#5e6f8a',
+                  fontSize: 9,
+                  width: 12,
+                  display: 'inline-block',
+                  transform: isExpanded ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 120ms ease',
                 }}
               >
-                {group.label}
+                ▶
               </span>
-              <span style={{ color: shown.length ? '#5e6f8a' : '#3d4a5e' }}>{total}</span>
-            </div>
-            {present.map((s) => (
-              <div key={s} style={{ paddingLeft: 14 }}>
-                <LegendRow
-                  colour={SCOPE_COLOUR[s]}
-                  label={SCOPE_LABEL[s]}
-                  count={scopeCounts[s] ?? 0}
-                  on={scopeOn(s)}
-                  onClick={() => onToggleScope(s)}
+              <div
+                onClick={() => onToggleGroup(group.country)}
+                style={{
+                  ...row,
+                  flex: 1,
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  pointerEvents: 'auto',
+                }}
+              >
+                <span
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 2,
+                    display: 'inline-block',
+                    background:
+                      shown.length === present.length
+                        ? rimColourFor(group.country)
+                        : 'transparent',
+                    border: `1px solid ${rimColourFor(group.country)}`,
+                    opacity: shown.length ? 1 : 0.45,
+                  }}
                 />
+                <span
+                  style={{
+                    flex: 1,
+                    color: shown.length ? '#c2cfe4' : '#4d5c74',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {group.label}
+                </span>
+                <span style={{ color: shown.length ? '#5e6f8a' : '#3d4a5e' }}>{total}</span>
               </div>
-            ))}
+            </div>
+            {isExpanded &&
+              present.map((s) => (
+                <div key={s} style={{ paddingLeft: 26 }}>
+                  <LegendRow
+                    colour={SCOPE_COLOUR[s]}
+                    label={SCOPE_LABEL[s]}
+                    count={scopeCounts[s] ?? 0}
+                    on={scopeOn(s)}
+                    onClick={() => onToggleScope(s)}
+                  />
+                </div>
+              ))}
           </div>
         )
       })}
@@ -1033,12 +1088,15 @@ const tooltip: React.CSSProperties = {
   // card is only visible while the pointer is over a node on the canvas, and the
   // pointer cannot be there and in the search field at the same time.
   zIndex: 30,
-  // A card taller than the window cannot be clamped into it, so the overflow
-  // has to be cut somewhere. Cutting at the bottom loses the tail of a list;
-  // cutting at the top lost the title. The card is built title-first for
-  // exactly this reason.
+  // A card taller than the window cannot be clamped into it. Scope groups
+  // collapse by default now (see Hud's `manuallyExpanded`), so this is a
+  // safety net rather than the primary fix — but it used to clip silently
+  // (`overflow: hidden`) whenever content ran past the window, which is worse
+  // than a scrollbar: a clipped row isn't just off-screen, it's unreachable.
+  // The card is still built title-first so the header survives regardless.
   maxHeight: 'calc(100vh - 36px)',
-  overflow: 'hidden',
+  overflowY: 'auto',
+  overflowX: 'hidden',
 }
 
 const section: React.CSSProperties = {
