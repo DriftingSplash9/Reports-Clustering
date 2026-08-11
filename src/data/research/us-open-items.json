@@ -1,0 +1,136 @@
+{
+  "_slice": "Closing the open items — the county auditor, the Texas special district register, and a federal route to a local body's finances",
+  "_researched": "2026-08-10",
+  "_note": "A clearing pass over what three rounds of research had left open, and two of the five closed properly. The Harris County Auditor turns out to have a reporting mandate of its own rather than only a signature on other people's statements: Local Government Code §114.025 requires an annual report of every transaction of the calendar year, filed with the commissioners court in April. And the aggregator question has a precise answer — Texas does maintain a statewide register of special purpose districts under Government Code §403.0241, covering exactly the utility and emergency services districts that had looked unreachable, but what it collects is debt and tax data rather than audits. The tax is aggregated and public; the accounts still are not. The third result is a pattern rather than a document. The transit authority publishes nothing retrievable, but the National Transit Database publishes its operating and capital funds by source because federal money obliges it to report. A federal reporting requirement has made a local body's finances readable where the body itself declined to. That is probably the route for every transit agency in this corpus whose own disclosure fails. One earlier finding is corrected here rather than repeated. The two school district budget sites were recorded as JavaScript-rendered. Retried with a browser that renders JavaScript, both reset the connection before any page loaded — the block is network egress from this environment, not client-side rendering. A rendering browser will not fix it, and saying so saves the next pass the attempt.",
+  "reports": [
+    {
+      "id": "harris-county-auditor-annual-report",
+      "title": "County Auditor Annual Report",
+      "publisher": "Harris County Auditor",
+      "country": "US",
+      "jurisdiction_level": "municipal",
+      "region": "Harris County, Texas",
+      "description": "The statutory annual report the county auditor files with the commissioners court and the district judges, covering every transaction of the calendar year — amounts received and disbursed from each county fund, the condition of each account, funds on deposit in the county depository, and bonded and other indebtedness. Distinct from the annual comprehensive financial report the same office produces, and the document that establishes the auditor as an office with a reporting mandate rather than only a signature on someone else's statements.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://auditor.harriscountytx.gov/Reports",
+      "domains": [
+        "municipal-finance",
+        "taxation"
+      ]
+    },
+    {
+      "id": "tx-spdpid",
+      "title": "Special Purpose District Public Information Database",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "country": "US",
+      "jurisdiction_level": "provincial",
+      "region": "Texas",
+      "description": "The statewide register of special purpose districts required by Government Code §403.0241, covering every district authorised to impose an ad valorem or sales tax, an assessment or a fee. It carries board membership, contact details, tax rates, authorised and issued bond principal, and the debt information Local Government Code §140.008 requires. The answer to a question this corpus had left open — there is a state-level aggregator for Texas special districts, and it collects their debt and tax data rather than their audits.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://spdpid.comptroller.texas.gov/",
+      "domains": [
+        "municipal-finance",
+        "taxation",
+        "financial-regulation"
+      ]
+    },
+    {
+      "id": "ntd-agency-profile",
+      "title": "National Transit Database transit agency profile",
+      "publisher": "US Federal Transit Administration",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The annual per-agency profile compiled from data every federally funded transit agency must report — sources of operating and capital funds split between fares, local, state and federal, a breakdown of operating expenses, service supplied and consumed. Worth having for a reason beyond transit: it is a federal reporting obligation that makes an agency's finances readable when the agency itself publishes nothing retrievable.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.transit.dot.gov/ntd/transit-agency-profiles",
+      "domains": [
+        "municipal-finance",
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "harris-county-auditor-annual-report",
+      "target_report_id": "harris-county-jurisdiction-tax-rates",
+      "relationship_type": "uses_data_from",
+      "basis": "Local Government Code §114.025(b) requires that \"The annual report must include a record of all transactions made during a calendar year\", showing \"the aggregate amounts received and disbursed from each county fund\", \"the condition of each account on the books\" and \"the amount of county, district, and school funds on deposit in the county depository\", and that \"The auditor shall file the annual report at a regular or special term of the commissioners court held during the month of April of the following year.\" §114.041(a) supplies the auditor's reach into the collecting office: the auditor shall \"annually examine the records and accounts of each officer\" and report the findings to the grand jury or district court. The Tax Assessor-Collector is such an officer, and the property tax the office collects is the money the report accounts for.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 12,
+        "ends": "12-31",
+        "stated_as": "All transactions of the calendar year, reported to the commissioners court at a term held in April of the following year."
+      },
+      "evidence_url": "https://statutes.capitol.texas.gov/Docs/LG/htm/LG.114.htm"
+    },
+    {
+      "source_report_id": "tx-spdpid",
+      "target_report_id": "hc-mud-285-audit",
+      "relationship_type": "uses_data_from",
+      "basis": "Government Code §403.0241 requires the database to cover districts \"authorized by the state by a general or special law to impose an ad valorem tax or a sales and use tax, to impose an assessment, or to charge a fee\", and to carry for each one \"the financial information described by Section 140.008(b) or (g), Local Government Code\", \"the total amount of bonds authorized by the voters\" payable from ad valorem taxes, \"the aggregate initial principal amount of all bonds issued\", and \"the ad valorem tax rate for the most recent tax year\" for water districts. A municipal utility district is squarely within that class, and the Comptroller must update the information annually at no cost to the public.",
+      "reference_period": {
+        "readings_per_year": 1,
+        "window_months": 0,
+        "ends": null,
+        "stated_as": "Updated annually from district submissions."
+      },
+      "evidence_url": "https://codes.findlaw.com/tx/government-code/gov-t-sect-403-0241/"
+    },
+    {
+      "source_report_id": "tx-spdpid",
+      "target_report_id": "harris-county-esd-annual-financial-report",
+      "relationship_type": "uses_data_from",
+      "basis": "Emergency services districts impose an ad valorem tax under Health and Safety Code §775.074 and are therefore within §403.0241's class of districts \"authorized by the state by a general or special law to impose an ad valorem tax\". The database carries their board membership, tax rates and bond and debt information alongside the water districts'.",
+      "evidence_url": "https://codes.findlaw.com/tx/government-code/gov-t-sect-403-0241/"
+    },
+    {
+      "source_report_id": "ntd-agency-profile",
+      "target_report_id": "metro-financial-reports",
+      "relationship_type": "uses_data_from",
+      "basis": "The profile is built from the agency's own reported figures and publishes them in a fixed frame: a \"Sources of Operating Funds Expended\" table splitting revenue between \"Fares and Directly Generated\", \"Local Funds\", \"State Funds\" and \"Federal Assistance\"; a parallel \"Sources of Capital Funds Expended\" table; and a \"Summary of Operating Expenses\" by category. For the Houston authority the local share dominates — 75.8 percent of operating funds and 94.0 percent of capital funds against no state money at all — which is the sales tax showing up under an aggregated heading rather than by name.",
+      "evidence_url": "https://www.transit.dot.gov/sites/fta.dot.gov/files/transit_agency_profile_doc/2018/60008.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tx-spdpid -> district audited financial statements",
+      "source": "tx-spdpid",
+      "target": null,
+      "reason": "no-document",
+      "why": "The precise answer to the aggregator question, and it is a qualified yes. A statewide register exists and covers exactly the districts in question, but what it collects is not the audits. Local Government Code §140.008, which §403.0241 incorporates, requires debt obligation amounts, outstanding principal, credit ratings from nationally recognized organizations, payment sources and projected per capita debt — plus tax rates and bond authorisations from §403.0241 itself. The audited financial statements are not in it. So the position is: a district's tax and debt are aggregated statewide and readable; its accounts are still only reachable through its own site or the municipal securities disclosure system. The gap is narrower than recorded before and it is still a gap."
+    },
+    {
+      "edge": "hisd-adopted-budget and lausd-adopted-budget -> their funding inputs",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "A correction to what was recorded earlier, because the failure is not the one previously diagnosed. Both district sites were described as JavaScript-rendered, defeating a plain fetch. Retried with a full headless browser that renders JavaScript, and both returned a connection reset at the network layer before any page loaded — the block is egress from this research environment, not client-side rendering. That matters for whoever picks this up: a rendering browser will not fix it, and the two districts remain the only substantial nodes in the corpus with no evidenced inputs. A fetch from an unrestricted network, or the districts' filings with their state education agencies, are the routes left."
+    },
+    {
+      "edge": "houston-revenue-cap -> the charter text",
+      "source": "houston-revenue-cap",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Still not retrieved, now for a second reason. The charter is served only through a JavaScript viewer whose API endpoints return 404, and that host is also unreachable from this environment. The bond Official Statement remains the best available source and now backs the formula itself — the fiscal 2005 base, the cumulative adjustment, the 4.5 percent alternative and the $90 million addition — leaving only the identity of the price index resting on the Finance Department's own budget footnote."
+    },
+    {
+      "edge": "metro-financial-reports -> its own audited statements",
+      "source": "metro-financial-reports",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Unchanged, but now with a partial substitute in the graph. The authority still publishes no retrievable audited statements. What is retrievable is the federal profile compiled from its own reporting, which gives operating and capital funds by source and operating expenses by category but not an auditor's opinion, a balance sheet or a note on the sales tax. A federal reporting obligation has made a local body's finances readable where the body itself would not — worth noticing as a general pattern, since it suggests the National Transit Database is the route for every transit authority in the corpus whose own disclosure fails."
+    },
+    {
+      "edge": "harris county auditor -> a statutory oversight duty in Chapter 84",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The duty is real but lives elsewhere than expected. Local Government Code §84.002(a) supplies only the appointment rule — \"In a county with a population of 10,200 or more, the district judges shall appoint a county auditor\" — and the rest of Chapter 84 covers qualifications, bonds, continuing education, removal and staffing. The substantive oversight and reporting duties are in Chapter 114: §114.025 for the annual report, §114.022 for the published exhibit, §114.041 for the annual examination of each officer's records. Recorded so the next pass does not re-read Chapter 84 looking for something that is not there."
+    }
+  ],
+  "_status": "NEW 2026-08-10. Clearing pass on items left open by three prior rounds. 2 of 5 closed with new nodes and edges, 1 partially closed with a federal substitute, 2 remain blocked and are now documented with the correct diagnosis."
+}

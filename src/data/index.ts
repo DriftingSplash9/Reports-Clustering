@@ -2,6 +2,7 @@ import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
 import { reports as seedReports } from './reports'
 import { dependencies as seedDependencies } from './dependencies'
 import usCaliforniaLosAngeles from './research/us-california-los-angeles.json'
+import usOpenItems from './research/us-open-items.json'
 import usCountyTierRound2 from './research/us-county-tier-round2.json'
 import usCountyTier from './research/us-county-tier.json'
 import usTexasHouston from './research/us-texas-houston.json'
@@ -105,15 +106,6 @@ import snCpiSocialProtection from './research/sn-cpi-social-protection.json'
 import ciCpiSocialProtection from './research/ci-cpi-social-protection.json'
 import cmCpiSocialProtection from './research/cm-cpi-social-protection.json'
 import mlCpiSocialProtection from './research/ml-cpi-social-protection.json'
-import bfCpiSocialProtection from './research/bf-cpi-social-protection.json'
-import tgCpiSocialProtection from './research/tg-cpi-social-protection.json'
-import gaCpiSocialProtection from './research/ga-cpi-social-protection.json'
-import tdCpiSocialProtection from './research/td-cpi-social-protection.json'
-import ngLagosMunicipalFinance from './research/ng-lagos-municipal-finance.json'
-import keNairobiMunicipalFinance from './research/ke-nairobi-municipal-finance.json'
-import egCairoMunicipalFinance from './research/eg-cairo-municipal-finance.json'
-import zaJoburgMunicipalFinance from './research/za-joburg-municipal-finance.json'
-import afGrokMunicipalBatch2 from './research/af-grok-municipal-batch2.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -152,6 +144,7 @@ const slices: ResearchSlice[] = [
   usTexasHouston as unknown as ResearchSlice,
   usCountyTier as unknown as ResearchSlice,
   usCountyTierRound2 as unknown as ResearchSlice,
+  usOpenItems as unknown as ResearchSlice,
   usCaliforniaLosAngeles as unknown as ResearchSlice,
   albertaMunicipal as unknown as ResearchSlice,
   populationAndEducation as unknown as ResearchSlice,
@@ -252,15 +245,6 @@ const slices: ResearchSlice[] = [
   ciCpiSocialProtection as unknown as ResearchSlice,
   cmCpiSocialProtection as unknown as ResearchSlice,
   mlCpiSocialProtection as unknown as ResearchSlice,
-  bfCpiSocialProtection as unknown as ResearchSlice,
-  tgCpiSocialProtection as unknown as ResearchSlice,
-  gaCpiSocialProtection as unknown as ResearchSlice,
-  tdCpiSocialProtection as unknown as ResearchSlice,
-  ngLagosMunicipalFinance as unknown as ResearchSlice,
-  keNairobiMunicipalFinance as unknown as ResearchSlice,
-  egCairoMunicipalFinance as unknown as ResearchSlice,
-  zaJoburgMunicipalFinance as unknown as ResearchSlice,
-  afGrokMunicipalBatch2 as unknown as ResearchSlice,
 ]
 
 function assemble() {
