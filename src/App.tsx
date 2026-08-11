@@ -1,1 +1,1424 @@
-see-file
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import InfluenceGraph, {
+  FOV,
+  type FlyTo,
+  type GraphBounds,
+} from './components/InfluenceGraph'
+import SpaceFrame from './components/SpaceFrame'
+import Environment from './components/Environment'
+import ViewControls from './components/ViewControls'
+import SearchPanel from './components/SearchPanel'
+import CalendarPanel from './components/CalendarPanel'
+import { describeWindow, nextRelease } from './lib/schedule'
+import CameraZoom from './components/CameraZoom'
+import { PanelShell } from './components/PanelShell'
+import { Flag } from './components/Flag'
+import {
+  BLOOM_THRESHOLD_MAX,
+  BLOOM_THRESHOLD_MIN,
+  DEFAULT_VIEW,
+  type ViewSettings,
+} from './lib/view'
+import { dependencies, droppedNotes, loadIssues, reports } from './data'
+import {
+  buildGraph,
+  contains,
+  dependents,
+  dependsOn,
+  describeRate,
+  disclosureByReport,
+  isDocumented,
+  isOfficial,
+  rolledUpAuthority,
+  validate,
+  type Disclosure,
+} from './lib/graph'
+import { buildFocusIndex, computeFocus } from './lib/selection'
+import {
+  NO_FILTER,
+  applyFilter,
+  compile,
+  compileEdges,
+  isFiltering,
+  toggleIn,
+  type FilterState,
+} from './lib/filter'
+import {
+  ALL_SCOPES,
+  COMMERCIAL_COLOUR,
+  focusPalette,
+  rimColourFor,
+  SCOPE_COLOUR,
+  SCOPE_GROUPS,
+  SCOPE_LABEL,
+  colourForReport,
+  scopeOf,
+  type Scope,
+} from './lib/palette'
+import { DOMAINS, type Domain } from './lib/types'
+import type {
+  Country,
+  ReferencePeriod,
+  ScoredReport,
+  TerminalReason,
+} from './lib/types'
+
+export default function App() {
+  const graph = useMemo(() => {
+    // Fail loudly in the console rather than silently rendering bad sizes.
+    if (loadIssues.dangling.length) {
+      console.warn('[data] dropped unresolved edges:', loadIssues.dangling)
+    }
+    // No longer dropped — kept and shelved beside the graph since V0.12. Logged
+    // rather than silent because the count is worth watching: a sweep that adds
+    // fifty islands has added territory in the most literal sense.
+    if (loadIssues.orphans.length) {
+      console.info('[data] isolated reports, kept and shelved:', loadIssues.orphans)
+    }
+    if (loadIssues.duplicateEdges.length) {
+      console.warn('[data] edges defined twice, last kept:', loadIssues.duplicateEdges)
+    }
+    if (loadIssues.duplicateIds.length) {
+      console.warn('[data] report ids defined twice, first kept:', loadIssues.duplicateIds)
+    }
+    const issues = validate(reports, dependencies)
+    for (const i of issues) {
+      if (i.severity === 'error') console.error('[graph]', i.message)
+      else console.warn('[graph]', i.message)
+    }
+    return buildGraph(reports, dependencies)
+  }, [])
+
+  /**
+   * Disclosure, computed once for the whole corpus rather than per hover.
+   *
+   * It walks every dropped note in the corpus, which is not something to do on
+   * a pointer move — and the result is a pure function of data that never
+   * changes during a session.
+   */
+  const disclosure = useMemo(
+    () => disclosureByReport(reports, dependencies, droppedNotes),
+    [],
+  )
+
+  const [hovered, setHovered] = useState<ScoredReport | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [bounds, setBounds] = useState<GraphBounds | null>(null)
+  const [view, setView] = useState<ViewSettings>(DEFAULT_VIEW)
+  const [filter, setFilter] = useState<FilterState>(NO_FILTER)
+  const [flyTo, setFlyTo] = useState<FlyTo | null>(null)
+  /**
+   * Incremented to ask the scene for the opening camera back. A counter rather
+   * than a boolean because the same request has to be answerable twice in a
+   * row, and a boolean would need clearing afterwards.
+   */
+  const [resetSignal, setResetSignal] = useState(0)
+  const tooltipRef = useRef<HTMLDivElement>(null)
+  /**
+   * Last pointer position, held in a ref rather than state so that placing the
+   * card costs no render — and so the card can be re-placed after its content
+   * changes, which is when its height is finally known. See `place`.
+   */
+  const pointer = useRef({ x: 0, y: 0 })
+
+  /**
+   * What is drawn. Null when nothing is filtered, so the common case does no
+   * set lookups at all — and so the renderer can tell "everything" apart from
+   * "everything happens to pass", which are the same picture but not the same
+   * amount of work.
+   */
+  const predicate = useMemo(() => compile(filter), [filter])
+  const edgePredicate = useMemo(() => compileEdges(filter), [filter])
+  const visible = useMemo(
+    () =>
+      isFiltering(filter) ? applyFilter(graph, predicate, edgePredicate) : null,
+    [graph, filter, predicate, edgePredicate],
+  )
+
+  // Adjacency, rebuilt only when the graph or the filter changes. Selection
+  // changes then cost a walk, not a rebuild.
+  const focusIndex = useMemo(() => buildFocusIndex(graph, visible), [graph, visible])
+
+  // A selection that has just been filtered out would leave the panel tracing
+  // a report that is no longer on screen.
+  useEffect(() => {
+    if (selectedId && visible && !visible.nodes.has(selectedId)) setSelectedId(null)
+  }, [selectedId, visible])
+
+  const focus = useMemo(
+    () =>
+      selectedId
+        ? computeFocus(focusIndex, selectedId, {
+            builtFrom: view.focusBuiltFrom,
+            feedsInto: view.focusFeedsInto,
+          })
+        : null,
+    [focusIndex, selectedId, view.focusBuiltFrom, view.focusFeedsInto],
+  )
+
+  const selected = selectedId ? (graph.byId.get(selectedId) ?? null) : null
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setSelectedId(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  /**
+   * Place the hover card at the last known pointer position, on screen.
+   *
+   * Flip to the other side of the cursor when the card would run off an edge,
+   * then **clamp**, which is the part that was missing. Flipping alone was the
+   * whole positioning rule and it produced coordinates outside the window on
+   * tall cards: the CPI's card is 552px tall, so `clientY - pad - h` from
+   * mid-screen lands at −96, and the title — the one thing a card must show —
+   * was the part cut off.
+   */
+  const place = useCallback(() => {
+    const el = tooltipRef.current
+    if (!el) return
+    const { x: px, y: py } = pointer.current
+    const pad = 18
+    const w = el.offsetWidth
+    const h = el.offsetHeight
+
+    const fit = (v: number, size: number, limit: number) =>
+      Math.max(pad, Math.min(v, limit - size - pad))
+
+    const x = fit(
+      px + pad + w > window.innerWidth ? px - pad - w : px + pad,
+      w,
+      window.innerWidth,
+    )
+    const y = fit(
+      py + pad + h > window.innerHeight ? py - pad - h : py + pad,
+      h,
+      window.innerHeight,
+    )
+    el.style.transform = `translate(${x}px, ${y}px)`
+  }, [])
+
+  // The card follows the cursor by writing style directly. Putting pointer
+  // coordinates in React state would re-render the tree on every mouse move.
+  const trackPointer = useCallback(
+    (e: React.PointerEvent) => {
+      pointer.current = { x: e.clientX, y: e.clientY }
+      place()
+    },
+    [place],
+  )
+
+  /**
+   * Place again once the card's *content* has rendered.
+   *
+   * This is the actual bug behind "the card is cut off", and clamping alone did
+   * not fix it. `place` measures `offsetHeight`, but the card's content comes
+   * from React state: on the pointermove that first hovers a node, the card is
+   * still showing the previous report — or nothing at all — so the height being
+   * clamped against is the wrong one. React then renders the real content and no
+   * further pointermove arrives, because the cursor is sitting still on the
+   * node. So the card was positioned for a short card and then grew.
+   *
+   * Measured before and after: hovering the CPI put the card at top 440 with a
+   * height of 552 in a 900px window — 92px off the bottom — with the clamp
+   * already in place and working correctly on a stale number.
+   *
+   * `useLayoutEffect`, not `useEffect`, and the difference is visible rather
+   * than theoretical. `useEffect` fires after the browser has painted, so the
+   * card would be drawn once in the wrong place and then moved — a flinch on
+   * every hover. The first attempt at this fix used `useEffect` and the
+   * screenshot still showed the card 92px off the bottom, because the deferred
+   * callback had not run yet.
+   */
+  useLayoutEffect(place, [hovered, place])
+
+  const handleBounds = useCallback((b: GraphBounds) => setBounds(b), [])
+
+  const handleZoomChange = useCallback(
+    (zoom: number) => setView((v) => (v.zoom === zoom ? v : { ...v, zoom })),
+    [],
+  )
+
+  /** Search picked a report: select it, and go there. */
+  const handleChoose = useCallback((report: ScoredReport) => {
+    setSelectedId(report.id)
+    setFlyTo((f) => ({ id: report.id, nonce: (f?.nonce ?? 0) + 1 }))
+  }, [])
+
+  /**
+   * Back to the opening view. See the Reset button in ViewControls for why the
+   * filter is only cleared on a shift-click.
+   *
+   * The zoom slider is put back to 1 as well as the camera being moved, or the
+   * two would disagree — CameraZoom reconciles them from the camera side on the
+   * next frame, and letting it do that instead would animate a slider nobody
+   * touched.
+   */
+  const handleReset = useCallback((clearFilter: boolean) => {
+    setSelectedId(null)
+    setFlyTo(null)
+    setView((v) => ({ ...v, zoom: 1 }))
+    setResetSignal((n) => n + 1)
+    if (clearFilter) setFilter(NO_FILTER)
+  }, [])
+
+  const toggleDomain = useCallback((domain: Domain) => {
+    setFilter((f) => ({ ...f, domains: toggleIn(f.domains, DOMAINS, domain) }))
+  }, [])
+
+  const toggleScope = useCallback((scope: Scope) => {
+    setFilter((f) => ({ ...f, scopes: toggleIn(f.scopes, ALL_SCOPES, scope) }))
+  }, [])
+
+  // Null means no constraint, which is not the same as a list containing
+  // everything — see filter.ts. An empty array is the honest representation of
+  // "the user turned everything off", and an empty graph is the honest response.
+  const toggleAllScopes = useCallback(() => {
+    setFilter((f) => ({ ...f, scopes: f.scopes === null ? [] : null }))
+  }, [])
+
+  /**
+   * A country header turns its whole group on or off.
+   *
+   * Off if any of the group is currently showing, on otherwise — so the first
+   * click on a fully-lit group clears it, which is what clicking a lit thing
+   * means. Doing it the other way round makes the header inert whenever the
+   * group is partially selected.
+   */
+  const toggleGroup = useCallback((country: Country) => {
+    const group = SCOPE_GROUPS.find((g) => g.country === country)
+    if (!group) return
+    setFilter((f) => {
+      const current = new Set<string>(f.scopes ?? ALL_SCOPES)
+      const anyOn = group.scopes.some((s) => current.has(s))
+      for (const s of group.scopes) {
+        if (anyOn) current.delete(s)
+        else current.add(s)
+      }
+      const next = ALL_SCOPES.filter((s) => current.has(s))
+      return { ...f, scopes: next.length === ALL_SCOPES.length ? null : next }
+    })
+  }, [])
+
+  const top = useMemo(
+    () => [...graph.nodes].sort((a, b) => b.authority - a.authority).slice(0, 3),
+    [graph],
+  )
+
+  // Counted over the whole graph, not the filtered view: a legend row showing
+  // "0" because you switched it off tells you nothing, while one showing how
+  // many you are hiding tells you what the switch is worth.
+  const scopeCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const n of graph.nodes) {
+      const s = scopeOf(n)
+      counts[s] = (counts[s] ?? 0) + 1
+    }
+    return counts
+  }, [graph])
+
+  const commercialCount = useMemo(
+    () => graph.nodes.filter((n) => !isOfficial(n)).length,
+    [graph],
+  )
+
+  // Counted over the whole graph, like scopeCounts, so a domain's number does
+  // not collapse to zero the moment you filter by it.
+  const domainCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const n of graph.nodes) {
+      for (const d of n.domains ?? []) counts[d] = (counts[d] ?? 0) + 1
+    }
+    return counts
+  }, [graph])
+
+  const impliedCount = useMemo(
+    () => graph.edges.filter((e) => !isDocumented(e)).length,
+    [graph],
+  )
+
+  const toggleEvidence = useCallback(
+    (key: 'showDocumented' | 'showImplied') =>
+      setFilter((f) => ({ ...f, [key]: !f[key] })),
+    [],
+  )
+
+  return (
+    <div style={{ width: '100%', height: '100%' }} onPointerMove={trackPointer}>
+      <Canvas
+        camera={{ position: [0, 0, 700], fov: FOV, near: 1, far: 12000 }}
+        gl={{ antialias: true }}
+        style={{ background: '#05070d', cursor: hovered ? 'pointer' : 'default' }}
+        // Fires when a click hits nothing in the scene. Clearing here rather
+        // than on the canvas element means orbiting over empty space, which
+        // also ends in a click, is handled by R3F's own drag threshold.
+        onPointerMissed={() => setSelectedId(null)}
+      >
+        <ambientLight intensity={0.5} />
+        <pointLight position={[300, 300, 400]} intensity={1.1} />
+        <pointLight position={[-300, -200, -300]} intensity={0.4} color="#4a6fb5" />
+
+        {bounds && <Environment floorY={bounds.floorY} view={view} />}
+
+        {bounds && (
+          <SpaceFrame
+            centre={bounds.centre}
+            radius={bounds.nodeRadius}
+            minY={bounds.minY}
+            maxY={bounds.maxY}
+            view={view}
+          />
+        )}
+
+        <InfluenceGraph
+          graph={graph}
+          view={view}
+          resetSignal={resetSignal}
+          focus={focus}
+          visible={visible}
+          flyTo={flyTo}
+          onHover={setHovered}
+          onSelect={setSelectedId}
+          onBounds={handleBounds}
+        />
+
+        <OrbitControls
+          makeDefault
+          enableDamping
+          dampingFactor={0.08}
+          autoRotate={view.autoRotate}
+          autoRotateSpeed={0.45}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI}
+        />
+
+        <CameraZoom
+          zoom={view.zoom}
+          fitDistance={bounds?.fitDistance ?? 0}
+          onZoomChange={handleZoomChange}
+        />
+
+        {/*
+          Bloom gives the dark background a sense of space. It has to be kept
+          on a short leash: it adds apparent size, and apparent size is the
+          authority encoding. Too much and every node blows out into an equal
+          white blob, destroying the exact signal the graph exists to show.
+          High threshold so only the brightest cores bleed, low intensity so
+          the halo stays a suggestion.
+        */}
+        {/*
+          The composer stays mounted whether or not glow is on, and the toggle
+          only changes bloom intensity.
+
+          Mounting and unmounting it instead re-routes the whole render: with a
+          composer the scene goes through an offscreen buffer with its own
+          colour handling, without one it draws straight to the canvas. The
+          difference shifts the background tint of the entire scene, so the
+          Glow switch appeared to be doing the horizon's job as well as its
+          own. Keeping the pipeline fixed makes the toggle mean one thing.
+        */}
+        {/*
+          Threshold slides down as the slider goes up, rather than intensity
+          sliding up. Intensity alone would brighten the same handful of nodes;
+          threshold decides *how many* nodes glow at all, which is the knob that
+          actually corresponds to what someone means by "more glow".
+
+          The range stops at 0.26 deliberately. Below roughly 0.15 most of the
+          graph blooms, halo adds apparent size uniformly, and the size-equals-
+          authority encoding stops working — which is exactly what happened the
+          first time bloom was tuned, and why it was then set so conservatively
+          that it did nothing at all for five sessions.
+        */}
+        <EffectComposer>
+          <Bloom
+            intensity={view.glow <= 0.005 ? 0 : 0.15 + view.glow * 1.35}
+            luminanceThreshold={
+              BLOOM_THRESHOLD_MAX -
+              view.glow * (BLOOM_THRESHOLD_MAX - BLOOM_THRESHOLD_MIN)
+            }
+            luminanceSmoothing={0.35}
+            radius={0.7}
+            mipmapBlur
+          />
+        </EffectComposer>
+      </Canvas>
+
+      <PanelShell side="right" label="View" width={190} defaultCollapsed>
+        <ViewControls
+          view={view}
+          onChange={setView}
+          evidence={{
+            showDocumented: filter.showDocumented,
+            showImplied: filter.showImplied,
+          }}
+          onEvidenceChange={toggleEvidence}
+          impliedCount={impliedCount}
+          hasSelection={!!selected}
+          onReset={handleReset}
+        />
+      </PanelShell>
+
+      <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
+
+      {/*
+        Bottom edge, and collapsed by default. It answers a question nobody has
+        while first looking at the graph — the shape comes first and the timing
+        second — so it costs one click to open and nothing at all to ignore.
+      */}
+      <CalendarPanel
+        graph={graph}
+        dependencies={dependencies}
+        within={predicate}
+        onChoose={handleChoose}
+      />
+
+      <PanelShell side="left" label="Reports" width={320} defaultCollapsed>
+        <Hud
+          nodeCount={graph.nodes.length}
+          edgeCount={graph.edges.length}
+          visibleNodeCount={visible ? visible.nodes.size : graph.nodes.length}
+          visibleEdgeCount={visible ? visible.edges.size : graph.edges.length}
+          top={top}
+          scopeCounts={scopeCounts}
+          domainCounts={domainCounts}
+          onToggleDomain={toggleDomain}
+          commercialCount={commercialCount}
+          filter={filter}
+          onToggleScope={toggleScope}
+          onToggleAllScopes={toggleAllScopes}
+          onToggleGroup={toggleGroup}
+          onToggleCommercial={() =>
+            setFilter((f) => ({ ...f, showCommercial: !f.showCommercial }))
+          }
+          onClearFilter={() => setFilter(NO_FILTER)}
+          selected={selected}
+          builtFromCount={focus?.builtFrom.size ?? 0}
+          feedsIntoCount={focus?.feedsInto.size ?? 0}
+        />
+      </PanelShell>
+
+      <div ref={tooltipRef} style={{ ...tooltip, opacity: hovered ? 1 : 0 }}>
+        {hovered && (
+          <Detail report={hovered} graph={graph} disclosure={disclosure} />
+        )}
+      </div>
+    </div>
+  )
+}
+
+/** Hover card. Replaces the always-on labels, which were unreadable in bulk. */
+function Detail({
+  report,
+  graph,
+  disclosure,
+}: {
+  report: ScoredReport
+  graph: ReturnType<typeof buildGraph>
+  /** Corpus-wide disclosure counts, keyed by report id. See `Disclosure`. */
+  disclosure: Map<string, Disclosure>
+}) {
+  const colour = colourForReport(report)
+  const official = isOfficial(report)
+  const feeds = dependents(graph, report.id)
+  const built = dependsOn(graph, report.id)
+
+  // Absent releases_per_year is the one-off-foundational-instrument shape
+  // (Research.1.md §4, 2026-08-08) — a treaty, a trade deal, a piece of
+  // government policy or regulation with no next edition. describeRate takes
+  // a rate to describe; there isn't one here, so this is not delegated to it.
+  const cadence =
+    report.releases_per_year !== undefined
+      ? describeRate(report.releases_per_year)
+      : 'once, as a standing instrument'
+  // Shown only when it differs. For most releases the number moves whenever the
+  // document appears, and saying so twice would be noise; the prime rate, which
+  // is published weekly and changes eight times a year, is the case worth the
+  // extra line.
+  const changes =
+    report.changes_per_year !== undefined &&
+    report.releases_per_year !== undefined &&
+    report.changes_per_year !== report.releases_per_year
+      ? describeRate(report.changes_per_year)
+      : null
+
+  // Reference periods live on the edge, so they are read from the graph rather
+  // than the node — the same release is read by its dependents on different
+  // rhythms, which is the whole reason the field sits where it does.
+  const builtFromEdges = graph.edges.filter((e) => e.source_report_id === report.id)
+
+  // Containment. Rendered because `part_of` would otherwise be a field nothing
+  // draws, and this project has already paid for one of those — `country` was
+  // wrong on nine nodes for five sessions because nothing showed it.
+  //
+  // The reason it earns space rather than sitting in the data is that the split
+  // is large and invisible: measured on this one pair, the containing release
+  // reads 0.46 where the merged programme reads 0.84. A reader who cannot see
+  // that two spheres are one masthead reads the lower number as the programme's
+  // weight and is wrong by nearly half.
+  const next = nextRelease(report)
+
+  const parent = report.part_of ? graph.byId.get(report.part_of) : undefined
+  const parts = contains(graph, report.id)
+  const rolledUp = parts.length > 0 ? rolledUpAuthority(graph, report.id) : null
+
+  return (
+    <>
+      {/*
+        The flag carries `country`, which is the one attribute in this model with
+        a documented history of being silently wrong: it was typed 'CA' | 'US'
+        with no value for "neither", so every international body was recorded as
+        Canadian for five sessions, undetected because nothing drew it. Putting it
+        at the top of the card is the cheapest available guard against a repeat.
+      */}
+      <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
+        <Flag country={report.country} />
+        <div
+          style={{ fontSize: 14, fontWeight: 600, color: colour, lineHeight: 1.3, flex: 1 }}
+        >
+          {report.title}
+        </div>
+      </div>
+      <div style={{ fontSize: 11, color: '#7d8ea8', marginTop: 3 }}>
+        {report.publisher} · {report.region} · published {cadence}
+        {changes && <span style={{ color: '#c2a86e' }}> · changes {changes}</span>}
+      </div>
+      {/*
+        Phase, where it is known. A rate says how often and never says when, and
+        "next 17 August" is the thing anyone reading a cadence actually wanted.
+        Absent on most nodes for now, and silent when absent rather than saying
+        "unknown" on four hundred cards.
+      */}
+      {next && (
+        <div style={{ fontSize: 11, color: '#8fa4c4', marginTop: 3 }}>
+          next {describeWindow(next.from, next.to, next.precision)}
+          {next.evidence === 'implied' && (
+            <span style={{ color: '#8a7ab5' }}> · inferred, not published</span>
+          )}
+        </div>
+      )}
+      {parent && (
+        <div style={{ fontSize: 10.5, color: '#7d8ea8', marginTop: 5, lineHeight: 1.5 }}>
+          A series published inside{' '}
+          <span style={{ color: colourForReport(parent) }}>{parent.title}</span>. Its
+          authority below is its own, not the release's — the two are separate
+          spheres for one programme.
+        </div>
+      )}
+      {rolledUp !== null && (
+        <div style={{ fontSize: 10.5, color: '#7d8ea8', marginTop: 5, lineHeight: 1.5 }}>
+          Also publishes{' '}
+          {parts.map((p, i) => (
+            <span key={p.id}>
+              {i > 0 && ', '}
+              <span style={{ color: colourForReport(p) }}>{p.title}</span>
+            </span>
+          ))}
+          , held separately. Everything under this masthead comes to{' '}
+          <span style={{ color: '#c2a86e' }}>{rolledUp.toFixed(2)}</span>.
+        </div>
+      )}
+      {report.cadence_note && (
+        <div style={{ fontSize: 10.5, color: '#5e6f8a', marginTop: 5, lineHeight: 1.5 }}>
+          {report.cadence_note}
+        </div>
+      )}
+
+      {!official && (
+        <div style={{ fontSize: 10.5, color: '#8b93a4', marginTop: 6, lineHeight: 1.5 }}>
+          Commercial source. Published, paywalled, and named by the documents
+          that use it — but outside the authority ranking, so it accrues no
+          size from what depends on it.
+        </div>
+      )}
+
+      {/*
+        Termini are rendered for the same reason `part_of` is: the field exists to
+        make something visible, and a field nothing draws is a field nobody
+        checks. The sentence is specific to the kind, because "this chain stops"
+        is not the finding — *why* it stops is.
+      */}
+      {report.terminal_reason && (
+        <div style={{ fontSize: 10.5, color: '#8b93a4', marginTop: 6, lineHeight: 1.5 }}>
+          {TERMINUS_NOTE[report.terminal_reason]} The chain ends here, so this
+          node is outside the authority ranking and accrues no size from what
+          depends on it.
+        </div>
+      )}
+
+      <div style={{ fontSize: 12, color: '#aab8cf', marginTop: 10, lineHeight: 1.5 }}>
+        {report.description}
+      </div>
+
+      <div style={statRow}>
+        <Stat
+          label="Authority"
+          // Not "0.00" — that reads as a measured result rather than a question
+          // the graph declines to ask of commercial sources. in_degree, next to
+          // it, is where their real weight shows.
+          value={official ? report.authority.toFixed(2) : '—'}
+        />
+        <Stat label="Depended on by" value={String(report.in_degree)} />
+        <Stat label="Built from" value={String(report.out_degree)} />
+      </div>
+
+      <DisclosureBlock disclosure={disclosure.get(report.id)} />
+
+      {feeds.length > 0 && (
+        <ListBlock title="Feeds into" items={feeds.map((r) => ({ text: r.title }))} />
+      )}
+      {built.length > 0 && (
+        <ListBlock
+          title="Built from"
+          items={built.map((r) => {
+            const edge = builtFromEdges.find((e) => e.target_report_id === r.id)
+            return {
+              text: r.title,
+              aside: describePeriod(edge?.reference_period),
+              // Marked here as well as drawn dashed, because the hover card is
+              // where someone decides whether to believe a chain.
+              implied: edge ? !isDocumented(edge) : false,
+            }
+          })}
+        />
+      )}
+      {feeds.length === 0 && (
+        <div style={{ fontSize: 11, color: '#5e6f8a', marginTop: 10, fontStyle: 'italic' }}>
+          Nothing in this graph depends on it — a terminal output.
+        </div>
+      )}
+    </>
+  )
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div style={{ fontSize: 15, color: '#dde5f2' }}>{value}</div>
+      <div
+        style={{
+          fontSize: 9.5,
+          color: '#5e6f8a',
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+        }}
+      >
+        {label}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * When this report reads that one, in a few words.
+ *
+ * Returns null when no document states it, and the row then shows nothing at
+ * all rather than "unknown" — an absent reference period is the ordinary case,
+ * not a defect, and labelling five sixths of the list would drown the sixth
+ * that carries real information.
+ */
+function describePeriod(period: ReferencePeriod | undefined): string | null {
+  if (!period) return null
+
+  const when = period.ends
+    ? (() => {
+        const [m, d] = period.ends!.split('-').map(Number)
+        const month = [
+          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+        ][m - 1]
+        return `${month} ${d}`
+      })()
+    : null
+
+  if (period.window_months === 0) {
+    return when ? `read at ${when}` : `read ${describeRate(period.readings_per_year)}`
+  }
+  const window =
+    period.window_months === 1 ? '1 month' : `${period.window_months} months`
+  return when ? `${window} to ${when}` : `${window}, rolling`
+}
+
+/**
+ * How much of what this report is built from it is willing to name.
+ *
+ * `disclosureByReport` has existed in graph.ts since V0.11 and was imported by
+ * nothing until now. Shipped 2026-08-10 (Thomas, Q14) ahead of the next
+ * high-volume sweep, deliberately: the ratio is only meaningful where somebody
+ * has already searched and come up short, so arriving after a sweep would mean
+ * arriving into a graph where it is null nearly everywhere and reads as broken.
+ *
+ * **Silent when the ratio is null, which is most nodes.** Null does not mean
+ * "fully disclosed" — it means nothing was searched for and not found, so
+ * nobody has asked. Rendering a null as 100% would invert the reading and make
+ * an unexamined report present as the most transparent thing on screen; that
+ * distinction is the whole subtlety of the field and it dies here if the card
+ * flattens it. So the block simply does not appear.
+ *
+ * `denied` and `leads` are shown even though neither is in the ratio, and they
+ * are shown as different kinds of thing. A denial is a finding — a document
+ * saying "this is not an input" is among the most valuable facts in the corpus.
+ * A lead is our own backlog and says nothing about the publisher at all.
+ */
+function DisclosureBlock({ disclosure }: { disclosure: Disclosure | undefined }) {
+  if (!disclosure || disclosure.ratio === null) return null
+  const { documented, undisclosed, unpublishable, denied, leads, ratio } = disclosure
+  const known = documented + undisclosed + unpublishable
+
+  return (
+    <div style={{ marginTop: 10 }}>
+      <div style={section}>Disclosure</div>
+      {/*
+        A bar, because the number is a proportion and a proportion is the one
+        thing a bar says faster than text. Amber for what is named, flat grey
+        for what is not — deliberately not red: a publisher declining to name a
+        source is a fact about the source, not a fault to be scored.
+      */}
+      <div
+        style={{
+          display: 'flex',
+          height: 4,
+          borderRadius: 2,
+          overflow: 'hidden',
+          background: '#232a38',
+          margin: '3px 0 5px',
+        }}
+      >
+        <div style={{ width: `${ratio * 100}%`, background: '#c2a86e' }} />
+      </div>
+      <div style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
+        Names {documented} of {known} inputs known to exist
+        {undisclosed > 0 && `, ${undisclosed} stated by no document`}
+        {unpublishable > 0 && `, ${unpublishable} that cannot be a node`}.
+      </div>
+      {denied > 0 && (
+        <div style={{ fontSize: 11, color: '#7fa88b', lineHeight: 1.5, marginTop: 2 }}>
+          {denied} relationship{denied === 1 ? '' : 's'} a document explicitly
+          denies — a finding, not a gap.
+        </div>
+      )}
+      {leads > 0 && (
+        <div style={{ fontSize: 11, color: '#5e6f8a', lineHeight: 1.5, marginTop: 2 }}>
+          {leads} lead{leads === 1 ? '' : 's'} not yet researched — ours, not theirs.
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Subject-matter filter.
+ *
+ * Unparked 2026-08-10 (Thomas, Q12), having been deferred on 8 and 9 August.
+ * The brief was explicit that 24 domains is not 24 checkboxes, and that sorting
+ * was wanted as much as filtering.
+ *
+ * **Collapsed to a single line until opened**, because this is a second filter
+ * axis on a panel that already carries one, and the publisher scope is the axis
+ * people reach for first. Domains that no node carries are not listed at all —
+ * the union is open and half of it is unstaffed, so showing empty rows would
+ * make the list twice as long and tell you nothing.
+ *
+ * The sort is the part worth arguing about. By count answers "what is this
+ * corpus actually about", and the answer changes as it grows — it is a readout
+ * on the shape of the research, not just an ordering. Alphabetical answers "is
+ * the thing I want in here", which is the question you have when you already
+ * know what you are looking for. Both are wanted, neither is the obvious
+ * default, so it is a toggle and it defaults to count: the first time anyone
+ * opens this, they do not yet know what is in it.
+ */
+function DomainPanel({
+  counts,
+  selected,
+  onToggle,
+}: {
+  counts: Record<string, number>
+  selected: readonly Domain[] | null
+  onToggle: (domain: Domain) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [sort, setSort] = useState<'count' | 'name'>('count')
+
+  const present = useMemo(
+    () =>
+      DOMAINS.filter((d) => (counts[d] ?? 0) > 0).sort((a, b) =>
+        sort === 'count' ? (counts[b] ?? 0) - (counts[a] ?? 0) : a.localeCompare(b),
+      ),
+    [counts, sort],
+  )
+  if (present.length === 0) return null
+
+  const on = (d: Domain) => !selected || selected.includes(d)
+  const chosen = selected ? selected.length : present.length
+
+  return (
+    <div style={{ marginTop: 12, pointerEvents: 'auto' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+        <div
+          onClick={() => setOpen((o) => !o)}
+          style={{ ...section, cursor: 'pointer', marginBottom: 0 }}
+        >
+          {open ? '▾' : '▸'} Subject — {selected ? `${chosen} of ` : ''}
+          {present.length}
+        </div>
+        {open && (
+          <span
+            onClick={() => setSort((x) => (x === 'count' ? 'name' : 'count'))}
+            title="Sort by how many reports carry the domain, or alphabetically"
+            style={{
+              fontSize: 9.5,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: '#5e6f8a',
+              cursor: 'pointer',
+              marginLeft: 'auto',
+            }}
+          >
+            {sort === 'count' ? 'by count' : 'a-z'}
+          </span>
+        )}
+      </div>
+
+      {open && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginTop: 5 }}>
+          {present.map((d) => (
+            <span
+              key={d}
+              onClick={() => onToggle(d)}
+              title={`${counts[d]} report${counts[d] === 1 ? '' : 's'}`}
+              style={{
+                fontSize: 10.5,
+                padding: '2px 6px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                border: '1px solid',
+                borderColor: on(d)
+                  ? 'rgba(110, 168, 255, 0.4)'
+                  : 'rgba(90, 115, 160, 0.18)',
+                background: on(d) ? 'rgba(110, 168, 255, 0.12)' : 'transparent',
+                color: on(d) ? '#cfe0f8' : '#5e6f8a',
+                // Chips rather than rows: 24 rows is a scroll, 24 chips is a
+                // paragraph, and the eye reads a paragraph in one pass.
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {d.replace(/-/g, ' ')}
+              <span style={{ color: '#5e6f8a', marginLeft: 4 }}>{counts[d]}</span>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ListBlock({
+  title,
+  items,
+}: {
+  title: string
+  items: { text: string; aside?: string | null; implied?: boolean }[]
+}) {
+  const shown = items.slice(0, 8)
+  return (
+    <div style={{ marginTop: 10 }}>
+      <div style={section}>{title}</div>
+      {shown.map((item) => (
+        <div key={item.text} style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
+          {item.implied && (
+            <span style={{ color: '#8b93a4' }} title="No document states this dependency">
+              ◌{' '}
+            </span>
+          )}
+          {item.text}
+          {item.aside && (
+            // The transmission rate, where a document states one. This is the
+            // answer to "when would a change here actually reach that", which
+            // a list of titles alone cannot give.
+            <span style={{ color: '#c2a86e' }}> — {item.aside}</span>
+          )}
+        </div>
+      ))}
+      {items.length > shown.length && (
+        <div style={{ fontSize: 11, color: '#5e6f8a', marginTop: 2 }}>
+          and {items.length - shown.length} more
+        </div>
+      )}
+    </div>
+  )
+}
+
+function Hud({
+  nodeCount,
+  edgeCount,
+  visibleNodeCount,
+  visibleEdgeCount,
+  top,
+  scopeCounts,
+  domainCounts,
+  onToggleDomain,
+  commercialCount,
+  filter,
+  onToggleScope,
+  onToggleAllScopes,
+  onToggleGroup,
+  onToggleCommercial,
+  onClearFilter,
+  selected,
+  builtFromCount,
+  feedsIntoCount,
+}: {
+  nodeCount: number
+  edgeCount: number
+  visibleNodeCount: number
+  visibleEdgeCount: number
+  top: { id: string; title: string; authority: number }[]
+  scopeCounts: Record<string, number>
+  domainCounts: Record<string, number>
+  onToggleDomain: (domain: Domain) => void
+  commercialCount: number
+  filter: FilterState
+  onToggleScope: (scope: Scope) => void
+  onToggleAllScopes: () => void
+  onToggleGroup: (country: Country) => void
+  onToggleCommercial: () => void
+  onClearFilter: () => void
+  selected: ScoredReport | null
+  builtFromCount: number
+  feedsIntoCount: number
+}) {
+  const filtered = visibleNodeCount !== nodeCount
+  const scopeOn = (s: Scope) => !filter.scopes || filter.scopes.includes(s)
+  const allScopesOn = filter.scopes === null
+  const noScopesOn = filter.scopes !== null && filter.scopes.length === 0
+
+  // Focus-adaptive recolouring (2026-08-10, Thomas): when the active filter
+  // touches exactly one group's own scopes — the common "one country only"
+  // move `onToggleGroup` already exists for — that group's own levels get a
+  // wider-spread palette than SCOPE_COLOUR's tight within-family band, since
+  // cross-country separation stops mattering once every other country is
+  // hidden. Sidebar only for now; the 3D scene's node/edge/pulse colours
+  // still come from SCOPE_COLOUR via `colourForReport`.
+  const focusedGroupCountry =
+    filter.scopes && filter.scopes.length > 0
+      ? (() => {
+          const countries = new Set(
+            filter.scopes!.map((s) => SCOPE_GROUPS.find((g) => g.scopes.includes(s))?.country),
+          )
+          return countries.size === 1 ? [...countries][0] : null
+        })()
+      : null
+
+  // Scope groups are closed by default — nine families x up to six levels
+  // each is 40+ rows, more than the panel's fixed height can show, and the
+  // panel clips (`overflow: hidden`) rather than scrolls. A group opens
+  // either because it was clicked open, or because the active filter
+  // actually touches one of its own levels — selecting a level from search
+  // or elsewhere should never leave it hidden inside a collapsed header.
+  const [manuallyExpanded, setManuallyExpanded] = useState<Set<string>>(new Set())
+  const toggleExpanded = (country: string) => {
+    setManuallyExpanded((prev) => {
+      const next = new Set(prev)
+      if (next.has(country)) next.delete(country)
+      else next.add(country)
+      return next
+    })
+  }
+
+  return (
+    <div style={panel}>
+      <div style={{ fontSize: 15, fontWeight: 600, color: '#e6edfa' }}>
+        Economic Report Influence Graph
+      </div>
+      <div style={{ fontSize: 12, color: '#6f829e', marginTop: 2 }}>
+        {filtered ? (
+          <>
+            <span style={{ color: '#9fb0c9' }}>
+              {visibleNodeCount} of {nodeCount}
+            </span>{' '}
+            reports · {visibleEdgeCount} dependencies
+          </>
+        ) : (
+          <>
+            {nodeCount} reports · {edgeCount} dependencies · size = weighted
+            authority
+          </>
+        )}
+      </div>
+
+      {/*
+        The counts are the point of the whole feature: the number of reports a
+        release ultimately rests on, and the number ultimately resting on it,
+        stated plainly. The cone in the scene shows where they are; this says
+        how many.
+      */}
+      {selected && (
+        <div style={selectionBlock}>
+          <div style={section}>Tracing</div>
+          <div
+            style={{
+              fontSize: 13,
+              color: colourForReport(selected),
+              lineHeight: 1.35,
+            }}
+          >
+            {selected.title}
+          </div>
+          <div style={{ fontSize: 11.5, color: '#8fa3c0', marginTop: 6, lineHeight: 1.6 }}>
+            Rests on <strong style={{ color: '#dde5f2' }}>{builtFromCount}</strong>{' '}
+            {builtFromCount === 1 ? 'report' : 'reports'} · feeds{' '}
+            <strong style={{ color: '#dde5f2' }}>{feedsIntoCount}</strong>{' '}
+            {feedsIntoCount === 1 ? 'report' : 'reports'}
+          </div>
+          <div style={{ fontSize: 10.5, color: '#4d5c74', marginTop: 5 }}>
+            Counted through the whole chain, not one step.
+          </div>
+        </div>
+      )}
+
+      <div style={{ ...section, marginTop: 14 }}>Most depended upon</div>
+      {top.map((n, i) => (
+        <div key={n.id} style={row}>
+          <span style={{ color: '#556785', width: 14 }}>{i + 1}</span>
+          <span style={{ flex: 1, color: '#c9d4e8' }}>{n.title}</span>
+          <span style={{ color: '#6f829e' }}>{n.authority.toFixed(2)}</span>
+        </div>
+      ))}
+
+      {/*
+        The legend and the filter are the same control.
+        Keeping them separate would have meant printing every colour and count
+        twice, and it would have hidden the more useful fact: the thing you can
+        switch off is exactly the thing the colour names. Clicking a row drops
+        that publisher scope out of the picture without moving or resizing
+        anything that remains — see filter.ts.
+      */}
+      <div style={{ ...section, marginTop: 14 }}>Publisher scope — click to filter</div>
+
+      {/*
+        A master row above everything. Turning it all off and one group back on
+        is the common move — it is how you look at a single system — and without
+        this it costs eight clicks in the wrong direction first.
+
+        Three-state in appearance rather than two: with a subset chosen it shows
+        neither fully on nor fully off, because "some" is a real answer and a
+        control that lies about it is worse than none.
+      */}
+      <LegendRow
+        colour="#8fa3c0"
+        label={allScopesOn ? 'Everything' : noScopesOn ? 'Nothing' : 'Some scopes'}
+        count={nodeCount}
+        on={allScopesOn}
+        partial={!allScopesOn && !noScopesOn}
+        onClick={onToggleAllScopes}
+      />
+
+      {/*
+        Grouped by country, and the group header is itself a toggle. This is the
+        shape the data actually has: "Canadian" is a question people ask, and
+        before this the largest group on screen — 62 federal nodes in one blue —
+        merged Statistics Canada with the Bureau of Labor Statistics.
+      */}
+      {SCOPE_GROUPS.map((group) => {
+        const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
+        if (total === 0) return null
+        const shown = group.scopes.filter((s) => scopeOn(s) && (scopeCounts[s] ?? 0) > 0)
+        const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
+        // Open if clicked open, or if the active filter actually selects
+        // some-but-not-all of this group (a level picked from elsewhere
+        // should never be hidden inside a collapsed header).
+        const filterTouchesGroup =
+          filter.scopes !== null && group.scopes.some((s) => filter.scopes!.includes(s))
+        const isExpanded = manuallyExpanded.has(group.country) || filterTouchesGroup
+        // Only the one group the filter is actually narrowed to gets the
+        // wide-spread treatment — every other group keeps SCOPE_COLOUR, so a
+        // colour never means two different things on screen at once.
+        const focusColours =
+          group.country === focusedGroupCountry ? focusPalette(group.scopes) : null
+        return (
+          <div key={group.country} style={{ marginTop: 7 }}>
+            <div
+              style={{
+                ...row,
+                alignItems: 'center',
+                pointerEvents: 'auto',
+              }}
+            >
+              {/*
+                Two separate click targets sharing one row: the chevron
+                opens/closes the breakdown, everything else toggles the whole
+                group on/off — same as before. Keeping them apart means
+                neither click has to guess what the other one meant.
+              */}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleExpanded(group.country)
+                }}
+                style={{
+                  cursor: 'pointer',
+                  color: '#5e6f8a',
+                  fontSize: 9,
+                  width: 12,
+                  display: 'inline-block',
+                  transform: isExpanded ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 120ms ease',
+                }}
+              >
+                ▶
+              </span>
+              <div
+                onClick={() => onToggleGroup(group.country)}
+                style={{
+                  ...row,
+                  flex: 1,
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  pointerEvents: 'auto',
+                }}
+              >
+                <span
+                  style={{
+                    width: 11,
+                    height: 11,
+                    borderRadius: 3,
+                    display: 'inline-block',
+                    background:
+                      shown.length === present.length
+                        ? rimColourFor(group.country)
+                        : 'transparent',
+                    border: `1px solid ${rimColourFor(group.country)}`,
+                    opacity: shown.length ? 1 : 0.45,
+                  }}
+                />
+                <span
+                  style={{
+                    flex: 1,
+                    color: shown.length ? '#c2cfe4' : '#4d5c74',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {group.label}
+                </span>
+                <span style={{ color: shown.length ? '#5e6f8a' : '#3d4a5e' }}>{total}</span>
+              </div>
+            </div>
+            {isExpanded &&
+              present.map((s) => (
+                <div key={s} style={{ paddingLeft: 26 }}>
+                  <LegendRow
+                    colour={focusColours ? focusColours[s] : SCOPE_COLOUR[s]}
+                    label={SCOPE_LABEL[s]}
+                    count={scopeCounts[s] ?? 0}
+                    on={scopeOn(s)}
+                    onClick={() => onToggleScope(s)}
+                  />
+                </div>
+              ))}
+          </div>
+        )
+      })}
+
+      <DomainPanel
+        counts={domainCounts}
+        selected={filter.domains}
+        onToggle={onToggleDomain}
+      />
+
+      {/*
+        Commercial sources belong in the legend on their own terms: grey is a
+        colour the user will see and needs explained. That the same row is also
+        the scope toggle from the V0.5 decision is a convenience, not a
+        coincidence — both answer "what counts as a source here".
+      */}
+      {commercialCount > 0 && (
+        <div style={{ marginTop: 7 }}>
+          <LegendRow
+            colour={COMMERCIAL_COLOUR}
+            label="Commercial (unranked)"
+            count={commercialCount}
+            on={filter.showCommercial}
+            onClick={onToggleCommercial}
+          />
+        </div>
+      )}
+
+      {filtered && (
+        <div
+          onClick={onClearFilter}
+          style={{
+            fontSize: 11,
+            color: '#6ea8ff',
+            marginTop: 8,
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+            display: 'inline-block',
+          }}
+        >
+          Show everything
+        </div>
+      )}
+
+      <div style={{ fontSize: 11, color: '#4d5c74', marginTop: 14, lineHeight: 1.5 }}>
+        Pulses travel outward from a report to everything built on it, at that
+        report's publication rate. Hover for detail, click to trace a chain,
+        Esc to clear. Drag to orbit, scroll to zoom. Press / to find a report by
+        name.
+      </div>
+
+      {!filter.showCommercial && (
+        <div style={{ fontSize: 10.5, color: '#4d5c74', marginTop: 8, lineHeight: 1.5 }}>
+          Commercial sources hidden. Nothing has moved or changed size — they
+          sit outside the authority calculation, so this view only subtracts.
+        </div>
+      )}
+    </div>
+  )
+}
+
+/** One legend entry, which is also one filter switch. */
+function LegendRow({
+  colour,
+  label,
+  count,
+  on,
+  partial = false,
+  onClick,
+}: {
+  colour: string
+  label: string
+  count: number
+  on: boolean
+  /** Some but not all of what this row stands for is showing. */
+  partial?: boolean
+  onClick: () => void
+}) {
+  return (
+    <div
+      onClick={onClick}
+      // The panel as a whole is pointer-transparent so it never eats an orbit
+      // drag. Only the rows that do something take the pointer back.
+      style={{ ...row, alignItems: 'center', cursor: 'pointer', pointerEvents: 'auto' }}
+    >
+      <span
+        style={{
+          width: 12,
+          height: 12,
+          borderRadius: 12,
+          display: 'inline-block',
+          // Hollow when off. A greyed-out dot would collide with the grey that
+          // already means "commercial". Half-filled for a partial selection,
+          // which is the one state a checkbox cannot honestly show.
+          background: on ? colour : 'transparent',
+          borderLeft: partial ? `5px solid ${colour}` : undefined,
+          border: partial ? undefined : `1.5px solid ${colour}`,
+          boxShadow: partial ? `inset 4px 0 0 ${colour}` : undefined,
+          opacity: on || partial ? 1 : 0.45,
+        }}
+      />
+      <span style={{ flex: 1, color: on || partial ? '#a8b7cd' : '#4d5c74' }}>
+        {label}
+      </span>
+      <span style={{ color: on || partial ? '#5e6f8a' : '#3d4a5e' }}>{count}</span>
+    </div>
+  )
+}
+
+/**
+ * What each kind of terminus means, in the reader's terms rather than the
+ * model's. See TerminalReason in types.ts for the argument and the examples.
+ */
+const TERMINUS_NOTE: Record<TerminalReason, string> = {
+  unpublishable:
+    'Named as an input by a document, and not a publication — an administrative form or record, with no release and no cadence to point at.',
+  unidentified:
+    'The document names a slot rather than a source: something outside it decides what fills this, so there is no stable publication behind it.',
+  redistributed:
+    'Reached through an intermediary that republishes other people’s data on no cadence of its own.',
+  confidential:
+    'Collected and deliberately never released. It is named, it is real, and there is no public document behind it.',
+}
+
+// See ViewControls: PanelShell owns position and width.
+const panel: React.CSSProperties = {
+  padding: '16px 18px',
+  background: 'rgba(10, 14, 24, 0.72)',
+  border: '1px solid rgba(90, 115, 160, 0.22)',
+  borderRadius: 10,
+  backdropFilter: 'blur(8px)',
+  pointerEvents: 'none',
+}
+
+const selectionBlock: React.CSSProperties = {
+  marginTop: 14,
+  paddingTop: 12,
+  paddingBottom: 2,
+  borderTop: '1px solid rgba(90, 115, 160, 0.18)',
+}
+
+const tooltip: React.CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: 300,
+  padding: '14px 16px',
+  background: 'rgba(8, 12, 21, 0.93)',
+  border: '1px solid rgba(90, 115, 160, 0.3)',
+  borderRadius: 10,
+  backdropFilter: 'blur(10px)',
+  pointerEvents: 'none',
+  transition: 'opacity 120ms ease',
+  willChange: 'transform',
+  // Above the search panel, which sits at 20. Clamping the card into the
+  // viewport put its top edge at y=18 on tall cards, directly underneath the
+  // search box — so the fix for "cut off at the top" produced "hidden behind the
+  // search box", which the screenshot caught and the arithmetic could not.
+  //
+  // Raising it above the search panel is safe rather than merely convenient: the
+  // card is only visible while the pointer is over a node on the canvas, and the
+  // pointer cannot be there and in the search field at the same time.
+  zIndex: 30,
+  // A card taller than the window cannot be clamped into it. Scope groups
+  // collapse by default now (see Hud's `manuallyExpanded`), so this is a
+  // safety net rather than the primary fix — but it used to clip silently
+  // (`overflow: hidden`) whenever content ran past the window, which is worse
+  // than a scrollbar: a clipped row isn't just off-screen, it's unreachable.
+  // The card is still built title-first so the header survives regardless.
+  maxHeight: 'calc(100vh - 36px)',
+  overflowY: 'auto',
+  overflowX: 'hidden',
+}
+
+const section: React.CSSProperties = {
+  fontSize: 10,
+  letterSpacing: '0.09em',
+  textTransform: 'uppercase',
+  color: '#556785',
+  marginBottom: 6,
+}
+
+const row: React.CSSProperties = {
+  display: 'flex',
+  gap: 8,
+  fontSize: 12,
+  lineHeight: 1.7,
+}
+
+const statRow: React.CSSProperties = {
+  display: 'flex',
+  gap: 22,
+  marginTop: 12,
+  paddingTop: 10,
+  borderTop: '1px solid rgba(90, 115, 160, 0.18)',
+}
