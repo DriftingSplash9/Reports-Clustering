@@ -13,8 +13,33 @@
       "region": "Spain",
       "description": "Spanish national accounts, compiled under the SEC-2010 (ESA 2010) standard adopted by Regulation (EU) No 549/2013.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-25",
+            "to": "2026-09-25",
+            "precision": "day",
+            "covers": "Quarterly National Accounts of Spain – Q2 2026, complete/final figures"
+          },
+          {
+            "from": "2026-10-30",
+            "to": "2026-10-30",
+            "precision": "day",
+            "covers": "Quarterly National Accounts of Spain – Q3 2026 preview (advance estimate)"
+          },
+          {
+            "from": "2026-12-23",
+            "to": "2026-12-23",
+            "precision": "day",
+            "covers": "Quarterly National Accounts of Spain – Q3 2026, complete/final figures"
+          }
+        ],
+        "source_url": "https://www.ine.es/dynt3/Calendario/en/calenHTML.htm",
+        "note": "INE's official advance-release calendar (dynt3/Calendario) lists dated releases for the statistical operation 'Quarterly Spanish National Accounts' (cid=1254736164439), which is the operation actually matching this report's releases_per_year=4 (quarterly) periodicity — the corpus's current url field (oper=344) instead points to the metadata page for 'Annual National Accounts of Spain: main aggregates', a related but distinct annual operation with a different (preliminary/provisional/final over 3 years) publication pattern. For the Quarterly National Accounts, INE actually publishes each quarter's GDP figures twice — an 'Avance'/Preview about one month after quarter-end, then complete/final figures about three months after quarter-end — so the full calendar shows 8 dated releases per year (2 per quarter), not 4. Confirmed dates for 2026 pulled directly from the calendar page: Jan 30 (Avance Q4/2025), Mar 26 (Q4/2025 final), Apr 30 (Preview Q1/2026), Jun 25 (Q1/2026 final), Jul 30 (Preview Q2/2026, matches the actual Jul 30 2026 press release found), Sep 25 (Q2/2026 final), Oct 30 (Preview Q3/2026), Dec 23 (Q3/2026 final)."
+      },
       "last_updated": null,
-      "url": "https://www.ine.es/dynt3/metadatos/en/RespuestaPrint.htm?oper=344",
+      "url": "https://www.ine.es/dyngs/INEbase/en/operacion.htm?c=Estadistica_C&cid=1254736164439&menu=ultiDatos&idp=1254735576581",
       "domains": [
         "national-accounts"
       ]
@@ -89,8 +114,27 @@
       "region": "Estonia",
       "description": "Estonian national accounts compiled according to the concepts, definitions, classifications and accounting rules of ESA 2010.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-31",
+            "to": "2026-08-31",
+            "precision": "day",
+            "covers": "National accounts (ESA 2010), 2nd quarter 2026 (GDP by production/income/expenditure approach, main national accounts indicators, auxiliary indicators)"
+          },
+          {
+            "from": "2026-11-30",
+            "to": "2026-11-30",
+            "precision": "day",
+            "covers": "National accounts (ESA 2010), 3rd quarter 2026"
+          }
+        ],
+        "source_url": "https://www.stat.ee/en/calendar",
+        "note": "Statistics Estonia publishes detailed quarterly National accounts (ESA 2010) data roughly 60 days after quarter-end, confirmed via the publisher's own filterable release calendar (theme = 'National accounts') at stat.ee for the whole of 2026: 2026-03-02 (Q4 2025), 2026-05-29 (Q1 2026), 2026-08-31 (Q2 2026), 2026-11-30 (Q3 2026) — 4 releases/year, consistent with releases_per_year=4 on file. This is distinct from the earlier 'GDP flash estimate (ESA 2010)' releases (e.g. 2026-07-30 for Q2 2026), which are a separate, faster preliminary product on the same calendar. A revision release for 2022-2025 data was also scheduled for 2026-08-14 (3 days from today), but that is a revision of historical data rather than the next new-period release."
+      },
       "last_updated": null,
-      "url": "https://dsbb.imf.org/sdds/dqaf-base/country/EST/category/NAG00",
+      "url": "https://www.stat.ee/en/calendar",
       "domains": [
         "national-accounts"
       ]
@@ -133,9 +177,44 @@
       "jurisdiction_level": "federal",
       "region": "Switzerland",
       "description": "Swiss national accounts, bound to ESA 2010 not through the EEA Agreement but through a bilateral Statistics Agreement (Bilateral II) with the EU — a structurally different but comparably binding obligation.",
-      "releases_per_year": 4,
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-08-24",
+            "to": "2023-08-24",
+            "precision": "day",
+            "covers": "Annual national accounts (VGR/ESVG 2010) for reference year 2022",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-08-27",
+            "to": "2024-08-27",
+            "precision": "day",
+            "covers": "Annual national accounts (VGR/ESVG 2010) for reference year 2023",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-09-29",
+            "to": "2025-09-29",
+            "precision": "day",
+            "covers": "Annual national accounts (VGR/ESVG 2010) for reference year 2024",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "Annual national accounts (VGR/ESVG 2010) for reference year 2025 (projected, based on Aug-Sep pattern of prior 3 years)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.bfs.admin.ch/bfs/de/home/statistiken/volkswirtschaft/volkswirtschaftliche-gesamtrechnung.html",
+        "note": "BFS publishes a single comprehensive annual national accounts release each year (press release 'Volkswirtschaftliche Gesamtrechnung der Schweiz im Jahr X', covering GDP by three approaches, sector accounts, government accounts, ESA2010/ESVG2010 framework), roughly 8-14 months after the reference year ends. No published release calendar or stated rule was found on bfs.admin.ch giving an exact date; the August-September timing is inferred from three consecutive years of actual releases (24 Aug 2023 for 2022 data, 27 Aug 2024 for 2023 data, 29 Sep 2025 for 2024 data - the last one delayed, likely due to a methodology/benchmark revision reported in Swiss media). Note: quarterly GDP estimates for Switzerland are produced by SECO (Staatssekretariat für Wirtschaft), not BFS - SECO's 'Bruttoinlandprodukt - Quartalsschätzung' is a separate, distinct product from this BFS annual national accounts report. The corpus's releases_per_year=4 for this specific BFS report does not match what was found; see existing_field_correction."
+      },
       "last_updated": null,
-      "url": "https://www.bfs.admin.ch/bfs/de/home/statistiken/volkswirtschaft.html",
+      "url": "https://www.bfs.admin.ch/bfs/de/home/statistiken/volkswirtschaft/volkswirtschaftliche-gesamtrechnung.html",
       "domains": [
         "national-accounts"
       ]

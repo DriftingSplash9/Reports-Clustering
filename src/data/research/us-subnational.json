@@ -259,6 +259,12 @@
       "region": "United States",
       "description": "Annual allocations to states and local educational agencies under the four Title I-A formulas of the Elementary and Secondary Education Act — Basic, Concentration, Targeted, and Education Finance Incentive Grants. Driven by counts of children aged 5 to 17 in families below the poverty level, for counties and school districts.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www2.ed.gov/about/overview/budget/statetables/index.html",
+        "note": "The corpus URL (www2.ed.gov state tables page, which redirects to www.ed.gov's 'President's Budget State Tables' series) is the correct page — it explicitly covers 'Department of Education programs that allocate funds to States or local educational agencies using statutory formulas,' including Title I, Part A. The page itself states: 'Updates to the State tables are posted as a package... Major updates normally are posted for significant milestones in the appropriations process, such as the President's Budget Request and enactment of an appropriation, and when the Department makes awards under certain formula grant programs -- usually in July and October.' This is a real publisher-stated description, but it gives no fixed/computable date. Checking actual file timestamps across the last three editions confirms the timing is not consistent: the FY2023-2025 edition's files were originally posted around October 2024 (per URL path /sites/ed/files/2024-10/...), the FY2024-2026 edition's files carry a last-modified date of 2025-06-13, and the current FY2025-2027 edition's files carry a last-modified date of 2026-04-02 (verified via HTTP HEAD on https://www.ed.gov/media/document/state-tables-state-fy-2025-fy-2027-113554.xlsx and the companion by-program file). That's roughly one edition per year but posted in three different months (Oct, June, April) with no consistent time-of-year, so it does not meet the bar for 'observed-pattern' (consistent time of year) — classified as irregular. No new (FY2026-2028) edition was found as of 2026-08-11; probing plausible filename/date patterns on ed.gov for a next edition returned nothing."
+      },
       "last_updated": null,
       "url": "https://www2.ed.gov/about/overview/budget/statetables/index.html",
       "domains": [
@@ -277,8 +283,14 @@
       "description": "The Federal Register notice publishing each state's Medicaid DSH allotment — the cap on federal DSH matching — and the Institutions for Mental Diseases DSH limits, determined under §1923(f) of the Social Security Act. Each year's allotment is the prior year's escalated by the change in the CPI-U, with preliminary allotments using an estimated change and final allotments the actual.",
       "releases_per_year": 1,
       "cadence_note": "Nominally annual, published irregularly in practice — the most recent notice covered four fiscal years at once (FY2020 through FY2023).",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.medicaid.gov/medicaid/financial-management/medicaid-disproportionate-share-hospital-dsh-payments",
+        "note": "CMS bundles multiple fiscal years' final and preliminary DSH/IMD-DSH allotment figures into a single Federal Register notice at irregular intervals -- observed notices: 2013-07-26 (FY2012 final/FY2013 preliminary), 2017-11-03 (FY2015 final/FY2017 preliminary), 2019-02-11 (FY2017 final/FY2019 preliminary), 2022-03-16 (FY2018-19 final/FY2020-21 preliminary), 2023-04-14 (FY2020-21 final/FY2022-23 preliminary). Gaps range from ~1 to ~4 years and no notice covering later fiscal years (FY2022+ final or FY2024+ preliminary) could be found as of 2026-08-11, over 3 years since the last notice. Neither the Social Security Act §1923(f) provision nor CMS/Medicaid.gov materials state a fixed publication deadline (e.g., 'by X days before FY start') for these combined notices -- CMS states allotments are calculated 'according to statutory requirements' but the finalization/publication has historically lagged years behind the fiscal year in question, per MACPAC's own analysis of the process. No calendar, stated rule with a computable date, or consistent yearly pattern could be established; this is a genuinely irregular release schedule despite releases_per_year=1 on file."
+      },
       "last_updated": null,
-      "url": "https://www.federalregister.gov/documents/2023/04/14/2023-07927/medicaid-program-final-fy-2020-final-fy-2021-preliminary-fy-2022-and-preliminary-fy-2023",
+      "url": "https://www.medicaid.gov/medicaid/financial-management/medicaid-disproportionate-share-hospital-dsh-payments",
       "domains": [
         "health",
         "fiscal-transfers",
@@ -294,6 +306,13 @@
       "region": "United States",
       "description": "Annual federal allotments of Children's Health Insurance Program funds to states, computed under §2104(m) of the Social Security Act by escalating the prior year's allotment (or the state's prior-year expenditures) by an \"allotment increase factor\" — the product of a per capita health care growth factor and a state child population growth factor.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "rule": "42 CFR 457.609(a)(1): \"the national CHIP allotment and State CHIP allotments will be posted in the Medicaid Budget and Expenditure System/State Children's Health Insurance Program Budget and Expenditure System and at Medicaid.gov ... as soon as practicable after the allotments have been determined for each Federal fiscal year.\"",
+        "source_url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-D/part-457/subpart-F/section-457.609",
+        "note": "There is a governing regulation (42 CFR 457.609) confirming allotments are determined once per federal fiscal year (consistent with the corpus's releases_per_year=1), but the posting timing is only specified as \"as soon as practicable\" -- no fixed date or computable next-occurrence. Historical Federal Register 'Final Allotments to States' notices (FY2000: published May 24, 2000; FY2012: published July 24, 2012; FY2013: published July 26, 2013) show no consistent month across years, and the medicaid.gov/chip/financing page itself has not been updated with a new allotments document since FY2012 final/FY2018 preliminary allotments (PDFs dated 2019 upload, content from Dec 2017). Since CHIP funding has since been extended for years at a time by statute (e.g., through FY2029), CMS does not appear to issue a new dated public allotments release on a predictable annual calendar. Could not find any current (2024-2026) dated allotments notice or calendar to support a computable next date."
+      },
       "last_updated": null,
       "url": "https://www.medicaid.gov/chip/financing/index.html",
       "domains": [
@@ -602,6 +621,21 @@
       "region": "California",
       "description": "The Controller's compiled annual report of the financial transactions of California cities, with companion reports for counties and special districts, built from Financial Transactions Reports each local agency must file under Government Code §53891. Government Code §12463 requires the compilation to \"encompass appropriations limits and the total annual appropriations subject to limitation\" — which makes this the document where every city's Gann limit is recorded. The California analogue of a municipal financial information return.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-31",
+            "precision": "month",
+            "covers": "FY 2025-26 Cities Financial Transactions Report filings (deadline ~7 months after June 30, 2026 fiscal year-end)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "California Government Code Section 53891(a): the officer of each local agency (city) having charge of financial records must furnish to the State Controller a report of all financial transactions of the agency during the preceding fiscal year, \"within seven months after the close of each fiscal year, or within such further time as the Controller may prescribe\" (whichever is later). The Controller compiles these city filings into the Cities Annual Report / Cities Financial Transactions Report dataset published via the ByTheNumbers portal.",
+        "source_url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=53891",
+        "note": "This is the statutory deadline by which individual California cities must submit their financial transactions data to the State Controller's Office; the SCO then compiles/publishes the aggregated Cities Annual Report / Cities Financial Transactions Report and ByTheNumbers database on a rolling basis as filings arrive (no single fixed publication date found). Could not directly access the publisher's own landing page (https://www.sco.ca.gov/ard_locrep_cities.html) or its PDF alert letters, which returned 403/Cloudflare-challenge errors during this research session, so no dated release calendar could be confirmed directly from the publisher; this finding relies on the governing statute plus corroborating secondary references to the same filing deadline."
+      },
       "last_updated": null,
       "url": "https://bythenumbers.sco.ca.gov/",
       "domains": [

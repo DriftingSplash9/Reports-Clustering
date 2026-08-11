@@ -27,9 +27,32 @@
       "region": "Algeria",
       "description": "Algeria's official monthly Consumer Price Index bulletin. VERIFIED DIRECTLY this session via the May 2026 edition (No. 365), cross-checked against 2012 and 2016 editions for stability of wording. 'L'année de base est 2000 et l'année de référence (100 pour les calculs) est 2001... Formule de calcul de l'indice: I m/2001 = Σi (w i / Σi w i)(p m i / p 2001 i)' (a Laspeyres-type weighted arithmetic mean). Classification is 'proche de celle recommandée (par l'ONU) dans le système de comptabilité nationale de 1970' -- explicitly the 1970 UN system of national accounts, not COICOP 2018. All three editions read (2012, 2016, 2026) were searched in full for 'COICOP', 'Manuel'/'FMI', 'SCN 2008', 'Arabe' and 'Maghreb' -- none appear anywhere.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-01",
+            "to": "2026-08-31",
+            "precision": "month",
+            "covers": "June 2026 CPI",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "July 2026 CPI",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.ons.dz/IMG/pdf/CalendrierONS_2025.pdf",
+        "note": "ONS Algeria's own 2025 publication calendar (Calendrier des Publications Année 2025) shows the CPI (IPC) released monthly with roughly a one-month lag: e.g. December 2024 data -> released January 2025; January 2025 -> February 2025; February -> March; March -> April; April -> May; May -> June; June -> July; July -> August; August -> September; September -> October 2025 (all documented rows in that PDF). However, the ONS homepage's latest actual news item (dated 26/7/2026) announces the May 2026 IPC release (matching the corpus's existing IPC_mai2026.pdf), which is a ~2-month lag from the reference month, indicating the cadence has slipped from the nominal 1-month lag seen in the 2025 calendar. No 2026 calendar PDF was found on the site (only 'Calendrier des Publications Année 2025' is linked), so future dates are projected from the most recently observed real cadence (2-month lag) rather than taken from a published 2026 calendar."
+      },
       "last_updated": "2026-05",
       "url": "https://www.ons.dz/IMG/pdf/IPC_mai2026.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "dz-ons-hbs-2000",
@@ -41,7 +64,9 @@
       "description": "The household consumption-expenditure survey ('un sondage auprès d'un échantillon de 12150 ménages réparti sur l'ensemble du territoire National selon 7 strates') whose year-2000 expenditure data underlie the CPI's variety weights, still unchanged as of the May 2026 CPI release -- corroborated by the IMF's own 2025 Article IV assessment ('CPI weights are based on a 2000 household survey and severely outdated, which could lead to errors in the measurement of inflation').",
       "last_updated": "2001",
       "url": "https://www.ons.dz/IMG/pdf/IPC_mai2026.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "dz-cnr-pension-revalorisation",
@@ -55,7 +80,9 @@
       "cadence_note": "An annual ministerial order, typically taking effect May 1.",
       "last_updated": "2026-04",
       "url": "https://algerie-eco.com/2026/04/27/retraites-versement-des-revalorisations-des-pensions-a-partir-de-la-premiere-semaine-de-mai/",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "dz-snmg-decret-15-59",
@@ -67,7 +94,9 @@
       "description": "VERIFIED DIRECTLY this session (Journal Officiel N° 08, hosted via ILO NATLEX). Issued under Article 87 of Loi n° 90-11 du 21 avril 1990, the decree's three articles define only which pay components count toward the SNMG (national guaranteed minimum wage) -- base salary plus certain bonuses, excluding others. Searched in full for 'indice des prix', 'inflation', 'coût de la vie': none appear. Contradicts a private legal-commentary site's claim (unresolved, see _open_questions) that the SNMG is set partly by reference to the CPI.",
       "last_updated": "2015-02",
       "url": "https://natlex.ilo.org/dyn/natlex2/natlex2/files/download/98554/DZA-98554.pdf",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "imf-dza-art4-2025",
@@ -81,7 +110,9 @@
       "cadence_note": "Annual Article IV consultation cycle.",
       "last_updated": "2025-09",
       "url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1dzaea2025001-source-pdf.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     }
   ],
   "dependencies": [

@@ -32,9 +32,25 @@
       "description": "Côte d'Ivoire's national CPI, base 100 = 2023 (rebased from base 2014 per a UEMOA Council of Ministers decision of 20 Dec 2024, in force from the January 2025 publication: \"la publication de janvier 2025 a inaugure la nouvelle serie de l'IHPC base 100 en 2023\"). Classification named directly as \"NOUVELLE NOMENCLATURE COICOP 2018\" -- a change from the prior base-2014 series, which UEMOA's own regional note describes as using \"NCOA-IHPC...derivee de la COICOP\" (a WAEMU-derived nomenclature, not COICOP itself). Covers 969 products across 12,754 observation points. Published by ANStat, successor to the dissolved Institut National de la Statistique (INS) as of a 12 June 2024 Council of Ministers decree.",
       "releases_per_year": 12,
       "cadence_note": "\"Chaque mois, 83 389 relevés de prix sont effectués par les agents enquêteurs de l'ANStat.\"",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-01",
+            "to": "2026-08-31",
+            "precision": "month",
+            "covers": "IHPC for a recent reference month (likely June or July 2026)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.anstat.ci/indicateur-details/b3b17c42d6cb6111334373981ad4be87749c826c6830764a2ae8bb9193ab8fa925f3053847caff4300ae71853a3b114b2c12fbf19ace78aaee5963afbdeb23499CHzhd7M8U6SSTkt-CeQymfLBcoKctL1Y2bd7p9SVwI",
+        "note": "ANStat publishes a dedicated 'IHPC' bulletin page every month (search results turned up dated editions for JANVIER, FEVRIER, MARS, AVRIL, MAI 2025, then JUILLET through DECEMBRE 2025, and JANVIER through AVRIL 2026 -- i.e. essentially every calendar month), confirming a monthly cadence consistent with the 12 releases/year already on file. ANStat also publishes a page titled 'CALENDRIER DE DIFFUSION 2026' (found via search at https://anstat.ci/publication-details/92401cd30bb51353e927401ec7d04b863068d396a83e8839722f6474e732f8397dc40cfda97d8c078470bd61990c8a644e91a7e6a8160e437b20b5115a570547yG0_oIUJguibv8tm2mm7vFkim36vOGnyvT90G08QT_Y and https://www.anstat.ci/publication-details/7a89bca6d03d2ab4e64556063c92e77b4beacd3c2b7768be3993efee4249ae50e16bda7f121c805781875369a93b73f64cfccd54c04c7585662e48a60c44ed3cOA6HI4CvDJlHa49mdgA1c0u92I6siGqfxKS9WAA0ToRCiMLy8BuDYcr27csQcyZ5), which would give exact per-month dates, but WebFetch could not reach anstat.ci in this environment (robots.txt/SSL fetch failures on every attempt), so I could not read its exact dates or confirm the exact day-of-month release pattern or the most recent actual edition (May/June/July 2026 editions were not found via search, though that may just be an indexing gap rather than non-publication). Given the observed ~1-month lag between reference month and publication, the next edition is expected during August 2026, covering June or July 2026 data. Confidence is medium because the monthly cadence is well evidenced but the exact release date could not be verified against the publisher's own calendar page."
+      },
       "last_updated": null,
       "url": "https://www.anstat.ci/assets/publications/files/File_val_indicateur1776176354.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "ci-anstat-ehcvm",
@@ -46,7 +62,9 @@
       "description": "Household living-conditions/expenditure survey supplying the weights for the current (base 100 = 2023) IHPC: \"Les pondérations proviennent de l'Enquête Harmonisée sur les Conditions de Vie des Ménages (EHCVM), édition 2021/2022.\"",
       "last_updated": null,
       "url": "https://www.anstat.ci/assets/publications/files/File_val_indicateur1776176354.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     }
   ],
   "dependencies": [
