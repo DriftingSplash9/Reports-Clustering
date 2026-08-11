@@ -14,8 +14,29 @@
       "description": "The Dutch national government's main unconditional equalization transfer to all Dutch municipalities, distributed under the Financiële-verhoudingswet via a formula (the 'verdeelmodel') set out in the Besluit financiële verhouding 2001 (Bfv 2001). The structural Dutch analog to Ontario's OMPF and Alberta's LGFF — the closest EU parallel this branch has found yet to the Canada branch's own provincial-to-municipal fiscal-transfer nodes.",
       "releases_per_year": 3,
       "cadence_note": "Distributed via three annual circulaires (meicirculaire, septembercirculaire, decembercirculaire), each updating the allocation for the current and future years.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "Septembercirculaire gemeentefonds 2026 (algemene uitkering update)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Decembercirculaire gemeentefonds 2026 (algemene uitkering update)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.rijksoverheid.nl/themas/overheid-en-democratie/financien-gemeenten-en-provincies/gemeentefonds/circulaires-gemeentefonds",
+        "note": "BZK/Financien publish three circulaires per year updating the gemeentefonds algemene uitkering: meicirculaire, septembercirculaire, decembercirculaire. No fixed calendar dates are pre-announced; observed historical dates: meicirculaire 2025-05-28, meicirculaire 2026-05-29; septembercirculaire 2024-09-17, septembercirculaire 2025-09-16; decembercirculaire 2022-12-21, decembercirculaire 2023-12-05, decembercirculaire 2024-12-12, decembercirculaire 2025-12-16. The next two expected editions after the already-published meicirculaire 2026 (2026-05-29) are the septembercirculaire 2026 and decembercirculaire 2026, both projected from this multi-year pattern rather than a published date."
+      },
       "last_updated": null,
-      "url": "https://www.rijksoverheid.nl/documenten/2026/05/29/meicirculaire-gemeentefonds-2026",
+      "url": "https://www.rijksoverheid.nl/themas/overheid-en-democratie/financien-gemeenten-en-provincies/gemeentefonds/circulaires-gemeentefonds",
       "domains": [
         "fiscal-transfers",
         "municipal-finance"
@@ -150,6 +171,56 @@
       "description": "CBS's published, unprocessed compilation of every Dutch municipality's Iv3 financial returns for a reporting year — the direct structural parallel to Alberta's `ab-municipalaffairs-financial-statistical-data`, which is itself compiled from the municipal Financial Information Return (`ab-municipalaffairs-fir`). VERIFIED DIRECTLY: data.overheid.nl dataset page fetched and parsed in full.",
       "releases_per_year": 12,
       "cadence_note": "Dataset's own text: six report types per year (begroting + four kwartalen + jaarrekening), each published twice — a first placement ~10 days after the submission deadline and a second ~70 days after, to allow corrected resubmissions.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-22",
+            "to": "2026-09-22",
+            "precision": "day",
+            "covers": "Jaarrekening 2025 data - second (corrected) release, 70 days after the 14 July 2026 deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-09",
+            "to": "2026-10-09",
+            "precision": "day",
+            "covers": "Q2 2026 data - second (corrected) release, 70 days after the 31 July 2026 deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-10",
+            "to": "2026-11-10",
+            "precision": "day",
+            "covers": "Q3 2026 data - first release, 10 days after the 31 October 2026 deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-24",
+            "to": "2026-11-24",
+            "precision": "day",
+            "covers": "Begroting 2027 data - first release, 10 days after the 14 November 2026 deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-09",
+            "to": "2027-01-09",
+            "precision": "day",
+            "covers": "Q3 2026 data - second (corrected) release, 70 days after the 31 October 2026 deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-23",
+            "to": "2027-01-23",
+            "precision": "day",
+            "covers": "Begroting 2027 data - second (corrected) release, 70 days after the 14 November 2026 deadline",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Iv3 submission deadlines by report type: begroting - 14 November of the year before the budget year; Q1-Q3 data - one month after the quarter ends; Q4 data - 14 February of the following year; jaarrekening (annual accounts) - 14 July of the following year. Each report type is then published by CBS twice: a first release ~10 days after the submission deadline, and a second release ~70 days after the deadline (both shifted to the next working day if they fall on a weekend/holiday), to allow for corrected resubmissions.",
+        "source_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data",
+        "note": "Dates are computed from CBS's own stated submission-deadline rule plus its fixed +10/+70 day publication offsets (per data.overheid.nl dataset description); exact dates may shift by a day or two for weekend/holiday adjustments CBS applies. This confirms the existing cadence_note/releases_per_year=12 on file (6 report types x 2 releases each per year) rather than contradicting it."
+      },
       "last_updated": null,
       "url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data",
       "domains": [
@@ -260,6 +331,34 @@
       "region": "Nijmegen, Netherlands",
       "description": "Nijmegen's own annual OZB (property tax) ordinance — chosen as the exemplar Dutch municipality the way Grande Prairie is the exemplar Alberta municipality in this corpus. By statute it must name the WOZ-determined value as its own tax base ('heffingsmaatstaf'), the same structural role Grande Prairie's tax rate bylaw plays for its assessment roll.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2024-12-18",
+            "to": "2024-12-18",
+            "precision": "day",
+            "covers": "OZB ordinance 2025 (CVDR731606), adopted by Nijmegen city council 18 Dec 2024, effective 1 Jan 2025",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-12-17",
+            "to": "2025-12-17",
+            "precision": "day",
+            "covers": "OZB ordinance 2026 (CVDR752073), adopted by Nijmegen city council 17 Dec 2025, effective 1 Jan 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Projected OZB ordinance 2027, expected adoption by Nijmegen city council mid-December 2026 (following the observed pattern), effective 1 Jan 2027",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://lokaleregelgeving.overheid.nl/CVDR752073/1",
+        "note": "No statute fixes an exact date; the municipal council adopts a new OZB ordinance annually in mid-December as part of the budget/tax-rate cycle, replacing the prior year's ordinance and taking effect 1 January of the following year. Confirmed for 2025 (adopted 18 Dec 2024) and 2026 (adopted 17 Dec 2025). Next edition (2027) expected mid-December 2026 with a similarly numbered CVDR identifier."
+      },
       "last_updated": null,
       "url": "https://lokaleregelgeving.overheid.nl/CVDR752073/1",
       "domains": [
@@ -341,8 +440,29 @@
       "region": "Noord-Brabant, Netherlands",
       "description": "Provincie Noord-Brabant's own annual budget — the Dutch provincial counterpart to Alberta's `ab-tbf-fiscal-plan`, completing the Provinciefonds chain the way `gp-budget` completes Alberta's municipal chain. VERIFIED DIRECTLY this session (2026-08-09): the 2024 edition's own budget table lists 'Uitkering provinciefonds' at €372,166 thousand and states 'De raming van de algemene uitkering is gebaseerd op de meicirculaire 2023.' (a more precise re-quotation of a fact a subagent had earlier reported with slightly different, unverified wording — see Corrections.)",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-10-02",
+            "to": "2025-10-02",
+            "precision": "day",
+            "covers": "Begroting 2026 presented to Provinciale Staten (adopted Nov 7 & 14, 2025)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "Begroting 2027 (expected presentation, following the same annual autumn pattern)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.brabant.nl/actueel/nieuws/toekomstgerichte-begroting-2026/",
+        "note": "Provincie Noord-Brabant publishes its annual budget (begroting) each year via begroting.brabant.nl. Observed pattern: the Begroting 2026 was presented on 2025-10-02 and discussed/adopted by Provinciale Staten on 2025-11-07 and 2025-11-14 (per brabant.nl news article and PS agenda). This is consistent with the general Dutch provincial budget cycle (Provinciewet ch. XIII), where GS submits the begroting in autumn and PS adopts it in November, ahead of the fiscal year it covers. No published multi-year release calendar was found, so exact Begroting 2027 dates are projected from this one-year observed instance, not read off a calendar."
+      },
       "last_updated": null,
-      "url": "https://begroting.brabant.nl/begroting-2024/programma/algemeen-financieel-beleid",
+      "url": "https://www.brabant.nl/bestuur/begroting-verantwoording/",
       "domains": [
         "fiscal-transfers",
         "municipal-finance"
@@ -357,8 +477,23 @@
       "region": "Waalwijk, Netherlands",
       "description": "Gemeente Waalwijk's own annual financial statement — the exemplar municipality's jaarrekening, corroborating the BBV's binding force on Dutch municipal accounting already documented from `nl-cbs-iv3-gemeenten`. VERIFIED DIRECTLY this session (2026-08-09): the 2021 edition states 'De jaarrekening is opgemaakt met inachtneming van de voorschriften die het Besluit begroting en verantwoording provincies en gemeenten daarvoor geeft.'",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-07-15",
+            "to": "2027-07-15",
+            "precision": "day",
+            "covers": "Jaarrekening 2026 (fiscal year 2026, to be adopted by the council)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Op grond van artikel 197 Gemeentewet stelt de gemeenteraad de jaarrekening (jaarstukken) jaarlijks vóór 15 juli van het jaar volgend op het begrotingsjaar vast.",
+        "source_url": "https://waalwijk.begrotingsapp.nl/jaarstukken-2025/programma/inleiding",
+        "note": "Statutory deadline is 'vóór 15 juli' (before 15 July) of the year following the fiscal year, per Gemeentewet art. 197. Waalwijk has consistently met this: Jaarrekening 2024 was adopted 3 July 2025, and Jaarrekening/Jaarstukken 2025 was adopted 25 June 2026 (both confirmed on the publisher's site). Since the 2025 accounts are already adopted as of today (2026-08-11), the next cycle is the 2026 fiscal year accounts, due before 2027-07-15."
+      },
       "last_updated": null,
-      "url": "https://waalwijk.begrotingsapp.nl/jaarrekening-2021/programma/grondslagen-voor-waardering-en-resultaatbepaling",
+      "url": "https://waalwijk.begrotingsapp.nl/",
       "domains": [
         "municipal-finance"
       ]

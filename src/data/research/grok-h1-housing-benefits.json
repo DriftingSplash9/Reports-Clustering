@@ -61,6 +61,21 @@
       "description": "The benefit schedule for Manitoba Rent Assist, the province's portable rent supplement. For non-EIA recipients the benefit is the difference between 80% of Median Market Rent (by household size) and 30% of net household income; Median Market Rent is established by the Canada Mortgage and Housing Corporation. Rates are republished as the MMR benchmark is updated.",
       "releases_per_year": 1,
       "cadence_note": "Benefit tables are refreshed as the CMHC-based Median Market Rent benchmark is updated, normally annually in July.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-07-01",
+            "to": "2027-07-31",
+            "precision": "month",
+            "covers": "Annual Rent Assist benefit rate update (contingent on a rise in the CMHC Median Market Rent benchmark)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Each July, Rent Assist benefits will go up if there has been an increase in the median market rent.",
+        "source_url": "https://www.gov.mb.ca/fs/eia/rentassist_facts.html",
+        "note": "The Manitoba Families Rent Assist fact sheet states benefit tables are reviewed each July and increased only if median market rent has risen, so an update is not guaranteed every year but the review point is annual in July. The most recent July (2026) cycle has already passed as of the reference date (2026-08-11), so the next stated-rule occurrence is July 2027. No dated release calendar was found on the program page, fact sheet, or EIA manual chapter 19 (shelter/utilities/fuel) beyond this general July rule."
+      },
       "last_updated": null,
       "url": "https://www.gov.mb.ca/fs/eia/rent_assist.html",
       "domains": [
@@ -77,6 +92,12 @@
       "description": "The portable rent supplement cost-shared under the National Housing Strategy. Since the August 2024 redesign the benefit equals the applicant's actual rent, capped at the average monthly rent for the area, minus 30% of total household income; eligibility requires spending 40% or more of household income on rent. The province implements CMHC's household income levels and average market rents for determining eligibility and supports.",
       "releases_per_year": 1,
       "cadence_note": "Program parameters are updated as CMHC's annual household income levels and average market rents are adopted; the current formula dates from the August 2024 program change.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://nspha.ca/applicants/eligibility",
+        "note": "No published release calendar and no fixed-date rule. NSPHA's eligibility page states \"Household Income Limits are established and updated annually by the Canada Mortgage and Housing Corporation,\" but the table on that page is still marked \"*Effective September 1, 2024\" as of August 2026 (nearly two years later) — i.e., the province has not mechanically re-adopted CMHC's figures on a fixed annual date. In practice, the program's rates/eligibility parameters have changed at irregular, policy-driven intervals (e.g., the August 2024 overhaul described in the province's news release, plus earlier ad hoc formula/eligibility changes in 2023 reported by CBC), not on a predictable calendar. This matches the existing cadence_note's framing (parameters updated \"as CMHC's annual household income levels and average market rents are adopted\") but there is no evidence of an actual fixed adoption date, so no computable next occurrence can be given."
+      },
       "last_updated": null,
       "url": "https://www.novascotia.ca/programs-and-services/canada-nova-scotia-targeted-housing-benefit",
       "domains": [

@@ -27,9 +27,26 @@
       "region": "Morocco",
       "description": "Morocco's official monthly Consumer Price Index. VERIFIED DIRECTLY this session via HCP's own methodological note. 'Le premier IPC basé sur la nouvelle référence 100 : 2017 a été publié le 27 avril de l'année 2020.' Formula: 'une formule de Laspeyres en chaîne combinée à une moyenne géométrique pour le premier niveau d'agrégation.' Classification: 'classifiés selon la nomenclature COICOP' (version unstated -- see _open_questions). Missing-price imputation: 'la méthode d'imputation est appliquée conformément au manuel du FMI, sauf pour les produits dont les prix sont fixés par l'État... où la méthode du report est utilisée.' Release calendar: 'conformément au calendrier établi selon les normes spéciales de diffusion des données (NSDD)' -- the French name for the IMF's SDDS.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-22",
+            "to": "2026-08-22",
+            "precision": "day",
+            "covers": "July 2026 CPI (IPC)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Per HCP's official Calendrier des publications (embedded Google Sheets calendar), the Indice des Prix à la Consommation (IPC) is published Mensuelle (monthly), with reference release day of the 20th, 21st, or 22nd of the month following the reference period (\"Référence: 20, 21 ou 22\").",
+        "source_url": "https://www.hcp.ma/Calendrier-des-publications_r630.html",
+        "note": "The stated rule gives a range (20th-22nd) rather than one fixed day; actual 2026 editions were consistently released on the 22nd of the following month (April 2026 data released 22/04/2026, May 2026 data released 22/05/2026, June 2026 data released 22/07/2026), so 2026-08-22 (for July 2026 data) is used as the computed next date. Source calendar: https://www.hcp.ma/Calendrier-des-publications_r630.html"
+      },
       "last_updated": "2026-06",
-      "url": "https://www.hcp.ma/Note-methodologique-sur-l-Indice-des-Prix-a-la-Consommation-Base-100-2017_a4094.html",
-      "domains": ["inflation"]
+      "url": "https://www.hcp.ma/Indices-des-prix-a-la-consommation-IPC_r348.html",
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "ma-hcp-enq-depenses-menages-2013-2014",
@@ -41,7 +58,9 @@
       "description": "The national household expenditure and consumption survey named by HCP as 'la principale source' of the CPI's expenditure weights, supplemented for the rent group by the 2014 General Population and Housing Census and for pharmaceuticals by 2016 drug-expenditure data.",
       "last_updated": "2014",
       "url": "https://www.hcp.ma/attachment/2737121/",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "ma-cmr-loi-011-71",
@@ -53,7 +72,9 @@
       "description": "VERIFIED DIRECTLY this session (consolidated text hosted by the Trésorerie Générale du Royaume). Article 44 bis, inserted by Loi n° 06-89: 'Les pensions de retraite et les pensions d'ayants cause concédées au titre de la présente loi sont majorées de toute augmentation affectant le traitement de base afférent aux grade, échelle et échelon ou classe effectivement détenus à la date de radiation des cadres.' A real, mandatory ('sont majorées') indexation mechanism -- but tied to the civil-service base-salary scale, not to CPI or inflation.",
       "last_updated": "1989",
       "url": "https://www.tgr.gov.ma/wps/wcm/connect/f73b8a13-b0ea-448c-9fa0-483487fd6713/011.71+francais+actualis%C3%A9.pdf",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "ma-cnss-dahir-1-72-184",
@@ -65,7 +86,9 @@
       "description": "VERIFIED DIRECTLY this session. Founding statute of Morocco's private-sector social security fund. Article 68: 'Lorsque l'écart entre le niveau des salaires sur la base desquels ont été liquidées les pensions d'invalidité, de vieillesse et de survivants et le niveau des salaires en cours le justifie, ces pensions peuvent être revalorisées par décret pris sur proposition du ministre chargé du travail.' A real but discretionary ('peuvent être') mechanism, triggered by a wage-level gap, not a price index.",
       "last_updated": "1972",
       "url": "https://rabat.eregulations.org/media/Dahir%20portant%20loi%20n%C2%B0%201-72-184%20relatif%20au%20r%C3%A9gime%20de%20s%C3%A9curit%C3%A9%20sociale.doc",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "ma-loi-cadre-09-21",
@@ -77,7 +100,9 @@
       "description": "VERIFIED DIRECTLY this session -- full text (Articles 1-19) read via Bulletin Officiel n° 7132 du 6 octobre 2022. Morocco's 2021 framework law for generalizing social protection (AMO, family allocations, pension coverage, unemployment benefit) over a five-year rollout. Uses the aspirational phrase 'soutenir le pouvoir d'achat des familles' twice (Préambule; Article 4, on the flat-rate family allocations) but specifies no indexation formula, trigger, or review cycle anywhere in the law.",
       "last_updated": "2021-03",
       "url": "https://faolex.fao.org/docs/pdf/mor225131.pdf",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "ma-asd-loi-58-23",
@@ -89,7 +114,9 @@
       "description": "Statute establishing Morocco's direct cash-support programme (Aide Sociale Directe). Primary text available on ANSS's own site only as a non-OCR'd Arabic scan -- could not be read this session (see _open_questions). Official secondary sources (ANSS's own announcements; the government portal maroc.ma) describe recent benefit increases as driven by 'la mise en œuvre progressive du Chantier Royal' and 'la soutenabilité budgétaire du régime', not by inflation or CPI, but this is not a verified reading of the statute itself.",
       "last_updated": "2023",
       "url": "https://www.anss.gov.ma/sites/default/files/decrets/Loi_n58.23_AR.pdf",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     }
   ],
   "dependencies": [

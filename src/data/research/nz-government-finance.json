@@ -14,6 +14,20 @@
       "description": "The audited annual financial statements of the whole New Zealand government reporting entity, presented to Parliament as paper B.11. New Zealand's analog of Canada's Public Accounts. Prepared under the Public Finance Act 1989 and NZ GAAP as defined in the Financial Reporting Act 2013, on Public Sector PBE Accounting Standards Tier 1. The Treasury also publishes interim (monthly, year-to-date) financial statements through the year; `releases_per_year` counts the audited year-end set only.",
       "releases_per_year": 1,
       "cadence_note": "One audited year-end set (B.11), plus roughly eleven interim monthly year-to-date sets on the same basis; `releases_per_year` counts the audited set only, since the interim statements are the same document unaudited rather than a separate release.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "Financial Statements of the Government of New Zealand for the Year Ended 30 June 2026",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.treasury.govt.nz/publications/year-end/financial-statements-2025",
+        "note": "No published release calendar or statutory fixed date found on Treasury's site (legislation.govt.nz was inaccessible to confirm any Public Finance Act deadline). However, the audited year-end financial statements (B.11) have consistently been signed/issued in the first half of October each year: 5 Oct 2022 (FY2022), 5 Oct 2023 (FY2023), 10 Oct 2024 (FY2024), 9 Oct 2025 (FY2025). Next edition (FY ended 30 June 2026) is expected around early-to-mid October 2026 based on this pattern."
+      },
       "last_updated": null,
       "url": "https://www.treasury.govt.nz/publications/year-end/financial-statements-2025",
       "domains": [
@@ -82,6 +96,20 @@
       "region": "New Zealand",
       "description": "Stats NZ's annual consolidation of central and local government financial activity on the IMF's GFS framework — the direct counterpart of Australia's `au-abs-gfs`. Its own DataInfo+ metadata sets out a two-source split that is unusually explicit for this corpus: central government from the Treasury's CFISnet database, local government from the annual Local Authority Census supplemented by individual councils' annual reports.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-11-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "Year ended June 2026",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.stats.govt.nz/information-releases/government-finance-statistics-general-government-year-ended-june-2025/",
+        "note": "Stats NZ publishes this annual report each November covering the fiscal year ended the preceding June. The Year ended June 2025 edition was released 27 November 2025 and explicitly stated: \"Government finance statistics (general government): Year ended June 2026 will be released in November 2026.\" No exact day was given, only the month."
+      },
       "last_updated": null,
       "url": "https://www.stats.govt.nz/information-releases/government-finance-statistics-general-government-year-ended-june-2025/",
       "domains": [
@@ -259,8 +287,23 @@
       "region": "Wellington, New Zealand",
       "description": "This slice's exemplar council annual report, Volume 2 (Financial Statements) of the 2024/25 report. Chosen over Auckland and Christchurch on availability grounds: Auckland Council's site returns HTTP 406 and Christchurch's HTTP 403 to every non-browser client tried, while wellington.govt.nz serves the PDF to plain curl. Its Statement of Compliance and its Note 1 together close the New Zealand accounting-standard chain from the council's own side — see the `nz-pbe-ipsas-1` edge, and contrast Brisbane's refusal to name AASB 1049 in `au-government-finance.json`.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-10-31",
+            "to": "2026-10-31",
+            "precision": "day",
+            "covers": "Annual Report 2025/26 (year ended 30 June 2026) statutory adoption deadline",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Under the Local Government Act 2002 (s98(3)), a local authority's annual report must be completed and adopted, by resolution, within 4 months after the end of the financial year to which it relates. Wellington City Council's financial year ends 30 June, so the Annual Report is due by 31 October each year.",
+        "source_url": "https://wellington.govt.nz/your-council/plans-policies-and-bylaws/policies/annual-report",
+        "note": "The 2024/25 Annual Report (year ended 30 June 2025) was adopted by Council on 8 October 2025, within the statutory 4-month window. The next edition (2025/26, year ended 30 June 2026) is due to be completed and adopted by 31 October 2026 under the same statutory rule; the exact council meeting date is not yet published."
+      },
       "last_updated": null,
-      "url": "https://wellington.govt.nz/-/media/your-council/plans-policies-and-bylaws/plans-and-policies/annualreport/2024-25/annual-report-2024-25-volume-2.pdf",
+      "url": "https://wellington.govt.nz/your-council/plans-policies-and-bylaws/policies/annual-report",
       "domains": [
         "municipal-finance"
       ]
@@ -275,6 +318,21 @@
       "description": "Wellington City Council's own published account of how its rates are struck on rating values — the New Zealand counterpart to `au-georges-river-rates`. States that values are determined by Quotable Value on a three-yearly cycle, that the process is governed by the Rating Valuations Act 1998 and audited by the Office of the Valuer-General, and that the council sends building-consent details to QV between revaluations. NOTE: the page writes 'Rating Valuation Act 1998', dropping the 's' from the Act's actual short title 'Rating Valuations Act 1998' — quoted verbatim in the edge basis rather than silently corrected.",
       "releases_per_year": 1,
       "cadence_note": "Rates are set annually; the underlying rating valuation behind them is revised three-yearly (latest effective 1 September 2024, next 2027).",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-09-01",
+            "to": "2027-09-01",
+            "precision": "day",
+            "covers": "Next triennial rating revaluation (effective date inferred from the 3-year cycle and prior 1 September 2024 effective date; exact 2027 date not yet published)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Rating valuations are conducted every 3 years; the current valuation (effective 1 September 2024) 'will be the basis for rates calculations until the next valuation in 2027, regardless of any change in the market.'",
+        "source_url": "https://www.wellington.govt.nz/property-rates-and-building/rates/rates-explained/how-rates-are-calculated/rating-valuations",
+        "note": "Rates themselves are set annually (each 1 July, e.g. current valuations used for rates from 1 July 2025), but the underlying rating valuation that rates are calculated from is only revised triennially. Corpus's releases_per_year=1 with existing cadence_note reflects this annual rates-setting cadence built on the triennial valuation base."
+      },
       "last_updated": null,
       "url": "https://www.wellington.govt.nz/property-rates-and-building/rates/rates-explained/how-rates-are-calculated/rating-valuations",
       "domains": [
@@ -457,8 +515,43 @@
       "region": "New Zealand",
       "description": "The annual report of the joint council-and-Crown-owned agency that raises debt on behalf of New Zealand councils — an institution with no direct Australian, Dutch or UK counterpart in this corpus. Names councils' own statutory planning documents as the material it monitors against its lending covenants. NEGATIVE FINDING recorded here: grep of the full 77-page 2025 report returns 0 hits for 'Statistics New Zealand', 'Stats NZ' and 'census' — LGFA's covenants are defined on accounting aggregates, not on any named statistical release.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-08-28",
+            "to": "2023-08-28",
+            "precision": "day",
+            "covers": "FY23 Annual Report (year ended 30 June 2023)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-08-29",
+            "to": "2024-08-29",
+            "precision": "day",
+            "covers": "FY24 Annual Report (year ended 30 June 2024)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-08-28",
+            "to": "2025-08-28",
+            "precision": "day",
+            "covers": "FY25 Annual Report (year ended 30 June 2025)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-24",
+            "to": "2026-08-31",
+            "precision": "week",
+            "covers": "FY26 Annual Report (year ended 30 June 2026)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.lgfa.co.nz/about-lgfa/news-and-market-announcements/lgfa-full-year-result-and-annual-report-2024",
+        "note": "No published release calendar or stated statutory deadline was found on LGFA's site. However, LGFA has released its 'Full Year Result and Annual Report' via NZX announcement in the last week of August each of the past three years (28 Aug 2023 for FY23, 29 Aug 2024 for FY24, and the FY25 report was 'authorized for issue' 28 Aug 2025), consistently ~8 weeks after its 30 June fiscal year end. The next (FY26) release is projected for late August 2026 based on this pattern; as of today (2026-08-11) it has not yet appeared."
+      },
       "last_updated": null,
-      "url": "https://www.lgfa.co.nz/",
+      "url": "https://www.lgfa.co.nz/investors/annual-reports-and-statement-intent",
       "domains": [
         "municipal-finance",
         "banking"
@@ -491,8 +584,14 @@
       "description": "MBIE's published assessment process for the Tourism Infrastructure Fund, which allocates central-government co-funding to councils for visitor-related infrastructure. The only New Zealand central-government allocation document found this session that names its own territorial-authority-level data inputs by exact title. CADENCE CAVEAT: TIF ran in numbered rounds (Round 7 opened April 2023) rather than on a fixed schedule, and the round cadence is the weakest part of this node's claim to be a recurrent release.",
       "releases_per_year": 1,
       "cadence_note": "Round-based rather than periodic — roughly annual rounds, with the assessment page revised per round.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/closed-tourism-funds/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process",
+        "note": "The Tourism Infrastructure Fund is now closed. MBIE's page states 'This fund is now closed' and it has been moved under MBIE's 'Closed tourism funds' section. The most recent activity was Round 7, which opened 11 April 2023 and closed 8 May 2023 at 5pm, with recipients announced August 2023. MBIE's current tourism funding page lists no further TIF rounds and instead shows newer active programs (e.g. Regional Tourism Boost Round 2/3, Events Boost Fund) as having effectively superseded it. There is no evidence of any planned future round, so no next occurrence can be computed."
+      },
       "last_updated": null,
-      "url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process",
+      "url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/closed-tourism-funds/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process",
       "domains": [
         "fiscal-transfers",
         "municipal-finance"
@@ -565,6 +664,41 @@
       "description": "The Auditor-General's statutory annual report to the House of Representatives, required by section 37 of the Public Audit Act 2001. Minted 2026-08-06 to close the branch's highest-value single gap: the corpus held no node for the New Zealand Auditor-General's own recurring output, which is what blocked the Tokelau half of the export-of-institution finding. The report is where the office states, in its own words and every year, the extent of its mandate, including the two jurisdictions outside New Zealand it serves.",
       "releases_per_year": 1,
       "cadence_note": "Annual and statutory. Public Audit Act 2001 s 37(1): \"As soon as practicable after the end of each financial year, the Auditor-General must prepare and present an annual report to the House of Representatives in accordance with section 43 of the Public Finance Act 1989.\" s 37(2) requires it to include \"an account of the implementation of the annual plan required under section 36\" and \"a list of entities audited by the Auditor-General under an arrangement in accordance with section 19\". The 2024/25 edition is 108 pages.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-09-26",
+            "to": "2023-09-26",
+            "precision": "day",
+            "covers": "2022/23 Annual Report presented to House of Representatives",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-09-30",
+            "to": "2024-09-30",
+            "precision": "day",
+            "covers": "2023/24 Annual Report signed/presented",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-10-14",
+            "to": "2025-10-14",
+            "precision": "day",
+            "covers": "2024/25 Annual Report published",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-15",
+            "to": "2026-10-15",
+            "precision": "month",
+            "covers": "2025/26 Annual Report (projected next edition)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://ao.parliament.nz/2025/annual-report/",
+        "note": "Public Audit Act 2001 s37(1) only requires the report 'as soon as practicable after the end of each financial year' (NZ financial year ends 30 June) — this rule has no fixed/computable date, so it cannot support a stated-rule entry. In practice, actual presentation/publication dates cluster in late September to mid-October each year: 2022/23 report presented to the House 26 Sep 2023; 2023/24 report signed 30 Sep 2024; 2024/25 report published 14 Oct 2025. The 2025/26 report (covering FY ending 30 June 2026) is projected for the same Sep-Oct 2026 window based on this pattern."
+      },
       "last_updated": "2025",
       "url": "https://ao.parliament.nz/2025/annual-report/",
       "domains": [
@@ -649,8 +783,23 @@
       "region": "Auckland, New Zealand",
       "description": "This slice's second exemplar council annual report (NZ/G.4.md priority 2), chosen because it is New Zealand's only unitary 'super city' authority and carries a substantial council-controlled-organisation structure Wellington does not. STRUCTURAL DIFFERENCE FROM WELLINGTON, itself a finding: Auckland's annual report ships in four volumes -- Volume 1 (Overview and Service Performance), Volumes 2.1-2.21 (one per local board), Volume 3 (Financial Statements, the volume this node's edges are drawn from), and Volume 4 (Climate Statement) -- rather than Wellington's single consolidated document. Basis of preparation: \"The financial statements have been prepared: in accordance with New Zealand Generally Accepted Accounting Practice (NZ GAAP), the LGA 2002, the LGACA 2009 and the Local Government (Financial Reporting and Prudence) Regulations 2014 and comply with PBE Accounting Standards.\" \"Auckland Council is a local authority domiciled in New Zealand and governed by the following legislation: Local Government Act 2002 (LGA 2002); Local Government (Auckland Council) Act 2009 (LGACA 2009); and Local Government (Rating) Act 2002.\" \"the council has designated itself and the group as public benefit entities (PBEs) and applies New Zealand Tier 1 PBE Accounting Standards.\"",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-10-31",
+            "to": "2026-10-31",
+            "precision": "day",
+            "covers": "Annual Report 2025/2026 (year ended 30 June 2026), including Volume 3 - Financial Statements",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Section 98(3) of the Local Government Act 2002: each annual report (which contains the audited financial statements, including Volume 3) must be completed and adopted by resolution within four months after the end of the financial year that it relates to. Auckland Council's financial year ends 30 June, so the statutory deadline is 31 October.",
+        "source_url": "https://ao.parliament.nz/2024/local-govt/part-5",
+        "note": "In practice Auckland Council has adopted/published recent Annual Reports somewhat ahead of the statutory deadline: the 2023/2024 report was before the Governing Body around 26 September 2024, and the 2024/2025 report was published/announced around 25 September 2025 (OurAuckland article dated September 2025). The statutory backstop under LGA 2002 s98(3) is 31 October (4 months after the 30 June financial year end); actual adoption has recently occurred in late September."
+      },
       "last_updated": null,
-      "url": "https://www.aucklandcouncil.govt.nz/content/dam/ac/docs/reports/annual24-25/volume-3-financial-statements-2024-2025.pdf",
+      "url": "https://www.aucklandcouncil.govt.nz/en/plans-policies-bylaws-reports-projects/our-annual-reports/current-annual-report.html",
       "domains": [
         "municipal-finance"
       ]
