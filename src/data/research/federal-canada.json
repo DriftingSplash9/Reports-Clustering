@@ -12,7 +12,13 @@
       "jurisdiction_level": "federal",
       "region": "Canada",
       "description": "Annual national household survey collecting detailed information on what Canadian households spend on food, shelter, clothing, transportation and other categories. Its principal downstream use is to supply the expenditure detail used to construct Consumer Price Index basket weights, particularly at low levels of product and geographic aggregation. Results are released as Table 11-10-0222-01 and associated Daily articles.",
-      "releases_per_year": 1,
+      "releases_per_year": 0.5,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "StatCan's own survey metadata (IMDB, SDDS 3508) states the Survey of Household Spending is conducted 'Every 2 years' (reference years 2019, 2021, 2023, 2025, ...), so data collection follows a fixed 2-year cycle. However, there is no published release calendar and the actual publication lag after each reference year has been highly irregular: 2019 reference-year data was released 2021-01-22 (~13 months after year-end), 2021 data was released 2023-10-18 (~22 months after year-end), and 2023 data was released 2025-05-21 (~17 months after year-end) — see The Daily releases dq210122b, dq231018a, and dq250521a. Because both the exact release month and the lag length vary substantially cycle to cycle, no specific next release date can be reliably computed. 2025 reference-year data collection ran through roughly February 2026 per StatCan's respondent portal, so the next release (for 2025 data) is expected at some point in 2026-2027, but no concrete date or calendar entry has been published by StatCan as of 2026-08-11.",
+        "source_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=3508"
+      },
       "last_updated": null,
       "url": "https://www.statcan.gc.ca/en/survey/household/3508",
       "domains": [
@@ -30,6 +36,27 @@
       "description": "The household final consumption expenditure series of the Canadian System of Macroeconomic Accounts, measuring total spending by the household sector on goods and services by detailed product category. Since the 2019 CPI basket update it has been the primary source of Consumer Price Index basket weights, replacing the Survey of Household Spending in that role. Published quarterly with annual benchmarks.",
       "releases_per_year": 4,
       "cadence_note": "Quarterly series with annual benchmark levels; CPI basket updates use the annual national HFCE series for a single calendar reference year.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-28",
+            "to": "2026-08-28",
+            "precision": "day",
+            "covers": "Second quarter 2026 - Gross domestic product, income and expenditure accounts (includes Household final consumption expenditure)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-11-30",
+            "to": "2026-11-30",
+            "precision": "day",
+            "covers": "Third quarter 2026 - Gross domestic product, income and expenditure accounts",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/n1/release-diffusion/2026-eng.pdf",
+        "note": "HFCE (table 36-10-0107-01) is released as part of Statistics Canada's quarterly National Income and Expenditure Accounts / GDP by income and expenditure release (The Daily), published roughly 60 days after each reference quarter ends. Most recent release was May 29, 2026 (Q1 2026); next is Q2 2026 on August 28, 2026 per StatCan's 2026-2027 major economic releases schedule."
+      },
       "part_of": "statcan-national-accounts",
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1901",
@@ -147,6 +174,21 @@
       "region": "Canada",
       "description": "The annual cost-of-living adjustment applied to all Canada Pension Plan benefits in payment - retirement, disability, survivor, children's and death benefits - effective each January. The Pension Index is legislated under the Canada Pension Plan and is computed from the change in the average CPI All-items index between two consecutive 12-month periods ending 31 October. Benefits never decrease: a negative calculation leaves amounts unchanged. The January 2026 increase was 2.0%.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "CPP amounts are adjusted once a year in January. The adjustment percentage is the percentage increase in the average CPI (All-Items) for the 12-month period ending October 31, over the average CPI for the previous 12-month period, as legislated under the Canada Pension Plan.",
+        "entries": [
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-01",
+            "precision": "month",
+            "covers": "Annual CPP benefit indexation (Pension Index) adjustment for 2027",
+            "evidence": "implied"
+          }
+        ],
+        "note": "Publisher's page (canada.ca) states amounts are adjusted once a year in January using 12-month average CPI comparisons ending in October. The January 2026 adjustment (2.0%, based on Nov 2024-Oct 2025 vs prior year) has already occurred as of today (2026-08-11), so next occurrence is January 2027. Exact day within January is not published in advance; precision set to month.",
+        "source_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html"
+      },
       "last_updated": "2025-12-30",
       "url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html",
       "domains": [

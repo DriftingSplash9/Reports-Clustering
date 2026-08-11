@@ -80,6 +80,41 @@
       "description": "The annual census of all city, district and regional councils and their non-market council-controlled organisations, and the Local Authority Financial Statistics (LAFS) compiled from it — the more comprehensive, less timely annual counterpart to QLAS. Stats NZ's own metadata states that LAFS is 'no longer published in the information release format used for 2009-13' and directs users to Infoshare instead, so the release exists as a data update rather than as a titled information release; kept as one node for that reason.",
       "releases_per_year": 1,
       "cadence_note": "Annual, released around May for the June year ending 11 months earlier. Distributed via Infoshare rather than as a titled information release since the 2009-13 series ended.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2024-05-13",
+            "to": "2024-05-13",
+            "precision": "day",
+            "covers": "Year ended June 2023",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-05-26",
+            "to": "2025-05-26",
+            "precision": "day",
+            "covers": "Year ended June 2024",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-05-26",
+            "to": "2026-05-26",
+            "precision": "day",
+            "covers": "Year ended June 2025",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-31",
+            "precision": "month",
+            "covers": "Year ended June 2026",
+            "evidence": "implied"
+          }
+        ],
+        "note": "Stats NZ publishes 'Local authority financial statistics' (formerly 'Local Authority Census') annually. No published forward release calendar entry was found for this specific release, but three consecutive years show a consistent pattern: released in mid-to-late May, covering the local government financial year ended the preceding 30 June (roughly an 11-month lag). Projected next release (Year ended June 2026 data) is therefore expected around May 2027; exact day not yet published.",
+        "source_url": "https://www.stats.govt.nz/information-releases/local-authority-financial-statistics-year-ended-june-2025/"
+      },
       "last_updated": null,
       "url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/9a6701e3-f1d3-4480-b879-5eea7716979b/101",
       "domains": [
@@ -193,6 +228,12 @@
       "description": "The Act creating the Valuer-General (s.3), setting the Valuer-General's standard-setting, monitoring and certification functions (s.4), empowering the Rating Valuations Rules (s.5), requiring each territorial authority to keep a district valuation roll (s.7), requiring three-yearly general revaluation (s.9) and forbidding rates to be assessed on uncertified values (s.11(2)). Structural counterpart of New South Wales' `au-vola1916`, minted on the same convention that a periodically reprinted statute is a node when downstream documents cite it by name.",
       "releases_per_year": 1,
       "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule; version read this session is 'as at 23 December 2023'.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "This corpus entry is the statute text itself (Rating Valuations Act 1998) on legislation.govt.nz. The consolidated 'as at' version is only reprinted when an amending Act or regulation takes effect — there is no periodic publication calendar or stated rule for revising/reprinting the Act's text. The current consolidated version is 'as at 23 December 2023' (last amendment date), and next reprint depends on whenever Parliament next amends it — unpredictable. Note: the Act's own Section 9 ('General revaluation of rolls at 3-yearly intervals') states that territorial authorities must generally revalue rating valuation rolls every 3 years, but that rule governs the underlying property-valuation rolls process (administered locally, staggered by council per QV's rolling revaluation calendar), not the timing of updates to this Act's text — so it isn't a valid stated-rule for this specific report/URL.",
+        "source_url": "https://www.legislation.govt.nz/act/public/1998/0069/latest/whole.html"
+      },
       "last_updated": null,
       "url": "https://www.legislation.govt.nz/act/public/1998/0069/latest/whole.html",
       "domains": [
@@ -245,6 +286,12 @@
       "description": "The presentation standard for Tier 1 and Tier 2 public benefit entities, which is what New Zealand councils report under. Like XRB A1, it names no local authority: grep of its full 54 pages returns 0 hits for 'local authority', 'Local Government Act' and 'Public Audit Act'. The only local-government hook in its text is the word 'ratepayers' in the list of users of general purpose financial reports (para 3), which is not a scope binding. The binding is achieved instead by a statutory chain outside the standard — see the `nz-wellington-annual-report` edge.",
       "releases_per_year": 0.2,
       "cadence_note": "Issued September 2014; version read this session incorporates amendments to 31 January 2022 with further amendments effective 1 January 2026.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.xrb.govt.nz/standards/accounting-standards/public-sector-standards/standards-list/pbe-ipsas-1/",
+        "note": "PBE IPSAS 1 is an accounting standard (not a periodic statistical report). XRB amends it irregularly via omnibus amendment packages as IPSASB updates the underlying international standard or NZ policy changes require it. Original issue November 2014; most recent substantive update is the October 2024 omnibus amendments (compiled to March 2025), effective for periods beginning 1 January 2026, with a prior amendment in May 2023 (audit fee disclosures). The XRB website states no fixed review cycle or forthcoming release date. The releases_per_year=0.2 figure on file (implying a ~5-year cadence) is not supported by any stated rule; amendment timing is genuinely irregular and driven by IPSASB/policy developments, not a fixed schedule."
+      },
       "last_updated": null,
       "url": "https://www.xrb.govt.nz/standards/accounting-standards/public-sector-standards/standards-list/pbe-ipsas-1/",
       "domains": [
@@ -358,6 +405,12 @@
       "description": "The statute that constitutes the Auditor-General, defines 'public entity', and requires the annual plan (s 36) and the annual report (s 37). Minted 2026-08-06 because it was already load-bearing in this corpus without a node: XRB A1 defines 'public sector PBE' by cross-reference to it, Wellington City Council self-classifies under it, and the Tokelau audit mandate turns on it. Schedule 2, 'Specific public entities not falling within any class' (s 5(1)(d)), lists \"Tokelau Administration\" by name. A full-text search of the current consolidation returns one occurrence of 'Tokelau' and zero of 'Niue' — which is the sharpest single piece of evidence for the export-of-institution finding, because it shows New Zealand statute reaching into Tokelau and being silent on Niue, whose Constitution instead reaches out.",
       "releases_per_year": 1,
       "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule. Version read 2026-08-06 is the current consolidation on legislation.govt.nz, which carries amendments through the Taranaki Maunga Collective Redress Act 2025 in Schedule 2.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "This is a piece of primary legislation (Public Audit Act 2001, No 10), not a periodic statistical release. The New Zealand Legislation site republishes it as an updated 'reprint' each time an amending Act or regulation changes its text, e.g. as at 23 December 2023, 30 June 2024, 01 October 2024, 27 October 2024, 27 August 2025, and 01 January 2026. These reprint dates are driven by unpredictable parliamentary amendment activity, not by any calendar or stated periodic-review rule, and show no consistent time-of-year pattern.",
+        "source_url": "https://www.legislation.govt.nz/act/public/2001/0010/latest/versions.aspx"
+      },
       "last_updated": null,
       "url": "https://www.legislation.govt.nz/act/public/2001/0010/latest/whole.html",
       "domains": [
@@ -375,6 +428,12 @@
       "description": "The statute governing the use of Crown financial resources. Minted 2026-08-07 on Thomas's decision (planning/Decisions-2026-08-07.docx, option A: mint on arrival, and the minting session adds every edge it can verify with a direct quote in the same session, no cap, nothing minted on inference), closing a lead three prior sessions had deferred as 'probably the right next statute to mint' (NZ/G.4.md, following the Tokelau/Public Audit Act 2001 work). s 1A(1): \"The purpose of this Act is to consolidate and amend the law governing the use of public financial resources.\" Requires the Treasury to prepare the annual consolidated Financial Statements of the Government (s 27) and the twice-yearly economic and fiscal updates (s 26O). Also supplies the other half of a bidirectional statutory cross-reference with the Public Audit Act 2001: s 2(1), \"Office of Parliament means the Parliamentary Commissioner for the Environment (and that Commissioner's office), the Office of Ombudsmen, and the Auditor-General\" -- naming the Auditor-General as one of only three Offices of Parliament this Act recognises -- and s 2(1) again, \"Auditor-General has the meaning given to it by section 4 of the Public Audit Act 2001.\" Each Act defines a term the other Act's own scope provisions rely on.",
       "releases_per_year": 1,
       "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule. Version read this session (2026-08-07) is 'Latest version as at 01 July 2026', carrying amendments through the Public Finance Amendment Act 2026 (2026 No 9).",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "This is the Public Finance Act 1989 itself (NZ primary legislation), not a periodic statistical report. The legislation.govt.nz page is a consolidated 'reprint' that is updated only when Parliament passes an amending Act into force (currently shown 'as at 13 November 2025'). There is no published release calendar and no statutory rule specifying when the next amendment/update will occur — changes depend entirely on the parliamentary legislative agenda, so the update cadence is genuinely irregular.",
+        "source_url": "https://www.legislation.govt.nz/act/public/1989/0044/latest/whole.html"
+      },
       "last_updated": null,
       "url": "https://www.legislation.govt.nz/act/public/1989/0044/latest/whole.html",
       "domains": [
@@ -454,6 +513,12 @@
       "description": "The general statute governing New Zealand's territorial and regional local authorities -- the statutory floor every council-level node in this slice sits on, cited well over a hundred times inside nz-lgaca-2009 alone. Minted 2026-08-08 on Thomas's ruling (Open-Questions-2026-08-08-sweep.docx Q3, 'mint and follow precedent'), on the same logic as the Public Finance Act 1989 mint (NZ/G.5.md): every edge this session could verify with an already-extracted direct quote, no cap. s 98 requires every local authority to prepare an annual report; Schedule 10 Part 3 sets its required content, including audited financial statements (clause 29) and the district's rating-unit count and total capital and land values (clause 30A). s 111 requires that information under Schedule 10 'be prepared in accordance with generally accepted accounting practice', and s 5 defines that term 'the same meaning as in section 8 of the Financial Reporting Act 2013' -- a chain independently VERIFIED DIRECTLY against a FAOLEX mirror of the PCO reprint in an earlier session, preserved in this file's own _dropped block on the XRB A1 / PBE IPSAS 1 entry. NOT DONE THIS SESSION, flagged rather than assumed complete: a full direct read of the Act's own cross-reference structure (s 5 interpretations, in both directions) parallel to what produced the Public Finance Act 1989's reverse edge into the Public Audit Act 2001 -- legislation.govt.nz's plain-text extractor returns nothing for this site (NZ/G.4.md, reconfirmed this session) and a browser session was not available this turn. This mint rests on quotes already extracted, first-hand, by documents that cite the Act -- not on a fresh read of the Act itself.",
       "releases_per_year": 1,
       "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule, same convention as this slice's other Acts (nz-public-finance-act-1989, nz-public-audit-act-2001, nz-lgaca-2009). Version not re-confirmed this session; the standard 'latest version' URL is used.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "The Local Government Act 2002 is a New Zealand statute maintained on legislation.govt.nz as a consolidated 'as at' version (currently 'as at 15 January 2026'). It is updated only when Parliament passes amendment Acts (e.g. Local Government Act 2002 Amendment Act 2019, Local Government (Electoral Legislation and Māori Wards and Māori Constituencies) Amendment Act 2024) that come into force, which happens on no fixed schedule. There is no published release calendar, no stated periodic-update rule, and no consistent yearly pattern -- amendments are driven by the parliamentary legislative agenda, so this is genuinely irregular rather than a periodic release.",
+        "source_url": "https://www.legislation.govt.nz/act/public/2002/0084/latest/whole.html"
+      },
       "last_updated": null,
       "url": "https://www.legislation.govt.nz/act/public/2002/0084/latest/whole.html",
       "domains": [

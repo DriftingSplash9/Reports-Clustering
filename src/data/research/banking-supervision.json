@@ -13,6 +13,12 @@
       "description": "The consolidated international standard for bank capital, liquidity and risk measurement, maintained by the Basel Committee and published by the BIS. Not law anywhere; adopted into binding national rules by member jurisdictions, which is why national capital guidelines carry Basel paragraph numbers in their margins.",
       "releases_per_year": 1,
       "cadence_note": "Maintained as a living consolidated framework with dated amendments rather than issued editions. Filed as annual for the same reason SNA 2008 is — the enum has no bucket for a standard.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "The Basel Framework is a continuously maintained online consolidated compilation of Basel Committee standards (bis.org/basel_framework/), not a periodic report. It is updated on a rolling basis whenever the Basel Committee finalizes new standards or amendments (e.g., individual chapters carry their own 'Version effective as of' dates, such as the cryptoasset exposures chapter SCO60 effective 1 January 2026). No fixed annual or periodic release calendar or stated rule for the whole document was found; BIS also maintains a 'time traveller' tool showing already-announced future effective dates for specific chapters, but this is not a fixed recurring publication schedule for the framework as a whole.",
+        "source_url": "https://www.bis.org/basel_framework/"
+      },
       "last_updated": null,
       "url": "https://www.bis.org/basel_framework/",
       "domains": [
@@ -29,6 +35,20 @@
       "region": "Canada",
       "description": "The binding capital rules for Canadian banks, federal credit unions, and federally regulated trust and loan companies. Reissued each year across nine chapters covering the definition of capital, credit risk, operational risk, securitization, counterparty risk and market risk. Determines how much capital every Canadian bank must hold against every exposure.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "Final CAR Guideline (2027), effective Nov 1, 2026 / Jan 1, 2027 depending on institution fiscal year-end",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.osfi-bsif.gc.ca/en/news/backgrounder-draft-capital-adequacy-requirements-guideline-2027",
+        "note": "OSFI finalizes a new dated version of the CAR Guideline annually, typically in September, taking effect the following November 1 (institutions with Oct 31 fiscal year-end) or January 1 (institutions with Dec 31 fiscal year-end). CAR Guideline (2026) was finalized Sept 11, 2025; the draft CAR Guideline (2027) consultation closed Feb 18, 2026, and OSFI has stated it plans to publish the final CAR Guideline (2027) in September 2026. The corpus url field pointing to the '2027' draft guideline page is consistent with this pattern; that page currently shows the draft version pending finalization."
+      },
       "last_updated": null,
       "url": "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/capital-adequacy-requirements-car-guideline-2027",
       "domains": [
@@ -45,8 +65,30 @@
       "region": "United States",
       "description": "The quarterly regulatory filing every US commercial bank must submit, giving a full balance sheet and income statement per institution. The authoritative census of American banking against which higher-frequency estimates are benchmarked.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-10-30",
+            "to": "2026-10-30",
+            "precision": "day",
+            "covers": "Call Report for report date September 30, 2026 (Q3 2026), due from institutions without foreign offices",
+            "evidence": "documented"
+          },
+          {
+            "from": "2027-02-01",
+            "to": "2027-02-01",
+            "precision": "day",
+            "covers": "Call Report for report date December 31, 2026 (Q4 2026), due from institutions without foreign offices",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Under the FFIEC/FDIC/OCC/Federal Reserve interagency Call Report instructions, banks without foreign offices (FFIEC 041/051 filers) must submit within 30 calendar days after the report (quarter-end) date; banks with foreign offices (FFIEC 031 filers, more than one foreign office) get 35 calendar days. If the calculated due date falls on a weekend or holiday, the deadline moves to the next business day.",
+        "source_url": "https://www.stlouisfed.org/bank-supervision/financial-regulatory-reporting/submission-deadlines",
+        "note": "Call Reports are filed quarterly for report (as-of) dates March 31, June 30, September 30, and December 31. The Federal Reserve Bank of St. Louis's bank-supervision page lists explicit deadlines through Q3 2026 (confirmed: Dec 31 2025 report due Fri Jan 30 2026 -- verified directly against FDIC's own FIL for Q4 2025 -- and Sept 30 2026 report due Fri Oct 30 2026). The Q4 2026 entry (Dec 31, 2026 report) was not yet listed on any source as of Aug 2026 (FDIC/FFIEC typically publish the FIL for a quarter only after that quarter closes), so I computed it myself: 30 days after Dec 31, 2026 is Jan 30, 2027, which falls on a Saturday, so under the standard weekend-rollover rule the deadline would move to Monday, Feb 1, 2027 -- this specific date is my computation (implied), not yet published by the agencies. The Q2 2026 report (June 30, 2026) was already due July 30, 2026, which is in the past relative to 2026-08-11, so it is omitted."
+      },
       "last_updated": null,
-      "url": "https://www.fdic.gov/resources/bankers/bank-financial-reports/index.html",
+      "url": "https://www.fdic.gov/bank-financial-reports",
       "domains": [
         "banking",
         "financial-regulation"

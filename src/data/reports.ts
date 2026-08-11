@@ -217,8 +217,20 @@ export const reports: Report[] = [
     description:
       'Quarterly adjustment of OAS benefit amounts, set by a statutory formula applied to the Consumer Price Index.',
     releases_per_year: 4,
+    release_schedule: {
+      kind: 'stated-rule',
+      rule: 'Old Age Security payment amounts are reviewed each year in January, April, July and October to ensure they reflect cost of living increases, as measured by the Consumer Price Index (CPI). Payments increase when the cost of living rises but do not decrease if the cost of living falls.',
+      source_url: 'https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/payments.html',
+      note: "The current quarter's rate (July-September 2026) already reflects a 1.2% increase confirmed on canada.ca. The most recent past review (July 2026) is not listed; entries start with the next future review (October 2026).",
+      entries: [
+        { from: '2026-10-01', to: '2026-10-01', precision: 'month', covers: 'October-December 2026 OAS quarterly indexation review', evidence: 'implied' },
+        { from: '2027-01-01', to: '2027-01-01', precision: 'month', covers: 'January-March 2027 OAS quarterly indexation review', evidence: 'implied' },
+        { from: '2027-04-01', to: '2027-04-01', precision: 'month', covers: 'April-June 2027 OAS quarterly indexation review', evidence: 'implied' },
+        { from: '2027-07-01', to: '2027-07-01', precision: 'month', covers: 'July-September 2027 OAS quarterly indexation review', evidence: 'implied' },
+      ],
+    },
     last_updated: null,
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
+    url: 'https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/payments.html',
     domains: ['benefits', 'inflation'],
   },
   {
@@ -245,6 +257,18 @@ export const reports: Report[] = [
     description:
       'Annual determination of CPP disability benefit amounts — a flat-rate portion indexed to the CPI plus an earnings-related portion bounded by the YMPE.',
     releases_per_year: 1,
+    release_schedule: {
+      kind: 'stated-rule',
+      rule:
+        'CPP benefit amounts, including the disability benefit, are adjusted once a year in January, based on the increase in the Consumer Price Index (average CPI for the 12-month period ending October of the current year compared to the same period the prior year). If there is a decrease in the cost of living, benefit amounts do not decrease.',
+      source_url:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html',
+      note:
+        'The January 2026 adjustment (2.0%, based on Nov 2024-Oct 2025 CPI vs Nov 2023-Oct 2024 CPI) has already occurred as of this entry — next adjustment expected January 2027. Canada.ca states the annual-in-January rule rather than publishing a dated calendar.',
+      entries: [
+        { from: '2027-01-01', to: '2027-01-01', precision: 'month', evidence: 'implied', covers: 'Annual CPI-based adjustment to CPP disability benefit amount' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-disability-benefit.html',
     domains: ['benefits'],
@@ -261,6 +285,17 @@ export const reports: Report[] = [
     description:
       'Monthly measure of consumer price change. Supplies detailed price data used well beyond inflation reporting, and CPI-W drives statutory benefit indexation.',
     releases_per_year: 12,
+    release_schedule: {
+      kind: 'published-calendar',
+      source_url: 'https://www.bls.gov/schedule/news_release/cpi.htm',
+      entries: [
+        { from: '2026-08-12', to: '2026-08-12', precision: 'day', covers: 'July 2026 CPI' },
+        { from: '2026-09-11', to: '2026-09-11', precision: 'day', covers: 'August 2026 CPI' },
+        { from: '2026-10-14', to: '2026-10-14', precision: 'day', covers: 'September 2026 CPI' },
+        { from: '2026-11-10', to: '2026-11-10', precision: 'day', covers: 'October 2026 CPI' },
+        { from: '2026-12-10', to: '2026-12-10', precision: 'day', covers: 'November 2026 CPI' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.bls.gov/cpi/',
     domains: ['inflation'],
@@ -275,6 +310,17 @@ export const reports: Report[] = [
     description:
       'Monthly release combining the establishment survey (payroll employment) and the household survey (unemployment rate).',
     releases_per_year: 12,
+    release_schedule: {
+      kind: 'published-calendar',
+      source_url: 'https://www.bls.gov/schedule/news_release/empsit.htm',
+      note: "BLS publishes The Employment Situation monthly at 8:30 AM Eastern, typically on the first Friday of the month (with occasional shifts around holidays); most recent release prior to 2026-08-11 was Aug. 7, 2026 covering July 2026 data.",
+      entries: [
+        { from: '2026-09-04', to: '2026-09-04', precision: 'day', covers: 'August 2026' },
+        { from: '2026-10-02', to: '2026-10-02', precision: 'day', covers: 'September 2026' },
+        { from: '2026-11-06', to: '2026-11-06', precision: 'day', covers: 'October 2026' },
+        { from: '2026-12-04', to: '2026-12-04', precision: 'day', covers: 'November 2026' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.bls.gov/news.release/empsit.toc.htm',
     domains: ['labour'],
@@ -289,6 +335,18 @@ export const reports: Report[] = [
     description:
       'Monthly personal income, spending, and the PCE price index — the inflation measure the Federal Reserve targets.',
     releases_per_year: 12,
+    release_schedule: {
+      kind: 'published-calendar',
+      source_url: 'https://www.bea.gov/news/schedule',
+      note: "All releases at 8:30 AM ET per BEA's published economic release schedule. Confirms the 12-releases-per-year monthly cadence on file.",
+      entries: [
+        { from: '2026-08-26', to: '2026-08-26', precision: 'day', covers: 'July 2026 Personal Income and Outlays (incl. PCE Price Index)' },
+        { from: '2026-09-30', to: '2026-09-30', precision: 'day', covers: 'August 2026 Personal Income and Outlays (incl. PCE Price Index)' },
+        { from: '2026-10-29', to: '2026-10-29', precision: 'day', covers: 'September 2026 Personal Income and Outlays (incl. PCE Price Index)' },
+        { from: '2026-11-25', to: '2026-11-25', precision: 'day', covers: 'October 2026 Personal Income and Outlays (incl. PCE Price Index)' },
+        { from: '2026-12-23', to: '2026-12-23', precision: 'day', covers: 'November 2026 Personal Income and Outlays (incl. PCE Price Index)' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.bea.gov/data/income-saving/personal-income',
     domains: ['inflation', 'national-accounts'],
@@ -305,6 +363,19 @@ export const reports: Report[] = [
     releases_per_year: 4,
     cadence_note:
       'Each quarter is released three times (advance, second, third estimate); modelled here as the quarterly programme.',
+    release_schedule: {
+      kind: 'published-calendar',
+      source_url: 'https://www.bea.gov/news/schedule',
+      note:
+        'Three-stage cycle (advance/second/third), each roughly four weeks apart; the second and third estimates are bundled with Corporate Profits, State GDP, and State Personal Income.',
+      entries: [
+        { from: '2026-08-26', to: '2026-08-26', precision: 'day', covers: 'Q2 2026 second estimate' },
+        { from: '2026-09-30', to: '2026-09-30', precision: 'day', covers: 'Q2 2026 third estimate' },
+        { from: '2026-10-29', to: '2026-10-29', precision: 'day', covers: 'Q3 2026 advance estimate' },
+        { from: '2026-11-25', to: '2026-11-25', precision: 'day', covers: 'Q3 2026 second estimate' },
+        { from: '2026-12-23', to: '2026-12-23', precision: 'day', covers: 'Q3 2026 third estimate' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.bea.gov/data/gdp/gross-domestic-product',
     domains: ['national-accounts'],
@@ -364,6 +435,15 @@ export const reports: Report[] = [
     description:
       'Annual benefit adjustment set by a statutory formula applied to third-quarter CPI-W. A pure derived node with no discretion.',
     releases_per_year: 1,
+    release_schedule: {
+      kind: 'observed-pattern',
+      source_url: 'https://www.ssa.gov/oact/cola/',
+      note:
+        'By statute (Social Security Act §215(i)), the COLA is calculated from average CPI-W for July-Aug-Sept versus the prior year, so it cannot be announced until BLS publishes the September CPI-W figure. No fixed calendar date — recent announcements were Oct 12 2023, Oct 10 2024, and Oct 24 2025, each following that year\'s September CPI-W release. BLS has scheduled the September 2026 CPI report for Oct 14, 2026; SSA is expected to announce the COLA that day or within about two weeks after.',
+      entries: [
+        { from: '2026-10-14', to: '2026-10-24', precision: 'week', evidence: 'implied', covers: '2027 Social Security COLA announcement' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.ssa.gov/oact/cola/',
     domains: ['benefits', 'inflation'],

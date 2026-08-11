@@ -14,6 +14,12 @@
       "description": "The single industry classification used by both Australian and New Zealand official statistics, and the structural twin of `naics` — a classification agreed and maintained jointly by the statistical agencies of more than one country, from which each publishes national statistics. Its Preface is signed by both national statisticians: \"Dennis Trewin / Brian Pink — Australian Statistician / Government Statistician — Australian Bureau of Statistics, Statistics New Zealand\". Catalogue no. 1292.0; hierarchical, four levels (Division, Subdivision, Group, Class), 19 divisions and 86 subdivisions in the 2006 edition. Replaced two separate national classifications, the Australian Standard Industrial Classification (ASIC, 1969/1978/1983) and the New Zealand Standard Industrial Classification (NZSIC, 1970/1975/1987), both of which were themselves derived from ISIC.",
       "releases_per_year": 0.05,
       "cadence_note": "Two editions in thirty-plus years — 1993 and 2006 — with a Revision 1.0 (Feb 2006) and Revision 2.0 (26 June 2013) of the 2006 edition. Next release listed by the ABS as 'Unknown'. Not an annual release; releases_per_year is nominal, and deliberately lower than `naics`'s 0.2 because ANZSIC has no five-year cycle.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "ANZSIC is a joint ABS/Stats NZ industry classification standard revised only as needed, not on a fixed cycle. History: ANZSIC 1993 (original), ANZSIC 2006 Revision 1.0, ANZSIC 2006 Revision 2.0 (released 26 June 2013). The ABS 'latest-release' page itself lists 'Next release: Unknown'. No stated rule or calendar for a future revision was found; the ANZSCO (occupation) classification has an active comprehensive review underway, but that is a separate standard from ANZSIC (industry).",
+        "source_url": "https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-industrial-classification-anzsic/latest-release"
+      },
       "last_updated": null,
       "url": "https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-industrial-classification-anzsic/latest-release",
       "domains": [
@@ -30,6 +36,12 @@
       "description": "The United Nations' industry classification and the acknowledged parent of most national industrial classifications, including ANZSIC and its two predecessors. Its absence from this corpus was a hole of the same shape as the missing `gasb-standards` that the associated-states pass had to fill: `naics` was present with eight inbound edges while the classification NAICS itself is aligned to was not represented at all. Adopted 1948; revisions 1 (1958), 2 (1968), 3 (1990), 3.1 (2002), 4 (2007) and 5 (endorsed 2023, publication forthcoming).",
       "releases_per_year": 0.05,
       "cadence_note": "Six revisions in seventy-five years. Rev. 5 was endorsed by the UN Statistical Commission at its 54th session in 2023 and, as of this session's read of the UNSD page, is 'forthcoming' in published form while being distributed as introduction, explanatory notes and structure files. releases_per_year is nominal.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "ISIC has no publication calendar or fixed revision cycle. Revisions occur irregularly and infrequently (Rev.3: 1989, Rev.3.1: 2002, Rev.4: 2008, Rev.5: endorsed by the UN Statistical Commission at its 54th session in March 2023). National adaptation of Rev.5 is targeted by 2025, business register updates by 2026, and statistical program implementation from 2027, but these are implementation milestones for the already-published Rev.5, not a future release date. The UN Committee of Experts on International Statistical Classifications recommended a five-year revision cycle for ISIC/CPC (raised at the 55th Statistical Commission session, 2024), but as of the 56th session (2025) documents, this had not been formally adopted -- a new Standing Task Team on ISIC and CPC was instead tasked with developing a revision-cycle strategy proposal. No computable next revision date exists yet.",
+        "source_url": "https://unstats.un.org/UNSDWebsite/statcom/session_56/documents/BG-3o-TOR_STT-ISIC-CPC-E.pdf"
+      },
       "last_updated": null,
       "url": "https://unstats.un.org/unsd/classifications/Econ/isic",
       "domains": [
@@ -60,6 +72,20 @@
       "region": "New Zealand",
       "description": "Stats NZ's annual financial-performance and financial-position survey of New Zealand businesses, running since the 1985/86 survey year and covering, on its own account, around 80% of GDP. The New Zealand end of the ANZSIC bridge. Its DataInfo+ metadata is unusually forthcoming about its own downstream use — it names the national accounts, the Tourism Satellite Account, the Non-profit Institutions Satellite Account, Business Price Indexes and Regional GDP as consumers — which makes it a promising source node for a later Stats NZ pass; see `_dropped`.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2027-06-01",
+            "to": "2027-06-30",
+            "precision": "month",
+            "covers": "Annual Enterprise Survey: 2026 financial year (provisional)",
+            "evidence": "implied"
+          }
+        ],
+        "note": "Stats NZ does not publish a fixed release-calendar date far in advance for AES, but the provisional AES release has landed consistently in late June for the past three years: 2023 FY (provisional) released 1 Jul 2024, 2024 FY (provisional) released 27 Jun 2025, and 2025 FY (provisional) released 25 Jun 2026. Based on this pattern the 2026 FY (provisional) release is projected for late June 2027; a final (non-provisional) AES release also follows later in the year but no consistent date pattern was found for it.",
+        "source_url": "https://www.stats.govt.nz/information-releases/annual-enterprise-survey-2025-financial-year-provisional/"
+      },
       "last_updated": null,
       "url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/36809771-984d-4e6b-89a1-576f2118b05b",
       "domains": [

@@ -61,6 +61,20 @@
       "description": "ABS's index of relative socio-economic advantage/disadvantage by area, derived from Census data and named by exact title (including the specific index, IRSD) in Tasmania's Grants Commission methodology as a cost adjustor.",
       "releases_per_year": 0.2,
       "cadence_note": "Released once per Census cycle (nominally every 5 years), tied to Census processing rather than a fixed annual schedule.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2028-01-01",
+            "to": "2028-06-30",
+            "precision": "half",
+            "covers": "SEIFA 2026 (based on 2026 Census)",
+            "evidence": "documented"
+          }
+        ],
+        "note": "SEIFA is produced once per Census cycle (approx. every 5 years), not on a fixed annual schedule. Historical editions: 1986, 1991, 1996, 2001, 2006, 2011, 2016, 2021 (released 27 Apr 2023, ~2 years after the 2021 Census). The ABS 2026 Census product guide states SEIFA is planned for the 'third release' of 2026 Census data products, scheduled for 'early to mid-2028', since it requires processing of second-release data (due Oct 2027) first. No exact day has been published yet.",
+        "source_url": "https://www.abs.gov.au/census/guide-census-data/2026-census-product-guide/2026"
+      },
       "last_updated": null,
       "url": "https://www.abs.gov.au/statistics/people/people-and-communities/socio-economic-indexes-areas-seifa-australia",
       "domains": [
@@ -76,8 +90,21 @@
       "region": "Australia",
       "description": "ABS's compiled national statistics on the financial activities of Commonwealth, state and local government, built on the IMF's Government Finance Statistics Manual (GFSM) and the 2008 System of National Accounts (SNA) — a genuine cross-corpus tie back to this branch's existing international-standard nodes. VERIFIED DIRECTLY: methodology page fetched and HTML-parsed in full.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-01",
+            "precision": "day",
+            "covers": "June quarter 2026 Government Finance Statistics, Australia"
+          }
+        ],
+        "source_url": "https://www.abs.gov.au/statistics/economy/government/government-finance-statistics-australia/latest-release",
+        "note": "This is the quarterly GFS series (matches releases_per_year=4). The corpus's current url field points to the separate annual methodology page ('Government Finance Statistics, Australia, Annual'), which is a related but distinct ABS publication released once per year. Next release confirmed directly on the ABS landing/latest-release page as 1 September 2026, 11:30am AEST, covering June quarter 2026."
+      },
       "last_updated": null,
-      "url": "https://www.abs.gov.au/methodologies/government-finance-statistics-annual-methodology/2023-24",
+      "url": "https://www.abs.gov.au/statistics/economy/government/government-finance-statistics-australia/latest-release",
       "domains": [
         "municipal-finance",
         "fiscal-transfers"
@@ -139,6 +166,12 @@
       "description": "The NSW law establishing the office of Valuer-General and requiring an annual land valuation for every NSW property (other than Crown/unrated Western Division land) — functions in this corpus the way the Netherlands' `nl-wet-woz` and the UK's `gb-voa-rating-lists` do: a legally-established valuation standard other documents cite as their rating base, not a periodical. VERIFIED DIRECTLY: legislation.nsw.gov.au fetched via a real browser (the site is Cloudflare-gated against curl) and its rendered text parsed directly.",
       "releases_per_year": 1,
       "cadence_note": "Land values are re-determined on a cycle set by the Valuer-General, confirmed by council sources (below) as 'every three years' in current practice — the Act's own s.14A requires annual ascertainment, so the three-year cycle is an operational choice, not a statutory maximum; flagged rather than reconciled.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-1916-002",
+        "note": "This is a NSW statute (the Valuation of Land Act 1916), not a periodic statistical release. It is amended ad-hoc by separate amending Acts whenever Parliament legislates changes, with no fixed cadence, calendar, or stated review rule. Amendments have occurred in irregular clusters across decades, most recently in 2023 (2023 No. 18, Sch 11). The corpus's own url field (the in-force consolidated version) remains the correct source to check for the current text; it updates whenever a new amendment commences, not on a schedule."
+      },
       "last_updated": null,
       "url": "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-1916-002",
       "domains": [
@@ -257,6 +290,21 @@
       "description": "Australia's five-yearly Census — minted here because the VLGGC's Appendix 4L names Census 2021 products (via Census TableBuilder extracts) as the source for six separate cost/revenue adjustors, and because the CGC's Socio-economic status chapter names it as the source SEIFA is built from. The Australian counterpart to `statcan-census-population` and `uscensus-decennial`, which the corpus already holds.",
       "releases_per_year": 0.2,
       "cadence_note": "Every five years (2016, 2021, 2026...).",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "\"Every five years, the ABS counts every person and household in Australia\" — the Census of Population and Housing is conducted every five years. The 2026 Census was held on Census Night, Tuesday/Monday 10 August 2026 (the most recent occurrence, one day before today's reference date of 2026-08-11), following the 2021 Census (10 August 2021).",
+        "entries": [
+          {
+            "from": "2031-08-01",
+            "to": "2031-08-31",
+            "precision": "month",
+            "covers": "Next Census of Population and Housing (5-yearly cycle after the 2026 Census held 10 August 2026)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.abs.gov.au/census/about-census/australian-census",
+        "note": "Census night for 2026 (the most recent cycle) was 10 August 2026, which has just occurred relative to today (2026-08-11); ABS has not yet announced an exact date for the 2031 Census, only confirmed the 5-year cycle, so the 2031 entry uses month-level precision based on the historical pattern of Census night falling in early-to-mid August. Note separately: detailed data from the just-completed 2026 Census will be released in three stages — first release ~June 2027 (~75% of topics), second release ~October 2027 (employment/education), and a final release in early 2028 (commute distance, homelessness, SEIFA) — per Informed Decisions' summary of ABS's release plan, though ABS states exact dates are not yet confirmed."
+      },
       "last_updated": null,
       "url": "https://www.abs.gov.au/census",
       "domains": [

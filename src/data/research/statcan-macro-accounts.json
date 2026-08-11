@@ -26,6 +26,25 @@
       "description": "Quarterly survey (IMDB record 2501) of the financial position and performance of Canadian incorporated businesses, collected roughly 30 days after the end of each quarter. Named in record 1901's 'Data sources' list among the quarterly national accounts' 'more notable sources', named again in record 1901's 'Estimation' section as one of the sub-annual surveys whose movements are applied to annual benchmarks, and named a third time in the monthly GDP by industry source table as the input behind financial intermediation and insurance industry output. Minted 2026-08-09 (sweep session, Tier-2 item #15), closing a `no-node-yet` lead that had already identified the record number but not confirmed its own publication facts. Enterprises are classified to a single NAICS code by predominant value-added activity. CORRECTION 2026-08-09 (EU/G.73.md): this node was not new when it was minted here — an equivalent `statcan-qsfs` already existed in grok-h1-classification-hubs.json, and the two co-existed as a duplicate id (first wins, later copy silently dropped) until `npm run validate` was run corpus-wide. The two records were merged into this one, which carries the fuller citation trail; the classification-hubs copy was deleted and its only unique sentence (the NAICS single-classification rule, above) folded in here. Another instance of the cross-file blind spot G.70.md named at batch-cluster level: the sweep that minted this node never grepped the corpus for the id first.",
       "releases_per_year": 4,
       "cadence_note": "Statistics Canada's own record 2501: 'Frequency: Quarterly'; collection occurs approximately 30 days after quarter-end.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-24",
+            "to": "2026-08-24",
+            "precision": "day",
+            "covers": "Quarterly financial statistics for enterprises, second quarter 2026"
+          },
+          {
+            "from": "2026-11-23",
+            "to": "2026-11-23",
+            "precision": "day",
+            "covers": "Quarterly financial statistics for enterprises, third quarter 2026"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/n1/release-diffusion/2026-eng.pdf",
+        "note": "Statistics Canada publishes this survey's results in The Daily under the title 'Quarterly financial statistics for enterprises' (the underlying survey program is QSFS, SDDS 2501). Confirmed prior 2026 releases: Feb 25, 2026 (Q4 2025) at https://www150.statcan.gc.ca/n1/daily-quotidien/260225/dq260225a-eng.htm and May 25, 2026 (Q1 2026) at https://www150.statcan.gc.ca/n1/daily-quotidien/260525/dq260525a-eng.htm, which explicitly stated the next release ('Financial statistics for enterprises for the second quarter of 2026 will be released on August 24.'). The full 2026 release calendar (https://www150.statcan.gc.ca/n1/release-diffusion/2026-eng.pdf) lists four releases for the year (Feb 25, May 25, Aug 24, Nov 23), consistent with releases_per_year=4 and a roughly 8-week-after-quarter-end cadence."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2501",
       "domains": [
@@ -42,6 +61,34 @@
       "description": "Statistics Canada's own IMDB record 2008 names this the Retail Commodity Survey (RCS), a monthly survey of retail commodity sales in Canada by outlet type, which 'produces more detailed quarterly estimates' at the commodity level. Named in record 1901's 'Data sources' list as one of the quarterly national accounts' 'more notable sources' under the name 'Quarterly Retail Commodity Survey', and appearing repeatedly in the monthly GDP by industry source table alongside the CPI for retail-trade industries as 'Retail commodity survey, Record no. 2008'. NAME DISCREPANCY, recorded rather than resolved: both citing documents call it the 'Quarterly Retail Commodity Survey,' but the survey's own current IMDB record names it the 'Retail Commodity Survey' with a monthly base frequency and quarterly commodity-level detail. Whether this reflects a historical rename (older Daily articles from 1999-2012 do use the 'Quarterly Retail Commodity Survey' name) or the citing documents using an informal name for the quarterly detail specifically is not adjudicated here. Minted 2026-08-09 (sweep session, Tier-2 item #15) under the record's own current title.",
       "releases_per_year": 12,
       "cadence_note": "Record 2008's own current page: 'Frequency: Monthly', with quarterly commodity-level detail as a secondary tier — the same shape as several ECB series this corpus already treats as one node with a headline cadence rather than two.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-15",
+            "precision": "month",
+            "covers": "June 2026 Retail Commodity Survey",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-01",
+            "to": "2026-10-15",
+            "precision": "month",
+            "covers": "July 2026 Retail Commodity Survey",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-01",
+            "to": "2026-11-15",
+            "precision": "month",
+            "covers": "August 2026 Retail Commodity Survey",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260723/dq260723a-eng.htm",
+        "note": "StatCan's IMDB survey page and release calendar (https://www150.statcan.gc.ca/n1/dai-quo/cal2-eng.htm) do not list a full forward calendar for RCS -- only the next imminent edition appears. Observed past 'The Daily' editions show RCS is released monthly in The Daily, each edition covering a reference month roughly 3 months prior, published in the first-to-second week of the release month (dates observed: Aug 2025 data released 2025-11-07; Sep 2025 data released 2025-12-05; Oct 2025 data released 2026-01-08; Nov 2025 data released 2026-02-06; Jan 2026 data released 2026-04-09; Mar 2026 data released 2026-06-04; May 2026 data released 2026-08-10, the most recent edition as of 2026-08-11). Entries below project the next few editions using this observed ~3-month lag, first-half-of-month pattern; exact publication days are not confirmed by a published calendar."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2008",
       "domains": [

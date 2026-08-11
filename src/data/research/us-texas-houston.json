@@ -120,7 +120,29 @@
       "jurisdiction_level": "provincial",
       "region": "Texas",
       "description": "The state's independent ratio study of taxable property value in every school district, conducted at least once every two years using comparable sales and audit sampling, and certified to the Commissioner of Education for use in school funding. The structure with no California equivalent: a state agency audits local appraisals, and where the local value fails the audit the state value is used instead — so the number that drives the money is not necessarily the one the appraisal district produced.",
-      "releases_per_year": 0.5,
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Tax Code Sec. 5.10 / Gov't Code Sec. 403.302 require the comptroller to conduct the property value study at least once every two years, but in practice the Comptroller runs the School District PVS annually: \"In December, our office releases local data and values for the sampled properties... we release the preliminary School District PVS findings at the end of January\" (certified to the Commissioner of Education), followed by final findings certified after the 40-day protest period, which historically has landed in mid-to-late August of the following year (e.g. 2022 study final findings certified Aug. 24, 2023; 2023 study final findings certified Aug. 15, 2024; 2024 study final findings certified Aug. 15, 2025).",
+        "entries": [
+          {
+            "from": "2026-08-01",
+            "to": "2026-08-31",
+            "precision": "month",
+            "covers": "2025 tax-year School District PVS final findings certification to the Commissioner of Education (not yet posted as of 2026-08-11; the 2025 preliminary findings were certified Jan. 30, 2026, and prior years' final findings have consistently followed in mid-to-late August)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-31",
+            "precision": "month",
+            "covers": "2026 tax-year School District PVS preliminary findings certification to the Commissioner of Education (per the Comptroller's stated 'end of January' release pattern)",
+            "evidence": "implied"
+          }
+        ],
+        "note": "Historical record on the Comptroller's site (2016-2025) shows the study actually runs annually, not biennially: every tax year has both preliminary findings (certified end of January of the following year) and final findings (certified mid-to-late August, sometimes with staggered later certifications for individual districts still under review, e.g. 2022 study had certifications trailing into 2024). This suggests the corpus's releases_per_year=0.5 (biennial) understates the actual annual cadence.",
+        "source_url": "https://comptroller.texas.gov/taxes/property-tax/pvs/index.php"
+      },
       "last_updated": null,
       "url": "https://comptroller.texas.gov/taxes/property-tax/pvs/index.php",
       "domains": [
@@ -370,6 +392,20 @@
       "region": "Houston, Texas",
       "description": "The annual computation of the ceiling on the City's property tax revenue under the 2004 charter amendment, as amended in 2006 to add $90 million for public safety. The limit is the lesser of the prior year's collections plus 4.5 percent, or the fiscal 2005 base adjusted cumulatively for inflation and population growth. The closest structural analogue in the corpus to California's Gann limit, and it reaches a different answer: a local price index and a federal population estimate rather than a state personal income measure.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "FY2027 property tax revenue cap calculation, presented to City Council ahead of the FY2027 tax rate adoption",
+            "evidence": "implied"
+          }
+        ],
+        "note": "The City of Houston Finance Department presents its property tax revenue cap calculation (under Props 1 and H, and SB2) to the City Council Budget and Fiscal Affairs (BFA) Committee annually in the fall, timed to the annual property tax rate adoption process (Houston's fiscal year runs July 1-June 30). Confirmed past instances: 'COH Revenue Cap Presentation' on 2021-09-07 (https://www.houstontx.gov/council/committees/bfacommittee/20210907/revenue-cap.pdf) and 'Property Tax Update, COH Revenue Cap' on 2025-10-07 (https://www.houstontx.gov/council/committees/bfacommittee/20251007/revenue-cap.pdf), the latter coinciding with the FY2026 tax-rate decision reported in the press. No dedicated release calendar was found for this specific document; only these two dated instances of the BFA presentation were located, so the projected FY2027 window (Sept-Oct 2026) is inferred rather than certain.",
+        "source_url": "https://www.houstontx.gov/council/committees/bfacommittee/20251007/revenue-cap.pdf"
+      },
       "last_updated": null,
       "url": "https://www.houstontx.gov/budget/",
       "domains": [

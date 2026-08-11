@@ -20,9 +20,26 @@
       "description": "Egypt's official monthly CPI. CAPMAS's role as publisher was independently verified this session via Law 148/2019's own statutory definition (see eg-social-insurance-pensions-law-148-2019). The 10th series' base period (FY2018/2019) and release date (October 2019, with September 2019 data) are independently confirmed this session via CAPMAS's own metadata catalog for the 10th-series bulletin itself. That same fetch also confirms the classification standard directly: 'COICOP-HBS 2000/1999' -- Egypt's CPI runs on the 1999 vintage of the UN's individual-consumption classification, not the 2018 vintage South Africa and Nigeria both cite (see un-coicop-hbs-1999 below). Weights are sourced from the FY2017/2018 Household Income, Expenditure and Consumption Survey (HIECS), covering 945 items across 12 sections/47 groups/116 classes priced monthly at roughly 14,442 outlets; the index is a Modified Laspeyres formula with Jevons-type (unweighted geometric mean) elementary aggregation. Egypt complies with the IMF's SDDS, releasing on the 10th day after the reference month. Per Thomas's standing instruction on Grok-sourced verification, this is accepted from the IMF's own DSBB DQAF page for Egypt (dsbb.imf.org/sdds/dqaf-base/country/EGY/category/CPI00), whose live metadata (certified 2026-02-25) Grok re-confirmed on a second pass -- the page's detailed sections are JS-collapsed for every tool tried against it, including Grok's own, so no fuller primary text than this exists to quote.",
       "releases_per_year": 12,
       "cadence_note": "Monthly CPI release; weights refreshed roughly every two years per the household expenditure survey cycle.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-10",
+            "to": "2026-09-10",
+            "precision": "day",
+            "covers": "August 2026 CPI",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "تصدر فى اليوم العاشر من الشهر التالى لجمع البيان (Issued on the 10th day of the month following the data-collection month; prices are gathered monthly from urban and rural areas between the 1st and 28th of each month).",
+        "source_url": "https://censusinfo.capmas.gov.eg/Metadata-ar-v4.2/index.php/catalog/1618/overview",
+        "note": "Confirmed by real-world observation: the July 2026 CPI release was published by CAPMAS on 2026-08-10 (reported in multiple Egyptian news outlets on 10 Aug 2026, e.g. Masrawy, Al-Balad, Amwal Al Ghad), consistent with the stated 10th-of-following-month rule. Next release (August 2026 data) is therefore expected 2026-09-10, rolled forward from the just-completed July cycle."
+      },
       "last_updated": "2019-10",
       "url": "https://censusinfo.capmas.gov.eg/Metadata-ar-v4.2/index.php/catalog/1618/overview",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "eg-social-insurance-pensions-law-148-2019",
@@ -34,7 +51,9 @@
       "description": "Egypt's unified pension and social insurance statute, replacing several prior fragmented schemes; effective 1 January 2020, executive regulations issued via Prime Ministerial Decree No. 2437 of 2021. VERIFIED DIRECTLY this session (Andersen's published official English translation of the Act) -- Article 35: 'Pensions due as of June 30 of each year shall be increased starting from July 1 by a percentage not less than the rate of inflation and not exceeding 15%', with 'the value of the increase must not exceed the proportionate increase relative to the maximum monthly contributory wage.' 'Inflation Rate' is defined in the Act itself as 'the relative change in the general consumer price index across the Republic for a given year, as published by [CAPMAS], determined each April.' Independently corroborated by the US Social Security Administration's own International Update (February 2020): 'The pension amount is automatically adjusted in July of each year based on changes in the national consumer price index, with a maximum annual increase of 15 percent.' The strongest statutory CPI-to-benefit link found in the corpus's Africa branch so far -- a genuine floor formula, not a Gazette-notice discretion.",
       "last_updated": "2021",
       "url": "https://eg.andersen.com/wp-content/uploads/2025/06/Law-No.-148-of-the-Year-2019-and-its-executive-regulation.pdf",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "eg-social-security-law-12-2025",
@@ -46,7 +65,9 @@
       "description": "The statute that legally anchors Takaful and Karama as Egypt's primary social safety net, resolving an open question left by the first draft of this slice (the docx's citation could not initially be confirmed against an official source). INDEPENDENTLY VERIFIED this session via a legal-reference summary (lawhub.info) quoting the Act directly: Article 3, 'the Takaful and Karama Fund... shall succeed to the Central Social Security Fund [established under Law No. 137 of 2010]... shall assume all its assets, rights and liabilities'; Article 4, 'The Social Security Law issued by Law No. 137 of 2010 is hereby repealed', with existing beneficiaries retaining current benefits through a transition period of up to two years. Article 39 (per the same source) formally establishes the Fund itself, with resources drawn from budget allocations, donations, recovered overpayments, investment returns, and penalties/fees (Article 40). Issued 4 Shawwal 1446 AH / 3 April 2025 CE, effective three months after Official Gazette publication. Multiple independent Arabic-language legal and news sources (a July 2026 Ministry of Social Solidarity executive-regulation notice among them) corroborate the citation and continued currency of this law.",
       "last_updated": "2025-04-03",
       "url": "https://lawhub.info/?p=7225",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "eg-takaful-karama-programme",
@@ -58,7 +79,9 @@
       "description": "Egypt's flagship cash-transfer programme: Takaful (conditional, families with children) and Karama (unconditional, covering elderly persons, persons with disabilities, and orphans). VERIFIED DIRECTLY this session via the ILO's own GIMI country profile for Egypt: no automatic indexation or adjustment mechanism is mentioned anywhere in the profile for Takaful/Karama. Funding figures independently confirmed via Daily News Egypt, quoting Prime Minister Madbouly directly: 'we are allocating EGP 41bn in the current FY 2025, up from EGP 24bn the previous year', rising to roughly EGP 55bn for FY 2025/26 -- that reporting gives no inflation rationale for the increase. A second, independent search this session (via Grok, checking specifically for a Ministry of Social Solidarity or Ministry of Finance document tying benefit increases to a CAPMAS CPI formula) also came back negative -- 'no primary source linking increases to a CPI formula does not appear to exist' -- reinforcing rather than merely repeating the first session's finding. Unlike eg-social-insurance-pensions-law-148-2019, nothing found across two independent search passes ties this programme's benefit levels to CPI by formula.",
       "last_updated": "2025-05",
       "url": "https://www.social-protection.org/gimi/ShowCountryProfile.action?iso=EG",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     },
     {
       "id": "un-coicop-hbs-1999",
@@ -72,7 +95,9 @@
       "cadence_note": "Revised on a multi-decade cycle; not an annual release. Matches the treatment already given to un-coicop-2018 and sna-2008.",
       "last_updated": null,
       "url": "https://censusinfo.capmas.gov.eg/Metadata-ar-v4.2/index.php/catalog/1618/overview",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     }
   ],
   "dependencies": [

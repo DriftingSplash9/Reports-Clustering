@@ -13,6 +13,12 @@
       "description": "The internationally agreed manual of concepts, methods and practice for compiling a consumer price index. Jointly published by six international organisations and managed by the IMF; the 2020 edition updates the 2004 ILO-managed Consumer Price Index Manual: Theory and Practice. Country code is CA only because the schema offers no international option — the publisher is a consortium of international agencies.",
       "releases_per_year": 0.06,
       "cadence_note": "Revised roughly once a generation — editions in 1989, 2004 and 2020. Not an annual release; releases_per_year is nominal so the pulse rate reads as near-static.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "No release calendar or stated periodicity exists. The Manual has been issued only three times: 1989 (ILO, 'Consumer Price Indices: An ILO Manual'), 2004 ('Consumer Price Index Manual: Theory and Practice'), and 2020 ('Consumer Price Index Manual: Concepts and Methods'), each ~15-16 years apart. The IMF's own page for this report is titled 'Update of the Consumer Price Index Manual' and explains the 2020 edition was produced because 'methods and best practices have continued to evolve' since 2004, following requests from the 2014 UNECE-ILO CPI Experts Meeting -- i.e., updates are triggered by inter-agency expert consensus, not a fixed schedule. No next-edition date or working-group timeline is published. This is consistent with the corpus's very low releases_per_year (0.06, i.e. roughly once per 16 years).",
+        "source_url": "https://www.imf.org/en/data/statistics/cpi-manual"
+      },
       "last_updated": null,
       "url": "https://www.imf.org/en/data/statistics/cpi-manual",
       "domains": [
@@ -59,6 +65,41 @@
       "description": "The IMF's standard for compiling the balance of payments and the international investment position — the accounting framework for a country's transactions and positions with the rest of the world. Harmonised with SNA 2008. A seventh edition (BPM7) was developed alongside the 2025 SNA update. Country code is CA only because the schema offers no international option.",
       "releases_per_year": 0.06,
       "cadence_note": "Revised roughly once a generation — BPM5 in 1993, BPM6 in 2009. Not an annual release; releases_per_year is nominal.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "1993-01-01",
+            "to": "1993-12-31",
+            "precision": "year",
+            "covers": "Balance of Payments Manual, Fifth Edition (BPM5)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2008-12-01",
+            "to": "2009-12-31",
+            "precision": "year",
+            "covers": "Balance of Payments and International Investment Position Manual, Sixth Edition (BPM6) — prepublished Dec 2008, final 2009",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-03-20",
+            "to": "2025-03-20",
+            "precision": "day",
+            "covers": "Seventh edition (BPM7), successor to BPM6",
+            "evidence": "implied"
+          },
+          {
+            "from": "2041-01-01",
+            "to": "2041-12-31",
+            "precision": "year",
+            "covers": "Projected next edition (successor to BPM7), based on the observed ~15-17 year revision cycle",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.imf.org/en/data/statistics/bpm",
+        "note": "BPM6 itself (the report this entry is about) is a one-off manual published in prepublication form Dec 2008 / final 2009 and is now superseded by BPM7, released 2025-03-20 (IMF press release PR25/072). The IMF revises this manual jointly with the UN's System of National Accounts (SNA) roughly every 15-17 years: BPM5 (1993) -> BPM6 (2008/2009, ~15-16 yrs) -> BPM7 (2025, ~16-17 yrs). No fixed/stated periodicity rule exists; the ~2041 date is a rough projection from the historical pattern, not an announced IMF target."
+      },
       "last_updated": null,
       "url": "https://www.imf.org/external/pubs/ft/bop/2007/bopman6.htm",
       "domains": [
@@ -75,6 +116,21 @@
       "description": "The IMF's standard framework for compiling statistics on the revenue, expense, financial position and financing of the general government and public sectors. Harmonised with SNA 2008 and BPM6, and the basis on which countries report comparable fiscal statistics. Country code is CA only because the schema offers no international option.",
       "releases_per_year": 0.06,
       "cadence_note": "Revised roughly once a generation — 1986, 2001, 2014. Not an annual release; releases_per_year is nominal.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "The IMF Statistics Department has launched the update for the Government Finance Statistics Manual 2014 (GFSM 2014) targeting to complete this process by December 2027. A GFSAC presentation (Oct 2025) further states: \"Final draft of new manual available for dissemination by end 2027.\"",
+        "entries": [
+          {
+            "from": "2027-12-01",
+            "to": "2027-12-31",
+            "precision": "month",
+            "covers": "Updated/revised Government Finance Statistics Manual (successor to GFSM 2014)",
+            "evidence": "implied",
+            "note": "This is an IMF-announced target completion date for the ongoing GFSM update project (research phase running through 2026Q3, drafting begun 2025Q2), not a confirmed publication date; it could slip. GFSM 2014 itself is a methodology manual, not a periodic statistical release, consistent with the very low releases_per_year (0.06) on file."
+          }
+        ],
+        "source_url": "https://www.imf.org/en/Data/Statistics/Government-Finance-Statistics-Manual"
+      },
       "last_updated": null,
       "url": "https://www.imf.org/external/Pubs/FT/GFS/Manual/2014/gfsfinal.pdf",
       "domains": [
@@ -152,6 +208,34 @@
       "description": "The UN's standard guidance on planning, conducting and disseminating a population and housing census, including the characteristics of the population and housing that should be measured. Issued since 1958 and revised once each decennial census round to keep national censuses internationally comparable; Revision 3 covers the 2020 round and Revision 4 the 2030 round. Country code is CA only because the schema offers no international option.",
       "releases_per_year": 0.1,
       "cadence_note": "Revised once per decennial census round — roughly every ten years. Not an annual release; releases_per_year is nominal.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2015-01-01",
+            "to": "2015-12-31",
+            "precision": "year",
+            "covers": "Revision 3, endorsed by the UN Statistical Commission's 46th session, for the 2020 census round",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-01-01",
+            "to": "2025-12-31",
+            "precision": "year",
+            "covers": "Revision 4, submitted for approval/endorsement by the UN Statistical Commission's 56th session (March 2025), for the 2030 census round",
+            "evidence": "implied"
+          },
+          {
+            "from": "2035-01-01",
+            "to": "2035-12-31",
+            "precision": "year",
+            "covers": "Projected next revision (Revision 5), for the 2040 census round, based on the observed once-per-census-round (~10-year) revision pattern",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://unstats.un.org/unsd/demographic-social/meetings/2023/egm-20231213/concept-note.pdf",
+        "note": "This is not an annually or fixed-cycle publication; it is revised roughly once per ten-year UN census round, timed to precede/coincide with the start of the next round's preparations. Revision 1 dates to 1958; Revision 2 to 1980; Revision 3 to 2015 (2020 round); Revision 4 was adopted in 2025 (2030 round, Statistical Commission 56th session). No revision has yet been announced/scheduled for the 2040 round, so 2035 is a projection extrapolated from the historical cadence, not a published date. releases_per_year=0.1 (once per ~10 years) on file is consistent with this pattern."
+      },
       "last_updated": null,
       "url": "https://unstats.un.org/unsd/demographic-social/census/",
       "domains": [

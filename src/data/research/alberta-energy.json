@@ -29,6 +29,27 @@
       "description": "The monthly representative market price ($/GJ) for natural gas bought and sold within Alberta, calculated by the APMC on a simplified netback model. Published alongside monthly reference prices for methane, ethane, propane, butanes, pentanes plus and sulphur. The reference price is the input that values the Crown's natural gas royalty volume, and the budget forecasts it by name.",
       "releases_per_year": 12,
       "cadence_note": "Continuous monthly series from 1994; average market prices published for 1988-1993 on the same page.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-01",
+            "to": "2026-08-31",
+            "precision": "month",
+            "covers": "June 2026 monthly reference price added to table",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "July 2026 monthly reference price added to table",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.alberta.ca/alberta-natural-gas-reference-price",
+        "note": "No published release calendar or stated-rule found on alberta.ca. The page (open.alberta.ca/opendata metadata confirms 'Monthly' maintenance/update frequency) is updated monthly with a new month's reference price. As of the page's last-modified timestamp (2026-07-15), the table showed data through May 2026 - an observed lag of roughly 6 weeks after month-end before that month's value is posted. Applying that same observed lag going forward implies June 2026 data should appear around mid-August 2026 and July 2026 data around mid-September 2026. This is an inferred pattern, not a stated publication rule."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/alberta-natural-gas-reference-price",
       "domains": [
@@ -92,6 +113,21 @@
       "description": "The daily settlement price of the prompt-month West Texas Intermediate light sweet crude oil futures contract traded on NYMEX, published each trading day by CME Group. Named by Alberta regulation as the single price series that sets oil sands royalty rates and the bitumen floor price, which makes a commodity exchange's daily settlement the largest single driver of Alberta's provincial revenue.",
       "releases_per_year": 252,
       "cadence_note": "One settlement per exchange trading day; roughly 252 per year. Alberta averages the daily settlements over a month.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Daily settlement prices for NYMEX Light Sweet Crude Oil (WTI) futures are determined every trading day, based on trading activity during the settlement period of 14:28:00 to 14:30:00 Eastern Time (14:00:00-14:30:00 ET on front-month expiration day), per the NYMEX Energy Futures Daily Settlement Procedure.",
+        "entries": [
+          {
+            "from": "2026-08-11",
+            "to": "2026-08-11",
+            "precision": "day",
+            "covers": "Daily settlement price for the 2026-08-11 trading session",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.cmegroup.com/trading/energy/files/NYMEX_Energy_Futures_Daily_Settlement_Procedure.pdf",
+        "note": "This is a continuous daily release published after the close of every CME/NYMEX trading day (the exchange trades Sunday evening through Friday afternoon ET, closed on exchange holidays), not a single dated 'next release' in the usual sense. 2026-08-11 is an ordinary trading day (Tuesday, no US/CME holiday), so it is the next (in-progress or upcoming) settlement date; the pattern then repeats each subsequent trading day. The corpus's releases_per_year of 252 is consistent with one settlement per NYMEX trading day per year."
+      },
       "last_updated": null,
       "url": "https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.settlements.html",
       "domains": [
@@ -108,6 +144,21 @@
       "description": "The Bank of Canada's daily indicative exchange rates, published each business day at 16:30 ET. Alberta's oil sands royalty regulation and its bitumen valuation regulation both name the Bank of Canada's daily USD/CAD rate as the conversion that turns a US-dollar crude price into the Canadian-dollar price the royalty formulas run on, and both contain fallback clauses in case the Bank stops publishing it.",
       "releases_per_year": 250,
       "cadence_note": "Every business day; the regulations still say 'noon' rate, a series the Bank replaced in 2017 with a single daily rate.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-11",
+            "to": "2026-08-11",
+            "precision": "day",
+            "covers": "Daily average exchange rates for 2026-08-11",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The daily average exchange rates are published once each business day by 16:30 ET.",
+        "source_url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
+        "note": "This is a daily recurring release on every business day (Mon-Fri, excluding Bank of Canada holidays), published by 16:30 ET, not an annual/periodic report with a small number of releases_per_year. The entry above is the next expected business-day release (today); no fixed multi-date calendar is posted since it is effectively continuous. releases_per_year=250 on file is consistent with roughly one release per business day (~250-252 business days/year) and appears reasonable, though not explicitly stated by the publisher as a count."
+      },
       "last_updated": null,
       "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
       "domains": [
@@ -125,6 +176,21 @@
       "description": "The Alberta Energy Regulator's authoritative record of every oil, gas, oil sands and water well licensed in Alberta, updated daily and distributed as fixed-format record types carrying licence number, well status, total depth, shoe set depth, plug intervals, material and operating pressure. It is the master register the province's regulated well and pipeline assessment reads from.",
       "releases_per_year": 365,
       "cadence_note": "Continuously maintained and updated daily; assessment freezes it at October 31 of the assessment year.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Next daily update of the General Well Data Report",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The AER General Well Data Report \"is updated daily and includes basic drilling data for each oil, gas, oil sands, and water well in Alberta, including domestic water wells.\"",
+        "source_url": "https://www.aer.ca/data-and-performance-reports/activity-and-data/lists-and-activities/general-well-data",
+        "note": "This is a continuously/daily-updated dataset rather than a periodic dated release, consistent with the corpus's existing releases_per_year=365 value. There is no single 'next release' in the traditional sense - the file is refreshed every day, so the entry above simply reflects the next daily refresh from today's date (2026-08-11)."
+      },
       "last_updated": null,
       "url": "https://www.aer.ca/data-and-performance-reports/activity-and-data/lists-and-activities/general-well-data",
       "domains": [

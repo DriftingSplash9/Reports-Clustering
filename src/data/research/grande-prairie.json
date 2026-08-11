@@ -29,6 +29,34 @@
       "region": "Grande Prairie, Alberta",
       "description": "Annual operating and capital budget, adopted as the detailed estimates of revenue and expenditure that the tax rate bylaw is then set to fund. Names its population and demographic sources, its provincial and federal capital grant amounts, and the inflation measure it benchmarks spending against.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2024-12-02",
+            "to": "2024-12-02",
+            "precision": "day",
+            "covers": "2025 Budget ratified at Dec 2, 2024 Council meeting",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-12-08",
+            "to": "2025-12-08",
+            "precision": "day",
+            "covers": "2026 Operating & Capital Budget approved at Dec 8, 2025 Council meeting",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "2027 Budget Report, expected approval by Council",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://cityofgp.com/city-government/budget-finance",
+        "note": "No published budget calendar or statutory fixed date was found on cityofgp.com. Observed pattern: City Council approves/ratifies the annual Budget Report (Operating + Capital) at a Council meeting in early December of the year preceding the budget year (e.g., 2025 Budget ratified Dec 2, 2024; 2026 Budget approved Dec 8, 2025), and the Budget Report PDF is published to cityofgp.com around the same time. Council also gives 'in principle' approval to multi-year budgets (e.g., 2027-2029 Operating Budget was given preliminary approval alongside the Dec 8, 2025 2026 budget approval), but the report itself is finalized/republished annually in December."
+      },
       "last_updated": null,
       "url": "https://cityofgp.com/city-government/budget-finance",
       "domains": [
@@ -46,8 +74,14 @@
       "description": "Municipal population count conducted under the Municipal Government Act, giving population, private dwellings and median age between federal census years. Run at the municipality's discretion rather than on a fixed cycle; Grande Prairie's most recent was 2024.",
       "releases_per_year": 0.25,
       "cadence_note": "Not annual. Conducted at the city's discretion — 2024 was the most recent. The enum has no bucket for an irregular multi-year count; releases_per_year carries the truth.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://cityofgp.com/culture-community/news-events/news/city-clerk/city-grande-prairie-municipal-census-2024-results-now",
+        "note": "City of Grande Prairie conducts a municipal census only when Council directs it (e.g., to support provincial/federal funding claims), not on a fixed cycle. Confirmed census years found: 2016, 2018, and 2024 (a 2-year gap followed by a 6-year gap), with no census found in 2019 or 2021 (Wikipedia's list of 2019 and 2021 Alberta municipal censuses does not include Grande Prairie). No calendar or stated statutory rule for timing was found on cityofgp.com; Alberta's Municipal Government Act allows but does not require municipalities to conduct their own census at intervals of the municipality's choosing. As of 2026-08-11, no announcement of a next census date was found."
+      },
       "last_updated": null,
-      "url": "https://cityofgp.com/city-government/census",
+      "url": "https://cityofgp.com/culture-community/news-events/news/city-clerk/city-grande-prairie-municipal-census-2024-results-now",
       "domains": [
         "population",
         "municipal-finance"
@@ -62,6 +96,21 @@
       "region": "Grande Prairie, Alberta",
       "description": "Annual valuation of every assessable property in the city, prepared under the Municipal Government Act and mailed to owners as assessment notices in the first week of March. Reassessed annually to track market movement; each property inspected on roughly a five-year cycle. The base every property tax rate in the city is levied against, and the data the province audits to set the equalized assessment.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Assessment Notices are typically mailed out the first week of March every year.",
+        "entries": [
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-07",
+            "precision": "week",
+            "covers": "2027 Property Assessment Notices/Roll",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://cityofgp.com/city-services/property-taxes/assessment-info",
+        "note": "Publisher states notices are 'typically' mailed the first week of March; exact date varies year to year and no dated calendar is published. The 2026 mailing (first week of March 2026) has already passed relative to today (2026-08-11), so the computed next entry rolls forward to the first week of March 2027."
+      },
       "last_updated": null,
       "url": "https://cityofgp.com/city-services/property-taxes/assessment-info",
       "domains": [
@@ -95,6 +144,20 @@
       "region": "Alberta",
       "description": "Annual provincial requisition recovering the cost of centrally assessing designated industrial property. The province assesses this class itself rather than leaving it to local assessors, and bills municipalities a rate against that assessment to fund the work.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "2027 Designated Industrial Property Requisition Tax Rate (Ministerial Order)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.alberta.ca/designated-industrial-property-tax-rate-and-requisition",
+        "note": "No published calendar or statutory deadline found; timing is governed by an annual Ministerial Order (Municipal Affairs) that sets the DIP tax rate/requisition for the year. Past orders were issued: MAG:005/23 on 2023-03-13, MAG:006/24 on 2024-03-25, MAG:004/25 on 2025-03-26, MAG:003/26 on 2026-03-27 (source: open.alberta.ca publication pages for each order, e.g. https://open.alberta.ca/publications/ma-mag-003-26). This is a consistent mid-to-late March pattern, not a stated rule. The 2026 order has already been issued as of the current date (2026-08-11), so the next expected instance is the 2027 order, projected for March 2027 based on the pattern; exact day is not predictable from public sources."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/designated-industrial-property-assessment",
       "domains": [

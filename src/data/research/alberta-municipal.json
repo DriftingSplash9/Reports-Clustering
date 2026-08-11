@@ -77,6 +77,21 @@
       "description": "Standardised annual return summarising each municipality's audited financial statements — assets, liabilities, revenue, expenses, long term debt and property taxes. Required from every Alberta municipality by May 1.",
       "releases_per_year": 1,
       "cadence_note": "Due May 1 for the preceding financial year.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-01",
+            "precision": "day",
+            "covers": "FIR for the 2026 fiscal year",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Each municipality and each regional services commission must prepare annual audited financial statements and a financial information return (FIR). Both reports must be returned to Alberta Municipal Affairs by May 1 of each year, as required by the Municipal Government Act.",
+        "source_url": "https://www.alberta.ca/annual-financial-reporting-for-municipalities",
+        "note": "The 2026-05-01 deadline (for the 2025 fiscal year FIR) has already passed relative to today's date (2026-08-11), so the next occurrence is 2027-05-01. Extensions to this deadline can be requested and are evaluated by Municipal Affairs (see ma-financial-reporting-extension-requests.pdf), so an individual municipality's actual submission date could shift, but the standard statutory deadline is May 1."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/annual-financial-reporting-for-municipalities",
       "domains": [
@@ -107,8 +122,43 @@
       "region": "Alberta",
       "description": "Annual adjustment of every municipality's taxable assessment to a common basis, producing a uniform provincial measure of property wealth. Determines each municipality's share of requisitions.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "source_url": "https://open.alberta.ca/publications/2368-657x",
+        "note": "Alberta Municipal Affairs publishes this annual series ('Provincial equalized assessment report', ISSN 2368-657X) on the Open Government portal every year, consistently in late October/early November. CKAN resource-creation timestamps for the last several editions: Provincial 2022 report created 2021-10-29; Provincial 2023 report created 2022-10-31; Provincial 2024 report created 2023-10-31; Provincial 2025 report created 2024-11-01; Provincial 2026 report created 2025-10-30 (this is the current/most-recent edition as of 2026-08-11). No formal forward-looking release calendar or stated statutory publication date was found — the pattern is inferred purely from past posting dates. The dataset's own metadata field 'updatefrequency' is listed as 'Annual'. Based on this pattern, the next edition (Provincial 2027 equalized assessment report) is expected in late October/early November 2026. NOTE: the corpus's existing url (open.alberta.ca/opendata/equalized-assessment-report) actually resolves to a different, related dataset titled 'Updated Equalized Assessment' (a supplemental mid-cycle update resource), not this annual 'Provincial equalized assessment report' series — see url_correction.",
+        "entries": [
+          {
+            "from": "2023-10-31",
+            "to": "2023-10-31",
+            "precision": "day",
+            "covers": "Provincial 2024 equalized assessment report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-11-01",
+            "to": "2024-11-01",
+            "precision": "day",
+            "covers": "Provincial 2025 equalized assessment report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-10-30",
+            "to": "2025-10-30",
+            "precision": "day",
+            "covers": "Provincial 2026 equalized assessment report (current/most recent edition)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-20",
+            "to": "2026-11-06",
+            "precision": "week",
+            "covers": "Provincial 2027 equalized assessment report (next expected edition)",
+            "evidence": "implied"
+          }
+        ]
+      },
       "last_updated": null,
-      "url": "https://open.alberta.ca/opendata/equalized-assessment-report",
+      "url": "https://open.alberta.ca/publications/2368-657x",
       "domains": [
         "assessment",
         "taxation"

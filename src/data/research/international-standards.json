@@ -10,27 +10,13 @@
       "country": "INT",
       "jurisdiction_level": "international",
       "region": "International",
-      "description": "The internationally agreed standard set of concepts, definitions, classifications and accounting rules for compiling national accounts. The organising framework beneath essentially every country's GDP.",
+      "description": "The internationally agreed standard set of concepts, definitions, classifications and accounting rules for compiling national accounts, in force 2008-2025. Superseded by the 2025 SNA (UNSC 56th Session, March 2025) — see sna-2025. Retained here because the eight reports below still cite it by name as their methodology basis; country-level rollout of the successor targets 2029-2030, so nothing downstream is factually wrong yet.",
       "releases_per_year": 0.05,
       "cadence_note": "Revised roughly once a generation — previous editions 1953, 1968 and 1993. Not an annual release; releases_per_year is nominal so the pulse rate reads as near-static.",
       "release_schedule": {
-        "kind": "published-calendar",
-        "entries": [
-          {
-            "from": "2025-03-04",
-            "to": "2025-03-07",
-            "precision": "week",
-            "covers": "2025 SNA adoption, UNSC 56th Session"
-          },
-          {
-            "from": "2029-01-01",
-            "to": "2030-12-31",
-            "precision": "year",
-            "covers": "Target country implementation window"
-          }
-        ],
-        "source_url": "https://unstats.un.org/unsd/nationalaccount/sna2025.asp",
-        "note": "FLAG: the UN Statistical Commission adopted the 2025 SNA at its 56th Session (March 2025) as SNA 2008's successor — SNA 2008 is now the superseded standard, independently re-confirmed against unstats.un.org. Country-level rollout targets 2029-2030 per the UN's own implementation strategy, so nothing downstream is factually wrong yet, but this node's framing (and whether a separate sna-2025 node should exist) needs Thomas's decision — not changed here beyond adding this schedule."
+        "kind": "irregular",
+        "entries": [],
+        "note": "Superseded by the 2025 SNA (UNSC 56th Session, March 2025) — see sna-2025's own published-calendar schedule for the adoption date and rollout window. No further revisions expected under the SNA 2008 edition."
       },
       "last_updated": null,
       "url": "https://unstats.un.org/UNSD/nationalaccount/sna2008.asp",
@@ -48,10 +34,60 @@
       "description": "The international standard defining employment, unemployment and labour force participation. Adopted by the International Conference of Labour Statisticians; the 19th ICLS resolution of 2013 supersedes the 13th ICLS resolution of 1982.",
       "releases_per_year": 0.2,
       "cadence_note": "The ICLS convenes roughly every five years; resolutions on labour force statistics are revised far less often than that.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2028-01-01",
+            "to": "2028-12-31",
+            "precision": "year",
+            "covers": "22nd International Conference of Labour Statisticians (possible further revision/amendment of this resolution)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The International Conference of Labour Statisticians (ICLS), which adopts and periodically revises labour statistics resolutions such as this one, is 'hosted by the ILO every five years' (per ILOSTAT's ICLS standards page). The 19th ICLS (2013) originally adopted this resolution, the 20th ICLS was held 10-19 October 2018, and the 21st ICLS (October 2023) adopted a resolution amending this very resolution.",
+        "source_url": "https://ilostat.ilo.org/about/standards/icls/",
+        "note": "This is a standard-setting resolution, not a periodic statistical release. It is revisited only when the ICLS (convened roughly every five years by the ILO) chooses to review or amend it, as happened at the 21st ICLS in 2023. No 22nd ICLS date has been officially announced yet as of 2026-08-11; 2028 is a computed estimate based on the 5-year cadence (2013 -> 2018 -> 2023), not a confirmed date. There is no guarantee the 22nd ICLS agenda will include a revision of this specific resolution."
+      },
       "last_updated": null,
       "url": "https://ilostat.ilo.org/methods/concepts-and-definitions/description-work-statistics-icls19/",
       "domains": [
         "labour"
+      ]
+    },
+    {
+      "id": "sna-2025",
+      "title": "System of National Accounts 2025 (SNA 2025)",
+      "publisher": "United Nations, European Commission, IMF, OECD and World Bank",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The internationally agreed standard superseding SNA 2008, adopted by the UN Statistical Commission at its 56th Session (March 2025). Retains the same core double-entry accounting framework while updating treatment of digitalisation, globalisation, wellbeing/sustainability and the informal economy. Country-level implementation is targeted for 2029-2030 — as of this entry, no dependency edges have been redirected from sna-2008 to this node; that is a separate, evidence-by-evidence decision for whenever an implementing country's methodology actually switches.",
+      "releases_per_year": 0.05,
+      "cadence_note": "Revised roughly once a generation, following SNA 1953, 1968, 1993 and 2008. Not an annual release; releases_per_year is nominal so the pulse rate reads at the same near-static rate as sna-2008.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2025-03-04",
+            "to": "2025-03-07",
+            "precision": "week",
+            "covers": "2025 SNA adoption, UNSC 56th Session"
+          },
+          {
+            "from": "2029-01-01",
+            "to": "2030-12-31",
+            "precision": "year",
+            "covers": "Target country implementation window"
+          }
+        ],
+        "source_url": "https://unstats.un.org/unsd/nationalaccount/sna2025.asp",
+        "note": "Adopted at the UNSC's 56th Session; the 2029-2030 window is the UN's own stated target for country-level rollout, not a guarantee."
+      },
+      "last_updated": null,
+      "url": "https://unstats.un.org/unsd/nationalaccount/sna2025.asp",
+      "domains": [
+        "national-accounts"
       ]
     }
   ],
@@ -76,6 +112,15 @@
       "relationship_type": "methodology_depends_on",
       "basis": "The Labour Force Survey adopts concepts and definitions of employment and unemployment endorsed by the ILO, drawn from the ICLS resolutions on labour force statistics.",
       "evidence_url": "https://www150.statcan.gc.ca/n1/pub/71-543-g/71-543-g2025001-eng.htm"
+    }
+  ],
+  "relations": [
+    {
+      "source_report_id": "sna-2025",
+      "target_report_id": "sna-2008",
+      "relation_type": "supersedes",
+      "basis": "The UN Statistical Commission adopted the 2025 SNA at its 56th Session (March 2025) as the successor to SNA 2008 — a generational revision of the same joint UN/EC/IMF/OECD/World Bank standard, not a new independent framework.",
+      "evidence_url": "https://unstats.un.org/unsd/nationalaccount/sna2025.asp"
     }
   ]
 }

@@ -32,8 +32,23 @@
       "releases_per_year": 52,
       "changes_per_year": 8,
       "cadence_note": "Published weekly, but changes only when banks move it, which is normally within a day of a policy rate change. Cadence of publication and cadence of change are different things — a distinction the pulse simulation currently cannot express.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Weekly Chartered Bank Prime Lending Rate update",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Typically published on Wednesdays by 14:30 ET.",
+        "source_url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/posted-interest-rates-offered-by-chartered-banks/",
+        "note": "The Bank of Canada's Prime Rate series (posted interest rates offered by chartered banks) is updated weekly, with the page stating it is 'Typically published on Wednesdays by 14:30 ET.' The table's most recent entries prior to the 2026-08-11 reference date were 2026-07-08, 07-15, 07-22, 07-29, and 08-05 (all Wednesdays), consistent with the stated weekly cadence and with the corpus's existing releases_per_year=52. Next occurrence computed as the following Wednesday after 2026-08-11."
+      },
       "last_updated": null,
-      "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-interest-rates/",
+      "url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/posted-interest-rates-offered-by-chartered-banks/",
       "domains": [
         "interest-rates",
         "banking",

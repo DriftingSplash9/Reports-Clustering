@@ -28,6 +28,34 @@
       "region": "Los Angeles-Long Beach-Anaheim, California",
       "description": "The metropolitan-area CPI-U for the Los Angeles-Long Beach-Anaheim core based statistical area, covering Los Angeles and Orange counties. A distinct series from the national CPI-U, and the index named by name in both the City and the County of Los Angeles rent stabilization ordinances — so a federal metropolitan statistic sets the legal ceiling on rent increases for millions of tenants.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "July 2026 CPI, Los Angeles area",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-09-11",
+            "to": "2026-09-11",
+            "precision": "day",
+            "covers": "August 2026 CPI, Los Angeles area",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-14",
+            "to": "2026-10-14",
+            "precision": "day",
+            "covers": "September 2026 CPI, Los Angeles area",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.bls.gov/regions/west/news-release/consumerpriceindex_losangeles.htm",
+        "note": "The Western Information Office's LA-area CPI release page states the next release explicitly (\"The July 2026 Consumer Price Index for the Los Angeles area is scheduled to be released on August 12, 2026\"). LA is one of the few metro areas BLS publishes CPI for every month; its release date matches the national CPI release date exactly (per the BLS national CPI schedule at bls.gov/schedule/news_release/cpi.htm), so subsequent dates below are taken from that same shared calendar."
+      },
       "last_updated": null,
       "url": "https://www.bls.gov/regions/west/news-release/consumerpriceindex_losangeles.htm",
       "domains": [
@@ -60,6 +88,21 @@
       "description": "A statutorily defined weighted price index for food, clothing, fuel, utilities, rent and transportation for low-income consumers, computed by the Department of Finance from BLS CPI components using the area weights of the California CPI. A purpose-built poverty-basket index that exists because the general CPI was judged not to describe what a welfare recipient buys.",
       "releases_per_year": 1,
       "cadence_note": "Weakly anchored on purpose: the statutory duty to compute the index is clear (W&I Code §§11453, 12201) but no standing Department of Finance page publishing the series could be found, and the figure surfaces inside budget documents and county letters instead. The URL is the closest publisher landing page, not a verified index page.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-07-01",
+            "to": "2027-07-01",
+            "precision": "day",
+            "covers": "Next statutory annual CNI-based adjustment effective date",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Welfare and Institutions Code Section 11453: annual adjustments to grants based on the California Necessities Index, computed by the Department of Finance from CPI-based cost data for food, clothing, fuel/utilities, rent, and transportation, \"shall become effective July 1 of each year.\"",
+        "source_url": "https://california.public.law/codes/ca_welf_and_inst_code_section_11453",
+        "note": "The DOF page given as the corpus URL (dof.ca.gov/forecasting/economics/economic-indicators/) does not mention the CNI at all — no calendar or CNI reference found there. Per Welf. & Inst. Code 11453, CNI-based adjustments take effect July 1 each year; July 1, 2026 has already passed as of today (2026-08-11), so the next occurrence is July 1, 2027. Note a complication found via LAO (Aug 2025, https://www.lao.ca.gov/reports/2025/5065/Updating-CA-Necessities-Index-081425.pdf): BLS discontinued publishing the specific consumer expenditure data the CNI formula relies on, making the index impossible to compute under the old formula starting with the 2026-27 budget. A 2026 budget trailer bill (Gov. Code 13074.1, see https://trailerbill.dof.ca.gov/public/trailerBill/pdf/1337) subsequently authorized DOF to use \"a reasonable estimate\" of missing data for such cost-of-living/annual-adjustment calculations, with the resulting calculation deemed final — which appears intended to preserve continuity of the annual July 1 CNI adjustment cycle going forward, though I found no DOF page explicitly confirming a computed CNI value for July 2027 yet."
+      },
       "last_updated": null,
       "url": "https://dof.ca.gov/forecasting/economics/economic-indicators/",
       "domains": [
@@ -141,6 +184,41 @@
       "region": "California",
       "description": "The annual funding valuation of the State of California's CalPERS plans, determining the required state employer contribution rate and dollar amount, the funded ratio and the unfunded accrued liability. Explicitly a funding document: it carries a disclaimer that it \"should not be used in financial reports subject to Governmental Accounting Standards Board Statement Number 68\".",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-10-01",
+            "to": "2023-10-31",
+            "precision": "month",
+            "covers": "State Actuarial Valuation as of June 30, 2022 (actuarial certification date)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-10-14",
+            "to": "2024-10-14",
+            "precision": "day",
+            "covers": "State Actuarial Valuation as of June 30, 2023 (announced available via Circular Letter 200-045-24, certified July 2024)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-09-01",
+            "to": "2025-09-30",
+            "precision": "month",
+            "covers": "State Actuarial Valuation as of June 30, 2024 (companion Schools Pool valuation certified September 2025)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-01",
+            "to": "2026-11-30",
+            "precision": "quarter",
+            "covers": "State Actuarial Valuation as of June 30, 2025 (next expected certification/public posting, projected from observed pattern; board summary already presented April 2026)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.calpers.ca.gov/employers/actuarial-resources",
+        "note": "CalPERS does not publish a release calendar or a stated statutory release date for the State Actuarial Valuation (covering State Miscellaneous, State Industrial, State Safety, POFF and CHP plans). It is produced annually with a valuation date of June 30. Observed pattern across the last several cycles: the valuation is presented in summary to the CalPERS Finance & Administration Committee the following April (e.g. the June 30, 2025 valuation results, including 79.2% funded ratio, were presented as agenda item 5d on April 14, 2026), then the full actuarial certification and the public-facing PDF report/circular-letter notice follow roughly July-November of that same year (13-17 months after the June 30 valuation date). Confirmed cycles: June 30, 2022 valuation certified October 2023; June 30, 2023 valuation certified July 2024 and announced as publicly available via Circular Letter 200-045-24 on October 14, 2024; June 30, 2024 valuation's companion Schools Pool report was certified September 2025 (State report expected on a similar timetable). As of 2026-08-11, the June 30, 2025 valuation has already been summarized to the board (April 2026) but the full certified public report had not yet appeared in search results, so its formal certification/posting is projected for roughly September-November 2026 based on the observed multi-year pattern."
+      },
       "last_updated": null,
       "url": "https://www.calpers.ca.gov/employers/actuarial-resources",
       "domains": [
@@ -175,6 +253,21 @@
       "region": "California",
       "description": "The quadrennial review of actual system experience — retirement, termination, disability, mortality, salary growth, inflation — against the current assumptions, recommending revised demographic and economic assumptions to the Board of Administration for use in every CalPERS valuation. Board policy requires one every four years.",
       "releases_per_year": 0.25,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "The report has been prepared in accordance with current board policy which requires that an actuarial experience study be performed every four years.",
+        "entries": [
+          {
+            "from": "2029-01-01",
+            "to": "2029-12-31",
+            "precision": "year",
+            "covers": "Next CalPERS Experience Study and Review of Actuarial Assumptions (following the 2025 study)",
+            "evidence": "implied"
+          }
+        ],
+        "note": "The most recent study (the 2025 CalPERS Experience Study and Review of Actuarial Assumptions, analyzing FY2000-2023 data) was presented to the Finance and Administration Committee in November 2025 and adopted for use with the June 30, 2025 actuarial valuations. Past studies were published in 2010, 2014, 2017, 2021, and 2025, consistent with the stated ~4-year board policy cycle. No official date for the next (circa-2029) study has been announced yet; 2029 is a projection based on the stated interval, not a published date.",
+        "source_url": "https://www.calpers.ca.gov/documents/2025-calpers-actuarial-experience-study/download"
+      },
       "last_updated": null,
       "url": "https://www.calpers.ca.gov/employers/actuarial-resources",
       "domains": [
@@ -273,6 +366,20 @@
       "region": "California",
       "description": "Semi-annual statistical exhibits of current personal income tax and corporation tax return data and trends, produced by the Franchise Tax Board for the twice-yearly revenue-estimating conferences with the Department of Finance and the Legislative Analyst's Office. The channel through which actual tax return data reaches both forecasts.",
       "releases_per_year": 2,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-12-01",
+            "to": "2027-01-31",
+            "precision": "quarter",
+            "covers": "Fall 2026 Revenue Estimating Exhibits (semi-annual DOF/FTB revenue forecast tied to the Governor's January Budget)",
+            "evidence": "implied"
+          }
+        ],
+        "note": "FTB's Economic & Statistical Research Bureau publishes these 'Revenue Estimating Exhibits' semi-annually as 'Fall' and 'Spring' editions, timed to the two points in the year DOF/FTB/LAO meet for budget forecasting: the Fall edition accompanies the Governor's January Budget and the Spring edition accompanies the May Revision. No fixed calendar or statutory date is published; the metadata field for update frequency is literally listed as 'Irregular'. Observed past publish dates on data.ca.gov/lab.data.ca.gov: Fall 2022 -> published/updated Jan 26-30, 2023; Fall 2024 -> created Dec 13, 2024, updated Jan 28, 2025; Fall 2025 -> published Jan 13, 2026; Spring 2023 -> data first published June 15, 2023; Spring 2025 -> published May 7, 2025 (updated July 9, 2025); Spring 2026 -> published May 15, 2026 (most recent edition as of today, 2026-08-11). Given this pattern, the next edition (Fall 2026) is expected in the Dec 2026-Jan 2027 window alongside the Governor's Budget, but no exact date has been published.",
+        "source_url": "https://lab.data.ca.gov/organization/datasets?publisher=california-franchise-tax-board"
+      },
       "last_updated": null,
       "url": "https://data.ca.gov/dataset/department-of-finance-exhibits-fall-2025",
       "domains": [

@@ -14,6 +14,21 @@
       "description": "Annual index of average wages tabulated by SSA from wages subject to federal income tax plus contributions to deferred compensation plans. It is the wage-side counterpart to the CPI in the Social Security system: it indexes a worker's lifetime earnings when their initial benefit is computed, and it drives the taxable maximum, the earnings test exempt amounts, the PIA bend points and the quarter-of-coverage amount. Published roughly a year in arrears — the index for a calendar year is announced in October of the following year.",
       "releases_per_year": 1,
       "cadence_note": "Announced each October alongside the COLA, for the calendar year two years prior to the year the indexed amounts take effect.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-11-01",
+            "to": "2026-11-01",
+            "precision": "day",
+            "covers": "National Average Wage Index for 2025",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "SSA must publish the national average wage index for the prior calendar year by November 1 of each year (Social Security Act section 215(a)(1)(D), 42 U.S.C. 415(a)(1)(D)); in practice SSA has published it in the Federal Register in the notice titled 'Cost-of-Living Increase and Other Determinations for [year]' in mid-to-late October each year (e.g., Oct 22, 2021; Oct 24, 2022; Oct 23, 2023; Oct 25, 2024).",
+        "source_url": "https://www.ssa.gov/oact/cola/AWI.html",
+        "note": "The SSA AWI.html page itself lists the most recent figure (currently the 2024 index, 69,846.57) but does not itself state a publication schedule. The publication deadline comes from the annual Federal Register 'Cost-of-Living Increase and Other Determinations' notice, which explicitly cites the November 1 statutory deadline for publishing the prior year's national average wage index. Actual publication has historically occurred a few days before the Nov 1 deadline (per past Federal Register notice dates)."
+      },
       "last_updated": null,
       "url": "https://www.ssa.gov/oact/cola/AWI.html",
       "domains": [
@@ -47,6 +62,41 @@
       "region": "United States",
       "description": "The monthly household survey of about 60,000 eligible households, collected by the Census Bureau and estimated by BLS. It is the sole source of the official unemployment rate and of every labour force measure broken down by age, sex, race, education or reason for unemployment. On average one CPS respondent stands for about 2,500 people, so the survey cannot produce a level on its own — it produces a rate, and the level comes from population controls supplied by Census.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "source_url": "https://www.bls.gov/schedule/news_release/empsit.htm",
+        "entries": [
+          {
+            "from": "2026-09-04",
+            "to": "2026-09-04",
+            "precision": "day",
+            "covers": "August 2026 Employment Situation (CPS household survey data)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-10-02",
+            "to": "2026-10-02",
+            "precision": "day",
+            "covers": "September 2026 Employment Situation (CPS household survey data)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-11-06",
+            "to": "2026-11-06",
+            "precision": "day",
+            "covers": "October 2026 Employment Situation (CPS household survey data)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-12-04",
+            "to": "2026-12-04",
+            "precision": "day",
+            "covers": "November 2026 Employment Situation (CPS household survey data)",
+            "evidence": "documented"
+          }
+        ],
+        "note": "The Current Population Survey (CPS) is the household survey component of BLS's monthly 'Employment Situation' news release, published on the BLS Schedule of Releases page. CPS microdata/tables (bls.gov/cps/tables.htm and census.gov/programs-surveys/cps.html) are released on the same monthly cadence tied to the Employment Situation release. Dates are subject to change; BLS has in the past shifted this schedule due to government shutdowns (e.g., a notice on bls.gov/cps/notices/2026/ references a March 6, 2026 release date for February 2026 data due to a population control revision)."
+      },
       "last_updated": null,
       "url": "https://www.bls.gov/cps/",
       "domains": [
@@ -134,8 +184,22 @@
       "region": "United States",
       "description": "The official statistical poverty measure: a matrix of thresholds by family size, number of children and (for one- and two-person units) age of householder, used to count how many Americans are in poverty. Published each September for the prior calendar year, using income data from the CPS Annual Social and Economic Supplement. The thresholds are a statistical instrument; the HHS guidelines are the administrative simplification of them.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-15",
+            "to": "2026-09-15",
+            "precision": "day",
+            "covers": "2025 poverty thresholds, released alongside Income, Poverty, and Health Insurance Coverage in the United States: 2025 (CPS ASEC)",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.census.gov/newsroom/press-releases/2026/iphi-acs-media-advisory.html",
+        "note": "Census Bureau's media advisory sets Tuesday, September 15, 2026 as the release date for 2025 Income, Poverty and Health Insurance statistics from the CPS ASEC, which is when the Bureau's poverty thresholds table for 2025 is published (in the P60 series report and the historical-poverty-thresholds.html data tables). Poverty thresholds are typically released once a year, in September, alongside the annual Income/Poverty/Health Insurance report; a preliminary weighted-average threshold estimate is sometimes posted earlier (a 'Preliminary Estimate of Weighted Average Poverty Threshold for 2025' appears on the thresholds landing page, last revised Jan 15, 2026), but the citable dated release is the September CPS ASEC report."
+      },
       "last_updated": null,
-      "url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html",
+      "url": "https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-thresholds.html",
       "domains": [
         "population",
         "benefits"
@@ -151,6 +215,43 @@
       "description": "A superlative price index built from the same price quotes as the CPI-U but using a Tornqvist formula with expenditure weights from both the current and the comparison period, so it captures consumers substituting between categories as relative prices change. It therefore rises more slowly than the CPI-U. Published monthly alongside the CPI, but initially as an estimate: values are revised twice and only become final about a year later, which is why the tax code pins the values used to those published as of the initial August release.",
       "releases_per_year": 12,
       "cadence_note": "Released with the monthly CPI news release, but each month's value is initial and subject to three interim revisions, with final data posted 10 to 12 months later.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Initial C-CPI-U for July 2026, released with the CPI-U news release"
+          },
+          {
+            "from": "2026-09-11",
+            "to": "2026-09-11",
+            "precision": "day",
+            "covers": "Initial C-CPI-U for August 2026"
+          },
+          {
+            "from": "2026-10-14",
+            "to": "2026-10-14",
+            "precision": "day",
+            "covers": "Initial C-CPI-U for September 2026"
+          },
+          {
+            "from": "2026-11-10",
+            "to": "2026-11-10",
+            "precision": "day",
+            "covers": "Initial C-CPI-U for October 2026"
+          },
+          {
+            "from": "2026-12-10",
+            "to": "2026-12-10",
+            "precision": "day",
+            "covers": "Initial C-CPI-U for November 2026"
+          }
+        ],
+        "source_url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+        "note": "The 'Initial' C-CPI-U estimate is published monthly in the same news release as the regular CPI-U (confirming releases_per_year=12). Per BLS (chained-cpi-introduction.htm), each Initial monthly value is later revised to an 'Interim' estimate the following February, and to a 'Final' value in February two years after the reference year, so historical C-CPI-U figures for a given month are revised twice on a fixed February cadence even though the initial monthly release follows the standard CPI calendar."
+      },
       "last_updated": null,
       "url": "https://www.bls.gov/cpi/additional-resources/chained-cpi.htm",
       "domains": [

@@ -13,6 +13,21 @@
       "description": "CORRA is Canada's designated risk-free reference rate, measuring the cost of overnight general collateral funding in Canadian dollars using Government of Canada treasury bills and bonds as repo collateral. The Bank of Canada has calculated and published it since June 15, 2020, as a daily trimmed volume-weighted median of eligible overnight repo transactions reported to CIRO through the Market Trade Reporting System. It became Canada's principal interest rate benchmark after CDOR ceased publication in June 2024.",
       "releases_per_year": 250,
       "cadence_note": "Published each Canadian business day by 10:00 ET, postponable to 11:00 ET.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-11",
+            "to": "2026-08-11",
+            "precision": "day",
+            "covers": "CORRA value for August 10, 2026 (previous business day), published on the next business day, August 11, 2026",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Published every business day between 9:00 and 11:00 ET.",
+        "source_url": "https://www.bankofcanada.ca/rates/interest-rates/corra/",
+        "note": "CORRA is a daily benchmark rate published every business day (excluding weekends and statutory holidays), not a periodic report with a fixed number of yearly editions in the usual sense. The releases_per_year value of 250 is roughly consistent with the number of Canadian business days in a year (about 252 minus a few statutory holidays), so it appears reasonable and was not corrected."
+      },
       "last_updated": null,
       "url": "https://www.bankofcanada.ca/rates/interest-rates/corra/",
       "domains": [
@@ -84,6 +99,12 @@
       "description": "CMHC's published mortgage loan insurance product rules set the eligibility criteria and premium schedule for government-backed mortgage default insurance, which is required by law on residential mortgages with a loan-to-value ratio above 80 percent. The rules define maximum Gross Debt Service (39 percent) and Total Debt Service (44 percent) ratios, minimum down payments, maximum property values and amortization limits, and a premium table running from roughly 0.60 to 4.50 percent of the loan amount by loan-to-value band. These are the operative underwriting standards for the insured segment of the Canadian mortgage market.",
       "releases_per_year": 1,
       "cadence_note": "Revised as government mortgage insurance policy changes rather than on a fixed schedule.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "CMHC does not publish a release calendar or stated periodic-update rule for this eligibility/premium schedule. The quick-reference guide page (published June 20, 2022) and premium information page (published March 31, 2018) both carry only a page-publication date and a disclaimer that terms are 'subject to change at any time' with no fixed review cycle. Historically, premium rate changes occurred irregularly (e.g., 2011, 2014, March 2015, March 2016, March 2017) tied to policy/risk decisions rather than a fixed annual or quarterly schedule, and premiums have reportedly been unchanged since 2017. This does not support treating it as an annual (releases_per_year=1) publication.",
+        "source_url": "https://www.cmhc-schl.gc.ca/professionals/project-funding-and-mortgage-financing/mortgage-loan-insurance/mortgage-loan-insurance-homeownership-programs/premium-information-for-homeowner-and-small-rental-loans"
+      },
       "last_updated": null,
       "url": "https://www.cmhc-schl.gc.ca/professionals/project-funding-and-mortgage-financing/mortgage-loan-insurance/mortgage-loan-insurance-homeownership-programs/mortgage-loan-insurance-quick-reference-guide",
       "domains": [
@@ -100,6 +121,21 @@
       "region": "Canada",
       "description": "Since April 6, 2020 the Bank of Canada has published a weekly benchmark rate used to determine the minimum qualifying rate for government-backed insured mortgages. It is calculated as the weekly median 5-year fixed insured mortgage rate drawn from federally backed mortgage insurance applications adjudicated by mortgage insurers, plus a buffer set by the Minister of Finance (initially 200 basis points). It is published on a Wednesday and takes effect the following Monday, replacing the older Bank of Canada 5-Year Benchmark Posted Mortgage Rate for this purpose.",
       "releases_per_year": 52,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Weekly benchmark/mortgage qualifying rate update (effective Monday 2026-08-17)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The new benchmark rate for insured mortgages (based on the weekly median 5-year fixed insured mortgage rate from federally-backed mortgage insurance applications, plus a 200 bps buffer) is published by the Bank of Canada every Wednesday, effective the following Monday.",
+        "source_url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html",
+        "note": "Confirmed by Department of Finance's Feb 2020 announcement establishing the new benchmark rate methodology and weekly Wednesday publication schedule (effective April 6, 2020, replacing the prior 5-Year Benchmark Posted Rate). Corroborated by Bank of Canada's related posted-interest-rates page, which is also 'Typically published on Wednesdays by 14:30 ET' with the most recent data as of research date (2026-08-11) being from Wednesday 2026-08-05, consistent with a next release on Wednesday 2026-08-12. Could not directly confirm on bankofcanada.ca which exact page hosts the insured-mortgage benchmark rate series itself (searches only surfaced the Department of Finance policy announcement and BoC's general posted-rates page), so no url_correction is made without direct citation."
+      },
       "last_updated": null,
       "url": "https://www.bankofcanada.ca/rates/interest-rates/canadian-interest-rates/",
       "domains": [
@@ -116,6 +152,21 @@
       "region": "Canada",
       "description": "A weekly Bank of Canada table of the interest rates posted by the six major Canadian chartered banks on conventional mortgages (1- through 5-year terms), GICs, personal loans and deposit products. The published figure for each product is the statistical mode of the rates posted by the six largest banks, so it is a compilation of commercial bank submissions rather than a market-transaction rate. Its 5-year conventional mortgage series was the Bank of Canada 5-Year Benchmark Posted Mortgage Rate that governed the Canadian mortgage stress test until 2020-21.",
       "releases_per_year": 52,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Typically published on Wednesdays by 14:30 ET (weekly update of posted interest rates by the major chartered banks).",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Weekly posted interest rates update",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/posted-interest-rates-offered-by-chartered-banks/",
+        "note": "The Bank of Canada page states the data is typically published weekly on Wednesdays by 14:30 ET; the most recent observation at time of check was dated 2026-08-05 (a Wednesday). The 2026-08-12 date is the next expected weekly Wednesday update, computed from that stated cadence, not read off a dated calendar. This matches the corpus's existing releases_per_year=52."
+      },
       "last_updated": null,
       "url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/posted-interest-rates-offered-by-chartered-banks/",
       "domains": [
@@ -169,6 +220,12 @@
       "description": "The Minister of Finance, not OSFI, sets the qualification rules for insured mortgages under Canada's government-backed mortgage insurance guarantee framework. Since April 6, 2020 the minimum qualifying rate for an insured mortgage has been the greater of the borrower's contract rate or the Bank of Canada's published Benchmark Rate. The Minister retains authority to adjust the buffer built into that benchmark.",
       "releases_per_year": 1,
       "cadence_note": "Changed by ministerial decision rather than on a schedule; major changes in 2016, 2020.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html",
+        "note": "This is a policy framework/rule, not a periodic statistical report. The Feb 2020 announcement set the minimum qualifying rate formula (weekly median 5-year fixed insured mortgage rate + a 200bp buffer set by the Minister of Finance, with authority to adjust the buffer as needed). While the underlying benchmark RATE VALUE is republished weekly (Wednesdays, effective the following Monday) by the Bank of Canada, the FRAMEWORK/RULE itself (what this Dept of Finance report/announcement documents) has only been amended irregularly and unpredictably since 2020: e.g. Dec 2022 and Dec 2023 ministerial statements on the housing market, the Sept 2024 'Boldest Mortgage Reforms in Decades' announcement, the Dec 2024 in-force announcement, and a March 2025 Canada Gazette regulatory amendment (Insurable Housing Loan Regulations / Eligible Mortgage Loan Regulations). There is no stated cadence or fixed review interval for buffer/framework changes -- the Minister simply 'will have the authority to adjust the buffer' at will. This looks like a foundational policy instrument amended irregularly rather than a true recurring publication."
+      },
       "last_updated": null,
       "url": "https://www.canada.ca/en/department-finance/news/2020/02/a-new-benchmark-rate-for-insured-mortgages.html",
       "domains": [

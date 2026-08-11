@@ -343,6 +343,21 @@
       "region": "California",
       "description": "The annual letter transmitting to every California city and county the two factors that adjust the Article XIII B appropriations limit — the \"Gann limit\". Attachment A gives the price factor, the percentage change in California per capita personal income; Attachment B gives each city's and unincorporated county's population percentage change as of January 1. Revenue and Taxation Code §2227 requires transmission by May 1; the higher population estimate is certified to the State Controller by June 1.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "California Revenue and Taxation Code Section 2227: \"Such statements shall be transmitted by May 1\" — the Department of Finance must transmit its estimate of the percentage change in population (and, in practice, the accompanying price factor for Article XIII B appropriations limit calculations) to local agencies by May 1 each year.",
+        "entries": [
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-01",
+            "precision": "day",
+            "covers": "FY 2027-28 price factor and population information (Article XIII B appropriations limit factors)",
+            "evidence": "implied"
+          }
+        ],
+        "note": "The FY 2026-27 edition was already transmitted via cover letter dated May 1, 2026 (confirmed via a third-party-hosted copy of the DOF letter), so that occurrence is in the past relative to today (2026-08-11); the next occurrence is computed as May 1, 2027. This May 1 deadline is corroborated by an unbroken observed pattern of DOF cover letters dated May 1 in multiple years checked (e.g. May 1, 2003 and May 1, 2026), and by the DOF site's live page currently showing the 'May 2026' edition as current.",
+        "source_url": "https://dof.ca.gov/forecasting/demographics/price-and-population-factors/"
+      },
       "last_updated": null,
       "url": "https://dof.ca.gov/forecasting/demographics/price-and-population-factors/",
       "domains": [
@@ -360,7 +375,22 @@
       "jurisdiction_level": "provincial",
       "region": "California",
       "description": "California's official January 1 population (E-1) and population-and-housing (E-5) estimates for the state, all 58 counties and every incorporated city, built from housing stock change, occupancy and persons-per-household, and administrative records. These are the statutory population figures for California per capita allocations, and the State Controller uses them to distribute state subventions to cities and counties.",
-      "releases_per_year": 2,
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-01",
+            "precision": "day",
+            "covers": "January 1, 2027 E-1/E-5 population and housing estimates",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Annually, the Department of Finance shall transmit to each city and each county an estimate of the percentage change in population... Such statements shall be transmitted by May 1. (Cal. Revenue and Taxation Code Section 2227)",
+        "source_url": "https://dof.ca.gov/forecasting/demographics/estimates-e1/",
+        "note": "DOF press releases confirm this statutory May 1 deadline is met in practice: the 2026 E-1/E-5 estimates were released May 1, 2026, and the 2025 estimates were released May 1, 2025. The most recent release (May 1, 2026) has already occurred as of 2026-08-11, so the next expected release is May 1, 2027."
+      },
       "last_updated": null,
       "url": "https://dof.ca.gov/forecasting/demographics/estimates-e1/",
       "domains": [
@@ -409,7 +439,28 @@
       "jurisdiction_level": "provincial",
       "region": "California",
       "description": "The distribution of the Bradley-Burns uniform local sales and use tax and district transactions taxes to cities, counties and districts, paid as two monthly advances plus a quarterly cleanup payment in February, May, August and November, together with the published statistics of amounts distributed by jurisdiction. Advances are computed from the prior year's like quarter; the cleanup reconciles to actual returns.",
-      "releases_per_year": 4,
+      "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-11-24",
+            "to": "2025-11-24",
+            "precision": "day",
+            "covers": "FY 2024-25 Local Tax Distributions by City and County (Table 21A) data added to the dataset",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "FY 2025-26 Local Tax Distributions by City and County (Table 21A) data (projected next annual update)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://cdtfa.ca.gov/dataportal/dataset.htm?url=SUTDRevDistCityCounty",
+        "note": "This is an ANNUAL dataset, not quarterly. CDTFA's own statistics page classifies it under 'Annual Report Tables: Sales and Use Taxes,' and the underlying OData API (queried directly) shows one fiscal-year record set added per year for 13 straight fiscal years (2012-13 through 2024-25), with the most recent addition (FY2024-25) timestamped LastUpdated=2025-11-24. Fiscal years run July 1-June 30, so a ~5-month lag after fiscal year close (June 30) to publication (~late November) is the observed pattern; the corpus's releases_per_year=4 appears to describe a different, related CDTFA quarterly Bradley-Burns disbursement product, not this specific Table 21A dataset. No explicit publisher-stated rule (e.g. 'published X months after fiscal year end') was found, so this is classified as observed-pattern rather than stated-rule."
+      },
       "last_updated": null,
       "url": "https://cdtfa.ca.gov/dataportal/dataset.htm?url=SUTDRevDistCityCounty",
       "domains": [
@@ -442,8 +493,43 @@
       "region": "California",
       "description": "The annual letter instructing all 58 county assessors what inflation factor to apply to factored base year values on the coming roll. Revenue and Taxation Code §51 compounds base year values by this factor, which Article XIII A §2(b) of the California Constitution caps at 2 percent. One short letter, issued days before the lien date, that sets the growth rate of the property tax base for the whole state.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-12-22",
+            "to": "2023-12-22",
+            "precision": "day",
+            "covers": "2024-25 Prop 13 inflation factor letter (LTA 2023/056)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-12-27",
+            "to": "2024-12-27",
+            "precision": "day",
+            "covers": "2025-26 Prop 13 inflation factor letter (LTA 2024/053)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-01-13",
+            "to": "2026-01-13",
+            "precision": "day",
+            "covers": "2026-27 Prop 13 inflation factor letter (LTA 2026/002)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2027-01-31",
+            "precision": "quarter",
+            "covers": "2027-28 Prop 13 inflation factor letter (next expected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.boe.ca.gov/proptaxes/ltacont.htm",
+        "note": "The BOE Property Tax Department issues a Letter To Assessors each year announcing the annual inflation factor under Revenue & Taxation Code Section 51 (base year values compounded by the CCPI percentage change, capped at 2%). There is no published release calendar and no statutory deadline for the letter's issuance date itself (only the underlying CPI computation method is statutorily fixed); observed issuance dates cluster in late December to mid-January, immediately before/around the January 1 lien date for the following fiscal year. The most recent letter, LTA 2026/002 (Jan 13, 2026), already covers FY2026-27 inflation factor (1.02); the next letter (for FY2027-28) is expected around December 2026-January 2027 based on this pattern, but no confirmed date exists yet as of 2026-08-11."
+      },
       "last_updated": null,
-      "url": "https://www.boe.ca.gov/proptaxes/lta.htm",
+      "url": "https://www.boe.ca.gov/proptaxes/ltacont.htm",
       "domains": [
         "inflation",
         "assessment",

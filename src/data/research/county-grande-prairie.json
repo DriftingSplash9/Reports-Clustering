@@ -28,7 +28,29 @@
       "jurisdiction_level": "municipal",
       "region": "County of Grande Prairie, Alberta",
       "description": "Annual operating and capital budget adopted at a dedicated budget council meeting, setting the net funding requirement that the tax rate bylaw then raises. The 2025 budget set that requirement at $154,133,907.",
-      "releases_per_year": 1,
+      "releases_per_year": 2,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "2027 Interim Budget",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-04-01",
+            "to": "2027-04-30",
+            "precision": "month",
+            "covers": "2027 Final Budget",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "\"The County approves an interim budget in the fall annually for the following year.\" \"The finalized budget and municipal tax rates are approved once the Province sets the final property tax levy for education requisitions, and when property assessment values have been confirmed through final budget deliberation meetings in April.\"",
+        "source_url": "https://www.countygp.ab.ca/council-administration/budget-and-financial-documents/",
+        "note": "The County actually publishes budget documents twice per year, not once: an interim budget adopted in fall/December (2025 interim approved 2024-12-13; 2026 interim approved 2025-12-13) and a finalized budget adopted in April once provincial education tax levies and assessments are confirmed (2025 final approved 2025-04-17; 2026 final approved 2026-04-25). Dates for the December interim entry are estimated (implied) from the consistent Dec 13 precedent in the two most recent years; exact 2026 dates were not on a published calendar."
+      },
       "last_updated": null,
       "url": "https://www.countygp.ab.ca/council-administration/budget-and-financial-documents/",
       "domains": [
@@ -45,6 +67,21 @@
       "region": "County of Grande Prairie, Alberta",
       "description": "Annual valuation of every assessable property in the county, notices mailed by the end of May. Unlike a city roll, most of its value sits in classes the local assessor does not value at market: $2.27 billion of machinery and equipment, $2.46 billion of linear property, and $122 million of farmland, all valued under provincial Minister's Guidelines.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Property Assessment Notices are mailed to County of Grande Prairie No. 1 property owners by the end of May of each year.",
+        "entries": [
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-31",
+            "precision": "month",
+            "covers": "2027 Property Assessment Roll notices",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.countygp.ab.ca/home-property-environment/property-taxes/",
+        "note": "The 2026 assessment roll/notices were already mailed by end of May 2026 (confirmed by a June 2026 County news post: 'Property Tax Notices Mailed; Payment Deadline June 30, 2026', https://www.countygp.ab.ca/news/posts/property-tax-notices-mailed-payment-deadline-june-30-2026/). Since today (2026-08-11) is past that, the next occurrence is projected to end of May 2027. The complaint deadline for the 2026 roll was July 14, 2026 (per https://www.countygp.ab.ca/home-property-environment/property-assessments/appealing-an-assessment/), consistent with a ~60-day window after a May mailing."
+      },
       "last_updated": null,
       "url": "https://www.countygp.ab.ca/home-property-environment/property-assessments/",
       "domains": [
@@ -95,6 +132,12 @@
       "region": "Grande Prairie region, Alberta",
       "description": "Annual requisition levied on member municipalities in the Grande Prairie region to fund seniors housing, collected through their property tax bylaws. A housing management body under the Alberta Housing Act — neither a government nor a department, but able to requisition tax from one.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.grandespirit.org/board-and-minutes/",
+        "note": "Grande Spirit Foundation (a regional Alberta 'management body' under the Alberta Housing Act) requisitions operating funds annually from its member municipalities (City/County of Grande Prairie and several surrounding towns/counties/MDs). The Housing Act provision found only specifies that a municipality must pay its agreed contribution within 90 days of the Foundation mailing the invoice -- it does not fix a date by which the Foundation must issue the requisition. Board meeting minutes show requisition percentage increases being approved at a mid-year (June 2024) meeting for the following fiscal year's budget, but no calendar, fixed statutory date, or consistent multi-year pattern for the requisition's own issuance could be confirmed -- the Foundation's public board-minutes archive (2023-2025) contains no dedicated 'requisition schedule' document, and the Alberta Housing Act / Housing Regulation full text could not be retrieved (qp.alberta.ca, kings-printer.alberta.ca, canlii.org, and open.alberta.ca all blocked or errored on fetch). Member-municipality budget documents (e.g. County of Grande Prairie) show the requisition amount folded into municipal interim/final budgets each Nov-Dec, but that reflects the municipality's own budget cycle, not a documented Foundation release date."
+      },
       "last_updated": null,
       "url": "https://www.grandespirit.org/",
       "domains": [
@@ -113,6 +156,34 @@
       "description": "The Minister's Guidelines that set assessed values for regulated property — farmland, machinery and equipment, linear property and railway. These classes are not valued at market by the local assessor; the province prescribes the procedure and the rates, and the municipality applies them. Issued as ministerial orders and updated for each assessment year.",
       "releases_per_year": 1,
       "cadence_note": "Published as a set of four guidelines per assessment year. Modelled as one node because Alberta publishes and revises them together as 'regulated property minister's guidelines'; splitting them would add three nodes with identical edges.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "source_url": "https://open.alberta.ca/publications/2369-6060",
+        "note": "\"Regulated Property Assessment Minister's Guidelines\" is the alberta.ca landing-page category covering four separate annual Ministerial Order documents: Linear Property, Railway Property, Machinery & Equipment, and Farm Land Assessment Minister's Guidelines. Each is republished annually via Ministerial Order (e.g. MAG:016/23, MAG:017/24) and the Open Government publication pages show a clear multi-year December pattern: 2025 editions of the Linear, Machinery & Equipment, and Farm Land guidelines were posted/updated December 12, 2025, and the Railway guideline December 17, 2025; prior editions (2015-2024) follow the same annual cadence. No statute/regulation text was found specifying an exact statutory deadline (the Matters Relating to Assessment and Taxation Regulation, 2018 just requires assessors to follow whichever guidelines are in effect), so this is classified as an observed pattern rather than a stated rule. The next edition (2026 guidelines) is expected mid-December 2026 based on this pattern; the exact day is not yet published as of 2026-08-11.",
+        "entries": [
+          {
+            "from": "2025-12-12",
+            "to": "2025-12-12",
+            "precision": "day",
+            "covers": "2025 Alberta Linear Property / Machinery & Equipment / Farm Land Assessment Minister's Guidelines",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-12-17",
+            "to": "2025-12-17",
+            "precision": "day",
+            "covers": "2025 Alberta Railway Property Assessment Minister's Guidelines",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "2026 Alberta Regulated Property (Linear/Railway/Machinery & Equipment/Farm Land) Assessment Minister's Guidelines",
+            "evidence": "implied"
+          }
+        ]
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/municipal-property-assessment-legislation-and-publications",
       "domains": [
