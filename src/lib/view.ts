@@ -34,6 +34,9 @@ export interface ViewSettings {
    * switch had never done anything at all. Glow now tracks authority — only the
    * most depended-upon reports bleed light — which makes it a second reading of
    * the same encoding rather than a uniform halo competing with it.
+   *
+   * 2026-08-10: default off; the intensity/threshold mapping was widened so
+   * low and high settings are visibly different when the slider is used.
    */
   glow: number
   /** Slow automatic orbit. */
@@ -69,50 +72,40 @@ export interface ViewSettings {
 /**
  * What the graph looks like on load.
  *
- * Chosen by looking, and revised in V0.7 after looking again at four times the
- * node count. The ground grid gives the network a floor and a sense of scale;
- * past that, each additional element competes with the nodes for attention.
- *
- * The platform slab is gone entirely, not merely defaulted off. Sized to the
- * data, it grew with the graph until it was a wall — from most angles it either
- * occluded the lower half of the network or forced the camera to look down at
- * it. The infinite grid does the same job, reports scale better because its
- * cells never change size, and is never in the way.
- *
- * Haze defaults low rather than off. It works against the long lens, which is
- * the whole objection to it — but at 121 nodes the alternative is a scene with
- * no depth cue whatsoever, and a little of the wrong cue beats none.
+ * Defaults revised 2026-08-10 to match the view Thomas was actually using:
+ * bounding box on, auto-orbit on, haze and glow off, cluster spread at 50%.
+ * Both side panels start collapsed (see App.tsx PanelShell props).
  */
 export const DEFAULT_VIEW: ViewSettings = {
   showPulses: true,
   showEdges: true,
-  showCube: false,
+  showCube: true,
   showGroundGrid: true,
   showHorizon: false,
-  fog: 0.35,
-  glow: 0.55,
-  autoRotate: false,
+  fog: 0,
+  glow: 0,
+  autoRotate: true,
   focusBuiltFrom: true,
   focusFeedsInto: true,
   zoom: 1,
-  spread: 1,
+  spread: 0.5,
 }
 
 /** Scene background. Fog resolves to this, so the two must agree. */
 export const SCENE_BACKGROUND = '#05070d'
 
 /**
- * Bloom threshold at full glow.
+ * Bloom threshold range across the glow slider.
  *
- * The old value was 0.5, against a brightest node of 0.36 — so bloom lit
- * nothing, on any graph, ever, and nobody noticed for five sessions. The
- * replacement is chosen so roughly the top ten nodes bleed and the rest stay
- * contained: glow becomes a second reading of authority instead of atmosphere.
- * Below about 0.15 most of the graph blooms, apparent size flattens out, and
- * the encoding the whole project rests on stops working.
+ * Widened 2026-08-10 so low and high settings are visibly different:
+ * - at low glow the threshold stays high → almost nothing blooms
+ * - at full glow the threshold drops → more nodes bleed, and intensity is higher
+ *
+ * The old 0.26–0.44 band was too tight for the slider to feel useful.
+ * Floor is still above the "everything turns into white blobs" regime.
  */
-export const BLOOM_THRESHOLD_MIN = 0.26
-export const BLOOM_THRESHOLD_MAX = 0.44
+export const BLOOM_THRESHOLD_MIN = 0.14
+export const BLOOM_THRESHOLD_MAX = 0.55
 
 /**
  * Every constant governing how focus looks, in one place, because they are only
