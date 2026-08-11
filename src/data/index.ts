@@ -2,6 +2,7 @@ import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
 import { reports as seedReports } from './reports'
 import { dependencies as seedDependencies } from './dependencies'
 import usCaliforniaLosAngeles from './research/us-california-los-angeles.json'
+import usCountyTierRound2 from './research/us-county-tier-round2.json'
 import usCountyTier from './research/us-county-tier.json'
 import usTexasHouston from './research/us-texas-houston.json'
 import usSubnational from './research/us-subnational.json'
@@ -112,6 +113,7 @@ import ngLagosMunicipalFinance from './research/ng-lagos-municipal-finance.json'
 import keNairobiMunicipalFinance from './research/ke-nairobi-municipal-finance.json'
 import egCairoMunicipalFinance from './research/eg-cairo-municipal-finance.json'
 import zaJoburgMunicipalFinance from './research/za-joburg-municipal-finance.json'
+import afGrokMunicipalBatch2 from './research/af-grok-municipal-batch2.json'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -149,6 +151,7 @@ const slices: ResearchSlice[] = [
   usSubnational as unknown as ResearchSlice,
   usTexasHouston as unknown as ResearchSlice,
   usCountyTier as unknown as ResearchSlice,
+  usCountyTierRound2 as unknown as ResearchSlice,
   usCaliforniaLosAngeles as unknown as ResearchSlice,
   albertaMunicipal as unknown as ResearchSlice,
   populationAndEducation as unknown as ResearchSlice,
@@ -257,6 +260,7 @@ const slices: ResearchSlice[] = [
   keNairobiMunicipalFinance as unknown as ResearchSlice,
   egCairoMunicipalFinance as unknown as ResearchSlice,
   zaJoburgMunicipalFinance as unknown as ResearchSlice,
+  afGrokMunicipalBatch2 as unknown as ResearchSlice,
 ]
 
 function assemble() {

@@ -1,0 +1,171 @@
+{
+  "_slice": "af-grok-municipal-batch2",
+  "_researched": "2026-08-10",
+  "_status": "DRAFT, NOT IMPORTED. Fifth municipal-level slice in the AF branch (G.14), and the first researched externally via Grok on Thomas's own prompt rather than by an in-session subagent. Covers Accra (Ghana), Kampala (Uganda), Casablanca (Morocco) and Addis Ababa (Ethiopia) with mintable primary-source findings; Dakar (Senegal) and Kigali (Rwanda) returned real leads but nothing that cleared this project's primary-source bar, and are recorded only as open questions and dropped edges below. Sitting in src/data/research/ pending Thomas's review.",
+  "_note": "This batch extends G.13's pattern rather than breaking it: no primary document across any of the six cities was found linking municipal-level property rates, tariffs or budgets to the country's national CPI series. Casablanca's Taxe d'Habitation is explicit about this -- its own city page states the rental-value base 'est revisee tous les cinq ans par une augmentation de 2%', a fixed statutory percentage, not CPI. Two corrections were made to Grok's draft before import: (1) the KCCA Act, 2010 was reclassified from 'municipal' to 'federal' -- it is an Act of the Parliament of Uganda, and this project's standing convention (applied consistently since G.13) is that jurisdiction_level follows the issuing authority, not the subject matter, the same way Ghana's Local Governance Act and South Africa's MFMA/MPRA are 'federal' despite governing municipalities. (2) Rwanda's proposed 'rw-kigali-budget-publications' node was not minted -- Grok's own Part A quote for it is a list of PDF filenames on the City of Kigali's publications page, with no verbatim content from inside any of those budgets; that is a real, useful lead (the documents plainly exist) but does not itself clear the bar for a Report node under this project's evidentiary standard, so it is recorded as an open question and a _dropped entry instead. Dependencies came back empty, and stayed empty after review -- no document in this batch's Part A, including ones Grok didn't formalize into an edge, actually names a specific target report by number or title (the Auditor-General's KCCA opinion cites 'the Public Finance Management Act' generically, not the KCCA Act, and that Act itself is not yet a corpus node).",
+  "_open_questions": [
+    {
+      "id": "et-proc-1365-addis-applicability-unverified",
+      "question": "Ethiopia's Property Tax Proclamation No. 1365/2025 was sourced via third-party legal-summary sites (ethiodata.et, ethiolex), not the official Federal Negarit Gazette, and its Part A quote establishes the national urban tax framework but does not itself name Addis Ababa. The proclamation's application to Addis Ababa specifically is Grok's own characterization, not a verbatim quote naming the city. Worth reopening against the primary gazette text, and worth a direct search for Addis Ababa City Administration's own budget/finance documents, which were not located in this pass despite the city's reported chartered, region-equivalent status."
+    },
+    {
+      "id": "rw-kigali-budget-content-not-opened",
+      "question": "The City of Kigali's own publications page (kigalicity.gov.rw/publications/budget) lists specific budget-resolution PDFs by title (e.g. 'City_of_Kigali_Revised_Budget_2023-2024.pdf') -- confirming the documents exist and are public, but none of their content was opened or quoted this round. A future session should open these directly rather than treat the listing page itself as the document."
+    },
+    {
+      "id": "sn-dakar-cgct-and-fdd-fect-not-opened",
+      "question": "Senegal's Code General des Collectivites Territoriales (the local-government code) and the FDD/FECT transfer-formula texts were not opened in primary form; Dakar's own budget figures (~88.5bn FCFA for 2026 per news reporting) were found only in secondary press coverage, not a primary Ville de Dakar budget document."
+    },
+    {
+      "id": "ug-kcca-financial-statements-pfma-not-minted",
+      "question": "The Auditor-General's opinion on KCCA's FY2023/24 financial statements states they were prepared 'in accordance with Section 49 of the Public Finance Management Act' -- a real, quotable dependency target, but Uganda's Public Finance Management Act itself has not been opened and minted as a corpus node in the AF branch. Worth completing in a future session."
+    }
+  ],
+  "reports": [
+    {
+      "id": "gh-ama-composite-budget-2026",
+      "title": "Accra Metropolitan Assembly Composite Budget / Programme Based Budget Estimates for 2026 (Narrative Statement)",
+      "publisher": "Accra Metropolitan Assembly",
+      "country": "GH",
+      "jurisdiction_level": "municipal",
+      "region": "Accra, Ghana",
+      "description": "AMA's own programme-based composite budget narrative and estimates for 2026-2029. Its Revenue Performance table lists Property Rate as a major Internally Generated Fund (IGF) line: \"Property Rate ... 2025 Budget 15,036,898.88 ... Actual as at September 10,647,171.47 ... 70.81\" percent achievement. No CPI or inflation-indexation language appears in the extracted revenue or rate-setting sections.",
+      "releases_per_year": 1,
+      "last_updated": "2026-02",
+      "url": "https://ama.gov.gh/documents/2026_NARRATIVE_STATEMENT.pdf",
+      "domains": ["municipal-finance", "taxation"]
+    },
+    {
+      "id": "gh-local-governance-act-936",
+      "title": "Local Governance Act, 2016 (Act 936)",
+      "publisher": "Parliament of Ghana",
+      "country": "GH",
+      "jurisdiction_level": "federal",
+      "region": "Ghana",
+      "description": "The national statute establishing District Assemblies (including AMA) and their property-rating powers: \"A general rate may be (a) a rate payable by the owner of premises within the district on the rateable value of the premises... A general or special rate imposed on immovable property... shall be at a specified rate per Ghana Cedi on the rateable value.\" Also establishes the District Assemblies Common Fund (DACF): \"The moneys that accrue to the Common Fund shall be distributed among the District Assemblies on the basis of a formula approved by Parliament.\" No inflation/CPI clause appears in the rate-setting provisions quoted.",
+      "last_updated": null,
+      "url": "https://ghalii.org/akn/gh/act/2016/936",
+      "domains": ["municipal-finance", "taxation", "fiscal-transfers", "assessment"]
+    },
+    {
+      "id": "ug-kcca-act",
+      "title": "Kampala Capital City Authority Act, 2010",
+      "publisher": "Parliament of Uganda",
+      "country": "UG",
+      "jurisdiction_level": "federal",
+      "region": "Uganda (establishes and governs Kampala Capital City Authority)",
+      "description": "The national Act establishing KCCA as a distinct, centrally-constituted capital-city authority rather than an ordinary elected municipal council. Vests the power \"to determine taxation levels within the Capital City\" in the Council and requires the Executive Director to \"present the annual budget of the Authority to the Council.\" No CPI/inflation language found in the extracted financial provisions.",
+      "last_updated": null,
+      "url": "https://ulii.org/en/akn/ug/act/2011/1",
+      "domains": ["municipal-finance", "taxation"]
+    },
+    {
+      "id": "ug-kcca-financial-statements-2024",
+      "title": "Kampala Capital City Authority Financial Statements (FY ended 30 June 2024) -- Auditor General Report",
+      "publisher": "Office of the Auditor General of Uganda (auditing KCCA's own financial statements)",
+      "country": "UG",
+      "jurisdiction_level": "municipal",
+      "region": "Kampala, Uganda",
+      "description": "The Auditor General's opinion on KCCA's own audited financial statements: \"I have audited the financial statements of Kampala Capital City Authority (KCCA) for the financial year ended 30th June 2024... prepared, in all material respects, in accordance with Section 49 of the Public Finance Management Act.\" Confirms KCCA maintains its own audited annual accounts, prepared under national PFM law -- classified municipal here since the underlying financial statements are KCCA's own, notwithstanding the national-level auditor.",
+      "releases_per_year": 1,
+      "last_updated": "2024-06-30",
+      "url": "https://www.oag.go.ug/storage/reports/PSM_CG_AGCY_2023_24_1740643852.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ug-kcca-revenue-sources",
+      "title": "KCCA Revenue Sources",
+      "publisher": "Kampala Capital City Authority",
+      "country": "UG",
+      "jurisdiction_level": "municipal",
+      "region": "Kampala, Uganda",
+      "description": "KCCA's own official listing of its revenue heads, including \"Property Rates [-] Commercially managed Properties in the City,\" plus Ground Rent, Local Service Tax and Licenses. No adjustment or escalation mechanism is stated for any listed revenue head.",
+      "last_updated": null,
+      "url": "https://www.kcca.go.ug/?jsp=rev_sources_more",
+      "domains": ["municipal-finance", "taxation"]
+    },
+    {
+      "id": "ma-casablanca-taxe-habitation",
+      "title": "Taxe d'habitation -- Commune de Casablanca",
+      "publisher": "Conseil de la Ville de Casablanca",
+      "country": "MA",
+      "jurisdiction_level": "municipal",
+      "region": "Casablanca, Morocco",
+      "description": "The City of Casablanca's own description of its residential property tax: \"La taxe d'habitation est assise sur la valeur locative qui est revisee tous les cinq ans par une augmentation de 2%\" -- an explicit, fixed five-yearly 2% revision, not a CPI or inflation-indexed adjustment.",
+      "last_updated": null,
+      "url": "https://www.casablancacity.ma/fr/article/279/taxe-dhabitation",
+      "domains": ["municipal-finance", "taxation", "assessment"]
+    },
+    {
+      "id": "et-property-tax-proc-1365-2025",
+      "title": "Property Tax Proclamation No. 1365/2025",
+      "publisher": "Federal Democratic Republic of Ethiopia",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "New national property-tax framework for urban areas: \"Taxable Value: This is set at 25 (twenty five) percent of the Property Market Value... [the] urban land use tax rate shall be... not less than 0.2% and more than 1% of the taxable value.\" Market-value-based, with the specific rate left to further Council of Ministers regulation. Sourced via third-party legal-summary sites, not the official Federal Negarit Gazette; its application to Addis Ababa specifically is inferred from the 'urban areas' framing rather than a verbatim quote naming the city (see open question).",
+      "last_updated": "2025",
+      "url": "https://ethiodata.et/ethiopia-property-tax-proclamation-no-1365-2025/",
+      "domains": ["taxation", "assessment", "municipal-finance"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "Any of the six cities' property rates, tariffs, wage-setting or revenue forecasts calculated_from or uses_data_from the country's national CPI node (gh-gss-cpi, sn-ansd-ihpc, et-ess-cpi, ug-ubos-cpi, rw-nisr-cpi, ma-hcp-ipc)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No primary document opened across any of the six cities contains a verbatim statement linking municipal-level fiscal instruments to the country's national CPI series. Casablanca's Taxe d'Habitation is explicit about using a fixed 2% five-yearly revision instead."
+    },
+    {
+      "edge": "Ville de Dakar's own primary annual budget document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Budget totals (~88.5bn FCFA for 2026) appear only in Senegalese press coverage of council adoption votes; no primary Ville de Dakar budget PDF or resolution text was opened."
+    },
+    {
+      "edge": "Senegal Code General des Collectivites Territoriales and FDD/FECT transfer-formula application to Dakar",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Referenced as the governing framework in secondary case-study material; the primary code text and the formula's actual application to Dakar were not opened this round."
+    },
+    {
+      "edge": "Addis Ababa City Administration's own primary budget or finance document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Budget-size figures (e.g. a reported 350bn Birr proposal) appear only in secondary news coverage. No primary Addis Ababa City Administration budget document or its chartered-city-status proclamation was opened, despite the city's reported region-equivalent administrative status."
+    },
+    {
+      "edge": "City of Kigali budget publications listing -> a specific Report node representing actual budget content",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "kigalicity.gov.rw/publications/budget lists specific PDF titles (e.g. the 2023-2024 revised budget) confirming the documents are public, but no content from inside any of those PDFs was opened or quoted -- a listing page is not itself a substantive primary document under this project's standard."
+    },
+    {
+      "edge": "Any of the six cities' water, waste-collection or business-licence tariff document with a CPI/inflation escalation clause",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No such document was located for any of the six cities in this pass."
+    },
+    {
+      "edge": "ug-kcca-financial-statements-2024 -> Uganda's Public Finance Management Act",
+      "source": "ug-kcca-financial-statements-2024",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The Auditor-General's opinion states KCCA's financial statements were prepared 'in accordance with Section 49 of the Public Finance Management Act' -- a real, named dependency target, but that Act has not been opened and minted as its own corpus node in the AF branch."
+    },
+    {
+      "edge": "gh-ama-composite-budget-2026 -> gh-local-governance-act-936",
+      "source": "gh-ama-composite-budget-2026",
+      "target": "gh-local-governance-act-936",
+      "reason": "no-document",
+      "why": "AMA's own 2026 budget narrative was searched in the material retrieved and does not itself cite Act 936 by name or number; the Act's rate-setting text was confirmed from a separate legal-database source (ghalii.org), not from AMA's own budget document referencing it."
+    }
+  ]
+}
