@@ -488,8 +488,36 @@
       "region": "California",
       "description": "The annual valuation of the CalSTRS Defined Benefit Program presented to the Teachers' Retirement Board each spring. Unusually, the base employer, member and state contribution rates are fixed in the Education Code rather than set actuarially: the valuation supports only a bounded board adjustment of at most 1 percent of payroll a year, to a ceiling of 20.25 percent.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-05-08",
+            "to": "2025-05-08",
+            "precision": "day",
+            "covers": "DB Program actuarial valuation as of June 30, 2024, presented to CalSTRS Teachers' Retirement Board",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-05-28",
+            "to": "2026-05-28",
+            "precision": "day",
+            "covers": "DB Program actuarial valuation as of June 30, 2025 (Milliman report issued April 28, 2026), presented to Teachers' Retirement Board",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-31",
+            "precision": "month",
+            "covers": "DB Program actuarial valuation as of June 30, 2026 (projected next annual valuation)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "http://www.calstrs.com/actuarial-valuations",
+        "note": "CalSTRS commissions Milliman to perform an annual actuarial valuation of the Defined Benefit Program as of each June 30 fiscal year end. The written report is typically issued in April of the following year and presented to the Teachers' Retirement Board at its May meeting (e.g., May 8, 2025 board item for the 6/30/2024 valuation; May 28, 2026 board item for the 6/30/2025 valuation, Milliman report dated April 28, 2026). No published fixed calendar or statutory date was found specifying an exact release date, but the annual June 30 valuation date / spring report / May board presentation cadence has been consistent across at least the 2024-2026 cycles."
+      },
       "last_updated": null,
-      "url": "https://www.calstrs.com/actuarial-valuations-and-reports",
+      "url": "http://www.calstrs.com/actuarial-valuations",
       "domains": [
         "benefits",
         "education",
@@ -1004,6 +1032,27 @@
       "region": "Los Angeles, California",
       "description": "The adjustment factors applied on top of base rates under the City water and electric rate ordinances. Carried in the corpus as a documented NON-dependency: none of the eight water factors or the four power factors is tied to any published index. Every one is a cost-recovery pass-through against LADWP's own budgeted and actual expenditures, approved by the Board of Water and Power Commissioners. See the _dropped entry.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-12-31",
+            "precision": "quarter",
+            "covers": "Oct-Dec 2026 electric/water rate adjustment factors",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-03-31",
+            "precision": "quarter",
+            "covers": "Jan-Mar 2027 electric/water rate adjustment factors",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.ladwp.com/account/customer-service/electric-rates/commercial-adjustment-billing-factors",
+        "note": "LADWP posts electric (residential/commercial) power pass-through adjustment billing factors in quarterly tables (Jan-Mar, Apr-Jun, Jul-Sep, Oct-Dec) each year; the Jul-Sep 2026 period is already posted and Oct-Dec 2026 is shown with dashes (not yet available) as of 2026-08-11. No explicit publication-date calendar or stated rule was found -- pages state only that factors 'fluctuate up or down periodically, in accordance with the power rate ordinances.' Water adjustment factor tables observed on a semiannual (Jan-Jun, Jul-Dec) cadence rather than quarterly, so the quarterly pattern here reflects the electric-side tables, which matches the on-file releases_per_year=4."
+      },
       "last_updated": null,
       "url": "https://www.ladwp.com/account/understanding-your-rates/water-rate-adjustment-factors",
       "domains": [

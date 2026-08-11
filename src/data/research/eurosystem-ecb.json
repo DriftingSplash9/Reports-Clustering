@@ -20,6 +20,20 @@
       "description": "The consolidated year-end balance sheet of the Eurosystem (the ECB and the euro area national central banks), with intra-Eurosystem claims and liabilities netted out. Governed by Annex VII to Guideline (EU) 2024/2941 of the European Central Bank (ECB/2024/31): 'the consolidated annual balance sheet of the Eurosystem' (Article 26(3)(c)). ECB's own landing page lists one dated entry per year, unbroken, from 1999 to 2025.",
       "releases_per_year": 1,
       "cadence_note": "27 consecutive years of linked publication (1999-2025) confirmed directly on the ECB's own landing page, each dated in February for the preceding year-end -- e.g. '26 February 2026 -- Consolidated balance sheet of the Eurosystem as at 31 December 2025'.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2027-02-01",
+            "to": "2027-02-28",
+            "precision": "month",
+            "covers": "Consolidated balance sheet of the Eurosystem as at 31 December 2026",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/balance/html/all_balance_sheets.en.html",
+        "note": "ECB has published this annual consolidated balance sheet every February since 1999 (27 consecutive years through the 26 February 2026 edition covering 31 December 2025). No fixed calendar date or stated rule is published; the landing page simply lists dated past editions. Most recent confirmed release: 26 February 2026 (as at 31 December 2025), per https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/balance/html/all_balance_sheets.en.html. Next edition (covering 31 December 2026) is expected around February 2027 based on this observed pattern."
+      },
       "last_updated": null,
       "url": "https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/balance/html/all_balance_sheets.en.html",
       "domains": [
@@ -36,6 +50,42 @@
       "description": "The consolidated weekly financial statement of the Eurosystem, published under Annexes V and VI to Guideline (EU) 2024/2941 (ECB/2024/31): 'the published consolidated weekly financial statement of the Eurosystem after quarter end' and '... during the quarter' (Article 26(3)(a)-(b)). ECB's own landing page: 'The weekly financial statements of the Eurosystem are published on a Tuesday, and they relate to the preceding Friday.'",
       "releases_per_year": 52,
       "cadence_note": "Stated directly by the ECB: published every Tuesday, relating to the preceding Friday, except the first statement of each quarter, which 'will normally be a Wednesday (instead of Tuesday) in order to allow more time to complete the quarterly revaluation of assets and liabilities'. The fastest-cadence node in the EU branch, faster than eurostat-hicp's monthly cadence.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-11",
+            "to": "2026-08-11",
+            "precision": "day",
+            "covers": "Statement relating to Friday 7 August 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-18",
+            "to": "2026-08-18",
+            "precision": "day",
+            "covers": "Statement relating to Friday 14 August 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-25",
+            "to": "2026-08-25",
+            "precision": "day",
+            "covers": "Statement relating to Friday 21 August 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-01",
+            "precision": "day",
+            "covers": "Statement relating to Friday 28 August 2026",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The weekly financial statements of the Eurosystem are published on a Tuesday, and they relate to the preceding Friday, except the first statement of each quarter, which will normally be a Wednesday (instead of Tuesday) in order to allow more time to complete the quarterly revaluation of assets and liabilities. Publication dates may also shift when TARGET system closures occur during the statement preparation period.",
+        "source_url": "https://www.ecb.europa.eu/press/annual-reports-financial-statements/wfs/html/index.en.html",
+        "note": "Confirmed via ECB site fetch: standard weekly Tuesday cadence with quarterly-first-statement Wednesday exception (e.g. 7 Jan 2026, 9 Apr 2026 [shifted to Thursday due to Easter Monday TARGET closure], 8 Jul 2026, 7 Oct 2026 are the 2026 quarter-first-statement dates). No full year-round published calendar of every single Tuesday was found on the page, only the general rule plus the quarterly exception dates, so this is modeled as a stated-rule with computed weekly entries rather than a published-calendar. As of 2026-08-11 (a Tuesday, not a quarter-first date), the immediate entries follow the plain weekly rule."
+      },
       "last_updated": null,
       "url": "https://www.ecb.europa.eu/press/annual-reports-financial-statements/wfs/html/index.en.html",
       "domains": [

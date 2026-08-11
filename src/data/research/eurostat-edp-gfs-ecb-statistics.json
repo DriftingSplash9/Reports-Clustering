@@ -101,8 +101,51 @@
       "description": "ECB's own methodology page: 'Monetary financial institution (MFI) balance sheet items (BSI) statistics are compiled by the ECB and include monthly and quarterly data.' All MFIs in the euro area are legally obliged to report to their national central bank, which in turn reports national aggregates to the ECB. Governed by Regulation ECB/2021/2 (recast) and Guideline ECB/2021/11.",
       "releases_per_year": 12,
       "cadence_note": "Live-verified on the ECB's own methodology page -- monthly data, with further breakdowns available quarterly.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-27",
+            "to": "2026-08-27",
+            "precision": "day",
+            "covers": "July 2026 BSI data (plus Q2 2026 breakdown)"
+          },
+          {
+            "from": "2026-09-25",
+            "to": "2026-09-25",
+            "precision": "day",
+            "covers": "August 2026 BSI data"
+          },
+          {
+            "from": "2026-10-27",
+            "to": "2026-10-27",
+            "precision": "day",
+            "covers": "September 2026 BSI data"
+          },
+          {
+            "from": "2026-11-26",
+            "to": "2026-11-26",
+            "precision": "day",
+            "covers": "October 2026 BSI data (plus Q3 2026 breakdown)"
+          },
+          {
+            "from": "2026-12-30",
+            "to": "2026-12-30",
+            "precision": "day",
+            "covers": "November 2026 BSI data"
+          },
+          {
+            "from": "2027-01-29",
+            "to": "2027-01-29",
+            "precision": "day",
+            "covers": "December 2026 BSI data"
+          }
+        ],
+        "source_url": "https://www.ecb.europa.eu/press/calendars/statscal/mfm/html/stpbsx.en.html",
+        "note": "ECB publishes a dedicated statistical release calendar page for the MFI aggregated balance sheet (BSI) with dated releases at 10:00 CET each month, roughly 4 weeks after month-end (slightly longer over year-end). The 27 July 2026 release (June 2026 data) has already passed relative to today (2026-08-11); the next release is 27 August 2026."
+      },
       "last_updated": null,
-      "url": "https://data.ecb.europa.eu/methodology/mfi-aggregated-balance-sheet",
+      "url": "https://www.ecb.europa.eu/press/calendars/statscal/mfm/html/stpbsx.en.html",
       "domains": [
         "monetary-policy"
       ]
@@ -117,6 +160,19 @@
       "description": "Aggregate consolidated profitability, balance sheets, asset quality, liquidity, funding, capital adequacy and solvency data for EU banks by size group, built from European Banking Authority Implementing Technical Standards (FINREP/COREP) supervisory reporting. Governed by Guideline ECB/2021/14.",
       "releases_per_year": 4,
       "cadence_note": "UNRESOLVED CONFLICT, recorded as found: the ECB's own live methodology page states, in one place, 'Data are published four times a year' and, further down the same page, 'The data are semi-annual, except for certain detailed breakdowns which are collected only annually.' Both sentences confirmed present on the live page 2026-08-05. releases_per_year uses the figure stated first and most prominently; not adjudicated. See EU/ECB-Staging-Batches_PartA_2026-08-05.md.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-11-06",
+            "to": "2026-11-06",
+            "precision": "day",
+            "covers": "CBD2 Q2 2026 consolidated banking data (release incl. press release)"
+          }
+        ],
+        "source_url": "https://www.ecb.europa.eu/press/calendars/statscal/sps/html/stcbds.en.html",
+        "note": "ECB's own statistics release calendar page for Consolidated Banking Data (dataset CBD2) lists dated releases: 07/08/2026 (already occurred — confirmed by press release published 2026-08-07 covering end-March 2026/Q1 2026 data) and 06/11/2026, both marked 'Tentative,' each 'Includes press release.' Prior actual press releases confirm a quarterly cadence: end-June 2025 data published 2025-11-21; end-September 2025 data published 2026-02-13; end-December 2025 data published 2026-06-19; end-March 2026 data published 2026-08-07. This supports releases_per_year=4 (one release per calendar quarter's reference data), consistent with the 'four times a year' statement on the methodology page, though the lag between reference quarter-end and publication varies (roughly 4-5 months) and the methodology page separately notes underlying data collection is semi-annual/annual for some breakdowns — that conflict (already flagged in the existing cadence_note) concerns data collection frequency, not the release/publication frequency, which the calendar clearly shows as quarterly."
+      },
       "last_updated": null,
       "url": "https://data.ecb.europa.eu/methodology/consolidated-banking-data",
       "domains": [
@@ -133,6 +189,27 @@
       "description": "Aggregate prudential data on significant institutions under ECB Banking Supervision — capital, leverage, liquidity, asset quality and profitability — built from European Banking Authority Implementing Technical Standards (FINREP/COREP) supervisory reporting, on the same institutional basis as ecb-consolidated-banking-data. Legal basis: Commission Implementing Regulation (EU) 2021/451 (ITS on supervisory reporting), ECB Regulation ECB/2015/13, Council Regulation (EU) No 1024/2013 (SSM Regulation) and Directive 2013/36/EU (CRD IV).",
       "releases_per_year": 4,
       "cadence_note": "ECB Data Portal, checked live 2026-08-08: 'The supervisory banking dataset is updated on a quarterly basis. With each update of the database figures for the previous four quarters can also be revised, as banks may resubmit data.' Note some general-government exposure breakdowns are collected only semi-annually, not the whole dataset — flagged, not adjudicated, same shape as the CBD2 conflict on the sibling node. Named but not minted since G.39.md/this file's original drafting for lack of a cadence statement; resolved 2026-08-08 by checking the live page.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "Q2 2026 supervisory banking statistics (significant institutions)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Q3 2026 supervisory banking statistics (significant institutions)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.bankingsupervision.europa.eu/press/pr/date/2026/html/ssm.pr260619~b2252c1d8a.en.html",
+        "note": "ECB Banking Supervision press releases show a consistent quarterly cadence of roughly 2.5-2.7 months after quarter-end: Q3 2025 data published 2025-12-17, Q4 2025 data published 2026-03-18, Q1 2026 data published 2026-06-19. No formal dated release calendar was found (the ECB statistical calendar page does not list SUP-specific dates), so exact day-of-month for upcoming releases is inferred from this pattern rather than documented. This is consistent with the existing cadence_note describing quarterly updates to the underlying dataset; the press-release cadence and dataset-update cadence appear aligned."
+      },
       "last_updated": null,
       "url": "https://data.ecb.europa.eu/data/datasets/SUP/data-information",
       "domains": [
@@ -149,6 +226,12 @@
       "description": "Euro area insurance corporations' transactions, revaluations and other flows (premiums, claims, technical reserves and related operations), companion series to the insurance corporations' balance-sheet statistics. Legal basis: ECB Regulation ECB/2014/50 (reporting requirements and exemptions for insurance corporations) and Guideline ECB/2021/12 on financial intermediaries other than monetary financial institutions.",
       "releases_per_year": 1,
       "cadence_note": "ECB Data Portal, checked live 2026-08-08: metadata states 'Time period: Annual' and 'Frequency of data collection: Annual.' Named but not minted since this file's original drafting for lack of a cadence statement; resolved 2026-08-08 by checking the live page. Domain retagged insurance 2026-08-08 (Thomas, OPEN-THREADS 0.5) — previously filed under financial-regulation for want of a dedicated tag.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://data.ecb.europa.eu/data/datasets/ICO/data-information",
+        "note": "ECB Data Portal metadata for ICO labels 'Time period: Annual' / 'Frequency of data collection: Annual', but this is a collection-frequency label, not a dated release calendar or stated publication rule. The ICO data-information page says 'See the release calendar for insurance corporations statistics in the euro area on the ECB's website,' but the only such calendar found (https://www.ecb.europa.eu/press/calendars/statscal/mfm/html/sticb.ga.html, entries for 26 Aug 2026 / 26 Nov 2026 / 26 Feb 2027) is explicitly for the quarterly Insurance Corporations Balance Sheet (ICB) dataset, not for ICO. No separate ICO calendar page could be located, and the compilation guide and reporting-framework pages state no fixed timeliness rule (e.g. 'within X months of year-end') for ICO specifically. The ICO dataset page shows 'Dataset last updated: 5 May 2026 10:00 CEST' (a single data point, insufficient to establish a recurring month-of-year pattern). Given no calendar, no stated computable rule, and no corroborated multi-year pattern, classified as irregular."
+      },
       "last_updated": null,
       "url": "https://data.ecb.europa.eu/data/datasets/ICO/data-information",
       "domains": [
@@ -165,6 +248,55 @@
       "description": "Euro area investment funds' assets and liabilities by investment policy and type (equity, bond, mixed, real estate, hedge and other funds), reported by NCBs and aggregated by the ECB. Legal basis: Regulation (EU) No 1073/2013 (ECB/2013/38) concerning statistics on the assets and liabilities of investment funds, and Guideline ECB/2014/15 on monetary and financial statistics, which sets NCB reporting procedures.",
       "releases_per_year": 12,
       "cadence_note": "ECB Data Portal, checked live 2026-08-08: 'Time period: Monthly, except for certain detailed breakdowns which are collected quarterly' and 'Frequency of data collection: Monthly and quarterly.' releases_per_year uses the monthly headline balance-sheet series; the quarterly sub-breakdowns are a more granular secondary tier, not a second nodeable series, same treatment as CBD2's semi-annual detail breakdowns on a sibling node. Named but not minted since this file's original drafting for lack of a cadence statement; resolved 2026-08-08 by checking the live page.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-14",
+            "to": "2026-08-14",
+            "precision": "day",
+            "covers": "June 2026 / Q2 2026 investment fund statistics"
+          },
+          {
+            "from": "2026-09-16",
+            "to": "2026-09-16",
+            "precision": "day",
+            "covers": "July 2026 investment fund statistics"
+          },
+          {
+            "from": "2026-10-15",
+            "to": "2026-10-15",
+            "precision": "day",
+            "covers": "August 2026 investment fund statistics"
+          },
+          {
+            "from": "2026-11-16",
+            "to": "2026-11-16",
+            "precision": "day",
+            "covers": "September 2026 / Q3 2026 investment fund statistics"
+          },
+          {
+            "from": "2026-12-17",
+            "to": "2026-12-17",
+            "precision": "day",
+            "covers": "October 2026 investment fund statistics"
+          },
+          {
+            "from": "2027-01-19",
+            "to": "2027-01-19",
+            "precision": "day",
+            "covers": "November 2026 investment fund statistics"
+          },
+          {
+            "from": "2027-02-18",
+            "to": "2027-02-18",
+            "precision": "day",
+            "covers": "December 2026 / Q4 2026 investment fund statistics"
+          }
+        ],
+        "source_url": "https://www.ecb.europa.eu/press/calendars/statscal/mfm/html/stprif.en.html",
+        "note": "Dates from the ECB's official statistics release calendar for investment fund statistics (dataset IVF), all scheduled 10:00 CET. This confirms the monthly cadence: releases occur roughly every month, ~7 weeks after the reference period ends, consistent with the existing releases_per_year=12 and cadence_note. Quarterly sub-breakdowns are published alongside the monthly release for the relevant quarter-end months (Q2, Q3, Q4 shown above), not as a separate release event."
+      },
       "last_updated": null,
       "url": "https://data.ecb.europa.eu/data/datasets/IVF/data-information",
       "domains": [
@@ -181,6 +313,34 @@
       "description": "Euro area insurance corporations' balance-sheet statistics — assets and liabilities by instrument and counterpart sector — companion series to ecb-insurance-corporations-operations. Legal basis: Guideline ECB/2021/12 on financial intermediaries other than monetary financial institutions, same governing instrument as its companion node.",
       "releases_per_year": 4,
       "cadence_note": "ECB Data Portal, checked live 2026-08-08: 'Quarterly data are reported by close of business on the 40th working day... following the end of the quarter,' disseminated approximately 9-10 weeks after the reference period. Completes the ICB/ICO pair this file originally filed as one bundled lead; ICO was resolved and minted earlier this session, ICB resolved now. Domain retagged insurance 2026-08-08 (Thomas, OPEN-THREADS 0.5) — previously filed under financial-regulation for want of a dedicated tag.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-26",
+            "to": "2026-08-26",
+            "precision": "day",
+            "covers": "Q2 2026 euro area insurance corporations statistics (ICB)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-11-26",
+            "to": "2026-11-26",
+            "precision": "day",
+            "covers": "Q3 2026 euro area insurance corporations statistics (ICB)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2027-02-26",
+            "to": "2027-02-26",
+            "precision": "day",
+            "covers": "Q4 2026 euro area insurance corporations statistics (ICB)",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.ecb.europa.eu/press/calendars/statscal/mfm/html/sticb.en.html",
+        "note": "ECB publishes a dedicated statistics release calendar page listing exact dated releases for the ICB dataset, confirming the quarterly cadence (releases_per_year=4) already on file. Data disseminated roughly 9-10 weeks (about 3 months) after the reference quarter ends, consistent with the existing cadence_note about the 40th (35th from 2019) working-day reporting deadline."
+      },
       "last_updated": null,
       "url": "https://data.ecb.europa.eu/data/datasets/ICB/data-information",
       "domains": [
