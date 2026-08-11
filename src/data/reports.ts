@@ -203,6 +203,14 @@ export const reports: Report[] = [
     description:
       'Quarterly assessment of the economy and inflation outlook, published alongside a rate decision. Synthesises domestic statistics and the external outlook.',
     releases_per_year: 4,
+    release_schedule: {
+      kind: 'published-calendar',
+      source_url: 'https://www.bankofcanada.ca/2025/08/bank-canada-publishes-2026-schedule-policy-interest-rate-announcements-other-major-publications/',
+      note: 'Bank of Canada publishes the MPR quarterly, concurrently with 4 of its 8 annual interest rate announcements (January, April, July, October). Most recent release was July 15, 2026.',
+      entries: [
+        { from: '2026-10-28', to: '2026-10-28', precision: 'day', covers: 'October 2026 Monetary Policy Report', evidence: 'documented' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.bankofcanada.ca/publications/mpr/',
     domains: ['monetary-policy', 'inflation'],

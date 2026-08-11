@@ -108,6 +108,12 @@
       "description": "The operating manual for the Modernized Royalty Framework governing wells drilled on or after 1 January 2017 under the Petroleum Royalty Regulation, 2017 and the Natural Gas Royalty Regulation, 2017. Sets out the Drilling and Completion Cost Allowance (C*), the 5% flat royalty until cumulative revenue reaches C*, and the post-C* royalty rate as a price component (rp) plus a quantity component (rq), with worked examples and rate-bracket tables keyed to par and reference prices for each hydrocarbon.",
       "releases_per_year": 1,
       "cadence_note": "Reissued when the framework, its rate formulas or its programs change rather than on a fixed calendar.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://open.alberta.ca/publications/alberta-modernized-royalty-framework-guidelines-principles-and-procedures",
+        "note": "This is a policy/program guidelines document (principles and procedures for Alberta's Modernized Royalty Framework), not a periodic statistical report. Alberta Energy and Minerals has issued revised versions at irregular intervals since 2020: v1.1 (2020-05-28), v2.0 (2020-06), v2.1 (2022-02), v2.2 (2023-01), v2.3 (2023-10), v2.4 (2024-11-21). No new version has been published since v2.4 as of 2026-08-11 (checked; dataset metadata last touched 2026-03-31 with v2.4 still the current/active resource). No calendar or stated rule governs when the next revision will appear — updates occur when Alberta Energy and Minerals changes MRF program parameters or procedures."
+      },
       "last_updated": null,
       "url": "https://open.alberta.ca/publications/alberta-modernized-royalty-framework-guidelines-principles-and-procedures",
       "domains": [
@@ -123,6 +129,37 @@
       "region": "Alberta",
       "description": "The monthly determination of oil sands royalty rates under the Oil Sands Royalty Regulation, 2009: the pre-payout gross revenue royalty percentage, the post-payout gross revenue royalty percentage and the post-payout net royalty percentage factor. Each release also publishes the WTI price and exchange rate used. Alberta Energy posts the percentages by the fifth business day following the production month.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-08",
+            "to": "2026-09-08",
+            "precision": "day",
+            "covers": "Publish OS Monthly Royalty Rates - September 2026"
+          },
+          {
+            "from": "2026-10-07",
+            "to": "2026-10-07",
+            "precision": "day",
+            "covers": "Publish OS Monthly Royalty Rates - October 2026"
+          },
+          {
+            "from": "2026-11-06",
+            "to": "2026-11-06",
+            "precision": "day",
+            "covers": "Publish OS Monthly Royalty Rates - November 2026"
+          },
+          {
+            "from": "2026-12-07",
+            "to": "2026-12-07",
+            "precision": "day",
+            "covers": "Publish OS Monthly Royalty Rates - December 2026"
+          }
+        ],
+        "source_url": "https://www.alberta.ca/system/files/em-oil-sands-reporting-calendar-2026.pdf",
+        "note": "Alberta Energy and Minerals publishes an annual 'Oil Sands Royalty Reporting Calendar' PDF that lists a specific 'Publish OS Monthly Royalty Rates' date for each month. The PDF itself notes it is 'prepared as a courtesy only' and that the Oil Sands Royalty Regulation, 2009 and departmental guidelines govern actual requirements, but it gives concrete dates each year. The August 2026 entry (Aug 10) has already passed as of 2026-08-11, so the next occurrence is September 8, 2026. The landing page https://www.alberta.ca/oil-sands-royalty-rates links to the Open Government Portal where each month's report/CSV is actually posted (open.alberta.ca was returning server errors during this check, so exact historical posting dates on that portal could not be independently verified, but the reporting calendar's dates align with a monthly cadence consistent with releases_per_year=12)."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/oil-sands-royalty-rates",
       "domains": [
@@ -138,6 +175,34 @@
       "region": "Alberta",
       "description": "Monthly publication of the component values and the Floor Price used to compute a deemed bitumen value under the Bitumen Valuation Methodology (Ministerial) Regulation. Operators whose bitumen is not sold at arm's length must value it at the BVM price rather than a sales price, so this release fixes the gross revenue on which oil sands royalty is charged. Accompanied by a downloadable BVM model calculator.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-06-22",
+            "to": "2026-06-22",
+            "precision": "day",
+            "covers": "June 2026 update to cumulative BVM components report (adds May 2026 production month data)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-07-22",
+            "to": "2026-07-22",
+            "precision": "day",
+            "covers": "July 2026 update to cumulative BVM components report (adds June 2026 production month data)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-17",
+            "to": "2026-08-24",
+            "precision": "week",
+            "covers": "August 2026 update to cumulative BVM components report (expected to add July 2026 production month data)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://open.alberta.ca/publications/bvm-components",
+        "note": "Publisher (CKAN metadata on open.alberta.ca) states updatefrequency = 'Monthly'. The report is a single cumulative annual PDF per year (e.g. em-bvm-components-2026.pdf) that is republished each month with the newly available production month's data appended; only the latest version is kept ('published cumulatively'). Using the CKAN package_activity_list API for dataset id f5f003e9-bdb2-42a7-9ed5-a2ee207dcd7e, update timestamps for the 2026 file show a highly consistent monthly cadence, generally landing between the 20th and 26th of each month: 2026-01-21, 2026-02-23, 2026-03-23, 2026-04-23, 2026-05-21/26, 2026-06-22, 2026-07-22. The same pattern holds in prior years (e.g. 2025-08-21, 2024-08-22, 2023-08-23 for the August update specifically). As of 2026-08-11 no August 2026 update has yet appeared, so the next release is projected for roughly 2026-08-17 to 2026-08-24 based on this pattern, adding July 2026 data. The downloaded 2026 PDF (last-modified 2026-07-22) currently contains monthly rows through June 2026 (WCS settlement price, oil sands par price, exchange rate, etc.), confirming the June data was the most recent addition as of that update."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/bitumen-valuation-methodology-components",
       "domains": [
@@ -251,6 +316,21 @@
       "description": "The daily settlement price of the prompt-month Brent crude futures contract on ICE. Named verbatim in Alberta's Bitumen Valuation Methodology regulation, where the gap between Brent and WTI enters the monthly Floor Price directly. A commercial exchange's settlement price, written into provincial law as a term in a royalty formula.",
       "releases_per_year": 252,
       "cadence_note": "One settlement per exchange trading day; roughly 252 a year. Alberta averages the daily settlements over a month.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-11",
+            "to": "2026-08-11",
+            "precision": "day",
+            "covers": "Daily settlement price for the next ICE Futures Europe trading day",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Daily settlement price for ICE Brent Crude Futures is calculated as the weighted average price of trades during a two-minute settlement period from 19:28:00 London time, and is published on each trading day the exchange is open (London trading hours 01:00-23:00, Mon-Fri, with holiday closures per the ICE Futures Europe trading calendar).",
+        "source_url": "https://www.ice.com/products/219/Brent-Crude-Futures",
+        "note": "This is a continuously traded futures contract; ICE publishes a new daily settlement price at the close of every trading day, not on a periodic release calendar. releases_per_year of 252 is consistent with the approximate number of annual trading days, which matches this daily-settlement rule."
+      },
       "last_updated": null,
       "url": "https://www.ice.com/products/219/Brent-Crude-Futures",
       "domains": [
@@ -268,6 +348,21 @@
       "description": "Argus Media's daily price assessment for Mexican Maya heavy crude delivered FOB at the US Gulf Coast. Alberta's bitumen valuation regulation names Argus as the publisher by company name and uses the assessment as the MMSP term in the Floor Price formula, so a proprietary heavy-crude assessment sets the floor under the province's bitumen royalty base.",
       "releases_per_year": 252,
       "cadence_note": "Assessed each trading day and averaged monthly for the BVM calculation. The assessment is paywalled; only the regulation naming it is public.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Next daily Argus Americas Crude price report (Maya FOB USGC assessment)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "\"At the end of each trading day we publish a PDF report containing the latest prices, news and market commentary\" (Argus Americas Crude, which includes the Argus Mexico Maya Spot Price, FOB US Gulf Coast assessment) — i.e. published daily on each business day, excluding the holidays listed in Argus's annual publishing schedule.",
+        "source_url": "https://www.argusmedia.com/en/solutions/products/argus-americas-crude",
+        "note": "This is a daily spot price assessment published every trading day as part of the Argus Americas Crude report/PDF, consistent with the corpus's releases_per_year=252 (roughly the number of US business days in a year). Argus publishes an annual 'Publishing Schedule' PDF (e.g. https://www.argusmedia.com/-/media/project/argusmedia/mainsite/english/documents-and-files/publishing-schedule/publishing-schedule-2026-pdf.pdf) listing specific holiday non-publication dates, but that PDF was blocked by robots.txt and could not be fetched directly to confirm exact 2026 holiday gaps."
+      },
       "last_updated": null,
       "url": "https://www.argusmedia.com/en/solutions/products/argus-americas-crude",
       "domains": [

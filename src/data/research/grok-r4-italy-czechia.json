@@ -28,8 +28,50 @@
       "region": "Italy",
       "description": "Census-type statistical register of active enterprises, named as a core supply-side source for Italian national accounts.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2022-07-28",
+            "to": "2022-07-28",
+            "precision": "day",
+            "covers": "Reference year 2020 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2023-08-09",
+            "to": "2023-08-09",
+            "precision": "day",
+            "covers": "Reference year 2021 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-07-11",
+            "to": "2024-07-11",
+            "precision": "day",
+            "covers": "Reference year 2022 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-07-09",
+            "to": "2025-07-09",
+            "precision": "day",
+            "covers": "Reference year 2023 edition",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-07-01",
+            "to": "2026-08-31",
+            "precision": "month",
+            "covers": "Reference year 2024 edition (next expected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.istat.it/tavole-di-dati/registro-statistico-delle-imprese-attive-anno-2023/",
+        "note": "Istat publishes the ASIA-Imprese (Registro statistico delle imprese attive) annual data tables with a roughly 2-year lag (data for year N released in year N+2), each year in the July-August window: 28 Jul 2022 (ref. 2020), 9 Aug 2023 (ref. 2021), 11 Jul 2024 (ref. 2022), 9 Jul 2025 (ref. 2023) - dates taken from the 'Data pubblicazione' field on each year's Istat tavole-di-dati page. No formal release-calendar page or stated publication rule was found on istat.it; as of 2026-08-11 no 'Anno 2024' edition page exists yet (istat.it/tavole-di-dati/registro-statistico-delle-imprese-attive-anno-2024/ returns 404), so it is overdue relative to the observed Jul 9 - Aug 9 window and likely imminent."
+      },
       "last_updated": null,
-      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_it.htm",
+      "url": "https://www.istat.it/scheda-qualita/registro-statistico-delle-imprese-attive-asia-imprese-2/",
       "domains": [
         "national-accounts"
       ]
@@ -43,8 +85,30 @@
       "region": "Italy",
       "description": "Micro-database of annual financial statements for active market enterprises within the ASIA-Enterprises register, built from administrative archives plus PMI and SCI surveys; primary source for enterprise economic results in national accounts.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "Reference year 2024 national economic results of enterprises (Frame-SBS / 'Conti economici delle imprese e dei gruppi di impresa')",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-31",
+            "precision": "month",
+            "covers": "Reference year 2024 territorial/regional breakdown ('Risultati economici delle imprese e delle multinazionali a livello territoriale')",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Per Eurostat's SBS metadata for Italy (Istat, ESSBS21 reference metadata): national-level structural business statistics data is 'published in general in October/November t+22 (months)' after the reference year; a separate regional/territorial breakdown is published 'in January t+25 (months)' after the reference year (data transmitted to Eurostat 18 months after reference year per Regulation; dissemination is annual).",
+        "source_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/sbs_essbs21_it.htm",
+        "note": "Computed by applying the stated t+22/t+25-month rule to the most recent reference year (2024), since the 2024-reference-year edition had not yet appeared as of 2026-08-11. Corroborated by Istat's own observed release pattern: 'Conti economici delle imprese e dei gruppi di impresa' editions were released mid-October for reference years 2022 (15 Oct 2024) and 2023 (15 Oct 2025), and the territorial table 'Risultati economici delle imprese e delle multinazionali a livello territoriale -- Anno 2023' was released 13 Jan 2026 (matching t+25 months from Dec 2023)."
+      },
       "last_updated": null,
-      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_it.htm",
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/sbs_essbs21_it.htm",
       "domains": [
         "national-accounts"
       ]
@@ -58,6 +122,49 @@
       "region": "Italy",
       "description": "Italian balance of payments, compiled by the Bank of Italy and named as the source for trade-in-services data feeding national accounts.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-19",
+            "to": "2026-08-19",
+            "precision": "day",
+            "covers": "June 2026 balance of payments data"
+          },
+          {
+            "from": "2026-09-18",
+            "to": "2026-09-18",
+            "precision": "day",
+            "covers": "July 2026 balance of payments data"
+          },
+          {
+            "from": "2026-10-20",
+            "to": "2026-10-20",
+            "precision": "day",
+            "covers": "August 2026 balance of payments data"
+          },
+          {
+            "from": "2026-11-19",
+            "to": "2026-11-19",
+            "precision": "day",
+            "covers": "September 2026 balance of payments data"
+          },
+          {
+            "from": "2026-12-18",
+            "to": "2026-12-18",
+            "precision": "day",
+            "covers": "October 2026 balance of payments data"
+          },
+          {
+            "from": "2027-01-19",
+            "to": "2027-01-19",
+            "precision": "day",
+            "covers": "November 2026 balance of payments data"
+          }
+        ],
+        "source_url": "https://www.bancaditalia.it/statistiche/calendario-pubblicazioni/Cal_mese_ita_2026.pdf",
+        "note": "Banca d'Italia publishes a monthly statistical release calendar (Cal_mese_ita_2026.pdf) listing exact dates for Balance of Payments and international investment position releases. Confirmed also via the Agenda delle Statistiche page (bancaditalia.it/media/agenda). Full 2026 calendar runs Jan 20 through Dec 18 (12 releases), consistent with the corpus's releases_per_year=12; entries listed here are limited to the next occurrences from today (2026-08-11) onward."
+      },
       "last_updated": null,
       "url": "https://www.bancaditalia.it/statistiche/tematiche/rapporti-estero/bilancia-pagamenti/index.html",
       "domains": [

@@ -137,8 +137,50 @@
       "description": "Commercial used-vehicle valuations and new-vehicle transaction data, sold by subscription. The BLS Handbook of Methods states that every used car and truck price in the US Consumer Price Index comes from J.D. Power Valuation Services, and that new vehicle prices come from J.D. Power transaction data — so an entire component of the headline national inflation number is sourced from one private company.",
       "releases_per_year": 12,
       "cadence_note": "Valuations are maintained continuously and drawn on monthly for the CPI. There is no public release calendar; the data is a paid feed, and only the BLS methodology naming it is public.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-11-12",
+            "to": "2025-11-12",
+            "precision": "day",
+            "covers": "October 2025 Used Vehicle Market Report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-12-15",
+            "to": "2025-12-15",
+            "precision": "day",
+            "covers": "November 2025 Used Vehicle Market Report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-01-14",
+            "to": "2026-01-14",
+            "precision": "day",
+            "covers": "December 2025 Used Vehicle Market Report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-03-11",
+            "to": "2026-03-11",
+            "precision": "day",
+            "covers": "February 2026 Used Vehicle Market Report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-11",
+            "to": "2026-08-17",
+            "precision": "week",
+            "covers": "July 2026 Used Vehicle Market Report (projected, based on observed ~monthly cadence around the 11th-15th of each month)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.jdpowervalues.com/industry-forecasts-press-releases",
+        "note": "J.D. Power Valuation Services (formerly NADA Used Car Guide) publishes a monthly 'Used Vehicle Market Report' / Used Vehicle Price Index article on jdpowervalues.com, typically appearing 11-15 days after month-end covering the prior month's used-vehicle pricing data. No official dated release calendar was found; this cadence is inferred from several recent editions (Oct 2025 data published Nov 12 2025, Nov 2025 data published Dec 15 2025, Dec 2025 data published Jan 14 2026, Feb 2026 data published Mar 11 2026). This is consistent with the on-file releases_per_year=12 (monthly). Separately, the MarketValues Specialty Vehicles app states its underlying values update 6 times per year, but the core Used Vehicle Market Report / Price Index that most closely matches the corpus title is monthly."
+      },
       "last_updated": null,
-      "url": "https://www.jdpower.com/business/valuation-services",
+      "url": "https://www.jdpowervalues.com/",
       "domains": [
         "inflation"
       ]

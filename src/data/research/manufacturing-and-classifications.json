@@ -157,9 +157,24 @@
       "jurisdiction_level": "federal",
       "region": "Canada",
       "description": "The product-side counterpart to NAICS, approved as a departmental standard on 24 September 2021. It is a trilateral standard by origin — 'a joint project of the national statistical agencies of Canada, Mexico and the United States' — developed after NAICS 'to serve the same purpose but for product statistics'. Two relationships it is commonly assumed to have and does not: it is parallel to NAICS rather than derived from it, and it is explicitly NOT compatible with the UN Central Product Classification ('NAPCS Canada is not fully compatible with the CPC'). Its live connection to the accounts runs through the Supply and Use Product Classification, which its introduction states is 'largely embedded at the level of NAPCS Canada' — that is a containment relationship rather than a dependency, and the SUPC is not yet a node.",
-      "releases_per_year": 0.4,
+      "releases_per_year": 0.2,
       "changes_per_year": 0.2,
       "cadence_note": "Nominally a five-year revision cycle moving toward continuous update: 'Since the creation of this product classification, NAPCS Canada, has been revised on a 5-year cycle, in 2012, 2017 and 2022. NAPCS Canada was also revised in 2018 with NAPCS Canada 2017 Version 2.0, as Canada has started evolving towards adopting a permanent \"evergreen\" practice with regards to NAPCS, which means the updating of NAPCS Canada on an as-needed basis, with version updates between the standard 5-year revision milestones.' Four versions are named across roughly a decade — 2012, 2017, 2017 V2.0 in 2018, and 2022 — so releases_per_year is 0.4 counting published versions. changes_per_year 0.2 is the structural five-year cycle the document states.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-02-01",
+            "to": "2027-02-28",
+            "precision": "month",
+            "covers": "NAPCS Canada 2027 Version 1.0 public release",
+            "evidence": "documented"
+          }
+        ],
+        "rule": "NAPCS Canada revisions are planned to occur every five years; the next version, NAPCS Canada 2027 Version 1.0, is scheduled for public release in February 2027.",
+        "source_url": "https://www.statcan.gc.ca/en/consultation/2023/napcs",
+        "note": "Statistics Canada's consultation page for the NAPCS Canada 2027 revision (and the 2026 'What We Heard Report') both explicitly state a public release target of February 2027, with a preceding public notice of final approved proposals planned for February 2026 and a November 2025 notice of proposed changes. This is a documented target date (not merely a computed 5-year projection), though it is still a forward-looking schedule for a not-yet-released edition. The introduction page for NAPCS Canada 2022 (https://www.statcan.gc.ca/en/subjects/standard/napcs/2022/introduction) states revisions are 'planned to occur every five years,' consistent with the 2012->2017->2022->2027 cadence, though StatCan also issued an off-cycle Version 2.0 update in 2018 for cannabis legalization, showing the 5-year cycle is a planning target rather than a rigid rule."
+      },
       "last_updated": null,
       "url": "https://www.statcan.gc.ca/en/subjects/standard/napcs/2022/introduction",
       "domains": [
@@ -176,6 +191,43 @@
       "description": "The administrative remittance records behind SEPH, and the first terminus in the graph. IMDB record 2612 names them as the primary input: 'Administrative information for total gross monthly payrolls and the total number of employees for the last pay period in the month are obtained from payroll deduction (PD7 form) accounts maintained by Canada Revenue Agency.' SEPH is a census of these records rather than a survey of employers, so the entire monthly payroll estimate — which four federal and provincial benefit formulas are calculated from — rests on a remittance form. There is no PD7 publication, no release schedule and no url: what exists is a form employers file and an agency that holds the results.",
       "releases_per_year": 12,
       "cadence_note": "A terminus has no publication cadence, so this number is the collection rhythm rather than a release rate: PD7 remittances are monthly, and record 2612 describes the payroll figure as covering 'the last pay period in the month'. Read it as how often the data behind this node changes, not as how often anything appears.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-27",
+            "to": "2026-08-27",
+            "precision": "day",
+            "covers": "June 2026 payroll employment, earnings and hours (SEPH)"
+          },
+          {
+            "from": "2026-09-24",
+            "to": "2026-09-24",
+            "precision": "day",
+            "covers": "July 2026 payroll employment, earnings and hours (SEPH)"
+          },
+          {
+            "from": "2026-10-29",
+            "to": "2026-10-29",
+            "precision": "day",
+            "covers": "August 2026 payroll employment, earnings and hours (SEPH)"
+          },
+          {
+            "from": "2026-11-26",
+            "to": "2026-11-26",
+            "precision": "day",
+            "covers": "September 2026 payroll employment, earnings and hours (SEPH)"
+          },
+          {
+            "from": "2026-12-23",
+            "to": "2026-12-23",
+            "precision": "day",
+            "covers": "October 2026 payroll employment, earnings and hours (SEPH)"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/n1/release-diffusion/2026-eng.pdf",
+        "note": "The corpus's report 'CRA payroll deduction (PD7) accounts' maps to Statistics Canada's Survey of Employment, Payrolls and Hours (SEPH, SDDS 2612), which is built from CRA payroll deduction (PD7) account administrative data and published monthly in The Daily as 'Payroll employment, earnings and hours'. Publisher of the actual release is Statistics Canada, not CRA directly, though the underlying administrative data source is CRA's PD7 accounts. StatCan states 'in exceptional circumstances, some release dates may be modified during the year.' Confirmed the most recent actual release: May 2026 data was released July 30, 2026, matching this calendar."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612",
       "domains": [
@@ -191,10 +243,38 @@
       "jurisdiction_level": "federal",
       "region": "Canada",
       "description": "GST remittance records, used to avoid surveying small manufacturers. IMDB record 2101: 'Managing response burden is an ongoing challenge for Statistics Canada. In an attempt to alleviate response burden, especially for small businesses, the MSM derives sales data for low-revenue establishments from Goods and Service Tax (GST) files using a ratio estimator.' So part of the monthly manufacturing sales figure — which the monthly GDP programme uses as its indicator for most manufacturing industries — is not collected at all but estimated from tax remittances.",
-      "releases_per_year": 4,
+      "releases_per_year": 1,
       "cadence_note": "A terminus has no publication cadence. GST filing frequency is set by the filer's revenue — monthly, quarterly or annually — and record 2101 does not state which vintage the MSM reads. 4 is the middle case and is a guess, flagged as such rather than left to look measured.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2024-06-06",
+            "to": "2024-06-06",
+            "precision": "day",
+            "covers": "GST/HST Statistics 2023 Edition (2017 to 2021 calendar years)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-05-23",
+            "to": "2025-05-23",
+            "precision": "day",
+            "covers": "GST/HST Statistics 2024 Edition (2018 to 2022 calendar years)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-03-11",
+            "to": "2026-03-11",
+            "precision": "day",
+            "covers": "GST/HST Statistics 2025 Edition (2019 to 2023 calendar years) - most recent edition as of 2026-08-11",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/income-statistics-gst-hst-statistics/gst-hst-statistics.html",
+        "note": "The corpus's existing url (StatCan IMDB SDDS=2101) actually resolves to the unrelated 'Monthly Survey of Manufacturing' record, not a GST administrative-data survey. The closest identifiable publicly-released product matching 'GST administrative files' from CRA is the annual 'GST/HST Statistics' series (CRA's own description: 'Detailed profiles of goods and services tax/harmonized sales tax (GST/HST) registrants'), published via canada.ca and the Open Government Portal. No fixed release calendar or stated rule was found; editions have appeared once per year but the month has drifted earlier each cycle (June 2024 -> May 2025 -> March 2026), so the next edition (likely '2026 Edition', covering 2020-2024) is expected roughly Q1-Q2 2027 but no specific date can be confirmed from published sources as of 2026-08-11."
+      },
       "last_updated": null,
-      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101",
+      "url": "https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/income-statistics-gst-hst-statistics/gst-hst-statistics.html",
       "domains": [
         "taxation",
         "national-accounts"
@@ -211,6 +291,27 @@
       "description": "Four named corporate and unincorporated tax returns that substitute for survey responses across the Integrated Business Statistics Program. IMDB record 2103 states both the mechanism and the motive: 'A strategy to replace survey data with tax data has been introduced to reduce the respondent burden and survey costs... As part of the Integrated Business Statistics Program (IBSP), T1 tax data are used for unincorporated businesses, T2 tax data for incorporated businesses, T3010 tax data for registered charities and T5013 tax data for partnerships. Data replacement may be used to correct outliers or to replace partially or completely missing data. Tax data may also be used to reconcile survey data.' Worth noting how thoroughly record 2103 discloses while naming nothing citable — the fed-h15 pattern arriving in a manufacturing survey. Named here for the ASML specifically, but the IBSP spans most StatCan business surveys, so this node will gain in-degree as the corpus grows rather than staying a leaf.",
       "releases_per_year": 1,
       "cadence_note": "A terminus has no publication cadence. Annual tax filings; the number is the filing rhythm, not a release rate.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "2025 reference-year data release (preliminary tables)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "2025 reference-year data release (revised/final tables)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
+        "note": "The corpus URL (StatCan IMDB SDDS=2103) is the survey page for the Annual Survey of Manufacturing and Logging Industries (ASML), one of several annual business surveys under the Integrated Business Statistics Program (IBSP). That page carries the exact boilerplate passage matching this report's title: 'As part of the Integrated Business Statistics Program (IBSP), T1 tax data are used for unincorporated businesses, T2 tax data for incorporated businesses, T3010 tax data for registered charities and T5013 tax data for partnerships.' This same administrative-tax-data description appears generically across many IBSP survey pages (it describes a data-collection method, not a standalone dated publication), so there is no single dedicated 'tax data' release calendar. The dated releases actually shown on this page (for 2024 reference-year data: December 18, 2025 and March 27, 2026) both fall before today (2026-08-11). Reference-period collection runs April-August of the year after the reference year, with a first release the following December and a revision the following March -- an annual pattern. Projecting that pattern forward gives an expected release around December 2026 (for 2025 reference-year data) with a follow-up revision around March 2027. These are inferred/projected dates, not dates published on a forward-looking calendar."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
       "domains": [

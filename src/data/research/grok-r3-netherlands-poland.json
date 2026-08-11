@@ -15,7 +15,9 @@
       "releases_per_year": 0.2,
       "last_updated": null,
       "url": "https://www.cbs.nl/-/media/_pdf/2017/13/gni-inventory-2010-march-2017-web.pdf",
-      "domains": ["national-accounts"]
+      "domains": [
+        "national-accounts"
+      ]
     },
     {
       "id": "nl-cbs-sbs",
@@ -26,9 +28,27 @@
       "region": "Netherlands",
       "description": "Annual survey-based statistics on enterprises, coordinated on the Statistical Business Register; the primary source for output, intermediate consumption and value added in the Dutch production approach to GDP.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-04-01",
+            "to": "2027-06-30",
+            "precision": "quarter",
+            "covers": "Definite/final figures for reference year 2025",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The survey operates on an annual basis. Usually, definite figures become available 18 months after the year under review.",
+        "source_url": "https://www.cbs.nl/en-gb/onze-diensten/methods/surveys/korte-onderzoeksbeschrijvingen/production-statistics",
+        "note": "CBS's 'Production statistics' (Productiestatistiek) survey description page states annual periodicity and that definite figures are 'usually' available 18 months after the year under review, but gives no exact day/month. Reference year 2024 definite figures would fall due around mid-2026 (already passed as of 2026-08-11), so the next occurrence computed here is for reference year 2025, expected around Q2 2027 (18 months after 2025-12-31). No dated release calendar entry for this specific survey was found on CBS's general publication calendar (cbs.nl/en-gb/publication-calendar) or Dutch publicatieplanning search."
+      },
       "last_updated": null,
-      "url": "https://www.cbs.nl/en-gb/our-services/methods/surveys",
-      "domains": ["national-accounts", "banking"]
+      "url": "https://www.cbs.nl/en-gb/onze-diensten/methods/surveys/korte-onderzoeksbeschrijvingen/production-statistics",
+      "domains": [
+        "national-accounts",
+        "banking"
+      ]
     },
     {
       "id": "nl-dnb-bop",
@@ -39,9 +59,31 @@
       "region": "Netherlands",
       "description": "Dutch balance-of-payments and IIP statistics, compiled by the central bank under BPM6/ESA 2010; named source for the property-income transition items from GDP to GNI, the same shape as Deutsche Bundesbank's role for Germany and Banca d'Italia's for Italy.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-23",
+            "to": "2026-09-23",
+            "precision": "day",
+            "covers": "Q2 2026 Balance of Payments (international transactions in goods and services, direct investment, cross-border securities transactions, derivatives)"
+          },
+          {
+            "from": "2026-12-24",
+            "to": "2026-12-24",
+            "precision": "day",
+            "covers": "Q3 2026 Balance of Payments (international transactions in goods and services, direct investment, cross-border securities transactions, derivatives)"
+          }
+        ],
+        "source_url": "https://www.dnb.nl/en/statistics/advance-release-calendar/",
+        "note": "DNB publishes a running advance release calendar with dated entries for Balance of Payments components; entries found cover Q2 2026 and Q3 2026 releases (quarterly cadence, consistent with releases_per_year=4). Q1 2026 and earlier 2026 entries had already rolled off the calendar by the time of this check (2026-08-11)."
+      },
       "last_updated": null,
-      "url": "https://www.dnb.nl/en/statistics/background-information/methodology-guidelines",
-      "domains": ["national-accounts", "banking"]
+      "url": "https://www.dnb.nl/en/statistics/advance-release-calendar/",
+      "domains": [
+        "national-accounts",
+        "banking"
+      ]
     },
     {
       "id": "nl-cbs-sbr",
@@ -52,9 +94,27 @@
       "region": "Netherlands",
       "description": "Register of legal units, enterprises and enterprise groups maintained by CBS from Chambers of Commerce, tax and other administrative sources; frames the SBS sampling frame and supplies NACE industry coding used in national accounts.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "Q4 2026 business register snapshot/statistics",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "\"De cijfers van elk kwartaal worden in de eerste maand van elk kwartaal gepubliceerd\" (Figures for each quarter are published in the first month of that quarter) — stated on CBS StatLine pages for business-register-derived tables (e.g. 'Bedrijven; bedrijfstak', 'Bedrijven; bedrijfsgrootte en rechtsvorm'), consistent with the CBS research description for 'Bedrijvendemografie' and 'Populatie van actieve bedrijven in Nederland', both of which state a quarterly ('eenmaal per kwartaal') publication frequency for business-register-based statistics.",
+        "source_url": "https://www.cbs.nl/nl-nl/cijfers/detail/81589NED",
+        "note": "CBS's 'General Business Register' (ABR) page itself has no dated release calendar; I could not confirm the exact frequency of internal register updates versus the published statistics derived from it. The evidence found consistently points to a quarterly publication cycle (data published in the first month of each quarter) for statistics based on the business register, not monthly as currently on file. Q3 2026 figures were already published July 15, 2026 (first month of Q3), so the next release is Q4 2026 figures in October 2026. Could not verify with a dedicated English-language 'statistical programme' page since the corpus's original URL now 404s."
+      },
       "last_updated": null,
-      "url": "https://www.cbs.nl/en-gb/our-services/methods/statistical-programmes/business-register",
-      "domains": ["national-accounts", "banking"]
+      "url": "https://www.cbs.nl/en-gb/our-services/methods/definitions/general-business-register",
+      "domains": [
+        "national-accounts",
+        "banking"
+      ]
     },
     {
       "id": "pl-gus-national-accounts",
@@ -67,7 +127,9 @@
       "releases_per_year": 4,
       "last_updated": null,
       "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_gdp_esms_pl.htm",
-      "domains": ["national-accounts"]
+      "domains": [
+        "national-accounts"
+      ]
     }
   ],
   "dependencies": [

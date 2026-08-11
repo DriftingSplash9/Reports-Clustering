@@ -14,8 +14,57 @@
       "description": "The Commonwealth Grants Commission's periodic recommendation on how GST revenue is distributed among Australia's states and territories, using horizontal fiscal equalisation — the Australian analog to Canada's federal equalization program (`fiscal-equalization-program`). VERIFIED DIRECTLY 2026-08-07: cgc.gov.au's PDF still defeats both curl and a real browser (Chrome renders it inside its own built-in PDF viewer, a chrome-extension:// page no automation tool can script into — a different, harder failure than the prior session's forced-download dialog), but the CGC's publications page lists every chapter in DOCX as well as PDF, and the DOCX triggers a genuine file download. Downloaded and byte-for-byte extracted with python-docx. See the edge to `au-abs-erp` for the confirmed quote and a correction to the prior session's footnote claim.",
       "releases_per_year": 1,
       "cadence_note": "Published as a periodic Review (e.g. '2025 Review', 'GST Relativities 2025-26') rather than a fixed annual schedule.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2022-03-01",
+            "to": "2022-03-31",
+            "precision": "month",
+            "covers": "2022 Update (GST relativities for 2022-23)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2023-03-01",
+            "to": "2023-03-31",
+            "precision": "month",
+            "covers": "2023 Update (GST relativities for 2023-24)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-03-01",
+            "to": "2024-03-31",
+            "precision": "month",
+            "covers": "2024 Update (GST relativities for 2024-25); transmittal letter dated 27 Feb 2024",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-03-14",
+            "to": "2025-03-14",
+            "precision": "day",
+            "covers": "2025 Update (GST relativities for 2025-26); media release 14 March 2025",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-03-13",
+            "to": "2026-03-13",
+            "precision": "day",
+            "covers": "2026 Update (GST relativities for 2026-27); media release 13 March 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "Projected 2027 Update (GST relativities for 2027-28)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.cgc.gov.au/reports-for-government/2026-update",
+        "note": "CGC publishes an annual GST Revenue Sharing Relativities Update in March each year (releases found for 2022, 2023, 2024, 2025 and 2026, the last two with confirmed media-release dates of 14 March 2025 and 13 March 2026), providing the relativities to apply for the following financial year (starting 1 July). No published multi-year release calendar or statutory 'report by' date was found on the publisher site, so this is classified as an observed pattern rather than a stated rule; the 2027 entry is a projection based on that pattern, not a confirmed date."
+      },
       "last_updated": null,
-      "url": "https://www.cgc.gov.au/publications/commissions-assessment-methodology",
+      "url": "https://www.cgc.gov.au/reports-for-government",
       "domains": [
         "fiscal-transfers"
       ]
@@ -29,6 +78,12 @@
       "region": "Tasmania, Australia",
       "description": "Tasmania's own technical methodology manual for distributing Commonwealth Financial Assistance Grants among its councils, implementing the National Principles set by the Local Government (Financial Assistance) Act 1995 (Cth) s.6. Structured per cost-adjustor (population, employment, SEIFA disadvantage, valuation, rainfall, freight, climate), each with its own named data source — the closest Australian analog found this session to the Dutch Toelichting / Ontario OMPF Appendix F pattern. A subagent read this PDF natively (not via a proxy-summariser) and reported it as the most reliably-extracted source in its research batch; NOT independently re-read by this session's own tooling, so treated as a middle confidence tier — more reliable than the CGC/VLGGC material, not yet re-verified the way the NSW legislation and ABS/AASB material was.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.treasury.tas.gov.au/state-grants-commission/methodology",
+        "note": "The Tasmanian State Grants Commission's Financial Assistance Grants Distribution Methodology document is not issued on a fixed schedule. The Commission's own methodology page states: 'The Commission implements methodology changes when it determines appropriate,' following 'a structured process after considering all relevant matters and following a consultation process with councils.' The current PDF is dated July 2024 and labeled 'Version 8', with no version-history table or stated review cadence found on the publisher's site."
+      },
       "last_updated": null,
       "url": "https://www.treasury.tas.gov.au/Documents/Financial%20Assistance%20Grants%20Distribution%20Methodology.pdf",
       "domains": [
@@ -45,6 +100,31 @@
       "region": "Australia",
       "description": "ABS's population estimate series, named by exact title in CGC methodology material as the population figure underlying GST relativity calculations. VERIFIED DIRECTLY 2026-08-07 (see `au-cgc-gst-relativities`'s own note on how) — the CGC's Population chapter also carries a source note under a state-population figure citing 'ABS, National, state and territory population, December 2023' by exact title, the same ABS release this node's own title and url already point at.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-17",
+            "to": "2026-09-17",
+            "precision": "day",
+            "covers": "National, state and territory population, March 2026 quarter"
+          },
+          {
+            "from": "2026-12-17",
+            "to": "2026-12-17",
+            "precision": "day",
+            "covers": "National, state and territory population, June 2026 quarter"
+          },
+          {
+            "from": "2027-03-18",
+            "to": "2027-03-18",
+            "precision": "day",
+            "covers": "National, state and territory population, September 2026 quarter"
+          }
+        ],
+        "source_url": "https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release",
+        "note": "ABS publishes this quarterly (mid-March, mid-June, mid-September, mid-December each year, roughly 8.5 months after the reference quarter ends). Latest release covers December 2025 quarter, published mid-2026. The 'latest-release' page states 'Next Release 17/09/2026 National, state and territory population, March 2026'."
+      },
       "last_updated": null,
       "url": "https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population",
       "domains": [
@@ -150,6 +230,12 @@
       "description": "The accounting standard governing whole-of-government and General Government Sector financial statements — the Australian counterpart to `psab-psas`, the Netherlands' `nl-bbv` and the UK's `gb-cipfa-code`, with one structural difference from all three: VERIFIED DIRECTLY (standards.aasb.gov.au, full standard text fetched and parsed), Appendix A's own definition of 'government' (the term the whole Standard's scope turns on) lists only 'The Australian Government, the Government of the Australian Capital Territory, New South Wales, the Northern Territory, Queensland, South Australia, Tasmania, Victoria or Western Australia' — Commonwealth, state and territory governments, but NOT local government. Unlike the Dutch BBV and UK CIPFA Code, this standard does not by its own text extend down to councils — see `au-brisbane-financial-statements` and the `_dropped` note explaining why no edge connects the two.",
       "releases_per_year": 1,
       "cadence_note": "Issued in compiled dated editions (e.g. 'Dec 2019' compilation checked this session), amended periodically.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://standards.aasb.gov.au/aasb-1049-dec-2019",
+        "note": "AASB 1049 is a standing Australian Accounting Standard (originally issued October 2007), not a periodic report. It sets requirements for whole-of-government and General Government Sector financial statements. It is updated only when the AASB issues amending standards (compiled versions exist for e.g. Mar 2015 and Dec 2019), with no fixed annual release cycle or calendar. Governments then apply the standard when preparing their own annual financial reports, but the standard itself has no periodicity."
+      },
       "last_updated": null,
       "url": "https://standards.aasb.gov.au/aasb-1049-dec-2019",
       "domains": [
@@ -204,6 +290,21 @@
       "region": "Georges River, New South Wales, Australia",
       "description": "Chosen as the exemplar NSW council, the way Nijmegen and Wolverhampton are the exemplar Dutch/UK ones — its own published rates page names the NSW Valuer General as the source of the land values its rates are calculated on. VERIFIED DIRECTLY: council webpage fetched and HTML-parsed.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-07-01",
+            "to": "2027-07-01",
+            "precision": "day",
+            "covers": "Annual rating categories / rates and charges for FY2027-28",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Rates and charges (including land valuations and rating categories used to calculate them) are determined on an annual basis for the period 1 July to 30 June the following year; NSW Valuer General land values underlying the rates are reissued on a separate 3-year cycle (most recent as at 1 July 2025, applying to rates for 1 July 2026 to 30 June 2029).",
+        "source_url": "https://www.georgesriver.nsw.gov.au/Council/Rates-and-Payments/Understanding-Rates-and-Charges",
+        "note": "Council's own page states charges are determined annually (1 July-30 June); no dated release calendar is published for the land valuations/rating categories page itself. Underlying NSW Valuer General land valuations follow a separate 3-year cycle (current cycle: 1 July 2025 valuation, used for rates 1 July 2026 - 30 June 2029), which is distinct from the annual rating category/rates cycle reflected in releases_per_year=1."
+      },
       "last_updated": null,
       "url": "https://www.georgesriver.nsw.gov.au/Council/Rates-and-Payments/Land-valuations-and-rating-categories",
       "domains": [
@@ -259,6 +360,21 @@
       "description": "Victoria's annual methodology-and-allocations report for distributing Commonwealth financial assistance grants (general purpose + local roads) among its 79 councils — the direct structural analog to Tasmania's methodology manual (`au-tas-sgc-methodology`) and, beyond Australia, to Ontario's OMPF technical guide and the Dutch Toelichting. VERIFIED DIRECTLY 2026-08-07: both parts read in full (ISSN 0155-1418 print / 1447-5286 online; presented to the Minister 'for the year to 31 August 2025, in accordance with Section 17 of the Victorian Local Government Grants Commission Act 1976'). The two-session story matters: Part 1 alone is AGENCY ONLY throughout (as AU/G.1 reported and AU/G.2 confirmed directly), but Part 2's Appendix 4L 'Data Sources' is a full per-adjustor source table naming ABS releases by exact title, catalogue number, table and release date — the strongest evidence class this project recognises (Research.1.md par.7), and the reason this node now carries edges. Published each September; the Commission's publications page carries the series back to 2011-12, with parallel PDF and DOCX for every year since 2013-14.",
       "releases_per_year": 1,
       "cadence_note": "Annual. Transmittal letter: 'the Annual Allocation Report of the Commission's operations for the year to 31 August 2025' — published September (this edition 'September 2025').",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-10-31",
+            "precision": "quarter",
+            "covers": "2026-27 Annual Allocation Report",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The Report is tabled annually in September/October.",
+        "source_url": "https://www.localgovernment.vic.gov.au/funding-programs/victoria-grants-commission/publications",
+        "note": "Publisher's publications page states the report is 'tabled annually in September/October'. This is corroborated by an observed pattern: the 2020-21 through 2025-26 editions were each published in September (2020, 2021, 2022, 2023, 2024, 2025). The 2026-27 edition had not yet been released as of 2026-08-11, so the next occurrence is projected for Sept/Oct 2026."
+      },
       "last_updated": null,
       "url": "https://www.localgovernment.vic.gov.au/funding-programs/victoria-grants-commission/publications",
       "domains": [
@@ -276,6 +392,12 @@
       "description": "The Victorian statute establishing the Grants Commission and requiring its annual report. The Annual Allocation Report's own words: 'The Victorian Local Government Grants Commission Act 1976 is the State legislation that governs the operation of the Victorian Local Government Grants Commission. The Act establishes the Commission for the purpose of making recommendations for the allocation of financial assistance grants to councils, provides for the appointment and remuneration of Commission members and specifies the general operations of the Commission, including meetings of the Commission and the annual reporting requirements.' NOTE: the Act was originally the Victoria Grants Commission Act 1976 and was renamed — legislation.vic.gov.au now titles it 'Victorian Local Government Grants Commission Act 1976' while its URL slug preserves the old name. Recorded, not reconciled: the Act itself was NOT read this session; every quote about it here is the VLGGC report's own characterisation.",
       "releases_per_year": 1,
       "cadence_note": "A statute in consolidated versions, not a periodical — same treatment as `au-vola1916`.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.legislation.vic.gov.au/in-force/acts/victoria-grants-commission-act-1976",
+        "note": "This is a piece of Victorian Parliament legislation (the Act establishing the Victorian Local Government Grants Commission), not a recurring statistical/data publication. The legislation.vic.gov.au page shows a version-history table with amendment/consolidation dates from 1 July 1997 through the current version (032, in force since 6 April 2020) -- these are irregular re-consolidations triggered whenever Parliament passes an amending Act, not a scheduled release cycle. There is no publisher-stated periodicity or calendar for new 'editions' of this Act."
+      },
       "last_updated": null,
       "url": "https://www.legislation.vic.gov.au/in-force/acts/victoria-grants-commission-act-1976",
       "domains": [
@@ -293,6 +415,12 @@
       "description": "The Commonwealth statute under which all Australian financial assistance grants to local government flow, and under which the seven National Principles binding every state Grants Commission are formulated. AU/G.1's session read s.3, s.4A and s.6 directly at legislation.gov.au (the s.4A AGENCY ONLY finding — 'the Statistician', no titled release — is already in this slice's _dropped array); minted now because the VLGGC Annual Allocation Report names it repeatedly as the basis of its own method: 'The Local Government (Financial Assistance) Act 1995 is the Commonwealth legislation that sets out the basis for the allocation of financial assistance grants by each Local Government Grants Commission to its respective local governing bodies in each State and the Northern Territory.'",
       "releases_per_year": 1,
       "cadence_note": "A statute in compiled versions (Federal Register of Legislation series C2004A04936), not a periodical.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.legislation.gov.au/C2004A04936/latest",
+        "note": "This is an Act of the Commonwealth Parliament (Local Government (Financial Assistance) Act 1995, No. 86 of 1995), not a periodic statistical/data publication. It is amended and re-compiled only when Parliament passes amending legislation, with no calendar, no stated periodic rule, and no consistent annual pattern. Latest compilation on the Federal Register of Legislation is C2016C00566, registered 10 March 2016."
+      },
       "last_updated": null,
       "url": "https://www.legislation.gov.au/C2004A04936/latest",
       "domains": [
@@ -310,6 +438,20 @@
       "description": "ABS's annual estimated resident population by Local Government Area — the population figure Victorian council grant allocations divide money by. Named in VLGGC Appendix 4L under its former title: 'Regional Population Growth, Australia, (cat no. 3218.0), Table 2. Estimated Resident Population, Local Government Area'. The live ABS page confirms 'This release previously used catalogue number 3218.0' and includes population estimates and components by LGA. DISTINCT from `au-abs-erp` ('National, state and territory population', quarterly, state/territory level) — two different ABS ERP products at different geographies and cadences, deliberately two nodes.",
       "releases_per_year": 1,
       "cadence_note": "Annual (ABS page: released each March for the prior financial year).",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2027-03-25",
+            "to": "2027-03-25",
+            "precision": "day",
+            "covers": "Regional population, 2025-26 financial year",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.abs.gov.au/statistics/people/population/regional-population/latest-release",
+        "note": "ABS publishes 'Regional population' annually for the financial year (July-June), typically released in late March of the following year. The current edition (2024-25 financial year) was released 31 March 2026 at 11:30am AEDT; the ABS page explicitly states the next release (2025-26 financial year) is scheduled for 25 March 2027."
+      },
       "last_updated": null,
       "url": "https://www.abs.gov.au/statistics/people/population/regional-population",
       "domains": [
@@ -356,6 +498,19 @@
       "region": "Australia",
       "description": "ABS's monthly release on dwelling and building approvals (catalogue 8731.0, confirmed still carried in the live release's own metadata). Named in VLGGC Appendix 4L — with a typo, 'Buildings Approvals' — as the source for the Value of Development revenue adjustor, by catalogue number, table and datacube. Tagged 'construction' — a Domain value added 2026-08-07 on Thomas's decision, with this node as its first customer (it was briefly filed under 'assessment' for lack of a fit; that compromise is retired).",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-01",
+            "precision": "day",
+            "covers": "July 2026 Building Approvals"
+          }
+        ],
+        "source_url": "https://www.abs.gov.au/statistics/industry/building-and-construction/building-approvals-australia",
+        "note": "ABS publishes Building Approvals, Australia monthly. The landing page and latest-release page both list the next release as 'Building Approvals, Australia, July 2026' scheduled for 1 September 2026 at 11:30am AEST. The June 2026 edition (most recent as of research date) was released 30 July 2026, consistent with a monthly (12/year) cadence."
+      },
       "last_updated": null,
       "url": "https://www.abs.gov.au/statistics/industry/building-and-construction/building-approvals-australia",
       "domains": [
@@ -372,6 +527,48 @@
       "description": "The Commonwealth's quarterly open dataset of income-support payment recipients by geography (including Local Government Area), age, sex and payment type — published on data.gov.au. Named in VLGGC Appendix 4L as 'Department of Social Services (DSS), Payment Demographic Data (Centrelink data)' with the exact data.gov.au URL, for both the Aged Pensioners cost adjustor and the Household Income revenue adjustor. The dataset's current title on data.gov.au is 'DSS Benefit and Payment Recipient Demographics - quarterly data' (verified live 2026-08-07); the 4L wording is its earlier name — same treatment as the Regional population retitling, quoted rather than translated.",
       "releases_per_year": 4,
       "cadence_note": "Quarterly ('June 2024 quarter' in the citing document; data.gov.au shows quarterly updates).",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-11-01",
+            "to": "2025-11-30",
+            "precision": "month",
+            "covers": "September 2025 quarter release (approximate, based on lag pattern)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-02-01",
+            "to": "2026-02-28",
+            "precision": "month",
+            "covers": "December 2025 quarter release (approximate, based on lag pattern)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-05-01",
+            "to": "2026-05-31",
+            "precision": "month",
+            "covers": "March 2026 quarter release (approximate, based on lag pattern)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-07",
+            "to": "2026-08-07",
+            "precision": "day",
+            "covers": "June 2026 quarter release",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "September 2026 quarter release (next expected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://data.gov.au/data/dataset/dss-payment-demographic-data",
+        "note": "No published release calendar or stated rule was found on data.gov.au or DSS's site. The dataset is confirmed quarterly (reference quarters: March, June, September, December — resources exist for every quarter from December 2022 through June 2026, matching the corpus's releases_per_year=4). Directly inspecting the live dataset page (fetched 2026-08-11) confirms the June 2026 quarter file was added/published on 2026-08-07 ('Data last updated: August 7, 2026'), i.e. roughly 5-6 weeks after the June 30 quarter end, and confirms no September 2026 resource exists yet. Earlier quarters' exact publication dates could not be independently verified (data.gov.au's per-resource 'last updated' field reflects the whole-dataset update time, not a per-resource historical date, and Wayback Machine access was blocked by the environment's proxy), so the March 2026/December 2025/September 2025 dates below are approximated using the same observed ~5-6 week post-quarter-end lag as the confirmed June 2026 case. Every entry is therefore marked implied per the observed-pattern convention."
+      },
       "last_updated": null,
       "url": "https://data.gov.au/data/dataset/dss-payment-demographic-data",
       "domains": [
@@ -388,8 +585,23 @@
       "region": "Victoria, Australia",
       "description": "The annual return every Victorian council completes for the Grants Commission — named in Appendix 4L as the source of commercial valuations data ('Victorian Local Government Grants Commission, Local Government - Accounting & General Information Questionnaire - as at June 2024, completed by councils annually') and in Appendix 5F as the channel for strategic-routes road data ('Details on strategic routes are provided to the Commission by individual councils as part of their annual questionnaire'). A terminus on the same footing as `cra-pd7-accounts`: real, named, load-bearing, and a form rather than a publication — the Victorian analog of the council 'annual statements of accounts' that `au-la-annual-statements` models nationally for the ABS.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-11-04",
+            "to": "2026-11-04",
+            "precision": "day",
+            "covers": "2026-27 VLGGC Questionnaire submission deadline (councils' Accounting & General Information Questionnaire due to Victorian Local Government Grants Commission)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "VLGGC Questionnaire (Accounting & General Information Questionnaire) due: 1st Wed in Nov each year. Data collected in November and the compiled dataset is uploaded/published annually in May.",
+        "source_url": "https://www.localgovernment.vic.gov.au/funding-programs/victoria-grants-commission/consultation-and-operations",
+        "note": "Publisher's Consultation & Council Data page states the annual calendar as '1st Wed in Nov - VLGGC Questionnaire due', with data collected in November and uploaded annually in May of the following year. Computed next occurrence: 1 Nov 2026 falls on a Sunday, so the first Wednesday of November 2026 is 4 Nov 2026. Historical questionnaire data files are published on the same page for years 2015-16 through 2024-25."
+      },
       "last_updated": null,
-      "url": "https://www.localgovernment.vic.gov.au/funding-programs/victoria-grants-commission",
+      "url": "https://www.localgovernment.vic.gov.au/funding-programs/victoria-grants-commission/consultation-and-operations",
       "domains": [
         "municipal-finance",
         "assessment"
@@ -406,6 +618,20 @@
       "description": "The Commonwealth's annual Budget — 'the Australian Government's main financial report outlining Australia's annual economic and fiscal outlook' (budget.gov.au, verified live 2026-08-07; the 2026-27 Budget was handed down 12 May 2026). Minted on Thomas's 2026-08-07 decision as ONE node covering the Budget Papers as a single annual publication (the same treatment `eu-draft-budget` gets), rather than modelling individual Budget Papers — that decision is precedent for a future Canadian federal budget node too. First documented edge: the VLGGC Annual Allocation Report names the Budget as the origin of the Victorian grants pool estimate.",
       "releases_per_year": 1,
       "cadence_note": "Annual ('Australia's annual economic and fiscal outlook'); typically handed down in March–May.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2027-05-11",
+            "to": "2027-05-11",
+            "precision": "day",
+            "covers": "2027-28 Budget (projected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://budget.gov.au/",
+        "note": "There is no statutory requirement fixing the Budget's date; per Wikipedia's Charter of Budget Honesty Act 1998 article, since 1994 there has been a political practice/convention of delivering the Budget on the second Tuesday in May, though this is departed from when circumstances require (e.g. the 2025-26 Budget was moved to 25 March 2025 because of the looming 2025 federal election). Confirmed recent instances: 2026-27 Budget delivered Tuesday 12 May 2026 (second Tuesday of May 2026, per budget.gov.au); 2025-26 Budget delivered 25 March 2025 (election-driven exception). Projected next date of 11 May 2027 is the second Tuesday of May 2027, computed by extrapolating the standard convention forward one year from the confirmed 12 May 2026 date; it is not an official announcement and could shift, particularly around election timing (next federal election due by mid-2028)."
+      },
       "last_updated": null,
       "url": "https://budget.gov.au/",
       "domains": [
@@ -446,8 +672,43 @@
       "description": "The methodology specification Victoria's Valuer-General is statutorily required to prepare for each general valuation, matching the structural role NSW's Notices-of-Sale sourcing from NSW Land Registry Services plays in that state's chain -- here the connecting document is a methodology standard rather than a raw-data registry, because that is what the Act itself names (s.5AA), not a substitution of convenience. The 2025 edition (revised and published 27 September 2024) is the seventh edition, building on a 'Valuation Best Practice' tradition dating to 1998 per its own foreword.",
       "releases_per_year": 1,
       "cadence_note": "Statutory basis is direct, not inferred: Act s.5AA(1), 'The valuer-general must prepare the Valuation Best Practice Specifications Guidelines at the commencement of every revaluation' -- and s.11 establishes revaluation (general valuation) as an annual event, so the two sections together fix VBPSG's cadence at once per year.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-06-01",
+            "to": "2023-06-30",
+            "precision": "month",
+            "covers": "VBPSG 2024 edition (foreword signed June 2023, for 2024 general valuation)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-09-27",
+            "to": "2024-09-27",
+            "precision": "day",
+            "covers": "VBPSG 2025 edition (published/revised 27 Sept 2024)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-06-01",
+            "to": "2025-06-30",
+            "precision": "month",
+            "covers": "VBPSG 2026 edition (foreword signed June 2025, eighth set of guidelines)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-06-01",
+            "to": "2026-09-30",
+            "precision": "quarter",
+            "covers": "Expected VBPSG 2027 edition (next annual edition, not yet found published as of 2026-08-11)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.land.vic.gov.au/valuations/valuations-for-rate-and-land-tax/the-valuation-processes",
+        "note": "Valuer-General Victoria publishes a new numbered VBPSG edition annually, timed to the following calendar year's statewide general valuation (Victoria conducts annual general valuations as at 1 January). Confirmed editions found: 2024 (foreword June 2023), 2025 (published 27 Sept 2024), 2026 (foreword June 2025, described in-document as 'the eighth set of the guidelines'). No 2027 edition was found via search as of 2026-08-11, so its release is projected from the June-September publication window observed in prior years; exact date/month cannot be confirmed without a stated publisher rule or calendar."
+      },
       "last_updated": "2024-09-27",
-      "url": "https://www.land.vic.gov.au/__data/assets/pdf_file/0023/719231/Valuation-Best-Practice-Specifications-Guidelines-2025-Revised-and-Published-27-Sept-2024.pdf",
+      "url": "https://www.land.vic.gov.au/__data/assets/pdf_file/0027/752814/valuation-best-practice-specifications-guidelines-2026.pdf",
       "domains": [
         "assessment",
         "taxation",

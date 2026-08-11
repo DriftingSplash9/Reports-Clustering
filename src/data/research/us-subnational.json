@@ -311,6 +311,12 @@
       "region": "United States",
       "description": "Ten-year projections of national health spending by payer and by service, produced by the CMS Office of the Actuary. The projected per capita figure is named in statute as one of the two factors escalating every state's CHIP allotment, which makes an actuarial projection a direct determinant of a federal transfer.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data/projected",
+        "note": "CMS OACT publishes NHE Projections roughly annually but with no fixed month or stated rule for timing; observed release dates for recent editions have ranged from February to September: 2016-2025 ed. released Feb 15, 2017; 2017-2026 ed. Feb 14, 2018; 2018-2027 ed. Feb 20, 2019; 2021-2030 ed. Mar 28, 2022 (2019/2020 editions were delayed/skipped, likely COVID-related); 2022-2031 ed. Jun 14, 2023; 2023-2032 ed. Jun 12, 2024; 2024-2033 ed. released ~Sep 2025 (Health Affairs DOI 10.1377/hlthaff.2025.00545); 2025-2034 ed. released Jun 24, 2026 (CMS/Fierce Healthcare). Because the month of release has varied by more than half a year across recent cycles, no specific next-occurrence date can be responsibly computed; the next edition (2026-2035) is expected sometime in 2027 but the CMS landing page states only that projections are produced 'annually' without specifying a month."
+      },
       "last_updated": null,
       "url": "https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data/projected",
       "domains": [
@@ -383,6 +389,12 @@
       "region": "California",
       "description": "The state's GAAP-basis audited annual financial report — government-wide and fund statements, management discussion, notes and a statistical section — issued under Government Code §12460, which requires a report \"prepared strictly in accordance with 'Generally Accepted Accounting Principles'\". Issued alongside a separate budgetary-legal basis annual report.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.sco.ca.gov/ard_state_acfr.html",
+        "note": "California Government Code Section 12460 requires the Controller to compile and publish this report but explicitly leaves timing to the Controller's discretion ('in the time, form, and manner prescribed by him or her') — no statutory deadline exists. There is no published release calendar. Historical release timing (from Independent Auditor's Report dates found in the PDFs on the publisher's site) has been highly irregular relative to fiscal year end (June 30): FY2022 report (FYE 6/30/2022) — auditor's report dated March 8, 2024 (~20 months lag); FY2023 report (FYE 6/30/2023) — auditor's report dated December 5, 2024 (~17 months lag); FY2025 report (FYE 6/30/2025) — auditor's report dated May 5, 2026, transmittal letter May 12, 2026 (~10.5 months lag, described by the Controller's own transmittal letter as 'notably the fastest turnaround for the ACFR in recent years'). These releases span March, December, and May across different years — no consistent time-of-year pattern — so this does not meet the bar for observed-pattern. One report per fiscal year (releases_per_year=1) does appear correct; only the calendar timing within the year is unpredictable. The FY2026 report (FYE 6/30/2026, just ended as of today 2026-08-11) has not yet been posted; based on the improving-but-variable trend, it could plausibly appear anywhere from roughly spring 2027 to a year or more later, but no defensible specific date can be computed."
+      },
       "last_updated": null,
       "url": "https://www.sco.ca.gov/ard_state_acfr.html",
       "domains": [
@@ -462,6 +474,42 @@
       "region": "California",
       "description": "The certified allocation of state school funding to local educational agencies, dominated by the Local Control Funding Formula, computed from attendance reported by districts and property tax data reported by county auditors. Certified four times a year: Advance by July 20, First Principal Apportionment by February 20, Second Principal Apportionment by June 25, and Annual by the following February 20.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-02-20",
+            "to": "2027-02-20",
+            "precision": "day",
+            "covers": "First Principal (P-1) Apportionment for FY 2026-27",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-02-20",
+            "to": "2027-02-20",
+            "precision": "day",
+            "covers": "Annual Apportionment for FY 2025-26 (initial AN certification)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-06-25",
+            "to": "2027-06-25",
+            "precision": "day",
+            "covers": "Second Principal (P-2) Apportionment for FY 2026-27",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-07-20",
+            "to": "2027-07-20",
+            "precision": "day",
+            "covers": "Advance Principal Apportionment for FY 2027-28",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The Principal Apportionment consists of four annual certifications: Advance Apportionment certified by July 20 (based on prior-year data, covers state aid payments July-January); First Principal (P-1) Apportionment certified by February 20 (supersedes Advance, covers February-May payments); Second Principal (P-2) Apportionment certified by June 25 (supersedes P-1, provides final June state aid payment); and Annual Apportionment (AN) certified by February 20 of the following year (supersedes P-2, later recertified as AN R1/R2/R3).",
+        "source_url": "https://www.cde.ca.gov/fg/aa/pa/",
+        "note": "Confirmed actual FY2025-26 certification dates found on CDE site: Advance certified July 18, 2025; P-1 certified February 18, 2026; P-2 certified June 19, 2026 (all already past relative to today, 2026-08-11). The FY2026-27 Advance Apportionment (nominally due by July 20, 2026) likely already occurred just before today's date but its exact certification date/letter was not directly located on the site, so it is not listed as a future entry. Listed entries are the next future occurrences of each of the four recurring certification types, computed from the stated July 20 / February 20 / June 25 / February 20 rule."
+      },
       "last_updated": null,
       "url": "https://www.cde.ca.gov/fg/aa/pa/",
       "domains": [
@@ -479,8 +527,29 @@
       "region": "California",
       "description": "The annual computation of the constitutional minimum funding level for school and community college districts under Article XVI §8 of the California Constitution, identifying which of Test 1, Test 2 or Test 3 operates and the resulting guarantee for the prior, current and budget years. Published inside the Governor's Budget, the May Revision and the enacted budget rather than as a document of its own.",
       "releases_per_year": 2,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-01-10",
+            "to": "2027-01-10",
+            "precision": "day",
+            "covers": "Governor's Budget FY2027-28 - initial Proposition 98 guarantee calculation",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-05-14",
+            "to": "2027-05-14",
+            "precision": "day",
+            "covers": "May Revision FY2027-28 - updated Proposition 98 guarantee calculation",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The Proposition 98 minimum funding guarantee is first calculated in the Governor's Budget, which the Governor must submit to the Legislature on or before January 10 each year (Cal. Constitution Art. IV Sec. 12(a); Gov. Code Sec. 13337); the calculation is then updated in the May Revision, which the Department of Finance releases in mid-May each year (Gov. Code Sec. 13308).",
+        "source_url": "https://ebudget.ca.gov/"
+      },
       "last_updated": null,
-      "url": "https://ebudget.ca.gov/2026-27/pdf/BudgetSummary/TK-12Education.pdf",
+      "url": "https://ebudget.ca.gov/",
       "domains": [
         "education",
         "fiscal-transfers",

@@ -256,6 +256,21 @@
       "description": "The Bank of Canada's own 'month-end statement of interest rates charged vis-a-vis new and existing loans, booked in Canada, in Canadian dollars only, to Canadian households and corporate sectors by chartered banks.' Rates are a volume-weighted average across reporting institutions, cross-sectioned for a given month. It breaks residential mortgages out by rate type, with a 'Residential variable rate mortgages' section ('Total variable rate mortgages, Total', further split into closed non-convertible, closed convertible, and open variable rate mortgages) alongside the fixed-rate breakdown. This is the missing near-end node flagged in this file's own _dropped entry and in rate-transmission.json: not an individual lender's commercial rate sheet (which cannot be a node), but the Bank's own aggregated published series of what banks actually charged, including on the variable-rate segment. Also redistributed by Statistics Canada as table 10-10-0006-01, 'Funds advanced, outstanding balances, and interest rates for new and existing lending, Bank of Canada', which states its source as the Bank of Canada.",
       "releases_per_year": 12,
       "cadence_note": "Typically published within the third week of the month.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-15",
+            "to": "2026-08-21",
+            "precision": "week",
+            "covers": "July 2026 month-end interest rates data",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Typically published within the third week of the month.",
+        "source_url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/",
+        "note": "The Bank of Canada page states the data is 'Typically published within the third week of the month' but does not give exact calendar dates. Cross-check via Statistics Canada table 10-10-0006 (which republishes this BoC series) showed a most recent release date of 2026-07-14, roughly consistent with a monthly cadence though slightly earlier than 'third week'."
+      },
       "last_updated": null,
       "url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/",
       "domains": [

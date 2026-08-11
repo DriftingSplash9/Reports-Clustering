@@ -14,6 +14,41 @@
       "releases_per_year": 1,
       "changes_per_year": 0.25,
       "cadence_note": "The roll returns annually; the values in it have not been re-based since 2016, and the gap between those two facts is the point. The Assessment Act s. 19.2(1) sets a four-year cycle by schedule, and para 4 assigns 1 January 2016 to 'the four taxation years from 2017 to 2020'. MPAC states the schedule has been suspended: 'On August 16, 2023, the Ontario government filed a regulation to amend the Assessment Act, extending the postponement of a province-wide reassessment through the end of the 2021-2024 assessment cycle. Property assessments for the 2026 property tax year will continue to be based on fully phased-in January 1, 2016 current values.' So `releases_per_year` 1 counts the returned roll, which does move for new construction, demolition and change of use; `changes_per_year` 0.25 is the statutory reassessment cycle, which is the rate at which the valuation basis is supposed to move and has not moved in ten years. Both numbers are true and neither alone describes this node.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-11-01",
+            "to": "2023-12-12",
+            "precision": "month",
+            "covers": "2023 Property Assessment Notices mailed (Nov) and Assessment Roll returned (Dec 12, 2023)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-11-01",
+            "to": "2024-12-10",
+            "precision": "month",
+            "covers": "2024 Property Assessment Notices mailed (Nov, 627,000+ notices) and Assessment Roll returned (Dec 10, 2024)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-11-01",
+            "to": "2025-12-09",
+            "precision": "month",
+            "covers": "2025 Property Assessment Notices mailed and Assessment Roll returned (fact sheet dated Dec 9, 2025)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Projected 2026 Property Assessment Notices and Assessment Roll return, based on the consistent Nov-Dec annual pattern",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.mpac.ca/en/News/FactSheet/2025RollReturnFactSheet",
+        "note": "MPAC delivers an assessment roll annually to Ontario municipalities each Nov-Dec (with Property Assessment Notices mailed to owners with changed assessments in November, and the roll formally 'returned' in early-mid December: Dec 12 2023, Dec 10 2024, ~Dec 9 2025). This annual notice/roll cycle is distinct from the province-wide Current Value Assessment (CVA) base-year update: Ontario's Assessment Act nominally requires reassessment on a 4-year cycle, but the government has repeatedly postponed it by regulation since 2020 (most recently confirmed through the 2026 tax year), so assessed values remain frozen at January 1, 2016 current values with no announced date for the next province-wide reassessment. The annual roll-return/notice cycle, however, has continued on schedule every year regardless of the reassessment freeze."
+      },
       "last_updated": null,
       "url": "https://www.mpac.ca/en/UnderstandingYourAssessment/AssessmentCycle",
       "domains": [
@@ -47,6 +82,21 @@
       "description": "Ontario's mandatory annual municipal financial return — the direct counterpart of `ab-municipalaffairs-fir`, already a node in this graph for Alberta. The FIR portal describes it as 'a standardized reporting of a municipality's financial activities in the previous fiscal year (January to December)', collecting data on assets, liabilities, revenue, expenses and statistical information drawn from each municipality's audited financial statements. Mandatory under the Municipal Act s. 294(1): 'the treasurer of a municipality shall in each year provide the Minister with a return containing information designated by the Minister with respect to the financial affairs of the municipality.' Named directly in the OMPF Technical Guide's Appendix F: 'PIL Weighted Assessment | 2023 or 2024 | Municipal FIR (Financial Information Return)'. Minted 2026-08-09 (corpus-wide `_dropped` sweep, Tier-1 item #7).",
       "releases_per_year": 1,
       "cadence_note": "Annual, deadline 31 May per the FIR portal's own description of the submission cycle; collected since 1978 (covering 1977 financial data), with complete province-wide datasets from 1988 onward per the portal's own historical archive.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-05-31",
+            "to": "2027-05-31",
+            "precision": "day",
+            "covers": "2026 Financial Information Return (FIR)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The deadline for the completion of the [year] Financial Information Return (FIR) is May 31 of the following year (e.g., \"The deadline for the completion of 2025 FIR is May 31, 2026\"), per the FIR Instructions issued by the Ontario Ministry of Municipal Affairs and Housing under Municipal Act s.294(1).",
+        "source_url": "https://efis.fma.csc.gov.on.ca/fir/wp-content/uploads/fir-files/municipal-reporting/fir-instructions/2025/FIR2025%20-%20Instructions.pdf",
+        "note": "The 2025 FIR deadline of May 31, 2026 has already passed as of 2026-08-11; next occurrence is the 2026 FIR, due May 31, 2027, following the same annual pattern. Deadline is stated in the annual FIR Instructions document (page 9, 'Deadline for Completion' section) rather than a fixed statutory date, but has been consistently May 31 in recent years."
+      },
       "last_updated": null,
       "url": "https://efis.fma.csc.gov.on.ca/fir/index.php/en/financial-information-return-en/",
       "domains": [

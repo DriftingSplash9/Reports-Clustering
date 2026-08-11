@@ -14,6 +14,20 @@
       "description": "The annual provincial and territorial counterpart of the national income and expenditure accounts (IMDB record 1902), producing GDP by income and by expenditure, household income and consumption, and government sector accounts for each province and territory. SOR/2007-303 adopts its definitions by name in the DIVISION 1 interpretation section that governs the all-provinces Equalization formula, which is what makes this the highest-value node in the equalization cluster.",
       "releases_per_year": 1,
       "cadence_note": "Annual, released as part of the provincial and territorial economic accounts cycle (typically November for the preceding reference year).",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-11-05",
+            "to": "2026-11-05",
+            "precision": "day",
+            "covers": "Provincial and territorial economic accounts, 2025",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/251106/dq251106a-eng.htm",
+        "note": "StatCan releases Provincial and Territorial Economic Accounts (PTEA) annually in The Daily, each fall, covering the prior calendar year. The Nov 6, 2025 release (covering 2024 data) explicitly states: 'The PTEA for 2025 will be released on November 5, 2026.' Prior release: Nov 6, 2025 (2024 data)."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1902",
       "domains": [
@@ -60,6 +74,27 @@
       "region": "Canada",
       "description": "The annual survey of companies engaged in oil and gas exploration, development and production in Canada (IMDB record 2178), collecting financial and operating statistics including the volume and value of marketable production. SOR/2007-303's Nova Scotia division names it in seven provisions of s. 8 — more than any other survey in the section — as the determination of oil, heavy oil, mined oil and natural gas volumes and values, the same physical production the corpus's Alberta energy-royalty cluster values through NYMEX WTI, ICE Brent and Argus.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-09-29",
+            "to": "2025-09-29",
+            "precision": "day",
+            "covers": "2024 reference year OGEX data",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-29",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "2025 reference year OGEX data (projected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2178",
+        "note": "Statistics Canada's IMDB survey page (SDDS 2178) confirms the survey is Annual, with data collection running 'April to September' each year (2024 reference year collection ran April 22 to September 5, 2025), and the 2024 reference-year results were released via The Daily on September 29, 2025 (https://www150.statcan.gc.ca/n1/daily-quotidien/250929/dq250929c-eng.htm). Only one concrete past release date could be confirmed via available tools (web search budget was exhausted for this session and several StatCan release-calendar/search pages returned 404/500 errors), so this is a single-point observed pattern rather than a multi-year-confirmed one. Based on the stated annual collection window (through September) and the confirmed September 29 release for the prior cycle, the next release for 2025 reference-year data is projected for approximately September-October 2026."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2178",
       "domains": [
@@ -76,6 +111,20 @@
       "region": "Canada",
       "description": "Annual net and gross sales of gasoline and net sales of diesel fuel for road use by province and territory, produced from the Gasoline and Other Petroleum Fuels Sold programme (survey 2746); formerly CANSIM 405-0002. SOR/2007-303 cites the table by its modern number in the general Interpretation section at s. 1(1), where the defined fuel quantities used throughout the instrument's motive-fuel tax bases are pinned to it.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "2025 motor vehicle fuel sales (annual)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/250922/dq250922e-eng.htm",
+        "note": "No published release calendar entry exists yet for this specific table this far out, and no stated rule was found. However, StatCan's 'The Daily' has released this annual table consistently in late August to late September each year: 2018-08-31 (2017 data), 2019-08-29 (2018 data), 2020-09-28 (2019 data), 2021-09-17 (2020 data), 2022-09-29 (2021 data), 2023-09-19 (2022 data), 2024-09-13 (2023 data), 2025-09-22 (2024 data). Based on this consistent pattern, the next release (covering 2025 data) is projected for September 2026."
+      },
       "last_updated": null,
       "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2310006601",
       "domains": [
@@ -142,7 +191,29 @@
       "jurisdiction_level": "federal",
       "region": "Canada",
       "description": "Annual assets, liabilities and equity of the Canadian agricultural sector by province, including the current-dollar value of farm land, from the Balance Sheet of the Agricultural Sector programme (survey record 5029); formerly CANSIM 002-0020, the number SOR/2007-303's Nova Scotia division still cites at s. 8(1)(z) for the farm-land component of the property-tax revenue base. The Territorial Formula Financing parallel measures the same conceptual farm value from the Census of Agriculture instead.",
-      "releases_per_year": 1,
+      "releases_per_year": 2,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-02-01",
+            "to": "2027-02-28",
+            "precision": "month",
+            "covers": "Balance sheet of the agricultural sector (revised/updated release)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-06-01",
+            "to": "2027-06-30",
+            "precision": "month",
+            "covers": "Balance sheet of the agricultural sector as at December 31, 2026 (annual reference-period update)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Data are published twice each year, in February and June. At each release, data for the previous two calendar years are subject to revision.",
+        "source_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=5029",
+        "note": "The StatCan table page (pid=3210005601) lists 'Frequency: Annual' and shows a single most-recent 'Release Date' of 2026-06-18, but the underlying survey metadata page (SDDS 5029, 'Revisions and seasonal adjustment' section) explicitly states data are published twice yearly, in February and June, with the prior two calendar years revised at each release. The June release provides/updates the December 31 reference-period figures; the February release is an interim revision release. Next occurrence months are estimated (no exact day given in the rule); the last confirmed release was 2026-06-18."
+      },
       "last_updated": null,
       "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3210005601",
       "domains": [
@@ -159,8 +230,50 @@
       "region": "Canada",
       "description": "The annual count of road motor vehicle registrations by vehicle type, province and territory, compiled from provincial and territorial administrative records (IMDB record 2747). SOR/2007-303's Nova Scotia division cites its output under the retired CANSIM number 405-0004 at s. 8(1)(h) and (i) for the motor vehicle licensing revenue bases, with an explicit statutory fallback for the Minister to substitute 'if Statistics Canada does not make the determination'.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2022-12-01",
+            "to": "2022-12-01",
+            "precision": "day",
+            "covers": "Vehicle registrations, 2021",
+            "evidence": "implied"
+          },
+          {
+            "from": "2023-11-02",
+            "to": "2023-11-02",
+            "precision": "day",
+            "covers": "Vehicle registrations, 2022",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-10-21",
+            "to": "2024-10-21",
+            "precision": "day",
+            "covers": "Vehicle registrations, 2023",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-10-17",
+            "to": "2025-10-17",
+            "precision": "day",
+            "covers": "Vehicle registrations, 2024",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "Vehicle registrations, 2025 (projected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2310030801",
+        "note": "No published release calendar or stated rule was found for this survey (SDDS 2747, table 23-10-0308-01). Past 'The Daily' releases show a consistent annual pattern of releasing the prior calendar year's vehicle registration counts in October-December, with the date drifting slightly earlier each year (Dec 1, 2022 -> Nov 2, 2023 -> Oct 21, 2024 -> Oct 17, 2025). Next release (covering 2025 data) is projected for October-November 2026 based on this pattern; exact date not published as of 2026-08-11."
+      },
       "last_updated": null,
-      "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2747",
+      "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2310030801",
       "domains": [
         "taxation",
         "fiscal-transfers"
@@ -177,8 +290,29 @@
       "description": "A recurring commercial reference manual of vehicle registration and licence fee schedules by jurisdiction, published by R.L. Polk & Co. of Detroit. SOR/2007-303 names it verbatim at s. 8(1)(i) as the source of the licence-fee data behind the weighted average licence fee in the Nova Scotia division's motor vehicle licensing revenue base — the third commercial publication found inside a government funding formula, after J.D. Power in the US CPI and ICE Brent in Alberta's bitumen valuation.",
       "releases_per_year": 1,
       "cadence_note": "Historically issued as a recurring multi-volume manual. R.L. Polk & Co. was acquired by IHS in 2013 (now S&P Global Mobility) and no live publisher landing page for the manual could be found in 2026; the URL is a bibliographic record. The regulation continues to name it as the operative source, and the statutory citation, not the publisher's marketing page, is the evidence for the edge.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2016-01-01",
+            "to": "2016-01-31",
+            "precision": "month",
+            "covers": "2016 Motor Vehicle Registration Manuals, Volumes I, II and III (includes Canadian/international coverage)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-31",
+            "precision": "month",
+            "covers": "Projected next annual edition (Volume III / Canadian and International coverage)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.worlddatanow.com/history.php",
+        "note": "R.L. Polk & Co. no longer publishes this title. Polk's vehicle-registration-manual business (including the title once called 'Foreign Vehicle Registration Manual', renamed 'Volume III' in 1990 — the successor of the 'Canadian and International Registration Manual') was sold to World Data Corporation in 2012; Polk itself was absorbed into IHS in 2013 and later S&P Global. World Data Corp's press release (PRNewswire, Feb 16 2016) states the '2016 Motor Vehicle Registration Manuals Volumes I, II and III' were 'Released in mid-January [2016]', comparing page-count revisions against the 2015 edition -- indicating a recurring annual (mid-January) release cycle for the whole three-volume set. A dealer-facing 'World Data Corp (Polk Book) Quick Reference Guide' dated March 2025 confirms the product line (still informally called the 'Polk Book') was still active in 2025. No dated release calendar or exact-day rule was found, only this observed annual mid-January cadence, so this is marked observed-pattern rather than published-calendar or stated-rule. The corpus's existing releases_per_year=1 is consistent with this."
+      },
       "last_updated": null,
-      "url": "https://books.google.com/books/about/Polk_s_Canadian_and_International_Regist.html?id=7PewDAEACAAJ",
+      "url": "https://www.worlddatanow.com/history.php",
       "domains": [
         "taxation"
       ]

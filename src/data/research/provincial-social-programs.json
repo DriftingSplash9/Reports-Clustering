@@ -78,6 +78,34 @@
       "description": "The schedule of base component and working component maximum amounts, the working-income entry threshold, and the family net income phase-out thresholds for the Alberta Child and Family Benefit. The dollar amounts sit in section 30.2(2) of the Alberta Personal Income Tax Act and are restated each year on alberta.ca. The benefit year runs July to June and payments are issued quarterly by the CRA on Alberta's behalf.",
       "releases_per_year": 1,
       "cadence_note": "Amounts are set for a July-to-June benefit year and adjusted once a year; the CRA pays them out in four quarterly instalments (August, November, February, May).",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-07-01",
+            "to": "2025-07-31",
+            "precision": "month",
+            "covers": "ACFB maximum amounts and thresholds for benefit year July 2025-June 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-07-01",
+            "to": "2026-07-31",
+            "precision": "month",
+            "covers": "ACFB maximum amounts and thresholds for benefit year July 2026-June 2027",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-07-01",
+            "to": "2027-07-31",
+            "precision": "month",
+            "covers": "ACFB maximum amounts and thresholds for benefit year July 2027-June 2028 (projected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.alberta.ca/alberta-child-and-family-benefit",
+        "note": "The alberta.ca ACFB page currently publishes maximum benefit amounts and income thresholds for two consecutive 'benefit years' (July 2025-June 2026 and July 2026-June 2027), with different dollar figures for each, showing the figures are updated annually to coincide with the start of each new benefit year on July 1. No explicit indexation statute or fixed publication calendar was found on the page itself, so this is inferred from the observed year-over-year pattern rather than a stated rule. Payment dates (the quarterly disbursement schedule of Aug/Nov/Feb/May) are a separate, unrelated cadence from the annual update of maximum amounts/thresholds, which is what this corpus entry tracks."
+      },
       "last_updated": "2026-07-01",
       "url": "https://www.alberta.ca/alberta-child-and-family-benefit",
       "domains": [
@@ -133,6 +161,21 @@
       "description": "The schedule of Income Support core essential payments (including the comforts allowance) and core shelter payments by household composition, set under the Income and Employment Supports Act and the Income Support, Training and Health Benefits Regulation, together with the supplementary benefit maximums. Rates apply to both the Expected to Work (ETW) and Barriers to Full Employment (BFE) client streams and are revised effective January 1 each year through the 'Benefit Rate Adjustments' policy in the Income and Employment Supports Policy Manual.",
       "releases_per_year": 1,
       "cadence_note": "Rate adjustment takes effect January 1 each year; the manual's Core Shelter Rate Adjustment and Core Essential Rate Adjustment pages carry the year-specific tables.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-01",
+            "precision": "day",
+            "covers": "Annual indexation of Core Essential and Core Shelter benefit rates",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Core Essential and Core Shelter benefit amounts are indexed annually, effective January 1 each year, to the Alberta Consumer Price Index (with increases capped at a maximum of 2 per cent under Alberta's indexation legislation, the \"Alberta Escalator\"). Note: Core Shelter-Social Housing rate increases instead take effect at each recipient's individual Annual Rent Review rather than on January 1.",
+        "source_url": "https://maytree.com/changing-systems/data-measuring/welfare-in-canada/alberta/",
+        "note": "Alberta resumed CPI indexing of income supports effective Jan 1, 2023; most recently confirmed indexation events occurred Jan 1, 2024 (4.25%) and Jan 1, 2026 (2%, per Maytree). New provincial legislation caps annual indexation at a maximum of 2%. The base URL alberta.ca/income-support itself has no calendar or rate table; rate figures and the indexing rule are documented on secondary/advocacy sites citing Alberta government sources (Maytree, enoughforall.ca) rather than a single official calendar page."
+      },
       "last_updated": "2026-01-01",
       "url": "https://www.alberta.ca/income-support",
       "domains": [
@@ -182,6 +225,13 @@
       "description": "The Ministerial Order made under the Income and Employment Supports Act that sets the maximum qualifying income levels by household type for the Alberta Adult Health Benefit (dental, optical, prescription drug, ambulance and diabetic supply coverage) and the Alberta Child Health Benefit. Financial eligibility at application and at annual renewal is tested against total combined household net income plus non-taxable child support. The order is reproduced in the Income and Employment Supports Policy Manual.",
       "releases_per_year": 1,
       "cadence_note": "Amended by Ministerial Order rather than on a fixed calendar. The qualifying income level table in the policy manual is still dated July 1, 2015, so in most years the order is re-affirmed rather than re-issued; the AAHB benefit period itself runs October 1 to September 30 with an automated annual renewal.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "rule": "Income Support, Training and Health Benefits Regulation (Alta Reg 122/2011), ss. 87-90: a household is financially eligible for the Alberta Adult Health Benefit / Alberta Child Health Benefit if its assessed income is equal to or less than 'the qualifying income level as determined by the Minister.' The Regulation does not specify any fixed interval at which the Minister must set or revise that level.",
+        "source_url": "https://www.alberta.ca/alberta-adult-health-benefit",
+        "note": "This is not a recurring statistical publication but a discretionary ministerial determination embedded in regulation (most recently amended by AR 97/2026, current-as-of-July-2026 consolidation). No dated release calendar or fixed-interval rule for updating the dollar qualifying-income-level table was found on alberta.ca, the King's Printer regulation text, or open.alberta.ca. The alberta.ca program page and a 2009 predecessor fact sheet both state that individual recipients' financial eligibility is 'reviewed annually' / confirmed 'every September' against CRA income data - but that describes re-verifying an existing recipient's continued eligibility against the current threshold, not a commitment to reissue or change the threshold table itself on that date. Alberta Ombudsman's 2024 investigation into AAHB/ACHB flagged systemic problems including thresholds that had gone without update for extended periods, which is more consistent with ad hoc/irregular ministerial revisions than a fixed annual release. Given this, releases_per_year=1 in the corpus is not well supported by direct evidence; if anything the evidence points to this being an irregular, discretion-driven instrument rather than a fixed-cadence release, though I could not find a citation strong enough to assert a specific correct replacement number."
+      },
       "last_updated": "2015-07-01",
       "url": "https://www.alberta.ca/alberta-adult-health-benefit",
       "domains": [
@@ -199,6 +249,12 @@
       "description": "The published cost-share rules for the Alberta Aids to Daily Living programme: clients pay 25% of the cost of most benefits up to a maximum of $500 per family per benefit year, and the taxable-income thresholds below which a client is exempt. It also lists the provincial income programmes whose recipients may be exempt from cost-sharing. The benefit year runs July 1 to June 30.",
       "releases_per_year": 1,
       "cadence_note": "Cost-share maximum and exemption thresholds are stated per benefit year (July 1 to June 30) and revised when Alberta Health changes them; the 25%/$500 structure has been stable for years while the exemption thresholds move.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.alberta.ca/aadl-cost-sharing-of-benefits",
+        "note": "The alberta.ca cost-sharing page presents the 25%/$500 maximum cost-share and income exemption thresholds as static figures with no stated review cycle, effective date, or calendar. The most closely related governing document (AADL Program Manual Section GN - general policy and procedures) has been revised at irregular intervals (Sep 2024, Sep 2023, Jan 2023, Jul 2022, Feb 2021, Dec 2020, Feb 2020, Sep 2017, Jan 2017...) rather than on a fixed annual schedule, and no source states a rule (e.g. 'reviewed every X months') governing when cost-share amounts/income thresholds themselves change. No evidence of a published calendar or a consistent annual pattern specific to this parameter was found."
+      },
       "last_updated": "2026-07-01",
       "url": "https://www.alberta.ca/aadl-cost-sharing-of-benefits",
       "domains": [
