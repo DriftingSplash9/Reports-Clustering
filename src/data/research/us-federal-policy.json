@@ -46,6 +46,41 @@
       "region": "United States",
       "description": "The annual ceiling on earnings subject to the Social Security portion of payroll tax, and the ceiling on earnings credited toward benefits. Announced each October in the same release as the COLA — but indexed to wages, not prices, which is why it can rise in a year when the COLA is small and vice versa. Published in the Federal Register as an automatic determination under section 230 of the Social Security Act.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-10-12",
+            "to": "2023-10-12",
+            "precision": "day",
+            "covers": "2024 contribution and benefit base announced with COLA press release",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-10-10",
+            "to": "2024-10-10",
+            "precision": "day",
+            "covers": "2025 contribution and benefit base announced with COLA press release",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-10-24",
+            "to": "2025-10-24",
+            "precision": "day",
+            "covers": "2026 contribution and benefit base ($184,500) announced with COLA press release",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "2027 contribution and benefit base, expected to be announced alongside the annual COLA press release",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.ssa.gov/news/en/press/releases/index.html",
+        "note": "The cbb.html page itself states only that the base changes each year with the national average wage index, but gives no announcement date. In practice SSA has consistently announced the new contribution and benefit base for the following year in the same October press release as the annual COLA (e.g. 'Social Security Announces 2.8 Percent Benefit Increase for 2026', released 2025-10-24, which also states the 2026 base of $184,500). Observed announcement dates cluster in mid-to-late October: 2023-10-12, 2024-10-10, 2025-10-24. BLS has already scheduled release of the September 2026 CPI (which anchors the COLA determination) for 2026-10-14, so the 2027 COLA/benefit-base announcement is expected around that date, with SSA's own press release typically following within days."
+      },
       "last_updated": null,
       "url": "https://www.ssa.gov/oact/cola/cbb.html",
       "domains": [

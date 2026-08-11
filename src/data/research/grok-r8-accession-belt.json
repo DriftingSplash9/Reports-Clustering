@@ -188,6 +188,27 @@
       "region": "Türkiye",
       "description": "Turkish national accounts. TurkStat has been an EU candidate since 1999 — the longest of any country in this branch — and still uses voluntary alignment language, not binding obligation, despite the duration.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-31",
+            "to": "2026-08-31",
+            "precision": "day",
+            "covers": "Quarterly GDP (Dönemsel Gayrisafi Yurt İçi Hasıla), Q2 2026 (April-June 2026), plus Annual GDP 2025",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-01",
+            "precision": "day",
+            "covers": "Quarterly GDP, Q3 2026 (July-September 2026)",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://tr.investing.com/news/economy-news/tuik-2026-yl-veri-yayn-takvimini-acklad-3696731",
+        "note": "TurkStat (TÜİK) publishes an official 'Ulusal Veri Yayımlama Takvimi' (National Data Release Calendar) each year listing exact dated releases for Quarterly GDP / National Accounts bulletins (4x/year, consistent with releases_per_year=4 on file). The 2026 calendar was announced 2026-01-02 (per TÜİK's own X/Twitter announcement) and lists Q1 2026 GDP for 2026-06-01 (independently confirmed as actually released on that date by Hürriyet Daily News and investing.com's historical release table), Q2 2026 GDP for 2026-08-31, and Q3 2026 GDP for 2026-12-01. Historical pattern from investing.com's release table also confirms this cadence: Q1 2025->2025-05-30, Q2 2025->2025-09-01, Q3 2025->2025-12-01, Q4 2025->2026-03-02, Q1 2026->2026-06-01, all released roughly ~2 months after quarter-end. Could not directly render TÜİK's own JS-driven calendar page (www.tuik.gov.tr/Kurumsal/Veri_Takvimi and veriportali.tuik.gov.tr) to grab a first-party screenshot of the table, so this relies on a secondary source (tr.investing.com) that reported the contents of TÜİK's published calendar, corroborated by TÜİK's own tweet confirming the calendar's existence/publication date and by independently-verified past release dates matching the same calendar's Q1 2026 entry."
+      },
       "last_updated": null,
       "url": "https://dsbb.imf.org/sdds/dqaf-base/country/TUR/category/NAG00",
       "domains": [
@@ -203,8 +224,36 @@
       "region": "Ukraine",
       "description": "Ukrainian national accounts compiled in line with ESA 2010; candidate status granted 2022.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "Q2 2026 quarterly national accounts (consolidated)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Q3 2026 quarterly national accounts (consolidated)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "Full-year 2026 / Q4 2026 national accounts (consolidated, annual)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://stat.gov.ua/en/datasets/quarterly-national-accounts",
+        "note": "SSSU (Держстат) does not publish a dated advance release calendar for national accounts specifically (the general stat.gov.ua/en/releases calendar and the 2026 primary-statistics calendar at km.ukrstat.gov.ua/ukr/statinf/kalendar26.htm do not list national accounts as a separate scheduled item -- it was dropped from that calendar's active topic list). Instead, timing was inferred from actual file-publish evidence on the Quarterly National Accounts dataset page: the file for 'Consolidated national accounts for I quarter of 2026' was uploaded in the site's 2026-06 folder (i.e. released around June 2026, ~3 months after the March 31 quarter-end), and the consolidated annual national accounts for full-year 2025 was uploaded in the 2026-03 folder (~3 months after the Dec 31 year-end). Both lags are consistent with the ~T+90-day quarterly/annual transmission timelines under the EU ESA 2010 framework (Regulation (EU) No 549/2013 and amending Regulation (EU) 2023/734) that SSSU cites as the methodological basis for this statistical observation (Plan of State Statistical Observations for 2026, item 2.02). Applying that same ~3-month lag going forward gives the entries below. Ukraine also had a multi-year backlog/restoration of 2022-2025 national accounts data (completed by Dec 2025) which may still affect near-term regularity."
+      },
       "last_updated": null,
-      "url": "https://dsbb.imf.org/sdds/dqaf-base/country/UKR/category/NAG00",
+      "url": "https://stat.gov.ua/en/topics/national-accounts",
       "domains": [
         "national-accounts"
       ]
@@ -258,6 +307,21 @@
       "region": "Kosovo",
       "description": "Kosovo national accounts using standard ESA 2010 alignment language. Kosovo's EU-relationship status is contested (not recognised by all member states; treated as a potential candidate in EU sources) — that status question is not adjudicated here.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-28",
+            "to": "2026-09-28",
+            "precision": "month",
+            "covers": "Q2 2026 quarterly national accounts (GDP)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Quarterly national accounts data are published 90 days after the end of the reference quarter (t+90 days); annual national accounts data are published at t+9 months after the end of the reference period (i.e., in September of the current year for the previous year), per KAS's Annual Plan and Statistical Release Calendar.",
+        "source_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_xk.htm",
+        "note": "KAS states it publishes an advance release calendar on its own website (http://ask.rks-gov.net/en/kosovo-agency-of-statistics/news/release-calendar), but that calendar page returned no scheduled publications when fetched (likely JS-rendered or not yet populated for the period checked), so no exact calendar date could be confirmed. The next entry is computed from the stated t+90-days rule (Q2 2026 ends 2026-06-30, +90 days ≈ 2026-09-28) rather than read off a calendar; precision downgraded to 'month' to reflect that the exact day is approximate. Quarterly cadence (4 releases/year) matches the corpus's existing releases_per_year=4, consistent with no change needed."
+      },
       "last_updated": null,
       "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_xk.htm",
       "domains": [

@@ -28,9 +28,26 @@
       "description": "Senegal's official consumer price index, base 2023 (\"Base 100 en 2023\"). Classification stated directly as COICOP 2018 via a regional adaptation: \"L'indice est structure selon la nomenclature de consommation ouest africaine (NCOA) 2018, tiree de la classification des fonctions de consommation des menages (COICOP) 2018.\" Formula is a Young index, explicitly not Laspeyres (\"les indices de Young sont privilegies plutot que ceux de Laspeyres\"). Corroborated independently by Senegal's own IMF SDDS metadata submission, which restates the same base year, classification and formula.",
       "releases_per_year": 12,
       "cadence_note": "ANSD's own December 2025 bulletin states publication \"au plus tard le 10 du mois suivant\" -- but Senegal's SDDS metadata gives a conflicting \"30th of month m+1\" in two sections while agreeing with \"10th\" in two others on the same page (see sn-release-date-conflict-10th-vs-30th). Rebased on a 5-year cycle per the SDDS metadata: \"The HICP is updated every 5 years.\"",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-10",
+            "to": "2026-09-10",
+            "precision": "day",
+            "covers": "August 2026 IHPC monthly note",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "ANSD's monthly IHPC bulletin states publication \"au plus tard le 10 du mois suivant\" (no later than the 10th of the following month) — confirmed as the operative pattern: the March 2026 IHPC note was posted to the site's 2026-04 folder, the December 2025 note was posted to the 2026-01 folder, and the July 2026 note was covered in press articles (pressafrik.com, dakaractu.com) published August 10-11, 2026, i.e. right at the 10th-of-the-following-month mark.",
+        "source_url": "https://www.ansd.sn/Indicateur/indice-harmonise-des-prix-la-consommation-ihpc-base-100-en-2023",
+        "note": "Most recent observed release: the July 2026 IHPC note, published on/around 2026-08-10 (per press coverage referencing it as newly published on 10-11 Aug 2026), consistent with the 'by the 10th of month m+1' rule already documented in this report's existing cadence_note (which also flags a conflicting SDDS mention of the 30th). Next release (August 2026 data) is expected by 2026-09-10."
+      },
       "last_updated": null,
-      "url": "https://www.ansd.sn/sites/default/files/2026-01/IHPC_base2023_DEC-25.pdf",
-      "domains": ["inflation"]
+      "url": "https://www.ansd.sn/Indicateur/indice-harmonise-des-prix-la-consommation-ihpc-base-100-en-2023",
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "sn-ansd-ehcvm",
@@ -42,7 +59,9 @@
       "description": "Household living-conditions/expenditure survey supplying the weights for Senegal's base-2023 IHPC. ANSD's own bulletin: \"les ponderations utilisees sont issues de l'Enquete Harmonisee sur les Conditions de Vie des Menages (EHCVM 2021-2022)\" -- independently corroborated by Senegal's own SDDS metadata, which states the same survey and round.",
       "last_updated": null,
       "url": "https://www.ansd.sn/sites/default/files/2026-01/IHPC_base2023_DEC-25.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     }
   ],
   "dependencies": [

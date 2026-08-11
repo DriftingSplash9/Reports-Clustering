@@ -434,8 +434,21 @@
       "region": "Portugal",
       "description": "Portuguese national accounts compiled, disseminated and transmitted per ESA 2010 definitions and transmission programme.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-31",
+            "to": "2026-08-31",
+            "precision": "day",
+            "covers": "Quarterly National Accounts, 2nd Quarter 2026"
+          }
+        ],
+        "source_url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_calendarios",
+        "note": "Confirmed directly from Statistics Portugal's (INE) official release calendar (www.ine.pt, page 'Calendar'), which lists 'Quarterly national accounts / 2nd Quarter 2026 / 31 August 2026' as an upcoming release (retrieved 2026-08-11). This is the main quarterly GDP/national accounts release (T+~60 days after quarter end), consistent with the observed pattern of prior quarters (e.g. Q2 2024 detailed release was published 30 August 2024). INE also issues a preliminary 'flash estimate' of GDP around T+30 days (e.g. the Q2 2026 flash estimate was reported ~30 July 2026) and a related but separate 'Quarterly National Accounts by Institutional Sector' release (e.g. Q4 2025 edition released 26 March 2026); this entry is for the core Quarterly National Accounts press release only, matching the corpus's releases_per_year=4 cadence."
+      },
       "last_updated": null,
-      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/na10_esms_pt.htm",
+      "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_cnacionais",
       "domains": [
         "national-accounts"
       ]
@@ -449,6 +462,35 @@
       "region": "Romania",
       "description": "Romanian national accounts produced according to the definitions and guidelines of ESA 2010.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-14",
+            "to": "2026-08-14",
+            "precision": "day",
+            "covers": "Q2 2026 GDP / quarterly national accounts, preliminary (flash) estimate",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-09-04",
+            "to": "2026-09-04",
+            "precision": "day",
+            "covers": "Q2 2026 GDP / quarterly national accounts, 2nd estimate",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-09",
+            "to": "2026-10-09",
+            "precision": "day",
+            "covers": "Q2 2026 GDP / quarterly national accounts, final estimate",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Per the ESA2010 transmission programme (as summarized in Eurostat's methodological metadata for Romania): quarterly national accounts flash estimate ~45 days after quarter-end, provisional/2nd estimate ~65 days after quarter-end, final/provisional-2 estimate ~90 days after quarter-end. INS publishes an annual 'Calendarul comunicatelor de presă' in advance listing exact dates for each release (comunicat PIB trimestrial).",
+        "source_url": "https://tradingeconomics.com/romania/gdp-growth",
+        "note": "INS's own site (insse.ro) was unreachable through the fetch tooling in this session (TLS connection reset on every attempt, both via WebFetch and direct curl through the proxy), so I could not read INS's official 'Calendarul comunicatelor de presă 2026' or 'Calendar-publicatii-2026.pdf' PDFs directly, despite locating their exact URLs via search (https://insse.ro/cms/files/catalog/calendar-comunicate-presa-2026.pdf and https://insse.ro/cms/files/catalog/Calendar-publicatii-2026.pdf). The 2026-08-14 date for the Q2 2026 preliminary GDP/national-accounts release is corroborated by Trading Economics' economic calendar (which mirrors NSI release calendars) and is consistent with recent actual INS release cadence observed via news coverage: Q1 2026 2nd estimate released 2026-06-05, Q1 2026 final estimate released 2026-07-09 (per Agerpres/Bursa.ro reporting on INS comunicate), both roughly 65 and 100 days after the March 31, 2026 quarter-end respectively. The 2026-09-04 and 2026-10-09 entries are my own projections of the next cycle using those observed offsets from the June 30, 2026 quarter-end, not dates read directly off a posted INS calendar page — treat these two as lower-confidence than the 2026-08-14 entry. The corpus's existing releases_per_year=4 likely refers to one flagship quarterly release per quarter; actual INS practice appears to involve up to 3 GDP estimates per quarter (flash/2nd/final), which I have not verified is what the 4/year figure was meant to capture, so I am not proposing a correction to it."
+      },
       "last_updated": null,
       "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/na10_esms_ro.htm",
       "domains": [
@@ -464,6 +506,25 @@
       "region": "Slovenia",
       "description": "Slovenian national accounts compiled under ESA 2010 as defined in Regulation 549/2013.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-14",
+            "to": "2026-08-14",
+            "precision": "day",
+            "covers": "Gross domestic product, 2nd quarter 2026 (quarterly national accounts, ESA 2010)"
+          },
+          {
+            "from": "2026-11-16",
+            "to": "2026-11-16",
+            "precision": "day",
+            "covers": "Gross domestic product, 3rd quarter 2026 (quarterly national accounts, ESA 2010)"
+          }
+        ],
+        "source_url": "https://www.stat.si/StatWeb/en/releasecal?idp=139",
+        "note": "SURS publishes quarterly GDP/national accounts releases roughly 45-46 days after quarter-end, matching the corpus's releases_per_year=4. Retrieved live dated entries via SURS's Release Calendar API (ReleasecalApi/Search, field=GDP and National Accounts, subfield=GDP and Economic Growth, idp=139). The calendar is only populated through end-2026 at the time of research (2026-08-11); a Q4 2025->2025 4th-quarter-2026 release (expected mid-Feb 2027, consistent with the 16 Feb 2026 date used for '4th quarter 2025') was not yet listed and is therefore omitted rather than guessed. SURS also publishes a related but distinct annual detailed release ('Gross domestic product, other aggregates of national accounts and employment, <year>') around late August each year (e.g. 29 Aug 2025 for 2024 data; next instance scheduled 31 Aug 2026 for 2025 data) plus an income-structure quarterly release; these were not included as they are separate report entries, not the core quarterly GDP/national-accounts release this report tracks."
+      },
       "last_updated": null,
       "url": "https://ec.europa.eu/eurostat/cache/metadata/en/nama_10_gdp_esms_si.htm",
       "domains": [
@@ -479,6 +540,48 @@
       "region": "Slovakia",
       "description": "Slovak national accounts compiled according to ESA 2010.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-09-05",
+            "to": "2025-09-05",
+            "precision": "day",
+            "covers": "GDP / quarterly national accounts, Q2 2025",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-12-05",
+            "to": "2025-12-05",
+            "precision": "day",
+            "covers": "GDP / quarterly national accounts, Q3 2025",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-03-06",
+            "to": "2026-03-06",
+            "precision": "day",
+            "covers": "GDP / quarterly national accounts, Q4 2025 and full-year 2025",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-06-05",
+            "to": "2026-06-05",
+            "precision": "day",
+            "covers": "GDP / quarterly national accounts, Q1 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-04",
+            "to": "2026-09-04",
+            "precision": "day",
+            "covers": "GDP / quarterly national accounts, Q2 2026 (next expected)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.investing.com/economic-calendar/slovak-gdp-794",
+        "note": "SUSR publishes two GDP-related releases per quarter: a 'flash estimate' about 45 days after quarter-end, and the full quarterly National Accounts (ESA 2010) release about 65-67 days after quarter-end. The full release consistently lands on the first Friday of the third month after the reference quarter ends (Sep/Dec/Mar/Jun), confirmed across 4 consecutive quarters (Q2 2025 - Q1 2026) via SUSR's own information-message pages (susr.statistics.sk/wps/portal/.../informationmessages/...) cross-checked against investing.com's economic calendar. No official publisher release-calendar page could be reached directly (slovak.statistics.sk / susr.sk use unstable WebSphere Portal session URLs that returned 403/connection-reset on repeated fetch attempts), so the next date (2026-09-04) is an extrapolation of the observed weekday+lag pattern, not a date read off a published calendar."
+      },
       "last_updated": null,
       "url": "https://dsbb.imf.org/sddsplus/dqaf-base/country/SVK/category/NAG00",
       "domains": [
