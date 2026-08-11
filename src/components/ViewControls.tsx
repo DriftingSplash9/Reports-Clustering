@@ -13,7 +13,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
     hint: 'The dependency lines. Pulses are independent — turn these off to see influence move with nothing else drawn',
   },
   { key: 'showHorizon', label: 'Horizon', hint: 'Sky gradient meeting the ground' },
-  { key: 'showGroundGrid', label: 'Ground grid', hint: 'Infinite grid, fixed cell size — the scale ruler' },
+  { key: 'showGroundGrid', label: 'Ground grid', hint: 'Infinite grid, fixed cell size — the scale ruler. Interferes when viewing from below; distant terrain silhouette is the planned replacement' },
   { key: 'showCube', label: 'Bounding box', hint: 'Wireframe extent of the network' },
   { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
 ]
@@ -34,7 +34,7 @@ const SLIDERS: {
   {
     key: 'glow',
     label: 'Glow',
-    hint: 'Only the most depended-upon reports bleed light, so this reads as a second take on size rather than as atmosphere',
+    hint: 'Authority-weighted bloom. Low end barely lights the giants; high end lets more of the graph bleed. Default off — turn up when you want the second size channel',
   },
   {
     key: 'spread',
