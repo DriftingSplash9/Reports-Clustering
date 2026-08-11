@@ -112,6 +112,25 @@
       "region": "United States",
       "description": "BEA's measure of \"the income people living in each state and the District of Columbia get from wages, proprietors' income, dividends, interest, rents, and government benefits,\" on a place-of-residence basis and consistent with the national accounts. Published in total and per capita. The per capita figure is the operative input to the Medicaid matching formula, which is why the population denominator matters: BEA uses the Census Bureau's July 1 midyear estimates.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-30",
+            "to": "2026-09-30",
+            "precision": "day",
+            "covers": "Q2 2026 state personal income"
+          },
+          {
+            "from": "2026-12-23",
+            "to": "2026-12-23",
+            "precision": "day",
+            "covers": "Q3 2026 state personal income"
+          }
+        ],
+        "source_url": "https://www.bea.gov/news/schedule",
+        "note": "Not independently scheduled — released bundled with the GDP third estimate."
+      },
       "last_updated": null,
       "url": "https://www.bea.gov/data/income-saving/personal-income-by-state",
       "domains": [
@@ -268,6 +287,28 @@
       "region": "California",
       "description": "The Governor's annual proposed budget for the ensuing fiscal year, submitted to the Legislature under Article IV §12 of the California Constitution \"within the first 10 days of each calendar year\", with itemized statements of recommended expenditures and estimated revenues. Revised each May as the May Revision and enacted as the Budget Act, which the Legislature must pass by midnight on June 15.",
       "releases_per_year": 2,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Governor's Budget submitted by January 10 each year (CA Constitution Art. IV §12); May Revision by May 14 (Gov. Code §13308).",
+        "entries": [
+          {
+            "from": "2027-01-10",
+            "to": "2027-01-10",
+            "precision": "day",
+            "evidence": "implied",
+            "covers": "FY2027-28 Governor's Budget"
+          },
+          {
+            "from": "2027-05-14",
+            "to": "2027-05-14",
+            "precision": "day",
+            "evidence": "implied",
+            "covers": "FY2027-28 May Revision"
+          }
+        ],
+        "source_url": "https://dof.ca.gov",
+        "note": "2026's January 10 and May 14 deadlines have already passed as of this audit — entries project the next full cycle."
+      },
       "last_updated": null,
       "url": "https://ebudget.ca.gov/",
       "domains": [
@@ -417,8 +458,30 @@
       "jurisdiction_level": "provincial",
       "region": "California",
       "description": "The California-specific consumer price index maintained by the Division of Labor Statistics and Research. It is a distinct series from the national CPI-U, and it is the index Revenue and Taxation Code §51(a)(1)(C) names as the source of the Proposition 13 inflation factor — so California property assessment tracks a state index, not a federal one.",
-      "releases_per_year": 12,
+      "releases_per_year": 6,
       "cadence_note": "Filed as monthly on the strength of the published series; the exact release cycle was not confirmed from a DIR methodology page this pass. The statutory read is October to October regardless of how often it appears.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Published on even-numbered months only (six times a year), roughly seven weeks after the reference month, per the California DIR's own published schedule.",
+        "entries": [
+          {
+            "from": "2026-10-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "evidence": "implied",
+            "covers": "August 2026 CCPI (even-month release)"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "evidence": "implied",
+            "covers": "October 2026 CCPI (even-month release)"
+          }
+        ],
+        "source_url": "https://www.dir.ca.gov/oprl/capriceindex.htm",
+        "note": "Corrects releases_per_year, previously recorded as 12 — DIR's own site (landing page, a 2019 methodology notice, and a Dec 2025 notice) states publication on even-numbered months only. Also depends specifically on BLS *regional* CPI releases (LA, SF, San Diego, Riverside metro indexes), not the national bls-cpi headline release — DIR skipped October 2025 entirely when the federal shutdown delayed BLS regional data. Candidate edge, not yet added: ca-dir-ccpi depends on BLS regional CPI, needs a proper basis before minting."
+      },
       "last_updated": null,
       "url": "https://www.dir.ca.gov/oprl/capriceindex.htm",
       "domains": [

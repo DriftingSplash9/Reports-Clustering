@@ -28,7 +28,9 @@
       "description": "The constitutional basis for how revenue is split among South Africa's three spheres of government. VERIFIED DIRECTLY this session. s.213: money raised nationally goes into the National Revenue Fund, and 'a province's equitable share of revenue raised nationally' is 'a direct charge against the National Revenue Fund'. s.214(1)(a): 'An Act of Parliament must provide for... the equitable division of revenue raised nationally among the national, provincial and local spheres of government'; s.214(2) lists the factors that Act must weigh, including provinces' and municipalities' ability to 'provide basic services' and 'fiscal capacity and efficiency'. s.226 gives each province its own Revenue Fund; s.227(1)(a) entitles local government and provinces to 'an equitable share of revenue raised nationally... to provide basic services'. ss.228-229 give provinces and municipalities limited own-revenue powers (no income tax, VAT or customs duty for either).",
       "last_updated": null,
       "url": "https://www.justice.gov.za/constitution/chp13.html",
-      "domains": ["fiscal-transfers"]
+      "domains": [
+        "fiscal-transfers"
+      ]
     },
     {
       "id": "za-division-of-revenue-act",
@@ -41,7 +43,10 @@
       "releases_per_year": 1,
       "last_updated": "2024-06-03",
       "url": "https://www.treasury.gov.za/legislation/GovernmentNotices/50743%2003-06%20DivisionofRevenueAct%2024%202024.pdf",
-      "domains": ["fiscal-transfers", "municipal-finance"]
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
     },
     {
       "id": "za-municipal-indigent-framework",
@@ -53,7 +58,10 @@
       "description": "The national policy framework municipalities build their own indigent/free-basic-services policies on (confirmed as the pattern by three individual municipal indigent policies found in search -- eThekwini, Govan Mbeki, George -- though only this national framework document was fetched and read directly). VERIFIED DIRECTLY this session: 'This policy framework provides a basis for the provision of free basic services to the indigent... The policy needs to be applied in conjunction with the equitable share policy being prepared by National Treasury', and the local government equitable share is described as 'an important component of the funding to be used to subsidise the provision of free basic services to the indigent'. No formula ties a specific equitable-share rand amount to a specific municipality's free-basic-services spend in this document -- it names the equitable share as the intended funding source, not a computed input -- so the edge below is filed as `cites`, matching the same caution already used for the Budget Review -> CPI edge in za-cpi-social-grants.json.",
       "last_updated": null,
       "url": "https://www.kgatelopele.gov.za/sites/default/files/2021-02/national_framework_for_municipal_indigent_policies.pdf",
-      "domains": ["municipal-finance", "benefits"]
+      "domains": [
+        "municipal-finance",
+        "benefits"
+      ]
     },
     {
       "id": "za-sarb-monetary-policy",
@@ -67,7 +75,10 @@
       "cadence_note": "MPC meets six times a year (confirmed via SARB's own public MPC-dates communications, not the monetary-policy page itself). Repo rate changes only on decision dates, so this is publication cadence, not a claim about how often the rate actually moves.",
       "last_updated": null,
       "url": "https://www.resbank.co.za/en/home/what-we-do/monetary-policy",
-      "domains": ["monetary-policy", "interest-rates"]
+      "domains": [
+        "monetary-policy",
+        "interest-rates"
+      ]
     },
     {
       "id": "un-coicop-2018",
@@ -79,9 +90,16 @@
       "description": "The UN's standard classification for household consumption expenditure. Deliberately not minted for the Canada or US CPI slices already in the graph (`international-frameworks.json`'s own dropped notes: StatCan's CPI never uses COICOP at all, and BLS only produces a COICOP mapping as a side series for the OECD, not something the headline release rests on -- 'It should return if a document is found where COICOP governs a primary release.'). South Africa is that document: Stats SA's own CPI Sources and Methods report states 'The South African CPI adopted the 2018 version of the Classification of Individual Consumption by Purpose (COICOP) for goods and services with effect from the January 2025 publication' -- COICOP 2018 is the actual basket structure of the live release, not a side output.",
       "releases_per_year": 0.05,
       "cadence_note": "Revised on a multi-decade cycle (prior editions predate 2018 by a similar span to SNA's revision cadence); not an annual release.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "Next revision is contingent on the outcome of the separate COFOG revision process (targeted 2028) rather than its own independent schedule."
+      },
       "last_updated": null,
       "url": "https://unstats.un.org/unsd/classifications/unsdclassifications/COICOP_2018_-_pre-edited_white_cover_version.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "imf-sdds",
@@ -93,9 +111,17 @@
       "description": "The IMF's voluntary standard for the coverage, periodicity, timeliness and advance-release-calendar practices of a country's official statistics. A parallel edge for Canada (`statcan-cpi -> imf-sdds-plus`, the stricter SDDS Plus tier) was scoped and dropped in `international-frameworks.json` for lack of national-side evidence -- every document naming the obligation was IMF-side, none from StatCan itself. South Africa has the national-side evidence Canada's case lacked: Stats SA's own CPI Sources and Methods report states plainly, 'The South African CPI complies with the IMF Special Data Dissemination Standard (SDDS)' -- the plain SDDS tier, not SDDS Plus, and not independently checked against South Africa's actual IMF DSBB country page this session (that page's landing view did not surface country-specific content when fetched directly).",
       "releases_per_year": 0.06,
       "cadence_note": "Standard itself revised rarely; not an annual release.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://dsbb.imf.org/sdds/overview",
+        "note": "Framework reviewed 'at intervals determined by the Executive Board' — no fixed periodicity. Last review concluded 2022-03-16 per the IMF's own site. This report's own url field previously pointed to a Statistics South Africa PDF with no connection to the IMF — corrected here to the DSBB SDDS overview page. (Note: the za-statssa-cpi -> imf-sdds edge's evidence_url, the same statssa PDF, is left as-is — that citation is correct evidence for that specific edge's claim.)"
+      },
       "last_updated": null,
-      "url": "https://www.statssa.gov.za/publications/Report-01-41-01/Report-01-41-012025.pdf",
-      "domains": ["inflation"]
+      "url": "https://dsbb.imf.org/sdds/overview",
+      "domains": [
+        "inflation"
+      ]
     }
   ],
   "dependencies": [

@@ -29,6 +29,21 @@
       "description": "The constitutionally mandated ten-yearly count of the US population. Beyond apportionment, it defines the urban areas in which federal statistical programmes sample and supplies the population counts those samples are weighted to.",
       "releases_per_year": 0.1,
       "cadence_note": "Every ten years. The enum's coarsest bucket is annual, which is off by a factor of ten here — the same failure the Canadian census already exposes, now with a worse ratio.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "Apportionment counts transmitted to the President within 9 months of the census date (13 U.S.C. §141(b)); the census date is April 1 of each decennial year.",
+        "entries": [
+          {
+            "from": "2030-12-31",
+            "to": "2030-12-31",
+            "precision": "day",
+            "evidence": "implied",
+            "covers": "2030 census apportionment counts"
+          }
+        ],
+        "source_url": "https://www.law.cornell.edu/uscode/text/13/141",
+        "note": "The 2020 count actually slipped to April 2021 due to COVID-19 — treat the Dec 31 statutory deadline as a target, not a guarantee."
+      },
       "last_updated": null,
       "url": "https://www.census.gov/programs-surveys/decennial-census.html",
       "domains": [

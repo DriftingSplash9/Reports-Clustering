@@ -30,6 +30,21 @@
       "description": "The annual indexation factor defined in section 44.2 of the Alberta Personal Income Tax Act and published each year by Treasury Board and Finance alongside the personal income tax bracket table. For years after 2025 it is either a percentage prescribed by regulation before January 1, or, absent a prescription, the lesser of 2% and the year-over-year change in the Alberta Consumer Price Index over the 12 months ending September 30. It is the single escalator that now drives Alberta tax brackets and credit amounts, the Alberta Child and Family Benefit, and AISH/ADAP benefit rates.",
       "releases_per_year": 1,
       "cadence_note": "One factor per taxation year, effective January 1; published in the personal income tax bracket table and in the Budget tax plan.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "rule": "If no percentage is prescribed by regulation by January 1, a CPI-derived formula (capped at 2%) applies automatically.",
+        "entries": [
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-01",
+            "precision": "day",
+            "evidence": "implied",
+            "covers": "2027 escalator determination"
+          }
+        ],
+        "source_url": "https://kings-printer.alberta.ca",
+        "note": "A 2026 amendment to this section exists but is not yet in force as of this audit — worth rechecking before relying on this rule going forward."
+      },
       "last_updated": "2026-01-01",
       "url": "https://www.alberta.ca/personal-income-tax",
       "domains": [
