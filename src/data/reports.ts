@@ -436,6 +436,25 @@ export const reports: Report[] = [
     description:
       "Quarterly compilation of FOMC participants' projections for growth, unemployment, inflation, and the policy rate path.",
     releases_per_year: 4,
+    release_schedule: {
+      kind: 'published-calendar',
+      entries: [
+        {
+          from: '2026-09-16',
+          to: '2026-09-16',
+          precision: 'day',
+          covers: 'September 2026 FOMC meeting Summary of Economic Projections',
+        },
+        {
+          from: '2026-12-09',
+          to: '2026-12-09',
+          precision: 'day',
+          covers: 'December 2026 FOMC meeting Summary of Economic Projections',
+        },
+      ],
+      note: "The SEP is released at four FOMC meetings per year (March, June, September, December), on the second day of the two-day meeting. The Fed's calendar page marks these meetings as 'associated with a Summary of Economic Projections.' The March and June 2026 SEP releases have already occurred relative to the 2026-08-11 reference date, so only the two remaining 2026 releases are listed.",
+      source_url: 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm',
+    },
     last_updated: null,
     url: 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm',
     domains: ['monetary-policy'],
@@ -451,6 +470,21 @@ export const reports: Report[] = [
       'Daily statistical release of selected US interest rates, including the effective federal funds rate and the current target range.',
     releases_per_year: 250,
     cadence_note: 'Every business day.',
+    release_schedule: {
+      kind: 'stated-rule',
+      rule: 'The release is posted daily Monday through Friday at 4:15pm. The release is not posted on holidays or in the event that the Board is closed.',
+      entries: [
+        {
+          from: '2026-08-11',
+          to: '2026-08-11',
+          precision: 'day',
+          covers: 'H.15 Selected Interest Rates (Daily) - next business-day release',
+          evidence: 'implied',
+        },
+      ],
+      note: "Fed's own site (federalreserve.gov/releases/h15/) confirms daily M-F publication at 4:15pm, skipping holidays/Board closures. This matches the existing cadence_note and releases_per_year=250 already on file (~250 US business days/year). No fixed future calendar is published beyond this standing rule; next occurrence is simply the next business day, which as of the query date (2026-08-11, a Tuesday) is today.",
+      source_url: 'https://www.federalreserve.gov/releases/h15/',
+    },
     last_updated: null,
     url: 'https://www.federalreserve.gov/releases/h15/',
     domains: ['interest-rates'],
