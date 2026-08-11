@@ -13,6 +13,48 @@
       "description": "The national accounts price index for what state and local governments buy, published as line 26 of NIPA Table 1.1.9 under BEA account code A829RD, quarterly and seasonally adjusted, on a 2017=100 base. It is the index California names to escalate every school district's base grant — so a federal national-accounts series sets the growth rate of Californian school funding.",
       "releases_per_year": 4,
       "cadence_note": "The statute names it as the deflator for \"State and Local Government Purchases of Goods and Services\", which is pre-1991 BEA terminology. The successor series covers consumption expenditures and gross investment together, so the statutory name and the published name have drifted apart without anyone amending either.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-26",
+            "to": "2026-08-26",
+            "precision": "day",
+            "covers": "Q2 2026 GDP Second Estimate (includes updated NIPA price index tables)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-30",
+            "to": "2026-09-30",
+            "precision": "day",
+            "covers": "Q2 2026 GDP Third Estimate, State GDP, State PCE",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-10-29",
+            "to": "2026-10-29",
+            "precision": "day",
+            "covers": "Q3 2026 GDP Advance Estimate",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-25",
+            "to": "2026-11-25",
+            "precision": "day",
+            "covers": "Q3 2026 GDP Second Estimate",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-23",
+            "to": "2026-12-23",
+            "precision": "day",
+            "covers": "Q3 2026 GDP Third Estimate, State GDP, State PCE",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.bea.gov/news/schedule",
+        "note": "This specific NIPA underlying-detail price-deflator table (BEA Table 3.9.4-type series) does not have its own standalone release calendar page on bea.gov; it is part of the National Income and Product Accounts (NIPA) table package that BEA republishes/revises alongside every quarterly GDP news release (advance, second, and third estimates), per BEA's official release schedule at https://www.bea.gov/news/schedule. That schedule shows releases roughly monthly (3 per quarter), which is more frequent than the corpus's current releases_per_year=4 (quarterly) figure, but I could not find a page confirming this specific price-index table only updates once per quarter rather than with all three current estimates, so I have not proposed an existing_field_correction. The apps.bea.gov iTable URL on file could not be fetched directly (blocked by robots.txt for automated fetch), but is a standard BEA interactive-table landing page for this series and appears to remain a reasonable, non-dead URL."
+      },
       "last_updated": null,
       "url": "https://apps.bea.gov/iTable/?reqid=19&step=3&isuri=1&1921=survey&1903=13",
       "domains": [

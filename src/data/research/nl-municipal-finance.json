@@ -31,8 +31,36 @@
       "description": "The provincial-level counterpart to the Gemeentefonds — the national equalization transfer to the Netherlands' 12 provinces, distributed under the same Financiële-verhoudingswet (confirmed: wetten.overheid.nl's own list of delegated regulations under the Fvw includes both the Besluit financiële verhouding 2001, whose Bijlage 1 governs provinces and Bijlage 2 governs municipalities, and separate year-specific 'Besluit vaststelling bedragen per eenheid uitkering provinciefonds' decrees).",
       "releases_per_year": 3,
       "cadence_note": "Same three-circulaire annual cadence as the Gemeentefonds.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-09-15",
+            "to": "2026-09-15",
+            "precision": "day",
+            "covers": "Septembercirculaire provinciefonds 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-12-01",
+            "to": "2026-12-31",
+            "precision": "month",
+            "covers": "Decembercirculaire provinciefonds 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-31",
+            "precision": "month",
+            "covers": "Meicirculaire provinciefonds 2027",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.rijksoverheid.nl/themas/overheid-en-democratie/financien-gemeenten-en-provincies/provinciefonds/circulaires-provinciefonds",
+        "note": "BZK/Financien publish three circulaires per year for the provinciefonds (meicirculaire in late May, septembercirculaire in mid-September, decembercirculaire in December), mirroring the identical schedule for the gemeentefonds. No fixed-date calendar is published in advance; dates are inferred from the consistent pattern of past editions. The septembercirculaire has coincided with Prinsjesdag (the constitutionally fixed third Tuesday of September) in each of the last three years observed (2023-09-19, 2024-09-17, 2025-09-16), so 2026-09-15 (Prinsjesdag 2026) is a high-confidence projection. The decembercirculaire has varied between Dec 12-16 in recent years (2024-12-12, 2025-12-16), and the meicirculaire between May 27-31 (2024-05-27, 2026-05-29), so those two are given month-level precision only."
+      },
       "last_updated": null,
-      "url": "https://www.rijksoverheid.nl/documenten/2026/05/29/meicirculaire-provinciefonds-2026",
+      "url": "https://www.rijksoverheid.nl/themas/overheid-en-democratie/financien-gemeenten-en-provincies/provinciefonds/circulaires-provinciefonds",
       "domains": [
         "fiscal-transfers"
       ]
@@ -46,6 +74,20 @@
       "region": "Netherlands",
       "description": "Annual technical companion document to the Gemeentefonds circulaires: one standardised data-source card per 'maatstaf' (distribution criterion) — roughly 50 of them — each carrying fields for Wet- en regelgeving / Definitie / Bron / Methode / Publicatie / Peildatum. This is the Dutch functional equivalent of Ontario's OMPF Technical Guide Appendix F ('Data sources') — a document that names its own inputs in a structured, repeatable table, which Research.1.md §7 identifies as the strongest evidence class in this corpus. VERIFIED DIRECTLY: downloaded the 2024 edition PDF and text-extracted it in full (77 pages, pypdf) to confirm the per-maatstaf source citations quoted below.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-31",
+            "precision": "month",
+            "covers": "Toelichting op de berekening van de uitkering uit het gemeentefonds 2027",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.rijksoverheid.nl/onderwerpen/financien-gemeenten-en-provincies/gemeentefonds",
+        "note": "No published release calendar or stated statutory rule was found for this specific document. However, BZK has published a new dated edition of this \"Toelichting\" report every year around the same time as the annual Meicirculaire gemeentefonds: 2013 edition dated 2013-05-24, 2024 edition dated 2024-05-27, 2025 edition dated 2025-05-12, and a 2026 edition confirmed linked from the Meicirculaire gemeentefonds 2026 page (published 2026-05-29). Since today (2026-08-11) is after the 2026 release, the next edition is projected for May 2027, following the observed annual May pattern (soonest future occurrence)."
+      },
       "last_updated": null,
       "url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024",
       "domains": [
@@ -124,6 +166,35 @@
       "description": "The standardised financial return every Dutch municipality and province submits to CBS/BZK under BBV-mandated reporting rules — the direct Dutch counterpart to Alberta's Municipal Financial Information Return (FIR). CBS's own compiled table (`nl-cbs-iv3-gemeenten`) is calculated directly from these individual submissions.",
       "releases_per_year": 6,
       "cadence_note": "Begroting (budget), four kwartaalrapportages (quarterly), and one jaarrekening (annual account) per year, per data.overheid.nl's own description of the underlying 'verslagsoorten'.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-11-10",
+            "to": "2026-11-10",
+            "precision": "day",
+            "covers": "Q3 2026 kwartaalstaat (Iv3), published 10 days after the Oct 31, 2026 quarterly submission deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-24",
+            "to": "2026-11-24",
+            "precision": "day",
+            "covers": "Iv3-jaarbegroting 2027, published 10 days after the Nov 14, 2026 budget submission deadline",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-02-10",
+            "to": "2027-02-10",
+            "precision": "day",
+            "covers": "Q4 2026 kwartaalstaat (Iv3), published 10 days after the Jan 31, 2027 quarterly submission deadline",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Het moment van beschikbaar stellen van Iv3-gegevens voor een verslagperiode is afhankelijk van de uiterste datum die geldt voor inzending aan CBS van de Iv3-rapportage voor die verslagperiode. Alle voor een bepaalde verslagperiode ontvangen Iv3-gegevens worden tegelijkertijd beschikbaar gesteld. Dit gebeurt tien dagen na de uiterste inzenddatum. Deadlines: kwartaalstaten uiterlijk 1 maand na afloop van het kwartaal; Iv3-jaarbegroting uiterlijk 14 november van het jaar voorafgaand aan het begrotingsjaar; Iv3-jaarrekening uiterlijk 14 juli van het jaar volgend op het verslagjaar.",
+        "source_url": "https://www.cbs.nl/nl-nl/onze-diensten/open-data/iv3",
+        "note": "Iv3 (Informatie voor Derden) is submitted by individual municipalities/provinces to CBS under the BBV (Besluit Begroting en Verantwoording) framework; CBS then publishes the combined open dataset 10 days after each submission deadline. There are 4 quarterly submissions plus 1 annual budget (jaarbegroting) plus 1 annual accounts (jaarrekening) per year = 6 releases/year, consistent with the corpus's existing releases_per_year=6. Two releases already occurred in the recent past relative to today (2026-08-11): Q2 2026 kwartaalcijfers (~Aug 10, 2026) and Jaarrekening 2025 (~Jul 24, 2026); the next upcoming release is the Q3 2026 kwartaalstaat around Nov 10, 2026."
+      },
       "last_updated": null,
       "url": "https://www.cbs.nl/nl-nl/onze-diensten/open-data/iv3",
       "domains": [
@@ -223,6 +294,20 @@
       "description": "CBS StatLine table (03759ned) giving population on 1 January and the yearly average, by sex, age and region — the CBS population statistic the Toelichting's 'Maatstaf Inwoners sociaal' card cites by name for the Gemeentefonds distribution formula. The EU-branch counterpart to Canada's `statcan-census-population`. Minted 2026-08-09 (sweep session, Tier-2 item #13), closing a `no-node-yet` lead this file's own extraction had already verified directly (line 452 of the 2024 Toelichting's extracted text) but left unbuilt for scope.",
       "releases_per_year": 1,
       "cadence_note": "CBS's own table page: figures for 1 January of year N and the average for year N-1 are added in Q2 of year N+1 — \"In het tweede kwartaal van 2027 worden de cijfers van 1 januari 2027 en de gemiddelde cijfers over 2026 in deze publicatie opgenomen.\" An annual update.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2027-04-01",
+            "to": "2027-06-30",
+            "precision": "quarter",
+            "covers": "Population as of 1 January 2027 and average population over 2026",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.cbs.nl/nl-nl/cijfers/detail/03759ned",
+        "note": "CBS table page states verbatim: 'In het tweede kwartaal van 2027 worden de cijfers van 1 januari 2027 en de gemiddelde cijfers over 2026 in deze publicatie opgenomen.' The table was last updated 23 June 2026 with definitive figures for 1 January 2026 / average 2025, confirming an annual (Q2) release cadence consistent with releases_per_year=1 already on file."
+      },
       "last_updated": null,
       "url": "https://www.cbs.nl/nl-nl/cijfers/detail/03759ned",
       "domains": [

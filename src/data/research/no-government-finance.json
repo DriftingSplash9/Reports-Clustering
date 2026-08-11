@@ -52,6 +52,28 @@
       "description": "Regulation of 18 October 2019 no. 1412, issued under kommuneloven (Act of 22 June 2018 no. 83) § 16-1 and IKS-loven § 42, prescribing what economic and service data municipalities, county authorities and inter-municipal companies must report and requiring that all KOSTRA reporting be made electronically to Statistics Norway. In force 1 January 2020. The Norwegian functional equivalent of the Dutch BBV/Iv3 reporting rules (nl-bbv) in this corpus.",
       "releases_per_year": 1,
       "cadence_note": "Amended periodically rather than issued as dated editions (e.g. amending regulation FOR-2023-11-04-1859), the same pattern nl-bbv and psab-psas are filed under. Canonical consolidation is on lovdata.no, which is robots.txt-blocked to this pipeline; operative text verified via the ministry's Veileder til KOSTRA-forskriften (regjeringen.no PDF, fetched).",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-02-15",
+            "to": "2027-02-15",
+            "precision": "day",
+            "covers": "Annual service/resource-use data reporting deadline (KOSTRA-forskriften § 4)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-02-22",
+            "to": "2027-02-22",
+            "precision": "day",
+            "covers": "Annual accounts (regnskap) reporting deadline (KOSTRA-forskriften § 5)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "KOSTRA-forskriften § 4, third paragraph: \"fristen for å rapportere opplysninger om ressursbruk og tjenester er 15. februar\" (deadline for reporting resource-use/service data is 15 February). § 5, third paragraph: \"fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret\" (deadline for submitting annual accounts is no later than 22 February in the year following the accounting year).",
+        "source_url": "https://www.regjeringen.no/contentassets/457fbe59592248e1a2b3b57ebe033e97/veileder-til-kostra-forskriften.pdf",
+        "note": "This is a regulation (forskrift) governing when Norwegian municipalities/county municipalities must report data into KOSTRA each year, not a statistical publication itself. Both 2026 deadlines (15 and 22 Feb) have already passed relative to today (2026-08-11), so the computed next occurrences are for 2027. In practice, SSB's own annual reporting-calendar notices (e.g. NOT2025-29) sometimes shift the accounts deadline by a day or two when the stated date falls on a weekend (e.g. 23 Feb instead of 22 Feb in 2026) — actual dates should be checked against SSB's yearly KOSTRA-rapportering notice for exact business-day adjustments. Additional deadlines exist for sensitive service data (mid-January) and corrected data (mid-April, per § 6/related guidance) not captured as separate entries here."
+      },
       "last_updated": null,
       "url": "https://lovdata.no/dokument/SF/forskrift/2019-10-18-1412",
       "domains": [
@@ -101,6 +123,21 @@
       "description": "Each Norwegian municipality's and county municipality's own annual accounts -- the primary filed document KOSTRA aggregates, analogous to the Dutch Iv3-rapportage (nl-iv3-rapportage) and Alberta's Municipal Financial Information Return. SSB's own KOSTRA veileder gives the reporting deadline: 'fristen for å rapportere årsregnskapene er senest 22. februar i året etter regnskapsåret'. SSB's Kommuneregnskap statistics page names the legal basis directly: 'Lov om kommuner og fylkeskommuner av 22. juni 2018 nr. 83 § 16-1' (the Municipality Act) and 'forskrift av 18. oktober 2019 nr. 1412 om rapportering fra kommuner og fylkeskommuner' (the KOSTRA reporting regulation) -- both confirmed by direct fetch of ssb.no this session. The underlying budsjett- og regnskapsforskrift itself (forskrift 2019-06-07-714) could not be independently opened -- lovdata.no is robots-disallowed, the same limitation already documented for the Kommuneloven statute in this file's own _status field.",
       "releases_per_year": 1,
       "cadence_note": "Annual, per municipality. SSB veileder: reporting deadline 22 February of the year following the accounting year.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-02-22",
+            "to": "2027-02-22",
+            "precision": "day",
+            "covers": "Kommunenes og fylkeskommunenes årsregnskap for regnskapsåret 2026 (avleggelsesfrist)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Årsregnskapet skal avlegges [av kommunedirektøren/administrasjonssjefen] senest 22. februar året etter regnskapsåret (jf. forskrift om økonomiplan, årsbudsjett, årsregnskap og årsberetning for kommuner og fylkeskommuner). Årsberetningen skal være avgitt til revisjon innen 31. mars, revisor avgir beretning innen 15. april, og kommunestyret/fylkestinget skal behandle (vedta) årsregnskapet senest seks måneder etter regnskapsårets slutt (normalt innen 30. juni).",
+        "source_url": "https://framsikt.no/blogg/arsregnskap-arsberetning-og-arsrapport/",
+        "note": "This report is produced individually by each of Norway's ~357 municipalities and counties (no single publisher calendar), so there is no dated release-calendar page; instead a national forskrift sets fixed statutory deadlines. The most recent cycle (accounts for FY2025) already fell due 2026-02-22 (confirmed by e.g. Melhus kommune's published 'Årsregnskap' PDF dated 22.02.2026) and was due for political adoption by kommunestyret by ~2026-06-30, both before today (2026-08-11); the next cycle (FY2026 accounts) is due 2027-02-22. The corpus's existing url (SSB's kommregnko/aar page) is SSB's own downstream KOSTRA aggregation of these municipal accounts, not a page belonging to the actual publisher (the individual municipalities themselves) — flagged as a candidate edge below rather than a url_correction since no single-publisher URL exists to substitute."
+      },
       "last_updated": null,
       "url": "https://www.ssb.no/offentlig-sektor/statistikker/kommregnko/aar",
       "domains": [

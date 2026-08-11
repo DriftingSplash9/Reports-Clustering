@@ -13,8 +13,22 @@
       "description": "The metropolitan-area CPI-U for the Houston core based statistical area, and the index the City of Houston uses to adjust its property tax revenue cap. Published bimonthly rather than monthly, in even months, and not seasonally adjusted. The area has been renamed twice — from Houston-Galveston-Brazoria, and again under the 2023 delineation — while the underlying series identifier stayed put.",
       "releases_per_year": 6,
       "cadence_note": "Bimonthly, which matters less than it looks: the City reads the annual average for the preceding calendar year, so a six-a-year series still yields a usable yearly figure.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-09-11",
+            "to": "2026-09-11",
+            "precision": "day",
+            "covers": "August 2026 CPI",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.bls.gov/regions/southwest/news-release/consumerpriceindex_houston.htm",
+        "note": "BLS Southwest Information Office publishes Houston-The Woodlands-Sugar Land CPI bimonthly (every other month: Feb, Apr, Jun, Aug, Oct, Dec), consistent with releases_per_year=6 on file. The July 14, 2026 news release (covering June 2026 data) explicitly states the next release date."
+      },
       "last_updated": null,
-      "url": "https://www.bls.gov/regions/southwest/tx_houston_msa.htm",
+      "url": "https://www.bls.gov/regions/southwest/news-release/consumerpriceindex_houston.htm",
       "domains": [
         "inflation"
       ]
@@ -194,6 +208,21 @@
       "region": "Texas",
       "description": "The constitutionally required estimate of revenue available for the coming two-year budget period. Appropriations exceeding it are invalid without a four-fifths vote of both chambers, and no appropriation bill reaches the Governor without the Comptroller's certificate that it fits inside the estimate. A forecast with legal force, which the California budget documents do not have.",
       "releases_per_year": 0.5,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-01-12",
+            "to": "2027-01-12",
+            "precision": "day",
+            "covers": "Biennial Revenue Estimate for the 2028-29 biennium, submitted at the convening of the 90th Texas Legislature",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "It shall be the duty of the Comptroller of Public Accounts in advance of each Regular Session of the Legislature to prepare and submit to the Governor and to the Legislature upon its convening a statement under oath showing fully the financial condition of the State Treasury at the close of the last fiscal period and an estimate of the probable receipts and disbursements for the then current fiscal year and the succeeding biennium. (Texas Constitution, Art. III, Sec. 49a)",
+        "source_url": "https://comptroller.texas.gov/transparency/reports/biennial-revenue-estimate/",
+        "note": "The Texas Legislature meets in regular session only in odd-numbered years, convening on the second Tuesday in January (Texas Constitution Art. III, Sec. 5). The BRE is constitutionally required to be submitted at that convening. In practice the Comptroller has released it the day before or on the convening date (e.g., Jan 13, 2025 for the session convening Jan 14, 2025; Jan 7, 2019 for session convening Jan 8, 2019). The next regular session convenes Jan 12, 2027, so the next BRE (covering FY2028-29) is expected on or about that date; no calendar page with a confirmed exact release date has been published yet as of Aug 2026."
+      },
       "last_updated": null,
       "url": "https://comptroller.texas.gov/transparency/reports/biennial-revenue-estimate/",
       "domains": [
@@ -227,6 +256,62 @@
       "region": "Texas",
       "description": "Monthly cash-basis reporting of state revenue by source, including net oil and natural gas production tax collections — the series the Economic Stabilization Fund transfer is computed against.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-09-01",
+            "to": "2023-09-01",
+            "precision": "day",
+            "covers": "August 2023 revenue/sales tax collections",
+            "evidence": "implied"
+          },
+          {
+            "from": "2024-09-03",
+            "to": "2024-09-03",
+            "precision": "day",
+            "covers": "August 2024 revenue/sales tax collections",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-09-03",
+            "to": "2025-09-03",
+            "precision": "day",
+            "covers": "August 2025 revenue/sales tax collections",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-04-01",
+            "to": "2026-04-01",
+            "precision": "day",
+            "covers": "March 2026 revenue/sales tax collections",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-05-01",
+            "to": "2026-05-01",
+            "precision": "day",
+            "covers": "April 2026 revenue/sales tax collections",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-03",
+            "to": "2026-08-03",
+            "precision": "day",
+            "covers": "July 2026 revenue/sales tax collections",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-01",
+            "to": "2026-09-03",
+            "precision": "week",
+            "covers": "August 2026 revenue/sales tax collections (projected next update)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://comptroller.texas.gov/transparency/revenue/watch/",
+        "note": "The Comptroller's own page states 'These reports are updated monthly' but provides no fixed calendar or specific day-of-month rule. Observed historical releases (both the Revenue Watch data page updates and the closely tied 'State Sales Tax Revenue' news releases covering the same monthly collections data) consistently land within the first 1-3 business days of each month, reporting the prior month's collections. Based on this pattern, the next update covering August 2026 collections is expected in the first few days of September 2026. Confirmed release dates found: 2023-09-01, 2024-09-03, 2025-09-03, 2026-04-01, 2026-05-01, 2026-08-03."
+      },
       "last_updated": null,
       "url": "https://comptroller.texas.gov/transparency/revenue/watch/",
       "domains": [
@@ -277,8 +362,51 @@
       "region": "Texas",
       "description": "The monthly allocation of transit authority sales and use tax collections back to each authority, net of the state's 2 percent service charge. The channel through which a Houston retail sale becomes transit revenue.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-14",
+            "to": "2026-08-14",
+            "precision": "day",
+            "covers": "June 2026 / 2nd Quarter allocation payment"
+          },
+          {
+            "from": "2026-09-14",
+            "to": "2026-09-14",
+            "precision": "day",
+            "covers": "July 2026 allocation payment"
+          },
+          {
+            "from": "2026-10-09",
+            "to": "2026-10-09",
+            "precision": "day",
+            "covers": "August 2026 allocation payment"
+          },
+          {
+            "from": "2026-11-16",
+            "to": "2026-11-16",
+            "precision": "day",
+            "covers": "September 2026 / 3rd Quarter allocation payment"
+          },
+          {
+            "from": "2026-12-11",
+            "to": "2026-12-11",
+            "precision": "day",
+            "covers": "October 2026 allocation payment"
+          },
+          {
+            "from": "2027-01-08",
+            "to": "2027-01-08",
+            "precision": "day",
+            "covers": "November 2026 allocation payment"
+          }
+        ],
+        "source_url": "https://comptroller.texas.gov/transparency/local/allocations/sales-tax/distribution-schedule.php",
+        "note": "The Comptroller publishes a single 'Sales Tax Allocation Payment Distribution Schedule' covering all local sales/use tax allocations (cities, counties, special purpose districts, metropolitan transit authorities, and city transit departments), including the Transit District Sales and Use Tax allocation. Payments are monthly, consistent with releases_per_year=12 on file."
+      },
       "last_updated": null,
-      "url": "https://comptroller.texas.gov/transparency/local/allocations/sales-tax/transit/",
+      "url": "https://comptroller.texas.gov/transparency/local/allocations/sales-tax/distribution-schedule.php",
       "domains": [
         "taxation",
         "municipal-finance"
@@ -310,8 +438,43 @@
       "region": "Texas",
       "description": "The four-yearly study of actual system experience against the standing assumptions, recommending the demographic and economic assumptions the valuations then use.",
       "releases_per_year": 0.25,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2018-07-27",
+            "to": "2018-07-27",
+            "precision": "day",
+            "covers": "2018 Actuarial Experience Study (FY2015-FY2017 experience)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2022-07-15",
+            "to": "2022-07-15",
+            "precision": "day",
+            "covers": "2022 Actuarial Experience Study (FY2018-FY2021 experience)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-02-06",
+            "to": "2026-02-06",
+            "precision": "day",
+            "covers": "2026 Actuarial Experience Study (FY2022-FY2025 experience)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2029-07-01",
+            "to": "2030-12-31",
+            "precision": "year",
+            "covers": "Next Actuarial Experience Study (projected, ~4-year cycle)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://trs.texas.gov/learning-resources/publications/actuarial-valuation-reports",
+        "note": "TRS conducts an actuarial experience study roughly every 3-4 years, tied to the actuarial valuation cycle, but there is no published calendar or codified fixed-interval rule found. Past editions found: 2015, 2018 (issued 2018-07-27), 2022 (issued 2022-07-15), and 2026 (issued 2026-02-06, already released before today's date of 2026-08-11). Gaps have been 3, 4, and ~3.6 years respectively, so the next edition is estimated to arrive around 2029-2030 rather than on a fixed date."
+      },
       "last_updated": null,
-      "url": "https://www.trs.texas.gov/Pages/about_publications.aspx",
+      "url": "https://trs.texas.gov/learning-resources/publications/actuarial-valuation-reports",
       "domains": [
         "benefits",
         "research-innovation",
@@ -343,6 +506,21 @@
       "region": "Texas",
       "description": "The four-yearly experience investigation from which the Board of Trustees adopts the assumptions used in subsequent valuations.",
       "releases_per_year": 0.25,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2028-03-01",
+            "to": "2028-03-31",
+            "precision": "month",
+            "covers": "Next ERS Actuarial Experience Study (statutorily due at least once every 4 years after the March 2024 study)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "At least once every four years, the actuary, under the direction of the board of trustees, shall make an actuarial investigation of the mortality, service, and compensation experience of the members and beneficiaries of the retirement system (Tex. Gov't Code Sec. 815.206(c)).",
+        "source_url": "https://ers.texas.gov/about-ers/reports-and-studies/ers-actuarial-valuation-reports/2024-ers-actuarial-experience-study-final",
+        "note": "The most recent study (covering the 4-year period ending August 31, 2023) was presented to the ERS Board on March 20, 2024, following the same cadence as the prior study (period ending August 31, 2020, presented as a March 2020 board presentation with a May 2020 final report). Texas Government Code Sec. 815.206(c) requires an experience investigation at least once every four years, so the next one is due by 2028; the March 2028 date is projected from the observed 4-year cadence (March 2020 -> March 2024) rather than a published calendar."
+      },
       "last_updated": null,
       "url": "https://ers.texas.gov/about-ers/reports-and-studies/ers-actuarial-valuation-reports",
       "domains": [
@@ -485,6 +663,41 @@
       "region": "Harris County, Texas",
       "description": "The transit authority's annual financial reporting. Funded principally by a 1 percent sales and use tax authorised by voters in 1978, collected by the state and remitted to the authority. The counterpart to LA Metro, and unlike LA Metro its reports are not served as retrievable documents — see the _dropped entry.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2024-03-22",
+            "to": "2024-03-22",
+            "precision": "day",
+            "covers": "FY2023 Annual Comprehensive Financial Report (year ended 2023-09-30)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-03-24",
+            "to": "2025-03-24",
+            "precision": "day",
+            "covers": "FY2024 Annual Comprehensive Financial Report (year ended 2024-09-30)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-03-20",
+            "to": "2026-03-20",
+            "precision": "day",
+            "covers": "FY2025 Annual Comprehensive Financial Report (year ended 2025-09-30)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "FY2026 Annual Comprehensive Financial Report (year ending 2026-09-30)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://metro.resourcespace.com/pages/collections_featured.php?parent=17937",
+        "note": "METRO's fiscal year runs October 1 - September 30 (confirmed on the ACFR cover page: 'Fiscal Year Begins on October 1 and Ends on September 30'). The Annual Comprehensive Financial Report (ACFR) for a given fiscal year is consistently issued in late March of the following calendar year, roughly 5.5-6 months after fiscal year end. Verified via PDF metadata (CreationDate) and the CFO transmittal-letter date on three consecutive editions downloaded directly from METRO's official document library (metro.resourcespace.com, linked from the corpus url): FY2023 ACFR created/dated 2024-03-22; FY2024 ACFR created 2025-03-24 (letter undated in extract but consistent); FY2025 ACFR created 2026-03-20, with its transmittal letter explicitly dated 'March 20, 2026' for 'the year ended September 30, 2025'. As of today (2026-08-11) the FY2025 ACFR is the latest published edition; the FY2026 ACFR (for the year ending 2026-09-30, not yet complete) is the next expected release, projected for March 2027 based on this three-year pattern. No published release calendar or statutory/continuing-disclosure deadline rule was found on METRO's site; the March timing is an observed pattern only."
+      },
       "last_updated": null,
       "url": "https://www.ridemetro.org/about/records-reports/financial-transparency/general-finance",
       "domains": [
@@ -518,6 +731,21 @@
       "region": "Harris County, Texas",
       "description": "The audited annual financial report of one named municipal utility district, kept under the state water district financial management guide. Included as the concrete instance of a class that is enormous in suburban Houston and absent from every other region in this corpus: independent special districts that levy property tax and issue debt to finance water and wastewater infrastructure, each with its own fiscal year — this one ends March 31.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-30",
+            "to": "2026-09-30",
+            "precision": "day",
+            "covers": "Audited annual financial statements for fiscal year ended March 31, 2026 (EMMA/MSRB continuing-disclosure filing deadline)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Per the District's bond continuing-disclosure covenant: the District must provide to the MSRB through EMMA its continuing disclosure of annual financial information and operating data, and 'the information, along with the audited annual financial statements, must be filed within six months after the end of each fiscal year of the District.' The District's fiscal year ends March 31.",
+        "source_url": "https://www.hcmud285.org/audit.pdf",
+        "note": "The FY2025 audit (year ended March 31, 2025) was dated July 21, 2025, well ahead of the six-month EMMA deadline. Board minutes show the audit is typically presented and approved by the Board at its mid-July meeting each year (e.g., July 15, 2024 and July 15, 2019 minutes both show audit approval), so the FY2026 audit (year ended March 31, 2026) was likely already completed and presented by the time of this research (2026-08-11), even though the formal six-month EMMA filing deadline is September 30, 2026. Could not locate a July 2026 board minutes document to confirm the exact FY2026 audit date, so the stated-rule deadline is used as the safe, evidenced 'next' date."
+      },
       "last_updated": null,
       "url": "https://www.hcmud285.org/",
       "domains": [

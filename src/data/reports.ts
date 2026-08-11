@@ -243,8 +243,20 @@ export const reports: Report[] = [
     description:
       'Annual earnings ceiling for Canada Pension Plan contributions, calculated from the industrial aggregate average weekly earnings series.',
     releases_per_year: 1,
+    release_schedule: {
+      kind: 'observed-pattern',
+      source_url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html',
+      note: "CRA does not publish a formal release calendar for YMPE. Instead, it issues an annual newsroom 'tax tip' announcing the following year's maximum pensionable earnings and CPP contribution limits, consistently around November 1 each year (observed: Nov 1 2022, Nov 1 2023, Nov 1 2024, Oct 31 2025). No specific calendar date is legislated for the announcement, only the observed early-November pattern.",
+      entries: [
+        { from: '2022-11-01', to: '2022-11-01', precision: 'day', covers: '2023 YMPE announcement', evidence: 'implied' },
+        { from: '2023-11-01', to: '2023-11-01', precision: 'day', covers: '2024 YMPE announcement', evidence: 'implied' },
+        { from: '2024-11-01', to: '2024-11-01', precision: 'day', covers: '2025 YMPE announcement', evidence: 'implied' },
+        { from: '2025-10-31', to: '2025-10-31', precision: 'day', covers: '2026 YMPE announcement', evidence: 'implied' },
+        { from: '2026-10-31', to: '2026-11-02', precision: 'week', covers: '2027 YMPE announcement (projected)', evidence: 'implied' },
+      ],
+    },
     last_updated: null,
-    url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp.html',
+    url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html',
     domains: ['benefits', 'labour'],
   },
   {
@@ -392,6 +404,16 @@ export const reports: Report[] = [
     releases_per_year: 8,
     cadence_note:
       'Eight scheduled meetings per year. Does not fit the coarse enum; use releases_per_year.',
+    release_schedule: {
+      kind: 'published-calendar',
+      source_url: 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm',
+      note: 'The FOMC statement is released at the conclusion of each two-day meeting (on the second day, typically 2:00 p.m. ET). The Fed lists 8 regularly scheduled meetings per year; may also hold additional unscheduled meetings as needed.',
+      entries: [
+        { from: '2026-09-16', to: '2026-09-16', precision: 'day', covers: 'September 15-16, 2026 FOMC meeting statement' },
+        { from: '2026-10-28', to: '2026-10-28', precision: 'day', covers: 'October 27-28, 2026 FOMC meeting statement' },
+        { from: '2026-12-09', to: '2026-12-09', precision: 'day', covers: 'December 8-9, 2026 FOMC meeting statement' },
+      ],
+    },
     last_updated: null,
     url: 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm',
     domains: ['monetary-policy', 'interest-rates'],

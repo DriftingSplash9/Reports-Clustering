@@ -31,9 +31,32 @@
       "region": "Libya",
       "description": "Libya's official monthly Consumer Price Index report. VERIFIED DIRECTLY this session via the June 2026 edition and the BSC's own online archive, which shows an unbroken monthly run from December 2024 to June 2026 -- 18+ consecutive months, each on the new 'Base Year 2024.' Per the IMF's 2025 Article IV report: 'The Bureau of Statistics and Census (BSC) has recently introduced a new CPI -- based on the new household spending survey -- that covers the entire country. The reported inflation from the new series stood at 1.2 percent in 2025 Q1. However, the new index could have a significant downward bias due to methodological deficiencies.' A 12-group classification table (Food and Beverages, Tobacco, Clothing and Footwear, Housing/Water/Electricity/Gas, Furniture and Household Equipment, Health, Transport, Communication, Recreation and Culture, Education, Restaurants and Hotels, Miscellaneous Goods and Services) is structurally close to standard COICOP divisions, though no document read this session names COICOP explicitly. The BSC's own homepage widget still displays a stale December 2023 figure on the superseded 2008 base -- the current series lives in the site's archive, not the front page.",
       "releases_per_year": 12,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-01",
+            "to": "2026-09-30",
+            "precision": "month",
+            "covers": "July 2026 CPI / inflation report",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-09-01",
+            "to": "2026-10-31",
+            "precision": "month",
+            "covers": "August 2026 CPI / inflation report",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://bsc.ly/economic_statistic/prices/",
+        "note": "The BSC prices page (bsc.ly/economic_statistic/prices/) lists monthly 'Report on inflation and consumer price index numbers' (تقرير حول التضخم والأرقام القياسية لأسعار المستهلك) plus separate base-year (2024=100) comparison reports and quarterly group-comparison reports, but publishes no dated release calendar and states no explicit release-day rule. As of 2026-08-11 the most recent posted monthly report covers June 2026, with reports appearing roughly monthly at a lag of about 6-8 weeks after the reference month (May, April, March 2026 editions posted in sequence before it). This is a consistent monthly cadence inferred from the sequence of past editions, not a published calendar or a stated rule, so it is classified as observed-pattern; the next report(s) are projected forward from that pattern rather than read off a calendar."
+      },
       "last_updated": "2026-06",
       "url": "https://bsc.ly/economic_statistic/prices/",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "ly-imf-art4-2025",
@@ -47,7 +70,9 @@
       "cadence_note": "Annual Article IV consultation cycle.",
       "last_updated": "2025-06",
       "url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1lbyea2025001-print-pdf.pdf",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "ly-worldbank-social-protection-crossroads",
@@ -61,7 +86,9 @@
       "cadence_note": "An occasional policy brief, not a fixed release.",
       "last_updated": "2022-04",
       "url": "https://documents1.worldbank.org/curated/en/099050106292232957/pdf/P1776930ea19b1000aa3105da9874a49b8.pdf",
-      "domains": ["benefits"]
+      "domains": [
+        "benefits"
+      ]
     }
   ],
   "dependencies": [

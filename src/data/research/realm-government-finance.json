@@ -64,8 +64,27 @@
       "description": "The Cook Islands' annual GDP release, compiled mainly from VAT data on the production approach. Names SNA 2008 as its conceptual framework. NOTE THE INTERNAL CONFLICT this node resolves: the Statistics Office's own 'National Classifications' methodology page still describes the national accounts as 'largely based on' SNA68 with a series published 'from the year 1982-2001', while this release names SNA 2008 and carries data to 2024. Both are live on the same site. The methodology page is treated as stale and the release as current — see this slice's `_dropped` array, where the conflict is recorded rather than silently resolved.",
       "releases_per_year": 1,
       "cadence_note": "Annual release (the 2024 edition published 31 December 2025); quarterly GDP is also produced and is what the Budget forecasts from.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-05-01",
+            "to": "2026-05-31",
+            "precision": "month",
+            "covers": "Calendar Year 2025 GDP National Accounts (Annual)"
+          },
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-31",
+            "precision": "month",
+            "covers": "Calendar Year 2026 GDP National Accounts (Annual)"
+          }
+        ],
+        "source_url": "https://stats.gov.ck/download/54/resources/6939/2025-26-publication-and-dissemination-calendar.pdf",
+        "note": "From the Cook Islands Ministry of Finance and Economic Management '2025-2026 Statistics Publication Calendar' PDF, which lists National Accounts (annual GDP by sector/industry) target release dates by reference calendar year: CY2025 -> May 2026, CY2026 -> May 2027 (the calendar explicitly states these are target dates and actual releases may occur before or after). As of today (2026-08-11) the National Accounts landing page (https://stats.gov.ck/national-accounts/) still shows 2024 as the latest completed annual edition (released 2025-12-31 per the 2024 report page), so the CY2025 annual report (targeted May 2026) appears overdue/delayed but not yet superseded by a later scheduled entry; it is kept as the first (soonest) entry rather than skipped, since it has not actually been published yet."
+      },
       "last_updated": null,
-      "url": "https://stats.gov.ck/national-accounts-annual-2024/",
+      "url": "https://stats.gov.ck/national-accounts/",
       "domains": [
         "national-accounts"
       ]
@@ -80,8 +99,36 @@
       "description": "The quarterly GDP release, split out from `ck-national-accounts` on 2026-08-06 because the Budget's forecasting model takes the quarterly series and not the annual one. Published roughly two to three quarters in arrears — the September quarter 2025 release is dated 18 June 2026. Compiled on the production approach at constant 2016 prices. Note that the Cook Islands Statistics Office attaches an identical 'More information on National Accounts' methodology block to both the quarterly and the annual release page, and that block is written for the quarterly series; see `_dropped`.",
       "releases_per_year": 4,
       "cadence_note": "Four releases a year, each roughly eight to nine months after the quarter it reports. The annual release is a separate publication on the same programme, dated 31 December 2025 for reference year 2024.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-12-31",
+            "to": "2025-12-31",
+            "precision": "day",
+            "covers": "March Quarter 2025 and June Quarter 2025 GDP (both released together)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-06-18",
+            "to": "2026-06-18",
+            "precision": "day",
+            "covers": "September Quarter 2025 and December Quarter 2025 GDP (both released together)",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-01",
+            "to": "2026-12-31",
+            "precision": "quarter",
+            "covers": "March Quarter 2026 and June Quarter 2026 GDP (projected next batch release)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://stats.gov.ck/national-accounts/",
+        "note": "No release calendar with future dates and no stated rule were found; the publisher's own '2025-26 Publication and Dissemination Calendar' PDF (https://stats.gov.ck/download/54/resources/6939/2025-26-publication-and-dissemination-calendar.pdf) lists nominal quarterly target months (Jul 2025, Oct 2025, Jan 2026, Apr 2026) but these targets are explicitly caveated ('reports may be released prior to or after the dates stated') and were badly missed in practice. Actual observed behavior on the site is that reports are published in twice-yearly catch-up batches (two quarters at a time), roughly ~5.5 months apart (2025-12-31 then 2026-06-18). Projected next batch (~Dec 2026, covering March & June Quarter 2026) is an extrapolation from only two observed data points and should be treated as low-precision."
+      },
       "last_updated": null,
-      "url": "https://stats.gov.ck/national-accounts-september-quarter-2025/",
+      "url": "https://stats.gov.ck/national-accounts/",
       "domains": [
         "national-accounts"
       ]
@@ -111,8 +158,14 @@
       "description": "Niue's whole-of-government consolidated financial statements. THE MOST STRUCTURALLY UNUSUAL NODE IN THIS SLICE: its Statement of Compliance names no external accounting framework at all, defining compliance by reference to the Government's own policies plus the Constitution of Niue and the Public Revenues Act 1959. Verified by grep over the full text of two separate sets — FY2023/FY2024 (26pp) and the five-year FY2017-21 document (37pp): zero occurrences of 'IPSAS', 'International Public Sector', 'XRB', 'New Zealand GAAP' or 'generally accepted accounting' in either. Niue has therefore never named an external standard back to FY2016 at least, which makes this a settled practice rather than an omission. Audited by the Controller and Auditor-General of New Zealand under Article 60 of the Constitution of Niue — so Niue imports New Zealand's auditor while importing nobody's accounting standards.",
       "releases_per_year": 1,
       "cadence_note": "Nominally annual and in severe arrears until recently. FY2017-21 were reported as a SINGLE five-year document under the Public Revenues (Financial Reporting and Audit Special Provisions) Amendment Act 2022, a statute passed specifically to permit it. FY2023 was authorised for issue on 19 May 2025 and FY2024 on 22 May 2025 — two years of accounts signed three days apart.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://mof.gov.nu/treasury/",
+        "note": "Niue's Government of Niue Consolidated Financial Statements (fiscal year ends 30 June) have a long documented history of severe, inconsistent delay rather than a fixed annual cycle. A 2011 PEFA assessment already noted a multi-year backlog (latest audited statements at the time were for FY2007/08, with FY2008/09 and FY2009/10 not expected complete until mid-2012). As of 2025, the government paid Deloitte New Zealand roughly NZD 2 million to clear the backlog: the FY2023 (year ended 30 June 2023) consolidated statements were only published 20 June 2025 (~24 months after fiscal year-end), and the FY2024 (year ended 30 June 2024) statements were published in September 2025 (~14 months after fiscal year-end) — lags that vary too much to project a consistent 'time of year'. The Auditor-General publicly stated that maintaining timely ANNUAL reporting going forward is 'critical', expressing an aspiration rather than a codified rule with a specific deadline; no statute, regulation, or publisher-stated numeric deadline (e.g. 'within N months of fiscal year end') could be found. As of 2026-08-11, no FY2025 (year ended 30 June 2025) consolidated financial statements have yet been posted on mof.gov.nu. Given the chronic historical irregularity and absence of any stated rule or calendar, this is best treated as irregular rather than assigning a fabricated 'next' date."
+      },
       "last_updated": null,
-      "url": "https://mof.gov.nu/wp-content/uploads/2025/09/GoN-24J-A1-Consolidated-Financial-StatementsComp.pdf",
+      "url": "https://mof.gov.nu/treasury/",
       "domains": [
         "national-accounts",
         "fiscal-transfers"
@@ -145,6 +198,11 @@
       "description": "Niue's public finance statute, originally the Public Revenues Ordinance 1959. Section 25 requires the annual accounts to be furnished, audited and presented to the Assembly; section 40 requires a statement of public moneys and investments. NEGATIVE FINDING: neither section names an accounting basis or a standard. Together with the Constitution's Articles 58-60 this is the whole of the legal specification of Niue's public accounts — it fixes who prepares them, who audits them and who receives them, and says nothing about how they are measured. That silence is what leaves `nu-government-financial-statements` free to define its own compliance.",
       "releases_per_year": 1,
       "cadence_note": "A consolidated statute, reprinted on amendment rather than published on a schedule.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "note": "This is a one-off/foundational legal instrument (an Act of the Niue Assembly governing public revenue administration), not a recurring statistical or administrative report. It is amended or reprinted irregularly as Niue's legislature sees fit (e.g. consolidated in periodic 'Niue Laws' compilations such as the 2006 edition), not on any fixed schedule. No release calendar, stated periodicity rule, or consistent-interval pattern of amendment/reissue was found on PacLII, gov.nu, or WIPO Lex. The releases_per_year=1 field on file appears to misclassify this as a recurring periodical; it should probably not carry a fixed cadence at all."
+      },
       "last_updated": null,
       "url": "https://paclii.org/nu/legis/num_act/pro1959232/",
       "domains": [
@@ -178,6 +236,12 @@
       "description": "Tokelau's public finance rules. Requires annual financial statements prepared 'in accordance with generally accepted accounting practice' — WITHOUT SAYING WHOSE, which is the third distinct answer the Realm gives to the same question (Cook Islands names IPSAS; Niue names nothing and says so; Tokelau names an undefined GAAP). Separately installs the Auditor-General of New Zealand as auditor and requires every auditor in Tokelau to be qualified to act as an auditor in New Zealand.",
       "releases_per_year": 0.1,
       "cadence_note": "Made 1998, consolidated 2016. Amended rarely.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://paclii.austlii.edu.au/tk/indices/legis/rules-by-year.html",
+        "note": "The Tokelau Finance Rules 1998 is a foundational legal instrument made by the General Fono (Tokelau's national legislative body), not a recurring statistical publication. PacLII's chronological table of General Fono Rules (paclii.austlii.edu.au/tk/indices/legis/rules-by-year.html) shows the original 1998 Finance rule followed by amendments in 2004 ('Finance Amendment'), 2006 ('Finance Amendment [Public Money]'), and 2015 ('Finance Amendment Rules') -- gaps of 6, 2, and 9 years respectively, with no stated periodicity. No General Fono or PacLII page describes a review calendar or fixed amendment cycle for these Rules; amendments occur whenever the General Fono decides to legislate on finance matters. This should not be treated as having a fixed release cadence."
+      },
       "last_updated": null,
       "url": "https://www.paclii.org/tk/legis/consol_act_2016/fr1998115/",
       "domains": [

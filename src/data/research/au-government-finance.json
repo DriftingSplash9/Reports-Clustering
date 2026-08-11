@@ -119,8 +119,23 @@
       "region": "Australia",
       "description": "The audited annual accounts every Australian local council prepares — the Australian counterpart to Alberta's FIR, the Netherlands' Iv3-rapportage, and the UK's Revenue Outturn forms. VERIFIED DIRECTLY: named as ABS's own local-government data source in the ABS GFS methodology page. NOTE: the same ABS methodology page describes the local-government source differently in two separate sections — the current 'Data sources' section says 'annual statements of accounts completed by local authorities,' while an older 'Institutional environment' section on the same page says 'annual local government consolidated data collections conducted on behalf of a range of stakeholders by departments of local government in each of the jurisdictions, as well as published financial statements.' Both quoted verbatim below rather than silently reconciled, per this project's own convention for internally-inconsistent source documents.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-10-31",
+            "to": "2026-10-31",
+            "precision": "day",
+            "covers": "FY2025-26 (year ended 30 June 2026) audited annual financial statements",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Local Government Act 1993 (NSW) s428: audited annual financial statements must be submitted to the Departmental Chief Executive by 31 October each year; the council's Annual Report (which incorporates the audited financial statements) must be prepared within five months after the end of the financial year, i.e. by 30 November.",
+        "source_url": "https://www.olg.nsw.gov.au/councils/finance/financial-reporting",
+        "note": "This is a NSW-specific statutory rule (Local Government Act 1993 s428), used as representative evidence since there is no single national publisher — each Australian state/territory sets its own Local Government Act with broadly similar (but not identical) annual reporting deadlines for individual councils, all keyed to the 30 June financial year end. No extensions are authorized for the annual report deadline itself. releases_per_year=1 is consistent with this annual cycle."
+      },
       "last_updated": null,
-      "url": "https://www.abs.gov.au/methodologies/government-finance-statistics-annual-methodology/2023-24",
+      "url": "https://www.olg.nsw.gov.au/councils/finance/financial-reporting",
       "domains": [
         "municipal-finance"
       ]
@@ -207,6 +222,27 @@
       "description": "The NSW land-titles registry, named as the specific source of Notices of Sale feeding the Valuer-General's mass property valuation — the direct structural analog to the Netherlands' Kadaster in the WOZ valuation chain. VERIFIED DIRECTLY: nsw.gov.au page fetched and HTML-parsed.",
       "releases_per_year": 365,
       "cadence_note": "A continuously-maintained transaction register, not a periodic release — filed at a high nominal frequency for lack of a better fit, the same treatment this project gives other continuously-updated base registries (see the Netherlands slice's own Kadaster/BRK note, not yet minted there either).",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-17",
+            "to": "2026-08-17",
+            "precision": "week",
+            "covers": "Weekly bulk Property Sales Information (PSI) extract update",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-08-24",
+            "to": "2026-08-24",
+            "precision": "week",
+            "covers": "Weekly bulk Property Sales Information (PSI) extract update",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://citydata.ada.unsw.edu.au/dataset/nsw-valuer-general-property-sales",
+        "note": "NSW Land Registry Services / the NSW Valuer General do not publish a dated release calendar or a statutory rule for this report. It is a continuously updated administrative dataset of property sale transactions (searchable back to 2001, bulk data since 1990), with new sale transactions lodged as they settle (owners/agents must report sales within 8 weeks of settlement per the corpus's on-file URL). Third-party technical sources (heatmaps.com.au and the citydata.ada.unsw.edu.au catalogue record) describe the official bulk Property Sales Information (PSI) extract as updated weekly, with annual files used for historical dumps. The official valuergeneral.nsw.gov.au page describing the bulk PSI service returned an HTTP 403 when fetched directly, so this is inferred from secondary sources rather than the primary page's own text - hence observed-pattern rather than a stated-rule with quoted language. No exact day-of-week is documented."
+      },
       "last_updated": null,
       "url": "https://www.nsw.gov.au/housing-and-construction/land-values-nsw/how-to-find-property-sales-information",
       "domains": [
@@ -386,8 +422,14 @@
       "description": "The Victorian analog to NSW's Valuation of Land Act 1916: establishes the office of Valuer-General (Part I) and requires an annual general valuation of rateable land statewide. Section 11 (as substituted by No. 69/2011 s.53): a valuation authority must 'cause a general valuation of rateable land within an area to be made as at 1 January in each calendar year' and, 'before 30 April that year,' cause it to be returned and provided to the relevant council. VERIFIED DIRECTLY: the official source (legislation.vic.gov.au) is a JS-rendered SPA whose raw HTML doesn't yield section text via regex, and the AustLII mirror is Cloudflare-blocked in this environment; full consolidated text instead fetched and confirmed via a third-party legal mirror, the FAO Legal Office's legislation database (faolex.fao.org), then extracted with pdftotext.",
       "releases_per_year": 1,
       "cadence_note": "Section 11 mandates a genuinely annual valuation cycle (valuation date 1 January, return due before 30 April each calendar year) -- unlike NSW, where the Valuation of Land Act 1916 requires annual ascertainment in principle but current council practice runs on an operational three-year cycle. Victoria's own valuations-process page confirms the Valuer-General has been the single valuation authority for all 79 Victorian councils since 2023.",
+      "release_schedule": {
+        "kind": "irregular",
+        "entries": [],
+        "source_url": "https://www.legislation.vic.gov.au/in-force/acts/valuation-land-act-1960",
+        "note": "The Valuation of Land Act 1960 (Vic) is a piece of Victorian legislation, not a recurring statistical/administrative publication. Victoria's official legislation register (legislation.vic.gov.au) shows a version-history/reprint page with 70+ consolidated versions dating back to 1997, with new versions issued whenever amending Acts or statutory rules take effect (e.g. 4 Dec 2024, 1 Jan 2025, 1 Jul 2025 - three updates within about seven months). There is no fixed cadence, calendar, or stated rule governing when the next amendment/reprint will occur; it is amended irregularly by the Victorian Parliament as needed. This is a foundational legal instrument, not a true recurring release."
+      },
       "last_updated": null,
-      "url": "https://faolex.fao.org/docs/pdf/vic45844.pdf",
+      "url": "https://www.legislation.vic.gov.au/in-force/acts/valuation-land-act-1960",
       "domains": [
         "assessment",
         "taxation",

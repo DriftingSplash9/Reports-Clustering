@@ -285,6 +285,21 @@
       "description": "The Treasury's daily par yield curve for its own securities, from which Constant Maturity Treasury (CMT) rates at specific maturities are read directly. Treasury's own FAQ: 'CMT yields are read directly from the Treasury's daily par yield curve, which is derived from indicative closing bid market price quotations on Treasury securities.' Minted 2026-08-09 (sweep session, Tier-3 item, us-federal-policy.json) to close a `no-node-yet` lead that was flagged urgent: deleting `fed-h15 -> fed-fomc-statement` in V0.9 had left the Fed's H.15 release with no surviving edge, meaning it dropped from the graph on every build. H.15's own footnotes 9 and 10 read 'Source: U.S. Treasury' for its Treasury nominal and inflation-indexed constant maturity series, describing those yields as 'interpolated by the U.S. Treasury from the daily yield curve' — this node is that source.",
       "releases_per_year": 250,
       "cadence_note": "Every business day — the corpus's own convention for daily releases, matching fed-h15's own cadence_note ('Every business day.').",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-08-12",
+            "to": "2026-08-12",
+            "precision": "day",
+            "covers": "Next business-day update of Daily Treasury Par Yield Curve Rates",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Treasury's Daily Par Yield Curve Rates are updated each business day, using closing market bid yields on actively traded Treasury securities as reflected in indicative, bid-side market quotations obtained by the Federal Reserve Bank of New York at approximately 3:30 PM each business day.",
+        "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+        "note": "This is not a calendar of discrete editions but a continuously updated daily series published on every US Treasury market business day (excludes weekends and federal holidays when bond markets are closed). The next occurrence listed is simply the next business day after 2026-08-11 (Tuesday), i.e. Wednesday 2026-08-12; this pattern repeats on essentially every subsequent business day."
+      },
       "last_updated": null,
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
       "domains": [

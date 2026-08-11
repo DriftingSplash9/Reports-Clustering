@@ -21,6 +21,21 @@
       "description": "Eurostat's recurring survey of the structure of agricultural holdings across the EU, run in one form or another since 1966. Eurostat's own metadata page states: 'The data describe the structure of agricultural holdings providing the general characteristics of farms and farmers and information on their land, livestock and labour force. They also describe production methods, rural development measures and agro-environmental aspects... The aggregated results are disseminated through statistical tables.' Legally re-founded by Regulation (EU) 2018/1091 ('on integrated farm statistics'), which fixed the current data collections at reference years 2020, 2023 and 2026 -- a census in 2020, sample surveys in 2023 and 2026 -- each covering at least 98% of the EU's utilised agricultural area and livestock units. Eurostat's own metadata states the FSS 'provid[es] a basis for extrapolating Farm Accountancy Data Network (FADN) data' -- see _dropped.",
       "releases_per_year": 0.33,
       "cadence_note": "Currently fixed at reference years 2020, 2023, 2026 by Regulation (EU) 2018/1091 Article 5 -- a 3-year interval, with results 'disseminated 2 years after the reference year' (Eurostat metadata page, 'Frequency of dissemination'). Historically (1989/1990 through 2016) reference years averaged roughly one every 2.6 years on a 10-year agricultural-census cycle with 2-3 intermediate sample surveys between censuses. See _open_questions.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2028-01-01",
+            "to": "2028-12-31",
+            "precision": "year",
+            "covers": "Farm Structure Survey, 2026 reference year",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "Regulation (EU) 2018/1091, Article 5: 'Member States shall collect and provide the core structural data ... for the reference years 2020, 2023 and 2026.' Article 12 sets Member State transmission deadlines of 12 months after the end of the 2023/2026 reference years (15 months for 2020). Eurostat's own metadata for this dataset (ef_sims.htm, Accuracy/Timeliness section) states: 'Results are disseminated 2 years after the reference year.'",
+        "source_url": "https://ec.europa.eu/eurostat/cache/metadata/en/ef_sims.htm",
+        "note": "FSS is run on a 3-year cycle mandated by Regulation (EU) 2018/1091 (reference years 2020 [census], 2023, 2026); the regulation as currently in force does not specify years beyond 2026. As of the current date (2026-08-11) the 2026 reference-year survey is the cycle underway; per Eurostat's own metadata, results for a given reference year are disseminated about 2 years later, so 2026-reference-year results are expected around 2028 (exact month not published). This matches the releases_per_year=0.33 (~once every 3 years) already on file."
+      },
       "last_updated": null,
       "url": "https://ec.europa.eu/eurostat/cache/metadata/en/ef_sims.htm",
       "domains": [

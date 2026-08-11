@@ -100,6 +100,27 @@
       "region": "California",
       "description": "Quarterly and annual statistics of retail activity as measured by transactions subject to sales and use tax, reported statewide by business type and broken down to counties and cities. The county-level series the public safety allocation ratio is computed from.",
       "releases_per_year": 4,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2026-08-07",
+            "to": "2026-08-07",
+            "precision": "day",
+            "covers": "Q1 2026 (Jan-Mar 2026) Taxable Sales in California tables, preliminary",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-11-01",
+            "to": "2026-11-30",
+            "precision": "month",
+            "covers": "Q2 2026 (Apr-Jun 2026) Taxable Sales in California tables, projected preliminary release",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://cdtfa.ca.gov/dataportal/dataset.htm?url=TaxSalesStatewide",
+        "note": "CDTFA's own page describes this as 'a quarterly report on retail sales activity in California.' No published release calendar or stated day-count rule was found on the publisher's site (Open Data Portal Help/FAQ has no scheduling section). Live inspection of the Open Data Portal on 2026-08-11 showed all 7 'Current Taxable Sales Tables' datasets (statewide by business type, by county, by city, etc.) last updated 2026/08/07, with the newest quarter present being '2026 Q1 - preliminary' (Jan-Mar 2026, quarter-end 03/31/2026). That is a ~4-month lag between quarter-end and data release. The 4 'Historical Taxable Sales Tables' (finalized prior data) were last updated 2026/08/06, one day earlier, suggesting preliminary and finalized/historical tables are refreshed together each quarter. Only one full release cycle could be directly observed (site tooling did not allow retrieving prior quarters' exact release dates, and Wayback Machine has no captured snapshots of this dynamically-rendered page since 2022), so the projected Q2 2026 entry assumes the same ~4-month lag continues; it should be treated as an estimate rather than a confirmed date. releases_per_year=4 in the corpus is consistent with the publisher's own 'quarterly report' description."
+      },
       "last_updated": null,
       "url": "https://cdtfa.ca.gov/legal/research-and-statistics/sales-and-use-tax.htm",
       "domains": [
@@ -180,8 +201,36 @@
       "region": "Harris County, Texas",
       "description": "Annual audited statements of the county hospital district, a component unit of Harris County whose board is appointed and whose tax rate is approved by Commissioners Court. Its own levy was $0.18761 per $100 for 2025 — roughly four times the flood control rate, for a service Californian counties fund out of realigned state revenue instead.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-02-13",
+            "to": "2025-02-13",
+            "precision": "day",
+            "covers": "FY2024 (year ended Sept 30, 2024) audited financial statements - auditor's report date",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-02-11",
+            "to": "2026-02-11",
+            "precision": "day",
+            "covers": "FY2025 (year ended Sept 30, 2025) audited financial statements - auditor's report date",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-02-01",
+            "to": "2027-02-28",
+            "precision": "month",
+            "covers": "FY2026 (year ending Sept 30, 2026) audited financial statements - projected next release",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.harrishealth.org/about-us-hh/who-we-are/Pages/financials.aspx",
+        "note": "Harris Health changed its fiscal year end from Feb 28/29 to Sept 30, effective with a stub year ended Sept 30, 2022 (previously FY ran March 1 - Feb 28/29). Since the change, audited combined financial statements (auditor's report by Forvis Mazars, LLP) have been issued in mid-February of the following calendar year: FY2024 statements dated Feb 13, 2025 and FY2025 statements dated Feb 11, 2026 (already published as of today, 2026-08-11). No published release calendar or statutory deadline was found stating an exact required date; this is inferred from the two most recent post-fiscal-year-change releases, which fell 4-4.5 months after fiscal year end. Next expected release: audited financial statements for FY2026 (year ending Sept 30, 2026), likely around February 2027."
+      },
       "last_updated": null,
-      "url": "https://www.harrishealth.org/",
+      "url": "https://www.harrishealth.org/about-us-hh/who-we-are/Pages/financials.aspx",
       "domains": [
         "health",
         "municipal-finance",
@@ -248,8 +297,23 @@
       "region": "Harris County, Texas",
       "description": "The audited annual report of an emergency services district — independent taxing units under Health and Safety Code chapter 775 that fund fire and ambulance service. Because Harris County exceeds three million people, §775.0825 requires the audit by July 1 and filing with the clerk of Commissioners Court within thirty days. Modelled on District No. 9 as the retrievable instance of a class.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-07-01",
+            "to": "2027-07-01",
+            "precision": "day",
+            "covers": "FY2026 annual audit/financial report for each Harris County Emergency Services District",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "A district shall prepare on or before July 1 of each year an audit of the district's fiscal accounts and records. (This section, Tex. Health & Safety Code § 775.0825, applies only to a district located wholly in a county with a population of more than three million — i.e., Harris County ESDs, as distinct from § 775.082's June 1 deadline for ESDs in less populous counties.) A copy of the audit must then be filed with the clerk of the county commissioners court within 30 days after the board receives it.",
+        "source_url": "https://texas.public.law/statutes/tex._health_and_safety_code_section_775.0825",
+        "note": "The July 1, 2026 deadline for this cycle has already passed as of the reference date (2026-08-11), so the next occurrence is July 1, 2027. Harris County has ~60+ separate Emergency Services Districts (ESD 1, ESD 9, ESD 11, ESD 14, ESD 15, ESD 17, ESD 46, ESD 75, ESD 80, etc.), each governed by this same statutory deadline and each publishing its own audit independently — there is no single unified 'Harris County ESD' report."
+      },
       "last_updated": null,
-      "url": "https://www.hctax.net/property/jurisdictiontaxrates",
+      "url": "https://texas.public.law/statutes/tex._health_and_safety_code_section_775.0825",
       "domains": [
         "municipal-finance",
         "taxation"

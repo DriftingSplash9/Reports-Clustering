@@ -14,6 +14,28 @@
       "description": "Statistics Canada's continuously maintained central repository of baseline information on businesses and institutions operating in Canada (IMDB record 1105). It is the sampling frame from which most of the agency's economic surveys draw their populations, and every establishment on it carries a NAICS industry code.",
       "releases_per_year": 2,
       "cadence_note": "The register is maintained continuously; published outputs from it (business counts) are released twice per year.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-08-14",
+            "to": "2026-08-14",
+            "precision": "day",
+            "covers": "Canadian business counts / Business Register data, June 2026",
+            "evidence": "documented"
+          },
+          {
+            "from": "2027-02-01",
+            "to": "2027-02-28",
+            "precision": "month",
+            "covers": "Canadian business counts / Business Register data, December 2026 (projected)",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The Canadian business counts (the public release product of the Business Register, SDDS 1105) are produced semi-annually for each June and December reference period, and the data are released in August and February.",
+        "source_url": "https://www150.statcan.gc.ca/n1/dai-quo/cal2-eng.htm",
+        "note": "StatCan's Business Register (SDDS 1105) itself is a continuously-updated internal database, but its public release product 'Canadian business counts' is published twice a year, matching the corpus's releases_per_year=2. Confirmed releases: June 2025 data released 2025-08-15, December 2025 data released 2026-02-13. The official StatCan release schedule (cal2-eng.htm) lists 'Canadian business counts, June 2026' as upcoming on 2026-08-14. The following release (December 2026 data) is projected via the stated semi-annual pattern and is not yet on the published calendar."
+      },
       "last_updated": null,
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1105",
       "domains": [
@@ -75,6 +97,21 @@
       "description": "The multipurpose international product nomenclature developed by the World Customs Organization: more than 5,000 commodity groups, each identified by a six-digit code. The commodity-side counterpart to the industry classifications already in this corpus — national trade statistics, including Canada's, are coded to it, with countries adding digits beyond six for tariff and statistical detail.",
       "releases_per_year": 0.2,
       "cadence_note": "The WCO's Harmonized System Committee 'prepares amendments updating the HS every 5 – 6 years' — editions 2002, 2007, 2012, 2017, 2022. Not an annual release; releases_per_year is nominal.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2028-01-01",
+            "to": "2028-01-01",
+            "precision": "day",
+            "covers": "HS2028 edition entry into force",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The WCO prepares amendments updating the HS nomenclature every 5-6 years through the Review Sub-Committee and HS Committee; the HS Convention provides a two-and-one-half-year implementation period after adoption before a new edition enters into force (six months for reservations, two years for correlation tables/translation/legislative updates). The HS2022 edition entered into force 1 January 2022; the next edition, originally planned as HS2027, was pushed back one year due to COVID-19-related delays and will be HS2028, entering into force 1 January 2028.",
+        "source_url": "https://www.wcoomd.org/en/topics/nomenclature/activities-and-programmes/amending_hs.aspx",
+        "note": "This is a periodic amendment/nomenclature update, not a recurring data report with dated calendar entries. The WCO's own site frames it as a 5-6 year revision cycle governed by the HS Convention's implementation timeline rather than a fixed calendar. A further, more fundamental revision (HS2033) is already being planned as a follow-on cycle."
+      },
       "last_updated": null,
       "url": "https://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx",
       "domains": [
@@ -91,6 +128,21 @@
       "description": "The companion Canadian clinical classifications maintained and published by CIHI: ICD-10-CA (the Canadian enhancement of the WHO's ICD-10 for diseases and health problems) and CCI (health interventions). Published together as versioned classification releases with accompanying Canadian Coding Standards, they are the coding standard for hospital data submissions.",
       "releases_per_year": 0.3,
       "cadence_note": "Versioned releases roughly every three years — v2015, v2018, v2022, with v2025/v2027 enhancement cycles under way — with coding-standard updates in between. releases_per_year is nominal.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-04-01",
+            "to": "2028-03-31",
+            "precision": "year",
+            "covers": "Next CCI / Canadian Coding Standards version (fiscal year 2027-2028); ICD-10-CA itself remains frozen at its 2022 version with no further updates planned",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "CIHI is postponing implementation of new versions of CCI and the Canadian Coding Standards until fiscal year 2027-2028. Separately, CIHI will no longer be updating ICD-10-CA at all, aligning with WHO's 2019 halt of ICD-10 updates as the international community moves toward ICD-11.",
+        "source_url": "https://www.cihi.ca/en/bulletin/upcoming-plans-for-clinical-administrative-databases-case-mix-and-classifications-and-terminologies",
+        "note": "This report bundles ICD-10-CA and CCI, but the two now have divergent status: ICD-10-CA is permanently frozen (CIHI stated it 'will no longer be updating ICD-10-CA'), so only the CCI component will see a future release. CIHI's most recent bulletin (as of mid-2026) postpones the next CCI/Canadian Coding Standards version to fiscal year 2027-2028 (Apr 1, 2027 - Mar 31, 2028) without a specific date yet announced. Prior versions were labeled 'Version 2018' and 'Version 2022,' and the 2025-2026 Classification Tables (an interim update, not a full new version) were released October 2024."
+      },
       "last_updated": null,
       "url": "https://www.cihi.ca/en/submit-data-and-view-standards/codes-classifications-and-terminologies/classification-resources",
       "domains": [

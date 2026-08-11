@@ -13,6 +13,21 @@
       "description": "Annual allocation of provincial capital funding to Alberta local governments, calculated by a formula set out in the Local Government Fiscal Framework Act. $800 million in 2026.",
       "releases_per_year": 1,
       "cadence_note": "Aggregate amounts must be communicated by September 30 two years in advance; individual allocations follow some weeks later.",
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2026-09-30",
+            "to": "2026-09-30",
+            "precision": "day",
+            "covers": "Future LGFF capital funding levels for the 2028 funding year",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "The LGFF Act requires that information on future funding levels is shared by September 30, 2 years prior to the funding year.",
+        "source_url": "https://www.alberta.ca/local-government-fiscal-framework-capital-funding",
+        "note": "Page (updated/published March 23, 2026) states the statutory disclosure deadline; the most recent occurrence (Sept 30, 2025, covering the 2027 funding year) has already passed, so the next occurrence is Sept 30, 2026. No published multi-year release calendar was found beyond this stated statutory rule."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/local-government-fiscal-framework-capital-funding",
       "domains": [
@@ -46,6 +61,41 @@
       "description": "Annual official population counts for Alberta municipalities, Metis Settlements and First Nations communities, drawn from municipal or federal census results. Used by provincial ministries to determine municipal grants.",
       "releases_per_year": 1,
       "cadence_note": "Discontinued in 2020 with the repeal of the Determination of Population Regulation; resumed in 2023 under the Municipal Census Regulation.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2024-02-16",
+            "to": "2024-02-16",
+            "precision": "day",
+            "covers": "2023 population list",
+            "evidence": "implied"
+          },
+          {
+            "from": "2025-04-11",
+            "to": "2025-04-11",
+            "precision": "day",
+            "covers": "2024 population list",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-01-21",
+            "to": "2026-01-21",
+            "precision": "day",
+            "covers": "2025 population list",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-06-30",
+            "precision": "half",
+            "covers": "2026 population list (projected next edition)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://open.alberta.ca/dataset/alberta-municipal-affairs-population-list",
+        "note": "The CKAN metadata for this dataset states 'updatefrequency: Annual' and shows resource creation dates for the last three editions: the 2023 population list was posted 2024-02-16, the 2024 population list was posted 2025-04-11, and the 2025 population list (most recent, current as of this query) was posted 2026-01-21. The list was discontinued after 2019 and publication resumed with the 2023 edition. Each numbered edition (e.g. '2025 population list') is published roughly a year after its reference year, but the exact month varies (Jan/Feb/Apr), so no single stated day exists. Next expected release would be the '2026 population list', likely appearing sometime between roughly January and June 2027 based on this pattern."
+      },
       "last_updated": null,
       "url": "https://open.alberta.ca/dataset/alberta-municipal-affairs-population-list",
       "domains": [
@@ -61,6 +111,34 @@
       "region": "Alberta",
       "description": "Annual population estimates for Alberta census subdivisions by year, age and gender, including permanent and non-permanent residents.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2023-01-11",
+            "to": "2023-01-11",
+            "precision": "day",
+            "covers": "Municipal (Census Subdivision) Population Estimates, 2016-2022 update",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-01-14",
+            "to": "2026-01-14",
+            "precision": "day",
+            "covers": "Municipal (Census Subdivision) Population Estimates, 2016-2025 update",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-01-01",
+            "to": "2027-01-31",
+            "precision": "month",
+            "covers": "Municipal (Census Subdivision) Population Estimates, next annual update (2016-2026)",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://www.alberta.ca/demographic-statistics",
+        "note": "No published release calendar found on Alberta.ca or the open.alberta.ca/open.canada.ca dataset pages. The dataset's own resource-update history shows the CSD-level municipal population estimates file has been refreshed in mid-January in the years for which we have confirmed dates: updated January 11, 2023 (covering 2016-2022) and updated January 14, 2026 (covering 2016-2025), consistent with a once-a-year January update pattern (releases_per_year=1 on file is consistent with this). No intervening years' exact update dates could be confirmed via search, so the pattern is based on two confirmed data points plus the current 'most recent update' timestamp; the office could be contacted directly (780-427-2071) to confirm exact cadence. The open.canada.ca dataset record lists overall dataset maintenance frequency as 'Quarterly', but that reflects the combined dataset (which also bundles a separate quarterly provincial-level population series updated June 17, 2026) rather than this specific municipal/CSD-level component, which itself only shows January updates."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/demographic-statistics",
       "domains": [
@@ -107,6 +185,21 @@
       "region": "Alberta",
       "description": "Annual compilation of every Alberta municipality's financial and statistical returns, including tangible capital assets, accumulated amortization, road length, assessment and tax rates.",
       "releases_per_year": 1,
+      "release_schedule": {
+        "kind": "stated-rule",
+        "entries": [
+          {
+            "from": "2027-05-01",
+            "to": "2027-05-01",
+            "precision": "day",
+            "covers": "Statutory deadline for municipalities to submit FY2026 audited financial statements, FIR and SIR to Alberta Municipal Affairs, which Municipal Affairs then compiles into the next edition of this report",
+            "evidence": "implied"
+          }
+        ],
+        "rule": "A municipality is required to submit to Alberta Municipal Affairs, by May 1 of each year, its financial statements and auditor's report pertaining to the previous year, as well as a financial information return (FIR) that is a summary of information from the audited financial statements. Municipalities also submit statistical information returns (SIR) each year as required under the Municipal Government Act.",
+        "source_url": "https://www.alberta.ca/annual-financial-reporting-for-municipalities",
+        "note": "This is the statutory submission deadline that feeds the compiled dataset, not a publication date Municipal Affairs itself commits to. CKAN metadata (open.alberta.ca API, checked 2026-08-11) confirms updatefrequency='Annual' and shows the 2025 financial-year resource already has real content as of last_modified 2026-08-05 (following the May 1, 2026 deadline for FY2025 data). Historically the compiled dataset resource for a given fiscal year has appeared/been substantively updated anywhere from ~1 to ~6+ months after the following May 1 deadline (e.g. FY2022 resource created 2023-06-05, FY2023 resource created 2024-08-29, FY2024 last substantively updated 2026-07-16), so the exact month the FY2026 edition appears cannot be pinned down beyond 'sometime after 2027-05-01'."
+      },
       "last_updated": null,
       "url": "https://www.alberta.ca/municipal-financial-and-statistical-data",
       "domains": [
