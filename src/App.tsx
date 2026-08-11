@@ -1422,3 +1422,4 @@ const statRow: React.CSSProperties = {
   paddingTop: 10,
   borderTop: '1px solid rgba(90, 115, 160, 0.18)',
 }
+
