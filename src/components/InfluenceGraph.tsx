@@ -232,6 +232,36 @@ function pulseCount(releasesPerYear: number): number {
   return 1
 }
 
+/**
+ * A synchronous side-channel between `runFit` and CameraZoom.
+ *
+ * These two have to agree *within a single frame* and React props cannot carry
+ * that: `runFit` moves the camera during `useFrame`, and the `fitDistance` prop
+ * describing where it moved it to does not reach CameraZoom until the next
+ * render. In between, CameraZoom's `cameraDistance / fitDistance` inference
+ * divides the new distance by the old one and reports the ratio as a zoom the
+ * user never asked for — which then pushes the camera to `newFitDistance ×
+ * thatRatio` and throws the graph off screen. Measured 2026-08-12: a spurious
+ * zoom of 2.85 on opening the national tier, camera at 22,587 against a fit
+ * distance of 7,935, tracking then permanently disabled because
+ * `cameraMovedOffFit` correctly concluded someone had grabbed the camera.
+ *
+ * Routing it through App state does not help, and was tried: CameraZoom's
+ * `useFrame` runs *after* InfluenceGraph's in the same frame, so its bad value
+ * is simply the last write to land in the batch.
+ *
+ * Module scope rather than context because there is exactly one scene, one
+ * camera and one zoom slider in this app, and because the whole point is to be
+ * readable synchronously from a frame callback — which is the one thing React
+ * state cannot be.
+ */
+export const fitSync = {
+  /** Distance the last camera-moving fit placed the camera at. 0 before any. */
+  distance: 0,
+  /** Bumped on every camera-moving fit, so CameraZoom can notice one happened. */
+  stamp: 0,
+}
+
 export interface GraphBounds {
   centre: THREE.Vector3
   radius: number
@@ -239,6 +269,26 @@ export interface GraphBounds {
   levels: JurisdictionLevel[]
   /** Camera distance chosen by the auto-fit. The zoom slider works off this. */
   fitDistance: number
+  /**
+   * Whether this fit actually moved the camera, as opposed to only measuring.
+   *
+   * The zoom slider needs to know, and cannot work it out. CameraZoom infers
+   * the current zoom as `cameraDistance / fitDistance`, which is only sound
+   * while nothing but the wheel moves the camera — and a tracking re-fit moves
+   * it constantly. Worse, it sees the two halves a render apart: `runFit`
+   * places the camera at the *new* fit distance, but the `fitDistance` prop is
+   * still the old one for one frame, so the inferred zoom spikes to the ratio
+   * between them. Measured 2026-08-12 opening the national tier: an inferred
+   * zoom of 2.5, which then pushed the camera out to 22,853 units from a fit
+   * distance of 9,156 — after which `cameraMovedOffFit` quite correctly read
+   * that as the user taking the camera and shut tracking off for good, with
+   * every node off screen. That is the "black screen after changing a setting".
+   *
+   * A fit that moves the camera puts it exactly at the fit distance, so the
+   * honest zoom immediately afterwards is 1 by construction. Saying so is what
+   * breaks the loop.
+   */
+  movedCamera: boolean
   /** Height of the floor plane, so drop lines know where to land. */
   floorY: number
   /** Vertical extent of the node cloud, which the room is built around. */
@@ -977,11 +1027,23 @@ export default function InfluenceGraph({
     const fg = ref.current
     if (!fg) return false
 
-    const initial = (fg.graphData().nodes ?? []) as PositionedNode[]
-    if (!initial.length || !initial.every((n) => Number.isFinite(n.x))) return false
+    const all = (fg.graphData().nodes ?? []) as PositionedNode[]
+    if (!all.length || !all.every((n) => Number.isFinite(n.x))) return false
 
-    const nodes = (fg.graphData().nodes ?? []) as PositionedNode[]
-    const positioned = nodes.filter((n) => Number.isFinite(n.x))
+    // **Frame what is on screen, not what exists.**
+    //
+    // This used to fit every node in the disclosed graph, filtered or not, and
+    // that is most of why Thomas kept landing on a black screen: a scope filter
+    // hiding three quarters of the corpus left the camera framing the box the
+    // *whole* corpus occupies, with the surviving quarter as a small clump
+    // somewhere off to one side of an otherwise empty frame. Reported as *"I
+    // see a black screen and have to play with the settings to find the
+    // nodes"*, and the screenshots show exactly that — 329 of 728 shown, the
+    // survivors in a knot in one corner.
+    //
+    // Hiding a node is a statement about what the view is *for*. The camera has
+    // to answer it the same way it answers the shelf being excluded below.
+    const positioned = all.filter((n) => shownNode(n.id))
     if (!positioned.length) return false
 
     // **Frame the connected graph, not the shelf.**
@@ -1056,6 +1118,9 @@ export default function InfluenceGraph({
       applyingFit.current = false
 
       fitPose.current = { target: centre.clone(), distance }
+      // Tell the zoom slider, synchronously, before it can guess wrong.
+      fitSync.distance = distance
+      fitSync.stamp += 1
     }
 
     // Where the node cloud is, so the fog can be recomputed against it every
@@ -1077,6 +1142,7 @@ export default function InfluenceGraph({
       radius,
       levels,
       fitDistance: distance,
+      movedCamera: moveCamera,
       floorY: frame.bottom,
       nodeRadius,
       minY: box.min.y,
@@ -1103,6 +1169,29 @@ export default function InfluenceGraph({
     const tolerance = Math.max(1, pose.distance * 0.005)
     if (Math.abs(camera.position.distanceTo(target) - pose.distance) > tolerance) return true
     return target.distanceTo(pose.target) > tolerance
+  }
+
+  /**
+   * Re-frame the scene, now, because what it should be showing just changed.
+   *
+   * Hands the camera back (a change to *what is displayed* overrides a camera
+   * the user had claimed — they asked for a new view, so they get one) and
+   * re-opens the tracking window so the fit keeps following for the next few
+   * seconds while the layout settles into its new shape.
+   *
+   * The immediate `runFit` on top of that is not redundant: without it the
+   * first tracking fit is up to `REFIT_INTERVAL_SECONDS` away, and on a heavy
+   * scene one frame can be much longer than that, which is long enough to read
+   * as a blink of nothing before the camera catches up. Guarded on `fitted`
+   * because before the very first fit there are no positions to measure and
+   * `runFit` would only bail anyway.
+   */
+  function requestRefit() {
+    userOwnsCamera.current = false
+    fitPose.current = null
+    settleClock.current = 0
+    sinceRefit.current = 0
+    if (fitted.current) runFit(true)
   }
 
   // Toggles that have to reach inside the force-graph object, which was built
@@ -1169,6 +1258,23 @@ export default function InfluenceGraph({
       }
     }
     appliedMeshCount.current = -1
+
+    // **A filter change has to move the camera.**
+    //
+    // Unlike a tier change, changing the filter does *not* rebuild `forceGraph`
+    // — the accessors above hide nodes in place, and the memo's deps
+    // (`[graph, spreadApplied]`) never see it. So none of the machinery that
+    // normally re-frames the scene ran: `fitted` stayed true, the tracking
+    // window stayed expired, and `userOwnsCamera` stayed set from whenever the
+    // user last touched the camera. The camera simply kept pointing wherever it
+    // already was while three quarters of the graph vanished from in front of
+    // it. That is the black screen.
+    //
+    // Toggling a filter is an explicit request for a different view, exactly
+    // like pressing a tier button, so it gets the same treatment: hand the
+    // camera back and re-open the tracking window. `runFit` now frames only
+    // visible nodes, so the fit this triggers is a fit to what survived.
+    requestRefit()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceGraph, visible])
 
@@ -1385,15 +1491,48 @@ export default function InfluenceGraph({
       // still get yanked, since this branch, not the periodic one, is what
       // runs during it.
       const mountFit = !everFitted.current
+      // **The tick gate applies only to the session's very first fit.**
+      //
+      // `MIN_TICKS_BEFORE_FIRST_PAINT` exists because three-forcegraph starts
+      // every node near the origin, so fitting at tick 0 would frame a
+      // near-zero-radius point and put the camera inside it. That reasoning
+      // holds exactly once. Every *later* rebuild seeds its nodes from the
+      // previous layout (see `lastPositions`), so positions are already
+      // meaningful on the first tick and there is nothing to wait for. Waiting
+      // anyway left the camera framing the old view while the new one was
+      // already on screen — half a second on real hardware, measured at 16
+      // seconds in the software-rendered sandbox, which is what made it visible
+      // enough to catch. Either way it is time spent showing the wrong thing,
+      // and it is a large part of what Thomas experiences as a black screen
+      // after changing a setting.
+      const ticksNeeded = mountFit ? MIN_TICKS_BEFORE_FIRST_PAINT : 1
       if (
-        tickCount.current >= MIN_TICKS_BEFORE_FIRST_PAINT &&
+        tickCount.current >= ticksNeeded &&
         runFit(mountFit || !userOwnsCamera.current)
       ) {
         fitted.current = true
         everFitted.current = true
       }
     } else if (
-      settleClock.current <= REFIT_WINDOW_SECONDS &&
+      // Track for `REFIT_WINDOW_SECONDS`, **or until the layout actually stops
+      // moving, whichever is later.**
+      //
+      // The window alone was a guess at how long a settle takes, and it is only
+      // ever right for one machine. Opening the national tier reveals 403 nodes
+      // all seeded on top of their orb, and the cloud then expands by more than
+      // an order of magnitude as repulsion separates them — a fit taken early
+      // in that frames a cloud that no longer exists seconds later. On a fast
+      // machine 12 seconds comfortably covers it; in the software-rendered
+      // sandbox the expansion was still going long after the window shut, and
+      // the camera was left framing the pre-explosion knot with every node
+      // spilled off screen. Measured: 0% of nodes on screen after opening
+      // Nations, with the camera perfectly centred on where they used to be.
+      //
+      // `settledOnce` is set by `onEngineStop`, which three-forcegraph fires on
+      // alpha decay or at its own 15s `cooldownTime` ceiling — so this cannot
+      // track forever, and on a fast machine it fires well inside the window
+      // and changes nothing. `userOwnsCamera` still overrides all of it.
+      (settleClock.current <= REFIT_WINDOW_SECONDS || !settledOnce.current) &&
       sinceRefit.current >= REFIT_INTERVAL_SECONDS
     ) {
       sinceRefit.current = 0

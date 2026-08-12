@@ -322,7 +322,23 @@ export default function App() {
    */
   useLayoutEffect(place, [hovered, place])
 
-  const handleBounds = useCallback((b: GraphBounds) => setBounds(b), [])
+  /**
+   * New scene bounds from a fit.
+   *
+   * When the fit moved the camera it placed it exactly at the fit distance, so
+   * the zoom is 1 whether the slider currently agrees or not — see
+   * `movedCamera` on GraphBounds for the loop this closes. Declaring it here
+   * rather than letting CameraZoom infer it is the difference between the
+   * slider following the camera and the two of them chasing each other.
+   *
+   * This cannot fight a user who deliberately zoomed: the wheel sets
+   * `userOwnsCamera` in the scene, camera-moving fits stop immediately after
+   * that, and so do these resets.
+   */
+  const handleBounds = useCallback((b: GraphBounds) => {
+    setBounds(b)
+    if (b.movedCamera) setView((v) => (v.zoom === 1 ? v : { ...v, zoom: 1 }))
+  }, [])
 
   const handleZoomChange = useCallback(
     (zoom: number) => setView((v) => (v.zoom === zoom ? v : { ...v, zoom })),
@@ -1269,9 +1285,11 @@ function IsolatedShelf({
             onClick={() => onSelect(r.id)}
             title={`${r.title} — ${r.publisher}`}
             style={{
-              width: 14,
-              height: 14,
-              borderRadius: 14,
+              // Must match `isolatedShelfGrid`'s track size, or `auto-fill`
+              // computes a column count the dots do not actually fit into.
+              width: 12,
+              height: 12,
+              borderRadius: 12,
               cursor: 'pointer',
               background: colourForReport(r),
               opacity: selectedId === r.id ? 1 : 0.72,
@@ -1718,30 +1736,48 @@ const tierBarWrap: React.CSSProperties = {
   zIndex: 6,
 }
 
+/**
+ * **Wide and short, not narrow and tall.**
+ *
+ * Thomas, 2026-08-12: *"see how the unlinked nodes look large and out of place?
+ * they should be fitted horizontally instead of vertically."* Four dots across
+ * turned 85 unlinked reports into a column running most of the height of the
+ * window, which read as a major panel — a third sidebar — for what is a
+ * footnote: the reports with no edges in either direction, the least
+ * structurally important part of the corpus. Size on screen was inversely
+ * proportional to importance, which is the same mistake the flag glyphs made
+ * (see `isStandingInstrument` in nodeVisuals.ts).
+ *
+ * Laid out on a fixed width with `auto-fill` rather than a fixed column count,
+ * so the block stays wide-and-short as the isolated set grows instead of
+ * growing back down the screen. `maxHeight` is now a low cap for the same
+ * reason — if this ever needs to scroll, that is the correct outcome, not a
+ * signal to let it get taller.
+ */
 const isolatedShelfWrap: React.CSSProperties = {
   position: 'fixed',
   top: 20,
   right: 214,
-  padding: '10px 12px',
+  width: 316,
+  padding: '9px 11px',
   background: 'rgba(10, 14, 24, 0.72)',
   border: '1px solid rgba(90, 115, 160, 0.22)',
   borderRadius: 10,
   backdropFilter: 'blur(8px)',
   pointerEvents: 'none',
-  // A defensive cap, not the expected case: at a few dozen isolated reports
-  // four wide comfortably fits above the fold. If the corpus's isolated set
-  // ever grew enough to run past the bottom of the window, scrolling the
-  // panel is a smaller failure than it silently growing past the screen
-  // edge with no way to reach the rest.
-  maxHeight: 'calc(100vh - 200px)',
+  maxHeight: 148,
   overflowY: 'auto',
   zIndex: 5,
 }
 
 const isolatedShelfGrid: React.CSSProperties = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 14px)',
-  gap: 6,
+  // 12px dots on a 316px-wide panel gives 18 per row — 85 reports land in five
+  // rows rather than twenty-two. Dots shrunk from 14px too: they are a
+  // secondary reference, and at 14 they were competing with the graph's own
+  // nodes for attention despite being the least connected fifth of the corpus.
+  gridTemplateColumns: 'repeat(auto-fill, 12px)',
+  gap: 5,
 }
 
 const tooltip: React.CSSProperties = {

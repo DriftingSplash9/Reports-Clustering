@@ -150,12 +150,20 @@ export default function SearchPanel({
   )
 }
 
+/**
+ * The search bar's width, exported because the calendar tab in
+ * CalendarPanel.tsx now sits immediately to its left and has to know where
+ * that edge is. Duplicating the number in both files is how the two silently
+ * drift apart the first time this changes.
+ */
+export const SEARCH_BAR_WIDTH = 380
+
 const wrap: React.CSSProperties = {
   position: 'fixed',
   top: 20,
   left: '50%',
   transform: 'translateX(-50%)',
-  width: 380,
+  width: SEARCH_BAR_WIDTH,
   zIndex: 20,
 }
 

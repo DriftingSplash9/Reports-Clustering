@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
+import { fitSync } from './InfluenceGraph'
 
 /**
  * Keeps the zoom slider and the camera in agreement, in both directions.
@@ -40,11 +41,29 @@ export default function CameraZoom({
   }, [zoom, fitDistance, camera, controls])
 
   // Camera → slider, for wheel zoom.
+  //
+  // Reads `fitSync`, not the `fitDistance` prop, and that difference is the
+  // whole correctness of this direction — see the note on `fitSync` in
+  // InfluenceGraph.tsx. The prop is a render behind the camera whenever the
+  // scene re-fits, and dividing the new camera distance by the old fit distance
+  // produces a large phantom zoom which this then feeds straight back into the
+  // camera, throwing the graph off screen.
+  const seenStamp = useRef(fitSync.stamp)
   useFrame(() => {
-    if (!fitDistance) return
+    // A fit just placed the camera at exactly the fit distance, so the zoom is
+    // 1 by construction. Re-baseline and skip the frame rather than inferring
+    // anything from a camera this component did not move.
+    if (fitSync.stamp !== seenStamp.current) {
+      seenStamp.current = fitSync.stamp
+      applied.current = 1
+      if (Math.abs(zoom - 1) > 0.0005) onZoomChange(1)
+      return
+    }
+    const base = fitSync.distance || fitDistance
+    if (!base) return
     const orbit = controls as unknown as { target: THREE.Vector3 } | undefined
     const target = orbit?.target ?? new THREE.Vector3()
-    const actual = camera.position.distanceTo(target) / fitDistance
+    const actual = camera.position.distanceTo(target) / base
     if (Math.abs(actual - applied.current) > 0.01) {
       applied.current = actual
       onZoomChange(actual)

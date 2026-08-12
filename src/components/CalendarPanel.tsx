@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import type { Dependency, Graph, ScoredReport, SchedulePrecision } from '../lib/types'
 import type { NodePredicate } from '../lib/filter'
 import { colourForReport } from '../lib/palette'
+import { SEARCH_BAR_WIDTH } from './SearchPanel'
 import {
   calendarEvents,
   describeWindow,
@@ -274,30 +275,51 @@ export default function CalendarPanel({
         title={collapsed ? 'Show Calendar' : 'Hide Calendar'}
         aria-expanded={!collapsed}
         style={{
+          // **Top, beside the search bar — not bottom-centre any more.**
+          //
+          // It used to sit at the bottom, tucked against the panel it opens,
+          // which was right until the tier buttons took that exact spot. The
+          // two then overlapped, and Thomas asked for it moved: *"'Calendar'
+          // can be set on the left of the search bar, add a calendar icon too.
+          // I think that will clean up the hud."*
+          //
+          // Anchored off the *search bar's* left edge rather than the calendar
+          // panel's, since that is what it now sits beside: 50% minus half the
+          // search bar's 380px width, then shifted its own width further left
+          // by `translateX(-100%)` so the gap is measured between the two
+          // controls rather than guessed from a hardcoded button width.
           position: 'fixed',
-          bottom: 20,
+          top: 20,
           left: '50%',
-          marginLeft: -PANEL_WIDTH / 2,
-          transform: collapsed
-            ? 'translateY(0)'
-            : `translateY(-${PANEL_HEIGHT + 6}px)`,
-          transition: 'transform 220ms cubic-bezier(0.4, 0, 0.2, 1)',
-          padding: '5px 9px',
+          marginLeft: -(SEARCH_BAR_WIDTH / 2) - 8,
+          transform: 'translateX(-100%)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          padding: '9px 12px',
           fontFamily: 'inherit',
           fontSize: 10,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: '#5e6f8a',
-          background: 'rgba(10, 14, 24, 0.82)',
-          border: '1px solid rgba(90, 115, 160, 0.22)',
+          // Lit while the panel is open, the same treatment the tier buttons
+          // use — with the button no longer touching the panel it toggles, its
+          // own appearance is the only thing left saying whether that panel is
+          // up.
+          color: collapsed ? '#5e6f8a' : '#dce7f8',
+          background: collapsed ? 'rgba(10, 14, 24, 0.82)' : 'rgba(70, 115, 190, 0.30)',
+          border: `1px solid ${collapsed ? 'rgba(90, 115, 160, 0.22)' : 'rgba(130, 170, 230, 0.55)'}`,
           borderRadius: 6,
           backdropFilter: 'blur(8px)',
           cursor: 'pointer',
           zIndex: 6,
           lineHeight: 1,
+          whiteSpace: 'nowrap',
         }}
       >
-        {collapsed ? 'Calendar' : '⌄'}
+        <span aria-hidden style={{ fontSize: 12, lineHeight: 1 }}>
+          📆
+        </span>
+        Calendar
       </button>
     </>
   )
