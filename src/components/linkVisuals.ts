@@ -251,15 +251,50 @@ export function teardropGeometry(width: number): THREE.LatheGeometry {
 const pulseMaterials = new Map<string, THREE.MeshBasicMaterial>()
 
 /**
+ * The blinking pulse materials, registered so one `tickPulseBlink` call a
+ * frame animates them all. A Set of materials rather than per-link state
+ * because the cache below already shares one material across every link of a
+ * given colour — all cross-border pulses of one ink therefore blink in
+ * phase, which reads as a system-wide signal rather than N separate alarms,
+ * and costs one opacity write per COLOUR per frame, not per pulse.
+ */
+const blinkingPulseMaterials = new Set<THREE.MeshBasicMaterial>()
+
+/** Full blink cycle, seconds. Fast enough to read as blinking, slow enough
+ * not to strobe — and deliberately out of step with the 2.6s orb breath so
+ * the two rhythms never look like one broken animation. */
+const BLINK_PERIOD_SECONDS = 1.3
+
+/**
+ * Drive the blink — called once per frame from InfluenceGraph's `useFrame`
+ * with its free-running pulse clock. The wave is squared so the pulse snaps
+ * bright and decays — a blink, which is what was asked for (round 10:
+ * "make... the pulses along it pulse/blink"), not a gentle fade that would
+ * disappear among everything else that already fades.
+ */
+export function tickPulseBlink(seconds: number) {
+  if (blinkingPulseMaterials.size === 0) return
+  const wave =
+    0.5 + 0.5 * Math.sin((2 * Math.PI * seconds) / BLINK_PERIOD_SECONDS)
+  const opacity = 0.2 + 0.8 * wave * wave
+  for (const material of blinkingPulseMaterials) material.opacity = opacity
+}
+
+/**
  * Pulse material — unlit on purpose.
  *
  * A pulse is meant to read as a signal travelling, not as a small object being
  * lit. Lambert would let it darken on the side facing away from the lights,
  * which makes the same pulse mean different things at different points in an
  * orbit.
+ *
+ * `blink` marks a cross-border pulse (see `LinkDatum.cross`): a separate
+ * cache entry per colour, because the ordinary material is shared by every
+ * same-ink link and animating it would blink the whole family.
  */
-export function pulseMaterial(colour: string): THREE.MeshBasicMaterial {
-  const cached = pulseMaterials.get(colour)
+export function pulseMaterial(colour: string, blink = false): THREE.MeshBasicMaterial {
+  const key = blink ? `${colour}|blink` : colour
+  const cached = pulseMaterials.get(key)
   if (cached) return cached
 
   const material = new THREE.MeshBasicMaterial({
@@ -268,6 +303,7 @@ export function pulseMaterial(colour: string): THREE.MeshBasicMaterial {
     opacity: 0.92,
     depthWrite: false,
   })
-  pulseMaterials.set(colour, material)
+  if (blink) blinkingPulseMaterials.add(material)
+  pulseMaterials.set(key, material)
   return material
 }

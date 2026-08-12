@@ -123,8 +123,8 @@ export default function ViewControls({
 
       <label style={{ ...sliderRow, marginBottom: 12 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 11, color: '#8fa3c0' }}>Zoom</span>
-          <span style={{ fontSize: 11, color: '#5e6f8a' }}>
+          <span style={{ fontSize: 11, color: 'var(--ink-label)' }}>Zoom</span>
+          <span style={{ fontSize: 11, color: 'var(--ink-dim)' }}>
             {view.zoom < 0.97 ? 'in' : view.zoom > 1.03 ? 'out' : 'fit'}
           </span>
         </div>
@@ -150,17 +150,17 @@ export default function ViewControls({
             onChange={(e) => set(key, e.target.checked as never)}
             style={checkbox}
           />
-          <span style={{ color: view[key] ? '#c2cfe4' : '#5e6f8a' }}>{label}</span>
+          <span style={{ color: view[key] ? 'var(--ink-body)' : 'var(--ink-dim)' }}>{label}</span>
         </label>
       ))}
 
       {SLIDERS.map(({ key, label, hint, min, max }) => (
         <label key={key} style={{ ...sliderRow, marginTop: 8 }} title={hint}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: 11, color: view[key] > 0 ? '#8fa3c0' : '#5e6f8a' }}>
+            <span style={{ fontSize: 11, color: view[key] > 0 ? 'var(--ink-label)' : 'var(--ink-dim)' }}>
               {label}
             </span>
-            <span style={{ fontSize: 11, color: '#5e6f8a' }}>
+            <span style={{ fontSize: 11, color: 'var(--ink-dim)' }}>
               {(min ?? 0) === 0 && view[key] <= 0.005
                 ? 'off'
                 : Math.round(view[key] * 100) + '%'}
@@ -187,7 +187,7 @@ export default function ViewControls({
             onChange={(e) => set(key, e.target.checked as never)}
             style={checkbox}
           />
-          <span style={{ color: view[key] ? '#c2cfe4' : '#5e6f8a' }}>{label}</span>
+          <span style={{ color: view[key] ? 'var(--ink-body)' : 'var(--ink-dim)' }}>{label}</span>
         </label>
       ))}
       <div style={note}>
@@ -206,10 +206,11 @@ export default function ViewControls({
 // two chances for the panel to stop short of the edge.
 const panel: React.CSSProperties = {
   padding: '14px 16px',
-  background: 'rgba(10, 14, 24, 0.72)',
-  border: '1px solid rgba(90, 115, 160, 0.22)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
   borderRadius: 10,
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   userSelect: 'none',
 }
 
@@ -217,7 +218,7 @@ const heading: React.CSSProperties = {
   fontSize: 10,
   letterSpacing: '0.09em',
   textTransform: 'uppercase',
-  color: '#556785',
+  color: 'var(--ink-faint)',
   marginBottom: 10,
 }
 
@@ -238,19 +239,19 @@ const sliderRow: React.CSSProperties = {
 const slider: React.CSSProperties = {
   width: '100%',
   marginTop: 4,
-  accentColor: '#6ea8ff',
+  accentColor: 'var(--accent)',
   cursor: 'ew-resize',
 }
 
 const note: React.CSSProperties = {
   fontSize: 10.5,
-  color: '#4d5c74',
+  color: 'var(--ink-faint)',
   lineHeight: 1.5,
   marginTop: 6,
 }
 
 const checkbox: React.CSSProperties = {
-  accentColor: '#6ea8ff',
+  accentColor: 'var(--accent)',
   cursor: 'pointer',
   margin: 0,
 }
@@ -261,9 +262,9 @@ const resetButton: React.CSSProperties = {
   fontSize: 9.5,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
-  color: '#5e6f8a',
+  color: 'var(--ink-dim)',
   background: 'transparent',
-  border: '1px solid rgba(90, 115, 160, 0.22)',
+  border: '1px solid var(--line)',
   borderRadius: 5,
   padding: '3px 7px',
   cursor: 'pointer',

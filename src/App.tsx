@@ -67,6 +67,7 @@ import {
 } from './lib/filter'
 import {
   ALL_SCOPES,
+  BLUEPRINT_INK,
   COMMERCIAL_COLOUR,
   COUNTRY_RIM,
   focusPalette,
@@ -78,6 +79,7 @@ import {
   type ColourFamily,
   type Scope,
 } from './lib/palette'
+import { THEME_CSS } from './lib/uiTheme'
 import { DOMAINS, type Domain } from './lib/types'
 import type {
   ReferencePeriod,
@@ -551,7 +553,15 @@ export default function App() {
   }, [graph])
 
   return (
-    <div style={{ width: '100%', height: '100%' }} onPointerMove={trackPointer}>
+    <div
+      style={{ width: '100%', height: '100%' }}
+      onPointerMove={trackPointer}
+      // The one switch the whole UI chrome hangs off — see lib/uiTheme.ts.
+      // Scene theming travels separately (view.blueprint through the material
+      // system); this attribute themes the instrument panels around it.
+      data-theme={view.blueprint ? 'paper' : 'dark'}
+    >
+      <style>{THEME_CSS}</style>
       <Canvas
         camera={{ position: [0, 0, 700], fov: FOV, near: 1, far: 12000 }}
         gl={{ antialias: true }}
@@ -699,6 +709,7 @@ export default function App() {
         scopeCounts={scopeCounts}
         filter={filter}
         levelColours={levelColours}
+        paper={view.blueprint}
         onFamily={toggleFamily}
         onScope={toggleScope}
       />
@@ -758,8 +769,28 @@ export default function App() {
           <Detail report={hovered} graph={disclosedGraph} disclosure={disclosure} />
         )}
       </div>
+
+      {/*
+        The page frame (round 10): a crisp 1px glassy line at the viewport
+        edge, with #0066CC fading inward to the background over ~38px — the
+        "frosted" edge. Pure paint: pointer-transparent, so it costs nothing
+        to interaction, and inset shadows fade to transparent, so the same
+        two variables read correctly over paper and over the dark scene.
+        Above every panel (they run zIndex 5–30) so the frost washes over
+        whatever reaches the edge; below the onboarding dialog at 40.
+      */}
+      <div aria-hidden style={pageFrame} />
     </div>
   )
+}
+
+const pageFrame: React.CSSProperties = {
+  position: 'fixed',
+  inset: 0,
+  pointerEvents: 'none',
+  zIndex: 38,
+  boxShadow:
+    'inset 0 0 0 1px var(--frame-line), inset 0 0 38px 8px var(--frame-glow)',
 }
 
 /** Hover card. Replaces the always-on labels, which were unreadable in bulk. */
@@ -834,9 +865,9 @@ function Detail({
           {report.title}
         </div>
       </div>
-      <div style={{ fontSize: 11, color: '#7d8ea8', marginTop: 3 }}>
+      <div style={{ fontSize: 11, color: 'var(--ink-mute)', marginTop: 3 }}>
         {report.publisher} · {report.region} · published {cadence}
-        {changes && <span style={{ color: '#c2a86e' }}> · changes {changes}</span>}
+        {changes && <span style={{ color: 'var(--ink-gold)' }}> · changes {changes}</span>}
       </div>
       {/*
         Phase, where it is known. A rate says how often and never says when, and
@@ -845,7 +876,7 @@ function Detail({
         "unknown" on four hundred cards.
       */}
       {next && (
-        <div style={{ fontSize: 11, color: '#8fa4c4', marginTop: 3 }}>
+        <div style={{ fontSize: 11, color: 'var(--ink-label)', marginTop: 3 }}>
           next {describeWindow(next.from, next.to, next.precision)}
           {next.evidence === 'implied' && (
             <span style={{ color: '#8a7ab5' }}> · inferred, not published</span>
@@ -853,7 +884,7 @@ function Detail({
         </div>
       )}
       {parent && (
-        <div style={{ fontSize: 10.5, color: '#7d8ea8', marginTop: 5, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 5, lineHeight: 1.5 }}>
           A series published inside{' '}
           <span style={{ color: colourForReport(parent) }}>{parent.title}</span>. Its
           authority below is its own, not the release's — the two are separate
@@ -861,7 +892,7 @@ function Detail({
         </div>
       )}
       {rolledUp !== null && (
-        <div style={{ fontSize: 10.5, color: '#7d8ea8', marginTop: 5, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 5, lineHeight: 1.5 }}>
           Also publishes{' '}
           {parts.map((p, i) => (
             <span key={p.id}>
@@ -870,17 +901,17 @@ function Detail({
             </span>
           ))}
           , held separately. Everything under this masthead comes to{' '}
-          <span style={{ color: '#c2a86e' }}>{rolledUp.toFixed(2)}</span>.
+          <span style={{ color: 'var(--ink-gold)' }}>{rolledUp.toFixed(2)}</span>.
         </div>
       )}
       {report.cadence_note && (
-        <div style={{ fontSize: 10.5, color: '#5e6f8a', marginTop: 5, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 10.5, color: 'var(--ink-dim)', marginTop: 5, lineHeight: 1.5 }}>
           {report.cadence_note}
         </div>
       )}
 
       {!official && (
-        <div style={{ fontSize: 10.5, color: '#8b93a4', marginTop: 6, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 6, lineHeight: 1.5 }}>
           Commercial source. Published, paywalled, and named by the documents
           that use it — but outside the authority ranking, so it accrues no
           size from what depends on it.
@@ -894,14 +925,14 @@ function Detail({
         is not the finding — *why* it stops is.
       */}
       {report.terminal_reason && (
-        <div style={{ fontSize: 10.5, color: '#8b93a4', marginTop: 6, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 6, lineHeight: 1.5 }}>
           {TERMINUS_NOTE[report.terminal_reason]} The chain ends here, so this
           node is outside the authority ranking and accrues no size from what
           depends on it.
         </div>
       )}
 
-      <div style={{ fontSize: 12, color: '#aab8cf', marginTop: 10, lineHeight: 1.5 }}>
+      <div style={{ fontSize: 12, color: 'var(--ink-mid)', marginTop: 10, lineHeight: 1.5 }}>
         {report.description}
       </div>
 
@@ -935,7 +966,7 @@ function Detail({
         />
       )}
       {feeds.length === 0 && (
-        <div style={{ fontSize: 11, color: '#5e6f8a', marginTop: 10, fontStyle: 'italic' }}>
+        <div style={{ fontSize: 11, color: 'var(--ink-dim)', marginTop: 10, fontStyle: 'italic' }}>
           Nothing in this graph depends on it — a terminal output.
         </div>
       )}
@@ -946,11 +977,11 @@ function Detail({
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div style={{ fontSize: 15, color: '#dde5f2' }}>{value}</div>
+      <div style={{ fontSize: 15, color: 'var(--ink-strong)' }}>{value}</div>
       <div
         style={{
           fontSize: 9.5,
-          color: '#5e6f8a',
+          color: 'var(--ink-dim)',
           textTransform: 'uppercase',
           letterSpacing: '0.06em',
         }}
@@ -1036,9 +1067,9 @@ function DisclosureBlock({ disclosure }: { disclosure: Disclosure | undefined })
           margin: '3px 0 5px',
         }}
       >
-        <div style={{ width: `${ratio * 100}%`, background: '#c2a86e' }} />
+        <div style={{ width: `${ratio * 100}%`, background: 'var(--ink-gold)' }} />
       </div>
-      <div style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
+      <div style={{ fontSize: 11.5, color: 'var(--ink-mid)', lineHeight: 1.55 }}>
         Names {documented} of {known} inputs known to exist
         {undisclosed > 0 && `, ${undisclosed} stated by no document`}
         {unpublishable > 0 && `, ${unpublishable} that cannot be a node`}.
@@ -1050,7 +1081,7 @@ function DisclosureBlock({ disclosure }: { disclosure: Disclosure | undefined })
         </div>
       )}
       {leads > 0 && (
-        <div style={{ fontSize: 11, color: '#5e6f8a', lineHeight: 1.5, marginTop: 2 }}>
+        <div style={{ fontSize: 11, color: 'var(--ink-dim)', lineHeight: 1.5, marginTop: 2 }}>
           {leads} lead{leads === 1 ? '' : 's'} not yet researched — ours, not theirs.
         </div>
       )}
@@ -1126,7 +1157,7 @@ function DomainPanel({
               fontSize: 9.5,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
-              color: '#5e6f8a',
+              color: 'var(--ink-dim)',
               cursor: 'pointer',
               marginLeft: 'auto',
             }}
@@ -1150,17 +1181,17 @@ function DomainPanel({
                 cursor: 'pointer',
                 border: '1px solid',
                 borderColor: on(d)
-                  ? 'rgba(110, 168, 255, 0.4)'
-                  : 'rgba(90, 115, 160, 0.18)',
-                background: on(d) ? 'rgba(110, 168, 255, 0.12)' : 'transparent',
-                color: on(d) ? '#cfe0f8' : '#5e6f8a',
+                  ? 'var(--accent-line)'
+                  : 'var(--line-faint)',
+                background: on(d) ? 'var(--accent-soft)' : 'transparent',
+                color: on(d) ? 'var(--ink-strong)' : 'var(--ink-dim)',
                 // Chips rather than rows: 24 rows is a scroll, 24 chips is a
                 // paragraph, and the eye reads a paragraph in one pass.
                 whiteSpace: 'nowrap',
               }}
             >
               {d.replace(/-/g, ' ')}
-              <span style={{ color: '#5e6f8a', marginLeft: 4 }}>{counts[d]}</span>
+              <span style={{ color: 'var(--ink-dim)', marginLeft: 4 }}>{counts[d]}</span>
             </span>
           ))}
         </div>
@@ -1188,18 +1219,18 @@ function ListBlock({
         // legitimately appear here more than once. A title key collided on
         // exactly that case (React logging "two children with the same
         // key"), harmlessly but constantly, every time an orb was hovered.
-        <div key={i} style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
+        <div key={i} style={{ fontSize: 11.5, color: 'var(--ink-mid)', lineHeight: 1.55 }}>
           {item.text}
           {item.aside && (
             // The transmission rate, where a document states one. This is the
             // answer to "when would a change here actually reach that", which
             // a list of titles alone cannot give.
-            <span style={{ color: '#c2a86e' }}> — {item.aside}</span>
+            <span style={{ color: 'var(--ink-gold)' }}> — {item.aside}</span>
           )}
         </div>
       ))}
       {items.length > shown.length && (
-        <div style={{ fontSize: 11, color: '#5e6f8a', marginTop: 2 }}>
+        <div style={{ fontSize: 11, color: 'var(--ink-dim)', marginTop: 2 }}>
           and {items.length - shown.length} more
         </div>
       )}
@@ -1251,12 +1282,20 @@ function ChipBar({
   scopeCounts,
   filter,
   levelColours,
+  paper,
   onFamily,
   onScope,
 }: {
   scopeCounts: Record<string, number>
   filter: FilterState
   levelColours: Record<string, string> | null
+  /**
+   * Blueprint mode. The chips are the legend, and a legend must show the ink
+   * the scene is actually wearing — which on paper is the dark printable
+   * ink, not the glow ink (whose white NZ/INT rings would vanish against
+   * light glass anyway).
+   */
+  paper: boolean
   onFamily: (family: ColourFamily) => void
   onScope: (scope: Scope) => void
 }) {
@@ -1311,12 +1350,12 @@ function ChipBar({
         <div
           onClick={() => setCollapsed(false)}
           title="Show the region chips"
-          style={{ ...chip, cursor: 'pointer', color: '#8fa3c0' }}
+          style={{ ...chip, cursor: 'pointer', color: 'var(--ink-label)' }}
         >
           <span style={{ whiteSpace: 'nowrap' }}>
             Regions{anyFilter ? ` · ${litCount} on` : ''}
           </span>
-          <span style={{ color: '#54637d' }}>▴</span>
+          <span style={{ color: 'var(--ink-faint)' }}>▴</span>
         </div>
       </div>
     )
@@ -1329,7 +1368,7 @@ function ChipBar({
         const on =
           !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
         const lit = anyFilter && on
-        const ink = COUNTRY_RIM[group.country] ?? '#8fa3c0'
+        const ink = (paper ? BLUEPRINT_INK : COUNTRY_RIM)[group.country] ?? 'var(--ink-label)'
         const open = openFamily === group.country
         const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
         return (
@@ -1355,15 +1394,15 @@ function ChipBar({
                           flexShrink: 0,
                         }}
                       />
-                      <span style={{ flex: 1, color: sOn ? '#c9d4e8' : '#5e6f8a' }}>
+                      <span style={{ flex: 1, color: sOn ? 'var(--ink-body)' : 'var(--ink-dim)' }}>
                         {SCOPE_LABEL[s] ?? s}
                       </span>
-                      <span style={{ color: '#5e6f8a' }}>{scopeCounts[s] ?? 0}</span>
+                      <span style={{ color: 'var(--ink-dim)' }}>{scopeCounts[s] ?? 0}</span>
                     </div>
                   )
                 })}
                 {levelColours && (
-                  <div style={{ fontSize: 9, color: '#54637d', marginTop: 4, lineHeight: 1.4 }}>
+                  <div style={{ fontSize: 9, color: 'var(--ink-faint)', marginTop: 4, lineHeight: 1.4 }}>
                     Spread colours — the spheres wear these while only this
                     family is shown.
                   </div>
@@ -1373,7 +1412,7 @@ function ChipBar({
             <div
               style={{
                 ...chip,
-                borderColor: lit ? ink : on ? 'rgba(90, 115, 160, 0.35)' : 'rgba(90, 115, 160, 0.18)',
+                borderColor: lit ? ink : on ? 'var(--line-strong)' : 'var(--line-faint)',
                 boxShadow: lit ? `0 0 8px ${ink}55, inset 0 0 6px ${ink}22` : 'none',
                 opacity: on ? 1 : 0.42,
               }}
@@ -1392,10 +1431,10 @@ function ChipBar({
                     flexShrink: 0,
                   }}
                 />
-                <span style={{ color: on ? '#dde5f2' : '#5e6f8a', whiteSpace: 'nowrap' }}>
+                <span style={{ color: on ? 'var(--ink-strong)' : 'var(--ink-dim)', whiteSpace: 'nowrap' }}>
                   {group.label}
                 </span>
-                <span style={{ color: '#54637d' }}>{total}</span>
+                <span style={{ color: 'var(--ink-faint)' }}>{total}</span>
               </span>
               <span
                 onClick={(e) => {
@@ -1405,7 +1444,7 @@ function ChipBar({
                 title={`${group.label} by level`}
                 style={{
                   cursor: 'pointer',
-                  color: open ? '#cfe0f8' : '#54637d',
+                  color: open ? 'var(--ink-strong)' : 'var(--ink-faint)',
                   // A real hit target — the old 2px sliver is what made the
                   // flyout feel stuck (see the outside-click note above).
                   padding: '6px 8px',
@@ -1431,7 +1470,7 @@ function ChipBar({
         title="Minimize the region chips"
         style={{ ...chip, cursor: 'pointer', padding: '5px 9px' }}
       >
-        <span style={{ color: '#54637d' }}>▾</span>
+        <span style={{ color: 'var(--ink-faint)' }}>▾</span>
       </div>
     </div>
   )
@@ -1457,10 +1496,11 @@ const chip: React.CSSProperties = {
   padding: '5px 8px 5px 10px',
   fontSize: 10.5,
   letterSpacing: '0.04em',
-  background: 'rgba(10, 14, 24, 0.82)',
+  background: 'var(--panel-bg)',
   border: '1px solid',
   borderRadius: 15,
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   userSelect: 'none',
 }
 
@@ -1471,10 +1511,11 @@ const flyout: React.CSSProperties = {
   transform: 'translateX(-50%)',
   minWidth: 178,
   padding: '8px 10px',
-  background: 'rgba(8, 12, 21, 0.95)',
-  border: '1px solid rgba(90, 115, 160, 0.3)',
+  background: 'var(--panel-bg-solid)',
+  border: '1px solid var(--line)',
   borderRadius: 8,
-  backdropFilter: 'blur(10px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   zIndex: 7,
 }
 
@@ -1545,9 +1586,9 @@ function TierBar({
                 fontSize: 10.5,
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: active ? '#e6eefc' : '#7c8ca7',
-                background: active ? 'rgba(70, 115, 190, 0.30)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${active ? 'rgba(130, 170, 230, 0.55)' : 'rgba(90, 115, 160, 0.22)'}`,
+                color: active ? 'var(--ink-strong)' : 'var(--ink-mute)',
+                background: active ? 'var(--accent-active)' : 'var(--btn-bg)',
+                border: `1px solid ${active ? 'var(--line-strong)' : 'var(--line)'}`,
                 borderRadius: 6,
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
@@ -1558,7 +1599,7 @@ function TierBar({
           )
         })}
       </div>
-      <div style={{ fontSize: 10, color: '#54637d', marginTop: 7, textAlign: 'center' }}>
+      <div style={{ fontSize: 10, color: 'var(--ink-faint)', marginTop: 7, textAlign: 'center' }}>
         {filtered
           ? `${visibleCount} shown · ${inTier} in this tier · filter hiding ${inTier - visibleCount}`
           : `${visibleCount} of ${total} reports shown`}
@@ -1582,6 +1623,26 @@ function IsolatedShelf({
 
   return (
     <div style={isolatedShelfWrap}>
+      {/*
+        The occasional sheen (round 10). A real pointer-transparent div, not a
+        ::after on the shelf — a positioned pseudo-element would paint above
+        the in-flow dots AND fold their screen area into the shelf's own hit
+        region, so clicks aimed at dots would land on the panel. The clipping
+        wrapper carries the panel's radius so the sweep never pokes past a
+        rounded corner.
+      */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          overflow: 'hidden',
+          borderRadius: 10,
+          pointerEvents: 'none',
+        }}
+      >
+        <div className="rig-sweep" />
+      </div>
       <div style={{ ...section, marginBottom: 8 }}>Unlinked — {reports.length}</div>
       <div style={isolatedShelfGrid}>
         {reports.map((r) => (
@@ -1601,7 +1662,7 @@ function IsolatedShelf({
               background: colourForReport(r),
               opacity: selectedId === r.id ? 1 : 0.72,
               boxShadow:
-                selectedId === r.id ? '0 0 0 2px rgba(230, 237, 250, 0.6)' : 'none',
+                selectedId === r.id ? '0 0 0 2px var(--sel-ring)' : 'none',
               pointerEvents: 'auto',
             }}
           />
@@ -1647,13 +1708,20 @@ function Hud({
 
   return (
     <div style={panel}>
-      <div style={{ fontSize: 15, fontWeight: 600, color: '#e6edfa' }}>
-        Economic Report Influence Graph
-      </div>
-      <div style={{ fontSize: 12, color: '#6f829e', marginTop: 2 }}>
+      {/*
+        The masthead (round 10: "more pronounced... a pleasant color and font
+        so it has depth and personality"). A serif in a panel full of system
+        sans is the personality; the gradient ink and drop shadow are the
+        depth. Gradient text needs background-clip — and the depth has to be
+        a `filter: drop-shadow`, not `textShadow`, because a text shadow
+        paints THROUGH transparent glyphs and muddies the gradient it sits
+        under. Both gradient and shadow are themed variables.
+      */}
+      <div style={masthead}>Economic Report Influence Graph</div>
+      <div style={{ fontSize: 12, color: 'var(--ink-mute)', marginTop: 2 }}>
         {filtered ? (
           <>
-            <span style={{ color: '#9fb0c9' }}>
+            <span style={{ color: 'var(--ink-mid)' }}>
               {visibleNodeCount} of {nodeCount}
             </span>{' '}
             reports · {visibleEdgeCount} dependencies
@@ -1684,13 +1752,13 @@ function Hud({
           >
             {selected.title}
           </div>
-          <div style={{ fontSize: 11.5, color: '#8fa3c0', marginTop: 6, lineHeight: 1.6 }}>
-            Rests on <strong style={{ color: '#dde5f2' }}>{builtFromCount}</strong>{' '}
+          <div style={{ fontSize: 11.5, color: 'var(--ink-label)', marginTop: 6, lineHeight: 1.6 }}>
+            Rests on <strong style={{ color: 'var(--ink-strong)' }}>{builtFromCount}</strong>{' '}
             {builtFromCount === 1 ? 'report' : 'reports'} · feeds{' '}
-            <strong style={{ color: '#dde5f2' }}>{feedsIntoCount}</strong>{' '}
+            <strong style={{ color: 'var(--ink-strong)' }}>{feedsIntoCount}</strong>{' '}
             {feedsIntoCount === 1 ? 'report' : 'reports'}
           </div>
-          <div style={{ fontSize: 10.5, color: '#4d5c74', marginTop: 5 }}>
+          <div style={{ fontSize: 10.5, color: 'var(--ink-faint)', marginTop: 5 }}>
             Counted through the whole chain, not one step.
           </div>
         </div>
@@ -1699,9 +1767,9 @@ function Hud({
       <div style={{ ...section, marginTop: 14 }}>Most depended upon</div>
       {top.map((n, i) => (
         <div key={n.id} style={row}>
-          <span style={{ color: '#556785', width: 14 }}>{i + 1}</span>
-          <span style={{ flex: 1, color: '#c9d4e8' }}>{n.title}</span>
-          <span style={{ color: '#6f829e' }}>{n.authority.toFixed(2)}</span>
+          <span style={{ color: 'var(--ink-faint)', width: 14 }}>{i + 1}</span>
+          <span style={{ flex: 1, color: 'var(--ink-body)' }}>{n.title}</span>
+          <span style={{ color: 'var(--ink-mute)' }}>{n.authority.toFixed(2)}</span>
         </div>
       ))}
 
@@ -1742,7 +1810,7 @@ function Hud({
           onClick={onClearFilter}
           style={{
             fontSize: 11,
-            color: '#6ea8ff',
+            color: 'var(--accent)',
             marginTop: 8,
             cursor: 'pointer',
             pointerEvents: 'auto',
@@ -1753,7 +1821,7 @@ function Hud({
         </div>
       )}
 
-      <div style={{ fontSize: 11, color: '#4d5c74', marginTop: 14, lineHeight: 1.5 }}>
+      <div style={{ fontSize: 11, color: 'var(--ink-faint)', marginTop: 14, lineHeight: 1.5 }}>
         Pulses travel outward from a report to everything built on it, at that
         report's publication rate. Hover for detail, click to trace a chain,
         Esc to clear. Drag to orbit, scroll to zoom. Press / to find a report by
@@ -1761,7 +1829,7 @@ function Hud({
       </div>
 
       {!filter.showCommercial && (
-        <div style={{ fontSize: 10.5, color: '#4d5c74', marginTop: 8, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 10.5, color: 'var(--ink-faint)', marginTop: 8, lineHeight: 1.5 }}>
           Commercial sources hidden. Nothing has moved or changed size — they
           sit outside the authority calculation, so this view only subtracts.
         </div>
@@ -1810,10 +1878,10 @@ function LegendRow({
           opacity: on || partial ? 1 : 0.45,
         }}
       />
-      <span style={{ flex: 1, color: on || partial ? '#a8b7cd' : '#4d5c74' }}>
+      <span style={{ flex: 1, color: on || partial ? 'var(--ink-mid)' : 'var(--ink-faint)' }}>
         {label}
       </span>
-      <span style={{ color: on || partial ? '#5e6f8a' : '#3d4a5e' }}>{count}</span>
+      <span style={{ color: on || partial ? 'var(--ink-dim)' : 'var(--ink-faintest)' }}>{count}</span>
     </div>
   )
 }
@@ -1836,10 +1904,11 @@ const TERMINUS_NOTE: Record<TerminalReason, string> = {
 // See ViewControls: PanelShell owns position and width.
 const panel: React.CSSProperties = {
   padding: '16px 18px',
-  background: 'rgba(10, 14, 24, 0.72)',
-  border: '1px solid rgba(90, 115, 160, 0.22)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
   borderRadius: 10,
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   // 'auto' + a viewport cap + a scrollbar, replacing 'none' + unbounded height.
   // With several groups expanded the legend ran past the bottom of the screen
   // and everything below the fold was unreachable — Thomas, 2026-08-12: "the
@@ -1856,7 +1925,7 @@ const selectionBlock: React.CSSProperties = {
   marginTop: 14,
   paddingTop: 12,
   paddingBottom: 2,
-  borderTop: '1px solid rgba(90, 115, 160, 0.18)',
+  borderTop: '1px solid var(--line-faint)',
 }
 
 // Right edge sits 4px inside the View panel's own left edge (that panel is
@@ -1876,10 +1945,11 @@ const tierBarWrap: React.CSSProperties = {
   left: '50%',
   transform: 'translateX(-50%)',
   padding: '10px 14px',
-  background: 'rgba(10, 14, 24, 0.82)',
-  border: '1px solid rgba(90, 115, 160, 0.22)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
   borderRadius: 10,
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   zIndex: 6,
 }
 
@@ -1907,10 +1977,11 @@ const isolatedShelfWrap: React.CSSProperties = {
   right: 214,
   width: 232,
   padding: '9px 11px',
-  background: 'rgba(10, 14, 24, 0.72)',
-  border: '1px solid rgba(90, 115, 160, 0.22)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
   borderRadius: 10,
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   // 'auto', not 'none' — the shelf scrolls once the isolated set outgrows
   // `maxHeight`, and a scrollbar inside a pointer-transparent panel cannot be
   // grabbed (Thomas, 2026-08-12: "give it a scroll bar and allow the pointer
@@ -1942,10 +2013,11 @@ const tooltip: React.CSSProperties = {
   left: 0,
   width: 300,
   padding: '14px 16px',
-  background: 'rgba(8, 12, 21, 0.93)',
-  border: '1px solid rgba(90, 115, 160, 0.3)',
+  background: 'var(--panel-bg-solid)',
+  border: '1px solid var(--line)',
   borderRadius: 10,
-  backdropFilter: 'blur(10px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   pointerEvents: 'none',
   transition: 'opacity 120ms ease',
   willChange: 'transform',
@@ -1973,8 +2045,25 @@ const section: React.CSSProperties = {
   fontSize: 10,
   letterSpacing: '0.09em',
   textTransform: 'uppercase',
-  color: '#556785',
+  color: 'var(--ink-faint)',
   marginBottom: 6,
+}
+
+// See the comment at the call site in Hud. Georgia-first because it ships on
+// every Windows/mac machine this will realistically open on — a webfont for
+// one line of text is a network dependency the project doesn't otherwise have.
+const masthead: React.CSSProperties = {
+  fontFamily: "Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif",
+  fontSize: 21,
+  fontWeight: 700,
+  letterSpacing: '0.005em',
+  lineHeight: 1.22,
+  backgroundImage: 'var(--title-ink)',
+  WebkitBackgroundClip: 'text',
+  backgroundClip: 'text',
+  color: 'transparent',
+  filter: 'var(--title-depth)',
+  paddingBottom: 1,
 }
 
 const row: React.CSSProperties = {
@@ -1989,5 +2078,5 @@ const statRow: React.CSSProperties = {
   gap: 22,
   marginTop: 12,
   paddingTop: 10,
-  borderTop: '1px solid rgba(90, 115, 160, 0.18)',
+  borderTop: '1px solid var(--line-faint)',
 }

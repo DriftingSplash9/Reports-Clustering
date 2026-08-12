@@ -44,6 +44,7 @@ import {
   setLinkFocus,
   setLinkFog,
   teardropGeometry,
+  tickPulseBlink,
   type GradientLinkMaterial,
 } from './linkVisuals'
 
@@ -89,6 +90,25 @@ interface LinkDatum {
    * as well as cleaner.
    */
   count: number
+  /**
+   * A cross-border dependency — the two endpoints belong to different colour
+   * families, neither of them INT. Round 10, Thomas: "there are some
+   * connections, such as between canada and usa. These types of cross border
+   * arrangements are special cases and I would like them to stand out."
+   *
+   * These edges draw bolder (width and brightness multipliers below) and
+   * their pulses BLINK (see `pulseMaterial`'s blink variant) — NYMEX WTI
+   * feeding Alberta's royalty regulation is exactly the kind of line this
+   * exists to surface.
+   *
+   * INT is excluded by definition, not oversight: the international bodies
+   * consume everyone's numbers, so nearly every INT edge crosses a border —
+   * flagging them would make the special case the wallpaper. An
+   * international body's edge is doing what international bodies do; a
+   * *country's* number resting on another country's is the arrangement worth
+   * a blink.
+   */
+  cross: boolean
   /**
    * Extra rest length for links touching high-degree nodes, precomputed at
    * build time (the d3 distance accessor sees mutated link objects, so
@@ -702,20 +722,35 @@ export default function InfluenceGraph({
       const key = edgeKey(e.source_report_id, e.target_report_id)
       const weight = e.strength ?? RELATIONSHIP_WEIGHT[e.relationship_type]
       const upstream = graph.byId.get(e.target_report_id)
+      const downstream = graph.byId.get(e.source_report_id)
+      // Cross-border test — see the note on LinkDatum.cross. Orbs carry a
+      // representative country like every node, so the test holds at every
+      // tier: the collapsed Canada↔US trunk at tier 1 is a border crossing
+      // for the same reason each of its member edges is.
+      const famUp = upstream ? familyOf(upstream.country) : null
+      const famDown = downstream ? familyOf(downstream.country) : null
+      const cross =
+        famUp !== null &&
+        famDown !== null &&
+        famUp !== famDown &&
+        famUp !== 'INT' &&
+        famDown !== 'INT'
       const existing = linkMap.get(key)
       if (existing) {
         existing.count += 1
         // A trunk inherits its strongest member's weight and its busiest
         // member's cadence — the line stands for all of them, and "how strong"
-        // / "how alive" are max questions, not averages.
+        // / "how alive" are max questions, not averages. Cross-border is an
+        // ANY question by the same logic: one border-crossing member makes
+        // the trunk a border crossing.
         existing.weight = Math.max(existing.weight, weight)
         existing.upstreamCadence = Math.max(
           existing.upstreamCadence,
           upstream?.releases_per_year ?? 1,
         )
+        existing.cross = existing.cross || cross
         continue
       }
-      const downstream = graph.byId.get(e.source_report_id)
       // Family ink, not fill — see the note on LinkDatum.colour. In blueprint
       // the same system, darker: each family's ink swaps to its printable
       // variant (blueprintInkFor), and because pulses inherit LinkDatum.colour
@@ -730,6 +765,7 @@ export default function InfluenceGraph({
         upstreamCadence: upstream?.releases_per_year ?? 1,
         colour: upstream ? inkFor(upstream.country) : fallbackInk,
         endColour: downstream ? inkFor(downstream.country) : fallbackInk,
+        cross,
         count: 1,
         hubRoom:
           3.5 *
@@ -753,14 +789,18 @@ export default function InfluenceGraph({
       // heavier, not 57× louder. Blueprint runs the same formula from a higher
       // base — dark ink on paper needs body where glow-lines need restraint —
       // with the cap lifted in proportion so trunks keep their full headroom.
-      const baseOpacity = bp ? PAPER_LINK_OPACITY : LINK_OPACITY
+      // A cross-border edge starts 1.3× brighter still (round 10): brightness
+      // and the width boost below are the "bolder" half of the treatment, the
+      // blinking pulse is the other.
+      const baseOpacity =
+        (bp ? PAPER_LINK_OPACITY : LINK_OPACITY) * (l.cross ? 1.3 : 1)
       linkMaterials.current.set(
         l.key,
         gradientLinkMaterial(
           l.colour,
           l.endColour,
           false,
-          Math.min(bp ? 0.8 : 0.5, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
+          Math.min(bp ? 0.82 : 0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
         ),
       )
     }
@@ -781,7 +821,9 @@ export default function InfluenceGraph({
           // which is why the answer to "how hard on the processors" was
           // "free".
           teardropGeometry((3.2 + l.weight * 3.8) * 1.5),
-          pulseMaterial(l.colour),
+          // The blink variant for a cross-border edge — a separate material
+          // instance per ink, animated by tickPulseBlink in useFrame below.
+          pulseMaterial(l.colour, l.cross),
         ),
       )
     }
@@ -910,11 +952,14 @@ export default function InfluenceGraph({
       // Widened 2026-08-10 (Thomas) — roughly 1.7x the old 0.3-1.0 range.
       // Trunk term added round 5: each doubling of stacked edges adds ~45% of
       // the base width, so the EU→ESA 57-trunk lands near 3.6× an ordinary
-      // line — a trunk among threads, not a pipe among threads.
+      // line — a trunk among threads, not a pipe among threads. Cross-border
+      // edges take a further 1.6× (round 10) so a border crossing reads
+      // bolder than its neighbours at the same trunk count.
       .linkWidth(
         (l: object) =>
           (0.5 + (l as LinkDatum).weight * 1.2) *
-          (1 + 0.45 * Math.log2((l as LinkDatum).count)),
+          (1 + 0.45 * Math.log2((l as LinkDatum).count)) *
+          ((l as LinkDatum).cross ? 1.6 : 1),
       )
       // No arrowheads. They were drawn at 94% along a link, and links run
       // centre to centre, so on a typical 40-unit link the head sat about 2.4
@@ -1806,6 +1851,9 @@ export default function InfluenceGraph({
     // breathe at a different rate on every machine and would visibly slow down
     // exactly when the scene gets heavy.
     pulseClock.current += delta
+    // The cross-border pulse blink — one call animates every registered blink
+    // material; a no-op when the current graph has no cross-border edges.
+    tickPulseBlink(pulseClock.current)
     const breath =
       0.5 - 0.5 * Math.cos((2 * Math.PI * pulseClock.current) / ORB_PULSE_PERIOD_SECONDS)
     for (const [id, mesh] of meshes.current) {

@@ -148,13 +148,13 @@ export default function CalendarPanel({
                   onClick={() => setHorizon(h)}
                   style={{
                     ...chip,
-                    color: h === horizon ? '#cfe0f8' : '#5e6f8a',
+                    color: h === horizon ? 'var(--ink-strong)' : 'var(--ink-dim)',
                     borderColor:
                       h === horizon
-                        ? 'rgba(110, 168, 255, 0.45)'
-                        : 'rgba(90, 115, 160, 0.22)',
+                        ? 'var(--accent-line)'
+                        : 'var(--line)',
                     background:
-                      h === horizon ? 'rgba(110, 168, 255, 0.14)' : 'transparent',
+                      h === horizon ? 'var(--accent-soft)' : 'transparent',
                   }}
                 >
                   {h}
@@ -172,11 +172,11 @@ export default function CalendarPanel({
               style={{
                 ...chip,
                 marginLeft: 'auto',
-                color: showReads ? '#cfe0f8' : '#5e6f8a',
+                color: showReads ? 'var(--ink-strong)' : 'var(--ink-dim)',
                 borderColor: showReads
-                  ? 'rgba(110, 168, 255, 0.45)'
-                  : 'rgba(90, 115, 160, 0.22)',
-                background: showReads ? 'rgba(110, 168, 255, 0.14)' : 'transparent',
+                  ? 'var(--accent-line)'
+                  : 'var(--line)',
+                background: showReads ? 'var(--accent-soft)' : 'transparent',
               }}
             >
               reads
@@ -213,8 +213,8 @@ export default function CalendarPanel({
                         <span style={title}>
                           {e.kind === 'read' ? (
                             <>
-                              <span style={{ color: '#6f829e' }}>{r.title}</span>
-                              <span style={{ color: '#4d5f7c' }}> read by </span>
+                              <span style={{ color: 'var(--ink-mute)' }}>{r.title}</span>
+                              <span style={{ color: 'var(--ink-faint)' }}> read by </span>
                               {reader?.title ?? e.readerId}
                             </>
                           ) : (
@@ -311,11 +311,12 @@ export default function CalendarPanel({
           // use — with the button no longer touching the panel it toggles, its
           // own appearance is the only thing left saying whether that panel is
           // up.
-          color: collapsed ? '#5e6f8a' : '#dce7f8',
-          background: collapsed ? 'rgba(10, 14, 24, 0.82)' : 'rgba(70, 115, 190, 0.30)',
-          border: `1px solid ${collapsed ? 'rgba(90, 115, 160, 0.22)' : 'rgba(130, 170, 230, 0.55)'}`,
+          color: collapsed ? 'var(--ink-dim)' : 'var(--ink-strong)',
+          background: collapsed ? 'var(--panel-bg)' : 'var(--accent-active)',
+          border: `1px solid ${collapsed ? 'var(--line)' : 'var(--line-strong)'}`,
           borderRadius: 6,
-          backdropFilter: 'blur(8px)',
+          boxShadow: 'var(--panel-shadow)',
+          backdropFilter: 'var(--glass-filter)',
           cursor: 'pointer',
           zIndex: 6,
           lineHeight: 1,
@@ -387,10 +388,11 @@ const PANEL_WIDTH = 560
 const PANEL_HEIGHT = 300
 
 const shell: React.CSSProperties = {
-  background: 'rgba(10, 14, 24, 0.82)',
-  border: '1px solid rgba(90, 115, 160, 0.28)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
   borderRadius: 10,
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   padding: '10px 12px 8px',
   boxSizing: 'border-box',
   height: PANEL_HEIGHT,
@@ -409,7 +411,7 @@ const heading: React.CSSProperties = {
   fontSize: 10,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
-  color: '#5e6f8a',
+  color: 'var(--ink-dim)',
 }
 
 const chip: React.CSSProperties = {
@@ -418,7 +420,7 @@ const chip: React.CSSProperties = {
   letterSpacing: '0.04em',
   padding: '3px 7px',
   borderRadius: 5,
-  border: '1px solid rgba(90, 115, 160, 0.22)',
+  border: '1px solid var(--line)',
   cursor: 'pointer',
   lineHeight: 1,
 }
@@ -434,7 +436,7 @@ const groupLabel: React.CSSProperties = {
   fontSize: 10,
   letterSpacing: '0.06em',
   textTransform: 'uppercase',
-  color: '#4d5f7c',
+  color: 'var(--ink-faint)',
   marginBottom: 3,
 }
 
@@ -448,7 +450,7 @@ const row: React.CSSProperties = {
 }
 
 const title: React.CSSProperties = {
-  color: '#dde5f2',
+  color: 'var(--ink-strong)',
   fontSize: 12,
   lineHeight: 1.35,
   display: 'block',
@@ -456,7 +458,7 @@ const title: React.CSSProperties = {
 
 const sub: React.CSSProperties = {
   display: 'block',
-  color: '#6f829e',
+  color: 'var(--ink-mute)',
   fontSize: 10.5,
   marginTop: 1,
 }
@@ -471,19 +473,19 @@ const impliedTag: React.CSSProperties = {
 }
 
 const empty: React.CSSProperties = {
-  color: '#6f829e',
+  color: 'var(--ink-mute)',
   fontSize: 11.5,
   lineHeight: 1.5,
   padding: '6px 2px',
 }
 
 const footer: React.CSSProperties = {
-  borderTop: '1px solid rgba(90, 115, 160, 0.18)',
+  borderTop: '1px solid var(--line-faint)',
   paddingTop: 6,
   marginTop: 6,
-  color: '#5e6f8a',
+  color: 'var(--ink-dim)',
   fontSize: 10.5,
   lineHeight: 1.45,
 }
 
-const b: React.CSSProperties = { color: '#8fa4c4', fontWeight: 600 }
+const b: React.CSSProperties = { color: 'var(--ink-label)', fontWeight: 600 }

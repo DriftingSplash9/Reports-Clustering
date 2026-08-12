@@ -111,7 +111,7 @@ export default function SearchPanel({
               onMouseEnter={() => setActive(i)}
               style={{
                 ...resultRow,
-                background: i === active ? 'rgba(110, 168, 255, 0.12)' : 'transparent',
+                background: i === active ? 'var(--accent-soft)' : 'transparent',
               }}
             >
               <span
@@ -125,13 +125,13 @@ export default function SearchPanel({
                 }}
               />
               <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ color: '#dde5f2', fontSize: 12.5, lineHeight: 1.35 }}>
+                <span style={{ color: 'var(--ink-strong)', fontSize: 12.5, lineHeight: 1.35 }}>
                   {report.title}
                 </span>
                 <span
                   style={{
                     display: 'block',
-                    color: '#6f829e',
+                    color: 'var(--ink-mute)',
                     fontSize: 10.5,
                     marginTop: 2,
                   }}
@@ -139,7 +139,7 @@ export default function SearchPanel({
                   {report.publisher} · {report.region}
                 </span>
               </span>
-              <span style={{ color: '#556785', fontSize: 10.5, marginTop: 2 }}>
+              <span style={{ color: 'var(--ink-faint)', fontSize: 10.5, marginTop: 2 }}>
                 {report.in_degree} in
               </span>
             </div>
@@ -172,22 +172,24 @@ const input: React.CSSProperties = {
   padding: '9px 12px',
   fontSize: 12.5,
   fontFamily: 'inherit',
-  color: '#dde5f2',
-  background: 'rgba(10, 14, 24, 0.82)',
-  border: '1px solid rgba(90, 115, 160, 0.28)',
+  color: 'var(--ink-strong)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
   borderRadius: 8,
   outline: 'none',
-  backdropFilter: 'blur(8px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
   boxSizing: 'border-box',
 }
 
 const list: React.CSSProperties = {
   marginTop: 6,
   padding: 4,
-  background: 'rgba(8, 12, 21, 0.93)',
-  border: '1px solid rgba(90, 115, 160, 0.28)',
+  background: 'var(--panel-bg-solid)',
+  border: '1px solid var(--line)',
   borderRadius: 8,
-  backdropFilter: 'blur(10px)',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
 }
 
 const resultRow: React.CSSProperties = {
@@ -202,6 +204,6 @@ const resultRow: React.CSSProperties = {
 const empty: React.CSSProperties = {
   padding: '8px 9px',
   fontSize: 11,
-  color: '#5e6f8a',
+  color: 'var(--ink-dim)',
   lineHeight: 1.5,
 }

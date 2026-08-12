@@ -1,0 +1,120 @@
+/**
+ * The UI chrome theme — every colour the DOM panels use, as CSS variables on
+ * a `data-theme` attribute App sets from `view.blueprint`.
+ *
+ * Why variables and not two style objects: the panels' styles live as inline
+ * `React.CSSProperties` across six components, written long before there were
+ * two themes. Threading a theme prop into every one of them would touch every
+ * signature for what is, in the end, a paint decision — while a variable
+ * resolves at paint time, exactly where the decision belongs, and the inline
+ * styles keep their structure with `var(--x)` where a literal used to be.
+ * (Round 10, Thomas: "brighten the expandable menus so they match the lighter
+ * look... give all the boxes really nice glassy looks".)
+ *
+ * The SCENE reads none of this. Node fills, rims, edges and pulses take their
+ * colours from palette.ts/view.ts through the material system; these
+ * variables style the instrument panels around the scene. Keep it that way —
+ * a scene colour in a CSS variable would be invisible to the screenshot-pixel
+ * tuning the scene colours are all chosen by.
+ *
+ * Two grounds, two vocabularies, one variable set:
+ * - **dark** — machined instrument panels: near-black gradient surfaces, a
+ *   1px top bevel and a bottom seam (the "3D" Thomas asked for, machined
+ *   rather than bubbly), a deep drop shadow, and a faint blue field glow.
+ * - **paper** — glass over paper: white-glass gradient surfaces, warm drop
+ *   shadows, white inner bevel, dark inks for text.
+ *
+ * The ink ladder runs strong → body → mid → label → mute → dim → faint →
+ * faintest, and note the paper values invert the LUMINANCE ordering, not the
+ * hierarchy: on dark ground, emphasis is bright; on paper, emphasis is dark.
+ * Mapping literals to rungs (not to per-use names) is what let 60+ inline
+ * colours collapse into eight variables.
+ */
+export const THEME_CSS = /* css */ `
+[data-theme='dark'] {
+  --panel-bg: linear-gradient(178deg, rgba(21, 28, 44, 0.90) 0%, rgba(10, 14, 24, 0.86) 46%, rgba(7, 10, 18, 0.92) 100%);
+  --panel-bg-solid: linear-gradient(180deg, rgba(15, 20, 33, 0.97), rgba(8, 11, 20, 0.97));
+  --panel-shadow: 0 18px 42px rgba(0, 0, 0, 0.52), 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 26px rgba(70, 130, 255, 0.12), inset 0 1px 0 rgba(165, 195, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.45);
+  --glass-filter: blur(14px) saturate(1.35);
+  --btn-bg: rgba(255, 255, 255, 0.03);
+  --line: rgba(102, 128, 172, 0.28);
+  --line-strong: rgba(130, 170, 230, 0.55);
+  --line-faint: rgba(90, 115, 160, 0.17);
+  --ink-strong: #e2eafa;
+  --ink-body: #c7d3e7;
+  --ink-mid: #a3b2ca;
+  --ink-label: #8fa3c0;
+  --ink-mute: #7d8ea8;
+  --ink-dim: #5e6f8a;
+  --ink-faint: #54637d;
+  --ink-faintest: #3d4a5e;
+  --ink-gold: #c2a86e;
+  --accent: #6ea8ff;
+  --accent-soft: rgba(110, 168, 255, 0.13);
+  --accent-line: rgba(110, 168, 255, 0.42);
+  --accent-active: rgba(70, 115, 190, 0.30);
+  --sel-ring: rgba(230, 237, 250, 0.6);
+  --title-ink: linear-gradient(118deg, #8ab6ff 0%, #b79dff 52%, #74d6c3 108%);
+  --title-depth: drop-shadow(0 2px 9px rgba(90, 140, 255, 0.35));
+  --frame-line: rgba(150, 190, 255, 0.30);
+  --frame-glow: rgba(0, 102, 204, 0.50);
+  --ripple-tint: rgba(150, 190, 255, 0.13);
+}
+
+[data-theme='paper'] {
+  --panel-bg: linear-gradient(174deg, rgba(255, 255, 255, 0.82) 0%, rgba(251, 249, 244, 0.66) 100%);
+  --panel-bg-solid: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 249, 243, 0.94));
+  --panel-shadow: 0 16px 36px rgba(72, 62, 44, 0.15), 0 3px 9px rgba(72, 62, 44, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(190, 182, 165, 0.35);
+  --glass-filter: blur(14px) saturate(1.25);
+  --btn-bg: rgba(255, 255, 255, 0.55);
+  --line: rgba(118, 112, 98, 0.30);
+  --line-strong: rgba(70, 90, 120, 0.52);
+  --line-faint: rgba(118, 112, 98, 0.16);
+  --ink-strong: #1c2836;
+  --ink-body: #2b3949;
+  --ink-mid: #3f5063;
+  --ink-label: #4d5f74;
+  --ink-mute: #5b6b7e;
+  --ink-dim: #74808f;
+  --ink-faint: #939aa6;
+  --ink-faintest: #b0b5bd;
+  --ink-gold: #8f6f1e;
+  --accent: #0066cc;
+  --accent-soft: rgba(0, 102, 204, 0.10);
+  --accent-line: rgba(0, 102, 204, 0.40);
+  --accent-active: rgba(0, 102, 204, 0.15);
+  --sel-ring: rgba(28, 48, 76, 0.55);
+  --title-ink: linear-gradient(118deg, #0a58ad 0%, #6a3fbd 55%, #0e7a6e 110%);
+  --title-depth: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.9)) drop-shadow(0 2px 7px rgba(30, 80, 160, 0.25));
+  --frame-line: rgba(255, 255, 255, 0.9);
+  --frame-glow: rgba(0, 102, 204, 0.30);
+  --ripple-tint: rgba(255, 255, 255, 0.55);
+}
+
+/*
+ * The unlinked shelf's occasional sheen (round 10: "an occasional ripple
+ * across it to draw a bit of attention"). A skewed light bar crosses in
+ * about 1.2s, then the surface rests for ~7.8s — attention is drawn by the
+ * MOTION STARTING, so the pause is what keeps it an accent instead of a
+ * distraction. The sweep lives in its own pointer-transparent div (see
+ * IsolatedShelf) rather than a ::after on the shelf, because a positioned
+ * pseudo-element would paint over the dots and steal their hit-testing.
+ */
+@keyframes rigShelfRipple {
+  0%   { transform: translateX(-140%) skewX(-14deg); }
+  13%  { transform: translateX(360%) skewX(-14deg); }
+  100% { transform: translateX(360%) skewX(-14deg); }
+}
+
+.rig-sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 46%;
+  background: linear-gradient(100deg, transparent 0%, var(--ripple-tint) 50%, transparent 100%);
+  transform: translateX(-140%) skewX(-14deg);
+  animation: rigShelfRipple 9s ease-in-out infinite;
+  pointer-events: none;
+}
+`
