@@ -1,0 +1,29 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 4 of Thomas's Africa gap-filling test, 2026-08-12. EAC hub wiring — Kenya and Tanzania were already linked to eac-hcpi-regulations; Uganda and Rwanda were not.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "ug-ubos-cpi",
+      "target_report_id": "eac-hcpi-regulations",
+      "relationship_type": "methodology_depends_on",
+      "basis": "eac-hcpi-regulations (already in the corpus, minted from ke-social-protection.json) describes a binding EAC instrument \"requiring Partner States to compile and submit a Harmonised CPI to the EAC Secretariat.\" Uganda is confirmed a founding EAC Partner State: the EAC's own overview page states the Treaty \"was signed on 30th November, 1999 and entered into force on 7th July, 2000 following its ratification by the original three (3) Partner States - Kenya, Uganda and Tanzania.\" Kenya and Tanzania already carry this same edge (ke-knbs-cpi, tz-nbs-cpi-dqa); Uganda's own CPI node (ug-ubos-cpi) was minted in a prior session without it.",
+      "evidence_url": "https://www.eac.int/overview-of-eac"
+    },
+    {
+      "source_report_id": "rw-nisr-cpi",
+      "target_report_id": "eac-hcpi-regulations",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same instrument. Rwanda is confirmed an EAC Partner State: the EAC's own overview page states \"The Republic of Rwanda and the Republic of Burundi acceded to the EAC Treaty on 18th June, 2007 and became full Members of the Community with effect from 1st July, 2007.\" Rwanda's own CPI node (rw-nisr-cpi) was minted without this edge.",
+      "evidence_url": "https://www.eac.int/overview-of-eac"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Burundi CPI (ISTEEBU) -> eac-hcpi-regulations",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Burundi is confirmed an EAC Partner State (acceded the same day as Rwanda, 1 July 2007) and its national statistics office, ISTEEBU (Institut de Statistiques et d'Etudes Economiques du Burundi), is confirmed to exist and to publish inflation data. No primary ISTEEBU CPI bulletin URL was located this round — isteebu.bi itself was not directly opened. Burundi, South Sudan, DR Congo and Somalia are the four remaining EAC members with no node at all in this branch; worth a dedicated round or Grok pass given the fragile-state research difficulty likely involved in at least the latter three."
+    }
+  ]
+}

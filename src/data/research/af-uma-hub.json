@@ -1,0 +1,34 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 6 of Thomas's Africa gap-filling test, 2026-08-12. Arab Maghreb Union (UMA) hub for the four already-covered North Africa countries; Mauritania flagged as a genuinely new fifth-member lead.",
+  "reports": [
+    {
+      "id": "uma-ipc-bulletin",
+      "title": "Indice des Prix à la Consommation dans les pays de l'Union du Maghreb Arabe (Bulletin mensuel)",
+      "publisher": "Direction des Affaires Economiques, Secrétariat Général de l'Union du Maghreb Arabe (UMA)",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "Arab Maghreb Union",
+      "description": "The UMA Secretariat-General's monthly regional CPI bulletin. The November 2017 edition names its five covered member states verbatim: \"Algérie, Libye, Mauritanie, Maroc, Tunisie.\" Its own stated data source (Page 4, Sources de données): \"Instituts Statistiques Nationaux des pays de l'Union du Maghreb Arabe\" [National Statistical Institutes of the UMA countries] — an AGENCY-style attribution naming the institutions rather than each country's specific titled release, so edges below rest on each covered country's own national CPI node existing and being one of those national institutes, not on the bulletin naming a specific title.",
+      "releases_per_year": 12,
+      "cadence_note": "Titled monthly (\"nashra shahriya\"/bulletin mensuel), but only 2017-dated editions (January through November) were located this round via search — no more recent edition found. Recorded honestly: this may mean the series lapsed, or simply that this round's search did not surface a later edition. Flagged, not assumed either way.",
+      "last_updated": "2017-11",
+      "url": "https://maghrebarabe.org/fr/wp-content/uploads/2019/03/Indice-des-Prix-%C3%A0-la-Consommation_UMA-Novembre-2017.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {"source_report_id": "uma-ipc-bulletin", "target_report_id": "dz-ons-ipc-monthly", "relationship_type": "uses_data_from", "basis": "uma-ipc-bulletin names \"Algérie\" verbatim among its five covered states and states its data source as \"Instituts Statistiques Nationaux des pays de l'Union du Maghreb Arabe\" — Algeria's ONS (Office National des Statistiques) is that national institute. Direction and relationship_type mirror the corrected cemac-inflation-note/sadc-hcpi-newsletter pattern established earlier this session: the regional bulletin depends on the national release, not the reverse.", "evidence_url": "https://maghrebarabe.org/fr/wp-content/uploads/2019/03/Indice-des-Prix-%C3%A0-la-Consommation_UMA-Novembre-2017.pdf"},
+    {"source_report_id": "uma-ipc-bulletin", "target_report_id": "ma-hcp-ipc", "relationship_type": "uses_data_from", "basis": "Same basis — \"Maroc\" named verbatim among covered states; Morocco's HCP (Haut-Commissariat au Plan) is the national statistical institute.", "evidence_url": "https://maghrebarabe.org/fr/wp-content/uploads/2019/03/Indice-des-Prix-%C3%A0-la-Consommation_UMA-Novembre-2017.pdf"},
+    {"source_report_id": "uma-ipc-bulletin", "target_report_id": "tn-ins-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — \"Tunisie\" named verbatim among covered states; Tunisia's INS (Institut National de la Statistique) is the national statistical institute.", "evidence_url": "https://maghrebarabe.org/fr/wp-content/uploads/2019/03/Indice-des-Prix-%C3%A0-la-Consommation_UMA-Novembre-2017.pdf"},
+    {"source_report_id": "uma-ipc-bulletin", "target_report_id": "ly-bsc-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — \"Libye\" named verbatim among covered states; Libya's Bureau of Statistics and Census is the national statistical institute.", "evidence_url": "https://maghrebarabe.org/fr/wp-content/uploads/2019/03/Indice-des-Prix-%C3%A0-la-Consommation_UMA-Novembre-2017.pdf"}
+  ],
+  "_dropped": [
+    {
+      "edge": "Mauritania CPI (ONS Mauritanie) -> (no node minted; new country lead)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Mauritania is confirmed the fifth UMA member state, named directly in uma-ipc-bulletin alongside Algeria, Libya, Morocco and Tunisia — but Mauritania has no node anywhere in the AF branch at all, at any level. Genuinely new country, not yet touched by any prior AF-branch session (G.1 through G.14 never named it). A natural next-round or Grok target: Mauritania's own ONS (Office National de la Statistique) CPI, plus whatever social-protection/pension law exists."
+    }
+  ]
+}

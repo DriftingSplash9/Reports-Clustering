@@ -1,0 +1,29 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 7 of Thomas's Africa gap-filling test, 2026-08-12. ECOWAS — an honest near-miss, not a hub win.",
+  "reports": [
+    {
+      "id": "ecowas-macroeconomic-convergence-report-2022",
+      "title": "ECOWAS Macroeconomic Convergence Report for 2022",
+      "publisher": "West African Monetary Agency (WAMA)",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "ECOWAS (Economic Community of West African States)",
+      "description": "WAMA's annual assessment of ECOWAS member states against macroeconomic convergence criteria, including \"Average Inflation Rate in ECOWAS Member States\" (Table 1.19, p.23). Individual country sections run pages 27-151, explicitly naming Nigeria and Ghana among fifteen member states (Benin, Burkina Faso, Cabo Verde, Côte d'Ivoire, The Gambia, Ghana, Guinea, Guinea Bissau, Liberia, Mali, Niger, Nigeria, Senegal, Sierra Leone, Togo). The Foreword states this \"marks the first year of assessment of Member States' compliance with the macroeconomic convergence criteria under the new Pact,\" confirming an annual cadence going forward. Deliberately minted isolated (no dependency edges to ng-cpi-pension-safety-net or gh's CPI node): the report's own Acknowledgements state its data source as \"data and other useful information provided by member central banks\" — an AGENCY ONLY attribution to central banks specifically, not to the national statistical offices (Nigeria's NBS, Ghana's GSS) whose own CPI releases are already minted in this corpus. Forcing an edge from a central-bank-sourced convergence report to a statistics-office CPI node would be exactly the kind of unsupported inference this branch's rules forbid — a real near-miss, honestly reported rather than stretched.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, per the Foreword's own \"first year of assessment... under the new Pact\" language.",
+      "last_updated": "2022",
+      "url": "https://amao-wama.org/wp-content/uploads/2023/12/ECOWAS-MACROECONOMIC-CONVERGENCE-REPORT-FOR-2022-1.pdf",
+      "domains": ["inflation", "national-accounts"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "ecowas-macroeconomic-convergence-report-2022 -> ng-nbs-cpi-rebasing (or Ghana's GSS CPI node)",
+      "source": "ecowas-macroeconomic-convergence-report-2022",
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked directly and reported as a genuine non-dependency, per this project's own §5a discipline: the report names Nigeria and Ghana as covered member states, and both already have CPI nodes in this corpus, but the report's own Acknowledgements name its data source as \"member central banks,\" not the national statistical offices that publish the CPI releases already in the graph. AGENCY ONLY at one remove from the actual node — a document naming an institution (a central bank) that is itself not the publisher of any node currently in the corpus. Worth reopening if a future session finds WAMA's own methodology annex naming NBS/GSS by title as an underlying CPI source rather than the central bank as an intermediary."
+    }
+  ]
+}

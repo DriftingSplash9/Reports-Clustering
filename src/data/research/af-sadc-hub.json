@@ -1,0 +1,38 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 5 of Thomas's Africa gap-filling test, 2026-08-12. SADC hub — the largest already-populated bloc in the AF branch (8 countries) had no regional layer at all.",
+  "reports": [
+    {
+      "id": "sadc-hcpi-newsletter",
+      "title": "SADC Harmonised Consumer Price Index (HCPI) Newsletter",
+      "publisher": "SADC Secretariat, Statistics Unit (Gaborone, Botswana)",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "Southern African Development Community",
+      "description": "A regional harmonised CPI compiled from national CPIs. The September 2012 issue (Stage I) names all its covered states verbatim: \"Botswana, Democratic Republic of Congo, Lesotho, Madagascar, Malawi, Mauritius, Mozambique, Namibia, Seychelles, South Africa, Swaziland, United Republic of Tanzania, Zambia and Zimbabwe\" — all eight of this corpus's Southern Africa countries (ZA, BW, NA, LS, SZ, ZM, MW, ZW) are named individually, by country. Methodology, verbatim: \"the HCPI development must generally be in compliance with the international standards relating to development of Consumer Price Indices (CPI),\" constructed as \"weighted averages of the national HCPIs, using as weights each country's total household consumption expenditure converted to a common currency using the 2005 purchasing power parities.\" Excludes Education and Health divisions at this Stage I development level.",
+      "releases_per_year": 12,
+      "cadence_note": "Titled a monthly newsletter, but the SADC document-listing page shows an irregular actual publication history (entries from 2012 through a September 2022 issue, not evenly spaced) — recorded honestly rather than assuming the titled cadence holds in practice.",
+      "last_updated": "2012-09",
+      "url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "za-statssa-cpi", "relationship_type": "uses_data_from", "basis": "sadc-hcpi-newsletter is a weighted average \"of the national HCPIs\" — verbatim, the regional index is built FROM each country's own national CPI, the same direction already used for the existing cemac-inflation-note -> country-CPI edges in this corpus. South Africa is named verbatim among the newsletter's covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "bw-statsbots-cpi", "relationship_type": "uses_data_from", "basis": "Same basis as the South Africa edge — Botswana named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "na-nsa-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — Namibia named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "ls-bos-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — Lesotho named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "sz-cso-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — \"Swaziland\" (Eswatini's name at time of publication) named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "zm-zamstats-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — Zambia named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "mw-nso-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — Malawi named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"},
+    {"source_report_id": "sadc-hcpi-newsletter", "target_report_id": "zw-zimstat-cpi", "relationship_type": "uses_data_from", "basis": "Same basis — Zimbabwe named verbatim among covered states.", "evidence_url": "https://www.sadc.int/sites/default/files/2021-12/Stage_1_HCPI_-_2012-09.pdf"}
+  ],
+  "_dropped": [
+    {
+      "edge": "SADC Protocol on Statistics (2021) -> (no target; candidate node, not minted)",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Confirmed real and binding via a secondary source only (Zambian Parliament's own analytical brief on the Protocol, https://www.parliament.gov.zm/sites/default/files/Analytical%20Brief%20on%20the%20SADC%20Protocol%20on%20Statistics.pdf): \"A Protocol is a legally binding document committing Member States to the objectives and specific procedures,\" with Article 14 said to require state parties to \"produce and disseminate monthly, quarterly, and annual macroeconomic statistics using common methodological standards,\" naming CPI and the ILO CPI Manual as the guiding standard, and listing \"Harmonised Consumer Price Index\" among expected output publications. TWO independent copies of the primary Protocol PDF were fetched this round (https://www.sadc.int/sites/default/files/2022-07/Protocol_on_Statistics_English_2021.pdf and a mirror on statsbots.org.bw) and both returned as scanned images with no machine-readable text — the same failure mode as an unreadable-source finding elsewhere in this corpus. Not minted this round because the Article 14 language above is a paraphrase from a secondary analytical brief, not a verbatim primary quote, and this project's own experience (AU/G.3.md) is that a proxy summary can fabricate a plausible-looking citation from true parts. Good Grok/OCR follow-up: the primary text needs a real read, not another fetch attempt."
+    }
+  ]
+}

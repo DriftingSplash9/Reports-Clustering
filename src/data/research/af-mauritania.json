@@ -1,0 +1,44 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 8 of Thomas's Africa gap-filling test, 2026-08-12. Mauritania — a genuinely new country, surfaced by round 6's UMA find.",
+  "reports": [
+    {
+      "id": "mr-ons-inpc",
+      "title": "Indice National des Prix à la Consommation (INPC/IHPC)",
+      "publisher": "Office National de la Statistique (ONS), Mauritanie",
+      "country": "MR",
+      "jurisdiction_level": "federal",
+      "region": "Mauritanie",
+      "description": "Mauritania's monthly CPI. ONS's own project page states the index was built with \"assistance technique d'AFRISTAT\" (technical assistance from AFRISTAT), drawing on \"méthodologie\" from UEMOA member states even though Mauritania is not itself a UEMOA member, classified under COICOP (\"Système de Comptabilité Nationale des Nations Unies\"). Sampling frame references the 2000 general census. Verbatim on cadence: \"publication et diffusion mensuelle des prix à la consommation.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Verbatim: \"publication et diffusion mensuelle des prix à la consommation\" (monthly publication and dissemination).",
+      "last_updated": null,
+      "url": "https://ons.mr/francais/Projets/ihpc/ihpc.htm",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mr-ons-inpc",
+      "target_report_id": "afristat-ihpc-guide-2014",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ONS's own IHPC project page states directly that the index was built with \"assistance technique d'AFRISTAT\" and UEMOA-derived methodology, even though Mauritania is not a UEMOA member — a first-hand national statement naming AFRISTAT's guide as the methodological basis, the same document already minted in the corpus from bf-cpi-social-protection.json.",
+      "evidence_url": "https://ons.mr/francais/Projets/ihpc/ihpc.htm"
+    },
+    {
+      "source_report_id": "uma-ipc-bulletin",
+      "target_report_id": "mr-ons-inpc",
+      "relationship_type": "uses_data_from",
+      "basis": "uma-ipc-bulletin (minted this session, af-uma-hub.json) names \"Mauritanie\" verbatim among its five covered UMA states. This edge supplies the missing Mauritania leg alongside the Algeria/Libya/Morocco/Tunisia edges added in that file.",
+      "evidence_url": "https://maghrebarabe.org/fr/wp-content/uploads/2019/03/Indice-des-Prix-%C3%A0-la-Consommation_UMA-Novembre-2017.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Mauritania CNSS pension -> (no CPI-indexation clause found)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "CLEISS's own summary of Mauritania's CNSS social security regime (https://www.cleiss.fr/docs/regimes/regime_mauritanie.html), searched directly, describes pension calculation formulas, eligibility conditions and payment schedules but contains no statement of periodic adjustment, revaluation or indexation of pensions once awarded. Consistent with the pattern already established across most of this branch. Mauritania's own CNSS statute was not independently opened this round — only the CLEISS secondary summary. Separately worth noting: ons.mr's homepage/data portal returned a robots/connection failure this round while the older static project page (ons.mr/francais/Projets/ihpc/ihpc.htm) worked — same site, two different behaviours by path, not a whole-domain block."
+    }
+  ]
+}

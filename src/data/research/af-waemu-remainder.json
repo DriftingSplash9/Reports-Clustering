@@ -1,0 +1,86 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 2 of Thomas's Africa gap-filling test, 2026-08-12. Bénin and Niger (WAEMU remainder); Guinea-Bissau left open.",
+  "reports": [
+    {
+      "id": "bj-insae-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Institut National de la Statistique et de l'Analyse Economique (INSAE), Bénin",
+      "country": "BJ",
+      "jurisdiction_level": "federal",
+      "region": "Bénin",
+      "description": "Bénin's monthly harmonized CPI, published by INSAE. Verbatim from the November 2016 bulletin: \"L'IHPC a pour population de référence l'ensemble des ménages africains de Cotonou et de ses agglomérations\" and \"Plus de 6000 relevés de prix sont effectués chaque mois par les enquêteurs de l'INSAE.\" Harmonized across the eight UEMOA member states (same regulatory basis as bf-insd-ihpc, ci-anstat-ihpc, ml-instat-ihpc, sn-ansd-ihpc, tg-inseed-ihpc).",
+      "releases_per_year": 12,
+      "cadence_note": "\"IHPC DU MOIS DE NOVEMBRE 2016\" — a monthly bulletin title, one of a numbered monthly series.",
+      "last_updated": null,
+      "url": "https://instad.bj/images/docs/insae-publications/mensuelles/archives/IHPC_2007_2017/IHPC_2016/11.IHPC_Novembre_2016.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ne-ins-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Institut National de la Statistique (INS), Niger",
+      "country": "NE",
+      "jurisdiction_level": "federal",
+      "region": "Niger",
+      "description": "Niger's monthly harmonized CPI, published by INS. The January 2026 bulletin states the index follows \"the principles and recommendations of the Consumer Price Index (CPI) Manual 2020 published by the IMF,\" using \"a common methodology among the eight (8) member states of the West African Economic and Monetary Union (UEMOA).\" Base 100 in 2023, adopted since January 2025 (replacing base 2014) — the same rebasing wave already documented for Mali and Côte d'Ivoire.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly bulletin; this session opened the January 2026 edition, part of a continuous monthly series (editions from Jul 2025 through Jun 2026 all found in one search pass).",
+      "last_updated": null,
+      "url": "https://www.stat-niger.org/wp-content/uploads/indices/indice_harmonise_prix_consommation/IHPCB2023_Janvier_2026_VF.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "bj-code-securite-sociale-1998",
+      "title": "Loi N° 98-019 portant Code de Sécurité Sociale",
+      "publisher": "Assemblée Nationale du Bénin",
+      "country": "BJ",
+      "jurisdiction_level": "federal",
+      "region": "Bénin",
+      "description": "Bénin's Social Security Code. Article 111 (verbatim): \"les montants des paiements périodiques en cours au titre des rentes ou des pensions ne peuvent être modifiés que si les possibilités financières de la branche intéressée le permettent. Cette modification est faite par décret pris en conseil des ministres sur propositions du ministre chargé de la sécurité sociale en raison des variations du niveau général des salaires résultant des variations du coût de la vie et en fonction de l'augmentation du salaire minimum interprofessionnel garanti.\" A discretionary, decree-based, financially-conditioned mechanism referencing \"variations du coût de la vie\" (cost-of-living variations) — but no specific index or report is named as the measure of that cost-of-living variation, so no dependency edge to bj-insae-ihpc is drawn. Left isolated per V0.12 convention: the finding is that the linkage is real but unnamed, not that it is absent.",
+      "releases_per_year": null,
+      "cadence_note": "One-off foundational instrument (a statute), not a recurring publication.",
+      "last_updated": null,
+      "url": "https://clr.africanchildforum.org/Legislation%20Per%20Country/benin/benin_socialsecurity_2003_fr.pdf",
+      "domains": ["benefits"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bj-insae-ihpc",
+      "target_report_id": "uemoa-ihpc-note-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same UEMOA Union-wide basis as the Côte d'Ivoire/Senegal edges added in af-continental-hub.json this session: Bénin is a founding WAEMU member state and INSAE's own bulletin states the IHPC is harmonized across all eight UEMOA states under the Union-wide regulation described in uemoa-ihpc-note-2023.",
+      "evidence_url": "https://www.uemoa.int/sites/default/files/bibliotheque/indice-harmonise-des-prix-la-consommation-ihpc-au-sein-de-luemoa-avril-2023.pdf"
+    },
+    {
+      "source_report_id": "ne-ins-ihpc",
+      "target_report_id": "uemoa-ihpc-note-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Niger's own January 2026 IHPC bulletin states directly that the index uses \"a common methodology among the eight (8) member states of the West African Economic and Monetary Union (UEMOA)\" — a first-hand national-side statement, stronger than the Côte d'Ivoire/Senegal edges (which rest on the UEMOA-side document alone).",
+      "evidence_url": "https://www.stat-niger.org/wp-content/uploads/indices/indice_harmonise_prix_consommation/IHPCB2023_Janvier_2026_VF.pdf"
+    },
+    {
+      "source_report_id": "ne-ins-ihpc",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Verbatim: Niger's IHPC bulletin states it follows \"the principles and recommendations of the Consumer Price Index (CPI) Manual 2020 published by the IMF.\" `cpi-manual` already exists in the corpus (used by the Canada/US galaxy) — reused rather than duplicated, per the branch's node-id discipline.",
+      "evidence_url": "https://www.stat-niger.org/wp-content/uploads/indices/indice_harmonise_prix_consommation/IHPCB2023_Janvier_2026_VF.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Guinea-Bissau CPI (INE) -> (no node minted)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "stat-guinebissau.com (INE's own site) is robots-disallowed / times out to non-browser fetch. IMF confirmed (press release, 8 July 2024, https://www.imf.org/en/news/articles/2024/07/08/pr24262-guinea-bissau-implements-imfs-enhanced-general-data-dissemination-system) that \"Guinea-Bissau has implemented a key recommendation of the IMF's Enhanced General Data Dissemination System (e-GDDS) to publish essential macroeconomic and financial data\" via a National Summary Data Page, but the press release itself does not name a specific CPI title, publisher detail, or cadence, and the DSBB country-category pages returned no extractable content this round. Guinea-Bissau is the one WAEMU member of this round's three targets not resolved — genuine gap, good Grok/browser lead (site needs real browser access, matching the pattern already logged for afristat.org)."
+    },
+    {
+      "edge": "Niger CNSS pension -> (no CPI-indexation clause found)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "CLEISS's own summary of Niger's CNSS social security regime (https://www.cleiss.fr/docs/regimes/regime_niger.html — secondary source; Niger's own CNSS statute was not independently opened this round), searched directly, describes pension calculation formulas and benefit amounts but contains no statement of periodic adjustment, revaluation or indexation of pensions once awarded. An honest negative finding, consistent with the pattern already established across most of the AF branch (Zambia, Lesotho, Eswatini, Malawi all found fixed-nominal or explicitly non-indexed benefits)."
+    }
+  ]
+}

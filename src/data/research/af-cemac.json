@@ -1,0 +1,128 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 3 of Thomas's Africa gap-filling test, 2026-08-12. CEMAC hub regulation (resolves three existing _dropped leads in cm/ga/td files) plus the three missing CEMAC countries.",
+  "reports": [
+    {
+      "id": "cemac-ihpc-regulation",
+      "title": "Règlement N° 03/21-CEMAC-UEAC-CM-36 portant modalités d'élaboration, de calcul et de publication de l'indice harmonisé des prix à la consommation",
+      "publisher": "CEMAC (Communauté Économique et Monétaire de l'Afrique Centrale)",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "CEMAC (Cameroon, Central African Republic, Congo, Gabon, Equatorial Guinea, Chad)",
+      "description": "The CEMAC-wide binding regulation establishing the harmonized CPI, dated 27 January 2021. The CEMAC Commission's own 2024 inflation note (page 5) describes it as covering \"modalités d'élaboration, de calcul et de publication de l'indice harmonisé des prix à la consommation\" [procedures for developing, calculating and publishing the harmonized consumer price index], with \"a methodological guide attached to this regulation.\" This closes three existing _dropped leads sitting unresolved in cm-cpi-social-protection.json, ga-cpi-social-protection.json and td-cpi-social-protection.json, all of which had already identified this exact regulation number by title but not fetched or minted it. A companion instrument, Regulation N°04/21-UEAC-115-CM-36, covers \"modalités d'élaboration, de calcul et de diffusion de l'inflation sous-jacente\" [underlying/core inflation] — not minted this round, flagged below. AFRISTAT's own CEMAC methodology document (APA04, 'Fondements Méthodologiques de l'Indice Harmonisé des Prix des Etats Membres de la CEMAC') independently confirms the six covered states by name: \"Cameroun, Centrafrique, Congo, Gabon; Guinée Equatoriale et Tchad,\" and identifies itself as published by AFRISTAT, though it does not itself state the regulation number — the regulation number comes from the CEMAC Commission's own note, not the AFRISTAT guide.",
+      "releases_per_year": null,
+      "cadence_note": "One-off foundational instrument (a supranational regulation), the same shape as eu-reg-2016-2304 and eac-hcpi-regulations already in the corpus.",
+      "last_updated": null,
+      "url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "cf-icasees-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Institut Centrafricain des Statistiques et des Etudes Economiques et Sociales (ICASEES)",
+      "country": "CF",
+      "jurisdiction_level": "federal",
+      "region": "Central African Republic",
+      "description": "The Central African Republic's monthly CPI, published by ICASEES, described on its own dissemination calendar as an \"Indice à 12 fonctions\" (COICOP-style 12-division index), with monthly releases typically around the 10th of the following month.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; ICASEES's own dissemination calendar lists releases through 2025.",
+      "last_updated": null,
+      "url": "https://icasees.org/index.php?q=statistiques&r=indicateurs",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "cg-ins-inhpc",
+      "title": "Indice National Harmonisé des Prix à la Consommation des Ménages (INHPC)",
+      "publisher": "Institut National de la Statistique (INS-Congo)",
+      "country": "CG",
+      "jurisdiction_level": "federal",
+      "region": "Congo (Brazzaville)",
+      "description": "Congo's monthly harmonized CPI. The August 2025 bulletin states: \"l'Indice national harmonisé des prix à la consommation des ménages (INHPC) s'établit à 117,8 points,\" reporting 0.1% monthly and 1.7% annual inflation.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly bulletin series (\"Bulletin INHPC\"), individually numbered by month back to at least January 2022.",
+      "last_updated": null,
+      "url": "https://ins-congo.cg/bulletin-inhpc-aout-2025/",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "gq-inege-anuario-2024",
+      "title": "Anuario Estadístico de Guinea Ecuatorial 2024",
+      "publisher": "Instituto Nacional de Estadística de Guinea Ecuatorial (INEGE)",
+      "country": "GQ",
+      "jurisdiction_level": "federal",
+      "region": "Equatorial Guinea",
+      "description": "INEGE's statistical yearbook, described in its own text as \"la séptima edición del Anuario Estadístico de Guinea Ecuatorial\" (the seventh edition), presenting data retrospectively through 2023, including an \"Índice de Precios de Consumo (IPC) nacional\" table with quarterly data and inflation rates by city. No CEMAC or AFRISTAT reference found in the excerpted content. News coverage (ahoraeg.com, guineaecuatorialpress.com, not independently opened as primary sources this round) references INEGE's own separate monthly IPC releases, suggesting a narrower dedicated CPI bulletin exists beyond this yearbook — not located this round, see deferred note below.",
+      "releases_per_year": 1,
+      "cadence_note": "\"séptima edición\" — annual, seventh edition confirmed.",
+      "last_updated": null,
+      "url": "https://inege.org/wp-content/uploads/2024/11/ANUARIO-ESTADISTICO-DE-GUINEA-ECUATORIAL-2024.pdf",
+      "domains": ["inflation", "national-accounts"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cm-ins-cpi",
+      "target_report_id": "cemac-ihpc-regulation",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Resolves the existing _dropped lead in cm-cpi-social-protection.json (\"cm-ins-cpi -> CEMAC Reglement N 03/21-CEMAC-UEAC-CM-36 du 27 janvier 2021\", reason: no-node-yet). The regulation is now minted; the CEMAC Commission's own 2024 inflation note names Cameroon as one of the six member states covered by it.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "ga-instat-ihpc",
+      "target_report_id": "cemac-ihpc-regulation",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Resolves the existing _dropped lead in ga-cpi-social-protection.json (\"ga-instat-ihpc -> CEMAC Règlement N° 03/21-CEMAC-UEAC-CM-36\", reason: no-document). Same basis as the Cameroon edge above — Gabon is named as a covered member state.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "td-inseed-cpi",
+      "target_report_id": "cemac-ihpc-regulation",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Resolves the existing _dropped lead in td-cpi-social-protection.json (\"td-inseed-cpi -> CEMAC Règlement N° 03/21-CEMAC-UEAC-CM-36\", reason: no-document). Same basis — Chad is named as a covered member state.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "cf-icasees-ihpc",
+      "target_report_id": "cemac-ihpc-regulation",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The CEMAC Commission's own 2024 inflation note names the Central African Republic as one of the six member states whose national CPI feeds the union-wide harmonized index under this regulation (Tableau 1, page 5, and country section from page 9). ICASEES's own bulletin content did not itself cite the regulation in the excerpt fetched this round, so this edge rests on the union-side document, the same evidentiary pattern already used for Côte d'Ivoire and Senegal against the WAEMU hub in af-continental-hub.json.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "cg-ins-inhpc",
+      "target_report_id": "cemac-ihpc-regulation",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same basis as the Central African Republic edge above — Congo is named as a covered member state in the CEMAC Commission's own 2024 inflation note.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "cemac-inflation-note",
+      "target_report_id": "cf-icasees-ihpc",
+      "relationship_type": "uses_data_from",
+      "basis": "Mirrors the existing pattern already in the corpus (cemac-inflation-note -> cm-ins-cpi, -> ga-instat-ihpc, -> td-inseed-cpi, all `relationship_type: uses_data_from` — verified against cm-ins-cpi's own edge, whose basis quotes p.29 \"CONTRIBUTION A LA PRODUCTION DE LA NOTE\" and p.5 \"Source : INS des Etats membres\"): the CEMAC Commission's own inflation note draws on each of the six member states' national CPI data, individually, by country section starting page 9. This entry supplies the missing Central African Republic leg now that cf-icasees-ihpc exists.",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    },
+    {
+      "source_report_id": "cemac-inflation-note",
+      "target_report_id": "cg-ins-inhpc",
+      "relationship_type": "uses_data_from",
+      "basis": "Same as the Central African Republic entry above — supplies the missing Congo leg of the existing cemac-inflation-note edge pattern (relationship_type: uses_data_from, matching cm-ins-cpi/ga-instat-ihpc/td-inseed-cpi).",
+      "evidence_url": "https://cemac.int/wp-content/uploads/2025/04/Note_inflation_CEMAC_2024.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gq-inege-anuario-2024 -> cemac-ihpc-regulation",
+      "source": "gq-inege-anuario-2024",
+      "target": null,
+      "reason": "deferred",
+      "why": "Equatorial Guinea is confirmed by AFRISTAT's own CEMAC methodology document as one of the six member states, and CEMAC's inflation note (Tableau 1, page 5) presumably draws on an Equatorial Guinea CPI source in its country sections from page 9 — but the node minted this round (gq-inege-anuario-2024) is INEGE's broad annual statistical yearbook, not confirmed to be the same document CEMAC's note actually cites. News coverage (ahoraeg.com, several 2025-2026 articles) references INEGE publishing separate monthly inflation figures, suggesting a narrower, dedicated IPC bulletin exists and would be the better-matched node — not located as a direct primary URL this round. Deferred rather than force-linked."
+    },
+    {
+      "edge": "Regulation N°04/21-UEAC-115-CM-36 (CEMAC underlying/core inflation) -> (no node minted)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Named directly alongside cemac-ihpc-regulation in the same CEMAC Commission source (page 5): \"modalités d'élaboration, de calcul et de diffusion de l'inflation sous-jacente\" [procedures for developing, calculating and disseminating underlying inflation]. A real, distinct companion regulation, not opened or independently verified this round — a cheap follow-up for whoever picks this branch up next."
+    }
+  ]
+}

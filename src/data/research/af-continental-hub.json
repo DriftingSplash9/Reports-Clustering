@@ -1,0 +1,65 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 1 of Thomas's Africa gap-filling test, 2026-08-12. Continental/regional coordination layer.",
+  "reports": [
+    {
+      "id": "au-african-statistical-yearbook",
+      "title": "African Statistical Yearbook",
+      "publisher": "African Development Bank (AfDB), African Union Commission (AUC) and UN Economic Commission for Africa (UNECA), jointly",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Africa (continental)",
+      "description": "Continental compendium of economic and social indicators, jointly produced by the three named institutions. The 2023 edition (14th edition) states it \"draws primarily on data from National Statistical Offices (NSOs), complemented by international sources where necessary. All country profiles were validated in close coordination with member states.\" No specific titled national report is named as an input anywhere found this round — AGENCY ONLY (National Statistical Offices, generically) — so no dependency edges are drawn to individual country CPI/national-accounts nodes already in the corpus. Recorded as an isolated node per V0.12 convention: a real, continental, top-of-hierarchy publication whose disclosure stops one level short of naming its own sources by title.",
+      "releases_per_year": 1,
+      "cadence_note": "\"the fourteenth edition\" as of the 2023 edition — implies roughly annual, though the exact interval between editions was not independently verified this round.",
+      "last_updated": null,
+      "url": "https://statafric.au.int/en/documents/2025-08-06/african-statistical-yearbook-2023",
+      "domains": ["national-accounts", "population"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ci-anstat-ihpc",
+      "target_report_id": "uemoa-ihpc-note-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "uemoa-ihpc-note-2023 (the UEMOA Commission's own descriptive note on the Union-wide Harmonised CPI, already in the corpus, minted by a prior AF-branch session from ml-cpi-social-protection.json) explicitly lists its own region/coverage as \"WAEMU (8 member states, incl. Mali, Côte d'Ivoire, Senegal)\" and describes régulation N°03/2017/CM/UEMOA as the union-wide instrument governing the base-2014 IHPC generation across all member states. The edge from ml-instat-ihpc (Mali) to this same node already exists (relationship_type: cites) — this entry supplies the missing, equally-evidenced edge for Côte d'Ivoire, whose own IHPC node (ci-anstat-ihpc) was minted without it.",
+      "evidence_url": "https://www.uemoa.int/sites/default/files/bibliotheque/indice-harmonise-des-prix-la-consommation-ihpc-au-sein-de-luemoa-avril-2023.pdf"
+    },
+    {
+      "source_report_id": "sn-ansd-ihpc",
+      "target_report_id": "uemoa-ihpc-note-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same basis as the Côte d'Ivoire edge above: uemoa-ihpc-note-2023 is the UEMOA Commission's own Union-wide descriptive note, and Senegal is a founding UEMOA member state under the same régulation N°03/2017/CM/UEMOA. Senegal's own IHPC node (sn-ansd-ihpc) was minted in a prior session (per af-egypt-draft.md/coverage notes) without this edge.",
+      "evidence_url": "https://www.uemoa.int/sites/default/files/bibliotheque/indice-harmonise-des-prix-la-consommation-ihpc-au-sein-de-luemoa-avril-2023.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "African Charter on Statistics (AU, 2009) -> (no target; is itself a candidate node)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Text confirmed real and binding in general terms: Article 4 requires member states to \"institute appropriate measures, especially legislative, regulatory and administrative to ensure that their laws and regulations are in conformity with this Charter,\" Article 5 requires states to \"ensure the implementation of this Charter in their respective countries.\" But per this project's node rule (Research.1.md §4 point 1), a document becomes a node only when ANOTHER document names it as an input to itself — no AF-branch country's own statistics act or CPI methodology page has yet been checked for a citation of this Charter by name. Genuine lead for a country-level pass, not a continental one. https://au.int/sites/default/files/treaties/36412-treaty-african_charter_on_satistics_eng.pdf"
+    },
+    {
+      "edge": "AFRISTAT (institution) -> (no target; not a titled publication)",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Confirmed again this round: AFRISTAT is named directly, repeatedly, by member countries' own IMF DQAF/SDDS metadata as CPI coordinator (already recorded in bf-cpi-social-protection.json and sn-cpi-social-protection.json _dropped entries from a prior session). AFRISTAT's own site (afristat.org) is robots-disallowed to non-browser fetch, so its founding treaty text (name, exact date, member-state list beyond the 18-states figure already sourced from a UNECA document) could not be independently verified this round. AFRISTAT itself remains an institution, not a publication, consistent with prior sessions' finding — but its founding convention/traité, if it has one with a title and date, would itself be a mintable one-off foundational instrument. Good Grok follow-up target (site needs a real browser)."
+    },
+    {
+      "edge": "SHaSA / SHaSA 2 (AU Strategy for the Harmonization of Statistics in Africa, 2017-2026) -> (no target)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Confirmed real and current (expires this year, 2026 — a successor SHaSA 3 is presumably forming, per africa-coordination.md). Fetched and searched the full strategy document for a named recurring statistical product or a member-state reporting obligation citing a specific titled report: none found. The closest passage is generic — \"The reporting mechanism specifies the different reports that need to be prepared as well as their frequency\" — without naming any. Not a node under this project's rules; it is a strategy/planning instrument, not itself a report and not (yet) named by another document as an input. https://au.int/sites/default/files/documents/34580-doc-34577-doc-shasa_ii_strategy_eng_full_web.pdf"
+    },
+    {
+      "edge": "1997 UEMOA founding règlement instituting the IHPC -> (no target; strong lead, not minted this round)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "NEW FIND, not previously in the corpus. AFRISTAT's own \"Guide de référence de l'indice harmonisé des prix à la consommation\" (APA01), page 9 preface, quotes verbatim: \"le Conseil des Ministres de l'UEMOA a adopté, au cours de sa séance du 16 décembre 1997 à Ouagadougou, le règlement instituant, pour compter du 1er janvier 1998, l'IHPC comme mesure officielle.\" This is an earlier, founding instrument than the two already in the corpus (régulation N°03/2017/CM/UEMOA for base-2014, referenced in uemoa-ihpc-note-2023; and a 2024 base-2023 regulation referenced as uemoa-reg-2024-base2023 in tg-cpi-social-protection.json) — a three-generation lineage (1997 founding, 2017 base-2014, 2024 base-2023), the same \"recast\" shape already accepted for the EU's Financial Regulation. Deferred rather than minted this round because the WebFetch extraction could not surface a specific règlement number for the 1997 instrument (only the date and council session), and the guide's own covered countries at founding (seven: Benin, Burkina Faso, Côte d'Ivoire, Mali, Niger, Senegal, Togo) differ slightly from the current eight (adds Guinea-Bissau, not yet in this corpus at all). Worth a dedicated pass or Grok follow-up to pin the exact instrument number and confirm founding membership. https://www.afristat.org/wp-content/uploads/2022/02/APA01_guide_ihpc.pdf"
+    }
+  ]
+}
