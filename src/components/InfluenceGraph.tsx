@@ -14,6 +14,7 @@ import {
 } from './nodeVisuals'
 import { edgeKey, type Focus } from '../lib/selection'
 import type { VisibleSet } from '../lib/filter'
+import { countryAffinityForce } from '../lib/geoAffinity'
 import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
@@ -294,6 +295,15 @@ export default function InfluenceGraph({
   const visibleRef = useRef<VisibleSet | null>(null)
   visibleRef.current = visible
 
+  /**
+   * Same closure problem again, but for a force rather than an accessor —
+   * `countryAffinityForce` reads this every tick so the slider can retune
+   * the pull live, without the 400-tick re-warmup `spread` pays on every
+   * change. See `lib/geoAffinity.ts`.
+   */
+  const geoAffinityStrength = useRef(0)
+  geoAffinityStrength.current = view.geoAffinity
+
   const litLink = (l: LinkDatum) => !focusRef.current || focusRef.current.edges.has(l.key)
 
   const shownNode = (id: string) => !visibleRef.current || visibleRef.current.nodes.has(id)
@@ -519,7 +529,16 @@ export default function InfluenceGraph({
     // JurisdictionLevel in types.ts. Where a node ends up is decided entirely
     // by what it depends on and what depends on it.
 
+    // Geo-affinity — off at strength 0 (the default), and cheap to check for
+    // that every tick even when off. See `lib/geoAffinity.ts` for the model
+    // and why this is layered alongside the forces above rather than
+    // replacing any of them: it never touches link distance, so a
+    // documented edge's rest length is exactly what it was regardless of
+    // this slider.
+    fg.d3Force('geoAffinity', countryAffinityForce(geoAffinityStrength) as unknown as never)
+
     return fg
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [graph, spreadApplied])
 
   useEffect(() => {
@@ -752,6 +771,23 @@ export default function InfluenceGraph({
       material.visible = view.showEdges
     }
   }, [view.showEdges, forceGraph])
+
+  /**
+   * Reheat when geo-affinity changes.
+   *
+   * `geoAffinityStrength` (above) is what the force itself reads, so this
+   * effect changes nothing about the force's behaviour — it exists because
+   * three-forcegraph's alpha has already decayed to ~0 by the time anyone
+   * touches this slider post-fit, and every d3 force is scaled by alpha.
+   * Without this, turning the slider on would silently do nothing until
+   * the next full rebuild. `d3ReheatSimulation` just resets alpha and lets
+   * `tickFrame` (already running every frame) carry the layout to its new
+   * rest position smoothly — not the synchronous 400-tick warmup `runFit`
+   * pays once at load, so this stays cheap on every drag.
+   */
+  useEffect(() => {
+    forceGraph.d3ReheatSimulation()
+  }, [view.geoAffinity, forceGraph])
 
 
   /**

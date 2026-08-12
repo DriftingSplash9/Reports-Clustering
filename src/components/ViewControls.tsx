@@ -19,7 +19,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
 ]
 
 const SLIDERS: {
-  key: 'fog' | 'glow' | 'spread'
+  key: 'fog' | 'glow' | 'spread' | 'geoAffinity'
   label: string
   hint: string
   /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 50%–250%. */
@@ -42,6 +42,11 @@ const SLIDERS: {
     hint: 'How much room the layout gives clusters, as a multiplier on the baseline. Rebuilds the layout when released, so it costs a beat; position still encodes nothing but the edges',
     min: 0.5,
     max: 2.5,
+  },
+  {
+    key: 'geoAffinity',
+    label: 'Geo-affinity',
+    hint: 'Pulls a country toward the ones it shares a trade/political bloc with, and away from the short list it is in an active dispute with. Off by default — see lib/geoAffinity.ts for the model',
   },
 ]
 

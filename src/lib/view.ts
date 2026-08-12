@@ -64,6 +64,18 @@ export interface ViewSettings {
    * before the camera refits.
    */
   spread: number
+  /**
+   * Bilateral geo-affinity, 0 to 1. Off by default.
+   *
+   * A soft, ablatable force nudging a country's nodes toward countries it
+   * shares a trade/political bloc with and away from the short, explicit
+   * list of countries it is in a real dispute with — see
+   * `lib/geoAffinity.ts` for the model and why it replaces the
+   * "continental repulsion" the original plan proposed. Read live by the
+   * force each tick, so unlike `spread` this never triggers a re-warmup —
+   * moving the slider re-tunes the pull without re-laying out the graph.
+   */
+  geoAffinity: number
 }
 
 /**
@@ -96,6 +108,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   focusFeedsInto: true,
   zoom: 1,
   spread: 1,
+  geoAffinity: 0,
 }
 
 /** Scene background. Fog resolves to this, so the two must agree. */
