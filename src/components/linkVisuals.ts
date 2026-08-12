@@ -73,6 +73,13 @@ export interface GradientLinkMaterial extends THREE.ShaderMaterial {
     from: THREE.Color
     /** Colour at the downstream end. */
     to: THREE.Color
+    /**
+     * The opacity this line returns to when lit — LINK_OPACITY for an
+     * ordinary edge, higher for a trunk carrying many stacked edges. Same
+     * role litOpacity plays on NodeMaterial: focus restores to this, not to
+     * a global constant, or every trace would flatten the trunks.
+     */
+    litOpacity: number
   }
 }
 
@@ -88,6 +95,7 @@ export function gradientLinkMaterial(
   from: string,
   to: string,
   dashed = false,
+  litOpacity = LINK_OPACITY,
 ): GradientLinkMaterial {
   const fromColour = new THREE.Color(from)
   const toColour = new THREE.Color(to)
@@ -96,7 +104,7 @@ export function gradientLinkMaterial(
     uniforms: {
       uFrom: { value: fromColour.clone() },
       uTo: { value: toColour.clone() },
-      uOpacity: { value: LINK_OPACITY },
+      uOpacity: { value: litOpacity },
       uDashed: { value: dashed ? 1 : 0 },
       // Pushed far enough out to be inert until the fog is switched on.
       uFogNear: { value: 1e9 },
@@ -111,7 +119,7 @@ export function gradientLinkMaterial(
     depthWrite: false,
   }) as GradientLinkMaterial
 
-  material.userData = { from: fromColour, to: toColour }
+  material.userData = { from: fromColour, to: toColour, litOpacity }
   return material
 }
 
@@ -119,10 +127,10 @@ const dimColour = new THREE.Color(DIM_LINK_COLOUR)
 
 /** Fade a link out of focus, or restore it, without rebuilding anything. */
 export function setLinkFocus(material: GradientLinkMaterial, lit: boolean) {
-  const { from, to } = material.userData
+  const { from, to, litOpacity } = material.userData
   material.uniforms.uFrom.value.copy(lit ? from : dimColour)
   material.uniforms.uTo.value.copy(lit ? to : dimColour)
-  material.uniforms.uOpacity.value = lit ? LINK_OPACITY : DIM_LINK_OPACITY
+  material.uniforms.uOpacity.value = lit ? litOpacity : DIM_LINK_OPACITY
 }
 
 /**

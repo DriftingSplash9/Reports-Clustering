@@ -1635,8 +1635,8 @@ function LegendRow({
   return (
     <div
       onClick={onClick}
-      // The panel as a whole is pointer-transparent so it never eats an orbit
-      // drag. Only the rows that do something take the pointer back.
+      // The panel scrolls as a whole now (see `panel`); rows keep their own
+      // pointerEvents for the sake of anything still rendered outside it.
       style={{ ...row, alignItems: 'center', cursor: 'pointer', pointerEvents: 'auto' }}
     >
       <span
@@ -1685,7 +1685,16 @@ const panel: React.CSSProperties = {
   border: '1px solid rgba(90, 115, 160, 0.22)',
   borderRadius: 10,
   backdropFilter: 'blur(8px)',
-  pointerEvents: 'none',
+  // 'auto' + a viewport cap + a scrollbar, replacing 'none' + unbounded height.
+  // With several groups expanded the legend ran past the bottom of the screen
+  // and everything below the fold was unreachable — Thomas, 2026-08-12: "the
+  // left sidebar is a pissoff that I cannot scroll and stuff gets trapped
+  // where I can't get to." The old 'none' existed so the panel never ate an
+  // orbit drag; the price was a panel that could strand its own controls,
+  // which is worse. Orbiting from the far-left strip is the rarer gesture.
+  pointerEvents: 'auto',
+  maxHeight: 'calc(100vh - 40px)',
+  overflowY: 'auto',
 }
 
 const selectionBlock: React.CSSProperties = {

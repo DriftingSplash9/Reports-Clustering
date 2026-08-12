@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 import { TIER_DESCRIPTION, TIER_LABEL } from '../lib/hierarchy'
 
 /**
@@ -7,93 +7,16 @@ import { TIER_DESCRIPTION, TIER_LABEL } from '../lib/hierarchy'
  * Thomas, 2026-08-12: *"I want a popup if you can. one that pops up on load to
  * explain the double clicking. It should be elegant and spacey."*
  *
- * It now explains the **tier buttons** rather than the double-click, because
- * the buttons replaced the gesture as the way you move between levels later the
- * same day. The card survived that change rather than being deleted with the
- * gesture, and it is worth saying why: the buttons are discoverable in a way
- * the double-click never was, but they still do not explain *themselves*.
- * Nothing about a row reading "Global / Nations / States / Everything" tells
- * you that the graph opens showing only the first of them, that the orbs are
- * where the rest went, or that the levels are cumulative.
- *
- * It also carries the *shape* legend, which has no other home. The tier ladder
- * and the shape ladder are the same ladder, so the glyph row is simultaneously
- * "here is what you are about to walk down" and "here is what each rung looks
- * like once you get there". Split across two surfaces, one of them would go
- * unread.
- *
- * The glyphs are hand-drawn SVG silhouettes of the actual 3D geometry in
- * `TIER_GEOMETRY`, not screenshots or icons — a circle for the sphere, a
- * heptagon for the icosahedron, a square for the cube, and so on. They have to
- * be kept in step with that table by hand. That is a real maintenance cost and
- * it is accepted: the alternative is rendering six WebGL contexts inside a
- * modal to draw six shapes that are, at this size, six flat outlines anyway.
+ * It explains the **tier buttons** (which replaced the double-click gesture
+ * the same day it was born) and, since round 5, the **family-ink system**:
+ * every node is a sphere, the ring and the lines wear the family's ink, and
+ * the fill runs dark→light down the government ladder. The shape legend that
+ * used to live here went down with the tier shapes — the fresnel rims that
+ * carry family identity only ring cleanly on smooth spheres, so the shapes
+ * retired and the glyph row retired with them.
  */
 
-const STORAGE_KEY = 'rig.onboarding.dismissed.v2'
-
-/**
- * Silhouettes matching `TIER_GEOMETRY`, one per jurisdiction level.
- *
- * Labelled by *level*, not by tier, and deliberately not driven off
- * `TIER_LABEL`: there are six shapes and only four tiers, because tier 1 alone
- * contains three levels (international, supranational and commercial). Wiring
- * these captions to the tier names would mislabel half the row.
- */
-const GLYPHS: { label: string; hint: string; draw: ReactNode }[] = [
-  { label: 'International', hint: 'IMF, UN, WTO', draw: <circle cx="16" cy="16" r="10" /> },
-  {
-    label: 'Supranational',
-    hint: 'EU, blocs',
-    draw: <polygon points="16,6 24,10 26,19 20,26 12,26 6,19 8,10" />,
-  },
-  { label: 'National', hint: 'countries', draw: <rect x="7" y="7" width="18" height="18" rx="1.5" /> },
-  { label: 'State', hint: 'and provinces', draw: <polygon points="16,4 27,16 16,28 5,16" /> },
-  { label: 'Municipal', hint: 'cities, counties', draw: <polygon points="16,5 28,26 4,26" /> },
-  { label: 'Commercial', hint: 'and other', draw: <rect x="10" y="5" width="12" height="22" rx="6" /> },
-]
-
-function Glyph({ label, hint, draw }: { label: string; hint: string; draw: ReactNode }) {
-  return (
-    <div style={{ textAlign: 'center', minWidth: 0 }}>
-      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden>
-        <g fill="rgba(120, 165, 235, 0.16)" stroke="#7fa6dd" strokeWidth="1.4">
-          {draw}
-        </g>
-      </svg>
-      <div
-        style={{
-          // Uppercase + letter-spacing at 9.5px made "INTERNATIONAL" and
-          // "SUPRANATIONAL" wider than their share of the row, and because each
-          // is a single unbreakable word it did not wrap — it spilled sideways
-          // and collided with its neighbours. Thomas: "the lettering is
-          // overlapping." Sentence case drops the tracking and roughly a fifth
-          // of the width, and `overflowWrap` guarantees the labels break rather
-          // than overlap whatever the card ends up being sized to.
-          fontSize: 9.5,
-          letterSpacing: '0.01em',
-          color: '#8fa4c4',
-          marginTop: 4,
-          lineHeight: 1.25,
-          overflowWrap: 'anywhere',
-        }}
-      >
-        {label}
-      </div>
-      <div
-        style={{
-          fontSize: 8.5,
-          color: '#54637d',
-          lineHeight: 1.3,
-          marginTop: 1,
-          overflowWrap: 'anywhere',
-        }}
-      >
-        {hint}
-      </div>
-    </div>
-  )
-}
+const STORAGE_KEY = 'rig.onboarding.dismissed.v3'
 
 export default function Onboarding() {
   // Read once, lazily, rather than in an effect: an effect would paint the card
@@ -269,27 +192,16 @@ export default function Onboarding() {
             marginBottom: 10,
           }}
         >
-          Shape tells you the level · colour tells you the region
+          One ink per region · size = how much rests on it
         </div>
 
-        {/*
-          A six-column grid, not a flex row. `flex: 1 1 0` sizes each column
-          from its *content*, so the two long labels claimed more than a sixth
-          each and pushed the rest into overlapping. Equal fixed fractions give
-          every glyph exactly the same width no matter how long its caption is.
-        */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(6, minmax(0, 1fr))',
-            gap: 8,
-            marginBottom: 22,
-          }}
-        >
-          {GLYPHS.map((g) => (
-            <Glyph key={g.label} {...g} />
-          ))}
-        </div>
+        <p style={{ margin: '0 0 22px', color: '#9fb2ce', fontSize: 12, lineHeight: 1.7 }}>
+          Every node wears its region&rsquo;s ring — Canada pink, the US red on
+          blue, the EU lime, Africa lavender — and the lines between reports are
+          drawn in the same inks, so a chain that crosses a border changes
+          colour mid-line. Fills run darker at the national level and lighter
+          toward the local one. Hover any node for the full story.
+        </p>
 
         <div
           style={{

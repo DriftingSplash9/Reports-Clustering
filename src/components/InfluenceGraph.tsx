@@ -20,6 +20,7 @@ import { countryAffinityForce } from '../lib/geoAffinity'
 import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
+  LINK_OPACITY,
   SCENE_BACKGROUND,
   ZOOM_MAX,
   type ViewSettings,
@@ -53,10 +54,28 @@ interface LinkDatum {
   weight: number
   /** Releases per year of the upstream report. Drives pulse rate. */
   upstreamCadence: number
-  /** Colour of the report being depended upon — where the line and pulse start. */
+  /**
+   * FAMILY INK at the upstream end — the rim colour, not the fill (round 5,
+   * Thomas: "line color should equal the rim color"). Within a family the
+   * gradient collapses to one clean ink; across families it becomes a
+   * two-tone rim→rim blend, which makes the cross-border edges — the whole
+   * point of the graph — the loudest lines on screen with no tuning at all.
+   * Pulses ride in this same ink.
+   */
   colour: string
-  /** Colour of the dependent report — where the line ends. */
+  /** Family ink at the downstream end. */
   endColour: string
+  /**
+   * How many real data edges this one drawn line stands for — 1 for an
+   * ordinary edge, up to 57 (EU orb → ESA 2010 at tier 1) where the disclosed
+   * view collapses a family's member edges onto one orb pair. Width and
+   * opacity scale with log2 of this ("we may need a logarithmic equation to
+   * quell the effect" — Thomas, and he was right: linear would make the EU
+   * trunk a glowing pipe). Merging parallels into one datum also deletes up
+   * to 56 overlapping draw calls per pair, which is why tier 1 gets cheaper
+   * as well as cleaner.
+   */
+  count: number
   /**
    * Extra rest length for links touching high-degree nodes, precomputed at
    * build time (the d3 distance accessor sees mutated link objects, so
@@ -633,23 +652,48 @@ export default function InfluenceGraph({
       degree.set(e.target_report_id, (degree.get(e.target_report_id) ?? 0) + 1)
     }
 
-    const links: LinkDatum[] = graph.edges.map((e) => {
+    // Parallel edges between the same pair — overwhelmingly the disclosed
+    // view's orb collapses (57 member edges share the EU-orb → esa-2010 pair
+    // at tier 1) — merge into ONE datum carrying a count, instead of N
+    // identical lines drawn on top of each other. The trunk treatment below
+    // turns that count into width and brightness; the focus set is unaffected
+    // because parallels always shared one edgeKey anyway.
+    const linkMap = new Map<string, LinkDatum>()
+    for (const e of graph.edges) {
+      const key = edgeKey(e.source_report_id, e.target_report_id)
+      const weight = e.strength ?? RELATIONSHIP_WEIGHT[e.relationship_type]
       const upstream = graph.byId.get(e.target_report_id)
+      const existing = linkMap.get(key)
+      if (existing) {
+        existing.count += 1
+        // A trunk inherits its strongest member's weight and its busiest
+        // member's cadence — the line stands for all of them, and "how strong"
+        // / "how alive" are max questions, not averages.
+        existing.weight = Math.max(existing.weight, weight)
+        existing.upstreamCadence = Math.max(
+          existing.upstreamCadence,
+          upstream?.releases_per_year ?? 1,
+        )
+        continue
+      }
       const downstream = graph.byId.get(e.source_report_id)
-      return {
+      linkMap.set(key, {
         source: e.target_report_id,
         target: e.source_report_id,
-        weight: e.strength ?? RELATIONSHIP_WEIGHT[e.relationship_type],
+        weight,
         upstreamCadence: upstream?.releases_per_year ?? 1,
-        colour: upstream ? colourForReport(upstream) : '#7f9ad0',
-        endColour: downstream ? colourForReport(downstream) : '#7f9ad0',
+        // Family ink, not fill — see the note on LinkDatum.colour.
+        colour: upstream ? rimColourFor(upstream.country) : '#7f9ad0',
+        endColour: downstream ? rimColourFor(downstream.country) : '#7f9ad0',
+        count: 1,
         hubRoom:
           3.5 *
           (Math.sqrt(degree.get(e.source_report_id) ?? 1) +
             Math.sqrt(degree.get(e.target_report_id) ?? 1)),
-        key: edgeKey(e.source_report_id, e.target_report_id),
-      }
-    })
+        key,
+      })
+    }
+    const links: LinkDatum[] = [...linkMap.values()]
 
     // One material per link, held so focus changes are a uniform write rather
     // than a rebuild, and so the library's repeated `obj.material = ...` on
@@ -659,8 +703,18 @@ export default function InfluenceGraph({
       // The third (dashed) argument retired with the implied-edge layer,
       // 2026-08-12. The shader machinery behind it survives in linkVisuals for
       // the relations rendering to reuse as a *dotted* style — a different
-      // pattern for a different claim.
-      linkMaterials.current.set(l.key, gradientLinkMaterial(l.colour, l.endColour))
+      // pattern for a different claim. The fourth is the trunk brightness:
+      // log-scaled with the stacked count so 57 edges read as unmistakably
+      // heavier, not 57× louder.
+      linkMaterials.current.set(
+        l.key,
+        gradientLinkMaterial(
+          l.colour,
+          l.endColour,
+          false,
+          Math.min(0.5, LINK_OPACITY * (1 + 0.35 * Math.log2(l.count))),
+        ),
+      )
     }
 
     // Geometry and material for a link's pulses. three-forcegraph reads only
@@ -722,14 +776,14 @@ export default function InfluenceGraph({
         // that ignores the focus for a frame or two reads as a flicker.
         const lit = !focusRef.current || focusRef.current.nodes.has(n.id)
 
-        // A one-off instrument is drawn hollow — same sphere, emptied fill, and
-        // a border in its own scope colour rather than the country rim every
-        // other node carries. See `isStandingInstrument`.
-        //
-        // The border colour is `colour`, not `rimColourFor(n.country)`, and
-        // that is deliberate: on a hollow node the rim is the only colour
-        // there is, so it has to be the one the legend explains. A hollow
-        // node's ring is exactly the colour a solid node's fill would be.
+        // A one-off instrument is drawn hollow — same sphere, emptied fill.
+        // Its ring is the FAMILY ink like every other node's, since round-5:
+        // the ink system's whole premise is one colour per family across
+        // rims, edges and pulses, and a hollow node wearing its fill colour
+        // as a ring would be the one place on screen where a ring means
+        // something different. (Pre-ink, the ring deliberately wore the scope
+        // colour "because that is what the legend explains" — the legend
+        // explains the inks now.)
         //
         // An orb is checked first and excludes `hollow` outright. Every orb
         // is built with `releases_per_year` absent by construction (it
@@ -746,7 +800,7 @@ export default function InfluenceGraph({
           nodeGeometry(n.jurisdiction_level, radius, orb),
           nodeMaterial({
             colour,
-            rimColour: hollow ? colour : rimColourFor(n.country),
+            rimColour: rimColourFor(n.country),
             radius,
             emissive,
             lit,
@@ -775,7 +829,14 @@ export default function InfluenceGraph({
       // linkColor and linkOpacity no longer apply to the lines themselves.
       .linkMaterial((l: object) => linkMaterials.current.get((l as LinkDatum).key) ?? null)
       // Widened 2026-08-10 (Thomas) — roughly 1.7x the old 0.3-1.0 range.
-      .linkWidth((l: object) => 0.5 + (l as LinkDatum).weight * 1.2)
+      // Trunk term added round 5: each doubling of stacked edges adds ~45% of
+      // the base width, so the EU→ESA 57-trunk lands near 3.6× an ordinary
+      // line — a trunk among threads, not a pipe among threads.
+      .linkWidth(
+        (l: object) =>
+          (0.5 + (l as LinkDatum).weight * 1.2) *
+          (1 + 0.45 * Math.log2((l as LinkDatum).count)),
+      )
       // No arrowheads. They were drawn at 94% along a link, and links run
       // centre to centre, so on a typical 40-unit link the head sat about 2.4
       // units from the target's centre — inside a sphere whose radius is

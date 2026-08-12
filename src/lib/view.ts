@@ -161,7 +161,11 @@ export const DIM_LINK_COLOUR = '#1b2437'
  * the cone into a diagram of pipes with beads on it. The contrast between these
  * two numbers is what marks the cone, not the absolute brightness of either.
  */
-export const LINK_OPACITY = 0.22
+// Dropped 0.22 → 0.17 with the family-ink edges (round 5): rim colours are
+// brighter than the fills the lines used to blend, so the same opacity read
+// louder. Trunks (stacked parallel edges) get their own per-material lift on
+// top of this — see litOpacity on GradientLinkMaterial.
+export const LINK_OPACITY = 0.17
 export const DIM_LINK_OPACITY = 0.07
 
 export const ZOOM_MIN = 0.25

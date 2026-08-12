@@ -467,16 +467,18 @@ export function scopeOf(report: {
  */
 export const SCOPE_COLOUR: Record<string, string> = {
   // Every family ramp runs DARK → LIGHT down the ladder (palette v2): the
-  // national level is the darkest shade, institutional the lightest. That is
-  // the reverse of v1, on Thomas's instruction, and it reads well with the
-  // authority encoding: the big foundational nodes tend to be national, and
-  // dark-and-large carries more weight than pale-and-large.
+  // national level is the darkest shade, institutional the lightest — Thomas's
+  // order, kept. The FLOORS were lifted in round 5 (his screenshots, his
+  // verdict): the original darkest steps sat within a whisker of the #05070d
+  // background, so the most foundational nodes in the graph read as holes in
+  // the sky. Same order, same hues, floor raised far enough that a national
+  // node is unmistakably a node.
 
   // Canada — reds, unchanged hue, reversed ramp.
-  'CA:federal': '#7c1c34',
-  'CA:provincial': '#a3264a',
-  'CA:municipal': '#c74562',
-  'CA:institutional': '#e07b90',
+  'CA:federal': '#963050',
+  'CA:provincial': '#b53f63',
+  'CA:municipal': '#d0607e',
+  'CA:institutional': '#e896ab',
 
   // United States — "255 blue" with a bold red rim (Thomas). The old tan band
   // is gone; the US now wears its own flag: vivid ultramarine fill, red ring.
@@ -487,16 +489,16 @@ export const SCOPE_COLOUR: Record<string, string> = {
   'US:institutional': '#8fabf8',
 
   // Australia — orange, its own family since the SAO split.
-  'AU:federal': '#9c4a08',
-  'AU:provincial': '#c2670f',
-  'AU:municipal': '#e8891c',
-  'AU:institutional': '#f7b25c',
+  'AU:federal': '#b05a10',
+  'AU:provincial': '#cf7318',
+  'AU:municipal': '#eb9026',
+  'AU:institutional': '#f7b45f',
 
   // New Zealand + Realm + Compact states — brown, bold white rim.
-  'NZ:federal': '#4a3020',
-  'NZ:provincial': '#6b4a33',
-  'NZ:municipal': '#8f6a4a',
-  'NZ:institutional': '#b59376',
+  'NZ:federal': '#6b4630',
+  'NZ:provincial': '#85583d',
+  'NZ:municipal': '#a1724f',
+  'NZ:institutional': '#c09873',
 
   // Stateless bodies — violet, now with a BOLD WHITE rim as the family cue.
   // Distinguished from AFR's violet by register (INT lighter, red-leaning)
@@ -509,10 +511,10 @@ export const SCOPE_COLOUR: Record<string, string> = {
   'INT:municipal': '#8a4fe8',
 
   // European Union — greens, reversed ramp, THICK LIME rim.
-  'EU:supranational': '#0f5f38',
-  'EU:federal': '#178a49',
-  'EU:provincial': '#2cae52',
-  'EU:municipal': '#53cf6e',
+  'EU:supranational': '#10603c',
+  'EU:federal': '#177a4a',
+  'EU:provincial': '#1f9c55',
+  'EU:municipal': '#3fc06a',
   'EU:institutional': '#8fe9a2',
   'EU:international': '#8a4fe8',
 
@@ -520,53 +522,53 @@ export const SCOPE_COLOUR: Record<string, string> = {
   // colour, so "European" stays readable on the ring — Thomas's design).
   // Deliberately muted against the US's vivid ultramarine; the rims (green vs
   // bold red) are the tiebreak where the hues near each other.
-  'XEU:federal': '#2e3f6e',
-  'XEU:provincial': '#40569a',
-  'XEU:municipal': '#5a74c0',
-  'XEU:institutional': '#8b9fd8',
-  'XEU:supranational': '#2e3f6e',
+  'XEU:federal': '#3a4d85',
+  'XEU:provincial': '#4c63a8',
+  'XEU:municipal': '#6a83c9',
+  'XEU:institutional': '#93a8dd',
+  'XEU:supranational': '#3a4d85',
   'XEU:international': '#8a4fe8',
 
   // Africa — deep violet, NO rim (Thomas: "Africa can be violet with no rim
   // color, I think that would do"). Darker and bluer than INT's violet; the
   // absence of any rim is itself the family cue.
-  'AFR:federal': '#3d1f78',
-  'AFR:provincial': '#5b2fa8',
-  'AFR:municipal': '#7c4fd0',
-  'AFR:institutional': '#a982e8',
-  'AFR:supranational': '#3d1f78',
+  'AFR:federal': '#4d2a94',
+  'AFR:provincial': '#6a3fbd',
+  'AFR:municipal': '#8a5cd9',
+  'AFR:institutional': '#ab84ea',
+  'AFR:supranational': '#4d2a94',
   'AFR:international': '#8a4fe8',
 
   // China — yellow, reserved unstaffed for the RU/CN branch.
-  'CN:federal': '#8a6b00',
-  'CN:provincial': '#bd950a',
+  'CN:federal': '#9a7a08',
+  'CN:provincial': '#c39c10',
   'CN:municipal': '#e3bc17',
   'CN:institutional': '#f5da5c',
-  'CN:supranational': '#8a6b00',
+  'CN:supranational': '#9a7a08',
   'CN:international': '#8a4fe8',
 
   // Asia (rest) — teal, reserved unstaffed.
-  'ASIA:federal': '#0d5750',
-  'ASIA:provincial': '#127970',
-  'ASIA:municipal': '#1ba396',
-  'ASIA:institutional': '#5ed3c6',
-  'ASIA:supranational': '#0d5750',
+  'ASIA:federal': '#14706a',
+  'ASIA:provincial': '#1b938a',
+  'ASIA:municipal': '#2bb5a8',
+  'ASIA:institutional': '#6cd9cd',
+  'ASIA:supranational': '#14706a',
   'ASIA:international': '#8a4fe8',
 
   // India — magenta, reserved unstaffed (the slice the SAO split freed).
-  'IN:federal': '#77204f',
-  'IN:provincial': '#a52a72',
-  'IN:municipal': '#c94b95',
-  'IN:institutional': '#e88bbd',
-  'IN:supranational': '#77204f',
+  'IN:federal': '#8c2a60',
+  'IN:provincial': '#ab3577',
+  'IN:municipal': '#ca5595',
+  'IN:institutional': '#e491bf',
+  'IN:supranational': '#8c2a60',
   'IN:international': '#8a4fe8',
 
   // South America — sage, reversed ramp.
-  'SA:federal': '#46503d',
-  'SA:provincial': '#64705a',
-  'SA:municipal': '#87947c',
-  'SA:institutional': '#aebaa4',
-  'SA:supranational': '#46503d',
+  'SA:federal': '#59654e',
+  'SA:provincial': '#75826a',
+  'SA:municipal': '#94a188',
+  'SA:institutional': '#b5c1ab',
+  'SA:supranational': '#59654e',
   'SA:international': '#8a4fe8',
 }
 
@@ -838,10 +840,12 @@ export const COUNTRY_RIM: Record<string, string> = {
   // The EU family's *old* soft green: still green (European on the ring, per
   // Thomas's XEU spec) but visibly not the EU's own lime.
   XEU: '#aff4af',
-  // Africa carries NO rim. The value here is only a fallback for code paths
-  // that demand a colour; RIM_WEIGHT.AFR === 'none' is what actually turns
-  // the ring off in the material.
-  AFR: '#5b2fa8',
+  // Africa's ring is BACK (round 5). The rimless experiment was Thomas's own
+  // spec and his own screenshots ended it: violet fills with no ring on a
+  // near-black sky simply vanish — and once edges draw in rim ink, a rimless
+  // family would have invisible edges too. Pale lavender, same contrast job
+  // as every other family's ring.
+  AFR: '#cbb2f5',
   CN: '#ffec9e',
   ASIA: '#a8ece2',
   IN: '#ffb3dc',
@@ -867,7 +871,7 @@ export const RIM_WEIGHT: Record<ColourFamily, RimWeight> = {
   INT: 'bold',
   EU: 'thick',
   XEU: 'normal',
-  AFR: 'none',
+  AFR: 'normal',
   CN: 'normal',
   ASIA: 'normal',
   IN: 'normal',
