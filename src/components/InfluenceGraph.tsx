@@ -101,7 +101,23 @@ interface PositionedNode extends ScoredReport {
  */
 export const FOV = 24
 
-const WARMUP_TICKS = 400
+/**
+ * How many ticks to let the layout run, un-rendered, before the very first
+ * paint — replacing the old `WARMUP_TICKS = 400`, which ran all 400
+ * synchronously in one blocking loop before anything mounted. Measured
+ * 2026-08-11 at ~770 nodes: that loop cost tens of seconds on a slow CPU,
+ * during which the UI shell had already mounted and the graph simply had
+ * not — "menus first, graph a minute later."
+ *
+ * This is not a replacement warmup of the same kind, just a small floor:
+ * three-forcegraph initialises every node close to the origin, so fitting
+ * a camera to tick 0's positions would frame a near-zero-radius point and
+ * put the camera inside it for a frame. A few dozen ticks is enough for
+ * the cloud to leave that degenerate state without meaningfully changing
+ * time-to-first-paint. The real settling — and the real fit — happens
+ * live, after this: see `runFit`'s two call sites below.
+ */
+const MIN_TICKS_BEFORE_FIRST_PAINT = 30
 
 /**
  * Node size, as a fraction of the cloud it sits in.
@@ -208,8 +224,9 @@ export default function InfluenceGraph({
   /**
    * Bumped by the Reset control. Restores the opening camera from the values
    * the fit already measured, rather than re-running the fit — a second fit
-   * would mean 400 more warmup ticks, and the layout would settle somewhere
-   * slightly different, so "reset the view" would silently move the graph.
+   * would mean re-settling the whole layout, which would come to rest
+   * somewhere slightly different, so "reset the view" would silently move
+   * the graph.
    */
   resetSignal: number
   /** Null when nothing is selected, which means everything renders at full strength. */
@@ -234,7 +251,22 @@ export default function InfluenceGraph({
   const fogRef = useRef(new THREE.Fog(SCENE_BACKGROUND, 1e9, 1e9 + 1))
   /** Centre and radius of the node cloud, measured once the layout settles. */
   const cloud = useRef<{ centre: THREE.Vector3; radius: number } | null>(null)
+  /**
+   * Whether the scene has had its first (rough) fit and is mounted.
+   * Renamed nothing, changed meaning: this used to flip true only after a
+   * blocking 400-tick warmup, so "mounted" and "settled" were the same
+   * moment. They are different moments now — see `settledOnce` below.
+   */
   const fitted = useRef(false)
+  /** Ticks applied since this `forceGraph` was (re)built — gates the first fit. */
+  const tickCount = useRef(0)
+  /**
+   * Whether the authoritative, post-convergence fit has run. Guards
+   * `onEngineStop` so it re-fits exactly once per `forceGraph` — not on
+   * every subsequent reheat (the geo-affinity slider, for one, reheats the
+   * simulation on every change without wanting a camera snap each time).
+   */
+  const settledOnce = useRef(false)
   /**
    * Visual scale for every node mesh, set once the fit has measured the cloud.
    * Held in a ref rather than state because it is read inside
@@ -495,6 +527,16 @@ export default function InfluenceGraph({
         (l: object) => particleObjects.get((l as LinkDatum).key) ?? fallbackParticle,
       )
 
+    // three-forcegraph's own default is 0, which — since alpha only counts
+    // down, never up past a floor of zero — means the alpha-based stop
+    // condition (`alpha() < d3AlphaMin`) is never true, so without this the
+    // simulation would run until `cooldownTime` (15s, also a library
+    // default) regardless of whether it had already settled. Setting a
+    // small positive floor lets `onEngineStop` below fire as soon as the
+    // layout is actually still, on any graph size, with the 15s ceiling
+    // remaining as the backstop for one that never quite settles.
+    fg.d3AlphaMin(0.005)
+
     // d3Force() is typed loosely upstream, hence the casts.
     //
     // Retuned 2026-08-07 at 335 nodes (was -230 / 260 / 38-68, chosen at 124).
@@ -544,6 +586,23 @@ export default function InfluenceGraph({
   useEffect(() => {
     ref.current = forceGraph
     fitted.current = false
+    tickCount.current = 0
+    settledOnce.current = false
+
+    // The authoritative fit — precise cloud radius, camera framing and node
+    // scale, all read off a layout that has actually stopped moving.
+    // three-forcegraph calls this once when its own engine decides the
+    // simulation is done (`d3AlphaMin` above, or the 15s `cooldownTime`
+    // ceiling if it never quite gets there) — and again after every
+    // `d3ReheatSimulation()`, which is why this is guarded by
+    // `settledOnce`: only the first convergence gets the camera-snapping
+    // fit. Later ones (from the geo-affinity slider, say) are left to
+    // resettle in view, under whatever camera the user has by then.
+    forceGraph.onEngineStop(() => {
+      if (settledOnce.current) return
+      settledOnce.current = true
+      runFit()
+    })
   }, [forceGraph])
 
   useEffect(() => {
@@ -563,8 +622,8 @@ export default function InfluenceGraph({
   }, [resetSignal, camera, controls])
 
   /**
-   * Fit the camera and publish the scene bounds — once, as soon as the layout
-   * has actually produced coordinates.
+   * Measure the current layout and publish the scene bounds — called from
+   * two different moments, not one.
    *
    * This deliberately does NOT run in an effect. three-forcegraph builds its
    * objects and starts its simulation asynchronously after `graphData()` is
@@ -573,6 +632,19 @@ export default function InfluenceGraph({
    * entire room (platform, ground grid, bounding box, horizon)
    * permanently unmounted, since App gates all of it on `bounds`. The
    * scenery was never invisible; it was never mounted.
+   *
+   * **Called twice per graph build, on purpose.** First from `useFrame`,
+   * `MIN_TICKS_BEFORE_FIRST_PAINT` ticks in — a rough fit, off a layout that
+   * has barely started spreading, whose only job is to mount the scene so
+   * there is something on screen while the simulation keeps running.
+   * Second from `onEngineStop`, once the layout has actually stopped moving
+   * — the precise fit, which corrects whatever the rough one got wrong
+   * (cloud radius, node scale, the isolated shelf's position all move
+   * during that gap). Between those two calls the graph is visibly
+   * settling into place rather than sitting behind a blank screen — that
+   * gap used to be a single synchronous 400-tick loop with nothing rendered
+   * until it finished. Returns whether it actually ran, so the first call
+   * site knows whether to stop asking.
    */
   /**
    * Hold isolated reports in a deliberate margin beside the graph.
@@ -644,20 +716,16 @@ export default function InfluenceGraph({
     })
   }
 
-  function runFit() {
+  function runFit(): boolean {
     const fg = ref.current
-    if (!fg) return
+    if (!fg) return false
 
     const initial = (fg.graphData().nodes ?? []) as PositionedNode[]
-    if (!initial.length || !initial.every((n) => Number.isFinite(n.x))) return
-
-    // Settle before measuring, so the framing is not chosen from a tangle.
-    for (let i = 0; i < WARMUP_TICKS; i++) fg.tickFrame()
-    fitted.current = true
+    if (!initial.length || !initial.every((n) => Number.isFinite(n.x))) return false
 
     const nodes = (fg.graphData().nodes ?? []) as PositionedNode[]
     const positioned = nodes.filter((n) => Number.isFinite(n.x))
-    if (!positioned.length) return
+    if (!positioned.length) return false
 
     shelveIsolated(positioned)
 
@@ -750,6 +818,8 @@ export default function InfluenceGraph({
       minY: box.min.y,
       maxY: box.max.y,
     })
+
+    return true
   }
 
   // Toggles that have to reach inside the force-graph object, which was built
@@ -980,7 +1050,14 @@ export default function InfluenceGraph({
 
   useFrame((_, delta) => {
     ref.current?.tickFrame()
-    if (!fitted.current) runFit()
+    if (!fitted.current) {
+      tickCount.current += 1
+      // The rough fit — see the note on `runFit`. Only mounts the scene;
+      // the precise numbers come later from `onEngineStop`.
+      if (tickCount.current >= MIN_TICKS_BEFORE_FIRST_PAINT && runFit()) {
+        fitted.current = true
+      }
+    }
     advanceFlight(delta)
     updateFog(view.fog)
 
