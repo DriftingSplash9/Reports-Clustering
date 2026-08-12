@@ -1,41 +1,113 @@
 import type { Country, Dependency, Graph, JurisdictionLevel, ScoredReport } from './types'
 import { isDocumented } from './graph'
-import { type ColourFamily, type Scope, SCOPE_GROUPS, SCOPE_LABEL, familyOf, scopeOf } from './palette'
+import { type ColourFamily, SCOPE_GROUPS, familyOf } from './palette'
 
 /**
  * Collapsible-orb drilldown.
  *
- * Thomas's brief (2026-08-11): as the corpus grows past the 1000-1200 node
- * range he'd already flagged as the point community detection becomes worth
- * asking about again, the answer he wants is not clustering — it is
- * collapsing by the hierarchy the data already has. `SCOPE_GROUPS` in
- * palette.ts already encodes exactly that ladder for every colour family
- * (Canada: federal → provincial → municipal → institutional; the EU:
- * supranational → federal → provincial → municipal → institutional), built
- * for the legend and reused here rather than inventing a second hierarchy.
+ * Thomas's brief, restated 2026-08-12 after the first build got it wrong:
+ * as the corpus grows past the 1000-1200 node range, the answer is not
+ * clustering — it is collapsing by the hierarchy the data already has, and
+ * unfolding it **one global tier at a time**.
  *
- * **The model, one number per family.** `Drilldown[family]` is how many
- * rungs of that family's own ladder have been peeled off into real,
- * individual nodes. Everything at a shallower rung is drawn as itself;
- * everything at that rung or deeper is folded into one orb per family — not
- * one orb per level, one orb *total* per family, because only one "next"
- * level is ever waiting to be opened at a time. A double-click on that orb
- * peels off the next rung; a double-click on any real node folds its own
- * rung (and anything deeper) back into the orb. Absent means 0, which is
- * "everything collapsed" — the fully-collapsed default Thomas asked for.
+ * **The model, one number for the whole world.** `Drilldown` is how many rungs
+ * of the global ladder below are currently drawn as real, individual nodes.
+ * Everything at a shallower tier is drawn as itself; everything at that tier or
+ * deeper is folded into one orb per colour family. A double-click on any orb
+ * peels off the next tier **everywhere at once** — every country, every family
+ * — and a double-click on a real node folds its own tier, and everything
+ * narrower, back in.
  *
- * **This does not touch the position rule.** `jurisdiction_level` still
- * drives nothing about where a node sits — see the comment on
- * `JurisdictionLevel` in types.ts, and the "protein unfolding" framing this
- * feature was pitched under is exactly why: the ladder decides *what exists
- * as a node*, and the existing edge-only force layout decides where it goes
- * once it does. An orb is positioned by its own edges like anything else.
+ * **This is the correction that mattered.** The first version kept one depth
+ * *per family*, so opening Canada opened only Canada and the EU stayed shut.
+ * Thomas, seeing it live: *"when it initializes I double click the eu and only
+ * the eu open up. I want to have double clicking the eu to open all national
+ * level nodes... then if i double click the nation then ALL provinces and
+ * states appear in the mix."* The tiers are a property of the view, not of a
+ * country — depth is global, and the orbs are just the click targets that
+ * happen to hold the collapsed remainder of each family.
+ *
+ * Per-*branch* drilldown — open Alberta's municipalities while other provinces
+ * stay shut — was offered and explicitly declined the same day. Slicing by
+ * anything other than depth is the left sidebar's job: *"the left side bar can
+ * be used to toggle combinations of whatever a user likes... if i want to cut
+ * the municipal noise out across the world I would be able to."* Depth answers
+ * "how far down"; the filter answers "which of it". Keep them separate.
+ *
+ * **This does not touch the position rule.** `jurisdiction_level` still drives
+ * nothing about where a node sits — see the comment on `JurisdictionLevel` in
+ * types.ts. The ladder decides *what exists as a node*, and the existing
+ * edge-only force layout decides where it goes once it does. It does now drive
+ * node *shape* — see `TIER_GEOMETRY` in nodeVisuals.ts — which is a different
+ * claim: what a node is, not where it belongs.
  */
-export type Drilldown = Partial<Record<ColourFamily, number>>
+export type Drilldown = number
 
-/** The ladder for a family, broadest rung first. Empty for an unstaffed one. */
-export function ladderFor(family: ColourFamily): Scope[] {
-  return SCOPE_GROUPS.find((g) => g.country === family)?.scopes ?? []
+/**
+ * The four tiers, broadest first. **Cumulative** — tier N shows everything in
+ * tiers 1..N.
+ *
+ * Thomas specified these directly on 2026-08-12, after the gesture-driven
+ * five-rung version proved unworkable in practice: *"Combine - International
+ * and commercial/industrial into 1 tier, in the next have all of the tier one
+ * plus all nations in the data set. Tier 3 is tier 2 plus all the provinces and
+ * states. Tier 4 is everything."*
+ *
+ * `supranational` rides in tier 1 alongside `international` and
+ * `institutional`. He named the other two explicitly and did not mention it,
+ * and tier 1 is the only place it can go: tiers 2, 3 and 4 are spoken for by
+ * nations, states and municipalities, so anything above the nation state has to
+ * be in the opening view or it would never appear at all. It also matches how
+ * he described the opening screen earlier the same day — *"our first view of
+ * the supranationals"*.
+ *
+ * Sizes as of 2026-08-12: tier 1 is 151 reports (41 international + 76
+ * supranational + 34 institutional), tier 2 adds 403 nations for 554, tier 3
+ * adds 110 states and provinces for 664, tier 4 adds the last 64
+ * municipalities for the full 728.
+ */
+export const TIERS: readonly (readonly JurisdictionLevel[])[] = [
+  ['international', 'supranational', 'institutional'],
+  ['federal'],
+  ['provincial'],
+  ['municipal'],
+]
+
+/** Button captions, in tier order. */
+export const TIER_LABEL: readonly string[] = [
+  'Global',
+  'Nations',
+  'States',
+  'Everything',
+]
+
+/** The longer form, for the orb caption and the onboarding card. */
+export const TIER_DESCRIPTION: readonly string[] = [
+  'International, supranational and commercial',
+  'plus every national report',
+  'plus states and provinces',
+  'plus municipalities — the whole corpus',
+]
+
+export const TIER_COUNT = TIERS.length
+
+/**
+ * The tier shown on load. Tier 1 — the smallest, ~151 reports.
+ *
+ * `Drilldown` is now a tier *number* from 1 to `TIER_COUNT`, not a count of
+ * opened rungs, so it reads the same way as the buttons the user actually
+ * clicks: `drilldown === 2` means "tier 2 is showing".
+ */
+export const DEFAULT_DRILLDOWN: Drilldown = 1
+
+/**
+ * Which rung a level sits on. An unrecognised level resolves to the deepest
+ * rung rather than throwing, on the same reasoning as `familyOf`'s unmapped-
+ * country fallback: showing a node somewhere defensible beats losing it.
+ */
+export function tierOf(level: JurisdictionLevel): number {
+  const i = TIERS.findIndex((t) => t.includes(level))
+  return i === -1 ? TIERS.length : i + 1
 }
 
 /** Stable id for a family's "everything not yet peeled off" orb. */
@@ -53,25 +125,16 @@ export function familyFromOrbId(id: string): ColourFamily {
 }
 
 /**
- * Where a real report currently resolves to: itself, if its own rung has
- * been peeled off, or its family's orb otherwise.
- *
- * A report whose scope is not on its family's ladder at all (should not
- * happen for a report the corpus actually validates, but the ladder is a
- * second, hand-maintained list — see `ladderFor`) resolves to itself always,
- * on the same reasoning as `familyOf`'s own unmapped-country fallback:
- * losing a node from view because a lookup missed is worse than showing it
- * somewhere it was not asked to collapse.
+ * Where a real report currently resolves to: itself, if its tier is open, or
+ * its family's orb otherwise.
  */
 export function resolveId(
   drilldown: Drilldown,
   report: { id: string; country: Country; jurisdiction_level: JurisdictionLevel },
 ): string {
-  const family = familyOf(report.country)
-  const ladder = ladderFor(family)
-  const idx = ladder.indexOf(scopeOf(report))
-  const depth = drilldown[family] ?? 0
-  return idx === -1 || idx < depth ? report.id : orbId(family)
+  return tierOf(report.jurisdiction_level) <= drilldown
+    ? report.id
+    : orbId(familyOf(report.country))
 }
 
 /**
@@ -88,11 +151,15 @@ export interface OrbNode extends ScoredReport {
 }
 
 function buildOrbNode(family: ColourFamily, members: ScoredReport[], depth: number): OrbNode {
-  const ladder = ladderFor(family)
-  const level = ladder[Math.min(depth, ladder.length - 1)]
-  const nominalLevel = (level?.split(':')[1] ?? 'institutional') as JurisdictionLevel
   const group = SCOPE_GROUPS.find((g) => g.country === family)
-  const levelLabel = (level && SCOPE_LABEL[level]) ?? nominalLevel
+  // The tier this orb would reveal next, as a 0-based index into TIERS.
+  const nextTier = Math.min(depth, TIER_COUNT - 1)
+  const levelLabel = TIER_LABEL[nextTier] ?? 'More'
+
+  // The orb's nominal level is the shallowest one it still holds — what the
+  // next tier up would reveal — not the deepest. It is what the caption
+  // promises and what the legend filter will match it on.
+  const nominalLevel: JurisdictionLevel = TIERS[nextTier][0]
 
   // The literal country members disagree on has to resolve to one value for
   // `country`, since that field is singular. The mode, not the first member,
@@ -118,12 +185,12 @@ function buildOrbNode(family: ColourFamily, members: ScoredReport[], depth: numb
 
   return {
     id: orbId(family),
-    title: `${group?.label ?? family} — ${levelLabel} (${members.length})`,
-    publisher: `${members.length} collapsed report${members.length === 1 ? '' : 's'}`,
+    title: `${group?.label ?? family} — ${levelLabel} and below (${members.length})`,
+    publisher: `${members.length} folded report${members.length === 1 ? '' : 's'}`,
     country,
     jurisdiction_level: nominalLevel,
     region: group?.label ?? family,
-    description: `Double-click to open the next level out of this group.`,
+    description: `Folded. Use the tier buttons below, or double-click here, to bring in ${levelLabel.toLowerCase()}.`,
     last_updated: null,
     url: '',
     domains,
@@ -174,7 +241,7 @@ export function buildDisclosedGraph(graph: Graph, drilldown: Drilldown): Graph {
   }
 
   const orbNodes: ScoredReport[] = [...membersByFamily.entries()].map(([family, members]) =>
-    buildOrbNode(family, members, drilldown[family] ?? 0),
+    buildOrbNode(family, members, drilldown),
   )
   const realNodes = graph.nodes.filter((n) => !isOrbId(resolve.get(n.id)!))
   const nodes: ScoredReport[] = [...realNodes, ...orbNodes]
@@ -213,26 +280,20 @@ export function buildDisclosedGraph(graph: Graph, drilldown: Drilldown): Graph {
 }
 
 /**
- * Double-click on `id`. Returns the next drilldown state; does not mutate.
+ * Double-click on `id`. Returns the next tier; does not mutate.
  *
- * An orb always *opens* — its family's depth increases by one rung. A real
- * node always *folds* — its own family's depth drops to that node's own rung
- * index, collapsing it and everything narrower back into the orb. Folding
- * from a broader already-open rung jumps back further than one step, which
- * matches clicking an ancestor in an ordinary expand/collapse tree: it closes
- * the whole branch under it, not just its own leaf.
+ * **An orb steps up a tier. A real node does nothing.** That asymmetry is the
+ * fix for the single most confusing thing about the previous version, which
+ * made a real node *fold* the view back — so double-clicking a national report
+ * hoping to see more inside it instead deleted every national report from the
+ * scene. Thomas hit this repeatedly and reported the feature as *"behaving
+ * irregularly"*, which it was: the same gesture meant "more" or "much less"
+ * depending on what happened to be under the cursor, and nothing on screen
+ * distinguished the two cases.
+ *
+ * Going *back* is now the tier buttons' job, and only theirs. A control that
+ * can only ever add detail cannot surprise anyone by removing it.
  */
-export function toggleDrilldown(current: Drilldown, id: string, report?: ScoredReport): Drilldown {
-  if (isOrbId(id)) {
-    const family = familyFromOrbId(id)
-    const ladder = ladderFor(family)
-    const depth = current[family] ?? 0
-    return { ...current, [family]: Math.min(depth + 1, ladder.length) }
-  }
-  if (!report) return current
-  const family = familyOf(report.country)
-  const ladder = ladderFor(family)
-  const idx = ladder.indexOf(scopeOf(report))
-  if (idx === -1) return current
-  return { ...current, [family]: idx }
+export function toggleDrilldown(current: Drilldown, id: string): Drilldown {
+  return isOrbId(id) ? Math.min(current + 1, TIER_COUNT) : current
 }

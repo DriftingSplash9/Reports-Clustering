@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import type { JurisdictionLevel } from '../lib/types'
 
 /**
  * The node material: a standard lit sphere with a country-coloured rim.
@@ -163,6 +164,82 @@ export function nodeMaterial({
   }
 
   return material
+}
+
+/**
+ * Node geometry by jurisdiction level — **shape carries the tier, colour keeps
+ * carrying the country.**
+ *
+ * Thomas, 2026-08-12: *"It is annoying how the shades of red don't help humans
+ * differentiate nodes. I need some sort of symbol or rethink the colour scheme
+ * altogether."* He was describing a real encoding failure, not a taste
+ * complaint. Hue was doing one job (which family) and *shade within that hue*
+ * was doing a second (which level), and shade is a terrible categorical
+ * channel: telling two reds apart requires seeing them side by side, at the
+ * same size, under the same lighting — none of which holds in a scene you can
+ * orbit, with bloom on, at nodes 3 to 11 pixels across.
+ *
+ * So the two facts get two channels. Colour says Canada; shape says national.
+ * Neither has to be read against a neighbour to be read at all.
+ *
+ * **Every shape here is volumetric, and that is not an accident.** The obvious
+ * palette for five tiers includes a ring or a disc for the narrowest one, and
+ * that is exactly the trap this codebase already fell into once: see the
+ * `hollow` note above, where ring geometry was rejected because "a torus or a
+ * disc vanishes edge-on, and a fifth of the nodes disappearing at certain
+ * angles would be worse than the problem being fixed." A flat glyph is only a
+ * symbol from one direction. Every shape below reads as itself from any angle.
+ *
+ * Ordered broadest to narrowest, and the progression is deliberate: rounder for
+ * broader, sharper and fewer-faced for more local. `international` is a smooth
+ * sphere, `supranational` a faceted one — visibly the same object with edges,
+ * for the tier that is *nearly* global. Then the polyhedra step down by face
+ * count as the jurisdiction narrows: cube, octahedron, tetrahedron. So the
+ * silhouette gets pointier the more local a report is, which means the tier
+ * ordering is legible even when you cannot name the individual solids.
+ *
+ * `institutional` is the odd one out — a capsule, not a polyhedron — because it
+ * is the odd tier out: "commercial / other", not a rung of government at all.
+ * It should not look like it belongs on the same ladder, because it does not.
+ *
+ * Low segment counts throughout. Faceted is the point, and it is also cheaper
+ * than the 28x20 sphere every node used to get — a box is 24 vertices against
+ * roughly 600.
+ */
+export const TIER_GEOMETRY: Record<JurisdictionLevel, (radius: number) => THREE.BufferGeometry> = {
+  international: (r) => new THREE.SphereGeometry(r, 24, 16),
+  supranational: (r) => new THREE.IcosahedronGeometry(r, 1),
+  federal: (r) => new THREE.BoxGeometry(r * 1.5, r * 1.5, r * 1.5),
+  provincial: (r) => new THREE.OctahedronGeometry(r * 1.25),
+  municipal: (r) => new THREE.TetrahedronGeometry(r * 1.45),
+  institutional: (r) => new THREE.CapsuleGeometry(r * 0.62, r * 1.25, 4, 10),
+}
+
+/**
+ * The geometry for one node.
+ *
+ * Orbs stay spheres regardless of the level they nominally carry. An orb is not
+ * a report at a tier, it is a container for many at several, and giving it the
+ * shape of the tier it is about to reveal would promise something specific
+ * about its contents that is not true. Sphere reads as "a bag of things", which
+ * is what it is — and with the pulse in InfluenceGraph.tsx and a radius drawn
+ * from the largest member, no orb is going to be mistaken for a lone
+ * international report.
+ *
+ * The per-tier multipliers above equalise *apparent* size, not mathematical
+ * radius: a cube of half-extent r looks considerably bigger than a sphere of
+ * radius r because it fills its bounding box, and a tetrahedron of
+ * circumradius r looks much smaller because it barely fills a third of one.
+ * Left unscaled, the shape encoding would have silently corrupted the size
+ * encoding, which is authority — the one rule the graph exists to express.
+ */
+export function nodeGeometry(
+  level: JurisdictionLevel,
+  radius: number,
+  orb: boolean,
+): THREE.BufferGeometry {
+  if (orb) return new THREE.SphereGeometry(radius, 24, 16)
+  return (TIER_GEOMETRY[level] ?? TIER_GEOMETRY.institutional)(radius)
 }
 
 /** Match the rim to the node's focus state. */

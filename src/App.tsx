@@ -18,6 +18,7 @@ import SpaceFrame from './components/SpaceFrame'
 import Environment from './components/Environment'
 import ViewControls from './components/ViewControls'
 import SearchPanel from './components/SearchPanel'
+import Onboarding from './components/Onboarding'
 import CalendarPanel from './components/CalendarPanel'
 import { describeWindow, nextRelease } from './lib/schedule'
 import CameraZoom from './components/CameraZoom'
@@ -45,6 +46,9 @@ import {
 } from './lib/graph'
 import { buildFocusIndex, computeFocus } from './lib/selection'
 import {
+  DEFAULT_DRILLDOWN,
+  TIER_DESCRIPTION,
+  TIER_LABEL,
   buildDisclosedGraph,
   isOrbId,
   resolveId,
@@ -119,9 +123,11 @@ export default function App() {
   )
 
   /**
-   * Which rungs of each family's ladder are peeled open. Absent means fully
-   * collapsed — one orb per family — which is the default load state Thomas
-   * asked for. See hierarchy.ts for the model.
+   * How many rungs of the global tier ladder are open — one number for the
+   * whole world, not one per country. `DEFAULT_DRILLDOWN` opens on the
+   * international and supranational tiers, with everything below folded into
+   * one orb per family. See hierarchy.ts for the model and for why this is
+   * global rather than per-family.
    *
    * Named `drilldown` rather than `disclosure`, even though "how much of the
    * hierarchy is shown" is a natural fit for that word: `disclosure` already
@@ -129,7 +135,7 @@ export default function App() {
    * a few lines up — and reusing it here would collide two different meanings
    * of "how much is currently visible" under one name.
    */
-  const [drilldown, setDrilldown] = useState<Drilldown>({})
+  const [drilldown, setDrilldown] = useState<Drilldown>(DEFAULT_DRILLDOWN)
 
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -185,6 +191,25 @@ export default function App() {
         : null,
     [disclosedGraph, filter, predicate, edgePredicate],
   )
+
+  /**
+   * What the tier bar reports: **real reports, orbs excluded, after the
+   * filter.**
+   *
+   * Both exclusions matter. Counting orbs would inflate the number by one per
+   * folded family and make "reports shown" untrue by up to eight. Ignoring the
+   * filter is the mistake the readout this replaced actually made — it claimed
+   * 527 of 728 were shown while an EU-only filter left about ten on screen.
+   * `visible` is null when nothing is filtered, which is not the same as an
+   * empty set, so it falls back to the disclosed count rather than to zero.
+   */
+  const tierCounts = useMemo(() => {
+    const real = disclosedGraph.nodes.filter((n) => !isOrbId(n.id))
+    return {
+      inTier: real.length,
+      visible: visible ? real.filter((n) => visible.nodes.has(n.id)).length : real.length,
+    }
+  }, [disclosedGraph, visible])
 
   // Adjacency, rebuilt only when the disclosed graph or the filter changes.
   // Selection changes then cost a walk, not a rebuild.
@@ -339,16 +364,29 @@ export default function App() {
   }, [])
 
   /**
-   * Double-click on the scene: open an orb one rung, or fold a real node's
-   * own rung back in. See `toggleDrilldown` in hierarchy.ts for which.
+   * Double-click on the scene: an orb steps up a tier, a real node does
+   * nothing. See `toggleDrilldown` in hierarchy.ts for why a real node no
+   * longer folds the view back.
    */
-  const handleToggleNode = useCallback(
-    (id: string) => {
-      const report = isOrbId(id) ? undefined : graph.byId.get(id)
-      setDrilldown((d) => toggleDrilldown(d, id, report))
-    },
-    [graph],
-  )
+  const handleToggleNode = useCallback((id: string) => {
+    setDrilldown((d) => toggleDrilldown(d, id))
+  }, [])
+
+  /**
+   * A tier button was pressed.
+   *
+   * Puts the zoom slider back to 1 as well as changing the tier. Pressing a
+   * tier button is a request for a *view*, not just for more nodes, and the
+   * camera has to answer it — the rebuild this triggers already re-frames the
+   * scene (see `userOwnsCamera` in InfluenceGraph.tsx, which resets on every
+   * rebuild), but a zoom the user left at 4x would survive that and leave them
+   * staring into the middle of a cloud that just changed size by a factor of
+   * three. This is the same reasoning as Reset, for the same reason.
+   */
+  const handleTier = useCallback((tier: number) => {
+    setDrilldown(tier)
+    setView((v) => (v.zoom === 1 ? v : { ...v, zoom: 1 }))
+  }, [])
 
   /**
    * Back to the opening view. See the Reset button in ViewControls for why the
@@ -364,20 +402,20 @@ export default function App() {
     setFlyTo(null)
     setView((v) => ({ ...v, zoom: 1 }))
     setResetSignal((n) => n + 1)
-    // Back to fully collapsed, unconditionally — not gated behind
+    // Back to the opening depth, unconditionally — not gated behind
     // `clearFilter`. Drilldown is navigation state like the camera and the
     // selection, not a filter: "reset" meaning "the opening view" should
     // mean the opening *topology* too, every time, the same way it always
     // puts the camera back regardless of whether the filter is kept.
     //
-    // Returns the *same* object when already collapsed rather than a fresh
-    // `{}` every click. `disclosedGraph` is keyed on this by reference, and a
-    // reset that changes nothing about the topology still has to leave that
-    // reference alone — rebuilding the whole force graph the same moment
-    // `resetSignal` also bumps the camera is exactly the two-things-at-once
-    // that surfaced the tickFrame race `useLayoutEffect` below closes, and
-    // there is no reason to pay that rebuild at all when nothing opened.
-    setDrilldown((d) => (Object.keys(d).length === 0 ? d : {}))
+    // Now that this is a number rather than an object, a reset that changes
+    // nothing is automatically referentially stable — `disclosedGraph` is keyed
+    // on this value, and setting a number to the number it already holds does
+    // not re-render at all. The old code had to hand back the *same* `{}` by
+    // hand to avoid rebuilding the whole force graph the same moment
+    // `resetSignal` bumps the camera, which is exactly the two-things-at-once
+    // that surfaced the tickFrame race `useLayoutEffect` closes.
+    setDrilldown(DEFAULT_DRILLDOWN)
     if (clearFilter) setFilter(NO_FILTER)
   }, [])
 
@@ -596,6 +634,16 @@ export default function App() {
       </PanelShell>
 
       <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
+
+      <TierBar
+        tier={drilldown}
+        onTier={handleTier}
+        inTier={tierCounts.inTier}
+        visibleCount={tierCounts.visible}
+        total={graph.nodes.length}
+      />
+
+      <Onboarding />
 
       <IsolatedShelf
         reports={isolated}
@@ -1117,6 +1165,85 @@ function ListBlock({
  * dots, narrow enough to fit the gap between those two panels without
  * competing with either for space.
  */
+/**
+ * The tier buttons.
+ *
+ * Thomas, 2026-08-12, after the gesture-only version: *"this is not working, we
+ * need to simplify this. it is behaving irregularly. Can we just create buttons
+ * across the bottom to select different levels?"* He was right to cut it. A
+ * double-click is invisible, undiscoverable, meant two opposite things
+ * depending on what was under the cursor, and gave no way to see where you were
+ * or to jump straight to where you wanted. Four buttons are none of those
+ * things: the current tier is always legible because it is the lit one, and any
+ * tier is one click away in either direction.
+ *
+ * **The count says what is actually on screen, and that is the point.** The
+ * readout this replaces showed the *disclosed* count — how far the hierarchy
+ * was unfolded, ignoring the sidebar filter. With an EU-only filter active it
+ * cheerfully said "527 of 728 shown" over a scene containing about ten dots,
+ * which is its own small contribution to "behaving irregularly": the one number
+ * on screen claiming to describe the view was describing something else. It now
+ * reports the visible set, and names the filter as the reason whenever the two
+ * disagree.
+ */
+function TierBar({
+  tier,
+  onTier,
+  inTier,
+  visibleCount,
+  total,
+}: {
+  tier: number
+  onTier: (tier: number) => void
+  /** Nodes this tier discloses, before any filter. */
+  inTier: number
+  /** Nodes actually drawn, after the filter. */
+  visibleCount: number
+  total: number
+}) {
+  const filtered = visibleCount < inTier
+
+  return (
+    <div style={tierBarWrap}>
+      <div style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
+        {TIER_LABEL.map((label, i) => {
+          const n = i + 1
+          const active = tier === n
+          return (
+            <button
+              key={label}
+              type="button"
+              onClick={() => onTier(n)}
+              title={`Tier ${n} — ${TIER_DESCRIPTION[i]}`}
+              aria-pressed={active}
+              style={{
+                padding: '6px 14px',
+                fontFamily: 'inherit',
+                fontSize: 10.5,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: active ? '#e6eefc' : '#7c8ca7',
+                background: active ? 'rgba(70, 115, 190, 0.30)' : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${active ? 'rgba(130, 170, 230, 0.55)' : 'rgba(90, 115, 160, 0.22)'}`,
+                borderRadius: 6,
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {n}. {label}
+            </button>
+          )
+        })}
+      </div>
+      <div style={{ fontSize: 10, color: '#54637d', marginTop: 7, textAlign: 'center' }}>
+        {filtered
+          ? `${visibleCount} shown · ${inTier} in this tier · filter hiding ${inTier - visibleCount}`
+          : `${visibleCount} of ${total} reports shown`}
+      </div>
+    </div>
+  )
+}
+
 function IsolatedShelf({
   reports,
   onHover,
@@ -1570,6 +1697,27 @@ const selectionBlock: React.CSSProperties = {
 // Right edge sits 4px inside the View panel's own left edge (that panel is
 // `right: 20, width: 190`, so its left edge is at `right: 210`) — close
 // enough to read as paired with it, not so close the two visually merge.
+/**
+ * Bottom-centre, clear of both side panels and of the search bar at the top.
+ *
+ * Unlike the other floating panels this one does NOT set `pointerEvents:
+ * none` — the buttons inside it have to be clickable. It is kept as narrow as
+ * its contents so the dead area it steals from orbit-dragging is the strip the
+ * buttons actually occupy and nothing more.
+ */
+const tierBarWrap: React.CSSProperties = {
+  position: 'fixed',
+  bottom: 20,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  padding: '10px 14px',
+  background: 'rgba(10, 14, 24, 0.82)',
+  border: '1px solid rgba(90, 115, 160, 0.22)',
+  borderRadius: 10,
+  backdropFilter: 'blur(8px)',
+  zIndex: 6,
+}
+
 const isolatedShelfWrap: React.CSSProperties = {
   position: 'fixed',
   top: 20,

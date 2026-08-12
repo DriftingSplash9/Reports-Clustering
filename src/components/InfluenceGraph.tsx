@@ -9,6 +9,7 @@ import { rimColourFor, colourForReport, familyOf } from '../lib/palette'
 import { isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
 import {
   isStandingInstrument,
+  nodeGeometry,
   nodeMaterial,
   setNodeRim,
   type NodeMaterial,
@@ -143,6 +144,38 @@ const MIN_TICKS_BEFORE_FIRST_PAINT = 30
  */
 const REFIT_INTERVAL_SECONDS = 0.2
 const REFIT_WINDOW_SECONDS = 12
+
+/**
+ * The orb "click me" breath.
+ *
+ * Thomas, 2026-08-12: *"maybe when we are viewing the top level the orbs that
+ * are paths to lower levels can slow blink or pulse saying 'click me', then
+ * when we are viewing the second from the top level (the nations) with edges
+ * going to the states and provinces can pulse."*
+ *
+ * Both halves of that describe the same set, which is why this is one rule and
+ * not two: **an orb is pulsed, a real node never is.** At every depth the orbs
+ * are exactly the things that still hold something and exactly the things a
+ * double-click opens, so "what leads deeper" and "what is an orb" are the same
+ * question. Pulsing real nodes would actively mislead — double-clicking a real
+ * node *folds*, it does not open (see `toggleDrilldown`), so a pulsing national
+ * node would be advertising the opposite of what it does.
+ *
+ * It also needs no upkeep as the walk proceeds. At full depth there are no orbs
+ * left, so the pulse stops on its own with nothing to switch off.
+ *
+ * The swing is mostly *downward* from the node's normal brightness rather than
+ * up from it. Emissive intensity is capped below 1 everywhere else in this file
+ * because bloom clips above that and the node stops reading as its true size —
+ * a pulse that brightened past the cap would make every orb flash to the same
+ * white blob at the top of each cycle, destroying the size and colour channels
+ * once per period. Dimming and recovering reads as breathing and costs nothing.
+ */
+const ORB_PULSE_PERIOD_SECONDS = 2.6
+/** Emissive floor as a fraction of the orb's normal brightness. */
+const ORB_PULSE_FLOOR = 0.42
+/** How much the orb physically swells at the top of the breath. */
+const ORB_PULSE_SCALE = 0.07
 
 /**
  * Node size, as a fraction of the cloud it sits in.
@@ -337,6 +370,8 @@ export default function InfluenceGraph({
    */
   const settleClock = useRef(0)
   const sinceRefit = useRef(0)
+  /** Wall-clock seconds, free-running, driving the orb breath. Never reset. */
+  const pulseClock = useRef(0)
   /**
    * Whether the user has taken the camera since this `forceGraph` was built.
    *
@@ -660,8 +695,12 @@ export default function InfluenceGraph({
         // collapsed group would render as a one-off instrument by accident.
         const orb = isOrbId(n.id)
         const hollow = !orb && isStandingInstrument(n)
+        // Shape carries the jurisdiction tier — see `nodeGeometry`. Colour is
+        // still the country family; these are two channels for two facts, which
+        // is the whole fix for "the shades of red don't help humans
+        // differentiate nodes".
         const mesh = new THREE.Mesh(
-          new THREE.SphereGeometry(radius, 28, 20),
+          nodeGeometry(n.jurisdiction_level, radius, orb),
           nodeMaterial({
             colour,
             rimColour: hollow ? colour : rimColourFor(n.country),
@@ -677,6 +716,11 @@ export default function InfluenceGraph({
         mesh.scale.setScalar(nodeScale.current)
         mesh.userData.reportId = n.id
         mesh.userData.baseEmissive = emissive
+        // Marks this mesh for the breathing pulse in `useFrame` — see
+        // `ORB_PULSE_PERIOD_SECONDS`. Stored on the mesh rather than recomputed
+        // from the id each frame so the pulse loop stays a flat walk over
+        // `meshes` with no string work in it.
+        mesh.userData.orb = orb
         meshes.current.set(n.id, mesh)
         return mesh
       })
@@ -1136,24 +1180,35 @@ export default function InfluenceGraph({
    * has to be handed back to make the library recount. Arrow colours are the
    * same. Both read `focusRef`, which is current before this runs.
    */
+  /**
+   * The emissive intensity a node should sit at for a given focus, before the
+   * orb breath scales it.
+   *
+   * Shared by `applyFocus` and the pulse loop in `useFrame` rather than
+   * duplicated into both. The pulse rewrites `emissiveIntensity` every frame,
+   * so it has to be able to reproduce exactly what the focus pass would have
+   * set — otherwise an orb that is dimmed, or selected, would snap to the plain
+   * value on the next frame and quietly undo the focus.
+   */
+  function focusEmissive(id: string, mesh: THREE.Mesh, f: Focus | null): number {
+    const base = (mesh.userData.baseEmissive as number) ?? 0.5
+    if (f && !f.nodes.has(id)) return DIM_NODE_EMISSIVE
+    // A small lift on the selection itself, so it is findable inside its own
+    // cone. Still capped below 1 — bloom clips above that and the node stops
+    // reading as its true size.
+    return f?.selectedId === id ? Math.min(0.95, base + 0.25) : base
+  }
+
   function applyFocus() {
     for (const [id, mesh] of meshes.current) {
       const material = mesh.material as NodeMaterial
-      const base = (mesh.userData.baseEmissive as number) ?? 0.5
       const lit = !focus || focus.nodes.has(id)
 
       setNodeRim(material, lit)
       // `litOpacity` rather than 1 — a hollow node stays hollow when traced.
       const litOpacity = material.userData.litOpacity ?? 1
       material.opacity = lit ? litOpacity : Math.min(DIM_NODE_OPACITY, litOpacity)
-      material.emissiveIntensity = lit
-        ? // A small lift on the selection itself, so it is findable inside its
-          // own cone. Still capped below 1 — bloom clips above that and the
-          // node stops reading as its true size.
-          focus?.selectedId === id
-          ? Math.min(0.95, base + 0.25)
-          : base
-        : DIM_NODE_EMISSIVE
+      material.emissiveIntensity = focusEmissive(id, mesh, focus)
     }
 
     for (const [key, material] of linkMaterials.current) {
@@ -1349,6 +1404,23 @@ export default function InfluenceGraph({
     }
     advanceFlight(delta)
     updateFog(view.fog)
+
+    // The orb breath — see `ORB_PULSE_PERIOD_SECONDS`. Driven off wall-clock
+    // `delta`, not the tick count, for the same reason the re-fit window is:
+    // a tick is not a fixed amount of real time, so a tick-driven pulse would
+    // breathe at a different rate on every machine and would visibly slow down
+    // exactly when the scene gets heavy.
+    pulseClock.current += delta
+    const breath =
+      0.5 - 0.5 * Math.cos((2 * Math.PI * pulseClock.current) / ORB_PULSE_PERIOD_SECONDS)
+    for (const [id, mesh] of meshes.current) {
+      if (!mesh.userData.orb) continue
+      const material = mesh.material as NodeMaterial
+      material.emissiveIntensity =
+        focusEmissive(id, mesh, focusRef.current) *
+        (ORB_PULSE_FLOOR + (1 - ORB_PULSE_FLOOR) * breath)
+      mesh.scale.setScalar(nodeScale.current * (1 + ORB_PULSE_SCALE * breath))
+    }
 
     // Node meshes are created lazily by the library, and can be recreated
     // without warning. A size change means the set we last styled is not the
