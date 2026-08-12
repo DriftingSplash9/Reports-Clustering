@@ -28,6 +28,8 @@ import {
   BLOOM_THRESHOLD_MAX,
   BLOOM_THRESHOLD_MIN,
   DEFAULT_VIEW,
+  ZOOM_MAX,
+  ZOOM_MIN,
   type ViewSettings,
 } from './lib/view'
 import { dependencies, droppedNotes, loadIssues, reports } from './data'
@@ -340,10 +342,27 @@ export default function App() {
     if (b.movedCamera) setView((v) => (v.zoom === 1 ? v : { ...v, zoom: 1 }))
   }, [])
 
-  const handleZoomChange = useCallback(
-    (zoom: number) => setView((v) => (v.zoom === zoom ? v : { ...v, zoom })),
-    [],
-  )
+  /**
+   * Zoom reported back from the camera — clamped to the slider's own range.
+   *
+   * A backstop, not the fix. The zoom slider and the auto-fit form a loop
+   * (camera → inferred zoom → camera), and a loop whose gain is even slightly
+   * above one walks its value outwards until something stops it. The
+   * gain-above-one bug found this session was `fitSync.distance` and
+   * `bounds.fitDistance` disagreeing about what "zoom 1" means, and that is
+   * fixed at source in `runFit`. But Thomas has seen the camera *"zoom out
+   * forever"* in a state that could not be reproduced here, so what the loop
+   * can reach is now bounded by construction rather than by argument.
+   *
+   * `ZOOM_MIN`/`ZOOM_MAX` are the slider's own limits, so nothing this clamp
+   * allows is anywhere the user could not have dragged to by hand. The worst
+   * case becomes "further out than I wanted, drag it back" rather than a camera
+   * receding without limit.
+   */
+  const handleZoomChange = useCallback((zoom: number) => {
+    const clamped = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom))
+    setView((v) => (v.zoom === clamped ? v : { ...v, zoom: clamped }))
+  }, [])
 
   /**
    * Search or the calendar picked a report: select it, and go there.
@@ -1287,9 +1306,9 @@ function IsolatedShelf({
             style={{
               // Must match `isolatedShelfGrid`'s track size, or `auto-fill`
               // computes a column count the dots do not actually fit into.
-              width: 12,
-              height: 12,
-              borderRadius: 12,
+              width: 6,
+              height: 6,
+              borderRadius: 6,
               cursor: 'pointer',
               background: colourForReport(r),
               opacity: selectedId === r.id ? 1 : 0.72,
@@ -1758,7 +1777,7 @@ const isolatedShelfWrap: React.CSSProperties = {
   position: 'fixed',
   top: 20,
   right: 214,
-  width: 316,
+  width: 232,
   padding: '9px 11px',
   background: 'rgba(10, 14, 24, 0.72)',
   border: '1px solid rgba(90, 115, 160, 0.22)',
@@ -1776,8 +1795,12 @@ const isolatedShelfGrid: React.CSSProperties = {
   // rows rather than twenty-two. Dots shrunk from 14px too: they are a
   // secondary reference, and at 14 they were competing with the graph's own
   // nodes for attention despite being the least connected fifth of the corpus.
-  gridTemplateColumns: 'repeat(auto-fill, 12px)',
-  gap: 5,
+  // 6px dots — half the previous 12. Thomas asked for them halved again after
+  // the horizontal pass: these are the least connected fifth of the corpus and
+  // the panel should read as a footnote, not as a third sidebar. 85 of them now
+  // land in four rows about 220px wide.
+  gridTemplateColumns: 'repeat(auto-fill, 6px)',
+  gap: 4,
 }
 
 const tooltip: React.CSSProperties = {

@@ -1151,10 +1151,29 @@ export default function InfluenceGraph({
       applyingFit.current = false
 
       fitPose.current = { target: centre.clone(), distance }
-      // Tell the zoom slider, synchronously, before it can guess wrong.
-      fitSync.distance = distance
+      // Only a fit that *moved* the camera resets the zoom baseline to 1 — see
+      // `stamp` on `fitSync`.
       fitSync.stamp += 1
     }
+
+    // **The measured distance is published whether or not the camera moved.**
+    //
+    // It is a measurement, not a camera action: "how far back you would have to
+    // stand to see all of this" is true regardless of where the camera actually
+    // is. Publishing it only on camera-moving fits was a bug. While the user
+    // owned the camera, tracking kept calling `runFit(false)`, which updated
+    // `bounds.fitDistance` (the prop) but left `fitSync.distance` frozen at the
+    // last camera-moving fit — so the zoom slider held two different ideas of
+    // what "zoom 1" means, multiplying by the prop in one direction and
+    // dividing by `fitSync` in the other. With the cloud grown in between, a
+    // round trip through the pair returns a slightly larger number than it was
+    // handed. That is a ratchet, and it walks the zoom outwards until ZOOM_MAX
+    // clamps it, which from the outside looks like the camera zooming out on
+    // its own and never coming back.
+    //
+    // Both directions now read this one number. If they are ever keyed off
+    // different bases again, the ratchet returns.
+    fitSync.distance = distance
 
     // Where the node cloud is, so the fog can be recomputed against it every
     // frame rather than baked once from the opening camera position.

@@ -24,8 +24,16 @@ export default function CameraZoom({
   const applied = useRef(zoom)
 
   // Slider → camera.
+  //
+  // The `fitDistance` prop is kept in the dependency list purely as a *trigger*
+  // — it is the thing that changes when a fit happens — but the arithmetic uses
+  // `fitSync.distance`, the same base the camera→slider direction below reads.
+  // The two directions have to agree on what "zoom 1" means down to the number;
+  // when they did not, a round trip through the pair returned slightly more
+  // than it was given and the zoom ratcheted outwards on its own.
   useEffect(() => {
-    if (!fitDistance) return
+    const base = fitSync.distance || fitDistance
+    if (!base) return
     if (Math.abs(applied.current - zoom) < 0.0005) return
     applied.current = zoom
 
@@ -35,7 +43,7 @@ export default function CameraZoom({
     const current = direction.length()
     if (current < 1e-6) return
 
-    direction.multiplyScalar((fitDistance * zoom) / current)
+    direction.multiplyScalar((base * zoom) / current)
     camera.position.copy(target).add(direction)
     orbit?.update?.()
   }, [zoom, fitDistance, camera, controls])

@@ -55,7 +55,7 @@ const GLYPHS: { label: string; hint: string; draw: ReactNode }[] = [
 
 function Glyph({ label, hint, draw }: { label: string; hint: string; draw: ReactNode }) {
   return (
-    <div style={{ textAlign: 'center', flex: '1 1 0', minWidth: 0 }}>
+    <div style={{ textAlign: 'center', minWidth: 0 }}>
       <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden>
         <g fill="rgba(120, 165, 235, 0.16)" stroke="#7fa6dd" strokeWidth="1.4">
           {draw}
@@ -63,17 +63,34 @@ function Glyph({ label, hint, draw }: { label: string; hint: string; draw: React
       </svg>
       <div
         style={{
+          // Uppercase + letter-spacing at 9.5px made "INTERNATIONAL" and
+          // "SUPRANATIONAL" wider than their share of the row, and because each
+          // is a single unbreakable word it did not wrap — it spilled sideways
+          // and collided with its neighbours. Thomas: "the lettering is
+          // overlapping." Sentence case drops the tracking and roughly a fifth
+          // of the width, and `overflowWrap` guarantees the labels break rather
+          // than overlap whatever the card ends up being sized to.
           fontSize: 9.5,
-          letterSpacing: '0.06em',
-          textTransform: 'uppercase',
+          letterSpacing: '0.01em',
           color: '#8fa4c4',
           marginTop: 4,
           lineHeight: 1.25,
+          overflowWrap: 'anywhere',
         }}
       >
         {label}
       </div>
-      <div style={{ fontSize: 9, color: '#54637d', lineHeight: 1.3, marginTop: 1 }}>{hint}</div>
+      <div
+        style={{
+          fontSize: 8.5,
+          color: '#54637d',
+          lineHeight: 1.3,
+          marginTop: 1,
+          overflowWrap: 'anywhere',
+        }}
+      >
+        {hint}
+      </div>
     </div>
   )
 }
@@ -154,7 +171,7 @@ export default function Onboarding() {
         onClick={(e) => e.stopPropagation()}
         style={{
           position: 'relative',
-          width: 'min(560px, calc(100vw - 48px))',
+          width: 'min(620px, calc(100vw - 48px))',
           padding: '30px 34px 24px',
           background: 'rgba(10, 14, 24, 0.92)',
           border: '1px solid rgba(90, 115, 160, 0.26)',
@@ -255,7 +272,20 @@ export default function Onboarding() {
           Shape tells you the level · colour tells you the region
         </div>
 
-        <div style={{ display: 'flex', gap: 6, marginBottom: 22 }}>
+        {/*
+          A six-column grid, not a flex row. `flex: 1 1 0` sizes each column
+          from its *content*, so the two long labels claimed more than a sixth
+          each and pushed the rest into overlapping. Equal fixed fractions give
+          every glyph exactly the same width no matter how long its caption is.
+        */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(6, minmax(0, 1fr))',
+            gap: 8,
+            marginBottom: 22,
+          }}
+        >
           {GLYPHS.map((g) => (
             <Glyph key={g.label} {...g} />
           ))}
