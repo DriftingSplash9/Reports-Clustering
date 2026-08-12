@@ -5,7 +5,14 @@ import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
 import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
-import { rimColourFor, rimWeightFor, colourForReport, familyOf, scopeOf } from '../lib/palette'
+import {
+  blueprintInkFor,
+  rimColourFor,
+  rimWeightFor,
+  colourForReport,
+  familyOf,
+  scopeOf,
+} from '../lib/palette'
 import { isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
 import {
   isStandingInstrument,
@@ -21,6 +28,11 @@ import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
   LINK_OPACITY,
+  PAPER_BACKGROUND,
+  PAPER_DIM_NODE_OPACITY,
+  PAPER_DIM_RIM_FACTOR,
+  PAPER_LINK_OPACITY,
+  PAPER_NODE_FILL,
   SCENE_BACKGROUND,
   ZOOM_MAX,
   type ViewSettings,
@@ -28,6 +40,7 @@ import {
 import {
   gradientLinkMaterial,
   pulseMaterial,
+  setLinkDimTheme,
   setLinkFocus,
   setLinkFog,
   teardropGeometry,
@@ -575,6 +588,18 @@ export default function InfluenceGraph({
     !visibleRef.current || visibleRef.current.edges.has(l.key)
 
   const forceGraph = useMemo(() => {
+    // Blueprint mode is a MEMO DEP, deliberately — the one view setting that
+    // is. Every other toggle mutates live materials because a rebuild would
+    // re-run layout for a paint job; blueprint changes the colour of every
+    // fill, rim, line and pulse at once, which is not a mutation pass, it is
+    // a different set of materials. The rebuild is cheap to the eye because
+    // `lastPositions` seeds every node exactly where it was (the same
+    // continuity a drilldown rides), so flipping the switch repaints the
+    // scene without moving it.
+    const bp = view.blueprint
+    // Theme the shared out-of-focus treatment BEFORE any material for this
+    // theme is built or focused — see the note in linkVisuals.
+    setLinkDimTheme(bp)
     // Meshes from a previous graph are about to be replaced; holding them would
     // leak and, worse, let focus updates write to spheres no longer in a scene.
     meshes.current.clear()
@@ -691,14 +716,20 @@ export default function InfluenceGraph({
         continue
       }
       const downstream = graph.byId.get(e.source_report_id)
+      // Family ink, not fill — see the note on LinkDatum.colour. In blueprint
+      // the same system, darker: each family's ink swaps to its printable
+      // variant (blueprintInkFor), and because pulses inherit LinkDatum.colour
+      // through the material cache, the teardrops arrive in dark ink with no
+      // separate wiring.
+      const inkFor = bp ? blueprintInkFor : rimColourFor
+      const fallbackInk = bp ? '#5a6478' : '#7f9ad0'
       linkMap.set(key, {
         source: e.target_report_id,
         target: e.source_report_id,
         weight,
         upstreamCadence: upstream?.releases_per_year ?? 1,
-        // Family ink, not fill — see the note on LinkDatum.colour.
-        colour: upstream ? rimColourFor(upstream.country) : '#7f9ad0',
-        endColour: downstream ? rimColourFor(downstream.country) : '#7f9ad0',
+        colour: upstream ? inkFor(upstream.country) : fallbackInk,
+        endColour: downstream ? inkFor(downstream.country) : fallbackInk,
         count: 1,
         hubRoom:
           3.5 *
@@ -719,14 +750,17 @@ export default function InfluenceGraph({
       // the relations rendering to reuse as a *dotted* style — a different
       // pattern for a different claim. The fourth is the trunk brightness:
       // log-scaled with the stacked count so 57 edges read as unmistakably
-      // heavier, not 57× louder.
+      // heavier, not 57× louder. Blueprint runs the same formula from a higher
+      // base — dark ink on paper needs body where glow-lines need restraint —
+      // with the cap lifted in proportion so trunks keep their full headroom.
+      const baseOpacity = bp ? PAPER_LINK_OPACITY : LINK_OPACITY
       linkMaterials.current.set(
         l.key,
         gradientLinkMaterial(
           l.colour,
           l.endColour,
           false,
-          Math.min(0.5, LINK_OPACITY * (1 + 0.35 * Math.log2(l.count))),
+          Math.min(bp ? 0.8 : 0.5, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
         ),
       )
     }
@@ -774,9 +808,15 @@ export default function InfluenceGraph({
         const n = node as ScoredReport
         const orbNode = isOrbId(n.id)
         // Orbs keep the family colour even mid-recolour: an orb spans levels,
-        // so no single level colour is true of it.
-        const colour =
-          (!orbNode && levelColoursRef.current?.[scopeOf(n)]) || colourForReport(n)
+        // so no single level colour is true of it. Blueprint overrides both:
+        // every node is the same pale paper disc, because on paper the fill
+        // stops being a channel at all — family moves entirely to the ink
+        // (rim + edges), and level to the flyout/hover, which is the whole
+        // "technical drawing" premise. The single-family recolour is likewise
+        // suspended here and in the recolour effect below.
+        const colour = bp
+          ? PAPER_NODE_FILL
+          : (!orbNode && levelColoursRef.current?.[scopeOf(n)]) || colourForReport(n)
         const radius = radiusFor(n.size_score)
 
         // No disposal of a superseded mesh here: three-forcegraph deallocates
@@ -789,7 +829,18 @@ export default function InfluenceGraph({
         // authoritative nodes bleed light, peripheral ones stay contained.
         // Capped below 1 — past that the bloom pass clips everything to
         // white and the colour and size channels both stop working.
-        const emissive = 0.3 + n.size_score * 0.62
+        //
+        // Blueprint pins it low and flat: paper discs are lit by the lights,
+        // not from within (a self-luminous disc reads as a screen, not
+        // paper), and bloom is off in this mode so the authority-glow
+        // reading is suspended anyway. The floor is not decorative — ACES
+        // tone mapping compresses a lit white hard enough that ambient alone
+        // leaves the discs concrete-grey (measured on the first cut at
+        // 0.12/0.85 ambient); this floor against the raised blueprint
+        // ambient is what pushes a solid disc's white just past the paper
+        // tone, so solid reads brighter-than-page and hollow reads as an
+        // open ring (see PAPER_NODE_FILL).
+        const emissive = bp ? 0.32 : 0.3 + n.size_score * 0.62
 
         // Born already dimmed if it is outside the current focus. The library
         // can rebuild these objects at times we do not control, and a sphere
@@ -820,11 +871,19 @@ export default function InfluenceGraph({
           nodeGeometry(n.jurisdiction_level, radius, orb),
           nodeMaterial({
             colour,
-            rimColour: rimColourFor(n.country),
+            // The ink channel — dark printable inks on paper, the glow inks
+            // on the dark scene. Family weights (US bold, EU thick…) apply
+            // in both themes; they are statements about the family, not
+            // about the lighting.
+            rimColour: bp ? blueprintInkFor(n.country) : rimColourFor(n.country),
             radius,
             emissive,
             lit,
-            dimOpacity: DIM_NODE_OPACITY,
+            // Themed: on paper the dim fill mostly vanishes into the
+            // background whatever the number, so it is allowed to sit much
+            // higher — the ghost is carried by the rim instead (see
+            // PAPER_DIM_NODE_OPACITY / applyFocus).
+            dimOpacity: bp ? PAPER_DIM_NODE_OPACITY : DIM_NODE_OPACITY,
             dimEmissive: DIM_NODE_EMISSIVE,
             // Palette v2: family rim weight (US bold red, EU thick lime,
             // Africa none…). Orbs keep their own fixed band inside
@@ -952,7 +1011,7 @@ export default function InfluenceGraph({
 
     return fg
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [graph, spreadApplied])
+  }, [graph, spreadApplied, view.blueprint])
 
   /**
    * `useLayoutEffect`, not `useEffect` — deliberately, and this one bug for
@@ -1371,6 +1430,27 @@ export default function InfluenceGraph({
     forceGraph.d3ReheatSimulation()
   }, [view.geoAffinity, forceGraph])
 
+  /**
+   * Blueprint gives the SCENE an opaque paper background; the dark theme
+   * keeps the canvas transparent over the page's CSS colour. Not styling —
+   * compositing correctness, diagnosed off pixel measurements: semi-
+   * transparent shader elements (dim links at 0.45, dim discs) blend into
+   * the transparent framebuffer, and the browser then composites those
+   * alpha-weighted values through a linear→sRGB conversion that lifts them
+   * nonlinearly — near-paper tones blow out to white, which is exactly what
+   * the first blueprint screenshots showed: "dim" lines glowing BRIGHTER
+   * than the paper. An opaque background moves the blend inside the GL
+   * buffer, in linear space, where it is right. The dark theme never showed
+   * the fault only because everything there is brighter than its
+   * background; it keeps its tuned-by-eye CSS compositing untouched.
+   */
+  useEffect(() => {
+    scene.background = view.blueprint ? new THREE.Color(PAPER_BACKGROUND) : null
+    return () => {
+      scene.background = null
+    }
+  }, [view.blueprint, scene])
+
 
   /**
    * Re-run the visibility digest when the filter changes.
@@ -1428,6 +1508,11 @@ export default function InfluenceGraph({
    * just computing the ordinary colour again; nothing is stashed.
    */
   useEffect(() => {
+    // Suspended on paper — blueprint discs have no fill channel to recolour
+    // (see nodeThreeObject), and this effect also fires on every rebuild, so
+    // without the guard it would repaint the paper discs in scene colours the
+    // moment blueprint switched on with a single-family filter active.
+    if (view.blueprint) return
     for (const [id, mesh] of meshes.current) {
       const r = graph.byId.get(id)
       if (!r || isOrbId(id)) continue
@@ -1437,7 +1522,7 @@ export default function InfluenceGraph({
       material.emissive.set(next)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [levelColours, forceGraph])
+  }, [levelColours, forceGraph, view.blueprint])
 
   /**
    * Apply the focus to everything that is already in the scene.
@@ -1467,14 +1552,19 @@ export default function InfluenceGraph({
   }
 
   function applyFocus() {
+    // The dim treatment is themed — see the PAPER_DIM_* notes in view.ts.
+    const bp = view.blueprint
+    const dimOpacity = bp ? PAPER_DIM_NODE_OPACITY : DIM_NODE_OPACITY
+    const dimRim = bp ? PAPER_DIM_RIM_FACTOR : undefined
+
     for (const [id, mesh] of meshes.current) {
       const material = mesh.material as NodeMaterial
       const lit = !focus || focus.nodes.has(id)
 
-      setNodeRim(material, lit)
+      setNodeRim(material, lit, dimRim)
       // `litOpacity` rather than 1 — a hollow node stays hollow when traced.
       const litOpacity = material.userData.litOpacity ?? 1
-      material.opacity = lit ? litOpacity : Math.min(DIM_NODE_OPACITY, litOpacity)
+      material.opacity = lit ? litOpacity : Math.min(dimOpacity, litOpacity)
       material.emissiveIntensity = focusEmissive(id, mesh, focus)
     }
 
@@ -1703,7 +1793,12 @@ export default function InfluenceGraph({
       runFit(!userOwnsCamera.current)
     }
     advanceFlight(delta)
-    updateFog(view.fog)
+    // No haze on paper — fog resolves toward SCENE_BACKGROUND (near-black),
+    // which on the paper theme would read as smoke rolling in rather than
+    // distance. Depth cues in blueprint are the drawing's own: occlusion and
+    // line convergence, like any technical drawing. The slider keeps its
+    // value; it simply resumes when the lights go back off.
+    updateFog(view.blueprint ? 0 : view.fog)
 
     // The orb breath — see `ORB_PULSE_PERIOD_SECONDS`. Driven off wall-clock
     // `delta`, not the tick count, for the same reason the re-fit window is:

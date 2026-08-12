@@ -13,6 +13,16 @@ export interface ViewSettings {
   /** Sky gradient on the horizon. */
   showHorizon: boolean
   /**
+   * Blueprint mode — the light theme, and deliberately not an inversion.
+   * Paper background, every node a pale disc, and the whole picture drawn in
+   * each family's dark ink: rims, edges and pulses alike, like a technical
+   * drawing. No glow (bloom dies on white anyway) and no haze. Same layout,
+   * same physics — toggling rebuilds materials, and position continuity is
+   * carried by the same `lastPositions` seeding a drilldown uses, so the
+   * graph does not re-scatter when the lights come on.
+   */
+  blueprint: boolean
+  /**
    * Distance haze, 0 to 1.
    *
    * A slider rather than a switch because the right answer was never "on" or
@@ -100,6 +110,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   showPulses: true,
   showEdges: true,
   showHorizon: false,
+  blueprint: false,
   fog: 0.35,
   glow: 0.55,
   autoRotate: false,
@@ -112,6 +123,44 @@ export const DEFAULT_VIEW: ViewSettings = {
 
 /** Scene background. Fog resolves to this, so the two must agree. */
 export const SCENE_BACKGROUND = '#05070d'
+
+/** Blueprint mode's paper, node disc, and dimmed-line colours. */
+export const PAPER_BACKGROUND = '#f2efe7'
+/**
+ * Pure white, not near-paper white — the difference IS the encoding. A solid
+ * disc renders as a slightly luminous white circle against the warmer paper
+ * (the emissive floor in InfluenceGraph pushes it just over the background),
+ * while a hollow one-off instrument keeps its emptied fill and reads as an
+ * open ring. With a near-paper fill those two collapsed into the same
+ * outline circle and the substance channel silently vanished in blueprint.
+ */
+export const PAPER_NODE_FILL = '#ffffff'
+export const PAPER_DIM_LINK = '#cdc6b6'
+/** Line opacity on paper — dark ink needs more body than glow-lines do.
+ * 0.42 measured near-invisible once compositing was fixed (the EU trunk came
+ * out 1 RGB step off the paper); 0.62 draws a confident pen line. */
+export const PAPER_LINK_OPACITY = 0.62
+/**
+ * Out-of-focus line opacity on paper. Far higher than the dark theme's
+ * `DIM_LINK_OPACITY` (0.07) because the roles of the two numbers differ with
+ * the ground they sit on: on near-black, a dim line only has to avoid adding
+ * light; on paper, `PAPER_DIM_LINK` is already within a few RGB steps of the
+ * background, so the *colour* carries the recession and the opacity has to
+ * keep the line from vanishing outright — faint pencil under the inked chain,
+ * not empty paper.
+ */
+export const PAPER_DIM_LINK_OPACITY = 0.45
+
+/**
+ * The dimmed-node treatment on paper — same shift of burden. A dimmed dark-
+ * theme node survives as a ghost of alpha; a paper disc's fill is within a
+ * few steps of the background, so alpha alone erases it. The ghost has to be
+ * the RIM: fill mostly gone, ring held at a quarter strength of its dark ink
+ * — a field of faint pencil circles under the traced chain, which is what a
+ * draughtsman's underdrawing actually looks like.
+ */
+export const PAPER_DIM_NODE_OPACITY = 0.35
+export const PAPER_DIM_RIM_FACTOR = 0.25
 
 /**
  * Bloom threshold at full glow.

@@ -6,6 +6,11 @@ import { ZOOM_MAX, ZOOM_MIN, type ViewSettings } from '../lib/view'
  */
 
 const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
+  {
+    key: 'blueprint',
+    label: 'Blueprint',
+    hint: 'Light mode, drawn like a technical drawing: paper background, pale discs, everything in each family\'s dark ink. Same layout — nothing moves when you flip it',
+  },
   { key: 'showPulses', label: 'Pulses', hint: 'Travelling teardrops, pointing the way influence moves. With arrows gone these are the only direction cue' },
   {
     key: 'showEdges',

@@ -3,6 +3,8 @@ import {
   DIM_LINK_COLOUR,
   DIM_LINK_OPACITY,
   LINK_OPACITY,
+  PAPER_DIM_LINK,
+  PAPER_DIM_LINK_OPACITY,
   SCENE_BACKGROUND,
 } from '../lib/view'
 
@@ -123,7 +125,28 @@ export function gradientLinkMaterial(
   return material
 }
 
-const dimColour = new THREE.Color(DIM_LINK_COLOUR)
+/**
+ * The out-of-focus treatment, themable because "receded" is drawn with
+ * opposite moves on the two grounds: near-invisible dark blue on the dark
+ * scene, faint-but-present warm grey on blueprint paper (see the note on
+ * `PAPER_DIM_LINK_OPACITY`). Module state rather than a per-material uniform
+ * because every link recedes the same way at any given moment — there is one
+ * theme, exactly as there is one `dimColour` before this change.
+ *
+ * `setLinkDimTheme` is called from the top of InfluenceGraph's `forceGraph`
+ * memo — the one place that knows the theme is changing — *before* any
+ * material is built or focused for the new theme, and a theme flip rebuilds
+ * every material after it anyway, so no stale-colour window exists.
+ */
+const dim = {
+  colour: new THREE.Color(DIM_LINK_COLOUR),
+  opacity: DIM_LINK_OPACITY,
+}
+
+export function setLinkDimTheme(blueprint: boolean) {
+  dim.colour.set(blueprint ? PAPER_DIM_LINK : DIM_LINK_COLOUR)
+  dim.opacity = blueprint ? PAPER_DIM_LINK_OPACITY : DIM_LINK_OPACITY
+}
 
 /**
  * Fade a link out of focus, or restore it, without rebuilding anything.
@@ -143,13 +166,13 @@ export function setLinkFocus(
   tracing = false,
 ) {
   const { from, to, litOpacity } = material.userData
-  material.uniforms.uFrom.value.copy(lit ? from : dimColour)
-  material.uniforms.uTo.value.copy(lit ? to : dimColour)
+  material.uniforms.uFrom.value.copy(lit ? from : dim.colour)
+  material.uniforms.uTo.value.copy(lit ? to : dim.colour)
   material.uniforms.uOpacity.value = lit
     ? tracing
       ? Math.min(0.68, litOpacity * 2.2)
       : litOpacity
-    : DIM_LINK_OPACITY
+    : dim.opacity
   material.depthTest = !(lit && tracing)
 }
 

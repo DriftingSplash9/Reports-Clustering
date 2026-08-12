@@ -27,6 +27,8 @@ import {
   BLOOM_THRESHOLD_MAX,
   BLOOM_THRESHOLD_MIN,
   DEFAULT_VIEW,
+  PAPER_BACKGROUND,
+  SCENE_BACKGROUND,
   ZOOM_MAX,
   ZOOM_MIN,
   type ViewSettings,
@@ -553,23 +555,52 @@ export default function App() {
       <Canvas
         camera={{ position: [0, 0, 700], fov: FOV, near: 1, far: 12000 }}
         gl={{ antialias: true }}
-        style={{ background: '#05070d', cursor: hovered ? 'pointer' : 'default' }}
+        // The background is CSS on the canvas element, not a scene colour —
+        // the GL buffer is transparent, so this one style IS the theme switch
+        // for the ground everything sits on.
+        style={{
+          background: view.blueprint ? PAPER_BACKGROUND : SCENE_BACKGROUND,
+          cursor: hovered ? 'pointer' : 'default',
+        }}
         // Fires when a click hits nothing in the scene. Clearing here rather
         // than on the canvas element means orbiting over empty space, which
         // also ends in a click, is handled by R3F's own drag threshold.
         onPointerMissed={() => setSelectedId(null)}
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[300, 300, 400]} intensity={1.1} />
-        <pointLight position={[-300, -200, -300]} intensity={0.4} color="#4a6fb5" />
+        {/*
+          Blueprint lifts the ambient and drops the cool fill light: paper is
+          lit flat and even (a strong point light on white discs reads as
+          plastic), and the blue fill that gives the dark scene its depth
+          would tint every disc toward the sky it no longer sits in. The main
+          key light stays — a little shading is what keeps the discs reading
+          as spheres at all.
+        */}
+        {/*
+          The blueprint ambient looks absurdly high because two pipeline
+          factors both eat it, measured off screenshots rather than assumed:
+          physically-correct lighting divides Lambertian diffuse by π (so
+          ambient 1.15 delivers only ~0.37 to a white disc — the first two
+          cuts rendered concrete-grey discs at 0.85 and 1.15), and ACES tone
+          mapping then compresses what is left. 2.6/π ≈ 0.83, plus the
+          emissive floor in nodeVisuals, lands the discs at pale-paper after
+          the curve — visibly below the hollow nodes' white, above the
+          background. Tune against pixels, not against what the number
+          "should" be.
+        */}
+        <ambientLight intensity={view.blueprint ? 2.6 : 0.5} />
+        <pointLight position={[300, 300, 400]} intensity={view.blueprint ? 0.5 : 1.1} />
+        {!view.blueprint && (
+          <pointLight position={[-300, -200, -300]} intensity={0.4} color="#4a6fb5" />
+        )}
 
         {/*
           SpaceFrame (the wireframe bounding box) and the ground grid were
           deleted 2026-08-12 — Thomas: "don't keep the code". Environment now
           carries only the optional horizon, which needs nothing measured, so
-          it no longer waits on `bounds`.
+          it no longer waits on `bounds` — and sits out blueprint entirely,
+          where a night-sky gradient behind paper would be a hole in the page.
         */}
-        <Environment view={view} />
+        {!view.blueprint && <Environment view={view} />}
 
         <InfluenceGraph
           graph={disclosedGraph}
@@ -630,9 +661,18 @@ export default function App() {
           first time bloom was tuned, and why it was then set so conservatively
           that it did nothing at all for five sessions.
         */}
+        {/*
+          Blueprint zeroes the intensity rather than unmounting the composer —
+          same reasoning as the Glow toggle above: the composer's presence
+          changes the whole pipeline's colour handling, so it stays mounted
+          and only the effect goes quiet. Glow has no meaning on paper anyway;
+          bloom is additive light, and paper does not emit.
+        */}
         <EffectComposer>
           <Bloom
-            intensity={view.glow <= 0.005 ? 0 : 0.45 + view.glow * 0.5}
+            intensity={
+              view.blueprint || view.glow <= 0.005 ? 0 : 0.45 + view.glow * 0.5
+            }
             luminanceThreshold={
               BLOOM_THRESHOLD_MAX -
               view.glow * (BLOOM_THRESHOLD_MAX - BLOOM_THRESHOLD_MIN)
@@ -1048,7 +1088,12 @@ function DomainPanel({
   selected: readonly Domain[] | null
   onToggle: (domain: Domain) => void
 }) {
-  const [open, setOpen] = useState(false)
+  // Open by default since round 9 (Thomas: "can we leave the subjects open to
+  // see in the left sidebar? there's no need to hide them like that"). The
+  // original close-by-default guess predated the sidebar scrolling — chips
+  // hidden to protect a panel that could overflow, in a panel that no longer
+  // can. The header still collapses it for anyone who wants the quiet.
+  const [open, setOpen] = useState(true)
   const [sort, setSort] = useState<'count' | 'name'>('count')
 
   const present = useMemo(
@@ -1216,6 +1261,15 @@ function ChipBar({
   onScope: (scope: Scope) => void
 }) {
   const [openFamily, setOpenFamily] = useState<ColourFamily | null>(null)
+  /**
+   * The tray minimize (round 9, Thomas: "The regions need a way to have their
+   * tray minimized"). Collapsed, the whole row folds into one small pill that
+   * still reports whether a region filter is active — state must stay legible
+   * while its controls are put away, or a puzzling half-empty graph is one
+   * forgotten click from looking like a bug. The filter itself is untouched
+   * by collapsing; this hides controls, never changes what they did.
+   */
+  const [collapsed, setCollapsed] = useState(false)
   const barRef = useRef<HTMLDivElement>(null)
 
   // The flyout closes on a click anywhere outside the bar, and on Escape —
@@ -1247,6 +1301,26 @@ function ChipBar({
   const groups = SCOPE_GROUPS.filter(
     (g) => g.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0) > 0,
   )
+  const litCount = anyFilter
+    ? groups.filter((g) => g.scopes.some((s) => filter.scopes!.includes(s))).length
+    : 0
+
+  if (collapsed) {
+    return (
+      <div ref={barRef} style={chipBarWrap}>
+        <div
+          onClick={() => setCollapsed(false)}
+          title="Show the region chips"
+          style={{ ...chip, cursor: 'pointer', color: '#8fa3c0' }}
+        >
+          <span style={{ whiteSpace: 'nowrap' }}>
+            Regions{anyFilter ? ` · ${litCount} on` : ''}
+          </span>
+          <span style={{ color: '#54637d' }}>▴</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div ref={barRef} style={chipBarWrap}>
@@ -1346,6 +1420,19 @@ function ChipBar({
           </div>
         )
       })}
+      {/* The tuck-away. ▾ pointing off the bottom edge = put the tray there;
+          the collapsed pill's ▴ = bring it back. Closes any open flyout on
+          the way down so nothing floats over a bar that has left. */}
+      <div
+        onClick={() => {
+          setOpenFamily(null)
+          setCollapsed(true)
+        }}
+        title="Minimize the region chips"
+        style={{ ...chip, cursor: 'pointer', padding: '5px 9px' }}
+      >
+        <span style={{ color: '#54637d' }}>▾</span>
+      </div>
     </div>
   )
 }

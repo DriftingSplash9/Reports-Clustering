@@ -884,6 +884,34 @@ export function rimWeightFor(country: Country): RimWeight {
 }
 
 /**
+ * The family inks for Blueprint mode — the same one-ink-per-family idea, in
+ * dark, because the night palette's light rims vanish on paper. Approved
+ * round 5 ("Blueprint mode" over a naive invert), built round 9. Each ink is
+ * the family's rim pulled down to drawing-ink darkness; NZ's and INT's whites
+ * become their fills' own dark registers, since white-on-paper is nothing.
+ */
+export const BLUEPRINT_INK: Record<ColourFamily, string> = {
+  CA: '#a82446',
+  US: '#c22525',
+  AU: '#b25a08',
+  NZ: '#6b4a33',
+  INT: '#7a3fe0',
+  EU: '#3f8a14',
+  XEU: '#3a5290',
+  AFR: '#6a3fbd',
+  CN: '#a5820a',
+  ASIA: '#12756c',
+  IN: '#b03078',
+  SA: '#697a58',
+}
+
+/** Blueprint ink for a country — total, like `rimColourFor`. */
+export function blueprintInkFor(country: Country): string {
+  if (!isKnownCountry(country)) return '#5a6478'
+  return BLUEPRINT_INK[familyOf(country)] ?? '#5a6478'
+}
+
+/**
  * Rim colour for a country, total by construction.
  *
  * Member states take the EU family rim rather than one each — see the note on

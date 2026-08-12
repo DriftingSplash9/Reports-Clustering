@@ -240,9 +240,16 @@ export function nodeGeometry(
  * of a bold ring was still a clearly visible ring, and several hundred
  * clearly visible rings is why tracing a chain stopped reading as a chain.
  * Out-of-focus nodes keep a ghost of a silhouette; they no longer keep a
- * ring. */
-export function setNodeRim(material: NodeMaterial, lit: boolean) {
-  material.userData.rim.value = (lit ? 1 : 0.07) * material.userData.rimMax
+ * ring.
+ *
+ * `dimFactor` is a parameter since round 9 because blueprint mode needs the
+ * OLD number back on purpose: on paper the dimmed fill is invisible by
+ * construction (white on near-white), so the rim is the whole ghost, and a
+ * quarter-strength dark-ink ring on paper is the pencil underdrawing — not
+ * the wall of rings it was on the dark scene. Same number, opposite meaning,
+ * because the ground flipped. */
+export function setNodeRim(material: NodeMaterial, lit: boolean, dimFactor = 0.07) {
+  material.userData.rim.value = (lit ? 1 : dimFactor) * material.userData.rimMax
 }
 
 /**
