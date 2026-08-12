@@ -1,0 +1,65 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 7 of Thomas's 'go for 10 rounds' request, 2026-08-12. Morocco already had municipal (Casablanca taxe d'habitation) and federal (HCP CPI, social-protection laws) nodes but nothing at the regional tier — this round adds Morocco's 'régionalisation avancée' layer: 12 constitutionally-and-statutorily-established regions, each with its own elected council and development plan.",
+  "reports": [
+    {
+      "id": "ma-loi-organique-111-14-regions",
+      "title": "Loi organique n° 111-14 relative aux régions",
+      "publisher": "Royaume du Maroc",
+      "country": "MA",
+      "jurisdiction_level": "federal",
+      "region": "Morocco",
+      "description": "Adopted late January 2015 / dated 7 July 2015 depending on source (\"adoptée fin janvier 2015\" per one region's own PDR; \"du 7 juillet 2015\" per a legal-summary secondary source — both cited, discrepancy not resolved this round). Establishes Morocco's 12 regions — Tanger-Tétouan-Al Hoceïma, l'Oriental, Fès-Meknès, Rabat-Salé-Kénitra, Béni Mellal-Khénifra, Casablanca-Settat, Marrakech-Safi, Drâa-Tafilalet, Souss-Massa, Guelmim-Oued Noun, Laâyoune-Sakia El Hamra, and Dakhla-Oued Ed Dahab — and, per a secondary summary, \"définit la composition et les attributions du conseil régional\" and \"les compétences propres, partagées et transférées des régions, ainsi que les règles budgétaires et financières applicables.\" The same secondary source states regions receive \"une quote-part de la taxe sur la valeur ajoutée\" (a VAT share) and \"une part de l'impôt sur les sociétés\" (a corporate-tax share) — Morocco's version of the federal-to-region fiscal transfer already documented differently for Nigeria (FAAC), Kenya (CRA), Ghana (DACF), Ethiopia (subsidy proclamation) and DR Congo (40% retrocession) this round — though no specific article number for that funding provision was independently verified this round.",
+      "releases_per_year": null,
+      "cadence_note": "One-off foundational instrument (an organic law).",
+      "last_updated": "2015-07-07",
+      "url": "https://politica.edumaroc.org/2026/06/les-regions-au-maroc-organisation-et.html",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "ma-casablanca-settat-pdr-2017",
+      "title": "Programme de Développement Régional (PDR), Région Casablanca-Settat",
+      "publisher": "Conseil Régional de Casablanca-Settat",
+      "country": "MA",
+      "jurisdiction_level": "provincial",
+      "region": "Casablanca-Settat Region, Morocco",
+      "description": "Dated March 2017, covering the region representing (per the document) 20.3% of Morocco's national population and 32.4% of GDP. Verbatim citation of the organic law: \"La loi organique 111-14, adoptée fin janvier 2015, prévoit de nouvelles prérogatives et attributions dévolues aux régions. L'article 83 de cette loi précise l'obligation pour le Conseil Régional de définir une stratégie de développement régionale durant la première année de son mandat\" — a direct statement that this very document exists BECAUSE Article 83 requires it, one of the cleaner statutory-basis citations found in this branch. Does not cite HCP or CPI data by name, checked directly and confirmed absent.",
+      "releases_per_year": null,
+      "cadence_note": "Multi-year regional development plan (this edition nominally 2017, though a 2021-2027 successor plan is referenced in press coverage as being prepared).",
+      "last_updated": "2017-03",
+      "url": "https://casainvest.ma/sites/default/files/guides/PDR%20Casablanca-Settat.pdf",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ma-casablanca-settat-pdr-2017",
+      "target_report_id": "ma-loi-organique-111-14-regions",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Verbatim, from the PDR itself: \"L'article 83 de cette loi précise l'obligation pour le Conseil Régional de définir une stratégie de développement régionale durant la première année de son mandat\" — the document exists specifically to satisfy this statutory obligation, a direct textual dependency rather than an inferred one.",
+      "evidence_url": "https://casainvest.ma/sites/default/files/guides/PDR%20Casablanca-Settat.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ma-casablanca-settat-pdr-2017 -> ma-hcp-ipc",
+      "source": "ma-casablanca-settat-pdr-2017",
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked directly for an HCP (Haut-Commissariat au Plan) or CPI citation in the PDR — the demographic/economic statistics presented (population share, GDP share) are given without a named source in the visible content. Not minted."
+    },
+    {
+      "edge": "ma-loi-organique-111-14-regions VAT/corporate-tax share -> (specific article)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "A secondary summary source states regions receive a VAT share and a corporate-tax share under the organic law, but does not give the specific article number, and the organic law's own primary text was not independently fetched this round. Worth a direct fetch of the law's own text (abhatoo.net.ma links to it) in a future round — this is exactly the kind of specific-article citation this branch's evidence standard wants before treating the funding mechanism as fully documented."
+    },
+    {
+      "edge": "ma-casablanca-taxe-habitation -> ma-loi-organique-111-14-regions or ma-casablanca-settat-pdr-2017",
+      "source": "ma-casablanca-taxe-habitation",
+      "target": null,
+      "reason": "deferred",
+      "why": "Casablanca the municipality (commune) and Casablanca-Settat the region are distinct administrative tiers that happen to share a name — the existing municipal taxe d'habitation node was not re-checked this round for a citation of the regional plan or organic law. Left as a natural next check rather than assumed connected."
+    }
+  ]
+}

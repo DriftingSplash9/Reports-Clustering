@@ -1,0 +1,51 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 6 of Thomas's 'go for 10 rounds' request, 2026-08-12. Ghana already had two isolated GH nodes at the municipal/federal tier (gh-ama-composite-budget-2026, gh-local-governance-act-936, both from an earlier af-grok-municipal-batch2.json round with zero dependencies wired between them). This round closes that gap and adds the missing money-flow layer — the District Assemblies Common Fund — that actually meshes MMDAs (Metropolitan/Municipal/District Assemblies) to the national government, directly answering Thomas's question for Ghana's unitary-decentralized model.",
+  "reports": [
+    {
+      "id": "gh-dacf-2026-allocation",
+      "title": "District Assemblies Common Fund — 2026 Allocation (under the 2026 Appropriation Act)",
+      "publisher": "Parliament of Ghana",
+      "country": "GH",
+      "jurisdiction_level": "federal",
+      "region": "Ghana",
+      "description": "Verbatim: \"The total allocation to the Fund for the 2026 fiscal year is based on five per cent of the projected total revenue for the year,\" totaling GHC8,769,707,900 (up from a prior allocation, per the Herald's own headline framing it as a raise). This is the standing constitutional mechanism (Ghana's Article 252, referenced by the Fund's common name but not independently quoted from the Constitution's own text this round) that distributes a fixed share of national revenue to every Metropolitan, Municipal and District Assembly — Ghana's answer to the same 'how does the nation fund municipalities' question already documented differently for Nigeria (FAAC/statutory allocation) and Kenya (CRA county allocation).",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, set within each year's Appropriation Act.",
+      "last_updated": "2026",
+      "url": "https://theheraldghana.com/parliament-raises-dacf-allocation-to-ghc8-7bn-for-2026/",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gh-ama-composite-budget-2026",
+      "target_report_id": "gh-local-governance-act-936",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Accra Metropolitan Assembly's own 2026-2029 Composite Budget narrative, verbatim: \"as prescribed by Section 12(3) of the Local Governance Act 2016, (Act 936)\" — a direct statutory citation, plus \"When Ghana returned to constitutional rule in 1993, it derived its legal basis from the Local Governance Act, 2016, (Act 936)\" describing the Assembly's own legal foundation. Closes a gap: both nodes existed in the corpus already (af-grok-municipal-batch2.json) with no edge between them.",
+      "evidence_url": "https://ama.gov.gh/documents/2026_NARRATIVE_STATEMENT.pdf"
+    },
+    {
+      "source_report_id": "gh-ama-composite-budget-2026",
+      "target_report_id": "gh-dacf-2026-allocation",
+      "relationship_type": "uses_data_from",
+      "basis": "Accra's own composite budget names the Fund directly among its financing sources: \"District Assemblies' Common Fund and District Development Facility,\" referenced multiple times across program budget lines.",
+      "evidence_url": "https://ama.gov.gh/documents/2026_NARRATIVE_STATEMENT.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gh-ama-composite-budget-2026 -> gh-gss-cpi",
+      "source": "gh-ama-composite-budget-2026",
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked directly for a Ghana Statistical Service CPI/inflation citation in the 2026 Accra composite budget narrative — not found. The budget cites a population growth rate (2.9% for 2026) but no inflation deflator by name. Not minted."
+    },
+    {
+      "edge": "gh-dacf-2026-allocation -> (Ghana Constitution, Article 252)",
+      "source": "gh-dacf-2026-allocation",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The Herald's coverage says the DACF is allocated 'in accordance with constitutional requirements' but does not itself quote Article 252 by number, and no existing Ghana constitution node is in this corpus to link to. Same open item pattern as Kenya's Article 204 this round — worth a dedicated future fetch of Ghana's constitutional text directly."
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 5 of Thomas's 'go for 10 rounds' request, 2026-08-12. DR Congo — entirely new to the AF branch until now (flagged 'no-document' in af-grok-synthesis.json's _dropped list, item 3). A strong constitutional decentralization story (26 provinces since a 2015 redivision, a documented 40%-retention rule) but the actual fiscal-transfer paper trail linking federal and provincial documents to each other was not found this round — an honest partial result, not a completed thread.",
+  "reports": [
+    {
+      "id": "cd-constitution-provinces-revenue",
+      "title": "Constitution de la République Démocratique du Congo, 2005 (rev. 2011) — Articles 2 et 175",
+      "publisher": "République Démocratique du Congo",
+      "country": "CD",
+      "jurisdiction_level": "federal",
+      "region": "Democratic Republic of the Congo",
+      "description": "Article 2, verbatim: \"The Democratic Republic of the Congo consists of the city of Kinshasa and 25 provinces which possess legal personality\" (26 territorial divisions total, naming all 25 provinces individually). Article 175, verbatim: \"The percentage of national revenues allocated to the provinces is fixed at 40%. It is retained at the source (retenue à la source).\" This is DRC's version of the same federal-to-province fiscal-transfer question already documented for Ethiopia (Proclamation 1250/2021) and Kenya (CRA formula, Equalisation Fund) this round — a constitutionally fixed percentage rather than a discretionary formula, and unusually explicit that the money is retained at the province of origin rather than routed through the capital first.",
+      "releases_per_year": null,
+      "cadence_note": "One-off foundational instrument (a constitution).",
+      "last_updated": "2011",
+      "url": "https://constitutionnet.org/sites/default/files/DRC%20-%20Congo%20Constitution.pdf",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "cd-ins-note-conjoncture",
+      "title": "Note de Conjoncture (Institut National de la Statistique, RDC)",
+      "publisher": "Institut National de la Statistique (INS), République Démocratique du Congo",
+      "country": "CD",
+      "jurisdiction_level": "federal",
+      "region": "Democratic Republic of the Congo",
+      "description": "AGENCY-attributed via press citation, not a directly located primary PDF: opinion-info.cd, reporting DRC's July 2026 inflation, states verbatim: \"Selon la note de conjoncture de l'Institut national de la statistique (INS), le taux d'inflation s'est établi à 0,195%, contre 0,186% enregistré la semaine précédente\" — implying a weekly cadence. INS's own site (insrdc.cd) is confirmed live but explicitly under construction (\"Prochainement: Catalogue de données, Calendrier de diffusion...\"), so a direct primary link was not available this round despite the agency and publication name both being real and specifically named. Closes the 'DR Congo CPI -> no node minted' gap flagged in af-grok-synthesis.json's _dropped list, though not as cleanly as a directly-fetched bulletin would.",
+      "releases_per_year": 52,
+      "cadence_note": "Implied weekly, per the press citation's own week-over-week comparison; not independently confirmed against a primary masthead.",
+      "last_updated": "2026-07",
+      "url": "https://www.opinion-info.cd/economie/2026/07/14/economie-la-rdc-enregistre-une-nouvelle-poussee-inflationniste-en-juillet-2026",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "cd-kinshasa-edit-budgetaire-2026",
+      "title": "Édit budgétaire du Gouvernement provincial de Kinshasa, exercice 2026",
+      "publisher": "Gouvernement provincial de Kinshasa",
+      "country": "CD",
+      "jurisdiction_level": "provincial",
+      "region": "Kinshasa Province, DR Congo",
+      "description": "Adopted by the provincial assembly late December 2025. Verbatim total: \"3 223 milliards 567 millions 945 mille 514 francs congolais, soit près de 1,111 milliard de dollars américains\" (~US$1.111 billion). Press coverage (DeskEco) describes the budget as resting on \"une approche pragmatique et réaliste, fondée... sur les capacités réelles de mobilisation des ressources provinciales\" (provincial resource-mobilization capacity) rather than citing the constitutional 40% retrocession rule directly — checked specifically and confirmed absent from this source.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual provincial budget edict.",
+      "last_updated": "2025-12-29",
+      "url": "https://deskeco.com/2025/12/29/kinshasa-le-gouvernement-provincial-devoile-un-budget-2026-de-plus-de-1-milliard-de-dollars",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "cd-cbmt-2024-2026",
+      "title": "Cadre Budgétaire à Moyen Terme 2024–2026",
+      "publisher": "Ministère du Budget, République Démocratique du Congo",
+      "country": "CD",
+      "jurisdiction_level": "federal",
+      "region": "Democratic Republic of the Congo",
+      "description": "Published September 2023. Contains a consolidated \"Provinces ETD Consolidé\" (Provinces + Entités Territoriales Décentralisées) budget line aggregating transfers to all provinces and decentralized entities together, without itemizing by individual province — so it cannot itself be used to link to Kinshasa's own budget edict. Does not cite Article 175 or the 40% figure directly, checked specifically and confirmed absent. DRC's own national medium-term fiscal framework, structurally the same genre already minted for Nigeria (MTEF) and Kenya (CFSP), but with materially less transparency about the province-by-province breakdown.",
+      "releases_per_year": null,
+      "cadence_note": "Rolling medium-term framework (this is the 2024-2026 edition; a 2025 Loi de Finances also exists at the same publisher).",
+      "last_updated": "2023-09",
+      "url": "https://www.budget.gouv.cd/wp-content/uploads/budget2024/projet/document_num_7_cbmt_24_26.pdf",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "cd-cbmt-2024-2026 -> cd-constitution-provinces-revenue",
+      "source": "cd-cbmt-2024-2026",
+      "target": "cd-constitution-provinces-revenue",
+      "reason": "no-document",
+      "why": "The CBMT's own \"Provinces ETD Consolidé\" budget line is exactly the kind of figure Article 175's 40% rule would produce, but the document was checked directly for an Article 175 or '40%' citation and neither was found — the two are almost certainly related in substance but not documented as connected in this specific text. Flagged for a Grok follow-up: dense French-language government budget PDFs like this are exactly where this session's fetch tooling has underperformed before."
+    },
+    {
+      "edge": "cd-kinshasa-edit-budgetaire-2026 -> cd-cbmt-2024-2026 or cd-constitution-provinces-revenue",
+      "source": "cd-kinshasa-edit-budgetaire-2026",
+      "target": null,
+      "reason": "no-document",
+      "why": "Kinshasa's own 2026 budget edict, per the press coverage checked, frames its revenue base as provincial resource-mobilization capacity rather than citing the constitutional retrocession mechanism or the national medium-term framework by name. The primary édit budgétaire text itself (as opposed to press coverage of it) was not located this round — worth a direct search for the provincial assembly's own published text."
+    },
+    {
+      "edge": "cd-ins-note-conjoncture -> (primary PDF)",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "insrdc.cd, INS's own portal, is live but explicitly under construction per its own text (\"Prochainement: Catalogue de données...\"); ins.gouv.cd shows a live inflation figure on its homepage but no titled, linked publication. The 'Note de Conjoncture' title and INS attribution both come from a secondary press citation (opinion-info.cd), not a primary document — consistent with, but weaker than, this branch's usual AGENCY ONLY standard, since here the agency AND a publication title are both named, just not independently verified against INS's own text."
+    }
+  ]
+}

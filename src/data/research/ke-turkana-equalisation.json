@@ -1,0 +1,65 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 4 of Thomas's 'go for 10 rounds' request, 2026-08-12. Kenya's devolution system already has strong coverage for Nairobi (ke-nairobi-municipal-finance.json); this round adds a second, structurally different county (Turkana, a rural 'hardship area') plus the constitutional Equalisation Fund mechanism that specifically exists to route extra federal money to counties like it — the clearest documented example in this branch so far of a national government mechanism built explicitly to correct for regional inequality between 'provinces.'",
+  "reports": [
+    {
+      "id": "ke-turkana-cfsp-2023",
+      "title": "Turkana County Fiscal Strategy Paper, FY 2023/24",
+      "publisher": "Turkana County Government, Finance and Economic Planning Department",
+      "country": "KE",
+      "jurisdiction_level": "provincial",
+      "region": "Turkana County, Kenya",
+      "description": "Verbatim: \"The County Fiscal Strategy Paper is published in accordance with Section 117 of the Public Finance Management Act, 2012.\" Also references the Commission on Revenue Allocation's role in setting county ceilings via an eight-parameter horizontal-division formula, and reports declining inflation (\"eased to 9.0 percent in January 2023\") without naming KNBS as the source by title, so that specific link is not minted (same caution already applied to Oromia's unattributed CPI mention this round). A later edition (2025) exists at the KIPPRA repository but returned only a bare metadata stub on fetch, not the document text — the 2023/24 edition is the one actually quoted here.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, per PFMA s.117's own statutory publication cycle.",
+      "last_updated": "2023-02",
+      "url": "https://www.turkana.go.ke/wp-content/uploads/2023/03/Approved-Turkana-CFSP-2023.pdf",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "ke-equalisation-fund-appropriation-bill-2025",
+      "title": "The Equalisation Fund Appropriation Bill (Senate Bills No. 7 of 2025)",
+      "publisher": "Parliament of Kenya (Senate)",
+      "country": "KE",
+      "jurisdiction_level": "federal",
+      "region": "Kenya",
+      "description": "First Reading 27 June 2025. Appropriates KShs 16,800,000,000 from the constitutionally-established Equalisation Fund (Article 204 of the Constitution of Kenya, 2010, cited multiple times per the Bill Digest) — KShs 504 million to the Fund's own Secretariat, KShs 16.296 billion \"for the settlement of development expenses in various constituencies.\" Names 34 marginalised counties directly, including Turkana: \"Baringo, Bomet, Bungoma, Busia, Elgeyo Marakwet, Garissa, Homa Bay, Isiolo, Kajiado, Kericho, Kilifi, Kisumu, Kitui, Kwale, Laikipia, Lamu, Machakos, Mandera, Marsabit, Meru, Migori, Murang'a, Nakuru, Nandi, Narok, Samburu, Siaya, Taita Taveta, Tana River, Tharaka Nithi, Trans Nzoia, Turkana, Wajir and West Pokot.\" This is the constitutional mechanism Thomas asked about directly — a documented instrument that routes national money specifically because a county/province is structurally disadvantaged, distinct from the ordinary population-weighted CRA revenue-sharing formula already in the corpus.",
+      "releases_per_year": null,
+      "cadence_note": "Not a recurring release in the corpus's sense — a periodic appropriation bill tied to the standing Equalisation Fund mechanism.",
+      "last_updated": "2025-06-27",
+      "url": "https://www.parliament.go.ke/sites/default/files/2025-07/Bill%20Digest%20-%20The%20Equalisation%20Fund%20Appropriation%20Bill,%20No.7%20of%202025%20-%20Final_0.pdf",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ke-turkana-cfsp-2023",
+      "target_report_id": "ke-pfma-2012",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Verbatim: \"The County Fiscal Strategy Paper is published in accordance with Section 117 of the Public Finance Management Act, 2012\" — the identical statutory basis and relationship_type already established for ke-nairobi-cfsp -> ke-pfma-2012 in this corpus, now confirmed for a second county.",
+      "evidence_url": "https://www.turkana.go.ke/wp-content/uploads/2023/03/Approved-Turkana-CFSP-2023.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ke-equalisation-fund-appropriation-bill-2025 -> ke-turkana-cfsp-2023",
+      "source": "ke-equalisation-fund-appropriation-bill-2025",
+      "target": "ke-turkana-cfsp-2023",
+      "reason": "no-document",
+      "why": "The Appropriation Bill names Turkana as a beneficiary county and Turkana's own CFSP (2023/24 edition, the one actually fetched) does not mention the Equalisation Fund at all — checked directly, confirmed absent. Both are real, both are minted, but no document ties them together textually, so no edge is drawn between them. This is a fiscal relationship (money flows from one to benefit the other) rather than a documented citation relationship, which this branch's evidence standard treats as two separate facts, not one dependency."
+    },
+    {
+      "edge": "ke-equalisation-fund-appropriation-bill-2025 -> (Constitution of Kenya, Article 204)",
+      "source": "ke-equalisation-fund-appropriation-bill-2025",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The Bill Digest confirms Article 204 is cited multiple times, but the Constitution's own verbatim Article 204 text could not be independently fetched this round — the Kenya Law Reform Commission's page redirected to a CAPTCHA wall, and no alternate primary-text source was found in the time available. The existing ke-constitution-article54 node covers a different article (disability rights) and is not a substitute. Worth a dedicated fetch attempt (a different route into klrc.go.ke, or the Constitution's official PDF from statelaw.go.ke) in a future round."
+    },
+    {
+      "edge": "ke-mombasa-cfsp-2025 -> (no node)",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Mombasa was the intended second-county pick this round (coastal, second-largest city, different fiscal profile from Nairobi and Turkana), but every URL tried — mombasaassembly.go.ke's 2025 CFSP PDF and the KIPPRA repository copy — either robots-blocked or SSL-failed on fetch. Turkana was substituted. Mombasa remains open for a future round with a different fetch route (e.g. a Google cache or a citing secondary source, per this branch's established fallback pattern)."
+    }
+  ]
+}

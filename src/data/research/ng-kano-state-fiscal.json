@@ -1,0 +1,51 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 3 of Thomas's 'go for 10 rounds' request, 2026-08-12. Second state in Nigeria's provincial tier (Lagos already covered in ng-lagos-municipal-finance.json) — Kano chosen as the largest northern state, giving geographic/fiscal-profile diversity from Lagos's southern, commercial-hub profile.",
+  "reports": [
+    {
+      "id": "ng-kano-mtef-2026-2028",
+      "title": "Kano State Government of Nigeria Medium Term Expenditure Framework (MTEF) 2026-2028",
+      "publisher": "Kano State Ministry of Planning & Budget",
+      "country": "NG",
+      "jurisdiction_level": "provincial",
+      "region": "Kano State, Nigeria",
+      "description": "Approved September 2025, published October 2025. Same MTEF genre already minted for Lagos (ng-lagos-mtef-2026-2028), giving a second Nigerian state at this tier. Directly describes the same NBS CPI rebasing already in the corpus: \"NBS undertook a Consumer Price Index (CPI) rebased exercise in early 2025, which has resulted in a significant drop in inflation from January 2025 onwards,\" citing a fall to 21.88% by July 2025. Also carries a Statutory Allocation table (\"Statutory Allocation 3,107.36 443.27% 3,585.33 15.38%\") tracking Kano's FAAC-derived federal transfers. The related 2026 Appropriation Bill this MTEF feeds into — ₦1,477,829,666,131, signed into law 31 Dec 2025 by Governor Abba Kabir Yusuf, titled 'Budget of Infrastructure, Inclusive Growth and Sustainable Development' and reported as the first Northern Nigerian state budget to exceed ₦1 trillion — was checked in news coverage (PRNigeria, Punch, VON) but none of those secondary sources quote a FAAC/IGR breakdown directly, so the Appropriation Bill itself is not separately minted this round; the MTEF is the citable primary document.",
+      "releases_per_year": null,
+      "cadence_note": "Rolling 3-year medium-term framework, republished annually (this is the 2026-2028 edition; a prior 2024-2026 edition also exists at the same publisher).",
+      "last_updated": "2025-10",
+      "url": "https://s3.eu-west-2.amazonaws.com/openstates.ng.storage/documents/dataset_2026%20-%202028%20MTEF%20REPORT.pdf",
+      "domains": ["fiscal-federalism", "inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ng-kano-mtef-2026-2028",
+      "target_report_id": "ng-nbs-cpi-rebasing",
+      "relationship_type": "cites",
+      "basis": "Verbatim: \"NBS undertook a Consumer Price Index (CPI) rebased exercise in early 2025, which has resulted in a significant drop in inflation from January 2025 onwards... By July 2025, the figure had fallen to 21.88% - the lowest rate in two years.\" Same relationship_type (cites, not uses_data_from) already established for the identical Lagos MTEF -> ng-nbs-cpi-rebasing edge, since both describe the rebasing exercise's effect rather than pulling a specific CPI data series into their own tables.",
+      "evidence_url": "https://s3.eu-west-2.amazonaws.com/openstates.ng.storage/documents/dataset_2026%20-%202028%20MTEF%20REPORT.pdf"
+    },
+    {
+      "source_report_id": "ng-kano-mtef-2026-2028",
+      "target_report_id": "ng-nbs-faac-disbursement",
+      "relationship_type": "uses_data_from",
+      "basis": "The MTEF's revenue tables report Kano's Statutory Allocation directly (\"Statutory Allocation 3,107.36 443.27% 3,585.33 15.38%\"), the FAAC-sourced transfer already tracked for Lagos via the identical ng-lagos-mtef-2026-2028 -> ng-nbs-faac-disbursement edge in this corpus.",
+      "evidence_url": "https://s3.eu-west-2.amazonaws.com/openstates.ng.storage/documents/dataset_2026%20-%202028%20MTEF%20REPORT.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Kano 2026 Appropriation Bill (₦1.477trn, signed 31 Dec 2025) -> (no node)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked three news sources (PRNigeria, Punch, Voice of Nigeria) covering the signing directly. None quote a FAAC/statutory-allocation or IGR revenue breakdown for the appropriation law itself — only the topline ₦1,477,829,666,131 figure and priority-sector language. The MTEF (minted this round) carries the actual sourced fiscal detail; the Appropriation Bill's own primary text was not located as a standalone accessible PDF this round."
+    },
+    {
+      "edge": "Rivers State 2026 budget (₦1.85trn, presented 10 July 2026) -> (no node)",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Searched this round alongside Kano — Governor Fubara presented a ₦1.85 trillion 2026 budget to the Rivers State House of Assembly on 10 July 2026, per multiple news sources (Business Post, Tribune Online, The Sun Nigeria). Only news coverage was checked; no MTEF/citizens'-budget-style primary document with sourced FAAC/CPI citations was located this round. A clean third Nigerian state, held for a future round."
+    }
+  ]
+}

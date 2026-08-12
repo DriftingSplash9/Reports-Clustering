@@ -1,0 +1,50 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 8 of Thomas's 'go for 10 rounds' request, 2026-08-12. Tanzania is a structurally unique case in this branch: not a federation of provinces but a Union (1964) of two formerly separate states, one of which (Zanzibar) keeps its own government, statistics office, and CPI series entirely separate from the mainland's. This is the clearest documented example so far of Thomas's question about how 'provinces' relate to the nation NOT reducing to a single pattern across Africa.",
+  "reports": [
+    {
+      "id": "tz-zanzibar-ocgs-zcpi",
+      "title": "Zanzibar Consumer Price Index (ZCPI)",
+      "publisher": "Office of the Chief Government Statistician (OCGS), Zanzibar",
+      "country": "TZ",
+      "jurisdiction_level": "provincial",
+      "region": "Zanzibar, Tanzania",
+      "description": "Confirmed monthly via OCGS's own CPI info page, latest listed release December 2024. Entirely separate from the already-minted tz-nbs-ncpi (Tanzania Mainland CPI, published by the National Bureau of Statistics) and tz-nbs-cpi-dqa (whose own title truncates to 'Tanzania Mainl[and]' — itself a hint of this same split, now confirmed directly). Zanzibar's own primary PDF (an April 2023 dated release) is robots-blocked to non-browser fetch, so no methodology citation could be independently checked this round — the title, publisher and cadence come from OCGS's own confirmed webpage, not the release document itself.",
+      "releases_per_year": 12,
+      "cadence_note": "Confirmed monthly via OCGS's own site.",
+      "last_updated": "2024-12",
+      "url": "https://www.ocgs.go.tz/cpi_info",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "tz-articles-of-union-1964",
+      "title": "Articles of Union of Tanganyika and Zanzibar, 1964",
+      "publisher": "United Republic of Tanzania (Vice President's Office)",
+      "country": "TZ",
+      "jurisdiction_level": "federal",
+      "region": "Tanzania",
+      "description": "The founding instrument of the 1964 union between Tanganyika and Zanzibar. Per the Vice President's Office's own explanatory page, union matters are those \"specified in the second schedule of the constitution of URT\" (22 listed areas), while \"The RGoZ [Revolutionary Government of Zanzibar] has exclusive jurisdiction over non union matters in Tanzania Zanzibar.\" This is the constitutional root of the split documented alongside it this round: statistics is treated as a non-union matter, which is exactly why Zanzibar maintains OCGS as an entirely separate statistical office from the mainland's NBS rather than a regional branch of it — a structurally different arrangement from every provincial/regional case covered elsewhere this session (Ethiopia, Nigeria, Kenya, DR Congo, Morocco, Ghana), none of which have a constitutionally separate second national government inside them.",
+      "releases_per_year": null,
+      "cadence_note": "One-off foundational instrument (a union treaty/act).",
+      "last_updated": "1964",
+      "url": "https://www.vpo.go.tz/uploads/publications/sw-1593598783-ARTICLES%20OF%20UNION%20final.pdf",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "tz-zanzibar-ocgs-zcpi -> tz-statistics-act-2023 (or tz-nbs-ncpi)",
+      "source": "tz-zanzibar-ocgs-zcpi",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "OCGS's own dated CPI release PDF (checked: 'Zanzibar Consumer Price Index, April 2023') is robots-blocked to non-browser fetch, so no methodology citation to the mainland's Statistics Act or NBS could be checked. Given statistics is a non-union matter per the Articles of Union, the working hypothesis is that no such citation exists at all — Zanzibar's CPI would be methodologically independent, not derived from mainland Tanzania's framework — but this is a hypothesis from the constitutional structure, not a confirmed textual finding, so no edge (positive or negative) is minted."
+    },
+    {
+      "edge": "tz-zanzibar-ocgs-zcpi -> eac-hcpi-regulations",
+      "source": "tz-zanzibar-ocgs-zcpi",
+      "target": "eac-hcpi-regulations",
+      "reason": "deferred",
+      "why": "Zanzibar is part of Tanzania, an EAC member, and the mainland's tz-nbs-ncpi is presumably wired (or wireable) to the EAC harmonized-CPI hub already in the corpus. Whether Zanzibar's separately-run CPI is independently obligated under the same EAC framework, or whether only the mainland/Union government represents Tanzania at the EAC level, was not checked this round — a genuinely interesting structural question left open."
+    }
+  ]
+}

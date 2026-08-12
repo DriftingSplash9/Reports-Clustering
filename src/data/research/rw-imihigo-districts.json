@@ -1,0 +1,58 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 9 of Thomas's 'go for 10 rounds' request, 2026-08-12. Rwanda's existing corpus presence (rw-cpi-social-protection.json) is entirely federal-level. This round adds the district tier via Rwanda's distinctive Imihigo performance-contract system — a genuinely different model from every other case worked this session: Rwanda deliberately abolished its old provinces as governing units in a 2006 reform specifically to break ethnic-regional association (the opposite instinct from Ethiopia's ethnic federalism, covered earlier this round), leaving districts (27-30, depending on year) as the real decentralized unit, evaluated annually and by name against national targets by the same statistics body that already publishes the country's CPI.",
+  "reports": [
+    {
+      "id": "rw-nisr-imihigo-evaluation-2021-2022",
+      "title": "Final Evaluation of 2021/2022 Imihigo",
+      "publisher": "National Institute of Statistics of Rwanda (NISR)",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "Published February 2023 by the same NISR that publishes rw-nisr-cpi already in this corpus. Imihigo are annual performance contracts, per NISR's own reports page, \"signed between government officials and the Head of State since 2006... aimed at accelerating the realization of the country's development ambitions.\" This document scores and ranks all 27 districts by name — e.g. \"Ngororero District scored 77.76%, ranking 18th among 27 districts, with an average national district score of 76.50%\" (Table 5) — making it the clearest documented mechanism in this branch for how a national government holds sub-national units directly, individually accountable to centrally-set targets, distinct from every fiscal-transfer mechanism (FAAC, CRA, DACF, subsidy proclamations) covered elsewhere this round, which move money rather than grade performance.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual evaluation, one edition per Imihigo cycle (this is the 2021/2022 edition; NISR's reports page lists six editions spanning 2017/18-2024/25).",
+      "last_updated": "2023-02",
+      "url": "https://www.ngororero.gov.rw/fileadmin/user_upload/ngororero/Inyandiko/Imihigo/NISR_Imihigo_2021_2022_evaluation_report.pdf",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "rw-nst1",
+      "title": "National Strategy for Transformation (NST1)",
+      "publisher": "Government of Rwanda",
+      "country": "RW",
+      "jurisdiction_level": "federal",
+      "region": "Rwanda",
+      "description": "Verbatim, from the Imihigo evaluation's own executive summary: \"Rwanda made significant reforms and aspires to become a middle-income country by 2035 and High-Income Country by 2050. This will be achieved through a series of National Strategies for Transformation (NST)\" and \"The first National Strategy for Transformation (NST1) whose aim is to achieve high standards of living conditions for all Rwandans by 2023/2024.\" This is the national target-setting document districts are evaluated against every year — minted here specifically because the Imihigo evaluation report cites it as its own basis, not independently sourced from NST1's own primary text this round.",
+      "releases_per_year": null,
+      "cadence_note": "Multi-year national strategy (NST1 covers roughly 2017-2024; a successor is implied but not confirmed this round).",
+      "last_updated": null,
+      "url": "https://faolex.fao.org/docs/pdf/rwa206814.pdf",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "rw-nisr-imihigo-evaluation-2021-2022",
+      "target_report_id": "rw-nst1",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Verbatim, Executive Summary p.iii and p.1: districts are evaluated against targets set by \"a series of National Strategies for Transformation (NST)\" and specifically \"The first National Strategy for Transformation (NST1) whose aim is to achieve high standards of living conditions for all Rwandans by 2023/2024\" — the evaluation report's entire scoring methodology is explicitly framed as measuring district performance against NST1's targets.",
+      "evidence_url": "https://www.ngororero.gov.rw/fileadmin/user_upload/ngororero/Inyandiko/Imihigo/NISR_Imihigo_2021_2022_evaluation_report.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "rw-nisr-imihigo-evaluation-2021-2022 -> rw-nisr-cpi",
+      "source": "rw-nisr-imihigo-evaluation-2021-2022",
+      "target": null,
+      "reason": "no-document",
+      "why": "Both are published by NISR, but no citation from the Imihigo evaluation to the CPI series (or vice versa) was found in the sections checked. Same-publisher does not imply a documented dependency per this branch's own standard; not minted."
+    },
+    {
+      "edge": "Rwanda provinces — structural note",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "General secondary sources (Wikipedia's 'Decentralization in Rwanda') describe a 2006 reform that abolished Rwanda's pre-existing provinces and redrew district boundaries specifically to weaken ethnic-regional association — the structural opposite of Ethiopia's ethnic federalism covered earlier this round. This was not independently verified against a primary legal document this round (no Rwandan government source was fetched for the 2006 reform itself), so it is recorded here as framing context for Thomas's question, not as a minted claim."
+    }
+  ]
+}

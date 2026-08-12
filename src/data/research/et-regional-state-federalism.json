@@ -1,0 +1,86 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 2 of Thomas's 'go for 10 rounds' request, 2026-08-12. First round of the new provincial/state + municipal thread — Ethiopia, chosen because its regional states are drawn along ethnic-linguistic lines (the one case in this branch where administrative tier and ethnic-nation concept genuinely overlap, per this session's conceptual answer to Thomas). Builds on the already-existing et-constitution-federal-structure and et-ess-cpi nodes from a prior, different research thread (et-psnp-cpi-federalism.json) — not duplicated here.",
+  "reports": [
+    {
+      "id": "et-federal-subsidy-proc-1250-2021",
+      "title": "A System for the Determination of the Division of the Federal Subsidy and Joint Revenues Proclamation No. 1250/2021",
+      "publisher": "Federal Democratic Republic of Ethiopia (House of Federation)",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "Issued 2 July 2021. Establishes the formula by which the House of Federation divides federal subsidy and joint revenues among Ethiopia's regional states. Verbatim, Article 5.2: subsidies aim to \"equalize the fiscal capacities of the Regional States so as to provide comparable level of public services.\" Does NOT name individual regional states (Oromia, Amhara, etc.) by name — refers generically to \"Regions\"/\"Regional States,\" consistent with the already-minted et-constitution-federal-structure node's own framing. This is the actual federal-to-regional-state fiscal mechanism Thomas asked about (\"how do provinces mesh with the nation\") — the block-grant/subsidy layer sitting between the constitutional structure and each region's own budget.",
+      "releases_per_year": null,
+      "cadence_note": "One-off foundational instrument (a proclamation establishing a standing formula, not a recurring release).",
+      "last_updated": "2021-07-02",
+      "url": "https://chilot.wordpress.com/2021/07/22/a-system-for-the-determination-of-the-division-of-the-federal-subsidy-and-joint-revenues-proclamation-no-1250-2021/",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "et-amhara-expenditure-analysis-eea-unicef-2023",
+      "title": "Expenditure Analysis for Amhara National Regional State 2012/13 – 2020/21",
+      "publisher": "Ethiopian Economics Association (EEA), in partnership with UNICEF Ethiopia",
+      "country": "ET",
+      "jurisdiction_level": "provincial",
+      "region": "Amhara Region, Ethiopia",
+      "description": "Third-party (EEA/UNICEF) analysis of Amhara regional-state budget data, published 2023, covering fiscal years 2012/13-2020/21. Cited repeatedly throughout: \"Source: Amhara Region Bureau of Plan and Development (2012/13–2020/21).\" The regional bureau's own site (amharabofec.gov.et) is robots-blocked to non-browser fetch, so this third-party analysis is the mintable node — same pattern this branch has used before when a primary government site is inaccessible but its data is cited verbatim by an accessible secondary publisher.",
+      "releases_per_year": null,
+      "cadence_note": "One-off analytical report, not a recurring release.",
+      "last_updated": "2023",
+      "url": "https://www.unicef.org/ethiopia/media/10541/file/9_Amhara_Regional%20public%20expenditure%20analysis.pdf.pdf",
+      "domains": ["fiscal-federalism"]
+    },
+    {
+      "id": "et-oromia-expenditure-analysis-eea-unicef-2023",
+      "title": "Expenditure Analysis for Oromia Regional State 2012/13 – 2020/21",
+      "publisher": "Ethiopian Economics Association (EEA), in partnership with UNICEF Ethiopia",
+      "country": "ET",
+      "jurisdiction_level": "provincial",
+      "region": "Oromia Region, Ethiopia",
+      "description": "Companion volume to the Amhara analysis in the same EEA/UNICEF series, published 2023, covering the same fiscal years. Cited: \"Source: Oromia Regional Plan and Development Commission (2012/13–2020/21).\" Oromia's own bureau site (oromiabofec.gov.et) is also robots-blocked. Note the naming difference from Amhara's cited bureau (\"Bureau of Plan and Development\" vs. Oromia's \"Regional Plan and Development Commission\") — recorded verbatim rather than normalized, since this branch does not assume regional administrative-body names are standardized across states.",
+      "releases_per_year": null,
+      "cadence_note": "One-off analytical report, not a recurring release.",
+      "last_updated": "2023",
+      "url": "https://www.unicef.org/ethiopia/media/10556/file/1_Oromia_Regional%20public%20expenditure%20analysis.pdf.pdf",
+      "domains": ["fiscal-federalism"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "et-amhara-expenditure-analysis-eea-unicef-2023",
+      "target_report_id": "et-ess-cpi",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Footnote 6, page 4, verbatim: \"The real values are calculated using the national average Consumer Price Index (CPI) published by Ethiopian Statistical Services,\" with a direct link to statsethiopia.gov.et. This explicitly names the already-minted et-ess-cpi node as the deflator source, unlike the Oromia companion document (see _dropped) which cites CPI generically without naming the publishing agency.",
+      "evidence_url": "https://www.unicef.org/ethiopia/media/10541/file/9_Amhara_Regional%20public%20expenditure%20analysis.pdf.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "et-oromia-expenditure-analysis-eea-unicef-2023 -> et-ess-cpi",
+      "source": "et-oromia-expenditure-analysis-eea-unicef-2023",
+      "target": "et-ess-cpi",
+      "reason": "no-document",
+      "why": "The Oromia document's own CPI footnote reads \"Real expenditure computed using the consumer price index (CPI), taking 2010 as a base year\" — it does NOT name the publishing agency, unlike Amhara's companion document in the same series which explicitly names Ethiopian Statistical Services. Rather than assume the same agency by analogy to the Amhara document, this is left unminted per the branch's own no-inference standard."
+    },
+    {
+      "edge": "et-federal-subsidy-proc-1250-2021 -> et-constitution-federal-structure",
+      "source": "et-federal-subsidy-proc-1250-2021",
+      "target": "et-constitution-federal-structure",
+      "reason": "no-document",
+      "why": "The proclamation almost certainly implements the House of Federation's constitutional revenue-division mandate (Article 62(7) per general knowledge of Ethiopia's constitutional structure), but the secondary source used to read the proclamation's text did not quote a specific constitutional citation within the proclamation itself. Not minted without a verbatim textual link; worth a direct fetch of the proclamation's own preamble in a future round."
+    },
+    {
+      "edge": "Amhara/Oromia bureau primary sites -> (no node)",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Both amharabofec.gov.et and oromiabofec.gov.et are robots-blocked to non-browser fetch, the same pattern seen repeatedly with African government statistics/finance-bureau sites in this branch (ons.mr, stat-guinebissau.com). Both bureaus' own titled statistical bulletins (an 'Annual statistical bulletin' is referenced for Amhara, dated as old as 2010 in one citation index) were not directly reachable this round."
+    },
+    {
+      "edge": "Ethiopia regional-state count — currency note",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The already-minted et-constitution-federal-structure node (from a prior, separate research thread) quotes Article 47 of the 1995 Constitution naming nine constituent states. That text is still accurate as constitutional text, but Ethiopia's actual federating units have since grown to twelve, per VOA's own reporting: a 2023 restructuring split the former Southern Nations, Nationalities and Peoples' Region into South Ethiopia Regional State and Central Ethiopia Regional State, on top of Sidama (2020) and South West Ethiopia Peoples' Region (2021), and VOA reports a further, twelfth regional state since. Not a correction to the existing node's quote (which is accurate to its source), but flagged here since 'nine regional states' is now a stale figure if repeated without qualification — directly relevant to Thomas's question about how many 'provinces' Ethiopia has today."
+    }
+  ]
+}
