@@ -80,15 +80,6 @@ interface PositionedNode extends ScoredReport {
   x: number
   y: number
   z: number
-  /**
-   * d3-force's pinning fields. Set on isolated nodes only — see `shelveIsolated`.
-   * Optional because nothing else in this graph is ever pinned: every connected
-   * node's position is decided by its edges and nothing else, which is the
-   * position rule.
-   */
-  fx?: number
-  fy?: number
-  fz?: number
 }
 
 /**
@@ -119,6 +110,39 @@ export const FOV = 24
  * live, after this: see `runFit`'s two call sites below.
  */
 const MIN_TICKS_BEFORE_FIRST_PAINT = 30
+
+/**
+ * How often, and for how long after a rebuild, the camera re-fits while a
+ * layout is still actively settling — on top of the original rough-then-
+ * precise pair below.
+ *
+ * That pair was tuned for a layout that starts near the origin and expands
+ * outward gradually — one early fit to mount the scene, one final fit once
+ * `onEngineStop` says it has stopped moving, nothing in between needed. A
+ * drilldown toggle breaks that assumption: newly-revealed siblings all start
+ * seeded at (roughly) their family orb's last position — see the jitter note
+ * on `lastPositions` above — and separate under repulsion much faster and
+ * further than a from-the-origin warmup ever moved. Worse, `onEngineStop`
+ * fires on alpha decay, not on visual stillness — measured 2026-08-12: it
+ * fired while the cloud was still visibly travelling several seconds before
+ * it actually stopped, so gating periodic refits on "not yet settled" left
+ * them without a real window to run in.
+ *
+ * Timed in wall-clock seconds (via `useFrame`'s `delta`), not a tick count.
+ * A tick is not a fixed amount of real time — it is whatever one frame's
+ * `tickFrame()` call advances, which on a slow machine or a heavy scene can
+ * take many times longer than on a fast one. A tick-counted window is
+ * generous on a fast machine and too short on a slow one, exactly backwards
+ * from what is needed: the slower the machine, the longer the settle
+ * actually takes and the longer the camera needs to keep tracking it. Timing
+ * this in seconds instead bounds the worst case the same way regardless of
+ * hardware — the camera is never more than `REFIT_INTERVAL_SECONDS` of real
+ * time behind the cloud's actual extent, for up to `REFIT_WINDOW_SECONDS`
+ * after every rebuild. Past the window a user's own camera drag is left
+ * alone, same as before.
+ */
+const REFIT_INTERVAL_SECONDS = 0.2
+const REFIT_WINDOW_SECONDS = 12
 
 /**
  * Node size, as a fraction of the cloud it sits in.
@@ -298,6 +322,14 @@ export default function InfluenceGraph({
    */
   const settledOnce = useRef(false)
   /**
+   * Wall-clock seconds elapsed since this `forceGraph` was (re)built, and
+   * since the last periodic re-fit — see `REFIT_INTERVAL_SECONDS`. Two
+   * separate accumulators because they reset on different events: the first
+   * only on rebuild, the second every time a periodic fit actually runs.
+   */
+  const settleClock = useRef(0)
+  const sinceRefit = useRef(0)
+  /**
    * Visual scale for every node mesh, set once the fit has measured the cloud.
    * Held in a ref rather than state because it is read inside
    * `nodeThreeObject`, which the library calls at times React does not drive —
@@ -392,26 +424,61 @@ export default function InfluenceGraph({
     //     object itself has just been replaced or removed this same rebuild.
     // Anything none of the three can place (first load) is left unpositioned
     // and d3-force-3d randomises it near the origin, exactly as before.
-    const nodes = graph.nodes.map((n) => {
-      const seed = lastPositions.current.get(n.id)
-      if (seed) return { ...n, x: seed.x, y: seed.y, z: seed.z }
+    //
+    // Isolated real reports (no edges in either direction) are left out of
+    // the 3D scene entirely — see `IsolatedShelf` in App.tsx, which renders
+    // them instead as a fixed panel in screen space. They used to be placed
+    // here too, pinned in a world-space column beside the cloud, but a
+    // world-space position — pinned or not — still turns with the camera:
+    // dragging or auto-orbiting swings that column around the graph exactly
+    // like everything else in the scene, which is not what "set aside from
+    // the graph" was supposed to look like, and read as distracting rather
+    // than as the deliberate exception it was meant to be.
+    const nodes = graph.nodes
+      .filter((n) => isOrbId(n.id) || n.in_degree > 0 || n.out_degree > 0)
+      .map((n) => {
+        const seed = lastPositions.current.get(n.id)
+        if (seed) return { ...n, x: seed.x, y: seed.y, z: seed.z }
 
-      if (isOrbId(n.id)) {
-        const points = (n as OrbNode).members
-          .map((m) => lastPositions.current.get(m.id))
-          .filter((p): p is { x: number; y: number; z: number } => !!p)
-        if (points.length) {
-          const x = points.reduce((s, p) => s + p.x, 0) / points.length
-          const y = points.reduce((s, p) => s + p.y, 0) / points.length
-          const z = points.reduce((s, p) => s + p.z, 0) / points.length
-          return { ...n, x, y, z }
+        if (isOrbId(n.id)) {
+          const points = (n as OrbNode).members
+            .map((m) => lastPositions.current.get(m.id))
+            .filter((p): p is { x: number; y: number; z: number } => !!p)
+          if (points.length) {
+            const x = points.reduce((s, p) => s + p.x, 0) / points.length
+            const y = points.reduce((s, p) => s + p.y, 0) / points.length
+            const z = points.reduce((s, p) => s + p.z, 0) / points.length
+            return { ...n, x, y, z }
+          }
+          return { ...n }
         }
-        return { ...n }
-      }
 
-      const parent = lastPositions.current.get(orbId(familyOf(n.country)))
-      return parent ? { ...n, x: parent.x, y: parent.y, z: parent.z } : { ...n }
-    })
+        // A freshly-revealed real node starts at its family orb's last
+        // position — but every sibling revealed by the same toggle reads the
+        // *same* orb position, so an orb with dozens of members hands out
+        // dozens of exactly-coincident starting points. Charge repulsion
+        // between nodes at zero distance is degenerate (d3-force-3d falls
+        // back to jittering them apart itself, violently, over the following
+        // several seconds) and was the actual cause of a reported bug:
+        // opening a large family (EU's 73 supranational reports, say) sent
+        // the whole cloud flying far outside the frame for 5-10+ seconds
+        // before the post-settle fit caught up and recentred the camera —
+        // reading, to someone watching it happen, as the graph having
+        // crashed rather than unfolded. A small random offset per node
+        // breaks the exact coincidence up front, so the siblings separate
+        // gently under the same forces instead of exploding apart from a
+        // single point — the "unfolding" the feature was meant to look like.
+        const parent = lastPositions.current.get(orbId(familyOf(n.country)))
+        if (!parent) return { ...n }
+        const SEED_JITTER = 14
+        const jitter = () => (Math.random() - 0.5) * SEED_JITTER
+        return {
+          ...n,
+          x: parent.x + jitter(),
+          y: parent.y + jitter(),
+          z: parent.z + jitter(),
+        }
+      })
 
     // Links are rendered REVERSED relative to the data model.
     //
@@ -677,6 +744,8 @@ export default function InfluenceGraph({
     fitted.current = false
     tickCount.current = 0
     settledOnce.current = false
+    settleClock.current = 0
+    sinceRefit.current = 0
 
     // The authoritative fit — precise cloud radius, camera framing and node
     // scale, all read off a layout that has actually stopped moving.
@@ -728,82 +797,19 @@ export default function InfluenceGraph({
    * there is something on screen while the simulation keeps running.
    * Second from `onEngineStop`, once the layout has actually stopped moving
    * — the precise fit, which corrects whatever the rough one got wrong
-   * (cloud radius, node scale, the isolated shelf's position all move
-   * during that gap). Between those two calls the graph is visibly
-   * settling into place rather than sitting behind a blank screen — that
-   * gap used to be a single synchronous 400-tick loop with nothing rendered
-   * until it finished. Returns whether it actually ran, so the first call
-   * site knows whether to stop asking.
+   * (cloud radius and node scale both move during that gap). Between those
+   * two calls the graph is visibly settling into place rather than sitting
+   * behind a blank screen — that gap used to be a single synchronous
+   * 400-tick loop with nothing rendered until it finished. Returns whether
+   * it actually ran, so the first call site knows whether to stop asking.
+   *
+   * Isolated reports (no edges in either direction) used to be placed here
+   * too — pinned in a world-space column beside the connected cloud. They
+   * are excluded from the 3D scene entirely now (see the filter on `nodes`
+   * in the `forceGraph` memo above) and rendered instead by `IsolatedShelf`
+   * in App.tsx, a fixed panel in screen space rather than a world-space
+   * position — see that component for why.
    */
-  /**
-   * Hold isolated reports in a deliberate margin beside the graph.
-   *
-   * Isolated nodes returned to the graph in V0.12, when the loader stopped
-   * dropping them. They need somewhere to be, and the force simulation has no
-   * opinion: with no links, a node is acted on only by charge repulsion, so it
-   * drifts wherever the nearest cluster pushes it and the distance means
-   * nothing. Left alone they read as ordinary peripheral nodes, which is the
-   * opposite of true — a peripheral node is at the end of a chain, and these
-   * are at the end of nothing.
-   *
-   * So they are placed, and the placement is the encoding: a column outside the
-   * connected cloud, at a distance measured from that cloud rather than fixed,
-   * so it stays outside as the graph grows.
-   *
-   * **This does not breach the position rule.** That rule forbids coordinates
-   * asserting a hierarchy the dependency data does not contain. Isolation is not
-   * a hierarchy and it is not asserted — it is read directly off the edge list,
-   * in the same way that "position encodes only the edges" permits depth in the
-   * dependency graph as a vertical axis. Having no edges is a fact about the
-   * edges.
-   *
-   * They are pinned rather than nudged, because an unpinned node placed in the
-   * margin would be pushed straight back toward the cloud by the same repulsion
-   * that scattered it.
-   */
-  function shelveIsolated(positioned: PositionedNode[]) {
-    const isolated = positioned.filter((n) => n.in_degree === 0 && n.out_degree === 0)
-    if (!isolated.length) return
-
-    const connected = positioned.filter((n) => n.in_degree > 0 || n.out_degree > 0)
-    if (!connected.length) return
-
-    const centre = new THREE.Vector3()
-    for (const n of connected) centre.add(new THREE.Vector3(n.x, n.y, n.z))
-    centre.divideScalar(connected.length)
-
-    let cloudRadius = 1
-    for (const n of connected) {
-      cloudRadius = Math.max(
-        cloudRadius,
-        centre.distanceTo(new THREE.Vector3(n.x, n.y, n.z)),
-      )
-    }
-
-    // A single column while there are few, wrapping into further columns as the
-    // shelf fills. Sorted by title so the order is stable across reloads and a
-    // node does not appear to move when nothing about it changed.
-    // Kept close to the cloud on purpose. The first attempt put the shelf at
-    // 1.3× the cloud radius plus 60 units, and looking at it showed the cost:
-    // the shelf is far enough out that framing the whole scene shrinks the graph
-    // to about half the frame and pushes it off-centre. Just outside the cloud
-    // is enough to read as "outside", and it keeps the subject the subject.
-    const GAP = 34
-    const perColumn = Math.max(4, Math.ceil(Math.sqrt(isolated.length * 2)))
-    const shelfX = centre.x + cloudRadius * 1.12 + 40
-    const ordered = [...isolated].sort((a, b) => a.title.localeCompare(b.title))
-
-    ordered.forEach((n, i) => {
-      const column = Math.floor(i / perColumn)
-      const row = i % perColumn
-      n.fx = shelfX + column * GAP
-      n.fy = centre.y + ((perColumn - 1) / 2 - row) * GAP
-      n.fz = centre.z
-      n.x = n.fx
-      n.y = n.fy
-      n.z = n.fz
-    })
-  }
 
   function runFit(): boolean {
     const fg = ref.current
@@ -815,8 +821,6 @@ export default function InfluenceGraph({
     const nodes = (fg.graphData().nodes ?? []) as PositionedNode[]
     const positioned = nodes.filter((n) => Number.isFinite(n.x))
     if (!positioned.length) return false
-
-    shelveIsolated(positioned)
 
     // **Frame the connected graph, not the shelf.**
     //
@@ -1163,13 +1167,22 @@ export default function InfluenceGraph({
       if (Number.isFinite(n.x)) lastPositions.current.set(n.id, { x: n.x, y: n.y, z: n.z })
     }
 
+    tickCount.current += 1
+    settleClock.current += delta
+    sinceRefit.current += delta
     if (!fitted.current) {
-      tickCount.current += 1
       // The rough fit — see the note on `runFit`. Only mounts the scene;
-      // the precise numbers come later from `onEngineStop`.
+      // periodic tracking fits (below) and `onEngineStop`'s precise one
+      // refine it from here.
       if (tickCount.current >= MIN_TICKS_BEFORE_FIRST_PAINT && runFit()) {
         fitted.current = true
       }
+    } else if (
+      settleClock.current <= REFIT_WINDOW_SECONDS &&
+      sinceRefit.current >= REFIT_INTERVAL_SECONDS
+    ) {
+      sinceRefit.current = 0
+      runFit()
     }
     advanceFlight(delta)
     updateFog(view.fog)

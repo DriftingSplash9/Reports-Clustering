@@ -210,9 +210,16 @@ export default function App() {
     [focusIndex, selectedId, view.focusBuiltFrom, view.focusFeedsInto],
   )
 
-  // Off `disclosedGraph`, not `graph` — `selectedId` may name an orb, which
-  // only exists in the disclosed view.
-  const selected = selectedId ? (disclosedGraph.byId.get(selectedId) ?? null) : null
+  // `disclosedGraph` first, not `graph` alone — `selectedId` may name an
+  // orb, which only exists in the disclosed view. Falls back to `graph` for
+  // an id `disclosedGraph` does not currently have: an isolated report
+  // selected from `IsolatedShelf` is always a valid id, but if its family's
+  // ladder has not been opened that far it is still folded into an orb in
+  // the disclosed view and has no entry of its own there — the fallback is
+  // what lets the Reports panel still show it was selected.
+  const selected = selectedId
+    ? (disclosedGraph.byId.get(selectedId) ?? graph.byId.get(selectedId) ?? null)
+    : null
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -317,6 +324,21 @@ export default function App() {
   )
 
   /**
+   * A dot in `IsolatedShelf` was clicked.
+   *
+   * No `flyTo` — an isolated report is never in the 3D scene (see the note
+   * on `isolated`), so there is nowhere for the camera to go. Selecting it
+   * still works: `selected` below reads off `disclosedGraph.byId`, which
+   * carries every report regardless of whether InfluenceGraph chose to draw
+   * it, so the Reports panel's "Tracing" block still shows it correctly.
+   * Toggles off on a second click of the same dot, matching a click on a
+   * node in the scene.
+   */
+  const handleSelectIsolated = useCallback((id: string) => {
+    setSelectedId((cur) => (cur === id ? null : id))
+  }, [])
+
+  /**
    * Double-click on the scene: open an orb one rung, or fold a real node's
    * own rung back in. See `toggleDrilldown` in hierarchy.ts for which.
    */
@@ -399,6 +421,25 @@ export default function App() {
 
   const top = useMemo(
     () => [...graph.nodes].sort((a, b) => b.authority - a.authority).slice(0, 3),
+    [graph],
+  )
+
+  /**
+   * Reports with no edges in either direction — never placed in the 3D
+   * scene at all (see the filter on `nodes` in `InfluenceGraph`'s
+   * `forceGraph` memo) and shown here instead, in `IsolatedShelf`.
+   *
+   * Read off `graph`, the whole corpus, not `disclosedGraph` — deliberately,
+   * and for the same reason the legend counts below read `graph` rather than
+   * the filtered view. Isolation is orthogonal to the drilldown hierarchy: an
+   * isolated report has no edges to fold along in the first place, so there
+   * is no meaningful "collapsed" state for it to disappear into the way a
+   * connected report does when its family's orb closes over it. It is either
+   * in this list or it is not, and that fact does not change as families
+   * open and close — so the list does not either.
+   */
+  const isolated = useMemo(
+    () => graph.nodes.filter((n) => n.in_degree === 0 && n.out_degree === 0),
     [graph],
   )
 
@@ -555,6 +596,13 @@ export default function App() {
       </PanelShell>
 
       <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
+
+      <IsolatedShelf
+        reports={isolated}
+        onHover={setHovered}
+        selectedId={selectedId}
+        onSelect={handleSelectIsolated}
+      />
 
       {/*
         Bottom edge, and collapsed by default. It answers a question nobody has
@@ -1018,8 +1066,15 @@ function ListBlock({
   return (
     <div style={{ marginTop: 10 }}>
       <div style={section}>{title}</div>
-      {shown.map((item) => (
-        <div key={item.text} style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
+      {shown.map((item, i) => (
+        // Indexed, not keyed by title: `dependents`/`dependsOn` return one
+        // entry per edge, not per neighbour, and an orb collapsing several
+        // distinct real edges into one orb-to-orb pair (by design — see
+        // hierarchy.ts's note on not merging edges) means the same title can
+        // legitimately appear here more than once. A title key collided on
+        // exactly that case (React logging "two children with the same
+        // key"), harmlessly but constantly, every time an orb was hovered.
+        <div key={i} style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
           {item.implied && (
             <span style={{ color: '#8b93a4' }} title="No document states this dependency">
               ◌{' '}
@@ -1039,6 +1094,67 @@ function ListBlock({
           and {items.length - shown.length} more
         </div>
       )}
+    </div>
+  )
+}
+
+/**
+ * Reports with no edges at all, set aside from the 3D scene entirely.
+ *
+ * They used to be drawn as real (if pinned) nodes in a world-space column
+ * beside the connected cloud — see the removed `shelveIsolated` in
+ * InfluenceGraph.tsx. A world-space position, pinned or not, still turns
+ * with the camera: dragging or auto-orbiting swings that whole column
+ * around the graph the same as everything else in the scene, which reads as
+ * the isolated set drifting and spinning rather than sitting quietly to one
+ * side of it (Thomas, 2026-08-12). Screen space fixes that outright — this
+ * panel does not move regardless of what the camera does, the same way the
+ * View and search panels either side of it do not.
+ *
+ * Fixed between the View panel and the search bar, and laid out four dots
+ * wide rather than in one row or one column, on the same request: wide
+ * enough to read as a deliberate small block rather than a stray line of
+ * dots, narrow enough to fit the gap between those two panels without
+ * competing with either for space.
+ */
+function IsolatedShelf({
+  reports,
+  onHover,
+  selectedId,
+  onSelect,
+}: {
+  reports: ScoredReport[]
+  onHover: (report: ScoredReport | null) => void
+  selectedId: string | null
+  onSelect: (id: string) => void
+}) {
+  if (reports.length === 0) return null
+
+  return (
+    <div style={isolatedShelfWrap}>
+      <div style={{ ...section, marginBottom: 8 }}>Unlinked — {reports.length}</div>
+      <div style={isolatedShelfGrid}>
+        {reports.map((r) => (
+          <div
+            key={r.id}
+            onMouseEnter={() => onHover(r)}
+            onMouseLeave={() => onHover(null)}
+            onClick={() => onSelect(r.id)}
+            title={`${r.title} — ${r.publisher}`}
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: 14,
+              cursor: 'pointer',
+              background: colourForReport(r),
+              opacity: selectedId === r.id ? 1 : 0.72,
+              boxShadow:
+                selectedId === r.id ? '0 0 0 2px rgba(230, 237, 250, 0.6)' : 'none',
+              pointerEvents: 'auto',
+            }}
+          />
+        ))}
+      </div>
     </div>
   )
 }
@@ -1449,6 +1565,35 @@ const selectionBlock: React.CSSProperties = {
   paddingTop: 12,
   paddingBottom: 2,
   borderTop: '1px solid rgba(90, 115, 160, 0.18)',
+}
+
+// Right edge sits 4px inside the View panel's own left edge (that panel is
+// `right: 20, width: 190`, so its left edge is at `right: 210`) — close
+// enough to read as paired with it, not so close the two visually merge.
+const isolatedShelfWrap: React.CSSProperties = {
+  position: 'fixed',
+  top: 20,
+  right: 214,
+  padding: '10px 12px',
+  background: 'rgba(10, 14, 24, 0.72)',
+  border: '1px solid rgba(90, 115, 160, 0.22)',
+  borderRadius: 10,
+  backdropFilter: 'blur(8px)',
+  pointerEvents: 'none',
+  // A defensive cap, not the expected case: at a few dozen isolated reports
+  // four wide comfortably fits above the fold. If the corpus's isolated set
+  // ever grew enough to run past the bottom of the window, scrolling the
+  // panel is a smaller failure than it silently growing past the screen
+  // edge with no way to reach the rest.
+  maxHeight: 'calc(100vh - 200px)',
+  overflowY: 'auto',
+  zIndex: 5,
+}
+
+const isolatedShelfGrid: React.CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 14px)',
+  gap: 6,
 }
 
 const tooltip: React.CSSProperties = {
