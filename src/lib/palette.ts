@@ -372,6 +372,48 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   GA: 'AFR',
   TD: 'AFR',
 
+  // 2026-08-12 (AF/G.15 -- continental/regional hub-building session, plus
+  // AF/G.16's Grok-verified follow-up): eleven countries that arrived not
+  // through a country-by-country docx list but through *following the
+  // regional blocs themselves* -- WAEMU, CEMAC, EAC and UMA hub documents
+  // each named member states this branch hadn't researched yet, and each
+  // one turned out to have a real, citable national CPI once actually
+  // looked for. Benin and Niger (WAEMU) both wired to the founding 16
+  // December 1997 WAEMU regulation; Niger's own bulletin separately names
+  // the IMF CPI Manual 2020 directly. Mauritania (UMA) is the one country
+  // in this batch with a documented AFRISTAT technical-assistance
+  // relationship despite not being a UEMOA member itself. Central African
+  // Republic and Congo-Brazzaville (CEMAC) were minted from scratch in
+  // G.15; Equatorial Guinea (also CEMAC) needed two sessions to resolve
+  // cleanly -- G.15 could only find its annual yearbook, G.16 located the
+  // separate monthly IPC bulletin Grok was asked to find. Guinea-Bissau
+  // (WAEMU) and Burundi, South Sudan and Somalia (all three EAC members
+  // with a binding Harmonised CPI obligation but zero prior AF-branch
+  // presence) were all resolved in G.16 via Grok's own follow-up research,
+  // independently re-verified rather than taken on trust per Thomas's
+  // explicit instruction that round ("things change fast so double check
+  // you have the recent data") -- Somalia's framing was specifically
+  // softened from Grok's "historic first" language after re-fetching would
+  // not support the stronger claim. DR Congo (CD) is this batch's one
+  // genuinely new country rather than a resolved gap: G.15 had flagged
+  // "DR Congo CPI -- no document" and G.16 closed it, plus independently
+  // quoted Article 175 of DRC's own constitution (a flat 40%-of-revenue
+  // provincial retention rule) and Kinshasa province's own ~US$1.1 billion
+  // 2026 budget. See `src/data/research/af-waemu-remainder.json`,
+  // `af-mauritania.json`, `af-cemac.json`, `af-grok-synthesis.json`,
+  // `cd-provinces-fiscal.json`, and `AF/G.15.md` / `AF/G.16.md`.
+  BJ: 'AFR',
+  NE: 'AFR',
+  MR: 'AFR',
+  CF: 'AFR',
+  CG: 'AFR',
+  GQ: 'AFR',
+  GW: 'AFR',
+  BI: 'AFR',
+  SS: 'AFR',
+  SO: 'AFR',
+  CD: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,
