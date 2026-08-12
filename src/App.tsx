@@ -45,6 +45,13 @@ import {
 } from './lib/graph'
 import { buildFocusIndex, computeFocus } from './lib/selection'
 import {
+  buildDisclosedGraph,
+  isOrbId,
+  resolveId,
+  toggleDrilldown,
+  type Drilldown,
+} from './lib/hierarchy'
+import {
   NO_FILTER,
   applyFilter,
   compile,
@@ -111,6 +118,19 @@ export default function App() {
     [],
   )
 
+  /**
+   * Which rungs of each family's ladder are peeled open. Absent means fully
+   * collapsed — one orb per family — which is the default load state Thomas
+   * asked for. See hierarchy.ts for the model.
+   *
+   * Named `drilldown` rather than `disclosure`, even though "how much of the
+   * hierarchy is shown" is a natural fit for that word: `disclosure` already
+   * means something else and unrelated in this file — see `disclosureByReport`
+   * a few lines up — and reusing it here would collide two different meanings
+   * of "how much is currently visible" under one name.
+   */
+  const [drilldown, setDrilldown] = useState<Drilldown>({})
+
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [bounds, setBounds] = useState<GraphBounds | null>(null)
@@ -132,6 +152,25 @@ export default function App() {
   const pointer = useRef({ x: 0, y: 0 })
 
   /**
+   * The graph as currently drawn — real reports where a family's ladder has
+   * been opened that far, one orb per family everywhere it has not.
+   *
+   * Everything that decides *what is rendered and selectable* reads this
+   * rather than `graph` from here down: the scene itself, the visible set a
+   * filter computes, the focus adjacency a selection walks. Everything that
+   * reads as a fact about the *corpus* rather than the current view — the
+   * legend's per-scope counts, the domain panel, search, the calendar —
+   * deliberately keeps reading `graph`, the same way those already read the
+   * unfiltered graph rather than the filtered one (see the comments on
+   * `scopeCounts` and friends below). Collapsing is a second, independent
+   * axis of "what's on screen" alongside filtering, not a replacement for it.
+   */
+  const disclosedGraph = useMemo(
+    () => buildDisclosedGraph(graph, drilldown),
+    [graph, drilldown],
+  )
+
+  /**
    * What is drawn. Null when nothing is filtered, so the common case does no
    * set lookups at all — and so the renderer can tell "everything" apart from
    * "everything happens to pass", which are the same picture but not the same
@@ -141,13 +180,18 @@ export default function App() {
   const edgePredicate = useMemo(() => compileEdges(filter), [filter])
   const visible = useMemo(
     () =>
-      isFiltering(filter) ? applyFilter(graph, predicate, edgePredicate) : null,
-    [graph, filter, predicate, edgePredicate],
+      isFiltering(filter)
+        ? applyFilter(disclosedGraph, predicate, edgePredicate)
+        : null,
+    [disclosedGraph, filter, predicate, edgePredicate],
   )
 
-  // Adjacency, rebuilt only when the graph or the filter changes. Selection
-  // changes then cost a walk, not a rebuild.
-  const focusIndex = useMemo(() => buildFocusIndex(graph, visible), [graph, visible])
+  // Adjacency, rebuilt only when the disclosed graph or the filter changes.
+  // Selection changes then cost a walk, not a rebuild.
+  const focusIndex = useMemo(
+    () => buildFocusIndex(disclosedGraph, visible),
+    [disclosedGraph, visible],
+  )
 
   // A selection that has just been filtered out would leave the panel tracing
   // a report that is no longer on screen.
@@ -166,7 +210,9 @@ export default function App() {
     [focusIndex, selectedId, view.focusBuiltFrom, view.focusFeedsInto],
   )
 
-  const selected = selectedId ? (graph.byId.get(selectedId) ?? null) : null
+  // Off `disclosedGraph`, not `graph` — `selectedId` may name an orb, which
+  // only exists in the disclosed view.
+  const selected = selectedId ? (disclosedGraph.byId.get(selectedId) ?? null) : null
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -251,11 +297,36 @@ export default function App() {
     [],
   )
 
-  /** Search picked a report: select it, and go there. */
-  const handleChoose = useCallback((report: ScoredReport) => {
-    setSelectedId(report.id)
-    setFlyTo((f) => ({ id: report.id, nonce: (f?.nonce ?? 0) + 1 }))
-  }, [])
+  /**
+   * Search or the calendar picked a report: select it, and go there.
+   *
+   * Both panels list real reports regardless of drilldown state (see the note
+   * on `disclosedGraph`), so the id they hand back may currently be folded
+   * into an orb rather than on screen itself. `resolveId` finds whichever id
+   * — the report's own, or its family's orb — is actually visible right now,
+   * so choosing a collapsed report selects and flies to the group it is
+   * currently part of instead of silently doing nothing.
+   */
+  const handleChoose = useCallback(
+    (report: ScoredReport) => {
+      const id = resolveId(drilldown, report)
+      setSelectedId(id)
+      setFlyTo((f) => ({ id, nonce: (f?.nonce ?? 0) + 1 }))
+    },
+    [drilldown],
+  )
+
+  /**
+   * Double-click on the scene: open an orb one rung, or fold a real node's
+   * own rung back in. See `toggleDrilldown` in hierarchy.ts for which.
+   */
+  const handleToggleNode = useCallback(
+    (id: string) => {
+      const report = isOrbId(id) ? undefined : graph.byId.get(id)
+      setDrilldown((d) => toggleDrilldown(d, id, report))
+    },
+    [graph],
+  )
 
   /**
    * Back to the opening view. See the Reset button in ViewControls for why the
@@ -271,6 +342,20 @@ export default function App() {
     setFlyTo(null)
     setView((v) => ({ ...v, zoom: 1 }))
     setResetSignal((n) => n + 1)
+    // Back to fully collapsed, unconditionally — not gated behind
+    // `clearFilter`. Drilldown is navigation state like the camera and the
+    // selection, not a filter: "reset" meaning "the opening view" should
+    // mean the opening *topology* too, every time, the same way it always
+    // puts the camera back regardless of whether the filter is kept.
+    //
+    // Returns the *same* object when already collapsed rather than a fresh
+    // `{}` every click. `disclosedGraph` is keyed on this by reference, and a
+    // reset that changes nothing about the topology still has to leave that
+    // reference alone — rebuilding the whole force graph the same moment
+    // `resetSignal` also bumps the camera is exactly the two-things-at-once
+    // that surfaced the tickFrame race `useLayoutEffect` below closes, and
+    // there is no reason to pay that rebuild at all when nothing opened.
+    setDrilldown((d) => (Object.keys(d).length === 0 ? d : {}))
     if (clearFilter) setFilter(NO_FILTER)
   }, [])
 
@@ -383,7 +468,7 @@ export default function App() {
         )}
 
         <InfluenceGraph
-          graph={graph}
+          graph={disclosedGraph}
           view={view}
           resetSignal={resetSignal}
           focus={focus}
@@ -392,6 +477,7 @@ export default function App() {
           onHover={setHovered}
           onSelect={setSelectedId}
           onBounds={handleBounds}
+          onToggleNode={handleToggleNode}
         />
 
         <OrbitControls
@@ -509,7 +595,7 @@ export default function App() {
 
       <div ref={tooltipRef} style={{ ...tooltip, opacity: hovered ? 1 : 0 }}>
         {hovered && (
-          <Detail report={hovered} graph={graph} disclosure={disclosure} />
+          <Detail report={hovered} graph={disclosedGraph} disclosure={disclosure} />
         )}
       </div>
     </div>

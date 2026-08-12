@@ -624,7 +624,17 @@ export const SCOPE_GROUPS: {
   {
     country: 'INT',
     label: 'International',
-    scopes: ['INT:international', 'INT:institutional'],
+    // `supranational` (a regional bloc with no family of its own — the EAC's
+    // binding HCPI regulation is the corpus's example, see `graph.ts`'s
+    // validate() comment on it) sits between `international` (fully global —
+    // IMF, UN, WTO) and `institutional` (narrowest — "commercial / other").
+    // Found missing 2026-08-11 while building the collapsible-orb drilldown
+    // (hierarchy.ts): `SCOPE_COLOUR` and `SCOPE_LABEL` both already carried an
+    // `INT:supranational` entry, but it had never been added here, so the
+    // three reports at that scope were invisible to both this legend's filter
+    // and — the bug that actually surfaced it — the drilldown's ladder, which
+    // reads this array to decide what can collapse.
+    scopes: ['INT:international', 'INT:supranational', 'INT:institutional'],
   },
   {
     country: 'CA',
@@ -634,7 +644,11 @@ export const SCOPE_GROUPS: {
   {
     country: 'US',
     label: 'United States',
-    scopes: ['US:federal', 'US:provincial', 'US:institutional'],
+    // `municipal` was missing here the same way `INT:supranational` was —
+    // found 2026-08-11 alongside it. `SCOPE_COLOUR` and `SCOPE_LABEL` already
+    // had entries; the 33 US municipal reports (LA County, Houston, HCAD and
+    // others) were simply never reachable through this legend's filter.
+    scopes: ['US:federal', 'US:provincial', 'US:municipal', 'US:institutional'],
   },
   // The EU sits after the two national systems rather than beside International,
   // even though its apex is supranational. The legend is read top-to-bottom as

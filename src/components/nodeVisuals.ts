@@ -62,6 +62,7 @@ export function nodeMaterial({
   dimOpacity,
   dimEmissive,
   hollow = false,
+  orb = false,
 }: {
   colour: string
   rimColour: string
@@ -83,6 +84,16 @@ export function nodeMaterial({
    * camera is.
    */
   hollow?: boolean
+  /**
+   * Draw the node as a collapsed group — a solid sphere (unlike `hollow`,
+   * this is real aggregated substance, not the absence of cadence) with a
+   * wider, brighter rim than an ordinary node gets, so an orb reads as "a
+   * group, double-click to open" at a glance rather than as one more report.
+   * Mutually exclusive with `hollow` in practice — see `isOrbId` guard at the
+   * call site — but not enforced here, since a material has no way to know
+   * which of two boolean options its caller meant to be authoritative.
+   */
+  orb?: boolean
 }): NodeMaterial {
   const material = new THREE.MeshStandardMaterial({
     color: colour,
@@ -104,13 +115,18 @@ export function nodeMaterial({
     // A hollow node's band is held wide and shallow on purpose. `rimPower`
     // exists to keep a *thin* highlight constant across node sizes; here the
     // rim is not a highlight, it is the whole node, so the exponent is pinned
-    // low to give a border with visible thickness instead of a hairline.
-    shader.uniforms.uRimPower = { value: hollow ? 1.5 : rimPower(radius) }
+    // low to give a border with visible thickness instead of a hairline. An
+    // orb keeps its fill but borrows the same wide band, pinned less low than
+    // hollow's — enough to read as a distinct, thicker ring than an ordinary
+    // node's thin fresnel highlight without swallowing the fill entirely.
+    shader.uniforms.uRimPower = { value: hollow ? 1.5 : orb ? 2.2 : rimPower(radius) }
     shader.uniforms.uRim = rim
     // How much the rim contributes to alpha. On a solid node this is a small
     // top-up that keeps the silhouette from fading out when dimmed. On a hollow
-    // one it is doing all the work, because the fill has been emptied.
-    shader.uniforms.uRimAlpha = { value: hollow ? 0.95 : 0.45 }
+    // one it is doing all the work, because the fill has been emptied. An orb
+    // sits between the two: a stronger top-up than an ordinary node, short of
+    // hollow's full weight, because the fill is still doing real work here.
+    shader.uniforms.uRimAlpha = { value: hollow ? 0.95 : orb ? 0.75 : 0.45 }
 
     shader.fragmentShader = shader.fragmentShader
       .replace(

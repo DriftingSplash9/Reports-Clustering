@@ -1,11 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import * as THREE from 'three'
 import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
 import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, isDocumented, radiusFor } from '../lib/graph'
-import { rimColourFor, colourForReport } from '../lib/palette'
+import { rimColourFor, colourForReport, familyOf } from '../lib/palette'
+import { isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
 import {
   isStandingInstrument,
   nodeMaterial,
@@ -218,6 +219,7 @@ export default function InfluenceGraph({
   onHover,
   onSelect,
   onBounds,
+  onToggleNode,
 }: {
   graph: Graph
   view: ViewSettings
@@ -246,11 +248,39 @@ export default function InfluenceGraph({
   onHover: (report: ScoredReport | null) => void
   onSelect: (id: string | null) => void
   onBounds: (bounds: GraphBounds) => void
+  /**
+   * Double-click on a node or an orb. App.tsx owns the drilldown state and
+   * decides what a double-click on this particular id means (open an orb,
+   * fold a real node's rung back in) — this component only reports which id
+   * was hit, the same division of labour `onSelect` already has.
+   */
+  onToggleNode: (id: string) => void
 }) {
   const ref = useRef<ThreeForceGraph | null>(null)
   const fogRef = useRef(new THREE.Fog(SCENE_BACKGROUND, 1e9, 1e9 + 1))
   /** Centre and radius of the node cloud, measured once the layout settles. */
   const cloud = useRef<{ centre: THREE.Vector3; radius: number } | null>(null)
+  /**
+   * Last known position of every id seen so far, real report or orb alike —
+   * updated every frame in `useFrame`, read once per `forceGraph` rebuild to
+   * seed new nodes.
+   *
+   * A drilldown toggle changes `graph`'s identity (App.tsx builds a fresh
+   * `disclosedGraph` object every time), which rebuilds `forceGraph` from
+   * scratch below — a new `ThreeForceGraph`, a fresh simulation, everything
+   * starting near the origin the way d3-force-3d always initialises an
+   * unpositioned node. Without this, "double-click to open" would mean every
+   * node in the graph re-scatters from a point, which is a re-layout wearing
+   * a drilldown's clothes. Seeding continuity here is what makes it read as
+   * unfolding *from* the orb that was clicked instead.
+   *
+   * Kept for every id ever seen, not cleared on rebuild, because an orb's id
+   * is stable across depth changes (`orb:${family}`, see hierarchy.ts) and a
+   * real node's id is stable across the whole session — so a position learned
+   * three drilldown toggles ago is still the right thing to seed from if that
+   * exact id reappears.
+   */
+  const lastPositions = useRef(new Map<string, { x: number; y: number; z: number }>())
   /**
    * Whether the scene has had its first (rough) fit and is mounted.
    * Renamed nothing, changed meaning: this used to flip true only after a
@@ -347,7 +377,41 @@ export default function InfluenceGraph({
     // leak and, worse, let focus updates write to spheres no longer in a scene.
     meshes.current.clear()
 
-    const nodes = graph.nodes.map((n) => ({ ...n }))
+    // Seed positions for continuity across a drilldown toggle — see the note
+    // on `lastPositions`. Three cases, checked in order:
+    //  1. This exact id was on screen before (an orb that just changed which
+    //     rung it aggregates, or a real node that was already expanded) —
+    //     reuse its last known spot outright.
+    //  2. A freshly-created orb — start at the centroid of whichever of its
+    //     own members last had a known position, so it appears where the
+    //     mass it now stands for actually was, not at a fresh random point.
+    //  3. A freshly-revealed real node (its orb just opened) — start at that
+    //     orb's last known position, so it visibly emerges from the sphere
+    //     that used to represent it. `orbId` is stable per family regardless
+    //     of depth, so the orb's last position is there even though the orb
+    //     object itself has just been replaced or removed this same rebuild.
+    // Anything none of the three can place (first load) is left unpositioned
+    // and d3-force-3d randomises it near the origin, exactly as before.
+    const nodes = graph.nodes.map((n) => {
+      const seed = lastPositions.current.get(n.id)
+      if (seed) return { ...n, x: seed.x, y: seed.y, z: seed.z }
+
+      if (isOrbId(n.id)) {
+        const points = (n as OrbNode).members
+          .map((m) => lastPositions.current.get(m.id))
+          .filter((p): p is { x: number; y: number; z: number } => !!p)
+        if (points.length) {
+          const x = points.reduce((s, p) => s + p.x, 0) / points.length
+          const y = points.reduce((s, p) => s + p.y, 0) / points.length
+          const z = points.reduce((s, p) => s + p.z, 0) / points.length
+          return { ...n, x, y, z }
+        }
+        return { ...n }
+      }
+
+      const parent = lastPositions.current.get(orbId(familyOf(n.country)))
+      return parent ? { ...n, x: parent.x, y: parent.y, z: parent.z } : { ...n }
+    })
 
     // Links are rendered REVERSED relative to the data model.
     //
@@ -462,7 +526,14 @@ export default function InfluenceGraph({
         // that is deliberate: on a hollow node the rim is the only colour
         // there is, so it has to be the one the legend explains. A hollow
         // node's ring is exactly the colour a solid node's fill would be.
-        const hollow = isStandingInstrument(n)
+        //
+        // An orb is checked first and excludes `hollow` outright. Every orb
+        // is built with `releases_per_year` absent by construction (it
+        // stands for a group, not a cadence — see hierarchy.ts), which is
+        // exactly `isStandingInstrument`'s test; without this guard every
+        // collapsed group would render as a one-off instrument by accident.
+        const orb = isOrbId(n.id)
+        const hollow = !orb && isStandingInstrument(n)
         const mesh = new THREE.Mesh(
           new THREE.SphereGeometry(radius, 28, 20),
           nodeMaterial({
@@ -474,6 +545,7 @@ export default function InfluenceGraph({
             dimOpacity: DIM_NODE_OPACITY,
             dimEmissive: DIM_NODE_EMISSIVE,
             hollow,
+            orb,
           }),
         )
         mesh.scale.setScalar(nodeScale.current)
@@ -583,7 +655,24 @@ export default function InfluenceGraph({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [graph, spreadApplied])
 
-  useEffect(() => {
+  /**
+   * `useLayoutEffect`, not `useEffect` — deliberately, and this one bug for
+   * bug matches the reasoning already given for `useLayoutEffect` on `place`
+   * elsewhere in this file: the difference is a crash here, not a flinch.
+   *
+   * `graph` (and therefore `forceGraph`, memoised on it) can now change
+   * identity mid-session — a drilldown toggle rebuilds it, where previously
+   * only the corpus-constant `graph` from App.tsx ever fed this memo and it
+   * never changed after mount. `useFrame`'s render-loop callback keeps
+   * calling `ref.current?.tickFrame()` every frame regardless of React's
+   * commit/effect timing, and a plain `useEffect` is deferred until after
+   * paint — which left a real window, hit in testing, where a frame could
+   * fire between the new `forceGraph` committing and this effect actually
+   * reassigning `ref.current`, ticking a graph object neither fully wired up
+   * yet nor the one on screen. `useLayoutEffect` closes that window by
+   * reassigning `ref.current` synchronously in the same commit.
+   */
+  useLayoutEffect(() => {
     ref.current = forceGraph
     fitted.current = false
     tickCount.current = 0
@@ -1049,7 +1138,31 @@ export default function InfluenceGraph({
   }
 
   useFrame((_, delta) => {
-    ref.current?.tickFrame()
+    // three-forcegraph is a Kapsule component: chained setters in the
+    // `forceGraph` useMemo above (`.graphData(...).numDimensions(3)...`) are
+    // batched into one internal digest that builds the underlying d3
+    // simulation, and that digest runs asynchronously relative to
+    // construction rather than synchronously inside the chain. A drilldown
+    // toggle rebuilds `forceGraph` from scratch (unlike every other prop
+    // here, `graph`'s identity now changes mid-session — see the note on
+    // `lastPositions`), and `ref.current` can start pointing at that brand
+    // new instance, via the `useLayoutEffect` below, before its digest has
+    // actually run. `tickFrame()` on an instance in that gap throws inside
+    // the library reading a property off its own not-yet-built simulation —
+    // caught here and skipped for one frame rather than crashing the scene,
+    // since the very next frame's digest will have completed by then.
+    try {
+      ref.current?.tickFrame()
+    } catch {
+      return
+    }
+
+    // Record positions for the next drilldown rebuild — see `lastPositions`.
+    const currentNodes = (ref.current?.graphData().nodes ?? []) as PositionedNode[]
+    for (const n of currentNodes) {
+      if (Number.isFinite(n.x)) lastPositions.current.set(n.id, { x: n.x, y: n.y, z: n.z })
+    }
+
     if (!fitted.current) {
       tickCount.current += 1
       // The rough fit — see the note on `runFit`. Only mounts the scene;
@@ -1110,6 +1223,14 @@ export default function InfluenceGraph({
     onSelect(focus?.selectedId === id ? null : id)
   }
 
+  /** Double-click to open an orb, or fold a real node's own rung back in. */
+  function handleDoubleClick(e: ThreeEvent<MouseEvent>) {
+    e.stopPropagation()
+    const id = reportIdAt(e.object)
+    if (!id) return
+    onToggleNode(id)
+  }
+
   return (
     <>
       <primitive
@@ -1118,6 +1239,7 @@ export default function InfluenceGraph({
         onPointerOut={() => onHover(null)}
         onPointerDown={handlePointerDown}
         onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
       />
     </>
   )
