@@ -21,6 +21,7 @@ import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
   SCENE_BACKGROUND,
+  ZOOM_MAX,
   type ViewSettings,
 } from '../lib/view'
 import {
@@ -1096,6 +1097,38 @@ export default function InfluenceGraph({
     const frame = frameGeometry(nodeRadius, box.min.y, box.max.y)
     const distance = (nodeRadius / Math.sin((FOV * Math.PI) / 360)) * 1.18
     const radius = nodeRadius
+
+    // **Keep the far plane behind the graph.**
+    //
+    // `far` is set once on the Canvas (12,000) and was fine while the whole
+    // corpus fitted inside it. It stopped being fine once the tiers arrived: at
+    // the States tier the fit puts the camera 11,539 units from a cloud of
+    // radius 2,033, so the graph's far side sits at 13,572 — past the far
+    // plane, clipped away by the projection, and the screen goes black.
+    //
+    // Measured 2026-08-12, and worth recording because the symptom points
+    // somewhere else entirely: 4 of 588 nodes survived the clip, while the fit
+    // itself was provably correct — camera exactly at the fit distance, orbit
+    // target dead on the centroid, and the radius implied by that distance
+    // matching the measured cloud radius to the unit. Nothing was mis-framed.
+    // The camera was aimed correctly and the depth clip threw the result away.
+    // It presents as "the auto-fit is broken", and it is not.
+    //
+    // It is also why the fault looked intermittent rather than absolute: 13,572
+    // against 12,000 is a near miss, so whether a given tier blanks depends on
+    // where that run's layout happened to settle.
+    //
+    // Sized for the furthest the camera can legitimately get — the zoom slider
+    // pulls back to `ZOOM_MAX` times the fit distance, and the cloud's far side
+    // is another radius beyond that. Grown, never shrunk: a tighter far plane
+    // buys nothing at this depth range, and re-deriving it downwards would
+    // rebuild the projection matrix on every tracking fit for no gain.
+    const neededFar = (distance * ZOOM_MAX + nodeRadius) * 1.15
+    const lens = camera as THREE.PerspectiveCamera
+    if (lens.isPerspectiveCamera && lens.far < neededFar) {
+      lens.far = neededFar
+      lens.updateProjectionMatrix()
+    }
 
     if (moveCamera) {
       // `applyingFit` brackets every camera write this function makes, because

@@ -120,3 +120,55 @@ cloud, which made two broken runs look like passes. Use three's own
    his earlier screenshots and spread the layout enormously. The camera now
    follows a re-fit properly, so this may no longer bite — but it is untested at
    those values.
+
+---
+
+# Addendum — the blank screen on States / Everything was the FAR CLIP PLANE
+
+Added later on 2026-08-12, after Thomas reported the screen still going blank on
+tiers 3 and 4 specifically.
+
+**This was not the auto-fit, and everything above about the auto-fit still
+stands.** The fit was provably correct at the moment the screen was blank:
+camera exactly at the computed fit distance, orbit target dead on the centroid,
+and the radius implied by that distance matching the measured cloud radius to
+the unit. 4 of 588 nodes were visible anyway.
+
+`far` is set once on the Canvas in App.tsx (`far: 12000`) and was never revisited
+when the tiers arrived. At the States tier the fit puts the camera **11,539**
+units from a cloud of radius **2,033** — so the graph's far side sits at
+**13,572**, past the far plane. The depth clip threw it away after the camera had
+aimed at it correctly.
+
+That also explains why it looked intermittent rather than absolute: 13,572
+against 12,000 is a near miss, so whether a given tier blanks depends on where
+that run's layout happened to settle. Tiers 1 and 2 never got far enough out to
+hit it.
+
+`runFit` now grows `camera.far` to `(distance × ZOOM_MAX + nodeRadius) × 1.15`
+whenever the current value is short — sized for the furthest the camera can
+legitimately get, since the zoom slider pulls back to `ZOOM_MAX` times the fit
+distance and the cloud's far side is another radius beyond that. Grown, never
+shrunk. Measured after the fix: far settles around 29,000 at tier 4.
+
+**Diagnostic lesson worth keeping.** The symptom ("clicking States goes blank")
+points squarely at the thing that was just changed — the fit — and the fit was
+innocent. What settled it was measuring the fit's *own* correctness rather than
+its outcome: comparing the radius implied by the camera distance against the
+measured radius of the cloud. Those agreeing to the unit while 99% of nodes were
+off screen is what ruled out the whole camera-positioning story and pointed at
+the projection instead.
+
+Also note: the earlier `refit2` recovery suite passed "tier button: Everything"
+at 100% while this bug was live, because those runs happened to settle inside
+12,000. A green suite did not mean the tiers were safe. The `finalwalk` harness
+added afterwards clicks every tier from a cold load and checks all nodes survive
+the clip — that is the one that catches this class of fault.
+
+## Verification after the fix
+
+- Every tier from a cold load: 1 → 2 → 3 → 4 → back to 1 → 4 again, all at 100%
+  of visible nodes on screen. `far` grows 12,828 → 28,203 → 29,267 → 29,424.
+- Full recovery suite re-run: all camera-recovery cases still pass.
+- `tsc --noEmit`, `npm run build`, `npm run validate` clean; `__debugIG`
+  stripped and re-grepped.
