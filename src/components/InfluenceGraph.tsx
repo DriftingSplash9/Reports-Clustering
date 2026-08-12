@@ -4,8 +4,8 @@ import * as THREE from 'three'
 import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
 import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
-import { RELATIONSHIP_WEIGHT, isDocumented, radiusFor } from '../lib/graph'
-import { rimColourFor, colourForReport, familyOf } from '../lib/palette'
+import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
+import { rimColourFor, rimWeightFor, colourForReport, familyOf } from '../lib/palette'
 import { isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
 import {
   isStandingInstrument,
@@ -32,7 +32,6 @@ import {
   teardropGeometry,
   type GradientLinkMaterial,
 } from './linkVisuals'
-import { frameGeometry } from './SpaceFrame'
 
 /**
  * The 3D force graph.
@@ -58,8 +57,6 @@ interface LinkDatum {
   colour: string
   /** Colour of the dependent report — where the line ends. */
   endColour: string
-  /** Drawn dashed, and never pulsed. See EvidenceKind in types.ts. */
-  implied: boolean
   /**
    * Extra rest length for links touching high-degree nodes, precomputed at
    * build time (the d3 distance accessor sees mutated link objects, so
@@ -290,11 +287,6 @@ export interface GraphBounds {
    * breaks the loop.
    */
   movedCamera: boolean
-  /** Height of the floor plane, so drop lines know where to land. */
-  floorY: number
-  /** Vertical extent of the node cloud, which the room is built around. */
-  minY: number
-  maxY: number
   /**
    * Bounding radius of the node cloud. The room is sized from this so it hugs
    * the network rather than inheriting empty space around it.
@@ -651,7 +643,6 @@ export default function InfluenceGraph({
         upstreamCadence: upstream?.releases_per_year ?? 1,
         colour: upstream ? colourForReport(upstream) : '#7f9ad0',
         endColour: downstream ? colourForReport(downstream) : '#7f9ad0',
-        implied: !isDocumented(e),
         hubRoom:
           3.5 *
           (Math.sqrt(degree.get(e.source_report_id) ?? 1) +
@@ -665,10 +656,11 @@ export default function InfluenceGraph({
     // every digest keeps assigning the same object instead of churning.
     linkMaterials.current.clear()
     for (const l of links) {
-      linkMaterials.current.set(
-        l.key,
-        gradientLinkMaterial(l.colour, l.endColour, l.implied),
-      )
+      // The third (dashed) argument retired with the implied-edge layer,
+      // 2026-08-12. The shader machinery behind it survives in linkVisuals for
+      // the relations rendering to reuse as a *dotted* style — a different
+      // pattern for a different claim.
+      linkMaterials.current.set(l.key, gradientLinkMaterial(l.colour, l.endColour))
     }
 
     // Geometry and material for a link's pulses. three-forcegraph reads only
@@ -760,6 +752,10 @@ export default function InfluenceGraph({
             lit,
             dimOpacity: DIM_NODE_OPACITY,
             dimEmissive: DIM_NODE_EMISSIVE,
+            // Palette v2: family rim weight (US bold red, EU thick lime,
+            // Africa none…). Orbs keep their own fixed band inside
+            // nodeMaterial regardless of this value.
+            rimWeight: rimWeightFor(n.country),
             hollow,
             orb,
           }),
@@ -792,20 +788,21 @@ export default function InfluenceGraph({
       // That is a real loss and it is accepted — a second encoding of the same
       // fact, permanently hidden inside the nodes, was not paying for itself.
       //
-      // The pulses. One instanced particle system across all edges, so this
-      // stays cheap at several hundred links.
+      // The pulses. NOT instanced — three-forcegraph builds one small mesh per
+      // photon (confirmed in its source, 2026-08-12; an earlier version of
+      // this comment claimed an instanced system it does not have). What IS
+      // shared is the teardrop geometry and the per-colour material, via the
+      // caches in linkVisuals.ts — so the cost that scales with link count is
+      // draw calls, not geometry memory. Worth knowing before any future
+      // performance hunt starts from a false premise.
       //
       // Suppressed entirely outside the focus, rather than dimmed. Motion is
       // the strongest signal on screen — a dim moving dot still pulls the eye
-      // harder than a bright stationary one.
-      // An implied edge never pulses. A pulse asserts that influence actually
-      // propagates along this line, and an implied edge is precisely the case
-      // where no document says it does. Dashing it and then animating it would
-      // take the claim back with one hand and make it with the other.
+      // harder than a bright stationary one. (Implied edges never pulsed;
+      // since 2026-08-12 there are none to suppress — every edge is
+      // documented by validator rule.)
       .linkDirectionalParticles((l: object) =>
-        litLink(l as LinkDatum) && !(l as LinkDatum).implied
-          ? pulseCount((l as LinkDatum).upstreamCadence)
-          : 0,
+        litLink(l as LinkDatum) ? pulseCount((l as LinkDatum).upstreamCadence) : 0,
       )
       .linkDirectionalParticleSpeed((l: object) =>
         pulseSpeed((l as LinkDatum).upstreamCadence),
@@ -1092,10 +1089,23 @@ export default function InfluenceGraph({
     // much larger room, so the camera was framing scenery: the graph opened
     // occupying about a fifth of the frame with empty floor beneath it.
     //
-    // The nodes are the subject. If the optional bounding box gets clipped at
-    // its corners, that is the correct trade.
-    const frame = frameGeometry(nodeRadius, box.min.y, box.max.y)
-    const distance = (nodeRadius / Math.sin((FOV * Math.PI) / 360)) * 1.18
+    // The nodes are the subject.
+    //
+    // Fit against BOTH the vertical and the horizontal field of view, via
+    // whichever is narrower. This used to fit the vertical FOV alone, which is
+    // exactly right on a wide window and wrong on a narrow one: a browser
+    // snapped to half a screen has a horizontal FOV tighter than the vertical,
+    // so the cloud fitted for height ran off the left and right edges at the
+    // supposedly-fitted view (flagged in the 08-13 polish handoff, greenlit by
+    // Thomas 2026-08-12). The camera's `aspect` is kept current by R3F on
+    // every resize, and the tracking refit window means a mid-session resize
+    // is picked up by the next fit that runs.
+    const vHalf = (FOV * Math.PI) / 360
+    const aspectRatio = (camera as THREE.PerspectiveCamera).isPerspectiveCamera
+      ? (camera as THREE.PerspectiveCamera).aspect
+      : 1
+    const hHalf = Math.atan(Math.tan(vHalf) * aspectRatio)
+    const distance = (nodeRadius / Math.sin(Math.min(vHalf, hHalf))) * 1.18
     const radius = nodeRadius
 
     // **Keep the far plane behind the graph.**
@@ -1195,10 +1205,7 @@ export default function InfluenceGraph({
       levels,
       fitDistance: distance,
       movedCamera: moveCamera,
-      floorY: frame.bottom,
       nodeRadius,
-      minY: box.min.y,
-      maxY: box.max.y,
     })
 
     return true
@@ -1380,7 +1387,7 @@ export default function InfluenceGraph({
     applyFocus()
 
     forceGraph.linkDirectionalParticles((l: object) =>
-      view.showPulses && litLink(l as LinkDatum) && !(l as LinkDatum).implied
+      view.showPulses && litLink(l as LinkDatum)
         ? pulseCount((l as LinkDatum).upstreamCadence)
         : 0,
     )

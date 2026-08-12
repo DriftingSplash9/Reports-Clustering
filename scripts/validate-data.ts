@@ -225,53 +225,21 @@ if (termini.length) {
 }
 
 /**
- * The implied-edge invariant.
+ * The implied-edge layer is RETIRED (2026-08-12, Thomas, round-3 review Q12).
  *
- * Same argument as the commercial one, and load-bearing for a different reason.
- * If an undocumented edge could move a score, the ranking would depend on what
- * somebody found plausible, and the evidence standard would quietly stop being
- * the rule the project is built on. Drawing implied edges at all is only
- * defensible while this holds.
+ * The invariant that used to be asserted here — scores identical with and
+ * without implied edges — is now vacuous by construction: `validate()` errors
+ * on any dependency carrying `evidence: 'implied'`, so none can exist past a
+ * green validator. The fourteen that existed at retirement are preserved as
+ * `_dropped` notes in `research/retired-implied-edges.json`, each with its
+ * full original basis. A belief that finds its document gets minted as an
+ * ordinary edge; a belief that does not stays a note.
  */
 const implied = dependencies.filter((d) => !isDocumented(d))
-
 if (implied.length) {
-  const documentedOnly = buildGraph(
-    reports,
-    dependencies.filter(isDocumented),
-  )
-
-  let worst = 0
-  let worstId = ''
-  for (const n of documentedOnly.nodes) {
-    const drift = Math.abs(n.authority - (graph.byId.get(n.id)?.authority ?? 0))
-    if (drift > worst) {
-      worst = drift
-      worstId = n.id
-    }
-  }
-
-  console.log(
-    `IMPLIED EDGES — ${implied.length}, believed but unsourced, outside the authority calculation`,
-  )
-  for (const d of implied) {
-    console.log(`  · ${d.source_report_id} → ${d.target_report_id}`)
-  }
-  console.log(
-    worst < 1e-12
-      ? '  ✓ scores identical with and without them — showing them reshuffles nothing'
-      : `  ✗ scores DRIFT by up to ${worst.toExponential(2)} (worst: ${worstId})`,
-  )
-  if (!(worst < 1e-12)) invariantFailures++
-
-  // An implied edge is a research lead, not a resting place. Anything sitting
-  // here for a long time is either findable or wrong.
-  const noBasis = implied.filter((d) => (d.basis?.trim().length ?? 0) < 80)
-  if (noBasis.length) {
-    console.log(
-      `  ! thin basis on ${noBasis.length}: an implied edge earns its place by explaining why it is believed`,
-    )
-  }
+  // validate() has already reported each of these as an error above; this is
+  // just the section headline so the count cannot pass unnoticed.
+  console.log(`IMPLIED EDGES — ${implied.length} present despite the 2026-08-12 retirement (errors above)`)
   console.log()
 }
 

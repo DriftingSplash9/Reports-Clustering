@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import type { JurisdictionLevel } from '../lib/types'
+import type { RimWeight } from '../lib/palette'
 
 /**
  * The node material: a standard lit sphere with a country-coloured rim.
@@ -21,6 +22,13 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
   userData: {
     /** Rim intensity, dimmed along with the node when out of focus. */
     rim: { value: number }
+    /**
+     * The rim intensity this material is allowed to reach — 0 for a family
+     * with no rim (Africa), 1 for everyone else. `setNodeRim` scales against
+     * this instead of writing absolute values, or the focus pass would
+     * quietly switch Africa's ring back on with every trace.
+     */
+    rimMax: number
     /**
      * The material's opacity when it *is* in focus.
      *
@@ -62,6 +70,7 @@ export function nodeMaterial({
   lit,
   dimOpacity,
   dimEmissive,
+  rimWeight = 'normal',
   hollow = false,
   orb = false,
 }: {
@@ -72,6 +81,14 @@ export function nodeMaterial({
   lit: boolean
   dimOpacity: number
   dimEmissive: number
+  /**
+   * Palette v2's family channel — how heavily the ring is drawn. 'bold' is
+   * the US red / INT+NZ white treatment, 'thick' the EU lime, 'none' turns
+   * the ring off entirely (Africa). A hollow node overrides 'none' upward:
+   * its rim is the whole node, and a family styling choice must not make a
+   * fifth of a family's one-off instruments invisible.
+   */
+  rimWeight?: RimWeight
   /**
    * Draw the node as an outline rather than a solid — the treatment for a
    * one-off instrument. See `isStandingInstrument`.
@@ -108,8 +125,12 @@ export function nodeMaterial({
     opacity: lit ? (hollow ? HOLLOW_FILL_OPACITY : 1) : Math.min(dimOpacity, hollow ? HOLLOW_FILL_OPACITY : 1),
   }) as NodeMaterial
 
-  const rim = { value: lit ? 1 : 0.25 }
-  material.userData = { rim, litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1 }
+  // A hollow node's rim IS the node, so a family's 'none' is promoted to
+  // 'normal' there rather than letting a styling rule erase the geometry.
+  const weight: RimWeight = hollow && rimWeight === 'none' ? 'normal' : rimWeight
+  const rimMax = weight === 'none' ? 0 : 1
+  const rim = { value: (lit ? 1 : 0.25) * rimMax }
+  material.userData = { rim, rimMax, litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1 }
 
   material.onBeforeCompile = (shader) => {
     shader.uniforms.uRimColour = { value: new THREE.Color(rimColour) }
@@ -120,14 +141,28 @@ export function nodeMaterial({
     // orb keeps its fill but borrows the same wide band, pinned less low than
     // hollow's — enough to read as a distinct, thicker ring than an ordinary
     // node's thin fresnel highlight without swallowing the fill entirely.
-    shader.uniforms.uRimPower = { value: hollow ? 1.5 : orb ? 2.2 : rimPower(radius) }
+    //
+    // Palette v2 adds the family weights on top: 'bold' pulls the exponent
+    // down harder than 'thick', which pulls harder than 'normal' — a lower
+    // exponent is a wider band. Alpha rises with the same ladder so a bold
+    // ring also holds the silhouette more firmly.
+    const base = rimPower(radius)
+    const weighted =
+      weight === 'bold'
+        ? Math.max(1.05, base * 0.4)
+        : weight === 'thick'
+          ? Math.max(1.2, base * 0.55)
+          : base
+    shader.uniforms.uRimPower = { value: hollow ? 1.5 : orb ? 2.2 : weighted }
     shader.uniforms.uRim = rim
     // How much the rim contributes to alpha. On a solid node this is a small
     // top-up that keeps the silhouette from fading out when dimmed. On a hollow
     // one it is doing all the work, because the fill has been emptied. An orb
     // sits between the two: a stronger top-up than an ordinary node, short of
     // hollow's full weight, because the fill is still doing real work here.
-    shader.uniforms.uRimAlpha = { value: hollow ? 0.95 : orb ? 0.75 : 0.45 }
+    shader.uniforms.uRimAlpha = {
+      value: hollow ? 0.95 : orb ? 0.75 : weight === 'bold' ? 0.75 : weight === 'thick' ? 0.6 : 0.45,
+    }
 
     shader.fragmentShader = shader.fragmentShader
       .replace(
@@ -242,9 +277,10 @@ export function nodeGeometry(
   return (TIER_GEOMETRY[level] ?? TIER_GEOMETRY.institutional)(radius)
 }
 
-/** Match the rim to the node's focus state. */
+/** Match the rim to the node's focus state — scaled by the family's rimMax,
+ * so a no-rim family (Africa) stays rimless through every focus change. */
 export function setNodeRim(material: NodeMaterial, lit: boolean) {
-  material.userData.rim.value = lit ? 1 : 0.25
+  material.userData.rim.value = (lit ? 1 : 0.25) * material.userData.rimMax
 }
 
 /**

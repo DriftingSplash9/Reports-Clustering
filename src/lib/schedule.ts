@@ -271,7 +271,20 @@ export function calendarEvents(
       if (!isRealDate(anchor)) continue
       const count = Math.max(1, Math.round(rp.readings_per_year))
       for (let i = 0; i < count; i++) {
-        const at = spacing >= 1 ? addMonthsIso(anchor, i * spacing) : anchor
+        // `addMonthsIso` does integer month arithmetic only. A rate that does
+        // not divide 12 (the Bank of Canada's eight readings a year, say) makes
+        // `i * spacing` fractional, and handing that to month arithmetic
+        // produced literal garbage — "2026-11.5-30" — which then flowed into
+        // sorting, window comparison and describeWindow undetected. Reproduced
+        // 2026-08-12; zero edges triggered it at the time only because every
+        // anchored rate in the corpus happened to divide 12. Non-divisor rates
+        // step in whole days instead: same even spacing, always a real date.
+        const at =
+          spacing >= 1
+            ? Number.isInteger(spacing)
+              ? addMonthsIso(anchor, i * spacing)
+              : addDaysIso(anchor, Math.round(i * (365.25 / rp.readings_per_year)))
+            : anchor
         if (at < window.from || at > window.to) continue
         events.push({
           kind: 'read',

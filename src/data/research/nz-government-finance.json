@@ -590,29 +590,6 @@
       ]
     },
     {
-      "id": "nz-mbie-tif",
-      "title": "Tourism Infrastructure Fund: application and assessment process",
-      "publisher": "Ministry of Business, Innovation & Employment (MBIE)",
-      "country": "NZ",
-      "jurisdiction_level": "federal",
-      "region": "New Zealand",
-      "description": "MBIE's published assessment process for the Tourism Infrastructure Fund, which allocates central-government co-funding to councils for visitor-related infrastructure. The only New Zealand central-government allocation document found this session that names its own territorial-authority-level data inputs by exact title. CADENCE CAVEAT: TIF ran in numbered rounds (Round 7 opened April 2023) rather than on a fixed schedule, and the round cadence is the weakest part of this node's claim to be a recurrent release.",
-      "releases_per_year": 1,
-      "cadence_note": "Round-based rather than periodic — roughly annual rounds, with the assessment page revised per round.",
-      "release_schedule": {
-        "kind": "irregular",
-        "entries": [],
-        "source_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/closed-tourism-funds/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process",
-        "note": "The Tourism Infrastructure Fund is now closed. MBIE's page states 'This fund is now closed' and it has been moved under MBIE's 'Closed tourism funds' section. The most recent activity was Round 7, which opened 11 April 2023 and closed 8 May 2023 at 5pm, with recipients announced August 2023. MBIE's current tourism funding page lists no further TIF rounds and instead shows newer active programs (e.g. Regional Tourism Boost Round 2/3, Events Boost Fund) as having effectively superseded it. There is no evidence of any planned future round, so no next occurrence can be computed."
-      },
-      "last_updated": null,
-      "url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/closed-tourism-funds/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process",
-      "domains": [
-        "fiscal-transfers",
-        "municipal-finance"
-      ]
-    },
-    {
       "id": "nz-mbie-accommodation-data",
       "title": "Accommodation Data Programme",
       "publisher": "Ministry of Business, Innovation & Employment (MBIE)",
@@ -1029,27 +1006,6 @@
       "evidence_url": "https://www.lgfa.co.nz/"
     },
     {
-      "source_report_id": "nz-mbie-tif",
-      "target_report_id": "nz-mbie-accommodation-data",
-      "relationship_type": "uses_data_from",
-      "basis": "VERIFIED DIRECTLY (mbie.govt.nz returns HTTP 403 to direct curl; the official page was replayed byte-for-byte through the Wayback `id_` endpoint and HTML-tag-stripped). Under \"Eligibility and assessment\", introduced by \"We interpret 'region' as the area for which the applicant (eg, local council) is responsible. We will refer to the following territorial authority level data:\" — \"Guest nights to rating unit ratio: To determine the ratio, guest night numbers can be obtained from the Accommodation Data Programme.\" Named by exact title.",
-      "evidence_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process"
-    },
-    {
-      "source_report_id": "nz-mbie-tif",
-      "target_report_id": "nz-mbie-tect",
-      "relationship_type": "uses_data_from",
-      "basis": "VERIFIED DIRECTLY (same page and fetch method). \"ECT Tourism Revenue: To determine revenue from tourism, MBIE will use the Tourism Electronic Card Transaction (TECT) for the different TAs.\" And, on other inputs: \"Other data sources: Applicants are encouraged to use the TECTs or any other data from reliable sources that supports their application.\" Named by exact title and acronym.",
-      "evidence_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process"
-    },
-    {
-      "source_report_id": "nz-mbie-tif",
-      "target_report_id": "nz-la-annual-reports",
-      "relationship_type": "uses_data_from",
-      "basis": "VERIFIED DIRECTLY (same page and fetch method). \"Rating unit figures will be sourced from TAs' annual reports (note this is the number of rateable properties and not the population figure).\" This lands exactly on Local Government Act 2002 Schedule 10 clause 30A, which requires the annual report to state \"the number of rating units within the district or region of the local authority at the end of the preceding financial year\" — so the grant document and the statute are describing the same figure, though MBIE does not cite clause 30A itself.",
-      "evidence_url": "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process"
-    },
-    {
       "source_report_id": "nz-statsnz-gfs",
       "target_report_id": "imf-gfsm",
       "relationship_type": "methodology_depends_on",
@@ -1295,6 +1251,34 @@
       "target": null,
       "reason": "note",
       "why": "VERIFIED DIRECTLY (LGACA 2009, Schedule 2, this session). Schedule 2 clause 33(4)-(5) (the Independent Māori Statutory Board, identified via s 4(1)'s 'selection body means the body established by clause 2 of Schedule 2'): \"The obligations of the board under the Public Finance Act 1989 are the responsibility of the members of the board\" and \"The board is a public entity as defined in section 5 of the Public Audit Act 2001.\" Not minted: this is a personal-liability clause about the Board's individual members, not a statement about the LGACA 2009 as a whole or about Auckland Council, and the Independent Māori Statutory Board is not itself a node (it publishes no recurring titled release found this session). Recorded because it is a real third documented instance, alongside the OAG and now Auckland's Volume 3, of a New Zealand public body's obligations being routed through the Public Finance Act 1989 even where the entity in question is nested inside local- rather than central-government machinery."
+    },
+    {
+      "edge": "nz-mbie-tif (node removed)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "REMOVED 2026-08-12 under Thomas's no-discontinued-programmes ruling (round-2 review, Q2): \"We are not looking at the past, lets keep it current and relevant.\" The Tourism Infrastructure Fund is confirmed discontinued with no further rounds planned, so the node and its three edges came out of the graph. The full node and edge JSON is preserved verbatim in project memory (discontinued-programmes-removed) for exact restoration \\u2014 Thomas's own condition on the deletion: if a live programme is ever found drawing on the old one, it goes back in. What the node was: MBIE's TIF application and assessment process \\u2014 the only NZ central-government allocation document found in this slice that names its own territorial-authority-level data inputs by exact title. Removing it also stranded nz-mbie-accommodation-data and nz-mbie-tect on the unlinked shelf (the TIF edges were their only ones); both are live data programmes and stay as nodes."
+    },
+    {
+      "edge": "nz-mbie-tif -> nz-mbie-accommodation-data",
+      "source": null,
+      "target": "nz-mbie-accommodation-data",
+      "reason": "note",
+      "why": "REMOVED 2026-08-12 under Thomas's no-discontinued-programmes ruling (round-2 review, Q2): \"We are not looking at the past, lets keep it current and relevant.\" The Tourism Infrastructure Fund is confirmed discontinued with no further rounds planned, so the node and its three edges came out of the graph. This was a fully documented uses_data_from edge, named by exact title on MBIE's own assessment page (https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process). Original basis, kept whole so the evidence survives the deletion: VERIFIED DIRECTLY (mbie.govt.nz returns HTTP 403 to direct curl; the official page was replayed byte-for-byte through the Wayback `id_` endpoint and HTML-tag-stripped). Under \"Eligibility and assessment\", introduced by \"We interpret 'region' as the area for which the applicant (eg, local council) is responsible. We will refer to the following territorial authority level data:\" — \"Guest nights to rating unit ratio: To determine the ratio, guest night numbers can be obtained from the Accommodation Data Programme.\" Named by exact title."
+    },
+    {
+      "edge": "nz-mbie-tif -> nz-mbie-tect",
+      "source": null,
+      "target": "nz-mbie-tect",
+      "reason": "note",
+      "why": "REMOVED 2026-08-12 under Thomas's no-discontinued-programmes ruling (round-2 review, Q2): \"We are not looking at the past, lets keep it current and relevant.\" The Tourism Infrastructure Fund is confirmed discontinued with no further rounds planned, so the node and its three edges came out of the graph. This was a fully documented uses_data_from edge, named by exact title on MBIE's own assessment page (https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process). Original basis, kept whole so the evidence survives the deletion: VERIFIED DIRECTLY (same page and fetch method). \"ECT Tourism Revenue: To determine revenue from tourism, MBIE will use the Tourism Electronic Card Transaction (TECT) for the different TAs.\" And, on other inputs: \"Other data sources: Applicants are encouraged to use the TECTs or any other data from reliable sources that supports their application.\" Named by exact title and acronym."
+    },
+    {
+      "edge": "nz-mbie-tif -> nz-la-annual-reports",
+      "source": null,
+      "target": "nz-la-annual-reports",
+      "reason": "note",
+      "why": "REMOVED 2026-08-12 under Thomas's no-discontinued-programmes ruling (round-2 review, Q2): \"We are not looking at the past, lets keep it current and relevant.\" The Tourism Infrastructure Fund is confirmed discontinued with no further rounds planned, so the node and its three edges came out of the graph. This was a fully documented uses_data_from edge, named by exact title on MBIE's own assessment page (https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/tourism-infrastructure-fund/tourism-infrastructure-fund-application-and-assessment-process). Original basis, kept whole so the evidence survives the deletion: VERIFIED DIRECTLY (same page and fetch method). \"Rating unit figures will be sourced from TAs' annual reports (note this is the number of rateable properties and not the population figure).\" This lands exactly on Local Government Act 2002 Schedule 10 clause 30A, which requires the annual report to state \"the number of rating units within the district or region of the local authority at the end of the preceding financial year\" — so the grant document and the statute are describing the same figure, though MBIE does not cite clause 30A itself."
     }
   ]
 }

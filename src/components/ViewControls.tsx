@@ -12,9 +12,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
     label: 'Edges',
     hint: 'The dependency lines. Pulses are independent — turn these off to see influence move with nothing else drawn',
   },
-  { key: 'showHorizon', label: 'Horizon', hint: 'Sky gradient meeting the ground' },
-  { key: 'showGroundGrid', label: 'Ground grid', hint: 'Infinite grid, fixed cell size — the scale ruler' },
-  { key: 'showCube', label: 'Bounding box', hint: 'Wireframe extent of the network' },
+  { key: 'showHorizon', label: 'Horizon', hint: 'Sky gradient meeting the dark' },
   { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
 ]
 
@@ -40,13 +38,18 @@ const SLIDERS: {
     key: 'spread',
     label: 'Cluster spread',
     hint: 'How much room the layout gives clusters, as a multiplier on the baseline. Rebuilds the layout when released, so it costs a beat; position still encodes nothing but the edges',
-    min: 0.5,
-    max: 2.5,
+    // Both extremes widened 50% on 2026-08-12 (Thomas: "you read that
+    // correctly. Go to the lower extremes by 50% too") — was 0.5–2.5.
+    min: 0.25,
+    max: 3.75,
   },
   {
     key: 'geoAffinity',
     label: 'Geo-affinity',
     hint: 'Pulls a country toward the ones it shares a trade/political bloc with, and away from the short list it is in an active dispute with. Off by default — see lib/geoAffinity.ts for the model',
+    // Ceiling raised 50% with the spread extremes, same request. Floor is 0 —
+    // "off" — and there is nothing below off to halve.
+    max: 1.5,
   },
 ]
 
@@ -67,51 +70,19 @@ const FOCUS_TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] 
   },
 ]
 
-/**
- * Which edges exist, by how well they are evidenced.
- *
- * A pair rather than a three-way choice, and shaped exactly like the focus
- * toggles above it, because the four states are all worth having:
- *
- *   documented only — the graph as the record supports it. The default, and
- *                     the view that honours the project's central rule.
- *   both            — what is probably true.
- *   implied only    — the research backlog, drawn. Every relationship someone
- *                     is confident about and nobody has found a source for.
- *   neither         — the nodes alone, which is the quickest way to see how
- *                     much of the picture is structure and how much is dots.
- */
-const EVIDENCE_TOGGLES: {
-  key: 'showDocumented' | 'showImplied'
-  label: string
-  hint: string
-}[] = [
-  {
-    key: 'showDocumented',
-    label: 'Documented',
-    hint: 'Edges where a document explicitly states the dependency. Every one carries a link to it',
-  },
-  {
-    key: 'showImplied',
-    label: 'Implied',
-    hint: 'Believed on strong grounds, with no document saying so. Drawn dashed, never pulsed, and excluded from the authority ranking — turning these on cannot change any size',
-  },
-]
+// The Evidence section (Documented / Implied toggles) lived here until
+// 2026-08-12, when the implied-edge layer was retired (Thomas, round-3 Q12).
+// Every edge on screen now carries a document by validator rule, so the
+// section had nothing left to switch.
 
 export default function ViewControls({
   view,
   onChange,
-  evidence,
-  onEvidenceChange,
-  impliedCount,
   hasSelection,
   onReset,
 }: {
   view: ViewSettings
   onChange: (next: ViewSettings) => void
-  evidence: { showDocumented: boolean; showImplied: boolean }
-  onEvidenceChange: (key: 'showDocumented' | 'showImplied') => void
-  impliedCount: number
   /** Only affects how the focus section is captioned. */
   hasSelection: boolean
   /** `clearFilter` is true when the control was shift-clicked. See the button. */
@@ -220,30 +191,7 @@ export default function ViewControls({
           : 'Click a node to trace its chain.'}
       </div>
 
-      <div style={{ ...heading, marginTop: 14 }}>Evidence</div>
-      {EVIDENCE_TOGGLES.map(({ key, label, hint }) => (
-        <label key={key} style={row} title={hint}>
-          <input
-            type="checkbox"
-            checked={evidence[key]}
-            onChange={() => onEvidenceChange(key)}
-            style={checkbox}
-          />
-          <span style={{ color: evidence[key] ? '#c2cfe4' : '#5e6f8a' }}>
-            {label}
-            {key === 'showImplied' && (
-              <span style={{ color: '#5e6f8a' }}> · {impliedCount}</span>
-            )}
-          </span>
-        </label>
-      ))}
-      <div style={note}>
-        {evidence.showImplied && !evidence.showDocumented
-          ? 'The research backlog: believed, unsourced.'
-          : evidence.showImplied
-            ? 'Dashed edges have no document behind them. No size changes either way.'
-            : 'Every edge shown has a source attached.'}
-      </div>
+      <div style={note}>Every edge shown has a source attached.</div>
     </div>
   )
 }

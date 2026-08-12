@@ -1,26 +1,18 @@
 import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Grid } from '@react-three/drei'
 import * as THREE from 'three'
 import type { ViewSettings } from '../lib/view'
 
 /**
- * The world the platform sits in.
+ * Scenery — now just the optional horizon.
  *
- * A bounded floor alone tells you the network has an extent, but not whether
- * that extent is large or small — there is nothing to compare it against. Two
- * additions fix that:
- *
- *   - an **infinite ground grid** whose cells are a fixed size, so the number
- *     of cells the platform spans is a direct readout of scale. Add fifty
- *     nodes and the platform grows to cover more cells; the grid itself never
- *     changes, so growth is visible rather than merely implied.
- *   - a **horizon**, where ground meets sky. This is what makes the grid read
- *     as receding into distance instead of as a flat texture, and it gives the
- *     eye an absolute up.
- *
- * Both are scenery: unlit, unfogged, and dim enough never to compete with the
- * data.
+ * The infinite ground grid lived here until 2026-08-12 and was deleted on
+ * Thomas's instruction ("delete the grid", "don't keep the code"), following
+ * the platform slab, the drop lines and the bounding box out of the scene.
+ * The pattern across all four is the same: scenery earns its place only while
+ * it reads as reference, and each of these had started reading as furniture.
+ * With the grid gone the scene has no floor and needs none — the graph is the
+ * subject, and "down" was never an encoding (see the position rule).
  */
 
 /** Sky dome radius. Must stay inside the camera far plane. */
@@ -85,36 +77,6 @@ function Sky() {
   )
 }
 
-export default function Environment({
-  floorY,
-  view,
-}: {
-  floorY: number
-  view: ViewSettings
-}) {
-  return (
-    <>
-      {view.showHorizon && <Sky />}
-      {view.showGroundGrid && (
-        <Grid
-          // Clear of the platform slab, which is 4 units thick and hangs below
-          // the floor line — otherwise the grid renders inside it.
-          position={[0, floorY - 9, 0]}
-          args={[10, 10]}
-          // Fixed-size cells. This is the whole point: the platform's growth
-          // is measured against a grid that never changes.
-          cellSize={25}
-          cellThickness={0.5}
-          cellColor="#243a5e"
-          sectionSize={125}
-          sectionThickness={1}
-          sectionColor="#3a5c92"
-          fadeDistance={2600}
-          fadeStrength={1.2}
-          infiniteGrid
-          side={THREE.DoubleSide}
-        />
-      )}
-    </>
-  )
+export default function Environment({ view }: { view: ViewSettings }) {
+  return <>{view.showHorizon && <Sky />}</>
 }

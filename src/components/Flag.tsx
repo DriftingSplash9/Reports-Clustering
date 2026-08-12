@@ -1,4 +1,5 @@
 import type { Country } from '../lib/types'
+import { countryLabelFor, isKnownCountry } from '../lib/palette'
 
 /**
  * A small country mark for the hover card.
@@ -102,19 +103,51 @@ export function Flag({ country, size = 16 }: { country: Country; size?: number }
   }
 
   /*
-   * A globe, not a flag. An international body has no flag, and borrowing one —
-   * the UN's, say — would assert a membership the data does not record: SNA 2008
-   * is joint UN/OECD/IMF/World Bank/European Commission work, and IPSAS comes
-   * from a private standards board.
+   * A globe, not a flag — for INT and for anything unmapped. An international
+   * body has no flag, and borrowing one — the UN's, say — would assert a
+   * membership the data does not record: SNA 2008 is joint UN/OECD/IMF/World
+   * Bank/European Commission work, and IPSAS comes from a private standards
+   * board.
+   */
+  if (country === 'INT' || !isKnownCountry(country)) {
+    return (
+      <svg {...common} width={size} viewBox="0 0 32 16" aria-label="International">
+        <rect width="32" height="16" fill="#2b2f45" />
+        <g stroke="#9db4dd" strokeWidth="1.3" fill="none">
+          <circle cx="16" cy="8" r="5.4" />
+          <ellipse cx="16" cy="8" rx="2.3" ry="5.4" />
+          <line x1="10.6" y1="8" x2="21.4" y2="8" />
+        </g>
+      </svg>
+    )
+  }
+
+  /*
+   * A real country with no drawn flag yet: an honest code chip, labelled with
+   * the country's actual name. Until 2026-08-12 these fell through to the
+   * globe above, so a Ugandan CPI hover card carried a mark whose
+   * accessibility label literally said "International" — for thirty-five
+   * countries. The chip is deliberately not a flag: a wrong flag is worse
+   * than no flag, and 35 hand-drawn flags is a project nobody has asked for.
+   * `countryLabelFor` (which this is the first real consumer of) carries the
+   * full name to screen readers and the hover title; the two-letter code is
+   * what fits legibly in 32×16.
    */
   return (
-    <svg {...common} width={size} viewBox="0 0 32 16" aria-label="International">
-      <rect width="32" height="16" fill="#2b2f45" />
-      <g stroke="#9db4dd" strokeWidth="1.3" fill="none">
-        <circle cx="16" cy="8" r="5.4" />
-        <ellipse cx="16" cy="8" rx="2.3" ry="5.4" />
-        <line x1="10.6" y1="8" x2="21.4" y2="8" />
-      </g>
+    <svg {...common} width={size} viewBox="0 0 32 16" aria-label={countryLabelFor(country)}>
+      <title>{countryLabelFor(country)}</title>
+      <rect width="32" height="16" rx="2.5" fill="#2b2f45" stroke="#5a739f" strokeWidth="1" />
+      <text
+        x="16"
+        y="11.6"
+        textAnchor="middle"
+        fontSize="10"
+        fontFamily="inherit"
+        letterSpacing="0.5"
+        fill="#c7d5ec"
+      >
+        {country}
+      </text>
     </svg>
   )
 }

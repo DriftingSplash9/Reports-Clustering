@@ -1,0 +1,107 @@
+{
+  "_slice": "retired-implied-edges",
+  "_researched": "2026-08-12",
+  "_status": "The graveyard of the implied-edge layer, retired whole on 2026-08-12 (Thomas, round-3 Q12: \"Retire it\"). Fourteen edges — believed on strong grounds, stated by no document — moved from the graph into these notes with their reasoning intact. The validator now ERRORS on any dependency carrying evidence: 'implied', so this cannot silently regrow; a belief that finds its document gets minted as an ordinary edge with an evidence_url. EvidenceKind itself survives on release_schedule entries, where 'implied' marks inferred DATES — a different and still-essential thing.",
+  "reports": [],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "statcan-national-accounts -> statcan-cpi",
+      "source": "statcan-national-accounts",
+      "target": "statcan-cpi",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: methodology_depends_on. Original basis, kept in full: Demoted from documented to implied in V0.10, having carried no evidence_url since the seed set. The accounts' own official guide — User Guide: Canadian System of Macroeconomic Accounts, ch. 5 §5.5 \"Final expenditure accounts at constant prices\" — describes the mechanism and names the index, but only as an illustration of what a price index is: \"For most expenditure product classes it is possible to construct a price index time series indicating the average change through time in the prices of products within that class. For example, the Consumer Price Index does precisely that for various classes of consumer products. The estimates at current prices for a particular expenditure time series … can then be divided by the corresponding price index time series—a process known as deflation.\" It never says which indexes \"the corresponding price index\" is, and record 1901's own Estimation section says only that \"certain series (mainly expenditure series) are deflated (presented in real terms)\". So: strong grounds, no document stating it — which is exactly what `implied` is for. Contrast statcan-gdp-monthly -> statcan-cpi, where the monthly program's source table cites the CPI by name and record number for each industry it deflates. The asymmetry is disclosure, not method."
+    },
+    {
+      "edge": "boc-policy-rate -> statcan-lfs",
+      "source": "boc-policy-rate",
+      "target": "statcan-lfs",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: Demoted from documented to implied 2026-08-12, closing a seed edge that had carried no evidence_url since V0.1. A targeted search (Grok source-hunt, results citation-checked) found no Bank document stating in its own words that the rate decision uses or depends on the Labour Force Survey: MPRs, speeches and backgrounders discuss LFS-derived indicators (unemployment, wages, participation) throughout, but always as part of a broad labour-market assessment, never as a stated input to the decision. The belief itself stands on the strongest possible grounds — the Bank visibly reasons from this data every cycle — which is exactly the implied shape: believed, load-bearing, and stated by no document. Contrast boc-mpr -> statcan-lfs, where the Report itself defines a wage measure on the survey by name."
+    },
+    {
+      "edge": "boc-policy-rate -> statcan-national-accounts",
+      "source": "boc-policy-rate",
+      "target": "statcan-national-accounts",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: Demoted from documented to implied 2026-08-12 — same search, same result as the LFS edge above: the output gap and potential output are discussed as inputs to the projection informing Governing Council deliberations, but no Bank document states that the decision depends on the quarterly National Accounts release. Strong grounds, no statement — implied."
+    },
+    {
+      "edge": "fed-fomc-statement -> bls-employment-situation",
+      "source": "fed-fomc-statement",
+      "target": "bls-employment-situation",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: Demoted from documented to implied 2026-08-12. FOMC minutes and the semiannual Monetary Policy Report cite payrolls and the unemployment rate with BLS sourcing throughout, but no official document states that the *statement's* employment assessment is defined on or depends on the Employment Situation release specifically. Contrast fed-sep -> bls-employment-situation, where the SEP's own variable-definition note supplies exactly that language — which is why that edge is documented and this one is implied."
+    },
+    {
+      "edge": "fed-fomc-statement -> bea-gdp",
+      "source": "fed-fomc-statement",
+      "target": "bea-gdp",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: Demoted from documented to implied 2026-08-12, same search and same asymmetry as the employment edge above: activity is discussed, BEA is sourced in charts, and no official text ties the statement's assessment to the GDP release in definitional words. The SEP edge to the same release IS documented, from the Fed's own definition note."
+    },
+    {
+      "edge": "boc-mpr -> fed-fomc-statement",
+      "source": "boc-mpr",
+      "target": "fed-fomc-statement",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: cites. Original basis, kept in full: Demoted from documented to implied 2026-08-12. The search found recent MPRs conditioning on US tariffs, trade policy and oil prices explicitly, and older Reports carrying US-growth assumptions — but no MPR language stating that the projection is conditioned on the FOMC statement or the expected federal funds path. The conditioning is standard central-bank practice and surely real; no document read so far says it, so it is implied until one does."
+    },
+    {
+      "edge": "ab-oil-par-prices -> nymex-wti-settlement-prices",
+      "source": "ab-oil-par-prices",
+      "target": "nymex-wti-settlement-prices",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: Real but undocumented as a formula. The APMC describes par prices as 'provincial arm's length netback market prices at the producing battery' derived from actual arm's-length sales, and Alberta light crude tracks WTI closely enough that the relationship is not in doubt. No Alberta document sets out a par-price formula in terms of a named benchmark, so a documented edge would be inference dressed as arithmetic."
+    },
+    {
+      "edge": "ab-dip-requisition -> ab-oilsands-royalty-rates",
+      "source": "ab-dip-requisition",
+      "target": "ab-oilsands-royalty-rates",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: cites. Original basis, kept in full: Designated industrial property assessment values wells and pipelines on regulated cost-and-depreciation schedules, and the facilities being assessed are the same oil sands operations whose output the royalty regime measures. The connection is real at the level of subject matter but no document ties the DIP requisition to the royalty determination as an input."
+    },
+    {
+      "edge": "cgp-financial-statements -> cgp-assessment-roll",
+      "source": "cgp-financial-statements",
+      "target": "cgp-assessment-roll",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: The city's statements say outright that property tax revenues are based on assessment values; the county's carry no equivalent sentence, so the same edge is not available on the same terms. This is a difference in disclosure wording, not in reality — the county levies against the same assessment roll the city does, under the same statute. The clearest case in the graph of the evidence standard tracking what got written down rather than what is true."
+    },
+    {
+      "edge": "cgp-budget -> ab-municipalaffairs-lgff-capital",
+      "source": "cgp-budget",
+      "target": "ab-municipalaffairs-lgff-capital",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: The county receives LGFF capital funding — the programme is formula-allocated to every Alberta municipality and the city's budget names its own allocation to the dollar. The county's budget documents were not read line by line, so the allocation figure has not been seen in a county document. Implied rather than documented until that PDF is checked; this is the weakest of the implied set and the easiest to resolve."
+    },
+    {
+      "edge": "gp-financial-statements -> gp-tax-rate-bylaw",
+      "source": "gp-financial-statements",
+      "target": "gp-tax-rate-bylaw",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: The statements report the tax levy the bylaw produced, and by statute no levy can exist without a rate bylaw — the Municipal Government Act requires council to pass one annually before taxes can be imposed. The statements never name the bylaw, so the relationship is certain in law and absent from the document. Promoted from _dropped as implied in V0.7. A council report reconciling the levy to the bylaw would settle it and make this documented."
+    },
+    {
+      "edge": "cihi-nhex -> canada-health-transfer",
+      "source": "cihi-nhex",
+      "target": "canada-health-transfer",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: The NHEX methodology notes say the public-sector forecasting model includes 'current, 1- and 2-year lagged health and social transfers' and that 'GDP and health and social services data are sourced from Finance Canada', which almost certainly means the CHT and CST — they are the health and social transfers Finance Canada publishes. The document never names either by name, so the identification is inference. Strong inference, but inference."
+    },
+    {
+      "edge": "ab-child-family-benefit -> canada-child-benefit",
+      "source": "ab-child-family-benefit",
+      "target": "canada-child-benefit",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: uses_data_from. Original basis, kept in full: The ACFB page states plainly that 'You are automatically considered for the ACFB when you file your annual tax return and qualify for the federal government's Canada Child Benefit' and that 'The ACFB program is administered by the Canada Revenue Agency (CRA) on Alberta's behalf.' Eligibility for the provincial benefit therefore runs through the federal one. What is missing is a document stating that the ACFB *amount* depends on any CCB figure, which is what an edge in this graph asserts."
+    },
+    {
+      "edge": "gppsd-financial-statements -> psab-psas",
+      "source": "gppsd-financial-statements",
+      "target": "psab-psas",
+      "reason": "no-document",
+      "why": "RETIRED 2026-08-12 with the whole implied-edge layer, on Thomas's Q12 ruling (round-3 review): implied edges \"do not belong here\" — the graph draws only what a document states, and beliefs live here in _dropped instead. This note preserves the retired edge whole; if a document is ever found, mint the edge fresh with the URL. Relationship as recorded: methodology_depends_on. Original basis, kept in full: Alberta school authorities prepare their financial statements under Canadian public sector accounting standards, as both municipalities already in the graph do and as provincial reporting requirements oblige. The GPPSD statements themselves were not read this pass, so the edge rests on the pattern rather than on the document. One PDF away from being documented."
+    }
+  ]
+}

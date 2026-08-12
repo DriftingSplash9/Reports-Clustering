@@ -82,7 +82,32 @@ import type {
  * the first Asian or South American node lands — the same reasoning the file
  * already gives for `US:provincial` existing with no data behind it.
  */
-export type ColourFamily = 'CA' | 'US' | 'INT' | 'EU' | 'XEU' | 'AFR' | 'ASIA' | 'SAO' | 'SA'
+/**
+ * **Palette v2, 2026-08-12 — Thomas's redesign, worked through two rounds of
+ * swatch review (round-3 Q9 and its revisions).** The headline changes from
+ * the continent scheme this replaces:
+ *
+ * - **Ramps run dark→light down the ladder now, not light→dark**: the national
+ *   level is each family's darkest shade, institutional its lightest ("the
+ *   spectrums should go in reverse order. National level being darkest").
+ * - **Rims carry family weight**, not just hue — see `RIM_WEIGHT`. The US
+ *   wears a bold red rim on a vivid blue fill ("Make USA 255 blue and give it
+ *   a bold red border"), INT a bold white rim, NZ a bold white rim on brown,
+ *   the EU a thick lime rim, and Africa NO rim at all ("Africa can be violet
+ *   with no rim color").
+ * - **SAO is gone**, split into `AU` (orange) and `NZ` (brown — carrying the
+ *   Realm and the Pacific compact states with it). `CN` (yellow), `ASIA`
+ *   (teal) and `IN` (magenta) are reserved, unstaffed, named ahead of the
+ *   RU/CN branch the roadmap already promises.
+ * - Known tight spots, accepted with eyes open: US ultramarine vs XEU
+ *   slate-blue (told apart by bold-red vs green rims), and AFR's deep violet
+ *   vs INT's lighter violet (no rim vs bold white rim). The rims are the
+ *   family channel in those neighbourhoods — which is exactly the job Thomas
+ *   gave them.
+ */
+export type ColourFamily =
+  | 'CA' | 'US' | 'AU' | 'NZ' | 'INT' | 'EU' | 'XEU' | 'AFR'
+  | 'CN' | 'ASIA' | 'IN' | 'SA'
 
 export type Scope = `${ColourFamily}:${JurisdictionLevel}`
 
@@ -119,20 +144,14 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   RS: 'XEU', ME: 'XEU', MK: 'XEU', AL: 'XEU', BA: 'XEU',
   TR: 'XEU', UA: 'XEU', MD: 'XEU', XK: 'XEU',
 
-  // First country in `SAO` ("South Asia + Oceania") — reserved 2026-08-05,
-  // staffed 2026-08-05 (same day). Australia: federal -> 6 states + 2
-  // territories -> local government, researched as this branch's first
-  // non-Europe/non-Canada/US country. See `src/data/research/au-*.json`.
-  AU: 'SAO',
+  // Australia — its own family since palette v2 (2026-08-12): SAO split in
+  // two on Thomas's colour assignments (AU orange, NZ brown), which is the
+  // CA/US precedent finally applied to Oceania.
+  AU: 'AU',
 
-  // Second country in `SAO`, added 2026-08-06 immediately after Australia, at
-  // Thomas's direction. New Zealand shares the family for the same reason the
-  // 27 member states share `EU`: the question "which of the two" is answered by
-  // the label and the region filter, not by hue. The `SAO` family does have
-  // room for a saturation split (see the continent-redesign note below) — the
-  // natural line, when it is needed, is South Asia against Oceania rather than
-  // AU against NZ.
-  NZ: 'SAO',
+  // New Zealand — its own family since palette v2, and the family the small
+  // Pacific jurisdictions ride with (below).
+  NZ: 'NZ',
 
   // The rest of the Realm of New Zealand, added 2026-08-06 in the same session
   // as NZ itself. The Cook Islands and Niue are self-governing in free
@@ -140,23 +159,18 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // All three publish their own budgets and accounts, and all three use the
   // New Zealand dollar.
   //
-  // **They are filed as their own countries, not as regions of NZ**, and that
-  // is the whole point of the entry. The research found that the Cook Islands
-  // reports on IPSAS, Niue names no external standard at all, and Tokelau
-  // requires an undefined "generally accepted accounting practice" — three
-  // different answers inside one Realm. Collapsing them into `NZ` would make
-  // `scopeOf` resolve all four to the same string and erase exactly the
-  // distinction the slice exists to record, which is the same argument that
-  // keeps `CA` and `US` apart at the top of this map.
-  CK: 'SAO', NU: 'SAO', TK: 'SAO',
+  // They remain their own *countries* (their own labels, flags-to-be and
+  // filter rows — the three-different-accounting-answers finding survives
+  // untouched); since palette v2 they draw from the NZ colour family, the
+  // same way 27 member states draw from EU.
+  CK: 'NZ', NU: 'NZ', TK: 'NZ',
 
   // The three Compact of Free Association states, added 2026-08-06. Sovereign
-  // Pacific nations — the FSM statements call the FSM "an independent sovereign
-  // nation" in their own words — that report under US GAAP with GASB as
-  // standard-setter and use the US dollar. They are `SAO` on geography, not
-  // `US` on method: the whole point of the slice they arrive in is that the
-  // method is imported and the sovereignty is not.
-  FM: 'SAO', MH: 'SAO', PW: 'SAO',
+  // Pacific nations that report under US GAAP and use the US dollar. Grouped
+  // with the NZ family on geography since palette v2 — the whole point of
+  // their slice is that the method is imported and the sovereignty is not, so
+  // colouring them `US` was never on the table.
+  FM: 'NZ', MH: 'NZ', PW: 'NZ',
 
   // Greenland. An arguable call, recorded as one. `XEU` is this palette's
   // non-EU-European bucket, and Greenland is constitutionally European (part
@@ -396,6 +410,12 @@ export function scopeOf(report: {
 }
 
 /**
+ * **SUPERSEDED 2026-08-12 by palette v2** — the table below describes the v1
+ * continent scheme this file no longer implements (tan US, azure Africa, SAO
+ * family, light→dark ramps). Kept because its *reasoning* about hue gaps and
+ * saturation splits still explains why the wheel is arranged the way it is;
+ * for what is actually drawn, read `SCOPE_COLOUR` and `RIM_WEIGHT` below.
+ *
  * **Continent redesign, 2026-08-05.** The single-country-per-hue-family scheme
  * (V0.12, revised again 2026-08-04 for the EU branch) hit its own limit the
  * moment a sixth political bloc showed up: nine families now share the wheel,
@@ -446,92 +466,108 @@ export function scopeOf(report: {
  * rather than the cool slate `COMMERCIAL`/`UNCLASSIFIED` already own.
  */
 export const SCOPE_COLOUR: Record<string, string> = {
-  // Canada — North America, red-leaning half. Higher saturation than US:
-  // it is this corpus's largest, oldest dataset and gets first claim on
-  // legibility within the shared "North America" neighbourhood.
-  'CA:federal': '#d44955',
-  'CA:provincial': '#c32847',
-  'CA:municipal': '#9c1c46',
-  'CA:institutional': '#691c40',
+  // Every family ramp runs DARK → LIGHT down the ladder (palette v2): the
+  // national level is the darkest shade, institutional the lightest. That is
+  // the reverse of v1, on Thomas's instruction, and it reads well with the
+  // authority encoding: the big foundational nodes tend to be national, and
+  // dark-and-large carries more weight than pale-and-large.
 
-  // United States — North America, yellow/tan-leaning half. Lower saturation
-  // than CA is the whole separation at this hue distance; do not raise it.
-  // `provincial` still means "state", unchanged from before the redesign.
-  'US:federal': '#d0b880',
-  'US:provincial': '#c4954f',
-  'US:municipal': '#a56b31',
-  'US:institutional': '#714528',
+  // Canada — reds, unchanged hue, reversed ramp.
+  'CA:federal': '#7c1c34',
+  'CA:provincial': '#a3264a',
+  'CA:municipal': '#c74562',
+  'CA:institutional': '#e07b90',
 
-  // Belonging to no continent — stateless bodies (IMF, OECD, NATO, BIS, UN,
-  // WTO…). Unchanged from before the redesign; violet was never contested.
-  'INT:international': '#af7aff',
-  'INT:institutional': '#d269e8',
-  'INT:federal': '#af7aff',
-  'INT:provincial': '#af7aff',
-  'INT:municipal': '#af7aff',
+  // United States — "255 blue" with a bold red rim (Thomas). The old tan band
+  // is gone; the US now wears its own flag: vivid ultramarine fill, red ring.
+  // `provincial` still means "state".
+  'US:federal': '#1330e0',
+  'US:provincial': '#2f55ee',
+  'US:municipal': '#5a80f4',
+  'US:institutional': '#8fabf8',
 
-  // European Union — Europe, full-saturation half. Unchanged from
-  // 2026-08-04; this ramp was already the model the redesign generalised.
-  'EU:supranational': '#96de73',
-  'EU:federal': '#53ce46',
-  'EU:provincial': '#2cba3f',
-  'EU:municipal': '#209d50',
-  'EU:institutional': '#167e58',
-  'EU:international': '#af7aff',
+  // Australia — orange, its own family since the SAO split.
+  'AU:federal': '#9c4a08',
+  'AU:provincial': '#c2670f',
+  'AU:municipal': '#e8891c',
+  'AU:institutional': '#f7b25c',
 
-  // Non-EU Europe — same green ramp as EU, held to roughly half its
-  // saturation. Replaces the tan-brown built one turn earlier in this same
-  // session, superseded by the continent redesign the very next turn: browns
-  // now belong to North America, and Europe — EU member or not — is green.
-  'XEU:federal': '#6caf64',
-  'XEU:provincial': '#4c9a56',
-  'XEU:municipal': '#3c8056',
-  'XEU:institutional': '#2e6651',
-  'XEU:supranational': '#6caf64',
-  'XEU:international': '#af7aff',
+  // New Zealand + Realm + Compact states — brown, bold white rim.
+  'NZ:federal': '#4a3020',
+  'NZ:provincial': '#6b4a33',
+  'NZ:municipal': '#8f6a4a',
+  'NZ:institutional': '#b59376',
 
-  // Africa — took over US's old cyan-blue territory once US moved into the
-  // North America brown band. No African country has a node yet; reserved
-  // the same way `US:provincial` was reserved before state-level releases
-  // existed, so the colour is not chosen in a hurry once the first one lands.
-  'AFR:federal': '#40b5e7',
-  'AFR:provincial': '#2c83e8',
-  'AFR:municipal': '#2050d5',
-  'AFR:institutional': '#273191',
-  'AFR:supranational': '#40b5e7',
-  'AFR:international': '#af7aff',
+  // Stateless bodies — violet, now with a BOLD WHITE rim as the family cue.
+  // Distinguished from AFR's violet by register (INT lighter, red-leaning)
+  // and above all by the rim: bold white here, none at all there.
+  'INT:international': '#8a4fe8',
+  'INT:supranational': '#a35fee',
+  'INT:institutional': '#c47ff0',
+  'INT:federal': '#8a4fe8',
+  'INT:provincial': '#8a4fe8',
+  'INT:municipal': '#8a4fe8',
 
-  // Asia — vivid yellow-orange, kept apart from North America's muted browns
-  // at a similar hue mainly by saturation (Asia ~80-92%, US ~42-54%).
-  // Unstaffed; reserved.
-  'ASIA:federal': '#f3e13f',
-  'ASIA:provincial': '#f4cb2a',
-  'ASIA:municipal': '#f5b20a',
-  'ASIA:institutional': '#b87c14',
-  'ASIA:supranational': '#f3e13f',
-  'ASIA:international': '#af7aff',
+  // European Union — greens, reversed ramp, THICK LIME rim.
+  'EU:supranational': '#0f5f38',
+  'EU:federal': '#178a49',
+  'EU:provincial': '#2cae52',
+  'EU:municipal': '#53cf6e',
+  'EU:institutional': '#8fe9a2',
+  'EU:international': '#8a4fe8',
 
-  // South Asia + Oceania — India/Pakistan and Australia/NZ share one family
-  // per Thomas's own pairing; the CA/US split mechanism (sub-range + a
-  // saturation gap) is what separates them once either has a node. Held clear
-  // of INT's violet by a 15° gap plus saturation, per the note above.
-  // Unstaffed; reserved.
-  'SAO:federal': '#d864cf',
-  'SAO:provincial': '#c73ad4',
-  'SAO:municipal': '#9430b5',
-  'SAO:institutional': '#612d86',
-  'SAO:supranational': '#d864cf',
-  'SAO:international': '#af7aff',
+  // Non-EU Europe — slate/steel blue fill, GREEN rim (the EU family's own rim
+  // colour, so "European" stays readable on the ring — Thomas's design).
+  // Deliberately muted against the US's vivid ultramarine; the rims (green vs
+  // bold red) are the tiebreak where the hues near each other.
+  'XEU:federal': '#2e3f6e',
+  'XEU:provincial': '#40569a',
+  'XEU:municipal': '#5a74c0',
+  'XEU:institutional': '#8b9fd8',
+  'XEU:supranational': '#2e3f6e',
+  'XEU:international': '#8a4fe8',
 
-  // South America — warm sage-grey at 90°, deliberately not the cool slate
-  // `COMMERCIAL_COLOUR`/`UNCLASSIFIED_COLOUR` occupy near 220°. See the note
-  // above on why the first draft (at 210°) had to move. Unstaffed; reserved.
-  'SA:federal': '#adb5a6',
-  'SA:provincial': '#8f9a84',
-  'SA:municipal': '#707d64',
-  'SA:institutional': '#4c5643',
-  'SA:supranational': '#adb5a6',
-  'SA:international': '#af7aff',
+  // Africa — deep violet, NO rim (Thomas: "Africa can be violet with no rim
+  // color, I think that would do"). Darker and bluer than INT's violet; the
+  // absence of any rim is itself the family cue.
+  'AFR:federal': '#3d1f78',
+  'AFR:provincial': '#5b2fa8',
+  'AFR:municipal': '#7c4fd0',
+  'AFR:institutional': '#a982e8',
+  'AFR:supranational': '#3d1f78',
+  'AFR:international': '#8a4fe8',
+
+  // China — yellow, reserved unstaffed for the RU/CN branch.
+  'CN:federal': '#8a6b00',
+  'CN:provincial': '#bd950a',
+  'CN:municipal': '#e3bc17',
+  'CN:institutional': '#f5da5c',
+  'CN:supranational': '#8a6b00',
+  'CN:international': '#8a4fe8',
+
+  // Asia (rest) — teal, reserved unstaffed.
+  'ASIA:federal': '#0d5750',
+  'ASIA:provincial': '#127970',
+  'ASIA:municipal': '#1ba396',
+  'ASIA:institutional': '#5ed3c6',
+  'ASIA:supranational': '#0d5750',
+  'ASIA:international': '#8a4fe8',
+
+  // India — magenta, reserved unstaffed (the slice the SAO split freed).
+  'IN:federal': '#77204f',
+  'IN:provincial': '#a52a72',
+  'IN:municipal': '#c94b95',
+  'IN:institutional': '#e88bbd',
+  'IN:supranational': '#77204f',
+  'IN:international': '#8a4fe8',
+
+  // South America — sage, reversed ramp.
+  'SA:federal': '#46503d',
+  'SA:provincial': '#64705a',
+  'SA:municipal': '#87947c',
+  'SA:institutional': '#aebaa4',
+  'SA:supranational': '#46503d',
+  'SA:international': '#8a4fe8',
 }
 
 /**
@@ -593,9 +629,18 @@ export const SCOPE_LABEL: Record<string, string> = {
   'ASIA:federal': 'National', 'ASIA:provincial': 'Regional',
   'ASIA:municipal': 'Municipal', 'ASIA:institutional': 'Institutional',
   'ASIA:supranational': 'Supranational', 'ASIA:international': 'International',
-  'SAO:federal': 'National', 'SAO:provincial': 'Regional',
-  'SAO:municipal': 'Municipal', 'SAO:institutional': 'Institutional',
-  'SAO:supranational': 'Supranational', 'SAO:international': 'International',
+  'AU:federal': 'Federal', 'AU:provincial': 'State', 'AU:municipal': 'Municipal',
+  'AU:institutional': 'Institutional', 'AU:supranational': 'Supranational',
+  'AU:international': 'International',
+  'NZ:federal': 'Central government', 'NZ:provincial': 'Regional',
+  'NZ:municipal': 'Territorial', 'NZ:institutional': 'Institutional',
+  'NZ:supranational': 'Supranational', 'NZ:international': 'International',
+  'CN:federal': 'National', 'CN:provincial': 'Regional', 'CN:municipal': 'Municipal',
+  'CN:institutional': 'Institutional', 'CN:supranational': 'Supranational',
+  'CN:international': 'International',
+  'IN:federal': 'National', 'IN:provincial': 'Regional', 'IN:municipal': 'Municipal',
+  'IN:institutional': 'Institutional', 'IN:supranational': 'Supranational',
+  'IN:international': 'International',
   'SA:federal': 'National', 'SA:provincial': 'Regional',
   'SA:municipal': 'Municipal', 'SA:institutional': 'Institutional',
   'SA:supranational': 'Supranational', 'SA:international': 'International',
@@ -680,9 +725,24 @@ export const SCOPE_GROUPS: {
     scopes: ['ASIA:federal', 'ASIA:provincial', 'ASIA:municipal', 'ASIA:institutional'],
   },
   {
-    country: 'SAO',
-    label: 'South Asia & Oceania',
-    scopes: ['SAO:federal', 'SAO:provincial', 'SAO:municipal', 'SAO:institutional'],
+    country: 'AU',
+    label: 'Australia',
+    scopes: ['AU:federal', 'AU:provincial', 'AU:municipal', 'AU:institutional'],
+  },
+  {
+    country: 'NZ',
+    label: 'New Zealand & Pacific',
+    scopes: ['NZ:federal', 'NZ:provincial', 'NZ:municipal', 'NZ:institutional'],
+  },
+  {
+    country: 'CN',
+    label: 'China',
+    scopes: ['CN:federal', 'CN:provincial', 'CN:municipal', 'CN:institutional'],
+  },
+  {
+    country: 'IN',
+    label: 'India',
+    scopes: ['IN:federal', 'IN:provincial', 'IN:municipal', 'IN:institutional'],
   },
   {
     country: 'AFR',
@@ -765,19 +825,58 @@ export function colourForReport(report: {
  * it reinforces rather than introducing a third thing to learn.
  */
 export const COUNTRY_RIM: Record<string, string> = {
-  // CA and US both moved into the North America brown band in the 2026-08-05
-  // continent redesign — their rims moved with them, same hue split as the fill.
   CA: '#f0a8b4',
-  US: '#ead6b8',
-  INT: '#e0c4ff',
-  EU: '#aff4af',
-  // XEU moved from tan-brown to a light version of EU's own green.
-  XEU: '#b7dbb3',
-  // Reserved continent families, unstaffed as of this edit.
-  AFR: '#a6d4f2',
-  ASIA: '#f4e6af',
-  SAO: '#e6b0e8',
+  // Bold red on blue — the US flag on every US node (Thomas's design).
+  US: '#e03131',
+  AU: '#ffc98f',
+  // Bold white — "NZ needs a bolder rim too".
+  NZ: '#ffffff',
+  // Bold white on violet, the stateless-bodies cue.
+  INT: '#ffffff',
+  // Thick lime — "The eu needs a thicker rim if you can, use lime green".
+  EU: '#b6f542',
+  // The EU family's *old* soft green: still green (European on the ring, per
+  // Thomas's XEU spec) but visibly not the EU's own lime.
+  XEU: '#aff4af',
+  // Africa carries NO rim. The value here is only a fallback for code paths
+  // that demand a colour; RIM_WEIGHT.AFR === 'none' is what actually turns
+  // the ring off in the material.
+  AFR: '#5b2fa8',
+  CN: '#ffec9e',
+  ASIA: '#a8ece2',
+  IN: '#ffb3dc',
   SA: '#d1d7cc',
+}
+
+/**
+ * How heavily each family's rim is drawn — palette v2's second channel.
+ *
+ * 'bold' is a wide, strong ring (US red, INT and NZ white), 'thick' a widened
+ * one (EU lime), 'none' switches the ring off entirely (Africa — the absence
+ * IS the cue), 'normal' is the classic thin fresnel highlight. Consumed by
+ * `nodeMaterial` via `rimWeightFor`; hollow one-off nodes override 'none'
+ * upward because their rim is the whole node.
+ */
+export type RimWeight = 'none' | 'normal' | 'thick' | 'bold'
+
+export const RIM_WEIGHT: Record<ColourFamily, RimWeight> = {
+  CA: 'normal',
+  US: 'bold',
+  AU: 'normal',
+  NZ: 'bold',
+  INT: 'bold',
+  EU: 'thick',
+  XEU: 'normal',
+  AFR: 'none',
+  CN: 'normal',
+  ASIA: 'normal',
+  IN: 'normal',
+  SA: 'normal',
+}
+
+/** Rim weight for a country, total by construction like `rimColourFor`. */
+export function rimWeightFor(country: Country): RimWeight {
+  return RIM_WEIGHT[familyOf(country)] ?? 'normal'
 }
 
 /**
@@ -826,15 +925,39 @@ export const COUNTRY_LABEL: Record<string, string> = {
   GB: 'United Kingdom', RS: 'Serbia', ME: 'Montenegro', MK: 'North Macedonia',
   AL: 'Albania', BA: 'Bosnia and Herzegovina', TR: 'Türkiye', UA: 'Ukraine',
   MD: 'Moldova', XK: 'Kosovo',
+
+  // Backfilled 2026-08-12 (Thomas: "fill in please"). The rule above — "add a
+  // name when that country gets its first node" — had quietly stopped being
+  // followed the day the corpus outran Europe: 35 countries with live nodes
+  // had no entry, so a third of the world fell back to bare ISO codes. The
+  // Flag component now reads this for its fallback label, which is the
+  // consumer this table was missing.
+  AU: 'Australia', NZ: 'New Zealand', BR: 'Brazil', GL: 'Greenland',
+  PR: 'Puerto Rico',
+
+  // The Realm of New Zealand and the Compact states.
+  CK: 'Cook Islands', NU: 'Niue', TK: 'Tokelau',
+  FM: 'Micronesia', MH: 'Marshall Islands', PW: 'Palau',
+
+  // Africa — every AFR country with nodes as of 2026-08-12.
+  ZA: 'South Africa', EG: 'Egypt', KE: 'Kenya', ET: 'Ethiopia', GH: 'Ghana',
+  NG: 'Nigeria', TZ: 'Tanzania', BW: 'Botswana', NA: 'Namibia', LS: 'Lesotho',
+  SZ: 'Eswatini', ZM: 'Zambia', MW: 'Malawi', ZW: 'Zimbabwe', UG: 'Uganda',
+  RW: 'Rwanda', DZ: 'Algeria', MA: 'Morocco', TN: 'Tunisia', LY: 'Libya',
+  SN: 'Senegal', CI: "Côte d'Ivoire", CM: 'Cameroon', ML: 'Mali',
+  // The G.11/G.12 WAEMU/CEMAC batch — slices researched but not yet wired
+  // (see UNWIRED in scripts/gen-slices.ts). Named ahead of wiring so the day
+  // they load, nothing shows a bare code.
+  BF: 'Burkina Faso', TG: 'Togo', GA: 'Gabon', TD: 'Chad',
 }
 
 export function countryLabelFor(country: Country): string {
   return COUNTRY_LABEL[country] ?? country
 }
 
-/** Kept so callers that only have a level still resolve to something sane. */
-export function colourFor(level: JurisdictionLevel): string {
-  return SCOPE_COLOUR[`CA:${level}`] ?? '#8fa3c0'
-}
+// `colourFor(level)` used to sit here "so callers that only have a level still
+// resolve to something sane" — no caller ever existed. Deleted 2026-08-12 with
+// the other dead exports (countryLabelFor gained its first real consumer the
+// same day instead: Flag.tsx's fallback).
 
 export type { Report }

@@ -1,5 +1,5 @@
-import type { Dependency, Domain, Graph, ScoredReport } from './types'
-import { isDocumented, isOfficial } from './graph'
+import type { Domain, Graph, ScoredReport } from './types'
+import { isOfficial } from './graph'
 import { scopeOf, type Scope } from './palette'
 import { edgeKey } from './selection'
 
@@ -27,9 +27,8 @@ import { edgeKey } from './selection'
  * common. See search.ts.
  */
 
-/** The primitives. Everything in this file composes these. */
+/** The primitive. Everything in this file composes this. */
 export type NodePredicate = (report: ScoredReport) => boolean
-export type EdgePredicate = (edge: Dependency) => boolean
 
 /**
  * The user-facing filter state.
@@ -58,25 +57,10 @@ export interface FilterState {
    * most want, because it is the one the graph exists to draw.
    */
   scopes: readonly Scope[] | null
-  /**
-   * Edges a document establishes. On by default — this is the graph as the
-   * record supports it, and turning it off is the deliberately strange view
-   * that shows only what is believed and unproven.
-   */
-  showDocumented: boolean
-  /**
-   * Edges believed on strong grounds that no document states. Off by default,
-   * because the evidence standard is the project's central claim and the
-   * default view has to be the one that honours it.
-   *
-   * Kept as a pair with `showDocumented` rather than a single three-way choice,
-   * for the same reason the focus cones are a pair: two independent switches
-   * give four states including both-off, and both-off is a legitimate view
-   * rather than a degenerate one. It shows the nodes with no edges at all,
-   * which is the fastest way to see how much of the graph is structure and how
-   * much is furniture.
-   */
-  showImplied: boolean
+  // The evidence axis (showDocumented / showImplied) lived here until
+  // 2026-08-12, when the implied-edge layer was retired outright (Thomas,
+  // round-3 Q12). With every edge documented by rule, "show documented edges"
+  // is just "show edges", which the View panel's Edges toggle already says.
   /**
    * Subject matter. Null for all.
    *
@@ -101,20 +85,12 @@ export interface FilterState {
 export const NO_FILTER: FilterState = {
   showCommercial: true,
   scopes: null,
-  showDocumented: true,
-  showImplied: false,
   domains: null,
 }
 
 /** True when the state would hide anything, so callers can skip the work. */
 export function isFiltering(state: FilterState): boolean {
-  return (
-    !state.showCommercial ||
-    state.scopes !== null ||
-    state.domains !== null ||
-    !state.showDocumented ||
-    state.showImplied
-  )
+  return !state.showCommercial || state.scopes !== null || state.domains !== null
 }
 
 /** Compile the node half of the state down to a single predicate. */
@@ -131,11 +107,6 @@ export function compile(state: FilterState): NodePredicate {
   }
 }
 
-/** Compile the edge half. */
-export function compileEdges(state: FilterState): EdgePredicate {
-  return (e) => (isDocumented(e) ? state.showDocumented : state.showImplied)
-}
-
 export interface VisibleSet {
   nodes: Set<string>
   /** Keyed by edgeKey, in the data model's direction. */
@@ -145,32 +116,25 @@ export interface VisibleSet {
 }
 
 /**
- * Resolve the predicates against the graph.
+ * Resolve the predicate against the graph.
  *
- * An edge survives only if it passes the edge predicate **and both** endpoints
- * pass the node one. Any other rule leaves a line running off to nothing, which
- * reads as a bug in the data rather than as a filter doing its job — and the
- * user cannot tell the difference by looking.
+ * An edge survives only if **both** endpoints do. Any other rule leaves a line
+ * running off to nothing, which reads as a bug in the data rather than as a
+ * filter doing its job — and the user cannot tell the difference by looking.
+ * (An edge predicate used to exist here too, for the evidence axis; it retired
+ * with the implied layer on 2026-08-12.)
  *
  * Nodes are *not* dropped for losing all their edges. A filter is a view, and a
  * view that silently removed a report because you hid the one edge kind that
  * reached it would be answering a question nobody asked.
  */
-export function applyFilter(
-  graph: Graph,
-  predicate: NodePredicate,
-  edgePredicate: EdgePredicate = () => true,
-): VisibleSet {
+export function applyFilter(graph: Graph, predicate: NodePredicate): VisibleSet {
   const nodes = new Set<string>()
   for (const n of graph.nodes) if (predicate(n)) nodes.add(n.id)
 
   const edges = new Set<string>()
   for (const e of graph.edges) {
-    if (
-      edgePredicate(e) &&
-      nodes.has(e.source_report_id) &&
-      nodes.has(e.target_report_id)
-    ) {
+    if (nodes.has(e.source_report_id) && nodes.has(e.target_report_id)) {
       edges.add(edgeKey(e.source_report_id, e.target_report_id))
     }
   }
@@ -181,19 +145,6 @@ export function applyFilter(
     hiddenNodes: graph.nodes.length - nodes.size,
     hiddenEdges: graph.edges.length - edges.size,
   }
-}
-
-/** How many nodes each level has, for the legend. Counted before filtering. */
-export function countBy<K extends string>(
-  nodes: ScoredReport[],
-  key: (r: ScoredReport) => K,
-): Record<K, number> {
-  const counts = {} as Record<K, number>
-  for (const n of nodes) {
-    const k = key(n)
-    counts[k] = (counts[k] ?? 0) + 1
-  }
-  return counts
 }
 
 /**

@@ -504,6 +504,24 @@ export function validate(
           `one of ${EVIDENCE_KINDS.join(', ')} (or absent, meaning documented)`,
       })
     }
+    // The implied-edge LAYER was retired on 2026-08-12 (Thomas, round-3 review
+    // Q12: implied edges "do not belong here"). The fourteen that existed are
+    // preserved as _dropped notes in research/retired-implied-edges.json. This
+    // rule is what stops the layer silently regrowing: a belief without a
+    // document goes in _dropped; a belief that finds its document gets minted
+    // as an ordinary edge with an evidence_url. `EvidenceKind` itself lives on
+    // for release_schedule entries, where 'implied' marks an inferred DATE —
+    // a different and still-essential use.
+    if (d.evidence === 'implied') {
+      issues.push({
+        severity: 'error',
+        message:
+          `Edge ${key} is marked implied — the implied-edge layer was retired ` +
+          `2026-08-12. Record the belief as a _dropped note (reason ` +
+          `'no-document'), or find the document and mint the edge with its ` +
+          `evidence_url`,
+      })
+    }
     if (!d.basis?.trim()) {
       issues.push({
         severity: 'warning',

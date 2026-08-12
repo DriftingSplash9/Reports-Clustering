@@ -10,11 +10,7 @@ export interface ViewSettings {
   showPulses: boolean
   /** The edges themselves. */
   showEdges: boolean
-  /** Wireframe box marking the extent of the network. */
-  showCube: boolean
-  /** Infinite ground grid, giving the scene a floor and a sense of scale. */
-  showGroundGrid: boolean
-  /** Sky gradient, so the ground has something to meet. */
+  /** Sky gradient on the horizon. */
   showHorizon: boolean
   /**
    * Distance haze, 0 to 1.
@@ -95,11 +91,14 @@ export interface ViewSettings {
  * the whole objection to it — but at 121 nodes the alternative is a scene with
  * no depth cue whatsoever, and a little of the wrong cue beats none.
  */
+// The ground grid and the wireframe bounding box are GONE — deleted outright,
+// not defaulted off (Thomas, 2026-08-12: "don't keep the code" / "delete the
+// bounding box"). They joined the platform slab and the drop lines: scenery
+// that competed with the data. The scene's scale cues are now the nodes
+// themselves and the optional horizon.
 export const DEFAULT_VIEW: ViewSettings = {
   showPulses: true,
   showEdges: true,
-  showCube: false,
-  showGroundGrid: true,
   showHorizon: false,
   fog: 0.35,
   glow: 0.55,

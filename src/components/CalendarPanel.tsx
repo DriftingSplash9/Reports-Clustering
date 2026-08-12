@@ -60,10 +60,9 @@ export default function CalendarPanel({
   const [horizon, setHorizon] = useState<Horizon>('month')
   const [showReads, setShowReads] = useState(true)
 
-  const byId = useMemo(
-    () => new Map(graph.nodes.map((n) => [n.id, n])),
-    [graph],
-  )
+  // The graph already carries this exact lookup — building a second identical
+  // map here was pure redundancy (tidied 2026-08-12).
+  const byId = graph.byId
 
   const { events, unplaceable } = useMemo(() => {
     const w = horizonWindow(horizon)

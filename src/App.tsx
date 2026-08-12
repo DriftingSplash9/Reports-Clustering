@@ -14,7 +14,6 @@ import InfluenceGraph, {
   type FlyTo,
   type GraphBounds,
 } from './components/InfluenceGraph'
-import SpaceFrame from './components/SpaceFrame'
 import Environment from './components/Environment'
 import ViewControls from './components/ViewControls'
 import SearchPanel from './components/SearchPanel'
@@ -40,7 +39,6 @@ import {
   dependsOn,
   describeRate,
   disclosureByReport,
-  isDocumented,
   isOfficial,
   rolledUpAuthority,
   validate,
@@ -61,7 +59,6 @@ import {
   NO_FILTER,
   applyFilter,
   compile,
-  compileEdges,
   isFiltering,
   toggleIn,
   type FilterState,
@@ -185,13 +182,9 @@ export default function App() {
    * amount of work.
    */
   const predicate = useMemo(() => compile(filter), [filter])
-  const edgePredicate = useMemo(() => compileEdges(filter), [filter])
   const visible = useMemo(
-    () =>
-      isFiltering(filter)
-        ? applyFilter(disclosedGraph, predicate, edgePredicate)
-        : null,
-    [disclosedGraph, filter, predicate, edgePredicate],
+    () => (isFiltering(filter) ? applyFilter(disclosedGraph, predicate) : null),
+    [disclosedGraph, filter, predicate],
   )
 
   /**
@@ -543,17 +536,6 @@ export default function App() {
     return counts
   }, [graph])
 
-  const impliedCount = useMemo(
-    () => graph.edges.filter((e) => !isDocumented(e)).length,
-    [graph],
-  )
-
-  const toggleEvidence = useCallback(
-    (key: 'showDocumented' | 'showImplied') =>
-      setFilter((f) => ({ ...f, [key]: !f[key] })),
-    [],
-  )
-
   return (
     <div style={{ width: '100%', height: '100%' }} onPointerMove={trackPointer}>
       <Canvas
@@ -569,17 +551,13 @@ export default function App() {
         <pointLight position={[300, 300, 400]} intensity={1.1} />
         <pointLight position={[-300, -200, -300]} intensity={0.4} color="#4a6fb5" />
 
-        {bounds && <Environment floorY={bounds.floorY} view={view} />}
-
-        {bounds && (
-          <SpaceFrame
-            centre={bounds.centre}
-            radius={bounds.nodeRadius}
-            minY={bounds.minY}
-            maxY={bounds.maxY}
-            view={view}
-          />
-        )}
+        {/*
+          SpaceFrame (the wireframe bounding box) and the ground grid were
+          deleted 2026-08-12 — Thomas: "don't keep the code". Environment now
+          carries only the optional horizon, which needs nothing measured, so
+          it no longer waits on `bounds`.
+        */}
+        <Environment view={view} />
 
         <InfluenceGraph
           graph={disclosedGraph}
@@ -657,12 +635,6 @@ export default function App() {
         <ViewControls
           view={view}
           onChange={setView}
-          evidence={{
-            showDocumented: filter.showDocumented,
-            showImplied: filter.showImplied,
-          }}
-          onEvidenceChange={toggleEvidence}
-          impliedCount={impliedCount}
           hasSelection={!!selected}
           onReset={handleReset}
         />
@@ -901,9 +873,6 @@ function Detail({
             return {
               text: r.title,
               aside: describePeriod(edge?.reference_period),
-              // Marked here as well as drawn dashed, because the hover card is
-              // where someone decides whether to believe a chain.
-              implied: edge ? !isDocumented(edge) : false,
             }
           })}
         />
@@ -1143,7 +1112,7 @@ function ListBlock({
   items,
 }: {
   title: string
-  items: { text: string; aside?: string | null; implied?: boolean }[]
+  items: { text: string; aside?: string | null }[]
 }) {
   const shown = items.slice(0, 8)
   return (
@@ -1158,11 +1127,6 @@ function ListBlock({
         // exactly that case (React logging "two children with the same
         // key"), harmlessly but constantly, every time an orb was hovered.
         <div key={i} style={{ fontSize: 11.5, color: '#9fb0c9', lineHeight: 1.55 }}>
-          {item.implied && (
-            <span style={{ color: '#8b93a4' }} title="No document states this dependency">
-              ◌{' '}
-            </span>
-          )}
           {item.text}
           {item.aside && (
             // The transmission rate, where a document states one. This is the
@@ -1783,7 +1747,12 @@ const isolatedShelfWrap: React.CSSProperties = {
   border: '1px solid rgba(90, 115, 160, 0.22)',
   borderRadius: 10,
   backdropFilter: 'blur(8px)',
-  pointerEvents: 'none',
+  // 'auto', not 'none' — the shelf scrolls once the isolated set outgrows
+  // `maxHeight`, and a scrollbar inside a pointer-transparent panel cannot be
+  // grabbed (Thomas, 2026-08-12: "give it a scroll bar and allow the pointer
+  // to grab it"). The cost is a small dead rectangle for orbit-drags, in a
+  // corner nobody orbits from.
+  pointerEvents: 'auto',
   maxHeight: 148,
   overflowY: 'auto',
   zIndex: 5,

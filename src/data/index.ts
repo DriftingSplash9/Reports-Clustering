@@ -1,111 +1,7 @@
 import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
 import { reports as seedReports } from './reports'
 import { dependencies as seedDependencies } from './dependencies'
-import usCaliforniaLosAngeles from './research/us-california-los-angeles.json'
-import usOpenItems from './research/us-open-items.json'
-import usCountyTierRound2 from './research/us-county-tier-round2.json'
-import usCountyTier from './research/us-county-tier.json'
-import usTexasHouston from './research/us-texas-houston.json'
-import usSubnational from './research/us-subnational.json'
-import albertaMunicipal from './research/alberta-municipal.json'
-import populationAndEducation from './research/population-and-education.json'
-import internationalStandards from './research/international-standards.json'
-import albertaProvincial from './research/alberta-provincial.json'
-import grandePrairie from './research/grande-prairie.json'
-import countyGrandePrairie from './research/county-grande-prairie.json'
-import regionalEducation from './research/regional-education.json'
-import usStatisticalInputs from './research/us-statistical-inputs.json'
-import bankingSupervision from './research/banking-supervision.json'
-import rateTransmission from './research/rate-transmission.json'
-import provincialSocialPrograms from './research/provincial-social-programs.json'
-import federalCanada from './research/federal-canada.json'
-import internationalFrameworks from './research/international-frameworks.json'
-import creditAndMortgages from './research/credit-and-mortgages.json'
-import usFederalPolicy from './research/us-federal-policy.json'
-import structuralBridges from './research/structural-bridges.json'
-import albertaEnergy from './research/alberta-energy.json'
-import healthFunding from './research/health-funding.json'
-import statcanMacroAccounts from './research/statcan-macro-accounts.json'
-import equalizationPayrollBase from './research/equalization-payroll-base.json'
-import equalizationNamedProducts from './research/equalization-named-products.json'
-import fedH15Disclosure from './research/fed-h15-disclosure.json'
-import statcanSupplyUseTables from './research/statcan-supply-use-tables.json'
-import statcanIppi from './research/statcan-ippi.json'
-import ontarioOmpfMpac from './research/ontario-ompf-mpac.json'
-import manufacturingAndClassifications from './research/manufacturing-and-classifications.json'
-import euDraftBudget from './research/eu-draft-budget.json'
-import esa2010 from './research/esa-2010.json'
-import deDestatisNationalAccounts from './research/de-destatis-national-accounts.json'
-import eurostatFarmStructureSurvey from './research/eurostat-farm-structure-survey.json'
-import eurostatHicp from './research/eurostat-hicp.json'
-import luStatecCpi from './research/lu-statec-cpi.json'
-import eurostatRemunerationUpdateReport from './research/eurostat-remuneration-update-report.json'
-import eurostatRemunerationSatelliteSeries from './research/eurostat-remuneration-satellite-series.json'
-import eurostatRemunerationMissionExpensesReport from './research/eurostat-remuneration-mission-expenses-report.json'
-import eurosystemEcb from './research/eurosystem-ecb.json'
-import ecfinBusinessConsumerSurveys from './research/ecfin-business-consumer-surveys.json'
-import eurostatEdpGfsEcbStatistics from './research/eurostat-edp-gfs-ecb-statistics.json'
-import euMetaDocxBatches from './research/eu-meta-docx-batches.json'
-import essQualityFramework from './research/ess-quality-framework.json'
-import essPeerReviewCountryReports from './research/ess-peer-review-country-reports.json'
-import edpInventoryRegulation4792009 from './research/edp-inventory-regulation-479-2009.json'
-import esa2010QualityReporting from './research/esa2010-quality-reporting.json'
-import deBundesbankFinancialAccounts from './research/de-bundesbank-financial-accounts.json'
-import deDestatisSourceSurveys from './research/de-destatis-source-surveys.json'
-import grokR1 from './research/grok-r1-nordic-nato-fr-oecd.json'
-import grokR4 from './research/grok-r4-italy-czechia.json'
-import grokR6 from './research/grok-r6-mixed-categories.json'
-import grokR7 from './research/grok-r7-eu27-completion.json'
-import grokR8 from './research/grok-r8-accession-belt.json'
-import grokR3nlpl from './research/grok-r3-netherlands-poland.json'
-import nlMunicipalFinance from './research/nl-municipal-finance.json'
-import ukLocalGovernmentFinance from './research/uk-local-government-finance.json'
-import auGovernmentFinance from './research/au-government-finance.json'
-import nzGovernmentFinance from './research/nz-government-finance.json'
-import realmGovernmentFinance from './research/realm-government-finance.json'
-import associatedStatesGovernmentFinance from './research/associated-states-government-finance.json'
-import brFpmPopulation from './research/br-fpm-population.json'
-import anzsicIndustryClassification from './research/anzsic-industry-classification.json'
-import grokH1Equalization from './research/grok-h1-equalization-named-products.json'
-import grokH1Calgary from './research/grok-h1-calgary-municipal.json'
-import grokH1Classification from './research/grok-h1-classification-hubs.json'
-import grokH1Housing from './research/grok-h1-housing-benefits.json'
-import grokH1MunicipalOnQc from './research/grok-h1-municipal-ontario-quebec.json'
-import grokH1International from './research/grok-h1-international-reports.json'
-import gbUkspfSuccession from './research/gb-ukspf-succession.json'
-import nzStatsnzNationalAccounts from './research/nz-statsnz-national-accounts.json'
-import noGovernmentFinance from './research/no-government-finance.json'
-import esa2010MethodologyStack from './research/esa2010-methodology-stack.json'
-import deIeNationalAccountsQualityReports from './research/de-ie-national-accounts-quality-reports.json'
-import euLegalInstrumentLineages from './research/eu-legal-instrument-lineages.json'
-import essCatalogueStandards from './research/ess-catalogue-standards.json'
-import zaCpiSocialGrants from './research/za-cpi-social-grants.json'
-import zaFiscalFederalism from './research/za-fiscal-federalism.json'
-import zaNationalAccountsLabour from './research/za-national-accounts-labour.json'
-import zaFollowupGaps from './research/za-followup-gaps.json'
-import egCpiSocialInsurance from './research/eg-cpi-social-insurance.json'
-import keSocialProtection from './research/ke-social-protection.json'
-import etPsnpCpiFederalism from './research/et-psnp-cpi-federalism.json'
-import ghLeapCpiIndexation from './research/gh-leap-cpi-indexation.json'
-import ngCpiPensionSafetyNet from './research/ng-cpi-pension-safety-net.json'
-import tzCpiSocialProtection from './research/tz-cpi-social-protection.json'
-import bwCpiSocialProtection from './research/bw-cpi-social-protection.json'
-import naCpiSocialProtection from './research/na-cpi-social-protection.json'
-import lsCpiSocialProtection from './research/ls-cpi-social-protection.json'
-import szCpiSocialProtection from './research/sz-cpi-social-protection.json'
-import zmCpiSocialProtection from './research/zm-cpi-social-protection.json'
-import mwCpiSocialProtection from './research/mw-cpi-social-protection.json'
-import zwCpiSocialProtection from './research/zw-cpi-social-protection.json'
-import ugCpiSocialProtection from './research/ug-cpi-social-protection.json'
-import rwCpiSocialProtection from './research/rw-cpi-social-protection.json'
-import dzCpiSocialProtection from './research/dz-cpi-social-protection.json'
-import maCpiSocialProtection from './research/ma-cpi-social-protection.json'
-import tnCpiSocialProtection from './research/tn-cpi-social-protection.json'
-import lyCpiSocialProtection from './research/ly-cpi-social-protection.json'
-import snCpiSocialProtection from './research/sn-cpi-social-protection.json'
-import ciCpiSocialProtection from './research/ci-cpi-social-protection.json'
-import cmCpiSocialProtection from './research/cm-cpi-social-protection.json'
-import mlCpiSocialProtection from './research/ml-cpi-social-protection.json'
+import { sliceModules } from './slices.generated'
 
 /**
  * Assembles the graph data from the hand-written seed set plus every research
@@ -139,113 +35,17 @@ interface ResearchSlice {
   relations?: Relation[]
 }
 
-const slices: ResearchSlice[] = [
-  usSubnational as unknown as ResearchSlice,
-  usTexasHouston as unknown as ResearchSlice,
-  usCountyTier as unknown as ResearchSlice,
-  usCountyTierRound2 as unknown as ResearchSlice,
-  usOpenItems as unknown as ResearchSlice,
-  usCaliforniaLosAngeles as unknown as ResearchSlice,
-  albertaMunicipal as unknown as ResearchSlice,
-  populationAndEducation as unknown as ResearchSlice,
-  internationalStandards as unknown as ResearchSlice,
-  albertaProvincial as unknown as ResearchSlice,
-  grandePrairie as unknown as ResearchSlice,
-  countyGrandePrairie as unknown as ResearchSlice,
-  regionalEducation as unknown as ResearchSlice,
-  usStatisticalInputs as unknown as ResearchSlice,
-  bankingSupervision as unknown as ResearchSlice,
-  rateTransmission as unknown as ResearchSlice,
-  provincialSocialPrograms as unknown as ResearchSlice,
-  federalCanada as unknown as ResearchSlice,
-  internationalFrameworks as unknown as ResearchSlice,
-  creditAndMortgages as unknown as ResearchSlice,
-  usFederalPolicy as unknown as ResearchSlice,
-  structuralBridges as unknown as ResearchSlice,
-  albertaEnergy as unknown as ResearchSlice,
-  healthFunding as unknown as ResearchSlice,
-  statcanMacroAccounts as unknown as ResearchSlice,
-  equalizationPayrollBase as unknown as ResearchSlice,
-  equalizationNamedProducts as unknown as ResearchSlice,
-  fedH15Disclosure as unknown as ResearchSlice,
-  statcanSupplyUseTables as unknown as ResearchSlice,
-  statcanIppi as unknown as ResearchSlice,
-  ontarioOmpfMpac as unknown as ResearchSlice,
-  manufacturingAndClassifications as unknown as ResearchSlice,
-  euDraftBudget as unknown as ResearchSlice,
-  esa2010 as unknown as ResearchSlice,
-  deDestatisNationalAccounts as unknown as ResearchSlice,
-  eurostatFarmStructureSurvey as unknown as ResearchSlice,
-  eurostatHicp as unknown as ResearchSlice,
-  luStatecCpi as unknown as ResearchSlice,
-  eurostatRemunerationUpdateReport as unknown as ResearchSlice,
-  eurostatRemunerationSatelliteSeries as unknown as ResearchSlice,
-  eurostatRemunerationMissionExpensesReport as unknown as ResearchSlice,
-  eurosystemEcb as unknown as ResearchSlice,
-  ecfinBusinessConsumerSurveys as unknown as ResearchSlice,
-  eurostatEdpGfsEcbStatistics as unknown as ResearchSlice,
-  euMetaDocxBatches as unknown as ResearchSlice,
-  essQualityFramework as unknown as ResearchSlice,
-  essPeerReviewCountryReports as unknown as ResearchSlice,
-  edpInventoryRegulation4792009 as unknown as ResearchSlice,
-  esa2010QualityReporting as unknown as ResearchSlice,
-  deBundesbankFinancialAccounts as unknown as ResearchSlice,
-  deDestatisSourceSurveys as unknown as ResearchSlice,
-  grokR1 as unknown as ResearchSlice,
-  grokR4 as unknown as ResearchSlice,
-  grokR6 as unknown as ResearchSlice,
-  grokR7 as unknown as ResearchSlice,
-  grokR8 as unknown as ResearchSlice,
-  grokR3nlpl as unknown as ResearchSlice,
-  nlMunicipalFinance as unknown as ResearchSlice,
-  ukLocalGovernmentFinance as unknown as ResearchSlice,
-  auGovernmentFinance as unknown as ResearchSlice,
-  nzGovernmentFinance as unknown as ResearchSlice,
-  realmGovernmentFinance as unknown as ResearchSlice,
-  associatedStatesGovernmentFinance as unknown as ResearchSlice,
-  brFpmPopulation as unknown as ResearchSlice,
-  anzsicIndustryClassification as unknown as ResearchSlice,
-  grokH1Equalization as unknown as ResearchSlice,
-  grokH1Calgary as unknown as ResearchSlice,
-  grokH1Classification as unknown as ResearchSlice,
-  grokH1Housing as unknown as ResearchSlice,
-  grokH1MunicipalOnQc as unknown as ResearchSlice,
-  grokH1International as unknown as ResearchSlice,
-  gbUkspfSuccession as unknown as ResearchSlice,
-  nzStatsnzNationalAccounts as unknown as ResearchSlice,
-  noGovernmentFinance as unknown as ResearchSlice,
-  esa2010MethodologyStack as unknown as ResearchSlice,
-  deIeNationalAccountsQualityReports as unknown as ResearchSlice,
-  euLegalInstrumentLineages as unknown as ResearchSlice,
-  essCatalogueStandards as unknown as ResearchSlice,
-  zaCpiSocialGrants as unknown as ResearchSlice,
-  zaFiscalFederalism as unknown as ResearchSlice,
-  zaNationalAccountsLabour as unknown as ResearchSlice,
-  zaFollowupGaps as unknown as ResearchSlice,
-  egCpiSocialInsurance as unknown as ResearchSlice,
-  keSocialProtection as unknown as ResearchSlice,
-  etPsnpCpiFederalism as unknown as ResearchSlice,
-  ghLeapCpiIndexation as unknown as ResearchSlice,
-  ngCpiPensionSafetyNet as unknown as ResearchSlice,
-  tzCpiSocialProtection as unknown as ResearchSlice,
-  bwCpiSocialProtection as unknown as ResearchSlice,
-  naCpiSocialProtection as unknown as ResearchSlice,
-  lsCpiSocialProtection as unknown as ResearchSlice,
-  szCpiSocialProtection as unknown as ResearchSlice,
-  zmCpiSocialProtection as unknown as ResearchSlice,
-  mwCpiSocialProtection as unknown as ResearchSlice,
-  zwCpiSocialProtection as unknown as ResearchSlice,
-  ugCpiSocialProtection as unknown as ResearchSlice,
-  rwCpiSocialProtection as unknown as ResearchSlice,
-  dzCpiSocialProtection as unknown as ResearchSlice,
-  maCpiSocialProtection as unknown as ResearchSlice,
-  tnCpiSocialProtection as unknown as ResearchSlice,
-  lyCpiSocialProtection as unknown as ResearchSlice,
-  snCpiSocialProtection as unknown as ResearchSlice,
-  ciCpiSocialProtection as unknown as ResearchSlice,
-  cmCpiSocialProtection as unknown as ResearchSlice,
-  mlCpiSocialProtection as unknown as ResearchSlice,
-]
+// The research slices — discovered from the folder by scripts/gen-slices.ts
+// rather than hand-imported one by one (2026-08-12; the old list here was 105
+// import lines and three edits per new slice, and it had silently drifted:
+// ten on-disk files were absent from it, four of them whole researched
+// countries — see UNWIRED in gen-slices.ts). Adding a slice is now: drop the
+// JSON in research/ and run anything (`dev`, `build` and `validate` all
+// regenerate first). The cast is the same cast the old list applied per file;
+// the runtime guards in validate() and scripts/validate-data.ts remain the
+// thing that actually checks the shape — see the cast-not-parsed note in
+// types.ts.
+const slices: ResearchSlice[] = sliceModules as ResearchSlice[]
 
 function assemble() {
   const reportById = new Map<string, Report>()

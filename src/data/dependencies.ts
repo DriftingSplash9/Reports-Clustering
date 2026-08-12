@@ -12,6 +12,14 @@ import type { Dependency } from '../lib/types'
 export const dependencies: Dependency[] = [
   // ── Canada: statistics feeding statistics ─────────────────────────────────
   //
+  // Six seed edges that lived here as `implied` retired to
+  // `research/retired-implied-edges.json` on 2026-08-12 with the whole
+  // implied layer (Thomas, round-3 Q12) — including
+  // `statcan-national-accounts -> statcan-cpi`, this file's original
+  // documented-to-implied demotion, and the five Bank-of-Canada/Fed edges
+  // demoted that same morning. The validator now errors on any dependency
+  // carrying `evidence: 'implied'`.
+  //
   // `statcan-national-accounts -> statcan-gdp-monthly` used to sit here, on the
   // basis that "the quarterly expenditure-based accounts are reconciled against
   // the monthly by-industry GDP estimates". Deleted in V0.10 after reading both
@@ -20,14 +28,6 @@ export const dependencies: Dependency[] = [
   // by-industry estimates. See the `_dropped` block in
   // `research/statcan-macro-accounts.json` — the real anchor is the annual
   // Supply and Use Tables, which is not yet a node.
-  {
-    source_report_id: 'statcan-national-accounts',
-    target_report_id: 'statcan-cpi',
-    relationship_type: 'methodology_depends_on',
-    evidence: 'implied',
-    basis:
-      'Demoted from documented to implied in V0.10, having carried no evidence_url since the seed set. The accounts\' own official guide — User Guide: Canadian System of Macroeconomic Accounts, ch. 5 §5.5 "Final expenditure accounts at constant prices" — describes the mechanism and names the index, but only as an illustration of what a price index is: "For most expenditure product classes it is possible to construct a price index time series indicating the average change through time in the prices of products within that class. For example, the Consumer Price Index does precisely that for various classes of consumer products. The estimates at current prices for a particular expenditure time series … can then be divided by the corresponding price index time series—a process known as deflation." It never says which indexes "the corresponding price index" is, and record 1901\'s own Estimation section says only that "certain series (mainly expenditure series) are deflated (presented in real terms)". So: strong grounds, no document stating it — which is exactly what `implied` is for. Contrast statcan-gdp-monthly -> statcan-cpi, where the monthly program\'s source table cites the CPI by name and record number for each industry it deflates. The asymmetry is disclosure, not method.',
-  },
 
   // ── Canada: statistics feeding monetary policy ────────────────────────────
   {
@@ -44,19 +44,6 @@ export const dependencies: Dependency[] = [
     },
     evidence_url:
       'https://www.bankofcanada.ca/2021/12/joint-statement-of-the-government-of-canada-and-the-bank-of-canada-on-the-renewal-of-the-monetary-policy-framework/',
-  },
-  {
-    source_report_id: 'boc-policy-rate',
-    target_report_id: 'statcan-lfs',
-    relationship_type: 'uses_data_from',
-    basis:
-      'Labour market slack from the LFS is a standing input to the rate decision.',
-  },
-  {
-    source_report_id: 'boc-policy-rate',
-    target_report_id: 'statcan-national-accounts',
-    relationship_type: 'uses_data_from',
-    basis: 'Output gap assessment rests on the quarterly national accounts.',
   },
   {
     source_report_id: 'boc-mpr',
@@ -81,7 +68,9 @@ export const dependencies: Dependency[] = [
     target_report_id: 'boc-policy-rate',
     relationship_type: 'cites',
     basis:
-      'The MPR is published alongside and explains the accompanying rate decision.',
+      'The Governor\'s press-conference opening statement for the July 2026 MPR ties the two directly, in both directions: "Based on the MPR projection published today, Governing Council judges the current policy rate remains appropriate to sustain the economic recovery and bring inflation back to the 2% target." And, on the occasion itself: "I\'m pleased to be here with Senior Deputy Governor Carolyn Rogers to discuss our quarterly Monetary Policy Report and today\'s decision." Sourced 2026-08-12 (Grok source-hunt, URL and quotes verified against the page), closing a seed edge that had carried no evidence_url since V0.1.',
+    evidence_url:
+      'https://www.bankofcanada.ca/2026/07/opening-statement-2026-07-15/',
   },
 
   // ── Canada: statistics feeding benefit calculations ───────────────────────
@@ -124,28 +113,22 @@ export const dependencies: Dependency[] = [
 
   // ── United States: statistics feeding monetary policy ─────────────────────
   {
-    source_report_id: 'fed-fomc-statement',
-    target_report_id: 'bls-employment-situation',
-    relationship_type: 'uses_data_from',
-    basis: 'The employment half of the dual mandate is assessed from this release.',
-  },
-  {
-    source_report_id: 'fed-fomc-statement',
-    target_report_id: 'bea-gdp',
-    relationship_type: 'uses_data_from',
-    basis: 'Assessment of economic activity rests on the NIPA GDP estimates.',
-  },
-  {
     source_report_id: 'fed-sep',
     target_report_id: 'bls-employment-situation',
     relationship_type: 'uses_data_from',
-    basis: 'SEP unemployment rate projections are stated on the household survey basis.',
+    basis:
+      'The Fed\'s own Guide to the Summary of Economic Projections defines the variable on the release: "Unemployment Rate—the average civilian unemployment rate in the fourth quarter of each year." The civilian unemployment rate is the headline series of the BLS Employment Situation, so the projection is denominated in that release\'s number. Sourced 2026-08-12 (Grok source-hunt, URL and quote verified), closing a seed edge with no prior evidence_url.',
+    evidence_url:
+      'https://www.federalreserve.gov/monetarypolicy/guide-to-the-summary-of-economic-projections.htm',
   },
   {
     source_report_id: 'fed-sep',
     target_report_id: 'bea-gdp',
     relationship_type: 'uses_data_from',
-    basis: 'SEP growth projections are stated as real GDP change.',
+    basis:
+      'The Fed\'s own Guide to the Summary of Economic Projections defines the growth variable on the release: "Change in Real Gross Domestic Product (GDP)—as measured from the fourth quarter of the previous year to the fourth quarter of the year indicated." Real GDP is BEA\'s NIPA series, so the projection is denominated in it. Same sourcing pass and verification as the unemployment edge.',
+    evidence_url:
+      'https://www.federalreserve.gov/monetarypolicy/guide-to-the-summary-of-economic-projections.htm',
   },
 
   // ── United States: statistics feeding benefit calculations ────────────────
@@ -154,13 +137,6 @@ export const dependencies: Dependency[] = [
   // Deliberately thin. Canadian and US statistical systems rarely consume each
   // other's outputs as computational inputs; the genuine link runs through the
   // Bank of Canada's treatment of the US outlook as a forecast condition.
-  {
-    source_report_id: 'boc-mpr',
-    target_report_id: 'fed-fomc-statement',
-    relationship_type: 'cites',
-    basis:
-      'The MPR conditions its projection on the expected path of US monetary policy.',
-  },
   {
     source_report_id: 'boc-mpr',
     target_report_id: 'bea-gdp',

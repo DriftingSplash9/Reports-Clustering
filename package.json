@@ -4,11 +4,15 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "gen": "tsx scripts/gen-slices.ts",
+    "predev": "npm run gen",
     "dev": "vite",
+    "prebuild": "npm run gen",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "check": "tsc --noEmit",
-    "validate": "tsx scripts/validate-data.ts",
+    "test": "tsx scripts/test-logic.ts",
+    "validate": "npm run gen && tsx scripts/test-logic.ts && tsx scripts/validate-data.ts",
     "logs": "tsx scripts/logs.ts"
   },
   "dependencies": {
