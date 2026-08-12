@@ -129,7 +129,7 @@ export function nodeMaterial({
   // 'normal' there rather than letting a styling rule erase the geometry.
   const weight: RimWeight = hollow && rimWeight === 'none' ? 'normal' : rimWeight
   const rimMax = weight === 'none' ? 0 : 1
-  const rim = { value: (lit ? 1 : 0.25) * rimMax }
+  const rim = { value: (lit ? 1 : 0.07) * rimMax }
   material.userData = { rim, rimMax, litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1 }
 
   material.onBeforeCompile = (shader) => {
@@ -234,9 +234,15 @@ export function nodeGeometry(
 }
 
 /** Match the rim to the node's focus state — scaled by the family's rimMax,
- * so a no-rim family (Africa) stays rimless through every focus change. */
+ * so a no-rim family (Africa) stays rimless through every focus change.
+ *
+ * The dim factor fell 0.25 → 0.07 in round 8: with the bold-rim system, 0.25
+ * of a bold ring was still a clearly visible ring, and several hundred
+ * clearly visible rings is why tracing a chain stopped reading as a chain.
+ * Out-of-focus nodes keep a ghost of a silhouette; they no longer keep a
+ * ring. */
 export function setNodeRim(material: NodeMaterial, lit: boolean) {
-  material.userData.rim.value = (lit ? 1 : 0.25) * material.userData.rimMax
+  material.userData.rim.value = (lit ? 1 : 0.07) * material.userData.rimMax
 }
 
 /**

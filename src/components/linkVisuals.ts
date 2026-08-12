@@ -125,12 +125,32 @@ export function gradientLinkMaterial(
 
 const dimColour = new THREE.Color(DIM_LINK_COLOUR)
 
-/** Fade a link out of focus, or restore it, without rebuilding anything. */
-export function setLinkFocus(material: GradientLinkMaterial, lit: boolean) {
+/**
+ * Fade a link out of focus, or restore it, without rebuilding anything.
+ *
+ * `tracing` marks that a chain is actively selected, and it changes what
+ * "lit" means (round 8, from Thomas's read of the built-from view: "these
+ * pulses and edges are lost by the size and proximity of the nodes"). A lit
+ * link during a trace gets a strong opacity lift AND stops depth-testing —
+ * it draws straight through any sphere in front of it, so the chain stays a
+ * visible thread even where it threads between fat nodes at close zoom. With
+ * no trace active, links depth-test normally; lines through nodes are only
+ * wanted when the lines ARE the answer.
+ */
+export function setLinkFocus(
+  material: GradientLinkMaterial,
+  lit: boolean,
+  tracing = false,
+) {
   const { from, to, litOpacity } = material.userData
   material.uniforms.uFrom.value.copy(lit ? from : dimColour)
   material.uniforms.uTo.value.copy(lit ? to : dimColour)
-  material.uniforms.uOpacity.value = lit ? litOpacity : DIM_LINK_OPACITY
+  material.uniforms.uOpacity.value = lit
+    ? tracing
+      ? Math.min(0.68, litOpacity * 2.2)
+      : litOpacity
+    : DIM_LINK_OPACITY
+  material.depthTest = !(lit && tracing)
 }
 
 /**

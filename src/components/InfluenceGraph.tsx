@@ -739,12 +739,14 @@ export default function InfluenceGraph({
       particleObjects.set(
         l.key,
         new THREE.Mesh(
-          // Sized up twice on 2026-08-10, both times on Thomas looking at it:
-          // 1.6-3.5 read as near-invisible specks, 2.4-5.3 was still short, and
-          // this is 3.2-7.0. Worth noting the moving target underneath — nodes
-          // themselves grew that day too (see TARGET_LARGEST_FRACTION), so a
-          // pulse that was legible against the old node size no longer was.
-          teardropGeometry(3.2 + l.weight * 3.8),
+          // Sized up THREE times now, every time on Thomas looking at it:
+          // 1.6-3.5 read as specks, 2.4-5.3 short, 3.2-7.0 lasted until the
+          // round-7 review ("they are small and could use a boost") — this is
+          // that ×1.5, so 4.8-10.5. Cost is ~nothing: the mesh count is
+          // unchanged and a slightly larger teardrop is a few more fragments,
+          // which is why the answer to "how hard on the processors" was
+          // "free".
+          teardropGeometry((3.2 + l.weight * 3.8) * 1.5),
           pulseMaterial(l.colour),
         ),
       )
@@ -1477,7 +1479,7 @@ export default function InfluenceGraph({
     }
 
     for (const [key, material] of linkMaterials.current) {
-      setLinkFocus(material, !focus || focus.edges.has(key))
+      setLinkFocus(material, !focus || focus.edges.has(key), focus !== null)
     }
 
     appliedMeshCount.current = meshes.current.size

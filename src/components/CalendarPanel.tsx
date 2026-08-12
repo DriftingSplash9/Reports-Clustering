@@ -119,12 +119,19 @@ export default function CalendarPanel({
     <>
       <div
         style={{
+          // Top of the screen, dropping down from under its own button —
+          // Thomas, 2026-08-12 round-7 feedback: "the calendar opens at the
+          // bottom, that should go up top with the calendar button." The
+          // bottom edge it used to slide from now belongs to the chip bar and
+          // the tier buttons, and the three were fighting for the same
+          // pixels. Slides DOWN from above the viewport instead of up from
+          // below it; same tab, same animation, opposite edge.
           position: 'fixed',
-          bottom: 20,
+          top: 64,
           left: '50%',
           width: PANEL_WIDTH,
           marginLeft: -PANEL_WIDTH / 2,
-          transform: `translateY(${collapsed ? PANEL_HEIGHT + 44 : 0}px)`,
+          transform: `translateY(${collapsed ? -(PANEL_HEIGHT + 90) : 0}px)`,
           transition: 'transform 220ms cubic-bezier(0.4, 0, 0.2, 1)',
           pointerEvents: collapsed ? 'none' : 'auto',
           zIndex: 5,

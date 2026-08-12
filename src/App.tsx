@@ -1216,6 +1216,32 @@ function ChipBar({
   onScope: (scope: Scope) => void
 }) {
   const [openFamily, setOpenFamily] = useState<ColourFamily | null>(null)
+  const barRef = useRef<HTMLDivElement>(null)
+
+  // The flyout closes on a click anywhere outside the bar, and on Escape —
+  // added round 8 after Thomas reported it "stuck... I cannot change it or
+  // get rid of it". Two failures stacked: the ▾ hit target was a few pixels
+  // wide (a miss landed on the chip label and toggled the family instead,
+  // leaving the flyout exactly where it was), and nothing but that sliver
+  // could ever close it. The chevron is a real button now, and the rest of
+  // the screen is an exit.
+  useEffect(() => {
+    if (!openFamily) return
+    const onDown = (e: PointerEvent) => {
+      if (barRef.current && !barRef.current.contains(e.target as Node)) {
+        setOpenFamily(null)
+      }
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenFamily(null)
+    }
+    window.addEventListener('pointerdown', onDown)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('pointerdown', onDown)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [openFamily])
 
   const anyFilter = filter.scopes !== null
   const groups = SCOPE_GROUPS.filter(
@@ -1223,7 +1249,7 @@ function ChipBar({
   )
 
   return (
-    <div style={chipBarWrap}>
+    <div ref={barRef} style={chipBarWrap}>
       {groups.map((group) => {
         const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
         const on =
@@ -1298,12 +1324,18 @@ function ChipBar({
                 <span style={{ color: '#54637d' }}>{total}</span>
               </span>
               <span
-                onClick={() => setOpenFamily(open ? null : group.country)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setOpenFamily(open ? null : group.country)
+                }}
                 title={`${group.label} by level`}
                 style={{
                   cursor: 'pointer',
                   color: open ? '#cfe0f8' : '#54637d',
-                  padding: '0 2px',
+                  // A real hit target — the old 2px sliver is what made the
+                  // flyout feel stuck (see the outside-click note above).
+                  padding: '6px 8px',
+                  margin: '-6px -6px -6px -2px',
                   transform: open ? 'rotate(180deg)' : 'none',
                   transition: 'transform 140ms ease',
                 }}

@@ -149,8 +149,16 @@ export const BLOOM_THRESHOLD_MAX = 0.44
  * Neither is zero, for the reason in the note above: the out-of-focus graph is
  * the context that makes a focused chain mean anything.
  */
-export const DIM_NODE_OPACITY = 0.15
-export const DIM_NODE_EMISSIVE = 0.03
+// Deepened 0.15/0.03 → 0.09/0.012 in round 8. The old measurement ("dimming
+// is not the lever — there is nothing left to take away") was true of the old
+// flat spheres, and the bold-rim system quietly invalidated it: rims add
+// alpha at the silhouette even on a dimmed node, so after palette v2 a
+// "dimmed" graph still read as a wall of bright rings and tracing lost its
+// contrast (Thomas: "the built from view... doesn't show much"). The rim dim
+// factor in nodeVisuals dropped alongside these, which is where most of the
+// recovered darkness actually comes from.
+export const DIM_NODE_OPACITY = 0.09
+export const DIM_NODE_EMISSIVE = 0.012
 export const DIM_LINK_COLOUR = '#1b2437'
 
 /**
