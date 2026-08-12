@@ -315,6 +315,14 @@ export default function InfluenceGraph({
   /** Ticks applied since this `forceGraph` was (re)built — gates the first fit. */
   const tickCount = useRef(0)
   /**
+   * Whether any fit has ever run this session. Unlike `fitted` this is never
+   * reset on rebuild — it distinguishes "the fit that mounts the scene", which
+   * must always move the camera, from every rebuild's first fit after it,
+   * which must not fight a camera the user is holding. See the `mountFit` note
+   * in `useFrame`.
+   */
+  const everFitted = useRef(false)
+  /**
    * Whether the authoritative, post-convergence fit has run. Guards
    * `onEngineStop` so it re-fits exactly once per `forceGraph` — not on
    * every subsequent reheat (the geo-affinity slider, for one, reheats the
@@ -329,6 +337,57 @@ export default function InfluenceGraph({
    */
   const settleClock = useRef(0)
   const sinceRefit = useRef(0)
+  /**
+   * Whether the user has taken the camera since this `forceGraph` was built.
+   *
+   * The tracking re-fit above exists to keep a newly-exploded cloud in frame,
+   * and it does that by *setting* the camera — position, target and all. That
+   * is fine against a layout nobody is touching and actively hostile against
+   * one they are: for up to `REFIT_WINDOW_SECONDS` after every rebuild, any
+   * drag or scroll was being overwritten on the next re-fit. Measured
+   * 2026-08-12 against `npm run dev`: with the window open, a drag-orbit
+   * reached 0.8° off-axis before being flattened back and the wheel could not
+   * move the camera distance off the fit value at all. Reported by Thomas as
+   * "sometimes when i move the camera it snaps back, when i scroll to zoom it
+   * snaps back to fit", which is exactly what it is — the tracking fit was
+   * winning every fifth of a second, and someone exploring the graph is
+   * essentially always inside that window, because exploring is what opens it.
+   *
+   * So the fit yields. Once this is true the camera is left alone until the
+   * next rebuild, and a rebuild is always something the user just did (a
+   * drilldown toggle, a filter, the spread slider), so "you moved it, you keep
+   * it, until you ask for a new view" is the whole rule.
+   *
+   * **It only yields the camera, not the measurement** — see `runFit`'s
+   * `moveCamera` parameter. Everything else that pass computes (node scale,
+   * the fog cloud, the scene bounds, and `fitState`, which is where Reset
+   * flies back to) keeps updating on the same 0.2s cadence. Skipping the fit
+   * wholesale would have left `fitState` describing the cloud as it was
+   * *before* the level opened, so Reset — the one escape hatch from a camera
+   * pointed at nothing — would have framed the wrong thing and stranded them.
+   */
+  const userOwnsCamera = useRef(false)
+  /** Whether a pointer/wheel/touch gesture on OrbitControls is in progress. */
+  const gestureActive = useRef(false)
+  /**
+   * Set while `runFit` is writing the camera, so the `change` event that our
+   * own `orbit.update()` emits is not mistaken for the user's input. Without
+   * it, holding the mouse down on a node — a plain select, no drag — would
+   * open a gesture, catch our own re-fit's change event, and stop tracking.
+   */
+  const applyingFit = useRef(false)
+  /**
+   * The target and distance `runFit` last set, so a camera change *nobody*
+   * made through OrbitControls is still detectable — the zoom slider writes
+   * `camera.position` directly (see CameraZoom.tsx) and the search fly-to
+   * writes both, and neither raises a gesture. Deliberately compares distance
+   * and target rather than raw position: auto-orbit changes position every
+   * frame while holding both of these exactly constant, so this stays quiet
+   * for it, and pure orbit-dragging — which also holds both constant — is
+   * what the gesture listener above is for. The two together cover the ways
+   * the camera can move; neither does alone.
+   */
+  const fitPose = useRef<{ target: THREE.Vector3; distance: number } | null>(null)
   /**
    * Visual scale for every node mesh, set once the fit has measured the cloud.
    * Held in a ref rather than state because it is read inside
@@ -746,6 +805,11 @@ export default function InfluenceGraph({
     settledOnce.current = false
     settleClock.current = 0
     sinceRefit.current = 0
+    // A rebuild is always something the user just asked for, and framing the
+    // result is the point of asking — so each one hands the camera back to the
+    // tracking fit, which then holds it only until they touch it again.
+    userOwnsCamera.current = false
+    fitPose.current = null
 
     // The authoritative fit — precise cloud radius, camera framing and node
     // scale, all read off a layout that has actually stopped moving.
@@ -759,9 +823,50 @@ export default function InfluenceGraph({
     forceGraph.onEngineStop(() => {
       if (settledOnce.current) return
       settledOnce.current = true
-      runFit()
+      // Same yield as the periodic fit: convergence is not a licence to grab a
+      // camera the user is already holding.
+      runFit(!userOwnsCamera.current)
     })
   }, [forceGraph])
+
+  /**
+   * Notice when the user takes the camera — see `userOwnsCamera`.
+   *
+   * OrbitControls is an EventDispatcher and brackets every gesture it handles
+   * (drag, wheel, pan, touch) in `start`/`end`, firing `change` in between
+   * only when the camera actually moved. That bracketing is what makes this
+   * reliable where a plain position diff is not: `change` also fires for our
+   * own re-fit and for auto-orbit, and only the ones landing inside a live
+   * gesture — and not while we are mid-fit ourselves — are the user's.
+   */
+  useEffect(() => {
+    const orbit = controls as unknown as
+      | {
+          addEventListener(type: string, fn: () => void): void
+          removeEventListener(type: string, fn: () => void): void
+        }
+      | undefined
+    if (!orbit?.addEventListener) return
+
+    const onStart = () => {
+      gestureActive.current = true
+    }
+    const onEnd = () => {
+      gestureActive.current = false
+    }
+    const onChange = () => {
+      if (gestureActive.current && !applyingFit.current) userOwnsCamera.current = true
+    }
+
+    orbit.addEventListener('start', onStart)
+    orbit.addEventListener('end', onEnd)
+    orbit.addEventListener('change', onChange)
+    return () => {
+      orbit.removeEventListener('start', onStart)
+      orbit.removeEventListener('end', onEnd)
+      orbit.removeEventListener('change', onChange)
+    }
+  }, [controls])
 
   useEffect(() => {
     // Zero is the initial value, not a request; resetting on mount would fight
@@ -777,6 +882,13 @@ export default function InfluenceGraph({
       | undefined
     orbit?.target.copy(f.centre)
     orbit?.update()
+
+    // Reset is the user asking for the fitted view back, so it hands the
+    // camera back to the tracking fit rather than counting as taking it — and
+    // re-records the pose, or the drift check below would read the move Reset
+    // just made as the user's own and stop tracking immediately.
+    userOwnsCamera.current = false
+    fitPose.current = { target: f.centre.clone(), distance: f.distance }
   }, [resetSignal, camera, controls])
 
   /**
@@ -811,7 +923,13 @@ export default function InfluenceGraph({
    * position — see that component for why.
    */
 
-  function runFit(): boolean {
+  /**
+   * `moveCamera: false` measures everything and moves nothing — see
+   * `userOwnsCamera` for why that split exists. Node scale, the fog cloud,
+   * `fitState` and `onBounds` are all still brought up to date; only the
+   * `camera.position` / `orbit.target` writes are skipped.
+   */
+  function runFit(moveCamera = true): boolean {
     const fg = ref.current
     if (!fg) return false
 
@@ -873,18 +991,27 @@ export default function InfluenceGraph({
     const distance = (nodeRadius / Math.sin((FOV * Math.PI) / 360)) * 1.18
     const radius = nodeRadius
 
-    camera.position.set(centre.x, centre.y, centre.z + distance)
-    camera.lookAt(centre)
-    camera.updateProjectionMatrix()
+    if (moveCamera) {
+      // `applyingFit` brackets every camera write this function makes, because
+      // `orbit.update()` dispatches OrbitControls' `change` event synchronously
+      // and the listener above must not read our own move as the user's.
+      applyingFit.current = true
+      camera.position.set(centre.x, centre.y, centre.z + distance)
+      camera.lookAt(centre)
+      camera.updateProjectionMatrix()
 
-    // Orbit has to pivot around the graph, not the world origin, or dragging
-    // swings the whole scene off screen.
-    const orbit = controls as unknown as
-      | { target: THREE.Vector3; update(): void }
-      | undefined
-    if (orbit?.target) {
-      orbit.target.copy(centre)
-      orbit.update()
+      // Orbit has to pivot around the graph, not the world origin, or dragging
+      // swings the whole scene off screen.
+      const orbit = controls as unknown as
+        | { target: THREE.Vector3; update(): void }
+        | undefined
+      if (orbit?.target) {
+        orbit.target.copy(centre)
+        orbit.update()
+      }
+      applyingFit.current = false
+
+      fitPose.current = { target: centre.clone(), distance }
     }
 
     // Where the node cloud is, so the fog can be recomputed against it every
@@ -913,6 +1040,25 @@ export default function InfluenceGraph({
     })
 
     return true
+  }
+
+  /**
+   * Has the camera moved away from what `runFit` last set, by something other
+   * than a gesture? The zoom slider and the search fly-to both write the
+   * camera directly and raise no OrbitControls gesture, so the listener above
+   * cannot see them; both change the distance from the target, or the target
+   * itself, which auto-orbit never does. Tolerance is half a percent of the
+   * fit distance — auto-orbit holds the radius bit-exact, so this only has to
+   * clear floating-point noise, not a real drift budget.
+   */
+  function cameraMovedOffFit(): boolean {
+    const pose = fitPose.current
+    if (!pose) return false
+    const orbit = controls as unknown as { target: THREE.Vector3 } | undefined
+    const target = orbit?.target ?? pose.target
+    const tolerance = Math.max(1, pose.distance * 0.005)
+    if (Math.abs(camera.position.distanceTo(target) - pose.distance) > tolerance) return true
+    return target.distanceTo(pose.target) > tolerance
   }
 
   // Toggles that have to reach inside the force-graph object, which was built
@@ -1174,15 +1320,32 @@ export default function InfluenceGraph({
       // The rough fit — see the note on `runFit`. Only mounts the scene;
       // periodic tracking fits (below) and `onEngineStop`'s precise one
       // refine it from here.
-      if (tickCount.current >= MIN_TICKS_BEFORE_FIRST_PAINT && runFit()) {
+      //
+      // The very first fit of the session always moves the camera, even if a
+      // gesture has already been noticed: it is the one that puts the graph in
+      // front of the viewer, and there is no earlier view worth preserving
+      // over it. Every *later* rebuild's first fit yields like the rest — that
+      // is the ~half-second after a drilldown toggle in which someone who
+      // double-clicks and immediately starts looking around would otherwise
+      // still get yanked, since this branch, not the periodic one, is what
+      // runs during it.
+      const mountFit = !everFitted.current
+      if (
+        tickCount.current >= MIN_TICKS_BEFORE_FIRST_PAINT &&
+        runFit(mountFit || !userOwnsCamera.current)
+      ) {
         fitted.current = true
+        everFitted.current = true
       }
     } else if (
       settleClock.current <= REFIT_WINDOW_SECONDS &&
       sinceRefit.current >= REFIT_INTERVAL_SECONDS
     ) {
       sinceRefit.current = 0
-      runFit()
+      // Still measures every time; only stops steering once the camera is the
+      // user's — see `userOwnsCamera`.
+      if (!userOwnsCamera.current && cameraMovedOffFit()) userOwnsCamera.current = true
+      runFit(!userOwnsCamera.current)
     }
     advanceFlight(delta)
     updateFog(view.fog)
