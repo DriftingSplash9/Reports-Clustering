@@ -148,22 +148,48 @@ export function applyFilter(graph: Graph, predicate: NodePredicate): VisibleSet 
 }
 
 /**
- * Toggle one value in a nullable selection list.
+ * Isolate-first toggling — the click model Thomas specified after living with
+ * the old one (2026-08-12, round-3 notes): *"the issue I have is that they are
+ * all selected so I need to select each of the 22 one at a time... What I
+ * expect is the one I want isolated I click and it happens, if I want to view
+ * any combo I should be able to view it."*
  *
- * Null (no constraint) behaves as though everything were selected, so the first
- * click removes one rather than leaving one — which is what a user clicking a
- * lit legend row means by it.
+ * The old model (`toggleIn`, now retired) treated a click on a lit item as
+ * "turn that one off" — correct for a checkbox, wrong for a filter, because
+ * from the all-on state the thing you almost always mean is "show me THIS".
+ * The rules, in click order:
+ *
+ *  - Nothing filtered (null) + click → **isolate**: the clicked unit becomes
+ *    the whole selection.
+ *  - A selection exists + click an unselected unit → **add it** (build a
+ *    combo).
+ *  - A selection exists + click a selected unit → **remove it**; removing the
+ *    last one returns to null — everything — rather than to an empty screen.
+ *    (The old "empty array = honest nothing" state retired with the legend
+ *    tree that could express it; a chip bar with every chip off reading as
+ *    "show all" is what every chip UI on earth does, and fighting that
+ *    convention bought nothing.)
+ *  - A selection that grows to cover everything collapses back to null, so
+ *    isFiltering() stays honest.
+ *
+ * `values` is the clicked unit — one scope, one domain, or a whole family's
+ * scope list — which is what lets one function serve the family chips, their
+ * level flyouts, and the subject chips alike.
  */
-export function toggleIn<T>(
+export function isolateFirstToggle<T>(
   current: readonly T[] | null,
   all: readonly T[],
-  value: T,
+  values: readonly T[],
 ): readonly T[] | null {
-  const selected = current ?? all
-  const next = selected.includes(value)
-    ? selected.filter((v) => v !== value)
-    : [...selected, value]
-  // Back to "no constraint" rather than a list that happens to contain
-  // everything, so isFiltering() stays honest and the toggle can reset itself.
+  const unit = values.filter((v) => all.includes(v))
+  if (unit.length === 0) return current
+  if (current === null) {
+    return unit.length === all.length ? null : unit
+  }
+  const anyOn = unit.some((v) => current.includes(v))
+  const next = anyOn
+    ? current.filter((v) => !unit.includes(v))
+    : [...current, ...unit.filter((v) => !current.includes(v))]
+  if (next.length === 0) return null
   return next.length === all.length ? null : next
 }

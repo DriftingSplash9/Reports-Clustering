@@ -5,7 +5,7 @@ import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
 import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
-import { rimColourFor, rimWeightFor, colourForReport, familyOf } from '../lib/palette'
+import { rimColourFor, rimWeightFor, colourForReport, familyOf, scopeOf } from '../lib/palette'
 import { isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
 import {
   isStandingInstrument,
@@ -335,6 +335,7 @@ export default function InfluenceGraph({
   visible,
   flyTo,
   resetSignal,
+  levelColours,
   onHover,
   onSelect,
   onBounds,
@@ -364,6 +365,15 @@ export default function InfluenceGraph({
   visible: VisibleSet | null
   /** Set by search. Null while no flight has been requested. */
   flyTo: FlyTo | null
+  /**
+   * Scope → spread colour while the filter is narrowed to exactly ONE family,
+   * null otherwise — see `levelColours` in App. Applied by mutating the
+   * existing meshes' materials in place (a filter change hides nodes without
+   * rebuilding them, so there is no rebuild to hook), and read through a ref
+   * inside `nodeThreeObject` so a mesh the library builds mid-recolour is
+   * born already wearing it.
+   */
+  levelColours: Record<string, string> | null
   onHover: (report: ScoredReport | null) => void
   onSelect: (id: string | null) => void
   onBounds: (bounds: GraphBounds) => void
@@ -544,6 +554,10 @@ export default function InfluenceGraph({
   /** Same closure problem as `focusRef`, same solution. */
   const visibleRef = useRef<VisibleSet | null>(null)
   visibleRef.current = visible
+
+  /** Same closure problem, for the single-family level recolour. */
+  const levelColoursRef = useRef<Record<string, string> | null>(null)
+  levelColoursRef.current = levelColours
 
   /**
    * Same closure problem again, but for a force rather than an accessor —
@@ -756,7 +770,11 @@ export default function InfluenceGraph({
       .linkVisibility((l: object) => shownLink(l as LinkDatum))
       .nodeThreeObject((node: object) => {
         const n = node as ScoredReport
-        const colour = colourForReport(n)
+        const orbNode = isOrbId(n.id)
+        // Orbs keep the family colour even mid-recolour: an orb spans levels,
+        // so no single level colour is true of it.
+        const colour =
+          (!orbNode && levelColoursRef.current?.[scopeOf(n)]) || colourForReport(n)
         const radius = radiusFor(n.size_score)
 
         // No disposal of a superseded mesh here: three-forcegraph deallocates
@@ -790,7 +808,7 @@ export default function InfluenceGraph({
         // stands for a group, not a cadence — see hierarchy.ts), which is
         // exactly `isStandingInstrument`'s test; without this guard every
         // collapsed group would render as a one-off instrument by accident.
-        const orb = isOrbId(n.id)
+        const orb = orbNode
         const hollow = !orb && isStandingInstrument(n)
         // Shape carries the jurisdiction tier — see `nodeGeometry`. Colour is
         // still the country family; these are two channels for two facts, which
@@ -1397,6 +1415,27 @@ export default function InfluenceGraph({
     requestRefit()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceGraph, visible])
+
+  /**
+   * The single-family level recolour, applied to meshes already in the scene.
+   *
+   * Mutates `color` and `emissive` in place — the same
+   * mutate-don't-rebuild contract the focus pass uses, and for the same
+   * reason: these meshes live inside a running simulation, and rebuilding
+   * them to change a colour would re-run layout for a paint job. Restoring is
+   * just computing the ordinary colour again; nothing is stashed.
+   */
+  useEffect(() => {
+    for (const [id, mesh] of meshes.current) {
+      const r = graph.byId.get(id)
+      if (!r || isOrbId(id)) continue
+      const material = mesh.material as NodeMaterial
+      const next = levelColours?.[scopeOf(r)] ?? colourForReport(r)
+      material.color.set(next)
+      material.emissive.set(next)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [levelColours, forceGraph])
 
   /**
    * Apply the focus to everything that is already in the scene.

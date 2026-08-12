@@ -60,24 +60,24 @@ import {
   applyFilter,
   compile,
   isFiltering,
-  toggleIn,
+  isolateFirstToggle,
   type FilterState,
 } from './lib/filter'
 import {
   ALL_SCOPES,
   COMMERCIAL_COLOUR,
+  COUNTRY_RIM,
   focusPalette,
-  rimColourFor,
   SCOPE_COLOUR,
   SCOPE_GROUPS,
   SCOPE_LABEL,
   colourForReport,
   scopeOf,
+  type ColourFamily,
   type Scope,
 } from './lib/palette'
 import { DOMAINS, type Domain } from './lib/types'
 import type {
-  Country,
   ReferencePeriod,
   ScoredReport,
   TerminalReason,
@@ -447,42 +447,25 @@ export default function App() {
     if (clearFilter) setFilter(NO_FILTER)
   }, [])
 
+  // All three filter axes speak Thomas's isolate-first click language now —
+  // see isolateFirstToggle in filter.ts for the rules and his words.
   const toggleDomain = useCallback((domain: Domain) => {
-    setFilter((f) => ({ ...f, domains: toggleIn(f.domains, DOMAINS, domain) }))
+    setFilter((f) => ({ ...f, domains: isolateFirstToggle(f.domains, DOMAINS, [domain]) }))
   }, [])
 
-  const toggleScope = useCallback((scope: Scope) => {
-    setFilter((f) => ({ ...f, scopes: toggleIn(f.scopes, ALL_SCOPES, scope) }))
-  }, [])
-
-  // Null means no constraint, which is not the same as a list containing
-  // everything — see filter.ts. An empty array is the honest representation of
-  // "the user turned everything off", and an empty graph is the honest response.
-  const toggleAllScopes = useCallback(() => {
-    setFilter((f) => ({ ...f, scopes: f.scopes === null ? [] : null }))
-  }, [])
-
-  /**
-   * A country header turns its whole group on or off.
-   *
-   * Off if any of the group is currently showing, on otherwise — so the first
-   * click on a fully-lit group clears it, which is what clicking a lit thing
-   * means. Doing it the other way round makes the header inert whenever the
-   * group is partially selected.
-   */
-  const toggleGroup = useCallback((country: Country) => {
-    const group = SCOPE_GROUPS.find((g) => g.country === country)
+  /** A family chip: isolate on first click, combo on the next, off on repeat. */
+  const toggleFamily = useCallback((family: ColourFamily) => {
+    const group = SCOPE_GROUPS.find((g) => g.country === family)
     if (!group) return
-    setFilter((f) => {
-      const current = new Set<string>(f.scopes ?? ALL_SCOPES)
-      const anyOn = group.scopes.some((s) => current.has(s))
-      for (const s of group.scopes) {
-        if (anyOn) current.delete(s)
-        else current.add(s)
-      }
-      const next = ALL_SCOPES.filter((s) => current.has(s))
-      return { ...f, scopes: next.length === ALL_SCOPES.length ? null : next }
-    })
+    setFilter((f) => ({
+      ...f,
+      scopes: isolateFirstToggle(f.scopes, ALL_SCOPES, group.scopes),
+    }))
+  }, [])
+
+  /** A level row in a chip's flyout — "Canada's municipal level" in two clicks. */
+  const toggleScope = useCallback((scope: Scope) => {
+    setFilter((f) => ({ ...f, scopes: isolateFirstToggle(f.scopes, ALL_SCOPES, [scope]) }))
   }, [])
 
   const top = useMemo(
@@ -509,9 +492,9 @@ export default function App() {
     [graph],
   )
 
-  // Counted over the whole graph, not the filtered view: a legend row showing
-  // "0" because you switched it off tells you nothing, while one showing how
-  // many you are hiding tells you what the switch is worth.
+  // Counted over the whole graph, not the filtered view: a chip showing "0"
+  // because you switched it off tells you nothing, while one showing how many
+  // you are hiding tells you what the switch is worth.
   const scopeCounts = useMemo(() => {
     const counts: Record<string, number> = {}
     for (const n of graph.nodes) {
@@ -520,6 +503,35 @@ export default function App() {
     }
     return counts
   }, [graph])
+
+  /**
+   * The one family the filter is narrowed to, if it is narrowed to exactly
+   * one — the trigger for the level recolour. Lived inside the Hud while the
+   * recolour was sidebar-only; lifted to App now that the 3D scene recolours
+   * too (Q8, built with the chip bar): the spheres and the flyout legend have
+   * to read the same mapping or the legend is a lie.
+   */
+  const focusedFamily = useMemo(() => {
+    if (!filter.scopes || filter.scopes.length === 0) return null
+    const families = new Set(
+      filter.scopes.map(
+        (s) => SCOPE_GROUPS.find((g) => g.scopes.includes(s))?.country,
+      ),
+    )
+    return families.size === 1 ? ([...families][0] ?? null) : null
+  }, [filter.scopes])
+
+  /**
+   * Scope → loud distinct colour, for the single-family view. Null whenever
+   * more than one family is on screen, which is what keeps a colour from ever
+   * meaning two things at once: the spread palette only exists while there is
+   * no other family left to clash with.
+   */
+  const levelColours = useMemo(() => {
+    if (!focusedFamily) return null
+    const group = SCOPE_GROUPS.find((g) => g.country === focusedFamily)
+    return group ? focusPalette(group.scopes) : null
+  }, [focusedFamily])
 
   const commercialCount = useMemo(
     () => graph.nodes.filter((n) => !isOfficial(n)).length,
@@ -566,6 +578,7 @@ export default function App() {
           focus={focus}
           visible={visible}
           flyTo={flyTo}
+          levelColours={levelColours}
           onHover={setHovered}
           onSelect={setSelectedId}
           onBounds={handleBounds}
@@ -642,6 +655,14 @@ export default function App() {
 
       <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
 
+      <ChipBar
+        scopeCounts={scopeCounts}
+        filter={filter}
+        levelColours={levelColours}
+        onFamily={toggleFamily}
+        onScope={toggleScope}
+      />
+
       <TierBar
         tier={drilldown}
         onTier={handleTier}
@@ -678,14 +699,10 @@ export default function App() {
           visibleNodeCount={visible ? visible.nodes.size : graph.nodes.length}
           visibleEdgeCount={visible ? visible.edges.size : graph.edges.length}
           top={top}
-          scopeCounts={scopeCounts}
           domainCounts={domainCounts}
           onToggleDomain={toggleDomain}
           commercialCount={commercialCount}
           filter={filter}
-          onToggleScope={toggleScope}
-          onToggleAllScopes={toggleAllScopes}
-          onToggleGroup={toggleGroup}
           onToggleCommercial={() =>
             setFilter((f) => ({ ...f, showCommercial: !f.showCommercial }))
           }
@@ -1165,6 +1182,194 @@ function ListBlock({
  * competing with either for space.
  */
 /**
+ * The chip bar — the legend and the filter, one row, one surface.
+ *
+ * Round-7 replacement for the sidebar's nine-family legend tree (Thomas,
+ * round-5 Q18: "yes to all"). Each chip wears its family's INK — the same
+ * colour its rims and edges wear in the scene, which is what makes the chips
+ * a legend and not just buttons. Clicks speak isolate-first (see
+ * `isolateFirstToggle`): from everything-on, one click on Canada means "show
+ * me Canada", further clicks build combos, clicking the last selected chip
+ * returns to everything.
+ *
+ * The ▾ on each chip opens a level flyout: click a level to isolate it (or
+ * toggle it within a combo) — "Canada's municipal level" is chip-chevron +
+ * one tick, exactly the two clicks promised. While the filter is narrowed to
+ * exactly one family, the flyout's swatches switch from the family shades to
+ * the spread recolour palette — the same colours the spheres themselves take
+ * (see `levelColours` in App), so the flyout doubles as the recolour legend.
+ *
+ * Unstaffed families (China, Asia, India — reserved palette slices with zero
+ * reports) render no chip: a filter for nothing is noise.
+ */
+function ChipBar({
+  scopeCounts,
+  filter,
+  levelColours,
+  onFamily,
+  onScope,
+}: {
+  scopeCounts: Record<string, number>
+  filter: FilterState
+  levelColours: Record<string, string> | null
+  onFamily: (family: ColourFamily) => void
+  onScope: (scope: Scope) => void
+}) {
+  const [openFamily, setOpenFamily] = useState<ColourFamily | null>(null)
+
+  const anyFilter = filter.scopes !== null
+  const groups = SCOPE_GROUPS.filter(
+    (g) => g.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0) > 0,
+  )
+
+  return (
+    <div style={chipBarWrap}>
+      {groups.map((group) => {
+        const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
+        const on =
+          !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
+        const lit = anyFilter && on
+        const ink = COUNTRY_RIM[group.country] ?? '#8fa3c0'
+        const open = openFamily === group.country
+        const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
+        return (
+          <div key={group.country} style={{ position: 'relative' }}>
+            {open && (
+              <div style={flyout}>
+                {present.map((s) => {
+                  const sOn = !filter.scopes || filter.scopes.includes(s)
+                  const swatch = levelColours?.[s] ?? SCOPE_COLOUR[s]
+                  return (
+                    <div
+                      key={s}
+                      onClick={() => onScope(s)}
+                      style={{ ...flyoutRow, opacity: sOn ? 1 : 0.45 }}
+                    >
+                      <span
+                        style={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: 10,
+                          background: swatch,
+                          border: `1px solid ${ink}`,
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span style={{ flex: 1, color: sOn ? '#c9d4e8' : '#5e6f8a' }}>
+                        {SCOPE_LABEL[s] ?? s}
+                      </span>
+                      <span style={{ color: '#5e6f8a' }}>{scopeCounts[s] ?? 0}</span>
+                    </div>
+                  )
+                })}
+                {levelColours && (
+                  <div style={{ fontSize: 9, color: '#54637d', marginTop: 4, lineHeight: 1.4 }}>
+                    Spread colours — the spheres wear these while only this
+                    family is shown.
+                  </div>
+                )}
+              </div>
+            )}
+            <div
+              style={{
+                ...chip,
+                borderColor: lit ? ink : on ? 'rgba(90, 115, 160, 0.35)' : 'rgba(90, 115, 160, 0.18)',
+                boxShadow: lit ? `0 0 8px ${ink}55, inset 0 0 6px ${ink}22` : 'none',
+                opacity: on ? 1 : 0.42,
+              }}
+            >
+              <span
+                onClick={() => onFamily(group.country)}
+                style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}
+              >
+                <span
+                  style={{
+                    width: 9,
+                    height: 9,
+                    borderRadius: 9,
+                    background: 'transparent',
+                    border: `2px solid ${ink}`,
+                    flexShrink: 0,
+                  }}
+                />
+                <span style={{ color: on ? '#dde5f2' : '#5e6f8a', whiteSpace: 'nowrap' }}>
+                  {group.label}
+                </span>
+                <span style={{ color: '#54637d' }}>{total}</span>
+              </span>
+              <span
+                onClick={() => setOpenFamily(open ? null : group.country)}
+                title={`${group.label} by level`}
+                style={{
+                  cursor: 'pointer',
+                  color: open ? '#cfe0f8' : '#54637d',
+                  padding: '0 2px',
+                  transform: open ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 140ms ease',
+                }}
+              >
+                ▾
+              </span>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+const chipBarWrap: React.CSSProperties = {
+  position: 'fixed',
+  bottom: 96,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  display: 'flex',
+  gap: 6,
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  maxWidth: 'min(1100px, calc(100vw - 460px))',
+  zIndex: 6,
+}
+
+const chip: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+  padding: '5px 8px 5px 10px',
+  fontSize: 10.5,
+  letterSpacing: '0.04em',
+  background: 'rgba(10, 14, 24, 0.82)',
+  border: '1px solid',
+  borderRadius: 15,
+  backdropFilter: 'blur(8px)',
+  userSelect: 'none',
+}
+
+const flyout: React.CSSProperties = {
+  position: 'absolute',
+  bottom: 'calc(100% + 6px)',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  minWidth: 178,
+  padding: '8px 10px',
+  background: 'rgba(8, 12, 21, 0.95)',
+  border: '1px solid rgba(90, 115, 160, 0.3)',
+  borderRadius: 8,
+  backdropFilter: 'blur(10px)',
+  zIndex: 7,
+}
+
+const flyoutRow: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 7,
+  fontSize: 11,
+  lineHeight: 1.9,
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+}
+
+/**
  * The tier buttons.
  *
  * Thomas, 2026-08-12, after the gesture-only version: *"this is not working, we
@@ -1293,14 +1498,10 @@ function Hud({
   visibleNodeCount,
   visibleEdgeCount,
   top,
-  scopeCounts,
   domainCounts,
   onToggleDomain,
   commercialCount,
   filter,
-  onToggleScope,
-  onToggleAllScopes,
-  onToggleGroup,
   onToggleCommercial,
   onClearFilter,
   selected,
@@ -1312,14 +1513,10 @@ function Hud({
   visibleNodeCount: number
   visibleEdgeCount: number
   top: { id: string; title: string; authority: number }[]
-  scopeCounts: Record<string, number>
   domainCounts: Record<string, number>
   onToggleDomain: (domain: Domain) => void
   commercialCount: number
   filter: FilterState
-  onToggleScope: (scope: Scope) => void
-  onToggleAllScopes: () => void
-  onToggleGroup: (country: Country) => void
   onToggleCommercial: () => void
   onClearFilter: () => void
   selected: ScoredReport | null
@@ -1327,42 +1524,7 @@ function Hud({
   feedsIntoCount: number
 }) {
   const filtered = visibleNodeCount !== nodeCount
-  const scopeOn = (s: Scope) => !filter.scopes || filter.scopes.includes(s)
-  const allScopesOn = filter.scopes === null
-  const noScopesOn = filter.scopes !== null && filter.scopes.length === 0
 
-  // Focus-adaptive recolouring (2026-08-10, Thomas): when the active filter
-  // touches exactly one group's own scopes — the common "one country only"
-  // move `onToggleGroup` already exists for — that group's own levels get a
-  // wider-spread palette than SCOPE_COLOUR's tight within-family band, since
-  // cross-country separation stops mattering once every other country is
-  // hidden. Sidebar only for now; the 3D scene's node/edge/pulse colours
-  // still come from SCOPE_COLOUR via `colourForReport`.
-  const focusedGroupCountry =
-    filter.scopes && filter.scopes.length > 0
-      ? (() => {
-          const countries = new Set(
-            filter.scopes!.map((s) => SCOPE_GROUPS.find((g) => g.scopes.includes(s))?.country),
-          )
-          return countries.size === 1 ? [...countries][0] : null
-        })()
-      : null
-
-  // Scope groups are closed by default — nine families x up to six levels
-  // each is 40+ rows, more than the panel's fixed height can show, and the
-  // panel clips (`overflow: hidden`) rather than scrolls. A group opens
-  // either because it was clicked open, or because the active filter
-  // actually touches one of its own levels — selecting a level from search
-  // or elsewhere should never leave it hidden inside a collapsed header.
-  const [manuallyExpanded, setManuallyExpanded] = useState<Set<string>>(new Set())
-  const toggleExpanded = (country: string) => {
-    setManuallyExpanded((prev) => {
-      const next = new Set(prev)
-      if (next.has(country)) next.delete(country)
-      else next.add(country)
-      return next
-    })
-  }
 
   return (
     <div style={panel}>
@@ -1425,138 +1587,12 @@ function Hud({
       ))}
 
       {/*
-        The legend and the filter are the same control.
-        Keeping them separate would have meant printing every colour and count
-        twice, and it would have hidden the more useful fact: the thing you can
-        switch off is exactly the thing the colour names. Clicking a row drops
-        that publisher scope out of the picture without moving or resizing
-        anything that remains — see filter.ts.
+        The publisher-scope legend tree lived here from V0.5 until 2026-08-12,
+        when the chip bar replaced it (round-5 Q18, built round 7). Nine
+        families × up to six levels was the panel's overflow monster, and the
+        chips do the same job in one row where the legend IS the filter. This
+        panel now informs; the bottom of the screen decides.
       */}
-      <div style={{ ...section, marginTop: 14 }}>Publisher scope — click to filter</div>
-
-      {/*
-        A master row above everything. Turning it all off and one group back on
-        is the common move — it is how you look at a single system — and without
-        this it costs eight clicks in the wrong direction first.
-
-        Three-state in appearance rather than two: with a subset chosen it shows
-        neither fully on nor fully off, because "some" is a real answer and a
-        control that lies about it is worse than none.
-      */}
-      <LegendRow
-        colour="#8fa3c0"
-        label={allScopesOn ? 'Everything' : noScopesOn ? 'Nothing' : 'Some scopes'}
-        count={nodeCount}
-        on={allScopesOn}
-        partial={!allScopesOn && !noScopesOn}
-        onClick={onToggleAllScopes}
-      />
-
-      {/*
-        Grouped by country, and the group header is itself a toggle. This is the
-        shape the data actually has: "Canadian" is a question people ask, and
-        before this the largest group on screen — 62 federal nodes in one blue —
-        merged Statistics Canada with the Bureau of Labor Statistics.
-      */}
-      {SCOPE_GROUPS.map((group) => {
-        const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
-        if (total === 0) return null
-        const shown = group.scopes.filter((s) => scopeOn(s) && (scopeCounts[s] ?? 0) > 0)
-        const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
-        // Open if clicked open, or if the active filter actually selects
-        // some-but-not-all of this group (a level picked from elsewhere
-        // should never be hidden inside a collapsed header).
-        const filterTouchesGroup =
-          filter.scopes !== null && group.scopes.some((s) => filter.scopes!.includes(s))
-        const isExpanded = manuallyExpanded.has(group.country) || filterTouchesGroup
-        // Only the one group the filter is actually narrowed to gets the
-        // wide-spread treatment — every other group keeps SCOPE_COLOUR, so a
-        // colour never means two different things on screen at once.
-        const focusColours =
-          group.country === focusedGroupCountry ? focusPalette(group.scopes) : null
-        return (
-          <div key={group.country} style={{ marginTop: 7 }}>
-            <div
-              style={{
-                ...row,
-                alignItems: 'center',
-                pointerEvents: 'auto',
-              }}
-            >
-              {/*
-                Two separate click targets sharing one row: the chevron
-                opens/closes the breakdown, everything else toggles the whole
-                group on/off — same as before. Keeping them apart means
-                neither click has to guess what the other one meant.
-              */}
-              <span
-                onClick={(e) => {
-                  e.stopPropagation()
-                  toggleExpanded(group.country)
-                }}
-                style={{
-                  cursor: 'pointer',
-                  color: '#5e6f8a',
-                  fontSize: 9,
-                  width: 12,
-                  display: 'inline-block',
-                  transform: isExpanded ? 'rotate(90deg)' : 'none',
-                  transition: 'transform 120ms ease',
-                }}
-              >
-                ▶
-              </span>
-              <div
-                onClick={() => onToggleGroup(group.country)}
-                style={{
-                  ...row,
-                  flex: 1,
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  pointerEvents: 'auto',
-                }}
-              >
-                <span
-                  style={{
-                    width: 11,
-                    height: 11,
-                    borderRadius: 3,
-                    display: 'inline-block',
-                    background:
-                      shown.length === present.length
-                        ? rimColourFor(group.country)
-                        : 'transparent',
-                    border: `1px solid ${rimColourFor(group.country)}`,
-                    opacity: shown.length ? 1 : 0.45,
-                  }}
-                />
-                <span
-                  style={{
-                    flex: 1,
-                    color: shown.length ? '#c2cfe4' : '#4d5c74',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  {group.label}
-                </span>
-                <span style={{ color: shown.length ? '#5e6f8a' : '#3d4a5e' }}>{total}</span>
-              </div>
-            </div>
-            {isExpanded &&
-              present.map((s) => (
-                <div key={s} style={{ paddingLeft: 26 }}>
-                  <LegendRow
-                    colour={focusColours ? focusColours[s] : SCOPE_COLOUR[s]}
-                    label={SCOPE_LABEL[s]}
-                    count={scopeCounts[s] ?? 0}
-                    on={scopeOn(s)}
-                    onClick={() => onToggleScope(s)}
-                  />
-                </div>
-              ))}
-          </div>
-        )
-      })}
 
       <DomainPanel
         counts={domainCounts}

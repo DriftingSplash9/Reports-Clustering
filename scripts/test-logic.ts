@@ -14,7 +14,7 @@
  */
 import { calendarEvents, cadenceBand, describeWindow, horizonWindow, isRealDate, nextRelease } from '../src/lib/schedule'
 import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, isOrbId, orbId, resolveId, tierOf, toggleDrilldown } from '../src/lib/hierarchy'
-import { NO_FILTER, applyFilter, compile, isFiltering, toggleIn } from '../src/lib/filter'
+import { NO_FILTER, applyFilter, compile, isFiltering, isolateFirstToggle } from '../src/lib/filter'
 import { buildFocusIndex, computeFocus } from '../src/lib/selection'
 import { buildGraph, describeRate, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
 import { search } from '../src/lib/search'
@@ -99,8 +99,13 @@ ok(DEFAULT_DRILLDOWN === 1, 'default drilldown is the top tier')
 
 // ------------------------------------------------------------------ filter --
 ok(!isFiltering(NO_FILTER) && isFiltering({ ...NO_FILTER, scopes: [] }), 'isFiltering: null means everything, [] means the user turned it all off')
-ok(toggleIn(null, ['a', 'b', 'c'], 'b')?.join(',') === 'a,c', 'toggleIn from null: first click removes one, not leaves one')
-ok(toggleIn(['a', 'c'], ['a', 'b', 'c'], 'b') === null, 'toggleIn: completing the set returns to null, not a full list')
+// Thomas's isolate-first click model, pinned exactly as he described it.
+ok(isolateFirstToggle(null, ['a', 'b', 'c'], ['b'])?.join(',') === 'b', 'isolate-first: from all-on, one click isolates ("the one I want isolated I click and it happens")')
+ok(isolateFirstToggle(['b'], ['a', 'b', 'c'], ['c'])?.join(',') === 'b,c', 'isolate-first: second click builds the combo')
+ok(isolateFirstToggle(['b', 'c'], ['a', 'b', 'c'], ['c'])?.join(',') === 'b', 'isolate-first: clicking a selected unit removes it')
+ok(isolateFirstToggle(['b'], ['a', 'b', 'c'], ['b']) === null, 'isolate-first: switching the last one off returns to all, not to nothing')
+ok(isolateFirstToggle(['b'], ['a', 'b', 'c'], ['a', 'c']) === null, 'isolate-first: completing the set collapses to null so isFiltering stays honest')
+ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: isolating everything is not a filter')
 {
   const reports: Report[] = [
     { id: 'n1', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: ['inflation'] },
