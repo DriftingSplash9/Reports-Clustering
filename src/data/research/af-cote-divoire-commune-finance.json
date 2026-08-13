@@ -1,5 +1,5 @@
 {
-  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). Municipal-tier population-priority push, 2026-08-13 (AF/G.18), round 11 of 20 (Wave C). Côte d'Ivoire — 16th-highest-population country. `ci-cpi-social-protection.json` already covers CPI/EHCVM; this round goes to the commune fiscal tier. Strongest finding: individual Abidjan communes' own sites publish almost no budget documents, but the Trésor Public's own national accounting report breaks out real per-commune figures anyway (the 'higher tier reporting on named lower-tier units' pattern first identified for Nigeria), and DGBF's own Annexe 8 reveals that Abidjan's 10 largest communes are explicitly EXCLUDED from the state's Dotation Globale de Fonctionnement because their tax-retrocession quotes-parts already exceed it.",
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). Municipal-tier population-priority push, 2026-08-13 (AF/G.18), round 11 of 20 (Wave C). Côte d'Ivoire — 16th-highest-population country. `ci-cpi-social-protection.json` already covers CPI/EHCVM; this round goes to the commune fiscal tier. Strongest finding: individual Abidjan communes' own sites publish almost no budget documents, but the Trésor Public's own national accounting report breaks out real per-commune figures anyway (the 'higher tier reporting on named lower-tier units' pattern first identified for Nigeria), and DGBF's own Annexe 8 reveals that Abidjan's 10 largest communes are explicitly EXCLUDED from the state's Dotation Globale de Fonctionnement because their tax-retrocession quotes-parts already exceed it. UPDATE 2026-08-13 (AF/G.21, processing Grok's round-2 follow-up): a lead Grok supplied for Loi n°2020-885's own full text was independently re-verified (Grok's exact URL was dead, but the actual content was located and confirmed via a different host) and minted as ci-loi-2020-885-regime-financier — see that node and the resolved/updated `_dropped` entries below.",
   "reports": [
     {
       "id": "ci-tresor-rapport-collectivites-2023",
@@ -28,6 +28,19 @@
       "last_updated": "2025-12-19",
       "url": "https://www.dgbf.ci/wp-content/uploads/2025/12/Annexe-8-Concours-financiers-aux-collectivites-territoriales-et-aux-districts-autonomes-2026.pdf",
       "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "ci-loi-2020-885-regime-financier",
+      "title": "Loi n°2020-885 du 21 octobre 2020 portant régime financier des Collectivités Territoriales et des Districts Autonomes",
+      "publisher": "Assemblée Nationale de Côte d'Ivoire",
+      "country": "CI",
+      "jurisdiction_level": "federal",
+      "region": "Côte d'Ivoire",
+      "description": "Côte d'Ivoire's governing fiscal-regime law for collectivités, previously known in this corpus only by title/date via a citing document (ci-dgbf-annexe8-2026) — its own text was NOT FOUND in AF/G.18 after two failed hosting attempts. Independently re-verified this round (AF/G.21, processing a Grok-supplied lead): Grok's exact cited URL (commons.laws.africa) is a dead 404, but the actual law text was independently located and confirmed via a third-party document-host mirror (Scribd), since the known official mirrors (agp.africanlii.org, juriafrica.com, dcf.ci) remained unreachable. Article 1: \"La présente loi fixe les règles et principes fondamentaux régissant le cadre financier et comptable des collectivités décentralisées : les collectivités territoriales et les districts autonomes.\" Article 2: \"Les collectivités territoriales sont des entités décentralisées qui s'administrent librement par des conseils dont les membres sont élus. Elles sont dotées de la personnalité morale et de l'autonomie financière. Les districts autonomes sont des entités territoriales de type particulier qui s'administrent par un conseil composé de membres élus et nommés. Ils sont dotés de la personnalité morale et de l'autonomie financière.\" On the DGF mechanism already cited (but not quoted) via ci-dgbf-annexe8-2026: Article 59 lists \"la dotation globale de fonctionnement,\" \"la dotation générale de décentralisation,\" \"les subventions d'équilibre,\" and \"les subventions d'équipement\" as the four state transfer instruments; Article 60 and 61 create the DGF and the dotation générale de décentralisation respectively; but Article 62 explicitly delegates the actual calculation/allocation formula to a SEPARATE decree, not the law itself: \"Les modalités de fixation, de calcul et de répartition de la dotation globale de fonctionnement et de la dotation générale de décentralisation sont fixées par décret pris en Conseil des ministres.\" CAVEAT (sourcing): the verified text comes from a non-official third-party upload, not a government-hosted or Journal Officiel copy — content is corroborated as accurate against the law's own citing documents (title, date, and Article 1/2 substance all consistent with how ci-dgbf-annexe8-2026 already describes it), but a government-domain mirror was not reachable this round. CAVEAT (completeness): the readable text truncates mid-Article-125 (the law's own signature/promulgation block was not reached), so no \"péréquation\" fund name or explicit tax-retrocession quotes-parts formula was found WITHIN the law's own text — this is inconclusive due to truncation, not a confirmed absence; see updated `_dropped` entries.",
+      "cadence_note": "One-off foundational legal instrument, currently in force.",
+      "last_updated": "2020-10-21",
+      "url": "https://www.scribd.com/document/753452498/LOI-N-2020-885-DU-21-OCTOBRE-2020-portant-re-gime-financier-des-collectivite-s-territoriales-et-des-districts-autonomes",
+      "domains": ["municipal-finance", "fiscal-transfers"]
     }
   ],
   "dependencies": [
@@ -36,6 +49,13 @@
       "target_report_id": "ci-anstat-ehcvm",
       "relationship_type": "uses_data_from",
       "basis": "DGBF's own Annexe 8 states directly that the investment-dotation share of the transfer formula additionally weights by \"le taux de pauvreté déterminé par l'Enquête Harmonisée sur les Conditions de Vie des Ménages (EHCVM)\" — the same EHCVM 2021/2022 survey already in the corpus as the IHPC's weighting source.",
+      "evidence_url": "https://www.dgbf.ci/wp-content/uploads/2025/12/Annexe-8-Concours-financiers-aux-collectivites-territoriales-et-aux-districts-autonomes-2026.pdf"
+    },
+    {
+      "source_report_id": "ci-dgbf-annexe8-2026",
+      "target_report_id": "ci-loi-2020-885-regime-financier",
+      "relationship_type": "cites",
+      "basis": "DGBF's own Annexe 8 names this law directly as the governing statute: \"la loi n°2020-885 du 21 octobre 2020 portant régime financier des Collectivités Territoriales et des Districts Autonomes.\"",
       "evidence_url": "https://www.dgbf.ci/wp-content/uploads/2025/12/Annexe-8-Concours-financiers-aux-collectivites-territoriales-et-aux-districts-autonomes-2026.pdf"
     }
   ],
@@ -55,18 +75,18 @@
       "why": "Checked each commune's own official site directly (mairiecocody.com incl. its 'Documents à télécharger' page, mairieplateau.net, ecocody.ci, abidjan.district.ci). Cocody's own site publishes a narrative news article citing a 2022 budget figure (\"le budget 2022 est estimé à 11.384.725.000 Cfa\") but no downloadable budget/délibération document; Plateau's site has no financial content at all. Numerous NEWS reports (KOACI, AFRIK SOIR, AIP, connectionivoirienne.net) cite 2025/2026 commune budget totals, but these are secondary press sources, explicitly excluded. The real per-commune figures that DO exist and were minted (ci-tresor-rapport-collectivites-2023) come from the Treasury reporting ON these communes, not from the communes' own publication."
     },
     {
-      "edge": "Loi n°2020-885 du 21 octobre 2020 (current governing fiscal-regime law) -> full primary text",
+      "edge": "Loi n°2020-885 Articles 126 onward (beyond the point the recovered text truncates) -> a named \"Fonds de Péréquation\" or explicit tax-retrocession quotes-parts formula",
       "source": null,
       "target": null,
       "reason": "unreadable-source",
-      "why": "Two hosting attempts (juriafrica.com, africanlii.org) both failed with connection/robots errors this round. The law's existence, exact title, and date are corroborated by DGBF's own Annexe 8 (which cites it directly), so the citation of the law's EXISTENCE is solid, but its own text — and therefore the exact percentage/formula it may specify beyond what Annexe 8 paraphrases — is NOT FOUND. Priority follow-up for a future round."
+      "why": "RESOLVED IN PART 2026-08-13 (AF/G.21): the law's own text (Articles 1-125) was located and confirmed this round (see ci-loi-2020-885-regime-financier) — superseding the prior 'law's own text is entirely NOT FOUND' entry. Article 62 confirms the DGF's calculation formula is delegated to a separate decree, not stated in the law itself. But the recovered text truncates mid-Article-125 before reaching a signature block, so no péréquation-fund name or quotes-parts formula was found WITHIN the law's own readable text — inconclusive due to truncation, not a confirmed absence. A full untruncated copy (ideally from an official .ci government domain — agp.africanlii.org, juriafrica.com, and dcf.ci all remained unreachable this round with DNS/connection failures) is still a priority follow-up."
     },
     {
       "edge": "arrêté interministériel n°0772/MBPE/MIS/MEF du 26 juillet 2022 (governs the Abidjan-commune tax-retrocession quotes-parts) -> full primary text",
       "source": null,
       "target": null,
       "reason": "unreadable-source",
-      "why": "Named directly, by number and date, inside DGBF's own Annexe 8, but the arrêté's own text/URL was not independently located this round — only the citing document was opened."
+      "why": "Named directly, by number and date, inside DGBF's own Annexe 8, but the arrêté's own text/URL was not independently located this round — only the citing document was opened. UPDATE 2026-08-13 (AF/G.21): independently re-confirmed via a second, differently-dated DGBF Annexe 8 edition (2025 vintage, dgbf.ci/wp-content/uploads/2024/11/...), which quotes the arrêté's own stated purpose more fully: \"Les modalités de leur répartition sont définies par l'arrêté interministériel n°0772/MBPE/MIS/MEF du 26 juillet 2022 portant modalités de répartition de la quote-part des impôts rétrocédés aux Collectivités Territoriales et aux Districts Autonomes. En outre, il est pris chaque année, un arrêté interministériel qui détermine les modalités de péréquation en vue de réduire les disparités entre différentes communes, régions et districts autonomes.\" This confirms the arrêté's exact scope (tax quote-part redistribution) and separately confirms an ANNUAL péréquation-setting arrêté exists as a mechanism — but the arrêté's own full text remains not independently located."
     },
     {
       "edge": "UEMOA-level proposal for a 20%-of-state-fiscal-revenue minimum transfer floor -> enacted Ivorian law",
