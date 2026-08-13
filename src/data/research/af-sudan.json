@@ -1,0 +1,82 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Sudan — highest-population country with zero prior corpus presence. Researched via a dispatched Agent (not sequential WebFetch), covering national CPI, COMESA membership, and provincial/state fiscal tier. War/insecurity materially affects two fields: CBS's own site is unreachable, and 2 of 18 states have field CPI collection replaced by estimates.",
+  "reports": [
+    {
+      "id": "sd-cbs-cpi",
+      "title": "Sudan Consumer Price Indices",
+      "publisher": "Central Bureau of Statistics (CBS), Sudan",
+      "country": "SD",
+      "jurisdiction_level": "federal",
+      "region": "Sudan",
+      "description": "Sudan's national CPI, historically titled \"Sudan Consumer Price Indices\" (per a 2010 UNECE/ILO presentation quoting a COICOP-consistent 12-group structure). Current (2026) coverage confirmed via Sudan Tribune news reporting rather than CBS's own site (cbs.gov.sd is unreachable throughout this research round) — monthly, with 40-46% YoY inflation reported March/April 2026 and a basket described as \"663 commodities... distributed across 12 categories.\" Two of Sudan's 18 states — Central Darfur (since April 2023) and North Darfur (since October 2025) — have had field price collection replaced by ESTIMATES due to the ongoing civil war, per the same reporting.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, per Sudan Tribune reporting on CBS releases; the primary CBS site is currently unreachable so this is confirmed only via secondary news coverage, not CBS's own bulletin.",
+      "last_updated": null,
+      "url": "https://sudantribune.com/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "comesa-treaty-establishing",
+      "title": "Treaty Establishing the Common Market for Eastern and Southern Africa (COMESA)",
+      "publisher": "COMESA (Common Market for Eastern and Southern Africa)",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "Eastern and Southern Africa",
+      "description": "COMESA's founding treaty. Sudan is named in the Preamble and listed as a member state under Article 1(2). Article 140, \"Co-operation in Statistical Development,\" states verbatim: \"Member States shall harmonise the methodology of collection, processing and analysis of information\" — flagged at MODERATE confidence (quoted by the dispatched research agent, not independently re-confirmed against the primary treaty PDF on a second pass). No document found this round links Sudan's own CBS CPI directly to this treaty by citation — left isolated from sd-cbs-cpi rather than force-linked; Sudan's membership itself is confirmed, the statistical-harmonisation clause is treaty text rather than a country-specific citation.",
+      "cadence_note": "One-off foundational instrument, same shape as other regional-bloc treaties already in the corpus (e.g. cemac-ihpc-regulation, eac-hcpi-regulations).",
+      "last_updated": null,
+      "url": "https://www.comesa.int/wp-content/uploads/2019/06/COMESA-Treaty.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "sd-budget-2021-transfers",
+      "title": "Sudan National Budget 2021 (Ministry of Finance and Economic Planning)",
+      "publisher": "Ministry of Finance and Economic Planning, Sudan",
+      "country": "SD",
+      "jurisdiction_level": "federal",
+      "region": "Sudan",
+      "description": "Sudan's 2021 national budget document (hosted by SIPRI). Table 17 shows an aggregate \"Current transfers to the states\" line (SDG 87.908 billion) and cites \"Decree No. 504 of 2020\" as the governing rule for state budgeting. This is an AGGREGATE national-to-states transfer figure, not a per-state breakdown — no individual Sudanese state's own budget document was found this round despite extensive search (state-level fiscal transparency appears to be essentially absent online, consistent with the ongoing conflict).",
+      "cadence_note": "Annual national budget.",
+      "last_updated": null,
+      "url": "https://www.sipri.org/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "sd-cbs-cpi -> comesa-treaty-establishing",
+      "source": "sd-cbs-cpi",
+      "target": "comesa-treaty-establishing",
+      "reason": "no-document",
+      "why": "Sudan's COMESA membership and the treaty's Article 140 statistical-harmonisation clause are both confirmed, but no document found this round has CBS's own CPI citing COMESA or the treaty directly — the connection is plausible but not documented. Left unlinked per the branch's evidence standard."
+    },
+    {
+      "edge": "sd-igad-statistics",
+      "source": "sd-cbs-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "IGAD (Intergovernmental Authority on Development), the other major regional bloc Sudan belongs to, was searched for a statistical-harmonisation citation comparable to COMESA's Article 140 — none found this round."
+    },
+    {
+      "edge": "sd-african-charter-statistics",
+      "source": "sd-cbs-cpi",
+      "target": null,
+      "reason": "note",
+      "why": "Negative finding, recorded for future reference rather than as a dropped edge attempt: Sudan has NOT signed or ratified the African Charter on Statistics 2009 (an AU status table lists \"48 Sudan - - -\" with no signature/ratification dates), unlike many other African countries already wired to AU-level statistical instruments elsewhere in this corpus."
+    },
+    {
+      "edge": "sd-state-level-budget",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "No individual Sudanese state's own budget or fiscal document was locatable this round (extensive search, explicitly failed) — the war has apparently collapsed most state-level online fiscal transparency. Best available substitutes used instead: the Interim National Constitution 2005 Art. 110 (general resource-allocation process, not independently re-verified against primary text this round) and a secondary IGC academic paper describing the National Revenue Fund / FFAMC (Fiscal and Financial Allocation and Monitoring Commission) and the 1971 People's Local Government Act — neither independently verified against primary legal text, so neither minted as a node this round. Flagged for a future session with more research budget to pursue Sudanese state fiscal law directly."
+    }
+  ]
+}

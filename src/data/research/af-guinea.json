@@ -1,0 +1,98 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Guinea — 5th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. Reuses the existing afristat-ihpc-guide-2014 node (established Mauritania precedent: mr-ons-inpc -> afristat-ihpc-guide-2014). A genuinely municipal-tier document was found (Commune Urbaine de Labé's local development plan) and is deliberately NOT minted here per Thomas's instruction not to pursue municipal tier yet — noted for the hand-off's municipal-leads section instead.",
+  "reports": [
+    {
+      "id": "gn-ins-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (INHPC/IHPC)",
+      "publisher": "Institut National de la Statistique (INS), Guinée",
+      "country": "GN",
+      "jurisdiction_level": "federal",
+      "region": "Guinea",
+      "description": "Guinea's national CPI, published monthly (January 2026 note confirmed: \"14 522 relevés... chaque mois\" [14,522 price observations... each month], base 2019=100, covering all 8 régions). INS Guinée's own document states verbatim: \"Cet indice est harmonisé, car il utilise la même méthodologie que les pays de l'Union Economique et Monétaire Ouest Africaine (UEMOA)\" [This index is harmonised because it uses the same methodology as the countries of the West African Economic and Monetary Union (UEMOA)] — notable because Guinea is NOT itself a UEMOA/CFA-franc member state, yet explicitly adopts UEMOA's CPI methodology by name. Confirmed as standing boilerplate across both a January 2026 and an October 2023 edition of the same note. No COICOP or IMF CPI Manual citation found.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; confirmed via both a January 2026 and an October 2023 edition of INS's own methodology note.",
+      "last_updated": null,
+      "url": "https://www.ins.gov.gn/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "gn-cns-snds-2016-2020",
+      "title": "Stratégie Nationale de Développement de la Statistique (SNDS) 2016-2020",
+      "publisher": "Conseil National de la Statistique, Guinée",
+      "country": "GN",
+      "jurisdiction_level": "federal",
+      "region": "Guinea",
+      "description": "Guinea's national statistics development strategy, published September 2017, hosted on INS Guinée's own domain. Names AFRISTAT explicitly twice: once generally (\"l'appartenance de la Guinée à des organisations sous-régionales... AFRISTAT, AFRITAC-OUEST et CEA\") and once as a specific planned activity (\"Adapter et vulgariser les nomenclatures d'activités et de produits des Etats membres d'AFRISTAT\" [Adapt and disseminate the activity and product nomenclatures of AFRISTAT member states]) — the latter is the strongest classification-standard citation found this round. Also names CEDEAO (ECOWAS) and \"ZMAO\" (West African Monetary Zone), but explicitly does NOT name \"WAMA\"/\"AMAO\" (the zone's administering agency) anywhere — searched and confirmed absent, not conflated with the zone name. Separately, AFRISTAT's own website confirms a dated bilateral \"convention de prestation de services\" signed 11 October 2022 in Brazzaville between AFRISTAT's Director-General and INS Guinée's Director-General.",
+      "cadence_note": "One-off foundational strategy document (2016-2020 planning horizon, now expired but the only such document located).",
+      "last_updated": null,
+      "url": "https://www.ins.gov.gn/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "gn-code-collectivites-locales-2017",
+      "title": "Code Révisé des Collectivités Locales de la République de Guinée",
+      "publisher": "Assemblée Nationale, Guinée",
+      "country": "GN",
+      "jurisdiction_level": "federal",
+      "region": "Guinea",
+      "description": "Loi Ordinaire L/2017/040/AN (dated either 24 February 2017 per its own text or 26 May 2017 per FAO/Ecolex metadata — discrepancy noted, not resolved this round). Article 2: \"Les Collectivités locales... sont les Régions, les Communes urbaines et les Communes Rurales\" [Local collectivities... are the Regions, Urban Communes, and Rural Communes] — préfectures are explicitly NOT collectivités locales under this code, distinct from régions. Articles 484 and 492 list specific state-to-region transfer mechanisms: \"dotation de fonctionnement,\" \"dotation d'équipement,\" \"Fonds National de Développement des Collectivités Locales.\"",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.ecolex.org/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "gn-anafic-decree",
+      "title": "Décret créant l'Agence Nationale de Financement des Collectivités Locales (ANAFIC)",
+      "publisher": "Présidence de la République, Guinée",
+      "country": "GN",
+      "jurisdiction_level": "federal",
+      "region": "Guinea",
+      "description": "Decree establishing ANAFIC and the FNDL (Fonds National de Développement Local) — the operational channel implementing the transfer mechanisms named in gn-code-collectivites-locales-2017 Art. 484/492. Cites Article 22 of the \"Loi de finances 2016\" as its statutory basis.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.anafic.gov.gn/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gn-cns-snds-2016-2020",
+      "target_report_id": "afristat-ihpc-guide-2014",
+      "relationship_type": "cites",
+      "basis": "Guinea's SNDS names AFRISTAT specifically as a planned source of nomenclature adaptation support (\"Adapter et vulgariser les nomenclatures d'activités et de produits des Etats membres d'AFRISTAT\"), matching the established pattern of reusing the shared afristat-ihpc-guide-2014 node when an institution is named as providing support, rather than minting a new per-country AFRISTAT document. relationship_type is 'cites' (not 'methodology_depends_on') because Guinea's own CPI methodology note (gn-ins-ihpc) attributes its methodology to UEMOA, not AFRISTAT directly — the AFRISTAT link here is at the strategy-document level, one step removed from the CPI itself.",
+      "evidence_url": "https://www.ins.gov.gn/"
+    },
+    {
+      "source_report_id": "gn-anafic-decree",
+      "target_report_id": "gn-code-collectivites-locales-2017",
+      "relationship_type": "cites",
+      "basis": "ANAFIC/FNDL is the operational funding channel for the transfer mechanisms established in the Code's Articles 484 and 492.",
+      "evidence_url": "https://www.anafic.gov.gn/"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gn-labe-pdl-2025-2029",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "MUNICIPAL-TIER LEAD, deliberately not pursued this round per Thomas's instruction to hold off on municipal for now. Found: Plan de Développement Local (PDL) 2025-2029, Commune Urbaine de Labé — a real commune-level budget document. Notable tension worth a future round: its own revenue table shows \"0\" GNF in state dotations/subventions received in all four years 2020-2023, despite the statutory dotation mechanism existing on paper in gn-code-collectivites-locales-2017 — a good candidate for an edge annotated with this real-world gap between law and practice, once the branch moves to the municipal tier."
+    },
+    {
+      "edge": "gn-ins-ihpc -> gn-code-collectivites-locales-2017",
+      "source": "gn-ins-ihpc",
+      "target": "gn-code-collectivites-locales-2017",
+      "reason": "wrong-target",
+      "why": "No document found connects Guinea's CPI to the local-collectivities fiscal-transfer code — these are separate domains (inflation vs. fiscal-transfers) with no documented citation between them. Recorded to avoid a future session re-attempting this same non-existent link."
+    }
+  ]
+}

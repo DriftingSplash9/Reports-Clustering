@@ -414,6 +414,18 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   SO: 'AFR',
   CD: 'AFR',
 
+  // 2026-08-13 (AF/G.17 -- 30-round population-priority push): the five
+  // highest-population African countries with zero prior corpus presence,
+  // researched via dispatched agents rather than sequential fetches --
+  // Sudan, Angola, Mozambique, Madagascar, Guinea. See
+  // `src/data/research/af-sudan.json`, `af-angola.json`, `af-mozambique.json`,
+  // `af-madagascar.json`, `af-guinea.json`, and `AF/G.17.md`.
+  SD: 'AFR',
+  AO: 'AFR',
+  MZ: 'AFR',
+  MG: 'AFR',
+  GN: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

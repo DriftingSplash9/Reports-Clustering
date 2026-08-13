@@ -1,0 +1,91 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17). Angola — 2nd-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. IMPORTANT: the agent's research corrected a wrong premise in my own research brief — I had assumed Angola held provincial elections in 2025; it did not. Provincial governors remain presidentially appointed throughout the period covered here. This file uses the agent's corrected finding, not my original assumption.",
+  "reports": [
+    {
+      "id": "ao-ine-ipcn",
+      "title": "Índice de Preços no Consumidor Nacional (IPCN)",
+      "publisher": "Instituto Nacional de Estatística (INE), Angola",
+      "country": "AO",
+      "jurisdiction_level": "federal",
+      "region": "Angola",
+      "description": "Angola's national CPI, published monthly by INE in both \"Boletim\" and \"FIR\" formats (most recent confirmed this round: July 2026 FIR, 9.33% YoY). INE's own \"Notas Metodológicas do IPCN\" (2025) explicitly names the classification standard: \"Classificação do Consumo Individual por Objectivo (CCIO) ou COICOP.\" Base year December 2020 (rebased from a 2018-19 household survey). The series began in 1991 as Luanda-only and became fully national (covering all provinces) in January 2015.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; both a full Boletim and a shorter FIR (Ficha de Informação Rápida) format confirmed current through July 2026.",
+      "last_updated": null,
+      "url": "https://www.ine.gov.ao/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ao-ine-sen2018-report",
+      "title": "Relatório de Actividades do Sistema Estatístico Nacional de Angola 2018",
+      "publisher": "Instituto Nacional de Estatística (INE), Angola",
+      "country": "AO",
+      "jurisdiction_level": "federal",
+      "region": "Angola",
+      "description": "INE Angola's own annual activity report for the National Statistical System. Page 22 states verbatim: \"Cumprimento a 100%. Informação é enviada para a SADC, que compila e publica o IPC Harmonizado da SADC\" [100% compliance. Information is sent to SADC, which compiles and publishes the SADC Harmonised CPI]. This exact statement is also confirmed present in a 2013 edition of the same report series, indicating it is a standing, repeated practice rather than a one-off note. No CEEAC/ECCAS statistical citation was found this round.",
+      "cadence_note": "Annual activity report; the specific SADC-transmission statement confirmed present in both the 2018 and 2013 editions.",
+      "last_updated": null,
+      "url": "https://www.ine.gov.ao/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ao-lei-administracao-local-15-16",
+      "title": "Lei n.º 15/16 — Lei da Administração Local do Estado",
+      "publisher": "Assembleia Nacional, Angola",
+      "country": "AO",
+      "jurisdiction_level": "federal",
+      "region": "Angola",
+      "description": "Angola's Law on Local State Administration. Article 21 states that provincial budgeting \"está sujeita às normas em vigor que disciplinam... o Orçamento Geral do Estado\" [is subject to the rules in force governing... the General State Budget] — provincial budgets are legally subordinate to, not independent of, the national OGE. Provincial governors are presidentially appointed (Constitution Art. 119(k)/125(4)), confirmed via decree citations for governor appointments as recent as 2025; Angola has never held local/autárquicas elections (a 2020 presidential quote — \"Não se adiam eleições que nunca foram convocadas\" [elections that were never called cannot be postponed] — and 2025-era news both confirm this remains the case). This corrects an earlier assumption in this branch's own research brief that Angola held provincial elections in 2025.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.governo.gov.ao/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ao-lei-14-24-nova-divisao",
+      "title": "Lei n.º 14/24 e Decreto Presidencial n.º 268/24 — Nova Divisão Político-Administrativa",
+      "publisher": "Assembleia Nacional / Presidência da República, Angola",
+      "country": "AO",
+      "jurisdiction_level": "federal",
+      "region": "Angola",
+      "description": "Law of 5 September 2024 and its implementing presidential decree, restructuring Angola from 18 to 21 provinces effective 1 January 2025 (three new provinces: Cuando, Icolo e Bengo, Moxico Leste). Governors of the new provinces were also presidentially appointed, not elected, consistent with ao-lei-administracao-local-15-16.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.governo.gov.ao/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "sadc-hcpi-newsletter",
+      "target_report_id": "ao-ine-ipcn",
+      "relationship_type": "uses_data_from",
+      "basis": "Direction and relationship_type match the established sadc-hcpi-newsletter -> country-CPI pattern used for the 8 SADC countries wired in G.15 (the regional index is built FROM each country's own national CPI). Angola's own ao-ine-sen2018-report states verbatim that INE sends data to SADC for compilation into the SADC Harmonised CPI.",
+      "evidence_url": "https://www.ine.gov.ao/"
+    },
+    {
+      "source_report_id": "ao-lei-14-24-nova-divisao",
+      "target_report_id": "ao-lei-administracao-local-15-16",
+      "relationship_type": "cites",
+      "basis": "The 2024 reorganisation law creating the three new provinces operates within the same subordinate-budgeting framework already established by Lei n.º 15/16 — the new provinces' governors are appointed and their budgets remain subject to the same Art. 21 OGE-subordination rule.",
+      "evidence_url": "https://www.governo.gov.ao/"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ao-ine-sen2018-report -> ceeac-statistics",
+      "source": "ao-ine-sen2018-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "CEEAC/ECCAS (the other major regional bloc Angola belongs to) was searched for a statistical-harmonisation citation comparable to the SADC one — none found this round."
+    }
+  ]
+}
