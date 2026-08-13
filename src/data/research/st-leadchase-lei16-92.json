@@ -1,0 +1,28 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). AF lead-chase round, 2026-08-13, follow-up to AF/G.23. Target was São Tomé's Lei n.º 16/92 (Lei das Finanças Locais), previously flagged as an open lead in st-g23-municipal.json's _dropped block. This round confirmed the law's title/date/gazette-locator via a government-authored INDEX entry (São Tomé's own Assembleia Nacional documentation service, third-party hosted on asg-plp.org) but still could NOT locate the statute's own primary text — see the corresponding UPDATE note on st-principe-lei10-2022 in af-sao-tome-principe.json. No node minted here: an index/summary citation (title + date + gazette locator only) is not primary legal text, and this corpus's evidence standard requires the document itself, not a description of it. Also resolves two side-leads from AF/G.23: leginon.dgrn.gov.st is confirmed unrelated (civil-registry portal, not legislative) and retired from future search lists; dre.gov.st (the nominal official gazette) is confirmed TLS-broken, presenting a certificate for an unrelated commercial entity (abagroup.st) — flagged as a dead/compromised-looking government domain worth periodic re-checking.",
+  "reports": [],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "st-principe-lei10-2022 cites Lei n.º 16/92 (Lei de Finanças Locais) — primary text",
+      "source": "st-principe-lei10-2022",
+      "target": null,
+      "reason": "no-document",
+      "why": "Full text of Lei n.º 16/92, de 31 de Dezembro de 1992 (\"Lei das Finanças Locais\", DR n.º 27) remains unlocatable despite a dedicated lead-chase round. Checked this round: leginon.dgrn.gov.st (confirmed to be São Tomé's DGRN civil-registry vital-events/identity-document validation portal — \"legi nón\" is Creole Forro for \"our root,\" unrelated to \"lei\"/law — not a legislative database at all; retired as a lead, see the separate _dropped note below); dgrn.gov.st/Legislacao.php (reached, but no 1992-era laws present in its listing); dre.gov.st (the nominal official gazette; TLS certificate mismatch, presenting a cert for an unrelated commercial entity, abagroup.st — could not be checked, see separate _dropped note below); FAOLEX (no coverage of this instrument); two academic papers on São Tomé local government/finance (neither covers Lei 16/92 specifically); and the Assembleia Nacional's b-software.st-hosted portal (has a \"Legislação\" menu present, but no searchable law-by-number database could be found within it this round). The one substantive result: a government-authored INDEX entry — São Tomé's own Assembleia Nacional documentation service (Direcção de Serviços de Apoio Parlamentar e Documentação, DSAPD/DDIP), dated Setembro 2007, in its \"Sumário das Legislações Publicadas nos Diários da República: 1975-2007\" (section \"Impostos\"), hosted third-party on asg-plp.org (Associação dos Secretários-Gerais dos Parlamentos de Língua Portuguesa): \"Lei n.º16/92, de 31 de Dezembro de 1992, DR. n.º 27. - Lei das Finanças Locais.\" This confirms title, date and gazette locator, and situates the law as the capstone of a coordinated December 1992 legislative package (Lei 10/92 autarquias framework, Lei 11/92 autarquia-body electoral law, Lei 12/92 electoral rolls, Lei 15/92 tax-legislation authorization, Lei 16/92 this finance law, Lei 17/92 the 1993 state budget) — but it is an index/summary entry only, not the statute's own primary legal text, so no node is minted. This UPDATE has instead been folded into st-principe-lei10-2022's description in af-sao-tome-principe.json. `backstp.gov.st` was also noted as a live Strapi CMS backend that MIGHT power a legislative archive — unconfirmed this round, a lead worth a future round with headless-browser/JS-execution tooling to probe its API for a law-by-number search."
+    },
+    {
+      "edge": "leginon.dgrn.gov.st as a legislative database lead",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "RETIRED — confirmed this round to NOT be a legislative database at all. leginon.dgrn.gov.st is São Tomé's DGRN (Direcção-Geral dos Registos e Notariado) civil-registry vital-events/identity-document validation portal; \"legi nón\" is Creole Forro for \"our root\" (a civil-registry/identity theme), not a truncation or variant of \"lei\"/law. This lead was carried into this round from AF/G.23's st-g23-municipal.json _dropped note (which had flagged it as JS-rendered with no extractable static text and guessed API endpoints all 404ing); this round's finding supersedes that note by explaining WHY it was unproductive — it was never the right kind of site. Recorded so no future round re-spends effort probing it as a legislative source."
+    },
+    {
+      "edge": "dre.gov.st as the official gazette host",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "dre.gov.st, São Tomé's nominal official Diário da República gazette site, is currently unreachable over a valid TLS connection: the certificate presented does not match the domain and instead identifies an unrelated commercial entity (abagroup.st). This corroborates st-oge-2026's existing hosting caveat in st-g23-municipal.json (\"the official host dre.gov.st returned a TLS certificate-hostname-mismatch error and could not be independently checked this round\"). Flagged as a dead or possibly compromised-looking government domain, worth a periodic re-check in future rounds rather than repeated per-round investigation — if it comes back online with a valid certificate it would be the single best lead for locating Lei n.º 16/92 and other pre-2000s legislation by DR issue number (this law is DR n.º 27, 1992)."
+    }
+  ]
+}

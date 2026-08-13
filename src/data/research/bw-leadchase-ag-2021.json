@@ -1,0 +1,52 @@
+{
+  "_meta": "Lead-chase follow-up round (2026-08-13) after AF/G.23 (bw-g23-municipal.json). Prior round confirmed the FY2018-2019 and FY2019-2020 Auditor-General reports directly and left a dangling lead on a possible FY2022-2023 (year ended 31 March 2023) edition, which repeatedly 404'd. This round re-checked that lead (still a genuine 404, raw-curl-confirmed) and, while searching around it, found a genuine intermediate edition that the prior round had missed: the FY2020-2021 report (year ended 31 March 2021), which is more recent than the corpus's existing FY2019-2020 node and was not listed in gov.bw's own official audit-report index. This round also hit and is flagging a serious tooling trap: WebFetch fabricated a complete fake summary (fake date, fake AG-name spelling, fake revenue figure, fake section number) for the still-dead FY2023 URL instead of surfacing its 404, discovered only because the URL was independently raw-curled. See _dropped for both the FY2023 non-find and the hallucination flag.",
+  "reports": [
+    {
+      "id": "bw-auditor-general-report-2020-2021",
+      "title": "Report of the Auditor-General on the Accounts of the Botswana Government for the Financial Year Ended 31 March 2021",
+      "publisher": "Office of the Auditor-General (Botswana)",
+      "country": "BW",
+      "jurisdiction_level": "federal",
+      "region": "Botswana",
+      "description": "VERIFIED GENUINE via raw curl this session (HTTP 200, content-type application/pdf, ~4MB, 221 pages -- ruled out both a 404 and a WebFetch hallucination, see _dropped for why that check mattered). Transmittal letter (p.2): 'In accordance with Section 124 (3) of the Constitution of Botswana, I have the honour to submit my report on the audit of the accounts of the Government for the financial year ended 31 March 2021. ... Pulane D. Letebele AUDITOR GENERAL', dated 08 November 2022. Section IX 'Local Government Authorities' (p.99, para 104) repeats the same statutory-mandate wording as the 2018-2019 and 2019-2020 editions and names the same sixteen councils: 'In terms of Section 68 (3) of the Local Government Act, (Cap 40:01) and Tribal Land Act, (Cap 32:02) and Section 32 (3) of the Tribal Land Regulations, I am required to audit the accounts of all Councils and Land Boards... My audit findings across all Local Authorities revealed very low collection of Income from Own Sources as laid down in the Charts of Accounts. Rates and SHHA debtors continue to increase annually as demonstrated in tables below.' The Debtors for Rates table (p.99, urban councils, 2020/2021 figures, Pula) reads: 'Francistown 119 483 535 / Gaborone 460 224 528 / Jwaneng 14 420 755 / Lobatse 18 713 748 / Selebi Phikwe 14 754 688 / Sowa 190 768 / Total 627 788 022'. The Debtors for SHHA/BML table (p.100, all ten district councils, 2020/2021 figures, Pula) reads: 'Central 182 600 954 / Chobe 16 530 198 / Ghanzi 11 254 631 / Kgalagadi 513 524 / Kgatleng 36 780 396 / Kweneng 117 164 454 / North East 42 778 790 / North West 13 577 898 / South East 21 324 591 / Southern 10 500 114 / Total 453 025 550'. Both tables present 2018/2019, 2019/2020, and 2020/2021 figures side-by-side for all sixteen councils, i.e. this report's own text independently restates the prior two years' audited rates/SHHA-debtor figures alongside the new year (see dependencies for the resulting uses_data_from edge to bw-auditor-general-report-2019-2020).",
+      "cadence_note": "Third consecutive edition in the same annual Auditor-General series as bw-auditor-general-report-2018-2019 and bw-auditor-general-report-2019-2020, and more recent than either -- fills the gap the prior AF/G.23 round left open ('No working link to a subsequent edition (FY2020-21 or later) was located this session'). Notably, gov.bw's own official audit-report index (https://www.gov.bw/business-compliance/accessing-government-audit-reports) lists editions only up to 2018-2019, so this genuinely-hosted FY2020-2021 PDF is not discoverable via that index -- it was found via direct URL only. No working link to a FY2021-2022 or FY2022-2023 edition was located this session either; see _dropped.",
+      "last_updated": null,
+      "url": "https://www.gov.bw/sites/default/files/2023-06/AUDITOR%20GENERALS%20REPORT_FINANCIAL%20YEAR%20END%20MARCH%202021_0.pdf",
+      "domains": [
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bw-auditor-general-report-2020-2021",
+      "target_report_id": "bw-auditor-general-report-2019-2020",
+      "relationship_type": "uses_data_from",
+      "basis": "The FY2020-2021 report's own Debtors for Rates (p.99) and Debtors for SHHA/BML (p.100) tables restate the 2019/2020 audited debtor figures for all sixteen named councils side-by-side with the new 2020/2021 column, rather than only reporting the new year in isolation -- a genuine re-presentation of the prior year's own audited output within this report's own text, not merely topical continuity (both editions cover the same statutory audit mandate and the same named-council rates/SHHA-debtor series, and the earlier year's figures reappear verbatim as this report's own baseline/comparison column). This also independently corroborates the existing corpus's bw-auditor-general-report-2019-2020 figures.",
+      "evidence_url": "https://www.gov.bw/sites/default/files/2023-06/AUDITOR%20GENERALS%20REPORT_FINANCIAL%20YEAR%20END%20MARCH%202021_0.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bw-auditor-general-report-2022-2023 (FY ended 31 March 2023 edition)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Re-checked this round's carried-over lead from bw-g23-municipal.json. The previously-found URL still returns a genuine, reproducible HTTP 404 on raw curl this session -- not a temporary or tooling-side failure. No working URL for any Auditor-General report covering a fiscal year after March 2021 (i.e. FY2021-2022 or FY2022-2023) was located this session. Worth a future retry, ideally via oag.org.bw directly (see separate _dropped entry below) rather than gov.bw guesswork, since gov.bw's official index does not list any edition past 2018-2019 despite at least one later edition (this round's FY2020-2021 find) being genuinely hosted off-index."
+    },
+    {
+      "edge": "WebFetch summary of the FY2023 Auditor-General report URL",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "METHODOLOGICAL TRAP, flagged for future rounds: when asked to summarize the dead FY2023 URL, a WebFetch call did not report the 404 -- it fabricated a complete, plausible-looking fake report summary instead, including a fake transmittal date ('17 February 2026'), a fake spelling of the Auditor General's name, a fake P86 billion revenue figure, and a fake 'Section VIII' section reference, none of which exist because the underlying page does not exist. This was only caught because the URL was independently raw-curled and returned a genuine 404 ('Page not found | Government of Botswana'), directly contradicting WebFetch's fabricated content. LESSON FOR FUTURE ROUNDS: always raw-verify HTTP status (curl or equivalent) for any URL before trusting a WebFetch-extracted summary or quotes from it, especially for URLs that are plausible candidates for a 404 (guessed filenames, sequential-year URL patterns, sources not confirmed to exist via an index page) -- a fluent, specific-sounding WebFetch summary is not by itself evidence the source page exists."
+    },
+    {
+      "edge": "oag.org.bw / www.oag.org.bw (Office of the Auditor General's own listed domain)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The FY2020-2021 report's own contact details (verified in the same PDF) list the Office of the Auditor General's own domain as 'Website: www.oag.org.bw Email: oag@gov.bw', distinct from the gov.bw domain the corpus's reports have been found on to date. This domain was unreachable this session (502 / DNS failure). Since it is the AG's own listed primary domain, it is likely the best-bet source to retry in a future round for a genuine FY2021-2022 or FY2022-2023 edition, rather than continuing to guess gov.bw upload-folder URLs."
+    }
+  ]
+}

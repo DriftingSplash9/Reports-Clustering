@@ -1,0 +1,95 @@
+{
+  "_slice": "cn-cpi-transfers",
+  "_researched": "2026-08-13",
+  "_status": "NEW 2026-08-13. The corpus's first China nodes, opening the `CN` colour family that has sat reserved and unstaffed since the RU/CN branch was promised on the roadmap. Two building blocks only: the NBS's monthly CPI release (with its standing indicator-explanation page folded in) and the annual Budget Report to the NPC, which carries the central-to-local transfer-payment figures including the 均衡性转移支付 (equalization transfer) line. A third node, the 2026 Government Work Report, carries the year's CPI target and ties it explicitly to monetary policy. Deliberately narrow and, this round, deliberately edge-less: every candidate dependency this session went looking for — Budget Report to the 1994 tax-sharing decision, Budget Report to the equalization-measures formula document, Government Work Report to NBS by name, Budget Report to a standalone Budget Law node — failed on genuine access or verification grounds and is recorded in `_dropped` rather than drawn or invented. The formula behind China's largest fiscal-transfer line (the 标准财政收入/标准财政支出 calculation in 中央对地方均衡性转移支付办法) is NOT in this corpus: the document exists (MOF lists it by title and date) but its text could not be retrieved this session (502/403 on yss.mof.gov.cn, repeated). The 1994 foundational tax-sharing decision (国发〔1993〕85号) is similarly absent: the correct scanned Gazette PDF was located but has no text layer and was not OCR'd. Both are the headline negative findings of this opening round, on the same pattern as Brazil's FPM slice naming its agency and not its statistic.",
+  "_note": "Researched via direct curl navigation of stats.gov.cn, npc.gov.cn, gov.cn and mof.gov.cn (WebSearch was unavailable this session; generic search engines returned JS-shell/blocked responses to non-browser requests), reconstructing each site's internal listing/search structure by hand. Every URL below was independently fetched and its HTTP status verified in this session, not accepted from an AI-summarized fetch. All access failures recorded in `_dropped` are real HTTP responses (502 Bad Gateway with a genuine CDN x-via header, and 403 with a live WAF block page reading '抱歉，您的请求被阻断了'), captured via verbose curl on repeated retries, not silent or fabricated failures. The Government Work Report's and Budget Report's silence on naming NBS, the 1994 decision, or the equalization-measures document was checked by full-text read of both documents, not assumed.",
+  "reports": [
+    {
+      "id": "cn-nbs-cpi",
+      "title": "居民消费价格指数 (Consumer Price Index, CPI) monthly release",
+      "publisher": "国家统计局 (National Bureau of Statistics of China, NBS)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "NBS's monthly national CPI release — the July 2026 edition read directly is titled 《2026年7月份居民消费价格同比上涨0.5%》 ('Consumer Prices Rose 0.5% Year-on-Year in July 2026'), headline quote: '2026年7月份，全国居民消费价格同比上涨0.5%。' Definition, from the release's own 指标解释 section: '居民消费价格指数（Consumer Price Index，简称CPI）是度量居民生活消费品和服务价格水平随着时间变动的相对数，综合反映居民购买的生活消费品和服务价格水平的变动情况。' ('The Consumer Price Index (CPI) measures how the price level of consumer goods and services purchased by residents changes over time, comprehensively reflecting price-level movements.') Basket, quoted verbatim: '居民消费价格统计调查涵盖全国城乡居民生活消费的食品烟酒及在外餐饮、衣着、居住、生活用品及服务、交通通信、教育文化娱乐、医疗保健、其他用品及服务等8大类、268个基本分类的商品与服务价格。' (8 major categories, 268 basic classifications: food/tobacco/alcohol & dining out, clothing, housing, household goods & services, transport & communication, education/culture/recreation, healthcare, other goods & services.) Sampling method, quoted verbatim: '采用抽样调查方法抽选确定调查网点，按照\"定人、定点、定时\"的原则，直接派人到调查网点或从互联网采集原始价格。数据来源于全国31个省（区、市）约500个市县、近12万家价格调查点，包括商场（店）、超市、农贸（生鲜）市场、服务网点和互联网电商等。' (Sampling, 'fixed personnel, fixed location, fixed time' principle, enumerators on-site or online collection; ~500 cities/counties across 31 provinces/regions/municipalities, nearly 120,000 price-survey points, covering malls, supermarkets, farmers' markets, service outlets and e-commerce.) Base-period rotation, quoted verbatim: '按照统计制度安排，2026年1月起，我国CPI开始编制和发布以2025年为基期的价格指数...本次基期轮换对CPI各月同比指数的影响平均约为0.06个百分点。' (Per the statistical system's schedule, from January 2026 China's CPI began being compiled/published on a 2025 base period; the rebasing affects the year-on-year index by an average of ~0.06 percentage points — the release names its own internal '统计制度安排' for this but does not cite an external legal document by title.) NBS's separate standing 指标解释 (Indicator Explanation) reference page (https://www.stats.gov.cn/sj/zbjs/202302/t20230202_1897106.html, category 价格/Price) restates the same concept in its own words, quoted verbatim: '居民消费价格指数　是反映一定时期内城乡居民所购买的生活消费品和服务项目价格变动趋势和程度的相对数，是对城市居民消费价格指数和农村居民消费价格指数进行综合汇总计算的结果。' (CPI is a relative measure reflecting the trend/extent of price changes in goods and services purchased by urban and rural residents; it is the aggregated result of the urban CPI and rural CPI.) Folded into this single node rather than split into a second, since the indicator-explanation page restates the same definition rather than adding a distinct dependency or methodology fact.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, confirmed by the existence of a sequential monthly release directory at stats.gov.cn/sj/zxfb/.",
+      "last_updated": null,
+      "url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965008.html",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "cn-npc-government-work-report",
+      "title": "政府工作报告 (Government Work Report), 2026",
+      "publisher": "国务院 (State Council), delivered by Premier 李强 (Li Qiang) to the 全国人民代表大会 (National People's Congress, NPC)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The State Council's annual report to the NPC, delivered March 5, 2026 at the 4th Session of the 14th NPC, setting the year's headline economic targets including the CPI target. Target, quoted verbatim: '今年发展主要预期目标是：经济增长4.5%－5%...居民消费价格涨幅2%左右...' ('This year's main targets are: economic growth of 4.5–5%... CPI increase of around 2%...'). Rationale, quoted verbatim, explicitly tying the CPI target to price-level policy: '居民消费价格涨幅2%左右，考虑了预期引导和现实可能，我们将通过改善总供求关系，推动价格总水平由负转正、消费价格合理温和回升，促进经济良性循环。' ('A CPI target of ~2% factors in expectation-guidance and feasibility; we will improve the aggregate supply-demand relationship to turn the general price level from negative to positive and encourage a modest, reasonable price recovery.') The monetary-policy paragraph ties the same target to monetary policy explicitly, quoted verbatim: '把促进经济稳定增长、物价合理回升作为货币政策的重要考量...使社会融资规模、货币供应量增长同经济增长、价格总水平预期目标相匹配。' (Promoting stable growth and a reasonable price recovery is stated as an important consideration for monetary policy, matching social-financing and money-supply growth to the growth and price-level targets.) Full-text read this session found no citation of the National Bureau of Statistics (国家统计局) by name anywhere in the document — see `_dropped`.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, delivered at each year's NPC session (early March).",
+      "last_updated": null,
+      "url": "http://www.npc.gov.cn/c2/c30834/202603/t20260316_453264.html",
+      "domains": [
+        "inflation",
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "cn-npc-budget-report",
+      "title": "关于2025年中央和地方预算执行情况与2026年中央和地方预算草案的报告 (Report on the 2025 Execution of the Central and Local Budgets and the 2026 Draft Central and Local Budgets)",
+      "publisher": "财政部 (Ministry of Finance), delivered on behalf of the 国务院 (State Council) to the 全国人民代表大会 (National People's Congress, NPC)",
+      "country": "CN",
+      "jurisdiction_level": "federal",
+      "region": "China",
+      "description": "The annual budget report delivered to the NPC alongside the Government Work Report (same session, March 5, 2026), carrying the scale of central-to-local fiscal transfer payments including the equalization-transfer line. 2026 planned figures, quoted verbatim: '中央对地方转移支付安排104150亿元、增长2.2%，其中，均衡性转移支付安排28340亿元、增长3.7%，县级基本财力保障机制奖补资金安排4895亿元、增长2.1%。' (Central-to-local transfer payments for 2026 budgeted at RMB 10.415 trillion, +2.2%, of which equalization transfer payments are RMB 2.834 trillion, +3.7%, and county-level basic fiscal-capacity guarantee reward/subsidy funds are RMB 489.5 billion, +2.1%.) 2025 actual execution, quoted verbatim: '中央对地方转移支付具体情况是：一般性转移支付92475.98亿元，完成预算的98.3%...专项转移支付9449.16亿元，完成预算的101.6%...' (General transfer payments were RMB 9.248 trillion, 98.3% of budget; special-purpose transfer payments were RMB 944.9 billion, 101.6% of budget.) The report cites the Budget Law (预算法) as governing framework, quoted verbatim: '根据预算法规定，预算年度开始后，在全国人民代表大会批准本预算草案前，可安排下列支出...对下级政府的转移性支出...' (Per the Budget Law, before the NPC approves the draft budget, certain expenditures — including transfers to lower-level governments — may be provisionally arranged.) This is a real, quoted citation to 预算法, but the Budget Law's own full text was not independently read or verified this session (only this reference to it, inside the Budget Report), so no separate Budget Law node is minted this round — see `_dropped`. Full-text read this session found no citation, by name or number, of the 1994 tax-sharing decision (国发〔1993〕85号) or of the '中央对地方均衡性转移支付办法' (equalization-measures document) anywhere in this report — the only explicit legal citation found is to 预算法. MOF's own transfer-payment taxonomy platform (http://www.mof.gov.cn/zhuantihuigu/cczqzyzfglbf/, verified live HTTP 200) independently confirms 均衡性转移支付 is filed as a sub-category of 一般性转移支付, and its equalization sub-page (http://www.mof.gov.cn/zhuantihuigu/cczqzyzfglbf/ybxzyzf_7774/jhxzyzf/, verified live HTTP 200) lists the governing MOF notices by title and date, including '财政部关于印发《中央对地方均衡性转移支付办法》的通知' (dated 2022-04-28 and, an earlier version, 2019-06-11) and an annual run of disbursement notices 2018–2023 — confirming the taxonomy and that these notices exist, but not supplying any formula content, since their own full text was inaccessible this session (see `_dropped`).",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, delivered at each year's NPC session (early March), alongside the Government Work Report.",
+      "last_updated": null,
+      "url": "http://www.npc.gov.cn/c2/c30834/202603/t20260316_453265.html",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "cn-npc-budget-report -> 中央对地方均衡性转移支付办法 (equalization transfer measures, the document that would carry the 标准财政收入/标准财政支出 formula)",
+      "source": "cn-npc-budget-report",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "MOF's own transfer-payment taxonomy pages (mof.gov.cn/zhuantihuigu/cczqzyzfglbf/, live HTTP 200) confirm this document exists, name it by title ('财政部关于印发《中央对地方均衡性转移支付办法》的通知') and date both a 2022-04-28 and a 2019-06-11 version, and confirm 均衡性转移支付 sits as a sub-category of 一般性转移支付. But the document's actual text — which per the task brief should contain the 标准财政收入/标准财政支出 formula — is hosted on yss.mof.gov.cn (MOF's Budget Department subdomain) and could not be retrieved: http://yss.mof.gov.cn/ybxzyzf/jhxzyzf/202204/t20220428_3807232.htm returns HTTP 502 Bad Gateway on repeated retries (5 attempts, minutes apart, verified via verbose curl with a real CDN x-via header — not a fabricated page); the same URL over HTTPS returns HTTP 403 with a genuine WAF block page ('抱歉，您的请求被阻断了' / 'Sorry, you have been blocked'); the 2019 version (.../201906/t20190611_3275005.htm) fails identically (502). This is a genuine, reproducible access failure on MOF's own subdomain, not a silent drop. No node is minted for this document and no formula content is asserted anywhere in this corpus."
+    },
+    {
+      "edge": "cn-npc-budget-report -> 国务院《关于实行分税制财政管理体制的决定》(国发〔1993〕85号, the 1994 tax-sharing foundational decision)",
+      "source": "cn-npc-budget-report",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The commonly-cited founding document of China's tax-sharing system, State Council 'Decision on Implementing the Tax-Sharing Fiscal Management System' (国发〔1993〕85号, dated 1993-12-15), was located in its correct container — the State Council Gazette's 1993 archive index (https://www.gov.cn/zhengce/2011-11/09/content_2619445.htm, verified live) links to the scanned PDF issue (https://www.gov.cn/gongbao/shuju/1993/gwyb199331.pdf, verified downloadable, HTTP 200, 160 pages) — but that PDF is an image scan with no text layer: pdftotext extraction returned only 160 bytes of whitespace, and pdfinfo shows Producer 'CNKI®ReaderEx', consistent with a scanned reprint with no OCR text. Extracting a verbatim quote would require OCR, which was not performed this session. No other government-hosted HTML reproduction of the decision was located within the time available (gov.cn's policy-library search API ignores query parameters entirely, returning the same 'latest by date' result set regardless of the search string tried). No node is minted for this decision and its content is not summarized or assumed anywhere in this corpus — the current Budget Report's own text does not cite it by name or number either, which is the separate finding recorded below."
+    },
+    {
+      "edge": "cn-npc-budget-report -> a standalone 预算法 (Budget Law) node",
+      "source": "cn-npc-budget-report",
+      "target": null,
+      "reason": "deferred",
+      "why": "The Budget Report quotes the Budget Law (预算法) as its governing framework for provisional pre-approval spending, including transfers to lower-level governments — a real, explicit citation, recorded in prose in the cn-npc-budget-report node's own description. But the Budget Law's own full text was not independently located, read, or verified this session — only this one reference to it, inside the Budget Report that cites it. Minting a Budget Law node on the strength of a citation to it, without having read the statute itself, would be exactly the kind of unverified node this corpus's evidence standard exists to prevent. Left as a lead for a future China-branch session, on the same pattern as Brazil's Budget Law counterpart (LC 101/2000) being minted only once its own articles were read directly."
+    },
+    {
+      "edge": "cn-npc-government-work-report -> cn-nbs-cpi (explicit named citation of NBS as the CPI target's issuing authority)",
+      "source": "cn-npc-government-work-report",
+      "target": "cn-nbs-cpi",
+      "reason": "no-document",
+      "why": "Full-text read of the 2026 Government Work Report this session found no citation of the National Bureau of Statistics (国家统计局) by name anywhere in the document, despite the CPI figures it uses being self-evidently NBS-sourced. This is a genuine NOT FOUND for an explicit inter-document citation, not an oversight — searched directly via full-text grep of the fetched document. No edge is drawn between the Government Work Report and the NBS CPI release on the strength of the shared subject matter alone; only a document naming the other would justify one, and none does."
+    },
+    {
+      "edge": "cn-npc-budget-report -> 国发〔1993〕85号 / 中央对地方均衡性转移支付办法 (named-by-title citation within the Budget Report itself)",
+      "source": "cn-npc-budget-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "Distinct from the two unreadable-source entries above, which record that the underlying documents themselves could not be read. This entry records a separate negative finding about the Budget Report's own text: full-text read of the 2026 Budget Report found it does NOT cite the 1994 tax-sharing decision by name or number, and does NOT cite the '中央对地方均衡性转移支付办法' by name anywhere — the only explicit legal citation found in the report is to 预算法 (the Budget Law). So even setting aside the access failures on the underlying documents, the Budget Report itself supplies no citation to name an edge from."
+    }
+  ]
+}

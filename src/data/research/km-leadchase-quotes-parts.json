@@ -1,0 +1,44 @@
+{
+  "_meta": "Lead-chasing follow-up round after AF/G.23, 2026-08-13. Closes the standing 'loi organique portant fixation des quotes-parts' open item recorded in km-g23-municipal.json's _dropped block (source: km-loi-finances-2026, target: null, reason: no-document). FOUND this round: Loi organique N°05-001/AU du 16 janvier 2005, hosted directly on justice.gouv.km (Ministère de la Justice des Comores's own legal-texts portal), PDF downloaded and pdftotext-verified. Its Article 8 percentages (Union 37,50% / Ngazidja 27,4% / Anjouan 25,7% / Mohéli 9,4%) match EXACTLY the percentages already quoted from the 2016 Loi de Finances (Article 8) inside km-loi-finances-2026's existing description ('Union / 37,5%... Nqazidja [Ngazidja] / 27,4%... Ndzouani / 25,7%... Mwali / 9,4%'), so a methodology_depends_on edge is recorded from km-loi-finances-2026 to this new node rather than a weaker 'cites'. Separately, this organic law's own text cites its constitutional basis as Article 11 of the original (pre-2018-revision) 2001 Constitution -- not Article 104, which a prior round (AF/G.23) had applied as an enrichment to km-constitution-union-2001 on the different topic of inter-island financial conventions. Article 11 as such is not preserved verbatim in the ILO/NATLEX-hosted CONSOLIDATED post-2018 text at km-constitution-union-2001's current Articles 104-106 (which cover convention-making power and the State-approval/balanced-budget rule, not a numbered quote-part cross-reference), so no edge is drawn to km-constitution-union-2001 this round -- recorded as a fresh no-node-yet/comparison lead in _dropped instead of forcing a match.",
+  "reports": [
+    {
+      "id": "km-loi-organique-05-001-au-2005",
+      "title": "Loi organique N°05-001/AU du 16 janvier 2005 fixant la quote-part des recettes publiques à partager entre l'Union et les Îles Autonomes",
+      "publisher": "Assemblée de l'Union des Comores / Ministère de la Justice des Comores",
+      "country": "KM",
+      "jurisdiction_level": "federal",
+      "region": "Comoros",
+      "description": "The organic law establishing the formula for splitting non-retroceded public revenues between the Union government and the three Autonomous Islands (Ngazidja/Grande Comore, Anjouan, Mohéli). Adopted by the Assemblée de l'Union on 16 January 2005 and promulgated by Décret N°05-023/PR (30 March 2005, President Azali Assoumani). Hosted as a full 4-page, 9-article PDF directly on justice.gouv.km, the Comorian Ministry of Justice's own legal-texts portal (HTTP 200, pdftotext-verified). Article 1 sets the underlying distinction: \"La loi de finances de l'Union des Comores conformément aux alinéas 1 et 3 de l'article 11 de la constitution rétrocède directement au profit des budgets des Iles Autonomes les recettes publiques devant être recouvrées et utilisées par ces dernières. Ces recettes publiques sont dites recettes propres des Iles Autonomes. Les ressources non rétrocédées directement au profit des budgets des Iles Autonomes seront à partager entre l'Union et les Iles Autonomes suivant les dispositions de la présente loi organique.\" Article 8 states the operative quote-part formula: \"la quote-part est fixée, après déduction des charges de la dette publique et des contributions aux organismes internationaux, des prestations de services et des pensions comme suit : - Union : 37,50% ; - Ngazidja : 27,4% ; - Anjouan : 25,7%; - Mohéli: 9,4%.\" Article 7 states the amendment procedure: \"Le Gouverneur de la Banque Centrale est tenu de respecter scrupuleusement ce mécanisme qui ne peut être modifié que par une loi organique.\" Signed by Le Président de l'Assemblée de l'Union, Said Dhoiffir Bounou, and Secretaries Bacar Abdou / Bacar Houmadi. CONSTITUTIONAL-BASIS NOTE: the law's own Article 1 cites \"l'article 11 de la constitution de l'Union des Comores du 23 Décembre 2001\" (as originally numbered), not the 'Article 104' a prior round (AF/G.23) had hypothesized -- see _dropped for why no edge is drawn to km-constitution-union-2001 this round. Corroborated (secondary, not primary) by a verbatim-identical reproduction of Décret N°05-023/PR at comoresdroit.comores-droit.com (private Comorian legal-reference site) and by a 2013 PEFA assessment (pefa.org) stating the mechanism was still described as operative as of 2013: \"Une loi organique fixe la quote-part des recettes publiques devant respectivement revenir à l'Union et aux Îles.\"",
+      "last_updated": null,
+      "url": "https://justice.gouv.km/wp-content/uploads/2025/03/loi-organique-n-05-001au-du-16-janvier-2005-fixant-la-quote-part-des-recettes-publiques-a-partager-entre-lunion-et-les-iles-autonomes.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "km-loi-finances-2026",
+      "target_report_id": "km-loi-organique-05-001-au-2005",
+      "relationship_type": "methodology_depends_on",
+      "basis": "km-loi-finances-2026's own description already quotes the 2016 Loi de Finances (Article 8), which names 'la loi organique portant fixation des quotes-parts' as the legal basis for the residual-revenue split and gives the percentages 'Union / 37,5%... Nqazidja [Ngazidja] / 27,4%... Ndzouani / 25,7%... Mwali / 9,4%'. Those four figures match this organic law's Article 8 formula exactly (Union 37,50% / Ngazidja 27,4% / Anjouan 25,7% / Mohéli 9,4%), and Article 7 of the organic law states the mechanism 'ne peut être modifié que par une loi organique' (can only be amended by [another] organic law) -- i.e. the annual finance law's residual-split percentages are calculated per this organic law's formula, not independently set each year. Note this is distinct from the separate 1,85%-of-internal-revenue 'gouvernorats' pooled-transfer mechanism in the 2026 edition's own Article 4, which is a different, smaller allocation than the Article 8 residual-quote-part split.",
+      "evidence_url": "https://justice.gouv.km/wp-content/uploads/2025/03/loi-organique-n-05-001au-du-16-janvier-2005-fixant-la-quote-part-des-recettes-publiques-a-partager-entre-lunion-et-les-iles-autonomes.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "km-loi-finances-2026 -> loi organique portant fixation des quotes-parts (AF/G.23 open item)",
+      "source": "km-loi-finances-2026",
+      "target": "km-loi-organique-05-001-au-2005",
+      "reason": "resolved",
+      "why": "CLOSES the AF/G.23 lead recorded in km-g23-municipal.json's _dropped block ('that named loi organique portant fixation des quotes-parts... was not itself independently located this round'). Found this round as Loi organique N°05-001/AU du 16 janvier 2005, hosted on justice.gouv.km; a live methodology_depends_on edge from km-loi-finances-2026 is recorded above. See the corpus-wide edge itself for the percentage-match evidence."
+    },
+    {
+      "edge": "km-loi-organique-05-001-au-2005 -> km-constitution-union-2001 (Article 11 cross-reference)",
+      "source": "km-loi-organique-05-001-au-2005",
+      "target": "km-constitution-union-2001",
+      "reason": "no-node-yet",
+      "why": "This organic law's Article 1 cites 'l'article 11 de la constitution de l'Union des Comores du 23 Décembre 2001' as its constitutional basis for the retrocession/quote-part mechanism -- NOT 'Article 104', which a prior round (AF/G.23) hypothesized and which was in fact used to enrich km-constitution-union-2001 on an unrelated topic (inter-island financial-convention power, not the quote-part formula). The CURRENT consolidated post-2018-revision text hosted at km-constitution-union-2001's url (ILO/NATLEX) does not preserve an Article 11 (or renumbered equivalent at Articles 104-105) that explicitly cross-references a numbered organic law fixing the quote-part -- Articles 104-106 as captured there cover convention-making power, the State grant/local-tax funding split, and the balanced-budget/State-approval rule respectively, none of which is the same cross-reference. This strongly suggests Article 11 of the ORIGINAL (pre-revision) 2001 constitutional text was renumbered or reorganized in later consolidations, and the exact renumbering was not traced this round. Flagged as a fresh lead for a future round: locate an un-consolidated/original-text copy of the 2001 Constitution (as it stood before the 2009/2013/2018 revisions) to confirm precisely what its original Article 11 said and how it maps onto the current Articles 104-106, before drawing a direct edge between this organic law and km-constitution-union-2001."
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "_slice": "ru-cpi-equalization",
+  "_researched": "2026-08-13",
+  "_status": "NEW 2026-08-13. The corpus's first Russian nodes, and the first entries in the reserved `ASIA` colour family (Russia filed there rather than to `CN`, which is China's own code — see palette.ts COUNTRY_FAMILY). Opening round only, two topics: (1) the Bank of Russia's own inflation-target document, the only verified anchor for a Russia CPI presence this round, because Rosstat's own domains (rosstat.gov.ru, gks.ru, fedstat.ru) were completely unreachable from this environment and so no Rosstat-hosted node is minted; (2) the statutory basis and a genuinely primary-sourced 2026 data table for Russia's regional fiscal-equalization grants (дотации на выравнивание бюджетной обеспеченности субъектов Российской Федерации), Russia's structural analogue to Brazil's FPM/FPE transfer chain. Four reports, three edges. Every NOT FOUND / access-failure item from the research round is preserved below as a `_dropped` entry rather than silently omitted.",
+  "_note": "Researched this session directly against `/tmp/brics-research/russia.txt`. Access environment note carried over verbatim from that file: rosstat.gov.ru, gks.ru and fedstat.ru were all unreachable by every method tried (TLS resets, envoy 503s, 403s); pravo.gov.ru 502'd and its publication.pravo.gov.ru subdomain is JS-rendered; docs.cntd.ru and web.archive.org (https) also failed. Sites that DID load with genuine HTTP 200 responses and real body content: cbr.ru, consultant.ru, minfin.gov.ru, government.ru, garant.ru/base.garant.ru. Every quote below comes only from a page confirmed to load with a real 200 response. Two of the four nodes below are sourced to consultant.ru, a third-party legal-database mirror rather than a .gov.ru host, because no working government-hosted full text of the Budget Code or of Resolution No. 670 could be reached in the time available; this is flagged explicitly in each such node's own description, the same discipline this corpus has applied to NGO/commercial-mirror sourcing elsewhere.",
+  "reports": [
+    {
+      "id": "ru-cbr-monetary-policy-guidelines",
+      "title": "Основные направления единой государственной денежно-кредитной политики на 2026 год и период 2027 и 2028 годов (Monetary Policy Guidelines for 2026 and the 2027–2028 period)",
+      "publisher": "Банк России (Bank of Russia)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The Bank of Russia's own current monetary-policy document, and the only verified primary-source anchor for a Russia CPI/inflation node this round — Rosstat's own methodology and release pages (rosstat.gov.ru, gks.ru, fedstat.ru) were completely unreachable this round (see `_dropped`), so no node is minted directly under Rosstat. This document names Rosstat's ИПЦ (CPI) by agency and abbreviation as the specific statistic used for the Bank's inflation target, quoted directly: «Постоянная публичная количественная цель по инфляции. Цель – годовая инфляция вблизи 4%. Цель действует на постоянной основе. Инфляция рассчитывается на основе индекса потребительских цен (ИПЦ, Росстат). После стабилизации инфляции вблизи 4% Банк России оценит целесообразность снижения уровня цели. Снижение возможно не ранее 2029 года.» (\"Permanent public quantitative inflation target — The target is annual inflation near 4%. The target applies on a permanent basis. Inflation is calculated based on the consumer price index (CPI, Rosstat). After inflation stabilizes near 4%, the Bank of Russia will assess the feasibility of lowering the target level. A reduction is possible no earlier than 2029.\") The document does not cite a specific Rosstat release or order by number — only the agency and index abbreviation (\"ИПЦ, Росстат\").",
+      "releases_per_year": 1,
+      "cadence_note": "Annual. The Bank of Russia publishes one edition per year, each covering a rolling three-year horizon (this edition: 2026, with the 2027–2028 period); a listing page shows one annual edition back to 2009.",
+      "last_updated": null,
+      "url": "https://www.cbr.ru/about_br/publ/ondkp/on_2026_2028/",
+      "domains": [
+        "monetary-policy",
+        "inflation"
+      ]
+    },
+    {
+      "id": "ru-budget-code-art131",
+      "title": "Бюджетный кодекс Российской Федерации, ст. 131 — Дотации бюджетам субъектов Российской Федерации из федерального бюджета (Budget Code of the Russian Federation, Art. 131 — Equalization grants to regional budgets from the federal budget)",
+      "publisher": "Федеральное Собрание Российской Федерации / Президент Российской Федерации (Federal Assembly / President of the Russian Federation)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "Статья 131 of the Budget Code (от 31.07.1998 N 145-ФЗ), current редакция as of 26.06.2026, the statutory basis for Russia's дотации на выравнивание бюджетной обеспеченности — grants equalizing the 'budgetary sufficiency' of Russia's regions (субъекты), paid from the federal budget. FLAG: the only reachable full text was via consultant.ru (ConsultantPlus), a third-party legal-database mirror, not a .gov.ru host — pravo.gov.ru 502'd and its publication.pravo.gov.ru subdomain is JS-rendered with the specific document not locatable through it; the ConsultantPlus page itself is freely accessible with no paywall. Third-party-hosted verbatim government text, flagged as such. §1, quoted directly: «Дотации на выравнивание бюджетной обеспеченности субъектов Российской Федерации предусматриваются в составе федерального бюджета и распределяются между субъектами Российской Федерации в соответствии с единой методикой, утверждаемой Правительством Российской Федерации в соответствии с требованиями настоящего Кодекса.» (\"Equalization grants ... are provided for within the federal budget and are distributed among the constituent entities in accordance with a unified methodology approved by the Government of the Russian Federation.\") §§4/6 define 'budgetary sufficiency' via a tax-capacity ratio, quoted directly: «4. Дотации ... предоставляются субъектам Российской Федерации, уровень расчетной бюджетной обеспеченности которых не превышает уровня, установленного в качестве критерия выравнивания ... 6. Уровень расчетной бюджетной обеспеченности субъекта Российской Федерации определяется соотношением между расчетными налоговыми доходами на одного жителя ... и аналогичным показателем в среднем по консолидированным бюджетам субъектов Российской Федерации с учетом структуры населения, социально-экономических, географических, климатических и иных объективных факторов ...» — the direct Russian analogue of a 'tax capacity relative to national average' mechanism. §8 sets the annual calendar, quoted directly: «Министерство финансов Российской Федерации до 1 августа текущего финансового года направляет в исполнительные органы субъектов Российской Федерации исходные данные для проведения расчетов распределения дотаций ... и до 20 августа текущего финансового года проводит сверку указанных исходных данных с исполнительными органами субъектов Российской Федерации…» (\"The Ministry of Finance ... shall, by 1 August, send ... the source data for calculating the distribution ... and shall, by 20 August, reconcile that source data ...\"). The statute text itself carries a live ConsultantPlus editorial cross-reference: «Об особенностях распределения дотаций в 2026 г. см. Постановление Правительства РФ от 15.12.2025 N 2038.» (\"On the specifics of the 2026 grant distribution, see Government of the Russian Federation Resolution No. 2038 of 15.12.2025.\")",
+      "last_updated": null,
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_19702/42df670934cd2c8f62a9ef153b2826b4d39b3ff4/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ru-resolution-670-equalization-methodology",
+      "title": "Постановление Правительства РФ от 22.11.2004 N 670 (ред. от 15.12.2025) «О распределении дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации» (Government of the Russian Federation Resolution No. 670 of 22.11.2004, as amended through 15.12.2025, \"On the distribution of equalization grants for the budgetary sufficiency of constituent entities of the Russian Federation\", together with the Methodology for distributing them)",
+      "publisher": "Правительство Российской Федерации (Government of the Russian Federation)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The 'единая методика' (unified methodology) that Budget Code Art. 131 §1 delegates to the Government to approve — reached by following that article's own hyperlink. FLAG: only a metadata/title page of this resolution was reachable, via consultant.ru (ConsultantPlus), a third-party mirror, not a .gov.ru host. That page confirms the resolution's exact number, its original date (22.11.2004), and its current-as-of-amendment date (15.12.2025 — matching the '№2038' amendment cited in Art. 131's own editorial note) and exact title. THE ACTUAL FORMULA TEXT IS UNVERIFIED / NOT FOUND: ConsultantPlus's free-tier version restricts this specific document to a limited access schedule (\"доступен по расписанию: по рабочим дням с 20-00 до 24-00 ... в выходные и праздничные дни в любое время\") that could not be reached live within that window this round, and no working government-hosted full text was found either (government.ru's own search function returned stale cached results from a fixed 2012–2017 date window regardless of query; pravo.gov.ru returned 502). This node therefore records the resolution's identity, existence and amendment history as confirmed, and its operative formula wording as explicitly not independently verified.",
+      "last_updated": "2025-12-15",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_521793/612ab7f8bef6bfaf21c16c907c000c4c1305482f/",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ru-minfin-2026-equalization",
+      "title": "Уровень расчетной бюджетной обеспеченности субъектов Российской Федерации после распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации и индекс бюджетных расходов субъектов Российской Федерации на 2026 год (Level of estimated budgetary sufficiency of Russia's regions after distribution of equalization grants, and the regional budget-expenditure index, for 2026)",
+      "publisher": "Министерство финансов Российской Федерации (Ministry of Finance of the Russian Federation)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "Genuinely government-hosted (minfin.gov.ru, not a legal-database mirror) — this branch's strongest, most directly primary-sourced node. Published/modified 15.12.2025, the exact same date as the Resolution No. 2038 amendment named in Budget Code Art. 131's own editorial note. Underlying data file: https://minfin.gov.ru/common/upload/library/2025/12/main/Uroven_raschetnoy_budzhetnoy_obespechennosti.xlsx (XLSX, 22.47 KB). Verbatim extract of the per-region index table, quoted directly: «Субъекты Российской Федерации / Уровень расчетной бюджетной обеспеченности / Индекс бюджетных расходов — Белгородская область 1.101 0.815; Брянская область 0.735 0.861; Владимирская область 0.832 0.899; Воронежская область 0.898 0.822; … Московская область 1.218 0.957 …» (\"Constituent entities of the Russian Federation / Level of estimated budgetary sufficiency / Budget expenditure index — Belgorod Region 1.101, 0.815; Bryansk Region 0.735, 0.861; Vladimir Region 0.832, 0.899; Voronezh Region 0.898, 0.822; ... Moscow Region 1.218, 0.957 ...\"), Russia's direct structural analogue to a per-capita-income-based coefficient table: an index below 1.0 signals fiscal capacity below the national average (eligible for equalization), above 1.0 signals above-average capacity. A companion, earlier-cycle document — \"Распределение дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации на 2025 год и плановый период 2026 и 2027 годов\", published 29.11.2024 (https://minfin.gov.ru/ru/document?id_4=310185-raspredelenie_dotatsii_na_vyravnivanie_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii_na_2025_god_i_planovyi_period_2026_i_2027_godov) — confirms the same document is produced annually on a rolling planning-period basis; its PDF contents were not extracted for quoting.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, published in the November–December preceding the covered fiscal year: this 2026-year edition is dated 15.12.2025, and the prior 2025-year (with 2026–2027 planning period) edition is dated 29.11.2024.",
+      "last_updated": "2025-12-15",
+      "url": "https://minfin.gov.ru/ru/document?id_4=314935-uroven_raschetnoi_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii_posle_raspredeleniya_dotatsii_na_vyravnivanie_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii_i_indeks_byudzhetnykh_raskhodov_subektov_rossiiskoi_federatsii_na_2026_god",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ru-budget-code-art131",
+      "target_report_id": "ru-resolution-670-equalization-methodology",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY. Art. 131 §1's own text names the unified methodology and delegates its approval to the Government: «...распределяются между субъектами Российской Федерации в соответствии с единой методикой, утверждаемой Правительством Российской Федерации в соответствии с требованиями настоящего Кодекса.» Following that citation's own hyperlink (as reproduced on the ConsultantPlus mirror of Art. 131) led directly to Постановление Правительства РФ от 22.11.2004 N 670, whose title, number and current amendment date (15.12.2025) match the '№2038' amendment Art. 131's own editorial note separately names. `cites` rather than `methodology_depends_on`: the statute's own text was independently confirmed to name and link to this specific instrument as the approving authority, but the resolution's own operative formula text remains unverified (see that node's description and the corresponding `_dropped` entry), so the edge records the documented citation rather than a verified computational dependency.",
+      "evidence_url": "https://www.consultant.ru/document/cons_doc_LAW_19702/42df670934cd2c8f62a9ef153b2826b4d39b3ff4/"
+    },
+    {
+      "source_report_id": "ru-minfin-2026-equalization",
+      "target_report_id": "ru-resolution-670-equalization-methodology",
+      "relationship_type": "cites",
+      "basis": "Minted on a temporal-and-subject convergence, stated plainly so a reader can judge it, rather than on any single sentence declaring the link. Постановление N 670 is currently in force 'ред. от 15.12.2025' — i.e., its text as amended effective 15.12.2025, the amendment Budget Code Art. 131's own editorial note names as governing '2026 г.' grant distribution. The Ministry of Finance's 'Уровень расчетной бюджетной обеспеченности ... на 2026 год' document is dated/published on that exact same day, 15.12.2025, and concerns exactly the subject that instrument's title describes — the distribution of дотации на выравнивание бюджетной обеспеченности. Two independently primary/near-primary Russian government sources (a ConsultantPlus-mirrored resolution page and a minfin.gov.ru-hosted publication) converge on the same date and the same mechanism. `cites` rather than `calculated_from`/`methodology_depends_on`, deliberately the most conservative of the four relationship types available: no document text says in so many words that the Minfin table was produced by applying Resolution 670's formula, and that formula itself was never independently read (see `_dropped`), so the edge records the documented convergence rather than an unverified computational claim.",
+      "evidence_url": "https://minfin.gov.ru/ru/document?id_4=314935-uroven_raschetnoi_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii_posle_raspredeleniya_dotatsii_na_vyravnivanie_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii_i_indeks_byudzhetnykh_raskhodov_subektov_rossiiskoi_federatsii_na_2026_god"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Minfin's 'Исходные данные...'/'Дополнительные данные...' publications -> ru-budget-code-art131 (Art. 131 §8's data-exchange calendar)",
+      "source": null,
+      "target": "ru-budget-code-art131",
+      "reason": "no-node-yet",
+      "why": "Budget Code Art. 131 §8 fixes an annual calendar under which the Ministry of Finance sends and reconciles source data for the grant-distribution calculation, quoted directly: «Министерство финансов Российской Федерации до 1 августа текущего финансового года направляет в исполнительные органы субъектов Российской Федерации исходные данные для проведения расчетов распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации ... и до 20 августа текущего финансового года проводит сверку ...» Two further Minfin publications found this round track those exact deadlines for the following (2027–2029) cycle: 'Исходные данные для проведения расчетов ...' published 10.06.2026 (https://minfin.gov.ru/ru/document?id_4=316787-iskhodnye_dannye_dlya_provedeniya_raschetov_raspredeleniya_dotatsii_na_vyravnivanie_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii), and 'Дополнительные данные для проведения расчетов ...' published 03.08.2026 (https://minfin.gov.ru/ru/document?id_4=317197-dopolnitelnye_dannye_dlya_provedeniya_raschetov_raspredeleniya_dotatsii_na_vyravnivanie_byudzhetnoi_obespechennosti_subektov_rossiiskoi_federatsii). This is real, current-year confirmation that the §8 cycle is operating on schedule, distinct from `ru-minfin-2026-equalization` itself (the resulting index table, not either data-exchange step) — a documented dependency on `ru-budget-code-art131`, but neither of these two data-exchange documents is built as its own node this round, so no edge is drawn yet rather than pointing one at the wrong target."
+    },
+    {
+      "edge": "Rosstat's own CPI methodology/release page as a node, cited directly",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "THE HEADLINE ACCESS GAP OF THIS BRANCH'S OPENING ROUND. rosstat.gov.ru, gks.ru (Rosstat's old domain, same infrastructure) and fedstat.ru (Rosstat's EMISS data system) were all unreachable by every method tried this round: plain curl, curl with explicit CA bundles, raw TLS handshake via openssl, and manual HTTP-over-TLS. rosstat.gov.ru resets after the TLS ClientHello ('Connection reset by peer'); a diagnostic raw-HTTP probe through the same path returned an explicit envoy-style 503 upstream connect error and a CERTIFICATE_VERIFY_FAILED (unable to get local issuer certificate); gks.ru returned the same 503 upstream error or a disconnect/reset; fedstat.ru returned 403 Forbidden. No verified primary-source quote from Rosstat itself for the CPI methodology, definition, or release cadence could be obtained. This is why no 'Russia CPI' node is minted sourced to Rosstat directly this round — `ru-cbr-monetary-policy-guidelines` is the only verified inflation-domain anchor, sourced to the Bank of Russia's own document naming Rosstat's ИПЦ rather than to Rosstat itself."
+    },
+    {
+      "edge": "The specific Rosstat order (Приказ Росстата) approving the CPI methodology, as a node or citation",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Not verified by number or date, and not merely inaccessible in the way the Rosstat domains above are — no source reachable this round (including the Bank of Russia's own document, which names only 'ИПЦ, Росстат' and no specific order) identified this instrument by number or date at all. Searched for; no document found that states it."
+    },
+    {
+      "edge": "ru-resolution-670-equalization-methodology -> its own operative formula text, quoted directly",
+      "source": "ru-resolution-670-equalization-methodology",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The resolution's existence, exact title, original date (22.11.2004) and current-as-amended date (15.12.2025) were confirmed via a ConsultantPlus metadata/title page, but the operative methodology text itself — the actual distribution formula — could not be read. ConsultantPlus's free-tier version restricts this specific document to a limited access schedule ('доступен по расписанию: по рабочим дням с 20-00 до 24-00 ... в выходные и праздничные дни в любое время'), not reachable live within that window this round. No working government-hosted full text was found as an alternative: government.ru's own search function returned stale cached results from a fixed 2012–2017 date window regardless of query, and pravo.gov.ru returned 502 Bad Gateway. Reported here as a genuine access failure, not a stylistic omission — the `ru-resolution-670-equalization-methodology` node's own description states this same gap."
+    },
+    {
+      "edge": "Постановление Правительства РФ № 2038 (15.12.2025), as its own standalone node",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Its existence and date are confirmed only indirectly, via Budget Code Art. 131's own embedded editorial note ('Об особенностях распределения дотаций в 2026 г. см. Постановление Правительства РФ от 15.12.2025 N 2038.') and via the same date appearing on Resolution No. 670's current-amendment metadata and on the Ministry of Finance's 2026-year publication. The instrument's own standalone text was never located this round — not on a .gov.ru host, and no ConsultantPlus, Garant or other mirror page for it specifically was reached — so it could not be confirmed in its own words that it cites Budget Code Art. 131 by number, or read for any content beyond what Art. 131's own citation and the coincidental dates already establish. No node is minted for it this round; the corroborating date-convergence with `ru-minfin-2026-equalization` is instead carried by that report's edge to `ru-resolution-670-equalization-methodology`, whose current redaction already incorporates whatever No. 2038 amended."
+    },
+    {
+      "edge": "Any government-hosted (non-mirror) full text of the codified Budget Code, as the url for ru-budget-code-art131",
+      "source": "ru-budget-code-art131",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "consultant.ru (ConsultantPlus) was the only reachable full copy of Art. 131 this round, hence the third-party-mirror flag on that node. pravo.gov.ru (the bare domain) returned 502 Bad Gateway on every attempt; publication.pravo.gov.ru, a different subdomain, did load its own homepage but its content is JS-rendered and the specific article could not be located through it. docs.cntd.ru failed at the TLS-connect stage. web.archive.org (https) also failed (TLS reset), and the Wayback Machine's availability API, while intermittently reachable, was consistently rate-limited (429) this round. A genuine, multi-domain access gap, recorded rather than papered over with a mirror citation presented as primary."
+    }
+  ]
+}

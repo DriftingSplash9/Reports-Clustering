@@ -1,0 +1,203 @@
+{
+  "_slice": "br-ipca-fpe",
+  "_researched": "2026-08-13",
+  "_status": "NEW 2026-08-13. Brazil's third slice, and the first BRICS-branch file built after the continent/bloc redesign opened a dedicated BRICS (Brazil/Russia/India/China) research effort -- Russia, China and India are being synthesised in parallel sessions and may reference this file's conventions. Closes the scope br-fpm-population.json's own entry 4 deliberately left open (\"Brazilian national accounts, CPI and the FPE (state-level) chain... a Brazilian statistics pass deserves its own session rather than being half-done here\"), taking only the IPCA/INPC price-index pair and the FPE (Fundo de Participação dos Estados) transfer chain -- national accounts (Sistema de Contas Nacionais) remains out of scope for a future session. Six nodes: the two IBGE price indices (br-ipca, br-inpc); the two-instrument legal chain that makes IPCA the Banco Central's inflation-target index (br-decreto-12079-2024, br-resolucao-cmn-5141); and the FPE mechanism itself, an annual TCU Decisão Normativa (br-fpe-dn-tcu, the direct state-level analogue of br-fpm-dn-tcu) plus the statute defining its population-and-inverse-income formula (br-lc-62-1989). Two of this file's edges reach across into br-fpm-population.json (br-fpe-dn-tcu -> br-ibge-estimativas-populacao, br-fpe-dn-tcu -> br-lei-8443), reusing rather than re-minting those nodes.",
+  "_note": "Direct `curl` access to www.ibge.gov.br (deep paths) and portal.tcu.gov.br was blocked by Cloudflare/WAF from this session's environment (403 'Just a moment...' challenge for IBGE; TLS connection reset for TCU), and www.bcb.gov.br/controleinflacao/historicometas and the BCB normativo-lookup page are JS-rendered and return no content to raw curl. For those pages this session used the r.jina.ai read-only rendering proxy to retrieve the live page -- the documents themselves are IBGE's, TCU's and the Banco Central's own government pages, not third-party-hosted mirrors, only reached through a rendering workaround because of the challenge/JS-rendering on direct fetch, the same shape as other branches' TLS/Cloudflare workarounds (e.g. the AF branch's Eswatini `curl --insecure` note). Authenticity was cross-checked against internally consistent current dates in the fetched content (e.g. 'Julho 2026' IPCA results, TCU homepage news dated 12/08/2026, a DN dated 18/03/2026 -- all coherent with the research date of 2026-08-13) and, far more importantly, against documents fetched with plain, unmodified `curl -sL` returning genuine HTTP 200 and real file bytes with no proxy involved at all: every planalto.gov.br statute/decree used below, and two TCU PDFs (DN 215/2025 and the DN 221/2026 exercicio-2027 PDF) downloaded directly and verified as real PDF binaries via pdftotext -- the strongest tier, and the source of every per-state coefficient and formula quotation in br-fpe-dn-tcu and br-lc-62-1989. Every `basis` below is this session's own read of the underlying research.",
+  "reports": [
+    {
+      "id": "br-ipca",
+      "title": "Índice Nacional de Preços ao Consumidor Amplo (IPCA)",
+      "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "IBGE's broad consumer price index, produced since December 1979 and Brazil's headline inflation measure. Its own methodology statement, quoted directly: \"O IPCA tem por objetivo medir a inflação de um conjunto de produtos e serviços comercializados no varejo, referentes ao consumo pessoal das famílias, cujo rendimento varia entre 1 e 40 salários mínimos... Esta faixa de renda foi criada com o objetivo de garantir uma cobertura de 90% das famílias pertencentes às áreas urbanas de cobertura do Sistema Nacional de Índices de Preços ao Consumidor - SNIPC.\" IBGE's own page also states its later adoption as the Banco Central's policy reference: \"Mais tarde, a partir de julho de 1999, o IPCA passou a ser utilizado como índice de preços oficial para referência da política monetária do Banco Central, no contexto do regime de metas de inflação.\" The instrument that actually names IPCA for that purpose is Resolução CMN 5.141/2024, not this IBGE claim alone -- see br-resolucao-cmn-5141. History, also from this page: produced by IBGE since December 1979; briefly Brazil's official indexer under Decreto 91.990 from November 1985 until March 1986. Fetched this session via the r.jina.ai rendering proxy after direct curl returned a 403 Cloudflare challenge on www.ibge.gov.br; the underlying document is IBGE's own product page.",
+      "releases_per_year": 12,
+      "cadence_note": "IBGE's own page states: \"Periodicidade de divulgação: Mensal\".",
+      "last_updated": null,
+      "url": "https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9256-indice-nacional-de-precos-ao-consumidor-amplo.html",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "br-inpc",
+      "title": "Índice Nacional de Preços ao Consumidor (INPC)",
+      "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "IBGE's narrower consumer price index, tracking the purchasing power of wages for lower-income salaried households rather than general inflation. Its own methodology statement, quoted directly: \"O INPC tem por objetivo a correção do poder de compra dos salários, através da mensuração das variações de preços da cesta de consumo da população assalariada com mais baixo rendimento. Esta faixa de renda foi criada com o objetivo de garantir uma cobertura populacional de 50% das famílias cuja pessoa de referência é assalariada e pertencente às áreas urbanas de cobertura do SNIPC.\" And: \"Atualmente, a população-objetivo do INPC abrange as famílias com rendimentos de 1 a 5 salários mínimos, cuja pessoa de referência é assalariada...\" -- against IPCA's 1-40 salários mínimos from any income source and no salaried restriction. Both indices are monthly and produced by IBGE under the same SNIPC (Sistema Nacional de Índices de Preços ao Consumidor). Fetched this session via the r.jina.ai rendering proxy after direct curl returned a 403 Cloudflare challenge on www.ibge.gov.br; the underlying document is IBGE's own product page.",
+      "releases_per_year": 12,
+      "cadence_note": "IBGE's own page states: \"Periodicidade de divulgação: Mensal\".",
+      "last_updated": null,
+      "url": "https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html",
+      "domains": ["inflation", "labour"]
+    },
+    {
+      "id": "br-decreto-12079-2024",
+      "title": "Decreto nº 12.079, de 26 de junho de 2024",
+      "publisher": "Presidência da República",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "Brazil's current decree establishing the inflation-targeting regime, in force since replacing Decreto nº 3.088/1999 (revoked effective 1 January 2025). It does not itself name a price index -- Art. 4º delegates that choice, quoted directly: \"O índice de preços a ser adotado para fins do disposto neste Decreto será escolhido pelo Conselho Monetário Nacional...\" -- the same structure as its 1999 predecessor, whose own Art. 3º read: \"O índice de preços a ser adotado para os fins previstos neste Decreto será escolhido pelo CMN, mediante proposta do Ministro de Estado da Fazenda.\" The index the CMN actually chose under this decree is IPCA, named not here but in Resolução CMN nº 5.141/2024, issued the same day (see br-resolucao-cmn-5141). Fetched this session via plain, unmodified curl (HTTP 200) from planalto.gov.br -- no proxy involved.",
+      "last_updated": null,
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/decreto/d12079.htm",
+      "domains": ["monetary-policy"]
+    },
+    {
+      "id": "br-resolucao-cmn-5141",
+      "title": "Resolução CMN nº 5.141, de 26 de junho de 2024",
+      "publisher": "Conselho Monetário Nacional (CMN) / Banco Central do Brasil",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "The instrument that actually names IPCA as Brazil's inflation-targeting price index, issued the same day as Decreto 12.079/2024, which delegated the choice to the CMN without naming an index itself. Art. 1º, quoted directly: \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o Índice Nacional de Preços ao Consumidor Amplo – IPCA, calculado pelo Instituto Brasileiro de Geografia e Estatística – IBGE.\" The Banco Central's own historical-targets page confirms compliance is measured this way, reporting results as \"Variação do IPCA\" and linking each year's target resolution (CMN Resolutions 2842 through 5141) back to the same normativo repository. Fetched this session via the r.jina.ai rendering proxy: both bcb.gov.br/estabilidadefinanceira/exibenormativo and bcb.gov.br/controleinflacao/historicometas are JS-rendered and return no content to raw curl. The underlying documents are the Banco Central's own normativo pages, not third-party mirrors.",
+      "last_updated": null,
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolução CMN&numero=5141",
+      "domains": ["monetary-policy", "inflation"]
+    },
+    {
+      "id": "br-fpe-dn-tcu",
+      "title": "Decisão Normativa-TCU — coeficientes individuais de participação no Fundo de Participação dos Estados e do Distrito Federal (FPE)",
+      "publisher": "Tribunal de Contas da União (TCU)",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "The annual normative decision fixing every Brazilian state's and the Federal District's individual coefficient in the Fundo de Participação dos Estados, the constitutional transfer under art. 159, I, alínea \"a\" of the Federal Constitution -- a correction from an initially hypothesised art. 159 II, which is in fact a different fund (the IPI-Exportação fund, apportioned by export value, unrelated to population or income). Verified directly against the Constitution's own compiled text: \"a) vinte e um inteiros e cinco décimos por cento ao Fundo de Participação dos Estados e do Distrito Federal; (Vide Lei Complementar nº 62, de 1989)\" under art. 159, I -- FPE and FPM (alínea \"b\") are siblings under the same inciso, not parallel incisos. TCU's authority to calculate the coefficients comes from art. 161, parágrafo único, confirmed a third time verbatim in the DN itself: \"a atribuição que lhe confere o art. 161, parágrafo único, da Constituição Federal\" and \"o constante no art. 159, inciso I, alínea 'a', da Constituição Federal\". Unlike the FPM, the FPE formula includes a per-capita-income term (see br-lc-62-1989); DN 215/2025's own Anexo III (Nota Explicativa da Metodologia) works this through per state, with columns for population, \"renda domiciliar per capita (rdpc)\", inverse rdpc and the resulting coefficient. Anexo I gives the individual result, e.g. Acre 4,241365%, São Paulo 1,519448%, summing to 100%. As with the parallel FPM instrument (br-fpm-dn-tcu, in br-fpm-population.json), the population figure is sourced to the agency but not to a titled release, quoted directly from Anexo III: \"Coluna B: população da UF fornecida pela Fundação Instituto Brasileiro de Geografia e Estatística (IBGE) com data de referência em 1º/7/2024 (art. 102, inciso I, da Lei 8.443, de 16/7/1992)... Coluna F: renda domiciliar per capita (rdpc) da UF fornecida pelo IBGE, relativa ao exercício de 2024... Coluna K: excesso da rdpc... valor de referência – que corresponde a 72% da renda domiciliar per capita nacional (rdpcn)...\". Fetched this session via the r.jina.ai rendering proxy for the TCU coefficients index page (portal.tcu.gov.br returned a TLS reset to direct curl); the DN 215/2025 and DN 221/2026 PDFs themselves were downloaded with plain, unmodified curl (HTTP 200, verified as real PDF binaries via pdftotext) -- the strongest verification tier, no proxy involved.",
+      "releases_per_year": 1,
+      "cadence_note": "One decision per exercise, parallel to the FPM DN series published on the same TCU page. Two dated instances observed this session: DN 215/2025 (19 de março de 2025, for exercício 2026) and DN 221/2026 (18 de março de 2026, for exercício 2027) -- a March cadence, distinct from FPM's observed November pattern in br-fpm-population.json.",
+      "release_schedule": {
+        "kind": "observed-pattern",
+        "entries": [
+          {
+            "from": "2025-03-19",
+            "to": "2025-03-19",
+            "precision": "day",
+            "covers": "DN 215/2025 - coeficientes FPE para exercício 2026",
+            "evidence": "implied"
+          },
+          {
+            "from": "2026-03-18",
+            "to": "2026-03-18",
+            "precision": "day",
+            "covers": "DN 221/2026 - coeficientes FPE para exercício 2027",
+            "evidence": "implied"
+          },
+          {
+            "from": "2027-03-01",
+            "to": "2027-03-31",
+            "precision": "month",
+            "covers": "Expected DN for coeficientes FPE 2028, projected from the two-instance March pattern",
+            "evidence": "implied"
+          }
+        ],
+        "source_url": "https://portal.tcu.gov.br/gestao-financeira-e-transferencias/coeficientes-fpe-e-fpm",
+        "note": "Only two dated instances were confirmed this session (DN 215/2025 and DN 221/2026), both in March -- thinner evidence than the FPM series' multi-year November pattern in br-fpm-population.json, but a real and internally consistent two-point pattern rather than a single date."
+      },
+      "last_updated": null,
+      "url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "br-lc-62-1989",
+      "title": "Lei Complementar nº 62, de 28 de dezembro de 1989 (alterada pela Lei Complementar nº 143, de 17 de julho de 2013)",
+      "publisher": "Congresso Nacional / Presidência da República",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "The statute defining the FPE distribution formula, binding since 1989 and rewritten from 2016 onward by Lei Complementar nº 143/2013. Art. 2º III, quoted directly, defines the population-plus-inverse-income formula used above the statutory floor: \"a parcela que superar o montante especificado no inciso II será distribuída proporcionalmente a coeficientes individuais de participação obtidos a partir da combinação de fatores representativos da população e do inverso da renda domiciliar per capita da entidade beneficiária... a) o fator representativo da população corresponderá à participação relativa da população da entidade beneficiária na população do País, observados os limites superior e inferior de, respectivamente, 0,07... e 0,012...; b) o fator representativo do inverso da renda domiciliar per capita corresponderá à participação relativa do inverso da renda domiciliar per capita da entidade beneficiária na soma dos inversos da renda domiciliar per capita de todas as entidades.\" The same article ties the FPE's own statutory floor to IPCA, quoted directly: \"cada entidade beneficiária receberá valor igual ao que foi distribuído no correspondente decêndio do exercício de 2015, corrigido pela variação acumulada do Índice Nacional de Preços ao Consumidor Amplo (IPCA)... e pelo percentual equivalente a 75% da variação real do Produto Interno Bruto nacional...\" -- directly connecting the FPE mechanism back to IPCA (see br-ipca). Art. 2º § 3º sources the underlying population and income figures generically rather than naming IBGE: \"serão considerados os valores censitários ou as estimativas mais recentes da população e da renda domiciliar per capita publicados pela entidade federal competente\" -- the pre-2013 wording of the companion provision (Lei 8.443/1992 art. 102) did name IBGE explicitly; the current, LC 143/2013-amended text also generalises to \"entidade competente do Poder Executivo federal\". The original 1989 version of this law (superseded for distribution purposes from 2016) set a fixed 85%/15% regional split with an Anexo Único of 27 individual state/DF coefficients based on 1960s-era data; background reporting associates this frozen table with the STF's partial-unconstitutionality ruling in ADI 875/2010, which forced LC 143/2013 -- not independently verified from the STF's own text this session, so treated as historical context only (see _dropped). Fetched this session via plain, unmodified curl (HTTP 200) from planalto.gov.br -- no proxy involved.",
+      "cadence_note": "A statute, amended rather than reissued -- same convention as br-lei-8443 (br-fpm-population.json) and br-lc-101-2000 (br-fiscal-responsibility-law.json).",
+      "last_updated": null,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp62.htm",
+      "domains": ["fiscal-transfers"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "br-resolucao-cmn-5141",
+      "target_report_id": "br-decreto-12079-2024",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY. Decreto 12.079/2024 Art. 4º delegates the index choice without naming one: \"O índice de preços a ser adotado para fins do disposto neste Decreto será escolhido pelo Conselho Monetário Nacional...\" Resolução CMN 5.141/2024, issued the same day, is the instrument that delegation produces -- its own Art. 1º opens \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o [IPCA]\", the same 'nova sistemática' the decree establishes. `cites` rather than `methodology_depends_on`: the decree delegates the choice and fixes no method of its own for how an index is to be selected -- the same reasoning br-fpm-population.json's own basis gives for `br-ibge-estimativas-populacao -> br-lei-8443` (\"the Act compels the publication and fixes its deadline, and supplies no method\").",
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/decreto/d12079.htm"
+    },
+    {
+      "source_report_id": "br-resolucao-cmn-5141",
+      "target_report_id": "br-ipca",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY. Resolução CMN 5.141/2024 Art. 1º: \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o Índice Nacional de Preços ao Consumidor Amplo – IPCA, calculado pelo Instituto Brasileiro de Geografia e Estatística – IBGE.\" The Banco Central's own historical-targets page (bcb.gov.br/controleinflacao/historicometas) confirms this is operative, not merely declaratory: it reports year-by-year compliance as \"Variação do IPCA\" -- the published index figures are the direct input to measuring whether the target was met.",
+      "evidence_url": "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolução CMN&numero=5141"
+    },
+    {
+      "source_report_id": "br-fpe-dn-tcu",
+      "target_report_id": "br-lc-62-1989",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY. DN 215/2025's own preamble grounds the decision in this statute: \"O TRIBUNAL DE CONTAS DA UNIÃO, no uso da atribuição que lhe confere o art. 161, parágrafo único, da Constituição Federal e o art. 1º, inciso VI, da Lei 8.443, de 16 de julho de 1992... e na Lei Complementar 62, de 28 de dezembro de 1989, alterada pela Lei Complementar 143, de 17 de julho de 2013...\" This is genuine methodology, not a bare publication mandate: DN 215/2025's own Anexo III works the calculation using exactly the population-plus-inverse-income-factor structure LC 62/1989 Art. 2º III defines, with the same limits (0,07 upper / 0,012 lower on the population factor) reproduced in the worked example -- distinguishing this edge from a `cites`-typed statutory mandate, the same distinction br-fiscal-responsibility-law.json draws for `br-rreo -> br-lc-101-2000`.",
+      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf"
+    },
+    {
+      "source_report_id": "br-fpe-dn-tcu",
+      "target_report_id": "br-ibge-estimativas-populacao",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY, and a stronger single-document citation than the parallel FPM edge (br-fpm-population.json's own version of this edge is distributed across three documents because no one of them states it alone). DN 215/2025's Anexo III (Nota Explicativa da Metodologia) states the population column's source and reference date in one place: \"Coluna B: população da UF fornecida pela Fundação Instituto Brasileiro de Geografia e Estatística (IBGE) com data de referência em 1º/7/2024 (art. 102, inciso I, da Lei 8.443, de 16/7/1992).\" This is a worked calculation input (Anexo II, Memória de Cálculo), not a background reference -- population is a literal column feeding the coefficient formula.",
+      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf"
+    },
+    {
+      "source_report_id": "br-fpe-dn-tcu",
+      "target_report_id": "br-lei-8443",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY. DN 215/2025's preamble names this statute as its authority alongside the Constitution: \"no uso da atribuição que lhe confere o art. 161, parágrafo único, da Constituição Federal e o art. 1º, inciso VI, da Lei 8.443, de 16 de julho de 1992 (Lei Orgânica do Tribunal de Contas da União)...\" `cites` rather than `methodology_depends_on`: Lei 8.443/1992 grants TCU the competence to fix the coefficients (art. 1º VI) and, separately, obliges the population list's publication (art. 102) -- it supplies authority and a deadline, not the FPE calculation method itself, which comes from LC 62/1989 (see br-fpe-dn-tcu -> br-lc-62-1989). Mirrors br-fpm-population.json's own typing of Lei 8.443 edges.",
+      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf"
+    },
+    {
+      "source_report_id": "br-lc-62-1989",
+      "target_report_id": "br-ipca",
+      "relationship_type": "calculated_from",
+      "basis": "VERIFIED DIRECTLY. LC 62/1989 Art. 2º ties the FPE's own statutory floor amount to a mechanical IPCA-based correction: \"cada entidade beneficiária receberá valor igual ao que foi distribuído no correspondente decêndio do exercício de 2015, corrigido pela variação acumulada do Índice Nacional de Preços ao Consumidor Amplo (IPCA)... e pelo percentual equivalente a 75% da variação real do Produto Interno Bruto nacional...\" This is a stated formula (2015 base value x accumulated IPCA variation x a GDP-growth factor), not a citation for context -- the corrected value is mechanically derived from IPCA's published cumulative variation, the same shape `calculated_from` describes elsewhere in this corpus for escalator/indexation formulas. Directly connects the FPE topic back to the IPCA/INPC topic in this same file.",
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp62.htm"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "br-fpe-dn-tcu -> a titled IBGE release naming its own population and renda domiciliar per capita inputs",
+      "source": "br-fpe-dn-tcu",
+      "target": null,
+      "reason": "no-document",
+      "why": "The FPM pattern repeats at the state level. DN 215/2025's Anexo III names the agency and gives a reference date for both inputs -- \"Coluna B: população da UF fornecida pela ... (IBGE) com data de referência em 1º/7/2024\" and \"Coluna F: renda domiciliar per capita (rdpc) da UF fornecida pelo IBGE, relativa ao exercício de 2024\" -- but never a titled release (no 'Estimativas da População', no named income survey/product). For population, the gap is partly closed by minting the edge to br-ibge-estimativas-populacao (br-fpm-population.json) directly, on the same reasoning that instrument's own methodology note supplies from the producer's side. For renda domiciliar per capita, there is no equivalent: no primary source located this session gives IBGE's per-capita household income product a title or URL, so no node exists to point to at all -- a harder gap than the population one. Enabling statutes use deliberately generic language throughout: LC 62/1989 Art. 2º § 3º says only \"entidade federal competente\", and Lei 8.443/1992 Art. 102 (as amended by LC 143/2013) says \"entidade competente do Poder Executivo federal\" -- neither names IBGE. Only TCU's own implementing DN names the agency, and only by name and reference date, never by titled release."
+    },
+    {
+      "edge": "Decreto nº 3.088/1999 / a 1999 CMN resolution -> IPCA (the resolution that first named IPCA as inflation target)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND. Decreto 3.088/1999 (the predecessor to Decreto 12.079/2024, revoked effective 1 January 2025) was read directly from planalto.gov.br and, like its successor, delegates the index choice to the CMN without naming one (Art. 3º: \"O índice de preços a ser adotado para os fins previstos neste Decreto será escolhido pelo CMN, mediante proposta do Ministro de Estado da Fazenda\"). The specific CMN resolution that first named IPCA under that 1999 decree -- commonly cited elsewhere as Resolução CMN 2.615/1999 -- was not fetched and its number is not independently asserted here. Neither Decreto 3.088/1999 nor its naming resolution is minted as a node for this reason; only the current, verified 2024 decree/resolution pair is in this file."
+    },
+    {
+      "edge": "br-inpc -> a specific statutory use beyond IBGE's own stated purpose (e.g. INSS benefit readjustment, FGTS correction)",
+      "source": "br-inpc",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND. INPC is widely reported elsewhere as the index used to readjust INSS social-security benefits and FGTS balances, but no primary-source law or decree naming INPC for either purpose was located this session. What is verified is only IBGE's own stated purpose for the index -- \"a correção do poder de compra dos salários\" -- which is what br-inpc's description and domains rest on. No downstream benefits/taxation edge is minted from this node."
+    },
+    {
+      "edge": "br-lc-62-1989 -> STF ADI 875/2010 (the ruling that forced LC 143/2013) and the original 1989 Anexo Único's constitutionality",
+      "source": "br-lc-62-1989",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND. LC 62/1989's compiled text on planalto.gov.br lists ADI 875 alongside related ADIs 1.987, 2.727 and 3.243 in its own header, and background reporting associates the frozen, 1960s-data-based 1989 Anexo Único with STF's partial-unconstitutionality ruling that forced Congress to pass LC 143/2013 -- but the ruling's own text was not fetched from stf.jus.br this session, so the claim is recorded in br-lc-62-1989's description as historical context only, not as a documented edge or a separate node."
+    },
+    {
+      "edge": "br-fpe-dn-tcu -> whether the LC 62/1989 Art. 2º III 'excess distribution' mechanism has ever actually triggered at scale",
+      "source": "br-fpe-dn-tcu",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND. LC 62/1989's population-plus-inverse-income formula (Art. 2º III) only applies to \"a parcela que superar o montante especificado no inciso II\" -- the amount exceeding the IPCA/GDP-indexed statutory floor (Art. 2º II). Whether that excess has, in practice, ever applied at scale across a majority of states in a given exercise, versus states typically remaining at the indexed floor, was not verified from any primary fiscal-outcome report this session. DN 215/2025's Anexo I coefficients are the formula's output regardless, so the node and the methodology_depends_on edge to br-lc-62-1989 stand; only the real-world incidence of the excess-distribution branch is unverified."
+    },
+    {
+      "edge": "Art. 159, II of the Federal Constitution as the FPE's constitutional basis",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "A correction recorded because it is the kind of plausible-but-wrong hypothesis this corpus exists to catch. The FPE is Art. 159, I, alínea \"a\" (verified directly against the Constitution's own compiled text at planalto.gov.br, and confirmed a third time verbatim inside TCU's own DN 215/2025 preamble), not Art. 159, II. Art. 159, II is a wholly different fund: \"do produto da arrecadação do imposto sobre produtos industrializados... 10%... aos Estados e ao Distrito Federal, proporcionalmente ao valor das respectivas exportações de produtos industrializados\" -- the IPI-Exportação fund (sometimes called FPEx), apportioned by export value and unrelated to population or income. This correction is folded into br-fpe-dn-tcu's own description; recorded here separately so a future BRICS-branch session does not re-introduce the wrong citation."
+    }
+  ]
+}

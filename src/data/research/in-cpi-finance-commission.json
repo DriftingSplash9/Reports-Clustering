@@ -1,0 +1,133 @@
+{
+  "_slice": "in-cpi-finance-commission",
+  "_researched": "2026-08-13",
+  "_status": "NEW 2026-08-13. India's opening branch — zero prior corpus presence, filling the `IN` (magenta) colour family reserved unstaffed since the continent/country redesign (see palette.ts, COUNTRY_FAMILY comment). Two chains, deliberately: (1) India's official CPI (MoSPI/NSO, Base 2024=100) and the RBI Act 1934's statutory inflation-targeting mechanism (Section 45ZA) that names the CPI as its target metric; (2) Article 280 of the Constitution and the Finance Commission it establishes, with both the just-reported Sixteenth Finance Commission (2026-31) and the outgoing Fifteenth Finance Commission (2021-26) built so their vertical- and horizontal-devolution formulas can be compared directly. Five reports, zero dependency edges — deliberately, not for lack of trying. Narrower than the research supports on raw quote count, because none of this round's plausible-looking connections cleared the evidence bar for a minted edge this session: the specific Gazette notification fixing the RBI's numeric inflation target and naming \"CPI (Combined)\" was CAPTCHA-blocked (egazette.gov.in) both directly and via the RBI's own bot-protected PDF server, so Section 45ZA is minted for what its own text says (a target is determined and gazetted) and not for the number, with no edge into `in-mospi-cpi`; FC16's own report, searched directly for \"Consumer Price Index\"/\"CPI\"/\"MoSPI\", never cites CPI or an inflation index by name anywhere, despite citing MoSPI repeatedly for GDP/GSDP and consumption-survey data — recorded as a `_dropped` negative finding rather than assumed silently; and the obvious-looking FC16-to-Article-280 relationship (the Commission is textually and definitionally the body Article 280 creates) was not minted either, because this round did not confirm a verbatim citation to \"Article 280\" inside the FC16 report's own text, only in the Constitution itself — a lead, not a finding, and recorded as such. See `_dropped` for this and five other genuine access failures/gaps this round could not close.",
+  "_note": "Researched this session against the India opening brief. Access facts worth recording: mospi.gov.in and rbi.org.in are JS single-page apps that a live browser was needed to render before exact document URLs could be pulled from network requests; rbidocs.rbi.org.in (RBI's own PDF file server) sits behind TSPD bot-detection and returns a JS-challenge page to a direct fetch rather than the PDF, confirmed on repeated attempts — never fabricated from a challenge page — and a Google-Docs-viewer route surfaced an actual CAPTCHA, not attempted/solved per policy; the RBI Act's operative text was obtained instead from indiacode.nic.in (Ministry of Law and Justice), a non-bot-protected mirror. mospi.gov.in and fincomindia.nic.in's own file servers are not bot-protected — PDFs downloaded and verified as genuine (file/pdftotext), not fetched-and-guessed. Every quote below is this session's own read, transcribed verbatim from the research file.",
+  "reports": [
+    {
+      "id": "in-mospi-cpi",
+      "title": "Consumer Price Index (CPI), Base: 2024=100",
+      "publisher": "Government of India, Ministry of Statistics and Programme Implementation (MoSPI), National Statistics Office (NSO)",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "India's official retail price index, rebased from 2012=100 to 2024=100 (confirmed live on MoSPI's own product dashboard and in the July 2026 press release below). MoSPI's own Meta Data page: \"Consumer Price Index (CPI) is designed to measure the changes over time in the general level of retail prices of selected goods and services consumed by households. ... The CPI (Base: 2024=100) series is aligned with the United Nations' Classification of Individual Consumption According to Purpose (COICOP) 2018, comprising 12 Divisions, 43 Groups, 92 Classes and 162 Subclasses. The CPI and CFPI are compiled at the All India level for the Rural, Urban and Combined sectors.\" The July 2026 press release, dated 12 August 2026, gives the headline print: \"Year-on-year inflation rate based on All India Consumer Price Index (CPI) with base year 2024 for the month of July, 2026 over July, 2025 is 4.45%(Provisional).\" It also states the survey's field methodology directly: \"Response Rate- Real time price data are collected from selected 1407 urban Markets (including online markets) and 1465 villages covering all States/UTs through personal visits by field staff of Field Operations Division of NSO, MoSPI on a weekly roster.\" And it confirms the next release explicitly: \"CPI for August 2026 will be released on 14th September, 2026 (Monday) or the next working day in case of 14th being a holiday.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, with the exact next release date stated in the release itself: CPI for August 2026 due 14 September 2026 (or the next working day if the 14th is a holiday).",
+      "last_updated": "2026-08-12",
+      "url": "https://www.mospi.gov.in/uploads/latestreleasesfiles/1786531114988-Press_Release_CPI_July_2026.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "in-rbi-act-45za",
+      "title": "The Reserve Bank of India Act, 1934 (as amended) — Chapter III-F, \"Monetary Policy\", Section 45ZA \"Inflation target\"",
+      "publisher": "Government of India, Ministry of Law and Justice (Legislative Department)",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The statutory mechanism establishing India's inflation-targeting framework — the legal machinery, not the notified number. Verbatim, from the Ministry of Law and Justice's own consolidated text (indiacode.nic.in): \"CHAPTER III F MONETARY POLICY ... 45ZA. Inflation target.—(1) The Central Government shall, in consultation with the Bank, determine the inflation target in terms of the Consumer Price Index, once in every five years. (2) The Central Government shall, upon such determination, notify the inflation target in the Official Gazette.\" — footnoted in the consolidated text as \"Ins. by Act 28 of 2016, s. 222 (w.e.f. 27-6-2016)\", so the provision itself is dateable to the 2016 amendment. Deliberately scoped no further than this: the section's own text obliges a target to be set \"in terms of the Consumer Price Index\" and gazetted every five years, but does not itself state a number or name a specific CPI series (e.g. \"CPI (Combined)\") — the actual notification carrying those specifics was not accessible this round (see `_dropped`), so this node and description stop at what Section 45ZA itself says.",
+      "last_updated": null,
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/9176/1/a1934-2reserve.pdf",
+      "domains": [
+        "monetary-policy",
+        "inflation"
+      ]
+    },
+    {
+      "id": "in-constitution-art280",
+      "title": "Article 280, Constitution of India — \"Finance Commission\"",
+      "publisher": "Government of India, Ministry of Law and Justice (Legislative Department)",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The constitutional basis for India's Finance Commission. Verbatim, from the Ministry of Law and Justice's consolidated text (cdnbbsr.s3waas.gov.in, hosted for legislative.gov.in): \"280. Finance Commission.—(1) The President shall, within two years from the commencement of this Constitution and thereafter at the expiration of every fifth year or at such earlier time as the President considers necessary, by order constitute a Finance Commission which shall consist of a Chairman and four other members to be appointed by the President. ... (3) It shall be the duty of the Commission to make recommendations to the President as to— (a) the distribution between the Union and the States of the net proceeds of taxes which are to be, or may be, divided between them under this Chapter and the allocation between the States of the respective shares of such proceeds; (b) the principles which should govern the grants-in-aid of the revenues of the States out of the Consolidated Fund of India; ...\" This is the Union-to-State devolution mechanism — India's Finance Commission is explicitly a Union/State instrument, not a municipal one.",
+      "last_updated": null,
+      "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2024/07/20240716890312078.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "in-fc16-report",
+      "title": "Sixteenth Finance Commission, Report for 2026-31, Volume I — Main Report",
+      "publisher": "Sixteenth Finance Commission (constitutional body under Article 280), Government of India",
+      "country": "IN",
+      "jurisdiction_level": "institutional",
+      "region": "India",
+      "description": "The most recent Finance Commission report, superseding the Fifteenth as the operative award. Vertical devolution, verbatim (Summary of Recommendations, para 7.68): \"3. We recommend that the States' share in the divisible pool is retained at 41 per cent.\" — the same headline share as the outgoing Fifteenth Finance Commission (see `in-fc15-report`), a real continuity fact rather than a coincidence of rounding. Horizontal devolution formula, verbatim (Table 8.8): \"Table 8.8 Formula for Horizontal Devolution — Criteria / Weight (percentage): Population (2011) 17.5; Demographic Performance 10; Area 10; Forest 10; Per Capita GSDP Distance 42.5; Contribution to GDP 10; Total 100.\" On its population criterion the report names its source directly: \"8.15 We next provide an evaluation of the criteria...\" / \"we rely on the 2011 Census figures. In this respect, we have fully transitioned from the 1971 Census population to the 2011 Census population data.\" — i.e. the Population (2011) criterion is sourced to the Census of India 2011 (Registrar General & Census Commissioner), a different producer from MoSPI, which the report cites elsewhere (GDP/GSDP and household consumption survey data) but not for population. No separate node exists for the Census of India 2011 this round — no citable URL for the census itself was located in this research pass, only FC16's own textual reliance on it — so this paragraph is the record of that dependency until a Census node can be built with its own evidence (see `_dropped`). Searched directly for \"Consumer Price Index\", \"CPI\" and \"MoSPI\" across the full Volume I text: the report cites MoSPI repeatedly for GDP/GSDP and consumption-survey data but never for CPI or any inflation index — a genuine negative finding (see `_dropped`), not an oversight in this transcription.",
+      "last_updated": null,
+      "url": "https://fincomindia.nic.in/asset/doc/commission-reports/16th-FC/reports/Vol1-Main-Report.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "in-fc15-report",
+      "title": "Fifteenth Finance Commission, Report for 2021-26, Volume I",
+      "publisher": "Fifteenth Finance Commission (constitutional body under Article 280), Government of India",
+      "country": "IN",
+      "jurisdiction_level": "institutional",
+      "region": "India",
+      "description": "The outgoing Finance Commission award, superseded by the Sixteenth for the 2026-31 period (see `in-fc16-report`). Vertical devolution, verbatim (para 6.29): \"18. We recommend retaining the vertical share of 41 per cent of the divisible pool of taxes for the States during the award period of this Commission.\" — the identical 41 per cent headline figure the Sixteenth Commission later retained. Horizontal devolution formula, verbatim (Table 6.4): \"Table 6.4: Criteria and Weights assigned for Horizontal Devolution — Population 15.0; Area 15.0; Forest and ecology 10.0; Income distance 45.0; Tax and fiscal efforts 2.5; Demographic performance 12.5\" (Total 100.0). A materially different horizontal formula from FC16's Table 8.8 — most visibly, \"Income distance\" (45%) here versus \"Per Capita GSDP Distance\" (42.5%) there, and a \"Tax and fiscal efforts\" criterion (2.5%) that FC16's table does not carry at all. This research round found no explicit passage in FC16's own text cross-referencing FC15's formula or award period by name, so no `cites` edge is drawn between the two reports this session — the comparison above is recorded as prose only (see `_dropped`).",
+      "last_updated": null,
+      "url": "https://fincomindia.nic.in/asset/doc/commission-reports/15th-FC/digitized/15th%20FC%20-%20Vol%20I%20-%20Digitised.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "in-rbi-act-45za -> the specific Government of India Gazette notification fixing the inflation target at \"four per cent\" and naming \"CPI (Combined)\"",
+      "source": "in-rbi-act-45za",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Section 45ZA obliges the Central Government to notify the inflation target in the Official Gazette, but the actual notification text was not retrievable this round. Every attempt hit an access wall: RBI's own PDF file server (rbidocs.rbi.org.in) is behind TSPD bot-detection and returned a JS-challenge page rather than the document on repeated attempts (not fabricated from the challenge page); a Google-Docs-viewer route surfaced an actual CAPTCHA, not attempted/solved per policy; and RBI's live Monetary Policy Statement HTML dated 5 August 2026 (https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63287) confirms CPI is the operative gauge (\"Headline CPI inflation edged up above the target...\") but does not restate the numeric target or \"CPI (Combined)\" wording. The notification itself is very likely on egazette.gov.in, whose document search is CAPTCHA-gated and was not attempted, per policy against solving CAPTCHAs. Genuine gap for a future round, not a fabricated node — the mechanism is verified (`in-rbi-act-45za`), the specific notified number and named series are not."
+    },
+    {
+      "edge": "President's Order under Article 281 formally laying/accepting the Fifteenth or Sixteenth Finance Commission's recommendations",
+      "source": "in-constitution-art280",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Not attempted this round: the egazette.gov.in document search that would host this Order is CAPTCHA-gated, and per policy CAPTCHAs are not solved. A real, named document (the Article 281 Order, or Explanatory Memorandum as to the action taken on FC15/FC16's recommendations) that would close the loop between a Finance Commission report and its formal acceptance, left for a future research pass."
+    },
+    {
+      "edge": "in-fc16-report -> a specific MoSPI GSDP publication underlying the 42.5% \"Per Capita GSDP Distance\" criterion",
+      "source": "in-fc16-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "FC16's Table 8.8 names its largest single criterion \"Per Capita GSDP Distance\" (42.5%, the largest weight in the whole formula), and the report cites MoSPI generally elsewhere for GDP/GSDP figures, but this research pass did not trace the GSDP figures behind this specific criterion to one named, titled MoSPI dataset or publication (as opposed to the agency in general). Searched but not located this round -- the evidence standard doing its job rather than a document simply not existing."
+    },
+    {
+      "edge": "in-fc16-report -> in-mospi-cpi (or any inflation index)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "A genuine negative finding, not an oversight. The full text of the Sixteenth Finance Commission's Volume I was searched directly for \"Consumer Price Index\", \"CPI\" and \"MoSPI\": the report cites MoSPI repeatedly for GDP/GSDP and household consumption-survey data, but does not cite CPI or any inflation index by name anywhere in the report. Recorded here so a future session does not re-search for the same missing citation."
+    },
+    {
+      "edge": "in-fc16-report -> in-constitution-art280",
+      "source": "in-fc16-report",
+      "target": "in-constitution-art280",
+      "reason": "deferred",
+      "why": "The relationship is real on its face -- the Sixteenth Finance Commission is definitionally the body Article 280 orders the President to constitute, and its Summary of Recommendations (para 7.68 vertical share; Table 8.8 horizontal formula) is exactly the output Article 280(3)(a)-(b) calls for -- but this research pass did not locate a verbatim passage inside FC16's own Volume I text that names \"Article 280\" by number (as, for comparison, the AU corpus's `au-vlggc-annual-allocation-report -> au-lgfa-act-1995` edge rests on the dependent report's own line \"in accordance with Section 17 of the Victorian Local Government Grants Commission Act 1976\"). Not minted this round for want of that in-document citation; a future pass that reads FC16's opening/mandate chapter (which very likely names Article 280 directly) can close this with a `cites` edge."
+    },
+    {
+      "edge": "in-fc16-report -> in-fc15-report",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "FC16 and FC15 both recommend a 41 per cent vertical share of the divisible pool, and both were built with their own independently-quoted horizontal-devolution tables (FC16 Table 8.8 vs FC15 Table 6.4), which differ materially in criteria and weights (e.g. FC16's \"Per Capita GSDP Distance\" 42.5% vs FC15's \"Income distance\" 45%; FC15 alone carries a \"Tax and fiscal efforts\" criterion). This research pass found no explicit passage in FC16's own text naming or cross-referencing FC15's report, award period, or formula, so no `cites` edge is minted between the two reports -- the comparison is recorded in prose in both reports' own descriptions instead. A lead for a future pass that reads FC16's full text for an explicit backward reference (e.g. in its chapter reviewing past Commissions' approaches), which this round did not attempt to exhaust."
+    },
+    {
+      "edge": "in-fc16-report -> Census of India 2011 (as its own node)",
+      "source": "in-fc16-report",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "FC16's own text directly names its population-data source: \"we rely on the 2011 Census figures. In this respect, we have fully transitioned from the 1971 Census population to the 2011 Census population data.\" The relationship itself is documented and strong -- as strong as any citation in this branch -- but no separate report node was built for the Census of India 2011 this round because this research pass did not locate a citable URL for the census release itself (only FC16's own reliance on it, quoted above and in `in-fc16-report`'s description). A future pass that finds the Registrar General & Census Commissioner's own published Census 2011 release can mint `in-census-2011` and wire a `uses_data_from` or `cites` edge from `in-fc16-report` directly off this quote."
+    }
+  ]
+}

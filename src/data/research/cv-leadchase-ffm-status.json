@@ -1,0 +1,46 @@
+{
+  "_meta": "AF lead-chase round, 2026-08-13 — follow-up to AF/G.23's cv-cabo-verde municipal-tier synthesis. Task: resolve the open question left by cv-lei-financas-locais-79-2005's description (governo.cv, June 2025) of whether Cabo Verde's Fundo de Financiamento dos Municípios (FFM) rate had been raised from 10% to 15% per a 2019 draft proposal. RESOLVED: still 10%, not raised. Two primary Boletim Oficial instruments were located: (1) Lei n.º 52/X/2025, de 17 de abril — the only law amending Lei n.º 79/VI/2005 since the corpus baseline, and it does not touch the FFM rate (amends only Article 6, an unrelated fee-charging provision) — judged too narrow to warrant a standalone report node and instead cited by URL directly within cv-lei-financas-locais-79-2005's updated description (see _dropped entry below for the reasoning). (2) Lei n.º 69/X/2025, de 31 de dezembro (OE2026, the enacted FY2026 state budget) — a genuinely new, independently citable national budget document, minted below as cv-oe2026-budget with a cites edge to cv-lei-financas-locais-79-2005. This file also documents (via a dependency-free note, since no new edge was created) that the same research pass re-confirmed, with a fuller quote, that both pending municipal-finance revision instruments flagged by cv-g23-municipal.json remain unenacted as of the most recent primary statement located (governo.cv, 12 June 2025) — the fuller quote and reason-code change were applied directly to cv-g23-municipal.json rather than duplicated here.",
+  "reports": [
+    {
+      "id": "cv-oe2026-budget",
+      "title": "Lei n.º 69/X/2025, de 31 de dezembro — Orçamento do Estado para 2026 (OE2026), Artigo 13.º (Fundo de Financiamento dos Municípios)",
+      "publisher": "Assembleia Nacional de Cabo Verde",
+      "country": "CV",
+      "jurisdiction_level": "federal",
+      "region": "Cabo Verde",
+      "description": "Cabo Verde's enacted FY2026 state budget law, published as a 1.º Suplemento to the Boletim Oficial (I Série, n.º 133, 31-12-2025). Chapter V (\"Autarquias Locais\"), Article 13.º, \"Fundo de Financiamento dos Municípios\": \"O montante do Fundo de Financiamento dos Municípios (FFM) é fixado em 5.387.079.168$00 CVE... para o ano de 2026, distribuído conforme constante do Mapa X, anexo à presente lei.\" [The FFM amount is fixed at 5,387,079,168 CVE for 2026, distributed as per Map X annexed to this law.] Consistent with — but does not itself restate — the 10%-of-tax-revenue FFM formula set by Lei n.º 79/VI/2005 Article 10 §3 (see cv-lei-financas-locais-79-2005); Cabo Verdean budget laws follow the standard practice of fixing the fund at an absolute escudo amount each year rather than reciting the underlying percentage. The ~5.39 billion CVE figure lines up with Vice-Prime Minister/Minister of Finance Olavo Correia's own June 2025 projection (governo.cv) that the FFM would \"ultrapassar[á] os 5 milhões de contos em 2026\" [surpass 5 million contos in 2026] — 5 million contos = 5 billion CVE, so the enacted figure is squarely in the range the Minister was already projecting under continued 10% math, not a jump consistent with a 15% rate (which would imply a materially larger figure). Per-município distribution not independently verified this round (Mapa X annex not fetched — flagged for a future round if a per-município breakdown is needed; see cv-g23-municipal.json's existing unresolved per-município _dropped entry, which this does not supersede).",
+      "cadence_note": "Annual state budget law; this is the FY2026 instalment. A recurring series could be modelled with releases_per_year: 1 in a future round if prior/subsequent years' OE laws are minted, but left unset here since only this one year's law has been located.",
+      "last_updated": null,
+      "url": "https://boe.incv.cv/Bulletins/DownloadAct?id=89137",
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cv-oe2026-budget",
+      "target_report_id": "cv-lei-financas-locais-79-2005",
+      "relationship_type": "cites",
+      "basis": "OE2026 Article 13.º restates and funds the Fundo de Financiamento dos Municípios (FFM) that Lei n.º 79/VI/2005 Article 10 established and formula-defines (10% of certain state tax revenue, penultimate-year lookback); the budget law names the fund by its statutory acronym and fixes its annual amount under that pre-existing legal framework, without re-legislating the formula itself.",
+      "evidence_url": "https://boe.incv.cv/Bulletins/DownloadAct?id=89137"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cv-lei-financas-locais-79-2005 -> lei-52-x-2025 (no standalone node minted)",
+      "source": "cv-lei-financas-locais-79-2005",
+      "target": null,
+      "reason": "note",
+      "why": "Lei n.º 52/X/2025, de 17 de abril (Boletim Oficial I Série n.º 30, 17-04-2025; https://boe.incv.cv/Bulletins/DownloadAct?id=84886) is the only law located that amends Lei n.º 79/VI/2005 since the corpus baseline, and its full 18-page text was checked end-to-end for any mention of \"FFM\" or \"Fundo de Financiamento dos Municípios\" — none found. It amends only Article 6 (adding a municipal fee-charging exemption for electricity distributors that now pay a separate \"renda especial\") and revokes an unrelated law, Lei n.º 24/VIII/2013. Judged too narrow in substantive content to warrant a standalone report node (unlike cv-oe2026-budget, which independently states a citable national budget figure); instead cited directly by URL within cv-lei-financas-locais-79-2005's updated description as the evidentiary basis for confirming the FFM rate is unchanged at 10%. Recorded here as a note only since no report node or dependency edge was created for it."
+    },
+    {
+      "edge": "cv-lei-financas-locais-79-2005 -> pending revision instruments (still unenacted, confirmed via governo.cv 12-06-2025)",
+      "source": "cv-lei-financas-locais-79-2005",
+      "target": null,
+      "reason": "note",
+      "why": "This round re-fetched and re-read the same governo.cv, 12 June 2025 article already cited by cv-g23-municipal.json's deferred entry, this time capturing the fuller sentence: \"Para o próximo ciclo, Olavo Correia defendeu que 'é urgente aprovar a Lei de Base do Orçamento Municipal, o novo Regime Financeiro dos Municípios e adotar o Índice de Coesão Territorial'\" — i.e. the Minister names BOTH the 'Lei de Base do Orçamento Municipal' and the 'novo Regime Financeiro dos Municípios' together, in the present/future-obligation tense ('é urgente aprovar'), directly confirming (not merely implying, as the AF/G.23 entry had to infer from a partial quote) that neither had been enacted as of that date. No enactment of either was located in the 2025-2026 window searched this round, but that sweep of the Boletim Oficial was not exhaustive, so this remains a 'confirmed not yet enacted as of the last-checked date' finding rather than a permanently closed question. The fuller quote and an updated reason code were applied directly to cv-g23-municipal.json's existing deferred entry rather than duplicated as a new entry here."
+    }
+  ]
+}

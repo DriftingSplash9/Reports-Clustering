@@ -215,6 +215,19 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // financing. See `src/data/research/ng-*.json`.
   NG: 'AFR',
 
+  // Russia — the branch's first country, opened 2026-08-13
+  // (`src/data/research/ru-cpi-equalization.json`). Filed to `ASIA`, the
+  // reserved-unstaffed catch-all family, rather than to `CN` — `CN` is
+  // literally China's own code, reserved for China itself, and doubling
+  // Russia up under it would repeat the exact CA/US-merge mistake this
+  // palette's own comments warn against. The Bank of Russia's monetary-policy
+  // guidelines (naming Rosstat's ИПЦ as the inflation-target measure) and the
+  // statutory/data chain behind the дотации на выравнивание бюджетной
+  // обеспеченности (regional fiscal-equalization grants) are the opening
+  // nodes; Rosstat's own domains were unreachable this round, so no
+  // Rosstat-hosted node exists yet.
+  RU: 'ASIA',
+
   // **Tanzania added 2026-08-10** (AF branch G.6, following the G.5 hand-off's
   // priority 1) -- the last of the seven countries in `country afrikans.docx`
   // to be researched. Its NCPI methodology (geometric mean / Lowe index,
@@ -455,6 +468,22 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // decided on one IBGE population figure. The rest of the continent is
   // scouted and unbuilt; see `research-input/Grok-Research-Brief-XI.md`.
   BR: 'SA',
+
+  // **`CN` staffed for the first time, 2026-08-13.** Reserved and unstaffed
+  // since the continent redesign, opened by the CPI/fiscal-transfers slice:
+  // the NBS's monthly CPI release, the 2026 Government Work Report's CPI
+  // target, and the annual Budget Report's central-to-local transfer-payment
+  // figures. See `src/data/research/cn-cpi-transfers.json`.
+  CN: 'CN',
+
+  // **`IN` staffed for the first time, 2026-08-13.** Reserved and unstaffed
+  // since the continent redesign, opened by the CPI/Finance Commission
+  // slice: MoSPI/NSO's Consumer Price Index (Base 2024=100), the RBI Act
+  // 1934's Section 45ZA inflation-targeting mechanism, Article 280 of the
+  // Constitution, and the Sixteenth and Fifteenth Finance Commissions'
+  // vertical- and horizontal-devolution formulas. See
+  // `src/data/research/in-cpi-finance-commission.json`.
+  IN: 'IN',
 }
 
 /**
@@ -1056,6 +1085,9 @@ export const COUNTRY_LABEL: Record<string, string> = {
   // (see UNWIRED in scripts/gen-slices.ts). Named ahead of wiring so the day
   // they load, nothing shows a bare code.
   BF: 'Burkina Faso', TG: 'Togo', GA: 'Gabon', TD: 'Chad',
+
+  // Russia, added 2026-08-13 alongside its first COUNTRY_FAMILY entry.
+  RU: 'Russia',
 }
 
 export function countryLabelFor(country: Country): string {
