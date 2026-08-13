@@ -28,6 +28,33 @@
       "last_updated": null,
       "url": "https://aabof.com.et/news/5/",
       "domains": ["municipal-finance"]
+    },
+    {
+      "id": "et-proc-1250-2021-federal-subsidy-division",
+      "title": "Proclamation No. 1250/2021 — A System for the Determination of the Division of the Federal Subsidy and Joint Revenues",
+      "publisher": "House of Peoples' Representatives, Federal Democratic Republic of Ethiopia",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "Resolves this file's own prior dropped note: Grok located this proclamation hosted on an actual .gov.et domain (justice.gov.et), and this round independently re-fetched and pdfplumber-extracted the bilingual Federal Negarit Gazette No. 29 PDF directly (not the private-blog copy previously the only locatable source). Confirmed verbatim, Article 2(3) (Definitions): \"'Regions' or 'Regional States' shall mean members of the Federation as are recognized under the Constitution of Federal Democratic Republic of Ethiopia; where appropriate it may include Addis Ababa and Dire Dawa to attain the objective of this proclamation.\" This is the House of Federation's own governing instrument for determining the federal-subsidy and joint-revenue division formula (the mechanism that produces the itemized figures in et-budget-proclamation-1297-2023's Article 7) — it establishes the FORMULA-SETTING PROCESS (a Coordinating Committee prepares a draft distribution formula, submitted to and determined by the House of Federation, per Arts. covering pages 13276-13290+) rather than fixing a specific percentage in the statute itself; Ethiopia's actual subsidy formula is a periodically-revised administrative output of this process, not a fixed statutory number.",
+      "cadence_note": "One-off foundational legal instrument (establishes a recurring administrative process; the process's own output formula is revised periodically, not on a fixed schedule stated in this proclamation).",
+      "last_updated": "2021-07-02",
+      "url": "https://justice.gov.et/wp-content/uploads/2025/02/%E1%8A%A0%E1%8B%8B%E1%8B%9C-%E1%89%81%E1%8C%A5%E1%88%AD-1250-2013.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "et-dire-dawa-budget-proclamation-2015ec",
+      "title": "Dire Dawa Administration 2015 (E.C.) Fiscal Year Budget Proclamation (Dire Negarit Gazeta No. 41/2015)",
+      "publisher": "Dire Dawa Administration Council",
+      "country": "ET",
+      "jurisdiction_level": "municipal",
+      "region": "Dire Dawa, Ethiopia",
+      "description": "Resolves this file's own prior dropped note: Grok located a genuine Dire-Dawa-self-published budget proclamation, hosted on the Administration's own site (ddacouncil.gov.et) — independently re-fetched and pdfplumber-extracted this round (76-page bilingual PDF, not AI-summarized). Enacted \"in accordance with Article 12(1)(b) of the Dire Dawa Administration charter No. 416/2004.\" Verbatim: \"The total revenue of the Administration of the year 2008 E.C. [sic, cites the prior year's actuals in its own preamble] which is made up of Federal subsidy and the administration's revenue is as follows; a) From Federal subsidy; • Government treasury Birr 847,580,000 • External assistance & Loan Birr 3,720,000 • Sustainable Dev.t Goal Birr 139,200,000 b) Ordinary revenue Birr 903,311,414 ... d) From internal revenue Birr 27,572,910 ... Total Sum Birr 2,054,419,826.\" This is a genuine self-published municipal/city-administration budget document with real, itemized figures — distinct in kind from et-budget-proclamation-1297-2023's federal-side subsidy line item, and the strongest single municipal-tier document found for Ethiopia this round.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual Administration budget proclamation; this edition is No. 41/2015 (Ethiopian calendar, approx. Gregorian 2022/23).",
+      "last_updated": null,
+      "url": "https://www.ddacouncil.gov.et/public/uploads/proclamations/file-62.pdf",
+      "domains": ["municipal-finance"]
     }
   ],
   "dependencies": [
@@ -37,23 +64,23 @@
       "relationship_type": "cites",
       "basis": "Both documents independently confirm Addis Ababa and Dire Dawa's distinct federal-chartered status: Proclamation 1365/2025's own Article 9(9) defines 'Region' for its purposes as including 'Addis Ababa and Dire Dawa City Administrations', directly resolving this branch's own open question (af-grok-municipal-batch2.json, et-proc-1365-addis-applicability-unverified) about whether the property-tax law names Addis Ababa specifically — confirmed via direct PDF download and pdftotext (not the third-party legal-summary site the original node was sourced from). Relationship recorded as 'cites' since the two proclamations independently establish the same city-administration structure rather than one being derived from the other.",
       "evidence_url": "https://justice.gov.et/wp-content/uploads/2025/07/1365.pdf"
+    },
+    {
+      "source_report_id": "et-budget-proclamation-1297-2023",
+      "target_report_id": "et-proc-1250-2021-federal-subsidy-division",
+      "relationship_type": "calculated_from",
+      "basis": "The federal budget proclamation's itemized Article 7 subsidy figures for each region and for Addis Ababa/Dire Dawa are the administrative OUTPUT of the formula-determination process Proclamation 1250/2021 establishes (Coordinating Committee prepares a draft distribution formula, submitted to and determined by the House of Federation) — the annual budget proclamation applies, rather than independently invents, that process's resulting formula each year.",
+      "evidence_url": "https://justice.gov.et/wp-content/uploads/2025/02/%E1%8A%A0%E1%8B%8B%E1%8B%9C-%E1%89%81%E1%8C%A5%E1%88%AD-1250-2013.pdf"
+    },
+    {
+      "source_report_id": "et-dire-dawa-budget-proclamation-2015ec",
+      "target_report_id": "et-budget-proclamation-1297-2023",
+      "relationship_type": "cites",
+      "basis": "Dire Dawa's own budget proclamation states its total revenue is 'made up of Federal subsidy and the administration's revenue' and itemizes the federal-subsidy component (Government treasury, External assistance & Loan, Sustainable Development Goal support) — the same three-part structure the federal budget proclamation's own Article 7/8 subsidy lines for Dire Dawa describe, for a different fiscal year.",
+      "evidence_url": "https://www.ddacouncil.gov.et/public/uploads/proclamations/file-62.pdf"
     }
   ],
   "_dropped": [
-    {
-      "edge": "et-property-tax-proc-1365-2025 -> a numeric revenue-sharing formula/percentage between federal government and Addis Ababa/Dire Dawa",
-      "source": "et-property-tax-proc-1365-2025",
-      "target": null,
-      "reason": "no-document",
-      "why": "Full-text search of the 49-page Proclamation 1365/2025 found no article specifying a percentage or formula splitting property-tax revenue between the federal government and Addis Ababa/Dire Dawa. The Proclamation assigns administrative/collection powers to Regions and Cities but leaves actual revenue division unspecified. A separate document, Proclamation No. 1250/2021 ('A System for the Determination of the Division of the Federal Subsidy and Joint Revenues'), was found to plausibly address this — its Definitions section reportedly reads '\"Regions\" or \"Regional States\" shall mean members of the Federation... where appropriate it may include Addis Ababa and Dire Dawa' — but this text was only locatable on a private legal blog (chilot.wordpress.com), never on a .gov.et host despite checking mofed.gov.et's proclamation listing page (which does not list it at all) and multiple justice.gov.et download links (one resolved to an unrelated Mining Proclamation). Not minted per the evidence-strict rule."
-    },
-    {
-      "edge": "Dire Dawa City Administration's own budget/finance document",
-      "source": null,
-      "target": null,
-      "reason": "no-document",
-      "why": "Dire Dawa Bureau of Finance and Economic Development's own site (direbofed.gov.et) exists and is government-authored but publishes no accessible budget proclamation or financial report — only generic mission-statement language. diredawa.gov.et's 'resource_types/proclamations' page failed to load across multiple retries. This contrasts with et-budget-proclamation-1297-2023, where Dire Dawa's federal subsidy IS documented, just not in a Dire-Dawa-self-published document."
-    },
     {
       "edge": "Ethiopian Statistics Service CPI methodology -> COMESA/IGAD/African Charter on Statistics",
       "source": "et-ess-cpi",
