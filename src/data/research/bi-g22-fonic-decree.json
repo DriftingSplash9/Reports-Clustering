@@ -1,0 +1,80 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.22 population-priority push, 2026-08-13. Transcription-only pass (no new web research performed) of a prior agent's verified findings on Burundi's FONIC (Fonds National d'Investissement Communal) reorganization decree, which mandates per-commune investment reporting; also records the round's genuine NOT-FOUND items and an explicitly-rejected edge candidate to the existing bi-loi-1-16-2015-transfert-communes node.",
+  "reports": [
+    {
+      "id": "bi-fonic-decret-2026-reorganisation",
+      "title": "Décret n°100/097 du 30 juillet 2026 portant modification du Décret n°100/117 du 21 avril 2021 portant réorganisation du Fonds National d'Investissement Communal « FONIC »",
+      "publisher": "Présidence de la République du Burundi",
+      "country": "BI",
+      "jurisdiction_level": "federal",
+      "region": "Burundi",
+      "description": "Presidential decree reorganizing FONIC (Fonds National d'Investissement Communal), Burundi's national fund for managing and accounting for state budget credits allocated to communal investment. Downloaded from presidence.gov.bi and OCR'd (tesseract, French model) from a scanned/image PDF — not machine-selectable text, so quotes are high-confidence but not pixel-verified against original glyphs; the decree's own header/number in the raw OCR reads garbled (\"DECRET N°100/ 04 DU 20 JUILLET 2026\"), which does not exactly match the decree number and date given in the source URL (n°100/097, 30 juillet 2026) — treated as an OCR misread of the header/logo area, not a different document, since Article 2 and Article 67 text match verbatim between the URL's linked PDF and the OCR. Article 1 confirms it \"modifie le Décret n°100/117 du 21 avril 2021 portant Modification du Décret n°100/270 du 22 novembre 2013 portant Réorganisation du Fonds National d'Investissement Communal\" [amends the 2021 decree, itself an amendment of a 2013 decree, reorganizing FONIC]. Article 2: \"Le FONIC a son siège au chef-lieu de la commune GITEGA dans la province GITEGA, avec un service du budget et de la comptabilité dans chaque commune\" [FONIC is headquartered in Gitega commune/province, with a budget-and-accounting service in every commune] — FONIC is described as an \"Administration Personnalisée de l'Etat (APE)\" under tutelle of the Ministère en charge du développement communautaire. Article 67 (Section 5, \"Des modalités de rapportage des crédits budgétaires destinés à l'investissement au niveau communal\"): \"Le FONIC produit des rapports trimestriel, semestriel et annuel détaillant l'utilisation des fonds mis à sa disposition en relation avec les investissements prévus et les investissements réalisés par commune\" [FONIC produces quarterly, half-yearly and annual reports detailing fund use versus planned and realized investment, per commune], format set by joint ministerial order (finances + développement communautaire), addressed to the Minister for développement communautaire with copy to the Minister of Finance. This is organizational/procedural: the decree itself contains no per-commune figures — it establishes the reporting mandate, not the actual filled-in figures (see _dropped for the unlocated underlying reports).",
+      "cadence_note": "One-off amending decree to FONIC's organizational framework (itself part of a decree lineage: 2013 -> 2021 -> 2026); the reports it mandates (Article 67) are quarterly/half-yearly/annual.",
+      "last_updated": null,
+      "url": "https://presidence.gov.bi/2026/07/31/decret-no100-097-du-30-juillet-2026-portant-modification-du-decret-n100-117-du-21-avril-2021-portant-reorganisation-du-fonds-national-dinvestissement-communal-fonic/",
+      "domains": [
+        "municipal-finance",
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "bi-fonic-decret-2026-reorganisation -> bi-loi-1-16-2015-transfert-communes",
+      "source": "bi-fonic-decret-2026-reorganisation",
+      "target": "bi-loi-1-16-2015-transfert-communes",
+      "reason": "note",
+      "why": "Considered but rejected. The 2015 Loi 1/16 (Art. 36, per the existing corpus node af-burundi-deepen.json) creates a communal support fund (\"fonds d'appui aux communes\"), and it is plausible FONIC descends from that mechanism — but the FONIC decree's own legal-basis (\"Vu\") clauses do NOT cite the 2015 Loi 1/16 or its Article 36 anywhere in the OCR'd text (checked full-text for \"Article 36\", \"fonds d'appui\", \"2015\", \"péréquation\" — zero relevant hits). Instead, its citation chain is entirely FONIC-internal: it amends Décret n°100/117 (21 avril 2021), which amended Décret n°100/270 (22 novembre 2013). There IS a \"Loi n°1/16\" cited in the Vu clauses, but it is a false-friend by numbering coincidence only: \"Loi n°1/16 du 07 juin 2024 portant Modification du Décret-Loi n°1/024 du 13 juillet 1989 portant Cadre Organique des Administrations Personnalisées de l'Etat\" — a 2024 law about the legal status of Administrations Personnalisées de l'Etat generally (relevant because FONIC is itself an APE), not the 2015 communal-transfer law. Per the evidence rule (edge requires the source text to actually name the target document), no edge is minted; flagged so a future pass does not conflate the two differently-dated \"Loi 1/16\" citations."
+    },
+    {
+      "edge": "bi-fonic-decret-2026-reorganisation -> [FONIC per-commune quarterly/annual reports, unpublished]",
+      "source": "bi-fonic-decret-2026-reorganisation",
+      "target": null,
+      "reason": "no-document",
+      "why": "Article 67 legally mandates FONIC to produce quarterly, half-yearly and annual reports itemized \"par commune\" — exactly the kind of named-lower-tier-unit document this project is looking for — but no published copy of an actual FONIC report (with real per-commune investment figures) was located on any .bi domain within the prior agent's search budget. This is the strongest lead in the round for a follow-up search, not a resolved node."
+    },
+    {
+      "edge": "bi-mairie-bujumbura -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "mairiebujumbura.gov.bi does not resolve at all (DNS failure, reproduced via both WebFetch and curl: \"Could not resolve host\"). isoko.gov.bi's government-services directory confirms this as the \"official\" URL for the Mairie de Bujumbura and gives only address/hours, no budget or finance content. No fiscal document for Burundi's largest city (Bujumbura) was found; the dead domain is itself circumstantial evidence of thin municipal e-government infrastructure, but no primary document states why it is down."
+    },
+    {
+      "edge": "bi-province-gitega-portal -> [no fiscal content]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "provincegitega.gov.bi loads successfully but contains no budget, financial report, or revenue figures anywhere on the site; its only finance-adjacent element is an outbound link to the national finances.gov.bi, not a Gitega-specific document."
+    },
+    {
+      "edge": "cour-des-comptes-bi -> [named-commune report]",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "courdescomptes.bi confirms an institutional chamber explicitly mandated for communal affairs (\"Chambre des Affaires Administratives et des Communes\") and lists report categories (Rapports Publics Annuels, Rapports Spécialisés, Rapports sur l'Exécution du Budget Général de l'Etat), but the individual report sub-pages were identified, not fetched, before the prior agent's search budget ran out — no actual named-commune figures were verified. Explicitly flagged by the prior agent as worth a follow-up session with fresh search budget."
+    },
+    {
+      "edge": "assemblee.bi communal-oversight article -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "https://assemblee.bi/2025/01/10/mecanismes-de-suivi-des-communes-des-institutions-a-renforcer/ (title translates to \"Communal oversight mechanisms: institutions to be strengthened\", directly on-topic) returned HTTP 404 on both WebFetch and direct curl — link rot, no longer live at this URL."
+    },
+    {
+      "edge": "finances.gov.bi decrees listing -> [FONIC/dotation decree]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "The Ministry of Finance's own décrets index page (finances.gov.bi/index.php/decrets/) does not surface any FONIC, dotation, or péréquation decree at its current listing level (visible entries cover pension increases, provincial directorates, financial-intelligence-unit rules, etc.) — the FONIC decree used as this file's node was instead found directly via presidence.gov.bi, not via this ministry index."
+    },
+    {
+      "edge": "bi-insbu-cpi -> eac-hcpi-regulations (re-examination only, not a new edge)",
+      "source": "bi-insbu-cpi",
+      "target": "eac-hcpi-regulations",
+      "reason": "caveat",
+      "why": "Not a new dependency (that edge already exists per af-burundi-deepen.json and af-grok-synthesis.json and is deliberately not re-added here). Checked INSBU's IPC-Fevrier-2025.pdf methodology annex (p.32) for EAC/harmonization language while cross-checking this round's other leads: confirms COICOP use (\"le panier de la ménagère comprend environ 770 variétés... classées dans les 12 fonctions de la COICOP\") but contains zero mentions of \"EAC\", \"IPCH\", or \"harmonisé/harmonisation\" anywhere in the document, and its base period/weights are Burundi-specific (2016/2017 base, weights from the 2013/2014 ECVMB household survey). Recorded as a caveat for the corpus maintainer: this particular document does not itself supply additional textual support for the existing EAC-harmonization edge."
+    }
+  ]
+}

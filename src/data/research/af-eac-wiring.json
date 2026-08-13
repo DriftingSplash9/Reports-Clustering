@@ -1,29 +1,28 @@
 {
-  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. Round 4 of Thomas's Africa gap-filling test, 2026-08-12. EAC hub wiring — Kenya and Tanzania were already linked to eac-hcpi-regulations; Uganda and Rwanda were not.",
+  "_meta": "CORRECTED 2026-08-13 (AF/G.22). Round 4 of Thomas's Africa gap-filling test, 2026-08-12, originally added ug-ubos-cpi -> eac-hcpi-regulations and rw-nisr-cpi -> eac-hcpi-regulations as live dependency edges on the reasoning 'both countries are confirmed EAC Partner States, and the EAC HCPI regulation obligates Partner States to submit a Harmonised CPI.' A dedicated AF/G.22 verification round re-checked both countries' own official CPI methodology documents directly and found this reasoning does not hold: the EAC-obligation citation runs from the EAC toward its Partner States, not from either country's own CPI methodology toward the EAC, and neither NISR's nor UBOS's published methodology cites the EAC or its HCPI framework anywhere. This is exactly the corpus's own pre-existing rw-cpi-social-protection.json/ug-cpi-social-protection.json `_dropped` notes (reason: no-document) getting it right, and this file's Round 4 edges getting it wrong by inferring 'same region, therefore must cite' without a textual citation. Both edges are retracted below; see the re-verification notes appended to rw-cpi-social-protection.json and ug-cpi-social-protection.json's own `_dropped` entries for the detail.",
   "reports": [],
-  "dependencies": [
+  "dependencies": [],
+  "_dropped": [
     {
-      "source_report_id": "ug-ubos-cpi",
-      "target_report_id": "eac-hcpi-regulations",
-      "relationship_type": "methodology_depends_on",
-      "basis": "eac-hcpi-regulations (already in the corpus, minted from ke-social-protection.json) describes a binding EAC instrument \"requiring Partner States to compile and submit a Harmonised CPI to the EAC Secretariat.\" Uganda is confirmed a founding EAC Partner State: the EAC's own overview page states the Treaty \"was signed on 30th November, 1999 and entered into force on 7th July, 2000 following its ratification by the original three (3) Partner States - Kenya, Uganda and Tanzania.\" Kenya and Tanzania already carry this same edge (ke-knbs-cpi, tz-nbs-cpi-dqa); Uganda's own CPI node (ug-ubos-cpi) was minted in a prior session without it.",
-      "evidence_url": "https://www.eac.int/overview-of-eac"
+      "edge": "ug-ubos-cpi -> eac-hcpi-regulations",
+      "source": "ug-ubos-cpi",
+      "target": "eac-hcpi-regulations",
+      "reason": "wrong-direction",
+      "why": "RETRACTED 2026-08-13 (AF/G.22) — this edge was live in the graph as of Round 4 (2026-08-12) on the basis that Uganda is a confirmed founding EAC Partner State and the EAC HCPI regulation 'requires Partner States to compile and submit a Harmonised CPI to the EAC Secretariat.' An AF/G.22 verification round re-checked UBOS's own official CPI publication (2016/17=100, July 2021, full 27-page document including the technical/methodology annex) directly for 'EAC', 'East African', 'Harmonis(z)ed', 'HCPI', 'regulation' — zero matches; the methodology cites COICOP 2018 only. The EAC instrument obligates Uganda to submit data TO the EAC (Uganda -> EAC direction); it is not evidence that Uganda's own CPI methodology depends on or cites the EAC framework (which would be the reverse direction this edge asserted). This corpus's own pre-existing ug-cpi-social-protection.json `_dropped` note already had this right (reason: no-document, same finding, independently arrived at in a prior session) — the error was this file's Round 4 edge, not that note. See ug-cpi-social-protection.json for the fuller re-verification record."
     },
     {
-      "source_report_id": "rw-nisr-cpi",
-      "target_report_id": "eac-hcpi-regulations",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Same instrument. Rwanda is confirmed an EAC Partner State: the EAC's own overview page states \"The Republic of Rwanda and the Republic of Burundi acceded to the EAC Treaty on 18th June, 2007 and became full Members of the Community with effect from 1st July, 2007.\" Rwanda's own CPI node (rw-nisr-cpi) was minted without this edge.",
-      "evidence_url": "https://www.eac.int/overview-of-eac"
-    }
-  ],
-  "_dropped": [
+      "edge": "rw-nisr-cpi -> eac-hcpi-regulations",
+      "source": "rw-nisr-cpi",
+      "target": "eac-hcpi-regulations",
+      "reason": "wrong-direction",
+      "why": "RETRACTED 2026-08-13 (AF/G.22) — same error as the Uganda edge above, same fix. An AF/G.22 verification round re-checked NISR's own official CPI methodological notice (CPI Publication, September 2024, full 10 pages including the dedicated methodology section) directly for 'EAC', 'East African', 'Harmonis(z)ed', 'HCPI', 'regulation' — zero matches; methodology cites only the Modified Laspeyres formula, EICV4 survey weights, and a Feb 2014=100 base. The World Bank's PforR Aide Memoire on Rwanda's statistical system states the actual direction: Rwanda's 'CPI monthly reports from September 2022 to July 2024 were submitted to EAC for publishing' as part of an EAC-level harmonised-CPI exercise — Rwanda's CPI as an input to an EAC output, the reverse of what this edge asserted. This corpus's own pre-existing rw-cpi-social-protection.json `_dropped` note already had this right (reason: no-document, independently arrived at in a prior session, and additionally citing that same Aide Memoire quote) — the error was this file's Round 4 edge. See rw-cpi-social-protection.json for the fuller re-verification record."
+    },
     {
       "edge": "Burundi CPI (ISTEEBU) -> eac-hcpi-regulations",
       "source": null,
       "target": null,
       "reason": "no-node-yet",
-      "why": "Burundi is confirmed an EAC Partner State (acceded the same day as Rwanda, 1 July 2007) and its national statistics office, ISTEEBU (Institut de Statistiques et d'Etudes Economiques du Burundi), is confirmed to exist and to publish inflation data. No primary ISTEEBU CPI bulletin URL was located this round — isteebu.bi itself was not directly opened. Burundi, South Sudan, DR Congo and Somalia are the four remaining EAC members with no node at all in this branch; worth a dedicated round or Grok pass given the fragile-state research difficulty likely involved in at least the latter three."
+      "why": "Burundi is confirmed an EAC Partner State (acceded the same day as Rwanda, 1 July 2007) and its national statistics office, ISTEEBU (Institut de Statistiques et d'Etudes Economiques du Burundi), is confirmed to exist and to publish inflation data. No primary ISTEEBU CPI bulletin URL was located this round — isteebu.bi itself was not directly opened. Burundi, South Sudan, DR Congo and Somalia are the four remaining EAC members with no node at all in this branch; worth a dedicated round or Grok pass given the fragile-state research difficulty likely involved in at least the latter three. NOTE (AF/G.22): given the Uganda/Rwanda correction above, if/when a Burundi CPI node is minted, do not default to adding this edge on 'same region' grounds alone — check ISTEEBU's own methodology text directly first, same as was just done for Uganda and Rwanda."
     }
   ]
 }

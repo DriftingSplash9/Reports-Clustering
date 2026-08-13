@@ -6,8 +6,13 @@ how much everything else depends on that report.
 **New here, or sending this to someone?** `START-HERE.md` explains what the
 project is and why, in plain language and without assuming you'll run it.
 
-See `REPORTS.md` for the design rules, and the highest-numbered `V0.*.md` in
-`sessions/` for the current state.
+See `REPORTS.md` for the design rules and the standing rules for anyone (human
+or AI) working on this repo. There is no single "current state" file any more —
+current state is whatever the newest hand-off says in the branch you're about
+to touch (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, each numbered independently) plus
+whatever your own project memory carries forward. The old `sessions/V0.*.md`
+running log is retired and archived; see `REPORTS.md` if you're wondering why
+it's gone.
 
 ## Running it
 
@@ -93,27 +98,39 @@ src/components/            the 3D graph, room, search box, and controls
 scripts/validate-data.ts   what `npm run validate` runs
 ```
 
-**The documents** — reorganised 2026-08-07 (see `notes/REORG-2026-08-07.md`
-for the old-path → new-path map); the four files at root are the ones worth
-opening first, everything else is filed by what it *is*:
+**The documents** — cleaned up 2026-08-13 (old handoffs, closed decisions and
+the retired session-log thread moved into `archive/`, subfoldered by what they
+were); the four files at root are the ones worth opening first, everything
+else is filed by what it *is*:
 
 ```
-REPORTS.md                 the design rules. The document that matters most
+REPORTS.md                 the design rules + standing rules. The document that matters most
 START-HERE.md              plain-language explanation, for sending to people
 Research.1.md              standing brief pasted into every research thread
 README.md                  this file
 
-sessions/                  V0.*.md app session logs + V1.5/V2.10 rollups
-EU/  NZ/  AU/              research branches: G.*.md hand-offs + G.*.json sidecars
+AF/  EU/  NZ/  AU/  CA/    research branches: G.*.md hand-offs, one independent
+                            numbering per branch — the newest file in a branch
+                            is that branch's current frontier
   EU/slices/               EU staging area cited by slice provenance (do not move)
-  EU/sources/              source PDFs (SEC00-10) and .docx source material
-  EU/extraction/           Part A/B extraction notes, superseded Research drafts
-  EU/prompts/              prompts sent to the external researcher
-  EU/legacy-handoffs/      early EU hand-offs that exist only as .docx
-research-input/            raw external research — Grok briefs and handoffs
-planning/                  BACKLOG.md, EXPANSION-V1.md, rolling-todo.md
-notes/                     scratch — unlogged notes, open questions, reorg map
-archive/                   inert scratch files kept for reference
+  EU/sources/               source PDFs (SEC00-10) and .docx source material
+  EU/extraction/            Part A/B extraction notes, superseded Research drafts
+  EU/prompts/                prompts sent to the external researcher
+  EU/legacy-handoffs/        early EU hand-offs that exist only as .docx
+  AF/AF-municipal-tier-protocol.md   reusable dispatch protocol for the AF branch's
+                                      municipal-tier research rounds
+planning/                  BACKLOG.md — Thomas's own tier-ranked priority list
+notes/                     scratch — sweep-log.md (durable record of what got
+                            swept to _to_delete/ and why) plus Thomas's own
+                            unrelated personal files, left alone
+archive/                   closed-out material kept for reference, not deleted:
+                            handoffs/, code-review-2026-08-12/, decisions/,
+                            notes/, planning/, sessions/ (the old V0.*/rollup
+                            log thread), research-input/ (old Grok/GPT briefs),
+                            logs/, plus whatever was already there
+_to_delete/                junk moved here on sight, never deleted by an agent —
+                            the device bridge can move files but not delete them;
+                            Thomas empties this by hand whenever he likes
 ```
 
 ## Adding data

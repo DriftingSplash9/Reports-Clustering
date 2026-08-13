@@ -1,0 +1,28 @@
+{
+  "_meta": "AF/G.23 (2026-08-13) — Cabo Verde municipal-tier synthesis pass. The raw research file for this round (cv-lei-financas-locais-79-2005's primary text via ampraia.cv, plus corroborating governo.cv press releases on the FFM 10%->15% proposal and 2016-2025 transfer totals) had already been folded into /tmp/rc/src/data/research/af-cabo-verde.json's cv-lei-financas-locais-79-2005 node and _dropped array by the time this synthesis pass began (verified line-for-line against the raw findings file — no discrepancies, nothing left un-synthesized there). This file captures the remaining negative/deferred findings from that same research pass that were not yet recorded anywhere: a distinct pending municipal-budget-law instrument, a per-município transfer breakdown that could not be located, and a CPLP-methodology search that came up empty. No new report nodes minted this round — no primary document was found that isn't already represented in af-cabo-verde.json.",
+  "reports": [],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "cv-lei-financas-locais-79-2005 -> cv-lei-base-orcamento-municipal (target has no node yet)",
+      "source": "cv-lei-financas-locais-79-2005",
+      "target": null,
+      "reason": "deferred",
+      "why": "A governo.cv press article (20.04.2023, quoting Minister of State/Territorial Cohesion Janine Lelis) describes a proposed revision to a distinctly-named instrument, the 'Lei Base do Orcamento Municipal' ('a proposta de revisao da Lei Base do Orcamento Municipal... esta-se tambem a introduzir os principios orcamentais que decorrem, tanto da Lei Base do Sistema Nacional de Planeamento, bem como a propria Lei Base do Orcamento do Estado'), separate from Lei n.deg 79/VI/2005. No enacted law number was found for it, and a later governo.cv release (12.06.2025, Vice-PM/Minister of Finance Olavo Correia) still calls approval of 'o novo Regime Financeiro dos Municipios' urgent, implying it remained unenacted as of mid-2025. Not minted as a node this round for lack of a citable primary text; flagged for a targeted Boletim Oficial search in a future round to check for a post-2023 enactment."
+    },
+    {
+      "edge": "cv-lei-financas-locais-79-2005 -> per-municipio FFM breakdown (no target document found)",
+      "source": "cv-lei-financas-locais-79-2005",
+      "target": null,
+      "reason": "no-document",
+      "why": "Searched for a named-municipio breakdown of Fundo de Financiamento dos Municipios (FFM) transfers, expecting either a Ministerio das Financas transparency-portal page or an Orcamento do Estado annex. portaltransparencia.gov.cv/municipal fetched successfully but contains only a general description page with links elsewhere, no per-municipio figures. No Orcamento do Estado annex itemizing FFM transfers by named municipio was located this round; only secondary commentary (opacc.cv, anacao.cv) on the OE's fiscal-system provisions generally. The only transfer figures found (governo.cv, 12.06.2025) are national aggregates already folded into cv-lei-financas-locais-79-2005's description."
+    },
+    {
+      "edge": "cv-ine-ipc -> cplp-methodology (no target document found)",
+      "source": "cv-ine-ipc",
+      "target": null,
+      "reason": "no-document",
+      "why": "Searched for a CPLP (Comunidade dos Paises de Lingua Portuguesa)-specific citation in INE-CV's CPI methodology, on the theory it might parallel the existing AFRISTAT/COICOP treatment. Found nothing on point — results returned only Portugal's own INE cooperation newsletters (COOPSTAT) mentioning Cabo Verde in passing, not an INE-CV document naming CPLP as a methodology influence on the IPC specifically. cv-ine-ipc's existing COICOP/AFRISTAT-glossary treatment from prior rounds stands unchanged."
+    }
+  ]
+}

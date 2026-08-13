@@ -1,0 +1,69 @@
+{
+  "_meta": "Ready to be wired into src/data/index.ts. Thin-country deepening pass for Central African Republic, 2026-08-13. CAR previously had exactly one node (cf-icasees-ihpc, in af-cemac.json). This file adds the national budget law and the 2020 decentralization law, both directly verified via downloaded PDFs (pdftotext/OCR extraction — both source PDFs are scanned, no embedded text layer; French-language Tesseract OCR used, cross-checked at 300dpi on all quoted pages). Ongoing armed conflict and the absence of local elections since the 1988 municipal elections (unconfirmed independently this round — flagged, not asserted) make CAR's sub-national fiscal layer thin; findings below reflect that structural context rather than a search failure.",
+  "reports": [
+    {
+      "id": "cf-loi-finances-2025",
+      "title": "Loi de Finances pour l'exercice 2025",
+      "publisher": "Ministère des Finances et du Budget (République Centrafricaine)",
+      "country": "CF",
+      "jurisdiction_level": "federal",
+      "region": "Central African Republic",
+      "description": "CAR's FY2025 budget law, downloaded directly from the Ministry of Finance and Budget's own site (155MB scanned PDF, 608 pages, no embedded text — OCR'd in full this round). Total budget (Art. 35, page numbered 16 in-document): \"1- Ressources : 345 200 000 000 FCFA ... 2- Charges : 365 917 975 000 FCFA\", with Art. 36 declaring a deficit of \"20 717 975 000 de FCFA\". Art. 31 repeals the prior commune tax-sharing mechanism, which had explicitly split shares between \"a- Commune de Bangui\" and \"b- Autres Communes\" (citing \"l'article 85 de la Loi de Finances 2003, modifiant et complétant les dispositions l'article 25 de la loi de Finances Rectificative de 2001\"), replacing it with a discretionary system: Art. 32 \"Les communes et les autres unités administratives bénéficient des subventions dans les limites des crédits ouverts dans le Budget Général de l'Etat\", with Art. 34 delegating practical modalities to \"Un arrêté du Ministre des Finances et du Budget\". Under Ministry 14 (Ministère de l'Administration du Territoire, de la Décentralisation et du Développement Local), budget line 14.00.00.00.390000 \"Dépenses non-reparties des administrations territoriales\" (Titre IV, Dépenses de transfert, 1 506 000 thousand FCFA for 2025) itemizes named transfers: \"Transferts aux conseils généraux des préfectures\" (75 000, code .6423.11, -16.67% vs 2024), \"Transferts aux conseils généraux des sous-préfectures\" (51 000, code .6424.11, +34.21%), \"Transferts aux conseils généraux des quartiers et villages\" (200 000, code .6426.11) annotated in the source table as \"Appui à la Mairie de Bangui\", \"Transferts aux conseils généraux des régions\" (900 000, code .6422.11) annotated \"Appui aux autres Communes\", and \"Autres transferts aux collectivités locales\" (280 000, code .6429.11). NOTE: the pairing of the descriptive labels \"Appui à la Mairie de Bangui\" / \"Appui aux autres Communes\" with specific coded lines is the source PDF's own table layout (each amount line is immediately followed on the next row by a plain-text sub-label); read literally the labels sit under the quartiers/villages and régions lines respectively, but this may be an artifact of the two-row cell format rather than a precise 1:1 amount attribution — flagged as an interpretive caveat rather than resolved. Separately, and unambiguously, all sixteen of CAR's prefectures are individually named with FY2025 operating budgets under Ministry 40 (Éducation Nationale), as \"Inspection Académique de [prefecture]\" lines (pages numbered 312-317 in-document), each budgeted at 3 500 thousand FCFA for 2025: Ombella M'poko, Lobaye, Mambéré Kadéï, Mambéré, Sangha Mbaéré, Nana Mambéré, Ouham, Ouham Fafa, Ouham Pendé, Kémo, Nana Gribizi, Ouaka, Haute Kotto, Vakaga, Bamingui Bangoran, Mbomou, Basse Kotto, Haut Mbomou (one entry, OCR'd as \"Inspection Académique de Lim Péndé\", could not be confidently matched to a standard prefecture name and is treated as a probable OCR error, not a 17th unit). A further named-prefecture line under Ministry 92 (Agriculture et Développement Rural, page numbered 541) reads: \"Projet d'appui à la résilience à la sécurité alimentaire et nutritionnelle dans les préfectures de la Kémo et la Ouaka (PARSANKO)\". Searched specifically for the phrase \"dotation globale de fonctionnement\" (the term the 2020 decentralization law mandates for state-to-collectivité transfers) across the full OCR'd text — NOT FOUND anywhere in this 608-page document; the actual transfer lines use different, older terminology (\"conseils généraux\", a pre-2020 administrative term) rather than the 2020 law's \"Conseil Régional\"/\"Conseil Municipal\" vocabulary or its DGF mechanism.",
+      "cadence_note": "Annual budget law (loi de finances), one per fiscal year; ministry's site lists equivalents back to 2000.",
+      "last_updated": null,
+      "url": "https://www.finances.gouv.cf/sites/default/files/2025-01/Loi%20de%20Finances%202025.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance", "education", "agriculture"]
+    },
+    {
+      "id": "cf-loi-2020-decentralisation",
+      "title": "Loi portant organisation et fonctionnement des Collectivités Territoriales (2020)",
+      "publisher": "Présidence de la République / Assemblée Nationale (République Centrafricaine)",
+      "country": "CF",
+      "jurisdiction_level": "federal",
+      "region": "Central African Republic",
+      "description": "CAR's 2020 decentralization framework law, establishing Régions and Communes as the two tiers of Collectivité Territoriale. Downloaded as a scanned 43-page PDF (no embedded text; OCR'd in full this round) from an NGO-run local-development resource site (devlocal-rca.org, linked to the French NGO IRAM), NOT a .gouv.cf government host — the document itself, however, bears the CAR presidential letterhead and promulgation formula and is signed \"Faustin Archange TOUADERA\"; its exact law number and promulgation date are blank/illegible in this scanned copy (\"Loi N°\" and \"Fait à Bangui le\" both show no visible number/date at 300dpi), so authenticity is inferred from format and signature rather than a citable number. Chapitre 7 (\"DU REGIME FINANCIER DES COLLECTIVITES TERRITORIALES\") Art. 46 lists Collectivité resources including \"(d) les quoteparts des Collectivités Territoriales des recettes qui leur sont affectées par l'Etat\" and \"(e) les subventions fournies par l'Etat\". Art. 49: \"La loi de finance prévoit chaque année une dotation globale de fonctionnement au profit des Collectivités Territoriales. La dotation globale de fonctionnement est repartie entre les Collectivités Territoriales selon des critères fixés par un Arrêté conjoint du Ministre en charge de l'Administration du Territoire et du Ministre des Finances... les facteurs relatifs à la population, l'étendue géographique et au niveau du développement... notifiées aux Maires et présidents des Conseils Régionaux au plus tard trois (3) mois avant le début de l'année budgétaire\". Art. 50 provides a parallel investment-side \"dotation globale régulièrement inscrite dans la Loi de finances\". Art. 71 (Titre II, Des Régions): \"La Région est une Collectivité Territoriale composée d'au moins deux (2) préfectures\" — confirming Région (the elected/decentralized tier) and préfecture (the deconcentrated, prefect-headed administrative tier) are distinct, with Régions built by grouping préfectures. Art. 215-216 (Titre IV, Dispositions transitoires) set deadlines from the law's adoption: \"des élections Municipales sont organisées\" within 2 years (Art. 215) and \"des élections régionales sont organisées\" within 3 years (Art. 216). No independent confirmation was found this round (within the primary-source-only search performed) that these elections have in fact been held; the FY2025 budget law's own transfer-line vocabulary (\"conseils généraux\" rather than \"Conseil Régional\"/\"Conseil Municipal\") is circumstantial evidence the 2020 framework's elected-council structure may not yet be operative in ordinary budget practice, but this is an inference, not a confirmed fact, and is flagged as such.",
+      "cadence_note": "One-off foundational framework law.",
+      "last_updated": null,
+      "url": "https://www.devlocal-rca.org/IMG/pdf/loi_sur_la_decentralisation_promulguee_00000002_.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "cf-loi-finances-2025 -> cf-loi-2020-decentralisation",
+      "source": "cf-loi-finances-2025",
+      "target": "cf-loi-2020-decentralisation",
+      "reason": "no-document",
+      "why": "The two documents are obviously in the same policy area (state transfers to Collectivités Territoriales) and the 2020 law's Art. 49 explicitly instructs the annual finance law to carry a 'dotation globale de fonctionnement', but the 2025 finance law's own text (Art. 31-34, and the Ministry 14 transfer lines) never cites the 2020 law by title, number, or date — it cites only the 2003 and 2001 finance laws by year. Per the standing evidence rule (verbatim textual basis required per edge), this is a genuine NOT FOUND for a documented citation edge, despite the strong topical relationship. Also, the 2025 law's transfer mechanism (discretionary 'subventions dans les limites des crédits ouverts') does not use the 2020 law's mandated DGF terminology or its population/geography/development-based formula language, so even a 'methodology_depends_on' or 'mandates' edge would overstate what the primary texts actually show."
+    },
+    {
+      "edge": "cf-loi-2020-decentralisation numero/date -> [unresolved]",
+      "source": "cf-loi-2020-decentralisation",
+      "target": null,
+      "reason": "no-document",
+      "why": "Attempted to find the law's official number and promulgation date via (a) the finances.gouv.cf site (not hosted there), (b) FAOLEX (guessed record ID, wrong document), (c) a secondary RJDH news article that appeared in search results (URL returned 404 on fetch), and (d) the devlocal-rca.org page itself (gives only 'promulguée en 2020', no number). Genuine NOT FOUND for an exact citable number/date this round."
+    },
+    {
+      "edge": "cf-* -> PEFA 2023 or 2010 CAR assessment",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "pefa.org lists three CAR PEFA assessments (2008, 2010, 2023). The 2023 report is marked 'Non-public' on pefa.org (node https://www.pefa.org/node/5186) and could not be accessed. The 2010 report (https://www.pefa.org/sites/default/files/assessments/reports/CAR-Jul10-PFMPR-Public.pdf) is public and was fetched per the task's angle 5 instruction, but it is donor/PEFA-Secretariat-authored, not a CAR government document, so per the evidence rule it cannot itself be a cited primary source. It does describe a joint ministerial-order transfer mechanism ('arrêtés conjoints du Ministre chargé des collectivités territoriales et du MFB') consistent with the 2020 law's Art. 49 DGF mechanism, and describes local budgets as chronically finalized late due to information reaching collectivités up to three months behind schedule — but names no specific CAR government document by number, so it yields no independently citable primary edge."
+    },
+    {
+      "edge": "cemac-ihpc-regulation / cemac-inflation-note -> CAR sub-national allocation",
+      "source": "cemac-ihpc-regulation",
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked both the CEMAC Commission's 2024 inflation note and AFRISTAT's CEMAC IHPC methodology documents (APA04 methodology guide and the 2017 IHPC-CEMAC methodological guide) for CAR-specific sub-national fiscal allocation content per the task's angle 4. Both name Centrafrique as 1 of 6 CEMAC member states and BANGUI specifically as the CPI observation city ('BANGUI pour la CENTRAFRIQUE'), confirming/extending the existing cf-icasees-ihpc <-> cemac-ihpc-regulation edge already in af-cemac.json — but neither document contains any CAR-specific sub-national (prefecture/region) budget or transfer content. Genuine NOT FOUND for a CEMAC-to-CAR-subnational edge; this is a CPI-methodology relationship only, already captured upstream."
+    },
+    {
+      "edge": "cf-mairie-bangui -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "villedebangui.cf confirms itself as the official Bangui city government site and lists 'Services financiers' among its Directions et Services, but publishes no budget, financial statement, or finance-office document online (checked homepage and /departements). A second apparent Bangui city domain, mairiedebangui.com, could not be fetched (DNS/robots error). No node minted — AGENCY ONLY, no document, consistent with the task's framing that this is itself a legitimate finding given CAR's circumstances."
+    }
+  ]
+}

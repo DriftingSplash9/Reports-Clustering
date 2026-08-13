@@ -1,0 +1,145 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.22 population-priority push, 2026-08-13. Transcribed from a prior agent's verified findings (agent_findings/a8b7bd525cd98fec7_FINAL.txt): resolves Libya's SDDS/e-GDDS dissemination-standards status and names the pre-2011 CPI weight survey directly from IMF DSBB country pages, locates Libya's base civil-service salary law (Law No. 15 of 1981, explicitly covering municipal/baladiyat employees) and the Ministry of Local Government's current Law 59/2012 local-administration framework plus a 2022 unified-municipal-structure decision, and records several genuine NOT-FOUND items (April 2026 Article IV access-blocked, Eastern/Benghazi administration finance ministry, municipal payroll figures) rather than asserting them.",
+  "reports": [
+    {
+      "id": "ly-dsbb-status",
+      "title": "Libya — SDDS / e-GDDS Dissemination Standards Status (DSBB Country Pages)",
+      "publisher": "International Monetary Fund — Dissemination Standards Bulletin Board (DSBB)",
+      "country": "LY",
+      "jurisdiction_level": "institutional",
+      "region": "Libya",
+      "description": "Confirms Libya's IMF data-dissemination-standards subscription status directly from the DSBB's own country pages. e-GDDS category page (dsbb.imf.org/egdds/country/LBY/category), header: 'Enhanced General Data Dissemination System (As provided by Libya as a participant in the e-GDDS)' — confirms Libya IS an e-GDDS participant, with data-provider agencies listed under 'Data Integrity and Access by the Public': Central Bank of Libya; Ministry of Planning and Finance; General Authority for Information (GAI). The parallel SDDS category page (dsbb.imf.org/sdds/country/LBY/category) returns instead: 'Malformed request, no data was found. Please retry or report to the STASR@imf.org' — read as confirmation Libya is NOT an SDDS subscriber, only an e-GDDS participant. This resolves a previously 'unconfirmed' open question in the corpus (ly-sdds-egdds-status-unconfirmed, in ly-cpi-social-protection.json) that had been blocked because dsbb.imf.org is an Angular single-page application. CROSS-CHECK NOTE: on-disk scratch copies of a raw/static fetch of this domain (dsbb_libya.html, dsbb_contacts.html) were checked this round and confirmed to contain only the site's generic JS navigation shell (menu chrome, no Libya-specific content, no error text but effectively empty of the country data) — a genuine dead end for non-JS-rendering fetch tools. Only a live, JS-rendering browser navigation (as used in the underlying research session) reached the actual country-specific content quoted above; see _dropped for this method-failure record.",
+      "last_updated": null,
+      "url": "https://dsbb.imf.org/egdds/country/LBY/category",
+      "domains": ["national-accounts"]
+    },
+    {
+      "id": "ly-dsbb-cpi-dqaf",
+      "title": "Libya CPI — Data Quality Assessment Framework (DQAF) Metadata (DSBB, category CPI00)",
+      "publisher": "International Monetary Fund — Dissemination Standards Bulletin Board (DSBB), DQAF metadata; data provided by General Authority for Information (GAI), Libya",
+      "country": "LY",
+      "jurisdiction_level": "institutional",
+      "region": "Libya",
+      "description": "Names and dates the weight survey behind Libya's pre-2011 CPI, resolving (for that vintage) a previously 'not clearly named' open question in the corpus. Section 2.2.1 'Scope': 'The weights, based on expenditure data collected during the 2003 Household Expenditure Survey (HES), reflect expenditures of urban households in the reference population (Tripoli).' Section 9.2 'Plans for improvement': 'Weights will be updated using data from 2007/2008 Household Expenditure Survey.' Names the responsible agency: 'The General Authority for Information (GAI) is responsible for collecting the data through censuses and surveys ... granted by Law no.16 (1963) termed the Statistical Law.' Page metadata dated 'Last Updated: Nov 11, 2009' — this describes the pre-2011, Tripoli-only CPI regime, not the post-2011 series (see ly-bsc-cpi in ly-cpi-social-protection.json). The successor/current CPI is IMF-described (2025 Article IV, IMF Country Report 25/148, para 6) only as based on 'the new household spending survey' — no formal proper name for that newer survey was found in any primary source this round either, so the newer vintage's survey name remains unresolved. The continuity between the two CPI regimes (old GAI/2003-HES series vs. new BSC series) is the researcher's own synthesis of two separate documents read in different sessions, not a citation from one document to the other, so no dependency edge is drawn between them (see _dropped).",
+      "last_updated": null,
+      "url": "https://dsbb.imf.org/egdds/dqaf-base/country/LBY/category/CPI00",
+      "domains": ["inflation"]
+    },
+    {
+      "id": "ly-salary-law-1981",
+      "title": "Law No. 15 of 1981 on the Salary System for [National] Employees (قانون رقم 15 لسنة 1981م بشأن نظام المرتبات للعاملين)",
+      "publisher": "Libyan government, 1981 enactment (General People's Congress era) — current text hosted by Ministry of Justice (وزارة العدل), Government of National Unity",
+      "country": "LY",
+      "jurisdiction_level": "federal",
+      "region": "Libya",
+      "description": "Major upgrade from a previously 'not located' open question in the corpus (ly-civil-service-salary-schedule-not-located, in ly-cpi-social-protection.json) to a named, dated, readable law. VERIFIED via the current Ministry of Justice legislation portal (aladel.gov.ly), full law text. Article 3(a) sets scope, explicitly covering municipal employees: 'تسري أحكام هذا القانون على جميع العاملين الوطنيين في الجهات الآتية: أ) الأمانات واللجان الشعبية للبلديات والأجهزة والتقسيمات التنظيمية التابعة لأي منهما...' — 'The provisions of this law apply to all national employees in: (a) the secretariats and popular committees of the municipalities (baladiyat) and organs/divisions affiliated with them...' Article 4: 'يتحدد الإطار العام لمرتبات كافة العاملين الوطنيين ... وفقاً لما هو محدد بالجدول رقم (1) المرفق' — 'The general framework for salaries of all national employees is determined per attached Table No. (1)...' Effective January 1, 1982 (Jamahiriya-era terminology: People's Congress / General People's Committee). Structure: a base Grade Table No. 1 plus nine substitute tables (police, customs guard, armed forces, judiciary, Jamahiriya Security, Central Inspection apparatus, universities, municipal guard). CAVEAT: the numeric pay tables themselves were not rendered in the page-text extraction read this round (may sit in an attached PDF/image not captured); the law's operative articles were read in full, but whether the numeric tables are separately downloadable from this page was not confirmed. A separate, non-governing 21 November 2015 document on the same domain (a Ministry of Justice announcement of an Audit Bureau workshop on a proposed replacement salary schedule) is deliberately NOT treated as evidence this law was amended or repealed — see _dropped for why.",
+      "last_updated": null,
+      "url": "https://aladel.gov.ly/home/قانون-رقم-15-لسنة-1981م-بشأن-نظام-المرتبات-للعاملين-ل/",
+      "domains": ["labour", "municipal-finance"]
+    },
+    {
+      "id": "ly-lgm-law-59-2012",
+      "title": "Law No. 59 of 2012 on Local Administration, and its 2013 Amendment (Law No. 9 of 2013)",
+      "publisher": "Libyan government (2012 enactment, plus 2013 amendment); current texts hosted by Ministry of Local Government (وزارة الحكم المحلي), Government of National Unity",
+      "country": "LY",
+      "jurisdiction_level": "federal",
+      "region": "Libya",
+      "description": "New municipal-tier node this round. Confirmed via the Ministry of Local Government's own site (lgm.gov.ly), the current GNU-aligned ministry implementing Libya's local-administration framework (Minister named on the homepage: بدر الدين التومي / Badr Eddin Al-Toumi). Homepage welcome statement: 'تفعيل القانون رقم (59) لسنة 2012 ميلادية بشأن نظام الإدارة المحلية وتعديلاته' — 'activating Law No. (59) of 2012 on the local administration system and its amendments' — direct primary confirmation this ministry is the current implementer of the 2012 law establishing baladiyat (municipalities). The ministry's legal-texts page (lgm.gov.ly/legal/laws/) hosts the law texts for direct download, titled 'قانون رقم 59 لسنة 2012 بشان الادارة المحلية' and its amendment 'القانون رقم (9) لسنة 2013م بتعديل القانون رقم (59) لسنة 2012م. في شأن نظام الإدارة المحلية.' Separately, lgm.gov.ly/hr/ ('شؤون الوظيفة المحلية' — Local Employment Affairs) confirms a live municipal-employee payroll/HR system exists: 'يتيح تطبيق بلديتي - الوظيفة المحلية امكانية الوصول لاهم البيانات التي يحتاجها موظفين البلديات ... وايضاً امكانية معرفة القرارات الخاصة به و مرتباته الشهرية' — 'The Baladiyati — Local Employment app gives municipal employees access to key data ... including their decisions and monthly salaries' — but the actual salary figures sit inside an authenticated employee-only app, not retrievable as a document (see _dropped).",
+      "last_updated": null,
+      "url": "https://www.lgm.gov.ly/legal/laws/",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ly-lgm-decision-1500-2022",
+      "title": "Decision No. 1500 of 2022 on the Unified Structure of Municipalities",
+      "publisher": "Ministry of Local Government (وزارة الحكم المحلي), Government of National Unity, Libya",
+      "country": "LY",
+      "jurisdiction_level": "federal",
+      "region": "Libya",
+      "description": "Confirmed via the Ministry of Local Government's decisions archive (lgm.gov.ly/legal/decsions/): 'قرار رقم 1500 لسنة 2022 بشان اعتماد التنظيم الداخلي للهيكل الموحد للبلديات' — 'Decision No. 1500 of 2022 on approving the internal organization of the Unified Structure of Municipalities.' Hosted alongside Law 59/2012 and its 2013 amendment (see ly-lgm-law-59-2012) in the same ministry legal-documents archive; the decision's own quoted title does not itself cite Law 59/2012 by number, so no dependency edge is drawn between the two despite the evident administrative relationship (both being LGM instruments governing municipal structure) — see _dropped.",
+      "last_updated": null,
+      "url": "https://www.lgm.gov.ly/legal/decsions/",
+      "domains": ["municipal-finance"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "ly-imf-art4-2026-concluding-statement -> [no node created]",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "The April 2026 IMF Article IV concluding statement (https://www.imf.org/en/news/articles/2026/04/10/mcs-04102026-libya-staff-concluding-statement-of-the-2026-article-iv-consultation-mission) could not be read via any of 5 independent methods this round: direct curl (HTTP 403), WebFetch (metadata only, no body), a real Chrome browser navigation (title 'Access Denied', body 'You don't have permission to access ... Reference #18.4a532217...', reproduced on a second attempt), the r.jina.ai reader proxy (relayed the same 403/Access Denied), and web.archive.org/archive.ph (connection reset / redirected back to the denied page). Cross-checked this round against on-disk scratch copies: imf_libya_2026.html and jina_libya.txt both contain the literal Akamai 'Access Denied ... errors.edgesuite.net' block for this exact URL. Adjacent IMF Staff Country Report PDFs (2024, 2025) were also 403-blocked. The Central Bank of Libya's own notice page (cbl.gov.ly) only points to the same blocked IMF link, with no independent content. Genuine, well-documented access wall, not a search failure -- no node minted."
+    },
+    {
+      "edge": "ly-eastern-gns-mof -> [no node created]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "The Benghazi-based 'Government of National Stability' (GNS, PM Osama Hammad) is confirmed (via Wikipedia's Central Bank of Libya article and a World Bank Libya Economic Monitor PDF, Nov 2025, both noting institutional duplication) to maintain its own parallel Ministry of Finance, but no official GNS Ministry of Finance website or GNS-authored primary document could be located (no domain analogous to mof.gov.ly found for the eastern administration). Central Bank of Libya is formally unified (Tripoli, cbl.gov.ly) since the 2023 CBL merger, so there is no separate 'Benghazi CBL' primary site either. Genuine NOT FOUND -- confirmed to exist via secondary/multilateral sources only, no primary document reachable."
+    },
+    {
+      "edge": "ly-lgm-law-59-2012 -> municipal payroll/salary figures (Baladiyati app)",
+      "source": "ly-lgm-law-59-2012",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "lgm.gov.ly/hr/ confirms a live municipal-employee payroll/HR system ('Baladiyati -- Local Employment' app) exists and is administered by the Ministry of Local Government, giving municipal employees access to 'their decisions and monthly salaries' -- but the actual salary figures/schedule sit inside an authenticated, employee-only application, not retrievable as a public document. The system's existence is citable (folded into the ly-lgm-law-59-2012 description); the underlying salary data itself is not."
+    },
+    {
+      "edge": "ly-salary-law-1981 -> 2015 Audit Bureau replacement salary schedule proposal",
+      "source": "ly-salary-law-1981",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "A 21 November 2015 Ministry of Justice announcement (aladel.gov.ly) documents an Audit Bureau (ديوان المحاسبة) workshop to discuss a proposed unified replacement salary schedule, but this document is from the Ministry of Justice under the 'Government of National Salvation' (Khalifa Ghwell's rival Tripoli-based government, 2014-2016) -- a now-defunct administration, not the current GNU-recognized government, even though it sits on the same domain the current Ministry of Justice now uses. The 'new salary schedule' discussed was never confirmed as adopted (unverified social-media chatter as recent as Jan 2025 suggests it remains only proposed/contested). Not treated as a citable current-state primary source or as evidence Law No. 15 of 1981 was superseded; no node minted for it."
+    },
+    {
+      "edge": "static/curl fetch of dsbb.imf.org (dsbb_libya.html, dsbb_contacts.html) -> [dead end]",
+      "source": null,
+      "target": "ly-dsbb-status",
+      "reason": "unreadable-source",
+      "why": "dsbb.imf.org is an Angular single-page application. On-disk scratch copies of raw/static fetches (dsbb_libya.html, dsbb_contacts.html) were checked this round: both return only the site's generic JS navigation shell (global IMF header/nav/footer chrome) with no Libya-specific or country-specific content rendered -- not literally an 'Unexpected error' page, but functionally a dead end for any non-JS-rendering fetch tool (curl, plain WebFetch). The country-specific SDDS/e-GDDS content actually cited in ly-dsbb-status was reached only via a live, JS-rendering browser navigation, a different method than what produced these two scratch files."
+    },
+    {
+      "edge": "ly-lgm-decision-1500-2022 -> ly-lgm-law-59-2012",
+      "source": "ly-lgm-decision-1500-2022",
+      "target": "ly-lgm-law-59-2012",
+      "reason": "no-document",
+      "why": "Decision No. 1500 of 2022 ('on approving the internal organization of the Unified Structure of Municipalities') is topically and administratively an implementing instrument under the same ministry's Law 59/2012 local-administration framework, and both are hosted in the same lgm.gov.ly legal-documents archive -- but the decision's own quoted title text does not cite Law 59/2012 by number, and no fuller text of the decision was read this round. Per the evidence rule (verbatim textual basis required per edge), this is a genuine NOT FOUND for a documented citation, despite the strong topical relationship."
+    },
+    {
+      "edge": "ly-salary-law-1981 -> ly-lgm-law-59-2012",
+      "source": "ly-salary-law-1981",
+      "target": "ly-lgm-law-59-2012",
+      "reason": "no-document",
+      "why": "Law No. 15 of 1981's Article 3(a) covers employees of 'the secretariats and popular committees of the municipalities (baladiyat)', the same baladiyat administrative unit that Law 59/2012 (enacted 31 years later) formally reorganizes -- but the 1981 law obviously cannot cite the 2012 law (it predates it), and no text was found in which the 2012 law or its 2013/2022 successors cite the 1981 salary law by number either. Terminological continuity ('baladiyat') only, not a documented citation in either direction."
+    },
+    {
+      "edge": "ly-dsbb-cpi-dqaf -> ly-bsc-cpi",
+      "source": "ly-dsbb-cpi-dqaf",
+      "target": "ly-bsc-cpi",
+      "reason": "no-document",
+      "why": "The DSBB CPI00 DQAF metadata page (2009-dated, describing the pre-2011 GAI/2003-HES CPI) is the direct historical predecessor of the current BSC CPI series (ly-bsc-cpi, in ly-cpi-social-protection.json), but no primary document read either this round or the prior round textually cites the other -- the continuity is the researcher's own synthesis across two separately-read documents (the DSBB page and the 2025 IMF Article IV report's description of the BSC relaunch), not a citation internal to either primary source. No dependency edge drawn."
+    },
+    {
+      "edge": "ly-worldbank-social-protection-crossroads -> ly-salary-law-1981",
+      "source": "ly-worldbank-social-protection-crossroads",
+      "target": "ly-salary-law-1981",
+      "reason": "no-document",
+      "why": "The existing corpus already notes (via ISSA/SSA sources, not this round) that Libya's Basic Pension Benefit is 'indexed based on changes in civil servant salaries' -- and this round located a named, dated civil-service salary law (Law No. 15 of 1981) for the first time, partially answering the prior open question ly-civil-service-salary-schedule-not-located. However, neither the World Bank brief (ly-worldbank-social-protection-crossroads) nor the ISSA profile cited in the existing corpus names Law No. 15 of 1981 specifically, and no document read this round shows the pension mechanism citing this particular law by number. The law's existence resolves part of the open question (a plausible candidate instrument now exists) but not the citation itself -- no edge drawn."
+    },
+    {
+      "edge": "ly-imf-art4-2025 -> ly-lgm-law-59-2012 / municipal finance content",
+      "source": "ly-imf-art4-2025",
+      "target": null,
+      "reason": "no-document",
+      "why": "The full 45-paragraph IMF Country Report 25/148 (Context, Recent Developments, Outlook, Policy Discussions A-D, Authorities' Views, Staff Appraisal) was read in full this round specifically checking for municipal or local-government finance content -- 'municipal'/'local government' never appears anywhere in the document. This is a genuine, checked NOT-FOUND for that angle in this specific document, not an oversight; recorded so a future session does not re-attempt the same search against the same report."
+    },
+    {
+      "edge": "dsbb.imf.org CGO00 (Gaddafi-era government-operations classification) -> [no node created]",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "dsbb.imf.org/egdds/dqaf-base/country/LBY/category/CGO00 (2009-dated metadata) describes a four-chapter expenditure classification ('Chapter I presents Wages and Salaries; Chapter II presents Operating Expenses; Chapter III presents Capital Expenditures...') attributed to the pre-2011 Ministry of Planning and Finance (People's Congress/Jamahiriya-era structure). Findings explicitly frame this as context only, not to be conflated with the current GNU Ministry of Finance -- no node minted, since it describes a defunct government structure rather than a currently operative document."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.22 population-priority push, 2026-08-13. Adds two South Sudan Ministry of Finance and Planning national budget/appropriation documents (FY2022/23 Draft Budget Book; FY2023/24 Appropriation Act); confirms the existing ss-nbs-cpi node (af-grok-synthesis.json) is independently corroborated on COICOP/geographic detail but not duplicated; records the genuine NOT-FOUND for any independently published Central Equatoria State or Juba City Council finance document.",
+  "reports": [
+    {
+      "id": "ss-mofp-budget-2022-2023",
+      "title": "Draft Budget Tables, Fiscal Year 2022/23",
+      "publisher": "Ministry of Finance and Planning, Republic of South Sudan",
+      "country": "SS",
+      "jurisdiction_level": "federal",
+      "region": "South Sudan",
+      "description": "South Sudan's FY2022/23 draft national budget book, downloaded directly from the Ministry of Finance and Planning's own site. Cover page: \"Draft Budget Tables Fiscal Year 2022/23 Ministry of Finance and Planning Republic of South Sudan July 2022\". Fiscal-policy narrative section states: \"The Government will continue to provide budget in the form of annual grants to the State Government and block grants to the Budgetary Central government Bodies to provide flexibility, ownership and accountability in budget execution.\" The \"Assumptions FY: 2021-22\" table, under \"Other Mandatory Expenditures\", itemizes: \"Transfer to Oil Prod. States (2%): 12,476,061,105\" [SSP] and \"Transfer to Oil Prod. Comm. (3%): 18,714,091,657\" [SSP]. This confirms a state-transfer mechanism exists in current national budget policy, but it is a general, formula-based mechanism (oil-producing status, fixed percentages) rather than a schedule itemized by individually named state — no Central Equatoria-, Juba-, or county-specific figures appear anywhere in this document.",
+      "cadence_note": "Annual national budget document; this is the FY2022/23 edition.",
+      "last_updated": null,
+      "url": "https://mofp.gov.ss/doc/Draft-Budget-Book-FY-2022-2023-v2-2.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "ss-mofp-appropriation-act-2023-2024",
+      "title": "Appropriation Act 2023/2024",
+      "publisher": "Ministry of Finance and Planning, Republic of South Sudan",
+      "country": "SS",
+      "jurisdiction_level": "federal",
+      "region": "South Sudan",
+      "description": "South Sudan's national Appropriation Act for FY2023/2024, hosted on the Ministry of Finance and Planning's site. Section 2 (Definitions): \"'Legislature' means the Constitutionally defined National Legislative Assembly and the Council of States\", with \"Council of States\" appearing in Section 53's budget table as a funded line item (wages 4,648,569,882 SSP; goods/services 18,046,992,875 SSP; capital 4,956,723,686 SSP). IMPORTANT CAVEAT (documented so this is not mistaken for a subnational node in a future pass): the \"Council of States\" here is the upper chamber of the national Legislature (analogous to a Senate), not a subnational fiscal entity. The full document was searched for \"State Government\", \"block grant\", \"transfer to state\", and \"conditional grant\" — none of these phrases appear anywhere in the Act, and it contains no state-by-state or county-by-county appropriation schedule.",
+      "cadence_note": "Annual appropriation act; this is the FY2023/2024 edition.",
+      "last_updated": null,
+      "url": "https://mofp.gov.ss/wp-content/uploads/2023/12/APPROPRIATION-ACT-2023-2024-MAIL-1.pdf",
+      "domains": ["fiscal-transfers"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "[Finding 1, this round] -> ss-nbs-cpi (existing node, af-grok-synthesis.json)",
+      "source": null,
+      "target": "ss-nbs-cpi",
+      "reason": "note",
+      "why": "This round's Finding 1 (https://nbs.gov.ss/assets/images/CPI%20for%20May-2025.pdf) is the exact same primary document, same URL, already represented by the existing ss-nbs-cpi node. No new node was minted for it. This round independently corroborates and adds detail already latent in that document but not previously recorded: it uses \"the UN Classification of Individual Consumption by Purpose, 2018 (UNCOICOP, 2018)... disseminated using 13 COICOP\" divisions; it disaggregates monthly inflation by all ten state capitals (\"The Index covers the ten states of South Sudan\", with Juba specifically cited at 0.61% for May 2025); and its weights derive from the World Bank's 2021/22 Household Budget Survey. No IGAD or EAC branding appears in the document itself (consistent with, and not contradicting, the existing ss-nbs-cpi -> eac-hcpi-regulations edge sourced from the EAC's own materials, per af-south-sudan-deepen.json's corroboration)."
+    },
+    {
+      "edge": "ss-nbs-cpi -> worldbank-household-budget-survey-2021-22",
+      "source": "ss-nbs-cpi",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The May 2025 CPI release states its expenditure weights are sourced from the World Bank's 2021/22 Household Budget Survey for South Sudan. This is a genuine uses_data_from relationship documented in the primary text, but no node exists in the corpus for that World Bank survey, and minting one was outside this round's scope (findings file did not verify/quote the survey document itself, only the CPI release's reference to it). Flagged for a future pass rather than force-linked."
+    },
+    {
+      "edge": "ss-mofp-budget-2022-2023 -> ss-transitional-constitution-2011",
+      "source": "ss-mofp-budget-2022-2023",
+      "target": "ss-transitional-constitution-2011",
+      "reason": "note",
+      "why": "The FY2022/23 budget book's \"Transfer to Oil Prod. States (2%)\" line is numerically consistent with the Transitional Constitution's Article 176(1)/177(f) formula (\"at least two percent of net oil and other mineral revenues for each producing state\"), and both nodes exist in the corpus. However, per the findings file, the budget book's own text does not cite the Transitional Constitution by article, number, or title anywhere in the passages checked — the match is topical/numerical, not a documented citation. Per the evidence rule (verbatim textual basis required per edge), this does not meet the bar for a citation-based dependency edge and is recorded here rather than asserted."
+    },
+    {
+      "edge": "ss-mofp-appropriation-act-2023-2024 'Council of States' line -> [subnational state node]",
+      "source": "ss-mofp-appropriation-act-2023-2024",
+      "target": null,
+      "reason": "note",
+      "why": "The Act's 'Council of States' line item is the upper chamber of the national Legislature (like a Senate), not a subnational fiscal entity, and must not be read as evidence of state-level funding. The findings file confirms the full Act text was searched for 'State Government', 'block grant', 'transfer to state', and 'conditional grant' with no matches. Recorded explicitly so a future pass does not mistake this line item as a subnational citation."
+    },
+    {
+      "edge": "ss-central-equatoria-state-budget -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No official Central Equatoria State government site, Ministry of Finance page, appropriation act, or budget PDF was found. Only located: a Radio Tamazuj news article ('Central Equatoria State passes 2024-2025 budget') with no linked underlying document, and Facebook pages for the Office of the Governor and the Ministry of Local Government & Law Enforcement — social media, not a publishable primary statistical/finance document. No node minted."
+      },
+    {
+      "edge": "ss-juba-city-council-budget -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No .gov.ss domain for Juba City Council, and no council-authored budget or revenue document, was found. Results were limited to an ICLEI Africa membership directory listing, an African Clean Cities NGO profile PDF, a Facebook page, and news items about the mayor — none primary. No node minted."
+    },
+    {
+      "edge": "grss-mof.org/documents/ -> [dead domain]",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "http://grss-mof.org/documents/ returned a 404 client error. This appears to be a superseded domain for the Ministry of Finance and Planning; the current live domain (mofp.gov.ss) was used instead for the two nodes minted in this file."
+    },
+    {
+      "edge": "eac-hcpi-opendataforafrica-portal (South Sudan filter) -> [unconfirmed]",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "https://eac.opendataforafrica.org/pwskwdc/eac-harmonised-consumer-price-indices?partner-states=1000050-south-sudan&product=1000870-accommodation-services returned a 500 server error on fetch. Could not confirm what South Sudan-specific data or source attribution this EAC page carries; flagged for a retry in a future pass rather than used as evidence."
+    },
+    {
+      "edge": "ssnbss.org 'About' page -> IGAD/EAC/COICOP mention",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "https://www.ssnbss.org/home/about/ loaded successfully but contains no mention of IGAD, EAC, or COICOP — only constitutional-mandate language and a note on the SSCCSE-to-NBS institutional transition. The COICOP usage documented in the ss-nbs-cpi document is on the CPI release itself, not on this About page."
+    },
+    {
+      "edge": "ssnbs.org (no double-s) -> [spam/hijacked domain, not NBS]",
+      "source": null,
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "ssnbs.org (missing the second 's' of the legitimate ssnbss.org) returns unrelated spam/content-farm pages (crypto-investing content) and appears to be an expired or hijacked domain trading on the NBS acronym. Flagged explicitly so this domain is never cited; the legitimate NBS properties are nbs.gov.ss and ssnbss.org."
+    },
+    {
+      "edge": "worldbank-pefa-southsudan-2012 -> [subnational state nodes]",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The World Bank/PEFA \"Public Finance Management Assessment: South Sudan\" (Report No. 78288-SS, May 31 2012) states at p.18 that \"A significant portion of the GRSS budget is transferred directly to the 10 states in the form of block grants... based on a very simple formula (one-tenth each)\", citing underlying GRSS budgets for 2008-2010 which could not be independently located online. This is a donor/PEFA-authored document, not a primary South Sudanese government document, and no subnational South Sudan state node exists in the corpus to link it to even if it were citable. No node or edge added."
+    },
+    {
+      "edge": "worldbank-pefa-western-equatoria-2012 -> ss-western-equatoria-state",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The World Bank's \"Western Equatoria State, South Sudan: Public Finance Management Assessment\" (Report No. 78292-SS, May 31 2012) notes at indicator PI-10 that \"The draft 2011 budget for WESG was available to the public when submitted to the State Legislative Assembly\" but in-year execution reports and audited financial statements were not publicly available. This is the closest evidence found that a South Sudanese state government produces its own budget document at all, but it is World Bank-reported (not a verbatim primary excerpt), concerns Western Equatoria rather than Central Equatoria, predates the 2013-2018 civil war, and no South Sudan subnational-state node exists in the corpus. No node minted."
+    },
+    {
+      "edge": "cabri-south-sudan-profile -> [subnational documents]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "The CABRI (Collaborative Africa Budget Reform Initiative) South Sudan country profile (https://www.cabri-sbo.org/en/our-work/budgets-in-africa/countries/south-sudan) lists only national-level documents (2023 National Budget Plan, 2023 Financial Act, 2024 Compliance Audit Report) and no subnational entries at all — corroborating, not resolving, the structural gap already recorded above."
+    }
+  ]
+}

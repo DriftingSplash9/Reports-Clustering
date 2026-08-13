@@ -1,0 +1,97 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.22 population-priority push, 2026-08-13. Corrects the Eritrea IMF-relationship timeline established by er-imf-cr03166-cpi (af-eritrea.json): adds the 2018-2019 IMF Article IV re-engagement material (Press Release 18/262 announcing the delayed consultation, and the 2019 Executive Board conclusion press release, the latter recovered via an africa-newsroom.com syndicated mirror since imf.org itself is Akamai-blocked in this tooling environment) — the IMF did resume Article IV engagement with Eritrea in 2018-2019, but that cycle never produced a published Country Report, so CR/03/166 (2003) remains the most recent *published* IMF Country Report even though it is not the most recent IMF *engagement*. All other checked angles this round (NSEO, Ministry of Finance, Asmara municipal budget, zoba administrations, and a found-but-non-financial UNESCO Asmara heritage dossier) are recorded in _dropped as confirmed-absent or incompletely-checked.",
+  "reports": [
+    {
+      "id": "er-imf-pr18262-delayed-article-iv",
+      "title": "Delayed Article IV Consultation with the State of Eritrea (IMF Press Release No. 18/262)",
+      "publisher": "International Monetary Fund",
+      "country": "ER",
+      "jurisdiction_level": "institutional",
+      "region": "Eritrea",
+      "description": "IMF Press Release No. 18/262, dated June 28, 2018. Title (independently confirmed): \"Delayed Article IV Consultation with the State of Eritrea.\" Only the title, press-release number, and date could be confirmed this round — the release's body text could not be retrieved (IMF's site renders press-release content via client-side JavaScript; both WebFetch and direct curl attempts returned 503/403). The title itself is significant: it establishes on the record that Eritrea's routine Article IV consultation cycle was delayed, consistent with the roughly fifteen-year gap between the 2003 Country Report (er-imf-cr03166-cpi) and the Fund's next substantive Eritrea engagement in 2019 (see er-imf-2019-article-iv-eb). Flagged as a partial finding: title/metadata confirmed, body content NOT FOUND.",
+      "cadence_note": "One-off press release announcing a specific delayed Article IV cycle; not a recurring publication.",
+      "last_updated": null,
+      "url": "https://imf.org/en/News/Articles/2018/06/28/pr18262-delayed-article-iv-consultation-with-the-state-of-eritrea",
+      "domains": ["assessment"]
+    },
+    {
+      "id": "er-imf-2019-article-iv-eb",
+      "title": "IMF Executive Board Concludes 2019 Article IV Consultation with the State of Eritrea (Press Release; Board Document EBM/19/67-3)",
+      "publisher": "International Monetary Fund",
+      "country": "ER",
+      "jurisdiction_level": "institutional",
+      "region": "Eritrea",
+      "description": "Press release reporting the conclusion of the IMF Executive Board's 2019 Article IV Consultation with Eritrea, dated July 24, 2019 (verified via the africa-newsroom.com syndicated mirror; the direct imf.org URL, pr19288, could not be fetched in this environment — see _dropped). Executive Board Assessment section quote: \"Directors stressed the need for capacity building tailored to country circumstances, particularly the production and analysis of data.\" Independently corroborated via the IMF Archives Catalog (https://archivescatalog.imf.org/Details/archive/125319451), which lists the underlying document as \"The State of Eritrea – 2019 Article IV Consultation,\" Board Document ID EBM/19/67-3, dated July 22, 2019 — an internal Executive Board Meeting document, not a released Country Report. No CR/19/xxx Country Report exists in the IMF eLibrary for Eritrea for this consultation (confirmed via direct elibrary.imf.org subject-page search returning no Eritrea entries for this period; the IMF's own Publications-series filter for Eritrea Country Reports likewise showed zero results, \"Page 1 of 0\"). A separate End-of-Mission press release (No. 19/179, May 22, 2019) confirms an IMF staff mission occurred that spring, though only its boilerplate genre-description text was retrievable ('End-of-Mission press releases include statements of IMF staff teams that convey preliminary findings after a visit to a country.'), adding no further data — not minted as its own node (see _dropped). CORRECTION TO EXISTING CORPUS: er-imf-cr03166-cpi (IMF Country Report No. 03/166, 2003) was previously treated as the most recent IMF document on Eritrea; this is not accurate — the IMF resumed Article IV engagement with Eritrea in 2018-2019 (see also er-imf-pr18262-delayed-article-iv), but that 2019 cycle never produced a published Country Report, only this press release. CR/03/166 therefore remains the most recent *published Country Report*, but it is not the most recent IMF *engagement*. No textual citation links this press release to CR/03/166 or to PR 18/262, so no formal dependency edge is recorded (see _dropped).",
+      "cadence_note": "One-off press release concluding a specific Article IV cycle; no Country Report was published for this cycle, so no recurring-publication cadence exists.",
+      "last_updated": null,
+      "url": "https://imf-fmi.africa-newsroom.com/press/international-monetary-fund-imf-executive-board-concludes-2019-article-iv-consultation-with-the-state-of-eritrea?lang=en",
+      "domains": ["assessment"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "er-imf-pr18262-delayed-article-iv -> er-imf-2019-article-iv-eb",
+      "source": "er-imf-pr18262-delayed-article-iv",
+      "target": "er-imf-2019-article-iv-eb",
+      "reason": "note",
+      "why": "Both press releases concern the same 2018-2019 Article IV consultation cycle (18/262 announces the delay, the 2019 Executive Board release reports its conclusion), but neither release's confirmed text cites the other by number or title. Per the standing evidence rule (verbatim textual basis required per edge), this is a real narrative/temporal relationship but not a documented citation, so no formal dependency edge is added — recorded here for context instead."
+    },
+    {
+      "edge": "er-imf-2019-article-iv-eb -> er-imf-cr03166-cpi",
+      "source": "er-imf-2019-article-iv-eb",
+      "target": "er-imf-cr03166-cpi",
+      "reason": "note",
+      "why": "This file's central finding is that the 2018-2019 IMF material postdates and corrects the prior assumption that CR/03/166 (2003) was Eritrea's most recent IMF document. However, neither the 2019 Executive Board press release nor PR 18/262 textually cites CR/03/166 by number or title — the relationship is a corpus-level correction, not a documented citation between the two texts. No 'cites' or 'methodology_depends_on' edge is added; the correction is instead recorded in prose in er-imf-2019-article-iv-eb's description and in this file's _meta."
+    },
+    {
+      "edge": "er-imf-pr19288-direct -> [access denied]",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "All attempts to reach the direct imf.org URL for the 2019 Executive Board conclusion (https://www.imf.org/en/News/Articles/2019/07/25/pr19288-eritrea-imf-executive-board-concludes-2019-article-iv-consultation) failed: direct curl and WebFetch returned repeated 403 (Akamai bot-block) / 503 across multiple retries and user agents; the r.jina.ai reader-proxy workaround also returned 403 (blocked by this environment's outbound proxy); the archive.org Wayback Machine API returned HTTP 429 (rate-limited) on repeated attempts, so no independent archive verification was possible either. The scratch file /tmp/eri_pr.html is the saved response from one of these direct-fetch attempts and confirms the failure mode: its <TITLE> is literally \"Access Denied\", with body text \"You don't have permission to access ... pr19288 ... on this server\" (Akamai edgesuite.net error page). This is a confirmed dead end, not a source — the same press release content was instead obtained via the africa-newsroom.com syndicated mirror, used as the url for er-imf-2019-article-iv-eb."
+    },
+    {
+      "edge": "er-imf-pr19179-mission-content -> [inaccessible]",
+      "source": null,
+      "target": null,
+      "reason": "denied",
+      "why": "IMF Press Release No. 19/179 (\"Eritrea: IMF Staff Completes 2019 Article IV Mission\", May 22, 2019, https://www.imf.org/en/News/Articles/2019/05/22/pr19179-eritrea-imf-staff-completes-2019-article-iv-mission) suffered the same access limitation as PR 18/262 — only generic boilerplate genre-description text loaded; the substantive mission-findings text did not. Confirms only that a 2019 IMF staff mission occurred; adds no data beyond er-imf-2019-article-iv-eb, so it was not minted as a separate node."
+    },
+    {
+      "edge": "er-nseo-current-release -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked http://www.nseoeritrea.org and http://nseoeritrea.gov.er — both DNS resolution failures (\"Could not resolve host\"). Web searches for \"Eritrea National Statistics Office CPI\" and \"National Statistics and Evaluation Office site\" returned only third-party aggregators (Knoema, GHDx, DHS Program) describing NSEO as a historical data source cited by others (e.g. the 2002 DHS survey), never a live NSEO web presence or current release. No functioning NSEO domain exists; no current CPI, population, or budget release could be located under Eritrean government attribution."
+    },
+    {
+      "edge": "er-mof-budget-document -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "https://mof.gov.er and https://www.mof.gov.er — connection reset by peer / CONNECT tunnel failure (502) / ConnectTimeout, no working site. https://www.eritrea.gov.er — DNS resolution failure, domain does not exist. Web search \"Eritrea Ministry of Finance national budget 2024 2025\" returned only World Bank Macro Poverty Outlook PDFs (World Bank-authored, not primary Eritrean government) and an unrelated business-directory page with no linked government document. No live Ministry of Finance or Ministry of National Development website, and no locatable national budget document of any vintage hosted by the Eritrean government itself."
+    },
+    {
+      "edge": "er-asmara-municipal-budget -> [no document]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Web search \"Asmara municipality official document budget\" returned: the UNESCO heritage nomination document (non-financial — see separate dropped entry below), a Wikipedia article on \"Administrations of Asmara\" (excluded as non-primary), an unrelated South African municipality (Metsimaholo), an Archnet architecture-database entry, and a private Dutch enthusiast site (asmera.nl) — none primary/government-financial. No Asmara city government website, no municipal budget, no municipal statistical release found anywhere."
+    },
+    {
+      "edge": "er-zoba-administration-document -> [incomplete]",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "No dedicated zoba-by-zoba search was completed this round beyond the general searches above — the WebSearch tool hit its per-session call cap partway through the task. Eritrea's six zobas (Maekel, Debub, Anseba, Gash-Barka, Semienawi Keyih Bahri, Debubawi Keyih Bahri) returned no results in any general query, and no zoba-specific web domain surfaced. Per the findings file, this should be flagged as incompletely checked rather than a confirmed absence (unlike the Ministry of Finance and NSEO items above, which had multiple independent negative signals) and revisited in a future round."
+    },
+    {
+      "edge": "er-unesco-asmara-nomination -> [wrong domain]",
+      "source": null,
+      "target": null,
+      "reason": "wrong-target",
+      "why": "A genuine Eritrean-government-authored primary document does exist: the State Party submission to UNESCO/ICOMOS, \"Interim Report Responses for: Nomination of Asmara: Africa's Modernist City\" (compiled to February 2017, https://whc.unesco.org/document/156800), quoting \"The justification for Criteria (ii) was made in the formal submission to UNESCO in January 2016 and augmented in November 2016...\" and attributed to the State Party of Eritrea via the Department of Public Works Development / Asmara Heritage Project. It shows Eritrea's government is capable of producing documents for international bodies, but it is a heritage/urban-planning nomination dossier confirmed to contain \"no budget information, municipal financial data, or detailed governance statistics\" over 100+ pages. Not usable as a fiscal/municipal-finance node; its absence of financial content, if anything, reinforces the no-funded-municipal-disclosure conclusion already recorded via er-un-coi-proclamation-86-1996."
+    }
+  ]
+}

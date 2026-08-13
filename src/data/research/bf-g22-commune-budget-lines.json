@@ -1,0 +1,104 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.22 population-priority push, 2026-08-13. Adds Burkina Faso's national Loi de Finances 2024 named-commune ('brigade verte') budget line items for Ouagadougou and Bobo-Dioulasso, plus a mayor-commissioned PEFA assessment of Commune de Ouagadougou's own finances (FY2016-2018, published 2021); documents multiple genuine NOT-FOUND/access-failure search attempts (Ouagadougou and Bobo-Dioulasso municipal sites, FPDCT, Cour des Comptes, INSD census monograph, Africa Open Data portal) transcribed from a prior agent's verified findings file.",
+  "reports": [
+    {
+      "id": "bf-loi-finances-2024",
+      "title": "Loi de Finances pour l'exécution du budget de l'Etat, exercice 2024",
+      "publisher": "Ministère de l'Economie, des Finances et de la Prospective (Burkina Faso)",
+      "country": "BF",
+      "jurisdiction_level": "federal",
+      "region": "Burkina Faso",
+      "description": "Burkina Faso's FY2024 national budget law (with 2025-2026 projections), adopted 15 December 2023 ('Ainsi fait et délibéré en séance publique à Ouagadougou, le 15 décembre 2023') and downloaded directly from the Ministry of Finance's own site (verified via WebFetch and independently via curl, 12.8MB PDF v1.7, cross-checked with pdftotext -layout). Section 09 ('Ministère de l'Administration Territoriale, de la Décentralisation et de la Sécurité,' pp.108-186), sub-table 'PREVISIONS DES DEPENSES PAR PROGRAMMES, ACTIONS, PAR CHAPITRES ET PAR ACTIVITES,' Action 01406 'Accroissement du financement des investissements des collectivités territoriales,' Chapitre 1028000311 (DGCT), names two specific communes with specific appropriations (pp.163-164): 'Activ. 0140626 Appuyer la brigade verte de la commune de Ouagadougou' with figures '0 900 000 0 900 000 0 900 000' (AE/CP columns for 2024, 2025, 2026 — i.e. CP = 900 000 for each of the three years), and 'Activ. 0140627 Appuyer la brigade verte de la commune de Bobo Dioulasso' with figures '0 300 000 0 300 000 0 300 000' (CP = 300 000 for each of 2024-2026). Units are inferred (not printed directly on pp.163-164 themselves) from the document-wide convention '(En milliers de francs CFA)' seen elsewhere in the same PDF — i.e. likely 900,000 milliers = 900 million FCFA for Ouagadougou and 300,000 milliers = 300 million FCFA for Bobo-Dioulasso; flagged as inferred, not a directly printed unit label. The appropriation is narrow-purpose (municipal sanitation/'brigade verte' support), not a general operating transfer. Section 98 'Transferts des Ressources aux Collectivités Territoriales' (pp.1372-1378, Programme 135) is a larger sectoral transfer program (education/health/water/social sectors, totaling 37,723,567 milliers FCFA in CP for 2024) but is broken down by sector, not by named commune, so it does not itself supply a named-commune figure. This is a distinct document from the existing bf-mof-aes-cedeao-2024 node (a February 2024 Ministry of Finance news article on the AES/ECOWAS withdrawal) — same ministry, different document type and different subject matter.",
+      "cadence_note": "Annual budget law (loi de finances), one per fiscal year.",
+      "last_updated": null,
+      "url": "https://www.finances.gov.bf/fileadmin/user_upload/storage/loi-de-finances-2024-2026-vf2.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "bf-pefa-ouagadougou-2021",
+      "title": "Evaluation PEFA de la commune de Ouagadougou (rapport public)",
+      "publisher": "PEFA Program (Secretariat), evaluation requested by the Mayor of Ouagadougou and financed by Agence Française de Développement, conducted by a 3-person team mobilized by Expertise France",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "A mayor-commissioned PEFA (Public Expenditure and Financial Accountability) assessment of Commune de Ouagadougou's own finances, published February 2021, covering fiscal years 2016-2018. Section 'Aperçu de la situation financière de la commune de Ouagadougou' (pp.26-27) gives commune budget tables: '(en millions de CFA) 2016 2017 2018 ... Total des recettes 16 869 20 295 25 335 / Ressources propres 13 681 81% 13 135 65% 15 139 60% / Ressources externes 772 5% 3 213 16% 3 588 14% / Produits antérieurs 2 416 14% 3 947 19% 6 608 26% / Section Invest. Total des recettes 43 010 21 431 34 244'. Attribution (p.2): 'Cette deuxième évaluation PEFA a été demandée par Monsieur Armand BÉOUINDÉ, Maire de Ouagadougou. Le financement a été assuré par l'Agence Française de Développement.' CAVEAT — borderline-primary status flagged explicitly for corpus-inclusion judgment: this is a government-commissioned document reporting the commune's own official budget data, but it is technically hosted/published by the PEFA Secretariat (a multi-donor program), not self-published by the Commune itself — hence country/jurisdiction_level here follow this corpus's existing convention of coding internationally-published-but-country-specific assessments as country='INT'/jurisdiction_level='international' (as already done for bf-worldbank-safety-net-p124015), rather than 'BF'/'municipal', since the Commune de Ouagadougou is not itself the publisher. CAVEAT — direct curl access to the PDF returned HTTP 403 (bot-protection, likely Cloudflare) with both default and browser-spoofed User-Agent; only the WebFetch tool's own fetch mechanism succeeded, so treat exact verbatim spacing/formatting of the quoted table as best-effort reconstruction, not byte-for-byte OCR.",
+      "cadence_note": "One-off assessment (PEFA's 'deuxième évaluation' for this commune, i.e. a second iteration exists, but only this one was retrieved).",
+      "last_updated": null,
+      "url": "https://www.pefa.org/sites/pefa/files/2021-05/BF-Ouagadougou-Feb21-PFMPR-SN-Public%20with%20PEFA%20Check.pdf",
+      "domains": ["municipal-finance", "assessment"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "bf-loi-finances-2024 -> bf-loi-055-2004-cgct",
+      "source": "bf-loi-finances-2024",
+      "target": "bf-loi-055-2004-cgct",
+      "reason": "no-document",
+      "why": "Both documents concern collectivités territoriales financing (the 2024 budget law's Action 01406 appropriations for communes; the 2004 code's Titre II financial regime), but the reviewed passages of the 2024 budget law (Section 09 tables pp.163-164/1372-1378, and the closing enactment clause) never cite the 2004 code (Loi n°055-2004/AN) by number, title, or article. Searched, no citing document/text found — genuine no-document, despite the strong topical overlap."
+    },
+    {
+      "edge": "bf-loi-finances-2024 -> bf-decret-2007-254-fpdct",
+      "source": "bf-loi-finances-2024",
+      "target": "bf-decret-2007-254-fpdct",
+      "reason": "no-document",
+      "why": "The Action 01406 chapter administering the reviewed commune appropriations is coded to 'Chapitre 1028000311 (DGCT)' — the Direction Générale des Collectivités Territoriales — not to FPDCT. FPDCT is not named anywhere in the reviewed passages (pp.108-186, pp.1372-1378) of the 2024 budget law. No citing text found linking this budget law to the FPDCT decree."
+    },
+    {
+      "edge": "bf-loi-finances-2024 <-> bf-mof-aes-cedeao-2024",
+      "source": "bf-loi-finances-2024",
+      "target": "bf-mof-aes-cedeao-2024",
+      "reason": "note",
+      "why": "Flagged explicitly in the findings file to prevent conflation: 'This is a distinct document from the existing \"2024 Ministry of Finance AES/CEDEAO document\" node — it is the annual state budget law.' Both are 2024 Ministry of Finance documents but are unrelated in subject matter (budget appropriations vs. an AES/ECOWAS-withdrawal news article); no citation or dependency relationship between them was found or would be appropriate."
+    },
+    {
+      "edge": "bf-pefa-ouagadougou-2021 -> bf-loi-055-2004-cgct",
+      "source": "bf-pefa-ouagadougou-2021",
+      "target": "bf-loi-055-2004-cgct",
+      "reason": "no-document",
+      "why": "The PEFA assessment's reviewed passage (the Ouagadougou finance-overview table and its attribution text, pp.2, 26-27) does not cite the 2004 Code Général des Collectivités Territoriales by number or title. Searched, no citing text found in the material actually retrieved this round."
+    },
+    {
+      "edge": "Mairie de Bobo-Dioulasso 'Publication de budget' page -> actual budget document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "https://mairie-bobo.bf/publication-de-budget/ (title confirmed via <title> tag: 'Publication de budget - Commune de Bobo Dioulasso') contains only navigation boilerplate, WordPress oEmbed links, and a newsletter signup form — no PDF links, no <table> of figures, and no numeric budget content, per direct curl fetch (1033 lines) and a grep for 'budget|compte' across all href attributes (only self-referential hits). Scratch material at /tmp/bobo_budget.html was checked and its <title> ('Publication de budget - Commune de Bobo Dioulasso') matches this exact URL/page described in the findings file — confirms this is the same empty placeholder already documented there, no new facts were extracted from the raw HTML beyond what the findings file itself already states. The commune's official site explicitly created this URL slot, signaling intent to publish, but as of the check date (2026-08-13) no document is posted."
+    },
+    {
+      "edge": "Mairie de Ouagadougou official site -> any budget-publication page",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Both direct curl (TLS handshake reset: 'Recv failure: Connection reset by peer' immediately after ClientHello) and WebFetch (robots.txt fetch failed: ConnectTimeout) failed to reach https://mairie-ouaga.bf/ during this session. Could not determine whether the site has a budget-publication page. Failure mode is a live connectivity/TLS issue, not a confirmed absence of content — should be retried in a later session."
+    },
+    {
+      "edge": "FPDCT dedicated website/implementing arrêté -> named-commune allocation figure",
+      "source": null,
+      "target": "bf-decret-2007-254-fpdct",
+      "reason": "deferred",
+      "why": "All four guessed domains (fpdct.bf, fpdct.gov.bf, www.fpdct.bf, fpdct.org) failed to resolve/connect (curl error 56, 'CONNECT tunnel failed, response 502'), suggesting these domains likely don't exist or aren't publicly reachable. Could not locate an FPDCT-published implementing arrêté specifying Ouagadougou's (or any named commune's) specific allocation amount/percentage for a given year, nor the 'formule de calcul des droits de tirage des collectivités territoriales' referenced but not quoted in the existing bf-decret-2007-254-fpdct node. Explicitly flagged in the findings file as 'an open gap ... unresolved, not negatively confirmed' — worth retrying in a future session rather than treated as a closed dead end."
+    },
+    {
+      "edge": "Cour des Comptes du Burkina Faso -> annual report PDF (e.g. Rapport annuel 2023)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Both https://www.presidencedufaso.bf/cour-des-comptes/ and https://www.cour-comptes.gov.bf were fetched in full. presidencedufaso.bf states only that the Cour des Comptes produces 'a yearly report that it submits to the president of Faso' with a bare link to cour-comptes.gov.bf (no PDF); cour-comptes.gov.bf itself displayed news items about management audits and sensitization tours but no linked rapport annuel/rapport public PDF. Secondary press coverage (excluded as non-primary) reports a Rapport annuel 2023 finding ~160 billion FCFA lost to mismanagement, handed to the transitional Head of State around November 2024/February 2025, but no primary PDF of that report (or any prior Cour des Comptes annual report) could be located online during this session."
+    },
+    {
+      "edge": "INSD Bobo-Dioulasso census monograph -> commune fiscal/budget data",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "https://www.insd.bf/sites/default/files/2023-02/MONOGRAPHIE%20DE%20LA%20COMMUNE%20DE%20BOBO-DIOULASSO.pdf ('RÉSULTATS CINQUIEME RECENSEMENT GENERAL DE LA POPULATION ET DE L'HABITATION - MONOGRAPHIE DE LA COMMUNE DE BOBO-DIOULASSO,' INSD, December 2022) was reviewed in full and covers only demographic/census indicators (population, education, employment, housing, marital status, disability) — no revenue/expenditure/subvention figures of any kind. Confirms INSD's commune monographs are a demographic-statistics genre, not a fiscal-reporting genre, for this document; INSD itself may still be worth checking for other publication series (e.g. any 'comptes économiques' or local-finance annuaire) in a future pass."
+    },
+    {
+      "edge": "Africa Open Data portal (opendataforafrica.org) commune dotations/subventions dataset -> commune-itemized transfer figures",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "https://burkinafaso.opendataforafrica.org/rmpybgd/niveaux-de-mobilisation-des-dotations-et-subventions-des-collectivit%C3%A9s-par-commune (title alone strongly suggests exactly the commune-itemized dotation/subvention dataset sought) could not be retrieved by any method available this session: WebFetch returned a 500 server error, and direct curl returned HTTP 403 with page title 'Just a moment...' (Cloudflare bot-challenge). Publisher/source attribution behind this dataset could not be confirmed either. Flagged in the findings file as a live lead that should be retried with a browser-based tool (e.g. claude-in-chrome) in a follow-up session, not a confirmed dead end."
+    }
+  ]
+}

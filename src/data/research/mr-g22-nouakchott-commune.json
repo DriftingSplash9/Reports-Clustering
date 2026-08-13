@@ -1,0 +1,88 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.22 population-priority push, 2026-08-13. Adds two DGCT-published Nouakchott-commune fiscal-transfer/revenue documents (the 2001/2002 tonnage-tax revenue-split arrêtés and the 2016 communal fiscal study), transcribed verbatim from a prior agent's already-verified findings file (/tmp/agent_findings/a55320926daf65c4c_FINAL.txt) — no new web research performed this round.",
+  "reports": [
+    {
+      "id": "mr-dgct-nkc-tonnage-tax-arretes",
+      "title": "Arrêtés Conjoints portant répartition de la taxe sur le tonnage débarqué — Communauté Urbaine de Nouakchott et ses 9 communes membres (Recueil des Textes 2017, DGCT)",
+      "publisher": "Direction Générale des Collectivités Territoriales (DGCT), Ministère de l'Intérieur, avec l'appui de la Coopération française — compilant des Arrêtés Conjoints du Ministère de l'Intérieur, des Postes et Télécommunications (MIPT) et du Ministère des Finances (MF)",
+      "country": "MR",
+      "jurisdiction_level": "federal",
+      "region": "Mauritanie",
+      "description": "DGCT's compiled 'Recueil des Textes 2017' (avec l'appui de la Coopération française) reproduces two joint ministerial arrêtés governing the split of the taxe sur le tonnage débarqué between the Communauté Urbaine de Nouakchott (CUN) and its 9 member communes. Arrêté Conjoint n°R884/MIPT/MF du 02 décembre 2001 (internal/PDF page 122), Article 4: \"Le produit de la taxe sur le tonnage débarqué, telle que prévue aux termes de l'Ordonnance n° 90-04 du 6 février 1990, est réparti entre la Communauté Urbaine de Nouakchott et les neuf Communes membres, dans les proportions ci-après - Communauté urbaine de Nouakchott : 60 %; - Communes membres 40 %\". Arrêté Conjoint n°R1198/MIPT/MF du 18 octobre 2002 (internal pages 124-125), \"portant répartition de la part du produit de la taxe sur le tonnage débarqué revenant aux communes de l'agglomération de Nouakchott entre celles-ci\", Article Premier: \"le montant de la taxe sur le tonnage débarqué revenant aux communes de l'agglomération de Nouakchott est partagé en trois parts à raison de 50% pour la première part, 30% pour la seconde part et 20% pour la troisième part. La première part est répartie à part égale entre les neufs Communes. La deuxième part est répartie en fonction de la population communale constatée au recensement général des populations 2001. La troisième part est répartie de manière décroissante en fonction du produit de la taxe communale par habitant...\" — followed by a named-commune allocation table (illustrative, base-year 2001 recensement) giving each commune's 'Part forfaitaire 50%', 'Part proportionnelle à la population 30%', and 'Part inversement proportionnelle au produit fiscal par habitant 20%', e.g. \"Riyad 55,56 34,95 93,05 183,56 18,36\" and \"Tevragh Zeina 55,56 20,61 0,87 77,04 7,70\", covering all 9 Nouakchott communes by name: Toujounine, Teyarett, Tevragh Zeina, Sebkha, Riyad, Ksar, El Mina, Arafat, Dar Naim. Both arrêtés are jointly issued by MIPT and MF; as of the 2017 compiled edition reviewed, no repeal is noted in the excerpt.",
+      "last_updated": null,
+      "url": "https://www.dgct.mr/wp-content/uploads/2017/04/Recueil-des-textes-2017.pdf",
+      "domains": ["municipal-finance", "fiscal-transfers", "taxation", "population"]
+    },
+    {
+      "id": "mr-dgct-etude-fiscalite-communes-2016",
+      "title": "Étude de la Fiscalité et des Finances des Communes en Mauritanie (Manuel de la fiscalité locale en Mauritanie)",
+      "publisher": "Ministère de l'Intérieur et de la Décentralisation / Direction Générale des Collectivités Territoriales (DGCT), dans le cadre du Programme National Intégré pour la Décentralisation, le Développement Local et l'Emploi des jeunes",
+      "country": "MR",
+      "jurisdiction_level": "federal",
+      "region": "Mauritanie",
+      "description": "DGCT/Ministère de l'Intérieur et de la Décentralisation study, dated March 2016, subtitled 'Manuel de la fiscalité locale en Mauritanie'. PDF page 17: \"L'analyse des comptes de gestion produits par les différentes communes du pays pour l'année 2014 indique que, sur le total de Contribution foncière de 648.7 millions d'UM, 255.17 millions proviennent de la communauté urbaine de Nouakchott, 266.02 millions proviennent de la région de Nouadhibou, 58.04 millions de la commune de Bennichab, 42.17 millions de Zouerate, et 18.73 millions d'Akjoujt.\" Names five communes/regions (Nouakchott/CUN, Nouadhibou, Bennichab, Zouerate, Akjoujt) with actual FY2014 property-tax (contribution foncière) revenue figures, independent of the tonnage-tax arrêtés captured in mr-dgct-nkc-tonnage-tax-arretes.",
+      "last_updated": null,
+      "url": "https://www.dgct.mr/wp-content/uploads/2016/06/ETUDE-DE-LA-FISCALITE-ET-DES-FINANCES-DES-COMMUNES-EN-MAURITANIE-2016.pdf",
+      "domains": ["municipal-finance", "taxation", "fiscal-transfers"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "mr-dgct-nkc-tonnage-tax-arretes -> mr-ons-inpc",
+      "source": "mr-dgct-nkc-tonnage-tax-arretes",
+      "target": "mr-ons-inpc",
+      "reason": "no-document",
+      "why": "Checked whether the Nouakchott revenue-split arrêtés reference the national CPI (mr-ons-inpc) for indexation. Article Premier of Arrêté Conjoint n°R1198/MIPT/MF du 18 octobre 2002 bases its redistribution formula on population (recensement général des populations 2001) and per-capita tax yield ('produit de la taxe communale par habitant'), not on any price index. No mention of INPC/IHPC, ONS, or price indexation appears anywhere in the arrêtés text reviewed. Genuine NOT FOUND for this edge."
+    },
+    {
+      "edge": "mr-dgct-etude-fiscalite-communes-2016 -> mr-ons-inpc",
+      "source": "mr-dgct-etude-fiscalite-communes-2016",
+      "target": "mr-ons-inpc",
+      "reason": "no-document",
+      "why": "The 2016 DGCT fiscal study's quoted passage (PDF page 17) reports raw FY2014 property-tax revenue figures per commune with no reference to CPI, inflation, or ONS/IHPC. No indexation or price-adjustment mechanism is described in the material reviewed, so no relationship to mr-ons-inpc can be documented from this source."
+    },
+    {
+      "edge": "mr-ansade-coicop-nomenclature -> [no node]",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "https://ansade.mr/wp-content/uploads/2021/09/Nomenclature-RIM-sept-2017.pdf does not serve the PDF — it redirects to the ANSADE homepage (a Next.js-style SPA shell) instead of the document. The underlying COICOP-nomenclature claim (referenced only informally in Finding 6 of the source findings file, via a WebFetch-summarized ONS methodology page already reflected in the existing mr-ons-inpc node) could not be independently verified against a raw ANSADE document this round or in the prior session. No new node minted for it."
+    },
+    {
+      "edge": "mr-cour-des-comptes-rgaf-2022-2023 -> [no node]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "https://courdescomptes.mr/ra/RGAF01juillet.pdf (Rapport Général Annuel 2022-2023, 422 pages, dated June 2025) was downloaded and reviewed in the prior session but does not itemize named communes/wilayas with attributed financial figures — it only mentions towns (Rosso, Kaédi, Kiffa, Nouadhibou) in prose describing health-facility equipment, with no linked figures. No node minted; genuine NOT FOUND for a commune-level Cour des Comptes document."
+    },
+    {
+      "edge": "mairie-de-nouakchott (official site) -> [no node]",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No dedicated official Nouakchott commune/mairie government website was found in the prior session's searches. Only third-party directories (annuaire-mairie.fr) and encyclopedia/NGO pages (Encyclopædia Universalis, AIMF) surfaced, none of which are primary Mauritanian government sources, so no node was minted for a Nouakchott municipal self-published source."
+      },
+    {
+      "edge": "mr-budget-citoyen-2025 -> [not yet checked]",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "https://www.finances.gov.mr/index.php/fr/budget_citoyen was fetched and lists four language-variant 'Budget Citoyen 2025' PDFs (Arabic, Pulaar, Soninke, Wolof), but the prior session's WebSearch budget was exhausted before any of the linked PDFs could be opened to check for a Nouakchott/commune-level allocation breakdown. Flagged for a follow-up research pass rather than dropped as a negative result, since it was never actually checked."
+    },
+    {
+      "edge": "aimf.asso.fr / afrique.le360.ma / cabri-sbo.org -> [excluded sources]",
+      "source": null,
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "AIMF (Association Internationale des Maires Francophones) is a Francophone mayors' association, Le360 is a news outlet, and CABRI is a multi-country research/NGO-type collaborative platform. All three surfaced as candidate sources for Nouakchott commune finance in the prior session but were excluded per the evidence rule requiring primary Mauritanian government sources; none were fetched or used as a basis for any node or edge."
+    },
+    {
+      "edge": "mr-loi-finances-2026 (wilaya/moughataa judicial + youth-ministry line items) -> [out of scope for this file]",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Findings 1 and 2 of the source findings file document that Mauritania's Loi de Finances pour l'année 2026 (https://www.finances.gov.mr/sites/default/files/2026-01/Loi%20de%20Finances%20pour%20l%E2%80%99ann%C3%A9e%202026.pdf) itemizes wilaya- and moughataa-level judicial structures (e.g. 'STRUCTURES JUDICIAIRES DU HODH EL CHARGHI') and regional AJESSC youth-ministry delegations with real per-unit UM figures, across essentially all 15 wilayas. This is genuine, verified national-to-subnational budget content, but it concerns wilayas/moughataas generally rather than Nouakchott commune specifically, so it falls outside this file's scoped remit (mr-g22-nouakchott-commune.json) and was not minted here. Recorded for a future wilaya-focused research slice."
+    }
+  ]
+}

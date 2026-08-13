@@ -1,0 +1,214 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED into src/data/index.ts. AF/G.23 municipal-fiscal-tier round, 2026-08-13. Synthesizes a prior agent's raw research (verbatim quotes + exact URLs, no new web research performed this round) into schema-correct nodes for Lesotho's local-government finance framework: the Local Government Act 1996/1997's Part V Finance provisions, the Public Financial Management and Accountability Act 2011, the Local Government Service Act 2008, four editions of the Auditor-General's annual report (naming Maseru City Council, Maseru/Leribe District Councils, Mokhotlong Urban Council, and a full national roster of District/Urban Councils with Maloti figures), the FY2023/2024 Draft Budget Estimates Book's named local-government budget lines, and a SACU Secretariat Harmonised CPI press notice. No dedicated Maseru City Council website could be located (see _dropped). Cross-checked against src/data/research/ls-cpi-social-protection.json before minting to avoid duplicating ls-bos-cpi / ls-old-age-pensions-act-2005; that file's ls-bos-cpi entry was separately updated in place with a new finding this round.",
+  "reports": [
+    {
+      "id": "ls-local-government-act-1997",
+      "title": "Local Government Act 1996 (Act No. 6 of 1997) — Part V: Finance",
+      "publisher": "Government of the Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Lesotho's foundational local-government statute. Part V \"Finance\" (ss.47-63) establishes each council's own treasury: \"Every Council for its general financial purposes shall establish a Council Fund, (hereinafter referred to as \\\"the Fund\\\").\" (s.47(1)). The Fund's constituent revenue sources include \"(b) subject to any special appropriation made by the Minister all grants allocated to the Council by the Minister;\" \"(c) all rates, taxes, duties, fees and other charges levied under the authority of this Act;\" and \"(i) all sums and all sources or revenue, from time to time, appropriated or made order [sic] to the Council by the National Assembly, whether by resolution or otherwise.\" On the grant-allocation mechanism (s.55(1)-(4)), the Act sets up a discretionary, application-based process rather than a fixed revenue-sharing formula: \"A Council may, in order to implement its development programme, as recommended by the District Development Co-ordinating Committee, make a written application to the Minister for the allocation of a grant\"; \"The Minister shall evaluate the merits of such application having regard to the development priorities of that district, and recommend such application to the Minister responsible for Finance\"; \"Where the Minister of Finance considers such application and allocates a sum of monies by way of grant... such monies shall be credited to the Fund of the Council.\" The Act also grants councils a rating power (s.56(1)): \"A local authority may subject to such limitations, qualifications and conditions as may be prescribed by the Minister, impose and levy a rate on any property situated within its jurisdiction,\" and imposes a bi-annual audit requirement (s.63(1)): \"The accounts of every Council shall be audited during each half of the financial year by the Government Auditor or by such other professionally qualified auditor as may be appointed by the Minister.\" Text recovered as clean OCR from an FAO/FAOLEX mirror of the scanned Government Gazette (Adobe Acrobat 8.0 Paper Capture); the Government's own hosted copy (via an aceproject.org mirror) is an un-OCR'd image scan with no extractable text. Minor OCR artifact noted in s.47 (\"made order\" likely \"made over\") — recommend spot-checking against the Gazette if exact character fidelity is required.",
+      "last_updated": "1997",
+      "url": "https://faolex.fao.org/docs/pdf/les129405.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-pfma-act-2011",
+      "title": "Public Financial Management and Accountability Act, 2011 (Act No. 12 of 2011)",
+      "publisher": "Government of the Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Lesotho's public financial management statute, which explicitly folds local-government finance into the national accountability chain. Its interpretation section cross-references the Local Government Act 1997's own Council Fund provision by name: \"'council funds' means the funds referred to in section 47 of the Local Government Act, 1997\" (s.2). It assigns local-authority audit to the national Auditor-General: \"The Auditor General shall undertake audit of the financial statements of local authorities\" (s.39). And it routes local-authority accountability through Parliament: \"A local authority shall submit audited annual reports to the minister responsible for local government, who shall table the reports before Parliament and shall furnish copies of the reports to the Minister\" (s.34(3)). CAVEAT: lesotholii.org is behind a Cloudflare managed JS challenge — direct curl access to both the HTML act page and its /source.pdf variant returned HTTP 403 (\"Just a moment...\" interstitial). These quotes were obtained via a WebFetch tool that reached real rendered content, but could not be independently byte-verified against raw HTML/PDF this round; treat as high-confidence but not independently cross-verified verbatim text pending a manual browser-session re-check.",
+      "last_updated": "2011-06-17",
+      "url": "https://lesotholii.org/akn/ls/act/2011/12/eng@2011-06-17",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-local-government-service-act-2008",
+      "title": "Local Government Service Act, 2008 (Act No. 2 of 2008)",
+      "publisher": "Government of the Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Governs discipline of local-government officers, including the officers responsible for council finances. On penalties for misconduct (s.32(1)-(2)): \"The following penalties may be imposed on an officer who has been found guilty of misconduct: caution and reprimand; surcharge; demotion; compulsory retirement; or dismissal.\" \"An officer shall not be dismissed or otherwise punished except in accordance with this Act, regulations or rules made under it.\" This Act is cited by the Auditor-General's FY2022 report as part of the basis for an unaccounted-funds finding against Leribe District Council staff (see ls-auditor-general-report-2022). CAVEAT: same Cloudflare/WebFetch verification caveat as ls-pfma-act-2011 — not independently byte-verified against raw HTML this round. Separately, the AG's FY2022 report cites \"Local Government Service Act 2008 Section 85,\" but the LesLII copy of this Act used for this quote appears to terminate at Section 34 (\"Repeals\"); no Section 85 could be located. This may be an AG-report citation error or an incomplete/un-consolidated LesLII copy — flagged for manual review, not silently resolved.",
+      "last_updated": "2008-01-30",
+      "url": "https://lesotholii.org/akn/ls/act/2008/2/eng@2008-01-30",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-auditor-general-report-2020",
+      "title": "Report of the Auditor-General for the Year Ended 31 March 2020",
+      "publisher": "Office of the Auditor-General, Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Names Maseru District Council (MDC) and its constituent community councils with specific Maloti figures. On unused road-maintenance funds (s.15.5.2(a)): \"It was established that in the financial year 2017/18 Maseru District Council had a budget for maintenance/rehabilitation of Mahloenyeng-Matsieng and Seng-Setala Roads, funds were received in the second quarter but were not utilized at the end of the financial year. For example, Mahloenyeng-Matsieng Road was budgeted M1,012,000 for tools and equipment and Seng-Setala had a budget of M1,125,000 for blasting, that were not utilised.\" On the thinly-spread Development Fund (s.15.5.2(b)): \"The Development Fund had to be spread across all the development projects in the different community councils, thereby giving each community council limited funds.\" Table 15.5.2 (sourced \"MDC records\") gives year-by-year Maloti allocations by named road project, e.g. \"Mahloenyeng Matsieng 42km ... 2017/18 M4,421,707 / 2018/19 M2,191,058 / 2019/20 M1,547,400 ... Still in Progress,\" with further rows for Hata-Butle-Tloutle (12km), Matsieng-Nkesi (72km), and Seng-Setala (87km). This is the clearest direct evidence in this round of a central Development Fund being distributed by/through a District Council to named community-council-level road projects, with the audit explicitly attributing under-completion to over-thin spreading of funds.",
+      "cadence_note": "Annual statutory audit report; this is the FY ended 31 March 2020 edition of a recurring series (see also the FY2021, FY2022, and FY2024 editions elsewhere in this corpus).",
+      "last_updated": "2020-03-31",
+      "url": "https://auditorgeneral.org.ls/wp-content/uploads/2024/08/REPORT-OF-THE-AUDITOR-GENERAL-MARCH-2020.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-auditor-general-report-2021",
+      "title": "Report of the Auditor-General for the Year Ended 31 March 2021",
+      "publisher": "Office of the Auditor-General, Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Names Maseru City Council (MCC) and Mokhotlong Urban Council in specific fiscal-distress entries. A Contingencies Warrant (No. 54, dated 19/02/21, Ministry of Local Government) records: \"Bailout of Maseru City Council for Pay-As-You-Earn, staff pensions and rentals.\" A separate arrears table records: \"Rental arrears for 12 months from Mokhotlong Urban Council.\" CAVEAT: pdftotext linearization of both underlying multi-column tables (Recurrent/Development Expenditure/Cumulative/Balance columns for the warrant; the arrears table) makes numeric-row-to-purpose-row alignment uncertain — the specific Maloti amounts attached to each entry could not be confidently extracted this round, only the purpose text itself (each a single contiguous text block). Recommend visually opening the source PDF to confirm exact figures before citing a number.",
+      "cadence_note": "Annual statutory audit report; this is the FY ended 31 March 2021 edition of a recurring series (see also the FY2020, FY2022, and FY2024 editions elsewhere in this corpus).",
+      "last_updated": "2021-03-31",
+      "url": "https://auditorgeneral.org.ls/wp-content/uploads/2024/08/REPORT-OF-THE-AUDITOR-GENERAL-MARCH-2021.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-auditor-general-report-2022",
+      "title": "Report of the Auditor-General for the Year Ended 31 March 2022",
+      "publisher": "Office of the Auditor-General, Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "Documents an intra-local-government reimbursement dependency at Leribe District Council (LDC), with a cleanly-extracted unaccounted-funds figure (s.12.2.2(a), \"No loss reports prepared - M279,200\"): \"Employees of the Leribe District Council (LDC) are required to complete cash withdrawal slips when claiming out-of-pocket expenses for items such as lunch, soft drinks, office calling cards, individual airtime, electricity units, and transportation related to office duties. These expenses are reimbursed by the Community Councils, Urban Councils, and District Council Secretaries (DCS) offices,\" and \"approved withdrawals totalled M33,738 while the bank statements reflected withdrawals amounting to M312,938. As a result, there was an unaccounted amount of M279,200.\" The finding cites Treasury Regulations 2014 §§81, 85 and Local Government Service Act 2008 §32(1)(b) as its legal basis (see ls-local-government-service-act-2008 for a caveat on the Act's own Section-85 citation elsewhere in this report).",
+      "cadence_note": "Annual statutory audit report; this is the FY ended 31 March 2022 edition of a recurring series (see also the FY2020, FY2021, and FY2024 editions elsewhere in this corpus).",
+      "last_updated": "2022-03-31",
+      "url": "https://auditorgeneral.org.ls/wp-content/uploads/2024/08/REPORT-OF-THE-AUDITOR-GENERAL-MARCH-2022.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-auditor-general-cfs-2024",
+      "title": "Report of the Auditor-General on the Consolidated Financial Statements of the Government of Lesotho for the Year Ended 31 March 2024",
+      "publisher": "Office of the Auditor-General, Kingdom of Lesotho",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "The single cleanest primary-source statement of Lesotho's local-government reporting tier structure (s.2.2): \"The Government of Lesotho (GOL) is composed of the Central Government, Local Governments, Extra-Budgetary Entities, Public Financial Corporations and Public Non-Financial Corporations. Central Government includes all Ministries, Departments and Agencies whilst Local Governments are all the District Councils, Urban Councils and the Maseru City Council.\" Near-identical wording independently recurs in the FY2023 edition of this same report (auditorgeneral.org.ls/wp-content/uploads/2026/03/REPORT-OF-THE-AUDITOR-GENERAL-ENDED-MARCH-2023.pdf), confirming it is a stable, repeated institutional definition rather than a one-off. On community-level fund execution: \"Community Councils have maintained infrastructure through the Development Fund for Community Councils. Additionally, solid waste budget was executed up to 90%.\" \"Table 2: Controlled entities excluded from consolidation\" (p.44) gives the fullest national-report roster of named lower-tier units found this round: under \"Local Government,\" Maseru City Council is listed alongside named District Councils (Berea, Botha-Bothe, Mafeteng, Mokhotlong, Quthing, Qacha's Nek, Thaba-Tseka, Maseru, Leribe, Mohale's Hoek) and named Urban Councils (Berea, Botha-Bothe, Mafeteng, Mokhotlong, Quthing, Qacha's Nek, Thaba-Tseka, Semonkong, Hlotse, Mohale's Hoek, Maputsoe). CAVEAT: the district-name/urban-name column pairing in Table 2 is inferred from pdftotext's linearization of a two-column visual layout — the district and urban lists themselves are reliable, but which district lines up with which urban entry in the source table has not been visually confirmed.",
+      "cadence_note": "Annual statutory audit report; this is the FY ended 31 March 2024 edition of a recurring series (see also the FY2020, FY2021, and FY2022 editions elsewhere in this corpus, and the corroborating FY2023 edition noted in this description).",
+      "last_updated": "2024-03-31",
+      "url": "https://auditorgeneral.org.ls/wp-content/uploads/2026/05/Report-of-the-Auditor-General-on-the-CFS-of-the-Government-of-Lesotho-for-the-Year-Ended-31-March-2024.pdf",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "ls-draft-budget-estimates-2023-24",
+      "title": "Kingdom of Lesotho Draft Budget Estimates for the Financial Year 2023/2024",
+      "publisher": "Government of Lesotho, Ministry of Finance",
+      "country": "LS",
+      "jurisdiction_level": "federal",
+      "region": "Lesotho",
+      "description": "The national budget's Vote 308 (\"Local Government, Chieftainship, Home Affairs & Police\") itemizes named local-government capital and recurrent lines. A named-entity capital line: \"0114 - Solid Waste Management (MCC) 3 000 000\" (Programme 01, \"MCC\" = Maseru City Council, confirmed by repeated full-spelling usage in the Auditor-General reports in this corpus). Under Programme 04 (\"Building Enabling Infrastructure\"): \"0104 - Development Fund For Councils 20 000 004\" / \"0107 - Urban Roads Upgrading 150 000 000\" / \"0109 - Development of Rural Community Roads 100 000 000\" / \"0391 - Solid Waste Management for Urban Councils 4 999 996\"; and under Programme 05 (\"Strengthening National Governance and Accountability\"): \"0111 - Local Government Infrastructure 4 800 000.\" The \"Development Fund For Councils\" line item's name matches the \"Development Fund for Community Councils\" referenced in the Auditor-General's reports (see ls-auditor-general-report-2020 and ls-auditor-general-cfs-2024), though no direct textual citation links the two documents (parallel independent primary sources describing the same real-world fund, not one citing the other — see _dropped). A single lump-sum recurrent transfer line, not itemized per named council, also appears in the recurrent economic-item breakdown: \"472313 - Current Grants Paid to Local Governments 8 950 750\" — consistent with the Local Government Act 1997's discretionary/application-based (non-formula) grant mechanism (see ls-local-government-act-1997).",
+      "cadence_note": "Annual national budget estimates book; this is the FY2023/2024 draft edition. Two FY2025/2026 editions were located in search results but not independently fetched/verified this round (see _dropped).",
+      "last_updated": "2023-02",
+      "url": "https://www.gov.ls/wp-content/uploads/2023/02/2023-2024-Draft-Budget-Book.pdf",
+      "domains": ["municipal-finance", "fiscal-transfers"]
+    },
+    {
+      "id": "sacu-harmonised-cpi-notice",
+      "title": "SACU Harmonised Consumer Price Index (HCPI) Press Notice 02/2019",
+      "publisher": "SACU Secretariat",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "Southern African Customs Union",
+      "description": "SACU (Southern African Customs Union, of which Lesotho is a founding member)'s regional harmonised CPI, built from member states' own national HCPIs. Methodological note: \"It is against this background that COMESA and SADC jointly developed a harmonised measure of consumer inflation, the Harmonised Consumer Price Index or HCPI. The HCPI for the SACU region builds on the HCPIs of the individual Member States, the latter following the harmonised rules agreed by COMESA and SADC. The HCPI for the SACU region is a weighted average of the HCPIs for the individual SACU Member States.\" \"The Member States HCPIs are produced by the respective Member States using the agreed harmonised methodologies, while the SACU HCPI is compiled by the SACU Secretariat.\" Table 1 gives a Lesotho-specific data row: \"Lesotho 12.3 5.4 4.0 4.3 3.9 3.9 3.2 3.1 0.0\" (12.3% weight; February 2019 annual inflation rate 3.1%, monthly rate 0.0%). Document is dated 15 April 2019. CAVEAT: this notice does not explicitly name \"Lesotho Bureau of Statistics\" by name — it refers only to \"the respective Member States\" as HCPI producers, with Lesotho named individually only in the country list and Table 1 data row, not paired with its national statistics office's name.",
+      "cadence_note": "Titled a numbered press notice (02/2019); publication frequency of the SACU HCPI series is not established from this single document — recorded as a one-off primary source, not assumed periodic.",
+      "last_updated": "2019-04-15",
+      "url": "https://www.sacu.int/uploads/documents/332c7ad46dfa982f3c31b565a7f8b84171cd2260.pdf",
+      "domains": ["inflation"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ls-pfma-act-2011",
+      "target_report_id": "ls-local-government-act-1997",
+      "relationship_type": "cites",
+      "basis": "PFMA Act 2011 s.2 (Interpretation): \"'council funds' means the funds referred to in section 47 of the Local Government Act, 1997\" — a direct, named cross-reference to the Council Fund provision.",
+      "evidence_url": "https://lesotholii.org/akn/ls/act/2011/12/eng@2011-06-17"
+    },
+    {
+      "source_report_id": "ls-auditor-general-report-2022",
+      "target_report_id": "ls-local-government-service-act-2008",
+      "relationship_type": "cites",
+      "basis": "AG FY2022 report, s.12.2.2 (Leribe District Council unaccounted-funds finding), cites \"Local Government Service Act 2008 Section 85 (1) and (2)\" (alongside Treasury Regulations 2014 §§81, 85) as legal basis for its disciplinary/accountability finding.",
+      "evidence_url": "https://auditorgeneral.org.ls/wp-content/uploads/2024/08/REPORT-OF-THE-AUDITOR-GENERAL-MARCH-2022.pdf"
+    },
+    {
+      "source_report_id": "sacu-harmonised-cpi-notice",
+      "target_report_id": "ls-bos-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "SACU HCPI Press Notice 02/2019: the regional HCPI is explicitly \"a weighted average of the HCPIs for the individual SACU Member States,\" with each Member State's HCPI \"produced by the respective Member States.\" Lesotho is named individually in the country list and given its own weight/inflation data row in Table 1 (\"Lesotho 12.3 ... 3.1 0.0\"). CAVEAT: the notice does not name Lesotho's statistics agency (BOS) by name, only \"the respective Member States\" generically — the specific institutional link to ls-bos-cpi is inferential (Lesotho's national CPI producer is BOS by general knowledge/default), not a verbatim named attribution in this document.",
+      "evidence_url": "https://www.sacu.int/uploads/documents/332c7ad46dfa982f3c31b565a7f8b84171cd2260.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Maseru City Council -> (own official website/budget document)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No dedicated official Maseru City Council website could be located. Searches for an MCC-operated domain (mcc.org.ls, maserucitycouncil.org.ls, maserucitycouncil.gov.ls, mcc.gov.ls) returned only third-party business directories, Wikipedia, government-portal news items, and academic papers; speculative domain guesses failed with DNS resolution errors or proxy tunnel errors (502). All information about Maseru City Council's finances in this round therefore comes from national-level documents (Auditor-General reports, national budget book) reporting on it, not from MCC's own publications."
+    },
+    {
+      "edge": "ls-local-government-act-1997 -> (a fixed statutory revenue-sharing/allocation formula)",
+      "source": "ls-local-government-act-1997",
+      "target": null,
+      "reason": "denied",
+      "why": "Section 55(1)-(4) of the Local Government Act 1997 was checked specifically for a revenue-sharing formula and instead establishes an application/discretion-based grant process: a Council applies in writing, the Minister evaluates against district development priorities and recommends to the Minister of Finance, who then allocates a sum at discretion. This is an affirmative structural finding (no formula exists in the Act's own text), not a research gap, and is already reflected in the ls-local-government-act-1997 node description."
+    },
+    {
+      "edge": "ls-bos-cpi -> (an explicit SACU/SADC/IMF/ILO methodology citation within BOS's own CPI release)",
+      "source": "ls-bos-cpi",
+      "target": null,
+      "reason": "denied",
+      "why": "Full-text search of the entire 9-page January 2026 CPI release (Statistical Report No.3:2026) for \"SACU,\" \"SADC,\" \"IMF,\" \"ILO,\" \"harmonis(z)ed,\" and \"manual\" returned zero methodological citations. The release uses COICOP division/group/class headers but never cites COICOP's origin/standard-setting body, nor any SACU/SADC/IMF/ILO framework — only a generic mission-statement phrase (\"produce accurate, timely and reliable culturally relevant and internationally comparable statistical data\"). No separate, dedicated CPI-methodology technical document distinct from the monthly release could be located on the BOS site this round (the Publications.htm page itself returned HTTP 503 to direct fetch). This finding was used to update ls-bos-cpi's description in src/data/research/ls-cpi-social-protection.json in place."
+    },
+    {
+      "edge": "ls-pfma-act-2011 -> ls-local-government-act-1997",
+      "source": "ls-pfma-act-2011",
+      "target": "ls-local-government-act-1997",
+      "reason": "caveat",
+      "why": "The s.2 interpretation quote underlying this live edge was obtained via WebFetch against lesotholii.org, which is behind a Cloudflare managed JS challenge that blocked direct curl verification (HTTP 403 on both the HTML page and its /source.pdf variant, on both GET and via WebFetch for the PDF). High confidence but not independently byte-verified against raw HTML this round — recommend a manual browser-session re-check before treating the quote as fully verified."
+    },
+    {
+      "edge": "ls-auditor-general-report-2022 -> ls-local-government-service-act-2008",
+      "source": "ls-auditor-general-report-2022",
+      "target": "ls-local-government-service-act-2008",
+      "reason": "caveat",
+      "why": "The AG's FY2022 report cites \"Local Government Service Act 2008 Section 85 (1) and (2)\" as part of the legal basis for this live edge's finding, but the LesLII copy of the Act used to build the ls-local-government-service-act-2008 node appears to terminate at Section 34 (\"Repeals\") — no Section 85 could be located in it. Possible AG-report drafting error (may intend Treasury Regulations 2014 §85, cited separately in the same finding) or an incomplete/un-consolidated LesLII copy of the Act. Flagged for manual review rather than silently resolved; the edge itself (the report does cite the Act by name) stands regardless of the section-number discrepancy."
+    },
+    {
+      "edge": "ls-auditor-general-report-2021 -> (specific Maloti figures for the MCC bailout / Mokhotlong arrears entries)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The FY2021 AG report's Contingencies Warrant table and arrears table both suffered pdftotext linearization ambiguity between numeric columns and purpose-text rows, so no confident Maloti figure could be attached to either the Maseru City Council bailout warrant or the Mokhotlong Urban Council rental-arrears entry this round, even though the purpose-text quotes themselves are reliable. Recorded as a data-quality note on ls-auditor-general-report-2021, not a missing edge."
+    },
+    {
+      "edge": "ls-auditor-general-cfs-2024 Table 2 -> (district-to-urban-council column pairing)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Table 2's district-council and urban-council name lists were both reliably extracted, but which district name lines up with which urban-council name in the source PDF's two-column table layout is inferred only from pdftotext linearization order, not visually confirmed. Recorded as a data-quality note on ls-auditor-general-cfs-2024."
+    },
+    {
+      "edge": "ls-draft-budget-estimates-2023-24 -> (FY2025/2026 Budget Estimates Book editions)",
+      "source": "ls-draft-budget-estimates-2023-24",
+      "target": null,
+      "reason": "deferred",
+      "why": "Two FY2025/2026 Budget Estimates Book PDFs (at budgetportal.gov.ls:7024) were found in search results but not fetched/verified this round, since the FY2023/2024 book already yielded strong named-council evidence and the session's time/search budget was prioritized elsewhere. Flagged as untried, not failed — a good next-round target for updated figures."
+    },
+    {
+      "edge": "ls-local-government-act-1997 -> (Local Government Bill 2016, proposed successor)",
+      "source": "ls-local-government-act-1997",
+      "target": null,
+      "reason": "deferred",
+      "why": "A senate.parliament.ls page referencing the \"Local Government Bill 2016\" (a proposed reform/successor to the 1997 Act) was found in search results but not fetched this round, deprioritized once the 1997 Act's own finance provisions were secured via FAOLEX. Worth a follow-up pass if the corpus wants the proposed successor's finance provisions."
+    },
+    {
+      "edge": "ls-auditor-general-cfs-2024 -> ls-pfma-act-2011",
+      "source": "ls-auditor-general-cfs-2024",
+      "target": "ls-pfma-act-2011",
+      "reason": "no-document",
+      "why": "PFMA Act 2011 s.39 establishes the Auditor-General's statutory mandate to audit local authorities, which is plainly the legal basis for the AG's consolidated-financial-statement reports as a series. However, none of the specific AG-report passages captured this round (FY2020-FY2024) textually cite the \"Public Financial Management and Accountability Act\" by name — the mandate relationship is structural/inferable, not a documented verbatim citation, so no edge is drawn per the evidence rule requiring a textual basis."
+    }
+  ]
+}

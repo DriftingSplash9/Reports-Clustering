@@ -5,152 +5,76 @@
 
 ---
 
-## 🛑 Agent: read these files before doing any work
+## 🛑 Agent: read this before doing any work
 
-1. **This file** — what the system is trying to be and what is out of scope.
-2. **The highest-numbered `V0.*.md`** in `sessions/` — currently `V0.12.md`, the
-   last session's state and backlog.
-3. **The highest-numbered `V*.*.md` rollup** in `sessions/` — currently
-   `V1.5.md`, covering V0.1 through V0.5. This is where the history lives; it
-   replaces those five logs as *reading*, at about a quarter of their length.
+1. **This file, from "The one-line version" onward** — what the system is
+   trying to be and what is out of scope. That is the actual content; this
+   protocol section above it is not.
+2. **Your own project memory**, if you have persistent memory across sessions
+   (e.g. an AI assistant's project memory / `MEMORY.md`). That is now the
+   primary carryover between sessions — read it before assuming anything below
+   is current.
+3. **The newest hand-off in whichever branch you're about to work on** —
+   `AF/G.*.md`, `EU/G.*.md`, `NZ/G.*.md`, `AU/G.*.md`, `CA/G.*.md`. Each branch
+   keeps its own independent numbering. Read only the highest number in the
+   branch you're touching, not the whole chain — each hand-off is written to
+   supersede its predecessors, per its own closing spec block.
+4. **`README.md`** when you need run mechanics or "where does X live," not to
+   get oriented. **`planning/BACKLOG.md`** when the question is "what should I
+   work on next" — it's Thomas's own tier-ranked priority list, not needed to
+   understand what the project is.
 
-*(Session logs and rollups moved from project root into `sessions/` on
-2026-08-04. Prose citations elsewhere in this file — "decided in V0.8" and the
-like — are references to the log, not to a path, and were left alone.)*
-
-That is the whole list for *direction and state*. There is no `CLAUDE.md` and no
-other standing-rules file; if one is ever added it goes first, and this line gets
-updated.
+That is the whole list. There is no `CLAUDE.md` and no other standing-rules
+file; if one is ever added it goes first, and this line gets updated.
 
 `START-HERE.md` is not for you. It is the plain-language description the human
 sends to other people, and it is deliberately free of protocol, file maps and
 jargon. Keep it that way — but if a *direction* changes, it needs updating too,
 because it is the only document a non-technical reader will ever open.
 
-`README.md` is reference rather than reading — how to
-run and validate, where things live, and the steps to add a research slice
-(drop the JSON in `src/data/research/`, import it in `src/data/index.ts`, add it
-to the `slices` array, validate). Open it when you need the mechanics, not to
-get oriented.
+### The old session-log system is retired
 
-`BACKLOG.md` is also reference, and deliberately not on the reading list above —
-it is 6,000 words and would double the cost of getting oriented. Open it when the
-question is *what should I work on next*, because it is prioritised into tiers with
-a stated criterion and a measurement baseline. It is not needed to understand what
-the project is.
+This section used to point at `sessions/V0.*.md` and a `V1.5`/`V2.10` rollup
+thread as the project's running state-and-history log — one file per session,
+a consolidating "rollup" every fifth one, audited by the human irregularly.
+It worked well while this was one person's renderer project. It stopped being
+how the project actually tracks state once the work split into independently-
+numbered research branches (EU, then NZ, AU, CA, AF) each with their own
+hand-off chain, and once git took over as the record of what changed and when.
+Nothing was added to the `sessions/` thread after `V0.12`/`V2.10`, and this
+file kept pointing at it as "current state" long after that stopped being
+true — exactly the kind of stale-documentation drift this project's own
+2026-08-12 code review flagged as a real bug class, not a cosmetic one.
 
-**Always exactly two files from the logs: the latest session log and the latest
-rollup.** Not the whole thread. That is the entire point of the rollup thread —
-reading cost stays flat no matter how long the project runs.
+The whole thread is archived, unedited, at `archive/sessions/` (2026-08-13).
+It is not being resumed. If a piece of work is genuinely cross-cutting and not
+part of any branch's numbered chain — a renderer change, a data-pipeline fix —
+a single dated `HANDOFF-<date>-<topic>.md` at the root is enough; archive it
+to `archive/handoffs/` once it's done and superseded, the way everything from
+2026-08-11 through 2026-08-13 was.
 
-Then state what you understand the next job to be and confirm before building.
+### Standing rule: never run git from an AI session in this repo
 
-**You may decide a session is worth logging. You may not decide to write the
-log.** Notice, offer in one line, wait for a yes. See the protocol below.
+Every `git` command run through this project's remote-device file bridge —
+even a read-only `git status` — leaves a stale `.git/index.lock` the bridge
+cannot clean up (it can move files, not delete them), which then blocks
+Thomas's own commits in GitHub Desktop until the lock is moved aside by hand.
+**An AI session should never run `git` here.** If you need current git state,
+ask Thomas, or check by screenshotting GitHub Desktop: "Fetch origin" in the
+toolbar means the local branch is in sync with `origin/main`; "Push origin
+(N)" means N local commits are still waiting to go up. Thomas commits and
+pushes this repo's own work himself — this reverses the git policy an earlier
+decisions document recommended (commit-and-push per session), which is why
+that document is archived rather than current.
 
----
+### Standing rule: the evidence standard (restated because it binds everything below)
 
-## The two log threads
-
-There are two parallel threads of documents, and they do different jobs.
-
-### Thread 1 — session logs: `V0.1.md`, `V0.2.md`, `V0.3.md`, …
-
-One per meaningful session, written by whoever did the work. Each supersedes the
-last and says so, carrying forward what is still true and correcting what is not.
-Detailed, specific, and honest about what was not verified.
-
-These are never deleted. They are the raw record, and the human audits them
-directly and irregularly.
-
-**Offer, then write. Never write first.**
-
-Either side can start it. The human says "write V0.7" or "wrap this up for the
-next agent". Or the agent notices a session has reached a sensible stopping
-point and says so, in one line:
-
-> Now's probably a good time to wrap up V0.7 — want me to?
-
-And if that log is a fifth one, say so in the same breath, because it is twice
-the work:
-
-> Now's probably a good time to wrap up V0.10 — that's a rollup one, so
-> `V2.10.md` comes with it. Want me to?
-
-Then wait. A yes is the trigger; noticing is not.
-
-This used to read "at the end of a meaningful session, write the next-numbered
-log", which an agent reasonably took as standing authority — and two logs were
-written that nobody had asked for. The judgement was fine; both were sensible
-stopping points. Acting on it without asking was the error. **Finishing a piece
-of work is not a request to document it.**
-
-### Thread 2 — rollups: `V1.5.md`, `V2.10.md`, `V3.15.md`, …
-
-Written at **every fifth session log**, consolidating the five before it —
-**in the same pass as that log, without being asked separately.**
-
-That last part is the whole enforcement mechanism, and it replaces an earlier
-attempt at a schedule. A rollup that is its own scheduled task competes with
-whatever the human actually wants next and loses every time: rollup 1 was due at
-V0.5 and was written after V0.6, having been deferred twice in favour of more
-interesting work. Attaching it to the log removes the choice. If you are asked to
-write V0.10, you are being asked for `V2.10.md` as well, and you do not need to
-check.
-
-`npm run logs` prints which log is next and whether a rollup rides with it.
-
-Filename is `V<rollup number>.<last session covered>.md`:
-
-| File | Rollup | Covers |
-|---|---|---|
-| `V1.5.md` | 1st | V0.1 → V0.5 |
-| `V2.10.md` | 2nd | V0.5 → V0.10 |
-| `V3.15.md` | 3rd | V0.10 → V0.15 |
-
-**The windows overlap at the seam on purpose.** V0.5 is the last file in rollup 1
-and the first in rollup 2. Without the overlap a decision made in V0.5 and
-revised in V0.6 could fall into the crack between two windows and be described by
-neither. Sharing the boundary file means every rollup begins from a state its
-predecessor already established, and nothing is only ever seen from one side.
-
-Because a rollup file could be misread as a version number, **every rollup states
-its window in its own header**: "Rollup 2. Covers V0.5 through V0.10."
-
-### What a rollup is for
-
-It is not a summary. It is an **audit and a prune**.
-
-Writing one means going back through five sessions and asking of every claim: is
-this still true, does it still matter, and would a new agent be worse off without
-it? Most of what a session log contains is scaffolding — a bug that was fixed, a
-number that has since changed, a next step already taken. That is exactly right
-for a session log and exactly wrong to carry forever.
-
-So a rollup keeps:
-
-- **Decisions that still bind**, and the reasoning behind them. Especially the
-  ones that look arbitrary without their history.
-- **Mistakes worth not repeating.** The lost research agents, the unmounted room,
-  the sink leak in the authority metric. A rollup that drops these invites the
-  same mistake again.
-- **Live problems**, restated in current terms rather than as a chain of
-  corrections.
-- **Facts about the corpus** — which publishers document their inputs, which do
-  not, where the evidence standard bites hardest.
-
-And it drops: superseded numbers, fixed bugs with no lesson attached, completed
-next steps, and anything that reads as "here is what I did today".
-
-If a rollup cannot honestly say a thing still matters, it goes. The session log
-still has it, and the human still audits the thread.
-
-### Why it is split this way
-
-The agent audits five sessions at a time, on a schedule, with fresh eyes and the
-authority to prune. The human audits the whole thread, irregularly, with the
-context an agent cannot have. Neither substitutes for the other, and both are
-cheaper than one enormous document nobody reads to the end.
+If no document says a dependency exists, it doesn't go in the graph. Every
+edge needs an `evidence_url` and, wherever practical, a verbatim quote from a
+primary source — not a paraphrase, not a secondary source dressed up as one.
+`NOT FOUND` is a legitimate, valuable research outcome: record it honestly
+with a specific reason (most research slices use a `_dropped` array for this),
+don't leave it unminted and unmentioned.
 
 ---
 

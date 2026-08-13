@@ -1,0 +1,91 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). Continuing municipal-fiscal-tier research, 2026-08-13 (AF/G.23). Gambia (existing corpus: af-gambia.json — gm-gbos-cpi, gm-local-government-act-2002). This round's key discovery: a 'Local Government Finance and Audit Act, 2004' (anticipated by s.130 of the 2002 Act) genuinely exists and is cited by name in two independent primary Gambian government sources (National Audit Office and Kanifing Municipal Council itself), but its full text could not be located online anywhere despite exhaustive search — so no node was minted for the Act itself. Two genuine named-council fiscal documents were minted instead: NAO's own audited financial statements for Kanifing Municipal Council (OCR-extracted from a scanned-image-only PDF — no embedded text layer) and Kanifing Municipal Council's own self-published Budget 2021 Summary (with a quantified 13%-of-revenue Government Subvention figure).",
+  "reports": [
+    {
+      "id": "gm-nao-audit-kmc-2017-2019",
+      "title": "Auditor General's Report on Kanifing Municipal Council Financial Statements (Period Ended 1 April 2017 to 31 December 2019)",
+      "publisher": "National Audit Office (Gambia)",
+      "country": "GM",
+      "jurisdiction_level": "municipal",
+      "region": "Kanifing Municipality, The Gambia",
+      "description": "The National Audit Office (Gambia)'s Auditor-General's report on Kanifing Municipal Council's financial statements for the period 1 April 2017 to 31 December 2019, transmitted 3 December 2020 (Ref: HC 93/475/01/PART IV(11), signed by Bakary Trawally, For: Auditor General, copied to the Permanent Secretaries of the Ministry of Local Government and Lands and the Ministry of Finance). States KMC's governing accountability framework: \"Management is responsible for the preparation and fair presentation of these financial statements in accordance with Local Government Finance and Audit Act, 2004, Financial and Accounting Manual For Local Government Authorities Chapter 9 on cash basis, and for such internal control as management determines is necessary...\" — the first of two independent primary confirmations found this round that a distinct \"Local Government Finance and Audit Act, 2004\" exists and governs municipal financial accountability, the law anticipated (but not enacted) by the 2002 Local Government Act's own Section 130: \"The financial affairs of a Council shall be regulated in accordance with a Local Government (Finance and Audit) law to be enacted by the National Assembly.\" A companion passage names the fuller compliance stack: financial statements must comply \"with the provisions of the Government Budget Management and Accountability Act, Financial and Accounting Manual for Local Government Authorities, Local Government Act, and the Finance and Audit Act.\" The audited Revenue and Expenditure Statement for FY2019 (with FY2018 comparatives) records Total Revenue of D180,415,062 (2019) vs D142,473,020 (2018), broken into Licences, Taxes, Rents & Fees, Rates, Other Income, and Interest and Dividend; Note 5 (\"Other Income\") itemizes a \"Grants And Subventions - Government\" line of D500,000.00 for 2019 versus D2,317,300.00 for 2018 — a documented, audited, named-council-specific central-government transfer figure, though the year-on-year decline is stark. CAVEAT (OCR): the source PDF has no embedded text layer (pdftotext returned zero characters; it is a set of 150dpi scanned-image pages per pdfimages) — all quotes above were extracted via local OCR (tesseract) rather than standard text extraction, and should be treated as OCR-derived, not directly machine-extracted, text. CAVEAT (audit opinion): NAO issued an overall Adverse Opinion on KMC's FY2019 financial statements due to unrelated unexplained balances (accumulated funds, suspense account, etc.), so the underlying financials should be treated as officially contested/unreliable in aggregate even though the specific quoted lines are as NAO itself published them.",
+      "last_updated": "2020-12-03",
+      "url": "https://nao.gm/wp-content/uploads/2022/12/Kanifing-Municipal-Council-2017-to-2019-final-audit-report_compressed1.pdf",
+      "domains": ["municipal-finance", "fiscal-transfers"]
+    },
+    {
+      "id": "gm-kmc-budget-2021",
+      "title": "Kanifing Municipal Council — Budget 2021 Summary",
+      "publisher": "Kanifing Municipal Council",
+      "country": "GM",
+      "jurisdiction_level": "municipal",
+      "region": "Kanifing Municipality, The Gambia",
+      "description": "Kanifing Municipal Council's own self-published budget page states its statutory basis: \"The Kanifing Municipal Council produces an annual budget to manage the financial resources of the Council. In line with the Local Government Finance and Audit Act 2004, the Council has the right and obligation to formulate, approve and execute a financial budget\" — a second, fully independent primary confirmation (alongside gm-nao-audit-kmc-2017-2019) that the Local Government Finance and Audit Act, 2004 exists and governs council budgeting, though its full text could not be located online anywhere this round. The page's 'Budget 2021 Summary' section gives KMC's own FY2021 revenue/expenditure figures: \"The revenue projected for the fiscal year 2021 amounts to D 280,429,161.15... representing an increase of 30.77% compared to the 2020 budget. The projected revenue comprises of Trade License, Administration income, Markets income, Property Rates, Property Leasing, and Government Subvention... distributed among the revenue earning units as follows: Administration 1%, Market 20%, License 30%, Rates and Taxes 35%, Government Subventions 13%, and Car Park fees 1%\" — a specific, named-council, self-reported figure showing central-government subvention as 13% of projected FY2021 revenue. Expenditure: \"The projected expenditure for 2021 amounts to D 260,258,993.29... D 92,142,348.69 (35.4%) represents the Recurrent expenditures... while D 168,116,644.60 (64.6%) goes to Development expenditures.\" CAVEAT (currency of content): the page's schema.org metadata shows dateModified 2023-03-09, but the retrievable body text still only covers 'Budget 2021 Summary' — a referenced 'Budget 2023 Summary' section (page 2 of the paginated post) returned HTTP 200 but rendered no article body (likely requires JS execution), so treat any later-year figures as not-yet-retrieved rather than confirmed absent. CAVEAT (access): this host (kanifing.gm) returned HTTP 403 to a bare/minimal User-Agent or HEAD request during this round's research — successful fetch required a full desktop-browser User-Agent string; treat as bot-gated if re-fetching.",
+      "releases_per_year": 1,
+      "cadence_note": "KMC's own site states it produces an annual budget; only the 'Budget 2021 Summary' content was retrievable this round.",
+      "last_updated": "2023-03-09",
+      "url": "https://kanifing.gm/budget-finances/",
+      "domains": ["municipal-finance", "fiscal-transfers"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gm-nao-audit-kmc-2017-2019",
+      "target_report_id": "gm-local-government-act-2002",
+      "relationship_type": "cites",
+      "basis": "The audit report's own 'General Council's Responsibilities' passage lists financial-statement compliance obligations including \"...Financial and Accounting Manual for Local Government Authorities, Local Government Act, and the Finance and Audit Act...\" — a direct, if generic (no section number), textual citation of the 2002 Local Government Act as part of KMC's compliance framework, alongside the separately-named (and still full-text-unlocated) Finance and Audit Act 2004.",
+      "evidence_url": "https://nao.gm/wp-content/uploads/2022/12/Kanifing-Municipal-Council-2017-to-2019-final-audit-report_compressed1.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gm-nao-audit-kmc-2017-2019 / gm-kmc-budget-2021 -> Local Government Finance and Audit Act, 2004 (full-text node)",
+      "source": "gm-nao-audit-kmc-2017-2019",
+      "target": null,
+      "reason": "no-document",
+      "why": "Both new nodes this round cite the 'Local Government Finance and Audit Act, 2004' by name and year as governing authority (NAO audit report: 'accordance with Local Government Finance and Audit Act, 2004...'; KMC's own budget page: 'In line with the Local Government Finance and Audit Act 2004...'). Its EXISTENCE is now confirmed by two independent primary sources, but its full text could not be located anywhere online this round despite exhaustive search — not on NAO's own 'Laws & Standards' listing page (which lists five other statutes but omits this one), not on assembly.gm, not on ecolex/FAOLEX/NATLEX/WIPO Lex, not on any Gambian government gazette archive found. No node minted for the Act itself; both citing nodes' descriptions record the confirmed-existence/no-full-text status."
+    },
+    {
+      "edge": "gm-nao-audit-kmc-2017-2019 -> Government Budget Management and Accountability Act",
+      "source": "gm-nao-audit-kmc-2017-2019",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The same NAO audit passage also names KMC's financial statements as needing to comply with 'the Government Budget Management and Accountability Act' and the 'Financial and Accounting Manual for Local Government Authorities' — neither was independently sourced/full-text-verified this round (out of scope for this round's Kanifing-focused search); flagging as a follow-up lead rather than minting an unverified node."
+    },
+    {
+      "edge": "Banjul City Council -> self-published budget/report documents",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "banjulcity.gm's own /budgets/ and /reports/ pages return HTTP 200 but contain only WordPress Astra-theme placeholder Lorem-Ipsum-style text ('Behind the word mountains, far from the countries Vokalia and Consonantia, there'), confirmed via the site's own sitemap that no PDF budget/report attachments exist anywhere on the domain — a genuine confirmed content absence, not a fetch failure. No Banjul City Council fiscal node could be minted this round."
+    },
+    {
+      "edge": "kanifing.gm /budget-finances/ page 2 -> 'Budget 2023 Summary' figures",
+      "source": "gm-kmc-budget-2021",
+      "target": null,
+      "reason": "deferred",
+      "why": "The page's own pagination references a second 'Budget 2023 Summary' section, but /budget-finances/2/ and ?page=2 both return HTTP 200 with only sidebar/footer template content, no article body (likely requires JS execution). A future round with browser-rendering capability could retrieve the newer figures."
+    },
+    {
+      "edge": "MOFEA 2026-2028 Program Based Budget -> named-council subvention breakdown",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "The Ministry of Finance and Economic Affairs' 2026-2028 Program Based Budget (approved version) itemizes a ministry-wide 'Subvention (Transfers)' line for the Ministry of Lands & Regional Government (e.g. D32,000,000 in both the 2025 approved and 2026 estimated budgets) but does not break this down by named local government area or council anywhere in its 55 pages (full-text search for 'banjul city council', 'kanifing municipal', 'area council', 'local government area' returned zero named-council hits). The companion 2026 Budget Speech was also checked with the same negative result. Confirms transfers appear only as ministry-level aggregates in the national budget, not itemized per council."
+    },
+    {
+      "edge": "National Assembly FPAC report on Banjul City Council's 2019/20 accounts -> primary PDF",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Referenced second-hand by Gambian news outlets (Kerr Fatou, The Point, GAINAKO) at https://assembly.gm/wp-content/uploads/2023/09/FINAL-ADOPTED-FPAC-REPORT.pdf, but this URL (and filename/case variants) returns 404 — the primary document is not currently reachable at the cited location. Worth a follow-up search under a different assembly.gm path."
+    },
+    {
+      "edge": "gm-gbos-cpi -> ECOWAS convergence criteria / WAMZ standards / ILO-IMF CPI Manual citation, within the monthly CPI bulletin's own text",
+      "source": "gm-gbos-cpi",
+      "target": null,
+      "reason": "deferred",
+      "why": "The March 2024 CPI bulletin's full extracted text (5 pages, via pdftotext) confirms COICOP table-header usage but contains no explicit citation of COICOP's issuing body, the ILO/IMF CPI Manual, ECOWAS macroeconomic convergence criteria, or WAMZ standards. This round's WebSearch budget was exhausted before checking GBoS's separate CPI methodology/technical-note document (distinct from the monthly bulletin); GBoS's own cpi.php methodology page could not be fetched (robots/DNS resolution failure through the fetch tool). Distinct from the existing gm-gbos-cpi -> wama-amao 'no-document' drop already recorded in af-gambia.json (which concerned the IMF ROSC document, not the bulletin itself) — recorded separately so a future round doesn't re-run the same negative bulletin-text search."
+    }
+  ]
+}

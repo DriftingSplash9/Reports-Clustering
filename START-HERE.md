@@ -15,14 +15,18 @@ graph where each sphere is a real published report, each line is a documented
 dependency between two of them, and a report's size is how much everything else
 rests on it.
 
-Right now it holds **507 reports and 612 dependencies**, all real, all sourced.
-It began with Canadian and American federal statistics, Alberta's provincial
-finances and three Alberta municipalities in full detail, and has since grown
-galaxies: the European Union and its member states, candidates and neighbours;
-New Zealand and the three jurisdictions of its Realm plus the Pacific states
-that borrow its institutions; Australia; Brazil; the United Kingdom and the
-Netherlands; and the international bodies — IMF, OECD, BIS-adjacent — whose
-reports consume everyone else's numbers.
+Right now it holds **948 reports and 923 dependencies** (measured 2026-08-13 —
+run `npm run validate` for the live count, it moves most sessions). It began
+with Canadian and American federal statistics, Alberta's provincial finances
+and three Alberta municipalities in full detail, and has since grown galaxies:
+the European Union and its member states, candidates and neighbours; New
+Zealand and the three jurisdictions of its Realm plus the Pacific states that
+borrow its institutions; Australia; the United Kingdom and the Netherlands;
+the international bodies — IMF, OECD, BIS-adjacent — whose reports consume
+everyone else's numbers; and, now the largest branch by file count, all 54
+African states, with city/commune-level financial detail for about half of
+them. Brazil has a small foothold (two nodes); Russia, China and India have
+none yet — the obvious next continent-scale push if one starts.
 
 ---
 
@@ -204,9 +208,11 @@ This is the plain-language one. The rest are working documents:
 | `REPORTS.md` | The design rules and the reasoning behind them. The document that matters most. |
 | `planning/BACKLOG.md` | What to add next and why, in priority order. |
 | `README.md` | How to run it and where the code lives. |
-| `sessions/` | The running log — one `V0.*.md` per working session, newest is the current state and to-do list, plus the `V1.5`/`V2.10` rollups. |
-| `EU/`, `NZ/`, `AU/` | The research branches — each with its own `G.*.md` session logs; the EU's source PDFs now live in `EU/sources/`. |
+| `AF/`, `EU/`, `NZ/`, `AU/`, `CA/` | The research branches — each with its own independently-numbered `G.*.md` hand-off chain; the newest file in a branch is that branch's current state. The EU's source PDFs live in `EU/sources/`. |
+| `archive/` | Closed-out material kept for reference — old handoffs, decided questions, and the project's original session-log system (retired 2026-08-13; see `REPORTS.md` for why). |
 
-The `V0.*` files are a running log, one per working session; the `V1.5`/`V2.10`
-files consolidate every five of them so the reading never gets longer. If you're
-picking this up, `REPORTS.md` plus the newest of each is the whole briefing.
+There's no single running log across the whole project any more — that was
+tried early on (`sessions/V0.*.md`, now archived) and stopped scaling once the
+work split into branches. If you're picking this up, `REPORTS.md` plus the
+newest hand-off in whichever branch you're about to work on is the whole
+briefing.

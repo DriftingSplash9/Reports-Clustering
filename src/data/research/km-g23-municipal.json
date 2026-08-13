@@ -1,0 +1,87 @@
+{
+  "_meta": "AF/G.23 round, 2026-08-13. Comoros sub-national fiscal-tier follow-up. The single new node this round is the Union's own FY2026 annual budget law (Loi de Finances), the best-sourced primary document found for the recurring Union-to-island-governorate revenue-sharing mechanism (Grande Comore / Anjouan / Mohéli). Per the branch's node-discipline precedent (avoid over-minting near-duplicate law-year nodes), the corroborating 2016/2024/2025 editions of the same annual law are folded into this node's description as historical corroboration rather than minted as separate nodes -- see _dropped for that explicit design note. A companion enrichment to the existing km-constitution-union-2001 node (Constitution Article 104) was applied directly to af-comoros.json, not duplicated here. CAVEAT: the 2025 edition of the law, quoted here only as secondary corroboration, was recovered by the research agent via local tesseract OCR of a scanned, non-text-layer Ministry of Finance PDF (Producer: 'Epson Scan 2') -- the Mohéli percentage in that edition is an inferred value, not a directly OCR-confirmed one. No island-governorate self-published primary document was located (all guessed .km governorate domains failed DNS/TLS; only Facebook pages exist, excluded per the evidence rule), so no lower-tier node exists yet to form the other end of a genuine multi-tier reporting edge.",
+  "reports": [
+    {
+      "id": "km-loi-finances-2026",
+      "title": "Loi de Finances 2026 (Décret portant promulgation de la loi n°25-020/AU du 26 décembre 2025)",
+      "publisher": "Ministère des Finances, du Budget et du Secteur Bancaire / Assemblée de l'Union des Comores (Union des Comores)",
+      "country": "KM",
+      "jurisdiction_level": "federal",
+      "region": "Comoros",
+      "description": "Comoros's Union-level annual budget law for fiscal year 2026, hosted directly on the Ministry of Finance's own site (finances.gouv.km) as a text-native PDF (embedded Times New Roman text layer confirmed via pdffonts, not a scan; a handful of glyphs are garbled by a font-encoding artifact, including the decree number itself, but the substantive legal text extracts cleanly). Article 4 sets the pooled transfer to the three island governorates and its internal split by name: \"L'Etat alimentera les budgets des gouvernorats à hauteur de 1,85% des recettes intérieures. Ces montants seront affectés mensuellement sur décision du Ministre de finances en fonction de la répartition suivantes : - GRANDE-COMORE 40,27% - ANJOUAN 35,02% - MOHELI 24,71% A titre indicatif, la somme prévue pour 2026 s'élèverait à 1 562 754 964FC.\" The same document's \"Répartition Administrative des Crédits\" table itemizes the resulting per-island administrative credit lines by name, e.g. \"Ndzouani 428 894 205 [LFR2025] 533 337 788 [LFA2026] 104 443 583 24,35%\" (figures in Comorian Francs, comparing the revised 2025 budget against the approved 2026 budget for each island governorate). The decree's own promulgation clause cites Constitution Article 64 as its authority. This is a stable, recurring Union-to-island revenue-sharing mechanism, not a one-off: comparable provisions recur in earlier editions of the same annual law. The 2024 edition (WTO-hosted copy, Article 3): \"L'Etat alimentera les budgets des gouvernorats à hauteur de 2,07% des recettes intérieures... GRANDE-COMORE : ……41% - ANJOUAN ……36% - MOHELI ……23%\" (this WTO-hosted copy carries a blank law number, \"LOI N°23-______/AU,\" suggesting it is the pre-promulgation Assembly text rather than a post-promulgation Journal Officiel copy). The 2016 edition (Décret N°15-2[4]0/PR, fully promulgated with signature block, but a poor-quality OCR scan cross-checked here for internal percentage consistency), Article 8, names the underlying legal basis for the split: \"Le montant résiduel...est réparti, conformément à la loi organique portant fixation des quotes-parts : Entité / Quote Part / Montant en Millions — Union / 37,5%... Nqazidja [Ngazidja] / 27,4%... Ndzouani / 25,7%... Mwali / 9,4%\" — that named \"loi organique portant fixation des quotes-parts\" (organic law fixing the shares) was not itself independently located this round (see _dropped). The 2025 edition (Ministry of Finance site, Article 3) is corroborating context only, recovered via local tesseract OCR (French pack) of a scanned, non-text-layer PDF: the confirmed portion reads \"L'Etat alimentera les budgets des gouvernorats à hauteur de 2,33% des recettes intérieures...GRANDE-COMORE : 41% ANJOUAN 36%\" with the Mohéli figure (inferred as 23% by consistency with the 2024 split and the requirement that percentages sum near 100%) cut off/illegible in the OCR pass and therefore not directly confirmed. No island-government-published document was located this round to serve as an independent check on these Union-published figures.",
+      "cadence_note": "Annual budget law (Loi de Finances), re-enacted each fiscal year; the island revenue-sharing provision independently verified in the 2016, 2024, 2025 and 2026 editions (a stable recurring mechanism, not unique to this year's law).",
+      "last_updated": null,
+      "url": "https://finances.gouv.km/wp-content/uploads/2026/02/Decret-portant-promulgation-du-loi-des-finances-2026.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "km-loi-finances-2026",
+      "target_report_id": "km-constitution-union-2001",
+      "relationship_type": "cites",
+      "basis": "The 2026 promulgation decree's own \"VU\" (having-regard-to) clause cites Constitution Article 64 as its promulgation authority, per direct extraction of the PDF's text layer (finances.gouv.km-hosted copy).",
+      "evidence_url": "https://finances.gouv.km/wp-content/uploads/2026/02/Decret-portant-promulgation-du-loi-des-finances-2026.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "km-loi-finances-2026 (or a hypothetical predecessor node) -> loi organique portant fixation des quotes-parts",
+      "source": "km-loi-finances-2026",
+      "target": null,
+      "reason": "no-document",
+      "why": "The 2016 Loi de Finances (Article 8) names 'la loi organique portant fixation des quotes-parts' as the legal basis for the Union/Ngazidja/Ndzouani/Mwali percentage split, but that organic law was not itself independently located this round despite the search (no dedicated Journal Officiel des Comores portal was found either -- see the separate 'no separate Journal Officiel portal' dropped note below). Recorded explicitly as NOT FOUND per the round's instructions."
+    },
+    {
+      "edge": "separate nodes for the 2016 / 2024 / 2025 editions of the Loi de Finances",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Findings for the 2016 (WTO-hosted, wtacccom12_leg_8.pdf), 2024 (WTO-hosted, WT_ACC_COM_50_LEG1.pdf) and 2025 (finances.gouv.km, OCR-recovered) editions of the annual Loi de Finances all show the same recurring Union-to-island percentage-split mechanism found in the 2026 edition. Per this branch's precedent of not minting a separate node per exercise-year for a recurring annual instrument absent a distinct legal-numbering change, these were folded into km-loi-finances-2026's description as historical corroboration rather than minted as their own nodes. Flagged here so the design choice is auditable rather than silent."
+    },
+    {
+      "edge": "island governorate (Ngazidja / Anjouan / Mohéli) self-published website or budget document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No official .km governorate domain resolves (probed gouvernorat.km, gouvernorat-ngazidja.km, anjouan.km, mwali.km, ndzuwani.km -- all DNS/connection failures). Only Facebook pages and third-party news coverage (alwatwan.net, Comores Infos) were found, none qualifying as a primary government document under this project's evidence rule. This means the Union-published km-loi-finances-2026 figures currently have no independent island-tier document to be checked against or to form the other end of a genuine multi-tier reporting edge."
+    },
+    {
+      "edge": "km-cour-des-comptes (Comorian apex audit body)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Comoros does not appear to have a standalone Cour des Comptes; audit functions instead sit within a 'Section des Comptes' of the Cour Suprême (Supreme Court) -- a modest structural finding, but only search-result titles were seen, not verbatim primary content. Direct access to coursupremecomores.km failed twice with different failure modes (a ROBOTS_DISALLOWED/timeout on the robots.txt probe, then a TLS handshake reset on retry), suggesting an unstable or misconfigured origin server rather than a deliberate crawler block. Worth a future access attempt from a different network path."
+    },
+    {
+      "edge": "Journal Officiel des Comores (dedicated online archive/portal)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No dedicated online 'Journal Officiel des Comores' portal was located this round; searches surfaced only third-party/unrelated results. The Ministry of Finance's own 'Publications et données' section (finances.gouv.km) functions as the closest equivalent for budget-law texts and was already exploited for this round's findings."
+    },
+    {
+      "edge": "km-inseed-ihpc -> AFRISTAT/COMESA/COI methodology text (bulletin re-check)",
+      "source": "km-inseed-ihpc",
+      "target": null,
+      "reason": "note",
+      "why": "Re-checked the existing corpus's cited IHPC bulletin (inseed-comores.org/publications/ihpc-avril-2026) directly for AFRISTAT/COMESA/Indian Ocean Commission methodology language; confirmed via WebFetch it contains none. This does not affect the existing methodology_depends_on edge to afristat-ihpc-guide-2014, which is sourced from a different document (the AU peer-review report) already correctly captured in af-comoros.json -- recorded here only as a re-confirmation, not a new or resolved edge."
+    },
+    {
+      "edge": "IMF 2025 Article IV / Fifth ECF Review -> island-level fiscal transfer relations",
+      "source": null,
+      "target": "km-loi-finances-2026",
+      "reason": "no-document",
+      "why": "The full text (7,791 extracted lines) of the IMF's 2025 Article IV Consultation / Fifth ECF Review report for Comoros (elibrary.imf.org) was searched for island-level fiscal-relations content. It discusses only tax-administration decentralization (deployment of DGI local tax offices across the three islands, SIGIT software interconnection) -- not Union-to-island revenue-sharing or transfers. Genuine NOT FOUND for this specific angle despite exhaustive full-text search; several direct imf.org PDF mirrors also returned HTTP 403."
+    },
+    {
+      "edge": "munganyo.km (privately-run Comorian legal-document aggregator)",
+      "source": null,
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "A Hostinger-hosted site aggregating Comorian decrees (e.g. munganyo.km/decrees/548) was found and returns 200 OK, but is not confirmed as government-authored or government-hosted, so it was not used as a primary source under this project's evidence rule. Flagged only as a possible future lead for locating other Comorian decrees (e.g. the still-unlocated organic law on island revenue quotes-parts) if no government-hosted copy turns up."
+    }
+  ]
+}
