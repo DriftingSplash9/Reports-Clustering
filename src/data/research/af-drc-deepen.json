@@ -1,0 +1,52 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), thin-country deepening wave. DR Congo already has 4 nodes covering national CPI, the Constitution's provincial-revenue provision, Kinshasa's own provincial budget, and a national medium-term budget framework (all in cd-provinces-fiscal.json) — national and provincial tiers are already well-documented. This file adds ONLY the missing international/regional-bloc layer, dispatched to a single Agent given DRC's unusually large number of overlapping bloc memberships (SADC, ECCAS/CEEAC, COMESA, and a 2022 EAC accession).",
+  "reports": [
+    {
+      "id": "afristat-rdc-prices-bulletin",
+      "title": "Évolution des prix dans les États Membres d'AFRISTAT, élargi à la RDC",
+      "publisher": "AFRISTAT",
+      "country": "INT",
+      "jurisdiction_level": "supranational",
+      "region": "Sub-Saharan Africa (AFRISTAT member states, extended to DR Congo)",
+      "description": "A monthly AFRISTAT price-trends bulletin covering CPI for 23 Sub-Saharan African countries, explicitly extended to include DR Congo despite DRC NOT being an AFRISTAT member state. Directly verified via PDF text extraction. \"AFRISTAT... envisage de produire un bulletin mensuel sur l'évolution des prix à la consommation des Etats membres élargi à la République Démocratique du Congo. La publication est consacrée aux indices des prix à la consommation de 23 pays d'Afrique subsaharienne... La collecte est effectuée auprès des sources ci-après : les responsables en charge de la production des indices des prix à la consommation dans les Etats membres et la RDC\" [AFRISTAT plans to produce a monthly bulletin on consumer price trends of Member States extended to DRC. The publication covers CPI for 23 Sub-Saharan African countries... Data is collected from officials responsible for producing consumer price indices in Member States and the DRC]. A distinct document from the existing `afristat-ihpc-guide-2014` methodology guide — this is a data-aggregation bulletin, not a methodology standard.",
+      "cadence_note": "Monthly, per the bulletin's own stated production plan.",
+      "last_updated": null,
+      "url": "https://www.afristat.org/wp-content/uploads/Evolution_des_prix_dans_les_EMA_RDC_janvier_2021.pdf",
+      "domains": [
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "sadc-hcpi-newsletter",
+      "target_report_id": "cd-ins-note-conjoncture",
+      "relationship_type": "uses_data_from",
+      "basis": "A September 2022 edition of the SADC HCPI Newsletter (Issue No. 129 — a later edition than the Stage-1 2012-09 PDF already wired to this corpus's 8 original SADC countries, but the same ongoing institutional series, consistent with how that hub node is already reused across editions) directly verified via pdftotext, lists \"Congo DR\" among covered SADC Member States with a country weight of 8.10 and monthly/annual inflation series 2020-2022 (11.5% annual, 1.4% monthly in September 2022). Direction/type matches the established sadc-hcpi-newsletter -> country-CPI pattern (hub aggregates FROM each country's own CPI). `sadc-hcpi-newsletter` reused, now covering its 9th country.",
+      "evidence_url": "https://www.sadc.int/sites/default/files/2022-11/SADC_HCPI_Sep_2022_0.pdf"
+    },
+    {
+      "source_report_id": "afristat-rdc-prices-bulletin",
+      "target_report_id": "cd-ins-note-conjoncture",
+      "relationship_type": "uses_data_from",
+      "basis": "The bulletin's own text states its data is collected from \"les responsables en charge de la production des indices des prix à la consommation dans les Etats membres et la RDC\" [officials responsible for producing consumer price indices in Member States and DRC] — the bulletin is built FROM DRC's own national CPI-producing officials, matching the established hub-aggregates-from-national-CPI pattern.",
+      "evidence_url": "https://www.afristat.org/wp-content/uploads/Evolution_des_prix_dans_les_EMA_RDC_janvier_2021.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cd-ins-note-conjoncture -> eac-hcpi-regulations",
+      "source": "cd-ins-note-conjoncture",
+      "target": "eac-hcpi-regulations",
+      "reason": "no-document",
+      "why": "DRC formally joined the EAC in 2022. The EAC's own HCPI Regulations document (full text searched, March 2022 edition) names only \"Kenya, Uganda, the United Republic of Tanzania (URT), Republic of Rwanda, Republic of Burundi and Republic of South Sudan\" as covered Partner States — zero occurrences of \"Congo\" or \"DRC.\" This March 2022 edition predates DRC's finalized accession later in 2022, so the absence is expected; no newer edition was locatable this round. Worth re-checking in a future session once a post-accession edition is published."
+    },
+    {
+      "edge": "cd-ins-note-conjoncture -> comesa-treaty-establishing",
+      "source": "cd-ins-note-conjoncture",
+      "target": "comesa-treaty-establishing",
+      "reason": "no-document",
+      "why": "DRC's own SNDS (2012-2017, hosted by PARIS21) mentions AFRISTAT only in an acronym glossary per an AI-summarized WebFetch pass (direct download was blocked by a CAPTCHA/redirect wall, so not independently verified) — no SADC/COMESA/CEEAC/EAC mention found in that document. INS-RDC's own website (ins.gouv.cd) similarly showed no mentions of any of these bodies per WebFetch summary, also not independently verified. COMESA's OpenDataForAfrica portal lists \"Congo DR\" as a reporter in its HCPI dataset, but this is a third-party data-hosting portal, not a COMESA primary publication — too weak to cite. Genuine NOT FOUND for a COMESA-specific documented edge."
+    }
+  ]
+}

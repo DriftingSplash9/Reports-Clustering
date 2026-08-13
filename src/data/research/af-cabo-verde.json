@@ -1,0 +1,60 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), wave 3. Cabo Verde — 13th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. A relatively strong Layer-1 finding for a small island state; Layer 2's AFRISTAT lead was a mere acronym-glossary appearance and deliberately not force-linked as a methodology edge.",
+  "reports": [
+    {
+      "id": "cv-ine-ipc",
+      "title": "Índice de Preços no Consumidor (IPC)",
+      "publisher": "Instituto Nacional de Estatística de Cabo Verde (INE-CV)",
+      "country": "CV",
+      "jurisdiction_level": "federal",
+      "region": "Cabo Verde",
+      "description": "Cabo Verde's national CPI. INE-CV's own \"Índice de Preços no Consumidor – Síntese dos Resultados\" report states the classification standard as \"Classificação do Consumo Individual por Objetivo (CCIO)\" — Cabo Verde's Portuguese-language name for COICOP — with a price reference year of 2018 (\"IPC18\") and monthly collection (\"recolha da informação mensal\"). Recent releases (titles confirmed via INE-CV's own site listing, not independently fetched due to JS-rendering) continue at least through January 2026, independently corroborated by Cabo Verdean press coverage of a 1.8% April 2026 inflation figure attributed to INE.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; confirmed current through at least January 2026 via INE-CV's own release-title listing and independent press corroboration.",
+      "last_updated": null,
+      "url": "https://ine.cv/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "cv-constitution-autarquias",
+      "title": "Constituição da República de Cabo Verde (2ª Revisão Ordinária, 2010) — Artigos 230 e 233",
+      "publisher": "República de Cabo Verde",
+      "country": "CV",
+      "jurisdiction_level": "federal",
+      "region": "Cabo Verde",
+      "description": "Cabo Verde is a unitary state organised into 22 municipalities (concelhos) with NO intermediate provincial/regional tier — the closest available fiscal-transfer tier is national-to-municipal. Article 233: \"As autarquias locais têm património próprio e finanças autónomas, nos termos da lei\" [Local authorities have their own patrimony and autonomous finances, under the terms of the law]. Article 230 separately defines autarquias locais as decentralised public entities with political, administrative and financial autonomy.",
+      "cadence_note": "One-off foundational instrument.",
+      "last_updated": null,
+      "url": "https://dgape.cv/wp-content/uploads/2022/02/Constituicao-da-Republica.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "cv-ine-ipc -> afristat-ihpc-guide-2014",
+      "source": "cv-ine-ipc",
+      "target": "afristat-ihpc-guide-2014",
+      "reason": "no-document",
+      "why": "Cabo Verde acceded to AFRISTAT in 2002 (per this corpus's earlier af-grok-synthesis.json AFRISTAT history note) and INE-CV's own \"Estratégia Nacional de Desenvolvimento da Estatística (ENDE) 2022-2026\" document (hosted on AFRISTAT's own site) DOES name AFRISTAT — but only in an acronym glossary (\"AFRISTAT — Observatório Económico e Estatístico da África Subsariana\"), not in a substantive sentence describing an actual methodology relationship. Too weak to satisfy the branch's citation standard; not force-linked. The same ENDE document does contain a substantive sentence naming ECOWAS (CEDEAO) as a sub-regional funding source, but that is about project financing, not statistical methodology, so also not minted as an edge."
+    },
+    {
+      "edge": "cv-charter-ratification-status",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The same ENDE 2022-2026 document states Cabo Verde had NOT ratified the African Charter on Statistics as of 2022 (\"Não ratificação da CAE pelo país\") — recorded as a negative finding for future reference, matching the pattern used for Sudan and Comoros this same round."
+    },
+    {
+      "edge": "cv-ine-ipc -> cv-lei-financas-locais-79-2005",
+      "source": "cv-ine-ipc",
+      "target": null,
+      "reason": "no-document",
+      "why": "A national Local Government Finance Law (Lei n.º 79/VI/2005, \"Lei das Finanças Locais\") is corroborated by two independent secondary sources (a UCLG country profile, and an \"Estatuto dos Municípios\" PDF) as establishing a two-fund municipal transfer mechanism (Fundo Municipal Comum, 75%, and Fundo de Solidariedade Municipal, 25%) — but the primary Boletim Oficial text of the law itself could not be located this round despite multiple targeted FAOLEX searches, all of which returned unrelated Cabo Verdean laws. Strong lead, not minted per the branch's standing practice of not treating secondary corroboration as a citable primary source."
+    }
+  ]
+}

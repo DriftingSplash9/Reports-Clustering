@@ -435,6 +435,18 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   GM: 'AFR',
   MU: 'AFR',
 
+  // 2026-08-13 (AF/G.17, wave 3 -- final 5 of the 15-country population-
+  // priority roster, all small/island states): Djibouti, Comoros, Cabo
+  // Verde, Sao Tome and Principe, Seychelles. All 54 sovereign African
+  // states now have at least one corpus node. See `af-djibouti.json`,
+  // `af-comoros.json`, `af-cabo-verde.json`, `af-sao-tome-principe.json`,
+  // `af-seychelles.json`.
+  DJ: 'AFR',
+  KM: 'AFR',
+  CV: 'AFR',
+  ST: 'AFR',
+  SC: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

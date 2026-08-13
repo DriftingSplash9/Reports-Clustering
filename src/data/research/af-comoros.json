@@ -1,0 +1,61 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), wave 3. Comoros — 12th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. Comoros is a genuinely federal union of three islands (Grande Comore, Anjouan, Mohéli), giving this file a stronger provincial/state-tier finding than most small-state rounds this wave.",
+  "reports": [
+    {
+      "id": "km-inseed-ihpc",
+      "title": "Indice Harmonisé des Prix à la Consommation (IHPC)",
+      "publisher": "Institut National de la Statistique et des Études Économiques et Démographiques (INSEED), Comoros",
+      "country": "KM",
+      "jurisdiction_level": "federal",
+      "region": "Comoros",
+      "description": "Comoros's national CPI, published monthly by INSEED (Bulletin IHPC N°04/2026, April 2026, directly verified via curl/HTML extraction). \"En avril 2026, l'Indice Harmonisé des Prix à la Consommation (IHPC) a progressé de 0,4 % par rapport au mois précédent... Indice harmonisé des prix à la consommation de Moroni, base 100 : 2011.\" Base year 2011=100. CAVEAT: the bulletin's own subtitle names the index as being \"de Moroni\" (of Moroni, the capital) — this may indicate the headline IHPC is a capital-city index rather than a full national composite; broader geographic coverage was not confirmed from this document alone. The index's functional breakdown structurally resembles COICOP but the bulletin's own text never uses the term \"COICOP\" verbatim, so that specific citation is not claimed here.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; active series confirmed through at least Dec 2025-Apr 2026.",
+      "last_updated": null,
+      "url": "https://www.inseed-comores.org/publications/ihpc-avril-2026",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "km-constitution-union-2001",
+      "title": "Constitution de l'Union des Comores du 23 décembre 2001 (révisée 2009, 2013, 2018)",
+      "publisher": "Union des Comores",
+      "country": "KM",
+      "jurisdiction_level": "federal",
+      "region": "Comoros",
+      "description": "The consolidated Comorian Constitution (2001, as amended through the 2018 revision), hosted via ILO NATLEX. Directly verified via pdftotext extraction. Article 105: \"Compte tenu de la solidarité nationale et du développement socio-économique équilibré des iles, les ressources de celles-ci comprennent la dotation versée par l'État et le produit des droits, impôts, taxes locaux, dont les montants et les taux sont fixés par la loi de finances\" [In view of national solidarity and balanced socio-economic development of the islands, island resources comprise the grant paid by the State and the proceeds of local duties, taxes and levies, whose amounts and rates are set by budget law]. Article 106: \"Le budget de l'Ile doit être en équilibre et approuvé par l'État\" [The Island's budget must be balanced and approved by the State]. The 2018 revision is widely reported to have significantly centralised power relative to the original 2001 framework (ending the rotating Union presidency among islands) — Articles 105/106 show the fiscal relationship is asymmetric/centralised (State-set grants, State-approved budgets), not co-equal federalism, despite the three islands each retaining their own elected government. No separate annual budget law itemising actual per-island transfer amounts was located this round.",
+      "cadence_note": "One-off foundational instrument (consolidated through the 2018 revision).",
+      "last_updated": null,
+      "url": "https://natlex.ilo.org/dyn/natlex2/natlex2/files/download/72696/COM-72696%20(CONSOLID).pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "km-inseed-ihpc",
+      "target_report_id": "afristat-ihpc-guide-2014",
+      "relationship_type": "methodology_depends_on",
+      "basis": "An AU/StatAfric Pan-African Statistics Programme peer review of Comoros's national statistical system (hosted on INSEED's own domain, visit dated 21-22 October 2018) states verbatim: \"L'INSEED adapte les nomenclatures développées par AFRISTAT et les méthodologies et méthodes internationales de collecte et de traitement des données\" [INSEED adapts the nomenclatures developed by AFRISTAT along with international methodologies and methods for data collection and processing]. This is AU-authored (a third-party peer review of INSEED, not INSEED's self-published methodology note), but hosted on INSEED's own site and states a direct, specific methodology-adaptation relationship — matching the strength standard used elsewhere in this corpus for `methodology_depends_on` edges. `afristat-ihpc-guide-2014` reused per the branch's node-id discipline.",
+      "evidence_url": "https://www.inseed-comores.org/backend/uploads/Rapport_revue_SSN_en_Union_des_Comores_par_les_Pairs_Union_Aficaine_26ce81b0d1.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "km-charter-ratification-status",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "The same AU peer-review document (p.4/p.89) notes Comoros signed but had NOT yet ratified the African Charter on Statistics as of the 2018 review (\"orientations de la Charte africaine de la statistique signée mais non encore ratifiée\") — recorded as a negative finding for future reference rather than as an edge, matching the pattern used for Sudan's Charter non-ratification this same round."
+    },
+    {
+      "edge": "km-inseed-ihpc -> coi-ioc",
+      "source": "km-inseed-ihpc",
+      "target": null,
+      "reason": "no-document",
+      "why": "Comoros is a founding member of the Indian Ocean Commission (COI/IOC), alongside Madagascar, Mauritius, and Seychelles — a strong a-priori candidate for this corpus's still-open \"no country has cited the COI/IOC\" gap. The full text of the AU peer-review document (36 pages) was searched for \"Commission de l'Océan Indien,\" \"COI,\" and \"Indian Ocean Commission\" — zero mentions found. Genuine NOT FOUND despite being the single best-positioned candidate document searched so far."
+    }
+  ]
+}

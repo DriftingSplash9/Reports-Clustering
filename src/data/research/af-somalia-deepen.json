@@ -1,0 +1,60 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), thin-country deepening wave. Somalia already has one node (`so-snbs-cpi`, in af-grok-synthesis.json) — this file adds the missing international/bloc and provincial/federal tiers via a dispatched Agent, without re-researching the national CPI itself.",
+  "reports": [
+    {
+      "id": "so-nsds-ii-2024-2029",
+      "title": "National Strategy for the Development of Statistics (NSDS II) 2024–2029",
+      "publisher": "Somalia National Bureau of Statistics (SNBS)",
+      "country": "SO",
+      "jurisdiction_level": "federal",
+      "region": "Somalia",
+      "description": "Somalia's current national statistics strategy. States: \"At the regional level, the NSDS is aligned with the IGAD RSDS and EAC RSDS, while at the national level, the Statistics Act guides statistical production and development in the country\" and \"The government of Somalia has aligned itself very much with the SDGs, Agenda 2063, the Intergovernmental Authority on Development (IGAD) Vision 2050 and the Regional Strategy for the Development of Statistics (RSDS).\" At the continental level: \"NSDSs respond to the Africa Charter for Statistics and the Strategy for Harmonisation of Statistics in Africa (SHaSA).\" Somalia joined the East African Community (EAC) in 2024 — a major, recent development. IMPORTANT: this document names the EAC's and IGAD's general Regional Strategy for the Development of Statistics (RSDS), NOT the EAC's specific harmonised-CPI regulation already in this corpus (`eac-hcpi-regulations`) — the two are different documents, so no edge is drawn to that node. AFRISTAT was searched for and NOT found in this document, SNBS's CPI methodological note, or a 2025 SNBS GDP policy brief.",
+      "cadence_note": "One-off foundational strategy document (2024-2029 planning horizon).",
+      "last_updated": null,
+      "url": "https://nbs.gov.so/wp-content/uploads/2025/12/Somalia-NSDS.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "so-provisional-constitution-2012",
+      "title": "Provisional Constitution of the Federal Republic of Somalia (2012)",
+      "publisher": "Federal Republic of Somalia",
+      "country": "SO",
+      "jurisdiction_level": "federal",
+      "region": "Somalia",
+      "description": "Somalia's Provisional Constitution, still in force (provisional status unchanged as of 2026). Directly verified via downloaded PDF (pdfplumber extraction, not AI-summarized). Article 50 (Principles of Federalism): \"(e) Fair distribution of resources; (f) The responsibility for the raising of revenue shall be given to the level of government where it is likely to be most effectively exercised.\" Article 54 (Allocation of Powers): \"The allocation of powers and resources shall be negotiated and agreed upon by the Federal Government and the Federal Member States (pending the formation of Federal Member States), except in matters concerning: (A) Foreign Affairs; (B) National Defense; (C) Citizenship and Immigration; (D) Monetary Policy, which shall be within the powers and responsibilities of the federal government.\" Article 51(3) establishes an annual conference of Federal/Member State executives to agree on national socio-economic development and common-market policies. A Somali National Economic Council report (\"Building Cooperative Fiscal Federalism in Somalia\") corroborates these same articles but is itself policy analysis, not a signed intergovernmental fiscal-federalism agreement — no distinct IGFF agreement document was located this round.",
+      "cadence_note": "One-off foundational instrument.",
+      "last_updated": null,
+      "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/so/so004en_1.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "so-nsds-ii-2024-2029",
+      "target_report_id": "african-charter-statistics-2009",
+      "relationship_type": "cites",
+      "basis": "\"At the continental level, NSDSs respond to the Africa Charter for Statistics and the Strategy for Harmonisation of Statistics in Africa (SHaSA).\" General framework-alignment language rather than a specific methodology dependency, so 'cites' rather than 'methodology_depends_on', matching the convention used for similarly general Charter mentions this session. `african-charter-statistics-2009` reused (4th country this session, after Tanzania, The Gambia, São Tomé).",
+      "evidence_url": "https://nbs.gov.so/wp-content/uploads/2025/12/Somalia-NSDS.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "so-nsds-ii-2024-2029 -> eac-hcpi-regulations",
+      "source": "so-nsds-ii-2024-2029",
+      "target": "eac-hcpi-regulations",
+      "reason": "wrong-target",
+      "why": "The NSDS II names the EAC's general Regional Strategy for the Development of Statistics (RSDS), not the specific harmonised-CPI regulation already minted as `eac-hcpi-regulations`. Despite Somalia's 2024 EAC accession, no document found this round cites that specific HCPI framework by name — a genuine NOT FOUND for the CPI-specific edge, distinct from the general statistics-strategy alignment that IS documented."
+    },
+    {
+      "edge": "so-snbs-cpi -> afristat-ihpc-guide-2014",
+      "source": "so-snbs-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "Neither the NSDS II, SNBS's CPI methodological note, nor a 2025 SNBS GDP policy brief mention AFRISTAT anywhere — all three cite only UNSC/IMF/World Bank standards. Genuine NOT FOUND."
+    }
+  ]
+}

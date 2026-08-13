@@ -1,0 +1,45 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), final research wave (Egypt/Algeria provincial tier, per Thomas's instruction to consider it once the missing-country list was exhausted). IMPORTANT: before minting, checked the existing corpus and found Egypt's provincial tier is ALREADY WELL-COVERED from an earlier session (eg-cairo-municipal-finance.json — eg-cairo-citizen-budget-2024-2025, eg-local-administration-law-43-1979, eg-real-estate-tax-law-196-2008 already exist) — this file adds only the one genuinely new Egyptian finding (the Constitution's own Articles 176-178, not previously minted) plus a new negative finding (COMESA-CAPMAS not found). Algeria's wilaya/provincial tier was genuinely uncovered and gets a full new node + edges.",
+  "reports": [
+    {
+      "id": "eg-constitution-local-administration",
+      "title": "Constitution of the Arab Republic of Egypt (2014), Articles 176-178 — Local Administration",
+      "publisher": "Arab Republic of Egypt",
+      "country": "EG",
+      "jurisdiction_level": "federal",
+      "region": "Egypt",
+      "description": "Egypt's 2014 Constitution's local-administration and local-finance provisions, not previously minted in this corpus (which already has Egypt's provincial-tier documents — eg-cairo-citizen-budget-2024-2025 and eg-local-administration-law-43-1979 — from an earlier session, but not the constitutional text itself). Directly verified via PDF extraction. Article 176: \"The state ensures support for administrative, financial, and economic decentralization. The law organizes empowering administrative units in providing, improving, and managing public utilities well, and defines the timeline for transferring powers and budgets to the local administration units.\" Article 177: \"The state guarantees that it will satisfy the local units' needs in terms of scientific, technical, administrative and financial assistance, and ensures the equitable distribution of facilities, services and resources.\" Article 178: \"Local units have independent financial budgets. Local units' resources include, in addition to the resources allocated to them by the state, original and additional taxes and fees of a local nature.\" IMPORTANT: the Constitution's own 5-year deadline (January 2019) to pass a NEW Local Administration Law implementing Articles 175-183 has lapsed — Law No. 43 of 1979 (already minted as `eg-local-administration-law-43-1979`) remains the operative statute, with a replacement still an unpassed draft before Parliament (resubmitted April 2026) — consistent with this corpus's EXISTING dropped note on eg-cairo-municipal-finance.json (\"New/replacement Local Administration Law (post-43/1979) -> Cairo Governorate finance, deferred\"). No new edge is drawn between this Constitution node and the pre-1979 law given the chronological mismatch (the operative law predates this Constitution).",
+      "cadence_note": "One-off foundational instrument.",
+      "last_updated": null,
+      "url": "https://www.constituteproject.org/constitution/Egypt_2014.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "dz-loi-12-07-code-wilaya",
+      "title": "Loi n° 12-07 du 21 février 2012 relative à la wilaya (Code de la Wilaya)",
+      "publisher": "République Algérienne / Journal Officiel de la République Algérienne (JORADP)",
+      "country": "DZ",
+      "jurisdiction_level": "federal",
+      "region": "Algeria",
+      "description": "Algeria's Wilaya Code, establishing the fiscal relationship between the central state and Algeria's 58 wilayas (provinces). Directly verified via curl + pdftotext extraction of the official Journal Officiel PDF (bypassing a 403-blocked mirror and a dead government-site link). Article 5: \"L'Etat affecte à la wilaya, en sa qualité de collectivité territoriale, les ressources destinées à la couverture des charges et des compétences qui lui sont dévolues par la loi... tout transfert de missions par l'Etat à la wilaya s'accompagne de l'affectation des ressources financières nécessaires à leur couverture permanente\" [The State allocates to the wilaya the resources to cover the charges and competences devolved to it by law; any transfer of missions is accompanied by the necessary financial resources]. Article 151 lists wilaya budgetary resources including state grants (\"dotations\") and tax proceeds. Article 154: \"La wilaya reçoit de l'Etat des subventions et des dotations de fonctionnement, compte tenu, notamment, de : — l'inégalité des revenus des wilayas ; — l'insuffisance de son revenu par rapport à ses missions\" [The wilaya receives operating subsidies and grants from the State, taking into account revenue inequality among wilayas and revenue insufficiency relative to its missions] — a direct equalisation clause. Articles 176-179 (Chapitre 1er, \"De la solidarité financière\") establish two dedicated equalisation funds: \"le fonds de solidarité des collectivités locales\" and \"le fonds de garantie des collectivités locales,\" the former paying wilayas \"une attribution annuelle de péréquation destinée à la section de fonctionnement du budget de la wilaya\" [an annual equalisation allocation for the wilaya's operating budget]. Article 155 separately names the \"fonds commun des collectivités locales (FCCL)\" for earmarked equipment financing — the historic name (per a secondary, not independently verified, Wikipedia summary) for what appears to now operate as the two Article-176 funds. No specific Loi de Finances line item labelled \"transferts aux wilayas\" was independently located this round.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.joradp.dz/FTP/JO-FRANCAIS/2012/F2012012.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "eg-capmas-cpi -> comesa-treaty-establishing",
+      "source": null,
+      "target": "comesa-treaty-establishing",
+      "reason": "no-document",
+      "why": "Egypt is a COMESA member. Searched extensively for a CAPMAS document naming COMESA in connection with CPI/statistical methodology — all CAPMAS-COMESA results found (Ahram Online, Daily News Egypt, Egypt Today, SIS) concern TRADE statistics (Egypt's export/import volumes with COMESA member states), not CPI methodology or statistical harmonisation. Genuine NOT FOUND; `comesa-treaty-establishing` not linked to Egypt."
+    }
+  ]
+}

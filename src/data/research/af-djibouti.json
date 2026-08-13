@@ -1,0 +1,67 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), wave 3 (final 5 missing countries, all small states with expected thinner documentation). Djibouti — 11th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent; INSTAD's own live CPI pages are JavaScript-rendered and inaccessible to this branch's tooling, so Layer 1 is deliberately thin.",
+  "reports": [
+    {
+      "id": "dj-instad-cpi",
+      "title": "Indice des Prix à la Consommation (IPC)",
+      "publisher": "Institut National de la Statistique de Djibouti (INSTAD)",
+      "country": "DJ",
+      "jurisdiction_level": "federal",
+      "region": "Djibouti",
+      "description": "Djibouti's national CPI. INSTAD's institutional identity and existence are confirmed via its own founding decree (Décret n°2021-236/PR/MEFI, \"Les statuts de l'Institut de la Statistique de Djibouti (INSTAD)... sont approuvés\"), and the IMF's 2025 Article IV report (Country Report No. 25/276) reproduces CPI/inflation figures for Djibouti in its tables. HOWEVER: INSTAD's own live CPI pages (instad.dj/ipc.php) are JavaScript-rendered and returned no extractable text this round — base year, publication frequency, and any COICOP/IMF-Manual methodology citation could NOT be independently confirmed from INSTAD's own document this round. Secondary aggregators (TradingEconomics/FRED, mirroring World Bank data) suggest a \"2005=100\" rebasing, but this is a World Bank figure, not an INSTAD primary-document statement, so it is excluded per the branch's evidence standard. Flagged for a future session with rendering-capable browser access.",
+      "cadence_note": "Frequency not independently confirmed this round; the agency and its CPI mandate are confirmed, but the bulletin's own cadence statement was inaccessible.",
+      "last_updated": null,
+      "url": "https://www.journalofficiel.dj/texte-juridique/decret-n2021-236-pr-mefi-portant-statuts-de-linstitut-national-de-la-statistique-de-djibouti-instad/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "dj-snds-2011-2015",
+      "title": "Stratégie Nationale de Développement de la Statistique — Schéma Directeur de la Statistique 2011-2015",
+      "publisher": "République de Djibouti",
+      "country": "DJ",
+      "jurisdiction_level": "federal",
+      "region": "Djibouti",
+      "description": "Djibouti's national statistics development strategy (2011-2015 — an older document; a newer edition may exist and was not searched for this round). Names AFRISTAT directly: \"La création de l'Observatoire économique et statistique d'Afrique subsaharienne (AFRISTAT), plus d'une décennie auparavant, en a été le premier signe\" [The creation of AFRISTAT, more than a decade earlier, was the first sign of this]. Separately names COMESA in connection with trade-statistics harmonisation (not CPI specifically): \"le Marché commun des pays de l'Afrique de l'Est et de l'Afrique australe (COMESA) avec l'harmonisation des statistiques du commerce extérieur\" [COMESA, with the harmonisation of foreign trade statistics]. Also references the African Charter on Statistics's development by the AU Commission. Djibouti's own INSTAD-founding decree separately confirms accession to AFRISTAT via \"Loi n°176/AN/12/6ème L\" — note this law number implies a 2012 legislature session, a discrepancy against this corpus's earlier af-grok-synthesis.json history note citing a 2010 AFRISTAT accession year for Djibouti; flagged, not resolved.",
+      "cadence_note": "One-off foundational strategy document (2011-2015 planning horizon, likely superseded by a newer edition not located this round).",
+      "last_updated": null,
+      "url": "https://www.paris21.org/sites/default/files/Djibouti%20SNDS%202011-15.pdf",
+      "domains": [
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "dj-snds-2011-2015",
+      "target_report_id": "afristat-ihpc-guide-2014",
+      "relationship_type": "cites",
+      "basis": "Djibouti's own national statistics strategy names AFRISTAT's founding as a formative event for the national statistical system: \"La création de l'Observatoire économique et statistique d'Afrique subsaharienne (AFRISTAT), plus d'une décennie auparavant, en a été le premier signe.\" General institutional acknowledgment rather than a CPI-methodology-specific citation, so 'cites' rather than 'methodology_depends_on', matching the Guinea/Madagascar convention for support-mention-only findings. `afristat-ihpc-guide-2014` already exists in the corpus — reused per the branch's node-id discipline.",
+      "evidence_url": "https://www.paris21.org/sites/default/files/Djibouti%20SNDS%202011-15.pdf"
+    },
+    {
+      "source_report_id": "dj-snds-2011-2015",
+      "target_report_id": "comesa-treaty-establishing",
+      "relationship_type": "cites",
+      "basis": "Djibouti's strategy document names COMESA specifically in connection with foreign-trade-statistics harmonisation: \"le Marché commun des pays de l'Afrique de l'Est et de l'Afrique australe (COMESA) avec l'harmonisation des statistiques du commerce extérieur.\" NOTE: this is about trade statistics, not CPI/inflation specifically — recorded as 'cites' with the domain caveat made explicit here rather than assigned an inflation-specific relationship. `comesa-treaty-establishing` was minted this same round (af-sudan.json) and is reused here for the second time.",
+      "evidence_url": "https://www.paris21.org/sites/default/files/Djibouti%20SNDS%202011-15.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "dj-instad-cpi -> dj-constitution-titrex",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "SNG-WOFI (a secondary OECD/UCLG observatory) reports the 1992 Constitution's Titre X, Articles 85-87, establishes regions/communes with administrative/financial autonomy — but the primary constitutional text (WIPO Lex, MJP Digithèque) could not be retrieved this round (robots.txt/SSL errors on both mirrors). Not minted as a node pending direct primary-text verification."
+    },
+    {
+      "edge": "dj-loi-174-territorial",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "A French technical-committee document (\"Comité technique Foncier et développement,\" not a Djiboutian government document) quotes Loi n°174/AN/02/4ème L (7 July 2002) Articles 80 and 93 on fiscal transfers to territorial collectivities (\"Des dotations et transferts de l'État\"; \"Une dotation globale de l'État est consentie pour le fonctionnement\") with specific article numbers — a real, quotable citation, but from a secondary/third-party source rather than Djibouti's own Journal Officiel text (not locatable this round). Consistent with this branch's standing practice of not minting secondary-sourced legal paraphrase as a report node (matching the earlier UNICEF Angola and NAYMOTE Liberia precedents) — recorded here as a strong lead for a future session with better access to the Journal Officiel de Djibouti."
+    }
+  ]
+}

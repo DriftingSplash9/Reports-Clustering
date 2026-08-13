@@ -1,0 +1,37 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), thin-country deepening wave. Burundi already has one CPI node (`bi-insbu-cpi`, in af-grok-synthesis.json) plus an existing `bi-insbu-cpi -> eac-hcpi-regulations` edge (confirmed still present, not duplicated here) — this file adds the missing provincial/commune fiscal-transfer tier via a dispatched Agent, and records why no NEW international edge was added.",
+  "reports": [
+    {
+      "id": "bi-loi-1-16-2015-transfert-communes",
+      "title": "Loi n°1/16 du 25 mai 2015 portant modalités de transfert de compétences de l'Etat aux communes",
+      "publisher": "Présidence de la République du Burundi",
+      "country": "BI",
+      "jurisdiction_level": "federal",
+      "region": "Burundi",
+      "description": "Burundi's organic law on the transfer of state competencies to communes. Directly verified via downloaded PDF (pdftotext extraction, OCR-degraded scan cross-checked against INSBU's own clean Annuaire Statistique citation, both agreeing on law number and date). Article 34: \"Tout transfert de compétences par l'Etat à la commune s'accompagne du transfert des ressources nécessaires à l'exercice de ces compétences\" [Any transfer of competencies by the State to the commune is accompanied by a transfer of the resources necessary to exercise those competencies]. Article 35: \"Les ressources financières nécessaires à la commune pour l'exercice de ses compétences lui sont dévolues soit par transfert de fiscalité, soit par dotations ou par les deux à la fois... Le niveau des dotations est fixé chaque année par la loi des finances\" [The financial resources a commune needs are devolved via tax transfer, grants, or both; grant levels are set annually by the finance law]. Article 36 creates a communal support fund (\"fonds d'appui aux communes\"). STRUCTURAL CAVEAT: this governs Burundi's 18 communes, not its provinces directly — provinces are deconcentrated administration (governor-led per Constitution Art. 143-151), not a distinct fiscal tier with their own budget, per Constitution Art. 269 (\"The commune as well as other local collectivities... are created by organic law\").",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://faolex.fao.org/docs/pdf/Bur163020.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "bi-insbu-cpi -> afristat-founding-treaty",
+      "source": "bi-insbu-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "INSBU's own CPI methodology note (directly verified, full-text grepped) cites ONLY COICOP — zero mentions of AFRISTAT, EAC, or CEPGL anywhere in the 18-page document. INSBU's own Annuaire Statistique separately lists Burundi's 2007 AFRISTAT accession law (\"Loi n° 1/07 du 26 juin 2007\") and 2007 EAC ratification law (\"Loi n° 1/08 du 30 Juin 2007\") — but these are legislative-history entries confirming membership dates, not methodology citations, so not minted as an edge basis. `afristat-ihpc-guide-2014` was NOT reused here per the agent's explicit flag: that guide is UEMOA-specific methodology and does not apply to EAC-zone Burundi."
+    },
+    {
+      "edge": "bi-insbu-cpi -> african-charter-statistics-2009",
+      "source": "bi-insbu-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "No document found citing the African Charter on Statistics (AU, 2009) by name. INSBU's Annuaire does cite a DIFFERENT AU charter — the \"Charte Africaine sur les valeurs et les principes de la décentralisation, de la gouvernance locale et du développement local\" (ratified via Loi n°1/18 du 8 décembre 2016) — relevant to Layer 3 decentralisation, not statistics methodology. Flagged so a future session does not conflate the two charters."
+    }
+  ]
+}
