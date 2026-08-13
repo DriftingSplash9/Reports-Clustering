@@ -1261,6 +1261,51 @@ export default function InfluenceGraph({
       )
     }
 
+    // **Floor `nodeRadius` at a padded multiple of the largest sphere it has
+    // to contain, not just at the spread between node *centres*.**
+    //
+    // Every measurement above is about where things sit, never how big they
+    // are — fine at corpus scale, where the cloud runs to hundreds or
+    // thousands of world units and a single node's 2.2-to-8-unit mesh is
+    // noise beside it. It stops being fine the moment a filter (a country
+    // chip, a tier collapse, "trace its chain" on an isolated report) leaves
+    // one node on screen, or a few sitting on top of each other: the
+    // position spread collapses toward zero, `nodeRadius` hits its floor of
+    // 1, and the fit distance that produces (`nodeRadius / sin(halfFov) *
+    // 1.18`, ~5.7 units at this file's FOV) can land *inside* a
+    // high-authority node's own sphere — `radiusFor` alone already reaches 8
+    // units, before `nodeScaleFor` below even applies. The camera opens
+    // inside the mesh, lit from within by its own bloom: the "one giant
+    // supersized sphere filling the screen, doesn't shrink on zoom-out" bug.
+    // Zooming out doesn't fix it because `ZOOM_MAX` only pulls the camera
+    // back to a fixed multiple of a fit distance that was already too small
+    // — it scales the mistake, not away from it.
+    //
+    // Flooring at exactly `radiusFor(...)` (no padding) stops the camera
+    // landing inside the mesh, but reintroduces the same complaint one step
+    // out: with only 18% margin (the `* 1.18` below), the sphere still fills
+    // ~85% of the frame's half-height — "supersized", just no longer
+    // clipping. In the many-node case that 18% margin is fine because the
+    // position spread is already dozens of units bigger than any one mesh,
+    // so the mesh itself only ever reads as a small fraction of the frame;
+    // it's that spread-vs-mesh gap that reads as "room to breathe", and a
+    // singleton has none of it. `SINGLETON_PADDING` manufactures the same
+    // breathing room deliberately for the singleton case instead of relying
+    // on spread that isn't there.
+    //
+    // `nodeScaleFor` is deliberately NOT applied here even though it reads
+    // this same `nodeRadius` a few lines down (`nodeScale.current =
+    // nodeScaleFor(nodeRadius)`): the floor only has to clear the scale-1
+    // case, because `nodeScaleFor` never returns below 1, so the true
+    // on-screen radius (`radiusFor(...) * nodeScale`) is never smaller than
+    // `radiusFor(...)` alone. At corpus scale this floor sits far below the
+    // position-spread radius and never engages — it exists for exactly the
+    // small-or-singleton view this comment describes.
+    const SINGLETON_PADDING = 4
+    for (const n of subject) {
+      nodeRadius = Math.max(nodeRadius, radiusFor(n.size_score) * SINGLETON_PADDING)
+    }
+
     const levels = [
       ...new Set(positioned.map((n) => n.jurisdiction_level)),
     ] as JurisdictionLevel[]
