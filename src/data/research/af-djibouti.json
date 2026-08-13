@@ -30,6 +30,21 @@
       "domains": [
         "inflation"
       ]
+    },
+    {
+      "id": "dj-constitution-1992",
+      "title": "Constitution de la République de Djibouti (1992)",
+      "publisher": "République de Djibouti",
+      "country": "DJ",
+      "jurisdiction_level": "federal",
+      "region": "Djibouti",
+      "description": "Djibouti's 1992 Constitution, Titre X (\"Des collectivités territoriales\"). Resolves this file's own earlier `_dropped` note — Grok located and this session independently re-fetched the primary text (MJP Digithèque, a French academic constitutional-text mirror, the same hosting tier already used elsewhere in this branch for constituteproject.org/WIPO Lex texts). Directly verified via curl + HTML extraction. Article 85: \"Les collectivités territoriales sont créées et administrées dans les conditions définies par la loi. Ces collectivités s'administrent librement par des conseils élus et dans les conditions prévues par la loi\" [Territorial collectivities are created and administered under conditions defined by law. These collectivities are freely self-administered by elected councils, under conditions provided by law]. Article 86: \"Dans les collectivités territoriales, le délégué du Gouvernement a la charge des intérêts nationaux, du contrôle administratif et du respect des lois\" [In the territorial collectivities, the Government's delegate is responsible for national interests, administrative oversight, and compliance with the law]. IMPORTANT CORRECTION to Grok's own paraphrase: Grok's response described these articles as stating the collectivities \"enjoy administrative and financial autonomy\" — that specific phrase does NOT appear anywhere in the actual French text of Article 85 or 86; the primary text establishes self-administration by elected councils, not a financial-autonomy guarantee. Grok also cited \"Articles 85-87\" as Titre X, but Article 87 is actually the FIRST article of Titre XI (\"De la révision de la Constitution\"), unrelated to territorial collectivities — a real citation error, caught by independent re-verification of the primary text rather than taken on Grok's word. No fiscal-transfer mechanism or percentage is specified anywhere in this Titre; the detailed financing regime is left entirely to ordinary law, consistent with dj-loi-174-territorial (still not independently located this round, per the dropped note below).",
+      "cadence_note": "One-off foundational instrument.",
+      "last_updated": null,
+      "url": "https://mjp.univ-perp.fr/constit/dj1992i.htm",
+      "domains": [
+        "fiscal-transfers"
+      ]
     }
   ],
   "dependencies": [
@@ -53,8 +68,8 @@
       "edge": "dj-instad-cpi -> dj-constitution-titrex",
       "source": null,
       "target": null,
-      "reason": "no-document",
-      "why": "SNG-WOFI (a secondary OECD/UCLG observatory) reports the 1992 Constitution's Titre X, Articles 85-87, establishes regions/communes with administrative/financial autonomy — but the primary constitutional text (WIPO Lex, MJP Digithèque) could not be retrieved this round (robots.txt/SSL errors on both mirrors). Not minted as a node pending direct primary-text verification."
+      "reason": "note",
+      "why": "SNG-WOFI (a secondary OECD/UCLG observatory) originally reported the 1992 Constitution's Titre X, Articles 85-87, establishing regions/communes with administrative/financial autonomy — the primary text was unreachable in this file's original research round (robots.txt/SSL errors). FOLLOW-UP 2026-08-13 (Grok + independent re-verification): the primary text was located and is now minted as `dj-constitution-1992` — but no edge is drawn from it to `dj-instad-cpi`, because the Constitution says nothing about statistics or CPI (it was never a plausible target for that specific edge, autonomy language or not). More importantly, the SNG-WOFI \"administrative/financial autonomy\" framing and Grok's matching paraphrase both turned out NOT to match the actual French text (see `dj-constitution-1992`'s own description: Article 85 establishes self-administration by elected councils only, with no financial-autonomy language, and Article 87 is not even part of Titre X — a real citation error, caught independently). Kept as `reason: 'note'` rather than 'resolved', since no edge naming this pair actually exists in the graph."
     },
     {
       "edge": "dj-loi-174-territorial",
