@@ -33,6 +33,33 @@
       ]
     },
     {
+      "id": "sd-mofep-budget-2026",
+      "title": "FY2026 Emergency Budget Guidelines — Council of Ministers Approval",
+      "publisher": "Ministry of Finance and Economic Planning (MoFEP), Sudan",
+      "country": "SD",
+      "jurisdiction_level": "federal",
+      "region": "Sudan",
+      "description": "Sudan's Ministry of Finance and Economic Planning's own site, reporting the Council of Ministers' approval of the FY2026 emergency budget (approved December 2025, following an October 2025 guidelines/objectives approval). Verbatim (Arabic): \"وتلتزم الموازنة بتحويل نصيب الولايات حسب قانون قسمة الموارد ووفق التحصيل الفعلي للإيرادات العامة في ظل عدم تحمل أي صرف إضافي\" [The budget commits to transferring the states' share according to the Resource-Sharing Law and in accordance with the actual collection of general revenues, without incurring any additional expenditure]. This is MORE SPECIFIC than the aggregate lump-sum 'transfers to states' line already documented in sd-budget-2021-transfers: it names a specific governing law (the 'Resource-Sharing Law', قانون قسمة الموارد) and ties state transfers to actual revenue collection rather than a fixed figure — though the article itself does not quote the Resource-Sharing Law's own text or a formula/percentage. Deepens the national tier per this project's fallback rule (state-level fiscal transparency has collapsed under the war; the national tier is scoured instead).",
+      "cadence_note": "Annual budget approval; this is the FY2026 (emergency wartime) edition.",
+      "last_updated": "2025-12-30",
+      "url": "https://mof.gov.sd/%D9%85%D8%AC%D9%84%D8%B3-%D8%A7%D9%84%D9%88%D8%B2%D8%B1%D8%A7%D8%A1-%D9%8A%D8%AC%D9%8A%D8%B2-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%B2%D9%86%D8%A9-%D8%A7%D9%84%D8%AC%D8%AF/",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "sd-cbos-statistical-review-q4-2024",
+      "title": "Economic and Financial Statistical Review, Issue 1/2024 (October–December 2024)",
+      "publisher": "Central Bank of Sudan (Bank of Sudan / CBOS)",
+      "country": "SD",
+      "jurisdiction_level": "federal",
+      "region": "Sudan",
+      "description": "Sudan's central bank publishes CPI/inflation data quarterly, sourced from CBS: Table No. (24), \"Consumer Price Index & Inflation Rates / Base Year 2007=100 ... Source: Central Bureau of Statistics.\" Narrative: \"The Inflation rate decreased from 215.5% by the end of September 2024 to 187.8% by the end December of 2024.\" Confirms CBOS continues to publish CPI-derived figures through the war period (this issue covers through Dec 2024), even though CBS's own website is unreachable and unresponsive throughout this branch's research. A full-text search of this 20-page document for COICOP, ILO, IMF, COMESA, or IGAD found no methodology-relevant mentions (one incidental, unrelated 'IMF (grant)' line in a balance-of-payments table).",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; this edition covers October-December 2024.",
+      "last_updated": "2024-12",
+      "url": "https://cbos.gov.sd/sites/default/files/العرض الاقتصادي والمالي الربع الرابع 2024 .pdf",
+      "domains": ["inflation"]
+    },
+    {
       "id": "sd-budget-2021-transfers",
       "title": "Sudan National Budget 2021 (Ministry of Finance and Economic Planning)",
       "publisher": "Ministry of Finance and Economic Planning, Sudan",
@@ -48,8 +75,30 @@
       ]
     }
   ],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "source_report_id": "sd-cbos-statistical-review-q4-2024",
+      "target_report_id": "sd-cbs-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "CBOS's own Table 24 explicitly attributes its published CPI/inflation figures to \"Source: Central Bureau of Statistics\" — the central bank republishes CBS's own index rather than compiling an independent one.",
+      "evidence_url": "https://cbos.gov.sd/sites/default/files/العرض الاقتصادي والمالي الربع الرابع 2024 .pdf"
+    }
+  ],
   "_dropped": [
+    {
+      "edge": "Red Sea State (Port Sudan) closing accounts, FY2024 -> a self-published state fiscal document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "A federal MoFEP article confirms Red Sea State submitted full closing accounts for FY2024 to the federal Chamber of Accounts ('سلمت ولاية البحر الأحمر حساباتها الختامية للعام المالي 2024م لديوان الحسابات...'), the single strongest evidence found of a still-functioning sub-national fiscal process during the war. But this is a federal article ABOUT the state's submission, not the state's own published document — the state's own finance-ministry domain (redseafinance.gov.sd) does not resolve. Genuine lead, not mintable as a standalone node this round."
+    },
+    {
+      "edge": "Sudan Ministry of Foreign Affairs' own statement on the 2023-2025 IGAD suspension/withdrawal status",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "News reporting (Shorouk News) attributes statements about IGAD ('a violation of Sudan's sovereignty... a dangerous precedent in the history of IGAD') to Sudan's Foreign Ministry, but no primary government document, press-release page, or verified statement transcript could be located (mfa.gov.sd's certificate has expired; sudan.gov.sd's own site search returned nothing on IGAD). Sudan's IGAD status remains reported only via secondary/news sources, not confirmed via a primary Sudanese government document."
+    },
     {
       "edge": "sd-cbs-cpi -> comesa-treaty-establishing",
       "source": "sd-cbs-cpi",

@@ -1,0 +1,50 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). Municipal-tier population-priority push, 2026-08-13 (AF/G.18), round 4 of 10. DR Congo — 4th-highest-population country. `cd-provinces-fiscal.json` already covers the PROVINCIAL tier (Constitution Art. 175's 40% retrocession to provinces). This round found a genuinely distinct SECOND fiscal-transfer rule, one tier down, at the commune/ETD (Entité Territoriale Décentralisée) level — legally separate from, even if numerically identical to, the provincial rule. A direct city/commune budget document (Kinshasa, Lubumbashi) remained NOT FOUND, consistent with a prior round's finding on Kinshasa specifically.",
+  "reports": [
+    {
+      "id": "cd-loi-organique-08-016-etd-finances",
+      "title": "Loi organique n°08/016 du 07 octobre 2008 portant composition, organisation et fonctionnement des Entités Territoriales Décentralisées — Titre IV: Des ressources financières",
+      "publisher": "République Démocratique du Congo",
+      "country": "CD",
+      "jurisdiction_level": "federal",
+      "region": "Democratic Republic of the Congo",
+      "description": "DRC's organic law establishing the fiscal regime of Entités Territoriales Décentralisées (ETDs — communes, secteurs, chefferies), the tier below province. Cross-verified against two independent hostings (leganet.cd, a Congolese legal-reference portal, and FAOLEX, the FAO's national-legislation database — neither a .gouv.cd host itself). Art. 104: \"Les finances d'une entité territoriale décentralisée sont distinctes de celles de la province\" [An ETD's finances are distinct from the province's]. Art. 105 lists ETD resource categories: own resources, a share of nationally-sourced revenue allocated to provinces, resources of the national equalisation fund, and exceptional resources. Art. 108-109: own resources include \"l'impôt personnel minimum\" (minimum personal tax), perceived \"au profit exclusif des communes, des secteurs ou des chefferies\" [exclusively for the benefit of communes, secteurs, or chefferies]. KEY FINDING — Art. 115: \"Les entités territoriales décentralisées ont droit à 40% de la part des recettes à caractère national allouées aux provinces\" [ETDs are entitled to 40% of the share of nationally-sourced revenue already allocated to the provinces] — a second, cascading 40% rule, legally distinct from (even though numerically identical to) the province-level 40% retrocession already in the corpus (cd-constitution-provinces-revenue, Constitution Art. 175). Art. 116: distribution among ETDs is based on \"critères de capacité de production, de la superficie et de la population\" [production capacity, territorial area, and population], with the exact mechanism left to provincial edict (édit) — not independently located this round.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.leganet.cd/Legislation/Droit%20Public/Administration.ter/L.08.16.17.10.2008.htm",
+      "domains": ["fiscal-transfers"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cd-loi-organique-08-016-etd-finances",
+      "target_report_id": "cd-constitution-provinces-revenue",
+      "relationship_type": "cites",
+      "basis": "Article 105 of the organic law explicitly lists 'la part provenant des recettes à caractère national allouées aux provinces' among ETD resource categories, directly presupposing the Constitution's Article 175 province-level 40% retrocession mechanism as the source pool that Article 115's own commune-level 40% cascades from.",
+      "evidence_url": "https://www.leganet.cd/Legislation/Droit%20Public/Administration.ter/L.08.16.17.10.2008.htm"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Any individual DRC commune (e.g. Gombe, Limete, Ngaliema) or secondary city (Lubumbashi, Mbuji-Mayi) -> a self-published budget/financial-statement document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Commune de Limete's own official site (communedelimete.cd) confirms a 'service du budget' exists and describes its procedural function ('Élaboration du budget communal. Suivre, Contrôler et exécuter le budget'), but publishes no actual budget figures. Ville de Lubumbashi's own domains (villedelubumbashi.gouv.cd, villedelubumbashi.cd) and Kinshasa's own revenue authority (dgrk-rdc.com) were blocked at the network/proxy level (502 CONNECT denial) rather than confirmed absent -- flagged for retry with different network access before treating as a permanent NOT FOUND. No dedicated Mbuji-Mayi city site was located at all (only news coverage). This is consistent with, and extends to a second angle, a prior round's NOT FOUND for Kinshasa's own primary budget text."
+    },
+    {
+      "edge": "BCC (Banque Centrale du Congo) or INS's own CPI methodology -> COICOP / IMF-ILO CPI Manual",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "bcc.cd fails TLS validation on every page checked, including a CPI-specific URL and a PDF apparently hosting an INS-authored national-accounts document ('cpt_nat_synthse.pdf') -- a genuine server-side certificate misconfiguration (missing intermediate cert), not a proxy block. ins-rdc.org (a different, older domain than the insrdc.cd checked in a prior round) is Cloudflare-gated (403) regardless of client. insrdc.cd itself explicitly self-describes as still under construction: \"Le portail est en cours d'amélioration : une bibliothèque de publications... des pages thématiques (IPC...) seront disponibles prochainement\" [The portal is being improved: a publications library, thematic pages (CPI...) will be available soon] -- confirms via INS's own current voice that no CPI methodology page is published yet, on a newer domain than the one checked previously."
+    },
+    {
+      "edge": "DRC's own EAC/SADC statistical-harmonisation citation (in DRC's own voice, not EAC's or a third party's)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No DRC government or INS-authored primary document was located naming the EAC Harmonised CPI Regulations or SADC frameworks in DRC's own voice. Only EAC's own press release (announcing DRC's 2022 accession) and a World Bank project document were found -- both third-party, excluded per the evidence-strict rule. Plausible such a statement exists behind ins-rdc.org's Cloudflare gate or insrdc.cd's under-construction pages, but unconfirmable this round."
+    }
+  ]
+}

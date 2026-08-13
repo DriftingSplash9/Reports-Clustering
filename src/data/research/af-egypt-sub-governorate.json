@@ -1,0 +1,64 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). Municipal-tier population-priority push, 2026-08-13 (AF/G.18), round 3 of 10. Egypt — 3rd-highest-population country. This round searched explicitly for a genuine sub-governorate (markaz/madina/hay/qism) fiscal tier and confirmed, rather than merely failed to rebut, the existing corpus's (eg-cairo-municipal-finance.json) implicit finding that Egypt's real fiscal-planning tier stops at governorate. A second governorate data point (Luxor) and a richer statutory basis for that finding are added here; see also the companion update to eg-local-administration-law-43-1979's own description in eg-cairo-municipal-finance.json.",
+  "reports": [
+    {
+      "id": "eg-luxor-citizen-investment-plan-2024",
+      "title": "Citizen Investment Plan for Luxor Governorate (FY2023/2024)",
+      "publisher": "Ministry of Planning, Economic Development and International Cooperation (Egypt)",
+      "country": "EG",
+      "jurisdiction_level": "provincial",
+      "region": "Luxor, Egypt",
+      "description": "A second governorate-level 'Citizen Investment Plan' data point, structurally identical to Cairo's existing eg-cairo-citizen-budget-2024-2025: a central-ministry document allocating public investment to a governorate, not a governorate-authored fiscal document. \"Total Investment: 7.7 billion EGP\", \"Number of Projects: 201 developmental projects\", described as \"now in its fifth consecutive year of governorate-wide implementation.\" Like the Cairo plan, this document does not specify individual markaz, city, or administrative-subdivision-level detail — reinforcing rather than contradicting the pattern already documented for Cairo.",
+      "releases_per_year": 1,
+      "cadence_note": "Published annually per fiscal year, part of the same nationwide Citizen Investment Plan series as Cairo's.",
+      "last_updated": "2024",
+      "url": "https://mped.gov.eg/singlenews?id=5458&lang=en",
+      "domains": ["municipal-finance"]
+    },
+    {
+      "id": "eg-sis-local-administration-system",
+      "title": "نظام الادارة المحلية (Local Administration System) — State Information Service",
+      "publisher": "State Information Service (SIS), Arab Republic of Egypt",
+      "country": "EG",
+      "jurisdiction_level": "federal",
+      "region": "Egypt",
+      "description": "Egypt's official state information/media agency's own restatement of the Constitution's local-administration provisions, corroborating (from a genuine Egyptian government agency, not the OHCHR unofficial-translation mirror used for the Constitution's own text) that the independent-budget/elected-council design exists in law: \"الدولة إلى وحدات إدارية تتمتع بالشخصية الاعتبارية، منها المحافظات، والمدن، والقرى\" [The state is divided into administrative units enjoying legal personality, including governorates, cities, and villages]; \"تنتخب كل وحدة محلية مجلساً بالاقتراع العام السرى المباشر، لمدة أربع سنوات\" [Each local unit elects a council by direct secret public ballot for a four-year term]; \"يكون للوحدات المحلية موازنات مالية مستقلة\" [Local units shall have independent financial budgets]. IMPORTANT: this describes the system AS DESIGNED, not as currently operating — Local Popular Councils have been dissolved since 2011 (Law No. 116 of 2011) with no successor body elected since, so no independent local-unit budget publication exists in practice (consistent with eg-local-administration-law-43-1979's finding that sub-governorate 'resources' are statutorily governorate-allocated transfers, not autonomous budgets).",
+      "cadence_note": "Standing institutional/legal-system description page, not dated to a specific edition.",
+      "last_updated": null,
+      "url": "https://www.sis.gov.eg/section/75/85?lang=ar",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "eg-sis-local-administration-system",
+      "target_report_id": "eg-local-administration-law-43-1979",
+      "relationship_type": "cites",
+      "basis": "SIS's own description of the local-administration system directly restates Constitution Article 178's 'independent financial budgets' language, which eg-local-administration-law-43-1979's own description already documents as constitutionally promised but not implemented by the operative 1979 statute (whose Articles 43/51 make markaz/city 'resources' governorate-allocated transfers, not independent budgets) — SIS's page is the clearest primary-agency confirmation that this gap between constitutional design and statutory/operative practice is real and current.",
+      "evidence_url": "https://www.sis.gov.eg/section/75/85?lang=ar"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "Any individual markaz/madina/hay/qism -> a self-published sub-governorate budget document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "No sub-governorate budget or financial document was located for any Egyptian markaz, hay, or qism this round. New Urban Communities Authority (NUCA) cities (New Cairo, 6th of October) were also checked — NUCA is a national authority under the Ministry of Housing running parallel to, not nested inside, the governorate hierarchy, with presidentially-appointed 'city organs' rather than elected councils, so even a NUCA financial report (none located) would not represent this tier in the markaz/hay/qism sense."
+    },
+    {
+      "edge": "Egypt's 2026 draft new Local Administration Law -> Cairo/sub-governorate finance",
+      "source": null,
+      "target": "eg-local-administration-law-43-1979",
+      "reason": "deferred",
+      "why": "Updates this file's own open question (eg-cairo-municipal-finance.json, eg-new-local-administration-law-draft): as of the latest evidence located this round (a 30 June 2026 news item still describing it as a 'مشروع قانون' / draft law), the bill remains unpassed after a decade of failed attempts (80 committee sessions since 2016 per an April 2026 report on Parliament's joint committee returning it to government over constitutional/substantive deficiencies). No primary parliamentary or government text of the draft itself was accessible (parlmany.com, dostor.org, masrawy.com bill-text pages all returned fetch errors). Still deferred, not resolved."
+    },
+    {
+      "edge": "CAPMAS's own CPI/trade-statistics publications -> COMESA / African Charter on Statistics / AFRISTAT",
+      "source": "eg-capmas-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "capmas.gov.eg is a JavaScript single-page app that could not be rendered by this round's tooling — a publication titled 'Egypt's inter-trade with international groupings' (publication #21) is suggestive but its content could not be extracted. Genuine access-layer NOT FOUND, not a confirmed content absence."
+    }
+  ]
+}

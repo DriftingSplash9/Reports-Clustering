@@ -1,0 +1,65 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). Municipal-tier population-priority push, 2026-08-13 (AF/G.18), round 2 of 10. Ethiopia — 2nd-highest-population country. Ethiopia has no ordinary municipal tier; instead it has two federally-chartered city administrations (Addis Ababa, Dire Dawa) that sit alongside, not beneath, the 11 regional states. This file documents that structure and resolves this branch's own open question `et-proc-1365-addis-applicability-unverified` (af-grok-municipal-batch2.json) about whether Proclamation 1365/2025 names Addis Ababa specifically — it does.",
+  "reports": [
+    {
+      "id": "et-budget-proclamation-1297-2023",
+      "title": "2016 Fiscal Year (2023/24) Federal Government Budget Proclamation No. 1297/2023",
+      "publisher": "House of Peoples' Representatives, Federal Democratic Republic of Ethiopia",
+      "country": "ET",
+      "jurisdiction_level": "federal",
+      "region": "Ethiopia",
+      "description": "Ethiopia's federal budget proclamation, published in Federal Negarit Gazette No. 38 (14 September 2023) and directly downloaded from the Ministry of Justice's own site. Article 7 ('Subsidies to Regions') lists Addis Ababa City Government and Dire Dawa Administration as separate, numbered line items structurally parallel to the 11 regional states, not nested under them: \"441 Addis Ababa City Government 5,254,541,684 ... 442 Dire Dawa Administration 1,837,611,323\", alongside \"431 The State of Tigray 12,591,813,948 ... 439 The State of the Harari People 1,587,027,961\". Sub-article 7.10 breaks Addis Ababa's own subsidy into External Loan (5,215,724,800 Birr) and External Assistance (38,816,884 Birr); sub-article 7.11 breaks Dire Dawa's into Domestic Source (1,811,501,996 Birr) and External Assistance (26,109,327 Birr). Note an asymmetry: Article 8 ('Support for Achievement of SDGs') lists a Dire Dawa line (8.10) but no separate Addis Ababa line, unlike Article 7. This is a fixed itemized appropriation, not a percentage formula.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual federal budget proclamation; this edition covers Ethiopian FY2016 (Gregorian 2023/24).",
+      "last_updated": "2023-09-14",
+      "url": "https://justice.gov.et/wp-content/uploads/2023/09/seasiisia-seusiNse-1297-2015.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "et-addis-ababa-budget-2026-news",
+      "title": "Addis Ababa City Council 2016 E.C. (2023/24) Approved Budget Announcement",
+      "publisher": "Addis Ababa City Administration Bureau of Finance",
+      "country": "ET",
+      "jurisdiction_level": "municipal",
+      "region": "Addis Ababa, Ethiopia",
+      "description": "Addis Ababa City Administration Bureau of Finance's own website reports a specific approved city budget with a real breakdown: \"The Addis Ababa City Council approved a 2016 budget of 140,291,550,064.00 Birr\", broken down as Regular city expenses (23,498,446,197.00 Birr), Capital expenditure (69,336,835,072.00 Birr), Reserve funds (5,300,000,000.00 Birr), Sub-cities regular expenses (33,498,495,001.00 Birr), Sub-cities capital expenditure (8,657,773,794.00 Birr) — quoted as \"a significant 40% growth compared to the previous year\" by Finance Office head Abdir Qadir Redwan. CAVEAT: direct HTTP access to this URL failed repeatedly (TLS connection reset) via direct fetch tooling; this content was retrieved only through an AI-summarizing fetch tool, not independently re-verified against raw HTML — matching this branch's existing practice of flagging AI-summarized-only sourcing distinctly (cf. Liberia's LISGIS pricestats.php page). The article does not state whether \"2016\" is the Ethiopian or Gregorian calendar year, nor give a proclamation number.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual city budget; this is the most recent approved figure found, verification-limited per the caveat above.",
+      "last_updated": null,
+      "url": "https://aabof.com.et/news/5/",
+      "domains": ["municipal-finance"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "et-property-tax-proc-1365-2025",
+      "target_report_id": "et-budget-proclamation-1297-2023",
+      "relationship_type": "cites",
+      "basis": "Both documents independently confirm Addis Ababa and Dire Dawa's distinct federal-chartered status: Proclamation 1365/2025's own Article 9(9) defines 'Region' for its purposes as including 'Addis Ababa and Dire Dawa City Administrations', directly resolving this branch's own open question (af-grok-municipal-batch2.json, et-proc-1365-addis-applicability-unverified) about whether the property-tax law names Addis Ababa specifically — confirmed via direct PDF download and pdftotext (not the third-party legal-summary site the original node was sourced from). Relationship recorded as 'cites' since the two proclamations independently establish the same city-administration structure rather than one being derived from the other.",
+      "evidence_url": "https://justice.gov.et/wp-content/uploads/2025/07/1365.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "et-property-tax-proc-1365-2025 -> a numeric revenue-sharing formula/percentage between federal government and Addis Ababa/Dire Dawa",
+      "source": "et-property-tax-proc-1365-2025",
+      "target": null,
+      "reason": "no-document",
+      "why": "Full-text search of the 49-page Proclamation 1365/2025 found no article specifying a percentage or formula splitting property-tax revenue between the federal government and Addis Ababa/Dire Dawa. The Proclamation assigns administrative/collection powers to Regions and Cities but leaves actual revenue division unspecified. A separate document, Proclamation No. 1250/2021 ('A System for the Determination of the Division of the Federal Subsidy and Joint Revenues'), was found to plausibly address this — its Definitions section reportedly reads '\"Regions\" or \"Regional States\" shall mean members of the Federation... where appropriate it may include Addis Ababa and Dire Dawa' — but this text was only locatable on a private legal blog (chilot.wordpress.com), never on a .gov.et host despite checking mofed.gov.et's proclamation listing page (which does not list it at all) and multiple justice.gov.et download links (one resolved to an unrelated Mining Proclamation). Not minted per the evidence-strict rule."
+    },
+    {
+      "edge": "Dire Dawa City Administration's own budget/finance document",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Dire Dawa Bureau of Finance and Economic Development's own site (direbofed.gov.et) exists and is government-authored but publishes no accessible budget proclamation or financial report — only generic mission-statement language. diredawa.gov.et's 'resource_types/proclamations' page failed to load across multiple retries. This contrasts with et-budget-proclamation-1297-2023, where Dire Dawa's federal subsidy IS documented, just not in a Dire-Dawa-self-published document."
+    },
+    {
+      "edge": "Ethiopian Statistics Service CPI methodology -> COMESA/IGAD/African Charter on Statistics",
+      "source": "et-ess-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "ess.gov.et's CPI landing page (price/) contains only a general CPI description and download links; no methodology text or regional-body mentions were present in the retrieved content. Underlying CPI methodology PDFs (linked but not opened this round) were not accessed — this is a partial NOT FOUND, not a confirmed absence within the full methodology document."
+    }
+  ]
+}
