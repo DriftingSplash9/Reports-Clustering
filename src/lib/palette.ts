@@ -426,6 +426,15 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   MG: 'AFR',
   GN: 'AFR',
 
+  // 2026-08-13 (AF/G.17, wave 2): next five by population -- Sierra Leone,
+  // Liberia, Eritrea, The Gambia, Mauritius. See `af-sierra-leone.json`,
+  // `af-liberia.json`, `af-eritrea.json`, `af-gambia.json`, `af-mauritius.json`.
+  SL: 'AFR',
+  LR: 'AFR',
+  ER: 'AFR',
+  GM: 'AFR',
+  MU: 'AFR',
+
   // **`SA` staffed for the first time, 2026-08-06.** South America was given a
   // slice of the wheel in the continent redesign and then left empty for a
   // day short of a year's worth of sessions. Brazil is its first country,

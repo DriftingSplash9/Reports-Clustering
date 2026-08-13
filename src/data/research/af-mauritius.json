@@ -1,0 +1,60 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), wave 2. Mauritius — 10th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. Mauritius belongs to SADC, COMESA, AND the Indian Ocean Commission (COI/IOC) — no COI citation was found this round despite targeted search, a genuine gap flagged for a future session.",
+  "reports": [
+    {
+      "id": "mu-statsmauritius-cpi",
+      "title": "Consumer Price Index (CPI) — Economic and Social Indicators",
+      "publisher": "Statistics Mauritius (Ministry of Finance)",
+      "country": "MU",
+      "jurisdiction_level": "federal",
+      "region": "Mauritius",
+      "description": "Mauritius's national CPI, Issue No. 1940, 2nd Quarter 2026 (released 14 July 2026). Directly verified via pdftotext extraction: base period \"January – December 2023 = 100.\" Technical note, Section 1(c): \"The composition of the current CPI basket has been derived from the 2023 Household Budget Survey (HBS) data. It has been determined in accordance with latest ILO and SADC recommendations... The commodities in the basket are classified according to the UN COICOP (Classification of Consumption Expenditure according to Purpose) with 13 divisions, 44 groups, 92 classes and 173 subclasses.\" The \"SADC recommendations\" reference is general (basket-composition methodology guidance), not a citation to a specific SADC document, so it is NOT force-linked to the existing `sadc-hcpi-newsletter` node (a different, specific bulletin) — recorded as a near-miss below. Both monthly and quarterly release formats confirmed current.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly and quarterly release formats both confirmed current as of July 2026.",
+      "last_updated": null,
+      "url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1940/CPI_2Qtr26_140726.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "mu-rodrigues-regional-assembly-act-2001",
+      "title": "Rodrigues Regional Assembly Act 2001 (Act No. 39 of 2001)",
+      "publisher": "National Assembly, Mauritius",
+      "country": "MU",
+      "jurisdiction_level": "federal",
+      "region": "Mauritius",
+      "description": "Mauritius is a small unitary state without provinces in the usual African federal sense; the autonomous island of Rodrigues (under its own Regional Assembly, per the Constitution's Third Schedule) is the closest analogue to a provincial tier. Directly verified via pdftotext extraction. Section 42: \"There shall be a Rodrigues Consolidated Fund which shall consist of— (a) any money standing to the credit of the Rodrigues Consolidated Fund; (b) money appropriated to the Rodrigues Consolidated Fund by the National Assembly; (c) all recurrent revenue of the Regional Assembly...\" Section 44(4): \"Cabinet shall, having regard to the various criteria referred to in section 46, determine the quantum of financial resources to be allocated to Rodrigues.\" Section 50(c): \"all duties and taxes imposed by any revenue law and applicable to Rodrigues shall be collected by the Regional Assembly on behalf of the Government and shall be paid into the Consolidated Fund.\" Net effect: Rodrigues has its own Consolidated and Capital Funds but fiscal resources are ultimately determined by Cabinet via annual appropriation, and general tax revenue collected in Rodrigues flows to the NATIONAL Consolidated Fund rather than staying local — \"limited fiscal autonomy,\" not independent taxing/spending power.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://education.govmu.org/Documents/legislations/Documents/The%20Rodrigues%20Regional%20Assembly%20Act%202001.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "mu-statsmauritius-cpi -> sadc-hcpi-newsletter",
+      "source": "mu-statsmauritius-cpi",
+      "target": "sadc-hcpi-newsletter",
+      "reason": "deferred",
+      "why": "Statistics Mauritius's own CPI technical note credits \"latest ILO and SADC recommendations\" for basket-composition methodology — real and verbatim, but it names SADC generically, not the specific Stage-1 HCPI bulletin document already minted as `sadc-hcpi-newsletter` in this corpus. Not force-linked to the wrong specific target. A separate Statistics Mauritius Annual Report (2022-2023, directly verified) additionally describes a joint AUC-STATAFRIC/SADC Secretariat mission assessing \"the Monitoring of the African Charter on Statistics (ACS) for Mauritius and the SADC Protocol on Statistics\" — general statistical-governance cooperation, not CPI-specific, also not minted as an edge. Deferred pending a future check of whether the actual sadc-hcpi-newsletter bulletin document names Mauritius among its covered states (its currently-wired 8 SADC countries list did not include Mauritius as of this session)."
+    },
+    {
+      "edge": "mu-statsmauritius-cpi -> comesa-treaty-establishing",
+      "source": "mu-statsmauritius-cpi",
+      "target": "comesa-treaty-establishing",
+      "reason": "wrong-target",
+      "why": "COMESA itself publishes a \"Harmonized Consumer Price Index\" for Mauritius on its opendataforafrica.org portal, but this is COMESA-authored ABOUT Mauritius, not authored BY Statistics Mauritius — does not satisfy the branch's sourcing rule. No Statistics Mauritius document naming COMESA in connection with its CPI was found."
+    },
+    {
+      "edge": "mu-statsmauritius-cpi -> coi-ioc",
+      "source": "mu-statsmauritius-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "Despite targeted search (\"Statistics Mauritius\" + Indian Ocean Commission/COI, price index, strategic plan, regional statistics), no Statistics Mauritius document names the Indian Ocean Commission in connection with CPI or any statistical methodology. Consistent with the branch-wide finding that the COI/IOC has not yet been found cited by any African country's own statistics agency."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), wave 2. Liberia — 7th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent. Thin result deliberately: Layer 2 and Layer 3 both came up as genuine NOT FOUND for primary-sourced documents despite extensive search — the near-misses are recorded in _dropped rather than force-linked.",
+  "reports": [
+    {
+      "id": "lr-lisgis-lcpi",
+      "title": "Liberia Consumer Price Index (LCPI) Newsletter",
+      "publisher": "Liberia Institute of Statistics & Geo-Information Services (LISGIS)",
+      "country": "LR",
+      "jurisdiction_level": "federal",
+      "region": "Liberia",
+      "description": "Liberia's national CPI. Directly verified via pdftotext extraction of the June 2023 newsletter PDF: \"Liberia's CPI Basket has a Weight Reference Period of 2016 while the Price is referenced to December 2018. The Index is chain-linked to December 2005.\" A chart caption on p.2 (self-verified) reads \"Figure 2: Inflation Rates (%) by the 12 major COICOP Functions, June 2023\" — confirming COICOP classification directly from the primary document. NOTE: three overlapping \"base\" concepts (2016 weight reference, December 2018 price reference, December 2005 chain-link) are not reconciled into one figure by the document itself — flagged rather than resolved. LISGIS's own pricestats.php listing page (AI-summarized only, not independently re-fetched) suggests continued monthly releases through at least June 2026, though it states a 15th-of-month publication target that conflicts with the newsletter's own stated 10th-of-month target (per a WebFetch summary of a different page, also not independently re-verified) — both recorded, conflict not resolved.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; exact publication-date target has two conflicting sourced figures (10th vs. 15th of the following month), neither independently re-verified this round.",
+      "last_updated": null,
+      "url": "https://lisgis.gov.lr/pricestats.php",
+      "domains": [
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "lr-lisgis-lcpi -> regional-bloc",
+      "source": "lr-lisgis-lcpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "No document authored by LISGIS itself, or a Liberian NSDS, names ECOWAS, WAMA/AMAO, AFRISTAT, MRU, the African Charter on Statistics, or SHaSA in connection with Liberia's CPI or statistical methodology — genuine NOT FOUND despite search. Closest adjacent (NOT minted, does not satisfy the sourcing rule): a World Bank Project Appraisal Document (P169265, 'Harmonizing and Improving Statistics in West Africa') states \"In the cases of Ghana, Liberia and Sierra Leone, the CPI will be updated following the model used by the WAEMU Commission\" — but this is World-Bank-authored (not LISGIS-authored) and describes a FUTURE/planned reform, not current practice, so it does not meet the branch's edge-sourcing standard."
+    },
+    {
+      "edge": "lr-lisgis-lcpi -> lr-local-government-act-2018",
+      "source": "lr-lisgis-lcpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "Liberia's Local Government Act, 2018 was searched for extensively (Ministry of Internal Affairs/Local Government, Governance Commission, FAOLEX, NATLEX, SNG-WOFI) — the official gazetted statute text with numbered sections was NOT locatable online. Only a NAYMOTE (Liberian civil-society organisation) plain-language FAQ PDF was found, quoting the Act by Chapter 4 (\"Local governments will get money... to collect taxes on houses, land, small businesses... They will also get money every year from the central government. Counties that have concessions will have social development money every year. (Chapter 4)\") — a real, independently pdftotext-verified quote, but from a secondary CSO explainer rather than the government-issued primary text, so not minted as a node per this branch's standing practice of not treating NGO paraphrase as a citable edge basis (matching the precedent set by the UNICEF Angola report earlier this session). The related \"County Social Development Fund (CSDF)\" concept is confirmed to exist via multiple 2023-2025 news articles but has no located statutory text either."
+    }
+  ]
+}

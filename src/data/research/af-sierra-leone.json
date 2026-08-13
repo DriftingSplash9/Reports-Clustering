@@ -1,0 +1,46 @@
+{
+  "_meta": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader). 30-round population-priority push, 2026-08-13 (AF/G.17), wave 2. Sierra Leone — 6th-highest-population country with zero prior corpus presence. Researched via a dispatched Agent.",
+  "reports": [
+    {
+      "id": "sl-statssl-cpi",
+      "title": "Consumer Price Index (CPI) Press Release",
+      "publisher": "Statistics Sierra Leone (Stats SL)",
+      "country": "SL",
+      "jurisdiction_level": "federal",
+      "region": "Sierra Leone",
+      "description": "Sierra Leone's national CPI. Stats SL's November 2025 press release states: \"We are using the Modified Laspeyres formula to compute indices according to the Classification of Individual Consumption by Purpose (COICOP) with 12 functions,\" base \"December 2021=100.\" A June 2026 release (14.77% YoY inflation) confirms ongoing monthly publication. MODERATE CONFIDENCE: Stats SL's own site returned a bot-detection captcha wall on two direct fetch attempts, so this quote is AI-summarized (WebFetch) rather than independently pdftotext-verified — treat as plausible, not verbatim-confirmed, pending a future direct extraction.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, per Stats SL's own press release series; confirmed current through June 2026 per the CPI index page.",
+      "last_updated": null,
+      "url": "https://www.statistics.sl/index.php/cpi.html",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "sl-local-government-act-2004",
+      "title": "Local Government Act, 2004 (No. 1)",
+      "publisher": "Government of Sierra Leone / Parliament",
+      "country": "SL",
+      "jurisdiction_level": "federal",
+      "region": "Sierra Leone",
+      "description": "Sierra Leone's Local Government Act. Verified directly via downloaded PDF + pdftotext extraction. Part VII (Financial Matters): S.45(1) \"Local councils shall be financed from their own revenue collections, from central government grants for devolved functions and from transfers for services delegated from Government Ministries\"; S.46(1) tied annual grants for devolved functions and administrative costs; S.58 \"Revenue raised from local taxes and from mining revenues, other than those collected by the Government, shall be shared between the local councils and the Chiefdom Councils\"; S.60 mining-revenue share for local councils \"as may be determined by the Ministry.\" STRUCTURAL CAVEAT: Sierra Leone's four \"provinces\" (Northern, North West, Southern, Eastern) plus Western Area are purely administrative groupings with no elected government or budget of their own — actual fiscal transfers under this Act flow to the district/city council and Chiefdom Council tier, not to a provincial-level entity. This national law is nonetheless the correct instrument for this corpus's provincial/state tier, since no separate provincial fiscal law exists to find.",
+      "cadence_note": "One-off foundational legal instrument.",
+      "last_updated": null,
+      "url": "https://www.sierra-leone.org/Laws/2004-1p.pdf",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "sl-statssl-cpi -> regional-bloc",
+      "source": "sl-statssl-cpi",
+      "target": null,
+      "reason": "no-document",
+      "why": "Sierra Leone's own National Strategy for the Development of Statistics (NSDS) 2016-2020 names ECOWAS once, but only in connection with a proposed regional TRAINING initiative (\"NSS will explore with ECOWAS the scope for a regional wide training initiative\"), not CPI methodology — does not satisfy a CPI-specific citation, so not minted as an edge. AFRISTAT, WAMA/AMAO, Mano River Union, the African Charter on Statistics, and SHaSA were all searched for in the NSDS and NOT found. Separately, ECOWAS's own regional statistical-harmonisation guidelines (Industrial Production Index, Business Register, Government Financial Transactions/TOFE-ECOWAS, Quarterly National Accounts) explicitly EXCLUDE CPI from their scope and do not name Sierra Leone specifically."
+    }
+  ]
+}
