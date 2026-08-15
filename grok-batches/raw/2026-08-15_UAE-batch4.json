@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "date": "2026-08-15",
+    "actor": "Grok",
+    "scope": "UAE Batch 4 — Official recurring series under new data spec: CPI, national accounts, monetary/banking statistics, population. Evidence-grade dependencies only; unsupported links in _dropped."
+  },
+  "reports": [
+    {
+      "id": "ae-cpi",
+      "title": "Consumer Price Index (CPI)",
+      "publisher": "Federal Competitiveness and Statistics Centre",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Official consumer price index measuring changes in the prices of a basket of goods and services. Released on a regular cadence and used as the primary domestic inflation measure.",
+      "releases_per_year": 12,
+      "domains": ["inflation"],
+      "url": "https://uaestat.fcsc.gov.ae/"
+    },
+    {
+      "id": "ae-national-accounts",
+      "title": "National Accounts (GDP)",
+      "publisher": "Federal Competitiveness and Statistics Centre",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Official national accounts estimates of gross domestic product and related aggregates, covering both oil and non-oil activity.",
+      "releases_per_year": 4,
+      "domains": ["national-accounts"],
+      "url": "https://fcsc.gov.ae/national-summary-data/"
+    },
+    {
+      "id": "ae-monetary-statistics",
+      "title": "Monthly Statistical Bulletin — Banking & Monetary Statistics",
+      "publisher": "Central Bank of the UAE",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Monthly compilation of monetary aggregates (M1, M2, M3), central-bank assets and liabilities, gross international reserves, bank deposits, credit and related banking indicators.",
+      "releases_per_year": 12,
+      "domains": ["monetary-policy", "banking"],
+      "url": "https://www.centralbank.ae/"
+    },
+    {
+      "id": "ae-population",
+      "title": "Population estimates",
+      "publisher": "Federal Competitiveness and Statistics Centre",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Official population estimates for the UAE, reflecting the large non-national component of the resident population.",
+      "releases_per_year": 1,
+      "domains": ["population"],
+      "url": "https://fcsc.gov.ae/national-summary-data/"
+    },
+    {
+      "id": "ae-bop",
+      "title": "Balance of Payments",
+      "publisher": "Central Bank of the UAE",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Official balance-of-payments statistics compiled according to BPM6, covering the current, capital and financial accounts.",
+      "releases_per_year": 1,
+      "domains": ["national-accounts"],
+      "url": "https://www.centralbank.ae/"
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "ae-monetary-statistics -> ae-cpi (monetary policy references inflation)",
+      "source": "ae-monetary-statistics",
+      "target": "ae-cpi",
+      "reason": "no-document",
+      "why": "While central-bank monetary analysis routinely references CPI, no specific CBUAE or FCSC document was located in this pass that explicitly states a methodological or data dependency of the Monthly Statistical Bulletin on the FCSC CPI series with a quotable claim."
+    },
+    {
+      "edge": "ae-national-accounts -> ae-cpi (deflators)",
+      "source": "ae-national-accounts",
+      "target": "ae-cpi",
+      "reason": "no-document",
+      "why": "National accounts commonly use CPI or related price indices for deflation, but no FCSC methodological note was retrieved in this pass that states the precise relationship with a quotable sentence."
+    },
+    {
+      "edge": "ae-bop -> ae-national-accounts (external sector consistency)",
+      "source": "ae-bop",
+      "target": "ae-national-accounts",
+      "reason": "no-document",
+      "why": "BOP and national accounts are conceptually linked under BPM6/SNA, but no UAE-specific document was found in this pass that asserts a concrete data or methodological dependency with a direct quote."
+    },
+    {
+      "edge": "oil production series (not yet a node) -> ae-national-accounts",
+      "source": null,
+      "target": "ae-national-accounts",
+      "reason": "no-node-yet",
+      "why": "Hydrocarbon production is a major component of UAE GDP. A dedicated oil-production report node was not created in this batch because no clean domain tag exists for energy production (energy-royalties is the closest but does not fit production volumes). Deferred until domain list can be extended or a better fit is confirmed."
+    },
+    {
+      "edge": "tourism / visitor arrivals (not yet a node) -> ae-national-accounts",
+      "source": null,
+      "target": "ae-national-accounts",
+      "reason": "no-node-yet",
+      "why": "Tourism is a significant services component. No domain tag cleanly covers tourism or visitor statistics; deferred."
+    },
+    {
+      "edge": "ports / container throughput (not yet a node) -> ae-national-accounts or trade",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Logistics is central to Dubai’s non-oil economy. No domain tag for trade or logistics; deferred pending domain guidance."
+    }
+  ]
+}

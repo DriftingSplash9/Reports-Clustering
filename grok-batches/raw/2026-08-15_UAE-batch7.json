@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "date": "2026-08-15",
+    "actor": "Grok",
+    "scope": "UAE Batch 7 — GCC trade, banking sector credit/assets, and government financial statistics (GFS) under locked data specification with proposed: domains where needed."
+  },
+  "reports": [
+    {
+      "id": "ae-gcc-trade",
+      "title": "UAE–GCC merchandise trade statistics",
+      "publisher": "Ministry of Finance / FCSC related",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates — GCC",
+      "description": "Statistics on merchandise trade between the UAE and other GCC member states. Total trade volume reached AED 333 billion in 2024; re-exports form a large share. Reflects the UAE’s position inside the GCC Customs Union and Common Market.",
+      "releases_per_year": 1,
+      "domains": ["proposed:trade", "external-action"],
+      "url": "https://mof.gov.ae/en/news/ministry-of-finance-intensifies-efforts-to-complete-the-customs-union-and-implement-gcc-common-market-tracks/"
+    },
+    {
+      "id": "ae-banking-credit",
+      "title": "Banking sector total assets, deposits and gross credit",
+      "publisher": "Central Bank of the UAE",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Monthly and periodic statistics on total banking-sector assets, resident and non-resident deposits, and gross bank credit by sector. Total assets exceeded AED 5.5 trillion in recent readings.",
+      "releases_per_year": 12,
+      "domains": ["banking", "monetary-policy"],
+      "url": "https://www.centralbank.ae/"
+    },
+    {
+      "id": "ae-gfs",
+      "title": "Government Finance Statistics (GFS) — revenues, expenditures, assets and liabilities",
+      "publisher": "Ministry of Finance",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Official government finance statistics compiled according to the IMF Government Finance Statistics Manual 2014. Covers consolidated revenues, expenditures, assets and liabilities at the national level; quarterly and annual releases.",
+      "releases_per_year": 4,
+      "domains": ["taxation", "national-accounts"],
+      "url": "https://mof.gov.ae/en/public-finance/uae-federal-budget/government-financial-statistics/"
+    },
+    {
+      "id": "ae-gcc-framing",
+      "title": "GCC Customs Union and Common Market framing",
+      "publisher": "Derived from Ministry of Finance and GCC sources",
+      "country": "AE",
+      "jurisdiction_level": "supranational",
+      "region": "GCC",
+      "description": "Framing of the UAE’s membership in the GCC Customs Union and Common Market. Common external tariff, free movement of goods, and ongoing work to complete remaining Customs Union requirements are structural features of the external trade regime.",
+      "domains": ["external-action", "proposed:trade"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "ae-gcc-trade -> ae-bop or national merchandise trade aggregates",
+      "source": "ae-gcc-trade",
+      "target": "ae-bop",
+      "reason": "no-document",
+      "why": "GCC trade is a component of overall external trade, but no document was located in this pass that states an explicit data or methodological dependency with a quotable claim."
+    },
+    {
+      "edge": "ae-banking-credit -> ae-monetary-statistics",
+      "source": "ae-banking-credit",
+      "target": "ae-monetary-statistics",
+      "reason": "no-document",
+      "why": "Both series are published by CBUAE and are closely related; however no specific bulletin or methodological note was retrieved that asserts a formal dependency between the two defined nodes with a direct quote."
+    },
+    {
+      "edge": "ae-gfs -> ae-national-accounts",
+      "source": "ae-gfs",
+      "target": "ae-national-accounts",
+      "reason": "no-document",
+      "why": "GFS and SNA are conceptually aligned (GFSM 2014 / SNA 2008), but no UAE-specific document was found that states a concrete statistical dependency usable as evidence."
+    },
+    {
+      "edge": "oil revenue share of fiscal revenue (standalone series)",
+      "source": null,
+      "target": "ae-gfs",
+      "reason": "deferred",
+      "why": "Oil revenue remains a material fiscal contributor. A dedicated oil-revenue series would fit proposed:energy + taxation. Left for a subsequent pass if a clean recurring product is isolated."
+    }
+  ]
+}

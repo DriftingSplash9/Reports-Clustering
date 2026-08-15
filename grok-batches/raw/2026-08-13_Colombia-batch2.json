@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Colombia batch 2 — Short-term industrial indicators (IPI, EMMET, EAM), external sector (BOP), and deeper Banco de la República policy layer (IPoM, intervention rate, reserves).",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft"
+  },
+  "candidates": [
+    {
+      "id": "co-ipi-detail",
+      "title": "Índice de Producción Industrial (IPI) — sector detail",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Monthly volume index of industrial production covering manufacturing, mining & quarrying, electricity & gas, and water. Published with sector contributions and year-to-date rates.",
+      "releases_per_year": 12,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["industry", "mining", "short-term-indicators"],
+      "shape": "own-cadence",
+      "notes": "Core short-term industrial indicator. February 2026: 0.0% year-on-year overall; manufacturing +1.4%, electricity & gas +1.8%, water +2.2%. Built from EMMET and administrative registers."
+    },
+    {
+      "id": "co-emmet",
+      "title": "Encuesta Mensual Manufacturera con Enfoque Territorial (EMMET)",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Monthly sample survey of manufacturing establishments measuring production, sales, employment, wages and hours. Source for the manufacturing component of the IPI and for territorial industrial indicators.",
+      "releases_per_year": 12,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["industry", "manufacturing", "short-term-indicators"],
+      "shape": "own-cadence",
+      "notes": "Primary high-frequency manufacturing survey. Covers 39 CIIU domains and selected departments/metropolitan areas. Direct input into monthly IPI and quarterly national accounts."
+    },
+    {
+      "id": "co-eam",
+      "title": "Encuesta Anual Manufacturera (EAM)",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Annual structural survey of manufacturing establishments providing production, intermediate consumption, value added, employment and energy use. Structural counterpart to the monthly EMMET.",
+      "releases_per_year": 1,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["industry", "manufacturing", "structural"],
+      "shape": "own-cadence",
+      "notes": "Structural manufacturing baseline. 2024 provisional: ~6,583 establishments, production ~COP 444 trillion, value added ~COP 148 trillion. Used for national-accounts benchmarking and industrial structure analysis."
+    },
+    {
+      "id": "co-bop",
+      "title": "Balanza de Pagos y Posición de Inversión Internacional",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Quarterly balance of payments and international investment position. Covers current account, capital/financial account, and the stock of external assets and liabilities.",
+      "releases_per_year": 4,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["external-sector", "balance-of-payments"],
+      "shape": "own-cadence",
+      "notes": "Core external-accounts product. Q4 2025: current-account deficit USD 3.9 bn (3.1% of quarterly GDP). Full-year 2025 deficit ~USD 10.9 bn (2.4% of GDP). Net IIP negative ~USD 200 bn."
+    },
+    {
+      "id": "co-comercio-exterior",
+      "title": "Estadísticas de Comercio Exterior / Merchandise Trade",
+      "publisher": "DANE / DIAN (with Banrep BOP integration)",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Monthly and annual statistics of exports and imports of goods, by product, partner and customs regime. Primary real-side input into the goods account of the balance of payments.",
+      "releases_per_year": 12,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["trade", "external-sector"],
+      "shape": "own-cadence",
+      "notes": "Trade data feed both the BOP and the national accounts. Mining-energy exports remain a large share; recent years have seen widening goods deficits driven by stronger import growth."
+    },
+    {
+      "id": "co-ipom",
+      "title": "Informe de Política Monetaria (Banrep)",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Periodic Monetary Policy Report of the central bank. Explains the inflation outlook, the policy framework and the implications for the intervention interest rate.",
+      "releases_per_year": 4,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["monetary", "policy", "central-bank"],
+      "shape": "own-cadence",
+      "notes": "Flagship policy communication product. Complements the post-meeting statements and minutes of the Junta Directiva. Central reference for the 3% inflation target and the path of the policy rate."
+    },
+    {
+      "id": "co-tasa-intervencion",
+      "title": "Tasa de interés de intervención / Policy interest rate",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Main monetary-policy instrument of the Junta Directiva. The rate at which the central bank intervenes in the money market to manage liquidity and steer inflation toward the 3% target.",
+      "releases_per_year": 12,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["monetary", "policy"],
+      "shape": "own-cadence",
+      "notes": "Operational policy rate. Recent levels in the low-to-mid teens after the post-2022 tightening cycle; path is the primary signal of the monetary stance."
+    },
+    {
+      "id": "co-reservas",
+      "title": "Reservas Internacionales del Banco de la República",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Stock of international reserves managed by the central bank under constitutional and legal mandate. Published at high frequency and analysed in the BOP and Board reports to Congress.",
+      "releases_per_year": 52,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["reserves", "external-sector", "monetary"],
+      "shape": "own-cadence",
+      "notes": "Key external-buffer indicator. End-2025 net reserves ~USD 66.4 bn (up ~USD 3.9 bn year-on-year). Adequacy metrics (IMF-style) regularly reported."
+    },
+    {
+      "id": "co-meta-inflacion",
+      "title": "Marco de metas de inflación (3%) — Banco de la República",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Operational monetary-policy framework: inflation targeting centred on 3% annual CPI inflation. Derived from the constitutional and legal mandate of the central bank.",
+      "releases_per_year": null,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["monetary", "policy", "central-bank"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "Every IPoM and monetary-policy decision statement",
+        "IPC and inflation analysis that refers to the target",
+        "Board reports to Congress"
+      ],
+      "notes": "Core policy-framework node. Continuously cited as the reference against which inflation outcomes and policy actions are evaluated."
+    },
+    {
+      "id": "co-informe-congreso",
+      "title": "Informe de la Junta Directiva al Congreso de la República",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Statutory twice-yearly report of the central-bank Board to Congress covering economic conditions, policy decisions, reserves, the Bank’s financial situation and outlook.",
+      "releases_per_year": 2,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["monetary", "policy", "accountability"],
+      "shape": "own-cadence",
+      "notes": "Accountability product required by law. March and July editions are the main formal channel from the Junta Directiva to the legislature."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "co-emmet",
+      "target": "co-ipi",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "EMMET is the primary survey source for the manufacturing component of the IPI."
+    },
+    {
+      "source": "co-eam",
+      "target": "co-emmet",
+      "relationship_type": "complements",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "The annual structural survey benchmarks and deepens the monthly manufacturing indicators."
+    },
+    {
+      "source": "co-bop",
+      "target": "co-banrep",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.banrep.gov.co/",
+      "basis": "Balance of payments and IIP are compiled by the Banco de la República."
+    },
+    {
+      "source": "co-comercio-exterior",
+      "target": "co-bop",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "Merchandise trade flows are a primary input into the goods account of the balance of payments."
+    },
+    {
+      "source": "co-ipom",
+      "target": "co-meta-inflacion",
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.banrep.gov.co/",
+      "basis": "The Monetary Policy Report analyses outcomes against the 3% inflation target."
+    },
+    {
+      "source": "co-tasa-intervencion",
+      "target": "co-meta-inflacion",
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.banrep.gov.co/",
+      "basis": "The intervention rate is the primary instrument used to steer inflation toward the target."
+    },
+    {
+      "source": "co-reservas",
+      "target": "co-bop",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.banrep.gov.co/",
+      "basis": "Changes in reserve assets appear in the balance of payments financial account."
+    },
+    {
+      "source": "co-informe-congreso",
+      "target": "co-banrep",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.banrep.gov.co/",
+      "basis": "Statutory report of the central-bank Board to Congress."
+    }
+  ],
+  "dropped_or_rejected": []
+}

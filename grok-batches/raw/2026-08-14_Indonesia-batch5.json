@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "date": "2026-08-14",
+    "actor": "Grok",
+    "scope": "Indonesia Batch 5 — Environmental / land-use / climate layer and digital-economy statistics. Links palm-oil and resource expansion to forest cover, deforestation, GHG inventories, and adds the official e-commerce statistical product.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft"
+  },
+  "candidates": [
+    {
+      "id": "id-forest-cover",
+      "title": "Forest cover and land-cover statistics",
+      "publisher": "Ministry of Forestry / BPS related / official monitoring",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "Official monitoring of forested land area (recent figures around 95.5 million ha / ~51 % of land area). Primary quantitative measure of remaining forest stock inside and outside formal forest areas.",
+      "releases_per_year": annual monitoring releases",
+      "url": null,
+      "domains": ["forest", "land-cover", "environment"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Deforestation statistics",
+        "Land-use and agricultural-expansion analysis",
+        "Climate and REDD+/NDC documents"
+      ],
+      "notes": "Stock-side environmental node that pairs with the flow (deforestation) series."
+    },
+    {
+      "id": "id-deforestation",
+      "title": "Deforestation rate statistics (gross and net)",
+      "publisher": "Ministry of Forestry / BPS (historical tables) / official satellite monitoring",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "Annual gross and net deforestation figures (e.g. net ~175 thousand ha in recent monitoring). Broken down by forest type and inside/outside forest area. Continuously cited in environmental, commodity and climate policy.",
+      "releases_per_year": 1 (annual monitoring)",
+      "url": "https://www.bps.go.id/",
+      "domains": ["deforestation", "forest", "environment", "land-use"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Forest-cover statistics",
+        "Palm-oil and estate-crop expansion analysis",
+        "GHG inventory (LULUCF) and NDC reporting",
+        "Sustainability and trade-policy debates"
+      ],
+      "notes": "High-visibility environmental flow node. Direct edge into the palm-oil and land-use clusters."
+    },
+    {
+      "id": "id-ghg-inventory",
+      "title": "Greenhouse-gas inventory and physical supply-use for emissions",
+      "publisher": "Ministry of Environment / BPS (physical supply-use tables) / related",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "National GHG inventory and BPS physical supply-and-use tables for emissions by sector (energy, industry, agriculture, LULUCF, waste, etc.). Underpins NDC accounting and climate-policy analysis.",
+      "releases_per_year": periodic inventory updates + BPS tables",
+      "url": "https://www.bps.go.id/",
+      "domains": ["ghg", "emissions", "climate", "inventory"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Energy Balances and industrial statistics",
+        "Deforestation and LULUCF analysis",
+        "NDC and long-term climate strategy documents"
+      ],
+      "notes": "Core climate-statistical node. Large LULUCF and energy shares are distinctive for Indonesia."
+    },
+    {
+      "id": "id-ndc-climate",
+      "title": "Nationally Determined Contribution (NDC) and climate-policy framework",
+      "publisher": "Government of Indonesia / Ministry of Environment",
+      "country": "ID",
+      "jurisdiction_level": "national / international",
+      "region": "Indonesia",
+      "description": "Indonesia’s successive NDCs and related long-term climate strategies. Recurring citation frame that organises emissions targets, LULUCF commitments and energy-transition language.",
+      "releases_per_year": periodic updates (NDC cycles)",
+      "url": null,
+      "domains": ["ndc", "climate-policy", "international"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "GHG inventory and deforestation statistics",
+        "Energy and coal-transition discussions",
+        "International climate and trade linkages"
+      ],
+      "notes": "Policy-frame node for the climate cluster."
+    },
+    {
+      "id": "id-ecommerce",
+      "title": "E-Commerce Statistics",
+      "publisher": "BPS – Statistics Indonesia",
+      "country": "ID",
+      "jurisdiction_level": "national / provincial",
+      "region": "Indonesia",
+      "description": "Annual BPS survey-based publication on e-commerce businesses: profiles, workers, activities and transaction values, with provincial estimates. Official statistical window on the digital commercial economy.",
+      "releases_per_year": 1",
+      "url": "https://www.bps.go.id/",
+      "domains": ["e-commerce", "digital", "business"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Digital-economy and MSME analysis",
+        "National accounts (services / trade margins)",
+        "Provincial economic and labour statistics"
+      ],
+      "notes": "Key digital-economy statistical product from BPS."
+    },
+    {
+      "id": "id-digital-economy",
+      "title": "Digital-economy and ICT indicators (broader)",
+      "publisher": "BPS / Kominfo / related agencies",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "Broader official indicators of internet access, digital adoption, ICT sector contribution and related metrics that contextualise the e-commerce statistics within the wider digital transformation agenda.",
+      "releases_per_year": periodic",
+      "url": null,
+      "domains": ["digital", "ict", "connectivity"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "E-Commerce Statistics",
+        "Education, labour and inclusion analysis",
+        "National digital-transformation policy documents"
+      ],
+      "notes": "Umbrella digital node surrounding the e-commerce survey."
+    },
+    {
+      "id": "id-land-use-change",
+      "title": "Land-use and land-cover change statistics linked to agriculture and estates",
+      "publisher": "BPS / Ministry of Forestry / Ministry of Agriculture related",
+      "country": "ID",
+      "jurisdiction_level": "national / provincial",
+      "region": "Indonesia",
+      "description": "Statistics and monitoring products that track conversion of forest and other land into agricultural and estate-crop uses (especially palm oil). Forms the land-use bridge between commodity expansion and deforestation/GHG outcomes.",
+      "releases_per_year": periodic / annual",
+      "url": null,
+      "domains": ["land-use", "agriculture", "environment"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Palm-oil and estate-crop statistics",
+        "Deforestation and forest-cover series",
+        "GHG LULUCF inventory"
+      ],
+      "notes": "Explicit land-use edge connecting the commodity and environmental clusters."
+    },
+    {
+      "id": "id-reforestation",
+      "title": "Reforestation / forest and land rehabilitation statistics",
+      "publisher": "Ministry of Forestry / official monitoring",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "Official figures on forest and land rehabilitation (reforestation) area, used as the offset in net-deforestation calculations and as a policy-performance indicator.",
+      "releases_per_year": annual",
+      "url": null,
+      "domains": ["reforestation", "rehabilitation", "environment"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Net deforestation statistics",
+        "Forest-cover monitoring",
+        "Climate and land-restoration policy documents"
+      ],
+      "notes": "Offset-side counterpart to gross deforestation."
+    },
+    {
+      "id": "id-environmental-stats",
+      "title": "Broader environmental statistics (water, waste, air — where published by BPS or ministries)",
+      "publisher": "BPS / Ministry of Environment related",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "Additional environmental statistical products covering water resources, waste, air quality and related indicators that complement the forest and GHG core.",
+      "releases_per_year": periodic",
+      "url": "https://www.bps.go.id/",
+      "domains": ["environment", "water", "waste", "air"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Welfare and health indicators",
+        "Industrial and urban analysis",
+        "Climate-adaptation planning"
+      ],
+      "notes": "Supporting environmental densification."
+    },
+    {
+      "id": "id-env-digital-meta",
+      "title": "Indonesia environment–climate–digital meta-node",
+      "publisher": "Derived from Ministry of Forestry, BPS, Environment ministry and digital statistics",
+      "country": "ID",
+      "jurisdiction_level": "national",
+      "region": "Indonesia",
+      "description": "Meta-node that binds forest cover, deforestation, reforestation, land-use change, GHG inventory, NDC framework, e-commerce and broader digital indicators into a coherent environment-and-digital layer, with explicit edges into the commodity (palm oil) and spatial clusters.",
+      "releases_per_year": null",
+      "url": null,
+      "domains": ["environment", "climate", "digital", "meta"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "All detailed nodes in this batch",
+        "Palm-oil, energy and provincial series from earlier batches"
+      ],
+      "notes": "Integrating node for Batch 5 domains."
+    }
+  ]
+}

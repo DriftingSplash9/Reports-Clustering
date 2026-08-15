@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Venezuela batch 1 — Phase 0+1 under data-quality caution. Core statistical landscape: official INE/BCV presence, ENCOVI (UCAB) as the dominant independent household/poverty source, and the structural features of a high-poverty, high-migration, services-stressed economy. Definition locked.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft",
+    "strategy_note": "Follows NEXT-COUNTRY-STRATEGY.md after Bolivia checkpoint. Explicit data-quality note: official statistical publication frequency and transparency are severely constrained; independent academic survey (ENCOVI) fills the primary household-welfare gap and is the reference series used by most external analysis."
+  },
+  "candidates": [
+    {
+      "id": "ve-ine",
+      "title": "Instituto Nacional de Estadística (INE) — institutional statistical identity",
+      "publisher": "Instituto Nacional de Estadística",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "National statistical office. Formal producer of official demographic, social and economic statistics. Publication cadence and methodological transparency have been severely constrained for an extended period.",
+      "releases_per_year": null,
+      "url": "http://www.ine.gov.ve/",
+      "domains": ["statistical-system", "governance"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "Official government statistical references",
+        "International organisations that still cite residual official series"
+      ],
+      "notes": "Institutional parent node. Continuously cited as the formal statistical authority, but the practical data environment for poverty, labour and living conditions has been dominated by independent sources for years."
+    },
+    {
+      "id": "ve-encovi",
+      "title": "Encuesta Nacional de Condiciones de Vida (ENCOVI) — UCAB",
+      "publisher": "Universidad Católica Andrés Bello (IIES-UCAB)",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Independent multi-purpose household survey conducted by the Universidad Católica Andrés Bello. Primary source for income poverty, multidimensional poverty, labour, education, health, services and migration effects used by domestic and international analysis.",
+      "releases_per_year": 1,
+      "url": "https://www.ucab.edu.ve/",
+      "domains": ["poverty", "labour", "households", "social", "living-conditions"],
+      "shape": "own-cadence",
+      "notes": "De-facto core household-welfare survey. Annual (or near-annual) since the mid-2010s. Continuously cited as the reference series for poverty, services access and living conditions when official publication is sparse. Recent rounds place income poverty in the high 60s % of households and multidimensional poverty around the mid-50s %."
+    },
+    {
+      "id": "ve-pobreza-ingresos",
+      "title": "Pobreza de ingresos (ENCOVI)",
+      "publisher": "UCAB / ENCOVI",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Income-poverty and extreme-poverty incidence derived from the ENCOVI household survey. Headline monetary-poverty indicator used in external analysis.",
+      "releases_per_year": 1,
+      "url": "https://www.ucab.edu.ve/",
+      "domains": ["poverty", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Headline social indicator under data-quality constraints. Recent ENCOVI rounds show income poverty still very high (order of 65–70% of households) with extreme poverty (inability to cover food) remaining material (order of 30%+ of households in recent readings)."
+    },
+    {
+      "id": "ve-pobreza-multidimensional",
+      "title": "Pobreza multidimensional (ENCOVI)",
+      "publisher": "UCAB / ENCOVI",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Multidimensional poverty index combining income with deprivations in employment, housing, public services and education. Complementary structural poverty measure.",
+      "releases_per_year": 1,
+      "url": "https://www.ucab.edu.ve/",
+      "domains": ["poverty", "multidimensional", "social"],
+      "shape": "own-cadence",
+      "notes": "Structural poverty measure. Has been more sticky than income poverty in recent years; public-service failures (electricity, water) weigh heavily. Recent readings around the mid-50s % of the population."
+    },
+    {
+      "id": "ve-bcv",
+      "title": "Banco Central de Venezuela — statistical publications",
+      "publisher": "Banco Central de Venezuela",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Central-bank statistical output covering monetary aggregates, prices, external accounts and related macroeconomic series. Publication and methodological transparency have varied sharply over the crisis period.",
+      "releases_per_year": 12,
+      "url": "http://www.bcv.org.ve/",
+      "domains": ["monetary", "external-sector", "central-bank", "prices"],
+      "shape": "own-cadence",
+      "notes": "Formal monetary and external statistical authority. Residual official series on inflation, exchange rates and external accounts remain the starting point for macroeconomic analysis, often cross-checked against independent estimates."
+    },
+    {
+      "id": "ve-ipc",
+      "title": "Índice de Precios al Consumidor / Inflation statistics",
+      "publisher": "BCV / independent estimates",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Consumer price index and inflation measures. Official BCV series coexist with independent estimates that have been widely used during periods of high inflation and publication gaps.",
+      "releases_per_year": 12,
+      "url": "http://www.bcv.org.ve/",
+      "domains": ["prices", "inflation"],
+      "shape": "own-cadence",
+      "notes": "Flagship price statistic under data-quality stress. Hyperinflation episode and subsequent high inflation made independent price tracking (and later official stabilisation) central to any reading of real incomes and poverty."
+    },
+    {
+      "id": "ve-clap",
+      "title": "CLAP — Comité Local de Abastecimiento y Producción (food boxes)",
+      "publisher": "Gobierno de Venezuela",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "State subsidised food-distribution programme delivering periodic food boxes to households. Major non-income support instrument in the crisis and post-hyperinflation period.",
+      "releases_per_year": 12,
+      "url": null,
+      "domains": ["social-protection", "food-security", "social"],
+      "shape": "own-cadence",
+      "notes": "Lived social-protection node. ENCOVI and other sources consistently report very high coverage (often 80%+ of households receiving boxes at some frequency). Complements (and partially substitutes for) cash income in food access."
+    },
+    {
+      "id": "ve-servicios-publicos",
+      "title": "Acceso a servicios públicos (electricidad, agua)",
+      "publisher": "ENCOVI / independent",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Household access to continuous electricity and piped water. Core component of multidimensional poverty and of everyday living conditions.",
+      "releases_per_year": 1,
+      "url": "https://www.ucab.edu.ve/",
+      "domains": ["services", "infrastructure", "social"],
+      "shape": "own-cadence",
+      "notes": "Lived infrastructure failure node. Recent ENCOVI rounds indicate continuous electricity is available to only a small minority of households and continuous piped water to a minority; service interruptions are a defining feature of daily life for most."
+    },
+    {
+      "id": "ve-migracion",
+      "title": "Migración y población residual",
+      "publisher": "ENCOVI / UN / independent",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Statistics and estimates of large-scale emigration and of the residual resident population. Demographic context for all household and labour analysis.",
+      "releases_per_year": 1,
+      "url": "https://www.ucab.edu.ve/",
+      "domains": ["demography", "migration", "social"],
+      "shape": "own-cadence",
+      "notes": "Structural demographic shock. Millions have left; residual population estimates (ENCOVI and others) are substantially below earlier official projections (order of 28–29 million vs earlier 34 million projections). Shapes labour supply, dependency ratios and the interpretation of all household surveys."
+    },
+    {
+      "id": "ve-caracas",
+      "title": "Distrito Capital / Caracas — metropolitan core",
+      "publisher": "ENCOVI / INE",
+      "country": "VE",
+      "jurisdiction_level": "municipal",
+      "region": "Venezuela — Caracas",
+      "description": "Capital metropolitan area. Primary urban domain for labour, income, services and poverty analysis.",
+      "releases_per_year": 1,
+      "url": "https://www.ucab.edu.ve/",
+      "domains": ["metropolitan", "capital", "caracas"],
+      "shape": "own-cadence",
+      "notes": "Dominant metro node. Continuously appears as a distinct geographic domain in ENCOVI and residual official tabulations; service and labour conditions remain stressed even in the capital."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "ve-pobreza-ingresos",
+      "target": "ve-encovi",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ucab.edu.ve/",
+      "basis": "Income poverty is calculated from the ENCOVI household income modules."
+    },
+    {
+      "source": "ve-pobreza-multidimensional",
+      "target": "ve-encovi",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ucab.edu.ve/",
+      "basis": "Multidimensional poverty is constructed from ENCOVI indicators across income, services, education and housing."
+    },
+    {
+      "source": "ve-servicios-publicos",
+      "target": "ve-pobreza-multidimensional",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.ucab.edu.ve/",
+      "basis": "Electricity and water access are core deprivation dimensions in the multidimensional measure."
+    },
+    {
+      "source": "ve-clap",
+      "target": "ve-pobreza-ingresos",
+      "relationship_type": "complements",
+      "evidence_url": "https://www.ucab.edu.ve/",
+      "basis": "CLAP food boxes are a major non-cash support that partially offsets low monetary income for food access."
+    },
+    {
+      "source": "ve-ipc",
+      "target": "ve-bcv",
+      "relationship_type": "produced_by",
+      "evidence_url": "http://www.bcv.org.ve/",
+      "basis": "Official IPC is produced by the Banco Central de Venezuela."
+    },
+    {
+      "source": "ve-migracion",
+      "target": "ve-encovi",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ucab.edu.ve/",
+      "basis": "ENCOVI provides key estimates of residual population and migration effects on household structure."
+    },
+    {
+      "source": "ve-caracas",
+      "target": "ve-encovi",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.ucab.edu.ve/",
+      "basis": "Caracas is a primary geographic domain of the ENCOVI survey."
+    }
+  ],
+  "dropped_or_rejected": []
+}

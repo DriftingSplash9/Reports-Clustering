@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Colombia batch 1 — Phase 0+1. Core national statistical system from DANE catalogue top-down: institutional identity, national accounts anchors, CPI, labour (GEIH), monetary poverty, population, and Banco de la República. Definition locked.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft",
+    "strategy_note": "Follows NEXT-COUNTRY-STRATEGY.md after Chile checkpoint."
+  },
+  "candidates": [
+    {
+      "id": "co-dane",
+      "title": "Departamento Administrativo Nacional de Estadística (DANE) — institutional statistical identity",
+      "publisher": "Departamento Administrativo Nacional de Estadística",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "National statistical office of Colombia. Produces the core official statistics (prices, labour force, poverty, national accounts inputs, census, etc.) and coordinates the national statistical system.",
+      "releases_per_year": null,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["statistical-system", "governance"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "All major DANE programme methodologies and press releases",
+        "Banco de la República statistical publications that cite DANE sources",
+        "Comité de Expertos en Pobreza joint statements"
+      ],
+      "notes": "Institutional parent node for Colombian official statistics. Continuously cited as the producer of the principal economic and social series."
+    },
+    {
+      "id": "co-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services. National coverage with city-level detail for major urban centres.",
+      "releases_per_year": 12,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["prices", "inflation"],
+      "shape": "own-cadence",
+      "notes": "Flagship price statistic. July 2026: monthly variation 0.17%, year-to-date 4.94%, annual 6.03%. Direct input into monetary-policy analysis by the Banco de la República and into the updating of poverty lines."
+    },
+    {
+      "id": "co-geih",
+      "title": "Gran Encuesta Integrada de Hogares (GEIH) / Great Integrated Household Survey",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Continuous household survey that is the primary source for labour-market indicators (employment, unemployment, informality, underemployment) and for the income data used in monetary-poverty measurement. National, urban-rural, regional and capital-city domains.",
+      "releases_per_year": 12,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["labour", "income", "poverty", "households"],
+      "shape": "own-cadence",
+      "notes": "Central social and labour survey. Moving-quarter and monthly releases. Official source for both labour statistics and the income side of monetary poverty and inequality (Gini). Microdata regularly disseminated."
+    },
+    {
+      "id": "co-pobreza-monetaria",
+      "title": "Pobreza monetaria y pobreza monetaria extrema / Monetary poverty",
+      "publisher": "DANE + Comité de Expertos en Pobreza",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Official income-poverty and extreme-poverty incidence, calculated by comparing household per-capita income (from GEIH, augmented with administrative transfers) with nationally defined poverty lines. Annual publication with urban/rural and city breakdowns.",
+      "releases_per_year": 1,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["poverty", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Headline social indicator. 2025 results published June 2026 with joint DANE–Expert Committee statement. Poverty lines updated with IPC; income concept includes labour, transfers and other sources. Series have undergone methodological empalmes after GEIH frame changes."
+    },
+    {
+      "id": "co-lineas-pobreza",
+      "title": "Líneas de pobreza monetaria y pobreza extrema",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Monetary values of the poverty and extreme-poverty lines (per capita and for reference households), updated with the IPC and differentiated by geographic domain.",
+      "releases_per_year": 1,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["poverty", "prices"],
+      "shape": "own-cadence",
+      "notes": "Direct input into the poverty measurement. 2025 national per-capita extreme-poverty line ~$236,580; poverty line ~$482,041 (monthly). Domain-specific lines published for cabeceras and centros poblados/rural disperso."
+    },
+    {
+      "id": "co-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Colombia",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Full system of national accounts producing GDP by production, expenditure and income, supply-and-use tables and institutional sector accounts. Quarterly and annual releases.",
+      "releases_per_year": 4,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["national-accounts", "gdp"],
+      "shape": "own-cadence",
+      "notes": "Core macroeconomic statistical system. DANE is the primary compiler (unlike Chile where the central bank leads). Quarterly GDP and annual institutional accounts are the headline products."
+    },
+    {
+      "id": "co-censo",
+      "title": "Censo Nacional de Población y Vivienda / National Population and Housing Census",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Decennial population and housing census. Provides the demographic baseline, sampling frames for household surveys, and small-area population estimates.",
+      "releases_per_year": 0.1,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["census", "demography", "housing"],
+      "shape": "own-cadence",
+      "notes": "Foundational demographic product. Continuously cited by GEIH design, poverty analysis and departmental statistical work. Latest major census cycle and subsequent projections are the current reference."
+    },
+    {
+      "id": "co-banrep",
+      "title": "Banco de la República — statistical publications (monetary, external, inflation)",
+      "publisher": "Banco de la República",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Central-bank statistical output covering monetary aggregates, balance of payments, international reserves, exchange rates, and inflation analysis. Complements DANE’s real-sector and price statistics.",
+      "releases_per_year": 12,
+      "url": "https://www.banrep.gov.co/",
+      "domains": ["monetary", "external-sector", "central-bank"],
+      "shape": "own-cadence",
+      "notes": "In the Colombian division of labour DANE leads national accounts, prices and labour; the Banco de la República leads monetary, external and financial statistics and conducts inflation-targeting policy."
+    },
+    {
+      "id": "co-ipi",
+      "title": "Índice de Producción Industrial (IPI) / Industrial Production Index",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Monthly volume index of industrial production (manufacturing, mining, electricity). Principal short-term activity indicator for the industrial sector.",
+      "releases_per_year": 12,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["industry", "short-term-indicators"],
+      "shape": "own-cadence",
+      "notes": "Core short-term industrial indicator. Complements the broader activity measures and feeds into quarterly national accounts."
+    },
+    {
+      "id": "co-gini",
+      "title": "Coeficiente de Gini / Income inequality",
+      "publisher": "DANE",
+      "country": "CO",
+      "jurisdiction_level": "federal",
+      "region": "Colombia",
+      "description": "Official Gini coefficient of income inequality, calculated from the same GEIH income concept used for monetary poverty. Published annually with the poverty results.",
+      "releases_per_year": 1,
+      "url": "https://www.dane.gov.co/",
+      "domains": ["inequality", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Companion inequality indicator to the poverty series. Released jointly with monetary poverty and extreme poverty under the Expert Committee process."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "co-pobreza-monetaria",
+      "target": "co-geih",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "Monetary poverty is calculated from GEIH household income data (augmented with administrative transfers)."
+    },
+    {
+      "source": "co-pobreza-monetaria",
+      "target": "co-lineas-pobreza",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "Poverty status is determined by comparing per-capita income with the official poverty and extreme-poverty lines."
+    },
+    {
+      "source": "co-lineas-pobreza",
+      "target": "co-ipc",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "Poverty lines are updated with the IPC."
+    },
+    {
+      "source": "co-gini",
+      "target": "co-geih",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "The Gini coefficient is computed from the same income distribution underlying the poverty estimates."
+    },
+    {
+      "source": "co-geih",
+      "target": "co-dane",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "GEIH is a core continuous survey of DANE."
+    },
+    {
+      "source": "co-ipc",
+      "target": "co-dane",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "IPC is produced and disseminated by DANE."
+    },
+    {
+      "source": "co-cuentas-nacionales",
+      "target": "co-dane",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.dane.gov.co/",
+      "basis": "National accounts are compiled by DANE."
+    }
+  ],
+  "dropped_or_rejected": []
+}

@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Ecuador batch 1 — Phase 0+1. Core national statistical system from INEC catalogue top-down: institutional identity, ENEMDU (labour + poverty), IPC, national accounts anchors, and Banco Central del Ecuador. Definition locked.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft",
+    "strategy_note": "Follows NEXT-COUNTRY-STRATEGY.md after Peru checkpoint."
+  },
+  "candidates": [
+    {
+      "id": "ec-inec",
+      "title": "Instituto Nacional de Estadística y Censos (INEC) — institutional statistical identity",
+      "publisher": "Instituto Nacional de Estadística y Censos",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "National statistical office of Ecuador. Produces the core official statistics (prices, labour force, poverty, national accounts inputs, census, etc.) and coordinates the national statistical system.",
+      "releases_per_year": null,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["statistical-system", "governance"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "All major INEC programme methodologies and technical bulletins",
+        "Banco Central del Ecuador statistical publications that cite INEC sources"
+      ],
+      "notes": "Institutional parent node for Ecuadorian official statistics. Continuously cited as the producer of the principal economic and social series."
+    },
+    {
+      "id": "ec-enemdu",
+      "title": "Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Continuous household survey that is the primary source for labour-market indicators (adequate employment, underemployment, unemployment) and for income-based poverty and inequality measurement. National, urban and rural domains.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["labour", "poverty", "income", "households"],
+      "shape": "own-cadence",
+      "notes": "Central social and labour survey. Monthly and quarterly releases. Official source for both labour statistics and monetary poverty. Recent (Dec 2025): national poverty 21.4%, extreme poverty 8.3%; unemployment ~2.6–3.6%."
+    },
+    {
+      "id": "ec-pobreza",
+      "title": "Pobreza por ingresos y pobreza extrema / Income poverty",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Official income-poverty and extreme-poverty incidence, calculated by comparing household per-capita income (from ENEMDU) with nationally defined poverty lines updated by the IPC. Published with urban/rural breakdowns.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["poverty", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Headline social indicator. Dec 2025: national poverty 21.4% (down sharply from 28.0% a year earlier); extreme poverty 8.3%. Large urban–rural gap (urban ~13.8%, rural ~37.6%)."
+    },
+    {
+      "id": "ec-lineas-pobreza",
+      "title": "Líneas de pobreza y pobreza extrema",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Monetary values of the poverty and extreme-poverty lines (per capita), updated with the IPC.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["poverty", "prices"],
+      "shape": "own-cadence",
+      "notes": "Direct input into the poverty measurement. Dec 2025: poverty line ~USD 92.40 per person; extreme poverty line ~USD 52.07."
+    },
+    {
+      "id": "ec-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["prices", "inflation"],
+      "shape": "own-cadence",
+      "notes": "Flagship price statistic. Used to update the poverty lines and as the primary inflation indicator for the dollarized economy and for BCE analysis."
+    },
+    {
+      "id": "ec-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Ecuador",
+      "publisher": "Banco Central del Ecuador / INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "System of national accounts producing GDP by production, expenditure and income. Quarterly and annual releases.",
+      "releases_per_year": 4,
+      "url": "https://www.bce.fin.ec/",
+      "domains": ["national-accounts", "gdp"],
+      "shape": "own-cadence",
+      "notes": "Core macroeconomic statistical system. In Ecuador the Banco Central plays a larger role in national accounts compilation than in pure INEI/DANE-style systems."
+    },
+    {
+      "id": "ec-bce",
+      "title": "Banco Central del Ecuador — statistical publications (monetary, external, inflation)",
+      "publisher": "Banco Central del Ecuador",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Central-bank statistical output covering monetary aggregates, balance of payments, international reserves, and macroeconomic analysis. Operates in a fully dollarized monetary regime.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": ["monetary", "external-sector", "central-bank"],
+      "shape": "own-cadence",
+      "notes": "In the Ecuadorian division of labour INEC leads labour, poverty and prices; the BCE leads national accounts, external sector and financial statistics. Dollarization means there is no independent policy interest rate of the classic type."
+    },
+    {
+      "id": "ec-empleo-adecuado",
+      "title": "Empleo adecuado / pleno empleo (ENEMDU)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Key labour-market indicator from ENEMDU measuring the share of the employed who work full-time at or above the minimum wage. Central quality-of-employment metric in the Ecuadorian system.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["labour", "employment-quality"],
+      "shape": "own-cadence",
+      "notes": "Distinctive Ecuadorian labour indicator. Dec 2025: national adequate employment 37.1% (up from 33.0% a year earlier). Large urban–rural gap (urban ~46%, rural ~20%)."
+    },
+    {
+      "id": "ec-censo",
+      "title": "Censo de Población y Vivienda / Population and Housing Census",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys.",
+      "releases_per_year": 0.1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["census", "demography", "housing"],
+      "shape": "own-cadence",
+      "notes": "Foundational demographic product. Continuously cited by ENEMDU design and poverty analysis."
+    },
+    {
+      "id": "ec-gini",
+      "title": "Coeficiente de Gini / Income inequality",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Official Gini coefficient of income inequality, calculated from the same ENEMDU income concept used for monetary poverty.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": ["inequality", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Companion inequality indicator to the poverty series. Recent values in the mid-0.44 to 0.47 range."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "ec-pobreza",
+      "target": "ec-enemdu",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Income poverty is calculated from ENEMDU household income data."
+    },
+    {
+      "source": "ec-pobreza",
+      "target": "ec-lineas-pobreza",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Poverty status is determined by comparing per-capita income with the official poverty lines."
+    },
+    {
+      "source": "ec-lineas-pobreza",
+      "target": "ec-ipc",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Poverty lines are updated with the IPC."
+    },
+    {
+      "source": "ec-empleo-adecuado",
+      "target": "ec-enemdu",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Adequate employment is a core indicator derived from the ENEMDU."
+    },
+    {
+      "source": "ec-gini",
+      "target": "ec-enemdu",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "The Gini coefficient is computed from the same income distribution underlying the poverty estimates."
+    },
+    {
+      "source": "ec-enemdu",
+      "target": "ec-inec",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "ENEMDU is a core continuous survey of INEC."
+    },
+    {
+      "source": "ec-ipc",
+      "target": "ec-inec",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "IPC is produced and disseminated by INEC."
+    }
+  ],
+  "dropped_or_rejected": []
+}

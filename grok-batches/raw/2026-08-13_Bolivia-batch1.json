@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Bolivia batch 1 — Phase 0+1. Core national statistical system from INE catalogue top-down: institutional identity, Encuesta de Hogares (poverty + labour), IPC, national accounts (recent base change), and Banco Central de Bolivia. Definition locked.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft",
+    "strategy_note": "Follows NEXT-COUNTRY-STRATEGY.md after Paraguay checkpoint. Note: national accounts base year updated to 2017 (SCN 2008) after ~30 years on 1990 base."
+  },
+  "candidates": [
+    {
+      "id": "bo-ine",
+      "title": "Instituto Nacional de Estadística (INE) — institutional statistical identity",
+      "publisher": "Instituto Nacional de Estadística",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "National statistical office of the Plurinational State of Bolivia. Produces the core official statistics (household surveys, poverty, prices, national accounts inputs, census, external trade, etc.).",
+      "releases_per_year": null,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["statistical-system", "governance"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "All major INE programme methodologies and technical reports",
+        "Banco Central de Bolivia publications that cite INE sources"
+      ],
+      "notes": "Institutional parent node for Bolivian official statistics. Continuously cited as the producer of the principal economic and social series."
+    },
+    {
+      "id": "bo-eh",
+      "title": "Encuesta de Hogares (EH) / Household Survey",
+      "publisher": "INE",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Annual household survey that is the primary source for labour-market indicators, household income, and income-based poverty and inequality measurement. National coverage with urban/rural and departmental domains.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["labour", "poverty", "income", "households"],
+      "shape": "own-cadence",
+      "notes": "Central social and labour survey. Official source for both labour statistics and monetary poverty. Conducted in the second half of each year; results feed the annual poverty and inequality publications."
+    },
+    {
+      "id": "bo-pobreza",
+      "title": "Pobreza monetaria / Monetary poverty",
+      "publisher": "INE",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Official income-poverty and extreme-poverty incidence, calculated by comparing household per-capita income (from EH) with nationally defined poverty lines. Published with urban/rural and departmental breakdowns.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["poverty", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Headline social indicator. Recent estimates place total monetary poverty in the mid-to-high 30% range and extreme poverty in the low teens, with large urban–rural gaps. Series updated with revised population projections (EPP Rev. 2025)."
+    },
+    {
+      "id": "bo-lineas-pobreza",
+      "title": "Líneas de pobreza y pobreza extrema",
+      "publisher": "INE",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Monetary values of the moderate and extreme poverty lines (per capita), differentiated for urban and rural areas and updated with price information.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["poverty", "prices"],
+      "shape": "own-cadence",
+      "notes": "Direct input into the poverty measurement. Current methodology uses CBA 2015–2016 baskets; lines are published separately for urban and rural domains."
+    },
+    {
+      "id": "bo-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "INE",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services.",
+      "releases_per_year": 12,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["prices", "inflation"],
+      "shape": "own-cadence",
+      "notes": "Flagship price statistic. Produced by INE. Direct input into monetary-policy analysis by the Banco Central de Bolivia and into the updating of poverty lines. Recent inflation has been elevated relative to the long-run low-inflation period."
+    },
+    {
+      "id": "bo-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Bolivia",
+      "publisher": "INE / Banco Central de Bolivia",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "System of national accounts producing GDP by production, expenditure and income. Major base-year revision completed in 2025 (new reference year 2017, SCN 2008).",
+      "releases_per_year": 4,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["national-accounts", "gdp"],
+      "shape": "own-cadence",
+      "notes": "Core macroeconomic statistical system. After ~30 years on a 1990 base, the 2017 reference year and SCN 2008 adoption represent a structural upgrade (validated with CEPAL/FMI support). Quarterly and annual releases."
+    },
+    {
+      "id": "bo-bcb",
+      "title": "Banco Central de Bolivia — statistical publications (monetary, external, inflation)",
+      "publisher": "Banco Central de Bolivia",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Central-bank statistical output covering monetary aggregates, balance of payments, international reserves, exchange-rate developments, and the monetary programme.",
+      "releases_per_year": 12,
+      "url": "https://www.bcb.gob.bo/",
+      "domains": ["monetary", "external-sector", "central-bank"],
+      "shape": "own-cadence",
+      "notes": "In the Bolivian division of labour INE leads prices, household surveys, poverty and national accounts; the BCB leads monetary, external and financial statistics and conducts monetary policy. Recent orientation has been contractive, aiming to bring inflation back to single digits and to rebuild reserves."
+    },
+    {
+      "id": "bo-programa-monetario",
+      "title": "Programa Monetario del BCB",
+      "publisher": "Banco Central de Bolivia",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Annual monetary programme and periodic execution reports setting targets for monetary emission, net domestic credit and net international reserves.",
+      "releases_per_year": 12,
+      "url": "https://www.bcb.gob.bo/",
+      "domains": ["monetary", "policy", "central-bank"],
+      "shape": "own-cadence",
+      "notes": "Operational policy framework. Recent programmes emphasise a contractive stance, open-market operations for sterilisation, and a gradual path toward greater exchange-rate flexibility and an inflation-targeting regime."
+    },
+    {
+      "id": "bo-censo",
+      "title": "Censo de Población y Vivienda / Population and Housing Census",
+      "publisher": "INE",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys; underpins the revised population projections (EPP Rev. 2025).",
+      "releases_per_year": 0.1,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["census", "demography", "housing"],
+      "shape": "own-cadence",
+      "notes": "Foundational demographic product. Continuously cited by EH design, poverty analysis and the 2025 population-projection revision used to reweight survey series."
+    },
+    {
+      "id": "bo-gini",
+      "title": "Índice de Gini / Income inequality",
+      "publisher": "INE",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Official Gini coefficient of income inequality calculated from EH income data. Companion indicator to the monetary-poverty series.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gob.bo/",
+      "domains": ["inequality", "income", "social"],
+      "shape": "own-cadence",
+      "notes": "Structural inequality measure. Published nationally and by urban/rural area alongside the annual poverty results."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "bo-pobreza",
+      "target": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "Monetary poverty is calculated from EH household income data."
+    },
+    {
+      "source": "bo-pobreza",
+      "target": "bo-lineas-pobreza",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "Poverty status is determined by comparing per-capita income with the official poverty lines."
+    },
+    {
+      "source": "bo-lineas-pobreza",
+      "target": "bo-ipc",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "Poverty lines are updated with price information derived from the IPC."
+    },
+    {
+      "source": "bo-programa-monetario",
+      "target": "bo-bcb",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.bcb.gob.bo/",
+      "basis": "The monetary programme is a core policy product of the Banco Central de Bolivia."
+    },
+    {
+      "source": "bo-eh",
+      "target": "bo-ine",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "EH is a core annual survey of INE."
+    },
+    {
+      "source": "bo-ipc",
+      "target": "bo-ine",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "IPC is produced and disseminated by INE."
+    },
+    {
+      "source": "bo-gini",
+      "target": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "The Gini coefficient is computed from the same income distribution underlying the poverty estimates."
+    },
+    {
+      "source": "bo-cuentas-nacionales",
+      "target": "bo-ine",
+      "relationship_type": "produced_by",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "basis": "National accounts are compiled under the INE statistical framework (with BCB collaboration on related series)."
+    }
+  ],
+  "dropped_or_rejected": []
+}

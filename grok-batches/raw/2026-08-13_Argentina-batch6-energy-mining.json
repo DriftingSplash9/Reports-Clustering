@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Argentina batch 6 (final expansion) — Energy & mining statistical layer: IPI minero, hydrocarbon production (Vaca Muerta / Neuquén), lithium, and provincial energy-export link. Closes the Argentina core before moving to Chile.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft"
+  },
+  "candidates": [
+    {
+      "id": "ar-ipi-minero",
+      "title": "Índice de Producción Industrial Minero (IPI minero)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly volume index of mining and hydrocarbon extraction activities. Covers crude oil, natural gas, metallic and non-metallic minerals, including lithium. Published with original and cumulative series.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": ["mining", "energy", "short-term-indicators"],
+      "shape": "own-cadence",
+      "notes": "Key short-term indicator for the energy and mining boom. First-half 2026: +8.4% cumulative. Driven by non-conventional oil (+35% range) and lithium carbonate (+49% range). Complements the manufacturing IPI."
+    },
+    {
+      "id": "ar-vaca-muerta",
+      "title": "Vaca Muerta / producción de hidrocarburos no convencionales (Neuquén)",
+      "publisher": "Secretaría de Energía / INDEC (statistical dissemination)",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Neuquén",
+      "description": "Statistical representation of the Vaca Muerta shale play and non-conventional hydrocarbon production, concentrated in Neuquén. Dominates national crude-oil growth and is visible in the IPI minero and provincial export origin statistics.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": ["energy", "hydrocarbons", "provincial"],
+      "shape": "own-cadence",
+      "notes": "Transformative energy node. Without Neuquén/Vaca Muerta, national crude production would be at multi-decade lows; with it, 2025 set records. Appears in IPI minero (non-conventional oil), provincial export origin (Neuquén rising share), and energy-balance analysis."
+    },
+    {
+      "id": "ar-neuquen-entity",
+      "title": "Provincia de Neuquén — core statistical identity (energy province)",
+      "publisher": "INDEC + provincial statistical services",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Neuquén",
+      "description": "Patagonian province whose statistical profile is now dominated by Vaca Muerta hydrocarbon production and related fiscal/export effects. Rising share of national merchandise exports.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/",
+      "domains": ["provincial", "energy", "neuquen"],
+      "shape": "own-cadence",
+      "notes": "Energy-specialised provincial node. Complements the earlier Córdoba/Santa Fe (agro-industrial) and Chaco/Formosa (higher-poverty) provincial contrasts."
+    },
+    {
+      "id": "ar-litio",
+      "title": "Producción de litio / carbonato de litio (estadísticas mineras)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Physical and index measures of lithium carbonate and related lithium minerals production, published within the IPI minero framework.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": ["mining", "lithium", "critical-minerals"],
+      "shape": "own-cadence",
+      "notes": "High-growth critical-mineral series. First-half 2026 lithium carbonate production +49% cumulative; monthly physical volumes regularly published. Completes the mining layer alongside hydrocarbons."
+    },
+    {
+      "id": "ar-energia-export",
+      "title": "Exportaciones de combustibles y energía / complejo petrolero-petroquímico",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Trade statistics for the fuels & energy large rubric and the oil-petrochemical export complex. Directly linked to Vaca Muerta production growth.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": ["trade", "energy"],
+      "shape": "own-cadence",
+      "notes": "Trade counterpart to the production indices. Oil-petrochemical complex was the second-largest export complex in 2025 (~13.5% of total goods exports)."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "ar-ipi-minero",
+      "target": "ar-emae",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Mining and hydrocarbon extraction feed into the monthly activity estimator."
+    },
+    {
+      "source": "ar-vaca-muerta",
+      "target": "ar-ipi-minero",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Non-conventional hydrocarbon production is the dominant driver of the oil & gas component of the IPI minero."
+    },
+    {
+      "source": "ar-vaca-muerta",
+      "target": "ar-neuquen-entity",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Vaca Muerta production is geographically concentrated in Neuquén."
+    },
+    {
+      "source": "ar-energia-export",
+      "target": "ar-comercio-exterior",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Fuels & energy and the oil-petrochemical complex are standard rubrics/complexes within merchandise trade statistics."
+    },
+    {
+      "source": "ar-litio",
+      "target": "ar-ipi-minero",
+      "relationship_type": "part_of",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Lithium production is reported inside the mining production index."
+    }
+  ],
+  "dropped_or_rejected": []
+}

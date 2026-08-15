@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "date": "2026-08-15",
+    "actor": "Grok",
+    "scope": "UAE Batch 9 — ADIA framing, renewable energy capacity, and climate/GHG residual under locked data specification with proposed: domains."
+  },
+  "reports": [
+    {
+      "id": "ae-adia-framing",
+      "title": "Abu Dhabi Investment Authority (ADIA) sovereign wealth framing",
+      "publisher": "Derived from ADIA and secondary monitoring sources",
+      "country": "AE",
+      "jurisdiction_level": "institutional",
+      "region": "United Arab Emirates — Abu Dhabi",
+      "description": "Framing of ADIA as Abu Dhabi’s traditional long-term sovereign wealth fund. Estimated assets under management in the order of US$1 trillion; invests primarily outside the UAE and is a core vehicle for intergenerational management of hydrocarbon surpluses.",
+      "domains": ["proposed:investment", "national-accounts"]
+    },
+    {
+      "id": "ae-renewables",
+      "title": "Renewable energy capacity statistics",
+      "publisher": "Derived from IRENA and national energy monitoring",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Statistics on installed renewable energy capacity. Capacity reached approximately 7.9 GW in 2025, driven primarily by solar PV; the UAE has a longer-term target of 23 GW by 2031.",
+      "releases_per_year": 1,
+      "domains": ["proposed:energy", "proposed:climate"],
+      "url": null
+    },
+    {
+      "id": "ae-climate-reporting",
+      "title": "Biennial Transparency Report / NDC progress reporting",
+      "publisher": "United Arab Emirates (UNFCCC submission)",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "Official climate transparency and NDC progress reporting submitted under the UNFCCC framework (Biennial Transparency Report and related common tabular formats).",
+      "releases_per_year": 0.5,
+      "domains": ["proposed:climate", "external-action"],
+      "url": "https://unfccc.int/documents/654338"
+    },
+    {
+      "id": "ae-energy-transition-framing",
+      "title": "Energy transition and diversification framing",
+      "publisher": "Derived from national energy and climate sources",
+      "country": "AE",
+      "jurisdiction_level": "federal",
+      "region": "United Arab Emirates",
+      "description": "System-level framing of the UAE’s simultaneous hydrocarbon production role and renewable/energy-transition ambitions. Links oil production, sovereign investment, renewable capacity expansion and climate reporting.",
+      "domains": ["proposed:energy", "proposed:climate", "national-accounts"]
+    }
+  ],
+  "dependencies": [],
+  "_dropped": [
+    {
+      "edge": "ae-adia-framing -> ae-sovereign-framing or ae-mubadala",
+      "source": "ae-adia-framing",
+      "target": "ae-mubadala",
+      "reason": "no-document",
+      "why": "ADIA and Mubadala are both Abu Dhabi sovereign vehicles, but no document was located that asserts a formal statistical or methodological dependency between them."
+    },
+    {
+      "edge": "ae-renewables -> ae-national-accounts or power statistics",
+      "source": "ae-renewables",
+      "target": "ae-national-accounts",
+      "reason": "no-document",
+      "why": "Renewable capacity feeds the energy sector of GDP and power generation, but no specific document with a quotable dependency claim was retrieved."
+    },
+    {
+      "edge": "ae-climate-reporting -> ae-renewables",
+      "source": "ae-climate-reporting",
+      "target": "ae-renewables",
+      "reason": "no-document",
+      "why": "NDC and BTR documents reference renewable deployment, but no explicit data-dependency statement linking the two defined nodes was found in this pass."
+    },
+    {
+      "edge": "detailed GHG inventory time series as standalone node",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "A full national GHG inventory series would strengthen the climate layer. The BTR is the current transparency vehicle; a more granular inventory product can be added if a clean recurring official series is isolated."
+    }
+  ]
+}

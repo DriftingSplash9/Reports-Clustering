@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "date": "2026-08-14",
+    "actor": "Grok",
+    "scope": "Turkey Batch 8 — Health (life expectancy) and poverty / living conditions densification.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft"
+  },
+  "candidates": [
+    {
+      "id": "tr-health",
+      "title": "Life expectancy and vital statistics",
+      "publisher": "Turkish Statistical Institute",
+      "country": "TR",
+      "jurisdiction_level": "national",
+      "region": "Turkey",
+      "description": "Official life tables and life expectancy at birth. Recent estimates place life expectancy at birth around 78.1 years (2022–2024 period), with females living substantially longer than males.",
+      "releases_per_year": periodic / multi-year life tables",
+      "url": "https://www.tuik.gov.tr/",
+      "domains": ["health", "life-expectancy", "vital-statistics"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "Population and social analysis",
+        "Human-capital and development planning",
+        "Regional disparity discussions"
+      ],
+      "notes": "Core health-outcome densification."
+    },
+    {
+      "id": "tr-poverty",
+      "title": "Poverty and living conditions statistics",
+      "publisher": "Turkish Statistical Institute",
+      "country": "TR",
+      "jurisdiction_level": "national / regional",
+      "region": "Turkey",
+      "description": "Official relative poverty rates and living-conditions indicators from household surveys. Relative poverty rate has been reported in the low-to-mid teens in recent releases; absolute poverty has declined substantially over the longer term while regional disparities persist.",
+      "releases_per_year": annual",
+      "url": "https://www.tuik.gov.tr/",
+      "domains": ["poverty", "living-conditions", "welfare"],
+      "shape": "own-cadence",
+      "referenced_by": [
+        "CPI and real-income analysis",
+        "Lagging-regions and equity framing",
+        "Social-protection discussions"
+      ],
+      "notes": "Core welfare measurement node. Interacts tightly with inflation and regional disparity."
+    },
+    {
+      "id": "tr-social-protection",
+      "title": "Social protection and assistance framing",
+      "publisher": "Derived from national and development sources",
+      "country": "TR",
+      "jurisdiction_level": "national",
+      "region": "Turkey",
+      "description": "Policy and statistical framing of social assistance, cash transfers and related social-protection programmes. Continuously referenced in poverty-reduction and equity analysis, especially under high-inflation conditions.",
+      "releases_per_year": continuous",
+      "url": null,
+      "domains": ["social-protection", "assistance", "welfare"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "Poverty and living-conditions statistics",
+        "Fiscal and budget analysis",
+        "Lagging-regions framing"
+      ],
+      "notes": "Social-protection densification linked to the poverty and fiscal clusters."
+    },
+    {
+      "id": "tr-batch8-meta",
+      "title": "Turkey health–poverty densification meta-node",
+      "publisher": "Derived from TurkStat and social sources",
+      "country": "TR",
+      "jurisdiction_level": "national",
+      "region": "Turkey",
+      "description": "Meta-node binding life expectancy and vital statistics, poverty and living-conditions statistics, and social-protection framing into a coherent health and welfare layer.",
+      "releases_per_year": null",
+      "url": null,
+      "domains": ["health", "poverty", "social", "meta"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "All detailed nodes in this batch",
+        "CPI, labour, lagging-regions and fiscal series from earlier batches"
+      ],
+      "notes": "Integrating node for the health and poverty densification pass."
+    }
+  ]
+}
