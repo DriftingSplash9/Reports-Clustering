@@ -1,0 +1,317 @@
+{
+  "_slice": "ru-g2-rosstat-equalization",
+  "_researched": "2026-08-13",
+  "_status": "NEW 2026-08-13. Russia's second slice, and the round that overturns round 1's central conclusion about this branch. `ru-cpi-equalization.json` (BRICS/G.1) recorded Rosstat as completely unreachable and, in the absence of any Rosstat-hosted document, sourced Russia's CPI building block indirectly to the Bank of Russia's own monetary-policy guidelines, which name Rosstat's ИПЦ without being Rosstat's text. That was a misdiagnosis, not a block -- see `_note`. With the diagnosis corrected, this file mints the real Rosstat CPI node (`ru-rosstat-cpi`) plus the standing Rosstat order that defines its method (`ru-rosstat-cpi-methodology-915`), and closes the second round-1 gap as well: Постановление 670's operative equalization formula, recorded at G.1 as paywalled on a third-party mirror, turns out to be published by the Ministry of Finance itself, bundled inside the very ZIP archive Minfin publishes as the equalization input data. Seven new nodes in total, spanning the four institutions this branch runs through -- Rosstat (CPI + its methodology), Minfin (the statutory input-data publication), the legislature/Government (the annual federal budget law, the 2025 amending resolution, and the subsistence-minimum statute), the Bank of Russia (the live key-rate decision series), and the Federal Treasury (budget-execution reporting). Two of this file's edges reach back into `ru-cpi-equalization.json` (`ru-resolution-670-equalization-methodology`), reusing rather than re-minting that node. This round also produced three deliberate NEGATIVE findings that are more interesting than several of the positives -- see `_dropped`: the Bank of Russia's key-rate releases never name Rosstat; the Monetary Policy Report was discontinued in February 2024; and Russia's subsistence minimum and minimum wage are NOT CPI-indexed at all, which directly contradicts the CPI-to-benefits pattern this corpus documents for most other countries.",
+  "_note": "ACCESS AND VERIFICATION. The headline methodological finding of this round, recorded here because it is reusable project-wide and not merely a Russia fact: round 1's `rosstat.gov.ru` \"TLS connection reset\" was a TRUST-STORE GAP, not an egress block or a WAF. Since 2022 Russian government sites are served under Russia's own national certificate authority (\"Russian Trusted Root CA\", Минцифры), which is present in no standard CA bundle. Diagnosis chain, every step verified this round: `curl -k` returned HTTP 200 / 827KB; the presented certificate is genuinely Rosstat's (CN=*.rosstat.gov.ru, OGRN=1047708023483, Мясницкая 39с1); the server sends ONLY the leaf certificate (chain depth 1), and the leaf's AIA extension points at CDP hosts that themselves serve a captcha. The correct intermediate is published at `gu-st.ru/.../russian_trusted_sub_ca_2024_pem.crt`, whose Subject Key Identifier `77:3D:D9:39...` matches the leaf's Authority Key Identifier. THE TRAP: the older, far more commonly cited sub-CA (SKI `D1:E1:71...`) does NOT match and will not validate -- a session that grabs the first Russian sub-CA it finds will wrongly conclude the site is broken. With the root plus the 2024 sub-CA appended to the bundle, every fetch below returns `verify=0`, i.e. genuine TIER A on the government's own host. The r.jina.ai rendering proxy was never needed and never used for Russia this round. TIERS: `rosstat.gov.ru`, `minfin.gov.ru`, `cbr.ru`, `roskazna.gov.ru` and `publication.pravo.gov.ru` all reached TIER A (plain curl, genuine HTTP 200, real document bytes). NOTE `pravo.gov.ru` serves over HTTP only -- `https://pravo.gov.ru/` fails outright while `http://publication.pravo.gov.ru/` returns 200 -- and its ИПС viewer is windows-1251 encoded, which decodes as mojibake if read as UTF-8 and can be mistaken for a failed fetch. OCR CAVEAT, important: several of this round's federal-law PDFs on pravo.gov.ru (426-ФЗ, Постановление 2038, 473-ФЗ) are image-only scans with no text layer, OCR'd here with `tesseract -l rus --psm 6` after installing Russian tessdata. Every quotation drawn from those four documents is OCR OUTPUT -- approximately 99% accurate but NOT byte-exact -- and is labelled as such at the point of use below. Quotes from Rosstat's own PDFs, Minfin's methodology PDF and the cbr.ru/roskazna.gov.ru pages are true verbatim from a real text layer, not OCR. STILL GENUINELY UNREACHABLE, each for a DIFFERENT reason and recorded separately rather than as one blanket claim: `gks.ru` (TCP reset), `fedstat.ru` (403 WAF), and `showdata.gks.ru` / `eng.rosstat.gov.ru` (certificate failures that the Russian national CA does NOT fix). Every `basis` below is this session's own read of the underlying research.",
+  "reports": [
+    {
+      "id": "ru-rosstat-cpi",
+      "title": "Индексы потребительских цен на товары и услуги (Consumer price indices for goods and services)",
+      "publisher": "Федеральная служба государственной статистики (Росстат) / Federal State Statistics Service",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "Rosstat's own consumer price index release -- the node BRICS/G.1 could not mint and for which `ru-cbr-monetary-policy-guidelines` was standing in. That stand-in is no longer necessary. Rosstat's own definitions document states the index's purpose verbatim: «Индекс потребительских цен (ИПЦ) является одним из важнейших показателей, характеризующих фактически сложившийся уровень инфляции, и используется для целей государственной финансовой и денежно-кредитной политики, анализа и прогноза ценовых процессов в экономике, изучения динамики социально-экономических явлений, пересмотра минимальных социальных гарантий, решения правовых споров, а также при пересчете макроэкономических показателей из текущих цен в сопоставимые цены.» (\"The CPI is one of the most important indicators characterising the actual level of inflation, and is used for the purposes of state financial and monetary policy, analysis and forecasting of price processes in the economy, study of the dynamics of socio-economic phenomena, revision of minimum social guarantees, resolution of legal disputes, and also for recalculating macroeconomic indicators from current prices into comparable prices.\") IMPORTANT DIRECTION NOTE: that sentence is Rosstat describing the DOWNSTREAM uses of its own output -- the source naming its consumers, not a dependent naming its input. It is therefore suggestive but not edge-qualifying in this corpus's direction, and no edge is minted from it; the «пересмотра минимальных социальных гарантий» clause in particular is contradicted in the specific case of the subsistence minimum, which is not CPI-indexed at all (see `ru-subsistence-minimum-law-134fz` and the `_dropped` entry on it). Price collection is stated verbatim as: «Источник — Регистрация цен непосредственно с прилавков организаций; данные онлайн–агрегаторов (авиа и железнодорожных по продаже билетов, туроператоров и других) и маркетплейсов.» (\"Source — price registration directly from organisations' counters; data from online aggregators (air and rail ticket sales, tour operators and others) and marketplaces.\") Live data files were confirmed on the product page dated 12.08.2026, the day before this research: `Nedel_ipc.xlsx` (weekly indices), `ipc_mes_07-2026.xlsx` (monthly indices, series from 1991, fetched HTTP 200 / 37,871 bytes and confirmed a valid xlsx), `ipc_RF_fo_sub_07-2026.xlsx` (by federal district and federal subject) and `ipc_kv2_2005-2026.xlsx` (quarterly). Fetched this session with plain curl at TIER A against Rosstat's own host, using the Russian national CA bundle described in this file's `_note`.",
+      "releases_per_year": 12,
+      "cadence_note": "Rosstat publishes this index on four simultaneous cadences, stated verbatim in its own definitions document: «Периодичность    Недельная, Месячная, Квартальная, Годовая» and «Сроки обновления на сайте / Недельная – еженедельно по средам / Месячная - на 6-10-й рабочий день месяца, следующего за отчетным / Квартальная - на 6-10-й рабочий день месяца, следующего за отчетным кварталом / Годовая - на 6-10-й рабочий день месяца, следующего за отчетным годом» (\"Periodicity: weekly, monthly, quarterly, annual. Site update deadlines: weekly – every Wednesday; monthly – on the 6th-10th working day of the month following the reporting month; quarterly – on the 6th-10th working day of the month following the reporting quarter; annual – on the 6th-10th working day of the month following the reporting year.\") `releases_per_year` is set to 12 for the headline monthly index, the cadence the branch's downstream instruments actually reference; the weekly sub-series (52, every Wednesday) and the quarterly and annual roll-ups run alongside it from the same collection.",
+      "last_updated": null,
+      "url": "https://rosstat.gov.ru/statistics/price",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ru-rosstat-cpi-methodology-915",
+      "title": "Приказ Росстата от 15 декабря 2021 г. № 915 «Об утверждении Официальной статистической методологии наблюдения за потребительскими ценами на товары и услуги и расчета индексов потребительских цен»",
+      "publisher": "Федеральная служба государственной статистики (Росстат)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The standing Rosstat order approving the official statistical methodology behind the consumer price index -- the instrument BRICS/G.1 recorded as NOT FOUND. Its enabling clause establishes it as a standing instrument and, incidentally, supplies this round's independent corroboration that Постановление Правительства РФ № 420 of 2 June 2008 is the instrument constituting Rosstat: «В соответствии с подпунктом 5.2 Положения о Федеральной службе государственной статистики, утвержденного постановлением Правительства Российской Федерации от 2 июня 2008 г. № 420, п р и к а з ы в а ю: 1. Утвердить Официальную статистическую методологию наблюдения за потребительскими ценами на товары и услуги и расчета индексов потребительских цен (далее – Методология) (приложение № 1).» The observation cadence is fixed by the methodology itself, §5.2 «Периодичность и масштаб наблюдения» п.15: «Регистрация цен и тарифов осуществляется: по полному перечню товаров (услуг)-представителей, утвержденному соответствующим приказом Росстата, для расчета индекса потребительских цен – ежемесячно по состоянию на конец месяца (по установленному графику)… по сокращенному перечню товаров (услуг)-представителей, определенному соответствующим приказом Росстата – еженедельно по состоянию на пятницу.» The index formula is named explicitly: «Расчет ИПЦ к предыдущему месяцу осуществляется в соответствии с модифицированной формулой Ласпейреса» (\"The CPI relative to the previous month is calculated in accordance with the modified Laspeyres formula\"). The weights source is also named, and is an internal dependency this round could not follow to a node: «Для формирования Набора анализируются итоги выборочного обследования бюджетов домашних хозяйств, проводимого на территории всех субъектов Российской Федерации, в группировке Классификатора индивидуального потребления домашних хозяйств по целям (далее – КИПЦ-ДХ).» and «веса – мера относительной значимости товаров (услуг) в рамках сводного индекса цен, определяемая на основе потребительских расходов домашних хозяйств» -- the household budget survey itself was not separately located this round (see `_dropped`). Fetched TIER A from Rosstat's own host; the first attempt returned `curl: (35) Recv failure: Connection reset by peer`, which is Rosstat rate-limiting rather than a block, and succeeded on retry after a 6-second backoff.",
+      "cadence_note": "A standing methodological instrument, amended rather than reissued on a cadence -- the same convention this corpus applies to statutes and standing orders elsewhere (e.g. `br-lc-62-1989`, `br-lei-8443`).",
+      "last_updated": null,
+      "url": "https://rosstat.gov.ru/storage/mediabank/Prikaz_915_15122021.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ru-minfin-equalization-input-data",
+      "title": "Исходные данные для проведения расчетов распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации",
+      "publisher": "Министерство финансов Российской Федерации (Минфин России)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "Minfin's published input-data archive for the regional equalization calculation -- the publication BRICS/G.1 recorded as a `no-node-yet` drop on the strength of the Budget Code's own publication requirement, without being able to locate it. It exists, it is published on Minfin's own host, and it is the literal input to the equalization formula. The archive contains 85 files: 84 per-region `.xls` workbooks (`altayskiy_kray.xls`, `respublika_dagestan.xls`, `g_moskva.xls`, `yamalo_nenetskiy_avtonomnyy_okrug.xls`, and so on, 64,512 bytes each) PLUS `Методика распределения дотаций на выравнивание.pdf` (866,913 bytes) -- which is the consolidated operative text of Постановление 670 itself, the document BRICS/G.1 recorded as paywalled on ConsultantPlus. That bundling is why round 1 could not find the formula: it is not published as a standalone page anywhere, it ships inside this data archive. The record page states publication timing verbatim: «Опубликован в разделе: 2026-2028 годы … Опубликовано: 10.06.2025 Изменено: 10.06.2025». Sibling publications confirmed live in the same Minfin section and available as future nodes: «Дополнительные данные для проведения расчетов распределения дотаций…», «Распределение дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации на 2026 год и плановый период 2027 и 2028 годов», «Исходные данные по единой субвенции на 2026 год…», and «Исходные данные для проведения расчетов распределения дотаций на частичную компенсацию дополнительных расходов на повышение оплаты труда работников бюджетной сферы и иные цели». Fetched TIER A: the record page returned HTTP 200 / 35,029 bytes and the payload ZIP HTTP 200 / 1,963,545 bytes with content-type `application/zip`, confirmed a real Zip archive by `file` and unpacked with python's `zipfile`.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, keyed to the rolling three-year budget cycle. FLAGGED AS INFERRED, not quoted: the record page states a publication date («Опубликовано: 10.06.2025»), not a periodicity sentence. The annual cadence is inferred from the parallel Minfin section series (`mb2020_2022`, `mb2026_2028`, and so on) and is consistent with Постановление 670's own «ежегодно, до 1 августа» data-supply deadline -- publication on 10.06.2025 precedes the 01.08.2025 deadline for the 2026 cycle.",
+      "last_updated": null,
+      "url": "https://minfin.gov.ru/common/upload/library/2025/06/main/Dotatsii_na_vyravnivanie.zip",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "ru-resolution-2038-2025",
+      "title": "Постановление Правительства Российской Федерации от 15.12.2025 № 2038 «О внесении изменений в некоторые акты Правительства Российской Федерации»",
+      "publisher": "Правительство Российской Федерации",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The Government resolution amending the equalization methodology for the 2026 cycle, and the instrument that puts an explicit inflation floor under every region's equalization grant. BRICS/G.1 recorded it as `unreadable-source`; it is TIER A on `publication.pravo.gov.ru`, the official government publication portal. ALL QUOTATIONS BELOW ARE OCR OUTPUT -- the official PDF is a 10-page scan with no text layer (`pdftotext` yielded 10 bytes), OCR'd with `tesseract -l rus --psm 6` -- approximately 99% accurate but not byte-exact. The amending clause names its target and supplies the fund's full official amendment history: «1. Утвердить прилагаемые изменения, которые вносятся в методику распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации, утвержденную постановлением Правительства Российской Федерации от 22 ноября 2004 г. № 670 \"О распределении дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации\" (Собрание законодательства Российской Федерации, 2004, № 48, ст. 4797; 2006, № 39, ст. 4088; … 2024, № 1, ст. 200; № 52, ст. 8333).» The operative inflation floor: «2. Установить, что: а) объем дотации на выравнивание бюджетной обеспеченности субъекта Российской Федерации на 2026 год не может быть менее утвержденного на 2025 год объема такой дотации бюджетам субъектов Российской Федерации, увеличенного на прогнозируемый уровень инфляции на конец 2026 года, учтенный при формировании федерального бюджета на 2026 год и плановый период 2027 и 2028 годов, для субъектов Российской Федерации, в которых реализуется программа комплексного восстановления и развития пострадавших территорий;» (\"the volume of the equalization dotation for 2026 may not be less than the volume approved for 2025, increased by the forecast level of inflation at end-2026 as taken into account in the formation of the federal budget for 2026 and the planning period 2027 and 2028…\"). A symmetrical ceiling is set at «г) прирост объема дотации … в 2026 году не может превышать 10 процентов по отношению к 2025 году;». It also repeals a provision of its own predecessor: «4. Пункт 3 постановления Правительства Российской Федерации от 16 декабря 2024 г. № 1792 … признать утратившим силу.» The inflation figure the floor points at is verbatim recoverable from the budget law itself -- see `ru-federal-budget-law-2026` -- which closes a complete, fully evidenced chain from a named forecast number to a regional grant amount.",
+      "cadence_note": "An amending instrument rather than a recurring release -- the same convention this corpus applies to amending statutes elsewhere (e.g. `br-lc-62-1989`, which is carried as a single node amended rather than reissued). It is minted as a node rather than folded into `ru-resolution-670-equalization-methodology` because it carries operative rules of its own (the inflation floor and the 10% growth ceiling) that the consolidated 670 text does not contain.",
+      "last_updated": null,
+      "url": "http://publication.pravo.gov.ru/document/0001202512160022",
+      "domains": [
+        "fiscal-transfers",
+        "inflation"
+      ]
+    },
+    {
+      "id": "ru-federal-budget-law-2026",
+      "title": "Федеральный закон от 28.11.2025 № 426-ФЗ «О федеральном бюджете на 2026 год и на плановый период 2027 и 2028 годов»",
+      "publisher": "Российская Федерация / Официальный интернет-портал правовой информации",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "Russia's annual federal budget law, and the document that carries the inflation forecast the equalization floor in `ru-resolution-2038-2025` points back at. ALL QUOTATIONS BELOW ARE OCR OUTPUT -- the official PDF is 5,381 pages and image-only (`pdftotext -f 1 -l 30` yielded 30 bytes), OCR'd with `tesseract -l rus --psm 6` -- approximately 99% accurate but not byte-exact, with visible OCR artefacts noted where they occur. Article 1 states the macroeconomic frame including the inflation number: «Статья 1. Основные характеристики федерального бюджета на 2026 год и на плановый период 2027 и 2028 годов. 1. Утвердить основные характеристики федерального бюджета на 2026 год, определенные исходя из прогнозируемого объема валового внутреннего продукта в размере 235 067 млрд. рублей и уровня инфляции, не превышающего 4,0 процента (декабрь 2026 года к декабрю 2025 года): 1) прогнозируемый общий объем доходов федерального бюджета в сумме 40 283 269 170,5 тыс. рублей; 2) общий объем расходов федерального бюджета в сумме 44 069 704 164,5 тыс. рублей; … 5) дефицит федерального бюджета в сумме 3 786 434 994,0 тыс. рублей.» The law cites the Budget Code repeatedly in its own text -- «В соответствии с пунктом 2 статьи 184-1 Бюджетного кодекса Российской Федерации утвердить нормативы распределения доходов…», and separately arts. 242-3, 242-7 and 80 -- but NOT art. 131, which is why no edge is minted from this law to `ru-budget-code-art131` (see `_dropped`). The equalization article, whose number OCR renders as \"Статья 19\" but which is unambiguously Статья 10 from the surrounding sequence, reads: «Статья 10. Межбюджетные трансферты бюджетам субъектов Российской Федерации и бюджету города Байконура. 1. Утвердить бюджетные ассигнования на предоставление межбюджетных трансфертов … согласно приложению 28 … 4. Дотации на выравнивание бюджетной обеспеченности субъектов Российской Федерации рассчитываются раздельно для бюджетов Архангельской области (без автономного округа), Ненецкого автономного округа, Тюменской области (без автономных округов), Ханты-Мансийского автономного округа - Югры, Ямало-Ненецкого автономного округа.» The law also fixes the year's subsistence-minimum figures directly, Статья 8 ч.4: «Установить в 2026 году величину прожиточного минимума в целом по Российской Федерации на душу населения в размере 18 939 рублей, для трудоспособного населения - 20 644 рублей, пенсионеров - 16 288 рублей, детей - 18 371 рубля.» Fetched TIER A from the official publication portal (HTTP 200, 195,811,243 bytes). Portal note: `HEAD` returns 405 there, so a range request is the way to size a file before downloading.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, on a rolling three-year horizon (the budget year plus a two-year planning period). FLAGGED AS INFERRED, not quoted: the periodicity follows from the instrument type and the title series rather than from any \"periodicity\" sentence, since no such sentence exists inside a budget law.",
+      "last_updated": null,
+      "url": "http://publication.pravo.gov.ru/document/0001202511280088",
+      "domains": [
+        "fiscal-transfers",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "ru-subsistence-minimum-law-134fz",
+      "title": "Федеральный закон № 134-ФЗ «О прожиточном минимуме в Российской Федерации», ст. 4 в редакции Федерального закона от 29.12.2020 № 473-ФЗ",
+      "publisher": "Российская Федерация / Официальный интернет-портал правовой информации",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The statute defining how Russia's subsistence minimum (прожиточный минимум) and, in the same amending law, the minimum wage (МРОТ) are set -- and the source of this round's most significant negative finding for the corpus as a whole. ALL QUOTATIONS BELOW ARE OCR OUTPUT from an image-only scan (Creator: ABBYY FineReader Engine 11, 11 pages), OCR'd with `tesseract -l rus --psm 6`; approximately 99% accurate, not byte-exact. Since 2021 neither quantity is CPI-indexed. The rewritten Article 4 reads: «Статья 4. Величина прожиточного минимума, периодичность ее исчисления и порядок установления. 1. Величина прожиточного минимума на душу населения в целом по Российской Федерации на очередной год устанавливается до 1 июля текущего года Правительством Российской Федерации с учетом мнения Российской трехсторонней комиссии по регулированию социально-трудовых отношений и исчисляется исходя из величины медианного среднедушевого дохода за предыдущий год. Соотношение величины прожиточного минимума на душу населения в целом по Российской Федерации и величины медианного среднедушевого дохода за предыдущий год с 2021 года устанавливается в размере 44,2 процента. … величина прожиточного минимума … не может быть установлена ниже величины прожиточного минимума … установленной на текущий год.» The parallel minimum-wage rule: «минимальный размер оплаты труда на очередной год устанавливается федеральным законом в текущем году и исчисляется исходя из величины медианной заработной платы, рассчитанной федеральным органом исполнительной власти, осуществляющим функции по формированию официальной статистической информации … С 2021 года соотношение минимального размера оплаты труда и медианной заработной платы устанавливается в размере 42 процентов. … Минимальный размер оплаты труда … устанавливается в размере не ниже величины прожиточного минимума трудоспособного населения…» The same amending law defines median income and assigns its calculation: «медианный среднедушевой доход - величина денежного дохода, относительно которой половина населения в целом по Российской Федерации имеет значение среднедушевого дохода ниже данной величины, другая половина - выше данной величины и которая ежегодно исчисляется федеральным органом исполнительной власти, осуществляющим функции по формированию официальной статистической информации о социальных, экономических, демографических, экологических и других общественных процессах в Российской Федерации». IDENTIFICATION NOTE, recorded honestly: the law NEVER writes the word «Росстат» -- a search of the OCR text returned 0 hits for `Росстат` and 0 for `статистик` as a standalone agency name. It uses only the statutory periphrasis quoted above, which designates Rosstat by way of Постановление Правительства РФ от 2 июня 2008 г. № 420, independently corroborated at TIER A this round because Rosstat's own Приказ № 915 opens by citing that same Положение. The identification is therefore sound but is an INFERENCE ACROSS TWO DOCUMENTS, not a literal naming -- which is why no edge is minted to a Rosstat median-income node here (see `_dropped`).",
+      "cadence_note": "A standing statute, amended rather than reissued -- same convention as `ru-rosstat-cpi-methodology-915` in this file and `br-lc-62-1989` in the Brazil slice. The quantity it governs is set annually («устанавливается до 1 июля текущего года»), but the statute itself is not a recurring release.",
+      "last_updated": null,
+      "url": "http://publication.pravo.gov.ru/document/0001202012290119",
+      "domains": [
+        "benefits",
+        "labour"
+      ]
+    },
+    {
+      "id": "ru-cbr-key-rate-decision",
+      "title": "Пресс-релиз по ключевой ставке / Материалы по итогам заседаний Совета директоров Банка России по ключевой ставке",
+      "publisher": "Центральный банк Российской Федерации (Банк России)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The Bank of Russia's live recurring monetary-policy decision series, minted here in place of the Monetary Policy Report («Доклад о денежно-кредитной политике»), which this round confirmed was DISCONTINUED in February 2024 and is therefore not eligible as a live node under this project's no-discontinued-programmes rule -- see `_dropped` for the Bank's own verbatim announcement. The series comprises the key-rate press release issued at each Board meeting, plus the companion «Резюме обсуждения ключевой ставки» published roughly two weeks later and the «Комментарий к среднесрочному прогнозу» after core rounds. The 2026 decision sequence, verbatim from the Bank's own decisions index: «24 июля 2026 г. 13:30 Банк России принял решение снизить ключевую ставку на 25 б.п., до 14,00% годовых / 19 июня 2026 г. 13:30 … до 14,25% годовых / 24 апреля 2026 г. 13:30 … на 50 б.п., до 14,50% годовых / 20 марта 2026 г. 13:30 … до 15,00% годовых / 13 февраля 2026 г. 13:30 … до 15,50% годовых / 19 декабря 2025 г. 13:30 … до 16,00% годовых / 24 октября 2025 г. 13:30 … до 16,50% годовых». From the latest release body: «Совет директоров Банка России 24 июля 2026 года принял решение снизить ключевую ставку на 25 б.п., до 14,00% годовых. … Оценка показателей устойчивой инфляции остается в диапазоне 4–5% в пересчете на год…» and «Следующее заседание Совета директоров Банка России … запланировано на 11 сентября 2026 года. Время публикации пресс-релиза о решении Совета директоров Банка России – 13:30 по московскому времени.» VERIFIED NEGATIVE, recorded rather than assumed: the release does NOT name Rosstat or the ИПЦ as its inflation input. A search of the full extracted text of the 24.07.2026 release returned 0 hits each for `Росстат`, `росстат` and `статистик`. No edge is asserted from this node to `ru-rosstat-cpi` on the strength of this document -- see `_dropped`. Fetched TIER A from cbr.ru.",
+      "releases_per_year": 8,
+      "cadence_note": "Eight scheduled Board meetings per year, each producing a press release at a fixed time, per the Bank's own published calendar: «Предполагаемое время публикации пресс-релиза — 13:30 по московскому времени / Предполагаемое время начала пресс-конференции — 15:00 по московскому времени», with the calendar itself listing e.g. «13 февраля 2026 года Заседание Совета директоров Банка России по ключевой ставке / Пресс-релиз по ключевой ставке … 26 февраля 2026 года Резюме обсуждения ключевой ставки … 20 марта 2026 года Заседание Совета директоров…». The calendar archive runs 2014-2026.",
+      "release_schedule": {
+        "kind": "published-calendar",
+        "entries": [
+          {
+            "from": "2026-02-13",
+            "to": "2026-02-13",
+            "precision": "day",
+            "covers": "Заседание Совета директоров по ключевой ставке — пресс-релиз и среднесрочный прогноз",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-03-20",
+            "to": "2026-03-20",
+            "precision": "day",
+            "covers": "Заседание Совета директоров по ключевой ставке — пресс-релиз",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-04-24",
+            "to": "2026-04-24",
+            "precision": "day",
+            "covers": "Заседание Совета директоров по ключевой ставке — пресс-релиз и среднесрочный прогноз",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-06-19",
+            "to": "2026-06-19",
+            "precision": "day",
+            "covers": "Заседание Совета директоров по ключевой ставке — пресс-релиз",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-07-24",
+            "to": "2026-07-24",
+            "precision": "day",
+            "covers": "Заседание Совета директоров по ключевой ставке — пресс-релиз (ставка снижена до 14,00%)",
+            "evidence": "documented"
+          },
+          {
+            "from": "2026-09-11",
+            "to": "2026-09-11",
+            "precision": "day",
+            "covers": "Следующее заседание Совета директоров по ключевой ставке, названное в пресс-релизе от 24.07.2026",
+            "evidence": "documented"
+          }
+        ],
+        "source_url": "https://www.cbr.ru/dkp/cal_mp/",
+        "note": "Taken from the Bank of Russia's own published meeting calendar and the forward-looking sentence in the 24.07.2026 press release naming the next meeting date. The calendar is a genuine published schedule, not an observed pattern, which is why `kind` is `published-calendar` rather than `observed-pattern`."
+      },
+      "last_updated": null,
+      "url": "https://www.cbr.ru/dkp/mp_dec/",
+      "domains": [
+        "monetary-policy",
+        "interest-rates"
+      ]
+    },
+    {
+      "id": "ru-treasury-federal-budget-execution-report",
+      "title": "Отчет об исполнении федерального бюджета",
+      "publisher": "Федеральное казначейство (Казначейство России)",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The Federal Treasury's recurring budget-execution reporting -- the executed counterpart to `ru-federal-budget-law-2026`, and the deepest recurring series located in this branch, with an archive reaching back to 1997. The report-type selector on the Treasury's own page states the cadences verbatim: «Вид отчета … Выберите из списка годовой квартальный ежемесячный оперативный» (\"Report type … select from list: annual, quarterly, monthly, operational\"). The year selector confirms the archive depth: «Год Выберите год 2026 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011 2010 2009 2008 2007 2006 2005 2004 2003 2002 2001 2000 1999 1998 1997». The publication lag is visible in the latest instances: «на 1 июня 2026 zip 1 июля 2026 09:00» and «на 1 апреля 2026 zip 9 июня 2026 09:00» -- a report as at the first of month M published at the start of month M+1 at 09:00. Sibling recurring sections confirmed live on the same host and available as future nodes: «Консолидированный бюджет РФ и бюджетов государственных внебюджетных фондов», «Консолидированные бюджеты субъектов РФ и бюджетов территориальных государственных внебюджетных фондов», the illustrated «Исполнение федерального бюджета и бюджетов бюджетной системы РФ», and «Статистика государственных финансов РФ». Fetched TIER A (HTTP 200 / 166,884 bytes after one retry; the first attempt returned `curl: (35) Recv failure: Connection reset by peer`, which is roskazna.gov.ru rate-limiting rather than a block). PATH TRAP worth recording for future sessions: the correct slug is `federalnyj-byudzhet` (single -j, no trailing slash); the plausible variants `federalnyy-byudzhet` (double -y) and a trailing slash both return a genuine 404 of exactly 2,622 bytes -- a small-bodied 404 that a status-code-only check reads correctly but a body-length heuristic might not. NOTE: only the section metadata was verified this round; the report ZIPs themselves were not opened, which is why no edge is minted from this node (see `_dropped`).",
+      "releases_per_year": 12,
+      "cadence_note": "Four simultaneous cadences, stated verbatim by the Treasury's own report-type selector: «годовой квартальный ежемесячный оперативный» (annual, quarterly, monthly, operational). `releases_per_year` is set to 12 for the monthly series, whose publication rhythm is directly observable in the file listing («на 1 июня 2026 … 1 июля 2026 09:00»); the operational series is more frequent still and the quarterly and annual roll-ups run alongside.",
+      "last_updated": null,
+      "url": "https://roskazna.gov.ru/ispolnenie-byudzhetov/federalnyj-byudzhet",
+      "domains": [
+        "fiscal-transfers",
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ru-rosstat-cpi",
+      "target_report_id": "ru-rosstat-cpi-methodology-915",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY, TIER A on Rosstat's own host. Приказ № 915 is the instrument that approves the official statistical methodology the CPI is computed under, in its own words: «Утвердить Официальную статистическую методологию наблюдения за потребительскими ценами на товары и услуги и расчета индексов потребительских цен (далее – Методология) (приложение № 1).» It supplies genuine method rather than a bare publication mandate -- it fixes the index formula («Расчет ИПЦ к предыдущему месяцу осуществляется в соответствии с модифицированной формулой Ласпейреса»), the observation cadence («ежемесячно по состоянию на конец месяца … еженедельно по состоянию на пятницу») and the weights basis («веса – мера относительной значимости товаров (услуг) в рамках сводного индекса цен, определяемая на основе потребительских расходов домашних хозяйств»). `methodology_depends_on` rather than `cites` on exactly the distinction `br-fiscal-responsibility-law.json` draws for `br-rreo -> br-lc-101-2000`: an instrument that defines the method the release relies on, not one that merely compels its publication.",
+      "evidence_url": "https://rosstat.gov.ru/storage/mediabank/Prikaz_915_15122021.pdf"
+    },
+    {
+      "source_report_id": "ru-minfin-equalization-input-data",
+      "target_report_id": "ru-resolution-670-equalization-methodology",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY, and unusually literally: the methodology is not merely cited by this publication, it is PHYSICALLY BUNDLED INSIDE IT. `Dotatsii_na_vyravnivanie.zip` contains 84 per-region `.xls` workbooks plus `Методика распределения дотаций на выравнивание.pdf`, the consolidated operative text of Постановление 670. The methodology's own text defines both the calculation this data feeds and the obligation that produces the data: «В целях реализации статьи 131 Бюджетного кодекса Российской Федерации Правительство Российской Федерации постановляет: 1. Утвердить прилагаемую методику распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации.» and «2. Федеральной службе государственной статистики и Федеральной налоговой службе обеспечивать ежегодно, до 1 августа, представление в Министерство финансов Российской Федерации информации, необходимой для осуществления расчетов в соответствии с методикой, утвержденной настоящим Постановлением.» The core formula the data serves is «БОi = ИНПi / ИБРi», where ИНПi is the index of tax potential and ИБРi the index of budget expenditure. `methodology_depends_on` rather than `cites`: this is the method the input data is assembled to satisfy, not a background reference.",
+      "evidence_url": "https://minfin.gov.ru/common/upload/library/2025/06/main/Dotatsii_na_vyravnivanie.zip"
+    },
+    {
+      "source_report_id": "ru-resolution-2038-2025",
+      "target_report_id": "ru-resolution-670-equalization-methodology",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY (OCR-derived quotation -- the source PDF is an image-only scan, so this text is ~99% accurate, not byte-exact). Постановление 2038 names its amendment target explicitly in its own operative clause: «1. Утвердить прилагаемые изменения, которые вносятся в методику распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации, утвержденную постановлением Правительства Российской Федерации от 22 ноября 2004 г. № 670 \"О распределении дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации\"…» `cites` rather than `methodology_depends_on`: 2038 modifies 670 rather than depending on it for a method of its own -- this corpus has no `amends` relationship type, and `cites` is the honest fit for a named-document reference that is not a computational input. The relationship is recorded in this direction because that is the direction 2038's own text states it.",
+      "evidence_url": "http://publication.pravo.gov.ru/document/0001202512160022"
+    },
+    {
+      "source_report_id": "ru-resolution-2038-2025",
+      "target_report_id": "ru-federal-budget-law-2026",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY (OCR-derived quotation, ~99% accurate, not byte-exact). Постановление 2038 sets a floor under each region's 2026 equalization grant that is defined by reference to a number published in the budget law: «объем дотации на выравнивание бюджетной обеспеченности субъекта Российской Федерации на 2026 год не может быть менее утвержденного на 2025 год объема такой дотации … увеличенного на прогнозируемый уровень инфляции на конец 2026 года, учтенный при формировании федерального бюджета на 2026 год и плановый период 2027 и 2028 годов». The figure that clause points at is recoverable verbatim from the budget law's own Article 1: «уровня инфляции, не превышающего 4,0 процента (декабрь 2026 года к декабрю 2025 года)». `uses_data_from` rather than `calculated_from`: the inflation forecast is a direct published input to the floor amount, but the resolution states a minimum condition rather than a complete mechanical derivation of the grant. TENSE CHECK: «не может быть менее» is present-tense and prospective for the 2026 cycle -- a live obligation, not a past arrangement.",
+      "evidence_url": "http://publication.pravo.gov.ru/document/0001202512160022"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ru-resolution-670-equalization-methodology -> ru-rosstat-cpi (the price input to the index of budget expenditure)",
+      "source": "ru-resolution-670-equalization-methodology",
+      "target": null,
+      "reason": "wrong-target",
+      "why": "A real, fully evidenced dependency on a Rosstat price statistic -- but on a DIFFERENT release than the CPI node this file mints, so no edge is drawn to `ru-rosstat-cpi`. The methodology's Приложение № 2 §6 defines the regional price-level coefficient as «к iц = (Б i / Б) × (1 + к iтд × А i / А) × к iр / к ц», where «Бi - стоимость фиксированного набора потребительских товаров и услуг в субъекте Российской Федерации; Б - расчетная стоимость фиксированного набора потребительских товаров и услуг в среднем по субъектам Российской Федерации», and the named-provider table in Приложение № 1 к Правилам assigns that indicator to Rosstat explicitly: «37. Стоимость фиксированного набора потребительских товаров и услуг по субъектам Российской Федерации (рублей) — Росстат». The «стоимость фиксированного набора потребительских товаров и услуг» is a distinct Rosstat product from the consumer price index -- a basket COST level used for inter-regional purchasing-power comparison, not a price INDEX -- and pointing this edge at `ru-rosstat-cpi` would assert a dependency on a release the document does not name. The correct target was confirmed to exist and to be live: it is listed on the same Rosstat price page reached this round, as «ЕМИСС / 1.29.6 / Стоимость фиксированного набора потребительских товаров и услуг для межрегиональных сопоставлений покупательной способности населения» and «Витрина данных / Стоимость фиксированного набора потребительских товаров и услуг», but no title-and-periodicity fetch of that specific release was completed, so no node exists for it yet. This is the single most concrete, highest-value lead for the next Russian round: one page fetch would mint the node and immediately close a CONFIRMED edge into the equalization formula."
+    },
+    {
+      "edge": "ru-resolution-670-equalization-methodology -> Росстат and Федеральная налоговая служба (the annual data-supply obligation)",
+      "source": "ru-resolution-670-equalization-methodology",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "AGENCY ONLY. This is the strongest dependency STATEMENT anywhere in the Russian branch, and it names agencies rather than publications, so it cannot become an edge on its own. Verbatim from the methodology: «2. Федеральной службе государственной статистики и Федеральной налоговой службе обеспечивать ежегодно, до 1 августа, представление в Министерство финансов Российской Федерации информации, необходимой для осуществления расчетов в соответствии с методикой, утвержденной настоящим Постановлением.» The named-provider table goes further and lists individual indicators against their supplying agency -- «1. Численность постоянного населения субъекта Российской Федерации на конец года (тыс. человек) — Росстат», «38. Величина прожиточного минимума по субъектам Российской Федерации (рублей) — Росстат», «39. Доля населения с денежными доходами ниже границы бедности … — Росстат», «41. Среднемесячная начисленная заработная плата наемных работников … — Росстат», «40. Площадь территории субъекта Российской Федерации … — Росреестр» -- but still never names a titled release for any of them, and adds a footnote confirming the data arrives through statistical forms rather than publications: «<*> Показатель формируется на основании формы федерального статистического наблюдения, утверждаемой Федеральной службой государственной статистики.» TENSE NOTE: «обеспечивать» is imperative and standing (a continuing obligation the Government places on Rosstat and the FNS), not a past-tense acknowledgement, so the relationship is live -- only the target is missing. The Federal Tax Service has no corpus node at all yet. Indicators 1, 38, 39 and 41 are each a separate findable Rosstat release and each a real lead."
+    },
+    {
+      "edge": "ru-budget-code-art131 -> ru-resolution-670-equalization-methodology (caveat: the citation is mutual — 670's own enabling clause states the converse)",
+      "source": "ru-budget-code-art131",
+      "target": "ru-resolution-670-equalization-methodology",
+      "reason": "caveat",
+      "why": "An annotation on the edge `ru-budget-code-art131 -> ru-resolution-670-equalization-methodology`, minted at BRICS/G.1 and retained unchanged. This round verified that the citation runs BOTH ways between these two documents, which is worth recording rather than silently resolving in one direction. G.1 minted the edge in the direction art. 131 states it, the Budget Code delegating the distribution method to a Government-approved methodology. This round found 670's own enabling clause stating the converse in its own voice, TIER A on minfin.gov.ru: «В целях реализации статьи 131 Бюджетного кодекса Российской Федерации Правительство Российской Федерации постановляет: 1. Утвердить прилагаемую методику распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации.» («For the purpose of implementing Article 131 of the Budget Code of the Russian Federation, the Government resolves: 1. To approve the attached methodology…»). A second edge was NOT minted, because a mutual statutory cross-reference between a delegating article and its implementing methodology is one relationship documented from two sides, not two independent dependencies, and minting both would put a two-node cycle into a graph whose whole semantic is directional influence. The existing G.1 edge is the better of the two directions to keep: it points from the higher-authority instrument to the operative method, matching how this corpus types statute-to-instrument relationships elsewhere. Recorded here so a future session does not re-discover 670's enabling clause and add the reverse edge as if it were new."
+    },
+    {
+      "edge": "ru-federal-budget-law-2026 -> ru-budget-code-art131",
+      "source": "ru-federal-budget-law-2026",
+      "target": null,
+      "reason": "wrong-target",
+      "why": "The budget law cites the Budget Code repeatedly and unambiguously in its own text, but never article 131. The citations actually present, all OCR-derived from the image-only official PDF: «В соответствии с пунктом 2 статьи 184-1 Бюджетного кодекса Российской Федерации утвердить нормативы распределения доходов между бюджетами бюджетной системы Российской Федерации…», «…в соответствии со статьей 242-3 Бюджетного кодекса Российской Федерации распределенные в федеральный бюджет…», «…в соответствии со статьей 242-7 Бюджетного кодекса Российской Федерации казначейскому сопровождению подлежат следующие целевые средства…», and «…бюджетные инвестиции юридическим лицам, предоставляемые в соответствии со статьей 80 Бюджетного кодекса Российской Федерации…». An edge to the Budget Code AS AN INSTRUMENT would be solid; an edge specifically to art. 131 is not evidenced by the law's own text and is not asserted. The corpus currently has only the article-scoped node `ru-budget-code-art131` and no node for the Budget Code as a whole, so there is no correct target to point at. Minting a whole-Code node is a clean, easy lead for a future round -- at which point this edge becomes available immediately, with four separate verbatim citation lines already in hand."
+    },
+    {
+      "edge": "ru-cbr-key-rate-decision -> ru-rosstat-cpi",
+      "source": "ru-cbr-key-rate-decision",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND, and verified as a negative rather than assumed. The Bank of Russia's key-rate press releases discuss inflation constantly and are obviously informed by Rosstat's CPI in substance, but they never say so. A search of the full extracted text of the 24.07.2026 press release returned 0 hits for `Росстат`, 0 for `росстат` and 0 for `статистик`. The release's inflation language is generic and unsourced: «Оценка показателей устойчивой инфляции остается в диапазоне 4–5% в пересчете на год…». This is the same shape as the China finding in `cn-cpi-transfers.json`, where the Government Work Report uses NBS's CPI figures without ever naming the National Bureau of Statistics -- a monetary or fiscal authority treating the national statistical office's output as ambient fact rather than as a cited source. Under this project's evidence standard the dependency does not go in the graph, however obvious it is in substance. Note this is a DIFFERENT negative from the round-1 position: G.1 minted `ru-cbr-monetary-policy-guidelines` precisely because that document DOES name Rosstat's ИПЦ; it is the key-rate release series, not the Bank of Russia generally, that is silent."
+    },
+    {
+      "edge": "«Доклад о денежно-кредитной политике» (Bank of Russia Monetary Policy Report) as a live node",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "DISCONTINUED, and therefore not minted, under this project's standing no-discontinued-programmes rule. The Bank of Russia's own publication page states it verbatim: «С февраля 2024 года публикация Доклада о денежно-кредитной политике прекращена. Вместо данного материала после каждого решения по ключевой ставке публикуется Резюме обсуждения ключевой ставки, дополнительно по итогам опорных раундов — Комментарий к среднесрочному прогнозу Банка России. Среднесрочный прогноз Банка России публикуется в составе Материалов по итогам заседаний Совета директоров Банка России по ключевой ставке.» («Since February 2024, publication of the Monetary Policy Report has been discontinued. Instead, after each key rate decision, a Summary of the key rate discussion is published…»). The archive confirms the terminal issues: «Выпуск № 4 (44) • Ноябрь» for 2023, and a final «Среднесрочный прогноз Банка России 16.02.2024». This is recorded rather than passed over because the Monetary Policy Report is the obvious thing a future session would go looking for as Russia's quarterly monetary-policy publication, and it would find a real, substantial, and dead series. `ru-cbr-key-rate-decision` is the live successor and is minted in its place."
+    },
+    {
+      "edge": "ru-subsistence-minimum-law-134fz -> ru-rosstat-cpi (a CPI-indexation edge for the subsistence minimum or the minimum wage)",
+      "source": "ru-subsistence-minimum-law-134fz",
+      "target": null,
+      "reason": "denied",
+      "why": "DENIED by the primary text, and the most corpus-significant finding of this round. Russia's benefit-indexation chain does NOT run through the consumer price index. Since 2021 both quantities are fixed shares of Rosstat MEDIAN-INCOME and MEDIAN-WAGE statistics: «Соотношение величины прожиточного минимума на душу населения в целом по Российской Федерации и величины медианного среднедушевого дохода за предыдущий год с 2021 года устанавливается в размере 44,2 процента» for the subsistence minimum, and «С 2021 года соотношение минимального размера оплаты труда и медианной заработной платы устанавливается в размере 42 процентов» for the minimum wage. This directly contradicts the CPI-to-benefits pattern this corpus documents across the AF branch and elsewhere, and it is precisely the kind of assumption a future session might import from a sibling country and get wrong. Note the near-miss that must NOT be read as a CPI edge: the 2026 budget law sets a separate indexation coefficient of «1,04» for certain court-ordered compensation payments, numerically equal to the same law's «не превышающего 4,0 процента» inflation forecast -- but the law never connects the two, and no edge may be drawn from the coincidence. Reason `denied` rather than `no-document` because a document positively states the mechanism to be something other than the proposed one."
+    },
+    {
+      "edge": "ru-subsistence-minimum-law-134fz -> a titled Rosstat median-income / median-wage release",
+      "source": "ru-subsistence-minimum-law-134fz",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The real dependency, with no available target. The statute defines what it depends on -- «медианный среднедушевой доход - величина денежного дохода, относительно которой половина населения … ежегодно исчисляется федеральным органом исполнительной власти, осуществляющим функции по формированию официальной статистической информации…» and «исчисляется исходя из величины медианной заработной платы, рассчитанной федеральным органом исполнительной власти…» -- but names no titled release, and does not even name the agency. A search of the OCR text returned 0 hits for `Росстат` and 0 for `статистик` as a standalone agency name; the law uses only the long statutory periphrasis. That periphrasis designates Rosstat by way of Постановление Правительства РФ от 2 июня 2008 г. № 420, which this round corroborated independently at TIER A because Rosstat's own Приказ № 915 opens by citing that same Положение -- so the identification is sound, but it is an INFERENCE ACROSS TWO DOCUMENTS rather than a naming, and no edge is minted on it. Two things would close this: a node for Rosstat's median-income publication, and a node for Постановление 420 itself, which would let the periphrasis-to-agency identification be represented as evidence rather than as reasoning in a note. Cross-reference worth keeping: the subsistence minimum re-enters the equalization calculation from the other side, since Постановление 670's provider table lists «38. Величина прожиточного минимума по субъектам Российской Федерации (рублей) — Росстат» as a regional input."
+    },
+    {
+      "edge": "ru-minfin-2026-equalization -> ru-minfin-equalization-input-data",
+      "source": "ru-minfin-2026-equalization",
+      "target": null,
+      "reason": "no-document",
+      "why": "Structurally near-certain, textually unstated, and therefore not minted. The input-data archive is by construction the input to the per-region «уровень расчетной бюджетной обеспеченности» table, and both are published in the same Minfin `mb2026_2028` section for the same budget cycle. But no sentence in the distribution table's own text names the input-data publication, and this project's evidence standard does not accept structural inevitability as a substitute for a citation. Recorded as PLAUSIBLE rather than upgraded. The chain is not lost: the relationship is fully represented through Постановление 670, which both documents do cite -- `ru-minfin-2026-equalization -> ru-resolution-670-equalization-methodology` was minted at BRICS/G.1, and `ru-minfin-equalization-input-data -> ru-resolution-670-equalization-methodology` is minted in this file -- so the two Minfin publications are connected through the methodology that governs them both, which is the honest topology."
+    },
+    {
+      "edge": "ru-treasury-federal-budget-execution-report -> ru-federal-budget-law-2026",
+      "source": "ru-treasury-federal-budget-execution-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND in the right direction. An execution report of the budget a law approves is structurally a report against that law, but the Treasury's section landing page contains no sentence naming the budget law, and the report ZIPs themselves were not opened this round -- only section metadata was verified. The one relevant citation found runs the WRONG WAY: the budget law names the Treasury, not the reverse, in its Article 11: «Установить, что в 2026 - 2028 годах Федеральное казначейство в рамках осуществления операций по управлению остатками средств на едином счете федерального бюджета вправе предоставить бюджетам субъектов Российской Федерации бюджетные кредиты…». That is the law naming an executing agency, which is neither the direction nor the document-to-document shape this edge needs. Opening a single monthly report ZIP would very likely settle it -- a cheap, concrete lead for the next round."
+    },
+    {
+      "edge": "ru-rosstat-cpi-methodology-915 -> выборочное обследование бюджетов домашних хозяйств (the household budget survey supplying the CPI weights)",
+      "source": "ru-rosstat-cpi-methodology-915",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "A named, real input with no node yet. Приказ № 915 states the weights source in its own text: «Для формирования Набора анализируются итоги выборочного обследования бюджетов домашних хозяйств, проводимого на территории всех субъектов Российской Федерации, в группировке Классификатора индивидуального потребления домашних хозяйств по целям (далее – КИПЦ-ДХ).» and «веса – мера относительной значимости товаров (услуг) в рамках сводного индекса цен, определяемая на основе потребительских расходов домашних хозяйств». The survey is named by title in Russian but was not separately located as a published release this round, so there is nothing to point at. Note the incidental supranational hook worth checking in a future round: «КИПЦ-ДХ» is the Russian rendering of COICOP, the UN classification of individual consumption by purpose, and this corpus already carries `un-coicop-2018` as a node -- if Приказ 915 or its annexes cite the COICOP version by year, that would be a documented supranational-to-national dependency of exactly the kind REPORTS.md's own secondary objective is looking for."
+    },
+    {
+      "edge": "Budget Code art. 131's own text on a government-operated host (to replace the third-party mirror `ru-budget-code-art131` is sourced to)",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "STILL UNRESOLVED, but far more precisely characterised than at BRICS/G.1, which recorded only that no working .gov.ru host was found. The official consolidated Budget Code IS on a government host and IS reachable: pravo.gov.ru's ИПС «Законодательство России» serves it at `http://pravo.gov.ru/proxy/ips/?doc_itself=&nd=102054721&rdk=249` (HTTP 200, 673,972 bytes). The blocker is that the ИПС viewer HARD-TRUNCATES its output at exactly 673,972 bytes, mid-Article 63 -- short of Article 131. Nine different pagination parameters were tried and every response was byte-identical, so this is a fixed server-side cap rather than a paging problem to be solved with the right query string. The `actual.pravo.gov.ru:8000` API was unreachable, and duma.gov.ru, government.ru and docs.cntd.ru all fail TLS even with the Russian national CA bundle that fixes Rosstat and Minfin. Two further access notes for whoever retries: pravo.gov.ru serves over HTTP only (`https://pravo.gov.ru/` fails outright), and its output is windows-1251 encoded, which renders as mojibake if decoded as UTF-8 and can easily be mistaken for a failed fetch. WHAT DID CHANGE: art. 131's ROLE is now corroborated at TIER A from a government host, because Постановление 670's enabling clause names it directly -- «В целях реализации статьи 131 Бюджетного кодекса Российской Федерации» -- so the node's substance no longer rests on the mirror alone, only its article text does."
+    },
+    {
+      "edge": "The total дотации на выравнивание appropriation in the 2026 federal budget law (Приложения 28 and 30)",
+      "source": "ru-federal-budget-law-2026",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "NOT EXTRACTED, recorded honestly rather than left unmentioned. Article 10 of the budget law points at the annexes that carry the numbers -- «Утвердить бюджетные ассигнования на предоставление межбюджетных трансфертов бюджетам субъектов Российской Федерации и бюджету города Байконура на 2026 год … согласно приложению 28 … 3. Утвердить распределение межбюджетных трансфертов … согласно приложению 30» -- but those annexes sit inside a 5,381-page, ~196 MB image-only PDF with no text layer and no in-document index. Locating the equalization total would require OCR'ing a large fraction of the scan. The PER-REGION distribution is not affected and is available at TIER A from Minfin: `ru-minfin-2026-equalization` (BRICS/G.1) and `ru-minfin-equalization-input-data` (this file) both carry it."
+    },
+    {
+      "edge": "Rosstat mirror and legacy hosts: gks.ru, fedstat.ru, showdata.gks.ru, eng.rosstat.gov.ru",
+      "source": null,
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Genuinely unreachable, and recorded per-host with a distinct reason for each rather than as one blanket claim -- the difference matters, because the main `rosstat.gov.ru` failure that looked identical from the outside turned out to be fixable and these do not. `gks.ru`: TCP connection reset. `fedstat.ru`: HTTP 403, a WAF rejection rather than a transport failure. `showdata.gks.ru` and `eng.rosstat.gov.ru`: certificate failures that the Russian national CA bundle does NOT fix -- distinct from the main host's trust-store gap, and the reason it would be wrong to record \"Rosstat is reachable now\" without qualification. None of these blocks costs the branch anything at present, since the primary host serves the CPI product page, the definitions PDF, the methodology order and the live data files."
+    }
+  ]
+}

@@ -228,6 +228,14 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // Rosstat-hosted node exists yet.
   RU: 'ASIA',
 
+  // United Arab Emirates — added 2026-08-15, first Gulf/Middle East country,
+  // same session as `src/data/research/ae-national-core.json`. Filed to
+  // `ASIA`, the same reserved catch-all family RU uses above, for the same
+  // reason: no dedicated Middle East family exists yet, and `ASIA` is the
+  // unstaffed bucket built to absorb exactly this case rather than force a
+  // false fit into `AFR`, `EU`/`XEU`, or a reserved-for-someone-else code.
+  AE: 'ASIA',
+
   // **Tanzania added 2026-08-10** (AF branch G.6, following the G.5 hand-off's
   // priority 1) -- the last of the seven countries in `country afrikans.docx`
   // to be researched. Its NCPI methodology (geometric mean / Lowe index,

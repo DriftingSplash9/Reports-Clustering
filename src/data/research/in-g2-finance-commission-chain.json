@@ -1,0 +1,291 @@
+{
+  "_slice": "in-g2-finance-commission-chain",
+  "_researched": "2026-08-13",
+  "_status": "NEW 2026-08-13. India's second slice, and the round that takes this branch from ZERO edges to a connected federal-transfer chain running from the Constitution through the Finance Commission to the Union Budget, the central bank and the audit institution. `in-cpi-finance-commission.json` (BRICS/G.1) minted five substantial nodes and drew no dependencies, and it correctly discarded one plausible-looking FC16-to-Article-280 edge for want of a verbatim in-text citation. THAT CITATION EXISTS, and this round found it in FC16's own opening substantive paragraph -- so the edge is reinstated, on evidence rather than on the inference G.1 rightly refused. That is the single most satisfying result here: the discipline was correct AND the edge was real, and the way to reconcile the two was to read the dependent document more carefully, not to relax the standard. Ten new nodes: both Finance Commission Explanatory Memoranda (the Article 281 instruments by which the reports are laid before Parliament and acted on), the Presidential Order constituting FC16, Census of India 2011 (G.1's open lead, now closed), two Union Budget documents, the RBI's annual State Finances study, the CAG's State Finances Audit Report, the GST Compensation Act, and MoSPI's National Accounts Statistics. Eleven edges, all with verbatim in-text citations from the dependent document. Two things this round deliberately did NOT do, and both are recorded in `_dropped`: it did not draw edges from Union Budget documents whose only reference to the Commission is a budget-head LABEL (\"Finance Commission Grants\"), which is the same discipline G.1 applied; and it did not assert the \"(Combined)\" qualifier on India's inflation target, because no reachable primary source contains that string.",
+  "_note": "ACCESS AND VERIFICATION. Every source below is TIER A -- plain curl, genuine HTTP 200, real document bytes on a government host, with every PDF confirmed as a real PDF and text-extracted rather than trusted from a summariser. TWO INFRASTRUCTURE FINDINGS, both reusable beyond India. (1) ROUND 1'S \"UNREACHABLE\" INDIAN HOSTS WERE A LOCAL TRUST-STORE GAP, NOT A GOVERNMENT BLOCK -- the same class of misdiagnosis the sibling Russia research found for Rosstat, arrived at independently. `censusindia.gov.in`, `dea.gov.in` and `egazette.gov.in` all failed with `unable to get local issuer certificate`, and `curl -k` returned 200 for all three, proving the servers were alive and the failure was verification-side. DIAGNOSTIC TRAP WORTH RECORDING: running `openssl s_client` DIRECTLY is misleading here, because it shows the egress gateway's own certificate and verifies cleanly; running it through the proxy (`openssl s_client -proxy ...`), which is what curl actually does, reveals that for these hosts the proxy tunnels rather than intercepts, so the real upstream certificate is presented. That exposed two independent causes: `censusindia.gov.in` serves an INCOMPLETE CHAIN (the eMudhra emSign intermediate is not sent), while `dea.gov.in` and `egazette.gov.in` use Let's Encrypt YR1/YR2 intermediates newer than the container's CA bundle. Fetching the three intermediates via their AIA URIs and building a combined bundle recovered ALL THREE to TIER A. Separately, `egazette.nic.in` genuinely does not exist -- no DNS record at all -- which is a different failure from the .gov.in host and was previously conflated with it. (2) RBI'S `rbidocs` BOT-WALL IS DEFEATABLE. It returns HTTP 200 containing an F5/Shape TSPD JavaScript challenge rather than the PDF -- exactly the 200-that-is-not-the-document trap. The working method: seed a cookie jar on the `www.rbi.org.in` landing page, then request the PDF with those cookies plus a matching `Referer`. This works for `/rdocs/Publications/PDFs/` and still fails for `/rdocs/PressRelease/PDFs/`. NO TIER B WAS AVAILABLE this round: `r.jina.ai`, this project's standing rendering-proxy fallback, is behind a Cloudflare challenge and returned 403 on every attempt, for India as for China. Every `basis` below is this session's own read of the underlying research.",
+  "reports": [
+    {
+      "id": "in-fc16-tor-order",
+      "title": "Presidential Order S.O. 5533(E) constituting the Sixteenth Finance Commission — The Gazette of India: Extraordinary, Part II, Section 3, Sub-section (ii)",
+      "publisher": "Ministry of Finance (Department of Economic Affairs), Government of India / President of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The constituting instrument for the Sixteenth Finance Commission, and the document that carries an explicit Article 280 citation in an official Gazette notification. Masthead verbatim: \"THE GAZETTE OF INDIA : EXTRAORDINARY — PART II—Section 3—Sub-section (ii) — PUBLISHED BY AUTHORITY — No. 5300, NEW DELHI, SUNDAY, DECEMBER 31, 2023\". The operative text: \"S.O. 5533(E).— The following order made by the President is to be published for general information: — ORDER — In pursuance of clause (1) of article 280 of the Constitution read with the provisions of the Finance Commission (Miscellaneous Provisions) Act, 1951 (33 of 1951), the President is pleased to constitute a Finance Commission with Dr. Arvind Panagariya, former Vice-Chairman, NITI Aayog and Professor, Columbia University, as the Chairman.\" The terms of reference, para 4: \"The Commission shall make recommendations as to the following matters, namely: — (i) The distribution between the Union and the States of the net proceeds of taxes which are to be, or may be, divided between them under Chapter I, Part XII of the Constitution and the allocation between the States of the respective shares of such proceeds; (ii) The principles which should govern the grants-in-aid of the revenues of the States out of the Consolidated Fund of India … under article 275 of the Constitution …; and (iii) The measures needed to augment the Consolidated Fund of a State to supplement the resources of the Panchayats and Municipalities in the State …\". The reporting deadline, para 5: \"The Commission shall make its report available by 31st day of October, 2025 covering a period of five years commencing on the 1st day of April, 2026.\" Signed \"New Delhi, Dated the 31st December, 2023 — DROUPADI MURMU, President of India\", with the departmental reference [F. No. 10(2)-B(S)/2022], ASHISH VACHHANI, Addl. Secy. (Budget), digitally signed by SARVESH KUMAR SRIVASTAVA 2023.12.31 13:34:56 +05'30', and the standard imprint \"Uploaded by Dte. of Printing at Government of India Press … and Published by the Controller of Publications, Delhi-110054.\" Fetched TIER A as a real, digitally signed, bilingual Hindi/English PDF.",
+      "releases_per_year": 1,
+      "cadence_note": "One constituting Order per Finance Commission, i.e. approximately every five years -- a genuine recurring series rather than a one-off, evidenced by its predecessors: FC15 was constituted by S.O. 3755(E) dated 27 November 2017, and the Thirteenth Finance Commission's own constituting notification is archived on the Finance Commission's site. `releases_per_year` is set to 1 for the year in which an Order is made; there is no Order in the intervening four years.",
+      "last_updated": null,
+      "url": "https://fincomindia.nic.in/asset/doc/tor_new.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "in-fc16-explanatory-memorandum",
+      "title": "Explanatory Memorandum as to the Action Taken on the Recommendations Made by the Sixteenth Finance Commission",
+      "publisher": "Ministry of Finance, Budget Division, Government of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The Article 281 instrument by which the Sixteenth Finance Commission's report is laid before Parliament together with the Government's action on it -- the document BRICS/G.1 listed as an open lead and did not attempt. Published \"GOVERNMENT OF INDIA / MINISTRY OF FINANCE / BUDGET DIVISION, February, 2026\" and signed \"New Delhi, February 01, 2026 — NIRMALA SITHARAMAN, Minister of Finance\". It cites the Commission's report repeatedly and by internal reference, which is what makes it edge-qualifying rather than merely adjacent: \"The formula for horizontal devolution and weights assigned to various criteria as recommended by the Commission are given in Table 8.8 of the Report. The shares of States in horizontal devolution for the award period are given in Table 8.9 of the Report.\" -- with further references throughout to \"Volume I of the Report\", \"para 10.100 of Volume I of the Report\" and \"Chapter 13 of Volume I\". It also states the Article 281 laying mechanism in its own words (\"…is being laid on the Table of the House, in pursuance of Article 281 of the Constitution\"), which would give a clean edge to an Article 281 node if one existed -- see `_dropped`. Para 13 additionally shows the Census dependency flowing downstream into the Government's own accepted figures: \"be ₹2,000 per person (based on Census 2011 population).\" Fetched TIER A from indiabudget.gov.in, confirmed a real PDF, with a clean text extraction of 406 lines; the same document is also served from the Finance Commission's own host, which is recorded as a mirror rather than as a second source.",
+      "releases_per_year": 1,
+      "cadence_note": "One Explanatory Memorandum per Finance Commission report, laid before Parliament under Article 281 -- so approximately every five years for a final report, with additional memoranda where a Commission issues an interim report (FC15 produced one for its first report covering FY 2020-21 and another for its final report covering 2021-26). Not an annual series.",
+      "last_updated": null,
+      "url": "https://www.indiabudget.gov.in/doc/16fc.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "in-fc15-explanatory-memorandum",
+      "title": "Explanatory Memorandum as to the Action Taken on the Recommendations Made by the Fifteenth Finance Commission (Final Report, 2021-26)",
+      "publisher": "Ministry of Finance (Department of Economic Affairs), Government of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The Fifteenth Finance Commission's counterpart Article 281 instrument, and the sibling that establishes the Explanatory Memorandum as a recurring series rather than a one-off. Its own text states both the laying mechanism and the recommendation it acts on: \"The Final Report of the Commission covering the financial years 2021-22 to 2025-26 ... together with this Explanatory Memorandum on the action taken on the recommendations of the Commission, is being laid on the Table of the House, in pursuance of Article 281 of the Constitution.\" and \"The Commission has recommended that 41 per cent of the net proceeds of Union taxes should be shared with the States.\" -- the 41% figure being FC15's headline vertical-devolution recommendation as already recorded on `in-fc15-report`. A separate Explanatory Memorandum for FC15's FIRST report (covering FY 2020-21) was also located and verified at TIER A; it is a scanned document requiring OCR and is not minted separately here, since the final-report memorandum is the one that governs the full award period. Fetched TIER A from the Finance Commission's own host.",
+      "releases_per_year": 1,
+      "cadence_note": "Same convention as `in-fc16-explanatory-memorandum` -- one per Commission report laid under Article 281, approximately every five years, with an extra memorandum where a Commission issues an interim report as FC15 did for FY 2020-21.",
+      "last_updated": null,
+      "url": "https://fincomindia.nic.in/asset/doc/commission-reports/atr-summary-annex-III-english.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "in-census-2011",
+      "title": "Census of India 2011 — Primary Census Abstract",
+      "publisher": "Office of the Registrar General & Census Commissioner, India, Ministry of Home Affairs",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "India's decennial census -- BRICS/G.1 named it as a real, concrete lead that could not be minted \"for want of a traceable primary URL\", and that blocker turned out to be the TLS trust-store gap described in this file's `_note` rather than anything about the document. The Census organisation's own page states the content verbatim: \"Population Finder 2011 — The Population Finder retrieves data from the Primary Census Abstract (PCA) data tables. These tables contain 85 indicators available for districts, sub-districts, towns, villages and wards. For districts and sub-districts, these indicators are also available separately for urban and rural areas. The indicators include the number of households, the population by sex, by selected age group, by scheduled castes and tribes, by work status, and more. Download Basic Population Figures of India and States, 2011. Basic Population Figures of India, States and Districts, 2011.\" This is the node FC16 depends on for the largest single population-linked weight in its devolution formula, and the dependency is stated in FC16's own text rather than inferred -- see the edge below. Fetched TIER A once the missing eMudhra emSign intermediate was supplied to the trust bundle.",
+      "releases_per_year": 1,
+      "cadence_note": "Decennial. Evidenced by the Census organisation's own data page, titled \"Census Tables (2011, 2001 & 1991)\", which shows the recurring ten-year series. `releases_per_year` is set to 1 for a census year; there is no release in the intervening nine years, the same convention this corpus applies to `br-censo-demografico`.",
+      "last_updated": null,
+      "url": "https://censusindia.gov.in/census.website/data/population-finder",
+      "domains": ["population"]
+    },
+    {
+      "id": "in-union-receipts-budget",
+      "title": "Receipts Budget — ANNEX-4: Statement Showing State-wise Distribution of Net Proceeds of Union Taxes and Duties",
+      "publisher": "Ministry of Finance, Budget Division, Government of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The annual Union Budget document that operationalises the Finance Commission's devolution formula into actual state-by-state amounts -- and the strongest breadth edge found for India this round, because unlike its sibling budget documents it CITES the Commission rather than merely naming a budget head after it. The footnote to the \"Share (Per cent)\" column reads, verbatim: \"* As per accepted recommendations of the Sixteenth Finance Commission, the States' share has been fixed at 41% of the net proceeds of shareable Central Taxes.\" The column that footnote annotates reproduces FC16's own Table 8.9 digit for digit -- \"Andhra Pradesh 4.217 | Arunachal Pradesh 1.354 | Assam 3.258 | Bihar 9.948 | Chhattisgarh 3.304 | Goa 0.365 | Gujarat 3.755 | Haryana 1.361 | Himachal Pradesh 0.914 | … | Uttar Pradesh 17.619 | Uttarakhand 1.141 | West Bengal 7.215\" -- so the dependent document both names the source document and republishes its numbers, which is as strong as this corpus's evidence standard gets. Parent volume: \"RECEIPT BUDGET 2026-2027, MINISTRY OF FINANCE, BUDGET DIVISION, February, 2026\". Fetched TIER A from indiabudget.gov.in as a real PDF.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual -- one Receipts Budget per financial year, presented with the Union Budget each February. Evidenced by the year in the title (\"BE 2026-2027\") and by the Ministry's own budget archive at `https://www.indiabudget.gov.in/budget_archive/rec.asp`.",
+      "last_updated": null,
+      "url": "https://www.indiabudget.gov.in/doc/rec/annex4.pdf",
+      "domains": ["fiscal-transfers", "taxation"]
+    },
+    {
+      "id": "in-union-budget-expenditure-profile-stmt18",
+      "title": "Expenditure Profile, Statement 18 — Total Transfer of Resources to States and Union Territories with Legislature",
+      "publisher": "Ministry of Finance, Budget Division, Government of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The Union Budget's consolidated statement of transfers to states, excluding the tax-devolution share covered by the Receipts Budget. Title verbatim: \"Expenditure Profile 2026-2027 … STATEMENT 18 — TOTAL TRANSFER OF RESOURCES TO STATES AND UNION TERRITORIES WITH LEGISLATURE (excluding States' share of Net Proceeds of Union Taxes and Duties)\". MINTED AS A NODE BUT WITH NO OUTGOING EDGE TO THE FINANCE COMMISSION, deliberately: its only reference to the Commission is the budget-head LABEL \"II. Finance Commission Grants\", and a budget head named after an institution is not a citation of a document. That is the same discipline BRICS/G.1 applied when it discarded the FC16-to-Article-280 edge, and it is applied here even though this round separately proved that particular rejection over-strict -- the fix there was a real citation coming to light, not a lowering of the bar. The node earns its place from the other direction: FC16's own data-sources appendix names Statement 18 explicitly as an input, which is the edge minted below. Fetched TIER A from indiabudget.gov.in.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual -- one Expenditure Profile per financial year, presented with the Union Budget each February.",
+      "last_updated": null,
+      "url": "https://www.indiabudget.gov.in/doc/eb/stat18.pdf",
+      "domains": ["fiscal-transfers"]
+    },
+    {
+      "id": "in-rbi-state-finances",
+      "title": "State Finances: A Study of Budgets of State Governments",
+      "publisher": "Reserve Bank of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The Reserve Bank's annual study of state government budgets -- the closest Indian analogue to the sub-national fiscal analysis this corpus carries for other federations, and unusual in this branch for sitting in a RECIPROCAL relationship with the Finance Commission: it cites FC15, and FC16 cites it back as a data source. Title as published: \"STATE FINANCES — A STUDY OF BUDGETS OF 2023-24 — REVENUE DYNAMICS AND FISCAL CAPACITY OF INDIAN STATES\", Reserve Bank of India, December 2023. Its own Foreword states the cadence verbatim: \"The Reserve Bank's annual publication 'State Finances: A Study of Budgets' provides a comprehensive analysis of the fiscal position of State governments in India.\" -- corroborated by the accompanying press release: \"Today, the Reserve Bank of India (RBI) released the Report titled 'State Finances: A Study of Budgets of 2023-24', an annual publication that provides information, analysis and an assessment of the finances of State governments for 2023-24 …\". It tracks the Commission's recommendations across the whole series: Table III.3, \"States' Share in the Divisible Pool of Central Taxes Recommended by Finance Commissions\", with rows \"Eleventh 29.5 | Twelfth 30.5 | Thirteenth 32.0 | Fourteenth 42.0 | Fifteenth 41.0\", sourced to \"Various Finance Commission Reports; and Reddy and Reddy (2019)\", plus in-text references such as \"…as pointed out by the Fifteenth Finance Commission (FC-XV)\" and \"…the recommendation of the Fourteenth Finance Commission (FC-XIV)\". Retrieved TIER A: the landing page and press release fetched normally, and the 13MB report PDF required the RBI cookie-plus-Referer method described in this file's `_note` to get past the TSPD bot-wall, then confirmed a real PDF with 17,374 lines of extracted text.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, and explicitly so labelled by the publisher in two independent places -- the report's own Foreword (\"The Reserve Bank's annual publication…\") and the RBI press release announcing it (\"an annual publication that provides information, analysis and an assessment of the finances of State governments…\").",
+      "last_updated": null,
+      "url": "https://www.rbi.org.in/scripts/PublicationsView.aspx?Id=22971",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "in-cag-state-finances-audit-report",
+      "title": "Report of the Comptroller and Auditor General of India on State Finances (State Finances Audit Report)",
+      "publisher": "Comptroller and Auditor General of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The constitutional audit institution's annual report on each state's finances -- the accountability tier of India's fiscal chain, and a node that audits the Finance Commission's projections against outturn. The instance verified this round: \"Report of the Comptroller and Auditor General of India on State Finances for the year 2023-24 — Government of Tamil Nadu — Report No. 2 of 2025 (State Finances Audit Report)\". It cites the Finance Commission throughout, in operative analytical voice rather than as background: \"The actual devolution of State's share of Union taxes and duties was greater than the projections made by the Fifteenth Finance Commission (XV FC) for the years 2021-22 to 2023-24.\", \"Fifteenth Finance Commission Grants — Transfers from GoI to the State during 2023-24 on the recommendations of XV FC are given in Table 2.10\", \"…compared to projections made by the Central Finance Commission\", \"…recommendations of the Twelfth Finance Commission (XII FC) for…\", and its own scope statement: \"The analysis is also carried out on recommendations of the Finance Commission (FC), in the context of Tamil Nadu State Fiscal Responsibility and Budget Management Act (TNFR Act), best practices and guidelines of the Government of India.\" Fetched TIER A from cag.gov.in as a real 9.9MB PDF with 14,035 lines of extracted text. NOTE ON SCOPE: this node is modelled on the SERIES (one State Finances Audit Report per state per financial year) with the Tamil Nadu 2023-24 instance as the verified exemplar -- the same convention this corpus uses elsewhere for per-jurisdiction audit series. A future round wanting per-state granularity has an obvious and well-structured source to expand into.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual per State -- one State Finances Audit Report covering each financial year, evidenced by the series numbering (\"Report No. 2 of 2025\" covering FY 2023-24) and by CAG's own audit-report archive organised by year and state.",
+      "last_updated": null,
+      "url": "https://cag.gov.in/webroot/uploads/download_audit_report/2025/English-SFAR-2023-24-068f705991fcd54.32361460.pdf",
+      "domains": ["fiscal-transfers", "municipal-finance"]
+    },
+    {
+      "id": "in-gst-compensation-act-2017",
+      "title": "The Goods and Services Tax (Compensation to States) Act, 2017 (Act No. 15 of 2017)",
+      "publisher": "Ministry of Law and Justice, Government of India (India Code)",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "The statute defining India's GST compensation formula -- a major intergovernmental fiscal-transfer mechanism running parallel to the Finance Commission route, and one both FC15 and FC16 discuss at length. It qualifies under this corpus's rule for standing statutes that define a method, because it fixes a specific escalator over a specific base year. Verbatim: \"3. Projected growth rate.––The projected nominal growth rate of revenue subsumed for a State during the transition period shall be fourteen per cent. per annum.\" and the defining clause \"(k) 'projected growth rate' means the rate of growth projected for the transition period as per section 3;\". The base year is fixed at 2015-16, stated in the Act's own illustration (\"If the base year revenue for 2015-16 for a concerned State, calculated as per section 5 …\") and in its amendment schedule (\"to provide that the financial year 2015-16 shall be taken as the base year … shall be fourteen per cent. per annum … counted towards the definition of Revenue for the base year 2015-16\"), with the mechanism stated as \"…calculated by applying the projected growth rate over the base year revenue of that State.\" MINTED AS A NODE-ONLY CONTRIBUTION, with no edges in either direction: as a 2017 statute it cannot cite FC15 (2020) or FC16 (2025), and although both Commissions discuss GST, no verbatim citation of this Act BY NAME AND NUMBER was located in the FC passages read this round, so none is asserted. Fetched TIER A from indiacode.nic.in, the official statute portal, as a real PDF.",
+      "cadence_note": "A standing statute, amended rather than reissued -- the same convention this corpus applies to statutes elsewhere. The compensation mechanism it defines operated over a stated transition period rather than indefinitely, which is worth checking in a future round before treating the arrangement as live in the present tense.",
+      "last_updated": null,
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/2253/1/A2017-15.pdf",
+      "domains": ["fiscal-transfers", "taxation"]
+    },
+    {
+      "id": "in-mospi-nas",
+      "title": "National Accounts Statistics",
+      "publisher": "Ministry of Statistics and Programme Implementation (MoSPI), Government of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "MoSPI's annual national accounts compendium. Title as published: \"NATIONAL ACCOUNTS STATISTICS - 2025 PUBLICATION\", Government of India, Ministry of Statistics and Programme Implementation, dated \"26 Vaisakha, 1947 Saka / 16 May, 2025\". Its own release describes the publication and, usefully, names its own predecessor, which is what evidences the annual series: \"The Ministry of Statistics and Programme Implementation (MoSPI) has released the 'National Accounts Statistics – 2025' publication, a comprehensive source of data on the national income, production, and expenditure aggregates of the Indian economy.\" and \"In addition, the publication, 'National Accounts Statistics – 2024' is updated by including the statements on Sequence of Accounts of different institutional sectors.\" On the international-standards question this project's secondary objective cares about, the release says only: \"These estimates are presented at current and constant (2011-12) prices and are based on the methodologies in alignment with the United Nations System of National Accounts (SNA)\" -- naming the standard but NOT its edition, which is why no edge to `sna-2008` is minted here. See `_dropped`; the contrast with the Chinese instrument in `cn-g2-budget-law-equalization.json`, which names 《国民账户体系2008》 by edition and therefore does get the edge, is the whole difference. Fetched TIER A from mospi.gov.in as a real PDF, corroborated by the PIB release of the same publication.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, evidenced by the release naming its own immediate predecessor publication (\"National Accounts Statistics – 2024\") alongside the current year's edition, plus the year-in-title convention.",
+      "last_updated": null,
+      "url": "https://www.mospi.gov.in/sites/default/files/press_release/Press%20Release%20on%20National%20Accounts%20Statistics%20Publication%20-%202025.pdf",
+      "domains": ["national-accounts"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "in-fc16-report",
+      "target_report_id": "in-constitution-art280",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY, and this REINSTATES the edge BRICS/G.1 explicitly drafted and then discarded. G.1's rejection was correct on the evidence it had -- it could find no verbatim passage in FC16's own text citing Article 280 by number, and preferred an honest `deferred` note to a plausible-but-unsupported edge. The passage exists, and it is the opening substantive sentence of the Report. FC16 Volume I, para 1.2, verbatim: \"In pursuance of clause (1) of Article 280 of the Constitution of India and the provisions of the Finance Commission (Miscellaneous Provisions) Act, 1951 (Act No. 33 of 1951), the President of India constituted the FC-16 vide Notification S.O. 5533(E) dated 31 December 2023 (Annexure 1.1). The Commission was mandated to make its recommendations for the five-year period commencing on 1 April 2026 and ending on 31 March 2031.\" That is an in-text citation naming the article and clause, in the dependent document's own body, in Chapter 1 \"Constitution and Composition of the Commission\" -- not the inference G.1 refused. `cites` rather than `methodology_depends_on`: Article 280 constitutes the Commission and defines its remit; it supplies no devolution method, which is the Commission's own to devise. Recorded at length because the sequence is instructive -- the standard held, and the edge was real; the reconciliation was reading the dependent document more carefully, not relaxing the rule.",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/16th-FC/reports/Vol1-Main-Report.pdf"
+    },
+    {
+      "source_report_id": "in-fc16-tor-order",
+      "target_report_id": "in-constitution-art280",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY, from an official Gazette instrument's own operative text -- the strongest possible form of this citation, since the Order IS the exercise of the constitutional power it names. Verbatim: \"S.O. 5533(E).— The following order made by the President is to be published for general information: — ORDER — In pursuance of clause (1) of article 280 of the Constitution read with the provisions of the Finance Commission (Miscellaneous Provisions) Act, 1951 (33 of 1951), the President is pleased to constitute a Finance Commission…\". TENSE: present and constitutive. `cites` rather than `methodology_depends_on` for the same reason as the edge above -- the article confers the power and defines the remit without supplying a method. Note that the Order also names the Finance Commission (Miscellaneous Provisions) Act, 1951 in the same breath; that statute has no corpus node and is recorded in `_dropped` as a lead.",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/tor_new.pdf"
+    },
+    {
+      "source_report_id": "in-fc16-report",
+      "target_report_id": "in-fc16-tor-order",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY. FC16 names the constituting Order by its Gazette number in Volume I para 1.2 -- \"the President of India constituted the FC-16 vide Notification S.O. 5533(E) dated 31 December 2023 (Annexure 1.1)\" -- and then reproduces the Order's terms of reference in full, introducing them at para 1.8 with \"As per the order constituting the FC-16, its ToR is as follows: 'The Commission shall make recommendations as to the following matters, namely: …'\", with the Order itself carried as Annexure 1.1. `methodology_depends_on` rather than `cites`: the Order does not merely authorise the Commission, it fixes the questions the Report must answer and the award period it must cover, and the Report's structure follows those terms directly -- the Order supplies the scope the Report's method is built to satisfy. That is the same distinction `br-ipca-fpe.json` draws between a statute that grants authority (`cites`) and one that determines what must be computed (`methodology_depends_on`).",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/16th-FC/reports/Vol1-Main-Report.pdf"
+    },
+    {
+      "source_report_id": "in-fc16-report",
+      "target_report_id": "in-census-2011",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY, and closes BRICS/G.1's open lead. FC16 names the Census as its population source repeatedly and operatively. Volume I para 8.85, on the Population criterion carrying a 17.5 per cent weight: \"In keeping with the longstanding practice ... we continue to include population among the criteria. In conformity with the uniform recommendation by nearly all States, we implement this criterion by awarding each State an allocation based on its share in the Census 2011 total population of the twenty-eight States. We assign a weight of 17.5 per cent to this criterion. We note here that whenever any of our variables are combined with population, we rely on the 2011 Census figures. In this respect, we have fully transitioned from the 1971 Census population to the 2011 Census population data.\" The Technical Note states it inside the formula itself: \"Denoting by Nk the population of State k (k = 1, 2, … 28) as per the 2011 Census, we have, (ii) C1j = …\". The Demographic Performance criterion depends on it too, para 8.88: \"we set the per capita devolution to a State in proportion to the inverse of its population growth between 1971 and 2011 Censuses. We convert this per capita devolution into total by multiplying it by the 2011 population.\" And a table source line reads \"Source: Reports of FC-11 to FC-15; Census of India 2001 and 2011.\" `uses_data_from` rather than `calculated_from`: the census figures are a direct published input to two weighted criteria, but the devolution shares are the output of a multi-criterion formula rather than a mechanical derivation from population alone.",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/16th-FC/reports/Vol1-Main-Report.pdf"
+    },
+    {
+      "source_report_id": "in-fc16-explanatory-memorandum",
+      "target_report_id": "in-fc16-report",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY. The Explanatory Memorandum exists to record the Government's action on the Commission's recommendations and cites the Report by internal reference throughout: \"The formula for horizontal devolution and weights assigned to various criteria as recommended by the Commission are given in Table 8.8 of the Report. The shares of States in horizontal devolution for the award period are given in Table 8.9 of the Report.\" Further references run to \"Volume I of the Report\", \"para 10.100 of Volume I of the Report\" and \"Chapter 13 of Volume I\". `cites` rather than `uses_data_from`: the memorandum states what the Government accepts or modifies and points at where each recommendation lives, rather than taking the Report's figures as a computational input -- the document that does the latter is the Receipts Budget, whose edge is typed accordingly.",
+      "evidence_url": "https://www.indiabudget.gov.in/doc/16fc.pdf"
+    },
+    {
+      "source_report_id": "in-fc15-explanatory-memorandum",
+      "target_report_id": "in-fc15-report",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY, and the sibling that establishes this as a recurring documentary relationship rather than a one-off. Verbatim: \"The Final Report of the Commission covering the financial years 2021-22 to 2025-26 ... together with this Explanatory Memorandum on the action taken on the recommendations of the Commission, is being laid on the Table of the House, in pursuance of Article 281 of the Constitution.\" and \"The Commission has recommended that 41 per cent of the net proceeds of Union taxes should be shared with the States.\" -- the second sentence restating FC15's headline vertical-devolution recommendation as already recorded on `in-fc15-report`, which confirms the memorandum is acting on this specific report rather than on the Commission generically.",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/atr-summary-annex-III-english.pdf"
+    },
+    {
+      "source_report_id": "in-union-receipts-budget",
+      "target_report_id": "in-fc16-report",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY, and the strongest breadth edge found for India this round -- the dependent document both NAMES the source and REPUBLISHES its numbers. The footnote to ANNEX-4's \"Share (Per cent)\" column reads: \"* As per accepted recommendations of the Sixteenth Finance Commission, the States' share has been fixed at 41% of the net proceeds of shareable Central Taxes.\" The column it annotates reproduces FC16 Volume I Table 8.9 digit for digit: \"Andhra Pradesh 4.217 | Arunachal Pradesh 1.354 | Assam 3.258 | Bihar 9.948 | Chhattisgarh 3.304 | Goa 0.365 | Gujarat 3.755 | Haryana 1.361 | Himachal Pradesh 0.914 | … | Uttar Pradesh 17.619 | Uttarakhand 1.141 | West Bengal 7.215\" against FC16's own \"Andhra Pradesh 4.217 / Arunachal Pradesh 1.354 / Assam 3.258 / Bihar 9.948 / Chhattisgarh 3.304 / Goa 0.365 / Gujarat 3.755 / Haryana 1.361 / Himachal Pradesh 0.914 / Jharkhand 3.357 / Karnataka 4.131 / Kerala 2.382 / Madhya Pradesh 7.347 / Maharashtra 6.441 …\". `uses_data_from` rather than `cites`: the shares are literal computational inputs to the state-wise distribution the annex publishes, not a background reference. This is also the edge that makes the Indian chain load-bearing rather than merely documentary -- it connects a Commission recommendation to the money actually appropriated.",
+      "evidence_url": "https://www.indiabudget.gov.in/doc/rec/annex4.pdf"
+    },
+    {
+      "source_report_id": "in-fc16-report",
+      "target_report_id": "in-rbi-state-finances",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY, from FC16's own data-sources appendix in Volume II, which names the RBI study by title and edition years as the source for a specific series across a specific period: \"Total Grants — 1952-53 to 1989-90: RBI Bulletins of various years. … 1990-91 to 2022-23: RBI Study on State Finances 2014, 2023, 2024. Appendix 2. The data for 2023-24 is taken from Statement 18 of Union Budget\". This is a titled-publication citation with a named appendix, not an agency-level reference, which is what makes it edge-qualifying where most of this round's near-misses were not. Note the reciprocity: `in-rbi-state-finances` cites FC15 in the other direction (see the edge below), so these two documents genuinely depend on each other across different vintages -- an unusual and legitimate shape, not a modelling error, since the RBI study of one year draws on an earlier Commission and a later Commission draws on that study.",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/16th-FC/reports/Vol1-Main-Report.pdf"
+    },
+    {
+      "source_report_id": "in-fc16-report",
+      "target_report_id": "in-union-budget-expenditure-profile-stmt18",
+      "relationship_type": "uses_data_from",
+      "basis": "VERIFIED DIRECTLY, from the same FC16 Volume II data-sources appendix, which names Statement 18 twice and explains why it turned to it: \"2016-17 to 2023-24: Statement 18 of Expenditure Profile of Union Budget as IPFS reports were discontinued\" and \"The data for 2023-24 is taken from Statement 18 of Union Budget\". A named statement within a named annual publication, cited as the source for a stated period, is a document-level citation. Worth recording that the dependency runs ONLY in this direction: Statement 18's own text does not cite the Finance Commission, carrying merely the budget-head label \"Finance Commission Grants\", which is why no reverse edge is minted (see `_dropped`).",
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/16th-FC/reports/Vol1-Main-Report.pdf"
+    },
+    {
+      "source_report_id": "in-rbi-state-finances",
+      "target_report_id": "in-fc15-report",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY. The RBI study cites the Fifteenth Finance Commission in its own analytical text -- \"…the States can raise more revenues through higher stamp duty and registration fees, as pointed out by the Fifteenth Finance Commission (FC-XV).\" -- and carries a table built on the Commission series: Table III.3, \"States' Share in the Divisible Pool of Central Taxes Recommended by Finance Commissions\", with rows \"Eleventh 29.5 | Twelfth 30.5 | Thirteenth 32.0 | Fourteenth 42.0 | Fifteenth 41.0\" and the source line \"Sources: Various Finance Commission Reports; and Reddy and Reddy (2019).\" The \"Fifteenth 41.0\" row is FC15's headline recommendation as recorded on `in-fc15-report`. `cites` rather than `uses_data_from`: the source line names a CLASS (\"Various Finance Commission Reports\") rather than a single titled report, and the in-text reference is analytical commentary -- so the edge rests on the combination of the two, which supports a citation relationship but not a claim that FC15's figures are a computational input to the study.",
+      "evidence_url": "https://www.rbi.org.in/scripts/PublicationsView.aspx?Id=22971"
+    },
+    {
+      "source_report_id": "in-cag-state-finances-audit-report",
+      "target_report_id": "in-fc15-report",
+      "relationship_type": "cites",
+      "basis": "VERIFIED DIRECTLY. The CAG audits state finances explicitly against the Commission's projections, naming it in its own analytical findings: \"The actual devolution of State's share of Union taxes and duties was greater than the projections made by the Fifteenth Finance Commission (XV FC) for the years 2021-22 to 2023-24.\" and \"Fifteenth Finance Commission Grants — Transfers from GoI to the State during 2023-24 on the recommendations of XV FC are given in Table 2.10\". The report's own scope statement makes the dependency structural rather than incidental: \"The analysis is also carried out on recommendations of the Finance Commission (FC), in the context of Tamil Nadu State Fiscal Responsibility and Budget Management Act (TNFR Act), best practices and guidelines of the Government of India.\" `cites` rather than `uses_data_from`: the Commission's projections are the benchmark the audit measures outturn against, which is a reference relationship rather than a computational input.",
+      "evidence_url": "https://cag.gov.in/webroot/uploads/download_audit_report/2025/English-SFAR-2023-24-068f705991fcd54.32361460.pdf"
+    },
+    {
+      "source_report_id": "in-rbi-act-45za",
+      "target_report_id": "in-mospi-cpi",
+      "relationship_type": "cites",
+      "basis": "VERIFIED, BUT WITH A WEAKNESS STATED EXPLICITLY RATHER THAN SILENTLY UPGRADED -- read this basis before relying on the edge. BRICS/G.1 scoped `in-rbi-act-45za` deliberately narrowly, to only what Section 45ZA's own text establishes, because it could not verify the notified target behind an RBI bot-wall and a CAPTCHA-gated gazette search. This round did NOT retrieve the literal signed gazette instrument either (S.O. 2088(E) -- see `_dropped` for the full record of attempts). What it did retrieve is the same statement from TWO INDEPENDENT PRIMARY GOVERNMENT-OF-INDIA PUBLISHERS. Press Information Bureau, Ministry of Finance, 5 August 2016: \"Under sub-section (1) of section 45ZA of the RBI Act, the Central Government, in consultation with the RBI, determines the inflation target in terms of the Consumer Price Index (CPI), once in every five years. This target would be notified in the Official Gazette.\" and \"Determination and notification of Inflation Target — In exercise of the powers conferred by section 45ZA of the Reserve Bank of India Act, 1934, the Central Government, in consultation with RBI, has fixed the inflation target … Inflation Target: Four per cent. Upper tolerance level: Six per cent. Lower tolerance level: Two per cent.\" And the Reserve Bank's own Monetary Policy Overview: \"Under Section 45ZA, the Central Government, in consultation with the RBI, determines the inflation target in terms of the Consumer Price Index (CPI), once in five years and notifies it in the Official Gazette.\" THE MECHANISM IS ALSO CURRENT, which matters for tense: \"In its second review, on March 25, 2026, the Central Government retained the inflation target and the tolerance band for the next 5-year period – April 1, 2026 to March 31, 2031.\" TWO EXPLICIT LIMITS ON THIS EDGE: (1) the citation comes from the Government's own explanatory statements ABOUT section 45ZA, not from the section's four corners nor from a retrieved gazette instrument; (2) the \"(Combined)\" qualifier is NOT evidenced anywhere reachable and is deliberately absent from this basis and from the node -- every primary text retrieved says \"Consumer Price Index (CPI)\" without it. `cites` rather than `uses_data_from` precisely because of limit (1): a stronger type would assert a computational relationship the retrieved documents do not themselves state.",
+      "evidence_url": "https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=148405"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "in-fc16-explanatory-memorandum / in-fc15-explanatory-memorandum -> Article 281 of the Constitution",
+      "source": "in-fc16-explanatory-memorandum",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Two clean, verbatim, in-text citations with nothing to point at. Both Explanatory Memoranda state the Article 281 laying mechanism in their own words -- \"…together with this Explanatory Memorandum on the action taken on the recommendations of the Commission, is being laid on the Table of the House, in pursuance of Article 281 of the Constitution.\" -- which is exactly the citation shape this corpus requires, naming the article by number in the dependent document's own body. The corpus has `in-constitution-art280` but no Article 281 node, so the edges are stranded. This is the cheapest high-value fix available to the next Indian round: minting `in-constitution-art281` from the same constitutional source `in-constitution-art280` was built from would immediately close TWO fully evidenced edges. Not minted here because this session did not fetch and verify Article 281's own text, and this corpus does not mint a node on the strength of documents that cite it -- the same rule that keeps the Budget Report's detail annex out of the Chinese slice."
+    },
+    {
+      "edge": "in-mospi-nas -> sna-2008",
+      "source": "in-mospi-nas",
+      "target": null,
+      "reason": "no-document",
+      "why": "A real citation of the UN System of National Accounts that names no EDITION, and is therefore not minted -- the same decision made for China's COICOP citation in `cn-g2-budget-law-equalization.json`, and made for the same reason, so the two branches stay consistent. The NAS-2025 release says only: \"These estimates are presented at current and constant (2011-12) prices and are based on the methodologies in alignment with the United Nations System of National Accounts (SNA)\". The string \"SNA 2008\" does NOT appear in it. It does appear in OTHER MoSPI documents about the same estimates -- a 2026 GDP FAQ, and a 2015 methodology volume which is itself watermarked OBSOLETE -- but under this project's rule the dependent document's own text must name the target, and combining two documents to establish which edition is meant is inference. Recorded rather than quietly minted because the temptation is real: everyone knows India's national accounts follow the 2008 SNA, and that is exactly the kind of ambient knowledge this corpus refuses to encode as evidence. CONTRAST WORTH KEEPING: the Chinese national-accounts instrument DOES name 《国民账户体系2008》 by edition, and therefore does get its edge to `sna-2008` -- the difference between the two cases is entirely in what the documents say, which is the standard working as intended. RESOLVABLE: the NAS publication itself (as opposed to its press release) very likely names the edition in its methodology chapter."
+    },
+    {
+      "edge": "in-fc16-report -> a specific titled MoSPI GSDP publication (behind the 42.5% Per Capita GSDP Distance criterion)",
+      "source": "in-fc16-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND, and this round settles BRICS/G.1's open lead as a genuine negative rather than leaving it open. FC16 Volume I (17,998 lines) and Volume II (8,985 lines) were both read in full text, INCLUDING the Technical Note that defines the devolution formula. FC16 never names a titled MoSPI GSDP publication anywhere -- it uses a dataset label with no corresponding release. This matters because Per Capita GSDP Distance carries 42.5 per cent, by far the largest single weight in the entire devolution formula, so the corpus's largest Indian dependency by economic significance has no documentary target. That is a real finding about how the Commission sources its most important input, not a search failure: the Commission cites MoSPI repeatedly for GDP and GSDP without ever pointing at a publication, exactly as `br-fpe-dn-tcu` names IBGE for its per-capita household income column without naming a release. Two BRICS federations, the same gap, in the same place in the same kind of formula."
+    },
+    {
+      "edge": "in-union-budget-expenditure-profile-stmt18 / Budget at a Glance / FRBM Fiscal Policy Statements -> in-fc16-report",
+      "source": "in-union-budget-expenditure-profile-stmt18",
+      "target": null,
+      "reason": "no-document",
+      "why": "REJECTED deliberately, and this is the round's clearest application of the discipline BRICS/G.1 established. All three are unambiguously recurrent annual Union Budget publications and good nodes (Statement 18 is minted; Budget at a Glance and the FRBM statements are left for a future round). But their ONLY reference to the Commission is a budget-head LABEL -- \"II. Finance Commission Grants\" in Statement 18 and Budget at a Glance, and in the FRBM statements an institutional reference with figures attached: \"(v) Finance Commission Grants — 30. In BE 2026-27, the Finance Commission grants are estimated at ₹1.29 lakh crore. … Thus, total resources shared, tax devolution and FC Grants, with States through the Finance Commission route are estimated at ₹16.56 lakh crore in BE 2026-27.\" A BUDGET HEAD NAMED AFTER AN INSTITUTION IS NOT A CITATION OF A DOCUMENT, and neither is a spending figure routed through that institution. The Receipts Budget's ANNEX-4 footnote is the one that clears the bar, by naming the Commission's accepted recommendations and reproducing its table -- and that is where the edge is drawn instead. Recorded at length because this round ALSO overturned one G.1 rejection (the FC16-to-Article-280 edge), and the two outcomes must not be read as one lesson: the standard did not move, the evidence did."
+    },
+    {
+      "edge": "in-rbi-act-45za -> the literal Gazette notification S.O. 2088(E) fixing the inflation target, and the \"Consumer Price Index (Combined)\" wording",
+      "source": "in-rbi-act-45za",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "PARTIALLY RESOLVED but recorded honestly as still open on its own terms. The SUBSTANCE is now verified from two independent primary Government publishers and supports the minted `in-rbi-act-45za -> in-mospi-cpi` edge (see that edge's basis). The literal signed gazette instrument was NOT retrieved. Every attempt, recorded so the next round does not repeat them: `egazette.nic.in` has NO DNS RECORD AT ALL and simply does not exist -- a different failure from the .gov.in host, and previously conflated with it. `egazette.gov.in` was recovered from its TLS failure to HTTP 200 by the trust-bundle fix in this file's `_note`, and contrary to G.1's note the LANDING PAGE HAS NO CAPTCHA -- but its search is a stateful ASP.NET session plus `__VIEWSTATE` postback flow, and a bare GET with a fabricated session token returns 500; completing it needs a real browser session. The RBI Discussion Paper PDF that reproduces the notification history sits behind the TSPD bot-wall on `/rdocs/PressRelease/PDFs/`, the one path the cookie-plus-Referer method does not defeat (it returned `curl: (52) Empty reply from server`, also on `--http1.1`). `r.jina.ai` returned a Cloudflare 403, so no TIER B was available. `dea.gov.in` was reachable but the notification was not located on it. SEPARATELY AND IMPORTANTLY: the \"(Combined)\" qualifier is NOT ASSERTED anywhere in this file. No reachable primary source contains the string \"Consumer Price Index (Combined)\" in the notification text; every one says \"Consumer Price Index (CPI)\". What IS verifiable is that the MoSPI series is published as a Combined series -- its release carries the column headers \"Rural | Urban | Combined\" and \"Annexure IV: All India Combined (General) level index and inflation\" -- but that is MoSPI's structure, not the notification's wording, and the two are kept apart deliberately. A browser session against egazette.gov.in would close this."
+    },
+    {
+      "edge": "in-fc16-report -> in-cag-state-finances-audit-report (the reciprocal direction)",
+      "source": "in-fc16-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "Plausible but judged too weak, and left out rather than minted at a confidence the evidence does not carry. FC16 Volume I uses the table source line \"Source: States' Finance Accounts, States' Budgets, CAG Audit Reports on State Finances\", and para 1.31 states \"Disaggregated details of the divisible pool of taxes were obtained from the office of the CAG.\" The first names a CLASS of reports rather than a specific one, and the second names the OFFICE rather than a publication -- neither reaches the standard the forward edge (`in-cag-state-finances-audit-report -> in-fc15-report`) clears comfortably. Contrast with the RBI study, where FC16's appendix names the publication AND its edition years AND the specific appendix within it, which is why that reciprocal edge WAS minted and this one was not. A future round reading FC16's per-state annexures may well find a specific State Finances Audit Report named by number, at which point this becomes available."
+    },
+    {
+      "edge": "in-fc16-report -> Economic Survey (Table 1.6 of Economic Survey 2024-25), and the Finance Commission (Miscellaneous Provisions) Act, 1951",
+      "source": "in-fc16-report",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Two precisely named instruments with no corpus node, both cited verbatim in documents this file mints, and both easy wins for a future round. (1) FC16's Volume II data-sources appendix cites the Economic Survey with table-level precision: \"GDP — Table 1.6 of Economic Survey 2024-25\". The Economic Survey is a well-known annual Government of India publication and would be a strong node; its URL was not verified this round, so it is flagged as a lead rather than asserted. Note this is the CLOSEST thing found to a titled source for FC16's macroeconomic denominators, and may be worth testing against the unresolved 42.5% GSDP-criterion question above. (2) The Finance Commission (Miscellaneous Provisions) Act, 1951 (Act No. 33 of 1951) is named alongside Article 280 in BOTH the constituting Order and FC16 Volume I para 1.2 -- \"In pursuance of clause (1) of Article 280 of the Constitution of India and the provisions of the Finance Commission (Miscellaneous Provisions) Act, 1951 (Act No. 33 of 1951)…\" -- so two fully evidenced edges are waiting on a node that indiacode.nic.in, already proven reachable at TIER A for the GST Compensation Act, would almost certainly supply. Also recorded from the same FC16 appendix, for completeness: \"GRR — Database on Indian Economy, RBI. The figure is derived as a sum of Gross Tax Revenue and Gross Non-tax Revenue taken from HBS Table 93 (Central Government Receipts- Major components) of DBIE\" and \"Net Proceeds — Data on divisible pool is taken from the CAG certificates for respective years\"."
+    },
+    {
+      "edge": "in-gst-compensation-act-2017 -> in-fc15-report / in-fc16-report, in either direction",
+      "source": "in-gst-compensation-act-2017",
+      "target": null,
+      "reason": "no-document",
+      "why": "NOT FOUND, and structurally impossible in one direction. The Act is a 2017 statute and cannot cite FC15 (reporting 2020) or FC16 (reporting 2025). In the reverse direction, both Commissions discuss GST and GST compensation substantively, but no verbatim citation of THIS ACT BY NAME AND NUMBER was located in the FC passages read this round, so none is asserted. The node is minted as a node-only contribution: a standing statute defining a real method (a fourteen per cent per annum projected growth rate over a 2015-16 base year), currently unconnected. Worth flagging for whoever picks this up: the Act's compensation mechanism operated over a defined \"transition period\", so before any future round writes a present-tense dependency on it, the tense question this project's own hand-off spec insists on should be settled -- a past-tense arrangement is not a live dependency."
+    }
+  ]
+}

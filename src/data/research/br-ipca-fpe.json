@@ -16,7 +16,9 @@
       "cadence_note": "IBGE's own page states: \"Periodicidade de divulgação: Mensal\".",
       "last_updated": null,
       "url": "https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9256-indice-nacional-de-precos-ao-consumidor-amplo.html",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "br-inpc",
@@ -30,7 +32,10 @@
       "cadence_note": "IBGE's own page states: \"Periodicidade de divulgação: Mensal\".",
       "last_updated": null,
       "url": "https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9258-indice-nacional-de-precos-ao-consumidor.html",
-      "domains": ["inflation", "labour"]
+      "domains": [
+        "inflation",
+        "labour"
+      ]
     },
     {
       "id": "br-decreto-12079-2024",
@@ -42,7 +47,9 @@
       "description": "Brazil's current decree establishing the inflation-targeting regime, in force since replacing Decreto nº 3.088/1999 (revoked effective 1 January 2025). It does not itself name a price index -- Art. 4º delegates that choice, quoted directly: \"O índice de preços a ser adotado para fins do disposto neste Decreto será escolhido pelo Conselho Monetário Nacional...\" -- the same structure as its 1999 predecessor, whose own Art. 3º read: \"O índice de preços a ser adotado para os fins previstos neste Decreto será escolhido pelo CMN, mediante proposta do Ministro de Estado da Fazenda.\" The index the CMN actually chose under this decree is IPCA, named not here but in Resolução CMN nº 5.141/2024, issued the same day (see br-resolucao-cmn-5141). Fetched this session via plain, unmodified curl (HTTP 200) from planalto.gov.br -- no proxy involved.",
       "last_updated": null,
       "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/decreto/d12079.htm",
-      "domains": ["monetary-policy"]
+      "domains": [
+        "monetary-policy"
+      ]
     },
     {
       "id": "br-resolucao-cmn-5141",
@@ -54,7 +61,10 @@
       "description": "The instrument that actually names IPCA as Brazil's inflation-targeting price index, issued the same day as Decreto 12.079/2024, which delegated the choice to the CMN without naming an index itself. Art. 1º, quoted directly: \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o Índice Nacional de Preços ao Consumidor Amplo – IPCA, calculado pelo Instituto Brasileiro de Geografia e Estatística – IBGE.\" The Banco Central's own historical-targets page confirms compliance is measured this way, reporting results as \"Variação do IPCA\" and linking each year's target resolution (CMN Resolutions 2842 through 5141) back to the same normativo repository. Fetched this session via the r.jina.ai rendering proxy: both bcb.gov.br/estabilidadefinanceira/exibenormativo and bcb.gov.br/controleinflacao/historicometas are JS-rendered and return no content to raw curl. The underlying documents are the Banco Central's own normativo pages, not third-party mirrors.",
       "last_updated": null,
       "url": "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolução CMN&numero=5141",
-      "domains": ["monetary-policy", "inflation"]
+      "domains": [
+        "monetary-policy",
+        "inflation"
+      ]
     },
     {
       "id": "br-fpe-dn-tcu",
@@ -96,7 +106,10 @@
       },
       "last_updated": null,
       "url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf",
-      "domains": ["fiscal-transfers", "municipal-finance"]
+      "domains": [
+        "fiscal-transfers",
+        "municipal-finance"
+      ]
     },
     {
       "id": "br-lc-62-1989",
@@ -109,7 +122,9 @@
       "cadence_note": "A statute, amended rather than reissued -- same convention as br-lei-8443 (br-fpm-population.json) and br-lc-101-2000 (br-fiscal-responsibility-law.json).",
       "last_updated": null,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp62.htm",
-      "domains": ["fiscal-transfers"]
+      "domains": [
+        "fiscal-transfers"
+      ]
     }
   ],
   "dependencies": [
@@ -162,28 +177,28 @@
       "source": "br-fpe-dn-tcu",
       "target": null,
       "reason": "no-document",
-      "why": "The FPM pattern repeats at the state level. DN 215/2025's Anexo III names the agency and gives a reference date for both inputs -- \"Coluna B: população da UF fornecida pela ... (IBGE) com data de referência em 1º/7/2024\" and \"Coluna F: renda domiciliar per capita (rdpc) da UF fornecida pelo IBGE, relativa ao exercício de 2024\" -- but never a titled release (no 'Estimativas da População', no named income survey/product). For population, the gap is partly closed by minting the edge to br-ibge-estimativas-populacao (br-fpm-population.json) directly, on the same reasoning that instrument's own methodology note supplies from the producer's side. For renda domiciliar per capita, there is no equivalent: no primary source located this session gives IBGE's per-capita household income product a title or URL, so no node exists to point to at all -- a harder gap than the population one. Enabling statutes use deliberately generic language throughout: LC 62/1989 Art. 2º § 3º says only \"entidade federal competente\", and Lei 8.443/1992 Art. 102 (as amended by LC 143/2013) says \"entidade competente do Poder Executivo federal\" -- neither names IBGE. Only TCU's own implementing DN names the agency, and only by name and reference date, never by titled release."
+      "why": "HARDENED, NOT RESOLVED, 2026-08-13 (BRICS/G.2) — the round chased this lead and came back with a stronger negative than it started with. PNAD Contínua was found and minted (`br-pnad-continua`, in `br-g2-pnadc-siconfi-scn.json`) as the obvious candidate source for TCU's 'renda domiciliar per capita' column, and the edge was REJECTED on three independent grounds. (1) TCU's own DN still says only 'rdpc da UF fornecida pelo IBGE' — agency, never a titled release. (2) LC 62/1989 §3º does not even name IBGE, saying only 'entidade federal competente'. (3) DECISIVE: the numbers do not match. PNADC's published 2023 headline household per-capita income is R$ 1 848 against TCU's R$ 1.892,75, so TCU is not simply lifting the published PNADC figure. The most likely mechanism is an UNPUBLISHED IBGE-to-TCU data supply, which would mean there is no document node behind that column at all — a structural finding about the corpus's own limits, not a search that ran out of time. Compare the near-identical shape found in India the same round: FC16 names MoSPI for the GSDP behind its largest weighted criterion and likewise never names a publication. ORIGINAL BLOCKER, kept: The FPM pattern repeats at the state level. DN 215/2025's Anexo III names the agency and gives a reference date for both inputs -- \"Coluna B: população da UF fornecida pela ... (IBGE) com data de referência em 1º/7/2024\" and \"Coluna F: renda domiciliar per capita (rdpc) da UF fornecida pelo IBGE, relativa ao exercício de 2024\" -- but never a titled release (no 'Estimativas da População', no named income survey/product). For population, the gap is partly closed by minting the edge to br-ibge-estimativas-populacao (br-fpm-population.json) directly, on the same reasoning that instrument's own methodology note supplies from the producer's side. For renda domiciliar per capita, there is no equivalent: no primary source located this session gives IBGE's per-capita household income product a title or URL, so no node exists to point to at all -- a harder gap than the population one. Enabling statutes use deliberately generic language throughout: LC 62/1989 Art. 2º § 3º says only \"entidade federal competente\", and Lei 8.443/1992 Art. 102 (as amended by LC 143/2013) says \"entidade competente do Poder Executivo federal\" -- neither names IBGE. Only TCU's own implementing DN names the agency, and only by name and reference date, never by titled release."
     },
     {
       "edge": "Decreto nº 3.088/1999 / a 1999 CMN resolution -> IPCA (the resolution that first named IPCA as inflation target)",
       "source": null,
       "target": null,
-      "reason": "no-document",
-      "why": "NOT FOUND. Decreto 3.088/1999 (the predecessor to Decreto 12.079/2024, revoked effective 1 January 2025) was read directly from planalto.gov.br and, like its successor, delegates the index choice to the CMN without naming one (Art. 3º: \"O índice de preços a ser adotado para os fins previstos neste Decreto será escolhido pelo CMN, mediante proposta do Ministro de Estado da Fazenda\"). The specific CMN resolution that first named IPCA under that 1999 decree -- commonly cited elsewhere as Resolução CMN 2.615/1999 -- was not fetched and its number is not independently asserted here. Neither Decreto 3.088/1999 nor its naming resolution is minted as a node for this reason; only the current, verified 2024 decree/resolution pair is in this file."
+      "reason": "note",
+      "why": "ANSWERED 2026-08-13 (BRICS/G.2), and the answer is that no node should exist. The resolution number G.1 declined to assert is CORRECT — Resolução CMN nº 2.615, de 30 de junho de 1999, fetched TIER A this round, and its Art. 1º does name IPCA as the inflation-target index under Decreto 3.088/1999. BUT IT IS REVOKED, verified independently from the revoking instrument's own text (Resolução CMN nº 4.367/2014, Art. 1º). Under this project's standing no-discontinued-programmes rule it is therefore NOT minted as a live node, and the corpus keeps only the current 2024 decree/resolution pair. Recorded as a `note` rather than `resolved` precisely because the correct outcome was to mint nothing: the lead is closed, no edge exists, and a future session that rediscovers Resolução 2.615 should not treat its correctness as a reason to add it. Tense matters here exactly as this project's hand-off spec insists — a past-tense arrangement is not a live dependency. ORIGINAL REASONING, kept: NOT FOUND. Decreto 3.088/1999 (the predecessor to Decreto 12.079/2024, revoked effective 1 January 2025) was read directly from planalto.gov.br and, like its successor, delegates the index choice to the CMN without naming one (Art. 3º: \"O índice de preços a ser adotado para os fins previstos neste Decreto será escolhido pelo CMN, mediante proposta do Ministro de Estado da Fazenda\"). The specific CMN resolution that first named IPCA under that 1999 decree -- commonly cited elsewhere as Resolução CMN 2.615/1999 -- was not fetched and its number is not independently asserted here. Neither Decreto 3.088/1999 nor its naming resolution is minted as a node for this reason; only the current, verified 2024 decree/resolution pair is in this file."
     },
     {
       "edge": "br-inpc -> a specific statutory use beyond IBGE's own stated purpose (e.g. INSS benefit readjustment, FGTS correction)",
-      "source": "br-inpc",
-      "target": null,
-      "reason": "no-document",
-      "why": "NOT FOUND. INPC is widely reported elsewhere as the index used to readjust INSS social-security benefits and FGTS balances, but no primary-source law or decree naming INPC for either purpose was located this session. What is verified is only IBGE's own stated purpose for the index -- \"a correção do poder de compra dos salários\" -- which is what br-inpc's description and domains rest on. No downstream benefits/taxation edge is minted from this node."
+      "source": "br-lei-8213",
+      "target": "br-inpc",
+      "reason": "resolved",
+      "why": "RESOLVED 2026-08-13 (BRICS/G.2): INPC's statutory downstream use is found, and it is bigger than G.1 guessed. TWO separate statutes name INPC operatively, and both are now minted with edges: (1) Lei nº 8.213/1991 art. 41-A names INPC and IBGE by name for the annual readjustment of RGPS social-security benefits — the edge named in this note's endpoints; (2) Lei nº 14.663/2023 art. 3º §1º uses INPC in the permanent minimum-wage valorisation formula, a strong, live, unambiguous second use, with §4º naming IBGE's PIB alongside it. ONE IMPORTANT MODELLING NOTE recorded so it is not mis-drawn later: the annual instrument that actually pays the readjustment (Portaria Interministerial MPS/MF) contains ZERO occurrences of the string 'INPC' — the naming sits one hop upstream in Lei 8.213 — so NO direct Portaria-to-INPC edge exists, and the chain is modelled through the statute instead. G.1's other guess was WRONG and is corrected here: the FGTS hypothesis does not hold, FGTS balances being corrected by TR plus 3% rather than by INPC (recorded as its own `_dropped` entry in the new file). ORIGINAL BLOCKER, kept: NOT FOUND. INPC is widely reported elsewhere as the index used to readjust INSS social-security benefits and FGTS balances, but no primary-source law or decree naming INPC for either purpose was located this session. What is verified is only IBGE's own stated purpose for the index -- \"a correção do poder de compra dos salários\" -- which is what br-inpc's description and domains rest on. No downstream benefits/taxation edge is minted from this node."
     },
     {
       "edge": "br-lc-62-1989 -> STF ADI 875/2010 (the ruling that forced LC 143/2013) and the original 1989 Anexo Único's constitutionality",
       "source": "br-lc-62-1989",
       "target": null,
       "reason": "no-document",
-      "why": "NOT FOUND. LC 62/1989's compiled text on planalto.gov.br lists ADI 875 alongside related ADIs 1.987, 2.727 and 3.243 in its own header, and background reporting associates the frozen, 1960s-data-based 1989 Anexo Único with STF's partial-unconstitutionality ruling that forced Congress to pass LC 143/2013 -- but the ruling's own text was not fetched from stf.jus.br this session, so the claim is recorded in br-lc-62-1989's description as historical context only, not as a documented edge or a separate node."
+      "why": "CLOSED ON SCOPE GROUNDS 2026-08-13 (BRICS/G.2) — a more useful outcome than the access question, because it closes the lead permanently rather than deferring it again. AN ADI DOES NOT QUALIFY AS A NODE under this project's own scope rule: it is a one-off adjudication, not a recurrently published release, and not a standing instrument that defines a method. So even a successful fetch would not have produced a node, and ADI 875 should stay as historical context in `br-lc-62-1989`'s description exactly where G.1 put it. The access attempt is recorded too, since it is a genuine egress finding: 8 URLs across 4 STF hosts (portal.stf.jus.br, redir.stf.jus.br, jurisprudencia.stf.jus.br, stf.jus.br) ALL returned 000 — bare-socket failures including on the domain roots, which is an egress block rather than a WAF — and r.jina.ai returned a genuine 403 from STF's own WAF. A DOU search returned nothing. A separate, real question was spun out and left open: whether STF publishes any RECURRING series (e.g. 'Informativo do STF') that WOULD qualify — see the `deferred` entry in `br-g2-pnadc-siconfi-scn.json`. ORIGINAL REASONING, kept: NOT FOUND. LC 62/1989's compiled text on planalto.gov.br lists ADI 875 alongside related ADIs 1.987, 2.727 and 3.243 in its own header, and background reporting associates the frozen, 1960s-data-based 1989 Anexo Único with STF's partial-unconstitutionality ruling that forced Congress to pass LC 143/2013 -- but the ruling's own text was not fetched from stf.jus.br this session, so the claim is recorded in br-lc-62-1989's description as historical context only, not as a documented edge or a separate node."
     },
     {
       "edge": "br-fpe-dn-tcu -> whether the LC 62/1989 Art. 2º III 'excess distribution' mechanism has ever actually triggered at scale",
