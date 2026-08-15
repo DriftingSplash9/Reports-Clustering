@@ -218,34 +218,35 @@ If a report is published *inside* another (a series that's a component of a bigg
    `{ "meta": {...}, "reports": [...], "dependencies": [...], "_dropped": [...] }`
 7. If the country's code isn't yet in `COUNTRY_FAMILY` (step 2), add it.
 
-## 6. Write it to disk and commit locally
+## 6. Write it to disk — do NOT touch git
 
 Write the finished JSON file directly to
 `src/data/research/<cc>-national-core.json` on the device (via
 `device_bash` heredoc, or SendUserFile + device_commit_files for larger
 files). Edit `palette.ts` in place if you added a country entry.
 
-Then, via `device_bash` (this runs locally on Thomas's machine, no network
-needed for a local commit):
+**Do not run any `git` command — not `add`, not `commit`, not `checkout`,
+nothing.** This was tried and it's unsafe for unattended runs:
+`device_bash` cannot delete files, and git needs to delete/replace files
+for `checkout` and for cleaning up its own lock files after a failed
+operation. One bad `git` command leaves `.git/index.lock` (or
+`HEAD.lock`) behind permanently, which then blocks every subsequent git
+command — including next hour's run — until someone manually moves the
+lock file out of `.git/`. A silently bricked pipeline is worse than no
+git history at all.
 
-```
-cd "$HOME/mnt/<connected-folder-name>/Reports Clustering"
-git add src/data/research/<cc>-national-core.json src/lib/palette.ts grok-import-progress.md
-git commit -m "Grok import: <Country> — N reports, M dependencies, K dropped"
-```
-
-Do NOT attempt `git push` — the machine you're on for the research/writing
-part (the cloud session) is network-blocked from pushing to this repo by
-sandbox policy, and `device_bash` has no network access at all. Leave the
-commit local; Thomas pushes when he reviews the trail. This is expected,
-not an error to report as a problem.
+Just leave the new/changed files as plain uncommitted changes in the
+working tree. That's fine — `git status`/`git diff` already shows Thomas
+exactly what this run touched, and he commits (and pushes) at his own
+pace when he reviews it. Never invoke git for any reason in this
+pipeline, full stop.
 
 ## 7. Update the state file
 
 Rewrite `grok-import-progress.md`: mark this country `done`, and add a
 one-line note — reports count, dependency count, anything dropped/notable,
-anything you flagged as unconfirmed. Commit that too (included in the
-commit above, or a separate one, your call).
+anything you flagged as unconfirmed. Just write the file directly, same
+as step 6 — no git commands.
 
 ## 8. End your turn
 
