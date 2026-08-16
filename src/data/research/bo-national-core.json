@@ -1,0 +1,887 @@
+{
+  "meta": {
+    "date": "2026-08-16",
+    "actor": "Claude",
+    "scope": "Bolivia national core — converted/merged from Grok's 6 pre-spec raw batches (2026-08-13), applying the current v2 data spec. 60 raw candidates reduced to 37 kept reports (23 dropped: 4 institution nodes, 12 framing nodes, 4 real-but-unstable/unverifiable topics deferred, 1 classification-not-a-publication, plus small containment cleanups). 51 raw proposed edges reduced to 21 kept dependencies (many converted from invalid legacy relationship types produced_by/part_of/related_to/complements into either valid dependency types with corrected direction, part_of fields on the Report, or dropped as not real data-lineage dependencies). 3 headline claims spot-verified: national-accounts base-year change to 2017/SCN2008 confirmed accurate; Bolivia's MERCOSUR membership claim found overstated (still mid-ratification, corrected by deferring the node); the two China/Russia lithium contracts confirmed real but currently suspended by a Bolivian court ruling with no public contract text, so deferred rather than minted."
+  },
+  "reports": [
+    {
+      "id": "bo-eh",
+      "title": "Encuesta de Hogares (EH) / Household Survey",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Annual household survey that is the primary source for labour-market indicators, household income, and income-based poverty and inequality measurement. National coverage with urban/rural and departmental domains.",
+      "domains": [
+        "labour",
+        "population"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-pobreza",
+      "title": "Pobreza monetaria / Monetary poverty",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Official income-poverty and extreme-poverty incidence, calculated by comparing household per-capita income (from EH) with nationally defined poverty lines. Published with urban/rural and departmental breakdowns.",
+      "domains": [
+        "proposed:poverty"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-lineas-pobreza",
+      "title": "Líneas de pobreza y pobreza extrema",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Monetary values of the moderate and extreme poverty lines (per capita), differentiated for urban and rural areas and updated with price information.",
+      "domains": [
+        "proposed:poverty",
+        "inflation"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services.",
+      "domains": [
+        "inflation"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Bolivia",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "System of national accounts producing GDP by production, expenditure and income. Major base-year revision completed in 2025 (new reference year 2017, SCN 2008).",
+      "domains": [
+        "national-accounts"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 4
+    },
+    {
+      "id": "bo-programa-monetario",
+      "title": "Programa Monetario del BCB",
+      "publisher": "Banco Central de Bolivia (BCB)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Annual monetary programme and periodic execution reports setting targets for monetary emission, net domestic credit and net international reserves.",
+      "domains": [
+        "monetary-policy"
+      ],
+      "url": "https://www.bcb.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-censo",
+      "title": "Censo de Población y Vivienda / Population and Housing Census",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys; underpins the revised population projections (EPP Rev. 2025).",
+      "domains": [
+        "population"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1
+    },
+    {
+      "id": "bo-gini",
+      "title": "Índice de Gini / Income inequality",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Official Gini coefficient of income inequality calculated from EH income data. Companion indicator to the monetary-poverty series.",
+      "domains": [
+        "proposed:inequality"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-bop",
+      "title": "Balanza de Pagos / Balance of Payments",
+      "publisher": "Banco Central de Bolivia (BCB)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Quarterly and annual balance of payments covering the current account, capital/financial account and changes in reserve assets.",
+      "domains": [
+        "external-action"
+      ],
+      "url": "https://www.bcb.gob.bo/",
+      "releases_per_year": 4
+    },
+    {
+      "id": "bo-comercio-exterior",
+      "title": "Estadísticas de Comercio Exterior / Merchandise Trade",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Monthly and annual statistics of exports and imports of goods. Export basket dominated by minerals (gold, silver, zinc, tin), hydrocarbons (gas), and non-traditional agro-products (soy derivatives, beef, Brazil nuts).",
+      "domains": [
+        "proposed:trade"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-gas",
+      "title": "Gas natural — producción y exportaciones",
+      "publisher": "Yacimientos Petrolíferos Fiscales Bolivianos (YPFB)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Statistics of natural-gas production and exports. Historically the dominant export and fiscal-revenue source; now in structural decline.",
+      "domains": [
+        "proposed:energy"
+      ],
+      "url": "https://www.ypfb.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-minerales",
+      "title": "Minerales — oro, plata, zinc, estaño",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Statistics of mineral production and exports (gold, silver, zinc, tin and others). Now the leading merchandise-export category by value.",
+      "domains": [
+        "proposed:mining"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-soya",
+      "title": "Soya y derivados — producción y exportaciones",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Statistics of soybean and soybean-product production and exports. Leading non-traditional agro-export, concentrated in the eastern lowlands (Santa Cruz).",
+      "domains": [
+        "agriculture"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-idh",
+      "title": "Impuesto Directo a los Hidrocarburos (IDH)",
+      "publisher": "Servicio de Impuestos Nacionales (SIN) / Ministerio de Economía y Finanzas Públicas",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Direct tax on hydrocarbons. Historically the central fiscal instrument that channelled gas rents into national and subnational budgets and social programmes.",
+      "domains": [
+        "energy-royalties"
+      ],
+      "url": "https://www.economiayfinanzas.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-renta-dignidad",
+      "title": "Renta Dignidad — universal old-age pension",
+      "publisher": "Gestora Pública de la Seguridad Social de Largo Plazo",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Non-contributory universal pension for older adults. Flagship social-protection programme financed in part from hydrocarbon rents.",
+      "domains": [
+        "benefits"
+      ],
+      "url": "https://www.justicia.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-juancito-pinto",
+      "title": "Bono Juancito Pinto — school attendance cash transfer",
+      "publisher": "Ministerio de Educación",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Conditional cash transfer paid to schoolchildren (and families) to encourage enrolment, attendance and completion. Covers primary and secondary levels.",
+      "domains": [
+        "benefits",
+        "education"
+      ],
+      "url": "https://www.minedu.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-juana-azurduy",
+      "title": "Bono Juana Azurduy — maternal and early-childhood transfer",
+      "publisher": "Ministerio de Salud y Deportes",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Conditional cash transfer for pregnant women and children under two, aimed at improving maternal and child health outcomes.",
+      "domains": [
+        "benefits",
+        "health"
+      ],
+      "url": "https://www.minsalud.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-educacion",
+      "title": "Sistema educativo — cobertura y gasto",
+      "publisher": "Ministerio de Educación",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Education-system statistics (enrolment, attendance, institutional counts) and public education expenditure. Complements the Juancito Pinto transfer.",
+      "domains": [
+        "education"
+      ],
+      "url": "https://www.minedu.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-salud",
+      "title": "Sistema de salud — cobertura y gasto",
+      "publisher": "Ministerio de Salud y Deportes",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Public health-system statistics and health expenditure. Complements the Juana Azurduy transfer and the broader social-protection architecture.",
+      "domains": [
+        "health"
+      ],
+      "url": "https://www.minsalud.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-presupuesto",
+      "title": "Presupuesto General del Estado / National Budget",
+      "publisher": "Ministerio de Economía y Finanzas Públicas",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Annual national budget law and subsequent execution reports covering revenues and expenditure of the public sector.",
+      "domains": [
+        "proposed:public-finance"
+      ],
+      "url": "https://www.economiayfinanzas.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-recaudacion",
+      "title": "Recaudación tributaria y aduanera",
+      "publisher": "Servicio de Impuestos Nacionales (SIN) / Aduana Nacional",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Tax and customs collection statistics. Primary non-hydrocarbon revenue-side fiscal product.",
+      "domains": [
+        "taxation"
+      ],
+      "url": "https://www.economiayfinanzas.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-deuda-publica",
+      "title": "Deuda pública / Public debt statistics",
+      "publisher": "Ministerio de Economía y Finanzas Públicas",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Stock and flow statistics of public debt (external and domestic). Key sustainability indicator under fiscal pressure.",
+      "domains": [
+        "proposed:public-finance"
+      ],
+      "url": "https://www.economiayfinanzas.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-informalidad",
+      "title": "Informalidad laboral / Labour informality",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Share of employed persons in informal employment. Structural feature of the Bolivian labour market and a primary determinant of household income security.",
+      "domains": [
+        "labour"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-remesas",
+      "title": "Remesas familiares / Family remittances",
+      "publisher": "Banco Central de Bolivia (BCB)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Inflows of personal transfers from Bolivians living abroad. Major secondary-income item in the balance of payments and a direct support to household consumption.",
+      "domains": [
+        "proposed:remittances",
+        "external-action"
+      ],
+      "url": "https://www.bcb.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-nbi",
+      "title": "Necesidades Básicas Insatisfechas (NBI) / Unsatisfied Basic Needs",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Structural (non-monetary) poverty measure based on deprivations in housing, services, education and health. Complementary to the income-poverty series.",
+      "domains": [
+        "proposed:poverty"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1,
+      "part_of": "bo-censo"
+    },
+    {
+      "id": "bo-inseguridad-alimentaria",
+      "title": "Inseguridad alimentaria / Food insecurity (ELCSA scale)",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Experience-based food-insecurity indicators from the household survey using the Latin American and Caribbean Food Security Scale.",
+      "domains": [
+        "proposed:poverty"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-ied",
+      "title": "Inversión Extranjera Directa / FDI statistics",
+      "publisher": "Banco Central de Bolivia (BCB)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Statistics of foreign direct investment flows and stocks by sector. Part of the external accounts and specialised BCB analysis.",
+      "domains": [
+        "proposed:investment"
+      ],
+      "url": "https://www.bcb.gob.bo/",
+      "releases_per_year": 4,
+      "part_of": "bo-bop"
+    },
+    {
+      "id": "bo-manufactura",
+      "title": "Industria manufacturera — producción y exportaciones",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Manufacturing production and export statistics. Includes soy derivatives, processed foods, textiles, wood products and other non-traditional manufactures.",
+      "domains": [
+        "proposed:manufacturing"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 12
+    },
+    {
+      "id": "bo-empleo-formal",
+      "title": "Empleo formal / Formal employment",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Share and absolute number of employed persons in formal jobs (with social-security coverage or registered contracts). Complement to the informality series.",
+      "domains": [
+        "labour"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-vivienda",
+      "title": "Condiciones de vivienda y servicios básicos",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Housing quality, overcrowding, and access to water, sanitation and electricity. Core components of the NBI measure and of everyday living standards.",
+      "domains": [
+        "proposed:housing"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-mortalidad-infantil",
+      "title": "Mortalidad infantil y neonatal",
+      "publisher": "Ministerio de Salud y Deportes",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Infant and neonatal mortality rates. Long-run health-outcome indicator complementary to the maternal-transfer and health-system nodes.",
+      "domains": [
+        "health"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1
+    },
+    {
+      "id": "bo-autoidentificacion",
+      "title": "Autoidentificación indígena originaria campesina (Censo)",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Census and survey statistics of population self-identification with Indigenous nations, peoples, or Afro-Bolivian identity. Core plurinational demographic indicator.",
+      "domains": [
+        "population"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1,
+      "part_of": "bo-censo"
+    },
+    {
+      "id": "bo-quechua-aymara",
+      "title": "Naciones Quechua y Aymara — demographic weight",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "The two largest Indigenous nations by self-identification. Together they account for the large majority of the Indigenous population.",
+      "domains": [
+        "population"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1,
+      "part_of": "bo-autoidentificacion"
+    },
+    {
+      "id": "bo-alfabetismo",
+      "title": "Tasa de alfabetismo / Literacy rate",
+      "publisher": "Ministerio de Educación",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Literacy rate for the adult population, published nationally and by Indigenous self-identification, area and department.",
+      "domains": [
+        "education"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1,
+      "part_of": "bo-censo"
+    },
+    {
+      "id": "bo-idioma",
+      "title": "Idiomas hablados / Language statistics",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Statistics of languages spoken (Spanish, Quechua, Aymara and others), from census and household surveys. Core plurinational cultural indicator.",
+      "domains": [
+        "population"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1,
+      "part_of": "bo-censo"
+    },
+    {
+      "id": "bo-poblacion-65",
+      "title": "Población de 65 años y más / Population ageing",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "federal",
+      "region": "Bolivia",
+      "description": "Share and absolute size of the population aged 65 and over. Demographic context for the Renta Dignidad and health-system pressure.",
+      "domains": [
+        "population"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 0.1,
+      "part_of": "bo-censo"
+    },
+    {
+      "id": "bo-pobreza-departamental",
+      "title": "Pobreza monetaria por departamento (INE)",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "BO",
+      "jurisdiction_level": "provincial",
+      "region": "Bolivia",
+      "description": "Official departmental tabulations of monetary poverty. Primary source for the inter-departmental poverty gradient.",
+      "domains": [
+        "proposed:poverty"
+      ],
+      "url": "https://www.ine.gob.bo/",
+      "releases_per_year": 1,
+      "part_of": "bo-pobreza"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bo-pobreza",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "Monetary poverty is calculated from Encuesta de Hogares (EH) household income data.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-pobreza",
+      "target_report_id": "bo-lineas-pobreza",
+      "relationship_type": "uses_data_from",
+      "basis": "Poverty status is determined by comparing per-capita household income against the official poverty lines.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-lineas-pobreza",
+      "target_report_id": "bo-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "Poverty lines (the cost of a basic basket) are updated using consumer price data from the IPC.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-gini",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "The Gini coefficient is computed from the same household income distribution captured by EH.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-bop",
+      "target_report_id": "bo-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "Merchandise trade flows (Estadísticas de Comercio Exterior) are a primary input into the goods account of the balance of payments. [Direction corrected from Grok's original draft, which had this reversed.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-gas",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export figures are the sum of commodity-level series, including natural gas exports. [Corrected from Grok's original 'part_of' edge — part_of is a containment field on the Report, not a dependency edge; the real relationship here is aggregation.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-minerales",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export figures are the sum of commodity-level series, including minerals (gold, silver, zinc, tin). [Corrected from Grok's original 'part_of' edge, same reasoning as the gas edge above.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-soya",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export figures are the sum of commodity-level series, including soy and derivatives. [Corrected from Grok's original 'part_of' edge, same reasoning.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-manufactura",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export figures are the sum of commodity-level series, including manufactured/processed goods. [Corrected from Grok's original 'part_of' edge, same reasoning.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-idh",
+      "target_report_id": "bo-gas",
+      "relationship_type": "uses_data_from",
+      "basis": "IDH (Impuesto Directo a los Hidrocarburos) revenues are calculated from hydrocarbon production and export volumes.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-renta-dignidad",
+      "target_report_id": "bo-idh",
+      "relationship_type": "uses_data_from",
+      "basis": "Renta Dignidad's financing has historically drawn substantially on hydrocarbon rents, including IDH revenue.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-renta-dignidad",
+      "target_report_id": "bo-poblacion-65",
+      "relationship_type": "uses_data_from",
+      "basis": "Renta Dignidad's beneficiary universe and coverage calculations are based on the 65+ population figures. [Corrected from Grok's original 'related_to' edge — related_to isn't a valid relationship_type; this is a genuine data-lineage relationship once stated precisely.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-presupuesto",
+      "target_report_id": "bo-idh",
+      "relationship_type": "uses_data_from",
+      "basis": "IDH and hydrocarbon royalties are material revenue lines in the national budget.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-presupuesto",
+      "target_report_id": "bo-recaudacion",
+      "relationship_type": "uses_data_from",
+      "basis": "Budgeted and executed revenue depends on tax and customs collection figures. [Corrected from Grok's original 'part_of' edge — direction and type both adjusted.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-presupuesto",
+      "target_report_id": "bo-deuda-publica",
+      "relationship_type": "uses_data_from",
+      "basis": "Public debt service and new financing are reported as part of budget execution. [Corrected from Grok's original 'related_to' edge — related_to isn't a valid relationship_type.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-informalidad",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "Labour informality rates are derived from the household-survey employment module.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-empleo-formal",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "Formal employment statistics are derived from the same household-survey employment module as informality. [Added — Grok's original 'complements' edge to bo-informalidad wasn't a real data dependency; this is the actual underlying lineage.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-bop",
+      "target_report_id": "bo-remesas",
+      "relationship_type": "uses_data_from",
+      "basis": "Remittances are the dominant component of secondary income in the balance of payments. [Corrected from Grok's original 'part_of' edge and direction — treated as a data input rather than asserting literal containment, which wasn't confirmed.]",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-nbi",
+      "target_report_id": "bo-vivienda",
+      "relationship_type": "uses_data_from",
+      "basis": "Housing and basic-services deprivation indicators are core components of the NBI structural-poverty index.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-inseguridad-alimentaria",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "Food-insecurity indicators (ELCSA scale) are collected as part of the household survey.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    },
+    {
+      "source_report_id": "bo-mortalidad-infantil",
+      "target_report_id": "bo-salud",
+      "relationship_type": "uses_data_from",
+      "basis": "Infant and neonatal mortality outcomes are reported as part of the health system's core indicators.",
+      "evidence_url": "https://www.ine.gob.bo/"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bo-ine (node)",
+      "source": "bo-ine",
+      "target": null,
+      "reason": "note",
+      "why": "Institution node for INE itself — spec rule 2c. INE is now just the publisher string on the ~20 report nodes it produces."
+    },
+    {
+      "edge": "bo-bcb (node)",
+      "source": "bo-bcb",
+      "target": null,
+      "reason": "note",
+      "why": "Institution node for the central bank — spec rule 2c. BCB's real distinct products (bo-bop, bo-programa-monetario, and its role as publisher of bo-remesas/bo-ied) are already represented as their own nodes."
+    },
+    {
+      "edge": "bo-ypfb (node)",
+      "source": "bo-ypfb",
+      "target": null,
+      "reason": "note",
+      "why": "Institution node for the state hydrocarbons company — spec rule 2c. YPFB is now the publisher string on bo-gas."
+    },
+    {
+      "edge": "bo-ylb (node)",
+      "source": "bo-ylb",
+      "target": null,
+      "reason": "deferred",
+      "why": "Institution node for the state lithium company — spec rule 2c. A genuine YLB production/reserve-disclosure product would be a legitimate future node, but none was proposed with a specific real URL — worth a dedicated future round."
+    },
+    {
+      "edge": "9 department 'character' nodes (bo-santa-cruz, bo-potosi, bo-chuquisaca, bo-la-paz, bo-cochabamba, bo-tarija, bo-oruro, bo-beni, bo-pando)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Each was a narrative summary of a department's economic character (e.g. 'low-poverty economic hub') pointing at the generic INE homepage, not a specific report or instrument — spec rule 2b framing-node pattern. The actual departmental data product, bo-pobreza-departamental, was kept."
+    },
+    {
+      "edge": "bo-la-paz-metro (node)",
+      "source": "bo-la-paz-metro",
+      "target": null,
+      "reason": "note",
+      "why": "Narrative description of the La Paz/El Alto metro area, generic URL, no specific product — framing node, rule 2b."
+    },
+    {
+      "edge": "bo-eje-central (node)",
+      "source": "bo-eje-central",
+      "target": null,
+      "reason": "note",
+      "why": "Narrative description of the La Paz-Cochabamba-Santa Cruz corridor, generic URL, no specific product — framing node, rule 2b."
+    },
+    {
+      "edge": "bo-salar-uyuni (node)",
+      "source": "bo-salar-uyuni",
+      "target": null,
+      "reason": "note",
+      "why": "Description of a geographic/geological resource, not a report or instrument — framing node, rule 2b."
+    },
+    {
+      "edge": "bo-china-comercio (node)",
+      "source": "bo-china-comercio",
+      "target": null,
+      "reason": "note",
+      "why": "Narrative description of the bilateral trade relationship with China, generic URL, no specific document — framing node, rule 2b. The concrete trade data lives in bo-comercio-exterior."
+    },
+    {
+      "edge": "bo-empresas-publicas (node)",
+      "source": "bo-empresas-publicas",
+      "target": null,
+      "reason": "deferred",
+      "why": "Narrative description of state-owned-enterprise fiscal risk, no specific recurring publication identified — framing node, rule 2b. A genuine 'Memoria de las Empresas Públicas' type report, if one exists, would be a legitimate future node."
+    },
+    {
+      "edge": "bo-tioc (node)",
+      "source": "bo-tioc",
+      "target": null,
+      "reason": "note",
+      "why": "Description of a census geographic/administrative classification, not itself a report — closer to a classification category than a publication."
+    },
+    {
+      "edge": "bo-mercosur-can (node)",
+      "source": "bo-mercosur-can",
+      "target": null,
+      "reason": "deferred",
+      "why": "Verified via web search: Bolivia's MERCOSUR status is NOT settled full membership as the original candidate claimed — accession ratification was still working through member states' legislatures as of the most recent reporting found (Brazil's Senate approval, Bolivia's own Senate passing the accession bill in mid-2024, but full completion unclear). CAN membership is real and longstanding, MERCOSUR claim was overstated. Worth a precise future round once ratification status is unambiguous, citing the actual accession protocol."
+    },
+    {
+      "edge": "bo-relacion-brasil-energia (node)",
+      "source": "bo-relacion-brasil-energia",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The underlying Bolivia-Brazil gas relationship is real (long-standing pipeline/GSA), but the candidate was a narrative description rather than a citation to the actual 1996 Gas Supply Agreement document — didn't have time this round to track down the specific instrument text. Good candidate for a future pass."
+    },
+    {
+      "edge": "bo-contrato-litio-cbc (node)",
+      "source": "bo-contrato-litio-cbc",
+      "target": null,
+      "reason": "deferred",
+      "why": "Verified via web search: this contract is real (YLB-CBC, Chinese consortium) but currently suspended by a Bolivian court ruling, and reporting describes the contract text as not fully public ('secret vote' controversy per Argus Media). Not a stable, citable, publicly-documented instrument as of this research round — revisit once the legal status resolves and/or contract text becomes public."
+    },
+    {
+      "edge": "bo-contrato-litio-uranium-one (node)",
+      "source": "bo-contrato-litio-uranium-one",
+      "target": null,
+      "reason": "deferred",
+      "why": "Same situation as the CBC contract — verified as real (YLB-Uranium One/Russian partner) but suspended by the same court ruling, contract text not public. Deferred for the same reason."
+    },
+    {
+      "edge": "bo-eh -> bo-ine, bo-ipc -> bo-ine, bo-cuentas-nacionales -> bo-ine (produced_by edges)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "'produced_by' isn't a valid relationship_type, and the target (bo-ine) was dropped as an institution node anyway — this information is captured by the publisher field on each report instead."
+    },
+    {
+      "edge": "bo-programa-monetario -> bo-bcb, bo-bop -> bo-bcb, bo-ypfb -> bo-gas (produced_by edges)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Same as above — produced_by isn't a valid type, and both institution targets were dropped. Captured via publisher field."
+    },
+    {
+      "edge": "bo-ypfb -> bo-idh (uses_data_from)",
+      "source": "bo-ypfb",
+      "target": "bo-idh",
+      "reason": "note",
+      "why": "Source node (bo-ypfb) was dropped as an institution node."
+    },
+    {
+      "edge": "bo-santa-cruz -> bo-soya, bo-potosi -> bo-pobreza-departamental, bo-cochabamba -> bo-pobreza-departamental, bo-la-paz-metro -> bo-eh, bo-remesas -> bo-eje-central, bo-china-comercio -> bo-comercio-exterior, bo-tioc -> bo-autoidentificacion (edges from/to dropped framing nodes)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Each edge's source or target was one of the department/metro/corridor/topic framing nodes dropped above — the edge falls away with the node."
+    },
+    {
+      "edge": "bo-ylb -> bo-salar-uyuni, bo-contrato-litio-cbc -> bo-ylb, bo-contrato-litio-uranium-one -> bo-ylb, bo-relacion-brasil-energia -> bo-gas, bo-mercosur-can -> bo-comercio-exterior",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Edges connecting to the lithium/YLB/MERCOSUR/Brazil-energy nodes deferred above — will be revisited alongside those nodes."
+    },
+    {
+      "edge": "bo-juancito-pinto -> bo-educacion, bo-juana-azurduy -> bo-salud (complements)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "'complements' isn't a valid relationship_type, and on reflection these describe policy-goal alignment, not a data-lineage dependency (the cash transfer's own data doesn't derive from education/health enrollment stats or vice versa). Not reworked into a valid type because there isn't a real data dependency here to state precisely."
+    },
+    {
+      "edge": "bo-informalidad -> bo-pobreza, bo-empleo-formal -> bo-pobreza (related_to)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "'related_to' isn't a valid relationship_type. These are real correlations (informality associates with poverty) but not data-lineage dependencies — one series isn't calculated from or citing the other, they're independently derived from the same source survey (bo-eh), which is captured by direct uses_data_from edges to bo-eh instead."
+    },
+    {
+      "edge": "bo-alfabetismo -> bo-educacion (uses_data_from)",
+      "source": "bo-alfabetismo",
+      "target": "bo-educacion",
+      "reason": "wrong-target",
+      "why": "Literacy rate is measured via the census/household survey, not derived from the education-sector coverage report — the original basis text was an analytical claim ('literacy is an outcome indicator of the education system') rather than a real data-source dependency."
+    },
+    {
+      "edge": "bo-idioma -> bo-autoidentificacion (complements)",
+      "source": "bo-idioma",
+      "target": "bo-autoidentificacion",
+      "reason": "note",
+      "why": "'complements' isn't a valid relationship_type. Both are separate census questions/tables (now both part_of bo-censo) rather than one depending on the other's data."
+    },
+    {
+      "edge": "bo-quechua-aymara -> bo-autoidentificacion (part_of)",
+      "source": "bo-quechua-aymara",
+      "target": "bo-autoidentificacion",
+      "reason": "note",
+      "why": "Converted to the part_of field on bo-quechua-aymara instead of a dependency edge, per spec rule 5 — containment goes on the Report, not as an edge."
+    },
+    {
+      "edge": "bo-pobreza-departamental -> bo-pobreza (part_of)",
+      "source": "bo-pobreza-departamental",
+      "target": "bo-pobreza",
+      "reason": "note",
+      "why": "Converted to the part_of field on bo-pobreza-departamental instead of a dependency edge, per spec rule 5."
+    },
+    {
+      "edge": "bo-ied -> bo-bop (part_of)",
+      "source": "bo-ied",
+      "target": "bo-bop",
+      "reason": "note",
+      "why": "Converted to the part_of field on bo-ied instead of a dependency edge, per spec rule 5 — FDI flows are reported within the BOP financial account."
+    },
+    {
+      "edge": "bo-autoidentificacion -> bo-censo (uses_data_from)",
+      "source": "bo-autoidentificacion",
+      "target": "bo-censo",
+      "reason": "note",
+      "why": "Redundant with the part_of field now set on this node pointing at bo-censo — a dependency edge between a node and its own container is invalid per spec rule 5."
+    }
+  ]
+}

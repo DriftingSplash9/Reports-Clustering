@@ -477,6 +477,17 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // scouted and unbuilt; see `research-input/Grok-Research-Brief-XI.md`.
   BR: 'SA',
 
+  // Argentina — processed 2026-08-15, `src/data/research/ar-national-core.json`.
+  // Filed to `SA` alongside Brazil, the family reserved for this continent.
+  // Backfilled 2026-08-16: this entry was missed when the Argentina slice
+  // originally went live, so its nodes were rendering flat grey until now.
+  AR: 'SA',
+
+  // Bolivia — processed 2026-08-16, `src/data/research/bo-national-core.json`,
+  // via the raw-Grok-batch conversion pipeline. Filed to `SA` alongside
+  // Brazil and Argentina.
+  BO: 'SA',
+
   // **`CN` staffed for the first time, 2026-08-13.** Reserved and unstaffed
   // since the continent redesign, opened by the CPI/fiscal-transfers slice:
   // the NBS's monthly CPI release, the 2026 Government Work Report's CPI
@@ -1096,6 +1107,15 @@ export const COUNTRY_LABEL: Record<string, string> = {
 
   // Russia, added 2026-08-13 alongside its first COUNTRY_FAMILY entry.
   RU: 'Russia',
+
+  // South America — Argentina (2026-08-15, backfilled 2026-08-16 alongside
+  // its missing COUNTRY_FAMILY entry above) and Bolivia (2026-08-16). Brazil's
+  // own label entry already exists above (line ~1090).
+  AR: 'Argentina', BO: 'Bolivia',
+
+  // United Arab Emirates, added 2026-08-15 alongside its COUNTRY_FAMILY
+  // entry — missed at the time, backfilled 2026-08-16.
+  AE: 'United Arab Emirates',
 }
 
 export function countryLabelFor(country: Country): string {

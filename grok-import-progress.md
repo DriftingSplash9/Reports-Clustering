@@ -15,7 +15,7 @@ batches are superseded, not reprocessed.
 |---|---|---|---|
 | Argentina | AR | done | Processed by hand pre-pipeline. 54 reports, 27 dependencies, 14 dropped. Live in `ar-national-core.json`. |
 | United Arab Emirates | AE | done | Processed by hand pre-pipeline from a separate Grok session, not this archive's UAE batches. 34 reports, 10 dependencies, 6 dropped. Live in `ae-national-core.json`. Archive's `UAE-batch*.json` files are superseded — do not reprocess. |
-| Bolivia | BO | queued | |
+| Bolivia | BO | done | Processed interactively (device-bridge automation isn't reaching scheduled sessions — see notes below). Raw batches were pre-spec legacy format (`candidates`/`proposed_edges` keys, invalid relationship types). 60 raw candidates → 37 kept reports, 23 dropped (4 institution nodes, 12 framing nodes, 4 real-but-unverifiable/unstable topics deferred incl. 2 court-suspended lithium contracts and an overstated MERCOSUR claim, plus cleanup). 51 raw edges → 21 kept dependencies, several direction/type corrections. 3 headline claims spot-verified. Live in `bo-national-core.json`. Also fixed a real bug found in passing: `AR` was missing from `COUNTRY_FAMILY` (Argentina nodes were rendering flat grey since that slice went live) and `AR`/`AE` were missing `COUNTRY_LABEL` entries — all fixed in `palette.ts`. |
 | Chile | CL | queued | |
 | Colombia | CO | queued | |
 | Ecuador | EC | queued | |
@@ -54,3 +54,13 @@ batches are superseded, not reprocessed.
   spec's own guidance on this.
 - If two consecutive runs both find "no device connected," that's fine and
   not a bug — the desktop app just wasn't open at those times.
+- **2026-08-16: the hourly scheduled task is disabled.** Four straight fires
+  (the real hourly trigger plus three manual test-fires, two of them sent
+  seconds after confirming the device bridge worked fine in the live
+  interactive session) all failed to reach the device — strong evidence that
+  triggered/scheduled sessions don't get the device-bridge pairing at all,
+  regardless of whether the desktop app is open. This isn't a "keep the app
+  open" problem. Countries are being processed interactively instead for now.
+  See if a direct-git-push-from-cloud route ever gets sorted out (blocked
+  separately by sandbox git-proxy authorization as of 2026-08-15) before
+  re-enabling the trigger.
