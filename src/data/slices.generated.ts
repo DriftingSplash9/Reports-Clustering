@@ -2,449 +2,463 @@
 // Regenerate with `npm run gen` (runs automatically before dev/build/validate).
 // To add a research slice: drop the JSON in src/data/research/ — that is all.
 // To exclude one: add it to UNWIRED in scripts/gen-slices.ts.
-import s0_af_algeria_commune_finance from './research/af-algeria-commune-finance.json'
-import s1_af_angola_autarquias from './research/af-angola-autarquias.json'
-import s2_af_angola from './research/af-angola.json'
-import s3_af_benin_commune_finance from './research/af-benin-commune-finance.json'
-import s4_af_burkina_faso_national_deepen from './research/af-burkina-faso-national-deepen.json'
-import s5_af_burundi_deepen from './research/af-burundi-deepen.json'
-import s6_af_cabo_verde from './research/af-cabo-verde.json'
-import s7_af_cameroon_communes_feicom from './research/af-cameroon-communes-feicom.json'
-import s8_af_car_budget_decentralization from './research/af-car-budget-decentralization.json'
-import s9_af_cemac from './research/af-cemac.json'
-import s10_af_chad_commune_finance from './research/af-chad-commune-finance.json'
-import s11_af_comoros from './research/af-comoros.json'
-import s12_af_continental_hub from './research/af-continental-hub.json'
-import s13_af_cote_divoire_commune_finance from './research/af-cote-divoire-commune-finance.json'
-import s14_af_djibouti from './research/af-djibouti.json'
-import s15_af_drc_commune_etd from './research/af-drc-commune-etd.json'
-import s16_af_drc_deepen from './research/af-drc-deepen.json'
-import s17_af_eac_wiring from './research/af-eac-wiring.json'
-import s18_af_ecowas from './research/af-ecowas.json'
-import s19_af_egypt_algeria_provincial from './research/af-egypt-algeria-provincial.json'
-import s20_af_egypt_sub_governorate from './research/af-egypt-sub-governorate.json'
-import s21_af_eritrea from './research/af-eritrea.json'
-import s22_af_ethiopia_chartered_cities from './research/af-ethiopia-chartered-cities.json'
-import s23_af_g22_poverty_minimum_wage from './research/af-g22-poverty-minimum-wage.json'
-import s24_af_gambia from './research/af-gambia.json'
-import s25_af_grok_municipal_batch2 from './research/af-grok-municipal-batch2.json'
-import s26_af_grok_provincial_followup from './research/af-grok-provincial-followup.json'
-import s27_af_grok_synthesis from './research/af-grok-synthesis.json'
-import s28_af_guinea_bissau_deepen from './research/af-guinea-bissau-deepen.json'
-import s29_af_guinea_commune_finance from './research/af-guinea-commune-finance.json'
-import s30_af_guinea from './research/af-guinea.json'
-import s31_af_liberia from './research/af-liberia.json'
-import s32_af_madagascar_commune_finance from './research/af-madagascar-commune-finance.json'
-import s33_af_madagascar from './research/af-madagascar.json'
-import s34_af_malawi_municipal from './research/af-malawi-municipal.json'
-import s35_af_mali_communes_national from './research/af-mali-communes-national.json'
-import s36_af_mauritania from './research/af-mauritania.json'
-import s37_af_mauritius from './research/af-mauritius.json'
-import s38_af_mozambique_autarquias from './research/af-mozambique-autarquias.json'
-import s39_af_mozambique from './research/af-mozambique.json'
-import s40_af_niger_national_deepen from './research/af-niger-national-deepen.json'
-import s41_af_nigeria_lga_municipal from './research/af-nigeria-lga-municipal.json'
-import s42_af_sadc_hub from './research/af-sadc-hub.json'
-import s43_af_sao_tome_principe from './research/af-sao-tome-principe.json'
-import s44_af_senegal_commune_finance from './research/af-senegal-commune-finance.json'
-import s45_af_seychelles from './research/af-seychelles.json'
-import s46_af_sierra_leone_municipal from './research/af-sierra-leone-municipal.json'
-import s47_af_sierra_leone from './research/af-sierra-leone.json'
-import s48_af_somalia_deepen from './research/af-somalia-deepen.json'
-import s49_af_south_sudan_deepen from './research/af-south-sudan-deepen.json'
-import s50_af_sudan from './research/af-sudan.json'
-import s51_af_tanzania_lga_municipal from './research/af-tanzania-lga-municipal.json'
-import s52_af_togo_commune_finance from './research/af-togo-commune-finance.json'
-import s53_af_tunisia_commune_finance from './research/af-tunisia-commune-finance.json'
-import s54_af_uma_hub from './research/af-uma-hub.json'
-import s55_af_waemu_remainder from './research/af-waemu-remainder.json'
-import s56_af_zambia_municipal from './research/af-zambia-municipal.json'
-import s57_af_zimbabwe_devolution_municipal from './research/af-zimbabwe-devolution-municipal.json'
-import s58_alberta_energy from './research/alberta-energy.json'
-import s59_alberta_municipal from './research/alberta-municipal.json'
-import s60_alberta_provincial from './research/alberta-provincial.json'
-import s61_anzsic_industry_classification from './research/anzsic-industry-classification.json'
-import s62_associated_states_government_finance from './research/associated-states-government-finance.json'
-import s63_au_government_finance from './research/au-government-finance.json'
-import s64_banking_supervision from './research/banking-supervision.json'
-import s65_bf_cpi_social_protection from './research/bf-cpi-social-protection.json'
-import s66_bf_g22_commune_budget_lines from './research/bf-g22-commune-budget-lines.json'
-import s67_bf_leadchase_loi012_2018 from './research/bf-leadchase-loi012-2018.json'
-import s68_bi_g22_fonic_decree from './research/bi-g22-fonic-decree.json'
-import s69_br_fiscal_responsibility_law from './research/br-fiscal-responsibility-law.json'
-import s70_br_fpm_population from './research/br-fpm-population.json'
-import s71_br_ipca_fpe from './research/br-ipca-fpe.json'
-import s72_bw_cpi_social_protection from './research/bw-cpi-social-protection.json'
-import s73_bw_g23_municipal from './research/bw-g23-municipal.json'
-import s74_bw_leadchase_ag_2021 from './research/bw-leadchase-ag-2021.json'
-import s75_cd_provinces_fiscal from './research/cd-provinces-fiscal.json'
-import s76_cg_g22_loi_finances_niari from './research/cg-g22-loi-finances-niari.json'
-import s77_ci_cpi_social_protection from './research/ci-cpi-social-protection.json'
-import s78_cm_cpi_social_protection from './research/cm-cpi-social-protection.json'
-import s79_cn_cpi_transfers from './research/cn-cpi-transfers.json'
-import s80_county_grande_prairie from './research/county-grande-prairie.json'
-import s81_credit_and_mortgages from './research/credit-and-mortgages.json'
-import s82_cv_g23_municipal from './research/cv-g23-municipal.json'
-import s83_cv_leadchase_ffm_status from './research/cv-leadchase-ffm-status.json'
-import s84_de_bundesbank_financial_accounts from './research/de-bundesbank-financial-accounts.json'
-import s85_de_destatis_national_accounts from './research/de-destatis-national-accounts.json'
-import s86_de_destatis_source_surveys from './research/de-destatis-source-surveys.json'
-import s87_de_ie_national_accounts_quality_reports from './research/de-ie-national-accounts-quality-reports.json'
-import s88_dj_g23_municipal from './research/dj-g23-municipal.json'
-import s89_dj_leadchase_loi149 from './research/dj-leadchase-loi149.json'
-import s90_dz_cpi_social_protection from './research/dz-cpi-social-protection.json'
-import s91_ecfin_business_consumer_surveys from './research/ecfin-business-consumer-surveys.json'
-import s92_edp_inventory_regulation_479_2009 from './research/edp-inventory-regulation-479-2009.json'
-import s93_eg_cairo_municipal_finance from './research/eg-cairo-municipal-finance.json'
-import s94_eg_cpi_social_insurance from './research/eg-cpi-social-insurance.json'
-import s95_equalization_named_products from './research/equalization-named-products.json'
-import s96_equalization_payroll_base from './research/equalization-payroll-base.json'
-import s97_er_g22_imf_reengagement from './research/er-g22-imf-reengagement.json'
-import s98_esa_2010 from './research/esa-2010.json'
-import s99_esa2010_methodology_stack from './research/esa2010-methodology-stack.json'
-import s100_esa2010_quality_reporting from './research/esa2010-quality-reporting.json'
-import s101_ess_catalogue_standards from './research/ess-catalogue-standards.json'
-import s102_ess_peer_review_country_reports from './research/ess-peer-review-country-reports.json'
-import s103_ess_quality_framework from './research/ess-quality-framework.json'
-import s104_et_psnp_cpi_federalism from './research/et-psnp-cpi-federalism.json'
-import s105_et_regional_state_federalism from './research/et-regional-state-federalism.json'
-import s106_eu_draft_budget from './research/eu-draft-budget.json'
-import s107_eu_legal_instrument_lineages from './research/eu-legal-instrument-lineages.json'
-import s108_eu_meta_docx_batches from './research/eu-meta-docx-batches.json'
-import s109_eurostat_edp_gfs_ecb_statistics from './research/eurostat-edp-gfs-ecb-statistics.json'
-import s110_eurostat_farm_structure_survey from './research/eurostat-farm-structure-survey.json'
-import s111_eurostat_hicp from './research/eurostat-hicp.json'
-import s112_eurostat_remuneration_mission_expenses_report from './research/eurostat-remuneration-mission-expenses-report.json'
-import s113_eurostat_remuneration_satellite_series from './research/eurostat-remuneration-satellite-series.json'
-import s114_eurostat_remuneration_update_report from './research/eurostat-remuneration-update-report.json'
-import s115_eurosystem_ecb from './research/eurosystem-ecb.json'
-import s116_fed_h15_disclosure from './research/fed-h15-disclosure.json'
-import s117_federal_canada from './research/federal-canada.json'
-import s118_ga_cpi_social_protection from './research/ga-cpi-social-protection.json'
-import s119_ga_g23_municipal from './research/ga-g23-municipal.json'
-import s120_ga_leadchase_perequation from './research/ga-leadchase-perequation.json'
-import s121_gb_ukspf_succession from './research/gb-ukspf-succession.json'
-import s122_gh_leap_cpi_indexation from './research/gh-leap-cpi-indexation.json'
-import s123_gh_mmda_wiring from './research/gh-mmda-wiring.json'
-import s124_gm_g23_municipal from './research/gm-g23-municipal.json'
-import s125_gq_g23_municipal from './research/gq-g23-municipal.json'
-import s126_gq_leadchase_finance_tax from './research/gq-leadchase-finance-tax.json'
-import s127_grande_prairie from './research/grande-prairie.json'
-import s128_grok_h1_calgary_municipal from './research/grok-h1-calgary-municipal.json'
-import s129_grok_h1_classification_hubs from './research/grok-h1-classification-hubs.json'
-import s130_grok_h1_equalization_named_products from './research/grok-h1-equalization-named-products.json'
-import s131_grok_h1_housing_benefits from './research/grok-h1-housing-benefits.json'
-import s132_grok_h1_international_reports from './research/grok-h1-international-reports.json'
-import s133_grok_h1_municipal_ontario_quebec from './research/grok-h1-municipal-ontario-quebec.json'
-import s134_grok_r1_nordic_nato_fr_oecd from './research/grok-r1-nordic-nato-fr-oecd.json'
-import s135_grok_r3_netherlands_poland from './research/grok-r3-netherlands-poland.json'
-import s136_grok_r4_italy_czechia from './research/grok-r4-italy-czechia.json'
-import s137_grok_r6_mixed_categories from './research/grok-r6-mixed-categories.json'
-import s138_grok_r7_eu27_completion from './research/grok-r7-eu27-completion.json'
-import s139_grok_r8_accession_belt from './research/grok-r8-accession-belt.json'
-import s140_gw_g23_municipal from './research/gw-g23-municipal.json'
-import s141_gw_leadchase_lei7_96 from './research/gw-leadchase-lei7-96.json'
-import s142_health_funding from './research/health-funding.json'
-import s143_in_cpi_finance_commission from './research/in-cpi-finance-commission.json'
-import s144_international_frameworks from './research/international-frameworks.json'
-import s145_international_standards from './research/international-standards.json'
-import s146_ke_nairobi_municipal_finance from './research/ke-nairobi-municipal-finance.json'
-import s147_ke_social_protection from './research/ke-social-protection.json'
-import s148_ke_turkana_equalisation from './research/ke-turkana-equalisation.json'
-import s149_km_g23_municipal from './research/km-g23-municipal.json'
-import s150_km_leadchase_quotes_parts from './research/km-leadchase-quotes-parts.json'
-import s151_lr_g22_nimba_gac_audit from './research/lr-g22-nimba-gac-audit.json'
-import s152_ls_cpi_social_protection from './research/ls-cpi-social-protection.json'
-import s153_ls_g23_municipal from './research/ls-g23-municipal.json'
-import s154_lu_statec_cpi from './research/lu-statec-cpi.json'
-import s155_ly_cpi_social_protection from './research/ly-cpi-social-protection.json'
-import s156_ly_g22_dsbb_cpi_status from './research/ly-g22-dsbb-cpi-status.json'
-import s157_ma_cpi_social_protection from './research/ma-cpi-social-protection.json'
-import s158_ma_regions_wiring from './research/ma-regions-wiring.json'
-import s159_manufacturing_and_classifications from './research/manufacturing-and-classifications.json'
-import s160_ml_cpi_social_protection from './research/ml-cpi-social-protection.json'
-import s161_mr_g22_nouakchott_commune from './research/mr-g22-nouakchott-commune.json'
-import s162_mu_g23_municipal from './research/mu-g23-municipal.json'
-import s163_mw_cpi_social_protection from './research/mw-cpi-social-protection.json'
-import s164_na_cpi_social_protection from './research/na-cpi-social-protection.json'
-import s165_na_g23_municipal from './research/na-g23-municipal.json'
-import s166_ne_g22_mining_petroleum_royalties from './research/ne-g22-mining-petroleum-royalties.json'
-import s167_ng_cpi_pension_safety_net from './research/ng-cpi-pension-safety-net.json'
-import s168_ng_kano_state_fiscal from './research/ng-kano-state-fiscal.json'
-import s169_ng_lagos_municipal_finance from './research/ng-lagos-municipal-finance.json'
-import s170_nl_municipal_finance from './research/nl-municipal-finance.json'
-import s171_no_government_finance from './research/no-government-finance.json'
-import s172_nz_government_finance from './research/nz-government-finance.json'
-import s173_nz_statsnz_national_accounts from './research/nz-statsnz-national-accounts.json'
-import s174_ontario_ompf_mpac from './research/ontario-ompf-mpac.json'
-import s175_population_and_education from './research/population-and-education.json'
-import s176_provincial_social_programs from './research/provincial-social-programs.json'
-import s177_rate_transmission from './research/rate-transmission.json'
-import s178_realm_government_finance from './research/realm-government-finance.json'
-import s179_regional_education from './research/regional-education.json'
-import s180_retired_implied_edges from './research/retired-implied-edges.json'
-import s181_ru_cpi_equalization from './research/ru-cpi-equalization.json'
-import s182_rw_cpi_social_protection from './research/rw-cpi-social-protection.json'
-import s183_rw_imihigo_districts from './research/rw-imihigo-districts.json'
-import s184_sc_g23_municipal from './research/sc-g23-municipal.json'
-import s185_sc_leadchase_ag_reports from './research/sc-leadchase-ag-reports.json'
-import s186_sd_g22_audit_chamber_fiscal from './research/sd-g22-audit-chamber-fiscal.json'
-import s187_sd_leadchase_nac_audits from './research/sd-leadchase-nac-audits.json'
-import s188_sn_cpi_social_protection from './research/sn-cpi-social-protection.json'
-import s189_so_g22_puntland_benadir_mof from './research/so-g22-puntland-benadir-mof.json'
-import s190_ss_g22_nbs_mofp_budget from './research/ss-g22-nbs-mofp-budget.json'
-import s191_st_g23_municipal from './research/st-g23-municipal.json'
-import s192_st_leadchase_lei16_92 from './research/st-leadchase-lei16-92.json'
-import s193_statcan_ippi from './research/statcan-ippi.json'
-import s194_statcan_macro_accounts from './research/statcan-macro-accounts.json'
-import s195_statcan_supply_use_tables from './research/statcan-supply-use-tables.json'
-import s196_structural_bridges from './research/structural-bridges.json'
-import s197_sz_cpi_social_protection from './research/sz-cpi-social-protection.json'
-import s198_sz_g23_municipal from './research/sz-g23-municipal.json'
-import s199_td_cpi_social_protection from './research/td-cpi-social-protection.json'
-import s200_tg_cpi_social_protection from './research/tg-cpi-social-protection.json'
-import s201_tn_cpi_social_protection from './research/tn-cpi-social-protection.json'
-import s202_tz_cpi_social_protection from './research/tz-cpi-social-protection.json'
-import s203_tz_zanzibar_union from './research/tz-zanzibar-union.json'
-import s204_ug_cpi_social_protection from './research/ug-cpi-social-protection.json'
-import s205_uk_local_government_finance from './research/uk-local-government-finance.json'
-import s206_us_california_los_angeles from './research/us-california-los-angeles.json'
-import s207_us_county_tier_round2 from './research/us-county-tier-round2.json'
-import s208_us_county_tier from './research/us-county-tier.json'
-import s209_us_federal_policy from './research/us-federal-policy.json'
-import s210_us_open_items from './research/us-open-items.json'
-import s211_us_statistical_inputs from './research/us-statistical-inputs.json'
-import s212_us_subnational from './research/us-subnational.json'
-import s213_us_texas_houston from './research/us-texas-houston.json'
-import s214_za_cpi_social_grants from './research/za-cpi-social-grants.json'
-import s215_za_fiscal_federalism from './research/za-fiscal-federalism.json'
-import s216_za_followup_gaps from './research/za-followup-gaps.json'
-import s217_za_joburg_municipal_finance from './research/za-joburg-municipal-finance.json'
-import s218_za_national_accounts_labour from './research/za-national-accounts-labour.json'
-import s219_zm_cpi_social_protection from './research/zm-cpi-social-protection.json'
-import s220_zw_cpi_social_protection from './research/zw-cpi-social-protection.json'
+import s0_ae_national_core from './research/ae-national-core.json'
+import s1_af_algeria_commune_finance from './research/af-algeria-commune-finance.json'
+import s2_af_angola_autarquias from './research/af-angola-autarquias.json'
+import s3_af_angola from './research/af-angola.json'
+import s4_af_benin_commune_finance from './research/af-benin-commune-finance.json'
+import s5_af_burkina_faso_national_deepen from './research/af-burkina-faso-national-deepen.json'
+import s6_af_burundi_deepen from './research/af-burundi-deepen.json'
+import s7_af_cabo_verde from './research/af-cabo-verde.json'
+import s8_af_cameroon_communes_feicom from './research/af-cameroon-communes-feicom.json'
+import s9_af_car_budget_decentralization from './research/af-car-budget-decentralization.json'
+import s10_af_cemac from './research/af-cemac.json'
+import s11_af_chad_commune_finance from './research/af-chad-commune-finance.json'
+import s12_af_comoros from './research/af-comoros.json'
+import s13_af_continental_hub from './research/af-continental-hub.json'
+import s14_af_cote_divoire_commune_finance from './research/af-cote-divoire-commune-finance.json'
+import s15_af_djibouti from './research/af-djibouti.json'
+import s16_af_drc_commune_etd from './research/af-drc-commune-etd.json'
+import s17_af_drc_deepen from './research/af-drc-deepen.json'
+import s18_af_eac_wiring from './research/af-eac-wiring.json'
+import s19_af_ecowas from './research/af-ecowas.json'
+import s20_af_egypt_algeria_provincial from './research/af-egypt-algeria-provincial.json'
+import s21_af_egypt_sub_governorate from './research/af-egypt-sub-governorate.json'
+import s22_af_eritrea from './research/af-eritrea.json'
+import s23_af_ethiopia_chartered_cities from './research/af-ethiopia-chartered-cities.json'
+import s24_af_g22_poverty_minimum_wage from './research/af-g22-poverty-minimum-wage.json'
+import s25_af_gambia from './research/af-gambia.json'
+import s26_af_grok_municipal_batch2 from './research/af-grok-municipal-batch2.json'
+import s27_af_grok_provincial_followup from './research/af-grok-provincial-followup.json'
+import s28_af_grok_synthesis from './research/af-grok-synthesis.json'
+import s29_af_guinea_bissau_deepen from './research/af-guinea-bissau-deepen.json'
+import s30_af_guinea_commune_finance from './research/af-guinea-commune-finance.json'
+import s31_af_guinea from './research/af-guinea.json'
+import s32_af_liberia from './research/af-liberia.json'
+import s33_af_madagascar_commune_finance from './research/af-madagascar-commune-finance.json'
+import s34_af_madagascar from './research/af-madagascar.json'
+import s35_af_malawi_municipal from './research/af-malawi-municipal.json'
+import s36_af_mali_communes_national from './research/af-mali-communes-national.json'
+import s37_af_mauritania from './research/af-mauritania.json'
+import s38_af_mauritius from './research/af-mauritius.json'
+import s39_af_mozambique_autarquias from './research/af-mozambique-autarquias.json'
+import s40_af_mozambique from './research/af-mozambique.json'
+import s41_af_niger_national_deepen from './research/af-niger-national-deepen.json'
+import s42_af_nigeria_lga_municipal from './research/af-nigeria-lga-municipal.json'
+import s43_af_sadc_hub from './research/af-sadc-hub.json'
+import s44_af_sao_tome_principe from './research/af-sao-tome-principe.json'
+import s45_af_senegal_commune_finance from './research/af-senegal-commune-finance.json'
+import s46_af_seychelles from './research/af-seychelles.json'
+import s47_af_sierra_leone_municipal from './research/af-sierra-leone-municipal.json'
+import s48_af_sierra_leone from './research/af-sierra-leone.json'
+import s49_af_somalia_deepen from './research/af-somalia-deepen.json'
+import s50_af_south_sudan_deepen from './research/af-south-sudan-deepen.json'
+import s51_af_sudan from './research/af-sudan.json'
+import s52_af_tanzania_lga_municipal from './research/af-tanzania-lga-municipal.json'
+import s53_af_togo_commune_finance from './research/af-togo-commune-finance.json'
+import s54_af_tunisia_commune_finance from './research/af-tunisia-commune-finance.json'
+import s55_af_uma_hub from './research/af-uma-hub.json'
+import s56_af_waemu_remainder from './research/af-waemu-remainder.json'
+import s57_af_zambia_municipal from './research/af-zambia-municipal.json'
+import s58_af_zimbabwe_devolution_municipal from './research/af-zimbabwe-devolution-municipal.json'
+import s59_alberta_energy from './research/alberta-energy.json'
+import s60_alberta_municipal from './research/alberta-municipal.json'
+import s61_alberta_provincial from './research/alberta-provincial.json'
+import s62_anzsic_industry_classification from './research/anzsic-industry-classification.json'
+import s63_ar_national_core from './research/ar-national-core.json'
+import s64_associated_states_government_finance from './research/associated-states-government-finance.json'
+import s65_au_government_finance from './research/au-government-finance.json'
+import s66_banking_supervision from './research/banking-supervision.json'
+import s67_bf_cpi_social_protection from './research/bf-cpi-social-protection.json'
+import s68_bf_g22_commune_budget_lines from './research/bf-g22-commune-budget-lines.json'
+import s69_bf_leadchase_loi012_2018 from './research/bf-leadchase-loi012-2018.json'
+import s70_bi_g22_fonic_decree from './research/bi-g22-fonic-decree.json'
+import s71_bo_national_core from './research/bo-national-core.json'
+import s72_br_fiscal_responsibility_law from './research/br-fiscal-responsibility-law.json'
+import s73_br_fpm_population from './research/br-fpm-population.json'
+import s74_br_g2_pnadc_siconfi_scn from './research/br-g2-pnadc-siconfi-scn.json'
+import s75_br_ipca_fpe from './research/br-ipca-fpe.json'
+import s76_bw_cpi_social_protection from './research/bw-cpi-social-protection.json'
+import s77_bw_g23_municipal from './research/bw-g23-municipal.json'
+import s78_bw_leadchase_ag_2021 from './research/bw-leadchase-ag-2021.json'
+import s79_cd_provinces_fiscal from './research/cd-provinces-fiscal.json'
+import s80_cg_g22_loi_finances_niari from './research/cg-g22-loi-finances-niari.json'
+import s81_ci_cpi_social_protection from './research/ci-cpi-social-protection.json'
+import s82_cm_cpi_social_protection from './research/cm-cpi-social-protection.json'
+import s83_cn_cpi_transfers from './research/cn-cpi-transfers.json'
+import s84_cn_g2_budget_law_equalization from './research/cn-g2-budget-law-equalization.json'
+import s85_county_grande_prairie from './research/county-grande-prairie.json'
+import s86_credit_and_mortgages from './research/credit-and-mortgages.json'
+import s87_cv_g23_municipal from './research/cv-g23-municipal.json'
+import s88_cv_leadchase_ffm_status from './research/cv-leadchase-ffm-status.json'
+import s89_de_bundesbank_financial_accounts from './research/de-bundesbank-financial-accounts.json'
+import s90_de_destatis_national_accounts from './research/de-destatis-national-accounts.json'
+import s91_de_destatis_source_surveys from './research/de-destatis-source-surveys.json'
+import s92_de_ie_national_accounts_quality_reports from './research/de-ie-national-accounts-quality-reports.json'
+import s93_dj_g23_municipal from './research/dj-g23-municipal.json'
+import s94_dj_leadchase_loi149 from './research/dj-leadchase-loi149.json'
+import s95_dz_cpi_social_protection from './research/dz-cpi-social-protection.json'
+import s96_ecfin_business_consumer_surveys from './research/ecfin-business-consumer-surveys.json'
+import s97_edp_inventory_regulation_479_2009 from './research/edp-inventory-regulation-479-2009.json'
+import s98_eg_cairo_municipal_finance from './research/eg-cairo-municipal-finance.json'
+import s99_eg_cpi_social_insurance from './research/eg-cpi-social-insurance.json'
+import s100_equalization_named_products from './research/equalization-named-products.json'
+import s101_equalization_payroll_base from './research/equalization-payroll-base.json'
+import s102_er_g22_imf_reengagement from './research/er-g22-imf-reengagement.json'
+import s103_esa_2010 from './research/esa-2010.json'
+import s104_esa2010_methodology_stack from './research/esa2010-methodology-stack.json'
+import s105_esa2010_quality_reporting from './research/esa2010-quality-reporting.json'
+import s106_ess_catalogue_standards from './research/ess-catalogue-standards.json'
+import s107_ess_peer_review_country_reports from './research/ess-peer-review-country-reports.json'
+import s108_ess_quality_framework from './research/ess-quality-framework.json'
+import s109_et_psnp_cpi_federalism from './research/et-psnp-cpi-federalism.json'
+import s110_et_regional_state_federalism from './research/et-regional-state-federalism.json'
+import s111_eu_draft_budget from './research/eu-draft-budget.json'
+import s112_eu_legal_instrument_lineages from './research/eu-legal-instrument-lineages.json'
+import s113_eu_meta_docx_batches from './research/eu-meta-docx-batches.json'
+import s114_eurostat_edp_gfs_ecb_statistics from './research/eurostat-edp-gfs-ecb-statistics.json'
+import s115_eurostat_farm_structure_survey from './research/eurostat-farm-structure-survey.json'
+import s116_eurostat_hicp from './research/eurostat-hicp.json'
+import s117_eurostat_remuneration_mission_expenses_report from './research/eurostat-remuneration-mission-expenses-report.json'
+import s118_eurostat_remuneration_satellite_series from './research/eurostat-remuneration-satellite-series.json'
+import s119_eurostat_remuneration_update_report from './research/eurostat-remuneration-update-report.json'
+import s120_eurosystem_ecb from './research/eurosystem-ecb.json'
+import s121_fed_h15_disclosure from './research/fed-h15-disclosure.json'
+import s122_federal_canada from './research/federal-canada.json'
+import s123_ga_cpi_social_protection from './research/ga-cpi-social-protection.json'
+import s124_ga_g23_municipal from './research/ga-g23-municipal.json'
+import s125_ga_leadchase_perequation from './research/ga-leadchase-perequation.json'
+import s126_gb_ukspf_succession from './research/gb-ukspf-succession.json'
+import s127_gh_leap_cpi_indexation from './research/gh-leap-cpi-indexation.json'
+import s128_gh_mmda_wiring from './research/gh-mmda-wiring.json'
+import s129_gm_g23_municipal from './research/gm-g23-municipal.json'
+import s130_gq_g23_municipal from './research/gq-g23-municipal.json'
+import s131_gq_leadchase_finance_tax from './research/gq-leadchase-finance-tax.json'
+import s132_grande_prairie from './research/grande-prairie.json'
+import s133_grok_h1_calgary_municipal from './research/grok-h1-calgary-municipal.json'
+import s134_grok_h1_classification_hubs from './research/grok-h1-classification-hubs.json'
+import s135_grok_h1_equalization_named_products from './research/grok-h1-equalization-named-products.json'
+import s136_grok_h1_housing_benefits from './research/grok-h1-housing-benefits.json'
+import s137_grok_h1_international_reports from './research/grok-h1-international-reports.json'
+import s138_grok_h1_municipal_ontario_quebec from './research/grok-h1-municipal-ontario-quebec.json'
+import s139_grok_r1_nordic_nato_fr_oecd from './research/grok-r1-nordic-nato-fr-oecd.json'
+import s140_grok_r3_netherlands_poland from './research/grok-r3-netherlands-poland.json'
+import s141_grok_r4_italy_czechia from './research/grok-r4-italy-czechia.json'
+import s142_grok_r6_mixed_categories from './research/grok-r6-mixed-categories.json'
+import s143_grok_r7_eu27_completion from './research/grok-r7-eu27-completion.json'
+import s144_grok_r8_accession_belt from './research/grok-r8-accession-belt.json'
+import s145_gw_g23_municipal from './research/gw-g23-municipal.json'
+import s146_gw_leadchase_lei7_96 from './research/gw-leadchase-lei7-96.json'
+import s147_health_funding from './research/health-funding.json'
+import s148_in_cpi_finance_commission from './research/in-cpi-finance-commission.json'
+import s149_in_g2_finance_commission_chain from './research/in-g2-finance-commission-chain.json'
+import s150_international_frameworks from './research/international-frameworks.json'
+import s151_international_standards from './research/international-standards.json'
+import s152_ke_nairobi_municipal_finance from './research/ke-nairobi-municipal-finance.json'
+import s153_ke_social_protection from './research/ke-social-protection.json'
+import s154_ke_turkana_equalisation from './research/ke-turkana-equalisation.json'
+import s155_km_g23_municipal from './research/km-g23-municipal.json'
+import s156_km_leadchase_quotes_parts from './research/km-leadchase-quotes-parts.json'
+import s157_lr_g22_nimba_gac_audit from './research/lr-g22-nimba-gac-audit.json'
+import s158_ls_cpi_social_protection from './research/ls-cpi-social-protection.json'
+import s159_ls_g23_municipal from './research/ls-g23-municipal.json'
+import s160_lu_statec_cpi from './research/lu-statec-cpi.json'
+import s161_ly_cpi_social_protection from './research/ly-cpi-social-protection.json'
+import s162_ly_g22_dsbb_cpi_status from './research/ly-g22-dsbb-cpi-status.json'
+import s163_ma_cpi_social_protection from './research/ma-cpi-social-protection.json'
+import s164_ma_regions_wiring from './research/ma-regions-wiring.json'
+import s165_manufacturing_and_classifications from './research/manufacturing-and-classifications.json'
+import s166_ml_cpi_social_protection from './research/ml-cpi-social-protection.json'
+import s167_mr_g22_nouakchott_commune from './research/mr-g22-nouakchott-commune.json'
+import s168_mu_g23_municipal from './research/mu-g23-municipal.json'
+import s169_mw_cpi_social_protection from './research/mw-cpi-social-protection.json'
+import s170_na_cpi_social_protection from './research/na-cpi-social-protection.json'
+import s171_na_g23_municipal from './research/na-g23-municipal.json'
+import s172_ne_g22_mining_petroleum_royalties from './research/ne-g22-mining-petroleum-royalties.json'
+import s173_ng_cpi_pension_safety_net from './research/ng-cpi-pension-safety-net.json'
+import s174_ng_kano_state_fiscal from './research/ng-kano-state-fiscal.json'
+import s175_ng_lagos_municipal_finance from './research/ng-lagos-municipal-finance.json'
+import s176_nl_municipal_finance from './research/nl-municipal-finance.json'
+import s177_no_government_finance from './research/no-government-finance.json'
+import s178_nz_government_finance from './research/nz-government-finance.json'
+import s179_nz_statsnz_national_accounts from './research/nz-statsnz-national-accounts.json'
+import s180_ontario_ompf_mpac from './research/ontario-ompf-mpac.json'
+import s181_population_and_education from './research/population-and-education.json'
+import s182_provincial_social_programs from './research/provincial-social-programs.json'
+import s183_rate_transmission from './research/rate-transmission.json'
+import s184_realm_government_finance from './research/realm-government-finance.json'
+import s185_regional_education from './research/regional-education.json'
+import s186_retired_implied_edges from './research/retired-implied-edges.json'
+import s187_ru_cpi_equalization from './research/ru-cpi-equalization.json'
+import s188_ru_g2_rosstat_equalization from './research/ru-g2-rosstat-equalization.json'
+import s189_rw_cpi_social_protection from './research/rw-cpi-social-protection.json'
+import s190_rw_imihigo_districts from './research/rw-imihigo-districts.json'
+import s191_sc_g23_municipal from './research/sc-g23-municipal.json'
+import s192_sc_leadchase_ag_reports from './research/sc-leadchase-ag-reports.json'
+import s193_sd_g22_audit_chamber_fiscal from './research/sd-g22-audit-chamber-fiscal.json'
+import s194_sd_leadchase_nac_audits from './research/sd-leadchase-nac-audits.json'
+import s195_sn_cpi_social_protection from './research/sn-cpi-social-protection.json'
+import s196_so_g22_puntland_benadir_mof from './research/so-g22-puntland-benadir-mof.json'
+import s197_ss_g22_nbs_mofp_budget from './research/ss-g22-nbs-mofp-budget.json'
+import s198_st_g23_municipal from './research/st-g23-municipal.json'
+import s199_st_leadchase_lei16_92 from './research/st-leadchase-lei16-92.json'
+import s200_statcan_ippi from './research/statcan-ippi.json'
+import s201_statcan_macro_accounts from './research/statcan-macro-accounts.json'
+import s202_statcan_supply_use_tables from './research/statcan-supply-use-tables.json'
+import s203_structural_bridges from './research/structural-bridges.json'
+import s204_sz_cpi_social_protection from './research/sz-cpi-social-protection.json'
+import s205_sz_g23_municipal from './research/sz-g23-municipal.json'
+import s206_td_cpi_social_protection from './research/td-cpi-social-protection.json'
+import s207_tg_cpi_social_protection from './research/tg-cpi-social-protection.json'
+import s208_tn_cpi_social_protection from './research/tn-cpi-social-protection.json'
+import s209_tz_cpi_social_protection from './research/tz-cpi-social-protection.json'
+import s210_tz_zanzibar_union from './research/tz-zanzibar-union.json'
+import s211_ug_cpi_social_protection from './research/ug-cpi-social-protection.json'
+import s212_uk_local_government_finance from './research/uk-local-government-finance.json'
+import s213_us_california_los_angeles from './research/us-california-los-angeles.json'
+import s214_us_county_tier_round2 from './research/us-county-tier-round2.json'
+import s215_us_county_tier from './research/us-county-tier.json'
+import s216_us_federal_policy from './research/us-federal-policy.json'
+import s217_us_open_items from './research/us-open-items.json'
+import s218_us_statistical_inputs from './research/us-statistical-inputs.json'
+import s219_us_subnational from './research/us-subnational.json'
+import s220_us_texas_houston from './research/us-texas-houston.json'
+import s221_za_cpi_social_grants from './research/za-cpi-social-grants.json'
+import s222_za_fiscal_federalism from './research/za-fiscal-federalism.json'
+import s223_za_followup_gaps from './research/za-followup-gaps.json'
+import s224_za_joburg_municipal_finance from './research/za-joburg-municipal-finance.json'
+import s225_za_national_accounts_labour from './research/za-national-accounts-labour.json'
+import s226_zm_cpi_social_protection from './research/zm-cpi-social-protection.json'
+import s227_zw_cpi_social_protection from './research/zw-cpi-social-protection.json'
 
 /** Every wired research slice, sorted by filename. Cast by the loader. */
 export const sliceModules: unknown[] = [
-  s0_af_algeria_commune_finance,
-  s1_af_angola_autarquias,
-  s2_af_angola,
-  s3_af_benin_commune_finance,
-  s4_af_burkina_faso_national_deepen,
-  s5_af_burundi_deepen,
-  s6_af_cabo_verde,
-  s7_af_cameroon_communes_feicom,
-  s8_af_car_budget_decentralization,
-  s9_af_cemac,
-  s10_af_chad_commune_finance,
-  s11_af_comoros,
-  s12_af_continental_hub,
-  s13_af_cote_divoire_commune_finance,
-  s14_af_djibouti,
-  s15_af_drc_commune_etd,
-  s16_af_drc_deepen,
-  s17_af_eac_wiring,
-  s18_af_ecowas,
-  s19_af_egypt_algeria_provincial,
-  s20_af_egypt_sub_governorate,
-  s21_af_eritrea,
-  s22_af_ethiopia_chartered_cities,
-  s23_af_g22_poverty_minimum_wage,
-  s24_af_gambia,
-  s25_af_grok_municipal_batch2,
-  s26_af_grok_provincial_followup,
-  s27_af_grok_synthesis,
-  s28_af_guinea_bissau_deepen,
-  s29_af_guinea_commune_finance,
-  s30_af_guinea,
-  s31_af_liberia,
-  s32_af_madagascar_commune_finance,
-  s33_af_madagascar,
-  s34_af_malawi_municipal,
-  s35_af_mali_communes_national,
-  s36_af_mauritania,
-  s37_af_mauritius,
-  s38_af_mozambique_autarquias,
-  s39_af_mozambique,
-  s40_af_niger_national_deepen,
-  s41_af_nigeria_lga_municipal,
-  s42_af_sadc_hub,
-  s43_af_sao_tome_principe,
-  s44_af_senegal_commune_finance,
-  s45_af_seychelles,
-  s46_af_sierra_leone_municipal,
-  s47_af_sierra_leone,
-  s48_af_somalia_deepen,
-  s49_af_south_sudan_deepen,
-  s50_af_sudan,
-  s51_af_tanzania_lga_municipal,
-  s52_af_togo_commune_finance,
-  s53_af_tunisia_commune_finance,
-  s54_af_uma_hub,
-  s55_af_waemu_remainder,
-  s56_af_zambia_municipal,
-  s57_af_zimbabwe_devolution_municipal,
-  s58_alberta_energy,
-  s59_alberta_municipal,
-  s60_alberta_provincial,
-  s61_anzsic_industry_classification,
-  s62_associated_states_government_finance,
-  s63_au_government_finance,
-  s64_banking_supervision,
-  s65_bf_cpi_social_protection,
-  s66_bf_g22_commune_budget_lines,
-  s67_bf_leadchase_loi012_2018,
-  s68_bi_g22_fonic_decree,
-  s69_br_fiscal_responsibility_law,
-  s70_br_fpm_population,
-  s71_br_ipca_fpe,
-  s72_bw_cpi_social_protection,
-  s73_bw_g23_municipal,
-  s74_bw_leadchase_ag_2021,
-  s75_cd_provinces_fiscal,
-  s76_cg_g22_loi_finances_niari,
-  s77_ci_cpi_social_protection,
-  s78_cm_cpi_social_protection,
-  s79_cn_cpi_transfers,
-  s80_county_grande_prairie,
-  s81_credit_and_mortgages,
-  s82_cv_g23_municipal,
-  s83_cv_leadchase_ffm_status,
-  s84_de_bundesbank_financial_accounts,
-  s85_de_destatis_national_accounts,
-  s86_de_destatis_source_surveys,
-  s87_de_ie_national_accounts_quality_reports,
-  s88_dj_g23_municipal,
-  s89_dj_leadchase_loi149,
-  s90_dz_cpi_social_protection,
-  s91_ecfin_business_consumer_surveys,
-  s92_edp_inventory_regulation_479_2009,
-  s93_eg_cairo_municipal_finance,
-  s94_eg_cpi_social_insurance,
-  s95_equalization_named_products,
-  s96_equalization_payroll_base,
-  s97_er_g22_imf_reengagement,
-  s98_esa_2010,
-  s99_esa2010_methodology_stack,
-  s100_esa2010_quality_reporting,
-  s101_ess_catalogue_standards,
-  s102_ess_peer_review_country_reports,
-  s103_ess_quality_framework,
-  s104_et_psnp_cpi_federalism,
-  s105_et_regional_state_federalism,
-  s106_eu_draft_budget,
-  s107_eu_legal_instrument_lineages,
-  s108_eu_meta_docx_batches,
-  s109_eurostat_edp_gfs_ecb_statistics,
-  s110_eurostat_farm_structure_survey,
-  s111_eurostat_hicp,
-  s112_eurostat_remuneration_mission_expenses_report,
-  s113_eurostat_remuneration_satellite_series,
-  s114_eurostat_remuneration_update_report,
-  s115_eurosystem_ecb,
-  s116_fed_h15_disclosure,
-  s117_federal_canada,
-  s118_ga_cpi_social_protection,
-  s119_ga_g23_municipal,
-  s120_ga_leadchase_perequation,
-  s121_gb_ukspf_succession,
-  s122_gh_leap_cpi_indexation,
-  s123_gh_mmda_wiring,
-  s124_gm_g23_municipal,
-  s125_gq_g23_municipal,
-  s126_gq_leadchase_finance_tax,
-  s127_grande_prairie,
-  s128_grok_h1_calgary_municipal,
-  s129_grok_h1_classification_hubs,
-  s130_grok_h1_equalization_named_products,
-  s131_grok_h1_housing_benefits,
-  s132_grok_h1_international_reports,
-  s133_grok_h1_municipal_ontario_quebec,
-  s134_grok_r1_nordic_nato_fr_oecd,
-  s135_grok_r3_netherlands_poland,
-  s136_grok_r4_italy_czechia,
-  s137_grok_r6_mixed_categories,
-  s138_grok_r7_eu27_completion,
-  s139_grok_r8_accession_belt,
-  s140_gw_g23_municipal,
-  s141_gw_leadchase_lei7_96,
-  s142_health_funding,
-  s143_in_cpi_finance_commission,
-  s144_international_frameworks,
-  s145_international_standards,
-  s146_ke_nairobi_municipal_finance,
-  s147_ke_social_protection,
-  s148_ke_turkana_equalisation,
-  s149_km_g23_municipal,
-  s150_km_leadchase_quotes_parts,
-  s151_lr_g22_nimba_gac_audit,
-  s152_ls_cpi_social_protection,
-  s153_ls_g23_municipal,
-  s154_lu_statec_cpi,
-  s155_ly_cpi_social_protection,
-  s156_ly_g22_dsbb_cpi_status,
-  s157_ma_cpi_social_protection,
-  s158_ma_regions_wiring,
-  s159_manufacturing_and_classifications,
-  s160_ml_cpi_social_protection,
-  s161_mr_g22_nouakchott_commune,
-  s162_mu_g23_municipal,
-  s163_mw_cpi_social_protection,
-  s164_na_cpi_social_protection,
-  s165_na_g23_municipal,
-  s166_ne_g22_mining_petroleum_royalties,
-  s167_ng_cpi_pension_safety_net,
-  s168_ng_kano_state_fiscal,
-  s169_ng_lagos_municipal_finance,
-  s170_nl_municipal_finance,
-  s171_no_government_finance,
-  s172_nz_government_finance,
-  s173_nz_statsnz_national_accounts,
-  s174_ontario_ompf_mpac,
-  s175_population_and_education,
-  s176_provincial_social_programs,
-  s177_rate_transmission,
-  s178_realm_government_finance,
-  s179_regional_education,
-  s180_retired_implied_edges,
-  s181_ru_cpi_equalization,
-  s182_rw_cpi_social_protection,
-  s183_rw_imihigo_districts,
-  s184_sc_g23_municipal,
-  s185_sc_leadchase_ag_reports,
-  s186_sd_g22_audit_chamber_fiscal,
-  s187_sd_leadchase_nac_audits,
-  s188_sn_cpi_social_protection,
-  s189_so_g22_puntland_benadir_mof,
-  s190_ss_g22_nbs_mofp_budget,
-  s191_st_g23_municipal,
-  s192_st_leadchase_lei16_92,
-  s193_statcan_ippi,
-  s194_statcan_macro_accounts,
-  s195_statcan_supply_use_tables,
-  s196_structural_bridges,
-  s197_sz_cpi_social_protection,
-  s198_sz_g23_municipal,
-  s199_td_cpi_social_protection,
-  s200_tg_cpi_social_protection,
-  s201_tn_cpi_social_protection,
-  s202_tz_cpi_social_protection,
-  s203_tz_zanzibar_union,
-  s204_ug_cpi_social_protection,
-  s205_uk_local_government_finance,
-  s206_us_california_los_angeles,
-  s207_us_county_tier_round2,
-  s208_us_county_tier,
-  s209_us_federal_policy,
-  s210_us_open_items,
-  s211_us_statistical_inputs,
-  s212_us_subnational,
-  s213_us_texas_houston,
-  s214_za_cpi_social_grants,
-  s215_za_fiscal_federalism,
-  s216_za_followup_gaps,
-  s217_za_joburg_municipal_finance,
-  s218_za_national_accounts_labour,
-  s219_zm_cpi_social_protection,
-  s220_zw_cpi_social_protection,
+  s0_ae_national_core,
+  s1_af_algeria_commune_finance,
+  s2_af_angola_autarquias,
+  s3_af_angola,
+  s4_af_benin_commune_finance,
+  s5_af_burkina_faso_national_deepen,
+  s6_af_burundi_deepen,
+  s7_af_cabo_verde,
+  s8_af_cameroon_communes_feicom,
+  s9_af_car_budget_decentralization,
+  s10_af_cemac,
+  s11_af_chad_commune_finance,
+  s12_af_comoros,
+  s13_af_continental_hub,
+  s14_af_cote_divoire_commune_finance,
+  s15_af_djibouti,
+  s16_af_drc_commune_etd,
+  s17_af_drc_deepen,
+  s18_af_eac_wiring,
+  s19_af_ecowas,
+  s20_af_egypt_algeria_provincial,
+  s21_af_egypt_sub_governorate,
+  s22_af_eritrea,
+  s23_af_ethiopia_chartered_cities,
+  s24_af_g22_poverty_minimum_wage,
+  s25_af_gambia,
+  s26_af_grok_municipal_batch2,
+  s27_af_grok_provincial_followup,
+  s28_af_grok_synthesis,
+  s29_af_guinea_bissau_deepen,
+  s30_af_guinea_commune_finance,
+  s31_af_guinea,
+  s32_af_liberia,
+  s33_af_madagascar_commune_finance,
+  s34_af_madagascar,
+  s35_af_malawi_municipal,
+  s36_af_mali_communes_national,
+  s37_af_mauritania,
+  s38_af_mauritius,
+  s39_af_mozambique_autarquias,
+  s40_af_mozambique,
+  s41_af_niger_national_deepen,
+  s42_af_nigeria_lga_municipal,
+  s43_af_sadc_hub,
+  s44_af_sao_tome_principe,
+  s45_af_senegal_commune_finance,
+  s46_af_seychelles,
+  s47_af_sierra_leone_municipal,
+  s48_af_sierra_leone,
+  s49_af_somalia_deepen,
+  s50_af_south_sudan_deepen,
+  s51_af_sudan,
+  s52_af_tanzania_lga_municipal,
+  s53_af_togo_commune_finance,
+  s54_af_tunisia_commune_finance,
+  s55_af_uma_hub,
+  s56_af_waemu_remainder,
+  s57_af_zambia_municipal,
+  s58_af_zimbabwe_devolution_municipal,
+  s59_alberta_energy,
+  s60_alberta_municipal,
+  s61_alberta_provincial,
+  s62_anzsic_industry_classification,
+  s63_ar_national_core,
+  s64_associated_states_government_finance,
+  s65_au_government_finance,
+  s66_banking_supervision,
+  s67_bf_cpi_social_protection,
+  s68_bf_g22_commune_budget_lines,
+  s69_bf_leadchase_loi012_2018,
+  s70_bi_g22_fonic_decree,
+  s71_bo_national_core,
+  s72_br_fiscal_responsibility_law,
+  s73_br_fpm_population,
+  s74_br_g2_pnadc_siconfi_scn,
+  s75_br_ipca_fpe,
+  s76_bw_cpi_social_protection,
+  s77_bw_g23_municipal,
+  s78_bw_leadchase_ag_2021,
+  s79_cd_provinces_fiscal,
+  s80_cg_g22_loi_finances_niari,
+  s81_ci_cpi_social_protection,
+  s82_cm_cpi_social_protection,
+  s83_cn_cpi_transfers,
+  s84_cn_g2_budget_law_equalization,
+  s85_county_grande_prairie,
+  s86_credit_and_mortgages,
+  s87_cv_g23_municipal,
+  s88_cv_leadchase_ffm_status,
+  s89_de_bundesbank_financial_accounts,
+  s90_de_destatis_national_accounts,
+  s91_de_destatis_source_surveys,
+  s92_de_ie_national_accounts_quality_reports,
+  s93_dj_g23_municipal,
+  s94_dj_leadchase_loi149,
+  s95_dz_cpi_social_protection,
+  s96_ecfin_business_consumer_surveys,
+  s97_edp_inventory_regulation_479_2009,
+  s98_eg_cairo_municipal_finance,
+  s99_eg_cpi_social_insurance,
+  s100_equalization_named_products,
+  s101_equalization_payroll_base,
+  s102_er_g22_imf_reengagement,
+  s103_esa_2010,
+  s104_esa2010_methodology_stack,
+  s105_esa2010_quality_reporting,
+  s106_ess_catalogue_standards,
+  s107_ess_peer_review_country_reports,
+  s108_ess_quality_framework,
+  s109_et_psnp_cpi_federalism,
+  s110_et_regional_state_federalism,
+  s111_eu_draft_budget,
+  s112_eu_legal_instrument_lineages,
+  s113_eu_meta_docx_batches,
+  s114_eurostat_edp_gfs_ecb_statistics,
+  s115_eurostat_farm_structure_survey,
+  s116_eurostat_hicp,
+  s117_eurostat_remuneration_mission_expenses_report,
+  s118_eurostat_remuneration_satellite_series,
+  s119_eurostat_remuneration_update_report,
+  s120_eurosystem_ecb,
+  s121_fed_h15_disclosure,
+  s122_federal_canada,
+  s123_ga_cpi_social_protection,
+  s124_ga_g23_municipal,
+  s125_ga_leadchase_perequation,
+  s126_gb_ukspf_succession,
+  s127_gh_leap_cpi_indexation,
+  s128_gh_mmda_wiring,
+  s129_gm_g23_municipal,
+  s130_gq_g23_municipal,
+  s131_gq_leadchase_finance_tax,
+  s132_grande_prairie,
+  s133_grok_h1_calgary_municipal,
+  s134_grok_h1_classification_hubs,
+  s135_grok_h1_equalization_named_products,
+  s136_grok_h1_housing_benefits,
+  s137_grok_h1_international_reports,
+  s138_grok_h1_municipal_ontario_quebec,
+  s139_grok_r1_nordic_nato_fr_oecd,
+  s140_grok_r3_netherlands_poland,
+  s141_grok_r4_italy_czechia,
+  s142_grok_r6_mixed_categories,
+  s143_grok_r7_eu27_completion,
+  s144_grok_r8_accession_belt,
+  s145_gw_g23_municipal,
+  s146_gw_leadchase_lei7_96,
+  s147_health_funding,
+  s148_in_cpi_finance_commission,
+  s149_in_g2_finance_commission_chain,
+  s150_international_frameworks,
+  s151_international_standards,
+  s152_ke_nairobi_municipal_finance,
+  s153_ke_social_protection,
+  s154_ke_turkana_equalisation,
+  s155_km_g23_municipal,
+  s156_km_leadchase_quotes_parts,
+  s157_lr_g22_nimba_gac_audit,
+  s158_ls_cpi_social_protection,
+  s159_ls_g23_municipal,
+  s160_lu_statec_cpi,
+  s161_ly_cpi_social_protection,
+  s162_ly_g22_dsbb_cpi_status,
+  s163_ma_cpi_social_protection,
+  s164_ma_regions_wiring,
+  s165_manufacturing_and_classifications,
+  s166_ml_cpi_social_protection,
+  s167_mr_g22_nouakchott_commune,
+  s168_mu_g23_municipal,
+  s169_mw_cpi_social_protection,
+  s170_na_cpi_social_protection,
+  s171_na_g23_municipal,
+  s172_ne_g22_mining_petroleum_royalties,
+  s173_ng_cpi_pension_safety_net,
+  s174_ng_kano_state_fiscal,
+  s175_ng_lagos_municipal_finance,
+  s176_nl_municipal_finance,
+  s177_no_government_finance,
+  s178_nz_government_finance,
+  s179_nz_statsnz_national_accounts,
+  s180_ontario_ompf_mpac,
+  s181_population_and_education,
+  s182_provincial_social_programs,
+  s183_rate_transmission,
+  s184_realm_government_finance,
+  s185_regional_education,
+  s186_retired_implied_edges,
+  s187_ru_cpi_equalization,
+  s188_ru_g2_rosstat_equalization,
+  s189_rw_cpi_social_protection,
+  s190_rw_imihigo_districts,
+  s191_sc_g23_municipal,
+  s192_sc_leadchase_ag_reports,
+  s193_sd_g22_audit_chamber_fiscal,
+  s194_sd_leadchase_nac_audits,
+  s195_sn_cpi_social_protection,
+  s196_so_g22_puntland_benadir_mof,
+  s197_ss_g22_nbs_mofp_budget,
+  s198_st_g23_municipal,
+  s199_st_leadchase_lei16_92,
+  s200_statcan_ippi,
+  s201_statcan_macro_accounts,
+  s202_statcan_supply_use_tables,
+  s203_structural_bridges,
+  s204_sz_cpi_social_protection,
+  s205_sz_g23_municipal,
+  s206_td_cpi_social_protection,
+  s207_tg_cpi_social_protection,
+  s208_tn_cpi_social_protection,
+  s209_tz_cpi_social_protection,
+  s210_tz_zanzibar_union,
+  s211_ug_cpi_social_protection,
+  s212_uk_local_government_finance,
+  s213_us_california_los_angeles,
+  s214_us_county_tier_round2,
+  s215_us_county_tier,
+  s216_us_federal_policy,
+  s217_us_open_items,
+  s218_us_statistical_inputs,
+  s219_us_subnational,
+  s220_us_texas_houston,
+  s221_za_cpi_social_grants,
+  s222_za_fiscal_federalism,
+  s223_za_followup_gaps,
+  s224_za_joburg_municipal_finance,
+  s225_za_national_accounts_labour,
+  s226_zm_cpi_social_protection,
+  s227_zw_cpi_social_protection,
 ]
