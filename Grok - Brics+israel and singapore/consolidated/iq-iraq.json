@@ -295,7 +295,7 @@
       "jurisdiction_level": "federal",
       "region": "Iraq",
       "description": "Statistics on oil revenues as a share of total federal budget revenue. Oil typically accounts for the large majority of public revenue (recent readings around 84% in early 2026), making the fiscal position highly sensitive to oil prices and export volumes.",
-      "url": null,
+      "url": "https://cbi.iq/static/uploads/up/file-173563991524858.pdf",
       "domains": [
         "proposed:oil",
         "proposed:fiscal",
@@ -313,7 +313,9 @@
         "Macro and external assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "Retrieved and read: the Central Bank of Iraq Statistics and Research Department's Annual Economic Report 2023 (56 pp.), which states that 'oil revenues constitute the largest share of total revenues reaching (90.9%) at an amount of IQD (124.4) trillion' - i.e. exactly the oil-revenue/fiscal-dependence statistic. Reached from the CBI's own publication landing page https://cbi.iq/page/150 ('Economic Report', archive 2003-2025).",
+      "_url_route": "publisher's own site navigation - CBI publication index (cbi.iq/index.php -> /page/150), after mof.gov.iq document lists again failed to render"
     },
     {
       "id": "iq-federal-budget",
@@ -409,7 +411,7 @@
       "jurisdiction_level": "federal",
       "region": "Iraq",
       "description": "Statistics on public-sector salaries, pensions and related recurrent expenditure. The wage bill absorbs a very large share of federal spending and is a central fiscal pressure point under oil-revenue volatility.",
-      "url": null,
+      "url": "https://cbi.iq/static/uploads/up/file-176595635437154.pdf",
       "domains": [
         "proposed:wage-bill",
         "proposed:public-employment",
@@ -427,7 +429,9 @@
         "Labour and social discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "Retrieved: the Central Bank of Iraq Annual Statistical Bulletin 2024. Its table of contents was read and confirms a public-finance section - Table 31 'State Public Budget' (p.68), Table 32 government budget revenues 2024, Table 33 government budget expenditures 2024, Table 34 'Economic Classification of Public Budget Expenditure for 2024' (pp.74-75, the table carrying compensation of employees) and Table 35 investment budget by sector. Reached from the CBI's own landing page https://cbi.iq/page/142. Note: the companion Annual Economic Report 2023 (same publisher) states explicitly that 'employees' compensation accounted for the largest proportion of total current expenditures reaching (39.9%)'; the bulletin is recorded here as the recurring statistical series. Iraq publishes no separate public-sector employment headcount series that could be confirmed.",
+      "_url_route": "publisher's own site navigation - CBI publication index (cbi.iq/page/142)"
     },
     {
       "id": "iq-exchange-rate",
@@ -980,7 +984,7 @@
       "jurisdiction_level": "federal",
       "region": "Iraq",
       "description": "National GHG emissions estimates. Energy and oil-related activities dominate the emissions profile; the series is referenced in climate and energy-transition discussions.",
-      "url": null,
+      "url": "https://unfccc.int/sites/default/files/resource/Iraq%20BTR%20%209%20September%202025_Final%20English%20Designed.pdf",
       "domains": [
         "proposed:ghg",
         "proposed:climate",
@@ -999,7 +1003,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "releases_per_year": 1,
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "Retrieved and read: Iraq's First Biennial Transparency Report, submitted by the Republic of Iraq's Ministry of Environment (with UNEP/GEF support) to the UNFCCC. It carries the national GHG inventory for 2020 and 2021 (total emissions excl. LULUCF ~198.7 Mt CO2e in 2020 rising to ~203.7 Mt in 2021). The UNFCCC is the official repository for the party's own submission, not a third-party compilation. The corresponding UNFCCC document landing page is unfccc.int/documents/649933 but it timed out on every fetch, so the submitted document itself is recorded.",
+      "_url_route": "UNFCCC party-submission repository (document PDF; landing page unreachable)"
     },
     {
       "id": "iq-batch7-meta",
@@ -1144,7 +1150,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "releases_per_year": 1,
-      "last_updated": null
+      "last_updated": null,
+      "_flagged_not_a_publication": true
     },
     {
       "id": "iq-batch8-meta",
@@ -1310,10 +1317,8 @@
       "iq-cso",
       "iq-cbi",
       "iq-batch1-meta",
-      "iq-oil-revenue",
       "iq-batch2-meta",
       "iq-krg-oil",
-      "iq-wage-bill",
       "iq-batch3-meta",
       "iq-reconstruction",
       "iq-batch4-meta",
@@ -1326,14 +1331,13 @@
       "iq-turkey-trade",
       "iq-external-architecture",
       "iq-batch6-meta",
-      "iq-ghg",
       "iq-batch7-meta",
       "iq-defence-budget",
       "iq-batch8-meta",
       "iq-non-oil",
       "iq-batch9-meta"
     ],
-    "reports_without_url_count": 25,
+    "reports_without_url_count": 22,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
@@ -1463,7 +1467,9 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 18,
-      "still_missing": 25
+      "still_missing": 25,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 3
     },
     "not_a_publication": [
       {
@@ -1570,32 +1576,14 @@
         "id": "iq-batch9-meta",
         "title": "Iraq residual densification meta-node",
         "finding": "Not a publication - a synthesised meta-node binding water and non-oil structural items."
-      }
-    ],
-    "url_unreachable_or_not_published": [
-      {
-        "id": "iq-oil-revenue",
-        "title": "Oil revenue and fiscal dependence statistics",
-        "finding": "No confirmable page found - the Ministry of Finance budget-implementation/monthly-reports pages render only navigation (document lists not served to WebFetch), and oil.gov.iq returns 403."
-      },
-      {
-        "id": "iq-ghg",
-        "title": "Greenhouse gas emissions statistics",
-        "finding": "No confirmable Iraq-specific GHG inventory landing page found - UNFCCC document/party listings were blocked or truncated via WebFetch, and CSO's environment series covers air pollutants rather than a national GHG inventory."
-      }
-    ],
-    "url_no_official_product_found": [
-      {
-        "id": "iq-wage-bill",
-        "title": "Public-sector wage bill and employment statistics",
-        "finding": "No confirmable page found - MoF does not expose a wage-bill/public-sector compensation series page that WebFetch can render, and CSO labour-market pages cover sectoral skills surveys, not the public wage bill."
       },
       {
         "id": "iq-defence-budget",
         "title": "Defence and security expenditure statistics",
-        "finding": "No confirmable page found - no Iraqi official landing page for defence/security expenditure statistics could be retrieved; MoF document listings do not render via WebFetch."
+        "finding": "Still not found, and largely ineligible as framed. No Iraqi official landing page for defence/security expenditure statistics exists: oil.gov.iq is irrelevant here, and the Ministry of Finance's own document listings (Balance-Archive.aspx, Budget-implementation-Archive.aspx, Annual-Books.aspx) were all fetched successfully this time but render only chrome and navigation - the ASP.NET document lists are not served to a plain fetch, so no budget-law annex with ministry-level defence allocations could be retrieved and verified. The CBI Annual Statistical Bulletin's expenditure tables are economic-classification, not functional/ministerial. The remaining figures in circulation are SIPRI-style international estimates, which are not a government publication."
       }
     ],
+    "url_unreachable_or_not_published": [],
     "not_a_publication_note": "These 21 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
   }
 }

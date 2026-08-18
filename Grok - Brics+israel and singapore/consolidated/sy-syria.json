@@ -1047,7 +1047,14 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 11,
-      "still_missing": 19
+      "still_missing": 19,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 0,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -1140,12 +1147,14 @@
       {
         "id": "sy-power",
         "title": "Electricity generation and capacity statistics",
-        "finding": "No official statistics product found: the Ministry of Electricity site (moe.gov.sy) has no statistics/publications section (only services, news, tenders, laws), and its affiliated bodies peeg.gov.sy and nerc.gov.sy are unreachable via WebFetch (TLS certificate verification failures)."
+        "finding": "Still not found. A successor publisher was located and retrieved this time - tde.gov.sy, the Public Establishment for Transmission and Distribution of Electricity under the Ministry of Energy - but it publishes no statistics product: its full menu is About / News / Tenders / Conferences / SEEP / Laws and Regulations / Jobs / Industrial Cities / Sustainability / Media Office / Contact, with no statistics or reports section, and the homepage's 'peak generation yesterday' and 'total production yesterday' fields both render 0 MW / 0 MWh. tde.gov.sy/sitemap.xml returns 404. peegt.gov.sy no longer resolves, nerc.gov.sy fails TLS verification, and the Central Bureau of Statistics (cbssyr.sy) times out on connect, so its Statistical Abstract electricity chapter cannot be reached.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       },
       {
         "id": "sy-turkey-trade",
         "title": "Syria–Turkey merchandise trade statistics",
-        "finding": "No verifiable official landing page: TurkStat's foreign trade portal (veriportali.tuik.gov.tr) renders only a JavaScript notice via WebFetch, and the Turkish Ministry of Trade Syria page returns 404; Syria's own trade statistics are not bilateral."
+        "finding": "Still not found. On the Turkish side, the Ministry of Trade's foreign-trade statistics page (https://ticaret.gov.tr/istatistikler/dis-ticaret-istatistikleri) was retrieved but hosts no country-level files - it only redirects users to TurkStat's query system, whose landing pages sit on veriportali.tuik.gov.tr and serve a JavaScript-required stub; the Ministry's Syria country page (ticaret.gov.tr/yurtdisi-teskilati/orta-dogu/suriye) returns 404, and the circulating 'Suriye Ulke Profili' PDFs are hosted by chambers of commerce (aso.org.tr, deik.org.tr), not by the Ministry. On the Syrian side, cbssyr.sy is unreachable and Syria publishes no bilateral trade product. No single official document covers this relationship as a series.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
     "not_a_publication_note": "These 17 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."

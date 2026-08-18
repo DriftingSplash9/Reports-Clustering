@@ -198,7 +198,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched SAMA 'Monthly Bulletin Statistics' page, which states it covers external sector data including balance of payments and international investment position."
+      "_url_evidence": "Fetched SAMA 'Monthly Bulletin Statistics' page, which states it covers external sector data including balance of payments and international investment position.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "sa-batch1-meta",
@@ -252,7 +253,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched GASTAT document landing page for 'Oil and Gas Statistics 2025 EN.pdf', GASTAT's official oil and gas production publication."
+      "_url_evidence": "Fetched GASTAT document landing page for 'Oil and Gas Statistics 2025 EN.pdf', GASTAT's official oil and gas production publication.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "sa-oil-exports",
@@ -281,7 +283,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Same GASTAT 'Oil and Gas Statistics 2025' publication also carries crude oil export volumes; no separate GASTAT oil-export product page exists."
+      "_url_evidence": "Same GASTAT 'Oil and Gas Statistics 2025' publication also carries crude oil export volumes; no separate GASTAT oil-export product page exists.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "sa-oil-revenue",
@@ -455,7 +458,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched SAMA 'Monthly Bulletin Statistics' page, described as containing monetary and financial statistics on banking activity, finance companies and interest rates."
+      "_url_evidence": "Fetched SAMA 'Monthly Bulletin Statistics' page, described as containing monetary and financial statistics on banking activity, finance companies and interest rates.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "sa-batch3-meta",
@@ -1136,7 +1140,12 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 15,
-      "still_missing": 17
+      "still_missing": 17,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -1225,7 +1234,36 @@
         "finding": "Not a publication: synthesised meta-node binding education, health and climate nodes."
       }
     ],
-    "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 17 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_note": "These 17 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
+    "url_partial_match": [
+      {
+        "id": "sa-bop",
+        "title": "Balance of Payments and external accounts",
+        "url": "https://www.sama.gov.sa/en-US/Statistics/Pages/MonthlyStatistics.aspx",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Fetched SAMA 'Monthly Bulletin Statistics' page, which states it covers external sector data including balance of payments and international investment position.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "sa-oil-production",
+        "title": "Crude oil production statistics",
+        "url": "https://www.stats.gov.sa/en/d/-oil-and-gas-statistics-2025-en-pdf",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Fetched GASTAT document landing page for 'Oil and Gas Statistics 2025 EN.pdf', GASTAT's official oil and gas production publication.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "sa-oil-exports",
+        "title": "Crude oil export statistics",
+        "url": "https://www.stats.gov.sa/en/d/-oil-and-gas-statistics-2025-en-pdf",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Same GASTAT 'Oil and Gas Statistics 2025' publication also carries crude oil export volumes; no separate GASTAT oil-export product page exists.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "sa-banking",
+        "title": "Banking system credit and asset-quality statistics",
+        "url": "https://www.sama.gov.sa/en-US/Statistics/Pages/MonthlyStatistics.aspx",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Fetched SAMA 'Monthly Bulletin Statistics' page, described as containing monetary and financial statistics on banking activity, finance companies and interest rates.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      }
+    ]
   }
 }

@@ -381,7 +381,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "FCSC statistical document page titled 'Oil and Gas' carrying national oil and gas production data for 2009-2024."
+      "_url_evidence": "FCSC statistical document page titled 'Oil and Gas' carrying national oil and gas production data for 2009-2024.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "ae-sovereign-funds",
@@ -555,7 +556,8 @@
         "External and GCC discussions"
       ],
       "_jurisdiction_level_original": "national / emirate",
-      "last_updated": null
+      "last_updated": null,
+      "_flagged_not_a_publication": true
     },
     {
       "id": "ae-tourism",
@@ -726,7 +728,8 @@
         "2026-08-15_UAE-batch6.json"
       ],
       "last_updated": null,
-      "_url_evidence": "Same FCSC 'Oil and Gas' statistics page (duplicate of ae-oil); ADNOC/SCAD publish no equivalent public oil production statistics page that could be retrieved."
+      "_url_evidence": "Same FCSC 'Oil and Gas' statistics page (duplicate of ae-oil); ADNOC/SCAD publish no equivalent public oil production statistics page that could be retrieved.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "ae-tourism-dubai",
@@ -1483,7 +1486,14 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 11,
-      "still_missing": 15
+      "still_missing": 15,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 0,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -1555,15 +1565,29 @@
         "id": "ae-energy-transition-framing",
         "title": "Energy transition and diversification framing",
         "finding": "Not a publication: system-level framing node linking hydrocarbons, investment and renewables."
-      }
-    ],
-    "url_unreachable_or_not_published": [
+      },
       {
         "id": "ae-ports",
         "title": "Ports and container throughput statistics",
-        "finding": "No eligible official page confirmed: DP World is a corporate publisher, dsc.gov.ae theme pages were unreachable via WebFetch (robots.txt errors), and neither FCSC 'Transport' nor SCAD 'Transport & Services' pages showed container throughput data."
+        "finding": "Still not found, and the item is partly ineligible: DP World, the source the item is derived from, is a corporate publisher. On the official side, the FCSC statistics index (https://fcsc.gov.ae/en-us/Pages/Statistics/Statistics.aspx) was retrieved and lists Transport 2013-2022 and Transport 2024 but exposes no hyperlinks to them, its UAE.STAT data explorer (uaestat.fcsc.gov.ae) is disallowed by robots.txt, and opendata.fcsc.gov.ae fails its robots.txt fetch. SCAD (scad.gov.ae) is reachable and its Transport & Services theme was retrieved, but the indicators tab returns 'No Indicators Available Yet' and the only products are Excel workbooks (e.g. Transport Statistics-Annually 2024) whose contents could not be read to verify any container/TEU or cargo-throughput table - and they would in any case cover Abu Dhabi only, not Jebel Ali. Dubai Statistics Center (dsc.gov.ae) serves only a login interface. No official UAE container-throughput product could be retrieved and verified."
       }
     ],
-    "not_a_publication_note": "These 14 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_note": "These 14 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
+    "url_partial_match": [
+      {
+        "id": "ae-oil",
+        "title": "Crude oil production and export statistics",
+        "url": "https://fcsc.gov.ae/uae-stats-document/oil-and-gas/",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. FCSC statistical document page titled 'Oil and Gas' carrying national oil and gas production data for 2009-2024.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "ae-oil-production",
+        "title": "Crude oil and condensate production and export statistics",
+        "url": "https://fcsc.gov.ae/uae-stats-document/oil-and-gas/",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Same FCSC 'Oil and Gas' statistics page (duplicate of ae-oil); ADNOC/SCAD publish no equivalent public oil production statistics page that could be retrieved.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      }
+    ]
   }
 }

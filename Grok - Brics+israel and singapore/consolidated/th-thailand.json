@@ -594,7 +594,8 @@
       ],
       "releases_per_year": 1,
       "last_updated": null,
-      "_url_evidence": "NESDC Gross Regional and Provincial Product (chain volume measures) series page with reports and Excel time series covering all provinces including Bangkok; no province-specific landing page exists."
+      "_url_evidence": "NESDC Gross Regional and Provincial Product (chain volume measures) series page with reports and Excel time series covering all provinces including Bangkok; no province-specific landing page exists.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "th-provincial-structure",
@@ -1053,7 +1054,8 @@
       ],
       "releases_per_year": 1,
       "last_updated": null,
-      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Chonburi; NESDC publishes no per-province landing page."
+      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Chonburi; NESDC publishes no per-province landing page.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "th-grdp-rayong",
@@ -1083,7 +1085,8 @@
       ],
       "releases_per_year": 1,
       "last_updated": null,
-      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Rayong; NESDC publishes no per-province landing page."
+      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Rayong; NESDC publishes no per-province landing page.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "th-grdp-chiangmai",
@@ -1112,7 +1115,8 @@
       ],
       "releases_per_year": 1,
       "last_updated": null,
-      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Chiang Mai; NESDC publishes no per-province landing page."
+      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Chiang Mai; NESDC publishes no per-province landing page.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "th-grdp-phuket",
@@ -1141,7 +1145,8 @@
       ],
       "releases_per_year": 1,
       "last_updated": null,
-      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Phuket; NESDC publishes no per-province landing page."
+      "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Phuket; NESDC publishes no per-province landing page.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "th-batch7-meta",
@@ -1331,7 +1336,12 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 18,
-      "still_missing": 15
+      "still_missing": 15,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -1410,7 +1420,43 @@
         "finding": "Not a distinct official publication - a derived estimate compiled from budget documents and SIPRI, which is not a government, central-bank, statistics-office or multilateral source; no Thai official military-expenditure series page found."
       }
     ],
-    "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 15 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_note": "These 15 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
+    "url_partial_match": [
+      {
+        "id": "th-grdp-bangkok",
+        "title": "Bangkok Gross Regional / Provincial Product",
+        "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
+        "caveat": "Shared with 4 other nodes in this file — the URL is the right official series page but not specific to this node. NESDC Gross Regional and Provincial Product (chain volume measures) series page with reports and Excel time series covering all provinces including Bangkok; no province-specific landing page exists.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "th-grdp-chonburi",
+        "title": "Chonburi Gross Provincial Product",
+        "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
+        "caveat": "Shared with 4 other nodes in this file — the URL is the right official series page but not specific to this node. NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Chonburi; NESDC publishes no per-province landing page.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "th-grdp-rayong",
+        "title": "Rayong Gross Provincial Product",
+        "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
+        "caveat": "Shared with 4 other nodes in this file — the URL is the right official series page but not specific to this node. NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Rayong; NESDC publishes no per-province landing page.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "th-grdp-chiangmai",
+        "title": "Chiang Mai Gross Provincial Product",
+        "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
+        "caveat": "Shared with 4 other nodes in this file — the URL is the right official series page but not specific to this node. NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Chiang Mai; NESDC publishes no per-province landing page.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "th-grdp-phuket",
+        "title": "Phuket Gross Provincial Product",
+        "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
+        "caveat": "Shared with 4 other nodes in this file — the URL is the right official series page but not specific to this node. NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Phuket; NESDC publishes no per-province landing page.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      }
+    ]
   }
 }

@@ -227,7 +227,7 @@
       "jurisdiction_level": "federal",
       "region": "Afghanistan",
       "description": "Statistics on crop and livestock production. Agriculture is the backbone of rural livelihoods and food security; wheat is the dominant staple. Production is highly sensitive to drought, water availability and input constraints.",
-      "url": null,
+      "url": "https://www.mail.gov.af/dr/reports",
       "domains": [
         "agriculture",
         "proposed:crops",
@@ -245,7 +245,9 @@
         "Poverty and rural discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "MAIL reports index listing 'گزارش سالانه زراعتی' (Annual Agriculture Report) editions with per-province crop area, yield and production tables, plus separate wheat and rice production reports. Found by Grok; independently re-fetched and confirmed by Claude 2026-08-18 (index shows 1403 and 1404 annual reports, wheat 1404, rice 1404).",
+      "_url_route": "grok:on-site-search"
     },
     {
       "id": "af-wheat",
@@ -779,7 +781,6 @@
       "af-nsia",
       "af-national-accounts",
       "af-batch1-meta",
-      "af-agriculture",
       "af-remittances",
       "af-batch2-meta",
       "af-women-exclusion",
@@ -790,7 +791,7 @@
       "af-balkh",
       "af-batch5-meta"
     ],
-    "reports_without_url_count": 13,
+    "reports_without_url_count": 12,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
@@ -880,7 +881,14 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 10,
-      "still_missing": 13
+      "still_missing": 13,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 0,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -943,12 +951,8 @@
       {
         "id": "af-national-accounts",
         "title": "National Accounts of Afghanistan (GDP)",
-        "finding": "No official national accounts/GDP page confirmed: nsia.gov.af is unreachable via WebFetch, and Da Afghanistan Bank's Real Sector Statistics page was fetched and contains only a CPI inflation file, no GDP or national accounts."
-      },
-      {
-        "id": "af-agriculture",
-        "title": "Agriculture production statistics",
-        "finding": "No official crop/livestock production statistics page found: MAIL's reports page (mail.gov.af/en/reports) was fetched and contains only project safeguard and achievement documents ending in 2021, mail.gov.af/en/statistics returns 404, and NSIA is unreachable via WebFetch."
+        "finding": "Still not found. NSIA is unreachable by any hostname or port: nsia.gov.af, www.nsia.gov.af and nsia.gov.af:8443 all fail at the robots.txt stage with 'certificate verify failed: unable to get local issuer certificate', so no fetch can proceed. Alternative official hosts were checked and ruled out: invest.gov.af (which had mirrored the Statistical Yearbook) no longer resolves; Da Afghanistan Bank's statistics index (https://www.dab.gov.af/statistics) lists only exchange rates, currency auctions, capital notes, external-sector, monetary/fiscal and real-sector pages, and its Real Sector page carries only CPI, while https://www.dab.gov.af/Financial-Statistics is banking-sector-only with no macro aggregates. old.dab.gov.af's Real Sector page describes GDP compilation but publishes no data or files.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
     "not_a_publication_note": "These 11 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."

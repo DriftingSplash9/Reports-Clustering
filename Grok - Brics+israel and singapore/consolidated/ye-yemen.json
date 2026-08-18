@@ -137,7 +137,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Central Bank of Yemen (Aden) 'Monetary and Financial Developments' monthly report series; the May 2026 issue on this page reports the general consumer price index rising from 98.19 (April 2026) to 100.05 (May 2026)."
+      "_url_evidence": "Central Bank of Yemen (Aden) 'Monetary and Financial Developments' monthly report series; the May 2026 issue on this page reports the general consumer price index rising from 98.19 (April 2026) to 100.05 (May 2026).",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "ye-cby",
@@ -194,7 +195,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Central Bank of Yemen annual report series page (2020-2025 editions); the 2024 report linked here contains Chapter Four 'ميزان المدفوعات' (Balance of Payments) with an overall balance deficit of ~USD 774 million and current account -26.6% of GDP."
+      "_url_evidence": "Central Bank of Yemen annual report series page (2020-2025 editions); the 2024 report linked here contains Chapter Four 'ميزان المدفوعات' (Balance of Payments) with an overall balance deficit of ~USD 774 million and current account -26.6% of GDP.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "ye-batch1-meta",
@@ -306,7 +308,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBY (Aden) monthly report series; the May 2026 issue gives the average rial rate at 1,562.49 YER/USD with a 2017-2026 history table. Caveat: as written the item spans a divided institution - this covers only the IRG/Aden rate, and no single official publisher issues both the Aden and Sana'a rates."
+      "_url_evidence": "CBY (Aden) monthly report series; the May 2026 issue gives the average rial rate at 1,562.49 YER/USD with a 2017-2026 history table. Caveat: as written the item spans a divided institution - this covers only the IRG/Aden rate, and no single official publisher issues both the Aden and Sana'a rates.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "ye-batch2-meta",
@@ -478,7 +481,8 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Central Bank of Yemen annual report series page; the 2024 report contains Chapter Three 'المالية العامة' (Public Finance) alongside the external sector chapter, the only regularly published official fiscal accounts. Covers IRG-controlled fiscal space only."
+      "_url_evidence": "Central Bank of Yemen annual report series page; the 2024 report contains Chapter Three 'المالية العامة' (Public Finance) alongside the external sector chapter, the only regularly published official fiscal accounts. Covers IRG-controlled fiscal space only.",
+      "_url_match": "series-level (corroborated)"
     },
     {
       "id": "ye-education",
@@ -948,7 +952,12 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 14,
-      "still_missing": 13
+      "still_missing": 13,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -1017,7 +1026,36 @@
         "finding": "Not a publication - synthesised meta-node binding other corpus items."
       }
     ],
-    "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 13 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_note": "These 13 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
+    "url_partial_match": [
+      {
+        "id": "ye-cpi",
+        "title": "Consumer Price Index and inflation statistics",
+        "url": "https://www.cby-ye.com/pages/28",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Central Bank of Yemen (Aden) 'Monetary and Financial Developments' monthly report series; the May 2026 issue on this page reports the general consumer price index rising from 98.19 (April 2026) to 100.05 (May 2026).",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "ye-bop",
+        "title": "Balance of Payments and external accounts",
+        "url": "https://www.cby-ye.com/pages/31",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Central Bank of Yemen annual report series page (2020-2025 editions); the 2024 report linked here contains Chapter Four 'ميزان المدفوعات' (Balance of Payments) with an overall balance deficit of ~USD 774 million and current account -26.6% of GDP.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "ye-exchange-rate",
+        "title": "Dual exchange-rate and rial statistics",
+        "url": "https://www.cby-ye.com/pages/28",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. CBY (Aden) monthly report series; the May 2026 issue gives the average rial rate at 1,562.49 YER/USD with a 2017-2026 history table. Caveat: as written the item spans a divided institution - this covers only the IRG/Aden rate, and no single official publisher issues both the Aden and Sana'a rates.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      },
+      {
+        "id": "ye-fiscal",
+        "title": "Fiscal balance and revenue statistics",
+        "url": "https://www.cby-ye.com/pages/31",
+        "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Central Bank of Yemen annual report series page; the 2024 report contains Chapter Three 'المالية العامة' (Public Finance) alongside the external sector chapter, the only regularly published official fiscal accounts. Covers IRG-controlled fiscal space only.",
+        "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
+      }
+    ]
   }
 }

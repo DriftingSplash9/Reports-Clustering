@@ -628,7 +628,8 @@
       ],
       "_shape": "own-cadence",
       "_notes": "Critical sustainability node under extreme opacity. Independent estimates place the combined public + PDVSA external debt in the low-to-mid hundreds of billions of USD — a multiple of GDP. Restructuring is on the policy agenda.",
-      "last_updated": null
+      "last_updated": null,
+      "_flagged_not_a_publication": true
     },
     {
       "id": "ve-seniat",
@@ -694,7 +695,9 @@
       ],
       "_shape": "own-cadence",
       "_notes": "Complementary independent source to ENCOVI. Frequently cited for state-level service and health-system deficiency rates; helps fill geographic detail that official statistics do not provide.",
-      "last_updated": null
+      "last_updated": null,
+      "_flagged_not_a_publication": true,
+      "_not_a_publication_reason": "Grok: humvenezuela.com serves only a WordPress placeholder, and the publisher is a civil-society coalition, not an eligible official body. Ineligible publisher, not merely unreachable."
     },
     {
       "id": "ve-ofac-sanciones",
@@ -935,7 +938,8 @@
         "Export-destination statistics",
         "High-level bilateral visit and agreement reporting"
       ],
-      "last_updated": null
+      "last_updated": null,
+      "_flagged_not_a_publication": true
     },
     {
       "id": "ve-gas-loran-cardon",
@@ -1267,46 +1271,56 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 7,
-      "still_missing": 7
-    },
-    "not_a_publication": [],
-    "url_unreachable_or_not_published": [
-      {
-        "id": "ve-bonos",
-        "title": "Bonos y transferencias monetarias del Estado",
-        "finding": "The government's Sistema Patria portal (patria.org.ve), the only official channel for bonos/transfers, does not respond (connection reset / 503 / timeout); no other official landing page for the transfer programme could be retrieved."
-      },
-      {
-        "id": "ve-faja-orinoco",
-        "title": "Faja Petrolífera del Orinoco — resource base",
-        "finding": "The only publisher-domain pages (pdvsa.com Faja articles) are unreachable because pdvsa.com has no DNS record; Ministerio de Petróleo (www.minpet.gob.ve) serves an invalid TLS certificate (hostname mismatch) and could not be fetched."
-      },
-      {
-        "id": "ve-seniat",
-        "title": "SENIAT — tax administration",
-        "finding": "seniat.gob.ve resolves (200.11.221.4) but every request — homepage and the statistics path — returns HTTP 503 'upstream connect error ... connection timeout'; the site could not be retrieved, so no URL is recorded."
-      },
-      {
-        "id": "ve-humvenezuela",
-        "title": "HumVenezuela — independent living-conditions diagnostics",
-        "finding": "humvenezuela.com is currently serving a WordPress 'coming soon/maintenance' placeholder: the homepage, /informes/ and /datos/ all return the identical 7.3 KB stub with only the logo and no report listing, so no landing page could be confirmed."
+      "still_missing": 7,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 0,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
-    ],
-    "url_no_official_product_found": [
-      {
-        "id": "ve-pdvsa",
-        "title": "Petróleos de Venezuela (PDVSA)",
-        "finding": "PDVSA's official site pdvsa.com no longer resolves — authoritative DNS returns no A record for pdvsa.com or www.pdvsa.com, and all fetch attempts fail; no substitute mirror used."
-      },
+    },
+    "not_a_publication": [
       {
         "id": "ve-deuda-publica",
         "title": "Deuda pública / Public and PDVSA debt",
-        "finding": "No official Venezuelan debt-stock series is published; the Ministry of Economy/Finance site has no debt statistics product page and the World Bank IDS Venezuela country page (datatopics.worldbank.org/debt/ids/country/VEN) returns an error page rather than data."
+        "finding": "Still not found, and arguably ineligible: Venezuela has not published an official public/PDVSA debt-stock series for years. The Ministry of Economy and Finance domain (mef.gob.ve) does not resolve, and the BCV (bcv.org.ve) cannot be fetched at all because its TLS chain fails certificate verification at the robots.txt stage. The figures circulating are independent estimates, not a government product."
       },
       {
         "id": "ve-relacion-india-turquia",
         "title": "Relaciones comerciales con India y Turquía",
-        "finding": "No official Indian, Turkish or Venezuelan publication on these bilateral oil-trade relationships could be retrieved — only news and commercial data aggregators; India's PPAC/Commerce sites offer no Venezuela-specific product page."
+        "finding": "Ineligible rather than unfindable. This item is a set of bilateral oil-trade relationships (Venezuela-India, Venezuela-Turkey), not a single published document or statistical series. No Venezuelan, Indian or Turkish government publication covers it as one product; the only sources are news reports and commercial cargo-tracking aggregators, all excluded."
+      },
+      {
+        "id": "ve-humvenezuela",
+        "title": "HumVenezuela — independent living-conditions diagnostics",
+        "finding": "Grok: humvenezuela.com serves only a WordPress placeholder, and the publisher is a civil-society coalition, not an eligible official body. Ineligible publisher, not merely unreachable."
+      }
+    ],
+    "url_unreachable_or_not_published": [
+      {
+        "id": "ve-bonos",
+        "title": "Bonos y transferencias monetarias del Estado",
+        "finding": "Still not found. patria.org.ve (the Sistema Patria portal, the only official channel publishing the bonos/transfers) could not be retrieved on this attempt either - the robots.txt fetch times out on connect, so the host is effectively unreachable. No other Venezuelan government page for the transfer programme exists.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
+      },
+      {
+        "id": "ve-faja-orinoco",
+        "title": "Faja Petrolífera del Orinoco — resource base",
+        "finding": "Still not found. pdvsa.com has no DNS record (name resolution fails). The Ministry of Petroleum: www.minpet.gob.ve serves a certificate that is not valid for that hostname (TLS hostname mismatch) and minpet.gob.ve does not resolve at all. Both publisher domains are dead.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
+      },
+      {
+        "id": "ve-seniat",
+        "title": "SENIAT — tax administration",
+        "finding": "Still not found. seniat.gob.ve and www.seniat.gob.ve both fail at the robots.txt stage with a connection timeout; the host resolves but never completes a request. No SENIAT statistics page could be retrieved.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
+      },
+      {
+        "id": "ve-pdvsa",
+        "title": "Petróleos de Venezuela (PDVSA)",
+        "finding": "Still not found. pdvsa.com and www.pdvsa.com have no DNS A record; every fetch fails with 'Name or service not known'. The domain is permanently dead and no mirror is acceptable.",
+        "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
     "not_a_publication_note": "These 0 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."

@@ -175,7 +175,7 @@
       "jurisdiction_level": "federal",
       "region": "Myanmar",
       "description": "BOP and external-sector statistics. Current-account dynamics, limited FDI, and large errors and omissions reflecting informal and unrecorded cross-border activity are recurring features.",
-      "url": null,
+      "url": "https://www.csostat.gov.mm/FileUpload/cso/FileDownload/MSYB%202024%20-%20Part-3.pdf",
       "domains": [
         "proposed:bop",
         "proposed:external"
@@ -192,7 +192,9 @@
         "Trade and sanctions-related discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "Retrieved and read: Myanmar Statistical Yearbook 2024, Part 3 (Central Statistical Organization). It contains Chapter 13 'Foreign Trade and Investment', whose Table 13.15 is 'Balance of Payments' for FY2019/2020 to FY2023/2024, with current-account items (exports f.o.b., imports f.o.b., trade balance, services, primary income, secondary income) and financial-account components. This is an official national BOP presentation, obtained after the NSDP's designated URL (cbm.gov.mm/content/3905) again failed - cbm.gov.mm returns HTTP 503 on robots.txt for both www and bare hostnames.",
+      "_url_route": "successor publisher - CSO publications index (csostat.gov.mm) after the NSDP-designated CBM page stayed unreachable"
     },
     {
       "id": "mm-batch1-meta",
@@ -488,7 +490,7 @@
       "jurisdiction_level": "federal",
       "region": "Myanmar",
       "description": "Labour-force participation, employment-to-population ratio and unemployment rates. Participation is in the low-60s percent range; unemployment is moderate by modelled estimates, but informal employment and underemployment are widespread and conflict has disrupted livelihoods.",
-      "url": null,
+      "url": "https://www.csostat.gov.mm/FileUpload/cso/FileDownload/MSYB%202024%20-%20Part-2.pdf",
       "domains": [
         "labour",
         "proposed:employment",
@@ -506,7 +508,9 @@
         "Agriculture and informal-economy discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "Retrieved and read: Myanmar Statistical Yearbook 2024, Part 2 (Central Statistical Organization), Chapter 7 'Labour and Employment' (pp.265-282). It carries labour-force participation rates by age group, the unemployment rate (3.69% in 2023), employment through the 91 Labour Exchange Offices (936,000+ registrations in 2023), overseas employment (219,701 in 2023-24), government/private employment splits by sex and by state/region, and social-security registrations, with series running 2010-2024. This is a national official product, replacing the ILOSTAT country profile that returns HTTP 403 to every fetch.",
+      "_url_route": "national publisher instead of ILO - CSO publications index (csostat.gov.mm)"
     },
     {
       "id": "mm-fiscal",
@@ -754,16 +758,14 @@
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
     "reports_without_url": [
       "mm-cbm",
-      "mm-bop",
       "mm-batch1-meta",
       "mm-batch2-meta",
       "mm-jade",
       "mm-batch3-meta",
-      "mm-labour",
       "mm-batch4-meta",
       "mm-batch5-meta"
     ],
-    "reports_without_url_count": 9,
+    "reports_without_url_count": 7,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
@@ -849,7 +851,9 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 14,
-      "still_missing": 9
+      "still_missing": 9,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 2
     },
     "not_a_publication": [
       {
@@ -888,18 +892,7 @@
         "finding": "Not a publication - synthesised 'meta-node' for the displacement/minerals/education layer."
       }
     ],
-    "url_unreachable_or_not_published": [
-      {
-        "id": "mm-bop",
-        "title": "Balance of Payments and external accounts",
-        "finding": "Myanmar's National Summary Data Page points Balance of Payments to https://www.cbm.gov.mm/content/3905, but that page is domain unreachable via WebFetch (robots.txt 503); no other official Myanmar BOP landing page could be retrieved and confirmed."
-      },
-      {
-        "id": "mm-labour",
-        "title": "Labour force and employment statistics",
-        "finding": "The correct target, ILOSTAT's Myanmar country profile (ilostat.ilo.org/data/country-profiles/?ref_area=MMR, linked from ILO's own Myanmar page), returns HTTP 403 to WebFetch on every attempt; no Myanmar labour force survey page on ilo.org could be retrieved and confirmed, and MMSIS's labour indicators cover only overseas employment."
-      }
-    ],
+    "url_unreachable_or_not_published": [],
     "not_a_publication_note": "These 7 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
   }
 }

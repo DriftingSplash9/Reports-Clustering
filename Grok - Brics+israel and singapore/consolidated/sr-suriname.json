@@ -807,7 +807,9 @@
       "_shape": "own-cadence",
       "_notes": "Institutional reform node. Continuously cited in IMF and domestic poverty analysis as the main attempt to improve the efficiency and targeting of transfers before the oil windfall arrives.",
       "last_updated": null,
-      "part_of": "sr-proteccion-social"
+      "part_of": "sr-proteccion-social",
+      "_flagged_not_a_publication": true,
+      "_not_a_publication_reason": "Grok, agreeing with Claude: gov.sr Ministry of Social Affairs carries no National Social Protection Strategy text — an ILO-supported process exists but no published document."
     },
     {
       "id": "sr-pib-no-mineria",
@@ -1212,7 +1214,7 @@
       "jurisdiction_level": "federal",
       "region": "Suriname",
       "description": "2024 PFM (Comptabiliteitswet) legislation that embeds two binding fiscal rules: (i) a five-year target for public debt net of SSFS assets, and (ii) annual primary-expenditure ceilings consistent with that debt target.",
-      "url": null,
+      "url": "https://gov.sr/wp-content/uploads/2024/12/SB-2024-no-178-Wet-van-30-december-2024-houde-241231-164608.pdf",
       "domains": [
         "proposed:public-finance",
         "proposed:fiscal-rule",
@@ -1228,7 +1230,9 @@
         "IMF and rating-agency assessments of fiscal credibility",
         "SSFS operationalization discussions"
       ],
-      "last_updated": null
+      "last_updated": null,
+      "_url_evidence": "Retrieved and read: the Comptabiliteitswet 2024, Wet van 30 december 2024, S.B. 2024 no. 178, hosted on the Government of Suriname's own site (gov.sr). Article 2 lid 2 establishes the two numeric fiscal rules the item describes - a ceiling on state debt at the end of the multi-year period net of Savings and Stabilisation Fund financial assets, and annual ceilings on primary expenditure consistent with that debt path. This is the law itself, not the 2026 amending bill that dna.sr surfaces.",
+      "_url_route": "alternate official host - the law is published on gov.sr rather than dna.sr"
     },
     {
       "id": "sr-psc-fiscal",
@@ -1727,13 +1731,12 @@
       "sr-aov",
       "sr-akb",
       "sr-puerto-paramaribo",
-      "sr-pfm-rules",
       "sr-ssfs-operationalization",
       "sr-net-debt-target",
       "sr-mineral-revenue-definition",
       "sr-intergenerational"
     ],
-    "reports_without_url_count": 16,
+    "reports_without_url_count": 15,
     "edges_without_evidence_url": [
       "sr-ingresos-petroleros -> sr-staatsolie",
       "sr-granmorgu-fiscal -> sr-block-58",
@@ -1764,7 +1767,14 @@
       "date": "2026-08-18",
       "method": "Per-country web research. A URL was accepted only when the page was actually retrieved and its content confirmed the publication. Publisher homepages, Wikipedia, news, aggregators and mirrors were rejected. Confirmations are stored on each node as _url_evidence.",
       "urls_found": 8,
-      "still_missing": 16
+      "still_missing": 16,
+      "retry_date": "2026-08-18",
+      "retry_recovered": 1,
+      "grok_pass": {
+        "date": "2026-08-18",
+        "asked": "75 items (34 with no URL, 41 with only a series-level URL)",
+        "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
+      }
     },
     "not_a_publication": [
       {
@@ -1836,18 +1846,11 @@
         "id": "sr-intergenerational",
         "title": "Intergenerational equity objective",
         "finding": "Not a publication - a stated policy objective/framing node, not an official document."
-      }
-    ],
-    "url_unreachable_or_not_published": [
+      },
       {
         "id": "sr-proteccion-reforma",
         "title": "Social protection reform / National Social Protection Strategy",
-        "finding": "Not found - the Ministry of Social Affairs and Housing pages on gov.sr (documents, policy areas, services) were retrieved and contain no National Social Protection Strategy or reform document."
-      },
-      {
-        "id": "sr-pfm-rules",
-        "title": "Public Financial Management Law 2024 — fiscal rules",
-        "finding": "Not found - the Comptabiliteitswet 2024 (S.B. 2024 no. 178) has no landing page on dna.sr: the law lists (wetten-na-2005, wijzigingen-na-2005) only carry the 2015 and 2019 versions, and a dna.sr site search returns only the page for the 2026 bill amending it, not the 2024 law itself."
+        "finding": "Grok, agreeing with Claude: gov.sr Ministry of Social Affairs carries no National Social Protection Strategy text — an ILO-supported process exists but no published document."
       }
     ],
     "not_a_publication_note": "These 14 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 3 dependency edges in this file touch one."
