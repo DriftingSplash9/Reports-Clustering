@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "country": "Venezuela",
+    "code": "VE",
+    "archived_on": "2026-08-18",
+    "why": "Removed from the country file: web-checked and confirmed not to be published documents — synthesised meta/framing nodes, geographic areas, industries, projects, institutions. Banned by data spec 2b/2c. Kept here in full so nothing is lost."
+  },
+  "reports": [
+    {
+      "id": "ve-deuda-publica",
+      "title": "Deuda pública / Public and PDVSA debt",
+      "publisher": "independent estimates / government",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Stock of public and PDVSA external debt. Subject of restructuring efforts; official stock series have not been regularly published for years.",
+      "releases_per_year": 1,
+      "url": null,
+      "domains": [
+        "proposed:public-finance",
+        "proposed:debt",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Venezuela-batch3-regions-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Critical sustainability node under extreme opacity. Independent estimates place the combined public + PDVSA external debt in the low-to-mid hundreds of billions of USD — a multiple of GDP. Restructuring is on the policy agenda.",
+      "last_updated": null,
+      "_flagged_not_a_publication": true
+    },
+    {
+      "id": "ve-humvenezuela",
+      "title": "HumVenezuela — independent living-conditions diagnostics",
+      "publisher": "HumVenezuela / civil-society consortium",
+      "country": "VE",
+      "jurisdiction_level": "federal",
+      "region": "Venezuela",
+      "description": "Independent multi-source diagnostic platform that compiles and publishes state-level indicators of humanitarian and living-condition stress (services, health, food, etc.).",
+      "releases_per_year": 1,
+      "url": null,
+      "domains": [
+        "proposed:living-conditions",
+        "proposed:humanitarian",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Venezuela-batch3-regions-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complementary independent source to ENCOVI. Frequently cited for state-level service and health-system deficiency rates; helps fill geographic detail that official statistics do not provide.",
+      "last_updated": null,
+      "_flagged_not_a_publication": true,
+      "_not_a_publication_reason": "Grok: humvenezuela.com serves only a WordPress placeholder, and the publisher is a civil-society coalition, not an eligible official body. Ineligible publisher, not merely unreachable."
+    },
+    {
+      "id": "ve-relacion-india-turquia",
+      "title": "Relaciones comerciales con India y Turquía",
+      "publisher": "independent / government",
+      "country": "VE",
+      "jurisdiction_level": "international",
+      "region": "Venezuela / India / Turkey",
+      "description": "Emerging and re-activated oil-trade relationships. India has reappeared as a significant buyer under eased sanctions conditions; Turkey is a recurring political and commercial interlocutor.",
+      "url": null,
+      "domains": [
+        "proposed:trade",
+        "proposed:oil",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Venezuela-batch4-supranational.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Diversification nodes. India in particular has absorbed material volumes in recent periods as sanctions carve-outs and commercial pragmatism reopened previously constrained channels.",
+      "_referenced_by": [
+        "Export-destination statistics",
+        "High-level bilateral visit and agreement reporting"
+      ],
+      "last_updated": null,
+      "_flagged_not_a_publication": true
+    }
+  ],
+  "dependencies": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": null,
+      "basis": "HumVenezuela diagnostics provide state-level detail on service and health-system deficiencies.",
+      "source_report_id": "ve-humvenezuela",
+      "target_report_id": "ve-servicios-publicos",
+      "_batch": [
+        "2026-08-13_Venezuela-batch3-regions-health-fiscal.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "ve-deuda-publica",
+      "title": "Deuda pública / Public and PDVSA debt",
+      "finding": "Still not found, and arguably ineligible: Venezuela has not published an official public/PDVSA debt-stock series for years. The Ministry of Economy and Finance domain (mef.gob.ve) does not resolve, and the BCV (bcv.org.ve) cannot be fetched at all because its TLS chain fails certificate verification at the robots.txt stage. The figures circulating are independent estimates, not a government product."
+    },
+    {
+      "id": "ve-relacion-india-turquia",
+      "title": "Relaciones comerciales con India y Turquía",
+      "finding": "Ineligible rather than unfindable. This item is a set of bilateral oil-trade relationships (Venezuela-India, Venezuela-Turkey), not a single published document or statistical series. No Venezuelan, Indian or Turkish government publication covers it as one product; the only sources are news reports and commercial cargo-tracking aggregators, all excluded."
+    },
+    {
+      "id": "ve-humvenezuela",
+      "title": "HumVenezuela — independent living-conditions diagnostics",
+      "finding": "Grok: humvenezuela.com serves only a WordPress placeholder, and the publisher is a civil-society coalition, not an eligible official body. Ineligible publisher, not merely unreachable."
+    }
+  ]
+}

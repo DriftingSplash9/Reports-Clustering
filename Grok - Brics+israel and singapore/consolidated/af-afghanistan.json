@@ -14,7 +14,7 @@
       "2026-08-15_Afghanistan-batch5.json"
     ],
     "counts": {
-      "reports": 25,
+      "reports": 14,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -25,34 +25,6 @@
   },
   "reports": [
     {
-      "id": "af-nsia",
-      "title": "National Statistics and Information Authority (NSIA) institutional core",
-      "publisher": "National Statistics and Information Authority",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Primary national statistical office under the de facto authorities, responsible for censuses, surveys, national accounts, prices, demographic and multi-domain socio-economic statistics where published.",
-      "url": null,
-      "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
-      ],
-      "_cadence_original": "continuous / limited",
-      "_batch": [
-        "2026-08-15_Afghanistan-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Foundational institutional node. Data continuity, coverage and independence are severely constrained.",
-      "_referenced_by": [
-        "All major Afghan statistical series",
-        "International monitoring and humanitarian analysis",
-        "Development assessments"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "af-population",
       "title": "Population census and estimates",
       "publisher": "NSIA / UN-aligned",
@@ -62,8 +34,7 @@
       "description": "Population estimates. Population is approximately 43–45 million; the age structure is very young and rapid population growth continues to pressure per-capita outcomes.",
       "url": "https://www.unfpa.org/data/world-population/AF",
       "domains": [
-        "population",
-        "proposed:demography"
+        "population"
       ],
       "_cadence_original": "estimates",
       "_batch": [
@@ -78,7 +49,10 @@
       ],
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
-      "_url_evidence": "UNFPA World Population Dashboard country page for Afghanistan; fetched page shows total population 43,800,000 (2025) and the 0-14 / 15-64 / 65+ age structure, matching the item's 43-45 million young-age-structure description. NSIA's own site is unreachable via WebFetch."
+      "_url_evidence": "UNFPA World Population Dashboard country page for Afghanistan; fetched page shows total population 43,800,000 (2025) and the 0-14 / 15-64 / 65+ age structure, matching the item's 43-45 million young-age-structure description. NSIA's own site is unreachable via WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "UNFPA World Population Dashboard for Afghanistan states the figures 'come from UNFPA and fellow UN agencies, and are updated annually'.",
+      "releases_per_year": 1
     },
     {
       "id": "af-national-accounts",
@@ -90,9 +64,7 @@
       "description": "Official and compiled national accounts (GDP). The economy contracted sharply after 2021; recent fiscal years show modest real growth but per-capita outcomes remain under pressure from population growth and structural constraints.",
       "url": null,
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "annual / fiscal-year",
       "_batch": [
@@ -118,8 +90,6 @@
       "description": "CPI and inflation rates. Price dynamics have moderated relative to the immediate post-2021 shock but remain sensitive to exchange-rate, import and supply conditions.",
       "url": "https://dab.gov.af/Inflation-Reports-(Monthly)",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_cadence_original": "monthly / periodic",
@@ -135,7 +105,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Da Afghanistan Bank's Monthly Inflation Report series page, fetched and confirmed to list 19 named monthly inflation reports (Jan 2020 - Jul 2021); note the series stopped in July 2021 and NSIA's CPI bulletin site is unreachable via WebFetch."
+      "_url_evidence": "Da Afghanistan Bank's Monthly Inflation Report series page, fetched and confirmed to list 19 named monthly inflation reports (Jan 2020 - Jul 2021); note the series stopped in July 2021 and NSIA's CPI bulletin site is unreachable via WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page is titled 'Inflation Reports (Monthly)' and lists one report per calendar month from January 2020 to July 2021. DORMANT: the series stops at July 2021 with nothing published since, though DAB's homepage still carries an inflation figure ('Last updated: 22 July 2026').",
+      "releases_per_year": 12
     },
     {
       "id": "af-dab",
@@ -147,9 +120,7 @@
       "description": "Central bank responsible for monetary policy, foreign-exchange management and key macro-financial statistics. Publishes exchange rates, inflation references and limited monetary series.",
       "url": "https://www.dab.gov.af/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
+        "monetary-policy"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -163,7 +134,9 @@
         "Financial stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "Da Afghanistan Bank homepage is a live institutional portal - a rolling exchange-rate table ('Last updated: 18 August 2026'), an inflation figure, news items and a periodical magazine - rather than a single publication with a discrete release cycle."
     },
     {
       "id": "af-bop",
@@ -175,9 +148,7 @@
       "description": "BOP and external-sector statistics where available. Remittances, limited formal trade, humanitarian inflows and large informal/unrecorded flows are structural features under current conditions.",
       "url": "https://dab.gov.af/External-Sector-Statistics1",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:remittances"
+        "external-sector"
       ],
       "_cadence_original": "periodic / limited",
       "_batch": [
@@ -192,32 +163,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Da Afghanistan Bank External Sector Statistics page, fetched and confirmed to host 'Balance of Payments Transactions (BPM6)' and 'Net International Investment Position' files for Afghanistan; data stops at 2021."
-    },
-    {
-      "id": "af-batch1-meta",
-      "title": "Afghanistan foundational statistical-system meta-node",
-      "publisher": "Derived from NSIA and DAB sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Meta-node binding the NSIA institutional core, population, national accounts, CPI, Da Afghanistan Bank institutional role and BOP into the opening foundation layer for Afghan research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Afghanistan-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node. Data quality, coverage and institutional constraints should be carried forward in all subsequent batches.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Da Afghanistan Bank External Sector Statistics page, fetched and confirmed to host 'Balance of Payments Transactions (BPM6)' and 'Net International Investment Position' files for Afghanistan; data stops at 2021.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DAB External Sector Statistics page lists Balance of Payments (BPM6) and Net International Investment Position with quarterly labelling ('IIP summary Q1 2021'). DORMANT: the latest edition on the page is Q1 2021, so the quarterly cadence recorded is the one it had when running.",
+      "releases_per_year": 4
     },
     {
       "id": "af-agriculture",
@@ -230,7 +179,6 @@
       "url": "https://www.mail.gov.af/dr/reports",
       "domains": [
         "agriculture",
-        "proposed:crops",
         "proposed:food"
       ],
       "_cadence_original": "annual / seasonal",
@@ -247,7 +195,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "MAIL reports index listing 'گزارش سالانه زراعتی' (Annual Agriculture Report) editions with per-province crop area, yield and production tables, plus separate wheat and rice production reports. Found by Grok; independently re-fetched and confirmed by Claude 2026-08-18 (index shows 1403 and 1404 annual reports, wheat 1404, rice 1404).",
-      "_url_route": "grok:on-site-search"
+      "_url_route": "grok:on-site-search",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MAIL reports page's core series is the annual agricultural report ('گزارش سالانه زراعتی'), with 1403 and 1404 editions listed; the page also carries semi-annual price reports and a seasonal crop forecast but states no frequency of its own. Most recent items dated 1405/4/27.",
+      "releases_per_year": 1
     },
     {
       "id": "af-wheat",
@@ -261,7 +212,7 @@
       "domains": [
         "proposed:wheat",
         "agriculture",
-        "proposed:food-security"
+        "poverty"
       ],
       "_cadence_original": "seasonal",
       "_batch": [
@@ -276,7 +227,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "FAO GIEWS Country Brief for Afghanistan (12 Jan 2026), fetched and confirmed to state 2025 wheat production of 4.5 million tonnes and cereal import requirements of 3.7 million tonnes, matching the item's wheat-gap framing."
+      "_url_evidence": "FAO GIEWS Country Brief for Afghanistan (12 Jan 2026), fetched and confirmed to state 2025 wheat production of 4.5 million tonnes and cereal import requirements of 3.7 million tonnes, matching the item's wheat-gap framing.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "FAO GIEWS Country Brief for Afghanistan, current reference date 12-January-2026; the linked AFG_Archive.pdf lists ~18 dated editions over 2016-2025, typically one to two per year.",
+      "releases_per_year": 2
     },
     {
       "id": "af-humanitarian",
@@ -290,7 +244,7 @@
       "domains": [
         "proposed:humanitarian",
         "proposed:food-insecurity",
-        "proposed:poverty"
+        "poverty"
       ],
       "_cadence_original": "annual / continuous",
       "_batch": [
@@ -305,64 +259,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "OCHA Afghanistan country page, fetched and confirmed to give the 2026 Humanitarian Needs and Response Plan figures: 21.9 million people in need (~45% of population) and 17.5 million targeted; humanitarianaction.info blocks WebFetch with 403."
-    },
-    {
-      "id": "af-remittances",
-      "title": "Remittance inflows framing",
-      "publisher": "Derived from World Bank and related sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Framing of remittance inflows as a critical external financing and household-income source. Remittances support consumption and foreign-exchange availability under constrained formal capital flows.",
-      "url": null,
-      "domains": [
-        "proposed:remittances",
-        "proposed:external",
-        "proposed:household"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_Afghanistan-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-centrality external-financing densification.",
-      "_referenced_by": [
-        "BOP and external accounts",
-        "Poverty and household analysis",
-        "Exchange-rate and monetary discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "af-batch2-meta",
-      "title": "Afghanistan agriculture–humanitarian–remittances densification meta-node",
-      "publisher": "Derived from MAIL, OCHA and external sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Meta-node binding agriculture and wheat statistics, humanitarian needs / acute food insecurity, and remittance inflows into a coherent primary-sector, humanitarian and external-financing layer under highly constrained conditions.",
-      "url": null,
-      "domains": [
-        "agriculture",
-        "proposed:humanitarian",
-        "proposed:remittances",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Afghanistan-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 2 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, CPI, BOP and DAB series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "OCHA Afghanistan country page, fetched and confirmed to give the 2026 Humanitarian Needs and Response Plan figures: 21.9 million people in need (~45% of population) and 17.5 million targeted; humanitarianaction.info blocks WebFetch with 403.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OCHA Afghanistan page lists consecutive month-labelled situation reports/humanitarian updates (September 2025, October 2025) plus Security Council briefings; the month-by-month editions indicate a monthly update cycle.",
+      "releases_per_year": 12
     },
     {
       "id": "af-exchange-rate",
@@ -390,37 +290,10 @@
         "Remittances and BOP discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "af-women-exclusion",
-      "title": "Women’s economic exclusion and labour-force framing",
-      "publisher": "Derived from UN Women and labour monitoring sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Framing of the severe restrictions on women’s participation in education, employment and public life. Women’s labour-force participation is extremely low (single-digit employment rates in recent estimates); the exclusion is projected to impose multi-year cumulative GDP losses and is the single most consequential constraint on recovery.",
-      "url": null,
-      "domains": [
-        "proposed:women",
-        "labour",
-        "proposed:exclusion",
-        "proposed:human-capital"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_Afghanistan-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Highest-centrality structural and human-capital constraint node under current conditions.",
-      "_referenced_by": [
-        "Labour and national accounts analysis",
-        "Poverty and humanitarian discussions",
-        "Education and long-term development framing"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DAB homepage publishes the official afghani rate against USD, EUR, GBP, CHF, INR, PKR, IRR, CNY, AED and SAR, stamped 'Last updated: 18 August 2026' - a fresh rate each working day.",
+      "releases_per_year": 250
     },
     {
       "id": "af-border-mobility",
@@ -449,35 +322,10 @@
       ],
       "_jurisdiction_level_original": "national / border",
       "last_updated": null,
-      "_url_evidence": "IOM Displacement Tracking Matrix Afghanistan page, fetched and confirmed to publish Flow Monitoring Snapshots on mobility at Afghanistan's border points with Iran and Pakistan, plus returnee and baseline area assessment datasets."
-    },
-    {
-      "id": "af-batch3-meta",
-      "title": "Afghanistan exchange–women–border densification meta-node",
-      "publisher": "Derived from DAB, UN Women and mobility sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Meta-node binding exchange-rate statistics, women’s economic exclusion framing, and border mobility/returnee statistics into a coherent monetary–human-capital–mobility layer under highly constrained conditions.",
-      "url": null,
-      "domains": [
-        "proposed:exchange",
-        "proposed:women",
-        "proposed:border",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Afghanistan-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Remittances, humanitarian, agriculture and DAB series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "IOM Displacement Tracking Matrix Afghanistan page, fetched and confirmed to publish Flow Monitoring Snapshots on mobility at Afghanistan's border points with Iran and Pakistan, plus returnee and baseline area assessment datasets.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "IOM DTM Afghanistan's lead product is the Flow Monitoring Snapshot covering seven-day periods ('16-22 June 2024', '9-15 June 2024'), i.e. weekly; Baseline Mobility Assessments and Community-Based Needs Assessments run in slower rounds alongside. Most recent product listed June 2024.",
+      "releases_per_year": 52
     },
     {
       "id": "af-education",
@@ -507,7 +355,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "UNICEF Afghanistan education programme page, fetched and confirmed to report enrolment statistics (3.7 million children out of school, 60% of them girls) and education-restriction impacts."
+      "_url_evidence": "UNICEF Afghanistan education programme page, fetched and confirmed to report enrolment statistics (3.7 million children out of school, 60% of them girls) and education-restriction impacts.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "UNICEF Afghanistan education page is a static programme description: no publication date, no last-updated stamp, no dated editions and no stated release frequency."
     },
     {
       "id": "af-health",
@@ -535,7 +385,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "WHO country data page for Afghanistan, fetched and confirmed to publish 'Life expectancy at birth' and healthy life expectancy (HALE) by sex for Afghanistan, plus mortality and health-workforce indicators."
+      "_url_evidence": "WHO country data page for Afghanistan, fetched and confirmed to publish 'Life expectancy at birth' and healthy life expectancy (HALE) by sex for Afghanistan, plus mortality and health-workforce indicators.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "data.who.int country overview is a live interactive data portal with per-indicator downloads; indicators carry their own data years (2018-2023) and the only date shown is an access date ('Accessed on 14 August 2026'), not a release cycle."
     },
     {
       "id": "af-trade",
@@ -547,9 +399,7 @@
       "description": "Statistics on merchandise exports and imports. Exports are small and concentrated in food products and textiles; India, Iran, Uzbekistan and China are notable destinations. Imports of essential goods dominate; the trade deficit is structural.",
       "url": "https://thedocs.worldbank.org/en/doc/e8eeba3d8d46fccafe273e30dff8f595-0310012026/original/Spring-ADU-May-26-2026-Final.pdf",
       "domains": [
-        "proposed:trade",
-        "proposed:exports",
-        "proposed:imports"
+        "trade"
       ],
       "_cadence_original": "monthly / continuous",
       "_batch": [
@@ -564,35 +414,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "World Bank Afghanistan Development Update (May 2026), fetched and confirmed to report merchandise exports at 10.0% of GDP, merchandise imports at 65% of GDP (US$13.2bn in FY2025) and trade-corridor dependence on Pakistan, Iran and India."
-    },
-    {
-      "id": "af-batch4-meta",
-      "title": "Afghanistan education–health–trade densification meta-node",
-      "publisher": "Derived from education, health and trade sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Meta-node binding education enrolment and girls’ secondary exclusion, life expectancy/health outcomes, and merchandise trade statistics into a coherent human-capital and external layer under highly constrained conditions.",
-      "url": null,
-      "domains": [
-        "education",
-        "health",
-        "proposed:trade",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Afghanistan-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Women’s exclusion, humanitarian, remittances and BOP series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "World Bank Afghanistan Development Update (May 2026), fetched and confirmed to report merchandise exports at 10.0% of GDP, merchandise imports at 65% of GDP (US$13.2bn in FY2025) and trade-corridor dependence on Pakistan, Iran and India.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Document is the World Bank 'Afghanistan Development Update', Spring 2026 edition, and repeatedly cites the 'Fall 2025 ADU' - confirming spring and fall editions, i.e. twice yearly.",
+      "releases_per_year": 2
     },
     {
       "id": "af-drought",
@@ -605,8 +430,7 @@
       "url": "https://fews.net/afghanistan",
       "domains": [
         "proposed:drought",
-        "proposed:water",
-        "proposed:climate"
+        "environment"
       ],
       "_cadence_original": "continuous / seasonal",
       "_batch": [
@@ -621,118 +445,10 @@
       ],
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
-      "_url_evidence": "FEWS NET Afghanistan country page, fetched and confirmed to publish Food Security Outlooks and agroclimatology/Seasonal Monitor reporting on drought, rainfall, soil moisture and multi-year drought recovery."
-    },
-    {
-      "id": "af-kabul",
-      "title": "Kabul province economic and demographic framing",
-      "publisher": "Derived from spatial and statistical sources",
-      "country": "AF",
-      "jurisdiction_level": "provincial",
-      "region": "Kabul",
-      "description": "Framing of Kabul province as the dominant urban, administrative and services centre. Concentrates a large share of the national urban population and economic activity relative to other provinces.",
-      "url": null,
-      "domains": [
-        "proposed:kabul",
-        "proposed:provincial",
-        "proposed:urban"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_Afghanistan-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary capital-province densification.",
-      "_referenced_by": [
-        "Population and national accounts",
-        "Humanitarian and service-delivery analysis",
-        "Provincial ranking"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "af-herat",
-      "title": "Herat province economic and trade framing",
-      "publisher": "Derived from spatial and trade sources",
-      "country": "AF",
-      "jurisdiction_level": "provincial",
-      "region": "Herat",
-      "description": "Framing of Herat as the principal western commercial and trade hub, with strong links to Iran and a large urban population. Frequently ranks among the more economically active provinces outside Kabul.",
-      "url": null,
-      "domains": [
-        "proposed:herat",
-        "proposed:provincial",
-        "proposed:trade"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_Afghanistan-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary western provincial densification.",
-      "_referenced_by": [
-        "Merchandise trade and border mobility",
-        "Provincial ranking",
-        "Humanitarian analysis"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "af-balkh",
-      "title": "Balkh province economic and trade framing",
-      "publisher": "Derived from spatial and trade sources",
-      "country": "AF",
-      "jurisdiction_level": "provincial",
-      "region": "Balkh",
-      "description": "Framing of Balkh (including Mazar-i-Sharif) as the principal northern commercial and trade hub, with links to Uzbekistan and Central Asia. An important secondary urban and economic pole.",
-      "url": null,
-      "domains": [
-        "proposed:balkh",
-        "proposed:provincial",
-        "proposed:trade"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_Afghanistan-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary northern provincial densification.",
-      "_referenced_by": [
-        "Merchandise trade and border mobility",
-        "Provincial ranking",
-        "Humanitarian analysis"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "af-batch5-meta",
-      "title": "Afghanistan climate–provincial densification meta-node",
-      "publisher": "Derived from climate and spatial sources",
-      "country": "AF",
-      "jurisdiction_level": "federal",
-      "region": "Afghanistan",
-      "description": "Meta-node binding drought/water-stress statistics and the Kabul, Herat and Balkh provincial framings into a coherent environmental and spatial layer under highly constrained conditions.",
-      "url": null,
-      "domains": [
-        "proposed:drought",
-        "proposed:provincial",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Afghanistan-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 5 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Agriculture, humanitarian, trade and population series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "FEWS NET Afghanistan country page, fetched and confirmed to publish Food Security Outlooks and agroclimatology/Seasonal Monitor reporting on drought, rainfall, soil moisture and multi-year drought recovery.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "FEWS NET Afghanistan page is labelled 'Monthly analysis' and states FEWS NET produces IPC-compatible acute food insecurity classifications monthly; the listing shows the rotating Food Security Outlook (June 2026-January 2027), Food Security Outlook Update (April-September 2026) and Key Message Updates (March and May 2026) that together fill each month.",
+      "releases_per_year": 12
     }
   ],
   "dependencies": [],
@@ -773,106 +489,39 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
     "reports_without_url": [
-      "af-nsia",
-      "af-national-accounts",
-      "af-batch1-meta",
-      "af-remittances",
-      "af-batch2-meta",
-      "af-women-exclusion",
-      "af-batch3-meta",
-      "af-batch4-meta",
-      "af-kabul",
-      "af-herat",
-      "af-balkh",
-      "af-batch5-meta"
+      "af-national-accounts"
     ],
-    "reports_without_url_count": 12,
+    "reports_without_url_count": 1,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
-        "id": "af-nsia",
-        "text": "continuous / limited"
-      },
-      {
-        "id": "af-population",
-        "text": "estimates"
-      },
-      {
-        "id": "af-national-accounts",
-        "text": "annual / fiscal-year"
-      },
-      {
-        "id": "af-cpi",
-        "text": "monthly / periodic"
-      },
-      {
         "id": "af-dab",
-        "text": "continuous"
-      },
-      {
-        "id": "af-bop",
-        "text": "periodic / limited"
-      },
-      {
-        "id": "af-agriculture",
-        "text": "annual / seasonal"
-      },
-      {
-        "id": "af-wheat",
-        "text": "seasonal"
-      },
-      {
-        "id": "af-humanitarian",
-        "text": "annual / continuous"
-      },
-      {
-        "id": "af-remittances",
-        "text": "continuous"
-      },
-      {
-        "id": "af-exchange-rate",
-        "text": "continuous / daily"
-      },
-      {
-        "id": "af-women-exclusion",
-        "text": "continuous"
-      },
-      {
-        "id": "af-border-mobility",
-        "text": "continuous / quarterly"
+        "title": "Da Afghanistan Bank institutional and reporting core",
+        "kind": "continuous-database",
+        "basis": "Da Afghanistan Bank homepage is a live institutional portal - a rolling exchange-rate table ('Last updated: 18 August 2026'), an inflation figure, news items and a periodical magazine - rather than a single publication with a discrete release cycle."
       },
       {
         "id": "af-education",
-        "text": "continuous"
+        "title": "Education enrolment and girls’ secondary exclusion statistics",
+        "kind": "unknown",
+        "basis": "UNICEF Afghanistan education page is a static programme description: no publication date, no last-updated stamp, no dated editions and no stated release frequency."
       },
       {
         "id": "af-health",
-        "text": "periodic"
-      },
-      {
-        "id": "af-trade",
-        "text": "monthly / continuous"
-      },
-      {
-        "id": "af-drought",
-        "text": "continuous / seasonal"
-      },
-      {
-        "id": "af-kabul",
-        "text": "continuous"
-      },
-      {
-        "id": "af-herat",
-        "text": "continuous"
-      },
-      {
-        "id": "af-balkh",
-        "text": "continuous"
+        "title": "Life expectancy and health outcome statistics",
+        "kind": "continuous-database",
+        "basis": "data.who.int country overview is a live interactive data portal with per-indicator downloads; indicators carry their own data years (2018-2023) and the only date shown is an access date ('Accessed on 14 August 2026'), not a release cycle."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -890,63 +539,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "af-nsia",
-        "title": "National Statistics and Information Authority (NSIA) institutional core",
-        "finding": "Not a publication - this is an institution node (the statistics office itself); separately, nsia.gov.af is unreachable via WebFetch (TLS certificate verification failure on robots.txt)."
-      },
-      {
-        "id": "af-batch1-meta",
-        "title": "Afghanistan foundational statistical-system meta-node",
-        "finding": "Not a publication - synthesised meta-node binding other Afghanistan nodes together."
-      },
-      {
-        "id": "af-remittances",
-        "title": "Remittance inflows framing",
-        "finding": "Not a publication - explicitly a synthesised 'framing' node about remittance inflows, not a specific published product."
-      },
-      {
-        "id": "af-batch2-meta",
-        "title": "Afghanistan agriculture–humanitarian–remittances densification meta-node",
-        "finding": "Not a publication - synthesised meta-node binding agriculture, humanitarian and remittance nodes."
-      },
-      {
-        "id": "af-women-exclusion",
-        "title": "Women’s economic exclusion and labour-force framing",
-        "finding": "Not a publication - explicitly a synthesised 'framing' node on women's economic exclusion, not a specific published product."
-      },
-      {
-        "id": "af-batch3-meta",
-        "title": "Afghanistan exchange–women–border densification meta-node",
-        "finding": "Not a publication - synthesised meta-node binding exchange-rate, women and border-mobility nodes."
-      },
-      {
-        "id": "af-batch4-meta",
-        "title": "Afghanistan education–health–trade densification meta-node",
-        "finding": "Not a publication - synthesised meta-node binding education, health and trade nodes."
-      },
-      {
-        "id": "af-kabul",
-        "title": "Kabul province economic and demographic framing",
-        "finding": "Not a publication - a geographic area (province) framing node."
-      },
-      {
-        "id": "af-herat",
-        "title": "Herat province economic and trade framing",
-        "finding": "Not a publication - a geographic area (province) framing node."
-      },
-      {
-        "id": "af-balkh",
-        "title": "Balkh province economic and trade framing",
-        "finding": "Not a publication - a geographic area (province) framing node."
-      },
-      {
-        "id": "af-batch5-meta",
-        "title": "Afghanistan climate–provincial densification meta-node",
-        "finding": "Not a publication - synthesised meta-node binding drought and provincial framing nodes."
-      }
-    ],
     "url_unreachable_or_not_published": [
       {
         "id": "af-national-accounts",
@@ -955,6 +547,11 @@
         "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
-    "not_a_publication_note": "These 11 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_moved_to_archive": "11 nodes removed from this file on 2026-08-18; full records in _archive/afg-afghanistan-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 13
+    }
   }
 }

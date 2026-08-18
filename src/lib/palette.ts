@@ -236,6 +236,16 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // false fit into `AFR`, `EU`/`XEU`, or a reserved-for-someone-else code.
   AE: 'ASIA',
 
+  // Israel and Singapore — added 2026-08-18 with the Grok archive
+  // consolidation (`Grok - Brics+israel and singapore/consolidated/`). Both
+  // filed to `ASIA` for the same reason RU and AE are: it is the reserved
+  // catch-all family, and there is still no dedicated Middle East family for
+  // Israel nor an East/Southeast Asia one for Singapore. Thomas is revamping
+  // the palette next, so these are placeholders that render rather than
+  // classifications to defend.
+  IL: 'ASIA',
+  SG: 'ASIA',
+
   // **Tanzania added 2026-08-10** (AF branch G.6, following the G.5 hand-off's
   // priority 1) -- the last of the seven countries in `country afrikans.docx`
   // to be researched. Its NCPI methodology (geometric mean / Lowe index,
@@ -1116,6 +1126,10 @@ export const COUNTRY_LABEL: Record<string, string> = {
   // United Arab Emirates, added 2026-08-15 alongside its COUNTRY_FAMILY
   // entry — missed at the time, backfilled 2026-08-16.
   AE: 'United Arab Emirates',
+
+  // Israel and Singapore, added 2026-08-18 alongside their COUNTRY_FAMILY
+  // entries above.
+  IL: 'Israel', SG: 'Singapore',
 }
 
 export function countryLabelFor(country: Country): string {

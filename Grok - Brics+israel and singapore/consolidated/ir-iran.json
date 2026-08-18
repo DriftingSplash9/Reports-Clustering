@@ -19,7 +19,7 @@
       "2026-08-14_Iran-batch9.json"
     ],
     "counts": {
-      "reports": 56,
+      "reports": 35,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -39,8 +39,7 @@
       "description": "Primary national statistical office responsible for censuses, surveys, national accounts, prices, labour, demographic and multi-domain socio-economic statistics.",
       "url": "https://www.amar.org.ir/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -54,7 +53,9 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "amar.org.ir homepage retrieved (most attempts time out). It shows only a dated news item (29 Tir 1397) and a reference to the 1395 Population and Housing Census; no release calendar and no stated periodicity for the office's outputs."
     },
     {
       "id": "ir-population",
@@ -66,9 +67,7 @@
       "description": "Official population census and subsequent estimates. Population is in the high-80s to low-90s millions range in recent reports; urbanisation is advanced and the age structure is shifting toward aging.",
       "url": "https://www.amar.org.ir/",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "census cycle + annual estimates",
       "_batch": [
@@ -82,7 +81,9 @@
         "Regional development planning"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Same amar.org.ir homepage. It names the 'General Population and Housing Census 1395' but states no census interval and gives no cadence for population estimates; a single census year is not countable evidence."
     },
     {
       "id": "ir-national-accounts",
@@ -94,9 +95,7 @@
       "description": "Official national accounts (GDP by industry and expenditure). Central macro-output series for an oil-and-gas-influenced, sanctions-affected economy.",
       "url": "https://www.cbi.ir/simplelist/2054.aspx",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -111,7 +110,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI page titled 'Annual National Accounts' (حساب‌های ملی سالانه) describing GDP time series at current and constant prices with base years 1383/1390/1395."
+      "_url_evidence": "CBI page titled 'Annual National Accounts' (حساب‌های ملی سالانه) describing GDP time series at current and constant prices with base years 1383/1390/1395.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "cbi.ir/simplelist/2054.aspx (CBI National Accounts collection) states it publishes 'ارقام حسابهای ملی سالانه و فصلی' - annual and quarterly national accounts figures - with base-year revisions (latest 1395). Quarterly is the highest cadence the page states, so 4 releases/yr for the series; the annual volume is a subset of that.",
+      "releases_per_year": 4
     },
     {
       "id": "ir-cpi",
@@ -124,8 +126,6 @@
       "releases_per_year": 12,
       "url": "https://www.amar.org.ir/",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_batch": [
@@ -151,9 +151,7 @@
       "description": "Central bank responsible for monetary policy, foreign-exchange management, banking supervision and key macro-financial and external statistics. Publishes monetary, banking, exchange-rate and related series.",
       "url": "https://www.cbi.ir/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
+        "monetary-policy"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -167,7 +165,9 @@
         "Financial stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "cbi.ir root timed out repeatedly; the English landing page that did answer lists Economic Trends, Annual Review, Economic Report & Balance Sheet and 'Monetary, Financial and Economic Statistics' but states no frequency for any of them except the implied yearly Annual Review, and gives no release calendar for the institution as a whole."
     },
     {
       "id": "ir-bop",
@@ -179,9 +179,8 @@
       "description": "BOP and external-sector statistics. Strongly influenced by oil and gas exports, sanctions regimes, and non-oil export performance.",
       "url": "https://cbi.ir/category/2693.aspx",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:oil"
+        "external-sector",
+        "energy"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -196,32 +195,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI 'بخش تراز پرداخت‌ها' section; page states it contains balance of payments tables, customs exports/imports, external debt and monthly average dollar rates, with monthly PDFs."
-    },
-    {
-      "id": "ir-batch1-meta",
-      "title": "Iran foundational statistical-system meta-node",
-      "publisher": "Derived from SCI and CBI sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding the SCI institutional core, population, national accounts, CPI, CBI institutional role and BOP into the opening foundation layer for Iranian research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node for Iranian research.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CBI 'بخش تراز پرداخت‌ها' section; page states it contains balance of payments tables, customs exports/imports, external debt and monthly average dollar rates, with monthly PDFs.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "cbi.ir/category/2693.aspx lists successive Persian-calendar monthly PDF editions (Farvardin, Ordibehesht, Khordad, Tir) of the balance-of-payments / customs trade / external debt tables - one edition per month.",
+      "releases_per_year": 12
     },
     {
       "id": "ir-nuclear-power",
@@ -234,8 +211,7 @@
       "url": "https://www-pub.iaea.org/MTCD/publications/PDF/cnpp2022/countryprofiles/IranIslamicRepublicof/IranIslamicRepublicof.htm",
       "domains": [
         "proposed:nuclear",
-        "proposed:power",
-        "proposed:energy"
+        "energy"
       ],
       "_cadence_original": "continuous / annual",
       "_batch": [
@@ -250,7 +226,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "IAEA Country Nuclear Power Profile 2022 for Iran; gives Bushehr Unit 1 net capacity 915 MW(e) and 1.73% share of national generation in 2020."
+      "_url_evidence": "IAEA Country Nuclear Power Profile 2022 for Iran; gives Bushehr Unit 1 net capacity 915 MW(e) and 1.73% share of national generation in 2020.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "IAEA Country Nuclear Power Profile for Iran is headed '(Updated 2022)' but the document states no update cycle for CNPP country profiles; no other dated editions are listed on the page."
     },
     {
       "id": "ir-eaeu",
@@ -263,9 +241,9 @@
       "url": "https://eec.eaeunion.org/en/comission/department/dotp/torgovye-soglasheniya/iran.php",
       "domains": [
         "proposed:eaeu",
-        "proposed:fta",
+        "trade",
         "proposed:russia",
-        "proposed:external"
+        "external-sector"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -279,7 +257,9 @@
         "Sanctions-mitigation analysis"
       ],
       "last_updated": null,
-      "_url_evidence": "Eurasian Economic Commission official trade-agreements page for Iran, covering the 2018 interim agreement, 2022 protocol and the December 2023 full free trade agreement."
+      "_url_evidence": "Eurasian Economic Commission official trade-agreements page for Iran, covering the 2018 interim agreement, 2022 protocol and the December 2023 full free trade agreement.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "EEC page documents signed instruments with fixed dates: Interim Agreement signed 17 May 2018, in force 27 Oct 2019; extension Protocol signed 14 Mar 2022, in force 25 Oct 2022; full Free Trade Agreement signed 25 Dec 2023. Signed agreements, not a publication series."
     },
     {
       "id": "ir-youth-labour",
@@ -292,8 +272,7 @@
       "url": "https://amar.org.ir/Portals/0/Statistics/3451-6.pdf",
       "domains": [
         "proposed:youth",
-        "labour",
-        "proposed:unemployment"
+        "labour"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -309,35 +288,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved PDF: Statistical Centre of Iran, 'Summary of Labour Force Survey results, Autumn 1398', issued by the Office of Population, Labour Force and Census Statistics. Contains the youth series explicitly: unemployment rate for the 15-24 age group 25.8% (down 1.2 pp y/y), 18-35 age group 17.9%, overall unemployment 10.6%, participation rate 44.3%.",
-      "_url_route": "retry of amar.org.ir after repeated failures; direct /Portals/ document path (host answered on roughly the 5th attempt)"
-    },
-    {
-      "id": "ir-batch10-meta",
-      "title": "Iran nuclear–EAEU–youth densification meta-node",
-      "publisher": "Derived from energy, trade and labour sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding nuclear power generation (Bushehr), Iran–EAEU free trade framework, and youth unemployment/labour statistics into a coherent energy–external–labour residual layer.",
-      "url": null,
-      "domains": [
-        "proposed:nuclear",
-        "proposed:eaeu",
-        "proposed:youth",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch10.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 10 residual densification.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Power, Russia, BRICS, labour and education series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "retry of amar.org.ir after repeated failures; direct /Portals/ document path (host answered on roughly the 5th attempt)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The SCI PDF (Labour Force Survey summary results, Autumn 1398) states the survey has been run 'در ماه میانی هر فصل' - in the middle month of each season - since 1384, i.e. four seasonal rounds and four result releases per year.",
+      "releases_per_year": 4
     },
     {
       "id": "ir-oil-production",
@@ -349,9 +303,8 @@
       "description": "Official and industry statistics on crude oil and condensate production. Iran ranks among the largest OPEC producers and holds some of the world’s largest proved reserves. Production and export volumes are heavily conditioned by sanctions regimes.",
       "url": "https://asb.opec.org/",
       "domains": [
-        "proposed:oil",
-        "proposed:energy",
-        "proposed:production"
+        "energy",
+        "industry"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -366,7 +319,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Retrieved OPEC Annual Statistical Bulletin site (59th edition), OPEC's official oil-data compilation covering member-country production; note it is the global ASB series page, not an Iran-specific page - OPEC country pages return HTTP 402 and mop.ir/nioc.ir are unreachable."
+      "_url_evidence": "Retrieved OPEC Annual Statistical Bulletin site (59th edition), OPEC's official oil-data compilation covering member-country production; note it is the global ASB series page, not an Iran-specific page - OPEC country pages return HTTP 402 and mop.ir/nioc.ir are unreachable.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "asb.opec.org identifies itself as the OPEC Annual Statistical Bulletin, 59th edition, appearing yearly since 1965 - one edition per year.",
+      "releases_per_year": 1
     },
     {
       "id": "ir-oil-exports",
@@ -378,9 +334,9 @@
       "description": "Export volumes and estimated values for crude and petroleum products. Export levels fluctuate sharply with sanctions enforcement, buyer willingness (notably China), and shipping constraints. Strait of Hormuz remains the primary route.",
       "url": "https://www.opec.org/opec_web/en/about_us/163.htm",
       "domains": [
-        "proposed:oil",
-        "proposed:exports",
-        "proposed:external"
+        "energy",
+        "trade",
+        "external-sector"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -396,7 +352,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved OPEC's Iran member-country facts-and-figures page. Shows Iran-specific 'Crude oil exports (1,000 b/d) 1,215', refinery capacity 1,715 kb/cd, refined output 1,918.4 kb/d, gas exports 9,307 mn cu m; footer states 'Source: Annual Statistical Bulletin 2014'. OPEC is a multilateral publisher. Note: the figures are dated (2014 ASB vintage); no Iranian government oil-export page could be retrieved — mop.ir and NIOC never answered.",
-      "_url_route": "multilateral fallback (OPEC) after Ministry of Petroleum / NIOC remained unreachable"
+      "_url_route": "multilateral fallback (OPEC) after Ministry of Petroleum / NIOC remained unreachable",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "opec.org/opec_web/en/about_us/163.htm is a static OPEC member-country facts-and-figures profile for Iran; it cites the Annual Statistical Bulletin as its data source but states no release frequency of its own and lists no dated editions."
     },
     {
       "id": "ir-gas",
@@ -408,8 +366,7 @@
       "description": "Statistics on dry natural gas production and domestic use. Iran is among the world’s largest gas producers (South Pars field central); most output is absorbed domestically rather than exported as LNG.",
       "url": "https://www.gecf.org/countries/iran",
       "domains": [
-        "proposed:gas",
-        "proposed:energy",
+        "energy",
         "proposed:domestic"
       ],
       "_cadence_original": "annual / periodic",
@@ -426,36 +383,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved (twice, consistently) the Gas Exporting Countries Forum member page for Iran. Gives both series the node needs: 'Marketed production of natural gas (billion cu. m.) 199.3 (2013)' and 'Domestic Dry Natural gas consumption (incl. flared, shrinkage, gas to GTL plants, plant own use, losses and market production) (billion cu. m.) 199.292 (2013)'. GECF is a multilateral organisation of which Iran is a founding member. Figures are 2013 vintage.",
-      "_url_route": "multilateral fallback (GECF) after mop.ir and nigc.ir stayed unreachable"
-    },
-    {
-      "id": "ir-sanctions",
-      "title": "Sanctions and external economic constraints framing",
-      "publisher": "Derived from CBI, fiscal and international sources",
-      "country": "IR",
-      "jurisdiction_level": "international",
-      "region": "Iran",
-      "description": "Recurring policy and analytical framing of the multi-layered sanctions regime (financial, energy, shipping, secondary sanctions) that constrains oil exports, access to the international financial system, and investment. Continuously cited across macro, fiscal and external analysis.",
-      "url": null,
-      "domains": [
-        "proposed:sanctions",
-        "proposed:external",
-        "proposed:constraints"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-centrality external-constraint frame that conditions almost every major economic series.",
-      "_referenced_by": [
-        "Oil export and BOP statistics",
-        "Inflation and exchange-rate analysis",
-        "Fiscal and investment discussions"
-      ],
-      "_jurisdiction_level_original": "international / national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "multilateral fallback (GECF) after mop.ir and nigc.ir stayed unreachable",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "gecf.org/countries/iran is a static GECF member country profile; no update cadence, no release calendar and no dated editions are stated (figures shown are a snapshot)."
     },
     {
       "id": "ir-labour",
@@ -467,9 +397,7 @@
       "description": "Labour-force participation, employment and unemployment rates from household surveys. Youth and female labour-market outcomes are structurally important.",
       "url": "https://www.amar.org.ir/",
       "domains": [
-        "labour",
-        "proposed:employment",
-        "proposed:unemployment"
+        "labour"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -483,7 +411,9 @@
         "Demographic and education nodes"
       ],
       "_jurisdiction_level_original": "national / regional",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The node points at the amar.org.ir homepage, which discusses employment/unemployment measurement concepts but states no survey or publication frequency and shows no release calendar for the labour force series."
     },
     {
       "id": "ir-poverty",
@@ -495,9 +425,8 @@
       "description": "Poverty-rate and living-standards indicators. Poverty outcomes interact strongly with high inflation, subsidy policy and oil-revenue volatility.",
       "url": "https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099640404212584734",
       "domains": [
-        "proposed:poverty",
-        "proposed:welfare",
-        "proposed:living-standards"
+        "poverty",
+        "living-standards"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -512,35 +441,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "World Bank document page titled 'Islamic Republic of Iran Poverty and Equity Brief : April 2025', with abstract on Iranian poverty trends."
-    },
-    {
-      "id": "ir-batch2-meta",
-      "title": "Iran oil–sanctions–labour densification meta-node",
-      "publisher": "Derived from petroleum, CBI and SCI sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding oil production, oil exports, natural gas statistics, sanctions/external-constraints framing, labour force statistics and poverty/living-standards indicators into a coherent hydrocarbon–constraint–welfare layer.",
-      "url": null,
-      "domains": [
-        "proposed:oil",
-        "proposed:sanctions",
-        "labour",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the first uniqueness densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, CPI, BOP and CBI series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "World Bank document page titled 'Islamic Republic of Iran Poverty and Equity Brief : April 2025', with abstract on Iranian poverty trends.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "World Bank documents page shows a single item, 'Islamic Republic of Iran Poverty and Equity Brief: April 2025'. Re-checked for series metadata and other editions: the page states no series frequency and lists no prior editions to count."
     },
     {
       "id": "ir-state-budget",
@@ -552,8 +455,7 @@
       "description": "Official and reported state budget figures covering oil and non-oil revenues, current and capital expenditure, and overall fiscal balance. Oil-revenue shortfalls relative to budget assumptions are a recurring feature under sanctions.",
       "url": "https://cbi.ir/category/2694.aspx",
       "domains": [
-        "proposed:fiscal",
-        "proposed:budget",
+        "public-finance",
         "proposed:oil-revenue"
       ],
       "_cadence_original": "annual (budget cycle)",
@@ -569,37 +471,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI 'Finance and Budget' statistics section; page states it contains tables of the government's general budget position and tax revenues, with monthly PDF releases."
-    },
-    {
-      "id": "ir-subsidies",
-      "title": "Targeted subsidies and energy-subsidy framing",
-      "publisher": "Government of Iran / related",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Policy and statistical framing of the large subsidy system (energy, essential goods, cash transfers). Subsidy reform attempts interact tightly with inflation, exchange-rate policy and fiscal sustainability.",
-      "url": null,
-      "domains": [
-        "proposed:subsidies",
-        "proposed:fiscal",
-        "proposed:energy",
-        "proposed:social"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-centrality domestic policy node linking fiscal, energy and welfare.",
-      "_referenced_by": [
-        "State budget statistics",
-        "CPI and poverty analysis",
-        "Exchange-rate and oil-revenue nodes"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CBI 'Finance and Budget' statistics section; page states it contains tables of the government's general budget position and tax revenues, with monthly PDF releases.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "cbi.ir/category/2694.aspx (government general budget and tax revenue tables) lists twelve separate PDF files, one for each Persian-calendar month Farvardin through Esfand - a monthly release.",
+      "releases_per_year": 12
     },
     {
       "id": "ir-exchange-rate",
@@ -628,65 +503,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Central Bank of Iran exchange-rate page showing rial rates against foreign currencies with the CBI weighted-average-rate methodology note."
-    },
-    {
-      "id": "ir-china-trade",
-      "title": "Iran–China merchandise trade and oil sales statistics",
-      "publisher": "Derived from customs, CBI and shipping sources",
-      "country": "IR",
-      "jurisdiction_level": "international",
-      "region": "Iran–China",
-      "description": "Bilateral trade with China, with particular emphasis on oil and petrochemical exports. China is the dominant remaining large-scale buyer of Iranian crude under sanctions; non-oil trade is also significant.",
-      "url": null,
-      "domains": [
-        "proposed:trade",
-        "proposed:china",
-        "proposed:oil",
-        "proposed:bilateral"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch3.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Primary bilateral trade corridor under sanctions. China is the key residual oil market.",
-      "_referenced_by": [
-        "Oil export statistics",
-        "BOP and sanctions framing",
-        "Overall merchandise trade analysis"
-      ],
-      "_jurisdiction_level_original": "bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ir-batch3-meta",
-      "title": "Iran fiscal–exchange–China densification meta-node",
-      "publisher": "Derived from fiscal, CBI and trade sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding state budget, targeted subsidies, exchange-rate/parallel-market statistics, and Iran–China trade/oil sales into a coherent fiscal–monetary–external layer that interacts tightly with the oil and sanctions nodes from Batch 2.",
-      "url": null,
-      "domains": [
-        "proposed:fiscal",
-        "proposed:exchange",
-        "proposed:china",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the fiscal and external densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, sanctions, CPI and BOP series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Central Bank of Iran exchange-rate page showing rial rates against foreign currencies with the CBI weighted-average-rate methodology note.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "cbi.ir/exrates/rates_en.aspx presents a single dated rate table ('Exchange Rates 26/07/2024') and notes 'No rates are quoted on Iranian holidays, for which the previous day's rates will apply' - i.e. one quoted release per working day, roughly 250/yr.",
+      "releases_per_year": 250
     },
     {
       "id": "ir-industry",
@@ -698,8 +518,7 @@
       "description": "Official statistics on industrial establishments, manufacturing output, value added and related indicators. Industry operates under sanctions constraints on technology, finance and intermediate imports.",
       "url": "https://www.amar.org.ir/",
       "domains": [
-        "proposed:industry",
-        "proposed:manufacturing"
+        "industry"
       ],
       "_cadence_original": "annual / periodic surveys",
       "_batch": [
@@ -713,7 +532,9 @@
         "Sanctions and import-substitution discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The node points at the amar.org.ir homepage, which says nothing about industrial/manufacturing survey periodicity and carries no release calendar or dated editions."
     },
     {
       "id": "ir-grdp-tehran",
@@ -725,9 +546,8 @@
       "description": "Official GRDP for Tehran province — by far the largest provincial economy, typically accounting for roughly one-fifth or more of national GDP. Dominant services, administration and industrial concentration.",
       "url": "https://amar.org.ir/hesabmelli",
       "domains": [
-        "proposed:grdp",
-        "proposed:tehran",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:tehran"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -756,10 +576,9 @@
       "description": "Official GRDP for Khuzestan — the principal oil-producing province and consistently one of the largest provincial economies after Tehran. Hydrocarbon activity dominates the local output structure.",
       "url": "https://amar.org.ir/hesabmelli",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:khuzestan",
-        "proposed:oil",
-        "proposed:regional"
+        "energy"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -779,35 +598,6 @@
       "_url_match": "series-level (corroborated)"
     },
     {
-      "id": "ir-oil-provinces",
-      "title": "Oil-producing provinces spatial framing",
-      "publisher": "Derived from SCI provincial and petroleum sources",
-      "country": "IR",
-      "jurisdiction_level": "provincial",
-      "region": "Iran (Khuzestan, Bushehr and related)",
-      "description": "System-level view of the main oil- and gas-producing provinces whose output underpins national hydrocarbon revenues and whose local economies are tightly linked to the energy sector.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:oil",
-        "proposed:spatial"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Spatial densification of the hydrocarbon cluster.",
-      "_referenced_by": [
-        "Khuzestan GRDP and oil production nodes",
-        "Fiscal and sanctions analysis",
-        "National accounts"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "ir-banking-system",
       "title": "Banking system structure and credit statistics",
       "publisher": "Central Bank of Iran",
@@ -818,7 +608,6 @@
       "url": "https://www.cbi.ir/",
       "domains": [
         "banking",
-        "proposed:credit",
         "proposed:financial-system"
       ],
       "_cadence_original": "periodic",
@@ -833,65 +622,9 @@
         "Monetary and fiscal series"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "ir-npl",
-      "title": "Non-performing loans and banking asset-quality statistics",
-      "publisher": "Central Bank of Iran / bank disclosures",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "System-wide and bank-level non-performing loan and asset-quality indicators. Asset quality is a recurring concern under high inflation, sanctions and directed-credit pressures.",
-      "url": null,
-      "domains": [
-        "proposed:npl",
-        "proposed:asset-quality",
-        "banking"
-      ],
-      "_cadence_original": "periodic",
-      "_batch": [
-        "2026-08-14_Iran-batch4.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core asset-quality / risk node for the banking cluster.",
-      "_referenced_by": [
-        "Banking-system structure",
-        "CBI financial-stability assessments",
-        "Credit and macro analysis"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true,
-      "_not_a_publication_reason": "Grok, agreeing with Claude: CBI pages load but no discrete non-performing-loans (مطالبات غیرجاری) product or series page exists."
-    },
-    {
-      "id": "ir-batch4-meta",
-      "title": "Iran industry–provincial–banking densification meta-node",
-      "publisher": "Derived from SCI and CBI sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding industrial production statistics, Tehran GRDP, Khuzestan GRDP, oil-producing provinces framing, banking-system structure and NPL statistics into a coherent industry–spatial–financial layer.",
-      "url": null,
-      "domains": [
-        "proposed:industry",
-        "proposed:provincial",
-        "banking",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, fiscal, sanctions and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "cbi.ir root was not retrievable on repeated attempts; the English landing page that answered says the Bank 'compiles and publishes a range' of monetary, financial and economic statistics but attaches no frequency to the banking/credit series."
     },
     {
       "id": "ir-agriculture",
@@ -904,7 +637,6 @@
       "url": "https://amar.org.ir/agricultural-statistics",
       "domains": [
         "agriculture",
-        "proposed:crops",
         "proposed:food"
       ],
       "_cadence_original": "annual / seasonal",
@@ -921,7 +653,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the Statistical Centre of Iran agricultural statistics portal. Page enumerates the SCI agricultural survey programme and its data sections: crop production and horticulture (stated as 71% of agricultural value added), livestock and poultry (milk, wool, poultry capacity), forestry, fisheries/aquaculture, greenhouse and mushroom production, general agricultural census series from 1339 onwards, and nomadic censuses (1366/1377/1387), each with tables, archive, publications and metadata.",
-      "_url_route": "amar.org.ir short ASCII slug discovered via search, then retried until the host answered"
+      "_url_route": "amar.org.ir short ASCII slug discovered via search, then retried until the host answered",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "amar.org.ir/agricultural-statistics lists past survey and census years only (crop/horticulture surveys 1386, 1389, 1394, 1396, 1397; agricultural censuses 1367, 1372, 1382, 1393; mushroom censuses 1380, 1385, 1391, 1396). Intervals are irregular (5-11 years) and the page states no ongoing release frequency."
     },
     {
       "id": "ir-wheat",
@@ -935,7 +669,7 @@
       "domains": [
         "proposed:wheat",
         "agriculture",
-        "proposed:food-security"
+        "poverty"
       ],
       "_cadence_original": "seasonal / annual",
       "_batch": [
@@ -950,65 +684,6 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null
-    },
-    {
-      "id": "ir-defence-budget",
-      "title": "Defence / military expenditure statistics",
-      "publisher": "Derived from official budget and international compilations (SIPRI-aligned)",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Estimates of military expenditure. Official figures are affected by high inflation (real declines even when nominal rises) and are widely assessed to understate true spending that draws on off-budget oil revenues.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:budget",
-        "proposed:military"
-      ],
-      "_cadence_original": "annual",
-      "_batch": [
-        "2026-08-14_Iran-batch5.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core defence-resource node. Interpretation requires care because of off-budget financing.",
-      "_referenced_by": [
-        "State budget and fiscal statistics",
-        "Sanctions and external-security analysis",
-        "National security framing"
-      ],
-      "_jurisdiction_level_original": "national",
-      "releases_per_year": 1,
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ir-defence-policy",
-      "title": "National defence and security policy framing",
-      "publisher": "Derived from defence and strategic sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Policy and strategic framing of Iran’s defence and security posture, including conventional forces, missile and drone capabilities, and regional influence instruments. Continuously referenced in external and sanctions analysis.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:security",
-        "proposed:policy"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Policy-frame counterpart to the defence budget node.",
-      "_referenced_by": [
-        "Defence budget statistics",
-        "Sanctions and external-constraint nodes",
-        "Regional geopolitical analysis"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     },
     {
       "id": "ir-education",
@@ -1039,34 +714,6 @@
       "last_updated": null
     },
     {
-      "id": "ir-batch5-meta",
-      "title": "Iran agriculture–defence–education densification meta-node",
-      "publisher": "Derived from SCI, defence and education sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding agriculture and wheat production, defence expenditure and policy framing, and education/literacy statistics into a coherent primary-sector, security and human-capital layer.",
-      "url": null,
-      "domains": [
-        "agriculture",
-        "proposed:defence",
-        "education",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 5 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier fiscal, sanctions, labour and poverty series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "ir-health",
       "title": "Health and vital statistics (life expectancy, mortality)",
       "publisher": "SCI / Ministry of Health related / WHO-aligned",
@@ -1077,7 +724,7 @@
       "url": "https://data.who.int/countries/364",
       "domains": [
         "health",
-        "proposed:vital-statistics",
+        "population",
         "proposed:life-expectancy"
       ],
       "_cadence_original": "periodic / annual",
@@ -1093,7 +740,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "WHO official country data page for Iran (Islamic Republic of), showing life expectancy at birth, HALE, and maternal/under-five/neonatal mortality indicators."
+      "_url_evidence": "WHO official country data page for Iran (Islamic Republic of), showing life expectancy at birth, HALE, and maternal/under-five/neonatal mortality indicators.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "data.who.int/countries/364 is WHO's live country data portal: indicators carry individual data years and extraction dates and the citation is by access date ('Accessed on 14 August 2026'), with no discrete edition or stated release cycle."
     },
     {
       "id": "ir-water-stress",
@@ -1105,8 +754,7 @@
       "description": "Renewable water resources, withdrawal by sector, and water-stress indicators. Iran faces high water stress (agricultural withdrawal dominant); drought and groundwater depletion are recurring constraints on agriculture and urban supply.",
       "url": "https://www.fao.org/aquastat/en/countries-and-basins/country-profiles/country/IRN/index.html",
       "domains": [
-        "proposed:water",
-        "proposed:climate",
+        "environment",
         "agriculture",
         "proposed:stress"
       ],
@@ -1123,93 +771,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "FAO AQUASTAT 'Country Profile - Iran (Islamic Republic of)' with water resources, water use, irrigation and summary-statistics factsheets."
-    },
-    {
-      "id": "ir-climate-drought",
-      "title": "Climate and drought framing",
-      "publisher": "Derived from meteorological and agricultural sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Policy and analytical framing of climate variability, drought frequency and their impacts on agriculture, water resources and rural livelihoods. Continuously referenced in food-security and adaptation discussions.",
-      "url": null,
-      "domains": [
-        "proposed:climate",
-        "proposed:drought",
-        "proposed:adaptation"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Climate-risk densification linked to the water and agriculture clusters.",
-      "_referenced_by": [
-        "Water-stress and agriculture nodes",
-        "Poverty and rural analysis",
-        "National development planning"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ir-russia",
-      "title": "Iran–Russia economic and strategic partnership framing",
-      "publisher": "Governments of Iran and Russia",
-      "country": "IR",
-      "jurisdiction_level": "international",
-      "region": "Iran–Russia",
-      "description": "Economic and strategic partnership framing with Russia, including trade, industrial cooperation, EAEU-related arrangements and broader geopolitical alignment. Complements the China oil corridor as a second major external relationship under sanctions.",
-      "url": null,
-      "domains": [
-        "proposed:russia",
-        "proposed:partnership",
-        "proposed:bilateral"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Second major external-partner densification after China.",
-      "_referenced_by": [
-        "Trade and external accounts",
-        "Sanctions and multi-vector analysis",
-        "Defence and geopolitical framing"
-      ],
-      "_jurisdiction_level_original": "bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ir-batch6-meta",
-      "title": "Iran health–water–Russia densification meta-node",
-      "publisher": "Derived from health, water and partnership sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding health/vital statistics, water resources and water-stress indicators, climate/drought framing, and Iran–Russia partnership framing into a coherent health–environment–external layer.",
-      "url": null,
-      "domains": [
-        "health",
-        "proposed:water",
-        "proposed:russia",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 6 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Agriculture, sanctions, China and social series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "FAO AQUASTAT 'Country Profile - Iran (Islamic Republic of)' with water resources, water use, irrigation and summary-statistics factsheets.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "FAO AQUASTAT country profile page for Iran shows a profile dated 2008 and directs users to 'Country Statistics' for more recent data; no update cadence for profiles or data is stated on the page."
     },
     {
       "id": "ir-social-protection",
@@ -1221,9 +785,9 @@
       "description": "Statistics and indicators on social assistance, cash transfers and related social-protection programmes. Cash transfers and subsidy-related support interact tightly with high inflation and the targeted-subsidy system.",
       "url": "https://www.ssa.gov/policy/docs/progdesc/ssptw/2018-2019/asia/iran.html",
       "domains": [
-        "proposed:social-protection",
+        "benefits",
         "proposed:cash-transfers",
-        "proposed:welfare"
+        "living-standards"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -1240,7 +804,9 @@
       "last_updated": null,
       "_url_evidence": "PARTIAL MATCH — retrieved the US Social Security Administration's 'Social Security Programs Throughout the World: Asia and the Pacific, 2018' country chapter for Iran (a government publication). It documents Iran's five social-protection branches (old age/disability/survivors, sickness and maternity, work injury, unemployment, family allowances) with quantitative parameters: employee contribution 5% of monthly earnings, employer 14% of payroll, 3% of payroll for unemployment insurance; sickness benefit 75% and maternity 66% of average daily covered earnings; unemployment benefit 55% for up to 50 months; minimum-wage floor 11,112,690 rials. Caveat: these are programme rules and benefit formulas, not cash-transfer coverage/spending statistics. No Iranian official social-protection statistics page was reachable, and the ILO World Social Protection dashboards and social-protection.org country profile returned 500/no Iran-specific content.",
       "_url_route": "government fallback (US SSA SSPTW) after Iranian welfare-ministry hosts and ILO/World Bank country routes failed",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "SSA page is 'Social Security Programs Throughout the World: Asia and the Pacific, 2018' (content created March 2019). The page states no publication frequency or regional rotation cycle and lists no other editions."
     },
     {
       "id": "ir-petrochemicals",
@@ -1254,8 +820,8 @@
       "domains": [
         "proposed:petrochemicals",
         "proposed:non-oil",
-        "proposed:exports",
-        "proposed:industry"
+        "trade",
+        "industry"
       ],
       "_cadence_original": "annual / continuous",
       "_batch": [
@@ -1272,7 +838,9 @@
       "last_updated": null,
       "_url_evidence": "PARTIAL MATCH — retrieved an official National Petrochemical Company (NPC) page carrying Iranian petrochemical capacity/output figures: ~3 million t of intermediate and final products in 1977, 14 million t/yr capacity by 1999, ~68 million t/yr by 2020, and a projected >133 million t/yr by 2025 from 55 ongoing projects. It is NPC's own page and does contain production-capacity statistics, but it is a narrative history page and carries no export statistics. No NPC statistics section could be reached (nipna.ir and nipc.ir Persian host both unreachable).",
       "_url_route": "alternate hostname — en.nipc.ir answered where nipc.ir / nipna.ir did not",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "en.nipc.ir/History is a narrative company/industry history page with a placeholder 'Last Update date: Jan 1 1900'; it contains no statistical release schedule or dated editions."
     },
     {
       "id": "ir-non-oil-exports",
@@ -1284,9 +852,8 @@
       "description": "Aggregate and commodity-structure statistics on non-oil exports. Petrochemicals, minerals, agricultural products and other manufactures form the main residual external-earnings base under oil sanctions.",
       "url": null,
       "domains": [
-        "proposed:exports",
-        "proposed:non-oil",
-        "proposed:trade"
+        "trade",
+        "proposed:non-oil"
       ],
       "_cadence_original": "continuous / annual",
       "_batch": [
@@ -1303,62 +870,6 @@
       "last_updated": null
     },
     {
-      "id": "ir-digital",
-      "title": "Digital economy and e-commerce framing",
-      "publisher": "Derived from licensing and platform sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Framing and available statistics on digital businesses, e-commerce licensing and online activity. Digital activity continues under constraints on international platforms, payment systems and connectivity.",
-      "url": null,
-      "domains": [
-        "proposed:digital",
-        "proposed:ecommerce"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch7.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Digital densification under sanctions-constrained technology and payment conditions.",
-      "_referenced_by": [
-        "Services and retail analysis",
-        "Labour and youth employment discussions",
-        "Sanctions and technology-access framing"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ir-batch7-meta",
-      "title": "Iran social–petrochemical–digital densification meta-node",
-      "publisher": "Derived from social, petrochemical and digital sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding social protection and cash-transfer statistics, petrochemical production and exports, non-oil export statistics, and digital/e-commerce framing into a coherent welfare–non-oil–digital layer.",
-      "url": null,
-      "domains": [
-        "proposed:social",
-        "proposed:petrochemicals",
-        "proposed:digital",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch7.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 7 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, sanctions, poverty and industry series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "ir-power",
       "title": "Electricity generation and installed capacity statistics",
       "publisher": "Ministry of Energy / related",
@@ -1368,9 +879,7 @@
       "description": "Installed generation capacity (thermal, combined-cycle, hydro, nuclear, renewables) and electricity production statistics. Capacity has surpassed 100 GW; gas and combined-cycle dominate; nuclear and renewables remain small shares.",
       "url": "https://amar.org.ir/%D8%AF%D8%A7%D8%AF%D9%87%D9%87%D8%A7-%D9%88-%D8%A7%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA-%D8%A2%D9%85%D8%A7%D8%B1%DB%8C/%D8%A7%D9%86%D8%B1%DA%98%DB%8C/%D8%A2%D8%A8-%D9%88-%D8%A8%D8%B1%D9%82",
       "domains": [
-        "proposed:power",
-        "proposed:electricity",
-        "proposed:energy"
+        "energy"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1386,7 +895,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the Statistical Centre of Iran water-and-electricity statistics page (دادهها و اطلاعات آماری › انرژی › آب و برق). Text confirms the electricity section covers 'generation, transmission, distribution and consumption of electricity (residential and industrial connections)' compiled annually since 1346, sourced from the Ministry of Energy (formerly Ministry of Water and Power). Note the publisher is SCI rather than the Ministry: Tavanir (tavanir.org.ir) still serves only an 'ORA-00257: archiver error' page and its statistics subdomain amar.tavanir.org.ir never answered.",
-      "_url_route": "amar.org.ir Persian topic path, bare host, second attempt"
+      "_url_route": "amar.org.ir Persian topic path, bare host, second attempt",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The SCI water-and-electricity data page states the Ministry of Energy 'هر ساله در قالب نشریات آماری تهیه و منتشر می‌کند' - prepares and publishes the electricity statistics annually in statistical publications.",
+      "releases_per_year": 1
     },
     {
       "id": "ir-mining",
@@ -1398,9 +910,8 @@
       "description": "Production statistics for metallic and non-metallic minerals. Iran ranks among the world’s leading producers for several commodities (e.g. strontium, direct-reduced iron, gypsum, iron ore).",
       "url": "https://amar.org.ir/%D8%AF%D8%A7%D8%AF%D9%87%D9%87%D8%A7-%D9%88-%D8%A7%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA-%D8%A2%D9%85%D8%A7%D8%B1%DB%8C/%D8%B5%D9%86%D8%B9%D8%AA-%D9%88-%D9%85%D8%B9%D8%AF%D9%86/%D9%85%D8%B9%D8%AF%D9%86",
       "domains": [
-        "proposed:mining",
-        "proposed:minerals",
-        "proposed:industry"
+        "mining",
+        "industry"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1429,9 +940,8 @@
       "description": "Official GRDP for Isfahan — a major industrial and historic central province that ranks among the larger non-oil provincial economies.",
       "url": "https://amar.org.ir/hesabmelli",
       "domains": [
-        "proposed:grdp",
-        "proposed:isfahan",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:isfahan"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1460,9 +970,8 @@
       "description": "Official GRDP for Fars — a large southern province with mixed agriculture, services and industry that ranks in the upper tier of provincial economies.",
       "url": "https://amar.org.ir/hesabmelli",
       "domains": [
-        "proposed:grdp",
-        "proposed:fars",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:fars"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1491,10 +1000,9 @@
       "description": "Official GRDP for Bushehr — an important oil, gas and petrochemical province on the Persian Gulf that ranks among the larger provincial economies relative to its population.",
       "url": "https://amar.org.ir/hesabmelli",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:bushehr",
-        "proposed:oil",
-        "proposed:regional"
+        "energy"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1514,34 +1022,6 @@
       "_url_match": "series-level (corroborated)"
     },
     {
-      "id": "ir-batch8-meta",
-      "title": "Iran power–mining–provincial densification meta-node",
-      "publisher": "Derived from energy, mining and SCI sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding electricity generation capacity and production, mining/mineral statistics, and the GRDP series for Isfahan, Fars and Bushehr into a coherent energy–mining–further-provincial layer.",
-      "url": null,
-      "domains": [
-        "proposed:power",
-        "proposed:mining",
-        "proposed:provincial",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch8.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 8 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, industry, Tehran/Khuzestan and energy series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "ir-tourism",
       "title": "International visitor arrivals and tourism statistics",
       "publisher": "Ministry of Cultural Heritage, Tourism and Handicrafts / related",
@@ -1551,8 +1031,8 @@
       "description": "Official statistics on foreign tourist arrivals and related tourism indicators. Arrivals have recovered into the multi-million range in recent Persian years despite sanctions and regional tensions.",
       "url": "https://amar.org.ir/tourism-statistics",
       "domains": [
-        "proposed:tourism",
-        "proposed:services",
+        "tourism",
+        "services",
         "proposed:arrivals"
       ],
       "_cadence_original": "annual",
@@ -1582,9 +1062,9 @@
       "description": "Statistics on building permits, residential units and construction activity. Housing investment and construction are sensitive to high inflation, credit conditions and urban demand.",
       "url": null,
       "domains": [
-        "proposed:housing",
+        "housing",
         "construction",
-        "proposed:investment"
+        "investment"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -1599,63 +1079,6 @@
       ],
       "_jurisdiction_level_original": "national / urban",
       "last_updated": null
-    },
-    {
-      "id": "ir-brics",
-      "title": "BRICS membership and alternative external-architecture framing",
-      "publisher": "Government of Iran / BRICS related",
-      "country": "IR",
-      "jurisdiction_level": "international",
-      "region": "Iran",
-      "description": "Framing of Iran’s formal BRICS membership (from 2024) as part of an alternative external economic architecture aimed at diversifying partners, reducing dollar dependence and mitigating sanctions constraints. Complements the China and Russia bilateral nodes.",
-      "url": null,
-      "domains": [
-        "proposed:brics",
-        "proposed:external",
-        "proposed:sanctions",
-        "proposed:partnership"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iran-batch9.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Multilateral external-architecture densification under sanctions.",
-      "_referenced_by": [
-        "China and Russia partnership nodes",
-        "Sanctions and external-constraint framing",
-        "Trade and BOP analysis"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ir-batch9-meta",
-      "title": "Iran tourism–housing–BRICS densification meta-node",
-      "publisher": "Derived from tourism, construction and partnership sources",
-      "country": "IR",
-      "jurisdiction_level": "federal",
-      "region": "Iran",
-      "description": "Meta-node binding international visitor arrivals, housing/construction permit statistics, and BRICS membership / alternative external-architecture framing into a coherent services–investment–external layer.",
-      "url": null,
-      "domains": [
-        "proposed:tourism",
-        "proposed:housing",
-        "proposed:brics",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iran-batch9.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 9 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Services, investment, China, Russia and sanctions series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     }
   ],
   "dependencies": [],
@@ -1701,187 +1124,114 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
     "reports_without_url": [
-      "ir-batch1-meta",
-      "ir-batch10-meta",
-      "ir-sanctions",
-      "ir-batch2-meta",
-      "ir-subsidies",
-      "ir-china-trade",
-      "ir-batch3-meta",
-      "ir-oil-provinces",
-      "ir-npl",
-      "ir-batch4-meta",
       "ir-wheat",
-      "ir-defence-budget",
-      "ir-defence-policy",
       "ir-education",
-      "ir-batch5-meta",
-      "ir-climate-drought",
-      "ir-russia",
-      "ir-batch6-meta",
       "ir-non-oil-exports",
-      "ir-digital",
-      "ir-batch7-meta",
-      "ir-batch8-meta",
-      "ir-housing",
-      "ir-brics",
-      "ir-batch9-meta"
+      "ir-housing"
     ],
-    "reports_without_url_count": 25,
+    "reports_without_url_count": 4,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "ir-sci",
-        "text": "continuous"
+        "title": "Statistical Centre of Iran (SCI) institutional core",
+        "kind": "unknown",
+        "basis": "amar.org.ir homepage retrieved (most attempts time out). It shows only a dated news item (29 Tir 1397) and a reference to the 1395 Population and Housing Census; no release calendar and no stated periodicity for the office's outputs."
       },
       {
         "id": "ir-population",
-        "text": "census cycle + annual estimates"
-      },
-      {
-        "id": "ir-national-accounts",
-        "text": "quarterly / annual"
+        "title": "Population census and estimates",
+        "kind": "unknown",
+        "basis": "Same amar.org.ir homepage. It names the 'General Population and Housing Census 1395' but states no census interval and gives no cadence for population estimates; a single census year is not countable evidence."
       },
       {
         "id": "ir-cbi",
-        "text": "continuous"
-      },
-      {
-        "id": "ir-bop",
-        "text": "periodic"
+        "title": "Central Bank of the Islamic Republic of Iran institutional and reporting core",
+        "kind": "unknown",
+        "basis": "cbi.ir root timed out repeatedly; the English landing page that did answer lists Economic Trends, Annual Review, Economic Report & Balance Sheet and 'Monetary, Financial and Economic Statistics' but states no frequency for any of them except the implied yearly Annual Review, and gives no release calendar for the institution as a whole."
       },
       {
         "id": "ir-nuclear-power",
-        "text": "continuous / annual"
-      },
-      {
-        "id": "ir-eaeu",
-        "text": "continuous"
-      },
-      {
-        "id": "ir-youth-labour",
-        "text": "periodic"
-      },
-      {
-        "id": "ir-oil-production",
-        "text": "monthly / annual"
+        "title": "Nuclear power generation statistics (Bushehr)",
+        "kind": "unknown",
+        "basis": "IAEA Country Nuclear Power Profile for Iran is headed '(Updated 2022)' but the document states no update cycle for CNPP country profiles; no other dated editions are listed on the page."
       },
       {
         "id": "ir-oil-exports",
-        "text": "continuous"
+        "title": "Oil and petroleum product export statistics",
+        "kind": "unknown",
+        "basis": "opec.org/opec_web/en/about_us/163.htm is a static OPEC member-country facts-and-figures profile for Iran; it cites the Annual Statistical Bulletin as its data source but states no release frequency of its own and lists no dated editions."
       },
       {
         "id": "ir-gas",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "ir-sanctions",
-        "text": "continuous"
+        "title": "Natural gas production and domestic consumption statistics",
+        "kind": "unknown",
+        "basis": "gecf.org/countries/iran is a static GECF member country profile; no update cadence, no release calendar and no dated editions are stated (figures shown are a snapshot)."
       },
       {
         "id": "ir-labour",
-        "text": "quarterly / annual"
+        "title": "Labour force and unemployment statistics",
+        "kind": "unknown",
+        "basis": "The node points at the amar.org.ir homepage, which discusses employment/unemployment measurement concepts but states no survey or publication frequency and shows no release calendar for the labour force series."
       },
       {
         "id": "ir-poverty",
-        "text": "periodic"
-      },
-      {
-        "id": "ir-state-budget",
-        "text": "annual (budget cycle)"
-      },
-      {
-        "id": "ir-subsidies",
-        "text": "continuous"
-      },
-      {
-        "id": "ir-exchange-rate",
-        "text": "continuous / daily"
-      },
-      {
-        "id": "ir-china-trade",
-        "text": "continuous"
+        "title": "Poverty and living-standards statistics",
+        "kind": "unknown",
+        "basis": "World Bank documents page shows a single item, 'Islamic Republic of Iran Poverty and Equity Brief: April 2025'. Re-checked for series metadata and other editions: the page states no series frequency and lists no prior editions to count."
       },
       {
         "id": "ir-industry",
-        "text": "annual / periodic surveys"
-      },
-      {
-        "id": "ir-oil-provinces",
-        "text": "continuous"
+        "title": "Industrial production and manufacturing statistics",
+        "kind": "unknown",
+        "basis": "The node points at the amar.org.ir homepage, which says nothing about industrial/manufacturing survey periodicity and carries no release calendar or dated editions."
       },
       {
         "id": "ir-banking-system",
-        "text": "periodic"
-      },
-      {
-        "id": "ir-npl",
-        "text": "periodic"
+        "title": "Banking system structure and credit statistics",
+        "kind": "unknown",
+        "basis": "cbi.ir root was not retrievable on repeated attempts; the English landing page that answered says the Bank 'compiles and publishes a range' of monetary, financial and economic statistics but attaches no frequency to the banking/credit series."
       },
       {
         "id": "ir-agriculture",
-        "text": "annual / seasonal"
-      },
-      {
-        "id": "ir-wheat",
-        "text": "seasonal / annual"
-      },
-      {
-        "id": "ir-defence-policy",
-        "text": "continuous"
-      },
-      {
-        "id": "ir-education",
-        "text": "annual / census-linked"
+        "title": "Agriculture production statistics",
+        "kind": "unknown",
+        "basis": "amar.org.ir/agricultural-statistics lists past survey and census years only (crop/horticulture surveys 1386, 1389, 1394, 1396, 1397; agricultural censuses 1367, 1372, 1382, 1393; mushroom censuses 1380, 1385, 1391, 1396). Intervals are irregular (5-11 years) and the page states no ongoing release frequency."
       },
       {
         "id": "ir-health",
-        "text": "periodic / annual"
+        "title": "Health and vital statistics (life expectancy, mortality)",
+        "kind": "continuous-database",
+        "basis": "data.who.int/countries/364 is WHO's live country data portal: indicators carry individual data years and extraction dates and the citation is by access date ('Accessed on 14 August 2026'), with no discrete edition or stated release cycle."
       },
       {
         "id": "ir-water-stress",
-        "text": "periodic"
-      },
-      {
-        "id": "ir-climate-drought",
-        "text": "continuous"
-      },
-      {
-        "id": "ir-russia",
-        "text": "continuous"
+        "title": "Water resources and water-stress statistics",
+        "kind": "unknown",
+        "basis": "FAO AQUASTAT country profile page for Iran shows a profile dated 2008 and directs users to 'Country Statistics' for more recent data; no update cadence for profiles or data is stated on the page."
       },
       {
         "id": "ir-social-protection",
-        "text": "periodic"
+        "title": "Social protection and cash-transfer statistics",
+        "kind": "unknown",
+        "basis": "SSA page is 'Social Security Programs Throughout the World: Asia and the Pacific, 2018' (content created March 2019). The page states no publication frequency or regional rotation cycle and lists no other editions."
       },
       {
         "id": "ir-petrochemicals",
-        "text": "annual / continuous"
-      },
-      {
-        "id": "ir-non-oil-exports",
-        "text": "continuous / annual"
-      },
-      {
-        "id": "ir-digital",
-        "text": "continuous"
-      },
-      {
-        "id": "ir-power",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "ir-housing",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "ir-brics",
-        "text": "continuous"
+        "title": "Petrochemical production and export statistics",
+        "kind": "unknown",
+        "basis": "en.nipc.ir/History is a narrative company/industry history page with a placeholder 'Last Update date: Jan 1 1900'; it contains no statistical release schedule or dated editions."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1899,113 +1249,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "ir-batch1-meta",
-        "title": "Iran foundational statistical-system meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding other Iranian nodes into a foundation layer."
-      },
-      {
-        "id": "ir-batch10-meta",
-        "title": "Iran nuclear–EAEU–youth densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-sanctions",
-        "title": "Sanctions and external economic constraints framing",
-        "finding": "Not a publication - a synthesised analytical framing of the sanctions regime, not a discrete official report."
-      },
-      {
-        "id": "ir-batch2-meta",
-        "title": "Iran oil–sanctions–labour densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-subsidies",
-        "title": "Targeted subsidies and energy-subsidy framing",
-        "finding": "Not a publication - a policy/statistical framing of the subsidy system rather than a specific official report."
-      },
-      {
-        "id": "ir-china-trade",
-        "title": "Iran–China merchandise trade and oil sales statistics",
-        "finding": "Not a discrete publication - a derived bilateral node compiled from customs, CBI and shipping sources; no single official Iran-China trade publication found on a reachable official domain."
-      },
-      {
-        "id": "ir-batch3-meta",
-        "title": "Iran fiscal–exchange–China densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-oil-provinces",
-        "title": "Oil-producing provinces spatial framing",
-        "finding": "Not a publication - a spatial framing of oil-producing provinces, not an official report."
-      },
-      {
-        "id": "ir-batch4-meta",
-        "title": "Iran industry–provincial–banking densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-defence-policy",
-        "title": "National defence and security policy framing",
-        "finding": "Not a publication - a strategic/policy framing rather than an official report."
-      },
-      {
-        "id": "ir-batch5-meta",
-        "title": "Iran agriculture–defence–education densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-climate-drought",
-        "title": "Climate and drought framing",
-        "finding": "Not a publication - an analytical framing of climate variability and drought impacts."
-      },
-      {
-        "id": "ir-russia",
-        "title": "Iran–Russia economic and strategic partnership framing",
-        "finding": "Not a publication - a bilateral partnership framing rather than a specific official document."
-      },
-      {
-        "id": "ir-batch6-meta",
-        "title": "Iran health–water–Russia densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-digital",
-        "title": "Digital economy and e-commerce framing",
-        "finding": "Not a publication - a framing of digital-economy and e-commerce activity rather than a specific official report."
-      },
-      {
-        "id": "ir-batch7-meta",
-        "title": "Iran social–petrochemical–digital densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-batch8-meta",
-        "title": "Iran power–mining–provincial densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-brics",
-        "title": "BRICS membership and alternative external-architecture framing",
-        "finding": "Not a publication - a framing of Iran's BRICS membership and alternative external architecture."
-      },
-      {
-        "id": "ir-batch9-meta",
-        "title": "Iran tourism–housing–BRICS densification meta-node",
-        "finding": "Not a publication - a synthesised densification meta-node."
-      },
-      {
-        "id": "ir-defence-budget",
-        "title": "Defence / military expenditure statistics",
-        "finding": "Not sourced to an eligible publisher - the series is a SIPRI-aligned compilation, and SIPRI is an independent research institute rather than a government, central bank, statistics office or multilateral body."
-      },
-      {
-        "id": "ir-npl",
-        "title": "Non-performing loans and banking asset-quality statistics",
-        "finding": "Grok, agreeing with Claude: CBI pages load but no discrete non-performing-loans (مطالبات غیرجاری) product or series page exists."
-      }
-    ],
     "url_unreachable_or_not_published": [
       {
         "id": "ir-wheat",
@@ -2034,7 +1277,6 @@
         "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
-    "not_a_publication_note": "These 20 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
     "url_partial_match": [
       {
         "id": "ir-grdp-tehran",
@@ -2085,6 +1327,12 @@
         "caveat": "PARTIAL MATCH — retrieved the US Social Security Administration's 'Social Security Programs Throughout the World: Asia and the Pacific, 2018' country chapter for Iran (a government publication). It documents Iran's five social-protection branches (old age/disability/survivors, sickness and maternity, work injury, unemployment, family allowances) with quantitative parameters: employee contribution 5% of monthly earnings, employer 14% of payroll, 3% of payroll for unemployment insurance; sickness benefit 75% and maternity 66% of average daily covered earnings; unemployment benefit 55% for up to 50 months; minimum-wage floor 11,112,690 rials. Caveat: these are programme rules and benefit formulas, not cash-transfer coverage/spending statistics. No Iranian official social-protection statistics page was reachable, and the ILO World Social Protection dashboards and social-protection.org country profile returned 500/no Iran-specific content.",
         "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
       }
-    ]
+    ],
+    "not_a_publication_moved_to_archive": "21 nodes removed from this file on 2026-08-18; full records in _archive/ir-iran-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 23
+    }
   }
 }

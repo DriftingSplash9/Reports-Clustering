@@ -37,8 +37,8 @@
       "url": "https://elaw.klri.re.kr/eng_service/lawView.do?hseq=66269&lang=ENG",
       "domains": [
         "proposed:statistics-law",
-        "proposed:governance",
-        "proposed:statistical-system"
+        "governance",
+        "statistical-system"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch1.json"
@@ -65,7 +65,7 @@
       "url": "https://kostat.go.kr/eng/",
       "domains": [
         "proposed:statistical-office",
-        "proposed:governance"
+        "governance"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch1.json"
@@ -91,10 +91,8 @@
       "description": "Decennial (with inter-censal updates and register-based elements) complete enumeration of population, households and housing. Provides the benchmark for population estimates, sampling frames and a wide range of demographic and social statistics.",
       "url": "https://kostat.go.kr/portal/eng/surveyOutlines/1/1/index.static",
       "domains": [
-        "proposed:demography",
         "population",
-        "proposed:housing",
-        "proposed:census"
+        "housing"
       ],
       "_cadence_original": "null (primarily every 5–10 years with continuous updates)",
       "_batch": [
@@ -103,7 +101,9 @@
       "_shape": "own-cadence",
       "_notes": "Core demographic foundation. Used for population projections, electoral apportionment, sampling frames for household surveys, and as the reference for ageing and household-structure analysis. Parallel to Japan’s Population Census node.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-cpi",
@@ -116,9 +116,7 @@
       "releases_per_year": 12,
       "url": "https://kostat.go.kr/portal/eng/pressReleases/3/1/index.board",
       "domains": [
-        "proposed:prices",
-        "inflation",
-        "proposed:cpi"
+        "inflation"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch1.json"
@@ -139,9 +137,7 @@
       "releases_per_year": 12,
       "url": "https://kostat.go.kr/portal/eng/pressReleases/5/1/index.board",
       "domains": [
-        "labour",
-        "proposed:employment",
-        "proposed:unemployment"
+        "labour"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch1.json"
@@ -161,10 +157,8 @@
       "description": "Periodic household survey measuring income, expenditure, consumption patterns and living conditions. Source for distributional analysis, poverty-related indicators and the weights of the CPI basket.",
       "url": "https://kostat.go.kr/portal/eng/surveyOutlines/4/1/index.static",
       "domains": [
-        "proposed:household",
-        "proposed:income",
-        "proposed:expenditure",
-        "proposed:consumption"
+        "living-standards",
+        "proposed:expenditure"
       ],
       "_cadence_original": "quarterly / annual detailed",
       "_batch": [
@@ -173,7 +167,9 @@
       "_shape": "own-cadence",
       "_notes": "Key source for living standards, inequality and consumption analysis. Complements the labour-force and price series and feeds into national-accounts household-sector estimates.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-national-accounts-bok",
@@ -185,9 +181,7 @@
       "description": "Quarterly and annual national accounts compiled by the Bank of Korea in accordance with international standards (SNA). Includes GDP by production, expenditure and income approaches, institutional-sector accounts, and related aggregates.",
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "4 (quarterly) + annual",
       "_batch": [
@@ -196,7 +190,9 @@
       "_shape": "own-cadence",
       "_notes": "Core macroeconomic framework. BOK is the primary compiler of the Korean System of National Accounts. Continuously used for growth analysis, fiscal and monetary policy, and international comparisons. Parallel to Japan’s JSNA (CAO/ESRI) node.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "bok.or.kr/eng retrieved, but its release listing (Apr 2026) contains no national accounts / GDP item, no stated periodicity and no link to a publication calendar; nothing to count."
     },
     {
       "id": "kr-balance-of-payments",
@@ -208,9 +204,8 @@
       "description": "Monthly / quarterly balance-of-payments statistics and related external accounts compiled according to BPM6. Includes current account, capital and financial account, and international investment position.",
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
-        "proposed:external-sector",
-        "proposed:bop",
-        "proposed:trade",
+        "external-sector",
+        "trade",
         "proposed:capital-flows"
       ],
       "_cadence_original": "12 (monthly preliminary) + quarterly",
@@ -220,7 +215,10 @@
       "_shape": "own-cadence",
       "_notes": "Primary external-sector statistics. Closely watched given Korea’s export-oriented economy and large current-account swings. Links to trade statistics and to national-accounts external transactions.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BOK release list shows 'Balance of Payments during February 2026 (preliminary)' published 8 April 2026 - one release per reference month.",
+      "releases_per_year": 12
     },
     {
       "id": "kr-mining-manufacturing-survey",
@@ -233,9 +231,7 @@
       "releases_per_year": 12,
       "url": "https://kostat.go.kr/portal/eng/pressReleases/2/1/index.board",
       "domains": [
-        "proposed:industrial-production",
-        "proposed:manufacturing",
-        "proposed:short-term-indicators"
+        "industry"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch1.json"
@@ -257,7 +253,7 @@
       "domains": [
         "proposed:dissemination",
         "proposed:portal",
-        "proposed:infrastructure"
+        "infrastructure"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -266,7 +262,9 @@
       "_shape": "own-cadence",
       "_notes": "Infrastructure node analogous to Japan’s e-Stat. The practical gateway through which most official Korean statistics are accessed and cited.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "kosis.kr/eng is a live dissemination portal with continuously refreshed indicator tiles (e.g. '24.10 employment, '24.09 industry) and search/history features; no discrete edition and no stated release frequency."
     },
     {
       "id": "kr-bok",
@@ -278,10 +276,9 @@
       "description": "Central bank with primary responsibility for national accounts, flow of funds, balance of payments, monetary and financial statistics, and related macroeconomic indicators. Complements KOSTAT in the production of official economic statistics.",
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
-        "proposed:central-bank",
+        "monetary-policy",
         "national-accounts",
-        "proposed:monetary",
-        "proposed:external"
+        "external-sector"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch1.json"
@@ -307,7 +304,7 @@
       "releases_per_year": 12,
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
-        "proposed:prices",
+        "inflation",
         "proposed:producer-prices"
       ],
       "_batch": [
@@ -329,10 +326,8 @@
       "releases_per_year": 12,
       "url": "https://tradedata.go.kr/",
       "domains": [
-        "proposed:trade",
-        "proposed:exports",
-        "proposed:imports",
-        "proposed:external-sector"
+        "trade",
+        "external-sector"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch2.json"
@@ -352,9 +347,7 @@
       "description": "Bilateral free-trade agreement that entered into force in March 2012. Eliminates or reduces tariffs on the large majority of goods trade and includes provisions on services, investment, intellectual property, labour and environment. One of Korea’s most commercially significant bilateral agreements with its major security and economic partner.",
       "url": "https://ustr.gov/trade-agreements/free-trade-agreements/korus-fta",
       "domains": [
-        "proposed:trade",
-        "proposed:international-agreement",
-        "proposed:fta"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch2.json"
@@ -379,9 +372,7 @@
       "description": "Bilateral free-trade agreement that entered into force provisionally in 2011 and fully thereafter. Comprehensive coverage of goods, services, investment and regulatory cooperation. One of the earliest and most ambitious FTAs between the EU and an Asian economy.",
       "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/south-korea_en",
       "domains": [
-        "proposed:trade",
-        "proposed:international-agreement",
-        "proposed:fta"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch2.json"
@@ -405,8 +396,7 @@
       "description": "Plurilateral trade agreement among 15 Asia-Pacific economies that entered into force for Korea in 2022. Covers tariff reduction, rules of origin, services, investment and economic cooperation. Largest trade agreement by membership population.",
       "url": "https://www.dfat.gov.au/trade/agreements/in-force/rcep",
       "domains": [
-        "proposed:trade",
-        "proposed:international-agreement",
+        "trade",
         "proposed:rcep"
       ],
       "_batch": [
@@ -443,7 +433,9 @@
       "_shape": "own-cadence",
       "_notes": "Key corporate-sector statistics. Directly relevant to analysis of Korea’s concentrated industrial structure (large enterprises / business groups). Complements the Mining & Manufacturing Survey and national accounts with accounting-based measures of profitability, leverage and investment. Parallel to Japan’s Financial Statements Statistics of Corporations.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "bok.or.kr/eng retrieved but shows no Financial Statement Analysis release, no stated frequency and no release calendar."
     },
     {
       "id": "kr-vital-statistics",
@@ -455,9 +447,8 @@
       "description": "Annual (with monthly/quarterly provisional) statistics on live births, deaths, marriages and divorces, including the total fertility rate (TFR), crude rates and age-specific rates. Documents Korea’s ultra-low fertility (TFR recently around 0.7–0.8) and rapid demographic transition.",
       "url": "https://kostat.go.kr/portal/eng/pressReleases/8/1/index.board",
       "domains": [
-        "proposed:demography",
+        "population",
         "proposed:fertility",
-        "proposed:vital-statistics",
         "proposed:ageing"
       ],
       "_cadence_original": "12 (provisional) + annual detailed",
@@ -467,7 +458,9 @@
       "_shape": "own-cadence",
       "_notes": "Core demographic series that quantifies one of Korea’s most distinctive features — the world’s lowest total fertility rate. Continuously cited in population projections, social-policy, labour-supply and fiscal-sustainability analysis. Parallel to Japan’s Vital Statistics node but with even more extreme fertility levels.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-population-projections",
@@ -479,7 +472,7 @@
       "description": "Official long-term population projections (typically to 2070 or beyond) under alternative fertility, mortality and migration scenarios. Shows the projected peak and subsequent decline of total population and the rapid rise in the old-age dependency ratio.",
       "url": "https://kostat.go.kr/portal/eng/pressReleases/8/8/index.board",
       "domains": [
-        "proposed:demography",
+        "population",
         "proposed:projections",
         "proposed:ageing"
       ],
@@ -490,7 +483,9 @@
       "_shape": "own-cadence",
       "_notes": "Forward-looking demographic framework. Essential for planning education, pensions, healthcare, labour supply and regional policy under rapid population decline and super-ageing. Continuously referenced in medium- and long-term fiscal and social-policy documents.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-trade-by-enterprise",
@@ -502,8 +497,8 @@
       "description": "Statistics linking merchandise trade flows to enterprise size and characteristics (large enterprises, middle-standing enterprises, SMEs). Highlights the high concentration of exports among large firms.",
       "url": "https://kostat.go.kr/",
       "domains": [
-        "proposed:trade",
-        "proposed:enterprise",
+        "trade",
+        "industry",
         "proposed:concentration"
       ],
       "_cadence_original": "quarterly / periodic",
@@ -513,7 +508,9 @@
       "_shape": "own-cadence",
       "_notes": "Useful bridge between aggregate trade statistics and corporate-structure analysis. Documents the dominant role of large enterprises in Korea’s export performance and is relevant to chaebol-related economic discussion.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-industrial-production-detail",
@@ -526,8 +523,7 @@
       "releases_per_year": 12,
       "url": "https://kostat.go.kr/portal/eng/pressReleases/2/1/index.board",
       "domains": [
-        "proposed:industrial-production",
-        "proposed:manufacturing",
+        "industry",
         "proposed:semiconductors"
       ],
       "_batch": [
@@ -548,7 +544,6 @@
       "description": "Statistical products that allow comparison of the Seoul Capital Area (Seoul + Gyeonggi + Incheon) with the rest of the country in population, economic activity, income and social indicators. Captures the extreme concentration of population and economic activity in the capital region.",
       "url": "https://kostat.go.kr/menu.es?mid=a20110030000",
       "domains": [
-        "proposed:regional",
         "proposed:metro",
         "proposed:contrast"
       ],
@@ -560,7 +555,9 @@
       "_notes": "Regional-contrast node. Korea exhibits very high spatial concentration in the Seoul Capital Area; systematic comparison with non-capital regions is essential for hierarchy-homogeneity checks and for understanding regional inequality and policy responses. Parallel to Japan’s Tokyo + Okinawa contrast approach.",
       "_jurisdiction_level_original": "provincial / metro",
       "last_updated": null,
-      "_url_evidence": "Retrieved the English 'Regional Income' press-release series page under 'Regional Accounts and National Wealth' on Statistics Korea's own site (kostat.go.kr, now Ministry of Data and Statistics); it lists 'Regional Income in 2022 (Preliminary)', 'Preliminary Results of Regional Income in 2023' and quarterly 'Preliminary Results of Real Gross Regional Domestic Product', i.e. the preliminary regional-accounts/GRDP series by province (Seoul, Gyeonggi, Incheon vs the rest)."
+      "_url_evidence": "Retrieved the English 'Regional Income' press-release series page under 'Regional Accounts and National Wealth' on Statistics Korea's own site (kostat.go.kr, now Ministry of Data and Statistics); it lists 'Regional Income in 2022 (Preliminary)', 'Preliminary Results of Regional Income in 2023' and quarterly 'Preliminary Results of Real Gross Regional Domestic Product', i.e. the preliminary regional-accounts/GRDP series by province (Seoul, Gyeonggi, Incheon vs the rest).",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-super-aged-status",
@@ -573,7 +570,7 @@
       "url": "https://kostat.go.kr/",
       "domains": [
         "proposed:ageing",
-        "proposed:demography",
+        "population",
         "proposed:super-aged"
       ],
       "_cadence_original": "continuous / annual highlights",
@@ -583,7 +580,9 @@
       "_shape": "own-cadence",
       "_notes": "Documents Korea’s rapid transition to a super-aged society. Complements the Vital Statistics and Population Projections nodes from Batch 2 and provides the high-level framing for long-term care, pension and labour-supply analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-long-term-care-insurance",
@@ -598,7 +597,7 @@
         "proposed:long-term-care",
         "proposed:elderly",
         "proposed:social-insurance",
-        "proposed:welfare"
+        "living-standards"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -607,7 +606,9 @@
       "_shape": "own-cadence",
       "_notes": "Korea’s social-insurance response to rapid ageing, parallel to Japan’s Long-Term Care Insurance node. Benefit costs have roughly doubled in recent years; data on certification, ‘old-old’ care patterns and preferred living arrangements are heavily cited in ageing-society policy.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - nhis.or.kr/english returns HTTP 404; retried, same result."
     },
     {
       "id": "kr-gender-statistics",
@@ -631,7 +632,9 @@
       "_shape": "own-cadence",
       "_notes": "Captures the persistent gender structure of Korean society (employment gap, care burden, decision-making representation). Continuously referenced in labour, family and social-policy analysis. Parallel to Japan’s Gender Equality White Paper cluster.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - mogef.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-poverty-inequality",
@@ -643,8 +646,7 @@
       "description": "Official and research-based series on relative poverty (share of population below 50 % of median disposable income), Gini coefficients, and related distributional indicators, often with breakdowns by age (notably high elderly poverty) and household type.",
       "url": "https://kostat.go.kr/",
       "domains": [
-        "proposed:poverty",
-        "proposed:inequality",
+        "poverty",
         "proposed:income-distribution"
       ],
       "_cadence_original": "annual / periodic",
@@ -654,7 +656,9 @@
       "_shape": "own-cadence",
       "_notes": "Korea’s relative poverty rate has hovered around 15 % in recent years, with elderly poverty markedly higher. These series are essential for social-cohesion and fiscal-sustainability analysis and complement the Household Income and Expenditure Survey from Batch 1.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-monetary-aggregates",
@@ -667,8 +671,7 @@
       "releases_per_year": 12,
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
-        "proposed:monetary",
-        "proposed:money-supply",
+        "monetary-policy",
         "proposed:liquidity"
       ],
       "_batch": [
@@ -723,7 +726,9 @@
       "_shape": "own-cadence",
       "_notes": "Korea’s education system and private-supplement intensity are distinctive features of its social structure. These series link demographic change (shrinking school-age cohorts) to human-capital and labour-market outcomes.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "kess.kedi.re.kr returned only the page title with no content: no editions, dates or stated collection/publication frequency available from the page."
     },
     {
       "id": "kr-household-finance-welfare",
@@ -736,9 +741,9 @@
       "releases_per_year": 1,
       "url": "https://kostat.go.kr/",
       "domains": [
-        "proposed:household",
+        "living-standards",
         "proposed:wealth",
-        "proposed:debt",
+        "public-finance",
         "proposed:living-conditions"
       ],
       "_batch": [
@@ -770,7 +775,9 @@
       "_shape": "own-cadence",
       "_notes": "Distinctive feature of Korea’s ageing society: many older persons continue working well past traditional retirement ages, often from financial necessity. Links labour-force, pension and long-term-care analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-national-pension",
@@ -782,8 +789,7 @@
       "description": "Statistics on National Pension coverage, contributors, beneficiaries, benefit levels and fund finances. Central pillar of Korea’s public pension system under demographic pressure.",
       "url": "https://www.nps.or.kr/",
       "domains": [
-        "proposed:pensions",
-        "proposed:social-security",
+        "benefits",
         "proposed:ageing"
       ],
       "_cadence_original": "periodic / annual",
@@ -793,7 +799,9 @@
       "_shape": "own-cadence",
       "_notes": "Key social-security node under rapid ageing and low fertility. Continuously cited in fiscal-sustainability and intergenerational-equity discussions. Complements long-term care and elderly-employment series.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "nps.or.kr retrieved but the page is a service gateway (civil services, employer services, fund info); it lists no statistical bulletins, no dates and no stated publication frequency."
     },
     {
       "id": "kr-survey-business-activities",
@@ -828,9 +836,8 @@
       "description": "Annual structural survey and monthly short-term survey of service-industry establishments covering sales, employment and related indicators across wholesale/retail, accommodation/food, information/communication, real estate, professional services, education, health and other service sectors.",
       "url": "https://kostat.go.kr/",
       "domains": [
-        "proposed:services",
-        "proposed:tertiary",
-        "proposed:short-term-indicators"
+        "services",
+        "proposed:tertiary"
       ],
       "_cadence_original": "12 (monthly) + annual structural",
       "_batch": [
@@ -839,7 +846,9 @@
       "_shape": "own-cadence",
       "_notes": "Essential for a services-heavy modern economy. The monthly series provides timely activity indicators that complement industrial production; the annual survey supplies structural detail. Parallel to Japan’s Tertiary Industry Activity and related service surveys.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-national-business-survey",
@@ -862,7 +871,9 @@
       "_shape": "own-cadence",
       "_notes": "Structural foundation for understanding the distribution of economic activity across firm sizes and regions. Complements the Economic Census-style products and feeds into national accounts and industrial statistics.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-grdp-regional-accounts",
@@ -874,8 +885,7 @@
       "description": "Annual (and experimental quarterly) estimates of gross regional domestic product by province and metropolitan city, with industry breakdowns. Quantifies the extreme concentration of economic activity in the Seoul Capital Area (Seoul + Gyeonggi + Incheon) versus other regions.",
       "url": "https://kostat.go.kr/",
       "domains": [
-        "proposed:regional-accounts",
-        "proposed:grdp",
+        "national-accounts",
         "proposed:spatial-economy"
       ],
       "_cadence_original": "1 (annual) + experimental quarterly",
@@ -884,7 +894,9 @@
       ],
       "_shape": "own-cadence",
       "_notes": "Core regional-contrast series. Seoul Capital Area typically accounts for roughly half of national GDP; GRDP data make the hierarchy and peripheral-region differentials explicit. Parallel to Japan’s Prefectural Accounts + Tokyo/Okinawa contrast.",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-housing-statistics",
@@ -896,9 +908,8 @@
       "description": "Statistics on housing stock, ownership, household housing conditions, and price/transaction indices for apartments and other dwellings (including actual-transaction price indices). Housing is a central social and financial issue in Korea.",
       "url": "https://www.reb.or.kr/",
       "domains": [
-        "proposed:housing",
-        "proposed:real-estate",
-        "proposed:prices",
+        "housing",
+        "inflation",
         "proposed:wealth"
       ],
       "_cadence_original": "multiple (monthly price indices + periodic ownership/stock statistics)",
@@ -908,7 +919,9 @@
       "_shape": "own-cadence",
       "_notes": "High-value uniqueness node. Housing prices, ownership concentration and household debt linked to housing are major policy and social concerns. Complements the Survey of Household Finances and Living Conditions and regional accounts.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - reb.or.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-construction-statistics",
@@ -921,7 +934,7 @@
       "url": "https://kostat.go.kr/",
       "domains": [
         "construction",
-        "proposed:investment",
+        "investment",
         "proposed:housing-supply"
       ],
       "_cadence_original": "12 / periodic",
@@ -931,7 +944,9 @@
       "_shape": "own-cadence",
       "_notes": "Links industrial production, fixed investment in the national accounts, and housing-market statistics. Useful for understanding the construction cycle and housing-supply responses.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-sme-statistics",
@@ -945,7 +960,7 @@
       "domains": [
         "proposed:sme",
         "proposed:business-structure",
-        "proposed:employment"
+        "labour"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -954,7 +969,9 @@
       "_shape": "own-cadence",
       "_notes": "Balances the chaebol / large-enterprise picture with the SME sector that employs the majority of workers. Relevant to industrial-policy and regional-economy analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - mss.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-rd-innovation",
@@ -967,7 +984,7 @@
       "url": "https://www.msit.go.kr/",
       "domains": [
         "proposed:rd",
-        "proposed:innovation",
+        "research-innovation",
         "proposed:technology",
         "proposed:human-capital"
       ],
@@ -978,7 +995,9 @@
       "_shape": "own-cadence",
       "_notes": "High-value uniqueness node. Korea’s R&D-to-GDP ratio is among the world’s highest; these series link education, industrial structure and export competitiveness (especially semiconductors and ICT).",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - msit.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-ict-digital",
@@ -990,8 +1009,7 @@
       "description": "Statistics on ICT industry production, employment, broadband/internet penetration, digital trade and related digital-economy indicators.",
       "url": "https://www.msit.go.kr/",
       "domains": [
-        "proposed:ict",
-        "proposed:digital",
+        "services",
         "proposed:technology"
       ],
       "_cadence_original": "periodic / annual",
@@ -1001,7 +1019,9 @@
       "_shape": "own-cadence",
       "_notes": "Complements R&D and industrial-production series. Korea’s advanced digital infrastructure and ICT export strength are distinctive features of its economic structure.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - msit.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-regional-contrast-extended",
@@ -1013,7 +1033,6 @@
       "description": "Synthesised framework that systematically compares the Seoul Capital Area with other provinces and metropolitan cities using GRDP, population, ageing, fertility, employment and housing indicators. Tests hierarchy homogeneity and surfaces core–periphery differentials.",
       "url": "https://kosis.kr/visual/eRegionIndex/index.do",
       "domains": [
-        "proposed:regional",
         "proposed:contrast",
         "proposed:hierarchy"
       ],
@@ -1044,7 +1063,7 @@
         "proposed:immigration",
         "proposed:foreign-residents",
         "proposed:multicultural",
-        "proposed:demography"
+        "population"
       ],
       "_cadence_original": "annual / periodic surveys",
       "_batch": [
@@ -1053,7 +1072,9 @@
       "_shape": "own-cadence",
       "_notes": "Parallel to Japan’s foreign-residents cluster. Korea’s migrant population (ethnic Korean Chinese, Vietnamese and other Asian nationalities prominent) is a growing structural feature that interacts with ultra-low fertility and labour shortages. Multicultural marriage and birth statistics are recurringly cited in demographic and social-policy discussion.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-nuclear-energy",
@@ -1065,9 +1086,8 @@
       "description": "Statistics on nuclear electricity generation, capacity, utilisation rates and share of total generation (recently ~32 %, the highest in 15 years), together with the broader electricity generation mix (nuclear, coal, LNG, renewables).",
       "url": "https://www.kpx.or.kr/",
       "domains": [
-        "proposed:energy",
+        "energy",
         "proposed:nuclear",
-        "proposed:electricity",
         "proposed:generation-mix"
       ],
       "_cadence_original": "annual / monthly operational data",
@@ -1077,7 +1097,9 @@
       "_shape": "own-cadence",
       "_notes": "High-value uniqueness node. Korea maintains a large, high-utilisation nuclear fleet that supplies roughly one-third of electricity — a sharp contrast with Japan’s post-Fukushima trajectory. Directly relevant to energy-security, industrial-cost and climate-policy analysis. Complements industrial-production and export competitiveness (energy-intensive manufacturing).",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "kpx.or.kr retrieved but the landing page carries no statistical publications, no dated releases and no stated frequency (only ESG and renewables portal links)."
     },
     {
       "id": "kr-input-output",
@@ -1100,7 +1122,9 @@
       "_shape": "own-cadence",
       "_notes": "Structural backbone for understanding Korea’s production linkages, especially the semiconductor, auto and shipbuilding value chains. Parallel to Japan’s Input-Output Tables node. Continuously cited in industrial-policy and trade-impact analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "bok.or.kr/eng retrieved but shows no input-output / inter-industry table release, no benchmark cycle statement and no release calendar."
     },
     {
       "id": "kr-north-korea-statistics",
@@ -1137,7 +1161,7 @@
       "releases_per_year": 1,
       "url": "https://www.keei.re.kr/",
       "domains": [
-        "proposed:energy",
+        "energy",
         "proposed:energy-balance",
         "proposed:supply"
       ],
@@ -1159,9 +1183,9 @@
       "description": "Periodic survey of wages by industry, occupation, firm size, sex and age, together with related labour-cost indicators. Source for gender wage-gap and firm-size wage-differential analysis.",
       "url": "https://www.moel.go.kr/",
       "domains": [
-        "proposed:wages",
+        "labour",
         "proposed:labour-cost",
-        "proposed:inequality"
+        "poverty"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1170,7 +1194,9 @@
       "_shape": "own-cadence",
       "_notes": "Deepens the labour and gender clusters. Wage differentials by firm size are particularly relevant in Korea’s dualistic labour market (large enterprises vs SMEs).",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - moel.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-health-statistics",
@@ -1193,7 +1219,9 @@
       "_shape": "own-cadence",
       "_notes": "Complements the Long-Term Care and Vital Statistics nodes. Provides the broader health-system picture under rapid ageing.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - mohw.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-agriculture-fishery",
@@ -1206,8 +1234,7 @@
       "url": "https://kostat.go.kr/",
       "domains": [
         "agriculture",
-        "proposed:fishery",
-        "proposed:rural"
+        "proposed:fishery"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -1216,7 +1243,9 @@
       "_shape": "own-cadence",
       "_notes": "Completes the sectoral coverage. While manufacturing and services dominate, agriculture remains relevant for regional economies and food-security policy; also appears in North Korea comparative statistics.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
     },
     {
       "id": "kr-tourism-culture",
@@ -1228,9 +1257,9 @@
       "description": "Statistics on inbound/outbound tourism, tourism expenditure, cultural participation and related creative-industry indicators.",
       "url": "https://www.mcst.go.kr/",
       "domains": [
-        "proposed:tourism",
+        "tourism",
         "proposed:culture",
-        "proposed:services"
+        "services"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -1239,7 +1268,9 @@
       "_shape": "own-cadence",
       "_notes": "Supporting services-sector and soft-power node. Tourism and cultural exports (Hallyu) are material to services trade and national-image analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - mcst.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-justice-crime",
@@ -1251,9 +1282,7 @@
       "description": "Official statistics on reported crime, clearance rates, prosecution and judicial statistics.",
       "url": "https://www.spo.go.kr/",
       "domains": [
-        "proposed:crime",
-        "proposed:justice",
-        "proposed:security"
+        "governance"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1262,7 +1291,9 @@
       "_shape": "own-cadence",
       "_notes": "Social-structure supporting node. Provides the public-safety dimension that interacts with demographic change, urban concentration and social-cohesion analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "url not retrievable - spo.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
     },
     {
       "id": "kr-ghg-inventory",
@@ -1275,10 +1306,7 @@
       "releases_per_year": 1,
       "url": "https://www.gir.go.kr/",
       "domains": [
-        "proposed:environment",
-        "proposed:climate",
-        "proposed:ghg",
-        "proposed:emissions"
+        "environment"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1298,9 +1326,8 @@
       "description": "Korea is a party to the Paris Agreement (ratified). The Agreement and Korea’s successive Nationally Determined Contributions (NDCs) form the central international climate framework against which domestic GHG inventories, energy plans and industrial decarbonisation measures are assessed.",
       "url": "https://unfccc.int/",
       "domains": [
-        "proposed:climate",
-        "proposed:international-agreement",
-        "proposed:environment"
+        "environment",
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1326,8 +1353,8 @@
       "domains": [
         "proposed:biodiversity",
         "proposed:marine",
-        "proposed:international-agreement",
-        "proposed:environment"
+        "trade",
+        "environment"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1350,9 +1377,7 @@
       "description": "As of 2026 Korea has 23 FTAs in force covering approximately 60 countries. Major partners include Chile (first FTA, 2004), Singapore, EFTA, ASEAN, India (CEPA), EU, Peru, United States (KORUS), Türkiye, Australia, Canada, China, Vietnam, Colombia, New Zealand, Central America, United Kingdom, RCEP, Indonesia, Israel, Cambodia, Philippines, UAE and others. The network is one of the densest among major economies.",
       "url": "https://www.fta.go.kr/",
       "domains": [
-        "proposed:trade",
-        "proposed:fta",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1376,9 +1401,7 @@
       "description": "Bilateral FTA that entered into force in December 2015. Covers goods, services and investment between Korea and its largest single trading partner.",
       "url": "https://www.fta.go.kr/",
       "domains": [
-        "proposed:trade",
-        "proposed:international-agreement",
-        "proposed:fta"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1402,8 +1425,7 @@
       "description": "Framework of agreements on goods (in force 2007), services (2009) and investment (2009) between Korea and the ten ASEAN members. Foundational regional economic partnership that predates RCEP.",
       "url": "https://www.fta.go.kr/",
       "domains": [
-        "proposed:trade",
-        "proposed:international-agreement",
+        "trade",
         "proposed:asean"
       ],
       "_batch": [
@@ -1428,8 +1450,8 @@
       "url": "https://www.oecd.org/korea/",
       "domains": [
         "proposed:international-organisation",
-        "proposed:trade",
-        "proposed:governance"
+        "trade",
+        "governance"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1453,9 +1475,9 @@
       "description": "Korea has concluded bilateral investment treaties with approximately 100 countries (around 84 in force as of mid-2025). Together with the investment chapters of its FTAs, these instruments form the legal framework for outbound and inbound investment protection.",
       "url": "https://www.mofa.go.kr/",
       "domains": [
-        "proposed:investment",
+        "investment",
         "proposed:bit",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch6.json"
@@ -1478,8 +1500,8 @@
       "description": "Periodic Financial Stability Report together with underlying statistics on household debt, corporate credit, bank soundness, non-bank financial institutions and systemic-risk indicators.",
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
-        "proposed:financial-stability",
-        "proposed:debt",
+        "financial-regulation",
+        "public-finance",
         "banking"
       ],
       "_cadence_original": "2 (typical) + continuous data",
@@ -1489,7 +1511,9 @@
       "_shape": "own-cadence",
       "_notes": "Deepens the financial cluster beyond monetary aggregates and Flow of Funds. Household debt and real-estate-linked leverage are major structural issues in Korea; these reports and statistics are continuously cited in macro-prudential and housing-policy analysis.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "bok.or.kr/eng retrieved but no Financial Stability Report item appears in its release list and no publication frequency or calendar is stated on the page."
     },
     {
       "id": "kr-external-debt-reserves",
@@ -1502,7 +1526,7 @@
       "url": "https://www.bok.or.kr/eng/",
       "domains": [
         "proposed:external-debt",
-        "proposed:reserves",
+        "external-sector",
         "proposed:external-vulnerability"
       ],
       "_cadence_original": "quarterly / monthly (reserves)",
@@ -1512,7 +1536,10 @@
       "_shape": "own-cadence",
       "_notes": "Complements the Balance of Payments and international-investment-position series. Important for assessing external resilience in an open, export-oriented economy.",
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BOK release list shows 'Official Foreign Reserves (March 2026)' published 3 April 2026 - one release per reference month; no separate external-debt release or frequency stated on the page.",
+      "releases_per_year": 12
     },
     {
       "id": "kr-montreal-protocol",
@@ -1524,9 +1551,9 @@
       "description": "Korea is party to the Vienna Convention and the Montreal Protocol (and subsequent amendments) on substances that deplete the ozone layer. These instruments drive domestic controls on ODS and related industrial regulation.",
       "url": "https://ozone.unep.org/",
       "domains": [
-        "proposed:environment",
+        "environment",
         "proposed:ozone",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1549,9 +1576,9 @@
       "description": "Korea is party to the Basel Convention governing transboundary movements of hazardous wastes and their disposal. Frames domestic waste-management and export/import controls.",
       "url": "https://www.basel.int/",
       "domains": [
-        "proposed:environment",
+        "environment",
         "proposed:waste",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1577,7 +1604,7 @@
         "proposed:biodiversity",
         "proposed:wildlife",
         "proposed:wetlands",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1600,10 +1627,10 @@
       "description": "Korea is party to the Stockholm Convention on Persistent Organic Pollutants and the Rotterdam Convention on Prior Informed Consent for certain hazardous chemicals and pesticides. Domestic POPs Control Act and related regulations implement these obligations.",
       "url": "https://www.pops.int/",
       "domains": [
-        "proposed:environment",
+        "environment",
         "proposed:chemicals",
         "proposed:pops",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1626,9 +1653,9 @@
       "description": "Korea is party to the UNCCD. While domestic desertification risk is limited, the Convention is relevant to international cooperation, land-degradation neutrality and Korea’s overseas development and environmental assistance.",
       "url": "https://www.unccd.int/",
       "domains": [
-        "proposed:environment",
-        "proposed:land",
-        "proposed:international-agreement"
+        "environment",
+        "housing",
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1651,9 +1678,9 @@
       "description": "As of mid-2025 Korea had concluded BITs with approximately 101 countries/territories (84 in force, a small number not yet in force, and some terminated or replaced). Major partners include early European treaties (Germany, UK, France, etc.), Japan, China, Vietnam, and a wide set of Asian, African, Middle-Eastern and Latin-American counterparts. Many newer FTAs contain investment chapters that interact with or supersede older BITs.",
       "url": "https://www.mofa.go.kr/",
       "domains": [
-        "proposed:investment",
+        "investment",
         "proposed:bit",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1679,7 +1706,7 @@
       "domains": [
         "proposed:digital-trade",
         "proposed:data",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1704,7 +1731,7 @@
       "domains": [
         "proposed:digital-trade",
         "proposed:data",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1729,7 +1756,7 @@
       "domains": [
         "proposed:digital-trade",
         "proposed:data",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1754,7 +1781,7 @@
       "domains": [
         "proposed:digital-trade",
         "proposed:data",
-        "proposed:international-agreement"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_SouthKorea-batch7.json"
@@ -1807,7 +1834,13 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
@@ -1817,143 +1850,201 @@
     "unresolved_cadence": [
       {
         "id": "kr-population-census",
-        "text": "null (primarily every 5–10 years with continuous updates)"
+        "title": "Population and Housing Census (인구주택총조사)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-household-income-expenditure",
-        "text": "quarterly / annual detailed"
+        "title": "Household Income and Expenditure Survey (가계동향조사 / related household income surveys)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-national-accounts-bok",
-        "text": "4 (quarterly) + annual"
-      },
-      {
-        "id": "kr-balance-of-payments",
-        "text": "12 (monthly preliminary) + quarterly"
+        "title": "Korean System of National Accounts / GDP and related aggregates (국민계정)",
+        "kind": "unknown",
+        "basis": "bok.or.kr/eng retrieved, but its release listing (Apr 2026) contains no national accounts / GDP item, no stated periodicity and no link to a publication calendar; nothing to count."
       },
       {
         "id": "kr-kosis",
-        "text": "continuous"
+        "title": "KOSIS — Korean Statistical Information Service (국가통계포털)",
+        "kind": "continuous-database",
+        "basis": "kosis.kr/eng is a live dissemination portal with continuously refreshed indicator tiles (e.g. '24.10 employment, '24.09 industry) and search/history features; no discrete edition and no stated release frequency."
       },
       {
         "id": "kr-financial-statement-analysis",
-        "text": "1 (annual detailed) + related releases"
+        "title": "Financial Statement Analysis (기업경영분석) — Bank of Korea",
+        "kind": "unknown",
+        "basis": "bok.or.kr/eng retrieved but shows no Financial Statement Analysis release, no stated frequency and no release calendar."
       },
       {
         "id": "kr-vital-statistics",
-        "text": "12 (provisional) + annual detailed"
+        "title": "Vital Statistics — Births, Deaths, Marriages, Divorces (인구동향조사 / 출생·사망통계)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-population-projections",
-        "text": "periodic (major revisions every few years)"
+        "title": "Population Projections (장래인구추계)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-trade-by-enterprise",
-        "text": "quarterly / periodic"
+        "title": "Trade by Enterprise Characteristics",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-seoul-capital-area",
-        "text": "varies"
+        "title": "Seoul Capital Area / Regional accounts and statistical contrast (preliminary)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-super-aged-status",
-        "text": "continuous / annual highlights"
+        "title": "Super-aged society indicators and elderly population statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-long-term-care-insurance",
-        "text": "periodic / annual"
+        "title": "Long-Term Care Insurance (노인장기요양보험) statistics and system performance",
+        "kind": "unknown",
+        "basis": "url not retrievable - nhis.or.kr/english returns HTTP 404; retried, same result."
       },
       {
         "id": "kr-gender-statistics",
-        "text": "annual / periodic"
+        "title": "Gender equality / women’s economic activity statistics and related white papers",
+        "kind": "unknown",
+        "basis": "url not retrievable - mogef.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-poverty-inequality",
-        "text": "annual / periodic"
+        "title": "Relative poverty rate and income inequality statistics (Gini, etc.)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-education-statistics",
-        "text": "1+"
+        "title": "Education statistics (schools, enrolment, advancement) — Korean Educational Development Institute / KOSTAT / Ministry of Education",
+        "kind": "unknown",
+        "basis": "kess.kedi.re.kr returned only the page title with no content: no editions, dates or stated collection/publication frequency available from the page."
       },
       {
         "id": "kr-elderly-employment",
-        "text": "annual / periodic"
+        "title": "Elderly / older-worker employment statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-national-pension",
-        "text": "periodic / annual"
+        "title": "National Pension Service statistics / National Pension coverage and finances",
+        "kind": "unknown",
+        "basis": "nps.or.kr retrieved but the page is a service gateway (civil services, employer services, fund info); it lists no statistical bulletins, no dates and no stated publication frequency."
       },
       {
         "id": "kr-service-industry-survey",
-        "text": "12 (monthly) + annual structural"
+        "title": "Service Industry Survey / Monthly Service Industry Survey",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-national-business-survey",
-        "text": "periodic (often annual or every few years)"
+        "title": "National Business Survey / Census of Establishments (전국사업체조사)",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-grdp-regional-accounts",
-        "text": "1 (annual) + experimental quarterly"
+        "title": "Gross Regional Domestic Product (GRDP) / Regional Accounts",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-housing-statistics",
-        "text": "multiple (monthly price indices + periodic ownership/stock statistics)"
+        "title": "Housing statistics and House Price / Transaction indices",
+        "kind": "unknown",
+        "basis": "url not retrievable - reb.or.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-construction-statistics",
-        "text": "12 / periodic"
+        "title": "Construction statistics / Construction orders and permits",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-sme-statistics",
-        "text": "periodic / annual"
+        "title": "SME / Small and Medium Enterprise statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - mss.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-rd-innovation",
-        "text": "annual / periodic"
+        "title": "R&D and innovation statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - msit.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-ict-digital",
-        "text": "periodic / annual"
+        "title": "ICT / Digital economy statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - msit.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-foreign-residents",
-        "text": "annual / periodic surveys"
+        "title": "Foreign Residents / Migrant population statistics and Multicultural Family / Marriage statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-nuclear-energy",
-        "text": "annual / monthly operational data"
+        "title": "Nuclear power generation and electricity generation mix statistics",
+        "kind": "unknown",
+        "basis": "kpx.or.kr retrieved but the landing page carries no statistical publications, no dated releases and no stated frequency (only ESG and renewables portal links)."
       },
       {
         "id": "kr-input-output",
-        "text": "periodic (benchmark every few years + updates)"
+        "title": "Input-Output Tables / Inter-industry relations tables",
+        "kind": "unknown",
+        "basis": "bok.or.kr/eng retrieved but shows no input-output / inter-industry table release, no benchmark cycle statement and no release calendar."
       },
       {
         "id": "kr-wage-structure",
-        "text": "annual / periodic"
+        "title": "Wage Structure Survey / Labour cost statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - moel.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-health-statistics",
-        "text": "annual / periodic"
+        "title": "Health and medical statistics (beyond long-term care)",
+        "kind": "unknown",
+        "basis": "url not retrievable - mohw.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-agriculture-fishery",
-        "text": "periodic / annual"
+        "title": "Agriculture, forestry and fishery statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - kostat.go.kr blocks WebFetch (robots.txt fetch failed)."
       },
       {
         "id": "kr-tourism-culture",
-        "text": "periodic / annual"
+        "title": "Tourism and culture statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - mcst.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-justice-crime",
-        "text": "annual / periodic"
+        "title": "Crime and justice statistics",
+        "kind": "unknown",
+        "basis": "url not retrievable - spo.go.kr blocks WebFetch (robots.txt fetch failed); retried, same result."
       },
       {
         "id": "kr-financial-stability",
-        "text": "2 (typical) + continuous data"
-      },
-      {
-        "id": "kr-external-debt-reserves",
-        "text": "quarterly / monthly (reserves)"
+        "title": "Financial Stability Report and related BOK financial-system statistics",
+        "kind": "unknown",
+        "basis": "bok.or.kr/eng retrieved but no Financial Stability Report item appears in its release list and no publication frequency or calendar is stated on the page."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1964,8 +2055,12 @@
       "urls_found": 3,
       "still_missing": 0
     },
-    "not_a_publication": [],
     "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 0 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_moved_to_archive": "0 nodes removed from this file on 2026-08-18; full records in _archive/kr-south-korea-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 35
+    }
   }
 }

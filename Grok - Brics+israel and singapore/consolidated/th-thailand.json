@@ -16,7 +16,7 @@
       "2026-08-14_Thailand-batch7-provincial.json"
     ],
     "counts": {
-      "reports": 40,
+      "reports": 25,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -36,8 +36,7 @@
       "description": "Primary national statistical office responsible for censuses, surveys, national accounts coordination, prices, labour, demographic and multi-domain socio-economic statistics. Publishes the Statistical Yearbook and major survey series.",
       "url": "https://www.nso.go.th/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -51,7 +50,9 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The given URL (nso.go.th root) resolves to a language-selection splash carrying only a tagline and navigation images - no publication list, no calendar. The NSO main page behind it names census programmes and refers to a 'ปฏิทินการเผยแพร่ข้อมูล' (data release calendar) but does not state a frequency for the office's own output, so no single cadence is evidenced."
     },
     {
       "id": "th-population",
@@ -63,9 +64,7 @@
       "description": "Official population census and subsequent estimates. Population is approximately 71–72 million; Thailand is an upper-middle-income economy with advanced demographic transition and rising aging.",
       "url": "https://www.nso.go.th/",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "census cycle + annual estimates",
       "_batch": [
@@ -79,7 +78,9 @@
         "Regional development planning"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Same nso.go.th root URL as the institutional node - a language splash with no content. The NSO main page lists a Population and Housing Census among its programmes but gives no census interval and no schedule for the intercensal population estimates, so the page does not establish a frequency."
     },
     {
       "id": "th-national-accounts",
@@ -91,9 +92,7 @@
       "description": "Official national accounts (GDP by industry and expenditure). Central macro-output series for a diversified upper-middle-income economy with strong tourism, manufacturing and agricultural foundations.",
       "url": "https://www.nesdc.go.th/main.php?filename=national_account",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -108,7 +107,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "NESDC National Account hub page: lists National Income of Thailand (NI), Quarterly GDP (QGDP), GPP, capital stock and flow-of-funds series."
+      "_url_evidence": "NESDC National Account hub page: lists National Income of Thailand (NI), Quarterly GDP (QGDP), GPP, capital stock and flow-of-funds series.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "NESDC national accounts page groups its products under 'สถิติ/ข้อมูลที่เผยแพร่ประจำ' (regularly published statistics) and names Quarterly Gross Domestic Product (ผลิตภัณฑ์มวลรวมในประเทศรายไตรมาส) alongside annual National Income, Gross Regional and Provincial Product, capital stock, flow-of-funds and input-output tables. Quarterly GDP is the finest stated cycle, hence 4; the annual NI and the Gross Regional and Provincial Product series sit at 1 within the same page. Note: this is the only item in the Thai file pointing at NESDC - no five-item shared Gross Regional and Provincial Product page exists in this input; the repeated URLs here are nso.go.th (2 items) and bot.or.th (3 items). No release dates are printed on the page.",
+      "releases_per_year": 4
     },
     {
       "id": "th-cpi",
@@ -121,8 +123,6 @@
       "releases_per_year": 12,
       "url": "https://www.tpso.go.th/economic-data/consumer-price-index",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_batch": [
@@ -149,9 +149,7 @@
       "description": "Central bank responsible for monetary policy, financial stability, foreign-exchange management and key macro-financial and external statistics. Publishes monetary, banking, exchange-rate, BOP and related series.",
       "url": "https://www.bot.or.th/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
+        "monetary-policy"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -165,7 +163,9 @@
         "Financial stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The given URL (bot.or.th root) is a language-selection splash with no publication content. The BOT statistics section behind it states only generic timing rules across four tiers - daily published every business day, weekly on the last business day of the following week, monthly on the last business day of the following month, quarterly on the last business day of the following quarter - and assigns no cadence to the institution as a whole, so no single number is supportable."
     },
     {
       "id": "th-bop",
@@ -177,9 +177,8 @@
       "description": "BOP and external-sector statistics. Tourism and goods exports (electronics, vehicles, agriculture) are major credits; the external accounts are a central policy focus.",
       "url": "https://www.bot.or.th/",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:tourism"
+        "external-sector",
+        "tourism"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -193,32 +192,9 @@
         "Trade and tourism discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "th-batch1-meta",
-      "title": "Thailand foundational statistical-system meta-node",
-      "publisher": "Derived from NSO, NESDC and BOT sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding the NSO institutional core, population, national accounts, CPI, BOT institutional role and BOP into the opening foundation layer for Thai research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node for Thai research.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Same bot.or.th root splash. The external-sector statistics page that carries balance of payments prints no frequency label next to the BOP, trade or external-debt tables - it only announces a June 2026 revision to 26 external-sector tables and refers users to individual table descriptions or an email contact. Frequency not stated on the page."
     },
     {
       "id": "th-tourism",
@@ -230,9 +206,9 @@
       "description": "Official statistics on international visitor arrivals and tourism receipts. Tourism is a major services credit in the balance of payments; recent years show arrivals in the low-to-mid 30 millions range and revenue in the multi-trillion-baht range.",
       "url": "https://www.mots.go.th/news/category/411",
       "domains": [
-        "proposed:tourism",
-        "proposed:services",
-        "proposed:external"
+        "tourism",
+        "services",
+        "external-sector"
       ],
       "_cadence_original": "continuous / annual",
       "_batch": [
@@ -247,7 +223,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Ministry of Tourism and Sports tourism statistics hub, indexing yearly international tourist arrival and tourism revenue statistics from 2008 to 2026."
+      "_url_evidence": "Ministry of Tourism and Sports tourism statistics hub, indexing yearly international tourist arrival and tourism revenue statistics from 2008 to 2026.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Ministry of Tourism and Sports category 411 is organised as one entry per year, 'สถิติด้านการท่องเที่ยว ปี X', running from 2008 through 2026 (Thai years 2551-2569), plus a few one-off dated items from 2019. The listing is an annual repository; no monthly or weekly editions appear at this level.",
+      "releases_per_year": 1
     },
     {
       "id": "th-industrial-production",
@@ -260,9 +239,7 @@
       "releases_per_year": 12,
       "url": "https://www.oie.go.th/view/1/industrial_indices/EN-US",
       "domains": [
-        "proposed:industry",
-        "proposed:manufacturing",
-        "proposed:production"
+        "industry"
       ],
       "_batch": [
         "2026-08-14_Thailand-batch2.json"
@@ -288,9 +265,7 @@
       "description": "Labour-force participation, employment and unemployment rates from the Labour Force Survey. Unemployment is typically very low by international standards (around or below 1% in recent readings).",
       "url": "https://www.nso.go.th/",
       "domains": [
-        "labour",
-        "proposed:employment",
-        "proposed:unemployment"
+        "labour"
       ],
       "_cadence_original": "monthly",
       "_batch": [
@@ -317,9 +292,8 @@
       "description": "Merchandise trade with ASEAN partners. ASEAN is a core regional market and production-network partner for Thai manufacturing and agricultural exports.",
       "url": "https://tradereport.moc.go.th/en/stat/report01",
       "domains": [
-        "proposed:trade",
-        "proposed:asean",
-        "proposed:regional"
+        "trade",
+        "proposed:asean"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -334,64 +308,9 @@
       ],
       "_jurisdiction_level_original": "regional",
       "last_updated": null,
-      "_url_evidence": "Ministry of Commerce official trade statistics report system; provides export/import/balance data with a country-group selection covering ASEAN."
-    },
-    {
-      "id": "th-asean",
-      "title": "ASEAN membership and regional economic framing",
-      "publisher": "Government of Thailand / ASEAN",
-      "country": "TH",
-      "jurisdiction_level": "international",
-      "region": "Thailand–ASEAN",
-      "description": "Framing of Thailand’s founding membership in ASEAN and its role in regional economic integration, production networks and trade liberalisation. Continuously cited in external and industrial strategy analysis.",
-      "url": null,
-      "domains": [
-        "proposed:asean",
-        "proposed:regional",
-        "proposed:external"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Core regional-architecture node.",
-      "_referenced_by": [
-        "ASEAN trade statistics",
-        "Trade and investment analysis",
-        "BOP and external accounts"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "th-batch2-meta",
-      "title": "Thailand tourism–industry–labour–ASEAN densification meta-node",
-      "publisher": "Derived from TAT, OIE, NSO and BOT sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding tourism arrivals and revenue, industrial production, labour force statistics, ASEAN merchandise trade, and ASEAN membership framing into a coherent activity–services–regional layer.",
-      "url": null,
-      "domains": [
-        "proposed:tourism",
-        "proposed:industry",
-        "labour",
-        "proposed:asean",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 2 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, CPI, BOP and BOT series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Ministry of Commerce official trade statistics report system; provides export/import/balance data with a country-group selection covering ASEAN.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "MOC tradereport portal is an interactive query system - dashboards by country and product, harmonised-code search, monthly/yearly filters and API endpoints - rather than dated report releases. It links to a 'Statistic Publication Date' page but states no update frequency on this page."
     },
     {
       "id": "th-agriculture",
@@ -404,7 +323,6 @@
       "url": "https://catalog.oae.go.th/th/dataset/dataoae3101",
       "domains": [
         "agriculture",
-        "proposed:crops",
         "proposed:food"
       ],
       "_cadence_original": "annual / seasonal",
@@ -420,7 +338,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Office of Agricultural Economics data catalogue entry for 'Agricultural Statistics of Thailand' (annual): area, production, yield, farm-gate prices and land use by province."
+      "_url_evidence": "Office of Agricultural Economics data catalogue entry for 'Agricultural Statistics of Thailand' (annual): area, production, yield, farm-gate prices and land use by province.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OAE data catalogue metadata for สถิติการเกษตรของประเทศไทย states 'หน่วยความถี่ของการปรับปรุงข้อมูล: ทุกปี' (update frequency unit: every year). Record last modified 2568 (2025); data last updated 24 March 2564 (2021).",
+      "releases_per_year": 1
     },
     {
       "id": "th-rice",
@@ -434,7 +355,7 @@
       "domains": [
         "proposed:rice",
         "agriculture",
-        "proposed:exports"
+        "trade"
       ],
       "_cadence_original": "seasonal / annual",
       "_batch": [
@@ -449,7 +370,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "OAE dataset 'ปริมาณการผลิตข้าว': planted/harvested area, production and yield for wet- and dry-season rice by province from 1981; covers production only, not exports."
+      "_url_evidence": "OAE dataset 'ปริมาณการผลิตข้าว': planted/harvested area, production and yield for wet- and dry-season rice by province from 1981; covers production only, not exports.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OAE catalogue metadata for ปริมาณการผลิตข้าว (rice production quantity) gives 'หน่วยความถี่ของการปรับปรุงข้อมูล: ปี' (update frequency unit: year). Last updated 1 October 2566 (2023).",
+      "releases_per_year": 1
     },
     {
       "id": "th-rubber",
@@ -463,7 +387,7 @@
       "domains": [
         "proposed:rubber",
         "agriculture",
-        "proposed:exports"
+        "trade"
       ],
       "_cadence_original": "annual / continuous",
       "_batch": [
@@ -478,37 +402,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "OAE dataset for rubber (ยางพารา): standing area, tapped area, production and yield per rai by province, data from 1988 onward."
-    },
-    {
-      "id": "th-eec",
-      "title": "Eastern Economic Corridor (EEC) policy and investment framing",
-      "publisher": "Eastern Economic Corridor Office / Government of Thailand",
-      "country": "TH",
-      "jurisdiction_level": "provincial",
-      "region": "Eastern Thailand (Chachoengsao, Chonburi, Rayong)",
-      "description": "Flagship regional development and investment corridor covering the eastern seaboard provinces. Targets high-value industries, infrastructure and skills upgrading; continuously cited in industrial, FDI and spatial-strategy analysis.",
-      "url": null,
-      "domains": [
-        "proposed:eec",
-        "proposed:regional",
-        "proposed:investment",
-        "proposed:industry"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-centrality spatial-industrial policy node.",
-      "_referenced_by": [
-        "Industrial production and FDI analysis",
-        "Provincial and spatial development",
-        "National accounts and investment series"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "OAE dataset for rubber (ยางพารา): standing area, tapped area, production and yield per rai by province, data from 1988 onward.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OAE catalogue metadata for ปริมาณการผลิตยางพารา (rubber production volume) gives update frequency unit 'ปี' with a frequency value of 1, i.e. once a year. Record updated 12 September 2568 (2025); latest data year 2565 (2022).",
+      "releases_per_year": 1
     },
     {
       "id": "th-public-debt",
@@ -520,9 +417,7 @@
       "description": "Official statistics on public debt stock, composition (government, SOE, guarantees) and debt-to-GDP ratio. Recent readings place public debt in the mid-60s percent of GDP range.",
       "url": "https://www.pdmo.go.th/en/public-debt/debt-outstanding",
       "domains": [
-        "proposed:public-debt",
-        "proposed:fiscal",
-        "proposed:debt"
+        "public-finance"
       ],
       "_cadence_original": "monthly / periodic",
       "_batch": [
@@ -537,35 +432,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "PDMO public debt outstanding page showing monthly government, SOE, SFI and agency debt plus the debt-to-GDP ratio (63-65%)."
-    },
-    {
-      "id": "th-batch3-meta",
-      "title": "Thailand agriculture–EEC–fiscal densification meta-node",
-      "publisher": "Derived from agricultural, EEC and fiscal sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding agriculture and rice/rubber statistics, Eastern Economic Corridor framing, and public debt statistics into a coherent primary-sector, spatial-industrial and fiscal layer.",
-      "url": null,
-      "domains": [
-        "agriculture",
-        "proposed:eec",
-        "proposed:fiscal",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Tourism, industry, ASEAN and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "PDMO public debt outstanding page showing monthly government, SOE, SFI and agency debt plus the debt-to-GDP ratio (63-65%).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PDMO debt-outstanding page carries one entry per month in an unbroken run - September 2024 through July 2025 - covering government, state-enterprise and SFI debt plus the debt-to-GDP ratio. No schedule is stated in words; monthly cadence counted from the consecutive dated entries.",
+      "releases_per_year": 12
     },
     {
       "id": "th-grdp-bangkok",
@@ -577,9 +447,8 @@
       "description": "Official GRDP for Bangkok — the dominant primate-city economy, accounting for a very large share of national GDP through services, finance, trade, tourism and headquarters activity.",
       "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
       "domains": [
-        "proposed:grdp",
-        "proposed:bangkok",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:bangkok"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -598,35 +467,6 @@
       "_url_match": "series-level (corroborated)"
     },
     {
-      "id": "th-provincial-structure",
-      "title": "Provincial and regional product structure framing",
-      "publisher": "Derived from NESDC Gross Regional and Provincial Product series",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "System-level view of the strong concentration of economic activity in Bangkok and the Central / Eastern seaboard (including EEC provinces), with secondary poles and lagging regions elsewhere. Continuously cited in spatial and development analysis.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:regional",
-        "proposed:spatial"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Spatial densification frame linking Bangkok, EEC and the rest of the country.",
-      "_referenced_by": [
-        "Bangkok GRDP and EEC nodes",
-        "National accounts and disparity analysis",
-        "Tourism and industrial location patterns"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "th-power",
       "title": "Electricity generation and capacity statistics",
       "publisher": "Energy Policy and Planning Office / EGAT related",
@@ -636,9 +476,7 @@
       "description": "Installed generation capacity, power generation by fuel type, peak demand and consumption statistics. Natural gas, coal, hydro, renewables and imports form the mix; power is a critical infrastructure series for industry and tourism.",
       "url": "https://www.eppo.go.th/data-energy-statistic/energy-statistic/electric-energy-stat/%E0%B9%84%E0%B8%9F%E0%B8%9F%E0%B9%89%E0%B8%B2-2/",
       "domains": [
-        "proposed:power",
-        "proposed:electricity",
-        "proposed:energy"
+        "energy"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -653,7 +491,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "EPPO electricity statistics page covering capacity, generation, peak demand, consumption, import/export and fuel used."
+      "_url_evidence": "EPPO electricity statistics page covering capacity, generation, peak demand, consumption, import/export and fuel used.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "EPPO electricity statistics page publishes capacity, generation, peak, consumption, import/export and fuel-used tables with Current / Monthly / Yearly views and downloadable exports, the latest being 'Current 2026 (6 month)'. Monthly is the finest published table cycle; the page itself states no release schedule beyond the monthly view.",
+      "releases_per_year": 12
     },
     {
       "id": "th-banking-system",
@@ -666,7 +507,6 @@
       "url": "https://www.bot.or.th/",
       "domains": [
         "banking",
-        "proposed:credit",
         "proposed:financial-system"
       ],
       "_cadence_original": "quarterly / periodic",
@@ -681,7 +521,9 @@
         "Monetary and fiscal series"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Same bot.or.th root splash. The BOT financial-institutions statistics page lists the Summary Statement of Assets and Liabilities and the Commercial Banks' Report on Deposits and Credits by District but attaches no monthly/quarterly/annual label to either and refers users to a contact email for schedules."
     },
     {
       "id": "th-npl",
@@ -712,34 +554,6 @@
       "releases_per_year": 4,
       "last_updated": null,
       "_url_evidence": "Bank of Thailand 'Financial Institutions' statistics category, described on the BOT statistics index as covering financial institutions' loans, deposits, financial status and non-performing loans (NPLs); BOT publishes no separate NPL-only landing page."
-    },
-    {
-      "id": "th-batch4-meta",
-      "title": "Thailand Bangkok–power–banking densification meta-node",
-      "publisher": "Derived from NESDC, energy and BOT sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding Bangkok GRDP, provincial/regional structure framing, electricity generation statistics, banking system structure and NPL statistics into a coherent spatial–energy–financial layer.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:power",
-        "banking",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "EEC, industry, tourism and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     },
     {
       "id": "th-education",
@@ -780,9 +594,8 @@
       "description": "Official and compiled poverty rates and living-standards indicators. National poverty has declined to low single digits on some measures; upper-middle-income poverty lines still show residual double-digit shares, with regional disparities.",
       "url": "https://www.nso.go.th/nsoweb/nso/statistics_and_indicators?impt_branch=309",
       "domains": [
-        "proposed:poverty",
-        "proposed:living-standards",
-        "proposed:welfare"
+        "poverty",
+        "living-standards"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -797,91 +610,10 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "NSO household income/expenditure indicator branch listing the poverty line, poverty incidence and number of poor, sourced from NESDC."
-    },
-    {
-      "id": "th-fta-network",
-      "title": "Thailand free trade agreement network framing",
-      "publisher": "Ministry of Commerce / related",
-      "country": "TH",
-      "jurisdiction_level": "international",
-      "region": "Thailand",
-      "description": "Overall framing of Thailand’s network of free trade agreements beyond ASEAN. Includes bilateral FTAs with Japan, Australia, New Zealand, India, Chile, Peru and plurilateral arrangements such as RCEP and ASEAN+1 frameworks. Continuously cited in trade-diversification and export analysis.",
-      "url": null,
-      "domains": [
-        "proposed:fta",
-        "proposed:trade",
-        "proposed:external"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "System-level FTA architecture node complementing ASEAN membership.",
-      "_referenced_by": [
-        "Merchandise trade statistics",
-        "ASEAN and industrial analysis",
-        "BOP and external accounts"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "th-rcep",
-      "title": "Regional Comprehensive Economic Partnership (RCEP) framing",
-      "publisher": "Governments of RCEP parties",
-      "country": "TH",
-      "jurisdiction_level": "international",
-      "region": "Thailand–RCEP",
-      "description": "Framing of Thailand’s participation in RCEP, the largest regional trade agreement by population and GDP coverage. Complements ASEAN and bilateral FTAs in the Indo-Pacific preferential architecture.",
-      "url": null,
-      "domains": [
-        "proposed:rcep",
-        "proposed:fta",
-        "proposed:regional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Major plurilateral densification of the external trade architecture.",
-      "_referenced_by": [
-        "FTA network framing",
-        "ASEAN and trade analysis",
-        "Industrial and investment discussions"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "th-batch5-meta",
-      "title": "Thailand education–poverty–FTA densification meta-node",
-      "publisher": "Derived from NSO, commerce and development sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding education enrolment statistics, poverty and living-standards indicators, FTA network framing and RCEP framing into a coherent human-capital, welfare and external-architecture layer.",
-      "url": null,
-      "domains": [
-        "education",
-        "proposed:poverty",
-        "proposed:fta",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 5 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "ASEAN, tourism, industry and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "NSO household income/expenditure indicator branch listing the poverty line, poverty incidence and number of poor, sourced from NESDC.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "NSO statistics branch 309 (household income and expenditure) lists ten series - household income, expenditure, debt, poverty line, share and number of poor, Gini coefficients - each as annual observations, with coverage 2547-2566 and 2555-2566 and dissemination dates of 10 October 2567 and 25 December 2568. Annual counted from the yearly data points; no periodicity is stated in words.",
+      "releases_per_year": 1
     },
     {
       "id": "th-health",
@@ -895,7 +627,7 @@
       "domains": [
         "health",
         "proposed:life-expectancy",
-        "proposed:vital-statistics"
+        "population"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -910,122 +642,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "NSO demographic/population indicator branch listing life expectancy at birth (and at 60/65/80), birth and death registrations and the total fertility rate."
-    },
-    {
-      "id": "th-defence-budget",
-      "title": "Defence / military expenditure statistics",
-      "publisher": "Derived from official budget and international compilations (SIPRI-aligned)",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Estimates of military expenditure. Continuously referenced in security, fiscal and regional strategic analysis.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:budget",
-        "proposed:military"
-      ],
-      "_cadence_original": "annual",
-      "_batch": [
-        "2026-08-14_Thailand-batch6.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core defence-resource node.",
-      "_referenced_by": [
-        "State budget and fiscal statistics",
-        "National security framing",
-        "Regional geopolitical analysis"
-      ],
-      "_jurisdiction_level_original": "national",
-      "releases_per_year": 1,
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "th-defence-policy",
-      "title": "National defence and security policy framing",
-      "publisher": "Ministry of Defence / related",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Policy framing of Thailand’s defence and security posture, including territorial integrity, internal security and regional cooperation. Continuously cited in strategic analysis.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:security",
-        "proposed:policy"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Policy-frame counterpart to the defence budget node.",
-      "_referenced_by": [
-        "Defence budget statistics",
-        "ASEAN and external analysis",
-        "Fiscal discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "th-digital",
-      "title": "Digital economy and e-commerce framing",
-      "publisher": "Derived from commerce and platform sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Framing and available statistics on digital commerce, e-commerce platforms and digitalisation of SMEs and retail. Strong growth in online sales volumes is a recurring feature.",
-      "url": null,
-      "domains": [
-        "proposed:digital",
-        "proposed:ecommerce"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Thailand-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Digital densification of the services and commerce cluster.",
-      "_referenced_by": [
-        "Services and retail analysis",
-        "SME and labour discussions",
-        "National development planning"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "th-batch6-meta",
-      "title": "Thailand health–defence–digital densification meta-node",
-      "publisher": "Derived from NSO, defence and commerce sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding life expectancy statistics, defence expenditure and policy framing, and digital/e-commerce framing into a coherent health–security–digital residual layer.",
-      "url": null,
-      "domains": [
-        "health",
-        "proposed:defence",
-        "proposed:digital",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 6 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Population, fiscal, tourism and services series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "NSO demographic/population indicator branch listing life expectancy at birth (and at 60/65/80), birth and death registrations and the total fertility rate.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "NSO statistics branch 300 lists vital and health indicators - population registration, births, deaths, life expectancy, fertility - as yearly series covering 2553-2568, with the most recent release dated 17 April 2569. Annual counted from the yearly data points and single annual release date; no explicit frequency statement.",
+      "releases_per_year": 1
     },
     {
       "id": "th-grdp-chonburi",
@@ -1037,7 +657,7 @@
       "description": "Official GPP for Chonburi — a core Eastern Economic Corridor province combining deep-sea port (Laem Chabang), industrial estates, automotive and logistics with tourism (Pattaya). Consistently among the largest provincial economies after Bangkok.",
       "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:chonburi",
         "proposed:eec"
       ],
@@ -1067,7 +687,7 @@
       "description": "Official GPP for Rayong — the industrial heart of the EEC, anchored by Map Ta Phut petrochemical complex, refineries and heavy industry. Frequently ranks among the highest in GPP per capita.",
       "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:rayong",
         "proposed:eec",
         "proposed:petrochemical"
@@ -1098,7 +718,7 @@
       "description": "Official GPP for Chiang Mai — the principal northern urban and tourism/services pole, ranking among the larger provincial economies outside the Central–Eastern core.",
       "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:chiangmai",
         "proposed:north"
       ],
@@ -1128,9 +748,9 @@
       "description": "Official GPP for Phuket — the principal southern island tourism economy. Highly sensitive to international visitor arrivals and a key node in the national tourism statistics.",
       "url": "https://www.nesdc.go.th/main.php?filename=gross_regional",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:phuket",
-        "proposed:tourism"
+        "tourism"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1147,34 +767,6 @@
       "last_updated": null,
       "_url_evidence": "NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Phuket; NESDC publishes no per-province landing page.",
       "_url_match": "series-level (corroborated)"
-    },
-    {
-      "id": "th-batch7-meta",
-      "title": "Thailand further-provincial densification meta-node",
-      "publisher": "Derived from NESDC provincial sources",
-      "country": "TH",
-      "jurisdiction_level": "federal",
-      "region": "Thailand",
-      "description": "Meta-node binding Chonburi and Rayong (EEC core), Chiang Mai (northern pole) and Phuket (southern tourism) GPP series into a coherent further-provincial layer that complements Bangkok and the earlier EEC framing.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:eec",
-        "proposed:tourism",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Thailand-batch7-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the further provincial densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Bangkok GRDP, EEC, tourism and industrial series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     }
   ],
   "dependencies": [],
@@ -1217,117 +809,55 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
-    "reports_without_url": [
-      "th-batch1-meta",
-      "th-asean",
-      "th-batch2-meta",
-      "th-eec",
-      "th-batch3-meta",
-      "th-provincial-structure",
-      "th-batch4-meta",
-      "th-fta-network",
-      "th-rcep",
-      "th-batch5-meta",
-      "th-defence-budget",
-      "th-defence-policy",
-      "th-digital",
-      "th-batch6-meta",
-      "th-batch7-meta"
-    ],
-    "reports_without_url_count": 15,
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "th-nso",
-        "text": "continuous"
+        "title": "National Statistical Office of Thailand (NSO) institutional core",
+        "kind": "unknown",
+        "basis": "The given URL (nso.go.th root) resolves to a language-selection splash carrying only a tagline and navigation images - no publication list, no calendar. The NSO main page behind it names census programmes and refers to a 'ปฏิทินการเผยแพร่ข้อมูล' (data release calendar) but does not state a frequency for the office's own output, so no single cadence is evidenced."
       },
       {
         "id": "th-population",
-        "text": "census cycle + annual estimates"
-      },
-      {
-        "id": "th-national-accounts",
-        "text": "quarterly / annual"
+        "title": "Population census and estimates",
+        "kind": "unknown",
+        "basis": "Same nso.go.th root URL as the institutional node - a language splash with no content. The NSO main page lists a Population and Housing Census among its programmes but gives no census interval and no schedule for the intercensal population estimates, so the page does not establish a frequency."
       },
       {
         "id": "th-bot",
-        "text": "continuous"
+        "title": "Bank of Thailand (BOT) institutional and reporting core",
+        "kind": "unknown",
+        "basis": "The given URL (bot.or.th root) is a language-selection splash with no publication content. The BOT statistics section behind it states only generic timing rules across four tiers - daily published every business day, weekly on the last business day of the following week, monthly on the last business day of the following month, quarterly on the last business day of the following quarter - and assigns no cadence to the institution as a whole, so no single number is supportable."
       },
       {
         "id": "th-bop",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "th-tourism",
-        "text": "continuous / annual"
+        "title": "Balance of Payments and external accounts",
+        "kind": "unknown",
+        "basis": "Same bot.or.th root splash. The external-sector statistics page that carries balance of payments prints no frequency label next to the BOP, trade or external-debt tables - it only announces a June 2026 revision to 26 external-sector tables and refers users to individual table descriptions or an email contact. Frequency not stated on the page."
       },
       {
         "id": "th-asean-trade",
-        "text": "continuous"
-      },
-      {
-        "id": "th-asean",
-        "text": "continuous"
-      },
-      {
-        "id": "th-agriculture",
-        "text": "annual / seasonal"
-      },
-      {
-        "id": "th-rice",
-        "text": "seasonal / annual"
-      },
-      {
-        "id": "th-rubber",
-        "text": "annual / continuous"
-      },
-      {
-        "id": "th-eec",
-        "text": "continuous"
-      },
-      {
-        "id": "th-public-debt",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "th-provincial-structure",
-        "text": "continuous"
-      },
-      {
-        "id": "th-power",
-        "text": "monthly / annual"
+        "title": "ASEAN merchandise trade statistics",
+        "kind": "continuous-database",
+        "basis": "MOC tradereport portal is an interactive query system - dashboards by country and product, harmonised-code search, monthly/yearly filters and API endpoints - rather than dated report releases. It links to a 'Statistic Publication Date' page but states no update frequency on this page."
       },
       {
         "id": "th-banking-system",
-        "text": "quarterly / periodic"
-      },
-      {
-        "id": "th-poverty",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "th-fta-network",
-        "text": "continuous"
-      },
-      {
-        "id": "th-rcep",
-        "text": "continuous"
-      },
-      {
-        "id": "th-health",
-        "text": "periodic"
-      },
-      {
-        "id": "th-defence-policy",
-        "text": "continuous"
-      },
-      {
-        "id": "th-digital",
-        "text": "continuous"
+        "title": "Banking system structure and credit statistics",
+        "kind": "unknown",
+        "basis": "Same bot.or.th root splash. The BOT financial-institutions statistics page lists the Summary Statement of Assets and Liabilities and the Commercial Banks' Report on Deposits and Credits by District but attaches no monthly/quarterly/annual label to either and refers users to a contact email for schedules."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1343,84 +873,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "th-batch1-meta",
-        "title": "Thailand foundational statistical-system meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding several Thai statistical sources into a 'foundation layer'."
-      },
-      {
-        "id": "th-asean",
-        "title": "ASEAN membership and regional economic framing",
-        "finding": "Not a publication - a framing summary of Thailand's ASEAN membership and regional integration role."
-      },
-      {
-        "id": "th-batch2-meta",
-        "title": "Thailand tourism–industry–labour–ASEAN densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding tourism, industry, labour and ASEAN nodes."
-      },
-      {
-        "id": "th-eec",
-        "title": "Eastern Economic Corridor (EEC) policy and investment framing",
-        "finding": "Not a publication - policy/institution framing of the Eastern Economic Corridor programme rather than a statistical product."
-      },
-      {
-        "id": "th-batch3-meta",
-        "title": "Thailand agriculture–EEC–fiscal densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding agriculture, EEC and fiscal nodes."
-      },
-      {
-        "id": "th-provincial-structure",
-        "title": "Provincial and regional product structure framing",
-        "finding": "Not a publication - a derived framing of spatial concentration built from the NESDC GPP series."
-      },
-      {
-        "id": "th-batch4-meta",
-        "title": "Thailand Bangkok–power–banking densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding Bangkok GRDP, power and banking nodes."
-      },
-      {
-        "id": "th-fta-network",
-        "title": "Thailand free trade agreement network framing",
-        "finding": "Not a publication - a framing summary of Thailand's FTA network rather than a specific official product."
-      },
-      {
-        "id": "th-rcep",
-        "title": "Regional Comprehensive Economic Partnership (RCEP) framing",
-        "finding": "Not a publication - a framing summary of Thailand's participation in RCEP."
-      },
-      {
-        "id": "th-batch5-meta",
-        "title": "Thailand education–poverty–FTA densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding education, poverty and trade-architecture nodes."
-      },
-      {
-        "id": "th-defence-policy",
-        "title": "National defence and security policy framing",
-        "finding": "Not a publication - a framing summary of Thailand's defence and security posture; no defence white paper or policy document located on mod.go.th via WebFetch."
-      },
-      {
-        "id": "th-digital",
-        "title": "Digital economy and e-commerce framing",
-        "finding": "Not a publication - a framing summary of Thailand's digital economy and e-commerce."
-      },
-      {
-        "id": "th-batch6-meta",
-        "title": "Thailand health–defence–digital densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding health, defence and digital nodes."
-      },
-      {
-        "id": "th-batch7-meta",
-        "title": "Thailand further-provincial densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding the further-provincial GPP nodes."
-      },
-      {
-        "id": "th-defence-budget",
-        "title": "Defence / military expenditure statistics",
-        "finding": "Not a distinct official publication - a derived estimate compiled from budget documents and SIPRI, which is not a government, central-bank, statistics-office or multilateral source; no Thai official military-expenditure series page found."
-      }
-    ],
-    "not_a_publication_note": "These 15 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
     "url_partial_match": [
       {
         "id": "th-grdp-bangkok",
@@ -1457,6 +909,12 @@
         "caveat": "Shared with 4 other nodes in this file — the URL is the right official series page but not specific to this node. NESDC Gross Regional and Provincial Product series page (reports plus Excel time series by province, 1995 onward) covering Phuket; NESDC publishes no per-province landing page.",
         "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
       }
-    ]
+    ],
+    "not_a_publication_moved_to_archive": "15 nodes removed from this file on 2026-08-18; full records in _archive/th-thailand-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 15
+    }
   }
 }

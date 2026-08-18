@@ -18,7 +18,7 @@
       "2026-08-14_Turkey-batch9-digital-climate.json"
     ],
     "counts": {
-      "reports": 54,
+      "reports": 40,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -38,8 +38,7 @@
       "description": "Primary national statistical office responsible for censuses, surveys, national accounts, prices, labour, demographic and multi-domain socio-economic statistics.",
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -53,7 +52,9 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "tuik.gov.tr homepage is a rolling release portal: it lists many separate dated bulletins (Motor Vehicles July 2026, Wage Earner Statistics June 2026, Service and Construction Production Indices June 2026, Agricultural PPI July 2026, Property Sales July 2026) and links a 'Veri Yayımlama Takvimi' publication calendar. The institution as a whole has no single discrete release cadence."
     },
     {
       "id": "tr-population",
@@ -65,9 +66,7 @@
       "description": "Official population census and Address-Based Population Registration System estimates. Population is approximately 88 million; urbanisation is high and the age structure is still relatively young compared with Europe.",
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "annual estimates + census cycle",
       "_batch": [
@@ -81,7 +80,9 @@
         "Regional development planning"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "URL is the TurkStat homepage, which shows no population (Adrese Dayalı Nüfus Kayıt Sistemi) release and states no census/estimate periodicity. The linked release calendar (tuik.gov.tr/Kurumsal/Veri_Takvimi and its veriportali redirect) renders only via JavaScript and returned no entries, so no countable evidence."
     },
     {
       "id": "tr-national-accounts",
@@ -93,9 +94,7 @@
       "description": "Official national accounts (GDP by industry and expenditure). Central macro-output series for a large, diversified upper-middle-income economy with significant manufacturing and services.",
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -109,7 +108,9 @@
         "External and industrial analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "URL is the TurkStat homepage; no GDP (Gayri Safi Yurt İçi Hasıla) release appears among the listed bulletins and no periodicity is stated. The linked data release calendar was JavaScript-only and returned no entries."
     },
     {
       "id": "tr-cpi",
@@ -122,8 +123,6 @@
       "releases_per_year": 12,
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_batch": [
@@ -149,9 +148,7 @@
       "description": "Central bank responsible for monetary policy, foreign-exchange management, banking supervision support and key macro-financial and external statistics. Publishes monetary, banking, exchange-rate, BOP and related series.",
       "url": "https://www.tcmb.gov.tr/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
+        "monetary-policy"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -165,7 +162,9 @@
         "Financial stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "tcmb.gov.tr homepage is a continuously updated statistics/publications portal - hourly-set exchange rates, weekly money and banking statistics, monthly price developments, quarterly Inflation Report, plus a 'Veri Yayımlama Takvimi'. No single discrete release for the institutional node."
     },
     {
       "id": "tr-bop",
@@ -177,9 +176,8 @@
       "description": "BOP and external-sector statistics. Structural current-account dynamics, strong tourism and services credits, and capital-account volatility are recurring features.",
       "url": "https://www.tcmb.gov.tr/",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:tourism"
+        "external-sector",
+        "tourism"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -193,32 +191,9 @@
         "Trade and tourism discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "tr-batch1-meta",
-      "title": "Turkey foundational statistical-system meta-node",
-      "publisher": "Derived from TurkStat and CBRT sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding the TurkStat institutional core, population, national accounts, CPI, CBRT institutional role and BOP into the opening foundation layer for Turkish research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node for Turkish research.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "On tcmb.gov.tr the balance of payments appears only as a category heading, 'Ödemeler Dengesi ve İlgili İstatistikler', with no frequency label and no dated editions listed (a neighbouring item, International Reserves and FX Liquidity, is month-tagged, but that is a different series)."
     },
     {
       "id": "tr-labour",
@@ -230,9 +205,7 @@
       "description": "Official labour-force participation, employment and unemployment rates (including seasonally adjusted series). Recent unemployment has fallen to multi-year lows in the mid-to-high single digits; youth and female rates remain structurally higher.",
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "labour",
-        "proposed:employment",
-        "proposed:unemployment"
+        "labour"
       ],
       "_cadence_original": "monthly",
       "_batch": [
@@ -260,9 +233,7 @@
       "releases_per_year": 12,
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "proposed:industry",
-        "proposed:manufacturing",
-        "proposed:production"
+        "industry"
       ],
       "_batch": [
         "2026-08-14_Turkey-batch2.json"
@@ -287,9 +258,9 @@
       "description": "Official statistics on international visitor arrivals and tourism receipts. Tourism is a major services credit in the balance of payments; recent years show arrivals in the 60+ million range and revenues above USD 60 billion.",
       "url": null,
       "domains": [
-        "proposed:tourism",
-        "proposed:services",
-        "proposed:external"
+        "tourism",
+        "services",
+        "external-sector"
       ],
       "_cadence_original": "continuous / annual",
       "_batch": [
@@ -317,8 +288,7 @@
       "domains": [
         "proposed:eu",
         "proposed:customs-union",
-        "proposed:trade",
-        "proposed:bilateral"
+        "trade"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -332,7 +302,9 @@
         "BOP and external accounts"
       ],
       "last_updated": null,
-      "_url_evidence": "EUR-Lex page confirms Decision No 1/95 of the EC-Turkey Association Council 'on implementing the final phase of the Customs Union', adopted 22 Dec 1995, in force 31 Dec 1995 - the underlying legal instrument for this framing node."
+      "_url_evidence": "EUR-Lex page confirms Decision No 1/95 of the EC-Turkey Association Council 'on implementing the final phase of the Customs Union', adopted 22 Dec 1995, in force 31 Dec 1995 - the underlying legal instrument for this framing node.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "EUR-Lex CELEX 21996D0213(01) is Decision No 1/95 of the EC-Turkey Association Council on implementing the final phase of the Customs Union, adopted 22 December 1995, in force 31 December 1995 - a single legal act."
     },
     {
       "id": "tr-eu-trade",
@@ -344,9 +316,8 @@
       "description": "Bilateral goods trade with the European Union under the Customs Union. Motor vehicles, machinery, electrical equipment and related manufactures dominate both directions. Bilateral trade volume has exceeded €200 billion in recent years.",
       "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/turkiye_en",
       "domains": [
-        "proposed:trade",
-        "proposed:eu",
-        "proposed:bilateral"
+        "trade",
+        "proposed:eu"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -361,36 +332,9 @@
       ],
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
-      "_url_evidence": "European Commission DG TRADE Türkiye page states bilateral goods trade reached a record €217.6bn in 2025 (EU exports €114.3bn, imports €103.3bn) with motor vehicles/machinery dominant - the official EU bilateral trade product page."
-    },
-    {
-      "id": "tr-batch2-meta",
-      "title": "Turkey labour–industry–tourism–EU densification meta-node",
-      "publisher": "Derived from TurkStat, CBRT and EU sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding labour force and unemployment statistics, industrial production, tourism arrivals and revenue, EU–Türkiye Customs Union framing, and Türkiye–EU merchandise trade into a coherent activity–services–external layer.",
-      "url": null,
-      "domains": [
-        "labour",
-        "proposed:industry",
-        "proposed:tourism",
-        "proposed:eu",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 2 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, CPI, BOP and CBRT series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "European Commission DG TRADE Türkiye page states bilateral goods trade reached a record €217.6bn in 2025 (EU exports €114.3bn, imports €103.3bn) with motor vehicles/machinery dominant - the official EU bilateral trade product page.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "The Commission's DG TRADE Türkiye country page carries continuously maintained trade figures (2025 goods data) with only a data-timing note, 'Services data is only available with a delay of one year'; no edition, issue number or release schedule."
     },
     {
       "id": "tr-state-budget",
@@ -402,9 +346,8 @@
       "description": "Official central government budget realization covering revenues, expenditures, primary balance and overall budget balance. Key fiscal-flow series monitored against Medium-Term Programme targets.",
       "url": "https://ms.hmb.gov.tr/uploads/sites/23/2026/06/Mayis-2026-Aylik-Butce-Gerceklesme-Raporu-27a3de69e13c03ab.pdf",
       "domains": [
-        "proposed:fiscal",
-        "proposed:budget",
-        "proposed:revenue",
+        "public-finance",
+        "taxation",
         "proposed:expenditure"
       ],
       "_cadence_original": "monthly / annual",
@@ -420,7 +363,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Ministry of Treasury and Finance 'Merkezi Yönetim Bütçe Gerçekleşme Raporu' (May 2026) reporting bütçe giderleri, bütçe gelirleri and bütçe dengesi; the HTML landing pages on hmb.gov.tr/muhasebat.hmb.gov.tr are JavaScript-only, so the report file itself was used."
+      "_url_evidence": "Ministry of Treasury and Finance 'Merkezi Yönetim Bütçe Gerçekleşme Raporu' (May 2026) reporting bütçe giderleri, bütçe gelirleri and bütçe dengesi; the HTML landing pages on hmb.gov.tr/muhasebat.hmb.gov.tr are JavaScript-only, so the report file itself was used.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The PDF is the 'Mayıs Ayı Merkezi Yönetim Bütçe Gerçekleşme Raporu' (May 2026) and states that the Central Government Monthly Budget Realization Report 'her ay yayımlanır' - is published every month.",
+      "releases_per_year": 12
     },
     {
       "id": "tr-public-debt",
@@ -432,9 +378,7 @@
       "description": "Official statistics on central government and public-sector debt stocks, domestic and external composition, and debt-service indicators. Continuously referenced in fiscal sustainability and external vulnerability analysis.",
       "url": "https://ms.hmb.gov.tr/uploads/2026/01/Web_Kamu_Borc_Yonetimi_Raporu_Ocak_2026-5d57f6eddcbac6ba.pdf",
       "domains": [
-        "proposed:public-debt",
-        "proposed:fiscal",
-        "proposed:debt"
+        "public-finance"
       ],
       "_cadence_original": "monthly / periodic",
       "_batch": [
@@ -449,7 +393,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Ministry of Treasury and Finance 'Kamu Borç Yönetimi Raporu' No. 246 (January 2026) with total debt stock 13.656 trillion TL, domestic 59.7% / external 40.3%, debt service and maturity tables."
+      "_url_evidence": "Ministry of Treasury and Finance 'Kamu Borç Yönetimi Raporu' No. 246 (January 2026) with total debt stock 13.656 trillion TL, domestic 59.7% / external 40.3%, debt service and maturity tables.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Cover reads 'Kamu Borç Yönetimi Raporu No: 246, Ocak 2026' and the report carries monthly data tables. The sequential issue number (246 by January 2026, series running since roughly mid-2005) is consistent only with one issue per month; no explicit periodicity sentence appears in the document.",
+      "releases_per_year": 12
     },
     {
       "id": "tr-monetary-policy",
@@ -477,7 +424,10 @@
         "Banking and financial-stability discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "tcmb.gov.tr lists dated MPC interest-rate press releases for 2026 - 12 March, 22 April, 11 June, 23 July - i.e. four decisions in about four and a half months, roughly six-week intervals, giving eight scheduled rate decisions per year. (The Inflation Report on the same page is quarterly: 2026-I 13 Feb, 2026-II 14 May, 2026-III 13 Aug.)",
+      "releases_per_year": 8
     },
     {
       "id": "tr-exchange-rate",
@@ -505,7 +455,9 @@
         "BOP and external accounts"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "tcmb.gov.tr labels its exchange rate data 'Merkez Bankası Tarafından Saat Başı Belirlenen Döviz Kurları ve Altın Fiyatları' - rates set hourly - i.e. a continuously refreshed feed rather than a discrete dated release."
     },
     {
       "id": "tr-banking-system",
@@ -518,7 +470,6 @@
       "url": "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Parasal+ve+Finansal+Istatistikler/",
       "domains": [
         "banking",
-        "proposed:credit",
         "proposed:financial-system"
       ],
       "_cadence_original": "periodic / monthly",
@@ -534,7 +485,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBRT 'Parasal ve Finansal İstatistikler' series page listing weekly and monthly money and banking statistics, non-bank financial institutions, securities and financial accounts - the official banking/credit aggregates series (BRSA's bddk.org.tr is unreachable via WebFetch)."
+      "_url_evidence": "CBRT 'Parasal ve Finansal İstatistikler' series page listing weekly and monthly money and banking statistics, non-bank financial institutions, securities and financial accounts - the official banking/credit aggregates series (BRSA's bddk.org.tr is unreachable via WebFetch).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The CBRT Monetary and Financial Statistics page labels its series by frequency: 'Haftalık Para ve Banka İstatistikleri' (weekly) alongside 'Aylık Para ve Banka İstatistikleri' (monthly) and weekly flow interest/profit rate statistics. Weekly is the highest stated cadence for the banking/credit aggregates, so 52 per year, with the monthly compilation nested inside it.",
+      "releases_per_year": 52
     },
     {
       "id": "tr-npl",
@@ -563,35 +517,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBRT Financial Stability Report series page (semi-annual, latest May 2026 issue 42) covering banking sector asset quality including non-performing loan trends; BRSA (bddk.org.tr) is domain unreachable via WebFetch."
-    },
-    {
-      "id": "tr-batch3-meta",
-      "title": "Turkey fiscal–monetary–banking densification meta-node",
-      "publisher": "Derived from Treasury, CBRT and BRSA sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding central government budget, public debt, CBRT monetary policy and policy rates, exchange-rate/lira statistics, banking system structure and NPL statistics into a coherent fiscal–monetary–financial layer.",
-      "url": null,
-      "domains": [
-        "proposed:fiscal",
-        "proposed:monetary",
-        "banking",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "CPI, BOP and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CBRT Financial Stability Report series page (semi-annual, latest May 2026 issue 42) covering banking sector asset quality including non-performing loan trends; BRSA (bddk.org.tr) is domain unreachable via WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "CBRT Financial Stability Report page lists numbered editions on a strict May/November pattern - May 2026 (No. 42), November 2025 (No. 41), May 2025 (No. 40), November 2024 (No. 39) - back to 2005: two issues per year.",
+      "releases_per_year": 2
     },
     {
       "id": "tr-grdp-istanbul",
@@ -603,9 +532,8 @@
       "description": "Official GRDP for Istanbul — by far the largest provincial economy, accounting for roughly 29% of national GDP in recent estimates. Dominant services, finance, trade and industrial concentration; global-city node.",
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "proposed:grdp",
-        "proposed:istanbul",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:istanbul"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -631,9 +559,8 @@
       "description": "Official GRDP for Ankara — the capital and second-largest provincial economy (around 10–11% of national GDP). Strong public administration, services and industrial presence.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
-        "proposed:ankara",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:ankara"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -662,9 +589,8 @@
       "description": "Official GRDP for Izmir — the third-largest provincial economy and principal Aegean industrial, port and services hub.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
-        "proposed:izmir",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:izmir"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -694,7 +620,6 @@
       "url": "https://www.tuik.gov.tr/",
       "domains": [
         "agriculture",
-        "proposed:crops",
         "proposed:food"
       ],
       "_cadence_original": "annual / seasonal",
@@ -709,7 +634,9 @@
         "Rural and regional discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "URL is the TurkStat homepage; no crop production (Bitkisel Üretim) release is among the listed bulletins and no periodicity is stated. The linked release calendar could not be read (JavaScript-only page)."
     },
     {
       "id": "tr-power",
@@ -721,9 +648,7 @@
       "description": "Installed generation capacity and electricity production by source (coal, natural gas, hydro, wind, solar, geothermal, etc.). Capacity exceeds 120 GW; the mix is diversifying with strong growth in renewables.",
       "url": "https://enerji.gov.tr/bilgi-merkezi-enerji-elektrik",
       "domains": [
-        "proposed:power",
-        "proposed:electricity",
-        "proposed:energy"
+        "energy"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -738,35 +663,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Ministry of Energy and Natural Resources electricity information page: installed capacity 126,113 MW as of June 2026 with shares by source, and 2025 generation of 362.9 TWh broken down by coal, gas, hydro, wind, solar, geothermal."
-    },
-    {
-      "id": "tr-batch4-meta",
-      "title": "Turkey provincial–agriculture–energy densification meta-node",
-      "publisher": "Derived from TurkStat and energy sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding Istanbul, Ankara and Izmir GRDP series, agriculture and crop production statistics, and electricity generation/capacity into a coherent spatial–primary–energy layer.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "agriculture",
-        "proposed:energy",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, industry and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Ministry of Energy and Natural Resources electricity information page: installed capacity 126,113 MW as of June 2026 with shares by source, and 2025 generation of 362.9 TWh broken down by coal, gas, hydro, wind, solar, geothermal.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "enerji.gov.tr electricity information page carries only 'Güncelleme Tarihi: 20 Temmuz 2026' (update date) with no stated update frequency and no list of dated editions."
     },
     {
       "id": "tr-fta-network",
@@ -778,9 +677,8 @@
       "description": "Overall framing of Türkiye’s network of free trade agreements and preferential arrangements beyond the EU Customs Union. Includes EFTA, UK, South Korea, Singapore, Chile, multiple Western Balkan and Mediterranean partners, and others. Continuously cited in trade-diversification and export analysis.",
       "url": "https://www.ticaret.gov.tr/dis-iliskiler/serbest-ticaret-anlasmalari/yururlukte-bulunan-stalar",
       "domains": [
-        "proposed:fta",
-        "proposed:trade",
-        "proposed:external"
+        "trade",
+        "external-sector"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -794,7 +692,9 @@
         "Export and industrial analysis"
       ],
       "last_updated": null,
-      "_url_evidence": "Ministry of Trade page listing the 24 FTAs currently in force (UK, EFTA, South Korea, Singapore, Chile, Western Balkans, Mediterranean partners etc.) with links to each agreement - the official source page for this network framing."
+      "_url_evidence": "Ministry of Trade page listing the 24 FTAs currently in force (UK, EFTA, South Korea, Singapore, Chile, Western Balkans, Mediterranean partners etc.) with links to each agreement - the official source page for this network framing.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "Ministry of Trade page is a static inventory of free trade agreements in force with ~24 partners (EFTA, North Macedonia, Bosnia and Herzegovina, Palestine, Tunisia, Morocco, Egypt and others), each entry a signed agreement or protocol with an entry-into-force date (e.g. 1 August 2024). No publication cycle."
     },
     {
       "id": "tr-uk-fta",
@@ -806,9 +706,8 @@
       "description": "Bilateral FTA in force since 2021 (continuity arrangement after Brexit). Preserves preferential access previously covered under the EU Customs Union framework.",
       "url": "https://www.ticaret.gov.tr/dis-iliskiler/serbest-ticaret-anlasmalari/yururlukte-bulunan-stalar/birlesik-krallik",
       "domains": [
-        "proposed:fta",
-        "proposed:uk",
-        "proposed:bilateral"
+        "trade",
+        "proposed:uk"
       ],
       "_batch": [
         "2026-08-14_Turkey-batch5.json"
@@ -834,9 +733,8 @@
       "description": "Bilateral FTA (goods in force 2013; services update later). Supports trade and investment links with a major Asian industrial partner.",
       "url": "https://www.ticaret.gov.tr/dis-iliskiler/serbest-ticaret-anlasmalari/yururlukte-bulunan-stalar/guney-kore",
       "domains": [
-        "proposed:fta",
-        "proposed:korea",
-        "proposed:bilateral"
+        "trade",
+        "proposed:korea"
       ],
       "_batch": [
         "2026-08-14_Turkey-batch5.json"
@@ -862,7 +760,7 @@
       "description": "Long-standing FTA with the European Free Trade Association (updated to include services). Complements the EU Customs Union in the European preferential space.",
       "url": "https://www.ticaret.gov.tr/dis-iliskiler/serbest-ticaret-anlasmalari/yururlukte-bulunan-stalar/efta",
       "domains": [
-        "proposed:fta",
+        "trade",
         "proposed:efta",
         "proposed:europe"
       ],
@@ -905,7 +803,9 @@
         "Regional and social discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "URL is the TurkStat homepage; no education statistics release appears in the listed bulletins and no periodicity is stated. The linked data release calendar was not retrievable (JavaScript-only)."
     },
     {
       "id": "tr-grdp-kocaeli",
@@ -917,9 +817,9 @@
       "description": "Official GRDP for Kocaeli — a major industrial and logistics province adjacent to Istanbul, consistently ranking among the top five provincial economies and among the highest in GDP per capita.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:kocaeli",
-        "proposed:industrial"
+        "industry"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -948,9 +848,9 @@
       "description": "Official GRDP for Bursa — a major automotive, textile and industrial province ranking among the top five provincial economies.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:bursa",
-        "proposed:industrial"
+        "industry"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -979,9 +879,9 @@
       "description": "Official GRDP for Antalya — the principal Mediterranean tourism and services hub, ranking in the upper tier of provincial economies and tightly linked to the national tourism statistics.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:antalya",
-        "proposed:tourism"
+        "tourism"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1010,7 +910,7 @@
       "description": "Official GRDP for Gaziantep — a major southeastern industrial and trade hub ranking among the larger provincial economies outside the Marmara–Aegean core.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:gaziantep",
         "proposed:southeast"
       ],
@@ -1032,34 +932,6 @@
       "_url_match": "series-level (corroborated)"
     },
     {
-      "id": "tr-batch5-meta",
-      "title": "Turkey FTA–education–provincial densification meta-node",
-      "publisher": "Derived from Trade Ministry, TurkStat and related sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding the FTA network framing, key bilateral FTAs (UK, Korea, EFTA), education/literacy/attainment statistics, and the GRDP series for Kocaeli, Bursa, Antalya and Gaziantep into a coherent commerce–human-capital–further-provincial layer.",
-      "url": null,
-      "domains": [
-        "proposed:fta",
-        "education",
-        "proposed:provincial",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 5 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "EU Customs Union, tourism, industry and earlier provincial series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "tr-defence-budget",
       "title": "Defence and security expenditure statistics",
       "publisher": "Ministry of National Defence / Ministry of Treasury and Finance / SIPRI-aligned",
@@ -1069,8 +941,8 @@
       "description": "Official and compiled statistics on defence and security spending. Recent budgets place total defence and security expenditure in the mid-to-high USD 20 billions range (roughly 2.3% of GDP in 2026 projections), with further planned increases. Includes Ministry of National Defence and related security allocations.",
       "url": "https://www.nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
       "domains": [
-        "proposed:defence",
-        "proposed:budget",
+        "governance",
+        "public-finance",
         "proposed:military"
       ],
       "_cadence_original": "annual",
@@ -1090,35 +962,6 @@
       "_url_evidence": "NATO 'Defence Expenditure of NATO Countries (2014-2025)' report containing Türkiye's series in current-price liras (1,361,307 mn in 2025) and defence spending as a share of GDP (2.33% estimated for 2025); msb.gov.tr is unreachable via WebFetch."
     },
     {
-      "id": "tr-defence-policy",
-      "title": "National defence and security policy framing",
-      "publisher": "Ministry of National Defence / Ministry of Foreign Affairs / related",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Official framing of Türkiye’s defence and security policy, emphasising territorial integrity, self-defence, comprehensive approaches to contemporary threats, and contributions to collective defence and crisis management. Continuously cited in strategic and foreign-policy analysis.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:security",
-        "proposed:policy"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Turkey-batch6-defence.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Core policy-frame node for Turkish defence posture.",
-      "_referenced_by": [
-        "Defence budget statistics",
-        "NATO membership framing",
-        "Regional and external security analysis"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "tr-nato",
       "title": "NATO membership and collective defence framing",
       "publisher": "Government of Türkiye / NATO",
@@ -1130,7 +973,7 @@
       "domains": [
         "proposed:nato",
         "proposed:alliance",
-        "proposed:defence"
+        "governance"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1144,64 +987,9 @@
         "External and geopolitical discussions"
       ],
       "last_updated": null,
-      "_url_evidence": "Turkish Ministry of Foreign Affairs page 'Ever since our NATO membership in 1952, the North Atlantic Alliance has played a central role in Türkiye's security' - the official government page for this membership/collective-defence framing (a policy page, not a statistical publication)."
-    },
-    {
-      "id": "tr-batch6-meta",
-      "title": "Turkey defence–security densification meta-node",
-      "publisher": "Derived from MoND, fiscal and alliance sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding defence and security expenditure, national defence policy framing, and NATO membership/collective defence framing into a coherent defence and security layer.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:security",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch6-defence.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the defence densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Fiscal, external and earlier strategy series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "tr-lagging-regions",
-      "title": "Eastern and southeastern lagging-regions framing",
-      "publisher": "Derived from TurkStat provincial and poverty sources",
-      "country": "TR",
-      "jurisdiction_level": "provincial",
-      "region": "Eastern / Southeastern Anatolia",
-      "description": "System-level view of the eastern and southeastern provinces that form the lagging cluster in national regional accounts and poverty analysis. These regions account for a disproportionate share of remaining poverty relative to their GDP contribution.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:lagging",
-        "proposed:equity",
-        "proposed:poverty"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Turkey-batch7-lagging.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Key equity / lagging-region spatial node that contrasts with Istanbul–Ankara–Izmir and industrial Marmara provinces.",
-      "_referenced_by": [
-        "Provincial GRDP rankings",
-        "Poverty and living-standards analysis",
-        "National development and regional policy"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Turkish Ministry of Foreign Affairs page 'Ever since our NATO membership in 1952, the North Atlantic Alliance has played a central role in Türkiye's security' - the official government page for this membership/collective-defence framing (a policy page, not a statistical publication).",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "mfa.gov.tr/nato.en.mfa is a static foreign-policy background page on Türkiye's NATO membership since its 1952 accession to the North Atlantic Treaty; no publication date, edition or update cycle is given."
     },
     {
       "id": "tr-grdp-van",
@@ -1213,7 +1001,7 @@
       "description": "Official GRDP for Van — among the provinces with the lowest GDP per capita in recent rankings. Illustrative eastern lagging-province node.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:van",
         "proposed:lagging"
       ],
@@ -1244,7 +1032,7 @@
       "description": "Official GRDP for Şanlıurfa — a large southeastern province that ranks among the lowest in GDP per capita despite significant population and agricultural activity.",
       "url": "https://www.tuik.gov.tr/indir/revizyon/A%C3%A7%C4%B1klama_dok%C3%BCman%C4%B1_BHG_EN2025.pdf",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:sanliurfa",
         "proposed:lagging",
         "proposed:southeast"
@@ -1267,64 +1055,6 @@
       "_url_match": "series-level (corroborated)"
     },
     {
-      "id": "tr-regional-disparity",
-      "title": "Regional disparity and convergence framing",
-      "publisher": "Derived from TurkStat and development sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Analytical and policy framing of inter-provincial and inter-regional disparities in GDP per capita, poverty and development outcomes. Continuously referenced in regional policy, investment incentives and equity discussions.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:disparity",
-        "proposed:convergence",
-        "proposed:equity"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Turkey-batch7-lagging.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "System-level equity frame linking the dual spatial structure of the Turkish economy.",
-      "_referenced_by": [
-        "Lagging-regions and high-income provincial nodes",
-        "Poverty and social analysis",
-        "National development planning"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "tr-batch7-meta",
-      "title": "Turkey lagging-region densification meta-node",
-      "publisher": "Derived from TurkStat provincial sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding eastern/southeastern lagging-regions framing, Van and Şanlıurfa GRDP series, and regional disparity/convergence framing into a coherent equity and lagging-region layer that complements the high-income provincial set.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:lagging",
-        "proposed:equity",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch7-lagging.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the lagging-region densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Istanbul, Ankara, Izmir, Kocaeli, Bursa, Antalya, Gaziantep and poverty series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "tr-health",
       "title": "Life expectancy and vital statistics",
       "publisher": "Turkish Statistical Institute",
@@ -1336,7 +1066,7 @@
       "domains": [
         "health",
         "proposed:life-expectancy",
-        "proposed:vital-statistics"
+        "population"
       ],
       "_cadence_original": "periodic / multi-year life tables",
       "_batch": [
@@ -1350,7 +1080,9 @@
         "Regional disparity discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "URL is the TurkStat homepage; no life tables (Hayat Tabloları) or vital statistics release appears among the listed bulletins and no periodicity is stated. The linked release calendar was JavaScript-only and returned no entries, so the life-table cadence could not be verified from the page."
     },
     {
       "id": "tr-poverty",
@@ -1362,9 +1094,9 @@
       "description": "Official relative poverty rates and living-conditions indicators from household surveys. Relative poverty rate has been reported in the low-to-mid teens in recent releases; absolute poverty has declined substantially over the longer term while regional disparities persist.",
       "url": "https://www.tuik.gov.tr/",
       "domains": [
-        "proposed:poverty",
+        "poverty",
         "proposed:living-conditions",
-        "proposed:welfare"
+        "living-standards"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1382,63 +1114,6 @@
       "last_updated": null
     },
     {
-      "id": "tr-social-protection",
-      "title": "Social protection and assistance framing",
-      "publisher": "Derived from national and development sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Policy and statistical framing of social assistance, cash transfers and related social-protection programmes. Continuously referenced in poverty-reduction and equity analysis, especially under high-inflation conditions.",
-      "url": null,
-      "domains": [
-        "proposed:social-protection",
-        "proposed:assistance",
-        "proposed:welfare"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Turkey-batch8-health-poverty.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Social-protection densification linked to the poverty and fiscal clusters.",
-      "_referenced_by": [
-        "Poverty and living-conditions statistics",
-        "Fiscal and budget analysis",
-        "Lagging-regions framing"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "tr-batch8-meta",
-      "title": "Turkey health–poverty densification meta-node",
-      "publisher": "Derived from TurkStat and social sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding life expectancy and vital statistics, poverty and living-conditions statistics, and social-protection framing into a coherent health and welfare layer.",
-      "url": null,
-      "domains": [
-        "health",
-        "proposed:poverty",
-        "proposed:social",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch8-health-poverty.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the health and poverty densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "CPI, labour, lagging-regions and fiscal series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "tr-ecommerce",
       "title": "E-commerce volume and digital trade statistics",
       "publisher": "Ministry of Trade / related",
@@ -1449,8 +1124,8 @@
       "url": "https://ticaret.gov.tr/data/6a02f2c7269de183c0b98bc4/T%C3%BCrkiye'de%20E-Ticaretin%20G%C3%B6r%C3%BCn%C3%BCm%C3%BC%20Raporu%202025.pdf",
       "domains": [
         "proposed:ecommerce",
-        "proposed:digital",
-        "proposed:trade"
+        "services",
+        "trade"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1470,35 +1145,6 @@
       "_url_route": "parent ministry main site instead of the dead subdomain - eticaret.gov.tr is unreachable, but ticaret.gov.tr renders and serves the report from its static /data/ path"
     },
     {
-      "id": "tr-digital-economy",
-      "title": "Digital economy framing",
-      "publisher": "Derived from Trade Ministry and related sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Policy and analytical framing of the digital economy and digitalisation of commerce, services and public services. Continuously referenced in competitiveness, SME and platform-economy discussions.",
-      "url": null,
-      "domains": [
-        "proposed:digital",
-        "proposed:economy",
-        "proposed:policy"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Turkey-batch9-digital-climate.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "System-level digital densification.",
-      "_referenced_by": [
-        "E-commerce statistics",
-        "Services and labour analysis",
-        "National development planning"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "tr-ghg",
       "title": "Greenhouse gas inventory statistics",
       "publisher": "Ministry of Environment, Urbanisation and Climate Change / UNFCCC submissions",
@@ -1508,9 +1154,7 @@
       "description": "Official national GHG inventory (National Inventory Document). Recent estimates place total emissions in the low-to-mid 500 MtCO2e range; energy is the dominant source sector.",
       "url": "https://unfccc.int/documents/646494",
       "domains": [
-        "proposed:ghg",
-        "proposed:climate",
-        "proposed:emissions"
+        "environment"
       ],
       "_cadence_original": "annual inventory cycle",
       "_batch": [
@@ -1525,7 +1169,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "UNFCCC document record 'Türkiye. 2025 National Inventory Document (NID)', submitted 15 April 2025 and listed under 2025 Annex I national greenhouse gas inventory submissions."
+      "_url_evidence": "UNFCCC document record 'Türkiye. 2025 National Inventory Document (NID)', submitted 15 April 2025 and listed under 2025 Annex I national greenhouse gas inventory submissions.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "UNFCCC document page shows 'Türkiye. 2025 National Inventory Document (NID)', submitted 15 April 2025, filed under the annual national GHG inventory submission cycle - one inventory submission per year.",
+      "releases_per_year": 1
     },
     {
       "id": "tr-ndc",
@@ -1538,8 +1185,8 @@
       "url": "https://unfccc.int/sites/default/files/2025-11/The%20Second%20NDC%20of%20T%C3%BCrkiye.pdf",
       "domains": [
         "proposed:ndc",
-        "proposed:climate",
-        "proposed:policy"
+        "environment",
+        "governance"
       ],
       "_cadence_original": "multi-year updates",
       "_batch": [
@@ -1554,34 +1201,9 @@
       ],
       "_jurisdiction_level_original": "national / international",
       "last_updated": null,
-      "_url_evidence": "Türkiye's Second NDC (NDC 3.0) as filed in the UNFCCC NDC Registry (submitted 9 November 2025): 466 Mt CO2e reduction vs BAU, emissions capped at 643 Mt CO2e by 2035, net zero by 2053."
-    },
-    {
-      "id": "tr-batch9-meta",
-      "title": "Turkey digital–climate densification meta-node",
-      "publisher": "Derived from Trade Ministry and climate sources",
-      "country": "TR",
-      "jurisdiction_level": "federal",
-      "region": "Turkey",
-      "description": "Meta-node binding e-commerce volume statistics, digital economy framing, GHG inventory statistics, and NDC climate framing into a coherent digital and climate layer.",
-      "url": null,
-      "domains": [
-        "proposed:digital",
-        "proposed:climate",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Turkey-batch9-digital-climate.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the digital and climate densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Services, energy, power and earlier macro series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Türkiye's Second NDC (NDC 3.0) as filed in the UNFCCC NDC Registry (submitted 9 November 2025): 466 Mt CO2e reduction vs BAU, emissions capped at 643 Mt CO2e by 2035, net zero by 2053.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "'The Second NDC of Türkiye' (2025) is a single dated submission under the Paris Agreement; it identifies itself as successor to the Updated First NDC and references the first Global Stocktake, but states no submission cycle, so it is treated as a one-off policy document rather than a five-yearly series."
     }
   ],
   "dependencies": [],
@@ -1626,137 +1248,87 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
     "reports_without_url": [
-      "tr-batch1-meta",
-      "tr-tourism",
-      "tr-batch2-meta",
-      "tr-batch3-meta",
-      "tr-batch4-meta",
-      "tr-batch5-meta",
-      "tr-defence-policy",
-      "tr-batch6-meta",
-      "tr-lagging-regions",
-      "tr-regional-disparity",
-      "tr-batch7-meta",
-      "tr-social-protection",
-      "tr-batch8-meta",
-      "tr-digital-economy",
-      "tr-batch9-meta"
+      "tr-tourism"
     ],
-    "reports_without_url_count": 15,
+    "reports_without_url_count": 1,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "tr-turkstat",
-        "text": "continuous"
+        "title": "Turkish Statistical Institute (TurkStat) institutional core",
+        "kind": "continuous-database",
+        "basis": "tuik.gov.tr homepage is a rolling release portal: it lists many separate dated bulletins (Motor Vehicles July 2026, Wage Earner Statistics June 2026, Service and Construction Production Indices June 2026, Agricultural PPI July 2026, Property Sales July 2026) and links a 'Veri Yayımlama Takvimi' publication calendar. The institution as a whole has no single discrete release cadence."
       },
       {
         "id": "tr-population",
-        "text": "annual estimates + census cycle"
+        "title": "Population census and estimates",
+        "kind": "unknown",
+        "basis": "URL is the TurkStat homepage, which shows no population (Adrese Dayalı Nüfus Kayıt Sistemi) release and states no census/estimate periodicity. The linked release calendar (tuik.gov.tr/Kurumsal/Veri_Takvimi and its veriportali redirect) renders only via JavaScript and returned no entries, so no countable evidence."
       },
       {
         "id": "tr-national-accounts",
-        "text": "quarterly / annual"
+        "title": "National Accounts of Turkey (GDP)",
+        "kind": "unknown",
+        "basis": "URL is the TurkStat homepage; no GDP (Gayri Safi Yurt İçi Hasıla) release appears among the listed bulletins and no periodicity is stated. The linked data release calendar was JavaScript-only and returned no entries."
       },
       {
         "id": "tr-cbrt",
-        "text": "continuous"
+        "title": "Central Bank of the Republic of Türkiye (CBRT) institutional and reporting core",
+        "kind": "continuous-database",
+        "basis": "tcmb.gov.tr homepage is a continuously updated statistics/publications portal - hourly-set exchange rates, weekly money and banking statistics, monthly price developments, quarterly Inflation Report, plus a 'Veri Yayımlama Takvimi'. No single discrete release for the institutional node."
       },
       {
         "id": "tr-bop",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "tr-tourism",
-        "text": "continuous / annual"
-      },
-      {
-        "id": "tr-eu-customs-union",
-        "text": "continuous"
+        "title": "Balance of Payments and external accounts",
+        "kind": "unknown",
+        "basis": "On tcmb.gov.tr the balance of payments appears only as a category heading, 'Ödemeler Dengesi ve İlgili İstatistikler', with no frequency label and no dated editions listed (a neighbouring item, International Reserves and FX Liquidity, is month-tagged, but that is a different series)."
       },
       {
         "id": "tr-eu-trade",
-        "text": "continuous"
-      },
-      {
-        "id": "tr-state-budget",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "tr-public-debt",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "tr-monetary-policy",
-        "text": "continuous / monthly MPC"
+        "title": "Türkiye–EU merchandise trade statistics",
+        "kind": "continuous-database",
+        "basis": "The Commission's DG TRADE Türkiye country page carries continuously maintained trade figures (2025 goods data) with only a data-timing note, 'Services data is only available with a delay of one year'; no edition, issue number or release schedule."
       },
       {
         "id": "tr-exchange-rate",
-        "text": "continuous / daily"
-      },
-      {
-        "id": "tr-banking-system",
-        "text": "periodic / monthly"
-      },
-      {
-        "id": "tr-npl",
-        "text": "periodic"
+        "title": "Exchange-rate and lira statistics",
+        "kind": "continuous-database",
+        "basis": "tcmb.gov.tr labels its exchange rate data 'Merkez Bankası Tarafından Saat Başı Belirlenen Döviz Kurları ve Altın Fiyatları' - rates set hourly - i.e. a continuously refreshed feed rather than a discrete dated release."
       },
       {
         "id": "tr-agriculture",
-        "text": "annual / seasonal"
+        "title": "Agriculture and crop production statistics",
+        "kind": "unknown",
+        "basis": "URL is the TurkStat homepage; no crop production (Bitkisel Üretim) release is among the listed bulletins and no periodicity is stated. The linked release calendar could not be read (JavaScript-only page)."
       },
       {
         "id": "tr-power",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "tr-fta-network",
-        "text": "continuous"
+        "title": "Electricity generation and installed capacity statistics",
+        "kind": "unknown",
+        "basis": "enerji.gov.tr electricity information page carries only 'Güncelleme Tarihi: 20 Temmuz 2026' (update date) with no stated update frequency and no list of dated editions."
       },
       {
         "id": "tr-education",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "tr-defence-policy",
-        "text": "continuous"
-      },
-      {
-        "id": "tr-nato",
-        "text": "continuous"
-      },
-      {
-        "id": "tr-lagging-regions",
-        "text": "continuous"
-      },
-      {
-        "id": "tr-regional-disparity",
-        "text": "continuous"
+        "title": "Education enrolment, literacy and attainment statistics",
+        "kind": "unknown",
+        "basis": "URL is the TurkStat homepage; no education statistics release appears in the listed bulletins and no periodicity is stated. The linked data release calendar was not retrievable (JavaScript-only)."
       },
       {
         "id": "tr-health",
-        "text": "periodic / multi-year life tables"
-      },
-      {
-        "id": "tr-social-protection",
-        "text": "continuous"
-      },
-      {
-        "id": "tr-digital-economy",
-        "text": "continuous"
-      },
-      {
-        "id": "tr-ghg",
-        "text": "annual inventory cycle"
-      },
-      {
-        "id": "tr-ndc",
-        "text": "multi-year updates"
+        "title": "Life expectancy and vital statistics",
+        "kind": "unknown",
+        "basis": "URL is the TurkStat homepage; no life tables (Hayat Tabloları) or vital statistics release appears among the listed bulletins and no periodicity is stated. The linked release calendar was JavaScript-only and returned no entries, so the life-table cadence could not be verified from the page."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1774,78 +1346,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "tr-batch1-meta",
-        "title": "Turkey foundational statistical-system meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding several Turkish sources; publisher is literally 'Derived from TurkStat and CBRT sources'."
-      },
-      {
-        "id": "tr-batch2-meta",
-        "title": "Turkey labour–industry–tourism–EU densification meta-node",
-        "finding": "Not a publication - synthesised densification meta-node ('Derived from TurkStat, CBRT and EU sources')."
-      },
-      {
-        "id": "tr-batch3-meta",
-        "title": "Turkey fiscal–monetary–banking densification meta-node",
-        "finding": "Not a publication - synthesised fiscal-monetary-banking meta-node ('Derived from Treasury, CBRT and BRSA sources')."
-      },
-      {
-        "id": "tr-batch4-meta",
-        "title": "Turkey provincial–agriculture–energy densification meta-node",
-        "finding": "Not a publication - synthesised provincial/agriculture/energy meta-node ('Derived from TurkStat and energy sources')."
-      },
-      {
-        "id": "tr-batch5-meta",
-        "title": "Turkey FTA–education–provincial densification meta-node",
-        "finding": "Not a publication - synthesised FTA/education/provincial meta-node ('Derived from Trade Ministry, TurkStat and related sources')."
-      },
-      {
-        "id": "tr-defence-policy",
-        "title": "National defence and security policy framing",
-        "finding": "Policy-framing node rather than a publication, and the Ministry of National Defence domain (msb.gov.tr) is unreachable via WebFetch, so no official page could be confirmed."
-      },
-      {
-        "id": "tr-batch6-meta",
-        "title": "Turkey defence–security densification meta-node",
-        "finding": "Not a publication - synthesised defence-security meta-node ('Derived from MoND, fiscal and alliance sources')."
-      },
-      {
-        "id": "tr-lagging-regions",
-        "title": "Eastern and southeastern lagging-regions framing",
-        "finding": "Not a publication - a synthesised regional framing node covering a geographic area ('Derived from TurkStat provincial and poverty sources'), with no corresponding official product."
-      },
-      {
-        "id": "tr-regional-disparity",
-        "title": "Regional disparity and convergence framing",
-        "finding": "Not a publication - a synthesised analytical framing of regional disparity and convergence ('Derived from TurkStat and development sources')."
-      },
-      {
-        "id": "tr-batch7-meta",
-        "title": "Turkey lagging-region densification meta-node",
-        "finding": "Not a publication - synthesised lagging-region meta-node ('Derived from TurkStat provincial sources')."
-      },
-      {
-        "id": "tr-social-protection",
-        "title": "Social protection and assistance framing",
-        "finding": "Not a publication - a synthesised policy framing of social assistance/social protection ('Derived from national and development sources')."
-      },
-      {
-        "id": "tr-batch8-meta",
-        "title": "Turkey health–poverty densification meta-node",
-        "finding": "Not a publication - synthesised health-poverty meta-node ('Derived from TurkStat and social sources')."
-      },
-      {
-        "id": "tr-digital-economy",
-        "title": "Digital economy framing",
-        "finding": "Not a publication - a synthesised digital-economy framing node ('Derived from Trade Ministry and related sources')."
-      },
-      {
-        "id": "tr-batch9-meta",
-        "title": "Turkey digital–climate densification meta-node",
-        "finding": "Not a publication - synthesised digital-climate meta-node ('Derived from Trade Ministry and climate sources')."
-      }
-    ],
     "url_unreachable_or_not_published": [
       {
         "id": "tr-tourism",
@@ -1854,7 +1354,6 @@
         "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
-    "not_a_publication_note": "These 14 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
     "url_partial_match": [
       {
         "id": "tr-grdp-ankara",
@@ -1912,6 +1411,12 @@
         "caveat": "Shared with 7 other nodes in this file — the URL is the right official series page but not specific to this node. Same retrieved-and-read TurkStat document: 'Main Revisions Studies on Gross Domestic Product by Provinces - Explanatory Note' (TurkStat, 11 December 2025), official methodology/revision document for the provincial GDP series, all 81 provinces, back to 2000. CAVEAT: not Sanliurfa-specific data; veriportali.tuik.gov.tr is JavaScript-only on every path.",
         "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
       }
-    ]
+    ],
+    "not_a_publication_moved_to_archive": "14 nodes removed from this file on 2026-08-18; full records in _archive/tr-turkey-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 21
+    }
   }
 }

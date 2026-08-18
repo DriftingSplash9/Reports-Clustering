@@ -26,7 +26,7 @@
       "2026-08-14_Indonesia-batch9.json"
     ],
     "counts": {
-      "reports": 162,
+      "reports": 126,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -47,8 +47,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:statistics",
-        "proposed:official",
-        "proposed:institutional"
+        "proposed:official"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -62,7 +61,9 @@
         "International organisations’ Indonesia country data"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "bps.go.id is the agency's live dissemination portal (Berita Resmi Statistik, Tabel Statistik, Publikasi, Rencana Terbit); it carries series from monthly press releases to decennial censuses, so the site itself has no single release cadence."
     },
     {
       "id": "id-statistical-yearbook",
@@ -101,8 +102,6 @@
       "description": "Decennial population census (most recent full cycle SP2020 with short-form enumeration and subsequent Long Form survey). Produces the definitive population stock, fertility, mortality, migration and related demographic parameters used throughout the statistical system.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:census",
-        "proposed:demography",
         "population"
       ],
       "_cadence_original": "every 10 years (plus Long Form follow-up)",
@@ -117,7 +116,10 @@
         "National Medium-Term Development Plan (RPJMN) population targets"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "sensus.bps.go.id serves census tabulations for SP2010 and SP2020 - census rounds ten years apart; the SP2010 topic page metadata says 'Frekuensi update: Lebih dari Dua Tahunan'.",
+      "releases_per_year": 0.1
     },
     {
       "id": "id-national-accounts",
@@ -129,9 +131,7 @@
       "description": "Quarterly and annual national accounts (Produk Domestik Bruto) by expenditure and by industrial origin, at current and constant prices. Provincial GDP (PDRB) series exist and will be densified later.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "4 (quarterly) + annual revisions",
       "_batch": [
@@ -145,7 +145,10 @@
         "Poverty, employment and structural-change analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS press releases 'Ekonomi Indonesia Triwulan ...' appear once per quarter (Tw III-2023 06 Nov 2023, Tw IV-2023 05 Feb 2024, Tw III-2025 05 Nov 2025, Tw I-2026 05 May 2026). The compendium 'Produk Domestik Bruto Indonesia Triwulanan 2021-2025' page itself states frequency 'Annually'.",
+      "releases_per_year": 4
     },
     {
       "id": "id-cpi",
@@ -158,9 +161,7 @@
       "releases_per_year": 12,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:prices",
-        "inflation",
-        "proposed:cpi"
+        "inflation"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch1.json"
@@ -186,7 +187,6 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "labour",
-        "proposed:employment",
         "proposed:sakernas"
       ],
       "_cadence_original": "multiple rounds per year (frequency has varied; currently high-frequency)",
@@ -202,7 +202,10 @@
         "Bank Indonesia and fiscal assessments of the real economy"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Keadaan Angkatan Kerja di Indonesia Agustus 2025' (released 19 Dec 2025) states Periodisasi: 'Semesteran'; the February round is published separately (Februari 2025 edition released 20 Jun 2025).",
+      "releases_per_year": 2
     },
     {
       "id": "id-poverty",
@@ -214,9 +217,8 @@
       "description": "Official poverty measurement using the basic-needs poverty line (food + non-food). Published at national and provincial level, with urban/rural splits. Continuously cited in RPJMN targets and social-protection design.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:poverty",
-        "proposed:welfare",
-        "proposed:social"
+        "poverty",
+        "living-standards"
       ],
       "_cadence_original": "typically 2 (March and September)",
       "_batch": [
@@ -230,7 +232,10 @@
         "Inequality and regional-disparity analysis"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS issues 'Profil Kemiskinan di Indonesia' for the March and September Susenas rounds each year (Maret 2025 release; September 2025 release dated 05 Feb 2026). The book 'Computation and Analysis of Macro Poverty' is separately listed as 'Annually'.",
+      "releases_per_year": 2
     },
     {
       "id": "id-susenas",
@@ -243,9 +248,8 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:household-survey",
-        "proposed:consumption",
-        "proposed:susenas",
-        "proposed:welfare"
+        "living-standards",
+        "proposed:susenas"
       ],
       "_cadence_original": "multiple modules / rounds",
       "_batch": [
@@ -259,7 +263,10 @@
         "Education, health and social-protection indicators"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Susenas is fielded twice a year: BPS office notices for 'Susenas Maret' (2019, 2020, 2021, 2024) and 'Susenas September' (2018, 2025); these two rounds feed the two annual poverty releases.",
+      "releases_per_year": 2
     },
     {
       "id": "id-bank-indonesia",
@@ -271,9 +278,8 @@
       "description": "Central bank of Indonesia. Publishes monetary statistics, balance of payments, financial-system statistics (SSKI), the Economic Report on Indonesia (LPI), Financial Stability Review, and multiple surveys (business, banking, property).",
       "url": "https://www.bi.go.id/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:financial-stability"
+        "monetary-policy",
+        "financial-regulation"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -287,7 +293,9 @@
         "Financial-stability and macroprudential assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "bi.go.id hosts continuously updated statistics alongside a mixed portfolio (SEKI monthly, LKM and NPI quarterly, KSK semi-annual, LPI annual) - the publications landing page lists ~16 series with different frequencies, so there is no single cadence for the node."
     },
     {
       "id": "id-economic-report-indonesia",
@@ -301,8 +309,8 @@
       "url": "https://www.bi.go.id/",
       "domains": [
         "proposed:economic-report",
-        "proposed:central-bank",
-        "proposed:macro"
+        "monetary-policy",
+        "national-accounts"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch1.json"
@@ -355,8 +363,7 @@
       "description": "Standard BPM-based balance-of-payments and IIP statistics. Key external-sector series for a commodity-exporting and capital-flow-sensitive economy.",
       "url": "https://www.bi.go.id/",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
+        "external-sector",
         "proposed:iip"
       ],
       "_cadence_original": "quarterly / monthly components",
@@ -371,127 +378,10 @@
         "Trade and investment policy documents"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "id-malacca-strait",
-      "title": "Strait of Malacca — strategic chokepoint and transit statistics/context",
-      "publisher": "Derived from international maritime/energy analyses + Indonesian sovereignty context (Sumatra side)",
-      "country": "ID",
-      "jurisdiction_level": "international",
-      "region": "Malacca Strait (Indonesia–Malaysia–Singapore)",
-      "description": "The primary western gateway between the Indian Ocean and the South China Sea / Pacific. Handles a very large share of global maritime trade and an even larger share of seaborne energy flows from the Middle East and Africa to East Asia. Indonesia controls a significant portion of the southern coastline. Continuously cited in energy-security, shipping and geopolitical analysis.",
-      "url": null,
-      "domains": [
-        "proposed:chokepoint",
-        "proposed:malacca",
-        "proposed:energy-transit",
-        "proposed:maritime"
-      ],
-      "_cadence_original": "continuous (monitoring + analysis)",
-      "_batch": [
-        "2026-08-14_Indonesia-batch10.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Highest-centrality maritime-chokepoint node for Indonesia. Critical for understanding why the archipelago sits at the centre of Asian energy security.",
-      "_referenced_by": [
-        "Energy and BOP external-sector analysis",
-        "Indonesian maritime and defence policy",
-        "Alternative-passage (Sunda, Lombok) discussions",
-        "Regional and global trade-route assessments"
-      ],
-      "_jurisdiction_level_original": "international / national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-sunda-strait",
-      "title": "Sunda Strait — alternative passage statistics/context",
-      "publisher": "Derived from maritime and Indonesian official context",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Sunda Strait (Java–Sumatra)",
-      "description": "Major alternative route between the Indian Ocean and the Java Sea / internal Indonesian waters. Shallower and more constrained than Lombok; used as a partial substitute when Malacca is stressed. Fully under Indonesian sovereignty.",
-      "url": null,
-      "domains": [
-        "proposed:chokepoint",
-        "proposed:sunda",
-        "proposed:maritime",
-        "proposed:alternative-route"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch10.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Key alternative-passage node under full Indonesian control.",
-      "_referenced_by": [
-        "Malacca Strait node",
-        "Inter-island and domestic shipping analysis",
-        "Maritime security and contingency planning"
-      ],
-      "_jurisdiction_level_original": "national / international",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-lombok-makassar",
-      "title": "Lombok and Makassar Straits — deep-water alternative passages",
-      "publisher": "Derived from maritime analyses + Indonesian sovereignty",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Lombok Strait (Bali–Lombok) and Makassar Strait",
-      "description": "Deep-water alternative routes preferred by the largest deep-draft tankers and bulk carriers (especially when Malacca draft is limiting) and by traffic linked to Australia. Also strategically relevant for submarine transit. Entirely within Indonesian archipelagic waters.",
-      "url": null,
-      "domains": [
-        "proposed:chokepoint",
-        "proposed:lombok",
-        "proposed:makassar",
-        "proposed:maritime"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch10.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Deep-water redundancy nodes that raise Indonesia’s strategic maritime centrality.",
-      "_referenced_by": [
-        "Malacca and Sunda Strait nodes",
-        "Coal, bulk and energy-transit analysis",
-        "Australian and East Asian trade-route studies"
-      ],
-      "_jurisdiction_level_original": "national / international",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-archipelagic-sea-lanes",
-      "title": "Indonesian Archipelagic Sea Lanes (ALKI) and archipelagic-state regime",
-      "publisher": "Government of Indonesia / UNCLOS-related practice",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesian archipelago",
-      "description": "The formal Archipelagic Sea Lanes (ALKI) designated under the archipelagic-state regime of UNCLOS. Legal and operational frame that governs transit through Indonesian waters while preserving sovereignty. Recurring citation in maritime policy, defence and international-law contexts.",
-      "url": null,
-      "domains": [
-        "proposed:alki",
-        "proposed:unclos",
-        "proposed:archipelagic-state",
-        "proposed:maritime-law"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch10.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Foundational legal-regime node for all Indonesian chokepoint and transit analysis.",
-      "_referenced_by": [
-        "Malacca, Sunda, Lombok and Makassar nodes",
-        "Defence and maritime-security documents",
-        "International shipping and energy-security analysis"
-      ],
-      "_jurisdiction_level_original": "national / international",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Bank Indonesia issues 'Neraca Pembayaran Indonesia' once per quarter - separate report pages for Triwulan III 2023, Triwulan I 2024, Triwulan IV 2025 and Triwulan I 2026.",
+      "releases_per_year": 4
     },
     {
       "id": "id-interprovincial-trade",
@@ -519,7 +409,10 @@
         "Logistics and connectivity policy"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Perdagangan Antar Wilayah Indonesia 2024' publication page states Periodisasi 'Tahunan' (annual), released 31 Dec 2025, ISSN 2745-6706.",
+      "releases_per_year": 1
     },
     {
       "id": "id-interisland-trade",
@@ -548,7 +441,10 @@
       ],
       "_jurisdiction_level_original": "provincial / national",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Perdagangan Antar Wilayah Indonesia 2024', on inter-provincial purchases and sales with trade maps and transport modes."
+      "_url_evidence": "BPS page confirms 'Perdagangan Antar Wilayah Indonesia 2024', on inter-provincial purchases and sales with trade maps and transport modes.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same publication as cited: 'Perdagangan Antar Wilayah Indonesia 2024', Periodisasi 'Tahunan', released 31 Dec 2025.",
+      "releases_per_year": 1
     },
     {
       "id": "id-sez",
@@ -562,7 +458,7 @@
       "domains": [
         "proposed:sez",
         "proposed:kek",
-        "proposed:investment",
+        "investment",
         "proposed:regulation"
       ],
       "_cadence_original": "continuous / periodic reporting",
@@ -577,7 +473,9 @@
         "Regional-development and spatial-planning documents"
       ],
       "_jurisdiction_level_original": "national / zone",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "kek.go.id returned no readable body content on two fetches (/ and /id); no frequency statement and no countable dated report series could be read from the site."
     },
     {
       "id": "id-ftz",
@@ -591,7 +489,7 @@
       "domains": [
         "proposed:ftz",
         "proposed:free-trade-zone",
-        "proposed:customs",
+        "trade",
         "proposed:batam"
       ],
       "_cadence_original": "continuous",
@@ -608,7 +506,9 @@
       "_jurisdiction_level_original": "national / zone",
       "last_updated": null,
       "_url_evidence": "Retrieved the DJBC (Directorate General of Customs and Excise) regulation directory topic page 'Kawasan Perdagangan Bebas', which lists 14 instruments governing free trade and free port zones from UU 36/2000 (the founding law) through PMK-34/PMK.04/2021 and PMK-173/PMK.03/2021 on goods entry/exit and VAT treatment, up to PER-4/BC/2026. This is the customs legal framework for the KPBPB/FTZ regime. The DJBC content page beacukai.go.id/arsip/fas/fasilitas-kawasan-khusus.html still returns a 404 shell and bpbatam.go.id is still 403.",
-      "_url_route": "alternate hostname on the same publisher - peraturan.beacukai.go.id serves static content where www.beacukai.go.id content paths 404"
+      "_url_route": "alternate hostname on the same publisher - peraturan.beacukai.go.id serves static content where www.beacukai.go.id content paths 404",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The cited Bea Cukai page is a directory of legal instruments for free-trade zones - UU No. 36/2000, PMK 34/PMK.04/2021, PMK 173/PMK.03/2021, Perdirjen 4/BC/2026 etc. These are regulations, not a recurring publication."
     },
     {
       "id": "id-customs-tariff",
@@ -620,7 +520,7 @@
       "description": "The broader customs and tariff framework that governs both international and (indirectly) domestic trade. Includes preferential treatment under ASEAN, RCEP and bilateral arrangements, as well as the special regimes applied inside SEZs and FTZs.",
       "url": "https://www.beacukai.go.id/referensi/btki-dan-tarif",
       "domains": [
-        "proposed:customs",
+        "trade",
         "proposed:tariff",
         "proposed:trade-facilitation"
       ],
@@ -637,65 +537,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Directorate General of Customs and Excise reference page confirmed to carry the Buku Tarif Kepabeanan Indonesia (BTKI) 2022 and customs tariff/exchange-rate references."
-    },
-    {
-      "id": "id-connectivity-logistics",
-      "title": "Inter-island connectivity and logistics policy/statistics",
-      "publisher": "Derived from BPS transport statistics, Ministry of Transportation, and connectivity programmes",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Statistical and policy traces of inter-island shipping, port connectivity and logistics programmes intended to reduce price disparities and integrate the domestic market across the archipelago.",
-      "url": null,
-      "domains": [
-        "proposed:connectivity",
-        "proposed:logistics",
-        "proposed:inter-island"
-      ],
-      "_cadence_original": "periodic",
-      "_batch": [
-        "2026-08-14_Indonesia-batch10.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Domestic-integration counterpart to the international chokepoint nodes.",
-      "_referenced_by": [
-        "Inter-provincial trade statistics",
-        "Price and food-security analysis",
-        "Maritime and port nodes"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-chokepoint-meta",
-      "title": "Indonesia maritime-chokepoint, inter-provincial trade and special-zone meta-node",
-      "publisher": "Derived from maritime, BPS trade, SEZ/FTZ and customs sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node that binds the Strait of Malacca, Sunda Strait, Lombok–Makassar passages, Archipelagic Sea Lanes regime, inter-provincial and inter-island trade statistics, Special Economic Zones, Free Trade/Free Port Zones, customs/tariff regime, and inter-island connectivity policy into a single high-centrality cluster. Captures both Indonesia’s role as a global energy and trade transit state and its internal commercial diversity across thousands of islands.",
-      "url": null,
-      "domains": [
-        "proposed:chokepoint",
-        "proposed:inter-provincial",
-        "proposed:sez",
-        "proposed:maritime",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch10.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-mass integrating node for the strategic-geography and internal-diversity layer requested by the user.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Energy, trade, provincial and external-sector series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national / international",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Directorate General of Customs and Excise reference page confirmed to carry the Buku Tarif Kepabeanan Indonesia (BTKI) 2022 and customs tariff/exchange-rate references.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BTKI is reissued with each Harmonized System revision: BTKI 2012, BTKI 2017 and BTKI 2022 (effective 1 April 2022, per Bea Cukai's 'Ketentuan Buku Tarif Kepabeanan Indonesia (BTKI) 2022' FAQ) - about one edition every five years. Note the cited /referensi/btki-dan-tarif URL now returns 404; the tariff book itself is enacted by PMK.",
+      "releases_per_year": 0.2
     },
     {
       "id": "id-defence-budget",
@@ -707,8 +552,8 @@
       "description": "Official and widely cited defence budget allocations (recent figures rising toward Rp 187 trillion in 2026) and broader military-expenditure estimates. Defence burden remains relatively low as a share of GDP for an archipelagic state with extensive maritime interests.",
       "url": "https://media.kemenkeu.go.id/getmedia/c4cc1854-96f4-42f4-95b8-94cf49a46f10/Informasi-APBN-Tahun-Anggaran-2025.pdf?ext=.pdf",
       "domains": [
-        "proposed:defence",
-        "proposed:budget",
+        "governance",
+        "public-finance",
         "proposed:military"
       ],
       "_cadence_original": "annual (budget cycle) + continuous citation",
@@ -725,7 +570,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the Ministry of Finance publication 'Informasi APBN Tahun Anggaran 2025'. It contains the table '10 Kementerian/Lembaga dengan Pagu Terbesar pada APBN 2025' in which Kementerian Pertahanan appears fifth with Rp166.26 trillion. Also verified as a secondary route that the Ministry of Defence PPID does publish budget documents at https://ppid.kemhan.go.id/web/ppid/informasi-berkala (RKA 2021/2023/2024/2025, DIPA 2022/2023/2025, audited Laporan Keuangan 2020/2022/2024) - contrary to the earlier finding that it listed none.",
-      "_url_route": "static asset host media.kemenkeu.go.id, bypassing the JS-only www.kemenkeu.go.id shell; kemhan PPID confirmed as a working backup"
+      "_url_route": "static asset host media.kemenkeu.go.id, bypassing the JS-only www.kemenkeu.go.id shell; kemhan PPID confirmed as a working backup",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited PDF is 'Informasi APBN 2025' from the Directorate General of Budget - one booklet per fiscal year; the text refers to improving 'penyusunan Buku Informasi APBN selanjutnya' (the next year's edition).",
+      "releases_per_year": 1
     },
     {
       "id": "id-defence-posture",
@@ -737,8 +585,7 @@
       "description": "Recurring policy and strategic framing of Indonesia’s defence posture as an archipelagic state, including modernisation programmes and the linkage between territorial integrity, sea lanes and external security.",
       "url": "https://www.kemhan.go.id/wp-content/uploads/2015/12/04f92fd80ee3d01c8e5c5dc3f56b34e31.pdf",
       "domains": [
-        "proposed:defence",
-        "proposed:security",
+        "governance",
         "proposed:archipelagic"
       ],
       "_cadence_original": "continuous",
@@ -754,7 +601,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "PDF on the Ministry of Defence domain confirmed as Buku Putih Pertahanan Indonesia (Defence White Paper), setting out archipelagic defence doctrine and strategy."
+      "_url_evidence": "PDF on the Ministry of Defence domain confirmed as Buku Putih Pertahanan Indonesia (Defence White Paper), setting out archipelagic defence doctrine and strategy.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited document is the Buku Putih Pertahanan Indonesia 2008 (18 Feb 2008), which states it updates the 2003 white paper 'Mempertahankan Tanah Air Memasuki Abad XXI' - two editions five years apart, i.e. roughly one per five years.",
+      "releases_per_year": 0.2
     },
     {
       "id": "id-education-stats",
@@ -817,8 +667,7 @@
       "domains": [
         "education",
         "proposed:tertiary",
-        "proposed:ger",
-        "proposed:provincial"
+        "proposed:ger"
       ],
       "_cadence_original": "annual / Susenas-based",
       "_batch": [
@@ -832,7 +681,10 @@
         "Skills and labour-market analysis"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Tertiary GER is published in BPS 'Statistik Pendidikan' (Susenas-based), one edition per year: 2023 (24 Nov 2023), 2024 (22 Nov 2024), 2025 (21 Nov 2025).",
+      "releases_per_year": 1
     },
     {
       "id": "id-construction",
@@ -846,8 +698,8 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "construction",
-        "proposed:infrastructure",
-        "proposed:investment"
+        "infrastructure",
+        "investment"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch11.json"
@@ -874,7 +726,7 @@
       "domains": [
         "proposed:rice",
         "proposed:paddy",
-        "proposed:food-security",
+        "poverty",
         "agriculture"
       ],
       "_cadence_original": "seasonal / annual",
@@ -889,7 +741,10 @@
         "Inter-provincial trade and food-security policy"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Luas Panen dan Produksi Padi di Indonesia' appears once a year, each around 1 August: 2022 ed. 03 Aug 2023, 2023 ed. 01 Aug 2024, 2024 ed. 01 Aug 2025. (BPS additionally issues KSA-based monthly production press releases, e.g. Juli 2025 released 01 Sep 2025.)",
+      "releases_per_year": 1
     },
     {
       "id": "id-sea-transport",
@@ -903,7 +758,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:sea-transport",
-        "proposed:ports",
+        "infrastructure",
         "proposed:shipping"
       ],
       "_batch": [
@@ -929,7 +784,7 @@
       "description": "High-frequency and annual statistics on passenger and goods movement by sea, air, rail and river/lake/ferry modes. Captures the multi-modal character of mobility across the archipelago.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:transport",
+        "infrastructure",
         "proposed:multimodal",
         "proposed:mobility"
       ],
@@ -945,7 +800,10 @@
         "Inflation (transport component) analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS press release 'Perkembangan Pariwisata dan Transportasi Nasional' is issued monthly (editions for Oktober 2009, November 2012, Februari 2015, Agustus 2021, Januari/Maret/April 2023). The annual compendia (Statistik Transportasi Laut etc.) are separate 'Tahunan' books.",
+      "releases_per_year": 12
     },
     {
       "id": "id-gender-stats",
@@ -960,7 +818,7 @@
       "domains": [
         "proposed:gender",
         "proposed:women",
-        "proposed:social"
+        "living-standards"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch11.json"
@@ -985,9 +843,6 @@
       "description": "Provincial CPI series (current base 2022=100) that reveal price-level and inflation differentials across the archipelago. Complements the national CPI and feeds analysis of inter-island price disparities.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:cpi",
-        "proposed:prices",
-        "proposed:provincial",
         "inflation"
       ],
       "_cadence_original": "monthly / annual compilation",
@@ -1001,38 +856,10 @@
         "Inter-provincial trade and connectivity policy",
         "Poverty-line and real-income calculations"
       ],
-      "last_updated": null
-    },
-    {
-      "id": "id-batch11-meta",
-      "title": "Indonesia defence–education–construction–food–transport–gender densification meta-node",
-      "publisher": "Derived from BPS, Ministry of Defence, Ministry of Finance and related sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding defence budget and archipelagic posture, education statistics and tertiary GER, construction sector statistics, paddy/rice production, sea and multimodal transport, gender statistics, and provincial CPI into a coherent multi-domain densification layer.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "education",
-        "construction",
-        "proposed:food",
-        "proposed:transport",
-        "proposed:gender",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch11.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the multi-domain research rounds in Batch 11.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier fiscal, agricultural, maritime, provincial and social series"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Indeks Harga Konsumen 38 Provinsi di Indonesia 2025 (2022=100)' page states Periodisasi 'Tahunan', released 09 Apr 2026 (2024 edition 10 Apr 2025); it compiles the monthly consumer price surveys.",
+      "releases_per_year": 1
     },
     {
       "id": "id-electricity-mix",
@@ -1044,8 +871,7 @@
       "description": "Statistics on electricity production by generation type. Coal-fired (PLTU) remains dominant; gas, hydro, geothermal and other sources make up the balance. Total generation has been rising with demand.",
       "url": "https://www.bps.go.id/id/publication/2025/12/31/c4f7aade5d4801236ec79b81/statistik-listrik-2020-2024.html",
       "domains": [
-        "proposed:electricity",
-        "proposed:power",
+        "energy",
         "proposed:energy-mix"
       ],
       "_cadence_original": "annual / periodic",
@@ -1061,7 +887,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Statistik Listrik 2020-2024' from the Annual Survey of Electricity Companies: installed capacity, electricity produced and distributed."
+      "_url_evidence": "BPS page confirms 'Statistik Listrik 2020-2024' from the Annual Survey of Electricity Companies: installed capacity, electricity produced and distributed.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Listrik 2020-2024' publication page states Periodisasi 'Tahunan', released 31 Dec 2025 (catalogue 6205005), described as a continuation of previous editions.",
+      "releases_per_year": 1
     },
     {
       "id": "id-energy-balance-detail",
@@ -1074,7 +903,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:energy",
+        "energy",
         "proposed:balance",
         "proposed:resources"
       ],
@@ -1101,9 +930,8 @@
       "description": "Long-run series of petroleum and condensate production. Shows the long-term decline from earlier peak levels; Indonesia is no longer a net oil exporter in the classic sense.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:oil",
-        "proposed:petroleum",
-        "proposed:production"
+        "energy",
+        "industry"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1117,7 +945,10 @@
         "Fiscal (oil & gas revenue) analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Ditjen Migas ESDM issues 'Buku Statistik Minyak dan Gas Bumi' twice a year - a Semester I edition (Semester I 2023, Semester I 2024) plus a full-year book (Statistik Migas 2022) on migas.esdm.go.id.",
+      "releases_per_year": 2
     },
     {
       "id": "id-gas-production",
@@ -1129,7 +960,7 @@
       "description": "Natural gas production series (MMscf). Gas remains a significant domestic and export energy commodity and feeds both power generation and industrial use / LNG.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:gas",
+        "energy",
         "proposed:natural-gas",
         "proposed:lng"
       ],
@@ -1145,7 +976,10 @@
         "Industrial and power-sector analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same series as oil: Ditjen Migas 'Buku Statistik Minyak dan Gas Bumi' with a Semester I edition (2023, 2024) plus an annual book (2022) - two issues per year.",
+      "releases_per_year": 2
     },
     {
       "id": "id-religion-composition",
@@ -1158,8 +992,8 @@
       "url": "https://sensus.bps.go.id/topik/tabular/sp2010/12/0/0",
       "domains": [
         "proposed:religion",
-        "proposed:demography",
-        "proposed:social"
+        "population",
+        "living-standards"
       ],
       "_cadence_original": "census / civil-registration updates",
       "_batch": [
@@ -1175,36 +1009,10 @@
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
       "_url_evidence": "Retrieved the BPS census portal table 'Penduduk Menurut Wilayah dan Agama yang Dianut, di INDONESIA' (Population by Region and Religion), Sensus Penduduk 2010, with figures rendering: Islam 104,528,568 (of a 237,641,326 total shown for the displayed breakdown), Kristen 7,118,678, Katolik 9,409,835, Hindu 2,418,492, Buddha 4,489,381, Khonghucu 117,091, Lainnya 139,582, plus urban/rural and sex disaggregation. Dukcapil publishes no religion-composition product; this BPS census table is the official statistical source.",
-      "_url_route": "BPS subdomain sensus.bps.go.id (census tabular topic pages), found by searching the exact Indonesian table name"
-    },
-    {
-      "id": "id-religious-geography",
-      "title": "Geographic distribution of religious communities",
-      "publisher": "Derived from census and civil-registration data",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Indonesia",
-      "description": "Spatial patterning of religious affiliation — Muslim majority almost everywhere, with notable Hindu concentration in Bali, Christian majorities or large minorities in parts of eastern Indonesia (North Sulawesi, Papua, Maluku, NTT, etc.), and other local patterns.",
-      "url": null,
-      "domains": [
-        "proposed:religion",
-        "proposed:geography",
-        "proposed:regional"
-      ],
-      "_cadence_original": "census cycle",
-      "_batch": [
-        "2026-08-14_Indonesia-batch12.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Spatial densification of the religion cluster; links identity to the archipelagic geography already mapped.",
-      "_referenced_by": [
-        "Religious composition statistics",
-        "Provincial and Bali–Nusa Tenggara / Papua / Sulawesi nodes",
-        "Cultural and social-policy analysis"
-      ],
-      "_jurisdiction_level_original": "provincial / regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "BPS subdomain sensus.bps.go.id (census tabular topic pages), found by searching the exact Indonesian table name",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited page is the SP2010 tabular topic 'Penduduk Menurut Wilayah dan Agama yang Dianut'; the census religion tables exist for SP2010 and SP2020, ten years apart. Page metadata states only 'Frekuensi update: Lebih dari Dua Tahunan'.",
+      "releases_per_year": 0.1
     },
     {
       "id": "id-geothermal",
@@ -1217,8 +1025,7 @@
       "url": "https://www.esdm.go.id/id/publikasi/handbook-of-energy-economic-statistics-of-indonesia",
       "domains": [
         "proposed:geothermal",
-        "proposed:renewables",
-        "proposed:energy"
+        "energy"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -1232,63 +1039,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "MEMR page confirmed as the Handbook of Energy & Economic Statistics of Indonesia (HEESI) series, listing editions 2010-2025 covering energy supply including geothermal and renewables."
-    },
-    {
-      "id": "id-energy-transition",
-      "title": "Energy-transition and renewable-policy framing",
-      "publisher": "Government of Indonesia / MEMR / related planning documents",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Recurring policy framing around energy transition, renewable targets and the tension with continued coal dominance in the power sector. Continuously cited alongside NDC and long-term planning documents.",
-      "url": null,
-      "domains": [
-        "proposed:energy-transition",
-        "proposed:policy",
-        "proposed:renewables"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch12.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Policy-frame node for the energy-transition debate.",
-      "_referenced_by": [
-        "Electricity mix, coal and GHG nodes",
-        "NDC and climate-policy framework",
-        "Investment and industrial-energy analysis"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-batch12-meta",
-      "title": "Indonesia energy-mix–oil-gas–religion densification meta-node",
-      "publisher": "Derived from BPS, MEMR, Dukcapil and related sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding electricity generation by source, detailed energy balances, oil and gas production, geothermal/renewables, energy-transition framing, religious composition and religious geography into a coherent energy-and-identity layer.",
-      "url": null,
-      "domains": [
-        "proposed:energy",
-        "proposed:religion",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch12.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 12 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier coal, energy-balance, GHG, Islamic-finance and provincial series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "MEMR page confirmed as the Handbook of Energy & Economic Statistics of Indonesia (HEESI) series, listing editions 2010-2025 covering energy supply including geothermal and renewables.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "ESDM's 'Handbook of Energy and Economic Statistics of Indonesia' page lists one edition per year: 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.",
+      "releases_per_year": 1
     },
     {
       "id": "id-tanjung-priok",
@@ -1303,7 +1057,7 @@
         "proposed:port",
         "proposed:tanjung-priok",
         "proposed:containers",
-        "proposed:logistics"
+        "infrastructure"
       ],
       "_cadence_original": "continuous / annual summaries",
       "_batch": [
@@ -1318,7 +1072,10 @@
       ],
       "_jurisdiction_level_original": "local / national gateway",
       "last_updated": null,
-      "_url_evidence": "BPS DKI Jakarta page confirms 'Statistik Transportasi Provinsi DKI Jakarta 2025' covering land, sea and air transport; the series is BPS's carrier for Tanjung Priok cargo and passenger data (port not named in the abstract itself)."
+      "_url_evidence": "BPS DKI Jakarta page confirms 'Statistik Transportasi Provinsi DKI Jakarta 2025' covering land, sea and air transport; the series is BPS's carrier for Tanjung Priok cargo and passenger data (port not named in the abstract itself).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Transportasi Provinsi DKI Jakarta 2025' page states Periodisasi 'Tahunan', released 26 May 2026.",
+      "releases_per_year": 1
     },
     {
       "id": "id-tanjung-perak",
@@ -1348,7 +1105,10 @@
       ],
       "_jurisdiction_level_original": "local / national",
       "last_updated": null,
-      "_url_evidence": "BPS East Java page confirms 'Statistik Transportasi Provinsi Jawa Timur 2023' presenting land, sea and air transport statistics for the province containing Tanjung Perak (port not named in the abstract itself)."
+      "_url_evidence": "BPS East Java page confirms 'Statistik Transportasi Provinsi Jawa Timur 2023' presenting land, sea and air transport statistics for the province containing Tanjung Perak (port not named in the abstract itself).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Transportasi Provinsi Jawa Timur 2023' page states Periodisasi 'Tahunan', released 24 Sep 2024.",
+      "releases_per_year": 1
     },
     {
       "id": "id-major-ports",
@@ -1360,9 +1120,8 @@
       "description": "System-level view of the main commercial ports that handle the bulk of international and inter-island cargo and passengers. Complements the detailed Priok and Perak nodes and links to the chokepoint and connectivity layers.",
       "url": "https://www.bps.go.id/id/publication/2025/12/01/fdc6de7c2b34aa9b109edcad/statistik-transportasi-laut-2024.html",
       "domains": [
-        "proposed:ports",
-        "proposed:system",
-        "proposed:logistics"
+        "infrastructure",
+        "proposed:system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1377,7 +1136,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Statistik Transportasi Laut 2024': vessel calls, cargo loading/unloading and passenger movements at seaports across 36 provinces."
+      "_url_evidence": "BPS page confirms 'Statistik Transportasi Laut 2024': vessel calls, cargo loading/unloading and passenger movements at seaports across 36 provinces.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Transportasi Laut 2024' page states Periodisasi 'Tahunan', released 01 Dec 2025 (catalogue 8304003), covering sea ports in 36 provinces.",
+      "releases_per_year": 1
     },
     {
       "id": "id-ethnic-groups",
@@ -1390,7 +1152,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:ethnicity",
-        "proposed:demography",
+        "population",
         "proposed:diversity"
       ],
       "_cadence_original": "census / Long Form cycle",
@@ -1405,7 +1167,10 @@
         "Cultural and social-policy analysis"
       ],
       "_jurisdiction_level_original": "national / regional",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Profil Suku dan Keragaman Bahasa Daerah Hasil Long Form Sensus Penduduk 2020' was released 12 Dec 2024 - a product of the Long Form of the decennial census (SP2010 -> SP2020), so roughly one round per ten years.",
+      "releases_per_year": 0.1
     },
     {
       "id": "id-regional-languages",
@@ -1433,7 +1198,10 @@
         "Provincial social-structure analysis"
       ],
       "_jurisdiction_level_original": "national / island / regional",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same publication: 'Profil Suku dan Keragaman Bahasa Daerah Hasil Long Form Sensus Penduduk 2020' (12 Dec 2024), tied to the decennial census Long Form.",
+      "releases_per_year": 0.1
     },
     {
       "id": "id-crime-stats",
@@ -1446,8 +1214,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:crime",
-        "proposed:security",
+        "governance",
         "proposed:judicial"
       ],
       "_batch": [
@@ -1474,7 +1241,7 @@
       "url": "https://www.bps.go.id/id/publication/2025/12/12/2edc8ea4c35b19ba912fc7e4/statistik-kriminal-2024-2025.html",
       "domains": [
         "proposed:victimisation",
-        "proposed:crime",
+        "governance",
         "proposed:reporting"
       ],
       "_cadence_original": "aligned with Crime Statistics",
@@ -1490,36 +1257,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Statistik Kriminal 2024/2025' and cites Susenas-based victimisation (0.73%) and crime reporting rate (20.28%) for 2024."
-    },
-    {
-      "id": "id-batch13-meta",
-      "title": "Indonesia ports–ethnicity–language–crime densification meta-node",
-      "publisher": "Derived from Pelindo, BPS Long Form and Crime Statistics sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding major port operational statistics (Tanjung Priok, Tanjung Perak, system), ethnic-group profiles, regional-language diversity, crime statistics and victimisation measures into a coherent infrastructure–identity–security layer.",
-      "url": null,
-      "domains": [
-        "proposed:ports",
-        "proposed:ethnicity",
-        "proposed:language",
-        "proposed:crime",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch13.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 13 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier sea-transport, census, religious and provincial series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "BPS page confirms 'Statistik Kriminal 2024/2025' and cites Susenas-based victimisation (0.73%) and crime reporting rate (20.28%) for 2024.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Kriminal 2024/2025' publication page states frequency 'Tahunan' (annual), released 12 Dec 2025, catalogue 4401002, ISSN 2089-5291.",
+      "releases_per_year": 1
     },
     {
       "id": "id-bnpb",
@@ -1532,8 +1273,7 @@
       "url": "https://data.bnpb.go.id/",
       "domains": [
         "proposed:disaster",
-        "proposed:bnpb",
-        "proposed:institutional"
+        "proposed:bnpb"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1546,7 +1286,9 @@
         "RPJMN and resilience planning documents"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "data.bnpb.go.id is the Portal Satu Data Bencana - an event-level disaster data portal with pre/during/post-disaster dashboards and incident-specific pages; discrete outputs are annual compilations, but the underlying database accumulates events continuously."
     },
     {
       "id": "id-disaster-occurrence",
@@ -1574,7 +1316,10 @@
         "Provincial and local resilience analysis"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The BNPB portal lists one 'Kompilasi Data Kejadian dan Dampak Bencana' per year - the 2024 compilation and the 2025 compilation dated 01 Jul 2026.",
+      "releases_per_year": 1
     },
     {
       "id": "id-disaster-risk-index",
@@ -1603,36 +1348,10 @@
       ],
       "_jurisdiction_level_original": "provincial / district",
       "last_updated": null,
-      "_url_evidence": "BNPB product page confirms IRBI as the annual disaster risk index at district/city and provincial level (bnpb.go.id itself returns 403 to WebFetch)."
-    },
-    {
-      "id": "id-bpbd",
-      "title": "Provincial and local Disaster Management Agencies (BPBD)",
-      "publisher": "BNPB / local governments",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Most provinces and many districts/cities",
-      "description": "Subnational disaster-management agencies that implement risk reduction, preparedness and response at provincial and local levels. Coverage has expanded to nearly all provinces.",
-      "url": null,
-      "domains": [
-        "proposed:disaster",
-        "proposed:local",
-        "proposed:bpbd"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch14-disaster.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Subnational institutional densification of the disaster system.",
-      "_referenced_by": [
-        "BNPB institutional node",
-        "Disaster Risk Index and occurrence statistics",
-        "Local government capacity analysis"
-      ],
-      "_jurisdiction_level_original": "provincial / local",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "BNPB product page confirms IRBI as the annual disaster risk index at district/city and provincial level (bnpb.go.id itself returns 403 to WebFetch).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The IRBI product page on direktoripb.bnpb.go.id states the index is 'dikeluarkan setiap tahun' (issued annually); initiation year 2014, implementation 2015.",
+      "releases_per_year": 1
     },
     {
       "id": "id-volcano-earthquake",
@@ -1662,61 +1381,9 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "Confirmed as PVMBG (Center for Volcanology and Geological Hazard Mitigation, Badan Geologi ESDM), publishing daily volcano status/alert levels, seismic counts and eruption observations."
-    },
-    {
-      "id": "id-disaster-policy",
-      "title": "National disaster-management policy and legal framework",
-      "publisher": "Government of Indonesia / BNPB",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Legal and policy instruments governing disaster management (including the post-2004 institutional redesign that created BNPB and the subsequent risk-reduction strategies). Recurring citation in resilience and development planning.",
-      "url": null,
-      "domains": [
-        "proposed:disaster",
-        "proposed:policy",
-        "proposed:legal-framework"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch14-disaster.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Policy-frame node for the entire disaster cluster.",
-      "_referenced_by": [
-        "BNPB, BPBD and Risk Index nodes",
-        "RPJMN and climate-adaptation documents"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-disaster-meta",
-      "title": "Indonesia disaster-risk and management meta-node",
-      "publisher": "Derived from BNPB and related sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding BNPB, disaster occurrence/impact statistics, Disaster Risk Index, BPBD subnational system, volcano/earthquake/tsunami focus, and the national policy framework into a coherent multi-hazard resilience layer with explicit inter-regional variation.",
-      "url": null,
-      "domains": [
-        "proposed:disaster",
-        "proposed:resilience",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch14-disaster.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the disaster round.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier environmental, provincial and climate series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Confirmed as PVMBG (Center for Volcanology and Geological Hazard Mitigation, Badan Geologi ESDM), publishing daily volcano status/alert levels, seismic counts and eruption observations.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "vsi.esdm.go.id is a live monitoring portal: near-daily 'Laporan Kebencanaan Geologi' entries and a continuously maintained list of volcano alert levels (Level II/III statuses with dates), not a discrete release series."
     },
     {
       "id": "id-ijepa",
@@ -1728,9 +1395,8 @@
       "description": "Indonesia’s first bilateral EPA. Covers goods, services, investment and capacity building. Continuously cited in Japan–Indonesia trade and investment analysis.",
       "url": "https://ditjenppi.kemendag.go.id/bilateral/asiaselatan-tengah-timur/jepang",
       "domains": [
-        "proposed:fta",
-        "proposed:japan",
-        "proposed:bilateral"
+        "trade",
+        "proposed:japan"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch15-international.json"
@@ -1755,7 +1421,7 @@
       "description": "Multilateral FTA between ASEAN and Australia/New Zealand covering goods, services and investment. Part of the broader ASEAN+ network.",
       "url": "https://aanzfta.asean.org/aanzfta-overview",
       "domains": [
-        "proposed:fta",
+        "trade",
         "proposed:asean",
         "proposed:australia",
         "proposed:new-zealand"
@@ -1783,9 +1449,8 @@
       "description": "Bilateral comprehensive partnership covering goods, services, investment and temporary movement of persons.",
       "url": "https://www.dfat.gov.au/trade/agreements/in-force/iacepa/indonesia-australia-comprehensive-economic-partnership-agreement",
       "domains": [
-        "proposed:fta",
-        "proposed:australia",
-        "proposed:bilateral"
+        "trade",
+        "proposed:australia"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch15-international.json"
@@ -1809,9 +1474,8 @@
       "description": "Comprehensive trade agreement covering the large majority of tariff lines. Negotiations concluded; entry into force pending ratification (targeted around 2027 in recent reporting).",
       "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/indonesia_en",
       "domains": [
-        "proposed:fta",
-        "proposed:eu",
-        "proposed:bilateral"
+        "trade",
+        "proposed:eu"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch15-international.json"
@@ -1838,7 +1502,7 @@
       "domains": [
         "proposed:bit",
         "proposed:investment-treaty",
-        "proposed:fdi"
+        "investment"
       ],
       "_cadence_original": "continuous (status changes)",
       "_batch": [
@@ -1852,7 +1516,9 @@
         "Investment-policy and dispute analysis"
       ],
       "last_updated": null,
-      "_url_evidence": "UNCTAD Investment Policy Hub country page lists Indonesia's BITs by status: 28 in force, 13 signed, 31 terminated."
+      "_url_evidence": "UNCTAD Investment Policy Hub country page lists Indonesia's BITs by status: 28 in force, 13 signed, 31 terminated.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "UNCTAD's IIA Navigator country page for Indonesia is a treaty database (73 BITs plus 25 TIPs and 25 further frameworks listed), updated as treaty statuses change; the page states no release schedule."
     },
     {
       "id": "id-fta-network",
@@ -1864,7 +1530,7 @@
       "description": "System-level view of Indonesia’s active and prospective free-trade and comprehensive economic partnership agreements (ASEAN, RCEP, bilaterals with Japan, Australia, EU, etc.). Organises the individual treaty nodes.",
       "url": "https://ditjenppi.kemendag.go.id/publikasi",
       "domains": [
-        "proposed:fta",
+        "trade",
         "proposed:network",
         "proposed:trade-architecture"
       ],
@@ -1880,62 +1546,9 @@
         "Trade-policy documents"
       ],
       "last_updated": null,
-      "_url_evidence": "Ministry of Trade DG PPI publications page lists the 'Indonesia Trade Negotiations Agenda (as of July 2026)' plus factsheets for IEU-CEPA, ICA-CEPA, I-EAEU FTA etc., i.e. the system-level FTA/CEPA overview."
-    },
-    {
-      "id": "id-singapore-partnership",
-      "title": "Indonesia–Singapore comprehensive partnership framework",
-      "publisher": "Governments of Indonesia and Singapore",
-      "country": "ID",
-      "jurisdiction_level": "international",
-      "region": "Indonesia–Singapore",
-      "description": "Dense bilateral partnership reflected in successive Leaders’ Retreats and numerous sectoral agreements (economy, investment, defence, energy, environment, digital, human resources). Singapore is also a top FDI source and FTZ-linked partner.",
-      "url": null,
-      "domains": [
-        "proposed:bilateral",
-        "proposed:singapore",
-        "proposed:partnership"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch15-international.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-density bilateral relationship node sitting on the Malacca approaches.",
-      "_referenced_by": [
-        "FDI statistics (Singapore origin)",
-        "Batam–Bintan–Karimun FTZ nodes",
-        "Malacca-approach commercial analysis"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-intl-meta",
-      "title": "Indonesia expanded international economic-architecture meta-node",
-      "publisher": "Derived from trade, investment-treaty and bilateral sources",
-      "country": "ID",
-      "jurisdiction_level": "international",
-      "region": "Indonesia",
-      "description": "Meta-node that expands the earlier ASEAN/RCEP core with IJEPA, AANZFTA, IA-CEPA, IEU-CEPA, the BIT network, overall FTA/CEPA overview and the Indonesia–Singapore partnership framework.",
-      "url": null,
-      "domains": [
-        "proposed:international",
-        "proposed:fta",
-        "proposed:bit",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch15-international.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the expanded international round.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier ASEAN, RCEP, trade and FDI series"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Ministry of Trade DG PPI publications page lists the 'Indonesia Trade Negotiations Agenda (as of July 2026)' plus factsheets for IEU-CEPA, ICA-CEPA, I-EAEU FTA etc., i.e. the system-level FTA/CEPA overview.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "ditjenppi.kemendag.go.id/publikasi shows no frequency statement and no regular series: 'Indonesia Trade Negotiations Agenda (as of July 2026)' posted 22 Jul 2026 and five CEPA/PTA factsheets all posted 27 Jan 2026."
     },
     {
       "id": "id-democracy-index",
@@ -1948,7 +1561,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:democracy",
-        "proposed:governance",
+        "governance",
         "proposed:idi"
       ],
       "_cadence_original": "annual",
@@ -1978,7 +1591,7 @@
       "domains": [
         "proposed:anti-corruption",
         "proposed:integrity",
-        "proposed:governance"
+        "governance"
       ],
       "_cadence_original": "continuous / multi-year strategy cycles",
       "_batch": [
@@ -1993,36 +1606,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Official KPK page setting out the Stranas PK 2025-2026 action plan (15 actions across licensing/trade, state finances, law enforcement and bureaucratic reform); the dedicated stranaspk.kpk.go.id host does not resolve for WebFetch."
-    },
-    {
-      "id": "id-kpk",
-      "title": "KPK – Corruption Eradication Commission institutional role",
-      "publisher": "Komisi Pemberantasan Korupsi",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Specialised anti-corruption agency with investigation, prosecution and prevention mandates. Continuously cited in governance, integrity and rule-of-law analysis.",
-      "url": null,
-      "domains": [
-        "proposed:kpk",
-        "proposed:anti-corruption",
-        "proposed:institutional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch16-governance.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Key specialised governance institution.",
-      "_referenced_by": [
-        "Stranas PK and integrity framework",
-        "Crime and judicial statistics",
-        "Public-trust and investment-climate discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Official KPK page setting out the Stranas PK 2025-2026 action plan (15 actions across licensing/trade, state finances, law enforcement and bureaucratic reform); the dedicated stranaspk.kpk.go.id host does not resolve for WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited KPK news item (09 Dec 2024) announces the launch of 15 Stranas PK corruption-prevention actions for the 2025-2026 period, described as an extension of previous action sets - i.e. one action-plan cycle every two years.",
+      "releases_per_year": 0.5
     },
     {
       "id": "id-asset-declaration",
@@ -2036,7 +1623,7 @@
       "domains": [
         "proposed:integrity",
         "proposed:asset-declaration",
-        "proposed:governance"
+        "governance"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -2050,35 +1637,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "KPK service page describes the LHKPN asset-declaration obligation, who must report, annual filing and sanctions under Law 28/1999."
-    },
-    {
-      "id": "id-governance-meta",
-      "title": "Indonesia governance and institutional-quality meta-node",
-      "publisher": "Derived from BPS IDI, KPK and integrity-strategy sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding the Indonesia Democracy Index, National Strategy for Corruption Prevention, KPK institutional role, and asset-declaration / conflict-of-interest regime into a coherent governance and institutional-quality layer.",
-      "url": null,
-      "domains": [
-        "proposed:governance",
-        "proposed:democracy",
-        "proposed:integrity",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch16-governance.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the governance round.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier fiscal, judicial/crime and RPJMN series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "KPK service page describes the LHKPN asset-declaration obligation, who must report, annual filing and sanctions under Law 28/1999.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The KPK LHKPN page states 'Setiap tahunnya, penyelenggara negara baik dari Yudikatif, Legislatif, Eksekutif, dan BUMN/D diwajibkan membuat LHKPN' - an annual declaration cycle. The page is a service/regulatory page rather than a dated publication.",
+      "releases_per_year": 1
     },
     {
       "id": "id-local-government-finance",
@@ -2091,8 +1653,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:fiscal",
-        "proposed:subnational",
+        "public-finance",
         "proposed:local-government"
       ],
       "_batch": [
@@ -2118,7 +1679,7 @@
       "description": "The main intergovernmental transfer instruments: Dana Alokasi Umum (general equalisation), Dana Alokasi Khusus (special purpose, including disaster), and Dana Bagi Hasil (revenue sharing). Central to understanding how resources are redistributed across a highly unequal archipelago.",
       "url": "https://djpk.kemenkeu.go.id/portal/data/tkdd",
       "domains": [
-        "proposed:fiscal",
+        "public-finance",
         "proposed:equalisation",
         "proposed:transfers"
       ],
@@ -2135,7 +1696,10 @@
       ],
       "_jurisdiction_level_original": "national → subnational",
       "last_updated": null,
-      "_url_evidence": "Directorate General of Fiscal Balance data page shows allocation and realisation of Transfer ke Daerah broken into DBH, DAU and DAK with rupiah figures."
+      "_url_evidence": "Directorate General of Fiscal Balance data page shows allocation and realisation of Transfer ke Daerah broken into DBH, DAU and DAK with rupiah figures.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The DJPK TKDD portal presents DBH/DAU/DAK/Otsus/Dana Desa by fiscal year with a year selector spanning 2011-2027 (one allocation dataset per year); realisation figures carry a 'per tanggal 18 Agustus 2026' tracking timestamp.",
+      "releases_per_year": 1
     },
     {
       "id": "id-own-source-revenue",
@@ -2147,7 +1711,7 @@
       "description": "Statistics and analysis of Pendapatan Asli Daerah (own-source revenue). Most districts remain heavily transfer-dependent; PAD capacity varies sharply and interacts with the DAU formula.",
       "url": "https://www.bps.go.id/id/publication/2025/12/31/87d5c364dac7e52cb385313b/statistik-keuangan-pemerintah-kabupaten-kota-2024-dan-2025.html",
       "domains": [
-        "proposed:fiscal",
+        "public-finance",
         "proposed:pad",
         "proposed:own-source"
       ],
@@ -2163,7 +1727,10 @@
       ],
       "_jurisdiction_level_original": "provincial / district",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Statistik Keuangan Pemerintah Kabupaten/Kota 2024 dan 2025' on district/city revenue and expenditure realisation and optimising regional revenue."
+      "_url_evidence": "BPS page confirms 'Statistik Keuangan Pemerintah Kabupaten/Kota 2024 dan 2025' on district/city revenue and expenditure realisation and optimising regional revenue.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Keuangan Pemerintah Kabupaten/Kota 2024 dan 2025' page states 'Frekuensi Terbit: Tahunan', released 31 Dec 2025.",
+      "releases_per_year": 1
     },
     {
       "id": "id-water-supply",
@@ -2176,9 +1743,9 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:water",
+        "environment",
         "proposed:water-supply",
-        "proposed:utilities"
+        "infrastructure"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch17-final-polish.json"
@@ -2203,7 +1770,7 @@
       "description": "Statistical and indicator material on water resources relevant to agriculture and broader use, including irrigation-related series. Java’s high population and agricultural intensity make water stress a recurring spatial and policy theme.",
       "url": "https://www.bps.go.id/id/publication/2025/12/31/a54f7fee0b1a7df7b93f5a47/statistik-air-bersih-2020-2024.html",
       "domains": [
-        "proposed:water",
+        "environment",
         "proposed:irrigation",
         "agriculture",
         "proposed:resources"
@@ -2222,64 +1789,10 @@
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
       "_url_evidence": "Retrieved the national BPS publication page 'Statistik Air Bersih 2020-2024' (catalogue 6206001, ISSN 0853-6449, released 31 December 2025), presenting results of the Survei Tahunan Perusahaan Air Bersih 2024 in statistical tables. This is the national edition, not a provincial one - the earlier pass saw only provincial 'Statistik Air Bersih' titles. Caveat: it covers piped/clean-water supply undertakings rather than irrigation specifically; no national BPS irrigation publication was found.",
-      "_url_route": "BPS national publication catalogue via Indonesian-language title search on www.bps.go.id"
-    },
-    {
-      "id": "id-java-water-stress",
-      "title": "Java water-stress and water-security framing",
-      "publisher": "Derived from water-supply, agricultural and planning sources",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Java",
-      "description": "Recurring policy and analytical framing of water stress on Java — high population density, intensive agriculture, industrial demand and seasonal variability. Complements the national water-supply statistics with a spatially focused narrative.",
-      "url": null,
-      "domains": [
-        "proposed:water",
-        "proposed:java",
-        "proposed:stress",
-        "proposed:security"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch17-final-polish.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Spatial water-stress node that tightens the Java environmental and infrastructure cluster.",
-      "_referenced_by": [
-        "Water Supply Statistics and irrigation indicators",
-        "Java-core provincial nodes",
-        "Climate-adaptation and urban-planning documents"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-final-polish-meta",
-      "title": "Indonesia subnational-fiscal and water densification meta-node",
-      "publisher": "Derived from BPS local-finance and water-supply sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding district/city government finance statistics, DAU/DAK/DBH equalisation transfers, own-source revenue (PAD), Water Supply Statistics, irrigation/water-resource indicators, and Java water-stress framing into the final polish layer.",
-      "url": null,
-      "domains": [
-        "proposed:fiscal",
-        "proposed:water",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch17-final-polish.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Closing integrating node for the final polish round.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier APBN, government-accounts, environmental and Java series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "BPS national publication catalogue via Indonesian-language title search on www.bps.go.id",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Air Bersih 2020-2024' page states Periodisasi 'Tahunan', released 31 Dec 2025.",
+      "releases_per_year": 1
     },
     {
       "id": "id-manufacturing-ipi",
@@ -2292,8 +1805,7 @@
       "releases_per_year": 12,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:manufacturing",
-        "proposed:industrial-production",
+        "industry",
         "proposed:ipi"
       ],
       "_batch": [
@@ -2320,7 +1832,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:manufacturing",
+        "industry",
         "proposed:business-register",
         "proposed:directory"
       ],
@@ -2347,9 +1859,8 @@
       "description": "Annual and higher-frequency export statistics by commodity (HS), destination country, province of origin and ISIC. Primary official measure of merchandise exports.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:trade",
-        "proposed:exports",
-        "proposed:external"
+        "trade",
+        "external-sector"
       ],
       "_cadence_original": "annual detailed + monthly/periodic summaries",
       "_batch": [
@@ -2363,7 +1874,10 @@
         "Commodity and industrial-policy analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Indonesia Foreign Trade Statistics Exports 2024, Book I' page states publishing frequency 'Annually', released 07 Jul 2025 (2023 Book II released 05 Jul 2024).",
+      "releases_per_year": 1
     },
     {
       "id": "id-foreign-trade-imports",
@@ -2375,9 +1889,8 @@
       "description": "Annual and higher-frequency import statistics by commodity, country of origin and other classifications. Complements the export series for the full merchandise trade picture.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:trade",
-        "proposed:imports",
-        "proposed:external"
+        "trade",
+        "external-sector"
       ],
       "_cadence_original": "annual detailed + monthly/periodic summaries",
       "_batch": [
@@ -2391,7 +1904,10 @@
         "Industrial input and consumption analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Import counterpart of the same annual series: 'Statistik Perdagangan Luar Negeri Indonesia Impor 2024, Buku I' released 07 Jul 2025 and the 2023 Buku I released 05 Jul 2024 - one edition per reference year.",
+      "releases_per_year": 1
     },
     {
       "id": "id-energy-balances",
@@ -2404,7 +1920,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:energy",
+        "energy",
         "proposed:balances",
         "proposed:resources"
       ],
@@ -2431,7 +1947,7 @@
       "description": "Producer and wholesale price indices that complement the CPI and feed into national-accounts deflators and industrial cost analysis.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:prices",
+        "inflation",
         "proposed:ppi",
         "proposed:wholesale"
       ],
@@ -2447,7 +1963,10 @@
         "Monetary and inflation diagnostics"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS issues 'Perkembangan Indeks Harga Perdagangan Besar' press releases monthly (Januari 2024 released 01 Feb 2024; Agustus 2024 BRS; monthly IHPB tables such as 'IHPB Mei 2024'). The annual compendium 'Indeks Harga Perdagangan Besar Indonesia' is separate (2024 ed. 22 Apr 2025, 2025 ed. 22 Apr 2026).",
+      "releases_per_year": 12
     },
     {
       "id": "id-agriculture-stats",
@@ -2475,7 +1994,10 @@
         "Export commodity and land-use analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Kementan's 'Statistik Pertanian' book appears once per year (2023 and 2024 editions on satudata.pertanian.go.id), and BPS's crop compendia are likewise annual (e.g. Luas Panen dan Produksi Padi, one edition each August).",
+      "releases_per_year": 1
     },
     {
       "id": "id-health-stats",
@@ -2489,7 +2011,7 @@
       "domains": [
         "health",
         "proposed:vital",
-        "proposed:social"
+        "living-standards"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -2503,7 +2025,10 @@
         "Social-protection design"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Kemenkes 'Profil Kesehatan Indonesia' has one edition per year - 2018, 2023 and 2024 editions published on kemkes.go.id.",
+      "releases_per_year": 1
     },
     {
       "id": "id-gini-inequality",
@@ -2515,9 +2040,9 @@
       "description": "Official Gini coefficient and related inequality measures derived primarily from Susenas consumption data. Published at national and provincial level.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:inequality",
+        "poverty",
         "proposed:gini",
-        "proposed:welfare"
+        "living-standards"
       ],
       "_cadence_original": "typically aligned with poverty releases",
       "_batch": [
@@ -2531,7 +2056,10 @@
         "Regional-disparity discussions"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS Gini-ratio press releases come twice a year, matching the March and September Susenas: 'Gini Ratio Maret 2025' (25 Jul 2025), 'Gini Ratio September 2025' (05 Feb 2026), 'Gini Ratio September 2024' (15 Jan 2025).",
+      "releases_per_year": 2
     },
     {
       "id": "id-monetary-aggregates",
@@ -2543,9 +2071,8 @@
       "description": "Money-supply (M1, M2, etc.), credit, and related banking indicators published by the central bank. Core high-frequency monetary data.",
       "url": "https://www.bi.go.id/",
       "domains": [
-        "proposed:monetary",
-        "banking",
-        "proposed:money-supply"
+        "monetary-policy",
+        "banking"
       ],
       "_cadence_original": "monthly / continuous",
       "_batch": [
@@ -2559,7 +2086,10 @@
         "Inflation and credit-growth analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Bank Indonesia's SEKI page states 'SEKI merupakan publikasi bulanan yang diterbitkan oleh Bank'; the page lists consecutive monthly editions from September 2025 to June 2026. BI's 'Perkembangan Uang Beredar' is likewise monthly.",
+      "releases_per_year": 12
     },
     {
       "id": "id-financial-stability-review",
@@ -2571,7 +2101,7 @@
       "description": "Periodic assessment of financial-system stability, risks and macroprudential conditions. Flagship stability publication of the central bank.",
       "url": "https://www.bi.go.id/",
       "domains": [
-        "proposed:financial-stability",
+        "financial-regulation",
         "proposed:macroprudential"
       ],
       "_cadence_original": "typically 2",
@@ -2586,7 +2116,10 @@
         "Economic Report on Indonesia"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The Bank Indonesia page for Kajian Stabilitas Keuangan No. 46 (February 2026, posted 27 Feb 2026) lists frequency 'Semesteran'; earlier editions alternate March/February and September (No. 28 Maret 2017, No. 31 September 2018).",
+      "releases_per_year": 2
     },
     {
       "id": "id-palm-oil",
@@ -2601,7 +2134,7 @@
         "proposed:palm-oil",
         "proposed:estate-crops",
         "proposed:commodities",
-        "proposed:exports"
+        "trade"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -2616,7 +2149,10 @@
         "Rural employment and regional GDP in producing provinces"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS 'Statistik Kelapa Sawit Indonesia' has one edition per reference year, each released around 30 November: 2014, 2015, 2017, 2019, 2020, 2021, 2022, 2023 editions.",
+      "releases_per_year": 1
     },
     {
       "id": "id-nickel",
@@ -2629,7 +2165,7 @@
       "url": "https://geologi.esdm.go.id/storage/publikasi/6PQq7RASjVeYKW7MwgQUI4lS10PA9WyCa6DD8ocQ.pdf",
       "domains": [
         "proposed:nickel",
-        "proposed:minerals",
+        "mining",
         "proposed:downstream",
         "proposed:commodities"
       ],
@@ -2647,7 +2183,10 @@
       ],
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
-      "_url_evidence": "PDF on Badan Geologi (ESDM) domain confirmed as 'Neraca Sumber Daya dan Cadangan Mineral dan Batubara Indonesia 2025', with a dedicated section on nickel laterite resources and reserves."
+      "_url_evidence": "PDF on Badan Geologi (ESDM) domain confirmed as 'Neraca Sumber Daya dan Cadangan Mineral dan Batubara Indonesia 2025', with a dedicated section on nickel laterite resources and reserves.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited PDF is Badan Geologi's 'Neraca Sumber Daya dan Cadangan Mineral dan Batubara Indonesia Tahun 2025' (data through Dec 2024), described as an annually published national resource balance.",
+      "releases_per_year": 1
     },
     {
       "id": "id-coal",
@@ -2660,9 +2199,9 @@
       "url": "https://www.bps.go.id/en/publication/2024/12/20/15a585268e537abcfe19f192/statistik-pertambangan-non-minyak-dan-gas-bumi-2019-2023.html",
       "domains": [
         "proposed:coal",
-        "proposed:energy",
-        "proposed:minerals",
-        "proposed:exports"
+        "energy",
+        "mining",
+        "trade"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -2678,7 +2217,10 @@
       ],
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Mining Statistics of Non-Petroleum and Natural Gas 2019-2023' covering production volume and value plus domestic and export sales for non-oil-and-gas mining (coal being the dominant component)."
+      "_url_evidence": "BPS page confirms 'Mining Statistics of Non-Petroleum and Natural Gas 2019-2023' covering production volume and value plus domestic and export sales for non-oil-and-gas mining (coal being the dominant component).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Mining Statistics of Non-Petroleum and Natural Gas 2019-2023' (Statistik Pertambangan Non Minyak dan Gas Bumi) page states publishing frequency 'Annually', released 20 Dec 2024.",
+      "releases_per_year": 1
     },
     {
       "id": "id-mining-stats",
@@ -2690,8 +2232,7 @@
       "description": "Broader mining and quarrying production and value statistics that contextualise nickel, coal, tin, copper, gold and other minerals within the national accounts and industrial structure.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:mining",
-        "proposed:minerals",
+        "mining",
         "proposed:resources"
       ],
       "_cadence_original": "periodic",
@@ -2706,7 +2247,10 @@
         "Regional resource-economy analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same series: BPS 'Statistik Pertambangan Non Minyak dan Gas Bumi 2019-2023', publishing frequency 'Annually', released 20 Dec 2024.",
+      "releases_per_year": 1
     },
     {
       "id": "id-pdrb",
@@ -2718,9 +2262,8 @@
       "description": "Official provincial gross regional domestic product series by industrial origin and expenditure. Primary quantitative measure of the extreme economic concentration on Java versus the resource-rich outer islands.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:regional-accounts",
-        "proposed:pdrb",
-        "proposed:provincial"
+        "national-accounts",
+        "proposed:pdrb"
       ],
       "_cadence_original": "annual (with periodic updates)",
       "_batch": [
@@ -2733,67 +2276,10 @@
         "Regional-disparity and equalisation analysis",
         "Provincial planning documents"
       ],
-      "last_updated": null
-    },
-    {
-      "id": "id-java-core",
-      "title": "Java economic and demographic core",
-      "publisher": "Derived from BPS provincial and national statistics",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Java (DKI Jakarta, West Java, Central Java, DIY, East Java, Banten)",
-      "description": "Relational node capturing Java’s dominant share of population, GDP, manufacturing and services. Forms the primary core against which outer-island resource economies are contrasted.",
-      "url": null,
-      "domains": [
-        "proposed:java",
-        "proposed:core",
-        "proposed:regional",
-        "proposed:concentration"
-      ],
-      "_cadence_original": "continuous (via provincial series)",
-      "_batch": [
-        "2026-08-14_Indonesia-batch3.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "High-level spatial core node for the archipelago.",
-      "_referenced_by": [
-        "PDRB and provincial population statistics",
-        "Manufacturing and services location analysis",
-        "Internal-migration and urbanisation series"
-      ],
-      "_jurisdiction_level_original": "regional",
       "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-outer-islands",
-      "title": "Outer-islands resource and demographic periphery",
-      "publisher": "Derived from BPS provincial statistics",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Sumatra, Kalimantan, Sulawesi, Maluku, Papua, Nusa Tenggara, etc.",
-      "description": "Relational node for the non-Java provinces that collectively hold the majority of land area and resource wealth (palm oil, coal, nickel, gas, etc.) but a minority of population and manufacturing. Captures the classic core–periphery structure of the Indonesian economy.",
-      "url": null,
-      "domains": [
-        "proposed:outer-islands",
-        "proposed:periphery",
-        "proposed:resources",
-        "proposed:regional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch3.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Periphery counterpart to the Java core. Essential for later densification of specific resource provinces.",
-      "_referenced_by": [
-        "PDRB, commodity and mining statistics",
-        "Provincial poverty and human-development indicators",
-        "Internal-migration and regional-development policy"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS 'Produk Domestik Regional Bruto Provinsi-Provinsi di Indonesia Menurut Lapangan Usaha' appears once a year - the 2021-2025 edition was released 13 Apr 2026.",
+      "releases_per_year": 1
     },
     {
       "id": "id-jakarta",
@@ -2806,8 +2292,7 @@
       "url": "https://jakarta.bps.go.id/id/publication/2025/02/28/30874e042a98939928603ee5/provinsi-dki-jakarta-dalam-angka-2025.html",
       "domains": [
         "proposed:jakarta",
-        "proposed:capital",
-        "proposed:urban"
+        "proposed:capital"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -2822,7 +2307,10 @@
       ],
       "_jurisdiction_level_original": "provincial / special region",
       "last_updated": null,
-      "_url_evidence": "BPS DKI Jakarta page confirms 'Provinsi DKI Jakarta Dalam Angka 2025', the annual provincial yearbook covering geography, governance, demographics and the economy."
+      "_url_evidence": "BPS DKI Jakarta page confirms 'Provinsi DKI Jakarta Dalam Angka 2025', the annual provincial yearbook covering geography, governance, demographics and the economy.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Provinsi DKI Jakarta Dalam Angka 2025' page states Periodisasi 'Tahunan', released 28 Feb 2025.",
+      "releases_per_year": 1
     },
     {
       "id": "id-internal-migration",
@@ -2836,7 +2324,7 @@
       "domains": [
         "proposed:migration",
         "proposed:urbanisation",
-        "proposed:demography"
+        "population"
       ],
       "_cadence_original": "census cycle + survey updates",
       "_batch": [
@@ -2850,66 +2338,10 @@
         "Regional-development and urban-policy analysis"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
-    },
-    {
-      "id": "id-hilirisasi",
-      "title": "Downstreaming / hilirisasi industrial-policy statistics and framing",
-      "publisher": "Derived from Ministry of Industry / ESDM / BPS trade and production data; recurring in official policy",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Statistical and policy traces of the downstreaming (hilirisasi) strategy that bans or restricts raw mineral exports and promotes domestic processing (especially nickel). Continuously cited in industrial and trade policy.",
-      "url": null,
-      "domains": [
-        "proposed:hilirisasi",
-        "proposed:industrial-policy",
-        "proposed:minerals",
-        "proposed:downstream"
-      ],
-      "_cadence_original": "continuous (policy + production/trade outcomes)",
-      "_batch": [
-        "2026-08-14_Indonesia-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-citation industrial-policy node unique to contemporary Indonesia.",
-      "_referenced_by": [
-        "Nickel and mining statistics",
-        "Foreign-trade composition (shift from ore to intermediates)",
-        "Investment and industrial-location analysis"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-commodity-meta",
-      "title": "Indonesia commodity and spatial-resource meta-node",
-      "publisher": "Derived from BPS, ESDM and related sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node that binds palm oil, nickel, coal, broader mining, PDRB, Java-core vs outer-islands contrast, and the hilirisasi policy frame into a coherent resource-and-space cluster. Captures the dual structure of a Java-centred industrial/service economy and an outer-island resource economy.",
-      "url": null,
-      "domains": [
-        "proposed:commodities",
-        "proposed:spatial",
-        "proposed:resources",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the resource–spatial uniqueness of Indonesia.",
-      "_referenced_by": [
-        "All commodity and provincial nodes in this batch",
-        "National accounts, trade and energy series",
-        "Later regional densification batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Migration statistics are a decennial census Long Form product: the provincial 'Statistik Migrasi ... Hasil Long Form Sensus Penduduk 2020' volumes (Papua, Bengkulu, DKI Jakarta, Riau, NTB, NTT and others) were all released on 14 Jul 2023 from the SP2020 base.",
+      "releases_per_year": 0.1
     },
     {
       "id": "id-welfare-indicators",
@@ -2922,9 +2354,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:welfare",
-        "proposed:social",
-        "proposed:indicators"
+        "living-standards"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch4.json"
@@ -2950,7 +2380,7 @@
       "url": "https://bpjs-kesehatan.go.id/",
       "domains": [
         "proposed:health-insurance",
-        "proposed:social-protection",
+        "benefits",
         "proposed:bpjs"
       ],
       "_cadence_original": "continuous / periodic reports",
@@ -2965,7 +2395,10 @@
         "RPJMN human-development targets"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPJS Kesehatan issues 'Laporan Pengelolaan Program dan Laporan Keuangan' once per year (2021 and 2023 reports hosted on web.bpjs-kesehatan.go.id); annual submission/endorsement is mandated by PMK 186/PMK.02/2020. The bpjs-kesehatan.go.id landing page itself returned no readable content.",
+      "releases_per_year": 1
     },
     {
       "id": "id-social-protection",
@@ -2977,9 +2410,9 @@
       "description": "Statistics and administrative data on major social-assistance programmes, including the conditional cash-transfer programme (PKH) and food-assistance schemes. Central to poverty-reduction strategy and fiscal social spending.",
       "url": "https://www.bps.go.id/id/statistics-table/3/TWt0MVNGZFdiV2RaYTFoS1oyRnRSVTFOYUhSc1VUMDkjMyMwMDAw/jumlah-keluarga-penerima-manfaat--kpm--dan-anggaran-bantuan-sosial-pangan-menurut-provinsi.html?year=2024",
       "domains": [
-        "proposed:social-protection",
+        "benefits",
         "proposed:cash-transfer",
-        "proposed:poverty"
+        "poverty"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -2995,7 +2428,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the BPS national statistics table 'Jumlah Keluarga Penerima Manfaat (KPM) dan Anggaran Bantuan Sosial Pangan Menurut Provinsi, 2024' - beneficiary families and food social-assistance budget by province, published by BPS. kemensos.go.id remains unreachable for WebFetch (robots.txt fetch times out) and satudata.kemenkopukm-style Kemensos portals fail TLS, so the BPS table is the confirmed official product covering food assistance; a PKH-specific national table was not found on a retrievable host.",
-      "_url_route": "BPS national statistics-table catalogue on www.bps.go.id, after Kemensos hosts stayed unreachable"
+      "_url_route": "BPS national statistics-table catalogue on www.bps.go.id, after Kemensos hosts stayed unreachable",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited BPS table 'Jumlah Keluarga Penerima Manfaat (KPM) dan Anggaran Bantuan Sosial Pangan Menurut Provinsi' is published one year at a time (the URL carries year=2024 and the title carries a single year); the page shows no explicit periodicity metadata.",
+      "releases_per_year": 1
     },
     {
       "id": "id-islamic-finance",
@@ -3024,7 +2460,10 @@
         "Islamic-economy and inclusion policy documents"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OJK's 'Statistik Perbankan Syariah' is a monthly release - the page lists consecutive monthly editions from September 2024 to June 2025 and notes that from the July 2025 period the data moved to OJK's Portal Data.",
+      "releases_per_year": 12
     },
     {
       "id": "id-ojk",
@@ -3037,8 +2476,7 @@
       "url": "https://www.ojk.go.id/",
       "domains": [
         "financial-regulation",
-        "proposed:ojk",
-        "proposed:institutional"
+        "proposed:ojk"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -3052,7 +2490,9 @@
         "Capital-market and inclusion analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "ojk.go.id/data-dan-statistik is a portal of many parallel series with different cadences (monthly PEPK statistics, quarterly Laporan Triwulan OJK, annual Laporan Tahunan, plus sector statistics) - no single release cadence for the node."
     },
     {
       "id": "id-asean",
@@ -3066,7 +2506,7 @@
       "domains": [
         "proposed:asean",
         "proposed:regional-integration",
-        "proposed:trade"
+        "trade"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -3079,7 +2519,9 @@
         "Trade and investment statistics with ASEAN partners",
         "Foreign-policy and economic-diplomacy documents"
       ],
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "asean.org returned only a JavaScript redirect notice ('Javascript is required'); no frequency statement or countable dated series could be read, and the node describes an organisational/cooperation framework rather than a dated publication."
     },
     {
       "id": "id-rcep",
@@ -3092,9 +2534,7 @@
       "url": "https://asean.org/our-communities/economic-community/integration-with-global-economy/regional-comprehensive-economic-partnership-rcep/",
       "domains": [
         "proposed:rcep",
-        "proposed:fta",
-        "proposed:trade",
-        "proposed:regional"
+        "trade"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch4.json"
@@ -3119,7 +2559,7 @@
       "description": "Official population projections based on the 2020 census parameters. Used throughout planning (RPJMN) and as the denominator for many per-capita and coverage indicators.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:demography",
+        "population",
         "proposed:projections",
         "proposed:planning"
       ],
@@ -3135,7 +2575,10 @@
         "Education, health and labour-force planning"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The current projection set is 'Proyeksi Penduduk Indonesia 2020-2050 Hasil Sensus Penduduk 2020', with matching provincial/city projections derived from the same SP2020 base - one projection round per decennial census; no interval is stated on the page.",
+      "releases_per_year": 0.1
     },
     {
       "id": "id-podes",
@@ -3148,8 +2591,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:village",
-        "proposed:rural",
-        "proposed:infrastructure",
+        "infrastructure",
         "proposed:podes"
       ],
       "_cadence_original": "periodic (aligned with census/survey cycles)",
@@ -3164,7 +2606,10 @@
         "Infrastructure and local-government planning"
       ],
       "_jurisdiction_level_original": "national / village",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Potensi Desa Indonesia 2025' page states Periodisasi 'Tahunan', released 11 Dec 2025 (2024 edition released 10 Dec 2024); the 2025 edition draws on the annual 'Pemutakhiran Data Perkembangan Desa'.",
+      "releases_per_year": 1
     },
     {
       "id": "id-rpjmn",
@@ -3193,35 +2638,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the Bappenas-hosted official copy of Peraturan Presiden No. 12 Tahun 2025 on the RPJMN 2025-2029. Content verified: defines the RPJMN as the five-year national development planning document for 2025-2029; specifies its four components (narrative, development matrix, ministry/agency matrix, regional development direction); requires Renstra-KL and regional plans to align with it; and mandates mid-term and end-of-period evaluation reported to the President, with indicative targets and funding adjusted annually. rpjmn.bappenas.go.id still does not resolve (DNS), jdih.bappenas.go.id and peraturan.bpk.go.id return 403, and the larger RPJMN narrative/summary PDFs exceed the fetch size limit.",
-      "_url_route": "Bappenas e-library static file path (perpustakaan.bappenas.go.id), reached via the Bappenas publication listing rather than the dead rpjmn subdomain"
-    },
-    {
-      "id": "id-batch4-meta",
-      "title": "Indonesia social-protection, Islamic-finance and regional-architecture meta-node",
-      "publisher": "Derived from BPS, BPJS, OJK, ASEAN/RCEP and planning sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding welfare indicators, BPJS/JKN coverage, social-assistance programmes, Islamic-finance statistics, OJK, ASEAN, RCEP, population projections, Podes and the RPJMN target frame into a coherent social-protection and external-architecture layer.",
-      "url": null,
-      "domains": [
-        "proposed:social-protection",
-        "proposed:islamic-finance",
-        "proposed:regional",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for this batch’s domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier poverty, labour, financial and trade series"
-      ],
-      "_jurisdiction_level_original": "national / international",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "Bappenas e-library static file path (perpustakaan.bappenas.go.id), reached via the Bappenas publication listing rather than the dead rpjmn subdomain",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The cited document is Peraturan Presiden Republik Indonesia Nomor 12 Tahun 2025 tentang Rencana Pembangunan Jangka Menengah Nasional Tahun 2025-2029, dated 10 Feb 2025 - a presidential regulation, not a recurring statistical release."
     },
     {
       "id": "id-forest-cover",
@@ -3235,7 +2654,7 @@
       "domains": [
         "proposed:forest",
         "proposed:land-cover",
-        "proposed:environment"
+        "environment"
       ],
       "_cadence_original": "annual monitoring releases",
       "_batch": [
@@ -3251,7 +2670,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the Ministry of Forestry statistics portal publication page 'State of Indonesia's Forest (SOIFO) 2024'; the abstract confirms it presents data, analysis and strategic indicators on forest-resource dynamics and land-cover change (tutupan hutan, perubahan tutupan lahan) for 2024, with the full PDF linked. statistik.kehutanan.go.id does resolve and render - contrary to the earlier finding - while menlhk.go.id's certificate is still expired.",
-      "_url_route": "working alternate hostname statistik.kehutanan.go.id ('Forestix'), found by Indonesian-language search for the ministry's statistics publications"
+      "_url_route": "working alternate hostname statistik.kehutanan.go.id ('Forestix'), found by Indonesian-language search for the ministry's statistics publications",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "statistik.kehutanan.go.id lists State of Indonesia's Forest (SOIFO) editions for 2020, 2022 and 2024 - one edition every two years.",
+      "releases_per_year": 0.5
     },
     {
       "id": "id-deforestation",
@@ -3265,8 +2687,7 @@
       "domains": [
         "proposed:deforestation",
         "proposed:forest",
-        "proposed:environment",
-        "proposed:land-use"
+        "environment"
       ],
       "_cadence_original": "1 (annual monitoring)",
       "_batch": [
@@ -3281,7 +2702,10 @@
         "Sustainability and trade-policy debates"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Deforestation figures are carried in the ministry's annual forestry statistics books, listed on statistik.kehutanan.go.id for 2020, 2022, 2023 and 2024; the portal notes deforestation data are integrated into the annual compilations rather than published separately.",
+      "releases_per_year": 1
     },
     {
       "id": "id-ghg-inventory",
@@ -3293,9 +2717,7 @@
       "description": "National GHG inventory and BPS physical supply-and-use tables for emissions by sector (energy, industry, agriculture, LULUCF, waste, etc.). Underpins NDC accounting and climate-policy analysis.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:ghg",
-        "proposed:emissions",
-        "proposed:climate",
+        "environment",
         "proposed:inventory"
       ],
       "_cadence_original": "periodic inventory updates + BPS tables",
@@ -3310,7 +2732,9 @@
         "NDC and long-term climate strategy documents"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "No page with a stated cadence for the national GHG inventory was readable: kemenlh.go.id items describe the SIGN-SMART reporting system and training rather than a dated publication series, and no countable inventory editions were listed."
     },
     {
       "id": "id-ndc-climate",
@@ -3323,8 +2747,7 @@
       "url": "https://unfccc.int/NDCREG",
       "domains": [
         "proposed:ndc",
-        "proposed:climate-policy",
-        "proposed:international"
+        "proposed:climate-policy"
       ],
       "_cadence_original": "periodic updates (NDC cycles)",
       "_batch": [
@@ -3339,7 +2762,10 @@
       ],
       "_jurisdiction_level_original": "national / international",
       "last_updated": null,
-      "_url_evidence": "UNFCCC NDC Registry confirmed to hold the 'Republic Of Indonesia Second NDC', submitted 27 October 2025, with active status."
+      "_url_evidence": "UNFCCC NDC Registry confirmed to hold the 'Republic Of Indonesia Second NDC', submitted 27 October 2025, with active status.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The UNFCCC NDC Registry records Indonesia's 'Republic of Indonesia Second NDC', submitted 27 Oct 2025; under Article 4 of the Paris Agreement Parties communicate a new NDC every five years (the registry page itself states only that NDCs 'shall be recorded in a public registry').",
+      "releases_per_year": 0.2
     },
     {
       "id": "id-ecommerce",
@@ -3353,7 +2779,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:e-commerce",
-        "proposed:digital",
+        "services",
         "proposed:business"
       ],
       "_batch": [
@@ -3379,9 +2805,8 @@
       "description": "Broader official indicators of internet access, digital adoption, ICT sector contribution and related metrics that contextualise the e-commerce statistics within the wider digital transformation agenda.",
       "url": "https://www.bps.go.id/id/publication/2025/08/29/beaa2be400eda6ce6c636ef8/statistik-telekomunikasi-indonesia-2024.html",
       "domains": [
-        "proposed:digital",
-        "proposed:ict",
-        "proposed:connectivity"
+        "services",
+        "infrastructure"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -3396,7 +2821,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Statistik Telekomunikasi Indonesia 2024': 72.78% internet use, device ownership, ICT trade and the ICT sector's 4.34% GDP share."
+      "_url_evidence": "BPS page confirms 'Statistik Telekomunikasi Indonesia 2024': 72.78% internet use, device ownership, ICT trade and the ICT sector's 4.34% GDP share.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Telekomunikasi Indonesia 2024' page states Periodisasi 'Tahunan', released 29 Aug 2025.",
+      "releases_per_year": 1
     },
     {
       "id": "id-land-use-change",
@@ -3408,9 +2836,8 @@
       "description": "Statistics and monitoring products that track conversion of forest and other land into agricultural and estate-crop uses (especially palm oil). Forms the land-use bridge between commodity expansion and deforestation/GHG outcomes.",
       "url": "https://www.bps.go.id/en/statistics-table/1/MjA4NCMx/luas-penutupan-lahan-indonesia-di-dalam-dan-di-luar-kawasan-hutan-tahun-2014-2021-menurut-kelas-ribu-ha-.html",
       "domains": [
-        "proposed:land-use",
-        "agriculture",
-        "proposed:environment"
+        "environment",
+        "agriculture"
       ],
       "_cadence_original": "periodic / annual",
       "_batch": [
@@ -3426,7 +2853,10 @@
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
       "_url_evidence": "Retrieved the BPS national statistics table, whose live title is 'Land Cover Area in Indonesia, Inside and Outside Forest Area by Class, 2014-2023 (thousand ha)' (the slug still says 2014-2021). Source BPS-Statistics Indonesia, compiled from Ministry of Environment and Forestry land-cover monitoring; it splits land-cover classes inside versus outside the designated forest estate, which is the series that tracks conversion of forest to agricultural and estate-crop cover.",
-      "_url_route": "BPS national statistics-table catalogue on www.bps.go.id"
+      "_url_route": "BPS national statistics-table catalogue on www.bps.go.id",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited BPS table 'Luas Penutupan Lahan Indonesia di Dalam dan di Luar Kawasan Hutan' carries one observation per year and has been extended annually (2014-2021 in the title, 2014-2023 in the current data); the table page shows no explicit update-frequency field.",
+      "releases_per_year": 1
     },
     {
       "id": "id-reforestation",
@@ -3440,7 +2870,7 @@
       "domains": [
         "proposed:reforestation",
         "proposed:rehabilitation",
-        "proposed:environment"
+        "environment"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -3469,8 +2899,7 @@
       "description": "Additional environmental statistical products covering water resources, waste, air quality and related indicators that complement the forest and GHG core.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:environment",
-        "proposed:water",
+        "environment",
         "proposed:waste",
         "proposed:air"
       ],
@@ -3486,35 +2915,10 @@
         "Climate-adaptation planning"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "id-env-digital-meta",
-      "title": "Indonesia environment–climate–digital meta-node",
-      "publisher": "Derived from Ministry of Forestry, BPS, Environment ministry and digital statistics",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node that binds forest cover, deforestation, reforestation, land-use change, GHG inventory, NDC framework, e-commerce and broader digital indicators into a coherent environment-and-digital layer, with explicit edges into the commodity (palm oil) and spatial clusters.",
-      "url": null,
-      "domains": [
-        "proposed:environment",
-        "proposed:climate",
-        "proposed:digital",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 5 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Palm-oil, energy and provincial series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS 'Statistik Lingkungan Hidup Indonesia' has one edition per year: 2023 (30 Nov 2023), 2024 (29 Nov 2024), 2025 (28 Nov 2025).",
+      "releases_per_year": 1
     },
     {
       "id": "id-provinces-structure",
@@ -3527,7 +2931,6 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:administrative",
-        "proposed:provincial",
         "proposed:archipelago"
       ],
       "_cadence_original": "continuous / periodic updates",
@@ -3541,153 +2944,9 @@
         "Java-core and outer-islands relational nodes"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
-    },
-    {
-      "id": "id-sumatra",
-      "title": "Sumatra regional statistical profile",
-      "publisher": "BPS provincial offices / national BPS",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Sumatra (Aceh to Lampung + island provinces)",
-      "description": "Aggregate and key provincial statistics for the Sumatra island group — major palm-oil, coal, oil & gas and plantation economy; significant population and land area.",
-      "url": null,
-      "domains": [
-        "proposed:sumatra",
-        "proposed:regional",
-        "proposed:resources"
-      ],
-      "_cadence_original": "continuous (via provincial series)",
-      "_batch": [
-        "2026-08-14_Indonesia-batch6.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Primary western outer-island resource region.",
-      "_referenced_by": [
-        "PDRB and provincial poverty/population series",
-        "Palm-oil and coal commodity nodes",
-        "Outer-islands periphery meta-node"
-      ],
-      "_jurisdiction_level_original": "regional",
       "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-kalimantan",
-      "title": "Kalimantan regional statistical profile",
-      "publisher": "BPS provincial offices / national BPS",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Kalimantan (West, Central, South, East, North)",
-      "description": "Statistics for the Kalimantan provinces — dominant coal, palm-oil, forestry and emerging industrial roles; large land area and low population density relative to Java.",
-      "url": null,
-      "domains": [
-        "proposed:kalimantan",
-        "proposed:regional",
-        "proposed:resources"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch6.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core Borneo resource region; also site of the new capital project context.",
-      "_referenced_by": [
-        "Coal, palm-oil and forest statistics",
-        "PDRB and outer-islands nodes",
-        "New capital (IKN) related planning where relevant"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-sulawesi",
-      "title": "Sulawesi regional statistical profile (nickel focus)",
-      "publisher": "BPS provincial offices / national BPS",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Sulawesi",
-      "description": "Statistics for Sulawesi provinces — central to the nickel mining and downstream processing boom, with significant agricultural and fisheries activity.",
-      "url": null,
-      "domains": [
-        "proposed:sulawesi",
-        "proposed:regional",
-        "proposed:nickel"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch6.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Geographic anchor of the nickel downstreaming story.",
-      "_referenced_by": [
-        "Nickel and hilirisasi nodes",
-        "PDRB and mining statistics",
-        "Outer-islands periphery"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-papua",
-      "title": "Papua regional statistical profile (including new provinces)",
-      "publisher": "BPS provincial offices / national BPS",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Papua region (multiple provinces after splits)",
-      "description": "Statistics for the Papua provinces — vast land area, low population density, resource potential (minerals, forest), distinctive demographic and development indicators, and recent administrative splitting into multiple provinces.",
-      "url": null,
-      "domains": [
-        "proposed:papua",
-        "proposed:regional",
-        "proposed:resources"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch6.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Easternmost and most distinctive regional node; administrative structure still evolving.",
-      "_referenced_by": [
-        "Provincial population, poverty and PDRB series",
-        "Forest and mining statistics",
-        "Outer-islands and regional-development analysis"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-bali-nt",
-      "title": "Bali and Nusa Tenggara tourism-oriented regional profile",
-      "publisher": "BPS provincial offices / national BPS",
-      "country": "ID",
-      "jurisdiction_level": "provincial",
-      "region": "Bali, NTB, NTT",
-      "description": "Statistics for Bali and the Nusa Tenggara provinces — tourism-heavy (especially Bali), distinctive cultural and demographic profiles, and different development challenges from the large resource islands.",
-      "url": null,
-      "domains": [
-        "proposed:bali",
-        "proposed:nusa-tenggara",
-        "proposed:tourism",
-        "proposed:regional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch6.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Tourism-specialised regional contrast to the resource outer islands.",
-      "_referenced_by": [
-        "Tourism statistics",
-        "Provincial PDRB and labour series",
-        "Cultural and service-economy analysis"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "No page giving an update cadence for the 38-province administrative structure or island counts was obtained; the cited bps.go.id front page carries no frequency statement for this content."
     },
     {
       "id": "id-tourism-domestic",
@@ -3700,9 +2959,9 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:tourism",
+        "tourism",
         "proposed:domestic",
-        "proposed:services"
+        "services"
       ],
       "_batch": [
         "2026-08-14_Indonesia-batch6.json"
@@ -3728,7 +2987,7 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:tourism",
+        "tourism",
         "proposed:attractions",
         "proposed:spatial"
       ],
@@ -3754,8 +3013,7 @@
       "description": "Official realization figures for foreign investment by country of origin, sector and (where published) location. Key capital-flow series complementary to the BOP financial account.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:fdi",
-        "proposed:investment",
+        "investment",
         "proposed:capital-flows"
       ],
       "_cadence_original": "quarterly / annual",
@@ -3770,7 +3028,10 @@
         "Provincial investment and growth discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BKPM's investment-realisation dataset page states 'Frekuensi Update Konten: Triwulanan' (quarterly); the Triwulan II 2026 dataset was published 21 Jul 2026.",
+      "releases_per_year": 4
     },
     {
       "id": "id-domestic-investment",
@@ -3782,7 +3043,7 @@
       "description": "Counterpart statistics on domestic investment realization by sector and location. Completes the investment picture alongside FDI.",
       "url": "https://data.bkpm.go.id/dataset-detail/data-realisasi-investasi-triwulan-ii-tahun-2026",
       "domains": [
-        "proposed:investment",
+        "investment",
         "proposed:domestic",
         "proposed:capital"
       ],
@@ -3799,36 +3060,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Ministry of Investment/BKPM open-data page confirms quarterly investment realisation data split into PMA and PMDN (domestic investment), sourced from OSS reporting."
-    },
-    {
-      "id": "id-provincial-meta",
-      "title": "Indonesia provincial and archipelagic densification meta-node",
-      "publisher": "Derived from BPS provincial series, tourism and investment statistics",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node that records the densification of the sub-national layer: provincial structure, Sumatra, Kalimantan, Sulawesi (nickel), Papua, Bali–Nusa Tenggara, domestic tourism, tourism attractions, FDI and domestic investment realization. Strengthens the spatial edges already seeded by the Java-core / outer-islands contrast.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:spatial",
-        "proposed:tourism",
-        "proposed:investment",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch6.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Book-keeping and integrating node for the deepened spatial layer.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier PDRB, Java-core, outer-islands and commodity nodes"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Ministry of Investment/BKPM open-data page confirms quarterly investment realisation data split into PMA and PMDN (domestic investment), sourced from OSS reporting.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same source as cited: data.bkpm.go.id 'Data Realisasi Investasi Triwulan II Tahun 2026', published 21 Jul 2026, 'Frekuensi Update Konten: Triwulanan'.",
+      "releases_per_year": 4
     },
     {
       "id": "id-informal-employment",
@@ -3841,8 +3076,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "labour",
-        "proposed:informal",
-        "proposed:employment"
+        "proposed:informal"
       ],
       "_cadence_original": "aligned with Sakernas rounds",
       "_batch": [
@@ -3856,7 +3090,10 @@
         "MSME and formalisation policy documents"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Informal-employment shares come from Sakernas; the parent release 'Keadaan Angkatan Kerja di Indonesia' states Periodisasi 'Semesteran', with February and August rounds published each year.",
+      "releases_per_year": 2
     },
     {
       "id": "id-msme-manufacturing",
@@ -3869,7 +3106,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:msme",
-        "proposed:manufacturing",
+        "industry",
         "proposed:micro-small"
       ],
       "_cadence_original": "periodic / annual",
@@ -3884,7 +3121,10 @@
         "Industrial and inclusion policy"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BPS 'Profil Industri Mikro dan Kecil' has one national edition per reference year (2024 edition released 16 Sep 2025), with provincial editions likewise annual (Jawa Tengah 2023 and 2024, Yogyakarta 2024).",
+      "releases_per_year": 1
     },
     {
       "id": "id-msme-broader",
@@ -3897,7 +3137,7 @@
       "url": "https://se2016.bps.go.id/umkumb/files/umkumb/00_Pusat/00_booklet_SE2016Lanjutan_01_Potensi_UMK.pdf",
       "domains": [
         "proposed:msme",
-        "proposed:enterprise",
+        "industry",
         "proposed:inclusion"
       ],
       "_cadence_original": "periodic",
@@ -3914,7 +3154,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the BPS booklet 'Potensi Usaha Mikro Kecil' from the 2016 Economic Census follow-up (data collected 2017). Confirmed content: 26+ million micro and small enterprises = 98.68% of all non-agricultural businesses, employing 59 million workers (75.33% of the non-agricultural workforce); covers 16 non-agricultural sectors - trade ~50%, food and accommodation >16%, manufacturing >16%, plus construction, transport, education, health and finance - with 43% of proprietors female and only 12% accessing formal credit. This is the broader, cross-sector MSME product the item asks for. kemenkopukm.go.id and satudata.kemenkopukm.go.id still fail TLS/robots checks; BPS's national 'Profil Industri Mikro dan Kecil 2024' (https://www.bps.go.id/id/publication/2025/09/16/a83f105e49377d0a7434e62a/profil-industri-mikro-dan-kecil-2024.html) also loads but is manufacturing-only.",
-      "_url_route": "BPS census subdomain se2016.bps.go.id static file path, after the Ministry of Cooperatives and SMEs hosts stayed TLS-blocked"
+      "_url_route": "BPS census subdomain se2016.bps.go.id static file path, after the Ministry of Cooperatives and SMEs hosts stayed TLS-blocked",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The cited booklet 'Potensi Usaha Mikro Kecil' (BPS, December 2018) is a single analytical output of SE2016-Lanjutan, the 2017 follow-up survey to the 2016 Economic Census; the document states no cadence and no comparable later edition is listed."
     },
     {
       "id": "id-ikn-population",
@@ -3943,7 +3185,9 @@
         "National planning and infrastructure documents"
       ],
       "_jurisdiction_level_original": "special / project",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "BPS news of 18 Dec 2025, 'BPS-Bappenas-OIKN: Luncurkan Hasil Pendataan Penduduk IKN', reports a single project-driven enumeration (147,427 people, 856 enumerators) with no announced repeat schedule."
     },
     {
       "id": "id-ikn-framework",
@@ -3983,9 +3227,8 @@
       "description": "Official international-reserve position published by Bank Indonesia. Key external-buffer indicator, routinely expressed in months of import cover and used in monetary and exchange-rate communication.",
       "url": "https://www.bi.go.id/",
       "domains": [
-        "proposed:reserves",
-        "proposed:external",
-        "proposed:monetary"
+        "external-sector",
+        "monetary-policy"
       ],
       "_cadence_original": "monthly",
       "_batch": [
@@ -4013,8 +3256,8 @@
       "url": "https://www.bi.go.id/",
       "domains": [
         "proposed:external-debt",
-        "proposed:debt",
-        "proposed:external"
+        "public-finance",
+        "external-sector"
       ],
       "_cadence_original": "quarterly / periodic",
       "_batch": [
@@ -4028,7 +3271,10 @@
         "International debt-sustainability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Bank Indonesia's SULNI page states the external-debt data are presented 'setiap bulannya' (monthly); SULNI is a joint BI/Ministry of Finance monthly publication.",
+      "releases_per_year": 12
     },
     {
       "id": "id-labour-productivity",
@@ -4042,7 +3288,7 @@
       "domains": [
         "proposed:productivity",
         "labour",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -4056,7 +3302,9 @@
         "Industrial and skills policy"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "No BPS publication or table with a stated release cadence for labour productivity was located; the indicator is derived from Sakernas and national accounts rather than issued as its own dated series."
     },
     {
       "id": "id-financial-inclusion",
@@ -4085,36 +3333,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "OJK page for the Survei Nasional Literasi dan Inklusi Keuangan (SNLIK), reporting the financial literacy and financial inclusion indices across 2019, 2022, 2024 and 2025 rounds."
-    },
-    {
-      "id": "id-batch7-meta",
-      "title": "Indonesia informal–MSME–IKN–external-buffer meta-node",
-      "publisher": "Derived from BPS, BI, OJK, OIKN and related sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding informal-employment and MSME statistics, the IKN new-capital population and legal framework, foreign-exchange reserves, external debt, labour productivity and financial-inclusion indicators into a coherent structural and project layer.",
-      "url": null,
-      "domains": [
-        "proposed:informal",
-        "proposed:msme",
-        "proposed:ikn",
-        "proposed:external",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch7.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 7 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier labour, financial, Kalimantan and spatial nodes"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "OJK page for the Survei Nasional Literasi dan Inklusi Keuangan (SNLIK), reporting the financial literacy and financial inclusion indices across 2019, 2022, 2024 and 2025 rounds.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The OJK SNLIK page lists survey rounds for 2019, 2022, 2024 and 2025 - four rounds across a seven-year span (~0.6 per year); the page states no interval, only that OJK 'kembali menyelenggarakan' the survey.",
+      "releases_per_year": 0.6
     },
     {
       "id": "id-marine-coastal",
@@ -4156,8 +3378,8 @@
       "releases_per_year": 1,
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:fisheries",
-        "proposed:ports",
+        "agriculture",
+        "infrastructure",
         "proposed:maritime"
       ],
       "_batch": [
@@ -4183,7 +3405,7 @@
       "description": "Official statistics on fish catch and aquaculture production. Indonesia ranks among the world’s largest fisheries producers; the series is central to food security, exports and coastal livelihoods.",
       "url": "https://www.bps.go.id/id/publication/2021/11/29/19818990830fa979adb29e8b/statistik-perusahaan-perikanan-2020.html",
       "domains": [
-        "proposed:fisheries",
+        "agriculture",
         "proposed:aquaculture",
         "proposed:food"
       ],
@@ -4200,7 +3422,10 @@
       ],
       "_jurisdiction_level_original": "national / provincial",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms 'Statistik Perusahaan Perikanan 2020' covering both capture fishing enterprises (101 active) and aquaculture enterprises (283), with production, labour and cost data; KKP's own statistik.kkp.go.id host does not resolve for WebFetch."
+      "_url_evidence": "BPS page confirms 'Statistik Perusahaan Perikanan 2020' covering both capture fishing enterprises (101 active) and aquaculture enterprises (283), with production, labour and cost data; KKP's own statistik.kkp.go.id host does not resolve for WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Perusahaan Perikanan 2020' page states Periodisasi 'Tahunan', released 29 Nov 2021.",
+      "releases_per_year": 1
     },
     {
       "id": "id-magelang",
@@ -4213,9 +3438,7 @@
       "url": "https://magelangkota.bps.go.id/",
       "domains": [
         "proposed:magelang",
-        "proposed:local",
-        "proposed:java",
-        "proposed:municipal"
+        "proposed:java"
       ],
       "_cadence_original": "1 (each)",
       "_batch": [
@@ -4228,7 +3451,10 @@
         "Local government and regional-account analysis"
       ],
       "_jurisdiction_level_original": "municipal / regency",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Kota Magelang Dalam Angka' has one edition per year (2020, 2021, 2025 and 2026 editions; the 2026 edition released 27 Feb 2026), consistent with the 'Tahunan' periodicity stated on Dalam Angka pages.",
+      "releases_per_year": 1
     },
     {
       "id": "id-malang",
@@ -4241,9 +3467,7 @@
       "url": "https://malangkota.bps.go.id/id/publication/2023/02/28/b600ebe2a1d407de59d12a90/kota-malang-dalam-angka-2023.html",
       "domains": [
         "proposed:malang",
-        "proposed:local",
-        "proposed:java",
-        "proposed:municipal"
+        "proposed:java"
       ],
       "_cadence_original": "1 (each)",
       "_batch": [
@@ -4257,7 +3481,10 @@
       ],
       "_jurisdiction_level_original": "municipal / regency",
       "last_updated": null,
-      "_url_evidence": "BPS Kota Malang page confirms 'Kota Malang Dalam Angka 2023', the annual municipal statistical yearbook (catalogue 1102001.3573)."
+      "_url_evidence": "BPS Kota Malang page confirms 'Kota Malang Dalam Angka 2023', the annual municipal statistical yearbook (catalogue 1102001.3573).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Kota Malang Dalam Angka 2023' page states Periodisasi 'Tahunan', released 28 Feb 2023.",
+      "releases_per_year": 1
     },
     {
       "id": "id-java-municipal",
@@ -4269,8 +3496,6 @@
       "description": "The widespread local ‘Dalam Angka’ yearbook system that produces city- and regency-level statistical compendia across Java and the rest of Indonesia. Provides the granular municipal layer beneath provincial PDRB and population series.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:local",
-        "proposed:municipal",
         "proposed:dalam-angka"
       ],
       "_cadence_original": "annual (hundreds of local titles)",
@@ -4283,7 +3508,10 @@
         "Provincial and national statistical series",
         "Specific city/regency nodes (Magelang, Malang, etc.)"
       ],
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Every Dalam Angka title checked states Periodisasi 'Tahunan' and is released each February: Kota Malang 2023 (28 Feb 2023), Kota Magelang 2026 (27 Feb 2026), DKI Jakarta 2025 (28 Feb 2025), Jawa Barat 2026 (27 Feb 2026).",
+      "releases_per_year": 1
     },
     {
       "id": "id-government-accounts",
@@ -4297,7 +3525,7 @@
       "url": "https://www.bps.go.id/",
       "domains": [
         "proposed:government",
-        "proposed:fiscal",
+        "public-finance",
         "proposed:accounts"
       ],
       "_batch": [
@@ -4324,8 +3552,7 @@
       "url": "https://djpb.kemenkeu.go.id/portal/id/berita/lainnya/pengumuman/153-apbn.html",
       "domains": [
         "proposed:apbn",
-        "proposed:budget",
-        "proposed:fiscal"
+        "public-finance"
       ],
       "_cadence_original": "monthly / periodic (APBN KiTa and related)",
       "_batch": [
@@ -4340,64 +3567,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Directorate General of Treasury page confirmed to publish the monthly 'Realisasi APBN / i-account' state budget realisation releases."
-    },
-    {
-      "id": "id-blue-economy",
-      "title": "Blue-economy policy and statistical framing",
-      "publisher": "Derived from BPS marine statistics, RPJPN/RPJMN and maritime policy documents",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Recurring policy and statistical framing of the ‘blue economy’ that organises marine-resource, fisheries, coastal and climate-adaptation data under a long-term development narrative (including Golden Indonesia 2045).",
-      "url": null,
-      "domains": [
-        "proposed:blue-economy",
-        "proposed:maritime",
-        "proposed:policy"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Indonesia-batch8.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Policy-frame node for the maritime cluster.",
-      "_referenced_by": [
-        "Marine and coastal resources statistics",
-        "Fisheries production and port statistics",
-        "Climate and long-term planning documents"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "id-batch8-meta",
-      "title": "Indonesia maritime–local–fiscal densification meta-node",
-      "publisher": "Derived from BPS marine, local and government-account sources",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding marine/coastal resources, fishing ports, fisheries production, selected Java municipal yearbooks (Magelang, Malang), the broader Dalam Angka local system, general government accounts, APBN fiscal statistics and blue-economy framing.",
-      "url": null,
-      "domains": [
-        "proposed:maritime",
-        "proposed:local",
-        "proposed:fiscal",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch8.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 8 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier Java-core, environmental and national-accounts series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Directorate General of Treasury page confirmed to publish the monthly 'Realisasi APBN / i-account' state budget realisation releases.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The DJPb portal publishes 'Realisasi APBN' monthly - e.g. per 31 Maret 2024 (27 Mar 2024), per 30 April 2024 (02 May 2024), per 31 Mei 2024 (03 Jun 2024) - alongside the monthly APBN KiTa publication.",
+      "releases_per_year": 12
     },
     {
       "id": "id-health-profile",
@@ -4454,7 +3627,10 @@
         "Provincial and spatial inequality discussions"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Hospital and puskesmas counts are published in Kemenkes 'Profil Kesehatan Indonesia', one edition per year (2018, 2023, 2024 editions).",
+      "releases_per_year": 1
     },
     {
       "id": "id-tax-revenues",
@@ -4466,9 +3642,8 @@
       "description": "Detailed composition of actual government revenues: income tax (oil/gas and non-oil/gas), VAT, excises, international trade taxes, natural-resource non-tax revenues, etc. Primary statistical view of the tax and non-tax revenue base.",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:tax",
-        "proposed:revenue",
-        "proposed:fiscal"
+        "taxation",
+        "public-finance"
       ],
       "_cadence_original": "annual / higher-frequency monitoring",
       "_batch": [
@@ -4482,7 +3657,10 @@
         "Fiscal-sustainability and tax-ratio analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The Directorate General of Taxes issues one 'Laporan Tahunan' per year (2022, 2023 and 2024 editions on pajak.go.id); BPS's central-government finance statistics tables are likewise annual fiscal-year series.",
+      "releases_per_year": 1
     },
     {
       "id": "id-tax-ratio",
@@ -4510,7 +3688,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Ministry of Finance fiscal-strategy page publishing the KEM-PPKF macroeconomic framework and fiscal policy documents (2025-2027 editions), the official vehicle for revenue/tax-capacity and deficit targets."
+      "_url_evidence": "Ministry of Finance fiscal-strategy page publishing the KEM-PPKF macroeconomic framework and fiscal policy documents (2025-2027 editions), the official vehicle for revenue/tax-capacity and deficit targets.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "fiskal.kemenkeu.go.id lists one KEM-PPKF per budget year (2025, 2026, 2027, each with a later 'Update'); the page states the document 'wajib dibahas bersama DPR RI sebagai bagian dari pembicaraan pendahuluan penyusunan RAPBN tahun anggaran berikutnya' - an annual budget-cycle document.",
+      "releases_per_year": 1
     },
     {
       "id": "id-export-partners",
@@ -4522,8 +3703,7 @@
       "description": "Merchandise export values and volumes broken down by destination country. China, United States, Japan, India, ASEAN partners and others appear as recurring major markets; the composition interacts with commodity mix (palm oil, coal, nickel products, manufactures).",
       "url": "https://www.bps.go.id/",
       "domains": [
-        "proposed:trade",
-        "proposed:exports",
+        "trade",
         "proposed:partners"
       ],
       "_cadence_original": "monthly / annual detailed",
@@ -4538,7 +3718,10 @@
         "Commodity and industrial-policy analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Destination-country detail is published in the monthly 'Buletin Statistik Perdagangan Luar Negeri Ekspor Menurut Kelompok Komoditi dan Negara' - the Februari 2024 issue page states Periodisasi 'Bulanan' (released 07 May 2024); import bulletins are likewise monthly.",
+      "releases_per_year": 12
     },
     {
       "id": "id-commodity-partner-matrix",
@@ -4550,7 +3733,7 @@
       "description": "Statistical patterns linking major export commodities to their principal destination markets. Forms the empirical backbone of discussions about China demand for nickel and coal, Indian and other markets for palm oil, and diversified manufactured-goods destinations.",
       "url": "https://www.bps.go.id/id/publication/2024/05/07/066047e31d499e30250dbe34/buletin-statistik-perdagangan-luar-negeri-ekspor-menurut-kelompok-komoditi-dan-negara-februari-2024.html",
       "domains": [
-        "proposed:trade",
+        "trade",
         "proposed:commodities",
         "proposed:partners"
       ],
@@ -4567,7 +3750,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "BPS page confirms the 'Buletin Statistik Perdagangan Luar Negeri Ekspor Menurut Kelompok Komoditi dan Negara' giving exports by commodity group and by destination country."
+      "_url_evidence": "BPS page confirms the 'Buletin Statistik Perdagangan Luar Negeri Ekspor Menurut Kelompok Komoditi dan Negara' giving exports by commodity group and by destination country.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The cited page, 'Buletin Statistik Perdagangan Luar Negeri Ekspor Menurut Kelompok Komoditi dan Negara, Februari 2024' (released 07 May 2024), states Periodisasi 'Bulanan'.",
+      "releases_per_year": 12
     },
     {
       "id": "id-java-west",
@@ -4580,8 +3766,7 @@
       "url": "https://jabar.bps.go.id/id/publication/2026/02/27/2f027354da10870634aa1648/provinsi-jawa-barat-dalam-angka-2026.html",
       "domains": [
         "proposed:west-java",
-        "proposed:java",
-        "proposed:provincial"
+        "proposed:java"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -4596,7 +3781,10 @@
       ],
       "_jurisdiction_level_original": "provincial / municipal",
       "last_updated": null,
-      "_url_evidence": "BPS Jawa Barat page confirms 'Provinsi Jawa Barat Dalam Angka 2026' (catalogue 1102001.32) with provincial and district/city data."
+      "_url_evidence": "BPS Jawa Barat page confirms 'Provinsi Jawa Barat Dalam Angka 2026' (catalogue 1102001.32) with provincial and district/city data.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Provinsi Jawa Barat Dalam Angka 2026' page states Periodisasi 'Tahunan', released 27 Feb 2026.",
+      "releases_per_year": 1
     },
     {
       "id": "id-java-central",
@@ -4609,8 +3797,7 @@
       "url": "https://jateng.bps.go.id/id/publication/2019/09/26/885ddf8694ad637a59b81ea8/statistik-daerah-provinsi-jawa-tengah-2019.html",
       "domains": [
         "proposed:central-java",
-        "proposed:java",
-        "proposed:provincial"
+        "proposed:java"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -4625,7 +3812,10 @@
       ],
       "_jurisdiction_level_original": "provincial / municipal",
       "last_updated": null,
-      "_url_evidence": "BPS Jawa Tengah page confirms 'Statistik Daerah Provinsi Jawa Tengah 2019' (catalogue 1101002.33); the province's 'Dalam Angka' yearbook is not indexed in BPS's own search engine."
+      "_url_evidence": "BPS Jawa Tengah page confirms 'Statistik Daerah Provinsi Jawa Tengah 2019' (catalogue 1101002.33); the province's 'Dalam Angka' yearbook is not indexed in BPS's own search engine.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Statistik Daerah Provinsi Jawa Tengah 2019' page states Periodisasi 'Tahunan', released 26 Sep 2019.",
+      "releases_per_year": 1
     },
     {
       "id": "id-java-east",
@@ -4638,8 +3828,7 @@
       "url": "https://jatim.bps.go.id/id/publication/2020/05/19/6225e5df323aa13d4fb1e4f4/provinsi-jawa-timur-dalam-angka-2020.html",
       "domains": [
         "proposed:east-java",
-        "proposed:java",
-        "proposed:provincial"
+        "proposed:java"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -4654,36 +3843,10 @@
       ],
       "_jurisdiction_level_original": "provincial / municipal",
       "last_updated": null,
-      "_url_evidence": "BPS Jawa Timur page confirms 'Provinsi Jawa Timur Dalam Angka 2020' (catalogue 1102001.35) covering geography, government, social-demographic and economic conditions."
-    },
-    {
-      "id": "id-batch9-meta",
-      "title": "Indonesia health–fiscal–trade-partner–Java densification meta-node",
-      "publisher": "Derived from BPS, Ministry of Health, Ministry of Finance and trade statistics",
-      "country": "ID",
-      "jurisdiction_level": "federal",
-      "region": "Indonesia",
-      "description": "Meta-node binding the Health Statistics Profile, health-facilities counts, tax-revenue structure, tax-to-GDP indicators, export-by-destination and commodity–partner patterns, and further Java provincial densification (West, Central, East Java) into a coherent health–fiscal–trade–spatial layer.",
-      "url": null,
-      "domains": [
-        "health",
-        "proposed:fiscal",
-        "proposed:trade",
-        "proposed:java",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Indonesia-batch9.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 9 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier BPJS, APBN, trade, Magelang/Malang and Java-core nodes"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "BPS Jawa Timur page confirms 'Provinsi Jawa Timur Dalam Angka 2020' (catalogue 1102001.35) covering geography, government, social-demographic and economic conditions.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "'Provinsi Jawa Timur Dalam Angka 2020' page states Periodisasi 'Tahunan', released 19 May 2020.",
+      "releases_per_year": 1
     }
   ],
   "dependencies": [],
@@ -4756,502 +3919,91 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
-    "reports_without_url": [
-      "id-malacca-strait",
-      "id-sunda-strait",
-      "id-lombok-makassar",
-      "id-archipelagic-sea-lanes",
-      "id-connectivity-logistics",
-      "id-chokepoint-meta",
-      "id-batch11-meta",
-      "id-religious-geography",
-      "id-energy-transition",
-      "id-batch12-meta",
-      "id-batch13-meta",
-      "id-bpbd",
-      "id-disaster-policy",
-      "id-disaster-meta",
-      "id-singapore-partnership",
-      "id-intl-meta",
-      "id-kpk",
-      "id-governance-meta",
-      "id-java-water-stress",
-      "id-final-polish-meta",
-      "id-java-core",
-      "id-outer-islands",
-      "id-hilirisasi",
-      "id-commodity-meta",
-      "id-batch4-meta",
-      "id-env-digital-meta",
-      "id-sumatra",
-      "id-kalimantan",
-      "id-sulawesi",
-      "id-papua",
-      "id-bali-nt",
-      "id-provincial-meta",
-      "id-batch7-meta",
-      "id-blue-economy",
-      "id-batch8-meta",
-      "id-batch9-meta"
-    ],
-    "reports_without_url_count": 36,
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "id-bps",
-        "text": "continuous"
-      },
-      {
-        "id": "id-population-census",
-        "text": "every 10 years (plus Long Form follow-up)"
-      },
-      {
-        "id": "id-national-accounts",
-        "text": "4 (quarterly) + annual revisions"
-      },
-      {
-        "id": "id-sakernas",
-        "text": "multiple rounds per year (frequency has varied; currently high-frequency)"
-      },
-      {
-        "id": "id-poverty",
-        "text": "typically 2 (March and September)"
-      },
-      {
-        "id": "id-susenas",
-        "text": "multiple modules / rounds"
+        "title": "BPS – Statistics Indonesia (Badan Pusat Statistik)",
+        "kind": "continuous-database",
+        "basis": "bps.go.id is the agency's live dissemination portal (Berita Resmi Statistik, Tabel Statistik, Publikasi, Rencana Terbit); it carries series from monthly press releases to decennial censuses, so the site itself has no single release cadence."
       },
       {
         "id": "id-bank-indonesia",
-        "text": "continuous"
-      },
-      {
-        "id": "id-bop",
-        "text": "quarterly / monthly components"
-      },
-      {
-        "id": "id-malacca-strait",
-        "text": "continuous (monitoring + analysis)"
-      },
-      {
-        "id": "id-sunda-strait",
-        "text": "continuous"
-      },
-      {
-        "id": "id-lombok-makassar",
-        "text": "continuous"
-      },
-      {
-        "id": "id-interprovincial-trade",
-        "text": "1 (with underlying survey data)"
-      },
-      {
-        "id": "id-interisland-trade",
-        "text": "periodic"
+        "title": "Bank Indonesia – central bank statistical and policy publications",
+        "kind": "continuous-database",
+        "basis": "bi.go.id hosts continuously updated statistics alongside a mixed portfolio (SEKI monthly, LKM and NPI quarterly, KSK semi-annual, LPI annual) - the publications landing page lists ~16 series with different frequencies, so there is no single cadence for the node."
       },
       {
         "id": "id-sez",
-        "text": "continuous / periodic reporting"
-      },
-      {
-        "id": "id-ftz",
-        "text": "continuous"
-      },
-      {
-        "id": "id-customs-tariff",
-        "text": "continuous"
-      },
-      {
-        "id": "id-connectivity-logistics",
-        "text": "periodic"
-      },
-      {
-        "id": "id-defence-budget",
-        "text": "annual (budget cycle) + continuous citation"
-      },
-      {
-        "id": "id-defence-posture",
-        "text": "continuous"
-      },
-      {
-        "id": "id-tertiary-ger",
-        "text": "annual / Susenas-based"
-      },
-      {
-        "id": "id-rice-paddy",
-        "text": "seasonal / annual"
-      },
-      {
-        "id": "id-transport-multimodal",
-        "text": "monthly press releases + annual compilations"
-      },
-      {
-        "id": "id-cpi-provincial",
-        "text": "monthly / annual compilation"
-      },
-      {
-        "id": "id-electricity-mix",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "id-oil-production",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "id-gas-production",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "id-religion-composition",
-        "text": "census / civil-registration updates"
-      },
-      {
-        "id": "id-religious-geography",
-        "text": "census cycle"
-      },
-      {
-        "id": "id-geothermal",
-        "text": "periodic"
-      },
-      {
-        "id": "id-energy-transition",
-        "text": "continuous"
-      },
-      {
-        "id": "id-tanjung-priok",
-        "text": "continuous / annual summaries"
-      },
-      {
-        "id": "id-tanjung-perak",
-        "text": "continuous / annual summaries"
-      },
-      {
-        "id": "id-major-ports",
-        "text": "continuous"
-      },
-      {
-        "id": "id-ethnic-groups",
-        "text": "census / Long Form cycle"
-      },
-      {
-        "id": "id-regional-languages",
-        "text": "census / Long Form cycle"
-      },
-      {
-        "id": "id-victimisation",
-        "text": "aligned with Crime Statistics"
+        "title": "Special Economic Zones (KEK) statistics and regulatory framework",
+        "kind": "unknown",
+        "basis": "kek.go.id returned no readable body content on two fetches (/ and /id); no frequency statement and no countable dated report series could be read from the site."
       },
       {
         "id": "id-bnpb",
-        "text": "continuous"
-      },
-      {
-        "id": "id-disaster-occurrence",
-        "text": "continuous / annual compilations"
-      },
-      {
-        "id": "id-disaster-risk-index",
-        "text": "periodic updates"
-      },
-      {
-        "id": "id-bpbd",
-        "text": "continuous"
+        "title": "BNPB – National Disaster Management Authority",
+        "kind": "continuous-database",
+        "basis": "data.bnpb.go.id is the Portal Satu Data Bencana - an event-level disaster data portal with pre/during/post-disaster dashboards and incident-specific pages; discrete outputs are annual compilations, but the underlying database accumulates events continuously."
       },
       {
         "id": "id-volcano-earthquake",
-        "text": "continuous monitoring + event compilations"
+        "title": "Volcanic and earthquake / tsunami hazard and event statistics",
+        "kind": "continuous-database",
+        "basis": "vsi.esdm.go.id is a live monitoring portal: near-daily 'Laporan Kebencanaan Geologi' entries and a continuously maintained list of volcano alert levels (Level II/III statuses with dates), not a discrete release series."
       },
       {
         "id": "id-bit-network",
-        "text": "continuous (status changes)"
+        "title": "Bilateral Investment Treaty (BIT) network",
+        "kind": "continuous-database",
+        "basis": "UNCTAD's IIA Navigator country page for Indonesia is a treaty database (73 BITs plus 25 TIPs and 25 further frameworks listed), updated as treaty statuses change; the page states no release schedule."
       },
       {
         "id": "id-fta-network",
-        "text": "continuous"
-      },
-      {
-        "id": "id-singapore-partnership",
-        "text": "continuous"
-      },
-      {
-        "id": "id-anticorruption",
-        "text": "continuous / multi-year strategy cycles"
-      },
-      {
-        "id": "id-kpk",
-        "text": "continuous"
-      },
-      {
-        "id": "id-asset-declaration",
-        "text": "continuous"
-      },
-      {
-        "id": "id-dau-dak",
-        "text": "annual budget cycle + continuous citation"
-      },
-      {
-        "id": "id-own-source-revenue",
-        "text": "continuous"
-      },
-      {
-        "id": "id-water-resources",
-        "text": "periodic"
-      },
-      {
-        "id": "id-java-water-stress",
-        "text": "continuous"
-      },
-      {
-        "id": "id-foreign-trade-exports",
-        "text": "annual detailed + monthly/periodic summaries"
-      },
-      {
-        "id": "id-foreign-trade-imports",
-        "text": "annual detailed + monthly/periodic summaries"
-      },
-      {
-        "id": "id-producer-prices",
-        "text": "periodic (monthly/quarterly components)"
-      },
-      {
-        "id": "id-agriculture-stats",
-        "text": "multiple series / annual summaries"
-      },
-      {
-        "id": "id-health-stats",
-        "text": "periodic"
-      },
-      {
-        "id": "id-gini-inequality",
-        "text": "typically aligned with poverty releases"
-      },
-      {
-        "id": "id-monetary-aggregates",
-        "text": "monthly / continuous"
-      },
-      {
-        "id": "id-financial-stability-review",
-        "text": "typically 2"
-      },
-      {
-        "id": "id-palm-oil",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "id-nickel",
-        "text": "periodic"
-      },
-      {
-        "id": "id-coal",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "id-mining-stats",
-        "text": "periodic"
-      },
-      {
-        "id": "id-pdrb",
-        "text": "annual (with periodic updates)"
-      },
-      {
-        "id": "id-java-core",
-        "text": "continuous (via provincial series)"
-      },
-      {
-        "id": "id-outer-islands",
-        "text": "continuous"
-      },
-      {
-        "id": "id-jakarta",
-        "text": "continuous"
-      },
-      {
-        "id": "id-internal-migration",
-        "text": "census cycle + survey updates"
-      },
-      {
-        "id": "id-hilirisasi",
-        "text": "continuous (policy + production/trade outcomes)"
-      },
-      {
-        "id": "id-bpjs-kesehatan",
-        "text": "continuous / periodic reports"
-      },
-      {
-        "id": "id-social-protection",
-        "text": "periodic"
-      },
-      {
-        "id": "id-islamic-finance",
-        "text": "periodic / annual reports + higher-frequency updates"
+        "title": "Overall FTA / CEPA network overview",
+        "kind": "unknown",
+        "basis": "ditjenppi.kemendag.go.id/publikasi shows no frequency statement and no regular series: 'Indonesia Trade Negotiations Agenda (as of July 2026)' posted 22 Jul 2026 and five CEPA/PTA factsheets all posted 27 Jan 2026."
       },
       {
         "id": "id-ojk",
-        "text": "continuous"
+        "title": "OJK – Financial Services Authority institutional and statistical role",
+        "kind": "continuous-database",
+        "basis": "ojk.go.id/data-dan-statistik is a portal of many parallel series with different cadences (monthly PEPK statistics, quarterly Laporan Triwulan OJK, annual Laporan Tahunan, plus sector statistics) - no single release cadence for the node."
       },
       {
         "id": "id-asean",
-        "text": "continuous"
-      },
-      {
-        "id": "id-population-projections",
-        "text": "periodic updates after census"
-      },
-      {
-        "id": "id-podes",
-        "text": "periodic (aligned with census/survey cycles)"
-      },
-      {
-        "id": "id-rpjmn",
-        "text": "multi-year plan cycles + annual monitoring"
-      },
-      {
-        "id": "id-forest-cover",
-        "text": "annual monitoring releases"
-      },
-      {
-        "id": "id-deforestation",
-        "text": "1 (annual monitoring)"
+        "title": "ASEAN economic cooperation framework (Indonesia as member)",
+        "kind": "unknown",
+        "basis": "asean.org returned only a JavaScript redirect notice ('Javascript is required'); no frequency statement or countable dated series could be read, and the node describes an organisational/cooperation framework rather than a dated publication."
       },
       {
         "id": "id-ghg-inventory",
-        "text": "periodic inventory updates + BPS tables"
-      },
-      {
-        "id": "id-ndc-climate",
-        "text": "periodic updates (NDC cycles)"
-      },
-      {
-        "id": "id-digital-economy",
-        "text": "periodic"
-      },
-      {
-        "id": "id-land-use-change",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "id-environmental-stats",
-        "text": "periodic"
+        "title": "Greenhouse-gas inventory and physical supply-use for emissions",
+        "kind": "unknown",
+        "basis": "No page with a stated cadence for the national GHG inventory was readable: kemenlh.go.id items describe the SIGN-SMART reporting system and training rather than a dated publication series, and no countable inventory editions were listed."
       },
       {
         "id": "id-provinces-structure",
-        "text": "continuous / periodic updates"
-      },
-      {
-        "id": "id-sumatra",
-        "text": "continuous (via provincial series)"
-      },
-      {
-        "id": "id-kalimantan",
-        "text": "continuous"
-      },
-      {
-        "id": "id-sulawesi",
-        "text": "continuous"
-      },
-      {
-        "id": "id-papua",
-        "text": "continuous"
-      },
-      {
-        "id": "id-bali-nt",
-        "text": "continuous"
-      },
-      {
-        "id": "id-fdi-realization",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "id-domestic-investment",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "id-informal-employment",
-        "text": "aligned with Sakernas rounds"
-      },
-      {
-        "id": "id-msme-manufacturing",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "id-msme-broader",
-        "text": "periodic"
-      },
-      {
-        "id": "id-ikn-population",
-        "text": "project-driven / periodic"
-      },
-      {
-        "id": "id-external-debt",
-        "text": "quarterly / periodic"
+        "title": "Provincial administrative structure (38 provinces) and island counts",
+        "kind": "unknown",
+        "basis": "No page giving an update cadence for the 38-province administrative structure or island counts was obtained; the cited bps.go.id front page carries no frequency statement for this content."
       },
       {
         "id": "id-labour-productivity",
-        "text": "periodic"
-      },
-      {
-        "id": "id-financial-inclusion",
-        "text": "periodic"
-      },
-      {
-        "id": "id-fisheries-production",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "id-magelang",
-        "text": "1 (each)"
-      },
-      {
-        "id": "id-malang",
-        "text": "1 (each)"
-      },
-      {
-        "id": "id-java-municipal",
-        "text": "annual (hundreds of local titles)"
-      },
-      {
-        "id": "id-apbn",
-        "text": "monthly / periodic (APBN KiTa and related)"
-      },
-      {
-        "id": "id-blue-economy",
-        "text": "continuous"
-      },
-      {
-        "id": "id-health-facilities",
-        "text": "periodic / annual"
-      },
-      {
-        "id": "id-tax-revenues",
-        "text": "annual / higher-frequency monitoring"
-      },
-      {
-        "id": "id-tax-ratio",
-        "text": "annual / continuous citation"
-      },
-      {
-        "id": "id-export-partners",
-        "text": "monthly / annual detailed"
-      },
-      {
-        "id": "id-commodity-partner-matrix",
-        "text": "continuous (via trade publications)"
-      },
-      {
-        "id": "id-java-west",
-        "text": "continuous"
-      },
-      {
-        "id": "id-java-central",
-        "text": "continuous"
-      },
-      {
-        "id": "id-java-east",
-        "text": "continuous"
+        "title": "Labour productivity and related indicators",
+        "kind": "unknown",
+        "basis": "No BPS publication or table with a stated release cadence for labour productivity was located; the indicator is derived from Sakernas and national accounts rather than issued as its own dated series."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -5264,189 +4016,12 @@
       "retry_date": "2026-08-18",
       "retry_recovered": 10
     },
-    "not_a_publication": [
-      {
-        "id": "id-malacca-strait",
-        "title": "Strait of Malacca — strategic chokepoint and transit statistics/context",
-        "finding": "Not a publication - a geographic chokepoint with a synthesised 'derived from international analyses' framing; no single official Indonesian product corresponds to it."
-      },
-      {
-        "id": "id-sunda-strait",
-        "title": "Sunda Strait — alternative passage statistics/context",
-        "finding": "Not a publication - a geographic strait / derived context node, not an official statistical product."
-      },
-      {
-        "id": "id-lombok-makassar",
-        "title": "Lombok and Makassar Straits — deep-water alternative passages",
-        "finding": "Not a publication - geographic straits described from derived maritime analyses."
-      },
-      {
-        "id": "id-archipelagic-sea-lanes",
-        "title": "Indonesian Archipelagic Sea Lanes (ALKI) and archipelagic-state regime",
-        "finding": "Not a publication - the ALKI archipelagic sea-lanes regime is a legal/UNCLOS framework; no official landing page retrieved (peraturan.bpk.go.id returns 403 to WebFetch)."
-      },
-      {
-        "id": "id-connectivity-logistics",
-        "title": "Inter-island connectivity and logistics policy/statistics",
-        "finding": "Not a publication - a synthesised 'derived from BPS transport statistics and connectivity programmes' framing node."
-      },
-      {
-        "id": "id-chokepoint-meta",
-        "title": "Indonesia maritime-chokepoint, inter-provincial trade and special-zone meta-node",
-        "finding": "Not a publication - explicitly a meta-node binding other nodes."
-      },
-      {
-        "id": "id-batch11-meta",
-        "title": "Indonesia defence–education–construction–food–transport–gender densification meta-node",
-        "finding": "Not a publication - explicitly a densification meta-node."
-      },
-      {
-        "id": "id-religious-geography",
-        "title": "Geographic distribution of religious communities",
-        "finding": "Not a publication - a derived spatial description of religious affiliation."
-      },
-      {
-        "id": "id-energy-transition",
-        "title": "Energy-transition and renewable-policy framing",
-        "finding": "Not a publication - a recurring policy-framing node rather than a specific document."
-      },
-      {
-        "id": "id-batch12-meta",
-        "title": "Indonesia energy-mix–oil-gas–religion densification meta-node",
-        "finding": "Not a publication - explicitly a densification meta-node."
-      },
-      {
-        "id": "id-batch13-meta",
-        "title": "Indonesia ports–ethnicity–language–crime densification meta-node",
-        "finding": "Not a publication - explicitly a densification meta-node."
-      },
-      {
-        "id": "id-bpbd",
-        "title": "Provincial and local Disaster Management Agencies (BPBD)",
-        "finding": "Not a publication - BPBD are subnational disaster-management agencies (institutions), not a document."
-      },
-      {
-        "id": "id-disaster-policy",
-        "title": "National disaster-management policy and legal framework",
-        "finding": "Not a publication - a legal/policy framework; no single official landing page retrieved (peraturan.bpk.go.id returns 403 to WebFetch)."
-      },
-      {
-        "id": "id-disaster-meta",
-        "title": "Indonesia disaster-risk and management meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-singapore-partnership",
-        "title": "Indonesia–Singapore comprehensive partnership framework",
-        "finding": "Not a publication - a bilateral partnership framework (leaders' retreats and sectoral MoUs) rather than a document; no official landing page retrieved."
-      },
-      {
-        "id": "id-intl-meta",
-        "title": "Indonesia expanded international economic-architecture meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-kpk",
-        "title": "KPK – Corruption Eradication Commission institutional role",
-        "finding": "Not a publication - the Corruption Eradication Commission is an institution."
-      },
-      {
-        "id": "id-governance-meta",
-        "title": "Indonesia governance and institutional-quality meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-java-water-stress",
-        "title": "Java water-stress and water-security framing",
-        "finding": "Not a publication - a derived policy/analytical framing of water stress on Java."
-      },
-      {
-        "id": "id-final-polish-meta",
-        "title": "Indonesia subnational-fiscal and water densification meta-node",
-        "finding": "Not a publication - explicitly a densification meta-node."
-      },
-      {
-        "id": "id-java-core",
-        "title": "Java economic and demographic core",
-        "finding": "Not a publication - a relational/contrast node about Java's economic weight."
-      },
-      {
-        "id": "id-outer-islands",
-        "title": "Outer-islands resource and demographic periphery",
-        "finding": "Not a publication - a relational/contrast node about the non-Java provinces."
-      },
-      {
-        "id": "id-hilirisasi",
-        "title": "Downstreaming / hilirisasi industrial-policy statistics and framing",
-        "finding": "Not a publication - the downstreaming policy frame, derived from several ministries' data."
-      },
-      {
-        "id": "id-commodity-meta",
-        "title": "Indonesia commodity and spatial-resource meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-batch4-meta",
-        "title": "Indonesia social-protection, Islamic-finance and regional-architecture meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-env-digital-meta",
-        "title": "Indonesia environment–climate–digital meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-sumatra",
-        "title": "Sumatra regional statistical profile",
-        "finding": "Not a publication - an island-group geographic aggregate; BPS publishes provincial, not Sumatra-wide, yearbooks."
-      },
-      {
-        "id": "id-kalimantan",
-        "title": "Kalimantan regional statistical profile",
-        "finding": "Not a publication - an island-group geographic aggregate rather than a specific BPS product."
-      },
-      {
-        "id": "id-sulawesi",
-        "title": "Sulawesi regional statistical profile (nickel focus)",
-        "finding": "Not a publication - an island-group geographic aggregate rather than a specific BPS product."
-      },
-      {
-        "id": "id-papua",
-        "title": "Papua regional statistical profile (including new provinces)",
-        "finding": "Not a publication - a multi-province geographic aggregate rather than a specific BPS product."
-      },
-      {
-        "id": "id-bali-nt",
-        "title": "Bali and Nusa Tenggara tourism-oriented regional profile",
-        "finding": "Not a publication - a multi-province geographic aggregate rather than a specific BPS product."
-      },
-      {
-        "id": "id-provincial-meta",
-        "title": "Indonesia provincial and archipelagic densification meta-node",
-        "finding": "Not a publication - explicitly a densification meta-node."
-      },
-      {
-        "id": "id-batch7-meta",
-        "title": "Indonesia informal–MSME–IKN–external-buffer meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-blue-economy",
-        "title": "Blue-economy policy and statistical framing",
-        "finding": "Not a publication - a derived policy/statistical framing of the blue economy."
-      },
-      {
-        "id": "id-batch8-meta",
-        "title": "Indonesia maritime–local–fiscal densification meta-node",
-        "finding": "Not a publication - explicitly a meta-node."
-      },
-      {
-        "id": "id-batch9-meta",
-        "title": "Indonesia health–fiscal–trade-partner–Java densification meta-node",
-        "finding": "Not a publication - explicitly a densification meta-node."
-      }
-    ],
     "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 36 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_moved_to_archive": "36 nodes removed from this file on 2026-08-18; full records in _archive/id-indonesia-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 94
+    }
   }
 }

@@ -14,7 +14,7 @@
       "2026-08-14_Myanmar-batch5.json"
     ],
     "counts": {
-      "reports": 24,
+      "reports": 17,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -34,8 +34,7 @@
       "description": "Primary national statistical office responsible for censuses, surveys, national accounts, prices, labour, demographic and multi-domain socio-economic statistics. Publishes the Statistical Yearbook and participates in the IMF enhanced General Data Dissemination System (e-GDDS).",
       "url": "https://www.csostat.gov.mm/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -49,7 +48,10 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "CSO site advertises the Myanmar Statistical Yearbook as its flagship, latest edition 2025, one per year. The site also lists Selected Monthly Economic Indicators (monthly) and a Quarterly Statistics Bulletin, but the newest SMEI shown is January 2021 and the newest quarterly bulletin is 2022-2023, so only the annual yearbook is still current; 1 reflects the yearbook.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-population",
@@ -61,9 +63,7 @@
       "description": "Official population census and subsequent estimates. Population is approximately 55 million; the age structure remains relatively young.",
       "url": "https://www.mmsis.gov.mm/sub_menu/statistics/fileDb.jsp?code_code=003",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "census cycle + estimates",
       "_batch": [
@@ -78,7 +78,9 @@
       ],
       "_jurisdiction_level_original": "national / state-region",
       "last_updated": null,
-      "_url_evidence": "MMSIS (Central Statistical Organization) 'Census Reports' page listing the 2014 Myanmar Population and Housing Census volumes (Union Report Vol 2-B/2-C, thematic reports on mortality, gender, disability, older population) and the 2014-2050 population projections report."
+      "_url_evidence": "MMSIS (Central Statistical Organization) 'Census Reports' page listing the 2014 Myanmar Population and Housing Census volumes (Union Report Vol 2-B/2-C, thematic reports on mortality, gender, disability, older population) and the 2014-2050 population projections report.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "MMSIS population file list shows only 2014 census thematic outputs (e.g. thematic report on population projections 2014-2050), all with the same entry date of 2018-03-22. No periodicity is stated and there is no second census cycle on the page to count from."
     },
     {
       "id": "mm-national-accounts",
@@ -90,9 +92,7 @@
       "description": "Official national accounts (GDP). Central macro-output series for an economy heavily shaped by agriculture, extractives, informal activity and political-institutional constraints.",
       "url": "https://www.mmsis.gov.mm/sub_menu/indicator/indicators.jsp?menuId=4&num=438",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -107,7 +107,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "MMSIS 'National income' indicator page for Gross Domestic Product (At Current Producers' Prices), showing a 2012-2023 series in Kyat million (125,338,951.9 for 2022) broken into agriculture, industry and services."
+      "_url_evidence": "MMSIS 'National income' indicator page for Gross Domestic Product (At Current Producers' Prices), showing a 2012-2023 series in Kyat million (125,338,951.9 for 2022) broken into agriculture, industry and services.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MMSIS GDP indicator is a single annual series (GDP at current producers' prices by sector) with one observation per year from 2012 to 2023; no sub-annual periods and no stated update frequency. Series is effectively dormant - it ends at 2023 with no later period posted.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-cpi",
@@ -119,8 +122,6 @@
       "description": "CPI and inflation rates. Inflation has been elevated and volatile in recent years under exchange-rate pressures and supply disruptions.",
       "url": "https://www.mmsis.gov.mm/sub_menu/statistics/fileDb.jsp?code_code=007",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_cadence_original": "monthly / periodic",
@@ -136,36 +137,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "MMSIS/CSO 'Inflation Reports' series page listing monthly inflation report PDFs; note the series visibly stops at December 2020, so it is a dormant post-coup product page rather than a current one."
-    },
-    {
-      "id": "mm-cbm",
-      "title": "Central Bank of Myanmar institutional and reporting core",
-      "publisher": "Central Bank of Myanmar",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Central bank responsible for monetary policy, foreign-exchange management and key macro-financial and external statistics. Publishes monetary, banking, exchange-rate, BOP and related series where available.",
-      "url": null,
-      "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Myanmar-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Central-bank institutional counterpart to CSO.",
-      "_referenced_by": [
-        "BOP, reserves, monetary aggregates",
-        "Inflation and exchange-rate analysis",
-        "Financial stability assessments"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "MMSIS/CSO 'Inflation Reports' series page listing monthly inflation report PDFs; note the series visibly stops at December 2020, so it is a dormant post-coup product page rather than a current one.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MMSIS CPI file list is a run of monthly 'Inflation Report (Month Year)' items - March 2020 through December 2020 on the first page, with further pages of earlier months. Series is dormant: the newest edition is December 2020, so nothing has been posted for five years, but the cadence while running was monthly.",
+      "releases_per_year": 12
     },
     {
       "id": "mm-bop",
@@ -177,8 +152,7 @@
       "description": "BOP and external-sector statistics. Current-account dynamics, limited FDI, and large errors and omissions reflecting informal and unrecorded cross-border activity are recurring features.",
       "url": "https://www.csostat.gov.mm/FileUpload/cso/FileDownload/MSYB%202024%20-%20Part-3.pdf",
       "domains": [
-        "proposed:bop",
-        "proposed:external"
+        "external-sector"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -194,32 +168,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved and read: Myanmar Statistical Yearbook 2024, Part 3 (Central Statistical Organization). It contains Chapter 13 'Foreign Trade and Investment', whose Table 13.15 is 'Balance of Payments' for FY2019/2020 to FY2023/2024, with current-account items (exports f.o.b., imports f.o.b., trade balance, services, primary income, secondary income) and financial-account components. This is an official national BOP presentation, obtained after the NSDP's designated URL (cbm.gov.mm/content/3905) again failed - cbm.gov.mm returns HTTP 503 on robots.txt for both www and bare hostnames.",
-      "_url_route": "successor publisher - CSO publications index (csostat.gov.mm) after the NSDP-designated CBM page stayed unreachable"
-    },
-    {
-      "id": "mm-batch1-meta",
-      "title": "Myanmar foundational statistical-system meta-node",
-      "publisher": "Derived from CSO and CBM sources",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Meta-node binding the CSO institutional core, population, national accounts, CPI, CBM institutional role and BOP into the opening foundation layer for Myanmar research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Myanmar-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node for Myanmar research. Data quality and coverage constraints should be carried forward in subsequent batches.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "successor publisher - CSO publications index (csostat.gov.mm) after the NSDP-designated CBM page stayed unreachable",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The linked file is Myanmar Statistical Yearbook 2024 Part 3 (foreign trade and investment chapter); the yearbook is an annual CSO volume and its methodology sheets give dissemination frequency as 'Yearly' for these tables.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-agriculture",
@@ -232,7 +184,6 @@
       "url": "https://www.mmsis.gov.mm/sub_menu/statistics/fileDb.jsp?code_code=005",
       "domains": [
         "agriculture",
-        "proposed:crops",
         "proposed:food"
       ],
       "_cadence_original": "annual / seasonal",
@@ -248,7 +199,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "MMSIS/CSO 'General Reports' page whose listing is dominated by the Myanmar Agricultural Statistics series, most recent edition covering 2016-2017 to 2024-2025."
+      "_url_evidence": "MMSIS/CSO 'General Reports' page whose listing is dominated by the Myanmar Agricultural Statistics series, most recent edition covering 2016-2017 to 2024-2025.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MMSIS lists successive editions of Myanmar Agricultural Statistics, each covering a rolling set of fiscal years - 2012-13 to 2020-21 (entered 2023-01-03), 2013-14 to 2021-22 (2023-04-28), 2014-15 to 2022-23 (2024-03-22), and two newer volumes entered 2026-06-19. Roughly one new edition per year; no explicit frequency statement.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-rice",
@@ -262,7 +216,7 @@
       "domains": [
         "proposed:rice",
         "agriculture",
-        "proposed:food-security"
+        "poverty"
       ],
       "_cadence_original": "seasonal",
       "_batch": [
@@ -277,7 +231,9 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "FAO GIEWS Country Brief for Myanmar (dated 20 Feb 2026) forecasting aggregate paddy production at 27.9 million tonnes and describing sowings versus the 2020-2024 average; area figures are not given."
+      "_url_evidence": "FAO GIEWS Country Brief for Myanmar (dated 20 Feb 2026) forecasting aggregate paddy production at 27.9 million tonnes and describing sowings versus the 2020-2024 average; area figures are not given.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "FAO GIEWS Country Brief for Myanmar carries only 'Reference Date: 20-February-2026' and an unindexed Archives link. The page states no update cycle and shows no countable list of dated prior briefs, only scattered special reports (2019, 2016, 2009)."
     },
     {
       "id": "mm-gas",
@@ -289,10 +245,9 @@
       "description": "Statistics on natural gas production and exports. Petroleum gas is among Myanmar’s largest export commodities by value; primary destinations include Thailand and China.",
       "url": "https://www.iea.org/countries/myanmar/natural-gas",
       "domains": [
-        "proposed:gas",
-        "proposed:energy",
-        "proposed:exports",
-        "proposed:extractives"
+        "energy",
+        "trade",
+        "mining"
       ],
       "_cadence_original": "continuous / annual",
       "_batch": [
@@ -307,7 +262,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "IEA country page for Myanmar's natural gas sector; the page is confirmed to be Myanmar's natural gas section (supply, production, imports/exports framing) but the underlying figures load from the IEA data browser and were not visible in the fetched text - weakest confirmation in this set. No Myanmar government gas statistics exist online: MOEE/MOEP publishes electricity only and MOGE has no site."
+      "_url_evidence": "IEA country page for Myanmar's natural gas sector; the page is confirmed to be Myanmar's natural gas section (supply, production, imports/exports framing) but the underlying figures load from the IEA data browser and were not visible in the fetched text - weakest confirmation in this set. No Myanmar government gas statistics exist online: MOEE/MOEP publishes electricity only and MOGE has no site.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "IEA Myanmar natural-gas page is static explanatory country-profile content with no data vintage, no publication date and no stated refresh schedule; the only dates present are on unrelated linked reports."
     },
     {
       "id": "mm-china-trade",
@@ -319,9 +276,8 @@
       "description": "Bilateral trade with China. China is a dominant trade partner; Myanmar exports include ores, mineral fuels, rubber, copper and agricultural products; imports include vehicles, machinery, electrical equipment and fabrics. Border and informal flows are material.",
       "url": "https://commerce.gov.mm/my/regular-borer-country-wise-status",
       "domains": [
-        "proposed:trade",
-        "proposed:china",
-        "proposed:bilateral"
+        "trade",
+        "proposed:china"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -336,35 +292,10 @@
       ],
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
-      "_url_evidence": "Myanmar Ministry of Commerce country-wise export/import/trade-volume table by fiscal year; China appears as entry 43 with FY2020-21 exports ~USD 5,179.73m and imports ~USD 4,646.21m. (China Customs' own bilateral bulletin at english.customs.gov.cn was also reachable but is not Myanmar-specific.)"
-    },
-    {
-      "id": "mm-batch2-meta",
-      "title": "Myanmar agriculture–extractives–China densification meta-node",
-      "publisher": "Derived from agricultural, energy and trade sources",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Meta-node binding agriculture and rice statistics, natural gas production/exports, and Myanmar–China trade into a coherent primary-sector, extractives and external layer under constrained data conditions.",
-      "url": null,
-      "domains": [
-        "agriculture",
-        "proposed:gas",
-        "proposed:china",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Myanmar-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 2 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, CPI, BOP and CBM series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Myanmar Ministry of Commerce country-wise export/import/trade-volume table by fiscal year; China appears as entry 43 with FY2020-21 exports ~USD 5,179.73m and imports ~USD 4,646.21m. (China Customs' own bilateral bulletin at english.customs.gov.cn was also reachable but is not Myanmar-specific.)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Ministry of Commerce country-wise trade page presents fiscal-year aggregates - FY2020-2021, FY2021-2022 (mini budget), FY2022-2023, FY2023-2024 and FY2024-2025 (April-June so far). One consolidated release per fiscal year; no monthly or weekly editions are listed.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-poverty",
@@ -376,9 +307,8 @@
       "description": "Poverty rates and living-standards indicators. Poverty had declined substantially before 2021; subsequent conflict, economic contraction and displacement have reversed gains and elevated vulnerability, especially in conflict-affected areas.",
       "url": "https://www.worldbank.org/en/country/myanmar/publication/myanmar-subnational-phone-surveys",
       "domains": [
-        "proposed:poverty",
-        "proposed:living-standards",
-        "proposed:welfare"
+        "poverty",
+        "living-standards"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -393,7 +323,9 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "World Bank Myanmar Subnational Phone Surveys series page (8,500+ households across all 15 states/regions) listing 'Development Reversed: Poverty and Labor Markets in Myanmar' and the Sept 2025 poverty and labour markets report."
+      "_url_evidence": "World Bank Myanmar Subnational Phone Surveys series page (8,500+ households across all 15 states/regions) listing 'Development Reversed: Poverty and Labor Markets in Myanmar' and the Sept 2025 poverty and labour markets report.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "World Bank Myanmar Subnational Phone Surveys page lists reports at irregular intervals - April 2023, May 2023, May 2024, September 2025, June 2026, plus a 2023-24 round technical note - and states no survey or publication frequency; the gaps are uneven, so no cadence can be counted."
     },
     {
       "id": "mm-exchange-rate",
@@ -422,65 +354,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "MMSIS 'Foreign Exchange Rates' indicator page showing the official monthly kyat rate against USD and EUR from Aug 2021 to Jul 2022 (1,684-1,850 kyat/USD). Official rate only - the parallel-market side of this item is not covered, and the CBM's own FX pages are unreachable via WebFetch."
-    },
-    {
-      "id": "mm-jade",
-      "title": "Jade and gemstone production / export framing",
-      "publisher": "Derived from trade and sector sources",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Framing and available statistics on jade and gemstone production and exports. Jade has historically been a major foreign-exchange and informal-economy activity, with strong China-linked demand and limited transparency.",
-      "url": null,
-      "domains": [
-        "proposed:jade",
-        "proposed:minerals",
-        "proposed:extractives",
-        "proposed:informal"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Myanmar-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-centrality informal and extractive densification. Data quality is particularly limited.",
-      "_referenced_by": [
-        "Extractives and trade analysis",
-        "China bilateral trade",
-        "Informal-economy and governance discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "mm-batch3-meta",
-      "title": "Myanmar poverty–exchange–jade densification meta-node",
-      "publisher": "Derived from welfare, CBM and extractives sources",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Meta-node binding poverty and living-standards statistics, exchange-rate/parallel-market statistics, and jade/gemstone framing into a coherent welfare–monetary–extractive layer under constrained conditions.",
-      "url": null,
-      "domains": [
-        "proposed:poverty",
-        "proposed:exchange",
-        "proposed:jade",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Myanmar-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "CPI, BOP, gas and China trade series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "MMSIS 'Foreign Exchange Rates' indicator page showing the official monthly kyat rate against USD and EUR from Aug 2021 to Jul 2022 (1,684-1,850 kyat/USD). Official rate only - the parallel-market side of this item is not covered, and the CBM's own FX pages are unreachable via WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MMSIS foreign exchange rate indicator is a monthly series (kyat per USD and EUR) with one observation per month from 2021.08 to 2022.07. Series is dormant - the last period posted is July 2022 - but its cadence while running was monthly.",
+      "releases_per_year": 12
     },
     {
       "id": "mm-labour",
@@ -492,9 +369,7 @@
       "description": "Labour-force participation, employment-to-population ratio and unemployment rates. Participation is in the low-60s percent range; unemployment is moderate by modelled estimates, but informal employment and underemployment are widespread and conflict has disrupted livelihoods.",
       "url": "https://www.csostat.gov.mm/FileUpload/cso/FileDownload/MSYB%202024%20-%20Part-2.pdf",
       "domains": [
-        "labour",
-        "proposed:employment",
-        "proposed:unemployment"
+        "labour"
       ],
       "_cadence_original": "periodic / modelled",
       "_batch": [
@@ -510,7 +385,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved and read: Myanmar Statistical Yearbook 2024, Part 2 (Central Statistical Organization), Chapter 7 'Labour and Employment' (pp.265-282). It carries labour-force participation rates by age group, the unemployment rate (3.69% in 2023), employment through the 91 Labour Exchange Offices (936,000+ registrations in 2023), overseas employment (219,701 in 2023-24), government/private employment splits by sex and by state/region, and social-security registrations, with series running 2010-2024. This is a national official product, replacing the ILOSTAT country profile that returns HTTP 403 to every fetch.",
-      "_url_route": "national publisher instead of ILO - CSO publications index (csostat.gov.mm)"
+      "_url_route": "national publisher instead of ILO - CSO publications index (csostat.gov.mm)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The linked file is Myanmar Statistical Yearbook 2024 Part 2, an annual CSO volume; its labour tables are annual data points 2020-2023 drawn from the Labour Force Projection Report, while the underlying LFS itself is described as two semi-annual collection rounds (Jan-Mar and Sep-Nov). The publication counted here is the annual yearbook.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-fiscal",
@@ -522,8 +400,7 @@
       "description": "Fiscal balance and deficit indicators. The deficit has widened in recent fiscal years (mid-single-digit percent of GDP range) under reconstruction, security and recurrent spending pressures, with weak tax collection and reliance on domestic financing including central-bank channels.",
       "url": "https://www.worldbank.org/en/country/myanmar/publication/myanmar-economic-monitor-reports",
       "domains": [
-        "proposed:fiscal",
-        "proposed:budget",
+        "public-finance",
         "proposed:deficit"
       ],
       "_cadence_original": "annual / periodic",
@@ -539,7 +416,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "World Bank Myanmar Economic Monitor series page - 'a biannual perspective on economic developments and key challenges in Myanmar', editions Oct 2013 through June 2026, covering the fiscal situation, financial sector and outlook."
+      "_url_evidence": "World Bank Myanmar Economic Monitor series page - 'a biannual perspective on economic developments and key challenges in Myanmar', editions Oct 2013 through June 2026, covering the fiscal situation, financial sector and outlook.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "World Bank page states outright that 'The Myanmar Economic Monitor series provides a biannual perspective on economic developments', and the edition list confirms two per year - June and December 2023, 2024, 2025 and June 2026.",
+      "releases_per_year": 2
     },
     {
       "id": "mm-border-trade",
@@ -552,7 +432,7 @@
       "url": "https://commerce.gov.mm/my/export-fiscal-year-region",
       "domains": [
         "proposed:border-trade",
-        "proposed:trade",
+        "trade",
         "proposed:informal"
       ],
       "_cadence_original": "continuous",
@@ -568,35 +448,10 @@
       ],
       "_jurisdiction_level_original": "national / border",
       "last_updated": null,
-      "_url_evidence": "Myanmar Ministry of Commerce table of actual export/import/trade volume by border station for FY2020-21 to FY2024-25, covering 16 stations including Muse, Myawaddy, Chinshwehaw and Kawthaung, in USD millions."
-    },
-    {
-      "id": "mm-batch4-meta",
-      "title": "Myanmar labour–fiscal–border densification meta-node",
-      "publisher": "Derived from labour, fiscal and trade sources",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Meta-node binding labour force statistics, fiscal balance/deficit indicators, and border trade framing into a coherent labour–fiscal–trade layer under constrained conditions.",
-      "url": null,
-      "domains": [
-        "labour",
-        "proposed:fiscal",
-        "proposed:border-trade",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Myanmar-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Poverty, CPI, China trade and BOP series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Myanmar Ministry of Commerce table of actual export/import/trade volume by border station for FY2020-21 to FY2024-25, covering 16 stations including Muse, Myawaddy, Chinshwehaw and Kawthaung, in USD millions.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Ministry of Commerce export-by-region page shows fiscal-year totals for 2020-21 through 2024-25 (latest covering April-June of the mini-budget period). The page notes the underlying customs data is weekly, but the published tables are compiled per fiscal year.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-displacement",
@@ -625,7 +480,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "OCHA Myanmar Humanitarian Needs and Response Plan 2026: 16.2 million people requiring life-saving assistance, ~3.6 million displaced by conflict and earthquake, 4.9 million targeted at USD 890 million."
+      "_url_evidence": "OCHA Myanmar Humanitarian Needs and Response Plan 2026: 16.2 million people requiring life-saving assistance, ~3.6 million displaced by conflict and earthquake, 4.9 million targeted at USD 890 million.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OCHA page is the Myanmar Humanitarian Needs and Response Plan 2026, an annual planning instrument; the text benchmarks itself against the prior year's edition ($890 million requested, a 36 per cent decrease from the $1.4 billion requested in 2025). No explicit frequency statement, but one plan per calendar year.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-rare-earths",
@@ -638,9 +496,8 @@
       "url": "https://www.usgs.gov/centers/national-minerals-information-center/burma",
       "domains": [
         "proposed:rare-earths",
-        "proposed:minerals",
-        "proposed:critical-minerals",
-        "proposed:extractives"
+        "mining",
+        "proposed:critical-minerals"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -655,7 +512,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "USGS National Minerals Information Center country page for Burma (Myanmar) with Minerals Yearbook chapters 1994-2022; states Burma was the world's 4th-ranked rare earths producer (7.1% of global output), 6th in tin (6.8%) and 5th in antimony (3.8%) in 2024."
+      "_url_evidence": "USGS National Minerals Information Center country page for Burma (Myanmar) with Minerals Yearbook chapters 1994-2022; states Burma was the world's 4th-ranked rare earths producer (7.1% of global output), 6th in tin (6.8%) and 5th in antimony (3.8%) in 2024.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "USGS Burma country page lists one Minerals Yearbook country chapter per year for 1994-2015, then 2016, a combined 2017-18, 2019 and a combined 2020-21, with data tables 2002-2021 plus a 2022 tables-only release. Nominally annual, though recent editions are combined and lag by several years; the page states no frequency in words.",
+      "releases_per_year": 1
     },
     {
       "id": "mm-education",
@@ -684,35 +544,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "World Bank Myanmar Monitoring Platform education page describing analysis of trends and disparities in educational outcomes, linking 'Educational Access and Learning Outcomes in Myanmar' and out-of-school children reports."
-    },
-    {
-      "id": "mm-batch5-meta",
-      "title": "Myanmar displacement–minerals–education densification meta-node",
-      "publisher": "Derived from humanitarian, mineral and education sources",
-      "country": "MM",
-      "jurisdiction_level": "federal",
-      "region": "Myanmar",
-      "description": "Meta-node binding internal displacement and humanitarian needs, rare earths/critical minerals framing, and education/learning outcomes into a coherent humanitarian–extractive–human-capital residual layer under constrained conditions.",
-      "url": null,
-      "domains": [
-        "proposed:displacement",
-        "proposed:minerals",
-        "education",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Myanmar-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 5 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Poverty, labour, China trade and extractives series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "World Bank Myanmar Monitoring Platform education page describing analysis of trends and disparities in educational outcomes, linking 'Educational Access and Learning Outcomes in Myanmar' and out-of-school children reports.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "World Bank Myanmar education monitoring brief describes an ongoing study and monitoring effort, not a scheduled series. Only one dated output is shown (State of Education in Myanmar, July 2023) and no frequency is stated."
     }
   ],
   "dependencies": [],
@@ -752,97 +586,49 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
-    "reports_without_url": [
-      "mm-cbm",
-      "mm-batch1-meta",
-      "mm-batch2-meta",
-      "mm-jade",
-      "mm-batch3-meta",
-      "mm-batch4-meta",
-      "mm-batch5-meta"
-    ],
-    "reports_without_url_count": 7,
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
-        "id": "mm-cso",
-        "text": "continuous"
-      },
-      {
         "id": "mm-population",
-        "text": "census cycle + estimates"
-      },
-      {
-        "id": "mm-national-accounts",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "mm-cpi",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "mm-cbm",
-        "text": "continuous"
-      },
-      {
-        "id": "mm-bop",
-        "text": "periodic"
-      },
-      {
-        "id": "mm-agriculture",
-        "text": "annual / seasonal"
+        "title": "Population census and estimates",
+        "kind": "unknown",
+        "basis": "MMSIS population file list shows only 2014 census thematic outputs (e.g. thematic report on population projections 2014-2050), all with the same entry date of 2018-03-22. No periodicity is stated and there is no second census cycle on the page to count from."
       },
       {
         "id": "mm-rice",
-        "text": "seasonal"
+        "title": "Rice production and area statistics",
+        "kind": "unknown",
+        "basis": "FAO GIEWS Country Brief for Myanmar carries only 'Reference Date: 20-February-2026' and an unindexed Archives link. The page states no update cycle and shows no countable list of dated prior briefs, only scattered special reports (2019, 2016, 2009)."
       },
       {
         "id": "mm-gas",
-        "text": "continuous / annual"
-      },
-      {
-        "id": "mm-china-trade",
-        "text": "continuous"
+        "title": "Natural gas production and export statistics",
+        "kind": "unknown",
+        "basis": "IEA Myanmar natural-gas page is static explanatory country-profile content with no data vintage, no publication date and no stated refresh schedule; the only dates present are on unrelated linked reports."
       },
       {
         "id": "mm-poverty",
-        "text": "periodic"
-      },
-      {
-        "id": "mm-exchange-rate",
-        "text": "continuous / daily"
-      },
-      {
-        "id": "mm-jade",
-        "text": "continuous"
-      },
-      {
-        "id": "mm-labour",
-        "text": "periodic / modelled"
-      },
-      {
-        "id": "mm-fiscal",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "mm-border-trade",
-        "text": "continuous"
-      },
-      {
-        "id": "mm-displacement",
-        "text": "continuous / periodic"
-      },
-      {
-        "id": "mm-rare-earths",
-        "text": "continuous"
+        "title": "Poverty and living standards statistics",
+        "kind": "unknown",
+        "basis": "World Bank Myanmar Subnational Phone Surveys page lists reports at irregular intervals - April 2023, May 2023, May 2024, September 2025, June 2026, plus a 2023-24 round technical note - and states no survey or publication frequency; the gaps are uneven, so no cadence can be counted."
       },
       {
         "id": "mm-education",
-        "text": "continuous"
+        "title": "Education and learning outcomes framing",
+        "kind": "unknown",
+        "basis": "World Bank Myanmar education monitoring brief describes an ongoing study and monitoring effort, not a scheduled series. Only one dated output is shown (State of Education in Myanmar, July 2023) and no frequency is stated."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -855,44 +641,12 @@
       "retry_date": "2026-08-18",
       "retry_recovered": 2
     },
-    "not_a_publication": [
-      {
-        "id": "mm-cbm",
-        "title": "Central Bank of Myanmar institutional and reporting core",
-        "finding": "Not a publication - this is an institutional node for the Central Bank of Myanmar itself; additionally cbm.gov.mm, forex.cbm.gov.mm and cbm.gov.mm/content/* are all domain unreachable via WebFetch (robots.txt returns HTTP 503)."
-      },
-      {
-        "id": "mm-batch1-meta",
-        "title": "Myanmar foundational statistical-system meta-node",
-        "finding": "Not a publication - synthesised 'meta-node' binding the CSO/CBM foundation layer; no such document exists."
-      },
-      {
-        "id": "mm-batch2-meta",
-        "title": "Myanmar agriculture–extractives–China densification meta-node",
-        "finding": "Not a publication - synthesised 'meta-node' for the agriculture/extractives/China layer."
-      },
-      {
-        "id": "mm-jade",
-        "title": "Jade and gemstone production / export framing",
-        "finding": "No official jade/gemstone production or export series could be retrieved: myanmargems.gov.mm does not resolve and monrec.gov.mm is domain unreachable via WebFetch; the Ministry of Commerce commodity tables aggregate jade into 'mining products' with no separate line. Largely a synthesised framing node."
-      },
-      {
-        "id": "mm-batch3-meta",
-        "title": "Myanmar poverty–exchange–jade densification meta-node",
-        "finding": "Not a publication - synthesised 'meta-node' for the poverty/exchange-rate/jade layer."
-      },
-      {
-        "id": "mm-batch4-meta",
-        "title": "Myanmar labour–fiscal–border densification meta-node",
-        "finding": "Not a publication - synthesised 'meta-node' for the labour/fiscal/border-trade layer."
-      },
-      {
-        "id": "mm-batch5-meta",
-        "title": "Myanmar displacement–minerals–education densification meta-node",
-        "finding": "Not a publication - synthesised 'meta-node' for the displacement/minerals/education layer."
-      }
-    ],
     "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 7 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_moved_to_archive": "7 nodes removed from this file on 2026-08-18; full records in _archive/mm-myanmar-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 17
+    }
   }
 }

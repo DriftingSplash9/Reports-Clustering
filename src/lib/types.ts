@@ -516,6 +516,24 @@ export type Domain =
   | 'research-innovation'   // added 2026-08-09 (Thomas, D1 2026-08-08 ruling, 'name as is'): first customer eu-horizon-europe and its lineage
   | 'agriculture'           // added 2026-08-09 (Thomas, D1 2026-08-08 ruling, 'name as is'): first customer eu-cap-strategic-plans and its lineage
   | 'external-action'       // added 2026-08-09 (Thomas, D1 2026-08-08 ruling, 'name as is'): first customer eu-ndici-global-europe and its lineage
+  | 'trade'                     // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 349 nodes across the BRICS/Asia/Latin-America import — merchandise trade, exports/imports, FTAs and trade agreements. Was the single largest `proposed:` tag by a wide margin.
+  | 'living-standards'          // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 209 nodes — household income, consumption, social conditions. Distinct from `benefits`, which is a payment; this is the measured condition.
+  | 'public-finance'            // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 200 nodes — budgets, deficits, government debt. `taxation`, `fiscal-transfers` and `municipal-finance` each cover one slice of this and left the general case homeless.
+  | 'industry'                  // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 162 nodes — industrial production, manufacturing output, structural business statistics.
+  | 'energy'                    // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 149 nodes — oil, gas, electricity generation. `energy-royalties` is an Alberta revenue instrument, not a substitute for this.
+  | 'external-sector'           // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 143 nodes — balance of payments, external debt, reserves. Not `external-action`, which is the EU's outward aid instruments.
+  | 'poverty'                   // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 110 nodes — poverty lines, incidence, inequality, food security.
+  | 'investment'                // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 59 nodes — foreign direct investment and investment promotion series.
+  | 'environment'               // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 51 nodes — emissions inventories, climate reporting, land and water.
+  | 'governance'                // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 39 nodes — public administration, justice, crime, defence and security series.
+  | 'development-finance'       // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 64 nodes — concessional lending and development-bank instruments, heavy in the BRICS international layer.
+  | 'services'                  // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 33 nodes — retail, ICT and the digital economy.
+  | 'statistical-system'        // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 31 nodes — statistics acts, methodology standards and the machinery of official statistics itself.
+  | 'infrastructure'            // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 29 nodes — transport, ports, logistics and utilities networks.
+  | 'mining'                    // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 28 nodes — minerals and extractive-industry production.
+  | 'housing'                   // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 34 nodes — housing stock, building permits and real estate.
+  | 'tourism'                   // added 2026-08-18 (Thomas, on reviewing the Grok import's 985 raw tags): 30 nodes — arrivals and tourism revenue.
+  | 'general-statistics'    // added 2026-08-18 (Thomas, on review): general multi-domain statistical compendia — state/provincial yearbooks, district handbooks, 'X in numbers' abstracts. 39 first customers across the Brazil, India and Chile slices, which had no honest tag at all: naming the individual domains a yearbook covers would be asserting content nobody checked.
 
 /** See the cast-not-parsed note under `SOURCE_KINDS`. */
 export const DOMAINS: readonly Domain[] = [
@@ -541,6 +559,24 @@ export const DOMAINS: readonly Domain[] = [
   'research-innovation',
   'agriculture',
   'external-action',
+  'trade',
+  'living-standards',
+  'public-finance',
+  'industry',
+  'energy',
+  'external-sector',
+  'poverty',
+  'investment',
+  'environment',
+  'governance',
+  'development-finance',
+  'services',
+  'statistical-system',
+  'infrastructure',
+  'mining',
+  'housing',
+  'tourism',
+  'general-statistics',
 ]
 
 /**

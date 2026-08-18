@@ -16,7 +16,7 @@
       "2026-08-15_SaudiArabia-batch7-residual.json"
     ],
     "counts": {
-      "reports": 33,
+      "reports": 16,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -36,8 +36,7 @@
       "description": "Primary national statistical office responsible for censuses, surveys, national accounts, prices, labour, demographic and multi-domain socio-economic statistics.",
       "url": "https://www.stats.gov.sa/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -51,7 +50,9 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "GASTAT homepage is the institutional portal, not a publication: it carries a rolling 'إصدارات التقويم الإحصائي' (Statistical Calendar) of forthcoming releases (business statistics June 2026, Umrah Q1 2026, construction cost July 2026, trade June 2026) and a catalogue of 5,758 entries tagged Monthly/Quarterly/Yearly. No single cadence applies to the page itself."
     },
     {
       "id": "sa-population",
@@ -63,9 +64,7 @@
       "description": "Official population census and estimates. Population is approximately 35 million; the structure includes a large non-Saudi workforce and rapid urbanisation under Vision 2030 projects.",
       "url": "https://www.stats.gov.sa/en/w/%D8%A5%D8%AD%D8%B5%D8%A7%D8%A1%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%8A%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%B3%D9%83%D8%A7%D9%86%D9%8A%D8%A9-2024",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "census cycle + estimates",
       "_batch": [
@@ -80,7 +79,10 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "Fetched page titled 'Population Estimates Statistics 2024' on GASTAT's site with Population_Estimates_Publication_2024_EN.pdf/xlsx downloads."
+      "_url_evidence": "Fetched page titled 'Population Estimates Statistics 2024' on GASTAT's site with Population_Estimates_Publication_2024_EN.pdf/xlsx downloads.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "GASTAT 'Population Estimates Statistics 2024' - a year-labelled edition (PDF + Excel) sitting in GASTAT's 'Yearly' periodicity category; the page itself carries no explicit frequency text, but the series is issued one edition per reference year.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-national-accounts",
@@ -93,9 +95,7 @@
       "url": "https://www.stats.gov.sa/en/w/gdp-flash-estimate-q2/2026-1",
       "domains": [
         "national-accounts",
-        "proposed:gdp",
-        "proposed:macro",
-        "proposed:oil"
+        "energy"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -110,7 +110,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched GASTAT 'GDP - Flash Estimate Q2/2026' page, categorised under National Accounts Statistics, with PDF/Excel GDP data."
+      "_url_evidence": "Fetched GASTAT 'GDP - Flash Estimate Q2/2026' page, categorised under National Accounts Statistics, with PDF/Excel GDP data.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "GASTAT 'GDP - Flash Estimate Q2/2026'; page metadata keywords include 'quarterly' and the edition is quarter-labelled, i.e. one flash estimate per quarter.",
+      "releases_per_year": 4
     },
     {
       "id": "sa-cpi",
@@ -122,8 +125,6 @@
       "description": "CPI and inflation rates. Inflation has been moderate in recent periods under the riyal peg and active demand management.",
       "url": "https://www.stats.gov.sa/en/w/consumer-price-index-july-2026-1",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_cadence_original": "monthly",
@@ -143,35 +144,6 @@
       "_url_evidence": "Fetched GASTAT 'Consumer Price Index July 2026' release page under Prices Statistics, with CPI Jul 2026-EN PDF and tables."
     },
     {
-      "id": "sa-sama",
-      "title": "Saudi Central Bank (SAMA) institutional and reporting core",
-      "publisher": "Saudi Central Bank",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Central bank responsible for monetary policy, the riyal peg, foreign-exchange reserves management and key macro-financial and external statistics. Publishes monetary, banking, exchange-rate, BOP and related series.",
-      "url": null,
-      "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Central-bank institutional counterpart to GASTAT. Riyal peg is the monetary anchor.",
-      "_referenced_by": [
-        "BOP, reserves, monetary aggregates",
-        "Inflation and exchange-rate analysis",
-        "Financial stability assessments"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "sa-bop",
       "title": "Balance of Payments and external accounts",
       "publisher": "Saudi Central Bank",
@@ -181,9 +153,8 @@
       "description": "BOP and external-sector statistics. Oil exports dominate the current account; large net foreign assets and reserves are structural features of the external position.",
       "url": "https://www.sama.gov.sa/en-US/Statistics/Pages/MonthlyStatistics.aspx",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:oil"
+        "external-sector",
+        "energy"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -199,32 +170,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Fetched SAMA 'Monthly Bulletin Statistics' page, which states it covers external sector data including balance of payments and international investment position.",
-      "_url_match": "series-level (corroborated)"
-    },
-    {
-      "id": "sa-batch1-meta",
-      "title": "Saudi Arabia foundational statistical-system meta-node",
-      "publisher": "Derived from GASTAT and SAMA sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding the GASTAT institutional core, population, national accounts, CPI, SAMA institutional role and BOP into the opening foundation layer for Saudi research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node. Oil + Vision 2030 diversification will structure subsequent densification.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "SAMA Monthly Bulletin Statistics page: 'The bulletin contains the latest monetary and financial statistics relating to banking activity, the activity of finance companies, payment systems, exchange rates, and interest rates' - a monthly bulletin. This URL is shared with sa-banking, so 12/yr is the shared bulletin's cadence, not two separate series.",
+      "releases_per_year": 12
     },
     {
       "id": "sa-oil-production",
@@ -236,9 +185,8 @@
       "description": "Official statistics on crude oil production. Production is managed under OPEC+ frameworks and remains the dominant real-sector and external-earnings activity; volumes fluctuate with quota and market policy.",
       "url": "https://www.stats.gov.sa/en/d/-oil-and-gas-statistics-2025-en-pdf",
       "domains": [
-        "proposed:oil",
-        "proposed:production",
-        "proposed:energy"
+        "energy",
+        "industry"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -254,7 +202,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Fetched GASTAT document landing page for 'Oil and Gas Statistics 2025 EN.pdf', GASTAT's official oil and gas production publication.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "GASTAT 'Oil and Gas Statistics 2025' is one edition of a year-labelled annual series (2023, 2024 and 2025 editions all published on stats.gov.sa). Shared URL with sa-oil-exports - this is the single annual publication's cadence covering both production and export tables.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-oil-exports",
@@ -266,9 +217,9 @@
       "description": "Official statistics on crude oil export volumes. Oil exports dominate merchandise exports and current-account credits.",
       "url": "https://www.stats.gov.sa/en/d/-oil-and-gas-statistics-2025-en-pdf",
       "domains": [
-        "proposed:oil",
-        "proposed:exports",
-        "proposed:external"
+        "energy",
+        "trade",
+        "external-sector"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -284,7 +235,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Same GASTAT 'Oil and Gas Statistics 2025' publication also carries crude oil export volumes; no separate GASTAT oil-export product page exists.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same document as sa-oil-production: GASTAT 'Oil and Gas Statistics', annual year-labelled editions (2023, 2024, 2025). Export volumes are tables inside that one annual release, so the cadence is the shared series' 1/yr.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-oil-revenue",
@@ -296,9 +250,9 @@
       "description": "Statistics on oil revenues as a share of total budget revenue. Oil remains the largest single revenue source, though non-oil revenue has risen under Vision 2030 fiscal reforms (VAT, fees, etc.).",
       "url": "https://www.mof.gov.sa/en/budget/2026",
       "domains": [
-        "proposed:oil",
-        "proposed:fiscal",
-        "proposed:revenue"
+        "energy",
+        "public-finance",
+        "taxation"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -313,7 +267,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched Ministry of Finance page titled 'Budget Statement 2026' with 'Budget in Numbers' revenue sections."
+      "_url_evidence": "Fetched Ministry of Finance page titled 'Budget Statement 2026' with 'Budget in Numbers' revenue sections.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Saudi Ministry of Finance page is 'Budget Statement FY 2026' with pre-budget and budget statement downloads, one set per fiscal year; no quarterly performance reports appear on this page.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-vision-2030",
@@ -342,35 +299,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched official Vision 2030 page whose title is 'Saudi Vision 2030 - 2025 Annual Report' (the annual progress/diversification report series)."
-    },
-    {
-      "id": "sa-batch2-meta",
-      "title": "Saudi Arabia oil–fiscal–Vision densification meta-node",
-      "publisher": "Derived from energy, finance and Vision 2030 sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding crude oil production, oil exports, oil-revenue fiscal dependence and Vision 2030 non-oil diversification into a coherent oil–fiscal–diversification layer.",
-      "url": null,
-      "domains": [
-        "proposed:oil",
-        "proposed:fiscal",
-        "proposed:vision-2030",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the oil–fiscal–Vision densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, BOP and SAMA series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Fetched official Vision 2030 page whose title is 'Saudi Vision 2030 - 2025 Annual Report' (the annual progress/diversification report series).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "vision2030.gov.sa/en/annual-reports is the Vision 2030 annual report library; the current edition shown is the 2025 Annual Report, one per year.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-labour",
@@ -383,8 +315,7 @@
       "url": "https://www.stats.gov.sa/en/w/labor-market-statistics-q1-2026-1",
       "domains": [
         "labour",
-        "proposed:saudization",
-        "proposed:employment"
+        "proposed:saudization"
       ],
       "_cadence_original": "quarterly",
       "_batch": [
@@ -414,7 +345,7 @@
       "domains": [
         "proposed:pif",
         "proposed:sovereign-fund",
-        "proposed:investment"
+        "investment"
       ],
       "_cadence_original": "continuous / periodic",
       "_batch": [
@@ -429,7 +360,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched Public Investment Fund annual reports page listing Annual Report 2021-2025 PDFs."
+      "_url_evidence": "Fetched Public Investment Fund annual reports page listing Annual Report 2021-2025 PDFs.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PIF annual reports page lists five consecutive editions - 2021, 2022, 2023, 2024, 2025 - described as setting out PIF's 'progress year on year'.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-banking",
@@ -442,7 +376,6 @@
       "url": "https://www.sama.gov.sa/en-US/Statistics/Pages/MonthlyStatistics.aspx",
       "domains": [
         "banking",
-        "proposed:credit",
         "proposed:npl"
       ],
       "_cadence_original": "quarterly / periodic",
@@ -459,64 +392,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Fetched SAMA 'Monthly Bulletin Statistics' page, described as containing monetary and financial statistics on banking activity, finance companies and interest rates.",
-      "_url_match": "series-level (corroborated)"
-    },
-    {
-      "id": "sa-batch3-meta",
-      "title": "Saudi Arabia labour–PIF–banking densification meta-node",
-      "publisher": "Derived from labour, PIF and SAMA sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding labour/Saudization statistics, Public Investment Fund framing, and banking credit/asset-quality statistics into a coherent labour–sovereign-investment–financial layer.",
-      "url": null,
-      "domains": [
-        "labour",
-        "proposed:pif",
-        "banking",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Vision 2030, national accounts and SAMA series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-gcc",
-      "title": "GCC Customs Union and single-market framing",
-      "publisher": "Derived from GCC and national sources",
-      "country": "SA",
-      "jurisdiction_level": "provincial",
-      "region": "GCC",
-      "description": "Framing of Saudi Arabia’s membership in the Gulf Cooperation Council Customs Union and single market. Common external tariff, free movement of goods within the GCC, and coordinated external trade negotiations are structural features of the external regime.",
-      "url": null,
-      "domains": [
-        "proposed:gcc",
-        "proposed:customs-union",
-        "proposed:regional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch4-external.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary regional economic-architecture densification.",
-      "_referenced_by": [
-        "Merchandise trade statistics",
-        "External architecture analysis",
-        "Vision 2030 and logistics discussions"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same SAMA Monthly Bulletin page as sa-bop: the bulletin carrying banking activity, finance-company and payment-system statistics is issued monthly. Shared URL, so this is the one bulletin's cadence.",
+      "releases_per_year": 12
     },
     {
       "id": "sa-trade-partners",
@@ -528,10 +407,8 @@
       "description": "Statistics on major export and import partners. China, the United States, India, Japan, South Korea and EU members feature prominently for oil and non-oil flows; the UAE is the dominant intra-GCC partner for non-oil trade.",
       "url": "https://www.stats.gov.sa/en/w/international-trade-in-goods-may-2026",
       "domains": [
-        "proposed:trade",
-        "proposed:partners",
-        "proposed:exports",
-        "proposed:imports"
+        "trade",
+        "proposed:partners"
       ],
       "_cadence_original": "continuous / monthly",
       "_batch": [
@@ -546,318 +423,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched GASTAT 'International Trade in Goods, May 2026' release page under International Trade Statistics, covering exports/imports and partner countries."
-    },
-    {
-      "id": "sa-external-architecture",
-      "title": "Saudi external economic architecture framing",
-      "publisher": "Derived from trade and diplomatic sources",
-      "country": "SA",
-      "jurisdiction_level": "international",
-      "region": "Saudi Arabia",
-      "description": "System-level framing of Saudi Arabia’s external economic architecture: GCC core, WTO membership, active and negotiated free-trade arrangements (via GCC), bilateral investment and energy relationships, and growing non-oil export orientation under Vision 2030.",
-      "url": null,
-      "domains": [
-        "proposed:external",
-        "proposed:fta",
-        "proposed:architecture"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch4-external.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Overall external-architecture densification.",
-      "_referenced_by": [
-        "GCC and trade-partner nodes",
-        "Oil and non-oil export analysis",
-        "Vision 2030 monitoring"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-batch4-meta",
-      "title": "Saudi Arabia GCC–external densification meta-node",
-      "publisher": "Derived from GCC and trade sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding GCC Customs Union framing, major trade partners, and external economic architecture into a coherent regional and international layer.",
-      "url": null,
-      "domains": [
-        "proposed:gcc",
-        "proposed:external",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch4-external.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the GCC–external densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil exports, BOP and Vision 2030 series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-riyadh",
-      "title": "Riyadh region economic and administrative framing",
-      "publisher": "Derived from GASTAT and regional sources",
-      "country": "SA",
-      "jurisdiction_level": "provincial",
-      "region": "Riyadh",
-      "description": "Framing of Riyadh as the capital and dominant administrative, services, finance and Vision 2030 project centre. Concentrates government, headquarters, and a large share of non-oil private-sector activity.",
-      "url": null,
-      "domains": [
-        "proposed:riyadh",
-        "proposed:regional",
-        "proposed:capital"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch5-regional.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary capital-region densification.",
-      "_referenced_by": [
-        "National accounts and Vision 2030 monitoring",
-        "Labour and Saudization analysis",
-        "PIF and mega-project discussions"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-eastern",
-      "title": "Eastern Province economic and oil framing",
-      "publisher": "Derived from regional and energy sources",
-      "country": "SA",
-      "jurisdiction_level": "provincial",
-      "region": "Eastern Province",
-      "description": "Framing of the Eastern Province as the principal oil and industrial hub. Hosts the bulk of crude production, refining, petrochemicals and a large share of FDI stock; low unemployment and high household incomes relative to other regions.",
-      "url": null,
-      "domains": [
-        "proposed:eastern-province",
-        "proposed:oil",
-        "proposed:regional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch5-regional.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary oil-province densification. Complements the national oil nodes.",
-      "_referenced_by": [
-        "Oil production and export statistics",
-        "National accounts and industrial analysis",
-        "Regional ranking and FDI discussions"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-regional-structure",
-      "title": "Regional economic structure framing",
-      "publisher": "Derived from GASTAT and spatial sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "System-level view of Saudi Arabia’s regional structure: Riyadh as administrative/services core, Eastern Province as oil/industrial core, and secondary poles (Makkah, Madinah, etc.). Continuously cited in Vision 2030 spatial and investment analysis.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:spatial",
-        "proposed:structure"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch5-regional.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Spatial densification frame for the dual capital–oil structure.",
-      "_referenced_by": [
-        "Riyadh and Eastern Province nodes",
-        "Oil, Vision 2030 and labour statistics",
-        "FDI and mega-project discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-batch5-meta",
-      "title": "Saudi Arabia regional densification meta-node",
-      "publisher": "Derived from regional and spatial sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding Riyadh, Eastern Province and regional-structure framing into a coherent provincial densification layer that complements the oil–Vision 2030 cores.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch5-regional.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the regional densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, Vision 2030, labour and PIF series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-neom",
-      "title": "NEOM giga-project framing",
-      "publisher": "Derived from Vision 2030 and project monitoring sources",
-      "country": "SA",
-      "jurisdiction_level": "institutional",
-      "region": "NEOM / northwest",
-      "description": "Framing of NEOM as the flagship Vision 2030 giga-project. Largest share of awarded contracts among the official giga-projects; intended as a new economic and urban pole on the Red Sea / northwest frontier.",
-      "url": null,
-      "domains": [
-        "proposed:neom",
-        "proposed:mega-project",
-        "proposed:vision-2030"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch6-megaprojects.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary flagship mega-project densification.",
-      "_referenced_by": [
-        "Vision 2030 monitoring",
-        "PIF and investment analysis",
-        "Regional and construction discussions"
-      ],
-      "_jurisdiction_level_original": "project / regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-red-sea",
-      "title": "Red Sea Global / tourism mega-project framing",
-      "publisher": "Derived from Vision 2030 and project sources",
-      "country": "SA",
-      "jurisdiction_level": "institutional",
-      "region": "Red Sea coast",
-      "description": "Framing of Red Sea Global and related tourism/luxury destination projects. Core component of the Vision 2030 tourism diversification pillar along the western coast.",
-      "url": null,
-      "domains": [
-        "proposed:red-sea",
-        "proposed:tourism",
-        "proposed:mega-project"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch6-megaprojects.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary tourism mega-project densification.",
-      "_referenced_by": [
-        "Vision 2030 and tourism analysis",
-        "PIF and investment discussions",
-        "Regional western-coast framing"
-      ],
-      "_jurisdiction_level_original": "project / regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-qiddiya",
-      "title": "Qiddiya entertainment mega-project framing",
-      "publisher": "Derived from Vision 2030 and project sources",
-      "country": "SA",
-      "jurisdiction_level": "institutional",
-      "region": "Riyadh area",
-      "description": "Framing of Qiddiya as the principal entertainment, sports and leisure giga-project near Riyadh. Complements the capital-region densification and the Vision 2030 quality-of-life and tourism pillars.",
-      "url": null,
-      "domains": [
-        "proposed:qiddiya",
-        "proposed:entertainment",
-        "proposed:mega-project"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch6-megaprojects.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary capital-area entertainment mega-project densification.",
-      "_referenced_by": [
-        "Vision 2030 and Riyadh regional analysis",
-        "PIF and investment discussions",
-        "Labour and construction analysis"
-      ],
-      "_jurisdiction_level_original": "project / regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-giga-portfolio",
-      "title": "Vision 2030 giga-project portfolio framing",
-      "publisher": "Derived from project monitoring sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "System-level framing of the official and broader giga-project portfolio (NEOM, Diriyah, Qiddiya, ROSHN, Red Sea Global and related). Cumulative awarded contracts exceed USD 100 billion; execution prioritisation and capital discipline have become more selective in recent years.",
-      "url": null,
-      "domains": [
-        "proposed:giga-projects",
-        "proposed:vision-2030",
-        "proposed:investment"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch6-megaprojects.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Overall mega-project portfolio densification under Vision 2030.",
-      "_referenced_by": [
-        "NEOM, Red Sea and Qiddiya nodes",
-        "PIF and fiscal analysis",
-        "Construction and labour discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "sa-batch6-meta",
-      "title": "Saudi Arabia mega-projects densification meta-node",
-      "publisher": "Derived from Vision 2030 and project sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding NEOM, Red Sea Global, Qiddiya and the broader giga-project portfolio into a coherent mega-projects layer under Vision 2030.",
-      "url": null,
-      "domains": [
-        "proposed:mega-projects",
-        "proposed:vision-2030",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch6-megaprojects.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the mega-projects densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Vision 2030, PIF, Riyadh and Eastern Province series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Fetched GASTAT 'International Trade in Goods, May 2026' release page under International Trade Statistics, covering exports/imports and partner countries.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "GASTAT 'International Trade in Goods, May 2026'; page metadata keywords read 'monthly,international trade for goods,2026,may' and editions are month-labelled.",
+      "releases_per_year": 12
     },
     {
       "id": "sa-education",
@@ -886,7 +455,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched GASTAT 'Education and Training Statistics 2025' publication page under Education Statistics, with PDF/Excel downloads."
+      "_url_evidence": "Fetched GASTAT 'Education and Training Statistics 2025' publication page under Education Statistics, with PDF/Excel downloads.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "GASTAT 'Education and Training Statistics 2025'; page metadata keyword is 'yearly' and the edition is year-labelled.",
+      "releases_per_year": 1
     },
     {
       "id": "sa-health",
@@ -914,7 +486,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Fetched WHO Data country page for Saudi Arabia showing 'Life expectancy at birth' and 'Leading causes of death, Saudi Arabia' sections."
+      "_url_evidence": "Fetched WHO Data country page for Saudi Arabia showing 'Life expectancy at birth' and 'Leading causes of death, Saudi Arabia' sections.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "data.who.int country overview for Saudi Arabia is a live interactive data portal; indicators carry mixed data years (2018-2023) and the only date given is an access date ('Accessed on 14 August 2026'), with no stated release cycle."
     },
     {
       "id": "sa-ghg",
@@ -926,9 +500,7 @@
       "description": "National GHG emissions estimates. Energy and oil-related activities dominate the emissions profile; the series is referenced in climate policy, NDC and energy-transition discussions under Vision 2030.",
       "url": "https://di.unfccc.int/ghg_profiles/nonAnnexOne/SAU/SAU_ghg_profile.pdf",
       "domains": [
-        "proposed:ghg",
-        "proposed:climate",
-        "proposed:emissions"
+        "environment"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -945,34 +517,6 @@
       "releases_per_year": 1,
       "last_updated": null,
       "_url_evidence": "Fetched UNFCCC greenhouse gas profile for Saudi Arabia showing total GHG emissions for 1990/2010/2012 by gas and sector."
-    },
-    {
-      "id": "sa-batch7-meta",
-      "title": "Saudi Arabia residual densification meta-node",
-      "publisher": "Derived from education, health and climate sources",
-      "country": "SA",
-      "jurisdiction_level": "federal",
-      "region": "Saudi Arabia",
-      "description": "Meta-node binding education/literacy, life expectancy/health outcomes, and GHG emissions into a coherent human-capital and climate residual layer.",
-      "url": null,
-      "domains": [
-        "education",
-        "health",
-        "proposed:climate",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_SaudiArabia-batch7-residual.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the residual densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Vision 2030, labour and oil series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     }
   ],
   "dependencies": [],
@@ -1015,123 +559,31 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
-    "reports_without_url": [
-      "sa-sama",
-      "sa-batch1-meta",
-      "sa-batch2-meta",
-      "sa-batch3-meta",
-      "sa-gcc",
-      "sa-external-architecture",
-      "sa-batch4-meta",
-      "sa-riyadh",
-      "sa-eastern",
-      "sa-regional-structure",
-      "sa-batch5-meta",
-      "sa-neom",
-      "sa-red-sea",
-      "sa-qiddiya",
-      "sa-giga-portfolio",
-      "sa-batch6-meta",
-      "sa-batch7-meta"
-    ],
-    "reports_without_url_count": 17,
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "sa-gastat",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-population",
-        "text": "census cycle + estimates"
-      },
-      {
-        "id": "sa-national-accounts",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "sa-sama",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-bop",
-        "text": "periodic"
-      },
-      {
-        "id": "sa-oil-production",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "sa-oil-exports",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "sa-oil-revenue",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "sa-vision-2030",
-        "text": "continuous / annual"
-      },
-      {
-        "id": "sa-pif",
-        "text": "continuous / periodic"
-      },
-      {
-        "id": "sa-banking",
-        "text": "quarterly / periodic"
-      },
-      {
-        "id": "sa-gcc",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-trade-partners",
-        "text": "continuous / monthly"
-      },
-      {
-        "id": "sa-external-architecture",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-riyadh",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-eastern",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-regional-structure",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-neom",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-red-sea",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-qiddiya",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-giga-portfolio",
-        "text": "continuous"
-      },
-      {
-        "id": "sa-education",
-        "text": "periodic / annual"
+        "title": "General Authority for Statistics (GASTAT) institutional core",
+        "kind": "continuous-database",
+        "basis": "GASTAT homepage is the institutional portal, not a publication: it carries a rolling 'إصدارات التقويم الإحصائي' (Statistical Calendar) of forthcoming releases (business statistics June 2026, Umrah Q1 2026, construction cost July 2026, trade June 2026) and a catalogue of 5,758 entries tagged Monthly/Quarterly/Yearly. No single cadence applies to the page itself."
       },
       {
         "id": "sa-health",
-        "text": "periodic"
+        "title": "Life expectancy and health outcome statistics",
+        "kind": "continuous-database",
+        "basis": "data.who.int country overview for Saudi Arabia is a live interactive data portal; indicators carry mixed data years (2018-2023) and the only date given is an access date ('Accessed on 14 August 2026'), with no stated release cycle."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1147,94 +599,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "sa-sama",
-        "title": "Saudi Central Bank (SAMA) institutional and reporting core",
-        "finding": "Not a publication: institutional node describing the Saudi Central Bank itself rather than a specific product (SAMA's own section landing pages are JS-rendered and could not be content-confirmed)."
-      },
-      {
-        "id": "sa-batch1-meta",
-        "title": "Saudi Arabia foundational statistical-system meta-node",
-        "finding": "Not a publication: synthesised meta-node binding other nodes into a foundation layer."
-      },
-      {
-        "id": "sa-batch2-meta",
-        "title": "Saudi Arabia oil–fiscal–Vision densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding oil, fiscal and Vision 2030 nodes."
-      },
-      {
-        "id": "sa-batch3-meta",
-        "title": "Saudi Arabia labour–PIF–banking densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding labour, PIF and banking nodes."
-      },
-      {
-        "id": "sa-gcc",
-        "title": "GCC Customs Union and single-market framing",
-        "finding": "Not a publication: framing node about GCC customs-union/single-market membership, not a specific statistical product."
-      },
-      {
-        "id": "sa-external-architecture",
-        "title": "Saudi external economic architecture framing",
-        "finding": "Not a publication: system-level framing node about Saudi external economic architecture."
-      },
-      {
-        "id": "sa-batch4-meta",
-        "title": "Saudi Arabia GCC–external densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding GCC and external-trade nodes."
-      },
-      {
-        "id": "sa-riyadh",
-        "title": "Riyadh region economic and administrative framing",
-        "finding": "Not a publication: geographic/administrative region framing node."
-      },
-      {
-        "id": "sa-eastern",
-        "title": "Eastern Province economic and oil framing",
-        "finding": "Not a publication: geographic/administrative region framing node."
-      },
-      {
-        "id": "sa-regional-structure",
-        "title": "Regional economic structure framing",
-        "finding": "Not a publication: system-level framing node on regional economic structure."
-      },
-      {
-        "id": "sa-batch5-meta",
-        "title": "Saudi Arabia regional densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding the regional framing nodes."
-      },
-      {
-        "id": "sa-neom",
-        "title": "NEOM giga-project framing",
-        "finding": "Not a publication: framing node for a development project/company, with no official statistical publication behind it."
-      },
-      {
-        "id": "sa-red-sea",
-        "title": "Red Sea Global / tourism mega-project framing",
-        "finding": "Not a publication: framing node for a development project/company, with no official statistical publication behind it."
-      },
-      {
-        "id": "sa-qiddiya",
-        "title": "Qiddiya entertainment mega-project framing",
-        "finding": "Not a publication: framing node for a development project/company, with no official statistical publication behind it."
-      },
-      {
-        "id": "sa-giga-portfolio",
-        "title": "Vision 2030 giga-project portfolio framing",
-        "finding": "Not a publication: system-level framing node aggregating giga-project monitoring commentary."
-      },
-      {
-        "id": "sa-batch6-meta",
-        "title": "Saudi Arabia mega-projects densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding the mega-project nodes."
-      },
-      {
-        "id": "sa-batch7-meta",
-        "title": "Saudi Arabia residual densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding education, health and climate nodes."
-      }
-    ],
-    "not_a_publication_note": "These 17 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
     "url_partial_match": [
       {
         "id": "sa-bop",
@@ -1264,6 +628,12 @@
         "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Fetched SAMA 'Monthly Bulletin Statistics' page, described as containing monetary and financial statistics on banking activity, finance companies and interest rates.",
         "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
       }
-    ]
+    ],
+    "not_a_publication_moved_to_archive": "17 nodes removed from this file on 2026-08-18; full records in _archive/sa-saudi-arabia-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 13
+    }
   }
 }

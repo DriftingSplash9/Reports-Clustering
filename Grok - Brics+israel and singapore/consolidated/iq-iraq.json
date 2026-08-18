@@ -18,7 +18,7 @@
       "2026-08-15_Iraq-batch9-residual.json"
     ],
     "counts": {
-      "reports": 43,
+      "reports": 21,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -29,34 +29,6 @@
   },
   "reports": [
     {
-      "id": "iq-cso",
-      "title": "Central Statistical Organization (Iraq) institutional core",
-      "publisher": "Central Statistical Organization",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Primary national statistical office responsible for censuses, surveys, national accounts, prices, labour, demographic and multi-domain socio-economic statistics.",
-      "url": null,
-      "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Foundational institutional node for the Iraqi statistical system.",
-      "_referenced_by": [
-        "All major Iraqi statistical series",
-        "Development and fiscal monitoring",
-        "International statistical cooperation"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "iq-population",
       "title": "Population census and estimates",
       "publisher": "Central Statistical Organization / related",
@@ -66,9 +38,7 @@
       "description": "Official population census and estimates. Population is approximately 47–48 million; the age structure is young and urbanisation is advancing.",
       "url": "https://cosit.gov.iq/ar/pop-main/manpower",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "census cycle + estimates",
       "_batch": [
@@ -83,7 +53,10 @@
       ],
       "_jurisdiction_level_original": "national / governorate",
       "last_updated": null,
-      "_url_evidence": "CSO 'تقديرات السكان' page lists Iraq population estimate reports (2015-2018, 2019, 2020, 2021) and the 2023 demographic composition report."
+      "_url_evidence": "CSO 'تقديرات السكان' page lists Iraq population estimate reports (2015-2018, 2019, 2020, 2021) and the 2023 demographic composition report.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "COSIT population page lists one estimates volume per year - 'تقديرات سكان العراق' for 2019, 2020, 2021, a 2015-2018 combined volume and a 2023 demographic-composition report. No explicit periodicity statement; cadence counted from the consecutive yearly editions.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-national-accounts",
@@ -96,9 +69,7 @@
       "url": "https://cosit.gov.iq/ar/national-accounts/income",
       "domains": [
         "national-accounts",
-        "proposed:gdp",
-        "proposed:macro",
-        "proposed:oil"
+        "energy"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -113,7 +84,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO 'الدخل القومي والناتج المحلي الاجمالي' page lists annual preliminary/actual GDP and national income estimate reports 2014-2025 plus quarterly GDP estimates."
+      "_url_evidence": "CSO 'الدخل القومي والناتج المحلي الاجمالي' page lists annual preliminary/actual GDP and national income estimate reports 2014-2025 plus quarterly GDP estimates.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page carries both annual GDP/national income estimates (2015-2024, e.g. 'التقديرات الاولية السنوية ... 2024') and quarterly products - quarterly GDP preliminary estimates for 2025 and Q1-Q4 early-warning indicators from 2016 onward. Quarterly is the finest stated release cycle, so 4; the headline annual volume appears once a year within that.",
+      "releases_per_year": 4
     },
     {
       "id": "iq-cpi",
@@ -125,8 +99,6 @@
       "description": "CPI and inflation rates. Inflation has been relatively moderate in recent periods compared with some regional peers, but remains sensitive to exchange-rate and supply conditions.",
       "url": "https://cosit.gov.iq/ar/stat-index/index-number/cpi",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_cadence_original": "monthly / periodic",
@@ -142,36 +114,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO consumer price index page lists monthly and annual CPI/inflation reports from 2016 through mid-2026 with Excel tables and metadata."
-    },
-    {
-      "id": "iq-cbi",
-      "title": "Central Bank of Iraq institutional and reporting core",
-      "publisher": "Central Bank of Iraq",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Central bank responsible for monetary policy, foreign-exchange management, reserve management and key macro-financial and external statistics. Publishes monetary, banking, exchange-rate, BOP and related series.",
-      "url": null,
-      "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Central-bank institutional counterpart to the statistical office.",
-      "_referenced_by": [
-        "BOP, reserves, monetary aggregates",
-        "Inflation and exchange-rate analysis",
-        "Financial stability assessments"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CSO consumer price index page lists monthly and annual CPI/inflation reports from 2016 through mid-2026 with Excel tables and metadata.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Archive lists one CPI report per calendar month ('تقرير الارقام القياسية لاسعار المستهلك لشهر كانون الثاني لسنة 2026', February 2025, etc.) running 2016 through 2026, plus a separate annual compilation. Monthly editions are countable on the page.",
+      "releases_per_year": 12
     },
     {
       "id": "iq-bop",
@@ -183,9 +129,8 @@
       "description": "BOP and external-sector statistics. Oil exports dominate the current account; reserve management and FX windows are central policy instruments.",
       "url": "https://cbi.iq/page/145",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:oil"
+        "external-sector",
+        "energy"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -200,32 +145,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI 'بيانات ميزان المدفوعات' page lists annual balance of payments datasets 2000-2025 plus quarterly external-sector data in standard format."
-    },
-    {
-      "id": "iq-batch1-meta",
-      "title": "Iraq foundational statistical-system meta-node",
-      "publisher": "Derived from CSO and CBI sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding the CSO institutional core, population, national accounts, CPI, CBI institutional role and BOP into the opening foundation layer for Iraqi research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node for Iraqi research. Oil dominance will structure subsequent densification.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CBI 'بيانات ميزان المدفوعات' page lists annual balance of payments datasets 2000-2025 plus quarterly external-sector data in standard format.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "CBI balance-of-payments page offers annual BOP datasets for 2000-2012, 2013-2020 and each year 2021-2025, plus quarterly BOP tables for 2021-2024. No stated schedule; quarterly datasets are the finest countable release cycle.",
+      "releases_per_year": 4
     },
     {
       "id": "iq-oil-production",
@@ -237,9 +160,8 @@
       "description": "Official and compiled statistics on crude oil production. Production is in the mid-to-high 4 million barrels per day range in recent readings; federal and Kurdistan Region output are distinguished in detailed monitoring.",
       "url": "https://www.opec.org/opec_web/en/about_us/164.htm",
       "domains": [
-        "proposed:oil",
-        "proposed:production",
-        "proposed:energy"
+        "energy",
+        "industry"
       ],
       "_cadence_original": "monthly",
       "_batch": [
@@ -267,9 +189,9 @@
       "description": "Official statistics on crude oil export volumes and values from southern terminals and other outlets. Oil exports dominate merchandise exports and current-account credits.",
       "url": "https://somooil.gov.iq/annual-summary-chart",
       "domains": [
-        "proposed:oil",
-        "proposed:exports",
-        "proposed:external"
+        "energy",
+        "trade",
+        "external-sector"
       ],
       "_cadence_original": "monthly",
       "_batch": [
@@ -297,9 +219,9 @@
       "description": "Statistics on oil revenues as a share of total federal budget revenue. Oil typically accounts for the large majority of public revenue (recent readings around 84% in early 2026), making the fiscal position highly sensitive to oil prices and export volumes.",
       "url": "https://cbi.iq/static/uploads/up/file-173563991524858.pdf",
       "domains": [
-        "proposed:oil",
-        "proposed:fiscal",
-        "proposed:revenue"
+        "energy",
+        "public-finance",
+        "taxation"
       ],
       "_cadence_original": "monthly / periodic",
       "_batch": [
@@ -315,7 +237,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved and read: the Central Bank of Iraq Statistics and Research Department's Annual Economic Report 2023 (56 pp.), which states that 'oil revenues constitute the largest share of total revenues reaching (90.9%) at an amount of IQD (124.4) trillion' - i.e. exactly the oil-revenue/fiscal-dependence statistic. Reached from the CBI's own publication landing page https://cbi.iq/page/150 ('Economic Report', archive 2003-2025).",
-      "_url_route": "publisher's own site navigation - CBI publication index (cbi.iq/index.php -> /page/150), after mof.gov.iq document lists again failed to render"
+      "_url_route": "publisher's own site navigation - CBI publication index (cbi.iq/index.php -> /page/150), after mof.gov.iq document lists again failed to render",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The linked PDF is the CBI Statistics and Research Department 'Annual Economic Report 2023', which describes itself as part of a series of economic reports the department prepares and publishes annually.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-federal-budget",
@@ -327,9 +252,8 @@
       "description": "Official federal budget realization covering revenues (oil and non-oil), expenditures and the overall balance. Public-sector salaries, pensions and social allocations form a large recurrent share of spending.",
       "url": "https://mof.gov.iq/en/Balance-Archive.aspx",
       "domains": [
-        "proposed:fiscal",
-        "proposed:budget",
-        "proposed:revenue",
+        "public-finance",
+        "taxation",
         "proposed:expenditure"
       ],
       "_cadence_original": "monthly / annual",
@@ -345,63 +269,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Iraqi Ministry of Finance Budget Archive page lists federal budget documents by year (2010-2024)."
-    },
-    {
-      "id": "iq-batch2-meta",
-      "title": "Iraq oil–fiscal densification meta-node",
-      "publisher": "Derived from Oil Ministry and Finance Ministry sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding crude oil production, oil exports, oil-revenue fiscal dependence and federal budget statistics into a coherent oil–fiscal layer that dominates the Iraqi macro structure.",
-      "url": null,
-      "domains": [
-        "proposed:oil",
-        "proposed:fiscal",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the oil–fiscal densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, BOP and CBI series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-krg-oil",
-      "title": "Kurdistan Region oil production and revenue framing",
-      "publisher": "Derived from KRG and federal monitoring sources",
-      "country": "IQ",
-      "jurisdiction_level": "provincial",
-      "region": "Kurdistan Region of Iraq",
-      "description": "Statistics and framing of oil production and sales in the Kurdistan Region. Production has typically been in the 250–350 thousand barrels per day range in recent years; sales arrangements, pricing differentials and federal–KRG revenue sharing are recurring points of contention.",
-      "url": null,
-      "domains": [
-        "proposed:oil",
-        "proposed:kurdistan",
-        "proposed:krg"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary subnational oil densification. Complements federal oil nodes.",
-      "_referenced_by": [
-        "Federal oil production and export statistics",
-        "Federal budget and revenue-sharing analysis",
-        "Political and fiscal discussions"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Iraqi Ministry of Finance Budget Archive page lists federal budget documents by year (2010-2024).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Ministry of Finance Balance Archive lists one entry per fiscal year ('Balance of 2024', 2021, 2019, 2018, 2017, 2016, 2015, 2013, 2012, 2011, 2010). These are annual final-account statements, not monthly realizations; the year list has gaps (no 2014, 2020, 2022-2023 entries).",
+      "releases_per_year": 1
     },
     {
       "id": "iq-wage-bill",
@@ -415,7 +286,7 @@
       "domains": [
         "proposed:wage-bill",
         "proposed:public-employment",
-        "proposed:fiscal"
+        "public-finance"
       ],
       "_cadence_original": "monthly / periodic",
       "_batch": [
@@ -431,7 +302,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved: the Central Bank of Iraq Annual Statistical Bulletin 2024. Its table of contents was read and confirms a public-finance section - Table 31 'State Public Budget' (p.68), Table 32 government budget revenues 2024, Table 33 government budget expenditures 2024, Table 34 'Economic Classification of Public Budget Expenditure for 2024' (pp.74-75, the table carrying compensation of employees) and Table 35 investment budget by sector. Reached from the CBI's own landing page https://cbi.iq/page/142. Note: the companion Annual Economic Report 2023 (same publisher) states explicitly that 'employees' compensation accounted for the largest proportion of total current expenditures reaching (39.9%)'; the bulletin is recorded here as the recurring statistical series. Iraq publishes no separate public-sector employment headcount series that could be confirmed.",
-      "_url_route": "publisher's own site navigation - CBI publication index (cbi.iq/page/142)"
+      "_url_route": "publisher's own site navigation - CBI publication index (cbi.iq/page/142)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The linked PDF is the CBI 'Annual Statistical Bulletin 2024' (النشرة الإحصائية السنوية) from the Department of Research and Statistics, covering calendar 2024 with month-by-month tables. The bulletin itself is annual.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-exchange-rate",
@@ -460,35 +334,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI exchange-rates page lists daily/monthly/annual Iraqi dinar rates against the US dollar and other currencies (1995-2026)."
-    },
-    {
-      "id": "iq-batch3-meta",
-      "title": "Iraq KRG–wage–exchange densification meta-node",
-      "publisher": "Derived from oil, fiscal and CBI sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding Kurdistan Region oil framing, public-sector wage bill statistics and exchange-rate/dinar statistics into a coherent subnational–fiscal–monetary layer.",
-      "url": null,
-      "domains": [
-        "proposed:kurdistan",
-        "proposed:wage-bill",
-        "proposed:exchange",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil production, exports, federal budget and BOP series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CBI exchange-rates page lists daily/monthly/annual Iraqi dinar rates against the US dollar and other currencies (1995-2026).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "CBI FX page hosts series files explicitly labelled daily - 'اسعار صرف الدينار تجاه الدولار الأمريكي (يومي- شهري- سنوي)' and daily dinar rates against major currencies and gold, plus a 1995-2026 currency file. No release schedule is stated in words; business-daily taken from the page's own daily-series labelling.",
+      "releases_per_year": 250
     },
     {
       "id": "iq-banking-system",
@@ -501,7 +350,6 @@
       "url": "https://cbi.iq/page/122",
       "domains": [
         "banking",
-        "proposed:credit",
         "proposed:financial-system"
       ],
       "_cadence_original": "periodic",
@@ -517,7 +365,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI 'النشرة الإحصائية الشهرية' (Monthly Statistical Bulletin) page, the CBI's monetary and banking statistics release including bank balance-sheet and credit aggregates."
+      "_url_evidence": "CBI 'النشرة الإحصائية الشهرية' (Monthly Statistical Bulletin) page, the CBI's monetary and banking statistics release including bank balance-sheet and credit aggregates.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page is headed 'النشرة الإحصائية الشهرية' (Monthly Statistical Bulletin) with a downloadable current data file; the page also cross-references the annual statistical bulletin and quarterly reports as separate products.",
+      "releases_per_year": 12
     },
     {
       "id": "iq-npl",
@@ -546,7 +397,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBI Financial Soundness Indicators page lists FSI reports (2015-2019, 2020, 2021, 2024 first issue), the CBI series carrying NPL and asset-quality ratios."
+      "_url_evidence": "CBI Financial Soundness Indicators page lists FSI reports (2015-2019, 2020, 2021, 2024 first issue), the CBI series carrying NPL and asset-quality ratios.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "CBI 'تقرير مؤشرات السلامة المالية' (financial soundness indicators report) is listed as one edition per year - 2024 (issue 1), 2021, 2020 and a combined 2015-2019 volume. Annual cadence inferred from the edition list; the archive is irregular with gaps (2022-2023 missing).",
+      "releases_per_year": 1
     },
     {
       "id": "iq-labour",
@@ -558,9 +412,7 @@
       "description": "Labour-force participation and unemployment rates. Unemployment is elevated (mid-teens percent range in recent estimates); female and youth rates are substantially higher. Public-sector employment absorbs a large share of formal jobs.",
       "url": "https://www.ilo.org/publications/iraq-labour-force-survey-2021",
       "domains": [
-        "labour",
-        "proposed:employment",
-        "proposed:unemployment"
+        "labour"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -575,320 +427,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "ILO publication page for the Iraq Labour Force Survey 2021, produced with Iraq's CSO and the Kurdistan Region Statistics Office, covering employment, unemployment and labour underutilisation."
-    },
-    {
-      "id": "iq-reconstruction",
-      "title": "Reconstruction and development investment framing",
-      "publisher": "Derived from government and international financial institution sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Policy and investment framing of post-conflict reconstruction, infrastructure rehabilitation and development projects (transport, energy, social services). Continuously cited in fiscal, donor and spatial analysis.",
-      "url": null,
-      "domains": [
-        "proposed:reconstruction",
-        "proposed:investment",
-        "proposed:infrastructure"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-level reconstruction densification.",
-      "_referenced_by": [
-        "Federal budget and investment spending",
-        "Provincial and spatial analysis",
-        "International partnership discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-batch4-meta",
-      "title": "Iraq banking–labour–reconstruction densification meta-node",
-      "publisher": "Derived from CBI, labour and development sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding banking system structure, NPL statistics, labour force and unemployment, and reconstruction framing into a coherent financial–labour–development layer.",
-      "url": null,
-      "domains": [
-        "banking",
-        "labour",
-        "proposed:reconstruction",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Wage bill, oil, fiscal and CBI series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-baghdad",
-      "title": "Baghdad governorate economic and fiscal framing",
-      "publisher": "Derived from fiscal and statistical sources",
-      "country": "IQ",
-      "jurisdiction_level": "provincial",
-      "region": "Baghdad",
-      "description": "Framing of Baghdad as the capital and dominant administrative, services and fiscal centre. Frequently ranks first in total provincial budget allocations and concentrates headquarters, public employment and services activity.",
-      "url": null,
-      "domains": [
-        "proposed:baghdad",
-        "proposed:governorate",
-        "proposed:capital"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch5-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary capital-region densification.",
-      "_referenced_by": [
-        "Federal budget and wage-bill statistics",
-        "National accounts and spatial analysis",
-        "Reconstruction discussions"
-      ],
-      "_jurisdiction_level_original": "governorate",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-basra",
-      "title": "Basra governorate economic and oil framing",
-      "publisher": "Derived from oil and fiscal sources",
-      "country": "IQ",
-      "jurisdiction_level": "provincial",
-      "region": "Basra",
-      "description": "Framing of Basra as the principal southern oil and export hub. Hosts the bulk of federal crude production and export terminals; high fiscal importance and recurrent demands for local resource shares.",
-      "url": null,
-      "domains": [
-        "proposed:basra",
-        "proposed:oil",
-        "proposed:governorate"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch5-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary southern oil-province densification.",
-      "_referenced_by": [
-        "Oil production and export statistics",
-        "Federal budget and revenue-sharing analysis",
-        "Provincial ranking"
-      ],
-      "_jurisdiction_level_original": "governorate",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-erbil",
-      "title": "Erbil governorate / Kurdistan Region economic framing",
-      "publisher": "Derived from KRG and federal sources",
-      "country": "IQ",
-      "jurisdiction_level": "provincial",
-      "region": "Erbil / Kurdistan Region",
-      "description": "Framing of Erbil as the political and commercial centre of the Kurdistan Region. Complements the KRG oil framing with services, trade and administrative activity.",
-      "url": null,
-      "domains": [
-        "proposed:erbil",
-        "proposed:kurdistan",
-        "proposed:governorate"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch5-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary Kurdistan Region urban densification.",
-      "_referenced_by": [
-        "KRG oil framing",
-        "Federal–KRG fiscal discussions",
-        "Spatial and reconstruction analysis"
-      ],
-      "_jurisdiction_level_original": "governorate / regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-governorate-structure",
-      "title": "Governorate and spatial structure framing",
-      "publisher": "Derived from fiscal and statistical sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "System-level view of Iraq’s governorate structure: oil-producing south (Basra and peers), capital concentration (Baghdad), Kurdistan Region autonomy, and lagging or conflict-affected governorates. Continuously cited in fiscal equalisation, reconstruction and disparity analysis.",
-      "url": null,
-      "domains": [
-        "proposed:governorate",
-        "proposed:spatial",
-        "proposed:regional"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch5-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Spatial densification frame for the dual federal–KRG and oil–non-oil structure.",
-      "_referenced_by": [
-        "Baghdad, Basra and Erbil nodes",
-        "Federal budget and oil revenue statistics",
-        "Reconstruction and poverty discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-batch5-meta",
-      "title": "Iraq provincial densification meta-node",
-      "publisher": "Derived from fiscal and spatial sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding Baghdad, Basra, Erbil and governorate-structure framing into a coherent provincial densification layer that complements the oil–fiscal and KRG cores.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:governorate",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch5-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the provincial densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, KRG, wage-bill and reconstruction series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-china-trade",
-      "title": "Iraq–China merchandise trade and cooperation framing",
-      "publisher": "Derived from trade and bilateral sources",
-      "country": "IQ",
-      "jurisdiction_level": "international",
-      "region": "Iraq–China",
-      "description": "Bilateral trade and economic cooperation with China. China is a major destination for Iraqi crude and a large source of imports (machinery, equipment, consumer goods) and infrastructure investment interest.",
-      "url": null,
-      "domains": [
-        "proposed:trade",
-        "proposed:china",
-        "proposed:bilateral"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch6-external.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary Asian bilateral densification.",
-      "_referenced_by": [
-        "Oil export statistics",
-        "BOP and external accounts",
-        "Reconstruction and investment analysis"
-      ],
-      "_jurisdiction_level_original": "bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-turkey-trade",
-      "title": "Iraq–Turkey merchandise trade statistics",
-      "publisher": "Derived from Turkish and Iraqi trade sources",
-      "country": "IQ",
-      "jurisdiction_level": "international",
-      "region": "Iraq–Turkey",
-      "description": "Bilateral trade with Turkey. Turkey is a major source of Iraqi imports (food, construction materials, consumer goods, jewellery) and a destination for some refined products and transit; volumes are large and sensitive to border and security conditions.",
-      "url": null,
-      "domains": [
-        "proposed:trade",
-        "proposed:turkey",
-        "proposed:bilateral"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch6-external.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Primary regional bilateral trade densification.",
-      "_referenced_by": [
-        "Merchandise trade and BOP",
-        "Border and regional analysis",
-        "Reconstruction supply chains"
-      ],
-      "_jurisdiction_level_original": "bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-external-architecture",
-      "title": "Iraq external economic cooperation framing",
-      "publisher": "Ministry of Finance / related",
-      "country": "IQ",
-      "jurisdiction_level": "international",
-      "region": "Iraq",
-      "description": "System-level framing of Iraq’s network of joint economic commissions, bilateral cooperation agreements and preferential arrangements. Continuously cited in trade diversification, investment and reconstruction analysis.",
-      "url": null,
-      "domains": [
-        "proposed:external",
-        "proposed:cooperation",
-        "proposed:agreements"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Iraq-batch6-external.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Overall external-architecture densification beyond pure oil exports.",
-      "_referenced_by": [
-        "China and Turkey trade nodes",
-        "Oil and BOP analysis",
-        "Reconstruction and donor discussions"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-batch6-meta",
-      "title": "Iraq external-partners densification meta-node",
-      "publisher": "Derived from trade and cooperation sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding Iraq–China trade/cooperation, Iraq–Turkey trade, and broader external economic cooperation framing into a coherent external-partners layer.",
-      "url": null,
-      "domains": [
-        "proposed:external",
-        "proposed:trade",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch6-external.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the external densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil exports, BOP and reconstruction series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "ILO publication page for the Iraq Labour Force Survey 2021, produced with Iraq's CSO and the Kurdistan Region Statistics Office, covering employment, unemployment and labour underutilisation.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "ILO page presents a single dated report, the Iraq Labour Force Survey 2021, described as 'the first national Labour Force Survey (LFS) in a decade'. No stated repeat cycle and no prior editions listed, so the page does not establish a frequency."
     },
     {
       "id": "iq-poverty",
@@ -900,9 +441,8 @@
       "description": "Poverty rates and living-standards indicators. Security and living conditions have improved relative to peak-conflict years; poverty reduction has been accompanied by gains in asset ownership and public-service access, though labour-force participation remains low, especially for women.",
       "url": "https://www.cosit.gov.iq/ar/living-conditions-main",
       "domains": [
-        "proposed:poverty",
-        "proposed:living-standards",
-        "proposed:welfare"
+        "poverty",
+        "living-standards"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -917,7 +457,9 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "CSO 'احوال المعيشة' page lists the Iraq Poverty Monitoring and Assessment Survey 2017-2018 and the continuous socio-economic survey."
+      "_url_evidence": "CSO 'احوال المعيشة' page lists the Iraq Poverty Monitoring and Assessment Survey 2017-2018 and the continuous socio-economic survey.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "COSIT living-conditions page lists point-in-time surveys with no periodicity - poverty monitoring survey 2017-2018, cholera survey 2016, continuous socio-economic survey 2014. The only frequency word on the page ('النصف سنوي', semi-annual) attaches to a different continuous socio-economic survey with no year, so the poverty series' own cadence is not stated."
     },
     {
       "id": "iq-education",
@@ -946,7 +488,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO 'التربية والتعليم' page lists annual education statistics reports (kindergarten, primary, secondary, vocational, university) for roughly 2014-2024 with Excel tables."
+      "_url_evidence": "CSO 'التربية والتعليم' page lists annual education statistics reports (kindergarten, primary, secondary, vocational, university) for roughly 2014-2024 with Excel tables.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "COSIT education page lists one report per school year across every category - secondary, university and technical, vocational, postgraduate, primary and kindergarten - running 2015-2016 through 2023-2024 in consecutive academic-year editions.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-health",
@@ -974,7 +519,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "WHO country health data page for Iraq showing life expectancy at birth, healthy life expectancy and mortality/health-system indicators."
+      "_url_evidence": "WHO country health data page for Iraq showing life expectancy at birth, healthy life expectancy and mortality/health-system indicators.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "WHO country data portal for Iraq is an interactive indicator dashboard drawing on Global Health Estimates, the Global Health Expenditure database and WPP, with API download links and no discrete dated edition or stated refresh schedule."
     },
     {
       "id": "iq-ghg",
@@ -986,9 +533,7 @@
       "description": "National GHG emissions estimates. Energy and oil-related activities dominate the emissions profile; the series is referenced in climate and energy-transition discussions.",
       "url": "https://unfccc.int/sites/default/files/resource/Iraq%20BTR%20%209%20September%202025_Final%20English%20Designed.pdf",
       "domains": [
-        "proposed:ghg",
-        "proposed:climate",
-        "proposed:emissions"
+        "environment"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1008,35 +553,6 @@
       "_url_route": "UNFCCC party-submission repository (document PDF; landing page unreachable)"
     },
     {
-      "id": "iq-batch7-meta",
-      "title": "Iraq social–climate densification meta-node",
-      "publisher": "Derived from welfare, education, health and climate sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding poverty and living standards, education enrolment/completion, life expectancy, and GHG emissions into a coherent social and climate residual layer.",
-      "url": null,
-      "domains": [
-        "proposed:poverty",
-        "education",
-        "health",
-        "proposed:climate",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Iraq-batch7-social-climate.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 7 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Labour, wage-bill, oil and reconstruction series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "iq-agriculture",
       "title": "Agriculture production statistics",
       "publisher": "Derived from national and USDA-aligned sources",
@@ -1047,7 +563,6 @@
       "url": "https://www.cosit.gov.iq/ar/agri-stat",
       "domains": [
         "agriculture",
-        "proposed:crops",
         "proposed:food"
       ],
       "_cadence_original": "seasonal / annual",
@@ -1063,7 +578,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO agricultural statistics section describing its annual crop, vegetable, fruit and livestock production surveys, with sub-sections for temporary crops, permanent crops, livestock and the agricultural census."
+      "_url_evidence": "CSO agricultural statistics section describing its annual crop, vegetable, fruit and livestock production surveys, with sub-sections for temporary crops, permanent crops, livestock and the agricultural census.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page is the Agricultural Statistics Directorate description rather than a publication list; it states the directorate runs periodic and annual surveys of the agricultural sector, periodic price indicators and an agricultural census. No dated editions are listed here, so annual is taken from the page's own description of its annual surveys.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-wheat",
@@ -1077,7 +595,7 @@
       "domains": [
         "proposed:wheat",
         "agriculture",
-        "proposed:food-security"
+        "poverty"
       ],
       "_cadence_original": "seasonal",
       "_batch": [
@@ -1092,7 +610,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO temporary-crops page lists the annual 'تقرير الحنطة والشعير' (wheat and barley) production reports for 2016-2025 with accompanying Excel tables."
+      "_url_evidence": "CSO temporary-crops page lists the annual 'تقرير الحنطة والشعير' (wheat and barley) production reports for 2016-2025 with accompanying Excel tables.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Crop-production page lists one report per year, 'تقرير الحنطة و الشعير لسنة X' (wheat and barley report for year X), for 2016 through 2025 in PDF and Excel, alongside parallel annual series for other crops.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-power",
@@ -1104,9 +625,7 @@
       "description": "Installed generation capacity and electricity production statistics. Capacity is in the high-30s GW range; generation relies heavily on gas and thermal plants, with chronic shortfalls relative to peak demand and fuel/availability constraints.",
       "url": "https://www.cosit.gov.iq/ar/industrial/electric-water",
       "domains": [
-        "proposed:power",
-        "proposed:electricity",
-        "proposed:energy"
+        "energy"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1121,65 +640,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO 'مشاريع الماء والكهرباء' page lists annual electricity project statistics reports 2015-2024, noting the data come from the Ministry of Electricity's information centre."
-    },
-    {
-      "id": "iq-defence-budget",
-      "title": "Defence and security expenditure statistics",
-      "publisher": "Derived from budget and international compilations",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Statistics on defence and security spending. Continuously referenced in fiscal, security and post-conflict analysis; security-related outlays form a material share of the federal budget alongside the wage bill.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:security",
-        "proposed:budget"
-      ],
-      "_cadence_original": "annual",
-      "_batch": [
-        "2026-08-15_Iraq-batch8.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core defence-resource node.",
-      "_referenced_by": [
-        "Federal budget statistics",
-        "Reconstruction and security analysis",
-        "Wage-bill and fiscal discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "releases_per_year": 1,
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-batch8-meta",
-      "title": "Iraq agriculture–power–defence densification meta-node",
-      "publisher": "Derived from agricultural, electricity and security sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding agriculture and wheat statistics, electricity generation/capacity, and defence/security expenditure into a coherent primary–energy–security residual layer.",
-      "url": null,
-      "domains": [
-        "agriculture",
-        "proposed:power",
-        "proposed:defence",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Iraq-batch8.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 8 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Oil, fiscal, reconstruction and poverty series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CSO 'مشاريع الماء والكهرباء' page lists annual electricity project statistics reports 2015-2024, noting the data come from the Ministry of Electricity's information centre.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page lists 'احصاء مشاريع الكهرباء لسنة X' (electricity projects statistics for year X) for each year 2015 through 2024, with matching Excel tables; water-project statistics on the same page run 2016-2018 only.",
+      "releases_per_year": 1
     },
     {
       "id": "iq-water",
@@ -1191,7 +655,7 @@
       "description": "Statistics and monitoring on live water storage, reservoir levels and basin inflows. Iraq has experienced severe storage declines and recurrent drought; recent recovery episodes remain partial relative to long-term capacity. Upstream flows and transboundary arrangements are structural constraints.",
       "url": "https://www.cosit.gov.iq/ar/agri-stat/agri-other-3",
       "domains": [
-        "proposed:water",
+        "environment",
         "proposed:drought",
         "proposed:tigris-euphrates"
       ],
@@ -1208,63 +672,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CSO water resources page lists the annual 'تقارير الموارد المائية' reports 2015-2020 with Excel data tables."
-    },
-    {
-      "id": "iq-non-oil",
-      "title": "Non-oil economic structure framing",
-      "publisher": "Derived from national accounts and sector sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Analytical framing of the non-oil economy: manufacturing, construction, trade, transport, agriculture and public services. Non-oil activity is material for employment and domestic absorption but remains secondary to oil in value added and fiscal contribution.",
-      "url": null,
-      "domains": [
-        "proposed:non-oil",
-        "proposed:structure",
-        "proposed:diversification"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_Iraq-batch9-residual.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "System-level counterpart to the oil-dominated core.",
-      "_referenced_by": [
-        "National accounts and oil nodes",
-        "Labour, wage-bill and reconstruction analysis",
-        "Fiscal diversification discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "iq-batch9-meta",
-      "title": "Iraq residual densification meta-node",
-      "publisher": "Derived from water and structural sources",
-      "country": "IQ",
-      "jurisdiction_level": "federal",
-      "region": "Iraq",
-      "description": "Meta-node binding water storage / Tigris-Euphrates statistics and non-oil economic structure framing into a coherent residual environmental and structural layer.",
-      "url": null,
-      "domains": [
-        "proposed:water",
-        "proposed:non-oil",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_Iraq-batch9-residual.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the final residual densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Agriculture, climate, oil and national accounts series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CSO water resources page lists the annual 'تقارير الموارد المائية' reports 2015-2020 with Excel data tables.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page lists 'تقرير الموارد المائية' (water resources report) once per year for 2015, 2016, 2017, 2018, 2019 and 2020, each with a PDF and an Excel table. Series appears dormant - nothing published after the 2020 edition.",
+      "releases_per_year": 1
     }
   ],
   "dependencies": [],
@@ -1309,156 +720,37 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
-    "reports_without_url": [
-      "iq-cso",
-      "iq-cbi",
-      "iq-batch1-meta",
-      "iq-batch2-meta",
-      "iq-krg-oil",
-      "iq-batch3-meta",
-      "iq-reconstruction",
-      "iq-batch4-meta",
-      "iq-baghdad",
-      "iq-basra",
-      "iq-erbil",
-      "iq-governorate-structure",
-      "iq-batch5-meta",
-      "iq-china-trade",
-      "iq-turkey-trade",
-      "iq-external-architecture",
-      "iq-batch6-meta",
-      "iq-batch7-meta",
-      "iq-defence-budget",
-      "iq-batch8-meta",
-      "iq-non-oil",
-      "iq-batch9-meta"
-    ],
-    "reports_without_url_count": 22,
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
-        "id": "iq-cso",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-population",
-        "text": "census cycle + estimates"
-      },
-      {
-        "id": "iq-national-accounts",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "iq-cpi",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "iq-cbi",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-bop",
-        "text": "periodic"
-      },
-      {
-        "id": "iq-oil-revenue",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "iq-federal-budget",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "iq-krg-oil",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-wage-bill",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "iq-exchange-rate",
-        "text": "continuous / daily"
-      },
-      {
-        "id": "iq-banking-system",
-        "text": "periodic"
-      },
-      {
-        "id": "iq-npl",
-        "text": "periodic"
-      },
-      {
         "id": "iq-labour",
-        "text": "periodic"
-      },
-      {
-        "id": "iq-reconstruction",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-baghdad",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-basra",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-erbil",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-governorate-structure",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-china-trade",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-turkey-trade",
-        "text": "continuous"
-      },
-      {
-        "id": "iq-external-architecture",
-        "text": "continuous"
+        "title": "Labour force and unemployment statistics",
+        "kind": "unknown",
+        "basis": "ILO page presents a single dated report, the Iraq Labour Force Survey 2021, described as 'the first national Labour Force Survey (LFS) in a decade'. No stated repeat cycle and no prior editions listed, so the page does not establish a frequency."
       },
       {
         "id": "iq-poverty",
-        "text": "periodic"
-      },
-      {
-        "id": "iq-education",
-        "text": "annual / periodic"
+        "title": "Poverty and living standards statistics",
+        "kind": "unknown",
+        "basis": "COSIT living-conditions page lists point-in-time surveys with no periodicity - poverty monitoring survey 2017-2018, cholera survey 2016, continuous socio-economic survey 2014. The only frequency word on the page ('النصف سنوي', semi-annual) attaches to a different continuous socio-economic survey with no year, so the poverty series' own cadence is not stated."
       },
       {
         "id": "iq-health",
-        "text": "periodic"
-      },
-      {
-        "id": "iq-agriculture",
-        "text": "seasonal / annual"
-      },
-      {
-        "id": "iq-wheat",
-        "text": "seasonal"
-      },
-      {
-        "id": "iq-power",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "iq-water",
-        "text": "continuous / seasonal"
-      },
-      {
-        "id": "iq-non-oil",
-        "text": "continuous"
+        "title": "Life expectancy and health outcome statistics",
+        "kind": "continuous-database",
+        "basis": "WHO country data portal for Iraq is an interactive indicator dashboard drawing on Global Health Estimates, the Global Health Expenditure database and WPP, with API download links and no discrete dated edition or stated refresh schedule."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1471,119 +763,12 @@
       "retry_date": "2026-08-18",
       "retry_recovered": 3
     },
-    "not_a_publication": [
-      {
-        "id": "iq-cso",
-        "title": "Central Statistical Organization (Iraq) institutional core",
-        "finding": "Not a publication - this is an institution (Iraq's Central Statistical Organization) rather than a specific publication or series."
-      },
-      {
-        "id": "iq-cbi",
-        "title": "Central Bank of Iraq institutional and reporting core",
-        "finding": "Not a publication - this is an institution (the Central Bank of Iraq) rather than a specific publication or series."
-      },
-      {
-        "id": "iq-batch1-meta",
-        "title": "Iraq foundational statistical-system meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding other corpus items into a foundation layer."
-      },
-      {
-        "id": "iq-batch2-meta",
-        "title": "Iraq oil–fiscal densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding the oil-fiscal corpus items."
-      },
-      {
-        "id": "iq-krg-oil",
-        "title": "Kurdistan Region oil production and revenue framing",
-        "finding": "Not a publication - a synthesised framing of KRG oil production/revenue; the KRG Ministry of Natural Resources site (mnr.krg.org) was also unreachable via WebFetch."
-      },
-      {
-        "id": "iq-batch3-meta",
-        "title": "Iraq KRG–wage–exchange densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding KRG, wage-bill and exchange-rate items."
-      },
-      {
-        "id": "iq-reconstruction",
-        "title": "Reconstruction and development investment framing",
-        "finding": "Not a publication - a synthesised policy/investment framing of reconstruction and development, not a specific report or series."
-      },
-      {
-        "id": "iq-batch4-meta",
-        "title": "Iraq banking–labour–reconstruction densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding banking, labour and reconstruction items."
-      },
-      {
-        "id": "iq-baghdad",
-        "title": "Baghdad governorate economic and fiscal framing",
-        "finding": "Not a publication - a geographic/administrative framing of Baghdad governorate."
-      },
-      {
-        "id": "iq-basra",
-        "title": "Basra governorate economic and oil framing",
-        "finding": "Not a publication - a geographic/administrative framing of Basra governorate."
-      },
-      {
-        "id": "iq-erbil",
-        "title": "Erbil governorate / Kurdistan Region economic framing",
-        "finding": "Not a publication - a geographic/administrative framing of Erbil governorate and the Kurdistan Region."
-      },
-      {
-        "id": "iq-governorate-structure",
-        "title": "Governorate and spatial structure framing",
-        "finding": "Not a publication - a synthesised system-level framing of Iraq's governorate/spatial structure."
-      },
-      {
-        "id": "iq-batch5-meta",
-        "title": "Iraq provincial densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding the provincial framing items."
-      },
-      {
-        "id": "iq-china-trade",
-        "title": "Iraq–China merchandise trade and cooperation framing",
-        "finding": "Not a publication - a synthesised bilateral trade and cooperation framing, not a specific statistical release."
-      },
-      {
-        "id": "iq-turkey-trade",
-        "title": "Iraq–Turkey merchandise trade statistics",
-        "finding": "Not a publication - a synthesised bilateral trade framing, not a specific statistical release."
-      },
-      {
-        "id": "iq-external-architecture",
-        "title": "Iraq external economic cooperation framing",
-        "finding": "Not a publication - a synthesised framing of Iraq's joint commissions and cooperation agreements."
-      },
-      {
-        "id": "iq-batch6-meta",
-        "title": "Iraq external-partners densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding the external-partners items."
-      },
-      {
-        "id": "iq-batch7-meta",
-        "title": "Iraq social–climate densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding the social and climate items."
-      },
-      {
-        "id": "iq-batch8-meta",
-        "title": "Iraq agriculture–power–defence densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding agriculture, power and defence items."
-      },
-      {
-        "id": "iq-non-oil",
-        "title": "Non-oil economic structure framing",
-        "finding": "Not a publication - a synthesised analytical framing of the non-oil economy."
-      },
-      {
-        "id": "iq-batch9-meta",
-        "title": "Iraq residual densification meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding water and non-oil structural items."
-      },
-      {
-        "id": "iq-defence-budget",
-        "title": "Defence and security expenditure statistics",
-        "finding": "Still not found, and largely ineligible as framed. No Iraqi official landing page for defence/security expenditure statistics exists: oil.gov.iq is irrelevant here, and the Ministry of Finance's own document listings (Balance-Archive.aspx, Budget-implementation-Archive.aspx, Annual-Books.aspx) were all fetched successfully this time but render only chrome and navigation - the ASP.NET document lists are not served to a plain fetch, so no budget-law annex with ministry-level defence allocations could be retrieved and verified. The CBI Annual Statistical Bulletin's expenditure tables are economic-classification, not functional/ministerial. The remaining figures in circulation are SIPRI-style international estimates, which are not a government publication."
-      }
-    ],
     "url_unreachable_or_not_published": [],
-    "not_a_publication_note": "These 21 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_moved_to_archive": "22 nodes removed from this file on 2026-08-18; full records in _archive/iq-iraq-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 18
+    }
   }
 }

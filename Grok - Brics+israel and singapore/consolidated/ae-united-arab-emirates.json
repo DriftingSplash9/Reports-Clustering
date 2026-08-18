@@ -19,7 +19,7 @@
       "2026-08-15_UAE-batch9.json"
     ],
     "counts": {
-      "reports": 41,
+      "reports": 26,
       "dependencies": 0,
       "dropped_notes": 31
     },
@@ -40,8 +40,7 @@
       "description": "Primary federal statistical office responsible for national accounts, prices, demographic, social and multi-domain statistics, and coordination with emirate-level statistical centres.",
       "url": "https://fcsc.gov.ae/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -55,7 +54,9 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "fcsc.gov.ae is a dataset portal: subjects are catalogued with coverage ranges (Annual National Accounts 2010-2025, CPI 2008-2025, Births 1976-2024, Air Transport 2014-2025, Climate January 2016-December 2024) rather than as issues. The site publishes no release calendar; the only schedule statement is that data 'will be updated following the official release of the review results' of the ongoing GDP review."
     },
     {
       "id": "ae-population",
@@ -67,8 +68,7 @@
       "description": "Official population estimates. Population is approximately 10 million; the structure includes a large majority of non-nationals and high urban concentration in Dubai and Abu Dhabi.",
       "url": "https://fcsc.gov.ae/uae/population-2/",
       "domains": [
-        "population",
-        "proposed:demography"
+        "population"
       ],
       "_cadence_original": "estimates / periodic",
       "_batch": [
@@ -100,7 +100,9 @@
       ],
       "_jurisdiction_level_original": "national / emirate",
       "last_updated": null,
-      "_url_evidence": "FCSC page titled 'Population Estimates - FCSC - Federal Competitiveness And Statistics Center', the official UAE population estimates series page."
+      "_url_evidence": "FCSC page titled 'Population Estimates - FCSC - Federal Competitiveness And Statistics Center', the official UAE population estimates series page.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "fcsc.gov.ae/uae/population-2/ renders only as a titled landing page ('Population Estimates') plus text about the RASMI data-accreditation initiative. No population documents, no coverage years and no release frequency appear on the page."
     },
     {
       "id": "ae-national-accounts",
@@ -112,9 +114,7 @@
       "description": "Official national accounts (GDP). The economy combines hydrocarbon production (concentrated in Abu Dhabi) with a large diversified non-oil services, logistics, tourism and finance base (concentrated in Dubai and other emirates).",
       "url": "https://fcsc.gov.ae/uae-stats-document/national-accounts/",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -147,7 +147,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "FCSC statistical document page titled '2010 - 2025 - National Accounts', the official UAE national accounts/GDP series."
+      "_url_evidence": "FCSC statistical document page titled '2010 - 2025 - National Accounts', the official UAE national accounts/GDP series.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "FCSC's statistics-by-subject listing carries 'Annual National Accounts 2010 - 2025' alongside 'Quarterly National Accounts 2012 - 2026'; the national-accounts document page itself is titled '2010 - 2025, 2010 - 2025 - National Accounts'. The quarterly series is the highest-frequency release, running through 2026.",
+      "releases_per_year": 4
     },
     {
       "id": "ae-cpi",
@@ -159,8 +162,6 @@
       "description": "CPI and inflation rates. Inflation has generally been moderate under the dirham peg and active demand management.",
       "url": "https://fcsc.gov.ae/uae-stats-document/prices-cpi/",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_cadence_original": "monthly",
@@ -207,9 +208,7 @@
       "description": "Central bank responsible for monetary policy, the dirham peg, foreign-exchange reserves management, banking supervision and key macro-financial and external statistics. Publishes monetary, banking, BOP and related series.",
       "url": "https://www.centralbank.ae/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
+        "monetary-policy"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -223,7 +222,10 @@
         "Financial stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "CBUAE site lists its reporting stack by frequency: monthly Statistical Bulletin (banking and monetary statistics), monthly 'Monetary & Banking Developments' summary and banking-operations statistics; quarterly 'UAE Monetary, Banking & Financial Markets Developments', Quarterly Economic Review and Credit Sentiment Survey; annual Central Bank Annual Report (2025 report issued April 2026) and Financial Stability Report. Monthly is the governing cadence.",
+      "releases_per_year": 12
     },
     {
       "id": "ae-bop",
@@ -235,8 +237,7 @@
       "description": "BOP and external-sector statistics. Large current-account surpluses are structural, driven by hydrocarbon and services exports; significant net acquisition of external financial assets is a persistent feature.",
       "url": "https://www.centralbank.ae/en/research-and-statistics/",
       "domains": [
-        "proposed:bop",
-        "proposed:external"
+        "external-sector"
       ],
       "_cadence_original": "periodic",
       "_batch": [
@@ -268,32 +269,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "CBUAE Research and Statistics page stating the department 'compiles and distributes statistics related to banking, monetary, insurance and balance of payments'; the UAE National Summary Data Page names this exact URL as the Balance of Payments browse link."
-    },
-    {
-      "id": "ae-batch1-meta",
-      "title": "UAE foundational statistical-system meta-node",
-      "publisher": "Derived from FCSC and CBUAE sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Meta-node binding the FCSC institutional core, population, national accounts, CPI, CBUAE institutional role and BOP into the opening foundation layer for UAE research.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node. Hydrocarbon + diversified services/logistics structure will guide subsequent densification.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "CBUAE Research and Statistics page stating the department 'compiles and distributes statistics related to banking, monetary, insurance and balance of payments'; the UAE National Summary Data Page names this exact URL as the Balance of Payments browse link.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The CBUAE research-and-statistics page names balance of payments only as a responsibility of the Data and Statistics Centre ('compiling and distributing statistics related to banking, monetary, insurance and balance of payments'). No BOP editions, reference periods or periodicity are stated; the only frequency wording on the page is for the annual MSME Business Survey Report."
     },
     {
       "id": "int-opec-momr",
@@ -305,8 +283,8 @@
       "description": "Flagship recurring publication of OPEC. Provides assessments of crude oil prices (including the OPEC Reference Basket), world oil demand and supply, non-DoC liquids production, and related market analysis. Continues to be published after the UAE’s May 2026 departure.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:energy",
-        "proposed:trade",
+        "energy",
+        "trade",
         "external-action"
       ],
       "url": "https://momr.opec.org/",
@@ -314,44 +292,6 @@
         "2026-08-15_UAE-batch10-opec.json"
       ],
       "last_updated": null
-    },
-    {
-      "id": "int-opec-plus-framing",
-      "title": "OPEC+ / Declaration of Cooperation production-policy framing",
-      "publisher": "Derived from OPEC and monitoring sources",
-      "country": "INT",
-      "jurisdiction_level": "international",
-      "region": "International",
-      "description": "System-level framing of the OPEC+ (Declaration of Cooperation) production-policy architecture. Core members continue to set output adjustments that influence global crude supply and price formation. UAE departure in May 2026 reduced the group’s share of world production and capacity but did not eliminate the mechanism.",
-      "domains": [
-        "proposed:energy",
-        "external-action"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch10-opec.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ae-opec-exit",
-      "title": "UAE exit from OPEC (May 2026)",
-      "publisher": "Derived from official and monitoring sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "One-off foundational event: the United Arab Emirates announced its departure from OPEC effective 1 May 2026. The exit reduced OPEC’s and OPEC+’s share of global crude production and capacity; the UAE retains independent production and export policy while remaining a major global supplier.",
-      "domains": [
-        "proposed:energy",
-        "external-action"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch10-opec.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
     },
     {
       "id": "ae-oil",
@@ -363,10 +303,9 @@
       "description": "Statistics on crude oil and condensate production and exports. Production is concentrated in Abu Dhabi; export volumes are large and responsive to OPEC+ and market conditions. Hydrocarbons remain a core current-account and fiscal contributor alongside the diversified non-oil base.",
       "url": "https://fcsc.gov.ae/uae-stats-document/oil-and-gas/",
       "domains": [
-        "proposed:oil",
-        "proposed:production",
-        "proposed:exports",
-        "proposed:energy"
+        "energy",
+        "industry",
+        "trade"
       ],
       "_cadence_original": "continuous / monthly",
       "_batch": [
@@ -382,37 +321,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "FCSC statistical document page titled 'Oil and Gas' carrying national oil and gas production data for 2009-2024.",
-      "_url_match": "series-level (corroborated)"
-    },
-    {
-      "id": "ae-sovereign-funds",
-      "title": "Sovereign wealth funds framing (ADIA, Mubadala)",
-      "publisher": "Derived from fund and official sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Framing of the major Abu Dhabi sovereign investment vehicles (ADIA, Mubadala and related). Multi-hundred-billion-dollar asset bases; dual role in international portfolio investment and domestic diversification under national strategies.",
-      "url": null,
-      "domains": [
-        "proposed:sovereign-fund",
-        "proposed:adia",
-        "proposed:mubadala",
-        "proposed:investment"
-      ],
-      "_cadence_original": "continuous / periodic",
-      "_batch": [
-        "2026-08-15_UAE-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Highest-centrality sovereign-investment densification node.",
-      "_referenced_by": [
-        "National accounts and investment statistics",
-        "Diversification and Vision analysis",
-        "External asset and BOP discussions"
-      ],
-      "_jurisdiction_level_original": "national / emirate",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The FCSC oil-and-gas document page enumerates single-year editions - 2024, 2023, 2022, 2020 - alongside cumulative series tables (2009-2013, 2009-2015, 2009-2016, 2009-2017, 2009-2018, 2010-2019); FCSC's subject index lists the set as 'Oil and Gas 2009 - 2024'. Coverage years are annual, one edition per year.",
+      "releases_per_year": 1
     },
     {
       "id": "ae-labour",
@@ -441,123 +353,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "FCSC page titled '2024, 2023, ... 2008 - Labor Force', the official UAE labour force statistics series."
-    },
-    {
-      "id": "ae-batch2-meta",
-      "title": "UAE oil–sovereign–labour densification meta-node",
-      "publisher": "Derived from energy, fund and labour sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Meta-node binding oil production/exports, sovereign wealth fund framing, and labour/expatriate statistics into a coherent hydrocarbon–investment–labour layer.",
-      "url": null,
-      "domains": [
-        "proposed:oil",
-        "proposed:sovereign-fund",
-        "labour",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 2 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, BOP and CBUAE series from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ae-dubai",
-      "title": "Dubai economic and logistics framing",
-      "publisher": "Derived from FCSC and Dubai monitoring sources",
-      "country": "AE",
-      "jurisdiction_level": "provincial",
-      "region": "Dubai",
-      "description": "Framing of Dubai as the principal non-oil, services, logistics, tourism and finance hub. Dominates container throughput (Jebel Ali), visitor arrivals, trade facilitation and private-sector services activity within the federation.",
-      "url": null,
-      "domains": [
-        "proposed:dubai",
-        "proposed:logistics",
-        "proposed:tourism",
-        "proposed:finance"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_UAE-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary Dubai densification. Complements the federal non-oil structure.",
-      "_referenced_by": [
-        "National accounts and non-oil GDP",
-        "Ports and trade statistics",
-        "Tourism and labour analysis"
-      ],
-      "_jurisdiction_level_original": "emirate",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ae-abu-dhabi",
-      "title": "Abu Dhabi economic and hydrocarbon framing",
-      "publisher": "Derived from FCSC and Abu Dhabi sources",
-      "country": "AE",
-      "jurisdiction_level": "provincial",
-      "region": "Abu Dhabi",
-      "description": "Framing of Abu Dhabi as the principal hydrocarbon, sovereign-wealth and capital emirate. Hosts the bulk of oil and gas production, ADNOC, ADIA/Mubadala and the federal capital functions.",
-      "url": null,
-      "domains": [
-        "proposed:abu-dhabi",
-        "proposed:oil",
-        "proposed:sovereign-fund"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-15_UAE-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Primary Abu Dhabi densification. Complements the federal hydrocarbon core.",
-      "_referenced_by": [
-        "Oil production and export statistics",
-        "Sovereign wealth fund framing",
-        "National accounts and fiscal analysis"
-      ],
-      "_jurisdiction_level_original": "emirate",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ae-ports",
-      "title": "Ports and container throughput statistics",
-      "publisher": "Derived from DP World and logistics sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Statistics on container and cargo throughput, centred on Jebel Ali and other UAE ports. The UAE is a major global transshipment and logistics node; throughput is continuously referenced in trade, diversification and regional-hub analysis.",
-      "url": null,
-      "domains": [
-        "proposed:ports",
-        "proposed:logistics",
-        "proposed:trade"
-      ],
-      "_cadence_original": "continuous / quarterly",
-      "_batch": [
-        "2026-08-15_UAE-batch3.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core logistics densification under global-hub structure.",
-      "_referenced_by": [
-        "Merchandise trade and BOP",
-        "Dubai economic framing",
-        "External and GCC discussions"
-      ],
-      "_jurisdiction_level_original": "national / emirate",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "FCSC page titled '2024, 2023, ... 2008 - Labor Force', the official UAE labour force statistics series.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The FCSC labour-force document page title enumerates per-year documents: 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2009, 2008; FCSC's subject index lists it as 'Labour Force 2008 - 2024'. One statistical document per reference year.",
+      "releases_per_year": 1
     },
     {
       "id": "ae-tourism",
@@ -569,9 +368,9 @@
       "description": "Statistics on overnight visitor arrivals and tourism performance. Dubai is the dominant destination; multi-million annual arrivals support a large hospitality, retail and transport services base.",
       "url": "https://www.dubaidet.gov.ae/en/research-and-insights/annual-visitor-report-2024",
       "domains": [
-        "proposed:tourism",
+        "tourism",
         "proposed:visitors",
-        "proposed:services"
+        "services"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -586,36 +385,10 @@
       ],
       "_jurisdiction_level_original": "national / emirate",
       "last_updated": null,
-      "_url_evidence": "Dubai Department of Economy and Tourism 'Annual Visitor Report 2024' page in DET's official Reports & Resources section."
-    },
-    {
-      "id": "ae-batch3-meta",
-      "title": "UAE Dubai–Abu Dhabi–logistics–tourism densification meta-node",
-      "publisher": "Derived from emirate and sector sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Meta-node binding Dubai framing, Abu Dhabi framing, ports/logistics statistics and tourism statistics into a coherent dual-emirate and services-hub layer.",
-      "url": null,
-      "domains": [
-        "proposed:dubai",
-        "proposed:abu-dhabi",
-        "proposed:logistics",
-        "proposed:tourism",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, oil, labour and BOP series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Dubai Department of Economy and Tourism 'Annual Visitor Report 2024' page in DET's official Reports & Resources section.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Dubai Department of Economy and Tourism page is titled 'Annual Visitor Report 2024' - the word 'Annual' plus a single reference year identifies a yearly edition. No monthly product or other cadence is referenced on the page.",
+      "releases_per_year": 1
     },
     {
       "id": "ae-monetary-statistics",
@@ -720,7 +493,7 @@
       "description": "Statistics on crude oil and condensate production and export volumes. Production is concentrated in Abu Dhabi; export volumes are large and respond to OPEC+ and market conditions. Hydrocarbons remain a core contributor to the current account and fiscal position.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:energy",
+        "energy",
         "national-accounts"
       ],
       "url": "https://fcsc.gov.ae/uae-stats-document/oil-and-gas/",
@@ -741,7 +514,7 @@
       "description": "Official statistics on overnight visitor arrivals to Dubai and related tourism performance indicators (occupancy, source markets). Dubai is the dominant tourism destination within the UAE.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:tourism"
+        "tourism"
       ],
       "url": "https://www.dubaidet.gov.ae/en/research-and-insights/tourism-performance-report-december-2025",
       "_batch": [
@@ -759,8 +532,8 @@
       "description": "Container and cargo throughput statistics centred on Jebel Ali Port. The UAE is a major global transshipment and logistics node; throughput is a key indicator of the non-oil trade and logistics economy.",
       "releases_per_year": 4,
       "domains": [
-        "proposed:logistics",
-        "proposed:trade"
+        "infrastructure",
+        "trade"
       ],
       "url": "https://www.dpworld.com/",
       "source_kind": "commercial",
@@ -768,45 +541,6 @@
         "2026-08-15_UAE-batch6.json"
       ],
       "last_updated": null
-    },
-    {
-      "id": "ae-dubai-framing",
-      "title": "Dubai non-oil services and logistics hub framing",
-      "publisher": "Derived from FCSC and Dubai official sources",
-      "country": "AE",
-      "jurisdiction_level": "provincial",
-      "region": "United Arab Emirates — Dubai",
-      "description": "Analytical framing of Dubai as the principal non-oil services, logistics, tourism and finance hub within the UAE federation.",
-      "domains": [
-        "proposed:logistics",
-        "proposed:tourism",
-        "national-accounts"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch6.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ae-abu-dhabi-framing",
-      "title": "Abu Dhabi hydrocarbon and sovereign-wealth hub framing",
-      "publisher": "Derived from FCSC and Abu Dhabi official sources",
-      "country": "AE",
-      "jurisdiction_level": "provincial",
-      "region": "United Arab Emirates — Abu Dhabi",
-      "description": "Analytical framing of Abu Dhabi as the principal hydrocarbon producer, sovereign-wealth centre and federal capital.",
-      "domains": [
-        "proposed:energy",
-        "national-accounts"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch6.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
     },
     {
       "id": "ae-gcc-trade",
@@ -818,7 +552,7 @@
       "description": "Statistics on merchandise trade between the UAE and other GCC member states. Total trade volume reached AED 333 billion in 2024; re-exports form a large share. Reflects the UAE’s position inside the GCC Customs Union and Common Market.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:trade",
+        "trade",
         "external-action"
       ],
       "url": "https://mof.gov.ae/en/news/ministry-of-finance-intensifies-efforts-to-complete-the-customs-union-and-implement-gcc-common-market-tracks/",
@@ -866,25 +600,6 @@
       "last_updated": null
     },
     {
-      "id": "ae-gcc-framing",
-      "title": "GCC Customs Union and Common Market framing",
-      "publisher": "Derived from Ministry of Finance and GCC sources",
-      "country": "AE",
-      "jurisdiction_level": "supranational",
-      "region": "GCC",
-      "description": "Framing of the UAE’s membership in the GCC Customs Union and Common Market. Common external tariff, free movement of goods, and ongoing work to complete remaining Customs Union requirements are structural features of the external trade regime.",
-      "domains": [
-        "external-action",
-        "proposed:trade"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch7.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "ae-mubadala",
       "title": "Mubadala Investment Company assets under management and performance",
       "publisher": "Mubadala Investment Company",
@@ -894,7 +609,7 @@
       "description": "Annual reporting of assets under management, capital deployment, proceeds and long-term returns for Mubadala, one of Abu Dhabi’s major sovereign investment vehicles. AUM reached AED 1.4 trillion (US$385 billion) in 2025.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:investment",
+        "investment",
         "national-accounts"
       ],
       "url": "https://www.mubadala.com/en/news/strong-performance-by-uae-portfolio-drives-mubadalas-growth-in-2025",
@@ -934,7 +649,7 @@
       "description": "Statistics on major export and import partners. China, India, Japan, the United States, Saudi Arabia and others feature prominently; crude petroleum, gold and refined petroleum dominate exports while gold, telephones and cars feature among top imports.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:trade",
+        "trade",
         "external-action"
       ],
       "url": "https://fcsc.gov.ae/uae-stats-document/commodities-trade/",
@@ -943,44 +658,6 @@
       ],
       "last_updated": null,
       "_url_evidence": "FCSC page titled 'Commodities Trade' with UAE merchandise trade statistics 2000-2025 (annual and 3/6/9-month, general and special systems)."
-    },
-    {
-      "id": "ae-sovereign-framing",
-      "title": "Abu Dhabi sovereign wealth architecture framing (ADIA, Mubadala, related)",
-      "publisher": "Derived from fund and official sources",
-      "country": "AE",
-      "jurisdiction_level": "provincial",
-      "region": "United Arab Emirates — Abu Dhabi",
-      "description": "System-level framing of the major Abu Dhabi sovereign investment vehicles. Multi-hundred-billion-dollar asset bases; dual role in international portfolio investment and domestic diversification.",
-      "domains": [
-        "proposed:investment",
-        "national-accounts"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch8.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "ae-adia-framing",
-      "title": "Abu Dhabi Investment Authority (ADIA) sovereign wealth framing",
-      "publisher": "Derived from ADIA and secondary monitoring sources",
-      "country": "AE",
-      "jurisdiction_level": "institutional",
-      "region": "United Arab Emirates — Abu Dhabi",
-      "description": "Framing of ADIA as Abu Dhabi’s traditional long-term sovereign wealth fund. Estimated assets under management in the order of US$1 trillion; invests primarily outside the UAE and is a core vehicle for intergenerational management of hydrocarbon surpluses.",
-      "domains": [
-        "proposed:investment",
-        "national-accounts"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch9.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
     },
     {
       "id": "ae-renewables",
@@ -992,8 +669,8 @@
       "description": "Statistics on installed renewable energy capacity. Capacity reached approximately 7.9 GW in 2025, driven primarily by solar PV; the UAE has a longer-term target of 23 GW by 2031.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:energy",
-        "proposed:climate"
+        "energy",
+        "environment"
       ],
       "url": "https://fcsc.gov.ae/uae-stats-document/renewable-energy/",
       "_batch": [
@@ -1012,7 +689,7 @@
       "description": "Official climate transparency and NDC progress reporting submitted under the UNFCCC framework (Biennial Transparency Report and related common tabular formats).",
       "releases_per_year": 0.5,
       "domains": [
-        "proposed:climate",
+        "environment",
         "external-action"
       ],
       "url": "https://unfccc.int/documents/654338",
@@ -1020,26 +697,6 @@
         "2026-08-15_UAE-batch9.json"
       ],
       "last_updated": null
-    },
-    {
-      "id": "ae-energy-transition-framing",
-      "title": "Energy transition and diversification framing",
-      "publisher": "Derived from national energy and climate sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "System-level framing of the UAE’s simultaneous hydrocarbon production role and renewable/energy-transition ambitions. Links oil production, sovereign investment, renewable capacity expansion and climate reporting.",
-      "domains": [
-        "proposed:energy",
-        "proposed:climate",
-        "national-accounts"
-      ],
-      "_batch": [
-        "2026-08-15_UAE-batch9.json"
-      ],
-      "last_updated": null,
-      "url": null,
-      "_flagged_not_a_publication": true
     }
   ],
   "dependencies": [],
@@ -1407,77 +1064,37 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
-    "reports_without_url": [
-      "ae-batch1-meta",
-      "int-opec-plus-framing",
-      "ae-opec-exit",
-      "ae-sovereign-funds",
-      "ae-batch2-meta",
-      "ae-dubai",
-      "ae-abu-dhabi",
-      "ae-ports",
-      "ae-batch3-meta",
-      "ae-dubai-framing",
-      "ae-abu-dhabi-framing",
-      "ae-gcc-framing",
-      "ae-sovereign-framing",
-      "ae-adia-framing",
-      "ae-energy-transition-framing"
-    ],
-    "reports_without_url_count": 15,
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "ae-fcsc",
-        "text": "continuous"
+        "title": "Federal Competitiveness and Statistics Centre (FCSC) institutional core",
+        "kind": "continuous-database",
+        "basis": "fcsc.gov.ae is a dataset portal: subjects are catalogued with coverage ranges (Annual National Accounts 2010-2025, CPI 2008-2025, Births 1976-2024, Air Transport 2014-2025, Climate January 2016-December 2024) rather than as issues. The site publishes no release calendar; the only schedule statement is that data 'will be updated following the official release of the review results' of the ongoing GDP review."
       },
       {
         "id": "ae-population",
-        "text": "estimates / periodic"
-      },
-      {
-        "id": "ae-national-accounts",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "ae-cbuae",
-        "text": "continuous"
+        "title": "Population estimates",
+        "kind": "unknown",
+        "basis": "fcsc.gov.ae/uae/population-2/ renders only as a titled landing page ('Population Estimates') plus text about the RASMI data-accreditation initiative. No population documents, no coverage years and no release frequency appear on the page."
       },
       {
         "id": "ae-bop",
-        "text": "periodic"
-      },
-      {
-        "id": "ae-oil",
-        "text": "continuous / monthly"
-      },
-      {
-        "id": "ae-sovereign-funds",
-        "text": "continuous / periodic"
-      },
-      {
-        "id": "ae-labour",
-        "text": "periodic / continuous"
-      },
-      {
-        "id": "ae-dubai",
-        "text": "continuous"
-      },
-      {
-        "id": "ae-abu-dhabi",
-        "text": "continuous"
-      },
-      {
-        "id": "ae-ports",
-        "text": "continuous / quarterly"
-      },
-      {
-        "id": "ae-tourism",
-        "text": "monthly / annual"
+        "title": "Balance of Payments and external accounts",
+        "kind": "unknown",
+        "basis": "The CBUAE research-and-statistics page names balance of payments only as a responsibility of the Data and Statistics Centre ('compiling and distributing statistics related to banking, monetary, insurance and balance of payments'). No BOP editions, reference periods or periodicity are stated; the only frequency wording on the page is for the annual MSME Business Survey Report."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -1495,84 +1112,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "ae-batch1-meta",
-        "title": "UAE foundational statistical-system meta-node",
-        "finding": "Not a publication: synthesised meta-node binding FCSC/CBUAE nodes into a foundation layer."
-      },
-      {
-        "id": "int-opec-plus-framing",
-        "title": "OPEC+ / Declaration of Cooperation production-policy framing",
-        "finding": "Not a publication: system-level framing node about OPEC+ production policy; opec.org also returned HTTP 402 to WebFetch."
-      },
-      {
-        "id": "ae-opec-exit",
-        "title": "UAE exit from OPEC (May 2026)",
-        "finding": "Not a publication: a one-off event node; no official document page retrieved and opec.org returned HTTP 402 to WebFetch."
-      },
-      {
-        "id": "ae-sovereign-funds",
-        "title": "Sovereign wealth funds framing (ADIA, Mubadala)",
-        "finding": "Not a publication: framing node describing ADIA/Mubadala as institutions, no corresponding statistical product."
-      },
-      {
-        "id": "ae-batch2-meta",
-        "title": "UAE oil–sovereign–labour densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding oil, sovereign fund and labour nodes."
-      },
-      {
-        "id": "ae-dubai",
-        "title": "Dubai economic and logistics framing",
-        "finding": "Not a publication: framing node describing the emirate of Dubai as an economic hub."
-      },
-      {
-        "id": "ae-abu-dhabi",
-        "title": "Abu Dhabi economic and hydrocarbon framing",
-        "finding": "Not a publication: framing node describing the emirate of Abu Dhabi."
-      },
-      {
-        "id": "ae-batch3-meta",
-        "title": "UAE Dubai–Abu Dhabi–logistics–tourism densification meta-node",
-        "finding": "Not a publication: synthesised meta-node binding emirate and sector nodes."
-      },
-      {
-        "id": "ae-dubai-framing",
-        "title": "Dubai non-oil services and logistics hub framing",
-        "finding": "Not a publication: analytical framing node about Dubai, duplicate of ae-dubai."
-      },
-      {
-        "id": "ae-abu-dhabi-framing",
-        "title": "Abu Dhabi hydrocarbon and sovereign-wealth hub framing",
-        "finding": "Not a publication: analytical framing node about Abu Dhabi, duplicate of ae-abu-dhabi."
-      },
-      {
-        "id": "ae-gcc-framing",
-        "title": "GCC Customs Union and Common Market framing",
-        "finding": "Not a publication: framing node about GCC Customs Union/Common Market membership."
-      },
-      {
-        "id": "ae-sovereign-framing",
-        "title": "Abu Dhabi sovereign wealth architecture framing (ADIA, Mubadala, related)",
-        "finding": "Not a publication: system-level framing node on Abu Dhabi sovereign investment vehicles."
-      },
-      {
-        "id": "ae-adia-framing",
-        "title": "Abu Dhabi Investment Authority (ADIA) sovereign wealth framing",
-        "finding": "Not a publication: framing node about ADIA as an institution rather than a specific document."
-      },
-      {
-        "id": "ae-energy-transition-framing",
-        "title": "Energy transition and diversification framing",
-        "finding": "Not a publication: system-level framing node linking hydrocarbons, investment and renewables."
-      },
-      {
-        "id": "ae-ports",
-        "title": "Ports and container throughput statistics",
-        "finding": "Still not found, and the item is partly ineligible: DP World, the source the item is derived from, is a corporate publisher. On the official side, the FCSC statistics index (https://fcsc.gov.ae/en-us/Pages/Statistics/Statistics.aspx) was retrieved and lists Transport 2013-2022 and Transport 2024 but exposes no hyperlinks to them, its UAE.STAT data explorer (uaestat.fcsc.gov.ae) is disallowed by robots.txt, and opendata.fcsc.gov.ae fails its robots.txt fetch. SCAD (scad.gov.ae) is reachable and its Transport & Services theme was retrieved, but the indicators tab returns 'No Indicators Available Yet' and the only products are Excel workbooks (e.g. Transport Statistics-Annually 2024) whose contents could not be read to verify any container/TEU or cargo-throughput table - and they would in any case cover Abu Dhabi only, not Jebel Ali. Dubai Statistics Center (dsc.gov.ae) serves only a login interface. No official UAE container-throughput product could be retrieved and verified."
-      }
-    ],
-    "not_a_publication_note": "These 14 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
     "url_partial_match": [
       {
         "id": "ae-oil",
@@ -1588,6 +1127,12 @@
         "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Same FCSC 'Oil and Gas' statistics page (duplicate of ae-oil); ADNOC/SCAD publish no equivalent public oil production statistics page that could be retrieved.",
         "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
       }
-    ]
+    ],
+    "not_a_publication_moved_to_archive": "15 nodes removed from this file on 2026-08-18; full records in _archive/ae-united-arab-emirates-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 8
+    }
   }
 }

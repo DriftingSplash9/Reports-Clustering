@@ -35,7 +35,7 @@
       "region": "Israel",
       "description": "Foundational legal instrument establishing the Central Bureau of Statistics, defining its mandate to collect and publish statistics on population, society, economy and other domains, the public’s obligation to provide information, and the CBS obligation of confidentiality and publication.",
       "domains": [
-        "proposed:statistical-system"
+        "statistical-system"
       ],
       "url": "https://www.cbs.gov.il/en/About/Pages/The-Statistics-Ordinance.aspx",
       "_batch": [
@@ -77,7 +77,7 @@
         "national-accounts",
         "labour",
         "inflation",
-        "proposed:trade"
+        "trade"
       ],
       "url": "https://www.cbs.gov.il/en/publications/Pages/2026/Monthly-Bulletin-of-Statistics-May-2026.aspx",
       "_batch": [
@@ -150,7 +150,7 @@
       "releases_per_year": 4,
       "domains": [
         "national-accounts",
-        "proposed:trade",
+        "trade",
         "monetary-policy"
       ],
       "url": "https://www.boi.org.il/en/economic-roles/statistics/external-sector/the-economy-s-balance-of-payments/",
@@ -169,7 +169,7 @@
       "description": "Monthly statistics on imports and exports of goods, trade balance, trade by country, and related price/volume/terms-of-trade indices. Separate media releases cover overall trade and trade by country.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:trade",
+        "trade",
         "national-accounts"
       ],
       "url": "https://www.cbs.gov.il/en/publications/Pages/2026/foreign-trade-statistics-monthly-february-2026.aspx",
@@ -207,7 +207,7 @@
       "releases_per_year": 12,
       "domains": [
         "inflation",
-        "proposed:housing"
+        "housing"
       ],
       "url": "https://www.cbs.gov.il/en/mediarelease/Madad/Pages/2026/Price-Changes-in-the-Dwellings-Market-March-2026.aspx",
       "_batch": [
@@ -281,7 +281,7 @@
       "releases_per_year": 12,
       "domains": [
         "national-accounts",
-        "proposed:services"
+        "services"
       ],
       "url": "https://www.cbs.gov.il/he/mediarelease/Pages/2026/%D7%A1%D7%A7%D7%A8-%D7%94%D7%A2%D7%A8%D7%9B%D7%AA-%D7%94%D7%9E%D7%92%D7%9E%D7%95%D7%AA-%D7%91%D7%A2%D7%A1%D7%A7%D7%99%D7%9D-%D7%93%D7%A6%D7%9E%D7%91%D7%A8-2025.aspx",
       "_batch": [
@@ -299,7 +299,7 @@
       "description": "Monthly and quarterly statistics on visitor arrivals (tourists and day visitors), hotel overnight stays (Israelis and tourists), room occupancy and related tourism indicators.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:tourism",
+        "tourism",
         "national-accounts"
       ],
       "url": "https://www.cbs.gov.il/en/Pages/search/publications.aspx?CbsArticleName=Tourism+and+Hotel+Services+Statistics+-+Quarterly+4",
@@ -336,7 +336,7 @@
       "description": "Quarterly and annual statistics on residential and non-residential building starts, completions, building permits, and related construction-activity indicators (including duration of construction).",
       "releases_per_year": 4,
       "domains": [
-        "proposed:housing",
+        "housing",
         "national-accounts"
       ],
       "url": "https://www.cbs.gov.il/he/mediarelease/DocLib/2026/089/04_26_089b.pdf",
@@ -394,7 +394,7 @@
       "domains": [
         "labour",
         "national-accounts",
-        "proposed:income"
+        "living-standards"
       ],
       "url": "https://www.cbs.gov.il/en/publications/Pages/2026/Household-Income-and-Expenditure-Data-From-the-2023-Household-Expenditure-Survey-General-Summary.aspx",
       "_batch": [
@@ -412,7 +412,7 @@
       "description": "Annual report on the dimensions of poverty and income inequality in Israel, based primarily on administrative data held by the National Insurance Institute (with supplementary estimates). Includes poverty rates, Gini, and related social indicators.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:income",
+        "living-standards",
         "labour"
       ],
       "url": "https://www.btl.gov.il/English%20Homepage/Publications/Poverty_Report/Documents/dohahoni23.pdf",
@@ -431,7 +431,7 @@
       "description": "Monthly estimated execution of the state budget, covering revenues (especially tax), expenditures, and the resulting deficit/surplus. Published by the Macroeconomic and Budget Division of the Accountant General’s Office.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:fiscal"
+        "public-finance"
       ],
       "url": "https://www.gov.il/en/departments/dynamiccollectors/budget-execution-estimate",
       "_batch": [
@@ -451,7 +451,7 @@
       "domains": [
         "national-accounts",
         "monetary-policy",
-        "proposed:trade"
+        "trade"
       ],
       "url": "https://www.boi.org.il/en/economic-roles/statistics/external-sector/israel-s-assets-and-liabilities-vis-a-vis-abroad",
       "_batch": [
@@ -489,7 +489,7 @@
       "releases_per_year": 4,
       "domains": [
         "national-accounts",
-        "proposed:trade"
+        "trade"
       ],
       "url": "https://www.boi.org.il/en/economic-roles/research-and-publications/all-research/statistical-bulletin/foreign-direct-investment-in-israel-developments-and-trends-in-the-past-decade/",
       "_batch": [
@@ -992,7 +992,13 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
@@ -1002,6 +1008,6 @@
     "unresolved_cadence": [],
     "unresolved_jurisdiction_level": [],
     "institution_node_candidates": [],
-    "not_a_publication_note": "These 0 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one."
+    "not_a_publication_moved_to_archive": "0 nodes removed from this file on 2026-08-18; full records in _archive/il-israel-not-publications.json"
   }
 }

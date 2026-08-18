@@ -22,7 +22,7 @@
       "2026-08-14_Vietnam-batch9-defence.json"
     ],
     "counts": {
-      "reports": 93,
+      "reports": 67,
       "dependencies": 0,
       "dropped_notes": 0
     },
@@ -42,8 +42,7 @@
       "description": "Primary national statistical office responsible for censuses, surveys, national accounts, prices, labour, trade and multi-domain socio-economic statistics. Organised vertically from central to provincial and district levels.",
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "proposed:statistical-system",
-        "proposed:institutional"
+        "statistical-system"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -57,7 +56,9 @@
         "International statistical cooperation"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "gso.gov.vn is the agency's live portal/homepage; it carries continuously refreshed indicator tiles and links rather than one discrete publication. Item is the institution itself, not a titled series."
     },
     {
       "id": "vn-population",
@@ -69,9 +70,7 @@
       "description": "Official population census and subsequent estimates. Population reached approximately 102.3 million in 2025, ranking third in Southeast Asia. Provides the demographic base for all per-capita and planning indicators; fertility now below replacement.",
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "population",
-        "proposed:demography",
-        "proposed:census"
+        "population"
       ],
       "_cadence_original": "census cycle + annual estimates",
       "_batch": [
@@ -85,7 +84,9 @@
         "Regional development planning"
       ],
       "_jurisdiction_level_original": "national / provincial",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Page fetched (gso.gov.vn homepage). Targeted check found no census cycle, no mid-year estimate schedule and no advance release calendar; only monthly CPI/IIP/socio-economic items unrelated to population."
     },
     {
       "id": "vn-national-accounts",
@@ -97,9 +98,7 @@
       "description": "Quarterly and annual national accounts (GDP by industry and expenditure). Central macro-output series for a rapidly industrialising, export-oriented economy.",
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "national-accounts",
-        "proposed:gdp",
-        "proposed:macro"
+        "national-accounts"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -113,7 +112,9 @@
         "Fiscal and external analysis"
       ],
       "_jurisdiction_level_original": "national / regional",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "gso.gov.vn homepage states no periodicity for GDP/national accounts and shows no dated GDP releases to count; no advance release calendar on the page."
     },
     {
       "id": "vn-cpi",
@@ -126,8 +127,6 @@
       "releases_per_year": 12,
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "proposed:prices",
-        "proposed:cpi",
         "inflation"
       ],
       "_batch": [
@@ -153,8 +152,7 @@
       "description": "Labour-force participation, employment, unemployment and related indicators from household and enterprise surveys. Captures the large manufacturing and services workforce that underpins export performance.",
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "labour",
-        "proposed:employment"
+        "labour"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -168,7 +166,9 @@
         "Social and poverty monitoring"
       ],
       "_jurisdiction_level_original": "national / regional",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "gso.gov.vn homepage contains no labour-force survey release dates or stated periodicity."
     },
     {
       "id": "vn-sbv",
@@ -180,9 +180,7 @@
       "description": "Central bank responsible for monetary policy, financial stability, external accounts and key macro-financial statistics. Publishes monetary, banking and external-sector data.",
       "url": "https://www.sbv.gov.vn/",
       "domains": [
-        "proposed:central-bank",
-        "proposed:monetary",
-        "proposed:institutional"
+        "monetary-policy"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -196,7 +194,9 @@
         "Financial stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "sbv.gov.vn homepage is a live portal: continuously updated exchange rates, interbank rates and a rolling 'banking activity this week' feed; no single discrete release for the institutional core."
     },
     {
       "id": "vn-bop",
@@ -208,9 +208,8 @@
       "description": "Quarterly and annual BOP statistics. Captures the large goods-trade surplus (especially with the United States) and FDI inflows that characterise Vietnam’s external position.",
       "url": "https://sbv.gov.vn/en/balance-of-international-payment",
       "domains": [
-        "proposed:bop",
-        "proposed:external",
-        "proposed:trade"
+        "external-sector",
+        "trade"
       ],
       "_cadence_original": "quarterly / annual",
       "_batch": [
@@ -225,7 +224,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "SBV statistics page showing Vietnam's quarterly balance of payments table (current, capital and financial accounts, Q2 2025)."
+      "_url_evidence": "SBV statistics page showing Vietnam's quarterly balance of payments table (current, capital and financial accounts, Q2 2025).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page presents the BOP table headed 'QUY II NAM 2025' (Q2 2025) with a quarter-by-quarter archive of the same table; quarterly periodicity.",
+      "releases_per_year": 4
     },
     {
       "id": "vn-usa-trade",
@@ -237,10 +239,8 @@
       "description": "Bilateral goods trade with the United States. The US is Vietnam’s largest single export market; key categories include electronics/telephones, computers, furniture, apparel and footwear. Trade volumes have expanded rapidly over the past decade.",
       "url": "https://www.nso.gov.vn/en/data-and-statistics/2025/03/exports-and-imports-value-by-months-of-2025/",
       "domains": [
-        "proposed:trade",
-        "proposed:usa",
-        "proposed:bilateral",
-        "proposed:exports"
+        "trade",
+        "proposed:usa"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -256,7 +256,10 @@
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
       "_url_evidence": "National Statistics Office release page whose data tables include 'Imports and exports by country group, country and territory' (the official bilateral goods-trade series); no US-only page exists on the NSO site.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "NSO page is headed 'Preliminary data tables of months in 2025 about Exports of goods, Imports of goods' - one export/import value table per month.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-usa-relations",
@@ -269,7 +272,7 @@
       "url": "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2023/09/11/joint-leaders-statement-elevating-united-states-vietnam-relations-to-a-comprehensive-strategic-partnership/",
       "domains": [
         "proposed:usa",
-        "proposed:bilateral",
+        "trade",
         "proposed:partnership",
         "proposed:diplomacy"
       ],
@@ -286,33 +289,9 @@
       ],
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
-      "_url_evidence": "Official US White House archive text of the 11 Sept 2023 Joint Leaders' Statement elevating US-Vietnam ties to a Comprehensive Strategic Partnership."
-    },
-    {
-      "id": "vn-batch1-meta",
-      "title": "Vietnam foundational statistical-system and USA-linkage meta-node",
-      "publisher": "Derived from GSO, SBV and bilateral sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding the GSO institutional core, population, national accounts, CPI, labour statistics, SBV institutional role, BOP, Vietnam–US merchandise trade and Comprehensive Strategic Partnership framing into the opening foundation layer.",
-      "url": null,
-      "domains": [
-        "proposed:foundation",
-        "proposed:usa",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Opening integrating node for Vietnamese research, with explicit USA trade and partnership edges.",
-      "_referenced_by": [
-        "All detailed nodes in this batch"
-      ],
-      "_jurisdiction_level_original": "national / bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Official US White House archive text of the 11 Sept 2023 Joint Leaders' Statement elevating US-Vietnam ties to a Comprehensive Strategic Partnership.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "Joint Leaders' Statement issued 11 September 2023 after a single Hanoi meeting elevating relations to a Comprehensive Strategic Partnership. Single dated diplomatic document, not a series."
     },
     {
       "id": "vn-seaport-throughput",
@@ -324,8 +303,7 @@
       "description": "Official statistics on total cargo throughput (million tonnes) and container throughput (TEUs) across Vietnam’s seaport system. Recent years show strong growth, with container volumes exceeding 30 million TEUs and cargo approaching or exceeding 900–960 million tonnes.",
       "url": "https://vimawa.gov.vn/vi/thong-ke",
       "domains": [
-        "proposed:ports",
-        "proposed:logistics",
+        "infrastructure",
         "proposed:containers",
         "proposed:cargo"
       ],
@@ -342,7 +320,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Statistics section of the Vietnam Maritime and Inland Waterways Administration listing the monthly 'Khoi luong hang hoa thong qua cang bien' (seaport cargo throughput) series."
+      "_url_evidence": "Statistics section of the Vietnam Maritime and Inland Waterways Administration listing the monthly 'Khoi luong hang hoa thong qua cang bien' (seaport cargo throughput) series.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "vimawa.gov.vn/vi/thong-ke lists one 'Hang hoa thong qua cang' cargo-throughput item per reference month (e.g. to June 2026, to May 2025) running back to April 2024 - monthly.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-port-hcmc-caimep",
@@ -411,8 +392,7 @@
       "description": "Policy and analytical framing of Vietnam’s logistics system — seaports, inland connectivity, and the role of logistics in supporting manufacturing exports and FDI. Continuously referenced in trade-facilitation and competitiveness discussions.",
       "url": "https://logistics.gov.vn/nghien-cuudao-tao/bao-cao-logistics-viet-nam-2023",
       "domains": [
-        "proposed:logistics",
-        "proposed:connectivity",
+        "infrastructure",
         "proposed:trade-facilitation"
       ],
       "_cadence_original": "continuous",
@@ -428,34 +408,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "MOIT's official logistics portal page for the Vietnam Logistics Report 2023, the recurring national logistics report (seven chapters on infrastructure, services, regional logistics)."
-    },
-    {
-      "id": "vn-batch10-meta",
-      "title": "Vietnam ports–logistics densification meta-node",
-      "publisher": "Derived from maritime administration and port sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding national seaport cargo and container throughput, Ho Chi Minh City / Cai Mep port complex, Hai Phong port, and national logistics framing into a coherent maritime-logistics layer.",
-      "url": null,
-      "domains": [
-        "proposed:ports",
-        "proposed:logistics",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch10-ports.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the ports densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Trade, FDI, regional and industrial series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "MOIT's official logistics portal page for the Vietnam Logistics Report 2023, the recurring national logistics report (seven chapters on infrastructure, services, regional logistics).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page states that since 2017 the Ministry of Industry and Trade produces the 'Bao cao Logistics Viet Nam thuong nien' (annual Vietnam Logistics Report); this is the 2023 edition.",
+      "releases_per_year": 1
     },
     {
       "id": "vn-ethnic-minorities",
@@ -468,7 +424,7 @@
       "url": null,
       "domains": [
         "proposed:ethnic",
-        "proposed:demography",
+        "population",
         "proposed:minorities"
       ],
       "_cadence_original": "census / inter-censal",
@@ -486,35 +442,6 @@
       "last_updated": null
     },
     {
-      "id": "vn-northern-mountains",
-      "title": "Midlands and Northern Mountains regional profile",
-      "publisher": "Derived from GSO regional and poverty sources",
-      "country": "VN",
-      "jurisdiction_level": "provincial",
-      "region": "Midlands and Northern Mountains",
-      "description": "System-level view of the Midlands and Northern Mountains — the region with the highest concentration of ethnic minorities and persistently higher poverty rates. Accounts for a disproportionate share of national poverty relative to its population.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:northern-mountains",
-        "proposed:poverty"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch11-ethnic.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Key lagging-region spatial node that contrasts with the Red River Delta and Southeast growth poles.",
-      "_referenced_by": [
-        "Ethnic minority statistics",
-        "Poverty and living-standards survey",
-        "National accounts and regional disparity analysis"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "vn-ethnic-poverty",
       "title": "Ethnic minority poverty and living-standards statistics",
       "publisher": "GSO / World Bank-aligned and national poverty monitoring",
@@ -524,9 +451,9 @@
       "description": "Poverty rates and living-standards indicators disaggregated by ethnicity. Ethnic minorities account for a large majority of remaining poverty despite representing a minority of the population; absolute numbers of poor ethnic minorities have fallen substantially over the past decade.",
       "url": null,
       "domains": [
-        "proposed:poverty",
+        "poverty",
         "proposed:ethnic",
-        "proposed:welfare"
+        "living-standards"
       ],
       "_cadence_original": "periodic survey cycles",
       "_batch": [
@@ -543,63 +470,6 @@
       "last_updated": null
     },
     {
-      "id": "vn-ethnic-policy",
-      "title": "Ethnic minority and mountainous-region development policy framing",
-      "publisher": "Party-State / Ministry of Ethnic and Religious Affairs related",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "National policy framing and target programmes for socio-economic development in ethnic minority and mountainous regions (including the National Target Programme 2021–2030). Continuously cited in poverty-reduction and regional-equity discussions.",
-      "url": null,
-      "domains": [
-        "proposed:ethnic-policy",
-        "proposed:development",
-        "proposed:equity"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch11-ethnic.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Policy-frame counterpart to the ethnic and regional statistical nodes.",
-      "_referenced_by": [
-        "Ethnic poverty and Northern Mountains nodes",
-        "Social-protection and fiscal analysis",
-        "National development planning"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-batch11-meta",
-      "title": "Vietnam ethnic–northern-mountains densification meta-node",
-      "publisher": "Derived from GSO, poverty and ethnic-policy sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding ethnic minority population and composition, Midlands and Northern Mountains regional profile, ethnic minority poverty statistics, and ethnic-policy / mountainous-region development framing into a coherent equity and lagging-region layer.",
-      "url": null,
-      "domains": [
-        "proposed:ethnic",
-        "proposed:regional",
-        "proposed:poverty",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch11-ethnic.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the ethnic and northern-mountains densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier poverty, regional and social-protection series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "vn-digital-economy",
       "title": "Digital economy value-added and share of GDP",
       "publisher": "General Statistics Office / National Statistics Office",
@@ -609,8 +479,8 @@
       "description": "Official measurement of the digital economy’s contribution to GDP. In 2025 the digital economy reached an estimated 14.02 % of GDP (approximately USD 72 billion), up substantially from earlier in the decade. Distinguishes core digital sectors from the digitalisation of other industries.",
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "proposed:digital-economy",
-        "proposed:gdp",
+        "services",
+        "national-accounts",
         "proposed:measurement"
       ],
       "_cadence_original": "annual",
@@ -639,8 +509,8 @@
       "url": "https://idea.gov.vn/?page=document",
       "domains": [
         "proposed:ecommerce",
-        "proposed:digital",
-        "proposed:trade"
+        "services",
+        "trade"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -655,7 +525,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Publications page of MOIT's E-commerce and Digital Economy Agency listing the 'Sach trang Thuong mai dien tu Viet Nam' (Vietnam E-commerce White Book) series 2019-2023."
+      "_url_evidence": "Publications page of MOIT's E-commerce and Digital Economy Agency listing the 'Sach trang Thuong mai dien tu Viet Nam' (Vietnam E-commerce White Book) series 2019-2023.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "idea.gov.vn document list shows one e-commerce white book / annual e-commerce report per year: 2019, 2020, 2021, 2022, 2023.",
+      "releases_per_year": 1
     },
     {
       "id": "vn-digital-strategy",
@@ -669,7 +542,7 @@
       "domains": [
         "proposed:digital-transformation",
         "proposed:strategy",
-        "proposed:policy"
+        "governance"
       ],
       "_cadence_original": "multi-year strategy + updates",
       "_batch": [
@@ -685,33 +558,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the Government legal-document portal record: Decision No. 749/QD-TTg of 3 June 2020 by the Prime Minister, 'Phe duyet Chuong trinh Chuyen doi so quoc gia den nam 2025, dinh huong den nam 2030' - the official National Digital Transformation Programme, with the signed PDF attached. NOTE: the newer Decision 1266/QD-TTg of 14/7/2026 (Strategy 2026-2030, vision 2045) could not be confirmed - I walked the portal's docid range covering documents dated 30/6/2026 to 28/7/2026 (218890-219038) and it is not published there.",
-      "_url_route": "4 (publisher's own document portal, vanban.chinhphu.vn, browsed/probed by docid)"
-    },
-    {
-      "id": "vn-batch12-meta",
-      "title": "Vietnam digital-economy densification meta-node",
-      "publisher": "Derived from GSO and digital-strategy sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding digital-economy value-added and GDP share, e-commerce component, and National Digital Transformation Strategy framing into a coherent digital-modernisation layer.",
-      "url": null,
-      "domains": [
-        "proposed:digital",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch12-digital.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the digital densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "National accounts, services and strategy series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_route": "4 (publisher's own document portal, vanban.chinhphu.vn, browsed/probed by docid)",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "Document is Decision 749/QD-TTg signed 3 June 2020 by the Prime Minister approving the national digital transformation programme - a single legal instrument, not a recurring publication."
     },
     {
       "id": "vn-grdp-danang",
@@ -723,9 +572,8 @@
       "description": "Official GRDP for Da Nang — the principal urban and services/tourism hub of the Central region. Regularly ranks among the mid-to-upper tier of provincial economies and contributes meaningfully to national growth.",
       "url": "https://danang.gov.vn/web/dng/bao-cao-kinh-te-xa-hoi",
       "domains": [
-        "proposed:grdp",
-        "proposed:danang",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:danang"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -753,7 +601,7 @@
       "description": "Official GRDP for Can Tho — the largest city and commercial hub of the Mekong Delta. Complements the broader Mekong Delta agricultural and aquaculture profile with an urban services and logistics node.",
       "url": "https://cantho.gov.vn/tinh-hinh-kinh-te-xa-hoi",
       "domains": [
-        "proposed:grdp",
+        "national-accounts",
         "proposed:cantho",
         "proposed:mekong"
       ],
@@ -774,90 +622,6 @@
       "_url_evidence": "Can Tho city portal's socio-economic situation report series (monthly and quarterly 'Bao cao tinh hinh kinh te - xa hoi'), which carries the city's GRDP figures."
     },
     {
-      "id": "vn-central-highlands",
-      "title": "Central Highlands regional economic profile",
-      "publisher": "Derived from GSO regional and provincial series",
-      "country": "VN",
-      "jurisdiction_level": "provincial",
-      "region": "Central Highlands",
-      "description": "System-level view of the Central Highlands — a major coffee, pepper and agricultural region with significant ethnic-minority populations and distinct development challenges and opportunities relative to the coastal and delta growth poles.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:central-highlands",
-        "agriculture"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch13-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Central Highlands spatial densification that links agriculture, ethnicity and lagging-region dynamics.",
-      "_referenced_by": [
-        "Agriculture and coffee/export analysis",
-        "Ethnic minority and poverty nodes",
-        "National accounts and regional disparity"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-secondary-provinces",
-      "title": "Selected secondary provincial economies (Quang Ninh, Thanh Hoa, Nghe An, etc.)",
-      "publisher": "Derived from GSO GRDP series",
-      "country": "VN",
-      "jurisdiction_level": "provincial",
-      "region": "Vietnam",
-      "description": "Grouping of secondary but still material provincial economies outside the top industrial and dual-core set — including Quang Ninh, Thanh Hoa, Nghe An and similar mid-tier contributors that collectively add meaningful shares of national growth and diversify the spatial structure.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:secondary",
-        "proposed:spatial"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch13-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Secondary provincial densification that softens the exclusive focus on the top five growth poles.",
-      "_referenced_by": [
-        "National Accounts and GRDP rankings",
-        "Regional disparity and development analysis",
-        "Industrial and tourism location patterns"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-batch13-meta",
-      "title": "Vietnam further-provincial densification meta-node",
-      "publisher": "Derived from GSO provincial GRDP sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding Da Nang GRDP, Can Tho GRDP, Central Highlands regional profile, and selected secondary provincial economies into a coherent further-provincial densification layer that complements the earlier Hanoi, HCMC, Red River Delta, industrial-province and Mekong Delta nodes.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:regional",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch13-provincial.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the further provincial densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier regional, industrial and agricultural series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "vn-iip",
       "title": "Index of Industrial Production (IIP)",
       "publisher": "General Statistics Office / National Statistics Office",
@@ -868,8 +632,7 @@
       "releases_per_year": 12,
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "proposed:industry",
-        "proposed:manufacturing",
+        "industry",
         "proposed:iip"
       ],
       "_batch": [
@@ -895,9 +658,8 @@
       "description": "Official FDI attraction figures (new projects, additional capital, capital contributions). Processing and manufacturing typically absorb the large majority of inflows. Singapore, Korea, China, Japan and others lead recent rankings; US FDI stock and flows remain strategically important.",
       "url": "https://fia.mof.gov.vn/List/MenuID/07edbbe1-67a3-484b-a4e2-b5faef1b9de5/CatID/457641e2-2605-4632-bbd8-39ee65454a06",
       "domains": [
-        "proposed:fdi",
-        "proposed:investment",
-        "proposed:external"
+        "investment",
+        "external-sector"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -913,7 +675,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Foreign Investment Agency (Ministry of Finance) listing of the recurring 'Tinh hinh thu hut dau tu nuoc ngoai' reports with registered, adjusted and disbursed FDI.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "FIA listing page carries cumulative FDI attraction reports for each successive reference period ('Thang 1', '3 thang dau nam', '6 thang dau nam', '11 thang', 'nam 2024') - one report per month.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-fdi-partners",
@@ -925,9 +690,9 @@
       "description": "Breakdown of FDI inflows by source. Singapore, South Korea, China, Japan, Hong Kong and others dominate recent flows; US FDI is smaller in annual ranking but significant in stock, technology and strategic sectors.",
       "url": "https://fia.mof.gov.vn/Detail/CatID/457641e2-2605-4632-bbd8-39ee65454a06/NewsID/f56eaaa3-0f17-4a36-9e47-1281bf95debc",
       "domains": [
-        "proposed:fdi",
+        "investment",
         "proposed:partners",
-        "proposed:bilateral"
+        "trade"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -942,7 +707,10 @@
       ],
       "_jurisdiction_level_original": "national / bilateral",
       "last_updated": null,
-      "_url_evidence": "FIA report 'Tinh hinh thu hut dau tu nuoc ngoai nam 2024' showing the ranking of investing countries (Singapore 10.21bn USD, Korea 7.06bn, then China, Hong Kong, Japan)."
+      "_url_evidence": "FIA report 'Tinh hinh thu hut dau tu nuoc ngoai nam 2024' showing the ranking of investing countries (Singapore 10.21bn USD, Korea 7.06bn, then China, Hong Kong, Japan).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "This is the 13 January 2025 FDI report covering full-year 2024 with the by-source-country ranking; the page identifies it as part of 'So lieu FDI hang thang' (monthly FDI data) and links prior monthly editions.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-rice",
@@ -972,7 +740,9 @@
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
       "_url_evidence": "NSO 'Agriculture, forestry and fishery' statistics topic page, which includes 'Planted area and production of paddy' series by province.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "nso.gov.vn agriculture section is an index of table titles ('Production of paddy by province' etc.) with no release dates, no editions to count and no stated periodicity."
     },
     {
       "id": "vn-agriculture",
@@ -985,7 +755,6 @@
       "url": "https://www.gso.gov.vn/",
       "domains": [
         "agriculture",
-        "proposed:fisheries",
         "proposed:primary"
       ],
       "_cadence_original": "quarterly / annual",
@@ -1000,7 +769,9 @@
         "Rural and poverty analysis"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "gso.gov.vn homepage gives no periodicity or dated releases for agriculture/forestry/fishery output."
     },
     {
       "id": "vn-grdp-hanoi",
@@ -1012,9 +783,8 @@
       "description": "Official GRDP for the capital city. Major services, administration and industrial contributor to national growth.",
       "url": "https://thongkehanoi.nso.gov.vn/tinh-hinh-kinh-te-xa-hoi/137",
       "domains": [
-        "proposed:grdp",
-        "proposed:hanoi",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:hanoi"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1043,9 +813,8 @@
       "description": "Official GRDP for Ho Chi Minh City — Vietnam’s largest urban economy and southern commercial/industrial hub. Together with Hanoi forms the dual-core national economic structure.",
       "url": null,
       "domains": [
-        "proposed:grdp",
-        "proposed:hcmc",
-        "proposed:regional"
+        "national-accounts",
+        "proposed:hcmc"
       ],
       "_cadence_original": "annual",
       "_batch": [
@@ -1063,92 +832,6 @@
       "last_updated": null
     },
     {
-      "id": "vn-red-river-delta",
-      "title": "Red River Delta regional economic profile",
-      "publisher": "Derived from GSO GRDP and industrial series",
-      "country": "VN",
-      "jurisdiction_level": "provincial",
-      "region": "Red River Delta",
-      "description": "System-level view of the Red River Delta — the northern industrial and growth engine that includes Hanoi, Hai Phong, Bac Ninh and other high-performing provinces. Frequently the largest contributor to national growth.",
-      "url": null,
-      "domains": [
-        "proposed:regional",
-        "proposed:red-river-delta",
-        "proposed:spatial"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Northern growth-pole spatial node.",
-      "_referenced_by": [
-        "Hanoi GRDP and industrial production",
-        "National Accounts and FDI location",
-        "Electronics and manufacturing clusters"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-industrial-provinces",
-      "title": "Key industrial provinces (Bac Ninh, Hai Phong, Dong Nai, etc.)",
-      "publisher": "Derived from GSO GRDP and IIP series",
-      "country": "VN",
-      "jurisdiction_level": "provincial",
-      "region": "Vietnam",
-      "description": "High-growth industrial provinces that drive electronics, manufacturing and port-related activity. Bac Ninh, Hai Phong, Dong Nai and similar localities often post double-digit GRDP growth and large contributions to national industry.",
-      "url": null,
-      "domains": [
-        "proposed:provincial",
-        "proposed:industry",
-        "proposed:electronics"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Provincial industrial densification that links FDI, electronics and regional growth.",
-      "_referenced_by": [
-        "IIP and FDI statistics",
-        "Red River Delta and Southeast regional nodes",
-        "Export and electronics analysis"
-      ],
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-batch2-meta",
-      "title": "Vietnam industry–FDI–agriculture–regional densification meta-node",
-      "publisher": "Derived from GSO, MPI and related sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding Index of Industrial Production, FDI statistics and partner breakdown, rice and broader agriculture production, Hanoi and Ho Chi Minh City GRDP, Red River Delta profile and key industrial provinces into a coherent industry–investment–spatial layer.",
-      "url": null,
-      "domains": [
-        "proposed:industry",
-        "proposed:fdi",
-        "agriculture",
-        "proposed:regional",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch2.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 2 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "BOP, USA trade and national accounts from Batch 1"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "vn-electronics-trade",
       "title": "Electronics, computers and components trade statistics",
       "publisher": "General Statistics Office / customs related",
@@ -1159,7 +842,7 @@
       "url": "https://www.nso.gov.vn/en/data-and-statistics/2025/03/exports-and-imports-value-by-months-of-2025/",
       "domains": [
         "proposed:electronics",
-        "proposed:exports",
+        "trade",
         "proposed:value-chains"
       ],
       "_cadence_original": "monthly / annual",
@@ -1176,7 +859,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "NSO trade release page whose tables include exports and imports by main commodity group (electronics, computers and components) as well as by country.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same NSO monthly export/import value tables ('data tables of months in 2025'); electronics/computers is a commodity line within the monthly trade release.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-energy-mix",
@@ -1188,10 +874,8 @@
       "description": "Power generation and capacity by source. Coal remains a large share of total energy supply; hydropower, gas, solar and wind are expanding under successive Power Development Plans. Energy transition targets are progressively raising renewable shares.",
       "url": "https://www.evn.com.vn/vi-VN/bao-cao-thuong-nien/Bao-cao-thuong-nien-60-50",
       "domains": [
-        "proposed:energy",
-        "proposed:electricity",
-        "proposed:coal",
-        "proposed:renewables"
+        "energy",
+        "proposed:coal"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1206,7 +890,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Vietnam Electricity (EVN) annual report series landing page, listing EVN Annual Reports 2017-2025 which carry generation and capacity by source."
+      "_url_evidence": "Vietnam Electricity (EVN) annual report series landing page, listing EVN Annual Reports 2017-2025 which carry generation and capacity by source.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "EVN 'Bao cao thuong nien' (Annual Report) page lists one edition per year (2017, 2018, 2021, 2022, 2022-2023, 2024-2025 posted 8 Jan 2026).",
+      "releases_per_year": 1
     },
     {
       "id": "vn-pdp8",
@@ -1236,7 +923,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the portal record for Decision No. 768/QD-TTg of 15 April 2025 by the Prime Minister, 'Phe duyet Dieu chinh Quy hoach phat trien dien luc quoc gia thoi ky 2021-2030, tam nhin den nam 2050' (the adjusted PDP8), with four downloadable PDFs (768-ttg.signed.pdf plus annexes). The original PDP8, Decision 500/QD-TTg of 15/5/2023, was also confirmed at docid=207889.",
-      "_url_route": "4 (publisher's own document portal, vanban.chinhphu.vn, addressed by docid)"
+      "_url_route": "4 (publisher's own document portal, vanban.chinhphu.vn, addressed by docid)",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "Document is Decision 768/QD-TTg dated 15 April 2025 approving the adjusted Power Development Plan VIII - a single Prime Ministerial legal instrument."
     },
     {
       "id": "vn-poverty",
@@ -1248,9 +937,8 @@
       "description": "Results from the Vietnam Household Living Standards Survey and related poverty-rate series. Multidimensional and income poverty have fallen sharply; remaining poverty is concentrated in northern mountainous and some ethnic-minority areas.",
       "url": "https://www.gso.gov.vn/",
       "domains": [
-        "proposed:poverty",
-        "proposed:living-standards",
-        "proposed:welfare"
+        "poverty",
+        "living-standards"
       ],
       "_cadence_original": "periodic survey cycles",
       "_batch": [
@@ -1264,7 +952,9 @@
         "National accounts and income statistics"
       ],
       "_jurisdiction_level_original": "national / regional",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "gso.gov.vn homepage states nothing about VHLSS or poverty-survey cycles and shows no dated poverty releases."
     },
     {
       "id": "vn-cptpp",
@@ -1276,9 +966,8 @@
       "description": "Vietnam’s membership in CPTPP (in force 2019). Provides preferential access to a high-standard Pacific trade bloc and interacts with electronics, apparel and agricultural export patterns.",
       "url": "https://www.dfat.gov.au/trade/agreements/in-force/cptpp/comprehensive-and-progressive-agreement-for-trans-pacific-partnership",
       "domains": [
-        "proposed:fta",
-        "proposed:cptpp",
-        "proposed:trade"
+        "trade",
+        "proposed:cptpp"
       ],
       "_batch": [
         "2026-08-14_Vietnam-batch3.json"
@@ -1303,9 +992,8 @@
       "description": "Bilateral FTA with the European Union (in force 2020). Significant for apparel, footwear, agricultural and other exports to the EU market.",
       "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/vietnam_en",
       "domains": [
-        "proposed:fta",
-        "proposed:eu",
-        "proposed:bilateral"
+        "trade",
+        "proposed:eu"
       ],
       "_batch": [
         "2026-08-14_Vietnam-batch3.json"
@@ -1330,7 +1018,7 @@
       "description": "Vietnam’s membership in RCEP. Links ASEAN with China, Japan, Korea, Australia and New Zealand and reinforces regional electronics and intermediate-goods value chains.",
       "url": "https://asean.org/our-communities/economic-community/integration-with-global-economy/regional-comprehensive-economic-partnership-rcep/",
       "domains": [
-        "proposed:fta",
+        "trade",
         "proposed:rcep",
         "proposed:asean"
       ],
@@ -1357,7 +1045,7 @@
       "description": "System-level view of Vietnam’s extensive FTA network (ASEAN, CPTPP, EVFTA, RCEP, bilateral agreements with Japan, Korea, etc.). Organises the individual treaty nodes and underpins export diversification.",
       "url": "https://fta.gov.vn/",
       "domains": [
-        "proposed:fta",
+        "trade",
         "proposed:network",
         "proposed:trade-architecture"
       ],
@@ -1373,66 +1061,9 @@
         "Trade-policy documents"
       ],
       "last_updated": null,
-      "_url_evidence": "Vietnam's official FTA Portal (MOIT), which enumerates the country's agreements: EVFTA, CPTPP, UKVFTA, VIFTA, VN-UAE CEPA, RCEP, VKFTA, VJEPA, ASEAN+ FTAs and the WTO agreement."
-    },
-    {
-      "id": "vn-batch3-meta",
-      "title": "Vietnam electronics–energy–poverty–FTA densification meta-node",
-      "publisher": "Derived from GSO, energy and trade-policy sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding electronics/computer trade, energy mix and Power Development Plan, poverty/living-standards statistics, CPTPP, EVFTA, RCEP and overall FTA network into a coherent value-chain, energy, welfare and trade-architecture layer.",
-      "url": null,
-      "domains": [
-        "proposed:electronics",
-        "proposed:energy",
-        "proposed:poverty",
-        "proposed:fta",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch3.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 3 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "USA trade, IIP, FDI and national accounts from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-mekong-delta",
-      "title": "Mekong Delta regional economic and agricultural profile",
-      "publisher": "Derived from GSO and agricultural sources",
-      "country": "VN",
-      "jurisdiction_level": "provincial",
-      "region": "Mekong Delta",
-      "description": "System-level view of the Mekong Delta — Vietnam’s primary rice bowl and major aquaculture region. Produces the majority of national rice, a large share of fruit and fisheries output; faces climate and salinity challenges.",
-      "url": null,
-      "domains": [
-        "proposed:mekong",
-        "proposed:regional",
-        "agriculture",
-        "proposed:aquaculture"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Southern agricultural heartland spatial node. Complements the northern industrial Red River Delta.",
-      "_referenced_by": [
-        "Rice and agriculture production statistics",
-        "Climate and disaster analysis",
-        "National accounts and regional disparity"
-      ],
-      "_jurisdiction_level_original": "regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_evidence": "Vietnam's official FTA Portal (MOIT), which enumerates the country's agreements: EVFTA, CPTPP, UKVFTA, VIFTA, VN-UAE CEPA, RCEP, VKFTA, VJEPA, ASEAN+ FTAs and the WTO agreement.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "fta.gov.vn is a live portal: searchable HS-code tariff-preference lookup across 16+ agreements plus rolling news; the page states no release frequency and has no discrete edition."
     },
     {
       "id": "vn-aquaculture",
@@ -1445,8 +1076,8 @@
       "url": "https://www.nso.gov.vn/en/agriculture-forestry-and-fishery/",
       "domains": [
         "proposed:aquaculture",
-        "proposed:fisheries",
-        "proposed:exports"
+        "agriculture",
+        "trade"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -1462,7 +1093,9 @@
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
       "_url_evidence": "NSO 'Agriculture, forestry and fishery' topic page, whose Fishery section covers capture-fishing and aquaculture production by province.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "nso.gov.vn agriculture-forestry-fishery section is an undated catalogue of table titles; no dates or stated frequency for aquaculture/capture fisheries."
     },
     {
       "id": "vn-tourism",
@@ -1474,8 +1107,8 @@
       "description": "Official statistics on international tourist arrivals, source markets and related tourism indicators. Arrivals have recovered strongly and set new records in recent years.",
       "url": "https://bvhttdl.gov.vn/thong-ke-c215.htm",
       "domains": [
-        "proposed:tourism",
-        "proposed:services",
+        "tourism",
+        "services",
         "proposed:arrivals"
       ],
       "_cadence_original": "monthly / annual",
@@ -1491,7 +1124,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Statistics section of Vietnam's Ministry of Culture, Sports and Tourism, publishing visitor-arrival figures (international and domestic) - the tourism authority's own site is a JavaScript app that returns no content to WebFetch."
+      "_url_evidence": "Statistics section of Vietnam's Ministry of Culture, Sports and Tourism, publishing visitor-arrival figures (international and domestic) - the tourism authority's own site is a JavaScript app that returns no content to WebFetch.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "bvhttdl.gov.vn/thong-ke is a news-style feed of ad-hoc provincial tourism items (Apr-Aug 2024) with no stated release schedule and no countable national visitor-arrivals series."
     },
     {
       "id": "vn-ndc",
@@ -1503,9 +1138,8 @@
       "description": "Vietnam’s NDC under the Paris Agreement and associated climate-policy framing. Continuously referenced in energy, agriculture, forestry and adaptation discussions.",
       "url": "https://unfccc.int/sites/default/files/NDC/2022-11/Viet%20Nam_NDC_2022_Eng.pdf",
       "domains": [
-        "proposed:climate",
-        "proposed:ndc",
-        "proposed:ghg"
+        "environment",
+        "proposed:ndc"
       ],
       "_cadence_original": "null (updated periodically)",
       "_batch": [
@@ -1520,7 +1154,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Viet Nam's updated Nationally Determined Contribution (2022) as recorded in the UNFCCC registry: 15.8% unconditional / 43.5% conditional reduction vs BAU by 2030."
+      "_url_evidence": "Viet Nam's updated Nationally Determined Contribution (2022) as recorded in the UNFCCC registry: 15.8% unconditional / 43.5% conditional reduction vs BAU by 2030.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "Single dated submission - Viet Nam's NDC updated 2022, submitted October 2022. The document states updates were made in 2015, 2020 and 2022 in response to calls (e.g. COP26), and gives no fixed update cycle."
     },
     {
       "id": "vn-ghg",
@@ -1532,9 +1168,7 @@
       "description": "National GHG inventory results by sector (energy dominant, followed by agriculture and industrial processes). Provides the empirical base for NDC tracking.",
       "url": "https://unfccc.int/sites/default/files/resource/Viet%20Nam_BUR3.pdf",
       "domains": [
-        "proposed:ghg",
-        "proposed:emissions",
-        "proposed:climate"
+        "environment"
       ],
       "_cadence_original": "periodic inventory cycles",
       "_batch": [
@@ -1549,7 +1183,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "Viet Nam's Third Biennial Updated Report to the UNFCCC containing the national GHG inventory for 2016 (316,735 ktCO2e; energy 65%, IPPU 14.6%, AFOLU 13.9%, waste 6.5%)."
+      "_url_evidence": "Viet Nam's Third Biennial Updated Report to the UNFCCC containing the national GHG inventory for 2016 (316,735 ktCO2e; energy 65%, IPPU 14.6%, AFOLU 13.9%, waste 6.5%).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Document is Viet Nam's Third Biennial Updated Report (BUR3); foreword cites Decision 2/CP.17 requiring biennial submission - one every two years.",
+      "releases_per_year": 0.5
     },
     {
       "id": "vn-health-insurance",
@@ -1562,7 +1199,7 @@
       "url": "https://baohiemxahoi.gov.vn/congkhai/pages/so-lieu-thong-ke-nganh.aspx",
       "domains": [
         "proposed:health-insurance",
-        "proposed:social-protection",
+        "benefits",
         "health"
       ],
       "_cadence_original": "annual / continuous",
@@ -1579,7 +1216,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Vietnam Social Security's official 'So lieu thong ke Nganh' (sector statistical data) disclosure section, which carries health-insurance participation/coverage reporting.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Vietnam Social Security 'So lieu thong ke Nganh' page carries meeting summaries and directives (Dec 2025, Mar 2026, Apr 2026) rather than a dated statistical series; no stated publication schedule."
     },
     {
       "id": "vn-social-insurance",
@@ -1592,7 +1231,7 @@
       "url": "https://baohiemxahoi.gov.vn/congkhai/pages/so-lieu-thong-ke-nganh.aspx",
       "domains": [
         "proposed:social-insurance",
-        "proposed:social-protection",
+        "benefits",
         "labour"
       ],
       "_cadence_original": "annual / continuous",
@@ -1609,36 +1248,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Same VSS 'So lieu thong ke Nganh' disclosure section, covering compulsory social insurance and unemployment insurance participation.",
-      "_url_match": "series-level (corroborated)"
-    },
-    {
-      "id": "vn-batch4-meta",
-      "title": "Vietnam Mekong–tourism–climate–social-protection densification meta-node",
-      "publisher": "Derived from GSO, tourism, climate and VSS sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding Mekong Delta regional profile, aquaculture/fisheries, tourism arrivals, NDC climate framework, GHG inventory, health insurance coverage and social insurance coverage into a coherent southern-spatial, services, climate and social-protection layer.",
-      "url": null,
-      "domains": [
-        "proposed:mekong",
-        "proposed:tourism",
-        "proposed:climate",
-        "proposed:social-protection",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for Batch 4 domains.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier agriculture, energy, poverty and regional series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Same VSS statistics page: no stated frequency and no countable series of social/unemployment insurance coverage releases."
     },
     {
       "id": "vn-china-trade",
@@ -1650,9 +1262,8 @@
       "description": "Bilateral goods trade with China. China is Vietnam’s largest overall trading partner and dominant import source (intermediate goods, components, machinery). Vietnam runs a large structural trade deficit with China while exporting electronics, agricultural products and other goods.",
       "url": "https://www.nso.gov.vn/en/data-and-statistics/2025/03/exports-and-imports-value-by-months-of-2025/",
       "domains": [
-        "proposed:trade",
-        "proposed:china",
-        "proposed:bilateral"
+        "trade",
+        "proposed:china"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -1668,7 +1279,10 @@
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
       "_url_evidence": "NSO trade release page including 'Imports and exports by country group, country and territory', the official series carrying Vietnam-China bilateral goods trade.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same NSO page of monthly preliminary export/import value tables, one per month of 2025.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-china-relations",
@@ -1682,7 +1296,7 @@
       "domains": [
         "proposed:china",
         "proposed:partnership",
-        "proposed:bilateral"
+        "trade"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1709,9 +1323,8 @@
       "url": null,
       "domains": [
         "proposed:korea",
-        "proposed:trade",
-        "proposed:fdi",
-        "proposed:bilateral"
+        "trade",
+        "investment"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1737,9 +1350,8 @@
       "description": "Bilateral FTA in force since 2015. Deepens preferential access beyond the ASEAN–Korea framework and supports the large bilateral investment and trade relationship.",
       "url": "https://vntr.moit.gov.vn/fta/21/0",
       "domains": [
-        "proposed:fta",
-        "proposed:korea",
-        "proposed:bilateral"
+        "trade",
+        "proposed:korea"
       ],
       "_batch": [
         "2026-08-14_Vietnam-batch5.json"
@@ -1766,9 +1378,8 @@
       "url": "https://mofa.gov.vn/tin-chi-tiet/chi-tiet/tai-lieu-co-ban-ve-nhat-ban-va-quan-he-viet-nam-nhat-ban-589.html",
       "domains": [
         "proposed:japan",
-        "proposed:trade",
-        "proposed:fdi",
-        "proposed:bilateral"
+        "trade",
+        "investment"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1784,7 +1395,9 @@
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
       "_url_evidence": "Retrieved MOFA's country dossier 'Tai lieu co ban ve Nhat Ban va quan he Viet Nam - Nhat Ban'. It carries both halves of the node: bilateral trade ('Nam 2013, Nhat Ban la ban hang thuong mai dung thu 4 cua Viet Nam voi kim ngach thuong mai hai chieu dat 25,163 ty USD', exports 13.581 bn / imports 11.582 bn) and Japanese FDI (top source in 2013 with 5.747 bn USD registered; 2,226 valid projects worth 35.5 bn USD cumulative to April 2014, ranked first). Dated - the dossier is updated to 2014 - but it is the official MOFA product.",
-      "_url_route": "4 (MOFA's own country-dossier page)"
+      "_url_route": "4 (MOFA's own country-dossier page)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "MOFA page is a single background briefing on Japan and Vietnam-Japan relations marked 'Cap nhat den thang 3/2014'; it states no update frequency and there are no editions to count."
     },
     {
       "id": "vn-vjepa",
@@ -1796,9 +1409,8 @@
       "description": "Bilateral EPA in force since 2009. Complements the ASEAN–Japan CEP and CPTPP; covers goods, services, investment and movement of natural persons.",
       "url": "https://www.mofa.go.jp/policy/economy/fta/vietnam.html",
       "domains": [
-        "proposed:fta",
-        "proposed:japan",
-        "proposed:bilateral"
+        "trade",
+        "proposed:japan"
       ],
       "_batch": [
         "2026-08-14_Vietnam-batch5.json"
@@ -1824,8 +1436,7 @@
       "url": "https://asean.org/wp-content/uploads/2021/08/AECBP_2025r_FINAL.pdf",
       "domains": [
         "proposed:asean",
-        "proposed:regional",
-        "proposed:trade"
+        "trade"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -1839,7 +1450,9 @@
         "FDI and regional value-chain analysis"
       ],
       "last_updated": null,
-      "_url_evidence": "ASEAN Economic Community Blueprint 2025, published by the ASEAN Secretariat (Nov 2015), setting the five characteristics of AEC integration that Vietnam participates in."
+      "_url_evidence": "ASEAN Economic Community Blueprint 2025, published by the ASEAN Secretariat (Nov 2015), setting the five characteristics of AEC integration that Vietnam participates in.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "ASEAN Economic Community Blueprint 2025, adopted and published Jakarta, November 2015 - a single adopted framework document covering 2016-2025 (it provides only for periodic review, not reissue)."
     },
     {
       "id": "vn-ukvfta",
@@ -1851,9 +1464,8 @@
       "description": "Bilateral FTA in force since 2021 (continuity agreement after Brexit). Preserves preferential access to the UK market for Vietnamese exports.",
       "url": "https://www.gov.uk/government/collections/uk-vietnam-free-trade-agreement",
       "domains": [
-        "proposed:fta",
-        "proposed:uk",
-        "proposed:bilateral"
+        "trade",
+        "proposed:uk"
       ],
       "_batch": [
         "2026-08-14_Vietnam-batch5.json"
@@ -1869,63 +1481,6 @@
       "_url_evidence": "UK Department for Business and Trade collection page for the UK-Vietnam Free Trade Agreement, listing the treaty document (CS Viet Nam No.1/2021) and committee documents."
     },
     {
-      "id": "vn-multi-vector",
-      "title": "Vietnam multi-vector external economic strategy framing",
-      "publisher": "Derived from trade, FDI and partnership sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "System-level framing of Vietnam’s deliberately multi-aligned external economic posture: largest export market in the United States, largest import and overall trade partner in China, major FDI and technology partners in Korea and Japan, dense preferential access via CPTPP/EVFTA/RCEP, and Comprehensive Strategic Partnerships with 14 countries including all five UN Security Council permanent members.",
-      "url": null,
-      "domains": [
-        "proposed:strategy",
-        "proposed:multi-vector",
-        "proposed:external"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "High-level organising frame for Vietnam’s external economic architecture.",
-      "_referenced_by": [
-        "All major bilateral and FTA nodes",
-        "FDI, trade and partnership statistics",
-        "Foreign-policy and economic-security analysis"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-batch5-meta",
-      "title": "Vietnam international-architecture densification meta-node",
-      "publisher": "Derived from GSO, MPI, customs and partnership sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding Vietnam–China trade and partnership, Vietnam–Korea trade/FDI and VKFTA, Vietnam–Japan trade/FDI and VJEPA, ASEAN framework, UKVFTA, and multi-vector external strategy framing into a coherent international-architecture layer that complements the USA corridor and existing CPTPP/EVFTA/RCEP nodes.",
-      "url": null,
-      "domains": [
-        "proposed:international",
-        "proposed:fta",
-        "proposed:partnership",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch5.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the international densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "USA trade, CPTPP, EVFTA, RCEP and FDI series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national / international",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "vn-china-fdi",
       "title": "China FDI in Vietnam statistics",
       "publisher": "Ministry of Planning and Investment / GSO related",
@@ -1935,9 +1490,9 @@
       "description": "Registered and realised FDI from China (and Hong Kong where separately reported). China ranks among the top sources by number of new projects and has risen into the top tier by capital in recent years; manufacturing and processing dominate.",
       "url": "https://fia.mof.gov.vn/List/MenuID/07edbbe1-67a3-484b-a4e2-b5faef1b9de5/CatID/457641e2-2605-4632-bbd8-39ee65454a06",
       "domains": [
-        "proposed:fdi",
+        "investment",
         "proposed:china",
-        "proposed:bilateral"
+        "trade"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -1953,7 +1508,10 @@
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null,
       "_url_evidence": "FIA (Ministry of Finance) series of FDI attraction reports; the 2024 report in this list ranks China and Hong Kong among the top five sources of registered capital.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Same FIA listing of monthly cumulative FDI attraction reports, which carry the by-source-country breakdown including China/Hong Kong.",
+      "releases_per_year": 12
     },
     {
       "id": "vn-china-trade-detail",
@@ -1965,7 +1523,7 @@
       "description": "Commodity composition of bilateral trade. Vietnam imports large volumes of intermediate goods, components and machinery from China; exports electronics, telephones, agricultural products and other goods. Structural deficit with China is a recurring feature.",
       "url": null,
       "domains": [
-        "proposed:trade",
+        "trade",
         "proposed:china",
         "proposed:value-chains"
       ],
@@ -1995,8 +1553,7 @@
       "domains": [
         "proposed:border",
         "proposed:bez",
-        "proposed:china",
-        "proposed:regional"
+        "proposed:china"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -2040,36 +1597,6 @@
       "last_updated": null
     },
     {
-      "id": "vn-china-community",
-      "title": "Vietnam–China Community with a Shared Future framing",
-      "publisher": "Governments of Vietnam and China",
-      "country": "VN",
-      "jurisdiction_level": "international",
-      "region": "Vietnam–China",
-      "description": "Elevated political framing (Community with a shared future that carries strategic significance) that sits above the Comprehensive Strategic Cooperative Partnership. Continuously referenced in joint statements and high-level visits.",
-      "url": null,
-      "domains": [
-        "proposed:china",
-        "proposed:partnership",
-        "proposed:diplomacy"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch6-china.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Highest-tier political framing densification.",
-      "_referenced_by": [
-        "Comprehensive Strategic Partnership node",
-        "Trade, FDI and border cooperation analysis",
-        "Multi-vector strategy framing"
-      ],
-      "_jurisdiction_level_original": "bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true,
-      "_not_a_publication_reason": "Grok, agreeing with Claude: political framing carried inside joint statements, not a standalone product."
-    },
-    {
       "id": "vn-china-connectivity",
       "title": "Vietnam–China infrastructure and railway connectivity projects",
       "publisher": "Governments of Vietnam and China / related",
@@ -2079,10 +1606,9 @@
       "description": "Priority cross-border infrastructure cooperation, including standard-gauge railway lines linking the two countries. Treated as strategic connectivity projects in joint statements.",
       "url": null,
       "domains": [
-        "proposed:infrastructure",
+        "infrastructure",
         "proposed:railway",
-        "proposed:china",
-        "proposed:connectivity"
+        "proposed:china"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -2097,63 +1623,6 @@
       ],
       "_jurisdiction_level_original": "bilateral",
       "last_updated": null
-    },
-    {
-      "id": "vn-china-supply-chain",
-      "title": "China-linked supply-chain and production-network framing",
-      "publisher": "Derived from trade, FDI and industrial sources",
-      "country": "VN",
-      "jurisdiction_level": "international",
-      "region": "Vietnam–China",
-      "description": "Analytical and policy framing of Vietnam’s position in China-centred and China-linked regional production networks — especially electronics and intermediate goods. Captures both complementarity and strategic diversification pressures.",
-      "url": null,
-      "domains": [
-        "proposed:supply-chain",
-        "proposed:china",
-        "proposed:electronics",
-        "proposed:value-chains"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch6-china.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Value-chain framing node that links China inputs to Vietnam’s export performance (including to the USA).",
-      "_referenced_by": [
-        "Electronics trade and China trade-structure nodes",
-        "FDI and industrial-province analysis",
-        "USA export corridor and multi-vector strategy"
-      ],
-      "_jurisdiction_level_original": "bilateral / regional",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-batch6-meta",
-      "title": "Vietnam–China deep-dive densification meta-node",
-      "publisher": "Derived from MPI, customs, border and partnership sources",
-      "country": "VN",
-      "jurisdiction_level": "international",
-      "region": "Vietnam–China",
-      "description": "Meta-node binding China FDI, detailed trade structure, Border Economic Zones, land-border treaty/management, Community with a Shared Future framing, infrastructure/railway connectivity, and China-linked supply-chain framing into a coherent deep bilateral layer.",
-      "url": null,
-      "domains": [
-        "proposed:china",
-        "proposed:bilateral",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch6-china.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the China deep-dive pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier China trade, partnership, electronics, FDI and multi-vector series"
-      ],
-      "_jurisdiction_level_original": "bilateral",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     },
     {
       "id": "vn-banking-system",
@@ -2181,7 +1650,9 @@
         "Monetary and financial-stability assessments"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "sbv.gov.vn homepage gives no periodicity or dated releases for credit-institution structure / total assets."
     },
     {
       "id": "vn-state-owned-banks",
@@ -2211,7 +1682,10 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Retrieved the State Bank of Vietnam's 'State-owned Commercial Banks' register, current as of 30 June 2026, giving each bank's name, address, licence number/date and charter capital in VND billion (e.g. Agribank, 51,638.6 bn VND), with links to the earlier dated versions of the list back to 2022.",
-      "_url_route": "4 (SBV's own site navigation; dttktt.sbv.gov.vn remains unreachable)"
+      "_url_route": "4 (SBV's own site navigation; dttktt.sbv.gov.vn remains unreachable)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page shows the SOCB table 'By June 30, 2026' with a 'Related documents' archive of the same table at quarter-ends: 31/12/2023, 31/03/2024, 30/06/2024, 30/09/2024, 30/03/2025, 30/06/2026 - quarterly snapshots.",
+      "releases_per_year": 4
     },
     {
       "id": "vn-credit-growth",
@@ -2223,9 +1697,8 @@
       "description": "System-wide and sectoral credit growth rates and outstanding loan volumes. Credit expansion is a key transmission channel of monetary policy and a major driver of investment and consumption.",
       "url": "https://www.sbv.gov.vn/",
       "domains": [
-        "proposed:credit",
         "banking",
-        "proposed:monetary"
+        "monetary-policy"
       ],
       "_cadence_original": "monthly / annual",
       "_batch": [
@@ -2239,7 +1712,9 @@
         "NPL and financial-stability discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "sbv.gov.vn homepage states no release frequency for credit growth / outstanding loans and shows no dated credit releases to count."
     },
     {
       "id": "vn-npl",
@@ -2268,7 +1743,9 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "_url_evidence": "SBV statistics section listing the 'Ratio of NPLs over Total Loan Outstanding' series under Performance of Credit Institutions; the underlying data pages sit on dttktt.sbv.gov.vn, which is unreachable via WebFetch."
+      "_url_evidence": "SBV statistics section listing the 'Ratio of NPLs over Total Loan Outstanding' series under Performance of Credit Institutions; the underlying data pages sit on dttktt.sbv.gov.vn, which is unreachable via WebFetch.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "sbv.gov.vn/en/statistics lists 'Ratio of NPLs over Total Loan Outstanding' among available series but states no periodicity; the page is a navigation portal to a separate analytics platform with no dated NPL editions shown."
     },
     {
       "id": "vn-monetary-indicators",
@@ -2280,7 +1757,7 @@
       "description": "Money supply, deposit and other monetary aggregates that complement credit statistics and feed monetary-policy analysis.",
       "url": "https://www.sbv.gov.vn/",
       "domains": [
-        "proposed:monetary",
+        "monetary-policy",
         "proposed:aggregates",
         "proposed:sbv"
       ],
@@ -2296,7 +1773,9 @@
         "Financial-system statistics"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "sbv.gov.vn homepage carries no dated monetary-aggregate release and states no publication frequency for money supply / deposit series."
     },
     {
       "id": "vn-policy-banks",
@@ -2309,8 +1788,8 @@
       "url": null,
       "domains": [
         "proposed:policy-bank",
-        "proposed:social",
-        "proposed:credit"
+        "living-standards",
+        "banking"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -2327,33 +1806,6 @@
       "last_updated": null
     },
     {
-      "id": "vn-batch7-meta",
-      "title": "Vietnam banking and financial-system densification meta-node",
-      "publisher": "Derived from SBV sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding the structure and total assets of credit institutions, state-owned commercial banks, credit growth, non-performing loans, monetary aggregates and policy-banking institutions into a coherent banking and financial-system layer.",
-      "url": null,
-      "domains": [
-        "banking",
-        "proposed:financial-system",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch7-banking.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the banking densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "SBV institutional core, BOP and macro series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
       "id": "vn-state-budget",
       "title": "State budget revenue and expenditure statistics",
       "publisher": "Ministry of Finance",
@@ -2363,9 +1815,8 @@
       "description": "Official state budget execution reports covering revenue collection, expenditure and overall fiscal balance. Provides the primary fiscal-flow series for the central and local budgets.",
       "url": "https://mof.gov.vn/",
       "domains": [
-        "proposed:fiscal",
-        "proposed:budget",
-        "proposed:revenue",
+        "public-finance",
+        "taxation",
         "proposed:expenditure"
       ],
       "_cadence_original": "annual / periodic",
@@ -2380,7 +1831,9 @@
         "Social and investment spending discussions"
       ],
       "_jurisdiction_level_original": "national",
-      "last_updated": null
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "mof.gov.vn returned only the portal title and metadata - no budget execution reports, dates or stated schedule were retrievable from the page."
     },
     {
       "id": "vn-budget-deficit",
@@ -2392,7 +1845,7 @@
       "description": "Official deficit figures for the state budget (central and local components) as a share of GDP and in absolute terms. Closely monitored against National Assembly targets.",
       "url": null,
       "domains": [
-        "proposed:fiscal",
+        "public-finance",
         "proposed:deficit"
       ],
       "_cadence_original": "annual",
@@ -2420,9 +1873,7 @@
       "description": "Official public debt, government debt and external debt ratios relative to GDP, together with related debt-service indicators. Maintained well below statutory ceilings in recent years (public debt typically mid-30s % of GDP).",
       "url": null,
       "domains": [
-        "proposed:public-debt",
-        "proposed:fiscal",
-        "proposed:debt"
+        "public-finance"
       ],
       "_cadence_original": "annual / periodic",
       "_batch": [
@@ -2466,7 +1917,9 @@
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
       "_url_evidence": "NSO 'Science and technology, education' statistics topic page listing schools, classes, teachers and pupils by level (kindergarten, general education) and province.",
-      "_url_match": "series-level (corroborated)"
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "nso.gov.vn education section is an index of table titles (reference point 'as of 30 September', some 2023 data) with no release dates and no stated periodicity."
     },
     {
       "id": "vn-literacy-education-stock",
@@ -2495,7 +1948,9 @@
       ],
       "_jurisdiction_level_original": "national / regional",
       "last_updated": null,
-      "_url_evidence": "NSO population statistics topic page, which includes 'Percentage of literate population at 15 years of age and above by sex, residence and province'."
+      "_url_evidence": "NSO population statistics topic page, which includes 'Percentage of literate population at 15 years of age and above by sex, residence and province'.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "nso.gov.vn population section lists table titles (e.g. literacy rate by sex and residence) with no dates, no source cycle and no stated frequency."
     },
     {
       "id": "vn-higher-education",
@@ -2507,7 +1962,7 @@
       "description": "Statistics on tertiary education and the share of the population holding technical or university-level qualifications. Complements basic enrolment and literacy series.",
       "url": "https://www.nso.gov.vn/en/education/",
       "domains": [
-        "proposed:higher-education",
+        "post-secondary",
         "proposed:skills",
         "proposed:human-capital"
       ],
@@ -2525,65 +1980,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_url_evidence": "Same NSO education topic page, whose higher-education section covers universities and colleges, lecturers by qualification, students by province and post-graduate numbers.",
-      "_url_match": "series-level (corroborated)"
-    },
-    {
-      "id": "vn-batch8-meta",
-      "title": "Vietnam fiscal–education densification meta-node",
-      "publisher": "Derived from MOF, GSO and MOET sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding state budget revenue and expenditure, budget deficit, public debt, education enrolment and completion, literacy and educational attainment, and higher-education/technical qualifications into a coherent fiscal and human-capital layer.",
-      "url": null,
-      "domains": [
-        "proposed:fiscal",
-        "education",
-        "proposed:human-capital",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch8-fiscal-education.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the fiscal and education densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Earlier macro, labour, poverty and social-protection series"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-defence-budget",
-      "title": "Defence / military expenditure statistics",
-      "publisher": "Derived from official budget and international compilations (SIPRI-aligned)",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Estimates and reported figures for Vietnam’s military expenditure. Recent levels are commonly placed around USD 10 billion and in the low-to-mid 2 % of GDP range. Provides the resource base for force modernisation and self-defence capacity.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:budget",
-        "proposed:military"
-      ],
-      "_cadence_original": "annual",
-      "_batch": [
-        "2026-08-14_Vietnam-batch9-defence.json"
-      ],
-      "_shape": "own-cadence",
-      "_notes": "Core defence-resource node.",
-      "_referenced_by": [
-        "State budget and fiscal statistics",
-        "National defence policy framing",
-        "Security and modernisation analysis"
-      ],
-      "_jurisdiction_level_original": "national",
-      "releases_per_year": 1,
-      "last_updated": null,
-      "_flagged_not_a_publication": true
+      "_url_match": "series-level (corroborated)",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "nso.gov.vn education section gives no dates or stated frequency for tertiary / technical qualification tables."
     },
     {
       "id": "vn-defence-policy",
@@ -2595,9 +1994,7 @@
       "description": "Official national defence policy emphasising peace, self-defence, non-use of force, peaceful settlement of disputes, and gradual modernisation of the Vietnam People’s Army sufficient for self-defence. Continuously cited in security and foreign-policy analysis.",
       "url": null,
       "domains": [
-        "proposed:defence",
-        "proposed:policy",
-        "proposed:security"
+        "governance"
       ],
       "_cadence_original": "continuous",
       "_batch": [
@@ -2612,92 +2009,6 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null
-    },
-    {
-      "id": "vn-national-security-strategy",
-      "title": "National security strategy framing",
-      "publisher": "Party-State documents (e.g. Central Committee resolutions)",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "High-level national security strategy documents and resolutions that set priorities for internal stability, external defence, and the integration of security with socio-economic development.",
-      "url": null,
-      "domains": [
-        "proposed:security",
-        "proposed:strategy",
-        "proposed:policy"
-      ],
-      "_cadence_original": "periodic major resolutions",
-      "_batch": [
-        "2026-08-14_Vietnam-batch9-defence.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Strategic densification above day-to-day defence policy.",
-      "_referenced_by": [
-        "National defence policy framing",
-        "Internal security and social stability analysis",
-        "Foreign-policy and partnership documents"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true,
-      "_not_a_publication_reason": "Grok, agreeing with Claude: Party-State framing in Central Committee resolutions, not a published citable strategy document."
-    },
-    {
-      "id": "vn-maritime-security",
-      "title": "Maritime security and East Sea (South China Sea) framing",
-      "publisher": "Derived from defence, foreign-policy and partnership sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam / East Sea",
-      "description": "Policy and strategic framing of Vietnam’s maritime security interests, including sovereignty claims and the consistent preference for peaceful negotiation under international law (UNCLOS). Closely linked to the multi-vector external posture.",
-      "url": null,
-      "domains": [
-        "proposed:maritime",
-        "proposed:security",
-        "proposed:east-sea"
-      ],
-      "_cadence_original": "continuous",
-      "_batch": [
-        "2026-08-14_Vietnam-batch9-defence.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Maritime-security densification of the defence cluster.",
-      "_referenced_by": [
-        "National defence policy",
-        "China partnership and multi-vector strategy nodes",
-        "Naval modernisation discussions"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
-    },
-    {
-      "id": "vn-batch9-meta",
-      "title": "Vietnam defence–security densification meta-node",
-      "publisher": "Derived from MOD, fiscal and strategy sources",
-      "country": "VN",
-      "jurisdiction_level": "federal",
-      "region": "Vietnam",
-      "description": "Meta-node binding defence/military expenditure, national defence policy framing, national security strategy framing, and maritime security / East Sea framing into a coherent defence and security layer.",
-      "url": null,
-      "domains": [
-        "proposed:defence",
-        "proposed:security",
-        "proposed:meta"
-      ],
-      "_batch": [
-        "2026-08-14_Vietnam-batch9-defence.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Integrating node for the defence densification pass.",
-      "_referenced_by": [
-        "All detailed nodes in this batch",
-        "Fiscal, partnership and multi-vector series from earlier batches"
-      ],
-      "_jurisdiction_level_original": "national",
-      "last_updated": null,
-      "_flagged_not_a_publication": true
     }
   ],
   "dependencies": [],
@@ -2746,311 +2057,167 @@
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
       "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
-    ]
+    ],
+    "domain_semantic_pass": {
+      "date": "2026-08-18",
+      "merged_into_existing": "Synonyms folded into the 22 already-approved tags (prices→inflation, employment→labour, demography/census→population, monetary/central-bank→monetary-policy, gdp/grdp/regional-accounts→national-accounts, and so on).",
+      "promoted": "17 tags that had earned a slot were promoted out of proposed: and added to Domain in types.ts.",
+      "dropped": "Geographic pseudo-tags (regional, provincial, urban, municipal, metropolitan) and batch-meta pseudo-tags (comprehensive, multi-domain, meta, indicators) were removed — geography is already carried by region and jurisdiction_level, and the meta ones describe the batch rather than the report."
+    }
   },
   "_gaps": {
     "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
     "reports_without_url": [
-      "vn-batch1-meta",
       "vn-port-hcmc-caimep",
       "vn-port-haiphong",
-      "vn-batch10-meta",
       "vn-ethnic-minorities",
-      "vn-northern-mountains",
       "vn-ethnic-poverty",
-      "vn-ethnic-policy",
-      "vn-batch11-meta",
-      "vn-batch12-meta",
-      "vn-central-highlands",
-      "vn-secondary-provinces",
-      "vn-batch13-meta",
       "vn-grdp-hcmc",
-      "vn-red-river-delta",
-      "vn-industrial-provinces",
-      "vn-batch2-meta",
-      "vn-batch3-meta",
-      "vn-mekong-delta",
-      "vn-batch4-meta",
       "vn-china-relations",
       "vn-korea-trade-fdi",
-      "vn-multi-vector",
-      "vn-batch5-meta",
       "vn-china-trade-detail",
       "vn-border-economic-zones",
       "vn-land-border",
-      "vn-china-community",
       "vn-china-connectivity",
-      "vn-china-supply-chain",
-      "vn-batch6-meta",
       "vn-policy-banks",
-      "vn-batch7-meta",
       "vn-budget-deficit",
       "vn-public-debt",
-      "vn-batch8-meta",
-      "vn-defence-budget",
-      "vn-defence-policy",
-      "vn-national-security-strategy",
-      "vn-maritime-security",
-      "vn-batch9-meta"
+      "vn-defence-policy"
     ],
-    "reports_without_url_count": 41,
+    "reports_without_url_count": 15,
     "edges_without_evidence_url": [],
     "unresolved_cadence": [
       {
         "id": "vn-gso",
-        "text": "continuous"
+        "title": "General Statistics Office of Viet Nam (GSO) institutional core",
+        "kind": "continuous-database",
+        "basis": "gso.gov.vn is the agency's live portal/homepage; it carries continuously refreshed indicator tiles and links rather than one discrete publication. Item is the institution itself, not a titled series."
       },
       {
         "id": "vn-population",
-        "text": "census cycle + annual estimates"
+        "title": "Population and housing census / mid-year population estimates",
+        "kind": "unknown",
+        "basis": "Page fetched (gso.gov.vn homepage). Targeted check found no census cycle, no mid-year estimate schedule and no advance release calendar; only monthly CPI/IIP/socio-economic items unrelated to population."
       },
       {
         "id": "vn-national-accounts",
-        "text": "quarterly / annual"
+        "title": "National Accounts of Viet Nam (GDP)",
+        "kind": "unknown",
+        "basis": "gso.gov.vn homepage states no periodicity for GDP/national accounts and shows no dated GDP releases to count; no advance release calendar on the page."
       },
       {
         "id": "vn-labour",
-        "text": "quarterly / annual"
+        "title": "Labour force and employment statistics",
+        "kind": "unknown",
+        "basis": "gso.gov.vn homepage contains no labour-force survey release dates or stated periodicity."
       },
       {
         "id": "vn-sbv",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-bop",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "vn-usa-trade",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "vn-usa-relations",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-seaport-throughput",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "vn-port-hcmc-caimep",
-        "text": "continuous / annual summaries"
-      },
-      {
-        "id": "vn-port-haiphong",
-        "text": "continuous / annual summaries"
-      },
-      {
-        "id": "vn-logistics-framing",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-ethnic-minorities",
-        "text": "census / inter-censal"
-      },
-      {
-        "id": "vn-northern-mountains",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-ethnic-poverty",
-        "text": "periodic survey cycles"
-      },
-      {
-        "id": "vn-ethnic-policy",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-ecommerce",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-digital-strategy",
-        "text": "multi-year strategy + updates"
-      },
-      {
-        "id": "vn-central-highlands",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-secondary-provinces",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-fdi",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "vn-fdi-partners",
-        "text": "continuous"
+        "title": "State Bank of Vietnam (SBV) institutional and reporting core",
+        "kind": "continuous-database",
+        "basis": "sbv.gov.vn homepage is a live portal: continuously updated exchange rates, interbank rates and a rolling 'banking activity this week' feed; no single discrete release for the institutional core."
       },
       {
         "id": "vn-rice",
-        "text": "seasonal / annual"
+        "title": "Rice production statistics",
+        "kind": "unknown",
+        "basis": "nso.gov.vn agriculture section is an index of table titles ('Production of paddy by province' etc.) with no release dates, no editions to count and no stated periodicity."
       },
       {
         "id": "vn-agriculture",
-        "text": "quarterly / annual"
-      },
-      {
-        "id": "vn-red-river-delta",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-industrial-provinces",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-electronics-trade",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "vn-energy-mix",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "vn-pdp8",
-        "text": "multi-year plan + adjustments"
+        "title": "Agriculture, forestry and fishery production statistics",
+        "kind": "unknown",
+        "basis": "gso.gov.vn homepage gives no periodicity or dated releases for agriculture/forestry/fishery output."
       },
       {
         "id": "vn-poverty",
-        "text": "periodic survey cycles"
+        "title": "Poverty and living standards survey statistics",
+        "kind": "unknown",
+        "basis": "gso.gov.vn homepage states nothing about VHLSS or poverty-survey cycles and shows no dated poverty releases."
       },
       {
         "id": "vn-fta-network",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-mekong-delta",
-        "text": "continuous"
+        "title": "Vietnam FTA / EPA network overview",
+        "kind": "continuous-database",
+        "basis": "fta.gov.vn is a live portal: searchable HS-code tariff-preference lookup across 16+ agreements plus rolling news; the page states no release frequency and has no discrete edition."
       },
       {
         "id": "vn-aquaculture",
-        "text": "annual / periodic"
+        "title": "Aquaculture and fisheries production statistics",
+        "kind": "unknown",
+        "basis": "nso.gov.vn agriculture-forestry-fishery section is an undated catalogue of table titles; no dates or stated frequency for aquaculture/capture fisheries."
       },
       {
         "id": "vn-tourism",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "vn-ndc",
-        "text": "null (updated periodically)"
-      },
-      {
-        "id": "vn-ghg",
-        "text": "periodic inventory cycles"
+        "title": "International visitor arrivals and tourism statistics",
+        "kind": "unknown",
+        "basis": "bvhttdl.gov.vn/thong-ke is a news-style feed of ad-hoc provincial tourism items (Apr-Aug 2024) with no stated release schedule and no countable national visitor-arrivals series."
       },
       {
         "id": "vn-health-insurance",
-        "text": "annual / continuous"
+        "title": "Health insurance coverage statistics",
+        "kind": "unknown",
+        "basis": "Vietnam Social Security 'So lieu thong ke Nganh' page carries meeting summaries and directives (Dec 2025, Mar 2026, Apr 2026) rather than a dated statistical series; no stated publication schedule."
       },
       {
         "id": "vn-social-insurance",
-        "text": "annual / continuous"
-      },
-      {
-        "id": "vn-china-trade",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "vn-china-relations",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-korea-trade-fdi",
-        "text": "continuous"
+        "title": "Social insurance and unemployment insurance coverage",
+        "kind": "unknown",
+        "basis": "Same VSS statistics page: no stated frequency and no countable series of social/unemployment insurance coverage releases."
       },
       {
         "id": "vn-japan-trade-fdi",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-asean",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-multi-vector",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-china-fdi",
-        "text": "monthly / annual"
-      },
-      {
-        "id": "vn-china-trade-detail",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-border-economic-zones",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-china-community",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-china-connectivity",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-china-supply-chain",
-        "text": "continuous"
+        "title": "Vietnam–Japan trade and FDI statistics",
+        "kind": "unknown",
+        "basis": "MOFA page is a single background briefing on Japan and Vietnam-Japan relations marked 'Cap nhat den thang 3/2014'; it states no update frequency and there are no editions to count."
       },
       {
         "id": "vn-banking-system",
-        "text": "periodic / monthly updates"
-      },
-      {
-        "id": "vn-state-owned-banks",
-        "text": "continuous"
+        "title": "Structure and total assets of credit institutions",
+        "kind": "unknown",
+        "basis": "sbv.gov.vn homepage gives no periodicity or dated releases for credit-institution structure / total assets."
       },
       {
         "id": "vn-credit-growth",
-        "text": "monthly / annual"
+        "title": "Credit growth and outstanding loans statistics",
+        "kind": "unknown",
+        "basis": "sbv.gov.vn homepage states no release frequency for credit growth / outstanding loans and shows no dated credit releases to count."
       },
       {
         "id": "vn-npl",
-        "text": "quarterly / periodic"
+        "title": "Non-performing loans and asset-quality statistics",
+        "kind": "unknown",
+        "basis": "sbv.gov.vn/en/statistics lists 'Ratio of NPLs over Total Loan Outstanding' among available series but states no periodicity; the page is a navigation portal to a separate analytics platform with no dated NPL editions shown."
       },
       {
         "id": "vn-monetary-indicators",
-        "text": "monthly / periodic"
-      },
-      {
-        "id": "vn-policy-banks",
-        "text": "continuous"
+        "title": "Monetary aggregates and key SBV monetary indicators",
+        "kind": "unknown",
+        "basis": "sbv.gov.vn homepage carries no dated monetary-aggregate release and states no publication frequency for money supply / deposit series."
       },
       {
         "id": "vn-state-budget",
-        "text": "annual / periodic"
-      },
-      {
-        "id": "vn-public-debt",
-        "text": "annual / periodic"
+        "title": "State budget revenue and expenditure statistics",
+        "kind": "unknown",
+        "basis": "mof.gov.vn returned only the portal title and metadata - no budget execution reports, dates or stated schedule were retrievable from the page."
       },
       {
         "id": "vn-education-enrolment",
-        "text": "annual / census-linked"
+        "title": "Education enrolment and completion statistics",
+        "kind": "unknown",
+        "basis": "nso.gov.vn education section is an index of table titles (reference point 'as of 30 September', some 2023 data) with no release dates and no stated periodicity."
       },
       {
         "id": "vn-literacy-education-stock",
-        "text": "census / inter-censal surveys"
+        "title": "Literacy and educational attainment of the population",
+        "kind": "unknown",
+        "basis": "nso.gov.vn population section lists table titles (e.g. literacy rate by sex and residence) with no dates, no source cycle and no stated frequency."
       },
       {
         "id": "vn-higher-education",
-        "text": "periodic"
-      },
-      {
-        "id": "vn-defence-policy",
-        "text": "continuous"
-      },
-      {
-        "id": "vn-national-security-strategy",
-        "text": "periodic major resolutions"
-      },
-      {
-        "id": "vn-maritime-security",
-        "text": "continuous"
+        "title": "Higher education and technical qualifications statistics",
+        "kind": "unknown",
+        "basis": "nso.gov.vn education section gives no dates or stated frequency for tertiary / technical qualification tables."
       }
     ],
     "unresolved_jurisdiction_level": [],
@@ -3068,138 +2235,6 @@
         "result": "Grok recovered 1 of the 34, independently reproduced all 41 series-level URLs, and returned the other 33 as dead for the same reasons Claude hit."
       }
     },
-    "not_a_publication": [
-      {
-        "id": "vn-batch1-meta",
-        "title": "Vietnam foundational statistical-system and USA-linkage meta-node",
-        "finding": "Not a publication - a synthesised meta-node binding other nodes together."
-      },
-      {
-        "id": "vn-batch10-meta",
-        "title": "Vietnam ports–logistics densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-northern-mountains",
-        "title": "Midlands and Northern Mountains regional profile",
-        "finding": "Not a publication - a geographic region profile synthesised from other sources."
-      },
-      {
-        "id": "vn-ethnic-policy",
-        "title": "Ethnic minority and mountainous-region development policy framing",
-        "finding": "Policy framing rather than a single publication; the National Target Programme decision text could not be confirmed on an official domain (vanban.chinhphu.vn is only addressable by internal docid)."
-      },
-      {
-        "id": "vn-batch11-meta",
-        "title": "Vietnam ethnic–northern-mountains densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-batch12-meta",
-        "title": "Vietnam digital-economy densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-central-highlands",
-        "title": "Central Highlands regional economic profile",
-        "finding": "Not a publication - a synthesised regional profile."
-      },
-      {
-        "id": "vn-secondary-provinces",
-        "title": "Selected secondary provincial economies (Quang Ninh, Thanh Hoa, Nghe An, etc.)",
-        "finding": "Not a publication - a synthesised grouping of provinces."
-      },
-      {
-        "id": "vn-batch13-meta",
-        "title": "Vietnam further-provincial densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-red-river-delta",
-        "title": "Red River Delta regional economic profile",
-        "finding": "Not a publication - a synthesised regional profile."
-      },
-      {
-        "id": "vn-industrial-provinces",
-        "title": "Key industrial provinces (Bac Ninh, Hai Phong, Dong Nai, etc.)",
-        "finding": "Not a publication - a synthesised grouping of provinces."
-      },
-      {
-        "id": "vn-batch2-meta",
-        "title": "Vietnam industry–FDI–agriculture–regional densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-batch3-meta",
-        "title": "Vietnam electronics–energy–poverty–FTA densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-mekong-delta",
-        "title": "Mekong Delta regional economic and agricultural profile",
-        "finding": "Not a publication - a synthesised regional profile."
-      },
-      {
-        "id": "vn-batch4-meta",
-        "title": "Vietnam Mekong–tourism–climate–social-protection densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-multi-vector",
-        "title": "Vietnam multi-vector external economic strategy framing",
-        "finding": "Not a publication - a synthesised framing of Vietnam's external economic posture."
-      },
-      {
-        "id": "vn-batch5-meta",
-        "title": "Vietnam international-architecture densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-china-supply-chain",
-        "title": "China-linked supply-chain and production-network framing",
-        "finding": "Not a publication - a synthesised analytical framing."
-      },
-      {
-        "id": "vn-batch6-meta",
-        "title": "Vietnam–China deep-dive densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-batch7-meta",
-        "title": "Vietnam banking and financial-system densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-batch8-meta",
-        "title": "Vietnam fiscal–education densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-maritime-security",
-        "title": "Maritime security and East Sea (South China Sea) framing",
-        "finding": "Not a publication - a synthesised policy framing."
-      },
-      {
-        "id": "vn-batch9-meta",
-        "title": "Vietnam defence–security densification meta-node",
-        "finding": "Not a publication - synthesised meta-node."
-      },
-      {
-        "id": "vn-defence-budget",
-        "title": "Defence / military expenditure statistics",
-        "finding": "Not an official Vietnamese publication. The figures behind this node are SIPRI estimates; SIPRI is an independent research institute, not a government or multilateral publisher, and Vietnam publishes no disaggregated defence-expenditure series - defence spending is not broken out in any state-budget disclosure product I could reach. Returning null rather than pointing at a third-party estimate."
-      },
-      {
-        "id": "vn-china-community",
-        "title": "Vietnam–China Community with a Shared Future framing",
-        "finding": "Grok, agreeing with Claude: political framing carried inside joint statements, not a standalone product."
-      },
-      {
-        "id": "vn-national-security-strategy",
-        "title": "National security strategy framing",
-        "finding": "Grok, agreeing with Claude: Party-State framing in Central Committee resolutions, not a published citable strategy document."
-      }
-    ],
     "url_unreachable_or_not_published": [
       {
         "id": "vn-ethnic-poverty",
@@ -3294,7 +2329,6 @@
         "second_opinion": "Grok searched independently and also came up empty, hitting the same blockers."
       }
     ],
-    "not_a_publication_note": "These 23 nodes were checked against the web and are not published documents — synthesised 'meta'/'framing' nodes that only bind other nodes together, geographic areas, industries, projects, or institutions. The data spec (2b/2c) bans all of these. They are flagged in place with _flagged_not_a_publication rather than deleted, so you can strip them in one pass once you agree. 0 dependency edges in this file touch one.",
     "url_partial_match": [
       {
         "id": "vn-usa-trade",
@@ -3373,6 +2407,12 @@
         "caveat": "Shared with 1 other nodes in this file — the URL is the right official series page but not specific to this node. Same NSO education topic page, whose higher-education section covers universities and colleges, lecturers by qualification, students by province and post-graduate numbers.",
         "second_opinion": "Grok independently reached the same URL, so this is the best link that exists — not a shortcut. Treat the series-level match as final unless the publisher adds a per-node page."
       }
-    ]
+    ],
+    "not_a_publication_moved_to_archive": "26 nodes removed from this file on 2026-08-18; full records in _archive/vn-vietnam-not-publications.json",
+    "cadence_research_pass": {
+      "date": "2026-08-18",
+      "method": "Each node's own verified URL was fetched and the release frequency read off the page — a stated periodicity, an advance release calendar, or a count of dated editions. Numbers carry their evidence in _cadence_evidence. Nothing was inferred from the title alone, and Grok's original text is preserved in _cadence_original.",
+      "items_checked": 40
+    }
   }
 }
