@@ -1,0 +1,1682 @@
+{
+  "meta": {
+    "country": "Argentina",
+    "code": "AR",
+    "consolidated_on": "2026-08-18",
+    "actor": "Claude — consolidation pass (no research, no content rewriting)",
+    "scope": "Every Grok batch file for Argentina merged into one file. Records are byte-faithful to the batches except for the normalisations listed in _consolidation.",
+    "source_batch_count": 6,
+    "source_batches": [
+      "2026-08-13_Argentina-batch1.json",
+      "2026-08-13_Argentina-batch2.json",
+      "2026-08-13_Argentina-batch3-gba.json",
+      "2026-08-13_Argentina-batch4-provinces.json",
+      "2026-08-13_Argentina-batch5-trade-agri-public.json",
+      "2026-08-13_Argentina-batch6-energy-mining.json"
+    ],
+    "counts": {
+      "reports": 61,
+      "dependencies": 16,
+      "dropped_notes": 5
+    },
+    "container_shapes_seen": {
+      "candidates,dropped_or_rejected,meta,proposed_edges": 6
+    },
+    "schema_aligned_on": "2026-08-18"
+  },
+  "reports": [
+    {
+      "id": "ar-ley-17622",
+      "title": "Ley Nº 17.622 — Creación del Instituto Nacional de Estadística y Censos (INDEC) y del Sistema Estadístico Nacional",
+      "publisher": "Poder Ejecutivo Nacional / Congreso de la Nación Argentina",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Foundational 1968 statute that creates INDEC, organises the Sistema Estadístico Nacional (SEN) under the principle of normative centralisation and executive decentralisation, and assigns INDEC direction of all official statistics in the national territory. Still the core legal basis for official statistics (with Decree 3110/70 and later complementary norms).",
+      "url": "https://www.argentina.gob.ar/normativa/nacional/ley-17622-24962",
+      "domains": [
+        "proposed:statistical-system",
+        "proposed:law",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Prime static + recurring-citation node — exact analogue of Mexico’s LSNIEG.\n\nContextual framing from the law itself and later references:\nLey 17.622 establishes that INDEC shall ‘unificar la orientación y ejercer la dirección superior de todas las actividades estadísticas oficiales que se realicen en el territorio de la Nación’ and ‘estructurar, mediante la articulación y coordinación de los servicios estadísticos nacionales, provinciales y municipales, el Sistema Estadístico Nacional… de acuerdo con el principio de centralización normativa y descentralización ejecutiva.’\n\nSubsequent instruments (Decree 3110/70, Resolución 130/2025, Programa Anual de Trabajo) and international assessments continuously cite this statute as the legal foundation. No independent publication cadence is required; the recurring institutional citation satisfies the expanded node definition.",
+      "_referenced_by": [
+        "INDEC institutional pages and methodological documents",
+        "Resolución 130/2025 and Programa Anual de Trabajo references to the legal framework",
+        "OECD and IMF assessments of the Argentine statistical system",
+        "Every major INDEC programme methodology that cites the SEN legal basis"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ar-sen",
+      "title": "Sistema Estadístico Nacional (SEN) / National Statistical System of Argentina",
+      "publisher": "INDEC (coordinator)",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "The organised set of statistical services of national, provincial and municipal bodies that produce official statistics. Coordinated by INDEC under normative centralisation and executive decentralisation. Each province has a Dirección Provincial de Estadística (DPE).",
+      "url": "https://www.indec.gob.ar/indec/web/Institucional-Indec-SistemaEstadistico",
+      "domains": [
+        "proposed:statistical-system",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Institutional framework node. Continuously referenced as the organisational architecture within which INDEC and the DPEs operate. Static in the sense that it is not a periodic statistical release, but load-bearing and recurringly cited.",
+      "_referenced_by": [
+        "Ley 17.622 and its regulatory decrees",
+        "INDEC Programa Anual de Trabajo",
+        "Relevamiento del Sistema Estadístico Nacional publications",
+        "All major INDEC programme methodologies"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ar-scn",
+      "title": "Sistema de Cuentas Nacionales (SCN) / National Accounts of Argentina",
+      "publisher": "INDEC — Dirección Nacional de Cuentas Nacionales",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Full national-accounts system producing GDP (production, expenditure, income), Supply and Use Tables (COU), institutional sector accounts, generation of income, and related aggregates. Current base year 2004 (with ongoing revision work). Quarterly and annual releases.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-9",
+      "domains": [
+        "national-accounts",
+        "proposed:gdp"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core macroeconomic statistical system. Methodological publications document the base-2004 estimation procedures and the use of sources such as SIPA and EPH microdata. Satellite accounts (culture, etc.) are explicitly made compatible with the SCN revision.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-emae",
+      "title": "Estimador Mensual de Actividad Económica (EMAE) / Monthly Estimator of Economic Activity",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly volume indicator of economic activity that provides an early signal of GDP movements. Published with original, seasonally adjusted and trend-cycle series.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-9",
+      "domains": [
+        "national-accounts",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Principal high-frequency activity indicator. Regularly cited in INDEC Informa and in BCRA / market analysis as the monthly proxy for GDP. May 2026 release showed +0.2% year-on-year (seasonally adjusted) and −0.5% month-on-month (original).",
+      "last_updated": null
+    },
+    {
+      "id": "ar-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "INDEC — Dirección Nacional de Estadísticas de Precios",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "National consumer price index measuring monthly changes in the prices of a representative basket of goods and services consumed by urban households. Published for Total Nacional and major regions (GBA, Pampeana, Noreste, Noroeste, Cuyo, Patagonia). Core, seasonal and regulated breakdowns also released.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:prices",
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship price statistic. July 2026: +2.1% month-on-month, +19.3% year-to-date. Disseminated within 8–10 working days after month-end (SDDS). Direct input into the valorization of the Canasta Básica Alimentaria and Canasta Básica Total used for poverty lines.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-sipm",
+      "title": "Sistema de Índices de Precios Mayoristas (SIPM) — IPIM, IPIB, IPP",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Wholesale price system comprising the Índice de Precios Internos al por Mayor (IPIM), Índice de Precios Internos Básicos al por Mayor (IPIB) and Índice de Precios Básicos del Productor (IPP). Monthly.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-32",
+      "domains": [
+        "proposed:prices",
+        "proposed:wholesale"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complements the IPC on the producer/wholesale side. Used in national-accounts deflation and industrial analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-eph",
+      "title": "Encuesta Permanente de Hogares (EPH) / Permanent Household Survey",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Continuous household survey that is the primary source for labour-market indicators (activity, employment, unemployment, underemployment, informality) and for income-based poverty measurement in 31 urban agglomerations. Microdata released regularly.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-31-58",
+      "domains": [
+        "labour",
+        "proposed:income",
+        "proposed:poverty",
+        "proposed:households"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central social and labour survey. Q1 2026: activity rate 48.6%, employment rate 44.8%, unemployment rate 7.8%. Also the source for the official poverty and indigency incidence figures published each semester. Extended total-urban version exists.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-pobreza-indigencia",
+      "title": "Incidencia de la pobreza y la indigencia (líneas CBA / CBT)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Official income-poverty and indigency (extreme poverty) rates for the 31 EPH urban agglomerations. Calculated by comparing household income with the Canasta Básica Alimentaria (CBA = indigency line) and Canasta Básica Total (CBT = poverty line). Published twice yearly.",
+      "releases_per_year": 2,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-46-152",
+      "domains": [
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Headline social indicator. Second semester 2025: 21.0% of households / 28.2% of persons below the poverty line; 4.8% of households / 6.3% of persons below the indigency line (31 agglomerations). Values of CBA and CBT are updated monthly with the IPC.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-cba-cbt",
+      "title": "Canasta Básica Alimentaria (CBA) y Canasta Básica Total (CBT) / Basic Food Basket and Total Basic Basket",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly monetary values of the food basket (indigency line) and the total basic basket (poverty line) for an adult-equivalent and for reference households, by region. Updated with the IPC.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:prices",
+        "proposed:income"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Direct input into the poverty measurement. July 2026: CBT for a reference household of four required more than $1.56 million to stay above the poverty line. Regional series published (GBA, etc.).",
+      "last_updated": null
+    },
+    {
+      "id": "ar-censo-poblacion",
+      "title": "Censo Nacional de Población, Hogares y Viviendas / National Population, Household and Housing Census",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Decennial (most recent 2022) census of population, households and dwellings. Provides the structural demographic and housing baseline and sampling frames for household surveys.",
+      "releases_per_year": 0.1,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:census",
+        "proposed:demography",
+        "proposed:housing"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational demographic product. 2022 census results and REDATAM databases are the reference for population structure, housing characteristics and small-area estimation. Continuously cited by EPH design, poverty analysis and provincial statistical offices.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-bcra-bop",
+      "title": "Balanza de Pagos / Balance of Payments (BCRA)",
+      "publisher": "Banco Central de la República Argentina (BCRA)",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Quarterly balance-of-payments statistics compiled by the central bank. Covers current account, capital account, financial account and reserve assets.",
+      "releases_per_year": 4,
+      "url": "https://www.bcra.gob.ar/",
+      "domains": [
+        "proposed:external-sector",
+        "proposed:balance-of-payments"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core external-accounts product. Complements INDEC merchandise-trade and national-accounts data. Regular press releases give the quarterly aggregates and ratios to GDP.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-bcra-reservas",
+      "title": "Reservas Internacionales del BCRA / International Reserves",
+      "publisher": "Banco Central de la República Argentina (BCRA)",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Stock of international reserves held by the BCRA. Published at high frequency (daily/weekly/monthly) and analysed in the Informe Monetario Mensual.",
+      "releases_per_year": 52,
+      "url": "https://www.bcra.gob.ar/",
+      "domains": [
+        "proposed:reserves",
+        "proposed:external-sector",
+        "proposed:monetary"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key external-vulnerability and monetary-policy indicator. Appears in the weekly/monthly monetary reports and in the balance-of-payments financial account (change in reserve assets).",
+      "last_updated": null
+    },
+    {
+      "id": "ar-bcra-base-monetaria",
+      "title": "Base monetaria y agregados monetarios / Monetary base and monetary aggregates",
+      "publisher": "Banco Central de la República Argentina (BCRA)",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Regular statistics of the monetary base and broader monetary aggregates (M2, M3, etc.) published by the BCRA and analysed in the Informe Monetario Mensual.",
+      "releases_per_year": 12,
+      "url": "https://www.bcra.gob.ar/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:financial"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core monetary statistics. The monthly monetary report tracks real and seasonally adjusted movements, factors of expansion/contraction, and ratios to GDP.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-mercosur",
+      "title": "Tratado de Asunción / Mercado Común del Sur (MERCOSUR)",
+      "publisher": "Estados Parte del MERCOSUR (Argentina, Brasil, Paraguay, Uruguay, etc.)",
+      "country": "AR",
+      "jurisdiction_level": "international",
+      "region": "South America / Argentina",
+      "description": "Foundational 1991 treaty establishing the Southern Common Market. Static legal instrument governing preferential trade, common external tariff aspirations and regional integration. Continuously cited in Argentine trade statistics, BCRA analysis and policy documents.",
+      "url": "https://www.mercosur.int/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement",
+        "proposed:regional-integration"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Prime international static + recurring-citation node — analogue of Mexico’s T-MEC.\n\nContextual framing: the Treaty of Asunción (23 March 1991) created MERCOSUR with the objectives of free circulation of goods and services, a common external commercial policy, and coordination of sectoral policies. Thirty-five years on it remains the institutional framework for a large share of Argentina’s regional trade (partner countries accounted for roughly 19% of Argentine exports and 29% of imports in recent figures). INDEC participates in the Reunión Especializada de Estadísticas del Mercosur (REES). No separate ‘MERCOSUR statistical yearbook’ is required for the instrument to qualify; the recurring citation in trade and integration analysis is sufficient under the expanded node definition.",
+      "_referenced_by": [
+        "Argentine trade and balance-of-payments analysis",
+        "INDEC external-sector publications",
+        "BCRA and Ministry of Economy reports on regional trade shares",
+        "REES (Reunión Especializada de Estadísticas del Mercosur) coordinated statistical work"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ar-ipi",
+      "title": "Índice de Producción Industrial Manufacturero (IPI manufacturero)",
+      "publisher": "INDEC — Dirección Nacional de Estadísticas Económicas",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly volume index of manufacturing industrial production covering the full set of manufacturing activities for the national territory. Published with original, seasonally adjusted and trend-cycle series. Replaced the earlier Estimador Mensual Industrial (EMI).",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:industry",
+        "proposed:short-term-indicators",
+        "proposed:manufacturing"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core short-term industrial indicator. June 2026: +2% year-on-year, +0.9% month-on-month (seasonally adjusted). First-half 2026 cumulative −2.2% vs same period 2025. Division-level detail regularly published. Directly used in EMAE and national-accounts analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-ucii",
+      "title": "Utilización de la Capacidad Instalada en la Industria (UCII)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly percentage measure of the proportion of installed productive capacity actually used in manufacturing industry. Based on a panel of 600–700 firms; sector blocks published.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:industry",
+        "proposed:capacity",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complement to the IPI. February 2026 general level 54.6%. Uses 2004 VAB structure for weighting. High analytical value for gauging slack/overheating in manufacturing.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-isac",
+      "title": "Indicador Sintético de la Actividad de la Construcción (ISAC)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly synthetic indicator of construction activity based on apparent consumption of key construction inputs (cement, iron, paints, sanitary ware, etc.). Original, seasonally adjusted and trend-cycle series.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "construction",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Principal construction activity indicator. June 2026: +4.0% year-on-year; first-half cumulative +2.8%. Complementary registered private employment series also published with a lag.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-servicios-publicos",
+      "title": "Indicador Sintético de Servicios Públicos",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly synthetic indicator of public-services activity (transport, communications, electricity, gas, water, etc.). Original, seasonally adjusted and trend-cycle series.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:services",
+        "proposed:public-services",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "May 2026: original series +2.4% year-on-year; seasonally adjusted −0.3% month-on-month. Completes the short-term activity triangle with EMAE, IPI and ISAC.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-csc",
+      "title": "Cuenta Satélite de Cultura (CSC) / Culture Satellite Account",
+      "publisher": "INDEC — Dirección Nacional de Cuentas Nacionales + Secretaría de Cultura / SInCA",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Satellite account measuring the economic contribution of culture: gross value added, external trade, employment, generation of income and private cultural consumption. Explicitly compatible with the SCN revision.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-28-154",
+      "domains": [
+        "national-accounts",
+        "proposed:culture",
+        "proposed:satellite"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Joint INDEC–SInCA product. Series 2023–2025 published August 2026. Culture accounts for roughly 1.7% of total VAB and 1.6% of employment in recent figures. Methodological document available.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-cst",
+      "title": "Cuenta Satélite de Turismo de la Argentina (CST-A) / Tourism Satellite Account",
+      "publisher": "INDEC + Ministerio de Turismo y Deportes",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Satellite account analysing tourism demand and its interface with the supply of tourism-characteristic goods and services. Compatible with the SCN.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-141",
+      "domains": [
+        "national-accounts",
+        "proposed:tourism",
+        "proposed:satellite"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Joint INDEC–MINTURDEP product. Methodological base 2004; series extended. Measures tourism’s contribution to GDP, employment and related aggregates.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-generacion-ingreso",
+      "title": "Cuenta de generación del ingreso e insumo de mano de obra",
+      "publisher": "INDEC — Dirección Nacional de Cuentas Nacionales",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "National-accounts component that distributes value added into compensation of employees, mixed income, other taxes less subsidies on production, and operating surplus. Also publishes labour input (hours/jobs) and sex/age breakdowns.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-9",
+      "domains": [
+        "national-accounts",
+        "labour",
+        "proposed:income"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key distributional layer of the SCN. Q1 2026 annualised shares: compensation of employees 47.0%, mixed income 16.3%, other taxes net of subsidies −0.6%, operating surplus 37.3%. Sex and age disaggregations published for recent years.",
+      "last_updated": null,
+      "part_of": "ar-scn"
+    },
+    {
+      "id": "ar-bcra-informe-monetario",
+      "title": "Informe Monetario Mensual (BCRA)",
+      "publisher": "Banco Central de la República Argentina",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly analytical report on the evolution of the monetary base, monetary aggregates, international reserves, foreign-exchange market, credit and related policy variables.",
+      "releases_per_year": 12,
+      "url": "https://www.bcra.gob.ar/publicaciones/informe-monetario-mensual-mayo-2026/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:central-bank",
+        "proposed:policy"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary high-frequency monetary-policy document. Tracks real and seasonally adjusted movements of M2/M3, factors of base expansion/contraction, FX purchases, and credit. July 2026 edition still the current reference at time of research.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-bcra-mercado-cambios",
+      "title": "Informe de Evolución del Mercado de Cambios y Balance Cambiario",
+      "publisher": "Banco Central de la República Argentina",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly report on foreign-exchange market transactions (purchases/sales by sector and concept) and the corresponding exchange-balance (balance cambiario).",
+      "releases_per_year": 12,
+      "url": "https://www.bcra.gob.ar/",
+      "domains": [
+        "proposed:external-sector",
+        "proposed:fx",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Detailed FX-flow companion to the official balance of payments. Sectoral and concept breakdowns (goods, services, primary income, financial account, etc.) published monthly. Standardised statistical annexes available from 2003.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-icc",
+      "title": "Índice del Costo de la Construcción (ICC)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly index of the average cost of private residential construction in CABA and the 24 partidos of Greater Buenos Aires. Part of the broader price-statistics suite.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:prices",
+        "construction"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complements ISAC (volume) with a cost measure. Used in construction-sector analysis and national-accounts deflation.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-indice-salarios",
+      "title": "Índice de Salarios (IS)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly index estimating wage variations for the public sector and for registered and unregistered private-sector workers.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "labour",
+        "proposed:wages",
+        "proposed:prices"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key labour-cost and income indicator. Published alongside the IPC and CBA/CBT suite and used in real-wage and poverty-context analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-indec-informa",
+      "title": "INDEC Informa (revista mensual de indicadores de coyuntura)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly compilation magazine that disseminates the principal short-term indicators produced by INDEC: industrial activity, construction, external sector, labour, poverty/income, consumer and wholesale prices, and national accounts.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:compilation",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Useful ‘dashboard’ publication that packages the core monthly series. Not a primary source, but a recurring official compilation that itself cites and is cited as the convenient reference for the concurrent indicators.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-gba",
+      "title": "Gran Buenos Aires (GBA) / Aglomerado Gran Buenos Aires — metropolitan statistical region",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Gran Buenos Aires",
+      "description": "Primary metropolitan statistical region of Argentina, comprising the Ciudad Autónoma de Buenos Aires plus the partidos of the Conurbano bonaerense. Largest urban agglomeration in the country (~15–16 million depending on exact delineation). Core domain of the EPH and of many price and activity series.",
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:demography",
+        "labour"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Central metro node. INDEC regularly publishes separate results for ‘Gran Buenos Aires’, ‘Ciudad Autónoma de Buenos Aires’ and ‘Partidos del GBA’. Recent work also defines a broader Región Metropolitana Buenos Aires (RMBA) that unifies AGBA with Gran La Plata (~16.4 million in 2022 census dwellings). The GBA remains the workhorse statistical region for labour, poverty and prices.",
+      "_referenced_by": [
+        "EPH labour and poverty results (GBA / CABA / Partidos del GBA breakdowns)",
+        "IPC regional series (GBA)",
+        "Census and population projections",
+        "INDEC agglomeration delineations and RMBA documentation"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ar-caba",
+      "title": "Ciudad Autónoma de Buenos Aires (CABA) — statistical and administrative profile",
+      "publisher": "INDEC + Instituto de Estadística y Censos de la Ciudad Autónoma de Buenos Aires (IDECBA)",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Ciudad Autónoma de Buenos Aires",
+      "description": "Autonomous city and federal capital. Population ~3 million. Distinct legal and statistical identity within the GBA. Local statistical production is relatively dense via IDECBA (Anuario Estadístico, own surveys and indicators).",
+      "releases_per_year": 1,
+      "url": "https://www.estadisticaciudad.gob.ar/",
+      "domains": [
+        "proposed:municipal",
+        "proposed:capital",
+        "proposed:caba"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Capital node with stronger local statistical capacity than most Argentine municipalities. IDECBA (created/strengthened under Ley 6724) produces an Anuario Estadístico and coordinates the city’s statistical system. EPH and IPC still supply the national-framework series, but local packaging and additional indicators are richer than in most provinces.",
+      "last_updated": null,
+      "part_of": "ar-gba"
+    },
+    {
+      "id": "ar-idecba",
+      "title": "Instituto de Estadística y Censos de la Ciudad Autónoma de Buenos Aires (IDECBA)",
+      "publisher": "Gobierno de la Ciudad Autónoma de Buenos Aires",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — CABA",
+      "description": "Local statistical institute of the Autonomous City of Buenos Aires. Coordinates the city’s statistical system, produces the Anuario Estadístico and other sociodemographic and economic indicators, and participates in national operatives on city territory.",
+      "releases_per_year": 1,
+      "url": "https://www.estadisticaciudad.gob.ar/",
+      "domains": [
+        "proposed:statistics",
+        "proposed:local-institute",
+        "proposed:caba"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Strongest local statistical office in the Argentine metro hierarchy. Anuario Estadístico 2024 is a concrete recurring product. Analogous in function (though smaller in scale) to IIEG Jalisco or IPDP CDMX.",
+      "last_updated": null,
+      "part_of": "ar-sen"
+    },
+    {
+      "id": "ar-partidos-gba",
+      "title": "Partidos del Gran Buenos Aires (Conurbano) — statistical aggregate",
+      "publisher": "INDEC + Dirección Provincial de Estadística de Buenos Aires",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Partidos del GBA",
+      "description": "The set of partidos of the Province of Buenos Aires that form the Conurbano surrounding CABA. Collectively ~12–13 million inhabitants. Regularly treated as a distinct statistical domain in EPH (labour, poverty) and other national series.",
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:conurbano",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Key contrast node inside the metro. Recent EPH figures show markedly higher poverty and unemployment in the Partidos del GBA than in CABA (e.g. unemployment ~9.7% vs ~4.8% in one recent quarter; poverty rates also substantially higher). Demonstrates intra-metro heterogeneity.",
+      "_referenced_by": [
+        "EPH results broken out for ‘Partidos del GBA’",
+        "Poverty and labour analyses that contrast CABA vs Conurbano",
+        "Provincial statistical products of Buenos Aires"
+      ],
+      "last_updated": null,
+      "part_of": "ar-gba"
+    },
+    {
+      "id": "ar-dpe-buenos-aires",
+      "title": "Dirección Provincial de Estadística de la Provincia de Buenos Aires",
+      "publisher": "Gobierno de la Provincia de Buenos Aires",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Provincia de Buenos Aires",
+      "description": "Provincial statistical office (DPE) that coordinates the Sistema Estadístico Provincial of Buenos Aires and participates in national operatives. Produces or compiles provincial and, where relevant, municipal-level indicators.",
+      "releases_per_year": 1,
+      "url": "https://www.estadistica.ec.gba.gov.ar/",
+      "domains": [
+        "proposed:statistics",
+        "proposed:provincial-institute",
+        "proposed:buenos-aires"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Provincial counterpart to IDECBA. Part of the SEN architecture established by Ley 17.622. Capacity is real but thinner and more dependent on INDEC frameworks than the CABA institute for the densest urban indicators.",
+      "last_updated": null,
+      "part_of": "ar-sen"
+    },
+    {
+      "id": "ar-eph-gba",
+      "title": "EPH — resultados para Gran Buenos Aires / CABA / Partidos del GBA",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Gran Buenos Aires",
+      "description": "Geographic disaggregation of the Permanent Household Survey that regularly publishes labour-market and poverty indicators separately for the Gran Buenos Aires region, the Ciudad Autónoma, and the Partidos del GBA.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-31-58",
+      "domains": [
+        "labour",
+        "proposed:poverty",
+        "proposed:metropolitan"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "The practical vehicle through which the metro layer becomes statistically visible. Allows direct comparison of CABA vs Conurbano on unemployment, informality and poverty — the main homogeneity/heterogeneity test inside the largest Argentine metro.",
+      "last_updated": null,
+      "part_of": "ar-eph"
+    },
+    {
+      "id": "ar-ipc-gba",
+      "title": "IPC — serie regional Gran Buenos Aires",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Gran Buenos Aires",
+      "description": "Regional consumer-price index for the Gran Buenos Aires domain, published alongside the national total and other regions (Pampeana, Noreste, Noroeste, Cuyo, Patagonia).",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:prices",
+        "proposed:metropolitan"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Price counterpart to the EPH geographic breakdowns. GBA is the densest and most closely watched regional CPI series.",
+      "last_updated": null,
+      "part_of": "ar-ipc"
+    },
+    {
+      "id": "ar-rmba",
+      "title": "Región Metropolitana Buenos Aires (RMBA) — expanded metropolitan delineation",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Región Metropolitana Buenos Aires",
+      "description": "Broader metropolitan statistical unit that unifies the Aglomerado Gran Buenos Aires with the Aglomerado Gran La Plata and related continuous urban fabric. Population in private dwellings ~16.4 million (2022 census). Newer delineation published by INDEC.",
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:demography"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Emerging higher-level metro node. Not yet as routinely used in monthly/quarterly releases as the classic GBA, but already the reference for structural demographic work. Useful parent for future expansion beyond the traditional 24-partido GBA.",
+      "_referenced_by": [
+        "INDEC 2024 documentation on Región Metropolitana Buenos Aires",
+        "Census 2022 geographic products",
+        "Academic and planning analyses of the expanded metro"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ar-caba-anuario",
+      "title": "Anuario Estadístico de la Ciudad de Buenos Aires (IDECBA)",
+      "publisher": "Instituto de Estadística y Censos de la Ciudad Autónoma de Buenos Aires",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — CABA",
+      "description": "Annual statistical yearbook of the Autonomous City covering territory, demography, social, economic, fiscal, cultural and environmental indicators.",
+      "releases_per_year": 1,
+      "url": "https://www.estadisticaciudad.gob.ar/",
+      "domains": [
+        "proposed:compilation",
+        "proposed:caba",
+        "proposed:local-institute"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Concrete recurring local product that packages both national series cut to CABA and city-specific indicators. Demonstrates that local statistical packaging capacity exists and is relatively strong in the capital.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-conurbano-pobreza",
+      "title": "Pobreza e indigencia en Partidos del GBA / Conurbano (EPH cut)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Partidos del GBA",
+      "description": "Poverty and indigency incidence specifically for the partidos of the Conurbano, regularly published as a geographic cut of the EPH-based poverty measurement.",
+      "releases_per_year": 2,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:metropolitan",
+        "proposed:conurbano"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-visibility social indicator for the densest poor belt of the metro. Recent figures show substantially higher poverty and unemployment in the Partidos del GBA than in CABA, illustrating intra-metro heterogeneity under a common national statistical framework.",
+      "last_updated": null,
+      "part_of": "ar-pobreza-indigencia"
+    },
+    {
+      "id": "ar-cordoba-entity",
+      "title": "Provincia de Córdoba — core statistical identity",
+      "publisher": "INDEC + Dirección General de Estadística y Censos de Córdoba",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Córdoba",
+      "description": "One of the largest and most economically diversified interior provinces. Strong provincial statistical office and a major urban agglomeration (Gran Córdoba).",
+      "releases_per_year": 4,
+      "url": "http://estadistica.cba.gov.ar",
+      "domains": [
+        "proposed:provincial",
+        "proposed:cordoba"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-capacity interior province. Provincial statistical office is active and participates fully in the SEN. Useful contrast to both the GBA and the poorer northern provinces.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-dgec-cordoba",
+      "title": "Dirección General de Estadística y Censos de la Provincia de Córdoba",
+      "publisher": "Gobierno de la Provincia de Córdoba",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Córdoba",
+      "description": "Provincial statistical office that coordinates the Sistema Estadístico Provincial of Córdoba and produces or compiles provincial indicators under the SEN framework.",
+      "releases_per_year": 1,
+      "url": "http://estadistica.cba.gov.ar",
+      "domains": [
+        "proposed:statistics",
+        "proposed:provincial-institute",
+        "proposed:cordoba"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "One of the stronger provincial statistical services. Explicitly listed in SEN directories and maintains an active web presence.",
+      "last_updated": null,
+      "part_of": "ar-sen"
+    },
+    {
+      "id": "ar-santa-fe-entity",
+      "title": "Provincia de Santa Fe — core statistical identity",
+      "publisher": "INDEC + Instituto Provincial de Estadística y Censos de Santa Fe (IPEC)",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Santa Fe",
+      "description": "Major agricultural and industrial province with two large agglomerations (Gran Rosario, Gran Santa Fe). Active provincial statistical institute.",
+      "releases_per_year": 4,
+      "url": "https://www.estadisticasantafe.gob.ar/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:santa-fe"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Another high-capacity interior province. IPEC is a well-established provincial statistical body within the SEN.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-ipec-santa-fe",
+      "title": "Instituto Provincial de Estadística y Censos de Santa Fe (IPEC)",
+      "publisher": "Gobierno de la Provincia de Santa Fe",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Santa Fe",
+      "description": "Provincial statistical institute responsible for coordinating and producing official statistics for Santa Fe under the SEN architecture.",
+      "releases_per_year": 1,
+      "url": "https://www.estadisticasantafe.gob.ar/",
+      "domains": [
+        "proposed:statistics",
+        "proposed:provincial-institute",
+        "proposed:santa-fe"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Strong provincial counterpart to IDECBA and the Córdoba DGEC. Maintains public statistical products and participates in national operatives.",
+      "last_updated": null,
+      "part_of": "ar-sen"
+    },
+    {
+      "id": "ar-chaco-entity",
+      "title": "Provincia del Chaco — core statistical identity (northern/NEA contrast)",
+      "publisher": "INDEC + Dirección de Estadística y Censos de Chaco",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Chaco",
+      "description": "Northeastern province with persistently high poverty indicators. Gran Resistencia is one of the highest-poverty large agglomerations in recent EPH cuts. Tests the statistical hierarchy under higher marginalisation.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:chaco",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Homogeneity-test province. Second-semester 2025 EPH: Gran Resistencia showed poverty of ~42.2% of persons and indigency ~13.2% — among the highest of the 31 agglomerations. Local statistical office exists but independent primary production is thinner; most usable series remain national cuts.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-gran-resistencia",
+      "title": "Gran Resistencia — municipal / agglomeration statistical profile",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "municipal",
+      "region": "Argentina — Chaco — Gran Resistencia",
+      "description": "Principal urban agglomeration of Chaco and one of the highest-poverty large urban areas in the EPH sample. Data almost entirely from national programmes (EPH, census, IPC regional) with limited independent local packaging.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:municipal",
+        "proposed:chaco",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Northern/NEA contrast node. High poverty and indigency relative to CABA or Córdoba. Demonstrates that the national statistical framework reaches the agglomeration, but local statistical density is low.",
+      "_referenced_by": [
+        "EPH labour and poverty results for the agglomeration",
+        "Census geographic products",
+        "Regional (Noreste) price and activity series"
+      ],
+      "last_updated": null,
+      "part_of": "ar-chaco-entity"
+    },
+    {
+      "id": "ar-formosa-entity",
+      "title": "Provincia de Formosa — core statistical identity (northern/NEA contrast)",
+      "publisher": "INDEC + provincial statistical service",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Formosa",
+      "description": "Northeastern border province with elevated poverty indicators relative to the national average. Part of the Noreste statistical region in EPH and IPC publications.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:formosa",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Second northern contrast province. Recent EPH: Formosa agglomeration poverty ~27.9% of persons (still above national urban average in many periods). Local statistical capacity is thinner; reliance on INDEC frameworks is high.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-noreste-region",
+      "title": "Región Noreste (NEA) — statistical region in EPH / IPC",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Noreste",
+      "description": "Statistical region used by INDEC for EPH, poverty and some price publications. Comprises Chaco, Corrientes, Formosa and Misiones. Regularly shows higher poverty and indigency than the national urban average.",
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:regional",
+        "proposed:poverty",
+        "labour"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Useful higher-level regional node for the northern homogeneity check. Second-semester 2025: Noreste poverty ~32.7% of persons, indigency ~7.5%. Gran Resistencia pulls the regional average up.",
+      "_referenced_by": [
+        "EPH regional tables",
+        "Poverty and indigency incidence by statistical region",
+        "IPC and CBA/CBT regional series"
+      ],
+      "last_updated": null,
+      "part_of": "ar-pobreza-indigencia"
+    },
+    {
+      "id": "ar-dpe-chaco",
+      "title": "Dirección de Estadística y Censos de la Provincia del Chaco",
+      "publisher": "Gobierno de la Provincia del Chaco",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Chaco",
+      "description": "Provincial statistical service of Chaco. Exists within the SEN but with thinner independent publication cadence than Córdoba, Santa Fe or CABA institutes.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/indec/web/Institucional-Indec-SistemaEstadistico",
+      "domains": [
+        "proposed:statistics",
+        "proposed:provincial-institute",
+        "proposed:chaco"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Homogeneity test: the office exists and is listed in SEN directories, yet most high-frequency and poverty indicators used analytically remain the national EPH/IPC cuts. Local packaging capacity is limited.",
+      "last_updated": null,
+      "part_of": "ar-sen"
+    },
+    {
+      "id": "ar-tucuman-dpe",
+      "title": "Dirección de Estadística de la Provincia de Tucumán",
+      "publisher": "Gobierno de la Provincia de Tucumán",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Tucumán",
+      "description": "Provincial statistical office (one of the older ones, founded 1881). Produces provincial indicators and participates in national operatives; also publishes local products such as the Canasta de Crianza.",
+      "releases_per_year": 1,
+      "url": "https://estadistica.tucuman.gov.ar/",
+      "domains": [
+        "proposed:statistics",
+        "proposed:provincial-institute",
+        "proposed:tucuman"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Noroeste example with a long-standing provincial office and some original local products (e.g. Canasta de Crianza). Still operates inside the SEN framework and relies heavily on national survey infrastructure.",
+      "last_updated": null,
+      "part_of": "ar-sen"
+    },
+    {
+      "id": "ar-comercio-exterior",
+      "title": "Estadísticas de Comercio Exterior / Merchandise Trade Statistics",
+      "publisher": "INDEC — Dirección Nacional de Estadísticas del Sector Externo y Cuentas Internacionales",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly and annual statistics of Argentine exports and imports of goods, by large rubrics (primary products, MOA, MOI, fuels & energy), by country/region, and with price and quantity indices.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:trade",
+        "proposed:external-sector"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core external-trade product. 2025 total goods exports USD 87.1 billion (+9.3% y/y, driven by volumes). Regular monthly tables by large rubric and destination. Direct input into the balance of payments and national accounts.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-complejos-exportadores",
+      "title": "Complejos exportadores / Export complexes ranking",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Analytical grouping of exports into productive complexes (soya, oil-petrochemical, automotive, maize, gold & silver, beef & leather, wheat, sunflower, fisheries, dairy, etc.). Regular ranking of participation and growth.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:trade",
+        "agriculture",
+        "proposed:industry"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-value analytical product. 2025: soya complex alone 24.6% of total goods exports (USD 21.4 bn); top 10 complexes ~78% of total. Makes the agro-industrial backbone of Argentine trade statistically visible.",
+      "last_updated": null,
+      "part_of": "ar-comercio-exterior"
+    },
+    {
+      "id": "ar-censo-agropecuario",
+      "title": "Censo Nacional Agropecuario / National Agricultural Census",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Structural agricultural census (most recent major round 2018 with subsequent updates and related surveys). Provides the farm-structure baseline, land use, livestock and production characteristics.",
+      "releases_per_year": 0.1,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "agriculture",
+        "proposed:census"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational agricultural statistical product. Continuously cited by agricultural production estimates, export-complex analysis and provincial agricultural offices. Complements the high-frequency trade and production series.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-estimaciones-agricolas",
+      "title": "Estimaciones agrícolas / Agricultural production estimates",
+      "publisher": "INDEC / Secretaría de Agricultura (joint statistical production)",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Regular estimates of area, yield and production for major crops (soya, maize, wheat, sunflower, etc.). High-frequency input into export and activity analysis.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "agriculture",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational agricultural statistics that feed both the trade complexes and the monthly activity indicators. Critical for a country whose export structure is still heavily agro-industrial.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-origen-provincial-exportaciones",
+      "title": "Origen provincial de las exportaciones (OPEX)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina",
+      "description": "Statistics that attribute merchandise exports to the province of origin. Reveals the geographic distribution of export capacity (Buenos Aires, Santa Fe, Córdoba dominant; rising share of Neuquén via Vaca Muerta).",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:trade",
+        "proposed:provincial",
+        "proposed:regional"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key geographic bridge between national trade statistics and the provincial layer. 2025 ranking still led by Buenos Aires, Santa Fe and Córdoba, with Neuquén rising on energy exports.",
+      "last_updated": null,
+      "part_of": "ar-comercio-exterior"
+    },
+    {
+      "id": "ar-gobierno-general",
+      "title": "Cuentas del sector gobierno general / General government accounts",
+      "publisher": "INDEC — Dirección Nacional de Cuentas Nacionales",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Institutional-sector accounts for general government (all levels of public administration excluding public enterprises). Covers production, generation, distribution and use of income, and saving.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:public-finance",
+        "national-accounts",
+        "proposed:government"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Public-sector counterpart to the generation-of-income and institutional-sector accounts. 2024: disposable income of general government ~17.2% of GDP; final consumption ~14.9%; saving ~2.3%.",
+      "last_updated": null,
+      "part_of": "ar-scn"
+    },
+    {
+      "id": "ar-empleo-publico",
+      "title": "Estadísticas de empleo en el sector público / Public-sector employment",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Statistics on employment in the public administration (centralised and, where available, broader public sector). Used to track the size and composition of the state workforce.",
+      "releases_per_year": 2,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "labour",
+        "proposed:government",
+        "proposed:public-finance"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complements the EPH (which covers the whole labour market) with a specific public-sector lens. Recent figures have shown significant net reductions in central administration employment since late 2023, with exceptions in Justice and Security.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-seguridad-publica",
+      "title": "Estadísticas de seguridad pública y población en centros de detención",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Official statistical tables on population held in detention centres (by legal status, type of establishment, sex, age, etc.) and related criminal-process indicators.",
+      "releases_per_year": 1,
+      "url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-34-108",
+      "domains": [
+        "proposed:justice",
+        "proposed:security",
+        "proposed:public-safety"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Basic justice/security statistical presence at national level. Less rich than the full CNIJE-style censuses of Mexico, but still a recurring official product that qualifies under the node definition.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-indices-precios-cantidades-comercio",
+      "title": "Índices de precios y cantidades del comercio exterior",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Price and quantity indices for merchandise exports and imports. Allow decomposition of value changes into price and volume components.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:trade",
+        "proposed:prices"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Essential analytical companion to the value-based trade statistics. 2025 export growth was volume-driven (+10%) while prices edged down (−0.6%).",
+      "last_updated": null
+    },
+    {
+      "id": "ar-moa-moi",
+      "title": "Manufacturas de Origen Agropecuario (MOA) y Manufacturas de Origen Industrial (MOI)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "The two major manufactured-export categories used in Argentine trade statistics: agro-based manufactures (MOA) and industrial manufactures (MOI). Regularly tabulated alongside primary products and fuels.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:trade",
+        "proposed:industry",
+        "agriculture"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural classification that makes the dual character of Argentine exports (agro-industrial + industrial) statistically legible. MOA and MOI together still account for the majority of export value in most periods.",
+      "last_updated": null,
+      "part_of": "ar-comercio-exterior"
+    },
+    {
+      "id": "ar-ipi-minero",
+      "title": "Índice de Producción Industrial Minero (IPI minero)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Monthly volume index of mining and hydrocarbon extraction activities. Covers crude oil, natural gas, metallic and non-metallic minerals, including lithium. Published with original and cumulative series.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:mining",
+        "proposed:energy",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key short-term indicator for the energy and mining boom. First-half 2026: +8.4% cumulative. Driven by non-conventional oil (+35% range) and lithium carbonate (+49% range). Complements the manufacturing IPI.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-vaca-muerta",
+      "title": "Vaca Muerta / producción de hidrocarburos no convencionales (Neuquén)",
+      "publisher": "Secretaría de Energía / INDEC (statistical dissemination)",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Neuquén",
+      "description": "Statistical representation of the Vaca Muerta shale play and non-conventional hydrocarbon production, concentrated in Neuquén. Dominates national crude-oil growth and is visible in the IPI minero and provincial export origin statistics.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:energy",
+        "proposed:hydrocarbons",
+        "proposed:provincial"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Transformative energy node. Without Neuquén/Vaca Muerta, national crude production would be at multi-decade lows; with it, 2025 set records. Appears in IPI minero (non-conventional oil), provincial export origin (Neuquén rising share), and energy-balance analysis.",
+      "last_updated": null,
+      "part_of": "ar-ipi-minero"
+    },
+    {
+      "id": "ar-neuquen-entity",
+      "title": "Provincia de Neuquén — core statistical identity (energy province)",
+      "publisher": "INDEC + provincial statistical services",
+      "country": "AR",
+      "jurisdiction_level": "provincial",
+      "region": "Argentina — Neuquén",
+      "description": "Patagonian province whose statistical profile is now dominated by Vaca Muerta hydrocarbon production and related fiscal/export effects. Rising share of national merchandise exports.",
+      "releases_per_year": 4,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:energy",
+        "proposed:neuquen"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Energy-specialised provincial node. Complements the earlier Córdoba/Santa Fe (agro-industrial) and Chaco/Formosa (higher-poverty) provincial contrasts.",
+      "last_updated": null
+    },
+    {
+      "id": "ar-litio",
+      "title": "Producción de litio / carbonato de litio (estadísticas mineras)",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Physical and index measures of lithium carbonate and related lithium minerals production, published within the IPI minero framework.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:mining",
+        "proposed:lithium",
+        "proposed:critical-minerals"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-growth critical-mineral series. First-half 2026 lithium carbonate production +49% cumulative; monthly physical volumes regularly published. Completes the mining layer alongside hydrocarbons.",
+      "last_updated": null,
+      "part_of": "ar-ipi-minero"
+    },
+    {
+      "id": "ar-energia-export",
+      "title": "Exportaciones de combustibles y energía / complejo petrolero-petroquímico",
+      "publisher": "INDEC",
+      "country": "AR",
+      "jurisdiction_level": "federal",
+      "region": "Argentina",
+      "description": "Trade statistics for the fuels & energy large rubric and the oil-petrochemical export complex. Directly linked to Vaca Muerta production growth.",
+      "releases_per_year": 12,
+      "url": "https://www.indec.gob.ar/",
+      "domains": [
+        "proposed:trade",
+        "proposed:energy"
+      ],
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Trade counterpart to the production indices. Oil-petrochemical complex was the second-largest export complex in 2025 (~13.5% of total goods exports).",
+      "last_updated": null,
+      "part_of": "ar-comercio-exterior"
+    }
+  ],
+  "dependencies": [
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.indec.gob.ar/indec/web/Institucional-Indec-SistemaEstadistico",
+      "basis": "National accounts are produced by INDEC under the legal mandate and SEN architecture established by Ley 17.622.",
+      "source_report_id": "ar-scn",
+      "target_report_id": "ar-ley-17622",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "EPH is an official statistical operation of the SEN coordinated by INDEC under the foundational law.",
+      "source_report_id": "ar-eph",
+      "target_report_id": "ar-ley-17622",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-46-152",
+      "basis": "Poverty and indigency incidence are calculated from EPH household income data.",
+      "reference_period": "semester",
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-eph",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Poverty/indigency status is determined by comparing household income with the CBA and CBT values.",
+      "reference_period": "semester (lines updated monthly)",
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-cba-cbt",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "CBA and CBT monetary values are updated monthly with the IPC.",
+      "reference_period": "monthly",
+      "source_report_id": "ar-cba-cbt",
+      "target_report_id": "ar-ipc",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-9",
+      "basis": "EMAE is the monthly estimator aligned with the national-accounts framework.",
+      "source_report_id": "ar-emae",
+      "target_report_id": "ar-scn",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.bcra.gob.ar/",
+      "basis": "Regional trade flows under MERCOSUR preferences are a recurring analytical dimension of the balance of payments and external-sector reports.",
+      "reference_period": "continuous / at each external-sector update",
+      "source_report_id": "ar-bcra-bop",
+      "target_report_id": "ar-mercosur",
+      "_batch": [
+        "2026-08-13_Argentina-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Manufacturing production is a major component of the monthly activity estimator (EMAE).",
+      "source_report_id": "ar-ipi",
+      "target_report_id": "ar-emae",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Construction activity feeds into the monthly activity estimator.",
+      "source_report_id": "ar-isac",
+      "target_report_id": "ar-emae",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-28-154",
+      "basis": "The Culture Satellite Account is explicitly framed as compatible with and derived from the System of National Accounts.",
+      "source_report_id": "ar-csc",
+      "target_report_id": "ar-scn",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-141",
+      "basis": "Tourism Satellite Account uses the SCN as its reference framework.",
+      "source_report_id": "ar-cst",
+      "target_report_id": "ar-scn",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.bcra.gob.ar/",
+      "basis": "The monthly monetary report analyses the monetary-base and aggregate series.",
+      "source_report_id": "ar-bcra-informe-monetario",
+      "target_report_id": "ar-bcra-base-monetaria",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Labour and poverty indicators for the agglomeration come from the EPH geographic cuts.",
+      "source_report_id": "ar-gran-resistencia",
+      "target_report_id": "ar-eph",
+      "_batch": [
+        "2026-08-13_Argentina-batch4-provinces.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Merchandise trade statistics are a primary input into the goods account of the balance of payments.",
+      "source_report_id": "ar-comercio-exterior",
+      "target_report_id": "ar-bcra-bop",
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Structural census provides the baseline and sampling frame for ongoing agricultural production estimates.",
+      "source_report_id": "ar-censo-agropecuario",
+      "target_report_id": "ar-estimaciones-agricolas",
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.indec.gob.ar/",
+      "basis": "Mining and hydrocarbon extraction feed into the monthly activity estimator.",
+      "source_report_id": "ar-ipi-minero",
+      "target_report_id": "ar-emae",
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ]
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ar-bcra-mercado-cambios -> ar-bcra-bop",
+      "source": "ar-bcra-mercado-cambios",
+      "target": "ar-bcra-bop",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The exchange-market / balance-cambiario report provides the high-frequency flow detail that underpins the quarterly balance of payments.",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_evidence_url": "https://www.bcra.gob.ar/"
+    },
+    {
+      "edge": "ar-ucii -> ar-ipi",
+      "source": "ar-ucii",
+      "target": "ar-ipi",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Capacity utilisation is the intensity counterpart to the volume production index.",
+      "_batch": [
+        "2026-08-13_Argentina-batch2.json"
+      ],
+      "_evidence_url": "https://www.indec.gob.ar/"
+    },
+    {
+      "edge": "ar-caba-anuario -> ar-idecba",
+      "source": "ar-caba-anuario",
+      "target": "ar-idecba",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: The Anuario is the flagship annual product of IDECBA.",
+      "_batch": [
+        "2026-08-13_Argentina-batch3-gba.json"
+      ],
+      "_evidence_url": "https://www.estadisticaciudad.gob.ar/"
+    },
+    {
+      "edge": "ar-indices-precios-cantidades-comercio -> ar-comercio-exterior",
+      "source": "ar-indices-precios-cantidades-comercio",
+      "target": "ar-comercio-exterior",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Price and quantity indices decompose the value changes reported in the trade statistics.",
+      "_batch": [
+        "2026-08-13_Argentina-batch5-trade-agri-public.json"
+      ],
+      "_evidence_url": "https://www.indec.gob.ar/"
+    },
+    {
+      "edge": "ar-vaca-muerta -> ar-neuquen-entity",
+      "source": "ar-vaca-muerta",
+      "target": "ar-neuquen-entity",
+      "reason": "note",
+      "why": "Containment edge, but the child already declares part_of \"ar-ipi-minero\". Not overwritten. Original basis: Vaca Muerta production is geographically concentrated in Neuquén.",
+      "_batch": [
+        "2026-08-13_Argentina-batch6-energy-mining.json"
+      ]
+    }
+  ],
+  "_consolidation": {
+    "json_syntax_repairs": [],
+    "json_syntax_repair_note": "These batch files were not valid JSON as delivered: \"releases_per_year\" carried an unquoted text value (missing opening quote), e.g. `\"releases_per_year\": continuous\",`. Repaired mechanically by re-quoting the value verbatim. No number was invented.",
+    "cadence_moved_to__cadence_original": 0,
+    "cadence_note": "A non-numeric cadence text was moved off releases_per_year into _cadence_original verbatim and the numeric field omitted, per the v2 spec (omitted, never null). Needs a human/judgement pass to become a real number.",
+    "releases_per_year_null_or_absent_omitted": 7,
+    "legacy_proposed_id_remapped": 0,
+    "duplicate_report_ids": {},
+    "duplicate_report_id_conflicts": [],
+    "duplicate_edges_collapsed": 0,
+    "edge_endpoints_not_defined_in_this_file": []
+  },
+  "_normalisation": {
+    "note": "Second pass, 2026-08-18: mechanical alignment to src/lib/types.ts. Nothing researched, nothing invented. Every original value that was replaced is preserved on the record under a key prefixed with an underscore.",
+    "changes": {
+      "nonschema_key_prefixed": 130,
+      "domain_tag_normalised": 145,
+      "last_updated_added_null": 61,
+      "part_of_edge_moved_to_node": 21,
+      "offunion_edge_deferred": 3,
+      "produced_by_edge_dropped": 1,
+      "part_of_edge_conflict": 1
+    },
+    "rules": [
+      "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
+      "domains: format-normalised, then any tag outside the 22 approved values prefixed \"proposed:\" as the spec directs. No semantic merging was done — that needs your call.",
+      "relationship_type: part_of edges moved onto the child node as part_of; contains edges reversed onto the child; produced_by edges dropped (publisher is a string, not a node); related_to / complements held in _dropped as deferred. Off-union values were poisoning every PageRank score with NaN.",
+      "last_updated added as null where absent (required field, string|null).",
+      "region filled with the country name where it was null or missing.",
+      "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
+      "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+    ]
+  },
+  "_gaps": {
+    "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
+    "edges_without_evidence_url": [],
+    "unresolved_cadence": [],
+    "unresolved_jurisdiction_level": [],
+    "institution_node_candidates": [
+      {
+        "id": "ar-idecba",
+        "title": "Instituto de Estadística y Censos de la Ciudad Autónoma de Buenos Aires (IDECBA)",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      }
+    ]
+  }
+}

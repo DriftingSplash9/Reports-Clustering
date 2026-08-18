@@ -1,0 +1,220 @@
+{
+  "meta": {
+    "date": "2026-08-13",
+    "actor": "Grok",
+    "scope": "Mexico batch 10 — Guadalajara metropolitan area zoom (Jalisco entity + Guadalajara + Zapopan + metro overview). Uses IIEG Jalisco municipal products and national series disaggregated to municipality. Continues the lowest-level municipal expansion after CDMX.",
+    "rule": "static + recurring citation (2026-08-13 decision)",
+    "status": "draft"
+  },
+  "candidates": [
+    {
+      "id": "mx-jalisco-entity",
+      "title": "Jalisco (entidad federativa) — core statistical identity",
+      "publisher": "INEGI + IIEG Jalisco + Gobierno de Jalisco",
+      "country": "MX",
+      "jurisdiction_level": "state",
+      "region": "Jalisco",
+      "description": "Jalisco as a federal entity: population, economic activity (ITAEE, exports), formal employment, public finances, justice (state judiciary and fiscalía), and the full suite of national programmes disaggregated to the state. Parent node for the Guadalajara metro municipalities.",
+      "releases_per_year": 4,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["state", "jalisco"],
+      "shape": "own-cadence",
+      "notes": "Bridge node between national series and the municipal layer. Jalisco is one of the largest and most industrialised states; IIEG provides a particularly rich set of state and municipal statistical products."
+    },
+    {
+      "id": "mx-iieg-jalisco",
+      "title": "Instituto de Información Estadística y Geográfica del Estado de Jalisco (IIEG) — institutional statistical products",
+      "publisher": "IIEG Jalisco",
+      "country": "MX",
+      "jurisdiction_level": "state",
+      "region": "Jalisco",
+      "description": "State statistical and geographic institute. Publishes municipal cuadernillos, metropolitan-area profiles, sociodemographic panoramas, economic bulletins, open data (IMSS employment, DENUE, remittances, municipal finances) and indicator dashboards. Primary local statistical producer for Jalisco.",
+      "releases_per_year": 12,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["statistics", "state-institute", "jalisco"],
+      "shape": "own-cadence",
+      "notes": "Exemplary state statistical office. Its municipal cuadernillos and indicator microsite are the main vehicles for municipality-level statistics in Jalisco and are updated with recent census, IMSS, DENUE and public-finance data."
+    },
+    {
+      "id": "mx-amg",
+      "title": "Área Metropolitana de Guadalajara (AMG) — metropolitan statistical profile",
+      "publisher": "IIEG Jalisco / INEGI",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco — Área Metropolitana de Guadalajara",
+      "description": "Statistical identity of the Guadalajara metropolitan area (commonly 9+ municipalities including Guadalajara, Zapopan, Tlaquepaque, Tonalá, Tlajomulco, El Salto, etc.). Population, economy, employment and housing indicators are regularly compiled by IIEG at metro scale.",
+      "releases_per_year": 1,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["metropolitan", "jalisco"],
+      "shape": "own-cadence",
+      "notes": "IIEG publishes dedicated metropolitan cuadernillos and includes the AMG as a distinct unit in sociodemographic and economic products. Population of the core metro exceeds 5 million. Useful parent node for the individual large municipalities."
+    },
+    {
+      "id": "mx-municipio-guadalajara",
+      "title": "Municipio de Guadalajara — statistical and administrative profile",
+      "publisher": "Ayuntamiento de Guadalajara / IIEG / INEGI",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco — Guadalajara",
+      "description": "Core municipality of the metro area. Population ~1.39 million (2020 census). Profile built from national census, CNGMD, DENUE, IMSS municipal employment, municipal public finances, and IIEG cuadernillo / indicator products.",
+      "releases_per_year": 1,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["municipal", "jalisco"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "IIEG municipal cuadernillos and indicator microsite",
+        "CNGMD",
+        "Censo de Población y Vivienda",
+        "IMSS municipal employment series",
+        "Municipal budget and development-plan documents"
+      ],
+      "notes": "Classic large-municipality node. Most statistics are national or state series disaggregated to the municipality; IIEG packages them into regularly updated municipal profiles. Qualifies under the expanded rule via continuous citation and packaging."
+    },
+    {
+      "id": "mx-municipio-zapopan",
+      "title": "Municipio de Zapopan — statistical and administrative profile",
+      "publisher": "Ayuntamiento de Zapopan / IIEG / INEGI",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco — Zapopan",
+      "description": "Largest municipality in the Guadalajara metro by population (~1.48 million in 2020) and a major economic centre. Detailed IIEG cuadernillo (2025 edition) covers population, DENUE establishments (~53 000), IMSS formal employment (~491 000 workers in mid-2025), public finances, remittances and other indicators.",
+      "releases_per_year": 1,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["municipal", "jalisco"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "IIEG Cuadernillo Municipal Zapopan 2025 and indicator microsite",
+        "CNGMD",
+        "Censo de Población y Vivienda",
+        "IMSS municipal series",
+        "Local government reporting"
+      ],
+      "notes": "Best-documented municipal example in the Jalisco metro. The 2025 IIEG cuadernillo is a concrete, recurring product that assembles official statistics for the municipality. Strong candidate under the new rule."
+    },
+    {
+      "id": "mx-municipio-tlaquepaque",
+      "title": "Municipio de San Pedro Tlaquepaque — statistical profile",
+      "publisher": "IIEG / INEGI / Ayuntamiento",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco — Tlaquepaque",
+      "description": "Major municipality in the Guadalajara metro (~687 000 inhabitants in 2020). Covered by the same IIEG municipal indicator and cuadernillo system.",
+      "releases_per_year": 1,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["municipal", "jalisco"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "IIEG municipal products",
+        "CNGMD",
+        "Census and DENUE disaggregations"
+      ],
+      "notes": "Third core municipality of the traditional AMG. Same data architecture as Guadalajara and Zapopan."
+    },
+    {
+      "id": "mx-municipio-tonala",
+      "title": "Municipio de Tonalá — statistical profile",
+      "publisher": "IIEG / INEGI / Ayuntamiento",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco — Tonalá",
+      "description": "Major eastern municipality of the Guadalajara metro (~570 000 inhabitants in 2020). Included in IIEG municipal and metropolitan products.",
+      "releases_per_year": 1,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["municipal", "jalisco"],
+      "shape": "recurring-citation",
+      "referenced_by": [
+        "IIEG municipal products",
+        "CNGMD",
+        "Census and DENUE"
+      ],
+      "notes": "Completes the four historic core municipalities of the Guadalajara metro."
+    },
+    {
+      "id": "mx-jalisco-pj",
+      "title": "Poder Judicial del Estado de Jalisco — statistical reporting",
+      "publisher": "Supremo Tribunal de Justicia / Poder Judicial de Jalisco",
+      "country": "MX",
+      "jurisdiction_level": "state",
+      "region": "Jalisco",
+      "description": "State judiciary statistical outputs (caseload, organs, resources). Visible both through the national CNIJE and through local transparency / statistical publications of the Jalisco judiciary.",
+      "releases_per_year": 1,
+      "url": "https://stjjalisco.gob.mx/",
+      "domains": ["justice", "courts", "jalisco"],
+      "shape": "own-cadence",
+      "notes": "Local counterpart to the CDMX judicial yearbook. CNIJE 2025 shows Jalisco among the states with the largest number of judicial organs and substantial caseload; local transparency pages also publish multi-year statistics."
+    },
+    {
+      "id": "mx-jalisco-imss-municipal",
+      "title": "IMSS formal employment by municipality (Jalisco / Guadalajara metro)",
+      "publisher": "IMSS / IIEG Jalisco",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco",
+      "description": "Municipal disaggregation of IMSS-affiliated employment posts, packaged and published by IIEG for every municipality in Jalisco (including detailed series for Zapopan, Guadalajara, etc.).",
+      "releases_per_year": 12,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["labour", "municipal", "jalisco"],
+      "shape": "own-cadence",
+      "notes": "High-value municipal labour series. IIEG maintains downloadable municipal IMSS employment databases and highlights them in the cuadernillos (e.g. Zapopan ~490k insured workers in mid-2025). Direct link between national IMSS data and the municipal zoom."
+    },
+    {
+      "id": "mx-jalisco-finanzas-municipales",
+      "title": "Finanzas públicas municipales de Jalisco (ingresos y egresos)",
+      "publisher": "IIEG Jalisco / INEGI EFIPEM",
+      "country": "MX",
+      "jurisdiction_level": "municipal",
+      "region": "Jalisco",
+      "description": "Municipal public-finance statistics (revenues and expenditures) for Jalisco municipalities, available both through the national EFIPEM system and through IIEG open-data and indicator products.",
+      "releases_per_year": 1,
+      "url": "https://iieg.gob.mx/",
+      "domains": ["public-finance", "municipal", "jalisco"],
+      "shape": "own-cadence",
+      "notes": "Completes the municipal statistical toolkit (population, employment, establishments, finances). IIEG explicitly lists municipal ingresos/egresos among its downloadable municipal indicator sets."
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "mx-municipio-zapopan",
+      "target": "mx-iieg-jalisco",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://iieg.gob.mx/",
+      "basis": "IIEG produces the municipal cuadernillo and indicator packages that constitute the main published statistical profile of Zapopan."
+    },
+    {
+      "source": "mx-municipio-guadalajara",
+      "target": "mx-iieg-jalisco",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://iieg.gob.mx/",
+      "basis": "Same IIEG municipal product system covers Guadalajara."
+    },
+    {
+      "source": "mx-municipio-zapopan",
+      "target": "mx-cngmd",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inegi.org.mx/programas/cngmd/",
+      "basis": "CNGMD supplies the structural government and public-service data for the municipality."
+    },
+    {
+      "source": "mx-jalisco-imss-municipal",
+      "target": "mx-imss-puestos",
+      "relationship_type": "part_of",
+      "evidence_url": "https://iieg.gob.mx/",
+      "basis": "Municipal IMSS employment series are geographic disaggregations of the national IMSS formal-employment statistics, packaged by IIEG."
+    },
+    {
+      "source": "mx-amg",
+      "target": "mx-jalisco-entity",
+      "relationship_type": "part_of",
+      "evidence_url": "https://iieg.gob.mx/",
+      "basis": "The metropolitan area is a statistical aggregation of municipalities within the state of Jalisco."
+    },
+    {
+      "source": "mx-jalisco-pj",
+      "target": "mx-cnije",
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inegi.org.mx/programas/cnije/",
+      "basis": "State judiciary statistics feed into and are consistent with the national CNIJE."
+    }
+  ],
+  "dropped_or_rejected": []
+}

@@ -1,0 +1,1889 @@
+{
+  "meta": {
+    "country": "Paraguay",
+    "code": "PY",
+    "consolidated_on": "2026-08-18",
+    "actor": "Claude — consolidation pass (no research, no content rewriting)",
+    "scope": "Every Grok batch file for Paraguay merged into one file. Records are byte-faithful to the batches except for the normalisations listed in _consolidation.",
+    "source_batch_count": 6,
+    "source_batches": [
+      "2026-08-13_Paraguay-batch1.json",
+      "2026-08-13_Paraguay-batch2.json",
+      "2026-08-13_Paraguay-batch3-metro-trade-social.json",
+      "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json",
+      "2026-08-13_Paraguay-batch5-education-health-trade.json",
+      "2026-08-13_Paraguay-batch6-international-industrial.json"
+    ],
+    "counts": {
+      "reports": 60,
+      "dependencies": 26,
+      "dropped_notes": 14
+    },
+    "container_shapes_seen": {
+      "candidates,dropped_or_rejected,meta,proposed_edges": 6
+    },
+    "schema_aligned_on": "2026-08-18"
+  },
+  "reports": [
+    {
+      "id": "py-ine",
+      "title": "Instituto Nacional de Estadística (INE) — institutional statistical identity",
+      "publisher": "Instituto Nacional de Estadística",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "National statistical office of Paraguay (successor to DGEEC under the modernisation of the national statistical system). Produces the core official statistics (household surveys, poverty, multidimensional poverty, census, etc.).",
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:statistical-system",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Institutional parent node for Paraguayan official statistics. Continuously cited as the producer of the principal social and demographic series. Law 6770 established the modern INE as an autonomous public-law entity.",
+      "_referenced_by": [
+        "All major INE programme methodologies and technical reports",
+        "Banco Central del Paraguay publications that cite INE sources"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-ephc",
+      "title": "Encuesta Permanente de Hogares Continua (EPHC)",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Continuous household survey that is the primary source for labour-market indicators, household income, and income-based poverty and inequality measurement. National coverage with urban/rural and departmental domains.",
+      "releases_per_year": 4,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "labour",
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:households"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central social and labour survey. Official source for both labour statistics and monetary poverty. Annual poverty results and quarterly labour bulletins are the main public products.",
+      "last_updated": null
+    },
+    {
+      "id": "py-pobreza",
+      "title": "Pobreza monetaria / Monetary poverty",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Official income-poverty and extreme-poverty incidence, calculated by comparing household per-capita income (from EPHC) with nationally defined poverty lines updated by the IPC. Published with urban/rural and departmental breakdowns.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Headline social indicator. 2024: total monetary poverty 20.1% (down 2.2 pp from 22.3% in 2023); extreme poverty 4.1%. Large urban–rural gap, especially in extreme poverty (rural much higher).",
+      "last_updated": null
+    },
+    {
+      "id": "py-lineas-pobreza",
+      "title": "Líneas de pobreza total y extrema",
+      "publisher": "INE / BCP",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Monetary values of the total and extreme poverty lines (per capita), differentiated for urban and rural areas and updated with the IPC produced by the Banco Central.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:prices"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Direct input into the poverty measurement. Basket structures derived from income-and-expenditure surveys; annual updating uses the BCP IPC.",
+      "last_updated": null
+    },
+    {
+      "id": "py-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services. Produced by the central bank (distinct from the pure INE model in some neighbouring countries).",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:prices",
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship price statistic. Produced by the BCP rather than INE. Direct input into monetary-policy analysis and into the updating of poverty lines.",
+      "last_updated": null
+    },
+    {
+      "id": "py-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Paraguay",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "System of national accounts producing GDP by production, expenditure and income. Quarterly and annual releases.",
+      "releases_per_year": 4,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "national-accounts",
+        "proposed:gdp"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core macroeconomic statistical system. BCP plays the central role in compilation and dissemination.",
+      "last_updated": null
+    },
+    {
+      "id": "py-bcp",
+      "title": "Banco Central del Paraguay — statistical publications (monetary, external, inflation)",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Central-bank statistical output covering monetary aggregates, balance of payments, international reserves, exchange rates, IPC, and inflation analysis under an inflation-targeting regime.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:external-sector",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "In the Paraguayan division of labour INE leads household surveys, poverty and census; the BCP leads national accounts, prices (IPC), monetary, external and financial statistics and conducts inflation-targeting policy (target around 3.5% ±2 pp).",
+      "last_updated": null
+    },
+    {
+      "id": "py-ipom",
+      "title": "Informe de Política Monetaria (IPoM)",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Periodic Monetary Policy Report of the central bank. Explains recent inflation, the outlook, and the implications for the policy rate under the inflation-targeting regime.",
+      "releases_per_year": 4,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:policy",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship policy communication product. Complements higher-frequency monetary-policy decisions.",
+      "last_updated": null
+    },
+    {
+      "id": "py-censo",
+      "title": "Censo Nacional de Población y Viviendas / Population and Housing Census",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Decennial population and housing census. Provides the demographic baseline, sampling frames for household surveys, and the basis for updated population projections.",
+      "releases_per_year": 0.1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:census",
+        "proposed:demography",
+        "proposed:housing"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational demographic product (2022 census). Continuously cited by EPHC design, poverty analysis and the 2025 population-projection revision.",
+      "last_updated": null
+    },
+    {
+      "id": "py-ipm",
+      "title": "Índice de Pobreza Multidimensional (IPM)",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Official multidimensional poverty index capturing deprivations across multiple dimensions beyond income. Complements the monetary-poverty series.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:multidimensional",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complementary structural poverty measure. Published annually for several consecutive years; series updated with the new population projections from the 2022 census.",
+      "last_updated": null
+    },
+    {
+      "id": "py-bop",
+      "title": "Balanza de Pagos / Balance of Payments",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Quarterly and annual balance of payments covering the current account, capital/financial account and changes in reserve assets.",
+      "releases_per_year": 4,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:external-sector",
+        "proposed:balance-of-payments"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core external-accounts product. Current-account outcomes swing with commodity cycles and energy exports; goods trade is typically strong when soy and beef perform well.",
+      "last_updated": null
+    },
+    {
+      "id": "py-comercio-exterior",
+      "title": "Reporte de Comercio Exterior / Merchandise Trade",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Monthly and annual statistics of exports and imports of goods, including registered trade, re-exports and other flows. Key traditional exports: soy and derivatives, beef, electricity, maize.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:trade",
+        "proposed:external-sector"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary high-frequency trade product. 2025 total exports ~USD 16.7 bn. Soy, beef, maize and electricity dominate; re-exports and maquila are material secondary flows.",
+      "last_updated": null
+    },
+    {
+      "id": "py-tpm",
+      "title": "Tasa de Política Monetaria (TPM) / Policy interest rate",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Main monetary-policy instrument of the BCP under the inflation-targeting regime.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:policy"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational policy rate. Recent levels around 5.5%. Adjusted to steer inflation toward the target band.",
+      "last_updated": null
+    },
+    {
+      "id": "py-reservas",
+      "title": "Reservas Internacionales / International reserves",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Stock of international reserve assets managed by the central bank. Published at high frequency and analysed in the BOP and monetary reports.",
+      "releases_per_year": 52,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:reserves",
+        "proposed:external-sector",
+        "proposed:monetary"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key external-buffer indicator. Continuously monitored alongside the net international investment position.",
+      "last_updated": null,
+      "part_of": "py-bop"
+    },
+    {
+      "id": "py-meta-inflacion",
+      "title": "Marco de metas de inflación — BCP",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Operational monetary-policy framework: explicit inflation targeting. The BCP sets a target (historically 4%, more recently centred near 3.5%) with a ±2 pp tolerance band and uses the TPM as the primary instrument.",
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:policy",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core policy-framework node. Continuously cited as the reference against which inflation outcomes and policy actions are evaluated.",
+      "_referenced_by": [
+        "Every IPoM and monetary-policy statement",
+        "IPC and inflation analysis that refers to the target band",
+        "Market and academic commentary on Paraguayan monetary policy"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-soja",
+      "title": "Soja y derivados — producción y exportaciones",
+      "publisher": "BCP / MAG / CAPECO",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Statistics of soybean and soybean-product production and exports. Single most important merchandise export and the backbone of the agricultural economy.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "agriculture",
+        "proposed:grains",
+        "proposed:trade"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural export leader. Often 30–40%+ of registered export value in strong years. Continuously cited in trade, BOP and rural-economy analysis.",
+      "last_updated": null,
+      "part_of": "py-comercio-exterior"
+    },
+    {
+      "id": "py-carne",
+      "title": "Carne bovina — producción y exportaciones",
+      "publisher": "BCP / SENACSA / ARP",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Statistics of beef production and exports. Major traditional agro-export alongside soy.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "agriculture",
+        "proposed:livestock",
+        "proposed:trade"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Signature traditional export. Paraguay is a significant regional and global beef exporter; volumes and values are high-frequency trade indicators.",
+      "last_updated": null,
+      "part_of": "py-comercio-exterior"
+    },
+    {
+      "id": "py-energia",
+      "title": "Exportaciones de energía eléctrica (Itaipú / Yacyretá)",
+      "publisher": "BCP / ANDE / entidades binacionales",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Statistics of electricity exports from the binational hydroelectric plants (Itaipú with Brazil, Yacyretá with Argentina). Unique and material component of Paraguay’s external accounts.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:energy",
+        "proposed:trade",
+        "proposed:external-sector"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Distinctive structural feature of the Paraguayan economy. Electricity sales to Brazil (and to a lesser extent Argentina) are a recurring and large line in the trade and current-account statistics.",
+      "last_updated": null,
+      "part_of": "py-comercio-exterior"
+    },
+    {
+      "id": "py-itaipu",
+      "title": "Itaipú Binacional — institutional and statistical identity",
+      "publisher": "Itaipú Binacional",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Brazil",
+      "description": "Binational hydroelectric entity shared with Brazil. Generates the bulk of Paraguay’s electricity export revenue and is a foundational infrastructure and fiscal-revenue node.",
+      "url": "https://www.itaipu.gov.py/",
+      "domains": [
+        "proposed:energy",
+        "proposed:international-agreement",
+        "proposed:infrastructure"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Foundational binational instrument. Continuously cited in energy, trade and public-finance analysis; the treaty and compensation arrangements are recurring reference points.",
+      "_referenced_by": [
+        "BCP energy-export and BOP statistics",
+        "Fiscal and royalty analysis",
+        "Binational treaty and energy-policy documents"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-maquila",
+      "title": "Régimen de Maquila / Maquila exports",
+      "publisher": "BCP / Consejo Nacional de Industrias Maquiladoras",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Statistics of exports under the maquila (in-bond manufacturing) regime. Growing industrial-export channel, especially toward Brazil and other MERCOSUR markets.",
+      "releases_per_year": 12,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:industry",
+        "proposed:trade",
+        "proposed:manufacturing"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Important industrial-export line. 2025 maquila exports ~USD 1.2 bn. Complements the primary-commodity export base with light manufacturing and assembly.",
+      "last_updated": null,
+      "part_of": "py-comercio-exterior"
+    },
+    {
+      "id": "py-asuncion",
+      "title": "Asunción — capital statistical identity",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "municipal",
+      "region": "Paraguay — Asunción",
+      "description": "Capital city and primary urban economy. Core domain for EPHC labour, income and poverty analysis. Lowest departmental poverty incidence.",
+      "releases_per_year": 4,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:capital",
+        "proposed:asuncion"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Dominant metro node. Continuously published as a distinct geographic domain. 2025 total monetary poverty ~6.0% — the lowest among departments.",
+      "last_updated": null,
+      "part_of": "py-ephc"
+    },
+    {
+      "id": "py-central",
+      "title": "Departamento Central — core metropolitan periphery",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — Central",
+      "description": "Department surrounding Asunción. Intermediate-to-low poverty and the largest absolute urban population mass outside the capital.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:central",
+        "proposed:metro"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Completes the greater Asunción statistical geography. 2025 poverty ~9.9% — among the lowest.",
+      "last_updated": null
+    },
+    {
+      "id": "py-concepcion",
+      "title": "Departamento de Concepción — highest-poverty contrast",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — Concepción",
+      "description": "Northern department with among the highest poverty incidence in the 2024–2025 departmental results.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Poverty-contrast department. 2025 total poverty ~28.7%; frequently ranks at or near the top of the departmental poverty ranking.",
+      "last_updated": null
+    },
+    {
+      "id": "py-san-pedro",
+      "title": "Departamento de San Pedro — high-poverty contrast",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — San Pedro",
+      "description": "Northern/interior department with elevated poverty incidence. Completes the high-poverty northern set.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 total poverty ~24.8%. Frequently cited alongside Concepción and Caazapá among the highest-poverty departments; also features heavily in district-level poverty maps.",
+      "last_updated": null
+    },
+    {
+      "id": "py-caazapa",
+      "title": "Departamento de Caazapá — high-poverty contrast",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — Caazapá",
+      "description": "Southern-interior department with elevated poverty incidence.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 total poverty ~25.1%. Completes the high-poverty departmental set.",
+      "last_updated": null
+    },
+    {
+      "id": "py-pobreza-departamental",
+      "title": "Pobreza monetaria por departamento (INE)",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay",
+      "description": "Official departmental tabulations of monetary poverty. Primary source for the inter-departmental poverty gradient.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:provincial",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key homogeneity-test product. 2025 ranking extremes: Concepción, Caazapá, San Pedro highest; Asunción and Central lowest. National total poverty fell to ~16.0%.",
+      "last_updated": null,
+      "part_of": "py-pobreza"
+    },
+    {
+      "id": "py-mercosur",
+      "title": "MERCOSUR (ACE 18) — marco comercial",
+      "publisher": "Estados Partes del MERCOSUR",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / South America",
+      "description": "Southern Common Market customs-union and trade framework of which Paraguay is a founding member. Core preferential-trade arrangement with Argentina, Brazil and Uruguay.",
+      "url": "https://www.mercosur.int/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement",
+        "proposed:regional-integration"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Foundational regional instrument. Continuously cited in Paraguayan trade and integration analysis. Brazil is the dominant bilateral partner within the bloc.",
+      "_referenced_by": [
+        "Official trade reporting with MERCOSUR partners",
+        "BCP external-sector analysis",
+        "Foreign-ministry trade-agreement monitoring"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-mercosur-ue",
+      "title": "Acuerdo MERCOSUR–Unión Europea",
+      "publisher": "MERCOSUR / Unión Europea",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Europe",
+      "description": "Trade agreement between MERCOSUR and the European Union. Interim trade agreement signed in Asunción in January 2026; major preferential-access instrument for Paraguayan agro-exports.",
+      "url": "https://www.mre.gov.py/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Landmark external agreement. Continuously cited as a major opening for beef, soy and other agro-products into the EU market. Signed in Asunción.",
+      "_referenced_by": [
+        "Foreign-ministry and MEF trade reporting",
+        "Export strategy and market-access analysis",
+        "Policy debate on agro-export opportunities"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-presupuesto",
+      "title": "Presupuesto General de la Nación / National Budget",
+      "publisher": "Ministerio de Economía y Finanzas",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Annual national budget law and subsequent execution reports covering revenues and expenditure of the central government.",
+      "releases_per_year": 12,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:budget",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational fiscal framework. Links tax and other revenues (including energy royalties) with functional spending on education, health, social protection and investment.",
+      "last_updated": null
+    },
+    {
+      "id": "py-educacion-salud",
+      "title": "Gasto público en educación y salud",
+      "publisher": "Ministerio de Economía y Finanzas / MEC / MSPyBS",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Public expenditure on education and health as reflected in the national budget and related functional statistics. Complements household-survey education and health modules.",
+      "releases_per_year": 1,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:public-finance",
+        "education",
+        "health"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Education and health are major functional allocations (education often the largest single share of the budget). Continuously tracked in budget execution and social-policy analysis; health coverage gaps remain a recurring policy issue.",
+      "last_updated": null,
+      "part_of": "py-presupuesto"
+    },
+    {
+      "id": "py-royalties-itaipu",
+      "title": "Royalties y compensación por cesión de energía (Itaipú)",
+      "publisher": "Itaipú Binacional / MEF",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Fiscal transfers from Itaipú to the Paraguayan state under the Treaty Annex C: royalties and compensation for energy ceded to Brazil. Major non-tax revenue stream distributed to the central government, departments and municipalities.",
+      "releases_per_year": 12,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:energy",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural fiscal node unique to Paraguay. Hundreds of millions of USD annually (e.g. ~USD 400–500 mn range in recent full years). Part funds the national budget; part is transferred to subnational governments and social funds (e.g. FONAE for school feeding).",
+      "last_updated": null,
+      "part_of": "py-presupuesto"
+    },
+    {
+      "id": "py-deuda-publica",
+      "title": "Deuda pública / Public debt statistics",
+      "publisher": "Ministerio de Economía y Finanzas",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Stock and flow statistics of central-government and public-sector debt (external and domestic). Key sustainability indicator.",
+      "releases_per_year": 12,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:debt",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Critical fiscal-sustainability node. Mid-2026 stock around USD 22 bn (~34% of GDP in recent readings). Continuously monitored in macroeconomic and policy analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "py-set",
+      "title": "Subsecretaría de Estado de Tributación (SET) — tax collection",
+      "publisher": "SET / MEF",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "National tax administration. Publishes tax collection by type of tax (income tax, VAT, etc.) and performance against annual targets.",
+      "releases_per_year": 12,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:tax",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary non-energy revenue-side fiscal statistic. Complements customs revenue and the energy royalty stream.",
+      "last_updated": null,
+      "part_of": "py-ingresos-fiscales"
+    },
+    {
+      "id": "py-ingresos-fiscales",
+      "title": "Ingresos fiscales del Estado / Consolidated fiscal revenues",
+      "publisher": "MEF",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Consolidated view of central-government revenues including tax, customs, energy royalties/compensation and other non-tax income.",
+      "releases_per_year": 12,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational revenue dashboard. Links the real-side economy (taxes, trade) and the binational energy complex to the financing of the national budget.",
+      "last_updated": null
+    },
+    {
+      "id": "py-zonas-francas",
+      "title": "Régimen de Zonas Francas",
+      "publisher": "MIC / Consejo Nacional de Zonas Francas",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Free-zone regime offering tax and customs incentives for industrial, commercial and services activities.",
+      "releases_per_year": 1,
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:industry",
+        "proposed:trade"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complementary industrial-promotion instrument to the maquila regime. Smaller employment footprint than maquila but strategically important for logistics and specific manufacturing.",
+      "last_updated": null
+    },
+    {
+      "id": "py-ley-60-90",
+      "title": "Ley 60/90 — Régimen de promoción de inversiones",
+      "publisher": "MIC / MEF",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "General investment-promotion law granting tax and customs benefits for declared investment projects (capital-goods import exemptions, etc.).",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:industry",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core horizontal investment-incentive framework. Continuously cited alongside the maquila regime as a reason firms locate in Paraguay.",
+      "_referenced_by": [
+        "REDIEX and investor-promotion materials",
+        "Investment-climate assessments",
+        "Project-approval documentation"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-rediex",
+      "title": "REDIEX — Red de Inversiones y Exportaciones",
+      "publisher": "MIC / REDIEX",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "National investment and export promotion network/agency. Publishes investor guides, sector profiles and trade intelligence.",
+      "releases_per_year": 4,
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:trade",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Institutional interface between the incentive regimes (maquila, Law 60/90, free zones) and private investors and exporters.",
+      "last_updated": null
+    },
+    {
+      "id": "py-alto-parana",
+      "title": "Departamento de Alto Paraná — industrial & border hub",
+      "publisher": "INE / BCP",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — Alto Paraná",
+      "description": "Eastern border department containing Ciudad del Este. Major commercial, industrial and re-export hub; intermediate poverty relative to the northern departments.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:alto-parana",
+        "proposed:trade",
+        "proposed:industry"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Completes the economic-geography set. Hosts significant maquila and commercial activity; poverty lower than the northern interior but higher than Asunción/Central.",
+      "last_updated": null
+    },
+    {
+      "id": "py-ips",
+      "title": "Instituto de Previsión Social (IPS) — social-security coverage",
+      "publisher": "Instituto de Previsión Social",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Main social-security institution covering pensions, health insurance and other benefits for formal workers. Major formal-employment and social-protection actor.",
+      "releases_per_year": 12,
+      "url": "https://www.ips.gov.py/",
+      "domains": [
+        "proposed:social-security",
+        "health",
+        "proposed:pensions",
+        "labour"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central formal-employment and social-protection node. Cotizante counts and benefit statistics complement the EPHC labour series; health coverage remains a major policy issue (large share of population without formal insurance).",
+      "last_updated": null
+    },
+    {
+      "id": "py-fonae",
+      "title": "Fondo Nacional de Alimentación Escolar (FONAE)",
+      "publisher": "MEF / MEC",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "National school-feeding fund financed in part by Itaipú energy-compensation transfers. Links the energy-fiscal stream to a core social programme.",
+      "releases_per_year": 1,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:social",
+        "education",
+        "proposed:public-finance"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Illustrative social-programme node. Receives a large share of the Itaipú compensation-for-energy-cession resources under the current distribution law.",
+      "last_updated": null
+    },
+    {
+      "id": "py-mec",
+      "title": "Ministerio de Educación y Ciencias (MEC) — education statistics and budget",
+      "publisher": "MEC / INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Ministry responsible for the formal education system. Publishes enrolment, attendance and institutional statistics; major functional allocation in the national budget (constitutionally prioritised).",
+      "releases_per_year": 1,
+      "url": "https://www.mec.gov.py/",
+      "domains": [
+        "education",
+        "proposed:public-finance",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core education node. Budget share is large (often the single largest functional category). Attendance rates from EPHC are high in primary ages but fall in the upper secondary range (~87% for 15–17). Rural–urban gaps persist.",
+      "last_updated": null
+    },
+    {
+      "id": "py-asistencia-escolar",
+      "title": "Tasa de asistencia escolar (EPHC)",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "School-attendance rates for the school-age population derived from the continuous household survey. Key education-outcome indicator complementary to administrative enrolment data.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "education",
+        "proposed:social",
+        "proposed:households"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High overall attendance (~95% for 5–17) but clear age and rural–urban gradients. Complements the MEC administrative series and links education outcomes to the household-survey system.",
+      "last_updated": null
+    },
+    {
+      "id": "py-mspbs",
+      "title": "Ministerio de Salud Pública y Bienestar Social (MSPyBS)",
+      "publisher": "MSPyBS",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Public health ministry responsible for the universal public health network. Primary provider for the large share of the population without formal health insurance.",
+      "releases_per_year": 1,
+      "url": "https://www.mspbs.gov.py/",
+      "domains": [
+        "health",
+        "proposed:public-services"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Public-provider side of a dual system (public + IPS/private). Continuously cited in health-coverage and access analysis; public spending remains below the OPS/OMS 6%-of-GDP recommendation.",
+      "last_updated": null
+    },
+    {
+      "id": "py-cobertura-salud",
+      "title": "Cobertura de seguro médico / Health-insurance coverage",
+      "publisher": "INE / IPS / MSPyBS",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Share of the population with formal health insurance (IPS or private). Complementary indicator to public-health service statistics.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "health",
+        "proposed:social-security",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural coverage gap. Roughly 70% of the population lacks formal insurance and depends on the public system; rural coverage is substantially lower than urban. Recurring policy and inequality theme.",
+      "last_updated": null
+    },
+    {
+      "id": "py-cuentas-salud",
+      "title": "Cuentas de Salud / National Health Accounts",
+      "publisher": "MSPyBS / OPS",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Satellite accounts of health expenditure (public and private) relative to GDP and total current health spending.",
+      "releases_per_year": 1,
+      "url": "https://www.mspbs.gov.py/",
+      "domains": [
+        "health",
+        "proposed:public-finance"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Links the health system to the macroeconomic accounts. Public health spending has risen but remains below regional and OPS benchmarks; private out-of-pocket spending is material.",
+      "last_updated": null
+    },
+    {
+      "id": "py-itapua",
+      "title": "Departamento de Itapúa — southern agricultural hub",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — Itapúa",
+      "description": "Southern department with significant agricultural production and intermediate-to-higher poverty relative to the capital region.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:itapua",
+        "agriculture"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Completes the departmental set. Frequently appears in both poverty rankings and agricultural-production geography.",
+      "last_updated": null
+    },
+    {
+      "id": "py-caaguazu",
+      "title": "Departamento de Caaguazú — central interior",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "provincial",
+      "region": "Paraguay — Caaguazú",
+      "description": "Central-interior department with elevated poverty incidence and significant rural population.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:caaguazu",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-poverty interior department. Completes the set of departments that test the statistical hierarchy under elevated deprivation.",
+      "last_updated": null
+    },
+    {
+      "id": "py-ace-chile",
+      "title": "ACE 35 MERCOSUR–Chile / Acuerdo Comercial Chile–Paraguay",
+      "publisher": "MERCOSUR / Chile / Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Chile",
+      "description": "Economic complementarity agreement and the modernised bilateral Chile–Paraguay commercial agreement (in force 2024). Preferential access and updated disciplines on services, digital trade, SPS, TBT, etc.",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Important Pacific-facing instrument. The 2024 bilateral modernisation deepens the older ACE 35 relationship with contemporary disciplines.",
+      "_referenced_by": [
+        "MIC trade-agreement pages and origin-certificate guidance",
+        "Export strategy for the Chilean market",
+        "ALADI/ACE monitoring"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-aladi-ace",
+      "title": "Red ALADI / Acuerdos de Complementación Económica",
+      "publisher": "ALADI / MERCOSUR",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Latin America",
+      "description": "Network of ALADI economic-complementarity agreements (ACE) that underpin preferential trade with Chile, Bolivia, Mexico, Peru, Colombia and other partners beyond the core MERCOSUR quartet.",
+      "url": "https://www.aladi.org/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement",
+        "proposed:regional-integration"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Broader Latin American preferential architecture. Continuously cited as the legal base for preferential access outside the four MERCOSUR members.",
+      "_referenced_by": [
+        "MIC commercial-agreements catalogue",
+        "Origin-certificate and preferential-access analysis",
+        "Export-diversification strategy"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-gini",
+      "title": "Coeficiente de Gini / Income inequality",
+      "publisher": "INE",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Official Gini coefficient of income inequality calculated from EPHC income data. Companion indicator to the monetary-poverty series.",
+      "releases_per_year": 1,
+      "url": "https://www.ine.gov.py/",
+      "domains": [
+        "proposed:inequality",
+        "proposed:income",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural inequality measure. Complements the poverty headcount and is published alongside the annual poverty results.",
+      "last_updated": null
+    },
+    {
+      "id": "py-ley-7548",
+      "title": "Ley 7548/2025 — Nuevo régimen de incentivos fiscales para la inversión",
+      "publisher": "MIC / MEF",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Updated general investment-promotion law (successor to Law 60/90). Grants tax and customs benefits for declared national and foreign investment projects.",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:industry",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core horizontal investment-incentive framework. Replaced Law 60/90 in September 2025. Continuously cited alongside the maquila regime as a primary reason firms locate in Paraguay. (Supersedes the earlier py-ley-60-90 node conceptually; keep both for lineage if needed.)",
+      "_referenced_by": [
+        "REDIEX investor guidance",
+        "Investment-climate assessments",
+        "Project-approval documentation under the new regime"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-appi",
+      "title": "Acuerdos de Promoción y Protección de Inversiones (APPI / BITs)",
+      "publisher": "Gobierno del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay",
+      "description": "Network of bilateral investment treaties (25+ countries). Provides legal protection and, in some cases, national-treatment guarantees for foreign investors.",
+      "url": "https://www.mre.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core legal infrastructure for FDI. Counterparties include Germany, Spain, France, UK, USA, Chile, Korea, Taiwan, UAE and others, plus the MERCOSUR investment framework.",
+      "_referenced_by": [
+        "REDIEX and investor-climate materials",
+        "Investment-protection and dispute-settlement analysis",
+        "US State Department and other investment-climate statements"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-politica-automotor",
+      "title": "Política Automotriz / ACE 13 sector automotor",
+      "publisher": "MIC / ALADI",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Automotive-sector policy and the bilateral ACE 13 regime with Argentina governing preferential trade in vehicles and auto parts, including regional-content rules and quotas.",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:industry",
+        "proposed:trade",
+        "proposed:automotive"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Sector-specific industrial and trade instrument. ACE 13 with Argentina remains the operational preferential framework for vehicles and auto parts; Law 4838/12 provides domestic tax benefits for automotive investment.",
+      "_referenced_by": [
+        "MIC origin-certification guidance for auto parts",
+        "Automotive investment-promotion materials",
+        "ACE 13 protocol updates"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-cnime",
+      "title": "Consejo Nacional de Industrias Maquiladoras de Exportación (CNIME)",
+      "publisher": "MIC / CNIME",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Governing body of the maquila regime. Approves programmes, monitors operations and publishes sector statistics.",
+      "releases_per_year": 12,
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:industry",
+        "proposed:trade",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Institutional parent of the maquila system. Continuously cited in maquila export, employment and programme-approval statistics (~35k direct jobs; exports in the USD 1+ bn range).",
+      "last_updated": null
+    },
+    {
+      "id": "py-cnzf",
+      "title": "Consejo Nacional de Zonas Francas (CNZF)",
+      "publisher": "MEF / CNZF",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Governing body of the free-zone regime under Law 523/95. Supervises concessions and the special tax/customs treatment (0.5% single tax on third-country exports).",
+      "releases_per_year": 1,
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:industry",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Institutional parent of the free-zone system. Complements the maquila regime; large-scale projects (e.g. pulp/industrial) have used free-zone concessions.",
+      "last_updated": null
+    },
+    {
+      "id": "py-taiwan",
+      "title": "Acuerdo de Cooperación Económica Paraguay–Taiwán",
+      "publisher": "Gobierno del Paraguay / Taiwán",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Asia",
+      "description": "Bilateral economic-cooperation and preferential-trade instrument with Taiwan. Includes agricultural, technological and investment-promotion elements.",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement",
+        "proposed:investment"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Distinctive bilateral instrument outside the MERCOSUR external agenda. Continuously listed in official trade-agreement inventories.",
+      "_referenced_by": [
+        "MIC commercial-agreements catalogue",
+        "Bilateral trade and investment reporting"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-mercosur-israel",
+      "title": "Acuerdo de Libre Comercio MERCOSUR–Israel",
+      "publisher": "MERCOSUR / Israel",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Middle East",
+      "description": "Free-trade agreement between MERCOSUR and Israel providing preferential access for a large share of bilateral trade.",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Extra-regional preferential instrument. Complements the broader MERCOSUR external agenda (EU, EFTA, Singapore, etc.).",
+      "_referenced_by": [
+        "MIC commercial-agreements catalogue",
+        "Export-strategy materials for non-traditional markets"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-mercosur-egipto",
+      "title": "Acuerdo de Libre Comercio MERCOSUR–Egipto",
+      "publisher": "MERCOSUR / Egipto",
+      "country": "PY",
+      "jurisdiction_level": "international",
+      "region": "Paraguay / Africa",
+      "description": "Free-trade agreement between MERCOSUR and Egypt providing preferential access, particularly relevant for agro-industrial exports.",
+      "url": "https://www.mic.gov.py/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Extra-regional preferential instrument opening an African market for Paraguayan agro-industrial products.",
+      "_referenced_by": [
+        "MIC commercial-agreements catalogue",
+        "Agro-export diversification analysis"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "py-ied",
+      "title": "Inversión Extranjera Directa / FDI statistics",
+      "publisher": "Banco Central del Paraguay",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Statistics of foreign direct investment flows and stocks by sector and country of origin. Published as part of the external accounts and specialised BCP studies.",
+      "releases_per_year": 4,
+      "url": "https://www.bcp.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:external-sector"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core FDI statistical product. Cumulative net inflows on the order of USD 10 bn over 2008–2024; recent flows concentrated in non-financial services (commerce, telecoms, transport, real estate) alongside manufacturing and agro-industry.",
+      "last_updated": null,
+      "part_of": "py-bop"
+    },
+    {
+      "id": "py-ley-invariabilidad",
+      "title": "Ley 5542/2015 — Invariabilidad de la tasa impositiva",
+      "publisher": "MEF / MIC",
+      "country": "PY",
+      "jurisdiction_level": "federal",
+      "region": "Paraguay",
+      "description": "Law allowing tax-rate invariability (stability) for up to 20 years for qualifying investment projects. Complements the general investment-incentive regime.",
+      "url": "https://www.mef.gov.py/",
+      "domains": [
+        "proposed:investment",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Stability instrument that reduces fiscal-policy risk for long-horizon investments. Continuously cited alongside Law 7548/2025 and the maquila/free-zone regimes.",
+      "_referenced_by": [
+        "Investor-promotion materials",
+        "Large-project structuring analysis"
+      ],
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Monetary poverty is calculated from EPHC household income data.",
+      "source_report_id": "py-pobreza",
+      "target_report_id": "py-ephc",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Poverty status is determined by comparing per-capita income with the official poverty lines.",
+      "source_report_id": "py-pobreza",
+      "target_report_id": "py-lineas-pobreza",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Poverty lines are updated with the IPC produced by the BCP.",
+      "source_report_id": "py-lineas-pobreza",
+      "target_report_id": "py-ipc",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Multidimensional poverty draws on household-survey information alongside other sources.",
+      "source_report_id": "py-ipm",
+      "target_report_id": "py-ephc",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.bcp.gov.py/",
+      "basis": "Merchandise trade flows are a primary input into the goods account of the balance of payments.",
+      "source_report_id": "py-comercio-exterior",
+      "target_report_id": "py-bop",
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.bcp.gov.py/",
+      "basis": "The policy rate is the primary instrument used to steer inflation toward the target.",
+      "source_report_id": "py-tpm",
+      "target_report_id": "py-meta-inflacion",
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.bcp.gov.py/",
+      "basis": "The Monetary Policy Report analyses outcomes against the inflation target.",
+      "source_report_id": "py-ipom",
+      "target_report_id": "py-meta-inflacion",
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.itaipu.gov.py/",
+      "basis": "Itaipú is the principal source of the electricity export statistics.",
+      "source_report_id": "py-itaipu",
+      "target_report_id": "py-energia",
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Concepción’s high poverty ranking is derived from the departmental poverty tabulations.",
+      "source_report_id": "py-concepcion",
+      "target_report_id": "py-pobreza-departamental",
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mercosur.int/",
+      "basis": "MERCOSUR preferential trade is a recurring analytical dimension of merchandise-trade reporting.",
+      "reference_period": "continuous",
+      "source_report_id": "py-mercosur",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mre.gov.py/",
+      "basis": "The EU agreement underpins preferential access for major agro-exports.",
+      "reference_period": "continuous",
+      "source_report_id": "py-mercosur-ue",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.mef.gov.py/",
+      "basis": "Royalties and compensation flows originate from the Itaipú binational entity under the Treaty Annex C.",
+      "source_report_id": "py-royalties-itaipu",
+      "target_report_id": "py-itaipu",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.mef.gov.py/",
+      "basis": "FONAE is a primary destination of Itaipú compensation-for-energy-cession resources.",
+      "source_report_id": "py-fonae",
+      "target_report_id": "py-royalties-itaipu",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mic.gov.py/",
+      "basis": "REDIEX promotes and explains the Law 60/90 incentive regime to investors.",
+      "source_report_id": "py-ley-60-90",
+      "target_report_id": "py-rediex",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "School-attendance rates are derived from the continuous household survey.",
+      "source_report_id": "py-asistencia-escolar",
+      "target_report_id": "py-ephc",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "IPS affiliation is a primary component of formal health-insurance coverage.",
+      "source_report_id": "py-cobertura-salud",
+      "target_report_id": "py-ips",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mic.gov.py/",
+      "basis": "The Chile agreement underpins preferential access and origin rules for bilateral trade.",
+      "reference_period": "continuous",
+      "source_report_id": "py-ace-chile",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.aladi.org/",
+      "basis": "The ALADI/ACE network structures preferential access to multiple Latin American partners.",
+      "reference_period": "continuous",
+      "source_report_id": "py-aladi-ace",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "The Gini coefficient is computed from the same income distribution underlying the poverty estimates.",
+      "source_report_id": "py-gini",
+      "target_report_id": "py-ephc",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Itapúa’s poverty ranking is derived from the departmental poverty tabulations.",
+      "source_report_id": "py-itapua",
+      "target_report_id": "py-pobreza-departamental",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ine.gov.py/",
+      "basis": "Caaguazú’s elevated poverty ranking is derived from the departmental poverty tabulations.",
+      "source_report_id": "py-caaguazu",
+      "target_report_id": "py-pobreza-departamental",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mic.gov.py/",
+      "basis": "REDIEX promotes and channels applications under the updated investment-incentive regime.",
+      "source_report_id": "py-ley-7548",
+      "target_report_id": "py-rediex",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mre.gov.py/",
+      "basis": "The BIT network is a core legal foundation cited in investment-promotion materials.",
+      "source_report_id": "py-appi",
+      "target_report_id": "py-rediex",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mic.gov.py/",
+      "basis": "ACE 13 and the automotive policy structure preferential trade and origin rules for vehicles and auto parts.",
+      "source_report_id": "py-politica-automotor",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mic.gov.py/",
+      "basis": "The Taiwan agreement underpins preferential bilateral trade and cooperation.",
+      "reference_period": "continuous",
+      "source_report_id": "py-taiwan",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.mic.gov.py/",
+      "basis": "The Israel FTA expands preferential extra-regional market access.",
+      "reference_period": "continuous",
+      "source_report_id": "py-mercosur-israel",
+      "target_report_id": "py-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ]
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "py-ipom -> py-bcp",
+      "source": "py-ipom",
+      "target": "py-bcp",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: The Monetary Policy Report is a core publication of the Banco Central del Paraguay.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_evidence_url": "https://www.bcp.gov.py/"
+    },
+    {
+      "edge": "py-ephc -> py-ine",
+      "source": "py-ephc",
+      "target": "py-ine",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: EPHC is a core continuous survey of INE.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_evidence_url": "https://www.ine.gov.py/"
+    },
+    {
+      "edge": "py-ipc -> py-bcp",
+      "source": "py-ipc",
+      "target": "py-bcp",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: IPC is produced and disseminated by the BCP.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch1.json"
+      ],
+      "_evidence_url": "https://www.bcp.gov.py/"
+    },
+    {
+      "edge": "py-bop -> py-bcp",
+      "source": "py-bop",
+      "target": "py-bcp",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: Balance of payments is compiled by the Banco Central del Paraguay.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch2.json"
+      ],
+      "_evidence_url": "https://www.bcp.gov.py/"
+    },
+    {
+      "edge": "py-central contains py-asuncion",
+      "source": "py-central",
+      "target": "py-asuncion",
+      "reason": "note",
+      "why": "Reverse-containment edge could not be moved onto the child node. Original basis: Central forms the principal demographic and economic periphery of the greater Asunción region.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "edge": "py-deuda-publica -> py-presupuesto",
+      "source": "py-deuda-publica",
+      "target": "py-presupuesto",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Public-debt dynamics are inseparable from the financing of the national budget.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_evidence_url": "https://www.mef.gov.py/"
+    },
+    {
+      "edge": "py-maquila -> py-zonas-francas",
+      "source": "py-maquila",
+      "target": "py-zonas-francas",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Maquila and free-zone regimes are complementary industrial-promotion instruments.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_evidence_url": "https://www.mic.gov.py/"
+    },
+    {
+      "edge": "py-ips -> py-ephc",
+      "source": "py-ips",
+      "target": "py-ephc",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: IPS administrative data on formal contributors complement the household-survey labour series.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_evidence_url": "https://www.ips.gov.py/"
+    },
+    {
+      "edge": "py-asistencia-escolar -> py-mec",
+      "source": "py-asistencia-escolar",
+      "target": "py-mec",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Survey-based attendance complements administrative enrolment and institutional statistics from MEC.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_evidence_url": "https://www.mec.gov.py/"
+    },
+    {
+      "edge": "py-cobertura-salud -> py-mspbs",
+      "source": "py-cobertura-salud",
+      "target": "py-mspbs",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The large uninsured population depends on the public health network administered by MSPyBS.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_evidence_url": "https://www.mspbs.gov.py/"
+    },
+    {
+      "edge": "py-cuentas-salud -> py-mspbs",
+      "source": "py-cuentas-salud",
+      "target": "py-mspbs",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: National Health Accounts are compiled under the health-ministry statistical framework.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch5-education-health-trade.json"
+      ],
+      "_evidence_url": "https://www.mspbs.gov.py/"
+    },
+    {
+      "edge": "py-cnime -> py-maquila",
+      "source": "py-cnime",
+      "target": "py-maquila",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: CNIME is the governing body that approves and monitors maquila programmes.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_evidence_url": "https://www.mic.gov.py/"
+    },
+    {
+      "edge": "py-cnzf -> py-zonas-francas",
+      "source": "py-cnzf",
+      "target": "py-zonas-francas",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: CNZF supervises the free-zone regime under Law 523/95.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_evidence_url": "https://www.mef.gov.py/"
+    },
+    {
+      "edge": "py-ley-invariabilidad -> py-ley-7548",
+      "source": "py-ley-invariabilidad",
+      "target": "py-ley-7548",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Tax-rate invariability complements the general investment-incentive regime for long-horizon projects.",
+      "_batch": [
+        "2026-08-13_Paraguay-batch6-international-industrial.json"
+      ],
+      "_evidence_url": "https://www.mef.gov.py/"
+    }
+  ],
+  "_consolidation": {
+    "json_syntax_repairs": [],
+    "json_syntax_repair_note": "These batch files were not valid JSON as delivered: \"releases_per_year\" carried an unquoted text value (missing opening quote), e.g. `\"releases_per_year\": continuous\",`. Repaired mechanically by re-quoting the value verbatim. No number was invented.",
+    "cadence_moved_to__cadence_original": 0,
+    "cadence_note": "A non-numeric cadence text was moved off releases_per_year into _cadence_original verbatim and the numeric field omitted, per the v2 spec (omitted, never null). Needs a human/judgement pass to become a real number.",
+    "releases_per_year_null_or_absent_omitted": 15,
+    "legacy_proposed_id_remapped": 0,
+    "duplicate_report_ids": {},
+    "duplicate_report_id_conflicts": [],
+    "duplicate_edges_collapsed": 0,
+    "edge_endpoints_not_defined_in_this_file": []
+  },
+  "_normalisation": {
+    "note": "Second pass, 2026-08-18: mechanical alignment to src/lib/types.ts. Nothing researched, nothing invented. Every original value that was replaced is preserved on the record under a key prefixed with an underscore.",
+    "changes": {
+      "nonschema_key_prefixed": 135,
+      "domain_tag_normalised": 147,
+      "last_updated_added_null": 60,
+      "produced_by_edge_dropped": 7,
+      "part_of_edge_moved_to_node": 11,
+      "offunion_edge_deferred": 6
+    },
+    "rules": [
+      "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
+      "domains: format-normalised, then any tag outside the 22 approved values prefixed \"proposed:\" as the spec directs. No semantic merging was done — that needs your call.",
+      "relationship_type: part_of edges moved onto the child node as part_of; contains edges reversed onto the child; produced_by edges dropped (publisher is a string, not a node); related_to / complements held in _dropped as deferred. Off-union values were poisoning every PageRank score with NaN.",
+      "last_updated added as null where absent (required field, string|null).",
+      "region filled with the country name where it was null or missing.",
+      "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
+      "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+    ]
+  },
+  "_gaps": {
+    "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
+    "edges_without_evidence_url": [],
+    "unresolved_cadence": [],
+    "unresolved_jurisdiction_level": [],
+    "institution_node_candidates": [
+      {
+        "id": "py-bcp",
+        "title": "Banco Central del Paraguay — statistical publications (monetary, external, inflation)",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      },
+      {
+        "id": "py-ine",
+        "title": "Instituto Nacional de Estadística (INE) — institutional statistical identity",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      },
+      {
+        "id": "py-mspbs",
+        "title": "Ministerio de Salud Pública y Bienestar Social (MSPyBS)",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      },
+      {
+        "id": "py-maquila",
+        "title": "Régimen de Maquila / Maquila exports",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      },
+      {
+        "id": "py-zonas-francas",
+        "title": "Régimen de Zonas Francas",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1419 @@
+{
+  "meta": {
+    "country": "Ecuador",
+    "code": "EC",
+    "consolidated_on": "2026-08-18",
+    "actor": "Claude — consolidation pass (no research, no content rewriting)",
+    "scope": "Every Grok batch file for Ecuador merged into one file. Records are byte-faithful to the batches except for the normalisations listed in _consolidation.",
+    "source_batch_count": 5,
+    "source_batches": [
+      "2026-08-13_Ecuador-batch1.json",
+      "2026-08-13_Ecuador-batch2.json",
+      "2026-08-13_Ecuador-batch3-metro-trade-social.json",
+      "2026-08-13_Ecuador-batch4-education-health-fiscal.json",
+      "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+    ],
+    "counts": {
+      "reports": 50,
+      "dependencies": 15,
+      "dropped_notes": 5
+    },
+    "container_shapes_seen": {
+      "candidates,dropped_or_rejected,meta,proposed_edges": 5
+    },
+    "schema_aligned_on": "2026-08-18"
+  },
+  "reports": [
+    {
+      "id": "ec-inec",
+      "title": "Instituto Nacional de Estadística y Censos (INEC) — institutional statistical identity",
+      "publisher": "Instituto Nacional de Estadística y Censos",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "National statistical office of Ecuador. Produces the core official statistics (prices, labour force, poverty, national accounts inputs, census, etc.) and coordinates the national statistical system.",
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:statistical-system",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Institutional parent node for Ecuadorian official statistics. Continuously cited as the producer of the principal economic and social series.",
+      "_referenced_by": [
+        "All major INEC programme methodologies and technical bulletins",
+        "Banco Central del Ecuador statistical publications that cite INEC sources"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ec-enemdu",
+      "title": "Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Continuous household survey that is the primary source for labour-market indicators (adequate employment, underemployment, unemployment) and for income-based poverty and inequality measurement. National, urban and rural domains.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "labour",
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:households"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central social and labour survey. Monthly and quarterly releases. Official source for both labour statistics and monetary poverty. Recent (Dec 2025): national poverty 21.4%, extreme poverty 8.3%; unemployment ~2.6–3.6%.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-pobreza",
+      "title": "Pobreza por ingresos y pobreza extrema / Income poverty",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Official income-poverty and extreme-poverty incidence, calculated by comparing household per-capita income (from ENEMDU) with nationally defined poverty lines updated by the IPC. Published with urban/rural breakdowns.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Headline social indicator. Dec 2025: national poverty 21.4% (down sharply from 28.0% a year earlier); extreme poverty 8.3%. Large urban–rural gap (urban ~13.8%, rural ~37.6%).",
+      "last_updated": null
+    },
+    {
+      "id": "ec-lineas-pobreza",
+      "title": "Líneas de pobreza y pobreza extrema",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Monetary values of the poverty and extreme-poverty lines (per capita), updated with the IPC.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:prices"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Direct input into the poverty measurement. Dec 2025: poverty line ~USD 92.40 per person; extreme poverty line ~USD 52.07.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:prices",
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship price statistic. Used to update the poverty lines and as the primary inflation indicator for the dollarized economy and for BCE analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Ecuador",
+      "publisher": "Banco Central del Ecuador / INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "System of national accounts producing GDP by production, expenditure and income. Quarterly and annual releases.",
+      "releases_per_year": 4,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "national-accounts",
+        "proposed:gdp"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core macroeconomic statistical system. In Ecuador the Banco Central plays a larger role in national accounts compilation than in pure INEI/DANE-style systems.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-bce",
+      "title": "Banco Central del Ecuador — statistical publications (monetary, external, inflation)",
+      "publisher": "Banco Central del Ecuador",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Central-bank statistical output covering monetary aggregates, balance of payments, international reserves, and macroeconomic analysis. Operates in a fully dollarized monetary regime.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:external-sector",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "In the Ecuadorian division of labour INEC leads labour, poverty and prices; the BCE leads national accounts, external sector and financial statistics. Dollarization means there is no independent policy interest rate of the classic type.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-empleo-adecuado",
+      "title": "Empleo adecuado / pleno empleo (ENEMDU)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Key labour-market indicator from ENEMDU measuring the share of the employed who work full-time at or above the minimum wage. Central quality-of-employment metric in the Ecuadorian system.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "labour",
+        "proposed:employment-quality"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Distinctive Ecuadorian labour indicator. Dec 2025: national adequate employment 37.1% (up from 33.0% a year earlier). Large urban–rural gap (urban ~46%, rural ~20%).",
+      "last_updated": null,
+      "part_of": "ec-enemdu"
+    },
+    {
+      "id": "ec-censo",
+      "title": "Censo de Población y Vivienda / Population and Housing Census",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys.",
+      "releases_per_year": 0.1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:census",
+        "proposed:demography",
+        "proposed:housing"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational demographic product. Continuously cited by ENEMDU design and poverty analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-gini",
+      "title": "Coeficiente de Gini / Income inequality",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Official Gini coefficient of income inequality, calculated from the same ENEMDU income concept used for monetary poverty.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:inequality",
+        "proposed:income",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Companion inequality indicator to the poverty series. Recent values in the mid-0.44 to 0.47 range.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-bop",
+      "title": "Balanza de Pagos / Balance of Payments",
+      "publisher": "Banco Central del Ecuador",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Quarterly and annual balance of payments covering the current account, capital/financial account and changes in reserve assets.",
+      "releases_per_year": 4,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:external-sector",
+        "proposed:balance-of-payments"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core external-accounts product. 2025 current-account surplus reached a historical high of ~USD 7.7 bn, driven by the goods surplus and secondary income (remittances).",
+      "last_updated": null
+    },
+    {
+      "id": "ec-comercio-exterior",
+      "title": "Estadísticas de Comercio Exterior / Merchandise Trade",
+      "publisher": "BCE / INEC / SENAE",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Monthly and annual statistics of exports and imports of goods, with a sharp analytical split between oil and non-oil trade.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:trade",
+        "proposed:external-sector"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Trade data feed the BOP and national accounts. Non-oil exports (shrimp, cocoa, banana, mining) have become the main growth engine; oil remains important but has lost relative weight.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-petroleo",
+      "title": "Exportaciones e ingresos petroleros / Oil exports & fiscal contribution",
+      "publisher": "BCE / Ministerio de Energía",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Statistics of crude-oil and derivatives production, exports and related fiscal revenues. Historically the dominant export and a major source of public revenue.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:energy",
+        "proposed:oil",
+        "proposed:trade",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural but declining relative weight. 2025 oil exports ~USD 7.8 bn (down ~19% year-on-year). Still a key fiscal and external-sector variable, but non-oil exports now exceed oil by a wide margin.",
+      "last_updated": null,
+      "part_of": "ec-comercio-exterior"
+    },
+    {
+      "id": "ec-no-petroleras",
+      "title": "Exportaciones no petroleras (camarón, cacao, banano, minería)",
+      "publisher": "BCE / INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Non-oil merchandise exports, led by shrimp, cocoa & elaborates, banana/plantain and mining products. Principal recent driver of the trade surplus and of export diversification.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:trade",
+        "agriculture",
+        "proposed:mining"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 non-oil exports ~USD 29.4 bn (+18%). Shrimp, cocoa and banana are the headline traditional non-oil lines; mining has also grown. Central to the narrative of export diversification under dollarization.",
+      "last_updated": null,
+      "part_of": "ec-comercio-exterior"
+    },
+    {
+      "id": "ec-reservas",
+      "title": "Reservas Internacionales del Banco Central del Ecuador",
+      "publisher": "Banco Central del Ecuador",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Stock of international reserves managed by the central bank. Critical liquidity buffer in a fully dollarized economy.",
+      "releases_per_year": 52,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:reserves",
+        "proposed:external-sector",
+        "proposed:monetary"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key external-buffer indicator under dollarization. End-2025 reserves reached record levels (~USD 9.8 bn). Cover deposits of the financial system and provide confidence in the dollarized regime.",
+      "last_updated": null,
+      "part_of": "ec-bop"
+    },
+    {
+      "id": "ec-dolarizacion",
+      "title": "Régimen de dolarización oficial (desde 2000)",
+      "publisher": "Banco Central del Ecuador / Marco legal",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Official dollarization of the Ecuadorian economy (US dollar as legal tender since 2000). Defines the monetary regime: no independent national currency or classic policy interest rate.",
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:regime",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Foundational institutional regime node. Continuously cited as the framework that constrains monetary policy and elevates the importance of fiscal discipline, reserves and external competitiveness.",
+      "_referenced_by": [
+        "Every major BCE macroeconomic and monetary report",
+        "Analysis of inflation, reserves and financial stability",
+        "Comparative monetary-regime studies"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ec-inpp",
+      "title": "Índice Nacional de Precios al Productor (INPP)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Monthly producer price index, published with and without oil. Measures price changes at the producer level across agriculture, mining, manufacturing and utilities.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:prices",
+        "proposed:producer-prices",
+        "proposed:industry"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complements the IPC. The oil/non-oil split mirrors the trade and production analysis. Useful for cost-push and industrial-price monitoring.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-canasta-basica",
+      "title": "Canasta Familiar Básica y Canasta Familiar Vital",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Official cost of the basic and vital family baskets, published monthly with the IPC. Used for living-cost and wage-reference analysis.",
+      "releases_per_year": 12,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:prices",
+        "proposed:living-costs",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-visibility living-cost indicator. Linked to the IPC and frequently cited in wage and social-policy discussion.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-remesas",
+      "title": "Remesas de trabajadores / Secondary income (remittances)",
+      "publisher": "Banco Central del Ecuador",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Statistics of worker remittances received from abroad. Major component of the secondary-income account and a stabilising factor in the balance of payments.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:external-sector",
+        "proposed:remittances",
+        "proposed:households"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structurally important inflow. Contributed to the record current-account surplus in 2025. Complements the goods-trade surplus in the external accounts.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-camaron-cacao-banano",
+      "title": "Camarón, cacao y banano — leading non-oil export products",
+      "publisher": "BCE / INEC / MAG",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Product-level export statistics for the three largest non-oil traditional export lines: shrimp, cocoa & elaborates, and banana/plantain.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "proposed:trade",
+        "agriculture",
+        "proposed:fisheries"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "These three products dominate non-oil traditional exports. Shrimp has overtaken oil in some recent periods as the single largest export earner; cocoa has seen exceptional value growth.",
+      "last_updated": null,
+      "part_of": "ec-no-petroleras"
+    },
+    {
+      "id": "ec-quito",
+      "title": "Quito / Distrito Metropolitano de Quito — capital statistical identity",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "municipal",
+      "region": "Ecuador — Quito / Pichincha",
+      "description": "Capital city and primary highland urban economy. Core of Pichincha province. Lower income-poverty incidence than the national average.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:capital",
+        "proposed:quito"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Dominant highland metro. Pichincha records among the lowest provincial income-poverty rates (~11%). Continuously published as a key urban domain in ENEMDU labour and poverty analysis.",
+      "last_updated": null,
+      "part_of": "ec-pichincha"
+    },
+    {
+      "id": "ec-guayaquil",
+      "title": "Guayaquil / Área metropolitana de Guayaquil — coastal statistical identity",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "municipal",
+      "region": "Ecuador — Guayaquil / Guayas",
+      "description": "Largest coastal city and main commercial/port economy. Core of Guayas province. Intermediate-to-higher poverty incidence relative to the capital.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:guayaquil",
+        "proposed:coast"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Dominant coastal metro. Guayas carries a large absolute number of poor households. Completes the capital–port-city contrast inside the national urban hierarchy.",
+      "last_updated": null,
+      "part_of": "ec-enemdu"
+    },
+    {
+      "id": "ec-pichincha",
+      "title": "Provincia de Pichincha — low-poverty contrast",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Pichincha",
+      "description": "Highland province containing Quito. Among the lowest income-poverty rates in the 2025 provincial results.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:pichincha"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 income poverty ~11.2%. Completes the low-poverty pole opposite the Amazonian and some coastal provinces.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-morona-santiago",
+      "title": "Provincia de Morona Santiago — highest-poverty Amazon contrast",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Morona Santiago",
+      "description": "Amazonian province with the highest income-poverty incidence in recent provincial results. Tests the statistical hierarchy under extreme marginalisation.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty",
+        "proposed:amazon"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Poverty-contrast province. 2025 income poverty reported in the mid-70% range; also among the highest in multidimensional and NBI poverty. National survey infrastructure reaches the province; local independent statistical density is thin.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-orellana",
+      "title": "Provincia de Orellana — high-poverty Amazon contrast",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Orellana",
+      "description": "Amazonian oil-producing province that previously recorded the highest poverty rates and saw a sharp decline in 2025.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty",
+        "proposed:amazon",
+        "proposed:oil"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 income poverty fell dramatically (from ~76% to ~44%). Illustrates both the high-poverty Amazon cluster and the volatility of provincial estimates in smaller domains.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-pobreza-provincial",
+      "title": "Pobreza por ingresos por provincia (INEC)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador",
+      "description": "Official provincial tabulations of income poverty and related indicators. Primary source for the inter-provincial poverty gradient.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:provincial",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key homogeneity-test product. 2025 ranking extremes: Morona Santiago highest; Tungurahua and Pichincha among the lowest (~11%). National average ~21.8%.",
+      "last_updated": null,
+      "part_of": "ec-pobreza"
+    },
+    {
+      "id": "ec-acuerdo-ue",
+      "title": "Acuerdo Comercial Ecuador–Unión Europea",
+      "publisher": "Gobierno del Ecuador / Unión Europea",
+      "country": "EC",
+      "jurisdiction_level": "international",
+      "region": "Ecuador / Europe",
+      "description": "Trade agreement with the European Union providing preferential access for Ecuadorian exports (especially banana, shrimp, cocoa, flowers). One of the most important preferential markets.",
+      "url": "https://www.produccion.gob.ec/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Major preferential instrument. Continuously cited in official trade-performance reporting; EU ranks among the top destinations for non-oil exports.",
+      "_referenced_by": [
+        "Ministry of Production trade-agreement monitoring",
+        "Export statistics by partner (EU is a top destination for non-oil exports)",
+        "Policy analysis of preferential market access"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ec-tlc-china",
+      "title": "Acuerdo Comercial Ecuador–China",
+      "publisher": "Gobierno del Ecuador / República Popular China",
+      "country": "EC",
+      "jurisdiction_level": "international",
+      "region": "Ecuador / Asia",
+      "description": "Trade agreement with China providing preferential access and underpinning growing bilateral trade, especially in non-oil exports and imports of manufactures.",
+      "url": "https://www.produccion.gob.ec/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Important bilateral instrument. China is a top destination for non-oil exports; the agreement is routinely cited in diversification analysis.",
+      "_referenced_by": [
+        "Trade and export-strategy documents",
+        "BCE external-sector analysis",
+        "Official monitoring of the China agreement"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ec-can",
+      "title": "Comunidad Andina (CAN) — marco comercial",
+      "publisher": "Estados miembros de la Comunidad Andina",
+      "country": "EC",
+      "jurisdiction_level": "international",
+      "region": "Ecuador / Andean",
+      "description": "Andean Community trade and integration framework. Long-standing preferential trade arrangement among the Andean partners.",
+      "url": "https://www.comunidadandina.org/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement",
+        "proposed:regional-integration"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Older regional instrument still operational and regularly referenced in Ecuadorian trade statistics and policy documents.",
+      "_referenced_by": [
+        "Official trade reporting with Andean partners",
+        "BCE and Ministry of Production bilateral trade statistics",
+        "Andean integration analysis"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ec-presupuesto",
+      "title": "Presupuesto General del Estado / National Budget",
+      "publisher": "Ministerio de Economía y Finanzas",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Annual national budget law and subsequent execution reports covering revenues (including oil) and expenditure of the central government.",
+      "releases_per_year": 12,
+      "url": "https://www.finanzas.gob.ec/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:budget",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational fiscal framework. Links oil and non-oil revenues with functional spending on education, health, social protection and investment. Critical under dollarization because monetary financing is constrained.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-cse",
+      "title": "Cuentas Satélite de Educación (CSE)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Satellite accounts of education measuring the value added, expenditure and production of the education sector (public and private). Complements the national accounts with a sectoral view of education.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "education",
+        "national-accounts",
+        "proposed:public-finance"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2024 education VAB ~5.5% of GDP (USD 6.8 bn). Higher education is the largest single industry within the satellite. Links the education budget to the real-side accounts.",
+      "last_updated": null,
+      "part_of": "ec-cuentas-nacionales"
+    },
+    {
+      "id": "ec-enighur",
+      "title": "Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGHUR)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Periodic household income and expenditure survey. Updates the structure of household consumption, provides the weights for the IPC, and supports living-conditions and inequality analysis.",
+      "releases_per_year": 0.1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:households",
+        "proposed:income",
+        "proposed:expenditure",
+        "proposed:prices"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural survey (latest 2024-2025 after a 12-year gap). Average monthly household income ~USD 1,135; expenditure ~USD 930. Directly feeds the IPC basket and complements ENEMDU on the expenditure side.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-nbi",
+      "title": "Pobreza por Necesidades Básicas Insatisfechas (NBI)",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Structural poverty indicator based on unsatisfied basic needs (housing quality, overcrowding, access to services, education, economic dependence). Calculated primarily from census data and updated with survey information.",
+      "releases_per_year": 0.1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:housing",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complementary structural poverty measure to income poverty. 2022 census: 39.8% of the population with at least one NBI. Provincial extremes remain large (Amazonian provinces highest).",
+      "last_updated": null
+    },
+    {
+      "id": "ec-iess",
+      "title": "Instituto Ecuatoriano de Seguridad Social (IESS) — coverage and finances",
+      "publisher": "IESS / Ministerio de Economía",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Main social-security institution covering pensions, health insurance and other benefits for formal workers and their dependents. Major fiscal counterpart and health-system actor.",
+      "releases_per_year": 1,
+      "url": "https://www.iess.gob.ec/",
+      "domains": [
+        "proposed:social-security",
+        "health",
+        "proposed:pensions",
+        "proposed:public-finance"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central social-protection node. Large and growing claims on the national budget (state contribution to pensions and health). Continuously cited in fiscal and health-system analysis; historical arrears are a recurring policy issue.",
+      "last_updated": null,
+      "part_of": "ec-gasto-salud"
+    },
+    {
+      "id": "ec-salud-publica",
+      "title": "Sistema de salud pública / Ministry of Health statistics",
+      "publisher": "Ministerio de Salud Pública / INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Public-health service statistics, coverage indicators and related expenditure. Complements IESS and household-survey health modules.",
+      "releases_per_year": 1,
+      "url": "https://www.salud.gob.ec/",
+      "domains": [
+        "health",
+        "proposed:public-services"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Public provider side of the dual health system (MSP + IESS). Linked to the health functional budget and to household access indicators from ENEMDU/ENIGHUR.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-gasto-educacion",
+      "title": "Gasto público en educación",
+      "publisher": "Ministerio de Economía y Finanzas / INEC CSE",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Public expenditure on education as reflected in the national budget and in the education satellite accounts.",
+      "releases_per_year": 1,
+      "url": "https://www.finanzas.gob.ec/",
+      "domains": [
+        "proposed:public-finance",
+        "education"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Education is a constitutionally prioritised function. CSE and budget execution together track the resource side of the education system.",
+      "last_updated": null,
+      "part_of": "ec-presupuesto"
+    },
+    {
+      "id": "ec-gasto-salud",
+      "title": "Gasto público en salud y seguridad social",
+      "publisher": "Ministerio de Economía y Finanzas / IESS",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Public expenditure on health and social security, including the state contribution to IESS pensions and health benefits.",
+      "releases_per_year": 1,
+      "url": "https://www.finanzas.gob.ec/",
+      "domains": [
+        "proposed:public-finance",
+        "health",
+        "proposed:social-security"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Health and social-security spending are major and growing budget items. The state–IESS financing relationship is a structural fiscal issue under dollarization.",
+      "last_updated": null,
+      "part_of": "ec-presupuesto"
+    },
+    {
+      "id": "ec-endi",
+      "title": "Encuesta Nacional sobre Desnutrición Infantil (ENDI)",
+      "publisher": "INEC / MSP",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Specialised survey on child malnutrition, early childhood development and related household conditions. Complements the broader health and living-conditions system.",
+      "releases_per_year": 0.5,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "health",
+        "proposed:nutrition",
+        "proposed:early-childhood"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-priority social indicator survey. Tracks chronic malnutrition and early-childhood development outcomes; used for targeted social-policy monitoring.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-tungurahua",
+      "title": "Provincia de Tungurahua — low-poverty highland contrast",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Tungurahua",
+      "description": "Highland province with among the lowest income-poverty rates in the 2025 results. Completes the low-poverty set alongside Pichincha.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:tungurahua"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 income poverty ~11%. Useful as a second low-poverty highland node.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-manabi",
+      "title": "Provincia de Manabí — large coastal province",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Manabí",
+      "description": "Major coastal province with elevated poverty and a large absolute number of poor households. Completes the coastal provincial set alongside Guayas.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:manabi",
+        "proposed:coast"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Significant coastal population and poverty mass. Frequently appears in both absolute and relative poverty rankings.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-camaron",
+      "title": "Camarón — producción y exportaciones",
+      "publisher": "Cámara Nacional de Acuacultura / BCE / INEC",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Statistics of shrimp aquaculture production and exports. Ecuador’s leading export product by value, surpassing oil in recent years. Concentrated in Guayas and other coastal provinces.",
+      "releases_per_year": 12,
+      "url": "https://www.cna-ecuador.com/",
+      "domains": [
+        "agriculture",
+        "proposed:fisheries",
+        "proposed:aquaculture",
+        "proposed:trade"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural export success story. 2025 exports reached record levels (~USD 8.4 bn), overtaking oil as the single largest export earner. ~225–230k hectares in production; major employment generator (especially female labour). China, EU and US are the main markets.",
+      "last_updated": null,
+      "part_of": "ec-no-petroleras"
+    },
+    {
+      "id": "ec-acuacultura",
+      "title": "Sector acuícola / Aquaculture statistics",
+      "publisher": "Cámara Nacional de Acuacultura / MAG / BCE",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Broader aquaculture sector statistics, dominated by shrimp but also covering other cultured species. Complements the product-level shrimp series.",
+      "releases_per_year": 4,
+      "url": "https://www.cna-ecuador.com/",
+      "domains": [
+        "agriculture",
+        "proposed:fisheries",
+        "proposed:aquaculture"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Industry association and official statistics track production area, employment, export volumes and values. Guayas accounts for ~60% of shrimp production area.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-sri",
+      "title": "Servicio de Rentas Internas (SRI) — tax collection",
+      "publisher": "Servicio de Rentas Internas",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "National tax administration. Publishes gross tax collection by type of tax (VAT, income tax, ICE, etc.) and performance against annual targets.",
+      "releases_per_year": 12,
+      "url": "https://www.sri.gob.ec/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:tax",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary non-oil revenue-side fiscal statistic. 2025 collection ~USD 21.5 bn (record). VAT is the largest single tax. Critical under dollarization because monetary financing is unavailable.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-iva",
+      "title": "Impuesto al Valor Agregado (IVA) / Value-added tax",
+      "publisher": "SRI",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Main consumption tax. Rate and base changes are high-visibility fiscal policy instruments; collection is published monthly by the SRI.",
+      "releases_per_year": 12,
+      "url": "https://www.sri.gob.ec/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:tax"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Largest single tax revenue. Recent rate/base adjustments (including expansion of the taxable base) have been material drivers of collection growth.",
+      "last_updated": null,
+      "part_of": "ec-sri"
+    },
+    {
+      "id": "ec-deuda-publica",
+      "title": "Deuda pública / Public debt statistics",
+      "publisher": "Ministerio de Economía y Finanzas / BCE",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Stock and flow statistics of central-government and public-sector debt (external and domestic). Key sustainability indicator under dollarization.",
+      "releases_per_year": 12,
+      "url": "https://www.finanzas.gob.ec/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:debt",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Critical fiscal-sustainability node. Continuously monitored because dollarization removes the option of monetary financing of deficits.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-el-oro",
+      "title": "Provincia de El Oro — shrimp and coastal production",
+      "publisher": "INEC / CNA",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — El Oro",
+      "description": "Coastal province that is the second-largest shrimp-producing area after Guayas. Completes the coastal aquaculture geography.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:aquaculture",
+        "proposed:coast"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "~15% of national shrimp production area. Links the commodity (shrimp) to the provincial production and poverty geography.",
+      "last_updated": null
+    },
+    {
+      "id": "ec-esmeraldas",
+      "title": "Provincia de Esmeraldas — northern coastal contrast",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Esmeraldas",
+      "description": "Northern coastal province with elevated poverty and a significant share of shrimp and other coastal production.",
+      "releases_per_year": 1,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty",
+        "proposed:coast"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Elevated poverty incidence relative to the highland core. Completes the set of major coastal provinces (Guayas, Manabí, El Oro, Esmeraldas).",
+      "last_updated": null
+    },
+    {
+      "id": "ec-cacao",
+      "title": "Cacao y elaborados — producción y exportaciones",
+      "publisher": "BCE / MAG / ANECACAO",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Statistics of cocoa production and exports (beans and elaborates). One of the three leading non-oil traditional export products alongside shrimp and banana.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "agriculture",
+        "proposed:trade",
+        "proposed:cocoa"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Strong recent value growth. Completes the product-level view of the non-oil traditional export triad (shrimp–cocoa–banana).",
+      "last_updated": null,
+      "part_of": "ec-no-petroleras"
+    },
+    {
+      "id": "ec-banano",
+      "title": "Banano y plátano — producción y exportaciones",
+      "publisher": "BCE / MAG / AEBE",
+      "country": "EC",
+      "jurisdiction_level": "federal",
+      "region": "Ecuador",
+      "description": "Statistics of banana and plantain production and exports. Long-standing traditional export and a major employer in coastal provinces.",
+      "releases_per_year": 12,
+      "url": "https://www.bce.fin.ec/",
+      "domains": [
+        "agriculture",
+        "proposed:trade",
+        "proposed:banana"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Classic traditional export. Still a large volume and value line; frequently cited alongside shrimp and cocoa in non-oil export analysis.",
+      "last_updated": null,
+      "part_of": "ec-no-petroleras"
+    },
+    {
+      "id": "ec-guayas",
+      "title": "Provincia del Guayas — core coastal statistical identity",
+      "publisher": "INEC",
+      "country": "EC",
+      "jurisdiction_level": "provincial",
+      "region": "Ecuador — Guayas",
+      "description": "Largest coastal province, containing Guayaquil and the majority of national shrimp production area. Intermediate-to-higher poverty incidence and the largest absolute poverty mass.",
+      "releases_per_year": 4,
+      "url": "https://www.ecuadorencifras.gob.ec/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:guayas",
+        "proposed:coast"
+      ],
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "~60% of shrimp production area; hosts the main port and commercial economy. Completes the provincial set with the largest economic and demographic weight on the coast.",
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Income poverty is calculated from ENEMDU household income data.",
+      "source_report_id": "ec-pobreza",
+      "target_report_id": "ec-enemdu",
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Poverty status is determined by comparing per-capita income with the official poverty lines.",
+      "source_report_id": "ec-pobreza",
+      "target_report_id": "ec-lineas-pobreza",
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "Poverty lines are updated with the IPC.",
+      "source_report_id": "ec-lineas-pobreza",
+      "target_report_id": "ec-ipc",
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "The Gini coefficient is computed from the same income distribution underlying the poverty estimates.",
+      "source_report_id": "ec-gini",
+      "target_report_id": "ec-enemdu",
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.bce.fin.ec/",
+      "basis": "Merchandise trade flows are a primary input into the goods account of the balance of payments.",
+      "source_report_id": "ec-comercio-exterior",
+      "target_report_id": "ec-bop",
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.bce.fin.ec/",
+      "basis": "Dollarization is the monetary regime under which the BCE operates.",
+      "source_report_id": "ec-dolarizacion",
+      "target_report_id": "ec-bce",
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "The basic and vital baskets are priced with the same price data underlying the IPC.",
+      "source_report_id": "ec-canasta-basica",
+      "target_report_id": "ec-ipc",
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.produccion.gob.ec/",
+      "basis": "The EU agreement underpins preferential access for major non-oil exports.",
+      "reference_period": "continuous",
+      "source_report_id": "ec-acuerdo-ue",
+      "target_report_id": "ec-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.produccion.gob.ec/",
+      "basis": "The China agreement underpins growing bilateral trade flows.",
+      "reference_period": "continuous",
+      "source_report_id": "ec-tlc-china",
+      "target_report_id": "ec-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.finanzas.gob.ec/",
+      "basis": "Oil revenues remain a material component of the national budget.",
+      "source_report_id": "ec-presupuesto",
+      "target_report_id": "ec-petroleo",
+      "_batch": [
+        "2026-08-13_Ecuador-batch3-metro-trade-social.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "ENIGHUR provides the expenditure weights for the IPC basket.",
+      "source_report_id": "ec-enighur",
+      "target_report_id": "ec-ipc",
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/",
+      "basis": "NBI is calculated primarily from census housing, education and service variables.",
+      "source_report_id": "ec-nbi",
+      "target_report_id": "ec-censo",
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.sri.gob.ec/",
+      "basis": "Tax collection is the primary non-oil revenue source of the national budget.",
+      "source_report_id": "ec-sri",
+      "target_report_id": "ec-presupuesto",
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.cna-ecuador.com/",
+      "basis": "Guayas accounts for the majority of national shrimp production area.",
+      "source_report_id": "ec-guayas",
+      "target_report_id": "ec-camaron",
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.cna-ecuador.com/",
+      "basis": "El Oro is the second-largest shrimp-producing province.",
+      "source_report_id": "ec-el-oro",
+      "target_report_id": "ec-camaron",
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ]
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ec-enemdu -> ec-inec",
+      "source": "ec-enemdu",
+      "target": "ec-inec",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: ENEMDU is a core continuous survey of INEC.",
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_evidence_url": "https://www.ecuadorencifras.gob.ec/"
+    },
+    {
+      "edge": "ec-ipc -> ec-inec",
+      "source": "ec-ipc",
+      "target": "ec-inec",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: IPC is produced and disseminated by INEC.",
+      "_batch": [
+        "2026-08-13_Ecuador-batch1.json"
+      ],
+      "_evidence_url": "https://www.ecuadorencifras.gob.ec/"
+    },
+    {
+      "edge": "ec-bop -> ec-bce",
+      "source": "ec-bop",
+      "target": "ec-bce",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: Balance of payments is compiled by the Banco Central del Ecuador.",
+      "_batch": [
+        "2026-08-13_Ecuador-batch2.json"
+      ],
+      "_evidence_url": "https://www.bce.fin.ec/"
+    },
+    {
+      "edge": "ec-endi -> ec-salud-publica",
+      "source": "ec-endi",
+      "target": "ec-salud-publica",
+      "reason": "deferred",
+      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: ENDI provides specialised early-childhood nutrition and development indicators that complement broader health statistics.",
+      "_batch": [
+        "2026-08-13_Ecuador-batch4-education-health-fiscal.json"
+      ],
+      "_evidence_url": "https://www.ecuadorencifras.gob.ec/"
+    },
+    {
+      "edge": "ec-camaron -> ec-comercio-exterior",
+      "source": "ec-camaron",
+      "target": "ec-comercio-exterior",
+      "reason": "note",
+      "why": "Containment edge, but the child already declares part_of \"ec-no-petroleras\". Not overwritten. Original basis: Shrimp is now the leading merchandise export by value.",
+      "_batch": [
+        "2026-08-13_Ecuador-batch5-shrimp-tax.json"
+      ]
+    }
+  ],
+  "_consolidation": {
+    "json_syntax_repairs": [],
+    "json_syntax_repair_note": "These batch files were not valid JSON as delivered: \"releases_per_year\" carried an unquoted text value (missing opening quote), e.g. `\"releases_per_year\": continuous\",`. Repaired mechanically by re-quoting the value verbatim. No number was invented.",
+    "cadence_moved_to__cadence_original": 0,
+    "cadence_note": "A non-numeric cadence text was moved off releases_per_year into _cadence_original verbatim and the numeric field omitted, per the v2 spec (omitted, never null). Needs a human/judgement pass to become a real number.",
+    "releases_per_year_null_or_absent_omitted": 5,
+    "legacy_proposed_id_remapped": 0,
+    "duplicate_report_ids": {},
+    "duplicate_report_id_conflicts": [],
+    "duplicate_edges_collapsed": 0,
+    "edge_endpoints_not_defined_in_this_file": []
+  },
+  "_normalisation": {
+    "note": "Second pass, 2026-08-18: mechanical alignment to src/lib/types.ts. Nothing researched, nothing invented. Every original value that was replaced is preserved on the record under a key prefixed with an underscore.",
+    "changes": {
+      "nonschema_key_prefixed": 105,
+      "domain_tag_normalised": 125,
+      "last_updated_added_null": 50,
+      "part_of_edge_moved_to_node": 16,
+      "produced_by_edge_dropped": 3,
+      "offunion_edge_deferred": 1,
+      "part_of_edge_conflict": 1
+    },
+    "rules": [
+      "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
+      "domains: format-normalised, then any tag outside the 22 approved values prefixed \"proposed:\" as the spec directs. No semantic merging was done — that needs your call.",
+      "relationship_type: part_of edges moved onto the child node as part_of; contains edges reversed onto the child; produced_by edges dropped (publisher is a string, not a node); related_to / complements held in _dropped as deferred. Off-union values were poisoning every PageRank score with NaN.",
+      "last_updated added as null where absent (required field, string|null).",
+      "region filled with the country name where it was null or missing.",
+      "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
+      "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+    ]
+  },
+  "_gaps": {
+    "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
+    "edges_without_evidence_url": [],
+    "unresolved_cadence": [],
+    "unresolved_jurisdiction_level": [],
+    "institution_node_candidates": [
+      {
+        "id": "ec-inec",
+        "title": "Instituto Nacional de Estadística y Censos (INEC) — institutional statistical identity",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      },
+      {
+        "id": "ec-bce",
+        "title": "Banco Central del Ecuador — statistical publications (monetary, external, inflation)",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      }
+    ]
+  }
+}

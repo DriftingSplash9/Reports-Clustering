@@ -1,0 +1,1188 @@
+{
+  "meta": {
+    "country": "Peru",
+    "code": "PE",
+    "consolidated_on": "2026-08-18",
+    "actor": "Claude — consolidation pass (no research, no content rewriting)",
+    "scope": "Every Grok batch file for Peru merged into one file. Records are byte-faithful to the batches except for the normalisations listed in _consolidation.",
+    "source_batch_count": 4,
+    "source_batches": [
+      "2026-08-13_Peru-batch1.json",
+      "2026-08-13_Peru-batch2.json",
+      "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json",
+      "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+    ],
+    "counts": {
+      "reports": 40,
+      "dependencies": 15,
+      "dropped_notes": 5
+    },
+    "container_shapes_seen": {
+      "candidates,dropped_or_rejected,meta,proposed_edges": 4
+    },
+    "schema_aligned_on": "2026-08-18"
+  },
+  "reports": [
+    {
+      "id": "pe-inei",
+      "title": "Instituto Nacional de Estadística e Informática (INEI) — institutional statistical identity",
+      "publisher": "Instituto Nacional de Estadística e Informática",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "National statistical office of Peru. Produces the core official statistics (prices, household surveys, poverty, national accounts inputs, census, etc.) and coordinates the national statistical system.",
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:statistical-system",
+        "proposed:governance"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Institutional parent node for Peruvian official statistics. Continuously cited as the producer of the principal economic and social series.",
+      "_referenced_by": [
+        "All major INEI programme methodologies and technical reports",
+        "Banco Central de Reserva statistical publications that cite INEI sources",
+        "Comisión Consultiva de Pobreza statements"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "pe-enaho",
+      "title": "Encuesta Nacional de Hogares (ENAHO) / National Household Survey",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Continuous household survey that is the official source for living conditions, monetary poverty, multidimensional poverty, income and expenditure, education and health access. National coverage with departmental disaggregation.",
+      "releases_per_year": 4,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:households",
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:living-conditions"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central social survey of Peru. Continuous since 2003 (earlier quarterly from 1995). Primary microdata source for poverty measurement and for a wide range of living-conditions indicators. Quarterly living-conditions reports and annual poverty results are the main public products.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-pobreza-monetaria",
+      "title": "Pobreza monetaria / Monetary poverty",
+      "publisher": "INEI + Comisión Consultiva de Pobreza",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Official income/expenditure-based poverty and extreme-poverty incidence. Calculated by comparing household per-capita expenditure (from ENAHO) with nationally defined poverty lines. Annual publication with urban/rural and departmental breakdowns.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:income",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Headline social indicator. 2025: monetary poverty 25.7% (down 1.9 pp from 27.6% in 2024); extreme poverty 4.7%. Urban–rural gap remains large (urban ~23.4%, rural ~35.5%). Series supervised by the Comisión Consultiva.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-lineas-pobreza",
+      "title": "Líneas de pobreza total y extrema",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Monetary values of the total and extreme poverty lines (per capita and for reference households), updated with price information and differentiated by geographic domain.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:prices"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Direct input into the poverty measurement. 2025 total poverty line ~S/ 462 per person; extreme (basic food basket) ~S/ 260 per person.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-ipc",
+      "title": "Índice de Precios al Consumidor (IPC) / Consumer Price Index",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Monthly consumer price index measuring changes in the prices of a representative basket of goods and services. National and major-city coverage.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:prices",
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship price statistic. Direct input into monetary-policy analysis by the Banco Central de Reserva and into the updating of poverty lines.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-cuentas-nacionales",
+      "title": "Cuentas Nacionales / National Accounts of Peru",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "System of national accounts producing GDP by production, expenditure and income. Quarterly and annual releases.",
+      "releases_per_year": 4,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "national-accounts",
+        "proposed:gdp"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core macroeconomic statistical system. INEI is the primary compiler of the real-sector accounts.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-epen",
+      "title": "Encuesta Permanente de Empleo Nacional (EPEN) / Permanent National Employment Survey",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Continuous employment survey providing labour-force indicators (employment, unemployment, underemployment, informality) at national and major-domain levels.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "labour",
+        "proposed:employment"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary high-frequency labour survey. Complements the longer-running ENAHO on labour-market dimensions and feeds the quarterly living-conditions reports.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-bcr",
+      "title": "Banco Central de Reserva del Perú — statistical publications (monetary, external, inflation)",
+      "publisher": "Banco Central de Reserva del Perú",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Central-bank statistical output covering monetary aggregates, balance of payments, international reserves, exchange rates, and inflation analysis. Complements INEI’s real-sector and price statistics.",
+      "releases_per_year": 12,
+      "url": "https://www.bcrp.gob.pe/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:external-sector",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "In the Peruvian division of labour INEI leads national accounts, prices, household surveys and poverty; the BCR leads monetary, external and financial statistics and conducts inflation-targeting policy.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-censo",
+      "title": "Censos Nacionales de Población y Vivienda / National Population and Housing Census",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Decennial population and housing census. Provides the demographic baseline, sampling frames for household surveys, and small-area population estimates.",
+      "releases_per_year": 0.1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:census",
+        "proposed:demography",
+        "proposed:housing"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational demographic product. Continuously cited by ENAHO/EPEN design, poverty analysis and departmental statistical work.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-condiciones-vida",
+      "title": "Condiciones de Vida en el Perú (quarterly technical report)",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Quarterly technical report synthesising ENAHO and EPEN results on living conditions, employment and related welfare indicators.",
+      "releases_per_year": 4,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:living-conditions",
+        "labour",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Regular public synthesis product. Bridges the continuous survey data to a widely used quarterly narrative on welfare and the labour market.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-pbi-mensual",
+      "title": "Producción Nacional / Monthly GDP (PBI)",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Monthly estimate of national production (PBI) by economic activity. Principal high-frequency real-activity indicator.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "national-accounts",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core short-term activity product. 2025 full-year growth ~3.4%; Q1 2026 ~3.5%. Construction, commerce and manufacturing have been recent drivers.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-manufactura",
+      "title": "PBI Manufactura / Manufacturing production",
+      "publisher": "INEI / PRODUCE",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Volume and value indicators of manufacturing production, split into primary and non-primary manufacturing. Monthly and annual series.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:industry",
+        "proposed:manufacturing",
+        "proposed:short-term-indicators"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Manufacturing contributes ~12% of GDP. 2025 growth ~2.7% (primary +4.9%, non-primary +1.9%). Export-oriented manufacturing has been a notable contributor.",
+      "last_updated": null,
+      "part_of": "pe-pbi-mensual"
+    },
+    {
+      "id": "pe-bop",
+      "title": "Balanza de Pagos / Balance of Payments",
+      "publisher": "Banco Central de Reserva del Perú",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Quarterly and annual balance of payments covering the current account, capital/financial account and changes in reserve assets.",
+      "releases_per_year": 4,
+      "url": "https://www.bcrp.gob.pe/",
+      "domains": [
+        "proposed:external-sector",
+        "proposed:balance-of-payments"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core external-accounts product. Recent years have shown current-account surpluses driven by strong traditional exports (mining, fishing, gas). Net international investment position and reserve adequacy are regularly reported.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-comercio-exterior",
+      "title": "Estadísticas de Comercio Exterior / Merchandise Trade",
+      "publisher": "INEI / SUNAT / BCR",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Monthly and annual statistics of exports and imports of goods, classified as traditional (mining, fishing, agriculture, oil/gas) and non-traditional.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:trade",
+        "proposed:external-sector"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Trade data feed both the BOP and the national accounts. Mining remains the dominant traditional export; manufacturing exports have shown strong recent growth.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-reporte-inflacion",
+      "title": "Reporte de Inflación (BCR)",
+      "publisher": "Banco Central de Reserva del Perú",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Periodic Inflation Report of the central bank. Explains recent inflation, the outlook, and the implications for the reference interest rate under the explicit inflation-targeting regime.",
+      "releases_per_year": 4,
+      "url": "https://www.bcrp.gob.pe/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:policy",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship policy communication product. Complements the monthly monetary-programme statements. Central reference for the 1–3% inflation target band.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-tasa-referencia",
+      "title": "Tasa de interés de referencia / Policy interest rate",
+      "publisher": "Banco Central de Reserva del Perú",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Main monetary-policy instrument of the BCR Board. The rate at which the central bank signals the monetary stance and steers interbank rates.",
+      "releases_per_year": 12,
+      "url": "https://www.bcrp.gob.pe/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:policy"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational policy rate. Held at 4.25% for an extended period in 2025–2026 after the earlier easing cycle. Path is the primary signal of the monetary stance.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-reservas",
+      "title": "Reservas Internacionales Netas (RIN)",
+      "publisher": "Banco Central de Reserva del Perú",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Stock of net international reserves managed by the central bank. Published at high frequency and analysed in the BOP and annual reports.",
+      "releases_per_year": 52,
+      "url": "https://www.bcrp.gob.pe/",
+      "domains": [
+        "proposed:reserves",
+        "proposed:external-sector",
+        "proposed:monetary"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key external-buffer indicator. End-2025 RIN ~USD 90 bn (~26% of GDP), covering multiple months of imports and a high multiple of short-term external debt.",
+      "last_updated": null,
+      "part_of": "pe-bop"
+    },
+    {
+      "id": "pe-meta-inflacion",
+      "title": "Marco de metas de inflación (1–3%) — BCR",
+      "publisher": "Banco Central de Reserva del Perú",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Operational monetary-policy framework: explicit inflation targeting with a 1–3% annual CPI band (centre 2%). In place since 2002.",
+      "url": "https://www.bcrp.gob.pe/",
+      "domains": [
+        "proposed:monetary",
+        "proposed:policy",
+        "proposed:central-bank"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core policy-framework node. Continuously cited as the reference against which inflation outcomes and policy actions are evaluated.",
+      "_referenced_by": [
+        "Every Inflation Report and monetary-programme statement",
+        "IPC and inflation analysis that refers to the target band",
+        "Market and academic commentary on Peruvian monetary policy"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "pe-mineria",
+      "title": "Producción y exportaciones mineras / Mining production & exports",
+      "publisher": "INEI / Ministerio de Energía y Minas / BCR",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Statistics of metallic and non-metallic mining production and exports (copper, gold, zinc, silver, etc.). Structural component of traditional exports and of GDP.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:mining",
+        "proposed:trade",
+        "proposed:commodities"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Mining is the backbone of traditional exports and a major GDP contributor. Copper and gold dominate the export basket; production and export volumes are high-frequency inputs into the BOP and national accounts.",
+      "last_updated": null,
+      "part_of": "pe-comercio-exterior"
+    },
+    {
+      "id": "pe-pesca",
+      "title": "Producción y exportaciones pesqueras / Fishing & fishmeal",
+      "publisher": "INEI / PRODUCE / BCR",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Statistics of fishing catch, fishmeal and fish-oil production and exports. Important traditional export and source of short-term volatility in manufacturing and GDP.",
+      "releases_per_year": 12,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:fishing",
+        "proposed:trade",
+        "proposed:commodities"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-volatility traditional sector. Anchovy/fishmeal cycles drive large swings in primary manufacturing and in the goods trade balance. Regularly highlighted in monthly production and BOP analysis.",
+      "last_updated": null,
+      "part_of": "pe-manufactura"
+    },
+    {
+      "id": "pe-lima-metropolitana",
+      "title": "Lima Metropolitana — capital statistical identity",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "municipal",
+      "region": "Peru — Lima Metropolitana",
+      "description": "Capital metropolitan area and largest urban economy. Primary high-frequency domain for ENAHO, EPEN and many price/activity series. Intermediate monetary-poverty incidence relative to the national average.",
+      "releases_per_year": 4,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:metropolitan",
+        "proposed:capital",
+        "proposed:lima"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Dominant metro node. 2025 monetary poverty in Lima Metropolitana ~27.3% (close to the national 25.7%). Continuously published as a distinct geographic domain in poverty and living-conditions reports.",
+      "last_updated": null,
+      "part_of": "pe-enaho"
+    },
+    {
+      "id": "pe-cajamarca",
+      "title": "Departamento de Cajamarca — highest-poverty contrast",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Cajamarca",
+      "description": "Andean department with the highest monetary-poverty incidence in the 2025 results. Tests the statistical hierarchy under persistent high poverty despite mining presence.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty",
+        "proposed:cajamarca"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Poverty-contrast department. 2025 monetary poverty 41.0% (highest); also among the highest in extreme poverty. Has remained in the top poverty group for many consecutive years.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-loreto",
+      "title": "Departamento de Loreto — high-poverty Selva contrast",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Loreto",
+      "description": "Amazonian department with the second-highest monetary-poverty incidence. Completes the periphery contrast alongside Cajamarca and Puno.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty",
+        "proposed:loreto"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 monetary poverty 40.1%. Illustrates the Selva high-poverty cluster under a common national measurement framework.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-puno",
+      "title": "Departamento de Puno — high-poverty Sierra contrast",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Puno",
+      "description": "Southern Andean department ranking among the highest in monetary and extreme poverty.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:poverty",
+        "proposed:puno"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 monetary poverty 37.5%. Part of the persistent high-poverty Sierra group.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-ica",
+      "title": "Departamento de Ica — low-poverty contrast",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Ica",
+      "description": "Coastal department with the lowest monetary-poverty incidence in the 2025 results.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:ica"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 monetary poverty 4.5% — lowest of the departments. Completes the low-poverty pole opposite Cajamarca/Loreto/Puno.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-pobreza-departamental",
+      "title": "Pobreza monetaria por departamento (INEI)",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru",
+      "description": "Official departmental tabulations of monetary poverty and extreme poverty. Primary source for the inter-departmental poverty gradient.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:poverty",
+        "proposed:provincial",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key homogeneity-test product. 2025 ranking (selected): Cajamarca 41.0%, Loreto 40.1%, Puno 37.5%, … Ica 4.5%, Madre de Dios 7.3%, Moquegua 7.8%. National average 25.7%.",
+      "last_updated": null,
+      "part_of": "pe-pobreza-monetaria"
+    },
+    {
+      "id": "pe-alianza-pacifico",
+      "title": "Alianza del Pacífico (Protocolo Comercial)",
+      "publisher": "Estados miembros de la Alianza del Pacífico (Chile, Colombia, México, Perú)",
+      "country": "PE",
+      "jurisdiction_level": "international",
+      "region": "Peru / Latin America Pacific",
+      "description": "Regional integration initiative and commercial protocol among the four Pacific-facing Latin American economies. Preferential trade, investment and regulatory cooperation framework.",
+      "url": "https://alianzapacifico.net/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement",
+        "proposed:regional-integration"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Latin American Pacific counterpart to MERCOSUR. Continuously cited in official trade reporting.",
+      "_referenced_by": [
+        "Peruvian trade-agreement monitoring and MinCETUR reports",
+        "Export and import statistics with AP partners",
+        "Regional integration analysis"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "pe-mef-presupuesto",
+      "title": "Presupuesto del Sector Público / National Budget (MEF)",
+      "publisher": "Ministerio de Economía y Finanzas",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Annual public-sector budget law and subsequent execution reports covering revenues and expenditure of the central government and transfers.",
+      "releases_per_year": 12,
+      "url": "https://www.mef.gob.pe/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:budget",
+        "proposed:fiscal"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational fiscal framework. 2026 budget ~S/ 257.6 bn. Education, health, transport and security absorb a large share of the functional allocation.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-educacion",
+      "title": "Estadísticas de educación / Education statistics & budget",
+      "publisher": "Ministerio de Educación / INEI / MEF",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Enrolment, attainment and learning-outcome indicators together with the education functional budget. Complements ENAHO education modules.",
+      "releases_per_year": 1,
+      "url": "https://www.minedu.gob.pe/",
+      "domains": [
+        "education",
+        "proposed:public-finance"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Education is a major budget priority. ENAHO provides household-side attainment and access data; administrative systems and learning assessments supply the supply-side picture.",
+      "last_updated": null,
+      "part_of": "pe-mef-presupuesto"
+    },
+    {
+      "id": "pe-salud",
+      "title": "Estadísticas de salud / Health coverage & expenditure",
+      "publisher": "Ministerio de Salud / SIS / INEI / MEF",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Health-insurance coverage (SIS and other schemes), health-service access and the health functional budget. Complements ENAHO health modules.",
+      "releases_per_year": 1,
+      "url": "https://www.minsa.gob.pe/",
+      "domains": [
+        "health",
+        "proposed:public-finance",
+        "proposed:social"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Health is a major and growing budget function. SIS (Seguro Integral de Salud) is the principal public insurer for the uninsured population; ENAHO tracks affiliation and access.",
+      "last_updated": null,
+      "part_of": "pe-mef-presupuesto"
+    },
+    {
+      "id": "pe-cafe",
+      "title": "Café — producción y exportaciones",
+      "publisher": "MIDAGRI / Junta Nacional del Café / SUNAT / INEI",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Statistics of coffee production and exports. Leading traditional agricultural export, produced mainly by smallholders in Andean and Amazonian foothill regions. Peru is a major organic-coffee exporter.",
+      "releases_per_year": 12,
+      "url": "https://www.gob.pe/midagri",
+      "domains": [
+        "agriculture",
+        "proposed:coffee",
+        "proposed:trade",
+        "proposed:andes"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Signature soft-commodity export. 2025 exports reached record levels (reports in the USD 1.7–1.8 bn range). Produced in 16 regions; main producers include San Martín, Cajamarca, Junín, Cusco and Amazonas. Continuously cited in agro-export and rural-economy analysis.",
+      "last_updated": null,
+      "part_of": "pe-comercio-exterior"
+    },
+    {
+      "id": "pe-agroexportaciones",
+      "title": "Agroexportaciones / Non-traditional agricultural exports",
+      "publisher": "MIDAGRI / SUNAT / BCR",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Broader statistics of agricultural and agro-industrial exports (fresh produce, processed foods, coffee, cocoa, etc.). Complements the mining-dominated traditional-export basket.",
+      "releases_per_year": 12,
+      "url": "https://www.gob.pe/midagri",
+      "domains": [
+        "agriculture",
+        "proposed:trade"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Non-traditional agro-exports have been a diversification success story. Coffee is the largest single traditional agricultural line; blueberries, grapes, avocados and asparagus are major non-traditional lines.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-tlc-eeuu",
+      "title": "Tratado de Libre Comercio Perú–Estados Unidos",
+      "publisher": "Gobierno del Perú / United States",
+      "country": "PE",
+      "jurisdiction_level": "international",
+      "region": "Peru / North America",
+      "description": "Bilateral free-trade agreement in force since February 2009. Core preferential-access instrument for the US market and a recurring reference in trade and investment analysis.",
+      "url": "https://www.acuerdoscomerciales.gob.pe/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Major bilateral FTA. Continuously cited in official trade-performance reporting. Nearly all Peruvian tariff lines enter the US duty-free under the agreement.",
+      "_referenced_by": [
+        "MinCETUR agreement-monitoring reports",
+        "Export statistics by partner (US is a top destination for coffee and other agro-exports)",
+        "Policy debates on market access and diversification"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "pe-tlc-china",
+      "title": "Tratado de Libre Comercio Perú–China",
+      "publisher": "Gobierno del Perú / República Popular China",
+      "country": "PE",
+      "jurisdiction_level": "international",
+      "region": "Peru / Asia",
+      "description": "Bilateral free-trade agreement in force since March 2010. Underpins the large and growing bilateral trade relationship, especially mining and agricultural exports to China.",
+      "url": "https://www.acuerdoscomerciales.gob.pe/",
+      "domains": [
+        "proposed:trade",
+        "proposed:international-agreement"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Structurally important bilateral instrument. China is a top destination for Peruvian copper and other minerals; the FTA is routinely cited in explanations of the trade relationship.",
+      "_referenced_by": [
+        "Trade and mining-export analysis",
+        "BCR external-sector reports",
+        "Official monitoring of the China FTA"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "pe-sierra",
+      "title": "Sierra — natural-region statistical domain",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Sierra",
+      "description": "Andean highlands natural region used as a standard geographic domain in ENAHO poverty and living-conditions analysis. Highest rural poverty incidence.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:regional",
+        "proposed:andes",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key natural-region domain. Sierra rural recorded the highest monetary poverty in 2025 (~38.8%). Hosts much of the coffee and highland agricultural production as well as important mining districts.",
+      "last_updated": null,
+      "part_of": "pe-pobreza-monetaria"
+    },
+    {
+      "id": "pe-selva",
+      "title": "Selva — natural-region statistical domain",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Selva",
+      "description": "Amazonian natural region used as a standard geographic domain in ENAHO analysis. Elevated rural poverty and important coffee/cocoa producing zones.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:regional",
+        "proposed:amazon",
+        "proposed:poverty"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Selva rural poverty remains elevated (~30.7% in 2025). Contains major coffee-producing departments such as San Martín and parts of Amazonas.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-costa",
+      "title": "Costa — natural-region statistical domain",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Costa",
+      "description": "Coastal natural region used as a standard geographic domain. Lowest poverty incidence among the three natural regions; hosts the capital and the bulk of non-traditional agro-exports.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:regional",
+        "proposed:coast"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Costa urbana has the lowest poverty rates. Completes the three natural-region domains (Costa–Sierra–Selva) that structure much of Peruvian social and agricultural analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-san-martin",
+      "title": "Departamento de San Martín — coffee-producing Andean–Amazon transition",
+      "publisher": "INEI / MIDAGRI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — San Martín",
+      "description": "Major coffee-producing department in the Andean–Amazon transition zone. Important for both agricultural-export and rural-poverty analysis.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:coffee",
+        "agriculture"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "One of the leading coffee regions. Links the commodity (coffee) to the departmental and natural-region poverty/production geography.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-canon-minero",
+      "title": "Canon minero y regalías mineras",
+      "publisher": "MEF / Ministerio de Energía y Minas",
+      "country": "PE",
+      "jurisdiction_level": "federal",
+      "region": "Peru",
+      "description": "Mining canon and royalty transfers from central government to producing regions and local governments. Major sub-national fiscal mechanism linking mining production to territorial budgets.",
+      "releases_per_year": 4,
+      "url": "https://www.mef.gob.pe/",
+      "domains": [
+        "proposed:public-finance",
+        "proposed:mining",
+        "proposed:subnational",
+        "proposed:royalties"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Critical sub-national fiscal node. Directly links the mining production and export statistics to departmental and municipal budgets, especially in the Sierra and mining corridors.",
+      "last_updated": null
+    },
+    {
+      "id": "pe-moquegua",
+      "title": "Departamento de Moquegua — low-poverty mining contrast",
+      "publisher": "INEI",
+      "country": "PE",
+      "jurisdiction_level": "provincial",
+      "region": "Peru — Moquegua",
+      "description": "Southern mining department with very low monetary-poverty incidence. Completes the mining-department contrast alongside Ica.",
+      "releases_per_year": 1,
+      "url": "https://www.inei.gob.pe/",
+      "domains": [
+        "proposed:provincial",
+        "proposed:mining"
+      ],
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "2025 monetary poverty ~7.8%. Hosts major copper operations; illustrates that mining presence can coincide with low measured poverty under the national framework.",
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "Monetary poverty is calculated from ENAHO household expenditure and income data.",
+      "source_report_id": "pe-pobreza-monetaria",
+      "target_report_id": "pe-enaho",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "Poverty status is determined by comparing per-capita expenditure with the official poverty lines.",
+      "source_report_id": "pe-pobreza-monetaria",
+      "target_report_id": "pe-lineas-pobreza",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "Poverty lines are updated with price information derived from the IPC.",
+      "source_report_id": "pe-lineas-pobreza",
+      "target_report_id": "pe-ipc",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "The quarterly living-conditions report synthesises ENAHO results.",
+      "source_report_id": "pe-condiciones-vida",
+      "target_report_id": "pe-enaho",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "The quarterly living-conditions report also draws on EPEN labour indicators.",
+      "source_report_id": "pe-condiciones-vida",
+      "target_report_id": "pe-epen",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.bcrp.gob.pe/",
+      "basis": "Merchandise trade flows are a primary input into the goods account of the balance of payments.",
+      "source_report_id": "pe-comercio-exterior",
+      "target_report_id": "pe-bop",
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.bcrp.gob.pe/",
+      "basis": "The Inflation Report analyses outcomes against the 1–3% target band.",
+      "source_report_id": "pe-reporte-inflacion",
+      "target_report_id": "pe-meta-inflacion",
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.bcrp.gob.pe/",
+      "basis": "The reference rate is the primary instrument used to steer inflation toward the target.",
+      "source_report_id": "pe-tasa-referencia",
+      "target_report_id": "pe-meta-inflacion",
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "Cajamarca’s high poverty ranking is derived from the departmental poverty tabulations.",
+      "source_report_id": "pe-cajamarca",
+      "target_report_id": "pe-pobreza-departamental",
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://alianzapacifico.net/",
+      "basis": "Pacific Alliance preferential trade is a recurring analytical dimension of merchandise-trade reporting.",
+      "reference_period": "continuous",
+      "source_report_id": "pe-alianza-pacifico",
+      "target_report_id": "pe-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.inei.gob.pe/",
+      "basis": "ENAHO provides household-side health affiliation and access indicators.",
+      "source_report_id": "pe-salud",
+      "target_report_id": "pe-enaho",
+      "_batch": [
+        "2026-08-13_Peru-batch3-metro-trade-social-fiscal.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.acuerdoscomerciales.gob.pe/",
+      "basis": "The US FTA underpins preferential bilateral trade flows, including coffee and other agro-exports.",
+      "reference_period": "continuous",
+      "source_report_id": "pe-tlc-eeuu",
+      "target_report_id": "pe-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ]
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "evidence_url": "https://www.acuerdoscomerciales.gob.pe/",
+      "basis": "The China FTA underpins the large bilateral trade relationship, especially minerals.",
+      "reference_period": "continuous",
+      "source_report_id": "pe-tlc-china",
+      "target_report_id": "pe-comercio-exterior",
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.mef.gob.pe/",
+      "basis": "Canon and royalties are generated by mining production.",
+      "source_report_id": "pe-canon-minero",
+      "target_report_id": "pe-mineria",
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": "https://www.gob.pe/midagri",
+      "basis": "San Martín is one of the principal coffee-producing departments.",
+      "source_report_id": "pe-san-martin",
+      "target_report_id": "pe-cafe",
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ]
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "pe-enaho -> pe-inei",
+      "source": "pe-enaho",
+      "target": "pe-inei",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: ENAHO is a core continuous survey of INEI.",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_evidence_url": "https://www.inei.gob.pe/"
+    },
+    {
+      "edge": "pe-ipc -> pe-inei",
+      "source": "pe-ipc",
+      "target": "pe-inei",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: IPC is produced and disseminated by INEI.",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_evidence_url": "https://www.inei.gob.pe/"
+    },
+    {
+      "edge": "pe-cuentas-nacionales -> pe-inei",
+      "source": "pe-cuentas-nacionales",
+      "target": "pe-inei",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: National accounts are compiled by INEI.",
+      "_batch": [
+        "2026-08-13_Peru-batch1.json"
+      ],
+      "_evidence_url": "https://www.inei.gob.pe/"
+    },
+    {
+      "edge": "pe-bop -> pe-bcr",
+      "source": "pe-bop",
+      "target": "pe-bcr",
+      "reason": "note",
+      "why": "Dropped: \"produced_by\" is not a dependency type. The publisher of a report is a plain string on the report, never a node of its own (data spec 2c). Original basis: Balance of payments is compiled by the Banco Central de Reserva.",
+      "_batch": [
+        "2026-08-13_Peru-batch2.json"
+      ],
+      "_evidence_url": "https://www.bcrp.gob.pe/"
+    },
+    {
+      "edge": "pe-cafe -> pe-agroexportaciones",
+      "source": "pe-cafe",
+      "target": "pe-agroexportaciones",
+      "reason": "note",
+      "why": "Containment edge, but the child already declares part_of \"pe-comercio-exterior\". Not overwritten. Original basis: Coffee is the leading traditional agricultural component of agro-exports.",
+      "_batch": [
+        "2026-08-13_Peru-batch4-coffee-trade-andes.json"
+      ]
+    }
+  ],
+  "_consolidation": {
+    "json_syntax_repairs": [],
+    "json_syntax_repair_note": "These batch files were not valid JSON as delivered: \"releases_per_year\" carried an unquoted text value (missing opening quote), e.g. `\"releases_per_year\": continuous\",`. Repaired mechanically by re-quoting the value verbatim. No number was invented.",
+    "cadence_moved_to__cadence_original": 0,
+    "cadence_note": "A non-numeric cadence text was moved off releases_per_year into _cadence_original verbatim and the numeric field omitted, per the v2 spec (omitted, never null). Needs a human/judgement pass to become a real number.",
+    "releases_per_year_null_or_absent_omitted": 5,
+    "legacy_proposed_id_remapped": 0,
+    "duplicate_report_ids": {},
+    "duplicate_report_id_conflicts": [],
+    "duplicate_edges_collapsed": 0,
+    "edge_endpoints_not_defined_in_this_file": []
+  },
+  "_normalisation": {
+    "note": "Second pass, 2026-08-18: mechanical alignment to src/lib/types.ts. Nothing researched, nothing invented. Every original value that was replaced is preserved on the record under a key prefixed with an underscore.",
+    "changes": {
+      "nonschema_key_prefixed": 85,
+      "domain_tag_normalised": 97,
+      "last_updated_added_null": 40,
+      "produced_by_edge_dropped": 4,
+      "part_of_edge_moved_to_node": 10,
+      "part_of_edge_conflict": 1
+    },
+    "rules": [
+      "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
+      "domains: format-normalised, then any tag outside the 22 approved values prefixed \"proposed:\" as the spec directs. No semantic merging was done — that needs your call.",
+      "relationship_type: part_of edges moved onto the child node as part_of; contains edges reversed onto the child; produced_by edges dropped (publisher is a string, not a node); related_to / complements held in _dropped as deferred. Off-union values were poisoning every PageRank score with NaN.",
+      "last_updated added as null where absent (required field, string|null).",
+      "region filled with the country name where it was null or missing.",
+      "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
+      "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+    ]
+  },
+  "_gaps": {
+    "note": "What is genuinely missing and cannot be fixed mechanically — this is the research queue, not a defect list.",
+    "reports_without_url": [],
+    "reports_without_url_count": 0,
+    "edges_without_evidence_url": [],
+    "unresolved_cadence": [],
+    "unresolved_jurisdiction_level": [],
+    "institution_node_candidates": [
+      {
+        "id": "pe-inei",
+        "title": "Instituto Nacional de Estadística e Informática (INEI) — institutional statistical identity",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      },
+      {
+        "id": "pe-bcr",
+        "title": "Banco Central de Reserva del Perú — statistical publications (monetary, external, inflation)",
+        "why": "Target of a produced_by edge — likely an institution node rather than a published report."
+      }
+    ]
+  }
+}
