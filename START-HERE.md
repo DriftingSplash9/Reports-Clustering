@@ -15,34 +15,49 @@ graph where each sphere is a real published report, each line is a documented
 dependency between two of them, and a report's size is how much everything else
 rests on it.
 
-Right now it holds **948 reports and 923 dependencies** (measured 2026-08-13 —
-run `npm run validate` for the live count, it moves most sessions). It began
-with Canadian and American federal statistics, Alberta's provincial finances
-and three Alberta municipalities in full detail, and has since grown galaxies:
-the European Union and its member states, candidates and neighbours; New
-Zealand and the three jurisdictions of its Realm plus the Pacific states that
-borrow its institutions; Australia; the United Kingdom and the Netherlands;
-the international bodies — IMF, OECD, BIS-adjacent — whose reports consume
-everyone else's numbers; and, now the largest branch by file count, all 54
-African states, with city/commune-level financial detail for about half of
-them. Brazil has a small foothold (two nodes); Russia, China and India have
-none yet — the obvious next continent-scale push if one starts.
+Right now it holds **1,250 reports and 1,079 dependencies** (measured
+2026-08-18 — run `npm run validate` for the live count, it moves most
+sessions). It began with Canadian and American federal statistics, Alberta's
+provincial finances and three Alberta municipalities in full detail, and has
+since grown galaxies: the European Union and its member states, candidates and
+neighbours; New Zealand and the three jurisdictions of its Realm plus the
+Pacific states that borrow its institutions; Australia; the United Kingdom and
+the Netherlands; the international bodies — IMF, OECD, BIS-adjacent — whose
+reports consume everyone else's numbers; and, the largest branch by file count,
+all 54 African states, with city/commune-level financial detail for about half
+of them.
+
+The BRICS branch opened in August 2026 and is the current active front: Brazil,
+Russia, China and India all have real chains now, and South Africa arrived
+earlier with the African push. It is deliberately a half-finished round — Brazil
+and China have had less attention than Russia and India — and the branch's own
+hand-off chain in `BRICS/` is the place to pick it up.
 
 ---
 
 ## What it looks like
 
-A dark room with a lit floor, and a cloud of coloured spheres floating above it
-connected by fine lines. Colour tells you who publishes: blue for federal, green
-for provincial, orange for municipal, pink for international bodies, purple for
-institutions, grey for private companies.
+A cloud of coloured spheres in empty dark space, connected by fine lines. (There
+used to be a lit floor, a platform and a bounding box; all three were deleted in
+August 2026 for competing with the data.)
+
+Colour tells you **which system publishes** — one hue family per country or
+bloc, with the shade inside that family telling you the tier: national, state or
+provincial, municipal, institutional. Reds are Canada, blues the United States,
+greens the European Union, violets Africa and the international bodies, and so
+on. Grey is a private company, drawn off the palette entirely because it doesn't
+sit anywhere on that axis.
+
+**This is mid-revamp.** The colour system, the node and edge sizing, and the
+selection glow are all being reworked — see `notes/visual-revamp-2026-08-18/`
+for the current design and the measurements behind it.
 
 Size is the whole point. A big sphere is a report that lots of other reports are
 built on. A small one is an endpoint — something calculated *from* other things
-that nothing else uses. The biggest sphere in the graph is now the European
-System of Accounts — the EU regulation every member state's statistics must
-follow — with Canada's Consumer Price Index and Census of Population close
-behind.
+that nothing else uses. The biggest sphere in the graph is the European System
+of Accounts 2010 — the EU regulation every member state's statistics must
+follow — and it leads by a distance: the next two, the European Statistics Code
+of Practice and the Consumer Price Index, score about a quarter of it.
 
 Little teardrops travel along the lines, moving outward from each report to
 everything downstream of it, at the rate that report actually gets published.
@@ -82,8 +97,9 @@ publishing it.
 and social transfers don't use census counts. They use Statistics Canada's
 population *estimate* for July 1, which is the census adjusted for undercount
 plus births, deaths and migration. That extra step is invisible in every
-description of how the money moves — and it's why the census comes out as the
-single most depended-upon document in the graph.
+description of how the money moves — and it's why the census sits so far up the
+most-depended-upon ranking despite not being named in any of the transfer
+formulas.
 
 **A statute anticipates a statistics revision.** The Canada Pension Plan Act
 contains a clause requiring the Minister, on the advice of the Chief
@@ -156,10 +172,16 @@ escalator reads twelve months of inflation data once, in September, even though
 inflation publishes monthly. The data now records all three; the animation
 doesn't use them yet.
 
-**Not working well:** it looks wrong when you first open it. The camera frames
-the room rather than the graph, so everything starts small and far away; and
-zoomed in far enough to read, the middle is a solid ball you can't see into. Both
-are known and neither is hard, they just haven't been done.
+**Not working well:** everything is drawn too small, and as of 2026-08-18 the
+cause is measured rather than guessed. A handful of stray two-node components
+scattered far from the main cloud are setting the bounding radius the camera
+fits to, which pins the node-scaling function at its safety cap — so the largest
+sphere renders at about 7 pixels instead of the 12 the design intends. Worse,
+edge width and pulse size are in fixed world units and were never scaled
+alongside the nodes, so while nodes grew six times over as the corpus went from
+120 reports to 1,250, the edges grew not at all: an ordinary line is now about a
+*tenth of a pixel* wide. Fixing the fit and tying edge and pulse size to the node
+scale is the first job of the revamp. See `notes/visual-revamp-2026-08-18/`.
 
 **The obvious next thing:** more data. Alberta alone has around 330
 municipalities, 60 school authorities and 26 post-secondary institutions, and the
@@ -206,13 +228,21 @@ This is the plain-language one. The rest are working documents:
 | File | What it is |
 |---|---|
 | `REPORTS.md` | The design rules and the reasoning behind them. The document that matters most. |
-| `planning/BACKLOG.md` | What to add next and why, in priority order. |
 | `README.md` | How to run it and where the code lives. |
-| `AF/`, `EU/`, `NZ/`, `AU/`, `CA/` | The research branches — each with its own independently-numbered `G.*.md` hand-off chain; the newest file in a branch is that branch's current state. The EU's source PDFs live in `EU/sources/`. |
-| `archive/` | Closed-out material kept for reference — old handoffs, decided questions, and the project's original session-log system (retired 2026-08-13; see `REPORTS.md` for why). |
+| `BRICS/` | The only live research branch, with its own independently-numbered `G.*.md` hand-off chain. The newest file is the branch's current state. |
+| `notes/` | Working notes that aren't a research branch — including `visual-revamp-2026-08-18/`, the current design record for the rendering rework. |
+| `archive/` | Everything closed out: the finished research branches (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, each still carrying its full hand-off chain), the old `planning/` backlog, decided questions, and the project's original session-log system (retired 2026-08-13; see `REPORTS.md` for why). |
 
 There's no single running log across the whole project any more — that was
 tried early on (`sessions/V0.*.md`, now archived) and stopped scaling once the
 work split into branches. If you're picking this up, `REPORTS.md` plus the
 newest hand-off in whichever branch you're about to work on is the whole
 briefing.
+
+**One correction for anything reading this project's saved memory:** a note
+dated 2026-08-18 about a visual/palette review was written early in that
+session and is **superseded**. It recommends keeping the United States blue and
+changing only one colour, and it says nothing about removing the node rims or
+about the node- and edge-sizing bugs. The current design is
+`notes/visual-revamp-2026-08-18/visual-revamp-review.md` (rev 4). Where the two
+disagree, the file wins.
