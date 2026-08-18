@@ -227,6 +227,7 @@ This is the plain-language one. The rest are working documents:
 
 | File | What it is |
 |---|---|
+| `HANDOFF.md` | The working hand-off — what's being worked on right now and what's next. Superseded ones go to `Previous Handoffs/`. |
 | `REPORTS.md` | The design rules and the reasoning behind them. The document that matters most. |
 | `README.md` | How to run it and where the code lives. |
 | `BRICS/` | The only live research branch, with its own independently-numbered `G.*.md` hand-off chain. The newest file is the branch's current state. |
@@ -238,11 +239,3 @@ tried early on (`sessions/V0.*.md`, now archived) and stopped scaling once the
 work split into branches. If you're picking this up, `REPORTS.md` plus the
 newest hand-off in whichever branch you're about to work on is the whole
 briefing.
-
-**One correction for anything reading this project's saved memory:** a note
-dated 2026-08-18 about a visual/palette review was written early in that
-session and is **superseded**. It recommends keeping the United States blue and
-changing only one colour, and it says nothing about removing the node rims or
-about the node- and edge-sizing bugs. The current design is
-`notes/visual-revamp-2026-08-18/visual-revamp-review.md` (rev 4). Where the two
-disagree, the file wins.

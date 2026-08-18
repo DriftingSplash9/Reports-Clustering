@@ -7,22 +7,29 @@
 
 ## 🛑 Agent: read this before doing any work
 
-1. **This file, from "The one-line version" onward** — what the system is
+1. **`HANDOFF.md`** at the top level — the working hand-off. What is in
+   flight, who is touching what, and what the next action is. There is exactly
+   one, it is always at the top level, and superseded ones are catalogued in
+   `Previous Handoffs/`. **Read it before anything else**, because more than one
+   agent may be working this repo at the same time and it is the only place that
+   says so.
+2. **This file, from "The one-line version" onward** — what the system is
    trying to be and what is out of scope. That is the actual content; this
    protocol section above it is not.
-2. **Your own project memory**, if you have persistent memory across sessions
-   (e.g. an AI assistant's project memory / `MEMORY.md`). That is now the
-   primary carryover between sessions — read it before assuming anything below
-   is current.
-3. **The newest hand-off in whichever branch you're about to work on** —
-   `AF/G.*.md`, `EU/G.*.md`, `NZ/G.*.md`, `AU/G.*.md`, `CA/G.*.md`. Each branch
-   keeps its own independent numbering. Read only the highest number in the
-   branch you're touching, not the whole chain — each hand-off is written to
-   supersede its predecessors, per its own closing spec block.
-4. **`README.md`** when you need run mechanics or "where does X live," not to
-   get oriented. **`planning/BACKLOG.md`** when the question is "what should I
-   work on next" — it's Thomas's own tier-ranked priority list, not needed to
-   understand what the project is.
+3. **Your own project memory**, if you have persistent memory across sessions.
+   Treat it as a hint, not as truth: it has silently failed mid-session before
+   and gone stale, so where memory and `HANDOFF.md` disagree, **the file wins**.
+   Anything in memory dated 2026-08-18 about a visual or palette review is
+   superseded by `notes/visual-revamp-2026-08-18/`.
+4. **The newest hand-off in whichever branch you're about to work on.** As of
+   2026-08-18 the only live research branch is `BRICS/G.*.md`; `AF/`, `EU/`,
+   `NZ/`, `AU/` and `CA/` are finished and now live under `archive/`, each with
+   its hand-off chain intact. Read only the highest number in the branch you're
+   touching, not the whole chain — each hand-off supersedes its predecessors.
+5. **`README.md`** when you need run mechanics or "where does X live," not to
+   get oriented. The old `planning/BACKLOG.md` is retired to
+   `archive/planning/`; `HANDOFF.md` is now the answer to "what should I work
+   on next."
 
 That is the whole list. There is no `CLAUDE.md` and no other standing-rules
 file; if one is ever added it goes first, and this line gets updated.
