@@ -23,7 +23,7 @@ const SLIDERS: {
   key: 'fog' | 'glow' | 'spread' | 'geoAffinity'
   label: string
   hint: string
-  /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 50%–250%. */
+  /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 200%–1000%. */
   min?: number
   max?: number
 }[] = [
@@ -41,18 +41,26 @@ const SLIDERS: {
     key: 'spread',
     label: 'Cluster spread',
     hint: 'How much room the layout gives clusters, as a multiplier on the baseline. Rebuilds the layout when released, so it costs a beat; position still encodes nothing but the edges',
-    // Both extremes widened 50% on 2026-08-12 (Thomas: "you read that
-    // correctly. Go to the lower extremes by 50% too") — was 0.5–2.5.
-    min: 0.25,
-    max: 3.75,
+    // Rebased 2026-08-19 (Thomas: "far too dense at 100%... best to start at
+    // the current 200%. It should be from there as a minimum up to a 1000x
+    // max"). Was 0.25–3.75, itself a 50%-widening of the original 0.5–2.5 on
+    // 2026-08-12. The floor deliberately sits ABOVE the old default of 1 —
+    // the dense end is the complaint, so the slider no longer offers it. See
+    // `spread` in lib/view.ts for why that is a judgement about this corpus
+    // size rather than about the layout.
+    min: 2,
+    max: 10,
   },
   {
     key: 'geoAffinity',
     label: 'Geo-affinity',
-    hint: 'Pulls a country toward the ones it shares a trade/political bloc with, and away from the short list it is in an active dispute with. Off by default — see lib/geoAffinity.ts for the model',
-    // Ceiling raised 50% with the spread extremes, same request. Floor is 0 —
-    // "off" — and there is nothing below off to halve.
-    max: 1.5,
+    hint: 'Pulls a country toward the ones it shares a trade/political bloc with, and away from the short list it is in an active dispute with. Starts at 150%; drag to 0 to ablate it entirely — see lib/geoAffinity.ts for the model',
+    // Ceiling 1.5 → 5 on 2026-08-19 (Thomas: "turn geo affinity up to 500%"),
+    // and the default moved 0 → 1.5 in the same pass because he had been
+    // running pinned at the old ceiling. Floor stays 0 — "off" — and there is
+    // nothing below off. The force was modelled for 0–1; settling at 5 was
+    // verified before shipping this range.
+    max: 5,
   },
 ]
 

@@ -60,20 +60,29 @@ export interface ViewSettings {
    */
   zoom: number
   /**
-   * Layout spread — the multiplier applied to the whole layout scale, 0.5 to
-   * 2.5, shown to the viewer as 50%–250%.
+   * Layout spread — the multiplier applied to the whole layout scale, **2 to
+   * 10**, shown to the viewer as 200%–1000%. Default 2.
    *
    * A slider for the same reason haze and glow are: the right amount depends
    * on the corpus. At 124 nodes the tight layout read as one constellation;
-   * at 335 it read as a nest. 1 is the baseline tuned 2026-08-07; below it
-   * approaches the old dense physics, above it goes airy. Moving it rebuilds
-   * the layout (charge, repulsion cap, link rest lengths all scale together,
-   * and links touching hubs get extra room), so the change costs a beat
-   * before the camera refits.
+   * at 335 it read as a nest. Moving it rebuilds the layout (charge,
+   * repulsion cap, link rest lengths all scale together, and links touching
+   * hubs get extra room), so the change costs a beat before the camera
+   * refits.
+   *
+   * **Rebased 2026-08-19 (Thomas: "the cluster spread is far too dense at
+   * 100%... it would be best to start at the current 200%. It should be from
+   * there as a minimum up to a 1000x max").** The old baseline of 1 — tuned
+   * 2026-08-07 at a fraction of today's node count — is now BELOW the floor
+   * and unreachable, deliberately: at 1,250 reports it is the density he is
+   * complaining about, so the range no longer offers it. Old range was
+   * 0.25–3.75 with a default of 1. If the corpus ever shrinks again this is
+   * the first number to revisit, because the floor is a judgement about
+   * THIS corpus size, not a property of the layout.
    */
   spread: number
   /**
-   * Bilateral geo-affinity, 0 to 1. Off by default.
+   * Bilateral geo-affinity, **0 to 5**. Defaults to 1.5 — on, not off.
    *
    * A soft, ablatable force nudging a country's nodes toward countries it
    * shares a trade/political bloc with and away from the short, explicit
@@ -82,6 +91,18 @@ export interface ViewSettings {
    * "continental repulsion" the original plan proposed. Read live by the
    * force each tick, so unlike `spread` this never triggers a re-warmup —
    * moving the slider re-tunes the pull without re-laying out the graph.
+   *
+   * **Ceiling 1.5 → 5 and default 0 → 1.5 on 2026-08-19 (Thomas: "turn geo
+   * affinity up to 500%").** He had been running pinned at the old ceiling of
+   * 1.5, which is why that value becomes the new default rather than 0: it is
+   * where he actually works, not a guess. Note the force adds velocity
+   * directly (`v += pull * strength * alpha`) with no distance term, so
+   * strength scales the injection linearly and d3's `velocityDecay` is the
+   * only thing damping it — the model was written for 0–1 and 5 is well past
+   * where it was tuned. Settling was verified at 5 before shipping this
+   * range; if a future change to `BLOC_WEIGHT`, `MAX_BLOC_ATTRACTION` or
+   * `CONFLICT_REPULSION` raises the pull magnitudes, re-check that the
+   * layout still comes to rest at the top of the slider.
    */
   geoAffinity: number
   /**
@@ -127,8 +148,8 @@ export const DEFAULT_VIEW: ViewSettings = {
   focusBuiltFrom: true,
   focusFeedsInto: true,
   zoom: 1,
-  spread: 1,
-  geoAffinity: 0,
+  spread: 2,
+  geoAffinity: 1.5,
   lens: 'STANDARD',
 }
 
