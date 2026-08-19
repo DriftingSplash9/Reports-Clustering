@@ -1056,7 +1056,17 @@ export function disclosureByReport(
  * Square root, so a node with four times the score reads as twice the radius
  * rather than four times: area is what the eye actually compares, and linear
  * scaling makes the top node swamp everything.
+ *
+ * **Floor raised 2.2 → 3.4 on 2026-08-19**, which lifts the smallest node from
+ * 27% of the largest to 42%. That is a deliberate loss of resolution in the
+ * authority encoding, and it is worth it: authority is *also* carried by glow
+ * and by the ordering in the side panel, while the 90% of the corpus that sits
+ * near the floor has nothing but its own size. At the sizes this scene
+ * actually renders at (see `TARGET_LARGEST_FRACTION` in InfluenceGraph) the
+ * old floor put the median node under two pixels across, where a size channel
+ * cannot carry anything at all. `max` is unchanged, so the top of the ramp —
+ * the part the encoding is really about — is untouched.
  */
-export function radiusFor(sizeScore: number, min = 2.2, max = 8): number {
+export function radiusFor(sizeScore: number, min = 3.4, max = 8): number {
   return min + Math.sqrt(Math.max(0, sizeScore)) * (max - min)
 }

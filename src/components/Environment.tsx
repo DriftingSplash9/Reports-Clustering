@@ -1,7 +1,7 @@
 import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import type { ViewSettings } from '../lib/view'
+import { HORIZON_COLOUR, type ViewSettings } from '../lib/view'
 
 /**
  * Scenery — now just the optional horizon.
@@ -58,7 +58,7 @@ function Sky() {
         fog: false,
         uniforms: {
           zenith: { value: new THREE.Color('#03050b') },
-          horizon: { value: new THREE.Color('#28486e') },
+          horizon: { value: new THREE.Color(HORIZON_COLOUR) },
           ground: { value: new THREE.Color('#05080f') },
         },
       }),

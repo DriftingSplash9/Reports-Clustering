@@ -124,6 +124,29 @@ export const DEFAULT_VIEW: ViewSettings = {
 /** Scene background. Fog resolves to this, so the two must agree. */
 export const SCENE_BACKGROUND = '#05070d'
 
+/**
+ * The horizon band of the optional sky dome.
+ *
+ * Was `#28486e`, which is an enormous jump from `SCENE_BACKGROUND` — a bright
+ * slate-blue band across a scene that is otherwise within a few steps of
+ * black. Dropped to `#12233a` on 2026-08-19: still unmistakably a horizon,
+ * no longer a light source competing with the graph.
+ *
+ * **It lives here rather than in `Environment.tsx` because two things need
+ * it.** The link shader's `uFogColour` used to be hard-wired to
+ * `SCENE_BACKGROUND`, so with the horizon on, a distant edge faded toward
+ * near-black while the background actually behind it was blue — lines
+ * dissolving into a colour that is not there. `updateFog` now resolves both
+ * three.js's fog and the link uniform to this value whenever the horizon is
+ * showing, and to `SCENE_BACKGROUND` when it is not.
+ *
+ * One constraint this puts on the palette: a node's luminance floor has to
+ * clear the *brightest* background it can sit against, which is this, not
+ * `SCENE_BACKGROUND`. Pick the floor against the sky band or dark nodes will
+ * be invisible against the horizon instead of against space.
+ */
+export const HORIZON_COLOUR = '#12233a'
+
 /** Blueprint mode's paper, node disc, and dimmed-line colours. */
 export const PAPER_BACKGROUND = '#f2efe7'
 /**

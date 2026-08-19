@@ -189,9 +189,16 @@ export function setLinkFog(
   material: GradientLinkMaterial,
   near: number,
   far: number,
+  colour?: string,
 ) {
   material.uniforms.uFogNear.value = near
   material.uniforms.uFogFar.value = far
+  // The colour a receding line resolves *into*. Left alone when not supplied,
+  // because the constructor's `SCENE_BACKGROUND` default is right for every
+  // caller that has no opinion. It stops being right the moment the horizon is
+  // on: fading a line toward near-black in front of a blue sky band makes it
+  // dissolve into a colour that is not behind it. See `HORIZON_COLOUR`.
+  if (colour !== undefined) material.uniforms.uFogColour.value.set(colour)
 }
 
 /**

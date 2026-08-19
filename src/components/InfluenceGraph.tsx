@@ -18,6 +18,9 @@ import {
   isStandingInstrument,
   nodeGeometry,
   nodeMaterial,
+  placeSelectionHalo,
+  selectionHalo,
+  setHaloTheme,
   setNodeRim,
   type NodeMaterial,
 } from './nodeVisuals'
@@ -34,6 +37,7 @@ import {
   PAPER_LINK_OPACITY,
   PAPER_NODE_FILL,
   SCENE_BACKGROUND,
+  HORIZON_COLOUR,
   ZOOM_MAX,
   type ViewSettings,
 } from '../lib/view'
@@ -145,6 +149,14 @@ interface PositionedNode extends ScoredReport {
 export const FOV = 24
 
 /**
+ * Diameter of the selection halo, in screen pixels, held constant at every
+ * zoom — see `selectionHalo`. Sized against the largest node (~19px at the
+ * opening fit), so the ring sits clearly outside the sphere it marks without
+ * becoming scenery of its own.
+ */
+const SELECTION_HALO_PIXELS = 76
+
+/**
  * How many ticks to let the layout run, un-rendered, before the very first
  * paint — replacing the old `WARMUP_TICKS = 400`, which ran all 400
  * synchronously in one blocking loop before anything mounted. Measured
@@ -230,7 +242,7 @@ const ORB_PULSE_SCALE = 0.07
 /**
  * Node size, as a fraction of the cloud it sits in.
  *
- * `radiusFor` returns 2.2 to 8 world units, and those numbers were chosen at
+ * `radiusFor` returns 3.4 to 8 world units, and those numbers were chosen at
  * roughly 120 nodes. Measured on 2026-08-10 at 555: the connected cloud has a
  * radius near 1,400 units and the fit camera sits about 8,000 back, which puts
  * one screen pixel at 4.2 world units — so the smallest node was **1.0 pixel
@@ -240,28 +252,128 @@ const ORB_PULSE_SCALE = 0.07
  * A fixed radius cannot survive a growing corpus, because the cloud radius
  * grows with node count and the node radius does not. So the *ratio* is the
  * constant instead: the largest node is held at this fraction of the cloud
- * radius, whatever the corpus size, and the whole 2.2-to-8 range scales with it
+ * radius, whatever the corpus size, and the whole 3.4-to-8 range scales with it
  * so the authority encoding is untouched.
  *
- * 1.65% puts the largest node near 11 screen pixels and the smallest near 3 at
- * the opening fit — legible without turning the cloud into a bag of marbles.
+ * **Work the fit arithmetic through and the cloud radius cancels out
+ * completely**, which is the property this constant exists to buy:
  *
- * **The collision radius is deliberately left alone** (Thomas, Q1). It also
- * reads `radiusFor`, so scaling it too would push nodes apart, which grows the
- * cloud, which grows the scale — the layout chasing its own tail. Visual size
- * scales; spacing does not. The cost is that nodes may overlap more at high
- * scale factors, which is a thing to look at rather than reason about.
+ * ```
+ * largest node on screen (px) = TARGET_LARGEST_FRACTION × canvasHeight
+ *                               × cos(FOV/2) / FIT_MARGIN
+ * ```
+ *
+ * Corpus size does not enter, and neither does what `runFit` decides the cloud
+ * radius *is*. Anything that changes the framing — the percentile core radius
+ * below, a filter, a tier — moves the camera and the node scale by the same
+ * factor and leaves apparent node size untouched. **The only two ways to make
+ * a node bigger on screen are this number and the cap below.**
+ *
+ * Raised 0.0165 → 0.026 on 2026-08-19 (Thomas: "everything is too small in
+ * pixels", and he was right). At 890px of canvas the old value promised a
+ * 12.2px largest node and delivered 7.0px, because the cap was binding — see
+ * below. 0.026 promises 19.2px, and with the cap lifted it delivers it. The
+ * smallest node goes from 1.9px to 8.2px, which is the number that actually
+ * mattered: at 1.9px there was no size channel, only a colour channel with
+ * noise in it.
+ *
+ * **The collision radius no longer follows this number, and must not.** The
+ * original note here (Thomas, Q1) was right that scaling collision off the
+ * cloud radius makes the layout chase its own tail — collision grows the
+ * cloud, the cloud grows the scale, the scale grows collision. Scaling it off
+ * `nodeScale` instead does not break that loop, because `nodeScale` *is* a
+ * function of the cloud radius; it only hides it. The loop is broken by
+ * keeping collision in **fixed world units** and tuning it against the link
+ * rest length, which is also fixed — see the `collide` force below. What
+ * matters for crowding is the ratio of the two, and both being constants makes
+ * that ratio a constant too.
  */
-const TARGET_LARGEST_FRACTION = 0.0165
+const TARGET_LARGEST_FRACTION = 0.026
 const MAX_BASE_RADIUS = 8
 
 function nodeScaleFor(cloudRadius: number): number {
   const wanted = (cloudRadius * TARGET_LARGEST_FRACTION) / MAX_BASE_RADIUS
   // Never below 1: at small corpus sizes the original constants are already
   // right, and shrinking them would undo a legibility fix in the other
-  // direction. Capped so a single far-flung cluster cannot inflate everything.
-  return Math.min(6, Math.max(1, wanted))
+  // direction.
+  //
+  // **The cap was the whole bug.** It was 6, and the comment justifying it
+  // said it stopped "a single far-flung cluster" inflating everything. It did
+  // — by treating the symptom. Measured 2026-08-19 on the full corpus at the
+  // Everything tier: 958 framed nodes, the fit wanted a scale of 9.75 and this
+  // function handed back 6, so 38% of node size was being lost to a guard
+  // rail, every session, silently. The straggler problem it was guarding
+  // against is now fixed at source in `runFit` (the percentile core radius),
+  // so the cap goes back to being what a cap should be — a backstop against
+  // something absurd, not a number that binds in the ordinary case. 20 is
+  // roughly twice what the corpus asks for today.
+  return Math.min(20, Math.max(1, wanted))
 }
+
+/**
+ * Line width, as a multiple of the node scale.
+ *
+ * **Edges and pulses never got the memo.** `mesh.scale.setScalar(nodeScale)`
+ * grew every node with the cloud from the day `TARGET_LARGEST_FRACTION` was
+ * introduced; `linkWidth` and the pulse geometry were left in fixed world
+ * units and therefore grew by exactly nothing while the corpus went from 120
+ * nodes to 1 250 and the nodes grew six-fold. That is an omission, not a
+ * tuning choice, and it is the entire explanation for the **87 : 1**
+ * node-to-edge width ratio Thomas reported as "edges are razor thin": an
+ * ordinary edge was being drawn **0.08 px** wide and was visible only because
+ * of antialiasing.
+ *
+ * Multiplying by `nodeScale` restores the coupling; the 1.2 on top is the part
+ * that is a judgement rather than a bug fix, and it lands an ordinary edge near
+ * 1.6 px and the 57-edge EU→ESA trunk near 8 px, for a ratio of about 12 : 1.
+ *
+ * If edges now read too loud, **lower `LINK_OPACITY` before lowering this.**
+ * A 0.08 px line needed all the opacity it could get just to exist; a 1.6 px
+ * line does not, and the two numbers were never tuned against each other at a
+ * width anyone could see.
+ */
+const LINK_WIDTH_SCALE = 1.2
+
+/**
+ * Pulse width, as a multiple of the width of the link it rides.
+ *
+ * Tied to the link rather than set independently because that is the
+ * relationship the eye is actually judging — Thomas's note was "pulses need
+ * adjusted with the size of edges so they don't blur", which is a statement
+ * about a ratio. Independent constants are what let the two drift apart in the
+ * first place.
+ *
+ * **Pulses cannot be resized by transform.** three-forcegraph reads `.geometry`
+ * and `.material` off the object handed to `linkDirectionalParticleThreeObject`
+ * and builds its own mesh per photon, so `particle.scale` is ignored entirely.
+ * Resizing a pulse means rebuilding its `teardropGeometry` at the new width and
+ * re-assigning the accessor — which is what `LINK_SCALE_APPLIERS` below exists
+ * to do.
+ */
+const PULSE_WIDTH_FACTOR = 2.4
+
+/** The un-scaled part of a link's width — weight, trunk stacking, border. */
+function baseLinkWidth(l: LinkDatum): number {
+  // Widened 2026-08-10 (Thomas) — roughly 1.7x the old 0.3-1.0 range.
+  // Trunk term added round 5: each doubling of stacked edges adds ~45% of
+  // the base width, so the EU→ESA 57-trunk lands near 3.6× an ordinary
+  // line — a trunk among threads, not a pipe among threads. Cross-border
+  // edges take a further 1.6× (round 10) so a border crossing reads
+  // bolder than its neighbours at the same trunk count.
+  return (0.5 + l.weight * 1.2) * (1 + 0.45 * Math.log2(l.count)) * (l.cross ? 1.6 : 1)
+}
+
+/**
+ * How to re-size a built graph's lines and pulses when the node scale moves.
+ *
+ * Keyed off the graph object rather than held in a ref because the closure it
+ * needs — the per-link particle meshes and the link list — only exists inside
+ * the `forceGraph` memo, while the only caller (`runFit`) lives outside it. A
+ * WeakMap keeps the association without giving the component another piece of
+ * mutable state to keep in step, and drops it on its own when the graph is
+ * rebuilt.
+ */
+const LINK_SCALE_APPLIERS = new WeakMap<ThreeForceGraph, (scale: number) => void>()
 
 /**
  * Pulse speed, as a fraction of link length per frame.
@@ -536,11 +648,22 @@ export default function InfluenceGraph({
    * appears at the wrong size for a frame.
    */
   const nodeScale = useRef(1)
+  /** The node scale the link widths and pulse geometries were last built at. */
+  const appliedLinkScale = useRef(1)
   /** Where the fit put the camera, so Reset can go back without re-laying out. */
   const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
   const fitDistance = useRef(0)
-  const { camera, controls, scene } = useThree()
+  const { camera, controls, scene, size } = useThree()
+
+  /**
+   * One sprite for the whole scene, built once. Its position, scale, colour
+   * and visibility are all written from `useFrame` below — nothing about it is
+   * React state, because it has to track the camera every frame.
+   */
+  const halo = useMemo(() => selectionHalo(), [])
+  /** Scratch vector for the halo's world position — allocated once, not per frame. */
+  const haloWorldPosition = useRef(new THREE.Vector3())
 
   /**
    * The spread slider rebuilds the whole layout (forces, warmup, camera
@@ -813,14 +936,18 @@ export default function InfluenceGraph({
       particleObjects.set(
         l.key,
         new THREE.Mesh(
-          // Sized up THREE times now, every time on Thomas looking at it:
+          // Sized up FOUR times now, every time on Thomas looking at it:
           // 1.6-3.5 read as specks, 2.4-5.3 short, 3.2-7.0 lasted until the
-          // round-7 review ("they are small and could use a boost") — this is
-          // that ×1.5, so 4.8-10.5. Cost is ~nothing: the mesh count is
-          // unchanged and a slightly larger teardrop is a few more fragments,
-          // which is why the answer to "how hard on the processors" was
-          // "free".
-          teardropGeometry((3.2 + l.weight * 3.8) * 1.5),
+          // round-7 review ("they are small and could use a boost"), and
+          // ×1.5 on top of that lasted until 2026-08-19 — at which point it
+          // turned out none of those four numbers had ever been multiplied by
+          // `nodeScale`, so the pulse was 0.56 px however often it was
+          // "sized up". It is now a multiple of the width of the line it rides
+          // (`PULSE_WIDTH_FACTOR`), which is the ratio the eye actually reads,
+          // and it is re-derived on every scale change by the applier below.
+          // The value here is only the scale-1 starting point; `runFit`
+          // overwrites it before the first frame anyone sees.
+          teardropGeometry(baseLinkWidth(l) * PULSE_WIDTH_FACTOR),
           // The blink variant for a cross-border edge — a separate material
           // instance per ink, animated by tickPulseBlink in useFrame below.
           pulseMaterial(l.colour, l.cross),
@@ -949,18 +1076,12 @@ export default function InfluenceGraph({
       // Our shader, their cylinder. Colour and focus now live in uniforms, so
       // linkColor and linkOpacity no longer apply to the lines themselves.
       .linkMaterial((l: object) => linkMaterials.current.get((l as LinkDatum).key) ?? null)
-      // Widened 2026-08-10 (Thomas) — roughly 1.7x the old 0.3-1.0 range.
-      // Trunk term added round 5: each doubling of stacked edges adds ~45% of
-      // the base width, so the EU→ESA 57-trunk lands near 3.6× an ordinary
-      // line — a trunk among threads, not a pipe among threads. Cross-border
-      // edges take a further 1.6× (round 10) so a border crossing reads
-      // bolder than its neighbours at the same trunk count.
-      .linkWidth(
-        (l: object) =>
-          (0.5 + (l as LinkDatum).weight * 1.2) *
-          (1 + 0.45 * Math.log2((l as LinkDatum).count)) *
-          ((l as LinkDatum).cross ? 1.6 : 1),
-      )
+      // Scaled with the nodes — see `LINK_WIDTH_SCALE` and `baseLinkWidth`.
+      // The scale-1 value here is a starting point only; `runFit` re-assigns
+      // this accessor through `LINK_SCALE_APPLIERS` as soon as it has measured
+      // the cloud, and `linkWidth` is in three-forcegraph's prop-flush list so
+      // re-assigning it re-digests the lines.
+      .linkWidth((l: object) => baseLinkWidth(l as LinkDatum) * LINK_WIDTH_SCALE)
       // No arrowheads. They were drawn at 94% along a link, and links run
       // centre to centre, so on a typical 40-unit link the head sat about 2.4
       // units from the target's centre — inside a sphere whose radius is
@@ -1002,6 +1123,29 @@ export default function InfluenceGraph({
         (l: object) => particleObjects.get((l as LinkDatum).key) ?? fallbackParticle,
       )
 
+    // How `runFit` re-sizes lines and pulses once it knows the node scale.
+    // Both accessors have to be *re-assigned*, not merely re-evaluated: the
+    // library only re-digests a prop it sees assigned, and for the pulses the
+    // geometry object itself has to be swapped, because a photon mesh is built
+    // from `.geometry` and ignores the source object's transform entirely.
+    //
+    // `teardropGeometry` buckets to the nearest quarter unit and caches, so
+    // re-deriving all of them is a map lookup per link in the steady state.
+    LINK_SCALE_APPLIERS.set(fg, (scale: number) => {
+      for (const l of links) {
+        const particle = particleObjects.get(l.key)
+        if (particle) {
+          particle.geometry = teardropGeometry(
+            baseLinkWidth(l) * LINK_WIDTH_SCALE * scale * PULSE_WIDTH_FACTOR,
+          )
+        }
+      }
+      fg.linkWidth((l: object) => baseLinkWidth(l as LinkDatum) * LINK_WIDTH_SCALE * scale)
+      fg.linkDirectionalParticleThreeObject(
+        (l: object) => particleObjects.get((l as LinkDatum).key) ?? fallbackParticle,
+      )
+    })
+
     // three-forcegraph's own default is 0, which — since alpha only counts
     // down, never up past a floor of zero — means the alpha-based stop
     // condition (`alpha() < d3AlphaMin`) is never true, so without this the
@@ -1035,9 +1179,34 @@ export default function InfluenceGraph({
 
     // Nothing in the default force set stops two spheres occupying the same
     // point, and overlapping nodes read as one node of the wrong size.
+    //
+    // **Opened up 2026-08-19, and deliberately still in fixed world units.**
+    // Nodes now take 1.58× more of the frame than they did (see
+    // `TARGET_LARGEST_FRACTION`), so at the old spacing they crowd by the same
+    // factor — which is what Thomas was compensating for by hand with Cluster
+    // spread at 375%.
+    //
+    // The tempting fix is to scale this by `nodeScale`, and it is wrong. The
+    // layout is scale-invariant: multiply *every* force's length by k and the
+    // cloud grows by k, the camera backs off by k, the node scale rises by k,
+    // and the picture is pixel-identical. Nothing is gained, and because
+    // `nodeScale` is itself derived from the cloud radius, tying collision to
+    // it closes a positive feedback loop — collision grows the cloud, the
+    // cloud grows the scale, the scale grows collision.
+    //
+    // What actually decides crowding is this radius **relative to the link
+    // rest length above**, which is a fixed 40–68 units. So the honest lever
+    // is that ratio, and the way to move it is to raise this while leaving the
+    // link distance alone. At the old numbers an ordinary node's collision
+    // radius was about 20% of a link's rest length; at these it is about 33%,
+    // which is the 1.6× the node-size change asks for. Both terms stay
+    // constants, so the ratio stays a constant, and the fit renormalises the
+    // result exactly once instead of chasing it.
     fg.d3Force(
       'collide',
-      forceCollide((node: unknown) => radiusFor((node as ScoredReport).size_score) + 3 + 3 * m)
+      forceCollide(
+        (node: unknown) => radiusFor((node as ScoredReport).size_score) * 1.5 + 4 + 4 * m,
+      )
         .strength(0.85)
         .iterations(2) as unknown as never,
     )
@@ -1201,17 +1370,27 @@ export default function InfluenceGraph({
    */
 
   /**
-   * `moveCamera: false` measures everything and moves nothing — see
-   * `userOwnsCamera` for why that split exists. Node scale, the fog cloud,
-   * `fitState` and `onBounds` are all still brought up to date; only the
-   * `camera.position` / `orbit.target` writes are skipped.
+   * Everything `runFit` needs to know, and nothing it does.
+   *
+   * Split out on 2026-08-19 so a caller can ask *whether* to move the camera
+   * before moving it — see `framedUsably` and `requestRefit`. It has to be a
+   * genuine split rather than an early return inside `runFit`, because
+   * `runFit` does not only move the camera: it also sets `nodeScale`, the link
+   * and pulse widths derived from it, the fog cloud and the published bounds.
+   * A naive "if it looks fine, return early" would have frozen node sizes at
+   * whatever the last camera-moving fit happened to leave them.
    */
-  function runFit(moveCamera = true): boolean {
+  function measureFit(): {
+    centre: THREE.Vector3
+    nodeRadius: number
+    distance: number
+    levels: JurisdictionLevel[]
+  } | null {
     const fg = ref.current
-    if (!fg) return false
+    if (!fg) return null
 
     const all = (fg.graphData().nodes ?? []) as PositionedNode[]
-    if (!all.length || !all.every((n) => Number.isFinite(n.x))) return false
+    if (!all.length || !all.every((n) => Number.isFinite(n.x))) return null
 
     // **Frame what is on screen, not what exists.**
     //
@@ -1227,7 +1406,7 @@ export default function InfluenceGraph({
     // Hiding a node is a statement about what the view is *for*. The camera has
     // to answer it the same way it answers the shelf being excluded below.
     const positioned = all.filter((n) => shownNode(n.id))
-    if (!positioned.length) return false
+    if (!positioned.length) return null
 
     // **Frame the connected graph, not the shelf.**
     //
@@ -1248,18 +1427,74 @@ export default function InfluenceGraph({
     for (const n of subject) {
       box.expandByPoint(new THREE.Vector3(n.x, n.y, n.z))
     }
-    const centre = box.getCenter(new THREE.Vector3())
+    let centre = box.getCenter(new THREE.Vector3())
 
-    // True bounding-sphere radius, not half the box diagonal — the diagonal
-    // overestimates for anything non-cubic and leaves the graph adrift in
-    // empty space.
-    let nodeRadius = 1
-    for (const n of subject) {
-      nodeRadius = Math.max(
-        nodeRadius,
-        centre.distanceTo(new THREE.Vector3(n.x, n.y, n.z)),
+    // **Frame the core, not the last speck.** Third and final application of
+    // the "fit to the subject, not the scenery" rule in this function, and the
+    // one that was costing the most.
+    //
+    // This used to be the true bounding-sphere radius — the distance to the
+    // furthest node, max over `subject`. Correct as a statement about extent,
+    // and useless as a statement about where the graph *is*, because a single
+    // two-node island flung to the edge of the room counts exactly as much as
+    // the 426-node European cluster. Measured 2026-08-19 on the full corpus,
+    // Everything tier, 958 framed nodes:
+    //
+    // | statistic | radius |
+    // |---|---|
+    // | furthest node (what this used to use) | 5 270 |
+    // | 99th percentile | 4 277 |
+    // | **95th percentile** | **3 072** |
+    // | 92nd percentile | 2 650 |
+    // | median | 1 053 |
+    //
+    // Half the graph sits inside a fifth of the radius the camera was fitting.
+    // On a 1600×900 canvas that put the whole visible network in the middle
+    // eighth of the frame with empty space all around it — the screenshot that
+    // started this change.
+    //
+    // **Why the 95th and not the largest connected component**, which was the
+    // other candidate: the component split was measured too, and it does not
+    // work on this corpus. Among the 958 connected nodes there are 123
+    // components, and the largest is 426 — **44.5%**. Fitting it would crop
+    // more than half the graph, including the entire 153-node second cluster.
+    // What makes P95 defensible is that the two independent estimators agree:
+    // the radius spanned by the two big components alone is 3 077, and the
+    // 95th percentile of all 958 is 3 072. Five units apart. P95 is finding
+    // the same boundary the topology does, without needing the topology.
+    //
+    // The 5% left outside is not as lossy as it sounds. The fit below takes
+    // the *narrower* of the two fields of view, which on any window wider than
+    // it is tall is the vertical one — so the horizontal frame still reaches
+    // out to ~5 230 units here, i.e. essentially the full extent. On a 16:9
+    // window nothing is actually lost; on a tall narrow one the outermost
+    // stragglers go off-frame, which is the trade being made deliberately.
+    const distanceFrom = (c: THREE.Vector3) =>
+      subject
+        .map((n) => c.distanceTo(new THREE.Vector3(n.x, n.y, n.z)))
+        .sort((a, b) => a - b)
+    const percentile = (sorted: number[], f: number) =>
+      sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(f * (sorted.length - 1))))]
+
+    const CORE_PERCENTILE = 0.95
+
+    // One refinement pass: the box centre is itself pulled off the bulk by the
+    // same stragglers, so re-centre on the mean of whatever fell inside the
+    // first estimate and measure again. Once is enough — a second pass moved
+    // the centre by less than a node radius when tried.
+    {
+      const first = percentile(distanceFrom(centre), CORE_PERCENTILE)
+      const inner = subject.filter(
+        (n) => centre.distanceTo(new THREE.Vector3(n.x, n.y, n.z)) <= first,
       )
+      if (inner.length) {
+        const mean = new THREE.Vector3()
+        for (const n of inner) mean.add(new THREE.Vector3(n.x, n.y, n.z))
+        centre = mean.divideScalar(inner.length)
+      }
     }
+
+    let nodeRadius = Math.max(1, percentile(distanceFrom(centre), CORE_PERCENTILE))
 
     // **Floor `nodeRadius` at a padded multiple of the largest sphere it has
     // to contain, not just at the spread between node *centres*.**
@@ -1336,6 +1571,22 @@ export default function InfluenceGraph({
       : 1
     const hHalf = Math.atan(Math.tan(vHalf) * aspectRatio)
     const distance = (nodeRadius / Math.sin(Math.min(vHalf, hHalf))) * 1.18
+
+    return { centre, nodeRadius, distance, levels }
+  }
+
+  /**
+   * `moveCamera: false` measures everything and moves nothing — see
+   * `userOwnsCamera` for why that split exists. Node scale, link and pulse
+   * width, the fog cloud, `fitState` and `onBounds` are all still brought up
+   * to date; only the `camera.position` / `orbit.target` writes are skipped.
+   */
+  function runFit(moveCamera = true): boolean {
+    const fg = ref.current
+    if (!fg) return false
+    const measured = measureFit()
+    if (!measured) return false
+    const { centre, nodeRadius, distance, levels } = measured
     const radius = nodeRadius
 
     // **Keep the far plane behind the graph.**
@@ -1426,6 +1677,17 @@ export default function InfluenceGraph({
     nodeScale.current = nodeScaleFor(nodeRadius)
     for (const m of meshes.current.values()) m.scale.setScalar(nodeScale.current)
 
+    // Lines and pulses follow the same scale — but only when it has actually
+    // moved. Re-assigning `linkWidth` makes three-forcegraph re-digest every
+    // line, and this function runs on a timer while the tracking window is
+    // open, so an unguarded re-assign would rebuild 1 079 lines every couple
+    // of seconds to write the number they already had. 1% is well below
+    // anything visible at these widths and well above float noise.
+    if (Math.abs(nodeScale.current - appliedLinkScale.current) > appliedLinkScale.current * 0.01) {
+      appliedLinkScale.current = nodeScale.current
+      LINK_SCALE_APPLIERS.get(fg)?.(nodeScale.current)
+    }
+
     fitState.current = { centre: centre.clone(), distance }
 
     fitDistance.current = distance
@@ -1476,11 +1738,78 @@ export default function InfluenceGraph({
    * `runFit` would only bail anyway.
    */
   function requestRefit() {
+    // Nothing has been laid out yet, so there is nothing to judge and nothing
+    // to frame. Hand the camera back and let the first fit do its job.
+    if (!fitted.current) {
+      userOwnsCamera.current = false
+      fitPose.current = null
+      settleClock.current = 0
+      sinceRefit.current = 0
+      return
+    }
+
+    // **Only move the camera if the survivors are not usably framed.**
+    //
+    // Thomas's ask was "stop moving the camera when I change a filter", and
+    // taken literally it reintroduces a bug he reported himself: an
+    // unconditional refit is what fixed the black screen (329 of 728 shown,
+    // the survivors knotted in one corner of an otherwise empty frame — see
+    // the long note in the filter effect). The camera move is not gratuitous;
+    // it is the only thing that answers "where did everything go".
+    //
+    // So the rule is conditional rather than absent. Measure first — which
+    // costs nothing the fit was not going to pay anyway — and ask whether what
+    // survived is actually on screen at a sensible size. If it is, keep the
+    // camera exactly where the user put it and run the measurement-only fit,
+    // which still updates node scale, link widths, the fog cloud and the
+    // published bounds. If it is not, this is the black-screen case and the
+    // camera is handed back as before.
+    const measured = measureFit()
+    if (measured && framedUsably(measured)) {
+      runFit(false)
+      return
+    }
+
     userOwnsCamera.current = false
     fitPose.current = null
     settleClock.current = 0
     sinceRefit.current = 0
-    if (fitted.current) runFit(true)
+    runFit(true)
+  }
+
+  /**
+   * Is what is currently visible already framed well enough to leave alone?
+   *
+   * Three questions, all asked against the core sphere `measureFit` just
+   * measured, and all of them have to answer yes:
+   *
+   * 1. **Is it in front of the camera at all?** The angle from the camera's
+   *    forward axis to the cloud centre has to be inside the vertical half-FOV
+   *    — the narrower of the two on any landscape window, so this is the
+   *    conservative test. This is the one that catches the black screen: a
+   *    filter that leaves a knot off to one side fails here.
+   * 2. **Is it big enough to see?** The core has to subtend at least 30% of
+   *    the frame. Below that the survivors are a clump in the middle of a
+   *    mostly empty view, which is the same complaint in a milder form.
+   * 3. **Is it small enough to see all of?** No more than 1.4× the frame. Some
+   *    overflow is fine and normal — the fit itself leaves 5% of nodes outside
+   *    by design — but a filter that reveals a much larger set should re-frame.
+   *
+   * The bounds are deliberately loose. A tight test would refit on almost
+   * every filter change and this would be an elaborate way of writing the old
+   * unconditional behaviour.
+   */
+  function framedUsably(measured: { centre: THREE.Vector3; nodeRadius: number }): boolean {
+    const toCentre = measured.centre.clone().sub(camera.position)
+    const distance = toCentre.length()
+    if (!(distance > 0)) return false
+
+    const vHalf = (FOV * Math.PI) / 360
+    const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion)
+    if (forward.angleTo(toCentre) > vHalf) return false
+
+    const subtended = Math.atan(measured.nodeRadius / distance)
+    return subtended > vHalf * 0.3 && subtended < vHalf * 1.4
   }
 
   // Toggles that have to reach inside the force-graph object, which was built
@@ -1694,9 +2023,16 @@ export default function InfluenceGraph({
     const c = cloud.current
     if (!c) return
 
+    // **Fog has to resolve into whatever is actually behind the graph.** With
+    // the horizon off that is `SCENE_BACKGROUND`; with it on, the part of the
+    // frame the graph sits against is the sky's horizon band, which is far
+    // brighter. Fading toward the wrong one is why distant edges looked like
+    // they were dissolving rather than receding (§8 of the visual review).
+    const resolveTo = view.showHorizon ? HORIZON_COLOUR : SCENE_BACKGROUND
+
     if (amount <= 0.005) {
       scene.fog = null
-      for (const m of linkMaterials.current.values()) setLinkFog(m, 1e9, 1e9 + 1)
+      for (const m of linkMaterials.current.values()) setLinkFog(m, 1e9, 1e9 + 1, resolveTo)
       return
     }
 
@@ -1706,11 +2042,12 @@ export default function InfluenceGraph({
 
     fogRef.current.near = near
     fogRef.current.far = far
+    fogRef.current.color.set(resolveTo)
     scene.fog = fogRef.current
 
     // The lines need telling separately: a custom shader receives none of
     // three.js's automatic fog uniforms.
-    for (const m of linkMaterials.current.values()) setLinkFog(m, near, far)
+    for (const m of linkMaterials.current.values()) setLinkFog(m, near, far, resolveTo)
   }
 
   /**
@@ -1910,6 +2247,28 @@ export default function InfluenceGraph({
       mesh.scale.setScalar(nodeScale.current * (1 + ORB_PULSE_SCALE * breath))
     }
 
+    // The selection halo. Rewritten every frame rather than on selection
+    // change, because holding a constant pixel size is a function of the
+    // camera distance, and the camera moves continuously — under the zoom
+    // slider, the search flight, auto-orbit and the user's own drag.
+    const selectedId = focusRef.current?.selectedId
+    const selectedMesh = selectedId ? meshes.current.get(selectedId) : undefined
+    if (selectedMesh && selectedMesh.visible) {
+      const material = selectedMesh.material as NodeMaterial
+      setHaloTheme(halo, `#${material.color.getHexString()}`, view.blueprint)
+      placeSelectionHalo(
+        halo,
+        selectedMesh.getWorldPosition(haloWorldPosition.current),
+        camera.position,
+        (FOV * Math.PI) / 360,
+        size.height,
+        SELECTION_HALO_PIXELS,
+      )
+      halo.visible = true
+    } else {
+      halo.visible = false
+    }
+
     // Node meshes are created lazily by the library, and can be recreated
     // without warning. A size change means the set we last styled is not the
     // set now on screen, so the focus has to be laid on again.
@@ -1969,6 +2328,7 @@ export default function InfluenceGraph({
 
   return (
     <>
+      <primitive object={halo} />
       <primitive
         object={forceGraph}
         onPointerMove={handlePointerMove}

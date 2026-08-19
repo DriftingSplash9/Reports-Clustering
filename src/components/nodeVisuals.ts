@@ -225,12 +225,39 @@ export function nodeMaterial({
  * `level` stays in the signature so call sites don't churn if a future
  * treatment wants it; it is deliberately unread.
  */
+/**
+ * Cached by rounded radius.
+ *
+ * This used to allocate a fresh `SphereGeometry` per node — 1 250 of them at
+ * the Everything tier, each with 24×16 segments, every one a separate GPU
+ * buffer upload, and all of them differing only in a radius that is a
+ * continuous function of `size_score` and therefore almost never repeated
+ * exactly. Bucketing to a tenth of a world unit collapses that to a few dozen
+ * distinct geometries, because `radiusFor` spans 3.4 to 8.
+ *
+ * A tenth of a unit is far below one screen pixel at any framing this scene
+ * uses, so nothing is visibly quantised. Note the meshes are scaled at
+ * runtime by `nodeScale` anyway, which is a transform and costs nothing —
+ * the geometry only carries the base radius.
+ *
+ * Nothing in this project disposes node geometry (three-forcegraph owns the
+ * meshes and can recreate them without warning), so sharing is strictly safer
+ * than allocating: a shared geometry cannot be disposed out from under a mesh
+ * that is still using it.
+ */
+const sphereCache = new Map<number, THREE.SphereGeometry>()
+
 export function nodeGeometry(
   _level: JurisdictionLevel,
   radius: number,
   _orb: boolean,
 ): THREE.BufferGeometry {
-  return new THREE.SphereGeometry(radius, 24, 16)
+  const key = Math.round(radius * 10) / 10
+  const cached = sphereCache.get(key)
+  if (cached) return cached
+  const geometry = new THREE.SphereGeometry(key, 24, 16)
+  sphereCache.set(key, geometry)
+  return geometry
 }
 
 /** Match the rim to the node's focus state — scaled by the family's rimMax,
@@ -271,4 +298,112 @@ export function setNodeRim(material: NodeMaterial, lit: boolean, dimFactor = 0.0
  */
 export function isStandingInstrument(report: { releases_per_year?: number }): boolean {
   return report.releases_per_year === undefined
+}
+
+/**
+ * The selection halo — one screen-space sprite, not a per-node treatment.
+ *
+ * **Why this exists rather than more bloom.** Selection glow was
+ * `emissiveIntensity + 0.25`, and the visible halo came entirely from the
+ * `<Bloom>` pass. Bloom is screen-space and energy-proportional: a node six
+ * pixels across contributes almost no bright pixels, so its halo is a couple
+ * of pixels, which is why selection only read once you had zoomed in. That is
+ * not tunable — turning bloom up blows out the *large* nodes long before it
+ * does anything for a small one, and apparent size is the authority encoding
+ * the whole project rests on. Below about a 0.15 threshold most of the graph
+ * blooms and that encoding stops working.
+ *
+ * So the halo becomes its own element: one camera-facing sprite, additive,
+ * radial falloff, rescaled every frame to hold a **constant pixel radius** at
+ * any zoom. One object in the scene regardless of corpus size, no per-node
+ * cost, and — because it owes nothing to the post-processing stack — it works
+ * in blueprint mode too, where bloom is zeroed and selection currently has no
+ * glow at all.
+ *
+ * `depthTest` is off on purpose. A selected node on the far side of the cloud
+ * would otherwise have its halo eaten by everything in front of it, and
+ * "where did my selection go" is precisely the question this is here to
+ * answer. The cost is that the halo draws over occluders; at a soft radial
+ * falloff and additive blending that reads as a glow through the graph rather
+ * than as a sticker on top of it.
+ */
+const HALO_TEXTURE_SIZE = 128
+
+function haloTexture(): THREE.Texture {
+  const canvas = document.createElement('canvas')
+  canvas.width = HALO_TEXTURE_SIZE
+  canvas.height = HALO_TEXTURE_SIZE
+  const ctx = canvas.getContext('2d')!
+  const half = HALO_TEXTURE_SIZE / 2
+  const gradient = ctx.createRadialGradient(half, half, 0, half, half, half)
+  // Hollow in the middle: the node itself is already there and the point is to
+  // ring it, not to paint over it. The stops are a soft shoulder rather than a
+  // hard ring so it reads as light coming off the node.
+  gradient.addColorStop(0.0, 'rgba(255,255,255,0.00)')
+  gradient.addColorStop(0.42, 'rgba(255,255,255,0.10)')
+  gradient.addColorStop(0.62, 'rgba(255,255,255,0.55)')
+  gradient.addColorStop(0.78, 'rgba(255,255,255,0.22)')
+  gradient.addColorStop(1.0, 'rgba(255,255,255,0.00)')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, HALO_TEXTURE_SIZE, HALO_TEXTURE_SIZE)
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+  return texture
+}
+
+export function selectionHalo(): THREE.Sprite {
+  const material = new THREE.SpriteMaterial({
+    map: haloTexture(),
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  })
+  const sprite = new THREE.Sprite(material)
+  sprite.visible = false
+  // Above everything, including the transparent node pass.
+  sprite.renderOrder = 999
+  // Never a hover or click target — it sits in front of the node it is
+  // advertising, and transparency does not stop a raycast.
+  sprite.raycast = () => {}
+  return sprite
+}
+
+/**
+ * Point the halo at a node, at a size measured in screen pixels rather than
+ * world units.
+ *
+ * A sprite of scale `s` at distance `d` covers `s · canvasHeight /
+ * (2 · d · tan(halfFov))` pixels, so holding the pixel size constant means
+ * solving that for `s` every frame. Doing it any other way — a fixed world
+ * size, a size derived from the node's radius — gives a halo that vanishes
+ * when you zoom out, which is exactly when you need it.
+ */
+export function placeSelectionHalo(
+  sprite: THREE.Sprite,
+  worldPosition: THREE.Vector3,
+  cameraPosition: THREE.Vector3,
+  halfFovRadians: number,
+  canvasHeight: number,
+  diameterInPixels: number,
+) {
+  sprite.position.copy(worldPosition)
+  const distance = cameraPosition.distanceTo(worldPosition)
+  const scale = (diameterInPixels * 2 * distance * Math.tan(halfFovRadians)) / canvasHeight
+  sprite.scale.set(scale, scale, 1)
+}
+
+/**
+ * Blueprint has no light to add to — additive blending against paper is
+ * invisible by construction. There the halo becomes a soft normal-blended
+ * smudge in the family's own ink, which is what a draughtsman circling
+ * something actually looks like.
+ */
+export function setHaloTheme(sprite: THREE.Sprite, colour: string, blueprint: boolean) {
+  const material = sprite.material as THREE.SpriteMaterial
+  material.color.set(colour)
+  material.blending = blueprint ? THREE.NormalBlending : THREE.AdditiveBlending
+  material.opacity = blueprint ? 0.5 : 1
+  material.needsUpdate = true
 }

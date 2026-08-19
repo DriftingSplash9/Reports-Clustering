@@ -143,7 +143,7 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
 
 // ------------------------------------------------------------------- graph --
 ok(describeRate(252) === 'every business day' && describeRate(0.05) === 'about every 20 years', 'describeRate: extremes phrased as facts')
-ok(radiusFor(0) === 2.2 && radiusFor(1) === 8, 'radiusFor: the documented 2.2–8 range')
+ok(radiusFor(0) === 3.4 && radiusFor(1) === 8, 'radiusFor: the documented 3.4–8 range')
 ok(isOfficial({}) && !isOfficial({ source_kind: 'commercial' }), 'isOfficial: absent means official')
 ok(isDocumented({}) && !isDocumented({ evidence: 'implied' }), 'isDocumented: absent means documented')
 {
