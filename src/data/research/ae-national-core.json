@@ -145,10 +145,11 @@
       "description": "Statistics on crude oil and condensate production and export volumes. Production is concentrated in Abu Dhabi; export volumes are large and respond to OPEC+ and market conditions. Hydrocarbons remain a core contributor to the current account and fiscal position.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:energy",
+        "energy",
         "national-accounts"
       ],
-      "url": null
+      "url": null,
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-tourism-dubai",
@@ -160,9 +161,10 @@
       "description": "Official statistics on overnight visitor arrivals to Dubai and related tourism performance indicators (occupancy, source markets). Dubai is the dominant tourism destination within the UAE.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:tourism"
+        "tourism"
       ],
-      "url": "https://www.dubaidet.gov.ae/en/research-and-insights/tourism-performance-report-december-2025"
+      "url": "https://www.dubaidet.gov.ae/en/research-and-insights/tourism-performance-report-december-2025",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-ports-jebel-ali",
@@ -174,11 +176,12 @@
       "description": "Container and cargo throughput statistics centred on Jebel Ali Port. The UAE is a major global transshipment and logistics node; throughput is a key indicator of the non-oil trade and logistics economy.",
       "releases_per_year": 4,
       "domains": [
-        "proposed:logistics",
-        "proposed:trade"
+        "infrastructure",
+        "trade"
       ],
       "url": "https://www.dpworld.com/",
-      "source_kind": "commercial"
+      "source_kind": "commercial",
+      "_domains_note": "Domain semantic pass 2026-08-18 — same mapping applied to the staged Grok archive, for consistency."
     },
     {
       "id": "ae-gcc-trade",
@@ -190,10 +193,11 @@
       "description": "Statistics on merchandise trade between the UAE and other GCC member states. Total trade volume reached AED 333 billion in 2024 (imports AED 84.5bn, non-oil exports AED 85.6bn, re-exports AED 162.9bn) — VERIFIED verbatim against the MOF's own page. Reflects the UAE's position inside the GCC Customs Union and Common Market.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:trade",
+        "trade",
         "external-action"
       ],
-      "url": "https://mof.gov.ae/en/news/ministry-of-finance-intensifies-efforts-to-complete-the-customs-union-and-implement-gcc-common-market-tracks/"
+      "url": "https://mof.gov.ae/en/news/ministry-of-finance-intensifies-efforts-to-complete-the-customs-union-and-implement-gcc-common-market-tracks/",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-banking-credit",
@@ -229,15 +233,18 @@
       "id": "ae-gcc-customs-union",
       "title": "GCC Unified Economic Agreement / Customs Union",
       "publisher": "Gulf Cooperation Council",
-      "country": "AE",
+      "country": "INT",
       "jurisdiction_level": "supranational",
       "region": "GCC",
       "description": "One-off foundational instrument establishing the GCC Customs Union and Common Market (Unified Economic Agreement, with the Customs Union operational since 2003). Common external tariff and free movement of goods among member states. Converted from Grok's unsourced 'ae-gcc-framing' node — VERIFIED real legal instrument with primary text available.",
       "domains": [
         "external-action",
-        "proposed:trade"
+        "trade"
       ],
-      "url": "https://www.gcc-sg.org/en/MediaCenter/DigitalLibrary/Documents/1274258747.pdf"
+      "url": "https://www.gcc-sg.org/en/MediaCenter/DigitalLibrary/Documents/1274258747.pdf",
+      "_country_original": "AE",
+      "_country_note": "Refiled AR/AE → INT on 2026-08-18. `validate()` flags an international- or supranational-level publisher carrying a country code, and the publisher here is the Gulf Cooperation Council, which belongs to no single country — the definition `Country` gives for INT. This is a rim-colour and family change only; nothing else reads the field.",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-mubadala",
@@ -249,11 +256,12 @@
       "description": "Annual reporting of assets under management, capital deployment, proceeds and long-term returns for Mubadala, one of Abu Dhabi's major sovereign investment vehicles. AUM reached AED 1.4 trillion (US$385 billion) in 2025 — VERIFIED exact match across multiple outlets (Arab News, The National, TradeArabia).",
       "releases_per_year": 1,
       "domains": [
-        "proposed:investment",
+        "investment",
         "national-accounts"
       ],
       "url": "https://www.mubadala.com/en/news/strong-performance-by-uae-portfolio-drives-mubadalas-growth-in-2025",
-      "source_kind": "commercial"
+      "source_kind": "commercial",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-construction",
@@ -280,10 +288,11 @@
       "description": "Statistics on major export and import partners. China, India, Japan, the United States, Saudi Arabia and others feature prominently; crude petroleum, gold and refined petroleum dominate exports while gold, telephones and cars feature among top imports.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:trade",
+        "trade",
         "external-action"
       ],
-      "url": null
+      "url": null,
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-adia",
@@ -294,10 +303,11 @@
       "region": "United Arab Emirates — Abu Dhabi",
       "description": "Abu Dhabi's traditional long-term sovereign wealth fund. AUM confirmed by UAE state media (Al Etihad) to have crossed US$1 trillion; other 2026 industry estimates (Bloomberg, The Middle East Insider) put ADIA specifically lower (~$870bn) within a combined Abu Dhabi sovereign-fund total of ~$1.7tn (ADIA+Mubadala+ADQ) — treat the ~$1tn figure as directionally right but not tightly precise. Invests primarily outside the UAE; core vehicle for intergenerational management of hydrocarbon surpluses.",
       "domains": [
-        "proposed:investment",
+        "investment",
         "national-accounts"
       ],
-      "url": "https://en.aletihad.ae/news/business/4539228/adia-s-assets-under-management-cross--1-trillion-mark"
+      "url": "https://en.aletihad.ae/news/business/4539228/adia-s-assets-under-management-cross--1-trillion-mark",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-renewables",
@@ -309,10 +319,11 @@
       "description": "Statistics on installed renewable energy capacity. Capacity reached 7.9 GW in 2025 (VERIFIED, matches Zawya reporting exactly), driven primarily by solar PV. CORRECTED: the longer-term target is 22 GW by 2031 (The National, PVknowhow) — Grok's original figure of '23 GW' does not match any source found and has been corrected.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:energy",
-        "proposed:climate"
+        "energy",
+        "environment"
       ],
-      "url": "https://www.zawya.com/en/projects/utilities/uae-renewable-capacity-rises-to-79-gw-in-2025-as-solar-drives-additions-sbzbtfh4"
+      "url": "https://www.zawya.com/en/projects/utilities/uae-renewable-capacity-rises-to-79-gw-in-2025-as-solar-drives-additions-sbzbtfh4",
+      "_domains_note": "Domain semantic pass 2026-08-18 — same mapping applied to the staged Grok archive, for consistency."
     },
     {
       "id": "ae-climate-reporting",
@@ -324,10 +335,11 @@
       "description": "Official climate transparency and NDC progress reporting submitted under the UNFCCC framework (Biennial Transparency Report and related common tabular formats). NOTE: the specific document URL could not be confirmed this pass (fetch timed out) — treat as unverified pending a direct pull.",
       "releases_per_year": 0.5,
       "domains": [
-        "proposed:climate",
+        "environment",
         "external-action"
       ],
-      "url": "https://unfccc.int/documents/654338"
+      "url": "https://unfccc.int/documents/654338",
+      "_domains_note": "Domain semantic pass 2026-08-18 — same mapping applied to the staged Grok archive, for consistency."
     },
     {
       "id": "int-opec-momr",
@@ -339,11 +351,12 @@
       "description": "Flagship recurring publication of OPEC. Provides assessments of crude oil prices (including the OPEC Reference Basket), world oil demand and supply, non-DoC liquids production, and related market analysis. Continues to be published after the UAE's May 2026 departure.",
       "releases_per_year": 12,
       "domains": [
-        "proposed:energy",
-        "proposed:trade",
+        "energy",
+        "trade",
         "external-action"
       ],
-      "url": "https://momr.opec.org/"
+      "url": "https://momr.opec.org/",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "int-opec-plus-doc",
@@ -354,10 +367,11 @@
       "region": "International",
       "description": "One-off foundational instrument establishing the OPEC+ production-coordination framework between OPEC members and non-OPEC producers, signed 10 December 2016. Converted from Grok's unsourced 'int-opec-plus-framing' node — VERIFIED real, primary text available via OPEC's own site.",
       "domains": [
-        "proposed:energy",
+        "energy",
         "external-action"
       ],
-      "url": "https://www.opec.org/declaration-of-cooperation.html"
+      "url": "https://www.opec.org/declaration-of-cooperation.html",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-opec-exit",
@@ -368,10 +382,11 @@
       "region": "United Arab Emirates",
       "description": "One-off foundational event: the United Arab Emirates announced its departure from OPEC effective 1 May 2026, after 59 years of membership. The exit reduced OPEC's and OPEC+'s share of global crude production and capacity; the UAE retains independent production and export policy while remaining a major global supplier. VERIFIED independently by WAM (UAE state news agency), CFR, NPR, and Al Jazeera — this was the single most surprising claim across all 10 batches and it checked out completely.",
       "domains": [
-        "proposed:energy",
+        "energy",
         "external-action"
       ],
-      "url": "https://www.wam.ae/en/article/bzxzuh7-uae-announces-decision-exit-opec-opec+"
+      "url": "https://www.wam.ae/en/article/bzxzuh7-uae-announces-decision-exit-opec-opec+",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-fta",
@@ -396,10 +411,11 @@
       "region": "United Arab Emirates",
       "description": "One-off-instrument-shaped recurring programme: 27+ individually negotiated bilateral trade agreements (India, Israel, Indonesia, and others) rapidly signed since 2021 as the UAE's central post-oil trade-diversification instrument. VERIFIED real and current (The National, Gulf Business both confirm 27 agreements as of mid-2025). Fits the same node shape this project already uses for Mercosur and Ley 17.622 — a real structural miss across all 10 batches.",
       "domains": [
-        "proposed:trade",
+        "trade",
         "external-action"
       ],
-      "url": "https://www.moet.gov.ae/en/cepa"
+      "url": "https://www.moet.gov.ae/en/cepa",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-dxb-traffic",
@@ -411,11 +427,12 @@
       "description": "Official passenger traffic statistics for DXB. VERIFIED: 95.2 million passengers in 2025, a record year, and DXB became the world's busiest airport for international traffic (The National, Khaleej Times, Dubai Airports media office). Missing entirely despite ports, tourism and logistics all being covered — aviation is at least as central to Dubai's hub-economy story as Jebel Ali.",
       "releases_per_year": 4,
       "domains": [
-        "proposed:logistics",
-        "proposed:tourism"
+        "infrastructure",
+        "tourism"
       ],
       "url": "https://media.dubaiairports.ae/dxb-sets-global-benchmark-as-record-traffic-become-the-norm/",
-      "source_kind": "commercial"
+      "source_kind": "commercial",
+      "_domains_note": "Domain semantic pass 2026-08-18 — same mapping applied to the staged Grok archive, for consistency."
     },
     {
       "id": "ae-dld-realestate",
@@ -442,9 +459,10 @@
       "releases_per_year": 2,
       "domains": [
         "financial-regulation",
-        "proposed:investment"
+        "investment"
       ],
-      "url": "https://www.difc.com/whats-on/news/record-20th-anniversary-year-results-solidify-difcs-position"
+      "url": "https://www.difc.com/whats-on/news/record-20th-anniversary-year-results-solidify-difcs-position",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-adgm",
@@ -457,9 +475,10 @@
       "releases_per_year": 2,
       "domains": [
         "financial-regulation",
-        "proposed:investment"
+        "investment"
       ],
-      "url": "https://www.adgm.com/media/announcements/adgm-is-the-mena-region-largest-ifc-with-11128-active-licences-at-the-end-of-h1-2025"
+      "url": "https://www.adgm.com/media/announcements/adgm-is-the-mena-region-largest-ifc-with-11128-active-licences-at-the-end-of-h1-2025",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-fdi",
@@ -471,10 +490,11 @@
       "description": "Annual FDI inflow statistics. VERIFIED: UAE attracted a record AED 177.3bn (US$48.24bn) in FDI in 2025, ranking 9th globally per UNCTAD's World Investment Report — a genuinely 'hub' statistic missing from all 10 batches despite the sovereign-wealth-outflow side (Mubadala, ADIA) being covered in depth. The inflow side of the same story was never researched.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:investment",
+        "investment",
         "external-action"
       ],
-      "url": "https://www.thenationalnews.com/business/economy/2026/07/08/uae-among-worlds-top-10-recipients-of-fdi-in-2025-un-report-says/"
+      "url": "https://www.thenationalnews.com/business/economy/2026/07/08/uae-among-worlds-top-10-recipients-of-fdi-in-2025-un-report-says/",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-dmcc-trade",
@@ -486,9 +506,10 @@
       "description": "Official commodity-trade-through-Dubai statistics from the DMCC free zone. VERIFIED: DMCC reported a record US$41.7bn in diamond trade through Dubai in 2025. DMCC is also a major global gold-trading hub, though a specific verified gold figure was not pinned down this pass. A distinct global-hub statistic entirely absent from all 10 batches.",
       "releases_per_year": 1,
       "domains": [
-        "proposed:trade"
+        "trade"
       ],
-      "url": "https://dmcc.ae/latest-news/dmcc-announces-record-usd-41.7-billion-in-diamond-trade-through-dubai-in-2025"
+      "url": "https://dmcc.ae/latest-news/dmcc-announces-record-usd-41.7-billion-in-diamond-trade-through-dubai-in-2025",
+      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
     },
     {
       "id": "ae-imf-article-iv",

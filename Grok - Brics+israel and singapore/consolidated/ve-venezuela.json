@@ -1001,8 +1001,8 @@
       "edge": "ve-clap -> ve-pobreza-ingresos",
       "source": "ve-clap",
       "target": "ve-pobreza-ingresos",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: CLAP food boxes are a major non-cash support that partially offsets low monetary income for food access.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Searched the CLAP constitutional law text on asambleanacional.gob.ve and UCAB/ENCOVI poverty publications for any statement that CLAP administration draws on ENCOVI income-poverty figures, or that ENCOVI's pobreza de ingresos incorporates the CLAP box as imputed income. Nothing found in either direction: the CLAP law defines an organisational/distribution structure and cites no statistical input, and ENCOVI's income-poverty measure is monetary. The 'partially offsets low monetary income' claim is an analytical observation, not a documented dependency.",
       "_batch": [
         "2026-08-13_Venezuela-batch1.json"
       ],
@@ -1034,8 +1034,8 @@
       "edge": "ve-tipo-cambio -> ve-ipc",
       "source": "ve-tipo-cambio",
       "target": "ve-ipc",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Exchange-rate depreciation is a primary pass-through channel into consumer prices.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched bcv.org.ve, which is live and publishes both the tipo de cambio and the IPC. No methodological note there states that the exchange-rate series is computed from the IPC or that the IPC is computed from the exchange rate; they are separately compiled BCV series. Exchange-rate pass-through into consumer prices is an economic relationship asserted by analysts, not a stated input dependency between the two BCV publications.",
       "_batch": [
         "2026-08-13_Venezuela-batch2.json"
       ],
@@ -1045,8 +1045,8 @@
       "edge": "ve-bonos -> ve-pobreza-ingresos",
       "source": "ve-bonos",
       "target": "ve-pobreza-ingresos",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: State cash bonuses partially offset low monetary income for receiving households.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The bonos/transferencias node has no URL of its own, and there is no official Venezuelan publication (Patria/Sistema Patria has no methodology page reachable) stating that the bonus programme uses ENCOVI income-poverty data for targeting, nor that ENCOVI's income-poverty aggregate is built from official bonus records. ENCOVI collects transfer receipt from respondents, not from state registers. Same thematic-offset pattern as drop_index 0.",
       "_batch": [
         "2026-08-13_Venezuela-batch2.json"
       ],
@@ -1066,8 +1066,8 @@
       "edge": "ve-deuda-publica -> ve-pdvsa",
       "source": "ve-deuda-publica",
       "target": "ve-pdvsa",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: PDVSA debt is a large component of the overall public-sector external-debt stock.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The source node ve-deuda-publica does not exist in the corpus (source_exists: false, no title, no URL), so there is no dependent to attach the edge to. Beyond that, the only documents that would state PDVSA's share of the public external-debt stock are PDVSA's own financial statements, which lived on pdvsa.com — a domain with no DNS record. Per the standing instruction I did not substitute a mirror or a news report.",
       "_batch": [
         "2026-08-13_Venezuela-batch3-regions-health-fiscal.json"
       ],
@@ -1077,8 +1077,8 @@
       "edge": "ve-seniat -> ve-ingresos-petroleros",
       "source": "ve-seniat",
       "target": "ve-ingresos-petroleros",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Tax collection is the main non-oil revenue complement to hydrocarbon income.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. seniat.gob.ve does not respond, so SENIAT's own collection reports are unreachable, and the target (ingresos petroleros, bcv.org.ve) publishes oil revenue without naming tax collection as an input. Searches returned only press coverage of SENIAT collection totals (TalCual, swissinfo, Transparencia Venezuela), which I did not use. The asserted relation is in any case complementarity within total fiscal revenue, not one series being an input to the other.",
       "_batch": [
         "2026-08-13_Venezuela-batch3-regions-health-fiscal.json"
       ],
@@ -1088,8 +1088,8 @@
       "edge": "ve-alba-petrocaribe -> ve-petroleo",
       "source": "ve-alba-petrocaribe",
       "target": "ve-petroleo",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Petrocaribe was historically structured around preferential Venezuelan oil supply.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched albatcp.org (the source node's own URL): the homepage hosts no Petrocaribe agreement, methodology or data note, and the site's own Petrocaribe article returns 404. The OLADE study 'Evolución del Acuerdo de Cooperación Energética PETROCARIBE' is 404, and the Nicaraguan INE copy of the bilateral Acuerdo is robots-blocked. Even if the treaty text were retrievable it would document a physical crude-supply arrangement, not a statement that the Petrocaribe node takes BCV oil-production figures as an input, method or citation — none of the four types would fit.",
       "_batch": [
         "2026-08-13_Venezuela-batch4-supranational.json"
       ],

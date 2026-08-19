@@ -16,7 +16,7 @@
     ],
     "counts": {
       "reports": 60,
-      "dependencies": 23,
+      "dependencies": 26,
       "dropped_notes": 16
     },
     "container_shapes_seen": {
@@ -1575,6 +1575,39 @@
       "_batch": [
         "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
       ]
+    },
+    {
+      "source_report_id": "bo-juancito-pinto",
+      "target_report_id": "bo-educacion",
+      "relationship_type": "uses_data_from",
+      "basis": "Ministerio de Educacion, Resolucion Ministerial 0613/2025 (reglamento de entrega del Bono Juancito Pinto 2025), Art. 6: beneficiary students are those «registrados en la Base de Datos del Sistema de Informacion Educativa (SIE) del Ministerio de Educacion, registrados como efectivos y con calificaciones hasta el segundo trimestre de la gestion 2025»; Art. 3 requires them to be «matriculados y registrados en el Sistema de Informacion Educativa (SIE) con estado de matricula EFECTIVOS».",
+      "evidence_url": "https://www.minedu.gob.bo/files/documentos-normativos/resoluciones-ministeriales/2025/0613-2025.pdf",
+      "_batch": [
+        "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    },
+    {
+      "source_report_id": "bo-juana-azurduy",
+      "target_report_id": "bo-salud",
+      "relationship_type": "uses_data_from",
+      "basis": "Decreto Supremo 0066 (Bono Madre Nino-Nina Juana Azurduy), Art. 3: the corresponsabilidad schedule is 4 controles prenatales, parto institucional mas control post-natal and 12 controles bimestrales integrales de salud, and «En todos los casos, los pagos seran entregados despues de verificado el cumplimiento de los controles.» Art. 6: «Las redes y equipos moviles de salud, tienen la responsabilidad de prestar los servicios de atencion integral de salud, realizar la verificacion del cumplimiento de los controles», with «Los Servicios Departamentales de Salud apoyaran con los servicios de salud que se requieran».",
+      "evidence_url": "https://www.lexivox.org/norms/BO-DS-N66.html",
+      "_batch": [
+        "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    },
+    {
+      "source_report_id": "bo-autoidentificacion",
+      "target_report_id": "bo-tioc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INE Bolivia, Autoidentificacion (Censo 2024) release page, table title: «POBLACION POR AUTOIDENTIFICACION Y SEXO, SEGUN DEPARTAMENTO, PROVINCIA, MUNICIPIO O TERRITORIO INDIGENA ORIGINARIO CAMPESINO (TIOC)».",
+      "evidence_url": "https://www.ine.gob.bo/index.php/estadisticas-sociales/autoidentificacion/",
+      "_batch": [
+        "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency. Direction reversed from the original."
     }
   ],
   "_dropped": [
@@ -1637,8 +1670,8 @@
       "edge": "bo-juancito-pinto -> bo-educacion",
       "source": "bo-juancito-pinto",
       "target": "bo-educacion",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The cash transfer is designed to support enrolment and attendance within the formal education system.",
+      "reason": "resolved",
+      "why": "Recovered as a real uses_data_from edge — see dependencies. Ministerio de Educacion, Resolucion Ministerial 0613/2025 (reglamento de entrega del Bono Juancito Pinto 2025), Art. 6: beneficiary students are those «registrados en la Base de Datos del Sistema de Informacion Educativa (SIE) del Ministerio de Educacion, registrados como efectivos y con calificaciones hasta el segundo trimestre de la gestion 2025»; Art. 3 requires them to be «matriculados y registrados en el Sistema de Informacion Educativa (SIE) con estado de matricula EFECTIVOS».",
       "_batch": [
         "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
       ],
@@ -1648,8 +1681,8 @@
       "edge": "bo-juana-azurduy -> bo-salud",
       "source": "bo-juana-azurduy",
       "target": "bo-salud",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The maternal/child transfer is designed to improve utilisation of health services.",
+      "reason": "resolved",
+      "why": "Recovered as a real uses_data_from edge — see dependencies. Decreto Supremo 0066 (Bono Madre Nino-Nina Juana Azurduy), Art. 3: the corresponsabilidad schedule is 4 controles prenatales, parto institucional mas control post-natal and 12 controles bimestrales integrales de salud, and «En todos los casos, los pagos seran entregados despues de verificado el cumplimiento de los controles.» Art. 6: «Las redes y equipos moviles de salud, tienen la responsabilidad de prestar los servicios de atencion integral de salud, realizar la verificacion del cumplimiento de los controles», with «Los Servicios Departamentales de Salud apoyaran con los servicios de salud que se requieran».",
       "_batch": [
         "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
       ],
@@ -1659,8 +1692,8 @@
       "edge": "bo-deuda-publica -> bo-presupuesto",
       "source": "bo-deuda-publica",
       "target": "bo-presupuesto",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Public-debt dynamics are inseparable from the financing of the national budget.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Searched MEFP debt publications, Ley 1613 (PGE 2025) and Ley 1356 (PGE 2021) for any statement that Bolivian public-debt statistics take the budget as an input. Found none. The PGE law only authorises specific credit operations (e.g. Ley 1356 Art. 11: «celebrar operaciones de deuda publica en los mercados de capital externos por un monto de hasta USD3.000.000.000») and Ley 1613 authorises the TGN to service authorised financing. That is an authorisation ceiling, not a data or method dependency, and none of the four permitted types fits it. Unlike Paraguay, I could not find a Bolivian debt bulletin that cites the PGE law by name.",
       "_batch": [
         "2026-08-13_Bolivia-batch4-fiscal-informality-departments.json"
       ],
@@ -1681,8 +1714,8 @@
       "edge": "bo-informalidad -> bo-pobreza",
       "source": "bo-informalidad",
       "target": "bo-pobreza",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Informal workers face substantially higher poverty incidence than formal workers.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Checked UDAPE Propuesta metodologica de medicion de la informalidad en Bolivia and INE ECE material. Informality is defined by ILO 21st ICLS criteria (no formally recognised labour relation, no short/long-term social security; for independents no NIT, no accounting records, under 5 employees) and measured from the ECE and Encuesta de Hogares. The methodology contains no connection to poverty measurement in either direction. The original basis is a correlational claim about informal workers being poorer, not a documented dependency.",
       "_batch": [
         "2026-08-13_Bolivia-batch4-fiscal-informality-departments.json"
       ],
@@ -1692,8 +1725,8 @@
       "edge": "bo-empresas-publicas -> bo-presupuesto",
       "source": "bo-empresas-publicas",
       "target": "bo-presupuesto",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: SOE losses and debt create contingent fiscal claims on the national budget.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The only supporting text I could find is the scope article of the budget law (Ley 1613/2025 and Ley 1356/2021, Art. 3): «La presente Ley se aplica a todas las instituciones del sector publico que comprenden los Organos del Estado Plurinacional... universidades publicas, empresas publicas, instituciones financieras bancarias...». That clause is boilerplate that names essentially every public entity and would equally validate a health-to-budget, education-to-budget or university-to-budget edge, so it is not evidence for this specific dependency. No document states that SOE performance or fiscal-exposure figures are taken from the PGE, and nothing supports the contingent-liability story in the original basis. DS 5454/2025 shows 27-29 SOEs transferring Bs474,3 million to fund the Bono Juancito Pinto, which is a different relation from the one asserted.",
       "_batch": [
         "2026-08-13_Bolivia-batch4-fiscal-informality-departments.json"
       ],
@@ -1703,8 +1736,8 @@
       "edge": "bo-empleo-formal -> bo-informalidad",
       "source": "bo-empleo-formal",
       "target": "bo-informalidad",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Formal and informal employment are complementary partitions of total employment.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The claim that formal employment is the residual complement of informal employment is contradicted by the source I checked: the UDAPE methodological proposal identifies formal employment through positive criteria (pension contributions, employer health insurance, NIT, accounting records, firm size), not as a residual, so the source is not mechanically derived from the target. Searched INE ECE boletines and UDAPE methodology; nothing states one series is computed from the other.",
       "_batch": [
         "2026-08-13_Bolivia-batch5-remittances-social-industrial.json"
       ],
@@ -1714,8 +1747,8 @@
       "edge": "bo-empleo-formal -> bo-pobreza",
       "source": "bo-empleo-formal",
       "target": "bo-pobreza",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Formal employment is strongly associated with lower poverty incidence.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Same searches as drop_index 9 and 11. No INE or UDAPE document states that the formal-employment series uses, or is derived from, the monetary poverty series. The basis is a purely associational statement.",
       "_batch": [
         "2026-08-13_Bolivia-batch5-remittances-social-industrial.json"
       ],
@@ -1725,8 +1758,8 @@
       "edge": "bo-tioc -> bo-autoidentificacion",
       "source": "bo-tioc",
       "target": "bo-autoidentificacion",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: TIOC appear as geographic domains in the same census identity tabulations.",
+      "reason": "resolved",
+      "why": "Recovered as a real methodology_depends_on edge (direction reversed) — see dependencies. INE Bolivia, Autoidentificacion (Censo 2024) release page, table title: «POBLACION POR AUTOIDENTIFICACION Y SEXO, SEGUN DEPARTAMENTO, PROVINCIA, MUNICIPIO O TERRITORIO INDIGENA ORIGINARIO CAMPESINO (TIOC)».",
       "_batch": [
         "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
       ],
@@ -1736,8 +1769,8 @@
       "edge": "bo-idioma -> bo-autoidentificacion",
       "source": "bo-idioma",
       "target": "bo-autoidentificacion",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Language use complements self-identification as a measure of lived plurinational culture.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Checked both INE census release pages. The idiomas page lists 16 census datasets (idioma en el que aprendio a hablar, idioma de mayor uso, nivel de multilinguismo, idiomas en segundo y tercer orden de uso, etc.), all broken down by sex, area, age group and geography, and none cross-tabulated with autoidentificacion; the autoidentificacion page likewise contains no language cross-tabulation. Nothing states the language statistics use or depend on the self-identification question. Purely thematic edge.",
       "_batch": [
         "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
       ],
@@ -1747,8 +1780,8 @@
       "edge": "bo-poblacion-65 -> bo-renta-dignidad",
       "source": "bo-poblacion-65",
       "target": "bo-renta-dignidad",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The size of the 65+ population is the direct demographic base of the universal old-age pension.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The premise is factually wrong. Ley 3791 Art. 3 sets beneficiaries as «todos los bolivianos residentes en el pais mayores de 60 (sesenta) anos», so the 65+ population is not the demographic base of the Renta Dignidad. Art. 9 finances it from 30% of IDH revenue and dividends of capitalised enterprises. The law makes no reference to INE, population statistics or demographic projections, and I found nothing in the DS 29400 reglamento tying the pension to the population series. Not accepted in either direction.",
       "_batch": [
         "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
       ],

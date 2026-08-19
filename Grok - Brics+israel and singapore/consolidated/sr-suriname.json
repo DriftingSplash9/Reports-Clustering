@@ -16,7 +16,7 @@
     ],
     "counts": {
       "reports": 43,
-      "dependencies": 3,
+      "dependencies": 5,
       "dropped_notes": 21
     },
     "container_shapes_seen": {
@@ -999,6 +999,28 @@
       "_batch": [
         "2026-08-14_Suriname-batch6-revenue-management.json"
       ]
+    },
+    {
+      "source_report_id": "sr-educacion",
+      "target_report_id": "sr-interior",
+      "relationship_type": "uses_data_from",
+      "basis": "The National Education Policy 2024-2031 itself consumes interior-district statistics as inputs to its analysis: \"The quality of (mainly primary) education in the interior has been lagging for many years\"; \"The data regarding students in the age group of 12 - 15 who are not enrolled in a school in Sipaliwini in the period 2019 -2021 is 90% on average\"; \"In 2019, the percentages were highest in Sipaliwini (89.01%)\". Tables 2-14 give dropout, repeater and out-of-school rates by interior district, and the document names its sources for district-level data: Figure 2 \"shows the distribution by district and ethnicity, based on 2012 census data\", MICS 2018 (\"multidimensional poverty in Suriname was 50.3% for the interior\"), and \"Source: MinOWC Research and Planning Department (Jan 2024).\"",
+      "evidence_url": "https://gov.sr/wp-content/uploads/2025/03/National-Education-Policy-Suriname-2024-2031-ENGLISH_FINAL-1.pdf",
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    },
+    {
+      "source_report_id": "sr-imf",
+      "target_report_id": "sr-deuda",
+      "relationship_type": "uses_data_from",
+      "basis": "The IMF Suriname 2025 Article IV staff report attributes its fiscal and debt tables to the national authorities' data. Table 1 (Selected Economic Indicators): \"Sources: Surinamese authorities; and IMF staff estimates and projections.\" Table 2a (Central Government Operations, 2023-31), which carries the public debt lines: \"Sources: Surinamese authorities; and IMF staff calculations and projections.\"",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2026/english/1surea2026001-source-pdf.pdf",
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
     }
   ],
   "_dropped": [
@@ -1028,8 +1050,8 @@
       "edge": "sr-educacion -> sr-interior",
       "source": "sr-educacion",
       "target": "sr-interior",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Education gaps are most severe in interior Maroon and Indigenous communities.",
+      "reason": "resolved",
+      "why": "Recovered as a real uses_data_from edge — see dependencies. The National Education Policy 2024-2031 itself consumes interior-district statistics as inputs to its analysis: \"The quality of (mainly primary) education in the interior has been lagging for many years\"; \"The data regarding students in the age group of 12 - 15 who are not enrolled in a school in Sipaliwini in the period 2019 -2021 is 90% on average\"; \"In 2019, the percentages were highest in Sipaliwini (89.01%)\". Tables 2-14 give dropout, repeater and out-of-school rates by interior district, and the document names its sources for district-level data: Figure 2 \"shows the distribution by district and ethnicity, based on 2012 census data\", MICS 2018 (\"multidimensional poverty in Suriname was 50.3% for the interior\"), and \"Source: MinOWC Research and Planning Department (Jan 2024).\"",
       "_batch": [
         "2026-08-14_Suriname-batch2.json"
       ],
@@ -1039,8 +1061,8 @@
       "edge": "sr-salud -> sr-interior",
       "source": "sr-salud",
       "target": "sr-interior",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Health-access gaps are most severe in the interior.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Retrieved the source node's own URL (statistics-suriname.org/sociale-statistieken/) and listed every health publication ABS carries there: health expenditure budget planning 2020-2022, health personnel 2018-2021, hospital beds by institution 2018-2022, health staff by facility, mortality and fertility indicators 2018-2020, and disease/immunisation data 2015-2021. None is broken down by district and none names an interior-district input; no data sources are given at all in the listing. The original basis ('health-access gaps are most severe in the interior') is a thematic claim no retrieved document makes about this series.",
       "_batch": [
         "2026-08-14_Suriname-batch2.json"
       ],
@@ -1061,8 +1083,8 @@
       "edge": "sr-deuda -> sr-cbvs",
       "source": "sr-deuda",
       "target": "sr-cbvs",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Debt and stabilisation indicators are central to CBvS and Ministry of Finance reporting.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The document evidence contradicts the edge. The CBvS site's own statistics index does not publish public debt: the 'Staatsschuld' entry is an outbound link to https://www.sdmo.org/index.php/statistieken-verloop-staatsschuld, i.e. the Suriname Debt Management Office, and state finances link out to the Ministerie van Financien en Planning. CBvS publishes monetary, external-sector, real-sector, balance-of-payments (BPM6) and exchange-rate statistics, not debt. So a debt report does not depend on CBvS; if anything the target of this edge should be SDMO. Also note source_url and target_url are the identical page, which makes the edge self-referential as written.",
       "_batch": [
         "2026-08-14_Suriname-batch2.json"
       ],
@@ -1072,8 +1094,8 @@
       "edge": "sr-caricom -> sr-bop",
       "source": "sr-caricom",
       "target": "sr-bop",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: CARICOM membership structures a portion of regional trade and services flows.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The source node sr-caricom does not exist (source_exists false, no title, no URL). There is no document to check because there is no dependent report. Nothing searched could establish a dependency for a node that is not in the corpus.",
       "_batch": [
         "2026-08-14_Suriname-batch2.json"
       ],
@@ -1083,8 +1105,8 @@
       "edge": "sr-tipo-cambio -> sr-ipc",
       "source": "sr-tipo-cambio",
       "target": "sr-ipc",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Exchange-rate movements are a primary pass-through channel into consumer prices.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched the ABS CPI methodology page, which states the index's actual inputs: \"de huidige verkooppunten of meetpunten en het basispakket van goederen en diensten zijn voortgekomen uit het Huishoudbudgetonderzoek (HBO) 2013/2014\", weights \"Uitgaande van het Huishoudbudgetonderzoek (HBO) is aan elke uitgavencategorie, een wegingscoefficient (wegingsfactor) toegekend\", base period \"april 2016 - juni 2016\". The exchange rate (wisselkoers) appears nowhere as an input. Separately, the edge is also pointed the wrong way relative to its own basis: 'pass-through into consumer prices' would make the CPI the dependent, not the exchange rate. I did not mark it 'reverse' because no document supports the reversed edge either as a compilation dependency; exchange-rate pass-through is an analytical observation, not a stated input relationship.",
       "_batch": [
         "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
       ],
@@ -1094,8 +1116,8 @@
       "edge": "sr-proteccion-social -> sr-pobreza",
       "source": "sr-proteccion-social",
       "target": "sr-pobreza",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Social-protection transfers are designed to mitigate monetary poverty and vulnerability.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The source node sr-proteccion-social does not exist (source_exists false, no title, no URL). No dependent report exists to document a dependency for.",
       "_batch": [
         "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
       ],
@@ -1105,8 +1127,8 @@
       "edge": "sr-imf -> sr-deuda",
       "source": "sr-imf",
       "target": "sr-deuda",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The IMF programme frames debt and stabilisation policy.",
+      "reason": "resolved",
+      "why": "Recovered as a real uses_data_from edge — see dependencies. The IMF Suriname 2025 Article IV staff report attributes its fiscal and debt tables to the national authorities' data. Table 1 (Selected Economic Indicators): \"Sources: Surinamese authorities; and IMF staff estimates and projections.\" Table 2a (Central Government Operations, 2023-31), which carries the public debt lines: \"Sources: Surinamese authorities; and IMF staff calculations and projections.\"",
       "_batch": [
         "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
       ],
@@ -1116,8 +1138,8 @@
       "edge": "sr-electricidad -> sr-interior",
       "source": "sr-electricidad",
       "target": "sr-interior",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Electricity access gaps are most severe in the interior districts.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched the source node's own URL (statistics-suriname.org/milieustatistieken-4/). The environment statistics listing covers climate change indicators and 'Consumption of Energy in KwH 2013-2017'; nothing on that page is disaggregated by district, the interior districts are not mentioned, and no underlying data source (EBS or Ministry of Natural Resources) is named. Nothing retrieved states that electricity statistics use interior-district data.",
       "_batch": [
         "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
       ],
@@ -1127,8 +1149,8 @@
       "edge": "sr-wanica -> sr-paramaribo",
       "source": "sr-wanica",
       "target": "sr-paramaribo",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Wanica forms the principal peri-urban extension of the greater Paramaribo area.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Searched for an ABS definition of a 'Groot Paramaribo' urban agglomeration or any statement that Wanica statistics are derived from, or reported jointly with, Paramaribo. Found none. The closest retrieved document is the ABS CPI methodology, which lists Paramaribo and Wanica alongside Nickerie, Coronie, Saramacca, Commewijne and Para as price-collection districts, i.e. they are co-equal collection areas, not one dependent on the other. 'Peri-urban extension of greater Paramaribo' is geography, not a stated dependency.",
       "_batch": [
         "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
       ],
@@ -1149,8 +1171,8 @@
       "edge": "sr-financiamiento-staatsolie -> sr-block-58",
       "source": "sr-financiamiento-staatsolie",
       "target": "sr-block-58",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The bond and loan package financed Staatsolie’s 20% equity in GranMorgu.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The target node sr-block-58 does not exist (target_exists false, no title, no URL). The underlying claim about Staatsolie financing its GranMorgu equity may well be documentable, but there is no target node in the corpus for the edge to land on, so it cannot be accepted as written.",
       "_batch": [
         "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
       ],
@@ -1160,8 +1182,8 @@
       "edge": "sr-petronas-block52 -> sr-block-58",
       "source": "sr-petronas-block52",
       "target": "sr-block-58",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Block 52 is the second major offshore exploration front in the same basin.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Neither node exists (source_exists false and target_exists false, no titles, no URLs). Nothing to verify. The original basis ('second major offshore exploration front in the same basin') is a thematic adjacency claim in any case, not a dependency.",
       "_batch": [
         "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
       ],
@@ -1171,8 +1193,8 @@
       "edge": "sr-arroz -> sr-nickerie",
       "source": "sr-arroz",
       "target": "sr-nickerie",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Nickerie is the principal rice-producing district.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Searched ABS for agricultural / rice statistics reported by district and found no published series or methodology note stating that rice production and export figures are compiled from Nickerie district data. Both nodes point at the bare statistics-suriname.org homepage, so the nodes' own URLs give nothing. 'Nickerie is the principal rice-producing district' is a true fact about Suriname but no retrieved document states the rice statistics depend on a Nickerie district series.",
       "_batch": [
         "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
       ],
@@ -1193,8 +1215,8 @@
       "edge": "sr-salario-minimo -> sr-empleo",
       "source": "sr-salario-minimo",
       "target": "sr-empleo",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The minimum wage is the statutory floor for formal and monitored employment.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Read the text of the Wet Minimumloon. The only provision on how the wage is set is Artikel 6 lid 1, \"waarbij zowel sociale als economische indicatoren in gelijke mate in acht worden genomen\" - generic 'social and economic indicators', naming nothing. The Memorie van Toelichting reproduces the ILO Convention 131 art. 3 criteria (\"het algemene loonniveau in het land\", \"de kosten van levensonderhoud\", \"de sociale zekerheidsuitkeringen\", \"de relatieve levensstandaard van andere maatschappelijke groepen\"). The statute nowhere references the Algemeen Bureau voor de Statistiek, labour force or employment statistics, or a consumer price index. 'Statutory floor for formal employment' is a description of scope, not a documented dependency on the labour force survey.",
       "_batch": [
         "2026-08-14_Suriname-batch5-power-social-districts.json"
       ],
@@ -1204,8 +1226,8 @@
       "edge": "sr-bosbouw -> sr-interior",
       "source": "sr-bosbouw",
       "target": "sr-interior",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Forestry activity is concentrated in and linked to interior livelihoods.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Nothing on the source node's URL (statistics-suriname.org) states that forestry statistics use interior-district data. Worth a human look: the district-level roundwood data actually exists, but it is published by SBB (Stichting Bosbeheer en Bostoezicht), not ABS - SBB's forestry statistics report production by district with Sipaliwini as the largest production area. If the source node's URL were corrected from ABS to SBB, this edge could probably be re-founded as uses_data_from. As the nodes stand, the cited source has no such content, so I reject rather than accept on a document belonging to a different publisher.",
       "_batch": [
         "2026-08-14_Suriname-batch5-power-social-districts.json"
       ],
@@ -1215,8 +1237,8 @@
       "edge": "sr-ssfs-operationalization -> sr-ssfs",
       "source": "sr-ssfs-operationalization",
       "target": "sr-ssfs",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Operationalization is the implementation status of the SSFS legal framework.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The source node sr-ssfs-operationalization does not exist (source_exists false, no title, no URL). No dependent report to verify. The basis ('operationalization is the implementation status of the legal framework') also describes a subject-matter subset rather than a dependency.",
       "_batch": [
         "2026-08-14_Suriname-batch6-revenue-management.json"
       ],
@@ -1226,8 +1248,8 @@
       "edge": "sr-intergenerational -> sr-ssfs",
       "source": "sr-intergenerational",
       "target": "sr-ssfs",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Intergenerational equity is a stated purpose of the savings component of the fund.",
+      "reason": "no-node-yet",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. The source node sr-intergenerational does not exist (source_exists false, no title, no URL). Nothing to verify. Even if the SSFS law states an intergenerational-equity purpose, that would make the concept a feature of the target, not a separate report depending on it.",
       "_batch": [
         "2026-08-14_Suriname-batch6-revenue-management.json"
       ],

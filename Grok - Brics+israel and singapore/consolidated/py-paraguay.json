@@ -16,7 +16,7 @@
     ],
     "counts": {
       "reports": 60,
-      "dependencies": 26,
+      "dependencies": 27,
       "dropped_notes": 14
     },
     "container_shapes_seen": {
@@ -1623,6 +1623,17 @@
       "_batch": [
         "2026-08-13_Paraguay-batch6-international-industrial.json"
       ]
+    },
+    {
+      "source_report_id": "py-deuda-publica",
+      "target_report_id": "py-presupuesto",
+      "relationship_type": "cites",
+      "basis": "MEF Paraguay, Reporte Mensual de la Deuda Publica (Boletin DGPE, Enero 2026), Emision de Bonos section: «Para el ejercicio fiscal 2025, se conto con una autorizacion legal de USD 714,5 millones aprobado mediante la Ley N. 7408/2024 Que aprueba el presupuesto general de la Nacion para el ejercicio fiscal 2025.»",
+      "evidence_url": "https://www.mef.gov.py/sites/default/files/2026-03/Bolet%C3%ADn%20DGPE%20Enero%202026.pdf",
+      "_batch": [
+        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
     }
   ],
   "_dropped": [
@@ -1684,8 +1695,8 @@
       "edge": "py-deuda-publica -> py-presupuesto",
       "source": "py-deuda-publica",
       "target": "py-presupuesto",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Public-debt dynamics are inseparable from the financing of the national budget.",
+      "reason": "resolved",
+      "why": "Recovered as a real cites edge — see dependencies. MEF Paraguay, Reporte Mensual de la Deuda Publica (Boletin DGPE, Enero 2026), Emision de Bonos section: «Para el ejercicio fiscal 2025, se conto con una autorizacion legal de USD 714,5 millones aprobado mediante la Ley N. 7408/2024 Que aprueba el presupuesto general de la Nacion para el ejercicio fiscal 2025.»",
       "_batch": [
         "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
       ],
@@ -1695,8 +1706,8 @@
       "edge": "py-maquila -> py-zonas-francas",
       "source": "py-maquila",
       "target": "py-zonas-francas",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Maquila and free-zone regimes are complementary industrial-promotion instruments.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Read Ley 523/95 (zonas francas): it never mentions maquila. Its only cross-regime clause is Art. 12, allowing concessionaires (not users) to also request Ley 60/90 benefits. The 2025 reform package keeps them apart as well: maquila was rewritten by Ley 7547/2025 and investment by Ley 7548/2025, with no free-zone provisions. No document states the maquila regime or its export series uses the free-zone regime in any way.",
       "_batch": [
         "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
       ],
@@ -1706,8 +1717,8 @@
       "edge": "py-ips -> py-ephc",
       "source": "py-ips",
       "target": "py-ephc",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: IPS administrative data on formal contributors complement the household-survey labour series.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Searched IPS and INE material for a statement that IPS coverage statistics use the EPHC, or that the EPHC labour series uses IPS administrative records. Found none. IPS appears in the MSPBS Indicadores Basicos only as an institutional provider (establishment and bed counts), and the EPHC treats IPS as a response category for health-insurance affiliation, which is not a data dependency. Complementarity of administrative and survey sources is an analyst's framing, not a documented input relation.",
       "_batch": [
         "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
       ],
@@ -1717,8 +1728,8 @@
       "edge": "py-asistencia-escolar -> py-mec",
       "source": "py-asistencia-escolar",
       "target": "py-mec",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Survey-based attendance complements administrative enrolment and institutional statistics from MEC.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Searched MEC statistical publications and INE EPHC releases. INE publishes the attendance and years-of-schooling indicators purely from its own EPHC (e.g. its education news releases cite «los indicadores de educacion de la Encuesta Permanente de Hogares Continua (EPHC) 2025 del Instituto Nacional de Estadistica»), with no MEC input named. I found no MEC document stating it uses the EPHC attendance rate either, so I could not confirm the edge in the reverse direction.",
       "_batch": [
         "2026-08-13_Paraguay-batch5-education-health-trade.json"
       ],
@@ -1728,8 +1739,8 @@
       "edge": "py-cobertura-salud -> py-mspbs",
       "source": "py-cobertura-salud",
       "target": "py-mspbs",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The large uninsured population depends on the public health network administered by MSPyBS.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Closest call in the Paraguay file. MSPBS Indicadores Basicos de Salud 2021 does cite «INE / Encuesta Permanente de Hogares Continua 2020 - 2021. Cuarto trimestre. Serie comparable» among its sources, so data flows MSPBS-uses-INE, i.e. opposite to the held edge. But that citation supports the separate py-ephc node, not the health-insurance coverage indicator specifically, and the MSPBS publication carries no insurance-coverage indicator at all. Nothing states the coverage indicator depends on MSPBS. Rejected rather than reversed because the reversed edge would be between the wrong pair of nodes.",
       "_batch": [
         "2026-08-13_Paraguay-batch5-education-health-trade.json"
       ],
@@ -1772,8 +1783,8 @@
       "edge": "py-ley-invariabilidad -> py-ley-7548",
       "source": "py-ley-invariabilidad",
       "target": "py-ley-7548",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Tax-rate invariability complements the general investment-incentive regime for long-horizon projects.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Read the full text of Ley 7548/2025. Art. 34 (Derogaciones) repeals only «en su totalidad el Decreto-Ley N. 27, de fecha 31 de marzo de 1990» and «la Ley N. 60/90», plus a generic clause on incompatible provisions. Ley 5542/2015, the word invariabilidad, zonas francas and maquila do not appear anywhere in the law. No cross-reference in either direction, so nothing documents the asserted complementarity.",
       "_batch": [
         "2026-08-13_Paraguay-batch6-international-industrial.json"
       ],

@@ -14,7 +14,7 @@
     ],
     "counts": {
       "reports": 40,
-      "dependencies": 15,
+      "dependencies": 16,
       "dropped_notes": 8
     },
     "container_shapes_seen": {
@@ -1038,6 +1038,17 @@
       "_batch": [
         "2026-08-13_Colombia-batch4-departments-fiscal.json"
       ]
+    },
+    {
+      "source_report_id": "co-emmet",
+      "target_report_id": "co-eam",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The dependency is real but runs the other way: the EMMET depends on the EAM. DANE's EMMET methodology states 'El marco estadistico que sirvio de base para el rediseno de la encuesta se conformo a partir de la informacion de la EAM de 2017', that establishments are coded using 'la clasificacion de actividad economica de cada establecimiento en la EAM', and that 'Como ponderador de la EMMET se tomo la relacion de valor agregado sobre la produccion bruta de la EAM del ano 2017'. The EAM methodology, by contrast, never mentions the EMMET.",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/EMMET/met-EMMET.pdf",
+      "_batch": [
+        "2026-08-13_Colombia-batch2.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency. Direction reversed from the original."
     }
   ],
   "_dropped": [
@@ -1078,8 +1089,8 @@
       "edge": "co-eam -> co-emmet",
       "source": "co-eam",
       "target": "co-emmet",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: The annual structural survey benchmarks and deepens the monthly manufacturing indicators.",
+      "reason": "resolved",
+      "why": "Recovered as a real methodology_depends_on edge (direction reversed) — see dependencies. The dependency is real but runs the other way: the EMMET depends on the EAM. DANE's EMMET methodology states 'El marco estadistico que sirvio de base para el rediseno de la encuesta se conformo a partir de la informacion de la EAM de 2017', that establishments are coded using 'la clasificacion de actividad economica de cada establecimiento en la EAM', and that 'Como ponderador de la EMMET se tomo la relacion de valor agregado sobre la produccion bruta de la EAM del ano 2017'. The EAM methodology, by contrast, never mentions the EMMET.",
       "_batch": [
         "2026-08-13_Colombia-batch2.json"
       ],
@@ -1122,8 +1133,8 @@
       "edge": "co-saber-icfes -> co-ecv",
       "source": "co-saber-icfes",
       "target": "co-ecv",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"complements\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Saber assessments measure learning outcomes of the school population whose enrolment and attainment are characterised in the ECV.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Read ICFES's 'Marco metodologico de la operacion estadistica'. The ECV is not mentioned. The external inputs it names are the Ministry of Education's SIMAT enrolment system and SNIES for higher education, with DANE appearing only for geographic coding ('Nomenclatura estandarizada, disenada por el DANE para la identificacion de entidades territoriales') and for school-site identification via SISE. Saber is a census of registered students drawn from school registries, not from a household survey; the ECV likewise does not use Saber results. Purely thematic pairing of 'learning outcomes' with 'education variables in a living-conditions survey'.",
       "_batch": [
         "2026-08-13_Colombia-batch3-metro-trade-social.json"
       ],

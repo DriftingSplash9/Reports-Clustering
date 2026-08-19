@@ -383,32 +383,22 @@ if (loadIssues.duplicateRelations.length) {
   for (const r of loadIssues.duplicateRelations) console.log(`      ${r}`)
 }
 /**
- * Domains — the seventh closed union, and the one that had no check at all.
+ * Domains — the inventory, not the rule.
  *
- * `Domain` is cast, not parsed, exactly like the other six. Unlike the others it
- * had no runtime guard here, so an off-union tag reached the renderer and simply
- * never matched a filter chip: silent, invisible, and undetectable except by
- * scanning the corpus by hand. That is the same failure `JurisdictionLevel` and
- * `DroppedReason` were caught by in EU/G.73.md — 29 reports carrying "national"
- * and one carrying "territorial", none a member of anything — and the same one
- * `Domain` itself was caught by a day later with `"manufacturing"` on
- * `de-destatis-quarterly-production-survey`. It was found by a corpus scan
- * because nothing else could find it.
+ * The rule itself lives in `validate()` in graph.ts alongside the other closed
+ * unions, where a bare unknown tag is an error and a `proposed:`-prefixed one is
+ * a warning. What is missing there is *visibility*: a warning per node tells you
+ * a hundred times that something is unapproved and never once tells you what the
+ * vocabulary actually looks like. This block is that view — how many tags are
+ * approved, how many are waiting, which are used enough to deserve promoting,
+ * and which reports carry no tag at all and so cannot be reached by the domain
+ * filter at all.
  *
- * Added 2026-08-18, on importing the Grok archive, where the raw batches carried
- * **985 distinct domain tags** against the approved list. The convention that
- * makes this checkable rather than merely strict is the `proposed:` prefix: a tag
- * outside `DOMAINS` is legal *if it announces itself*, so new vocabulary can
- * enter the corpus and be reviewed rather than being either rejected at the door
- * or accepted silently. A bare unknown tag is the bug; `proposed:trade` is a
- * request.
+ * Added 2026-08-18, when the Grok import promoted 18 tags in one pass and the
+ * question "which of the 62 proposed ones have earned a slot" turned out to have
+ * no answer anywhere in the tooling.
  */
 const PROPOSED_PREFIX = 'proposed:'
-const offUnionDomains = reports.flatMap((r) =>
-  (r.domains ?? [])
-    .filter((d) => !DOMAINS.includes(d) && !String(d).startsWith(PROPOSED_PREFIX))
-    .map((d) => ({ id: r.id, domain: d })),
-)
 const proposedDomains = new Map<string, number>()
 for (const r of reports) {
   for (const d of r.domains ?? []) {
@@ -421,16 +411,9 @@ const untagged = reports.filter((r) => !r.domains || r.domains.length === 0)
 
 console.log(`DOMAINS — ${DOMAINS.length} approved, ${proposedDomains.size} proposed`)
 console.log(
-  offUnionDomains.length === 0
-    ? '  ✓ every domain tag is a Domain or carries the proposed: prefix'
-    : `  ✗ ${offUnionDomains.length} tag(s) are neither a Domain nor prefixed proposed: — they will never match a filter:`,
-)
-for (const o of offUnionDomains) console.log(`      "${o.domain}" — ${o.id}`)
-if (offUnionDomains.length) invariantFailures++
-console.log(
   untagged.length === 0
     ? '  ✓ every report carries at least one domain tag'
-    : `  ! ${untagged.length} report(s) carry no domain tag at all — unreachable by domain filter:`,
+    : `  ! ${untagged.length} report(s) carry no domain tag at all — unreachable by the domain filter:`,
 )
 for (const u of untagged) console.log(`      ${u.id}`)
 if (proposedDomains.size) {
@@ -438,6 +421,7 @@ if (proposedDomains.size) {
   for (const [tag, count] of [...proposedDomains].sort((a, b) => b[1] - a[1]).slice(0, 15)) {
     console.log(`      ${String(count).padStart(4)}  ${tag}`)
   }
+  if (proposedDomains.size > 15) console.log(`      … and ${proposedDomains.size - 15} more`)
 }
 console.log()
 

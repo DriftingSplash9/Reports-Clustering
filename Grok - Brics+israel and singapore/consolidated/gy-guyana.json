@@ -14,7 +14,7 @@
     ],
     "counts": {
       "reports": 40,
-      "dependencies": 6,
+      "dependencies": 7,
       "dropped_notes": 13
     },
     "container_shapes_seen": {
@@ -983,6 +983,17 @@
       "_batch": [
         "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
       ]
+    },
+    {
+      "source_report_id": "gy-gpl",
+      "target_report_id": "gy-gas-to-energy",
+      "relationship_type": "cites",
+      "basis": "Government of Guyana press release on the Wales Gas-to-Energy project states that \"delivery of power to the national grid through Guyana Power and Light Inc. remains on track to reduce consumer electricity tariffs by 50 percent\", and that once operational the facility is expected to \"double national generation capacity, improve reliability, reduce fuel imports, stabilise energy costs, and support a 50 per cent reduction in consumer electricity tariffs.\"",
+      "evidence_url": "https://dpi.gov.gy/press-release-wales-gas-to-energy-project-advancing-rapidly/",
+      "_batch": [
+        "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
     }
   ],
   "_dropped": [
@@ -990,8 +1001,8 @@
       "edge": "gy-nrf -> gy-pib",
       "source": "gy-nrf",
       "target": "gy-pib",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: NRF withdrawals finance public spending that feeds into non-oil GDP.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Read the Natural Resource Fund Act to see whether the withdrawal rule takes GDP or national accounts as an input. It does not. The ceiling is the 'Economically Sustainable Amount', \"the maximum amount that can, in the opinion of the Minister after taking into account the recommendations of the Macroeconomic Committee\" be withdrawn; the Committee weighs \"inflation; the exchange rate; the real effective exchange rate; the balance of payments; economic growth, particularly in the agriculture and manufacturing sectors; the composition of public spending; the need to maintain stability in public spending; public debt; and other relevant economic indicators\". There are no references to GDP figures, national accounts, or the Bureau of Statistics anywhere in the Act. Note also that 'growth' appears as one qualitative consideration among many, which is not the same as the Fund's output being derived from a GDP series. The original basis also runs backwards from what it argues: it says NRF withdrawals feed into non-oil GDP, which would make GDP the dependent, not the NRF.",
       "_batch": [
         "2026-08-13_Guyana-batch1.json"
       ],
@@ -1023,8 +1034,8 @@
       "edge": "gy-local-content -> gy-petroleo",
       "source": "gy-local-content",
       "target": "gy-petroleo",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Local-content rules are designed to link oil activity to domestic employment and enterprise.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Read the Local Content Act 2021. It ties its scope to petroleum operations - s.3(1) \"applies to local content in relation to all operations and activities in the petroleum sector\", s.3(2) requires entities to \"implement local content as an essential component of their petroleum operations\", and 'petroleum operations' is defined as \"operations carried out for, or in connection with, the prospecting for, or production of, petroleum\". But that is a statement of legal scope, not a dependency on the target node, which is the oil production data series at petroleum.gov.gy/data-centre. The Act's First Schedule targets are percentages of procurement spend across 40-odd service categories; nothing in the Act, and nothing in the Local Content Performance Report or Annual Plan submission guidelines, takes production volumes or the published production statistics as an input. This is the closest of my Guyana rejections and a human might accept it as 'cites' on the strength of s.3(1).",
       "_batch": [
         "2026-08-13_Guyana-batch2.json"
       ],
@@ -1045,8 +1056,8 @@
       "edge": "gy-caricom -> gy-bop",
       "source": "gy-caricom",
       "target": "gy-bop",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: CARICOM membership structures a portion of regional trade and services flows.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Checked both nodes' own URLs. The CARICOM Guyana country profile contains only key facts (membership date, area, capital, population, currency), a few unattributed GDP figures and a historical timeline; it carries no balance of payments or trade statistics and names no statistical source at all. On the other side, the Bank of Guyana Annual Report 2023 mentions CARICOM only as a destination share within its own tables (\"the CARICOM region accounted for 30.2 percent\" of sugar exports; rice \"CARICOM's share decline to 26.9 percent\"; CARICOM currencies traded on the cambio market) and does not cite CARICOM as a data source. So the relation runs the other way from the edge as written and even then is only a breakdown category, not a dependency. Not marked 'reverse' because a BoP report disaggregating exports by destination does not depend on a 'CARICOM membership' node.",
       "_batch": [
         "2026-08-13_Guyana-batch2.json"
       ],
@@ -1066,8 +1077,8 @@
       "edge": "gy-oro -> gy-hinterland",
       "source": "gy-oro",
       "target": "gy-hinterland",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Gold mining is a material livelihood activity in hinterland regions.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched the source node's own document library (Guyana Gold Board: annual reports 2013-2022, financial statements 2013-2023, gold exports 2020-2023, gold and dealer declarations 2020-2023). None of the published series is broken down by region or by hinterland mining district, and no document states that gold production and export figures are compiled from or attributed to Regions 1, 7, 8, 9. 'Gold mining is a material livelihood activity in hinterland regions' is a true background fact with no documentary dependency behind it.",
       "_batch": [
         "2026-08-13_Guyana-batch3-regions-social-hinterland.json"
       ],
@@ -1077,8 +1088,8 @@
       "edge": "gy-salud -> gy-hinterland",
       "source": "gy-salud",
       "target": "gy-hinterland",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Health-access gaps are most severe in the hinterland regions.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched the source node's exact URL. The table is 'Number of Health Institutions by Type and by Region, Guyana: 2024', covering all ten regions uniformly, with the source line \"Maternal and Child Health Unit and Statistical Unit, Ministry of Health\". It does have rows for Regions 1, 7, 8 and 9, but it uses no hinterland grouping, makes no access-gap claim, and takes its data from the Ministry of Health rather than from any hinterland-region series. A table that happens to include four regions among ten is not a dependency on a 'hinterland regions' node; the original basis ('gaps are most severe in the hinterland') is an interpretation the document does not make.",
       "_batch": [
         "2026-08-13_Guyana-batch3-regions-social-hinterland.json"
       ],
@@ -1088,8 +1099,8 @@
       "edge": "gy-gpl -> gy-gas-to-energy",
       "source": "gy-gpl",
       "target": "gy-gas-to-energy",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Gas-to-energy is the main near-term capacity and cost-reduction project for the GPL system.",
+      "reason": "resolved",
+      "why": "Recovered as a real cites edge — see dependencies. Government of Guyana press release on the Wales Gas-to-Energy project states that \"delivery of power to the national grid through Guyana Power and Light Inc. remains on track to reduce consumer electricity tariffs by 50 percent\", and that once operational the facility is expected to \"double national generation capacity, improve reliability, reduce fuel imports, stabilise energy costs, and support a 50 per cent reduction in consumer electricity tariffs.\"",
       "_batch": [
         "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
       ],
@@ -1099,8 +1110,8 @@
       "edge": "gy-eiti -> gy-nrf",
       "source": "gy-eiti",
       "target": "gy-nrf",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: EITI reporting covers the same extractive revenues that flow into the NRF.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Checked GYEITI's own reconciliation-data page and the country report index. The reporting government entities are the Guyana Revenue Authority, Guyana Geology and Mines Commission, Guyana Gold Board, Ministry of Natural Resources and Ministry of Amerindian Affairs; the Natural Resource Fund is not among them and is not named on the page. The mining-sector page mentions the NRF Act 2019 only in a legal-framework table as having \"established the Natural Resource Fund to manage the natural resource wealth of Guyana\", which is background, not a reconciliation input. No retrieved GYEITI document states that NRF statements or accounts were used as a data source or that reported revenues were traced to the Fund. 'Covers the same extractive revenues' is precisely the kind of thematic overlap this standard excludes.",
       "_batch": [
         "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
       ],
@@ -1110,8 +1121,8 @@
       "edge": "gy-region-10 -> gy-bauxita",
       "source": "gy-region-10",
       "target": "gy-bauxita",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Linden / Region 10 is the historic centre of bauxite activity.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Both nodes point at the bare statisticsguyana.gov.gy homepage, so the nodes' own URLs yield nothing. Searched GGMC and GYEITI mining-sector material for bauxite production reported by region or by Linden/Region 10: the GYEITI mining-sector page names individual bauxite operations by locality (Kurubuka Upper Berbice, East Montgomery, Bonasika) but states nothing about regional data organisation, and no document was found saying that Region 10 statistics are compiled from bauxite output or that bauxite figures are derived from a Region 10 series. 'Linden is the historic centre of bauxite activity' is economic geography, not a stated dependency, and the direction is ambiguous on the face of the assertion.",
       "_batch": [
         "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
       ],
@@ -1121,8 +1132,8 @@
       "edge": "gy-agua -> gy-hinterland",
       "source": "gy-agua",
       "target": "gy-hinterland",
-      "reason": "deferred",
-      "why": "Held back: relationship_type \"related_to\" is not one of the four valid values and the basis describes a thematic association rather than a documented dependency. Re-type it with real evidence or leave it out. Original basis: Water and sanitation gaps are most pronounced in hinterland and riverain communities.",
+      "reason": "no-document",
+      "why": "Re-checked 2026-08-18 against primary sources and not supported. Fetched the source node's own document (Guyana MICS6) twice with targeted prompts. The survey does carry an Interior/Coastal distinction in its sampling-error tables (Table SE.4 'Sampling errors: Coastal', Table SE.5 'Sampling errors: Interior') and defines Interior only as \"Lying away or remote from the border or seashore\". But the stated sample design is different from the edge's claim: \"The sample for the Guyana MICS 2019-2020 was designed to provide estimates ... at the national level, for urban and rural areas, and for the ten [10], regions\" - urban/rural and ten regions are the domains, not a hinterland grouping. I could not retrieve any water or sanitation result (tables WS.1.1, WS.3.1) presented by Interior versus Coastal, and the report never maps 'Interior' onto Regions 1, 7, 8, 9 as the target node defines them. Close enough to be worth a human look if someone can page through the full WS tables, but on what I retrieved the dependency is not stated.",
       "_batch": [
         "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
       ],

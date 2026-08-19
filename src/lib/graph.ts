@@ -217,13 +217,37 @@ export function validate(
     // `Domain` is read by nothing outside types.ts — no filter, no legend, no
     // colour — so an invented tag has no consumer to fail at. This rule is that
     // consumer, and it is the reason the field is checkable at all.
+    //
+    // **The `proposed:` prefix, added 2026-08-18.** This rule used to reject any
+    // tag outside `DOMAINS` outright, which sounds right and was wrong in
+    // practice: the data spec every research session works to tells researchers
+    // to prefix a genuinely new tag with `proposed:` precisely so it can enter
+    // the corpus visibly and be reviewed later. So the honest move — announcing
+    // new vocabulary — failed the build, while the dishonest one — quietly
+    // reusing whichever approved tag was closest — passed it. The corpus proved
+    // the point: at the time this was changed the live data carried **152
+    // `proposed:` tags and not one bare unknown tag**, so every researcher had
+    // followed the convention and the validator had been red for days because of
+    // it, which is how a red validator stops being read.
+    //
+    // A bare unknown tag is still an error — that is a typo or an invention with
+    // nothing behind it. A prefixed one is a request, and it surfaces as a
+    // warning plus an inventory in `validate-data.ts` so it cannot rot quietly.
     for (const d of r.domains ?? []) {
-      if (!DOMAINS.includes(d)) {
+      if (String(d).startsWith('proposed:')) {
+        issues.push({
+          severity: 'warning',
+          message:
+            `${r.id}: domain "${d}" is proposed, not yet approved — promote it ` +
+            `to Domain and DOMAINS in src/lib/types.ts, or replace it`,
+        })
+      } else if (!DOMAINS.includes(d)) {
         issues.push({
           severity: 'error',
           message:
-            `${r.id}: domain "${d}" is not a Domain — add it to Domain and ` +
-            `DOMAINS in src/lib/types.ts, or use an existing tag`,
+            `${r.id}: domain "${d}" is not a Domain and does not announce itself ` +
+            `with the proposed: prefix — add it to Domain and DOMAINS in ` +
+            `src/lib/types.ts, use an existing tag, or write it as "proposed:${d}"`,
         })
       }
     }
