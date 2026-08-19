@@ -7,7 +7,8 @@ level.** When it is superseded, the new session moves this file into
 `archive/`. Never leave two handoffs at the top level.
 
 Last written: **2026-08-19**, end of the Lane B implementation session —
-Phases 0, 0b and 1 of the visual revamp are **built and on disk**.
+Phases 0, 0b and 1 of the visual revamp are **built and on disk**, and Thomas has
+specified a **Phase 4** which is queued behind Phases 2 and 3 (§5A).
 
 **This file was edited, not replaced.** A Lane A session (the first edge round on
 the `candidates-only` tier) wrote this handoff while a Lane B session was working
@@ -34,7 +35,7 @@ Then read **one** of these depending on the task:
 
 | Task | Read |
 |---|---|
-| Renderer, colours, camera, anything visual | **§5 below first** — Phases 0/0b/1 of the review are built, so the review is now partly history. Then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` (rev 4) for Phases 2–3, which are still design |
+| Renderer, colours, camera, anything visual | **§5 below first**, then **§5A** for what Thomas has queued as Phase 4 — Phases 0/0b/1 of the review are built, so the review is now partly history. Then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` (rev 4) for Phases 2–3, which are still design |
 | Importing / minting the Grok archive | `Grok - Brics+israel and singapore/consolidated/CONSOLIDATION-REPORT.md`, then `consolidated/_STATUS.md` for the per-country board |
 | Researching edges for the archive | §6 below, then `consolidated/_EDGES-jp-kr-tw-2026-08-19.json` as the worked example of the required shape |
 | Continuing BRICS research | `BRICS/G.3.md` |
@@ -105,6 +106,10 @@ mint-or-don't call, and the edge research — which this session began.
 
 Written, type-checked, validated and rendered. Phases 2 and 3 — the lens modes —
 are untouched and are the next Lane B work. Detail and findings in §5.
+
+**Thomas has since specified a Phase 4** (look and feel, interaction, menu bar,
+saved views, delete Blueprint) and put it explicitly on the back burner behind
+2 and 3. Summary in §5A, full brief in `notes/phase-4-brief-2026-08-19.md`.
 
 **Lane B owns `src/lib/palette.ts` and `src/components/`.** Lane A's `IL`/`SG`
 placeholder entries survived the palette rebuild (both are `ASIA`, which now has
@@ -253,6 +258,41 @@ institutional colour is nearly the same grey. That is the design working, and it
 costs family identity at that level — but it affects **42 of 1 250 reports
 (3.4%)**, while **800 (64%) are federal** and sit at full chroma. Counted before
 worrying.
+
+---
+
+## 5A. Phase 4 — queued by Thomas, not started
+
+**`notes/phase-4-brief-2026-08-19.md`.** Read it before touching the UI layer.
+
+Thomas reviewed the Phase 0/0b/1 build on 2026-08-19 and specified a fourth
+round — look-and-feel, interaction, a consolidated menu bar, saved views, and
+**deleting Blueprint mode outright**. His instruction was explicit that it is
+**back burner**: *"these changes can be phase 4, I may add to phase 4 as we
+complete phase 2 and 3 so keep it all on the side burner."*
+
+**Order: Phases 2 and 3 first, then 4.** Expect the brief to grow — he said he
+would add to it.
+
+Three things in it are worth knowing even if you are not doing Phase 4, because
+they are findings about code you may be in:
+
+- **The key light sits inside the node cloud.** `App.tsx` lights the scene with
+  point lights at ~590 units from the origin, in a cloud measured at ~3 000, with
+  three.js's default `decay = 2`. There is no consistent light direction and the
+  far half of the graph is lit by ambient alone — which is most of what "the
+  nodes are flat" means, mechanically. Same class of bug as the edge width: a
+  constant chosen at 120 nodes and never revisited.
+- **`Cluster spread` is not a coherent control.** `m` multiplies a force
+  *strength* and two *lengths* by the same number, plus only the padding term of
+  the collide radius. That is why Thomas runs it at 375%. Doubling the link rest
+  length **alone** is the lever he actually wants — one line, rendered and
+  confirmed this session, node size unchanged and chains drawn out.
+- **The evidence never reaches the renderer.** `Dependency` carries
+  `relationship_type`, `basis` (usually a verbatim quote), `evidence_url` and
+  `reference_period`; `LinkDatum` carries none of them. The graph's whole
+  standing rule is the evidence standard, and the evidence is loaded, used, and
+  discarded before drawing. An edge card is the project showing its working.
 
 ---
 
