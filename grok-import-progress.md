@@ -6,7 +6,7 @@
 
 This file used to list 27 countries as `queued` against the raw batches in
 `Grok - Brics+israel and singapore/grok-batches/raw/`, to be picked off one per
-hourly run by the scheduled task described in `GROK-PIPELINE.md`. Both are
+hourly run by the scheduled task described in `archive/planning/GROK-PIPELINE.md`. Both are
 superseded:
 
 - **The scheduled task never worked** and is disabled. Triggered sessions do not
