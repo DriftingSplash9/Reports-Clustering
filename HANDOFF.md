@@ -6,7 +6,7 @@ top level.** When it is superseded, the new session moves this file into
 `HANDOFF.md` in its place. Thomas periodically sweeps `Previous Handoffs/` into
 `archive/handoffs/`. Never leave two handoffs at the top level.
 
-Last written: **2026-08-19, end of day** — the close of a five-session day that
+Last written: **2026-08-19, end of day** (revised same day: git-status correction, lighting closed, camera-density item added) — the close of a five-session day that
 audited the project, built visual-revamp Phases 2 and 3.5, and landed most of
 Phase 4. Written deliberately for a FRESH agent with no memory of any of it.
 Supersedes `Previous Handoffs/HANDOFF-2026-08-19-audit-phase2-35-4.md` (the
@@ -89,19 +89,26 @@ session's research round on Japan/Korea/Taiwan (the three largest zero-edge
 countries). It is DATA, not bookkeeping; merge per its own `_rule`; do not
 sweep it.
 
-**Git: the single biggest risk in the project.** Nothing committed since
-2026-08-13. Uncommitted bodies of work: AF/G.23, AF/G.24, the singleton-fit
-fix, BRICS G.1–G.3, the Grok consolidation (+ types/graph/scripts edits), the
-2026-08-19 folder reorg, visual Phases 0/0b/1, Phase 2 (lenses), Phase 3.5,
-Phase 4 items 1/2/4/5/6, the pulse re-inking and set-sizes pass, and the
-staged-corpus cadence fix. That is roughly three weeks of work on one disk.
+**Git: agents cannot see it, so agents must not assert it.** Thomas confirmed
+on 2026-08-19 with a GitHub Desktop screenshot — branch `main`, **0 changed
+files**, "Fetch origin, last fetched just now". The repo is fully committed and
+pushed, and had been all along. Every handoff since 2026-08-13 opened with a
+growing "nothing committed, three weeks of work on one disk" emergency; that
+claim was never verified by anyone, was copied forward each session with that
+session's work appended to the list, and was false. Standing rule 1 bars agents
+from running git, which is exactly why the claim was unfalsifiable and grew.
+**No session may state git status in any document — not "committed", not "not
+committed", not a backlog count.** Ask Thomas, or read a GitHub Desktop
+screenshot. Delete any such claim you find rather than carrying it forward;
+dated "NOT git-committed" lines in older memory entries are point-in-time notes
+that were never verified either.
 
-**Project memory is DOWN** — `project_memory_write` refused for most of
-2026-08-19 ("not available in this session"). The memory index's top entries
-about the visual revamp are STALE (they predate implementation). Until memory
-works again, THIS FILE is the record; a future session with working memory
-should write entries for: the audit, Phases 2/3.5/4, and the cadence fix, and
-correct the stale "visual revamp REVIEWED, not implemented" entry.
+**Project memory is BACK UP** (verified 2026-08-19, later the same day).
+Written since: the git-status corollary on `git-no-touch`, a corrected
+visual-revamp index entry (it no longer says "not implemented"), and
+`camera-fit-density-risk-2026-08-19`. STILL OWED, if a session has spare
+capacity: entries for the audit, Phases 2/3.5/4 in their own right, and the
+cadence fix.
 
 **File locations that moved on 2026-08-19** (audit reorg + Thomas's own
 tidying): `Previous Handoffs/` now holds `handoff-summary.md` (Phases 0–1
@@ -176,26 +183,35 @@ Sorted by owner, ordered by priority within each.
 
 ### [Thomas] — only you can
 
-1. **Commit the backlog in GitHub Desktop.** Three weeks of work on one disk
-   (list in §3). Logical chunks: data rounds / consolidation + cadences /
-   visual phases / reorg. Nothing else on this list matters as much.
-2. **Say what "off" means about the lighting** — one sentence or a screenshot
-   with a circle is enough (too dark? too flat from some angles? highlights
-   too hot? colour cast?). Every rig number is adjustable; the agent needs the
-   symptom, not the fix.
-3. **Empty the recycle bins**: `_to_delete/` at the root and
+1. **Empty the recycle bins**: `_to_delete/` at the root and
    `Grok - Brics+israel and singapore/_to_delete/`. Keep `grok-batches/` and
    the three BRICS/Israel/Singapore zips — sole raw provenance.
-4. **Sweep `Previous Handoffs/` into `archive/handoffs/`** when convenient —
+2. **Sweep `Previous Handoffs/` into `archive/handoffs/`** when convenient —
    five files are waiting, including two plain-language accounts worth keeping
    (`handoff-summary.md`, `HANDOFF-2026-08-19-audit-phase2-35-4.md`).
 
+*(The "commit the backlog" item that led this list for weeks is deleted — it
+was never real; see §3. The lighting question is answered: "the lighting is
+okay", Thomas 2026-08-19.)*
+
 ### [Us] — your eyes, agent's hands
 
-5. **Lighting tune on your GPU.** Key 2.2 / fill 0.7 / ambient 0.28 /
-   emissive floor 0.12 / bloom 0.14–0.26 — all analytic starting points, none
-   judged on real hardware. Includes the glow slider feel. One session with
-   you reacting to live changes would close it.
+5. **Camera fit vs. cluster density — Thomas's live concern, 2026-08-19:**
+   *"when we add more modes and edges it would end up inside the cluster
+   again."* Not a bug today; a constraint on everything below. `measureFit`
+   fits the **95th percentile** of node distance from centre, so 5% of nodes
+   sit outside the frame by design (~62 now, ~160 after the mint), and at this
+   FOV the camera sits at roughly **2.8 × p95** from centre — anything past
+   that ratio along the camera axis is behind the camera. There is a floor for
+   the too-FEW-nodes case (`SINGLETON_PADDING`) and **no guard for the
+   heavy-tail case**. Lenses cannot cause this (recolour only, never a memo
+   dep) — but GEO_EXPLORATION can if it repositions nodes, and edges can via
+   layout compaction. Settle it by measurement, not argument: dump
+   p50/p95/p99/max and `max/p95` per view from the headless harness, then again
+   on a scratch merge of the staged corpus. Full analysis in project memory,
+   `camera-fit-density-risk-2026-08-19`. **Lighting is CLOSED** — "the lighting
+   is okay" (Thomas, same message); the five rig numbers stand as shipped.
+
 6. **Pulse size/shape redesign + the beam.** Burner by your instruction. The
    set-sizes pass fixed the noise; the beam idea (continuous databases render
    their edge as a lit stream with a direction cue) replaces pulse geometry on
@@ -207,7 +223,10 @@ Sorted by owner, ordered by priority within each.
    "Grok - Brics+israel and singapore/consolidated"` (your machine — sandbox
    egress blocks some hosts); merge `_EDGES-jp-kr-tw-2026-08-19.json`; the
    Mexico/Argentina geography-as-a-node sweep; live-wins on the 4 duplicate
-   ids (+ graft the staged RBI `external-sector` tag). After minting: re-count
+   ids (+ graft the staged RBI `external-sector` tag); **and run the fit
+   measurement in item 5 BEFORE and AFTER, because the mint roughly triples the
+   corpus with mostly edgeless nodes — the case most likely to blow up the
+   outer tail.** After minting: re-count
    the palette's chroma damping — corpus shares are an input to it.
 
 ### [Agent] — next build rounds, in order
