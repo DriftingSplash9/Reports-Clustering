@@ -7,7 +7,8 @@ import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
 import {
   blueprintInkFor,
-  rimColourFor,
+  glowInk,
+  inkFor,
   rimWeightFor,
   colourForReport,
   familyOf,
@@ -666,6 +667,15 @@ export default function InfluenceGraph({
   const haloWorldPosition = useRef(new THREE.Vector3())
 
   /**
+   * The live layout data, by report id.
+   *
+   * These are the very objects d3-force mutates each tick, so reading `x`/`y`/
+   * `z` off one is reading where the node actually is — which `meshes` cannot
+   * be trusted for (see the halo block in `useFrame`).
+   */
+  const positionedById = useRef(new Map<string, PositionedNode>())
+
+  /**
    * The spread slider rebuilds the whole layout (forces, warmup, camera
    * refit), which costs a visible beat at 335 nodes. Debounced so a drag
    * costs one rebuild at the end, not one per pixel of travel.
@@ -879,15 +889,15 @@ export default function InfluenceGraph({
       // variant (blueprintInkFor), and because pulses inherit LinkDatum.colour
       // through the material cache, the teardrops arrive in dark ink with no
       // separate wiring.
-      const inkFor = bp ? blueprintInkFor : rimColourFor
+      const linkInk = bp ? blueprintInkFor : inkFor
       const fallbackInk = bp ? '#5a6478' : '#7f9ad0'
       linkMap.set(key, {
         source: e.target_report_id,
         target: e.source_report_id,
         weight,
         upstreamCadence: upstream?.releases_per_year ?? 1,
-        colour: upstream ? inkFor(upstream.country) : fallbackInk,
-        endColour: downstream ? inkFor(downstream.country) : fallbackInk,
+        colour: upstream ? linkInk(upstream.country) : fallbackInk,
+        endColour: downstream ? linkInk(downstream.country) : fallbackInk,
         cross,
         count: 1,
         hubRoom:
@@ -1044,7 +1054,21 @@ export default function InfluenceGraph({
             // on the dark scene. Family weights (US bold, EU thick…) apply
             // in both themes; they are statements about the family, not
             // about the lighting.
-            rimColour: bp ? blueprintInkFor(n.country) : rimColourFor(n.country),
+            // Glow tracks authority, not fill brightness — see `glowInk`.
+            // Blueprint keeps the fill as its own emissive: bloom is off
+            // there, and the floor is what lifts a solid white disc past the
+            // paper tone (see PAPER_NODE_FILL).
+            emissiveColour: bp ? colour : glowInk(colour),
+            rimColour: bp ? blueprintInkFor(n.country) : inkFor(n.country),
+            // **Rims exist only where there is no coloured fill to read.**
+            // Blueprint is ink on paper and a hollow one-off instrument has
+            // an emptied fill; everything else in the dark scene now carries
+            // its family in the fill itself, at a flat luminance, and the
+            // ring is redundant. An orb is deliberately NOT in this list —
+            // it used to wear a wide bright band, and it already has the
+            // breath (`ORB_PULSE_PERIOD_SECONDS`) saying the same thing with
+            // motion instead of ink.
+            drawRim: bp || hollow,
             radius,
             emissive,
             lit,
@@ -1054,9 +1078,8 @@ export default function InfluenceGraph({
             // PAPER_DIM_NODE_OPACITY / applyFocus).
             dimOpacity: bp ? PAPER_DIM_NODE_OPACITY : DIM_NODE_OPACITY,
             dimEmissive: DIM_NODE_EMISSIVE,
-            // Palette v2: family rim weight (US bold red, EU thick lime,
-            // Africa none…). Orbs keep their own fixed band inside
-            // nodeMaterial regardless of this value.
+            // How heavily to draw it, in the two cases where it is drawn at
+            // all — see `RIM_WEIGHT`.
             rimWeight: rimWeightFor(n.country),
             hollow,
             orb,
@@ -1251,6 +1274,12 @@ export default function InfluenceGraph({
     settledOnce.current = false
     settleClock.current = 0
     sinceRefit.current = 0
+
+    // Index the live layout data. Rebuilt with the graph, because these are
+    // the objects the simulation owns and a new graph means a new set of them.
+    positionedById.current = new Map(
+      ((forceGraph.graphData().nodes ?? []) as PositionedNode[]).map((n) => [n.id, n]),
+    )
     // A rebuild is always something the user just asked for, and framing the
     // result is the point of asking — so each one hands the camera back to the
     // tracking fit, which then holds it only until they touch it again.
@@ -1938,7 +1967,12 @@ export default function InfluenceGraph({
       const material = mesh.material as NodeMaterial
       const next = levelColours?.[scopeOf(r)] ?? colourForReport(r)
       material.color.set(next)
-      material.emissive.set(next)
+      // Normalised, for the same reason the constructor normalises — this
+      // effect is a paint job, and a paint job must not silently rewrite what
+      // the glow channel means. Safe to call unconditionally: the effect
+      // returns early in blueprint (see above), so this only ever runs on the
+      // dark scene.
+      material.emissive.set(glowInk(next))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelColours, forceGraph, view.blueprint])
@@ -1985,6 +2019,15 @@ export default function InfluenceGraph({
       const litOpacity = material.userData.litOpacity ?? 1
       material.opacity = lit ? litOpacity : Math.min(dimOpacity, litOpacity)
       material.emissiveIntensity = focusEmissive(id, mesh, focus)
+      // **Transparency does not stop a raycast.** A ghosted node is still
+      // solid geometry as far as the picker is concerned, so a barely-visible
+      // sphere in front of the chain you are tracing silently eats the hover
+      // and the click meant for the node behind it — and `reportIdAt` then
+      // reports whichever mesh the raycaster returned nearest-first, which is
+      // the ghost. Dropping `raycast` to a no-op is the cheap correct fix, and
+      // it belongs here rather than in `nodeMaterial` because it is a
+      // statement about focus, not about the material.
+      mesh.raycast = lit ? THREE.Mesh.prototype.raycast : () => {}
     }
 
     for (const [key, material] of linkMaterials.current) {
@@ -2251,14 +2294,38 @@ export default function InfluenceGraph({
     // change, because holding a constant pixel size is a function of the
     // camera distance, and the camera moves continuously — under the zoom
     // slider, the search flight, auto-orbit and the user's own drag.
+    // **Position comes from the layout datum, not from the mesh.**
+    //
+    // The obvious implementation — `meshes.current.get(id).getWorldPosition()`
+    // — renders a halo in the wrong place, and the reason is worth recording
+    // because it is a trap for anything else that reaches into that map for
+    // geometry. `meshes` is populated from inside `nodeThreeObject`, and
+    // three-forcegraph is free to rebuild its node objects; when it does, the
+    // map can end up holding a mesh the library never adopted, still sitting
+    // at its construction position. Measured 2026-08-19: with ESA 2010
+    // selected and plainly drawn near the left of the frame, the mesh this map
+    // returned for it reported a world position of exactly (0, 0, 0), and the
+    // halo dutifully drew a ring around the middle of the graph.
+    //
+    // The node datum is what the library itself reads to place everything —
+    // d3-force mutates `x`/`y`/`z` on these objects in place every tick — so
+    // it cannot disagree with what is on screen. The mesh is still consulted
+    // for the *colour*, where a stale copy is harmless: it carries the same
+    // family ink whichever generation it belongs to.
     const selectedId = focusRef.current?.selectedId
-    const selectedMesh = selectedId ? meshes.current.get(selectedId) : undefined
-    if (selectedMesh && selectedMesh.visible) {
-      const material = selectedMesh.material as NodeMaterial
-      setHaloTheme(halo, `#${material.color.getHexString()}`, view.blueprint)
+    const selectedNode = selectedId ? positionedById.current.get(selectedId) : undefined
+    if (selectedNode && Number.isFinite(selectedNode.x) && shownNode(selectedNode.id)) {
+      const mesh = meshes.current.get(selectedNode.id)
+      const material = mesh?.material as NodeMaterial | undefined
+      setHaloTheme(
+        halo,
+        material ? `#${material.color.getHexString()}` : colourForReport(selectedNode),
+        view.blueprint,
+      )
+      haloWorldPosition.current.set(selectedNode.x, selectedNode.y, selectedNode.z)
       placeSelectionHalo(
         halo,
-        selectedMesh.getWorldPosition(haloWorldPosition.current),
+        haloWorldPosition.current,
         camera.position,
         (FOV * Math.PI) / 360,
         size.height,

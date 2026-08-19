@@ -3,13 +3,34 @@ import type { JurisdictionLevel } from '../lib/types'
 import type { RimWeight } from '../lib/palette'
 
 /**
- * The node material: a standard lit sphere with a country-coloured rim.
+ * The node material: a standard lit sphere, and — in two cases only — a
+ * country-coloured rim.
  *
  * A sphere in a rotating 3D scene has no border. The equivalent is a **fresnel
  * rim** — brightness that rises where the surface turns away from the camera,
  * which is what an edge-lit object looks like and what the eye already reads as
  * an outline. It follows the silhouette from every angle for free, which a
  * drawn border could not do.
+ *
+ * **Rims came off the dark scene on 2026-08-19** (`drawRim`), and the reason
+ * is worth keeping rather than just deleting the code. Thomas's complaint was
+ * that nodes "become mostly border". He was right, and the mechanism is
+ * `rimPower` below: the exponent is `radius × 0.6`, so on a radius-2.2 node it
+ * was **1.32** — a near-linear tint smeared across the entire disc rather than
+ * a band at the silhouette. The rim only behaved like a border on the largest
+ * nodes. And because size *is* the authority encoding, small nodes always
+ * exist, so this was a channel that silently changed meaning with importance.
+ *
+ * But the rim was never the real fault. It was a **patch on the fill**: v2's
+ * palette spanned a 13× luminance range, the darkest nodes read as holes in
+ * the sky, and rims were added to rescue them. v3 flattens that range (see
+ * `SCOPE_COLOUR`), which is what made the rescue unnecessary and the removal
+ * possible. Removing rims without flattening the ramp first would have made
+ * things worse, not better.
+ *
+ * What survives, and the rule that governs it: **a rim is valid only where the
+ * interior is empty.** Hollow one-off instruments have no fill, and blueprint
+ * is ink on paper. Those two. Not orbs, which have the breath instead.
  *
  * Built with `onBeforeCompile` rather than as a custom ShaderMaterial, so the
  * material stays a real MeshStandardMaterial. Everything else in the renderer
@@ -64,6 +85,7 @@ function rimPower(radius: number): number {
 
 export function nodeMaterial({
   colour,
+  emissiveColour,
   rimColour,
   radius,
   emissive,
@@ -71,11 +93,33 @@ export function nodeMaterial({
   dimOpacity,
   dimEmissive,
   rimWeight = 'normal',
+  drawRim = false,
   hollow = false,
   orb = false,
 }: {
   colour: string
+  /**
+   * The colour the node *emits*, as distinct from the colour it *is*.
+   *
+   * They were the same thing until v3, and that was the inverted-glow bug:
+   * emitted light is `emissive × emissiveIntensity`, intensity is authority,
+   * so a bright fill out-glowed a dark one at equal authority — and under the
+   * old dark-at-the-top ramp that meant the least important nodes glowed
+   * hardest. Pass `glowInk(colour)` here for the dark scene and the product
+   * becomes proportional to authority alone. Blueprint passes the fill
+   * unchanged, because there the emissive floor is doing a different job
+   * entirely (pushing a white disc just past the paper tone) and bloom is off.
+   *
+   * Defaults to `colour`, which is the old behaviour, so this is opt-in.
+   */
+  emissiveColour?: string
   rimColour: string
+  /**
+   * Whether this node gets a fresnel rim at all — see the block comment above.
+   * Defaults to `false`, so a future call site that forgets it gets the
+   * no-rim scene rather than silently reintroducing the wash.
+   */
+  drawRim?: boolean
   radius: number
   emissive: number
   lit: boolean
@@ -115,7 +159,7 @@ export function nodeMaterial({
 }): NodeMaterial {
   const material = new THREE.MeshStandardMaterial({
     color: colour,
-    emissive: colour,
+    emissive: emissiveColour ?? colour,
     emissiveIntensity: lit ? emissive : dimEmissive,
     roughness: 0.4,
     metalness: 0.05,
@@ -127,8 +171,12 @@ export function nodeMaterial({
 
   // A hollow node's rim IS the node, so a family's 'none' is promoted to
   // 'normal' there rather than letting a styling rule erase the geometry.
+  // (No family carries 'none' since v3 — this survives as a guard, not as a
+  // live case. See `RIM_WEIGHT`.)
   const weight: RimWeight = hollow && rimWeight === 'none' ? 'normal' : rimWeight
-  const rimMax = weight === 'none' ? 0 : 1
+  // `drawRim` is the outer gate; the weight only decides *how heavily*, once
+  // the node is one of the two kinds that gets a rim at all.
+  const rimMax = !drawRim || weight === 'none' ? 0 : 1
   const rim = { value: (lit ? 1 : 0.07) * rimMax }
   material.userData = { rim, rimMax, litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1 }
 

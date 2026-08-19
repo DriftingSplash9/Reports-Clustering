@@ -69,7 +69,7 @@ import {
   ALL_SCOPES,
   BLUEPRINT_INK,
   COMMERCIAL_COLOUR,
-  COUNTRY_RIM,
+  FAMILY_INK,
   focusPalette,
   SCOPE_COLOUR,
   SCOPE_GROUPS,
@@ -1368,7 +1368,7 @@ function ChipBar({
         const on =
           !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
         const lit = anyFilter && on
-        const ink = (paper ? BLUEPRINT_INK : COUNTRY_RIM)[group.country] ?? 'var(--ink-label)'
+        const ink = (paper ? BLUEPRINT_INK : FAMILY_INK)[group.country] ?? 'var(--ink-label)'
         const open = openFamily === group.country
         const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
         return (

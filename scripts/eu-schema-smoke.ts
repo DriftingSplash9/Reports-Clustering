@@ -10,7 +10,7 @@ import {
   colourForReport,
   familyOf,
   isKnownCountry,
-  rimColourFor,
+  inkFor,
   scopeOf,
   countryLabelFor,
   UNCLASSIFIED_COLOUR,
@@ -39,14 +39,14 @@ const bogus = { country: 'XX', jurisdiction_level: 'federal' } as const
 
 check('scopeOf(Destatis)', scopeOf(destatis), 'EU:federal')
 check('scopeOf(Eurostat)', scopeOf(eurostat), 'EU:supranational')
-check('colour(Destatis)', colourForReport(destatis), '#53ce46')
-check('colour(Eurostat)', colourForReport(eurostat), '#96de73')
+check('colour(Destatis)', colourForReport(destatis), '#279860')
+check('colour(Eurostat)', colourForReport(eurostat), '#0c924f')
 check('colour(unmapped)', colourForReport(bogus), UNCLASSIFIED_COLOUR)
-check('rim(DE)', rimColourFor('DE'), '#aff4af')
-check('rim(EU)', rimColourFor('EU'), '#aff4af')
-check('rim(unmapped)', rimColourFor('XX'), UNCLASSIFIED_COLOUR)
+check('ink(DE)', inkFor('DE'), '#0c924f')
+check('ink(EU)', inkFor('EU'), '#0c924f')
+check('ink(unmapped)', inkFor('XX'), UNCLASSIFIED_COLOUR)
 check('label(DE)', countryLabelFor('DE'), 'Germany')
-check('label(PT, unlisted)', countryLabelFor('PT'), 'PT')
+check('label(ZZ, unlisted)', countryLabelFor('ZZ'), 'ZZ')
 
 console.log('\n--- validator guards ---')
 const base = {

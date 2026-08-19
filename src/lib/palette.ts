@@ -521,7 +521,7 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
  * An unmapped code falls to `INT` **structurally only** — it has to return one
  * of the four so the legend has somewhere to put it, and `INT` is the least
  * wrong bucket for "belongs to no system I know about". It does **not** get
- * `INT`'s colour: `colourForReport` and `rimColourFor` both test membership
+ * `INT`'s colour: `colourForReport` and `inkFor` both test membership
  * directly and return `UNCLASSIFIED_COLOUR`, precisely so an unmapped country is
  * visible rather than absorbed. Silently absorbing unknowns into a bucket is how
  * nine international bodies were Canadian for five sessions.
@@ -543,177 +543,231 @@ export function scopeOf(report: {
 }
 
 /**
- * **SUPERSEDED 2026-08-12 by palette v2** — the table below describes the v1
- * continent scheme this file no longer implements (tan US, azure Africa, SAO
- * family, light→dark ramps). Kept because its *reasoning* about hue gaps and
- * saturation splits still explains why the wheel is arranged the way it is;
- * for what is actually drawn, read `SCOPE_COLOUR` and `RIM_WEIGHT` below.
+ * **Palette v3, 2026-08-19.** Hue is the family; chroma is the jurisdiction
+ * ladder; luminance is held flat. Read this table with `FAMILY_INK` and
+ * `glowInk` below — the three of them are one system and tuning one alone
+ * will undo the others.
  *
- * **Continent redesign, 2026-08-05.** The single-country-per-hue-family scheme
- * (V0.12, revised again 2026-08-04 for the EU branch) hit its own limit the
- * moment a sixth political bloc showed up: nine families now share the wheel,
- * and nine cannot each get their own 40°+ gap the way three or four could.
- * Thomas's fix — one slice of the wheel **per continent**, political blocs
- * within a continent told apart by saturation rather than by a wholly separate
- * hue — is the same escape hatch this file already used once, for EU vs XEU,
- * generalised on purpose rather than special-cased a second time.
+ * **What v2 got wrong, measured rather than argued.** The v2 ramps ran
+ * DARK → LIGHT down the ladder, which spread the palette across a **13.1×**
+ * relative-luminance range (0.054 to 0.703). Two consequences followed, and
+ * both had been treated as separate problems for months:
  *
- * **Each family spans two or three hues internally**, same as before (V0.12's
- * lesson: a single 20°-wide gradient reads as one indistinguishable smear at
- * fit zoom). What changed is which political blocs share a family:
+ * 1. **The darkest nodes read as holes in the sky.** A national-level EU node
+ *    at Y = 0.054 against a Y = 0.003 background is a smudge. Rims were added
+ *    to rescue exactly those nodes — the rims were never the design, they were
+ *    a patch on this table. Flattening the ramp is what makes it possible to
+ *    take them off.
+ * 2. **The authority glow ran backwards.** `emissive` is the fill colour and
+ *    `emissiveIntensity` is authority, so emitted light is the product of the
+ *    two. Across a 13× fill range that product is dominated by the fill: a
+ *    worthless institutional node emitted roughly 3–4× a top-authority
+ *    national one. Bloom was picking out the *least* important nodes in the
+ *    graph, and had been since it was first tuned. See `glowInk`.
  *
- * | Family | Continent | Hue centre | Blocs inside it |
+ * **The v3 assignment.** Hues are spaced by how much of the corpus each family
+ * actually is — AFR 32.2%, EU 15.7%, US 11.4%, CA 10.2%, SA 9.3%, INT 6.1%,
+ * then ASIA 4.0%, NZ 3.8%, XEU 2.8%, AU 1.9%, IN 1.6%, CN 1.0%. Five families
+ * are 79% of the graph; the other seven are 15% between them. Big families get
+ * wide moats, small ones sit in the shoulders:
+ *
+ * | Family | Hue | Share | National |
  * |---|---|---|---|
- * | `CA` | North America | 340°→355° (red-brown) | Canada |
- * | `US` | North America | 24°→42° (tan/ochre) | United States (Mexico: reserved, unstaffed) |
- * | `EU` | Europe | 100°→158° (green→teal) | EU member states, full saturation |
- * | `XEU` | Europe | 114°→158° (same ramp, muted) | Non-EU Europe, low saturation |
- * | `ASIA` | Asia | 38°→54° (yellow-orange) | unstaffed — reserved |
- * | `SAO` | South Asia + Oceania | 275°→305° (red-violet) | unstaffed — reserved |
- * | `AFR` | Africa | 198°→234° (blue) | unstaffed — reserved, US's old territory |
- * | `SA` | South America | 90° (low-sat olive-grey) | unstaffed — reserved |
- * | `INT` | — stateless bodies, no continent | 264°→290° (violet) | IMF, OECD, NATO, BIS, UN, WTO… |
+ * | US | 0° | 11.4% | `#ff0000` — pure, with a 335°–25° moat |
+ * | *(BRICS ink)* | *48°* | — | reserved, belongs to no family |
+ * | SA | 88° | 9.3% | `#518e0c` |
+ * | AU | 118° | 1.9% | `#059500` |
+ * | EU | 150° | 15.7% | `#0c924f` |
+ * | XEU | 172° | 2.8% | `#00907c` |
+ * | INT | — | 6.1% | `#ecf0f7` — achromatic |
+ * | CA | 200° | 10.2% | `#1086c2` |
+ * | CN | 224° | 1.0% | `#4375ff` |
+ * | ASIA | 248° | 4.0% | `#7c67ff` |
+ * | NZ | 270° | 3.8% | `#a850ff` |
+ * | AFR | 296° | 32.2% | `#ca44d3` |
+ * | IN | 322° | 1.6% | `#f2009a` |
  *
- * **`CA` and `US` are the worked example for every future within-continent
- * split**, including `ASIA`, `SAO` and eventually `SA`: same hue *neighbourhood*
- * (0°–45°, "North America" reads as one warm brown band from a distance), two
- * distinct sub-ranges within it (CA red-leaning, US yellow-leaning) plus a
- * saturation gap (CA 58–70%, US 42–54%) so the two don't collapse into one
- * indistinguishable brown up close. `EU`/`XEU` is the same mechanism applied
- * to a single hue rather than a split range: identical ramp, `XEU` held at
- * roughly half `EU`'s saturation throughout.
+ * **Measured on the values below**: the eleven hued families' national steps
+ * span Y 0.211–0.215, a **1.02×** range, against v2's 13.1×. Across the whole
+ * ladder (national through institutional) the span is 0.211–0.333, 1.58× — and
+ * that residual is chroma falling away toward the neutral, not brightness
+ * being added.
  *
- * **The tightest gaps, stated so a future edit does not quietly close them:**
- * `US:institutional` (24°) to `ASIA:institutional` (38°) is 14° apart in hue
- * and held by a 32-point saturation gap (US ~48%, ASIA ~80%) — do not raise
- * `US`'s saturation or lower `ASIA`'s. `SAO:federal` (305°) to
- * `INT:institutional` (290°) is 15° and holds on saturation the same way
- * (SAO ≤64%, INT ≥73%). Do not let either creep toward the other's number.
+ * **Chroma is damped in proportion to how often a family appears.** A colour
+ * seen 397 times has to be calmer than one seen 12 times or the largest family
+ * shouts the graph down. AFR runs at 62% chroma, the 8–15% families at 85%,
+ * the small ones at full. That damping is why Africa reads as a field rather
+ * than as a wall.
  *
- * **`SA` sits at 90°, not in the cool grey `COMMERCIAL_COLOUR`/`UNCLASSIFIED_COLOUR`
- * occupy (≈220°).** It was drafted there first and nearly collided with both —
- * `COMMERCIAL_COLOUR` is `#8b93a4` (h=221°, s=12%, l=59%) and the first `SA`
- * draft was `#8a99a8` (h=210°, s=15%, l=60%), close enough to be the same grey
- * on a real display. 90° is the genuine free gap between `ASIA`'s warm end and
- * `EU`'s green start, and low saturation there reads as a warm sage-grey
- * rather than the cool slate `COMMERCIAL`/`UNCLASSIFIED` already own.
+ * **These shares are an input, and they will move.** They were counted at
+ * 1 250 nodes. The staged Grok archive is another 1 999 and is heavily Latin
+ * America and Asia — importing it roughly doubles SA and ASIA and materially
+ * changes AFR's share. Thomas chose to build this now and re-damp afterwards,
+ * with eyes open; when the import lands, re-count and re-damp rather than
+ * assuming these numbers still hold.
+ *
+ * **The v2 docstring that used to sit here** described the v1 continent scheme
+ * that v2 itself had already replaced, and had been stale for a full palette
+ * generation. It is not carried forward a second time; its one durable idea —
+ * that families sharing a continent are told apart within a hue neighbourhood
+ * rather than by separate hues — is now expressed directly by EU/XEU sitting
+ * 22° apart and by CA taking the US antipode.
  */
 export const SCOPE_COLOUR: Record<string, string> = {
-  // Every family ramp runs DARK → LIGHT down the ladder (palette v2): the
-  // national level is the darkest shade, institutional the lightest — Thomas's
-  // order, kept. The FLOORS were lifted in round 5 (his screenshots, his
-  // verdict): the original darkest steps sat within a whisker of the #05070d
-  // background, so the most foundational nodes in the graph read as holes in
-  // the sky. Same order, same hues, floor raised far enough that a national
-  // node is unmistakably a node.
+  // Stateless bodies — ACHROMATIC, and off the colour wheel entirely.
+  //
+  // Three reasons, and it solves a problem nobody asked it to. It is
+  // semantically exact: the palette's axis is *which country*, and a stateless
+  // body has no position on that axis, so the absence of hue is the honest
+  // mark. It is continuous with what was already approved — INT's family cue
+  // was a bold white rim, and with rims gone the rim simply becomes the fill.
+  // And it resolves the AFR/INT collision for free: those two have been a
+  // "known tight spot, accepted with eyes open" (deep violet against lighter
+  // violet, told apart by the rim) since palette v2, and the tiebreak was
+  // about to disappear. INT vacating the purple region is what lets Africa
+  // keep its hue.
+  //
+  // It also returns a full 60° of wheel to the eleven hued families, which at
+  // roughly 25° apart they need.
+  'INT:international': '#ecf0f7',
+  'INT:supranational': '#d3d8e2',
+  'INT:federal': '#d3d8e2',
+  'INT:provincial': '#bac0cd',
+  'INT:municipal': '#bac0cd',
+  'INT:institutional': '#a1a8b8',
 
-  // Canada — reds, unchanged hue, reversed ramp.
-  'CA:federal': '#963050',
-  'CA:provincial': '#b53f63',
-  'CA:municipal': '#d0607e',
-  'CA:institutional': '#e896ab',
+  // United States — pure red, and only the United States.
+  // `#ff0000` exactly, with a moat: no other family sits in hues 335°–25°.
+  // That is what costs the palette its whole warm quarter, and it is why CA,
+  // AU, NZ, CN and IN all had to move. `provincial` still means "state".
+  'US:federal': '#ff0000',
+  'US:provincial': '#d16a6a',
+  'US:municipal': '#b98585',
+  'US:institutional': '#aa9797',
+  'US:supranational': '#ff0000',
+  'US:international': '#ecf0f7',
 
-  // United States — "255 blue" with a bold red rim (Thomas). The old tan band
-  // is gone; the US now wears its own flag: vivid ultramarine fill, red ring.
-  // `provincial` still means "state".
-  'US:federal': '#1330e0',
-  'US:provincial': '#2f55ee',
-  'US:municipal': '#5a80f4',
-  'US:institutional': '#8fabf8',
+  // Canada — cyan, at 200°, a full 160° from the US and the largest
+  // separation the wheel can give. Losing red is the biggest identity change
+  // in this palette and it is unavoidable: CA/US is the one pair this file
+  // exists to keep apart ("Statistics Canada and the Bureau of Labor
+  // Statistics would render identically"), so rather than crowd Canada up
+  // against the moat it gets the antipode.
+  'CA:federal': '#1086c2',
+  'CA:provincial': '#3b91bd',
+  'CA:municipal': '#7099ad',
+  'CA:institutional': '#909ea4',
+  'CA:supranational': '#1086c2',
+  'CA:international': '#ecf0f7',
 
-  // Australia — orange, its own family since the SAO split.
-  'AU:federal': '#b05a10',
-  'AU:provincial': '#cf7318',
-  'AU:municipal': '#eb9026',
-  'AU:institutional': '#f7b45f',
+  // European Union — green at 150°, essentially where it already was.
+  // Five levels rather than four, so the ramp is sampled at five points.
+  'EU:supranational': '#0c924f',
+  'EU:federal': '#279860',
+  'EU:provincial': '#469d72',
+  'EU:municipal': '#68a084',
+  'EU:institutional': '#8ba096',
+  'EU:international': '#ecf0f7',
 
-  // New Zealand + Realm + Compact states — brown, bold white rim.
-  'NZ:federal': '#6b4630',
-  'NZ:provincial': '#85583d',
-  'NZ:municipal': '#a1724f',
-  'NZ:institutional': '#c09873',
+  // Europe (non-EU) — teal at 172°, riding alongside EU's green:
+  // "European, but not the EU" said as a neighbouring hue rather than as a
+  // separate idea. Replaces the old saturation-split, which needed the rims
+  // to be readable and therefore cannot survive them.
+  'XEU:federal': '#00907c',
+  'XEU:provincial': '#24998a',
+  'XEU:municipal': '#52a095',
+  'XEU:institutional': '#87a09d',
+  'XEU:supranational': '#00907c',
+  'XEU:international': '#ecf0f7',
 
-  // Stateless bodies — violet, now with a BOLD WHITE rim as the family cue.
-  // Distinguished from AFR's violet by register (INT lighter, red-leaning)
-  // and above all by the rim: bold white here, none at all there.
-  'INT:international': '#8a4fe8',
-  'INT:supranational': '#a35fee',
-  'INT:institutional': '#c47ff0',
-  'INT:federal': '#8a4fe8',
-  'INT:provincial': '#8a4fe8',
-  'INT:municipal': '#8a4fe8',
+  // Africa — violet at 296°, near-unchanged, and it keeps its hue only
+  // because INT vacated the purple region (see below). At 32.2% of the corpus
+  // this is the family whose chroma damping matters most: undamped, a third of
+  // the graph shouts.
+  'AFR:federal': '#ca44d3',
+  'AFR:provincial': '#b96dbe',
+  'AFR:municipal': '#ac87ae',
+  'AFR:institutional': '#a598a6',
+  'AFR:supranational': '#ca44d3',
+  'AFR:international': '#ecf0f7',
 
-  // European Union — greens, reversed ramp, THICK LIME rim.
-  'EU:supranational': '#10603c',
-  'EU:federal': '#177a4a',
-  'EU:provincial': '#1f9c55',
-  'EU:municipal': '#3fc06a',
-  'EU:institutional': '#8fe9a2',
-  'EU:international': '#8a4fe8',
+  // South America — olive-lime at 88°. The old sage was the same hue at
+  // almost no chroma; this is that hue given a voice, which it has earned at
+  // 9.3% of the corpus.
+  'SA:federal': '#518e0c',
+  'SA:provincial': '#66972f',
+  'SA:municipal': '#7d9d5a',
+  'SA:institutional': '#959f8a',
+  'SA:supranational': '#518e0c',
+  'SA:international': '#ecf0f7',
 
-  // Non-EU Europe — slate/steel blue fill, GREEN rim (the EU family's own rim
-  // colour, so "European" stays readable on the ring — Thomas's design).
-  // Deliberately muted against the US's vivid ultramarine; the rims (green vs
-  // bold red) are the tiebreak where the hues near each other.
-  'XEU:federal': '#3a4d85',
-  'XEU:provincial': '#4c63a8',
-  'XEU:municipal': '#6a83c9',
-  'XEU:institutional': '#93a8dd',
-  'XEU:supranational': '#3a4d85',
-  'XEU:international': '#8a4fe8',
+  // Australia — green at 118°. Orange is inside the US moat.
+  'AU:federal': '#059500',
+  'AU:provincial': '#299d25',
+  'AU:municipal': '#57a454',
+  'AU:institutional': '#89a289',
+  'AU:supranational': '#059500',
+  'AU:international': '#ecf0f7',
 
-  // Africa — deep violet, NO rim (Thomas: "Africa can be violet with no rim
-  // color, I think that would do"). Darker and bluer than INT's violet; the
-  // absence of any rim is itself the family cue.
-  'AFR:federal': '#4d2a94',
-  'AFR:provincial': '#6a3fbd',
-  'AFR:municipal': '#8a5cd9',
-  'AFR:institutional': '#ab84ea',
-  'AFR:supranational': '#4d2a94',
-  'AFR:international': '#8a4fe8',
+  // New Zealand + Realm + Compact states — violet-blue at 270°.
+  // Brown cannot survive a luminance floor: darkened it is mud, lightened it
+  // is tan, and neither is a hue.
+  'NZ:federal': '#a850ff',
+  'NZ:provincial': '#a670dd',
+  'NZ:municipal': '#a486c1',
+  'NZ:institutional': '#a398ae',
+  'NZ:supranational': '#a850ff',
+  'NZ:international': '#ecf0f7',
 
-  // China — yellow, reserved unstaffed for the RU/CN branch.
-  'CN:federal': '#9a7a08',
-  'CN:provincial': '#c39c10',
-  'CN:municipal': '#e3bc17',
-  'CN:institutional': '#f5da5c',
-  'CN:supranational': '#9a7a08',
-  'CN:international': '#8a4fe8',
+  // China — blue at 224°, NOT yellow. Yellow is the BRICS group ink and
+  // belongs to no family; if China kept it, China would look like "the BRICS
+  // one" in every mode while the other four members did not.
+  'CN:federal': '#4375ff',
+  'CN:provincial': '#6686db',
+  'CN:municipal': '#8192be',
+  'CN:institutional': '#959bac',
+  'CN:supranational': '#4375ff',
+  'CN:international': '#ecf0f7',
 
-  // Asia (rest) — teal, reserved unstaffed.
-  'ASIA:federal': '#14706a',
-  'ASIA:provincial': '#1b938a',
-  'ASIA:municipal': '#2bb5a8',
-  'ASIA:institutional': '#6cd9cd',
-  'ASIA:supranational': '#14706a',
-  'ASIA:international': '#8a4fe8',
+  // Asia (rest) — indigo at 248°. RU, AE, IL, SG.
+  'ASIA:federal': '#7c67ff',
+  'ASIA:provincial': '#897be0',
+  'ASIA:municipal': '#938cc4',
+  'ASIA:institutional': '#9c9aaf',
+  'ASIA:supranational': '#7c67ff',
+  'ASIA:international': '#ecf0f7',
 
-  // India — magenta, reserved unstaffed (the slice the SAO split freed).
-  'IN:federal': '#8c2a60',
-  'IN:provincial': '#ab3577',
-  'IN:municipal': '#ca5595',
-  'IN:institutional': '#e491bf',
-  'IN:supranational': '#8c2a60',
-  'IN:international': '#8a4fe8',
+  // India — magenta at 322°, near-unchanged.
+  'IN:federal': '#f2009a',
+  'IN:provincial': '#d85baa',
+  'IN:municipal': '#bd7fa7',
+  'IN:institutional': '#ac96a4',
+  'IN:supranational': '#f2009a',
+  'IN:international': '#ecf0f7',
 
-  // South America — sage, reversed ramp.
-  'SA:federal': '#59654e',
-  'SA:provincial': '#75826a',
-  'SA:municipal': '#94a188',
-  'SA:institutional': '#b5c1ab',
-  'SA:supranational': '#59654e',
-  'SA:international': '#8a4fe8',
 }
 
 /**
  * A country in the data with no entry in `COUNTRY_FAMILY`.
  *
  * Should be unreachable — `npm run validate` errors on it — and is drawn in a
- * flat mid-grey if it ever is, so it reads as "unclassified" rather than
- * quietly joining a family. Distinct from `COMMERCIAL_COLOUR`, which is a
- * *decision*; this one is the absence of one.
+ * flat grey if it ever is, so it reads as "unclassified" rather than quietly
+ * joining a family. Distinct from `COMMERCIAL_COLOUR`, which is a *decision*;
+ * this one is the absence of one.
+ *
+ * **Pushed below the band in v3** (was `#6b7280`, Y = 0.167). INT is
+ * achromatic now, so the palette has three neutrals in play and they can no
+ * longer be told apart by hue — only by lightness. The ladder, top to bottom:
+ * INT national Y = 0.869, INT institutional Y = 0.390, `COMMERCIAL_COLOUR`
+ * Y = 0.118, this Y = 0.056. **Bright neutral means stateless body; dim
+ * neutral means outside the classification.** Keep that ordering intact.
+ *
+ * The floor is set against the horizon band (`HORIZON_COLOUR`, Y = 0.017),
+ * not against `SCENE_BACKGROUND` (Y = 0.003) — with the sky on, part of the
+ * background a node can sit against is far brighter than space, and a floor
+ * picked against space vanishes into the sky instead.
  */
-export const UNCLASSIFIED_COLOUR = '#6b7280'
+export const UNCLASSIFIED_COLOUR = '#3f434d'
 
 export const SCOPE_LABEL: Record<string, string> = {
   'CA:federal': 'Federal',
@@ -933,8 +987,15 @@ export function focusPalette(scopes: Scope[]): Record<string, string> {
  * anywhere on that axis, and grey says "outside this classification", which is
  * exactly what it is. It also matches the fact that these nodes are outside the
  * authority calculation.
+ *
+ * **Pushed below the band in v3** (was `#8b93a4`, Y = 0.290), for the reason
+ * spelled out on `UNCLASSIFIED_COLOUR`: with INT achromatic, this grey used to
+ * sit *between* INT's institutional step (0.390) and its national one (0.869)
+ * and would have read as a mid-weight stateless body. It now sits below both,
+ * and above `UNCLASSIFIED_COLOUR` — a decision is dimmer than a stateless
+ * body and brighter than the absence of a decision.
  */
-export const COMMERCIAL_COLOUR = '#8b93a4'
+export const COMMERCIAL_COLOUR = '#5a616e'
 
 /** Colour for a report. The single source of truth for node fill. */
 export function colourForReport(report: {
@@ -951,51 +1012,148 @@ export function colourForReport(report: {
 }
 
 /**
- * Rim colour, still keyed to country alone.
+ * **`FAMILY_INK` — one colour per family, and the single source of ink.**
  *
- * Redundant with the fill now that hue carries country, and kept for exactly
- * that reason: a second cue on the silhouette makes the family readable at
- * distances where the fill is three pixels across, and redundant encoding is
- * the cheapest discriminability there is. Pulled from the fill's own family so
- * it reinforces rather than introducing a third thing to learn.
+ * This is v3's extraction of what v2 called `COUNTRY_RIM`, and the rename is
+ * the point. That table was doing three unrelated jobs under a name that
+ * described only the first: it coloured the fresnel rim, it coloured every
+ * edge and pulse in the graph, and it coloured the legend chips in the
+ * sidebar. Rims are now gone from the dark scene (see `nodeMaterial`) — and
+ * had the edges still been reading their colour out of a table called
+ * `COUNTRY_RIM`, deleting rims would have taken the edges with them.
+ *
+ * So: this is the family's ink, full stop. Edges are drawn in it, pulses are
+ * drawn in it, legend chips are drawn in it, and the two places a rim still
+ * survives — hollow one-off instruments, where the rim IS the node, and
+ * blueprint, where the whole drawing is ink on paper — draw in it too.
+ *
+ * The values are each family's **national step** from `SCOPE_COLOUR`, not a
+ * separate set of hand-picked light tints the way v2's rims were. An edge
+ * between two EU reports is now EU green rather than a lime that appears
+ * nowhere else on screen. v2 needed the tints because a rim is a few pixels of
+ * silhouette and had to shout; an edge at 1.6px does not (see
+ * `LINK_WIDTH_SCALE` — edges used to be drawn 0.08px wide, which is most of
+ * why they needed such bright ink).
+ *
+ * Y = 0.211–0.215 across the eleven hued families, so no family's edges are
+ * brighter than another's. INT is the deliberate exception at Y = 0.869: a
+ * stateless body's ink is near-white because its fill is.
  */
-export const COUNTRY_RIM: Record<string, string> = {
-  CA: '#f0a8b4',
-  // Bold red on blue — the US flag on every US node (Thomas's design).
-  US: '#e03131',
-  AU: '#ffc98f',
-  // Bold white — "NZ needs a bolder rim too".
-  NZ: '#ffffff',
-  // Bold white on violet, the stateless-bodies cue.
-  INT: '#ffffff',
-  // Thick lime — "The eu needs a thicker rim if you can, use lime green".
-  EU: '#b6f542',
-  // The EU family's *old* soft green: still green (European on the ring, per
-  // Thomas's XEU spec) but visibly not the EU's own lime.
-  XEU: '#aff4af',
-  // Africa's ring is BACK (round 5). The rimless experiment was Thomas's own
-  // spec and his own screenshots ended it: violet fills with no ring on a
-  // near-black sky simply vanish — and once edges draw in rim ink, a rimless
-  // family would have invisible edges too. Pale lavender, same contrast job
-  // as every other family's ring.
-  AFR: '#cbb2f5',
-  CN: '#ffec9e',
-  ASIA: '#a8ece2',
-  IN: '#ffb3dc',
-  SA: '#d1d7cc',
+export const FAMILY_INK: Record<ColourFamily, string> = {
+  CA: '#1086c2',
+  US: '#ff0000',
+  AU: '#059500',
+  NZ: '#a850ff',
+  INT: '#ecf0f7',
+  EU: '#0c924f',
+  XEU: '#00907c',
+  AFR: '#ca44d3',
+  CN: '#4375ff',
+  ASIA: '#7c67ff',
+  IN: '#f2009a',
+  SA: '#518e0c',
 }
 
 /**
- * How heavily each family's rim is drawn — palette v2's second channel.
+ * The family ink for a country, total by construction.
  *
- * 'bold' is a wide, strong ring (US red, INT and NZ white), 'thick' a widened
- * one (EU lime), 'none' switches the ring off entirely (Africa — the absence
- * IS the cue), 'normal' is the classic thin fresnel highlight. Consumed by
- * `nodeMaterial` via `rimWeightFor`; hollow one-off nodes override 'none'
- * upward because their rim is the whole node.
+ * Member states take the EU family ink rather than one each — see the note on
+ * `ColourFamily`. A country with no family at all gets `UNCLASSIFIED_COLOUR`
+ * instead of being absorbed, which is the whole reason this is a function and
+ * not a `Record<Country, string>`: an open country set cannot be a total
+ * record, and the old type only looked total because the union was closed.
+ */
+export function inkFor(country: Country): string {
+  if (!isKnownCountry(country)) return UNCLASSIFIED_COLOUR
+  return FAMILY_INK[familyOf(country)] ?? UNCLASSIFIED_COLOUR
+}
+
+/**
+ * The luminance every node's *emissive* channel is held at, whatever its hue.
+ *
+ * **This is the fix for the inverted authority glow.** A node's emitted light
+ * is `emissive colour × emissiveIntensity`, intensity is
+ * `0.3 + size_score × 0.62`, and emissive was simply the fill. Under v2's 13×
+ * fill range that product was dominated by the fill, so bloom lit whichever
+ * nodes happened to be painted brightest — which, because the ramp ran
+ * dark-at-the-top, meant the *least* authoritative ones. ESA 2010, the single
+ * most-depended-upon report in the corpus, was painted `#10603c` at Y = 0.054
+ * and emitted less light than an institutional node nobody cites.
+ *
+ * Normalising the emissive colour to a constant luminance makes the product
+ * proportional to intensity alone, so **glow becomes a pure second reading of
+ * authority** — which is what `view.ts` has claimed it was for five sessions.
+ *
+ * **0.213 is not a free choice: it is pure red's ceiling.** `#ff0000` has a
+ * relative luminance of 0.2126 and cannot be scaled above it, and the US is
+ * pure red by decision. A higher reference would leave every US node emitting
+ * short of every other family at the same authority — the inversion back
+ * again, in miniature. So the reference is set at what the least luminous hue
+ * in the palette can actually carry, and every other family is scaled down to
+ * meet it.
+ *
+ * Consequence to expect: total emitted light across the scene is lower than
+ * v2's, so the bloom threshold had to come down with it — see
+ * `BLOOM_THRESHOLD_MIN` in view.ts. Do not raise this to recover brightness;
+ * lower the threshold instead, or red silently falls out of the encoding.
+ */
+export const GLOW_REFERENCE_Y = 0.213
+
+/**
+ * A fill colour scaled to `GLOW_REFERENCE_Y`, for use as the emissive channel.
+ *
+ * Scaling happens in **linear** light, not on the sRGB bytes — the whole point
+ * is to equalise perceived emission, and sRGB is not proportional to it.
+ * Channels clamp at 1, which is why a hue already at or below the reference
+ * (pure red, exactly) comes back unchanged rather than impossibly boosted.
+ */
+export function glowInk(colour: string): string {
+  const hex = colour.replace('#', '')
+  if (hex.length !== 6) return colour
+  const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)
+  const toSrgb = (c: number) => (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055)
+  const linear = [0, 2, 4].map((i) => toLinear(parseInt(hex.slice(i, i + 2), 16) / 255))
+  const luminance = 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+  if (luminance <= 0) return colour
+  const scale = GLOW_REFERENCE_Y / luminance
+  return `#${linear
+    .map((c) => Math.round(Math.min(1, Math.max(0, toSrgb(Math.min(1, c * scale)))) * 255)
+      .toString(16)
+      .padStart(2, '0'))
+    .join('')}`
+}
+
+/**
+ * The rim-weight vocabulary. See `RIM_WEIGHT` for where a rim still exists.
  */
 export type RimWeight = 'none' | 'normal' | 'thick' | 'bold'
 
+/**
+ * How heavily a family's rim is drawn — **and where a rim still exists at
+ * all.**
+ *
+ * In v2 this was one of two always-on family channels, applied to every node
+ * in the scene. In v3 the fill carries the family on its own and rims are gone
+ * from the dark scene entirely (see `nodeMaterial`), which leaves this table
+ * governing exactly two survivors:
+ *
+ * - **Hollow one-off instruments**, where the rim *is* the node — there is no
+ *   fill to carry anything, so the ring has to.
+ * - **Blueprint**, where the whole drawing is ink on paper and a pale disc has
+ *   no fill channel either.
+ *
+ * Both are cases where the interior is empty. That is the rule: **a rim is
+ * valid only where there is no coloured fill to read.** It is not a decorative
+ * option to be switched back on.
+ *
+ * 'bold' is a wide, strong ring (US, INT, NZ), 'thick' a widened one (EU),
+ * 'normal' the classic thin fresnel highlight. 'none' — Africa's, in v2 —
+ * is no longer used by any family: with rims confined to hollow nodes, a
+ * family-level 'none' would mean a fifth of African one-off instruments
+ * rendering as nothing at all, and `nodeMaterial` already had to special-case
+ * a promotion to work around exactly that. The special case is gone with the
+ * value that needed it.
+ */
 export const RIM_WEIGHT: Record<ColourFamily, RimWeight> = {
   CA: 'normal',
   US: 'bold',
@@ -1011,54 +1169,49 @@ export const RIM_WEIGHT: Record<ColourFamily, RimWeight> = {
   SA: 'normal',
 }
 
-/** Rim weight for a country, total by construction like `rimColourFor`. */
+/** Rim weight for a country, total by construction like `inkFor`. */
 export function rimWeightFor(country: Country): RimWeight {
   return RIM_WEIGHT[familyOf(country)] ?? 'normal'
 }
 
 /**
  * The family inks for Blueprint mode — the same one-ink-per-family idea, in
- * dark, because the night palette's light rims vanish on paper. Approved
- * round 5 ("Blueprint mode" over a naive invert), built round 9. Each ink is
- * the family's rim pulled down to drawing-ink darkness; NZ's and INT's whites
- * become their fills' own dark registers, since white-on-paper is nothing.
+ * dark, because the night palette's light inks vanish on paper. Approved
+ * round 5 ("Blueprint mode" over a naive invert), built round 9.
+ *
+ * **Rebuilt for v3 and, like `FAMILY_INK`, normalised.** Each ink is its
+ * family's `FAMILY_INK` scaled in linear light to Y = 0.085 — the same
+ * technique `glowInk` uses, applied to a different target. Doing it by hand
+ * the obvious way (drop each hue to a fixed HSL lightness) gave a table
+ * spanning Y 0.025–0.244, a ten-fold range: Asia's indigo came out as near-
+ * black while Australia's green came out mid-tone. On paper that reads as some
+ * families drawn in pencil and others in marker, which is not a channel
+ * anybody chose. Equal luminance is what makes them read as one pen.
+ *
+ * INT is the exception again and in the opposite direction: white-on-paper is
+ * nothing, so a stateless body draws in graphite.
  */
 export const BLUEPRINT_INK: Record<ColourFamily, string> = {
-  CA: '#a82446',
-  US: '#c22525',
-  AU: '#b25a08',
-  NZ: '#6b4a33',
-  INT: '#7a3fe0',
-  EU: '#3f8a14',
-  XEU: '#3a5290',
-  AFR: '#6a3fbd',
-  CN: '#a5820a',
-  ASIA: '#12756c',
-  IN: '#b03078',
-  SA: '#697a58',
+  CA: '#075781',
+  US: '#aa0000',
+  AU: '#026100',
+  NZ: '#6e32aa',
+  INT: '#4a4f5a',
+  EU: '#055f32',
+  XEU: '#005e50',
+  AFR: '#852a8b',
+  CN: '#294caa',
+  ASIA: '#5042aa',
+  IN: '#a10065',
+  SA: '#335d05',
 }
 
-/** Blueprint ink for a country — total, like `rimColourFor`. */
+/** Blueprint ink for a country — total, like `inkFor`. */
 export function blueprintInkFor(country: Country): string {
   if (!isKnownCountry(country)) return '#5a6478'
   return BLUEPRINT_INK[familyOf(country)] ?? '#5a6478'
 }
 
-/**
- * Rim colour for a country, total by construction.
- *
- * Member states take the EU family rim rather than one each — see the note on
- * `ColourFamily`. A country with no family at all gets `UNCLASSIFIED_COLOUR`
- * instead of being absorbed, which is the whole reason this is a function now
- * and not a `Record<Country, string>`: an open country set cannot be a total
- * record, and the old type only looked total because the union was closed.
- */
-export function rimColourFor(country: Country): string {
-  const own = COUNTRY_RIM[country]
-  if (own) return own
-  if (!isKnownCountry(country)) return UNCLASSIFIED_COLOUR
-  return COUNTRY_RIM[familyOf(country)] ?? UNCLASSIFIED_COLOUR
-}
 
 /**
  * Display name for a country code.

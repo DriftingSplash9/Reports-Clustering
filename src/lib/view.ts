@@ -194,9 +194,25 @@ export const PAPER_DIM_RIM_FACTOR = 0.25
  * contained: glow becomes a second reading of authority instead of atmosphere.
  * Below about 0.15 most of the graph blooms, apparent size flattens out, and
  * the encoding the whole project rests on stops working.
+ *
+ * **Lowered 0.26/0.44 → 0.17/0.32 in v3, 2026-08-19, and it had to be.** The
+ * 0.26 was tuned against v2's emissive channel, where emitted light was the
+ * fill colour times authority and fills ran up to Y = 0.703. v3 normalises
+ * every node's emissive to Y = 0.213 (`glowInk`), which is what makes glow a
+ * reading of authority at all — but it also cuts the brightest emission in the
+ * scene by roughly a third. Left at 0.26 the old threshold would have sat
+ * above the new ceiling and bloom would have gone dark again, which is exactly
+ * the five-session bug described above, arrived at from the opposite
+ * direction. The pair keeps its old span; only the range moved.
+ *
+ * **The one node class this does not govern is INT.** Its fill is near-white
+ * by design (achromatic = stateless, see `SCOPE_COLOUR`), so it is bright
+ * before any emission is added and blooms on lit luminance rather than on
+ * authority. That is a known, deliberate exception in the same family as
+ * BRICS yellow — not a tuning failure, and not fixable from this constant.
  */
-export const BLOOM_THRESHOLD_MIN = 0.26
-export const BLOOM_THRESHOLD_MAX = 0.44
+export const BLOOM_THRESHOLD_MIN = 0.17
+export const BLOOM_THRESHOLD_MAX = 0.32
 
 /**
  * Every constant governing how focus looks, in one place, because they are only
@@ -221,16 +237,43 @@ export const BLOOM_THRESHOLD_MAX = 0.44
  * Neither is zero, for the reason in the note above: the out-of-focus graph is
  * the context that makes a focused chain mean anything.
  */
-// Deepened 0.15/0.03 → 0.09/0.012 in round 8. The old measurement ("dimming
-// is not the lever — there is nothing left to take away") was true of the old
-// flat spheres, and the bold-rim system quietly invalidated it: rims add
-// alpha at the silhouette even on a dimmed node, so after palette v2 a
-// "dimmed" graph still read as a wall of bright rings and tracing lost its
-// contrast (Thomas: "the built from view... doesn't show much"). The rim dim
-// factor in nodeVisuals dropped alongside these, which is where most of the
-// recovered darkness actually comes from.
-export const DIM_NODE_OPACITY = 0.09
-export const DIM_NODE_EMISSIVE = 0.012
+// Deepened 0.15/0.03 → 0.09/0.012 in round 8, and **put back to 0.16/0.03 in
+// v3, 2026-08-19** — because round 8's reason has been deleted.
+//
+// The history is worth keeping, because these numbers have now been wrong in
+// both directions for the same underlying reason. The original measurement
+// ("dimming is not the lever — there is nothing left to take away") was true
+// of the old flat spheres. The bold-rim system quietly invalidated it: rims
+// add alpha at the silhouette even on a dimmed node, so a "dimmed" graph still
+// read as a wall of bright rings and tracing lost its contrast (Thomas: "the
+// built from view... doesn't show much"). Round 8 answered that by taking the
+// fill down to 0.09 — compensating in the fill channel for something the rim
+// channel was doing.
+//
+// v3 removes rims from the dark scene outright, so that compensation is now a
+// debt: at 0.09 with no rim there is nothing left at the silhouette either,
+// and the out-of-focus graph stops being legible as structure — which is the
+// thing the note above says it must never stop being. The shape of the whole
+// graph is the context that makes a traced cone mean anything.
+//
+// **Landed at 0.13, not the 0.16 the reasoning above first suggested**, and
+// the correction is the interesting part. Restoring the pre-rim 0.15 assumed
+// the only thing that had changed was the missing rim. It was not: v3's fills
+// are flat at Y ≈ 0.21 where v2's ran up to 0.70, so a *lit* node is now
+// dimmer than it used to be at the same time as the dimmed one got brighter,
+// and the contrast that tracing depends on is the ratio of the two. Rendered
+// at 0.16 the traced chain stopped standing out from the graph at all; at 0.10
+// it stood out and the rest of the graph stopped reading as structure. 0.13
+// was picked off a three-way render of the same trace and is the one number
+// here most worth moving by eye — a tenth either way is a legitimate taste
+// difference, not a bug.
+//
+// Retune it against `DIM_LINK_OPACITY`, never alone. Most of what made 0.16
+// look wrong the first time was actually the edges: they are twenty times
+// wider than they were, so the dimmed *lines* were doing the crowding and the
+// node number took the blame.
+export const DIM_NODE_OPACITY = 0.13
+export const DIM_NODE_EMISSIVE = 0.03
 export const DIM_LINK_COLOUR = '#1b2437'
 
 /**
@@ -245,8 +288,18 @@ export const DIM_LINK_COLOUR = '#1b2437'
 // brighter than the fills the lines used to blend, so the same opacity read
 // louder. Trunks (stacked parallel edges) get their own per-material lift on
 // top of this — see litOpacity on GradientLinkMaterial.
-export const LINK_OPACITY = 0.17
-export const DIM_LINK_OPACITY = 0.07
+//
+// **Dropped again, 0.17 → 0.13, and the dim 0.07 → 0.03, in v3.** Both of
+// those numbers were tuned against a line drawn **0.08 px** wide — a line that
+// needed every scrap of opacity it could get merely to exist (see
+// `LINK_WIDTH_SCALE` in InfluenceGraph for how that happened). At 1.6 px the
+// same opacity is a solid stroke, and the note above about pipes-with-beads
+// stops being a caution and becomes a description. The dim value falls
+// proportionally further because it moved from invisible-by-accident to
+// clearly drawn: at 0.07 and full width the out-of-focus graph competed with
+// the traced chain instead of sitting behind it.
+export const LINK_OPACITY = 0.13
+export const DIM_LINK_OPACITY = 0.045
 
 export const ZOOM_MIN = 0.25
 export const ZOOM_MAX = 2.6

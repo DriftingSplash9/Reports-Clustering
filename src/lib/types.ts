@@ -465,7 +465,7 @@ export type Country = 'CA' | 'US' | 'INT' | 'EU' | (string & {})
  * international body in the graph was recorded as Canadian for five sessions and
  * nothing caught it, because nothing rendered the field. The replacement guard
  * is not the type system — it is a `validate-data` rule that errors on any
- * country with no palette entry, backed by `colourForReport` and `rimColourFor`
+ * country with no palette entry, backed by `colourForReport` and `inkFor`
  * both falling to a flat grey rather than to a family. **If you add a country to
  * the data, add it to `COUNTRY_FAMILY` in palette.ts in the same commit**; the
  * validator will fail the build if you forget, and the node renders as

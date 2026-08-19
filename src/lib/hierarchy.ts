@@ -141,7 +141,7 @@ export function resolveId(
  * A synthetic node standing in for every currently-collapsed report in one
  * family. Extends `ScoredReport` rather than replacing it so every existing
  * consumer — `compile`/`applyFilter`, `buildFocusIndex`/`computeFocus`,
- * `colourForReport`/`rimColourFor`, the hover card — needs zero
+ * `colourForReport`/`inkFor`, the hover card — needs zero
  * special-casing; only code that specifically wants the membership list
  * needs to know `OrbNode` exists at all.
  */
