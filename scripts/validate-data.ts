@@ -7,6 +7,7 @@
  */
 import { dependencies, droppedNotes, loadIssues, relations, reports } from '../src/data'
 import {
+  DOMAINS,
   DROPPED_LEAD_REASONS,
   DROPPED_REASONS,
   RELATION_TYPES,
@@ -381,6 +382,65 @@ if (loadIssues.duplicateRelations.length) {
   console.log('  ! exact duplicate relations, dropped:')
   for (const r of loadIssues.duplicateRelations) console.log(`      ${r}`)
 }
+/**
+ * Domains — the seventh closed union, and the one that had no check at all.
+ *
+ * `Domain` is cast, not parsed, exactly like the other six. Unlike the others it
+ * had no runtime guard here, so an off-union tag reached the renderer and simply
+ * never matched a filter chip: silent, invisible, and undetectable except by
+ * scanning the corpus by hand. That is the same failure `JurisdictionLevel` and
+ * `DroppedReason` were caught by in EU/G.73.md — 29 reports carrying "national"
+ * and one carrying "territorial", none a member of anything — and the same one
+ * `Domain` itself was caught by a day later with `"manufacturing"` on
+ * `de-destatis-quarterly-production-survey`. It was found by a corpus scan
+ * because nothing else could find it.
+ *
+ * Added 2026-08-18, on importing the Grok archive, where the raw batches carried
+ * **985 distinct domain tags** against the approved list. The convention that
+ * makes this checkable rather than merely strict is the `proposed:` prefix: a tag
+ * outside `DOMAINS` is legal *if it announces itself*, so new vocabulary can
+ * enter the corpus and be reviewed rather than being either rejected at the door
+ * or accepted silently. A bare unknown tag is the bug; `proposed:trade` is a
+ * request.
+ */
+const PROPOSED_PREFIX = 'proposed:'
+const offUnionDomains = reports.flatMap((r) =>
+  (r.domains ?? [])
+    .filter((d) => !DOMAINS.includes(d) && !String(d).startsWith(PROPOSED_PREFIX))
+    .map((d) => ({ id: r.id, domain: d })),
+)
+const proposedDomains = new Map<string, number>()
+for (const r of reports) {
+  for (const d of r.domains ?? []) {
+    if (String(d).startsWith(PROPOSED_PREFIX)) {
+      proposedDomains.set(String(d), (proposedDomains.get(String(d)) ?? 0) + 1)
+    }
+  }
+}
+const untagged = reports.filter((r) => !r.domains || r.domains.length === 0)
+
+console.log(`DOMAINS — ${DOMAINS.length} approved, ${proposedDomains.size} proposed`)
+console.log(
+  offUnionDomains.length === 0
+    ? '  ✓ every domain tag is a Domain or carries the proposed: prefix'
+    : `  ✗ ${offUnionDomains.length} tag(s) are neither a Domain nor prefixed proposed: — they will never match a filter:`,
+)
+for (const o of offUnionDomains) console.log(`      "${o.domain}" — ${o.id}`)
+if (offUnionDomains.length) invariantFailures++
+console.log(
+  untagged.length === 0
+    ? '  ✓ every report carries at least one domain tag'
+    : `  ! ${untagged.length} report(s) carry no domain tag at all — unreachable by domain filter:`,
+)
+for (const u of untagged) console.log(`      ${u.id}`)
+if (proposedDomains.size) {
+  console.log(`  ${proposedDomains.size} proposed tag(s) awaiting a decision, most-used first:`)
+  for (const [tag, count] of [...proposedDomains].sort((a, b) => b[1] - a[1]).slice(0, 15)) {
+    console.log(`      ${String(count).padStart(4)}  ${tag}`)
+  }
+}
+console.log()
+
 const relationPairsAlsoEdges = relations.filter((r) =>
   dependencies.some(
     (d) =>
