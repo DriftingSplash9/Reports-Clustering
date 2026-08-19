@@ -972,7 +972,7 @@ export default function InfluenceGraph({
           teardropGeometry(baseLinkWidth(l) * PULSE_WIDTH_FACTOR),
           // The blink variant for a cross-border edge — a separate material
           // instance per ink, animated by tickPulseBlink in useFrame below.
-          pulseMaterial(l.colour, l.cross),
+          pulseMaterial(l.colour, l.cross, bp),
         ),
       )
     }
@@ -981,7 +981,7 @@ export default function InfluenceGraph({
     // rather than a silent one.
     const fallbackParticle = new THREE.Mesh(
       teardropGeometry(4),
-      pulseMaterial('#7f9ad0'),
+      pulseMaterial('#7f9ad0', false, bp),
     )
 
     const fg = new ThreeForceGraph()
@@ -1222,7 +1222,23 @@ export default function InfluenceGraph({
     const linkForce = fg.d3Force('link') as unknown as
       | { distance(fn: (l: LinkDatum) => number): void }
       | undefined
-    linkForce?.distance((l) => (40 + (1 - l.weight) * 28 + l.hubRoom) * m)
+    // ×2 on the REST LENGTH ONLY — the Phase-4 brief's "double the edge
+    // lengths", pulled forward into Phase 3.5 (Thomas, 2026-08-19: "these
+    // nodes are just too crowded... more of a constellation"). Deliberately
+    // NOT applied to charge or collision: double every length and the layout's
+    // scale-invariance (see the collision note below) hands back a
+    // pixel-identical picture after the fit renormalises. Doubling just this
+    // term changes the RATIO of chain length to cluster size, which is the
+    // thing that actually draws chains out and gives pulses room. It is also
+    // why node sizes "stay constant" whatever this number does — the fit
+    // holds the largest node at a fixed fraction of the frame by design, so
+    // spacing changes show up as room between stars, not as bigger stars.
+    // Related: Cluster spread multiplies a force strength and two lengths by
+    // one number, which is why it never delivered this on its own at 375%.
+    const LINK_LENGTH_SCALE = 2
+    linkForce?.distance(
+      (l) => (40 + (1 - l.weight) * 28 + l.hubRoom) * m * LINK_LENGTH_SCALE,
+    )
 
     // Nothing in the default force set stops two spheres occupying the same
     // point, and overlapping nodes read as one node of the wrong size.
@@ -1425,8 +1441,8 @@ export default function InfluenceGraph({
   /**
    * Everything `runFit` needs to know, and nothing it does.
    *
-   * Split out on 2026-08-19 so a caller can ask *whether* to move the camera
-   * before moving it — see `framedUsably` and `requestRefit`. It has to be a
+   * Split out on 2026-08-19 so a caller can measure without moving the camera
+   * — see `requestRefit`. It has to be a
    * genuine split rather than an early return inside `runFit`, because
    * `runFit` does not only move the camera: it also sets `nodeScale`, the link
    * and pulse widths derived from it, the fog cloud and the published bounds.
@@ -1801,28 +1817,27 @@ export default function InfluenceGraph({
       return
     }
 
-    // **Only move the camera if the survivors are not usably framed.**
+    // **Unconditional again, as of 2026-08-19 — the conditional version read
+    // as a glitch.** This function has now been written three ways, and the
+    // history is the argument:
     //
-    // Thomas's ask was "stop moving the camera when I change a filter", and
-    // taken literally it reintroduces a bug he reported himself: an
-    // unconditional refit is what fixed the black screen (329 of 728 shown,
-    // the survivors knotted in one corner of an otherwise empty frame — see
-    // the long note in the filter effect). The camera move is not gratuitous;
-    // it is the only thing that answers "where did everything go".
+    // 1. Always refit — fixed the black screen (329 of 728 shown, survivors
+    //    knotted in one corner), because the refit is the only thing that
+    //    answers "where did everything go".
+    // 2. Refit only when the survivors weren't "usably framed" (a
+    //    centre-in-view + 30%–140% subtense test), built for Thomas's "stop
+    //    moving the camera when I change a filter".
+    // 3. This: always refit again — Thomas, watching version 2 live: "some
+    //    [times] the camera stays put, other times it goes to the reset
+    //    distance", filed as a GLITCH. The heuristic was doing exactly what
+    //    it was told and the result was unpredictable from the outside, which
+    //    is worse than either consistent behaviour. A filter change is an
+    //    explicit request for a different view; it now always gets one, the
+    //    same way a tier button does.
     //
-    // So the rule is conditional rather than absent. Measure first — which
-    // costs nothing the fit was not going to pay anyway — and ask whether what
-    // survived is actually on screen at a sensible size. If it is, keep the
-    // camera exactly where the user put it and run the measurement-only fit,
-    // which still updates node scale, link widths, the fog cloud and the
-    // published bounds. If it is not, this is the black-screen case and the
-    // camera is handed back as before.
-    const measured = measureFit()
-    if (measured && framedUsably(measured)) {
-      runFit(false)
-      return
-    }
-
+    // If the constant reframing grates while composing a multi-country
+    // filter, the fix is to make the move a FLIGHT (advanceFlight already
+    // exists for search) rather than to bring the heuristic back.
     userOwnsCamera.current = false
     fitPose.current = null
     settleClock.current = 0
@@ -1830,40 +1845,11 @@ export default function InfluenceGraph({
     runFit(true)
   }
 
-  /**
-   * Is what is currently visible already framed well enough to leave alone?
-   *
-   * Three questions, all asked against the core sphere `measureFit` just
-   * measured, and all of them have to answer yes:
-   *
-   * 1. **Is it in front of the camera at all?** The angle from the camera's
-   *    forward axis to the cloud centre has to be inside the vertical half-FOV
-   *    — the narrower of the two on any landscape window, so this is the
-   *    conservative test. This is the one that catches the black screen: a
-   *    filter that leaves a knot off to one side fails here.
-   * 2. **Is it big enough to see?** The core has to subtend at least 30% of
-   *    the frame. Below that the survivors are a clump in the middle of a
-   *    mostly empty view, which is the same complaint in a milder form.
-   * 3. **Is it small enough to see all of?** No more than 1.4× the frame. Some
-   *    overflow is fine and normal — the fit itself leaves 5% of nodes outside
-   *    by design — but a filter that reveals a much larger set should re-frame.
-   *
-   * The bounds are deliberately loose. A tight test would refit on almost
-   * every filter change and this would be an elaborate way of writing the old
-   * unconditional behaviour.
-   */
-  function framedUsably(measured: { centre: THREE.Vector3; nodeRadius: number }): boolean {
-    const toCentre = measured.centre.clone().sub(camera.position)
-    const distance = toCentre.length()
-    if (!(distance > 0)) return false
-
-    const vHalf = (FOV * Math.PI) / 360
-    const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion)
-    if (forward.angleTo(toCentre) > vHalf) return false
-
-    const subtended = Math.atan(measured.nodeRadius / distance)
-    return subtended > vHalf * 0.3 && subtended < vHalf * 1.4
-  }
+  // `framedUsably` — the "is what survived already framed well enough?"
+  // heuristic — lived here from 2026-08-19 morning to 2026-08-19 evening.
+  // Deleted with the conditional-refit experiment it served (see the history
+  // in `requestRefit`); the code is in git and in
+  // `Previous Handoffs/HANDOFF-2026-08-18c-*` §8 if the idea ever returns.
 
   // Toggles that have to reach inside the force-graph object, which was built
   // once and is not rebuilt when view settings change.

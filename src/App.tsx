@@ -712,6 +712,8 @@ export default function App() {
         paper={view.blueprint}
         onFamily={toggleFamily}
         onScope={toggleScope}
+        onAll={() => setFilter((f) => ({ ...f, scopes: null }))}
+        onNone={() => setFilter((f) => ({ ...f, scopes: [] }))}
       />
 
       <TierBar
@@ -1285,6 +1287,8 @@ function ChipBar({
   paper,
   onFamily,
   onScope,
+  onAll,
+  onNone,
 }: {
   scopeCounts: Record<string, number>
   filter: FilterState
@@ -1298,35 +1302,50 @@ function ChipBar({
   paper: boolean
   onFamily: (family: ColourFamily) => void
   onScope: (scope: Scope) => void
+  /** Show everything — scopes back to null. */
+  onAll: () => void
+  /** Show nothing, as the clean base for building a combination. */
+  onNone: () => void
 }) {
-  const [openFamily, setOpenFamily] = useState<ColourFamily | null>(null)
   /**
-   * The tray minimize (round 9, Thomas: "The regions need a way to have their
-   * tray minimized"). Collapsed, the whole row folds into one small pill that
-   * still reports whether a region filter is active — state must stay legible
-   * while its controls are put away, or a puzzling half-empty graph is one
-   * forgotten click from looking like a bug. The filter itself is untouched
-   * by collapsing; this hides controls, never changes what they did.
+   * Rebuilt as a drop-up selector, 2026-08-19 (Thomas, Phase 3.5: "lower the
+   * country bar or turn it into a drop down selector where a person can
+   * select all, none, or any combo... the country selector is about to
+   * explode when we add all the rest so best to make it something that can
+   * minimize"). The horizontal chip row was already wrapping at thirteen
+   * families; the staged Grok archive adds dozens of countries, and a row
+   * that grows sideways loses to a list that grows downward and scrolls.
+   *
+   * Collapsed is now the DEFAULT: one pill that always reports the filter
+   * state (All / None / n of m), because state must stay legible while its
+   * controls are put away — the same rule the old tray minimize followed. The
+   * open panel adds All and None as one-click resets; any combination is
+   * built from either end (start from All and knock families out, or start
+   * from None and pick them in — `isolateFirstToggle` already gives both).
+   * Level rows expand INLINE under their family rather than in a floating
+   * flyout, because a positioned flyout inside a scrolling list detaches from
+   * its row the moment the list scrolls.
    */
-  const [collapsed, setCollapsed] = useState(false)
+  const [openFamily, setOpenFamily] = useState<ColourFamily | null>(null)
+  const [collapsed, setCollapsed] = useState(true)
   const barRef = useRef<HTMLDivElement>(null)
 
-  // The flyout closes on a click anywhere outside the bar, and on Escape —
-  // added round 8 after Thomas reported it "stuck... I cannot change it or
-  // get rid of it". Two failures stacked: the ▾ hit target was a few pixels
-  // wide (a miss landed on the chip label and toggled the family instead,
-  // leaving the flyout exactly where it was), and nothing but that sliver
-  // could ever close it. The chevron is a real button now, and the rest of
-  // the screen is an exit.
+  // The open panel closes on a click anywhere outside it, and on Escape —
+  // the same two exits the old flyout learned in round 8 ("stuck... I cannot
+  // change it or get rid of it").
   useEffect(() => {
-    if (!openFamily) return
+    if (collapsed) return
     const onDown = (e: PointerEvent) => {
       if (barRef.current && !barRef.current.contains(e.target as Node)) {
         setOpenFamily(null)
+        setCollapsed(true)
       }
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpenFamily(null)
+      if (e.key === 'Escape') {
+        setOpenFamily(null)
+        setCollapsed(true)
+      }
     }
     window.addEventListener('pointerdown', onDown)
     window.addEventListener('keydown', onKey)
@@ -1334,7 +1353,7 @@ function ChipBar({
       window.removeEventListener('pointerdown', onDown)
       window.removeEventListener('keydown', onKey)
     }
-  }, [openFamily])
+  }, [collapsed])
 
   const anyFilter = filter.scopes !== null
   const groups = SCOPE_GROUPS.filter(
@@ -1344,149 +1363,259 @@ function ChipBar({
     ? groups.filter((g) => g.scopes.some((s) => filter.scopes!.includes(s))).length
     : 0
 
-  if (collapsed) {
-    return (
-      <div ref={barRef} style={chipBarWrap}>
-        <div
-          onClick={() => setCollapsed(false)}
-          title="Show the region chips"
-          style={{ ...chip, cursor: 'pointer', color: 'var(--ink-label)' }}
-        >
-          <span style={{ whiteSpace: 'nowrap' }}>
-            Regions{anyFilter ? ` · ${litCount} on` : ''}
-          </span>
-          <span style={{ color: 'var(--ink-faint)' }}>▴</span>
-        </div>
-      </div>
-    )
-  }
+  const summary = !anyFilter
+    ? 'All'
+    : litCount === 0
+      ? 'None'
+      : `${litCount} of ${groups.length}`
 
   return (
     <div ref={barRef} style={chipBarWrap}>
-      {groups.map((group) => {
-        const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
-        const on =
-          !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
-        const lit = anyFilter && on
-        const ink = (paper ? BLUEPRINT_INK : FAMILY_INK)[group.country] ?? 'var(--ink-label)'
-        const open = openFamily === group.country
-        const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
-        return (
-          <div key={group.country} style={{ position: 'relative' }}>
-            {open && (
-              <div style={flyout}>
-                {present.map((s) => {
-                  const sOn = !filter.scopes || filter.scopes.includes(s)
-                  const swatch = levelColours?.[s] ?? SCOPE_COLOUR[s]
-                  return (
-                    <div
-                      key={s}
-                      onClick={() => onScope(s)}
-                      style={{ ...flyoutRow, opacity: sOn ? 1 : 0.45 }}
+      {!collapsed && (
+        <div style={countryPanel}>
+          <div style={countryPanelHeader}>
+            <span style={countryPanelTitle}>Countries</span>
+            <button
+              type="button"
+              onClick={onAll}
+              title="Show every country"
+              style={{ ...allNoneButton, ...(anyFilter ? null : allNoneActive) }}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              onClick={onNone}
+              title="Hide every country — then pick the combination you want"
+              style={{
+                ...allNoneButton,
+                ...(anyFilter && litCount === 0 ? allNoneActive : null),
+              }}
+            >
+              None
+            </button>
+          </div>
+          <div style={countryList}>
+            {groups.map((group) => {
+              const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
+              const on =
+                !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
+              const lit = anyFilter && on
+              const ink =
+                (paper ? BLUEPRINT_INK : FAMILY_INK)[group.country] ?? 'var(--ink-label)'
+              const open = openFamily === group.country
+              const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
+              return (
+                <div key={group.country}>
+                  <div style={countryRow}>
+                    <span
+                      onClick={() => onFamily(group.country)}
+                      title={`${group.label} — click to isolate, click others to combine, click again to drop`}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 7,
+                        flex: 1,
+                        cursor: 'pointer',
+                        opacity: on ? 1 : 0.45,
+                      }}
                     >
                       <span
                         style={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: 10,
-                          background: swatch,
-                          border: `1px solid ${ink}`,
+                          width: 9,
+                          height: 9,
+                          borderRadius: 9,
+                          background: lit ? ink : 'transparent',
+                          border: `2px solid ${ink}`,
+                          boxShadow: lit ? `0 0 7px ${ink}88` : 'none',
                           flexShrink: 0,
                         }}
                       />
-                      <span style={{ flex: 1, color: sOn ? 'var(--ink-body)' : 'var(--ink-dim)' }}>
-                        {SCOPE_LABEL[s] ?? s}
+                      <span
+                        style={{
+                          color: on ? 'var(--ink-strong)' : 'var(--ink-dim)',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {group.label}
                       </span>
-                      <span style={{ color: 'var(--ink-dim)' }}>{scopeCounts[s] ?? 0}</span>
-                    </div>
-                  )
-                })}
-                {levelColours && (
-                  <div style={{ fontSize: 9, color: 'var(--ink-faint)', marginTop: 4, lineHeight: 1.4 }}>
-                    Spread colours — the spheres wear these while only this
-                    family is shown.
+                      <span style={{ color: 'var(--ink-faint)', marginLeft: 'auto' }}>
+                        {total}
+                      </span>
+                    </span>
+                    <span
+                      onClick={() => setOpenFamily(open ? null : group.country)}
+                      title={`${group.label} by level`}
+                      style={{
+                        cursor: 'pointer',
+                        color: open ? 'var(--ink-strong)' : 'var(--ink-faint)',
+                        padding: '4px 6px',
+                        margin: '-4px -4px -4px 0',
+                        transform: open ? 'rotate(180deg)' : 'none',
+                        transition: 'transform 140ms ease',
+                      }}
+                    >
+                      ▾
+                    </span>
                   </div>
-                )}
-              </div>
-            )}
-            <div
-              style={{
-                ...chip,
-                borderColor: lit ? ink : on ? 'var(--line-strong)' : 'var(--line-faint)',
-                boxShadow: lit ? `0 0 8px ${ink}55, inset 0 0 6px ${ink}22` : 'none',
-                opacity: on ? 1 : 0.42,
-              }}
-            >
-              <span
-                onClick={() => onFamily(group.country)}
-                style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}
-              >
-                <span
-                  style={{
-                    width: 9,
-                    height: 9,
-                    borderRadius: 9,
-                    background: 'transparent',
-                    border: `2px solid ${ink}`,
-                    flexShrink: 0,
-                  }}
-                />
-                <span style={{ color: on ? 'var(--ink-strong)' : 'var(--ink-dim)', whiteSpace: 'nowrap' }}>
-                  {group.label}
-                </span>
-                <span style={{ color: 'var(--ink-faint)' }}>{total}</span>
-              </span>
-              <span
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setOpenFamily(open ? null : group.country)
-                }}
-                title={`${group.label} by level`}
-                style={{
-                  cursor: 'pointer',
-                  color: open ? 'var(--ink-strong)' : 'var(--ink-faint)',
-                  // A real hit target — the old 2px sliver is what made the
-                  // flyout feel stuck (see the outside-click note above).
-                  padding: '6px 8px',
-                  margin: '-6px -6px -6px -2px',
-                  transform: open ? 'rotate(180deg)' : 'none',
-                  transition: 'transform 140ms ease',
-                }}
-              >
-                ▾
-              </span>
-            </div>
+                  {open && (
+                    <div style={levelBlock}>
+                      {present.map((s) => {
+                        const sOn = !filter.scopes || filter.scopes.includes(s)
+                        const swatch = levelColours?.[s] ?? SCOPE_COLOUR[s]
+                        return (
+                          <div
+                            key={s}
+                            onClick={() => onScope(s)}
+                            style={{ ...flyoutRow, opacity: sOn ? 1 : 0.45 }}
+                          >
+                            <span
+                              style={{
+                                width: 10,
+                                height: 10,
+                                borderRadius: 10,
+                                background: swatch,
+                                border: `1px solid ${ink}`,
+                                flexShrink: 0,
+                              }}
+                            />
+                            <span
+                              style={{
+                                flex: 1,
+                                color: sOn ? 'var(--ink-body)' : 'var(--ink-dim)',
+                              }}
+                            >
+                              {SCOPE_LABEL[s] ?? s}
+                            </span>
+                            <span style={{ color: 'var(--ink-dim)' }}>
+                              {scopeCounts[s] ?? 0}
+                            </span>
+                          </div>
+                        )
+                      })}
+                      {levelColours && (
+                        <div
+                          style={{
+                            fontSize: 9,
+                            color: 'var(--ink-faint)',
+                            marginTop: 4,
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          Spread colours — the spheres wear these while only this
+                          family is shown.
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
-        )
-      })}
-      {/* The tuck-away. ▾ pointing off the bottom edge = put the tray there;
-          the collapsed pill's ▴ = bring it back. Closes any open flyout on
-          the way down so nothing floats over a bar that has left. */}
+        </div>
+      )}
       <div
         onClick={() => {
           setOpenFamily(null)
-          setCollapsed(true)
+          setCollapsed((c) => !c)
         }}
-        title="Minimize the region chips"
-        style={{ ...chip, cursor: 'pointer', padding: '5px 9px' }}
+        title={collapsed ? 'Choose countries' : 'Put the country list away'}
+        style={{ ...chip, cursor: 'pointer', color: 'var(--ink-label)' }}
       >
-        <span style={{ color: 'var(--ink-faint)' }}>▾</span>
+        <span style={{ whiteSpace: 'nowrap' }}>Countries · {summary}</span>
+        <span style={{ color: 'var(--ink-faint)' }}>{collapsed ? '▴' : '▾'}</span>
       </div>
     </div>
   )
 }
 
+// Lowered from 96 to the bottom edge and turned into a column (panel opens
+// upward over the pill) when the chip row became a drop-up selector —
+// Phase 3.5, 2026-08-19.
 const chipBarWrap: React.CSSProperties = {
   position: 'fixed',
-  bottom: 96,
+  bottom: 20,
   left: '50%',
   transform: 'translateX(-50%)',
   display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   gap: 6,
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  maxWidth: 'min(1100px, calc(100vw - 460px))',
   zIndex: 6,
+}
+
+const countryPanel: React.CSSProperties = {
+  width: 292,
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '10px 12px',
+  background: 'var(--panel-bg-solid)',
+  border: '1px solid var(--line)',
+  borderRadius: 10,
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
+  userSelect: 'none',
+}
+
+const countryPanelHeader: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 6,
+  paddingBottom: 8,
+  marginBottom: 6,
+  borderBottom: '1px solid var(--line-faint)',
+}
+
+const countryPanelTitle: React.CSSProperties = {
+  flex: 1,
+  fontSize: 10,
+  letterSpacing: '0.09em',
+  textTransform: 'uppercase',
+  color: 'var(--ink-faint)',
+}
+
+const allNoneButton: React.CSSProperties = {
+  fontFamily: 'inherit',
+  fontSize: 9.5,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  color: 'var(--ink-dim)',
+  background: 'transparent',
+  border: '1px solid var(--line)',
+  borderRadius: 5,
+  padding: '3px 9px',
+  cursor: 'pointer',
+  lineHeight: 1,
+}
+
+const allNoneActive: React.CSSProperties = {
+  color: 'var(--ink-body)',
+  borderColor: 'var(--accent-line)',
+  background: 'var(--accent-soft)',
+}
+
+/** Scrolls once the family list outgrows roughly half the window — the whole
+ * reason this is a list: it grows DOWN into a scrollbar, not sideways into
+ * the graph, however many countries the corpus gains. */
+const countryList: React.CSSProperties = {
+  overflowY: 'auto',
+  maxHeight: '44vh',
+}
+
+const countryRow: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+  fontSize: 11.5,
+  lineHeight: 2.05,
+}
+
+const levelBlock: React.CSSProperties = {
+  padding: '2px 0 6px 22px',
+  borderLeft: '1px solid var(--line-faint)',
+  marginLeft: 4,
 }
 
 const chip: React.CSSProperties = {
@@ -1504,20 +1633,9 @@ const chip: React.CSSProperties = {
   userSelect: 'none',
 }
 
-const flyout: React.CSSProperties = {
-  position: 'absolute',
-  bottom: 'calc(100% + 6px)',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  minWidth: 178,
-  padding: '8px 10px',
-  background: 'var(--panel-bg-solid)',
-  border: '1px solid var(--line)',
-  borderRadius: 8,
-  boxShadow: 'var(--panel-shadow)',
-  backdropFilter: 'var(--glass-filter)',
-  zIndex: 7,
-}
+// `flyout` (the floating per-family level panel) was deleted with the chip
+// row — levels now expand inline inside the scrolling country list, where a
+// positioned flyout would detach from its row on scroll.
 
 const flyoutRow: React.CSSProperties = {
   display: 'flex',
@@ -1939,11 +2057,13 @@ const selectionBlock: React.CSSProperties = {
  * its contents so the dead area it steals from orbit-dragging is the strip the
  * buttons actually occupy and nothing more.
  */
+// Bottom-LEFT corner as of Phase 3.5 (Thomas, 2026-08-19: "slide the
+// global>nations>state>everything bar to the left bottom corner"), clearing
+// the bottom-centre for the country selector's pill.
 const tierBarWrap: React.CSSProperties = {
   position: 'fixed',
   bottom: 20,
-  left: '50%',
-  transform: 'translateX(-50%)',
+  left: 20,
   padding: '10px 14px',
   background: 'var(--panel-bg)',
   border: '1px solid var(--line)',
@@ -1971,9 +2091,13 @@ const tierBarWrap: React.CSSProperties = {
  * reason — if this ever needs to scroll, that is the correct outcome, not a
  * signal to let it get taller.
  */
+// Tucked into the bottom-right as of Phase 3.5 (Thomas, 2026-08-19: "tuck
+// those unlinked nodes neatly in the bottom right area") — a footnote's
+// corner, out of the way of the search bar and the calendar along the top.
+// Still left of the View panel's column (`right: 214`), which owns the edge.
 const isolatedShelfWrap: React.CSSProperties = {
   position: 'fixed',
-  top: 20,
+  bottom: 20,
   right: 214,
   width: 232,
   padding: '9px 11px',
@@ -2052,9 +2176,15 @@ const section: React.CSSProperties = {
 // See the comment at the call site in Hud. Georgia-first because it ships on
 // every Windows/mac machine this will realistically open on — a webfont for
 // one line of text is a network dependency the project doesn't otherwise have.
+// Enlarged 21 → 26 and given the slow gradient rotation on 2026-08-19
+// (Thomas, Phase 3.5: "the Economic Report Influence Graph could be larger
+// and make the gradient rotate constantly at a slow rate"). The rotation is
+// the `rigTitle` animation in uiTheme.ts driving a registered @property
+// angle — the gradient's ANGLE turns, the glyphs hold still, one full turn
+// every 28 seconds. Slow enough to be alive without ever being motion.
 const masthead: React.CSSProperties = {
   fontFamily: "Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif",
-  fontSize: 21,
+  fontSize: 26,
   fontWeight: 700,
   letterSpacing: '0.005em',
   lineHeight: 1.22,
@@ -2064,6 +2194,7 @@ const masthead: React.CSSProperties = {
   color: 'transparent',
   filter: 'var(--title-depth)',
   paddingBottom: 1,
+  animation: 'rigTitleTurn 28s linear infinite',
 }
 
 const row: React.CSSProperties = {

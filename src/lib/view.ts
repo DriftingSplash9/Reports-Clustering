@@ -134,8 +134,18 @@ export const DEFAULT_VIEW: ViewSettings = {
   lens: 'STANDARD',
 }
 
-/** Scene background. Fog resolves to this, so the two must agree. */
-export const SCENE_BACKGROUND = '#05070d'
+/** Scene background. Fog resolves to this, so the two must agree.
+ *
+ * Dropped `#05070d` → `#010204` on 2026-08-19 (Thomas, Phase 3.5: "can you
+ * make the background completely black or very close? I think it is too
+ * bright"). Not the full `#000000`: one step of blue-black keeps the haze
+ * resolving into night air rather than into a dead matte, and the difference
+ * from true black is below anything a calibrated monitor shows on its own —
+ * but it keeps every mix() in the fog chain from collapsing to pure grey.
+ * The palette's luminance floor was picked against HORIZON_COLOUR (the
+ * brightest ground a node can sit on), so nothing needs re-tuning here —
+ * contrast only improved. */
+export const SCENE_BACKGROUND = '#010204'
 
 /**
  * The horizon band of the optional sky dome.
@@ -285,8 +295,23 @@ export const BLOOM_THRESHOLD_MAX = 0.32
 // look wrong the first time was actually the edges: they are twenty times
 // wider than they were, so the dimmed *lines* were doing the crowding and the
 // node number took the blame.
-export const DIM_NODE_OPACITY = 0.13
-export const DIM_NODE_EMISSIVE = 0.03
+// **Dropped again, 0.13 → 0.045, on 2026-08-19 — Thomas's direct call, and it
+// overrides the "legible as structure" doctrine above.** Looking at a live
+// trace: "the background nodes are quite visible? they need to be nearly
+// invisible... I envision more of a constellation with pulses of light
+// between the stars." The context argument was written when a dimmed graph
+// was the only thing keeping the viewer oriented; with 19px nodes, 1.6px
+// edges and the traced chain drawn straight through everything
+// (depth-test off while tracing — see setLinkFocus), the orientation job is
+// carried by the chain itself. What 0.13 was actually buying was the exact
+// crowding he is objecting to: at Everything-tier density, hundreds of
+// overlapping 0.13-alpha spheres STACK, and the pile reads far brighter than
+// any single node's number suggests. The emissive floor falls with it
+// (0.03 → 0.012) for the standing reason: bloom re-lights whatever the alpha
+// takes out. Raycast on dimmed nodes is already disabled, so near-invisible
+// does not mean click-eating.
+export const DIM_NODE_OPACITY = 0.045
+export const DIM_NODE_EMISSIVE = 0.012
 export const DIM_LINK_COLOUR = '#1b2437'
 
 /**
@@ -311,8 +336,11 @@ export const DIM_LINK_COLOUR = '#1b2437'
 // proportionally further because it moved from invisible-by-accident to
 // clearly drawn: at 0.07 and full width the out-of-focus graph competed with
 // the traced chain instead of sitting behind it.
+// Dim edges follow the dim nodes down (0.045 → 0.02, 2026-08-19, same
+// direction from Thomas): the out-of-focus web is atmosphere behind the
+// constellation now, not a co-subject.
 export const LINK_OPACITY = 0.13
-export const DIM_LINK_OPACITY = 0.045
+export const DIM_LINK_OPACITY = 0.02
 
 export const ZOOM_MIN = 0.25
 export const ZOOM_MAX = 2.6

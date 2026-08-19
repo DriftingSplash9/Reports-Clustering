@@ -258,6 +258,28 @@ export function teardropGeometry(width: number): THREE.LatheGeometry {
 const pulseMaterials = new Map<string, THREE.MeshBasicMaterial>()
 
 /**
+ * How far a pulse's colour is pushed from its family ink toward white on the
+ * dark scene.
+ *
+ * Phase 3.5 (Thomas, 2026-08-19): "the pulses are too similar to the edges
+ * and they blur together... I envision more of a constellation with pulses of
+ * light between the stars." The edge and its pulse used to be the SAME ink at
+ * different opacities, so at 1.6px lines the moving element dissolved into
+ * the line it rides. The fix keeps the hue (so a pulse still says which
+ * family sent it — one colour per family is the ink system's whole premise)
+ * but renders it as light: mixed two-thirds toward white and additively
+ * blended, so it burns through whatever it crosses instead of alpha-blending
+ * into it. Thomas floated literally INVERTING the edge colour instead; that
+ * would put eleven complementary hues on screen that belong to no family —
+ * magenta pulses on green EU edges reading as a twelfth family — so this is
+ * the same separation bought without breaking the ink system. If it still
+ * reads too edge-like on real hardware, raise the mix before reaching for
+ * inversion.
+ */
+const PULSE_CORE_MIX = 0.66
+const PULSE_OPACITY = 0.85
+
+/**
  * The blinking pulse materials, registered so one `tickPulseBlink` call a
  * frame animates them all. A Set of materials rather than per-link state
  * because the cache below already shares one material across every link of a
@@ -298,18 +320,42 @@ export function tickPulseBlink(seconds: number) {
  * `blink` marks a cross-border pulse (see `LinkDatum.cross`): a separate
  * cache entry per colour, because the ordinary material is shared by every
  * same-ink link and animating it would blink the whole family.
+ *
+ * `paper` keeps the old solid-ink treatment for blueprint. The dark scene's
+ * whitened additive core (see PULSE_CORE_MIX) is exactly wrong on paper:
+ * additive blending over a white ground resolves to white-on-white and the
+ * pulses vanish, while a solid dark ink drop is precisely what a technical
+ * drawing wants. Part of the cache key, because a theme flip rebuilds the
+ * graph's materials but this cache outlives the rebuild.
  */
-export function pulseMaterial(colour: string, blink = false): THREE.MeshBasicMaterial {
-  const key = blink ? `${colour}|blink` : colour
+export function pulseMaterial(
+  colour: string,
+  blink = false,
+  paper = false,
+): THREE.MeshBasicMaterial {
+  const key = `${colour}|${blink ? 'blink' : 'steady'}|${paper ? 'paper' : 'dark'}`
   const cached = pulseMaterials.get(key)
   if (cached) return cached
 
-  const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(colour),
-    transparent: true,
-    opacity: 0.92,
-    depthWrite: false,
-  })
+  const material = paper
+    ? new THREE.MeshBasicMaterial({
+        color: new THREE.Color(colour),
+        transparent: true,
+        opacity: 0.92,
+        depthWrite: false,
+      })
+    : new THREE.MeshBasicMaterial({
+        // The family ink pushed toward white: a hot core that still carries
+        // its hue at the fringe. Semi-transparent AND additive — the alpha
+        // keeps a lone pulse from reading as a solid bead, the blending makes
+        // crossings brighten instead of muddying, which is what "light"
+        // does and "paint" does not.
+        color: new THREE.Color(colour).lerp(new THREE.Color('#ffffff'), PULSE_CORE_MIX),
+        transparent: true,
+        opacity: PULSE_OPACITY,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      })
   if (blink) blinkingPulseMaterials.add(material)
   pulseMaterials.set(key, material)
   return material

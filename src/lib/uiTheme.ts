@@ -31,13 +31,36 @@
  * colours collapse into eight variables.
  */
 export const THEME_CSS = /* css */ `
+/* The masthead gradient's angle, registered so it can ANIMATE — an
+ * unregistered custom property snaps between keyframes instead of
+ * interpolating. Chrome-only syntax, which is where this app lives; a
+ * browser that ignores @property just renders the title at its initial
+ * angle, stationary, which is the correct fallback. */
+@property --rig-title-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 118deg;
+}
+
+/* One full turn of the title gradient — see \`masthead\` in App.tsx for the
+ * duration and the request behind it. */
+@keyframes rigTitleTurn {
+  from { --rig-title-angle: 118deg; }
+  to   { --rig-title-angle: 478deg; }
+}
+
 [data-theme='dark'] {
   --panel-bg: linear-gradient(178deg, rgba(21, 28, 44, 0.90) 0%, rgba(10, 14, 24, 0.86) 46%, rgba(7, 10, 18, 0.92) 100%);
   --panel-bg-solid: linear-gradient(180deg, rgba(15, 20, 33, 0.97), rgba(8, 11, 20, 0.97));
-  --panel-shadow: 0 18px 42px rgba(0, 0, 0, 0.52), 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 26px rgba(70, 130, 255, 0.12), inset 0 1px 0 rgba(165, 195, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.45);
+  /* Blue field glow doubled and a faint blue keyline added 2026-08-19
+   * (Thomas, Phase 3.5: "the menu boxes could stay as they are but have a
+   * nice blue shadow effect or some kind of blue border") — same panels,
+   * more of the blue that was already in them, against the near-black the
+   * scene background just dropped to. */
+  --panel-shadow: 0 18px 42px rgba(0, 0, 0, 0.52), 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 32px rgba(70, 130, 255, 0.26), 0 0 0 1px rgba(110, 165, 245, 0.10), inset 0 1px 0 rgba(165, 195, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.45);
   --glass-filter: blur(14px) saturate(1.35);
   --btn-bg: rgba(255, 255, 255, 0.03);
-  --line: rgba(102, 128, 172, 0.28);
+  --line: rgba(112, 152, 220, 0.38);
   --line-strong: rgba(130, 170, 230, 0.55);
   --line-faint: rgba(90, 115, 160, 0.17);
   --ink-strong: #e2eafa;
@@ -54,7 +77,7 @@ export const THEME_CSS = /* css */ `
   --accent-line: rgba(110, 168, 255, 0.42);
   --accent-active: rgba(70, 115, 190, 0.30);
   --sel-ring: rgba(230, 237, 250, 0.6);
-  --title-ink: linear-gradient(118deg, #8ab6ff 0%, #b79dff 52%, #74d6c3 108%);
+  --title-ink: linear-gradient(var(--rig-title-angle), #8ab6ff 0%, #b79dff 52%, #74d6c3 108%);
   --title-depth: drop-shadow(0 2px 9px rgba(90, 140, 255, 0.35));
   --frame-line: rgba(150, 190, 255, 0.30);
   --frame-glow: rgba(0, 102, 204, 0.50);
@@ -84,7 +107,7 @@ export const THEME_CSS = /* css */ `
   --accent-line: rgba(0, 102, 204, 0.40);
   --accent-active: rgba(0, 102, 204, 0.15);
   --sel-ring: rgba(28, 48, 76, 0.55);
-  --title-ink: linear-gradient(118deg, #0a58ad 0%, #6a3fbd 55%, #0e7a6e 110%);
+  --title-ink: linear-gradient(var(--rig-title-angle), #0a58ad 0%, #6a3fbd 55%, #0e7a6e 110%);
   --title-depth: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.9)) drop-shadow(0 2px 7px rgba(30, 80, 160, 0.25));
   --frame-line: rgba(255, 255, 255, 0.9);
   --frame-glow: rgba(0, 102, 204, 0.30);
