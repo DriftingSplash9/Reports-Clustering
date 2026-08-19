@@ -6,12 +6,9 @@ import type { LensMode } from '../lib/modes'
  * it should never draw attention away from the graph.
  */
 
+// Blueprint (the paper theme) led this list from 2026-08-12 until Thomas
+// deleted the mode outright on 2026-08-19 (Phase 4 item 1).
 const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
-  {
-    key: 'blueprint',
-    label: 'Blueprint',
-    hint: 'Light mode, drawn like a technical drawing: paper background, pale discs, everything in each family\'s dark ink. Same layout — nothing moves when you flip it',
-  },
   { key: 'showPulses', label: 'Pulses', hint: 'Travelling teardrops, pointing the way influence moves. With arrows gone these are the only direction cue' },
   {
     key: 'showEdges',
@@ -219,12 +216,6 @@ export default function ViewControls({
           </button>
         ))}
       </div>
-      {/* Blueprint has no fill channel to recolour, so the lens sits out — say
-          so rather than let the buttons appear broken. */}
-      {view.blueprint && view.lens !== 'STANDARD' && (
-        <div style={note}>Lenses colour the dark scene; blueprint sits them out.</div>
-      )}
-
       <div style={{ ...heading, marginTop: 14 }}>Focus</div>
       {FOCUS_TOGGLES.map(({ key, label, hint }) => (
         <label key={key} style={row} title={hint}>

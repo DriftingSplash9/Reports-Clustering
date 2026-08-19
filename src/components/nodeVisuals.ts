@@ -29,8 +29,9 @@ import type { RimWeight } from '../lib/palette'
  * things worse, not better.
  *
  * What survives, and the rule that governs it: **a rim is valid only where the
- * interior is empty.** Hollow one-off instruments have no fill, and blueprint
- * is ink on paper. Those two. Not orbs, which have the breath instead.
+ * interior is empty.** Hollow one-off instruments have no fill. (Blueprint,
+ * the other empty-interior case, was deleted 2026-08-19.) Not orbs, which
+ * have the breath instead.
  *
  * Built with `onBeforeCompile` rather than as a custom ShaderMaterial, so the
  * material stays a real MeshStandardMaterial. Everything else in the renderer
@@ -113,9 +114,7 @@ export function nodeMaterial({
    * so a bright fill out-glowed a dark one at equal authority — and under the
    * old dark-at-the-top ramp that meant the least important nodes glowed
    * hardest. Pass `glowInk(colour)` here for the dark scene and the product
-   * becomes proportional to authority alone. Blueprint passes the fill
-   * unchanged, because there the emissive floor is doing a different job
-   * entirely (pushing a white disc just past the paper tone) and bloom is off.
+   * becomes proportional to authority alone.
    *
    * Defaults to `colour`, which is the old behaviour, so this is opt-in.
    */
@@ -380,7 +379,7 @@ export function isStandingInstrument(report: { releases_per_year?: number }): bo
  * radial falloff, rescaled every frame to hold a **constant pixel radius** at
  * any zoom. One object in the scene regardless of corpus size, no per-node
  * cost, and — because it owes nothing to the post-processing stack — it works
- * in blueprint mode too, where bloom is zeroed and selection currently has no
+ * whatever the glow slider says, since selection has no
  * glow at all.
  *
  * `depthTest` is off on purpose. A selected node on the far side of the cloud
@@ -457,16 +456,12 @@ export function placeSelectionHalo(
   sprite.scale.set(scale, scale, 1)
 }
 
-/**
- * Blueprint has no light to add to — additive blending against paper is
- * invisible by construction. There the halo becomes a soft normal-blended
- * smudge in the family's own ink, which is what a draughtsman circling
- * something actually looks like.
- */
-export function setHaloTheme(sprite: THREE.Sprite, colour: string, blueprint: boolean) {
+/** Set the halo's colour. (Its paper variant went with blueprint, 2026-08-19;
+ * additive light is the only treatment left, so only the colour moves.) */
+export function setHaloTheme(sprite: THREE.Sprite, colour: string) {
   const material = sprite.material as THREE.SpriteMaterial
   material.color.set(colour)
-  material.blending = blueprint ? THREE.NormalBlending : THREE.AdditiveBlending
-  material.opacity = blueprint ? 0.5 : 1
+  material.blending = THREE.AdditiveBlending
+  material.opacity = 1
   material.needsUpdate = true
 }

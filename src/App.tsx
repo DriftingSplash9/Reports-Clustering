@@ -27,7 +27,6 @@ import {
   BLOOM_THRESHOLD_MAX,
   BLOOM_THRESHOLD_MIN,
   DEFAULT_VIEW,
-  PAPER_BACKGROUND,
   SCENE_BACKGROUND,
   ZOOM_MAX,
   ZOOM_MIN,
@@ -46,7 +45,7 @@ import {
   validate,
   type Disclosure,
 } from './lib/graph'
-import { buildFocusIndex, computeFocus } from './lib/selection'
+import { buildFocusIndex, computeFocus, edgeKey } from './lib/selection'
 import {
   DEFAULT_DRILLDOWN,
   TIER_DESCRIPTION,
@@ -55,6 +54,7 @@ import {
   isOrbId,
   resolveId,
   toggleDrilldown,
+  type DisclosedDependency,
   type Drilldown,
 } from './lib/hierarchy'
 import {
@@ -67,7 +67,6 @@ import {
 } from './lib/filter'
 import {
   ALL_SCOPES,
-  BLUEPRINT_INK,
   COMMERCIAL_COLOUR,
   FAMILY_INK,
   focusPalette,
@@ -245,9 +244,66 @@ export default function App() {
     ? (disclosedGraph.byId.get(selectedId) ?? graph.byId.get(selectedId) ?? null)
     : null
 
+  /**
+   * What the selection card is showing — the last non-null selection, kept
+   * through the slide-out so the card exits with its content intact rather
+   * than collapsing to an empty panel mid-animation.
+   */
+  const [cardReport, setCardReport] = useState<ScoredReport | null>(null)
+  useEffect(() => {
+    if (selected) setCardReport(selected)
+  }, [selected])
+
+  /**
+   * The selected EDGE — a drawn line's key, set by clicking the line, its
+   * arrowhead or one of its pulses. Drives the evidence card on the LEFT
+   * (Phase 4 §5): right = what a node is, left = why an edge exists. The two
+   * selections are deliberately independent — with a node traced, the lit
+   * edges are exactly the ones worth interrogating, so opening evidence must
+   * not tear the trace down.
+   */
+  const [selectedEdgeKey, setSelectedEdgeKey] = useState<string | null>(null)
+
+  /**
+   * The real Dependency records behind the selected line — resolved on
+   * demand by filtering the disclosed edges back to the same key the
+   * renderer's trunk merge grouped them under, so no back-reference is ever
+   * stored on the link datum (the brief's memory worry, answered by not
+   * holding anything at all). Up to 57 records for a tier-1 trunk.
+   */
+  const selectedEdgeDeps = useMemo(() => {
+    if (!selectedEdgeKey) return []
+    return disclosedGraph.edges.filter(
+      (e) => edgeKey(e.source_report_id, e.target_report_id) === selectedEdgeKey,
+    ) as DisclosedDependency[]
+  }, [selectedEdgeKey, disclosedGraph])
+
+  /** The screen-space edge picker, registered by InfluenceGraph — see
+   * `registerEdgePicker` there and `onPointerMissed` on the Canvas. */
+  const edgePicker = useRef<((x: number, y: number) => string | null) | null>(null)
+
+  /** Keep-last for the slide-out, same pattern as `cardReport`. */
+  const [edgeCard, setEdgeCard] = useState<{
+    key: string
+    deps: DisclosedDependency[]
+  } | null>(null)
+  useEffect(() => {
+    if (selectedEdgeKey && selectedEdgeDeps.length) {
+      setEdgeCard({ key: selectedEdgeKey, deps: selectedEdgeDeps })
+    } else if (selectedEdgeKey && selectedEdgeDeps.length === 0) {
+      // A tier or drilldown change re-keyed the lines out from under the
+      // selection — the line this card described no longer exists. Close
+      // rather than show evidence for a line that is not on screen.
+      setSelectedEdgeKey(null)
+    }
+  }, [selectedEdgeKey, selectedEdgeDeps])
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setSelectedId(null)
+      if (e.key === 'Escape') {
+        setSelectedId(null)
+        setSelectedEdgeKey(null)
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -556,10 +612,11 @@ export default function App() {
     <div
       style={{ width: '100%', height: '100%' }}
       onPointerMove={trackPointer}
-      // The one switch the whole UI chrome hangs off — see lib/uiTheme.ts.
-      // Scene theming travels separately (view.blueprint through the material
-      // system); this attribute themes the instrument panels around it.
-      data-theme={view.blueprint ? 'paper' : 'dark'}
+      // The theme attribute the UI chrome hangs off — see lib/uiTheme.ts.
+      // Only 'dark' exists since blueprint's deletion (2026-08-19); the
+      // attribute stays because every panel styles itself through the
+      // variables it selects.
+      data-theme="dark"
     >
       <style>{THEME_CSS}</style>
       <Canvas
@@ -569,48 +626,69 @@ export default function App() {
         // the GL buffer is transparent, so this one style IS the theme switch
         // for the ground everything sits on.
         style={{
-          background: view.blueprint ? PAPER_BACKGROUND : SCENE_BACKGROUND,
+          background: SCENE_BACKGROUND,
           cursor: hovered ? 'pointer' : 'default',
         }}
         // Fires when a click hits nothing in the scene. Clearing here rather
         // than on the canvas element means orbiting over empty space, which
         // also ends in a click, is handled by R3F's own drag threshold.
-        onPointerMissed={() => setSelectedId(null)}
+        // A click that hit no geometry first asks the edge picker whether a
+        // line runs within a few pixels — a 1.6px cylinder is not a target
+        // anyone hits by raycast (see registerEdgePicker in InfluenceGraph).
+        // Only a genuinely empty click clears the selections.
+        onPointerMissed={(e) => {
+          const key = edgePicker.current?.(e.clientX, e.clientY) ?? null
+          if (key) {
+            // Always OPEN, never toggle: this handler can fire more than
+            // once for a single click, and a toggle self-cancels — the card
+            // opened and closed in the same frame, which read as a dead
+            // click. Closing is Esc or a click in genuinely empty space;
+            // the direct-raycast path (pulses, trunks) keeps its toggle in
+            // onSelectEdge, which fires exactly once.
+            setSelectedEdgeKey(key)
+            return
+          }
+          setSelectedId(null)
+          setSelectedEdgeKey(null)
+        }}
       >
         {/*
-          Blueprint lifts the ambient and drops the cool fill light: paper is
-          lit flat and even (a strong point light on white discs reads as
-          plastic), and the blue fill that gives the dark scene its depth
-          would tint every disc toward the sky it no longer sits in. The main
-          key light stays — a little shading is what keeps the discs reading
-          as spheres at all.
+          The lighting rig, rebuilt 2026-08-19 (Phase 4 §2.1 — the mechanical
+          half of "cartoony, flat, no style").
+
+          The old rig was two POINT lights placed when the scene held ~120
+          nodes: the key sat ~590 units from the origin inside a cloud that
+          now measures ~3,000, with default inverse-square decay. Result: no
+          consistent light direction anywhere (near-side nodes lit one way,
+          far-side the opposite, centre from within), and the far half of the
+          graph received ~1/80th of the key — lit by ambient alone, which is
+          directionless, so those nodes were flat discs literally. Same class
+          of bug as the 0.08px edges: a constant outgrown by the corpus.
+
+          DIRECTIONAL lights fix both by construction — one direction for the
+          whole scene, no falloff — and are scale-invariant, so the corpus
+          cannot outgrow them again. A directional light's `position` is just
+          the direction it shines FROM (toward the origin); magnitude is
+          meaningless. Ambient drops 0.5 → 0.28 because its job (filling the
+          falloff hole) no longer exists; what remains only keeps the dark
+          side of each sphere off pure black. Numbers seeded from the brief's
+          own reverted experiment — judged there only in a 4× software crop,
+          so tune on real hardware by eye, not here by arithmetic.
         */}
-        {/*
-          The blueprint ambient looks absurdly high because two pipeline
-          factors both eat it, measured off screenshots rather than assumed:
-          physically-correct lighting divides Lambertian diffuse by π (so
-          ambient 1.15 delivers only ~0.37 to a white disc — the first two
-          cuts rendered concrete-grey discs at 0.85 and 1.15), and ACES tone
-          mapping then compresses what is left. 2.6/π ≈ 0.83, plus the
-          emissive floor in nodeVisuals, lands the discs at pale-paper after
-          the curve — visibly below the hollow nodes' white, above the
-          background. Tune against pixels, not against what the number
-          "should" be.
-        */}
-        <ambientLight intensity={view.blueprint ? 2.6 : 0.5} />
-        <pointLight position={[300, 300, 400]} intensity={view.blueprint ? 0.5 : 1.1} />
-        {!view.blueprint && (
-          <pointLight position={[-300, -200, -300]} intensity={0.4} color="#4a6fb5" />
-        )}
+        <ambientLight intensity={0.28} />
+        <directionalLight position={[0.6, 0.8, 1]} intensity={2.2} />
+        {/* Cool fill from behind-below, opposing the key so the terminator
+            stays readable during a full orbit rather than only from the
+            opening angle. */}
+        <directionalLight position={[-0.5, -0.3, -1]} intensity={0.7} color="#4a6fb5" />
 
         {/*
           SpaceFrame (the wireframe bounding box) and the ground grid were
           deleted 2026-08-12 — Thomas: "don't keep the code". Environment now
           carries only the optional horizon, which needs nothing measured, so
-          it no longer waits on `bounds` — and sits out blueprint entirely,
-          where a night-sky gradient behind paper would be a hole in the page.
+          it no longer waits on `bounds`.
         */}
-        {!view.blueprint && <Environment view={view} />}
+        <Environment view={view} />
 
         <InfluenceGraph
           graph={disclosedGraph}
@@ -622,6 +700,12 @@ export default function App() {
           levelColours={levelColours}
           onHover={setHovered}
           onSelect={setSelectedId}
+          onSelectEdge={(key) =>
+            setSelectedEdgeKey((current) => (current === key ? null : key))
+          }
+          registerEdgePicker={(pick) => {
+            edgePicker.current = pick
+          }}
           onBounds={handleBounds}
           onToggleNode={handleToggleNode}
         />
@@ -671,18 +755,9 @@ export default function App() {
           first time bloom was tuned, and why it was then set so conservatively
           that it did nothing at all for five sessions.
         */}
-        {/*
-          Blueprint zeroes the intensity rather than unmounting the composer —
-          same reasoning as the Glow toggle above: the composer's presence
-          changes the whole pipeline's colour handling, so it stays mounted
-          and only the effect goes quiet. Glow has no meaning on paper anyway;
-          bloom is additive light, and paper does not emit.
-        */}
         <EffectComposer>
           <Bloom
-            intensity={
-              view.blueprint || view.glow <= 0.005 ? 0 : 0.45 + view.glow * 0.5
-            }
+            intensity={view.glow <= 0.005 ? 0 : 0.45 + view.glow * 0.5}
             luminanceThreshold={
               BLOOM_THRESHOLD_MAX -
               view.glow * (BLOOM_THRESHOLD_MAX - BLOOM_THRESHOLD_MIN)
@@ -709,7 +784,6 @@ export default function App() {
         scopeCounts={scopeCounts}
         filter={filter}
         levelColours={levelColours}
-        paper={view.blueprint}
         onFamily={toggleFamily}
         onScope={toggleScope}
         onAll={() => setFilter((f) => ({ ...f, scopes: null }))}
@@ -766,9 +840,47 @@ export default function App() {
         />
       </PanelShell>
 
+      {/*
+        Hover shows an identity CHIP; the full card moved to the click (Phase
+        4 §4.2, 2026-08-19). Showing the whole Detail in both places was the
+        kind of duplicate encoding this project already deleted twice (the
+        arrowheads, the jurisdiction glyphs) — and the full card following the
+        cursor was most of why hovering felt heavier than clicking.
+      */}
       <div ref={tooltipRef} style={{ ...tooltip, opacity: hovered ? 1 : 0 }}>
-        {hovered && (
-          <Detail report={hovered} graph={disclosedGraph} disclosure={disclosure} />
+        {hovered && <HoverChip report={hovered} />}
+      </div>
+
+      {/*
+        The selection card — slides in from the right on click, out on clear
+        (Esc / empty space / clicking the selection again). `cardReport` holds
+        the LAST selected report so the card keeps its content while sliding
+        away, instead of blanking mid-exit. Sits left of the View panel's
+        column, above the shelf.
+      */}
+      <div style={{ ...selectionCard, transform: selected ? 'translateX(0)' : 'translateX(620px)' }}>
+        {cardReport && (
+          <Detail report={cardReport} graph={disclosedGraph} disclosure={disclosure} />
+        )}
+      </div>
+
+      {/*
+        The edge evidence card — the graph finally showing its working (Phase
+        4 §5). Every dependency carries a basis (usually a verbatim quote), an
+        evidence URL, a relationship type and a reference period, and until
+        now NONE of it reached the renderer: the material the whole evidence
+        rule is built on was loaded, used to build the graph, and thrown away
+        before drawing. Slides from the LEFT: right is what a node is, left is
+        why an edge exists.
+      */}
+      <div
+        style={{
+          ...edgeCardFrame,
+          transform: selectedEdgeKey ? 'translateX(0)' : 'translateX(-780px)',
+        }}
+      >
+        {edgeCard && (
+          <EdgeEvidence deps={edgeCard.deps} graph={graph} disclosed={disclosedGraph} />
         )}
       </div>
 
@@ -777,7 +889,7 @@ export default function App() {
         edge, with #0066CC fading inward to the background over ~38px — the
         "frosted" edge. Pure paint: pointer-transparent, so it costs nothing
         to interaction, and inset shadows fade to transparent, so the same
-        two variables read correctly over paper and over the dark scene.
+        two variables read correctly over the dark scene.
         Above every panel (they run zIndex 5–30) so the frost washes over
         whatever reaches the edge; below the onboarding dialog at 40.
       */}
@@ -795,7 +907,136 @@ const pageFrame: React.CSSProperties = {
     'inset 0 0 0 1px var(--frame-line), inset 0 0 38px 8px var(--frame-glow)',
 }
 
-/** Hover card. Replaces the always-on labels, which were unreadable in bulk. */
+/** Human labels for the four relationship types. Display-only — the union in
+ * types.ts stays the identifier vocabulary. */
+const REL_LABEL: Record<string, string> = {
+  calculated_from: 'calculated from',
+  uses_data_from: 'uses data from',
+  methodology_depends_on: 'methodology depends on',
+  cites: 'cites',
+}
+
+/**
+ * The evidence behind one drawn line.
+ *
+ * One line can stand for up to 57 documented dependencies (a tier-1 trunk),
+ * so this is a LIST by construction. Each row is one Dependency: which real
+ * report rests on which (the pre-disclosure endpoints — the drawn line may
+ * end at an orb, the evidence never does), the relationship type, the
+ * reference period where one is stated, the basis — usually a verbatim quote
+ * from the source document — and the primary-source link it was read from.
+ */
+function EdgeEvidence({
+  deps,
+  graph,
+  disclosed,
+}: {
+  deps: DisclosedDependency[]
+  /** The FULL corpus graph — original endpoint ids resolve here even when the
+   * drawn line ends at an orb that folded them away. */
+  graph: ReturnType<typeof buildGraph>
+  disclosed: ReturnType<typeof buildGraph>
+}) {
+  const head = deps[0]
+  if (!head) return null
+  const visualFrom =
+    disclosed.byId.get(head.source_report_id) ?? graph.byId.get(head.source_report_id)
+  const visualTo =
+    disclosed.byId.get(head.target_report_id) ?? graph.byId.get(head.target_report_id)
+
+  return (
+    <>
+      <div style={edgeCardHeading}>Why this line exists</div>
+      <div style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.35 }}>
+        <span style={{ color: visualFrom ? colourForReport(visualFrom) : 'var(--ink-body)' }}>
+          {visualFrom?.title ?? head.source_report_id}
+        </span>
+        <span style={{ color: 'var(--ink-dim)', fontWeight: 400 }}> rests on </span>
+        <span style={{ color: visualTo ? colourForReport(visualTo) : 'var(--ink-body)' }}>
+          {visualTo?.title ?? head.target_report_id}
+        </span>
+      </div>
+      {deps.length > 1 && (
+        <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 4 }}>
+          One drawn line standing for {deps.length} documented dependencies.
+        </div>
+      )}
+      {deps.map((d, i) => {
+        const from = graph.byId.get(d.original_source_id ?? d.source_report_id)
+        const to = graph.byId.get(d.original_target_id ?? d.target_report_id)
+        const period = describePeriod(d.reference_period)
+        return (
+          <div key={i} style={evidenceRow}>
+            {deps.length > 1 && (
+              <div style={{ fontSize: 11.5, fontWeight: 600, lineHeight: 1.35 }}>
+                <span style={{ color: from ? colourForReport(from) : 'var(--ink-body)' }}>
+                  {from?.title ?? d.original_source_id}
+                </span>
+                <span style={{ color: 'var(--ink-dim)', fontWeight: 400 }}> rests on </span>
+                <span style={{ color: to ? colourForReport(to) : 'var(--ink-body)' }}>
+                  {to?.title ?? d.original_target_id}
+                </span>
+              </div>
+            )}
+            <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 2 }}>
+              {REL_LABEL[d.relationship_type] ?? d.relationship_type}
+              {period && <span style={{ color: 'var(--ink-gold)' }}> · reads {period}</span>}
+            </div>
+            {/* The basis — the reason this edge is believed to exist, in the
+                source's own words wherever the researcher could quote them.
+                This is the field the standing rule is made of. */}
+            <div style={basisQuote}>“{d.basis}”</div>
+            {d.evidence_url && (
+              <a
+                href={d.evidence_url}
+                target="_blank"
+                rel="noreferrer"
+                style={evidenceLink}
+                title={d.evidence_url}
+              >
+                primary source ↗
+              </a>
+            )}
+          </div>
+        )
+      })}
+      <div style={{ fontSize: 10, color: 'var(--ink-faint)', marginTop: 10, lineHeight: 1.5 }}>
+        Every edge in this graph carries a document. This card is that rule,
+        visible.
+      </div>
+    </>
+  )
+}
+
+/**
+ * The hover identity chip — just enough to know what you are pointing at and
+ * that clicking does something: flag, title, publisher · region, and the
+ * affordance line. Everything else lives in the click card (`Detail`).
+ */
+function HoverChip({ report }: { report: ScoredReport }) {
+  const colour = colourForReport(report)
+  return (
+    <>
+      <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
+        <Flag country={report.country} />
+        <div
+          style={{ fontSize: 13, fontWeight: 600, color: colour, lineHeight: 1.3, flex: 1 }}
+        >
+          {report.title}
+        </div>
+      </div>
+      <div style={{ fontSize: 11, color: 'var(--ink-mute)', marginTop: 3 }}>
+        {report.publisher} · {report.region}
+      </div>
+      <div style={{ fontSize: 10, color: 'var(--ink-faint)', marginTop: 5 }}>
+        Click to trace its chain and open the full card.
+      </div>
+    </>
+  )
+}
+
+/** The full report card — slides in from the right on selection (Phase 4
+ * §4.2). Was the hover card until 2026-08-19; hover now shows `HoverChip`. */
 function Detail({
   report,
   graph,
@@ -1284,7 +1525,6 @@ function ChipBar({
   scopeCounts,
   filter,
   levelColours,
-  paper,
   onFamily,
   onScope,
   onAll,
@@ -1293,13 +1533,6 @@ function ChipBar({
   scopeCounts: Record<string, number>
   filter: FilterState
   levelColours: Record<string, string> | null
-  /**
-   * Blueprint mode. The chips are the legend, and a legend must show the ink
-   * the scene is actually wearing — which on paper is the dark printable
-   * ink, not the glow ink (whose white NZ/INT rings would vanish against
-   * light glass anyway).
-   */
-  paper: boolean
   onFamily: (family: ColourFamily) => void
   onScope: (scope: Scope) => void
   /** Show everything — scopes back to null. */
@@ -1401,8 +1634,7 @@ function ChipBar({
               const on =
                 !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
               const lit = anyFilter && on
-              const ink =
-                (paper ? BLUEPRINT_INK : FAMILY_INK)[group.country] ?? 'var(--ink-label)'
+              const ink = FAMILY_INK[group.country] ?? 'var(--ink-label)'
               const open = openFamily === group.country
               const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
               return (
@@ -2129,6 +2361,93 @@ const isolatedShelfGrid: React.CSSProperties = {
   // land in four rows about 220px wide.
   gridTemplateColumns: 'repeat(auto-fill, 6px)',
   gap: 4,
+}
+
+/**
+ * The selection card's frame. Slides on `transform`, not on `right`/`left` —
+ * transforms composite on the GPU and never reflow the panels around it. The
+ * ease-out curve arrives quickly and settles softly ("smooth and interesting"
+ * was the request; a linear slide reads as neither). Kept mounted at all
+ * times so the exit animates; `pointerEvents` gates by openness via the
+ * transform — offscreen it cannot be interacted with anyway.
+ */
+const selectionCard: React.CSSProperties = {
+  position: 'fixed',
+  top: 64,
+  right: 214,
+  width: 340,
+  maxHeight: 'calc(100vh - 220px)',
+  overflowY: 'auto',
+  padding: '14px 16px',
+  background: 'var(--panel-bg-solid)',
+  border: '1px solid var(--line)',
+  borderRadius: 10,
+  boxShadow: 'var(--panel-shadow)',
+  transition: 'transform 320ms cubic-bezier(0.22, 1, 0.36, 1)',
+  willChange: 'transform',
+  zIndex: 8,
+}
+
+/** The edge evidence card's frame — the left-hand mirror of `selectionCard`,
+ * sitting right of the Reports panel's column. Same transform-composited
+ * slide, opposite direction.
+ *
+ * The closed transforms on BOTH cards are plain pixel values (width + edge
+ * offset + shadow headroom — move them if the card geometry changes).
+ * A verification note worth keeping: under SOFTWARE rendering (SwiftShader,
+ * headless) at the Everything tier, these transitions can wedge at their
+ * start value indefinitely — the main thread never yields a frame for the
+ * transition to tick. Isolated-page transitions work fine there, and GPU
+ * compositing is unaffected; if a user on weak hardware ever reports "the
+ * card doesn't open", it opened — it just never animated. The fallback
+ * would be gating the transition on frame rate, not removing it. */
+const edgeCardFrame: React.CSSProperties = {
+  position: 'fixed',
+  top: 64,
+  left: 360,
+  width: 360,
+  maxHeight: 'calc(100vh - 220px)',
+  overflowY: 'auto',
+  padding: '14px 16px',
+  background: 'var(--panel-bg-solid)',
+  border: '1px solid var(--line)',
+  borderRadius: 10,
+  boxShadow: 'var(--panel-shadow)',
+  transition: 'transform 320ms cubic-bezier(0.22, 1, 0.36, 1)',
+  willChange: 'transform',
+  zIndex: 8,
+}
+
+const edgeCardHeading: React.CSSProperties = {
+  fontSize: 10,
+  letterSpacing: '0.09em',
+  textTransform: 'uppercase',
+  color: 'var(--ink-faint)',
+  marginBottom: 8,
+}
+
+const evidenceRow: React.CSSProperties = {
+  marginTop: 10,
+  paddingTop: 10,
+  borderTop: '1px solid var(--line-faint)',
+}
+
+const basisQuote: React.CSSProperties = {
+  fontSize: 11.5,
+  lineHeight: 1.55,
+  color: 'var(--ink-body)',
+  fontStyle: 'italic',
+  marginTop: 5,
+}
+
+const evidenceLink: React.CSSProperties = {
+  display: 'inline-block',
+  marginTop: 5,
+  fontSize: 10.5,
+  letterSpacing: '0.04em',
+  color: 'var(--accent)',
+  textDecoration: 'none',
+  borderBottom: '1px solid var(--accent-line)',
 }
 
 const tooltip: React.CSSProperties = {

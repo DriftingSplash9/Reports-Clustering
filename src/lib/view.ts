@@ -14,16 +14,16 @@ export interface ViewSettings {
   showEdges: boolean
   /** Sky gradient on the horizon. */
   showHorizon: boolean
-  /**
-   * Blueprint mode — the light theme, and deliberately not an inversion.
-   * Paper background, every node a pale disc, and the whole picture drawn in
-   * each family's dark ink: rims, edges and pulses alike, like a technical
-   * drawing. No glow (bloom dies on white anyway) and no haze. Same layout,
-   * same physics — toggling rebuilds materials, and position continuity is
-   * carried by the same `lastPositions` seeding a drilldown uses, so the
-   * graph does not re-scatter when the lights come on.
-   */
-  blueprint: boolean
+  // Blueprint mode (the paper/light theme) lived here from 2026-08-12 to
+  // 2026-08-19, when Thomas deleted it outright (Phase 4 item 1: "Delete
+  // Blueprint outright... subtractive and makes everything after it
+  // cheaper"). The ten-minute diagnosis before deletion: on paper, large
+  // nodes rendered as fuzzy soft blobs (the emissive floor fighting ACES
+  // tone mapping on a white ground) — a paper-pipeline fault the dark scene
+  // does not share, so nothing needed porting. Deleting it removed the one
+  // view setting that was a forceGraph MEMO DEP, so no toggle rebuilds the
+  // scene's materials any more. The code is in git history if a light theme
+  // ever returns; per the house rule, it is not kept commented out.
   /**
    * Distance haze, 0 to 1.
    *
@@ -91,7 +91,6 @@ export interface ViewSettings {
    * seven-way continental roll-up. A recolour pass only — layout, camera and
    * every other channel are untouched, and it must stay out of the
    * `forceGraph` memo deps (see `lib/modes.ts` for the model and the rule).
-   * Inert in blueprint, where fill is not a channel.
    */
   lens: LensMode
 }
@@ -122,7 +121,6 @@ export const DEFAULT_VIEW: ViewSettings = {
   showPulses: true,
   showEdges: true,
   showHorizon: false,
-  blueprint: false,
   fog: 0.35,
   glow: 0.55,
   autoRotate: false,
@@ -170,43 +168,8 @@ export const SCENE_BACKGROUND = '#010204'
  */
 export const HORIZON_COLOUR = '#12233a'
 
-/** Blueprint mode's paper, node disc, and dimmed-line colours. */
-export const PAPER_BACKGROUND = '#f2efe7'
-/**
- * Pure white, not near-paper white — the difference IS the encoding. A solid
- * disc renders as a slightly luminous white circle against the warmer paper
- * (the emissive floor in InfluenceGraph pushes it just over the background),
- * while a hollow one-off instrument keeps its emptied fill and reads as an
- * open ring. With a near-paper fill those two collapsed into the same
- * outline circle and the substance channel silently vanished in blueprint.
- */
-export const PAPER_NODE_FILL = '#ffffff'
-export const PAPER_DIM_LINK = '#cdc6b6'
-/** Line opacity on paper — dark ink needs more body than glow-lines do.
- * 0.42 measured near-invisible once compositing was fixed (the EU trunk came
- * out 1 RGB step off the paper); 0.62 draws a confident pen line. */
-export const PAPER_LINK_OPACITY = 0.62
-/**
- * Out-of-focus line opacity on paper. Far higher than the dark theme's
- * `DIM_LINK_OPACITY` (0.07) because the roles of the two numbers differ with
- * the ground they sit on: on near-black, a dim line only has to avoid adding
- * light; on paper, `PAPER_DIM_LINK` is already within a few RGB steps of the
- * background, so the *colour* carries the recession and the opacity has to
- * keep the line from vanishing outright — faint pencil under the inked chain,
- * not empty paper.
- */
-export const PAPER_DIM_LINK_OPACITY = 0.45
-
-/**
- * The dimmed-node treatment on paper — same shift of burden. A dimmed dark-
- * theme node survives as a ghost of alpha; a paper disc's fill is within a
- * few steps of the background, so alpha alone erases it. The ghost has to be
- * the RIM: fill mostly gone, ring held at a quarter strength of its dark ink
- * — a field of faint pencil circles under the traced chain, which is what a
- * draughtsman's underdrawing actually looks like.
- */
-export const PAPER_DIM_NODE_OPACITY = 0.35
-export const PAPER_DIM_RIM_FACTOR = 0.25
+// The PAPER_* constant family (background, node fill, dim link/node/rim
+// treatments, line opacities) was deleted with blueprint mode, 2026-08-19.
 
 /**
  * Bloom threshold at full glow.
@@ -234,8 +197,16 @@ export const PAPER_DIM_RIM_FACTOR = 0.25
  * authority. That is a known, deliberate exception in the same family as
  * BRICS yellow — not a tuning failure, and not fixable from this constant.
  */
-export const BLOOM_THRESHOLD_MIN = 0.17
-export const BLOOM_THRESHOLD_MAX = 0.32
+// **Rescaled 0.17/0.32 → 0.14/0.26 on 2026-08-19, with the lighting fix.**
+// The emissive floor dropped 0.3 → 0.12 (Phase 4 §2.2), which cuts the
+// brightest node's emitted component ~20% — left alone, these thresholds
+// would have drifted back toward the sat-above-everything dead zone this
+// comment's history warns about twice. Scaled analytically by that same
+// ratio, NOT verified by eye: bloom remains the least-trusted number in the
+// codebase (every render this side of Thomas's GPU is software-rasterised).
+// Judge it on hardware alongside the new directional shading.
+export const BLOOM_THRESHOLD_MIN = 0.14
+export const BLOOM_THRESHOLD_MAX = 0.26
 
 /**
  * Every constant governing how focus looks, in one place, because they are only

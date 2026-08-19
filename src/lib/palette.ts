@@ -1025,7 +1025,7 @@ export function colourForReport(report: {
  * So: this is the family's ink, full stop. Edges are drawn in it, pulses are
  * drawn in it, legend chips are drawn in it, and the two places a rim still
  * survives — hollow one-off instruments, where the rim IS the node, and
- * blueprint, where the whole drawing is ink on paper — draw in it too.
+ * (and, until 2026-08-19, blueprint) — draw in it too.
  *
  * The values are each family's **national step** from `SCOPE_COLOUR`, not a
  * separate set of hand-picked light tints the way v2's rims were. An edge
@@ -1150,14 +1150,13 @@ export type RimWeight = 'none' | 'normal' | 'thick' | 'bold'
  * In v2 this was one of two always-on family channels, applied to every node
  * in the scene. In v3 the fill carries the family on its own and rims are gone
  * from the dark scene entirely (see `nodeMaterial`), which leaves this table
- * governing exactly two survivors:
+ * governing exactly one survivor (blueprint, the other, was deleted
+ * 2026-08-19):
  *
  * - **Hollow one-off instruments**, where the rim *is* the node — there is no
  *   fill to carry anything, so the ring has to.
- * - **Blueprint**, where the whole drawing is ink on paper and a pale disc has
- *   no fill channel either.
  *
- * Both are cases where the interior is empty. That is the rule: **a rim is
+ * That is the rule: **a rim is
  * valid only where there is no coloured fill to read.** It is not a decorative
  * option to be switched back on.
  *
@@ -1189,43 +1188,12 @@ export function rimWeightFor(country: Country): RimWeight {
   return RIM_WEIGHT[familyOf(country)] ?? 'normal'
 }
 
-/**
- * The family inks for Blueprint mode — the same one-ink-per-family idea, in
- * dark, because the night palette's light inks vanish on paper. Approved
- * round 5 ("Blueprint mode" over a naive invert), built round 9.
- *
- * **Rebuilt for v3 and, like `FAMILY_INK`, normalised.** Each ink is its
- * family's `FAMILY_INK` scaled in linear light to Y = 0.085 — the same
- * technique `glowInk` uses, applied to a different target. Doing it by hand
- * the obvious way (drop each hue to a fixed HSL lightness) gave a table
- * spanning Y 0.025–0.244, a ten-fold range: Asia's indigo came out as near-
- * black while Australia's green came out mid-tone. On paper that reads as some
- * families drawn in pencil and others in marker, which is not a channel
- * anybody chose. Equal luminance is what makes them read as one pen.
- *
- * INT is the exception again and in the opposite direction: white-on-paper is
- * nothing, so a stateless body draws in graphite.
- */
-export const BLUEPRINT_INK: Record<ColourFamily, string> = {
-  CA: '#075781',
-  US: '#aa0000',
-  AU: '#026100',
-  NZ: '#6e32aa',
-  INT: '#4a4f5a',
-  EU: '#055f32',
-  XEU: '#005e50',
-  AFR: '#852a8b',
-  CN: '#294caa',
-  ASIA: '#5042aa',
-  IN: '#a10065',
-  SA: '#335d05',
-}
-
-/** Blueprint ink for a country — total, like `inkFor`. */
-export function blueprintInkFor(country: Country): string {
-  if (!isKnownCountry(country)) return '#5a6478'
-  return BLUEPRINT_INK[familyOf(country)] ?? '#5a6478'
-}
+// `BLUEPRINT_INK` / `blueprintInkFor` — the dark-on-paper family inks —
+// were deleted with blueprint mode on 2026-08-19 (Phase 4 item 1). The
+// equal-luminance derivation (each FAMILY_INK scaled in linear light to
+// Y = 0.085) is worth remembering if a print/light theme ever returns:
+// hand-picked dark inks spanned a ten-fold luminance range and read as
+// pencil-vs-marker.
 
 
 /**

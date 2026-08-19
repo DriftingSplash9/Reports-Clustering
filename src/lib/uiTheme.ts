@@ -1,6 +1,7 @@
 /**
  * The UI chrome theme — every colour the DOM panels use, as CSS variables on
- * a `data-theme` attribute App sets from `view.blueprint`.
+ * a `data-theme` attribute. Only 'dark' since blueprint's deletion
+ * (2026-08-19); the paper variable set went with it.
  *
  * Why variables and not two style objects: the panels' styles live as inline
  * `React.CSSProperties` across six components, written long before there were
@@ -17,18 +18,14 @@
  * a scene colour in a CSS variable would be invisible to the screenshot-pixel
  * tuning the scene colours are all chosen by.
  *
- * Two grounds, two vocabularies, one variable set:
- * - **dark** — machined instrument panels: near-black gradient surfaces, a
- *   1px top bevel and a bottom seam (the "3D" Thomas asked for, machined
- *   rather than bubbly), a deep drop shadow, and a faint blue field glow.
- * - **paper** — glass over paper: white-glass gradient surfaces, warm drop
- *   shadows, white inner bevel, dark inks for text.
+ * One ground: **dark** — machined instrument panels: near-black gradient
+ * surfaces, a 1px top bevel and a bottom seam (the "3D" Thomas asked for,
+ * machined rather than bubbly). The glow and blur that briefly joined them
+ * are gone (see --panel-shadow).
  *
  * The ink ladder runs strong → body → mid → label → mute → dim → faint →
- * faintest, and note the paper values invert the LUMINANCE ordering, not the
- * hierarchy: on dark ground, emphasis is bright; on paper, emphasis is dark.
- * Mapping literals to rungs (not to per-use names) is what let 60+ inline
- * colours collapse into eight variables.
+ * faintest. Mapping literals to rungs (not to per-use names) is what let 60+
+ * inline colours collapse into eight variables.
  */
 export const THEME_CSS = /* css */ `
 /* The masthead gradient's angle, registered so it can ANIMATE — an
@@ -93,35 +90,7 @@ export const THEME_CSS = /* css */ `
   --ripple-tint: rgba(150, 190, 255, 0.13);
 }
 
-[data-theme='paper'] {
-  --panel-bg: linear-gradient(174deg, rgba(255, 255, 255, 0.82) 0%, rgba(251, 249, 244, 0.66) 100%);
-  --panel-bg-solid: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 249, 243, 0.94));
-  --panel-shadow: 0 16px 36px rgba(72, 62, 44, 0.15), 0 3px 9px rgba(72, 62, 44, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(190, 182, 165, 0.35);
-  --glass-filter: blur(14px) saturate(1.25);
-  --btn-bg: rgba(255, 255, 255, 0.55);
-  --line: rgba(118, 112, 98, 0.30);
-  --line-strong: rgba(70, 90, 120, 0.52);
-  --line-faint: rgba(118, 112, 98, 0.16);
-  --ink-strong: #1c2836;
-  --ink-body: #2b3949;
-  --ink-mid: #3f5063;
-  --ink-label: #4d5f74;
-  --ink-mute: #5b6b7e;
-  --ink-dim: #74808f;
-  --ink-faint: #939aa6;
-  --ink-faintest: #b0b5bd;
-  --ink-gold: #8f6f1e;
-  --accent: #0066cc;
-  --accent-soft: rgba(0, 102, 204, 0.10);
-  --accent-line: rgba(0, 102, 204, 0.40);
-  --accent-active: rgba(0, 102, 204, 0.15);
-  --sel-ring: rgba(28, 48, 76, 0.55);
-  --title-ink: linear-gradient(var(--rig-title-angle), #0a58ad 0%, #6a3fbd 55%, #0e7a6e 110%);
-  --title-depth: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.9)) drop-shadow(0 2px 7px rgba(30, 80, 160, 0.25));
-  --frame-line: rgba(255, 255, 255, 0.9);
-  --frame-glow: rgba(0, 102, 204, 0.30);
-  --ripple-tint: rgba(255, 255, 255, 0.55);
-}
+/* [data-theme='paper'] went with blueprint mode, 2026-08-19. */
 
 /*
  * The unlinked shelf's occasional sheen (round 10: "an occasional ripple

@@ -225,12 +225,84 @@ Owner key: **[Thomas]** only he can do it · **[Agent]** a session does it ·
    instrument. Blocked 2026-08-19 only by the bridge dropping. **[Thomas]**
    separately: does the beam rendering (scrolling gradient for direction)
    join Phase 4, or wait for the mint?
-6. **[Both] Phase 4 backlog next** — `notes/phase-4-brief-2026-08-19.md`,
-   minus what Phase 3.5 already took (edge lengths ×2 is done). [Thomas]
-   ranks; [Agent] builds. Candidates: delete Blueprint (ten minutes of
-   diagnosis first), fix the key light sitting inside the graph, hover/click
-   affordances, the edge evidence card (the project's best material is still
-   thrown away before drawing), menu bar, help wiring, saved views.
+6. **[Both] Phase 4 — IN PROGRESS.** Item 1, **delete Blueprint, is DONE
+   (2026-08-19, third session)**: the ten-minute diagnosis first (on paper,
+   large nodes rendered as fuzzy blobs — the emissive floor fighting ACES
+   tone mapping on white; a paper-pipeline fault the dark scene does not
+   share, so nothing needed porting), then ~130 references removed across 9
+   files — `view.blueprint`, the PAPER_* constants, `BLUEPRINT_INK`/
+   `blueprintInkFor`, the paper CSS theme, the blueprint lighting rig, the
+   scene-background effect, `setLinkDimTheme`, the halo/pulse paper
+   variants, the Blueprint toggle. Two structural wins: **no view setting is
+   a forceGraph memo dep any more** (blueprint was the last), and rims now
+   survive in exactly one place (hollow one-off instruments). Verified: tsc,
+   build, 44-check validate, headless regression (lenses, trace, country
+   selector). Same day, also from Thomas's reaction: **panel glow/blur
+   removed** — flat near-opaque panels, no backdrop blur, no soft shadow,
+   blue keyline stays (uiTheme has the one-day history).
+   **Items 4+5 (hover feedback + selection card) are DONE too (same
+   session):** hover now grows the node toward 1.15× over an eased 0.15s,
+   lifts its emissive toward the selection ceiling, and draws a smaller,
+   fainter second instance of the Phase 0b halo (HOVER_* constants in
+   InfluenceGraph; hover lives in refs and useFrame, never React state the
+   renderer reads, never the memo deps; positions from positionedById per
+   the (0,0,0) trap). The full Detail card moved from the hover tooltip to
+   a fixed panel that slides in from the right on click (320ms ease-out,
+   transform-composited, keeps its content through the slide-out via
+   cardReport); hover now shows a small identity chip (flag, title,
+   publisher · region, a "click to trace" affordance line) — the
+   full-card-on-hover duplicate encoding is gone. Verified headless
+   including an in/out transform probe; note the search box eats the first
+   Escape while it holds text (its documented behaviour) — the second
+   reaches the selection.
+   **Item 6, the edge evidence card, is DONE (2026-08-19, fourth session) —
+   the graph finally shows its working.** Clicking any line, arrowhead or
+   travelling pulse slides a card in from the LEFT (right = what a node is,
+   left = why an edge exists) listing every Dependency behind that drawn
+   line — real pre-disclosure endpoints ("X rests on Y", resolved through
+   new `original_source_id`/`original_target_id` kept by disclosure in
+   hierarchy.ts), relationship type, reference period, the verbatim basis
+   quote, and the `evidence_url` as a primary-source link. Trunks render
+   the full list under a "one drawn line standing for N documented
+   dependencies" header. No back-reference is stored on LinkDatum at all —
+   App re-filters the disclosed edges by edgeKey on demand, which answers
+   the brief's memory worry by holding nothing. Direct raycast handles the
+   generous targets; for 1.6px lines a screen-space picker
+   (`registerEdgePicker`) resolves missed clicks to the nearest visible
+   line within 9px — measured first: ~330 blind clicks landed zero direct
+   line hits, so without the picker edges were unclickable in practice.
+   Two traps found and recorded in-code: the missed-click path can fire
+   more than once per click, so it always OPENS rather than toggles (a
+   toggle self-cancelled); and under SOFTWARE rendering at Everything-tier
+   load the card's CSS transition can wedge at its start value — GPU
+   compositing is unaffected, note kept on `edgeCardFrame`.
+   **Same session, pulses re-inked:** the whitened-additive core lasted one
+   day — Thomas at corpus scale: "TBH I am not liking these white pulses...
+   colors need reinstated." Family ink restored verbatim in pulseMaterial;
+   the why-it-failed (additive white × thousands of photons = snowstorm)
+   is in the comment.
+   **BURNER (Thomas, 2026-08-19):** (a) pulse SIZE and SHAPE "need
+   addressed" — take together with the beam-edge idea, since the beam
+   replaces pulse geometry on the fastest edges; (b) add the report's URL
+   link to the node selection card — scheduled with the menu bar + help
+   round, per Thomas.
+   Remaining Phase 4, in the brief's order: menu bar + help next (including
+   the node-card URL link), then saved views last.
+   NOTE for whoever writes docs: `START-HERE.md`/`REPORTS.md`/onboarding may
+   still mention Blueprint — sweep the prose when the menu-bar/help work
+   touches them.
+   **Item 2, the lighting, is DONE too (same session):** both point lights
+   (key sat ~590 units inside a ~3,000-unit cloud, inverse-square decay —
+   no consistent light direction, far half lit by directionless ambient
+   alone) replaced with directional lights per the brief's §2.1 numbers
+   (key [0.6,0.8,1] @ 2.2, cool fill from behind @ 0.7, ambient 0.5 → 0.28);
+   emissive floor 0.3 → 0.12 (§2.2 — self-illumination was drowning the
+   shading; v3's palette floor removed the reason 0.3 existed); bloom
+   thresholds rescaled 0.17/0.32 → 0.14/0.26 to the new emitted range,
+   analytically only. Verified headless: consistent terminator on every
+   sphere at both close and corpus scale. **Bloom and overall darkness are
+   for Thomas's GPU to judge — every number here was tuned against
+   software renders.**
 7. **[Agent] Phase 3 after Phase 4** (reordered by Thomas 2026-08-19):
    geography-takes-the-fill mode; typed edges (remember:
    `methodology_depends_on` is the MOST common type at 407, and a trunk

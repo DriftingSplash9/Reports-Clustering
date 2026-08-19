@@ -6,7 +6,6 @@ import { forceCollide } from 'd3-force-3d'
 import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
 import {
-  blueprintInkFor,
   glowInk,
   inkFor,
   rimWeightFor,
@@ -33,11 +32,6 @@ import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
   LINK_OPACITY,
-  PAPER_BACKGROUND,
-  PAPER_DIM_NODE_OPACITY,
-  PAPER_DIM_RIM_FACTOR,
-  PAPER_LINK_OPACITY,
-  PAPER_NODE_FILL,
   SCENE_BACKGROUND,
   HORIZON_COLOUR,
   ZOOM_MAX,
@@ -46,7 +40,6 @@ import {
 import {
   gradientLinkMaterial,
   pulseMaterial,
-  setLinkDimTheme,
   setLinkFocus,
   setLinkFog,
   teardropGeometry,
@@ -157,6 +150,26 @@ export const FOV = 24
  * becoming scenery of its own.
  */
 const SELECTION_HALO_PIXELS = 76
+
+/**
+ * The hover treatment — Phase 4 §4.1 (Thomas: "a lift and grow and glow/shadow
+ * to signify we can click it"). Hover used to be entirely 2D: a tooltip div
+ * appeared and the node itself did not change, which is exactly why nothing
+ * read as clickable.
+ *
+ * Grow eases the hovered mesh toward 1.15× over 0.15s (smoothstepped — a snap
+ * reads as a glitch, and this scene has a suspected flicker bug people will
+ * blame it for). The "lift" is emissive: hover brightens the node toward the
+ * selection ceiling. The "glow" is a second, smaller, fainter instance of the
+ * Phase 0b selection halo. All three run in `useFrame` off a ref — hover
+ * NEVER touches React state the renderer reads, and never goes near the
+ * forceGraph memo deps.
+ */
+const HOVER_GROW = 0.15
+const HOVER_EASE_SECONDS = 0.15
+const HOVER_EMISSIVE_LIFT = 0.3
+const HOVER_HALO_PIXELS = 48
+const HOVER_HALO_OPACITY = 0.45
 
 /**
  * How many ticks to let the layout run, un-rendered, before the very first
@@ -485,6 +498,8 @@ export default function InfluenceGraph({
   levelColours,
   onHover,
   onSelect,
+  onSelectEdge,
+  registerEdgePicker,
   onBounds,
   onToggleNode,
 }: {
@@ -523,6 +538,26 @@ export default function InfluenceGraph({
   levelColours: Record<string, string> | null
   onHover: (report: ScoredReport | null) => void
   onSelect: (id: string | null) => void
+  /**
+   * Click landed on an edge — a line, its arrowhead, or a travelling pulse —
+   * rather than a node. Reports the edgeKey; App owns what selecting an edge
+   * means (the evidence card) and the toggle semantics, mirroring `onSelect`.
+   */
+  onSelectEdge: (key: string) => void
+  /**
+   * Hands App a screen-space edge picker for clicks that hit NOTHING.
+   *
+   * A drawn line is ~1.6px wide — as a raycast target it is a precision
+   * instrument nobody can reliably hit (measured: a 40px-grid sweep of ~330
+   * synthetic clicks over the Everything tier landed zero). So the direct
+   * raycast handles the generous targets (pulses, trunks, arrowheads), and
+   * this picker gives ordinary lines a tolerance: on a missed click, App asks
+   * for the nearest visible link within a few pixels of the cursor. It lives
+   * behind a registration callback because only this component holds the
+   * camera, the live link list and the layout positions — and `onPointerMissed`
+   * only exists on the Canvas, which App owns.
+   */
+  registerEdgePicker: (pick: (clientX: number, clientY: number) => string | null) => void
   onBounds: (bounds: GraphBounds) => void
   /**
    * Double-click on a node or an orb. App.tsx owns the drilldown state and
@@ -656,7 +691,7 @@ export default function InfluenceGraph({
   const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
   const fitDistance = useRef(0)
-  const { camera, controls, scene, size } = useThree()
+  const { camera, controls, scene, size, gl } = useThree()
 
   /**
    * One sprite for the whole scene, built once. Its position, scale, colour
@@ -664,6 +699,17 @@ export default function InfluenceGraph({
    * React state, because it has to track the camera every frame.
    */
   const halo = useMemo(() => selectionHalo(), [])
+  /** The hover glow — same sprite machinery, smaller and fainter. */
+  const hoverHalo = useMemo(() => selectionHalo(), [])
+  /**
+   * Which node the pointer is over, for the 3D hover feedback. A ref, not
+   * state: `useFrame` reads it every frame, and the 2D tooltip already gets
+   * its own copy through `onHover` — two consumers, two channels, neither
+   * re-rendering the tree on mouse move.
+   */
+  const hoveredIdRef = useRef<string | null>(null)
+  /** The eased hover animation: which mesh is growing, and how far along. */
+  const hoverAnim = useRef<{ id: string | null; t: number }>({ id: null, t: 0 })
   /** Scratch vector for the halo's world position — allocated once, not per frame. */
   const haloWorldPosition = useRef(new THREE.Vector3())
 
@@ -675,6 +721,8 @@ export default function InfluenceGraph({
    * be trusted for (see the halo block in `useFrame`).
    */
   const positionedById = useRef(new Map<string, PositionedNode>())
+  /** The current LinkDatum list, for the screen-space edge picker. */
+  const linkDataRef = useRef<LinkDatum[]>([])
 
   /**
    * The spread slider rebuilds the whole layout (forces, warmup, camera
@@ -753,18 +801,10 @@ export default function InfluenceGraph({
     !visibleRef.current || visibleRef.current.edges.has(l.key)
 
   const forceGraph = useMemo(() => {
-    // Blueprint mode is a MEMO DEP, deliberately — the one view setting that
-    // is. Every other toggle mutates live materials because a rebuild would
-    // re-run layout for a paint job; blueprint changes the colour of every
-    // fill, rim, line and pulse at once, which is not a mutation pass, it is
-    // a different set of materials. The rebuild is cheap to the eye because
-    // `lastPositions` seeds every node exactly where it was (the same
-    // continuity a drilldown rides), so flipping the switch repaints the
-    // scene without moving it.
-    const bp = view.blueprint
-    // Theme the shared out-of-focus treatment BEFORE any material for this
-    // theme is built or focused — see the note in linkVisuals.
-    setLinkDimTheme(bp)
+    // Since blueprint's deletion (2026-08-19) NO view setting is a memo dep —
+    // every toggle mutates live materials, because a rebuild re-runs layout
+    // for a paint job. Blueprint was the one deliberate exception (a
+    // different set of materials, not a paint job); it went with the mode.
     // Meshes from a previous graph are about to be replaced; holding them would
     // leak and, worse, let focus updates write to spheres no longer in a scene.
     meshes.current.clear()
@@ -896,13 +936,9 @@ export default function InfluenceGraph({
         existing.cross = existing.cross || cross
         continue
       }
-      // Family ink, not fill — see the note on LinkDatum.colour. In blueprint
-      // the same system, darker: each family's ink swaps to its printable
-      // variant (blueprintInkFor), and because pulses inherit LinkDatum.colour
-      // through the material cache, the teardrops arrive in dark ink with no
-      // separate wiring.
-      const linkInk = bp ? blueprintInkFor : inkFor
-      const fallbackInk = bp ? '#5a6478' : '#7f9ad0'
+      // Family ink, not fill — see the note on LinkDatum.colour.
+      const linkInk = inkFor
+      const fallbackInk = '#7f9ad0'
       linkMap.set(key, {
         source: e.target_report_id,
         target: e.source_report_id,
@@ -920,6 +956,8 @@ export default function InfluenceGraph({
       })
     }
     const links: LinkDatum[] = [...linkMap.values()]
+    // For the screen-space edge picker — see registerEdgePicker on the props.
+    linkDataRef.current = links
 
     // One material per link, held so focus changes are a uniform write rather
     // than a rebuild, and so the library's repeated `obj.material = ...` on
@@ -931,21 +969,18 @@ export default function InfluenceGraph({
       // the relations rendering to reuse as a *dotted* style — a different
       // pattern for a different claim. The fourth is the trunk brightness:
       // log-scaled with the stacked count so 57 edges read as unmistakably
-      // heavier, not 57× louder. Blueprint runs the same formula from a higher
-      // base — dark ink on paper needs body where glow-lines need restraint —
-      // with the cap lifted in proportion so trunks keep their full headroom.
+      // heavier, not 57× louder.
       // A cross-border edge starts 1.3× brighter still (round 10): brightness
       // and the width boost below are the "bolder" half of the treatment, the
       // blinking pulse is the other.
-      const baseOpacity =
-        (bp ? PAPER_LINK_OPACITY : LINK_OPACITY) * (l.cross ? 1.3 : 1)
+      const baseOpacity = LINK_OPACITY * (l.cross ? 1.3 : 1)
       linkMaterials.current.set(
         l.key,
         gradientLinkMaterial(
           l.colour,
           l.endColour,
           false,
-          Math.min(bp ? 0.82 : 0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
+          Math.min(0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
         ),
       )
     }
@@ -972,7 +1007,7 @@ export default function InfluenceGraph({
           teardropGeometry(baseLinkWidth(l) * PULSE_WIDTH_FACTOR),
           // The blink variant for a cross-border edge — a separate material
           // instance per ink, animated by tickPulseBlink in useFrame below.
-          pulseMaterial(l.colour, l.cross, bp),
+          pulseMaterial(l.colour, l.cross),
         ),
       )
     }
@@ -981,7 +1016,7 @@ export default function InfluenceGraph({
     // rather than a silent one.
     const fallbackParticle = new THREE.Mesh(
       teardropGeometry(4),
-      pulseMaterial('#7f9ad0', false, bp),
+      pulseMaterial('#7f9ad0'),
     )
 
     const fg = new ThreeForceGraph()
@@ -999,22 +1034,16 @@ export default function InfluenceGraph({
         const n = node as ScoredReport
         const orbNode = isOrbId(n.id)
         // Orbs keep the family colour even mid-recolour: an orb spans levels,
-        // so no single level colour is true of it. Blueprint overrides both:
-        // every node is the same pale paper disc, because on paper the fill
-        // stops being a channel at all — family moves entirely to the ink
-        // (rim + edges), and level to the flyout/hover, which is the whole
-        // "technical drawing" premise. The single-family recolour is likewise
-        // suspended here and in the recolour effect below.
+        // so no single level colour is true of it.
         // Lens first, then the single-family level recolour, then the plain
         // palette — the same precedence the recolour effect below applies, and
         // the two MUST agree or a mesh rebuilt mid-lens flickers to the wrong
         // colour until the next effect pass.
-        const colour = bp
-          ? PAPER_NODE_FILL
-          : (!orbNode &&
-              (lensColourFor(n.country, lensRef.current) ??
-                levelColoursRef.current?.[scopeOf(n)])) ||
-            colourForReport(n)
+        const colour =
+          (!orbNode &&
+            (lensColourFor(n.country, lensRef.current) ??
+              levelColoursRef.current?.[scopeOf(n)])) ||
+          colourForReport(n)
         const radius = radiusFor(n.size_score)
 
         // No disposal of a superseded mesh here: three-forcegraph deallocates
@@ -1028,17 +1057,18 @@ export default function InfluenceGraph({
         // Capped below 1 — past that the bloom pass clips everything to
         // white and the colour and size channels both stop working.
         //
-        // Blueprint pins it low and flat: paper discs are lit by the lights,
-        // not from within (a self-luminous disc reads as a screen, not
-        // paper), and bloom is off in this mode so the authority-glow
-        // reading is suspended anyway. The floor is not decorative — ACES
-        // tone mapping compresses a lit white hard enough that ambient alone
-        // leaves the discs concrete-grey (measured on the first cut at
-        // 0.12/0.85 ambient); this floor against the raised blueprint
-        // ambient is what pushes a solid disc's white just past the paper
-        // tone, so solid reads brighter-than-page and hollow reads as an
-        // open ring (see PAPER_NODE_FILL).
-        const emissive = bp ? 0.32 : 0.3 + n.size_score * 0.62
+        // **Floor dropped 0.3 → 0.12 on 2026-08-19 (Phase 4 §2.2).** At 0.3
+        // the self-illumination term rivalled everything the lights
+        // contributed, so the shading gradient was a small ripple on a large
+        // flat value — the mechanical meaning of "the nodes are flat". The
+        // 0.3 was chosen when it was the only thing keeping v2's dark fills
+        // off the background; v3's palette floors fill luminance at Y ≈ 0.21,
+        // which removed that reason. The directional rig in App.tsx (same
+        // change) supplies the shading this floor used to drown. The
+        // authority SLOPE (0.62) is untouched — glow still ranks nodes the
+        // same way, from a lower base. BLOOM_THRESHOLD_MIN/MAX in view.ts
+        // were rescaled to the new emitted range in the same edit.
+        const emissive = 0.12 + n.size_score * 0.62
 
         // Born already dimmed if it is outside the current focus. The library
         // can rebuild these objects at times we do not control, and a sphere
@@ -1074,33 +1104,24 @@ export default function InfluenceGraph({
             // in both themes; they are statements about the family, not
             // about the lighting.
             // Glow tracks authority, not fill brightness — see `glowInk`.
-            // Blueprint keeps the fill as its own emissive: bloom is off
-            // there, and the floor is what lifts a solid white disc past the
-            // paper tone (see PAPER_NODE_FILL).
-            emissiveColour: bp ? colour : glowInk(colour),
+            emissiveColour: glowInk(colour),
             // Lens-aware for the same reason `colour` is: a hollow node's
             // ring is its whole body, and a mesh rebuilt mid-lens must be
             // born wearing the lens ink, not the family ink under it.
-            rimColour: bp
-              ? blueprintInkFor(n.country)
-              : (lensColourFor(n.country, lensRef.current) ?? inkFor(n.country)),
+            rimColour:
+              lensColourFor(n.country, lensRef.current) ?? inkFor(n.country),
             // **Rims exist only where there is no coloured fill to read.**
-            // Blueprint is ink on paper and a hollow one-off instrument has
-            // an emptied fill; everything else in the dark scene now carries
-            // its family in the fill itself, at a flat luminance, and the
-            // ring is redundant. An orb is deliberately NOT in this list —
-            // it used to wear a wide bright band, and it already has the
-            // breath (`ORB_PULSE_PERIOD_SECONDS`) saying the same thing with
-            // motion instead of ink.
-            drawRim: bp || hollow,
+            // A hollow one-off instrument has an emptied fill; everything
+            // else carries its family in the fill itself, at a flat
+            // luminance, and the ring is redundant. An orb is deliberately
+            // NOT in this list — it used to wear a wide bright band, and it
+            // already has the breath (`ORB_PULSE_PERIOD_SECONDS`) saying the
+            // same thing with motion instead of ink.
+            drawRim: hollow,
             radius,
             emissive,
             lit,
-            // Themed: on paper the dim fill mostly vanishes into the
-            // background whatever the number, so it is allowed to sit much
-            // higher — the ghost is carried by the rim instead (see
-            // PAPER_DIM_NODE_OPACITY / applyFocus).
-            dimOpacity: bp ? PAPER_DIM_NODE_OPACITY : DIM_NODE_OPACITY,
+            dimOpacity: DIM_NODE_OPACITY,
             dimEmissive: DIM_NODE_EMISSIVE,
             // How heavily to draw it, in the two cases where it is drawn at
             // all — see `RIM_WEIGHT`.
@@ -1288,7 +1309,7 @@ export default function InfluenceGraph({
 
     return fg
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [graph, spreadApplied, view.blueprint])
+  }, [graph, spreadApplied])
 
   /**
    * `useLayoutEffect`, not `useEffect` — deliberately, and this one bug for
@@ -1888,26 +1909,10 @@ export default function InfluenceGraph({
     forceGraph.d3ReheatSimulation()
   }, [view.geoAffinity, forceGraph])
 
-  /**
-   * Blueprint gives the SCENE an opaque paper background; the dark theme
-   * keeps the canvas transparent over the page's CSS colour. Not styling —
-   * compositing correctness, diagnosed off pixel measurements: semi-
-   * transparent shader elements (dim links at 0.45, dim discs) blend into
-   * the transparent framebuffer, and the browser then composites those
-   * alpha-weighted values through a linear→sRGB conversion that lifts them
-   * nonlinearly — near-paper tones blow out to white, which is exactly what
-   * the first blueprint screenshots showed: "dim" lines glowing BRIGHTER
-   * than the paper. An opaque background moves the blend inside the GL
-   * buffer, in linear space, where it is right. The dark theme never showed
-   * the fault only because everything there is brighter than its
-   * background; it keeps its tuned-by-eye CSS compositing untouched.
-   */
-  useEffect(() => {
-    scene.background = view.blueprint ? new THREE.Color(PAPER_BACKGROUND) : null
-    return () => {
-      scene.background = null
-    }
-  }, [view.blueprint, scene])
+  // The scene-background effect (opaque paper vs transparent-over-CSS) went
+  // with blueprint, 2026-08-19 — the dark theme's compositing was always the
+  // transparent framebuffer over the page's CSS colour, and now that is the
+  // only path.
 
 
   /**
@@ -1966,11 +1971,6 @@ export default function InfluenceGraph({
    * just computing the ordinary colour again; nothing is stashed.
    */
   useEffect(() => {
-    // Suspended on paper — blueprint discs have no fill channel to recolour
-    // (see nodeThreeObject), and this effect also fires on every rebuild, so
-    // without the guard it would repaint the paper discs in scene colours the
-    // moment blueprint switched on with a single-family filter active.
-    if (view.blueprint) return
     for (const [id, mesh] of meshes.current) {
       const r = graph.byId.get(id)
       if (!r || isOrbId(id)) continue
@@ -1986,11 +1986,9 @@ export default function InfluenceGraph({
       material.color.set(next)
       // Normalised, for the same reason the constructor normalises — this
       // effect is a paint job, and a paint job must not silently rewrite what
-      // the glow channel means. Safe to call unconditionally: the effect
-      // returns early in blueprint (see above), so this only ever runs on the
-      // dark scene. (BRICS yellow and INT white still bloom harder than the
-      // rest under GROUP_COMPARISON — that is their fill luminance, accepted
-      // in the review, not this channel.)
+      // the glow channel means. (BRICS yellow and INT white still bloom
+      // harder than the rest under GROUP_COMPARISON — that is their fill
+      // luminance, accepted in the review, not this channel.)
       material.emissive.set(glowInk(next))
       // The rim too — a hollow node's ring IS its body, and a family-violet
       // ring over a lens-grey scene would be the one place on screen where
@@ -2008,7 +2006,7 @@ export default function InfluenceGraph({
     // `view.lens` in the deps of a MUTATION effect, never the forceGraph
     // memo's — that distinction is the whole mode system. See lib/modes.ts.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [levelColours, view.lens, forceGraph, view.blueprint])
+  }, [levelColours, view.lens, forceGraph])
 
   /**
    * Apply the focus to everything that is already in the scene.
@@ -2038,10 +2036,8 @@ export default function InfluenceGraph({
   }
 
   function applyFocus() {
-    // The dim treatment is themed — see the PAPER_DIM_* notes in view.ts.
-    const bp = view.blueprint
-    const dimOpacity = bp ? PAPER_DIM_NODE_OPACITY : DIM_NODE_OPACITY
-    const dimRim = bp ? PAPER_DIM_RIM_FACTOR : undefined
+    const dimOpacity = DIM_NODE_OPACITY
+    const dimRim = undefined
 
     for (const [id, mesh] of meshes.current) {
       const material = mesh.material as NodeMaterial
@@ -2296,12 +2292,7 @@ export default function InfluenceGraph({
       runFit(!userOwnsCamera.current)
     }
     advanceFlight(delta)
-    // No haze on paper — fog resolves toward SCENE_BACKGROUND (near-black),
-    // which on the paper theme would read as smoke rolling in rather than
-    // distance. Depth cues in blueprint are the drawing's own: occlusion and
-    // line convergence, like any technical drawing. The slider keeps its
-    // value; it simply resumes when the lights go back off.
-    updateFog(view.blueprint ? 0 : view.fog)
+    updateFog(view.fog)
 
     // The orb breath — see `ORB_PULSE_PERIOD_SECONDS`. Driven off wall-clock
     // `delta`, not the tick count, for the same reason the re-fit window is:
@@ -2321,6 +2312,44 @@ export default function InfluenceGraph({
         focusEmissive(id, mesh, focusRef.current) *
         (ORB_PULSE_FLOOR + (1 - ORB_PULSE_FLOOR) * breath)
       mesh.scale.setScalar(nodeScale.current * (1 + ORB_PULSE_SCALE * breath))
+    }
+
+    // The hover feedback — grow, lift, glow (see the HOVER_* constants).
+    // Orbs are excluded from the grow/lift: the breath already owns their
+    // scale and emissive every frame, and two writers on one channel is how
+    // values snap. Restoration on un-hover is explicit (scale back to
+    // nodeScale, emissive back to what the focus pass would set) rather than
+    // left to the next applyFocus, which may be many frames away.
+    {
+      const anim = hoverAnim.current
+      const targetId = hoveredIdRef.current
+      if (anim.id !== targetId) {
+        if (anim.id) {
+          const prev = meshes.current.get(anim.id)
+          if (prev && !prev.userData.orb) {
+            prev.scale.setScalar(nodeScale.current)
+            const mat = prev.material as NodeMaterial
+            mat.emissiveIntensity = focusEmissive(anim.id, prev, focusRef.current)
+          }
+        }
+        anim.id = targetId
+        anim.t = 0
+      }
+      if (anim.id) {
+        const mesh = meshes.current.get(anim.id)
+        if (mesh && !mesh.userData.orb) {
+          anim.t = Math.min(1, anim.t + delta / HOVER_EASE_SECONDS)
+          const s = anim.t * anim.t * (3 - 2 * anim.t)
+          mesh.scale.setScalar(nodeScale.current * (1 + HOVER_GROW * s))
+          const mat = mesh.material as NodeMaterial
+          // Capped where the selection lift caps — past ~0.95 bloom clips to
+          // white and the node stops reading as its true size.
+          mat.emissiveIntensity = Math.min(
+            0.95,
+            focusEmissive(anim.id, mesh, focusRef.current) + HOVER_EMISSIVE_LIFT * s,
+          )
+        }
+      }
     }
 
     // The selection halo. Rewritten every frame rather than on selection
@@ -2353,7 +2382,6 @@ export default function InfluenceGraph({
       setHaloTheme(
         halo,
         material ? `#${material.color.getHexString()}` : colourForReport(selectedNode),
-        view.blueprint,
       )
       haloWorldPosition.current.set(selectedNode.x, selectedNode.y, selectedNode.z)
       placeSelectionHalo(
@@ -2369,11 +2397,93 @@ export default function InfluenceGraph({
       halo.visible = false
     }
 
+    // The hover glow — the smaller halo, faded and scaled in with the same
+    // ease as the grow, and suppressed on the selected node (the selection
+    // halo is already there; two rings on one node reads as an error).
+    // Position from `positionedById`, never `meshes.current` — the (0,0,0)
+    // trap documented on the selection halo above applies here identically.
+    const hoverId = hoverAnim.current.id
+    const hoveredNode =
+      hoverId && hoverId !== selectedId ? positionedById.current.get(hoverId) : undefined
+    if (hoveredNode && Number.isFinite(hoveredNode.x) && shownNode(hoveredNode.id)) {
+      const t = hoverAnim.current.t
+      const s = t * t * (3 - 2 * t)
+      const mesh = meshes.current.get(hoveredNode.id)
+      const material = mesh?.material as NodeMaterial | undefined
+      setHaloTheme(
+        hoverHalo,
+        material ? `#${material.color.getHexString()}` : colourForReport(hoveredNode),
+      )
+      ;(hoverHalo.material as THREE.SpriteMaterial).opacity = HOVER_HALO_OPACITY * s
+      haloWorldPosition.current.set(hoveredNode.x, hoveredNode.y, hoveredNode.z)
+      placeSelectionHalo(
+        hoverHalo,
+        haloWorldPosition.current,
+        camera.position,
+        (FOV * Math.PI) / 360,
+        size.height,
+        HOVER_HALO_PIXELS * Math.max(0.001, s),
+      )
+      hoverHalo.visible = true
+    } else {
+      hoverHalo.visible = false
+    }
+
     // Node meshes are created lazily by the library, and can be recreated
     // without warning. A size change means the set we last styled is not the
     // set now on screen, so the focus has to be laid on again.
     if (meshes.current.size !== appliedMeshCount.current) applyFocus()
   })
+
+  /**
+   * The screen-space edge picker, handed up to App for missed clicks — the
+   * click tolerance that makes a 1.6px line a real target. Projects every
+   * VISIBLE link's endpoints (layout data, never the mesh map) into canvas
+   * pixels and returns the nearest line within the tolerance. O(links) per
+   * missed click — ~1,100 projections, microseconds, and it runs only when
+   * the raycast already came back empty.
+   */
+  useEffect(() => {
+    const v = new THREE.Vector3()
+    const TOLERANCE_PX = 9
+    registerEdgePicker((clientX, clientY) => {
+      const rect = gl.domElement.getBoundingClientRect()
+      const px = clientX - rect.left
+      const py = clientY - rect.top
+      const project = (id: string): { x: number; y: number } | null => {
+        const n = positionedById.current.get(id)
+        if (!n || !Number.isFinite(n.x)) return null
+        v.set(n.x, n.y, n.z).project(camera)
+        // Behind the camera or past the far plane — not a clickable pixel.
+        if (v.z < -1 || v.z > 1) return null
+        return { x: ((v.x + 1) / 2) * rect.width, y: ((1 - v.y) / 2) * rect.height }
+      }
+      let best: string | null = null
+      let bestDistance = TOLERANCE_PX
+      for (const l of linkDataRef.current) {
+        if (!shownLink(l)) continue
+        const a = project(l.source)
+        const b = project(l.target)
+        if (!a || !b) continue
+        // Point-to-segment distance, 2D.
+        const abx = b.x - a.x
+        const aby = b.y - a.y
+        const lengthSq = abx * abx + aby * aby
+        const t = lengthSq
+          ? Math.max(0, Math.min(1, ((px - a.x) * abx + (py - a.y) * aby) / lengthSq))
+          : 0
+        const dx = px - (a.x + t * abx)
+        const dy = py - (a.y + t * aby)
+        const distance = Math.hypot(dx, dy)
+        if (distance < bestDistance) {
+          bestDistance = distance
+          best = l.key
+        }
+      }
+      return best
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [registerEdgePicker, camera, gl])
 
   /** Walk up to whichever ancestor carries the report id. */
   function reportIdAt(object: THREE.Object3D): string | undefined {
@@ -2382,9 +2492,31 @@ export default function InfluenceGraph({
     return obj?.userData?.reportId as string | undefined
   }
 
+  /**
+   * Walk up to whichever ancestor carries a LINK datum, and return its key.
+   *
+   * three-forcegraph's digest stamps `__data` (the datum) on every object it
+   * creates — the line cylinders, the arrow cones, AND the per-link photon
+   * groups the travelling pulses live under. So a click on a fat teardrop
+   * resolves to its edge exactly like a click on the line itself, which
+   * matters: at 1.6px the line is a precision target, the pulse is not.
+   * A LinkDatum is recognised by its `key`; node datums carry `id` and no
+   * `key`, so the two walkers can never claim each other's objects.
+   */
+  function linkKeyAt(object: THREE.Object3D): string | undefined {
+    let obj: THREE.Object3D | null = object
+    while (obj) {
+      const data = (obj as unknown as { __data?: { key?: unknown } }).__data
+      if (data && typeof data.key === 'string') return data.key
+      obj = obj.parent
+    }
+    return undefined
+  }
+
   function handlePointerMove(e: ThreeEvent<PointerEvent>) {
     e.stopPropagation()
     const id = reportIdAt(e.object)
+    hoveredIdRef.current = id ?? null
     onHover(id ? (graph.byId.get(id) ?? null) : null)
   }
 
@@ -2414,8 +2546,15 @@ export default function InfluenceGraph({
 
     e.stopPropagation()
     const id = reportIdAt(e.object)
-    if (!id) return
-    onSelect(focus?.selectedId === id ? null : id)
+    if (id) {
+      onSelect(focus?.selectedId === id ? null : id)
+      return
+    }
+    // Not a node — an edge, then, if anything. Lines, arrowheads and pulses
+    // all resolve here (see linkKeyAt), and App owns the toggle semantics
+    // the same way it owns the node selection's.
+    const linkKey = linkKeyAt(e.object)
+    if (linkKey) onSelectEdge(linkKey)
   }
 
   /** Double-click to open an orb, or fold a real node's own rung back in. */
@@ -2429,10 +2568,14 @@ export default function InfluenceGraph({
   return (
     <>
       <primitive object={halo} />
+      <primitive object={hoverHalo} />
       <primitive
         object={forceGraph}
         onPointerMove={handlePointerMove}
-        onPointerOut={() => onHover(null)}
+        onPointerOut={() => {
+          hoveredIdRef.current = null
+          onHover(null)
+        }}
         onPointerDown={handlePointerDown}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}

@@ -145,6 +145,18 @@ export function resolveId(
  * special-casing; only code that specifically wants the membership list
  * needs to know `OrbNode` exists at all.
  */
+/**
+ * A Dependency as it leaves disclosure: endpoints remapped to whatever is
+ * actually drawn (possibly an orb), with the real pre-disclosure endpoints
+ * preserved. Declared here rather than widening `Dependency` in types.ts —
+ * that interface is the DATA schema, and these two fields are renderer
+ * bookkeeping that no validator should ever see.
+ */
+export interface DisclosedDependency extends Dependency {
+  original_source_id?: string
+  original_target_id?: string
+}
+
 export interface OrbNode extends ScoredReport {
   /** The real, currently-collapsed reports this orb stands in for. */
   members: ScoredReport[]
@@ -247,11 +259,24 @@ export function buildDisclosedGraph(graph: Graph, drilldown: Drilldown): Graph {
   const nodes: ScoredReport[] = [...realNodes, ...orbNodes]
 
   const edges: Dependency[] = graph.edges
-    .map((d) => ({
-      ...d,
-      source_report_id: resolve.get(d.source_report_id) ?? d.source_report_id,
-      target_report_id: resolve.get(d.target_report_id) ?? d.target_report_id,
-    }))
+    .map((d): DisclosedDependency => {
+      const carried = d as DisclosedDependency
+      return {
+        ...d,
+        source_report_id: resolve.get(d.source_report_id) ?? d.source_report_id,
+        target_report_id: resolve.get(d.target_report_id) ?? d.target_report_id,
+        // The pre-disclosure endpoints, kept for the edge evidence card
+        // (Phase 4 §5, 2026-08-19): a trunk line between an orb and a node
+        // stands for up to 57 real dependencies, and its card has to say
+        // which actual report rests on which — the resolved ids above only
+        // name the orb. The `?? d.*_report_id` fallback covers the normal
+        // case (this map runs on the BASE graph, whose edges carry no
+        // originals); the `carried` read keeps the true originals if
+        // disclosure is ever applied to an already-disclosed graph.
+        original_source_id: carried.original_source_id ?? d.source_report_id,
+        original_target_id: carried.original_target_id ?? d.target_report_id,
+      }
+    })
     .filter((d) => d.source_report_id !== d.target_report_id)
 
   const inDegree = new Map<string, number>()

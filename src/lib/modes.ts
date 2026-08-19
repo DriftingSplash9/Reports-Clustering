@@ -18,9 +18,8 @@ import type { Country } from './types'
  * mutate-don't-rebuild recolour pass `levelColours` already uses in
  * `InfluenceGraph.tsx`.
  *
- * **The one hard rule, from the review (§2) and proven by the blueprint
- * precedent: the lens must NEVER appear in the `forceGraph` memo's dependency
- * array.** Every memo change resets `fitted`, `userOwnsCamera` and
+ * **The one hard rule, from the review (§2): the lens must NEVER appear in
+ * the `forceGraph` memo's dependency array.** Every memo change resets `fitted`, `userOwnsCamera` and
  * `settledOnce` and re-warms the layout — five modes as memo deps would mean a
  * camera reset and a physics re-warm on every lens change. The lens travels
  * through a ref plus a mutation effect, mirroring `levelColoursRef`.
@@ -30,11 +29,6 @@ import type { Country } from './types'
  * country-detail lens that engages itself when the filter narrows to one
  * family; an explicit lens choice is the stronger statement of intent. Clear
  * the lens and the narrowed view comes back.
- *
- * Blueprint suspends lenses entirely, the same way it suspends the
- * single-family recolour: on paper the fill is not a channel (every node is
- * the same pale disc), so there is nothing for a lens to recolour. The
- * controls say so rather than silently doing nothing.
  *
  * What a lens does NOT recolour, v1, deliberate: edges, pulses and orbs keep
  * their family ink. Fill is "very nearly the only channel that has to be
