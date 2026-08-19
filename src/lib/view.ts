@@ -1,3 +1,5 @@
+import type { LensMode } from './modes'
+
 /**
  * Everything the viewer can turn on and off.
  *
@@ -82,6 +84,16 @@ export interface ViewSettings {
    * moving the slider re-tunes the pull without re-laying out the graph.
    */
   geoAffinity: number
+  /**
+   * The lens — which question the node fills answer. STANDARD is the
+   * country palette; GROUP_COMPARISON is five inks (US red, BRICS yellow, EU
+   * green, international white, everything else grey); WORLD_OVERVIEW is the
+   * seven-way continental roll-up. A recolour pass only — layout, camera and
+   * every other channel are untouched, and it must stay out of the
+   * `forceGraph` memo deps (see `lib/modes.ts` for the model and the rule).
+   * Inert in blueprint, where fill is not a channel.
+   */
+  lens: LensMode
 }
 
 /**
@@ -119,6 +131,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   zoom: 1,
   spread: 1,
   geoAffinity: 0,
+  lens: 'STANDARD',
 }
 
 /** Scene background. Fog resolves to this, so the two must agree. */

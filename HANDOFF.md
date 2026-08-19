@@ -70,11 +70,24 @@ sandbox on this day's snapshot:** `npm run validate` exits 0 (all 44 checks,
 warnings only: the 7 single-use `proposed:` tags and the known isolated-report
 list), and `npx tsc --noEmit --skipLibCheck` is clean.
 
-**Lane B is implemented through Phase 1.** Phases 0 (scale), 0b (halo, horizon,
+**Lane B is implemented through Phase 2.** Phases 0 (scale), 0b (halo, horizon,
 geometry cache) and 1 (flat-luminance palette v3, rims deleted, authority glow
-un-inverted) are on disk and type-checking. `handoff-summary.md` is the
-authoritative account. **The one unchecked thing is bloom** — the sandbox renders
-were software-rasterised, so the glow pass needs eyes on real hardware.
+un-inverted) are on disk and type-checking; `handoff-summary.md` is the
+authoritative account of those. **Phase 2 (lens modes) landed 2026-08-19,
+same-day**: BRICS into `GeoBloc`/`COUNTRY_BLOCS` (single home of membership —
+the layout force and the lens read the same table), `groupOf()` and the mode
+system in new `src/lib/modes.ts`, GROUP_COMPARISON (US red / BRICS yellow / EU
+green / INT white / grey) and WORLD_OVERVIEW (seven-way continental roll-up)
+as recolour passes, a Lens row in the View panel, and the review's "10-line
+fix" hoisting `uRimColour` so hollow nodes' rings follow the lens. The lens
+lives in a ref + mutation effect and is NOT a `forceGraph` memo dep — verified
+by driving the built app headless: camera pixel-identical across lens
+switches, meshes rebuilt mid-lens born wearing the lens colour, no console
+errors. Known v1 limits, deliberate (ship-and-look): edges, pulses and orbs
+keep family ink; the legend panels don't re-caption under a lens; blueprint
+sits lenses out. **The one unchecked thing remains bloom** — all sandbox
+renders are software-rasterised, so the glow pass needs eyes on real hardware
+(BRICS yellow and INT white intentionally bloom hardest under the group lens).
 
 **Staged corpus:** `Grok - Brics+israel and singapore/consolidated/` — 37
 country files, 1 999 reports, ~970 dependencies, 357 dropped notes. Minting
@@ -112,8 +125,9 @@ a future session with working memory should rewrite it from this file and
 
 ## 4. Work in flight
 
-**Lane B — visual revamp: phases 0/0b/1 built, awaiting Thomas's hardware check
-(bloom) and sign-off. Phase 2 (lens modes) is next and is unblocked.**
+**Lane B — visual revamp: phases 0/0b/1 AND 2 built, awaiting Thomas's
+hardware check (bloom) and sign-off. Phase 3 is next, gated on Phase 2
+holding up in his hands.**
 
 **Lane A — Grok archive: staging complete, mint decided-yes-deferred. Pre-mint
 gates listed in §5. Nothing here blocks Lane B.**
@@ -134,11 +148,12 @@ Owner key: **[Thomas]** only he can do it · **[Agent]** a session does it ·
 3. **[Thomas] Empty the recycle bins.** `_to_delete/` at the root and
    `Grok - Brics+israel and singapore/_to_delete/`. Keep `grok-batches/` and the
    three BRICS/Israel/Singapore zips — only raw provenance copies.
-4. **[Agent] Phase 2 — lens modes.** BRICS into `geoAffinity.ts`'s
-   `COUNTRY_BLOCS` (a lens, not a colour family), `groupOf()`, GROUP_COMPARISON
-   as a recolour pass, world-overview preset. Firm constraint: mode must never
-   enter the forceGraph rebuild trigger. **[Thomas]** reviews the result before
-   Phase 3.
+4. **[Thomas] Review Phase 2 — DONE 2026-08-19, awaiting your eyes.** The Lens
+   row is in the View panel (Country / Groups / World). Check the three lenses
+   on real hardware alongside the bloom check in item 2. Sidebar from the same
+   day: `notes/node-surface-encoding-2026-08-19.md` records the
+   solid/blurred/bordered/banded node-surface idea and where each honestly
+   fits — the soft-edge = continuous-database mapping ties into item 5.
 5. **[Both] The 35 continuous databases / beam decision.** [Agent] gives the 35
    staged nodes real `releases_per_year` numbers (250 business-daily, 365
    continuous — matching live daily FX), which fixes the hollow-node/annual-pulse

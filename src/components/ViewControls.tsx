@@ -1,4 +1,5 @@
 import { ZOOM_MAX, ZOOM_MIN, type ViewSettings } from '../lib/view'
+import type { LensMode } from '../lib/modes'
 
 /**
  * View controls. Deliberately plain — this is instrumentation, not chrome, and
@@ -55,6 +56,29 @@ const SLIDERS: {
     // Ceiling raised 50% with the spread extremes, same request. Floor is 0 —
     // "off" — and there is nothing below off to halve.
     max: 1.5,
+  },
+]
+
+/**
+ * The lens row. Radio behaviour, not toggles — exactly one lens is ever on,
+ * and STANDARD is a lens like the others rather than an absence, so there is
+ * always a pressed button telling you which question the colours answer.
+ */
+const LENSES: { key: LensMode; label: string; hint: string }[] = [
+  {
+    key: 'STANDARD',
+    label: 'Country',
+    hint: 'The full palette — every country family its own colour',
+  },
+  {
+    key: 'GROUP_COMPARISON',
+    label: 'Groups',
+    hint: 'Five inks: US red, BRICS yellow, EU green, international white, everything else grey. Same layout — only the colours change',
+  },
+  {
+    key: 'WORLD_OVERVIEW',
+    label: 'World',
+    hint: 'Seven continental inks: US, Canada, Europe, Africa, South America, Asia-Pacific, International. The full palette comes back when you filter',
   },
 ]
 
@@ -178,6 +202,29 @@ export default function ViewControls({
         </label>
       ))}
 
+      <div style={{ ...heading, marginTop: 14 }}>Lens</div>
+      <div style={lensRow}>
+        {LENSES.map(({ key, label, hint }) => (
+          <button
+            key={key}
+            type="button"
+            title={hint}
+            onClick={() => set('lens', key)}
+            style={{
+              ...lensButton,
+              ...(view.lens === key ? lensButtonActive : null),
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {/* Blueprint has no fill channel to recolour, so the lens sits out — say
+          so rather than let the buttons appear broken. */}
+      {view.blueprint && view.lens !== 'STANDARD' && (
+        <div style={note}>Lenses colour the dark scene; blueprint sits them out.</div>
+      )}
+
       <div style={{ ...heading, marginTop: 14 }}>Focus</div>
       {FOCUS_TOGGLES.map(({ key, label, hint }) => (
         <label key={key} style={row} title={hint}>
@@ -254,6 +301,31 @@ const checkbox: React.CSSProperties = {
   accentColor: 'var(--accent)',
   cursor: 'pointer',
   margin: 0,
+}
+
+const lensRow: React.CSSProperties = {
+  display: 'flex',
+  gap: 4,
+}
+
+const lensButton: React.CSSProperties = {
+  flex: 1,
+  fontFamily: 'inherit',
+  fontSize: 9.5,
+  letterSpacing: '0.06em',
+  textTransform: 'uppercase',
+  color: 'var(--ink-dim)',
+  background: 'transparent',
+  border: '1px solid var(--line)',
+  borderRadius: 5,
+  padding: '4px 0',
+  cursor: 'pointer',
+  lineHeight: 1,
+}
+
+const lensButtonActive: React.CSSProperties = {
+  color: 'var(--ink-body)',
+  borderColor: 'var(--accent)',
 }
 
 const resetButton: React.CSSProperties = {

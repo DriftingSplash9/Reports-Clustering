@@ -28,6 +28,7 @@ import {
 import { edgeKey, type Focus } from '../lib/selection'
 import type { VisibleSet } from '../lib/filter'
 import { countryAffinityForce } from '../lib/geoAffinity'
+import { lensColourFor } from '../lib/modes'
 import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
@@ -726,6 +727,17 @@ export default function InfluenceGraph({
   levelColoursRef.current = levelColours
 
   /**
+   * Same closure problem, for the lens. A ref rather than a memo dep is the
+   * load-bearing choice, not a convenience: putting the lens in the
+   * `forceGraph` memo would reset the camera and re-warm the layout on every
+   * lens change (see `lib/modes.ts` — the one hard rule of the mode system).
+   * A mesh the library rebuilds mid-lens is born already wearing the lens
+   * colour, exactly as `levelColoursRef` guarantees for the level recolour.
+   */
+  const lensRef = useRef(view.lens)
+  lensRef.current = view.lens
+
+  /**
    * Same closure problem again, but for a force rather than an accessor —
    * `countryAffinityForce` reads this every tick so the slider can retune
    * the pull live, without the 400-tick re-warmup `spread` pays on every
@@ -993,9 +1005,16 @@ export default function InfluenceGraph({
         // (rim + edges), and level to the flyout/hover, which is the whole
         // "technical drawing" premise. The single-family recolour is likewise
         // suspended here and in the recolour effect below.
+        // Lens first, then the single-family level recolour, then the plain
+        // palette — the same precedence the recolour effect below applies, and
+        // the two MUST agree or a mesh rebuilt mid-lens flickers to the wrong
+        // colour until the next effect pass.
         const colour = bp
           ? PAPER_NODE_FILL
-          : (!orbNode && levelColoursRef.current?.[scopeOf(n)]) || colourForReport(n)
+          : (!orbNode &&
+              (lensColourFor(n.country, lensRef.current) ??
+                levelColoursRef.current?.[scopeOf(n)])) ||
+            colourForReport(n)
         const radius = radiusFor(n.size_score)
 
         // No disposal of a superseded mesh here: three-forcegraph deallocates
@@ -1059,7 +1078,12 @@ export default function InfluenceGraph({
             // there, and the floor is what lifts a solid white disc past the
             // paper tone (see PAPER_NODE_FILL).
             emissiveColour: bp ? colour : glowInk(colour),
-            rimColour: bp ? blueprintInkFor(n.country) : inkFor(n.country),
+            // Lens-aware for the same reason `colour` is: a hollow node's
+            // ring is its whole body, and a mesh rebuilt mid-lens must be
+            // born wearing the lens ink, not the family ink under it.
+            rimColour: bp
+              ? blueprintInkFor(n.country)
+              : (lensColourFor(n.country, lensRef.current) ?? inkFor(n.country)),
             // **Rims exist only where there is no coloured fill to read.**
             // Blueprint is ink on paper and a hollow one-off instrument has
             // an emptied fill; everything else in the dark scene now carries
@@ -1965,17 +1989,40 @@ export default function InfluenceGraph({
       const r = graph.byId.get(id)
       if (!r || isOrbId(id)) continue
       const material = mesh.material as NodeMaterial
-      const next = levelColours?.[scopeOf(r)] ?? colourForReport(r)
+      // Lens wins over the level recolour — `focusPalette` is effectively a
+      // country-detail lens that engages itself when the filter narrows to
+      // one family, and an explicit lens choice is the stronger statement of
+      // intent. Same chain as nodeThreeObject; keep them identical.
+      const next =
+        lensColourFor(r.country, view.lens) ??
+        levelColours?.[scopeOf(r)] ??
+        colourForReport(r)
       material.color.set(next)
       // Normalised, for the same reason the constructor normalises — this
       // effect is a paint job, and a paint job must not silently rewrite what
       // the glow channel means. Safe to call unconditionally: the effect
       // returns early in blueprint (see above), so this only ever runs on the
-      // dark scene.
+      // dark scene. (BRICS yellow and INT white still bloom harder than the
+      // rest under GROUP_COMPARISON — that is their fill luminance, accepted
+      // in the review, not this channel.)
       material.emissive.set(glowInk(next))
+      // The rim too — a hollow node's ring IS its body, and a family-violet
+      // ring over a lens-grey scene would be the one place on screen where
+      // colour still answered the old question. The uniform handle exists
+      // only after first compile (see nodeVisuals), hence the guard; the
+      // level recolour never touched rims, so outside a lens this restores
+      // the family ink, which is what it always was.
+      const rimUniform = material.userData.uRimColour as
+        | { value: THREE.Color }
+        | undefined
+      rimUniform?.value.set(
+        lensColourFor(r.country, view.lens) ?? inkFor(r.country),
+      )
     }
+    // `view.lens` in the deps of a MUTATION effect, never the forceGraph
+    // memo's — that distinction is the whole mode system. See lib/modes.ts.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [levelColours, forceGraph, view.blueprint])
+  }, [levelColours, view.lens, forceGraph, view.blueprint])
 
   /**
    * Apply the focus to everything that is already in the scene.

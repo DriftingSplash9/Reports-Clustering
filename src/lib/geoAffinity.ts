@@ -51,6 +51,18 @@ export type GeoBloc =
   | 'ARAB_LEAGUE'
   | 'AFRICAN_UNION'
   | 'MERCOSUR'
+  // Added 2026-08-19 for Phase 2 of the visual revamp. This table is the
+  // single home of BRICS membership — `groupOf()` in `lib/modes.ts` reads it
+  // for the GROUP_COMPARISON lens, so the layout force and the lens can never
+  // disagree about who is in. Membership as of 2026: the original five (BR,
+  // RU, IN, CN, ZA) plus Egypt, Ethiopia, Iran, the UAE (2024) and Indonesia
+  // (2025). Iran and Indonesia have no live nodes yet — they arrive with the
+  // staged Grok mint, and their entries should be added then. Saudi Arabia
+  // was invited and has not formally joined, so it is deliberately absent —
+  // and note for the mint: its ISO code 'SA' collides with the `SA` (South
+  // America) ColourFamily name in palette.ts, worth untangling before any
+  // Saudi node is minted.
+  | 'BRICS'
 
 /**
  * Which blocs a country belongs to, for countries actually present in the
@@ -129,10 +141,10 @@ export const COUNTRY_BLOCS: Partial<Record<string, GeoBloc[]>> = {
   // whole reason "AFRISTAT + Charter hub nodes" is on the priority menu:
   // continental structure is real here), then the sub-regional bloc, then
   // Commonwealth/Arab League where it applies.
-  ZA: ['AFRICAN_UNION', 'SADC', 'COMMONWEALTH'],
-  EG: ['AFRICAN_UNION', 'ARAB_LEAGUE'],
+  ZA: ['AFRICAN_UNION', 'SADC', 'COMMONWEALTH', 'BRICS'],
+  EG: ['AFRICAN_UNION', 'ARAB_LEAGUE', 'BRICS'],
   KE: ['AFRICAN_UNION', 'EAC', 'COMMONWEALTH'],
-  ET: ['AFRICAN_UNION'],
+  ET: ['AFRICAN_UNION', 'BRICS'],
   GH: ['AFRICAN_UNION', 'ECOWAS', 'COMMONWEALTH'],
   NG: ['AFRICAN_UNION', 'ECOWAS', 'COMMONWEALTH'],
   TZ: ['AFRICAN_UNION', 'EAC', 'COMMONWEALTH'],
@@ -159,7 +171,18 @@ export const COUNTRY_BLOCS: Partial<Record<string, GeoBloc[]>> = {
   TD: ['AFRICAN_UNION', 'CEMAC'],
 
   // South America
-  BR: ['MERCOSUR'],
+  BR: ['MERCOSUR', 'BRICS'],
+
+  // BRICS members with no earlier entry — these countries joined the corpus
+  // (BRICS/G.1–G.3, the UAE backlog import) after this table was first
+  // written, which is why they were missing rather than empty. India's
+  // Commonwealth membership is listed alongside because leaving it off while
+  // CA/AU/NZ/ZA carry theirs would make the table quietly inconsistent, and
+  // the same goes for the UAE's Arab League seat.
+  RU: ['BRICS'],
+  CN: ['BRICS'],
+  IN: ['BRICS', 'COMMONWEALTH'],
+  AE: ['BRICS', 'ARAB_LEAGUE'],
 }
 
 /**

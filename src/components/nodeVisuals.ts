@@ -59,6 +59,13 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
      * meant the one-off instruments changed shape whenever they were traced.
      */
     litOpacity: number
+    /**
+     * Live handle on the rim-colour uniform, so the lens recolour pass can
+     * retune a hollow node's ring without a rebuild. Absent until the first
+     * compile — `onBeforeCompile` is where the uniform comes into existence —
+     * so every reader guards on it.
+     */
+    uRimColour?: { value: THREE.Color }
   }
 }
 
@@ -182,6 +189,14 @@ export function nodeMaterial({
 
   material.onBeforeCompile = (shader) => {
     shader.uniforms.uRimColour = { value: new THREE.Color(rimColour) }
+    // Hoisted into userData the way `rim` itself always was, so the rim
+    // colour can be retuned on a live material — the review's "10-line fix".
+    // Before this, `uRimColour` was created here with no handle kept, so
+    // nothing could ever change it: a hollow node's ring was pinned to the
+    // ink it was born with, and the lens recolour pass (lib/modes.ts) would
+    // have left family-coloured rings floating over group-coloured fills.
+    // Changing a uniform's *value* does not trigger a shader recompile.
+    material.userData.uRimColour = shader.uniforms.uRimColour
     // A hollow node's band is held wide and shallow on purpose. `rimPower`
     // exists to keep a *thin* highlight constant across node sizes; here the
     // rim is not a highlight, it is the whole node, so the exponent is pinned

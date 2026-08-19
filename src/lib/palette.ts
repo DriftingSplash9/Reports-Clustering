@@ -1055,6 +1055,21 @@ export const FAMILY_INK: Record<ColourFamily, string> = {
 }
 
 /**
+ * The BRICS group yellow — the 48° slot the v3 wheel reserves and assigns to
+ * no family (see the assignment table above: if China kept yellow, China
+ * would read as "the BRICS one" in every mode while the other members
+ * didn't). Worn only by the GROUP_COMPARISON lens in `lib/modes.ts`.
+ *
+ * Deliberately a luminance exception, measured in the review (§3.2): yellow
+ * inside the Y band is a dark olive (`#cea400`) that renders brown-gold and
+ * loses to the neutral grey. Bright `#ffd600` is clearly right; the accepted
+ * cost is that BRICS nodes bloom a little harder than the other four groups
+ * while that lens is on — the same knowingly-open exception as INT's
+ * near-white (see BLOOM_THRESHOLD_MIN in view.ts).
+ */
+export const BRICS_INK = '#ffd600'
+
+/**
  * The family ink for a country, total by construction.
  *
  * Member states take the EU family ink rather than one each — see the note on
