@@ -262,8 +262,27 @@ okay", Thomas 2026-08-19.)*
     (geography takes the fill; needs a `REGION_OF` table) and typed edges —
     answer first what a trunk's "type" means when one line stands for 57
     mixed edges; `methodology_depends_on` is the MOST common type (407).
-11. **Run the four flicker tests** (review §9) — still unrun, and every new
-    visual will be blamed for the undiagnosed flicker until they exist.
+11. **The four flicker tests are RUN (2026-08-19).** Full write-up in
+    `notes/flicker-tests-2026-08-19.md`. Three of the four suspects from
+    review §9 are cleared or unsupported by measurement:
+    **(2) silent mesh recreation — CLEARED**, zero recreations across eight
+    full tier rebuilds; **(4) orb breath intersecting neighbours — CLEARED**,
+    zero overlapping pairs at full inhale (test at tier 2 — there are no orbs
+    at the Everything tier); **(1) transparent-queue sort instability — NOT
+    SUPPORTED**: the sort really is unstable (~750 contested pairs per frame,
+    2–3 flipping order per frame under auto-rotate), but neither candidate fix
+    moves a pixel beyond the scene's own drift — two bursts at the *same*
+    setting ten seconds apart differ MORE than the two settings differ from
+    each other. **(3) bloom shimmer is untestable headless (rule 7) and is now
+    the leading candidate by elimination** — Thomas has a one-minute check:
+    get the flicker going, drag the glow slider to 0.
+    **Real side-finding worth acting on:** the comment in `nodeVisuals.ts`
+    (~line 172) claiming that switching `transparent` on a live material forces
+    a shader recompile is **FALSE** — 688 materials flipped, `renderer.info.
+    programs` 9 → 9, cache keys identical. Correct the comment; moving opaque
+    nodes out of the transparent queue is free, but it is a perf change, NOT a
+    flicker fix, and must not be sold as one.
+
 12. **Research backlog** (biggest total effort, schedule around the above):
     the candidates-only tier — 722 nodes with no edges (JP/KR/TW round has
     begun, see §3); 170 `_dropped` research leads; BRICS G.4 (Brazil 3/24 and
@@ -335,8 +354,9 @@ countable; the 7 single-use `proposed:` tags; `diary.csv` relocation.
   (hollow nodes still carry them).
 - **The IMF DSBB aggregator is useless to a non-JS fetcher**; national NSDP
   mirrors work.
-- **The four flicker tests are still unrun** — anything new and visual will
-  be blamed for the undiagnosed flicker (see todo 11).
+- **The flicker is still undiagnosed, but no longer a blanket excuse** — the
+  four tests are run (§5 item 11, `notes/flicker-tests-2026-08-19.md`); three
+  mechanisms are measured and quiet, and only bloom shimmer is still open.
 
 ---
 
