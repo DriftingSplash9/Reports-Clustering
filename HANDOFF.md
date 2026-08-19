@@ -103,12 +103,21 @@ screenshot. Delete any such claim you find rather than carrying it forward;
 dated "NOT git-committed" lines in older memory entries are point-in-time notes
 that were never verified either.
 
-**Project memory is BACK UP** (verified 2026-08-19, later the same day).
-Written since: the git-status corollary on `git-no-touch`, a corrected
-visual-revamp index entry (it no longer says "not implemented"), and
-`camera-fit-density-risk-2026-08-19`. STILL OWED, if a session has spare
-capacity: entries for the audit, Phases 2/3.5/4 in their own right, and the
-cadence fix.
+**Project memory is INTERMITTENT** — it accepted writes early on 2026-08-19
+and refused them a few hours later ("not available in this session"). Written
+successfully: the git-status corollary on `git-no-touch`, a corrected
+visual-revamp index entry, and `camera-fit-density-risk-2026-08-19`.
+
+⚠️ **`camera-fit-density-risk-2026-08-19` in project memory is WRONG and could
+not be corrected — memory went down before the rewrite landed.** It states the
+camera sits at ~2.8 × p95 (it is **5.675 ×**) and predicts a diffuse halo of
+edgeless nodes after the mint (impossible — the shelf already excludes them
+from the fit). **`notes/camera-fit-measurement-2026-08-19.md` and §5 item 5
+below supersede it.** First session with working memory: overwrite that entry
+from the notes file, then delete this warning.
+
+STILL OWED to memory: entries for the audit, Phases 2/3.5/4, and the cadence
+fix.
 
 **File locations that moved on 2026-08-19** (audit reorg + Thomas's own
 tidying): `Previous Handoffs/` now holds `handoff-summary.md` (Phases 0–1
@@ -196,21 +205,29 @@ okay", Thomas 2026-08-19.)*
 
 ### [Us] — your eyes, agent's hands
 
-5. **Camera fit vs. cluster density — Thomas's live concern, 2026-08-19:**
-   *"when we add more modes and edges it would end up inside the cluster
-   again."* Not a bug today; a constraint on everything below. `measureFit`
-   fits the **95th percentile** of node distance from centre, so 5% of nodes
-   sit outside the frame by design (~62 now, ~160 after the mint), and at this
-   FOV the camera sits at roughly **2.8 × p95** from centre — anything past
-   that ratio along the camera axis is behind the camera. There is a floor for
-   the too-FEW-nodes case (`SINGLETON_PADDING`) and **no guard for the
-   heavy-tail case**. Lenses cannot cause this (recolour only, never a memo
-   dep) — but GEO_EXPLORATION can if it repositions nodes, and edges can via
-   layout compaction. Settle it by measurement, not argument: dump
-   p50/p95/p99/max and `max/p95` per view from the headless harness, then again
-   on a scratch merge of the staged corpus. Full analysis in project memory,
-   `camera-fit-density-risk-2026-08-19`. **Lighting is CLOSED** — "the lighting
-   is okay" (Thomas, same message); the five rig numbers stand as shipped.
+5. **Camera fit vs. cluster density — RAISED by Thomas 2026-08-19, then
+   MEASURED the same day. Answer: not a risk from growth.** Full table in
+   `notes/camera-fit-measurement-2026-08-19.md`. The camera always sits at
+   exactly **5.675 × the p95 node radius** (that constant is `1.18 /
+   sin(FOV/2)` at FOV 24°), so a node only gets behind the camera once
+   **max / p95 > 5.675**. Measured on the Everything tier, n=3, settled
+   layout: live corpus **1.74**, and with the staged mint simulated in
+   (framed nodes 958 → 1,758, +84%) **1.81**. Doubling the graph cost 4% of
+   the margin; zero nodes behind the camera in every run. The layout is
+   scale-free, so p95 and max grow together and the fit rides the expansion.
+   **Two things this corrected:** the camera is at 5.675 × p95, not the
+   ~2.8 × an earlier note claimed (that assumed a ~50° FOV); and the feared
+   "diffuse halo of edgeless staged nodes" cannot happen, because
+   `measureFit` already drops edgeless nodes from the fit via the
+   frame-the-graph-not-the-shelf rule — 1,155 of the 1,999 staged reports
+   (58%) are edgeless and every one of them goes to the shelf.
+   **The one live risk is GEO_EXPLORATION** (item 10): a mode that
+   *repositions* nodes replaces a scale-free cloud with a bounded surface and
+   invalidates every number above, and it also stops being a pure recolour
+   pass, so it cannot stay out of the `forceGraph` memo deps the way lenses
+   do. Re-run the measurement if it is built. **Lighting is CLOSED** — "the
+   lighting is okay" (Thomas, same message); the five rig numbers stand as
+   shipped.
 
 6. **Pulse size/shape redesign + the beam.** Burner by your instruction. The
    set-sizes pass fixed the noise; the beam idea (continuous databases render
@@ -223,10 +240,9 @@ okay", Thomas 2026-08-19.)*
    "Grok - Brics+israel and singapore/consolidated"` (your machine — sandbox
    egress blocks some hosts); merge `_EDGES-jp-kr-tw-2026-08-19.json`; the
    Mexico/Argentina geography-as-a-node sweep; live-wins on the 4 duplicate
-   ids (+ graft the staged RBI `external-sector` tag); **and run the fit
-   measurement in item 5 BEFORE and AFTER, because the mint roughly triples the
-   corpus with mostly edgeless nodes — the case most likely to blow up the
-   outer tail.** After minting: re-count
+   ids (+ graft the staged RBI `external-sector` tag); **the fit measurement in item 5 is already
+   done for the mint and came back clear (max/p95 1.74 → 1.81), so this is no
+   longer a mint gate.** After minting: re-count
    the palette's chroma damping — corpus shares are an input to it.
 
 ### [Agent] — next build rounds, in order
