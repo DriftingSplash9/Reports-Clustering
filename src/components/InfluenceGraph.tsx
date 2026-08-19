@@ -38,6 +38,7 @@ import {
   type ViewSettings,
 } from '../lib/view'
 import {
+  edgeShade,
   gradientLinkMaterial,
   pulseMaterial,
   setLinkFocus,
@@ -367,15 +368,25 @@ const LINK_WIDTH_SCALE = 1.2
  */
 const PULSE_WIDTH_FACTOR = 2.4
 
-/** The un-scaled part of a link's width — weight, trunk stacking, border. */
-function baseLinkWidth(l: LinkDatum): number {
-  // Widened 2026-08-10 (Thomas) — roughly 1.7x the old 0.3-1.0 range.
-  // Trunk term added round 5: each doubling of stacked edges adds ~45% of
-  // the base width, so the EU→ESA 57-trunk lands near 3.6× an ordinary
-  // line — a trunk among threads, not a pipe among threads. Cross-border
-  // edges take a further 1.6× (round 10) so a border crossing reads
-  // bolder than its neighbours at the same trunk count.
-  return (0.5 + l.weight * 1.2) * (1 + 0.45 * Math.log2(l.count)) * (l.cross ? 1.6 : 1)
+/**
+ * The un-scaled width of a link — ONE constant, since 2026-08-19.
+ *
+ * This function used to encode three things in geometry: edge weight
+ * (0.5 + weight × 1.2), trunk stacking (+45% per doubling of count) and the
+ * cross-border boost (×1.6). Thomas, looking at the result at corpus scale:
+ * "it is too noisy trying to equate the thicknesses of the edges and sizes
+ * of the pulses. these need to be cleaner so lets go with set sizes and
+ * keep it simpler." He is right about what the encoding was worth: at 1–2px
+ * the differences read as inconsistency, not information. Every line is now
+ * the same width and every pulse the same size; what survives of those three
+ * facts lives where it always read better — trunk stacking and the border
+ * boost in the line's OPACITY (see the gradientLinkMaterial call), the
+ * border crossing additionally in its blinking pulse, and weight in the
+ * layout's rest lengths. The `l` parameter stays so the accessors don't
+ * change shape if a width encoding ever earns its way back.
+ */
+function baseLinkWidth(_l: LinkDatum): number {
+  return 1
 }
 
 /**
@@ -977,8 +988,11 @@ export default function InfluenceGraph({
       linkMaterials.current.set(
         l.key,
         gradientLinkMaterial(
-          l.colour,
-          l.endColour,
+          // The LINE draws in a softened shade of the ink; the pulse riding
+          // it draws brighter (see edgeShade/PULSE_BRIGHTEN in linkVisuals) —
+          // the datum keeps the PURE ink so pulses derive from the true hue.
+          edgeShade(l.colour),
+          edgeShade(l.endColour),
           false,
           Math.min(0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
         ),

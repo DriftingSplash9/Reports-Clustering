@@ -1,17 +1,18 @@
 # HANDOFF — working document
 
-**This is the current handoff. There is exactly one, and it lives here at the top
-level.** When it is superseded, the new session moves this file into
+**This is the current handoff. There is exactly one, and it lives here at the
+top level.** When it is superseded, the new session moves this file into
 `Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes a fresh
 `HANDOFF.md` in its place. Thomas periodically sweeps `Previous Handoffs/` into
 `archive/handoffs/`. Never leave two handoffs at the top level.
 
-Last written: **2026-08-19**, end of the full-project audit session. Supersedes
-`Previous Handoffs/HANDOFF-2026-08-18c-grok-consolidation-final.md` — whose Lane
-A sections remain accurate and hold the full Grok-archive detail; read that file
-before any mint or archive work rather than expecting it re-copied here. Its
-Lane B section ("zero code written") was overtaken the same evening it was
-written and is corrected below.
+Last written: **2026-08-19, end of day** — the close of a five-session day that
+audited the project, built visual-revamp Phases 2 and 3.5, and landed most of
+Phase 4. Written deliberately for a FRESH agent with no memory of any of it.
+Supersedes `Previous Handoffs/HANDOFF-2026-08-19-audit-phase2-35-4.md` (the
+running log of this day, kept for its per-item detail) and, behind that,
+`Previous Handoffs/HANDOFF-2026-08-18c-grok-consolidation-final.md` (still the
+authoritative Lane A / Grok-archive reference).
 
 ---
 
@@ -19,367 +20,307 @@ written and is corrected below.
 
 **In this order. Do not skip step 1.**
 
-| # | Document | Why | Skip if |
-|---|---|---|---|
-| 1 | **`REPORTS.md`** — start at *"🛑 Agent: read this before doing any work"* | The standing rules, including the two that get violated most: never run git, and every edge needs a document. | Never skip. |
-| 2 | **This file** | What is in flight, the prioritized todo list, who owns what. | Never skip. |
-| 3 | `START-HERE.md` | Plain-language orientation. | You already know the project. |
+| # | Document | Why |
+|---|---|---|
+| 1 | **`REPORTS.md`** — start at *"🛑 Agent: read this before doing any work"* | The standing rules. The two most violated: never run git, and every edge needs a document. |
+| 2 | **This file, all of it** | Current state, the prioritized todo, the traps. |
+| 3 | `START-HERE.md` | Plain-language orientation, if the project is new to you. |
 
-Then read **one** of these depending on the task:
+Then one of these, depending on the task:
 
 | Task | Read |
 |---|---|
-| Renderer, colours, camera, anything visual | `handoff-summary.md` (what phases 0/0b/1 actually did, 2026-08-19), then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` for the measurements |
-| Phase 4 UI work (menus, cards, hover, saved views) | `notes/phase-4-brief-2026-08-19.md` |
-| Importing research / minting nodes | `Previous Handoffs/HANDOFF-2026-08-18c-grok-consolidation-final.md` §6–§8, then `Grok - Brics+israel and singapore/consolidated/CONSOLIDATION-REPORT.md` and `consolidated/_STATUS.md` |
-| Continuing BRICS research | `BRICS/G.3.md` |
-| Anything touching the schema | `src/lib/types.ts` — most of it is documented reasoning, not types |
+| Anything visual | §4 and §6 below first; then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` (rev 4) for the measured design, and `Previous Handoffs/handoff-summary.md` for Phases 0–1 in plain language |
+| Phase 4 UI work | `notes/phase-4-brief-2026-08-19.md` — items 1, 2, 3, 4.1, 4.2 and 5 are BUILT; §6 (menu bar) and §7.1 (saved views) are not |
+| Minting / the staged archive | `Previous Handoffs/HANDOFF-2026-08-18c-grok-consolidation-final.md` §6–§8, then `Grok - Brics+israel and singapore/consolidated/CONSOLIDATION-REPORT.md` and `_STATUS.md` |
+| BRICS research | `BRICS/G.3.md` |
+| Schema | `src/lib/types.ts` — mostly documented reasoning, not types |
 
-**A habit specific to this repo: the code is the design doc.** `src/lib/palette.ts`,
-`src/components/nodeVisuals.ts`, `src/lib/view.ts` and
-`src/components/InfluenceGraph.tsx` carry long comments explaining why each
-constant is the value it is. Read the comment before changing the number.
+**House habit: the code is the design doc.** `palette.ts`, `nodeVisuals.ts`,
+`linkVisuals.ts`, `view.ts`, `modes.ts` and `InfluenceGraph.tsx` carry long
+comments explaining why each constant is what it is, usually with the date and
+Thomas's words. Read the comment before changing the number. Several say "do
+not raise this" and mean it.
 
 ---
 
 ## 2. Standing rules
 
-In `REPORTS.md` in full. The short version, because these are the ones that break:
+Full text in `REPORTS.md`. The short list, because these are the ones that
+break:
 
-1. **Never run git in this repo from an agent session** — not even read-only. It
-   leaves a stale lock. Ask Thomas, or check GitHub Desktop.
+1. **Never run git in this repo from an agent session** — not even read-only.
+   It leaves a stale lock. Ask Thomas, or check via GitHub Desktop.
 2. **If no document says a dependency exists, it does not go in the graph.**
-3. **A pointer is not a source.** `WebFetch` can return fabricated content for a
-   dead URL; raw-verify before trusting a quote.
-4. **`npm run validate` before and after** any data change (44 checks). It cannot
-   run through the device bridge (Windows esbuild in `node_modules`); copy
-   `src/`, `scripts/`, `package.json`, `tsconfig.json` into a Linux workspace and
-   `npm install` there. The 2026-08-19 audit did exactly this and it works.
-5. **`src/data/slices.generated.ts` is generated.** Never hand-edit it.
-6. Agents cannot delete files on the device — `mv` into `_to_delete/`, log the
-   reason in `_to_delete/README.md`, and tell Thomas.
+3. **A pointer is not a source.** WebFetch can fabricate content for a dead
+   URL; raw-verify before trusting a quote.
+4. **`npm run validate` before and after any data change** (44 checks). It
+   cannot run through the device bridge (`node_modules` carries the Windows
+   esbuild). The working recipe: tar `src/ scripts/ package.json
+   tsconfig.json` on-device, stage the tarball, extract + `npm install` in a
+   Linux workspace, run there. `index.html` + `vite.config.ts` are also needed
+   if you want `npm run build` or a headless render.
+5. **`src/data/slices.generated.ts` is generated. Never hand-edit it.**
+6. Agents cannot delete device files — `mv` into `_to_delete/`, log the reason
+   in `_to_delete/README.md`, tell Thomas.
+7. **Headless verification works and is expected**: build, `vite preview`,
+   Playwright + the preinstalled Chromium with
+   `--use-angle=swiftshader --enable-unsafe-swiftshader`. Geometry and colour
+   are exact; **bloom/glow is NOT trustworthy** in software rendering, and CSS
+   transitions can wedge under load (see traps, §7).
 
 ---
 
 ## 3. Where the project is (verified 2026-08-19)
 
-**Live corpus:** 1 250 reports, 1 079 dependencies.
-
-**Health — independently re-verified by the audit session in a clean Linux
-sandbox on this day's snapshot:** `npm run validate` exits 0 (all 44 checks,
-warnings only: the 7 single-use `proposed:` tags and the known isolated-report
-list), and `npx tsc --noEmit --skipLibCheck` is clean.
-
-**Lane B is implemented through Phase 2.** Phases 0 (scale), 0b (halo, horizon,
-geometry cache) and 1 (flat-luminance palette v3, rims deleted, authority glow
-un-inverted) are on disk and type-checking; `handoff-summary.md` is the
-authoritative account of those. **Phase 2 (lens modes) landed 2026-08-19,
-same-day**: BRICS into `GeoBloc`/`COUNTRY_BLOCS` (single home of membership —
-the layout force and the lens read the same table), `groupOf()` and the mode
-system in new `src/lib/modes.ts`, GROUP_COMPARISON (US red / BRICS yellow / EU
-green / INT white / grey) and WORLD_OVERVIEW (seven-way continental roll-up)
-as recolour passes, a Lens row in the View panel, and the review's "10-line
-fix" hoisting `uRimColour` so hollow nodes' rings follow the lens. The lens
-lives in a ref + mutation effect and is NOT a `forceGraph` memo dep — verified
-by driving the built app headless: camera pixel-identical across lens
-switches, meshes rebuilt mid-lens born wearing the lens colour, no console
-errors. Known v1 limits, deliberate (ship-and-look): edges, pulses and orbs
-keep family ink; the legend panels don't re-caption under a lens; blueprint
-sits lenses out. **The one unchecked thing remains bloom** — all sandbox
-renders are software-rasterised, so the glow pass needs eyes on real hardware
-(BRICS yellow and INT white intentionally bloom hardest under the group lens).
+**Live corpus:** 1,250 reports · 1,079 dependencies. `npm run validate` exits
+0 (all 44 checks; warnings only — the 7 single-use `proposed:` tags and the
+known isolated-report list). `npx tsc --noEmit --skipLibCheck` clean.
+`npm run build` clean. All re-verified after the last code change of the day.
 
 **Staged corpus:** `Grok - Brics+israel and singapore/consolidated/` — 37
-country files, 1 999 reports, ~970 dependencies, 357 dropped notes. Minting
-would ~2.6× the corpus. Mint is decided **yes** but deferred to a dedicated
-session, last on Thomas's priority list.
+country files, 1,999 reports. Mint is decided YES but deferred and LAST on the
+priority list. Since 2026-08-19: the 35 `_cadence_resolution:
+"continuous-database"` records carry nominal `releases_per_year` (31×250
+business-day, 4×365 all-days monitors), so `undefined` now means one-off
+instrument ONLY, corpus-wide. Also in `consolidated/`:
+**`_EDGES-jp-kr-tw-2026-08-19.json`** — an additive edge file from another
+session's research round on Japan/Korea/Taiwan (the three largest zero-edge
+countries). It is DATA, not bookkeeping; merge per its own `_rule`; do not
+sweep it.
 
-**Git: the biggest single risk in the project.** Nothing has been committed
-since 2026-08-13 (last confirmed push). Uncommitted on disk now: AF/G.23,
-AF/G.24, the singleton-fit fix, BRICS G.1–G.3, the Grok consolidation
-(types/graph/scripts edits + retagged live slices), visual phases 0/0b/1, and
-the 2026-08-19 reorganization. One disk failure loses several weeks.
+**Git: the single biggest risk in the project.** Nothing committed since
+2026-08-13. Uncommitted bodies of work: AF/G.23, AF/G.24, the singleton-fit
+fix, BRICS G.1–G.3, the Grok consolidation (+ types/graph/scripts edits), the
+2026-08-19 folder reorg, visual Phases 0/0b/1, Phase 2 (lenses), Phase 3.5,
+Phase 4 items 1/2/4/5/6, the pulse re-inking and set-sizes pass, and the
+staged-corpus cadence fix. That is roughly three weeks of work on one disk.
 
-**Folder reorganization done 2026-08-19 by the audit session:**
+**Project memory is DOWN** — `project_memory_write` refused for most of
+2026-08-19 ("not available in this session"). The memory index's top entries
+about the visual revamp are STALE (they predate implementation). Until memory
+works again, THIS FILE is the record; a future session with working memory
+should write entries for: the audit, Phases 2/3.5/4, and the cadence fix, and
+correct the stale "visual revamp REVIEWED, not implemented" entry.
 
-- `Previous Handoffs/` swept into `archive/handoffs/`.
-- `GROK-PIPELINE.md` (superseded pipeline design) → `archive/planning/`;
-  the reference in `grok-import-progress.md` was updated.
-- `brics-and-grok.md` → `notes/brics-and-grok-2026-08-18.md`.
-- Transfer tarballs (`archive/*.tar.gz`) → `_to_delete/` (see its README).
-- `diary.csv` at the top level is Thomas's personal cross-project Claude diary;
-  its own first row says it lives in `C:\Users\thoma\Documents\Claude-Diary\`.
-  Left in place — not an agent's to move. Thomas: relocate or confirm the copy.
-
-**Known documentation drift, now corrected here:** the 2026-08-18c handoff said
-Lane B had zero code written; two agents were in the repo at once that evening
-and the later Lane A rewrite of `HANDOFF.md` clobbered the visual session's
-update. If two accounts of Lane B conflict anywhere else, `handoff-summary.md`
-wins. **Project memory stopped working partway through the audit session**
-(reads worked at session start, then "not available"), so its index entry
-"visual revamp REVIEWED, not implemented" is STALE and could not be rewritten —
-a future session with working memory should rewrite it from this file and
-`handoff-summary.md`, and add an entry for this audit.
-
----
-
-## 4. Work in flight
-
-**Lane B — visual revamp: phases 0/0b/1, 2 AND 3.5 built.** Phase 3.5 is
-Thomas's 2026-08-19 live-critique list, pulled ahead of Phases 3 and 4 on his
-instruction ("plan the work I gave here around phase 4 and phase 3.5") — see
-§5a for what it changed. Order from here: finish Phase 3.5's stragglers, then
-Phase 4 (the notes/phase-4-brief backlog), then Phase 3 (geo mode, typed
-edges), which drops behind Phase 4 by the same instruction.
-
-**Lane A — Grok archive: staging complete, mint decided-yes-deferred. Pre-mint
-gates listed in §5. Nothing here blocks Lane B.**
+**File locations that moved on 2026-08-19** (audit reorg + Thomas's own
+tidying): `Previous Handoffs/` now holds `handoff-summary.md` (Phases 0–1
+plain-language account) and `grok-import-progress.md`; superseded handoffs are
+there too pending Thomas's sweep to `archive/handoffs/`. `GROK-PIPELINE.md` →
+`archive/planning/`. `brics-and-grok.md` → `notes/brics-and-grok-2026-08-18.md`.
+`notes/node-surface-encoding-2026-08-19.md` is the solid/blurred/bordered node
+idea. `diary.csv` at the top level is Thomas's personal cross-project diary —
+not the project's; leave it alone.
 
 ---
 
-## 5a. Phase 3.5 — Thomas's live critique, built 2026-08-19 (second session)
+## 4. What the app is now — one day changed most of the renderer
 
-Everything here came from him using the app with the lenses on. Built and
-verified headless the same day; the ONE unpushed piece is noted.
+A fresh agent should assume ALL of the following exists and works; each landed
+2026-08-19 and each carries a dated comment at the site:
 
-- **Dim to near-invisible.** `DIM_NODE_OPACITY` 0.13 → 0.045, emissive
-  0.03 → 0.012, `DIM_LINK_OPACITY` 0.045 → 0.02. His words: "more of a
-  constellation with pulses of light between the stars." This deliberately
-  overrides the old "legible as structure" doctrine — the traced chain
-  carries orientation now.
-- **Pulses read as light, not paint.** Family ink lerped 2/3 toward white,
-  additive blending, opacity 0.85 (`PULSE_CORE_MIX` in linkVisuals). He
-  floated inverting the edge colour instead — rejected in the comment there:
-  eleven complementary hues would read as a twelfth family. Blueprint keeps
-  solid ink drops (additive over paper is invisible).
-- **Background near-black** (`#05070d` → `#010204`), and the dark panels got
-  the blue keyline + doubled blue field glow he asked for (uiTheme).
-- **Edge lengths ×2** — the Phase-4 "double the edge lengths" pulled forward.
-  Rest length ONLY, not charge/collision, or scale-invariance hands back the
-  same picture. This is also the answer to "node sizes stay constant whatever
-  I do": the fit pins the largest node at a fixed frame fraction by design,
-  so spacing changes appear as room between stars, never bigger stars.
-- **Camera refit on filter change is UNCONDITIONAL again** — third rewrite of
-  that rule; the `framedUsably` heuristic read as a glitch ("some[times] the
-  camera stays put, others it goes to reset distance"). History preserved in
-  `requestRefit`'s comment. If constant reframing grates, make it a flight,
-  don't bring the heuristic back.
-- **HUD rework:** country chip row is now a collapsed-by-default drop-up
-  selector (bottom-centre pill → panel with All / None / any combo, inline
-  level rows, scrolls as countries grow); tier bar moved to the bottom-left
-  corner; unlinked shelf tucked bottom-right; masthead 21 → 26px with the
-  gradient's angle rotating once per 28s (`@property` in uiTheme).
-- **The "blue nodes under the Groups lens" in his screenshots was stale HMR
-  state, not a code bug** — hunted first: every repaint path (build, recolour
-  effect, halo) resolves through the lens; a hard refresh clears it. Verified
-  with a traced selection under GROUPS on the built app.
-- **The 35 continuous databases — DONE, later the same session** once the
-  bridge returned. Every record with `_cadence_resolution:
-  "continuous-database"` in `consolidated/` now carries a nominal
-  `releases_per_year`: **250** for the 31 business-day portals, feeds and
-  query databases (the live corpus's daily-FX convention), **365** for the 4
-  genuinely all-days monitors (`tw-air-quality`, `id-volcano-earthquake`,
-  `ph-pagasa`, `id-bnpb`). Each carries a `cadence_note` naming the
-  convention — it is a statement of continuous flow for the pulse/beam
-  system, NOT a claim of counted editions; observed reality stays in
-  `_cadence_evidence`, originals in `_cadence_original`, and each file's
-  `_normalisation` logs the change. All 15 touched files re-parse clean;
-  exactly 35 records changed (31×250 + 4×365), nothing else.
-  `undefined` now means one-off instrument ONLY, corpus-wide.
-
-**Also found in `consolidated/` — a third agent's work, untouched:**
-`_EDGES-jp-kr-tw-2026-08-19.json`, an ADDITIVE edge file from a 2026-08-19
-research round on the three largest zero-edge countries (Japan, South Korea,
-Taiwan) — item 9a of this list already in motion. Its own `_note` says it
-was written separately because it saw the country JSONs being rewritten
-mid-flight (correctly: that was this session's cadence pass). Merge its
-`dependencies` arrays into the country files, or import directly, per its
-`_rule`; every endpoint id is stated verified. Do not lose it in a sweep —
-underscore-prefixed files in `consolidated/` are bookkeeping, but this one
-is DATA.
-
-## 5. The prioritized todo list (2026-08-19 audit)
-
-Owner key: **[Thomas]** only he can do it · **[Agent]** a session does it ·
-**[Both]** decision + execution split.
-
-1. **[Thomas] Commit the backlog.** GitHub Desktop, in logical chunks (data
-   rounds / consolidation / visual phases / reorg). Everything else on this list
-   matters less than not losing three weeks of work.
-2. **[Thomas] Eyeball phases 0/0b/1 on real hardware.** Especially bloom/glow —
-   the two glow numbers were tuned against software renders. Note what looks
-   wrong; do not retune constants ad hoc (each carries a dated comment).
-3. **[Thomas] Empty the recycle bins.** `_to_delete/` at the root and
-   `Grok - Brics+israel and singapore/_to_delete/`. Keep `grok-batches/` and the
-   three BRICS/Israel/Singapore zips — only raw provenance copies.
-4. **[Thomas] Eyeball Phase 2 + Phase 3.5 together on your hardware** (hard
-   refresh first — F5 — to clear any hot-reload ghosts). Lenses, the
-   constellation dim, the new pulses, the moved HUD, the always-refit camera.
-   Note reactions; constants carry dated comments. Sidebar note:
-   `notes/node-surface-encoding-2026-08-19.md` — soft-edge = continuous
-   database ties into item 5.
-5. **[Agent] Finish Phase 3.5:** give the 35 continuous databases in the
-   staged corpus real `releases_per_year` numbers (250 business-daily, 365
-   continuous — matching live daily FX), which fixes the hollow-node/
-   annual-pulse contradiction and keeps `undefined` meaning one-off
-   instrument. Blocked 2026-08-19 only by the bridge dropping. **[Thomas]**
-   separately: does the beam rendering (scrolling gradient for direction)
-   join Phase 4, or wait for the mint?
-6. **[Both] Phase 4 — IN PROGRESS.** Item 1, **delete Blueprint, is DONE
-   (2026-08-19, third session)**: the ten-minute diagnosis first (on paper,
-   large nodes rendered as fuzzy blobs — the emissive floor fighting ACES
-   tone mapping on white; a paper-pipeline fault the dark scene does not
-   share, so nothing needed porting), then ~130 references removed across 9
-   files — `view.blueprint`, the PAPER_* constants, `BLUEPRINT_INK`/
-   `blueprintInkFor`, the paper CSS theme, the blueprint lighting rig, the
-   scene-background effect, `setLinkDimTheme`, the halo/pulse paper
-   variants, the Blueprint toggle. Two structural wins: **no view setting is
-   a forceGraph memo dep any more** (blueprint was the last), and rims now
-   survive in exactly one place (hollow one-off instruments). Verified: tsc,
-   build, 44-check validate, headless regression (lenses, trace, country
-   selector). Same day, also from Thomas's reaction: **panel glow/blur
-   removed** — flat near-opaque panels, no backdrop blur, no soft shadow,
-   blue keyline stays (uiTheme has the one-day history).
-   **Items 4+5 (hover feedback + selection card) are DONE too (same
-   session):** hover now grows the node toward 1.15× over an eased 0.15s,
-   lifts its emissive toward the selection ceiling, and draws a smaller,
-   fainter second instance of the Phase 0b halo (HOVER_* constants in
-   InfluenceGraph; hover lives in refs and useFrame, never React state the
-   renderer reads, never the memo deps; positions from positionedById per
-   the (0,0,0) trap). The full Detail card moved from the hover tooltip to
-   a fixed panel that slides in from the right on click (320ms ease-out,
-   transform-composited, keeps its content through the slide-out via
-   cardReport); hover now shows a small identity chip (flag, title,
-   publisher · region, a "click to trace" affordance line) — the
-   full-card-on-hover duplicate encoding is gone. Verified headless
-   including an in/out transform probe; note the search box eats the first
-   Escape while it holds text (its documented behaviour) — the second
-   reaches the selection.
-   **Item 6, the edge evidence card, is DONE (2026-08-19, fourth session) —
-   the graph finally shows its working.** Clicking any line, arrowhead or
-   travelling pulse slides a card in from the LEFT (right = what a node is,
-   left = why an edge exists) listing every Dependency behind that drawn
-   line — real pre-disclosure endpoints ("X rests on Y", resolved through
-   new `original_source_id`/`original_target_id` kept by disclosure in
-   hierarchy.ts), relationship type, reference period, the verbatim basis
-   quote, and the `evidence_url` as a primary-source link. Trunks render
-   the full list under a "one drawn line standing for N documented
-   dependencies" header. No back-reference is stored on LinkDatum at all —
-   App re-filters the disclosed edges by edgeKey on demand, which answers
-   the brief's memory worry by holding nothing. Direct raycast handles the
-   generous targets; for 1.6px lines a screen-space picker
-   (`registerEdgePicker`) resolves missed clicks to the nearest visible
-   line within 9px — measured first: ~330 blind clicks landed zero direct
-   line hits, so without the picker edges were unclickable in practice.
-   Two traps found and recorded in-code: the missed-click path can fire
-   more than once per click, so it always OPENS rather than toggles (a
-   toggle self-cancelled); and under SOFTWARE rendering at Everything-tier
-   load the card's CSS transition can wedge at its start value — GPU
-   compositing is unaffected, note kept on `edgeCardFrame`.
-   **Same session, pulses re-inked:** the whitened-additive core lasted one
-   day — Thomas at corpus scale: "TBH I am not liking these white pulses...
-   colors need reinstated." Family ink restored verbatim in pulseMaterial;
-   the why-it-failed (additive white × thousands of photons = snowstorm)
-   is in the comment.
-   **BURNER (Thomas, 2026-08-19):** (a) pulse SIZE and SHAPE "need
-   addressed" — take together with the beam-edge idea, since the beam
-   replaces pulse geometry on the fastest edges; (b) add the report's URL
-   link to the node selection card — scheduled with the menu bar + help
-   round, per Thomas.
-   Remaining Phase 4, in the brief's order: menu bar + help next (including
-   the node-card URL link), then saved views last.
-   NOTE for whoever writes docs: `START-HERE.md`/`REPORTS.md`/onboarding may
-   still mention Blueprint — sweep the prose when the menu-bar/help work
-   touches them.
-   **Item 2, the lighting, is DONE too (same session):** both point lights
-   (key sat ~590 units inside a ~3,000-unit cloud, inverse-square decay —
-   no consistent light direction, far half lit by directionless ambient
-   alone) replaced with directional lights per the brief's §2.1 numbers
-   (key [0.6,0.8,1] @ 2.2, cool fill from behind @ 0.7, ambient 0.5 → 0.28);
-   emissive floor 0.3 → 0.12 (§2.2 — self-illumination was drowning the
-   shading; v3's palette floor removed the reason 0.3 existed); bloom
-   thresholds rescaled 0.17/0.32 → 0.14/0.26 to the new emitted range,
-   analytically only. Verified headless: consistent terminator on every
-   sphere at both close and corpus scale. **Bloom and overall darkness are
-   for Thomas's GPU to judge — every number here was tuned against
-   software renders.**
-7. **[Agent] Phase 3 after Phase 4** (reordered by Thomas 2026-08-19):
-   geography-takes-the-fill mode; typed edges (remember:
-   `methodology_depends_on` is the MOST common type at 407, and a trunk
-   aggregates up to 57 mixed edges — answer what a trunk's "type" means
-   first).
-8. **[Both] Pre-mint gates, then the mint.** In order: [Thomas or Agent] run
-   `npm run check-urls -- --dir "Grok - Brics+israel and singapore/consolidated"`
-   (Thomas's machine is more reliable — sandbox egress blocks some hosts);
-   [Agent] sweep the Mexico/Argentina geography-as-a-node cluster; [Agent] apply
-   the live-wins policy to the 4 duplicate ids and graft the staged RBI
-   `external-sector` tag. Then a **dedicated mint session** — never a side task.
-   Immediately after: [Agent] re-count palette chroma damping (§7).
-9. **[Agent] Research backlog — the bulk of remaining work, after the above.**
-   (a) 722 candidate-only nodes across 15 countries with zero edges — several
-   sessions; (b) 170 `_dropped` research leads (cheaper than cold research);
-   (c) BRICS G.4 — Brazil (3/24) and China (1/12) were never dispatched at G.3,
-   and the round should open by grepping every node description for
-   international-node names.
-10. **Parked, deliberately:** 169 open cadences (134 publishers state nothing
-    countable — item 5 resolves the other 35); the 7 single-use `proposed:` tags
-    (the mechanism's long tail — promote when one earns it); tabs/saved-views
-    beyond what Phase 4 covers.
+- **Lenses (Phase 2).** `src/lib/modes.ts`: STANDARD / GROUP_COMPARISON (US
+  red, BRICS yellow, EU green, INT white, rest grey) / WORLD_OVERVIEW
+  (seven-way continental roll-up). BRICS membership lives ONLY in
+  `geoAffinity.ts`'s `COUNTRY_BLOCS`. Lens = recolour pass via ref + mutation
+  effect; **never a forceGraph memo dep**. Rim uniforms are live-mutable
+  (`userData.uRimColour`) so hollow nodes follow the lens.
+- **The constellation look (Phase 3.5).** Near-black background (`#010204`),
+  dim at 0.045/0.012 (nearly invisible by Thomas's direct call — the traced
+  chain carries orientation now), link rest lengths ×2 (rest length ONLY —
+  scale-invariance eats a uniform doubling), flat crisp panels (no glow, no
+  blur, blue keyline), bigger masthead with a 28s rotating gradient, tier bar
+  bottom-left, unlinked shelf bottom-right, country selector as a
+  collapsed-by-default drop-up (All / None / any combo, scrolls).
+- **Lighting (Phase 4 §2).** Two DIRECTIONAL lights (key [0.6,0.8,1] @ 2.2,
+  cool fill from behind @ 0.7) + ambient 0.28; emissive floor 0.12; bloom
+  thresholds 0.14/0.26 (rescaled analytically, NOT by eye). Every sphere has a
+  consistent terminator now. **Thomas's last words on it: "one thing seemingly
+  off is the lighting" — tuning it by eye on his GPU is an open [Us] item; all
+  five numbers are starting points.**
+- **Blueprint is DELETED** (Phase 4 §1) — the whole paper theme, ~130
+  references. No view setting is a memo dep any more. Rims survive in exactly
+  one place: hollow one-off instruments. `START-HERE.md`/`REPORTS.md`/
+  onboarding prose may still mention Blueprint — sweep when touching docs.
+- **Hover and selection (Phase 4 §4).** Hover: eased grow to 1.15×, emissive
+  lift, small halo — all in refs + useFrame. Click: full `Detail` card slides
+  in from the RIGHT; hover shows only an identity chip. Camera refits
+  UNCONDITIONALLY on every filter change (third rewrite; the conditional
+  heuristic read as a glitch — history in `requestRefit`).
+- **The edge evidence card (Phase 4 §5).** Click any line/arrowhead/pulse —
+  or within 9px of a line (screen-space picker; a 1.6px line is unhittable by
+  raycast, measured) — and a card slides from the LEFT listing every
+  Dependency behind that drawn line: real endpoints ("X rests on Y", via
+  `original_source_id`/`original_target_id` preserved by disclosure),
+  relationship type, reference period, the verbatim `basis` quote, and
+  `evidence_url` as a primary-source link. Right = what a node is, left = why
+  an edge exists; the two coexist. No back-reference is stored — App
+  re-filters disclosed edges by `edgeKey` on demand.
+- **Edges and pulses have SET SIZES and split shades** (Thomas, end of day:
+  "too noisy trying to equate the thicknesses... go with set sizes and keep it
+  simpler"; "pulses can be brighter and the edges lighter shades").
+  `baseLinkWidth()` returns 1 — every line one width, every pulse one size.
+  Trunk stacking and the cross-border boost survive in line OPACITY (+ the
+  blinking pulse); weight survives in rest lengths. Lines draw in
+  `edgeShade(ink)` (ink lerped 0.22 to white, low opacity — pale threads);
+  pulses draw at ink lerped 0.35 to white, opacity 0.92 — brighter beads on
+  those threads, same hue, normal blending. **Pulse colour history matters:**
+  a whitened-ADDITIVE version lived one session and was reverted — additive ×
+  thousands of photons = snowstorm. Do not reintroduce additive pulses.
 
 ---
 
-## 6. Lane A pointers (detail lives in the 2026-08-18c handoff)
+## 5. The prioritized todo list (2026-08-19, end of day)
 
-Do not reprocess: `grok-batches/raw/` (consolidated already), the three
-superseded country files (Argentina, Bolivia, UAE), the 21 double-confirmed
-unreachable publishers, the 60 held-back edges (reviewed: 10 accepted, 4
-reversed, 46 rejected), the 20 duplicate-id conflicts (reviewed). URLs are
-verified-by-content, not verified-by-status, until `check-urls` has run.
+Sorted by owner, ordered by priority within each.
+
+### [Thomas] — only you can
+
+1. **Commit the backlog in GitHub Desktop.** Three weeks of work on one disk
+   (list in §3). Logical chunks: data rounds / consolidation + cadences /
+   visual phases / reorg. Nothing else on this list matters as much.
+2. **Say what "off" means about the lighting** — one sentence or a screenshot
+   with a circle is enough (too dark? too flat from some angles? highlights
+   too hot? colour cast?). Every rig number is adjustable; the agent needs the
+   symptom, not the fix.
+3. **Empty the recycle bins**: `_to_delete/` at the root and
+   `Grok - Brics+israel and singapore/_to_delete/`. Keep `grok-batches/` and
+   the three BRICS/Israel/Singapore zips — sole raw provenance.
+4. **Sweep `Previous Handoffs/` into `archive/handoffs/`** when convenient —
+   five files are waiting, including two plain-language accounts worth keeping
+   (`handoff-summary.md`, `HANDOFF-2026-08-19-audit-phase2-35-4.md`).
+
+### [Us] — your eyes, agent's hands
+
+5. **Lighting tune on your GPU.** Key 2.2 / fill 0.7 / ambient 0.28 /
+   emissive floor 0.12 / bloom 0.14–0.26 — all analytic starting points, none
+   judged on real hardware. Includes the glow slider feel. One session with
+   you reacting to live changes would close it.
+6. **Pulse size/shape redesign + the beam.** Burner by your instruction. The
+   set-sizes pass fixed the noise; the beam idea (continuous databases render
+   their edge as a lit stream with a direction cue) replaces pulse geometry on
+   the fastest edges, so shape and beam are ONE design round. Pairs with the
+   soft-edge node idea (`notes/node-surface-encoding-2026-08-19.md`) — the 35
+   continuous databases now have the data to support all of it.
+7. **Mint the staged archive** — decided yes, LAST on your list, needs a
+   dedicated session. Pre-mint gates in order: `npm run check-urls -- --dir
+   "Grok - Brics+israel and singapore/consolidated"` (your machine — sandbox
+   egress blocks some hosts); merge `_EDGES-jp-kr-tw-2026-08-19.json`; the
+   Mexico/Argentina geography-as-a-node sweep; live-wins on the 4 duplicate
+   ids (+ graft the staged RBI `external-sector` tag). After minting: re-count
+   the palette's chroma damping — corpus shares are an input to it.
+
+### [Agent] — next build rounds, in order
+
+8. **Menu bar + Help/How-to + the node card's URL link** (phase-4-brief §6).
+   One Word-style bar hosting the seven HUD blocks; Help = `START-HERE.md`
+   nearly verbatim; How-to = re-open the existing onboarding modal (never a
+   second copy that drifts). Thomas's pushback to honour: tier buttons are
+   primary navigation, and the status line is the only signal a filter is on.
+   Add the report's `url` as a link on the selection card (Thomas, 2026-08-19)
+   — and sweep stale Blueprint prose from the docs while in there.
+9. **Saved views** (phase-4-brief §7.1, last of Phase 4). Tier + settings +
+   filters + selection are four plain values; named saved states, one canvas.
+   NOT live tabs — a second canvas is a second physics sim; the brief has the
+   full argument.
+10. **Phase 3** (after Phase 4, by Thomas's reorder): GEO_EXPLORATION mode
+    (geography takes the fill; needs a `REGION_OF` table) and typed edges —
+    answer first what a trunk's "type" means when one line stands for 57
+    mixed edges; `methodology_depends_on` is the MOST common type (407).
+11. **Run the four flicker tests** (review §9) — still unrun, and every new
+    visual will be blamed for the undiagnosed flicker until they exist.
+12. **Research backlog** (biggest total effort, schedule around the above):
+    the candidates-only tier — 722 nodes with no edges (JP/KR/TW round has
+    begun, see §3); 170 `_dropped` research leads; BRICS G.4 (Brazil 3/24 and
+    China 1/12 never dispatched; open by grepping node descriptions for
+    international-node names).
+
+Parked deliberately: 134 cadences where the publisher states nothing
+countable; the 7 single-use `proposed:` tags; `diary.csv` relocation.
 
 ---
 
-## 7. The one cross-lane dependency
+## 6. Architecture crib — where things live
+
+- **`src/App.tsx`** — state owner: filter, drilldown, selection (`selectedId`
+  + `selectedEdgeKey`), view settings, lens; the HUD (Hud/ChipBar country
+  selector/TierBar/IsolatedShelf/CalendarPanel/SearchPanel); the hover chip,
+  the right-hand `Detail` card, the left-hand `EdgeEvidence` card; the
+  lighting rig; Canvas + bloom. `describePeriod` lives here.
+- **`src/components/InfluenceGraph.tsx`** — the imperative renderer. One
+  `forceGraph` memo builds everything (deps: `[graph, spreadApplied]` ONLY —
+  keep it that way); every view change flows through refs + mutation effects
+  (`lensRef`, `levelColoursRef`, `focusRef`, `hoveredIdRef`, `visibleRef`).
+  `runFit`/`measureFit` own camera + node scale; `applyFocus` owns
+  dim/opacity/raycast; `useFrame` runs pulses, orb breath, hover ease, halos,
+  fog, flight. The screen-space edge picker registers itself up to App.
+- **`src/lib/palette.ts`** — colour system: `SCOPE_COLOUR` ladders,
+  `FAMILY_INK` (single ink source), `BRICS_INK`, `glowInk` (authority glow
+  normalisation), `rimWeightFor`. **`src/lib/modes.ts`** — lenses.
+  **`src/lib/view.ts`** — every tuned scene constant, heavily documented.
+  **`src/components/linkVisuals.ts`** — edge shader (gradient, fog, focus),
+  `edgeShade`, `pulseMaterial`, teardrop geometry cache.
+  **`src/components/nodeVisuals.ts`** — node material (fresnel rim machinery,
+  hollow treatment), halo sprites. **`src/lib/hierarchy.ts`** — tier
+  disclosure, orbs, `DisclosedDependency` (original endpoint ids).
+- Data: `src/data/research/*.json` slices auto-load; `slices.generated.ts` is
+  generated; `graph.ts` builds + validates (44 checks live in
+  `scripts/validate-data.ts` + `test-logic.ts`).
+
+---
+
+## 7. Known traps — the ones that will actually bite
+
+- **Never put a mode, tab, hover, or any view setting in the `forceGraph`
+  memo deps.** Every change there resets the camera and re-warms physics.
+  Blueprint was the last such dep and it is gone.
+- **`meshes.current` cannot be trusted for POSITIONS** — the library rebuilds
+  node objects and the map can hold one it never adopted, sitting at (0,0,0).
+  Read `positionedById` (the layout data). Colour reads from the mesh are
+  fine.
+- **Transparency does not stop a raycast** — any ghosted element needs
+  `raycast = () => {}` (the focus pass does this for dimmed nodes).
+- **The rim-colour uniform exists only after first shader compile**
+  (`userData.uRimColour` guard) — a never-rendered mesh keeps its born rim
+  until the next recolour pass.
+- **`onPointerMissed` can fire more than once per click** — the edge-pick
+  path therefore always OPENS, never toggles (a toggle self-cancelled).
+- **CSS transitions on the cards can wedge under SOFTWARE rendering** at full
+  scene load (start value held indefinitely; transition:none snaps it). GPU
+  compositing unaffected. Verify card behaviour with transitions disabled
+  when testing headless.
+- **Do not reintroduce additive/white pulse cores** — one session, reverted,
+  snowstorm at corpus scale. The shade split (edgeShade 0.22 / pulse 0.35,
+  normal blending) is the surviving design.
+- **Closed unions are cast, not parsed** — an off-union `relationship_type`
+  makes edge weight NaN and PageRank spreads it everywhere. Gate imports on
+  this first (285 such edges arrived in the raw Grok batch).
+- **Grok's JSON is not reliably JSON** — parse-check before reading.
+- **Never reintroduce faceted node geometry** while fresnel rims exist
+  (hollow nodes still carry them).
+- **The IMF DSBB aggregator is useless to a non-JS fetcher**; national NSDP
+  mirrors work.
+- **The four flicker tests are still unrun** — anything new and visual will
+  be blamed for the undiagnosed flicker (see todo 11).
+
+---
+
+## 8. The one cross-lane dependency
 
 **Do not finalise the palette until the mint lands.** `palette-proposal.json`
-damps each family's chroma by its corpus share, measured at 1 250 nodes. The
-staged import moves `SA` to a major family and adds `IL`/`SG` outright. Palette
-v3 was tuned accepting this debt — after minting, re-count the shares and
-re-damp. Everything else in phases 0–1 is distribution-independent.
-
----
-
-## 8. Known traps
-
-Carried forward; the longer list is in the 2026-08-18c handoff §8.
-
-- **The mesh-position map can lie.** With ESA 2010 selected, the mesh lookup
-  reported (0,0,0) for a node plainly drawn on-screen — the library rebuilds
-  node objects and the map can hold one it never adopted. The halo now reads
-  layout data instead. **Anything else reading positions from that map will hit
-  the same bug.**
-- **`runFit` now measures first and only moves the camera if the surviving set
-  isn't usably framed** — this preserves the black-screen fix. Do not restore an
-  unconditional refit, and do not remove the conditional one.
-- **Closed unions are cast, not parsed.** An off-union `relationship_type`
-  makes edge weight `NaN` and PageRank spreads it to every score. Gate any
-  external import on this first (285 such edges arrived in the raw Grok batch).
-- **Grok's JSON is not reliably JSON** — parse-check before reading.
-- **`releases_per_year: undefined` is overloaded** (hollow one-off vs annual
-  pulse) — resolved by todo item 5; until then don't mint the 35.
-- **Transparency does not affect raycasting** — `mesh.raycast = () => {}`.
-- **Never reintroduce faceted node geometry while fresnel rims exist** (rims
-  survive on hollow nodes and blueprint).
-- **`dsbb.imf.org` is useless to a non-JS fetcher**; national NSDP mirrors work.
+damps each family's chroma by its corpus share, measured at 1,250 nodes; the
+staged import moves SA to a major family and adds IL/SG outright. Palette v3
+took this debt knowingly — after minting, re-count and re-damp.
 
 ---
 
 ## 9. How to hand off
 
 1. `mv HANDOFF.md "Previous Handoffs/HANDOFF-YYYY-MM-DD-<topic>.md"`
-2. Write a new `HANDOFF.md` at the top level — **§1 "Read these first" always
-   comes first.**
-3. Carry forward anything still live. Delete what is finished; a handoff that
+2. Write a fresh `HANDOFF.md` here — §1 "Read these first" always first.
+3. Carry forward what is live; delete what is finished. A handoff that
    accumulates is a handoff nobody reads.
-4. Write the project-memory index entry. If memory is broken, say so here.
+4. Write the project-memory entry if memory works; if not, say so here (it
+   was broken all of 2026-08-19).
 
 Only one `HANDOFF.md` at the top level, ever.

@@ -244,6 +244,31 @@ export function teardropGeometry(width: number): THREE.LatheGeometry {
 const pulseMaterials = new Map<string, THREE.MeshBasicMaterial>()
 
 /**
+ * The shade split between a line and the pulse riding it — Thomas,
+ * 2026-08-19, third pass on this relationship: "I want the pulses to be a
+ * different shade than the edges too, the pulses can be brighter and the
+ * edges lighter shades."
+ *
+ * Same hue on both (one colour per family stays the ink system's premise);
+ * what differs is where each sits on that hue's ladder. The EDGE softens
+ * toward white a little and keeps its low opacity — a pale thread. The PULSE
+ * brightens further and rides at near-full opacity — a hot bead on that
+ * thread. This is deliberately HALF of what the failed whitened-additive
+ * version did: 0.35 toward white with normal blending keeps the hue legible
+ * on a single pulse, and thousands of them don't sum into a snowstorm
+ * because nothing is additive.
+ */
+export const EDGE_SOFTEN = 0.22
+const PULSE_BRIGHTEN = 0.35
+
+/** An edge's drawn shade: the family ink, softened. Exported for the one
+ * call site building gradient materials, so the edge and its pulse derive
+ * from the SAME ink and can never drift onto different hues. */
+export function edgeShade(ink: string): string {
+  return `#${new THREE.Color(ink).lerp(new THREE.Color('#ffffff'), EDGE_SOFTEN).getHexString()}`
+}
+
+/**
  * The blinking pulse materials, registered so one `tickPulseBlink` call a
  * frame animates them all. A Set of materials rather than per-link state
  * because the cache below already shares one material across every link of a
@@ -305,7 +330,8 @@ export function pulseMaterial(colour: string, blink = false): THREE.MeshBasicMat
   if (cached) return cached
 
   const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(colour),
+    // Brighter than its line by construction — see PULSE_BRIGHTEN.
+    color: new THREE.Color(colour).lerp(new THREE.Color('#ffffff'), PULSE_BRIGHTEN),
     transparent: true,
     opacity: 0.92,
     depthWrite: false,
