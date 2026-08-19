@@ -58,7 +58,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "gso.gov.vn is the agency's live portal/homepage; it carries continuously refreshed indicator tiles and links rather than one discrete publication. Item is the institution itself, not a titled series."
+      "_cadence_evidence": "gso.gov.vn is the agency's live portal/homepage; it carries continuously refreshed indicator tiles and links rather than one discrete publication. Item is the institution itself, not a titled series.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "vn-population",
@@ -196,7 +198,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "sbv.gov.vn homepage is a live portal: continuously updated exchange rates, interbank rates and a rolling 'banking activity this week' feed; no single discrete release for the institutional core."
+      "_cadence_evidence": "sbv.gov.vn homepage is a live portal: continuously updated exchange rates, interbank rates and a rolling 'banking activity this week' feed; no single discrete release for the institutional core.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "vn-bop",
@@ -1063,7 +1067,9 @@
       "last_updated": null,
       "_url_evidence": "Vietnam's official FTA Portal (MOIT), which enumerates the country's agreements: EVFTA, CPTPP, UKVFTA, VIFTA, VN-UAE CEPA, RCEP, VKFTA, VJEPA, ASEAN+ FTAs and the WTO agreement.",
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "fta.gov.vn is a live portal: searchable HS-code tariff-preference lookup across 16+ agreements plus rolling news; the page states no release frequency and has no discrete edition."
+      "_cadence_evidence": "fta.gov.vn is a live portal: searchable HS-code tariff-preference lookup across 16+ agreements plus rolling news; the page states no release frequency and has no discrete edition.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "vn-aquaculture",
@@ -2046,7 +2052,8 @@
       "jurisdiction_level_mapped": 83,
       "domain_tag_normalised": 277,
       "last_updated_added_null": 93,
-      "cadence_resolved_to_number": 7
+      "cadence_resolved_to_number": 7,
+      "continuous_database_number_assigned": 3
     },
     "rules": [
       "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
@@ -2056,7 +2063,8 @@
       "region filled with the country name where it was null or missing.",
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
-      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted.",
+      "2026-08-19: the 35 records resolved 'continuous-database' were given a nominal releases_per_year (250 business-day portals/feeds/query databases; 365 all-days monitoring: air quality, volcano/seismic, tropical-cyclone, disaster-event feeds), each with a cadence_note naming the convention. Original delivered value untouched in _cadence_original; evidence untouched in _cadence_evidence."
     ],
     "domain_semantic_pass": {
       "date": "2026-08-18",

@@ -83,7 +83,9 @@
       "last_updated": null,
       "_url_evidence": "UNSD (UN Statistics Division) country profile for the Syrian Arab Republic showing GDP in million current US$ (2015/2020/2025), GDP growth rate and GDP per capita, plus sectoral gross value added.",
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "data.un.org country profile is the UNdata application - '50+ statistical indicators for 229 countries/territories' - rendered as a live indicator table (values for 2015, 2020, 2025 with 2023/2024 estimates). No editions, no issue dates and no stated release cycle."
+      "_cadence_evidence": "data.un.org country profile is the UNdata application - '50+ statistical indicators for 229 countries/territories' - rendered as a live indicator table (values for 2015, 2020, 2025 with 2023/2024 estimates). No editions, no issue dates and no stated release cycle.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "sy-cpi",
@@ -444,7 +446,8 @@
       "nonschema_key_prefixed": 90,
       "jurisdiction_level_mapped": 28,
       "domain_tag_normalised": 83,
-      "last_updated_added_null": 30
+      "last_updated_added_null": 30,
+      "continuous_database_number_assigned": 1
     },
     "rules": [
       "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
@@ -454,7 +457,8 @@
       "region filled with the country name where it was null or missing.",
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
-      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted.",
+      "2026-08-19: the 35 records resolved 'continuous-database' were given a nominal releases_per_year (250 business-day portals/feeds/query databases; 365 all-days monitoring: air quality, volcano/seismic, tropical-cyclone, disaster-event feeds), each with a cadence_note naming the convention. Original delivered value untouched in _cadence_original; evidence untouched in _cadence_evidence."
     ],
     "domain_semantic_pass": {
       "date": "2026-08-18",

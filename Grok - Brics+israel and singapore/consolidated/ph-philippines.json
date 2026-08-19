@@ -58,7 +58,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "psa.gov.ph is the agency portal, not a single publication: it fronts an Advance Release Calendar and the OpenSTAT open-data platform (PC-Axis) with a live STATWATCH panel dated 06 Aug 2026; no discrete release for the node itself."
+      "_cadence_evidence": "psa.gov.ph is the agency portal, not a single publication: it fronts an Advance Release Calendar and the OpenSTAT open-data platform (PC-Axis) with a live STATWATCH panel dated 06 Aug 2026; no discrete release for the node itself.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "ph-population-census",
@@ -200,7 +202,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "bsp.gov.ph is the central bank portal; its Statistics section is described as 'Monetary, banking, financial industry data visualization and other statistics and their release schedule' — a continuously maintained data hub, not one publication."
+      "_cadence_evidence": "bsp.gov.ph is the central bank portal; its Statistics section is described as 'Monetary, banking, financial industry data visualization and other statistics and their release schedule' — a continuously maintained data hub, not one publication.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "ph-bop",
@@ -1306,7 +1310,9 @@
       "last_updated": null,
       "_url_evidence": "PAGASA tropical cyclone section showing the live bulletin plus its product set (advisories, severe wind and storm surge impact forecasts, TC threat potential, annual reports).",
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "The PAGASA severe weather / tropical cyclone bulletin page is a live operational feed with no stated issuance schedule — bulletins appear only while a cyclone is active, so there is no discrete periodic release."
+      "_cadence_evidence": "The PAGASA severe weather / tropical cyclone bulletin page is a live operational feed with no stated issuance schedule — bulletins appear only while a cyclone is active, so there is no discrete periodic release.",
+      "releases_per_year": 365,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "ph-peza",
@@ -2330,7 +2336,8 @@
       "jurisdiction_level_mapped": 98,
       "domain_tag_normalised": 316,
       "last_updated_added_null": 104,
-      "cadence_resolved_to_number": 9
+      "cadence_resolved_to_number": 9,
+      "continuous_database_number_assigned": 3
     },
     "rules": [
       "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
@@ -2340,7 +2347,8 @@
       "region filled with the country name where it was null or missing.",
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
-      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted.",
+      "2026-08-19: the 35 records resolved 'continuous-database' were given a nominal releases_per_year (250 business-day portals/feeds/query databases; 365 all-days monitoring: air quality, volcano/seismic, tropical-cyclone, disaster-event feeds), each with a cadence_note naming the convention. Original delivered value untouched in _cadence_original; evidence untouched in _cadence_evidence."
     ],
     "domain_semantic_pass": {
       "date": "2026-08-18",

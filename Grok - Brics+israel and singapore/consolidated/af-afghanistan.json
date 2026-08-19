@@ -136,7 +136,9 @@
       "_jurisdiction_level_original": "national",
       "last_updated": null,
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "Da Afghanistan Bank homepage is a live institutional portal - a rolling exchange-rate table ('Last updated: 18 August 2026'), an inflation figure, news items and a periodical magazine - rather than a single publication with a discrete release cycle."
+      "_cadence_evidence": "Da Afghanistan Bank homepage is a live institutional portal - a rolling exchange-rate table ('Last updated: 18 August 2026'), an inflation figure, news items and a periodical magazine - rather than a single publication with a discrete release cycle.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "af-bop",
@@ -387,7 +389,9 @@
       "last_updated": null,
       "_url_evidence": "WHO country data page for Afghanistan, fetched and confirmed to publish 'Life expectancy at birth' and healthy life expectancy (HALE) by sex for Afghanistan, plus mortality and health-workforce indicators.",
       "_cadence_resolution": "continuous-database",
-      "_cadence_evidence": "data.who.int country overview is a live interactive data portal with per-indicator downloads; indicators carry their own data years (2018-2023) and the only date shown is an access date ('Accessed on 14 August 2026'), not a release cycle."
+      "_cadence_evidence": "data.who.int country overview is a live interactive data portal with per-indicator downloads; indicators carry their own data years (2018-2023) and the only date shown is an access date ('Accessed on 14 August 2026'), not a release cycle.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
     },
     {
       "id": "af-trade",
@@ -478,7 +482,8 @@
       "nonschema_key_prefixed": 75,
       "jurisdiction_level_mapped": 22,
       "domain_tag_normalised": 65,
-      "last_updated_added_null": 25
+      "last_updated_added_null": 25,
+      "continuous_database_number_assigned": 2
     },
     "rules": [
       "jurisdiction_level mapped into the six-value union; the delivered string kept as _jurisdiction_level_original.",
@@ -488,7 +493,8 @@
       "region filled with the country name where it was null or missing.",
       "releases_per_year: unambiguous single-word cadences resolved to numbers; ambiguous text left in _cadence_original and listed under _gaps.unresolved_cadence.",
       "source_kind mapped to official/commercial; delivered value kept as _source_kind_original.",
-      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted."
+      "Non-schema keys Grok wrote (shape, notes, referenced_by, ...) renamed with a leading underscore so they are visibly not part of the schema. Nothing deleted.",
+      "2026-08-19: the 35 records resolved 'continuous-database' were given a nominal releases_per_year (250 business-day portals/feeds/query databases; 365 all-days monitoring: air quality, volcano/seismic, tropical-cyclone, disaster-event feeds), each with a cadence_note naming the convention. Original delivered value untouched in _cadence_original; evidence untouched in _cadence_evidence."
     ],
     "domain_semantic_pass": {
       "date": "2026-08-18",

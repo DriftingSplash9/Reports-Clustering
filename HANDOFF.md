@@ -173,10 +173,30 @@ verified headless the same day; the ONE unpushed piece is noted.
   state, not a code bug** — hunted first: every repaint path (build, recolour
   effect, halo) resolves through the lens; a hard refresh clears it. Verified
   with a traced selection under GROUPS on the built app.
-- **STILL OPEN from this list:** `releases_per_year` for the 35 continuous
-  databases in the staged corpus — the device bridge dropped mid-session
-  before the consolidated files could be read. It is the next mechanical
-  task; everything else in this section is on disk.
+- **The 35 continuous databases — DONE, later the same session** once the
+  bridge returned. Every record with `_cadence_resolution:
+  "continuous-database"` in `consolidated/` now carries a nominal
+  `releases_per_year`: **250** for the 31 business-day portals, feeds and
+  query databases (the live corpus's daily-FX convention), **365** for the 4
+  genuinely all-days monitors (`tw-air-quality`, `id-volcano-earthquake`,
+  `ph-pagasa`, `id-bnpb`). Each carries a `cadence_note` naming the
+  convention — it is a statement of continuous flow for the pulse/beam
+  system, NOT a claim of counted editions; observed reality stays in
+  `_cadence_evidence`, originals in `_cadence_original`, and each file's
+  `_normalisation` logs the change. All 15 touched files re-parse clean;
+  exactly 35 records changed (31×250 + 4×365), nothing else.
+  `undefined` now means one-off instrument ONLY, corpus-wide.
+
+**Also found in `consolidated/` — a third agent's work, untouched:**
+`_EDGES-jp-kr-tw-2026-08-19.json`, an ADDITIVE edge file from a 2026-08-19
+research round on the three largest zero-edge countries (Japan, South Korea,
+Taiwan) — item 9a of this list already in motion. Its own `_note` says it
+was written separately because it saw the country JSONs being rewritten
+mid-flight (correctly: that was this session's cadence pass). Merge its
+`dependencies` arrays into the country files, or import directly, per its
+`_rule`; every endpoint id is stated verified. Do not lose it in a sweep —
+underscore-prefixed files in `consolidated/` are bookkeeping, but this one
+is DATA.
 
 ## 5. The prioritized todo list (2026-08-19 audit)
 

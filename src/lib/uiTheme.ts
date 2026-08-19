@@ -50,15 +50,24 @@ export const THEME_CSS = /* css */ `
 }
 
 [data-theme='dark'] {
-  --panel-bg: linear-gradient(178deg, rgba(21, 28, 44, 0.90) 0%, rgba(10, 14, 24, 0.86) 46%, rgba(7, 10, 18, 0.92) 100%);
-  --panel-bg-solid: linear-gradient(180deg, rgba(15, 20, 33, 0.97), rgba(8, 11, 20, 0.97));
-  /* Blue field glow doubled and a faint blue keyline added 2026-08-19
-   * (Thomas, Phase 3.5: "the menu boxes could stay as they are but have a
-   * nice blue shadow effect or some kind of blue border") — same panels,
-   * more of the blue that was already in them, against the near-black the
-   * scene background just dropped to. */
-  --panel-shadow: 0 18px 42px rgba(0, 0, 0, 0.52), 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 32px rgba(70, 130, 255, 0.26), 0 0 0 1px rgba(110, 165, 245, 0.10), inset 0 1px 0 rgba(165, 195, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.45);
-  --glass-filter: blur(14px) saturate(1.35);
+  /* Alphas raised toward opaque on 2026-08-19 when the backdrop blur came
+   * off — an unblurred translucent panel lets the graph's stars show
+   * through the text, so the surface itself has to do the separating the
+   * blur used to. */
+  --panel-bg: linear-gradient(178deg, rgba(21, 28, 44, 0.96) 0%, rgba(10, 14, 24, 0.95) 46%, rgba(7, 10, 18, 0.97) 100%);
+  --panel-bg-solid: linear-gradient(180deg, rgba(15, 20, 33, 0.98), rgba(8, 11, 20, 0.98));
+  /* The glow's whole history, one day long: Phase 3.5 morning asked for "a
+   * nice blue shadow effect or some kind of blue border"; by evening,
+   * against the near-black background, the doubled field glow read as the
+   * HUD taking over the scene — Thomas: "it is time for the glow to go. no
+   * glow or blur on the boxes." So: the crisp blue KEYLINE stays (that is
+   * --line, the border half of the original ask), every soft shadow and
+   * every glow goes, and the 1px machined bevels stay because they are
+   * lines, not light. The panels now separate from the scene by edge and
+   * surface, the way an instrument panel actually does. */
+  --panel-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(165, 195, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  /* No backdrop blur — same request, same reasoning as the shadow. */
+  --glass-filter: none;
   --btn-bg: rgba(255, 255, 255, 0.03);
   --line: rgba(112, 152, 220, 0.38);
   --line-strong: rgba(130, 170, 230, 0.55);
