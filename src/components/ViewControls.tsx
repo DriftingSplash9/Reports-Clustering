@@ -48,8 +48,24 @@ const SLIDERS: {
     // the dense end is the complaint, so the slider no longer offers it. See
     // `spread` in lib/view.ts for why that is a judgement about this corpus
     // size rather than about the layout.
+    //
+    // **Ceiling 10 → 100 on 2026-08-20 (Thomas: "I almost wonder if we could
+    // go to 10000x instead of 1000x").** Granted, but measure before
+    // believing it does what it looks like it does: rendered at both ends,
+    // the core radius goes 6,429 → 17,217 (2.7×, not 10×) and the median
+    // nearest-neighbour gap — as a fraction of the two nodes' drawn radii —
+    // goes 0.84 → 1.05. **Ten times the spread buys about a quarter more
+    // air.** Spread saturates, because past a point the layout is held apart
+    // by the collision radius (fixed world units, deliberately) rather than
+    // by link rest length, and only this second term scales.
+    //
+    // Raising this REQUIRED raising `nodeScaleFor`'s cap in step — see the
+    // long note there. Cold-starting at 10000% asks for a node scale of 922;
+    // the cap was 200 and would have reproduced the "nodes and edges are
+    // nearly invisible" bug reported that morning. **Never move this ceiling
+    // without re-deriving that cap.**
     min: 2,
-    max: 10,
+    max: 100,
   },
   {
     key: 'geoAffinity',

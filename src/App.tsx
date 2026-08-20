@@ -24,6 +24,7 @@ import CameraZoom from './components/CameraZoom'
 import { PanelShell } from './components/PanelShell'
 import { MenuBar, PANELS_HIDDEN, type PanelKey, type PanelVisibility } from './components/MenuBar'
 import { HelpCard } from './components/HelpCard'
+import { LoadingCurtain } from './components/LoadingCurtain'
 
 /**
  * Versioned like the onboarding key: if the panel set ever changes shape in a
@@ -652,6 +653,13 @@ export default function App() {
   }, [panels])
   const togglePanel = (key: PanelKey) => setPanels((p) => ({ ...p, [key]: !p[key] }))
 
+  /**
+   * Lifted once the renderer says the layout has stopped moving and been
+   * framed. `LoadingCurtain` owns the safety timeout, so a signal that never
+   * arrives cannot trap anyone behind it.
+   */
+  const [graphReady, setGraphReady] = useState(false)
+
   /** Bumped by Help ▸ How to use; `Onboarding` watches it. See that file. */
   const [howToRequest, setHowToRequest] = useState(0)
   const [helpOpen, setHelpOpen] = useState(false)
@@ -754,6 +762,7 @@ export default function App() {
           registerEdgePicker={(pick) => {
             edgePicker.current = pick
           }}
+          onReady={() => setGraphReady(true)}
           onBounds={handleBounds}
           onToggleNode={handleToggleNode}
         />
@@ -971,6 +980,14 @@ export default function App() {
         Above every panel (they run zIndex 5–30) so the frost washes over
         whatever reaches the edge; below the onboarding dialog at 40.
       */}
+      {/*
+        The loading curtain. Rendered above every panel but BELOW the onboarding
+        dialog's 40 — no: above it, at 45. The onboarding card explains a graph;
+        showing it over a blank settling scene teaches nothing, so the curtain
+        covers it and the card is there when the curtain lifts.
+      */}
+      <LoadingCurtain ready={graphReady} reportCount={graph.nodes.length} />
+
       <div aria-hidden style={pageFrame} />
     </div>
   )

@@ -172,6 +172,41 @@ A fresh agent should assume ALL of the following exists and works; each landed
   `evidence_url` as a primary-source link. Right = what a node is, left = why
   an edge exists; the two coexist. No back-reference is stored — App
   re-filters disclosed edges by `edgeKey` on demand.
+- **Loading curtain, spread ceiling 10000%, and the cap re-derived
+  (2026-08-20, later).** `src/components/LoadingCurtain.tsx` (new) + an
+  `onReady` prop on `InfluenceGraph`.
+  - **The curtain** holds an opaque #010204 screen over the scene until the
+    renderer reports BOTH `settledOnce` (the engine actually stopped, via
+    `onEngineStop`) AND `fitted` (a fit has run). Thomas asked for it because
+    the warmup is visible thrashing — *"I think when we triple the size of
+    this the settling will take even longer"*, which is correct. Fires once,
+    on first load only: a curtain over every tier click would be worse than
+    watching a graph you can already see rearrange. **The safety timeout
+    (25s) is the load-bearing part** — if `onReady` never arrives, the
+    curtain lifts anyway, because one that never lifts is a broken app.
+    Measured lifting at 20–21s in the software-rendered sandbox, on the real
+    signal rather than the timeout; a GPU converges far sooner.
+  - **Spread ceiling 10 → 100 (10000%)**, Thomas's explicit choice after
+    being shown that it saturates: 2.7× more core radius and 25% more air,
+    not 10×.
+  - **`nodeScaleFor`'s cap re-derived 200 → 2000.** The rule written into that
+    comment an hour earlier ("if either slider ceiling moves again, recompute
+    this") immediately earned its keep: cold-starting at 10000% with geo off
+    asks for a node scale of **921.9** at States tier, 781.7 at Everything.
+    A cap of 200 would have reproduced the morning's invisible-nodes bug at
+    the new ceiling.
+  - **NEW FINDING — the layout is path-dependent, and this is probably the
+    "ball vs oblong" glitch.** Cold-starting at spread 10000% settles to a
+    core radius of **240,508**; dragging the slider up to 10000% during a
+    live session settles at **17,217**. Same settings, factor of fourteen.
+    The simulation keeps the history of how it got there. Not fixed — the fix
+    is a question about the simulation (re-seed positions on spread change?)
+    rather than about any one constant — but every cap and threshold has to
+    clear the worst path, which is why the cap is 2000 and not 40.
+  - Verified on the device tree after committing: `tsc` clean, `npm run
+    validate` 44 checks / 1250 / 1079, `npm run build` clean, curtain lifts
+    at 21s with zero console errors.
+
 - **Two rendering bugs found and fixed 2026-08-20**, both surfaced by Thomas's
   *"the nodes and edges are nearly invisible"* report (Geo-affinity off,
   Cluster spread 1000%, Nations tier).

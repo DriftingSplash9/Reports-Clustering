@@ -345,12 +345,28 @@ function nodeScaleFor(cloudRadius: number): number {
   // at its 150% default nothing looked wrong. Turning geo OFF lets the same
   // corpus relax to nearly five times that radius.
   //
-  // 200 is twice what the most extreme reachable setting asks for, computed
-  // rather than guessed. **If either slider's ceiling moves again, recompute
-  // this** — `cloudRadius × TARGET_LARGEST_FRACTION / MAX_BASE_RADIUS` at the
-  // new extreme, then double it. A cap that silently binds costs node size
-  // and edge width together, and neither failure names itself.
-  return Math.min(200, Math.max(1, wanted))
+  // **Re-derived to 2000 the same day, when the spread ceiling went to
+  // 10000%.** 200 was right for a 1000% ceiling and would have re-broken the
+  // graph at 10000% — the rule below was written an hour earlier and then
+  // immediately earned its keep, so it is worth restating: when a slider
+  // ceiling moves, recompute this. `cloudRadius × TARGET_LARGEST_FRACTION /
+  // MAX_BASE_RADIUS` at the new extreme, then double it.
+  //
+  // Measured cold-start at spread 10000% with geo off, which is the most
+  // expansive configuration reachable: core radius 240,508 at the Everything
+  // tier (asks for 781.7), 283,666 at States (asks for **921.9**). 2000 is
+  // 2.2× the worst of those.
+  //
+  // **Cold start and ramped-up are not the same layout.** Loading straight
+  // into 10000% gives a core radius of 240,508; dragging the slider up to
+  // 10000% from 1000% in a live session settles at 17,217 — a factor of
+  // fourteen for identical settings. The force layout keeps the history of
+  // how it got there. That path-dependence is almost certainly what Thomas
+  // means by "sometimes the cluster is a ball, sometimes it is oblong"; it is
+  // recorded here rather than fixed because the fix is a question about the
+  // simulation (re-seed on spread change?) and not about this function.
+  // Whatever the path, the cap must clear the worst of them.
+  return Math.min(2000, Math.max(1, wanted))
 }
 
 /**
@@ -539,6 +555,7 @@ export default function InfluenceGraph({
   onSelectEdge,
   registerEdgePicker,
   onBounds,
+  onReady,
   onToggleNode,
 }: {
   graph: Graph
@@ -598,6 +615,11 @@ export default function InfluenceGraph({
   registerEdgePicker: (pick: (clientX: number, clientY: number) => string | null) => void
   onBounds: (bounds: GraphBounds) => void
   /**
+   * Fired once, the first time the layout has stopped moving AND been framed.
+   * App uses it to lift the loading curtain. See the call site in `useFrame`.
+   */
+  onReady?: () => void
+  /**
    * Double-click on a node or an orb. App.tsx owns the drilldown state and
    * decides what a double-click on this particular id means (open an orb,
    * fold a real node's rung back in) — this component only reports which id
@@ -654,6 +676,8 @@ export default function InfluenceGraph({
    * simulation on every change without wanting a camera snap each time).
    */
   const settledOnce = useRef(false)
+  /** One-shot latch for `onReady` — see where it is fired, in `useFrame`. */
+  const readyReported = useRef(false)
   /**
    * Wall-clock seconds elapsed since this `forceGraph` was (re)built, and
    * since the last periodic re-fit — see `REFIT_INTERVAL_SECONDS`. Two
@@ -2361,6 +2385,30 @@ export default function InfluenceGraph({
       if (!userOwnsCamera.current && cameraMovedOffFit()) userOwnsCamera.current = true
       runFit(!userOwnsCamera.current)
     }
+    /**
+     * Tell App the graph is worth looking at (2026-08-20, Thomas: *"can we
+     * have a basic loading screen so the graph has time to settle and come to
+     * rest before being visible?"*).
+     *
+     * The two conditions are the two different things "ready" means here, and
+     * one without the other is a lie:
+     *  - `settledOnce` — the simulation has actually stopped moving. Set by
+     *    `onEngineStop`, which three-forcegraph fires on alpha decay or at its
+     *    own 15s cooldown ceiling, so it cannot hang forever.
+     *  - `fitted` — a fit has run, so the camera is pointed at the result
+     *    rather than at wherever it started.
+     *
+     * Fired ONCE, on first load only. A tier or spread change rebuilds the
+     * graph and resets `settledOnce`, but throwing a full-screen curtain over
+     * every tier click would be far worse than watching a graph you can
+     * already see rearrange itself. The wait is only unbearable when there is
+     * nothing on screen yet.
+     */
+    if (!readyReported.current && fitted.current && settledOnce.current) {
+      readyReported.current = true
+      onReady?.()
+    }
+
     advanceFlight(delta)
     updateFog(view.fog)
 
