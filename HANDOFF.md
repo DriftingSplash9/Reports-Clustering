@@ -202,15 +202,58 @@ Sorted by owner, ordered by priority within each.
    the fastest edges, so shape and beam are ONE design round. Pairs with the
    soft-edge node idea (`notes/node-surface-encoding-2026-08-19.md`) — the 35
    continuous databases have the data to support all of it.
-5. **Mint the staged archive** — decided yes, needs a dedicated session.
-   Pre-mint gates in order: `npm run check-urls -- --dir "Grok - Brics+israel
-   and singapore/consolidated"` (your machine — sandbox egress blocks some
-   hosts); merge `_EDGES-jp-kr-tw-2026-08-19.json`; the Mexico/Argentina
-   geography-as-a-node sweep; live-wins on the 4 duplicate ids (+ graft the
-   staged RBI `external-sector` tag). After minting: re-count the palette's
-   chroma damping — corpus shares are an input to it.
-   **Framing is NOT a gate** — measured and clear (item 12). Density is the
-   real question, which is why item 6 is above this.
+5. **Mint the staged archive — DONE 2026-08-20.** Corpus went from 1 250 to
+   **3 091 reports, 1 079 to 2 070 dependencies**. `npm run validate` and
+   `npm run build` both exit 0 on the merged corpus — worth re-running on your
+   machine once to confirm the same, since this was built and shipped from a
+   sandbox copy, not committed there directly (standing rule: agents never run
+   git in this repo).
+   - `check-urls` ran on your machine: 1 972 checked, 832 flagged "dead" but
+     most were false positives (403/timeout from the checker's plain HTTP
+     client tripping bot-walls — spot-checked several through a real
+     browser-fetch and they load fine). Only 37 were genuine 404s (18 of
+     those one problem — singstat.gov.sg restructured its URLs). Your call:
+     keep the report, flag the URL as stale rather than drop anything — not
+     yet written back as an explicit flag anywhere (no schema field for it;
+     needs its own small tracking note next session, e.g.
+     `notes/stale-urls-2026-08-20.md`).
+   - Merged `_EDGES-jp-kr-tw-2026-08-19.json` (63 edges, all landed).
+   - The geography-as-a-node problem turned out to be **two** problems, not
+     one: MX/AR had ~25 places (a state, a city) modeled as fake report nodes
+     ("Chiapas — core statistical identity"); 12 OTHER country files had the
+     same trick played with institutions instead (central banks, stats
+     offices) — mostly already flagged in each file's own
+     `_gaps.institution_node_candidates`, which is how they were caught. All
+     ~53 excluded from the mint rather than shipped as fake nodes. One of
+     them (`bo-ypfb`) was already independently flagged in the LIVE corpus's
+     own dropped-notes, which is also how a second thing got caught: one new
+     edge (`bo-alfabetismo → bo-educacion`) was a near-repeat of a claim
+     already rejected once for weak evidence — dropped rather than let it
+     quietly reappear.
+   - Live-wins applied uniformly (not just the 4 named duplicate ids — every
+     id collision resolved the same way); RBI `external-sector` tag grafted
+     onto the live `in-rbi-balance-of-payments` per this note.
+   - Also fixed along the way, none of it anticipated going in: 132 reports
+     had `jurisdiction_level: international` but kept a specific country code
+     instead of `INT` (existing validator rule, not a new one); 21 dependency
+     edges were containment mis-modeled as dependency (dropped — the
+     containment is already expressed via `part_of`); 40 edges carried a
+     free-text `reference_period` ("continuous") where the schema wants a
+     structured object (stripped the field rather than invent numbers from
+     prose).
+   - **Palette re-damped, same session** (Thomas: do it now). Shares
+     inverted — ASIA 4.0%→28.5% (now largest), SA 9.3%→21.9%, AFR
+     32.2%→15.3% (was largest), EU/US/CA all fell to 4–6%. New chroma tiers:
+     ASIA/SA (≥20%) 55%, AFR (15.3%) 75%, EU/US/CA/IN (3–7%) 90%, everything
+     under 3% stays full. Applied as a straight per-family chroma multiplier
+     in OKLCH space (hue and L untouched) — see `palette.ts`'s v4 note.
+   - **Camera-fit re-measured, same recipe as the path-dependence fix**: 1 806
+     framed nodes now (up from 958), furthest/p95 ratio **1.38×** — well
+     inside the 5.675× failure line, actually a better margin than pre-mint
+     despite nearly double the nodes. See the updated comment in
+     `InfluenceGraph.tsx`'s `measureFit`.
+   - **Not done yet**: the stale-url tracking note above, and the pulse/beam
+     item (4) which was already next in line.
 
 ### [Agent] — next build rounds, in order
 

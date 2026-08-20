@@ -161,6 +161,86 @@ cloud. Now debounced 300ms then `requestRefit()`.
   tail versus 45s.
 ```
 
+## Addendum — the mint is DONE, later still 2026-08-20
+
+HANDOFF §5 item 5 (mint the staged archive) is done, and it's the biggest
+single addendum in this file. Write it as its own memory entry, e.g.
+`grok-archive-minted-2026-08-20.md`, `type: project`:
+
+**Result**: 1,250 → **3,091 reports**, 1,079 → **2,070 dependencies**.
+`npm run validate` and `npm run build` both exit 0 on the merged corpus.
+
+**check-urls, run by Thomas on his own machine** (sandbox egress blocks some
+hosts, this can't run here): 1,972 checked, 832 flagged dead, but investigation
+found most of that is the checker's plain HTTP client tripping bot-walls
+(403s) or hitting TLS-trust issues (Russian govt sites use a domestic CA) —
+NOT real link rot. Spot-checked BPS Indonesia, IBGE Brazil, INE Uruguay/Chile
+through a real browser-fetch; all load fine. Only **37 were genuine 404s**
+(18 of those are one problem: singstat.gov.sg restructured its URL scheme).
+Thomas's call: keep the report, flag the URL as stale, don't drop anything.
+No schema field exists for "stale URL" — tracked instead in
+`notes/stale-urls-2026-08-20.md` until either a field gets added or each one
+gets re-researched.
+
+**Geography-as-a-node turned out to be two problems.** MX/AR had ~25 places
+(a state, a city) modeled as fake report nodes ("Chiapas — core statistical
+identity", url = a generic institutional homepage). 12 OTHER country files
+had the same trick played with institutions instead of places (central banks,
+stats offices) — mostly self-flagged in each staged file's own
+`_gaps.institution_node_candidates`, which is how they were caught rather than
+guessed at. All ~53 excluded from the mint. One (`bo-ypfb`) was independently
+flagged already in the LIVE corpus's own dropped-notes for `bo-national-core`,
+which is also how a second thing got caught: a new edge
+(`bo-alfabetismo → bo-educacion`) repeated a claim already rejected once for
+weak evidence — dropped rather than let it quietly reappear via the new
+import. **Method worth repeating**: cross-check every candidate new edge
+against the live corpus's existing `_dropped` notes before merging, not just
+against duplicate ids — a `_dropped` note is a considered decision and a
+silent re-add defeats the point of writing it down.
+
+**Live-wins applied uniformly**, not just to the 4 named duplicate ids
+(`in-mospi-cpi`, `in-rbi-balance-of-payments`, `ru-rosstat-cpi`,
+`ru-cbr-monetary-policy-guidelines`) — every id already in the live corpus
+was skipped in favour of the existing copy, everywhere, which is what made
+AE/AR/BO's ~112 collisions resolve themselves for free. RBI `external-sector`
+tag grafted onto the live `in-rbi-balance-of-payments` per the HANDOFF note.
+
+**Unanticipated fixes found along the way, all mechanical once found**: 132
+reports had `jurisdiction_level: international` but kept a specific country
+code instead of `INT` — an existing validator rule (`graph.ts`), not a new
+one, just never tripped by data this size before. 21 dependency edges were
+containment relationships mis-modeled as dependencies (a national aggregate
+"depending on" its own sub-item) — dropped, since `part_of` already expresses
+it and the validator rejects the same relationship expressed twice. 40 edges
+carried a free-text `reference_period` ("continuous", "quarterly / ongoing")
+where the schema wants a structured object — stripped the field rather than
+invent `readings_per_year`/`window_months`/`ends` from prose.
+
+**Palette re-damped, same session** (Thomas: "do it now"). Corpus shares
+inverted exactly as `palette.ts`'s v3 note warned they would: ASIA 4.0% →
+28.5% (now the largest family), SA 9.3% → 21.9%, AFR 32.2% → 15.3% (was
+largest, now third), EU/US/CA all fell to 4–6%. New tiers: ASIA/SA (≥20%) 55%
+chroma, AFR (15.3%) 75%, EU/US/CA/IN (3–7%) 90%, everything under 3% stays
+full (unchanged). Applied as a straight per-family chroma multiplier in OKLCH
+space — hue and L held fixed, only C scaled, computed from each family's
+existing hex via a from-scratch OKLab/OKLCH conversion (no colour library
+was available in the sandbox). See `palette.ts`'s v4 docstring for the full
+numbers and reasoning.
+
+**Camera-fit re-measured**, same recipe as the path-dependence harness
+(`vite preview` + headless Chromium, temporary `__FITDEBUG2__` console log in
+`measureFit`, stripped before shipping): 1,806 framed nodes now (up from 958),
+furthest/p95 ratio **1.38×** — comfortably inside the 5.675× failure line,
+and actually a *better* margin than pre-mint despite nearly double the framed
+nodes. The palette's colour-balance shift does not touch this ratio; they are
+independent axes (colour vs geometry) that both happened to move the same
+session.
+
+**Not done**: the stale-url list is written but not wired into anything the
+app reads (no schema field); re-deriving `nodeScaleFor`'s cap again wasn't
+needed (comfortably above the new numbers too, per the pre-mint fix's own
+margin).
+
 ---
 
 ## MEMORY.md index line to add
