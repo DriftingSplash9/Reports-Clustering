@@ -321,9 +321,36 @@ function nodeScaleFor(cloudRadius: number): number {
   // rail, every session, silently. The straggler problem it was guarding
   // against is now fixed at source in `runFit` (the percentile core radius),
   // so the cap goes back to being what a cap should be — a backstop against
-  // something absurd, not a number that binds in the ordinary case. 20 is
-  // roughly twice what the corpus asks for today.
-  return Math.min(20, Math.max(1, wanted))
+  // something absurd, not a number that binds in the ordinary case.
+  //
+  // **Raised 20 → 200 on 2026-08-20, and the same mistake had been made
+  // twice.** 20 was "roughly twice what the corpus asks for today" — true on
+  // 2026-08-19, when Cluster spread topped out at 375% and Geo-affinity at
+  // 150%. Both ceilings moved that evening (spread to 1000%, geo to 500%,
+  // geo now on by default), and the cap became binding again immediately.
+  // Thomas reported it the next morning as *"the nodes and edges are nearly
+  // invisible"*, with Geo-affinity off and Cluster spread at 1000%.
+  //
+  // Measured at those settings, Everything tier: the core radius reaches
+  // 28,558 and this function is asked for a scale of **92.8**. It returned
+  // 20. Nodes were drawn at just under a fifth of the size the fit had
+  // decided on, which at that camera distance is sub-pixel dust — and
+  // because `baseLinkWidth` is a MULTIPLE of this number, every edge was
+  // four-fifths too thin at the same time. That is why the edges went first.
+  // Fixing it took the count of bright pixels in the frame from 4,284 to
+  // 21,248 at identical settings: a 5.0× recovery against a predicted 4.6×.
+  //
+  // Geo-affinity was hiding it: the bloc pull holds the cloud to a core
+  // radius of about 5,900 (scale 19.2, just under the old cap), so with geo
+  // at its 150% default nothing looked wrong. Turning geo OFF lets the same
+  // corpus relax to nearly five times that radius.
+  //
+  // 200 is twice what the most extreme reachable setting asks for, computed
+  // rather than guessed. **If either slider's ceiling moves again, recompute
+  // this** — `cloudRadius × TARGET_LARGEST_FRACTION / MAX_BASE_RADIUS` at the
+  // new extreme, then double it. A cap that silently binds costs node size
+  // and edge width together, and neither failure names itself.
+  return Math.min(200, Math.max(1, wanted))
 }
 
 /**
@@ -1922,6 +1949,35 @@ export default function InfluenceGraph({
   useEffect(() => {
     forceGraph.d3ReheatSimulation()
   }, [view.geoAffinity, forceGraph])
+
+  /**
+   * ...and then re-frame what the reheat rearranged (2026-08-20).
+   *
+   * The reheat above lets the layout walk to its new rest position. Nothing
+   * re-ran the fit afterwards, so `nodeScale`, the link widths and the camera
+   * distance all stayed tuned to the cloud as it was BEFORE the slider moved.
+   * That is not a cosmetic lag: geo-affinity changes the core radius by nearly
+   * a factor of five between 0% and 150% on this corpus, and node size is
+   * derived from that radius — so turning the pull off left every node and
+   * every edge sized for a cloud a fifth the size of the one now on screen.
+   * Found while reproducing Thomas's "nearly invisible" report; it is the
+   * second half of that bug, the first being the `nodeScaleFor` cap.
+   *
+   * Debounced on the same 300ms as `spreadApplied`, and for the same reason:
+   * a range input fires on every pixel of a drag, and refitting per pixel
+   * would be a strobe. One refit after the drag stops.
+   *
+   * `requestRefit` rather than `runFit` so this behaves exactly like a filter
+   * or tier change — it hands the camera back and re-opens the settling
+   * window, which matters here because the layout is still moving when the
+   * refit lands and a single static fit would frame a cloud mid-expansion.
+   */
+  useEffect(() => {
+    if (!fitted.current) return
+    const t = setTimeout(() => requestRefit(), 300)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view.geoAffinity])
 
   // The scene-background effect (opaque paper vs transparent-over-CSS) went
   // with blueprint, 2026-08-19 — the dark theme's compositing was always the

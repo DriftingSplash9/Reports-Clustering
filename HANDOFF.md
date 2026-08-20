@@ -172,6 +172,47 @@ A fresh agent should assume ALL of the following exists and works; each landed
   `evidence_url` as a primary-source link. Right = what a node is, left = why
   an edge exists; the two coexist. No back-reference is stored — App
   re-filters disclosed edges by `edgeKey` on demand.
+- **Two rendering bugs found and fixed 2026-08-20**, both surfaced by Thomas's
+  *"the nodes and edges are nearly invisible"* report (Geo-affinity off,
+  Cluster spread 1000%, Nations tier).
+  1. **`nodeScaleFor`'s cap was binding hard.** It was 20 — "roughly twice
+     what the corpus asks for" as measured on 2026-08-19, before that
+     evening's slider rebasing. At geo-off/spread-1000% the core radius
+     reaches 28,558 and the fit asks for a scale of **92.8**; it got 20.
+     Nodes were drawn at under a fifth of their intended size, and because
+     `baseLinkWidth` is a MULTIPLE of node scale, every edge was four-fifths
+     too thin at the same moment — which is why the edges vanished first.
+     Raised to **200** (twice the most extreme reachable setting, computed
+     not guessed). Bright pixels in the frame went 4,284 → 21,248 at
+     identical settings, a 5.0× recovery against a predicted 4.6×.
+     **Geo-affinity had been hiding it**: the bloc pull holds the cloud near
+     5,900, just under the old cap, so at the 150% default nothing looked
+     wrong. **If either slider ceiling moves again, recompute this cap.**
+  2. **Changing geo-affinity reheated the layout but never re-fitted.** The
+     effect called `d3ReheatSimulation()` and stopped there, so node scale,
+     link widths and camera distance stayed tuned to the pre-change cloud —
+     and geo changes the core radius by nearly 5× on this corpus. Now
+     debounced 300ms (same as `spreadApplied`) and followed by
+     `requestRefit()`. Found via a harness reading that looked stale and
+     turned out to be the app, not the harness.
+
+- **Spread saturates — measured 2026-08-20.** Thomas asked whether the
+  ceiling should go to 10000%. Rendered it: p95 goes 6,429 → 17,217 (2.7×,
+  not 10×) and median nearest-neighbour gap as a fraction of the two nodes'
+  drawn radii goes **0.84 → 1.05**. Ten times the spread buys 25% more air.
+  Cheap and safe to raise the ceiling, but it is not the lever it looks like.
+  **The camera never ends up inside the cluster** whatever the spread — the
+  fit is percentile-based, so it backs off proportionally (max/p95 stayed
+  1.5–1.9 against a 5.675 threshold). Getting *inside* needs navigation, not
+  spread. Two things already exist and are undocumented: **pan is already on**
+  (`enablePan` defaults true — right-drag moves the target through the cloud),
+  and **min zoom already puts the camera inside the outer shell** (ZOOM_MIN
+  0.25 × a fit distance of 97,712 = 24,428, against a max node radius of
+  ~26,000). Arrow-key flying is close to free: drei's `OrbitControls` takes a
+  `keyEvents` prop (default false) and three's controls already implement
+  arrow-key panning at `keyPanSpeed = 7`. **Check the SearchPanel's own arrow
+  handling before enabling it** — that is the one collision.
+
 - **Cluster spread and geo-affinity rebased (2026-08-19, late).** Spread now
   runs **200%–1000%, opening at 200%** (was 25%–375% opening at 100%); the old
   default is below the new floor and unreachable on purpose — Thomas: *"far too
@@ -266,13 +307,47 @@ okay", Thomas 2026-08-19.)*
 
 ### [Agent] — next build rounds, in order
 
-8. **Menu bar + Help/How-to + the node card's URL link** (phase-4-brief §6).
-   One Word-style bar hosting the seven HUD blocks; Help = `START-HERE.md`
-   nearly verbatim; How-to = re-open the existing onboarding modal (never a
-   second copy that drifts). Thomas's pushback to honour: tier buttons are
-   primary navigation, and the status line is the only signal a filter is on.
-   Add the report's `url` as a link on the selection card (Thomas, 2026-08-19)
-   — and sweep stale Blueprint prose from the docs while in there.
+8. **Menu bar + Help/How-to + the node card's URL link — DONE 2026-08-20.**
+    `src/components/MenuBar.tsx` (new) and `HelpCard.tsx` (new); edits to
+    `App.tsx`, `Onboarding.tsx`, `PanelShell.tsx`, `SearchPanel.tsx`,
+    `CalendarPanel.tsx`, `lib/uiTheme.ts`.
+    - **Six of the seven blocks hide by default** behind a `Panels ▾` menu
+      (Reports / Find a report / Calendar / Countries / Unlinked reports / View
+      controls), with Show all and Hide all. Choice persisted at
+      `rig.panels.v1`, merged over the defaults on read so a key added later
+      cannot arrive `undefined`.
+    - **Both pieces of pushback honoured.** The tier bar is NOT in the menu —
+      it is primary navigation — and its status line stays visible with it, so
+      no separate always-on strip was needed. The argument is written at the
+      top of `MenuBar.tsx`; if Thomas ever asks for the tier bar hidden too,
+      the status line needs its own strip and that is the part not to forget.
+    - **The bar toggles blocks where they live; it does not re-parent them.**
+      A dropdown containing a panel would mean stripping fixed positioning out
+      of six components whose screen edges are load-bearing. Word's View ▸ Ruler
+      does not put the ruler inside the menu either.
+    - **Help renders `START-HERE.md` imported raw at build time** (`?raw`), so
+      the two can never drift — editing the markdown edits the card. Everything
+      from `## Running it` onward is cut at render time (repo mechanics, not
+      graph explanation); the cut is by heading name, so a rename degrades to
+      "shows slightly too much" rather than to a stale copy. `HelpCard.tsx`
+      carries a ~90-line markdown subset — headings, paragraphs, bullets,
+      rules, bold/code/link/italic — deliberately not a dependency.
+    - **How-to re-opens the existing onboarding card** via an `openRequest`
+      counter prop (a counter, not a boolean, so asking twice works and there
+      is no "set it back to false" step to forget). It does NOT clear the
+      dismissed flag — asking to see it once is not asking to see it every load.
+    - **The report's `url` is now on the selection card**, shown as its host
+      (`statcan.gc.ca ↗`) because full URLs run past 120 characters and wrap.
+    - **A shared `HUD_TOP` in `lib/uiTheme.ts`** replaces four hard-coded top
+      offsets that a top bar collides with.
+    - Verified on the device tree after committing: `tsc` clean, `npm run
+      validate` 44 checks / 1250 / 1079, `npm run build` clean, and a headless
+      pass that opens both menus, toggles all six panels, opens Help, re-opens
+      the onboarding card, reloads to confirm persistence — zero console errors.
+    - **Blueprint doc sweep: nothing to do.** No `blueprint` in any top-level
+      `.md` or in `notes/`; every remaining mention in `src/` is a deliberate
+      dated tombstone recording the deletion. Struck from the list.
+
 9. **Saved views** (phase-4-brief §7.1, last of Phase 4). Tier + settings +
    filters + selection are four plain values; named saved states, one canvas.
    NOT live tabs — a second canvas is a second physics sim; the brief has the
