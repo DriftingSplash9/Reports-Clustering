@@ -15,7 +15,7 @@
 import { calendarEvents, cadenceBand, describeWindow, horizonWindow, isRealDate, nextRelease } from '../src/lib/schedule'
 import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, countryFromOrbId, countryOrbId, isCountryOrbId, isFamilyOrbId, isOrbId, orbId, resolveId, tierOf, toggleCountryOpen, toggleDrilldown } from '../src/lib/hierarchy'
 import { NO_FILTER, applyFilter, compile, isFiltering, isolateFirstToggle } from '../src/lib/filter'
-import { buildFocusIndex, computeFocus, computeGroupFocus } from '../src/lib/selection'
+import { buildFocusIndex, computeFocus, computeGroupFocus, computeNeighbourhoodFocus } from '../src/lib/selection'
 import { buildGraph, describeRate, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
 import { search } from '../src/lib/search'
 import { affinityScore } from '../src/lib/geoAffinity'
@@ -227,6 +227,51 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   ok(focus.nodes.has('outside') && focus.edges.has('g1->outside'), 'computeGroupFocus: still walks OUT of the group to whatever it actually connects to, same as single-node isolate')
   const noWalk = computeGroupFocus(index, ['g1', 'g2'], { builtFrom: false, feedsInto: false })
   ok(!noWalk.nodes.has('outside') && noWalk.nodes.size === 2, 'computeGroupFocus: both cones off leaves exactly the seed set, no walking')
+}
+{
+  // computeNeighbourhoodFocus — item 8, 2026-08-20: "show this node and
+  // everything within N hops." A five-report chain a -> b -> c -> d -> e,
+  // so hops = 2 from 'a' has a clean, unambiguous answer: b and c are IN
+  // (1 and 2 hops away), d and e are OUT (3 and 4 hops away) — and the
+  // edge b->c must survive (it is what makes c reachable at all) while
+  // c->d must not appear at all (neither endpoint is within range, and c is
+  // never expanded past the hop limit to find it).
+  const reports: Report[] = ['a', 'b', 'c', 'd', 'e'].map((id) => ({
+    id,
+    title: id,
+    publisher: 'p',
+    country: 'CA',
+    jurisdiction_level: 'federal',
+    region: 'r',
+    description: '',
+    last_updated: null,
+    url: '',
+    domains: [],
+  }))
+  const deps: Dependency[] = [
+    { source_report_id: 'a', target_report_id: 'b', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'b', target_report_id: 'c', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'c', target_report_id: 'd', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'd', target_report_id: 'e', relationship_type: 'cites', basis: 't' },
+  ]
+  const g = buildGraph(reports, deps)
+  const index = buildFocusIndex(g, null)
+
+  const two = computeNeighbourhoodFocus(index, 'a', 2, { builtFrom: true, feedsInto: false })
+  ok(two.nodes.has('a') && two.nodes.has('b') && two.nodes.has('c'), 'computeNeighbourhoodFocus: hops=2 includes the selection plus 1 and 2 hops out')
+  ok(!two.nodes.has('d') && !two.nodes.has('e'), 'computeNeighbourhoodFocus: hops=2 excludes 3 and 4 hops out')
+  ok(two.edges.has('a->b') && two.edges.has('b->c'), 'computeNeighbourhoodFocus: both edges inside the 2-hop chain are collected')
+  ok(!two.edges.has('c->d'), 'computeNeighbourhoodFocus: the edge just past the boundary is not collected — c is never expanded')
+
+  const zero = computeNeighbourhoodFocus(index, 'a', 0, { builtFrom: true, feedsInto: true })
+  ok(zero.nodes.size === 1 && zero.nodes.has('a'), 'computeNeighbourhoodFocus: hops=0 is "just the selection", same as both cones off on computeFocus')
+
+  const unbounded = computeFocus(index, 'a', { builtFrom: true, feedsInto: false })
+  const five = computeNeighbourhoodFocus(index, 'a', 5, { builtFrom: true, feedsInto: false })
+  ok(
+    five.nodes.size === unbounded.nodes.size && [...five.nodes].every((id) => unbounded.nodes.has(id)),
+    'computeNeighbourhoodFocus: a hop limit past the graph\'s actual depth matches the unbounded walk exactly',
+  )
 }
 {
   // regions.ts: every country CONTINENT_OF has an opinion on for continent

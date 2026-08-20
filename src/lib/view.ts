@@ -75,6 +75,30 @@ export interface ViewSettings {
    */
   isolateFocus: boolean
   /**
+   * Item 8 of the 2026-08-20 todo list: "show this node and everything
+   * within N hops." **0 means off** — the ordinary unbounded
+   * `focusBuiltFrom`/`focusFeedsInto` cones, unchanged. Any other value
+   * (1 through `NEIGHBOURHOOD_HOPS_MAX`) switches the selection to a
+   * bounded, HIDING isolate the same way `isolateFocus` does — see the
+   * `neighbourhoodFocus` memo in `App.tsx` for exactly how the two compose
+   * (this one wins when it is on; a selection cannot be both "everything it
+   * rests on" and "only N hops of it" at once, so they are not additive).
+   *
+   * A separate field from `isolateFocus` rather than reusing that boolean
+   * plus this as a modifier, on purpose: `isolateFocus` is "show me the
+   * WHOLE chain and nothing else", which is a real, complete answer someone
+   * may want with the slider left at 0. Folding them into one control would
+   * make "the whole chain" reachable only by cranking the hop slider high
+   * enough to exceed the graph's diameter, which is not the same thing and
+   * would not read as the same thing.
+   *
+   * Thomas's own framing for why this earns its place ahead of fancier
+   * navigation ideas: "Filters today are by country and subject only. This
+   * attacks the density problem directly and is far cheaper than
+   * fly-through navigation."
+   */
+  neighbourhoodHops: number
+  /**
    * Camera distance as a multiple of the auto-fit distance.
    * 1 is the framing chosen on load; below 1 moves in, above 1 moves out.
    */
@@ -196,6 +220,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   focusBuiltFrom: true,
   focusFeedsInto: true,
   isolateFocus: false,
+  neighbourhoodHops: 0,
   zoom: 1,
   spread: 2,
   geoAffinity: 1.5,
@@ -386,3 +411,13 @@ export const DIM_LINK_OPACITY = 0.02
 
 export const ZOOM_MIN = 0.25
 export const ZOOM_MAX = 2.6
+
+/**
+ * Ceiling on `neighbourhoodHops`'s slider. 5 chosen as "clearly still a
+ * neighbourhood, not the whole graph" without measuring a specific number —
+ * unlike `spread`'s ceiling (§7's "never move a slider ceiling without
+ * re-deriving the cap" rule), nothing downstream of this one scales
+ * non-linearly with it, so there is no equivalent cap to keep in sync. Raise
+ * it freely if 5 hops turns out to still be everything on a dense hub node.
+ */
+export const NEIGHBOURHOOD_HOPS_MAX = 5

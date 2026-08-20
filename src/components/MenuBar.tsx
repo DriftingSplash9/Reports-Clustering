@@ -34,7 +34,7 @@ import { MENU_BAR_HEIGHT } from '../lib/uiTheme'
  * not put the ruler inside the menu.
  */
 
-export type PanelKey = 'reports' | 'find' | 'calendar' | 'countries' | 'groups' | 'unlinked' | 'view'
+export type PanelKey = 'reports' | 'find' | 'calendar' | 'groups' | 'unlinked' | 'view' | 'legend'
 
 export type PanelVisibility = Record<PanelKey, boolean>
 
@@ -42,25 +42,38 @@ export type PanelVisibility = Record<PanelKey, boolean>
  * Hidden by default, as asked. The graph is the subject; every panel is an
  * annotation beside it, and the same "fit to the subject, not the scenery"
  * argument that deleted the platform slab applies to the chrome.
+ *
+ * `countries` (the old ChipBar family/level filter) was removed from this
+ * key set entirely 2026-08-20, not just hidden — see the tombstone comment
+ * in `App.tsx` where `ChipBar` used to be defined. `GroupsPanel` ("groups"
+ * below) now sits in the bottom-centre slot it used to occupy. A stale
+ * `countries: true` left over in someone's persisted `rig.panels.v1` from
+ * before this change is harmless — it is just an unread extra key now.
  */
 export const PANELS_HIDDEN: PanelVisibility = {
   reports: false,
   find: false,
   calendar: false,
-  countries: false,
-  groups: false,
+  // `groups` (GroupsPanel, bottom-centre) is the one exception to "hidden by
+  // default" above: it replaced ChipBar as the primary country/region
+  // navigation control in that slot 2026-08-20 (Thomas: "front and centre
+  // bottom of the graph... by default"), and that only means anything if it
+  // is actually on screen without having to be found in the Panels menu
+  // first.
+  groups: true,
   unlinked: false,
   view: false,
+  legend: false,
 }
 
 const PANEL_ITEMS: { key: PanelKey; label: string; hint: string }[] = [
   { key: 'reports', label: 'Reports', hint: 'Corpus totals, the most depended-upon reports, and the subject filters' },
   { key: 'find', label: 'Find a report', hint: 'Search by name — or just press /' },
   { key: 'calendar', label: 'Calendar', hint: 'What publishes when, banded by cadence' },
-  { key: 'countries', label: 'Countries (filter)', hint: 'Hide whole colour families — an edge to anything outside the chosen ones is dropped' },
   { key: 'groups', label: 'Regions, orgs & countries (isolate)', hint: 'Pick a continent, treaty bloc, publisher or single country to see just it plus everything it actually connects to, including across borders' },
   { key: 'unlinked', label: 'Unlinked reports', hint: 'The shelf of reports with no surviving edge in either direction' },
   { key: 'view', label: 'View controls', hint: 'Zoom, haze, glow, cluster spread, geo-affinity and the lens' },
+  { key: 'legend', label: 'Legend', hint: 'What colour, size, fill, hollow rings, line colour and pulse rate each mean' },
 ]
 
 export function MenuBar({
@@ -76,6 +89,7 @@ export function MenuBar({
   onApplyView,
   onDeleteView,
   onSetOpenOnLoad,
+  onCopyLink,
 }: {
   panels: PanelVisibility
   onToggle: (key: PanelKey) => void
@@ -89,9 +103,19 @@ export function MenuBar({
   onApplyView: (id: string) => void
   onDeleteView: (id: string) => void
   onSetOpenOnLoad: (id: string | null) => void
+  /**
+   * Item 13, 2026-08-20 — shareable deep links. Synchronous: App.tsx builds
+   * the URL from whatever `drilldown`/`view`/`filter`/`selectedId`/
+   * `selectedGroupId` are RIGHT NOW and hands back a string; this component
+   * only owns writing it to the clipboard and the "Copied" feedback, the
+   * same division of labour `onSaveView` already has (App owns the data,
+   * MenuBar owns the interaction).
+   */
+  onCopyLink: () => string
 }) {
   const [open, setOpen] = useState<null | 'panels' | 'help' | 'views'>(null)
   const [draftName, setDraftName] = useState('')
+  const [linkCopied, setLinkCopied] = useState(false)
   const barRef = useRef<HTMLDivElement | null>(null)
 
   /**
@@ -248,6 +272,55 @@ export function MenuBar({
             }}
           >
             Save
+          </button>
+        </div>
+
+        {/*
+          Copy link — item 13. Distinct from Save just above: Save writes to
+          THIS browser's storage for the person sitting here; this builds a
+          URL anyone can open to land on the exact same tier, filters and
+          selection, with no account and no storage involved on either end.
+          `document.execCommand` fallback because Clipboard API can be
+          unavailable outside a secure context — unlikely on this app's own
+          localhost dev server, but cheap insurance for whatever it ends up
+          deployed behind.
+        */}
+        <div style={{ padding: '0 6px 8px' }}>
+          <button
+            type="button"
+            onClick={async () => {
+              const url = onCopyLink()
+              try {
+                await navigator.clipboard.writeText(url)
+              } catch {
+                const input = document.createElement('input')
+                input.value = url
+                input.style.position = 'fixed'
+                input.style.opacity = '0'
+                document.body.appendChild(input)
+                input.select()
+                document.execCommand('copy')
+                document.body.removeChild(input)
+              }
+              setLinkCopied(true)
+              setTimeout(() => setLinkCopied(false), 1500)
+            }}
+            title="Copy a URL that opens straight to this tier, filter and selection — for someone else, or for later"
+            style={{
+              width: '100%',
+              padding: '6px 8px',
+              fontFamily: 'inherit',
+              fontSize: 10.5,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: linkCopied ? 'var(--ink-gold)' : 'var(--ink-label)',
+              background: 'transparent',
+              border: '1px solid var(--line-faint)',
+              borderRadius: 5,
+              cursor: 'pointer',
+            }}
+          >
+            {linkCopied ? 'Link copied' : 'Copy link to this view'}
           </button>
         </div>
 

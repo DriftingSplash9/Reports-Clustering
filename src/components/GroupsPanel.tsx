@@ -131,10 +131,17 @@ function GroupRow({
   )
 }
 
+// Bottom-centre, not bottom-right — moved here 2026-08-20 (Thomas: "lets put
+// the new Regions/Countries front and centre bottom of the graph"), taking
+// over the exact slot the old ChipBar "Countries" filter pill used to sit in
+// (see the ChipBar tombstone comment in App.tsx). Same `left: 50% +
+// translateX(-50%)` centring trick ChipBar used, so this panel opens upward
+// dead-centre under the graph the same way that one did.
 const wrap: React.CSSProperties = {
   position: 'fixed',
   bottom: 20,
-  right: 20,
+  left: '50%',
+  transform: 'translateX(-50%)',
   zIndex: 6,
 }
 

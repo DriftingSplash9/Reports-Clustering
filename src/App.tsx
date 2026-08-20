@@ -9,6 +9,8 @@ import {
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import type { EffectComposer as EffectComposerImpl } from 'postprocessing'
+import { PngExport } from './components/PngExport'
 import InfluenceGraph, {
   FOV,
   type FlyTo,
@@ -58,6 +60,20 @@ const STARTUP_VIEW = (() => {
   const s = loadViews()
   return s.openOnLoad ? (s.views.find((v) => v.id === s.openOnLoad) ?? null) : null
 })()
+
+/**
+ * Item 13, 2026-08-20 — a deep link, if the page was opened with one
+ * (`?rig=...`). Same module-scope-read reasoning as `STARTUP_VIEW` just
+ * above — every `useState` initialiser below needs it before the first
+ * render. Read separately from `STARTUP_VIEW` rather than merged into it at
+ * this point, because the two are different shapes (a link carries
+ * `selectedGroupId`, which a saved view does not yet) and different
+ * questions ("what did this URL ask for" vs "what do I usually open to") —
+ * each initialiser below decides for itself which one wins, but in every
+ * case it is the link: opening someone else's link is a more specific,
+ * more recent intent than a standing "always open to X" preference.
+ */
+const DEEP_LINK = readDeepLink()
 import { Flag } from './components/Flag'
 import {
   BLOOM_THRESHOLD_MAX,
@@ -81,9 +97,17 @@ import {
   validate,
   type Disclosure,
 } from './lib/graph'
-import { buildFocusIndex, computeFocus, computeGroupFocus, edgeKey } from './lib/selection'
+import {
+  buildFocusIndex,
+  computeFocus,
+  computeGroupFocus,
+  computeNeighbourhoodFocus,
+  edgeKey,
+} from './lib/selection'
 import { REGION_GROUPS, COUNTRY_GROUPS, reportIdsForGroup, type RegionGroup } from './lib/regions'
 import { GroupsPanel } from './components/GroupsPanel'
+import { Legend } from './components/Legend'
+import { buildDeepLink, clearDeepLinkFromAddressBar, readDeepLink } from './lib/deepLink'
 import {
   DEFAULT_DRILLDOWN,
   TIER_DESCRIPTION,
@@ -106,17 +130,10 @@ import {
   type FilterState,
 } from './lib/filter'
 import {
-  ALL_SCOPES,
   COMMERCIAL_COLOUR,
-  FAMILY_INK,
   focusPalette,
-  SCOPE_COLOUR,
   SCOPE_GROUPS,
-  SCOPE_LABEL,
   colourForReport,
-  scopeOf,
-  type ColourFamily,
-  type Scope,
 } from './lib/palette'
 import { THEME_CSS } from './lib/uiTheme'
 import { DOMAINS, type Domain } from './lib/types'
@@ -178,7 +195,9 @@ export default function App() {
    * a few lines up — and reusing it here would collide two different meanings
    * of "how much is currently visible" under one name.
    */
-  const [drilldown, setDrilldown] = useState<Drilldown>(STARTUP_VIEW?.drilldown ?? DEFAULT_DRILLDOWN)
+  const [drilldown, setDrilldown] = useState<Drilldown>(
+    DEEP_LINK?.drilldown ?? STARTUP_VIEW?.drilldown ?? DEFAULT_DRILLDOWN,
+  )
 
   /**
    * Which countries have been individually expanded past their per-country
@@ -190,23 +209,45 @@ export default function App() {
    * same as the filter — advancing depth is additive, not a fresh start.
    */
   const [openedCountries, setOpenedCountries] = useState<ReadonlySet<Country>>(
-    () => new Set(STARTUP_VIEW?.openedCountries ?? []),
+    () => new Set(DEEP_LINK?.openedCountries ?? STARTUP_VIEW?.openedCountries ?? []),
   )
 
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(STARTUP_VIEW?.selectedId ?? null)
+  const [selectedId, setSelectedId] = useState<string | null>(
+    DEEP_LINK?.selectedId ?? STARTUP_VIEW?.selectedId ?? null,
+  )
   /**
    * A region/bloc/publisher picked from `GroupsPanel`, mutually exclusive
    * with `selectedId` (2026-08-20, Thomas: "we should have a menu with north
    * america, south america... IMF, eu, brics... when we open a nation or
    * region we should see how it ties to the international level and the
-   * connections within it"). Not persisted in saved views yet — see the
-   * note where `isolateFocus` below reads it.
+   * connections within it"). Still not persisted in saved views (`panels`
+   * and friends in `savedViews.ts`'s `SavedView` — a limitation of that
+   * feature, unrelated to this one) — but item 13's deep links DO carry it
+   * (`lib/deepLink.ts`'s `DeepLinkState`), postdating `SavedView` by less
+   * than a day and free to include from the start, so a shared "look at
+   * this region" link reproduces the sender's actual selection rather than
+   * silently downgrading to nothing selected.
    */
-  const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null)
+  const [selectedGroupId, setSelectedGroupId] = useState<string | null>(
+    DEEP_LINK?.selectedGroupId ?? null,
+  )
   const [bounds, setBounds] = useState<GraphBounds | null>(null)
-  const [view, setView] = useState<ViewSettings>(STARTUP_VIEW?.view ?? DEFAULT_VIEW)
-  const [filter, setFilter] = useState<FilterState>(STARTUP_VIEW?.filter ?? NO_FILTER)
+  const [view, setView] = useState<ViewSettings>(DEEP_LINK?.view ?? STARTUP_VIEW?.view ?? DEFAULT_VIEW)
+  const [filter, setFilter] = useState<FilterState>(
+    DEEP_LINK?.filter ?? STARTUP_VIEW?.filter ?? NO_FILTER,
+  )
+
+  // Once the deep link above has done its one job — seeding the initial
+  // state, several lines up — the `?rig=...` param is scrubbed from the
+  // address bar. See `clearDeepLinkFromAddressBar`'s own comment for why:
+  // a URL that keeps advertising the moment the link was opened is exactly
+  // the thing someone re-shares by accident once the view has moved on.
+  // Runs once — `DEEP_LINK` is a module constant, fixed for the session.
+  useEffect(() => {
+    if (DEEP_LINK) clearDeepLinkFromAddressBar()
+  }, [])
+
   const [flyTo, setFlyTo] = useState<FlyTo | null>(null)
   /**
    * Incremented to ask the scene for the opening camera back. A counter rather
@@ -214,6 +255,17 @@ export default function App() {
    * row, and a boolean would need clearing afterwards.
    */
   const [resetSignal, setResetSignal] = useState(0)
+  /**
+   * Item 12, 2026-08-20 — export a PNG at 2x with no HUD. Same "counter,
+   * zero is not a request" pattern as `resetSignal` just above, consumed by
+   * `PngExport.tsx`. `composerRef` is the postprocessing `EffectComposer`
+   * INSTANCE (via that component's own forwarded ref, not a React ref to the
+   * JSX element) — `PngExport` needs to resize it manually to keep bloom in
+   * sync with the temporarily-doubled pixel ratio; see that file's top
+   * comment for exactly why `useThree()` alone is not enough for that.
+   */
+  const [exportRequest, setExportRequest] = useState(0)
+  const composerRef = useRef<EffectComposerImpl | null>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   /**
    * Last pointer position, held in a ref rather than state so that placing the
@@ -316,6 +368,34 @@ export default function App() {
     [unfilteredFocusIndex, selectedId, view.isolateFocus, view.focusBuiltFrom, view.focusFeedsInto],
   )
 
+  /**
+   * Item 8 — "show this node and everything within N hops," 2026-08-20.
+   * Same unfiltered index and same HIDE-not-dim shape as `isolateFocus`
+   * just above (deliberately: a bounded chain across a family/country a
+   * scope filter would otherwise cut is exactly as real a chain as an
+   * unbounded one), but walked with `neighbourhoodHops` as the depth limit
+   * instead of no limit at all. Wins over `isolateFocus` when both would
+   * apply (see the field comment on `neighbourhoodHops` in `lib/view.ts` for
+   * why the two do not combine) — in practice this rarely matters, since
+   * turning the hop slider off leaves plain Isolate as it always was.
+   */
+  const neighbourhoodFocus = useMemo(
+    () =>
+      view.neighbourhoodHops > 0 && selectedId
+        ? computeNeighbourhoodFocus(unfilteredFocusIndex, selectedId, view.neighbourhoodHops, {
+            builtFrom: view.focusBuiltFrom,
+            feedsInto: view.focusFeedsInto,
+          })
+        : null,
+    [
+      unfilteredFocusIndex,
+      selectedId,
+      view.neighbourhoodHops,
+      view.focusBuiltFrom,
+      view.focusFeedsInto,
+    ],
+  )
+
   const visible = useMemo(() => {
     // Group isolate wins over everything else — it is the most specific,
     // most recently expressed intent ("show me exactly this region").
@@ -325,6 +405,16 @@ export default function App() {
         edges: groupFocus.edges,
         hiddenNodes: disclosedGraph.nodes.length - groupFocus.nodes.size,
         hiddenEdges: disclosedGraph.edges.length - groupFocus.edges.size,
+      }
+    }
+    // Neighbourhood (bounded) wins over plain Isolate (unbounded) — see the
+    // memo comment above.
+    if (neighbourhoodFocus) {
+      return {
+        nodes: neighbourhoodFocus.nodes,
+        edges: neighbourhoodFocus.edges,
+        hiddenNodes: disclosedGraph.nodes.length - neighbourhoodFocus.nodes.size,
+        hiddenEdges: disclosedGraph.edges.length - neighbourhoodFocus.edges.size,
       }
     }
     // Isolate wins outright over the scope/domain filter rather than
@@ -341,7 +431,7 @@ export default function App() {
       }
     }
     return isFiltering(filter) ? applyFilter(disclosedGraph, predicate) : null
-  }, [groupFocus, isolateFocus, disclosedGraph, filter, predicate])
+  }, [groupFocus, neighbourhoodFocus, isolateFocus, disclosedGraph, filter, predicate])
 
   /**
    * What the tier bar reports: **real reports, orbs excluded, after the
@@ -701,20 +791,9 @@ export default function App() {
     setFilter((f) => ({ ...f, domains: isolateFirstToggle(f.domains, DOMAINS, [domain]) }))
   }, [])
 
-  /** A family chip: isolate on first click, combo on the next, off on repeat. */
-  const toggleFamily = useCallback((family: ColourFamily) => {
-    const group = SCOPE_GROUPS.find((g) => g.country === family)
-    if (!group) return
-    setFilter((f) => ({
-      ...f,
-      scopes: isolateFirstToggle(f.scopes, ALL_SCOPES, group.scopes),
-    }))
-  }, [])
-
-  /** A level row in a chip's flyout — "Canada's municipal level" in two clicks. */
-  const toggleScope = useCallback((scope: Scope) => {
-    setFilter((f) => ({ ...f, scopes: isolateFirstToggle(f.scopes, ALL_SCOPES, [scope]) }))
-  }, [])
+  // `toggleFamily`/`toggleScope` (the ChipBar family/level chip handlers) were
+  // deleted with ChipBar itself, 2026-08-20 — see the tombstone comment where
+  // the component used to be defined, below.
 
   const top = useMemo(
     () => [...graph.nodes].sort((a, b) => b.authority - a.authority).slice(0, 3),
@@ -740,17 +819,7 @@ export default function App() {
     [graph],
   )
 
-  // Counted over the whole graph, not the filtered view: a chip showing "0"
-  // because you switched it off tells you nothing, while one showing how many
-  // you are hiding tells you what the switch is worth.
-  const scopeCounts = useMemo(() => {
-    const counts: Record<string, number> = {}
-    for (const n of graph.nodes) {
-      const s = scopeOf(n)
-      counts[s] = (counts[s] ?? 0) + 1
-    }
-    return counts
-  }, [graph])
+  // `scopeCounts` (ChipBar's per-family/level counts) went with it too.
 
   /**
    * The one family the filter is narrowed to, if it is narrowed to exactly
@@ -1060,7 +1129,7 @@ export default function App() {
           first time bloom was tuned, and why it was then set so conservatively
           that it did nothing at all for five sessions.
         */}
-        <EffectComposer>
+        <EffectComposer ref={composerRef}>
           <Bloom
             intensity={view.glow <= 0.005 ? 0 : 0.45 + view.glow * 0.5}
             luminanceThreshold={
@@ -1072,6 +1141,15 @@ export default function App() {
             mipmapBlur
           />
         </EffectComposer>
+
+        {/*
+          Item 12, 2026-08-20 — export a PNG at 2x with no HUD. Needs the
+          composer's own ref (just above) to keep bloom's buffers in sync
+          with the temporarily-doubled pixel ratio — see PngExport.tsx's
+          file-level comment for exactly why. No visible output of its own;
+          it only acts when `exportRequest` is bumped.
+        */}
+        <PngExport request={exportRequest} composerRef={composerRef} />
       </Canvas>
 
       {/*
@@ -1088,10 +1166,10 @@ export default function App() {
             reports: true,
             find: true,
             calendar: true,
-            countries: true,
             groups: true,
             unlinked: true,
             view: true,
+            legend: true,
           })
         }
         onHideAll={() => setPanels(PANELS_HIDDEN)}
@@ -1106,6 +1184,16 @@ export default function App() {
         }}
         onDeleteView={deleteView}
         onSetOpenOnLoad={setOpenOnLoad}
+        onCopyLink={() =>
+          buildDeepLink({
+            drilldown,
+            openedCountries: [...openedCountries],
+            view,
+            filter,
+            selectedId,
+            selectedGroupId,
+          })
+        }
       />
 
       {panels.view && (
@@ -1115,6 +1203,7 @@ export default function App() {
           onChange={setView}
           hasSelection={!!selected}
           onReset={handleReset}
+          onExportPng={() => setExportRequest((n) => n + 1)}
         />
       </PanelShell>
       )}
@@ -1123,24 +1212,14 @@ export default function App() {
         <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
       )}
 
-      {panels.countries && (
-      <ChipBar
-        scopeCounts={scopeCounts}
-        filter={filter}
-        levelColours={levelColours}
-        onFamily={toggleFamily}
-        onScope={toggleScope}
-        onAll={() => setFilter((f) => ({ ...f, scopes: null }))}
-        onNone={() => setFilter((f) => ({ ...f, scopes: [] }))}
-      />
-      )}
-
       {panels.groups && (
         <GroupsPanel
           selectedGroupId={selectedGroupId}
           onChoose={handleChooseGroup}
         />
       )}
+
+      {panels.legend && <Legend />}
 
       <TierBar
         tier={drilldown}
@@ -1909,384 +1988,20 @@ function ListBlock({
  * dots, narrow enough to fit the gap between those two panels without
  * competing with either for space.
  */
-/**
- * The chip bar — the legend and the filter, one row, one surface.
- *
- * Round-7 replacement for the sidebar's nine-family legend tree (Thomas,
- * round-5 Q18: "yes to all"). Each chip wears its family's INK — the same
- * colour its rims and edges wear in the scene, which is what makes the chips
- * a legend and not just buttons. Clicks speak isolate-first (see
- * `isolateFirstToggle`): from everything-on, one click on Canada means "show
- * me Canada", further clicks build combos, clicking the last selected chip
- * returns to everything.
- *
- * The ▾ on each chip opens a level flyout: click a level to isolate it (or
- * toggle it within a combo) — "Canada's municipal level" is chip-chevron +
- * one tick, exactly the two clicks promised. While the filter is narrowed to
- * exactly one family, the flyout's swatches switch from the family shades to
- * the spread recolour palette — the same colours the spheres themselves take
- * (see `levelColours` in App), so the flyout doubles as the recolour legend.
- *
- * Unstaffed families (China, Asia, India — reserved palette slices with zero
- * reports) render no chip: a filter for nothing is noise.
- */
-function ChipBar({
-  scopeCounts,
-  filter,
-  levelColours,
-  onFamily,
-  onScope,
-  onAll,
-  onNone,
-}: {
-  scopeCounts: Record<string, number>
-  filter: FilterState
-  levelColours: Record<string, string> | null
-  onFamily: (family: ColourFamily) => void
-  onScope: (scope: Scope) => void
-  /** Show everything — scopes back to null. */
-  onAll: () => void
-  /** Show nothing, as the clean base for building a combination. */
-  onNone: () => void
-}) {
-  /**
-   * Rebuilt as a drop-up selector, 2026-08-19 (Thomas, Phase 3.5: "lower the
-   * country bar or turn it into a drop down selector where a person can
-   * select all, none, or any combo... the country selector is about to
-   * explode when we add all the rest so best to make it something that can
-   * minimize"). The horizontal chip row was already wrapping at thirteen
-   * families; the staged Grok archive adds dozens of countries, and a row
-   * that grows sideways loses to a list that grows downward and scrolls.
-   *
-   * Collapsed is now the DEFAULT: one pill that always reports the filter
-   * state (All / None / n of m), because state must stay legible while its
-   * controls are put away — the same rule the old tray minimize followed. The
-   * open panel adds All and None as one-click resets; any combination is
-   * built from either end (start from All and knock families out, or start
-   * from None and pick them in — `isolateFirstToggle` already gives both).
-   * Level rows expand INLINE under their family rather than in a floating
-   * flyout, because a positioned flyout inside a scrolling list detaches from
-   * its row the moment the list scrolls.
-   */
-  const [openFamily, setOpenFamily] = useState<ColourFamily | null>(null)
-  const [collapsed, setCollapsed] = useState(true)
-  const barRef = useRef<HTMLDivElement>(null)
-
-  // The open panel closes on a click anywhere outside it, and on Escape —
-  // the same two exits the old flyout learned in round 8 ("stuck... I cannot
-  // change it or get rid of it").
-  useEffect(() => {
-    if (collapsed) return
-    const onDown = (e: PointerEvent) => {
-      if (barRef.current && !barRef.current.contains(e.target as Node)) {
-        setOpenFamily(null)
-        setCollapsed(true)
-      }
-    }
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setOpenFamily(null)
-        setCollapsed(true)
-      }
-    }
-    window.addEventListener('pointerdown', onDown)
-    window.addEventListener('keydown', onKey)
-    return () => {
-      window.removeEventListener('pointerdown', onDown)
-      window.removeEventListener('keydown', onKey)
-    }
-  }, [collapsed])
-
-  const anyFilter = filter.scopes !== null
-  const groups = SCOPE_GROUPS.filter(
-    (g) => g.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0) > 0,
-  )
-  const litCount = anyFilter
-    ? groups.filter((g) => g.scopes.some((s) => filter.scopes!.includes(s))).length
-    : 0
-
-  const summary = !anyFilter
-    ? 'All'
-    : litCount === 0
-      ? 'None'
-      : `${litCount} of ${groups.length}`
-
-  return (
-    <div ref={barRef} style={chipBarWrap}>
-      {!collapsed && (
-        <div style={countryPanel}>
-          <div style={countryPanelHeader}>
-            <span style={countryPanelTitle}>Countries</span>
-            <button
-              type="button"
-              onClick={onAll}
-              title="Show every country"
-              style={{ ...allNoneButton, ...(anyFilter ? null : allNoneActive) }}
-            >
-              All
-            </button>
-            <button
-              type="button"
-              onClick={onNone}
-              title="Hide every country — then pick the combination you want"
-              style={{
-                ...allNoneButton,
-                ...(anyFilter && litCount === 0 ? allNoneActive : null),
-              }}
-            >
-              None
-            </button>
-          </div>
-          <div style={countryList}>
-            {groups.map((group) => {
-              const total = group.scopes.reduce((n, s) => n + (scopeCounts[s] ?? 0), 0)
-              const on =
-                !anyFilter || group.scopes.some((s) => filter.scopes!.includes(s))
-              const lit = anyFilter && on
-              const ink = FAMILY_INK[group.country] ?? 'var(--ink-label)'
-              const open = openFamily === group.country
-              const present = group.scopes.filter((s) => (scopeCounts[s] ?? 0) > 0)
-              return (
-                <div key={group.country}>
-                  <div style={countryRow}>
-                    <span
-                      onClick={() => onFamily(group.country)}
-                      title={`${group.label} — click to isolate, click others to combine, click again to drop`}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 7,
-                        flex: 1,
-                        cursor: 'pointer',
-                        opacity: on ? 1 : 0.45,
-                      }}
-                    >
-                      <span
-                        style={{
-                          width: 9,
-                          height: 9,
-                          borderRadius: 9,
-                          background: lit ? ink : 'transparent',
-                          border: `2px solid ${ink}`,
-                          boxShadow: lit ? `0 0 7px ${ink}88` : 'none',
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span
-                        style={{
-                          color: on ? 'var(--ink-strong)' : 'var(--ink-dim)',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
-                        {group.label}
-                      </span>
-                      <span style={{ color: 'var(--ink-faint)', marginLeft: 'auto' }}>
-                        {total}
-                      </span>
-                    </span>
-                    <span
-                      onClick={() => setOpenFamily(open ? null : group.country)}
-                      title={`${group.label} by level`}
-                      style={{
-                        cursor: 'pointer',
-                        color: open ? 'var(--ink-strong)' : 'var(--ink-faint)',
-                        padding: '4px 6px',
-                        margin: '-4px -4px -4px 0',
-                        transform: open ? 'rotate(180deg)' : 'none',
-                        transition: 'transform 140ms ease',
-                      }}
-                    >
-                      ▾
-                    </span>
-                  </div>
-                  {open && (
-                    <div style={levelBlock}>
-                      {present.map((s) => {
-                        const sOn = !filter.scopes || filter.scopes.includes(s)
-                        const swatch = levelColours?.[s] ?? SCOPE_COLOUR[s]
-                        return (
-                          <div
-                            key={s}
-                            onClick={() => onScope(s)}
-                            style={{ ...flyoutRow, opacity: sOn ? 1 : 0.45 }}
-                          >
-                            <span
-                              style={{
-                                width: 10,
-                                height: 10,
-                                borderRadius: 10,
-                                background: swatch,
-                                border: `1px solid ${ink}`,
-                                flexShrink: 0,
-                              }}
-                            />
-                            <span
-                              style={{
-                                flex: 1,
-                                color: sOn ? 'var(--ink-body)' : 'var(--ink-dim)',
-                              }}
-                            >
-                              {SCOPE_LABEL[s] ?? s}
-                            </span>
-                            <span style={{ color: 'var(--ink-dim)' }}>
-                              {scopeCounts[s] ?? 0}
-                            </span>
-                          </div>
-                        )
-                      })}
-                      {levelColours && (
-                        <div
-                          style={{
-                            fontSize: 9,
-                            color: 'var(--ink-faint)',
-                            marginTop: 4,
-                            lineHeight: 1.4,
-                          }}
-                        >
-                          Spread colours — the spheres wear these while only this
-                          family is shown.
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )}
-      <div
-        onClick={() => {
-          setOpenFamily(null)
-          setCollapsed((c) => !c)
-        }}
-        title={collapsed ? 'Choose countries' : 'Put the country list away'}
-        style={{ ...chip, cursor: 'pointer', color: 'var(--ink-label)' }}
-      >
-        <span style={{ whiteSpace: 'nowrap' }}>Countries · {summary}</span>
-        <span style={{ color: 'var(--ink-faint)' }}>{collapsed ? '▴' : '▾'}</span>
-      </div>
-    </div>
-  )
-}
-
-// Lowered from 96 to the bottom edge and turned into a column (panel opens
-// upward over the pill) when the chip row became a drop-up selector —
-// Phase 3.5, 2026-08-19.
-const chipBarWrap: React.CSSProperties = {
-  position: 'fixed',
-  bottom: 20,
-  left: '50%',
-  transform: 'translateX(-50%)',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: 6,
-  zIndex: 6,
-}
-
-const countryPanel: React.CSSProperties = {
-  width: 292,
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '10px 12px',
-  background: 'var(--panel-bg-solid)',
-  border: '1px solid var(--line)',
-  borderRadius: 10,
-  boxShadow: 'var(--panel-shadow)',
-  backdropFilter: 'var(--glass-filter)',
-  userSelect: 'none',
-}
-
-const countryPanelHeader: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 6,
-  paddingBottom: 8,
-  marginBottom: 6,
-  borderBottom: '1px solid var(--line-faint)',
-}
-
-const countryPanelTitle: React.CSSProperties = {
-  flex: 1,
-  fontSize: 10,
-  letterSpacing: '0.09em',
-  textTransform: 'uppercase',
-  color: 'var(--ink-faint)',
-}
-
-const allNoneButton: React.CSSProperties = {
-  fontFamily: 'inherit',
-  fontSize: 9.5,
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase',
-  color: 'var(--ink-dim)',
-  background: 'transparent',
-  border: '1px solid var(--line)',
-  borderRadius: 5,
-  padding: '3px 9px',
-  cursor: 'pointer',
-  lineHeight: 1,
-}
-
-const allNoneActive: React.CSSProperties = {
-  color: 'var(--ink-body)',
-  borderColor: 'var(--accent-line)',
-  background: 'var(--accent-soft)',
-}
-
-/** Scrolls once the family list outgrows roughly half the window — the whole
- * reason this is a list: it grows DOWN into a scrollbar, not sideways into
- * the graph, however many countries the corpus gains. */
-const countryList: React.CSSProperties = {
-  overflowY: 'auto',
-  maxHeight: '44vh',
-}
-
-const countryRow: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 4,
-  fontSize: 11.5,
-  lineHeight: 2.05,
-}
-
-const levelBlock: React.CSSProperties = {
-  padding: '2px 0 6px 22px',
-  borderLeft: '1px solid var(--line-faint)',
-  marginLeft: 4,
-}
-
-const chip: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 4,
-  padding: '5px 8px 5px 10px',
-  fontSize: 10.5,
-  letterSpacing: '0.04em',
-  background: 'var(--panel-bg)',
-  border: '1px solid',
-  borderRadius: 15,
-  boxShadow: 'var(--panel-shadow)',
-  backdropFilter: 'var(--glass-filter)',
-  userSelect: 'none',
-}
-
-// `flyout` (the floating per-family level panel) was deleted with the chip
-// row — levels now expand inline inside the scrolling country list, where a
-// positioned flyout would detach from its row on scroll.
-
-const flyoutRow: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 7,
-  fontSize: 11,
-  lineHeight: 1.9,
-  cursor: 'pointer',
-  whiteSpace: 'nowrap',
-}
+// ChipBar (the old bottom-centre "Countries - All" filter pill) was
+// DELETED 2026-08-20 -- Thomas: "lets put the new Regions/Countries front and
+// centre bottom of the graph. Kill the old Countries that currently sits on
+// the bottom in the centre." GroupsPanel now owns that slot (see its `wrap`
+// style). This was a real deletion, not a hide: the family/level FILTER
+// mechanism it drove (`FilterState.scopes`, `SCOPE_GROUPS`, `isolateFirstToggle`
+// over scopes) is still intact in `lib/filter.ts` and `lib/palette.ts` --
+// nothing there was touched -- there is simply no UI left that ever sets
+// `filter.scopes` to anything but null, so it now always reads as "All".
+// `levelColours`/`focusedFamily` above are the same story: still wired into
+// InfluenceGraph's recolour effect, now permanently a no-op since nothing
+// narrows `filter.scopes` to one family anymore. Recoverable from git
+// history if a UI for the filter is wanted again -- see the archived
+// HANDOFF for the full reasoning.
 
 /**
  * The tier buttons.

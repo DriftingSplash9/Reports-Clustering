@@ -96,24 +96,41 @@ export interface Focus {
  * case. A single-id walk is just this with one seed, which is exactly why
  * `computeFocus` below still reads as unchanged.
  */
+/**
+ * `maxHops` (2026-08-20, for `computeNeighbourhoodFocus` below): when set,
+ * a node discovered at exactly `maxHops` steps from a seed is still added to
+ * `nodes` (and the edge that reached it is still added to `edges`) — it is
+ * IN the neighbourhood — but its own outgoing edges are never walked, so
+ * nothing at `maxHops + 1` is reached. `undefined` (the default, what
+ * `computeFocus`/`computeGroupFocus` both still pass) means no limit at all,
+ * the original unbounded transitive walk. A lateral edge directly between
+ * two nodes that both happen to sit exactly at the depth limit is not
+ * collected, since neither end is ever expanded — an accepted gap, not an
+ * oversight: catching it would mean walking one hop past the stated limit
+ * just to look for edges back inside it, and "within N hops" is already a
+ * looser promise than "every edge among what's on screen" (that promise is
+ * what `applyFilter`'s both-endpoints-visible rule is for, elsewhere).
+ */
 function walk(
   startIds: Iterable<string>,
   adjacency: Map<string, string[]>,
   orient: (from: string, to: string) => string,
+  maxHops?: number,
 ): { nodes: Set<string>; edges: Set<string> } {
   const nodes = new Set<string>()
   const edges = new Set<string>()
-  const queue = [...startIds]
-  const seen = new Set<string>(queue)
+  const queue: Array<[string, number]> = [...startIds].map((id) => [id, 0])
+  const seen = new Set<string>(queue.map(([id]) => id))
 
   while (queue.length) {
-    const current = queue.shift() as string
+    const [current, depth] = queue.shift() as [string, number]
+    if (maxHops !== undefined && depth >= maxHops) continue
     for (const next of adjacency.get(current) ?? []) {
       edges.add(orient(current, next))
       if (seen.has(next)) continue
       seen.add(next)
       nodes.add(next)
-      queue.push(next)
+      queue.push([next, depth + 1])
     }
   }
 
@@ -134,6 +151,51 @@ export function computeFocus(
 ): Focus {
   const up = walk([selectedId], index.builtFrom, (from, to) => edgeKey(from, to))
   const down = walk([selectedId], index.feedsInto, (from, to) => edgeKey(to, from))
+
+  const nodes = new Set<string>([selectedId])
+  const edges = new Set<string>()
+
+  if (show.builtFrom) {
+    for (const id of up.nodes) nodes.add(id)
+    for (const k of up.edges) edges.add(k)
+  }
+  if (show.feedsInto) {
+    for (const id of down.nodes) nodes.add(id)
+    for (const k of down.edges) edges.add(k)
+  }
+
+  return {
+    selectedId,
+    builtFrom: up.nodes,
+    feedsInto: down.nodes,
+    nodes,
+    edges,
+  }
+}
+
+/**
+ * Item 8 of the 2026-08-20 todo list — "show this node and everything
+ * within N hops." Thomas's own framing: filters today are by country and
+ * subject only, and this attacks the density problem more directly and
+ * more cheaply than fly-through navigation would.
+ *
+ * Same shape as `computeFocus`, and reuses the same `Focus` interface
+ * outright rather than a bespoke one — a bounded cone answers the same
+ * "what does this rest on / what rests on this" question, just with a
+ * nearer horizon, so the two are interchangeable everywhere a `Focus` is
+ * consumed (`App.tsx`'s `visible` memo, `InfluenceGraph`'s `applyFocus`).
+ * `hops = 0` means "just the selection, nothing else" — a real, useful
+ * answer to "where is this one thing", not an error case, matching the
+ * existing "both cones off" behaviour of `computeFocus` at hops = Infinity.
+ */
+export function computeNeighbourhoodFocus(
+  index: FocusIndex,
+  selectedId: string,
+  hops: number,
+  show: { builtFrom: boolean; feedsInto: boolean },
+): Focus {
+  const up = walk([selectedId], index.builtFrom, (from, to) => edgeKey(from, to), hops)
+  const down = walk([selectedId], index.feedsInto, (from, to) => edgeKey(to, from), hops)
 
   const nodes = new Set<string>([selectedId])
   const edges = new Set<string>()

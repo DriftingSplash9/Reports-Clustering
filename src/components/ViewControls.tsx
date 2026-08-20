@@ -1,4 +1,4 @@
-import { ZOOM_MAX, ZOOM_MIN, type ViewSettings } from '../lib/view'
+import { NEIGHBOURHOOD_HOPS_MAX, ZOOM_MAX, ZOOM_MIN, type ViewSettings } from '../lib/view'
 import type { LensMode } from '../lib/modes'
 
 /**
@@ -141,6 +141,7 @@ export default function ViewControls({
   onChange,
   hasSelection,
   onReset,
+  onExportPng,
 }: {
   view: ViewSettings
   onChange: (next: ViewSettings) => void
@@ -148,6 +149,13 @@ export default function ViewControls({
   hasSelection: boolean
   /** `clearFilter` is true when the control was shift-clicked. See the button. */
   onReset: (clearFilter: boolean) => void
+  /**
+   * Item 12, 2026-08-20 — "export a PNG at 2x without the HUD." Fire-and-
+   * forget: the actual capture lives in `PngExport.tsx`, mounted inside the
+   * Canvas where it has the renderer and the bloom composer. This is just
+   * the button.
+   */
+  onExportPng: () => void
 }) {
   const set = <K extends keyof ViewSettings>(key: K, value: ViewSettings[K]) =>
     onChange({ ...view, [key]: value })
@@ -174,6 +182,14 @@ export default function ViewControls({
           style={resetButton}
         >
           reset
+        </button>
+        <button
+          type="button"
+          onClick={onExportPng}
+          title="Save a PNG of exactly what the canvas shows, at 2x resolution, with no panels or menu drawn over it"
+          style={resetButton}
+        >
+          png
         </button>
       </div>
 
@@ -263,6 +279,38 @@ export default function ViewControls({
           <span style={{ color: view[key] ? 'var(--ink-body)' : 'var(--ink-dim)' }}>{label}</span>
         </label>
       ))}
+      {/*
+        Item 8, 2026-08-20 — "show this node and everything within N hops."
+        A slider rather than a checkbox, like `spread`/`geoAffinity`/`galaxy`
+        above, because "how many hops" is the actual question, not "on or
+        off" — 0 IS off (the field's own contract, see `lib/view.ts`), so no
+        separate toggle is needed. Kept in the Focus section, not with the
+        percentage SLIDERS above, because it shares nothing with them: an
+        integer hop count, not a 0–1 strength, and it does nothing without a
+        selection either, same as the two checkboxes just above it.
+      */}
+      <label style={{ ...sliderRow, marginTop: 8 }} title="Hide everything more than N hops from the selection — a bounded version of Isolate that attacks a dense neighbourhood directly">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 11, color: view.neighbourhoodHops > 0 ? 'var(--ink-label)' : 'var(--ink-dim)' }}>
+            Neighbourhood
+          </span>
+          <span style={{ fontSize: 11, color: 'var(--ink-dim)' }}>
+            {view.neighbourhoodHops === 0
+              ? 'off'
+              : `${view.neighbourhoodHops} hop${view.neighbourhoodHops === 1 ? '' : 's'}`}
+          </span>
+        </div>
+        <input
+          type="range"
+          min={0}
+          max={NEIGHBOURHOOD_HOPS_MAX}
+          step={1}
+          value={view.neighbourhoodHops}
+          onChange={(e) => set('neighbourhoodHops', Number(e.target.value))}
+          style={slider}
+        />
+      </label>
+
       <div style={note}>
         {hasSelection
           ? 'Esc or click empty space to clear.'

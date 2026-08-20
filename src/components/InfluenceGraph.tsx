@@ -2094,6 +2094,37 @@ export default function InfluenceGraph({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view.geoAffinity])
 
+  /**
+   * Reheat when galaxy pull changes — same bug, same fix, as the
+   * geo-affinity reheat pair just above. `galaxyStrength` (the ref
+   * `galaxyForce` actually reads) is already current the instant the slider
+   * moves; what silenced it was three-forcegraph's alpha having decayed to
+   * ~0 by the time anyone touches ANY slider post-fit, and `galaxyForce`'s
+   * force, like every d3 force here, is scaled by alpha. Without this,
+   * dragging "Galaxy pull" did nothing until the next full rebuild (a tier
+   * or filter change) happened to reheat the sim as a side effect — which
+   * is exactly the "the galaxy pull doesn't appear to have an effect" report
+   * (2026-08-20). This was simply never wired when `view.galaxy` shipped;
+   * `geoAffinity`'s reheat was already there to copy.
+   */
+  useEffect(() => {
+    forceGraph.d3ReheatSimulation()
+  }, [view.galaxy, forceGraph])
+
+  /**
+   * ...and re-frame what the reheat rearranged, same reasoning as
+   * geo-affinity's refit pair above: nothing re-runs the fit after a reheat,
+   * so camera distance and node scale stay tuned to the cloud as it was
+   * before the slider moved. Same 300ms debounce, same `requestRefit` (not
+   * `runFit`) so this behaves like any other filter/tier change.
+   */
+  useEffect(() => {
+    if (!fitted.current) return
+    const t = setTimeout(() => requestRefit(), 300)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view.galaxy])
+
   // The scene-background effect (opaque paper vs transparent-over-CSS) went
   // with blueprint, 2026-08-19 — the dark theme's compositing was always the
   // transparent framebuffer over the page's CSS colour, and now that is the
