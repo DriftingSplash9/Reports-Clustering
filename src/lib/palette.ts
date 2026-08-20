@@ -513,6 +513,30 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   // vertical- and horizontal-devolution formulas. See
   // `src/data/research/in-cpi-finance-commission.json`.
   IN: 'IN',
+
+  // **South America filled out, 2026-08-20**, via the BRICS+/Israel/Singapore
+  // Grok archive mint (`Grok - Brics+israel and singapore/consolidated/`).
+  // Filed to `SA` alongside Brazil, Argentina and Bolivia — the family
+  // reserved for this continent since the continent redesign.
+  CL: 'SA', CO: 'SA', EC: 'SA', PE: 'SA', PY: 'SA', UY: 'SA', VE: 'SA',
+  GY: 'SA', SR: 'SA',
+
+  // Mexico — same 2026-08-20 mint. No dedicated North/Central America family
+  // exists (only `CA` and `US`, which are specific countries, not the
+  // continent), so this rides with `SA` as the least-wrong bucket rather than
+  // force a false fit into `CA`/`US`. A placeholder that renders, not a
+  // classification to defend — same standing as the `ASIA` assignments below.
+  MX: 'SA',
+
+  // Middle East, South and East/Southeast Asia — same 2026-08-20 mint. Filed
+  // to `ASIA`, the reserved catch-all family RU/AE/IL/SG already use, for the
+  // same reason: no dedicated Middle East or East/Southeast Asia family
+  // exists yet. Placeholders that render rather than classifications to
+  // defend, same standing as the IL/SG note above.
+  AF: 'ASIA', IR: 'ASIA', IQ: 'ASIA', SY: 'ASIA', YE: 'ASIA',
+  SA: 'ASIA', // Saudi Arabia's ISO code — do not confuse with the `SA` (South America) family value above.
+  ID: 'ASIA', TW: 'ASIA', PH: 'ASIA', KR: 'ASIA', VN: 'ASIA', JP: 'ASIA',
+  TH: 'ASIA', MM: 'ASIA',
 }
 
 /**
@@ -565,46 +589,72 @@ export function scopeOf(report: {
  *    national one. Bloom was picking out the *least* important nodes in the
  *    graph, and had been since it was first tuned. See `glowInk`.
  *
- * **The v3 assignment.** Hues are spaced by how much of the corpus each family
- * actually is — AFR 32.2%, EU 15.7%, US 11.4%, CA 10.2%, SA 9.3%, INT 6.1%,
- * then ASIA 4.0%, NZ 3.8%, XEU 2.8%, AU 1.9%, IN 1.6%, CN 1.0%. Five families
- * are 79% of the graph; the other seven are 15% between them. Big families get
- * wide moats, small ones sit in the shoulders:
+ * **The v3 assignment** (2026-08-19, superseded by the v4 re-damp below).
+ * Hues are spaced by how much of the corpus each family actually is — that was
+ * AFR 32.2%, EU 15.7%, US 11.4%, CA 10.2%, SA 9.3%, INT 6.1%, then ASIA 4.0%,
+ * NZ 3.8%, XEU 2.8%, AU 1.9%, IN 1.6%, CN 1.0%, counted at 1 250 nodes. Hue
+ * assignments (which degree each family sits at) do not change with the mint —
+ * only chroma, below — so the table stays the reference for hue:
  *
- * | Family | Hue | Share | National |
+ * | Family | Hue |
+ * |---|---|
+ * | US | 0° — pure, with a 335°–25° moat |
+ * | *(BRICS ink)* | *48°* — reserved, belongs to no family |
+ * | SA | 88° |
+ * | AU | 118° |
+ * | EU | 150° |
+ * | XEU | 172° |
+ * | INT | — achromatic |
+ * | CA | 200° |
+ * | CN | 224° |
+ * | ASIA | 248° |
+ * | NZ | 270° |
+ * | AFR | 296° |
+ * | IN | 322° |
+ *
+ * The eleven hued families' national steps span Y 0.211–0.215, a **1.02×**
+ * range, against v2's 13.1×. Across the whole ladder (national through
+ * institutional) the span is 0.211–0.333, 1.58× — and that residual is chroma
+ * falling away toward the neutral, not brightness being added. Chroma-scaling
+ * a hex in OKLCH at fixed L (below) does not move this: L is untouched, only C
+ * changes, so the flat-luminance property survives every re-damp.
+ *
+ * **v4 re-damp, 2026-08-20 — the BRICS+/Israel/Singapore Grok archive minted.**
+ * Corpus grew from 1 250 to 3 091 reports and the shares inverted exactly as
+ * flagged below they would: **ASIA 4.0% → 28.5%** (now the largest family),
+ * **SA 9.3% → 21.9%**, **AFR 32.2% → 15.3%** (was largest, now third), EU
+ * 15.7% → 6.2%, US 11.4% → 4.8%, CA 10.2% → 4.4%, INT 6.1% → 9.1%, IN 1.6% →
+ * 3.1%, CN 1.0% → 2.1%, XEU 2.8% → 2.2%, NZ 3.8% → 1.5%, AU 1.9% → 0.7%.
+ *
+ * **Chroma is damped in proportion to how often a family appears** — a colour
+ * seen hundreds of times has to be calmer than one seen a dozen times or the
+ * largest family shouts the graph down. v3's tiers were AFR (the one family
+ * over 20%) at 62% chroma, the 8–15% cluster (EU/US/CA/SA) at 85%, everything
+ * under 8% (bar achromatic INT) at full. The new distribution has a different
+ * shape — two families over 20% instead of one, and they are 50.4% of the
+ * graph between them, a harder concentration than AFR's solo 32.2% ever was —
+ * so the new tiers are:
+ *
+ * | Tier | Families | Share | Chroma |
  * |---|---|---|---|
- * | US | 0° | 11.4% | `#ff0000` — pure, with a 335°–25° moat |
- * | *(BRICS ink)* | *48°* | — | reserved, belongs to no family |
- * | SA | 88° | 9.3% | `#518e0c` |
- * | AU | 118° | 1.9% | `#059500` |
- * | EU | 150° | 15.7% | `#0c924f` |
- * | XEU | 172° | 2.8% | `#00907c` |
- * | INT | — | 6.1% | `#ecf0f7` — achromatic |
- * | CA | 200° | 10.2% | `#1086c2` |
- * | CN | 224° | 1.0% | `#4375ff` |
- * | ASIA | 248° | 4.0% | `#7c67ff` |
- * | NZ | 270° | 3.8% | `#a850ff` |
- * | AFR | 296° | 32.2% | `#ca44d3` |
- * | IN | 322° | 1.6% | `#f2009a` |
+ * | dominant | ASIA, SA | ≥20% | 55% |
+ * | large | AFR | 15.3% | 75% |
+ * | mid | EU, US, CA, IN | 3–7% | 90% |
+ * | small | XEU, CN, NZ, AU | <3% | 100% (full, unchanged) |
  *
- * **Measured on the values below**: the eleven hued families' national steps
- * span Y 0.211–0.215, a **1.02×** range, against v2's 13.1×. Across the whole
- * ladder (national through institutional) the span is 0.211–0.333, 1.58× — and
- * that residual is chroma falling away toward the neutral, not brightness
- * being added.
+ * Applied as a straight per-family chroma multiplier (`new % ÷ old %`) to every
+ * level of that family's existing ramp in OKLCH space — hue and L held fixed,
+ * only C scaled — rather than a from-scratch redesign: ASIA ×0.55, SA ×0.647,
+ * AFR ×1.21 (LESS damped now — it shrank), EU/US/CA ×1.059, IN ×0.9, and
+ * XEU/CN/NZ/AU ×1.0 (unchanged — they were already "full" and stayed under
+ * 3%). INT is untouched; it sits outside the hue/chroma system entirely.
+ * `FAMILY_INK` (below) carries the same new values — it is each family's
+ * national/supranational step, not a separately maintained table.
  *
- * **Chroma is damped in proportion to how often a family appears.** A colour
- * seen 397 times has to be calmer than one seen 12 times or the largest family
- * shouts the graph down. AFR runs at 62% chroma, the 8–15% families at 85%,
- * the small ones at full. That damping is why Africa reads as a field rather
- * than as a wall.
- *
- * **These shares are an input, and they will move.** They were counted at
- * 1 250 nodes. The staged Grok archive is another 1 999 and is heavily Latin
- * America and Asia — importing it roughly doubles SA and ASIA and materially
- * changes AFR's share. Thomas chose to build this now and re-damp afterwards,
- * with eyes open; when the import lands, re-count and re-damp rather than
- * assuming these numbers still hold.
+ * **These shares are an input, and they will move again.** Count and re-damp
+ * whenever the corpus composition shifts materially, the same way this pass
+ * did for the one before it — do not assume the v4 numbers above outlive the
+ * next import.
  *
  * **The v2 docstring that used to sit here** described the v1 continent scheme
  * that v2 itself had already replaced, and had been stale for a full palette
@@ -641,9 +691,9 @@ export const SCOPE_COLOUR: Record<string, string> = {
   // That is what costs the palette its whole warm quarter, and it is why CA,
   // AU, NZ, CN and IN all had to move. `provincial` still means "state".
   'US:federal': '#ff0000',
-  'US:provincial': '#d16a6a',
-  'US:municipal': '#b98585',
-  'US:institutional': '#aa9797',
+  'US:provincial': '#d46768',
+  'US:municipal': '#bb8484',
+  'US:institutional': '#ab9797',
   'US:supranational': '#ff0000',
   'US:international': '#ecf0f7',
 
@@ -653,20 +703,20 @@ export const SCOPE_COLOUR: Record<string, string> = {
   // exists to keep apart ("Statistics Canada and the Bureau of Labor
   // Statistics would render identically"), so rather than crowd Canada up
   // against the moat it gets the antipode.
-  'CA:federal': '#1086c2',
-  'CA:provincial': '#3b91bd',
-  'CA:municipal': '#7099ad',
-  'CA:institutional': '#909ea4',
-  'CA:supranational': '#1086c2',
+  'CA:federal': '#0086c6',
+  'CA:provincial': '#3391c0',
+  'CA:municipal': '#6e99af',
+  'CA:institutional': '#8f9ea5',
+  'CA:supranational': '#0086c6',
   'CA:international': '#ecf0f7',
 
   // European Union — green at 150°, essentially where it already was.
   // Five levels rather than four, so the ramp is sampled at five points.
-  'EU:supranational': '#0c924f',
-  'EU:federal': '#279860',
-  'EU:provincial': '#469d72',
-  'EU:municipal': '#68a084',
-  'EU:institutional': '#8ba096',
+  'EU:supranational': '#00934c',
+  'EU:federal': '#18995e',
+  'EU:provincial': '#409e71',
+  'EU:municipal': '#65a183',
+  'EU:institutional': '#8aa096',
   'EU:international': '#ecf0f7',
 
   // Europe (non-EU) — teal at 172°, riding alongside EU's green:
@@ -684,21 +734,21 @@ export const SCOPE_COLOUR: Record<string, string> = {
   // because INT vacated the purple region (see below). At 32.2% of the corpus
   // this is the family whose chroma damping matters most: undamped, a third of
   // the graph shouts.
-  'AFR:federal': '#ca44d3',
-  'AFR:provincial': '#b96dbe',
-  'AFR:municipal': '#ac87ae',
-  'AFR:institutional': '#a598a6',
-  'AFR:supranational': '#ca44d3',
+  'AFR:federal': '#d61de2',
+  'AFR:provincial': '#c163c8',
+  'AFR:municipal': '#b084b3',
+  'AFR:institutional': '#a797a8',
+  'AFR:supranational': '#d61de2',
   'AFR:international': '#ecf0f7',
 
   // South America — olive-lime at 88°. The old sage was the same hue at
   // almost no chroma; this is that hue given a voice, which it has earned at
   // 9.3% of the corpus.
-  'SA:federal': '#518e0c',
-  'SA:provincial': '#66972f',
-  'SA:municipal': '#7d9d5a',
-  'SA:institutional': '#959f8a',
-  'SA:supranational': '#518e0c',
+  'SA:federal': '#628845',
+  'SA:provincial': '#729255',
+  'SA:municipal': '#84996f',
+  'SA:institutional': '#979e90',
+  'SA:supranational': '#628845',
   'SA:international': '#ecf0f7',
 
   // Australia — green at 118°. Orange is inside the US moat.
@@ -730,19 +780,19 @@ export const SCOPE_COLOUR: Record<string, string> = {
   'CN:international': '#ecf0f7',
 
   // Asia (rest) — indigo at 248°. RU, AE, IL, SG.
-  'ASIA:federal': '#7c67ff',
-  'ASIA:provincial': '#897be0',
-  'ASIA:municipal': '#938cc4',
-  'ASIA:institutional': '#9c9aaf',
-  'ASIA:supranational': '#7c67ff',
+  'ASIA:federal': '#7d7aca',
+  'ASIA:provincial': '#8985bb',
+  'ASIA:municipal': '#9390af',
+  'ASIA:institutional': '#9c9ba7',
+  'ASIA:supranational': '#7d7aca',
   'ASIA:international': '#ecf0f7',
 
   // India — magenta at 322°, near-unchanged.
-  'IN:federal': '#f2009a',
-  'IN:provincial': '#d85baa',
-  'IN:municipal': '#bd7fa7',
-  'IN:institutional': '#ac96a4',
-  'IN:supranational': '#f2009a',
+  'IN:federal': '#e92e98',
+  'IN:provincial': '#d262a8',
+  'IN:municipal': '#b982a5',
+  'IN:institutional': '#ab97a3',
+  'IN:supranational': '#e92e98',
   'IN:international': '#ecf0f7',
 
 }
@@ -1040,18 +1090,18 @@ export function colourForReport(report: {
  * stateless body's ink is near-white because its fill is.
  */
 export const FAMILY_INK: Record<ColourFamily, string> = {
-  CA: '#1086c2',
+  CA: '#0086c6',
   US: '#ff0000',
   AU: '#059500',
   NZ: '#a850ff',
   INT: '#ecf0f7',
-  EU: '#0c924f',
+  EU: '#00934c',
   XEU: '#00907c',
-  AFR: '#ca44d3',
+  AFR: '#d61de2',
   CN: '#4375ff',
-  ASIA: '#7c67ff',
-  IN: '#f2009a',
-  SA: '#518e0c',
+  ASIA: '#7d7aca',
+  IN: '#e92e98',
+  SA: '#628845',
 }
 
 /**

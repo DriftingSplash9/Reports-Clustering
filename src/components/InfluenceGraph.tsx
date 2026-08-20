@@ -1650,6 +1650,16 @@ export default function InfluenceGraph({
     // | 92nd percentile | 2 650 |
     // | median | 1 053 |
     //
+    // **Re-measured 2026-08-20** after the BRICS+/Israel/Singapore Grok archive
+    // mint (1 250 → 3 091 reports): 1 806 framed nodes at Everything tier
+    // (up from 958), furthest node 4 318, p95 3 134, ratio of the two 1.38× —
+    // comfortably inside the 5.675× that would put the camera inside the
+    // cluster (see the fit-distance derivation below), and actually a better
+    // margin than pre-mint despite nearly double the framed nodes. The
+    // dominant-family concentration the mint caused (see `palette.ts`'s v4
+    // re-damp note) is a colour problem, not a geometry one — it does not
+    // touch this ratio.
+    //
     // Half the graph sits inside a fifth of the radius the camera was fitting.
     // On a 1600×900 canvas that put the whole visible network in the middle
     // eighth of the frame with empty space all around it — the screenshot that

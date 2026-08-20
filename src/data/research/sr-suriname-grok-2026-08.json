@@ -1,0 +1,929 @@
+{
+  "meta": {
+    "source": "Grok - Brics+israel and singapore/consolidated/sr-suriname.json",
+    "minted": "2026-08-20",
+    "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  },
+  "reports": [
+    {
+      "id": "sr-pib",
+      "title": "National Accounts / GDP",
+      "publisher": "ABS / CBvS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "System of national accounts. Mining (gold) and oil dominate value-added and exports; economy experienced a deep crisis in the early 2020s with large real per-capita GDP decline.",
+      "releases_per_year": 4,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "national-accounts"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core macroeconomic product. Mining and oil account for a large share of GDP and ~90% of exports. Per-capita GDP fell sharply from the mid-2010s peak; offshore oil is expected to produce a step-change from ~2028.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-goud",
+      "title": "Gold production and exports",
+      "publisher": "ABS / CBvS / industry",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Gold mining and export statistics. Current backbone of the extractive economy alongside onshore oil.",
+      "releases_per_year": 12,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "mining",
+        "proposed:gold",
+        "trade"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary current extractive earner. Together with oil, accounts for the large majority of merchandise exports and a major share of GDP.",
+      "last_updated": null,
+      "part_of": "sr-pib"
+    },
+    {
+      "id": "sr-ipc",
+      "title": "Consumer Price Index / Inflation",
+      "publisher": "ABS / CBvS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Consumer price index and inflation measures. High and persistent inflation has been a defining feature of the early-2020s crisis period.",
+      "releases_per_year": 12,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship price statistic under stress. Annual inflation ran above 50% for an extended period; stabilisation remains a central policy objective.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-pobreza",
+      "title": "Poverty measurement",
+      "publisher": "ABS / World Bank / independent",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Poverty headcount and related indicators. Crisis-period deterioration was more severe for less-educated and interior households; recent estimates place poverty in the mid-teens to higher range depending on the line used.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "poverty",
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Social-outcome node. Interior (hinterland) and less-educated households were hit hardest in the crisis; ABS participates in methodological work on multidimensional poverty.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-paramaribo",
+      "title": "Paramaribo — capital metropolitan core",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "municipal",
+      "region": "Suriname — Paramaribo",
+      "description": "Capital city and primary urban, commercial and administrative centre. Dominant demographic and economic concentration.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:capital",
+        "proposed:paramaribo"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Lived urban core. Continuously appears as the main geographic domain in household and labour statistics.",
+      "last_updated": null,
+      "part_of": "sr-censo"
+    },
+    {
+      "id": "sr-censo",
+      "title": "Population and Housing Census",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Decennial population and housing census. Provides the demographic baseline and sampling frames for household surveys.",
+      "releases_per_year": 0.1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "population",
+        "housing"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational demographic product. Population on the order of 0.6–0.7 million; supports national accounts rebasing and SDG indicator updates.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-interior",
+      "title": "Interior districts (Sipaliwini, Brokopondo, Para)",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — interior",
+      "description": "Interior districts that hold the large majority of national land area but a small share of population. Highest concentrations of Maroon and Indigenous communities and of poverty and service gaps.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:interior",
+        "proposed:hinterland"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural geographic contrast. Less than 10% of population but disproportionately high shares of the poor and extreme poor; service access (electricity, water, education, health) is markedly weaker than on the coast.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-maroon",
+      "title": "Maroon population and communities",
+      "publisher": "ABS / independent",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Maroon (descendants of escaped enslaved people) population statistics and traditional communities, predominantly in the interior. Largest minority with elevated poverty incidence.",
+      "releases_per_year": 0.1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "population",
+        "proposed:identity",
+        "proposed:maroon"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core identity and social node. Maroons form roughly one-fifth of the national population and a large majority in several interior districts; poverty rates are markedly higher than the national average.",
+      "last_updated": null,
+      "part_of": "sr-interior"
+    },
+    {
+      "id": "sr-indigenous",
+      "title": "Indigenous population and communities",
+      "publisher": "ABS / independent",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Indigenous population statistics and traditional territories, concentrated in the interior. Small national share but high local majorities and elevated poverty.",
+      "releases_per_year": 0.1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "population",
+        "proposed:identity",
+        "proposed:indigenous"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Complementary identity node. Continuously cited alongside Maroon communities in land-rights, poverty and service-delivery analysis.",
+      "last_updated": null,
+      "part_of": "sr-interior"
+    },
+    {
+      "id": "sr-empleo",
+      "title": "Labour force and employment",
+      "publisher": "ABS / CBvS / ILO",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Labour-force participation, employment and unemployment indicators. Gender gaps persist; skill shortages are a recurring constraint.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "labour"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Lived labour market. Employment has recovered toward pre-pandemic levels but female participation remains lower and skill mismatches are cited as a binding constraint for the coming oil era.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-educacion",
+      "title": "Education system — coverage and interior gaps",
+      "publisher": "Ministry of Education / ABS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Education enrolment, completion and quality indicators. National rates lag regional peers; interior schools face the most severe resource and outcome gaps.",
+      "releases_per_year": 1,
+      "url": "https://gov.sr/wp-content/uploads/2025/03/National-Education-Policy-Suriname-2024-2031-ENGLISH_FINAL-1.pdf",
+      "domains": [
+        "education",
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Human-capital node. Secondary enrolment and completion are well below structural peers; interior (Maroon and Indigenous) communities experience the weakest school conditions and outcomes.",
+      "last_updated": null,
+      "_url_evidence": "Retrieved: MinOWC 'National Education Policy Suriname 2024-2031' (Aug 2024), containing NER/GER enrolment rates, graduation/drop-out/repeater data by district, and extensive analysis of interior (Sipaliwini) education gaps; listed on the Ministry of Education documents page on gov.sr."
+    },
+    {
+      "id": "sr-salud",
+      "title": "Health system — access and outcomes",
+      "publisher": "Ministry of Health / ABS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Public health-system access and outcome indicators. Coverage and quality gaps are largest in the interior.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/sociale-statistieken/",
+      "domains": [
+        "health",
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Human-capital counterpart to education. Continuously cited for interior service-delivery challenges and for the need to convert future oil revenues into better health outcomes outside Paramaribo.",
+      "last_updated": null,
+      "_url_evidence": "Retrieved: ABS 'Sociale Statistieken' series page listing health tables - mortality and fertility indicators 2018-2020, disease prevalence and immunisation 2015-2021, health staff numbers 2018-2021, hospital beds by institution 2018-2022, and health expenditure summaries; no separate Ministry of Health statistics publication with a live link was found."
+    },
+    {
+      "id": "sr-bop",
+      "title": "Balance of Payments / External accounts",
+      "publisher": "Centrale Bank van Suriname",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Balance of payments and external-sector statistics. Dominated by gold and oil exports; capital account will be shaped by the large Block 58 investment.",
+      "releases_per_year": 4,
+      "url": "https://www.cbvs.sr/",
+      "domains": [
+        "external-sector"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "External counterpart of the extractive economy. Gold and oil account for ~90% of merchandise exports; the forthcoming offshore project will dominate FDI and export volumes from the late 2020s.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-deuda",
+      "title": "Public debt and IMF programme context",
+      "publisher": "CBvS / Ministry of Finance / IMF",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Public-debt stock and the macroeconomic stabilisation programme context that followed the early-2020s crisis.",
+      "releases_per_year": 4,
+      "url": "https://www.cbvs.sr/",
+      "domains": [
+        "public-finance"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Sustainability and stabilisation node. High inflation, exchange-rate pressure and debt distress characterised the crisis years; an IMF-supported programme has framed subsequent policy.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-sipaliwini",
+      "title": "District Sipaliwini — largest interior district",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — Sipaliwini",
+      "description": "Largest district by area; predominantly Maroon and Indigenous population; among the weakest service-access indicators (electricity, water, internet, education).",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:sipaliwini",
+        "proposed:interior"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Extreme interior node. Continuously cited in district-level service and poverty diagnostics as the clearest illustration of the coast–interior gap.",
+      "last_updated": null,
+      "part_of": "sr-interior"
+    },
+    {
+      "id": "sr-ingresos-petroleros",
+      "title": "Oil and mining fiscal revenues",
+      "publisher": "Staatsolie / Ministry of Finance / CBvS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Fiscal revenues from onshore oil, gold and (prospectively) offshore oil. Current backbone of public finances; Block 58 expected to produce a step-change from ~2028.",
+      "releases_per_year": 4,
+      "url": "https://www.staatsolie.com/en/media-center/",
+      "domains": [
+        "public-finance",
+        "energy",
+        "mining"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core fiscal-revenue node. Continuously cited in budget and sustainability analysis; the design of future oil-revenue management (including any sovereign fund) is a central policy debate.",
+      "last_updated": null,
+      "_url_evidence": "Retrieved: Staatsolie Media Center listing annual reports 2010-2025; the 2023 summary annual report (linked from it) states Staatsolie's contribution to the State of US$335m (36% of government revenues), incl. ~US$181m taxes and ~US$11m gold royalties from Newmont/Rosebel - the closest official publication series covering oil/mining fiscal revenues."
+    },
+    {
+      "id": "sr-tipo-cambio",
+      "title": "Exchange rate / monetary conditions",
+      "publisher": "Centrale Bank van Suriname",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Exchange-rate and monetary-policy indicators. High inflation and exchange-rate pressure defined the early-2020s crisis; stabilisation remains ongoing.",
+      "releases_per_year": 12,
+      "url": "https://www.cbvs.sr/",
+      "domains": [
+        "proposed:exchange-rate",
+        "monetary-policy",
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Lived price and monetary signal. Continuously cited alongside inflation as the central stabilisation challenge of the post-crisis period.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-comercio-exterior",
+      "title": "Merchandise trade statistics",
+      "publisher": "ABS / CBvS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Exports and imports of goods. Export basket dominated by gold and oil; imports reflect consumption, intermediate goods and (prospectively) large project-related capital goods.",
+      "releases_per_year": 12,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "trade",
+        "external-sector"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary high-frequency trade product. Gold and oil account for the large majority of export value.",
+      "last_updated": null,
+      "part_of": "sr-bop"
+    },
+    {
+      "id": "sr-wanica",
+      "title": "District Wanica — coastal peri-urban",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — Wanica",
+      "description": "Coastal district adjacent to Paramaribo. Second major population concentration and peri-urban expansion area.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:wanica",
+        "proposed:coastal"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Completes the greater Paramaribo statistical geography. Continuously appears among the largest population districts.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-brokopondo",
+      "title": "District Brokopondo — interior hydro and Maroon",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — Brokopondo",
+      "description": "Interior district with major hydroelectric infrastructure and large Maroon population share. Intermediate between deep interior and coastal zones.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:brokopondo",
+        "proposed:interior"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Interior energy and identity node. Completes the set of major interior districts alongside Sipaliwini.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-imf",
+      "title": "IMF-supported stabilisation programme",
+      "publisher": "IMF / Government of Suriname",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Suriname",
+      "description": "IMF-supported macroeconomic stabilisation and reform programme that has framed fiscal, monetary and structural policy since the early-2020s crisis.",
+      "url": "https://www.imf.org/en/Countries/SUR",
+      "domains": [
+        "proposed:macroeconomic-policy",
+        "trade",
+        "public-finance"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "External policy-anchor node. Continuously cited as the framework for post-crisis stabilisation pending the arrival of offshore oil revenues.",
+      "_referenced_by": [
+        "Budget and debt analysis",
+        "Inflation and exchange-rate reporting",
+        "Structural-reform discussions"
+      ],
+      "last_updated": null,
+      "_url_evidence": "Retrieved: IMF's official Suriname country page, confirming the Fund relationship (last Article IV Board consultation 26 January 2026) and listing Article IV staff reports, financial position and transactions with the Fund."
+    },
+    {
+      "id": "sr-agricultura",
+      "title": "Agriculture, forestry and fisheries",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Agriculture, forestry and fisheries production and employment. Smaller share of GDP than mining but material for rural livelihoods.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "agriculture"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Non-extractive primary sector. Continuously cited in diversification and rural-livelihood analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-electricidad",
+      "title": "Electricity access and generation",
+      "publisher": "EBS / ABS",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Electricity generation, access and reliability. National access is high on the coast; interior districts (especially Sipaliwini) have very low grid connection rates.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/milieustatistieken-4/",
+      "domains": [
+        "energy",
+        "services"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Basic-services node. Coastal access is relatively high; interior access is a defining gap (Sipaliwini grid connection often cited near 30%).",
+      "last_updated": null,
+      "_url_evidence": "Retrieved: ABS Environment Statistics series page; the 10th publication (Dec 2022) explicitly covers 'Electriciteit', the 9th (Mar 2021) covers 'Energie & Mineralen', and a dataset 'Consumption of Energy in KwH 2013-2017' is listed. EBS's own site was checked and has no generation/access statistics page."
+    },
+    {
+      "id": "sr-staatsolie-contribucion",
+      "title": "Staatsolie contributions to the State",
+      "publisher": "Staatsolie",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Taxes, dividends, royalties and related transfers from Staatsolie (and gold participations) to the central government. Material current fiscal contribution pending offshore first oil.",
+      "releases_per_year": 1,
+      "url": "https://www.staatsolie.com/",
+      "domains": [
+        "public-finance",
+        "energy"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational fiscal link. Recent annual contributions on the order of hundreds of millions of USD (e.g. ~USD 400 m cited for 2025) form a large share of mineral revenues.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-financiamiento-staatsolie",
+      "title": "Staatsolie financing for Block 58 equity",
+      "publisher": "Staatsolie",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Bond issuance and syndicated loan used by Staatsolie to fund its 20% participating interest in GranMorgu (order of USD 2 bn combined financing).",
+      "url": "https://www.staatsolie.com/",
+      "domains": [
+        "energy",
+        "public-finance",
+        "investment",
+        "proposed:public-enterprise"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Financing counterpart of the state equity stake. Continuously cited in discussions of contingent public-sector exposure and of the cost of securing a larger share of future oil revenues.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-pib-no-mineria",
+      "title": "Non-mining / non-natural-resource GDP",
+      "publisher": "ABS / CBvS / IMF",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "GDP excluding mining and oil extraction. Has shown more robust growth than the mineral sector in recent stabilisation years.",
+      "releases_per_year": 4,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "national-accounts",
+        "proposed:non-mining"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Analytical counterpart to headline GDP. Continuously cited as evidence of recovery outside the volatile mineral cycle; still small relative to the prospective oil step-change.",
+      "last_updated": null,
+      "part_of": "sr-pib"
+    },
+    {
+      "id": "sr-nickerie",
+      "title": "District Nickerie — western agricultural",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — Nickerie",
+      "description": "Western coastal district with significant rice and agricultural activity. Secondary economic pole outside the greater Paramaribo area.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:nickerie",
+        "agriculture"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Coastal agricultural node. Completes the set of major districts beyond Paramaribo/Wanica and the deep interior.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-reservas",
+      "title": "International reserves",
+      "publisher": "Centrale Bank van Suriname",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Stock of international reserve assets. Rebuilt from crisis lows; adequacy metrics have improved under the stabilisation programme.",
+      "releases_per_year": 12,
+      "url": "https://www.cbvs.sr/",
+      "domains": [
+        "external-sector",
+        "monetary-policy"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "External-buffer node. Continuously cited in exchange-rate and stabilisation analysis; levels remain sensitive to mineral export cycles and project-related import spikes.",
+      "last_updated": null,
+      "part_of": "sr-bop"
+    },
+    {
+      "id": "sr-arroz",
+      "title": "Rice production and exports",
+      "publisher": "ABS / industry",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname — coastal (esp. Nickerie)",
+      "description": "Rice production and export statistics. Principal traditional agricultural export and rural livelihood activity on the western coast.",
+      "releases_per_year": 12,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "agriculture",
+        "trade"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch4-oil-fiscal-trade.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Traditional agro-export node. Continuously cited in non-mining diversification and rural-employment analysis.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-ebs",
+      "title": "Energiebedrijven Suriname (EBS) — national power utility",
+      "publisher": "N.V. Energiebedrijven Suriname",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "State-owned power utility with monopoly on distribution and retail. Operates transmission and distribution; depends heavily on generation from SPCS (Afobaka hydro + thermal) and other sources.",
+      "releases_per_year": 1,
+      "url": "https://nvebs.com/",
+      "domains": [
+        "energy",
+        "infrastructure"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core power-system node. Coastal grid access is relatively high; interior connection rates are low. Hydro variability (Afobaka reservoir levels) creates recurring supply risk and load-shedding threats.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-spcs-afobaka",
+      "title": "SPCS / Afobaka hydropower and thermal",
+      "publisher": "Staatsolie Power Company Suriname",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname — Brokopondo",
+      "description": "Staatsolie subsidiary that operates the Afobaka hydropower plant and associated thermal capacity. Supplies the large majority of electricity to the EPAR (Paramaribo-area) network.",
+      "releases_per_year": 1,
+      "url": "https://www.staatsolie.com/",
+      "domains": [
+        "energy",
+        "proposed:hydropower"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary generation node. Continuously cited in power-security analysis; low reservoir levels periodically force reliance on expensive thermal and emergency rental capacity.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-salario-minimo",
+      "title": "Minimum wage",
+      "publisher": "Ministry of Labour",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Statutory national minimum hourly wage. Periodically adjusted; share of workers earning below the threshold is higher in the interior and among Maroon and Indigenous workers.",
+      "releases_per_year": 1,
+      "url": "https://www.dna.sr/wetgeving/surinaamse-wetten/wetten-na-2005/wet-minimumloon-2019/",
+      "domains": [
+        "labour",
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Labour-floor node. Continuously cited in poverty and informality analysis; enforcement and coverage gaps are largest outside the formal coastal economy.",
+      "last_updated": null,
+      "_url_evidence": "Retrieved: National Assembly page for the 'WET van 06 september 2019, houdende bepalingen over de vaststelling van het minimumloon (Wet Minimumloon)', S.B. 2019 no. 101, with PDF; the 2024 amending act (S.B. 2024 no. 31) was also verified on dna.sr."
+    },
+    {
+      "id": "sr-commewijne",
+      "title": "District Commewijne — eastern coastal",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — Commewijne",
+      "description": "Eastern coastal district adjacent to Paramaribo. Significant peri-urban and agricultural population.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:commewijne",
+        "proposed:coastal"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Completes the greater Paramaribo coastal set alongside Wanica and Paramaribo itself.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-marowijne",
+      "title": "District Marowijne — eastern border",
+      "publisher": "ABS",
+      "country": "SR",
+      "jurisdiction_level": "provincial",
+      "region": "Suriname — Marowijne",
+      "description": "Eastern border district with mixed coastal and interior characteristics; material Maroon population presence.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "proposed:marowijne"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Eastern border node. Completes the set of major districts beyond the capital core and the deep western/southern interior.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-informalidad",
+      "title": "Labour informality",
+      "publisher": "ABS / independent",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Share of employed persons in informal employment (without social-security coverage). Structural feature of the labour market.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "labour",
+        "proposed:informality",
+        "living-standards"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Lived labour structure. Roughly half of workers are classified as informal; informality is associated with higher probability of earnings below the minimum wage.",
+      "last_updated": null,
+      "part_of": "sr-empleo"
+    },
+    {
+      "id": "sr-bosbouw",
+      "title": "Forestry and timber",
+      "publisher": "ABS / industry",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Forestry and timber production and export statistics. Non-mining primary sector linked to interior livelihoods and land-use debates.",
+      "releases_per_year": 1,
+      "url": "https://statistics-suriname.org/",
+      "domains": [
+        "agriculture",
+        "trade",
+        "environment"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Interior primary-sector node. Continuously cited in diversification and land-rights analysis alongside gold and agriculture.",
+      "last_updated": null
+    },
+    {
+      "id": "sr-ssfs",
+      "title": "Savings and Stabilization Fund Suriname (SSFS)",
+      "publisher": "Government of Suriname / Ministry of Finance",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Sovereign savings and stabilization fund revamped by the 2024 SSFS Act. From 2026, all mineral revenues are to be deposited directly into the fund; annual budgets set a maximum withdrawal consistent with fiscal rules.",
+      "releases_per_year": 1,
+      "url": "https://www.dna.sr/wetgeving/surinaamse-wetten/wetten-na-2005/wet-spaar-en-stabilisatie-fonds-suriname-2024/",
+      "domains": [
+        "public-finance",
+        "proposed:sovereign-wealth",
+        "energy"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch6-revenue-management.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Central institutional node for the oil era. Designed to delink spending from volatile mineral revenues, accumulate assets, and finance the budget only within pre-set limits. Operationalization (investment policy, independent management, transparent reporting) is still incomplete as of mid-2026.",
+      "last_updated": null,
+      "part_of": "sr-pfm-rules",
+      "_url_evidence": "Retrieved: National Assembly page for 'WET van 30 december 2024, houdende vaststelling van regels over het Spaar- en Stabilisatie Fonds Suriname (Wet Spaar- en Stabilisatie Fonds Suriname 2024)', Staatsblad 2024 no. 179, with PDF download."
+    },
+    {
+      "id": "sr-pfm-rules",
+      "title": "Public Financial Management Law 2024 — fiscal rules",
+      "publisher": "Government of Suriname / National Assembly",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "2024 PFM (Comptabiliteitswet) legislation that embeds two binding fiscal rules: (i) a five-year target for public debt net of SSFS assets, and (ii) annual primary-expenditure ceilings consistent with that debt target.",
+      "url": "https://gov.sr/wp-content/uploads/2024/12/SB-2024-no-178-Wet-van-30-december-2024-houde-241231-164608.pdf",
+      "domains": [
+        "public-finance",
+        "proposed:fiscal-rule",
+        "governance"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch6-revenue-management.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Legal backbone of the post-crisis, pre-oil fiscal framework. Intended to prevent a premature spending surge when offshore revenues arrive and to force multi-year planning.",
+      "_referenced_by": [
+        "Budget documents from 2026 onward",
+        "IMF and rating-agency assessments of fiscal credibility",
+        "SSFS operationalization discussions"
+      ],
+      "last_updated": null,
+      "_url_evidence": "Retrieved and read: the Comptabiliteitswet 2024, Wet van 30 december 2024, S.B. 2024 no. 178, hosted on the Government of Suriname's own site (gov.sr). Article 2 lid 2 establishes the two numeric fiscal rules the item describes - a ceiling on state debt at the end of the multi-year period net of Savings and Stabilisation Fund financial assets, and annual ceilings on primary expenditure consistent with that debt path. This is the law itself, not the 2026 amending bill that dna.sr surfaces.",
+      "_url_route": "alternate official host - the law is published on gov.sr rather than dna.sr"
+    },
+    {
+      "id": "sr-psc-fiscal",
+      "title": "Offshore PSC fiscal terms (royalty, profit oil, tax)",
+      "publisher": "Staatsolie / Petroleum Law",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname — offshore",
+      "description": "Production-sharing contract fiscal package: 6.25% royalty on gross production, profit-oil split, and 36% corporate income tax. Combined government take estimated in the 60–70% range (after costs) depending on price.",
+      "url": "https://www.staatsolie.com/",
+      "domains": [
+        "energy",
+        "public-finance",
+        "trade"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch6-revenue-management.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Contractual revenue-definition node. Continuously cited as the legal basis for the flow of royalty, profit oil and tax that will feed the SSFS once production begins.",
+      "_referenced_by": [
+        "Block 58 / GranMorgu fiscal-income projections",
+        "Staatsolie equity and revenue analysis"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "sr-mtff",
+      "title": "Medium-term fiscal framework (MTFF) / multi-year fiscal plan",
+      "publisher": "Ministry of Finance",
+      "country": "SR",
+      "jurisdiction_level": "federal",
+      "region": "Suriname",
+      "description": "Requirement under the 2024 PFM law for a multi-year fiscal plan with annual primary-spending ceilings and a clear net-debt target, to be submitted with the budget (starting with 2026/2027).",
+      "releases_per_year": 1,
+      "url": "https://gov.sr/wp-content/uploads/2023/10/Financieel-Jaarplan-2024-1.pdf",
+      "domains": [
+        "public-finance"
+      ],
+      "_batch": [
+        "2026-08-14_Suriname-batch6-revenue-management.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Operational planning node. IMF assessments repeatedly stress that agreeing and publishing the five-year plan and expenditure limits is essential to make the fiscal rules credible before oil arrives.",
+      "last_updated": null,
+      "part_of": "sr-pfm-rules",
+      "_url_evidence": "Retrieved: Ministry of Finance and Planning 'Financieel Jaarplan 2024' (29 Sep 2023), which sets out the Medium-Term Government Finance Framework (MTFF 2021-2027 / 2022-2027, tables 3.1.1-3.1.2), primary expenditure by ministry and debt-ratio path; linked from the ministry's documents page on gov.sr."
+    }
+  ],
+  "dependencies": [
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": null,
+      "basis": "EBS distribution depends heavily on generation supplied by SPCS (Afobaka and thermal).",
+      "source_report_id": "sr-ebs",
+      "target_report_id": "sr-spcs-afobaka",
+      "_batch": [
+        "2026-08-14_Suriname-batch5-power-social-districts.json"
+      ]
+    },
+    {
+      "relationship_type": "uses_data_from",
+      "evidence_url": null,
+      "basis": "Mineral revenues are the inflows that the SSFS is designed to receive.",
+      "source_report_id": "sr-ssfs",
+      "target_report_id": "sr-ingresos-petroleros",
+      "_batch": [
+        "2026-08-14_Suriname-batch6-revenue-management.json"
+      ]
+    },
+    {
+      "source_report_id": "sr-educacion",
+      "target_report_id": "sr-interior",
+      "relationship_type": "uses_data_from",
+      "basis": "The National Education Policy 2024-2031 itself consumes interior-district statistics as inputs to its analysis: \"The quality of (mainly primary) education in the interior has been lagging for many years\"; \"The data regarding students in the age group of 12 - 15 who are not enrolled in a school in Sipaliwini in the period 2019 -2021 is 90% on average\"; \"In 2019, the percentages were highest in Sipaliwini (89.01%)\". Tables 2-14 give dropout, repeater and out-of-school rates by interior district, and the document names its sources for district-level data: Figure 2 \"shows the distribution by district and ethnicity, based on 2012 census data\", MICS 2018 (\"multidimensional poverty in Suriname was 50.3% for the interior\"), and \"Source: MinOWC Research and Planning Department (Jan 2024).\"",
+      "evidence_url": "https://gov.sr/wp-content/uploads/2025/03/National-Education-Policy-Suriname-2024-2031-ENGLISH_FINAL-1.pdf",
+      "_batch": [
+        "2026-08-14_Suriname-batch2.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    },
+    {
+      "source_report_id": "sr-imf",
+      "target_report_id": "sr-deuda",
+      "relationship_type": "uses_data_from",
+      "basis": "The IMF Suriname 2025 Article IV staff report attributes its fiscal and debt tables to the national authorities' data. Table 1 (Selected Economic Indicators): \"Sources: Surinamese authorities; and IMF staff estimates and projections.\" Table 2a (Central Government Operations, 2023-31), which carries the public debt lines: \"Sources: Surinamese authorities; and IMF staff calculations and projections.\"",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2026/english/1surea2026001-source-pdf.pdf",
+      "_batch": [
+        "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
+      ],
+      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    }
+  ]
+}

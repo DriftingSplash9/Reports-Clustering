@@ -1,0 +1,2278 @@
+{
+  "meta": {
+    "source": "Grok - Brics+israel and singapore/consolidated/ph-philippines.json",
+    "minted": "2026-08-20",
+    "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  },
+  "reports": [
+    {
+      "id": "ph-psa",
+      "title": "Philippine Statistics Authority (PSA) institutional core",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Primary national statistical office created by the Philippine Statistical Act of 2013 (merger of NSO, NSCB, BLES, BAS). Produces censuses, surveys, national accounts, prices, labour, poverty and multi-domain statistics. Attached to NEDA for policy coordination.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "statistical-system"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Foundational institutional node for the entire Philippine statistical system.",
+      "_referenced_by": [
+        "All major Philippine statistical series",
+        "Philippine Statistical Development Program",
+        "NEDA planning documents"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "psa.gov.ph is the agency portal, not a single publication: it fronts an Advance Release Calendar and the OpenSTAT open-data platform (PC-Axis) with a live STATWATCH panel dated 06 Aug 2026; no discrete release for the node itself.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
+    },
+    {
+      "id": "ph-population-census",
+      "title": "Census of Population (and related mid-year estimates)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official population census and subsequent estimates. 2024 Census recorded 112,729,484 persons. Provides the demographic base for all per-capita and planning indicators.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "population"
+      ],
+      "_cadence_original": "decennial census + annual/mid-year estimates",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core demographic node. Population ~112.7 million (2024 Census).",
+      "_referenced_by": [
+        "National accounts and per-capita series",
+        "Poverty, labour and social indicators",
+        "Regional and provincial profiles"
+      ],
+      "_jurisdiction_level_original": "national / regional / provincial",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA population-and-housing page documents 2020 CPH and 2024 POPCEN as the recent enumerations (no explicit periodicity statement); census rounds land about every five years.",
+      "releases_per_year": 0.2
+    },
+    {
+      "id": "ph-national-accounts",
+      "title": "National Accounts of the Philippines (GDP / GRDP)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Quarterly and annual national accounts (GDP by industry and expenditure) and Gross Regional Domestic Product. Central macro-output series.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "national-accounts"
+      ],
+      "_cadence_original": "quarterly (national) + annual regional",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary macroeconomic output node.",
+      "_referenced_by": [
+        "BSP Monetary Policy Report and economic assessments",
+        "NEDA development planning",
+        "Poverty and fiscal analysis"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA National Accounts release calendar lists 4 quarterly releases (29 Jan 2026 Q4+Annual 2025, 07 May, 07 Aug, 09 Nov 2026) plus a separate Revised Annual National Accounts release on 08 Apr 2026.",
+      "releases_per_year": 5
+    },
+    {
+      "id": "ph-cpi",
+      "title": "Consumer Price Index and inflation statistics",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Monthly CPI and inflation rates by major commodity group and region. High-frequency price signal used in monetary policy and welfare analysis.",
+      "releases_per_year": 12,
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core high-frequency price node.",
+      "_referenced_by": [
+        "BSP inflation targeting and Monetary Policy Report",
+        "Poverty-line and real-income calculations",
+        "National accounts deflators"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null
+    },
+    {
+      "id": "ph-lfs",
+      "title": "Labor Force Survey (LFS)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Quarterly (and more frequent) labour-force statistics: employment, unemployment, underemployment, labour-force participation. Central labour-market barometer.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "labour",
+        "proposed:lfs"
+      ],
+      "_cadence_original": "quarterly / monthly releases",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary labour-market statistical product.",
+      "_referenced_by": [
+        "National accounts (compensation of employees)",
+        "Poverty and social-protection analysis",
+        "BSP and NEDA assessments"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA 2026 Calendar of Releases lists Labor Force Survey with 12 scheduled release dates (monthly); LFS page shows consecutive monthly editions (e.g. June 2026 released 06 Aug 2026) with month-on-month comparisons.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-bsp",
+      "title": "Bangko Sentral ng Pilipinas (BSP) institutional and reporting core",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Central bank responsible for monetary policy, financial stability, external accounts and key macro-financial statistics. Publishes the Monetary Policy Report, Balance of Payments, International Reserves and related series.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "monetary-policy"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Central-bank institutional counterpart to PSA.",
+      "_referenced_by": [
+        "BOP, reserves, monetary aggregates",
+        "Inflation and exchange-rate analysis",
+        "Financial Stability reports"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "bsp.gov.ph is the central bank portal; its Statistics section is described as 'Monetary, banking, financial industry data visualization and other statistics and their release schedule' — a continuously maintained data hub, not one publication.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
+    },
+    {
+      "id": "ph-bop",
+      "title": "Balance of Payments and International Investment Position",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Quarterly BOP and related external-sector accounts, including the large role of remittances (OFW) in the current account.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "external-sector"
+      ],
+      "_cadence_original": "quarterly",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "External-accounts node with strong remittance linkage — a defining Philippine feature.",
+      "_referenced_by": [
+        "BSP Monetary Policy Report",
+        "National accounts (external sector)",
+        "Remittance and migration analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "releases_per_year": 4,
+      "last_updated": null
+    },
+    {
+      "id": "ph-reserves",
+      "title": "Gross International Reserves",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Monthly official reserve assets. Key external-buffer indicator expressed in months of import cover.",
+      "releases_per_year": 12,
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "external-sector",
+        "monetary-policy"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-frequency external-buffer node.",
+      "_referenced_by": [
+        "BOP and Monetary Policy Report",
+        "Exchange-rate and vulnerability analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null
+    },
+    {
+      "id": "ph-poverty",
+      "title": "Official poverty statistics (and related thresholds)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official poverty incidence, poverty thresholds and related indicators derived from the Family Income and Expenditure Survey (FIES) and other sources. High policy salience.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "poverty",
+        "living-standards"
+      ],
+      "_cadence_original": "periodic (FIES cycle + updates)",
+      "_batch": [
+        "2026-08-14_Philippines-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core welfare measurement node.",
+      "_referenced_by": [
+        "NEDA and social-protection planning",
+        "FIES and income/expenditure statistics",
+        "Regional disparity analysis"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA poverty release index shows full-year official poverty statistics roughly every three years (2021 full year released Aug 2022, 2023 full year released Jul 2024) with first-semester and sectoral/SAE releases in between (Dec 2023, Aug 2024, Mar 2025, Feb 2026) — about one poverty release per year.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-mining",
+      "title": "Mining and quarrying production statistics",
+      "publisher": "Mines and Geosciences Bureau (DENR) / PSA related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official statistics on metallic and non-metallic mineral production. Nickel is the standout commodity (Philippines ranks among the world’s top producers); gold, copper and others complete the main metallic output.",
+      "url": "https://mgb.gov.ph/priority-programs/2015-05-13-01-44-56/2015-05-13-01-47-51",
+      "domains": [
+        "mining",
+        "proposed:nickel"
+      ],
+      "_cadence_original": "annual / periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch10.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core mining statistical product. Nickel gives the Philippines a distinctive position in global battery/EV mineral supply chains.",
+      "_referenced_by": [
+        "National accounts (mining GVA)",
+        "Export and trade statistics",
+        "Environmental and local-development analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "MGB 'Mineral Statistics' page listing Philippine Metallic Mineral Production, employment of operating mines and quarries, and directory of operating mines.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MGB Mineral Industry Statistics page lists annual products — 'Philippine Metallic Mineral Production', 'Annual Employment of Operating Metallic Mines and Quarries Per Region', 'MGB Annual Revenue Collection Report per Region'; no sub-annual series stated.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-nickel",
+      "title": "Nickel production and export statistics",
+      "publisher": "MGB / PSA / trade statistics",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Focused statistics on nickel output and trade. The Philippines has been the second-ranked global producer in recent years, making nickel a high-centrality commodity node.",
+      "url": "https://mgb.gov.ph/images/Philippine_Metallic_Mineral_Production/2023/NICKEL_MET-PRODUCTION-FOR-WEBSITE-1998-2023.as-of-07-March-2024.pdf",
+      "domains": [
+        "proposed:nickel",
+        "mining",
+        "trade"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-14_Philippines-batch10.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-centrality commodity uniqueness node (parallel to Indonesian nickel but different institutional and policy context).",
+      "_referenced_by": [
+        "Mining production statistics",
+        "Merchandise trade and partner analysis",
+        "Critical-minerals and industrial-policy discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "MGB table titled 'PHILIPPINES NICKEL ORE PRODUCTION VOLUME AND VALUE 1998-2023' with annual DMT volumes and peso values.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The MGB nickel table gives one row per calendar year, 1998-2023, and is filed under Philippine_Metallic_Mineral_Production/2023 with an 'as of 07 March 2024' cut-off in the filename — an annually refreshed series table.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-fisheries",
+      "title": "Fisheries and aquaculture production statistics",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official volume and value of production for capture fisheries and aquaculture (milkfish, tilapia and other species prominent). Complements the broader agriculture and food-security cluster.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "agriculture",
+        "proposed:aquaculture",
+        "proposed:food"
+      ],
+      "_cadence_original": "quarterly / annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch10.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary fisheries/aquaculture statistical product.",
+      "_referenced_by": [
+        "Agriculture and fisheries production",
+        "Food-security and nutrition analysis",
+        "Coastal and regional livelihood discussions"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA Fisheries Situation Report editions are quarterly: Apr-Jun 2026 (06 Aug 2026), Jan-Mar 2026 (06 May 2026), Oct-Dec 2025 + annual 2025 (28 Jan 2026).",
+      "releases_per_year": 4
+    },
+    {
+      "id": "ph-ports",
+      "title": "Port and shipping statistics (cargo, containers, passengers)",
+      "publisher": "Philippine Ports Authority / related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Operational statistics on cargo throughput (MMT), container volume (TEUs), shipcalls and passenger traffic at Philippine ports. Captures both domestic inter-island and foreign trade flows.",
+      "url": "https://www.ppa.com.ph/node/22472",
+      "domains": [
+        "infrastructure",
+        "proposed:shipping"
+      ],
+      "_cadence_original": "annual / periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch10.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core maritime-logistics node for an archipelagic economy.",
+      "_referenced_by": [
+        "Merchandise trade statistics",
+        "Inter-island connectivity and tourism analysis",
+        "Regional economic profiles"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "PPA official page reporting 2025 national port statistics: 308.5 MMT cargo throughput, over 8 million TEUs, 664,817 shipcalls; PPA's /content/statistics-1 landing page is blocked to WebFetch by robots/SSL errors.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PPA page carries a single full-year performance release dated 16 Jan 2026 covering 2025 cargo (308.5 MMT), containers (8M+ TEUs), 664,817 shipcalls and RoRo traffic against 2024 — an annual performance summary.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-msme",
+      "title": "MSME establishment and structure statistics",
+      "publisher": "Philippine Statistics Authority / DTI",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official counts and structure of micro, small and medium enterprises. MSMEs constitute the overwhelming majority of registered establishments (recently >99 %) and a large share of employment.",
+      "url": "https://psa.gov.ph/content/2022-annual-survey-philippine-business-and-industry-aspbi-all-establishments-employment",
+      "domains": [
+        "proposed:msme",
+        "industry",
+        "proposed:business"
+      ],
+      "_cadence_original": "periodic / annual updates",
+      "_batch": [
+        "2026-08-14_Philippines-batch11.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core enterprise-structure node. Complements the formal manufacturing (ASPBI) and IT-BPM series.",
+      "_referenced_by": [
+        "Employment and labour statistics",
+        "Digital-economy and e-commerce analysis",
+        "Industrial and inclusion policy"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Retrieved PSA product page '2022 Annual Survey of Philippine Business and Industry (ASPBI) - All Establishments by Employment Grouping: Preliminary Results'. Page gives 281,825 establishments split micro 196,607 (69.8%), small 77,857 (27.6%), medium 3,244 (1.2%), large 4,118 (1.5%), plus employment shares by size class - i.e. official MSME establishment structure. DTI's own MSME statistics pages (dti.gov.ph/dti-knowledge-hub/dti-statistics/dti-msme-statistics) remain robots-disallowed, so the PSA source was used instead.",
+      "_url_route": "publisher on-site/product page via targeted search (psa.gov.ph); DTI still robots-blocked",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "ASPBI is described on the page as an annual designated statistical activity — the 2022 round was 'conducted nationwide in April 2023 with 2022 as reference period'; establishment/employment counts come from that annual cycle.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-gender",
+      "title": "Women and Men in the Philippines / Core GAD indicators",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official gender statistics and Philippine Core Gender and Development (GAD) indicators covering population, education, health, labour, political participation and related domains.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "proposed:gender",
+        "proposed:women",
+        "proposed:gad"
+      ],
+      "_cadence_original": "periodic updates",
+      "_batch": [
+        "2026-08-14_Philippines-batch11.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core gender-statistical product.",
+      "_referenced_by": [
+        "Labour Force Survey and OFW gender composition",
+        "Education and health statistics",
+        "Social-protection and inclusion analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA Gender and Development page states the Factsheet on Women and Men in the Philippines is issued annually (latest 30 Apr 2026, ref 2026-132) and that Core GAD Indicators are monitored 'through the annual updating of the Factsheet'.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-housing",
+      "title": "Housing and household characteristics statistics",
+      "publisher": "PSA (Census, FIES, related surveys)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Housing stock, tenure, access to basic services and related household characteristics drawn from census and household surveys. Links to construction, urbanisation and welfare analysis.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "housing",
+        "living-standards"
+      ],
+      "_cadence_original": "census / survey cycles",
+      "_batch": [
+        "2026-08-14_Philippines-batch11.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Housing densification of the social and construction clusters.",
+      "_referenced_by": [
+        "Construction and GFCF statistics",
+        "Poverty and FIES analysis",
+        "Urbanisation and regional profiles"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA page treats population and housing as one integrated collection ('Census of Population and Housing', 2020 CPH and 2024 POPCEN) — housing characteristics come out with the roughly five-yearly census rounds.",
+      "releases_per_year": 0.2
+    },
+    {
+      "id": "ph-defence-budget",
+      "title": "Department of National Defense / AFP budget statistics",
+      "publisher": "Department of National Defense / DBM",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official budget allocations for the Department of National Defense and the major services (Army, Navy, Air Force). Provides the resource base for defence and security analysis.",
+      "url": "https://www.dbm.gov.ph/index.php/2026/general-appropriations-act-gaa-fy-2026",
+      "domains": [
+        "governance",
+        "public-finance"
+      ],
+      "_cadence_original": "annual (budget cycle)",
+      "_batch": [
+        "2026-08-14_Philippines-batch12.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core defence-resource node.",
+      "_referenced_by": [
+        "National Government fiscal operations",
+        "Maritime and external-security analysis",
+        "Disaster-response capacity discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "DBM General Appropriations Act FY2026 page; the agency listing includes Department of National Defense with Office of the Secretary, Philippine Army, Air Force, Navy and PVAO budget documents.",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The DBM page is the General Appropriations Act FY 2026, i.e. Republic Act No. 12314 dated 06 January 2026 — a single enacted law with a document behind it, not a statistical series (DBM does enact a new GAA each fiscal year)."
+    },
+    {
+      "id": "ph-irrigation",
+      "title": "Irrigation development and status statistics",
+      "publisher": "National Irrigation Administration",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official status of irrigation development — area irrigated, systems, and related indicators. Critical for rice production and agricultural resilience.",
+      "url": "https://www.nia.gov.ph/",
+      "domains": [
+        "proposed:irrigation",
+        "environment",
+        "agriculture"
+      ],
+      "_cadence_original": "annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch12.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core irrigation/water-for-agriculture node.",
+      "_referenced_by": [
+        "Rice/palay production statistics",
+        "Agriculture and food-security analysis",
+        "Climate-adaptation and disaster discussions"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "releases_per_year": 1,
+      "last_updated": null
+    },
+    {
+      "id": "ph-rd-statistics",
+      "title": "Science, technology and R&D statistics",
+      "publisher": "Department of Science and Technology (DOST) / PSA related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official statistics on research and development expenditure, personnel and related S&T indicators. Provides the innovation and knowledge-generation base.",
+      "url": "https://www.dost.gov.ph/knowledge-resources/downloads/file/8922-survey-results-of-the-2019-2020-r-d-expenditures-and-human-resources.html",
+      "domains": [
+        "proposed:rd",
+        "research-innovation",
+        "proposed:technology"
+      ],
+      "_cadence_original": "periodic (R&D survey cycles)",
+      "_batch": [
+        "2026-08-14_Philippines-batch12.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core R&D / S&T statistical product.",
+      "_referenced_by": [
+        "Higher-education and human-capital analysis",
+        "IT-BPM and digital-economy nodes",
+        "Industrial and innovation policy"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "DOST download page for 'Survey Results of the 2019-2020 R&D Expenditures and Human Resources', filed under the Compendium of S&T Statistics.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DOST Compendium of S&T Statistics entry is 'Survey Results of the 2019-2020 R&D Expenditures and Human Resources' — a two-year (biennial) survey cycle; page updated 08 May 2025.",
+      "releases_per_year": 0.5
+    },
+    {
+      "id": "ph-nta",
+      "title": "National Tax Allotment (NTA, formerly IRA) local government finance statistics",
+      "publisher": "Department of Budget and Management",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "The principal intergovernmental transfer (40% share of national internal revenue taxes) automatically released to provinces, cities, municipalities and barangays. Renamed National Tax Allotment following the Mandanas-Garcia ruling. Critical equalisation and local fiscal-capacity instrument.",
+      "url": "https://www.dbm.gov.ph/index.php/national-tax-allotment-nta",
+      "domains": [
+        "public-finance",
+        "proposed:local-government",
+        "proposed:nta",
+        "proposed:equalisation"
+      ],
+      "_cadence_original": "annual / continuous",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core subnational fiscal equalisation node (parallel to Indonesia’s DAU/DAK).",
+      "_referenced_by": [
+        "National Government fiscal operations",
+        "Regional and local development analysis",
+        "Social-protection and infrastructure delivery"
+      ],
+      "_jurisdiction_level_original": "national → local",
+      "last_updated": null,
+      "_url_evidence": "DBM's National Tax Allotment (NTA) page, which hosts the NTA shares of LGUs and links to the DBM NTA dashboard.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The DBM National Tax Allotment page is a navigation stub: no dated NTA documents, no stated frequency, only a link to the reports.dbm.gov.ph/ira2 dashboard, which returns no substantive content or update statement."
+    },
+    {
+      "id": "ph-geothermal",
+      "title": "Geothermal power capacity and generation statistics",
+      "publisher": "Department of Energy",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Installed and dependable geothermal capacity and related generation figures. The Philippines remains one of the world’s leading geothermal producers; geothermal forms a distinctive indigenous renewable component of the power mix.",
+      "url": "https://doe.gov.ph/",
+      "domains": [
+        "proposed:geothermal",
+        "energy"
+      ],
+      "_cadence_original": "continuous (within Power Statistics)",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Distinctive renewable uniqueness node.",
+      "_referenced_by": [
+        "Philippine Power Statistics and energy-mix nodes",
+        "NDC and climate-policy analysis",
+        "Energy-security discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Geothermal capacity/generation figures are carried inside DOE's Philippine Power Statistics, which the DOE statistics page shows as one edition per year (2023 edition released 12 Jul 2024; 2024 edition released 15 Jun 2025).",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-renewables",
+      "title": "Renewable energy project and capacity statistics (RE Act framework)",
+      "publisher": "Department of Energy",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Summary statistics on renewable-energy projects under the Renewable Energy Act of 2008 — hydropower, geothermal, wind, solar, biomass — covering potential and installed capacity.",
+      "url": "https://doe.gov.ph/",
+      "domains": [
+        "energy",
+        "governance"
+      ],
+      "_cadence_original": "periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Broader renewable-energy densification.",
+      "_referenced_by": [
+        "Geothermal and power-mix nodes",
+        "NDC and energy-transition framing",
+        "Investment and green-finance analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The DOE renewable-energy pages show only the legal framework (RA 9513, RA 9367), department orders and circulars — no dated statistical editions and no stated release frequency for RE project/capacity statistics."
+    },
+    {
+      "id": "ph-pdp",
+      "title": "Philippine Development Plan (PDP) and NEDA planning framework",
+      "publisher": "National Economic and Development Authority (NEDA)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "The medium-term national development plan (current cycle 2023–2028) and associated progress reports. Provides the overarching policy and target frame that organises statistical monitoring across sectors.",
+      "url": "https://pdp.neda.gov.ph/",
+      "domains": [
+        "proposed:planning",
+        "proposed:pdp",
+        "proposed:neda",
+        "governance"
+      ],
+      "_cadence_original": "multi-year plan + annual progress reports",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "High-centrality national planning frame node.",
+      "_referenced_by": [
+        "Almost all major statistical and programme series",
+        "Poverty, education, health and infrastructure targets",
+        "Fiscal and investment prioritisation"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "pdp.neda.gov.ph presents the PDP 2023-2028 as 'the second medium-term plan' anchored on the administration's socioeconomic agenda — a six-year medium-term plan cycle; no annual progress report schedule is stated on the page.",
+      "releases_per_year": 0.17
+    },
+    {
+      "id": "ph-crime",
+      "title": "Crime statistics (focus crimes and crime rate)",
+      "publisher": "Philippine National Police / related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official focus-crime counts (murder, homicide, rape, physical injury, theft, robbery, vehicle theft) and overall crime-rate trends. Used in security and governance analysis.",
+      "url": "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__3E__GD__PH/0103E3D1030.px/",
+      "domains": [
+        "governance"
+      ],
+      "_cadence_original": "annual / periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core crime/security statistical product.",
+      "_referenced_by": [
+        "Governance and social-cohesion analysis",
+        "Local government and policing discussions",
+        "Tourism and investment climate assessments"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Retrieved the PSA OpenSTAT PX-Web table 'Levels of Index Crimes in the Philippines: 2009 - 2015'. Metadata on the page names the Philippine National Police (PNP) as the administrative-data source and lists the focus/index crime variables: murder, homicide, physical injuries, rape, robbery, theft, carnapping, cattle rustling, in number of cases. Companion tables 0103E3D1010.px (against persons) and 0103E3D1020.px (against property) sit in the same folder. pnp.gov.ph itself still returns 403.",
+      "_url_route": "PSA OpenSTAT database folder listing (DB__3E__GD__PH/?tablelist=true) used as discovery, then the .px table page fetched directly",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OpenSTAT table metadata for 'Levels of Index Crimes in the Philippines: 2009-2015' states update frequency 'Annual' (PNP administrative records; last updated 07 Aug 2018).",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-port-manila",
+      "title": "Port of Manila operational statistics",
+      "publisher": "Philippine Ports Authority / terminal operators",
+      "country": "PH",
+      "jurisdiction_level": "municipal",
+      "region": "NCR / Manila",
+      "description": "Operational statistics for the country’s primary international container gateway (Manila International Container Terminal, South Harbor, North Harbor). Handles the large majority of international container trade.",
+      "url": "https://www.ppa.com.ph/sites/default/files/qtr_stat/2023_Summary_Statistics05152024.pdf",
+      "domains": [
+        "proposed:port",
+        "proposed:manila",
+        "proposed:containers",
+        "infrastructure"
+      ],
+      "_cadence_original": "continuous / annual summaries",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary international-gateway port node.",
+      "_referenced_by": [
+        "National port and trade statistics",
+        "NCR economic profile",
+        "Electronics and merchandise-export analysis"
+      ],
+      "_jurisdiction_level_original": "local / national gateway",
+      "last_updated": null,
+      "_url_evidence": "Retrieved 'SUMMARY PORT STATISTICS - Philippine Ports Authority 2023'. It reports shipcalls, cargo throughput (272.5m MT), container traffic (7.5m TEU), passenger and RoRo traffic, broken down by PPA district including Manila/Northern Luzon, which carries roughly 36-40% of most metrics. This is PPA's own statistical release; note it is the district aggregate rather than a MICT/South Harbor/North Harbor terminal-level page, which PPA does not publish. ppa.com.ph is intermittently unfetchable (its robots.txt fails TLS verification on many attempts) - this fetch succeeded on retry.",
+      "_url_route": "alternate hostname (bare ppa.com.ph node page proved the site fetchable) + repeated retries on the www /sites/default/files/qtr_stat/ static PDF path",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The PPA file is '2023 Summary Statistics' containing all four quarterly breakdowns plus a GRAND TOTAL — a full-year compilation; Manila appears only as the aggregated 'Manila/Northern Luzon' district, with no separate MICT/South Harbor release.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-port-cebu",
+      "title": "Port of Cebu operational statistics",
+      "publisher": "Philippine Ports Authority / related",
+      "country": "PH",
+      "jurisdiction_level": "municipal",
+      "region": "Central Visayas / Cebu",
+      "description": "Operational statistics for the principal Visayas port hub — major domestic inter-island and secondary international gateway.",
+      "url": "https://www.cpa.gov.ph/the-cebu-port-system/statistics",
+      "domains": [
+        "proposed:port",
+        "proposed:cebu",
+        "proposed:visayas",
+        "infrastructure"
+      ],
+      "_cadence_original": "continuous / annual summaries",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary Visayas port node.",
+      "_referenced_by": [
+        "National port statistics",
+        "Visayas regional profile",
+        "Inter-island connectivity analysis"
+      ],
+      "_jurisdiction_level_original": "local / regional hub",
+      "last_updated": null,
+      "_url_evidence": "Cebu Port Authority 'Statistics' page under The Cebu Port System, the official statistics section for the Port of Cebu.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "Cebu Port Authority statistics page is only a landing page embedding a Google Drive folder ('Open Drive Folder, STATISTIC'); no tables, dated editions or frequency statement are exposed."
+    },
+    {
+      "id": "ph-vital-stats",
+      "title": "Vital statistics (births, deaths, marriages)",
+      "publisher": "Philippine Statistics Authority (Civil Registration)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Registered births, deaths and marriages. Provides the continuous demographic flow data that complements the census and population projections.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "proposed:vital",
+        "population",
+        "proposed:civil-registration"
+      ],
+      "_cadence_original": "annual / provisional updates",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core civil-registration / vital-statistics node.",
+      "_referenced_by": [
+        "Population census and projections",
+        "Health and mortality analysis",
+        "Social and family-policy discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA vital statistics page shows rolling monthly provisional releases — Birth, Marriage and Death Statistics for 2025 as of 31 May 2026 (released 31 Jul 2026) and as of 30 Apr 2026 (released 26 Jun 2026) — noting 'Civil Registration is a continuous process' with monthly cut-offs.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-bsp-mpr",
+      "title": "BSP Monetary Policy Report",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Flagship periodic monetary-policy communication document that synthesises inflation, growth, external and financial conditions. High recurring-citation value across macro analysis.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "monetary-policy",
+        "proposed:bsp",
+        "national-accounts"
+      ],
+      "_cadence_original": "quarterly / periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch13-final.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-centrality central-bank communication node.",
+      "_referenced_by": [
+        "CPI, national accounts, BOP and reserves",
+        "Financial-stability and credit analysis",
+        "Fiscal and external assessments"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BSP Advance Release Calendar lists the Monetary Policy Report with periodicity 'Quarterly'.",
+      "releases_per_year": 4
+    },
+    {
+      "id": "ph-ofw-stock",
+      "title": "Overseas Filipino Workers stock and Survey on Overseas Filipinos",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official estimates of the number of Overseas Filipino Workers (recently ~2.19 million) and related characteristics from the Survey on Overseas Filipinos. Captures both land-based and sea-based workers and the gender composition (female majority in recent rounds).",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "proposed:ofw",
+        "proposed:migration",
+        "labour"
+      ],
+      "_cadence_original": "annual / survey cycle",
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core OFW stock node — one of the defining structural features of the Philippine economy and society.",
+      "_referenced_by": [
+        "Remittance statistics",
+        "BOP current-account analysis",
+        "Social and regional development planning"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA Survey on Overseas Filipinos releases are annual: 2024 results (16 Dec 2025), 2023 results (13 Sep 2024), 2022 results (11 Oct 2023).",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-remittances",
+      "title": "Overseas Filipino cash remittances (total and by country)",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "High-frequency and annual statistics on cash remittances from overseas Filipinos, broken down by major source country. Remittances are a major stabilising component of the current account and household income.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "external-sector",
+        "proposed:ofw"
+      ],
+      "_cadence_original": "monthly / annual detailed",
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-centrality external and household-income node. Canada is a consistently ranked source country.",
+      "_referenced_by": [
+        "Balance of Payments",
+        "Household income and poverty analysis",
+        "Monetary and financial-stability assessments"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BSP Advance Release Calendar lists Overseas Filipinos' Remittances with periodicity 'Monthly'.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-remittances-canada",
+      "title": "Cash remittances from Canada",
+      "publisher": "Bangko Sentral ng Pilipinas (country breakdown)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Philippines–Canada",
+      "description": "BSP-reported cash remittances originating from Canada. Recent annual figures exceed USD 1.2 billion, placing Canada among the top source countries alongside the United States, Middle East destinations, Singapore, Japan and others.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "external-sector",
+        "proposed:canada",
+        "trade"
+      ],
+      "_cadence_original": "continuous (within remittance tables)",
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Explicit Canada–Philippines financial linkage node. Reflects the large Filipino diaspora in Canada (including communities where Tagalog ranks as a major non-official language).",
+      "_referenced_by": [
+        "Overall remittance statistics",
+        "Canada–Philippines migration and labour cooperation nodes",
+        "BOP analysis"
+      ],
+      "_jurisdiction_level_original": "bilateral",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Canada is a country line inside the BSP remittances-by-source tables, which the BSP Advance Release Calendar publishes 'Monthly'; there is no separate Canada release.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-dmw",
+      "title": "Department of Migrant Workers institutional role and deployment statistics",
+      "publisher": "Department of Migrant Workers (DMW)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Lead agency for overseas employment policy, contract processing and worker protection. Publishes deployment / contracts-processed statistics by destination, sex and type (land-based, sea-based, new hires, rehires).",
+      "url": "https://dmw.gov.ph/archives/v1/resources/dsms/DMW/Externals/2025/Statistics/JAN/TAB%2011%20-%20Landbased%20Deployment%20by%20Destination%20(2024%20Jan%202025).pdf",
+      "domains": [
+        "proposed:ofw",
+        "proposed:migration-policy"
+      ],
+      "_cadence_original": "continuous / monthly–annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Policy and administrative counterpart to the statistical OFW nodes.",
+      "_referenced_by": [
+        "OFW stock and remittance series",
+        "Bilateral labour agreements",
+        "Social-protection and reintegration programmes"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Retrieved DMW 'OVERSEAS EMPLOYMENT STATISTICS - Landbased Deployment per Country/Destination per Type of Hiring', 2024 through January 2025, footer 'Department of Migrant Workers - Management Information and Technology Service', processed by the Strategic Planning and Management Service. Deployment is broken out by major world region and by new hires vs rehires. The dmw.gov.ph HTML statistics landing pages (/statistics, /archives/v1/statistics, /archives/ofwstat/ofwstat.html) are still JavaScript-only shells, so the underlying static statistics PDF is the only retrievable official artefact.",
+      "_url_route": "legacy/static archive path under dmw.gov.ph/archives/ (discovered by site-scoped search), bypassing the JS-only app",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The DMW table is filed at /2025/Statistics/JAN/ as 'TAB 11 - Landbased Deployment by Destination (2024 Jan 2025)', i.e. a per-month folder of preliminary deployment tables; data are cumulative-to-date and flagged 'preliminary and subject to final evaluation'.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-canada-labour",
+      "title": "Philippines–Canada labour and migration cooperation framework",
+      "publisher": "Department of Migrant Workers (PH) / Immigration, Refugees and Citizenship Canada",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Philippines–Canada",
+      "description": "Joint Declaration of Intent (signed Vancouver, July 2026) and related instruments on ethical recruitment, labour rights and migration cooperation. Formalises the policy channel that underpins the large bilateral labour flow.",
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/agreements/declaration-intent-philippines-canada-labour-migration-cooperation.html",
+      "domains": [
+        "proposed:canada",
+        "proposed:migration",
+        "trade",
+        "labour"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Key bilateral policy node linking the statistical remittance flow to formal labour-migration governance.",
+      "_referenced_by": [
+        "Remittances from Canada",
+        "DMW deployment statistics",
+        "Broader Canada–Philippines partnership nodes"
+      ],
+      "_jurisdiction_level_original": "bilateral",
+      "last_updated": null,
+      "_url_evidence": "Retrieved the full text on Canada.ca: 'Joint Declaration of Intent between the Department of Migrant Workers of the Republic of the Philippines and the Department of Citizenship and Immigration of Canada concerning labour and migration cooperation', signed 2 July 2026 in Vancouver in English and French. Sets out eight principles on ethical recruitment - no recruitment fees, licensing and registration of recruiters, freedom of movement and no document confiscation, voluntary and non-coercive consent, free access to rights information, and grievance mechanisms - grounded in ILO fair-recruitment principles.",
+      "_url_route": "IRCC agreements index on canada.ca, found by searching the exact instrument name against the Canadian side of the bilateral"
+    },
+    {
+      "id": "ph-fies",
+      "title": "Family Income and Expenditure Survey (FIES)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Major household survey providing income, expenditure and inequality data. Primary source for official poverty statistics and for understanding the household-level impact of remittances.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "living-standards",
+        "proposed:expenditure",
+        "poverty"
+      ],
+      "_cadence_original": "multi-year cycle",
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Household-income densification that links remittances to welfare outcomes.",
+      "_referenced_by": [
+        "Official poverty statistics",
+        "Remittance impact analysis",
+        "National accounts (household consumption)"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA FIES page carries survey years 2018, 2021 and 2023 (2023 preliminary released 15 Aug 2024) — a roughly triennial survey; no explicit frequency statement on the page.",
+      "releases_per_year": 0.33
+    },
+    {
+      "id": "ph-underemployment",
+      "title": "Underemployment and quality-of-employment indicators (LFS)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Underemployment rates and related quality-of-employment measures from the Labor Force Survey. Complements the headline unemployment rate and is relevant to the push factors behind overseas work.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "labour",
+        "proposed:underemployment",
+        "proposed:quality"
+      ],
+      "_cadence_original": "aligned with LFS",
+      "_batch": [
+        "2026-08-14_Philippines-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Labour-quality node that helps explain the scale of the OFW phenomenon.",
+      "_referenced_by": [
+        "Labor Force Survey",
+        "OFW and migration analysis",
+        "Poverty and social-policy documents"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Underemployment is a headline indicator of the Labor Force Survey, which the PSA 2026 Calendar of Releases schedules 12 times in the year (monthly).",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-itbpm",
+      "title": "IT-BPM / BPO industry statistics and performance",
+      "publisher": "IBPAP / IBPAP / PSA related surveys",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Industry statistics on the Information Technology and Business Process Management sector — revenues (recently ~USD 40+ billion), headcount (~1.8–1.9 million FTEs), global market share, and sub-sector composition (customer experience, healthcare, IT services, etc.). Philippines ranks as the world’s second-largest IT-BPM delivery geography after India.",
+      "url": "https://www.ibpap.org/knowledge-hub",
+      "domains": [
+        "proposed:it-bpm",
+        "proposed:bpo",
+        "proposed:services-export"
+      ],
+      "_cadence_original": "annual industry reports + survey cycles",
+      "_batch": [
+        "2026-08-14_Philippines-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-centrality uniqueness node. Alongside OFW remittances, IT-BPM is a defining export of Philippine services and human capital.",
+      "_referenced_by": [
+        "National accounts (services exports)",
+        "Labour Force Survey and employment analysis",
+        "Investment and industrial-policy documents"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "IBPAP Knowledge Hub listing industry reports including 'The Philippine IT-BPM Industry Overview (Q2 2026)' and 'Beyond $40 Billion'; note IBPAP is the named publisher but is an industry association, not a government body.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "IBPAP Knowledge Hub's recurring publication is 'The IT-BPM Navigator', released quarterly (Q1, Q3, Q4 2025 and Q1, Q2 2026 editions listed); other items (ESG Report, Industry Overview) carry no stated cadence.",
+      "releases_per_year": 4
+    },
+    {
+      "id": "ph-grdp-ncr",
+      "title": "National Capital Region (NCR) Gross Regional Domestic Product",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "provincial",
+      "region": "NCR (Metro Manila)",
+      "description": "Official GRDP for the National Capital Region — the dominant services and administrative core of the Philippine economy.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "national-accounts",
+        "proposed:ncr"
+      ],
+      "_cadence_original": "annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary urban-core regional output node.",
+      "_referenced_by": [
+        "National Accounts",
+        "Regional disparity and urbanisation analysis",
+        "IT-BPM and services location patterns"
+      ],
+      "_jurisdiction_level_original": "regional",
+      "releases_per_year": 1,
+      "last_updated": null
+    },
+    {
+      "id": "ph-grdp-calabarzon",
+      "title": "CALABARZON Gross Regional Domestic Product",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "provincial",
+      "region": "CALABARZON (Cavite, Laguna, Batangas, Rizal, Quezon)",
+      "description": "Official GRDP for CALABARZON — major industrial and manufacturing belt adjacent to NCR, frequently accounting for a large share of national industry output and ranking among the largest regional economies.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "national-accounts",
+        "proposed:calabarzon",
+        "industry"
+      ],
+      "_cadence_original": "annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary industrial-belt regional output node. Together with NCR forms the Luzon economic core.",
+      "_referenced_by": [
+        "National Accounts and manufacturing statistics",
+        "NCR and Luzon spatial analysis",
+        "Investment and industrial-location policy"
+      ],
+      "_jurisdiction_level_original": "regional",
+      "releases_per_year": 1,
+      "last_updated": null
+    },
+    {
+      "id": "ph-agriculture",
+      "title": "Agriculture and fisheries production statistics",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official value and volume of production in agriculture and fisheries. Crops (especially rice/palay) dominate; livestock, poultry and fisheries complete the sector.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "agriculture",
+        "proposed:food"
+      ],
+      "_cadence_original": "quarterly / annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core primary-sector production node.",
+      "_referenced_by": [
+        "National Accounts (agriculture origin)",
+        "Poverty and rural-income analysis",
+        "Food-security and inflation (food component) discussions"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA 2026 Calendar of Releases lists 'Value of Production in Philippine Agriculture and Fisheries' with 4 scheduled release dates, labelled Quarterly.",
+      "releases_per_year": 4
+    },
+    {
+      "id": "ph-rice",
+      "title": "Rice / palay production statistics",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official palay (unmilled rice) production volume and related indicators. Rice remains the central food-security crop and a politically sensitive commodity; weather, irrigation and import policy strongly affect outcomes.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "proposed:rice",
+        "proposed:palay",
+        "poverty"
+      ],
+      "_cadence_original": "seasonal / quarterly",
+      "_batch": [
+        "2026-08-14_Philippines-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational food-security crop node.",
+      "_referenced_by": [
+        "Agriculture and fisheries statistics",
+        "CPI food component and inflation analysis",
+        "Food-security and import-policy documents"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA palay and corn estimates are issued as the 'Palay and Corn Quarterly Bulletin'; the page shows updates for Jan-Mar 2026 (15 Apr 2026) and Apr-Jun 2026 (11 Jun and 15 Jul 2026), i.e. quarterly reference periods.",
+      "releases_per_year": 4
+    },
+    {
+      "id": "ph-disaster-impact",
+      "title": "Natural hazard occurrence and impact statistics (typhoons, earthquakes, etc.)",
+      "publisher": "NDRRMC / PSA related compilations",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Compiled statistics on fatalities, injuries, affected population, damaged houses and economic losses from tropical cyclones, earthquakes and other natural hazards. Typhoons are the dominant recurring high-impact hazard.",
+      "url": "https://psa.gov.ph/content/compendium-philippine-environment-statistics-2015-2024-component-4-extreme-events-and",
+      "domains": [
+        "proposed:disaster",
+        "proposed:typhoon",
+        "proposed:earthquake",
+        "proposed:impact"
+      ],
+      "_cadence_original": "continuous / annual summaries",
+      "_batch": [
+        "2026-08-14_Philippines-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core multi-hazard impact series. The Philippines lies on both the typhoon belt and the Pacific Ring of Fire.",
+      "_referenced_by": [
+        "NDRRMC institutional node",
+        "Agriculture and infrastructure damage analysis",
+        "Poverty and vulnerability discussions"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_url_evidence": "Retrieved PSA 'Compendium of Philippine Environment Statistics 2015-2024, Component 4: Extreme Events and Disasters'. It compiles deaths, injured, missing, affected population and damaged houses (partially/totally) by hazard type - earthquakes, typhoons, floods, landslides - sourced from the Office of Civil Defense, with technical tables attached. ndrrmc.gov.ph still returns 403 to WebFetch.",
+      "_url_route": "publisher on-site product page via targeted search (psa.gov.ph environment statistics series)",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The page states 'The Compendium of Philippine Environment Statistics is released annually'; this edition (Component 4, Extreme Events and Disasters, covering 2015-2024) was released 10 July 2025.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-pagasa",
+      "title": "PAGASA tropical cyclone and weather monitoring products",
+      "publisher": "PAGASA (DOST)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official meteorological agency products on tropical cyclones, rainfall and related hazards. Provides the scientific monitoring backbone for NDRRMC response and early warning.",
+      "url": "https://www.pagasa.dost.gov.ph/tropical-cyclone/severe-weather-bulletin",
+      "domains": [
+        "proposed:weather",
+        "proposed:typhoon",
+        "proposed:monitoring"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-14_Philippines-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Meteorological monitoring node tightly coupled to the disaster cluster.",
+      "_referenced_by": [
+        "NDRRMC and disaster-impact statistics",
+        "Agriculture (crop damage) analysis",
+        "Climate-adaptation documents"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "PAGASA tropical cyclone section showing the live bulletin plus its product set (advisories, severe wind and storm surge impact forecasts, TC threat potential, annual reports).",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "The PAGASA severe weather / tropical cyclone bulletin page is a live operational feed with no stated issuance schedule — bulletins appear only while a cyclone is active, so there is no discrete periodic release.",
+      "releases_per_year": 365,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
+    },
+    {
+      "id": "ph-peza",
+      "title": "PEZA ecozone and investment statistics",
+      "publisher": "Philippine Economic Zone Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Statistics on approved investments, employment generation, number of ecozones and export performance under the PEZA regime. Ecozones are a principal vehicle for manufacturing and IT-BPM location.",
+      "url": "https://www.peza.gov.ph/",
+      "domains": [
+        "proposed:peza",
+        "proposed:ecozone",
+        "investment"
+      ],
+      "_cadence_original": "annual / periodic updates",
+      "_batch": [
+        "2026-08-14_Philippines-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key special-zone and investment-promotion node. Complements the IT-BPM cluster.",
+      "_referenced_by": [
+        "IT-BPM and manufacturing statistics",
+        "FDI and industrial-policy analysis",
+        "CALABARZON and regional development nodes"
+      ],
+      "_jurisdiction_level_original": "national / zone",
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "peza.gov.ph shows only a static ecozone count snapshot ('419 TOTAL' as of April 2023) with no investment, employment or export series, no dated editions and no stated reporting frequency; the statistics sub-pages are not retrievable."
+    },
+    {
+      "id": "ph-trade-partners",
+      "title": "Merchandise trade by major partner country",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Export and import values by principal trading partners. United States, Japan, China, Hong Kong, Korea and ASEAN partners recur as leading markets and sources; electronics dominate the commodity mix.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "trade",
+        "proposed:partners"
+      ],
+      "_cadence_original": "monthly / annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Partner-side densification of the external-trade cluster.",
+      "_referenced_by": [
+        "National accounts and BOP goods account",
+        "Electronics and manufacturing analysis",
+        "FTA and trade-policy documents"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA International Merchandise Trade Statistics are monthly (2026 Calendar of Releases lists 12 IMTS dates); page shows Apr 2026 (29 May), May 2026 (30 Jun), Jun 2026 (30 Jul) preliminary editions with partner-country tables.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-electronics-trade",
+      "title": "Electronics and semiconductor trade statistics",
+      "publisher": "PSA / related industry sources",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Trade statistics focused on electronic products — the single largest merchandise export category and a major import category as well, reflecting the country’s role in regional electronics value chains.",
+      "url": "https://psa.gov.ph/statistics/export-import/monthly",
+      "domains": [
+        "proposed:electronics",
+        "proposed:semiconductors",
+        "trade"
+      ],
+      "_cadence_original": "continuous (within trade publications)",
+      "_batch": [
+        "2026-08-14_Philippines-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Commodity-specific trade node that links the Philippines into East Asian electronics networks.",
+      "_referenced_by": [
+        "Merchandise trade by partner",
+        "Manufacturing and PEZA statistics",
+        "Global value-chain analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "PSA monthly international merchandise trade release stating electronic products were the top export in June 2026 at USD 5.25 billion, 59.9 percent of total exports.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Electronic products are a commodity line inside the monthly Highlights of the Philippine Export and Import (June 2026 edition: electronics 59.9% of exports, 34.8% of imports); no separate electronics release exists.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-power-stats",
+      "title": "Philippine Power Statistics (generation, capacity, consumption)",
+      "publisher": "Department of Energy (DOE)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official statistics on installed and dependable capacity, gross generation by technology, electricity sales and consumption, and system peak demand. Coal remains the largest single source; natural gas, geothermal, hydro, solar, wind and oil-based plants complete the mix. Luzon, Visayas and Mindanao grids reported separately.",
+      "url": "https://doe.gov.ph/",
+      "domains": [
+        "energy"
+      ],
+      "_cadence_original": "annual / periodic updates",
+      "_batch": [
+        "2026-08-14_Philippines-batch5.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core power-system statistical product. Coal-dominant with significant renewable (especially geothermal) contribution.",
+      "_referenced_by": [
+        "National accounts and industrial energy analysis",
+        "Climate and energy-transition documents",
+        "Regional grid and investment discussions"
+      ],
+      "_jurisdiction_level_original": "national / grid",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DOE Philippine Power Statistics appears as one edition per year — 2023 edition released 12 July 2024, 2024 edition released 15 June 2025.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-energy-mix",
+      "title": "Electricity generation and capacity mix by technology",
+      "publisher": "Department of Energy",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Breakdown of installed/dependable capacity and generation by fuel/technology — coal, natural gas, oil-based, geothermal, hydro, solar, wind, biomass, storage. Highlights both the coal lock-in and the sizeable indigenous geothermal resource.",
+      "url": "https://legacy.doe.gov.ph/energy-statistics/philippine-power-statistics",
+      "domains": [
+        "proposed:energy-mix",
+        "proposed:coal",
+        "proposed:geothermal",
+        "energy"
+      ],
+      "_cadence_original": "continuous (within Power Statistics)",
+      "_batch": [
+        "2026-08-14_Philippines-batch5.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural energy-mix node.",
+      "_referenced_by": [
+        "Philippine Power Statistics",
+        "Climate and NDC analysis",
+        "Investment and power-sector planning"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "DOE Philippine Power Statistics page listing 'Installed and Dependable Capacity per Grid and per technology, 2003-2024' and 'Gross Generation per Grid and per technology, 2003-2024'.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The capacity/generation-by-technology breakdown is part of Philippine Power Statistics on the DOE energy-statistics page, which lists only the 2023 (rel. 12 Jul 2024) and 2024 (rel. 15 Jun 2025) editions — annual.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-4ps",
+      "title": "Pantawid Pamilyang Pilipino Program (4Ps) statistics",
+      "publisher": "Department of Social Welfare and Development (DSWD)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official performance and coverage statistics for the national conditional cash-transfer and human-capital program. Tracks household beneficiaries, self-sufficiency exits, education and health outcomes of monitored children.",
+      "url": "https://www.dswd.gov.ph/",
+      "domains": [
+        "benefits",
+        "proposed:4ps",
+        "proposed:cash-transfer",
+        "poverty"
+      ],
+      "_cadence_original": "continuous / periodic reports",
+      "_batch": [
+        "2026-08-14_Philippines-batch5.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Flagship social-protection node. Institutionalised by RA 11310.",
+      "_referenced_by": [
+        "Official poverty statistics",
+        "FIES and household welfare analysis",
+        "Shock-responsive social-protection and disaster response"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DSWD publishes the 4Ps Program Implementation Report quarterly — e.g. 'Second Quarter Program Implementation Report' (Apr-Jun 2025, published Jul 2025) and Fourth Quarter PIR, with quarter-on-quarter comparisons.",
+      "releases_per_year": 4
+    },
+    {
+      "id": "ph-asean",
+      "title": "ASEAN economic cooperation framework (Philippine participation)",
+      "publisher": "ASEAN / Department of Trade and Industry",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "ASEAN",
+      "description": "Philippine participation in the ASEAN economic community and related cooperation frameworks. Continuously cited in regional trade, investment and policy analysis.",
+      "url": "https://asean.org/wp-content/uploads/2025/06/AEC-Strategic-Plan-2026-2030.pdf",
+      "domains": [
+        "proposed:asean",
+        "trade"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-14_Philippines-batch5.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core regional-architecture node.",
+      "_referenced_by": [
+        "RCEP and bilateral FTA nodes",
+        "Merchandise trade statistics",
+        "Investment and services-trade analysis"
+      ],
+      "last_updated": null,
+      "_url_evidence": "Retrieved the full 'ASEAN Economic Community Strategic Plan 2026-2030', ASEAN Secretariat, Jakarta, May 2025 - 6 strategic goals, 44 objectives, 192 strategic measures under ASEAN Community Vision 2045. Note this node is a regional cooperation framework published by the ASEAN Secretariat (an intergovernmental body), not a Philippine government statistical publication. asean.org's HTML pages under /asean-economic-community/ and /our-communities/economic-community-2/ still serve only a JavaScript redirect shell (and rate-limit with 429), so the static wp-content PDF is the retrievable official document.",
+      "_url_route": "static /wp-content/uploads/ asset path on asean.org, bypassing the JS-only page shell",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The AEC Strategic Plan 2026-2030 (adopted May 2025) states the AEC 'will develop and implement strategic plans in five-year strategic planning cycles' — one plan document per five years.",
+      "releases_per_year": 0.2
+    },
+    {
+      "id": "ph-rcep",
+      "title": "Regional Comprehensive Economic Partnership (RCEP) participation",
+      "publisher": "ASEAN + partners / DTI",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "RCEP area",
+      "description": "Philippine membership in RCEP — the mega-FTA linking ASEAN with China, Japan, Korea, Australia and New Zealand. Provides preferential market access and rules that interact with electronics and other supply-chain trade.",
+      "url": "https://asean.org/our-communities/economic-community/integration-with-global-economy/regional-comprehensive-economic-partnership-rcep/",
+      "domains": [
+        "proposed:rcep",
+        "trade"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch5.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Major plurilateral trade-architecture node.",
+      "_referenced_by": [
+        "ASEAN framework",
+        "Trade-partner and electronics statistics",
+        "Trade-policy documents"
+      ],
+      "last_updated": null,
+      "_url_evidence": "Retrieved the ASEAN Main Portal RCEP page with real content: describes RCEP's launch (Nov 2012), participants (10 ASEAN members plus FTA partners), coverage (goods, services, investment, IP, competition, dispute settlement, e-commerce, SMEs) and economic weight. Deep paths under /our-communities/ render for WebFetch even though asean.org's top-level pages do not. Note this is a trade-agreement framework node published by the ASEAN Secretariat, not a statistical product; rcepsec.org remains password-protected and dti.gov.ph robots-disallowed.",
+      "_url_route": "alternate deep path on asean.org (/our-communities/...) rather than the JS-shell top-level pages"
+    },
+    {
+      "id": "ph-higher-ed",
+      "title": "Higher education statistics (enrolment, institutions, graduates)",
+      "publisher": "Commission on Higher Education (CHED) / PSA related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official statistics on higher-education institutions, enrolment, graduates and faculty. Provides the human-capital supply side that feeds both the domestic labour market and the OFW / IT-BPM talent pipelines.",
+      "url": "https://ched.gov.ph/",
+      "domains": [
+        "education",
+        "post-secondary",
+        "proposed:human-capital"
+      ],
+      "_cadence_original": "annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch6.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core higher-education statistical product.",
+      "_referenced_by": [
+        "Labor Force Survey and skills analysis",
+        "IT-BPM and OFW talent discussions",
+        "Regional development profiles"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "releases_per_year": 1,
+      "last_updated": null
+    },
+    {
+      "id": "ph-basic-ed",
+      "title": "Basic education statistics (DepEd)",
+      "publisher": "Department of Education / PSA related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Enrolment, completion and related indicators for elementary and secondary education. Complements the higher-education series and links to 4Ps education conditions.",
+      "url": "https://www.deped.gov.ph/2021/11/18/deped-posts-4-increase-in-enrollment-for-basic-education-in-sy-2021-2022/",
+      "domains": [
+        "education",
+        "proposed:basic-education",
+        "proposed:deped"
+      ],
+      "_cadence_original": "annual / school-year",
+      "_batch": [
+        "2026-08-14_Philippines-batch6.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational basic-education node.",
+      "_referenced_by": [
+        "4Ps education outcomes",
+        "Human-capital and poverty analysis",
+        "Higher-education pipeline"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_url_evidence": "Retrieved a DepEd page that loads and reports official basic education enrolment: 27,232,095 enrolled in formal basic education as of 15 Nov 2021, +3.83% year on year, with public/private transfer flows and Alternative Learning System enrolment (239,616). Caveat: this is DepEd's own enrolment statistics announcement, not a standing statistics product - deped.gov.ph's actual data pages (/resources/facts-and-figures/, /category/facts-and-figures/datasets/, /enrollment/, and all /wp-content/uploads/ PDFs) still return 403, and only dated post URLs are fetchable.",
+      "_url_route": "alternate URL shape on deped.gov.ph - dated post paths (/YYYY/MM/DD/...) are served while category, resource and wp-content paths return 403",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The URL is a single dated DepEd press release (18 November 2021) on SY 2021-2022 enrolment; it promises 'a more granular enrolment analysis after November 30' but states no regular publication schedule."
+    },
+    {
+      "id": "ph-philhealth",
+      "title": "PhilHealth coverage and claims statistics",
+      "publisher": "Philippine Health Insurance Corporation (PhilHealth)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Membership, coverage, claims and financial performance statistics of the national health-insurance programme. Central instrument of health financing and universal-health-coverage policy.",
+      "url": "https://www.philhealth.gov.ph/",
+      "domains": [
+        "health",
+        "proposed:philhealth",
+        "insurance"
+      ],
+      "_cadence_original": "continuous / annual reports",
+      "_batch": [
+        "2026-08-14_Philippines-batch6.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core health-financing node.",
+      "_referenced_by": [
+        "Health and nutrition indicators",
+        "Social-protection and fiscal analysis",
+        "Universal-health-coverage monitoring"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PhilHealth 'Stats and Charts' exists in a full-year and a first-semester edition each year (SNC 2023, SNC 2023 1st Sem, SNC 2024 covering 1 Jan-31 Dec 2024 updated 23 May 2025, SNC 2024 1st Sem, SNC 2025) — two editions per year.",
+      "releases_per_year": 2
+    },
+    {
+      "id": "ph-health-indicators",
+      "title": "Key health and nutrition indicators",
+      "publisher": "PSA / DOH / FNRI related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official indicators on child nutrition (stunting, wasting, underweight), vaccination, maternal care, mortality and leading causes of death. Provides the outcome side of the health system.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "health",
+        "proposed:nutrition",
+        "proposed:vital"
+      ],
+      "_cadence_original": "periodic (NDHS, NNS, vital statistics)",
+      "_batch": [
+        "2026-08-14_Philippines-batch6.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Outcome-side health and nutrition node.",
+      "_referenced_by": [
+        "PhilHealth and DOH programme analysis",
+        "4Ps health conditions",
+        "Poverty and human-development monitoring"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "The node bundles NDHS, National Nutrition Survey and vital-statistics indicators from PSA/DOH/FNRI; the PSA NDHS page gives no survey years and no stated periodicity, and no single frequency covers the bundle."
+    },
+    {
+      "id": "ph-barmm",
+      "title": "BARMM (Bangsamoro Autonomous Region in Muslim Mindanao) economic and statistical profile",
+      "publisher": "PSA-BARMM / Bangsamoro government sources",
+      "country": "PH",
+      "jurisdiction_level": "provincial",
+      "region": "BARMM / Mindanao",
+      "description": "Regional accounts, growth and sectoral performance for the Bangsamoro Autonomous Region. Captures the distinctive political-economy and development trajectory of the autonomous region within Mindanao.",
+      "url": "https://rssobarmm.psa.gov.ph/statistics/regional-accounts",
+      "domains": [
+        "proposed:barmm",
+        "proposed:mindanao",
+        "proposed:autonomous"
+      ],
+      "_cadence_original": "annual GRDP + related",
+      "_batch": [
+        "2026-08-14_Philippines-batch6.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Key autonomous-region node. Distinct institutional and development path inside the Philippine archipelago.",
+      "_referenced_by": [
+        "Mindanao and national regional structure",
+        "Peace and development analysis",
+        "Poverty and social-protection targeting"
+      ],
+      "_jurisdiction_level_original": "autonomous region",
+      "last_updated": null,
+      "_url_evidence": "PSA RSSO-BARMM Regional Accounts (GRDP/GRDE) page showing the 2025 BARMM GRDP infographic and the release 'BARMM's economy expands by 5.0 percent in 2025'.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA-BARMM regional accounts page shows one GRDP release per year — 'BARMM's economy expands by 5.0 percent in 2025' dated 23 April 2026, with a 2025 GRDP infographic; the PSA 2026 calendar lists Regional Accounts with 1 release date (Annual).",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-fiscal-ops",
+      "title": "National Government fiscal operations and budget statistics",
+      "publisher": "Department of Budget and Management / Bureau of the Treasury",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official statistics on national government revenues, expenditures, financing and fiscal balance. Core public-finance series used in macro and debt analysis.",
+      "url": "https://www.treasury.gov.ph/?page_id=4221",
+      "domains": [
+        "public-finance"
+      ],
+      "_cadence_original": "monthly / annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary fiscal-operations node.",
+      "_referenced_by": [
+        "Debt statistics",
+        "National accounts and BSP assessments",
+        "Social-protection and infrastructure spending analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Bureau of the Treasury 'National Government Cash Operations' page with revenue, expenditure, financing, debt service and cash budget assessment tables back to 1986.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Bureau of the Treasury National Government Cash Operations Report is published monthly (latest posting July 2026 for June 2026 data; page last updated 23 July 2026) alongside annual aggregates back to 1986.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-gov-debt",
+      "title": "National Government outstanding debt statistics",
+      "publisher": "Bureau of the Treasury",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Outstanding domestic and external debt of the national government, with periodic updates on composition and ratios. High-visibility macro-fiscal indicator.",
+      "url": "https://www.treasury.gov.ph/?page_id=12407",
+      "domains": [
+        "public-finance",
+        "external-sector"
+      ],
+      "_cadence_original": "monthly",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core public-debt node.",
+      "_referenced_by": [
+        "Fiscal operations",
+        "BOP and reserves analysis",
+        "Debt-sustainability assessments"
+      ],
+      "_jurisdiction_level_original": "national",
+      "releases_per_year": 12,
+      "last_updated": null,
+      "_url_evidence": "Bureau of the Treasury 'National Government Debt' page with NG outstanding debt (monthly 1993-2025, annual 1986-2025) and NG debt indicators in Excel and PDF."
+    },
+    {
+      "id": "ph-manufacturing-aspbi",
+      "title": "Annual Survey of Philippine Business and Industry – Manufacturing",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Detailed structural statistics on manufacturing establishments, employment, revenue and expenses from the ASPBI. Complements the national-accounts manufacturing GVA series.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "industry",
+        "proposed:aspbi"
+      ],
+      "_cadence_original": "annual (survey cycle)",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Structural manufacturing densification node.",
+      "_referenced_by": [
+        "National accounts (manufacturing)",
+        "PEZA and industrial-policy analysis",
+        "Electronics and food-manufacturing discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The Annual Survey of Philippine Business and Industry is an annual designated statistical activity (2022 round conducted April 2023 with 2022 as reference period); manufacturing is one of its sector volumes.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-tourism",
+      "title": "Tourism statistics (arrivals, receipts, TDGVA)",
+      "publisher": "Department of Tourism / PSA",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "International visitor arrivals, tourism receipts and Tourism Direct Gross Value Added. Captures both foreign tourists and returning overseas Filipinos (balikbayans).",
+      "url": "https://psa.gov.ph/statistics/tourism",
+      "domains": [
+        "tourism",
+        "services",
+        "proposed:arrivals"
+      ],
+      "_cadence_original": "monthly arrivals + annual compilations",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core tourism statistical product. Canada appears among notable source markets.",
+      "_referenced_by": [
+        "National accounts (services)",
+        "External sector and employment analysis",
+        "Regional tourism development"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "PSA Philippine Tourism Satellite Account page reporting 2025 TDGVA of PhP 2.27 trillion, 8.1 percent of GDP, and tourism employment.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA tourism page shows the Philippine Tourism Satellite Account / TDGVA released once a year — 2023 data (18 Jun 2024), 2024 data (19 Jun 2025), 2025 data (28 May 2026); no monthly arrivals series is published here.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-financial-system",
+      "title": "Philippine financial system resources and structure",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Total resources of banks and non-bank financial institutions, with breakdowns by universal/commercial, thrift, digital, rural/cooperative banks and NBFIs. Provides the size and structure of the formal financial system.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "banking",
+        "proposed:financial-system",
+        "proposed:bsp"
+      ],
+      "_cadence_original": "periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core financial-system size and structure node.",
+      "_referenced_by": [
+        "BSP Financial Stability reports",
+        "Monetary and credit analysis",
+        "Inclusion and digital-banking discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BSP Advance Release Calendar lists 'Total Resources of the Philippine Financial System' with periodicity 'Monthly'.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-construction",
+      "title": "Construction statistics and GVA",
+      "publisher": "PSA / related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Construction-sector output, employment and related indicators. Important cyclical and investment-related series.",
+      "url": "https://psa.gov.ph/statistics/construction/pcs",
+      "domains": [
+        "construction",
+        "investment",
+        "industry"
+      ],
+      "_cadence_original": "quarterly / annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Construction densification of the industry cluster.",
+      "_referenced_by": [
+        "National accounts",
+        "GFCF and infrastructure analysis",
+        "Regional development"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "PSA 'Construction Statistics from Approved Building Permits' series landing page with the latest monthly release, Excel tables and technical notes.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA Construction Statistics from Approved Building Permits is monthly — May 2026 edition (20 Jul 2026), April 2026 (18 Jun 2026), each comparing May 2025r, April 2026r and May 2026p.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-gfcf",
+      "title": "Gross Fixed Capital Formation statistics",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Investment-side national-accounts series covering construction, durable equipment and other capital formation. Links fiscal, private investment and growth analysis.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "investment",
+        "proposed:gfcf",
+        "national-accounts"
+      ],
+      "_cadence_original": "quarterly / annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary investment/GFCF node.",
+      "_referenced_by": [
+        "National accounts",
+        "Construction and fiscal statistics",
+        "Growth and productivity analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Gross Fixed Capital Formation is the expenditure side of the National Accounts, whose release calendar has 4 quarterly dates (Jan/May/Aug/Nov) plus a revised annual national accounts release (08 Apr 2026).",
+      "releases_per_year": 5
+    },
+    {
+      "id": "ph-cpi-detail",
+      "title": "CPI by major commodity group and regional inflation",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Detailed CPI breakdowns (food, housing, transport, etc.) and regional inflation rates that complement the headline CPI series.",
+      "releases_per_year": 12,
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "inflation"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch7.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Price-detail densification.",
+      "_referenced_by": [
+        "Headline CPI and BSP inflation targeting",
+        "Poverty-line and real-income analysis",
+        "Food-security and rice-price discussions"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null
+    },
+    {
+      "id": "ph-digital-economy",
+      "title": "Philippine Digital Economy Satellite Account (PDESA)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official satellite account measuring the size and contribution of the digital economy (digital infrastructure, e-commerce, digital content/media, government digital services). Recent figures put digital GVA around 9–10 % of GDP and employment in the tens of millions.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "services",
+        "proposed:e-commerce"
+      ],
+      "_cadence_original": "annual",
+      "_batch": [
+        "2026-08-14_Philippines-batch8.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-value digital-economy measurement node. Complements the IT-BPM industry statistics.",
+      "_referenced_by": [
+        "National accounts",
+        "IT-BPM and ICT analysis",
+        "Employment and inclusion discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "releases_per_year": 1,
+      "last_updated": null
+    },
+    {
+      "id": "ph-ecommerce",
+      "title": "E-commerce component of the digital economy",
+      "publisher": "PSA (within PDESA)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "E-commerce share of digital-economy output and especially employment (largest employment component in recent PDESA releases).",
+      "url": "https://psa.gov.ph/statistics/digital-economy",
+      "domains": [
+        "proposed:e-commerce",
+        "services",
+        "labour"
+      ],
+      "_cadence_original": "aligned with PDESA",
+      "_batch": [
+        "2026-08-14_Philippines-batch8.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Employment-heavy digital sub-node.",
+      "_referenced_by": [
+        "Digital Economy Satellite Account",
+        "Retail and household expenditure analysis",
+        "MSME and inclusion policy"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "PSA Philippine Digital Economy Satellite Account page showing total E-commerce at 32.2 percent of digital economy GVA and 75.8 percent of digital economy employment in 2025.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "The Philippine Digital Economy Satellite Account, which carries the e-commerce component, is released once a year in late April — 2023 data (25 Apr 2024), 2024 data (29 Apr 2025), 2025 data (30 Apr 2026).",
+      "releases_per_year": 1
+    },
+    {
+      "id": "ph-external-debt",
+      "title": "External debt statistics",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Outstanding external debt (public and private), by creditor type and maturity. Complements the national-government debt series and the BOP/IIP.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "proposed:external-debt",
+        "public-finance",
+        "external-sector"
+      ],
+      "_cadence_original": "quarterly",
+      "_batch": [
+        "2026-08-14_Philippines-batch8.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "External-debt densification of the external-sector cluster.",
+      "_referenced_by": [
+        "BOP and Gross International Reserves",
+        "National government debt statistics",
+        "Debt-sustainability and vulnerability analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "releases_per_year": 4,
+      "last_updated": null
+    },
+    {
+      "id": "ph-monetary-aggregates",
+      "title": "Monetary aggregates and banking statistics",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Money supply, credit and related banking indicators that complement the financial-system resources series and feed monetary-policy analysis.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "monetary-policy",
+        "banking"
+      ],
+      "_cadence_original": "monthly / periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch8.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Monetary densification of the central-bank cluster.",
+      "_referenced_by": [
+        "BSP Monetary Policy Report",
+        "Financial-system resources",
+        "Inflation and growth analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "BSP Advance Release Calendar lists the Depository Corporations Survey (money supply/credit aggregates) with periodicity 'Monthly'.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "ph-iip",
+      "title": "International Investment Position",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Stock measure of external financial assets and liabilities. Complements the flow BOP and the external-debt series.",
+      "url": "https://www.bsp.gov.ph/",
+      "domains": [
+        "proposed:iip",
+        "external-sector",
+        "proposed:stocks"
+      ],
+      "_cadence_original": "quarterly",
+      "_batch": [
+        "2026-08-14_Philippines-batch8.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Stock-side external-accounts node.",
+      "_referenced_by": [
+        "BOP and external-debt statistics",
+        "Reserves and vulnerability analysis"
+      ],
+      "_jurisdiction_level_original": "national",
+      "releases_per_year": 4,
+      "last_updated": null
+    },
+    {
+      "id": "ph-ndc",
+      "title": "Nationally Determined Contribution (NDC) and climate-policy framework",
+      "publisher": "Government of the Philippines / Climate Change Commission related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Philippine NDC under the Paris Agreement, targeting substantial GHG reduction relative to business-as-usual. Continuously cited in energy, transport, agriculture and LULUCF policy discussions.",
+      "url": "https://unfccc.int/sites/default/files/NDC/2022-06/Philippines%20-%20NDC.pdf",
+      "domains": [
+        "environment",
+        "proposed:ndc"
+      ],
+      "_cadence_original": "null (updated periodically)",
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Core climate-policy frame node.",
+      "_referenced_by": [
+        "Energy mix and power statistics",
+        "Agriculture and forest/LULUCF analysis",
+        "International climate and finance discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "The Philippines' NDC as submitted to the UNFCCC, stating a 75 percent GHG emissions reduction and avoidance for 2020-2030 (2.71 percent unconditional, 72.29 percent conditional).",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The document is the Philippines' Nationally Determined Contribution communicated to the UNFCCC on 15 April 2021 covering 2020-2030 — a single submitted instrument under Decision 1/CP.21, not a periodic statistical release."
+    },
+    {
+      "id": "ph-ghg",
+      "title": "Greenhouse gas inventory and emissions statistics",
+      "publisher": "Climate Change Commission / DENR / related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "National GHG inventory results by sector (energy dominant; LULUCF as net sink). Provides the empirical base for NDC tracking.",
+      "url": "https://niccdies.climate.gov.ph/ghg-inventory",
+      "domains": [
+        "environment"
+      ],
+      "_cadence_original": "periodic inventory cycles",
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Emissions-side climate node.",
+      "_referenced_by": [
+        "NDC framework",
+        "Energy and transport analysis",
+        "Forest and LULUCF statistics"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Climate Change Commission NICCDIES GHG inventory page describing the Philippine GHG Inventory Management and Reporting System and the sectoral inventories (energy, IPPU, AFOLU, waste).",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "NICCDIES GHG inventory page lists national inventories for 2010 (completed 2019), 2015 and 2020 (completed 2023, published early 2024) — five-year inventory years, feeding the first Biennial Update Report.",
+      "releases_per_year": 0.2
+    },
+    {
+      "id": "ph-forest",
+      "title": "Forest cover and forestry sector statistics",
+      "publisher": "Department of Environment and Natural Resources (DENR) / PSA related",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Land classification, forest cover, production/protection forest, and related forestry production and management statistics. Forests are treated as a net carbon sink in the NDC.",
+      "url": "https://psa.gov.ph/content/philippines-open-and-closed-forest-cover-grew-29-percent-2020",
+      "domains": [
+        "proposed:forest",
+        "proposed:lulucf",
+        "environment"
+      ],
+      "_cadence_original": "periodic",
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core forest/LULUCF statistical node.",
+      "_referenced_by": [
+        "GHG inventory and NDC",
+        "Disaster and watershed analysis",
+        "Rural livelihood and indigenous-community discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Retrieved PSA release (20 Dec 2024, ref 2024-203) reporting Philippine forest cover from the Land Asset Accounts under the SEEA 2012 Central Framework: 6.91 million ha open plus closed forest in 2020 = 23.4% of land area, +2.9% on 2015; closed forest 2.22m ha (+9.3%), open forest 4.69m ha (+0.1%), built-up 1.03m ha (+20.6%), with regional contributions and links to five SDG forest indicators. DENR's forestry.denr.gov.ph still fails robots.txt with a TLS certificate-verification error on every path tried.",
+      "_url_route": "substitute official publisher (PSA land/forest accounts) after DENR FMB remained TLS/robots-blocked",
+      "_cadence_resolution": "one-off",
+      "_cadence_evidence": "The 20 December 2024 release (ref 2024-203) states it 'marks the PSA's first attempt to compile the Land Asset Accounts of the Philippines' — a one-time pilot study output with no announced repeat schedule."
+    },
+    {
+      "id": "ph-pjepa",
+      "title": "Philippines–Japan Economic Partnership Agreement (PJEPA)",
+      "publisher": "Governments of the Philippines and Japan",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Philippines–Japan",
+      "description": "Long-standing bilateral EPA with Japan (in force since 2008). Covers goods, services, investment and movement of natural persons; continuously relevant to electronics, automotive and labour flows.",
+      "url": "https://www.mofa.go.jp/policy/economy/fta/philippines.html",
+      "domains": [
+        "trade",
+        "proposed:japan"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Foundational bilateral EPA node with Japan.",
+      "_referenced_by": [
+        "Trade-partner statistics (Japan)",
+        "ASEAN and RCEP architecture",
+        "Investment and OFW analysis"
+      ],
+      "last_updated": null,
+      "_url_evidence": "Japan MOFA official page for the Japan-Philippines Economic Partnership Agreement with the 2006 agreement text, implementing procedures and entry-into-force notes."
+    },
+    {
+      "id": "ph-korea-fta",
+      "title": "Philippines–Korea Free Trade Agreement (PH-ROK FTA)",
+      "publisher": "Governments of the Philippines and Republic of Korea",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Philippines–Korea",
+      "description": "Bilateral FTA that entered into force end-2024. Provides deeper preferential access than existing ASEAN-Korea and RCEP schedules in priority products and includes economic-cooperation chapters.",
+      "url": "https://dfa.gov.ph/dfa-news/statements-and-advisoriesupdate/35974-dfa-statement-on-the-entry-into-force-of-the-free-trade-agreement-fta-between-the-philippines-and-the-republic-of-korea",
+      "domains": [
+        "trade",
+        "proposed:korea"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Recent bilateral FTA densification.",
+      "_referenced_by": [
+        "Trade-partner statistics (Korea)",
+        "RCEP and ASEAN-Korea frameworks",
+        "Electronics and industrial trade analysis"
+      ],
+      "last_updated": null,
+      "_url_evidence": "Retrieved the Philippine Department of Foreign Affairs statement (3 Jan 2025) confirming the Philippines-Republic of Korea Free Trade Agreement entered into force on 31 December 2024, and situating it within the Strategic Partnership elevated in October 2024. This is a Philippine government page on the PH-ROK FTA; fta.go.kr and mofa.go.kr remain unreachable and dti.gov.ph robots-disallowed, so the agreement text itself could not be retrieved from an official host.",
+      "_url_route": "alternate Philippine government publisher (dfa.gov.ph) after Korean government sites and DTI stayed blocked"
+    },
+    {
+      "id": "ph-efta",
+      "title": "Philippines–EFTA Free Trade Agreement",
+      "publisher": "Philippines and EFTA states",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Philippines–EFTA",
+      "description": "Bilateral FTA with the European Free Trade Association (Iceland, Liechtenstein, Norway, Switzerland), in force since 2018.",
+      "url": "https://www.efta.int/free-trade/free-trade-agreements/philippines",
+      "domains": [
+        "trade",
+        "proposed:efta"
+      ],
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "European bilateral FTA node.",
+      "_referenced_by": [
+        "Trade-partner and FTA-network analysis",
+        "European market access discussions"
+      ],
+      "last_updated": null,
+      "_url_evidence": "EFTA official page for the EFTA-Philippines FTA, confirming entry into force 1 June 2018 for the Philippines, Norway, Liechtenstein and Switzerland."
+    },
+    {
+      "id": "ph-pop-projections",
+      "title": "Population projections",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official population projections (recently to 2035, with national total approaching ~124 million). Provides the forward demographic frame for planning, labour and social-protection analysis.",
+      "url": "https://psa.gov.ph/",
+      "domains": [
+        "population",
+        "proposed:projections"
+      ],
+      "_cadence_original": "periodic projection rounds",
+      "_batch": [
+        "2026-08-14_Philippines-batch9.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Forward-looking demographic node.",
+      "_referenced_by": [
+        "Census of Population",
+        "Labour, education and social-protection planning",
+        "Regional growth and urbanisation analysis"
+      ],
+      "_jurisdiction_level_original": "national / regional",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "PSA projection rounds are census-based and issued once per census: 1995 CBPP (08 Dec 2006), 2000 CBPP (04 Apr 2006), 2010 CBPP (09 Aug 2016), 2015 CBPP (04 Oct 2019), 2020 CBPP (13 Jan 2026) — roughly every five years.",
+      "releases_per_year": 0.2
+    }
+  ],
+  "dependencies": []
+}
