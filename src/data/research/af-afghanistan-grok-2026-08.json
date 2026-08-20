@@ -1,0 +1,440 @@
+{
+  "meta": {
+    "source": "Grok - Brics+israel and singapore/consolidated/af-afghanistan.json",
+    "minted": "2026-08-20",
+    "note": "Live-wins dedup against existing corpus; geography- and institution-as-a-node scaffolding stripped; see notes/mint-2026-08-20.md"
+  },
+  "reports": [
+    {
+      "id": "af-population",
+      "title": "Population census and estimates",
+      "publisher": "NSIA / UN-aligned",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Population estimates. Population is approximately 43–45 million; the age structure is very young and rapid population growth continues to pressure per-capita outcomes.",
+      "url": "https://www.unfpa.org/data/world-population/AF",
+      "domains": [
+        "population"
+      ],
+      "_cadence_original": "estimates",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core demographic node. Population ~43–45 million.",
+      "_referenced_by": [
+        "National accounts and per-capita series",
+        "Humanitarian and social indicators",
+        "Labour and poverty analysis"
+      ],
+      "_jurisdiction_level_original": "national / provincial",
+      "last_updated": null,
+      "_url_evidence": "UNFPA World Population Dashboard country page for Afghanistan; fetched page shows total population 43,800,000 (2025) and the 0-14 / 15-64 / 65+ age structure, matching the item's 43-45 million young-age-structure description. NSIA's own site is unreachable via WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "UNFPA World Population Dashboard for Afghanistan states the figures 'come from UNFPA and fellow UN agencies, and are updated annually'.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "af-national-accounts",
+      "title": "National Accounts of Afghanistan (GDP)",
+      "publisher": "NSIA / related",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Official and compiled national accounts (GDP). The economy contracted sharply after 2021; recent fiscal years show modest real growth but per-capita outcomes remain under pressure from population growth and structural constraints.",
+      "url": null,
+      "domains": [
+        "national-accounts"
+      ],
+      "_cadence_original": "annual / fiscal-year",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Primary macroeconomic output node under constrained conditions.",
+      "_referenced_by": [
+        "Da Afghanistan Bank assessments",
+        "Humanitarian and poverty analysis",
+        "International monitoring"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null
+    },
+    {
+      "id": "af-cpi",
+      "title": "Consumer Price Index and inflation statistics",
+      "publisher": "NSIA / Da Afghanistan Bank related",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "CPI and inflation rates. Price dynamics have moderated relative to the immediate post-2021 shock but remain sensitive to exchange-rate, import and supply conditions.",
+      "url": "https://dab.gov.af/Inflation-Reports-(Monthly)",
+      "domains": [
+        "inflation"
+      ],
+      "_cadence_original": "monthly / periodic",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core high-frequency price node.",
+      "_referenced_by": [
+        "Da Afghanistan Bank monetary analysis",
+        "Poverty and real-income analysis",
+        "National accounts deflators"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Da Afghanistan Bank's Monthly Inflation Report series page, fetched and confirmed to list 19 named monthly inflation reports (Jan 2020 - Jul 2021); note the series stopped in July 2021 and NSIA's CPI bulletin site is unreachable via WebFetch.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Page is titled 'Inflation Reports (Monthly)' and lists one report per calendar month from January 2020 to July 2021. DORMANT: the series stops at July 2021 with nothing published since, though DAB's homepage still carries an inflation figure ('Last updated: 22 July 2026').",
+      "releases_per_year": 12
+    },
+    {
+      "id": "af-dab",
+      "title": "Da Afghanistan Bank institutional and reporting core",
+      "publisher": "Da Afghanistan Bank",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Central bank responsible for monetary policy, foreign-exchange management and key macro-financial statistics. Publishes exchange rates, inflation references and limited monetary series.",
+      "url": "https://www.dab.gov.af/",
+      "domains": [
+        "monetary-policy"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch1.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Central-bank institutional counterpart to NSIA.",
+      "_referenced_by": [
+        "Exchange-rate and monetary aggregates",
+        "Inflation analysis",
+        "Financial stability assessments"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "Da Afghanistan Bank homepage is a live institutional portal - a rolling exchange-rate table ('Last updated: 18 August 2026'), an inflation figure, news items and a periodical magazine - rather than a single publication with a discrete release cycle.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
+    },
+    {
+      "id": "af-bop",
+      "title": "Balance of Payments and external accounts",
+      "publisher": "Da Afghanistan Bank / related",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "BOP and external-sector statistics where available. Remittances, limited formal trade, humanitarian inflows and large informal/unrecorded flows are structural features under current conditions.",
+      "url": "https://dab.gov.af/External-Sector-Statistics1",
+      "domains": [
+        "external-sector"
+      ],
+      "_cadence_original": "periodic / limited",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch1.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "External-accounts node under constrained formal data and large informal flows.",
+      "_referenced_by": [
+        "DAB monetary and external analysis",
+        "National accounts",
+        "Humanitarian and trade discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "Da Afghanistan Bank External Sector Statistics page, fetched and confirmed to host 'Balance of Payments Transactions (BPM6)' and 'Net International Investment Position' files for Afghanistan; data stops at 2021.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DAB External Sector Statistics page lists Balance of Payments (BPM6) and Net International Investment Position with quarterly labelling ('IIP summary Q1 2021'). DORMANT: the latest edition on the page is Q1 2021, so the quarterly cadence recorded is the one it had when running.",
+      "releases_per_year": 4
+    },
+    {
+      "id": "af-agriculture",
+      "title": "Agriculture production statistics",
+      "publisher": "Ministry of Agriculture, Irrigation and Livestock / NSIA related",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Statistics on crop and livestock production. Agriculture is the backbone of rural livelihoods and food security; wheat is the dominant staple. Production is highly sensitive to drought, water availability and input constraints.",
+      "url": "https://www.mail.gov.af/dr/reports",
+      "domains": [
+        "agriculture",
+        "proposed:food"
+      ],
+      "_cadence_original": "annual / seasonal",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core primary-sector production node under constrained conditions.",
+      "_referenced_by": [
+        "National accounts (agriculture origin)",
+        "Food-security and humanitarian analysis",
+        "Poverty and rural discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "MAIL reports index listing 'گزارش سالانه زراعتی' (Annual Agriculture Report) editions with per-province crop area, yield and production tables, plus separate wheat and rice production reports. Found by Grok; independently re-fetched and confirmed by Claude 2026-08-18 (index shows 1403 and 1404 annual reports, wheat 1404, rice 1404).",
+      "_url_route": "grok:on-site-search",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "MAIL reports page's core series is the annual agricultural report ('گزارش سالانه زراعتی'), with 1403 and 1404 editions listed; the page also carries semi-annual price reports and a seasonal crop forecast but states no frequency of its own. Most recent items dated 1405/4/27.",
+      "releases_per_year": 1
+    },
+    {
+      "id": "af-wheat",
+      "title": "Wheat production and food-gap statistics",
+      "publisher": "MAIL / related",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Focused statistics on wheat production and the structural wheat gap. Domestic production typically falls short of national demand (around 4.5–5 million tonnes vs demand near 7 million tonnes), making imports and humanitarian food assistance critical.",
+      "url": "https://www.fao.org/giews/countrybrief/country.jsp?code=AFG",
+      "domains": [
+        "proposed:wheat",
+        "agriculture",
+        "poverty"
+      ],
+      "_cadence_original": "seasonal",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Foundational food-security crop node. Structural production deficit is a defining feature.",
+      "_referenced_by": [
+        "Agriculture production statistics",
+        "Humanitarian needs and food-insecurity analysis",
+        "Trade and import discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "FAO GIEWS Country Brief for Afghanistan (12 Jan 2026), fetched and confirmed to state 2025 wheat production of 4.5 million tonnes and cereal import requirements of 3.7 million tonnes, matching the item's wheat-gap framing.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "FAO GIEWS Country Brief for Afghanistan, current reference date 12-January-2026; the linked AFG_Archive.pdf lists ~18 dated editions over 2016-2025, typically one to two per year.",
+      "releases_per_year": 2
+    },
+    {
+      "id": "af-humanitarian",
+      "title": "Humanitarian needs and acute food insecurity statistics",
+      "publisher": "OCHA / Humanitarian Needs and Response Plan / IPC-aligned",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Statistics on people in need of humanitarian assistance and acute food insecurity. In 2026 an estimated 21.9 million people (roughly 45% of the population) require humanitarian assistance; acute food insecurity affects over 17 million, with several million in Emergency (IPC Phase 4).",
+      "url": "https://www.unocha.org/afghanistan",
+      "domains": [
+        "proposed:humanitarian",
+        "proposed:food-insecurity",
+        "poverty"
+      ],
+      "_cadence_original": "annual / continuous",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch2.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Highest-centrality social and humanitarian node under current conditions.",
+      "_referenced_by": [
+        "Poverty and living-standards analysis",
+        "Agriculture and wheat statistics",
+        "Population and displacement discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "OCHA Afghanistan country page, fetched and confirmed to give the 2026 Humanitarian Needs and Response Plan figures: 21.9 million people in need (~45% of population) and 17.5 million targeted; humanitarianaction.info blocks WebFetch with 403.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "OCHA Afghanistan page lists consecutive month-labelled situation reports/humanitarian updates (September 2025, October 2025) plus Security Council briefings; the month-by-month editions indicate a monthly update cycle.",
+      "releases_per_year": 12
+    },
+    {
+      "id": "af-exchange-rate",
+      "title": "Exchange-rate and afghani statistics",
+      "publisher": "Da Afghanistan Bank",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Official exchange rates for the afghani against major currencies published by Da Afghanistan Bank. The rate is a central price signal for imports, remittances and domestic prices under limited formal capital flows.",
+      "url": "https://www.dab.gov.af/",
+      "domains": [
+        "proposed:exchange-rate",
+        "proposed:afghani",
+        "proposed:fx"
+      ],
+      "_cadence_original": "continuous / daily",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Critical price and external-management node.",
+      "_referenced_by": [
+        "DAB monetary policy",
+        "CPI and import-price analysis",
+        "Remittances and BOP discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "DAB homepage publishes the official afghani rate against USD, EUR, GBP, CHF, INR, PKR, IRR, CNY, AED and SAR, stamped 'Last updated: 18 August 2026' - a fresh rate each working day.",
+      "releases_per_year": 250
+    },
+    {
+      "id": "af-border-mobility",
+      "title": "Border mobility and returnee statistics",
+      "publisher": "Derived from IOM and related monitoring sources",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Statistics on cross-border inflows and outflows, especially with Iran and Pakistan. Large-scale returns and ongoing mobility place pressure on host communities, services and livelihoods; formal trade and informal flows interact with these movements.",
+      "url": "https://dtm.iom.int/afghanistan",
+      "domains": [
+        "proposed:border",
+        "proposed:mobility",
+        "proposed:returnees"
+      ],
+      "_cadence_original": "continuous / quarterly",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch3.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-centrality mobility and external densification.",
+      "_referenced_by": [
+        "Humanitarian needs analysis",
+        "Remittances and external accounts",
+        "Poverty and labour discussions"
+      ],
+      "_jurisdiction_level_original": "national / border",
+      "last_updated": null,
+      "_url_evidence": "IOM Displacement Tracking Matrix Afghanistan page, fetched and confirmed to publish Flow Monitoring Snapshots on mobility at Afghanistan's border points with Iran and Pakistan, plus returnee and baseline area assessment datasets.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "IOM DTM Afghanistan's lead product is the Flow Monitoring Snapshot covering seven-day periods ('16-22 June 2024', '9-15 June 2024'), i.e. weekly; Baseline Mobility Assessments and Community-Based Needs Assessments run in slower rounds alongside. Most recent product listed June 2024.",
+      "releases_per_year": 52
+    },
+    {
+      "id": "af-education",
+      "title": "Education enrolment and girls’ secondary exclusion statistics",
+      "publisher": "Derived from UNICEF and education monitoring sources",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Statistics and framing of education access. Afghanistan remains the only country where secondary and higher education are effectively closed to girls and women; more than 2.6 million girls have been denied secondary education since 2021. The ban is a major human-capital and long-term growth constraint.",
+      "url": "https://www.unicef.org/afghanistan/education",
+      "domains": [
+        "education",
+        "proposed:girls",
+        "proposed:exclusion",
+        "proposed:human-capital"
+      ],
+      "_cadence_original": "continuous",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch4.json"
+      ],
+      "_shape": "recurring-citation",
+      "_notes": "Highest-centrality education node under current restrictions. Directly linked to the women’s exclusion node.",
+      "_referenced_by": [
+        "Women’s economic exclusion framing",
+        "Poverty and humanitarian analysis",
+        "Long-term development and GDP discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "UNICEF Afghanistan education programme page, fetched and confirmed to report enrolment statistics (3.7 million children out of school, 60% of them girls) and education-restriction impacts.",
+      "_cadence_resolution": "unknown",
+      "_cadence_evidence": "UNICEF Afghanistan education page is a static programme description: no publication date, no last-updated stamp, no dated editions and no stated release frequency."
+    },
+    {
+      "id": "af-health",
+      "title": "Life expectancy and health outcome statistics",
+      "publisher": "WHO / related",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Life expectancy at birth and related health indicators. Life expectancy remains among the lowest in the region; gains earlier in the century have been partially reversed. Continuously referenced in humanitarian and human-development analysis.",
+      "url": "https://data.who.int/countries/004",
+      "domains": [
+        "health",
+        "proposed:life-expectancy"
+      ],
+      "_cadence_original": "periodic",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core health-outcome densification under constrained service delivery.",
+      "_referenced_by": [
+        "Population and humanitarian analysis",
+        "Poverty and social discussions",
+        "Women’s access-to-services framing"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "WHO country data page for Afghanistan, fetched and confirmed to publish 'Life expectancy at birth' and healthy life expectancy (HALE) by sex for Afghanistan, plus mortality and health-workforce indicators.",
+      "_cadence_resolution": "continuous-database",
+      "_cadence_evidence": "data.who.int country overview is a live interactive data portal with per-indicator downloads; indicators carry their own data years (2018-2023) and the only date shown is an access date ('Accessed on 14 August 2026'), not a release cycle.",
+      "releases_per_year": 250,
+      "cadence_note": "Continuously updated database/portal with no discrete editions. The number is the renderer convention decided 2026-08-18 (HANDOFF section 7) and applied 2026-08-19: a nominal releases_per_year so that absence keeps meaning 'one-off instrument' only - 250 encodes business-day updating (the live corpus's daily-FX convention), 365 genuinely all-days monitoring. It is a statement of continuous flow for the pulse/beam system, not a claim of counted editions - the observed reality is in _cadence_evidence."
+    },
+    {
+      "id": "af-trade",
+      "title": "Merchandise trade statistics",
+      "publisher": "Derived from World Bank and trade monitoring sources",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Statistics on merchandise exports and imports. Exports are small and concentrated in food products and textiles; India, Iran, Uzbekistan and China are notable destinations. Imports of essential goods dominate; the trade deficit is structural.",
+      "url": "https://thedocs.worldbank.org/en/doc/e8eeba3d8d46fccafe273e30dff8f595-0310012026/original/Spring-ADU-May-26-2026-Final.pdf",
+      "domains": [
+        "trade"
+      ],
+      "_cadence_original": "monthly / continuous",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch4.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "Core formal trade densification under constrained conditions.",
+      "_referenced_by": [
+        "BOP and external accounts",
+        "Remittances and exchange-rate analysis",
+        "Border mobility discussions"
+      ],
+      "_jurisdiction_level_original": "national",
+      "last_updated": null,
+      "_url_evidence": "World Bank Afghanistan Development Update (May 2026), fetched and confirmed to report merchandise exports at 10.0% of GDP, merchandise imports at 65% of GDP (US$13.2bn in FY2025) and trade-corridor dependence on Pakistan, Iran and India.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "Document is the World Bank 'Afghanistan Development Update', Spring 2026 edition, and repeatedly cites the 'Fall 2025 ADU' - confirming spring and fall editions, i.e. twice yearly.",
+      "releases_per_year": 2
+    },
+    {
+      "id": "af-drought",
+      "title": "Drought and water-stress statistics",
+      "publisher": "Derived from climate monitoring and humanitarian sources",
+      "country": "AF",
+      "jurisdiction_level": "federal",
+      "region": "Afghanistan",
+      "description": "Statistics and monitoring on drought conditions, snowpack, soil moisture and water availability. Recurrent drought is a primary driver of food insecurity and rural livelihood stress; western and southern provinces are frequently the most affected.",
+      "url": "https://fews.net/afghanistan",
+      "domains": [
+        "proposed:drought",
+        "environment"
+      ],
+      "_cadence_original": "continuous / seasonal",
+      "_batch": [
+        "2026-08-15_Afghanistan-batch5.json"
+      ],
+      "_shape": "own-cadence",
+      "_notes": "High-centrality environmental constraint node linking agriculture and humanitarian needs.",
+      "_referenced_by": [
+        "Agriculture and wheat production statistics",
+        "Humanitarian needs and food-insecurity analysis",
+        "Poverty and rural discussions"
+      ],
+      "_jurisdiction_level_original": "national / provincial",
+      "last_updated": null,
+      "_url_evidence": "FEWS NET Afghanistan country page, fetched and confirmed to publish Food Security Outlooks and agroclimatology/Seasonal Monitor reporting on drought, rainfall, soil moisture and multi-year drought recovery.",
+      "_cadence_resolution": "recurring",
+      "_cadence_evidence": "FEWS NET Afghanistan page is labelled 'Monthly analysis' and states FEWS NET produces IPC-compatible acute food insecurity classifications monthly; the listing shows the rotating Food Security Outlook (June 2026-January 2027), Food Security Outlook Update (April-September 2026) and Key Message Updates (March and May 2026) that together fill each month.",
+      "releases_per_year": 12
+    }
+  ],
+  "dependencies": []
+}
