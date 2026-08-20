@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import type { SavedView } from '../lib/savedViews'
 import { MENU_BAR_HEIGHT } from '../lib/uiTheme'
 
 /**
@@ -67,6 +68,12 @@ export function MenuBar({
   onHideAll,
   onHowTo,
   onHelp,
+  views,
+  openOnLoad,
+  onSaveView,
+  onApplyView,
+  onDeleteView,
+  onSetOpenOnLoad,
 }: {
   panels: PanelVisibility
   onToggle: (key: PanelKey) => void
@@ -74,8 +81,15 @@ export function MenuBar({
   onHideAll: () => void
   onHowTo: () => void
   onHelp: () => void
+  views: SavedView[]
+  openOnLoad: string | null
+  onSaveView: (name: string) => void
+  onApplyView: (id: string) => void
+  onDeleteView: (id: string) => void
+  onSetOpenOnLoad: (id: string | null) => void
 }) {
-  const [open, setOpen] = useState<null | 'panels' | 'help'>(null)
+  const [open, setOpen] = useState<null | 'panels' | 'help' | 'views'>(null)
+  const [draftName, setDraftName] = useState('')
   const barRef = useRef<HTMLDivElement | null>(null)
 
   /**
@@ -164,6 +178,157 @@ export function MenuBar({
         <MenuSeparator />
         <MenuItem label="Show all" onClick={onShowAll} />
         <MenuItem label="Hide all" onClick={onHideAll} />
+      </MenuButton>
+
+      {/*
+        Views. Third menu rather than a section inside Panels: a panel toggle
+        is a momentary preference, a saved view is a document, and putting a
+        destructive Delete in the same list as a checkbox invites the wrong
+        click.
+      */}
+      <MenuButton
+        label="Views"
+        badge={views.length ? String(views.length) : undefined}
+        isOpen={open === 'views'}
+        onClick={() => setOpen((o) => (o === 'views' ? null : 'views'))}
+      >
+        {/*
+          An inline field, not `window.prompt`. A native prompt blocks the
+          whole page — including the render loop behind it — and this project
+          has a standing note that modal browser dialogs wedge automation and
+          anything else waiting on a frame.
+        */}
+        <div style={{ display: 'flex', gap: 5, padding: '4px 6px 8px' }}>
+          <input
+            value={draftName}
+            onChange={(e) => setDraftName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && draftName.trim()) {
+                onSaveView(draftName.trim())
+                setDraftName('')
+              }
+              // Escape must not reach the window handler, which would close
+              // the menu out from under a half-typed name.
+              if (e.key === 'Escape') e.stopPropagation()
+            }}
+            placeholder="Name this view…"
+            style={{
+              flex: 1,
+              minWidth: 0,
+              padding: '5px 7px',
+              fontFamily: 'inherit',
+              fontSize: 11,
+              color: 'var(--ink-strong)',
+              background: 'var(--btn-bg)',
+              border: '1px solid var(--line-faint)',
+              borderRadius: 5,
+              outline: 'none',
+            }}
+          />
+          <button
+            type="button"
+            disabled={!draftName.trim()}
+            onClick={() => {
+              onSaveView(draftName.trim())
+              setDraftName('')
+            }}
+            style={{
+              padding: '5px 10px',
+              fontFamily: 'inherit',
+              fontSize: 10.5,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: draftName.trim() ? 'var(--ink-strong)' : 'var(--ink-dim)',
+              background: draftName.trim() ? 'var(--accent-active)' : 'transparent',
+              border: '1px solid var(--line-faint)',
+              borderRadius: 5,
+              cursor: draftName.trim() ? 'pointer' : 'default',
+            }}
+          >
+            Save
+          </button>
+        </div>
+
+        {views.length === 0 ? (
+          <div style={{ padding: '4px 8px 8px', fontSize: 10.5, color: 'var(--ink-dim)', lineHeight: 1.5 }}>
+            Saves the tier, every slider, the filters, the traced node and which
+            panels are open.
+          </div>
+        ) : (
+          <>
+            <MenuSeparator />
+            {views.map((v) => (
+              <div key={v.id} style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => onApplyView(v.id)}
+                  title={v.savedAt ? `Saved ${v.savedAt}` : undefined}
+                  style={{
+                    flex: 1,
+                    minWidth: 0,
+                    textAlign: 'left',
+                    padding: '6px 8px',
+                    fontFamily: 'inherit',
+                    fontSize: 11,
+                    color: 'var(--ink-label)',
+                    background: 'transparent',
+                    border: 'none',
+                    borderRadius: 5,
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {v.name}
+                </button>
+                {/*
+                  The star is the feature Thomas actually asked for — "annoying
+                  to always open to the basic graph". Clicking it again clears
+                  it, so there is always a way back to the plain graph.
+                */}
+                <button
+                  type="button"
+                  aria-pressed={openOnLoad === v.id}
+                  title={
+                    openOnLoad === v.id
+                      ? 'Opens on load — click to stop'
+                      : 'Open this view on load'
+                  }
+                  onClick={() => onSetOpenOnLoad(openOnLoad === v.id ? null : v.id)}
+                  style={{
+                    padding: '4px 6px',
+                    fontFamily: 'inherit',
+                    fontSize: 11,
+                    color: openOnLoad === v.id ? 'var(--ink-gold)' : 'var(--ink-dim)',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {openOnLoad === v.id ? '★' : '☆'}
+                </button>
+                <button
+                  type="button"
+                  title={`Delete "${v.name}"`}
+                  onClick={() => onDeleteView(v.id)}
+                  style={{
+                    padding: '4px 8px 4px 4px',
+                    fontFamily: 'inherit',
+                    fontSize: 12,
+                    color: 'var(--ink-dim)',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </>
+        )}
       </MenuButton>
 
       <MenuButton

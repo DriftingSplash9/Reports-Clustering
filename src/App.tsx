@@ -25,6 +25,13 @@ import { PanelShell } from './components/PanelShell'
 import { MenuBar, PANELS_HIDDEN, type PanelKey, type PanelVisibility } from './components/MenuBar'
 import { HelpCard } from './components/HelpCard'
 import { LoadingCurtain } from './components/LoadingCurtain'
+import {
+  loadViews,
+  persistViews,
+  newViewId,
+  type SavedView,
+  type SavedViewStore,
+} from './lib/savedViews'
 
 /**
  * Versioned like the onboarding key: if the panel set ever changes shape in a
@@ -32,6 +39,25 @@ import { LoadingCurtain } from './components/LoadingCurtain'
  * writing migration code for a preference worth two clicks to restore.
  */
 const PANELS_KEY = 'rig.panels.v1'
+
+/**
+ * The starred view, read ONCE at module load.
+ *
+ * Module scope rather than a hook, because every `useState` initialiser below
+ * needs it and hooks run in order — a `useMemo` inside the component would be
+ * evaluated after the state it has to seed. Reading it here means the starred
+ * view is the graph's FIRST state, so the expensive thing on this page (a
+ * 400-tick force warmup over 1,250 nodes) happens once, for the right graph,
+ * instead of once for the default and again for the saved one.
+ *
+ * A module-level read also means starring a view mid-session does not
+ * teleport you into it: this value is fixed until the next reload, which is
+ * exactly what "open on load" means.
+ */
+const STARTUP_VIEW = (() => {
+  const s = loadViews()
+  return s.openOnLoad ? (s.views.find((v) => v.id === s.openOnLoad) ?? null) : null
+})()
 import { Flag } from './components/Flag'
 import {
   BLOOM_THRESHOLD_MAX,
@@ -147,13 +173,13 @@ export default function App() {
    * a few lines up — and reusing it here would collide two different meanings
    * of "how much is currently visible" under one name.
    */
-  const [drilldown, setDrilldown] = useState<Drilldown>(DEFAULT_DRILLDOWN)
+  const [drilldown, setDrilldown] = useState<Drilldown>(STARTUP_VIEW?.drilldown ?? DEFAULT_DRILLDOWN)
 
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(STARTUP_VIEW?.selectedId ?? null)
   const [bounds, setBounds] = useState<GraphBounds | null>(null)
-  const [view, setView] = useState<ViewSettings>(DEFAULT_VIEW)
-  const [filter, setFilter] = useState<FilterState>(NO_FILTER)
+  const [view, setView] = useState<ViewSettings>(STARTUP_VIEW?.view ?? DEFAULT_VIEW)
+  const [filter, setFilter] = useState<FilterState>(STARTUP_VIEW?.filter ?? NO_FILTER)
   const [flyTo, setFlyTo] = useState<FlyTo | null>(null)
   /**
    * Incremented to ask the scene for the opening camera back. A counter rather
@@ -634,6 +660,10 @@ export default function App() {
    */
   const [panels, setPanels] = useState<PanelVisibility>(() => {
     try {
+      // A starred view carries its own panel set and outranks the standalone
+      // key — otherwise loading "my working setup" would restore its sliders
+      // and filters but leave whatever panels happened to be open last time.
+      if (STARTUP_VIEW) return STARTUP_VIEW.panels
       const raw = window.localStorage.getItem(PANELS_KEY)
       if (!raw) return PANELS_HIDDEN
       const saved = JSON.parse(raw) as Partial<PanelVisibility>
@@ -652,6 +682,66 @@ export default function App() {
     }
   }, [panels])
   const togglePanel = (key: PanelKey) => setPanels((p) => ({ ...p, [key]: !p[key] }))
+
+  /**
+   * Saved views — Phase 4 §7.1.
+   *
+   * Read once, lazily, so the startup view is applied in the SAME render that
+   * mounts the graph. Applying it in an effect instead would lay the default
+   * graph out first and then rebuild it, which is both a wasted warmup and a
+   * visible lurch — and at 1,250 nodes the warmup is the expensive thing on
+   * the whole page. See `savedViews.ts` for why `openOnLoad` is the point of
+   * the feature rather than a garnish.
+   */
+  const [viewStore, setViewStore] = useState<SavedViewStore>(() => loadViews())
+  const applyView = (v: SavedView) => {
+    setDrilldown(v.drilldown)
+    setView(v.view)
+    setFilter(v.filter)
+    setSelectedId(v.selectedId)
+    setPanels(v.panels)
+    // Not `setResetSignal` — that snaps the camera to the reset pose, and a
+    // saved view already implies a refit through the tier/spread path. Firing
+    // both would fight.
+  }
+
+  const saveCurrentView = (name: string) => {
+    const v: SavedView = {
+      id: newViewId(),
+      name,
+      savedAt: new Date().toISOString().slice(0, 10),
+      drilldown,
+      view,
+      filter,
+      selectedId,
+      panels,
+    }
+    setViewStore((s) => {
+      const next = { ...s, views: [...s.views, v] }
+      persistViews(next)
+      return next
+    })
+  }
+
+  const deleteView = (id: string) => {
+    setViewStore((s) => {
+      const next = {
+        ...s,
+        views: s.views.filter((v) => v.id !== id),
+        openOnLoad: s.openOnLoad === id ? null : s.openOnLoad,
+      }
+      persistViews(next)
+      return next
+    })
+  }
+
+  const setOpenOnLoad = (id: string | null) => {
+    setViewStore((s) => {
+      const next = { ...s, openOnLoad: id }
+      persistViews(next)
+      return next
+    })
+  }
 
   /**
    * Lifted once the renderer says the layout has stopped moving and been
@@ -841,6 +931,15 @@ export default function App() {
         onHideAll={() => setPanels(PANELS_HIDDEN)}
         onHowTo={() => setHowToRequest((n) => n + 1)}
         onHelp={() => setHelpOpen(true)}
+        views={viewStore.views}
+        openOnLoad={viewStore.openOnLoad}
+        onSaveView={saveCurrentView}
+        onApplyView={(id) => {
+          const v = viewStore.views.find((x) => x.id === id)
+          if (v) applyView(v)
+        }}
+        onDeleteView={deleteView}
+        onSetOpenOnLoad={setOpenOnLoad}
       />
 
       {panels.view && (
