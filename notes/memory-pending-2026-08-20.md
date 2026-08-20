@@ -24,6 +24,54 @@ Also: Thomas tried right-drag panning and the low end of the zoom slider
 yes/no either — worth one direct check before anything (e.g. item 9,
 fly-through navigation) gets built on top of it.
 
+## Addendum — layout path-dependence FIXED, later 2026-08-20
+
+HANDOFF §5 item 6 (the top open agent-owed bug) is done. Write this as its
+own memory entry, e.g. `layout-path-dependence-fixed-2026-08-20.md`, `type:
+project`:
+
+**What it was**: cold-starting at spread 10000% settled to a core radius of
+240,508; ramping the same slider up to 10000% from a live session settled at
+17,217 — factor of fourteen, identical final settings. Almost certainly
+Thomas's "sometimes the cluster is a ball, sometimes it is oblong".
+
+**Root cause**: `InfluenceGraph.tsx`'s `forceGraph` memo (deps `[graph,
+spreadApplied]`) seeded every node from `lastPositions` on ANY rebuild. That
+seeding exists for drilldown continuity (a tier toggle should keep nodes
+where they were) but fired identically on a pure spread change, where `graph`
+itself hadn't changed — so a spread change only ever nudged an
+already-relaxed cloud under the new force parameters, never re-relaxed one
+from scratch the way a cold load does.
+
+**Fix**: a new `prevGraphForLayout` ref remembers the `graph` reference the
+memo last ran with. When only `spreadApplied` changed (`graph` reference
+identical), every seed path is skipped and the node falls through unseeded —
+same as first load. Drilldown/tier/filter changes are untouched.
+
+**Verified, not just built** — this is the part worth remembering as a
+method, not just a result: built a temporary headless Playwright harness
+(same recipe as `notes/camera-fit-measurement-2026-08-19.md` — `vite
+preview` + Chromium with `--use-angle=swiftshader
+--enable-unsafe-swiftshader`, sandbox copy only, deleted before shipping the
+fix), pre-seeded `localStorage['rig.views.v1']` with a saved view at tier 4
+(Everything) and the target spread so a cold load and a scripted slider drag
+could both be driven headlessly, and added a temporary
+`console.log('__FITDEBUG__', ...)` in `measureFit` to read the settled core
+radius back out. **Ran the harness against the UNFIXED code FIRST** to
+confirm it actually reproduces the bug before trusting it (cold 113,651 vs
+ramped 20,034, ratio 5.67 — same qualitative bug as the original 14×
+measurement, different exact numbers because of settle-window differences),
+**then** against the fixed code (cold 113,650 vs ramped 113,307, ratio
+1.003 — no meaningful path-dependence left). `npm run validate` (44/44
+checks, 1250 reports/1079 dependencies) and `npm run build` (tsc + vite)
+both clean before and after the change, on the real corpus, not a synthetic
+one.
+
+**Not done**: re-deriving `nodeScaleFor`'s cap (currently 2000) now that
+cold and ramped agree — it was already comfortably above both numbers so
+nothing broke, but it was tuned to clear the worst of a bug that no longer
+exists in that form.
+
 **Also still owed to memory, and still not written:** entries for the project
 audit, visual Phases 2 / 3.5 / 4 in their own right, and the staged-corpus
 cadence fix.

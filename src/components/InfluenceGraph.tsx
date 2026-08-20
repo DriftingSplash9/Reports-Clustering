@@ -357,15 +357,30 @@ function nodeScaleFor(cloudRadius: number): number {
   // tier (asks for 781.7), 283,666 at States (asks for **921.9**). 2000 is
   // 2.2× the worst of those.
   //
-  // **Cold start and ramped-up are not the same layout.** Loading straight
-  // into 10000% gives a core radius of 240,508; dragging the slider up to
-  // 10000% from 1000% in a live session settles at 17,217 — a factor of
-  // fourteen for identical settings. The force layout keeps the history of
-  // how it got there. That path-dependence is almost certainly what Thomas
-  // means by "sometimes the cluster is a ball, sometimes it is oblong"; it is
-  // recorded here rather than fixed because the fix is a question about the
-  // simulation (re-seed on spread change?) and not about this function.
-  // Whatever the path, the cap must clear the worst of them.
+  // **Cold start and ramped-up used to not be the same layout — fixed
+  // 2026-08-20.** Loading straight into 10000% gave a core radius of
+  // 240,508; dragging the slider up to 10000% from 1000% in a live session
+  // settled at 17,217 — a factor of fourteen for identical settings. That
+  // path-dependence was almost certainly what Thomas meant by "sometimes the
+  // cluster is a ball, sometimes it is oblong". The cause: the `forceGraph`
+  // memo's node-seeding block (see `spreadOnlyChanged` in that memo, below)
+  // reused every node's last position on ANY rebuild, including a pure spread
+  // change — so a ramped change only ever nudged an already-relaxed cloud
+  // instead of re-relaxing one from scratch the way a cold load does.
+  // Skipping the seed step when `graph` itself hasn't changed makes a spread
+  // change re-run the same near-origin randomisation a fresh load gets.
+  // **Re-measured after the fix, 2026-08-20**, with a temporary headless
+  // Playwright harness (sandbox copy only — never merged, same recipe as the
+  // 2026-08-19 fit-measurement notes): at the Everything tier, 958 framed
+  // nodes, cold-starting at spread 10000% now settles to a core radius of
+  // ~113,650; ramping the same slider up to 10000% from 1000% in a live
+  // session settles to ~113,307 — a ratio of 1.003, against 5.67 measured the
+  // same way on the unfixed code (that run's own cold figure, ~113,651, is
+  // the same order as the 240,508 recorded above under different settle
+  // timing and tier state — the QUALITATIVE bug, not this exact number, is
+  // what carried over). Effectively no path-dependence left. If the two paths
+  // ever disagree by more than noise again, look at `spreadOnlyChanged` in
+  // the `forceGraph` memo first, not this cap.
   return Math.min(2000, Math.max(1, wanted))
 }
 
@@ -653,6 +668,16 @@ export default function InfluenceGraph({
    */
   const lastPositions = useRef(new Map<string, { x: number; y: number; z: number }>())
   /**
+   * The `graph` reference the layout memo last ran with — so it can tell "a
+   * real graph change (drilldown, tier, filter)" apart from "only
+   * `spreadApplied` changed". See the seeding block in the memo below for why
+   * that distinction is the fix for the reported path-dependence bug
+   * ("sometimes the cluster is a ball, sometimes it is oblong" — also
+   * recorded in `nodeScaleFor`'s comment, which this fixes rather than merely
+   * compensates for).
+   */
+  const prevGraphForLayout = useRef<typeof graph | null>(null)
+  /**
    * Whether the scene has had its first (rough) fit and is mounted.
    * Renamed nothing, changed meaning: this used to flip true only after a
    * blocking 400-tick warmup, so "mounted" and "settled" were the same
@@ -887,6 +912,23 @@ export default function InfluenceGraph({
     // Anything none of the three can place (first load) is left unpositioned
     // and d3-force-3d randomises it near the origin, exactly as before.
     //
+    // **None of the three apply when only `spreadApplied` changed.** This memo
+    // has two triggers — `graph` changing (a drilldown toggle, a tier change,
+    // a filter narrowing the corpus) and `spreadApplied` changing (the
+    // slider) — and before this fix, a spread change fell through the exact
+    // same seeding as a drilldown toggle: every node resumed from wherever it
+    // had settled under the OLD spread, so the new force parameters only ever
+    // got to nudge an already-relaxed cloud rather than re-relax one from
+    // scratch. That is the fourteen-fold "sometimes the cluster is a ball,
+    // sometimes it is oblong" bug measured in `nodeScaleFor`'s comment below:
+    // cold-starting at spread 10000% settles to a core radius of 240,508;
+    // ramping the same slider up to 10000% in a live session settled at
+    // 17,217 for identical final settings, because the ramped run never got
+    // the from-scratch relaxation a cold load gets. Skipping every seed below
+    // when the graph itself hasn't changed makes a spread change behave
+    // exactly like a fresh load at that spread — the fix `nodeScaleFor`
+    // flagged as a candidate without yet making.
+    //
     // Isolated real reports (no edges in either direction) are left out of
     // the 3D scene entirely — see `IsolatedShelf` in App.tsx, which renders
     // them instead as a fixed panel in screen space. They used to be placed
@@ -896,9 +938,14 @@ export default function InfluenceGraph({
     // like everything else in the scene, which is not what "set aside from
     // the graph" was supposed to look like, and read as distracting rather
     // than as the deliberate exception it was meant to be.
+    const spreadOnlyChanged = prevGraphForLayout.current === graph
+    prevGraphForLayout.current = graph
+
     const nodes = graph.nodes
       .filter((n) => isOrbId(n.id) || n.in_degree > 0 || n.out_degree > 0)
       .map((n) => {
+        if (spreadOnlyChanged) return { ...n }
+
         const seed = lastPositions.current.get(n.id)
         if (seed) return { ...n, x: seed.x, y: seed.y, z: seed.z }
 

@@ -102,15 +102,17 @@ Taiwan research round. It is DATA, not bookkeeping; merge per its own `_rule`.
 
 **Project memory is DOWN again** — `project_memory_write` accepted writes early
 on 2026-08-19 and refused them for the rest of that day and all of 2026-08-20
-("not available in this session"). **Re-confirmed still down later on
-2026-08-20**: `project_memory_read` on a specific file returned "Project
-memory is not available in this session" (the index shown at session start is
-a cached snapshot, not a live read — don't mistake it for memory being back).
-Two consequences:
+("not available in this session"). **Re-confirmed still down twice more,
+later on 2026-08-20**: `project_memory_read` on a specific file returned
+"Project memory is not available in this session" both times, once right
+before the path-dependence fix and once right after (the index shown at
+session start is a cached snapshot, not a live read — don't mistake it for
+memory being back). Two consequences:
 - The memory entry this session owes is parked at
-  **`notes/memory-pending-2026-08-20.md`**, which now also carries a second,
-  smaller addendum (the flicker-check result) — a session with working memory
-  should paste both in and delete the file.
+  **`notes/memory-pending-2026-08-20.md`**, which now also carries a second
+  and third addendum (the flicker-check result, and the path-dependence fix
+  + its verified measurements) — a session with working memory should paste
+  all of it in and delete the file.
 - ⚠️ The existing memory entry `camera-fit-density-risk-2026-08-19` is **WRONG**
   and could not be corrected: it says the camera sits at ~2.8 × p95 (it is
   **5.675 ×**) and predicts a halo of edgeless nodes after the mint
@@ -212,15 +214,35 @@ Sorted by owner, ordered by priority within each.
 
 ### [Agent] — next build rounds, in order
 
-6. **Fix the layout's path-dependence — the top open bug.** Cold-starting at
-   spread 10000% settles to a core radius of **240,508**; ramping the slider up
-   to 10000% in a live session settles at **17,217**. Factor of fourteen,
-   identical settings. Thomas sees this as *"sometimes the cluster is a ball,
-   sometimes it is oblong"* after a reset. The force layout keeps the history
-   of how it got there. The candidate fix is re-seeding node positions when
-   `spread` changes rather than letting the simulation relax from where it was;
-   whatever is chosen, **every cap and threshold must clear the worst path**
-   (which is why `nodeScaleFor`'s cap is 2000 and not 40).
+6. **FIXED 2026-08-20 — the layout's path-dependence.** Was the top open bug:
+   cold-starting at spread 10000% settled to a core radius of **240,508**;
+   ramping the slider up to 10000% in a live session settled at **17,217** —
+   factor of fourteen, identical settings. Thomas's *"sometimes the cluster is
+   a ball, sometimes it is oblong"*.
+   **Root cause**: the `forceGraph` memo (`InfluenceGraph.tsx`, deps
+   `[graph, spreadApplied]`) seeded every node from `lastPositions` on ANY
+   rebuild — including a pure spread change, where `graph` itself hadn't
+   changed. That seeding is genuinely needed for drilldown continuity (a tier
+   toggle should keep nodes where they were), but applying it to a spread-only
+   change meant the new force parameters only ever nudged an already-relaxed
+   cloud, never re-relaxed one from scratch the way a cold load does.
+   **Fix**: a new `prevGraphForLayout` ref tracks the `graph` reference the
+   memo last ran with; a pure spread change (`graph` unchanged) now skips
+   every seed path and falls through to an unseeded node, exactly like first
+   load. Drilldown/tier/filter changes are untouched — they still seed from
+   `lastPositions` as before.
+   **Verified**, not just built: a temporary headless Playwright harness
+   (same recipe as `notes/camera-fit-measurement-2026-08-19.md`, sandbox copy
+   only, never merged) reproduced the bug on the unfixed code first —
+   cold 113,651 vs ramped 20,034, ratio 5.67 — then re-ran on the fixed code:
+   cold 113,650 vs ramped 113,307, **ratio 1.003**. `npm run validate` (44/44,
+   1250/1079) and `npm run build` (tsc + vite) both clean before and after.
+   Full detail in `nodeScaleFor`'s comment in `InfluenceGraph.tsx` and the
+   `forceGraph` memo's seeding block (search `spreadOnlyChanged`).
+   **Not re-derived**: whether `nodeScaleFor`'s cap of 2000 can now come down,
+   now that the worst-path cold-start number and the ramped number agree —
+   worth a look next time that cap is touched, but not done here since it
+   wasn't the thing that was broken.
 7. **A legend.** Highest-value missing feature by a distance. There are **six**
    live encodings — colour = country family, fill darkness = government tier,
    hollow = one-off instrument, size = authority, line colour = the source's
