@@ -1,9 +1,28 @@
 # Pending project-memory entry — 2026-08-20
 
 **Project memory (`project_memory_write`) was unavailable for all of
-2026-08-20.** This file is the entry that should have been written. A session
-with working memory should write it as `phase4-complete-and-render-bugs.md`,
-add the index line at the bottom to `MEMORY.md`, and then delete this file.
+2026-08-20, re-confirmed unavailable later the same day.** This file is the
+entry that should have been written. A session with working memory should
+write it as `phase4-complete-and-render-bugs.md`, add the index line at the
+bottom to `MEMORY.md`, and then delete this file.
+
+## Addendum — flicker check result, later 2026-08-20
+
+Thomas ran the one-minute bloom-flicker test from
+`notes/flicker-tests-2026-08-19.md` (drag the glow slider to 0 while the
+flicker is happening). His words: *"i think the flicker is gone."* Treat this
+as a soft, unrepeated confirmation — not the same confidence level as the
+measured numbers elsewhere in this project. Fold into HANDOFF.md §5 item 1:
+bloom is now the leading/working diagnosis, next step is the bloom-pass fix
+(raise the threshold / drop `mipmapBlur` / pin the bloom buffer to a fixed
+resolution), and **if that fix doesn't actually stop the flicker, re-open
+this diagnosis rather than assume it's settled** — do not let it calcify into
+an unverified fact the way the git-status claim did (see `git-no-touch.md`).
+
+Also: Thomas tried right-drag panning and the low end of the zoom slider
+(HANDOFF item 2) with no complaint reported, but didn't give an explicit
+yes/no either — worth one direct check before anything (e.g. item 9,
+fly-through navigation) gets built on top of it.
 
 **Also still owed to memory, and still not written:** entries for the project
 audit, visual Phases 2 / 3.5 / 4 in their own right, and the staged-corpus

@@ -102,10 +102,15 @@ Taiwan research round. It is DATA, not bookkeeping; merge per its own `_rule`.
 
 **Project memory is DOWN again** — `project_memory_write` accepted writes early
 on 2026-08-19 and refused them for the rest of that day and all of 2026-08-20
-("not available in this session"). Two consequences:
+("not available in this session"). **Re-confirmed still down later on
+2026-08-20**: `project_memory_read` on a specific file returned "Project
+memory is not available in this session" (the index shown at session start is
+a cached snapshot, not a live read — don't mistake it for memory being back).
+Two consequences:
 - The memory entry this session owes is parked at
-  **`notes/memory-pending-2026-08-20.md`** — a session with working memory
-  should paste it in and delete the file.
+  **`notes/memory-pending-2026-08-20.md`**, which now also carries a second,
+  smaller addendum (the flicker-check result) — a session with working memory
+  should paste both in and delete the file.
 - ⚠️ The existing memory entry `camera-fit-density-risk-2026-08-19` is **WRONG**
   and could not be corrected: it says the camera sits at ~2.8 × p95 (it is
   **5.675 ×**) and predicts a halo of edgeless nodes after the mint
@@ -166,17 +171,20 @@ Sorted by owner, ordered by priority within each.
 
 ### [Thomas] — only you can
 
-1. **The bloom flicker check — one minute.** Get the flicker happening, drag
-   the glow slider to 0. Stops → it is bloom (fix is in the bloom pass:
-   threshold, `mipmapBlur`, or a pinned buffer resolution). Continues → all
-   four suspects are exhausted and the next step is a two-second screen
-   recording, which would show whether nodes *vanish* or *shimmer*. This is the
-   last open item from the flicker round and it gates nothing else, but every
-   new visual gets blamed on it until it is closed.
-2. **Try right-drag panning and the low end of the zoom slider.** Both already
-   work and neither is documented. They may already be most of the
-   "navigate inside the cluster" feature — worth knowing before anything is
-   built for it.
+1. **DONE (tentatively) 2026-08-20 — the bloom flicker check.** Thomas dragged
+   the glow slider to 0 while the flicker was happening: *"i think the flicker
+   is gone."* Read as a soft confirmation, not a hard one — he did not say
+   "definitely" and the test was not repeated. Treat bloom as the leading
+   cause and try the bloom-pass fix (raise the threshold, drop `mipmapBlur`,
+   or pin the bloom buffer to a fixed resolution) next; **if the fix doesn't
+   actually kill the flicker, re-open this** rather than assume the diagnosis
+   was solid — this project has a standing scar from carrying forward
+   claims nobody re-checked (§3).
+2. **Tried 2026-08-20 — right-drag panning and the low end of the zoom
+   slider.** Thomas tried it (no complaint reported), so treat as probably
+   working, but this wasn't an explicit yes/no confirmation — worth a quick
+   "does this feel like navigation" check before building the fly-through
+   feature (item 9) on top of it.
 3. **Empty the recycle bins.** `_to_delete/` at the root now also holds four
    `_verify*-src.tgz` / `_fitmeasure-*.tgz` transport tarballs from this
    session's headless verification; all are throwaway and logged in
