@@ -172,6 +172,25 @@ A fresh agent should assume ALL of the following exists and works; each landed
   `evidence_url` as a primary-source link. Right = what a node is, left = why
   an edge exists; the two coexist. No back-reference is stored — App
   re-filters disclosed edges by `edgeKey` on demand.
+- **Cluster spread and geo-affinity rebased (2026-08-19, late).** Spread now
+  runs **200%–1000%, opening at 200%** (was 25%–375% opening at 100%); the old
+  default is below the new floor and unreachable on purpose — Thomas: *"far too
+  dense at 100%... best to start at the current 200%... from there as a minimum
+  up to a 1000x max."* Geo-affinity ceiling **1.5 → 5** and its default **0 →
+  1.5**, because he had been running pinned at the old ceiling. Constants in
+  `lib/view.ts` (`DEFAULT_VIEW`) and `components/ViewControls.tsx` (`SLIDERS`),
+  both with the reasoning at the site. Measured before shipping: spread really
+  does decrowd at today's node count — median screen-space gap between nearest
+  neighbours, as a fraction of the two nodes' drawn radii, goes **0.33 at 200%
+  → 0.84 at 1000%** (2.6×) and overlapping nearest-neighbour pairs fall **86% →
+  63%**, while drawn node radius holds at ~4.1px. So the in-code warning that
+  spread "never delivered this on its own at 375%" no longer applies — it
+  predates `LINK_LENGTH_SCALE = 2` and the node-size change. Camera stays safe
+  across the whole range (max/p95 1.49–1.55 against a 5.675 threshold). Geo at
+  5× settles with no NaN and no oscillation, and visibly segregates the
+  continental inks. `tsc`, `npm run validate` (44 checks, 1250/1079) and
+  `npm run build` all clean afterwards.
+
 - **Edges and pulses have SET SIZES and split shades** (Thomas, end of day:
   "too noisy trying to equate the thicknesses... go with set sizes and keep it
   simpler"; "pulses can be brighter and the edges lighter shades").
