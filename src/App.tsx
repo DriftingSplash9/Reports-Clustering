@@ -87,8 +87,10 @@ import {
   TIER_DESCRIPTION,
   TIER_LABEL,
   buildDisclosedGraph,
+  isCountryOrbId,
   isOrbId,
   resolveId,
+  toggleCountryOpen,
   toggleDrilldown,
   type DisclosedDependency,
   type Drilldown,
@@ -117,6 +119,7 @@ import {
 import { THEME_CSS } from './lib/uiTheme'
 import { DOMAINS, type Domain } from './lib/types'
 import type {
+  Country,
   ReferencePeriod,
   ScoredReport,
   TerminalReason,
@@ -175,6 +178,19 @@ export default function App() {
    */
   const [drilldown, setDrilldown] = useState<Drilldown>(STARTUP_VIEW?.drilldown ?? DEFAULT_DRILLDOWN)
 
+  /**
+   * Which countries have been individually expanded past their per-country
+   * fold — see hierarchy.ts's 2026-08-20 note on `resolveId`. Independent of
+   * `drilldown`: depth still answers "how far down, globally"; this answers
+   * "which of the countries current depth reveals do I actually want to see
+   * as individual reports, rather than as one folded orb". Reset to empty on
+   * a full Reset, same as `drilldown`; left untouched by a tier button press,
+   * same as the filter — advancing depth is additive, not a fresh start.
+   */
+  const [openedCountries, setOpenedCountries] = useState<ReadonlySet<Country>>(
+    () => new Set(STARTUP_VIEW?.openedCountries ?? []),
+  )
+
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(STARTUP_VIEW?.selectedId ?? null)
   const [bounds, setBounds] = useState<GraphBounds | null>(null)
@@ -210,8 +226,8 @@ export default function App() {
    * axis of "what's on screen" alongside filtering, not a replacement for it.
    */
   const disclosedGraph = useMemo(
-    () => buildDisclosedGraph(graph, drilldown),
-    [graph, drilldown],
+    () => buildDisclosedGraph(graph, drilldown, openedCountries),
+    [graph, drilldown, openedCountries],
   )
 
   /**
@@ -221,10 +237,52 @@ export default function App() {
    * amount of work.
    */
   const predicate = useMemo(() => compile(filter), [filter])
-  const visible = useMemo(
-    () => (isFiltering(filter) ? applyFilter(disclosedGraph, predicate) : null),
-    [disclosedGraph, filter, predicate],
+
+  /**
+   * Isolate mode's own adjacency — 2026-08-20, Thomas: *"if i want to show
+   * just Israel and international connections to and from it I have no way
+   * to do so."* Built over the UNFILTERED disclosed graph (`visible: null`)
+   * deliberately, not the scope-filtered one `focusIndex` below uses: the
+   * whole point is a chain that reaches whatever it actually connects to —
+   * Israel's real edges run to a Paraguay-tagged MERCOSUR–Israel agreement
+   * and to assorted international standards, and a scope filter isolated to
+   * one colour family would silently prune exactly the cross-border
+   * connections this is for. Kept as its own memo rather than reusing
+   * `focusIndex` for that reason: the two answer different questions ("what
+   * does this rest on among what I've chosen to see" vs "what does this
+   * actually rest on, full stop") and must not collapse into one.
+   */
+  const unfilteredFocusIndex = useMemo(
+    () => buildFocusIndex(disclosedGraph, null),
+    [disclosedGraph],
   )
+  const isolateFocus = useMemo(
+    () =>
+      view.isolateFocus && selectedId
+        ? computeFocus(unfilteredFocusIndex, selectedId, {
+            builtFrom: view.focusBuiltFrom,
+            feedsInto: view.focusFeedsInto,
+          })
+        : null,
+    [unfilteredFocusIndex, selectedId, view.isolateFocus, view.focusBuiltFrom, view.focusFeedsInto],
+  )
+
+  const visible = useMemo(() => {
+    // Isolate wins outright over the scope/domain filter rather than
+    // combining with it — "just Israel and its connections" means exactly
+    // that chain, not that chain further narrowed by whatever family was
+    // isolated a minute earlier. Turn Isolate off (or clear the selection)
+    // to get the ordinary filter back.
+    if (isolateFocus) {
+      return {
+        nodes: isolateFocus.nodes,
+        edges: isolateFocus.edges,
+        hiddenNodes: disclosedGraph.nodes.length - isolateFocus.nodes.size,
+        hiddenEdges: disclosedGraph.edges.length - isolateFocus.edges.size,
+      }
+    }
+    return isFiltering(filter) ? applyFilter(disclosedGraph, predicate) : null
+  }, [isolateFocus, disclosedGraph, filter, predicate])
 
   /**
    * What the tier bar reports: **real reports, orbs excluded, after the
@@ -465,11 +523,11 @@ export default function App() {
    */
   const handleChoose = useCallback(
     (report: ScoredReport) => {
-      const id = resolveId(drilldown, report)
+      const id = resolveId(drilldown, report, openedCountries)
       setSelectedId(id)
       setFlyTo((f) => ({ id, nonce: (f?.nonce ?? 0) + 1 }))
     },
-    [drilldown],
+    [drilldown, openedCountries],
   )
 
   /**
@@ -488,11 +546,21 @@ export default function App() {
   }, [])
 
   /**
-   * Double-click on the scene: an orb steps up a tier, a real node does
-   * nothing. See `toggleDrilldown` in hierarchy.ts for why a real node no
-   * longer folds the view back.
+   * Double-click on the scene: a family orb steps up a tier, a country orb
+   * expands just that country, a real node does nothing. See
+   * `toggleDrilldown` and `toggleCountryOpen` in hierarchy.ts.
+   *
+   * Checked as `isCountryOrbId` first, deliberately not folded into
+   * `toggleDrilldown` itself — a country orb's id also satisfies the broader
+   * `isOrbId`, so if this checked family-vs-not it would advance the global
+   * tier on a country double-click too, dumping every OTHER unopened
+   * country's next tier onto the screen as a side effect of opening one.
    */
   const handleToggleNode = useCallback((id: string) => {
+    if (isCountryOrbId(id)) {
+      setOpenedCountries((prev) => toggleCountryOpen(prev, id))
+      return
+    }
     setDrilldown((d) => toggleDrilldown(d, id))
   }, [])
 
@@ -540,6 +608,12 @@ export default function App() {
     // `resetSignal` bumps the camera, which is exactly the two-things-at-once
     // that surfaced the tickFrame race `useLayoutEffect` closes.
     setDrilldown(DEFAULT_DRILLDOWN)
+    // Same reasoning, same unconditional-of-clearFilter treatment, as
+    // `drilldown` two lines up — country expansion is navigation state, not
+    // a filter. Referentially stable when already empty, for the same reason
+    // the drilldown reset is: no need to force `disclosedGraph` to rebuild
+    // over a no-op.
+    setOpenedCountries((prev) => (prev.size === 0 ? prev : new Set()))
     if (clearFilter) setFilter(NO_FILTER)
   }, [])
 
@@ -696,6 +770,7 @@ export default function App() {
   const [viewStore, setViewStore] = useState<SavedViewStore>(() => loadViews())
   const applyView = (v: SavedView) => {
     setDrilldown(v.drilldown)
+    setOpenedCountries(new Set(v.openedCountries ?? []))
     setView(v.view)
     setFilter(v.filter)
     setSelectedId(v.selectedId)
@@ -710,6 +785,7 @@ export default function App() {
       id: newViewId(),
       name,
       savedAt: new Date().toISOString().slice(0, 10),
+      openedCountries: [...openedCountries],
       drilldown,
       view,
       filter,

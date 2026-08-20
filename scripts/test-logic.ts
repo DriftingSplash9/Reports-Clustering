@@ -13,12 +13,13 @@
  * so they stay instant and cannot be broken by a research slice.
  */
 import { calendarEvents, cadenceBand, describeWindow, horizonWindow, isRealDate, nextRelease } from '../src/lib/schedule'
-import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, isOrbId, orbId, resolveId, tierOf, toggleDrilldown } from '../src/lib/hierarchy'
+import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, countryFromOrbId, countryOrbId, isCountryOrbId, isFamilyOrbId, isOrbId, orbId, resolveId, tierOf, toggleCountryOpen, toggleDrilldown } from '../src/lib/hierarchy'
 import { NO_FILTER, applyFilter, compile, isFiltering, isolateFirstToggle } from '../src/lib/filter'
 import { buildFocusIndex, computeFocus } from '../src/lib/selection'
 import { buildGraph, describeRate, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
 import { search } from '../src/lib/search'
 import { affinityScore } from '../src/lib/geoAffinity'
+import { galaxyForce, type GalaxyNode } from '../src/lib/galaxyForce'
 import type { Dependency, Report } from '../src/lib/types'
 
 let failures = 0
@@ -72,9 +73,18 @@ ok(horizonWindow('week', '2026-08-12').to === '2026-08-19', 'horizonWindow: a we
 
 // --------------------------------------------------------------- hierarchy --
 ok(tierOf('international') === 1 && tierOf('federal') === 2 && tierOf('provincial') === 3 && tierOf('municipal') === 4, 'tierOf: the four rungs')
-ok(toggleDrilldown(1, orbId('CA')) === 2 && toggleDrilldown(TIER_COUNT, orbId('CA')) === TIER_COUNT, 'toggleDrilldown: orb opens a tier, caps at the deepest')
+ok(toggleDrilldown(1, orbId('CA')) === 2 && toggleDrilldown(TIER_COUNT, orbId('CA')) === TIER_COUNT, 'toggleDrilldown: a family orb opens a tier, caps at the deepest')
 ok(toggleDrilldown(3, 'statcan-cpi') === 3, 'toggleDrilldown: a real node folds NOTHING (the deleted-every-national-report bug)')
+ok(toggleDrilldown(2, countryOrbId('CA')) === 2, "toggleDrilldown: a country orb does NOT also advance the tier — opening one country must not dump every OTHER country's next tier onto the screen")
 ok(isOrbId(orbId('EU')) && !isOrbId('eu-something'), 'orb ids namespaced')
+ok(isCountryOrbId(countryOrbId('CA')) && !isCountryOrbId(orbId('CA')) && !isFamilyOrbId(countryOrbId('CA')), 'family and country orb ids are namespaced apart, not just both "an orb"')
+ok(countryFromOrbId(countryOrbId('MX')) === 'MX', 'countryOrbId / countryFromOrbId round-trip')
+{
+  const opened = toggleCountryOpen(new Set(), countryOrbId('CA'))
+  ok(opened.has('CA') && opened.size === 1, 'toggleCountryOpen: opens the clicked country')
+  ok(toggleCountryOpen(opened, 'statcan-cpi') === opened, 'toggleCountryOpen: a real node id is a no-op (same reference back)')
+  ok(toggleCountryOpen(opened, orbId('CA')) === opened, 'toggleCountryOpen: a family orb id is a no-op too')
+}
 {
   // Two families, two tiers; an edge inside a family must vanish (self-loop),
   // one across families must survive remapped to the orbs.
@@ -91,9 +101,31 @@ ok(isOrbId(orbId('EU')) && !isOrbId('eu-something'), 'orb ids namespaced')
   const d1 = buildDisclosedGraph(g, 1)
   ok(d1.nodes.every((n) => isOrbId(n.id)) && d1.nodes.length === 2, 'disclosed@1: everything folded into two family orbs')
   ok(d1.edges.length === 1 && isOrbId(d1.edges[0].source_report_id), 'disclosed@1: within-family edge dropped as self-loop, cross-family edge remapped')
-  ok(resolveId(1, reports[0]) === orbId('CA') && resolveId(2, reports[0]) === 'ca-fed', 'resolveId: folded vs open')
-  const d4 = buildDisclosedGraph(g, 4)
-  ok(d4.nodes.length === 3 && d4.edges.length === 2, 'disclosed@4: everything real again')
+  ok(resolveId(1, reports[0]) === orbId('CA'), 'resolveId: tier not open at all still folds to the family orb, same as before the country fold existed')
+
+  // Tier 2 open, nobody expanded yet: this is the 2026-08-20 fix itself.
+  // Before it, every report at an open tier showed as itself — fine at a
+  // couple dozen countries, but 139 countries turned that into the "95% of
+  // nodes crowded in there" complaint. Now an open-but-unexpanded tier folds
+  // by country instead of showing real nodes.
+  const d2 = buildDisclosedGraph(g, 2)
+  ok(d2.nodes.length === 3, 'disclosed@2, nobody opened: ca-mun still folds to its family orb (its own tier is not open yet); ca-fed and us-fed each fold to their own country orb (open tier, country not expanded)')
+  ok(resolveId(2, reports[0]) === countryOrbId('CA'), 'resolveId: tier open but country not expanded folds to the COUNTRY orb, not the real id')
+
+  // Opening CA reveals just ca-fed — us-fed, still unopened, stays folded.
+  // This is the per-branch behaviour Thomas explicitly declined on
+  // 2026-08-12 for FAMILIES and just as explicitly asked for, for
+  // COUNTRIES, on 2026-08-20 once the corpus made a single global "Nations"
+  // rung unnavigable.
+  const d2ca = buildDisclosedGraph(g, 2, new Set(['CA']))
+  ok(d2ca.nodes.some((n) => n.id === 'ca-fed') && d2ca.nodes.some((n) => n.id === countryOrbId('US')), 'disclosed@2, CA opened: ca-fed is real; us-fed stays folded because opening one country must not open any other')
+  ok(resolveId(2, reports[0], new Set(['CA'])) === 'ca-fed', 'resolveId: tier open AND country opened resolves to the real id')
+
+  // The old "open the deepest tier and get every real report back" guarantee
+  // still holds — it just now also requires every country to be opened,
+  // which is the whole point.
+  const d4 = buildDisclosedGraph(g, 4, new Set(['CA', 'US']))
+  ok(d4.nodes.length === 3 && d4.edges.length === 2, 'disclosed@4, every country opened: everything real again')
 }
 ok(DEFAULT_DRILLDOWN === 1, 'default drilldown is the top tier')
 
@@ -140,6 +172,36 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   const only = computeFocus(buildFocusIndex(g), 'a', { builtFrom: false, feedsInto: false })
   ok(only.nodes.size === 1 && only.nodes.has('a'), 'computeFocus: both cones off leaves the selection alone in the light')
 }
+{
+  // The exact motivating case for App.tsx's `isolateFocus` (2026-08-20,
+  // Thomas: "show just Israel and international connections to and from
+  // it"): an Israel-family report cites a Paraguay-family one (the real
+  // corpus has this — a MERCOSUR-Israel trade agreement). A scope filter
+  // isolated to Israel's family would, correctly for a FILTER, drop that
+  // edge — both endpoints must be visible, and Paraguay is not. Isolate is
+  // built differently on purpose: it walks `buildFocusIndex(graph, null)`,
+  // the UNFILTERED index, so the cross-family edge survives. This pins that
+  // difference so nobody "fixes" isolateFocus into reusing the filtered
+  // index and quietly reintroduces the bug it exists to avoid.
+  const reports: Report[] = [
+    { id: 'il-report', title: 'Israel report', publisher: 'p', country: 'IL', jurisdiction_level: 'federal', region: 'Israel', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'py-mercosur-israel', title: 'MERCOSUR-Israel', publisher: 'p', country: 'PY', jurisdiction_level: 'international', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+  ]
+  const deps: Dependency[] = [
+    { source_report_id: 'il-report', target_report_id: 'py-mercosur-israel', relationship_type: 'cites', basis: 't' },
+  ]
+  const g = buildGraph(reports, deps)
+
+  // A scope filter isolated to IL's family drops the cross-border edge —
+  // correct FILTER behaviour, and the reason isolateFocus can't just reuse it.
+  const ilOnly = applyFilter(g, compile({ ...NO_FILTER, scopes: ['ASIA:federal'] }))
+  ok(!ilOnly.nodes.has('py-mercosur-israel'), 'applyFilter: a family-scoped filter drops the cross-border report, as filters should')
+
+  // isolateFocus's own approach — unfiltered index — keeps it.
+  const unfilteredIndex = buildFocusIndex(g, null)
+  const isolated = computeFocus(unfilteredIndex, 'il-report', { builtFrom: true, feedsInto: true })
+  ok(isolated.nodes.has('py-mercosur-israel'), 'isolateFocus model: walking the UNFILTERED index reaches the cross-border report the scope filter would have dropped')
+}
 
 // ------------------------------------------------------------------- graph --
 ok(describeRate(252) === 'every business day' && describeRate(0.05) === 'about every 20 years', 'describeRate: extremes phrased as facts')
@@ -183,6 +245,69 @@ ok(isDocumented({}) && !isDocumented({ evidence: 'implied' }), 'isDocumented: ab
 ok(affinityScore('CA', 'US') > 0 && affinityScore('CA', 'US') === affinityScore('US', 'CA'), 'affinityScore: shared blocs attract, symmetric')
 ok(affinityScore('MA', 'DZ') < 0, 'affinityScore: the one documented conflict pair repels')
 ok(affinityScore('CA', 'INT') === 0 && affinityScore('CA', 'CA') === 0, 'affinityScore: stateless and self are zero')
+
+// ------------------------------------------------------------- galaxyForce --
+{
+  // BR and AR share the SA colour family (both extended into it 2026-08-20,
+  // see palette.ts); AU is its own single-country family. Two BR nodes and
+  // two AR nodes start on opposite sides of the origin — same test shape as
+  // the file-level note's "countries visibly clumping inside their family's
+  // region" claim — plus one distant AU node that has no partner and no
+  // shared family with either. Running the force repeatedly should pull
+  // BR/AR toward a shared region (family pull) while each tightens toward
+  // its own country's centroid (the stronger, inner pull) — and AU, alone
+  // in its own family with nothing to average against, is left untouched by
+  // the family term (a lone member's "centroid" is itself).
+  const mk = (_id: string, country: string, x: number, y: number, z: number, fx?: number): GalaxyNode => ({
+    x, y, z, country, ...(fx !== undefined ? { fx } : {}),
+  })
+  const nodes: GalaxyNode[] = [
+    mk('br1', 'BR', -50, 0, 0),
+    mk('br2', 'BR', -40, 5, 0),
+    mk('ar1', 'AR', 40, 0, 0),
+    mk('ar2', 'AR', 50, -5, 0),
+    mk('au1', 'AU', 500, 500, 500),
+  ]
+  const strength = { current: 1 }
+  const force = galaxyForce(strength)
+  force.initialize(nodes as unknown[])
+  const startBrArGap = Math.hypot(nodes[0].x - nodes[2].x, nodes[0].y - nodes[2].y, nodes[0].z - nodes[2].z)
+  // Mimics d3-force-3d's own tick loop, which this force never sees directly
+  // in production (three-forcegraph drives it) — apply velocity to position,
+  // then decay velocity the way `d3VelocityDecay`'s default (0.4) does.
+  // Without the decay step, velocity accumulates every tick with nothing
+  // ever bleeding it off, which oscillates instead of converging — a bug in
+  // a hand-rolled test loop, not evidence the real force is unstable.
+  for (let i = 0; i < 200; i++) {
+    force(0.3)
+    for (const n of nodes) {
+      n.x += n.vx ?? 0
+      n.y += n.vy ?? 0
+      n.z += n.vz ?? 0
+      n.vx = (n.vx ?? 0) * 0.6
+      n.vy = (n.vy ?? 0) * 0.6
+      n.vz = (n.vz ?? 0) * 0.6
+    }
+  }
+  const endBrArGap = Math.hypot(nodes[0].x - nodes[2].x, nodes[0].y - nodes[2].y, nodes[0].z - nodes[2].z)
+  ok(nodes.every((n) => Number.isFinite(n.x) && Number.isFinite(n.y) && Number.isFinite(n.z)), 'galaxyForce: no NaN after repeated ticks')
+  ok(endBrArGap < startBrArGap, "galaxyForce: two different countries sharing SA's family end up nearer each other, not just tighter within themselves")
+  ok(Math.hypot(nodes[0].x - nodes[1].x, nodes[0].y - nodes[1].y, nodes[0].z - nodes[1].z) < 10, 'galaxyForce: the two BR nodes tighten toward their own country centroid')
+
+  // Strength 0 must be a true no-op — the "off" position on the slider.
+  const still = [mk('a', 'BR', 1, 2, 3), mk('b', 'AR', 100, 100, 100)]
+  const offForce = galaxyForce({ current: 0 })
+  offForce.initialize(still as unknown[])
+  offForce(1)
+  ok(still[0].vx === undefined && still[1].vx === undefined, 'galaxyForce: strength 0 adds no velocity at all')
+
+  // A pinned node (`fx` set, the isolated shelf's marker) must never be nudged.
+  const pinned = [mk('p', 'BR', 0, 0, 0, 999), mk('p2', 'BR', 900, 900, 900)]
+  const pinForce = galaxyForce({ current: 1 })
+  pinForce.initialize(pinned as unknown[])
+  pinForce(1)
+  ok(pinned[0].vx === undefined, 'galaxyForce: a pinned node (fx set) is never nudged')
+}
 
 // --------------------------------------------------------------------------
 if (failures) {

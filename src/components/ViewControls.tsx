@@ -20,7 +20,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
 ]
 
 const SLIDERS: {
-  key: 'fog' | 'glow' | 'spread' | 'geoAffinity'
+  key: 'fog' | 'glow' | 'spread' | 'geoAffinity' | 'galaxy'
   label: string
   hint: string
   /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 200%–1000%. */
@@ -78,6 +78,12 @@ const SLIDERS: {
     // verified before shipping this range.
     max: 5,
   },
+  {
+    key: 'galaxy',
+    label: 'Galaxy pull',
+    hint: 'Pulls every report toward its own family and its own country’s centre — countries cluster inside their family’s region of space, like separate star clusters inside one galaxy. Starts at 100%; drag to 0 to ablate it entirely — see lib/galaxyForce.ts for the model',
+    max: 3,
+  },
 ]
 
 /**
@@ -117,6 +123,11 @@ const FOCUS_TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] 
     key: 'focusFeedsInto',
     label: 'Feeds into',
     hint: 'Keep everything ultimately built on the selected report',
+  },
+  {
+    key: 'isolateFocus',
+    label: 'Isolate',
+    hint: 'HIDE everything outside the traced chain instead of dimming it — select a report or a country, turn this on, and only it plus what actually connects to it stays on screen. Overrides the Countries/Domains filter while it is on',
   },
 ]
 

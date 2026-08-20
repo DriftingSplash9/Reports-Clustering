@@ -13,7 +13,7 @@ import {
   familyOf,
   scopeOf,
 } from '../lib/palette'
-import { isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
+import { countryOrbId, isOrbId, orbId, type OrbNode } from '../lib/hierarchy'
 import {
   isStandingInstrument,
   nodeGeometry,
@@ -27,6 +27,7 @@ import {
 import { edgeKey, type Focus } from '../lib/selection'
 import type { VisibleSet } from '../lib/filter'
 import { countryAffinityForce } from '../lib/geoAffinity'
+import { galaxyForce } from '../lib/galaxyForce'
 import { lensColourFor } from '../lib/modes'
 import {
   DIM_NODE_EMISSIVE,
@@ -881,6 +882,10 @@ export default function InfluenceGraph({
   const geoAffinityStrength = useRef(0)
   geoAffinityStrength.current = view.geoAffinity
 
+  /** Same pattern, for `galaxyForce`. See `lib/galaxyForce.ts` and `view.galaxy`. */
+  const galaxyStrength = useRef(0)
+  galaxyStrength.current = view.galaxy
+
   const litLink = (l: LinkDatum) => !focusRef.current || focusRef.current.edges.has(l.key)
 
   const shownNode = (id: string) => !visibleRef.current || visibleRef.current.nodes.has(id)
@@ -962,7 +967,7 @@ export default function InfluenceGraph({
           return { ...n }
         }
 
-        // A freshly-revealed real node starts at its family orb's last
+        // A freshly-revealed real node starts at its parent orb's last
         // position — but every sibling revealed by the same toggle reads the
         // *same* orb position, so an orb with dozens of members hands out
         // dozens of exactly-coincident starting points. Charge repulsion
@@ -977,7 +982,17 @@ export default function InfluenceGraph({
         // breaks the exact coincidence up front, so the siblings separate
         // gently under the same forces instead of exploding apart from a
         // single point — the "unfolding" the feature was meant to look like.
-        const parent = lastPositions.current.get(orbId(familyOf(n.country)))
+        //
+        // **Country orb checked first, 2026-08-20.** Since the per-country
+        // fold, the overwhelmingly common way a real node gets revealed is a
+        // double-click on ITS country's orb, not a global tier change — so
+        // its last known position is under `corb:${country}`, not
+        // `orb:${family}`. The family lookup stays as a fallback for the
+        // rarer case a tier button reveals a country that's already marked
+        // opened before that country ever had its own orb on screen.
+        const parent =
+          lastPositions.current.get(countryOrbId(n.country)) ??
+          lastPositions.current.get(orbId(familyOf(n.country)))
         if (!parent) return { ...n }
         const SEED_JITTER = 14
         const jitter = () => (Math.random() - 0.5) * SEED_JITTER
@@ -1418,6 +1433,25 @@ export default function InfluenceGraph({
     // documented edge's rest length is exactly what it was regardless of
     // this slider.
     fg.d3Force('geoAffinity', countryAffinityForce(geoAffinityStrength) as unknown as never)
+
+    // Galaxy clustering — off would mean 0 at strength 0, but the default is
+    // 1 (on), unlike geoAffinity's original 0 default: Thomas asked for this
+    // shape directly rather than discovering it as an option, so it opens
+    // already doing its job. See `lib/galaxyForce.ts` for the model and the
+    // note on why this does not repeat the "continent is not a relationship"
+    // mistake geoAffinity was built to avoid.
+    //
+    // **Measured, not assumed, before shipping the 0–3 range**: a headless
+    // run against the real corpus (Everything tier, nothing filtered),
+    // comparing each country's own settled spread against the spread
+    // between different countries' centroids. At 100% (the default):
+    // countries sit **1.92×** further from each other than their own
+    // members sit from their own centroid. At the 300% ceiling: **3.49×**
+    // — clearly tighter, separation scales with the slider as it should,
+    // and zero NaN positions at either setting (the force does not blow up
+    // at the top of its range). Off (0%) settles fine too, just slower to
+    // converge in a cold headless run — not a sign of anything wrong.
+    fg.d3Force('galaxy', galaxyForce(galaxyStrength) as unknown as never)
 
     return fg
     // eslint-disable-next-line react-hooks/exhaustive-deps

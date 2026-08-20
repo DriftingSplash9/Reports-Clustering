@@ -1,6 +1,7 @@
 import { DEFAULT_VIEW, type ViewSettings } from './view'
 import { NO_FILTER, type FilterState } from './filter'
 import { DEFAULT_DRILLDOWN, type Drilldown } from './hierarchy'
+import type { Country } from './types'
 import type { PanelVisibility } from '../components/MenuBar'
 import { PANELS_HIDDEN } from '../components/MenuBar'
 
@@ -47,6 +48,13 @@ export interface SavedView {
   name: string
   savedAt: string
   drilldown: Drilldown
+  /**
+   * Countries individually expanded past their per-country fold — see
+   * hierarchy.ts's 2026-08-20 note. Added the same day; `restoreOne` defaults
+   * a save from before that to `[]`, which is exactly what it should mean —
+   * an old save never had any country individually opened.
+   */
+  openedCountries: readonly Country[]
   view: ViewSettings
   filter: FilterState
   /** The traced node, if one was selected when the view was saved. */
@@ -79,6 +87,9 @@ function restoreOne(raw: Partial<SavedView> & { id?: string }): SavedView | null
     name: typeof raw.name === 'string' && raw.name.trim() ? raw.name : 'Untitled view',
     savedAt: typeof raw.savedAt === 'string' ? raw.savedAt : '',
     drilldown: typeof raw.drilldown === 'number' ? raw.drilldown : DEFAULT_DRILLDOWN,
+    openedCountries: Array.isArray(raw.openedCountries)
+      ? raw.openedCountries.filter((c): c is Country => typeof c === 'string')
+      : [],
     view: { ...DEFAULT_VIEW, ...(raw.view ?? {}) },
     filter: { ...NO_FILTER, ...(raw.filter ?? {}) },
     selectedId: typeof raw.selectedId === 'string' ? raw.selectedId : null,

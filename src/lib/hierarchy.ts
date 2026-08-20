@@ -1,6 +1,6 @@
 import type { Country, Dependency, Graph, JurisdictionLevel, ScoredReport } from './types'
 import { isDocumented } from './graph'
-import { type ColourFamily, SCOPE_GROUPS, familyOf } from './palette'
+import { type ColourFamily, SCOPE_GROUPS, countryLabelFor, familyOf } from './palette'
 
 /**
  * Collapsible-orb drilldown.
@@ -115,27 +115,105 @@ export function orbId(family: ColourFamily): string {
   return `orb:${family}`
 }
 
-export function isOrbId(id: string): boolean {
+/** True only for a *family* orb — the tier-not-open-at-all fold. */
+export function isFamilyOrbId(id: string): boolean {
   return id.startsWith('orb:')
 }
 
-/** Inverse of `orbId`. Only meaningful when `isOrbId(id)` is true. */
+/**
+ * Stable id for one country's "tier is open, but this country hasn't been
+ * individually expanded" orb — see the note on `COUNTRY_FOLD_FROM_TIER`
+ * below for why this exists and what it does and doesn't fold.
+ */
+export function countryOrbId(country: Country): string {
+  return `corb:${country}`
+}
+
+/** True only for a *country* orb. */
+export function isCountryOrbId(id: string): boolean {
+  return id.startsWith('corb:')
+}
+
+/**
+ * True for either kind of orb — the "this is a folded stand-in, not a real
+ * report" check every renderer/counter actually wants. Kept as the name every
+ * existing caller already used: none of them cared *which* rung folded a
+ * report, only that one did.
+ */
+export function isOrbId(id: string): boolean {
+  return isFamilyOrbId(id) || isCountryOrbId(id)
+}
+
+/** Inverse of `orbId`. Only meaningful when `isFamilyOrbId(id)` is true. */
 export function familyFromOrbId(id: string): ColourFamily {
   return id.slice(4) as ColourFamily
 }
 
+/** Inverse of `countryOrbId`. Only meaningful when `isCountryOrbId(id)` is true. */
+export function countryFromOrbId(id: string): Country {
+  return id.slice(5) as Country
+}
+
 /**
- * Where a real report currently resolves to: itself, if its tier is open, or
- * its family's orb otherwise.
+ * Below this tier, reports never fold by country — see the note on
+ * `resolveId`. Tier 1 (Global) is ~400 reports total across every family and
+ * stays exactly as it always has: opened, flat, one screen's worth. It is
+ * tier 2 and deeper where a single rung turns out to hold the vast majority
+ * of the corpus (2,071 of 3,073 reports at tier 2 alone, spread across 139
+ * countries — see the 2026-08-20 note on `resolveId`), so that is where a
+ * second fold axis earns its keep.
+ */
+const COUNTRY_FOLD_FROM_TIER = 2
+
+/**
+ * Where a real report currently resolves to, checked in order:
+ *
+ * 1. Its own tier is deeper than the global drilldown — folds into its
+ *    family's orb, same as always. This rung is unaffected by anything below.
+ * 2. Its tier IS open (tier 2+) but its country has not been individually
+ *    expanded — folds into that one country's orb.
+ * 3. Otherwise: itself.
+ *
+ * **Added 2026-08-20, after the BRICS+/Israel/Singapore mint.** The tier
+ * ladder was built and tuned against a ~728-report corpus where "Nations"
+ * meant a few hundred nodes from a couple dozen countries — dense but
+ * navigable. The mint took the corpus to 3,073 reports across 139 countries,
+ * and "Nations" now means 2,071 individual reports appearing on screen
+ * simultaneously the instant that tier opens — Thomas's "95% of nodes
+ * crowded in there... a literal cluster fuck," measured and confirmed
+ * against the actual corpus rather than assumed.
+ *
+ * This is deliberately per-*country*, not per-family: a family orb already
+ * answered "how far down, globally" (Thomas, 2026-08-12: depth is a property
+ * of the view, not of a country) and that reasoning still holds — nobody
+ * asked to open only Alberta's municipalities while every other province
+ * stays shut. But "which of the 139 countries currently in this tier do I
+ * want expanded" is a different question, one the 2026-08-12 corpus never
+ * posed because no family held more than a handful of countries. ASIA alone
+ * now holds 14. Per-country folding is the direct fix for that, revisiting
+ * (not overriding) the "no per-branch drilldown" call from that date — it
+ * was correct for the corpus it was made against.
+ *
+ * Same asymmetry as `toggleDrilldown`: opening a country is the only thing a
+ * double-click on its orb can do. There is deliberately no gesture that
+ * re-folds one country back down short of a full Reset — see
+ * `toggleCountryOpen`.
  */
 export function resolveId(
   drilldown: Drilldown,
   report: { id: string; country: Country; jurisdiction_level: JurisdictionLevel },
+  openedCountries: ReadonlySet<Country> = EMPTY_COUNTRIES,
 ): string {
-  return tierOf(report.jurisdiction_level) <= drilldown
-    ? report.id
-    : orbId(familyOf(report.country))
+  const tier = tierOf(report.jurisdiction_level)
+  if (tier > drilldown) return orbId(familyOf(report.country))
+  if (tier >= COUNTRY_FOLD_FROM_TIER && !openedCountries.has(report.country)) {
+    return countryOrbId(report.country)
+  }
+  return report.id
 }
+
+/** Shared empty default so callers that don't yet track per-country state (there are none left, but the signature stays optional) get today's "nothing individually opened" behaviour for free. */
+const EMPTY_COUNTRIES: ReadonlySet<Country> = new Set()
 
 /**
  * A synthetic node standing in for every currently-collapsed report in one
@@ -215,6 +293,53 @@ function buildOrbNode(family: ColourFamily, members: ScoredReport[], depth: numb
 }
 
 /**
+ * A country's "tier is open, but this country hasn't been individually
+ * expanded" orb — see `resolveId`'s 2026-08-20 note for why this exists.
+ *
+ * Simpler than `buildOrbNode` in one respect: every member shares exactly one
+ * `country` by construction (that's the grouping key), so there is no mode to
+ * compute. Its label is not "what the next tier would reveal" the way a
+ * family orb's is — a country orb doesn't gate a tier, it gates *this
+ * country's slice of whichever tiers are already open* — so the caption
+ * names the current tier instead of the next one, and double-clicking it
+ * always reveals everything the global drilldown already permits for this
+ * country in one step, not one rung at a time.
+ */
+function buildCountryOrbNode(country: Country, members: ScoredReport[], drilldown: Drilldown): OrbNode {
+  const name = countryLabelFor(country)
+  const currentTierLabel = TIER_LABEL[Math.min(Math.max(drilldown, 1), TIER_COUNT) - 1] ?? 'More'
+
+  // Nominal level: the shallowest tier this orb currently holds, same
+  // reasoning as buildOrbNode's — it is what the colour ramp and the legend
+  // filter should read this orb as.
+  let shallowestTier = TIER_COUNT
+  for (const m of members) shallowestTier = Math.min(shallowestTier, tierOf(m.jurisdiction_level))
+  const nominalLevel: JurisdictionLevel = TIERS[Math.max(shallowestTier, 1) - 1][0]
+
+  const domains = [...new Set(members.flatMap((m) => m.domains ?? []))]
+  const authority = members.reduce((max, m) => Math.max(max, m.authority), 0)
+  const size_score = members.reduce((max, m) => Math.max(max, m.size_score), 0)
+
+  return {
+    id: countryOrbId(country),
+    title: `${name} — ${members.length} folded report${members.length === 1 ? '' : 's'}`,
+    publisher: `${members.length} folded report${members.length === 1 ? '' : 's'}`,
+    country,
+    jurisdiction_level: nominalLevel,
+    region: name,
+    description: `Folded. Double-click to open ${name}'s own reports at the ${currentTierLabel.toLowerCase()} tier and below.`,
+    last_updated: null,
+    url: '',
+    domains,
+    in_degree: 0,
+    out_degree: 0,
+    authority,
+    size_score,
+    members,
+  }
+}
+
+/**
  * The graph as currently drawn, given a drilldown state.
  *
  * **Draws every edge, remapped, no merging** — Thomas's explicit answer when
@@ -238,23 +363,39 @@ function buildOrbNode(family: ColourFamily, members: ScoredReport[], depth: numb
  * max of its members', so a group's sphere is never smaller than the most
  * important single thing inside it.
  */
-export function buildDisclosedGraph(graph: Graph, drilldown: Drilldown): Graph {
+export function buildDisclosedGraph(
+  graph: Graph,
+  drilldown: Drilldown,
+  openedCountries: ReadonlySet<Country> = EMPTY_COUNTRIES,
+): Graph {
   const resolve = new Map<string, string>()
-  for (const n of graph.nodes) resolve.set(n.id, resolveId(drilldown, n))
+  for (const n of graph.nodes) resolve.set(n.id, resolveId(drilldown, n, openedCountries))
 
   const membersByFamily = new Map<ColourFamily, ScoredReport[]>()
+  const membersByCountry = new Map<Country, ScoredReport[]>()
   for (const n of graph.nodes) {
     const resolved = resolve.get(n.id)!
-    if (!isOrbId(resolved)) continue
-    const family = familyFromOrbId(resolved)
-    const list = membersByFamily.get(family)
-    if (list) list.push(n)
-    else membersByFamily.set(family, [n])
+    if (isFamilyOrbId(resolved)) {
+      const family = familyFromOrbId(resolved)
+      const list = membersByFamily.get(family)
+      if (list) list.push(n)
+      else membersByFamily.set(family, [n])
+    } else if (isCountryOrbId(resolved)) {
+      const country = countryFromOrbId(resolved)
+      const list = membersByCountry.get(country)
+      if (list) list.push(n)
+      else membersByCountry.set(country, [n])
+    }
   }
 
-  const orbNodes: ScoredReport[] = [...membersByFamily.entries()].map(([family, members]) =>
-    buildOrbNode(family, members, drilldown),
-  )
+  const orbNodes: ScoredReport[] = [
+    ...[...membersByFamily.entries()].map(([family, members]) =>
+      buildOrbNode(family, members, drilldown),
+    ),
+    ...[...membersByCountry.entries()].map(([country, members]) =>
+      buildCountryOrbNode(country, members, drilldown),
+    ),
+  ]
   const realNodes = graph.nodes.filter((n) => !isOrbId(resolve.get(n.id)!))
   const nodes: ScoredReport[] = [...realNodes, ...orbNodes]
 
@@ -307,18 +448,42 @@ export function buildDisclosedGraph(graph: Graph, drilldown: Drilldown): Graph {
 /**
  * Double-click on `id`. Returns the next tier; does not mutate.
  *
- * **An orb steps up a tier. A real node does nothing.** That asymmetry is the
- * fix for the single most confusing thing about the previous version, which
- * made a real node *fold* the view back — so double-clicking a national report
- * hoping to see more inside it instead deleted every national report from the
- * scene. Thomas hit this repeatedly and reported the feature as *"behaving
- * irregularly"*, which it was: the same gesture meant "more" or "much less"
- * depending on what happened to be under the cursor, and nothing on screen
- * distinguished the two cases.
+ * **A family orb steps up a tier. Anything else does nothing.** That
+ * asymmetry is the fix for the single most confusing thing about the
+ * previous version, which made a real node *fold* the view back — so
+ * double-clicking a national report hoping to see more inside it instead
+ * deleted every national report from the scene. Thomas hit this repeatedly
+ * and reported the feature as *"behaving irregularly"*, which it was: the
+ * same gesture meant "more" or "much less" depending on what happened to be
+ * under the cursor, and nothing on screen distinguished the two cases.
  *
  * Going *back* is now the tier buttons' job, and only theirs. A control that
  * can only ever add detail cannot surprise anyone by removing it.
+ *
+ * **Only a family orb, not a country orb, since 2026-08-20.** A country
+ * orb's double-click means something different — see `toggleCountryOpen` —
+ * and must not also advance the global tier, or opening one country would
+ * silently dump every OTHER country's next tier onto the screen too.
  */
 export function toggleDrilldown(current: Drilldown, id: string): Drilldown {
-  return isOrbId(id) ? Math.min(current + 1, TIER_COUNT) : current
+  return isFamilyOrbId(id) ? Math.min(current + 1, TIER_COUNT) : current
+}
+
+/**
+ * Double-click on `id`, for the per-country fold. Returns the next set of
+ * opened countries; does not mutate. Companion to `toggleDrilldown`, same
+ * contract: a country orb reveals that one country's currently-permitted
+ * reports, anything else does nothing, and there is no gesture that folds a
+ * country back — only a full Reset does (see App.tsx's `handleReset`).
+ */
+export function toggleCountryOpen(
+  current: ReadonlySet<Country>,
+  id: string,
+): ReadonlySet<Country> {
+  if (!isCountryOrbId(id)) return current
+  const country = countryFromOrbId(id)
+  if (current.has(country)) return current
+  const next = new Set(current)
+  next.add(country)
+  return next
 }

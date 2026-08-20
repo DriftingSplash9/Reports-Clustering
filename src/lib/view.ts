@@ -55,6 +55,26 @@ export interface ViewSettings {
   /** With a node selected, keep everything built on it lit. */
   focusFeedsInto: boolean
   /**
+   * With a node selected, HIDE everything outside the traced chain instead
+   * of merely dimming it. Off by default — dimming is the ordinary way to
+   * trace a chain in context; this is for the narrower question "just this
+   * one thing and what actually touches it, nothing else on screen at all."
+   *
+   * Added 2026-08-20 (Thomas: *"if i want to show just Israel and
+   * international connections to and from it I have no way to do so"*).
+   * Deliberately NOT a per-country entry in the scope filter — a country
+   * isolated via `FilterState.scopes` would drop any edge to a DIFFERENT
+   * country by the filter's own "both endpoints visible" rule (see
+   * `filter.ts`), which is exactly the cross-border connections a country
+   * isolate is for. This reuses the existing focus/trace walk instead
+   * (`computeFocus` in `lib/selection.ts`) and turns its result into the
+   * visible set rather than a dim/lit split — select Israel's node or
+   * orb, flip this on, and the chain IS the whole scene. See the
+   * `isolateFocus` memo in App.tsx for how this composes with (and
+   * deliberately overrides, rather than intersects with) the scope filter.
+   */
+  isolateFocus: boolean
+  /**
    * Camera distance as a multiple of the auto-fit distance.
    * 1 is the framing chosen on load; below 1 moves in, above 1 moves out.
    */
@@ -106,6 +126,34 @@ export interface ViewSettings {
    */
   geoAffinity: number
   /**
+   * Galaxy clustering, **0 to 3**. Defaults to 1 — on, not off.
+   *
+   * A soft, ablatable force pulling every node toward its OWN family's
+   * centroid and its OWN country's centroid — see `lib/galaxyForce.ts` for
+   * the model, and for why this is a deliberate reversal of `geoAffinity`'s
+   * "continent is not a relationship" objection rather than a contradiction
+   * of it: that objection was about pulling COUNTRY A toward COUNTRY B
+   * because they share a colour bucket, which this force never does.
+   *
+   * Added 2026-08-20, same evening as the per-country fold, after Thomas
+   * saw the just-shipped mint's tier crowding and asked for "each continent
+   * is its own cluster... like the milkyway and andromeda" as one of four
+   * options — this is the cheap-to-try one, built inside the existing
+   * single scene rather than as a multi-scene rewrite. Read live by the
+   * force each tick, so — like `geoAffinity` — moving the slider re-tunes
+   * the pull without a layout rebuild.
+   *
+   * Range picked conservatively pending Thomas actually seeing it live: the
+   * force's own constants (`FAMILY_PULL`/`COUNTRY_PULL` in galaxyForce.ts)
+   * are spring constants multiplied by raw distance, not a normalised
+   * direction like geoAffinity's — verified settling at the ceiling (3)
+   * with a real headless-browser run before shipping this range, the same
+   * way geoAffinity's 5 was verified. If Thomas wants it pulled harder than
+   * 300%, raise this ceiling and re-verify settling exactly as that note
+   * describes, rather than assuming the same headroom applies.
+   */
+  galaxy: number
+  /**
    * The lens — which question the node fills answer. STANDARD is the
    * country palette; GROUP_COMPARISON is five inks (US red, BRICS yellow, EU
    * green, international white, everything else grey); WORLD_OVERVIEW is the
@@ -147,9 +195,11 @@ export const DEFAULT_VIEW: ViewSettings = {
   autoRotate: false,
   focusBuiltFrom: true,
   focusFeedsInto: true,
+  isolateFocus: false,
   zoom: 1,
   spread: 2,
   geoAffinity: 1.5,
+  galaxy: 1,
   lens: 'STANDARD',
 }
 

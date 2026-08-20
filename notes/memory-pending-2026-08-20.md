@@ -243,8 +243,217 @@ margin).
 
 ---
 
+## Addendum — the per-country fold, still 2026-08-20 (later, after the mint)
+
+Intended as its own future memory entry, `country-fold-2026-08-20.md`,
+`type: project`.
+
+Thomas ran the just-shipped mint on his own machine and sent nine screenshots:
+every tier but "1. Global" was, in his words, *"a literal cluster fuck... we
+need a cap at a certain number of nodes... when we had 1250 nodes it was
+already too dense... in hindsight I should have known this would happen at
+3000."* He floated splitting the graph into per-continent "galaxy" scenes
+(the Milky Way/Andromeda image) as one option among others, then said he was
+half asleep and just wanted ideas.
+
+**Diagnosed before proposing anything**, by actually counting the merged
+corpus rather than guessing: tier 1 (Global) is 396 reports — fine, matches
+his screenshot. Tier 2 (Nations, cumulative) jumps to **2,467 — 84% of the
+whole 3,073-report corpus** — because 2,071 of those are `federal`-level and
+spread across **139 distinct countries**. Tier 3 (States): 2,873. Tier 4
+(Everything): 3,073. So every tier past Global was, in practice, "show almost
+the whole corpus," regardless of which button was pressed — not a bug in the
+mint, but the 2026-08-12 tier design (built and tuned against a ~728-report,
+few-dozen-country corpus) meeting a country count it was never built to
+handle.
+
+**Presented four options before writing any code** (Thomas explicitly asked
+for ideas, said he was "half asleep," so this was a discussion turn, not an
+implementation turn): (1) a per-country fold — reuse the existing family-orb
+mechanism, add country as a second grouping key; (2) a blunt authority-based
+node cap/LOD, independent of tiers; (3) full per-continent/economic-region
+"galaxy" scenes — literally Thomas's own image, biggest lift, replaces the
+one-scene-one-drilldown architecture rather than extending it; (4) a lighter
+middle path — keep one scene, lean harder on `geoAffinity` and country-orb
+seed positions so regions read as galaxies without a rewrite. Recommended
+(1) first regardless of long-term direction, since it's small, reuses tested
+code, and would show whether the itch is even still there afterward. Thomas
+picked (1): *"I think 1 is a good idea, assuming i understand correctly."*
+
+**What shipped**, all in the same per-country-fold change: `src/lib/hierarchy.ts`
+gained a second, independent fold axis. The existing tier ladder still folds
+a report into its family orb (`orb:${family}`) when its own tier isn't
+globally open — unchanged, still global by design (Thomas, 2026-08-12: "depth
+is a property of the view, not of a country"). NEW: once a tier IS open (tier
+2+), a report additionally folds into a per-country orb (`corb:${country}`,
+namespaced apart from `orb:` so `isFamilyOrbId`/`isCountryOrbId` can tell them
+apart while the existing broad `isOrbId` — every pre-existing caller's "is
+this a folded stand-in" check — still returns true for both with zero
+changes at those call sites) until that one country is individually
+double-clicked open. `toggleCountryOpen` mirrors `toggleDrilldown`'s
+contract exactly: opening is the only thing the gesture can do, there is no
+double-click that folds a country back (same reasoning as the 2026-08-12
+fix for real nodes — "a control that can only ever add detail cannot
+surprise anyone by removing it"). `App.tsx` holds the new state as
+`openedCountries: ReadonlySet<Country>`, threaded into `buildDisclosedGraph`/
+`resolveId` alongside `drilldown`; reset to empty on a full Reset (same
+treatment as `drilldown`); left alone by a tier button press (additive, like
+the filter, not a fresh start). `savedViews.ts` gained the field
+(`openedCountries: readonly Country[]`, schema un-bumped — `restoreOne`
+defaults a pre-existing save to `[]`, which is exactly the right meaning for
+"this save predates the feature"). `InfluenceGraph.tsx`'s position-seeding-
+on-reveal logic (the thing that makes a newly-revealed node animate out of
+its parent orb instead of popping in at the origin) now checks the country
+orb's last known position FIRST and the family orb's as a fallback, since
+double-clicking a country orb is now the overwhelmingly common way a real
+node gets revealed, not a global tier change.
+
+**This deliberately revisits, not overturns, the 2026-08-12 "no per-branch
+drilldown" decision** — Thomas explicitly declined per-country/per-branch
+opening back then ("I want double clicking the EU to open all national level
+nodes... not just Canada's"), and that was correct for a corpus where no
+family held more than a handful of countries. ASIA alone now holds 14. Both
+calls were right for the corpus size they were made against — worth reading
+this as "the requirements changed with the data," not as Thomas contradicting
+himself.
+
+**Verified three ways** (method worth repeating: measure the actual thing,
+don't trust that clean tests + a clean build means the UX problem is
+actually solved). (1) Added targeted unit tests to `scripts/test-logic.ts`
+for the new `countryOrbId`/`isCountryOrbId`/`countryFromOrbId` round-trips,
+`toggleCountryOpen`'s no-op cases (a real node id, a family orb id), and the
+fold/open/reopen sequence on a small synthetic two-family graph — updated
+the one pre-existing test (`disclosed@4: everything real again`) that
+assumed the OLD "deepest tier always shows every real report" guarantee,
+since that guarantee now also requires every country to be opened, which is
+the entire point of the change. All 54 checks pass, `npm run validate` and
+`npm run build` both exit 0. (2) Built the app (`vite build` + `vite
+preview`) and drove it with a headless Chromium harness (same recipe as the
+path-dependence and camera-fit measurements this same day) that seeds a
+saved view via `localStorage['rig.views.v1']` and reads the app's own "N of
+3,091 reports shown" on-screen readout — not a simulated count. Confirmed:
+Global/Nations/States/Everything ALL now default to showing 396 real nodes
+(down from 396/2,467/2,873/3,073 before the fix), and opening Canada
+specifically at the Nations tier bumps that to 467 (adds exactly Canada's
+own reports) while every other of the 138 other countries stays folded. (3)
+No console or page errors in that same run.
+
+**Not done, flagged explicitly rather than left implicit**: no UI affordance
+exists to re-fold one country short of a full Reset (deliberate, matching
+the `toggleDrilldown` asymmetry, but genuinely worth Thomas seeing live
+before deciding whether it needs one); nothing on screen shows "N countries
+currently opened"; options (2), (3) and (4) from the same conversation are
+still just discussed, not built, and Thomas said he was still analysing them
+when he approved (1) — don't treat this as having closed that conversation
+without checking with him.
+
+---
+
+## Addendum — galaxy clustering (Phase 1), still 2026-08-20 (later, after the per-country fold)
+
+Thomas looked at the shipped per-country fold, asked what the "387 hiding"
+nodes in his screenshot were (answer: the pre-existing Countries scope/family
+filter chip, unrelated to the fold — clears with the filter's own "All", not
+a plain Reset), then picked option 3 from that conversation: real "galaxies,"
+countries clustering visibly the way continents do, provinces the same way
+inside a country if the data supported it (checked: only 130/606, 21%, of
+provincial/municipal reports have a `region` that parses cleanly into
+"Country — Province" — a data gap, not a code one, so province-level
+clustering is parked, not built).
+
+**New file `src/lib/galaxyForce.ts`.** A d3-force-3d custom force, same shape
+as `geoAffinity.ts`'s `countryAffinityForce` (ref-read strength, no rebuild on
+slider change). Pulls every node toward its own colour-FAMILY centroid
+(gentle, `FAMILY_PULL = 0.028`) and its own COUNTRY centroid (stronger,
+`COUNTRY_PULL = 0.07`) every tick. **Deliberately not a contradiction of
+geoAffinity's "continent is not a relationship" objection** — that objection
+was about pulling country A toward unrelated country B because they share a
+colour bucket; this force only ever pulls a node toward its OWN group's
+centroid, the standard d3 cluster-force pattern. Read the file-level comment
+on `galaxyForce.ts` before touching either force.
+
+New `ViewSettings.galaxy` (0–3, default 1, ON not opt-in since Thomas asked
+for it directly) in `view.ts`; "Galaxy pull" slider in `ViewControls.tsx`;
+wired into `InfluenceGraph.tsx`'s `forceGraph` memo.
+
+**Verified**: `npm run validate` (59 checks, up from 54 — new tests cover
+no-NaN-after-200-ticks, two same-family countries drawing closer without
+merging, strength-0 as a true no-op, a pinned/shelf node never nudged) and
+`npm run build` both exit 0. A real headless-Chromium run against the full
+merged corpus measured actual settled positions: at the 100% default,
+countries sit 1.92× further apart from each other than their own members sit
+from their own centroid; at the 300% ceiling, 3.49× — separation scales with
+the slider, zero NaN at either setting. No live on-screen check was done
+(harness-measured only) — worth Thomas looking at it before calling it
+finished, which is exactly what surfaced the next addendum.
+
+---
+
+## Addendum — Isolate feature + the "felt sparse" tension, still 2026-08-20 (later again)
+
+Thomas came back after seeing the galaxy force live with three things in one
+message: (1) it "felt like a lot was missing... expected several clusters;"
+(2) no way to show just Israel plus its international connections, the
+Countries filter's 12 options too coarse; (3) searching "Israel" in the find
+bar returned nothing.
+
+**(2) — built.** New `view.isolateFocus` toggle. With a node or country orb
+selected and this ON, everything outside the traced chain is HIDDEN (not
+dimmed). Built on the EXISTING focus/trace machinery
+(`selection.ts`'s `buildFocusIndex`/`computeFocus`), unchanged — the only new
+thing is building that index over the UNFILTERED disclosed graph
+(`buildFocusIndex(disclosedGraph, null)`) rather than the currently-visible
+one. This distinction is the entire design: `applyFilter` only keeps an edge
+when BOTH endpoints are visible, so a naive "scope the family filter to just
+Israel" approach would silently drop any edge reaching outside Israel — the
+opposite of what "show connections to and from it" means. `view.ts`,
+`ViewControls.tsx`, `App.tsx` (new `unfilteredFocusIndex`/`isolateFocus`
+memos — the local name `isolateFocus` there is a `Focus | null`, distinct
+from the `view.isolateFocus` boolean it's built from), `scripts/test-logic.ts`
+(new pinned test: an Israel report citing a Paraguay/MERCOSUR one — a filter
+correctly drops that edge, Isolate correctly keeps it). 61/61 checks, `tsc`
+and `build` both clean.
+
+**(2) — investigating it live surfaced a real, verified data gap.** Selecting
+Israel's country orb with Isolate on shows Israel alone, 0 others. Traced
+directly against the corpus, not the UI: all 29 Israel reports are `federal`,
+all 26 edges touching any of them are Israel-to-Israel. Broadened the check
+to every country with 5+ reports: 18 more in the same state (Indonesia,
+Taiwan, Philippines, Japan, South Korea, Vietnam, Singapore, Iran, Thailand,
+Iraq, Myanmar, Saudi Arabia, Afghanistan, Yemen, Syria, Sudan, Mauritius,
+Sierra Leone — mostly from the item-5 mint, which recorded each country's
+domestic dependency structure but not its international ties). Full list and
+counts: `notes/cross-border-gaps-2026-08-20.md`. **No edges were invented to
+paper over this** — rule 2 (no document, no edge) applies exactly as much to
+a gap that's inconvenient to explain as to any other missing edge. This is a
+research-queue item, not a defect.
+
+**(3) — diagnosed, not independently reproduced against Thomas's exact live
+state.** `SearchPanel` is passed `within={predicate}` — search obeys the same
+scope filter as everything else, by design, so it never suggests flying to a
+node the filter is currently hiding. Thomas's own screenshot showed the
+Countries filter at "1 of 12" at the time he searched. A direct unfiltered
+test of the search function for "israel" returned 10 correct results, so the
+search algorithm itself is cleared. Told Thomas this is the likely
+explanation and to retry after clearing the filter — not stated as certain,
+since his exact session state at search time wasn't directly observed.
+
+**(1) — explained, not resolved; a genuine tension between two shipped
+features, not a bug in either.** The per-country fold (5b) reduces most
+countries to a single-point orb by default; the galaxy force (5c) needs
+several visible points per country to read as a cluster rather than a lone
+dot. Out of the box, most of what should look like a galaxy is single stars.
+Told Thomas to try opening a handful of countries manually before deciding
+whether a default should change (which countries pre-open, or
+`COUNTRY_FOLD_FROM_TIER` itself) — this has not been decided yet, only
+surfaced.
+
+---
+
 ## MEMORY.md index line to add
 
 ```
 - [Phase 4 complete + two render bugs, 2026-08-20 — READ BEFORE RENDERER OR SLIDER WORK](phase4-complete-and-render-bugs.md) — menu bar, Help from START-HERE.md verbatim, saved views with an open-on-load star, loading curtain. **The bug to remember: `nodeScaleFor`'s cap silently binding cost node size AND edge width together — recompute it whenever a slider ceiling moves.** Also: the camera can never end up inside the cluster by raising spread (fit sits at exactly 5.675 × p95); spread saturates; and the layout is PATH-DEPENDENT — cold start vs ramped gives a 14× different cloud for identical settings, which is the "ball vs oblong" glitch.
+- [Grok archive minted + per-country fold, 2026-08-20 — READ BEFORE TOUCHING THE DRILLDOWN OR THE CORPUS SIZE](grok-archive-minted-2026-08-20.md) — corpus 1,250→3,091 reports (see the mint addendum above this one in the pending file for the full merge story); then, same day, `hierarchy.ts`'s tier ladder gained a SECOND fold axis (per-country, not just per-family-tier) because 139 countries made the old single-axis model dump 84% of the corpus onto the "Nations" tier at once. See `resolveId`'s comment in hierarchy.ts for the model.
+- [Galaxy clustering + Isolate feature, 2026-08-20 — READ BEFORE TOUCHING GEOAFFINITY, GALAXYFORCE, OR THE FOCUS/FILTER SYSTEM](galaxy-and-isolate-2026-08-20.md) — new `galaxyForce.ts` pulls nodes toward their own family/country centroid (NOT the same thing geoAffinity's "continent is not a relationship" rule forbids — that rule is about bilateral pull between unrelated countries, this only pulls a node toward its own group). New Isolate toggle (`view.isolateFocus`) hides everything outside a traced focus chain, built over an UNFILTERED index on purpose so cross-border edges survive — a filtered-index version would have silently dropped them (`applyFilter` requires both edge endpoints visible). **Also: 19 countries (Israel, Indonesia, Taiwan, and 16 others, mostly from the recent mint) have ZERO cross-border dependency edges in the corpus — real, verified, not a bug — see `notes/cross-border-gaps-2026-08-20.md` before assuming Isolate or geoAffinity is broken for any of them.**
 ```
