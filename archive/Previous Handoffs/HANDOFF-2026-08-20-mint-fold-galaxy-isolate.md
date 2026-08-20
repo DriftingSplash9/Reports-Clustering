@@ -5,88 +5,25 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-20 (updated a sixth time the same day)**. The day in
-order: the mint (item 5), then Thomas reported the tier system unusable at
-the new corpus size and got the per-country fold (5b) the same day, then
-asked for real "galaxies" and got the clustering force (5c), then came back
-with three more things in one message and got the Isolate feature plus two
-diagnoses (5d) — search blocked by a lingering filter, and a real 19-country
-zero-cross-border-edge data gap, NOT a bug, written up in
-`notes/cross-border-gaps-2026-08-20.md`. Then (5e): Thomas found the
-"Countries" filter panel itself was the next problem — "12 mixed nations
-and organizations" — and asked for it split into a Regions/Organizations
-panel and a plain country directory, both ISOLATE rather than filter, so
-opening a region shows its international ties rather than cutting them. Built
-and shipped as a new, parallel `regions.ts` + `GroupsPanel.tsx` — the old
-`ChipBar` filter panel is untouched, not replaced. Also backfilled 52 missing
-`COUNTRY_LABEL` entries (China, India, Japan, Mexico and 48 others were
-rendering as bare ISO codes everywhere a label shows). Separately, Thomas
-asked two process questions that update answers in §0 below: how to tell when
-a session is getting too long to trust, and a standing rule for updating this
-file every time work happens, not just at big milestones. **This update
-(5f)**: Thomas, looking at 5e's shipped result, asked to remove the old
-`ChipBar` "Countries · All" control from bottom-centre and put `GroupsPanel`
-("Regions & Countries") there by default instead — bottom-centre is the
-primary-navigation slot, bottom-right (where `GroupsPanel` lives today) reads
-as secondary. **TODO ONLY — nothing built this update**, logged as new item
-5f in §5. See that entry for the two open scope questions (does "get rid of"
-mean delete `ChipBar`/`SCOPE_GROUPS` outright, given it is a genuinely
-different filter-vs-isolate mechanism 5e deliberately left alone — or just
-relocate `GroupsPanel` and demote/hide the old control; and `PanelShell`'s
-one-panel-per-edge limit from §7 applies to bottom-centre same as the
-left/right edges).
-Earlier the same day: corrected a long-running false claim about git,
-measured three things the project had only argued about, finished Phase 4 of
-the visual revamp, and fixed two rendering bugs. Written for a FRESH agent
-with no memory of any of it. Supersedes
-`archive/Previous Handoffs/HANDOFF-2026-08-20-groupspanel-process-rules.md`
-(itself superseding
-`archive/Previous Handoffs/HANDOFF-2026-08-20-mint-fold-galaxy-isolate.md`,
-itself superseding
-`archive/Previous Handoffs/HANDOFF-2026-08-19-visual-revamp-phase4-complete.md`),
-kept for per-item detail.
-
----
-
-## 0. Process rules Thomas asked for, 2026-08-20 — read this section too
-
-**When to stop trusting a long session and hand off.** There is no in-app
-signal for this; the honest answer is behavioural, not numeric. Treat these as
-the tells, roughly in order of how much they should worry you:
-- The agent starts re-deriving or re-explaining something already settled
-  earlier in the same conversation, or gives an answer that quietly
-  contradicts an earlier one in the same session.
-- A tool call gets retried more than the documented policy allows (this file
-  and `REPORTS.md` both specify: once, and only for specific connection
-  errors) — repeated retries past that are a sign of confusion, not
-  persistence.
-- The conversation has already been through one compaction/summary event
-  (visible as a message saying a prior conversation "ran out of context" and
-  got summarized) — that already happened once today, mid-session, and is
-  itself the clearest possible signal: the working context was full enough
-  that detail had to be thrown away and reconstructed from a summary. That is
-  the cue to wrap up soon, not a thing to wait out.
-- Concretely: when an agent notices any of the above, it should say so
-  plainly ("this is a good point to hand off") rather than pushing on, write
-  this file up to date, and stop — not keep working through a state where its
-  own answers are getting less reliable.
-
-**This file gets updated every time, not just at milestones.** Standing rule
-now: whenever Thomas asks for code work, a brainstorm, or an adjustment, the
-session logs what happened in this file before finishing that turn — not
-batched up for a big rewrite at the end. In practice this means: read the
-current `HANDOFF.md`, copy it unchanged to
-`archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-<topic>.md` (the archive is a
-version history now, not just an end-of-day snapshot — several dated copies
-per day is expected and correct), then write the updated file back to the top
-level with a new dated section describing what just happened, in the same
-style the rest of this file already uses (what was asked, what shipped, how
-it was verified, what's explicitly not done yet). This is an ADDITION to a
-section, not a from-scratch rewrite each time — a full rewrite every single
-turn would be wasteful and would lose detail rather than preserve it; a
-full rewrite stays reserved for when a section has genuinely gone stale or
-the file has grown unwieldy, same as `REPORTS.md`'s original "carry forward
-what is live, delete what is finished" rule already said.
+Last written: **2026-08-20 (updated a fourth time the same day)** — the mint
+(item 5) shipped, Thomas ran the built app and reported the tier system
+unusable at the new corpus size ("95% of nodes crowded in there... a literal
+cluster fuck"), a same-day fix (item 5b, the per-country fold) shipped for
+that, THEN Thomas asked for real "galaxies" (item 5c) — countries clustering
+visibly inside their own colour family's region of space — which also
+shipped the same evening, and THEN Thomas came back with three more things in
+one message (item 5d): the galaxy effect felt sparse, no way to isolate one
+country plus its international ties, and search for "Israel" returning
+nothing. All three answered; the Isolate feature shipped; the country-isolate
+investigation surfaced a real, verified data gap (19 countries with zero
+cross-border edges) written up in
+`notes/cross-border-gaps-2026-08-20.md`. Earlier in the day: corrected a
+long-running false claim about git, measured three things the project had
+only argued about, finished Phase 4 of the visual revamp, and fixed two
+rendering bugs. Written for a FRESH agent with no memory of any of it.
+Supersedes
+`archive/Previous Handoffs/HANDOFF-2026-08-19-visual-revamp-phase4-complete.md`,
+kept for its per-item detail.
 
 ---
 
@@ -108,7 +45,6 @@ Then one of these, depending on the task:
 | Camera, fit or layout | `notes/camera-fit-measurement-2026-08-19.md` — the numbers, and the harness recipe |
 | The flicker | `notes/flicker-tests-2026-08-19.md` — three of four suspects cleared, one open |
 | Isolate, or "why does country X show empty" | `notes/cross-border-gaps-2026-08-20.md` — 19 countries with zero cross-border edges, by design not bug |
-| Regions, blocs, publishers, the country directory | `src/lib/regions.ts`'s file-level comment — the four `RegionGroup` kinds and why this is parallel to, not a replacement for, the `ChipBar` filter panel |
 | Minting / the staged archive | `Grok - Brics+israel and singapore/consolidated/CONSOLIDATION-REPORT.md` and `_STATUS.md` |
 | BRICS research | `BRICS/G.3.md` |
 | Schema | `src/lib/types.ts` — mostly documented reasoning, not types |
@@ -157,9 +93,9 @@ break:
 (these numbers were 1,250 · 1,079 for the whole first half of 2026-08-20 — if
 you're reading an older copy of this file, or a comment elsewhere still says
 1,250, that's the pre-mint figure, not a live discrepancy to chase down).
-`npm run validate` exits 0 (74 logic checks as of item 5e, up from 61 after
-5d, 59 after 5c and 54 after 5b, all invariant checks; warnings only —
-single-use `proposed:` tags and the known isolated-report list). `npx tsc --noEmit`
+`npm run validate` exits 0 (61 logic checks as of item 5d, up from 59 after
+5c and 54 after 5b, all invariant checks; warnings only — single-use
+`proposed:` tags and the known isolated-report list). `npx tsc --noEmit`
 clean. `npm run build` clean. All re-verified on the actual device tree after
 the last commit of the day.
 
@@ -290,17 +226,6 @@ Assume all of this exists and works. Each carries a dated comment at the site.
   `Focus | null` and a toggle) and the pinned regression test in
   `scripts/test-logic.ts` (the Israel/MERCOSUR case) that exists specifically
   so nobody "simplifies" Isolate back onto the filtered index.
-- **Regions & Organizations panel + Countries directory (2026-08-20, item
-  5e).** `GroupsPanel.tsx`, bottom right. Picking a continent, treaty bloc,
-  publisher (IMF, World Bank, UN), or a single country from a search box
-  isolates it the SAME way item 5d's single-node Isolate does — same
-  unfiltered index, generalised in `selection.ts` to a multi-seed
-  `computeGroupFocus` so "isolate this whole region" also keeps the edges
-  BETWEEN its own members, not just the ones reaching out of it. See
-  `lib/regions.ts` for the four group kinds and why this is a parallel
-  mechanism to the `ChipBar`/`SCOPE_GROUPS` filter panel, not a replacement —
-  that one still hides by colour family and drops cross-border edges on
-  purpose, which is a different, still-useful question.
 - **Loading curtain** (`LoadingCurtain.tsx`). Opaque until the renderer reports
   `settledOnce && fitted`, first load only. **The 25s safety timeout is the
   load-bearing part** — a curtain that never lifts is worse than none.
@@ -557,134 +482,6 @@ Sorted by owner, ordered by priority within each.
       (e.g. `COUNTRY_FOLD_FROM_TIER`, or which countries start pre-opened)
       should change.
 
-5e. **Regions/Organizations panel + Countries directory — DONE 2026-08-20,
-    next thing Thomas asked for.** His words: *"if I select countries from
-    the panel it brings up 12 mixed nations and organizations/regions...
-    we should have a menu with north america, south america, asia, europe,
-    middle east, pacific islands, IMF, eu, brics, etc. The other panel can
-    simply be a directory of nations... when we open a nation or region we
-    should see how it ties to the international level and the connections
-    within it."* The "12 mixed" is the existing `ChipBar`/`SCOPE_GROUPS`
-    filter — six single countries and six continent-ish buckets sharing one
-    list because they share a `ColourFamily`, a palette concept, not a
-    geography or membership one. Left untouched, deliberately — it is a real,
-    different feature (a FILTER: both-endpoints-visible, drops cross-border
-    edges) from what was actually wanted here (an ISOLATE: keeps them, same
-    mechanism the single-node Isolate from item 5d already uses).
-    - **New file `src/lib/regions.ts`.** `Continent` (8 buckets — North
-      America, South America, Europe, Middle East, Africa, Asia, Oceania &
-      Pacific, International), deliberately NOT the same partition as
-      `ColourFamily`: splits Middle East out by name, folds Russia into Asia
-      and Greenland into Europe to match calls `palette.ts` already made for
-      `COUNTRY_FAMILY`/`COUNTRY_LABEL` rather than re-litigate either.
-      `CONTINENT_OF` maps all 142 country codes live in the corpus —
-      verified by a direct script cross-check against every
-      `src/data/research/*.json` file: zero missing, zero stray entries.
-      `RegionGroup` unifies four kinds behind one `matchesRegionGroup(node,
-      group)` predicate: `continent` (reads `CONTINENT_OF`), `bloc` (reads
-      `COUNTRY_BLOCS` from `geoAffinity.ts` OUTRIGHT — same source of truth
-      the galaxy/geo-affinity layout already uses, so this can never disagree
-      with them about who is in NATO or BRICS), `publisher` (a stateless
-      body with no country — IMF, World Bank, UN — matched by substring
-      against `publisher`, checking a folded orb's `.members` too since an
-      orb's own `.publisher` is a synthetic "N folded reports" string), and
-      `country` (one nation, for the directory — derived from
-      `COUNTRY_LABEL`'s keys rather than hand-duplicated, so a country added
-      there in the normal course of research appears here automatically).
-    - **`selection.ts` generalised, not duplicated.** `walk()`'s single
-      `startId` became `startIds: Iterable<string>`, seeding `seen`/`queue`
-      from the whole set up front — an edge directly BETWEEN two seeds is
-      still collected (the `edges.add` happens before the "already seen"
-      check skips re-queuing), so "isolate this region" gets its own internal
-      connections for free, no special case. `computeFocus` (single node) is
-      now just this with one seed; new `computeGroupFocus(index, seedIds,
-      show)` is the multi-seed form `regions.ts` calls into. Same unfiltered
-      index item 5d built (`unfilteredFocusIndex` in `App.tsx`), reused
-      outright — a region's international ties survive by the same
-      mechanism Israel's did.
-    - **`App.tsx`**: new `selectedGroupId` state, mutually exclusive with
-      `selectedId` (every place that already sets one now clears the other —
-      node click, Escape, empty-space click, Reset, `IsolatedShelf`). New
-      `selectedGroup`/`groupFocus` memos; `visible` now checks `groupFocus`
-      FIRST, ahead of the existing single-node `isolateFocus` and the scope
-      filter — most specific, most recent intent wins. A group selection
-      always isolates; unlike a single node there is no useful "selected but
-      not isolated" state for a whole region to sit in.
-    - **New `src/components/GroupsPanel.tsx`.** One floating panel (bottom
-      right, its own collapsed pill, same outside-click/Escape-closes pattern
-      `ChipBar` already uses), two sections inside: "Regions & Organizations"
-      (continents, then a curated `FEATURED_BLOCS` subset of `GeoBloc` — EU,
-      NATO, OECD, G7, BRICS, Commonwealth, USMCA, MERCOSUR, Arab League,
-      African Union — then the publisher orgs) and "Countries" (a search box
-      over every `COUNTRY_GROUPS` entry). Clicking a row calls
-      `handleChooseGroup`, which isolates; clicking the same row again turns
-      it off, matching every other isolate-first control in the app. **Scope
-      call, worth Thomas seeing before deciding it's final**: this is ONE
-      shell with two visual sections, not two independent `PanelShell`s —
-      both screen-edge slots (left/Reports, right/View) were already taken,
-      and rewriting `PanelShell` to support more than one panel per edge was
-      out of scope for this pass.
-    - **New `panels.groups` visibility key** (`MenuBar.tsx`) — a plain
-      addition alongside `panels.countries` (the old filter), not a
-      replacement; `onShowAll` in `App.tsx` updated to match.
-    - **Backfilled 52 missing `COUNTRY_LABEL` entries** (`palette.ts`), found
-      because the new country directory needs real names, not bare codes:
-      the 139-country mint added `COUNTRY_FAMILY` entries for all of them but
-      never labels, so China, India, Japan, Mexico, Indonesia and 47 others
-      were falling back to a bare ISO code everywhere a label renders (the
-      `Flag` component's fallback path too, not just this new panel). Same
-      kind of backfill this file already describes happening twice before —
-      "add a name when a country gets its first node" quietly stopped being
-      followed the same way, at the same scale-up, again.
-    - **Verified**: `npm run validate` (74 checks, up from 61 — new tests for
-      `computeGroupFocus`'s seed-to-seed edge collection and its "walks OUT
-      of the group same as single-node isolate" behaviour, `matchesRegionGroup`
-      for all four kinds including an orb-with-one-IMF-report-inside case,
-      and a `continentOf`-vs-`COUNTRY_FAMILY` coverage check that the two
-      hand-authored tables haven't silently drifted apart), `tsc --noEmit`
-      and `npm run build` both clean. A real headless-Chromium run against
-      the full merged corpus at the Everything tier: isolating "Middle East"
-      shows exactly 6 real reports (consistent with the cross-border-gap
-      note — 6 of the region's 7 countries are on that zero-cross-border
-      list, only the UAE has real international ties recorded); isolating
-      Israel from the new country directory independently reproduces the
-      documented 0-shown result through this new code path; isolating "IMF"
-      shows 42 real reports; every isolate correctly reverts to 396 of 3,091
-      on a second click.
-    - **Not done, explicitly deferred rather than silently skipped**:
-      broadening the MAIN search bar (`SearchPanel`) to also find a region,
-      bloc, publisher or country and isolate it the same way — Thomas asked
-      for this in the same message ("let the main search bar also pull up a
-      nation, regions, or node or edge or doc") and it did not make it into
-      this pass. Also not done: the reported "Israel search yields nothing"
-      bug from 5d was diagnosed but never re-tested against Thomas's actual
-      live session state.
-
-5f. **Bottom-centre slot swap — ASKED 2026-08-20, NOT BUILT.** Thomas, after
-    seeing 5e's shipped `GroupsPanel`: get rid of the original "Countries ·
-    All" control (the `ChipBar`/`SCOPE_GROUPS` filter, bottom-centre) and put
-    `GroupsPanel` ("Regions & Countries," currently bottom-right) there by
-    default instead — bottom-centre is where the eye already goes for
-    country/region navigation, bottom-right reads as secondary.
-    - **Open scope question before building**: "get rid of" could mean (a)
-      delete `ChipBar`/`SCOPE_GROUPS` outright — but 5e deliberately kept it
-      as a genuinely different mechanism (a FILTER: both-endpoints-visible,
-      drops cross-border edges — still useful for "show me only the AFR
-      family," a different question from isolate) — or (b) just relocate
-      `GroupsPanel` to bottom-centre and demote the old control (collapsed
-      pill, or moved elsewhere, or hidden behind a `Panels ▾` toggle) without
-      deleting the mechanism. Confirm which with Thomas before writing code;
-      defaulting to (b) — relocate + demote, keep the mechanism reachable —
-      is the reversible choice if this needs to be guessed.
-    - **§7's `PanelShell`-one-panel-per-edge trap applies here too**:
-      bottom-centre is currently the tier bar's status-line slot (§4: "the
-      tier bar and its status line are deliberately NOT in the menu —
-      primary navigation, and the only signal a filter is on"), not a
-      `PanelShell` edge, so this is a layout/z-order question specific to
-      that HUD area, not a straight `PanelShell` swap — read `MenuBar.tsx`
-      and the tier-bar component before assuming this is a one-line move.
-    - Not started. No code changed for this item yet.
-
 ### [Agent] — next build rounds, in order
 
 6. **FIXED 2026-08-20 — the layout's path-dependence.** Was the top open bug:
@@ -787,11 +584,8 @@ cross-project diary — not the project's, leave it alone).
   **`components/linkVisuals.ts`** — edge shader, `edgeShade`, `pulseMaterial`.
   **`components/nodeVisuals.ts`** — node material, fresnel rims, halos.
   **`lib/hierarchy.ts`** — tier disclosure, orbs, `DisclosedDependency`.
-  **`lib/regions.ts`** — continents, treaty blocs, publisher-orgs, the
-  country directory; `lib/selection.ts`'s `computeFocus`/`computeGroupFocus`
-  is the walk both single-node and group Isolate share.
 - **`components/MenuBar.tsx`, `HelpCard.tsx`, `LoadingCurtain.tsx`,
-  `PanelShell.tsx`, `GroupsPanel.tsx`** — the chrome.
+  `PanelShell.tsx`** — the chrome.
 - Data: `src/data/research/*.json` slices auto-load; `slices.generated.ts` is
   generated; `graph.ts` builds + validates (44 checks in
   `scripts/validate-data.ts` + `test-logic.ts`).
@@ -800,19 +594,6 @@ cross-project diary — not the project's, leave it alone).
 
 ## 7. Known traps — the ones that will actually bite
 
-- **`PanelShell` supports exactly one panel per screen edge.** Both slots
-  (left/Reports, right/View) are already taken, which is why `GroupsPanel`
-  (item 5e) is its own free-floating panel with its own collapse state rather
-  than a third `PanelShell`. If a fourth persistent panel is ever wanted,
-  either `PanelShell` needs a stacking/offset parameter or the free-floating
-  pattern `ChipBar`/`GroupsPanel` already use is the answer again.
-- **Isolating a group can show a surprisingly small number with no
-  explanation on screen.** "Middle East" isolates to 6 real reports — correct
-  (6 of its 7 countries are on the zero-cross-border-edges list in
-  `notes/cross-border-gaps-2026-08-20.md`, so almost everything folds into
-  orbs with no real report count and no international tie to walk to) but
-  looks like a bug to anyone who hasn't read that note. Worth a "why so few?"
-  affordance before this ships to anyone but Thomas.
 - **A cap that silently binds costs two things at once.** `nodeScaleFor`'s cap
   was 20 while the fit was asking for 92.8: nodes rendered at a fifth of their
   size AND, because `baseLinkWidth` is a multiple of node scale, edges went

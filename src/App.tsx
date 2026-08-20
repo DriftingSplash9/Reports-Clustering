@@ -81,7 +81,9 @@ import {
   validate,
   type Disclosure,
 } from './lib/graph'
-import { buildFocusIndex, computeFocus, edgeKey } from './lib/selection'
+import { buildFocusIndex, computeFocus, computeGroupFocus, edgeKey } from './lib/selection'
+import { REGION_GROUPS, COUNTRY_GROUPS, reportIdsForGroup, type RegionGroup } from './lib/regions'
+import { GroupsPanel } from './components/GroupsPanel'
 import {
   DEFAULT_DRILLDOWN,
   TIER_DESCRIPTION,
@@ -193,6 +195,15 @@ export default function App() {
 
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(STARTUP_VIEW?.selectedId ?? null)
+  /**
+   * A region/bloc/publisher picked from `GroupsPanel`, mutually exclusive
+   * with `selectedId` (2026-08-20, Thomas: "we should have a menu with north
+   * america, south america... IMF, eu, brics... when we open a nation or
+   * region we should see how it ties to the international level and the
+   * connections within it"). Not persisted in saved views yet — see the
+   * note where `isolateFocus` below reads it.
+   */
+  const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null)
   const [bounds, setBounds] = useState<GraphBounds | null>(null)
   const [view, setView] = useState<ViewSettings>(STARTUP_VIEW?.view ?? DEFAULT_VIEW)
   const [filter, setFilter] = useState<FilterState>(STARTUP_VIEW?.filter ?? NO_FILTER)
@@ -256,6 +267,44 @@ export default function App() {
     () => buildFocusIndex(disclosedGraph, null),
     [disclosedGraph],
   )
+
+  /**
+   * The selected group (a continent, bloc, or publisher), resolved from
+   * `selectedGroupId` — `REGION_GROUPS` and `COUNTRY_GROUPS` are two arrays
+   * for two panels, but one id namespace (`continent:`/`bloc:`/`publisher:`
+   * vs `country:`), so a single lookup across both is correct rather than
+   * something the caller has to know to route.
+   */
+  const selectedGroup: RegionGroup | null = useMemo(() => {
+    if (!selectedGroupId) return null
+    return (
+      REGION_GROUPS.find((g) => g.id === selectedGroupId) ??
+      COUNTRY_GROUPS.find((g) => g.id === selectedGroupId) ??
+      null
+    )
+  }, [selectedGroupId])
+
+  /**
+   * Isolate by GROUP — same mechanism as the single-node Isolate below
+   * (`computeGroupFocus` over the same unfiltered index), seeded from every
+   * disclosed node `matchesRegionGroup` accepts rather than one selection.
+   * A group selection always isolates regardless of `view.isolateFocus` —
+   * unlike a single node, a region/bloc/publisher has no other useful
+   * "selected but not isolated" state; the whole point of picking one from
+   * `GroupsPanel` is to see it and its ties, nothing else.
+   */
+  const groupFocus = useMemo(
+    () =>
+      selectedGroup
+        ? computeGroupFocus(
+            unfilteredFocusIndex,
+            reportIdsForGroup(disclosedGraph.nodes, selectedGroup),
+            { builtFrom: view.focusBuiltFrom, feedsInto: view.focusFeedsInto },
+          )
+        : null,
+    [unfilteredFocusIndex, disclosedGraph, selectedGroup, view.focusBuiltFrom, view.focusFeedsInto],
+  )
+
   const isolateFocus = useMemo(
     () =>
       view.isolateFocus && selectedId
@@ -268,6 +317,16 @@ export default function App() {
   )
 
   const visible = useMemo(() => {
+    // Group isolate wins over everything else — it is the most specific,
+    // most recently expressed intent ("show me exactly this region").
+    if (groupFocus) {
+      return {
+        nodes: groupFocus.nodes,
+        edges: groupFocus.edges,
+        hiddenNodes: disclosedGraph.nodes.length - groupFocus.nodes.size,
+        hiddenEdges: disclosedGraph.edges.length - groupFocus.edges.size,
+      }
+    }
     // Isolate wins outright over the scope/domain filter rather than
     // combining with it — "just Israel and its connections" means exactly
     // that chain, not that chain further narrowed by whatever family was
@@ -282,7 +341,7 @@ export default function App() {
       }
     }
     return isFiltering(filter) ? applyFilter(disclosedGraph, predicate) : null
-  }, [isolateFocus, disclosedGraph, filter, predicate])
+  }, [groupFocus, isolateFocus, disclosedGraph, filter, predicate])
 
   /**
    * What the tier bar reports: **real reports, orbs excluded, after the
@@ -396,6 +455,7 @@ export default function App() {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         setSelectedId(null)
+        setSelectedGroupId(null)
         setSelectedEdgeKey(null)
       }
     }
@@ -524,11 +584,27 @@ export default function App() {
   const handleChoose = useCallback(
     (report: ScoredReport) => {
       const id = resolveId(drilldown, report, openedCountries)
+      setSelectedGroupId(null)
       setSelectedId(id)
       setFlyTo((f) => ({ id, nonce: (f?.nonce ?? 0) + 1 }))
     },
     [drilldown, openedCountries],
   )
+
+  /**
+   * A region, bloc or publisher was picked from `GroupsPanel` — see the
+   * `selectedGroup`/`groupFocus` memos above. No `flyTo`: a group has no
+   * single point for the camera to fly to, and `visible` narrowing to the
+   * group's nodes is what makes the whole thing visible on screen already
+   * (the camera refits on every filter change regardless — see the note on
+   * that in `InfluenceGraph.tsx`). Picking the SAME group again turns it back
+   * off, matching every other isolate-first control in this app.
+   */
+  const handleChooseGroup = useCallback((groupId: string) => {
+    setSelectedId(null)
+    setSelectedEdgeKey(null)
+    setSelectedGroupId((cur) => (cur === groupId ? null : groupId))
+  }, [])
 
   /**
    * A dot in `IsolatedShelf` was clicked.
@@ -542,6 +618,7 @@ export default function App() {
    * node in the scene.
    */
   const handleSelectIsolated = useCallback((id: string) => {
+    setSelectedGroupId(null)
     setSelectedId((cur) => (cur === id ? null : id))
   }, [])
 
@@ -591,6 +668,7 @@ export default function App() {
    */
   const handleReset = useCallback((clearFilter: boolean) => {
     setSelectedId(null)
+    setSelectedGroupId(null)
     setFlyTo(null)
     setView((v) => ({ ...v, zoom: 1 }))
     setResetSignal((n) => n + 1)
@@ -871,6 +949,7 @@ export default function App() {
             return
           }
           setSelectedId(null)
+          setSelectedGroupId(null)
           setSelectedEdgeKey(null)
         }}
       >
@@ -921,7 +1000,10 @@ export default function App() {
           flyTo={flyTo}
           levelColours={levelColours}
           onHover={setHovered}
-          onSelect={setSelectedId}
+          onSelect={(id) => {
+            setSelectedGroupId(null)
+            setSelectedId(id)
+          }}
           onSelectEdge={(key) =>
             setSelectedEdgeKey((current) => (current === key ? null : key))
           }
@@ -1002,7 +1084,15 @@ export default function App() {
         panels={panels}
         onToggle={togglePanel}
         onShowAll={() =>
-          setPanels({ reports: true, find: true, calendar: true, countries: true, unlinked: true, view: true })
+          setPanels({
+            reports: true,
+            find: true,
+            calendar: true,
+            countries: true,
+            groups: true,
+            unlinked: true,
+            view: true,
+          })
         }
         onHideAll={() => setPanels(PANELS_HIDDEN)}
         onHowTo={() => setHowToRequest((n) => n + 1)}
@@ -1043,6 +1133,13 @@ export default function App() {
         onAll={() => setFilter((f) => ({ ...f, scopes: null }))}
         onNone={() => setFilter((f) => ({ ...f, scopes: [] }))}
       />
+      )}
+
+      {panels.groups && (
+        <GroupsPanel
+          selectedGroupId={selectedGroupId}
+          onChoose={handleChooseGroup}
+        />
       )}
 
       <TierBar

@@ -1316,6 +1316,28 @@ export const COUNTRY_LABEL: Record<string, string> = {
   // Israel and Singapore, added 2026-08-18 alongside their COUNTRY_FAMILY
   // entries above.
   IL: 'Israel', SG: 'Singapore',
+
+  // Backfilled 2026-08-20, found while building the Countries directory
+  // panel (`regions.ts`): the 139-country Grok mint added COUNTRY_FAMILY
+  // entries for all of these but never a label, so 52 countries — including
+  // China, India, Japan, Mexico, Indonesia — were falling back to a bare ISO
+  // code everywhere a label renders (the Flag component's fallback path, and
+  // now the directory too). Same backfill this comment block already
+  // describes happening twice before; same fix.
+  CN: 'China', IN: 'India', JP: 'Japan', ID: 'Indonesia', MX: 'Mexico',
+  KR: 'South Korea', TH: 'Thailand', VN: 'Vietnam', PH: 'Philippines',
+  TW: 'Taiwan', IQ: 'Iraq', IR: 'Iran', SA: 'Saudi Arabia', SY: 'Syria',
+  YE: 'Yemen', AF: 'Afghanistan', MM: 'Myanmar',
+  CL: 'Chile', CO: 'Colombia', PE: 'Peru', VE: 'Venezuela', EC: 'Ecuador',
+  PY: 'Paraguay', UY: 'Uruguay', GY: 'Guyana', SR: 'Suriname',
+  AO: 'Angola', MZ: 'Mozambique', MG: 'Madagascar', MR: 'Mauritania',
+  MU: 'Mauritius', NE: 'Niger', GM: 'The Gambia', GN: 'Guinea',
+  GW: 'Guinea-Bissau', GQ: 'Equatorial Guinea', CV: 'Cabo Verde',
+  BI: 'Burundi', BJ: 'Benin', CD: 'Democratic Republic of the Congo',
+  CF: 'Central African Republic', CG: 'Republic of the Congo',
+  DJ: 'Djibouti', ER: 'Eritrea', KM: 'Comoros', LR: 'Liberia',
+  SC: 'Seychelles', SD: 'Sudan', SL: 'Sierra Leone', SO: 'Somalia',
+  SS: 'South Sudan', ST: 'São Tomé and Príncipe',
 }
 
 export function countryLabelFor(country: Country): string {

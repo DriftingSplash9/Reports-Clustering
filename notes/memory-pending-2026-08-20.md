@@ -450,10 +450,42 @@ surfaced.
 
 ---
 
+## Addendum — Regions/Organizations panel + Countries directory, still 2026-08-20 (item 5e)
+
+Thomas's next complaint after the Isolate feature: the "Countries" panel
+(`ChipBar`/`SCOPE_GROUPS`) is "12 mixed nations and organizations," and asked
+for a Regions/Organizations menu (continents, IMF, EU, BRICS, etc.) plus a
+plain country directory, where opening either shows international ties, not
+just internal ones. Full detail is in `HANDOFF.md` item 5e — this addendum is
+deliberately short, pointing there rather than duplicating it, since the
+handoff file is now updated every session per Thomas's own new standing rule
+(see `HANDOFF.md` §0).
+
+Built as a genuinely PARALLEL feature to the existing filter, not a
+replacement: new `src/lib/regions.ts` (continents via a new `CONTINENT_OF`
+map covering all 142 corpus country codes, treaty blocs read straight off
+`geoAffinity.ts`'s existing `COUNTRY_BLOCS` so the two can never disagree,
+publisher-based orgs like IMF matched by substring, and a country directory
+derived from `COUNTRY_LABEL`), `selection.ts`'s `walk()` generalised to
+multi-seed so a whole region's internal edges get collected for free
+alongside its outward ones (`computeGroupFocus`), and a new
+`GroupsPanel.tsx`. Also backfilled 52 missing `COUNTRY_LABEL` entries
+(China, India, Japan, Mexico and 48 others were bare ISO codes everywhere).
+74/74 logic checks, `tsc`/`build` clean, verified live via headless Chromium:
+Middle East isolates to 6 real reports (matches the cross-border-gap note —
+6 of 7 Middle Eastern countries have none), Israel isolates to 0 via this new
+path too (same as the existing finding), IMF isolates to 42.
+
+Not done: broadening the MAIN search bar to also find a region/org/country
+(Thomas asked for this in the same message) — deferred, noted in HANDOFF.md.
+
+---
+
 ## MEMORY.md index line to add
 
 ```
 - [Phase 4 complete + two render bugs, 2026-08-20 — READ BEFORE RENDERER OR SLIDER WORK](phase4-complete-and-render-bugs.md) — menu bar, Help from START-HERE.md verbatim, saved views with an open-on-load star, loading curtain. **The bug to remember: `nodeScaleFor`'s cap silently binding cost node size AND edge width together — recompute it whenever a slider ceiling moves.** Also: the camera can never end up inside the cluster by raising spread (fit sits at exactly 5.675 × p95); spread saturates; and the layout is PATH-DEPENDENT — cold start vs ramped gives a 14× different cloud for identical settings, which is the "ball vs oblong" glitch.
 - [Grok archive minted + per-country fold, 2026-08-20 — READ BEFORE TOUCHING THE DRILLDOWN OR THE CORPUS SIZE](grok-archive-minted-2026-08-20.md) — corpus 1,250→3,091 reports (see the mint addendum above this one in the pending file for the full merge story); then, same day, `hierarchy.ts`'s tier ladder gained a SECOND fold axis (per-country, not just per-family-tier) because 139 countries made the old single-axis model dump 84% of the corpus onto the "Nations" tier at once. See `resolveId`'s comment in hierarchy.ts for the model.
 - [Galaxy clustering + Isolate feature, 2026-08-20 — READ BEFORE TOUCHING GEOAFFINITY, GALAXYFORCE, OR THE FOCUS/FILTER SYSTEM](galaxy-and-isolate-2026-08-20.md) — new `galaxyForce.ts` pulls nodes toward their own family/country centroid (NOT the same thing geoAffinity's "continent is not a relationship" rule forbids — that rule is about bilateral pull between unrelated countries, this only pulls a node toward its own group). New Isolate toggle (`view.isolateFocus`) hides everything outside a traced focus chain, built over an UNFILTERED index on purpose so cross-border edges survive — a filtered-index version would have silently dropped them (`applyFilter` requires both edge endpoints visible). **Also: 19 countries (Israel, Indonesia, Taiwan, and 16 others, mostly from the recent mint) have ZERO cross-border dependency edges in the corpus — real, verified, not a bug — see `notes/cross-border-gaps-2026-08-20.md` before assuming Isolate or geoAffinity is broken for any of them.**
+- [Regions/Organizations panel + Countries directory, 2026-08-20 — READ BEFORE TOUCHING lib/regions.ts, GroupsPanel.tsx, OR selection.ts's walk()](regions-and-groups-panel-2026-08-20.md) — new `RegionGroup` concept (continent/bloc/publisher/country), isolate-based not filter-based, built on a generalised multi-seed `computeGroupFocus`. Parallel to, not a replacement for, the existing `ChipBar` scope filter. See `HANDOFF.md` item 5e for full detail.
 ```

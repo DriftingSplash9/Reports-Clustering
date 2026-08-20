@@ -15,11 +15,13 @@
 import { calendarEvents, cadenceBand, describeWindow, horizonWindow, isRealDate, nextRelease } from '../src/lib/schedule'
 import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, countryFromOrbId, countryOrbId, isCountryOrbId, isFamilyOrbId, isOrbId, orbId, resolveId, tierOf, toggleCountryOpen, toggleDrilldown } from '../src/lib/hierarchy'
 import { NO_FILTER, applyFilter, compile, isFiltering, isolateFirstToggle } from '../src/lib/filter'
-import { buildFocusIndex, computeFocus } from '../src/lib/selection'
+import { buildFocusIndex, computeFocus, computeGroupFocus } from '../src/lib/selection'
 import { buildGraph, describeRate, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
 import { search } from '../src/lib/search'
 import { affinityScore } from '../src/lib/geoAffinity'
 import { galaxyForce, type GalaxyNode } from '../src/lib/galaxyForce'
+import { continentOf, matchesRegionGroup, reportIdsForGroup, REGION_GROUPS, COUNTRY_GROUPS } from '../src/lib/regions'
+import { COUNTRY_FAMILY } from '../src/lib/palette'
 import type { Dependency, Report } from '../src/lib/types'
 
 let failures = 0
@@ -201,6 +203,65 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   const unfilteredIndex = buildFocusIndex(g, null)
   const isolated = computeFocus(unfilteredIndex, 'il-report', { builtFrom: true, feedsInto: true })
   ok(isolated.nodes.has('py-mercosur-israel'), 'isolateFocus model: walking the UNFILTERED index reaches the cross-border report the scope filter would have dropped')
+}
+{
+  // computeGroupFocus: the multi-seed generalisation regions.ts's group
+  // isolate is built on (2026-08-20, Thomas: "north america, south america,
+  // asia, europe, middle east... IMF, eu, brics"). Three reports: two in the
+  // "group" (a synthetic bloc), citing each other, plus one outside the group
+  // that one of them also cites.
+  const reports: Report[] = [
+    { id: 'g1', title: 'g1', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'g2', title: 'g2', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'outside', title: 'outside', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+  ]
+  const deps: Dependency[] = [
+    { source_report_id: 'g1', target_report_id: 'g2', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'g1', target_report_id: 'outside', relationship_type: 'cites', basis: 't' },
+  ]
+  const g = buildGraph(reports, deps)
+  const index = buildFocusIndex(g, null)
+  const focus = computeGroupFocus(index, ['g1', 'g2'], { builtFrom: true, feedsInto: true })
+  ok(focus.nodes.has('g1') && focus.nodes.has('g2'), 'computeGroupFocus: both seeds present even with no edges walked to reach them')
+  ok(focus.edges.has('g1->g2'), 'computeGroupFocus: the edge BETWEEN two seeds is collected — not just edges leaving the group')
+  ok(focus.nodes.has('outside') && focus.edges.has('g1->outside'), 'computeGroupFocus: still walks OUT of the group to whatever it actually connects to, same as single-node isolate')
+  const noWalk = computeGroupFocus(index, ['g1', 'g2'], { builtFrom: false, feedsInto: false })
+  ok(!noWalk.nodes.has('outside') && noWalk.nodes.size === 2, 'computeGroupFocus: both cones off leaves exactly the seed set, no walking')
+}
+{
+  // regions.ts: every country CONTINENT_OF has an opinion on for continent
+  // grouping should agree with COUNTRY_FAMILY on which codes are known
+  // countries at all — the two tables are maintained separately (continents
+  // are new; families predate this session) and must not silently drift apart.
+  const knownFamilies = Object.keys(COUNTRY_FAMILY).filter((c) => c !== 'INT')
+  const uncovered = knownFamilies.filter((c) => continentOf(c) === 'International')
+  ok(uncovered.length === 0, `continentOf: every known country maps to a real continent, not the INT fallback (missing: ${uncovered.join(',') || 'none'})`)
+
+  // matchesRegionGroup — one representative of each kind, structural only
+  // (no src/data import — this file stays a pure-logic suite by rule).
+  const caReal = { id: 'r1', country: 'CA', publisher: 'Statistics Canada' }
+  const deReal = { id: 'r2', country: 'DE', publisher: 'Destatis' }
+  const imfReal = { id: 'r3', country: 'INT', publisher: 'International Monetary Fund' }
+  const naOrb = { id: 'corb:CA', country: 'CA', publisher: '3 folded reports', members: [{ publisher: 'Statistics Canada' }] }
+  const imfOrb = { id: 'corb:INT', country: 'INT', publisher: '2 folded reports', members: [{ publisher: 'World Bank' }, { publisher: 'International Monetary Fund' }] }
+
+  const naContinent = REGION_GROUPS.find((g) => g.id === 'continent:North America')!
+  ok(matchesRegionGroup(caReal, naContinent) && !matchesRegionGroup(deReal, naContinent), 'matchesRegionGroup: continent kind matches by continentOf(country)')
+  ok(matchesRegionGroup(naOrb, naContinent), 'matchesRegionGroup: a country ORB matches by its own .country field, same as a real report')
+
+  const euBloc = REGION_GROUPS.find((g) => g.id === 'bloc:EU')!
+  ok(matchesRegionGroup(deReal, euBloc) && !matchesRegionGroup(caReal, euBloc), 'matchesRegionGroup: bloc kind reads straight off COUNTRY_BLOCS, no duplicated membership list')
+
+  const imfPublisher = REGION_GROUPS.find((g) => g.id === 'publisher:imf')!
+  ok(matchesRegionGroup(imfReal, imfPublisher), 'matchesRegionGroup: publisher kind matches a real report by publisher substring')
+  ok(!matchesRegionGroup(caReal, imfPublisher), 'matchesRegionGroup: publisher kind does not match an unrelated publisher')
+  ok(matchesRegionGroup(imfOrb, imfPublisher), 'matchesRegionGroup: publisher kind reaches INTO a folded orb’s .members — an orb with one IMF report inside still counts, even though the orb’s own synthetic .publisher string does not')
+
+  const caCountry = COUNTRY_GROUPS.find((g) => g.country === 'CA')!
+  ok(matchesRegionGroup(caReal, caCountry) && matchesRegionGroup(naOrb, caCountry), 'matchesRegionGroup: country kind matches both a real report and its folded orb')
+
+  const ids = reportIdsForGroup([caReal, deReal, imfReal, naOrb, imfOrb], naContinent)
+  ok(ids.has('r1') && ids.has('corb:CA') && !ids.has('r2'), 'reportIdsForGroup: seed set is exactly the matching node ids')
 }
 
 // ------------------------------------------------------------------- graph --

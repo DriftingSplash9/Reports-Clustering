@@ -80,22 +80,31 @@ export interface Focus {
 }
 
 /**
- * Walk one direction from `startId`, collecting nodes and the edges used to
- * reach them.
+ * Walk one direction from one or more starting ids, collecting nodes and the
+ * edges used to reach them.
  *
  * `orient` maps a step to the edge's direction *in the data model*, which is
  * always dependent → depended-upon regardless of which way we are walking.
  * Getting this backwards would light the right nodes and the wrong edges.
+ *
+ * Multi-source generalisation (2026-08-20, for `computeGroupFocus` below):
+ * seeding `seen` with every start id up front, before the walk begins, means
+ * an edge directly between two seeds still gets collected — `seen.has(next)`
+ * only skips re-queuing an already-visited node, never the `edges.add` call
+ * above it — so "isolate this whole region" naturally includes the edges
+ * *within* the region as well as the ones reaching out of it, with no special
+ * case. A single-id walk is just this with one seed, which is exactly why
+ * `computeFocus` below still reads as unchanged.
  */
 function walk(
-  startId: string,
+  startIds: Iterable<string>,
   adjacency: Map<string, string[]>,
   orient: (from: string, to: string) => string,
 ): { nodes: Set<string>; edges: Set<string> } {
   const nodes = new Set<string>()
   const edges = new Set<string>()
-  const queue = [startId]
-  const seen = new Set<string>([startId])
+  const queue = [...startIds]
+  const seen = new Set<string>(queue)
 
   while (queue.length) {
     const current = queue.shift() as string
@@ -123,8 +132,8 @@ export function computeFocus(
   selectedId: string,
   show: { builtFrom: boolean; feedsInto: boolean },
 ): Focus {
-  const up = walk(selectedId, index.builtFrom, (from, to) => edgeKey(from, to))
-  const down = walk(selectedId, index.feedsInto, (from, to) => edgeKey(to, from))
+  const up = walk([selectedId], index.builtFrom, (from, to) => edgeKey(from, to))
+  const down = walk([selectedId], index.feedsInto, (from, to) => edgeKey(to, from))
 
   const nodes = new Set<string>([selectedId])
   const edges = new Set<string>()
@@ -145,4 +154,44 @@ export function computeFocus(
     nodes,
     edges,
   }
+}
+
+/**
+ * The same computation as `computeFocus`, seeded from an entire GROUP of ids
+ * at once rather than one selection — "isolate this region/bloc/publisher",
+ * not "isolate this report". See `regions.ts` for what supplies `seedIds`
+ * (a continent, a treaty bloc, or a stateless publisher's reports) and the
+ * file-level comment on `walk` above for why edges *within* the group are
+ * collected for free rather than needing their own pass.
+ *
+ * No `selectedId` field — a group has no single "the" selection — so this is
+ * a distinct, smaller interface rather than a `Focus` with a fudged field.
+ */
+export interface GroupFocus {
+  seedIds: Set<string>
+  nodes: Set<string>
+  edges: Set<string>
+}
+
+export function computeGroupFocus(
+  index: FocusIndex,
+  seedIds: Iterable<string>,
+  show: { builtFrom: boolean; feedsInto: boolean },
+): GroupFocus {
+  const seeds = new Set(seedIds)
+  const nodes = new Set(seeds)
+  const edges = new Set<string>()
+
+  if (show.builtFrom) {
+    const up = walk(seeds, index.builtFrom, (from, to) => edgeKey(from, to))
+    for (const id of up.nodes) nodes.add(id)
+    for (const k of up.edges) edges.add(k)
+  }
+  if (show.feedsInto) {
+    const down = walk(seeds, index.feedsInto, (from, to) => edgeKey(to, from))
+    for (const id of down.nodes) nodes.add(id)
+    for (const k of down.edges) edges.add(k)
+  }
+
+  return { seedIds: seeds, nodes, edges }
 }

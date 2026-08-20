@@ -5,15 +5,15 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-20 (updated a sixth time the same day)**. The day in
+Last written: **2026-08-20 (updated a fifth time the same day)**. The day in
 order: the mint (item 5), then Thomas reported the tier system unusable at
 the new corpus size and got the per-country fold (5b) the same day, then
 asked for real "galaxies" and got the clustering force (5c), then came back
 with three more things in one message and got the Isolate feature plus two
 diagnoses (5d) — search blocked by a lingering filter, and a real 19-country
 zero-cross-border-edge data gap, NOT a bug, written up in
-`notes/cross-border-gaps-2026-08-20.md`. Then (5e): Thomas found the
-"Countries" filter panel itself was the next problem — "12 mixed nations
+`notes/cross-border-gaps-2026-08-20.md`. **This update (5e)**: Thomas found
+the "Countries" filter panel itself was the next problem — "12 mixed nations
 and organizations" — and asked for it split into a Regions/Organizations
 panel and a plain country directory, both ISOLATE rather than filter, so
 opening a region shows its international ties rather than cutting them. Built
@@ -21,28 +21,15 @@ and shipped as a new, parallel `regions.ts` + `GroupsPanel.tsx` — the old
 `ChipBar` filter panel is untouched, not replaced. Also backfilled 52 missing
 `COUNTRY_LABEL` entries (China, India, Japan, Mexico and 48 others were
 rendering as bare ISO codes everywhere a label shows). Separately, Thomas
-asked two process questions that update answers in §0 below: how to tell when
+asked two process questions this update answers in §0 below: how to tell when
 a session is getting too long to trust, and a standing rule for updating this
-file every time work happens, not just at big milestones. **This update
-(5f)**: Thomas, looking at 5e's shipped result, asked to remove the old
-`ChipBar` "Countries · All" control from bottom-centre and put `GroupsPanel`
-("Regions & Countries") there by default instead — bottom-centre is the
-primary-navigation slot, bottom-right (where `GroupsPanel` lives today) reads
-as secondary. **TODO ONLY — nothing built this update**, logged as new item
-5f in §5. See that entry for the two open scope questions (does "get rid of"
-mean delete `ChipBar`/`SCOPE_GROUPS` outright, given it is a genuinely
-different filter-vs-isolate mechanism 5e deliberately left alone — or just
-relocate `GroupsPanel` and demote/hide the old control; and `PanelShell`'s
-one-panel-per-edge limit from §7 applies to bottom-centre same as the
-left/right edges).
+file every time work happens, not just at big milestones.
 Earlier the same day: corrected a long-running false claim about git,
 measured three things the project had only argued about, finished Phase 4 of
 the visual revamp, and fixed two rendering bugs. Written for a FRESH agent
 with no memory of any of it. Supersedes
-`archive/Previous Handoffs/HANDOFF-2026-08-20-groupspanel-process-rules.md`
+`archive/Previous Handoffs/HANDOFF-2026-08-20-mint-fold-galaxy-isolate.md`
 (itself superseding
-`archive/Previous Handoffs/HANDOFF-2026-08-20-mint-fold-galaxy-isolate.md`,
-itself superseding
 `archive/Previous Handoffs/HANDOFF-2026-08-19-visual-revamp-phase4-complete.md`),
 kept for per-item detail.
 
@@ -659,31 +646,6 @@ Sorted by owner, ordered by priority within each.
       this pass. Also not done: the reported "Israel search yields nothing"
       bug from 5d was diagnosed but never re-tested against Thomas's actual
       live session state.
-
-5f. **Bottom-centre slot swap — ASKED 2026-08-20, NOT BUILT.** Thomas, after
-    seeing 5e's shipped `GroupsPanel`: get rid of the original "Countries ·
-    All" control (the `ChipBar`/`SCOPE_GROUPS` filter, bottom-centre) and put
-    `GroupsPanel` ("Regions & Countries," currently bottom-right) there by
-    default instead — bottom-centre is where the eye already goes for
-    country/region navigation, bottom-right reads as secondary.
-    - **Open scope question before building**: "get rid of" could mean (a)
-      delete `ChipBar`/`SCOPE_GROUPS` outright — but 5e deliberately kept it
-      as a genuinely different mechanism (a FILTER: both-endpoints-visible,
-      drops cross-border edges — still useful for "show me only the AFR
-      family," a different question from isolate) — or (b) just relocate
-      `GroupsPanel` to bottom-centre and demote the old control (collapsed
-      pill, or moved elsewhere, or hidden behind a `Panels ▾` toggle) without
-      deleting the mechanism. Confirm which with Thomas before writing code;
-      defaulting to (b) — relocate + demote, keep the mechanism reachable —
-      is the reversible choice if this needs to be guessed.
-    - **§7's `PanelShell`-one-panel-per-edge trap applies here too**:
-      bottom-centre is currently the tier bar's status-line slot (§4: "the
-      tier bar and its status line are deliberately NOT in the menu —
-      primary navigation, and the only signal a filter is on"), not a
-      `PanelShell` edge, so this is a layout/z-order question specific to
-      that HUD area, not a straight `PanelShell` swap — read `MenuBar.tsx`
-      and the tier-bar component before assuming this is a one-line move.
-    - Not started. No code changed for this item yet.
 
 ### [Agent] — next build rounds, in order
 

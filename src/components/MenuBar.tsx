@@ -34,7 +34,7 @@ import { MENU_BAR_HEIGHT } from '../lib/uiTheme'
  * not put the ruler inside the menu.
  */
 
-export type PanelKey = 'reports' | 'find' | 'calendar' | 'countries' | 'unlinked' | 'view'
+export type PanelKey = 'reports' | 'find' | 'calendar' | 'countries' | 'groups' | 'unlinked' | 'view'
 
 export type PanelVisibility = Record<PanelKey, boolean>
 
@@ -48,6 +48,7 @@ export const PANELS_HIDDEN: PanelVisibility = {
   find: false,
   calendar: false,
   countries: false,
+  groups: false,
   unlinked: false,
   view: false,
 }
@@ -56,7 +57,8 @@ const PANEL_ITEMS: { key: PanelKey; label: string; hint: string }[] = [
   { key: 'reports', label: 'Reports', hint: 'Corpus totals, the most depended-upon reports, and the subject filters' },
   { key: 'find', label: 'Find a report', hint: 'Search by name — or just press /' },
   { key: 'calendar', label: 'Calendar', hint: 'What publishes when, banded by cadence' },
-  { key: 'countries', label: 'Countries', hint: 'Show or hide whole countries and regions' },
+  { key: 'countries', label: 'Countries (filter)', hint: 'Hide whole colour families — an edge to anything outside the chosen ones is dropped' },
+  { key: 'groups', label: 'Regions, orgs & countries (isolate)', hint: 'Pick a continent, treaty bloc, publisher or single country to see just it plus everything it actually connects to, including across borders' },
   { key: 'unlinked', label: 'Unlinked reports', hint: 'The shelf of reports with no surviving edge in either direction' },
   { key: 'view', label: 'View controls', hint: 'Zoom, haze, glow, cluster spread, geo-affinity and the lens' },
 ]
