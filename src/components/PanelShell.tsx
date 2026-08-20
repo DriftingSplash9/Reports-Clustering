@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { HUD_TOP } from '../lib/uiTheme'
 
 /**
  * A fixed-position panel that can be rolled off the edge of the screen,
@@ -48,7 +49,7 @@ export function PanelShell({
       <div
         style={{
           position: 'fixed',
-          top: 20,
+          top: HUD_TOP,
           [side]: 20,
           width,
           transform: `translateX(${collapsed ? off : 0}px)`,
@@ -74,7 +75,7 @@ export function PanelShell({
         aria-expanded={!collapsed}
         style={{
           position: 'fixed',
-          top: 20,
+          top: HUD_TOP,
           [side]: 20,
           // While expanded the tab sits just *inside* the panel's far edge, not
           // outside it. Outside was the first attempt and both tabs ended up half

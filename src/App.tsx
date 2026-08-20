@@ -22,6 +22,15 @@ import CalendarPanel from './components/CalendarPanel'
 import { describeWindow, nextRelease } from './lib/schedule'
 import CameraZoom from './components/CameraZoom'
 import { PanelShell } from './components/PanelShell'
+import { MenuBar, PANELS_HIDDEN, type PanelKey, type PanelVisibility } from './components/MenuBar'
+import { HelpCard } from './components/HelpCard'
+
+/**
+ * Versioned like the onboarding key: if the panel set ever changes shape in a
+ * way the merge in `useState` cannot absorb, bump the suffix rather than
+ * writing migration code for a preference worth two clicks to restore.
+ */
+const PANELS_KEY = 'rig.panels.v1'
 import { Flag } from './components/Flag'
 import {
   BLOOM_THRESHOLD_MAX,
@@ -608,6 +617,45 @@ export default function App() {
     return counts
   }, [graph])
 
+  /**
+   * Which HUD panels are showing — the menu bar's model (Phase 4 §6).
+   *
+   * All six start hidden, as asked: the graph is the subject and every panel is
+   * an annotation beside it. The tier bar is not in here on purpose — it is
+   * primary navigation, not a panel, and its status line is the only signal
+   * that a filter is on. See `MenuBar.tsx` for that argument in full.
+   *
+   * Persisted, because the alternative is re-opening the same two panels every
+   * single load, and `Onboarding` already establishes localStorage as the place
+   * this app remembers a preference. A parse failure or disabled storage falls
+   * back to all-hidden rather than throwing: the menu is right there, and a
+   * blank graph with a working menu beats a white screen.
+   */
+  const [panels, setPanels] = useState<PanelVisibility>(() => {
+    try {
+      const raw = window.localStorage.getItem(PANELS_KEY)
+      if (!raw) return PANELS_HIDDEN
+      const saved = JSON.parse(raw) as Partial<PanelVisibility>
+      // Merged over the defaults rather than used directly, so a key added to
+      // PanelVisibility later cannot arrive as `undefined` from old storage.
+      return { ...PANELS_HIDDEN, ...saved }
+    } catch {
+      return PANELS_HIDDEN
+    }
+  })
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(PANELS_KEY, JSON.stringify(panels))
+    } catch {
+      // Nothing to do; the panels simply start hidden again next load.
+    }
+  }, [panels])
+  const togglePanel = (key: PanelKey) => setPanels((p) => ({ ...p, [key]: !p[key] }))
+
+  /** Bumped by Help ▸ How to use; `Onboarding` watches it. See that file. */
+  const [howToRequest, setHowToRequest] = useState(0)
+  const [helpOpen, setHelpOpen] = useState(false)
+
   return (
     <div
       style={{ width: '100%', height: '100%' }}
@@ -769,6 +817,24 @@ export default function App() {
         </EffectComposer>
       </Canvas>
 
+      {/*
+        The menu bar (Phase 4 §6). Rendered before every panel it governs so it
+        reads first in the DOM as well as on screen — a screen reader arriving
+        at a graph with all six panels hidden should meet the control that
+        brings them back, not the canvas.
+      */}
+      <MenuBar
+        panels={panels}
+        onToggle={togglePanel}
+        onShowAll={() =>
+          setPanels({ reports: true, find: true, calendar: true, countries: true, unlinked: true, view: true })
+        }
+        onHideAll={() => setPanels(PANELS_HIDDEN)}
+        onHowTo={() => setHowToRequest((n) => n + 1)}
+        onHelp={() => setHelpOpen(true)}
+      />
+
+      {panels.view && (
       <PanelShell side="right" label="View" width={190}>
         <ViewControls
           view={view}
@@ -777,9 +843,13 @@ export default function App() {
           onReset={handleReset}
         />
       </PanelShell>
+      )}
 
-      <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
+      {panels.find && (
+        <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
+      )}
 
+      {panels.countries && (
       <ChipBar
         scopeCounts={scopeCounts}
         filter={filter}
@@ -789,6 +859,7 @@ export default function App() {
         onAll={() => setFilter((f) => ({ ...f, scopes: null }))}
         onNone={() => setFilter((f) => ({ ...f, scopes: [] }))}
       />
+      )}
 
       <TierBar
         tier={drilldown}
@@ -798,27 +869,33 @@ export default function App() {
         total={graph.nodes.length}
       />
 
-      <Onboarding />
+      <Onboarding openRequest={howToRequest} />
+      {helpOpen && <HelpCard onClose={() => setHelpOpen(false)} />}
 
-      <IsolatedShelf
-        reports={isolated}
-        onHover={setHovered}
-        selectedId={selectedId}
-        onSelect={handleSelectIsolated}
-      />
+      {panels.unlinked && (
+        <IsolatedShelf
+          reports={isolated}
+          onHover={setHovered}
+          selectedId={selectedId}
+          onSelect={handleSelectIsolated}
+        />
+      )}
 
       {/*
         Bottom edge, and collapsed by default. It answers a question nobody has
         while first looking at the graph — the shape comes first and the timing
         second — so it costs one click to open and nothing at all to ignore.
       */}
-      <CalendarPanel
-        graph={graph}
-        dependencies={dependencies}
-        within={predicate}
-        onChoose={handleChoose}
-      />
+      {panels.calendar && (
+        <CalendarPanel
+          graph={graph}
+          dependencies={dependencies}
+          within={predicate}
+          onChoose={handleChoose}
+        />
+      )}
 
+      {panels.reports && (
       <PanelShell side="left" label="Reports" width={320}>
         <Hud
           nodeCount={graph.nodes.length}
@@ -839,6 +916,7 @@ export default function App() {
           feedsIntoCount={focus?.feedsInto.size ?? 0}
         />
       </PanelShell>
+      )}
 
       {/*
         Hover shows an identity CHIP; the full card moved to the click (Phase
@@ -1037,6 +1115,20 @@ function HoverChip({ report }: { report: ScoredReport }) {
 
 /** The full report card — slides in from the right on selection (Phase 4
  * §4.2). Was the hover card until 2026-08-19; hover now shows `HoverChip`. */
+/**
+ * The display form of a report's URL: its host, without `www.`.
+ *
+ * Falls back to the raw string if the URL will not parse — better a long ugly
+ * link than a card that renders nothing where a link should be.
+ */
+function hostOf(url: string): string {
+  try {
+    return new URL(url).host.replace(/^www\./, '')
+  } catch {
+    return url
+  }
+}
+
 function Detail({
   report,
   graph,
@@ -1112,6 +1204,34 @@ function Detail({
         {report.publisher} · {report.region} · published {cadence}
         {changes && <span style={{ color: 'var(--ink-gold)' }}> · changes {changes}</span>}
       </div>
+      {/*
+        The report's own URL (Thomas, 2026-08-19). Every node in this corpus is
+        a real published document and every one of them carries the address it
+        was verified at — the field was loaded, validated by `check-urls`, and
+        then never drawn, which is the same "a field nothing draws is a field
+        nobody checks" argument that put `part_of` and `terminal_reason` on this
+        card. The card's job is to answer "what is this?", and "go and read it"
+        is the end of that answer.
+
+        The host is shown rather than the full address: a UN or EUR-Lex URL runs
+        past 120 characters and would wrap to three lines above the authority
+        figure, and the title directly above already says which document this
+        is. `new URL()` is in a try because a malformed entry in a 1,250-node
+        corpus should cost this one line, not the whole card.
+      */}
+      {report.url && (
+        <div style={{ fontSize: 11, marginTop: 4 }}>
+          <a
+            href={report.url}
+            target="_blank"
+            rel="noreferrer"
+            title={report.url}
+            style={{ color: 'var(--ink-gold)', textDecoration: 'none' }}
+          >
+            {hostOf(report.url)} ↗
+          </a>
+        </div>
+      )}
       {/*
         Phase, where it is known. A rate says how often and never says when, and
         "next 17 August" is the thing anyone reading a cadence actually wanted.

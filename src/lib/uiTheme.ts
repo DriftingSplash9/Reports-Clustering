@@ -119,3 +119,19 @@ export const THEME_CSS = /* css */ `
   pointer-events: none;
 }
 `
+
+/**
+ * The menu bar's height, and the top edge everything below it now starts at.
+ *
+ * Added 2026-08-19 with the menu bar (Phase 4 §6). Before it, three separate
+ * blocks each hard-coded `top: 20` — the two `PanelShell` tabs, the search
+ * field, and the calendar button — and a fourth (the calendar panel itself)
+ * hard-coded 64 as "20 plus the button". A bar across the top of the viewport
+ * collides with all four, so the offset is a shared constant rather than four
+ * numbers that drift apart the next time the bar changes height.
+ *
+ * 14px of air below the bar, not 20: the bar already carries its own bottom
+ * border, so the old 20 read as a gap-plus-a-line and looked slack.
+ */
+export const MENU_BAR_HEIGHT = 30
+export const HUD_TOP = MENU_BAR_HEIGHT + 14

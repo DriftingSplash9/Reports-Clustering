@@ -11,6 +11,7 @@ import {
   type CalendarEvent,
   type Horizon,
 } from '../lib/schedule'
+import { HUD_TOP } from '../lib/uiTheme'
 
 /**
  * What is coming, and what quietly consumes it.
@@ -127,7 +128,7 @@ export default function CalendarPanel({
           // pixels. Slides DOWN from above the viewport instead of up from
           // below it; same tab, same animation, opposite edge.
           position: 'fixed',
-          top: 64,
+          top: HUD_TOP + 44,
           left: '50%',
           width: PANEL_WIDTH,
           marginLeft: -PANEL_WIDTH / 2,
@@ -295,7 +296,7 @@ export default function CalendarPanel({
           // by `translateX(-100%)` so the gap is measured between the two
           // controls rather than guessed from a hardcoded button width.
           position: 'fixed',
-          top: 20,
+          top: HUD_TOP,
           left: '50%',
           marginLeft: -(SEARCH_BAR_WIDTH / 2) - 8,
           transform: 'translateX(-100%)',

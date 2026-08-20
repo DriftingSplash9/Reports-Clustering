@@ -3,6 +3,7 @@ import type { Graph, ScoredReport } from '../lib/types'
 import type { NodePredicate } from '../lib/filter'
 import { search } from '../lib/search'
 import { colourForReport } from '../lib/palette'
+import { HUD_TOP } from '../lib/uiTheme'
 
 /**
  * Find-by-name.
@@ -160,7 +161,7 @@ export const SEARCH_BAR_WIDTH = 380
 
 const wrap: React.CSSProperties = {
   position: 'fixed',
-  top: 20,
+  top: HUD_TOP,
   left: '50%',
   transform: 'translateX(-50%)',
   width: SEARCH_BAR_WIDTH,

@@ -18,7 +18,7 @@ import { TIER_DESCRIPTION, TIER_LABEL } from '../lib/hierarchy'
 
 const STORAGE_KEY = 'rig.onboarding.dismissed.v3'
 
-export default function Onboarding() {
+export default function Onboarding({ openRequest = 0 }: { openRequest?: number }) {
   // Read once, lazily, rather than in an effect: an effect would paint the card
   // for one frame before hiding it again, which is a flash on every load for
   // exactly the people who already said they did not want to see it.
@@ -44,6 +44,22 @@ export default function Onboarding() {
     }
     setOpen(false)
   }
+
+  /**
+   * Re-open on request from the Help ▸ How to use menu (Phase 4 §6).
+   *
+   * A counter rather than a boolean, so asking twice works: with a boolean the
+   * caller would have to set it true, wait for this to notice, and set it back
+   * to false, and the "set it back" step is the one that gets forgotten — after
+   * which the card can never be dismissed. Bumping a number is idempotent from
+   * the caller's side and unambiguous from this one.
+   *
+   * It deliberately does NOT clear the dismissed flag in storage: asking to see
+   * the card once is not the same as asking to see it on every load again.
+   */
+  useEffect(() => {
+    if (openRequest > 0) setOpen(true)
+  }, [openRequest])
 
   // Escape closes it, because a modal over a 3D scene that traps you is worse
   // than no modal. Bound on window rather than the card so it works before the
