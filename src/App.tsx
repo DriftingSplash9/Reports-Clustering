@@ -107,6 +107,7 @@ import {
 import { REGION_GROUPS, COUNTRY_GROUPS, reportIdsForGroup, type RegionGroup } from './lib/regions'
 import { GroupsPanel } from './components/GroupsPanel'
 import { Legend } from './components/Legend'
+import { Compare } from './components/Compare'
 import { buildDeepLink, clearDeepLinkFromAddressBar, readDeepLink } from './lib/deepLink'
 import {
   DEFAULT_DRILLDOWN,
@@ -1170,6 +1171,7 @@ export default function App() {
             unlinked: true,
             view: true,
             legend: true,
+            compare: true,
           })
         }
         onHideAll={() => setPanels(PANELS_HIDDEN)}
@@ -1220,6 +1222,16 @@ export default function App() {
       )}
 
       {panels.legend && <Legend />}
+
+      {panels.compare && (
+        <Compare
+          graph={graph}
+          disclosedGraph={disclosedGraph}
+          drilldown={drilldown}
+          openedCountries={openedCountries}
+          focusIndex={unfilteredFocusIndex}
+        />
+      )}
 
       <TierBar
         tier={drilldown}

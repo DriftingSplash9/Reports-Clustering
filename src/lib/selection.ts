@@ -219,6 +219,84 @@ export function computeNeighbourhoodFocus(
 }
 
 /**
+ * Item 15 of the 2026-08-20 todo list — path finder. "How does this connect
+ * to that" is a different question from either `computeFocus` cone: two
+ * sibling reports built from the same upstream release have no DIRECT edge
+ * between them at all, yet plainly connect — one hop up to the shared
+ * ancestor, one hop down to the other sibling. Neither cone alone reaches
+ * that; the two directions have to be searched together, in the same walk.
+ *
+ * Breadth-first over the UNION of both adjacency maps (same unfiltered
+ * index every other focus feature above already trusts, for the same
+ * reason — "how does A actually connect to B" has to mean the true graph,
+ * not whatever the current filter happens to leave on screen). BFS
+ * guarantees the FEWEST hops, not the first path found by chance, which is
+ * the only version of "shortest" worth showing next to a graph whose entire
+ * subject is dependency distance.
+ */
+export type PathRelation = 'restsOn' | 'feedsInto'
+
+export interface PathStep {
+  id: string
+  /**
+   * How this step relates to the one before it. `restsOn`: the previous
+   * step depends on (rests on) this one — walked via `builtFrom`.
+   * `feedsInto`: this step depends on (rests on) the previous one — walked
+   * via `feedsInto`, so from the previous step's point of view it feeds
+   * into this one. `null` only on the very first step, which has no
+   * predecessor.
+   */
+  relation: PathRelation | null
+}
+
+/**
+ * Shortest chain of edges connecting `fromId` to `toId`, in EITHER
+ * direction at each hop. `null` when the two are simply not connected —
+ * a real, expected answer (see `IsolatedShelf` for reports with no edges at
+ * all) and not a bug to work around.
+ */
+export function shortestPath(
+  index: FocusIndex,
+  fromId: string,
+  toId: string,
+): PathStep[] | null {
+  if (fromId === toId) return [{ id: fromId, relation: null }]
+
+  const cameFrom = new Map<string, { id: string; relation: PathRelation }>()
+  const visited = new Set<string>([fromId])
+  const queue: string[] = [fromId]
+
+  while (queue.length) {
+    const current = queue.shift() as string
+    if (current === toId) break
+    for (const next of index.builtFrom.get(current) ?? []) {
+      if (visited.has(next)) continue
+      visited.add(next)
+      cameFrom.set(next, { id: current, relation: 'restsOn' })
+      queue.push(next)
+    }
+    for (const next of index.feedsInto.get(current) ?? []) {
+      if (visited.has(next)) continue
+      visited.add(next)
+      cameFrom.set(next, { id: current, relation: 'feedsInto' })
+      queue.push(next)
+    }
+  }
+
+  if (!visited.has(toId)) return null
+
+  const path: PathStep[] = []
+  let cursor = toId
+  while (cursor !== fromId) {
+    const step = cameFrom.get(cursor) as { id: string; relation: PathRelation }
+    path.unshift({ id: cursor, relation: step.relation })
+    cursor = step.id
+  }
+  path.unshift({ id: fromId, relation: null })
+  return path
+}
+
+/**
  * The same computation as `computeFocus`, seeded from an entire GROUP of ids
  * at once rather than one selection — "isolate this region/bloc/publisher",
  * not "isolate this report". See `regions.ts` for what supplies `seedIds`

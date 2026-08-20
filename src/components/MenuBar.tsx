@@ -34,7 +34,15 @@ import { MENU_BAR_HEIGHT } from '../lib/uiTheme'
  * not put the ruler inside the menu.
  */
 
-export type PanelKey = 'reports' | 'find' | 'calendar' | 'groups' | 'unlinked' | 'view' | 'legend'
+export type PanelKey =
+  | 'reports'
+  | 'find'
+  | 'calendar'
+  | 'groups'
+  | 'unlinked'
+  | 'view'
+  | 'legend'
+  | 'compare'
 
 export type PanelVisibility = Record<PanelKey, boolean>
 
@@ -64,6 +72,7 @@ export const PANELS_HIDDEN: PanelVisibility = {
   unlinked: false,
   view: false,
   legend: false,
+  compare: false,
 }
 
 const PANEL_ITEMS: { key: PanelKey; label: string; hint: string }[] = [
@@ -74,6 +83,7 @@ const PANEL_ITEMS: { key: PanelKey; label: string; hint: string }[] = [
   { key: 'unlinked', label: 'Unlinked reports', hint: 'The shelf of reports with no surviving edge in either direction' },
   { key: 'view', label: 'View controls', hint: 'Zoom, haze, glow, cluster spread, geo-affinity and the lens' },
   { key: 'legend', label: 'Legend', hint: 'What colour, size, fill, hollow rings, line colour and pulse rate each mean' },
+  { key: 'compare', label: 'Compare two reports', hint: 'Pick any two reports and see everything they both rest on — or both feed into' },
 ]
 
 export function MenuBar({

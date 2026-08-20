@@ -15,7 +15,7 @@
 import { calendarEvents, cadenceBand, describeWindow, horizonWindow, isRealDate, nextRelease } from '../src/lib/schedule'
 import { DEFAULT_DRILLDOWN, TIER_COUNT, buildDisclosedGraph, countryFromOrbId, countryOrbId, isCountryOrbId, isFamilyOrbId, isOrbId, orbId, resolveId, tierOf, toggleCountryOpen, toggleDrilldown } from '../src/lib/hierarchy'
 import { NO_FILTER, applyFilter, compile, isFiltering, isolateFirstToggle } from '../src/lib/filter'
-import { buildFocusIndex, computeFocus, computeGroupFocus, computeNeighbourhoodFocus } from '../src/lib/selection'
+import { buildFocusIndex, computeFocus, computeGroupFocus, computeNeighbourhoodFocus, shortestPath } from '../src/lib/selection'
 import { buildGraph, describeRate, isDocumented, isOfficial, radiusFor, validate } from '../src/lib/graph'
 import { search } from '../src/lib/search'
 import { affinityScore } from '../src/lib/geoAffinity'
@@ -272,6 +272,93 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
     five.nodes.size === unbounded.nodes.size && [...five.nodes].every((id) => unbounded.nodes.has(id)),
     'computeNeighbourhoodFocus: a hop limit past the graph\'s actual depth matches the unbounded walk exactly',
   )
+}
+{
+  // Item 14, 2026-08-20 — "Compare two reports: what do these both rest on?"
+  // `Compare.tsx` answers this by calling `computeFocus` once per pick and
+  // intersecting `.builtFrom` (and, for the mirror question, `.feedsInto`) —
+  // this pins that the intersection itself lands on the right nodes, not
+  // just that `computeFocus` works (already covered above).
+  //
+  // Diamond shape: x and y both ultimately rest on `shared`, which itself
+  // rests on `base` — so both should be "in common". Each also has an
+  // ancestor the other does not (`onlyX`/`onlyY`), which must NOT appear.
+  // Downstream mirrors it: `commonDependent` rests on both x and y, while
+  // `onlyDependentOfX` rests on x alone.
+  const reports: Report[] = ['x', 'y', 'shared', 'base', 'onlyX', 'onlyY', 'commonDependent', 'onlyDependentOfX'].map((id) => ({
+    id,
+    title: id,
+    publisher: 'p',
+    country: 'CA',
+    jurisdiction_level: 'federal',
+    region: 'r',
+    description: '',
+    last_updated: null,
+    url: '',
+    domains: [],
+  }))
+  const deps: Dependency[] = [
+    { source_report_id: 'x', target_report_id: 'shared', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'y', target_report_id: 'shared', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'shared', target_report_id: 'base', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'x', target_report_id: 'onlyX', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'y', target_report_id: 'onlyY', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'commonDependent', target_report_id: 'x', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'commonDependent', target_report_id: 'y', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'onlyDependentOfX', target_report_id: 'x', relationship_type: 'cites', basis: 't' },
+  ]
+  const g = buildGraph(reports, deps)
+  const index = buildFocusIndex(g, null)
+  const focusX = computeFocus(index, 'x', { builtFrom: true, feedsInto: true })
+  const focusY = computeFocus(index, 'y', { builtFrom: true, feedsInto: true })
+  const restOn = [...focusX.builtFrom].filter((id) => focusY.builtFrom.has(id))
+  const feedInto = [...focusX.feedsInto].filter((id) => focusY.feedsInto.has(id))
+  ok(
+    restOn.length === 2 && restOn.includes('shared') && restOn.includes('base'),
+    'Compare: what both rest on is exactly {shared, base}, not the union and not either one-sided ancestor',
+  )
+  ok(!restOn.includes('onlyX') && !restOn.includes('onlyY'), "Compare: each side's own-only ancestor is excluded from the intersection")
+  ok(
+    feedInto.length === 1 && feedInto.includes('commonDependent'),
+    'Compare: what both feed into is exactly {commonDependent}, mirroring the same intersection downstream',
+  )
+  ok(!feedInto.includes('onlyDependentOfX'), 'Compare: a dependent of only one side is excluded from the feeds-into intersection')
+}
+{
+  // Item 15, 2026-08-20 — path finder. The motivating case: two SIBLINGS
+  // built from the same upstream release have no direct edge between them
+  // at all, yet plainly connect — one hop up to the shared source, one hop
+  // down to the sibling. Neither `computeFocus` cone alone reaches that;
+  // `shortestPath` has to be free to change direction mid-route.
+  const reports: Report[] = ['sib1', 'sib2', 'upstream', 'stranger'].map((id) => ({
+    id,
+    title: id,
+    publisher: 'p',
+    country: 'CA',
+    jurisdiction_level: 'federal',
+    region: 'r',
+    description: '',
+    last_updated: null,
+    url: '',
+    domains: [],
+  }))
+  const deps: Dependency[] = [
+    { source_report_id: 'sib1', target_report_id: 'upstream', relationship_type: 'cites', basis: 't' },
+    { source_report_id: 'sib2', target_report_id: 'upstream', relationship_type: 'cites', basis: 't' },
+  ]
+  const g = buildGraph(reports, deps)
+  const index = buildFocusIndex(g, null)
+
+  const p = shortestPath(index, 'sib1', 'sib2')
+  ok(p !== null && p.length === 3, 'shortestPath: two siblings connect in exactly 2 hops (up then down), not "no path"')
+  ok(!!p && p[0].id === 'sib1' && p[0].relation === null, 'shortestPath: first step is the start, with no relation (nothing precedes it)')
+  ok(!!p && p[1].id === 'upstream' && p[1].relation === 'restsOn', 'shortestPath: step 1 is reached by walking UP (sib1 rests on upstream)')
+  ok(!!p && p[2].id === 'sib2' && p[2].relation === 'feedsInto', 'shortestPath: step 2 is reached by walking back DOWN (upstream feeds into sib2)')
+
+  const same = shortestPath(index, 'sib1', 'sib1')
+  ok(!!same && same.length === 1 && same[0].relation === null, 'shortestPath: the same id twice is a length-1 path, not a search')
+
+  ok(shortestPath(index, 'sib1', 'stranger') === null, 'shortestPath: two reports with no connecting chain return null, not an empty array')
 }
 {
   // regions.ts: every country CONTINENT_OF has an opinion on for continent

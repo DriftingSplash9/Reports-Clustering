@@ -5,126 +5,42 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-20 (updated a seventh time the same day)**. The day in
-order: the mint (item 5), the per-country fold (5b), the clustering force
-(5c), the Isolate feature plus two diagnoses (5d), the Regions/Organizations
-panel + country directory (5e), the bottom-centre slot swap logged as a todo
-only (5f). **This update (5g)** is a full build session against that backlog,
-run to Thomas's own explicit stopping point ("get everything done here except
-11"). In order asked and shipped:
-- **Galaxy-pull bug, fixed.** Thomas: *"The galaxy pull doesn't appear to have
-  an effect, maybe I am using wrong?"* Root cause: `view.geoAffinity` has a
-  reheat-then-refit effect pair so retuning it mid-session actually moves
-  already-settled nodes (`d3-force-3d`'s `alpha` decays to ~0 after first
-  settle, and every force scales by it); `view.galaxy` never got the matching
-  pair when it shipped in 5c, so the slider silently did nothing once the
-  layout had already relaxed. Two new effects in `InfluenceGraph.tsx`, same
-  shape as the geo-affinity pair, keyed on `view.galaxy`.
-- **Item 5f, built** (Thomas confirmed the scope question 5f had left open:
-  *"Kill the old Countries that currently sits on the bottom in the
-  centre"* — a real deletion, option (a), not the relocate-and-demote default
-  5f had flagged as the reversible guess). `ChipBar` (~378 lines) deleted
-  outright from `App.tsx`, `GroupsPanel` moved into its vacated bottom-centre
-  slot and now defaults to visible. The `FilterState.scopes` /
-  `SCOPE_GROUPS` FILTER mechanism ChipBar drove is untouched in
-  `lib/filter.ts`/`lib/palette.ts` — nothing there was deleted, there is
-  simply no UI left that ever sets it away from "All" now. Full detail at the
-  tombstone comment in `App.tsx` (search `ChipBar`).
-- **Item 7, built.** `components/Legend.tsx`, new — a collapsed-pill panel
-  (bottom-right, `GroupsPanel`'s vacated slot) documenting all six live
-  encodings: colour, fill darkness, hollow ring, size, line colour, pulse
-  rate.
-- **Item 8, built.** "Neighbourhood focus" — `computeNeighbourhoodFocus` in
-  `lib/selection.ts` (a hop-limited generalisation of `walk`), a new
-  `view.neighbourhoodHops` slider (0–5) in `ViewControls.tsx`, wins over plain
-  Isolate in `App.tsx`'s `visible` precedence chain when both would apply.
-- **Item 9, declined by Thomas**: *"dragging works and I can easily spin the
-  graph."* Not built. Left in §5 below as offered-and-declined rather than
-  deleted, so a future session does not re-offer it without knowing it was
-  already asked and turned down once.
-- **Item 4 (pulse/beam redesign), declined for now**: *"I am quite happy with
-  the pulses currently, they are almost mesmerizing."* Not built, not
-  reopened — Thomas is on record liking the current shape.
-- **Item 10 (GEO_EXPLORATION), explained, still not built.** Thomas asked for
-  the item to be elaborated on rather than built (*"I need you to elaborate,
-  it's not ringing any bells"*) — explained in chat this update: it is a
-  proposed FOURTH lens mode alongside `STANDARD`/`GROUP_COMPARISON`/
-  `WORLD_OVERVIEW` in `lib/modes.ts`, except every existing lens is a pure
-  recolour pass (country → fill colour only, nothing moves) and
-  GEO_EXPLORATION would be the first lens that also REPOSITIONS nodes by
-  geography, which is why §7/§5's item 10 note flags it as the one mode that
-  can break the camera fit — the fit math (§7) assumes a scale-free force
-  cloud, and a geography-positioned layout is a bounded surface instead.
-  Genuinely not started; needs a `REGION_OF` table (country → rough lat/long
-  or region bucket) that does not exist yet.
-- **Item 11 (research backlog), explicitly deferred**: *"dear god that is for
-  the next agent."* Untouched, left as-is in §5.
-- **Item 12, built.** PNG export at 2× device pixel ratio, no HUD.
-  `components/PngExport.tsx`, new — a no-render component inside `<Canvas>`
-  that doubles `gl`'s pixel ratio, manually resizes the `EffectComposer` to
-  match (the postprocessing package's own `setSize` always re-reads the
-  drawing-buffer size, verified against its actual source — the resize is
-  required even though CSS width/height are unchanged), then captures via a
-  priority-2 `useFrame` (guaranteed to run after the composer's own
-  priority-1 render that tick).
-- **Item 13, built.** Shareable deep links. `lib/deepLink.ts`, new — same
-  serialisation shape as `savedViews.ts`, JSON → base64 → `?rig=` query
-  param (not `#hash`, since some link-preview bots strip fragments), read
-  once at module scope (mirroring `STARTUP_VIEW`) and scrubbed from the
-  address bar after applying so a stale link is never accidentally re-shared.
-  "Copy link to this view" button added to `MenuBar.tsx`'s Views ▾ menu.
-- **Item 14, built.** Compare two reports — "what do these both rest on?"
-  `components/Compare.tsx`, new (bottom-left). Two search pickers (reusing
-  `lib/search.ts`), then `computeFocus` run once per pick with the results
-  intersected — `.builtFrom` for "what both rest on", `.feedsInto` for the
-  mirror "what both feed into." Deliberately its own panel rather than a
-  `Detail`/`selectedId` extension — `Detail` has no access to broader app
-  state, and two picks held side by side is a different shape from the app's
-  existing single-selection machinery. **Caught before shipping, worth
-  flagging**: bottom-left is not actually free — the tier bar (`tierBarWrap`
-  in `App.tsx`) already sits at that exact `bottom: 20, left: 20`, always
-  visible, never hidden. First draft of this panel used the same coordinates
-  and would have drawn directly on top of it. Fixed by stacking `Compare`
-  above the tier bar (`bottom: 100`, hand-measured the same way
-  `PanelShell`'s `shift` constant already is elsewhere in this app) rather
-  than picking a different corner — every other corner is genuinely taken
-  (see the updated §7 trap on this). Worth Thomas looking at the actual stack
-  live; the 100px clearance was computed from the tier bar's own padding/
-  button/status-line dimensions, not measured on screen.
-- **Item 15, built, same panel as 14.** Path finder — shortest chain of
-  edges between the two picks, EITHER direction at each hop. New
-  `shortestPath` in `lib/selection.ts`: a breadth-first walk over the UNION
-  of `builtFrom` and `feedsInto` (deliberately not reusing the two
-  `computeFocus` cones — two siblings built from the same upstream release
-  have no direct edge and no cone-intersection answer, only a walk that can
-  change direction mid-route ever finds the real 2-hop path between them).
-  Rendered as a vertical chain with a "rests on" / "feeds into" label between
-  each pair, in the same panel as item 14 (one "pick two reports" panel
-  answering two questions, not two panels needing the same inputs twice).
-- **New todo logged, not built** (Thomas, this update): finding more data for
-  and finishing off the sparse/zero-edge countries (`notes/cross-border-gaps-
-  2026-08-20.md`'s list). Grok can help find leads there — Claude still has
-  final editorial say on what actually gets used from anything Grok surfaces,
-  same standing rule as every other research source in this project (§2 rule
-  2 — a document has to actually say the dependency exists).
-- Everything above verified the same way every item this file documents is:
-  `npx tsc --noEmit` clean, `npx vite build` clean, and `scripts/test-logic.ts`
-  passing (90 checks, up from 74 after 5e — new pinned tests for
-  `computeNeighbourhoodFocus`'s hop boundary, the Compare intersection on a
-  diamond-shaped fixture, and `shortestPath`'s up-then-down sibling case) —
-  run directly with `npx`, never through `npm run` (see the cloud-sandbox note
-  §2 rule 4 already has, unchanged: `npm run *` triggers `gen-slices.ts`,
-  which needs the full `src/data/research/*.json` corpus that was never
-  staged into this particular sandbox). Shipped to the actual device path by
-  path as each piece finished, not batched to the end.
+Last written: **2026-08-20 (updated a sixth time the same day)**. The day in
+order: the mint (item 5), then Thomas reported the tier system unusable at
+the new corpus size and got the per-country fold (5b) the same day, then
+asked for real "galaxies" and got the clustering force (5c), then came back
+with three more things in one message and got the Isolate feature plus two
+diagnoses (5d) — search blocked by a lingering filter, and a real 19-country
+zero-cross-border-edge data gap, NOT a bug, written up in
+`notes/cross-border-gaps-2026-08-20.md`. Then (5e): Thomas found the
+"Countries" filter panel itself was the next problem — "12 mixed nations
+and organizations" — and asked for it split into a Regions/Organizations
+panel and a plain country directory, both ISOLATE rather than filter, so
+opening a region shows its international ties rather than cutting them. Built
+and shipped as a new, parallel `regions.ts` + `GroupsPanel.tsx` — the old
+`ChipBar` filter panel is untouched, not replaced. Also backfilled 52 missing
+`COUNTRY_LABEL` entries (China, India, Japan, Mexico and 48 others were
+rendering as bare ISO codes everywhere a label shows). Separately, Thomas
+asked two process questions that update answers in §0 below: how to tell when
+a session is getting too long to trust, and a standing rule for updating this
+file every time work happens, not just at big milestones. **This update
+(5f)**: Thomas, looking at 5e's shipped result, asked to remove the old
+`ChipBar` "Countries · All" control from bottom-centre and put `GroupsPanel`
+("Regions & Countries") there by default instead — bottom-centre is the
+primary-navigation slot, bottom-right (where `GroupsPanel` lives today) reads
+as secondary. **TODO ONLY — nothing built this update**, logged as new item
+5f in §5. See that entry for the two open scope questions (does "get rid of"
+mean delete `ChipBar`/`SCOPE_GROUPS` outright, given it is a genuinely
+different filter-vs-isolate mechanism 5e deliberately left alone — or just
+relocate `GroupsPanel` and demote/hide the old control; and `PanelShell`'s
+one-panel-per-edge limit from §7 applies to bottom-centre same as the
+left/right edges).
 Earlier the same day: corrected a long-running false claim about git,
 measured three things the project had only argued about, finished Phase 4 of
 the visual revamp, and fixed two rendering bugs. Written for a FRESH agent
 with no memory of any of it. Supersedes
-`archive/Previous Handoffs/HANDOFF-2026-08-20-5f-asked-not-built.md`
+`archive/Previous Handoffs/HANDOFF-2026-08-20-groupspanel-process-rules.md`
 (itself superseding
-`archive/Previous Handoffs/HANDOFF-2026-08-20-groupspanel-process-rules.md`,
-itself superseding
 `archive/Previous Handoffs/HANDOFF-2026-08-20-mint-fold-galaxy-isolate.md`,
 itself superseding
 `archive/Previous Handoffs/HANDOFF-2026-08-19-visual-revamp-phase4-complete.md`),
@@ -192,8 +108,7 @@ Then one of these, depending on the task:
 | Camera, fit or layout | `notes/camera-fit-measurement-2026-08-19.md` — the numbers, and the harness recipe |
 | The flicker | `notes/flicker-tests-2026-08-19.md` — three of four suspects cleared, one open |
 | Isolate, or "why does country X show empty" | `notes/cross-border-gaps-2026-08-20.md` — 19 countries with zero cross-border edges, by design not bug |
-| Regions, blocs, publishers, the country directory | `src/lib/regions.ts`'s file-level comment — the four `RegionGroup` kinds. Written when `ChipBar` (the old family/level filter panel) was still on screen; `ChipBar` was deleted 2026-08-20 (item 5f/5g — see §5) but the FILTER mechanism it drove, `FilterState.scopes`/`SCOPE_GROUPS`, still exists and is what "parallel to, not a replacement for" refers to |
-| Comparing two reports, or the shortest path between them | `src/components/Compare.tsx`'s file-level comment — items 14/15, one panel answering both questions |
+| Regions, blocs, publishers, the country directory | `src/lib/regions.ts`'s file-level comment — the four `RegionGroup` kinds and why this is parallel to, not a replacement for, the `ChipBar` filter panel |
 | Minting / the staged archive | `Grok - Brics+israel and singapore/consolidated/CONSOLIDATION-REPORT.md` and `_STATUS.md` |
 | BRICS research | `BRICS/G.3.md` |
 | Schema | `src/lib/types.ts` — mostly documented reasoning, not types |
@@ -242,17 +157,11 @@ break:
 (these numbers were 1,250 · 1,079 for the whole first half of 2026-08-20 — if
 you're reading an older copy of this file, or a comment elsewhere still says
 1,250, that's the pre-mint figure, not a live discrepancy to chase down).
-`npm run validate` exits 0 (90 logic checks as of item 5g, up from 74 after
-5e, 61 after 5d, 59 after 5c and 54 after 5b, all invariant checks; warnings
-only — single-use `proposed:` tags and the known isolated-report list). `npx
-tsc --noEmit` clean. `npm run build` clean. **5g's own checks (`tsc`/`vite
-build`/`test-logic.ts`) were run directly with `npx`, never `npm run`** — the
-sandbox that built 5g never had `src/data/research/*.json` staged, and `npm
-run *`'s `predev`/`prebuild`/`validate` hooks call `gen-slices.ts`, which
-reads that whole corpus and would have silently regenerated
-`slices.generated.ts` down to empty. Re-run the real `npm run validate` on
-your machine once to confirm 90/90 against the live corpus, same as every
-prior item in this file.
+`npm run validate` exits 0 (74 logic checks as of item 5e, up from 61 after
+5d, 59 after 5c and 54 after 5b, all invariant checks; warnings only —
+single-use `proposed:` tags and the known isolated-report list). `npx tsc --noEmit`
+clean. `npm run build` clean. All re-verified on the actual device tree after
+the last commit of the day.
 
 **Git: agents cannot see it, so agents must not assert it.** Thomas confirmed
 on 2026-08-19 with a GitHub Desktop screenshot — branch `main`, **0 changed
@@ -301,12 +210,8 @@ Assume all of this exists and works. Each carries a dated comment at the site.
 - **Lenses.** `src/lib/modes.ts`: STANDARD / GROUP_COMPARISON / WORLD_OVERVIEW.
   A recolour pass via ref + mutation effect; **never a `forceGraph` memo dep**.
 - **The constellation look.** Near-black background (`#010204`), flat crisp
-  panels, rotating masthead gradient, tier bar bottom-left, unlinked shelf +
-  Legend bottom-right, Compare bottom-left (2026-08-20, item 5g — same
-  corner as the tier bar, which sits further left), `GroupsPanel`
-  ("Regions & Countries") drop-up bottom-centre (2026-08-20, item 5f — the
-  old `ChipBar` filter drop-up that used to own this slot is deleted; see the
-  5f/5g entries below).
+  panels, rotating masthead gradient, tier bar bottom-left, unlinked shelf
+  bottom-right, country drop-up bottom-centre.
 - **Lighting.** Two directional lights + ambient 0.28, emissive floor 0.12,
   bloom 0.14/0.26. **Closed** — Thomas, 2026-08-19: *"the lighting is okay"*.
 - **Blueprint is DELETED.** No view setting is a memo dep any more. Rims
@@ -755,40 +660,30 @@ Sorted by owner, ordered by priority within each.
       bug from 5d was diagnosed but never re-tested against Thomas's actual
       live session state.
 
-5f. **Bottom-centre slot swap — DONE 2026-08-20 (item 5g).** Thomas resolved
-    5f's own open scope question directly: *"lets put the new Regions/
-    Countries front and centre bottom of the graph. Kill the old Countries
-    that currently sits on the bottom in the centre."* — option (a), a real
-    deletion, not the relocate-and-demote (b) 5f had flagged as the
-    reversible guess if this needed to be assumed.
-    - **`ChipBar` deleted outright** from `App.tsx` (~378 lines: the
-      component, its 8 dedicated style consts, and the now-dead-only helpers
-      `toggleFamily`/`toggleScope`/`scopeCounts` and palette imports
-      `ALL_SCOPES`/`SCOPE_COLOUR`/`SCOPE_LABEL`/`scopeOf`/`FAMILY_INK`/
-      `ColourFamily`/`Scope`). A dated tombstone comment sits where the
-      component used to be. **The `FilterState.scopes`/`SCOPE_GROUPS` FILTER
-      mechanism itself was deliberately left alone** — nothing in
-      `lib/filter.ts`/`lib/palette.ts` was touched, it is simply unreachable
-      from the UI now (no control left ever sets `filter.scopes` away from
-      null/"All"). Recoverable from git history if a UI for it is ever wanted
-      again — this was a UI deletion, not a data-model one.
-    - **`GroupsPanel` moved into the vacated bottom-centre slot** (`wrap`
-      style in `GroupsPanel.tsx`: `left: 50%, transform: translateX(-50%)`,
-      same centring trick `ChipBar` used) **and now defaults to visible**
-      (`groups: true` in `MenuBar.tsx`'s `PANELS_HIDDEN` — the one exception
-      to "every panel hidden by default," since Thomas asked for this control
-      specifically to be on screen without hunting for it in the Panels
-      menu).
-    - **The §7 `PanelShell`-one-edge trap did not end up applying**:
-      bottom-centre was never a `PanelShell` edge (only left/Reports and
-      right/View are), so this was the free-floating-panel pattern
-      `GroupsPanel` already used, just relocated — no `PanelShell` change
-      needed.
-    - Verified: `npx tsc --noEmit`, `npx vite build` both clean (run directly,
-      not through `npm run` — see §3's note on why). Shipped to the device
-      mid-session; not independently confirmed live on Thomas's own screen
-      by this agent — worth him taking a look, same as every other item this
-      update that only got a headless/sandbox check.
+5f. **Bottom-centre slot swap — ASKED 2026-08-20, NOT BUILT.** Thomas, after
+    seeing 5e's shipped `GroupsPanel`: get rid of the original "Countries ·
+    All" control (the `ChipBar`/`SCOPE_GROUPS` filter, bottom-centre) and put
+    `GroupsPanel` ("Regions & Countries," currently bottom-right) there by
+    default instead — bottom-centre is where the eye already goes for
+    country/region navigation, bottom-right reads as secondary.
+    - **Open scope question before building**: "get rid of" could mean (a)
+      delete `ChipBar`/`SCOPE_GROUPS` outright — but 5e deliberately kept it
+      as a genuinely different mechanism (a FILTER: both-endpoints-visible,
+      drops cross-border edges — still useful for "show me only the AFR
+      family," a different question from isolate) — or (b) just relocate
+      `GroupsPanel` to bottom-centre and demote the old control (collapsed
+      pill, or moved elsewhere, or hidden behind a `Panels ▾` toggle) without
+      deleting the mechanism. Confirm which with Thomas before writing code;
+      defaulting to (b) — relocate + demote, keep the mechanism reachable —
+      is the reversible choice if this needs to be guessed.
+    - **§7's `PanelShell`-one-panel-per-edge trap applies here too**:
+      bottom-centre is currently the tier bar's status-line slot (§4: "the
+      tier bar and its status line are deliberately NOT in the menu —
+      primary navigation, and the only signal a filter is on"), not a
+      `PanelShell` edge, so this is a layout/z-order question specific to
+      that HUD area, not a straight `PanelShell` swap — read `MenuBar.tsx`
+      and the tier-bar component before assuming this is a one-line move.
+    - Not started. No code changed for this item yet.
 
 ### [Agent] — next build rounds, in order
 
@@ -821,116 +716,49 @@ Sorted by owner, ordered by priority within each.
    now that the worst-path cold-start number and the ramped number agree —
    worth a look next time that cap is touched, but not done here since it
    wasn't the thing that was broken.
-7. **A legend — DONE 2026-08-20 (item 5g).** `components/Legend.tsx`, new — a
-   collapsed-pill panel, bottom-right (`GroupsPanel`'s old slot, now vacated
-   by 5f). Documents all six live encodings: colour (country family, via
-   `FAMILY_INK`/`COUNTRY_FAMILY`), fill darkness (government tier), hollow
-   ring (one-off instrument), size (authority), line colour (source's
-   family), pulse rate (publication frequency) — small pure-CSS mockups per
-   row (`FamilyDots`/`TierRamp`/`HollowPair`/`SizePair`/`PulseDemo`) rather
-   than live Three.js material previews. Verified: `npx tsc --noEmit`, `npx
-   vite build` clean.
-8. **Neighbourhood focus — DONE 2026-08-20 (item 5g).** "Show this node and
-   everything within N hops." New `computeNeighbourhoodFocus` in
-   `lib/selection.ts` — `walk()` gained an optional `maxHops` param (a node
-   at exactly the limit is still included, its own edges are just never
-   expanded past it); `computeFocus`/`computeGroupFocus` call it unchanged
-   (no `maxHops` = the original unbounded walk). New `view.neighbourhoodHops`
-   slider (0–5, `NEIGHBOURHOOD_HOPS_MAX` in `view.ts`) in `ViewControls.tsx`'s
-   Focus section. In `App.tsx`'s `visible` precedence chain, wins over plain
-   Isolate when both would apply (bounded is the more specific ask), loses to
-   group Isolate (still the most specific). Verified: `npx tsc --noEmit`,
-   `npx vite build` clean, plus a pinned `test-logic.ts` case (5-report chain
-   a→b→c→d→e) checking the exact hop boundary — hops=2 includes b/c, excludes
-   d/e, the edge just past the boundary is never collected; hops=0 is "just
-   the selection"; a hop limit past the graph's real depth matches the
-   unbounded walk exactly.
-9. **Arrow-key / on-screen fly navigation — DECLINED 2026-08-20.** Thomas:
-   *"dragging works and I can easily spin the graph."* Not built. Left here
-   rather than deleted so a future session knows this was asked and turned
-   down once, not simply never offered.
-10. **Phase 3: GEO_EXPLORATION mode — EXPLAINED 2026-08-20 (item 5g), still
-    not built.** Thomas asked to have this elaborated on rather than built
-    (*"I need you to elaborate, it's not ringing any bells"*). The
-    explanation given: it would be a FOURTH lens in `lib/modes.ts` alongside
-    `STANDARD`/`GROUP_COMPARISON`/`WORLD_OVERVIEW`, except every lens today
-    is a pure recolour pass — country → fill colour, nothing moves, which is
-    why a lens is safe to keep out of the `forceGraph` memo deps (§7).
-    GEO_EXPLORATION would be the first lens that also REPOSITIONS nodes by
-    geography (needs a `REGION_OF` table — country → rough lat/long or region
-    bucket — that does not exist yet), which is exactly why it is flagged as
-    the one mode that can break the camera fit: the fit math in §7 assumes a
-    scale-free force cloud, and a geography-positioned layout is a bounded
-    surface instead, so it would stop being a pure recolour pass and would
-    need to rejoin the memo deps, with the camera-fit measurement re-run
-    against it. Typed edges (the other half of this item — what a trunk's
-    "type" means when one line stands for 57 mixed edges) also not started.
-    Genuinely not begun this update; still needs its own build round.
-11. **Research backlog — explicitly deferred by Thomas, 2026-08-20**: *"dear
-    god that is for the next agent."* Untouched this update: the
-    candidates-only tier (722 nodes with no edges), 170 `_dropped` research
-    leads, BRICS G.4 (Brazil 3/24 and China 1/12 never dispatched; open by
-    grepping node descriptions for international-node names).
-16. **New, logged 2026-08-20, not built** — finding more data for, and
-    finishing off, the sparse/zero-cross-border-edge countries.
-    `notes/cross-border-gaps-2026-08-20.md` already has the list (19
-    countries with zero recorded cross-border dependency edges, surfaced
-    during 5d). Thomas's own framing: *"Don't forget grok can help when we
-    get to this one, it is great at finding data you can't and as always you
-    have the final say as to what to use that grok uncovers."* Distinct from
-    item 11 above — 11 is the candidates-only/dropped-leads/BRICS-G.4
-    backlog, this is specifically the cross-border-gap list. Whatever Grok
-    turns up is a LEAD, not a source — §2 rule 2 still applies in full
-    (nothing goes in the graph unless a document actually says the
-    dependency exists) and rule 3 (raw-verify before trusting a quote) applies
-    doubly to anything Grok surfaces, the same as it already does to WebFetch.
+7. **A legend.** Highest-value missing feature by a distance. There are **six**
+   live encodings — colour = country family, fill darkness = government tier,
+   hollow = one-off instrument, size = authority, line colour = the source's
+   family, pulse rate = publication frequency — and the only place any of it is
+   written down is an onboarding card most users dismiss once. Cheap, and it
+   fixes a real comprehension gap.
+8. **Neighbourhood focus.** "Show this node and everything within N hops."
+   Filters today are by country and subject only. This attacks the density
+   problem directly and is far cheaper than fly-through navigation. Do it
+   before the mint, not after.
+9. **Arrow-key / on-screen fly navigation.** Thomas's idea. drei's
+   `OrbitControls` takes a `keyEvents` prop (default false) and three's
+   controls already implement arrow-key panning at `keyPanSpeed = 7`, so the
+   keys are nearly free — **but check `SearchPanel`'s own arrow handling
+   first**, that is the one collision. On-screen direction arrows and a
+   "you-are-here" cue are the real work. Note the measured fact this must be
+   built around: **more spread will never put the camera inside the cluster**
+   (§7), so navigation is the only way in.
+10. **Phase 3**: GEO_EXPLORATION mode (geography takes the fill; needs a
+    `REGION_OF` table) and typed edges — answer first what a trunk's "type"
+    means when one line stands for 57 mixed edges; `methodology_depends_on` is
+    the MOST common type (407). **GEO_EXPLORATION is the one mode that can
+    break the camera fit**: a mode that repositions nodes swaps a scale-free
+    cloud for a bounded surface and voids every number in §7, and it stops
+    being a pure recolour pass so it cannot stay out of the memo deps the way
+    lenses do. Re-run the fit measurement if it is built.
+11. **Research backlog** (biggest total effort): the candidates-only tier — 722
+    nodes with no edges; 170 `_dropped` research leads; BRICS G.4 (Brazil 3/24
+    and China 1/12 never dispatched; open by grepping node descriptions for
+    international-node names).
 
-### Offered — picked up this update (5g)
+### Offered and not chosen — pick up any time
 
-12. **Export a PNG — DONE 2026-08-20 (item 5g).** 2× device pixel ratio, no
-    HUD. `components/PngExport.tsx`, new — a no-render component mounted
-    inside `<Canvas>`. "Without the HUD" needed no work (the HUD is ordinary
-    DOM painted over the canvas by the browser compositor, never in the
-    canvas's own pixels). "2×" needed one real fix: doubling `gl`'s pixel
-    ratio alone leaves the `EffectComposer`'s bloom buffers sized for the old
-    resolution (their own resize effect depends on CSS size, not ratio), so
-    the composite would be wrong — fixed with one manual
-    `composer.setSize(width, height)` call right after the ratio bump
-    (unchanged CSS numbers, but the `postprocessing` package's own
-    `setSize` always re-reads `renderer.getDrawingBufferSize()`, verified
-    directly against `node_modules/postprocessing/build/postprocessing.js`,
-    not assumed). Capture happens in a priority-2 `useFrame` — `@react-three/
-    postprocessing`'s own `EffectComposer` renders via a priority-1
-    `useFrame`, so priority-2 is guaranteed to run immediately after that
-    frame's composited render. `composerRef` (a real forwarded ref to the
-    composer instance, wired in `App.tsx`) is what makes the manual resize
-    possible — `useThree()`'s `gl`/`scene`/`camera` alone are not enough.
-    Verified: `npx tsc --noEmit`, `npx vite build` clean.
-13. **Deep links — DONE 2026-08-20 (item 5g).** `lib/deepLink.ts`, new. Same
-    field set and tolerant-merge restore pattern `savedViews.ts` already
-    uses, minus `id`/`name`/`savedAt`/`panels` (link-specific: a shared link
-    is about the DATA view, not one browser's saved-view bookkeeping or
-    which HUD panels someone else has open), plus `selectedGroupId` (newer
-    than `SavedView`'s own schema, needed for a link to reproduce a
-    GroupsPanel-based isolate). Encoded as JSON → base64 → `?rig=` query
-    param — not `#hash`, since some link-preview bots/chat clients strip
-    fragments before fetching a preview, which would silently drop the whole
-    payload. Read once at module scope (`DEEP_LINK` in `App.tsx`, same
-    pattern as `STARTUP_VIEW` — has to happen before the first `useState`
-    call, so it cannot be a hook), wins over a starred saved view when both
-    are present, then scrubbed from the address bar via `history.replaceState`
-    once applied so a stale link is never accidentally re-shared. "Copy link
-    to this view" button added to `MenuBar.tsx`'s Views ▾ menu, Clipboard API
-    with an `execCommand` fallback. Verified: `npx tsc --noEmit`, `npx vite
-    build` clean, plus a standalone manual round-trip check against a sample
-    `DeepLinkState` before wiring it into `App.tsx` (encode → URL → decode,
-    exact equality).
-14. **Compare two nodes — DONE 2026-08-20 (item 5g).** See the dedicated
-    entry earlier in this update's summary at the top of this file for the
-    full writeup, including the bottom-left tier-bar collision caught and
-    fixed before shipping.
-15. **Path finder — DONE 2026-08-20 (item 5g), same panel as 14.** See the
-    dedicated entry earlier in this update's summary at the top of this file.
+12. **Export a PNG** at 2× without the HUD. Thomas has been screenshotting with
+    the Windows tool all session; a visualisation you cannot share is doing
+    half its job.
+13. **Deep links** — a URL encoding tier + filter + selection. Nearly the same
+    serialisation `savedViews.ts` already does, but shareable, where saved
+    views are local to one browser.
+14. **Compare two nodes** — "what do these both rest on?". The data is there;
+    nothing in the UI asks it.
+15. **Path finder** — shortest documented path between two reports, highlighted.
+    This is the question the corpus exists to answer and the UI never asks it.
 
 Parked deliberately: 134 cadences where the publisher states nothing countable;
 the 7 single-use `proposed:` tags; `diary.csv` relocation (Thomas's personal
@@ -960,50 +788,24 @@ cross-project diary — not the project's, leave it alone).
   **`components/nodeVisuals.ts`** — node material, fresnel rims, halos.
   **`lib/hierarchy.ts`** — tier disclosure, orbs, `DisclosedDependency`.
   **`lib/regions.ts`** — continents, treaty blocs, publisher-orgs, the
-  country directory; `lib/selection.ts`'s `computeFocus`/`computeGroupFocus`/
-  `computeNeighbourhoodFocus` (item 8) is the walk single-node Isolate, group
-  Isolate and Neighbourhood focus all share; `shortestPath` (item 15) is a
-  separate breadth-first walk over the SAME `FocusIndex`, for "how do these
-  two connect" rather than "what does this rest on."
-- **`lib/deepLink.ts`** (item 13) — shareable-URL serialisation, the same
-  shape `savedViews.ts` uses, read once at module scope in `App.tsx`
-  (`DEEP_LINK`, mirroring `STARTUP_VIEW`).
+  country directory; `lib/selection.ts`'s `computeFocus`/`computeGroupFocus`
+  is the walk both single-node and group Isolate share.
 - **`components/MenuBar.tsx`, `HelpCard.tsx`, `LoadingCurtain.tsx`,
-  `PanelShell.tsx`, `GroupsPanel.tsx`, `Legend.tsx`** (item 7), **`Compare.tsx`**
-  (items 14/15), **`PngExport.tsx`** (item 12) — the chrome. `ChipBar`, which
-  used to be in this list, was deleted 2026-08-20 (item 5f/5g) — see the
-  tombstone comment in `App.tsx`.
+  `PanelShell.tsx`, `GroupsPanel.tsx`** — the chrome.
 - Data: `src/data/research/*.json` slices auto-load; `slices.generated.ts` is
   generated; `graph.ts` builds + validates (44 checks in
-  `scripts/validate-data.ts` + `test-logic.ts`, 90 as of item 5g).
+  `scripts/validate-data.ts` + `test-logic.ts`).
 
 ---
 
 ## 7. Known traps — the ones that will actually bite
 
-- **`PanelShell` supports exactly one panel per screen edge, AND every screen
-  position is now spoken for (2026-08-20, updated after item 5g).** Left/
-  Reports and right/View are the two `PanelShell` edges. Everything else is
-  free-floating, and all of it is now occupied: top (`MenuBar`), top-centre
-  (`SearchPanel`), bottom-left (the tier bar, ALWAYS on — see the next trap),
-  bottom-left stacked above it (`Compare`, items 14/15), bottom-centre
-  (`GroupsPanel`, moved here 2026-08-20 item 5f/5g), bottom-right
-  (`IsolatedShelf`) and bottom-right again further in (`Legend`, item 7). The
-  next panel this app gets needs either a `PanelShell` stacking/offset
-  parameter, or to share a panel that already exists (the way items 14 and
-  15 share one `Compare` panel rather than each getting their own) — there is
-  no more free corner or edge to claim by picking new fixed coordinates.
-- **A free-floating panel's `bottom`/`left`/`right` coordinates are not
-  reserved anywhere — check every existing `position: fixed` panel by eye
-  before picking new ones.** Caught only right before shipping, 2026-08-20:
-  `Compare` (items 14/15) was first written at `bottom: 20, left: 20`, not
-  realising the tier bar (`tierBarWrap` in `App.tsx`) already sits at those
-  exact coordinates and is never hidden. There is no shared registry of
-  "which corner is whose" the way `PanelShell`'s two edges are enforced by
-  the component itself — every free-floating panel just hard-codes numbers,
-  so the only real check is reading every other panel's `wrap`/positioning
-  const before adding one, which is what this trap is now here to remind
-  whoever adds the next one to actually do.
+- **`PanelShell` supports exactly one panel per screen edge.** Both slots
+  (left/Reports, right/View) are already taken, which is why `GroupsPanel`
+  (item 5e) is its own free-floating panel with its own collapse state rather
+  than a third `PanelShell`. If a fourth persistent panel is ever wanted,
+  either `PanelShell` needs a stacking/offset parameter or the free-floating
+  pattern `ChipBar`/`GroupsPanel` already use is the answer again.
 - **Isolating a group can show a surprisingly small number with no
   explanation on screen.** "Middle East" isolates to 6 real reports — correct
   (6 of its 7 countries are on the zero-cross-border-edges list in
@@ -1025,19 +827,6 @@ cross-project diary — not the project's, leave it alone).
   2.7× radius and 25% more air, not 10×.
 - **Never put a mode, tab, hover, or any view setting in the `forceGraph` memo
   deps.** Every change there resets the camera and re-warms physics.
-- **A force that reads `alpha`-scaled strength needs its OWN reheat-then-refit
-  effect pair, or its slider silently does nothing once the layout has
-  settled** (found and fixed 2026-08-20, item 5g — the "galaxy pull has no
-  effect" bug). Every `d3-force-3d` force's velocity nudge is scaled by the
-  simulation's own `alpha`, which decays to ~0 after first settle;
-  `view.geoAffinity` already had a matching `forceGraph.d3ReheatSimulation()`
-  + delayed `requestRefit()` pair so retuning it mid-session actually moves
-  already-settled nodes, but `view.galaxy` shipped in item 5c without one —
-  the slider updated the ref the force reads, the force itself was correct,
-  and it still did nothing, because nothing ever re-woke the simulation to
-  apply it. Whenever a new force-strength slider is added, check it has this
-  pair; `InfluenceGraph.tsx`, search `view.galaxy` for the fix as the
-  template.
 - **`meshes.current` cannot be trusted for POSITIONS** — read `positionedById`
   or `graphData().nodes`. This trap was documented and still bit this session.
 - **Transparency does not stop a raycast** — ghosted elements need
