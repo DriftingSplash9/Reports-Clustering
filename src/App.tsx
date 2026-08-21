@@ -1346,7 +1346,7 @@ export default function App() {
             // current group clears it — which a raycast hit off the visible
             // set cannot produce today, but the check costs nothing and
             // keeps this correct if that ever changes.
-            if (groupFocus && !groupFocus.nodes.has(id)) setSelectedGroupId(null)
+            if (groupFocus && id !== null && !groupFocus.nodes.has(id)) setSelectedGroupId(null)
             setSelectedId(id)
           }}
           onSelectEdge={(key) =>

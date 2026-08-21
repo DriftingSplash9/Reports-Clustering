@@ -727,13 +727,23 @@ live console below are real captures, not descriptions.
     untested on its own terms — worth Thomas's one-minute glow-slider check
     if a genuinely bloom-only flicker (nodes shimmering in brightness at a
     STABLE camera distance) is ever seen separately from this.
-  - **Not verified via the full sandbox recipe this round** — no
-    `npm run validate` / `tsc --noEmit` / `vite build` pass. Both changes
-    are small (one added library-config line, a conditional narrowed in two
-    places) and were verified live via Vite HMR with a clean console
-    instead, given the size of staging the full corpus for a build; worth a
-    real `tsc`/`build` pass next session before this is considered fully
-    closed out, per rule 4.
+  - **Sandbox recipe now run — caught and fixed a real bug.** Staged the
+    full repo (all 267 research files + app source + config) into the
+    verification sandbox and ran `npm install` / `npm run gen` /
+    `tsc --noEmit` / `npm run validate` / `npm run build`. `tsc` failed on
+    the `onSelect` fix above: `App.tsx`'s handler passed `id` straight to
+    `groupFocus.nodes.has(id)`, but `InfluenceGraph`'s `onSelect` signature
+    is `(id: string | null) => void` — a node *deselect* (clicking the same
+    node again) calls it with `null`, which `.has()` doesn't accept. Fixed
+    by adding `id !== null` to the guard, so a deselect now leaves the group
+    isolate untouched too (same "only clear on a verified outside-group
+    pick" principle as the rest of 5p — a deselect was never a pick).
+    Everything else was clean: `tsc --noEmit` 0 errors after the fix, `npm
+    run validate` 120/120 logic checks pass (no new isolated-report or
+    domain-mapping regressions), `vite build` succeeded (one pre-existing
+    "chunk >500kB" size warning, not a new issue). The fixed `App.tsx` was
+    written back to Thomas's machine; not yet re-verified live since his
+    dev server was down at the time (see below).
 - **Files touched:** `src/components/InfluenceGraph.tsx` (`cooldownTime`),
   `src/App.tsx` (`onSelect`, `onPointerMissed`).
 - **Not done, deliberately:** the `userOwnsCamera`/`cameraMovedOffFit`
