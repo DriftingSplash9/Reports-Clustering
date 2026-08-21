@@ -5,68 +5,206 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5i)**. Yesterday (2026-08-20) was a full day
-of work ending in item 5h, a HUD layout pass — full detail archived at
-`archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md` (itself
-superseding the chain of earlier archived handoffs listed at its own top).
-This file no longer carries that day's narrative inline; read the archived
-copy for the galaxy-pull fix, the `ChipBar` deletion, Legend/Isolate/Regions
-panel work, and the full 5h HUD repositioning writeup.
+Last written: **2026-08-20 (updated an eighth time the same day)**. The day in
+order: the mint (item 5), the per-country fold (5b), the clustering force
+(5c), the Isolate feature plus two diagnoses (5d), the Regions/Organizations
+panel + country directory (5e), the bottom-centre slot swap logged as a todo
+only (5f). **This update (5g)** is a full build session against that backlog,
+run to Thomas's own explicit stopping point ("get everything done here except
+11"). In order asked and shipped:
+- **Galaxy-pull bug, fixed.** Thomas: *"The galaxy pull doesn't appear to have
+  an effect, maybe I am using wrong?"* Root cause: `view.geoAffinity` has a
+  reheat-then-refit effect pair so retuning it mid-session actually moves
+  already-settled nodes (`d3-force-3d`'s `alpha` decays to ~0 after first
+  settle, and every force scales by it); `view.galaxy` never got the matching
+  pair when it shipped in 5c, so the slider silently did nothing once the
+  layout had already relaxed. Two new effects in `InfluenceGraph.tsx`, same
+  shape as the geo-affinity pair, keyed on `view.galaxy`.
+- **Item 5f, built** (Thomas confirmed the scope question 5f had left open:
+  *"Kill the old Countries that currently sits on the bottom in the
+  centre"* — a real deletion, option (a), not the relocate-and-demote default
+  5f had flagged as the reversible guess). `ChipBar` (~378 lines) deleted
+  outright from `App.tsx`, `GroupsPanel` moved into its vacated bottom-centre
+  slot and now defaults to visible. The `FilterState.scopes` /
+  `SCOPE_GROUPS` FILTER mechanism ChipBar drove is untouched in
+  `lib/filter.ts`/`lib/palette.ts` — nothing there was deleted, there is
+  simply no UI left that ever sets it away from "All" now. Full detail at the
+  tombstone comment in `App.tsx` (search `ChipBar`).
+- **Item 7, built.** `components/Legend.tsx`, new — a collapsed-pill panel
+  (bottom-right, `GroupsPanel`'s vacated slot) documenting all six live
+  encodings: colour, fill darkness, hollow ring, size, line colour, pulse
+  rate.
+- **Item 8, built.** "Neighbourhood focus" — `computeNeighbourhoodFocus` in
+  `lib/selection.ts` (a hop-limited generalisation of `walk`), a new
+  `view.neighbourhoodHops` slider (0–5) in `ViewControls.tsx`, wins over plain
+  Isolate in `App.tsx`'s `visible` precedence chain when both would apply.
+- **Item 9, declined by Thomas**: *"dragging works and I can easily spin the
+  graph."* Not built. Left in §5 below as offered-and-declined rather than
+  deleted, so a future session does not re-offer it without knowing it was
+  already asked and turned down once.
+- **Item 4 (pulse/beam redesign), declined for now**: *"I am quite happy with
+  the pulses currently, they are almost mesmerizing."* Not built, not
+  reopened — Thomas is on record liking the current shape.
+- **Item 10 (GEO_EXPLORATION), explained, still not built.** Thomas asked for
+  the item to be elaborated on rather than built (*"I need you to elaborate,
+  it's not ringing any bells"*) — explained in chat this update: it is a
+  proposed FOURTH lens mode alongside `STANDARD`/`GROUP_COMPARISON`/
+  `WORLD_OVERVIEW` in `lib/modes.ts`, except every existing lens is a pure
+  recolour pass (country → fill colour only, nothing moves) and
+  GEO_EXPLORATION would be the first lens that also REPOSITIONS nodes by
+  geography, which is why §7/§5's item 10 note flags it as the one mode that
+  can break the camera fit — the fit math (§7) assumes a scale-free force
+  cloud, and a geography-positioned layout is a bounded surface instead.
+  Genuinely not started; needs a `REGION_OF` table (country → rough lat/long
+  or region bucket) that does not exist yet.
+- **Item 11 (research backlog), explicitly deferred**: *"dear god that is for
+  the next agent."* Untouched, left as-is in §5.
+- **Item 12, built.** PNG export at 2× device pixel ratio, no HUD.
+  `components/PngExport.tsx`, new — a no-render component inside `<Canvas>`
+  that doubles `gl`'s pixel ratio, manually resizes the `EffectComposer` to
+  match (the postprocessing package's own `setSize` always re-reads the
+  drawing-buffer size, verified against its actual source — the resize is
+  required even though CSS width/height are unchanged), then captures via a
+  priority-2 `useFrame` (guaranteed to run after the composer's own
+  priority-1 render that tick).
+- **Item 13, built.** Shareable deep links. `lib/deepLink.ts`, new — same
+  serialisation shape as `savedViews.ts`, JSON → base64 → `?rig=` query
+  param (not `#hash`, since some link-preview bots strip fragments), read
+  once at module scope (mirroring `STARTUP_VIEW`) and scrubbed from the
+  address bar after applying so a stale link is never accidentally re-shared.
+  "Copy link to this view" button added to `MenuBar.tsx`'s Views ▾ menu.
+- **Item 14, built.** Compare two reports — "what do these both rest on?"
+  `components/Compare.tsx`, new (bottom-left). Two search pickers (reusing
+  `lib/search.ts`), then `computeFocus` run once per pick with the results
+  intersected — `.builtFrom` for "what both rest on", `.feedsInto` for the
+  mirror "what both feed into." Deliberately its own panel rather than a
+  `Detail`/`selectedId` extension — `Detail` has no access to broader app
+  state, and two picks held side by side is a different shape from the app's
+  existing single-selection machinery. **Caught before shipping, worth
+  flagging**: bottom-left is not actually free — the tier bar (`tierBarWrap`
+  in `App.tsx`) already sits at that exact `bottom: 20, left: 20`, always
+  visible, never hidden. First draft of this panel used the same coordinates
+  and would have drawn directly on top of it. Fixed by stacking `Compare`
+  above the tier bar (`bottom: 100`, hand-measured the same way
+  `PanelShell`'s `shift` constant already is elsewhere in this app) rather
+  than picking a different corner — every other corner is genuinely taken
+  (see the updated §7 trap on this). Worth Thomas looking at the actual stack
+  live; the 100px clearance was computed from the tier bar's own padding/
+  button/status-line dimensions, not measured on screen.
+- **Item 15, built, same panel as 14.** Path finder — shortest chain of
+  edges between the two picks, EITHER direction at each hop. New
+  `shortestPath` in `lib/selection.ts`: a breadth-first walk over the UNION
+  of `builtFrom` and `feedsInto` (deliberately not reusing the two
+  `computeFocus` cones — two siblings built from the same upstream release
+  have no direct edge and no cone-intersection answer, only a walk that can
+  change direction mid-route ever finds the real 2-hop path between them).
+  Rendered as a vertical chain with a "rests on" / "feeds into" label between
+  each pair, in the same panel as item 14 (one "pick two reports" panel
+  answering two questions, not two panels needing the same inputs twice).
+- **New todo logged, not built** (Thomas, this update): finding more data for
+  and finishing off the sparse/zero-edge countries (`notes/cross-border-gaps-
+  2026-08-20.md`'s list). Grok can help find leads there — Claude still has
+  final editorial say on what actually gets used from anything Grok surfaces,
+  same standing rule as every other research source in this project (§2 rule
+  2 — a document has to actually say the dependency exists).
+- Everything above verified the same way every item this file documents is:
+  `npx tsc --noEmit` clean, `npx vite build` clean, and `scripts/test-logic.ts`
+  passing (90 checks, up from 74 after 5e — new pinned tests for
+  `computeNeighbourhoodFocus`'s hop boundary, the Compare intersection on a
+  diamond-shaped fixture, and `shortestPath`'s up-then-down sibling case) —
+  run directly with `npx`, never through `npm run` (see the cloud-sandbox note
+  §2 rule 4 already has, unchanged: `npm run *` triggers `gen-slices.ts`,
+  which needs the full `src/data/research/*.json` corpus that was never
+  staged into this particular sandbox). Shipped to the actual device path by
+  path as each piece finished, not batched to the end.
 
-**This update (5i)** fixes a real bug 5h's own layout pass introduced without
-either of us noticing at the time. Thomas, 2026-08-21, after scrolling the
-Reports panel all the way down: *"I scrolled all the way down and it is
-hiding content behind the panel I think needs moved to the top."* This was
-the second round of the same report — the first time, both of us concluded
-"nothing's actually hidden, that's just the panel's own scroll" and shipped
-no fix. That first conclusion was wrong, and the second report is why: it
-does not just look scrolled, content that exists is not reachable.
+**This update (5h)** is a HUD layout pass, asked for live while Thomas was
+looking at the running app (a screenshot, not a written spec) rather than
+from a todo item — the bottom-centre trio and the search bar had drifted
+into each other's way as 5f/5g landed. In order asked and shipped:
+- **Compare, moved.** Off the tier bar's corner (where 5g had stacked it,
+  `bottom: 100, left: 20`) to bottom-centre, flanking `GroupsPanel` on the
+  LEFT — Thomas: *"set it just left of the regions and countries button."*
+- **Legend, moved.** From bottom-right (where it sat since item 7) to
+  bottom-centre, flanking `GroupsPanel` on the RIGHT — Thomas: *"on the
+  right of the countries and regions button move the legend."*
+  `IsolatedShelf` was deliberately left at its existing `right: 214` rather
+  than reclaiming the space Legend vacated: that offset was never really
+  about Legend — the comment on `isolatedShelfWrap` ties it to clearing the
+  View `PanelShell`'s own column (`right: 20` at the top), which can run
+  tall enough on a short window to reach the bottom-right corner. Moving
+  `IsolatedShelf` to `right: 20` now that Legend is gone would reopen
+  exactly the collision that number was chosen to avoid. The bottom-right
+  corner is emptier than it used to be as a result — worth a look, not
+  fixed here since nobody asked for it and the risk above is real.
+- **Both anchored with `calc(50% ± 140px)`, not a fixed offset from
+  `GroupsPanel`'s own rendered width.** `GroupsPanel`'s pill has no fixed
+  width — "Regions & Countries" or, once something is isolated, "Isolated:
+  <label>" up to its own `maxWidth: 260` before ellipsis clips it. Anchoring
+  each neighbour at half that worst case (130) plus a 10px gap keeps a
+  constant, correct gap on both sides regardless of collapsed-pill-vs-
+  expanded-280px-panel state on either side, without measuring anything at
+  runtime. See the `wrap` comments on `Compare.tsx` and `Legend.tsx`.
+- **The tier bar (Global/Nations/States/Everything), asked about, left
+  alone.** With Compare gone, its bottom-left corner is no longer shared
+  with anything — Thomas confirmed leaving it there rather than moving it
+  up to the top bar, so `tierBarWrap` (`App.tsx`) is untouched.
+- **The search bar, moved off dead-centre.** Thomas: *"I just want the
+  search/find bar to the left. The left corner is too far left because
+  there is already a panel there."* — the Reports `PanelShell` (`left: 20`,
+  width 320, plus its own collapse tab) owns true left; a search bar flush
+  against it would sit on top of it whenever Reports is open. New
+  `SEARCH_BAR_LEFT = 400` (`SearchPanel.tsx`) replaces the old `left: 50%` +
+  `translateX(-50%)` centring, hand-measured clear of that panel's tab.
+- **The calendar tab, flipped from the search bar's left side to its
+  right.** It was anchored off the search bar's own left edge (`left: 50%,
+  marginLeft: -(SEARCH_BAR_WIDTH/2) - 8, transform: translateX(-100%)`);
+  once the bar itself moved left, staying on that same side would have
+  pushed the tab further left still, into the same Reports panel the search
+  bar had just been moved to avoid. `CalendarPanel.tsx` now anchors off
+  `SEARCH_BAR_LEFT + SEARCH_BAR_WIDTH + 8` instead — no `translateX` needed,
+  since the tab now grows away from the bar rather than towards it.
+- **The search bar, made minimizable — same update, same request.**
+  Collapses to the same pill-by-default shape every other drop-up panel in
+  this app already uses (`Compare`/`Legend`/`GroupsPanel`), rather than the
+  input staying permanently on screen. `/` still reopens and focuses it from
+  anywhere; Escape on an empty box now minimizes it too, matching every
+  other panel's Escape-closes convention, rather than falling through to
+  the window's clear-selection handler. See the two effects in
+  `SearchPanel.tsx` — one restores `minimized` to `false`, the other
+  focuses the input, but only on a transition INTO the expanded state, not
+  on first mount, or the page would steal focus on every load.
+- Verified: `npx tsc --noEmit` clean (had to stage the full
+  `src/data/research/*.json` corpus into the sandbox to get a real answer
+  here — `slices.generated.ts` imports every file by name, so `tsc` cannot
+  resolve the program without it, unlike `test-logic.ts` which only needs
+  the already-`.generated` slice), `npx vite build` clean, `scripts/
+  test-logic.ts` still 90/90 (this update touched no data or logic, so the
+  count is unchanged from 5g). Also a real headless-Chromium screenshot
+  against the built app (same recipe as every other visual check this file
+  documents) — confirmed the search bar sits clear of the Reports panel
+  with the calendar tab to its right, and confirmed Compare/`GroupsPanel`/
+  Legend hold a clean, even gap on both sides of centre with ALL THREE
+  expanded at once (the worst case for the corner), not just glanced at
+  collapsed. Screenshots not shipped anywhere — this was a visual check,
+  not a deliverable.
+- **Not done, not asked for**: the empty bottom-right corner `IsolatedShelf`
+  left behind (see above); reclaiming it needs someone to first re-check
+  whether the View panel can actually reach that far down on a real window,
+  not just carry the same margin forward from before Legend existed there.
 
-- **Root cause, confirmed by measuring the live DOM, not guessed.** The
-  Reports `PanelShell` (`left: 20`, starting at `top: HUD_TOP`) and the tier
-  bar (`tierBarWrap`, `bottom: 20, left: 20`, `App.tsx`) both live in the same
-  bottom-left corner — a collision the second §7 trap bullet already warns
-  about, but that bullet only covers free-floating panels colliding with each
-  other, not a `PanelShell` growing tall enough to reach one. The Reports
-  panel's own scrollable content (`panel` style, `Hud` component) had
-  `maxHeight: 'calc(100vh - 40px)'`, a number that assumed the panel starts
-  20px from the top of the viewport. It doesn't — `PanelShell` starts it at
-  `HUD_TOP` (44px, below the menu bar), so the old formula let the panel's
-  bottom edge run to 100vh + 4px, well past the tier bar's own `bottom: 20`
-  position. Because `tierBarWrap` sits at `zIndex: 6` and `PanelShell`'s
-  sliding wrapper sits at `zIndex: 5`, the tier bar paints ON TOP of that
-  overlap — so a long enough report list scrolls its last entries into the
-  tier bar's own row and they render underneath it, invisible and
-  unreachable by scrolling further (there is nothing past them; they're
-  just covered, not below the fold). Confirmed live via
-  `getBoundingClientRect()`/`getComputedStyle()` in Thomas's own running
-  Chrome tab before writing any fix: tier bar measured `top: 720, bottom:
-  792, zIndex: 6`; the Reports `PanelShell` wrapper measured `top: 44,
-  bottom: 816, zIndex: 5` on an 812px-tall viewport — its bottom edge sat 4px
-  past the viewport already, and 96px into the tier bar's own row.
-- **Fix, `App.tsx`.** New `REPORTS_PANEL_BOTTOM_CLEARANCE = 120` constant;
-  the `panel` style's `maxHeight` is now
-  `` `calc(100vh - ${HUD_TOP}px - ${REPORTS_PANEL_BOTTOM_CLEARANCE}px)` ``
-  — measured from where the panel actually starts (`HUD_TOP`, imported from
-  `uiTheme.ts`) down to a line clear of the tier bar's full row (measured
-  ~72px tall) plus a real gap, rather than a flat guess. This makes the
-  panel's own scrollbar the thing that stops the content, not the tier bar
-  silently painting over it.
-- **Not touched:** `tierBarWrap` itself, `PanelShell`, any other panel.
-  This is the one spot where a `PanelShell`-hosted panel's own height
-  formula didn't account for a free-floating neighbour sharing its corner —
-  nothing else currently reaches far enough down to have the same problem
-  (see the updated §7 trap bullet).
-- Verified: `npx tsc --noEmit` clean, `npx vite build` clean, `scripts/
-  test-logic.ts` still 90/90 (no data/logic touched) — same sandbox recipe as
-  5h, full `src/data/research/*.json` corpus staged so `slices.generated.ts`
-  resolves. Then confirmed live, not just built: re-measured the same
-  `getBoundingClientRect()` call in Thomas's actual Chrome tab after shipping
-  the fix and reloading (Vite HMR) — Reports `PanelShell` wrapper now bottoms
-  out at `692`, a clean 28px above the tier bar's `top: 720`, and a screenshot
-  scrolled to the end of the report list shows the full "Commercial
-  (unranked)" line and the trailing instructions paragraph sitting above the
-  tier bar with daylight between them, not under it.
+Earlier the same day: corrected a long-running false claim about git,
+measured three things the project had only argued about, finished Phase 4 of
+the visual revamp, and fixed two rendering bugs. Written for a FRESH agent
+with no memory of any of it. Supersedes
+`archive/Previous Handoffs/HANDOFF-2026-08-20-5f-asked-not-built.md`
+(itself superseding
+`archive/Previous Handoffs/HANDOFF-2026-08-20-groupspanel-process-rules.md`,
+itself superseding
+`archive/Previous Handoffs/HANDOFF-2026-08-20-mint-fold-galaxy-isolate.md`,
+itself superseding
+`archive/Previous Handoffs/HANDOFF-2026-08-19-visual-revamp-phase4-complete.md`),
+kept for per-item detail.
 
 ---
 
@@ -248,10 +386,7 @@ Assume all of this exists and works. Each carries a dated comment at the site.
   Legend on its RIGHT (item 5h, both anchored `calc(50% ± 140px)` off centre
   — see the `wrap` comments on `Compare.tsx`/`Legend.tsx`). The search bar
   sits left-of-centre at the top (`SEARCH_BAR_LEFT`, item 5h, not dead
-  centre any more), calendar tab to its right. The Reports panel's own
-  scrollable content stops a full `REPORTS_PANEL_BOTTOM_CLEARANCE` (120px)
-  above the tier bar rather than running underneath it (2026-08-21, item
-  5i — `App.tsx`'s `panel` style; see this update's writeup and §7).
+  centre any more), calendar tab to its right.
 - **Lighting.** Two directional lights + ambient 0.28, emissive floor 0.12,
   bloom 0.14/0.26. **Closed** — Thomas, 2026-08-19: *"the lighting is okay"*.
 - **Blueprint is DELETED.** No view setting is a memo dep any more. Rims
@@ -836,26 +971,14 @@ Sorted by owner, ordered by priority within each.
     confirmed staying put at bottom-left now that it has that corner to
     itself, the search bar moved off dead-centre to clear the Reports panel,
     the calendar tab flipped to the search bar's right, and the search bar
-    made minimizable. Full writeup archived at
-    `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md`.
-    `npx tsc --noEmit` clean (against the FULL research corpus,
+    made minimizable. Full writeup in this update's summary at the top of
+    this file. `npx tsc --noEmit` clean (against the FULL research corpus,
     staged into the sandbox specifically for this — `slices.generated.ts`
     imports every file by name and `tsc` cannot resolve the program
     otherwise), `npx vite build` clean, `test-logic.ts` unchanged at 90/90
     (no data/logic touched), plus a headless-Chromium screenshot with all
     three bottom-centre panels expanded at once — the actual worst case for
     the corner, not just the collapsed-pill default.
-
-18. **Reports panel scrolling under the tier bar — DONE 2026-08-21 (item
-    5i).** A regression from item 5h's own layout pass, not caught until
-    Thomas scrolled the Reports panel all the way down and reported real
-    content missing, twice — the first report was wrongly closed as "just
-    scrolled." Root cause and fix, plus the live DOM measurements that
-    confirmed it before and after, are in this update's summary at the top
-    of this file. `npx tsc --noEmit` clean, `npx vite build` clean,
-    `test-logic.ts` unchanged at 90/90, confirmed live in Thomas's own
-    Chrome tab (bounding-rect measurement + a scrolled-to-bottom screenshot),
-    not just built.
 
 ### Offered — picked up this update (5g)
 
@@ -897,12 +1020,12 @@ Sorted by owner, ordered by priority within each.
     build` clean, plus a standalone manual round-trip check against a sample
     `DeepLinkState` before wiring it into `App.tsx` (encode → URL → decode,
     exact equality).
-14. **Compare two nodes — DONE 2026-08-20 (item 5g).** Full writeup, including
-    the bottom-left tier-bar collision caught and fixed before shipping,
-    archived at `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-
-    pass.md`.
-15. **Path finder — DONE 2026-08-20 (item 5g), same panel as 14.** Same
-    archived writeup as item 14.
+14. **Compare two nodes — DONE 2026-08-20 (item 5g).** See the dedicated
+    entry earlier in this update's summary at the top of this file for the
+    full writeup, including the bottom-left tier-bar collision caught and
+    fixed before shipping.
+15. **Path finder — DONE 2026-08-20 (item 5g), same panel as 14.** See the
+    dedicated entry earlier in this update's summary at the top of this file.
 
 Parked deliberately: 134 cadences where the publisher states nothing countable;
 the 7 single-use `proposed:` tags; `diary.csv` relocation (Thomas's personal
@@ -984,28 +1107,6 @@ cross-project diary — not the project's, leave it alone).
   so the only real check is reading every other panel's `wrap`/positioning
   const before adding one, which is what this trap is now here to remind
   whoever adds the next one to actually do.
-- **The same trap also bites a `PanelShell`-hosted panel that's allowed to
-  grow tall, not just two free-floating panels planted at the same spot —
-  caught the hard way, 2026-08-21 (item 5i).** The Reports `PanelShell`
-  (`left: 20`) and the tier bar (`tierBarWrap`, `bottom: 20, left: 20`) share
-  a corner the same way Compare and the tier bar once did, but nobody
-  noticed at the time because `PanelShell` itself has no `bottom`/height —
-  height comes from the content's own `maxHeight`, one level removed from the
-  coordinate that actually collides. The Reports panel's `maxHeight` (`panel`
-  style, `App.tsx`) also had the wrong reference point: it assumed a 20px top
-  offset when the panel actually starts at `HUD_TOP` (44px), so it ran past
-  the true bottom of the viewport even before the tier bar entered into it.
-  Combined with `tierBarWrap`'s `zIndex: 6` beating `PanelShell`'s `zIndex:
-  5`, the tier bar painted over the panel's own last few list entries instead
-  of just sitting beside them — scrolling further did nothing, because there
-  was nowhere further to scroll to; the content was already fully scrolled,
-  just hidden. Fixed by anchoring the `maxHeight` formula to `HUD_TOP` and a
-  named `REPORTS_PANEL_BOTTOM_CLEARANCE` constant instead of a flat guess —
-  see this update's writeup at the top of the file. **The lesson for the next
-  person who touches either panel's sizing:** a content `maxHeight` is a
-  coordinate too, and needs the same "check every other fixed-position panel"
-  discipline the bullet above already asks for — it just doesn't look like
-  one until you go measure it.
 - **Isolating a group can show a surprisingly small number with no
   explanation on screen.** "Middle East" isolates to 6 real reports — correct
   (6 of its 7 countries are on the zero-cross-border-edges list in

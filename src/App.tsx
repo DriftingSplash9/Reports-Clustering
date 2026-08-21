@@ -136,7 +136,7 @@ import {
   SCOPE_GROUPS,
   colourForReport,
 } from './lib/palette'
-import { THEME_CSS } from './lib/uiTheme'
+import { THEME_CSS, HUD_TOP } from './lib/uiTheme'
 import { DOMAINS, type Domain } from './lib/types'
 import type {
   Country,
@@ -2388,6 +2388,19 @@ const TERMINUS_NOTE: Record<TerminalReason, string> = {
 }
 
 // See ViewControls: PanelShell owns position and width.
+//
+// Bottom clearance for the scrollable panel below: the tier bar
+// (`tierBarWrap`) is fixed at the same `left: 20` corner this panel slides
+// from, `bottom: 20`, and sits at zIndex 6 — one above this panel's PanelShell
+// wrapper (zIndex 5). Thomas, 2026-08-21, after scrolling Reports all the way
+// down: "it is hiding content behind the panel I think needs moved to the
+// top." Measured live: the tier bar's row is ~72px tall, so its top edge sits
+// ~92px above the viewport bottom. Without a matching cap here, a long
+// enough report list scrolls its last entries into that same 92px strip,
+// and the tier bar — being on top — paints over them instead of just sitting
+// beside them. 120px leaves the tier bar's full row plus a clear gap, so the
+// panel's own scrollbar (not the tier bar) is what stops the content.
+const REPORTS_PANEL_BOTTOM_CLEARANCE = 120
 const panel: React.CSSProperties = {
   padding: '16px 18px',
   background: 'var(--panel-bg)',
@@ -2402,8 +2415,16 @@ const panel: React.CSSProperties = {
   // where I can't get to." The old 'none' existed so the panel never ate an
   // orbit drag; the price was a panel that could strand its own controls,
   // which is worse. Orbiting from the far-left strip is the rarer gesture.
+  //
+  // The cap is measured from HUD_TOP (where this panel actually starts, not
+  // the top of the viewport) down to a clearance line above the tier bar —
+  // see REPORTS_PANEL_BOTTOM_CLEARANCE above. The old `calc(100vh - 40px)`
+  // assumed a 20px top offset that was never true (the panel starts at
+  // HUD_TOP = 44) and ignored the tier bar entirely, so it both overshot the
+  // bottom of the viewport by a few pixels AND let content scroll under the
+  // tier bar.
   pointerEvents: 'auto',
-  maxHeight: 'calc(100vh - 40px)',
+  maxHeight: `calc(100vh - ${HUD_TOP}px - ${REPORTS_PANEL_BOTTOM_CLEARANCE}px)`,
   overflowY: 'auto',
 }
 
