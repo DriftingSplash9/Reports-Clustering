@@ -5,11 +5,9 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5p — GroupsPanel/graph-click isolate-reset
-bug FIXED and verified live; the render-consistency/camera-fit bug
-reproduced live and partially fixed (cooldownTime raised) but NOT fully
-resolved — a second suspect is flagged, not yet fixed; bloom-flicker item
-REOPENED)**.
+Last written: **2026-08-21 (item 5o — the pulse/beam round: §5 item 4 SHIPPED,
+new `Report.continuous` field + validator rule, beam edge treatment for
+continuous-database sources, §6 fully closed since 5n)**.
 §6 (the full-review punch list) closed with item 5n, immediately before this
 round — see that entry below for the full nine-item history.
 Yesterday (2026-08-20) was a full day
@@ -633,125 +631,6 @@ design questions before any code was written.
   nothing in this round's brief asked for one, and the effect is meant to
   read from the edge itself.
 
-**This update (5p), 2026-08-21.** Thomas, after living with 5o for a session:
-the render is "far from consistent" — screenshots of the SAME Global tier
-(396 shown) sometimes pale and sparse, sometimes densely colourful, and a
-separate complaint that picking a country/region from `GroupsPanel` then
-clicking the graph to dismiss the panel throws the whole isolate away and
-lands back on the reset view. Also: the bloom-flicker item (§5 [Thomas] #1,
-tentatively closed 2026-08-20 off a soft "I think it's gone") is REOPENED —
-still happening. Two real bugs found and one fixed with confidence; the
-other partially addressed and explicitly left open rather than guessed at
-further. This session drove Thomas's own Chrome directly (Claude-in-Chrome,
-his approval) rather than reasoning from code alone — screenshots and a
-live console below are real captures, not descriptions.
-
-- **The GroupsPanel/graph-click isolate reset — FOUND, FIXED, verified live.**
-  Root cause: `App.tsx`'s `onSelect` (a node click) and `onPointerMissed` (an
-  empty-space click) both unconditionally called `setSelectedGroupId(null)`
-  — a leftover from before `handleChoose` (search) got the "selection and
-  group isolate may coexist" fix in 5k. Since `visible` already restricts
-  clickable nodes to the active `groupFocus` while an isolate is on, there
-  was never a real "clicked something outside the isolate" case for a direct
-  node click to guard against — the unconditional clear was simply wrong.
-  `onSelect` now only clears `selectedGroupId` when the clicked id is
-  outside `groupFocus` (same shape as `handleChoose`'s existing check);
-  `onPointerMissed` no longer touches `selectedGroupId` at all. Exiting an
-  isolate now requires an actual explicit action — the panel's own "Clear"
-  button, re-picking the same group (existing toggle-off), or Escape's
-  priority stack (unchanged, still clears it last). Verified live in
-  Thomas's own Chrome tab via Vite HMR: isolated India (12 reports, 11
-  shown), clicked a node inside the isolate — panel closed, node selected,
-  isolate held ("11 shown · 396 in this tier · filter hiding 385" unchanged,
-  "ISOLATED: INDIA" pill still showing); clicked empty space — same result;
-  reopened the panel and clicked Clear — correctly dropped back to the full
-  396-node view. No console errors at any point.
-- **The render-consistency bug — REPRODUCED live, ROOT-CAUSED, PARTIALLY
-  fixed.** Five cold reloads of `localhost:5173`, zero camera interaction,
-  same Global tier every time: the camera-fit distance the app settles on is
-  genuinely non-deterministic. Two of five landed correctly (thin lines,
-  full graph in frame); one landed far too close (spheres overlapping,
-  filling the screen, colours reading as vivid purely because everything is
-  huge); one landed far too far (a handful of pale dots on empty black —
-  this is almost certainly what Thomas's "pale image" actually is: the SAME
-  data and colours, just zoomed out until they read as nothing). Switching
-  to Everything and back to Global, Thomas's own workaround, was tested live
-  too and did NOT reliably fix it — one live test produced a THIRD wrong
-  distance rather than the right one.
-  - Traced to `InfluenceGraph.tsx`'s settle/fit machinery: `fg.d3AlphaMin(0.005)`
-    makes the simulation's stop condition tick-based, not wall-clock-based,
-    but the ceiling that backstops it (`cooldownTime`, library default 15s)
-    IS wall-clock. A cold load — parsing the 7MB corpus, compiling 3,091
-    meshes, JIT warmup — is exactly when real frame rate is lowest, so fewer
-    physics ticks land inside that 15s window than on a warm/fast run,
-    and the layout can still be genuinely mid-expansion (under `galaxyForce`/
-    `geoAffinity`, both added well after 15s was ever tuned) when the cap
-    forces a stop and `runFit` measures a too-small radius.
-  - **Fix shipped:** `fg.cooldownTime(45000)`, right after the existing
-    `d3AlphaMin` call — a plain constant raise, same shape as the line
-    already there. Does not slow down a run that already converges well
-    inside 15s (the vast majority); only changes the runs that were hitting
-    the old cap.
-  - **Did not fully resolve it** — re-tested live after shipping (multiple
-    reloads): still saw a too-close lock-up on one run, cold-load console
-    clean throughout. So `cooldownTime` was a real contributing factor but
-    not the whole story. Second, more specific suspect identified but NOT
-    fixed this round: `runFit`'s periodic tracking pass sets
-    `userOwnsCamera.current = true` (line ~2585) whenever
-    `cameraMovedOffFit()` sees the live camera position differ from the last
-    fit pose by more than a 0.5%-of-distance tolerance — and that check is
-    NOT gated behind an actual user gesture (unlike the OrbitControls
-    `change`-listener path just above it, which correctly is). If
-    OrbitControls' own damping (`enableDamping`, `dampingFactor: 0.08`)
-    leaves `camera.position` a hair off the exact snapped pose for a frame
-    or two after a programmatic `runFit`, and that happens to land during an
-    EARLY tracking pass when the fit distance is still small (so 0.5% of it
-    is a tiny absolute tolerance), this could false-trip `userOwnsCamera`
-    with nobody touching anything — and once true, no later, more-correct
-    `runFit(true)` call is ever allowed to move the camera again for that
-    session. Plausible and matches every symptom (camera "stuck," not
-    drifting; wrong in both directions; worse under load) but NOT confirmed
-    by instrumentation — would need a temporary debug hook logging
-    `userOwnsCamera`/`cameraMovedOffFit` transitions live, the same kind of
-    measurement 5j's Suspect-1-through-4 flicker tests used, before touching
-    that logic. Deliberately not guessed at further this round: this is
-    camera-ownership code Thomas explicitly said he loves ("the right drag
-    is awesome... I love playing with it"), and a wrong fix here risks
-    breaking that feel to chase a bug the `cooldownTime` change already
-    partially addressed.
-  - **Bloom itself was NOT re-implicated.** The apparent "pale vs colourful"
-    difference Thomas is seeing tracks entirely with camera distance in
-    every live capture this round — no separate bloom/glow inconsistency was
-    observed once distance is accounted for. The 2026-08-19 bloom-slider
-    theory (`notes/flicker-tests-2026-08-19.md`, Suspect 3) is still
-    untested on its own terms — worth Thomas's one-minute glow-slider check
-    if a genuinely bloom-only flicker (nodes shimmering in brightness at a
-    STABLE camera distance) is ever seen separately from this.
-  - **Not verified via the full sandbox recipe this round** — no
-    `npm run validate` / `tsc --noEmit` / `vite build` pass. Both changes
-    are small (one added library-config line, a conditional narrowed in two
-    places) and were verified live via Vite HMR with a clean console
-    instead, given the size of staging the full corpus for a build; worth a
-    real `tsc`/`build` pass next session before this is considered fully
-    closed out, per rule 4.
-- **Files touched:** `src/components/InfluenceGraph.tsx` (`cooldownTime`),
-  `src/App.tsx` (`onSelect`, `onPointerMissed`).
-- **Not done, deliberately:** the `userOwnsCamera`/`cameraMovedOffFit`
-  investigation above — flagged for next round, needs live instrumentation
-  first. Geo-exploration (§5 item 10) explicitly deprioritized by Thomas
-  this round: *"forget about geo-exploration, once that menu for selecting
-  countries or regions works I will be happy."* That menu (GroupsPanel) now
-  works as he described.
-- **Also this round, no code:** refreshed Thomas on the soft-edge node idea
-  (`notes/node-surface-encoding-2026-08-19.md`) and drafted a Grok research
-  prompt + file list for the research backlog (19 zero-cross-border-edge
-  countries, `notes/cross-border-gaps-2026-08-20.md`) — both delivered in
-  chat, not written to a new file, since the note already holds the country
-  list and the prompt is Thomas's to paste into Grok directly, not a repo
-  artifact.
-
----
-
 ---
 
 ## 0. Process rules Thomas asked for, 2026-08-20 — read this section too
@@ -1041,19 +920,15 @@ Sorted by owner, ordered by priority within each.
 
 ### [Thomas] — only you can
 
-1. **REOPENED 2026-08-21 (item 5p) — the bloom flicker / render-consistency
-   check.** The 2026-08-20 "tentative DONE" above did not hold — Thomas:
-   "the bloom flicker is still happening," this time with a real, live-
-   reproduced repro (5p, top of file): the SAME Global tier renders at a
-   different, wrong camera distance on a fresh load, not a brightness
-   flicker at a stable distance. One contributing cause fixed
-   (`cooldownTime` raised, InfluenceGraph.tsx) but NOT fully resolved — see
-   5p for the second suspect (`userOwnsCamera`/`cameraMovedOffFit`) that
-   still needs live instrumentation before touching it. The original
-   bloom-slider theory (`notes/flicker-tests-2026-08-19.md`, Suspect 3) is
-   still untested on its own terms and may be a genuinely separate issue —
-   worth Thomas's one-minute glow-slider check if a brightness-only flicker
-   at a fixed camera distance is ever seen apart from this.
+1. **DONE (tentatively) 2026-08-20 — the bloom flicker check.** Thomas dragged
+   the glow slider to 0 while the flicker was happening: *"i think the flicker
+   is gone."* Read as a soft confirmation, not a hard one — he did not say
+   "definitely" and the test was not repeated. Treat bloom as the leading
+   cause and try the bloom-pass fix (raise the threshold, drop `mipmapBlur`,
+   or pin the bloom buffer to a fixed resolution) next; **if the fix doesn't
+   actually kill the flicker, re-open this** rather than assume the diagnosis
+   was solid — this project has a standing scar from carrying forward
+   claims nobody re-checked (§3).
 2. **Tried 2026-08-20 — right-drag panning and the low end of the zoom
    slider.** Thomas tried it (no complaint reported), so treat as probably
    working, but this wasn't an explicit yes/no confirmation — worth a quick
