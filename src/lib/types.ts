@@ -668,6 +668,47 @@ export interface Report {
   /** Free text where the numbers still lose something. */
   cadence_note?: string
   /**
+   * A continuously-updated database or portal with no discrete editions —
+   * the renderer distinction `isStandingInstrument` cannot make on its own.
+   *
+   * `releases_per_year` alone cannot tell "publishes 250 times a year" from
+   * "has no editions at all, and 250 is a nominal rate invented so the
+   * renderer doesn't mistake it for a one-off instrument" — both shapes carry
+   * the same number by construction (the 2026-08-18 renderer convention,
+   * still readable in `cadence_note` on every node this applies to: "a
+   * nominal releases_per_year so that absence keeps meaning 'one-off
+   * instrument' only"). Before this field existed the two were genuinely
+   * indistinguishable in the typed schema — findable only by grepping
+   * `cadence_note` for "no discrete editions" — which is exactly the kind of
+   * prose-sniffing the "closed unions are cast, not parsed" rule exists to
+   * keep out of code. This field is that fact, promoted.
+   *
+   * **Not the same signal as `_cadence_original` in the raw research
+   * files.** That underscore field records what the SOURCE claims about its
+   * own update pattern during research — a much noisier, unreviewed set (73
+   * reports say "continuous" there, most of them one-off institutional cores
+   * or reports with a real periodic cadence, not renderer-nominal ones).
+   * `continuous` is the curated subset that actually got the nominal-rate
+   * treatment: checked file-by-file 2026-08-21 via `_cadence_resolution ===
+   * "continuous-database"` (itself underscore-prefixed research metadata,
+   * cross-verified against every `cadence_note` naming "no discrete
+   * editions" AND every report sharing its 250/365 nominal rate with a
+   * genuinely-editioned daily series such as `boc-daily-exchange-rates` or
+   * `treasury-daily-yield-curve` — 14 of those exist and are correctly
+   * `continuous` absent). Exactly 35 reports qualify; see the validator rule
+   * in `graph.ts` for the one structural constraint this field carries.
+   *
+   * Optional, and absent means ordinary — a real edition count, or no
+   * cadence at all (`isStandingInstrument`'s one-off case). Never inferred
+   * from `cadence_note` at runtime; the field is the source of truth once
+   * set. Drives the beam-edge treatment (`InfluenceGraph.tsx`'s
+   * `LinkDatum.continuousSource`, `linkVisuals.ts`'s flow shader) — a
+   * continuous source's outgoing edges read as a lit, flowing stream instead
+   * of discrete teardrop pulses, because there is no discrete event to draw
+   * one for.
+   */
+  continuous?: boolean
+  /**
    * **Phase** — when the next releases actually land, as against how many there
    * are in a year. See ReleaseSchedule.
    *

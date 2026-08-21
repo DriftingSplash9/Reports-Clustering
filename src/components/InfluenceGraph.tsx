@@ -42,9 +42,12 @@ import {
   edgeShade,
   gradientLinkMaterial,
   pulseMaterial,
+  resetLinkFlow,
+  setLinkFlow,
   setLinkFocus,
   setLinkFog,
   teardropGeometry,
+  tickLinkFlow,
   tickPulseBlink,
   type GradientLinkMaterial,
 } from './linkVisuals'
@@ -110,6 +113,20 @@ interface LinkDatum {
    * a blink.
    */
   cross: boolean
+  /**
+   * The upstream report is a continuously-updated database with no discrete
+   * editions (`Report.continuous`, see its doc comment for how that's
+   * decided). This edge gets the beam treatment instead of teardrop pulses:
+   * zero photons (built nowhere — see the `particleObjects` loop) and a
+   * flowing highlight on the LINE material itself (`gradientLinkMaterial`'s
+   * `beam` argument, `linkVisuals.ts`'s `uFlow`/`uFlowTime`).
+   *
+   * OR-merged on trunk collapse the same way `cross` is, for the same
+   * reason — one continuous member makes the trunk read as a stream — though
+   * in practice a trunk's members share one upstream after disclosure
+   * folding, so this is rarely a real merge of two different answers.
+   */
+  continuousSource: boolean
   /**
    * Extra rest length for links touching high-degree nodes, precomputed at
    * build time (the d3 distance accessor sees mutated link objects, so
@@ -1059,6 +1076,11 @@ export default function InfluenceGraph({
         famUp !== famDown &&
         famUp !== 'INT' &&
         famDown !== 'INT'
+      // See LinkDatum.continuousSource. `=== true` rather than a bare
+      // truthiness check for the same reason the field is optional and not
+      // defaulted: undefined (ordinary) is a different claim from a future
+      // explicit `false`, even though both render identically today.
+      const continuousSource = upstream?.continuous === true
       const existing = linkMap.get(key)
       if (existing) {
         existing.count += 1
@@ -1073,6 +1095,7 @@ export default function InfluenceGraph({
           upstream?.releases_per_year ?? 1,
         )
         existing.cross = existing.cross || cross
+        existing.continuousSource = existing.continuousSource || continuousSource
         continue
       }
       // Family ink, not fill — see the note on LinkDatum.colour.
@@ -1086,6 +1109,7 @@ export default function InfluenceGraph({
         colour: upstream ? linkInk(upstream.country) : fallbackInk,
         endColour: downstream ? linkInk(downstream.country) : fallbackInk,
         cross,
+        continuousSource,
         count: 1,
         hubRoom:
           3.5 *
@@ -1102,6 +1126,11 @@ export default function InfluenceGraph({
     // than a rebuild, and so the library's repeated `obj.material = ...` on
     // every digest keeps assigning the same object instead of churning.
     linkMaterials.current.clear()
+    // Same reset, for the same reason — see resetLinkFlow's own comment: a
+    // beam material is one instance per link, never shared, so the module's
+    // animation registry has to be cleared here or it leaks one entry per
+    // continuous edge on every rebuild.
+    resetLinkFlow()
     for (const l of links) {
       // The third (dashed) argument retired with the implied-edge layer,
       // 2026-08-12. The shader machinery behind it survives in linkVisuals for
@@ -1123,6 +1152,9 @@ export default function InfluenceGraph({
           edgeShade(l.endColour),
           false,
           Math.min(0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
+          // The beam flag — see LinkDatum.continuousSource and
+          // gradientLinkMaterial's own doc comment.
+          l.continuousSource,
         ),
       )
     }
@@ -1130,8 +1162,16 @@ export default function InfluenceGraph({
     // Geometry and material for a link's pulses. three-forcegraph reads only
     // these two fields off the object it is handed, and reuses them across all
     // the photons on that link.
+    //
+    // A continuous edge gets no entry here at all — it never asks for one,
+    // since `linkDirectionalParticles` always returns 0 for it below, and
+    // building a teardrop it will never use would be exactly the draw-call
+    // cost the beam treatment exists to remove (the review's own §4.3: up to
+    // 4 photon meshes per fast edge, and continuous edges are the fastest by
+    // construction — see `Report.continuous`'s nominal 250/365 rate).
     const particleObjects = new Map<string, THREE.Mesh>()
     for (const l of links) {
+      if (l.continuousSource) continue
       particleObjects.set(
         l.key,
         new THREE.Mesh(
@@ -1317,8 +1357,15 @@ export default function InfluenceGraph({
       // harder than a bright stationary one. (Implied edges never pulsed;
       // since 2026-08-12 there are none to suppress — every edge is
       // documented by validator rule.)
+      // A continuous edge is 0 unconditionally, never `pulseCount` — it has
+      // the beam instead (see LinkDatum.continuousSource), not the beam IN
+      // ADDITION to pulses.
       .linkDirectionalParticles((l: object) =>
-        litLink(l as LinkDatum) ? pulseCount((l as LinkDatum).upstreamCadence) : 0,
+        (l as LinkDatum).continuousSource
+          ? 0
+          : litLink(l as LinkDatum)
+            ? pulseCount((l as LinkDatum).upstreamCadence)
+            : 0,
       )
       .linkDirectionalParticleSpeed((l: object) =>
         pulseSpeed((l as LinkDatum).upstreamCadence),
@@ -2306,10 +2353,21 @@ export default function InfluenceGraph({
     applyFocus()
 
     forceGraph.linkDirectionalParticles((l: object) =>
-      view.showPulses && litLink(l as LinkDatum)
+      view.showPulses && !(l as LinkDatum).continuousSource && litLink(l as LinkDatum)
         ? pulseCount((l as LinkDatum).upstreamCadence)
         : 0,
     )
+    // The beam is a continuous edge's ONLY direction cue (see
+    // LinkDatum.continuousSource) — it obeys the same Pulses toggle the
+    // teardrops do, rather than always drawing regardless of that setting.
+    // Also where the beam's animation is switched on in the first place:
+    // `gradientLinkMaterial` always constructs with `uFlow` off (see its own
+    // comment) so this effect, which fires on mount, is what turns it on.
+    for (const l of linkDataRef.current) {
+      if (!l.continuousSource) continue
+      const material = linkMaterials.current.get(l.key)
+      if (material) setLinkFlow(material, view.showPulses)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceGraph, focus, view.showPulses])
 
@@ -2563,6 +2621,9 @@ export default function InfluenceGraph({
     // The cross-border pulse blink — one call animates every registered blink
     // material; a no-op when the current graph has no cross-border edges.
     tickPulseBlink(pulseClock.current)
+    // The beam flow — same free-running clock, same shape, a no-op when
+    // nothing on screen is continuous.
+    tickLinkFlow(pulseClock.current)
     const breath =
       0.5 - 0.5 * Math.cos((2 * Math.PI * pulseClock.current) / ORB_PULSE_PERIOD_SECONDS)
     for (const [id, mesh] of meshes.current) {

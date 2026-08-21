@@ -235,6 +235,20 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   ok(!goodStrength.some((i) => i.message.includes('strength')), 'validate: a positive finite strength passes clean')
 }
 
+// `continuous` validator rule, 2026-08-21 (todo item 4, the pulse/beam
+// round): a continuous source needs SOME nominal releases_per_year, or it
+// falls into isStandingInstrument's "one-off, draw hollow" case instead —
+// the two claims are opposites and must never collide.
+{
+  const base = { title: 'x', publisher: 'p', country: 'CA' as const, jurisdiction_level: 'federal' as const, region: 'r', description: '', last_updated: null, url: '', domains: [] }
+  const noRate = validate([{ ...base, id: 'r1', continuous: true }], [])
+  ok(noRate.some((i) => i.severity === 'error' && i.message.includes('continuous is true but releases_per_year is absent')), 'validate: continuous: true with no releases_per_year is an error')
+  const withRate = validate([{ ...base, id: 'r1', continuous: true, releases_per_year: 250 }], [])
+  ok(!withRate.some((i) => i.message.includes('continuous')), 'validate: continuous: true with a nominal releases_per_year passes clean')
+  const ordinary = validate([{ ...base, id: 'r1', releases_per_year: 12 }], [])
+  ok(!ordinary.some((i) => i.message.includes('continuous')), 'validate: an ordinary recurring report (continuous absent) is unaffected')
+}
+
 // --------------------------------------------------------------- selection --
 {
   // a -> b -> c chain plus a cycle c -> a: both cones, cycle-safe.

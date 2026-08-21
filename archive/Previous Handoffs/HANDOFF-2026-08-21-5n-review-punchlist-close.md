@@ -5,11 +5,10 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5o — the pulse/beam round: §5 item 4 SHIPPED,
-new `Report.continuous` field + validator rule, beam edge treatment for
-continuous-database sources, §6 fully closed since 5n)**.
-§6 (the full-review punch list) closed with item 5n, immediately before this
-round — see that entry below for the full nine-item history.
+Last written: **2026-08-21 (item 5n — review follow-up round 4, the LAST
+round: §6 items 6–9 — the tier-1 colour pass, the three validator rules,
+search accent-folding + calendar year-boundary fix, and the PNG re-entry
+guard + zoom-baseline freeze — all shipped)**.
 Yesterday (2026-08-20) was a full day
 of work ending in item 5h, a HUD layout pass — full detail archived at
 `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md` (itself
@@ -507,130 +506,6 @@ in full, items 1–9 shipped across 5k/5l/5m/5n.
   regression coverage until a component-level harness exists. §6 has no
   further items — the review's ordered list is fully shipped.
 
-**This update (5o), 2026-08-21.** §6 closed with 5n, immediately above.
-This round is §5 item 4 — the pulse/beam redesign — picked by Thomas from
-a menu of four remaining todo items, then steered by him on two open
-design questions before any code was written.
-
-- **What was asked.** Item 4's own text: "Pulse size/shape redesign + the
-  beam. Burner by your instruction. The set-sizes pass fixed the noise;
-  the beam idea (continuous databases render their edge as a lit stream
-  with a direction cue) replaces pulse geometry on the fastest edges, so
-  shape and beam are ONE design round." Scope was explicitly the beam
-  treatment for continuous-database edges, not a general pulse redesign —
-  the full review (§6) already found ordinary teardrop pulses "aged well"
-  with "nothing... wants a style change," and that verdict was left alone
-  here. Two questions were put to Thomas before writing code, both
-  answered by him: how to identify "the 35 continuous databases"
-  (he chose adding a real structured field over inferring one), and what
-  the beam should look like (he chose an animated flow baked into the
-  edge shader over discrete photon particles).
-- **The identification problem, and a trap avoided.** Nothing in the typed
-  schema distinguished a continuously-updated database (a nominal
-  `releases_per_year` invented so the renderer doesn't read "no cadence"
-  as a one-off instrument) from a report that just happens to publish
-  often. The obvious source — `_cadence_original === "continuous"` in the
-  raw per-report research metadata — turned out to be wrong: 73 reports
-  carry it, but cross-checking against `cadence_note` phrasing and actual
-  `releases_per_year` values found 38 of those are one-off institutional
-  cores or genuinely periodic reports (1/4/12/0.2 per year), not the
-  renderer-nominal 250/365 convention. The correct signal, found by the
-  same cross-check, is `_cadence_resolution === "continuous-database"` —
-  itself underscore-prefixed research metadata, but a curated resolution
-  rather than a raw source claim. It matched a from-scratch manual
-  cross-check (cadence_note phrase + shared nominal rate, with the 14
-  genuinely-daily-edition lookalikes such as `boc-daily-exchange-rates`
-  explicitly excluded) exactly: 35 of 35. This was caught before any code
-  was written — no wrong identification shipped.
-- **What shipped.**
-  - `Report.continuous?: boolean` (`src/lib/types.ts`) — a real field, not
-    a runtime inference from `cadence_note`. Backfilled onto exactly the
-    35 correct reports across 15 `src/data/research/*.json` files (surgical
-    per-object insertion, not a rewrite — diffed clean against the
-    originals). Absent means ordinary, matching every existing optional
-    field's convention.
-  - A validator rule (`src/lib/graph.ts`): `continuous: true` with no
-    `releases_per_year` is an error, since a continuous source needs a
-    nominal rate or it silently falls into `isStandingInstrument`'s
-    one-off/hollow case instead — the two claims are opposites and must
-    never collide unnoticed. Three pinned tests added in
-    `scripts/test-logic.ts` (no-rate rejected, rate-present passes clean,
-    an ordinary recurring report is unaffected).
-  - The beam itself: no new geometry, no discrete particle objects.
-    `linkVisuals.ts`'s `gradientLinkMaterial` gained a `beam` parameter and
-    two new shader uniforms (`uFlow`, `uFlowTime`); when `uFlow` is on, the
-    fragment shader sweeps several soft brightness bands along the edge
-    (a moving wave, not a moving dot — a travelling object reads as an
-    event, which is what a pulse already means; a travelling wave reads as
-    a medium already in motion, which is what "continuous" means).
-    `tickLinkFlow` advances `uFlowTime` from the same per-frame clock that
-    already drives pulse blinking; `resetLinkFlow` clears the module-level
-    animation registry on every `forceGraph` rebuild (this material is one
-    instance per link, never cache-shared, so without an explicit reset
-    the registry would leak one entry per continuous edge per rebuild).
-  - `InfluenceGraph.tsx`: `LinkDatum` gained `continuousSource: boolean`,
-    OR-merged on trunk collapse the same way `cross` already is, derived
-    from `upstream?.continuous === true`. Continuous links never get a
-    teardrop particle object built for them at all (`particleObjects`
-    build loop skips them outright — zero draw calls, not zero-opacity),
-    and `linkDirectionalParticles()` returns 0 for them in both the
-    accessor and the `showPulses` effect. The beam is gated by the same
-    `showPulses` toggle pulses already use, so "hide pulses" hides both
-    mechanisms together as one concept from the UI's point of view.
-- **An honest finding, not a code gap.** Of the 35 continuous-database
-  nodes, only **one** — `tw-dgbas`, cited by `tw-statistics-act` — has any
-  documented dependent in the current 3091-report corpus; the other 34 are
-  isolated, uncited institutional-core entries from the 2026-08-20 mint
-  with no outgoing edges yet. So today the beam mechanism is correct and
-  fully wired but touches one real edge — it removes 1 of roughly 2967
-  photon meshes (about 0.1%), nowhere near the §4.3 draw-call relief the
-  "35 continuous databases" framing might suggest. That relief shows up as
-  more research connects these institutional cores to real dependents, not
-  from anything left to fix in this code. Measured, not assumed: confirmed
-  live via a constructed deep link (`?rig=`) forcing Taiwan's per-report
-  nodes into view, since at Global/Everything tier an unopened country's
-  reports fold into an orb and orbs never carry `continuous` (same
-  convention as `releases_per_year`).
-- **A bug hit and fixed during this round.** The first backfill script
-  located each report by its `id` line and inserted `"continuous": true,`
-  right after `cadence_note`, without checking whether `cadence_note` was
-  already the object's last field or handling the trailing-comma rules
-  correctly — this corrupted all 15 touched JSON files (verified with
-  `python3 -c "import json; json.load(...)"`, all 15 failed to parse).
-  Fixed by re-extracting clean copies and rewriting the script to find the
-  object's true closing `}` via indentation matching, add a trailing comma
-  to whatever the real last field was if missing, and insert `continuous`
-  as the new final field with no trailing comma of its own. Re-verified
-  all 267 corpus files parse and exactly 35 carry `continuous: true`.
-  Also hit: an early draft of the shader comment above used backtick-quoted
-  identifiers inside `linkVisuals.ts`'s `FRAGMENT` string, which is itself
-  a backtick-delimited JS template literal — any backtick inside it ends
-  the string early and broke `tsc`. Fixed by rewriting the comment in
-  plain prose with no backticks anywhere.
-- **Verified live, full sandbox build** (same recipe as prior rounds):
-  staged the full 267-file `src/data/research/` corpus fresh →
-  `npm install` → `npm run gen` (267 slices, unwired unchanged) →
-  `npx tsc --noEmit` clean → `npm run validate` (**120/120 logic checks,
-  up from 117** — the three new `continuous` tests; unchanged 3091
-  reports/2070 dependencies; zero validator errors) → `npm run build`
-  clean (1,486.90 kB) → `vite preview` + Playwright on the preinstalled
-  Chromium with the §2.7 SwiftShader flags: a deep link forcing Taiwan
-  open confirmed `tw-statistics-act → tw-dgbas` is the only link with
-  `continuousSource: true` in the live graph, its material carries
-  `uFlow === 1`, and it draws with zero photon particles while ordinary
-  edges are unaffected; zero console errors throughout. A temporary
-  `window.__rigDebugLinks` hook used only for this inspection was removed
-  before shipping — confirmed absent (`typeof window.__rigDebugLinks ===
-  'undefined'`) in the final build.
-- **Not done, deliberately:** ordinary (non-continuous) teardrop pulse
-  shape and sizing were not touched this round — the full review already
-  found that design "aged well" with no style change wanted, and item 4's
-  own framing ("shape and beam are ONE design round") was satisfied by
-  scoping "shape" to the edges that actually get the beam treatment. No
-  new UI surfaces the `continuous` flag directly (no badge, no filter) —
-  nothing in this round's brief asked for one, and the effect is meant to
-  read from the edge itself.
-
 ---
 
 ## 0. Process rules Thomas asked for, 2026-08-20 — read this section too
@@ -943,19 +818,12 @@ Sorted by owner, ordered by priority within each.
 
 ### [Us] — your eyes, agent's hands
 
-4. **Pulse size/shape redesign + the beam — DONE 2026-08-21 (5o).** New
-   `Report.continuous` field, backfilled onto the real 35 via
-   `_cadence_resolution === "continuous-database"` (not the noisier
-   `_cadence_original`, which was a trap — see 5o's writeup below).
-   Continuous edges draw as an animated flow baked into the edge shader,
-   zero teardrop particles built for them. Ordinary pulse shape/sizing
-   deliberately untouched — the review already found that design aged
-   well. Honest caveat: only 1 of the 35 nodes has a documented dependent
-   today, so the draw-call win is real but small until more research
-   connects the rest — see 5o for the full measurement. Still open: the
-   soft-edge node idea (`notes/node-surface-encoding-2026-08-19.md`) this
-   was meant to pair with was not part of this round's brief and remains
-   undone.
+4. **Pulse size/shape redesign + the beam.** Burner by your instruction. The
+   set-sizes pass fixed the noise; the beam idea (continuous databases render
+   their edge as a lit stream with a direction cue) replaces pulse geometry on
+   the fastest edges, so shape and beam are ONE design round. Pairs with the
+   soft-edge node idea (`notes/node-surface-encoding-2026-08-19.md`) — the 35
+   continuous databases have the data to support all of it.
 5. **Mint the staged archive — DONE 2026-08-20.** Corpus went from 1 250 to
    **3 091 reports, 1 079 to 2 070 dependencies**. `npm run validate` and
    `npm run build` both exit 0 on the merged corpus — worth re-running on your

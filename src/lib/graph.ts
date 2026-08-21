@@ -144,6 +144,27 @@ export function validate(
         message: `${r.id}: releases_per_year must be positive when present`,
       })
     }
+    // `continuous`, added 2026-08-21 (todo item 4, the pulse/beam round).
+    // `isStandingInstrument` (nodeVisuals.ts) reads an ABSENT
+    // `releases_per_year` as "one-off foundational instrument, draw
+    // hollow" — the one meaning `continuous: true` must never collide with,
+    // since the two claims are opposites (never revisited vs. never NOT
+    // being updated). A continuous source therefore has to state SOME
+    // nominal rate, or it would silently draw hollow instead of getting the
+    // beam treatment `InfluenceGraph.tsx`/`linkVisuals.ts` build for it.
+    // This does not check the rate is exactly 250 or 365 — the renderer
+    // convention observed on the 35 nodes that currently carry this field —
+    // because the field's job is "this is a stream, not an edition", and a
+    // future continuous source is free to pick whatever nominal number
+    // reads right; only the absence/presence combination is a structural
+    // error, the same restraint `isKnownCountry` shows toward country CODES
+    // it has never seen rather than a hard-coded list.
+    if (r.continuous === true && r.releases_per_year === undefined) {
+      issues.push({
+        severity: 'error',
+        message: `${r.id}: continuous is true but releases_per_year is absent — a continuous source needs a nominal rate, or it draws as a one-off instrument instead (isStandingInstrument reads absence as that)`,
+      })
+    }
     // An international body does not belong to a country. This exists because
     // the field was typed without an `INT` value and everything international
     // silently defaulted to Canadian — nine nodes, wrong for five sessions,

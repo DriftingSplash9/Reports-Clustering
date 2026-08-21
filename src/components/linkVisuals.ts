@@ -43,6 +43,8 @@ const FRAGMENT = /* glsl */ `
   uniform vec3 uTo;
   uniform float uOpacity;
   uniform float uDashed;
+  uniform float uFlow;
+  uniform float uFlowTime;
   uniform float uFogNear;
   uniform float uFogFar;
   uniform vec3 uFogColour;
@@ -57,6 +59,24 @@ const FRAGMENT = /* glsl */ `
     if (uDashed > 0.5 && fract(vT * 16.0) > 0.55) discard;
 
     vec3 colour = mix(uFrom, uTo, smoothstep(0.0, 1.0, vT));
+
+    // The beam treatment. Several soft bands sweep the whole length at once
+    // (phase multiplier 5.0) rather than one dot travelling it, which is the
+    // whole point: a moving OBJECT reads as an event (that is what a pulse
+    // already says), a moving WAVE reads as a medium already in motion.
+    // uFlow is 0/1 per material, set once at creation from LinkDatum's
+    // continuousSource and never toggled per frame — only uFlowTime
+    // advances, from linkVisuals.ts's tickLinkFlow. pow(band, 4.0) narrows
+    // each band from a full sine lobe to a slim bright crest so the "flow"
+    // reads as light riding the line, not the line's own base colour
+    // breathing; 0.6 caps how far toward white a crest can push so it still
+    // sits under the pulse system's own PULSE_BRIGHTEN peak brightness.
+    if (uFlow > 0.5) {
+      float phase = vT * 5.0 - uFlowTime * 0.6;
+      float band = 0.5 + 0.5 * sin(6.28318530718 * phase);
+      float brightness = pow(band, 4.0) * 0.6;
+      colour = mix(colour, vec3(1.0), brightness);
+    }
 
     // Fog, applied by hand. A custom shader gets none of three.js's automatic
     // fog chunks, which is why the lines used to stay perfectly crisp while
@@ -84,18 +104,37 @@ export interface GradientLinkMaterial extends THREE.ShaderMaterial {
 }
 
 /**
+ * Materials carrying the beam treatment, registered so one `tickLinkFlow`
+ * call a frame advances all of them — same shape as `blinkingPulseMaterials`
+ * below, and for the same reason: a `Set` costs one write per REGISTERED
+ * material per frame, not a walk over every link in the graph to find the
+ * ~dozens that qualify.
+ */
+const flowMaterials = new Set<GradientLinkMaterial>()
+
+/**
  * A link coloured from its upstream node to its downstream node.
  *
  * Edges previously took the upstream node's colour along their whole length,
  * which said "this line belongs to that report" — true, but it left the other
  * end unattributed. A gradient states both ends: what this is, and what it
  * reaches.
+ *
+ * `beam` marks a continuous database's outgoing edge (`LinkDatum.
+ * continuousSource` — see `types.ts`'s `Report.continuous`) and is set once
+ * at construction, never toggled later: a link's continuity is a fact about
+ * its upstream node, not a view state. What DOES toggle per frame is the
+ * flowing highlight itself, via `uFlowTime` from `tickLinkFlow`, and per the
+ * Pulses view setting via `setLinkFlow` — the beam is this edge's only
+ * direction cue, the same role pulses play everywhere else, so it obeys the
+ * same toggle.
  */
 export function gradientLinkMaterial(
   from: string,
   to: string,
   dashed = false,
   litOpacity = LINK_OPACITY,
+  beam = false,
 ): GradientLinkMaterial {
   const fromColour = new THREE.Color(from)
   const toColour = new THREE.Color(to)
@@ -106,6 +145,14 @@ export function gradientLinkMaterial(
       uTo: { value: toColour.clone() },
       uOpacity: { value: litOpacity },
       uDashed: { value: dashed ? 1 : 0 },
+      // Starts OFF even when `beam` is true — registration in
+      // `flowMaterials` (below) is what makes the material animate-able;
+      // whether the animation is currently VISIBLE is `view.showPulses`,
+      // synced by the caller (`InfluenceGraph.tsx`'s `setLinkFlow` effect)
+      // once it knows that setting. Two different questions, like `dashed`
+      // vs `uOpacity` elsewhere in this file.
+      uFlow: { value: 0 },
+      uFlowTime: { value: 0 },
       // Pushed far enough out to be inert until the fog is switched on.
       uFogNear: { value: 1e9 },
       uFogFar: { value: 1e9 + 1 },
@@ -120,7 +167,50 @@ export function gradientLinkMaterial(
   }) as GradientLinkMaterial
 
   material.userData = { from: fromColour, to: toColour, litOpacity }
+  if (beam) flowMaterials.add(material)
   return material
+}
+
+/**
+ * Drop every registered beam material.
+ *
+ * Unlike `pulseMaterial`'s cache (keyed by colour, so it is correctly
+ * shared and correctly permanent) `gradientLinkMaterial` builds one instance
+ * PER LINK, never shared — so `flowMaterials`, which registers by instance,
+ * would otherwise keep every beam material alive forever across every
+ * `forceGraph` rebuild (a tier flip, a filter change) with nothing left
+ * pointing at the discarded links that used to own them. Call this once at
+ * the top of a rebuild, the same moment `linkMaterials.current.clear()`
+ * already runs in `InfluenceGraph.tsx` — same leak class, same fix shape.
+ */
+export function resetLinkFlow() {
+  flowMaterials.clear()
+}
+
+/**
+ * Show or hide the beam's flowing highlight without touching the material's
+ * registration.
+ *
+ * A continuous edge's beam is its ONLY direction cue — there are no discrete
+ * pulses to fall back on (`InfluenceGraph.tsx` never builds them for a
+ * `continuousSource` link) — so it obeys the same `view.showPulses` toggle
+ * every other direction cue does, rather than always drawing regardless of
+ * that setting. Registration in `flowMaterials` (via the `beam` flag at
+ * construction) is permanent for the material's life; only whether the
+ * animation is currently VISIBLE toggles here.
+ */
+export function setLinkFlow(material: GradientLinkMaterial, active: boolean) {
+  material.uniforms.uFlow.value = active ? 1 : 0
+}
+
+/**
+ * Advance every registered beam's flow phase — called once per frame from
+ * InfluenceGraph's `useFrame`, same free-running clock `tickPulseBlink`
+ * already reads. A no-op when nothing on screen is continuous.
+ */
+export function tickLinkFlow(seconds: number) {
+  if (flowMaterials.size === 0) return
+  for (const material of flowMaterials) material.uniforms.uFlowTime.value = seconds
 }
 
 /**
