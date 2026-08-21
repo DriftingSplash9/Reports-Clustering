@@ -5,7 +5,7 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-20 (updated an eighth time the same day)**. The day in
+Last written: **2026-08-20 (updated a seventh time the same day)**. The day in
 order: the mint (item 5), the per-country fold (5b), the clustering force
 (5c), the Isolate feature plus two diagnoses (5d), the Regions/Organizations
 panel + country directory (5e), the bottom-centre slot swap logged as a todo
@@ -117,82 +117,6 @@ run to Thomas's own explicit stopping point ("get everything done here except
   which needs the full `src/data/research/*.json` corpus that was never
   staged into this particular sandbox). Shipped to the actual device path by
   path as each piece finished, not batched to the end.
-
-**This update (5h)** is a HUD layout pass, asked for live while Thomas was
-looking at the running app (a screenshot, not a written spec) rather than
-from a todo item — the bottom-centre trio and the search bar had drifted
-into each other's way as 5f/5g landed. In order asked and shipped:
-- **Compare, moved.** Off the tier bar's corner (where 5g had stacked it,
-  `bottom: 100, left: 20`) to bottom-centre, flanking `GroupsPanel` on the
-  LEFT — Thomas: *"set it just left of the regions and countries button."*
-- **Legend, moved.** From bottom-right (where it sat since item 7) to
-  bottom-centre, flanking `GroupsPanel` on the RIGHT — Thomas: *"on the
-  right of the countries and regions button move the legend."*
-  `IsolatedShelf` was deliberately left at its existing `right: 214` rather
-  than reclaiming the space Legend vacated: that offset was never really
-  about Legend — the comment on `isolatedShelfWrap` ties it to clearing the
-  View `PanelShell`'s own column (`right: 20` at the top), which can run
-  tall enough on a short window to reach the bottom-right corner. Moving
-  `IsolatedShelf` to `right: 20` now that Legend is gone would reopen
-  exactly the collision that number was chosen to avoid. The bottom-right
-  corner is emptier than it used to be as a result — worth a look, not
-  fixed here since nobody asked for it and the risk above is real.
-- **Both anchored with `calc(50% ± 140px)`, not a fixed offset from
-  `GroupsPanel`'s own rendered width.** `GroupsPanel`'s pill has no fixed
-  width — "Regions & Countries" or, once something is isolated, "Isolated:
-  <label>" up to its own `maxWidth: 260` before ellipsis clips it. Anchoring
-  each neighbour at half that worst case (130) plus a 10px gap keeps a
-  constant, correct gap on both sides regardless of collapsed-pill-vs-
-  expanded-280px-panel state on either side, without measuring anything at
-  runtime. See the `wrap` comments on `Compare.tsx` and `Legend.tsx`.
-- **The tier bar (Global/Nations/States/Everything), asked about, left
-  alone.** With Compare gone, its bottom-left corner is no longer shared
-  with anything — Thomas confirmed leaving it there rather than moving it
-  up to the top bar, so `tierBarWrap` (`App.tsx`) is untouched.
-- **The search bar, moved off dead-centre.** Thomas: *"I just want the
-  search/find bar to the left. The left corner is too far left because
-  there is already a panel there."* — the Reports `PanelShell` (`left: 20`,
-  width 320, plus its own collapse tab) owns true left; a search bar flush
-  against it would sit on top of it whenever Reports is open. New
-  `SEARCH_BAR_LEFT = 400` (`SearchPanel.tsx`) replaces the old `left: 50%` +
-  `translateX(-50%)` centring, hand-measured clear of that panel's tab.
-- **The calendar tab, flipped from the search bar's left side to its
-  right.** It was anchored off the search bar's own left edge (`left: 50%,
-  marginLeft: -(SEARCH_BAR_WIDTH/2) - 8, transform: translateX(-100%)`);
-  once the bar itself moved left, staying on that same side would have
-  pushed the tab further left still, into the same Reports panel the search
-  bar had just been moved to avoid. `CalendarPanel.tsx` now anchors off
-  `SEARCH_BAR_LEFT + SEARCH_BAR_WIDTH + 8` instead — no `translateX` needed,
-  since the tab now grows away from the bar rather than towards it.
-- **The search bar, made minimizable — same update, same request.**
-  Collapses to the same pill-by-default shape every other drop-up panel in
-  this app already uses (`Compare`/`Legend`/`GroupsPanel`), rather than the
-  input staying permanently on screen. `/` still reopens and focuses it from
-  anywhere; Escape on an empty box now minimizes it too, matching every
-  other panel's Escape-closes convention, rather than falling through to
-  the window's clear-selection handler. See the two effects in
-  `SearchPanel.tsx` — one restores `minimized` to `false`, the other
-  focuses the input, but only on a transition INTO the expanded state, not
-  on first mount, or the page would steal focus on every load.
-- Verified: `npx tsc --noEmit` clean (had to stage the full
-  `src/data/research/*.json` corpus into the sandbox to get a real answer
-  here — `slices.generated.ts` imports every file by name, so `tsc` cannot
-  resolve the program without it, unlike `test-logic.ts` which only needs
-  the already-`.generated` slice), `npx vite build` clean, `scripts/
-  test-logic.ts` still 90/90 (this update touched no data or logic, so the
-  count is unchanged from 5g). Also a real headless-Chromium screenshot
-  against the built app (same recipe as every other visual check this file
-  documents) — confirmed the search bar sits clear of the Reports panel
-  with the calendar tab to its right, and confirmed Compare/`GroupsPanel`/
-  Legend hold a clean, even gap on both sides of centre with ALL THREE
-  expanded at once (the worst case for the corner), not just glanced at
-  collapsed. Screenshots not shipped anywhere — this was a visual check,
-  not a deliverable.
-- **Not done, not asked for**: the empty bottom-right corner `IsolatedShelf`
-  left behind (see above); reclaiming it needs someone to first re-check
-  whether the View panel can actually reach that far down on a real window,
-  not just carry the same margin forward from before Legend existed there.
-
 Earlier the same day: corrected a long-running false claim about git,
 measured three things the project had only argued about, finished Phase 4 of
 the visual revamp, and fixed two rendering bugs. Written for a FRESH agent
@@ -377,16 +301,12 @@ Assume all of this exists and works. Each carries a dated comment at the site.
 - **Lenses.** `src/lib/modes.ts`: STANDARD / GROUP_COMPARISON / WORLD_OVERVIEW.
   A recolour pass via ref + mutation effect; **never a `forceGraph` memo dep**.
 - **The constellation look.** Near-black background (`#010204`), flat crisp
-  panels, rotating masthead gradient, tier bar bottom-left ALONE (2026-08-20,
-  item 5h — Compare moved off this corner, Thomas confirmed leaving the tier
-  bar itself in place), unlinked shelf bottom-right ALONE (Legend moved off
-  it the same update), `GroupsPanel` ("Regions & Countries") drop-up
-  bottom-centre (2026-08-20, item 5f — the old `ChipBar` filter drop-up that
-  used to own this slot is deleted), now flanked by Compare on its LEFT and
-  Legend on its RIGHT (item 5h, both anchored `calc(50% ± 140px)` off centre
-  — see the `wrap` comments on `Compare.tsx`/`Legend.tsx`). The search bar
-  sits left-of-centre at the top (`SEARCH_BAR_LEFT`, item 5h, not dead
-  centre any more), calendar tab to its right.
+  panels, rotating masthead gradient, tier bar bottom-left, unlinked shelf +
+  Legend bottom-right, Compare bottom-left (2026-08-20, item 5g — same
+  corner as the tier bar, which sits further left), `GroupsPanel`
+  ("Regions & Countries") drop-up bottom-centre (2026-08-20, item 5f — the
+  old `ChipBar` filter drop-up that used to own this slot is deleted; see the
+  5f/5g entries below).
 - **Lighting.** Two directional lights + ambient 0.28, emissive floor 0.12,
   bloom 0.14/0.26. **Closed** — Thomas, 2026-08-19: *"the lighting is okay"*.
 - **Blueprint is DELETED.** No view setting is a memo dep any more. Rims
@@ -965,21 +885,6 @@ Sorted by owner, ordered by priority within each.
     dependency exists) and rule 3 (raw-verify before trusting a quote) applies
     doubly to anything Grok surfaces, the same as it already does to WebFetch.
 
-17. **HUD layout pass — DONE 2026-08-20 (item 5h).** Asked live, off a
-    screenshot of the running app rather than a written spec: Compare and
-    Legend moved to flank `GroupsPanel` at bottom-centre, the tier bar
-    confirmed staying put at bottom-left now that it has that corner to
-    itself, the search bar moved off dead-centre to clear the Reports panel,
-    the calendar tab flipped to the search bar's right, and the search bar
-    made minimizable. Full writeup in this update's summary at the top of
-    this file. `npx tsc --noEmit` clean (against the FULL research corpus,
-    staged into the sandbox specifically for this — `slices.generated.ts`
-    imports every file by name and `tsc` cannot resolve the program
-    otherwise), `npx vite build` clean, `test-logic.ts` unchanged at 90/90
-    (no data/logic touched), plus a headless-Chromium screenshot with all
-    three bottom-centre panels expanded at once — the actual worst case for
-    the corner, not just the collapsed-pill default.
-
 ### Offered — picked up this update (5g)
 
 12. **Export a PNG — DONE 2026-08-20 (item 5g).** 2× device pixel ratio, no
@@ -1077,22 +982,14 @@ cross-project diary — not the project's, leave it alone).
 ## 7. Known traps — the ones that will actually bite
 
 - **`PanelShell` supports exactly one panel per screen edge, AND every screen
-  position is now spoken for (2026-08-20, updated after item 5h).** Left/
+  position is now spoken for (2026-08-20, updated after item 5g).** Left/
   Reports and right/View are the two `PanelShell` edges. Everything else is
-  free-floating, and all of it is now occupied: top (`MenuBar`), top,
-  left-of-centre (`SearchPanel`, moved off dead-centre item 5h —
-  `SEARCH_BAR_LEFT`), top beside it to the right (the calendar tab, flipped
-  sides the same update), bottom-left (the tier bar, ALONE now — Compare
-  moved off this corner item 5h, ALWAYS on regardless — see the next trap),
-  bottom-centre (`GroupsPanel`, moved here 2026-08-20 item 5f/5g), now
-  flanked on both sides — Compare on the LEFT (moved off the tier bar's
-  corner, item 5h) and Legend on the RIGHT (moved off bottom-right, item
-  5h), both anchored `calc(50% ± 140px)` rather than a `PanelShell`-style
-  fixed edge (see `Compare.tsx`/`Legend.tsx`'s own `wrap` comments), and
-  bottom-right (`IsolatedShelf`, ALONE now that Legend has moved off it —
-  its own `right: 214` was never really about Legend, see item 5h's own
-  note, so it was deliberately left as-is rather than reclaiming the space).
-  The next panel this app gets needs either a `PanelShell` stacking/offset
+  free-floating, and all of it is now occupied: top (`MenuBar`), top-centre
+  (`SearchPanel`), bottom-left (the tier bar, ALWAYS on — see the next trap),
+  bottom-left stacked above it (`Compare`, items 14/15), bottom-centre
+  (`GroupsPanel`, moved here 2026-08-20 item 5f/5g), bottom-right
+  (`IsolatedShelf`) and bottom-right again further in (`Legend`, item 7). The
+  next panel this app gets needs either a `PanelShell` stacking/offset
   parameter, or to share a panel that already exists (the way items 14 and
   15 share one `Compare` panel rather than each getting their own) — there is
   no more free corner or edge to claim by picking new fixed coordinates.

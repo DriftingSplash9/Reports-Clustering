@@ -27,6 +27,11 @@ import { colourForReport } from '../lib/palette'
  * a read-only answer underneath is the whole feature; it does not select,
  * isolate, or fly the camera anywhere; it just answers the question.
  *
+ * **Position, moved 2026-08-20**: from a stack above the tier bar to
+ * bottom-centre, just left of `GroupsPanel` (Thomas: "set it just left of
+ * the regions and countries button") — see the `wrap` comment below for the
+ * anchoring math.
+ *
  * **Why two `builtFrom` sets intersected, not a fresh walk**: `computeFocus`
  * already answers "everything A rests on, transitively" as `.builtFrom` —
  * exactly the per-node half of this question. Running it twice (once per
@@ -318,22 +323,25 @@ function PathSection({ path, graph }: { path: PathStep[] | null; graph: Graph })
   )
 }
 
-// Bottom-left, STACKED ABOVE the tier bar rather than sharing its corner —
-// caught before shipping, 2026-08-20: `tierBarWrap` (App.tsx) already owns
-// `bottom: 20, left: 20` outright, and the tier bar is never hidden (§4 of
-// HANDOFF.md — it is primary navigation, deliberately not behind the Panels
-// menu), so this panel sitting at the identical coordinates would draw
-// straight on top of it on every load, not just some of the time IsolatedShelf
-// (`right: 214`) and Legend (`right: 20`) took the two right-side slots. `100`
-// is the tier bar's own padding (10+10) + its four-button row (~27) + the
-// status-line block below it (~7 margin + ~12 text) + a 12px gap, added by
-// hand the same way `PanelShell`'s `shift` constant already does elsewhere in
-// this app — worth a live look before calling the stack final, same as every
-// other hand-measured offset in this codebase.
+// Bottom-centre, just LEFT of `GroupsPanel` ("Regions & Countries") — moved
+// here 2026-08-20 from a stack above the tier bar (Thomas: "set it just left
+// of the regions and countries button"). The tier bar (`tierBarWrap`,
+// App.tsx) keeps `bottom: 20, left: 20` to itself now, unstacked.
+//
+// Anchored with `right: calc(50% + 140px)` rather than a `left` offset from
+// `GroupsPanel`'s own centred position, because `GroupsPanel`'s pill has no
+// fixed width — it can read "Regions & Countries" or, once something is
+// isolated, "Isolated: <label>" up to its own `maxWidth: 260` before
+// ellipsis clips it (`GroupsPanel.tsx`). Anchoring THIS panel's right edge at
+// half that worst-case width (130) plus a 10px gap keeps a constant, correct
+// gap between the two panels' facing edges — collapsed pill or expanded
+// 280px panel alike — however wide the label in the middle turns out to be,
+// without measuring anything at runtime. Same `calc(50% ± 140px)` pairing
+// lives on `Legend.tsx`'s `wrap`, mirrored to the right.
 const wrap: React.CSSProperties = {
   position: 'fixed',
-  bottom: 100,
-  left: 20,
+  bottom: 20,
+  right: 'calc(50% + 140px)',
   zIndex: 6,
 }
 

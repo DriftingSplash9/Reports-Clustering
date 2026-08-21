@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import type { Dependency, Graph, ScoredReport, SchedulePrecision } from '../lib/types'
 import type { NodePredicate } from '../lib/filter'
 import { colourForReport } from '../lib/palette'
-import { SEARCH_BAR_WIDTH } from './SearchPanel'
+import { SEARCH_BAR_LEFT, SEARCH_BAR_WIDTH } from './SearchPanel'
 import {
   calendarEvents,
   describeWindow,
@@ -290,16 +290,18 @@ export default function CalendarPanel({
           // can be set on the left of the search bar, add a calendar icon too.
           // I think that will clean up the hud."*
           //
-          // Anchored off the *search bar's* left edge rather than the calendar
-          // panel's, since that is what it now sits beside: 50% minus half the
-          // search bar's 380px width, then shifted its own width further left
-          // by `translateX(-100%)` so the gap is measured between the two
-          // controls rather than guessed from a hardcoded button width.
+          // **Flipped to the search bar's RIGHT, 2026-08-20**, when the search
+          // bar itself moved off dead-centre to `SEARCH_BAR_LEFT` (Thomas: "I
+          // just want the search/find bar to the left... add it to the right
+          // at the top of the page") — staying on the search bar's left edge
+          // would have pushed this tab further left still, straight into the
+          // Reports `PanelShell` the search bar itself was just moved to
+          // avoid. Anchored off the search bar's own left edge plus its
+          // width, same 8px gap as before, no `translateX` needed now that
+          // the tab grows away from the bar instead of towards it.
           position: 'fixed',
           top: HUD_TOP,
-          left: '50%',
-          marginLeft: -(SEARCH_BAR_WIDTH / 2) - 8,
-          transform: 'translateX(-100%)',
+          left: SEARCH_BAR_LEFT + SEARCH_BAR_WIDTH + 8,
           display: 'flex',
           alignItems: 'center',
           gap: 6,

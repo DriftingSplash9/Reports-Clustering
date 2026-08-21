@@ -8,10 +8,21 @@ import { HUD_TOP } from '../lib/uiTheme'
 /**
  * Find-by-name.
  *
- * Sits top-centre because it is the primary way into the graph, not an option
- * about it — the view and filter controls are instrumentation and live off to
- * the side. Collapsed to a single line until it is used, so it costs almost
- * nothing when it is not.
+ * Moved 2026-08-20 from dead-centre to left-of-centre (Thomas: "I just want
+ * the search/find bar to the left") — `SEARCH_BAR_LEFT` below, not true left
+ * (`left: 20`), because the Reports `PanelShell` already owns that corner
+ * (`left: 20`, width 320, plus its collapse tab) and a search bar flush
+ * against it would sit on top of it whenever Reports is open. It is still
+ * the primary way into the graph, not an option about it — the view and
+ * filter controls are instrumentation and live off to the side.
+ *
+ * **Minimizable, same update.** Collapses to the same kind of pill every
+ * other drop-up panel in this app uses (`Compare`/`Legend`/`GroupsPanel`),
+ * rather than the input staying permanently on screen. `/` still reopens it
+ * from anywhere, same as before — see the two effects below: one restores
+ * `minimized` to `false` on `/`, the other focuses the input, but only on a
+ * transition INTO the expanded state, not on first mount, or the page would
+ * steal focus into this box on every load before anyone asked for it.
  *
  * Choosing a result selects the report *and* flies the camera to it. Selection
  * alone was the version that did not work: it lit a cone somewhere off screen
@@ -29,7 +40,10 @@ export default function SearchPanel({
 }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
+  const [minimized, setMinimized] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  // Skips the focus effect below on first mount — see that effect's comment.
+  const firstRender = useRef(true)
 
   const results = useMemo(
     () => search(graph, query, within),
@@ -40,17 +54,34 @@ export default function SearchPanel({
 
   // "/" to search is the convention everywhere text is searched, and it costs
   // the user nothing to discover by accident. Ignored while already typing, or
-  // the key would be swallowed by the field it just opened.
+  // the key would be swallowed by the field it just opened. Also un-minimizes
+  // — "/" is the keyboard escape hatch out of the collapsed pill, same as a
+  // click on it.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === '/' && document.activeElement !== inputRef.current) {
         e.preventDefault()
+        setMinimized(false)
         inputRef.current?.focus()
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
+  // Focuses the input whenever it actually re-expands — but not on first
+  // mount, or the page would steal focus into this box before anyone asked
+  // for it. The "/" handler above already focuses synchronously in the same
+  // event when the input is already mounted; this effect exists for the
+  // OTHER path, expanding from the collapsed pill, where the input has not
+  // mounted yet at the moment `setMinimized(false)` runs.
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+    if (!minimized) inputRef.current?.focus()
+  }, [minimized])
 
   function choose(report: ScoredReport) {
     onChoose(report)
@@ -69,29 +100,55 @@ export default function SearchPanel({
       e.preventDefault()
       choose(results[active].report)
     } else if (e.key === 'Escape') {
-      // Only clears the box. Escape with an empty box falls through to the
-      // window handler that clears the selection, so one key does the obvious
-      // thing at each stage of backing out.
+      // An empty box minimizes — same convention as every other drop-up
+      // panel's Escape-closes behaviour — rather than falling through to the
+      // window handler that clears the selection; a non-empty box just
+      // clears first, same as before, so one key does the obvious thing at
+      // each stage of backing out.
       if (query) {
         e.stopPropagation()
         setQuery('')
       } else {
-        inputRef.current?.blur()
+        setMinimized(true)
       }
     }
   }
 
+  if (minimized) {
+    return (
+      <div style={wrap}>
+        <button
+          type="button"
+          onClick={() => setMinimized(false)}
+          style={pill}
+        >
+          Find a report…  /
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div style={wrap}>
-      <input
-        ref={inputRef}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={onKeyDown}
-        placeholder="Find a report…  /"
-        spellCheck={false}
-        style={input}
-      />
+      <div style={inputRow}>
+        <input
+          ref={inputRef}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={onKeyDown}
+          placeholder="Find a report…  /"
+          spellCheck={false}
+          style={input}
+        />
+        <button
+          type="button"
+          onClick={() => setMinimized(true)}
+          title="Minimize"
+          style={minimizeButton}
+        >
+          –
+        </button>
+      </div>
 
       {query && (
         <div style={list}>
@@ -153,23 +210,58 @@ export default function SearchPanel({
 
 /**
  * The search bar's width, exported because the calendar tab in
- * CalendarPanel.tsx now sits immediately to its left and has to know where
- * that edge is. Duplicating the number in both files is how the two silently
- * drift apart the first time this changes.
+ * CalendarPanel.tsx now sits immediately to its right (moved there
+ * 2026-08-20, alongside the bar itself moving off-centre — see that file's
+ * own comment) and has to know where that edge is. Duplicating the number in
+ * both files is how the two silently drift apart the first time this
+ * changes.
  */
 export const SEARCH_BAR_WIDTH = 380
+
+/**
+ * The search bar's left edge, exported for the same reason as
+ * `SEARCH_BAR_WIDTH` — `CalendarPanel.tsx`'s tab is anchored off this bar,
+ * not centred independently. Hand-measured clear of the Reports `PanelShell`
+ * (`left: 20`, `width: 320`) plus its collapse tab (which pokes out to
+ * roughly `320 + 26` from that panel's own left edge when expanded) and a
+ * visible gap — see the file-level comment above for why this bar moved off
+ * dead-centre in the first place. Worth a live look on a narrow window,
+ * same as every other hand-measured offset in this codebase.
+ */
+export const SEARCH_BAR_LEFT = 400
 
 const wrap: React.CSSProperties = {
   position: 'fixed',
   top: HUD_TOP,
-  left: '50%',
-  transform: 'translateX(-50%)',
+  left: SEARCH_BAR_LEFT,
   width: SEARCH_BAR_WIDTH,
   zIndex: 20,
 }
 
+const pill: React.CSSProperties = {
+  fontFamily: 'inherit',
+  fontSize: 10,
+  letterSpacing: '0.06em',
+  textTransform: 'uppercase',
+  color: 'var(--ink-dim)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
+  borderRadius: 8,
+  padding: '7px 12px',
+  cursor: 'pointer',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
+}
+
+const inputRow: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'stretch',
+  gap: 6,
+}
+
 const input: React.CSSProperties = {
-  width: '100%',
+  flex: 1,
+  minWidth: 0,
   padding: '9px 12px',
   fontSize: 12.5,
   fontFamily: 'inherit',
@@ -181,6 +273,21 @@ const input: React.CSSProperties = {
   boxShadow: 'var(--panel-shadow)',
   backdropFilter: 'var(--glass-filter)',
   boxSizing: 'border-box',
+}
+
+const minimizeButton: React.CSSProperties = {
+  flexShrink: 0,
+  width: 30,
+  fontFamily: 'inherit',
+  fontSize: 13,
+  color: 'var(--ink-dim)',
+  background: 'var(--panel-bg)',
+  border: '1px solid var(--line)',
+  borderRadius: 8,
+  cursor: 'pointer',
+  boxShadow: 'var(--panel-shadow)',
+  backdropFilter: 'var(--glass-filter)',
+  lineHeight: 1,
 }
 
 const list: React.CSSProperties = {

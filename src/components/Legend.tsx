@@ -17,10 +17,13 @@ import { COUNTRY_FAMILY, FAMILY_INK, type ColourFamily } from '../lib/palette'
  * small/large dot pair for the size encoding, a coloured line for an edge,
  * and a two-frame CSS animation for the pulse.
  *
- * Sits bottom-right — the exact spot `GroupsPanel` vacated the same day when
- * it moved to bottom-centre (see the tombstone comment where `ChipBar` used
- * to render in `App.tsx`, and `GroupsPanel.tsx`'s own `wrap` comment). Same
- * collapsed-pill-by-default pattern every drop-up panel in this app uses.
+ * Sat bottom-right, the exact spot `GroupsPanel` vacated the same day it
+ * moved to bottom-centre, until 2026-08-20's later layout pass moved it
+ * again — bottom-centre, just RIGHT of `GroupsPanel` this time (Thomas:
+ * "on the right of the countries and regions button move the legend"). See
+ * `wrap` below for the anchoring math, mirrored from `Compare.tsx`'s own
+ * `wrap` comment on the opposite side. Same collapsed-pill-by-default
+ * pattern every drop-up panel in this app uses.
  */
 export function Legend() {
   const [collapsed, setCollapsed] = useState(true)
@@ -208,10 +211,16 @@ function PulseDemo() {
   )
 }
 
+// Bottom-centre, just RIGHT of `GroupsPanel` — see `Compare.tsx`'s `wrap`
+// comment for why `calc(50% ± 140px)`, not a `left` offset measured from
+// `GroupsPanel` itself, is the anchor: that panel's own pill has no fixed
+// width (up to its `maxWidth: 260` once something is isolated), so half of
+// that worst case (130) plus a 10px gap is the constant that keeps both
+// facing edges the same distance apart regardless of the label between them.
 const wrap: React.CSSProperties = {
   position: 'fixed',
   bottom: 20,
-  right: 20,
+  left: 'calc(50% + 140px)',
   zIndex: 6,
 }
 
