@@ -178,6 +178,18 @@ export interface Unplaceable {
   reportsIrregular: string[]
   /** Edges that state a reading but no calendar anchor for it. */
   edgesWithoutAnchor: string[]
+  /**
+   * Edges reading less than once a year (a biennial or decennial reading) —
+   * added 2026-08-21 (review §2, "rates < 1/year emit a read every year... an
+   * invented date, the module's own forbidden case"). `ReferencePeriod.ends`
+   * is `MM-DD` only, with no year — enough to phase a within-a-year cycle,
+   * not enough to know WHICH years a multi-year cycle actually lands on. The
+   * old code filled that gap by assuming every year qualified, which is
+   * exactly the "invent a date" move this module's own doc comment rules out
+   * for the zero-anchor case. Honest is the same as that case: place nothing,
+   * and say so here instead.
+   */
+  edgesSubAnnualUnphased: string[]
 }
 
 export interface CalendarResult {
@@ -211,6 +223,7 @@ export function calendarEvents(
     reportsWithoutSchedule: [],
     reportsIrregular: [],
     edgesWithoutAnchor: [],
+    edgesSubAnnualUnphased: [],
   }
   const byId = new Map(reports.map((r) => [r.id, r]))
 
@@ -260,11 +273,30 @@ export function calendarEvents(
       unplaceable.edgesWithoutAnchor.push(label)
       continue
     }
-    const spacing = rp.readings_per_year > 0 ? 12 / rp.readings_per_year : 12
+    // Sub-annual rates (biennial, decennial…) have no year to phase them —
+    // `ends` is MM-DD only — so, same as the no-anchor case just above,
+    // nothing is invented. See `edgesSubAnnualUnphased`'s doc comment.
+    if (rp.readings_per_year < 1) {
+      unplaceable.edgesSubAnnualUnphased.push(label)
+      continue
+    }
+    const spacing = 12 / rp.readings_per_year
     // Walk the years the window touches, then step the anchor by the spacing.
-    // Both ends of the window are scanned because a window can straddle a year
-    // boundary, and the anchor for the following year has to be reachable.
-    const startYear = Number(window.from.slice(0, 4))
+    // **`startYear - 1`, 2026-08-21 (review §2, "calendarEvents drops most
+    // reads of faster-than-annual anchored edges").** An anchor is a single
+    // MM-DD, and a rate above 1/year steps FORWARD from it — a monthly read
+    // anchored 10-31 produces reads for Oct(Y)..Sep(Y+1), so a window on
+    // calendar year Y needs the anchor series that STARTED the year before
+    // (Y-1's own Oct..Dec reads spill into Y-1, but Y-1's Jan-Sep reads come
+    // from anchor (Y-2)-10-31 — the point is every read in year Y can trace
+    // back to an anchor as early as Y-1). The old loop started at
+    // `Number(window.from.slice(0,4))` and never generated that earlier
+    // series at all, so every read before the anchor's own month in the
+    // window's first year silently never existed. The window check below
+    // (`at < window.from`) still discards anything that lands before the
+    // window either way, so widening the start by one year is pure recall —
+    // it cannot invent an event that would not already have passed that check.
+    const startYear = Number(window.from.slice(0, 4)) - 1
     const endYear = Number(window.to.slice(0, 4))
     for (let y = startYear; y <= endYear; y++) {
       const anchor = `${y}-${String(mm).padStart(2, '0')}-${String(dd).padStart(2, '0')}`
@@ -279,12 +311,19 @@ export function calendarEvents(
         // 2026-08-12; zero edges triggered it at the time only because every
         // anchored rate in the corpus happened to divide 12. Non-divisor rates
         // step in whole days instead: same even spacing, always a real date.
-        const at =
-          spacing >= 1
-            ? Number.isInteger(spacing)
-              ? addMonthsIso(anchor, i * spacing)
-              : addDaysIso(anchor, Math.round(i * (365.25 / rp.readings_per_year)))
-            : anchor
+        //
+        // **Rates above 12/year, 2026-08-21 (review §2, "rates > 12/yr
+        // collapse to a single read with no comment").** This used to branch
+        // on `spacing >= 1` and, below 1 (more than 12 readings/year),
+        // return the bare anchor for every `i` and `break` after the first —
+        // a weekly edge (52/yr) collapsed to one read total. The day-step
+        // formula already used for the 1–12/yr non-divisor case works
+        // unmodified for any rate above 1/year, weekly included (365.25/52 ≈
+        // 7.03 days apart) — there was never a mathematical reason to special-
+        // case it, only an unfinished one.
+        const at = Number.isInteger(spacing)
+          ? addMonthsIso(anchor, i * spacing)
+          : addDaysIso(anchor, Math.round(i * (365.25 / rp.readings_per_year)))
         if (at < window.from || at > window.to) continue
         events.push({
           kind: 'read',
@@ -304,7 +343,6 @@ export function calendarEvents(
           detail: rp.stated_as,
           sourceUrl: d.evidence_url,
         })
-        if (spacing < 1) break
       }
     }
   }

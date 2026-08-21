@@ -114,7 +114,8 @@ export default function CalendarPanel({
   const missing =
     unplaceable.reportsWithoutSchedule.length +
     unplaceable.reportsIrregular.length +
-    unplaceable.edgesWithoutAnchor.length
+    unplaceable.edgesWithoutAnchor.length +
+    unplaceable.edgesSubAnnualUnphased.length
 
   return (
     <>
@@ -268,6 +269,16 @@ export default function CalendarPanel({
                   {', '}
                   <b style={b}>{unplaceable.edgesWithoutAnchor.length}</b> edges stating a
                   reading with no date
+                </>
+              )}
+              {unplaceable.edgesSubAnnualUnphased.length > 0 && (
+                <>
+                  {(unplaceable.reportsWithoutSchedule.length > 0 ||
+                    unplaceable.reportsIrregular.length > 0 ||
+                    unplaceable.edgesWithoutAnchor.length > 0) &&
+                    ', '}
+                  <b style={b}>{unplaceable.edgesSubAnnualUnphased.length}</b> edges
+                  reading less than once a year (no year to phase them against)
                 </>
               )}
               .

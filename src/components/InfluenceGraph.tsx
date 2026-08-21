@@ -507,6 +507,21 @@ export const fitSync = {
   distance: 0,
   /** Bumped on every camera-moving fit, so CameraZoom can notice one happened. */
   stamp: 0,
+  /**
+   * Whether the user currently holds the camera — the same `userOwnsCamera`
+   * ref `runFit` itself reads to decide `moveCamera`, mirrored here so
+   * CameraZoom can read it too. Added 2026-08-21 (review §2, "zoom slider
+   * drifts on its own during settle") — `runFit` keeps publishing `distance`
+   * on every tracking pass even while the user owns the camera (deliberately,
+   * see `distance`'s own history), and CameraZoom needs to know when to stop
+   * treating that live number as "zoom 1" and freeze its own snapshot
+   * instead (see `currentBase` in CameraZoom.tsx). Written from `runFit`
+   * itself — `!moveCamera` at every call site already equals
+   * `userOwnsCamera.current` at the moment of that call, so this needs no
+   * extra ref-mutation sites of its own, just one line where `distance` is
+   * already published below.
+   */
+  userOwnsCamera: false,
 }
 
 export interface GraphBounds {
@@ -1911,6 +1926,11 @@ export default function InfluenceGraph({
     // Both directions now read this one number. If they are ever keyed off
     // different bases again, the ratchet returns.
     fitSync.distance = distance
+    // See `fitSync.userOwnsCamera`'s own doc comment: `moveCamera` at every
+    // call site already IS `!userOwnsCamera.current` (or a forced fit, which
+    // means "no, tracking has the camera again"), so this is just publishing
+    // that same fact CameraZoom cannot otherwise see.
+    fitSync.userOwnsCamera = !moveCamera
 
     // Where the node cloud is, so the fog can be recomputed against it every
     // frame rather than baked once from the opening camera position.

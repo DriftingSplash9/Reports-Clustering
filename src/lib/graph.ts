@@ -28,7 +28,7 @@ import {
 // literally "this country has a hand-written palette entry", so the palette is
 // the only honest source for it; asserting it against a second list here would
 // just create two lists to keep in sync.
-import { isKnownCountry } from './palette'
+import { COUNTRY_LABEL, isKnownCountry } from './palette'
 // Date realness lives with the calendar code that also needs it, rather than
 // being restated here — same argument as the value lists above.
 import { isRealDate } from './schedule'
@@ -114,6 +114,28 @@ export function validate(
       issues.push({ severity: 'error', message: `Duplicate report id: ${r.id}` })
     }
     ids.add(r.id)
+    // Reserved namespaces, added 2026-08-21 (review §2, §6 item 7). The
+    // renderer mints two id prefixes of its own — `orb:${family}`,
+    // `corb:${country}` (`hierarchy.ts`'s `resolveId`) — and uses `->` as the
+    // edgeKey separator (`d.source_report_id + '->' + d.target_report_id`,
+    // just below in this same function). Nothing stopped a research file
+    // minting a real report id that collides with either: a report literally
+    // named `orb:asia-something` would be indistinguishable from a folded
+    // family orb the moment it reached the disclosure hierarchy, and an id
+    // containing `->` would corrupt every edgeKey it appears in. Both
+    // namespaces are the renderer's alone from here on.
+    if (r.id.startsWith('orb:') || r.id.startsWith('corb:')) {
+      issues.push({
+        severity: 'error',
+        message: `${r.id}: report id starts with a reserved renderer prefix ("orb:"/"corb:" are minted by src/lib/hierarchy.ts for folded orbs) — rename it`,
+      })
+    }
+    if (r.id.includes('->')) {
+      issues.push({
+        severity: 'error',
+        message: `${r.id}: report id contains "->", the reserved edgeKey separator — rename it`,
+      })
+    }
     // Absent is the one-off-foundational-instrument shape (Research.1.md §4,
     // 2026-08-08) and is valid; a present-but-non-positive value is not.
     if (r.releases_per_year !== undefined && r.releases_per_year <= 0) {
@@ -168,6 +190,26 @@ export function validate(
         message:
           `${r.id}: country ${r.country} has no palette entry — ` +
           `add it to COUNTRY_FAMILY in src/lib/palette.ts`,
+      })
+    }
+    // The same gap one table over — added 2026-08-21 (review §2, §5, §6 item
+    // 7). `COUNTRY_GROUPS` (regions.ts, the Countries directory) is DERIVED
+    // from `COUNTRY_LABEL`'s keys, not from `COUNTRY_FAMILY`'s — so a country
+    // with a family but no label was not just a bare-code display fallback
+    // (survivable), it was invisible in the directory (worse: it reads as
+    // "does not exist" rather than "unnamed"). This has already shipped with
+    // a gap three times (see COUNTRY_LABEL's own backfill comments, 2026-08-12
+    // / 2026-08-16 / 2026-08-20) — always caught by hand, after the fact.
+    // Mirrors the COUNTRY_FAMILY check immediately above; only checked when
+    // the country IS known, so this never fires twice for the same typo.
+    if (isKnownCountry(r.country) && !(r.country in COUNTRY_LABEL)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `${r.id}: country ${r.country} has a COUNTRY_FAMILY entry but no ` +
+          `COUNTRY_LABEL — add it to COUNTRY_LABEL in src/lib/palette.ts, or ` +
+          `it renders as a bare code and stays invisible in the Countries ` +
+          `directory (regions.ts's COUNTRY_GROUPS is derived from COUNTRY_LABEL)`,
       })
     }
     // The same gap one field over, and it cost more: `jurisdiction_level` IS a
@@ -515,6 +557,24 @@ export function validate(
           `RelationshipType — one of ${RELATIONSHIP_TYPES.join(', ')}. ` +
           `An unrecognised value has no RELATIONSHIP_WEIGHT entry and would ` +
           `make every authority score NaN`,
+      })
+    }
+    // `strength`, added 2026-08-21 (review §2, §6 item 7) — the one edge-
+    // weight input with no validation at all before this. Unused in the live
+    // corpus today (every edge relies on `RELATIONSHIP_WEIGHT`'s default),
+    // which is exactly why nothing has caught it: `strength ?? RELATIONSHIP_
+    // WEIGHT[...]` in graph.ts/validate-data.ts means a hand-typed `strength:
+    // 0` on a node's only out-edge is NOT treated as absent — it is a
+    // deliberate zero, `0 / 0` in PageRank's normalisation, and NaN spreads
+    // to every score in the graph the moment it is summed against — the exact
+    // failure mode the `relationship_type` guard above exists to close, via a
+    // field with no guard at all. `undefined` (the overwhelmingly common
+    // case) is untouched; only a PRESENT-and-bad value is an error, same
+    // pattern as `releases_per_year`/`readings_per_year` above.
+    if (d.strength !== undefined && !(Number.isFinite(d.strength) && d.strength > 0)) {
+      issues.push({
+        severity: 'error',
+        message: `Edge ${key}: strength (${d.strength}) must be a finite number greater than 0 — 0 or negative makes every PageRank score NaN`,
       })
     }
     // `evidence` absent means documented, so a typo reads as documented and

@@ -48,6 +48,16 @@ import type { EffectComposer as EffectComposerImpl } from 'postprocessing'
  * gets the freshly drawn, bloom-included, 2×-resolution pixels, with no race
  * against a rAF registered from outside the render loop.
  */
+/**
+ * A GPU's drawing-buffer dimension limit — 8192px is the practical floor
+ * across desktop and mobile WebGL implementations (some go higher; none
+ * reliably go lower). Doubling DPR on a large, high-density monitor can cross
+ * it, and the capture silently comes back black rather than erroring — see
+ * the file-level comment on the re-entry guard below for the sibling bug this
+ * was found alongside.
+ */
+const MAX_CAPTURE_DIMENSION = 8192
+
 export function PngExport({
   request,
   composerRef,
@@ -62,15 +72,42 @@ export function PngExport({
 
   useEffect(() => {
     if (!request) return
+    // **Re-entry guard, 2026-08-21 (review §2, "two rapid clicks permanently
+    // double the render resolution").** This effect used to snapshot
+    // `restore.current` from `gl.getPixelRatio()` unconditionally on every
+    // `request` bump. `toBlob` below is async, so a second click before the
+    // first export's callback landed would snapshot the ratio the FIRST
+    // click had already doubled, then double it again — and when both
+    // callbacks eventually ran, `finish()` would restore to that already-
+    // doubled snapshot instead of the true original, leaving the on-screen
+    // renderer permanently at 2x DPR (half the framerate, silently). A
+    // non-null `restore.current` means an export is already in flight, so a
+    // second request while one is pending is simply ignored — one export
+    // still happens (whichever click's `useFrame` fires next), it just
+    // cannot corrupt the ratio it will restore to.
+    if (restore.current) return
     const composer = composerRef.current
     if (!composer) return
     const size = gl.getSize(new Vector2())
-    restore.current = { ratio: gl.getPixelRatio(), width: size.width, height: size.height }
+    const currentRatio = gl.getPixelRatio()
     // Doubling the CURRENT ratio, not setting a flat 2 — a viewer already on
     // a 2x-DPR display gets a 4x-device-pixel export, which is what "2x"
     // should mean: twice as sharp as what they are actually looking at, not
     // twice a number that may already be below their screen's own density.
-    gl.setPixelRatio(restore.current.ratio * 2)
+    //
+    // **Clamped to `MAX_CAPTURE_DIMENSION`, 2026-08-21 (review §2).** A large
+    // window on a high-DPR display doubled again can ask the GPU for a
+    // drawing buffer past its own limit — the review's own example, 2x DPR
+    // on a large window, can exceed 8192px — and when that happens the
+    // capture comes back black with no error, which reads as "the feature is
+    // broken" rather than "the resolution was too high to ask for". Clamping
+    // the ratio (not just the request) keeps the composite in sync with
+    // whatever ratio the renderer actually ends up at.
+    const longestSide = Math.max(size.width, size.height)
+    const maxRatio = longestSide > 0 ? MAX_CAPTURE_DIMENSION / longestSide : currentRatio * 2
+    const targetRatio = Math.min(currentRatio * 2, maxRatio)
+    restore.current = { ratio: currentRatio, width: size.width, height: size.height }
+    gl.setPixelRatio(targetRatio)
     // CSS size unchanged on purpose — the on-screen canvas must not visibly
     // resize or flash. See the file-level comment for why this call is still
     // required even though the width/height it's passed haven't changed.

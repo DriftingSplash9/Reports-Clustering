@@ -143,6 +143,7 @@ export default function ViewControls({
   hasSelection,
   onReset,
   onExportPng,
+  tier,
 }: {
   view: ViewSettings
   onChange: (next: ViewSettings) => void
@@ -157,6 +158,18 @@ export default function ViewControls({
    * the button.
    */
   onExportPng: () => void
+  /**
+   * The current global tier (`drilldown`), 2026-08-21 (review §1, §6 item 6).
+   * A lens is a pure recolour pass over the REAL nodes on screen, and at
+   * tier 1 (Global) the real nodes are mostly INT — white in every lens — so
+   * GROUP_COMPARISON/WORLD_OVERVIEW visibly do almost nothing there (the
+   * review's own A/B screenshots at tier 1 were "near-identical"). Orbs stay
+   * out of lens recolour by design (`lib/modes.ts`'s file comment), so
+   * recolouring orbs too was the other option the review offered; greying
+   * the buttons out was picked as the cheaper fix for this pass — it costs
+   * one prop and a title, not a new orb-recolour code path.
+   */
+  tier: number
 }) {
   const set = <K extends keyof ViewSettings>(key: K, value: ViewSettings[K]) =>
     onChange({ ...view, [key]: value })
@@ -253,20 +266,32 @@ export default function ViewControls({
 
       <div style={{ ...heading, marginTop: 14 }}>Lens</div>
       <div style={lensRow}>
-        {LENSES.map(({ key, label, hint }) => (
-          <button
-            key={key}
-            type="button"
-            title={hint}
-            onClick={() => set('lens', key)}
-            style={{
-              ...lensButton,
-              ...(view.lens === key ? lensButtonActive : null),
-            }}
-          >
-            {label}
-          </button>
-        ))}
+        {LENSES.map(({ key, label, hint }) => {
+          // A lens with nothing to recolour at this tier — see the `tier`
+          // prop's doc comment. STANDARD is never disabled: it is the
+          // always-correct baseline, tier notwithstanding.
+          const inert = tier === 1 && key !== 'STANDARD'
+          return (
+            <button
+              key={key}
+              type="button"
+              disabled={inert}
+              title={
+                inert
+                  ? `${hint} — mostly a no-op at the Global tier: the real nodes shown here are mostly international (white in every lens). Open a tier to see this lens do something`
+                  : hint
+              }
+              onClick={() => set('lens', key)}
+              style={{
+                ...lensButton,
+                ...(view.lens === key ? lensButtonActive : null),
+                ...(inert ? lensButtonInert : null),
+              }}
+            >
+              {label}
+            </button>
+          )
+        })}
       </div>
       <div style={{ ...heading, marginTop: 14 }}>Focus</div>
       {FOCUS_TOGGLES.map(({ key, label, hint }) => (
@@ -417,6 +442,13 @@ const lensButton: React.CSSProperties = {
 const lensButtonActive: React.CSSProperties = {
   color: 'var(--ink-body)',
   borderColor: 'var(--accent)',
+}
+
+const lensButtonInert: React.CSSProperties = {
+  color: 'var(--ink-faint)',
+  borderColor: 'var(--line)',
+  opacity: 0.5,
+  cursor: 'not-allowed',
 }
 
 const resetButton: React.CSSProperties = {

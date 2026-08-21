@@ -5,11 +5,8 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5n — review follow-up round 4, the LAST
-round: §6 items 6–9 — the tier-1 colour pass, the three validator rules,
-search accent-folding + calendar year-boundary fix, and the PNG re-entry
-guard + zoom-baseline freeze — all shipped)**.
-Yesterday (2026-08-20) was a full day
+Last written: **2026-08-21 (item 5l — review follow-up round 2: corpus out of
+the JS bundle, startup warnings batched)**. Yesterday (2026-08-20) was a full day
 of work ending in item 5h, a HUD layout pass — full detail archived at
 `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md` (itself
 superseding the chain of earlier archived handoffs listed at its own top).
@@ -285,226 +282,6 @@ Both fixed, both verified live, not just built.
   single call can't move all of it), into a Linux sandbox; `npm install`,
   `npm run gen`, `npx tsc --noEmit`, `npm run validate`, `npm run build`,
   then `vite preview` + Playwright with the §2.7 SwiftShader flags.
-
-**This update (5m), 2026-08-21.** Round 3 of the review's §6 list, item 5 —
-*"Unlinked shelf → summary + list (before it becomes 2,007 dots)"* (§3.6:
-*"1,285 six-pixel dots with hover-only identity... the dots stop earning
-their place above ~200 items"*). The staged mint adds 722 more candidates on
-top of the current 1,285, which would have made it ~2,007 dots with no
-browse, no filter and a hit target below every accessibility guideline.
-
-- **`IsolatedShelf` (bottom dock, right cell) is now a single-line summary
-  pill, not a scrolling dot grid.** Reads `Unlinked — 1,285 · ASIA 483 · SA
-  271 · AFR 157 …` — count first, then up to the top three continents by
-  count (a new local `CONTINENT_ABBR` shorthand, deliberately NOT the same
-  vocabulary as `ColourFamily` — see its doc comment), trailing `…` if a
-  fourth+ continent is folded in. Computed with `continentOf(r.country)`
-  from `lib/regions.ts` (already the corpus's one source of truth for
-  continent membership — nothing new to keep in sync). The old `isolatedShelfGrid`
-  style, the per-dot 6px hit targets, and the dot-grid's own scrolling
-  `maxHeight` are gone; the whole pill is now the click target, sized to its
-  own text (`isolatedShelfPill`, replacing `isolatedShelfWrap`).
-- **Clicking the pill opens a searchable list inside the Reports panel** —
-  the review's own framing (*"That's also the honest UI for what the shelf
-  really is now: a research queue, not an annotation"*). New App-level
-  `unlinkedOpen` state (sibling to `panels`, since the pill and the Reports
-  panel are siblings, not parent/child) plus `openUnlinkedList()`, which
-  force-opens Reports if it was closed and switches it to the list. `Hud`
-  gained an early-return branch: a filter input (title/publisher substring,
-  case-insensitive, deliberately simple — §3.5's real search pass is still
-  its own open review item) over the isolated set, sorted alphabetically by
-  title, rendered as rows in the same colour-dot + title + publisher shape
-  `SearchPanel.tsx` already uses. Selecting a row calls the SAME
-  `handleSelectIsolated` the old dots called — the Detail card slide-in and
-  the row's own selection ring both confirmed working live (see verification
-  below), unchanged from before this update.
-- **Two entry points, one state.** The dock pill (visible only when the
-  `Unlinked` panel toggle is on) and a `"{N} unlinked — browse →"` line
-  inside the Reports panel's normal body (visible whenever any isolated
-  reports exist, regardless of the dock pill's own visibility — the review
-  put the list IN the Reports panel, not gated behind a second panel) both
-  call the same `unlinkedOpen` state. A `"← Back"` button returns to the
-  normal Reports body without closing the panel. Toggling ANY panel by hand
-  — including Reports itself, and "Hide all" — resets `unlinkedOpen` to
-  `false`, so a manual open always lands on the normal body; only the pill
-  (or a future deep link) opens straight into the list.
-- **Verified live, full sandbox build** (same recipe as 5k/5l): `npm run gen`
-  → `tsc --noEmit` clean → `npm run validate` (95/95 checks, unchanged
-  3091/2070) → `npm run build` clean (bundle unaffected by this change,
-  still ~1,494 kB) → `vite preview` + Playwright (SwiftShader flags,
-  `rig.panels.v1` seeded with Reports + Unlinked open): pill reads `Unlinked
-  — 1,285 · ASIA 483 · SA 271 · AFR 157 …`; clicking it shows the `← Back`
-  button and the list; the filter narrows results live (`"consumer price"` →
-  22 rows); clicking a filtered row slides the Detail card in
-  (`translateX(620px)` → `translateX(0px)`, confirmed via the element's own
-  inline style, not just text) and gives that row the `--accent-soft`
-  selection background; `← Back` restores the normal body (`"Most depended
-  upon"` section, the browse line, the Subject legend all present) without
-  closing the panel; **0 page errors, 1 console error (the same
-  favicon-404 timing artifact 5l already found and ruled out — reconfirmed,
-  not new), 3 console warnings (the same 2 grouped `[graph]` lines + 1
-  `THREE.Clock` notice from 5l — unchanged, confirming this update didn't
-  reintroduce any startup-warning spam)**.
-- **Not done from §6, deliberately:** items 6–9 (the tier-1 colour pass,
-  validator rules, search accent-folding + calendar year-boundary fix, PNG
-  guard + zoom-baseline freeze) — next rounds, in the review's order. No new
-  `test-logic.ts` regression test was added for the list's filter or the
-  `unlinkedOpen` state machine — this is pure UI/interaction, not corpus
-  logic, so it wasn't a natural fit for that suite; worth a component-level
-  test if this code gets touched again without a live re-check available.
-  One loose end carried over, not new: `slices.generated.ts` and the
-  `.rig-sweep` CSS rule in `uiTheme.ts` (only used by the dot grid's old
-  sheen effect, now orphaned) are both flagged for a future session with
-  `device_bash` to actually delete — see 5l's note on the first, and this
-  update for the second.
-
-**This update (5n), 2026-08-21.** Round 4 of the review's §6 list, items
-6–9 as one round (Thomas's own framing: *"the tier-1 colour pass, validator
-rules, the search/calendar pass, and the PNG guard + zoom freeze (items
-6–9)"*) — **the last four items on the review's list.** §6 is now closed
-in full, items 1–9 shipped across 5k/5l/5m/5n.
-
-- **§6 item 6 — the tier-1 colour pass, SHIPPED.** Two independent
-  complaints, one root cause each, per the review's own diagnosis (§6:
-  "design, not defect" — 61% of Global-tier real nodes are hollow one-off
-  instruments at 0.1 opacity, and the v4 damp held ASIA/SA at 55–65%
-  chroma). `HOLLOW_FILL_OPACITY` (`nodeVisuals.ts`) raised `0.1 → 0.3` — the
-  low end of the review's suggested 0.28–0.35 band. `palette.ts`'s ASIA and
-  SA `SCOPE_COLOUR`/`FAMILY_INK` entries recomputed via a proper OKLCH
-  scale (Björn Ottosson's sRGB↔OKLab formulas, chroma-only scaling —
-  ASIA ×1.2727 to bring 55%→70%, SA ×1.0819 to bring 64.7%→70%, hue and
-  lightness untouched) to match every other family's ~70% floor. Third
-  piece — lenses doing nothing at tier 1 was previously silent: `ViewControls`
-  now takes a `tier` prop, and GROUPS/WORLD (labelled "Groups"/"World" —
-  STANDARD, labelled "Country", is the always-correct baseline and stays
-  enabled) are disabled with an explanatory title
-  ("mostly a no-op at the Global tier... Open a tier to see this lens do
-  something") rather than silently doing nothing when clicked. Verified live
-  (headless, see below): both non-STANDARD lens buttons report `disabled`
-  at load (tier 1 is `DEFAULT_DRILLDOWN`), STANDARD/Country stays clickable.
-- **§6 item 7 — validator rules, SHIPPED.** Three new checks in `validate()`
-  (`graph.ts`): (a) reserved-namespace guard — a report `id` starting with
-  `orb:`/`corb:`, or containing `->`, is now a hard error (those prefixes
-  are the hierarchy module's own synthetic-node namespace; a real report
-  landing in it would silently collide); (b) `COUNTRY_LABEL` coverage — any
-  `isKnownCountry` country missing a `COUNTRY_LABEL` entry now errors,
-  closing the gap the review flagged ("its absence now hides countries from
-  the directory entirely"); (c) `strength` range — a defined `strength` that
-  isn't a finite positive number (the NaN door the review called dormant)
-  now errors by name. **Checked before adding (b), not assumed: a proper
-  Python regex extraction of both tables found `COUNTRY_FAMILY` and
-  `COUNTRY_LABEL` already had identical 142/142 coverage** — a first,
-  naive `awk`-based diff had reported 60 false-positive gaps (it only
-  matched keys at the start of a line, missing keys later on the same
-  multi-key comma-separated line); raw-verifying that result before trusting
-  it is what caught the false positive. So (b) ships as a validator rule
-  only, no backfill needed — the review's worry was already unfounded, now
-  it's enforced so it stays that way. Six pinned tests added to
-  `test-logic.ts` covering all three rules.
-- **§6 item 8 — search pass + calendar year-boundary fix, SHIPPED.**
-  Two parts, matched to the review's two complaints:
-  - **Accent-folding and non-Latin scripts.** `search.ts`'s `normalise()`
-    rewritten: NFD-decompose then strip combining marks (`\p{Mn}`) so
-    `"Côte d'Ivoire"` matches `cote`, `"Türkiye"` matches `turkiye`; the
-    punctuation-fold widened from an ASCII-only class to `\p{L}\p{N}` so
-    Cyrillic, CJK and other non-Latin titles survive folding instead of
-    being stripped to nothing (Cyrillic query `Росстат` now finds the
-    Cyrillic title and correctly does NOT match the Latin spelling
-    `rosstat` — folding isn't transliteration). Also added a per-report
-    `WeakMap` cache (`normalisedFieldsCache`) so the five searchable fields
-    are normalised once per report, not recomputed on every keystroke
-    against every report.
-  - **Search/filter/isolate semantics reconciled with Compare's full-corpus
-    behaviour.** `SearchPanel` no longer takes a `within` predicate — it now
-    searches the FULL corpus unconditionally (`ALWAYS_VISIBLE`), matching
-    how Compare already worked, and takes a new `outsideFilter` predicate
-    used only to TAG results a live filter is currently hiding ("outside
-    filter", the same pattern 5k already shipped for "outside isolate").
-    Choosing an outside-filter result now clears the filter
-    (`App.tsx`'s `handleChoose`) rather than silently selecting an
-    invisible node — the same informed-exit design 5k used for isolate.
-  - **Calendar year-boundary fix.** `schedule.ts`'s `calendarEvents()` loop
-    started from `Number(window.from.slice(0, 4))` — the review's own
-    diagnosis: a reference date that lands late in a year with an anchor
-    early the following year has its first read start counting from the
-    WRONG year, dropping every read that should have spilled forward from
-    the previous year's anchor. Now starts from `startYear − 1`, per the
-    review's own fix. A pinned monthly-anchor test spanning a year boundary
-    (expects exactly 12 reads, Jan–Dec) confirms it.
-  - **Two more calendar bugs found and fixed alongside the year-boundary
-    one, not separately scoped but the same function and the same root
-    cause class (rate-to-spacing arithmetic):** a sub-annual rate
-    (`readings_per_year < 1`, e.g. biennial/decennial) was being silently
-    mis-scheduled — `ReferencePeriod.ends` is MM-DD only, no year, so the
-    model genuinely cannot know WHICH years a sub-annual reading falls on;
-    rather than guess, these now route to a new `unplaceable.
-    edgesSubAnnualUnphased` bucket (surfaced in `CalendarPanel`'s "Not
-    shown" footer), consistent with the module's existing "no anchor →
-    nothing is emitted" philosophy. And a rate above 12/year had a special
-    case collapsing it to a single read — turned out unnecessary: the same
-    fractional-day-stepping formula already used for 1–12/year non-integer
-    spacing generalises correctly above 12/year with no changes, so the
-    special case was deleted rather than patched. Pinned tests for both
-    (sub-annual 0.5/year → 0 reads + 1 unplaceable entry; rate >12/year
-    weekly → 40+ reads, all valid dates).
-- **§6 item 9 — PNG re-entry guard + zoom-baseline freeze, SHIPPED.**
-  - **PNG re-entry guard** (`PngExport.tsx`): a second export click while
-    one is still in flight (the capture is async — `canvas.toBlob`) used to
-    silently double the pixel ratio a second time and never restore the
-    true original, permanently halving the on-screen framerate with no
-    visible error. `restore.current` non-null now means an export is
-    already pending, and a second request is simply ignored — one export
-    still happens, it just can't corrupt the ratio it restores to. Also
-    added a `MAX_CAPTURE_DIMENSION = 8192` clamp (a GPU drawing-buffer limit
-    that a 2×-DPR capture on a large, high-density window can cross,
-    which previously came back silently black instead of erroring).
-  - **Zoom-baseline freeze** (`CameraZoom.tsx`): `runFit`'s ongoing
-    tracking pass republishes `fitSync.distance` on every pass by design —
-    but while the user holds the camera and the cloud is still settling
-    under a camera that hasn't moved, that "zoom 1" denominator kept moving
-    under a static camera, and the inferred zoom (distance ÷ base) drifted
-    on its own — the most plausible explanation for the "zooms out forever"
-    report. Fixed with a snapshot-on-first-use pattern (`frozenBase` ref +
-    `currentBase()` helper): the BASE freezes the moment `userOwnsCamera`
-    goes true and un-freezes the moment tracking or a fresh fit takes the
-    camera back. Deliberately does NOT freeze camera reads — wheel-zoom
-    also sets `userOwnsCamera` (via OrbitControls' own gesture bracketing)
-    and still needs to read the live, moving camera position every frame;
-    only the denominator stops moving. `fitSync` gained a `userOwnsCamera`
-    field (`InfluenceGraph.tsx`), derived for free from `runFit`'s existing
-    `moveCamera` parameter (`fitSync.userOwnsCamera = !moveCamera`) — no
-    new mutation sites needed, all four `runFit` call sites already compute
-    `moveCamera` from the same ref this needed to read.
-- **Verified live, full sandbox build** (same recipe as 5k/5l/5m): staged
-  the full 267-file `src/data/research/` corpus fresh → `npm install` →
-  `npm run gen` (267 slices, 7.1MB `corpus-data.json`, 0 unwired) →
-  `npx tsc --noEmit` clean → `npm run validate` (**117/117 logic checks,
-  up from 95** — the six item-7 tests plus the accent-folding/Cyrillic
-  block plus the three calendar tests; unchanged 3091 reports/2070
-  dependencies; zero validator errors, confirming items 6/7's own new
-  rules pass against the live corpus) → `npm run build` clean (1,496.71 kB
-  / gzip 428.41 kB, in line with 5m's ~1,494 kB baseline) → `vite preview`
-  + Playwright on the preinstalled Chromium with the §2.7 SwiftShader
-  flags, **9/9 live checks**: both non-STANDARD lens buttons `disabled` at
-  tier 1 load, STANDARD/Country enabled; a tier-1 screenshot for visual
-  colour spot-check; accent-folded query `cote` surfaces
-  `"Côte d'Ivoire"` results; the Calendar panel renders with the new
-  "Not shown" footer text present and zero console errors (confirming the
-  new `edgesSubAnnualUnphased` wiring doesn't crash even though this
-  corpus has no currently-qualifying sub-annual reads to exercise it); a
-  rapid double-click on PNG export still produces exactly one download
-  (re-entry guard holding — took ~15–20s under SwiftShader's software
-  bloom compositing at 2× resolution, not a regression, matching §2.7's
-  own "bloom/glow is untrustworthy in software rendering" caveat about
-  speed as well as fidelity); the zoom slider responds correctly to a
-  programmatic move. Zero console errors across the whole run.
-- **Not done, deliberately:** no new `test-logic.ts` coverage for the PNG
-  re-entry guard or the zoom-baseline freeze themselves — both are
-  React-effect/ref-level fixes inside `<Canvas>`, not corpus logic, so
-  (same precedent as 5m's `unlinkedOpen` state machine) they weren't a
-  natural fit for that suite; the live Playwright pass above is the
-  regression coverage until a component-level harness exists. §6 has no
-  further items — the review's ordered list is fully shipped.
 
 ---
 
@@ -1297,24 +1074,23 @@ Sorted by owner, ordered by priority within each.
     Chrome tab (bounding-rect measurement + a scrolled-to-bottom screenshot),
     not just built.
 
-19. **Review follow-ups, logged 2026-08-21 (item 5j) — items 1–9 DONE across
-    5k/5l/5m/5n, same week. §6 is fully closed.** The full list with
-    reasoning is `notes/full-review-2026-08-21.md` §6; the order there was
-    followed throughout: ~~(1) orb-aware `matchesRegionGroup` + a
-    folded-tier pinned test~~ **DONE 5k**; ~~(2) a bottom-dock container
-    replacing the hand-placed bottom-edge coordinates + `maxHeight` on the
-    View panel~~ **DONE 5k**; ~~(3) Escape priority stack, "/" input guard,
-    search-choose preserving isolates~~ **DONE 5k**; ~~(4) corpus out of the
-    JS bundle + batched startup warnings~~ **DONE 5l** — see the item 5l
-    writeup at the top of this file; ~~(5) unlinked shelf → summary +
-    list~~ **DONE 5m** — see the item 5m writeup at the top of this file;
-    ~~(6) tier-1 colour pass (hollow opacity 0.1→0.3, damp floor →70% for
-    ASIA/SA, lens greyed at tier 1)~~ **DONE 5n**; ~~(7) validator rules for
-    `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->` namespaces~~
-    **DONE 5n**; ~~(8) search accent-folding/full-corpus pass + the
-    calendar year-boundary fix~~ **DONE 5n**; ~~(9) PNG re-entry guard +
-    zoom-baseline freeze~~ **DONE 5n** — see the item 5n writeup at the top
-    of this file for all four.
+19. **Review follow-ups, logged 2026-08-21 (item 5j) — items 1–3 DONE in item
+    5k, item 4 DONE in item 5l, same week.** The full list with reasoning is
+    `notes/full-review-2026-08-21.md` §6; the order there is deliberate:
+    ~~(1) orb-aware `matchesRegionGroup` + a folded-tier pinned test~~ **DONE
+    5k**; ~~(2) a bottom-dock container replacing the hand-placed bottom-edge
+    coordinates + `maxHeight` on the View panel~~ **DONE 5k**; ~~(3) Escape
+    priority stack, "/" input guard, search-choose preserving isolates~~
+    **DONE 5k**; ~~(4) corpus out of the JS bundle + batched startup
+    warnings~~ **DONE 5l** — see the item 5l writeup at the top of this file.
+    Still open, in order: (5) unlinked shelf → summary + list (before the 722
+    edgeless candidates land); (6) the tier-1 colour pass (hollow opacity
+    ~0.3, damp floor ~70%, lens greyed or orbs recoloured); (7) validator
+    rules for `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->`
+    namespaces; (8) search accent-folding/full-corpus pass + the calendar
+    year-boundary fix; (9) PNG re-entry guard + zoom-baseline freeze when
+    pulses are next
+    touched.
 
 ### Offered — picked up this update (5g)
 

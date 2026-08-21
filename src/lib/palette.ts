@@ -656,6 +656,30 @@ export function scopeOf(report: {
  * did for the one before it — do not assume the v4 numbers above outlive the
  * next import.
  *
+ * **v5 chroma floor, 2026-08-21 (review §1, §6 item 6).** The review's
+ * complaint — "the majority of the graph reads as colour missing" — traced to
+ * ASIA and SA, the two families the v4 damp put furthest below full: 55% and
+ * 64.7% chroma respectively, and together they are 50.4% of the corpus. The
+ * damp logic itself is kept ("a colour seen hundreds of times must be
+ * calmer" is still correct) but 55% chroma is below the point a hue still
+ * reads as a hue at 8px, so a **floor of 70%** now applies: any family whose
+ * v4 multiplier sat below 70% is raised to exactly 70%, every family already
+ * at or above 70% (AFR 121%, EU/US/CA 105.9%, IN 90%, XEU/CN/NZ/AU 100%) is
+ * untouched. Only ASIA (×0.55 → ×0.70) and SA (×0.647 → ×0.70) move. Applied
+ * the same way v4 was — scale factor `0.70 ÷ old multiplier` against each
+ * family's ALREADY-DAMPED v4 hex, in OKLCH, hue and L fixed, chroma only —
+ * so this is a floor on top of v4, not a re-derivation from the v3 base:
+ * ASIA `#7d7aca → #7c75dc` (federal), `#8985bb → #8982c7` (provincial),
+ * `#9390af → #938fb6` (municipal), `#9c9ba7 → #9c9baa` (institutional); SA
+ * `#628845 → #60893f` (federal), `#729255 → #709350` (provincial),
+ * `#84996f → #839a6c` (municipal), `#979e90 → #979e8f` (institutional).
+ * `supranational` mirrors `federal` for both, same as every other family.
+ * `FAMILY_INK.ASIA`/`FAMILY_INK.SA` carry the new federal values, same rule
+ * as v4 ("each family's national step, not a separately maintained table").
+ * The floor is a judgement call, not a measured optimum — 70% was picked as
+ * "the point the hue still reads as itself," not derived from a legibility
+ * script. Re-check by eye if the next re-damp moves either family further.
+ *
  * **The v2 docstring that used to sit here** described the v1 continent scheme
  * that v2 itself had already replaced, and had been stale for a full palette
  * generation. It is not carried forward a second time; its one durable idea —
@@ -744,11 +768,13 @@ export const SCOPE_COLOUR: Record<string, string> = {
   // South America — olive-lime at 88°. The old sage was the same hue at
   // almost no chroma; this is that hue given a voice, which it has earned at
   // 9.3% of the corpus.
-  'SA:federal': '#628845',
-  'SA:provincial': '#729255',
-  'SA:municipal': '#84996f',
-  'SA:institutional': '#979e90',
-  'SA:supranational': '#628845',
+  // v5 floor 2026-08-21: chroma raised 64.7%→70% of full (see the file-level
+  // v5 note above) — was '#628845'/'#729255'/'#84996f'/'#979e90'.
+  'SA:federal': '#60893f',
+  'SA:provincial': '#709350',
+  'SA:municipal': '#839a6c',
+  'SA:institutional': '#979e8f',
+  'SA:supranational': '#60893f',
   'SA:international': '#ecf0f7',
 
   // Australia — green at 118°. Orange is inside the US moat.
@@ -780,11 +806,13 @@ export const SCOPE_COLOUR: Record<string, string> = {
   'CN:international': '#ecf0f7',
 
   // Asia (rest) — indigo at 248°. RU, AE, IL, SG.
-  'ASIA:federal': '#7d7aca',
-  'ASIA:provincial': '#8985bb',
-  'ASIA:municipal': '#9390af',
-  'ASIA:institutional': '#9c9ba7',
-  'ASIA:supranational': '#7d7aca',
+  // v5 floor 2026-08-21: chroma raised 55%→70% of full (see the file-level
+  // v5 note above) — was '#7d7aca'/'#8985bb'/'#9390af'/'#9c9ba7'.
+  'ASIA:federal': '#7c75dc',
+  'ASIA:provincial': '#8982c7',
+  'ASIA:municipal': '#938fb6',
+  'ASIA:institutional': '#9c9baa',
+  'ASIA:supranational': '#7c75dc',
   'ASIA:international': '#ecf0f7',
 
   // India — magenta at 322°, near-unchanged.
@@ -1099,9 +1127,9 @@ export const FAMILY_INK: Record<ColourFamily, string> = {
   XEU: '#00907c',
   AFR: '#d61de2',
   CN: '#4375ff',
-  ASIA: '#7d7aca',
+  ASIA: '#7c75dc',
   IN: '#e92e98',
-  SA: '#628845',
+  SA: '#60893f',
 }
 
 /**

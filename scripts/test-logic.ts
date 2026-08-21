@@ -63,6 +63,44 @@ ok(isRealDate('2026-02-28') && !isRealDate('2026-02-31') && !isRealDate('2026-13
   // No anchor → unplaceable, never guessed.
   const na = calendarEvents(reports, [{ ...deps[0], reference_period: { readings_per_year: 8, window_months: 12, ends: null, stated_as: 't' } }], { from: '2026-01-01', to: '2026-12-31' })
   ok(na.events.filter((e) => e.kind === 'read').length === 0 && na.unplaceable.edgesWithoutAnchor.length === 1, 'no anchor: counted unplaceable, nothing invented')
+
+  // The year-boundary bug, pinned 2026-08-21 (review §2): a monthly edge
+  // anchored 10-31 must fill EVERY month of a full-year window, including
+  // Jan-Sep — which come from the PREVIOUS year's own anchor series stepping
+  // forward across the boundary. Before the startYear-1 fix this produced
+  // only 3 reads (Oct/Nov/Dec) instead of 12.
+  const monthly: Dependency[] = [{
+    source_report_id: 'down', target_report_id: 'up', relationship_type: 'uses_data_from', basis: 'test',
+    reference_period: { readings_per_year: 12, window_months: 1, ends: '10-31', stated_as: 'test' },
+  }]
+  const monthlyReads = calendarEvents(reports, monthly, { from: '2026-01-01', to: '2026-12-31' }).events.filter((e) => e.kind === 'read')
+  ok(monthlyReads.length === 12, `year boundary: a monthly anchor fills all 12 months of the window, not just the months after its own anchor date (got ${monthlyReads.length})`)
+  ok(monthlyReads.some((e) => e.from.startsWith('2026-01')), 'year boundary: January is covered by the PREVIOUS year\'s anchor series, not invented, not dropped')
+  ok(monthlyReads.some((e) => e.from.startsWith('2026-09')), 'year boundary: September (the last month before the anchor\'s own month) is covered')
+
+  // Sub-annual rates (< 1/year) — pinned 2026-08-21 (review §2): no year to
+  // phase a biennial/decennial cycle against, so nothing is invented; the
+  // edge is counted as unplaceable instead of emitting a wrong-cadence
+  // annual read.
+  const biennial: Dependency[] = [{
+    source_report_id: 'down', target_report_id: 'up', relationship_type: 'uses_data_from', basis: 'test',
+    reference_period: { readings_per_year: 0.5, window_months: 24, ends: '06-15', stated_as: 'test' },
+  }]
+  const bi = calendarEvents(reports, biennial, { from: '2026-01-01', to: '2026-12-31' })
+  ok(bi.events.filter((e) => e.kind === 'read').length === 0, 'sub-annual: a biennial reading emits no read (no year to phase it against)')
+  ok(bi.unplaceable.edgesSubAnnualUnphased.length === 1, 'sub-annual: counted as unplaceable instead of silently dropped or wrongly annual')
+
+  // Rates above 12/year — pinned 2026-08-21 (review §2): used to collapse to
+  // exactly one read regardless of rate ("52/yr" and "13/yr" both showed one
+  // dot). The same day-step formula the fractional-spacing fix already
+  // proved out generalises to this case with no special-casing needed.
+  const weekly: Dependency[] = [{
+    source_report_id: 'down', target_report_id: 'up', relationship_type: 'uses_data_from', basis: 'test',
+    reference_period: { readings_per_year: 52, window_months: 1, ends: '01-05', stated_as: 'test' },
+  }]
+  const weeklyReads = calendarEvents(reports, weekly, { from: '2026-01-01', to: '2026-12-31' }).events.filter((e) => e.kind === 'read')
+  ok(weeklyReads.length > 40, `rate > 12/yr: a weekly anchor produces roughly 52 reads across the year, not one (got ${weeklyReads.length})`)
+  ok(weeklyReads.every((e) => /^\d{4}-\d{2}-\d{2}$/.test(e.from) && isRealDate(e.from)), 'rate > 12/yr: every emitted date is still a real YYYY-MM-DD')
 }
 ok(describeWindow('2026-04-01', '2027-03-31', 'year') === '2026-27', 'describeWindow: fiscal year straddling December is not called "2026"')
 ok(describeWindow('2026-07-01', '2026-09-30', 'quarter') === 'Q3 2026', 'describeWindow: quarter names the quarter')
@@ -157,6 +195,44 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   // any dependency that tries to carry it back in.
   const issues = validate(reports, [{ source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't', evidence: 'implied' }])
   ok(issues.some((i) => i.severity === 'error' && i.message.includes('retired')), 'validate: an implied dependency is an error, pointing at the retirement')
+}
+
+// Three new validator rules, 2026-08-21 (review §2, §6 item 7): the reserved
+// orb:/corb:/-> namespaces, COUNTRY_LABEL coverage, and strength range.
+{
+  const base = { title: 'x', publisher: 'p', country: 'CA' as const, jurisdiction_level: 'federal' as const, region: 'r', description: '', last_updated: null, url: '', domains: [] }
+  // Reserved id prefixes/separator — the renderer mints orb:/corb: ids and
+  // uses -> as the edgeKey separator; a research file must never collide.
+  const orbClash = validate([{ ...base, id: 'orb:asia-something' }], [])
+  ok(orbClash.some((i) => i.severity === 'error' && i.message.includes('reserved renderer prefix')), 'validate: a report id starting with "orb:" is an error')
+  const corbClash = validate([{ ...base, id: 'corb:jp-something' }], [])
+  ok(corbClash.some((i) => i.severity === 'error' && i.message.includes('reserved renderer prefix')), 'validate: a report id starting with "corb:" is an error')
+  const arrowClash = validate([{ ...base, id: 'a->b' }], [])
+  ok(arrowClash.some((i) => i.severity === 'error' && i.message.includes('edgeKey separator')), 'validate: a report id containing "->" is an error')
+  const cleanId = validate([{ ...base, id: 'cabo-verde-orbital-survey' }], [])
+  ok(!cleanId.some((i) => i.message.includes('reserved')), 'validate: a normal id merely containing the LETTERS "orb" is not flagged (prefix-only match)')
+
+  // COUNTRY_LABEL coverage — mirrors the COUNTRY_FAMILY check, since
+  // COUNTRY_GROUPS (the Countries directory) is derived from COUNTRY_LABEL's
+  // keys, not COUNTRY_FAMILY's. A known family with no label must error.
+  const noLabel = validate([{ ...base, id: 'r1', country: 'ZZ' }], [])
+  ok(noLabel.some((i) => i.severity === 'error' && i.message.includes('no palette entry')), 'validate: an unknown country still fails the existing COUNTRY_FAMILY check first')
+  const knownGood = validate([{ ...base, id: 'r1', country: 'CA' }], [])
+  ok(!knownGood.some((i) => i.message.includes('COUNTRY_LABEL')), 'validate: a country with both a family and a label passes clean')
+
+  // strength range — present-and-bad is an error, absent is fine (the
+  // overwhelmingly common shape: RELATIONSHIP_WEIGHT supplies the default).
+  const okDeps: Dependency[] = [{ source_report_id: 'r1', target_report_id: 'r2', relationship_type: 'cites', basis: 't' }]
+  const twoReports: Report[] = [{ ...base, id: 'r1' }, { ...base, id: 'r2' }]
+  ok(!validate(twoReports, okDeps).some((i) => i.message.includes('strength')), 'validate: an edge with no strength field is fine (default applies downstream)')
+  const zeroStrength = validate(twoReports, [{ ...okDeps[0], strength: 0 }])
+  ok(zeroStrength.some((i) => i.severity === 'error' && i.message.includes('strength') && i.message.includes('NaN')), 'validate: strength: 0 is an error (0/0 in PageRank is the exact NaN door the review found)')
+  const negStrength = validate(twoReports, [{ ...okDeps[0], strength: -1 }])
+  ok(negStrength.some((i) => i.severity === 'error' && i.message.includes('strength')), 'validate: negative strength is an error')
+  const nanStrength = validate(twoReports, [{ ...okDeps[0], strength: NaN }])
+  ok(nanStrength.some((i) => i.severity === 'error' && i.message.includes('strength')), 'validate: NaN strength is an error')
+  const goodStrength = validate(twoReports, [{ ...okDeps[0], strength: 2.5 }])
+  ok(!goodStrength.some((i) => i.message.includes('strength')), 'validate: a positive finite strength passes clean')
 }
 
 // --------------------------------------------------------------- selection --
@@ -466,6 +542,23 @@ ok(isDocumented({}) && !isDocumented({ evidence: 'implied' }), 'isDocumented: ab
   ok(rate[0]?.report.id === 'corporate-thing', 'search: mid-word match still matches (corporate contains rate)')
   ok(search(g, 'cpi corporate', () => true).length === 0, 'search: every token must match — adding a word narrows')
   ok(search(g, 'cpi', (r) => r.id !== 'statcan-cpi').length === 0, 'search: respects the filter predicate')
+}
+
+// Accent-folding and script-aware normalisation, 2026-08-21 (review §3.5(a)):
+// "Côte d'Ivoire" findable by "cote", "Türkiye" by "turkiye", and — the actual
+// fix, since NFD alone does not cover this — a Cyrillic title findable by its
+// own Cyrillic text instead of being blanked out as "punctuation".
+{
+  const reports: Report[] = [
+    { id: 'ci-report', title: "Côte d'Ivoire commune finance", publisher: 'p', country: 'CI', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'tr-report', title: 'Türkiye Cumhuriyet Merkez Bankası', publisher: 'p', country: 'TR', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'ru-report', title: 'Росстат национальные счета', publisher: 'p', country: 'RU', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+  ]
+  const g = buildGraph(reports, [])
+  ok(search(g, 'cote', () => true).some((r) => r.report.id === 'ci-report'), 'search: accent-folded "cote" finds "Côte d\'Ivoire"')
+  ok(search(g, 'turkiye', () => true).some((r) => r.report.id === 'tr-report'), 'search: accent-folded "turkiye" finds "Türkiye"')
+  ok(search(g, 'Росстат', () => true).some((r) => r.report.id === 'ru-report'), 'search: Cyrillic query finds a Cyrillic title (was blanked to punctuation before)')
+  ok(search(g, 'rosstat', () => true).length === 0, 'search: Cyrillic is script-preserved, not transliterated — a Latin spelling does not match it')
 }
 
 // ------------------------------------------------------------ geoAffinity --

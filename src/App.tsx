@@ -105,7 +105,14 @@ import {
   computeNeighbourhoodFocus,
   edgeKey,
 } from './lib/selection'
-import { REGION_GROUPS, COUNTRY_GROUPS, reportIdsForGroup, type RegionGroup } from './lib/regions'
+import {
+  REGION_GROUPS,
+  COUNTRY_GROUPS,
+  reportIdsForGroup,
+  continentOf,
+  type RegionGroup,
+  type Continent,
+} from './lib/regions'
 import { GroupsPanel } from './components/GroupsPanel'
 import { Legend } from './components/Legend'
 import { Compare } from './components/Compare'
@@ -810,10 +817,18 @@ export default function App() {
     (report: ScoredReport) => {
       const id = resolveId(drilldown, report, openedCountries)
       if (groupFocus && !groupFocus.nodes.has(id)) setSelectedGroupId(null)
+      // Mirrors the isolate branch immediately above (2026-08-21, review
+      // §3.5(b)/(c)) — search now runs over the whole corpus and tags a
+      // filtered-out row "outside filter" instead of hiding it (see
+      // `searchOutsideFilter` and `SearchPanel`'s `outsideFilter` prop), so
+      // choosing one has to actually clear the filter or the report would
+      // vanish again the instant it were selected — the same "reads as
+      // broken" failure the isolate case already fixed one round earlier.
+      if (isFiltering(filter) && !predicate(report)) setFilter(NO_FILTER)
       setSelectedId(id)
       setFlyTo((f) => ({ id, nonce: (f?.nonce ?? 0) + 1 }))
     },
-    [drilldown, openedCountries, groupFocus],
+    [drilldown, openedCountries, groupFocus, filter, predicate],
   )
 
   /**
@@ -828,6 +843,19 @@ export default function App() {
     const nodes = groupFocus.nodes
     return (report: ScoredReport) => !nodes.has(resolveId(drilldown, report, openedCountries))
   }, [groupFocus, drilldown, openedCountries])
+
+  /**
+   * True for a report the active Countries/Domains scope filter currently
+   * hides — same shape as `searchOutsideIsolate` immediately above, added
+   * 2026-08-21 (review §3.5(b)/(c)) when `SearchPanel` stopped narrowing its
+   * own results by `predicate` and started tagging them instead. Null when no
+   * filter is active, so the panel skips the check in the common case, same
+   * convention as the isolate version.
+   */
+  const searchOutsideFilter = useMemo(() => {
+    if (!isFiltering(filter)) return null
+    return (report: ScoredReport) => !predicate(report)
+  }, [filter, predicate])
 
   /**
    * A region, bloc or publisher was picked from `GroupsPanel` — see the
@@ -1050,7 +1078,37 @@ export default function App() {
       // Nothing to do; the panels simply start hidden again next load.
     }
   }, [panels])
-  const togglePanel = (key: PanelKey) => setPanels((p) => ({ ...p, [key]: !p[key] }))
+  // 2026-08-21, full-review item 5: toggling ANY panel by hand — including
+  // Reports itself — always lands on the normal Reports body, never
+  // mid-list. Only `openUnlinkedList` below (the shelf pill, or a future
+  // deep link) opens straight into the Unlinked list; a manual toggle is a
+  // request for "the panel", not "whatever it last showed".
+  const togglePanel = (key: PanelKey) => {
+    setPanels((p) => ({ ...p, [key]: !p[key] }))
+    if (key === 'reports') setUnlinkedOpen(false)
+  }
+
+  /**
+   * The Unlinked shelf's own open/closed state (2026-08-21, full-review item
+   * 5). Lives here, not inside `Hud` or `IsolatedShelf`, because the pill
+   * that opens it (bottom dock) and the list that shows it (Reports panel)
+   * are siblings, not parent/child — see the dock's render site and Hud's
+   * `unlinkedOpen` prop below.
+   */
+  const [unlinkedOpen, setUnlinkedOpen] = useState(false)
+
+  /**
+   * The compact shelf pill was clicked. Opens the Reports panel if it was
+   * closed (the list lives inside it — see the review's own framing, "opens
+   * a searchable list in the Reports panel") and switches that panel to the
+   * Unlinked list. `setPanels` only writes when Reports was actually closed,
+   * so this never fights the persisted-panels effect on the common case
+   * where Reports is already open.
+   */
+  const openUnlinkedList = useCallback(() => {
+    setPanels((p) => (p.reports ? p : { ...p, reports: true }))
+    setUnlinkedOpen(true)
+  }, [])
 
   /**
    * DEV-ONLY overlap tripwire (2026-08-21, full-review item 2). §7's "no
@@ -1367,7 +1425,10 @@ export default function App() {
             compare: true,
           })
         }
-        onHideAll={() => setPanels(PANELS_HIDDEN)}
+        onHideAll={() => {
+          setPanels(PANELS_HIDDEN)
+          setUnlinkedOpen(false)
+        }}
         onHowTo={() => setHowToRequest((n) => n + 1)}
         onHelp={() => setHelpOpen(true)}
         views={viewStore.views}
@@ -1399,6 +1460,7 @@ export default function App() {
           hasSelection={!!selected}
           onReset={handleReset}
           onExportPng={() => setExportRequest((n) => n + 1)}
+          tier={drilldown}
         />
       </PanelShell>
       )}
@@ -1406,9 +1468,9 @@ export default function App() {
       {panels.find && (
         <SearchPanel
           graph={graph}
-          within={predicate}
           onChoose={handleChoose}
           outsideIsolate={searchOutsideIsolate}
+          outsideFilter={searchOutsideFilter}
         />
       )}
 
@@ -1465,12 +1527,7 @@ export default function App() {
         </div>
         <div style={bottomDockRight}>
           {panels.unlinked && (
-            <IsolatedShelf
-              reports={isolated}
-              onHover={setHovered}
-              selectedId={selectedId}
-              onSelect={handleSelectIsolated}
-            />
+            <IsolatedShelf reports={isolated} onOpen={openUnlinkedList} />
           )}
         </div>
       </div>
@@ -1511,6 +1568,13 @@ export default function App() {
           selected={selected}
           builtFromCount={focus?.builtFrom.size ?? 0}
           feedsIntoCount={focus?.feedsInto.size ?? 0}
+          isolated={isolated}
+          unlinkedOpen={unlinkedOpen}
+          onOpenUnlinked={() => setUnlinkedOpen(true)}
+          onCloseUnlinked={() => setUnlinkedOpen(false)}
+          onSelectIsolated={handleSelectIsolated}
+          onHoverIsolated={setHovered}
+          selectedId={selectedId}
         />
       </PanelShell>
       )}
@@ -2319,67 +2383,82 @@ function TierBar({
   )
 }
 
+/**
+ * Short display codes for the shelf pill's continent breakdown
+ * (2026-08-21, full-review item 5). NOT the same vocabulary as
+ * `ColourFamily` — three of these (`AFR`/`ASIA`/`SA`) happen to agree with
+ * three of that scheme's twelve buckets, the rest don't, because a
+ * continent (`regions.ts`) and a colour family (`palette.ts`) are different
+ * partitions of the same countries. Local to this one summary line; nothing
+ * else reads it.
+ */
+const CONTINENT_ABBR: Record<Continent, string> = {
+  'North America': 'NA',
+  'South America': 'SA',
+  Europe: 'EUR',
+  'Middle East': 'MENA',
+  Africa: 'AFR',
+  Asia: 'ASIA',
+  'Oceania & Pacific': 'OCN',
+  International: 'INTL',
+}
+
+/**
+ * The Unlinked shelf (2026-08-21, full-review item 5 — see the review's
+ * §3.6: "1,285 six-pixel dots with hover-only identity... the dots stop
+ * earning their place above ~200 items"). This used to render every
+ * isolated report as its own 6px dot in a scrolling grid; the staged mint
+ * adds 722 more, which would have made it ~2,007 dots — below every hit-size
+ * guideline, with no way to browse or filter what's there and no touch
+ * story at all.
+ *
+ * Replaced with the review's own suggested shape: a compact one-line
+ * summary — "Unlinked — 1,285 · AFR 412 · ASIA 371 …" — that opens a
+ * searchable list in the Reports panel instead of trying to represent each
+ * report as a pixel here. That is also the more honest UI for what this set
+ * actually is: a research queue (reports with no recorded cross-border
+ * dependency yet), not an annotation on the scene. The click target grows
+ * from 6px to the whole pill; hover-identity and the row-level selection
+ * ring both move to the list itself, where `title`+`publisher` are always
+ * visible text instead of a tooltip on a dot nobody could reliably aim at.
+ */
 function IsolatedShelf({
   reports,
-  onHover,
-  selectedId,
-  onSelect,
+  onOpen,
 }: {
   reports: ScoredReport[]
-  onHover: (report: ScoredReport | null) => void
-  selectedId: string | null
-  onSelect: (id: string) => void
+  onOpen: () => void
 }) {
   if (reports.length === 0) return null
 
+  const breakdown = useMemo(() => {
+    const byContinent = new Map<Continent, number>()
+    for (const r of reports) {
+      const c = continentOf(r.country)
+      byContinent.set(c, (byContinent.get(c) ?? 0) + 1)
+    }
+    return [...byContinent.entries()].sort((a, b) => b[1] - a[1])
+  }, [reports])
+
+  // Top three continents fit a one-line pill at any panel width this dock
+  // track actually offers (measured live at 1280×720); a fourth+ collapses
+  // to a trailing "…" rather than wrapping the pill onto a second line.
+  const shown = breakdown.slice(0, 3)
+  const summary = shown
+    .map(([c, n]) => `${CONTINENT_ABBR[c]} ${n.toLocaleString()}`)
+    .join(' · ')
+
   return (
-    <div style={isolatedShelfWrap}>
-      {/*
-        The occasional sheen (round 10). A real pointer-transparent div, not a
-        ::after on the shelf — a positioned pseudo-element would paint above
-        the in-flow dots AND fold their screen area into the shelf's own hit
-        region, so clicks aimed at dots would land on the panel. The clipping
-        wrapper carries the panel's radius so the sweep never pokes past a
-        rounded corner.
-      */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          overflow: 'hidden',
-          borderRadius: 10,
-          pointerEvents: 'none',
-        }}
-      >
-        <div className="rig-sweep" />
-      </div>
-      <div style={{ ...section, marginBottom: 8 }}>Unlinked — {reports.length}</div>
-      <div style={isolatedShelfGrid}>
-        {reports.map((r) => (
-          <div
-            key={r.id}
-            onMouseEnter={() => onHover(r)}
-            onMouseLeave={() => onHover(null)}
-            onClick={() => onSelect(r.id)}
-            title={`${r.title} — ${r.publisher}`}
-            style={{
-              // Must match `isolatedShelfGrid`'s track size, or `auto-fill`
-              // computes a column count the dots do not actually fit into.
-              width: 6,
-              height: 6,
-              borderRadius: 6,
-              cursor: 'pointer',
-              background: colourForReport(r),
-              opacity: selectedId === r.id ? 1 : 0.72,
-              boxShadow:
-                selectedId === r.id ? '0 0 0 2px var(--sel-ring)' : 'none',
-              pointerEvents: 'auto',
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    <button
+      type="button"
+      onClick={onOpen}
+      title="Reports with no recorded cross-border dependency yet — click to browse"
+      style={isolatedShelfPill}
+    >
+      Unlinked — {reports.length.toLocaleString()}
+      {shown.length > 0 && <span style={{ color: 'var(--ink-faint)' }}> · {summary}</span>}
+      {breakdown.length > shown.length && <span style={{ color: 'var(--ink-faint)' }}> …</span>}
+    </button>
   )
 }
 
@@ -2398,6 +2477,13 @@ function Hud({
   selected,
   builtFromCount,
   feedsIntoCount,
+  isolated,
+  unlinkedOpen,
+  onOpenUnlinked,
+  onCloseUnlinked,
+  onSelectIsolated,
+  onHoverIsolated,
+  selectedId,
 }: {
   nodeCount: number
   edgeCount: number
@@ -2413,9 +2499,112 @@ function Hud({
   selected: ScoredReport | null
   builtFromCount: number
   feedsIntoCount: number
+  /** Reports with no edges in either direction — see `App`'s `isolated` memo. */
+  isolated: ScoredReport[]
+  /** True while this panel is showing the Unlinked list instead of its normal body (2026-08-21, full-review item 5). */
+  unlinkedOpen: boolean
+  onOpenUnlinked: () => void
+  onCloseUnlinked: () => void
+  onSelectIsolated: (id: string) => void
+  onHoverIsolated: (report: ScoredReport | null) => void
+  selectedId: string | null
 }) {
   const filtered = visibleNodeCount !== nodeCount
+  const [unlinkedQuery, setUnlinkedQuery] = useState('')
 
+  // Case-insensitive substring over title + publisher, deliberately simple —
+  // this is a browse/filter aid for a few thousand rows, not the full search
+  // feature (§3.5's accent-folding/full-corpus pass is its own review item,
+  // still open). Sorted by title so the list reads as a directory rather
+  // than in whatever order `graph.nodes` happened to build it.
+  const filteredUnlinked = useMemo(() => {
+    const q = unlinkedQuery.trim().toLowerCase()
+    const matches = q
+      ? isolated.filter(
+          (r) =>
+            r.title.toLowerCase().includes(q) || r.publisher.toLowerCase().includes(q),
+        )
+      : isolated
+    return [...matches].sort((a, b) => a.title.localeCompare(b.title))
+  }, [isolated, unlinkedQuery])
+
+  if (unlinkedOpen) {
+    return (
+      <div style={panel}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button type="button" onClick={onCloseUnlinked} style={unlinkedBackButton}>
+            ← Back
+          </button>
+          <div style={{ ...masthead, fontSize: 17 }}>Unlinked</div>
+        </div>
+        <div style={{ fontSize: 11.5, color: 'var(--ink-mute)', marginTop: 6, lineHeight: 1.5 }}>
+          {isolated.length.toLocaleString()} reports with no recorded cross-border
+          dependency yet — a research queue, not a bug. Never placed in the 3D
+          scene (nothing to draw an edge to); browse or filter them here instead.
+        </div>
+        <input
+          value={unlinkedQuery}
+          onChange={(e) => setUnlinkedQuery(e.target.value)}
+          placeholder="Filter by title or publisher…"
+          spellCheck={false}
+          style={unlinkedFilterInput}
+        />
+        <div style={{ marginTop: 10 }}>
+          {filteredUnlinked.length === 0 ? (
+            <div style={{ fontSize: 11, color: 'var(--ink-dim)', padding: '8px 2px' }}>
+              Nothing matches "{unlinkedQuery}".
+            </div>
+          ) : (
+            filteredUnlinked.map((r) => (
+              <div
+                key={r.id}
+                onClick={() => onSelectIsolated(r.id)}
+                onMouseEnter={() => onHoverIsolated(r)}
+                onMouseLeave={() => onHoverIsolated(null)}
+                style={{
+                  ...unlinkedRow,
+                  background: selectedId === r.id ? 'var(--accent-soft)' : 'transparent',
+                }}
+              >
+                <span
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: 7,
+                    flexShrink: 0,
+                    marginTop: 5,
+                    background: colourForReport(r),
+                  }}
+                />
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      color: 'var(--ink-strong)',
+                      fontSize: 12,
+                      lineHeight: 1.32,
+                    }}
+                  >
+                    {r.title}
+                  </span>
+                  <span
+                    style={{
+                      display: 'block',
+                      color: 'var(--ink-mute)',
+                      fontSize: 10.5,
+                      marginTop: 2,
+                    }}
+                  >
+                    {r.publisher} · {CONTINENT_ABBR[continentOf(r.country)]}
+                  </span>
+                </span>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div style={panel}>
@@ -2444,6 +2633,29 @@ function Hud({
           </>
         )}
       </div>
+
+      {/*
+        The Unlinked list entry point (2026-08-21, full-review item 5),
+        always available here regardless of whether the bottom-dock pill is
+        showing — the dock's `Unlinked` panel toggle can be off while this
+        panel is open, and the review's own framing put the searchable list
+        IN the Reports panel, not gated behind a second panel's visibility.
+      */}
+      {isolated.length > 0 && (
+        <div
+          onClick={onOpenUnlinked}
+          style={{
+            fontSize: 11,
+            color: 'var(--ink-dim)',
+            marginTop: 6,
+            cursor: 'pointer',
+            pointerEvents: 'auto',
+            display: 'inline-block',
+          }}
+        >
+          {isolated.length.toLocaleString()} unlinked — browse →
+        </div>
+      )}
 
       {/*
         The counts are the point of the whole feature: the number of reports a
@@ -2660,6 +2872,49 @@ const selectionBlock: React.CSSProperties = {
   borderTop: '1px solid var(--line-faint)',
 }
 
+// The Unlinked list's own styles (2026-08-21, full-review item 5). Mirrors
+// `SearchPanel.tsx`'s `input`/`resultRow` look-and-feel on purpose — same
+// panel chrome, same row shape — rather than importing them, since that
+// file's versions are `position: fixed`-anchored to the search bar and
+// these are in-flow inside the Reports `PanelShell`.
+const unlinkedBackButton: React.CSSProperties = {
+  flexShrink: 0,
+  fontFamily: 'inherit',
+  fontSize: 11,
+  color: 'var(--ink-dim)',
+  background: 'var(--btn-bg)',
+  border: '1px solid var(--line)',
+  borderRadius: 6,
+  padding: '4px 8px',
+  cursor: 'pointer',
+  pointerEvents: 'auto',
+}
+
+const unlinkedFilterInput: React.CSSProperties = {
+  width: '100%',
+  boxSizing: 'border-box',
+  marginTop: 10,
+  padding: '8px 10px',
+  fontSize: 12,
+  fontFamily: 'inherit',
+  color: 'var(--ink-strong)',
+  background: 'var(--btn-bg)',
+  border: '1px solid var(--line)',
+  borderRadius: 8,
+  outline: 'none',
+  pointerEvents: 'auto',
+}
+
+const unlinkedRow: React.CSSProperties = {
+  display: 'flex',
+  gap: 9,
+  alignItems: 'flex-start',
+  padding: '6px 4px',
+  borderRadius: 6,
+  cursor: 'pointer',
+  pointerEvents: 'auto',
+}
+
 // Right edge sits 4px inside the View panel's own left edge (that panel is
 // `right: 20, width: 190`, so its left edge is at `right: 210`) — close
 // enough to read as paired with it, not so close the two visually merge.
@@ -2755,7 +3010,7 @@ const bottomDockRight: React.CSSProperties = {
 }
 
 /**
- * **Wide and short, not narrow and tall.**
+ * **Wide and short, not narrow and tall — and now one line, not a block.**
  *
  * Thomas, 2026-08-12: *"see how the unlinked nodes look large and out of place?
  * they should be fitted horizontally instead of vertically."* Four dots across
@@ -2764,54 +3019,36 @@ const bottomDockRight: React.CSSProperties = {
  * footnote: the reports with no edges in either direction, the least
  * structurally important part of the corpus. Size on screen was inversely
  * proportional to importance, which is the same mistake the flag glyphs made
- * (see `isStandingInstrument` in nodeVisuals.ts).
+ * (see `isStandingInstrument` in nodeVisuals.ts). The horizontal, then
+ * halved-dot passes that followed (round 10, Phase 3.5) kept solving that
+ * same problem one size cut at a time.
  *
- * Laid out on a fixed width with `auto-fill` rather than a fixed column count,
- * so the block stays wide-and-short as the isolated set grows instead of
- * growing back down the screen. `maxHeight` is now a low cap for the same
- * reason — if this ever needs to scroll, that is the correct outcome, not a
- * signal to let it get taller.
+ * **2026-08-21, full-review item 5 — the dot grid itself retired.** At 1,285
+ * reports (1,285 → ~2,007 after the staged mint) no dot size fixes a grid
+ * with no browse, no filter and a 6px hit target; see the file-level comment
+ * on `IsolatedShelf` above. This is now a single-line button, sized to its
+ * own text — no grid, no scroll, no per-dot geometry left to tune.
  */
 // Tucked into the bottom-right as of Phase 3.5 (Thomas, 2026-08-19: "tuck
 // those unlinked nodes neatly in the bottom right area") — a footnote's
 // corner, out of the way of the search bar and the calendar along the top.
-// Still left of the View panel's column, which owns the edge — that 214px
-// offset now lives on the dock's right cell (`bottomDockRight.marginRight`)
-// since 2026-08-21, when this stopped being `position: fixed` and became a
-// dock child (see the dock comment at the render site). `position:
-// 'relative'` stays because the sheen inside is absolutely positioned
-// against this wrap.
-const isolatedShelfWrap: React.CSSProperties = {
-  position: 'relative',
-  width: 232,
-  padding: '9px 11px',
+// Still left of the View panel's column, which owns the edge — the 214px
+// offset lives on the dock's own empty fourth track (`bottomDock`'s
+// comment), not on this style. `pointerEvents: 'auto'` because the dock
+// container is 'none' (drag-through between panels).
+const isolatedShelfPill: React.CSSProperties = {
+  fontFamily: 'inherit',
+  fontSize: 11,
+  color: 'var(--ink-mute)',
   background: 'var(--panel-bg)',
   border: '1px solid var(--line)',
   borderRadius: 10,
+  padding: '9px 13px',
+  cursor: 'pointer',
   boxShadow: 'var(--panel-shadow)',
   backdropFilter: 'var(--glass-filter)',
-  // 'auto', not 'none' — the shelf scrolls once the isolated set outgrows
-  // `maxHeight`, and a scrollbar inside a pointer-transparent panel cannot be
-  // grabbed (Thomas, 2026-08-12: "give it a scroll bar and allow the pointer
-  // to grab it"). The cost is a small dead rectangle for orbit-drags, in a
-  // corner nobody orbits from.
   pointerEvents: 'auto',
-  maxHeight: 148,
-  overflowY: 'auto',
-}
-
-const isolatedShelfGrid: React.CSSProperties = {
-  display: 'grid',
-  // 12px dots on a 316px-wide panel gives 18 per row — 85 reports land in five
-  // rows rather than twenty-two. Dots shrunk from 14px too: they are a
-  // secondary reference, and at 14 they were competing with the graph's own
-  // nodes for attention despite being the least connected fifth of the corpus.
-  // 6px dots — half the previous 12. Thomas asked for them halved again after
-  // the horizontal pass: these are the least connected fifth of the corpus and
-  // the panel should read as a footnote, not as a third sidebar. 85 of them now
-  // land in four rows about 220px wide.
-  gridTemplateColumns: 'repeat(auto-fill, 6px)',
-  gap: 4,
+  whiteSpace: 'nowrap',
 }
 
 /**

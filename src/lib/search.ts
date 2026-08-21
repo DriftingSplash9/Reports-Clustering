@@ -33,14 +33,64 @@ const FIELDS: { get: (r: ScoredReport) => string; score: number }[] = [
   { get: (r) => r.description, score: 8 },
 ]
 
+/**
+ * **Accent-folded and script-aware, 2026-08-21 (review §3.5(a)).** Before this,
+ * punctuation was folded to spaces with `/[^a-z0-9]+/g` — an ASCII-only class,
+ * so it did double duty as an accidental *script* filter: "Côte d'Ivoire" (the
+ * `é`/apostrophe survive NFC as themselves) and "Türkiye" never matched their
+ * unaccented spellings, and a Cyrillic title (`ё`, `ж`, …) was stripped down to
+ * nothing at all — 139 countries' worth of non-ASCII titles quietly
+ * unsearchable in exactly the corpus that most needs them searchable.
+ *
+ * Two independent fixes, in order:
+ * 1. **NFD-decompose, then strip combining marks** (`\p{Mn}`) — turns "é" into
+ *    "e" + a combining acute, then drops the mark, so "cote"/"turkiye" find
+ *    the accented originals. This alone does nothing for genuinely non-Latin
+ *    script — decomposition does not transliterate Cyrillic to Latin, it only
+ *    separates a Latin letter from its diacritic.
+ * 2. **The punctuation fold itself widened from `[^a-z0-9]` to `[^\p{L}\p{N}]`**
+ *    (Unicode letter/number classes, `u` flag) — so a Cyrillic, Greek, CJK, or
+ *    any other script's letters survive normalisation as themselves instead of
+ *    being treated as punctuation and blanked. This is the actual fix for
+ *    "anything Cyrillic": the review's own suggested fix (NFD + strip combining
+ *    marks) only covers accented Latin, so it is extended here rather than
+ *    left half-solved.
+ */
 function normalise(s: string): string {
   return s
+    .normalize('NFD')
+    .replace(/\p{Mn}/gu, '')
     .toLowerCase()
     // Fold punctuation to spaces so "J.D. Power" is found by "jd power", and
-    // "CPI-W" by "cpi w". Acronyms in this corpus are punctuated inconsistently
-    // across publishers and nobody should have to guess which way.
-    .replace(/[^a-z0-9]+/g, ' ')
+    // "CPI-W" by "cpi w" — but keep any script's letters/digits rather than
+    // only a-z0-9 (see the function doc above).
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
     .trim()
+}
+
+/**
+ * Per-report normalised field cache, keyed by object identity.
+ *
+ * **Added 2026-08-21 (review §3.5(d)): "re-normalises five fields × 3k nodes ×
+ * every keystroke."** Before this, `scoreToken` called `normalise(get(report))`
+ * fresh for every (token × field × report) combination on every render — the
+ * same five strings recomputed from scratch on every single keystroke, for
+ * every report in the corpus, whether or not that report's text ever changes.
+ * A `WeakMap` keyed by the `ScoredReport` object itself needs no invalidation
+ * logic: a graph rebuild (tier change, corpus reload) hands `search` an
+ * entirely new array of report objects, the old ones become unreachable, and
+ * their cache entries are collected for free — there is no `report.id` re-key
+ * to get wrong and no explicit "clear the cache" call site to forget.
+ */
+const normalisedFieldsCache = new WeakMap<ScoredReport, string[]>()
+
+function normalisedFields(report: ScoredReport): string[] {
+  let cached = normalisedFieldsCache.get(report)
+  if (!cached) {
+    cached = FIELDS.map(({ get }) => normalise(get(report)))
+    normalisedFieldsCache.set(report, cached)
+  }
+  return cached
 }
 
 /**
@@ -52,8 +102,10 @@ function normalise(s: string): string {
  */
 function scoreToken(report: ScoredReport, token: string): number {
   let best = 0
-  for (const { get, score } of FIELDS) {
-    const text = normalise(get(report))
+  const fields = normalisedFields(report)
+  for (let i = 0; i < FIELDS.length; i++) {
+    const text = fields[i]
+    const score = FIELDS[i].score
     const at = text.indexOf(token)
     if (at === -1) continue
     const atBoundary = at === 0 || text[at - 1] === ' '

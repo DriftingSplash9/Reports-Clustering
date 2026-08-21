@@ -2,6 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Graph, ScoredReport } from '../lib/types'
 import type { NodePredicate } from '../lib/filter'
 import { search } from '../lib/search'
+
+/** Search always runs over the whole corpus — see the `outsideFilter` prop doc. */
+const ALWAYS_VISIBLE: NodePredicate = () => true
 import { colourForReport } from '../lib/palette'
 import { HUD_TOP } from '../lib/uiTheme'
 
@@ -30,13 +33,11 @@ import { HUD_TOP } from '../lib/uiTheme'
  */
 export default function SearchPanel({
   graph,
-  within,
   onChoose,
   outsideIsolate,
+  outsideFilter,
 }: {
   graph: Graph
-  /** The current filter, so search never offers a node that is not drawn. */
-  within: NodePredicate
   onChoose: (report: ScoredReport) => void
   /**
    * Non-null while a group isolate is active: true for a report that
@@ -46,6 +47,21 @@ export default function SearchPanel({
    * instead of the old silent state-loss.
    */
   outsideIsolate?: ((report: ScoredReport) => boolean) | null
+  /**
+   * Non-null while the Countries/Domains scope filter is active: true for a
+   * report the filter currently hides. Added 2026-08-21 (review §3.5(b)/(c)):
+   * search used to run `within={predicate}` — the SAME scope filter — which
+   * silently dropped filtered-out reports from the results entirely, so a
+   * report that plainly exists could report "Nothing matches" if it happened
+   * to sit outside whatever the Countries filter was narrowed to. It also
+   * disagreed with `Compare.tsx`, which has always searched the whole corpus
+   * with `within={() => true}`. Search now does the same — always the whole
+   * corpus — and tags a filtered-out row instead of hiding it, exactly the
+   * pattern `outsideIsolate` already established one round earlier: one
+   * feature (this one) copied onto a second kind of hidden-ness rather than
+   * inventing a new one.
+   */
+  outsideFilter?: ((report: ScoredReport) => boolean) | null
 }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -54,9 +70,13 @@ export default function SearchPanel({
   // Skips the focus effect below on first mount — see that effect's comment.
   const firstRender = useRef(true)
 
+  // Always the whole corpus (see the `outsideFilter` prop doc above) — never
+  // narrowed by the scope filter or the isolate. Both are surfaced as row
+  // tags instead, same shape, so search never says "Nothing matches" for a
+  // report that plainly exists somewhere outside the current view.
   const results = useMemo(
-    () => search(graph, query, within),
-    [graph, query, within],
+    () => search(graph, query, ALWAYS_VISIBLE),
+    [graph, query],
   )
 
   useEffect(() => setActive(0), [query])
@@ -226,6 +246,14 @@ export default function SearchPanel({
                   style={outsideTag}
                 >
                   outside isolate
+                </span>
+              )}
+              {outsideFilter?.(report) && (
+                <span
+                  title="The Countries/Domains filter hides this report. Choosing it clears the filter."
+                  style={outsideTag}
+                >
+                  outside filter
                 </span>
               )}
               <span style={{ color: 'var(--ink-faint)', fontSize: 10.5, marginTop: 2 }}>

@@ -74,8 +74,18 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
  * Fill opacity of a hollow node. Low enough to read as empty, high enough that
  * the sphere still occludes what is directly behind it — at zero the rim reads
  * as a ring floating in front of the graph rather than as a surface.
+ *
+ * **Raised 0.1 → 0.3, 2026-08-21 (review §1, §6 item 6).** At 0.1 a hollow
+ * node was near-invisible — and at the Global tier, 125 of 204 real reports
+ * (61%) are hollow one-off instruments, so the opening view read as mostly
+ * blank. 0.3 keeps them legibly the calmest thing on screen (a real fill is
+ * still 3.3× denser) while giving each one a readable tint of its own family
+ * instead of a near-empty ring. Chosen at the low end of the review's
+ * suggested 0.28–0.35 band rather than the middle, on purpose: hollow-vs-
+ * filled is itself a signal (a one-off instrument vs. a tracked series) and
+ * should stay readable at a glance, not close the gap with a real fill.
  */
-const HOLLOW_FILL_OPACITY = 0.1
+const HOLLOW_FILL_OPACITY = 0.3
 
 /**
  * Rim sharpness scales with the node's radius.
