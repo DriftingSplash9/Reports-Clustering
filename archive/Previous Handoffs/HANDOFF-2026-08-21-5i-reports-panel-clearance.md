@@ -5,7 +5,7 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5j — full external review, no code changed)**. Yesterday (2026-08-20) was a full day
+Last written: **2026-08-21 (item 5i)**. Yesterday (2026-08-20) was a full day
 of work ending in item 5h, a HUD layout pass — full detail archived at
 `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md` (itself
 superseding the chain of earlier archived handoffs listed at its own top).
@@ -67,39 +67,6 @@ does not just look scrolled, content that exists is not reachable.
   scrolled to the end of the report list shows the full "Commercial
   (unranked)" line and the trailing instructions paragraph sitting above the
   tier bar with daylight between them, not under it.
-
-**This update (5j), 2026-08-21.** Thomas asked for a full review — "snoop, try it out,
-try and break it... review all the code and files... a detailed report on your opinions
-on the ui especially" — before adding more datasets. Done as a READ-ONLY session: no
-source file was changed; the deliverable is **`notes/full-review-2026-08-21.md`**, and
-the next build round should start from its §6 priority list. Highlights, so nobody has
-to re-derive them:
-- Validate/tsc/build all clean in a fresh sandbox (90/90, warnings only), matching §3.
-- **New HIGH bug, verified live in a headless-Chromium run of the built app**: picking a
-  country from `GroupsPanel`'s directory at a folded tier renders a completely BLACK
-  scene — `matchesRegionGroup` (`regions.ts`) checks only a node's single `country` for
-  the continent/bloc/country kinds, so a family orb's modal country decides membership
-  and a folded country seeds an empty isolate. Only `publisher` checks `.members`.
-- Also verified live: the Compare pill is UNCLICKABLE at ≤~1400px windows (tier bar's
-  opaque wrap paints over it, both z6, TierBar later in DOM); expanded Legend covers the
-  Unlinked shelf below ~1800px; one Escape closes a panel AND destroys an active
-  isolate; "/" steals focus from the Views name input mid-word; choosing a search
-  result silently drops a group isolate; the View panel clips 21px at 720-tall windows
-  (same class as 5i, fix never applied to the sibling panel).
-- The colour complaint diagnosed as design, not defect: at tier 1, 125 of 204 real
-  nodes (61%) are hollow one-off instruments at fill opacity 0.1, most of the rest are
-  achromatic INT, and the v4 damp holds ASIA/SA (41% of corpus) at 55–65% chroma — the
-  palette tables themselves have ZERO gaps (checked all 3,091 against every table).
-  Lenses visibly do nothing at tier 1 (orbs exempt + INT white) — verified by A/B
-  screenshots.
-- Perf: the 8.6MB bundle is ~95% corpus (move data out of the JS bundle before the
-  mint); 2,665 console warnings at startup; `geoAffinity` is O(countries²) per tick
-  with per-pair string allocs (~19k pairs at 139 countries — precompute the matrix).
-- Data-layer: `calendarEvents` misses every read spilling forward from the previous
-  year's anchor (loop needs `startYear − 1`); `strength` is unvalidated (NaN door,
-  dormant); `COUNTRY_LABEL` has no validator rule and its absence now hides countries
-  from the directory entirely.
-- Project memory: still DOWN — reads refused twice this session, same message as §3.
 
 ---
 
@@ -889,18 +856,6 @@ Sorted by owner, ordered by priority within each.
     `test-logic.ts` unchanged at 90/90, confirmed live in Thomas's own
     Chrome tab (bounding-rect measurement + a scrolled-to-bottom screenshot),
     not just built.
-
-19. **Review follow-ups, logged 2026-08-21 (item 5j), not built.** The full list with
-    reasoning is `notes/full-review-2026-08-21.md` §6; the order there is deliberate:
-    (1) orb-aware `matchesRegionGroup` + a folded-tier pinned test; (2) a bottom-dock
-    flex container replacing the hand-placed bottom-edge coordinates (kills the Compare
-    and Legend collisions structurally) + `maxHeight` on the View panel; (3) Escape
-    priority stack, "/" input guard, search-choose preserving isolates; (4) corpus out
-    of the JS bundle + batched startup warnings; (5) unlinked shelf → summary + list
-    (before the 722 edgeless candidates land); (6) the tier-1 colour pass (hollow
-    opacity ~0.3, damp floor ~70%, lens greyed or orbs recoloured); (7) validator rules
-    for `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->` namespaces; (8) search
-    accent-folding/full-corpus pass + the calendar year-boundary fix.
 
 ### Offered — picked up this update (5g)
 
