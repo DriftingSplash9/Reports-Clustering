@@ -1406,12 +1406,43 @@ export default function InfluenceGraph({
     // three-forcegraph's own default is 0, which — since alpha only counts
     // down, never up past a floor of zero — means the alpha-based stop
     // condition (`alpha() < d3AlphaMin`) is never true, so without this the
-    // simulation would run until `cooldownTime` (15s, also a library
-    // default) regardless of whether it had already settled. Setting a
-    // small positive floor lets `onEngineStop` below fire as soon as the
-    // layout is actually still, on any graph size, with the 15s ceiling
-    // remaining as the backstop for one that never quite settles.
+    // simulation would run until `cooldownTime` regardless of whether it had
+    // already settled. Setting a small positive floor lets `onEngineStop`
+    // below fire as soon as the layout is actually still, on any graph size,
+    // with `cooldownTime` remaining as the backstop for one that never quite
+    // settles.
     fg.d3AlphaMin(0.005)
+
+    // `cooldownTime` raised from the library's 15s default, 2026-08-21 —
+    // Thomas: the flicker/inconsistent render is still happening, and this
+    // time it reproduced live (in a browser tab this session drove directly),
+    // cold-loaded, with no camera interaction at all: the SAME Global tier
+    // (396 shown) came out fit-to-frame on some reloads and, on others, stuck
+    // either far too close (spheres overlapping, filling the screen) or far
+    // too far (a handful of pale dots on a mostly empty screen) — and stayed
+    // that way; switching to Everything and back did not reliably fix it
+    // either, it just produced a THIRD wrong distance in one live test.
+    // Root cause traced to the interaction between the alpha-based stop
+    // condition above and this wall-clock ceiling: `alpha()` decays by a
+    // fixed fraction PER TICK, not per second, so how many ticks land inside
+    // the settle window depends on real frame rate — and a cold load
+    // (parsing the corpus, compiling 3,091 meshes, JIT warmup) is exactly
+    // when frame rate is lowest. On a slow-enough frame rate, the old 15s
+    // wall-clock cap could fire before enough ticks had run for `alpha()` to
+    // actually reach `d3AlphaMin`, so `onEngineStop` — and the camera-fit
+    // measurement `runFit` takes from it — locked in early, against a layout
+    // still under repulsion and cluster forces (`galaxyForce`, `geoAffinity`
+    // — both added well after this 15s default was ever tuned) that had not
+    // finished moving. Raising the ceiling does not slow down a machine that
+    // already converges well inside it — this only changes the runs that
+    // were hitting the cap. Tracking's own window (`REFIT_WINDOW_SECONDS`
+    // below) already extends past 12s whenever `settledOnce` hasn't fired
+    // yet, so this cap is the one number that actually governs how long a
+    // slow load gets before being forced to stop. Not yet re-measured under
+    // real repeated cold-load reloads on Thomas's own machine — flagged for
+    // him to confirm live, the same "does this actually fix it" check the
+    // 2026-08-19 bloom-slider theory got and never passed.
+    fg.cooldownTime(45000)
 
     // d3Force() is typed loosely upstream, hence the casts.
     //

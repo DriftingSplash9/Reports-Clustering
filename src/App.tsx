@@ -1257,6 +1257,19 @@ export default function App() {
         // line runs within a few pixels — a 1.6px cylinder is not a target
         // anyone hits by raycast (see registerEdgePicker in InfluenceGraph).
         // Only a genuinely empty click clears the selections.
+        //
+        // No longer clears `selectedGroupId` here (2026-08-21 — Thomas: "I
+        // pick a region from GroupsPanel, click the graph to get the menu
+        // out of the way, and it goes back to the reset view"). `GroupsPanel`
+        // closes itself on any outside `pointerdown` (its own window
+        // listener), and that same physical click almost always lands on
+        // the canvas underneath — so an isolate built one click ago was
+        // being destroyed by the very click meant only to dismiss the menu.
+        // A group isolate is a deliberate, named state now (same standing as
+        // `view.isolateFocus`): it exits on the panel's own "Clear" button,
+        // re-picking the same group (the existing toggle-off), or Escape's
+        // priority stack (still last in line, see that effect's comment) —
+        // never as a side effect of clicking around the scene.
         onPointerMissed={(e) => {
           const key = edgePicker.current?.(e.clientX, e.clientY) ?? null
           if (key) {
@@ -1270,7 +1283,6 @@ export default function App() {
             return
           }
           setSelectedId(null)
-          setSelectedGroupId(null)
           setSelectedEdgeKey(null)
         }}
       >
@@ -1322,7 +1334,19 @@ export default function App() {
           levelColours={levelColours}
           onHover={setHovered}
           onSelect={(id) => {
-            setSelectedGroupId(null)
+            // Same fix as `onPointerMissed` just above, same day: a node
+            // click used to nuke an active group isolate unconditionally,
+            // even though `visible` already restricts clickable nodes to
+            // `groupFocus` while one is active — so in practice every node
+            // reachable by this click already lives inside the isolate, and
+            // there was never a real "selected something outside it" case
+            // to guard against. Mirrors `handleChoose`'s search-panel fix
+            // from the same review round: selection and group isolate are
+            // allowed to coexist, and only an id genuinely outside the
+            // current group clears it — which a raycast hit off the visible
+            // set cannot produce today, but the check costs nothing and
+            // keeps this correct if that ever changes.
+            if (groupFocus && !groupFocus.nodes.has(id)) setSelectedGroupId(null)
             setSelectedId(id)
           }}
           onSelectEdge={(key) =>
