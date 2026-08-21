@@ -183,7 +183,13 @@ export function HelpCard({ onClose }: { onClose: () => void }) {
   // traps you is worse than no modal.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        // Closing the card is the press's one action — the flag tells
+        // App.tsx's Escape priority stack not to ALSO clear the selection
+        // or isolate (2026-08-21, full-review item 3).
+        e.preventDefault()
+        onClose()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)

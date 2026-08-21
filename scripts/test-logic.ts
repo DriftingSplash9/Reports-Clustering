@@ -374,8 +374,8 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   const caReal = { id: 'r1', country: 'CA', publisher: 'Statistics Canada' }
   const deReal = { id: 'r2', country: 'DE', publisher: 'Destatis' }
   const imfReal = { id: 'r3', country: 'INT', publisher: 'International Monetary Fund' }
-  const naOrb = { id: 'corb:CA', country: 'CA', publisher: '3 folded reports', members: [{ publisher: 'Statistics Canada' }] }
-  const imfOrb = { id: 'corb:INT', country: 'INT', publisher: '2 folded reports', members: [{ publisher: 'World Bank' }, { publisher: 'International Monetary Fund' }] }
+  const naOrb = { id: 'corb:CA', country: 'CA', publisher: '3 folded reports', members: [{ publisher: 'Statistics Canada', country: 'CA' }] }
+  const imfOrb = { id: 'corb:INT', country: 'INT', publisher: '2 folded reports', members: [{ publisher: 'World Bank', country: 'INT' }, { publisher: 'International Monetary Fund', country: 'INT' }] }
 
   const naContinent = REGION_GROUPS.find((g) => g.id === 'continent:North America')!
   ok(matchesRegionGroup(caReal, naContinent) && !matchesRegionGroup(deReal, naContinent), 'matchesRegionGroup: continent kind matches by continentOf(country)')
@@ -394,6 +394,40 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
 
   const ids = reportIdsForGroup([caReal, deReal, imfReal, naOrb, imfOrb], naContinent)
   ok(ids.has('r1') && ids.has('corb:CA') && !ids.has('r2'), 'reportIdsForGroup: seed set is exactly the matching node ids')
+
+  // PINNED, 2026-08-21 — the folded-tier black-scene bug. A FAMILY orb's own
+  // `country` is only the MODAL member (buildOrbNode counts the mode), so any
+  // kind that read it alone decided membership for the whole orb by whichever
+  // country happened to dominate inside. `orb:ASIA` here models the live
+  // repro: mode RU, one folded JP member. Before the fix, isolating Japan at
+  // the Global tier seeded an EMPTY set (JP is nobody's mode) → black scene;
+  // and BRICS claimed or excluded the whole orb by the mode alone. All four
+  // kinds must reach into `.members` the way `publisher` always did.
+  const asiaOrb = {
+    id: 'orb:ASIA', country: 'RU', publisher: '3 folded reports',
+    members: [
+      { publisher: 'Rosstat', country: 'RU' },
+      { publisher: 'Rosstat', country: 'RU' },
+      { publisher: 'Statistics Bureau of Japan', country: 'JP' },
+    ],
+  }
+  const jpCountry = COUNTRY_GROUPS.find((g) => g.country === 'JP')!
+  ok(matchesRegionGroup(asiaOrb, jpCountry), 'matchesRegionGroup: country kind finds a country FOLDED INSIDE a family orb whose modal country differs (the 2026-08-21 black-scene bug)')
+  ok(!matchesRegionGroup(asiaOrb, caCountry), 'matchesRegionGroup: country kind still rejects an orb containing no member of that country')
+  const bricsBloc = REGION_GROUPS.find((g) => g.id === 'bloc:BRICS')!
+  const ilModeOrb = {
+    id: 'orb:ASIA2', country: 'IL', publisher: '2 folded reports',
+    members: [
+      { publisher: 'CBS Israel', country: 'IL' },
+      { publisher: 'Rosstat', country: 'RU' },
+    ],
+  }
+  ok(matchesRegionGroup(ilModeOrb, bricsBloc), 'matchesRegionGroup: bloc kind sees a BRICS member folded inside an orb whose MODE is a non-BRICS country — the mode no longer decides for the whole orb')
+  const asiaContinent = REGION_GROUPS.find((g) => g.id === 'continent:Asia')!
+  const meContinent = REGION_GROUPS.find((g) => g.id === 'continent:Middle East')!
+  ok(matchesRegionGroup(ilModeOrb, asiaContinent) && matchesRegionGroup(ilModeOrb, meContinent), 'matchesRegionGroup: continent kind matches an orb through EVERY member country, not just the mode')
+  // A real report (no members) still stands only for its own country.
+  ok(!matchesRegionGroup(deReal, jpCountry), 'matchesRegionGroup: a real report with no members is unaffected by the members-aware check')
 }
 
 // ------------------------------------------------------------------- graph --

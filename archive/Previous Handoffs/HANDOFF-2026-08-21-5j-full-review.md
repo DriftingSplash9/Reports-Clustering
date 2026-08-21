@@ -5,8 +5,7 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5l — review follow-up round 2: corpus out of
-the JS bundle, startup warnings batched)**. Yesterday (2026-08-20) was a full day
+Last written: **2026-08-21 (item 5j — full external review, no code changed)**. Yesterday (2026-08-20) was a full day
 of work ending in item 5h, a HUD layout pass — full detail archived at
 `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md` (itself
 superseding the chain of earlier archived handoffs listed at its own top).
@@ -100,188 +99,7 @@ to re-derive them:
   year's anchor (loop needs `startYear − 1`); `strength` is unvalidated (NaN door,
   dormant); `COUNTRY_LABEL` has no validator rule and its absence now hides countries
   from the directory entirely.
-- Project memory: was still down during 5j — see the 5k bullet below; it came BACK the same day.
-
-**This update (5k), 2026-08-21.** Thomas: *"lets work through the issues with this
-project"* — the first build round off the review's §6 list, items 1–3 as one round
-(his pick from four offered scopes). All three shipped, all three re-verified against
-the review's own live repro recipes in a fresh headless-Chromium harness (10/10
-checks), plus `npm run validate` (**95 logic checks now, up from 90**), `tsc
---noEmit` and `vite build` all clean on the full corpus.
-
-- **§6 item 1 — the black-scene isolate bug, FIXED.** `matchesRegionGroup`
-  (`src/lib/regions.ts`): all four group kinds now reach into an orb's `.members`
-  the way `publisher` always did, via a new `countriesOf()` helper — an orb's own
-  `country` is only the MODAL member, and reading it as membership was the whole
-  bug (Japan folded inside `orb:ASIA` seeded an empty isolate → black scene;
-  `orb:ASIA` counted into/out of BRICS by whichever country dominated it).
-  `GroupMatchable.members` widened to carry `country`. Five pinned tests added to
-  `test-logic.ts` (the exact orb-with-JP-inside-RU-mode repro, the bloc mode-vs-
-  member case, continent through every member, real-report unaffected). Verified
-  live: Regions & Countries → Japan at the Global tier now reads **"16 shown"**
-  (was "0 shown", black). Semantics note: at a folded tier the isolate seeds the
-  orb standing in for the country — coarse but honest at that disclosure level;
-  auto-opening the picked country instead was considered and left for Thomas to
-  call. Also fixed the STALE COMMENT that caused this (`hierarchy.ts`'s "only
-  affects the flag and the rim shade" note — now a dated scar warning that orb
-  `country` is display-grade, not membership).
-- **§6 item 2 — the bottom dock, BUILT.** One fixed full-width grid
-  (`bottomDock` in `App.tsx`, `1fr / minmax(0,auto) / 1fr / 182px`) now owns the
-  whole bottom edge: tier bar left, Compare + GroupsPanel + Legend dead-centre
-  (flex-wrap under squeeze), Unlinked shelf right, empty fourth track reserving
-  the View panel's column (shelf's right edge stays exactly 214 from the viewport
-  edge). All five bottom panels lost their `position: fixed` coordinates and
-  became dock children (`Compare.tsx`/`Legend.tsx`/`GroupsPanel.tsx` wraps +
-  `tierBarWrap`/`isolatedShelfWrap`); the dock is `pointerEvents: 'none'` with
-  per-panel re-enable so the strip between panels stays drag-through. Verified
-  live at 1280×720: the Compare pill CLICKS (was unclickable under the tier
-  bar), expanded Legend [532..800] vs shelf [822..1054] — no touch (was fully
-  covered). One measured lesson mid-build: the first cut reserved the View
-  column with `marginRight: 194` on the shelf's cell and the shelf overflowed
-  its own track back under the Legend — margins size the ITEM, not the track;
-  the empty fixed track is what makes the guarantee real. Rode along: the View
-  panel `maxHeight` fix (`ViewControls.tsx`, anchored `HUD_TOP` +
-  `VIEW_PANEL_BOTTOM_CLEARANCE` — same class as 5i's Reports fix, panel now
-  bottoms at 692 on a 720 viewport with its own scrollbar), and a DEV-only
-  fixed-panel overlap tripwire (`App.tsx`, warns on intersecting fixed panels
-  every 4s in dev, skips the dock/dialogs/full-screen overlays — §7's trap as
-  code instead of prose).
-- **§6 item 3 — Escape stack, "/" guard, search-choose state, FIXED.**
-  (a) Escape: every panel's own window-level handler now marks a close consumed
-  (`e.preventDefault()` — GroupsPanel, Legend, MenuBar, HelpCard, Onboarding;
-  the search box stops propagation outright, both branches), and App's handler
-  defers to end-of-dispatch (`setTimeout 0` — listener order on window depends
-  on mount order, so the flag is only trustworthy after everyone ran) and then
-  clears ONE level, topmost first: edge card → node selection → group isolate.
-  Verified live: UAE isolated + Legend open, Escape closes the Legend and the
-  isolate SURVIVES; a second Escape clears it. (b) "/" now ignores the press
-  whenever focus is in ANY input/textarea/select/contentEditable
-  (`SearchPanel.tsx`) — typing "US/EU" into Views ▸ "Name this view" keeps all
-  five characters and focus, verified live. (c) Search-choose no longer clears
-  a group isolate unconditionally (`handleChoose`, App.tsx): a result INSIDE
-  the isolate keeps it (selection+isolate now deliberately coexist on this one
-  path; `visible` unaffected since `groupFocus` still wins); a result the
-  isolate hides carries an **"outside isolate" tag** in the results list
-  (`searchOutsideIsolate` prop) and choosing it is an informed exit — it still
-  clears the isolate, because keeping it would trip the off-screen-selection
-  guard and read as "search is broken". Verified live both ways (tagged rows
-  present; inside-choose keeps "16 shown"). CalendarPanel shares `handleChoose`
-  and inherits the inside-case behaviour.
-- **Not done from §6, deliberately:** items 4–9 (corpus out of the bundle,
-  warnings batch, shelf redesign, colour pass, validator rules, search pass,
-  calendar year fix, PNG guard, zoom freeze) — next rounds, in the review's
-  order. The dock also does NOT change `PanelShell` (left/right edges) or the
-  top row (search bar/calendar tab still hand-anchored).
-- Verification recipe used (rerunnable): build + `vite preview` + Playwright on
-  the preinstalled Chromium with the §2.7 SwiftShader flags; the harness waits
-  for the loading curtain to DETACH before clicking (its opacity blocks
-  actionability — first harness run failed on exactly this), seeds
-  `rig.panels.v1`/onboarding-dismissed via `addInitScript`, and asserts via the
-  tier-bar readout text plus `getBoundingClientRect` sweeps.
-- **PROJECT MEMORY IS BACK UP, and the parked backlog is cleared.** Writes and
-  reads both worked throughout this session. Everything
-  `notes/memory-pending-2026-08-20.md` was holding got written to real memory
-  files (phase4-complete-and-render-bugs, layout-path-dependence-fixed,
-  grok-archive-minted, galaxy-and-isolate, regions-and-groups-panel, plus this
-  round's own entry), the WRONG `camera-fit-density-risk-2026-08-19` entry was
-  finally corrected in place (5.675× not 2.8×; no post-mint halo possible),
-  and `MEMORY.md` was re-indexed. The pending file itself is processed and
-  moved to `_to_delete/` (logged in its README) — §3's "memory is DOWN"
-  paragraph is now historical.
-
-**This update (5l), 2026-08-21.** Round 2 of the review's §6 list, picking up
-item 4 where 5k's "not done, deliberately" note left off — the review's own
-framing was "the single highest-leverage performance change available":
-`src/data/research/*.json` (200+ files, ~8.2MB) was being pulled into the
-browser JS bundle via `slices.generated.ts`'s 200+ ES `import` statements,
-making it ~95% of an 8,612 kB production bundle; and `App.tsx`'s startup
-validation was firing ~2,665 individual `console.warn` calls on every load.
-Both fixed, both verified live, not just built.
-
-- **§6 item 4a — corpus out of the bundle, DONE.** The corpus is now a
-  runtime-fetched static asset, not compiled JS. New split:
-  - `src/data/assembleCorpus.ts` — the pure merge logic (seed-wins report
-    dedup, last-wins edge dedup, dangling/orphan handling, relations
-    handling) pulled out of the old closure-based `assemble()` in
-    `src/data/index.ts` into a standalone `assembleCorpus(seedReports,
-    seedDependencies, slices)` function, so both loaders below share
-    identical rules. All the original reasoning comments (the `fed-h15`
-    orphan-kept example, the V0.8 last-wins rationale) carried over verbatim.
-  - `src/data/index.ts` — now Node-only, used solely by
-    `scripts/validate-data.ts`. Reads `public/corpus-data.json` with
-    `node:fs` at module scope and calls `assembleCorpus`. Carries a loud
-    top-of-file warning not to import it from browser code.
-  - `src/data/browserCorpus.ts` — new. `loadCorpusData()` fetches
-    `/corpus-data.json` over HTTP, parses it, and calls the same
-    `assembleCorpus`. Caches the in-flight promise at module scope (React
-    StrictMode double-invokes effects in dev; without the cache that meant
-    two fetches).
-  - `scripts/gen-slices.ts` — rewritten. Used to emit a 200+-import TS file
-    (`slices.generated.ts`); now reads and JSON-parses each research file
-    itself and writes one compact JSON array to `public/corpus-data.json`
-    (Vite's `public/` copies verbatim into `dist/`, served by both `vite
-    dev` and `vite preview`). Same up-to-date-skip behaviour as before.
-  - `src/data/slices.generated.ts` — **tombstoned, not deleted** (no
-    `device_bash` this session, so no `mv` to `_to_delete/` was possible).
-    Content replaced with a comment explaining it's retired 2026-08-21 and
-    safe to delete; ends in `export {}` so it stays valid, unused TS.
-    **Flagged for a future session with shell access to `mv` into
-    `_to_delete/`.**
-  - `.gitignore` — added `public/corpus-data.json` (generated, same
-    not-tracked status `slices.generated.ts` had).
-  - `App.tsx` — `reports`/`dependencies`/`loadIssues`/`droppedNotes` now come
-    from `useState<AssembledCorpus | null>` populated by a `useEffect` calling
-    `loadCorpusData()`, with an `EMPTY_CORPUS` sentinel used while the fetch
-    is in flight (same shape the app's own Isolate feature already exercises
-    for empty graphs — confirmed safe by reading `buildGraph`/`pagerank`/
-    `disclosureByReport`, none of which throw on empty arrays). Both
-    `useMemo`s that used to depend on `[]` now depend on `[corpus]`.
-  - `LoadingCurtain.tsx` — new `error` prop. A fetch failure now pins the
-    curtain permanently (never auto-lifts via the safety timeout) and shows
-    "Couldn't load the report corpus" + the error + a reload prompt, instead
-    of silently revealing a permanently-empty scene with no explanation.
-  - **Verified live, full sandbox build:** `npm run gen` → `tsc --noEmit`
-    clean → `npm run validate` → **95/95 logic checks, identical 3091
-    reports / 2070 dependencies** to the pre-change corpus (same numbers two
-    independent ways: the CLI validator and the live browser console) →
-    `npm run build`: **bundle dropped from 8,612 kB to 1,491.5 kB, a ~82.7%
-    reduction** → `vite preview` + Playwright on the preinstalled Chromium
-    (SwiftShader flags): tier bar reads "396 of 3091 reports shown", **0
-    page errors**. A separate simulated-fetch-failure run confirmed the new
-    error UI renders without crashing.
-- **§6 item 4b — startup warnings batched, DONE.** `App.tsx` used to
-  `console.warn` once per validation issue (~2,665 calls on a full load,
-  mostly two repeating shapes: ~1,378 "proposed:" domain warnings and
-  ~1,285 "no edges in either direction" warnings). New `logGroupedIssues()`
-  buckets issues by message with report-id-shaped tokens and quoted values
-  normalized out (`\b[\p{L}][\p{L}0-9]*(?:-[\p{L}0-9]+)+\b` — Unicode-aware,
-  needed for accented ids like `mx-cdmx-evalúa`), then logs one line per
-  bucket with a count and up to 3 samples; a bucket with exactly one message
-  still logs it plain, nothing is dropped. Iterated twice against live
-  counts, not assumed: a first narrower regex only caught the
-  prefix-shaped warnings (1287 lines left); the id-anywhere-in-message
-  version got it to 3 lines total (2 real grouped buckets + one pre-existing
-  unrelated `THREE.Clock` deprecation notice). **Verified live: console
-  warnings went from ~2,665 to 2 grouped `[graph]` lines**, counts matching
-  the CLI validator's independently-computed totals exactly (1,378 and
-  1,285). A favicon 404 seen in one run was confirmed unrelated — a repeat
-  run waiting for `networkidle` showed zero 4xx+ responses, i.e. a timing
-  artifact, not a regression.
-- **Not done from §6, deliberately:** items 5–9 (unlinked shelf redesign,
-  the tier-1 colour pass, validator rules for `COUNTRY_LABEL`/`strength`/the
-  namespace prefixes, search accent-folding + calendar year-boundary fix,
-  PNG re-entry guard + zoom-baseline freeze) — next rounds, in the review's
-  order. No new pinned `test-logic.ts` regression test was added specifically
-  for `assembleCorpus()`; the identical-corpus-count cross-check (95/95
-  checks, 3091/2070 unchanged) was relied on instead — worth a follow-up if
-  `assembleCorpus.ts` gets touched again.
-- Verification recipe used (rerunnable, same shape as 5k's): stage
-  `src/`, `scripts/`, `package.json`, `tsconfig.json`, `index.html`,
-  `vite.config.ts`, `START-HERE.md`, plus the full `src/data/research/`
-  corpus (267 files, batched across six `device_stage_files` calls — a
-  single call can't move all of it), into a Linux sandbox; `npm install`,
-  `npm run gen`, `npx tsc --noEmit`, `npm run validate`, `npm run build`,
-  then `vite preview` + Playwright with the §2.7 SwiftShader flags.
+- Project memory: still DOWN — reads refused twice this session, same message as §3.
 
 ---
 
@@ -369,21 +187,13 @@ break:
 2. **If no document says a dependency exists, it does not go in the graph.**
 3. **A pointer is not a source.** WebFetch can fabricate content for a dead
    URL; raw-verify before trusting a quote.
-4. **`npm run validate` before and after any data change** (95 checks as of
-   item 5k). It cannot run through the device bridge (`node_modules` carries
-   the Windows esbuild). Working recipe: tar `src/ scripts/ package.json
-   tsconfig.json index.html vite.config.ts START-HERE.md` on-device into
-   `_to_delete/`, stage the tarball, extract + `npm install` in a Linux
-   workspace, run there. **`START-HERE.md` is now required for the build** —
-   Help imports it. **As of item 5l, `npm run gen` must also produce
-   `public/corpus-data.json` before `tsc`/scripts that import `src/data`
-   will resolve** — same requirement `slices.generated.ts` used to carry.
-5. **`public/corpus-data.json` is generated (by `scripts/gen-slices.ts`).
-   Never hand-edit it.** As of item 5l this replaces
-   `src/data/slices.generated.ts` (tombstoned, not deleted — flagged for
-   `_to_delete/` — as the browser-bundle mechanism; see the item 5l writeup
-   at the top of this file for the full `assembleCorpus.ts` /
-   `src/data/index.ts` / `src/data/browserCorpus.ts` split).
+4. **`npm run validate` before and after any data change** (44 checks). It
+   cannot run through the device bridge (`node_modules` carries the Windows
+   esbuild). Working recipe: tar `src/ scripts/ package.json tsconfig.json
+   index.html vite.config.ts START-HERE.md` on-device into `_to_delete/`,
+   stage the tarball, extract + `npm install` in a Linux workspace, run there.
+   **`START-HERE.md` is now required for the build** — Help imports it.
+5. **`src/data/slices.generated.ts` is generated. Never hand-edit it.**
 6. Agents cannot delete device files — `mv` into `_to_delete/`, log the reason
    in `_to_delete/README.md`, tell Thomas.
 7. **Headless verification works and is expected**: build, `vite preview`,
@@ -434,15 +244,24 @@ edgeless (58%)**. Mint is decided YES but deferred. Also in `consolidated/`:
 `_EDGES-jp-kr-tw-2026-08-19.json`, an additive edge file from a Japan/Korea/
 Taiwan research round. It is DATA, not bookkeeping; merge per its own `_rule`.
 
-**Project memory is UP again as of 2026-08-21 (item 5k), and the backlog is
-cleared.** It had been down from mid-2026-08-19 through all of 2026-08-20
-("not available in this session"). During the 5k session both read and write
-worked throughout; the parked file `notes/memory-pending-2026-08-20.md` was
-fully processed into real memory entries, the wrong
-`camera-fit-density-risk-2026-08-19` entry was corrected in place, and the
-pending file was moved to `_to_delete/`. If memory refuses again, go back to
-the parking pattern: write the owed entry into `notes/memory-pending-<date>.md`
-and say so here.
+**Project memory is DOWN again** — `project_memory_write` accepted writes early
+on 2026-08-19 and refused them for the rest of that day and all of 2026-08-20
+("not available in this session"). **Re-confirmed still down twice more,
+later on 2026-08-20**: `project_memory_read` on a specific file returned
+"Project memory is not available in this session" both times, once right
+before the path-dependence fix and once right after (the index shown at
+session start is a cached snapshot, not a live read — don't mistake it for
+memory being back). Two consequences:
+- The memory entry this session owes is parked at
+  **`notes/memory-pending-2026-08-20.md`**, which now also carries a second
+  and third addendum (the flicker-check result, and the path-dependence fix
+  + its verified measurements) — a session with working memory should paste
+  all of it in and delete the file.
+- ⚠️ The existing memory entry `camera-fit-density-risk-2026-08-19` is **WRONG**
+  and could not be corrected: it says the camera sits at ~2.8 × p95 (it is
+  **5.675 ×**) and predicts a halo of edgeless nodes after the mint
+  (impossible — the shelf excludes them from the fit).
+  `notes/camera-fit-measurement-2026-08-19.md` supersedes it.
 
 ---
 
@@ -453,22 +272,19 @@ Assume all of this exists and works. Each carries a dated comment at the site.
 - **Lenses.** `src/lib/modes.ts`: STANDARD / GROUP_COMPARISON / WORLD_OVERVIEW.
   A recolour pass via ref + mutation effect; **never a `forceGraph` memo dep**.
 - **The constellation look.** Near-black background (`#010204`), flat crisp
-  panels, rotating masthead gradient. **The whole bottom edge is one dock
-  now (2026-08-21, item 5k — `bottomDock` in `App.tsx`)**: tier bar in the
-  left cell (same bottom-left spot 5h gave it), Compare + `GroupsPanel`
-  ("Regions & Countries") + Legend as the centre cell's pills (same order 5h
-  arranged, minus the hand-tuned `calc(50% ± 140px)` anchors — the grid
-  centres them now), unlinked shelf in the right cell (right edge still
-  exactly 214 in from the viewport edge, via the dock's empty fourth track),
-  and none of the five carries its own `position: fixed` coordinates any
-  more. The old `ChipBar` filter drop-up that owned bottom-centre is still
-  deleted (5f). The search bar sits left-of-centre at the top
-  (`SEARCH_BAR_LEFT`, item 5h, not dead centre any more), calendar tab to
-  its right — the top row is NOT in the dock. The Reports panel's own
+  panels, rotating masthead gradient, tier bar bottom-left ALONE (2026-08-20,
+  item 5h — Compare moved off this corner, Thomas confirmed leaving the tier
+  bar itself in place), unlinked shelf bottom-right ALONE (Legend moved off
+  it the same update), `GroupsPanel` ("Regions & Countries") drop-up
+  bottom-centre (2026-08-20, item 5f — the old `ChipBar` filter drop-up that
+  used to own this slot is deleted), now flanked by Compare on its LEFT and
+  Legend on its RIGHT (item 5h, both anchored `calc(50% ± 140px)` off centre
+  — see the `wrap` comments on `Compare.tsx`/`Legend.tsx`). The search bar
+  sits left-of-centre at the top (`SEARCH_BAR_LEFT`, item 5h, not dead
+  centre any more), calendar tab to its right. The Reports panel's own
   scrollable content stops a full `REPORTS_PANEL_BOTTOM_CLEARANCE` (120px)
   above the tier bar rather than running underneath it (2026-08-21, item
-  5i — `App.tsx`'s `panel` style); the View panel got the same treatment in
-  5k (`ViewControls.tsx`, `VIEW_PANEL_BOTTOM_CLEARANCE`).
+  5i — `App.tsx`'s `panel` style; see this update's writeup and §7).
 - **Lighting.** Two directional lights + ambient 0.28, emissive floor 0.12,
   bloom 0.14/0.26. **Closed** — Thomas, 2026-08-19: *"the lighting is okay"*.
 - **Blueprint is DELETED.** No view setting is a memo dep any more. Rims
@@ -1074,23 +890,17 @@ Sorted by owner, ordered by priority within each.
     Chrome tab (bounding-rect measurement + a scrolled-to-bottom screenshot),
     not just built.
 
-19. **Review follow-ups, logged 2026-08-21 (item 5j) — items 1–3 DONE in item
-    5k, item 4 DONE in item 5l, same week.** The full list with reasoning is
-    `notes/full-review-2026-08-21.md` §6; the order there is deliberate:
-    ~~(1) orb-aware `matchesRegionGroup` + a folded-tier pinned test~~ **DONE
-    5k**; ~~(2) a bottom-dock container replacing the hand-placed bottom-edge
-    coordinates + `maxHeight` on the View panel~~ **DONE 5k**; ~~(3) Escape
-    priority stack, "/" input guard, search-choose preserving isolates~~
-    **DONE 5k**; ~~(4) corpus out of the JS bundle + batched startup
-    warnings~~ **DONE 5l** — see the item 5l writeup at the top of this file.
-    Still open, in order: (5) unlinked shelf → summary + list (before the 722
-    edgeless candidates land); (6) the tier-1 colour pass (hollow opacity
-    ~0.3, damp floor ~70%, lens greyed or orbs recoloured); (7) validator
-    rules for `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->`
-    namespaces; (8) search accent-folding/full-corpus pass + the calendar
-    year-boundary fix; (9) PNG re-entry guard + zoom-baseline freeze when
-    pulses are next
-    touched.
+19. **Review follow-ups, logged 2026-08-21 (item 5j), not built.** The full list with
+    reasoning is `notes/full-review-2026-08-21.md` §6; the order there is deliberate:
+    (1) orb-aware `matchesRegionGroup` + a folded-tier pinned test; (2) a bottom-dock
+    flex container replacing the hand-placed bottom-edge coordinates (kills the Compare
+    and Legend collisions structurally) + `maxHeight` on the View panel; (3) Escape
+    priority stack, "/" input guard, search-choose preserving isolates; (4) corpus out
+    of the JS bundle + batched startup warnings; (5) unlinked shelf → summary + list
+    (before the 722 edgeless candidates land); (6) the tier-1 colour pass (hollow
+    opacity ~0.3, damp floor ~70%, lens greyed or orbs recoloured); (7) validator rules
+    for `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->` namespaces; (8) search
+    accent-folding/full-corpus pass + the calendar year-boundary fix.
 
 ### Offered — picked up this update (5g)
 
@@ -1180,44 +990,45 @@ cross-project diary — not the project's, leave it alone).
   (items 14/15), **`PngExport.tsx`** (item 12) — the chrome. `ChipBar`, which
   used to be in this list, was deleted 2026-08-20 (item 5f/5g) — see the
   tombstone comment in `App.tsx`.
-- Data: `src/data/research/*.json` slices are compiled by
-  `scripts/gen-slices.ts` into generated `public/corpus-data.json` (as of
-  item 5l, replacing the tombstoned `slices.generated.ts`); browser code
-  loads it via `src/data/browserCorpus.ts`'s `loadCorpusData()` (fetch +
-  cache), Node scripts via `src/data/index.ts` (`node:fs`, browser-unsafe —
-  do not import from browser code); both call the shared
-  `src/data/assembleCorpus.ts`. `graph.ts` builds + validates (95 checks in
-  `scripts/validate-data.ts` + `test-logic.ts`, up from 90 as of item 5k).
+- Data: `src/data/research/*.json` slices auto-load; `slices.generated.ts` is
+  generated; `graph.ts` builds + validates (44 checks in
+  `scripts/validate-data.ts` + `test-logic.ts`, 90 as of item 5g).
 
 ---
 
 ## 7. Known traps — the ones that will actually bite
 
-- **`PanelShell` supports exactly one panel per screen edge; the BOTTOM edge
-  is now the dock's, not a set of hand-anchored corners (2026-08-21, item
-  5k).** Left/Reports and right/View are the two `PanelShell` edges. The
-  entire bottom edge — tier bar, Compare, `GroupsPanel`, Legend,
-  `IsolatedShelf` — lives inside `bottomDock` (`App.tsx`), a fixed
-  full-width grid whose cells cannot overlap; none of those five carries its
-  own coordinates any more. **The next bottom panel is a one-line addition
-  to a dock cell, not a coordinate hunt.** Still hand-anchored and still
-  spoken for: top (`MenuBar`), top left-of-centre (`SearchPanel`,
-  `SEARCH_BAR_LEFT`), the calendar tab to its right — a new TOP-row element
-  still needs the old check-every-neighbour discipline (next trap), or the
-  top row needs its own dock.
-- **A free-floating panel's coordinates are not reserved anywhere — check
-  every existing `position: fixed` panel by eye before picking new ones.**
-  This trap collected FOUR real casualties before the bottom dock retired it
-  for the bottom edge (Compare/tier-bar pre-ship 2026-08-20; Reports/tier-bar
-  item 5i; the review's Compare-pill-unclickable and Legend-covers-shelf,
-  both confirmed live at 1280×720 and both structurally killed by the dock in
-  item 5k). It still applies in full to the top row and to anything new that
-  chooses fixed coordinates over a dock cell. Two 5k additions that keep it
-  honest: a DEV-only overlap tripwire in `App.tsx` now console.warns when two
-  fixed panels intersect (prose → runtime check), and one measured lesson for
-  whoever extends the dock — reserve space with an empty grid TRACK, not a
-  margin on a cell's item; a margin sizes the item, not the track, and the
-  first cut of the dock proved it by putting the shelf back under the Legend.
+- **`PanelShell` supports exactly one panel per screen edge, AND every screen
+  position is now spoken for (2026-08-20, updated after item 5h).** Left/
+  Reports and right/View are the two `PanelShell` edges. Everything else is
+  free-floating, and all of it is now occupied: top (`MenuBar`), top,
+  left-of-centre (`SearchPanel`, moved off dead-centre item 5h —
+  `SEARCH_BAR_LEFT`), top beside it to the right (the calendar tab, flipped
+  sides the same update), bottom-left (the tier bar, ALONE now — Compare
+  moved off this corner item 5h, ALWAYS on regardless — see the next trap),
+  bottom-centre (`GroupsPanel`, moved here 2026-08-20 item 5f/5g), now
+  flanked on both sides — Compare on the LEFT (moved off the tier bar's
+  corner, item 5h) and Legend on the RIGHT (moved off bottom-right, item
+  5h), both anchored `calc(50% ± 140px)` rather than a `PanelShell`-style
+  fixed edge (see `Compare.tsx`/`Legend.tsx`'s own `wrap` comments), and
+  bottom-right (`IsolatedShelf`, ALONE now that Legend has moved off it —
+  its own `right: 214` was never really about Legend, see item 5h's own
+  note, so it was deliberately left as-is rather than reclaiming the space).
+  The next panel this app gets needs either a `PanelShell` stacking/offset
+  parameter, or to share a panel that already exists (the way items 14 and
+  15 share one `Compare` panel rather than each getting their own) — there is
+  no more free corner or edge to claim by picking new fixed coordinates.
+- **A free-floating panel's `bottom`/`left`/`right` coordinates are not
+  reserved anywhere — check every existing `position: fixed` panel by eye
+  before picking new ones.** Caught only right before shipping, 2026-08-20:
+  `Compare` (items 14/15) was first written at `bottom: 20, left: 20`, not
+  realising the tier bar (`tierBarWrap` in `App.tsx`) already sits at those
+  exact coordinates and is never hidden. There is no shared registry of
+  "which corner is whose" the way `PanelShell`'s two edges are enforced by
+  the component itself — every free-floating panel just hard-codes numbers,
+  so the only real check is reading every other panel's `wrap`/positioning
+  const before adding one, which is what this trap is now here to remind
+  whoever adds the next one to actually do.
 - **The same trap also bites a `PanelShell`-hosted panel that's allowed to
   grow tall, not just two free-floating panels planted at the same spot —
   caught the hard way, 2026-08-21 (item 5i).** The Reports `PanelShell`
@@ -1239,10 +1050,7 @@ cross-project diary — not the project's, leave it alone).
   person who touches either panel's sizing:** a content `maxHeight` is a
   coordinate too, and needs the same "check every other fixed-position panel"
   discipline the bullet above already asks for — it just doesn't look like
-  one until you go measure it. (The sibling case this predicted — the View
-  panel clipping 21px at 720-tall windows with no scrollbar — was real, was
-  caught by the 5j review, and got the same fix in 5k:
-  `VIEW_PANEL_BOTTOM_CLEARANCE` in `ViewControls.tsx`.)
+  one until you go measure it.
 - **Isolating a group can show a surprisingly small number with no
   explanation on screen.** "Middle East" isolates to 6 real reports — correct
   (6 of its 7 countries are on the zero-cross-border-edges list in
@@ -1299,16 +1107,6 @@ cross-project diary — not the project's, leave it alone).
 - **Never reintroduce faceted node geometry** while fresnel rims exist.
 - **The IMF DSBB aggregator is useless to a non-JS fetcher**; national NSDP
   mirrors work.
-- **`public/corpus-data.json` must exist before `tsc`, `scripts/validate-
-  data.ts`, or the app itself will resolve real data (item 5l).** It's
-  generated by `npm run gen` (`scripts/gen-slices.ts`) from
-  `src/data/research/*.json` and gitignored — a fresh checkout or a fresh
-  sandbox stage needs `npm run gen` run at least once before anything else.
-  This is the same trap the old `slices.generated.ts` carried (see the
-  now-stale-sounding note on item 17 above); the file changed, the trap
-  didn't. `src/data/index.ts` throws a clear "run `npm run gen`" error if
-  it's missing — `browserCorpus.ts`'s fetch fails with an HTTP error the
-  `LoadingCurtain` now surfaces instead of silently showing an empty scene.
 
 ---
 

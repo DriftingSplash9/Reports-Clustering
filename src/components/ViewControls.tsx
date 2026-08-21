@@ -1,5 +1,6 @@
 import { NEIGHBOURHOOD_HOPS_MAX, ZOOM_MAX, ZOOM_MIN, type ViewSettings } from '../lib/view'
 import type { LensMode } from '../lib/modes'
+import { HUD_TOP } from '../lib/uiTheme'
 
 /**
  * View controls. Deliberately plain — this is instrumentation, not chrome, and
@@ -325,6 +326,12 @@ export default function ViewControls({
 // Positioning moved to PanelShell, which owns the roll-away. Width lives there
 // too — the slide distance is computed from it, so two copies of the number is
 // two chances for the panel to stop short of the edge.
+// How far above the viewport's bottom edge this panel's content must stop.
+// Nothing else lives under the View column (the Unlinked shelf's right edge
+// stays 214px in from the viewport edge — `bottomDockRight` in App.tsx), so
+// this only needs the panel's own 20px bottom margin plus a real gap.
+const VIEW_PANEL_BOTTOM_CLEARANCE = 28
+
 const panel: React.CSSProperties = {
   padding: '14px 16px',
   background: 'var(--panel-bg)',
@@ -333,6 +340,16 @@ const panel: React.CSSProperties = {
   boxShadow: 'var(--panel-shadow)',
   backdropFilter: 'var(--glass-filter)',
   userSelect: 'none',
+  // 2026-08-21, full-review item 2 (same bug class as 5i's Reports-panel
+  // fix, which was never applied to this sibling): the content here
+  // measures ~697px tall, and `PanelShell` starts it at `HUD_TOP` (44px) —
+  // at a 720-tall window the bottom ~21px (the Neighbourhood slider's tail
+  // and notes) sat off-viewport with NO scrollbar, unreachable. Anchor the
+  // height to where the panel actually starts and let the panel's own
+  // scrollbar be the thing that stops the content, same as the Reports
+  // panel. A content `maxHeight` is a coordinate too — §7's trap bullet.
+  maxHeight: `calc(100vh - ${HUD_TOP}px - ${VIEW_PANEL_BOTTOM_CLEARANCE}px)`,
+  overflowY: 'auto',
 }
 
 const heading: React.CSSProperties = {

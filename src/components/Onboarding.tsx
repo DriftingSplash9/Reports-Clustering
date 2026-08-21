@@ -67,7 +67,13 @@ export default function Onboarding({ openRequest = 0 }: { openRequest?: number }
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        // Closing the card is the press's one action — the flag tells
+        // App.tsx's Escape priority stack not to ALSO clear the selection
+        // or isolate (2026-08-21, full-review item 3).
+        e.preventDefault()
+        setOpen(false)
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)

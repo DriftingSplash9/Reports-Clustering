@@ -1,249 +1,55 @@
-import type { Dependency, DroppedNote, Relation, Report } from '../lib/types'
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { reports as seedReports } from './reports'
 import { dependencies as seedDependencies } from './dependencies'
-import { sliceModules } from './slices.generated'
+import { assembleCorpus, type ResearchSlice } from './assembleCorpus'
 
 /**
- * Assembles the graph data from the hand-written seed set plus every research
- * slice.
+ * Node-only entry point for the assembled corpus. `scripts/validate-data.ts`
+ * is the only thing that imports this file — it is never reachable from
+ * `App.tsx` or anything else Vite bundles for the browser.
  *
- * Research arrives incrementally, one JSON file per slice, and slices
- * legitimately reference reports owned by slices that do not exist yet — a
- * municipal budget points at a provincial grant programme researched later.
- * So this loader tolerates dangling edges by dropping them and logging what it
- * dropped, rather than letting one unresolved reference break the render.
+ * **Do not import this from browser code.** It reads `node:fs` at module
+ * scope, which does not exist in a browser and would either fail the Vite
+ * build or (worse) get silently externalised and crash at runtime. The
+ * browser path is `browserCorpus.ts`, which fetches the exact same
+ * `public/corpus-data.json` this file reads off disk, and hands it to the
+ * same `assembleCorpus()` — one assembly rule, read two different ways.
  *
- * To add a slice: drop the JSON in `research/`, import it, add it to `slices`.
+ * 2026-08-21 (§6 item 4): this used to import `slices.generated.ts`, a
+ * codegen'd list of 200+ `import` statements — one per research JSON file —
+ * which is how the whole 8.2MB corpus ended up compiled into the browser's
+ * JS bundle as executable module code. That mechanism is retired (see the
+ * tombstone left in `slices.generated.ts` and the rewritten
+ * `scripts/gen-slices.ts`, which now emits `public/corpus-data.json`
+ * instead of a TS import list). Reading that same JSON file directly off
+ * disk here, rather than re-importing 200+ files as TS modules, is also why
+ * this file no longer needs `import.meta.glob` or any Vite-only API — plain
+ * `node:fs`, which was always the actual constraint driving the codegen
+ * approach in the first place (see the retired comment in `gen-slices.ts`'s
+ * git history / the old `slices.generated.ts` tombstone).
  */
+const here = dirname(fileURLToPath(import.meta.url))
+const corpusPath = join(here, '..', '..', 'public', 'corpus-data.json')
 
-interface ResearchSlice {
-  reports: Report[]
-  dependencies: Dependency[]
-  /**
-   * Dependencies that were looked for and are not here, with the reasoning.
-   * Optional because the seed set has none and a slice may legitimately drop
-   * nothing. Read rather than ignored as of V0.8 — see `DroppedNote`.
-   */
-  _dropped?: DroppedNote[]
-  /**
-   * Documented relationships that are not dependencies — see `Relation`.
-   *
-   * Optional, and most slices will never have any. Deliberately a separate key
-   * from `dependencies` rather than a discriminated member of it, so that no
-   * future refactor can accidentally hand one to `buildGraph`.
-   */
-  relations?: Relation[]
+let rawSlices: ResearchSlice[]
+try {
+  rawSlices = JSON.parse(readFileSync(corpusPath, 'utf8'))
+} catch (err) {
+  throw new Error(
+    `Could not read ${corpusPath} — run \`npm run gen\` first (the ` +
+      `validate/build/dev scripts all do this automatically via their ` +
+      `pre* hooks; this direct script did not). Original error: ${
+        err instanceof Error ? err.message : String(err)
+      }`,
+  )
 }
 
-// The research slices — discovered from the folder by scripts/gen-slices.ts
-// rather than hand-imported one by one (2026-08-12; the old list here was 105
-// import lines and three edits per new slice, and it had silently drifted:
-// ten on-disk files were absent from it, four of them whole researched
-// countries — see UNWIRED in gen-slices.ts). Adding a slice is now: drop the
-// JSON in research/ and run anything (`dev`, `build` and `validate` all
-// regenerate first). The cast is the same cast the old list applied per file;
-// the runtime guards in validate() and scripts/validate-data.ts remain the
-// thing that actually checks the shape — see the cast-not-parsed note in
-// types.ts.
-const slices: ResearchSlice[] = sliceModules as ResearchSlice[]
-
-function assemble() {
-  const reportById = new Map<string, Report>()
-  const duplicateIds: string[] = []
-
-  for (const r of seedReports) reportById.set(r.id, r)
-
-  for (const slice of slices) {
-    for (const r of slice.reports) {
-      if (reportById.has(r.id)) {
-        duplicateIds.push(r.id)
-        continue // First definition wins; the seed set is authoritative.
-      }
-      reportById.set(r.id, r)
-    }
-  }
-
-  const seen = new Set<string>()
-  const dependencies: Dependency[] = []
-  const dangling: string[] = []
-  const duplicateEdges: string[] = []
-
-  // **Later definition wins for edges — the opposite of the rule for reports.**
-  //
-  // Decided in V0.8 after measuring it. The rule used to be first-wins here too,
-  // by analogy with reports, and the analogy was wrong. For reports "first wins,
-  // the seed set is authoritative" is a deliberate choice about curation. For
-  // edges it was an accident with the wrong sign: the seed edges were written
-  // first and are uniformly worse evidenced, so first-wins systematically
-  // discarded the better copy.
-  //
-  // All six duplicates in the corpus resolved the same way — in every one, the
-  // losing research copy carried an `evidence_url` and the winning seed copy did
-  // not, and three of the seed copies therefore should not have existed at all by
-  // this project's own evidence standard. One pair also disagreed on
-  // `relationship_type` (`bea-pce -> bls-cpi`, `uses_data_from` in the seed and
-  // `calculated_from` in research), so the rule was affecting authority and not
-  // only metadata.
-  //
-  // Reversing it is close to free, which is the argument for doing it rather
-  // than deferring it again: it moves 3 of 117 rank positions and leaves the top
-  // four untouched. What it buys is structural — under documented-plus-
-  // evidence_url only, the graph goes from three components to two and from six
-  // orphaned nodes to two.
-  //
-  // Iterating in reverse and keeping the first hit seen is what makes the last
-  // definition win, while `duplicateEdges` still reports the key exactly once
-  // per superseded copy.
-  const allDependencies = [...seedDependencies, ...slices.flatMap((s) => s.dependencies)]
-  for (let i = allDependencies.length - 1; i >= 0; i--) {
-    const d = allDependencies[i]
-    const key = `${d.source_report_id}->${d.target_report_id}`
-    if (seen.has(key)) {
-      duplicateEdges.push(key)
-      continue
-    }
-    if (!reportById.has(d.source_report_id) || !reportById.has(d.target_report_id)) {
-      dangling.push(key)
-      continue
-    }
-    seen.add(key)
-    dependencies.push(d)
-  }
-  // Restore declaration order so the edge list does not depend on how it was
-  // deduplicated. Nothing downstream should care, but a stable order keeps
-  // diffs readable and keeps any future ordering bug from being ours.
-  dependencies.reverse()
-
-  // **Isolated reports are kept, as of V0.12.** They used to be dropped here,
-  // on the reasoning that "a disconnected node carries no information in a
-  // dependency graph and only adds clutter". That was wrong, and the cost of it
-  // was specific: `fed-h15` is one of the most thoroughly researched nodes in
-  // the corpus — every source it names is a reporting form, private transaction
-  // data, unnamed banks or a bare agency — and V2.10 calls it the worked example
-  // the whole disclosure decision was waiting for. It has never once appeared on
-  // screen. Three logs described dropping it as "the evidence standard working".
-  // The evidence standard working would be showing it and showing why it is
-  // alone.
-  //
-  // An isolated node is not an absence of information. It is the statement *this
-  // programme exists and nothing published names its inputs*, which is exactly
-  // the kind of fact this project exists to make visible.
-  //
-  // Note what did NOT change: dangling edges are still dropped, above. An edge
-  // pointing at an id that does not exist is a data error, not an island, and
-  // tolerating those is what lets research slices arrive in any order.
-  //
-  // `isolated` is still reported, because it is a number worth watching — a
-  // sweep that adds fifty islands has added territory in the most literal sense.
-  const connected = new Set<string>()
-  for (const d of dependencies) {
-    connected.add(d.source_report_id)
-    connected.add(d.target_report_id)
-  }
-  const orphans: string[] = []
-  const reports: Report[] = []
-  for (const r of reportById.values()) {
-    reports.push(r)
-    if (!connected.has(r.id)) orphans.push(r.id)
-  }
-
-  // **Relations — non-dependency relationships. See `Relation` in types.ts.**
-  //
-  // Assembled here rather than in `buildGraph` on purpose: `buildGraph` takes
-  // `(reports, dependencies)` and relations are never passed to it, so there is
-  // no path from this array to `authority`, `size_score`, degree counts or
-  // position. That structural isolation is the whole reason this is a separate
-  // list rather than a fifth `RelationshipType`.
-  //
-  // Same dangling rule as dependencies, and for the same reason: a relation
-  // pointing at an id that does not exist is a data error, not an island. It is
-  // a strict rule here and it bites — most of the documented `audits` instances
-  // in the corpus name an auditor that has no node, and they stay in `_dropped`
-  // as `no-node-yet` leads until one is researched.
-  //
-  // No dedup by `source->target`, unlike dependencies. A pair can legitimately
-  // hold both a dependency and a relation — the Niue case is exactly that, where
-  // the Auditor-General's report both *uses data from* and *audits* the same
-  // financial statements — and two relations of different `relation_type` over
-  // the same pair would also be meaningful. Exact duplicates are reported rather
-  // than silently dropped.
-  const relations: Relation[] = []
-  const danglingRelations: string[] = []
-  const duplicateRelations: string[] = []
-  const seenRelations = new Set<string>()
-  for (const slice of slices) {
-    for (const rel of slice.relations ?? []) {
-      const key = `${rel.source_report_id}-[${rel.relation_type}]->${rel.target_report_id}`
-      if (
-        !reportById.has(rel.source_report_id) ||
-        !reportById.has(rel.target_report_id)
-      ) {
-        danglingRelations.push(key)
-        continue
-      }
-      if (seenRelations.has(key)) {
-        duplicateRelations.push(key)
-        continue
-      }
-      seenRelations.add(key)
-      relations.push(rel)
-    }
-  }
-
-  return {
-    reports,
-    dependencies,
-    relations,
-    dangling,
-    duplicateIds,
-    duplicateEdges,
-    orphans,
-    danglingRelations,
-    duplicateRelations,
-  }
-}
-
-const assembled = assemble()
+const assembled = assembleCorpus(seedReports, seedDependencies, rawSlices)
 
 export const reports = assembled.reports
 export const dependencies = assembled.dependencies
-
-/**
- * Documented relationships that are not dependencies — see `Relation`.
- *
- * Exported separately from `dependencies` and never merged with it. Anything
- * that consumes this must not feed it to `buildGraph`; there is nothing to
- * stop you except that the signature does not accept it, which is the point.
- */
 export const relations = assembled.relations
-
-/** What the loader had to discard. Surfaced so it never fails silently. */
-export const loadIssues = {
-  dangling: assembled.dangling,
-  duplicateIds: assembled.duplicateIds,
-  /**
-   * Edges defined more than once. Not an error — the later definition wins and
-   * is normally the better-evidenced one — but worth seeing, because a pair that
-   * disagrees on `relationship_type` is changing authority and not just prose.
-   */
-  duplicateEdges: assembled.duplicateEdges,
-  orphans: assembled.orphans,
-  /**
-   * Relations dropped because one end is not a node. Watch this number: unlike
-   * `dangling`, a non-zero value here is not necessarily a typo. The corpus has
-   * more documented `audits` instances than it has auditor nodes, and this is
-   * where an over-eager conversion of a `_dropped` note would show up.
-   */
-  danglingRelations: assembled.danglingRelations,
-  /** Exact `source-[type]->target` repeats. Reported, not tolerated silently. */
-  duplicateRelations: assembled.duplicateRelations,
-}
-
-/**
- * Every `_dropped` note across every slice, flattened.
- *
- * Exported so the reasoning stops being write-only. Two documents recommended
- * work that was already done because nothing read this block, and one note
- * contradicted a live edge for several sessions without anything noticing.
- */
-export const droppedNotes: DroppedNote[] = slices.flatMap((s) => s._dropped ?? [])
+export const loadIssues = assembled.loadIssues
+export const droppedNotes = assembled.droppedNotes

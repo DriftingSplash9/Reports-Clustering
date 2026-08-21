@@ -32,11 +32,20 @@ export default function SearchPanel({
   graph,
   within,
   onChoose,
+  outsideIsolate,
 }: {
   graph: Graph
   /** The current filter, so search never offers a node that is not drawn. */
   within: NodePredicate
   onChoose: (report: ScoredReport) => void
+  /**
+   * Non-null while a group isolate is active: true for a report that
+   * isolate currently hides. Those rows get an "outside isolate" tag —
+   * choosing one deliberately leaves the isolate (see `handleChoose` in
+   * App.tsx, 2026-08-21), and the tag is what makes that an informed exit
+   * instead of the old silent state-loss.
+   */
+  outsideIsolate?: ((report: ScoredReport) => boolean) | null
 }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -53,13 +62,23 @@ export default function SearchPanel({
   useEffect(() => setActive(0), [query])
 
   // "/" to search is the convention everywhere text is searched, and it costs
-  // the user nothing to discover by accident. Ignored while already typing, or
-  // the key would be swallowed by the field it just opened. Also un-minimizes
-  // — "/" is the keyboard escape hatch out of the collapsed pill, same as a
-  // click on it.
+  // the user nothing to discover by accident. Ignored while already typing —
+  // in ANY text field, not just this panel's own input (2026-08-21,
+  // full-review item 3: typing "US/EU" into the Views ▸ "Name this view"
+  // field lost everything after the slash and teleported focus here; the
+  // GroupsPanel country box and the Compare pickers were bitten the same
+  // way). Also un-minimizes — "/" is the keyboard escape hatch out of the
+  // collapsed pill, same as a click on it.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === '/' && document.activeElement !== inputRef.current) {
+      const el = document.activeElement as HTMLElement | null
+      const typing =
+        !!el &&
+        (el.tagName === 'INPUT' ||
+          el.tagName === 'TEXTAREA' ||
+          el.tagName === 'SELECT' ||
+          el.isContentEditable)
+      if (e.key === '/' && !typing) {
         e.preventDefault()
         setMinimized(false)
         inputRef.current?.focus()
@@ -101,12 +120,16 @@ export default function SearchPanel({
       choose(results[active].report)
     } else if (e.key === 'Escape') {
       // An empty box minimizes — same convention as every other drop-up
-      // panel's Escape-closes behaviour — rather than falling through to the
-      // window handler that clears the selection; a non-empty box just
-      // clears first, same as before, so one key does the obvious thing at
-      // each stage of backing out.
+      // panel's Escape-closes behaviour; a non-empty box just clears first,
+      // so one key does the obvious thing at each stage of backing out.
+      // BOTH branches stop propagation (2026-08-21, full-review item 3):
+      // each is this press's one consumed action, and letting the minimize
+      // branch fall through to the window handler meant Escape on an empty
+      // box also destroyed an active isolate — the exact one-key-two-
+      // destructions bug the Escape priority stack in App.tsx exists to
+      // prevent.
+      e.stopPropagation()
       if (query) {
-        e.stopPropagation()
         setQuery('')
       } else {
         setMinimized(true)
@@ -197,6 +220,14 @@ export default function SearchPanel({
                   {report.publisher} · {report.region}
                 </span>
               </span>
+              {outsideIsolate?.(report) && (
+                <span
+                  title="The active isolate hides this report. Choosing it leaves the isolate."
+                  style={outsideTag}
+                >
+                  outside isolate
+                </span>
+              )}
               <span style={{ color: 'var(--ink-faint)', fontSize: 10.5, marginTop: 2 }}>
                 {report.in_degree} in
               </span>
@@ -314,4 +345,21 @@ const empty: React.CSSProperties = {
   fontSize: 11,
   color: 'var(--ink-dim)',
   lineHeight: 1.5,
+}
+
+// The "outside isolate" row tag — quiet, but present. It answers two
+// questions at once: "why does search list things I cannot see" and "why
+// did choosing this clear my isolate" (see the `outsideIsolate` prop).
+const outsideTag: React.CSSProperties = {
+  flexShrink: 0,
+  alignSelf: 'flex-start',
+  marginTop: 3,
+  padding: '1px 5px',
+  fontSize: 9,
+  letterSpacing: '0.05em',
+  textTransform: 'uppercase',
+  color: 'var(--ink-dim)',
+  border: '1px solid var(--line)',
+  borderRadius: 4,
+  whiteSpace: 'nowrap',
 }

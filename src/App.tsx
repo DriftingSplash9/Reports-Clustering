@@ -84,7 +84,7 @@ import {
   ZOOM_MIN,
   type ViewSettings,
 } from './lib/view'
-import { dependencies, droppedNotes, loadIssues, reports } from './data'
+import { loadCorpusData, type AssembledCorpus } from './data/browserCorpus'
 import {
   buildGraph,
   contains,
@@ -96,6 +96,7 @@ import {
   rolledUpAuthority,
   validate,
   type Disclosure,
+  type ValidationIssue,
 } from './lib/graph'
 import {
   buildFocusIndex,
@@ -145,7 +146,106 @@ import type {
   TerminalReason,
 } from './lib/types'
 
+/**
+ * The empty corpus rendered while `loadCorpusData()` (`browserCorpus.ts`) is
+ * still in flight, or forever if it fails. `buildGraph([], [])` and
+ * `disclosureByReport([], [], [])` are both exercised paths already — an
+ * empty/near-empty graph is exactly what Isolate on a country with no
+ * cross-border edges produces (`notes/cross-border-gaps-2026-08-20.md`), so
+ * this is not a new edge case, just a very early frame of one that already
+ * has to render correctly. `LoadingCurtain` stays up the whole time regardless
+ * (nothing settles with zero nodes... actually it settles instantly, which is
+ * fine — the curtain's own 25s safety timeout is what stops it trapping
+ * anyone if the fetch itself never resolves).
+ */
+const EMPTY_CORPUS: AssembledCorpus = {
+  reports: [],
+  dependencies: [],
+  relations: [],
+  loadIssues: {
+    dangling: [],
+    duplicateIds: [],
+    duplicateEdges: [],
+    orphans: [],
+    danglingRelations: [],
+    duplicateRelations: [],
+  },
+  droppedNotes: [],
+}
+
+/**
+ * Groups `validate()`'s issues into one console line per repeated pattern
+ * instead of one line per issue.
+ *
+ * 2026-08-21 (§6 item 4 of the full review) — the live corpus currently
+ * carries roughly 2,600 `proposed:`-domain warnings (one per un-approved
+ * domain tag; see graph.ts's `proposed:` note), and the old code called
+ * `console.warn` once per issue: thousands of synchronous console writes
+ * before first paint, seconds of it with DevTools open.
+ *
+ * Grouping key: every quoted value blanked out, and every report-id-shaped
+ * token (hyphenated letters/digits, Unicode-aware since report ids include
+ * accented and non-Latin titles — `ae-labour`, `boc-mpr`, `mx-cdmx-evalúa`,
+ * an `a -> b` edge key) replaced with `<id>`, wherever in the
+ * sentence it falls — report ids show up mid-sentence as often as they lead
+ * it ("Report ae-monetary-statistics has no edges in either direction" is
+ * the single largest non-`proposed:` bucket in the live corpus, and its id
+ * is not a prefix). So e.g. every `xx-report: domain "proposed:y" is
+ * proposed…` message collapses into one bucket regardless of which report or
+ * which tag — the *kind* of issue is what deserves a summary line, not each
+ * occurrence of it. Nothing is dropped: every bucket still states its true
+ * count, and a bucket with more than one message logs a few verbatim
+ * samples alongside the count, so the detail survives, just not repeated
+ * once per occurrence.
+ */
+function logGroupedIssues(log: (...args: unknown[]) => void, issues: ValidationIssue[]) {
+  if (!issues.length) return
+  const buckets = new Map<string, string[]>()
+  for (const issue of issues) {
+    const key = issue.message
+      .replace(/"[^"]*"/g, '"…"')
+      .replace(/\b[\p{L}][\p{L}0-9]*(?:-[\p{L}0-9]+)+\b/gu, '<id>')
+    const bucket = buckets.get(key)
+    if (bucket) bucket.push(issue.message)
+    else buckets.set(key, [issue.message])
+  }
+  for (const [key, messages] of buckets) {
+    if (messages.length === 1) {
+      log('[graph]', messages[0])
+    } else {
+      log(`[graph] ${messages.length}× ${key}`, { sample: messages.slice(0, 3) })
+    }
+  }
+}
+
 export default function App() {
+  /**
+   * The assembled corpus, fetched once at startup — see `browserCorpus.ts`
+   * for why this is a fetch rather than a static import as of 2026-08-21.
+   * `null` until the fetch resolves; `EMPTY_CORPUS` (not `null`) is what the
+   * rest of this component actually reads, so every hook below can stay
+   * unconditional (React's rules of hooks) instead of branching on whether
+   * data has arrived yet.
+   */
+  const [corpus, setCorpus] = useState<AssembledCorpus | null>(null)
+  const [corpusError, setCorpusError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    loadCorpusData()
+      .then((data) => {
+        if (!cancelled) setCorpus(data)
+      })
+      .catch((err) => {
+        if (!cancelled) setCorpusError(err instanceof Error ? err.message : String(err))
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const { reports, dependencies, loadIssues, droppedNotes } = corpus ?? EMPTY_CORPUS
+
   const graph = useMemo(() => {
     // Fail loudly in the console rather than silently rendering bad sizes.
     if (loadIssues.dangling.length) {
@@ -164,23 +264,21 @@ export default function App() {
       console.warn('[data] report ids defined twice, first kept:', loadIssues.duplicateIds)
     }
     const issues = validate(reports, dependencies)
-    for (const i of issues) {
-      if (i.severity === 'error') console.error('[graph]', i.message)
-      else console.warn('[graph]', i.message)
-    }
+    logGroupedIssues(console.error, issues.filter((i) => i.severity === 'error'))
+    logGroupedIssues(console.warn, issues.filter((i) => i.severity === 'warning'))
     return buildGraph(reports, dependencies)
-  }, [])
+  }, [corpus])
 
   /**
-   * Disclosure, computed once for the whole corpus rather than per hover.
+   * Disclosure, computed once per corpus rather than per hover.
    *
    * It walks every dropped note in the corpus, which is not something to do on
-   * a pointer move — and the result is a pure function of data that never
-   * changes during a session.
+   * a pointer move — and the result is a pure function of data that only
+   * changes once, when the fetch resolves.
    */
   const disclosure = useMemo(
     () => disclosureByReport(reports, dependencies, droppedNotes),
-    [],
+    [corpus],
   )
 
   /**
@@ -542,17 +640,37 @@ export default function App() {
     }
   }, [selectedEdgeKey, selectedEdgeDeps])
 
+  /**
+   * Escape, with a priority stack (2026-08-21, full-review item 3). One
+   * press used to clear selection + group isolate + edge card
+   * UNCONDITIONALLY, in parallel with whichever open panel's own Escape
+   * listener also fired — so closing an expanded Legend silently destroyed
+   * an active isolate the user had just built. Now every panel's own Escape
+   * handler marks the event consumed with `e.preventDefault()` when it
+   * actually closes something (GroupsPanel, Legend, MenuBar, HelpCard,
+   * Onboarding — the search box stops propagation outright, so its Escapes
+   * never even arrive here), and THIS handler defers its read to the end of
+   * the dispatch (`setTimeout 0`) — listener order on `window` depends on
+   * mount order, which panel toggling reshuffles, so "check the flag after
+   * every listener has run" is the only order-independent way to know
+   * whether anyone consumed the press. Only an unconsumed Escape clears
+   * anything, and then only ONE level, topmost first: the edge-evidence
+   * card, then the node selection, then the group isolate. Backing all the
+   * way out still works — one press per level.
+   */
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        setSelectedId(null)
-        setSelectedGroupId(null)
-        setSelectedEdgeKey(null)
-      }
+      if (e.key !== 'Escape') return
+      window.setTimeout(() => {
+        if (e.defaultPrevented) return
+        if (selectedEdgeKey) setSelectedEdgeKey(null)
+        else if (selectedId) setSelectedId(null)
+        else if (selectedGroupId) setSelectedGroupId(null)
+      }, 0)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [selectedEdgeKey, selectedId, selectedGroupId])
 
   /**
    * Place the hover card at the last known pointer position, on screen.
@@ -672,15 +790,44 @@ export default function App() {
    * so choosing a collapsed report selects and flies to the group it is
    * currently part of instead of silently doing nothing.
    */
+  /**
+   * A search result was chosen (2026-08-21, full-review item 3). This used
+   * to `setSelectedGroupId(null)` unconditionally — with UAE isolated, one
+   * Enter in the find bar silently threw the whole isolate away. Now a
+   * result INSIDE the active isolate keeps the isolate and just selects and
+   * flies (selection and group isolate are allowed to coexist on this path;
+   * `visible` is unaffected because `groupFocus` still wins there, and the
+   * effect that clears an off-screen selection never fires for a node the
+   * isolate shows). A result OUTSIDE the isolate does still clear it — but
+   * that is now an informed exit, not a silent one: `SearchPanel` labels
+   * those rows "outside isolate" (see `searchOutsideIsolate` below), so
+   * choosing one is the user deciding to leave the isolate for that report,
+   * not the app discarding their view as a side effect. Without clearing,
+   * the off-screen-selection guard would immediately null the selection and
+   * the choose would read as "search is broken".
+   */
   const handleChoose = useCallback(
     (report: ScoredReport) => {
       const id = resolveId(drilldown, report, openedCountries)
-      setSelectedGroupId(null)
+      if (groupFocus && !groupFocus.nodes.has(id)) setSelectedGroupId(null)
       setSelectedId(id)
       setFlyTo((f) => ({ id, nonce: (f?.nonce ?? 0) + 1 }))
     },
-    [drilldown, openedCountries],
+    [drilldown, openedCountries, groupFocus],
   )
+
+  /**
+   * True for a report the ACTIVE group isolate currently hides — the search
+   * panel tags these rows so "why did my isolate vanish" (choosing one) and
+   * "why does search list things I cannot see" (before choosing) both have
+   * their answer on the row itself. Null when no isolate is active, so the
+   * panel skips the check entirely in the common case.
+   */
+  const searchOutsideIsolate = useMemo(() => {
+    if (!groupFocus) return null
+    const nodes = groupFocus.nodes
+    return (report: ScoredReport) => !nodes.has(resolveId(drilldown, report, openedCountries))
+  }, [groupFocus, drilldown, openedCountries])
 
   /**
    * A region, bloc or publisher was picked from `GroupsPanel` — see the
@@ -904,6 +1051,52 @@ export default function App() {
     }
   }, [panels])
   const togglePanel = (key: PanelKey) => setPanels((p) => ({ ...p, [key]: !p[key] }))
+
+  /**
+   * DEV-ONLY overlap tripwire (2026-08-21, full-review item 2). §7's "no
+   * reserved coordinates" trap bullet collected four real overlap bugs as
+   * prose; this turns it into a runtime check. Every few seconds in dev,
+   * walk the `position: fixed` elements and warn when two of them
+   * intersect. Skips: anything inside the bottom dock (grid cells cannot
+   * overlap — and the dock wrapper itself IS fixed, so it would intersect
+   * everything), dialogs/overlays that legitimately cover the screen
+   * (role="dialog", or >60% of the viewport, e.g. the loading curtain), and
+   * invisible/zero-size elements. Compiled out of production builds
+   * entirely by the `import.meta.env.DEV` guard.
+   */
+  useEffect(() => {
+    if (!import.meta.env.DEV) return
+    const check = () => {
+      const fixed = [...document.querySelectorAll<HTMLElement>('body *')].filter((el) => {
+        const cs = getComputedStyle(el)
+        if (cs.position !== 'fixed' || cs.visibility === 'hidden' || cs.display === 'none') return false
+        if (cs.pointerEvents === 'none') return false
+        if (el.closest('[data-bottom-dock]')) return false
+        if (el.closest('[role="dialog"]')) return false
+        const r = el.getBoundingClientRect()
+        if (r.width < 2 || r.height < 2) return false
+        if (r.width * r.height > window.innerWidth * window.innerHeight * 0.6) return false
+        return true
+      })
+      for (let i = 0; i < fixed.length; i++) {
+        for (let j = i + 1; j < fixed.length; j++) {
+          if (fixed[i].contains(fixed[j]) || fixed[j].contains(fixed[i])) continue
+          const a = fixed[i].getBoundingClientRect()
+          const b = fixed[j].getBoundingClientRect()
+          const overlap = a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom
+          if (overlap) {
+            console.warn(
+              '[layout] two fixed panels overlap — the §7 trap, live:',
+              fixed[i], `[${Math.round(a.left)},${Math.round(a.top)} ${Math.round(a.width)}×${Math.round(a.height)}]`,
+              fixed[j], `[${Math.round(b.left)},${Math.round(b.top)} ${Math.round(b.width)}×${Math.round(b.height)}]`,
+            )
+          }
+        }
+      }
+    }
+    const id = window.setInterval(check, 4000)
+    return () => window.clearInterval(id)
+  }, [])
 
   /**
    * Saved views — Phase 4 §7.1.
@@ -1211,47 +1404,79 @@ export default function App() {
       )}
 
       {panels.find && (
-        <SearchPanel graph={graph} within={predicate} onChoose={handleChoose} />
-      )}
-
-      {panels.groups && (
-        <GroupsPanel
-          selectedGroupId={selectedGroupId}
-          onChoose={handleChooseGroup}
-        />
-      )}
-
-      {panels.legend && <Legend />}
-
-      {panels.compare && (
-        <Compare
+        <SearchPanel
           graph={graph}
-          disclosedGraph={disclosedGraph}
-          drilldown={drilldown}
-          openedCountries={openedCountries}
-          focusIndex={unfilteredFocusIndex}
+          within={predicate}
+          onChoose={handleChoose}
+          outsideIsolate={searchOutsideIsolate}
         />
       )}
 
-      <TierBar
-        tier={drilldown}
-        onTier={handleTier}
-        inTier={tierCounts.inTier}
-        visibleCount={tierCounts.visible}
-        total={graph.nodes.length}
-      />
+      {/*
+        THE BOTTOM DOCK (2026-08-21, full-review item 2). One fixed, full-width
+        container now owns the entire bottom edge; every bottom panel is a
+        child of one of its three cells instead of planting its own
+        `position: fixed` coordinates. Before this, five hand-placed panels
+        shared the edge by eye, and the §7 "no reserved coordinates" trap
+        collected four real casualties (Compare/tier-bar pre-ship, Reports/
+        tier-bar 5i, and the review's Compare-pill-unclickable and
+        Legend-covers-shelf overlaps at ≤1400px widths). A grid row cannot
+        overlap its own cells, at any window width, so that whole bug class
+        dies here rather than being patched pair by pair.
+
+        Grid `1fr minmax(0, auto) 1fr`: tier bar left, the three pills
+        dead-centre (exact centring regardless of the side cells' widths —
+        flex `space-between` would drift off-centre because the tier bar and
+        shelf are different widths), shelf right. `alignItems: 'end'` bottoms
+        every cell on the same line, so an expanded panel grows UPWARD from
+        the shared baseline, pushing nothing. The centre cell wraps its pills
+        when a squeezed window leaves too little room (`minmax(0, auto)` is
+        what lets the track actually compress). The dock itself is
+        `pointerEvents: 'none'` so the empty strip between panels stays
+        drag-through to the canvas; each panel wrap re-enables its own events.
+      */}
+      <div style={bottomDock} data-bottom-dock>
+        <div style={bottomDockLeft}>
+          <TierBar
+            tier={drilldown}
+            onTier={handleTier}
+            inTier={tierCounts.inTier}
+            visibleCount={tierCounts.visible}
+            total={graph.nodes.length}
+          />
+        </div>
+        <div style={bottomDockCentre}>
+          {panels.compare && (
+            <Compare
+              graph={graph}
+              disclosedGraph={disclosedGraph}
+              drilldown={drilldown}
+              openedCountries={openedCountries}
+              focusIndex={unfilteredFocusIndex}
+            />
+          )}
+          {panels.groups && (
+            <GroupsPanel
+              selectedGroupId={selectedGroupId}
+              onChoose={handleChooseGroup}
+            />
+          )}
+          {panels.legend && <Legend />}
+        </div>
+        <div style={bottomDockRight}>
+          {panels.unlinked && (
+            <IsolatedShelf
+              reports={isolated}
+              onHover={setHovered}
+              selectedId={selectedId}
+              onSelect={handleSelectIsolated}
+            />
+          )}
+        </div>
+      </div>
 
       <Onboarding openRequest={howToRequest} />
       {helpOpen && <HelpCard onClose={() => setHelpOpen(false)} />}
-
-      {panels.unlinked && (
-        <IsolatedShelf
-          reports={isolated}
-          onHover={setHovered}
-          selectedId={selectedId}
-          onSelect={handleSelectIsolated}
-        />
-      )}
 
       {/*
         Bottom edge, and collapsed by default. It answers a question nobody has
@@ -1349,7 +1574,7 @@ export default function App() {
         showing it over a blank settling scene teaches nothing, so the curtain
         covers it and the card is there when the curtain lifts.
       */}
-      <LoadingCurtain ready={graphReady} reportCount={graph.nodes.length} />
+      <LoadingCurtain ready={graphReady} reportCount={graph.nodes.length} error={corpusError} />
 
       <div aria-hidden style={pageFrame} />
     </div>
@@ -2449,17 +2674,84 @@ const selectionBlock: React.CSSProperties = {
 // Bottom-LEFT corner as of Phase 3.5 (Thomas, 2026-08-19: "slide the
 // global>nations>state>everything bar to the left bottom corner"), clearing
 // the bottom-centre for the country selector's pill.
+//
+// 2026-08-21: no longer `position: fixed` at hand-picked coordinates — this
+// is now a child of the bottom dock's LEFT cell (see the dock comment at the
+// render site), which puts it in the same bottom-left spot without owning
+// any coordinate another panel could collide with. `pointerEvents: 'auto'`
+// because the dock container is 'none' (drag-through between panels).
 const tierBarWrap: React.CSSProperties = {
-  position: 'fixed',
-  bottom: 20,
-  left: 20,
   padding: '10px 14px',
   background: 'var(--panel-bg)',
   border: '1px solid var(--line)',
   borderRadius: 10,
   boxShadow: 'var(--panel-shadow)',
   backdropFilter: 'var(--glass-filter)',
+  pointerEvents: 'auto',
+}
+
+/**
+ * The bottom dock (2026-08-21, full-review item 2) — see the long comment at
+ * its render site for the reasoning. `zIndex: 6` is the old shared level of
+ * the tier bar and the centre pills; nothing inside the dock needs its own
+ * z-index any more because grid cells cannot overlap each other.
+ */
+const bottomDock: React.CSSProperties = {
+  position: 'fixed',
+  left: 0,
+  right: 0,
+  bottom: 0,
+  padding: '0 20px 20px',
+  display: 'grid',
+  // Four tracks, three children: tier bar / centre pills / shelf / EMPTY.
+  // The empty fourth track is the View panel's column — it reserves
+  // the screen edge the shelf's old `right: 214` used to stay clear of. A
+  // fixed track rather than a `marginRight` on the shelf's cell because a
+  // margin counts into the ITEM's outer size, not the track's, and the
+  // first cut of this dock proved it the measured way: at 1280×720 with the
+  // Legend expanded, the margin-carrying shelf overflowed its own track
+  // leftward and sat back underneath the Legend — the exact overlap this
+  // dock exists to make impossible. Items without margins cannot outgrow
+  // `auto`-minimum tracks, and tracks cannot overlap, so the guarantee is
+  // real again. (Squeezed hard enough — expanded panels at a narrow window
+  // — the grid overflows RIGHT, past the empty track, which degrades to
+  // "shelf temporarily further right", never to panels stacking.)
+  // 182, not 194: the 12px `columnGap` before this track is part of the
+  // reservation, so 20 (dock padding) + 182 + 12 lands the shelf's right
+  // edge exactly 214 from the viewport edge — the same spot its old fixed
+  // `right: 214` put it.
+  gridTemplateColumns: '1fr minmax(0, auto) 1fr 182px',
+  alignItems: 'end',
+  columnGap: 12,
+  pointerEvents: 'none',
   zIndex: 6,
+}
+
+const bottomDockLeft: React.CSSProperties = {
+  justifySelf: 'start',
+  minWidth: 0,
+  pointerEvents: 'none',
+}
+
+const bottomDockCentre: React.CSSProperties = {
+  justifySelf: 'center',
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'flex-end',
+  justifyContent: 'center',
+  gap: 12,
+  minWidth: 0,
+  pointerEvents: 'none',
+}
+
+const bottomDockRight: React.CSSProperties = {
+  // The shelf's right edge lands 214 from the viewport edge exactly as its
+  // old fixed `right: 214` did — but via the dock's empty fourth track (see
+  // `bottomDock`'s comment), NOT a margin here. A margin was the first cut
+  // and it broke the no-overlap guarantee under a squeeze.
+  justifySelf: 'end',
+  minWidth: 0,
+  pointerEvents: 'none',
 }
 
 /**
@@ -2483,11 +2775,14 @@ const tierBarWrap: React.CSSProperties = {
 // Tucked into the bottom-right as of Phase 3.5 (Thomas, 2026-08-19: "tuck
 // those unlinked nodes neatly in the bottom right area") — a footnote's
 // corner, out of the way of the search bar and the calendar along the top.
-// Still left of the View panel's column (`right: 214`), which owns the edge.
+// Still left of the View panel's column, which owns the edge — that 214px
+// offset now lives on the dock's right cell (`bottomDockRight.marginRight`)
+// since 2026-08-21, when this stopped being `position: fixed` and became a
+// dock child (see the dock comment at the render site). `position:
+// 'relative'` stays because the sheen inside is absolutely positioned
+// against this wrap.
 const isolatedShelfWrap: React.CSSProperties = {
-  position: 'fixed',
-  bottom: 20,
-  right: 214,
+  position: 'relative',
   width: 232,
   padding: '9px 11px',
   background: 'var(--panel-bg)',
@@ -2503,7 +2798,6 @@ const isolatedShelfWrap: React.CSSProperties = {
   pointerEvents: 'auto',
   maxHeight: 148,
   overflowY: 'auto',
-  zIndex: 5,
 }
 
 const isolatedShelfGrid: React.CSSProperties = {

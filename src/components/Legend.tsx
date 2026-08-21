@@ -36,7 +36,14 @@ export function Legend() {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setCollapsed(true)
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setCollapsed(true)
+      if (e.key === 'Escape') {
+        // Closing this panel is the press's one action — the flag tells
+        // App.tsx's Escape priority stack not to ALSO clear the selection
+        // or isolate (2026-08-21, full-review item 3 — the exact repro was
+        // "Legend open + UAE isolated, one Escape destroyed both").
+        e.preventDefault()
+        setCollapsed(true)
+      }
     }
     window.addEventListener('pointerdown', onDown)
     window.addEventListener('keydown', onKey)
@@ -211,17 +218,16 @@ function PulseDemo() {
   )
 }
 
-// Bottom-centre, just RIGHT of `GroupsPanel` — see `Compare.tsx`'s `wrap`
-// comment for why `calc(50% ± 140px)`, not a `left` offset measured from
-// `GroupsPanel` itself, is the anchor: that panel's own pill has no fixed
-// width (up to its `maxWidth: 260` once something is isolated), so half of
-// that worst case (130) plus a 10px gap is the constant that keeps both
-// facing edges the same distance apart regardless of the label between them.
+// Bottom-centre, just RIGHT of `GroupsPanel` — since 2026-08-21 the LAST
+// child of the bottom dock's centre cell (`bottomDock` in App.tsx; see
+// `Compare.tsx`'s `wrap` comment for the full story of the move). The old
+// fixed `calc(50% + 140px)` anchor let this panel, expanded, fully cover
+// the Unlinked shelf at any window below ~1800px and overlap its pill below
+// ~1350px — in the dock the two live in different grid cells and cannot
+// touch. `pointerEvents: 'auto'` because the dock container is 'none'.
 const wrap: React.CSSProperties = {
-  position: 'fixed',
-  bottom: 20,
-  left: 'calc(50% + 140px)',
-  zIndex: 6,
+  position: 'relative',
+  pointerEvents: 'auto',
 }
 
 const pill: React.CSSProperties = {

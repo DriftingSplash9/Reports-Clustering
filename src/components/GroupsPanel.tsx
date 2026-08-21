@@ -38,7 +38,13 @@ export function GroupsPanel({
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setCollapsed(true)
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setCollapsed(true)
+      if (e.key === 'Escape') {
+        // Closing this panel is the press's one action — the flag tells
+        // App.tsx's Escape priority stack not to ALSO clear the selection
+        // or isolate (2026-08-21, full-review item 3).
+        e.preventDefault()
+        setCollapsed(true)
+      }
     }
     window.addEventListener('pointerdown', onDown)
     window.addEventListener('keydown', onKey)
@@ -133,16 +139,16 @@ function GroupRow({
 
 // Bottom-centre, not bottom-right — moved here 2026-08-20 (Thomas: "lets put
 // the new Regions/Countries front and centre bottom of the graph"), taking
-// over the exact slot the old ChipBar "Countries" filter pill used to sit in
-// (see the ChipBar tombstone comment in App.tsx). Same `left: 50% +
-// translateX(-50%)` centring trick ChipBar used, so this panel opens upward
-// dead-centre under the graph the same way that one did.
+// over the exact slot the old ChipBar "Countries" filter pill used to sit
+// in (see the ChipBar tombstone comment in App.tsx). Since 2026-08-21 the
+// centring is the bottom dock's job (`bottomDock` in App.tsx — this is the
+// MIDDLE child of its centre cell), not a `left: 50% + translateX(-50%)`
+// trick; the panel still opens upward dead-centre, it just cannot collide
+// with its neighbours any more. `pointerEvents: 'auto'` because the dock
+// container is 'none'.
 const wrap: React.CSSProperties = {
-  position: 'fixed',
-  bottom: 20,
-  left: '50%',
-  transform: 'translateX(-50%)',
-  zIndex: 6,
+  position: 'relative',
+  pointerEvents: 'auto',
 }
 
 const pill: React.CSSProperties = {

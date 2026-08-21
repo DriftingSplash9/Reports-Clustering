@@ -257,22 +257,47 @@ export interface GroupMatchable {
   country: Country
   publisher: string
   /** Present on orb nodes only — the real reports folded into it. */
-  members?: readonly { publisher: string }[]
+  members?: readonly { publisher: string; country: Country }[]
 }
 
 function publisherMatches(publisher: string, needles: string[]): boolean {
   return needles.some((needle) => publisher.includes(needle))
 }
 
-/** True if this disclosed node — real report or orb, either — belongs to `group`. */
+/**
+ * The real countries a disclosed node stands for. A folded orb's own
+ * `country` field is only the MODAL member (see `buildOrbNode`'s counting
+ * loop) — for a family orb like `orb:ASIA` that is one country out of a
+ * dozen, so any membership test that reads it decides for the whole orb by
+ * whichever country happens to be most numerous inside. That is exactly the
+ * 2026-08-21 black-scene bug: isolating "Japan" at the Global tier seeded
+ * nothing because JP was folded inside `orb:ASIA` whose modal country
+ * wasn't JP, and the same flaw silently mis-filed bloc/continent isolates
+ * (`orb:ASIA` counted into BRICS iff its mode was RU). Only the `publisher`
+ * kind reached into `.members`; now all four kinds do, through this helper.
+ * A real report has no `members` and stands for its own country alone.
+ */
+function countriesOf(node: GroupMatchable): readonly Country[] {
+  if (node.members && node.members.length > 0) return node.members.map((m) => m.country)
+  return [node.country]
+}
+
+/**
+ * True if this disclosed node — real report or orb, either — belongs to
+ * `group`. For orbs the semantic is ANY-member (the same one the
+ * `publisher` kind always had): an orb containing even one report of the
+ * group counts, because at a folded tier that orb is the only thing on
+ * screen that can stand in for those reports. The seed walk in
+ * `computeGroupFocus` needs the stand-in, not silence.
+ */
 export function matchesRegionGroup(node: GroupMatchable, group: RegionGroup): boolean {
   switch (group.kind) {
     case 'continent':
-      return continentOf(node.country) === group.continent
+      return countriesOf(node).some((c) => continentOf(c) === group.continent)
     case 'country':
-      return node.country === group.country
+      return countriesOf(node).includes(group.country as Country)
     case 'bloc':
-      return !!COUNTRY_BLOCS[node.country]?.includes(group.bloc as GeoBloc)
+      return countriesOf(node).some((c) => !!COUNTRY_BLOCS[c]?.includes(group.bloc as GeoBloc))
     case 'publisher': {
       const needles = group.publisherMatch ?? []
       if (publisherMatches(node.publisher, needles)) return true

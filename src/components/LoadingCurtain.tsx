@@ -28,6 +28,20 @@ import { useEffect, useState } from 'react'
  * worse than no loading screen at all, so the timeout lifts it regardless.
  * A curtain that lifts too early is a cosmetic problem; one that never lifts
  * is a broken app.
+ *
+ * **`error`, added 2026-08-21 (§6 item 4).** Now that the corpus is fetched
+ * at startup (`browserCorpus.ts`) instead of bundled in, there is a new way
+ * for "nothing ever arrives" to happen: the fetch itself can fail (offline,
+ * a bad deploy missing `public/corpus-data.json`, a dev server not yet
+ * restarted after this change). That failure must NOT behave like the
+ * timeout above — lifting the curtain on a fetch failure would reveal a
+ * permanently empty scene with no explanation, which is exactly the
+ * "reads as broken" outcome this component exists to prevent. So when
+ * `error` is set, the curtain ignores `ready`/the safety timeout entirely
+ * and stays up, showing the message instead of the settling copy — the
+ * honest state here really is "nothing loaded and nothing will," and saying
+ * so beats a blank near-black scene that looks like every other loading
+ * frame.
  */
 
 /** Longest the curtain may ever stay up, signal or no signal. */
@@ -38,9 +52,11 @@ const FADE_MS = 450
 export function LoadingCurtain({
   ready,
   reportCount,
+  error = null,
 }: {
   ready: boolean
   reportCount: number
+  error?: string | null
 }) {
   const [hiding, setHiding] = useState(false)
   const [gone, setGone] = useState(false)
@@ -51,7 +67,7 @@ export function LoadingCurtain({
     return () => clearTimeout(t)
   }, [])
 
-  const lift = ready || timedOut
+  const lift = !error && (ready || timedOut)
 
   useEffect(() => {
     if (!lift) return
@@ -99,38 +115,52 @@ export function LoadingCurtain({
         Economic Report Influence Graph
       </div>
 
-      <div style={{ fontSize: 12, color: 'var(--ink-mute)', textAlign: 'center', lineHeight: 1.6 }}>
-        Settling {reportCount.toLocaleString()} reports into place.
-        <br />
-        <span style={{ color: 'var(--ink-dim)' }}>
-          Every position is decided by the edges, so this takes a moment.
-        </span>
-      </div>
+      {error ? (
+        <div style={{ fontSize: 12, color: 'var(--ink-mute)', textAlign: 'center', lineHeight: 1.6, maxWidth: 360, padding: '0 24px' }}>
+          Couldn't load the report corpus.
+          <br />
+          <span style={{ color: 'var(--ink-dim)' }}>{error}</span>
+          <br />
+          <span style={{ color: 'var(--ink-dim)' }}>Reload the page to try again.</span>
+        </div>
+      ) : (
+        <div style={{ fontSize: 12, color: 'var(--ink-mute)', textAlign: 'center', lineHeight: 1.6 }}>
+          Settling {reportCount.toLocaleString()} reports into place.
+          <br />
+          <span style={{ color: 'var(--ink-dim)' }}>
+            Every position is decided by the edges, so this takes a moment.
+          </span>
+        </div>
+      )}
 
       {/*
         Indeterminate rather than a percentage. A force simulation has no
         meaningful completion fraction — it converges when it converges — and a
-        fake bar that sits at 90% is a worse lie than an honest sweep.
+        fake bar that sits at 90% is a worse lie than an honest sweep. Hidden
+        on the error path — nothing is in progress, so a sweeping bar would
+        be a second lie stacked on top of the first.
       */}
-      <div
-        style={{
-          width: 220,
-          height: 2,
-          background: 'var(--line-faint)',
-          borderRadius: 2,
-          overflow: 'hidden',
-        }}
-      >
+      {!error && (
         <div
           style={{
-            width: '38%',
-            height: '100%',
-            background: 'var(--line-strong)',
+            width: 220,
+            height: 2,
+            background: 'var(--line-faint)',
             borderRadius: 2,
-            animation: 'rig-curtain-sweep 1.25s ease-in-out infinite',
+            overflow: 'hidden',
           }}
-        />
-      </div>
+        >
+          <div
+            style={{
+              width: '38%',
+              height: '100%',
+              background: 'var(--line-strong)',
+              borderRadius: 2,
+              animation: 'rig-curtain-sweep 1.25s ease-in-out infinite',
+            }}
+          />
+        </div>
+      )}
 
       <style>{`
         @keyframes rig-curtain-sweep {

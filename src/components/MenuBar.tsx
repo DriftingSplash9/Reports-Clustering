@@ -141,7 +141,13 @@ export function MenuBar({
       if (barRef.current && !barRef.current.contains(e.target as Node)) setOpen(null)
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(null)
+      if (e.key === 'Escape') {
+        // Closing the open menu is the press's one action — the flag tells
+        // App.tsx's Escape priority stack not to ALSO clear the selection
+        // or isolate (2026-08-21, full-review item 3).
+        e.preventDefault()
+        setOpen(null)
+      }
     }
     window.addEventListener('pointerdown', onDown)
     window.addEventListener('keydown', onKey)

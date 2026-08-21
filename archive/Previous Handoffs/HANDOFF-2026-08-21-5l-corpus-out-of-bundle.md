@@ -5,8 +5,8 @@ top level.** When it is superseded, the new session moves this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and writes
 a fresh `HANDOFF.md` in its place. Never leave two handoffs at the top level.
 
-Last written: **2026-08-21 (item 5l — review follow-up round 2: corpus out of
-the JS bundle, startup warnings batched)**. Yesterday (2026-08-20) was a full day
+Last written: **2026-08-21 (item 5k — review follow-up round 1: black-scene
+isolate fix, the bottom dock, Escape/"/"/search state)**. Yesterday (2026-08-20) was a full day
 of work ending in item 5h, a HUD layout pass — full detail archived at
 `archive/Previous Handoffs/HANDOFF-2026-08-20-5h-hud-layout-pass.md` (itself
 superseding the chain of earlier archived handoffs listed at its own top).
@@ -189,100 +189,6 @@ checks), plus `npm run validate` (**95 logic checks now, up from 90**), `tsc
   moved to `_to_delete/` (logged in its README) — §3's "memory is DOWN"
   paragraph is now historical.
 
-**This update (5l), 2026-08-21.** Round 2 of the review's §6 list, picking up
-item 4 where 5k's "not done, deliberately" note left off — the review's own
-framing was "the single highest-leverage performance change available":
-`src/data/research/*.json` (200+ files, ~8.2MB) was being pulled into the
-browser JS bundle via `slices.generated.ts`'s 200+ ES `import` statements,
-making it ~95% of an 8,612 kB production bundle; and `App.tsx`'s startup
-validation was firing ~2,665 individual `console.warn` calls on every load.
-Both fixed, both verified live, not just built.
-
-- **§6 item 4a — corpus out of the bundle, DONE.** The corpus is now a
-  runtime-fetched static asset, not compiled JS. New split:
-  - `src/data/assembleCorpus.ts` — the pure merge logic (seed-wins report
-    dedup, last-wins edge dedup, dangling/orphan handling, relations
-    handling) pulled out of the old closure-based `assemble()` in
-    `src/data/index.ts` into a standalone `assembleCorpus(seedReports,
-    seedDependencies, slices)` function, so both loaders below share
-    identical rules. All the original reasoning comments (the `fed-h15`
-    orphan-kept example, the V0.8 last-wins rationale) carried over verbatim.
-  - `src/data/index.ts` — now Node-only, used solely by
-    `scripts/validate-data.ts`. Reads `public/corpus-data.json` with
-    `node:fs` at module scope and calls `assembleCorpus`. Carries a loud
-    top-of-file warning not to import it from browser code.
-  - `src/data/browserCorpus.ts` — new. `loadCorpusData()` fetches
-    `/corpus-data.json` over HTTP, parses it, and calls the same
-    `assembleCorpus`. Caches the in-flight promise at module scope (React
-    StrictMode double-invokes effects in dev; without the cache that meant
-    two fetches).
-  - `scripts/gen-slices.ts` — rewritten. Used to emit a 200+-import TS file
-    (`slices.generated.ts`); now reads and JSON-parses each research file
-    itself and writes one compact JSON array to `public/corpus-data.json`
-    (Vite's `public/` copies verbatim into `dist/`, served by both `vite
-    dev` and `vite preview`). Same up-to-date-skip behaviour as before.
-  - `src/data/slices.generated.ts` — **tombstoned, not deleted** (no
-    `device_bash` this session, so no `mv` to `_to_delete/` was possible).
-    Content replaced with a comment explaining it's retired 2026-08-21 and
-    safe to delete; ends in `export {}` so it stays valid, unused TS.
-    **Flagged for a future session with shell access to `mv` into
-    `_to_delete/`.**
-  - `.gitignore` — added `public/corpus-data.json` (generated, same
-    not-tracked status `slices.generated.ts` had).
-  - `App.tsx` — `reports`/`dependencies`/`loadIssues`/`droppedNotes` now come
-    from `useState<AssembledCorpus | null>` populated by a `useEffect` calling
-    `loadCorpusData()`, with an `EMPTY_CORPUS` sentinel used while the fetch
-    is in flight (same shape the app's own Isolate feature already exercises
-    for empty graphs — confirmed safe by reading `buildGraph`/`pagerank`/
-    `disclosureByReport`, none of which throw on empty arrays). Both
-    `useMemo`s that used to depend on `[]` now depend on `[corpus]`.
-  - `LoadingCurtain.tsx` — new `error` prop. A fetch failure now pins the
-    curtain permanently (never auto-lifts via the safety timeout) and shows
-    "Couldn't load the report corpus" + the error + a reload prompt, instead
-    of silently revealing a permanently-empty scene with no explanation.
-  - **Verified live, full sandbox build:** `npm run gen` → `tsc --noEmit`
-    clean → `npm run validate` → **95/95 logic checks, identical 3091
-    reports / 2070 dependencies** to the pre-change corpus (same numbers two
-    independent ways: the CLI validator and the live browser console) →
-    `npm run build`: **bundle dropped from 8,612 kB to 1,491.5 kB, a ~82.7%
-    reduction** → `vite preview` + Playwright on the preinstalled Chromium
-    (SwiftShader flags): tier bar reads "396 of 3091 reports shown", **0
-    page errors**. A separate simulated-fetch-failure run confirmed the new
-    error UI renders without crashing.
-- **§6 item 4b — startup warnings batched, DONE.** `App.tsx` used to
-  `console.warn` once per validation issue (~2,665 calls on a full load,
-  mostly two repeating shapes: ~1,378 "proposed:" domain warnings and
-  ~1,285 "no edges in either direction" warnings). New `logGroupedIssues()`
-  buckets issues by message with report-id-shaped tokens and quoted values
-  normalized out (`\b[\p{L}][\p{L}0-9]*(?:-[\p{L}0-9]+)+\b` — Unicode-aware,
-  needed for accented ids like `mx-cdmx-evalúa`), then logs one line per
-  bucket with a count and up to 3 samples; a bucket with exactly one message
-  still logs it plain, nothing is dropped. Iterated twice against live
-  counts, not assumed: a first narrower regex only caught the
-  prefix-shaped warnings (1287 lines left); the id-anywhere-in-message
-  version got it to 3 lines total (2 real grouped buckets + one pre-existing
-  unrelated `THREE.Clock` deprecation notice). **Verified live: console
-  warnings went from ~2,665 to 2 grouped `[graph]` lines**, counts matching
-  the CLI validator's independently-computed totals exactly (1,378 and
-  1,285). A favicon 404 seen in one run was confirmed unrelated — a repeat
-  run waiting for `networkidle` showed zero 4xx+ responses, i.e. a timing
-  artifact, not a regression.
-- **Not done from §6, deliberately:** items 5–9 (unlinked shelf redesign,
-  the tier-1 colour pass, validator rules for `COUNTRY_LABEL`/`strength`/the
-  namespace prefixes, search accent-folding + calendar year-boundary fix,
-  PNG re-entry guard + zoom-baseline freeze) — next rounds, in the review's
-  order. No new pinned `test-logic.ts` regression test was added specifically
-  for `assembleCorpus()`; the identical-corpus-count cross-check (95/95
-  checks, 3091/2070 unchanged) was relied on instead — worth a follow-up if
-  `assembleCorpus.ts` gets touched again.
-- Verification recipe used (rerunnable, same shape as 5k's): stage
-  `src/`, `scripts/`, `package.json`, `tsconfig.json`, `index.html`,
-  `vite.config.ts`, `START-HERE.md`, plus the full `src/data/research/`
-  corpus (267 files, batched across six `device_stage_files` calls — a
-  single call can't move all of it), into a Linux sandbox; `npm install`,
-  `npm run gen`, `npx tsc --noEmit`, `npm run validate`, `npm run build`,
-  then `vite preview` + Playwright with the §2.7 SwiftShader flags.
-
 ---
 
 ## 0. Process rules Thomas asked for, 2026-08-20 — read this section too
@@ -369,21 +275,13 @@ break:
 2. **If no document says a dependency exists, it does not go in the graph.**
 3. **A pointer is not a source.** WebFetch can fabricate content for a dead
    URL; raw-verify before trusting a quote.
-4. **`npm run validate` before and after any data change** (95 checks as of
-   item 5k). It cannot run through the device bridge (`node_modules` carries
-   the Windows esbuild). Working recipe: tar `src/ scripts/ package.json
-   tsconfig.json index.html vite.config.ts START-HERE.md` on-device into
-   `_to_delete/`, stage the tarball, extract + `npm install` in a Linux
-   workspace, run there. **`START-HERE.md` is now required for the build** —
-   Help imports it. **As of item 5l, `npm run gen` must also produce
-   `public/corpus-data.json` before `tsc`/scripts that import `src/data`
-   will resolve** — same requirement `slices.generated.ts` used to carry.
-5. **`public/corpus-data.json` is generated (by `scripts/gen-slices.ts`).
-   Never hand-edit it.** As of item 5l this replaces
-   `src/data/slices.generated.ts` (tombstoned, not deleted — flagged for
-   `_to_delete/` — as the browser-bundle mechanism; see the item 5l writeup
-   at the top of this file for the full `assembleCorpus.ts` /
-   `src/data/index.ts` / `src/data/browserCorpus.ts` split).
+4. **`npm run validate` before and after any data change** (44 checks). It
+   cannot run through the device bridge (`node_modules` carries the Windows
+   esbuild). Working recipe: tar `src/ scripts/ package.json tsconfig.json
+   index.html vite.config.ts START-HERE.md` on-device into `_to_delete/`,
+   stage the tarball, extract + `npm install` in a Linux workspace, run there.
+   **`START-HERE.md` is now required for the build** — Help imports it.
+5. **`src/data/slices.generated.ts` is generated. Never hand-edit it.**
 6. Agents cannot delete device files — `mv` into `_to_delete/`, log the reason
    in `_to_delete/README.md`, tell Thomas.
 7. **Headless verification works and is expected**: build, `vite preview`,
@@ -1075,21 +973,20 @@ Sorted by owner, ordered by priority within each.
     not just built.
 
 19. **Review follow-ups, logged 2026-08-21 (item 5j) — items 1–3 DONE in item
-    5k, item 4 DONE in item 5l, same week.** The full list with reasoning is
+    5k, same day.** The full list with reasoning is
     `notes/full-review-2026-08-21.md` §6; the order there is deliberate:
     ~~(1) orb-aware `matchesRegionGroup` + a folded-tier pinned test~~ **DONE
     5k**; ~~(2) a bottom-dock container replacing the hand-placed bottom-edge
     coordinates + `maxHeight` on the View panel~~ **DONE 5k**; ~~(3) Escape
     priority stack, "/" input guard, search-choose preserving isolates~~
-    **DONE 5k**; ~~(4) corpus out of the JS bundle + batched startup
-    warnings~~ **DONE 5l** — see the item 5l writeup at the top of this file.
-    Still open, in order: (5) unlinked shelf → summary + list (before the 722
-    edgeless candidates land); (6) the tier-1 colour pass (hollow opacity
-    ~0.3, damp floor ~70%, lens greyed or orbs recoloured); (7) validator
-    rules for `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->`
-    namespaces; (8) search accent-folding/full-corpus pass + the calendar
-    year-boundary fix; (9) PNG re-entry guard + zoom-baseline freeze when
-    pulses are next
+    **DONE 5k** — see this update's writeup at the top for all three. Still
+    open, in order: (4) corpus out of the JS bundle + batched startup
+    warnings; (5) unlinked shelf → summary + list (before the 722 edgeless
+    candidates land); (6) the tier-1 colour pass (hollow opacity ~0.3, damp
+    floor ~70%, lens greyed or orbs recoloured); (7) validator rules for
+    `COUNTRY_LABEL`, `strength`, and the `orb:`/`corb:`/`->` namespaces;
+    (8) search accent-folding/full-corpus pass + the calendar year-boundary
+    fix; (9) PNG re-entry guard + zoom-baseline freeze when pulses are next
     touched.
 
 ### Offered — picked up this update (5g)
@@ -1180,14 +1077,9 @@ cross-project diary — not the project's, leave it alone).
   (items 14/15), **`PngExport.tsx`** (item 12) — the chrome. `ChipBar`, which
   used to be in this list, was deleted 2026-08-20 (item 5f/5g) — see the
   tombstone comment in `App.tsx`.
-- Data: `src/data/research/*.json` slices are compiled by
-  `scripts/gen-slices.ts` into generated `public/corpus-data.json` (as of
-  item 5l, replacing the tombstoned `slices.generated.ts`); browser code
-  loads it via `src/data/browserCorpus.ts`'s `loadCorpusData()` (fetch +
-  cache), Node scripts via `src/data/index.ts` (`node:fs`, browser-unsafe —
-  do not import from browser code); both call the shared
-  `src/data/assembleCorpus.ts`. `graph.ts` builds + validates (95 checks in
-  `scripts/validate-data.ts` + `test-logic.ts`, up from 90 as of item 5k).
+- Data: `src/data/research/*.json` slices auto-load; `slices.generated.ts` is
+  generated; `graph.ts` builds + validates (44 checks in
+  `scripts/validate-data.ts` + `test-logic.ts`, 90 as of item 5g).
 
 ---
 
@@ -1299,16 +1191,6 @@ cross-project diary — not the project's, leave it alone).
 - **Never reintroduce faceted node geometry** while fresnel rims exist.
 - **The IMF DSBB aggregator is useless to a non-JS fetcher**; national NSDP
   mirrors work.
-- **`public/corpus-data.json` must exist before `tsc`, `scripts/validate-
-  data.ts`, or the app itself will resolve real data (item 5l).** It's
-  generated by `npm run gen` (`scripts/gen-slices.ts`) from
-  `src/data/research/*.json` and gitignored — a fresh checkout or a fresh
-  sandbox stage needs `npm run gen` run at least once before anything else.
-  This is the same trap the old `slices.generated.ts` carried (see the
-  now-stale-sounding note on item 17 above); the file changed, the trap
-  didn't. `src/data/index.ts` throws a clear "run `npm run gen`" error if
-  it's missing — `browserCorpus.ts`'s fetch fails with an HTTP error the
-  `LoadingCurtain` now surfaces instead of silently showing an empty scene.
 
 ---
 

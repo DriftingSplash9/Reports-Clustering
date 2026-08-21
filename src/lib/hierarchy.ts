@@ -256,8 +256,17 @@ function buildOrbNode(family: ColourFamily, members: ScoredReport[], depth: numb
   // so an orb dominated by German nodes with one stray Portuguese one still
   // reads (and, via the flag, looks) German rather than whichever happened
   // to load first. Colour itself does not depend on this — see palette.ts's
-  // "keyed to a hue family, not to a country" note — so this only affects
-  // the flag and the rim helper's exact shade within the family.
+  // "keyed to a hue family, not to a country" note.
+  //
+  // ⚠️ STALE-COMMENT SCAR, 2026-08-21: this note used to end "so this only
+  // affects the flag and the rim helper's exact shade" — true when written,
+  // then three later features started reading `country` off orbs (the
+  // galaxy/geo-affinity layout forces, and `matchesRegionGroup` in
+  // regions.ts), and trusting the old sentence is how the black-scene
+  // isolate bug shipped: a membership test read the MODAL country as if it
+  // were the whole orb's. If you add another reader of an orb's `country`,
+  // remember it is a display-grade summary, not membership — membership
+  // lives in `.members`, which `matchesRegionGroup` now checks.
   const counts = new Map<string, number>()
   for (const m of members) counts.set(m.country, (counts.get(m.country) ?? 0) + 1)
   let country: Country = members[0]?.country ?? 'INT'

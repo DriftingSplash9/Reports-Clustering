@@ -325,24 +325,21 @@ function PathSection({ path, graph }: { path: PathStep[] | null; graph: Graph })
 
 // Bottom-centre, just LEFT of `GroupsPanel` ("Regions & Countries") — moved
 // here 2026-08-20 from a stack above the tier bar (Thomas: "set it just left
-// of the regions and countries button"). The tier bar (`tierBarWrap`,
-// App.tsx) keeps `bottom: 20, left: 20` to itself now, unstacked.
+// of the regions and countries button").
 //
-// Anchored with `right: calc(50% + 140px)` rather than a `left` offset from
-// `GroupsPanel`'s own centred position, because `GroupsPanel`'s pill has no
-// fixed width — it can read "Regions & Countries" or, once something is
-// isolated, "Isolated: <label>" up to its own `maxWidth: 260` before
-// ellipsis clips it (`GroupsPanel.tsx`). Anchoring THIS panel's right edge at
-// half that worst-case width (130) plus a 10px gap keeps a constant, correct
-// gap between the two panels' facing edges — collapsed pill or expanded
-// 280px panel alike — however wide the label in the middle turns out to be,
-// without measuring anything at runtime. Same `calc(50% ± 140px)` pairing
-// lives on `Legend.tsx`'s `wrap`, mirrored to the right.
+// 2026-08-21: no longer `position: fixed` with the old `calc(50% + 140px)`
+// anchoring math — that arithmetic guaranteed the gap to `GroupsPanel` but
+// nothing else, and the full review caught the tier bar's opaque wrap
+// painting over this panel's collapsed pill at ≤~1400px windows (both
+// zIndex 6, TierBar later in the DOM — the pill was flatly unclickable).
+// This is now the FIRST child of the bottom dock's centre cell
+// (`bottomDock` in App.tsx): the dock's grid centres the cell and its flex
+// `gap` provides the spacing the old calc used to fake, at every window
+// width, with overlap structurally impossible. `pointerEvents: 'auto'`
+// because the dock container is 'none' (drag-through between panels).
 const wrap: React.CSSProperties = {
-  position: 'fixed',
-  bottom: 20,
-  right: 'calc(50% + 140px)',
-  zIndex: 6,
+  position: 'relative',
+  pointerEvents: 'auto',
 }
 
 const pill: React.CSSProperties = {
