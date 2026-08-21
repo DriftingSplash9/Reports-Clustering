@@ -87,37 +87,15 @@ export const THEME_CSS = /* css */ `
   --title-depth: drop-shadow(0 2px 9px rgba(90, 140, 255, 0.35));
   --frame-line: rgba(150, 190, 255, 0.30);
   --frame-glow: rgba(0, 102, 204, 0.50);
-  --ripple-tint: rgba(150, 190, 255, 0.13);
 }
 
 /* [data-theme='paper'] went with blueprint mode, 2026-08-19. */
 
-/*
- * The unlinked shelf's occasional sheen (round 10: "an occasional ripple
- * across it to draw a bit of attention"). A skewed light bar crosses in
- * about 1.2s, then the surface rests for ~7.8s — attention is drawn by the
- * MOTION STARTING, so the pause is what keeps it an accent instead of a
- * distraction. The sweep lives in its own pointer-transparent div (see
- * IsolatedShelf) rather than a ::after on the shelf, because a positioned
- * pseudo-element would paint over the dots and steal their hit-testing.
- */
-@keyframes rigShelfRipple {
-  0%   { transform: translateX(-140%) skewX(-14deg); }
-  13%  { transform: translateX(360%) skewX(-14deg); }
-  100% { transform: translateX(360%) skewX(-14deg); }
-}
-
-.rig-sweep {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 46%;
-  background: linear-gradient(100deg, transparent 0%, var(--ripple-tint) 50%, transparent 100%);
-  transform: translateX(-140%) skewX(-14deg);
-  animation: rigShelfRipple 9s ease-in-out infinite;
-  pointer-events: none;
-}
+/* .rig-sweep, its rigShelfRipple keyframes, and the --ripple-tint
+   custom property above were removed 2026-08-21 -- orphaned since 5m
+   replaced the unlinked shelf dot grid (this rule was its sheen effect)
+   with a summary pill. Flagged in 5l/5m, deleted this round now that
+   shell access is available. See _to_delete/README.md and HANDOFF.md. */
 `
 
 /**
