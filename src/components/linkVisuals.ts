@@ -48,6 +48,7 @@ const FRAGMENT = /* glsl */ `
   uniform float uFogNear;
   uniform float uFogFar;
   uniform vec3 uFogColour;
+  uniform float uHover;
   varying float vT;
   varying float vDepth;
   void main() {
@@ -78,12 +79,23 @@ const FRAGMENT = /* glsl */ `
       colour = mix(colour, vec3(1.0), brightness);
     }
 
+    // Hover highlight. Independent of uFrom/uTo/uOpacity (the focus/dim
+    // system above) so pointing at an edge reads the same whether or not a
+    // trace is active — a dimmed link sitting at 0.02 opacity still needs to
+    // resolve clearly on hover, which a multiply on uOpacity could never do.
+    // The whiten is stronger than a pulse's PULSE_BRIGHTEN (0.35): a pulse
+    // rides a line and only needs to read as "different from its edge," a
+    // hover needs to read as "different from every other edge in a rats-nest
+    // of them," including ones carrying a brighter pulse of their own.
+    colour = mix(colour, vec3(1.0), uHover * 0.55);
+    float opacity = mix(uOpacity, max(uOpacity, 0.75), uHover);
+
     // Fog, applied by hand. A custom shader gets none of three.js's automatic
     // fog chunks, which is why the lines used to stay perfectly crisp while
     // every node behind them faded — the one part of the scene that most needed
     // a depth cue was the only part not receiving it.
     float fog = smoothstep(uFogNear, uFogFar, vDepth);
-    gl_FragColor = vec4(mix(colour, uFogColour, fog), uOpacity * (1.0 - fog));
+    gl_FragColor = vec4(mix(colour, uFogColour, fog), opacity * (1.0 - fog));
   }
 `
 
@@ -157,6 +169,7 @@ export function gradientLinkMaterial(
       uFogNear: { value: 1e9 },
       uFogFar: { value: 1e9 + 1 },
       uFogColour: { value: new THREE.Color(SCENE_BACKGROUND) },
+      uHover: { value: 0 },
     },
     vertexShader: VERTEX,
     fragmentShader: FRAGMENT,
@@ -250,6 +263,24 @@ export function setLinkFocus(
       : litOpacity
     : dim.opacity
   material.depthTest = !(lit && tracing)
+}
+
+/**
+ * The pointer is over this link (or its screen-space tolerance band — see
+ * InfluenceGraph.tsx's nearest-link picker), so light it up regardless of
+ * focus/dim state.
+ *
+ * Deliberately its own uniform rather than folded into setLinkFocus: focus
+ * marks membership in a trace, hover marks where the pointer is, and 2026-08
+ * 22's bug report (Thomas: mousing over an edge gave no cue it was
+ * selectable) is about the second thing happening with zero code path for it
+ * at all — not about the two systems conflicting. Keeping them orthogonal
+ * means a hovered edge outside any trace still highlights, and a hovered
+ * edge inside a dimmed trace highlights on top of the dim rather than
+ * fighting it for one shared knob.
+ */
+export function setLinkHover(material: GradientLinkMaterial, hovered: boolean) {
+  material.uniforms.uHover.value = hovered ? 1 : 0
 }
 
 /**

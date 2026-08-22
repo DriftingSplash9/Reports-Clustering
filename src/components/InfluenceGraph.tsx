@@ -46,6 +46,7 @@ import {
   setLinkFlow,
   setLinkFocus,
   setLinkFog,
+  setLinkHover,
   teardropGeometry,
   tickLinkFlow,
   tickPulseBlink,
@@ -189,6 +190,14 @@ const HOVER_EASE_SECONDS = 0.15
 const HOVER_EMISSIVE_LIFT = 0.3
 const HOVER_HALO_PIXELS = 48
 const HOVER_HALO_OPACITY = 0.45
+/**
+ * Screen-space tolerance, in pixels, for "the pointer is over this edge" —
+ * shared by the missed-click picker (registerEdgePicker) and pointer-move
+ * hover (handlePointerMove). One constant because they are the same
+ * question asked at two different moments; a click that would have hit
+ * should hover first, not hit a line the pointer never lit up.
+ */
+const EDGE_PICK_TOLERANCE_PX = 9
 
 /**
  * How many ticks to let the layout run, un-rendered, before the very first
@@ -832,6 +841,16 @@ export default function InfluenceGraph({
   const hoverAnim = useRef<{ id: string | null; t: number }>({ id: null, t: 0 })
   /** Scratch vector for the halo's world position — allocated once, not per frame. */
   const haloWorldPosition = useRef(new THREE.Vector3())
+  /**
+   * Which edge the pointer is over, so setLinkHover can be told when that
+   * changes — 2026-08-22, Thomas: hovering a line gave no cue it was
+   * selectable at all. A ref, not state, for the same reason hoveredIdRef
+   * is: this is written every pointermove and read by nothing that should
+   * re-render the tree.
+   */
+  const hoveredLinkKeyRef = useRef<string | null>(null)
+  /** Scratch vector for nearestLinkAt's screen-space projection — allocated once, not per call. */
+  const linkProjectScratch = useRef(new THREE.Vector3())
 
   /**
    * The live layout data, by report id.
@@ -1131,6 +1150,12 @@ export default function InfluenceGraph({
     // animation registry has to be cleared here or it leaks one entry per
     // continuous edge on every rebuild.
     resetLinkFlow()
+    // The old hovered key's material no longer exists past this point — drop
+    // it rather than leave a stale key that setHoveredLink would silently no-op
+    // against forever (harmless, but the pointer may genuinely still be over
+    // the same edge after a filter change, and this lets it re-highlight on
+    // the next pointermove instead of staying dark).
+    hoveredLinkKeyRef.current = null
     for (const l of links) {
       // The third (dashed) argument retired with the implied-edge layer,
       // 2026-08-12. The shader machinery behind it survives in linkVisuals for
@@ -2788,52 +2813,61 @@ export default function InfluenceGraph({
   })
 
   /**
-   * The screen-space edge picker, handed up to App for missed clicks — the
-   * click tolerance that makes a 1.6px line a real target. Projects every
-   * VISIBLE link's endpoints (layout data, never the mesh map) into canvas
-   * pixels and returns the nearest line within the tolerance. O(links) per
-   * missed click — ~1,100 projections, microseconds, and it runs only when
-   * the raycast already came back empty.
+   * The screen-space edge picker — the tolerance that makes a 1.6px line a
+   * real target. Projects every VISIBLE link's endpoints (layout data,
+   * never the mesh map) into canvas pixels and returns the nearest line
+   * within `tolerancePx`. O(links) per call — ~1,100 projections,
+   * microseconds — cheap enough to run on every pointermove (see
+   * handlePointerMove), not only the missed clicks it was built for
+   * (registerEdgePicker below).
    */
+  function nearestLinkAt(
+    clientX: number,
+    clientY: number,
+    tolerancePx: number,
+  ): string | null {
+    const rect = gl.domElement.getBoundingClientRect()
+    const px = clientX - rect.left
+    const py = clientY - rect.top
+    const v = linkProjectScratch.current
+    const project = (id: string): { x: number; y: number } | null => {
+      const n = positionedById.current.get(id)
+      if (!n || !Number.isFinite(n.x)) return null
+      v.set(n.x, n.y, n.z).project(camera)
+      // Behind the camera or past the far plane — not a clickable pixel.
+      if (v.z < -1 || v.z > 1) return null
+      return { x: ((v.x + 1) / 2) * rect.width, y: ((1 - v.y) / 2) * rect.height }
+    }
+    let best: string | null = null
+    let bestDistance = tolerancePx
+    for (const l of linkDataRef.current) {
+      if (!shownLink(l)) continue
+      const a = project(l.source)
+      const b = project(l.target)
+      if (!a || !b) continue
+      // Point-to-segment distance, 2D.
+      const abx = b.x - a.x
+      const aby = b.y - a.y
+      const lengthSq = abx * abx + aby * aby
+      const t = lengthSq
+        ? Math.max(0, Math.min(1, ((px - a.x) * abx + (py - a.y) * aby) / lengthSq))
+        : 0
+      const dx = px - (a.x + t * abx)
+      const dy = py - (a.y + t * aby)
+      const distance = Math.hypot(dx, dy)
+      if (distance < bestDistance) {
+        bestDistance = distance
+        best = l.key
+      }
+    }
+    return best
+  }
+
+  /** Hand the picker up to App, for missed clicks. */
   useEffect(() => {
-    const v = new THREE.Vector3()
-    const TOLERANCE_PX = 9
-    registerEdgePicker((clientX, clientY) => {
-      const rect = gl.domElement.getBoundingClientRect()
-      const px = clientX - rect.left
-      const py = clientY - rect.top
-      const project = (id: string): { x: number; y: number } | null => {
-        const n = positionedById.current.get(id)
-        if (!n || !Number.isFinite(n.x)) return null
-        v.set(n.x, n.y, n.z).project(camera)
-        // Behind the camera or past the far plane — not a clickable pixel.
-        if (v.z < -1 || v.z > 1) return null
-        return { x: ((v.x + 1) / 2) * rect.width, y: ((1 - v.y) / 2) * rect.height }
-      }
-      let best: string | null = null
-      let bestDistance = TOLERANCE_PX
-      for (const l of linkDataRef.current) {
-        if (!shownLink(l)) continue
-        const a = project(l.source)
-        const b = project(l.target)
-        if (!a || !b) continue
-        // Point-to-segment distance, 2D.
-        const abx = b.x - a.x
-        const aby = b.y - a.y
-        const lengthSq = abx * abx + aby * aby
-        const t = lengthSq
-          ? Math.max(0, Math.min(1, ((px - a.x) * abx + (py - a.y) * aby) / lengthSq))
-          : 0
-        const dx = px - (a.x + t * abx)
-        const dy = py - (a.y + t * aby)
-        const distance = Math.hypot(dx, dy)
-        if (distance < bestDistance) {
-          bestDistance = distance
-          best = l.key
-        }
-      }
-      return best
-    })
+    registerEdgePicker((clientX, clientY) =>
+      nearestLinkAt(clientX, clientY, EDGE_PICK_TOLERANCE_PX),
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registerEdgePicker, camera, gl])
 
@@ -2865,11 +2899,43 @@ export default function InfluenceGraph({
     return undefined
   }
 
+  /**
+   * Apply (or clear) the hover highlight on whichever edge was hovered last
+   * frame, if it's different from the one hovered now — the same
+   * old-then-new shape applyFocus already uses for nodes, so a link never
+   * gets stuck lit after the pointer has moved off it.
+   */
+  function setHoveredLink(key: string | null) {
+    if (key === hoveredLinkKeyRef.current) return
+    if (hoveredLinkKeyRef.current) {
+      const prev = linkMaterials.current.get(hoveredLinkKeyRef.current)
+      if (prev) setLinkHover(prev, false)
+    }
+    if (key) {
+      const next = linkMaterials.current.get(key)
+      if (next) setLinkHover(next, true)
+    }
+    hoveredLinkKeyRef.current = key
+  }
+
   function handlePointerMove(e: ThreeEvent<PointerEvent>) {
     e.stopPropagation()
     const id = reportIdAt(e.object)
     hoveredIdRef.current = id ?? null
     onHover(id ? (graph.byId.get(id) ?? null) : null)
+
+    // A node under the pointer wins outright — never highlight an edge
+    // that happens to pass behind the sphere you're actually pointing at.
+    // Otherwise: a raycast hit resolves fat targets (pulses, arrowheads,
+    // the trunk itself) exactly like a click does (see linkKeyAt); a miss
+    // falls through to the same screen-space tolerance scan that rescues
+    // missed clicks on a 1.6px line, because a hover cue on a line this
+    // thin needs the same rescue a click does, not a stricter one.
+    const linkKey = id
+      ? null
+      : (linkKeyAt(e.object) ?? nearestLinkAt(e.clientX, e.clientY, EDGE_PICK_TOLERANCE_PX))
+    setHoveredLink(linkKey)
+    gl.domElement.style.cursor = id || linkKey ? 'pointer' : 'auto'
   }
 
   /**
@@ -2927,6 +2993,8 @@ export default function InfluenceGraph({
         onPointerOut={() => {
           hoveredIdRef.current = null
           onHover(null)
+          setHoveredLink(null)
+          gl.domElement.style.cursor = 'auto'
         }}
         onPointerDown={handlePointerDown}
         onClick={handleClick}
