@@ -5,21 +5,12 @@ level.** When superseded, the new session copies this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and
 writes the replacement here. Never two handoffs at the top level.
 
-Last written: **2026-08-22 (item 5u — Grok round 3's reply came back with
-every listed source file marked "not received"; root-caused to the
-attachment list living only inside the pasteable prompt text, which Thomas
-does not read closely. Standing fix added to `notes/grok-diary.md` §0 and
-project memory: always relay the attachment list to Thomas separately,
-outside the prompt block. Round 3 is being redone properly with that fix
-applied — same prompt file, attachments confirmed to exist on disk, this
-time called out to Thomas directly in-chat.)**
-Earlier item 5t — Grok diary + prompt queue established as §8;
-item 5s — the cross-border mint LANDED (§3). Earlier still, this file was
-rewritten lean at Thomas's request ("get it to the meat and bones"). The
-full 5a–5r narrative lives in `archive/Previous Handoffs/` (dated copies,
-most recently `HANDOFF-2026-08-22-5r-full-pre-slim.md`) and in project
-memory. This file carries only: current state, standing rules, the live
-todo list, the architecture crib, and the traps.
+Last written: **2026-08-22 — slim rewrite at Thomas's request** ("get it to
+the meat and bones"). The full 5a–5r narrative this file used to carry inline
+lives in `archive/Previous Handoffs/` (dated copies, most recently
+`HANDOFF-2026-08-22-5r-full-pre-slim.md`) and in project memory. This file
+now carries only: current state, standing rules, the live todo list, the
+architecture crib, and the traps.
 
 ---
 
@@ -35,10 +26,8 @@ Then by task: anything visual → §5/§6 here, then
 `notes/visual-revamp-2026-08-18/visual-revamp-review.md`; camera/fit/layout →
 `notes/camera-fit-measurement-2026-08-19.md`; the flicker →
 `notes/flicker-tests-2026-08-19.md`; isolate / "why is country X empty" →
-`notes/cross-border-gaps-2026-08-20.md`; the cross-border research thread
-→ `notes/crossborder-verification-2026-08-22.md`; **any Grok prompt →
-`notes/grok-diary.md` FIRST (§8) — including its new §0 on relaying
-attachment lists to Thomas separately**; regions/blocs/publishers →
+`notes/cross-border-gaps-2026-08-20.md`; the cross-border mint (CURRENT WORK)
+→ `notes/crossborder-verification-2026-08-22.md`; regions/blocs/publishers →
 `src/lib/regions.ts` file comment; compare/path → `Compare.tsx` file comment;
 schema → `src/lib/types.ts`.
 
@@ -78,11 +67,6 @@ Full text in `REPORTS.md`.
    CSS transitions can wedge under load.
 8. **Measure before believing.** If a statement has a number in it and nobody
    ran anything, it is a guess.
-9. **Any prompt a Thomas-in-the-loop human relays to a third party (Grok,
-   etc.) needs its attachment/action list told to him separately, in plain
-   chat text, not just inside the pasteable block** — he skims or skips the
-   prompt itself. See `notes/grok-diary.md` §0 for the case that established
-   this (round 3, 2026-08-22).
 
 **Process rules (Thomas, 2026-08-20).** Update this file every work turn, not
 just at milestones: copy the current file to `archive/Previous Handoffs/`
@@ -91,67 +75,49 @@ is reserved for when the file goes unwieldy; that's what happened 2026-08-22).
 Hand off rather than push on when: you re-derive something already settled,
 contradict an earlier answer, retry a tool past the documented once-only
 policy, or the session has been through a compaction. Say "this is a good
-point to hand off," write this file, stop. Project memory: write entries as
-you go; if it refuses, park in `notes/memory-pending-<date>.md` and say so
-here. **It went DOWN mid-session 2026-08-22** (after the verification entry
-was written, before the mint entry could be) — the owed 5s entry is parked
-at `notes/memory-pending-2026-08-22.md`; process it when memory returns.
+point to hand off," write this file, stop. Project memory is UP — write
+entries as you go; if it refuses, park in `notes/memory-pending-<date>.md`
+and say so here.
 
 ---
 
 ## 3. Where the project is (2026-08-22)
 
-**Live corpus: 3,101 reports · 2,114 dependencies** (after the 5s
-cross-border mint, below). `npm run validate` **120/120 logic checks**,
-`tsc --noEmit` clean, `npm run build` clean (bundle ~1,490 kB). The
-2026-08-20 mint (1,250 → 3,091), the per-country fold, the full-review punch
-list, and the pulse/beam round are all DONE — details in memory and the
-archived handoffs. **Worth re-running `npm run validate` on Thomas's machine
-once** — 5s was built and verified from a sandbox copy, same as every prior
-mint.
+**Live corpus: 3,091 reports · 2,070 dependencies.** `npm run validate`
+120/120 logic checks, `tsc --noEmit` clean, `npm run build` clean (bundle
+~1,490 kB after the corpus moved out of the JS bundle). The 2026-08-20 mint
+(1,250 → 3,091), the per-country fold, the full-review punch list (§6 items
+1–9), and the pulse/beam round are all DONE — details in memory and the
+archived handoffs.
 
-**The cross-border mint (5s) — LANDED 2026-08-22.** One new slice,
-`src/data/research/crossborder-standards-2026-08-22.json`: 10 nodes, 44
-edges, every `basis` carrying its raw-verified quote. **Every one of the 19
-zero-cross-border-edge countries now has at least one cross-border edge**
-(counted in the generated corpus, per-country: ID 5, TW/PH/TH 4, JP/VN/SG/MM
-3, IL/KR/SA/MU 2, the rest 1). Unlinked shelf 1,285 → 1,264. What went in,
-per Thomas's recorded decisions:
+**Current work in flight — the cross-border mint (5r).** Grok's two research
+rounds on the 19 zero-cross-border-edge countries are **raw-verified** (59/62
+evidence entries pass, most verbatim, zero contradictions):
+`notes/crossborder-verification-2026-08-22.md` is the authoritative per-edge
+report, id-mapping table, and merge plan. Thomas's decisions, recorded:
 
-- Sources: Grok research rounds 1+2, raw-verified first (59/62 evidence
-  entries pass, zero contradictions) — per-edge report, id map and merge
-  plan in `notes/crossborder-verification-2026-08-22.md`.
-- **No schema change**: standards edges (SDDS / SDDS Plus / e-GDDS / SNA) →
-  `methodology_depends_on`; ACSS/APEC membership edges → `cites`; the two
-  observance-report nodes Grok proposed were dropped (backwards direction,
-  zero added value).
-- **Institutional nodes minted** ("they effect things too"): `sd-cbs`,
-  `mu-statsmauritius`, `sl-statssl`, `af-nsia`, `ye-cso`, `sy-cbs`,
-  `iq-cso`. Live portals (MU/SL/IQ) got the continuous-database convention
-  (releases 250 + `continuous: true`); the rest are standing entries with
-  honest cadence notes. New international nodes: `imf-sdds-plus`,
-  `asean-acss`, `apec-stats` (imf-sdds / imf-e-gdds / sna-2008 already
-  existed and were reused; two SDDS-Plus edges retargeted accordingly).
-- URL findings recorded in the node descriptions: Sudan's cbs.gov.sd is
-  DNS-dead (kept + flagged stale). **Syria's cbssyr.sy is HIJACKED —
-  redirects to a spam campaign domain; never link it** (sy-cbs points at
-  the IMF DSBB table instead). Yemen's old cso-yemen.org is parked/hijacked
-  too; the real host is cso-ye.org.
-- **Held out, deliberately**: Mauritius's SNA-2008 edge (quote unverified +
-  no MU national-accounts report exists) and Afghanistan's CR 06/251
-  supporting quote (its edge stands on the verified DSBB row). Both are
-  natural Grok round-3 targets, along with real bilateral/data edges for
-  the seven thin countries whose only edge is a dated e-GDDS row.
-
-**Grok round 3 — reply received 2026-08-22 but NOT usable, redo in
-flight (5u).** Every one of the 9 listed source files came back marked
-`files_received: false` — Grok answered from the prompt's own Rule A id
-list rather than the actual country research files, so its edges/proposed
-nodes are thinner and less grounded than intended. Not raw-verified, not
-minted. Root cause and fix in `notes/grok-diary.md` §0; the same prompt
-(`notes/grok-prompt-cross-border-round3-2026-08-22.md`) is being resent with
-the attachment list also called out to Thomas directly, outside the prompt
-text.
+- Relationship types: **no schema change** — standards edges (SDDS / SDDS
+  Plus / e-GDDS / SNA) → `methodology_depends_on`; ACSS/APEC membership
+  edges → `cites`; the two observance-report nodes and their `subject_of`
+  edges are dropped.
+- **Institutional nodes ARE minted** for the seven countries lacking one:
+  `sd-cbs`, `mu-statsmauritius`, `sl-statssl`, `af-nsia`, `ye-cso`,
+  `sy-cbs`, `iq-cso` ("they effect things too").
+- Hold-outs: Mauritius's SNA-2008 edge (quote unverified + no NA report);
+  Afghanistan's cr06251 supporting quote (its edge stands on the verified
+  DSBB row). Round 2 wins wherever both rounds cover one claim.
+- New international nodes: `imf-sdds-plus`, `asean-acss`, `apec-stats` only —
+  `imf-sdds`, `imf-e-gdds`, `sna-2008` already exist; two SDDS-Plus edges
+  retarget from `imf-sdds` to `imf-sdds-plus`.
+- Agency URLs verified live: statsmauritius.govmu.org, statistics.sl,
+  cosit.gov.iq, cso-ye.org, nsia.gov.af. Sudan's cbs.gov.sd is DNS-dead
+  (keep + flag stale). **Syria's cbssyr.sy is HIJACKED — redirects to a spam
+  campaign domain; never link it** — sy-cbs uses the IMF DSBB page instead.
+- Build plan: one new research slice (~10 nodes, ~44 edges, quotes folded
+  into `basis` — there is no evidence_quote field), then the full rule-4
+  sandbox recipe, then commit + handoff + memory. **Slice not yet written**
+  when this rewrite happened — resume from the verification report's
+  "Recommended merge plan" plus the decisions above.
 
 **Git:** unknown to agents by design — see rule 1.
 
@@ -219,13 +185,9 @@ Assume all of this exists and works; each has a dated comment at the site.
 ## 5. THE TODO LIST (live items only)
 
 ### In flight
-1. **Grok round 3 — REDO in flight, see §3 (item 5u).** Original reply
-   unusable (attachments never came through). Same prompt
-   (`notes/grok-prompt-cross-border-round3-2026-08-22.md`) is being resent;
-   this time the attachment list is being told to Thomas directly in-chat,
-   separate from the prompt text, per the new standing rule in
-   `notes/grok-diary.md` §0. When the reply lands: confirm `files_received`
-   is true this time, parse-check, raw-verify, mint (5r/5s template).
+1. **Finish the cross-border mint** — state and decisions in §3. Resume at
+   "build the slice"; everything upstream (verification, id mapping, URL
+   checks) is done and recorded.
 
 ### [Thomas] — only you can
 2. **Render-consistency / camera-fit bug — DEFERRED by your own call** (deal
@@ -336,11 +298,7 @@ personal file — leave it alone.
 - **Grok's JSON is not reliably JSON** — parse-check first. Its ids and
   enum values are inventions until grepped against the corpus. Never
   hand-edit JSON insertions — generate them (a hand-inserted field once
-  corrupted 15 files). **Its stated `files_received` confirmations are not
-  reliable either (round 3, 2026-08-22) — an attachment list only stated
-  inside the prompt block is not a guarantee Thomas actually attached
-  anything; verify by asking what it received AND by checking that its
-  content plausibly reflects the attached files, not just the prompt text.**
+  corrupted 15 files).
 - **Never reintroduce faceted node geometry** (fresnel rims) or
   additive/white pulse cores.
 - **The IMF DSBB tables are JS-walled** (use a real browser); its PDF
@@ -349,32 +307,7 @@ personal file — leave it alone.
 
 ---
 
-## 8. Grok pipeline — diary and prompt queue
-
-**Before writing ANY prompt for Grok, read `notes/grok-diary.md`** — the
-standing playbook of what works and Grok's dated failure modes (invented
-ids, invented enum values, silently skipped unattached countries, recycled
-quotes, third-party scorecards, and now §0: attachment lists that never
-reach Thomas because they only lived inside the prompt text). Append a
-dated lesson to the diary after processing every Grok reply. Every handoff
-carries this pointer (Thomas's standing instruction, 2026-08-22).
-
-Prompts live beside the diary as `notes/grok-prompt-*.md`; the diary's
-"Round log" section is the queue state. Currently in flight: **round 3
-redo** (`notes/grok-prompt-cross-border-round3-2026-08-22.md` — same prompt
-text as the first attempt, since the asks themselves were never the
-problem) asks for the Mauritius SNA-2008 edge done properly (plus a
-possible mu-national-accounts node), Afghanistan CR 06/251 corroboration,
-and substantive cross-border edges for SD/SL/IQ/IR/AF/YE/SY. This time the
-9-file attachment list is being relayed to Thomas directly in-chat, not just
-inside the prompt block — see §0 of the diary for why that matters. Whatever
-comes back: confirm `files_received` is genuinely true, parse-check the
-JSON, raw-verify every quote (rules 2/3), then mint — the 5r/5s verify-then-
-mint flow is the template.
-
----
-
-## 9. How to hand off
+## 8. How to hand off
 
 1. `cp HANDOFF.md "archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-<topic>.md"`.
 2. Append a dated section to this file (or rewrite only if it has gone

@@ -5,21 +5,13 @@ level.** When superseded, the new session copies this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and
 writes the replacement here. Never two handoffs at the top level.
 
-Last written: **2026-08-22 (item 5u — Grok round 3's reply came back with
-every listed source file marked "not received"; root-caused to the
-attachment list living only inside the pasteable prompt text, which Thomas
-does not read closely. Standing fix added to `notes/grok-diary.md` §0 and
-project memory: always relay the attachment list to Thomas separately,
-outside the prompt block. Round 3 is being redone properly with that fix
-applied — same prompt file, attachments confirmed to exist on disk, this
-time called out to Thomas directly in-chat.)**
-Earlier item 5t — Grok diary + prompt queue established as §8;
-item 5s — the cross-border mint LANDED (§3). Earlier still, this file was
-rewritten lean at Thomas's request ("get it to the meat and bones"). The
-full 5a–5r narrative lives in `archive/Previous Handoffs/` (dated copies,
-most recently `HANDOFF-2026-08-22-5r-full-pre-slim.md`) and in project
-memory. This file carries only: current state, standing rules, the live
-todo list, the architecture crib, and the traps.
+Last written: **2026-08-22 (item 5s — the cross-border mint LANDED; see §3)**.
+Earlier the same day this file was rewritten lean at Thomas's request ("get it
+to the meat and bones"). The full 5a–5r narrative lives in
+`archive/Previous Handoffs/` (dated copies, most recently
+`HANDOFF-2026-08-22-5r-full-pre-slim.md`) and in project memory. This file
+carries only: current state, standing rules, the live todo list, the
+architecture crib, and the traps.
 
 ---
 
@@ -35,10 +27,8 @@ Then by task: anything visual → §5/§6 here, then
 `notes/visual-revamp-2026-08-18/visual-revamp-review.md`; camera/fit/layout →
 `notes/camera-fit-measurement-2026-08-19.md`; the flicker →
 `notes/flicker-tests-2026-08-19.md`; isolate / "why is country X empty" →
-`notes/cross-border-gaps-2026-08-20.md`; the cross-border research thread
-→ `notes/crossborder-verification-2026-08-22.md`; **any Grok prompt →
-`notes/grok-diary.md` FIRST (§8) — including its new §0 on relaying
-attachment lists to Thomas separately**; regions/blocs/publishers →
+`notes/cross-border-gaps-2026-08-20.md`; the cross-border mint (CURRENT WORK)
+→ `notes/crossborder-verification-2026-08-22.md`; regions/blocs/publishers →
 `src/lib/regions.ts` file comment; compare/path → `Compare.tsx` file comment;
 schema → `src/lib/types.ts`.
 
@@ -78,11 +68,6 @@ Full text in `REPORTS.md`.
    CSS transitions can wedge under load.
 8. **Measure before believing.** If a statement has a number in it and nobody
    ran anything, it is a guess.
-9. **Any prompt a Thomas-in-the-loop human relays to a third party (Grok,
-   etc.) needs its attachment/action list told to him separately, in plain
-   chat text, not just inside the pasteable block** — he skims or skips the
-   prompt itself. See `notes/grok-diary.md` §0 for the case that established
-   this (round 3, 2026-08-22).
 
 **Process rules (Thomas, 2026-08-20).** Update this file every work turn, not
 just at milestones: copy the current file to `archive/Previous Handoffs/`
@@ -142,16 +127,6 @@ per Thomas's recorded decisions:
   supporting quote (its edge stands on the verified DSBB row). Both are
   natural Grok round-3 targets, along with real bilateral/data edges for
   the seven thin countries whose only edge is a dated e-GDDS row.
-
-**Grok round 3 — reply received 2026-08-22 but NOT usable, redo in
-flight (5u).** Every one of the 9 listed source files came back marked
-`files_received: false` — Grok answered from the prompt's own Rule A id
-list rather than the actual country research files, so its edges/proposed
-nodes are thinner and less grounded than intended. Not raw-verified, not
-minted. Root cause and fix in `notes/grok-diary.md` §0; the same prompt
-(`notes/grok-prompt-cross-border-round3-2026-08-22.md`) is being resent with
-the attachment list also called out to Thomas directly, outside the prompt
-text.
 
 **Git:** unknown to agents by design — see rule 1.
 
@@ -219,13 +194,12 @@ Assume all of this exists and works; each has a dated comment at the site.
 ## 5. THE TODO LIST (live items only)
 
 ### In flight
-1. **Grok round 3 — REDO in flight, see §3 (item 5u).** Original reply
-   unusable (attachments never came through). Same prompt
-   (`notes/grok-prompt-cross-border-round3-2026-08-22.md`) is being resent;
-   this time the attachment list is being told to Thomas directly in-chat,
-   separate from the prompt text, per the new standing rule in
-   `notes/grok-diary.md` §0. When the reply lands: confirm `files_received`
-   is true this time, parse-check, raw-verify, mint (5r/5s template).
+1. **Cross-border research, next round** — the 5s mint landed (§3); what
+   remains is research, not code: the two held-out items (MU SNA-2008 edge,
+   AF CR 06/251 quote) and substantive edges for the seven countries whose
+   only tie is a dated e-GDDS row. The round-2 Grok prompt pattern lives at
+   `notes/grok-prompt-cross-border-round2-2026-08-22.md`; rules 2/3 apply
+   in full to whatever comes back.
 
 ### [Thomas] — only you can
 2. **Render-consistency / camera-fit bug — DEFERRED by your own call** (deal
@@ -336,11 +310,7 @@ personal file — leave it alone.
 - **Grok's JSON is not reliably JSON** — parse-check first. Its ids and
   enum values are inventions until grepped against the corpus. Never
   hand-edit JSON insertions — generate them (a hand-inserted field once
-  corrupted 15 files). **Its stated `files_received` confirmations are not
-  reliable either (round 3, 2026-08-22) — an attachment list only stated
-  inside the prompt block is not a guarantee Thomas actually attached
-  anything; verify by asking what it received AND by checking that its
-  content plausibly reflects the attached files, not just the prompt text.**
+  corrupted 15 files).
 - **Never reintroduce faceted node geometry** (fresnel rims) or
   additive/white pulse cores.
 - **The IMF DSBB tables are JS-walled** (use a real browser); its PDF
@@ -349,32 +319,7 @@ personal file — leave it alone.
 
 ---
 
-## 8. Grok pipeline — diary and prompt queue
-
-**Before writing ANY prompt for Grok, read `notes/grok-diary.md`** — the
-standing playbook of what works and Grok's dated failure modes (invented
-ids, invented enum values, silently skipped unattached countries, recycled
-quotes, third-party scorecards, and now §0: attachment lists that never
-reach Thomas because they only lived inside the prompt text). Append a
-dated lesson to the diary after processing every Grok reply. Every handoff
-carries this pointer (Thomas's standing instruction, 2026-08-22).
-
-Prompts live beside the diary as `notes/grok-prompt-*.md`; the diary's
-"Round log" section is the queue state. Currently in flight: **round 3
-redo** (`notes/grok-prompt-cross-border-round3-2026-08-22.md` — same prompt
-text as the first attempt, since the asks themselves were never the
-problem) asks for the Mauritius SNA-2008 edge done properly (plus a
-possible mu-national-accounts node), Afghanistan CR 06/251 corroboration,
-and substantive cross-border edges for SD/SL/IQ/IR/AF/YE/SY. This time the
-9-file attachment list is being relayed to Thomas directly in-chat, not just
-inside the prompt block — see §0 of the diary for why that matters. Whatever
-comes back: confirm `files_received` is genuinely true, parse-check the
-JSON, raw-verify every quote (rules 2/3), then mint — the 5r/5s verify-then-
-mint flow is the template.
-
----
-
-## 9. How to hand off
+## 8. How to hand off
 
 1. `cp HANDOFF.md "archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-<topic>.md"`.
 2. Append a dated section to this file (or rewrite only if it has gone
