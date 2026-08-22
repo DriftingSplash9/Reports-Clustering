@@ -1,0 +1,89 @@
+{
+  "_slice": "BC school tax, local-government statistics and unconditional grants",
+  "_researched": "2026-08-22",
+  "_note": "Closes three Alberta-parallel gaps: (1) provincial compilation of municipal financial data (LGDE → published schedules), (2) education property-tax mechanism that rests on BC Assessment, (3) formula-driven unconditional grants that weight population and assessment. No equalized-assessment step exists; assessment is already uniform province-wide.",
+  "proposed_reports": [
+    {
+      "proposed_id": "bc-local-government-statistics",
+      "title": "Local Government Statistics (Municipal General and Financial Statistics Schedules)",
+      "publisher": "Ministry of Housing and Municipal Affairs (Province of British Columbia)",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/facts-framework/statistics/statistics",
+      "description": "Annual compilation of standardized financial and statistical data submitted by every municipality and regional district via the Local Government Data Entry (LGDE) system. Covers assets, liabilities, long-term debt, revenues, expenditures, tangible capital assets, reserve funds, tax rates and tax burden. Closest functional equivalent to Alberta's Municipal Financial and Statistical Data / FIR compilation. Data due from local governments by 15 May; published in numbered schedules.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-school-tax-rates",
+      "title": "Provincial School Tax Rates (Residential and Non-Residential Orders in Council)",
+      "publisher": "Province of British Columbia (Orders in Council under the School Act)",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/taxes/property-taxes/annual-property-tax/school-tax",
+      "description": "Annual residential school-tax rates set by Order in Council for each school district (formula weights number of residences and total residential assessed value) and province-wide non-residential class rates. Includes the Additional School Tax on high-value residential properties (threshold currently $3 million). Rates applied to net taxable assessed values determined by BC Assessment; municipalities and the Surveyor of Taxes collect and remit.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-small-community-grants",
+      "title": "Small Community Grants (Unconditional)",
+      "publisher": "Ministry of Housing and Municipal Affairs",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/grants-transfers/small-community-grants",
+      "description": "Annual unconditional operating grants to municipalities with population up to approximately 19 000. Formula under the Local Government Grants Regulation comprises a base amount, an equalization component driven by assessment weighting factor (provincial average assessment per person divided by the municipality's), and a population component. Parallel to Alberta-style population- and assessment-weighted transfers.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "local-government-grants-act",
+      "title": "Local Government Grants Act [RSBC 1996] c. 275",
+      "publisher": "Province of British Columbia",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96275_01",
+      "description": "Enabling statute for unconditional and conditional grants to municipalities and regional districts. Section 3 authorises unconditional grants to be calculated on population, total expenditures/revenues, converted value of land and improvements (i.e. assessment), or other prescribed bases.",
+      "publication_cadence": "one-off instrument (legislation)"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bc-local-government-statistics",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Community Charter s. 167 requires every municipality to prepare annual financial statements and submit them (together with tax-rate information) to the Inspector of Municipalities by 15 May; the LGDE forms and resulting published schedules are the standardized product of that statutory reporting obligation.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/financial-reporting",
+      "evidence_quote": "All local governments in B.C. must submit financial statements and tax rate information by May 15 each year by submitting: Financial plans, Audited financial statements, Tax rate bylaws, Local Government Data Entry (LGDE) forms, LGDE tax forms. Once reviewed by the ministry this information is published in statistical schedules."
+    },
+    {
+      "source_report_id": "bc-school-tax-rates",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "calculated_from",
+      "basis": "Residential school-tax rates for each district are set using total residential assessed value in the district; the Additional School Tax applicability and taxable amount are determined from the net taxable value of the dwelling property as assessed by BC Assessment.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/taxes/property-taxes/annual-property-tax/school-tax",
+      "evidence_quote": "Each year the province sets the residential school tax rate for each school district and is based equally on: 1) The total number of residences in the district 2) The total residential assessed value in the district. BC Assessment determines if the additional school tax rate applies to your property."
+    },
+    {
+      "source_report_id": "bc-small-community-grants",
+      "target_report_id": "local-government-grants-act",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The grant program is authorised by the Local Government Grants Act and the detailed formula (base + assessment-weighting equalization + population) is prescribed in the Local Government Grants Regulation.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/grants-transfers/small-community-grants",
+      "evidence_quote": "The Local Government Grants Act and Local Government Grants Regulation have detailed information on provincial funding for local governments. Grant amounts are based on a formula that incorporates a base amount, population and assessment values."
+    },
+    {
+      "source_report_id": "bc-small-community-grants",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "calculated_from",
+      "basis": "The equalization component of the Small Community Grant uses an assessment weighting factor defined as provincial average assessment per person divided by the municipality's per-person assessment (converted value of land and improvements).",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/lc/bcgaz2/v49n13_185-2006",
+      "evidence_quote": "\"assessment\" in relation to a jurisdiction means the converted value of land and improvements, as defined in section 1 of the Schedule to the Community Charter, in the jurisdiction; \"assessment weighting factor\" in relation to a municipality means the provincial assessment value divided by the per person assessment of the municipality"
+    },
+    {
+      "source_report_id": "bc-small-community-grants",
+      "target_report_id": "bc-stats-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "The population component of the grant formula uses the municipality's mean population (derived from census / official estimates).",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/grants-transfers/small-community-grants",
+      "evidence_quote": "Grant amounts are based on a formula that incorporates a base amount, population and assessment values."
+    }
+  ]
+}

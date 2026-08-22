@@ -1,6 +1,8 @@
 # Prompt for Grok — Canada: Ontario — deepen (currently just 6 thin nodes for Canada's largest economy)
 
-**Attach:** `ontario-ompf-mpac.json`, `alberta-provincial.json`, `federal-canada.json` (all under `src/data/research/`) — these carry the existing Alberta/federal pattern this new research should follow, plus the federal transfer-program nodes (equalization, territorial formula financing, health/social transfers) new provincial/municipal nodes will likely connect to.
+**Standing rules:** see `../GROKREADME.md` — attach/paste it alongside this file every time. It has the id-integrity rule, the relationship-type enum, the honesty permission, the coverage-is-data-driven principle, and the reply schema. This file has only the region-specific research question below.
+
+**Attach:** `GROKREADME.md`, `ontario-ompf-mpac.json`, `alberta-provincial.json`, `federal-canada.json` (all under `src/data/research/`) — these carry the existing Alberta/federal pattern this new research should follow, plus the federal transfer-program nodes (equalization, territorial formula financing, health/social transfers) new provincial/municipal nodes will likely connect to.
 
 Paste everything below the line.
 
@@ -18,17 +20,6 @@ Ontario already has the province-wide assessment authority (MPAC) and the provin
 
 `fiscal-equalization-program`, `territorial-formula-financing`, `canada-health-transfer`, `canada-social-transfer`, `statcan-cpi`, `statcan-national-accounts`, `statcan-provincial-economic-accounts`, `statcan-government-finance-statistics`, `statcan-census-population`, `statcan-population-estimates`, `cmhc-rental-market-survey`, `cmhc-mortgage-loan-insurance`, `psab-psas` (Public Sector Accounting Standards), `statcan-business-register`. Also: `mpac-assessment`, `on-municipal-fir`, `on-ompf`, `on-opta`, `on-portable-housing-benefit`, `on-hpp`.
 
-**Relationship types — closed set of exactly four values:**
+## Reply note
 
-- `methodology_depends_on` — an international/national standard or framework governs how the report is compiled (PSAS, an SNA edition, a named provincial regulation setting the methodology for an index).
-- `uses_data_from` — the target's figures are a direct input to the source (e.g. a municipal FIR feeds a provincial financial/statistical compilation; a rent-benefit program's rates are set relative to CMHC's Rental Market Survey).
-- `calculated_from` — the source is mechanically derived from the target (e.g. an equalization/transfer amount calculated from a province's fiscal capacity data).
-- `cites` — referenced as context (a municipal budget citing the province's fiscal framework as its funding basis).
-
-No other values are legal.
-
-**Honesty permission: an explicit "found nothing solid for X" is a correct and useful answer.** Primary documents only — the government's own budget/financial-statement/regulation pages, not aggregator or news-summary sites. One quote per edge that names the specific jurisdiction and states the specific claim being made.
-
-## How to reply
-
-One JSON object: `proposed_reports` array for every new report node you find — `{ proposed_id, title, publisher, region, jurisdiction_level (federal/provincial/municipal/institutional), url, description, publication_cadence }` — plus a `dependencies` array for edges you can support with a primary source, `{ source_report_id, target_report_id, relationship_type, basis, evidence_url, evidence_quote }`. Tell us plainly if Toronto or Ottawa publish these documents under names that don't map cleanly to the FIR/assessment-roll/tax-bylaw template — Ontario's municipal-finance vocabulary sometimes differs from Alberta's and we'd rather have the real name than a forced label. We raw-verify every quote before anything is minted, same as always.
+Tell us plainly if Toronto or Ottawa publish these documents under names that don't map cleanly to the FIR/assessment-roll/tax-bylaw template — Ontario's municipal-finance vocabulary sometimes differs from Alberta's and we'd rather have the real name than a forced label.

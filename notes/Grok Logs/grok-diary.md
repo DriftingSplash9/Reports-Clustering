@@ -6,6 +6,20 @@ reply. Every handoff must name this file's location
 (`notes/grok-diary.md`).** This is the accumulated playbook; the prompts
 themselves live beside it as `notes/grok-prompt-*.md`.
 
+**This file is not what Grok reads.** It's Claude's own lessons-learned log
+for writing good prompts — Grok never sees it, since (per §0 below) Grok
+can't reach this project's files itself. The document that actually gets
+pasted/attached to Grok every time is `notes/GROKREADME.md` — added
+2026-08-22 alongside the numbered per-region prompts in
+`notes/grok-research-queue-2026-08-22/`, so the relationship-type enum, the
+id-integrity rule, the honesty permission, the coverage-is-data-driven
+principle, and the reply-JSON schema live in ONE place instead of being
+retyped into every regional prompt. With 60+ more countries still queued,
+that repetition was real: attach `GROKREADME.md` to every prompt from now
+on, and when writing a NEW regional prompt, put only the region-specific
+research question in it — everything generic belongs in GROKREADME.md, not
+copy-pasted in again.
+
 ## §0 — Attachments: tell Thomas separately, every time (Thomas, 2026-08-22)
 
 Grok cannot reach this project's files itself. Thomas physically attaches
@@ -33,6 +47,20 @@ to everything it returns, every time. Nothing Grok says gets minted until an
 agent has opened the URL and confirmed the quote — the 2026-08-22
 cross-border rounds verified 59/62 entries and the three failures were all
 caught this way.
+
+## Coverage is data-driven, not density-driven (Thomas, 2026-08-22)
+
+The graph represents the actual network of official reports and the
+dependencies that can be evidenced from primary documents. For any
+jurisdiction, research stops when additional primary sources stop adding
+real, verifiable nodes or edges. Head-count targets, parity with other
+countries or provinces, or "density" relative to already-closed layers are
+not criteria. Artificial completeness targets are outside the model.
+
+This was made explicit on 2026-08-22 during the British Columbia
+domestic-layer work (see failure mode 12 below), and it applies to every
+jurisdiction, not just BC. Put it in every prompt, and don't accept a reply
+that justifies itself by pointing at another region's coverage.
 
 ## What Grok is genuinely good at (don't over-constrain it)
 
@@ -106,6 +134,16 @@ caught this way.
     as unverified, say so explicitly in the next prompt and ask Grok to
     either find a *different* corroborating document or drop the claim —
     don't let it re-assert the same unverified quote a third time.**
+12. **Benchmarking coverage against other regions instead of against primary
+    sources (2026-08-22, British Columbia).** While researching BC's
+    domestic layer from scratch, Grok kept describing its own output as
+    "good" or "on par" by comparing BC's node count/density to Alberta's or
+    Ontario's already-built layers, rather than by whether more primary
+    sources actually existed to check. That's backwards: see the standing
+    rule above — coverage is data-driven, not density-driven. **Fix: state
+    that rule explicitly in every prompt, and reject any reply that argues
+    completeness by pointing at another jurisdiction's coverage instead of
+    at exhausted primary sources.**
 
 ## The prompt shape that works (used rounds 2–3)
 

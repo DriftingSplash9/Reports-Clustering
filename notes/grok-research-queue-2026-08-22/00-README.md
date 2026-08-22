@@ -8,6 +8,18 @@ a wasted reply: **the attachment list for each prompt is repeated below in
 one table, separate from the prompt text itself**, because that's the
 channel that actually reaches Thomas.
 
+**2026-08-22 restructure: the rules Grok needs are now in `../GROKREADME.md`,
+not repeated inside each numbered prompt.** Every prompt used to restate the
+same relationship-type enum, id-integrity rule, honesty permission, and reply
+schema, over and over — real repetition with 60+ more countries still to go.
+Now `GROKREADME.md` (one level up, in `notes/`) carries all of that once, and
+every numbered prompt below is just its region-specific research question.
+**Attach `GROKREADME.md` to every single prompt, in addition to whatever the
+table below lists for that row** — it's not repeated per-row below to keep
+the table itself skimmable. `notes/grok-diary.md` is a different document:
+that's Claude's own lessons-learned log for writing these prompts well, not
+something pasted to Grok.
+
 **This queue exists as its own case study of that lesson** — round 3
 (2026-08-22) came back with all 9 attached files marked "not received"
 because the attachment sentence lived only inside the pasteable prompt
@@ -48,7 +60,10 @@ over this whole folder (prompts + replies) and it picks up from there.
 
 ## Attachment manifest — check this before every paste
 
-| # | Prompt | Attach (from `src/data/research/`) |
+**Every row below also needs `GROKREADME.md` attached — it's the standing
+rules, not repeated per-row here. If you attach nothing else, attach that.**
+
+| # | Prompt | Also attach (from `src/data/research/`) |
 |---|---|---|
 | 01 | Canada — British Columbia | `alberta-provincial.json`, `alberta-municipal.json`, `federal-canada.json`, `equalization-named-products.json` |
 | 02 | Canada — Ontario deepen | `ontario-ompf-mpac.json`, `alberta-provincial.json`, `federal-canada.json` |
@@ -67,14 +82,14 @@ over this whole folder (prompts + replies) and it picks up from there.
 | 18 | Wiring — Uruguay/Paraguay/Guyana/Suriname | `uy-uruguay-grok-2026-08.json`, `py-paraguay-grok-2026-08.json`, `gy-guyana-grok-2026-08.json`, `sr-suriname-grok-2026-08.json` |
 | 19 | Wiring — UAE/Saudi Arabia | `ae-national-core.json`, `ae-united-arab-emirates-grok-2026-08.json`, `sa-saudi-arabia-grok-2026-08.json` |
 | 20 | Wiring — Afghanistan/Yemen/Sudan/Somalia | `af-afghanistan-grok-2026-08.json`, `ye-yemen-grok-2026-08.json`, `af-sudan.json`, `sd-g22-audit-chamber-fiscal.json`, `sd-leadchase-nac-audits.json`, `af-somalia-deepen.json`, `so-g22-puntland-benadir-mof.json` |
-| 30 | New — Central Asia/Caucasus/Mongolia | none (from-scratch) |
-| 31 | New — South Asia | none |
-| 32 | New — Gulf/Levant | none |
-| 33 | New — SE Asia remainder | none |
-| 34 | New — Central America | none |
-| 35 | New — Caribbean | none |
-| 36 | New — Belarus/North Korea | none |
-| 37 | New — Pacific microstates | none |
+| 30 | New — Central Asia/Caucasus/Mongolia | none — `GROKREADME.md` only (from-scratch) |
+| 31 | New — South Asia | none — `GROKREADME.md` only |
+| 32 | New — Gulf/Levant | none — `GROKREADME.md` only |
+| 33 | New — SE Asia remainder | none — `GROKREADME.md` only |
+| 34 | New — Central America | none — `GROKREADME.md` only |
+| 35 | New — Caribbean | none — `GROKREADME.md` only |
+| 36 | New — Belarus/North Korea | none — `GROKREADME.md` only |
+| 37 | New — Pacific microstates | none — `GROKREADME.md` only |
 
 ## Two things worth knowing before you start
 

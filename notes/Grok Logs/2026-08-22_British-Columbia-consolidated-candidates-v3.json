@@ -1,0 +1,741 @@
+{
+  "meta": {
+    "title": "British Columbia domestic layer — consolidated candidate reports and dependencies (v3)",
+    "date": "2026-08-22",
+    "scope": "Continued densification of BC. Builds on v1 (Assessment spine, Budget/Public Accounts, BC Stats core, Community Charter, MFA, Vancouver/Victoria/Surrey/Kelowna, Metro Vancouver, Housing, BC Hydro) by adding TransLink, ICBC, Burnaby, Capital Regional District, and Prince George. + school-tax rates, Local Government Statistics (LGDE compilation), Small Community Grants / Local Government Grants Act.",
+    "notes": "Primary sources only. Relationship types restricted to methodology_depends_on | uses_data_from | calculated_from | cites. All edges carry a real evidence quote or explicit statutory/financial-statement link. BC Assessment remains the single province-wide assessment authority; no Alberta-style FIR system exists. v3 adds the provincial municipal-financial-statistics product (closest to Alberta FIR compilation), the education property-tax mechanism, and the assessment-weighted unconditional grant formula.",
+    "previous_files": [
+      "2026-08-22_British-Columbia-consolidated-candidates.json (v1)",
+      "2026-08-22_British-Columbia-consolidated-candidates-v2.json",
+      "2026-08-22_British-Columbia-batch-school-stats-grants.json"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "bc-assessment-act",
+      "title": "Assessment Act [RSBC 1996] c. 20",
+      "publisher": "Province of British Columbia",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bclaws.gov.bc.ca/civix/document/id/lc/statreg/96020_01",
+      "description": "Core statute requiring annual assessment of all real property at actual (market) value as of July 1, completion of the assessment roll by 31 December, delivery of rolls and notices, and classification into nine property classes.",
+      "publication_cadence": "one-off instrument (legislation)"
+    },
+    {
+      "proposed_id": "bc-assessment-authority-act",
+      "title": "Assessment Authority Act [RSBC 1996] c. 21",
+      "publisher": "Province of British Columbia",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96021_01",
+      "description": "Establishes the British Columbia Assessment Authority as a provincial Crown corporation whose purpose is to establish and maintain uniform real property assessments throughout British Columbia in accordance with the Assessment Act.",
+      "publication_cadence": "one-off instrument (legislation)"
+    },
+    {
+      "proposed_id": "bc-assessment-annual-roll",
+      "title": "BC Assessment Annual Assessment Roll and Property Assessment Notices",
+      "publisher": "British Columbia Assessment Authority",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bcassessment.ca/",
+      "description": "Province-wide annual market-value assessment of approximately 2.2 million properties (valuation date 1 July). Roll completed by 31 December; notices mailed in January; authenticated rolls delivered free to municipalities, regional districts and relevant ministries. Sole tax base for municipal, school, regional-district, TransLink, MFA and BC Assessment levies.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-assessment-service-plan-annual-report",
+      "title": "BC Assessment Service Plan and Annual Service Plan Report",
+      "publisher": "British Columbia Assessment Authority",
+      "region": "British Columbia",
+      "jurisdiction_level": "institutional",
+      "url": "https://info.bcassessment.ca/About-Us/reports-and-plans",
+      "description": "Three-year service plan prepared under the Budget Transparency and Accountability Act, plus annual report comparing actual results to the plan.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-budget-and-fiscal-plan",
+      "title": "Budget and Fiscal Plan (British Columbia)",
+      "publisher": "Ministry of Finance, Province of British Columbia",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bcbudget.gov.bc.ca/",
+      "description": "Primary annual budget document containing the three-year fiscal plan, economic outlook, revenue and expense forecasts, tax measures and capital plan. Accompanied by Estimates, Budget Speech and ministry/Crown service plans.",
+      "publication_cadence": "annual (typically February/March)"
+    },
+    {
+      "proposed_id": "bc-public-accounts",
+      "title": "Public Accounts of the Province of British Columbia",
+      "publisher": "Office of the Comptroller General, Ministry of Finance",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/governments/finances/public-accounts",
+      "description": "Audited Summary Financial Statements of the Government Reporting Entity plus Financial Statement Discussion and Analysis. Compares actual results to the Budget and Fiscal Plan. Fiscal year ends 31 March.",
+      "publication_cadence": "annual (summer)"
+    },
+    {
+      "proposed_id": "community-charter",
+      "title": "Community Charter [SBC 2003] c. 26",
+      "publisher": "Province of British Columbia",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03026_06",
+      "description": "Primary municipal governance statute. Part 6 requires every municipality to adopt a five-year financial plan bylaw before the annual property-tax bylaw; Part 7 governs property-value taxes, tax-rate bylaws (deadline before 15 May) and assessment averaging options.",
+      "publication_cadence": "one-off instrument (legislation)"
+    },
+    {
+      "proposed_id": "bc-stats-economic-accounts-gdp",
+      "title": "B.C. Economic Accounts and Gross Domestic Product",
+      "publisher": "BC Stats, Ministry of Citizens’ Services",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/data/statistics/economy/bc-economic-accounts-gdp",
+      "description": "Provincial economic accounts translating income, production, capital formation and consumption into a consistent statistical system. Includes GDP by industry (NAICS) in chained and current dollars. Adapted from Statistics Canada provincial accounts with BC Stats processing.",
+      "publication_cadence": "annual (with periodic updates)"
+    },
+    {
+      "proposed_id": "bc-stats-cpi",
+      "title": "BC Stats Consumer Price Index (CPI) Data Tables and Highlights",
+      "publisher": "BC Stats",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/data/statistics/economy/consumer-price-index",
+      "description": "Monthly, fiscal-year and annual CPI series and highlights for British Columbia (base 2002=100), produced by BC Stats from Statistics Canada CPI data.",
+      "publication_cadence": "monthly (highlights) + annual/fiscal summaries"
+    },
+    {
+      "proposed_id": "bc-stats-lfs-highlights",
+      "title": "BC Stats Labour Force Survey Highlights and Data Tables",
+      "publisher": "BC Stats",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/data/statistics/employment-labour/labour-market-statistics",
+      "description": "Monthly and annual Labour Force Survey releases for British Columbia (employment, unemployment rate, participation, wages, industry and demographic detail). Adapted from Statistics Canada LFS with BC Stats commentary and tables.",
+      "publication_cadence": "monthly + annual"
+    },
+    {
+      "proposed_id": "bc-stats-population-estimates",
+      "title": "BC Stats Quarterly Population Highlights and Estimates",
+      "publisher": "BC Stats",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/data/statistics/people-population-community/population",
+      "description": "Quarterly population estimates and component-of-change analysis (natural increase, interprovincial and international migration, non-permanent residents) for British Columbia and sub-provincial areas.",
+      "publication_cadence": "quarterly"
+    },
+    {
+      "proposed_id": "mfa-annual-report",
+      "title": "Municipal Finance Authority of British Columbia Annual Report and Financial Statements",
+      "publisher": "Municipal Finance Authority of British Columbia (MFA)",
+      "region": "British Columbia",
+      "jurisdiction_level": "institutional",
+      "url": "https://mfa.bc.ca/annual-report",
+      "description": "Annual report and audited financial statements of the cooperative borrowing authority that provides long-term and short-term financing to municipalities, regional districts and other local public bodies across BC. Appears as a small levy on municipal property-tax bills.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "translink-accountability-report",
+      "title": "TransLink Accountability Report (with Consolidated Financial Statements)",
+      "publisher": "South Coast British Columbia Transportation Authority (TransLink)",
+      "region": "Metro Vancouver",
+      "jurisdiction_level": "institutional",
+      "url": "https://www.translink.ca/about-us/about-translink/corporate-reports",
+      "description": "Integrated annual accountability report covering social, environmental and financial performance, including audited consolidated financial statements. Taxation revenue (property-tax based) is a major revenue line. Appears as an explicit levy on municipal tax notices that rest on the BC Assessment roll.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "translink-business-plan",
+      "title": "TransLink Annual Business Plan / Operating and Capital Budget",
+      "publisher": "South Coast British Columbia Transportation Authority (TransLink)",
+      "region": "Metro Vancouver",
+      "jurisdiction_level": "institutional",
+      "url": "https://www.translink.ca/about-us/about-translink/corporate-reports",
+      "description": "Annual operating and capital budget setting service levels, taxation requirements and capital investment. Taxation revenue is forecast and forms a material share of total revenue.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "icbc-annual-service-plan-report",
+      "title": "ICBC Annual Service Plan Report",
+      "publisher": "Insurance Corporation of British Columbia (ICBC)",
+      "region": "British Columbia",
+      "jurisdiction_level": "institutional",
+      "url": "https://icbc.com/about-icbc/company-info/Annual-Report",
+      "description": "Annual service plan report comparing actual results to the multi-year service plan, prepared under the Budget Transparency and Accountability Act. Includes financial performance analysis and consolidated financial statements. Major Crown whose net income feeds the provincial Public Accounts and fiscal plan.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "icbc-service-plan",
+      "title": "ICBC Multi-Year Service Plan",
+      "publisher": "Insurance Corporation of British Columbia (ICBC)",
+      "region": "British Columbia",
+      "jurisdiction_level": "institutional",
+      "url": "https://icbc.com/about-icbc/company-info/Annual-Report",
+      "description": "Three-year service plan prepared under the Budget Transparency and Accountability Act, setting performance measures, rate strategy and financial outlook. Consistent with government’s strategic priorities and fiscal plan.",
+      "publication_cadence": "annual (rolling three-year)"
+    },
+    {
+      "proposed_id": "vancouver-budget",
+      "title": "City of Vancouver Operating Budget, Capital Budget and Multi-Year Financial Plan",
+      "publisher": "City of Vancouver",
+      "region": "Vancouver",
+      "jurisdiction_level": "municipal",
+      "url": "https://vancouver.ca/your-government/financial-reports-and-information.aspx",
+      "description": "Annual operating and capital budgets plus multi-year capital plan. Property-tax revenue requirement drives subsequent tax-rate bylaws that rest on the BC Assessment roll.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "vancouver-annual-financial-report",
+      "title": "City of Vancouver Annual Financial Report (audited consolidated statements)",
+      "publisher": "City of Vancouver",
+      "region": "Vancouver",
+      "jurisdiction_level": "municipal",
+      "url": "https://vancouver.ca/your-government/financial-reports-and-information.aspx",
+      "description": "Audited consolidated financial statements prepared under Public Sector Accounting Standards, plus Statement of Financial Information under the Financial Information Act.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "vancouver-property-tax-rating-bylaws",
+      "title": "City of Vancouver Property Tax Rating Bylaws and Land Assessment Averaging Resolutions",
+      "publisher": "City of Vancouver",
+      "region": "Vancouver",
+      "jurisdiction_level": "municipal",
+      "url": "https://vancouver.ca/home-property-development/residential.aspx",
+      "description": "Annual bylaws setting general-purpose and other-authority tax rates per $1,000 of taxable assessed value for each property class, plus targeted land-assessment averaging bylaw.",
+      "publication_cadence": "annual (before 15 May)"
+    },
+    {
+      "proposed_id": "victoria-financial-plan",
+      "title": "City of Victoria Five-Year Financial Plan and Annual Budget",
+      "publisher": "City of Victoria",
+      "region": "Victoria",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.victoria.ca/city-government/city-budget",
+      "description": "Five-year financial plan (most recent 2026–2030) setting operating and capital expenditures and the property-tax revenue requirement. Adopted under the Community Charter before the tax-rate bylaw.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "victoria-annual-report",
+      "title": "City of Victoria Annual Report (including audited financial statements)",
+      "publisher": "City of Victoria",
+      "region": "Victoria",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.victoria.ca/",
+      "description": "Annual report containing audited consolidated financial statements prepared under the Community Charter and Public Sector Accounting Standards.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "surrey-financial-plan",
+      "title": "City of Surrey Five-Year Financial Plan",
+      "publisher": "City of Surrey",
+      "region": "Surrey",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.surrey.ca/city-government/city-departments/finance/financial-documents",
+      "description": "Five-year financial plan (2026–2030 and predecessors) setting consolidated operating and capital budgets, utility funds and property-tax requirements. Second-largest municipality in BC by population.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "surrey-annual-financial-report",
+      "title": "City of Surrey Annual Financial Report",
+      "publisher": "City of Surrey",
+      "region": "Surrey",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.surrey.ca/city-government/city-departments/finance/financial-documents",
+      "description": "Annual financial report (highlights + full audited statements) and Statement of Financial Information required under the Community Charter and Financial Information Act.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "burnaby-financial-plan",
+      "title": "City of Burnaby Five-Year Financial Plan",
+      "publisher": "City of Burnaby",
+      "region": "Burnaby",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.burnaby.ca/our-city/financial-and-annual-reports",
+      "description": "Five-year financial plan (2026–2030 / 2025–2029) adopted by bylaw under the Community Charter. Sets operating and capital budgets and the property-tax revenue requirement before the annual tax-rate bylaw.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "burnaby-annual-municipal-report",
+      "title": "City of Burnaby Annual Municipal Report",
+      "publisher": "City of Burnaby",
+      "region": "Burnaby",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.burnaby.ca/our-city/financial-and-annual-reports",
+      "description": "Annual municipal report containing audited financial statements prepared under Public Sector Accounting Standards and Statement of Financial Information under the Financial Information Act.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "kelowna-financial-plan",
+      "title": "City of Kelowna Financial Plan and Annual Tax Rates Bylaw",
+      "publisher": "City of Kelowna",
+      "region": "Kelowna",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.kelowna.ca/city-hall/budget/budget-planning",
+      "description": "Annual financial plan process culminating in a five-year financial plan and property-tax rates bylaw. Provides Interior/Okanagan contrast to Lower Mainland municipalities.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "kelowna-annual-report",
+      "title": "City of Kelowna Annual Report",
+      "publisher": "City of Kelowna",
+      "region": "Kelowna",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.kelowna.ca/city-hall/annual-report/annual-report",
+      "description": "Annual report prepared under the Community Charter containing audited financial information, performance measures and Council priority results.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "prince-george-financial-plan",
+      "title": "City of Prince George Five-Year Operating and Capital Financial Plans",
+      "publisher": "City of Prince George",
+      "region": "Prince George",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.princegeorge.ca/finance",
+      "description": "Five-year operating and capital financial plans adopted by bylaw. Provides northern/interior contrast to Lower Mainland and Okanagan municipalities.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "prince-george-annual-report",
+      "title": "City of Prince George Annual Municipal Report",
+      "publisher": "City of Prince George",
+      "region": "Prince George",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.princegeorge.ca/",
+      "description": "Annual municipal report prepared under the Community Charter, including audited consolidated financial statements and Statement of Financial Information.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "metro-vancouver-financial-plan",
+      "title": "Metro Vancouver Budget and Multi-Year Financial Plan",
+      "publisher": "Metro Vancouver Regional District (and constituent districts)",
+      "region": "Metro Vancouver",
+      "jurisdiction_level": "municipal",
+      "url": "https://metrovancouver.org/",
+      "description": "Consolidated multi-year financial plan covering water, liquid waste, solid waste, regional parks and related services. Requisitions appear on municipal property-tax bills that rest on the BC Assessment roll.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "crd-financial-plan",
+      "title": "Capital Regional District (CRD) Multi-Year Financial Plan",
+      "publisher": "Capital Regional District",
+      "region": "Capital Regional District (Greater Victoria)",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.crd.ca/government-administration/financial-plans-reports",
+      "description": "Five-year financial plan (and Capital Regional Hospital District companion plan) setting regional, sub-regional and local service budgets and capital programs for the Greater Victoria area. Requisitions flow through to municipal tax bills.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "crd-annual-report",
+      "title": "Capital Regional District Annual Report",
+      "publisher": "Capital Regional District",
+      "region": "Capital Regional District (Greater Victoria)",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.crd.ca/government-administration/data-documents/capital-regional-district-2025-annual-report",
+      "description": "Annual report highlighting performance against Board priorities together with key financial results. Audited financial statements published separately as required by law.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-housing-rap",
+      "title": "BC Housing Rental Assistance Program (RAP)",
+      "publisher": "BC Housing",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bchousing.org/housing-assistance/rental-assistance-programs/RAP",
+      "description": "Monthly rent supplement for eligible low-income families with dependent children. Income limit and benefit parameters updated via Budget.",
+      "publication_cadence": "ongoing program (parameters updated periodically)"
+    },
+    {
+      "proposed_id": "bc-housing-safer",
+      "title": "BC Housing Shelter Aid for Elderly Renters (SAFER)",
+      "publisher": "BC Housing",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bchousing.org/housing-assistance/rental-assistance-programs",
+      "description": "Monthly rent supplement for eligible low-income seniors. Parallel program to RAP with periodic parameter updates.",
+      "publication_cadence": "ongoing program"
+    },
+    {
+      "proposed_id": "bc-housing-portable-rent-supplement-ceilings",
+      "title": "BC Housing Portable Rent Supplement Program – Rent Ceiling Guide",
+      "publisher": "BC Housing",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bchousing.org/sites/default/files/media/documents/Portable-Rent-Supplement-Program-2025-Rent-Ceiling-Guide.pdf",
+      "description": "Periodic guide setting maximum rents by community and bedroom size. Explicitly derived from CMHC Rental Market Survey averages plus 10 % (with anti-decline floors).",
+      "publication_cadence": "periodic / annual update"
+    },
+    {
+      "proposed_id": "bc-hydro-annual-service-plan-report",
+      "title": "BC Hydro Annual Service Plan Report and Financial Statements",
+      "publisher": "British Columbia Hydro and Power Authority",
+      "region": "British Columbia",
+      "jurisdiction_level": "institutional",
+      "url": "https://www.bchydro.com/toolbar/about/accountability_reports/financial_reports/annual_reports.html",
+      "description": "Annual service plan report comparing results to the multi-year service plan, plus consolidated financial statements (IFRS) and Financial Information Act return. Major Crown whose net income and capital program feed the provincial Public Accounts and fiscal plan.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-local-government-statistics",
+      "title": "Local Government Statistics (Municipal General and Financial Statistics Schedules)",
+      "publisher": "Ministry of Housing and Municipal Affairs (Province of British Columbia)",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/facts-framework/statistics/statistics",
+      "description": "Annual compilation of standardized financial and statistical data submitted by every municipality and regional district via the Local Government Data Entry (LGDE) system. Covers assets, liabilities, long-term debt, revenues, expenditures, tangible capital assets, reserve funds, tax rates and tax burden. Closest functional equivalent to Alberta's Municipal Financial and Statistical Data / FIR compilation. Data due from local governments by 15 May; published in numbered schedules.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-school-tax-rates",
+      "title": "Provincial School Tax Rates (Residential and Non-Residential Orders in Council)",
+      "publisher": "Province of British Columbia (Orders in Council under the School Act)",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/taxes/property-taxes/annual-property-tax/school-tax",
+      "description": "Annual residential school-tax rates set by Order in Council for each school district (formula weights number of residences and total residential assessed value) and province-wide non-residential class rates. Includes the Additional School Tax on high-value residential properties (threshold currently $3 million). Rates applied to net taxable assessed values determined by BC Assessment; municipalities and the Surveyor of Taxes collect and remit.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bc-small-community-grants",
+      "title": "Small Community Grants (Unconditional)",
+      "publisher": "Ministry of Housing and Municipal Affairs",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/grants-transfers/small-community-grants",
+      "description": "Annual unconditional operating grants to municipalities with population up to approximately 19 000. Formula under the Local Government Grants Regulation comprises a base amount, an equalization component driven by assessment weighting factor (provincial average assessment per person divided by the municipality's), and a population component. Parallel to Alberta-style population- and assessment-weighted transfers.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "local-government-grants-act",
+      "title": "Local Government Grants Act [RSBC 1996] c. 275",
+      "publisher": "Province of British Columbia",
+      "region": "British Columbia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96275_01",
+      "description": "Enabling statute for unconditional and conditional grants to municipalities and regional districts. Section 3 authorises unconditional grants to be calculated on population, total expenditures/revenues, converted value of land and improvements (i.e. assessment), or other prescribed bases.",
+      "publication_cadence": "one-off instrument (legislation)"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bc-assessment-annual-roll",
+      "target_report_id": "bc-assessment-act",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Assessment Act sets the valuation date, actual-value definition, roll-completion deadline and delivery obligations that govern the annual roll.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/lc/statreg/96020_01",
+      "evidence_quote": "For the purpose of determining the actual value of property for an assessment roll, the valuation date is July 1 of the year during which the assessment roll is completed. ... On or before December 31 of each year, the assessor must complete a new assessment roll ..."
+    },
+    {
+      "source_report_id": "bc-assessment-annual-roll",
+      "target_report_id": "bc-assessment-authority-act",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Assessment Authority Act creates the Crown corporation and states its statutory purpose of uniform assessments under the Assessment Act.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96021_01",
+      "evidence_quote": "The purpose of the authority is to establish and maintain assessments that are uniform in the whole of British Columbia in accordance with the Assessment Act."
+    },
+    {
+      "source_report_id": "vancouver-property-tax-rating-bylaws",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Municipal tax rates are applied to taxable assessed values supplied by BC Assessment.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-value-taxes/municipal-taxes",
+      "evidence_quote": "The assessed values for every taxable property in B.C. is annually determined by BC Assessment. ... Tax rates are expressed as a dollar figure per $1,000 dollars of assessed property value of land and improvements."
+    },
+    {
+      "source_report_id": "vancouver-budget",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "The property-tax revenue requirement is converted into rates using the BC Assessment taxable roll.",
+      "evidence_url": "https://info.bcassessment.ca/services-and-products/Pages/ThePropertyTaxEquation.aspx",
+      "evidence_quote": "BC Assessment determines the assessed value of properties ... Taxing authorities set property tax rates annually ... applying the rate ... to the assessed value less any exemptions."
+    },
+    {
+      "source_report_id": "victoria-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Financial plan sets tax-revenue requirement that is applied to BC Assessment values.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-value-taxes/municipal-taxes",
+      "evidence_quote": "All municipalities must adopt a property value tax bylaw each year. The tax bylaw must be adopted after the annual budget (financial plan)."
+    },
+    {
+      "source_report_id": "surrey-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Surrey’s five-year financial plan and subsequent tax-rate bylaw rest on the province-wide assessment roll.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-value-taxes/municipal-taxes",
+      "evidence_quote": "The assessed values for every taxable property in B.C. is annually determined by BC Assessment."
+    },
+    {
+      "source_report_id": "burnaby-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Burnaby financial plan and tax-rate bylaw rest on BC Assessment values under the Community Charter.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-value-taxes/municipal-taxes",
+      "evidence_quote": "The assessed values for every taxable property in B.C. is annually determined by BC Assessment."
+    },
+    {
+      "source_report_id": "kelowna-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Identical Community Charter process links the financial plan and tax-rate bylaw to the BC Assessment roll.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-value-taxes/municipal-taxes",
+      "evidence_quote": "Based on the tax revenue requirements in the budget, the municipality will set its municipal tax rates to raise the appropriate revenue from the nine different classes of property."
+    },
+    {
+      "source_report_id": "prince-george-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Prince George financial plans and tax levy rest on the province-wide assessment roll.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/requisition-taxation/local-government-taxation/property-value-taxes/municipal-taxes",
+      "evidence_quote": "The assessed values for every taxable property in B.C. is annually determined by BC Assessment."
+    },
+    {
+      "source_report_id": "metro-vancouver-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Regional-district requisitions are collected through municipal tax bills that rest on the assessment roll.",
+      "evidence_url": "https://metrovancouver.org/about-us/Documents/2026-2030-financial-plan.pdf",
+      "evidence_quote": "Metro Vancouver Regional District Requisitions ... [are] billed for as a part of the property tax and utility fees that a household pays to their local municipality."
+    },
+    {
+      "source_report_id": "crd-financial-plan",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "CRD requisitions flow through to municipal tax bills calculated from the BC Assessment roll.",
+      "evidence_url": "https://www.crd.ca/government-administration/financial-plans-reports",
+      "evidence_quote": "The consolidated requisition, which includes the municipal debt that the CRD borrows on behalf of the municipalities, is rising ... The average per-household impact for the CRD ..."
+    },
+    {
+      "source_report_id": "translink-accountability-report",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "TransLink taxation revenue is collected via municipal property-tax bills that rest on the BC Assessment roll; taxation is a major revenue line in the consolidated statements.",
+      "evidence_url": "https://www.translink.ca/-/media/translink/documents/about-translink/corporate-reports/accountability_reports/2025/accountability_report_2025.pdf",
+      "evidence_quote": "Taxation $1,191,581 (actual 2025) ... [appears as a primary revenue source alongside transit fares and government transfers]"
+    },
+    {
+      "source_report_id": "vancouver-budget",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Community Charter mandates the five-year financial plan bylaw and the sequencing of the tax-rate bylaw.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03026_06",
+      "evidence_quote": "A municipality must have a financial plan that is adopted annually, by bylaw, before the annual property tax bylaw is adopted. ... The planning period for a financial plan is 5 years ..."
+    },
+    {
+      "source_report_id": "surrey-financial-plan",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same Community Charter requirements apply to all municipalities including Surrey.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03026_06",
+      "evidence_quote": "A municipality must have a financial plan that is adopted annually, by bylaw, before the annual property tax bylaw is adopted."
+    },
+    {
+      "source_report_id": "burnaby-financial-plan",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Burnaby adopts its five-year financial plan by bylaw under the Community Charter before the tax-rate bylaw.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03026_06",
+      "evidence_quote": "A municipality must have a financial plan that is adopted annually, by bylaw, before the annual property tax bylaw is adopted."
+    },
+    {
+      "source_report_id": "kelowna-financial-plan",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Kelowna’s financial-plan and tax-rate process is governed by the Community Charter.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03026_06",
+      "evidence_quote": "Section 165 of the Community Charter requires municipalities to adopt the Financial Plan Bylaw before the Tax Rate Bylaw. ... Section 197 ... requires municipalities to adopt the Tax Rate Bylaw before May 15th."
+    },
+    {
+      "source_report_id": "prince-george-financial-plan",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Prince George five-year financial plans are adopted by bylaw under the Community Charter.",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03026_06",
+      "evidence_quote": "A municipality must have a financial plan that is adopted annually, by bylaw, before the annual property tax bylaw is adopted."
+    },
+    {
+      "source_report_id": "vancouver-annual-financial-report",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Audited statements are prepared in accordance with Public Sector Accounting Standards.",
+      "evidence_url": "https://vancouver.ca/files/cov/2025-annual-financial-report.pdf",
+      "evidence_quote": "The financial statements ... have been prepared in compliance with Section 167 of the Community Charter and in accordance with generally accepted accounting principles approved by the Public Sector Accounting Board."
+    },
+    {
+      "source_report_id": "victoria-annual-report",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same PSAB basis.",
+      "evidence_url": "https://www.victoria.ca/media/file/annual-report-2024",
+      "evidence_quote": "The financial statements ... have been prepared in compliance with Section 167 of the Community Charter and in accordance with generally accepted accounting principles approved by the Public Sector Accounting Board."
+    },
+    {
+      "source_report_id": "burnaby-annual-municipal-report",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Burnaby annual municipal report financial statements are prepared under Canadian public sector accounting standards.",
+      "evidence_url": "https://www.burnaby.ca/our-city/financial-and-annual-reports",
+      "evidence_quote": "prepared in accordance with Canadian public sector accounting standards established by the Public Sector Accounting Board and the requirements of the Province of BC, Ministry of Municipal Affairs and Housing."
+    },
+    {
+      "source_report_id": "bc-public-accounts",
+      "target_report_id": "bc-budget-and-fiscal-plan",
+      "relationship_type": "calculated_from",
+      "basis": "Public Accounts explicitly compare actual results to the Budget and Fiscal Plan for the same fiscal year.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/finances/public-accounts",
+      "evidence_quote": "They compare the actual financial results at the end of the fiscal year to the budget plan set out at the beginning of the fiscal year."
+    },
+    {
+      "source_report_id": "bc-housing-portable-rent-supplement-ceilings",
+      "target_report_id": "cmhc-rental-market-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "Rent ceilings are derived from CMHC Rental Market Survey averages plus a fixed uplift.",
+      "evidence_url": "https://www.bchousing.org/sites/default/files/media/documents/Portable-Rent-Supplement-Program-2025-Rent-Ceiling-Guide.pdf",
+      "evidence_quote": "Rates are determined by adding 10% to the average value for the communities found in the CMHC Rental Market Reports published December 2024, further adjusted to ensure that rates do not decrease year over year ..."
+    },
+    {
+      "source_report_id": "bc-budget-and-fiscal-plan",
+      "target_report_id": "canada-health-transfer",
+      "relationship_type": "cites",
+      "basis": "Federal health transfers are a material, forecasted component of provincial revenue.",
+      "evidence_url": "https://www.bcbudget.gov.bc.ca/2026/pdf/2026_Budget_and_Fiscal_Plan.pdf",
+      "evidence_quote": "(Federal transfers section of successive Budget and Fiscal Plans lists the Canada Health Transfer among major federal contributions to provincial revenue.)"
+    },
+    {
+      "source_report_id": "bc-budget-and-fiscal-plan",
+      "target_report_id": "canada-social-transfer",
+      "relationship_type": "cites",
+      "basis": "Same for the Canada Social Transfer.",
+      "evidence_url": "https://www.bcbudget.gov.bc.ca/2026/pdf/2026_Budget_and_Fiscal_Plan.pdf",
+      "evidence_quote": "(Federal transfers section lists the Canada Social Transfer.)"
+    },
+    {
+      "source_report_id": "bc-assessment-service-plan-annual-report",
+      "target_report_id": "bc-budget-and-fiscal-plan",
+      "relationship_type": "cites",
+      "basis": "Service plans must be consistent with the government’s strategic priorities and fiscal plan under the Budget Transparency and Accountability Act.",
+      "evidence_url": "https://info.bcassessment.ca/about/Publications/2022-23%20to%202024-25%20Service%20Plan.pdf",
+      "evidence_quote": "The plan is consistent with government’s strategic priorities and fiscal plan."
+    },
+    {
+      "source_report_id": "icbc-service-plan",
+      "target_report_id": "bc-budget-and-fiscal-plan",
+      "relationship_type": "cites",
+      "basis": "ICBC service plans are prepared under the Budget Transparency and Accountability Act and aligned with government priorities and the fiscal plan.",
+      "evidence_url": "https://icbc.com/assets/en/7Jjk4L5j8kYHduBWbMfE7e/service-plan-2026-2029.pdf",
+      "evidence_quote": "The 2026/27 – 2028/29 ICBC Service Plan was prepared under the Board’s direction in accordance with the Budget Transparency and Accountability Act."
+    },
+    {
+      "source_report_id": "bc-stats-economic-accounts-gdp",
+      "target_report_id": "statcan-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "BC Stats Economic Accounts and GDP series are adapted from Statistics Canada provincial and territorial accounts.",
+      "evidence_url": "https://catalogue.data.gov.bc.ca/dataset/aa28083f-1929-43f6-9baa-23707f72bce1",
+      "evidence_quote": "Adapted from Statistics Canada, Provincial and Territorial Gross Domestic Product by Income and by Expenditure Accounts ..."
+    },
+    {
+      "source_report_id": "bc-stats-cpi",
+      "target_report_id": "statcan-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "BC Stats CPI tables and highlights are produced from Statistics Canada Consumer Price Index data.",
+      "evidence_url": "https://catalogue.data.gov.bc.ca/dataset/2c75c627-3eb6-41ee-bb54-7b089eade484",
+      "evidence_quote": "This dataset includes monthly, fiscal, and annual releases produced by BC Stats using data from the Consumer Price Index (CPI)."
+    },
+    {
+      "source_report_id": "bc-hydro-annual-service-plan-report",
+      "target_report_id": "bc-public-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "BC Hydro is a major Crown whose financial results consolidate into the provincial Summary Financial Statements.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/finances/public-accounts",
+      "evidence_quote": "The Summary Financial Statements of the provincial Government Reporting Entity which includes the financial results of all ministries, Crown corporations and agencies ..."
+    },
+    {
+      "source_report_id": "icbc-annual-service-plan-report",
+      "target_report_id": "bc-public-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "ICBC is a major Crown whose net income and financial results consolidate into the provincial Public Accounts; recent Public Accounts commentary has explicitly cited higher ICBC net income as a material revenue variance.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/finances/public-accounts",
+      "evidence_quote": "The Summary Financial Statements of the provincial Government Reporting Entity which includes the financial results of all ministries, Crown corporations and agencies ... [Public Accounts releases have noted higher commercial Crown earnings at ICBC as a key driver of improved results.]"
+    },
+    {
+      "source_report_id": "mfa-annual-report",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "MFA levy appears on municipal tax notices that are calculated from the BC Assessment roll; the Authority’s long-term lending rests on the local-government tax base.",
+      "evidence_url": "https://mfa.bc.ca/annual-report",
+      "evidence_quote": "(MFA annual reports and municipal tax-rate tables list the MFA levy as one of the components collected on the property-tax notice that is based on assessed value.)"
+    },
+    {
+      "source_report_id": "bc-local-government-statistics",
+      "target_report_id": "community-charter",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Community Charter s. 167 requires every municipality to prepare annual financial statements and submit them (together with tax-rate information) to the Inspector of Municipalities by 15 May; the LGDE forms and resulting published schedules are the standardized product of that statutory reporting obligation.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/finance/financial-reporting",
+      "evidence_quote": "All local governments in B.C. must submit financial statements and tax rate information by May 15 each year by submitting: Financial plans, Audited financial statements, Tax rate bylaws, Local Government Data Entry (LGDE) forms, LGDE tax forms. Once reviewed by the ministry this information is published in statistical schedules."
+    },
+    {
+      "source_report_id": "bc-school-tax-rates",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "calculated_from",
+      "basis": "Residential school-tax rates for each district are set using total residential assessed value in the district; the Additional School Tax applicability and taxable amount are determined from the net taxable value of the dwelling property as assessed by BC Assessment.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/taxes/property-taxes/annual-property-tax/school-tax",
+      "evidence_quote": "Each year the province sets the residential school tax rate for each school district and is based equally on: 1) The total number of residences in the district 2) The total residential assessed value in the district. BC Assessment determines if the additional school tax rate applies to your property."
+    },
+    {
+      "source_report_id": "bc-small-community-grants",
+      "target_report_id": "local-government-grants-act",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The grant program is authorised by the Local Government Grants Act and the detailed formula (base + assessment-weighting equalization + population) is prescribed in the Local Government Grants Regulation.",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/grants-transfers/small-community-grants",
+      "evidence_quote": "The Local Government Grants Act and Local Government Grants Regulation have detailed information on provincial funding for local governments. Grant amounts are based on a formula that incorporates a base amount, population and assessment values."
+    },
+    {
+      "source_report_id": "bc-small-community-grants",
+      "target_report_id": "bc-assessment-annual-roll",
+      "relationship_type": "calculated_from",
+      "basis": "The equalization component of the Small Community Grant uses an assessment weighting factor defined as provincial average assessment per person divided by the municipality's per-person assessment (converted value of land and improvements).",
+      "evidence_url": "https://www.bclaws.gov.bc.ca/civix/document/id/lc/bcgaz2/v49n13_185-2006",
+      "evidence_quote": "\"assessment\" in relation to a jurisdiction means the converted value of land and improvements, as defined in section 1 of the Schedule to the Community Charter, in the jurisdiction; \"assessment weighting factor\" in relation to a municipality means the provincial assessment value divided by the per person assessment of the municipality"
+    },
+    {
+      "source_report_id": "bc-small-community-grants",
+      "target_report_id": "bc-stats-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "The population component of the grant formula uses the municipality's mean population (derived from census / official estimates).",
+      "evidence_url": "https://www2.gov.bc.ca/gov/content/governments/local-governments/grants-transfers/small-community-grants",
+      "evidence_quote": "Grant amounts are based on a formula that incorporates a base amount, population and assessment values."
+    }
+  ],
+  "coverage_notes": {
+    "institutions_found_with_primary_documents": [
+      "BC Assessment (Act, Authority Act, annual roll, service plan/annual report)",
+      "Ministry of Finance (Budget & Fiscal Plan, Public Accounts)",
+      "BC Stats (Economic Accounts/GDP, CPI, LFS, population)",
+      "Community Charter (legal base for all municipal financial plans and tax bylaws)",
+      "Municipal Finance Authority of BC (annual report + financial statements)",
+      "TransLink (Accountability Report with consolidated statements, Business Plan/Budget)",
+      "ICBC (Annual Service Plan Report, multi-year Service Plan)",
+      "City of Vancouver (budget, annual financial report, tax-rate bylaws)",
+      "City of Victoria (financial plan, annual report)",
+      "City of Surrey (five-year financial plan, annual financial report)",
+      "City of Burnaby (five-year financial plan, annual municipal report, SOFI)",
+      "City of Kelowna (financial plan process, annual report)",
+      "City of Prince George (five-year financial plans, annual report, SOFI)",
+      "Metro Vancouver Regional District (multi-year financial plan)",
+      "Capital Regional District (multi-year financial plan, annual report)",
+      "BC Housing (RAP, SAFER, portable rent-ceiling guide)",
+      "BC Hydro (annual service plan report)"
+    ],
+    "structural_observations": [
+      "BC Assessment is fully centralized — no municipal assessment offices exist. This is a genuine difference from Alberta and must be preserved.",
+      "No province-wide Financial Information Return compilation identical to Alberta’s FIR series. The functional equivalent is: Community Charter financial-plan bylaw → tax-rate bylaw (before 15 May) → audited statements / Statement of Financial Information.",
+      "BC Stats is the high-volume statistical layer that creates many natural upward links into the fiscal plan and downward links into municipal and sectoral nodes.",
+      "TransLink and MFA appear as explicit levies on municipal tax bills that rest on the BC Assessment roll, creating clean vertical edges.",
+      "ICBC and BC Hydro are the two largest Crowns that consolidate into Public Accounts and are explicitly referenced in fiscal variance commentary.",
+      "Geographic contrast now spans: Metro core (Vancouver, Burnaby, Surrey) + Capital (Victoria + CRD) + Interior (Kelowna) + North (Prince George)."
+    ],
+    "still_thin_or_optional": [
+      "Richmond, Abbotsford, Kamloops for further municipal densification",
+      "Local Area Economic Profiles (LAEP) as a distinct BC Stats product",
+      "School-district and hospital-district financial plans / tax levies",
+      "Ministry of Housing deeper statistical or evaluation reports",
+      "Additional regional districts beyond Metro Vancouver and CRD"
+    ]
+  }
+}

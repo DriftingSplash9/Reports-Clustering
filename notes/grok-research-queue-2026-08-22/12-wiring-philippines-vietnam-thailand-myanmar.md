@@ -1,6 +1,8 @@
 # Prompt for Grok — domestic wiring — Philippines, Vietnam, Thailand, Myanmar
 
-**Attach:** `ph-philippines-grok-2026-08.json`, `vn-vietnam-grok-2026-08.json`, `th-thailand-grok-2026-08.json`, `mm-myanmar-grok-2026-08.json` (all under `src/data/research/`). The full id/title list for every node this prompt covers is also pasted below, so even if an attachment doesn't come through, the ids you need are right here in the text.
+**Standing rules:** see `../GROKREADME.md` — attach/paste it alongside this file every time. It has the id-integrity rule, the relationship-type enum, the honesty permission, the coverage-is-data-driven principle, and the reply schema. This file has only the region-specific research question below.
+
+**Attach:** `GROKREADME.md`, `ph-philippines-grok-2026-08.json`, `vn-vietnam-grok-2026-08.json`, `th-thailand-grok-2026-08.json`, `mm-myanmar-grok-2026-08.json` (all under `src/data/research/`). The full id/title list for every node this prompt covers is also pasted below, so even if an attachment doesn't come through, the ids you need are right here in the text.
 
 Paste everything below the line.
 
@@ -8,45 +10,13 @@ Paste everything below the line.
 
 Four Southeast Asian countries with the same pattern: real candidate nodes, almost no wiring. **Philippines 65/68 (96%), Vietnam 46/48 (96%), Thailand 22/25 (88%), Myanmar 14/16 (88%) are unlinked.** Vietnam in particular has a dense set of bilateral trade/FDI nodes (China, Korea, Japan, the US, the EU, the UK) that likely relate to its own trade-statistics releases.
 
-**Ids — use ONLY ids from the list below, or propose a new node.** Every `source_report_id` and `target_report_id` in your reply must be one of the exact ids listed in "Philippines / Vietnam / Thailand / Myanmar" below (copy them character-for-character — do not paraphrase, re-hyphenate, or guess a variant), OR one of the existing international/standard ids listed further down, OR — if the dependency genuinely involves something not in either list — a **proposed new node** (title, publisher, exact URL, description, publication cadence) in a separate `proposed_reports` array. Never invent an id that looks plausible but isn't in these lists; that has broken every round so far.
-
-**Relationship types — closed set of exactly four values, nothing else is legal:**
-
-- `methodology_depends_on` — an international standard, classification, or framework governs how the report is compiled or disseminated (SNA edition, COICOP, BPM6, HS, ISIC, SDMX, an IMF data-standard tier).
-- `uses_data_from` — the target's figures are a direct input to the source (e.g. a CPI report uses a household expenditure survey; a trade-statistics release uses a customs declaration dataset; a GDP report uses a labour-force survey).
-- `calculated_from` — the source is mechanically derived from the target (e.g. a real-GDP series calculated from the nominal series and a deflator; a regional index calculated from national sub-components).
-- `cites` — referenced as context, including institutional/treaty membership (a country's statistics office citing its membership in a regional statistical body; a report citing a trade agreement as the legal basis for a tariff/customs regime it reports on).
-
-Do not invent any other value (`participates_in`, `disseminated_under`, `member_of`, `references`, etc. are all illegal and will NaN our PageRank calculation if they slip through).
-
-**Existing international/standard ids to reuse as targets (do not re-propose these):**
-
-- `sna-2008`, `sna-1993`, `sna-1968`, `sna-2025` — System of National Accounts editions
-- `imf-bpm6` — Balance of Payments Manual 6th edition
-- `imf-e-gdds`, `imf-sdds`, `imf-sdds-plus` — IMF data-dissemination standard tiers
-- `un-coicop-2018`, `un-coicop-hbs-1999` — Classification of Individual Consumption by Purpose
-- `imf-dqaf` — Data Quality Assessment Framework
-- `imf-weo`, `imf-fiscal-monitor`, `imf-gfsr`, `imf-gfsm` — recurring IMF flagship publications
-- `isic`, `hs`, `naics`, `anzsic` — industry/product classification standards
-- `sdmx-standard`, `sdmx-glossary` — statistical data exchange standard
-- `cpi-manual` — Consumer Price Index Manual: Concepts and Methods
-- `ipsas` — International Public Sector Accounting Standards
-- `un-census-principles` — Principles and Recommendations for Population and Housing Censuses
-- `icls-work-statistics-resolution` — ICLS labour-statistics resolution
-
-Reuse these rather than proposing a duplicate international node. Propose a new international node only for a body/standard genuinely not on this list (name it explicitly and we'll check before minting).
+**Ids — use ONLY ids from the list below, or propose a new node.** Every `source_report_id` and `target_report_id` in your reply must be one of the exact ids listed in "Philippines / Vietnam / Thailand / Myanmar" below (copy them character-for-character — do not paraphrase, re-hyphenate, or guess a variant), OR one of GROKREADME.md's standard international ids, OR — if the dependency genuinely involves something not on either list — a **proposed new node** (title, publisher, exact URL, description, publication cadence) in a separate `proposed_reports` array. Never invent an id that looks plausible but isn't on one of those lists; that has broken every round so far.
 
 ## The ask
 
 Find real, citable **domestic** (within-country) dependency edges among the nodes listed below — which report's figures feed which, which report's methodology is governed by which standard, which trade/legal instrument a statistics release cites as its basis. Every one of these nodes currently has **zero edges** in our graph (or is directly relevant context for one that does) — they were minted as candidates but never wired to anything.
 
 Likely angles: PSA (Philippines), GSO (Vietnam), NSO (Thailand), CSO (Myanmar) national-accounts or CPI methodology naming an SNA/COICOP edition; Vietnam's many bilateral trade nodes (`vn-usa-trade`, `vn-china-trade`, `vn-korea-trade-fdi`, `vn-japan-trade-fdi`, etc.) as the cited basis for GSO's own trade-statistics releases; the RCEP/ASEAN/CPTPP membership nodes across all four countries as `cites` edges from each country's trade or customs statistics. Treat each country separately — don't force a Philippines node to link to a Vietnam node; these are domestic edges only (cross-border edges between these countries are a separate, later ask).
-
-**Honesty permission, as always: if you search and find nothing solid connecting two nodes, say so and move on — an explicit "no real dependency found between X and Y" is a correct and useful answer.** We would rather have 10 solid edges than 40 shaky ones. Primary documents only — the agency's own methodology notes, the treaty/agreement text itself, an IMF Article IV statistical annex, a national statistics office's own publication. No third-party scorecards (ODIN etc.) as citations — they're leads to chase, not sources to cite.
-
-## How to reply
-
-One JSON object: `dependencies` array, each entry `{ source_report_id, target_report_id, relationship_type, basis, evidence_url, evidence_quote }` — `evidence_quote` must name the specific country/agency and state the specific claim the edge makes (not a generic sentence that could apply to five other countries). Proposed new nodes (if any) go in a separate `proposed_reports` array with `proposed_id` (a sensible new id, not colliding with anything on the lists below), `kind` (domestic/international), `title`, `publisher`, `url`, `description`, `publication_cadence`. We raw-verify every quote before anything is minted, same as always.
 
 ## Node lists
 
