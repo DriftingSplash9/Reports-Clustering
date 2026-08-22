@@ -1,0 +1,48 @@
+{
+  "_meta": "BRICS/G.4 partial — Brazil + China, 2026-08-22. Grep-first pass on §5 item 9 (research backlog): searched all br- and cn- node descriptions for mentions of already-known international-standards node names (SNA 2008, BPM6, GFSM, SDDS/SDDS Plus, e-GDDS, IPSAS, ISIC, COICOP, Frascati, ICIO, SDMX, Basel), the same technique that found in-mospi-cpi's ready-quoted COICOP 2018 edge at BRICS/G.3. Two false-positive substring matches (br-finbra, br-scn both matched 'ICIO' inside Portuguese words like 'início'/'ofício', not the OECD ICIO tables) were discarded. Six real candidates surfaced; four raw-verified directly against a live primary source (not just the corpus description, which for these Grok-imported nodes is a summary, not a verified quote) and minted here. One (br-ibge-sistema-contas-nacionais) turned out to be a near-duplicate of the already-wired br-scn node (same title 'Sistema de Contas Nacionais', same publisher IBGE) and was deliberately NOT wired to sna-2008 pending Thomas's call on whether to merge/retire the duplicate. One (cn-mof-fiscal-statistics -> imf-sdds) hit the known DSBB JS-wall trap (REPORTS.md §7) and needs a real-browser fetch, not WebFetch, to close. This is a HALF round: Brazil went from 19 unwired candidate nodes to 18 (br-scn's own SNA-2008 edge was already wired before this session), China went from 7 unwired to 5. The remaining 722-minus-this backlog and the 170 _dropped leads are untouched.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "br-ibge-contas-regionais",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY, TIER A (ibge.gov.br municipal-GDP page, WebFetch, live). IBGE's own page states the conformity verbatim: \"estando em conformidade, portanto, com o manual System of national accounts 2008, SNA 2008, e com a Classificação Nacional de Atividades Econômicas - CNAE 2.0\" — the same conformity sentence IBGE uses for the national-level Sistema de Contas Nacionais (br-scn's existing sna-2008 edge), here confirmed for the regional/municipal accounts specifically, not merely inherited from the parent series.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html"
+    },
+    {
+      "source_report_id": "br-bcb-balanco-pagamentos",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY, TIER A (BCB's own methodological note PDF, WebFetch, live). The note announcing the standard's adoption states verbatim: \"o Banco Central do Brasil (BCB) passa a divulgar as estatisticas de Balanco de Pagamentos (BP) e Posicao Internacional de Investimento (PII) da economia brasileira em conformidade com a sexta edicao do Manual de Balanco de Pagamentos e Posicao Internacional de Investimento (BPM6), do Fundo Monetario Internacional (FMI)\" — names the manual, its edition, and the sponsoring body. The bcb.gov.br/estatisticas/setor-externo landing page itself is JS-rendered and returned nothing to WebFetch; this methodological-note PDF, found via search, is the actual source.",
+      "evidence_url": "https://www.bcb.gov.br/content/estatisticas/notas_metodologicas/balanco_pagamentos/bpm6/nm2bpm6p.pdf"
+    },
+    {
+      "source_report_id": "cn-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY, TIER A (SAFE's own quarterly BOP data-interpretation release, WebFetch, live). The notes section of the data tables state verbatim: \"The table is compiled according to BPM6.\" A short, plain statement but load-bearing: it is SAFE's own standing disclosure, repeated on every quarterly release in this series, not a one-off aside.",
+      "evidence_url": "https://www.safe.gov.cn/en/2026/0814/2442.html"
+    },
+    {
+      "source_report_id": "cn-gdp-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "VERIFIED DIRECTLY, TIER A (stats.gov.cn's own official Q&A on the State Council's approval of China's System of National Accounts (2016), WebFetch, live). Verbatim: \"2016年核算体系采用了与2008年SNA基本一致的核算方法，使得核算结果能够更加客观地反映我国有关经济活动的成果，提高国际可比性。\" (\"The 2016 accounting system adopted accounting methods essentially consistent with the 2008 SNA, so that the accounting results more objectively reflect the outcomes of our country's economic activity and improve international comparability.\") This is NBS's own explanatory article for the 2016 revision, not a secondary summary.",
+      "evidence_url": "https://www.stats.gov.cn/xxgk/jd/zcjd/201708/t20170809_1762620.html"
+    }
+  ],
+  "_dropped": [
+    {
+      "report_id": "br-ibge-sistema-contas-nacionais",
+      "candidate_target": "sna-2008",
+      "reason": "note",
+      "note": "NOT a held-out claim — this node appears to be a NEAR-DUPLICATE of the already-wired br-scn (both titled 'Sistema de Contas Nacionais' / 'Sistema de Contas Nacionais: Brasil (SCN)', same publisher IBGE, same url family). br-scn already carries a raw-verified sna-2008 edge from an earlier round. Minting a second, near-identical edge from a likely-duplicate node would paper over the duplication rather than fix it. Flagged for Thomas: either merge/retire br-ibge-sistema-contas-nacionais (it came in via the 2026-08-17 Grok domestic batch, br-brazil-grok-2026-08.json) or confirm it represents something genuinely distinct from br-scn (e.g. a different vintage or a portal-level vs release-level split) before wiring anything to it."
+    },
+    {
+      "report_id": "cn-mof-fiscal-statistics",
+      "candidate_target": "imf-sdds",
+      "reason": "note",
+      "note": "China's own description states 'SDDS tables' and the DSBB DQAF page for China's General Government Operations category exists (dsbb.imf.org/sdds/dqaf-base/country/CHN/category/GGO00), but the DSBB tables are JS-walled (known trap, REPORTS.md §7) and WebFetch returned only the DSBB shell/navigation, not the actual country row. Needs a real-browser fetch (Chrome, per the imf.org PDF/DSBB workaround pattern used at G.3) to raw-verify and mint, not another WebFetch attempt."
+    }
+  ]
+}

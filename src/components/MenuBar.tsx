@@ -9,6 +9,15 @@ import { MENU_BAR_HEIGHT } from '../lib/uiTheme'
  * Word-style dropdowns". Six of the seven are here. The seventh, the tier bar,
  * deliberately is NOT, and neither is its status line:
  *
+ * **Superseded 2026-08-22 (item 5z): "hidden by default" became "on by
+ * default, minimized"** — see `PANELS_DEFAULT` below, which now seeds a
+ * fresh session instead of `PANELS_HIDDEN`. Thomas's own working layout (a
+ * screenshot with all eight panels present as collapsed pills/tabs, none
+ * fully absent) was the brief. The Panels menu, the toggle mechanism, and
+ * `PANELS_HIDDEN` itself (still used by "Hide all" and as a safety fallback)
+ * are unchanged — only which state a session with no saved `rig.panels.v1`
+ * starts from.
+ *
  * - **The tier buttons are the primary navigation**, not a setting. Global →
  *   Nations → States → Everything is how the graph is meant to be read, and the
  *   onboarding card teaches it as the first thing anyone does. Behind a menu it
@@ -47,9 +56,12 @@ export type PanelKey =
 export type PanelVisibility = Record<PanelKey, boolean>
 
 /**
- * Hidden by default, as asked. The graph is the subject; every panel is an
- * annotation beside it, and the same "fit to the subject, not the scenery"
- * argument that deleted the platform slab applies to the chrome.
+ * Every panel OFF. No longer the fresh-session default (see `PANELS_DEFAULT`
+ * below, 2026-08-22) — this is now purely the "Hide all" state and the
+ * corrupted-storage safety fallback. Kept as its own constant rather than
+ * inlined at both call sites so "Hide all" and "something went wrong reading
+ * localStorage" stay obviously the same state, not two literals that could
+ * drift apart.
  *
  * `countries` (the old ChipBar family/level filter) was removed from this
  * key set entirely 2026-08-20, not just hidden — see the tombstone comment
@@ -62,17 +74,39 @@ export const PANELS_HIDDEN: PanelVisibility = {
   reports: false,
   find: false,
   calendar: false,
-  // `groups` (GroupsPanel, bottom-centre) is the one exception to "hidden by
-  // default" above: it replaced ChipBar as the primary country/region
-  // navigation control in that slot 2026-08-20 (Thomas: "front and centre
-  // bottom of the graph... by default"), and that only means anything if it
-  // is actually on screen without having to be found in the Panels menu
-  // first.
-  groups: true,
+  groups: false,
   unlinked: false,
   view: false,
   legend: false,
   compare: false,
+}
+
+/**
+ * Every panel ON — the fresh-session default as of 2026-08-22 (item 5z),
+ * replacing `PANELS_HIDDEN` in that role. Thomas: "why not have the graph
+ * open with the menus like i have here? they don't need hidden, just
+ * minimized," alongside a screenshot of his own session with all eight
+ * panels present as collapsed pills/tabs rather than absent. This constant
+ * only decides whether each panel's outer slot renders at all
+ * (`App.tsx`'s `{panels.x && <X />}`); every one of the eight components
+ * already opens in its OWN collapsed/minimized inner state by default
+ * (`GroupsPanel`, `Legend`, `Compare`, `CalendarPanel` all already had
+ * `useState(true)` for their own `collapsed`; `SearchPanel`'s `minimized`
+ * and both `PanelShell` calls — Reports, View — needed the same treatment
+ * alongside this change, see those files' own 2026-08-22 notes). The two
+ * layers together are what actually produces "on screen as a pill, not
+ * hidden, not sprawled open" — this constant alone would just open every
+ * panel wide on every fresh visit.
+ */
+export const PANELS_DEFAULT: PanelVisibility = {
+  reports: true,
+  find: true,
+  calendar: true,
+  groups: true,
+  unlinked: true,
+  view: true,
+  legend: true,
+  compare: true,
 }
 
 const PANEL_ITEMS: { key: PanelKey; label: string; hint: string }[] = [

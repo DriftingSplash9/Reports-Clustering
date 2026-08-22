@@ -1,12 +1,30 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Graph, ScoredReport } from '../lib/types'
 import type { NodePredicate } from '../lib/filter'
-import { search } from '../lib/search'
+import type { RegionGroup } from '../lib/regions'
+import { search, searchGroups } from '../lib/search'
 
 /** Search always runs over the whole corpus — see the `outsideFilter` prop doc. */
 const ALWAYS_VISIBLE: NodePredicate = () => true
 import { colourForReport } from '../lib/palette'
 import { HUD_TOP } from '../lib/uiTheme'
+
+/**
+ * One row of the merged result list — either a report (fly + select) or a
+ * `RegionGroup` (isolate). See `searchGroups` in `lib/search.ts` for how the
+ * two get scored on a comparable scale and `combined` below for how they're
+ * merged into one ranked, keyboard-navigable list.
+ */
+type CombinedResult =
+  | { kind: 'report'; report: ScoredReport; score: number }
+  | { kind: 'group'; group: RegionGroup; score: number }
+
+const GROUP_KIND_LABEL: Record<RegionGroup['kind'], string> = {
+  continent: 'Region',
+  bloc: 'Bloc / org',
+  publisher: 'Publisher',
+  country: 'Country',
+}
 
 /**
  * Find-by-name.
@@ -30,15 +48,37 @@ import { HUD_TOP } from '../lib/uiTheme'
  * Choosing a result selects the report *and* flies the camera to it. Selection
  * alone was the version that did not work: it lit a cone somewhere off screen
  * and left the user no better off than before.
+ *
+ * **Broadened 2026-08-22 (HANDOFF §5 item 4).** This used to search reports
+ * only — a query for "asia", "brics", or a country name came back "Nothing
+ * matches" even though `GroupsPanel` one panel over could isolate exactly
+ * that, from the same corpus, via `computeGroupFocus`. Now every query also
+ * runs through `searchGroups` (continents, blocs/orgs, publishers, individual
+ * countries — the same `RegionGroup` list `GroupsPanel` renders) and the two
+ * result lists merge into one ranked, keyboard-navigable list. Choosing a
+ * report still flies + selects, unchanged; choosing a group calls
+ * `onChooseGroup`, the exact handler `GroupsPanel` rows already use, so
+ * isolating "Asia" from the search bar and isolating it from the panel are
+ * the same action reached two ways, not two behaviours that could drift
+ * apart.
  */
 export default function SearchPanel({
   graph,
   onChoose,
+  onChooseGroup,
+  groups,
+  selectedGroupId,
   outsideIsolate,
   outsideFilter,
 }: {
   graph: Graph
   onChoose: (report: ScoredReport) => void
+  /** Isolate a region, bloc, publisher, or country — same handler `GroupsPanel` rows call. */
+  onChooseGroup: (groupId: string) => void
+  /** The full `RegionGroup` list to search — `REGION_GROUPS` + `COUNTRY_GROUPS`, App.tsx's job to combine. */
+  groups: readonly RegionGroup[]
+  /** The currently isolated group, if any — tags its row so re-choosing it visibly toggles off. */
+  selectedGroupId?: string | null
   /**
    * Non-null while a group isolate is active: true for a report that
    * isolate currently hides. Those rows get an "outside isolate" tag —
@@ -65,7 +105,13 @@ export default function SearchPanel({
 }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
-  const [minimized, setMinimized] = useState(false)
+  // Starts minimized (2026-08-22, item 5z) — `panels.find` mounting this
+  // component is now the fresh-session default (`PANELS_DEFAULT` in
+  // `MenuBar.tsx`), and every other collapsible panel already opens as a
+  // pill/tab rather than sprawled wide; this one was the one holdout still
+  // defaulting to `false` (expanded). `/` still un-minimizes it from
+  // anywhere, unchanged.
+  const [minimized, setMinimized] = useState(true)
   const inputRef = useRef<HTMLInputElement>(null)
   // Skips the focus effect below on first mount — see that effect's comment.
   const firstRender = useRef(true)
@@ -74,10 +120,32 @@ export default function SearchPanel({
   // narrowed by the scope filter or the isolate. Both are surfaced as row
   // tags instead, same shape, so search never says "Nothing matches" for a
   // report that plainly exists somewhere outside the current view.
-  const results = useMemo(
+  const reportResults = useMemo(
     () => search(graph, query, ALWAYS_VISIBLE),
     [graph, query],
   )
+
+  const groupResults = useMemo(
+    () => searchGroups(query, groups),
+    [groups, query],
+  )
+
+  /**
+   * Reports and groups merged into one ranked list. Both scorers share the
+   * same 0-300ish scale (a whole-string match on the top-weighted field
+   * scores `100 * 3`), so a plain score sort interleaves them sensibly rather
+   * than one kind always burying the other — searching "canada" surfaces the
+   * Canada country group first (a whole-label match) with Canadian reports
+   * right behind it, which is the useful order, not an accident of list
+   * concatenation order.
+   */
+  const results = useMemo<CombinedResult[]>(() => {
+    const merged: CombinedResult[] = [
+      ...reportResults.map((r) => ({ kind: 'report' as const, report: r.report, score: r.score })),
+      ...groupResults.map((g) => ({ kind: 'group' as const, group: g.group, score: g.score })),
+    ]
+    return merged.sort((a, b) => b.score - a.score).slice(0, 8)
+  }, [reportResults, groupResults])
 
   useEffect(() => setActive(0), [query])
 
@@ -122,8 +190,12 @@ export default function SearchPanel({
     if (!minimized) inputRef.current?.focus()
   }, [minimized])
 
-  function choose(report: ScoredReport) {
-    onChoose(report)
+  function chooseResult(result: CombinedResult) {
+    if (result.kind === 'report') {
+      onChoose(result.report)
+    } else {
+      onChooseGroup(result.group.id)
+    }
     setQuery('')
     inputRef.current?.blur()
   }
@@ -137,7 +209,7 @@ export default function SearchPanel({
       setActive((i) => Math.max(i - 1, 0))
     } else if (e.key === 'Enter' && results[active]) {
       e.preventDefault()
-      choose(results[active].report)
+      chooseResult(results[active])
     } else if (e.key === 'Escape') {
       // An empty box minimizes — same convention as every other drop-up
       // panel's Escape-closes behaviour; a non-empty box just clears first,
@@ -165,7 +237,7 @@ export default function SearchPanel({
           onClick={() => setMinimized(false)}
           style={pill}
         >
-          Find a report…  /
+          Find anything…  /
         </button>
       </div>
     )
@@ -179,7 +251,7 @@ export default function SearchPanel({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Find a report…  /"
+          placeholder="Find a report, region, bloc, or country…  /"
           spellCheck={false}
           style={input}
         />
@@ -197,70 +269,130 @@ export default function SearchPanel({
         <div style={list}>
           {results.length === 0 && (
             <div style={{ ...empty }}>
-              Nothing matches. Every word has to appear somewhere in the report.
+              Nothing matches. Every word has to appear somewhere in a report,
+              region, bloc, publisher, or country name.
             </div>
           )}
-          {results.map(({ report }, i) => (
-            <div
-              key={report.id}
-              onMouseDown={(e) => {
-                // mousedown, not click: blurring the input on click would
-                // unmount this list before the click ever landed.
-                e.preventDefault()
-                choose(report)
-              }}
-              onMouseEnter={() => setActive(i)}
-              style={{
-                ...resultRow,
-                background: i === active ? 'var(--accent-soft)' : 'transparent',
-              }}
-            >
-              <span
-                style={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: 7,
-                  flexShrink: 0,
-                  marginTop: 5,
-                  background: colourForReport(report),
-                }}
-              />
-              <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ color: 'var(--ink-strong)', fontSize: 12.5, lineHeight: 1.35 }}>
-                  {report.title}
-                </span>
-                <span
+          {results.map((result, i) => {
+            if (result.kind === 'report') {
+              const report = result.report
+              return (
+                <div
+                  key={`r:${report.id}`}
+                  onMouseDown={(e) => {
+                    // mousedown, not click: blurring the input on click would
+                    // unmount this list before the click ever landed.
+                    e.preventDefault()
+                    chooseResult(result)
+                  }}
+                  onMouseEnter={() => setActive(i)}
                   style={{
-                    display: 'block',
-                    color: 'var(--ink-mute)',
-                    fontSize: 10.5,
-                    marginTop: 2,
+                    ...resultRow,
+                    background: i === active ? 'var(--accent-soft)' : 'transparent',
                   }}
                 >
-                  {report.publisher} · {report.region}
-                </span>
-              </span>
-              {outsideIsolate?.(report) && (
+                  <span
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: 7,
+                      flexShrink: 0,
+                      marginTop: 5,
+                      background: colourForReport(report),
+                    }}
+                  />
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <span style={{ color: 'var(--ink-strong)', fontSize: 12.5, lineHeight: 1.35 }}>
+                      {report.title}
+                    </span>
+                    <span
+                      style={{
+                        display: 'block',
+                        color: 'var(--ink-mute)',
+                        fontSize: 10.5,
+                        marginTop: 2,
+                      }}
+                    >
+                      {report.publisher} · {report.region}
+                    </span>
+                  </span>
+                  {outsideIsolate?.(report) && (
+                    <span
+                      title="The active isolate hides this report. Choosing it leaves the isolate."
+                      style={outsideTag}
+                    >
+                      outside isolate
+                    </span>
+                  )}
+                  {outsideFilter?.(report) && (
+                    <span
+                      title="The Countries/Domains filter hides this report. Choosing it clears the filter."
+                      style={outsideTag}
+                    >
+                      outside filter
+                    </span>
+                  )}
+                  <span style={{ color: 'var(--ink-faint)', fontSize: 10.5, marginTop: 2 }}>
+                    {report.in_degree} in
+                  </span>
+                </div>
+              )
+            }
+
+            const group = result.group
+            const isolated = !!selectedGroupId && group.id === selectedGroupId
+            return (
+              <div
+                key={`g:${group.id}`}
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                  chooseResult(result)
+                }}
+                onMouseEnter={() => setActive(i)}
+                title={
+                  isolated
+                    ? `Click to stop isolating ${group.label}`
+                    : `Isolate ${group.label} — show it and everything it actually connects to, including internationally`
+                }
+                style={{
+                  ...resultRow,
+                  background: i === active ? 'var(--accent-soft)' : 'transparent',
+                }}
+              >
                 <span
-                  title="The active isolate hides this report. Choosing it leaves the isolate."
-                  style={outsideTag}
-                >
-                  outside isolate
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: 7,
+                    flexShrink: 0,
+                    marginTop: 5,
+                    border: '1.5px solid var(--ink-mute)',
+                    background: 'transparent',
+                  }}
+                />
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <span style={{ color: 'var(--ink-strong)', fontSize: 12.5, lineHeight: 1.35 }}>
+                    {group.label}
+                  </span>
+                  <span
+                    style={{
+                      display: 'block',
+                      color: 'var(--ink-mute)',
+                      fontSize: 10.5,
+                      marginTop: 2,
+                    }}
+                  >
+                    {GROUP_KIND_LABEL[group.kind]} · isolate
+                  </span>
                 </span>
-              )}
-              {outsideFilter?.(report) && (
-                <span
-                  title="The Countries/Domains filter hides this report. Choosing it clears the filter."
-                  style={outsideTag}
-                >
-                  outside filter
-                </span>
-              )}
-              <span style={{ color: 'var(--ink-faint)', fontSize: 10.5, marginTop: 2 }}>
-                {report.in_degree} in
-              </span>
-            </div>
-          ))}
+                {isolated && (
+                  <span title="Already isolated — choosing it again turns this off" style={outsideTag}>
+                    isolated
+                  </span>
+                )}
+              </div>
+            )
+          })}
         </div>
       )}
     </div>
@@ -377,7 +509,9 @@ const empty: React.CSSProperties = {
 
 // The "outside isolate" row tag — quiet, but present. It answers two
 // questions at once: "why does search list things I cannot see" and "why
-// did choosing this clear my isolate" (see the `outsideIsolate` prop).
+// did choosing this clear my isolate" (see the `outsideIsolate` prop). Reused
+// (2026-08-22) for the group list's "isolated" tag — same quiet-badge shape,
+// a different one-word label.
 const outsideTag: React.CSSProperties = {
   flexShrink: 0,
   alignSelf: 'flex-start',

@@ -96,6 +96,16 @@ caught this way.
     doesn't read that closely (see the section above). **Fix: always surface
     the attachment list to Thomas separately, outside the prompt block,
     every round — not just once inside the prompt text.**
+11. **A specific claim repeated across rounds without new evidence
+    (2026-08-22, round 3 redo).** Grok re-supplied the same two Afghanistan
+    CR 06/251 GDDS quotes in round 3 that round 1/2 already couldn't verify
+    (that edge's basis has carried a "quote could not be independently
+    retrieved" caveat since round 1/2). This time the actual document was
+    read in full and the quotes genuinely aren't in it — not a retrieval
+    failure, a real miss. **Fix: when a prior round already flagged a claim
+    as unverified, say so explicitly in the next prompt and ask Grok to
+    either find a *different* corroborating document or drop the claim —
+    don't let it re-assert the same unverified quote a third time.**
 
 ## The prompt shape that works (used rounds 2–3)
 
@@ -116,14 +126,27 @@ everything) — it measurably improves citation discipline.
   source ids invented; relationship types still off-union. 59/62 combined
   evidence entries raw-verified; minted as 5s
   (`crossborder-standards-2026-08-22.json`, 10 nodes / 44 edges).
-- **Round 3** (received 2026-08-22): came back thin and mostly off-target —
-  `files_received` all false for the 9 listed source files, so it worked
-  from the prompt text's Rule A id list alone rather than the actual
-  country research files. Still produced usable methodology_depends_on/cites
-  edges for MU/SL/IQ/SD/IR/AF/YE/SY with real, checkable sources (not yet
-  raw-verified as of this writing) and 5 proposed nodes (mu national-accounts
-  release, sna-1968, sna-1993, imf-bpm6, un-coicop, comesa-stats). Root
-  cause: the attachment list was only named inside the prompt block, and
-  Thomas doesn't read prompts closely before pasting them — see the
-  standing fix at the top of this file. Next round's attachment list must
-  be relayed to Thomas separately and explicitly.
+- **Round 3, first attempt** (received 2026-08-22): came back thin and
+  mostly off-target — `files_received` all false for the 9 listed source
+  files, so it worked from the prompt text's Rule A id list alone rather
+  than the actual country research files. Root cause: the attachment list
+  was only named inside the prompt block, and Thomas doesn't read prompts
+  closely before pasting them — see the standing fix at the top of this
+  file (§0).
+- **Round 3, redo** (received 2026-08-22, same day, after the §0 fix):
+  `files_received: true`, 10/10 files, and the content demonstrably used
+  the actual attached country files (real existing ids like `af-nsia`,
+  `mu-statsmauritius-cpi` that only appear in those files, not just the
+  prompt's own id list) — the fix worked. Delivered: the Mauritius
+  SNA-2008 edge done properly this time (new `mu-national-accounts` node +
+  quote), two additional Mauritius SDDS-Plus series-level edges, and three
+  new standards facts for AF/IQ/IR. Raw-verified and minted as 5w
+  (`crossborder-round3-2026-08-22.json`, 1 node / 5 edges). One repeat
+  failure: the Afghanistan CR 06/251 GDDS quotes it re-supplied (same two
+  sentences as round 1/2, which also couldn't verify them) failed
+  verification again — the actual 89-page PDF was read in full this time
+  (Google Docs Viewer proxy workaround, see HANDOFF.md §7) and neither
+  quote, nor "GDDS"/"General Data Dissemination"/"imminently" in any form,
+  appears anywhere in the document. Two rounds straight on the same claim;
+  don't ask Grok for it a third time — tell it the claim doesn't check out
+  and let it move on.

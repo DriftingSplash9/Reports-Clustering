@@ -24,7 +24,7 @@ import CalendarPanel from './components/CalendarPanel'
 import { describeWindow, nextRelease } from './lib/schedule'
 import CameraZoom from './components/CameraZoom'
 import { PanelShell } from './components/PanelShell'
-import { MenuBar, PANELS_HIDDEN, type PanelKey, type PanelVisibility } from './components/MenuBar'
+import { MenuBar, PANELS_HIDDEN, PANELS_DEFAULT, type PanelKey, type PanelVisibility } from './components/MenuBar'
 import { HelpCard } from './components/HelpCard'
 import { LoadingCurtain } from './components/LoadingCurtain'
 import {
@@ -115,10 +115,22 @@ import {
 } from './lib/regions'
 import { GroupsPanel } from './components/GroupsPanel'
 import { Legend } from './components/Legend'
+/**
+ * Every `RegionGroup` there is — continents/blocs/orgs/publishers plus every
+ * individual country — combined once at module scope for `SearchPanel`
+ * (2026-08-22, HANDOFF §5 item 4). `REGION_GROUPS` and `COUNTRY_GROUPS` are
+ * still two separate arrays because `GroupsPanel` renders them as two
+ * visually distinct sections; the search bar has no such split, so it
+ * searches the union. A module constant, not a `useMemo` — both source
+ * arrays are themselves module constants built once in `regions.ts`, so
+ * there is nothing here that could ever change between renders.
+ */
+const SEARCHABLE_GROUPS: RegionGroup[] = [...REGION_GROUPS, ...COUNTRY_GROUPS]
 import { Compare } from './components/Compare'
 import { buildDeepLink, clearDeepLinkFromAddressBar, readDeepLink } from './lib/deepLink'
 import {
   DEFAULT_DRILLDOWN,
+  TIER_COUNT,
   TIER_DESCRIPTION,
   TIER_LABEL,
   buildDisclosedGraph,
@@ -130,6 +142,7 @@ import {
   type DisclosedDependency,
   type Drilldown,
 } from './lib/hierarchy'
+import { AUTO_UNFOLD_STEP_MS, nextAutoUnfoldBatch } from './lib/autoUnfold'
 import {
   NO_FILTER,
   applyFilter,
@@ -318,6 +331,16 @@ export default function App() {
     () => new Set(DEEP_LINK?.openedCountries ?? STARTUP_VIEW?.openedCountries ?? []),
   )
 
+  /**
+   * Auto-unfold, 2026-08-22 — whether the tier ladder and the country orbs
+   * are currently being opened on a timer instead of by hand. See
+   * `lib/autoUnfold.ts` for what "next" means; the effect below is just the
+   * clock that keeps asking it and applying the answer. Never persisted
+   * (deep link, saved view) — it is a one-shot action in progress, not a
+   * state of the view the way `drilldown` and `openedCountries` are.
+   */
+  const [autoUnfoldActive, setAutoUnfoldActive] = useState(false)
+
   const [hovered, setHovered] = useState<ScoredReport | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(
     DEEP_LINK?.selectedId ?? STARTUP_VIEW?.selectedId ?? null,
@@ -397,6 +420,57 @@ export default function App() {
   const disclosedGraph = useMemo(
     () => buildDisclosedGraph(graph, drilldown, openedCountries),
     [graph, drilldown, openedCountries],
+  )
+
+  /**
+   * The auto-unfold clock. Re-armed every time `disclosedGraph` (or
+   * `drilldown`, for the "no orbs left, just advance the tier" case) changes
+   * while `autoUnfoldActive` is on — which includes every change this same
+   * effect itself causes, so it naturally chains: apply one step, the
+   * resulting rebuild reschedules the next.
+   *
+   * `nextAutoUnfoldBatch` is asked fresh each tick rather than a plan being
+   * computed once up front, because the answer depends on state this effect
+   * is itself mutating (which countries are still folded) — precomputing a
+   * plan would either go stale the moment the user also clicks something by
+   * hand, or have to duplicate `buildDisclosedGraph`'s own resolution logic
+   * just to stay in sync with it.
+   *
+   * Cleanup cancels a still-pending timer whenever the dependencies change
+   * before it fires — the ordinary case (this effect's own previous step
+   * completing) as well as the user interrupting by hand (Reset, a manual
+   * double-click, a tier button press) mid-wait.
+   */
+  useEffect(() => {
+    if (!autoUnfoldActive) return
+    const timer = setTimeout(() => {
+      const batch = nextAutoUnfoldBatch(disclosedGraph)
+      if (batch) {
+        setOpenedCountries((prev) => {
+          const next = new Set(prev)
+          for (const c of batch.countries) next.add(c)
+          return next
+        })
+        return
+      }
+      if (drilldown < TIER_COUNT) {
+        setDrilldown((d) => Math.min(d + 1, TIER_COUNT))
+        return
+      }
+      // Nothing left folded and the ladder is fully open — done.
+      setAutoUnfoldActive(false)
+    }, AUTO_UNFOLD_STEP_MS)
+    return () => clearTimeout(timer)
+  }, [autoUnfoldActive, disclosedGraph, drilldown])
+
+  /**
+   * Whether there is nothing left for auto-unfold to do — the ladder is
+   * already at Everything and every country orb is already open. Used to
+   * grey out the button rather than let it be pressed for no effect.
+   */
+  const autoUnfoldDone = useMemo(
+    () => drilldown >= TIER_COUNT && !nextAutoUnfoldBatch(disclosedGraph),
+    [drilldown, disclosedGraph],
   )
 
   /**
@@ -921,6 +995,21 @@ export default function App() {
   const handleTier = useCallback((tier: number) => {
     setDrilldown(tier)
     setView((v) => (v.zoom === 1 ? v : { ...v, zoom: 1 }))
+    // A manual tier press is the user taking the wheel — let the clock stop
+    // rather than have it fight (or redundantly repeat) what was just asked
+    // for by hand.
+    setAutoUnfoldActive(false)
+  }, [])
+
+  /**
+   * The auto-unfold button. Starting is just flipping the flag on — the
+   * effect above does the rest on its own clock. Stopping mid-sequence
+   * leaves the ladder and whatever countries are already open exactly where
+   * they are; there is deliberately no "undo the steps taken so far", same
+   * asymmetry as `toggleCountryOpen` itself (see hierarchy.ts).
+   */
+  const handleToggleAutoUnfold = useCallback(() => {
+    setAutoUnfoldActive((a) => !a)
   }, [])
 
   /**
@@ -938,6 +1027,10 @@ export default function App() {
     setFlyTo(null)
     setView((v) => ({ ...v, zoom: 1 }))
     setResetSignal((n) => n + 1)
+    // Reset means "the opening view" — a mid-flight auto-unfold going on to
+    // reopen everything it had already opened the instant Reset finishes
+    // would make the button look broken.
+    setAutoUnfoldActive(false)
     // Back to the opening depth, unconditionally — not gated behind
     // `clearFilter`. Drilldown is navigation state like the camera and the
     // selection, not a filter: "reset" meaning "the opening view" should
@@ -1044,16 +1137,21 @@ export default function App() {
   /**
    * Which HUD panels are showing — the menu bar's model (Phase 4 §6).
    *
-   * All six start hidden, as asked: the graph is the subject and every panel is
-   * an annotation beside it. The tier bar is not in here on purpose — it is
-   * primary navigation, not a panel, and its status line is the only signal
-   * that a filter is on. See `MenuBar.tsx` for that argument in full.
+   * **Superseded 2026-08-22 (item 5z).** All eight used to start hidden; now
+   * all eight start ON but each opens in its own collapsed/minimized inner
+   * state (see `PANELS_DEFAULT`'s own comment in `MenuBar.tsx` for the full
+   * story and Thomas's screenshot that prompted it). The tier bar is still
+   * not in here on purpose — it is primary navigation, not a panel, and its
+   * status line is the only signal that a filter is on. See `MenuBar.tsx`
+   * for that argument in full.
    *
-   * Persisted, because the alternative is re-opening the same two panels every
-   * single load, and `Onboarding` already establishes localStorage as the place
-   * this app remembers a preference. A parse failure or disabled storage falls
-   * back to all-hidden rather than throwing: the menu is right there, and a
-   * blank graph with a working menu beats a white screen.
+   * Persisted, because the alternative is re-opening the same panels every
+   * single load, and `Onboarding` already establishes localStorage as the
+   * place this app remembers a preference. A parse failure or disabled
+   * storage falls back to `PANELS_DEFAULT` (not `PANELS_HIDDEN`, 2026-08-22)
+   * — a first-time visitor and a visitor whose storage just broke should see
+   * the same thing, the ordinary fresh-load experience, not a bare canvas
+   * with only the menu bar to explain it.
    */
   const [panels, setPanels] = useState<PanelVisibility>(() => {
     try {
@@ -1062,13 +1160,16 @@ export default function App() {
       // and filters but leave whatever panels happened to be open last time.
       if (STARTUP_VIEW) return STARTUP_VIEW.panels
       const raw = window.localStorage.getItem(PANELS_KEY)
-      if (!raw) return PANELS_HIDDEN
+      if (!raw) return PANELS_DEFAULT
       const saved = JSON.parse(raw) as Partial<PanelVisibility>
-      // Merged over the defaults rather than used directly, so a key added to
-      // PanelVisibility later cannot arrive as `undefined` from old storage.
+      // Merged over PANELS_HIDDEN, not PANELS_DEFAULT, so a key added to
+      // PanelVisibility AFTER someone already saved a preference stays off
+      // for them rather than suddenly appearing unasked — only a session
+      // with NO stored preference at all (the branch above) gets the new
+      // all-on default.
       return { ...PANELS_HIDDEN, ...saved }
     } catch {
-      return PANELS_HIDDEN
+      return PANELS_DEFAULT
     }
   })
   useEffect(() => {
@@ -1437,18 +1538,11 @@ export default function App() {
       <MenuBar
         panels={panels}
         onToggle={togglePanel}
-        onShowAll={() =>
-          setPanels({
-            reports: true,
-            find: true,
-            calendar: true,
-            groups: true,
-            unlinked: true,
-            view: true,
-            legend: true,
-            compare: true,
-          })
-        }
+        // Was a hand-written all-true literal; now just `PANELS_DEFAULT`
+        // (2026-08-22) — the exact same state a fresh session starts from,
+        // so there is one all-on literal in the codebase, not two that could
+        // quietly drift apart the next time a panel key is added.
+        onShowAll={() => setPanels(PANELS_DEFAULT)}
         onHideAll={() => {
           setPanels(PANELS_HIDDEN)
           setUnlinkedOpen(false)
@@ -1476,8 +1570,13 @@ export default function App() {
         }
       />
 
+      {/* defaultCollapsed (2026-08-22, item 5z): the panel now mounts as soon
+          as panels.view is true (the fresh-session default), so it needs its
+          own collapsed-tab starting state — the outer `panels.view` boolean
+          only controls whether this exists at all, not whether it opens wide
+          or as a tab. */}
       {panels.view && (
-      <PanelShell side="right" label="View" width={190}>
+      <PanelShell side="right" label="View" width={190} defaultCollapsed>
         <ViewControls
           view={view}
           onChange={setView}
@@ -1493,6 +1592,9 @@ export default function App() {
         <SearchPanel
           graph={graph}
           onChoose={handleChoose}
+          onChooseGroup={handleChooseGroup}
+          groups={SEARCHABLE_GROUPS}
+          selectedGroupId={selectedGroupId}
           outsideIsolate={searchOutsideIsolate}
           outsideFilter={searchOutsideFilter}
         />
@@ -1529,6 +1631,9 @@ export default function App() {
             inTier={tierCounts.inTier}
             visibleCount={tierCounts.visible}
             total={graph.nodes.length}
+            autoUnfoldActive={autoUnfoldActive}
+            onToggleAutoUnfold={handleToggleAutoUnfold}
+            autoUnfoldDone={autoUnfoldDone}
           />
         </div>
         <div style={bottomDockCentre}>
@@ -1573,8 +1678,9 @@ export default function App() {
         />
       )}
 
+      {/* defaultCollapsed — see the same note on the View PanelShell above. */}
       {panels.reports && (
-      <PanelShell side="left" label="Reports" width={320}>
+      <PanelShell side="left" label="Reports" width={320} defaultCollapsed>
         <Hud
           nodeCount={graph.nodes.length}
           edgeCount={graph.edges.length}
@@ -2355,6 +2461,9 @@ function TierBar({
   inTier,
   visibleCount,
   total,
+  autoUnfoldActive,
+  onToggleAutoUnfold,
+  autoUnfoldDone,
 }: {
   tier: number
   onTier: (tier: number) => void
@@ -2363,6 +2472,11 @@ function TierBar({
   /** Nodes actually drawn, after the filter. */
   visibleCount: number
   total: number
+  /** Whether the auto-unfold clock (lib/autoUnfold.ts) is currently running. */
+  autoUnfoldActive: boolean
+  onToggleAutoUnfold: () => void
+  /** Nothing left folded — Everything is open and every country is expanded. */
+  autoUnfoldDone: boolean
 }) {
   const filtered = visibleCount < inTier
 
@@ -2403,6 +2517,44 @@ function TierBar({
           ? `${visibleCount} shown · ${inTier} in this tier · filter hiding ${inTier - visibleCount}`
           : `${visibleCount} of ${total} reports shown`}
       </div>
+      {/*
+        Auto-unfold, 2026-08-22 — opens the tier ladder and every country
+        orb on a timer, largest region first, instead of the instant tier-4
+        jump. See lib/autoUnfold.ts for the ordering and App.tsx's effect on
+        `autoUnfoldActive` for the clock itself. `disabled` covers both ends:
+        nothing to do once everything is already open, and no reason to let
+        a second run start on top of one already going.
+      */}
+      <button
+        type="button"
+        onClick={onToggleAutoUnfold}
+        disabled={!autoUnfoldActive && autoUnfoldDone}
+        title={
+          autoUnfoldActive
+            ? 'Stop — leaves whatever has opened so far as-is'
+            : autoUnfoldDone
+              ? 'Everything is already open'
+              : 'Open the tier ladder and every country, largest region first, one batch at a time'
+        }
+        style={{
+          marginTop: 6,
+          width: '100%',
+          padding: '5px 10px',
+          fontFamily: 'inherit',
+          fontSize: 10,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: autoUnfoldActive ? 'var(--ink-strong)' : 'var(--ink-mute)',
+          background: autoUnfoldActive ? 'var(--accent-active)' : 'var(--btn-bg)',
+          border: `1px solid ${autoUnfoldActive ? 'var(--line-strong)' : 'var(--line)'}`,
+          borderRadius: 6,
+          cursor: !autoUnfoldActive && autoUnfoldDone ? 'default' : 'pointer',
+          opacity: !autoUnfoldActive && autoUnfoldDone ? 0.5 : 1,
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {autoUnfoldActive ? '■ Stop unfolding' : '▶ Auto-unfold'}
+      </button>
     </div>
   )
 }
