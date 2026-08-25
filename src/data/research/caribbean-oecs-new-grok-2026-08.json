@@ -292,6 +292,20 @@
         "national-accounts"
       ],
       "url": "https://unstats.un.org/unsd/nationalaccount/sna.asp"
+    },
+    {
+      "id": "int-caricom",
+      "title": "Caribbean Community (CARICOM)",
+      "publisher": "CARICOM Secretariat",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Caribbean",
+      "description": "Regional integration organisation of 15 member states and 8 associate members, established 4 July 1973 by the Treaty of Chaguaramas (signed by Barbados, Guyana, Jamaica and Trinidad and Tobago); coordinates economic integration, foreign policy and functional cooperation across the Caribbean. Added 2026-08-25 as the generic CARICOM-institution node, distinct from gy-caricom (Guyana's own country-specific CARICOM-membership record) — see HANDOFF.md §5 item 5b.",
+      "domains": [
+        "trade",
+        "external-action"
+      ],
+      "url": "https://caricom.org/who-we-are/"
     }
   ],
   "dependencies": [
@@ -385,6 +399,55 @@
       "relationship_type": "methodology_depends_on",
       "basis": "The IMF DSBB's DQAF summary for Saint Lucia's national-accounts category states national accounts are based on {\"System of National Accounts 1968\" (1968 SNA)}, with described adjustments toward select 1993 SNA treatments (FISIM, mineral exploration, software capitalization) that fall short of a full edition change.",
       "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=LCA&categoryCode=NAG00"
+    },
+    {
+      "source_report_id": "jm-statin",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists Jamaica's own country profile page, which states {\"Date of Membership in CARICOM: 1 Aug 1973\"}.",
+      "evidence_url": "https://caricom.org/country_profiles/jamaica/"
+    },
+    {
+      "source_report_id": "tt-cso",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists Trinidad and Tobago's country profile page, which states {\"Date of Membership in CARICOM: 1 Aug 1973\"}; the CSO's own site independently lists CARICOM as an affiliate organisation.",
+      "evidence_url": "https://caricom.org/country_profiles/trinidad-and-tobago/"
+    },
+    {
+      "source_report_id": "bs-bnsi",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists the Bahamas' country profile page, which states {\"Date of Membership in CARICOM: 4 Jul 1983\"}.",
+      "evidence_url": "https://caricom.org/country_profiles/bahamas/"
+    },
+    {
+      "source_report_id": "bb-bss",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists Barbados' country profile page, which states {\"Date of Membership in CARICOM: 1 Aug 1973\"}.",
+      "evidence_url": "https://caricom.org/country_profiles/barbados/"
+    },
+    {
+      "source_report_id": "ht-ihsi",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists Haiti's country profile page, which states {\"Date of Membership in CARICOM: 1 Jul 2002\"}.",
+      "evidence_url": "https://caricom.org/country_profiles/haiti/"
+    },
+    {
+      "source_report_id": "ag-statistics-division",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists Antigua and Barbuda's country profile page, which states {\"Date of Membership in CARICOM: 4 Jul 1974\"}.",
+      "evidence_url": "https://caricom.org/country_profiles/antigua-and-barbuda/"
+    },
+    {
+      "source_report_id": "lc-cso",
+      "target_report_id": "int-caricom",
+      "relationship_type": "cites",
+      "basis": "CARICOM's own member-state directory lists Saint Lucia's country profile page, which states {\"Date of Membership in CARICOM: 1 May 1974\"}.",
+      "evidence_url": "https://caricom.org/country_profiles/saint-lucia/"
     }
   ],
   "_dropped": [
@@ -492,55 +555,6 @@
       "target": null,
       "reason": "note",
       "why": "This batch's reference set includes only /tmp/refs/corpus-ids.txt (bare id list) and /tmp/refs/corpus-edges.txt (source|target pairs), not full node records, so gy-caricom's own description/title could not be directly inspected to confirm whether it represents the CARICOM institution itself versus Guyana-specific membership framing. Followed PROMPT.md's explicit instruction (\"CARICOM already referenced via Guyana's gy-caricom node... reuse it... and CARICOM itself as the target\") and used it as the CARICOM target for every confirmed member state's cites edge in this batch. Flagging for the coordinator to double check the node's actual title/description before insertion, since if it turns out to be narrowly Guyana-membership-framed rather than a general CARICOM institutional node, all ten `cites -> gy-caricom` edges above would need retargeting to a proper international CARICOM node instead."
-    },
-    {
-      "edge": "jm-statin -> gy-caricom",
-      "source": "jm-statin",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring jm-statin's own CARICOM membership (evidenced via https://caricom.org/country_profiles/jamaica/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (jm-statin is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists Jamaica's own country profile page, which states {\"Date of Membership in CARICOM: 1 Aug 1973\"}. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
-    },
-    {
-      "edge": "tt-cso -> gy-caricom",
-      "source": "tt-cso",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring tt-cso's own CARICOM membership (evidenced via https://caricom.org/country_profiles/trinidad-and-tobago/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (tt-cso is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists Trinidad and Tobago's country profile page, which states {\"Date of Membership in CARICOM: 1 Aug 1973\"}; the CSO's own site independently lists CARICOM as an affiliate organisation. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
-    },
-    {
-      "edge": "bs-bnsi -> gy-caricom",
-      "source": "bs-bnsi",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring bs-bnsi's own CARICOM membership (evidenced via https://caricom.org/country_profiles/bahamas/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (bs-bnsi is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists the Bahamas' country profile page, which states {\"Date of Membership in CARICOM: 4 Jul 1983\"}. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
-    },
-    {
-      "edge": "bb-bss -> gy-caricom",
-      "source": "bb-bss",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring bb-bss's own CARICOM membership (evidenced via https://caricom.org/country_profiles/barbados/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (bb-bss is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists Barbados' country profile page, which states {\"Date of Membership in CARICOM: 1 Aug 1973\"}. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
-    },
-    {
-      "edge": "ht-ihsi -> gy-caricom",
-      "source": "ht-ihsi",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring ht-ihsi's own CARICOM membership (evidenced via https://caricom.org/country_profiles/haiti/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (ht-ihsi is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists Haiti's country profile page, which states {\"Date of Membership in CARICOM: 1 Jul 2002\"}. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
-    },
-    {
-      "edge": "ag-statistics-division -> gy-caricom",
-      "source": "ag-statistics-division",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring ag-statistics-division's own CARICOM membership (evidenced via https://caricom.org/country_profiles/antigua-and-barbuda/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (ag-statistics-division is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists Antigua and Barbuda's country profile page, which states {\"Date of Membership in CARICOM: 4 Jul 1974\"}. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
-    },
-    {
-      "edge": "lc-cso -> gy-caricom",
-      "source": "lc-cso",
-      "target": "gy-caricom",
-      "reason": "wrong-target",
-      "why": "[THOMAS FLAG] Verified against the live corpus node: gy-caricom's actual title is \"CARICOM membership\" with publisher \"CARICOM / Government of Guyana\" and its url/description are Guyana-country-profile-specific (\"Guyana's principal formal integration framework\"), not a generic CARICOM-institution node. Wiring lc-cso's own CARICOM membership (evidenced via https://caricom.org/country_profiles/saint-lucia/, its own country profile page) to a node that is structurally about Guyana's membership specifically would be a wrong-target mint, not a real cites-Guyana relationship. The underlying claim (lc-cso is a CARICOM member per CARICOM's own directory) is real and well-evidenced -- basis preserved: CARICOM's own member-state directory lists Saint Lucia's country profile page, which states {\"Date of Membership in CARICOM: 1 May 1974\"}. -- but needs either a new generic int-caricom node or a rename/re-scope of gy-caricom before it can be minted correctly. Needs Thomas's call."
     }
   ]
 }

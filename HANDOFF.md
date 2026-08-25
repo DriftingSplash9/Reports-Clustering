@@ -241,18 +241,21 @@ something already settled, contradict an earlier answer, retry a tool past
 the documented once-only policy, or the session has been through a
 compaction. Say "this is a good point to hand off," write this file, stop.
 Project memory: write entries as you go; if it refuses, park in
-`notes/memory-pending-<date>.md` and say so here.
+`notes/memory-pending-<date>.md` and say so here. **Currently parked:
+`notes/memory-pending-2026-08-25.md`** — the int-caricom addendum, tool
+was unreachable this turn.
 
 ---
 
 ## 3. Where the project is (2026-08-25, prompt 18 + new-countries round)
 
-**Live corpus: 3,384 reports · 2,589 dependencies.** `npm run validate`
+**Live corpus: 3,385 reports · 2,596 dependencies.** `npm run validate`
 clean exit 0 (120/120 logic checks), `tsc --noEmit` clean, `npm run build`
-clean at 1,493 kB. Reports up 130 and dependencies up 113 from the wiring
-round's 3,254/2,476 — all from this pass's new-countries mint (prompt 18
-itself minted 0 new report nodes, 4 new deps, by design — wiring connects
-existing nodes).
+clean at 1,493 kB. Reports up 131 and dependencies up 120 from the wiring
+round's 3,254/2,476 — 130 reports/109 deps from the new-countries mint
+(prompt 18 minted 0 new report nodes, 4 new deps, by design), plus 1 new
+node (`int-caricom`) and 7 retargeted deps from closing item 5b same day
+(Thomas: "add the dedicated node").
 
 **BRICS (G.1–G.4)** — full narrative in
 `archive/Previous Handoffs/HANDOFF-2026-08-22-brics-g4-full.md` and project
@@ -384,19 +387,18 @@ Assume all of this exists and works; each has a dated comment at the site.
    same publisher IBGE, different ids from different research rounds
    (`br-scn` already wired; `br-ibge-sistema-contas-nacionais` unwired).
    Full note in `_dropped` block of `brics-g4-partial-2026-08-22.json`.
-5b. **`gy-caricom` is scoped to Guyana specifically, not a generic CARICOM
-   node — needs a call on whether to add a dedicated `int-caricom` node
-   (2026-08-25, Caribbean/OECS new-countries round).** Its title is "CARICOM
-   membership", publisher "CARICOM / Government of Guyana", url/description
-   both Guyana-country-profile-specific. Seven other CARICOM members'
-   statistics offices (Jamaica, Trinidad & Tobago, Bahamas, Barbados, Haiti,
-   Antigua & Barbuda, Saint Lucia) have real, well-evidenced CARICOM
-   membership claims (each via that country's own CARICOM profile page) that
-   currently have nowhere correct to wire to — dropped `wrong-target` rather
-   than minted onto Guyana's node. Full basis text preserved in each
-   `_dropped` entry in `caribbean-oecs-new-grok-2026-08.json` (search
-   `gy-caricom`). If a generic node gets added, these seven edges are
-   ready to mint as-is against the new target.
+5b. **`int-caricom` added, 2026-08-25 (Thomas: "add the dedicated node") —
+   DONE.** New institutional node (`src/data/research/caribbean-oecs-new-grok-2026-08.json`),
+   sourced from CARICOM's own site (`caricom.org/who-we-are/`, live-verified:
+   established 4 July 1973 by the Treaty of Chaguaramas, 15 members + 8
+   associate members). The 7 CARICOM-membership edges held out at item 5b's
+   discovery (Jamaica, Trinidad & Tobago, Bahamas, Barbados, Haiti, Antigua &
+   Barbuda, Saint Lucia — each `cites`, evidenced via that country's own
+   CARICOM profile page) are now minted against `int-caricom` instead of
+   `gy-caricom`. `gy-caricom` itself untouched — stays as Guyana's own
+   country-specific membership record, still zero live edges of its own,
+   not this session's call to rescope. Corpus now 3,385/2,596, validate
+   120/120, tsc/build clean.
 6. **`cn-stats-law` / `cn-stats-law-impl-regs` vs `cn-statistics-law` —
     duplicate-node call needed.** Same shape as item 5. Full note in
     `_dropped` block of `brics-g4-2026-08-22.json`.

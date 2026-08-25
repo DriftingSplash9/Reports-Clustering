@@ -256,3 +256,13 @@ everything) — it measurably improves citation discipline.
   scoped to touch those files. Final combined corpus: 3,384 reports / 2,589
   dependencies, `npm run validate` 120/120, `tsc --noEmit` clean, `npm run
   build` clean.
+- **`int-caricom` node added, 2026-08-25 (Thomas: "add the dedicated node")**
+  — closed lesson 13/HANDOFF §5 item 5b same day it was flagged. Verified
+  CARICOM's own site live (`caricom.org/who-we-are/`: established 4 July
+  1973, Treaty of Chaguaramas, 15 members + 8 associate members) before
+  minting the node, then retargeted the 7 held-out `cites` edges from
+  `gy-caricom` to `int-caricom` — no new research needed, their basis/
+  evidence_url were already verified and preserved verbatim in the
+  `_dropped` entries. `gy-caricom` left untouched (Guyana's own membership
+  record, still zero edges — a separate rescope question, not this pass's
+  call). Corpus 3,385/2,596, validate 120/120, tsc/build clean.
