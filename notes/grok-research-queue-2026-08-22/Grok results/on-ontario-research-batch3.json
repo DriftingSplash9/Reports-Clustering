@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "files_received": [
+      "02-canada-ontario-deepen.md",
+      "GROKREADME.md",
+      "alberta-provincial.json",
+      "federal-canada.json",
+      "ontario-ompf-mpac.json"
+    ],
+    "countries_covered": [
+      "Canada",
+      "Ontario"
+    ],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "on-edu-core-funding",
+      "kind": "domestic",
+      "title": "Core Education Funding Technical Paper / Guide (formerly Grants for Student Needs)",
+      "publisher": "Ontario Ministry of Education",
+      "country": "CA",
+      "region": "Ontario",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.ontario.ca/page/education-funding",
+      "description": "The annual technical paper and guide that explain the formulas, allocations and restrictions for Core Education Funding (previously Grants for Student Needs / GSN). Used by school boards for budgeting and financial reporting. Describes the Pupil Foundation Grant, School Foundation Grant and supplemental grants that together provide roughly 90 % of operating funding to Ontario’s 72 district school boards.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "on-edu-gsn-regulation",
+      "kind": "domestic",
+      "title": "Core Education Funding – Legislative Grants Regulation",
+      "publisher": "Ontario Ministry of Education / Lieutenant Governor in Council",
+      "country": "CA",
+      "region": "Ontario",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.ontario.ca/laws/regulation",
+      "description": "The annual regulation made under the Education Act (e.g. O. Reg. 190/25 for 2025-26) that legally sets the grant amounts, formulas and conditions for Core Education Funding. It is the statutory instrument that turns the technical paper’s calculations into binding entitlements for each school board.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "on-edu-school-board-fs",
+      "kind": "domestic",
+      "title": "Ontario School Board Audited Financial Statements and EFIS Reporting",
+      "publisher": "Ontario Ministry of Education (Financial Analysis & Accountability Branch) / individual district school boards",
+      "country": "CA",
+      "region": "Ontario",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.ontario.ca/page/school-board-reporting",
+      "description": "The mandatory annual audited financial statements that every district school board and school authority must prepare under the Education Act (s. 252), submit through the Education Finance Information System (EFIS), and publish on their websites. Prepared in accordance with Canadian Public Sector Accounting Standards. Includes consolidated statements of financial position, operations, cash flow, change in net debt and remeasurement gains/losses.",
+      "publication_cadence": "annual"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "on-edu-gsn-regulation",
+      "target_report_id": "on-edu-core-funding",
+      "relationship_type": "calculated_from",
+      "basis": "The annual Legislative Grants regulation implements the formulas and allocations described in the Core Education Funding Technical Paper / Guide; the technical paper itself states that the regulation prevails in case of any discrepancy.",
+      "evidence_url": "https://files.ontario.ca/edu_6/edu-2023-24-technical-paper-en-2023-04-12.pdf",
+      "evidence_quote": "If there are discrepancies between this paper and the regulations made under the Education Act, the regulations prevail."
+    },
+    {
+      "source_report_id": "on-edu-core-funding",
+      "target_report_id": "on-mof-budget",
+      "relationship_type": "calculated_from",
+      "basis": "Core Education Funding is the primary vehicle through which the provincial Budget’s education envelope is distributed to school boards. The annual technical paper and regulation are issued after (and give effect to) the education spending decisions set out in the Ontario Budget.",
+      "evidence_url": "https://www.ontario.ca/page/education-funding",
+      "evidence_quote": "The Ministry of Education provides about 90% of the operating funding for Ontario’s school boards via Core Education Funding, previously known as the Grants for Student Needs (GSN)."
+    },
+    {
+      "source_report_id": "on-edu-school-board-fs",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "School board audited financial statements are required to be prepared in accordance with Canadian Public Sector Accounting Standards. Auditor General reviews and Ministry illustrative notes confirm this basis of accounting.",
+      "evidence_url": "https://auditor.on.ca/en/content/annualreports/arreports/en23/1-06FU_finschoolboards_en23.pdf",
+      "evidence_quote": "Overall, our review found that school board financial statements were prepared in accordance with Canadian PSAS."
+    },
+    {
+      "source_report_id": "on-edu-school-board-fs",
+      "target_report_id": "on-edu-gsn-regulation",
+      "relationship_type": "uses_data_from",
+      "basis": "School board financial statements and EFIS submissions report actual results against the funding entitlements calculated under the annual Core Education Funding Legislative Grants regulation. The Ministry’s financial-statement instructions require boards to report the grants received under that regulation.",
+      "evidence_url": "https://www.ontario.ca/page/school-board-reporting",
+      "evidence_quote": "School boards are required under s252(2) of the Education Act to publish their audited financial statements... The information and publication delivery method are the minimum requirements under clauses 252(2)1 or 252(2)2 of the Education Act."
+    },
+    {
+      "source_report_id": "to-tax-levy-bylaw",
+      "target_report_id": "on-edu-gsn-regulation",
+      "relationship_type": "cites",
+      "basis": "Municipal tax-levy by-laws collect the education portion of property tax at rates prescribed by the Province; those rates and the overall education levy form part of the funding that supports the Core Education Funding system. Toronto’s 2026 Tax Levy By-law explicitly adopts the education tax rates prescribed under the Education Act regulations.",
+      "evidence_url": "https://www.toronto.ca/legdocs/bylaws/2026/law0133.pdf",
+      "evidence_quote": "City Council adopt the 2026 tax rates for school purposes... in accordance with Ontario Regulation 400/98 as amended, prescribing such rates for the City of Toronto."
+    },
+    {
+      "source_report_id": "ot-tax-policy",
+      "target_report_id": "on-edu-gsn-regulation",
+      "relationship_type": "cites",
+      "basis": "Ottawa’s tax-policy process and final tax rates include the provincially prescribed education tax rates that fund the school system under the Core Education Funding framework.",
+      "evidence_url": "https://ottawa.ca/en/city-hall/budget-finance-and-corporate-planning/tax-policy",
+      "evidence_quote": "One-quarter of a residential property tax bill is effectively set or mandated by the Province. Education taxes are set by the Province and collected by the City."
+    },
+    {
+      "source_report_id": "on-edu-core-funding",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Several GSN / Core Education Funding allocations (e.g., demographic, language, special education) rely on enrolment and demographic data that ultimately trace to Statistics Canada census and population estimates; the technical papers reference enrolment data supplied by boards but grounded in the broader statistical system.",
+      "evidence_url": "https://files.ontario.ca/edu_6/edu-2023-24-technical-paper-en-2023-04-12.pdf",
+      "evidence_quote": "The funding projections have been prepared by the Ministry of Education and are based on enrolment and other data provided by school boards."
+    }
+  ]
+}

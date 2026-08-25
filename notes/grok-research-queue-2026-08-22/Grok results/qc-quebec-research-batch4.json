@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "files_received": [
+      "03-canada-quebec-deepen.md",
+      "GROKREADME.md",
+      "alberta-provincial.json",
+      "federal-canada.json"
+    ],
+    "countries_covered": [
+      "Canada (Quebec provincial and municipal layers)"
+    ],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "qc-mamh-sommaire-role",
+      "kind": "domestic",
+      "title": "Sommaire du rôle d'évaluation foncière (et compilation provinciale)",
+      "publisher": "Ministère des Affaires municipales et de l'Habitation",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.quebec.ca/habitation-territoire/information-fonciere/evaluation-fonciere",
+      "description": "Annual summary of each municipal assessment roll, prescribed by regulation and transmitted to MAMH. Aggregates values by use, fiscal regime, condominiums and other categories; forms the primary input data for the provincial RFU dataset, statistical publications on assessment, and various fiscal-sharing calculations.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "qc-education-taux-taxe-scolaire",
+      "kind": "domestic",
+      "title": "Taux de la taxe scolaire (taux uniforme provincial)",
+      "publisher": "Ministère de l'Éducation du Québec",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.education.gouv.qc.ca/education/prescolaire-primaire-et-secondaire/administration-encadrements/financement/taxe-scolaire",
+      "description": "Annual uniform school-tax rate set by the Minister of Education and published in the Gazette officielle. Applied province-wide to the adjusted standardized assessment value of each taxable property (after a basic exemption), using the same municipal assessment rolls that feed municipal taxation and RFU.",
+      "publication_cadence": "annual (by 15 June for the following school year)"
+    },
+    {
+      "proposed_id": "qc-reglement-proportion-mediane",
+      "kind": "domestic",
+      "title": "Règlement sur la proportion médiane du rôle d'évaluation foncière",
+      "publisher": "Gouvernement du Québec (Ministère des Affaires municipales et de l'Habitation)",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.quebec.ca/habitation-territoire/information-fonciere/evaluation-fonciere/proportions-medianes/a-propos",
+      "description": "Provincial regulation that prescribes the exact statistical method for calculating the median proportion of each municipal assessment roll relative to market sales, and the corresponding comparative factor. The resulting factors are approved by the Minister and used to uniformize values for RFU and other fiscal applications.",
+      "publication_cadence": "legislation / regulation (updated as needed)"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "qc-mamh-richesse-fonciere-uniformisee",
+      "target_report_id": "qc-mamh-sommaire-role",
+      "relationship_type": "uses_data_from",
+      "basis": "The RFU calculation draws its raw assessed values and category breakdowns from the annual sommaires du rôle transmitted by every municipality to MAMH.",
+      "evidence_url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/affaires-municipales/publications/evaluation_fonciere/documentation/GUI_ValidationRoleSommaire.pdf",
+      "evidence_quote": "Chaque année, le ministère des Affaires municipales et de l’Habitation (MAMH) collecte les données des rôles d’évaluation foncière et des sommaires pour chacune des municipalités du Québec"
+    },
+    {
+      "source_report_id": "qc-mamh-proportion-mediane-facteurs",
+      "target_report_id": "qc-reglement-proportion-mediane",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The annual calculation and approval of each roll's median proportion and comparative factor are governed by the specific statistical rules set out in the Règlement sur la proportion médiane du rôle d'évaluation foncière.",
+      "evidence_url": "https://www.quebec.ca/habitation-territoire/information-fonciere/evaluation-fonciere/proportions-medianes/a-propos",
+      "evidence_quote": "Le Règlement sur la proportion médiane du rôle d’évaluation foncière prescrit la façon d’établir la proportion médiane de chacun des rôles d’évaluation."
+    },
+    {
+      "source_report_id": "qc-education-taux-taxe-scolaire",
+      "target_report_id": "mtl-role-evaluation",
+      "relationship_type": "uses_data_from",
+      "basis": "School tax is levied on the adjusted standardized value derived from the municipal assessment roll (the same roll used for municipal taxation); value changes are phased over the three-year life of the roll.",
+      "evidence_url": "https://www.cgtsim.qc.ca/en/understanding-school-tax/",
+      "evidence_quote": "The school tax is calculated based on the property’s adjusted standardized value. This value is obtained after spreading the change in assessed values resulting from the implementation of the assessment roll. Only municipalities have authority over property assessments."
+    },
+    {
+      "source_report_id": "qc-education-taux-taxe-scolaire",
+      "target_report_id": "qc-mamh-richesse-fonciere-uniformisee",
+      "relationship_type": "uses_data_from",
+      "basis": "The school-tax base ultimately rests on the same uniformized assessed values that constitute the richesse foncière uniformisée, after statutory averaging of roll-to-roll changes.",
+      "evidence_url": "https://www.education.gouv.qc.ca/education/prescolaire-primaire-et-secondaire/administration-encadrements/financement/taxe-scolaire",
+      "evidence_quote": "Le second facteur reflète la richesse foncière des contribuables à la taxe scolaire."
+    },
+    {
+      "source_report_id": "qc-mamh-manuel-evaluation-fonciere",
+      "target_report_id": "qc-reglement-proportion-mediane",
+      "relationship_type": "cites",
+      "basis": "The Manuel d'évaluation foncière du Québec incorporates and operationalizes the statutory method for establishing the median proportion, directing assessors to the regulation's rules.",
+      "evidence_url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/affaires-municipales/publications/evaluation_fonciere/manuel_evaluation_fonciere/2026/MEFQ_partie_5_2026.pdf",
+      "evidence_quote": "La proportion médiane du rôle est constituée par la donnée médiane des ratios individuels conservés à la suite de deux épurations successives"
+    },
+    {
+      "source_report_id": "isq-vitalite-economique",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "The five-year population growth component (TAAM) of the IVE is calculated from the official annual population estimates produced by Statistics Canada in collaboration with ISQ.",
+      "evidence_url": "https://statistique.quebec.ca/en/fichier/bulletin-analyse-indice-vitalite-economique-territoires-edition-2025.pdf",
+      "evidence_quote": "Statistique Canada, Estimations démographiques annuelles (régions infraprovinciales, mai 2024)."
+    }
+  ]
+}

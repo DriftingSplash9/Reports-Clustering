@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "files_received": ["17-wiring-south-america-andean.md", "GROKREADME.md"],
+    "countries_covered": ["Ecuador", "Peru", "Venezuela", "Bolivia", "Colombia"],
+    "countries_thin_or_null": ["Venezuela — official INE statistical production remains severely limited; most listed nodes (ENCOVI-based poverty/employment/health, oil production, OFAC/oil-major context) have no primary domestic methodological dependency edges among themselves that meet the evidence standard; standalone context is the correct result"]
+  },
+  "proposed_reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "ec-pobreza",
+      "target_report_id": "ec-enemdu",
+      "relationship_type": "uses_data_from",
+      "basis": "Income poverty incidence is calculated by comparing household per-capita income from the National Survey of Employment, Unemployment and Underemployment (ENEMDU) against the official poverty and extreme-poverty lines.",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/POBREZA/2025/Junio/202506_Boletin_pobreza_ENEMDU.pdf",
+      "evidence_quote": "aquellos individuos cuyo ingreso total per cápita, en relación a su hogar, sea inferior a la línea de pobreza son identificados pobres por ingresos. ... se calcula la proporción de pobres frente al total de la población."
+    },
+    {
+      "source_report_id": "ec-pobreza",
+      "target_report_id": "ec-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "Official poverty and extreme-poverty lines (originally estimated from consumption surveys) are updated monthly/periodically by the Consumer Price Index so that current-period incomes can be compared to real lines.",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/POBREZA/2025/Junio/202506_Boletin_pobreza_ENEMDU.pdf",
+      "evidence_quote": "A partir de diciembre de 2007, la pobreza por ingresos se obtiene actualizando la línea oficial de pobreza por consumo mediante el Índice de Precios al Consumidor (IPC)."
+    },
+    {
+      "source_report_id": "ec-pobreza",
+      "target_report_id": "ec-lineas-pobreza",
+      "relationship_type": "calculated_from",
+      "basis": "Incidence rates are obtained directly by classifying households relative to the monetary values of the poverty and extreme-poverty lines.",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/POBREZA/2025/Junio/202506_Boletin_pobreza_ENEMDU.pdf",
+      "evidence_quote": "En junio de 2025 la línea de pobreza se ubica en US$ 91,98 mensuales per cápita, mientras que la línea de pobreza extrema en US$ 51,83 mensuales per cápita"
+    },
+    {
+      "source_report_id": "ec-nbi",
+      "target_report_id": "ec-enemdu",
+      "relationship_type": "uses_data_from",
+      "basis": "Unsatisfied Basic Needs (NBI) poverty is measured from ENEMDU (and census) data on housing quality, services, economic dependence, school attendance and overcrowding.",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/Censo2022/Documento_NBI_24.09.25.pdf",
+      "evidence_quote": "se oficializó a la Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU) como su fuente oficial."
+    },
+    {
+      "source_report_id": "ec-canasta-basica",
+      "target_report_id": "ec-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "The analytical Basic and Vital Family Baskets are priced with the product-level prices collected for the Consumer Price Index.",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/Inflacion/canastas/2026/febrero/1.Informe_Ejecutivo_Canastas_Analiticas_feb_2026.pdf",
+      "evidence_quote": "Las canastas analíticas están constituidas por alrededor de 75 productos de los 359 que conforman la Canasta de artículos (Bienes y servicios), del Índice de Precios al Consumidor (IPC)."
+    },
+    {
+      "source_report_id": "ec-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Ecuador’s balance-of-payments statistics are compiled according to the sixth edition of the IMF Balance of Payments and International Investment Position Manual (from 2016 onwards).",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/Sitios/Programa_Nacional_de_Estadistica/Fichas_Metodologicas/Inventario%20de%20Operaciones%20Estad%C3%ADsticas/Economicas/Comercio_internacional_y_balanza/FM_Balanza_Pagos_REV.pdf",
+      "evidence_quote": "Versión 6 Manual de Balanza de Pagos y Posición de Inversión Internacional desde: I T 2016"
+    },
+    {
+      "source_report_id": "pe-pobreza-monetaria",
+      "target_report_id": "pe-enaho",
+      "relationship_type": "uses_data_from",
+      "basis": "Monetary poverty incidence and profiles are produced from household income/expenditure data collected by the continuous National Household Survey (ENAHO).",
+      "evidence_url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1935/libro.pdf",
+      "evidence_quote": "elaborado con los resultados de la Encuesta Nacional de Hogares (ENAHO) que ejecuta el INEI cada año de manera continua."
+    },
+    {
+      "source_report_id": "pe-pobreza-monetaria",
+      "target_report_id": "pe-lineas-pobreza",
+      "relationship_type": "calculated_from",
+      "basis": "Households are classified as poor or extremely poor by comparing their per-capita expenditure (or income) against the official total and extreme poverty lines.",
+      "evidence_url": "http://proyectos.inei.gob.pe/web/biblioineipub/bancopub/Est/Lib0071/medi.htm",
+      "evidence_quote": "Se considera pobre, a un hogar (hi) cuyo gasto percápita (Yi) resulta inferior al valor de la Línea de Pobreza Percápita (Z)."
+    },
+    {
+      "source_report_id": "pe-cuentas-nacionales",
+      "target_report_id": "pe-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "Exports and imports of goods that enter the expenditure-side national accounts and quarterly GDP are taken from foreign-trade statistics (customs/SUNAT).",
+      "evidence_url": "https://cdn.www.gob.pe/uploads/document/file/6121309/2439802-quarterly-gross-domestic-product-calculation-methodology.pdf?v=1711573212",
+      "evidence_quote": "statistics on Foreign Trade and tax collection from SUNAT are used. ... SUNAT Imports and Exports"
+    },
+    {
+      "source_report_id": "pe-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Peruvian balance-of-payments statistics follow the IMF BPM6 framework (standard for the region’s central banks).",
+      "evidence_url": "https://www.bcrp.gob.pe/docs/Publicaciones/Guia-Metodologica/2025/guia-metodologica-2025-10.pdf",
+      "evidence_quote": "De las cuentas externas se obtiene la información sobre exportaciones e importaciones de bienes y servicios no financieros"
+    },
+    {
+      "source_report_id": "bo-pobreza",
+      "target_report_id": "bo-eh",
+      "relationship_type": "uses_data_from",
+      "basis": "Monetary poverty incidence is measured from income data collected by the annual Household Survey (Encuesta de Hogares).",
+      "evidence_url": "https://anda.ine.gob.bo/index.php/catalog/163",
+      "evidence_quote": "se constituye, en la principal fuente de información de la medición de la pobreza por ingresos en Bolivia."
+    },
+    {
+      "source_report_id": "bo-pobreza",
+      "target_report_id": "bo-lineas-pobreza",
+      "relationship_type": "calculated_from",
+      "basis": "Households are classified relative to the official extreme-poverty (CBA) and total-poverty (CBT) lines constructed from the Family Budget Survey and updated thereafter.",
+      "evidence_url": "https://www.ine.gob.bo/index.php/descarga/225/publicaciones/48206/nota-tecnica-pobreza-2f.pdf",
+      "evidence_quote": "La línea de pobreza extrema representa la cuantía monetaria mínima para adquirir una canasta básica de alimentos ... la línea de pobreza además de considerar los gastos alimentarios, incorpora otros gastos esenciales"
+    },
+    {
+      "source_report_id": "co-pobreza-monetaria",
+      "target_report_id": "co-geih",
+      "relationship_type": "uses_data_from",
+      "basis": "Monetary poverty is calculated by comparing per-capita income of the spending unit, obtained from the Great Integrated Household Survey (GEIH), against the official poverty and extreme-poverty lines.",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/DSO-EMP-MET-001_F_V2.pdf",
+      "evidence_quote": "el ingreso per cápita disponible de la Unidad de Gasto ... se obtiene a partir de una batería de preguntas que se encuentran incluidas en la Gran Encuesta Integrada de Hogares (GEIH)"
+    },
+    {
+      "source_report_id": "co-pobreza-monetaria",
+      "target_report_id": "co-lineas-pobreza",
+      "relationship_type": "calculated_from",
+      "basis": "Incidence is obtained by classifying households whose income falls below the monetary values of the extreme-poverty (food basket) and total-poverty (food + non-food) lines.",
+      "evidence_url": "https://www.dane.gov.co/files/operaciones/PM/DSO-EMP-MET-001_F_V2.pdf",
+      "evidence_quote": "cuando un hogar no tiene suficientes ingresos mensuales para adquirir una canasta básica de alimentos entonces dicho hogar se encuentra en condición de pobreza extrema. ... un hogar se encuentra en situación de pobreza monetaria, cuando su ingreso promedio no es suficiente para cubrir rubros de gastos esenciales"
+    },
+    {
+      "source_report_id": "co-bop",
+      "target_report_id": "co-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "Goods exports and imports in the balance of payments are compiled primarily from the merchandise-trade statistics supplied monthly by DANE and DIAN.",
+      "evidence_url": "https://www.banrep.gov.co/sites/default/files/bp_metodologia_bpm6_v4.pdf",
+      "evidence_quote": "Las bases de datos de comercio exterior suministradas mensualmente por el Departamento Administrativo Nacional de Estadísticas (DANE) y la Dirección de Impuestos y Aduanas Nacionales (DIAN) al Banco de la República (BR) son la principal fuente de información empleada en la medición del comercio exterior de bienes."
+    },
+    {
+      "source_report_id": "co-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Colombia’s balance-of-payments and IIP statistics are compiled under the sixth edition of the IMF Balance of Payments Manual.",
+      "evidence_url": "https://www.banrep.gov.co/sites/default/files/bp_metodologia_bpm6_v4.pdf",
+      "evidence_quote": "bp_metodologia_bpm6_v4.pdf"
+    },
+    {
+      "source_report_id": "co-comercio-exterior",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Merchandise trade statistics are classified and validated according to the Harmonized System (and CAN/UN recommendations).",
+      "evidence_url": "https://www.dian.gov.co/dian/cifras/Paginas/Bases-Estadisticas-de-Comercio-Exterior-Importaciones-y-Exportaciones.aspx",
+      "evidence_quote": "se genera a partir de los datos de los registros administrativos de importaciones y exportaciones ... a partir de la metodología de la Organización de las Naciones Unidas (ONU), de la Comunidad Andina de Naciones (CAN)"
+    }
+  ]
+}

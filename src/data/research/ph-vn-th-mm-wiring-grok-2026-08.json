@@ -1,0 +1,90 @@
+{
+ "reports": [],
+ "dependencies": [
+  {
+   "source_report_id": "ph-national-accounts",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Philippine System of National Accounts (PSNA) follows the 2008 SNA recommendations; sources and methodology are aligned with the 2008 System of National Accounts Manual. Evidence: \"The sources and methodology of the national accounts is aligned with the 2008 System of National Accounts Manual, which is the latest version of the international statistical standard for the national accounts... The framework is based on the 2008 System of National Accounts (SNA)\""
+  },
+  {
+   "source_report_id": "ph-bop",
+   "target_report_id": "imf-bpm6",
+   "relationship_type": "methodology_depends_on",
+   "basis": "BSP compiles Balance of Payments statistics in accordance with the IMF Balance of Payments and International Investment Position Manual, 6th Edition (BPM6). Evidence: \"The Philippines' BOP statistics are compiled in accordance with the concepts and standards as set forth in the International Monetary Fund's (IMF) Balance of Payments and International Investment Position Manual, 6th Edition (BPM6) framework\""
+  },
+  {
+   "source_report_id": "ph-cpi",
+   "target_report_id": "un-coicop-2018",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Philippine CPI uses the Philippine Classification of Individual Consumption According to Purpose (PCOICOP), which is patterned after the United Nations COICOP. Evidence: \"Philippine Classification of Individual Consumption According to Purpose (PCOICOP) ... The PCOICOP was patterned after the United Nations COICOP.\""
+  },
+  {
+   "source_report_id": "ph-cpi",
+   "target_report_id": "ph-fies",
+   "relationship_type": "uses_data_from",
+   "basis": "CPI statistical weights at division and item level are derived from expenditure data of the Family Income and Expenditure Survey (FIES). Evidence: \"Statistical weights are applied to the division level down to the Item level of the PCOICOP. The weights are derived from the expenditure data of the FIES.\""
+  },
+  {
+   "source_report_id": "vn-national-accounts",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "GSO has researched and applied SNA 2008 changes into the handbook on 2008 SNA methodology (published early 2018) and continues alignment from earlier 1993 SNA base. Evidence: \"GSO has researched and applied SNA 2008 changes into the handbook on 2008 SNA methodology which was published in the early 2018.\""
+  },
+  {
+   "source_report_id": "th-national-accounts",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Thailand annual national accounts and quarterly GDP are compiled in line with the 2008 SNA, using chained volume measures. Evidence: \"Both of the annual national accounts and the QGDP are in line with the 2008 SNA, with chained volume measures to express the constant terms.\""
+  },
+  {
+   "source_report_id": "ph-national-accounts",
+   "target_report_id": "ph-lfs",
+   "relationship_type": "uses_data_from",
+   "basis": "National accounts residual employment approach for the unorganized sector derives employment as the residual of Labor Force Survey (LFS) employment and establishment surveys (CPBI/ASPBI). Evidence: \"To come up with the GVA of the unorganized industry, indirect estimation is employed using the residual employment approach. Using this approach, employment in the unorganized industry is derived as the residual of the employment of the Labor Force Survey (LFS) and the Census of Philippine Business and Industry (CPBI) for the benchmark year or the Annual Survey of Philippine Business and Industry (ASPBI) for the non-benchmark years.\""
+  },
+  {
+   "source_report_id": "ph-bop",
+   "target_report_id": "ph-remittances",
+   "relationship_type": "uses_data_from",
+   "basis": "Personal remittances / cash remittances from overseas Filipinos form a major component of the secondary income account (personal transfers) in the BPM6-based BOP. Evidence: \"The BPM6 identifies the standard components and provides supplementary items to allow compilation of remittance aggregates. The standard components of remittances refer to the compensation of employees (lodged under the Primary Income account) and personal transfers (lodged under the Secondary Income account).\""
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "mm-national-accounts -> sna-1993",
+   "source": "mm-national-accounts",
+   "target": "sna-1993",
+   "reason": "no-document",
+   "why": "[SUSPECT] Two separate issues. (1) evidence_url (cdn.aseanstats.org .../MM_Metadata GDP Production and Expenditure.pdf) is blocked by a bot-captcha CDN (HTTP 202 with 'sg-captcha: challenge' header, redirects to a captcha page) for both curl and WebFetch (WebFetch failed with ROBOTS_DISALLOWED) -- could not raw-verify this specific URL, though the underlying claim is real: found the identical near-verbatim sentence on the official, independently-reachable IMF DSBB e-GDDS page for Myanmar (dsbb.imf.org/egdds/country/MMR, API countryCode=MMR&categoryCode=NAG00): 'Myanmar's NA broadly follows the concepts and definitions of the System of National Accounts 1968. Consequently, changes introduced by the 1993 SNA/2008 SNA affecting GDP are being implemented.' -- a verbatim match to Grok's quote, on a live, dormant-but-published metadata page (consistent with the known Myanmar-dormancy pattern; this is stated as current/unrevised methodology, not an actively updated series, but the page itself is genuinely live). (2) ID problem: target id 'sna-1993' is NOT present in the live 3,254-id corpus list (only sna-2008 and sna-2025 were found there), even though GROKREADME.md lists sna-1993 (and sna-1968) as 'standard ids already in the corpus.' This appears to be a stale/inaccurate GROKREADME claim -- the dependency's target does not currently resolve to any live node. Recommend either minting sna-1993 (and/or sna-1968, which is arguably the more accurate target given the quote) as a new standard node, or reconciling GROKREADME against the current corpus before this edge can be wired."
+  },
+  {
+   "edge": "ph-lfs -> icls-work-statistics-resolution",
+   "source": "ph-lfs",
+   "target": "icls-work-statistics-resolution",
+   "reason": "no-document",
+   "why": "[CONTENT_MISMATCH] evidence_url resolves (DSBB API countryCode=PHL&categoryCode=EMP00, real content retrieved) but Grok's specific evidence_quote ('The sources of data and the methodology are being reviewed by the Inter-Agency Committee on Labor and Productivity Statistics (IACLPS)') does NOT appear anywhere on the page, and does not even describe a methodology-standard relationship -- it describes an internal review committee, not adherence to an ICLS resolution. However, the underlying relationship claim IS independently supportable from a different passage on the same page: 'The PSA definition of employment closely follows the most recent international recommendations set out in the Resolution concerning statistics on employment adopted by the Thirteenth International Conference of Labour Statisticians (1982).' This is a real, strong match for icls-work-statistics-resolution but is not the quote Grok cited. Classified as CONTENT_MISMATCH because the submitted evidence_quote is fabricated/wrong for this URL; recommend re-citing with the actual 13th-ICLS (1982) sentence found above before wiring."
+  },
+  {
+   "edge": "vn-cpi -> un-coicop-2018",
+   "source": "vn-cpi",
+   "target": "un-coicop-2018",
+   "reason": "no-document",
+   "why": "[CONTENT_MISMATCH] evidence_url resolves (DSBB API countryCode=VNM&categoryCode=CPI00, e-GDDS tier, real content retrieved -- confirmed the VHLSS half of Grok's quote verbatim: 'The weights used in calculating CPI is derived from the Vietnam Household Living Standard Survey (VHLSS) and CPI weights survey.'). BUT the COICOP half of the quote ('Improving consumer price index structure by the latest COICOP') does not appear anywhere on the page, and the word 'COICOP' does not appear anywhere in any of the 6 DQAF sections for this category. The page instead explicitly states Vietnam classifies CPI with its OWN domestic scheme: 'The system used to classify and aggregate the CPI is the Vietnam CPI classification. This classification is based on country needs, but takes into account details from other countries.' This contradicts, rather than supports, a methodology_depends_on edge to un-coicop-2018 as currently sourced. Do not wire this edge on this evidence; the VHLSS half instead supports a separate, unproposed uses_data_from edge to a Vietnam household survey node."
+  },
+  {
+   "edge": "th-cpi -> un-coicop-2018",
+   "source": "th-cpi",
+   "target": "un-coicop-2018",
+   "reason": "no-document",
+   "why": "[SUSPECT] evidence_url (economy.com/thailand/consumer-price-index-cpi) resolves (HTTP 200) and the exact quoted text is genuinely present verbatim: 'The classification system was developed by the Bureau of Trade and Economic Indices (BTEI) corresponding to the household expenditure survey conducted by National Statistics Office (NSO) which is consistent with the UN COICOP classification.' However economy.com is a Moody's Analytics third-party data aggregator, not a primary government/agency source -- explicitly disallowed by the project's source-quality rules ('No third-party scorecards, aggregators, or news-summary sites as citations'). Found a genuine primary alternative that confirms the same substance: IMF DSBB (dsbb.imf.org/sdds/dqaf-base/country/THA/category/CPI00, via API) states 'The structure of CPI largely follows the COICOP classification, consisting of 7 major groups and 430 items.' Recommend re-citing to the DSBB/THA/CPI00 source instead of economy.com before wiring; the relationship itself is real."
+  },
+  {
+   "edge": "th-national-accounts -> isic",
+   "source": "th-national-accounts",
+   "target": "isic",
+   "reason": "no-document",
+   "why": "[CONTENT_MISMATCH] evidence_url resolves (DSBB API countryCode=THA&categoryCode=NAG00, same page as the th-national-accounts/sna-2008 dependency above) but the evidence_quote given ('Both of the annual national accounts and the QGDP are in line with the 2008 SNA, with chained volume measures...') is about the SNA edition, not ISIC, and never mentions ISIC -- it is a copy-paste of the quote used for a different dependency. A genuinely supporting sentence DOES exist elsewhere on the same page: 'International Standard Industrial Classification of All Economic Activities (ISIC), Rev. 4 and the Central Product Classification (CPC) are used to classify industries and products, respectively, with some country specific adaptions.' The underlying relationship is real and verifiable, but classified CONTENT_MISMATCH because the specific evidence_quote submitted does not support the claim; recommend re-citing with the ISIC/CPC sentence above."
+  }
+ ]
+}

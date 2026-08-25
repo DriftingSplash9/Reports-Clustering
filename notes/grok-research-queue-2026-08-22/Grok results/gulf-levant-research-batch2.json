@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "files_received": ["32-new-middle-east-gulf-levant.md", "GROKREADME.md"],
+    "countries_covered": ["Jordan", "Lebanon", "Kuwait", "Qatar", "Oman", "Bahrain"],
+    "countries_thin_or_null": [
+      "Kuwait — DSBB metadata continues to list 1993 SNA as the framework with an explicit note of 'Moving to 2008 SNA'; no newer primary CSB methodology page confirming completed transition found",
+      "Qatar — available primary and IMF documentation (including older DSBB and WEO key data tables) continue to reference 1993 SNA with plans for 2008; post-transition National Statistics Center methodology statement naming current edition not located in primary sources",
+      "Lebanon — no primary CAS page located naming COICOP version for CPI or current BPM edition for external statistics beyond older BPM5 references and migration plans"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "om-cpi",
+      "kind": "domestic",
+      "title": "Oman Consumer Price Index (CPI)",
+      "publisher": "National Centre for Statistics and Information (NCSI)",
+      "country": "OM",
+      "region": "Oman",
+      "url": "https://www.ncsi.gov.om/",
+      "description": "Monthly consumer price index measuring changes in prices of a fixed basket of goods and services purchased by households; Laspeyres-type index with weights from household expenditure surveys; classified by COICOP.",
+      "publication_cadence": "monthly"
+    },
+    {
+      "proposed_id": "bh-cpi-methodology",
+      "kind": "domestic",
+      "title": "Bahrain CPI Compilation Methodology (as documented in DSBB)",
+      "publisher": "Information & eGovernment Authority (iGA)",
+      "country": "BH",
+      "region": "Bahrain",
+      "url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/BHR/category/CPI00",
+      "description": "Documented methodology for Bahrain's Consumer Price Index, referencing 2008 SNA concepts for coverage/valuation and the CPI Manual for methods and procedures.",
+      "publication_cadence": "as updated in DSBB metadata"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bh-national-accounts",
+      "target_report_id": "sna-1993",
+      "relationship_type": "methodology_depends_on",
+      "basis": "iGA adopts the 1993 System of National Accounts as the primary framework while incorporating many concepts and recommendations of the 2008 SNA (fixed assets classification, FISIM, R&D treatment); work is underway to fully move to the 2008 system.",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/BHR/category/NAG00",
+      "evidence_quote": "The 1993 System of National Accounts is adopted, considering all the concepts and recommendations of the 2008 System of National Accounts in many aspects related to accounts, such as classification of fixed assets and technical treatments for calculating imputed financial service costs and treatment of research and development expenses, etc., and work is currently underway to move to the 2008 system with the available details and minimum tables required."
+    },
+    {
+      "source_report_id": "bh-cpi",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CPI concepts and definitions (coverage and valuation) draw on the 2008 SNA as guidelines.",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/BHR/category/CPI00",
+      "evidence_quote": "The concepts and definitions from the 2008 SNA are used as guidelines with regards to coverage and valuation while the methods and procedures are mainly from Consumer Price Index Manual: Theory and Practice (2004) and practical guide to producing consumer price indices (2020)."
+    },
+    {
+      "source_report_id": "bh-cpi",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CPI methods and procedures primarily follow the Consumer Price Index Manual (2004 edition and 2020 practical guide).",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/BHR/category/CPI00",
+      "evidence_quote": "the methods and procedures are mainly from Consumer Price Index Manual: Theory and Practice (2004) and practical guide to producing consumer price indices (2020)."
+    },
+    {
+      "source_report_id": "om-cpi",
+      "target_report_id": "un-coicop-hbs-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The CPI basket items are classified according to the international Classification of Individual Consumption by Purpose (COICOP).",
+      "evidence_url": "https://dsbb.imf.org/egdds/dqaf-base/country/OMN/category/CPI00",
+      "evidence_quote": "The 392 items in the index are classified according to the international classification the Classification of Individual Consumption by Purpose (COICOP)."
+    },
+    {
+      "source_report_id": "jo-dos",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "uses_data_from",
+      "basis": "DoS provides merchandise trade data (from Customs) that serve as a direct input to the compilation of Jordan's balance of payments statistics, which themselves follow BPM6.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/JOR/category/BOP00",
+      "evidence_quote": "The Department of Statistics is the source of data based on data received from the Customs department. Exports: Domestic exports (f.o.b) plus re-exports. Imports: Imports (f.o.b) less imports of non-resident agencies."
+    }
+  ]
+}

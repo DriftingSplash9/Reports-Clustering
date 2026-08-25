@@ -1,0 +1,134 @@
+{
+  "_meta": {
+    "files_received": [
+      "30-new-central-asia-caucasus.md",
+      "GROKREADME.md",
+      "ca-caucasus-mongolia-batch1.json"
+    ],
+    "countries_covered": [
+      "Kazakhstan",
+      "Uzbekistan",
+      "Kyrgyzstan",
+      "Tajikistan",
+      "Turkmenistan",
+      "Mongolia",
+      "Georgia",
+      "Armenia",
+      "Azerbaijan"
+    ],
+    "countries_thin_or_null": [
+      "Uzbekistan — e-GDDS participant with explicit SDDS roadmap under NSDS 2020–25 and World Bank project; latest available project indicators (late 2025) still show “official statistics not reported according to SDDS standards” with target date September 2027; no subscription confirmed yet",
+      "Turkmenistan — remains thin; no new primary methodology or series documents located"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "kz-national-accounts",
+      "kind": "domestic",
+      "title": "National Accounts of Kazakhstan (GDP and related aggregates)",
+      "publisher": "Bureau of National Statistics",
+      "country": "KZ",
+      "region": "Kazakhstan",
+      "jurisdiction_level": "federal",
+      "url": "https://stat.gov.kz/en/industries/economy/national-accounts/",
+      "description": "Official national accounts and GDP estimates published by the Bureau of National Statistics; currently compiled under the 1993 SNA framework per IMF DQAF metadata.",
+      "publication_cadence": "quarterly / annual"
+    },
+    {
+      "proposed_id": "mn-national-accounts",
+      "kind": "domestic",
+      "title": "National Accounts of Mongolia (GDP and related aggregates)",
+      "publisher": "National Statistics Office of Mongolia",
+      "country": "MN",
+      "region": "Mongolia",
+      "jurisdiction_level": "federal",
+      "url": "https://www.nso.mn",
+      "description": "Official national accounts compiled by the NSO of Mongolia using the production, expenditure and income approaches.",
+      "publication_cadence": "quarterly / annual"
+    },
+    {
+      "proposed_id": "eaeu-stat-protocol",
+      "kind": "international",
+      "title": "Protocol on the Procedure for the Formation and Dissemination of Official Statistical Information of the Eurasian Economic Union (Annex No. 4 to the Treaty on the Eurasian Economic Union of 29 May 2014)",
+      "publisher": "Eurasian Economic Union / Eurasian Economic Commission",
+      "url": "https://adilet.zan.kz/eng/docs/Z1400000240",
+      "description": "Foundational protocol annexed to the EAEU Treaty that establishes the procedure for forming and disseminating official statistical information of the Union, requires member-state authorized bodies to provide data according to agreed lists, and empowers the Commission to approve methodologies and ensure comparability of standards.",
+      "publication_cadence": "one-off foundational instrument"
+    },
+    {
+      "proposed_id": "eaeu-stat-methodology-2023",
+      "kind": "international",
+      "title": "Methodology of Forming Official Statistical Information of the Eurasian Economic Union (approved by Decision of the Board of the Eurasian Economic Commission No. 175 of 19 December 2023, as amended)",
+      "publisher": "Eurasian Economic Commission",
+      "url": "https://cis-legislation.com/document.fwx?rgn=155801",
+      "description": "Commission-approved methodology governing how official statistical information of the EAEU is formed from data supplied by the authorized statistical bodies of the member states (Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia).",
+      "publication_cadence": "updated by Commission decision"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mn-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF SDDS DQAF metadata for Mongolia National Accounts explicitly states that the System of National Accounts used in Mongolia is based on the methodological framework of the 2008 SNA.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/MNG/category/NAG00",
+      "evidence_quote": "The System of National Accounts used in Mongolia is based on the methodological framework of the System of National Accounts 2008 (2008 SNA). The NSO compiles the GDP using three approaches: the production approach and the expenditure approach on a quarterly and annual basis; and the GDP by income approach, is compiled on an annual basis."
+    },
+    {
+      "source_report_id": "kz-national-accounts",
+      "target_report_id": "sna-1993",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF SDDS DQAF metadata for Kazakhstan National Accounts states that the analytical framework is the 1993 SNA.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/KAZ/category/NAG00",
+      "evidence_quote": "Analytical framework: 1993 SNA. Definition: Following 1993 SNA, GDP at market prices from the production side is defined as the sum of gross values added of resident producers plus taxes and excluding subsidies on products not included in the value of their outputs. ... The data are compiled in accordance with the methodology set forth in 1993 System of National Accounts (SNA-93)."
+    },
+    {
+      "source_report_id": "kz-bns",
+      "target_report_id": "eaeu-stat-protocol",
+      "relationship_type": "cites",
+      "basis": "As an EAEU member-state authorized body, Kazakhstan’s Bureau of National Statistics is required under the Protocol (Annex 4 to the EAEU Treaty) to provide official statistical information to the Eurasian Economic Commission according to the agreed list and procedures; the Protocol is the governing instrument for Union-level statistical information formation.",
+      "evidence_url": "https://adilet.zan.kz/eng/docs/Z1400000240",
+      "evidence_quote": "This Minute is developed in accordance with Article 24 of agreement on Eurasian economic union for the purposes of determination of procedure of formation and distribution of official statistical information Union. ... The authorized bodies shall provide the official statistical information of the member states to the Commission according to the list of statistical indicators. ... Commission shall develop and approve the methodology of formation of official statistical information of the Union..."
+    },
+    {
+      "source_report_id": "kg-nsc",
+      "target_report_id": "eaeu-stat-protocol",
+      "relationship_type": "cites",
+      "basis": "As an EAEU member-state authorized body, the National Statistical Committee of the Kyrgyz Republic operates under the same Protocol obligations for the formation and supply of official statistical information to the Commission.",
+      "evidence_url": "https://adilet.zan.kz/eng/docs/Z1400000240",
+      "evidence_quote": "The authorized bodies shall provide the official statistical information of the member states to the Commission according to the list of statistical indicators. ... Commission shall take measures, directed to ensuring of comparability of official statistical information of the member states, by adoption of relevant recommendations on application of unified standards, comparable on the international level by the authorized bodies, including classification and methodology."
+    },
+    {
+      "source_report_id": "am-armstat",
+      "target_report_id": "eaeu-stat-protocol",
+      "relationship_type": "cites",
+      "basis": "As an EAEU member-state authorized body, Armstat is subject to the Protocol’s requirements for supplying official statistical information and applying Commission methodologies for Union-level statistics.",
+      "evidence_url": "https://adilet.zan.kz/eng/docs/Z1400000240",
+      "evidence_quote": "The authorized bodies shall provide the official statistical information of the member states to the Commission according to the list of statistical indicators. ... Commission shall develop and approve the methodology of formation of official statistical information of the Union, made on the basis of official statistical information of the member states, provided to the Commission."
+    },
+    {
+      "source_report_id": "kz-bns",
+      "target_report_id": "eaeu-stat-methodology-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The EEC Board Decision No. 175 of 19 December 2023 (as amended) approves the Methodology of Forming Official Statistical Information of the EAEU, which is binding on the data supplied by member-state authorized bodies including Kazakhstan’s Bureau of National Statistics.",
+      "evidence_url": "https://cis-legislation.com/document.fwx?rgn=155801",
+      "evidence_quote": "According to Item 11 of the Protocol on procedure for forming and distribution of official statistical information of the Eurasian Economic Union (appendix No. 4 to the Agreement on the Eurasian Economic Union of May 29, 2014) Board of the Eurasian economic commission of RESHILA: 1. Approve the enclosed Methodology of forming of official statistical information of the Eurasian Economic Union."
+    },
+    {
+      "source_report_id": "kg-nsc",
+      "target_report_id": "eaeu-stat-methodology-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same EEC Methodology Decision governs the statistical information supplied by the Kyrgyz National Statistical Committee as an authorized body of an EAEU member state.",
+      "evidence_url": "https://cis-legislation.com/document.fwx?rgn=155801",
+      "evidence_quote": "Data source for forming of official statistical information of the Union is the official statistical information provided by authorized bodies of state members of the Union ... according to the list of statistics of the official statistical information provided to the Commission by authorized bodies..."
+    },
+    {
+      "source_report_id": "am-armstat",
+      "target_report_id": "eaeu-stat-methodology-2023",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same EEC Methodology Decision governs the statistical information supplied by Armstat as an authorized body of an EAEU member state.",
+      "evidence_url": "https://cis-legislation.com/document.fwx?rgn=155801",
+      "evidence_quote": "Data source for forming of official statistical information of the Union is the official statistical information provided by authorized bodies of state members of the Union ... according to the list of statistics of the official statistical information provided to the Commission by authorized bodies..."
+    }
+  ]
+}

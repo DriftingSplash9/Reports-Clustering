@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "files_received": [
+      "03-canada-quebec-deepen.md",
+      "GROKREADME.md",
+      "alberta-provincial.json",
+      "federal-canada.json"
+    ],
+    "countries_covered": [
+      "Canada (Quebec provincial and municipal layers)"
+    ],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "qc-mamh-richesse-fonciere-uniformisee",
+      "kind": "domestic",
+      "title": "Richesse foncière uniformisée (RFU) des municipalités",
+      "publisher": "Ministère des Affaires municipales et de l'Habitation",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.quebec.ca/gouvernement/gestion-municipale/finances-fiscalite-municipales/information-financiere/publications-financieres/richesse-fonciere-uniformisee",
+      "description": "Annual provincial dataset and complementary guide measuring each municipality's equalized assessment (richesse foncière uniformisée). Computed from the values on the municipal real-estate assessment roll multiplied by the comparative factor for that roll, plus selected non-taxable values. Serves as the fiscal-capacity measure for municipal equalization, intermunicipal cost-sharing and metropolitan community allocations.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "qc-mamh-manuel-evaluation-fonciere",
+      "kind": "domestic",
+      "title": "Manuel d'évaluation foncière du Québec (MEFQ)",
+      "publisher": "Ministère des Affaires municipales et de l'Habitation",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.quebec.ca/habitation-territoire/information-fonciere/evaluation-fonciere/manuel",
+      "description": "Official provincial manual that prescribes the methodology, data standards, valuation techniques and legal requirements for preparing and maintaining municipal real-estate assessment rolls (rôles d'évaluation foncière). Updated periodically; the edition in force governs all rolls coming into force in a given year. Provides the uniform basis from which the richesse foncière uniformisée is derived.",
+      "publication_cadence": "updated as needed (annual editions for successive roll years)"
+    },
+    {
+      "proposed_id": "isq-pib-par-industrie",
+      "kind": "domestic",
+      "title": "Produit intérieur brut réel par industrie au Québec",
+      "publisher": "Institut de la statistique du Québec",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://statistique.quebec.ca/fr/produit/publication/produit-interieur-brut-par-industrie-au-quebec",
+      "description": "Monthly estimates of real GDP by industry for Quebec as a whole (seasonally adjusted, annualized, basic prices). Produced using the net-production method preferred under national-accounts conventions, with indicator methods where necessary. Released approximately 2.5 months after the reference month.",
+      "publication_cadence": "monthly"
+    },
+    {
+      "proposed_id": "isq-pib-regional",
+      "kind": "domestic",
+      "title": "Produit intérieur brut régional par industrie au Québec",
+      "publisher": "Institut de la statistique du Québec",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://statistique.quebec.ca/fr/fichier/produit-interieur-brut-regional-par-indutrie-quebec-edition-2025.pdf",
+      "description": "Annual estimates of GDP by industry for Quebec's 17 administrative regions and selected census metropolitan areas, in current dollars at basic prices. Derived by allocating provincial industry totals (from the Comptes économiques) using fiscal and census-based allocators.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "isq-comptes-economiques",
+      "kind": "domestic",
+      "title": "Comptes économiques des revenus et dépenses du Québec",
+      "publisher": "Institut de la statistique du Québec",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://statistique.quebec.ca/",
+      "description": "Quebec's provincial economic accounts (income and expenditure accounts), providing GDP by income and by expenditure components, capital and financial accounts by institutional sector, and industry distributions. Compiled in accordance with the Canadian System of Macroeconomic Accounts and the underlying international SNA standards; serves as the control totals for regional GDP estimates.",
+      "publication_cadence": "annual (with quarterly updates for key aggregates)"
+    },
+    {
+      "proposed_id": "mtl-taux-taxes",
+      "kind": "domestic",
+      "title": "Taux de taxes de la Ville de Montréal",
+      "publisher": "Ville de Montréal",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "municipal",
+      "url": "https://montreal.ca/articles/taux-de-taxes-pour-2026-106147",
+      "description": "Annual schedule of property-tax rates (taxe foncière générale, water, road, ARTM contribution, borough service taxes, etc.) adopted by the City of Montreal for the fiscal year. Rates vary by property category, value bracket and borough; applied to the values on the current triennial assessment roll after any phasing measures.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "qc-loi-equilibre-budgetaire",
+      "kind": "domestic",
+      "title": "Loi sur l'équilibre budgétaire",
+      "publisher": "Assemblée nationale du Québec / Éditeur officiel du Québec",
+      "country": "CA",
+      "region": "Quebec",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.legisquebec.gouv.qc.ca/fr/document/lc/E-12.00002",
+      "description": "Provincial statute that defines the budgetary balance for the purposes of the Balanced Budget Act, excludes Generations Fund transactions from the balance, and requires a multi-year return-to-balance plan when a deficit is recorded. The Plan budgétaire presents both the accounting balance and the balance 'within the meaning of the Balanced Budget Act'.",
+      "publication_cadence": "legislation (amended as needed)"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "qc-perequation",
+      "target_report_id": "qc-mamh-richesse-fonciere-uniformisee",
+      "relationship_type": "calculated_from",
+      "basis": "Municipal equalization eligibility and payment amounts under the Règlement sur le régime de péréquation are determined by comparing each municipality's richesse foncière uniformisée per capita (and average housing value) to provincial medians; the RFU dataset is the direct source of those figures.",
+      "evidence_url": "https://www.quebec.ca/gouvernement/gestion-municipale/finances-fiscalite-municipales/information-financiere/publications-financieres/richesse-fonciere-uniformisee",
+      "evidence_quote": "Elle sert aussi de base de répartition d’une partie du programme de péréquation municipale."
+    },
+    {
+      "source_report_id": "qc-mamh-richesse-fonciere-uniformisee",
+      "target_report_id": "qc-mamh-manuel-evaluation-fonciere",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The values that enter the RFU calculation are the values inscribed on the municipal assessment roll; those rolls are prepared and maintained strictly according to the methodology, data standards and valuation techniques prescribed by the Manuel d'évaluation foncière du Québec.",
+      "evidence_url": "https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/affaires-municipales/publications/finances_indicateurs_fiscalite/information_financiere/richesse_fonciere_uniformisee/GUI_richesse_fonciere_uniformisee.pdf",
+      "evidence_quote": "Les évaluations sont uniformisées en les multipliant par le facteur comparatif approuvé par la ou le ministre des Affaires municipales pour l’année en cours. ... Comme les rôles triennaux des municipalités ne sont pas tous déposés la même année..."
+    },
+    {
+      "source_report_id": "isq-pib-regional",
+      "target_report_id": "isq-comptes-economiques",
+      "relationship_type": "calculated_from",
+      "basis": "Regional GDP by industry is obtained by allocating the provincial industry totals published in the Comptes économiques des revenus et dépenses du Québec using fiscal and census-based allocators.",
+      "evidence_url": "https://statistique.quebec.ca/fr/fichier/produit-interieur-brut-regional-par-indutrie-quebec-edition-2025.pdf",
+      "evidence_quote": "Le point de départ du processus est le total québécois à répartir entre les régions : la valeur ajoutée (VA) par industrie et par composante, en dollars courants, selon les Comptes économiques du Québec."
+    },
+    {
+      "source_report_id": "isq-comptes-economiques",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Quebec's economic accounts rest on the Canadian System of Macroeconomic Accounts, which implements the international System of National Accounts 2008 (SCN 2008).",
+      "evidence_url": "https://statistique.quebec.ca/fr/fichier/comptes-economiques-des-revenus-et-depenses-du-quebec-edition-2021.pdf",
+      "evidence_quote": "Le Système canadien des comptes macroéconomiques repose essentiellement sur les normes provenant du Système de comptabilité nationale 2008 (SCN 2008)"
+    },
+    {
+      "source_report_id": "isq-pib-par-industrie",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The monthly real GDP-by-industry series is compiled according to the production approach and concepts of the System of National Accounts (basic-price valuation, net production method preferred).",
+      "evidence_url": "https://statistique.quebec.ca/fr/produit/publication/produit-interieur-brut-reel-industrie-notes-methodologiques",
+      "evidence_quote": "Mesure l'activité économique générée par un secteur ou une industrie. Il estime, en dollars constants, la contribution du secteur ou de l'industrie à la production. Pour produire ces estimations, la méthode dite de la production nette est l'approche privilégiée."
+    },
+    {
+      "source_report_id": "mtl-taux-taxes",
+      "target_report_id": "mtl-budget-fonctionnement",
+      "relationship_type": "calculated_from",
+      "basis": "The annual tax-rate schedule is the concrete expression of the taxation decisions taken in the City's operating budget; rates are set so that expected yield equals the taxation revenue line in the adopted budget.",
+      "evidence_url": "https://montreal.ca/articles/taux-de-taxes-pour-2026-106147",
+      "evidence_quote": "Les taux de taxation imposés varient en fonction de la catégorie de votre immeuble et de l’arrondissement dans lequel il est situé."
+    },
+    {
+      "source_report_id": "qc-mfq-plan-budgetaire",
+      "target_report_id": "qc-loi-equilibre-budgetaire",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Plan budgétaire presents both an accounting balance and a distinct 'budgetary balance within the meaning of the Balanced Budget Act' that excludes Generations Fund deposits; the Act itself defines that balance and the required return-to-balance plan.",
+      "evidence_url": "https://www.legisquebec.gouv.qc.ca/fr/document/lc/E-12.00002",
+      "evidence_quote": "Le solde budgétaire pour une année financière est formé de l’écart entre les revenus et les dépenses établis conformément aux conventions comptables du gouvernement. Il ne comprend pas: 1 ° les revenus et les dépenses comptabilisés au Fonds des générations"
+    },
+    {
+      "source_report_id": "qc-mfq-plan-budgetaire",
+      "target_report_id": "isq-comptes-economiques",
+      "relationship_type": "uses_data_from",
+      "basis": "The economic outlook and GDP assumptions that drive the multi-year revenue forecasts in the Plan budgétaire draw on the provincial economic accounts produced by the Institut de la statistique du Québec.",
+      "evidence_url": "https://www.finances.gouv.qc.ca/Budget_et_mise_a_jour/budget/documents/Budget2627_PlanBudgetaire.pdf",
+      "evidence_quote": "Sources: Institut de la statistique du Québec, Statistics Canada and Ministère des Finances du Québec."
+    },
+    {
+      "source_report_id": "isq-pib-regional",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Regional allocation of industry value-added uses commuting matrices and place-of-work data derived from Statistics Canada census (and National Household Survey) special tabulations.",
+      "evidence_url": "https://statistique.quebec.ca/fr/fichier/produit-interieur-brut-regional-par-indutrie-quebec-edition-2025.pdf",
+      "evidence_quote": "elles sont transformées en données selon le lieu de travail au moyen des tableaux de navettage résidence-travail par industrie (SCIAN). Ces matrices sont construites à l’aide de compilations spéciales de Statistique Canada faites à partir des données de l’Enquête nationale auprès des ménages (ENM) de 2011 ... et du recensement de 2016"
+    }
+  ]
+}

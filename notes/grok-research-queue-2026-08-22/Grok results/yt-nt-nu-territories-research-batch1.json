@@ -1,0 +1,212 @@
+{
+  "_meta": {
+    "files_received": [
+      "equalization-named-products.json",
+      "federal-canada.json",
+      "06-canada-territories.md",
+      "GROKREADME.md"
+    ],
+    "countries_covered": [
+      "Yukon",
+      "Northwest Territories",
+      "Nunavut"
+    ],
+    "countries_thin_or_null": [
+      "Yukon — solid budget and TFF share documentation; bureau of statistics exists but thinner own statistical production than provinces",
+      "Northwest Territories — solid budget and ~70% TFF documentation; bureau of statistics active",
+      "Nunavut — solid budget and ~68-70% TFF/federal-transfer documentation; bureau of statistics still developing relative to the other two"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "yt-budget-main-estimates",
+      "kind": "domestic",
+      "title": "Yukon Main Estimates (Operation and Maintenance and Capital Estimates)",
+      "publisher": "Yukon Department of Finance",
+      "country": "CA",
+      "region": "Yukon",
+      "jurisdiction_level": "provincial",
+      "url": "https://yukon.ca/en/your-government/performance-and-finance/budget/2026-27-operation-and-maintenance-and-capital-estimates",
+      "description": "Annual Main Estimates setting out the Government of Yukon's planned operation-and-maintenance and capital expenditures and revenues for the fiscal year, prepared under the direction of Management Board for the Legislative Assembly.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "yt-fiscal-outlook",
+      "kind": "domestic",
+      "title": "Yukon Fiscal Outlook (and companion Economic Outlook)",
+      "publisher": "Yukon Department of Finance",
+      "country": "CA",
+      "region": "Yukon",
+      "jurisdiction_level": "provincial",
+      "url": "https://yukon.ca/en/2026-27-fiscal-outlook",
+      "description": "Annual fiscal and economic outlook documents accompanying the Yukon Budget that project revenues (including federal transfers), expenditures, surplus/deficit and net debt over a multi-year horizon.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "nt-budget-main-estimates",
+      "kind": "domestic",
+      "title": "Northwest Territories Main Estimates and Budget Address / Fiscal Review",
+      "publisher": "Northwest Territories Department of Finance",
+      "country": "CA",
+      "region": "Northwest Territories",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.fin.gov.nt.ca/en/category/main-estimates",
+      "description": "Annual Main Estimates, Budget Address and Fiscal Review papers setting out the Government of the Northwest Territories' planned revenues (including the Grant from Canada), operating expenditures and fiscal outlook.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "nu-budget-main-estimates",
+      "kind": "domestic",
+      "title": "Nunavut Main Estimates and Fiscal and Economic Indicators / Budget",
+      "publisher": "Nunavut Department of Finance",
+      "country": "CA",
+      "region": "Nunavut",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.gov.nu.ca/en/department-finance/budget-2026-27",
+      "description": "Annual Main Estimates, Budget Address and Fiscal and Economic Indicators documents setting out the Government of Nunavut's planned revenues (Territorial Formula Financing and other federal transfers), expenditures and fiscal outlook.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "yt-bureau-statistics",
+      "kind": "domestic",
+      "title": "Yukon Bureau of Statistics",
+      "publisher": "Yukon Bureau of Statistics (Government of Yukon)",
+      "country": "CA",
+      "region": "Yukon",
+      "jurisdiction_level": "provincial",
+      "url": "https://yukon.ca/bureau-of-statistics",
+      "description": "Territorial statistical agency that compiles and publishes Yukon-specific population estimates, economic accounts, labour-force indicators, CPI for Whitehorse, retail sales and annual statistical reviews, drawing on Statistics Canada data and its own surveys.",
+      "publication_cadence": "continuous (monthly, quarterly and annual releases)"
+    },
+    {
+      "proposed_id": "nt-bureau-statistics",
+      "kind": "domestic",
+      "title": "NWT Bureau of Statistics",
+      "publisher": "NWT Bureau of Statistics (Government of the Northwest Territories)",
+      "country": "CA",
+      "region": "Northwest Territories",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.statsnwt.ca/",
+      "description": "Territorial statistical agency responsible for the NWT statistical program; publishes population estimates, GDP, labour-force activity, CPI, community statistics and socio-economic scans, frequently using Statistics Canada source data.",
+      "publication_cadence": "continuous (monthly, quarterly and annual releases)"
+    },
+    {
+      "proposed_id": "nu-bureau-statistics",
+      "kind": "domestic",
+      "title": "Nunavummit Kiglisiniartiit (Nunavut Bureau of Statistics)",
+      "publisher": "Nunavummit Kiglisiniartiit / Government of Nunavut",
+      "country": "CA",
+      "region": "Nunavut",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.gov.nu.ca/en/nunavummit-kiglisiniartiit-nunavut-bureau-statistics",
+      "description": "Nunavut's central statistical agency; collects, analyses and disseminates population, labour-force, CPI (Iqaluit), GDP and community statistics for the territory, operating under the Statistics Act (Nunavut) and partnering with Statistics Canada.",
+      "publication_cadence": "continuous (monthly, quarterly and annual releases)"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "yt-fiscal-outlook",
+      "target_report_id": "territorial-formula-financing",
+      "relationship_type": "calculated_from",
+      "basis": "The Yukon Fiscal Outlook explicitly identifies the Grant from Canada (Territorial Formula Financing) as the dominant revenue source and quantifies its share of total revenue.",
+      "evidence_url": "https://yukon.ca/sites/default/files/fin-2026-27-fiscal-outlook.pdf",
+      "evidence_quote": "As shown in Chart 3, the TFF remains the largest source of the Yukon’s total revenue, at just over 80 per cent in 2026–27. ... Territorial formula financing 81.1%"
+    },
+    {
+      "source_report_id": "yt-budget-main-estimates",
+      "target_report_id": "territorial-formula-financing",
+      "relationship_type": "calculated_from",
+      "basis": "The Main Estimates revenue tables list the Grant from Canada / Territorial Formula Financing as the principal federal transfer and the largest single revenue line.",
+      "evidence_url": "https://yukon.ca/en/2026-27-main-estimates-finance",
+      "evidence_quote": "Transfers from Canada ... Grant from Canada 1,454.2 ... The largest source of this growth is the Grant from Canada, or Territorial Formula Financing (TFF)"
+    },
+    {
+      "source_report_id": "yt-fiscal-outlook",
+      "target_report_id": "canada-health-transfer",
+      "relationship_type": "calculated_from",
+      "basis": "The Fiscal Outlook revenue breakdown lists the Canada Health Transfer as a distinct federal transfer received by Yukon.",
+      "evidence_url": "https://yukon.ca/sites/default/files/fin-2026-27-fiscal-outlook.pdf",
+      "evidence_quote": "Canada Health Transfer 61.7 ... 66.9 ... 71.3 ... 74.8"
+    },
+    {
+      "source_report_id": "yt-fiscal-outlook",
+      "target_report_id": "canada-social-transfer",
+      "relationship_type": "calculated_from",
+      "basis": "The Fiscal Outlook revenue breakdown lists the Canada Social Transfer as a distinct federal transfer received by Yukon.",
+      "evidence_url": "https://yukon.ca/sites/default/files/fin-2026-27-fiscal-outlook.pdf",
+      "evidence_quote": "Canada Social Transfer 19.7 ... 20.9 ... 21.8 ... 22.7"
+    },
+    {
+      "source_report_id": "nt-budget-main-estimates",
+      "target_report_id": "territorial-formula-financing",
+      "relationship_type": "calculated_from",
+      "basis": "The NWT Budget Address, Fiscal Review and Main Estimates identify the Grant from Canada (Territorial Formula Financing) as approximately 70% of total revenues and the dominant driver of revenue growth.",
+      "evidence_url": "https://www.fin.gov.nt.ca/sites/fin/files/2026-27_budget_address_and_economic_outlook_and_fiscal_review_papers.pdf",
+      "evidence_quote": "Territorial Formula Financing alone accounts for about 70 per cent of total revenues and dominates total revenue growth. ... GRANT FROM CANADA 1,803,314 ... 1,906,943"
+    },
+    {
+      "source_report_id": "nt-budget-main-estimates",
+      "target_report_id": "canada-health-transfer",
+      "relationship_type": "calculated_from",
+      "basis": "Federal transfer letters and NWT fiscal documents list the Canada Health Transfer as a distinct payment to the territory alongside TFF.",
+      "evidence_url": "https://www.canada.ca/en/department-finance/programs/federal-transfers/letters-provinces-territories/2024/yukon.html",
+      "evidence_quote": "NWT ... Territorial Formula Financing ... Canada Health Transfer 58 ... Canada Social Transfer 18"
+    },
+    {
+      "source_report_id": "nt-budget-main-estimates",
+      "target_report_id": "canada-social-transfer",
+      "relationship_type": "calculated_from",
+      "basis": "Federal transfer letters and NWT fiscal documents list the Canada Social Transfer as a distinct payment to the territory alongside TFF.",
+      "evidence_url": "https://www.canada.ca/en/department-finance/programs/federal-transfers/letters-provinces-territories/2024/yukon.html",
+      "evidence_quote": "NWT ... Canada Social Transfer 18"
+    },
+    {
+      "source_report_id": "nu-budget-main-estimates",
+      "target_report_id": "territorial-formula-financing",
+      "relationship_type": "calculated_from",
+      "basis": "The Nunavut Main Estimates and Fiscal and Economic Indicators explicitly identify Territorial Formula Financing as the largest federal transfer and quantify its share of total revenue at approximately 68–70%.",
+      "evidence_url": "https://www.gov.nu.ca/sites/default/files/documents/2026-05/FEI_-_Budget_2026-27_-_ENG.pdf",
+      "evidence_quote": "The largest of these, Territorial Formula Financing (TFF), will provide $2,347.9 M in 2026-27 ... Together, TFF and other federal transfers make up 70% of total GN revenues ... Formula Financing Arrangement 68.3%"
+    },
+    {
+      "source_report_id": "nu-budget-main-estimates",
+      "target_report_id": "canada-health-transfer",
+      "relationship_type": "calculated_from",
+      "basis": "Nunavut budget documents list the Canada Health Transfer as a distinct federal transfer received by the territory.",
+      "evidence_url": "https://www.gov.nu.ca/sites/default/files/documents/2026-05/FEI_-_Budget_2026-27_-_ENG.pdf",
+      "evidence_quote": "Other federal transfers include the Canada Health Transfer ($58 M; 9% of total health spending), Canada Social Transfer ($18 M)"
+    },
+    {
+      "source_report_id": "nu-budget-main-estimates",
+      "target_report_id": "canada-social-transfer",
+      "relationship_type": "calculated_from",
+      "basis": "Nunavut budget documents list the Canada Social Transfer as a distinct federal transfer received by the territory.",
+      "evidence_url": "https://www.gov.nu.ca/sites/default/files/documents/2026-05/FEI_-_Budget_2026-27_-_ENG.pdf",
+      "evidence_quote": "Canada Social Transfer ($18 M)"
+    },
+    {
+      "source_report_id": "yt-bureau-statistics",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "Yukon Bureau of Statistics population reports and key-indicator pages rely on Statistics Canada population estimates and tables as primary inputs, supplemented by territorial adjustments.",
+      "evidence_url": "https://yukon.ca/en/statistics-and-data/yukon-bureau-statistics/access-yukons-key-indicators",
+      "evidence_quote": "Source: Statistics Canada. Tables 17-10-0020-01 and 17-10-0040-01."
+    },
+    {
+      "source_report_id": "nt-bureau-statistics",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "NWT Bureau of Statistics population releases are based on Statistics Canada estimates.",
+      "evidence_url": "https://www.statsnwt.ca/",
+      "evidence_quote": "On April 1, 2026 Statistics Canada estimated that 45,808 people were living in the Northwest Territories."
+    },
+    {
+      "source_report_id": "nu-bureau-statistics",
+      "target_report_id": "statcan-population-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "Nunavut Bureau of Statistics population data pages state that estimates are sourced from Statistics Canada.",
+      "evidence_url": "https://www.gov.nu.ca/en/nunavummit-kiglisiniartiit-nunavut-bureau-statistics/population-data",
+      "evidence_quote": "Data are sourced from Statistics Canada and the Nunavut Bureau of Statistics."
+    }
+  ]
+}

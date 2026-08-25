@@ -1,6 +1,6 @@
 # Prompt for Grok — new country research: remaining Southeast Asia (Malaysia, Cambodia, Laos, Brunei, Timor-Leste)
 
-**Standing rules:** see `../GROKREADME.md` — attach/paste it alongside this file every time. It has the id-integrity rule, the relationship-type enum, the honesty permission, the coverage-is-data-driven principle, and the reply schema. This file has only the region-specific research question below.
+**Standing rules:** see `GROKREADME.md` — attach/paste it alongside this file every time. It has the id-integrity rule, the relationship-type enum, the honesty permission, the coverage-is-data-driven principle, and the reply schema. This file has only the region-specific research question below.
 
 **Attach:** `GROKREADME.md` only — every one of these countries has **zero nodes** in our corpus today, so no country-specific file exists yet. This is from-scratch research.
 

@@ -1,0 +1,92 @@
+{
+  "_meta": {
+    "files_received": [
+      "04-canada-prairies.md",
+      "GROKREADME.md",
+      "alberta-municipal.json",
+      "alberta-provincial.json",
+      "federal-canada.json",
+      "grande-prairie.json"
+    ],
+    "countries_covered": [
+      "Canada — Saskatchewan (Regina municipal tax bylaw + annual report process)",
+      "Canada — Manitoba (municipal Financial Plan / Tax Levy By-law filing requirements)"
+    ],
+    "countries_thin_or_null": [
+      "Winnipeg 2026 enacted Real and Personal Property Municipal Tax Rate By-law PDF — recommendation language and published mill rate (13.372) are solid and already edge-supported in batch 2; the final enacted by-law text itself has not surfaced as a stable public PDF",
+      "Manitoba centralized municipal financial-information-return compilation analogous to Alberta FIR — no primary provincial compilation dataset found; only individual municipality filing obligations under The Municipal Act"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "regina-tax-rate-bylaw-2026",
+      "kind": "domestic",
+      "title": "The Regina Property Tax Bylaw, 2026 (Bylaw No. 2026-25)",
+      "publisher": "City of Regina",
+      "country": "CA",
+      "region": "Regina, Saskatchewan",
+      "jurisdiction_level": "municipal",
+      "url": "https://openregina.ca/dataset/bylaw-no-2026-25-the-regina-property-tax-bylaw-2026",
+      "description": "Annual bylaw under The Cities Act establishing municipal, library and business-improvement-district tax rates against taxable assessments sufficient to meet the 2026 budgets of the City and Library. Companion Education Property Tax Bylaw 2026-24 and Property Classes Bylaw 2026-23 also enacted.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "regina-financial-statements",
+      "kind": "domestic",
+      "title": "City of Regina Annual Report — Consolidated Audited Financial Statements",
+      "publisher": "City of Regina",
+      "country": "CA",
+      "region": "Regina, Saskatchewan",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.regina.ca/city-government/budget-finance/annual-report/",
+      "description": "Annual consolidated audited financial statements and Public Accounts required under The Cities Act ss. 155-156. 2025 edition (year ended 31 December 2025) approved by Audit and Finance Committee May 2026 and recommended to Council; 2024 Public Accounts and Annual Report previously published on open data.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "mb-municipal-financial-plan",
+      "kind": "domestic",
+      "title": "Manitoba Municipal Financial Plan and Tax Levy By-law Filing",
+      "publisher": "Manitoba Municipal and Northern Relations",
+      "country": "CA",
+      "region": "Manitoba",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.gov.mb.ca/mr/mfas/pubs/mmo/presentation-navigating_your_financial_plan-march_%208_and_22_2024.pdf",
+      "description": "Statutory annual process under The Municipal Act requiring every municipality to adopt and file a Financial Plan (by 15 May) and a Tax Levy By-law (by 15 June) with the Province, followed by audited financial statements. Provides the provincial oversight layer for municipal budgets and tax rates outside Winnipeg; no centralized compiled FIR-style dataset is published.",
+      "publication_cadence": "annual"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "regina-tax-rate-bylaw-2026",
+      "target_report_id": "regina-budget",
+      "relationship_type": "calculated_from",
+      "basis": "The bylaw’s purpose is to establish tax rates sufficient to meet the estimated expenditures and transfers set out in the budgets of the City and the Library for 2026.",
+      "evidence_url": "https://openregina.ca/dataset/bylaw-no-2026-25-the-regina-property-tax-bylaw-2026",
+      "evidence_quote": "establish tax rates and impose taxes on: (a) all taxable property in the City of Regina sufficient to meet the estimated expenditures and transfers, having regard to estimated revenues from other sources, set out in the budgets of the City and the Library for 2026"
+    },
+    {
+      "source_report_id": "regina-tax-rate-bylaw-2026",
+      "target_report_id": "sama",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Property classes, sub-classes and percentages of value are established under provincial legislation administered with SAMA oversight; the companion Classes Bylaw 2026-23 implements the provincial framework.",
+      "evidence_url": "https://openregina.ca/dataset/ce503364-e12c-48ee-a5f5-621b300a1b15/resource/061d3f64-73a5-480a-82b6-0f7f29e40996/download/2026-23.pdf",
+      "evidence_quote": "The purpose of this Bylaw is to establish classes and sub-classes of property for the purposes of establishing tax rates."
+    },
+    {
+      "source_report_id": "regina-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Consolidated financial statements are prepared and audited under Canadian public sector accounting standards as required by The Cities Act.",
+      "evidence_url": "https://www.regina.ca/city-government/budget-finance/annual-report/",
+      "evidence_quote": "The financial statements reflect the status of the City’s consolidated financial position as of December 31 of the previous fiscal year"
+    },
+    {
+      "source_report_id": "mb-municipal-financial-plan",
+      "target_report_id": "mb-budget-summary",
+      "relationship_type": "cites",
+      "basis": "Municipal Financial Plans and Tax Levy By-laws operate within the provincial fiscal and legislative framework set by the annual Summary Budget and The Municipal Act.",
+      "evidence_url": "https://www.gov.mb.ca/mr/mfas/pubs/mmo/presentation-navigating_your_financial_plan-march_%208_and_22_2024.pdf",
+      "evidence_quote": "The Tax Levy By-Law MUST be filed with Province on, or before, June 15th as The Municipal Act does not permit the granting of extensions for the submission of the Tax Levy By-law."
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "_meta": {
+    "files_received": ["32-new-middle-east-gulf-levant.md", "GROKREADME.md"],
+    "countries_covered": ["Jordan", "Lebanon", "Kuwait", "Qatar", "Oman", "Bahrain"],
+    "countries_thin_or_null": [
+      "Qatar — primary DSBB metadata still cites 1993 SNA; more recent base-year update documents reference 2008 SNA recommendations but do not yet provide a clean full-adoption quote for a dedicated NA release node",
+      "Kuwait — national accounts still formally on 1993 SNA per DSBB, with stated plans to move to 2008; BPM6 for BOP is solid"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "om-national-accounts",
+      "kind": "domestic",
+      "title": "National Accounts of Oman",
+      "publisher": "National Centre for Statistics and Information",
+      "country": "OM",
+      "region": "Oman",
+      "url": "https://data.gov.om/zoangf/national-accounts",
+      "description": "GDP and related national accounts series compiled under the System of National Accounts 2008 with base year 2018.",
+      "publication_cadence": "annual and quarterly"
+    },
+    {
+      "proposed_id": "om-cpi",
+      "kind": "domestic",
+      "title": "Consumer Price Index of Oman",
+      "publisher": "National Centre for Statistics and Information",
+      "country": "OM",
+      "region": "Oman",
+      "url": "https://www.ncsi.gov.om/",
+      "description": "Monthly CPI classified according to COICOP, with weights from household expenditure surveys.",
+      "publication_cadence": "monthly"
+    },
+    {
+      "proposed_id": "kw-national-accounts",
+      "kind": "domestic",
+      "title": "National Accounts of Kuwait",
+      "publisher": "Central Statistical Bureau",
+      "country": "KW",
+      "region": "Kuwait",
+      "url": "https://www.csb.gov.kw/",
+      "description": "National accounts statistics compiled by the Central Statistical Bureau under the 1993 SNA framework (with stated plans to move to 2008 SNA).",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "kw-cbk-bop",
+      "kind": "domestic",
+      "title": "Balance of Payments Statistics of Kuwait",
+      "publisher": "Central Bank of Kuwait",
+      "country": "KW",
+      "region": "Kuwait",
+      "url": "https://www.cbk.gov.kw/",
+      "description": "Balance of payments and related external sector statistics compiled by the Central Bank of Kuwait.",
+      "publication_cadence": "quarterly and annual"
+    },
+    {
+      "proposed_id": "bh-national-accounts",
+      "kind": "domestic",
+      "title": "National Accounts of Bahrain",
+      "publisher": "Information & eGovernment Authority",
+      "country": "BH",
+      "region": "Bahrain",
+      "url": "https://www.iga.gov.bh/",
+      "description": "National accounts compiled primarily under the 1993 SNA while incorporating selected 2008 SNA treatments; work underway toward fuller 2008 SNA implementation.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "bh-cpi",
+      "kind": "domestic",
+      "title": "Consumer Price Index of Bahrain",
+      "publisher": "Information & eGovernment Authority",
+      "country": "BH",
+      "region": "Bahrain",
+      "url": "https://www.iga.gov.bh/",
+      "description": "Monthly CPI using COICOP 1999 classification, with weights from the Household Income and Expenditure Survey.",
+      "publication_cadence": "monthly"
+    },
+    {
+      "proposed_id": "lb-cpi",
+      "kind": "domestic",
+      "title": "Consumer Price Index of Lebanon",
+      "publisher": "Central Administration of Statistics",
+      "country": "LB",
+      "region": "Lebanon",
+      "url": "http://www.cas.gov.lb/",
+      "description": "Monthly CPI series published by CAS, used inter alia for national accounts deflation.",
+      "publication_cadence": "monthly"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "om-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Oman official data portal states that the Sultanate applied the new system of National Accounts (SNA) approved in 2008, with 2018 as the new base year.",
+      "evidence_url": "https://data.gov.om/zoangf/national-accounts",
+      "evidence_quote": "The Sultanate applied the new system of National Accounts (SNA) approved by the United Nations Bureau of Statistics and the United Nations Economic and Social Council in 2008. The new system adopted 2018 as a new base year for (SNA) in Oman instead of 2010."
+    },
+    {
+      "source_report_id": "om-cpi",
+      "target_report_id": "un-coicop-hbs-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB e-GDDS metadata for Oman CPI states that the 392 items are classified according to the international classification the Classification of Individual Consumption by Purpose (COICOP).",
+      "evidence_url": "https://dsbb.imf.org/egdds/dqaf-base/country/OMN/category/CPI00",
+      "evidence_quote": "The 392 items in the index are classified according to the international classification the Classification of Individual Consumption by Purpose (COICOP)."
+    },
+    {
+      "source_report_id": "kw-national-accounts",
+      "target_report_id": "sna-1993",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB e-GDDS metadata for Kuwait national accounts states that the framework is the 1993 System of National Accounts.",
+      "evidence_url": "https://dsbb.imf.org/egdds/dqaf-base/country/KWT/category/NAG00",
+      "evidence_quote": "The framework for the compilation of national accounts is the \"1993 System of National Accounts\" (\"1993 SNA\")."
+    },
+    {
+      "source_report_id": "kw-cbk-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB metadata for Kuwait balance of payments states that the presentation mostly conforms to the classifications and definitions of BPM6.",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/KWT/category/BOP00",
+      "evidence_quote": "The Kuwait’s balance of payments presentation mostly conforms to the classifications and definitions of the sixth edition of the IMF's \"Balance of Payments and international investment position Manual- BPM6\"."
+    },
+    {
+      "source_report_id": "bh-national-accounts",
+      "target_report_id": "sna-1993",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB e-GDDS metadata for Bahrain national accounts states that the 1993 System of National Accounts is adopted, while incorporating selected 2008 SNA treatments and working toward full 2008 implementation.",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/BHR/category/NAG00",
+      "evidence_quote": "The 1993 System of National Accounts is adopted, considering all the concepts and recommendations of the 2008 System of National Accounts in many aspects related to accounts..."
+    },
+    {
+      "source_report_id": "bh-cpi",
+      "target_report_id": "un-coicop-hbs-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB e-GDDS metadata for Bahrain CPI and iGA methodology notes state that COICOP 1999 is used.",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/BHR/category/CPI00",
+      "evidence_quote": "The Classification of Individual Consumption by Purpose (COICOP1999) is used."
+    },
+    {
+      "source_report_id": "lb-cpi",
+      "target_report_id": "un-coicop-hbs-1999",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CAS national accounts sources-and-methods documentation and ongoing CPI releases use purpose-based classifications consistent with COICOP for deflation and household consumption; the CPI itself is the primary price source named by CAS.",
+      "evidence_url": "http://cas.gov.lb/images/PDFs/National%20Accounts/Lebanon%20National%20Accounts%202011%20-Data%20sources%20and%20compilation%20methods.pdf",
+      "evidence_quote": "The CPI produced by CAS since December 2007 was a readily available source."
+    }
+  ]
+}

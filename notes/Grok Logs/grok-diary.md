@@ -9,16 +9,28 @@ themselves live beside it as `notes/grok-prompt-*.md`.
 **This file is not what Grok reads.** It's Claude's own lessons-learned log
 for writing good prompts — Grok never sees it, since (per §0 below) Grok
 can't reach this project's files itself. The document that actually gets
-pasted/attached to Grok every time is `notes/GROKREADME.md` — added
-2026-08-22 alongside the numbered per-region prompts in
-`notes/grok-research-queue-2026-08-22/`, so the relationship-type enum, the
-id-integrity rule, the honesty permission, the coverage-is-data-driven
-principle, and the reply-JSON schema live in ONE place instead of being
-retyped into every regional prompt. With 60+ more countries still queued,
-that repetition was real: attach `GROKREADME.md` to every prompt from now
-on, and when writing a NEW regional prompt, put only the region-specific
-research question in it — everything generic belongs in GROKREADME.md, not
-copy-pasted in again.
+pasted/attached to Grok every time is
+`notes/grok-research-queue-2026-08-22/GROKREADME.md` — added 2026-08-22
+alongside the numbered per-region prompts in that same folder, so the
+relationship-type enum, the id-integrity rule, the honesty permission, the
+coverage-is-data-driven principle, and the reply-JSON schema live in ONE
+place instead of being retyped into every regional prompt. With 60+ more
+countries still queued, that repetition was real: attach `GROKREADME.md` to
+every prompt from now on, and when writing a NEW regional prompt, put only
+the region-specific research question in it — everything generic belongs
+in GROKREADME.md, not copy-pasted in again.
+
+**2026-08-22, same day, follow-up fix:** the BC round (01) came back with
+prose wrapped around the JSON, sometimes invalid JSON outright, and nothing
+Thomas could just download — he had to hand-extract the data from a chat
+reply. Partly self-inflicted: GROKREADME.md used to ask Grok to *confirm
+what it received in prose before the JSON*, which invited exactly that
+mixing. Fixed: GROKREADME.md now demands one fenced code block and nothing
+else, with confirmations folded into a `_meta` field inside the JSON, plus
+an explicit "stay in scope, don't narrate" rule. **Fix for future prompts:
+never ask Grok to say anything in prose outside the code fence — if you
+want it to confirm or report something, give it a JSON field to put that
+in, not a sentence to write.**
 
 ## §0 — Attachments: tell Thomas separately, every time (Thomas, 2026-08-22)
 

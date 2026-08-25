@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "files_received": [
+      "02-canada-ontario-deepen.md",
+      "GROKREADME.md",
+      "alberta-provincial.json",
+      "federal-canada.json",
+      "ontario-ompf-mpac.json"
+    ],
+    "countries_covered": [
+      "Canada",
+      "Ontario",
+      "Loyalist Township"
+    ],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "loyalist-budget",
+      "kind": "domestic",
+      "title": "Loyalist Township Municipal Budget (Operating and Capital)",
+      "publisher": "Loyalist Township",
+      "country": "CA",
+      "region": "Ontario",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.loyalist.ca/council-and-administration/budget-and-financial-reporting/",
+      "description": "The annual operating and capital budget for Loyalist Township (lower-tier municipality in the County of Lennox and Addington). Sets the municipal tax levy requirement (e.g. $24.457 million for 2026) that is subsequently translated into tax rates via the annual tax-rate by-law. Publicly deliberated and finalized by Council.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "loyalist-tax-rate-bylaw",
+      "kind": "domestic",
+      "title": "Loyalist Township Tax Rate By-law",
+      "publisher": "Loyalist Township",
+      "country": "CA",
+      "region": "Ontario",
+      "jurisdiction_level": "municipal",
+      "url": "https://loyalist.civicweb.net/FileStorage/B8307A8750C24F668DC5A15AE9CD81AC-2026%20Tax%20Rate%20By-law.pdf",
+      "description": "The annual by-law (e.g. By-law 2026-19) that establishes tax rates for general and special purposes after adoption of the municipal budget estimates. Explicitly multiplies the latest revised assessment roll (MPAC) by the adopted rates, incorporates County and education rates, and authorizes collection. Required under Municipal Act s. 312.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "loyalist-financial-statements",
+      "kind": "domestic",
+      "title": "Loyalist Township Audited Financial Statements",
+      "publisher": "Loyalist Township",
+      "country": "CA",
+      "region": "Ontario",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.loyalist.ca/council-and-administration/budget-and-financial-reporting/",
+      "description": "The annual audited consolidated financial statements prepared under Canadian Public Sector Accounting Standards and submitted as the basis for the municipality's Financial Information Return to the Ministry of Municipal Affairs and Housing.",
+      "publication_cadence": "annual"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "loyalist-tax-rate-bylaw",
+      "target_report_id": "loyalist-budget",
+      "relationship_type": "calculated_from",
+      "basis": "The tax-rate by-law is enacted only after (and to implement) the municipal budget levy requirement adopted by Council. The 2026 by-law states the Municipal Budget Levy Requirement of $24,457,260 that the rates are calculated to raise.",
+      "evidence_url": "https://loyalist.civicweb.net/FileStorage/B8307A8750C24F668DC5A15AE9CD81AC-2026%20Tax%20Rate%20By-law.pdf",
+      "evidence_quote": "AND WHEREAS the Municipal Budget Levy Requirement for Loyalist Township amounts to $24,457,260;"
+    },
+    {
+      "source_report_id": "loyalist-tax-rate-bylaw",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "The by-law applies the established tax rates to the assessed value of all rateable real property according to the latest revised assessment roll (prepared by MPAC).",
+      "evidence_url": "https://loyalist.civicweb.net/FileStorage/B8307A8750C24F668DC5A15AE9CD81AC-2026%20Tax%20Rate%20By-law.pdf",
+      "evidence_quote": "AND WHEREAS the assessed value of all rateable real property according to the latest revised assessment roll including for Payment in Lieu properties for Loyalist Township amounts to $2,475,159,600;"
+    },
+    {
+      "source_report_id": "loyalist-financial-statements",
+      "target_report_id": "psab-psas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Like all Ontario municipalities, Loyalist Township's audited financial statements are prepared in accordance with Canadian Public Sector Accounting Standards.",
+      "evidence_url": "https://www.loyalist.ca/council-and-administration/budget-and-financial-reporting/",
+      "evidence_quote": "The Ministry of Municipal Affairs and Housing mandates a very detailed financial report which is available on the Ministry's website."
+    },
+    {
+      "source_report_id": "on-municipal-fir",
+      "target_report_id": "loyalist-financial-statements",
+      "relationship_type": "uses_data_from",
+      "basis": "The provincial FIR is populated from each municipality's audited financial statements. Loyalist Township's statements are the source data for its annual FIR submission under Municipal Act s. 294(1).",
+      "evidence_url": "https://efis.fma.csc.gov.on.ca/fir/index.php/en/financial-information-return-en/",
+      "evidence_quote": "Through the FIR template, a standard Excel workbook, the Ministry collects data on municipal financial position and activities ... based on the audited financial statements."
+    },
+    {
+      "source_report_id": "loyalist-budget",
+      "target_report_id": "on-ompf",
+      "relationship_type": "cites",
+      "basis": "As a lower-tier municipality, Loyalist receives (or is eligible for) unconditional funding under the Ontario Municipal Partnership Fund; the budget revenue lines include provincial grants that form part of the OMPF and related transfer framework.",
+      "evidence_url": "https://www.loyalist.ca/council-and-administration/budget-and-financial-reporting/",
+      "evidence_quote": "The municipal budget is a crucial policy and planning document that highlights our municipality's priorities for services, programs, and infrastructure."
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "files_received": ["16-wiring-argentina-chile.md", "GROKREADME.md"],
+    "countries_covered": ["Argentina", "Chile"],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "ar-mercosur-comex-manual",
+      "kind": "domestic",
+      "title": "Manual de compatibilización de las metodologías utilizadas para la elaboración de las estadísticas del comercio exterior en el ámbito del MERCOSUR (Comité Nº 6)",
+      "publisher": "MERCOSUR / Comité Nº 6 Estadísticas del comercio exterior del MERCOSUR",
+      "country": "AR",
+      "region": "Argentina / MERCOSUR",
+      "jurisdiction_level": "institutional",
+      "url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_comex.pdf",
+      "description": "Harmonization manual (2014) cited by INDEC as the governing methodological reference for compiling Argentina's foreign-trade statistics within the MERCOSUR framework; establishes common concepts, classifications (NCM) and recording practices among member states.",
+      "publication_cadence": "one-time / updated as needed"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-eph",
+      "relationship_type": "uses_data_from",
+      "basis": "Household incomes and demographic structure used to compute incidence of poverty and indigency are taken directly from the Permanent Household Survey.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+      "evidence_quote": "la “Línea de Pobreza” (LP) ... es también contrastada con los ingresos de los hogares relevados por la Encuesta Permanente de Hogares (EPH)."
+    },
+    {
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-cba-cbt",
+      "relationship_type": "calculated_from",
+      "basis": "Poverty and indigency lines are constructed as the monetary values of the Basic Food Basket (CBA) and the Total Basic Basket (CBT); incidence is obtained by comparing household income to these basket values.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+      "evidence_quote": "El concepto de “Línea de Indigencia” (LI) procura establecer si los hogares cuentan con ingresos suficientes para cubrir una canasta de alimentos capaz de satisfacer un umbral mínimo de necesidades energéticas y proteicas, denominada Canasta Básica Alimentaria (CBA). ... la “Línea de Pobreza” (LP) ... la Canasta Básica Total (CBT)"
+    },
+    {
+      "source_report_id": "ar-pobreza-indigencia",
+      "target_report_id": "ar-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "The CBA and CBT are valued monthly with average prices collected by the Consumer Price Index.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
+      "evidence_quote": "Los componentes de la CBA se valorizan con los precios relevados por el Índice de Precios al Consumidor (IPC) para cada período de medición."
+    },
+    {
+      "source_report_id": "ar-indices-precios-cantidades-comercio",
+      "target_report_id": "ar-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "Unit values and quantities that enter the Paasche price indices and Laspeyres quantity indices are taken from the customs-based merchandise-trade statistics compiled by INDEC.",
+      "evidence_url": "https://www.indec.gob.ar/uploads/informesdeprensa/ipcext_05_249F2190E1AF.pdf",
+      "evidence_quote": "La información básica surge de los registros aduaneros procesados en el INDEC y definen el marco para el cálculo de los valores unitarios y los pesos relativos o las ponderaciones. ... Las ponderaciones correspondientes a cada uno de los productos seleccionados se calculan sobre la base del total exportado o importado en el período corriente registrado en las estadísticas de comercio exterior."
+    },
+    {
+      "source_report_id": "ar-comercio-exterior",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Product classification of exports and imports follows the Harmonized System; the MERCOSUR Common Nomenclature (NCM) is itself based on the HS.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_comex.pdf",
+      "evidence_quote": "Desde 1995 está en uso la Nomenclatura Común del MERCOSUR (NCM), basada en el Sistema Armonizado. Las estadísticas de exportación e importación de la República Argentina presentadas en las publicaciones del comercio exterior están clasificadas de acuerdo a esta nomenclatura."
+    },
+    {
+      "source_report_id": "ar-comercio-exterior",
+      "target_report_id": "ar-mercosur-comex-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INDEC explicitly lists the 2014 MERCOSUR Harmonization Manual of foreign-trade statistics methodologies as one of the core conceptual and methodological references governing compilation.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_comex.pdf",
+      "evidence_quote": "MERCOSUR (2014). Manual de compatibilización de las metodologías utilizadas para la elaboración de las estadísticas del comercio exterior en el ámbito del MERCOSUR. Comité Nº 6 Estadísticas del comercio exterior del MERCOSUR."
+    },
+    {
+      "source_report_id": "ar-scn",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "National accounts estimates (base 2004 and subsequent institutional-sector accounts) follow the concepts, definitions and accounting rules of the System of National Accounts 2008.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_21_cuentas_nacionales.pdf",
+      "evidence_quote": "Para este cambio de año base se han seguido los conceptos y recomendaciones del Sistema de Cuentas Nacionales 2008 (SCN 2008)"
+    },
+    {
+      "source_report_id": "ar-sen",
+      "target_report_id": "ar-ley-17622",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The National Statistical System is legally constituted and directed by the framework established in Law 17.622, which creates INDEC and assigns it superior direction over official statistics.",
+      "evidence_url": "https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-130-2025-420146/texto",
+      "evidence_quote": "la Ley Nº 17.622 y su Decreto Reglamentario Nº 3110/1970 y las demás normas complementarias establecen las bases legales para la organización y funcionamiento del Sistema Estadístico Nacional y la responsabilidad del Instituto Nacional de Estadística y Censos (INDEC) en el ejercicio de la dirección superior de todas las estadísticas oficiales"
+    },
+    {
+      "source_report_id": "cl-pobreza",
+      "target_report_id": "cl-casen",
+      "relationship_type": "uses_data_from",
+      "basis": "Household income data used to compute the incidence of income poverty are obtained from the National Socioeconomic Characterization Survey (CASEN).",
+      "evidence_url": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/Metodologia_de_Medicion_de_la_Pobreza_por_Ingresos_2024.pdf",
+      "evidence_quote": "Los dos últimos pasos consideran la comparación de las líneas de pobreza calculadas a partir de la EPF con el ingreso de los hogares, cuya fuente corresponde a la Encuesta Casen."
+    },
+    {
+      "source_report_id": "cl-pobreza",
+      "target_report_id": "cl-epf",
+      "relationship_type": "uses_data_from",
+      "basis": "The composition and cost structure of the basic food and non-food baskets that define the poverty lines are derived from the Family Budget Survey (EPF).",
+      "evidence_url": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/Metodologia_de_Medicion_de_la_Pobreza_por_Ingresos_2024.pdf",
+      "evidence_quote": "La población de referencia se define como el primer quintil móvil de ingresos de la EPF que cumple el requerimiento de consumo calórico de 2.000 calorías per cápita al día."
+    },
+    {
+      "source_report_id": "cl-pobreza",
+      "target_report_id": "cl-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "Poverty lines are updated over time by applying price changes from the Consumer Price Index (food IPC for the CBA, residual IPC and rent component for non-food).",
+      "evidence_url": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/Metodologia_de_Medicion_de_la_Pobreza_por_Ingresos_2024.pdf",
+      "evidence_quote": "El reajuste de este componente se realiza utilizando como deflactor la variación de un índice de precios de alimentos y bebidas no alcohólicas construido a partir del Índice de Precios del Consumidor (IPC)."
+    },
+    {
+      "source_report_id": "cl-cuentas-nacionales",
+      "target_report_id": "cl-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "Exports and imports of goods that enter the national-accounts expenditure side and the goods account of the balance of payments are compiled primarily from the merchandise-trade statistics based on customs declarations.",
+      "evidence_url": "https://www.bcentral.cl/w/3.1.5-exportaciones-e-importaciones",
+      "evidence_quote": "La principal fuente de información para la medición de las exportaciones e importaciones de bienes son las estadísticas del Servicio Nacional de Aduanas, que registran las transacciones, por agente exportador o importador y producto (clasificado por código arancelario del Sistema Armonizado vigente)"
+    },
+    {
+      "source_report_id": "cl-bop",
+      "target_report_id": "cl-comercio-exterior",
+      "relationship_type": "uses_data_from",
+      "basis": "The goods account of the balance of payments is constructed from the same customs-based merchandise-trade statistics that constitute the official foreign-trade figures.",
+      "evidence_url": "https://si3.bcentral.cl/estadisticas/principal1/Metodologias/SE/BDP/Bienes.pdf",
+      "evidence_quote": "La principal fuente empleada para medir las exportaciones de bienes es el documento “Declaración única de salida” (DUS), emitido por el Servicio Nacional de Aduanas (Aduana)."
+    },
+    {
+      "source_report_id": "cl-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Balance-of-payments and international-investment-position statistics are compiled according to the sixth edition of the IMF Balance of Payments and International Investment Position Manual.",
+      "evidence_url": "https://www.bcentral.cl/areas/estadisticas/comercio-exterior-de-bienes",
+      "evidence_quote": "Las estadísticas de comercio exterior se miden de acuerdo a los criterios del Manual de Balanza de Pagos (BP) del Fondo Monetario Internacional (FMI), versión 6."
+    },
+    {
+      "source_report_id": "cl-cuentas-nacionales",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Chile’s national accounts (reference year 2008 compilation and subsequent chained series) follow the System of National Accounts 2008.",
+      "evidence_url": "https://www.bcentral.cl/es/web/banco-central/contenido/-/detalle/metodologias-y-estudios-cuentas-nacionales-por-sector-institucional",
+      "evidence_quote": "Adopción del SCN 2008 en las Cuentas Nacionales por Sector institucional"
+    },
+    {
+      "source_report_id": "cl-comercio-exterior",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Merchandise is classified according to the Harmonized System (Sistema Armonizado) codes used by the National Customs Service.",
+      "evidence_url": "https://www.bcentral.cl/w/3.1.5-exportaciones-e-importaciones",
+      "evidence_quote": "clasificado por código arancelario del Sistema Armonizado vigente"
+    }
+  ]
+}

@@ -8,17 +8,30 @@ a wasted reply: **the attachment list for each prompt is repeated below in
 one table, separate from the prompt text itself**, because that's the
 channel that actually reaches Thomas.
 
-**2026-08-22 restructure: the rules Grok needs are now in `../GROKREADME.md`,
+**2026-08-22 restructure: the rules Grok needs are now in `GROKREADME.md`,
 not repeated inside each numbered prompt.** Every prompt used to restate the
 same relationship-type enum, id-integrity rule, honesty permission, and reply
 schema, over and over — real repetition with 60+ more countries still to go.
-Now `GROKREADME.md` (one level up, in `notes/`) carries all of that once, and
-every numbered prompt below is just its region-specific research question.
-**Attach `GROKREADME.md` to every single prompt, in addition to whatever the
-table below lists for that row** — it's not repeated per-row below to keep
-the table itself skimmable. `notes/grok-diary.md` is a different document:
-that's Claude's own lessons-learned log for writing these prompts well, not
+Now `GROKREADME.md` (right here, in this same folder) carries all of that
+once, and every numbered prompt below is just its region-specific research
+question. **Attach `GROKREADME.md` to every single prompt, in addition to
+whatever the table below lists for that row** — it's not repeated per-row
+below to keep the table itself skimmable. `notes/grok-diary.md` is a
+different document, one level up: that's Claude's own lessons-learned log
+for writing these prompts well, not
 something pasted to Grok.
+
+**Same-day follow-up fix: Grok wasn't replying in clean JSON.** The BC
+results (01) came back with prose wrapped around the JSON, sometimes not
+valid JSON at all, and nothing Thomas could just download — he had to
+manually pick the data out of a chat reply. Root cause was partly
+`GROKREADME.md` itself: it used to ask Grok to *confirm what it received in
+prose before the JSON*, which invited exactly that mixing. `GROKREADME.md`
+now says the reply must be **one fenced code block and nothing else** —
+confirmations go inside the JSON as a `_meta` field instead of as chat text
+— plus an explicit "stay in scope, don't narrate" rule. If a future reply
+still wanders, save it anyway (as instructed below) and flag it — the fix
+can be sharpened further next round.
 
 **This queue exists as its own case study of that lesson** — round 3
 (2026-08-22) came back with all 9 attached files marked "not received"

@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "files_received": ["16-wiring-argentina-chile.md", "GROKREADME.md"],
+    "countries_covered": ["Argentina", "Chile"],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "ar-emae",
+      "target_report_id": "ar-scn",
+      "relationship_type": "calculated_from",
+      "basis": "EMAE is constructed as a Laspeyres index that aggregates value-added at basic prices of economic activities plus net taxes on products, using the fixed weights (ponderaciones) from the 2004 base-year national accounts.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
+      "evidence_quote": "Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina."
+    },
+    {
+      "source_report_id": "ar-emae",
+      "target_report_id": "ar-ipi",
+      "relationship_type": "uses_data_from",
+      "basis": "Manufacturing component of EMAE is obtained by applying the monthly evolution of the Industrial Monthly Estimator (EMI / IPI manufacturero) to the sectoral structure of the quarterly GDP calculation.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
+      "evidence_quote": "El cálculo para el EMAE se basa en la aplicación de la evolución de los rubros del Estimador Mensual Industrial (EMI) a la estructura sectorial del cálculo trimestral del PIB."
+    },
+    {
+      "source_report_id": "ar-emae",
+      "target_report_id": "ar-isac",
+      "relationship_type": "uses_data_from",
+      "basis": "Construction activity in EMAE is extrapolated from the Synthetic Indicator of Construction Activity (ISAC) (and SIPA employment), weighted according to the shares of surplus and compensation of employees from national accounts.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
+      "evidence_quote": "La estimación de la actividad se basa en la evolución del Indicador Sintético de la Actividad de la Construcción (ISAC) y del número de ocupados en el SIPA. Estos indicadores se utilizan para extrapolar el Valor Agregado sectorial en forma ponderada de acuerdo a las participaciones del excedente y de las remuneraciones a los asalariados e ingreso mixto, respectivamente."
+    },
+    {
+      "source_report_id": "ar-ipi",
+      "target_report_id": "ar-scn",
+      "relationship_type": "uses_data_from",
+      "basis": "IPI provides sectoral production information that serves as a primary statistical input for the calculation of GDP and for updating the base year and input-output matrix of the System of National Accounts.",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipi_manufacturero_ingles.pdf",
+      "evidence_quote": "the Manufacturing IPI provides sectoral and thematic information that allows the update of primary statistical information in the System of National Accounts, as it serves as an input in the calculation of the gross domestic product and as a source of data to analise and update the base year, the input-output matrix, and design statistical programmes."
+    },
+    {
+      "source_report_id": "ar-ipi",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Branch and division structure of the Manufacturing IPI is aligned with the production-account estimates of national accounts via ISIC Rev. 3.1 (implemented nationally as ClaNAE 2004).",
+      "evidence_url": "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipi_manufacturero_ingles.pdf",
+      "evidence_quote": "To make the construction of the general level of the index and the results of each branch of economic activities of the Manufacturing IPI compatible with the estimates of the production account of the System of National Accounts, the International Standard Industrial Classification of All Economic Activities Revision 3.1 (ISIC Rev3.1) is used"
+    },
+    {
+      "source_report_id": "ar-isac",
+      "target_report_id": "ar-scn",
+      "relationship_type": "calculated_from",
+      "basis": "General-level ISAC is a Laspeyres quantity index of apparent consumption of construction inputs, aggregated with weights taken from the utilization-matrix vector for construction in the 2004 base-year national accounts.",
+      "evidence_url": "https://sitioanterior.indec.gob.ar/ftp/cuadros/economia/metodologia_isac_2018.pdf",
+      "evidence_quote": "Su cálculo se estructura en la agregación de los índices individuales de los insumos al índice del nivel general, utilizando las ponderaciones de los insumos de la actividad de la construcción de las cuentas nacionales base 2004. ... Estos ponderadores se construyen a partir de la estructura del vector “Construcción” de la matriz de utilización a precios de comprador, revisión del año base 2004, provista por la Dirección Nacional de Cuentas Nacionales."
+    },
+    {
+      "source_report_id": "cl-imacec",
+      "target_report_id": "cl-cuentas-nacionales",
+      "relationship_type": "calculated_from",
+      "basis": "IMACEC is a monthly summary indicator of economic activity whose weights are the value-added shares of activities in the previous year’s GDP from the national accounts; it is benchmarked to quarterly GDP.",
+      "evidence_url": "https://www.bcentral.cl/documents/33528/2547010/see90.pdf/36b8c720-ca63-38dc-e94d-a686a8a66c67?t=1596037522877",
+      "evidence_quote": "El cálculo del Imacec se basa en múltiples indicadores de oferta ... que son ponderados por la participación de las actividades económicas dentro del PIB en el año anterior. ... Al concluir el trimestre, el Imacec se alinea con el PIB trimestral"
+    },
+    {
+      "source_report_id": "cl-ipmin",
+      "target_report_id": "cl-cobre",
+      "relationship_type": "uses_data_from",
+      "basis": "Mining production index incorporates physical copper (and other mineral) production volumes as core quantity indicators.",
+      "evidence_url": "https://www.ine.gob.cl/estadisticas-por-tema/industria-energia-y-construccion/produccion-minera",
+      "evidence_quote": "El objetivo del Índice de Producción Minera es estimar la evolución mensual del volumen de producción de la Minería, Sección B de la CIIU4.CL 2012, a través de las cantidades producidas por los distintos establecimientos que componen dicho sector."
+    },
+    {
+      "source_report_id": "cl-cuentas-nacionales",
+      "target_report_id": "cl-cochilco",
+      "relationship_type": "uses_data_from",
+      "basis": "Monthly and annual production estimates for the mining branch (especially copper) draw on data supplied by Cochilco (together with company reports and INE surveys).",
+      "evidence_url": "https://www.bcentral.cl/w/2.3.3-mineria",
+      "evidence_quote": "La estimación de todas las actividades mineras se realiza con periodicidad mensual, dada la disponibilidad y oportunidad de la información de producción efectiva, obtenida directamente desde las empresas públicas y privadas, complementada con información recopilada por el INE, la Comisión Chilena del Cobre (Cochilco) y Sernageomin."
+    },
+    {
+      "source_report_id": "cl-ipmin",
+      "target_report_id": "cl-cochilco",
+      "relationship_type": "uses_data_from",
+      "basis": "Cochilco copper-production statistics form part of the source data that feed the monthly Mining Production Index compiled by INE.",
+      "evidence_url": "https://www.bcentral.cl/w/2.3.3-mineria",
+      "evidence_quote": "complementada con información recopilada por el INE, la Comisión Chilena del Cobre (Cochilco) y Sernageomin."
+    },
+    {
+      "source_report_id": "cl-cuentas-nacionales",
+      "target_report_id": "cl-ipmin",
+      "relationship_type": "uses_data_from",
+      "basis": "Volume measures for the mining activity in national accounts and IMACEC rely on production indices and physical quantities from the Mining Production Index and related company/Cochilco data.",
+      "evidence_url": "https://www.bcentral.cl/w/2.3.3-mineria",
+      "evidence_quote": "Para la medición en términos de volumen se utiliza el método de doble deflación para el VA, extrapolando por cantidades la producción y deflactando el CI. ... La estimación de todas las actividades mineras se realiza con periodicidad mensual ... complementada con información recopilada por el INE, la Comisión Chilena del Cobre (Cochilco)"
+    }
+  ]
+}

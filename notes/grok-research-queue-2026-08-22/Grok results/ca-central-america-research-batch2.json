@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "files_received": [
+      "34-new-central-america.md",
+      "GROKREADME.md"
+    ],
+    "countries_covered": [
+      "Guatemala",
+      "Honduras",
+      "Costa Rica",
+      "Panama"
+    ],
+    "countries_thin_or_null": [
+      "Nicaragua — additional CPI primary methodology still thin",
+      "Belize — additional CPI primary methodology still thin beyond earlier SNA 2008 notes"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "gt-ine-cpi-2024",
+      "kind": "domestic",
+      "title": "Índice de Precios al Consumidor (IPC) Guatemala — cambio de año base (CCIF 2018)",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "GT",
+      "region": "Guatemala",
+      "url": "https://www.ine.gob.gt/wp-content/uploads/2024/02/Aspectos-metodologicos-y-cambio-de-ano-base-IPC-2023-1.pdf",
+      "description": "Updated consumer price index methodology and base-year change adopting the Classification of Individual Consumption by Purpose 2018 (CCIF/COICOP 2018) and CPI Manual 2020 recommendations.",
+      "publication_cadence": "monthly (methodology update as needed)"
+    },
+    {
+      "proposed_id": "hn-bch-cpi-2025",
+      "kind": "domestic",
+      "title": "Índice de Precios al Consumidor (IPC) Honduras — base diciembre 2025=100",
+      "publisher": "Banco Central de Honduras",
+      "country": "HN",
+      "region": "Honduras",
+      "url": "https://www.bch.hn/estadisticos/GIE/LIBIPC/Metodolog%C3%ADa%20IPC%20Diciembre%202025=100.pdf",
+      "description": "New CPI base December 2025=100 with 405 products, using COICOP 2018 (13 divisions), aligned with 2008 SNA expenditure concepts and the 2020 CPI Concepts and Methods Manual.",
+      "publication_cadence": "monthly"
+    },
+    {
+      "proposed_id": "cr-inec-cpi",
+      "kind": "domestic",
+      "title": "Índice de Precios al Consumidor (IPC) Costa Rica",
+      "publisher": "Instituto Nacional de Estadística y Censos",
+      "country": "CR",
+      "region": "Costa Rica",
+      "url": "https://dsbb.imf.org/sdds/dqaf-base/country/CRI/category/CPI00",
+      "description": "Official CPI compiled by INEC; classification uses COICOP 2018 (13 divisions); concepts aligned with CPI Manual 2004/2020.",
+      "publication_cadence": "monthly"
+    },
+    {
+      "proposed_id": "pa-inec-cpi-2024",
+      "kind": "domestic",
+      "title": "Índice de Precios al Consumidor (IPC) Panama — base 2024=100",
+      "publisher": "Instituto Nacional de Estadística y Censo",
+      "country": "PA",
+      "region": "Panama",
+      "url": "https://www.inec.gob.pa/archivos/A0705547520251015154615NOTA%20T%C3%89CNICA%20IPC%202025.pdf",
+      "description": "Updated CPI base 2024=100 with 343 articles organised under Clasificación del Consumo Individual por Finalidades 2018 (CCIF/COICOP 2018), 13 divisions.",
+      "publication_cadence": "monthly"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "gt-ine-cpi-2024",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INE Guatemala methodology for the recent CPI base change explicitly adopts CCIF/COICOP 2018 for coding the consumption basket.",
+      "evidence_url": "https://www.ine.gob.gt/wp-content/uploads/2024/02/Aspectos-metodologicos-y-cambio-de-ano-base-IPC-2023-1.pdf",
+      "evidence_quote": "La implementación de la Clasificación del Consumo Individual por Finalidades (CCIF) versión 2018 para la codificación de los bienes y servicios de la canasta que conforma el IPC"
+    },
+    {
+      "source_report_id": "gt-ine-cpi-2024",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Document repeatedly cites the 2020 CPI Concepts and Methods Manual for calculation, outlier treatment and other practices.",
+      "evidence_url": "https://www.ine.gob.gt/wp-content/uploads/2024/02/Aspectos-metodologicos-y-cambio-de-ano-base-IPC-2023-1.pdf",
+      "evidence_quote": "Acorde a las recomendaciones Manual de Conceptos y Métodos del IPC 2020"
+    },
+    {
+      "source_report_id": "hn-bch-cpi-2025",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "BCH methodology for the December 2025=100 CPI states use of COICOP 2018 (13 divisions) and alignment with 2008 SNA expenditure concepts.",
+      "evidence_url": "https://www.bch.hn/estadisticos/GIE/LIBIPC/Metodolog%C3%ADa%20IPC%20Diciembre%202025=100.pdf",
+      "evidence_quote": "la Clasificación del Consumo Individual por Finalidades (CCIF) de la Organización de las Naciones Unidas (ONU) 2018, que divide estrictamente los bienes y servicios en trece grupos"
+    },
+    {
+      "source_report_id": "hn-bch-cpi-2025",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DQAF and BCH documentation state the ENIGH expenditure definition used for weights is consistent with 2008 SNA.",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/HND/category/CPI00",
+      "evidence_quote": "The definition of expenditure of ENIGH households is consistent with the 2008 System of National Accounts (2008 SNA)"
+    },
+    {
+      "source_report_id": "hn-bch-cpi-2025",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "BCH cites the 2020 CPI Concepts and Methods Manual as the governing methodological reference.",
+      "evidence_url": "https://www.bch.hn/estadisticos/GIE/LIBIPC/Metodolog%C3%ADa%20IPC%20Diciembre%202025=100.pdf",
+      "evidence_quote": "recomendaciones metodológicas establecidas en el Manual de Conceptos y Métodos del IPC (2020)"
+    },
+    {
+      "source_report_id": "cr-inec-cpi",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Costa Rica SDDS DQAF for consumer prices states the classification system is COICOP 2018.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/CRI/category/CPI00",
+      "evidence_quote": "The classification system used for the CPI is the original version of the most recent COICOP (COICOP 2018)"
+    },
+    {
+      "source_report_id": "cr-inec-cpi",
+      "target_report_id": "cpi-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "DQAF states the CPI is based on the 2004 and 2020 CPI Manuals.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/CRI/category/CPI00",
+      "evidence_quote": "The CPI is based on the Consumer Price Index Manual: Theory and Practice (2004) and on the Consumer Price Index Manual: Concepts and Methods (2020)"
+    },
+    {
+      "source_report_id": "pa-inec-cpi-2024",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INEC Panama technical note for base 2024=100 states use of Clasificación del Consumo Individual por Finalidades 2018 (CCIF 2018).",
+      "evidence_url": "https://www.inec.gob.pa/archivos/A0705547520251015154615NOTA%20T%C3%89CNICA%20IPC%202025.pdf",
+      "evidence_quote": "utiliza la Clasificación del Consumo Individual por Finalidades (CCIF 2018)"
+    }
+  ]
+}

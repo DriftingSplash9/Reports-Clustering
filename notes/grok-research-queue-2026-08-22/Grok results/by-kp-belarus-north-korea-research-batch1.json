@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "files_received": [
+      "36-new-belarus-north-korea.md",
+      "GROKREADME.md"
+    ],
+    "countries_covered": [
+      "Belarus",
+      "North Korea"
+    ],
+    "countries_thin_or_null": [
+      "Belarus — Belstat continues to publish national accounts under SNA 2008 and maintains SDDS metadata, but international engagement constrained since 2020-21; still functional primary source material exists",
+      "North Korea — No known functioning national statistics office publishing internationally-standard primary data through normal channels; only external estimates (UN Population Division, World Bank) found — not North Korea's own primary source"
+    ]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "by-belstat",
+      "kind": "domestic",
+      "title": "National Statistical Committee of the Republic of Belarus (Belstat)",
+      "publisher": "National Statistical Committee of the Republic of Belarus",
+      "country": "BY",
+      "region": "Belarus",
+      "url": "https://www.belstat.gov.by/",
+      "description": "National statistical committee responsible for the System of National Accounts, CPI, labour and other official statistics. Continues to publish under SNA 2008 framework.",
+      "publication_cadence": "ongoing institutional"
+    },
+    {
+      "proposed_id": "by-belstat-national-accounts",
+      "kind": "domestic",
+      "title": "National accounts of the Republic of Belarus (SNA 2008)",
+      "publisher": "National Statistical Committee of the Republic of Belarus",
+      "country": "BY",
+      "region": "Belarus",
+      "url": "https://belstat.gov.by/en/ofitsialnaya-statistika/publications/statistical-publications-data-books-bulletins/public_compilation/index_91831/",
+      "description": "Annual national accounts publication compiled according to the System of National Accounts 2008; data for 2010 onward revised to SNA 2008.",
+      "publication_cadence": "annual"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "by-belstat-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Belstat methodology and DQAF-style statements confirm national accounts compiled under SNA 2008 from 2016 onward (with back-revision of earlier years).",
+      "evidence_url": "https://www.belstat.gov.by/ofitsialnaya-statistika/ssrd-mvf_2/metadannye/realnyi-sektor/natsionalnye-scheta_2",
+      "evidence_quote": "Начиная с I квартала 2016 г. данные формируются по Системе национальных счетов 2008 года (СНС-2008). Данные за 2009-2015 гг. приведены в соответствии с СНС-2008"
+    },
+    {
+      "source_report_id": "by-belstat",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Belarus remains an SDDS subscriber with active metadata on the DSBB (subscription 2004); labour, BOP and other category DQAF pages continue to reference SDDS observance.",
+      "evidence_url": "https://dsbb.imf.org/sdds/subscription-date",
+      "evidence_quote": "Belarus, Republic of 22-Dec-2004"
+    },
+    {
+      "source_report_id": "by-belstat",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "National Bank of Belarus (in coordination with Belstat) compiles balance of payments according to BPM6.",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/BLR/category/BOP00",
+      "evidence_quote": "The Balance of Payments is compiled in accordance with international standards set out in the sixth edition of The Balance of Payments and International Investment Position Manual (BPM6)"
+    }
+  ]
+}

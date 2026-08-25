@@ -1,6 +1,6 @@
 # Prompt for Grok — domestic wiring — Afghanistan, Yemen, Sudan, Somalia (small, very thin)
 
-**Standing rules:** see `../GROKREADME.md` — attach/paste it alongside this file every time. It has the id-integrity rule, the relationship-type enum, the honesty permission, the coverage-is-data-driven principle, and the reply schema. This file has only the region-specific research question below.
+**Standing rules:** see `GROKREADME.md` — attach/paste it alongside this file every time. It has the id-integrity rule, the relationship-type enum, the honesty permission, the coverage-is-data-driven principle, and the reply schema. This file has only the region-specific research question below.
 
 **Attach:** `GROKREADME.md`, `af-afghanistan-grok-2026-08.json`, `ye-yemen-grok-2026-08.json`, `af-sudan.json`, `sd-g22-audit-chamber-fiscal.json`, `sd-leadchase-nac-audits.json`, `af-somalia-deepen.json`, `so-g22-puntland-benadir-mof.json` (all under `src/data/research/`). The full id/title list for every node this prompt covers is also pasted below, so even if an attachment doesn't come through, the ids you need are right here in the text.
 

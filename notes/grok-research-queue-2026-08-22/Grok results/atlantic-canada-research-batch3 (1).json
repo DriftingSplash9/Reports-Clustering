@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "files_received": [
+      "GROKREADME.md",
+      "05-canada-atlantic.md",
+      "alberta-provincial.json",
+      "equalization-named-products.json",
+      "federal-canada.json"
+    ],
+    "countries_covered": [
+      "New Brunswick",
+      "Prince Edward Island",
+      "Newfoundland and Labrador",
+      "Nova Scotia",
+      "Halifax Regional Municipality",
+      "City of Fredericton",
+      "City of St. John's"
+    ],
+    "countries_thin_or_null": []
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "pei-taxation-property-assessment",
+      "kind": "domestic",
+      "title": "Property Assessment Notices and Assessment Roll (Taxation and Property Records)",
+      "publisher": "Taxation and Property Records, Department of Finance and Affordability, Government of Prince Edward Island",
+      "country": "CA",
+      "region": "Prince Edward Island",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.princeedwardisland.ca/en/information/finance-and-affordability/property-assessment",
+      "description": "Annual determination of market value for all real property under the Real Property Assessment Act, forming the basis for provincial and municipal property tax collection; Notices of Property Assessment are issued with the annual property tax bill.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "nl-maa-annual-report",
+      "kind": "domestic",
+      "title": "Municipal Assessment Agency Annual Report",
+      "publisher": "Municipal Assessment Agency Inc.",
+      "country": "CA",
+      "region": "Newfoundland and Labrador",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.gov.nl.ca/mca/files/MAA-Annual-Report-2024-2025-FINAL-08192025.pdf",
+      "description": "Annual performance and financial report of the Municipal Assessment Agency, including assessed property values used by municipalities to calculate tax revenue for the following year.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "fredericton-financial-statements",
+      "kind": "domestic",
+      "title": "City of Fredericton Consolidated Financial Statements",
+      "publisher": "City of Fredericton",
+      "country": "CA",
+      "region": "New Brunswick",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.fredericton.ca/sites/default/files/2026-04/2025%20Financial%20Statements.pdf",
+      "description": "Audited consolidated financial statements of the City of Fredericton for the year ended 31 December, including property tax revenue and community funding/equalization grant lines.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "stjohns-budget",
+      "kind": "domestic",
+      "title": "City of St. John's Budget 2026",
+      "publisher": "City of St. John's",
+      "country": "CA",
+      "region": "Newfoundland and Labrador",
+      "jurisdiction_level": "municipal",
+      "url": "https://www.stjohns.ca/media/rcjjh3ol/2026-budget-book.pdf",
+      "description": "Annual municipal operating and capital budget setting mill rates and funding municipal services, with residential and commercial realty tax revenue based on assessed values.",
+      "publication_cadence": "annual"
+    },
+    {
+      "proposed_id": "ns-pvsc-annual-report",
+      "kind": "domestic",
+      "title": "Property Valuation Services Corporation Annual Report",
+      "publisher": "Property Valuation Services Corporation",
+      "country": "CA",
+      "region": "Nova Scotia",
+      "jurisdiction_level": "provincial",
+      "url": "https://www.pvsc.ca/sites/default/files/2025-07/2024-2025-Annual%20Report.pdf",
+      "description": "Annual report of the independent assessment authority, including audited financial statements, Assessment Roll quality measures, and delivery of the roll to the 49 municipalities.",
+      "publication_cadence": "annual"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "hrm-budget-business-plan",
+      "target_report_id": "ns-pvsc-assessment-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Municipal tax rates and bills are calculated from assessed values on the Assessment Roll delivered annually by PVSC.",
+      "evidence_url": "https://www.halifax.ca/home-property/property-taxes/tax-rates",
+      "evidence_quote": "Your tax bill is calculated by multiplying the tax rate by the total assessed value of a property as set by the Property Valuation Services Corporation (PVSC)."
+    },
+    {
+      "source_report_id": "stjohns-budget",
+      "target_report_id": "nl-maa-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "City of St. John's residential and commercial realty tax revenue is derived from assessed property values (City of St. John's conducts its own assessments, but the provincial MAA covers the rest of the province under the same Assessment Act framework; the budget relies on the assessment base).",
+      "evidence_url": "https://www.stjohns.ca/media/rcjjh3ol/2026-budget-book.pdf",
+      "evidence_quote": "Residential Realty ... Commercial Realty"
+    },
+    {
+      "source_report_id": "fredericton-financial-statements",
+      "target_report_id": "nb-snb-property-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "Property tax revenue in the City of Fredericton financial statements is calculated from assessed values provided by Service New Brunswick Property Assessment under the Assessment Act.",
+      "evidence_url": "https://www.fredericton.ca/sites/default/files/2026-04/2025%20Financial%20Statements.pdf",
+      "evidence_quote": "Property taxes 156,346,042"
+    },
+    {
+      "source_report_id": "ns-pvsc-annual-report",
+      "target_report_id": "ns-pvsc-assessment-roll",
+      "relationship_type": "cites",
+      "basis": "The Annual Report reports on the delivery and quality of the Assessment Roll that is the primary product of PVSC.",
+      "evidence_url": "https://www.pvsc.ca/sites/default/files/2025-07/2024-2025-Annual%20Report.pdf",
+      "evidence_quote": "Each December, we deliver an Assessment Roll to all 49 Nova Scotia municipalities"
+    }
+  ]
+}

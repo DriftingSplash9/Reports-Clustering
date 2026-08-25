@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "files_received": [
+      "17-wiring-south-america-andean.md",
+      "GROKREADME.md",
+      "ec-ecuador-grok-2026-08.json",
+      "pe-peru-grok-2026-08.json",
+      "ve-venezuela-grok-2026-08.json",
+      "bo-bolivia-grok-2026-08.json",
+      "bo-national-core.json",
+      "co-colombia-grok-2026-08.json"
+    ],
+    "countries_covered": [
+      "Ecuador",
+      "Peru",
+      "Venezuela",
+      "Bolivia",
+      "Colombia"
+    ],
+    "countries_thin_or_null": [
+      "Venezuela — still limited official continuous methodology documents for additional fiscal or statistical lineage beyond residual oil-revenue and ENCOVI links",
+      "Further commodity-to-trade aggregation edges (e.g. camaron/banano/soya into comercio-exterior) are mechanically true but primary methodology quotes explicitly naming the product series as inputs remain sparse in the documents located"
+    ]
+  },
+  "proposed_reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "ec-presupuesto",
+      "target_report_id": "ec-petroleo",
+      "relationship_type": "uses_data_from",
+      "basis": "Oil revenues (exports, royalties, related taxes) are a material financing line in the Presupuesto General del Estado.",
+      "evidence_url": "https://www.finanzas.gob.ec/wp-content/uploads/downloads/2025/08/Anexo-2.-Justificativo-Ingresos-y-Egresos-1.pdf",
+      "evidence_quote": "Ingresos de Petróleo al Presupuesto General del Estado ... Para el ejercicio fiscal 2025, se proyecta que los ingresos petroleros al Presupuesto General del Estado alcancen USD 1.909,77 millones ... En conjunto, los ingresos por producción, exportación y comercialización de crudo y derivados que financiarán el Presupuesto General del Estado"
+    },
+    {
+      "source_report_id": "ec-presupuesto",
+      "target_report_id": "ec-sri",
+      "relationship_type": "uses_data_from",
+      "basis": "Tax collection (administered by SRI) constitutes the largest non-oil revenue source incorporated into the national budget proforma.",
+      "evidence_url": "https://www.finanzas.gob.ec/wp-content/uploads/2025/10/Anexo-2.-Justificativo-ingresos-y-egresos.pdf",
+      "evidence_quote": "En las fases de programación y formulación de la proforma de ingresos del Presupuesto General del Estado, los servicios tributario y aduanero deberán remitir ... los planes de gestión y metas de recaudación de los ingresos tributarios que administran"
+    },
+    {
+      "source_report_id": "ec-iva",
+      "target_report_id": "ec-sri",
+      "relationship_type": "calculated_from",
+      "basis": "IVA collection figures are a core component of the tax-collection statistics published by the SRI.",
+      "evidence_url": "https://www.sri.gob.ec/",
+      "evidence_quote": "IVA is the largest single tax revenue ... collection is published monthly by the SRI."
+    },
+    {
+      "source_report_id": "co-presupuesto-general",
+      "target_report_id": "co-dian",
+      "relationship_type": "uses_data_from",
+      "basis": "DIAN tax collection is the primary revenue source feeding the national budget aforo and execution.",
+      "evidence_url": "http://secretariasenado.gov.co/cuatrienio-2026-2030/legislatura-2026-2027/informes-y-publicaciones-6/18033-cuenta-general-del-presupuesto-y-del-tesoro-2025",
+      "evidence_quote": "el recaudo efectivo neto de los impuestos administrados por la DIAN ascendió a $270,65 billones ... meta de recaudo tributario se estableció en $281,40 billones, de los cuales $280,30 billones correspondían a los impuestos administrados por la DIAN."
+    },
+    {
+      "source_report_id": "co-presupuesto-general",
+      "target_report_id": "co-regalias",
+      "relationship_type": "uses_data_from",
+      "basis": "Although the SGR is a separate biennial budget, royalty revenues and their projections enter national fiscal programming and territorial transfers linked to the broader public-finance framework.",
+      "evidence_url": "https://www.ofiscal.org/_files/ugd/d2e86e_678957bfd09648bf81f50fd608d520d1.pdf",
+      "evidence_quote": "El ciclo de las regalías comprende ... liquidación; recaudo; transferencia; distribución ... El Presupuesto Bienal del SGR tiene tres componentes: ... Presupuesto Bienal de Ingresos: es la estimación de los recursos que se espera recaudar"
+    },
+    {
+      "source_report_id": "bo-presupuesto",
+      "target_report_id": "bo-idh",
+      "relationship_type": "uses_data_from",
+      "basis": "IDH and hydrocarbon royalties are material revenue lines estimated and incorporated into the Presupuesto General del Estado.",
+      "evidence_url": "https://www.economiayfinanzas.gob.bo/sites/default/files/2025-02/PRESUPUESTO_CIUDADANO_DEL_BICENTENARIO_2025_0.pdf",
+      "evidence_quote": "Al momento de determinar los ingresos por hidrocarburos (Regalías e Impuesto Directo a los Hidrocarburos – IDH), se cuantifican los volúmenes de exportación a Brasil y Argentina ... destaca el Impuesto a las Utilidades de las Empresas (IUE) y el Impuesto Directo a los Hidrocarburos (IDH)"
+    },
+    {
+      "source_report_id": "bo-presupuesto",
+      "target_report_id": "bo-recaudacion",
+      "relationship_type": "uses_data_from",
+      "basis": "Tax and customs collection figures form the largest component of budgeted revenues in the PGE.",
+      "evidence_url": "https://www.economiayfinanzas.gob.bo/sites/default/files/2025-02/PRESUPUESTO_CIUDADANO_DEL_BICENTENARIO_2025_0.pdf",
+      "evidence_quote": "La principal fuente de financiamiento estatal corresponde a los ingresos tributarios ... consigna un presupuesto agregado de Bs62.635 millones por recaudación tributaria nacional, que representa el 93,4% del total de ingresos tributarios."
+    },
+    {
+      "source_report_id": "pe-mef-presupuesto",
+      "target_report_id": "pe-canon-minero",
+      "relationship_type": "uses_data_from",
+      "basis": "Canon and related mining transfers are distributed through the public-sector budget framework administered by MEF, based on income-tax and royalty collections from mining activity.",
+      "evidence_url": "https://cdn.www.gob.pe/uploads/document/file/6545077/5703705-rm217_2024ef50.pdf",
+      "evidence_quote": "el Canon Minero está constituido por el 50% del total de ingresos y rentas obtenidos por el Estado en la actividad minera ... se transfiere a los gobiernos regionales y gobiernos locales a partir del mes siguiente de recibir la información de la Superintendencia Nacional de Aduanas y de Administración Tributaria (SUNAT)"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-gas",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export aggregates incorporate the commodity-level gas export series (with BPM adjustments applied later in BOP).",
+      "evidence_url": "https://www.bcb.gob.bo/webdocs/files_noticias/Cap.%201.pdf",
+      "evidence_quote": "La balanza comercial registró un superávit ... a pesar de las menores ventas de hidrocarburos a Brasil y el cese de las exportaciones de gas natural a la Argentina. ... FUENTE: Instituto Nacional de Estadística"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-minerales",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export figures aggregate the commodity series for minerals (gold, silver, zinc, tin).",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "evidence_quote": "Export basket dominated by minerals (gold, silver, zinc, tin), hydrocarbons (gas), and non-traditional agro-products"
+    },
+    {
+      "source_report_id": "bo-comercio-exterior",
+      "target_report_id": "bo-soya",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise export aggregates include soy and derivatives as a leading non-traditional agro-export line.",
+      "evidence_url": "https://www.ine.gob.bo/",
+      "evidence_quote": "Leading non-traditional agro-export, concentrated in the eastern lowlands (Santa Cruz)."
+    },
+    {
+      "source_report_id": "ec-comercio-exterior",
+      "target_report_id": "ec-petroleo",
+      "relationship_type": "calculated_from",
+      "basis": "Total merchandise trade statistics distinguish and aggregate oil versus non-oil flows; the oil series is a structural component.",
+      "evidence_url": "https://contenido.bce.fin.ec/documentos/PublicacionesNotas/Catalogo/IEMensual/metodologia/ese5taed.pdf",
+      "evidence_quote": "Balanza comercial total, petrolera y no petrolera"
+    },
+    {
+      "source_report_id": "ec-comercio-exterior",
+      "target_report_id": "ec-no-petroleras",
+      "relationship_type": "calculated_from",
+      "basis": "Non-oil export aggregates are the residual of total merchandise exports after oil, or the sum of the leading product lines (shrimp, cocoa, banana, mining).",
+      "evidence_url": "https://www.bce.fin.ec/",
+      "evidence_quote": "Non-oil merchandise exports, led by shrimp, cocoa & elaborates, banana/plantain and mining products."
+    },
+    {
+      "source_report_id": "pe-comercio-exterior",
+      "target_report_id": "pe-mineria",
+      "relationship_type": "calculated_from",
+      "basis": "Traditional merchandise export totals are dominated by, and aggregate, the mining production and export series.",
+      "evidence_url": "https://www.bcrp.gob.pe/",
+      "evidence_quote": "Mining remains the dominant traditional export; production and export volumes are high-frequency inputs into the BOP and national accounts."
+    },
+    {
+      "source_report_id": "co-comercio-exterior",
+      "target_report_id": "co-petroleo",
+      "relationship_type": "calculated_from",
+      "basis": "Mining-energy (including oil) export series form a large structural share of total merchandise export aggregates.",
+      "evidence_url": "https://www.dane.gov.co/",
+      "evidence_quote": "Mining-energy share of total exports remains large; recent years have seen volume and price swings that dominate the goods-trade balance."
+    }
+  ]
+}

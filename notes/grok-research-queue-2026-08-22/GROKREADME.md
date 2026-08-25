@@ -119,8 +119,34 @@ jurisdictions.
 
 ## How to reply
 
-One JSON object with two arrays:
+The deliverable is one JSON object — `_meta`, `proposed_reports`,
+`dependencies` (schema and a worked example below) — but it doesn't get
+pasted into the chat. Deliver it as a file, every time:
 
+1. Write the full research result to a file in `/home/workdir/artifacts/`,
+   named clearly for the region and batch, using the same short id-prefix
+   the regional prompt itself uses (e.g. `bc-`, `id-`, `tw-`):
+   - `bc-british-columbia-research-batch1.json`
+   - `bc-british-columbia-research-batch2.json`
+   - etc.
+2. Immediately render a downloadable file preview for that JSON with
+   `render_file`, so it can be clicked and saved directly. This is the
+   actual delivery mechanism — not a pasted code block.
+3. If one research pass produced more than one related JSON file, also
+   bundle them into a zip and render that too.
+4. After the download link(s), you may add a brief note on any remaining
+   high-value areas that could still yield more nodes or edges — real,
+   promising leads only, never padding just to have something to say.
+
+Research on a region doesn't have to finish in one pass. Multiple
+sequential batches from the same regional prompt are expected and fine —
+keep researching and producing new numbered batch files (batch1, batch2,
+batch3...) until further searching stops turning up anything real (see
+"Coverage is data-driven" above) or we tell you to stop.
+
+**Fields inside each batch file's JSON:**
+
+- `_meta` — `{ files_received: [ "filenames you were actually given, verbatim" ], countries_covered: [ "list of every country/jurisdiction this prompt asked about" ], countries_thin_or_null: [ "which of those came back thin or empty, and why, in a few words each" ] }`.
 - `proposed_reports` — one entry per new report or institution node you
   find: `{ proposed_id, kind (domestic/international), title, publisher,
   country (ISO-3166 alpha-2, or omit for a sub-national/institutional
@@ -131,8 +157,65 @@ One JSON object with two arrays:
   source: `{ source_report_id, target_report_id, relationship_type, basis,
   evidence_url, evidence_quote }`.
 
-Start your reply by confirming which of the files listed in the regional
-prompt's "Attach" line you actually received, and which countries or
-jurisdictions in the prompt you found real, current, citable material for
-versus thin or nothing. We raw-verify every quote before anything is
-minted, same as always.
+**Example shape — match this structure exactly. The field names and
+nesting stay the same every time; only the values change. This is a
+placeholder, not real data — never reuse any id, url, or quote from it:**
+
+```json
+{
+  "_meta": {
+    "files_received": ["example-file.json"],
+    "countries_covered": ["Example Country"],
+    "countries_thin_or_null": ["Example Thin Country — only a UN population estimate found, no primary national-accounts source"]
+  },
+  "proposed_reports": [
+    {
+      "proposed_id": "xx-example-report",
+      "kind": "domestic",
+      "title": "Example National Accounts Release",
+      "publisher": "Example National Statistics Office",
+      "country": "XX",
+      "region": "Example Country",
+      "url": "https://example.gov/national-accounts",
+      "description": "One sentence on what the report actually is and covers.",
+      "publication_cadence": "annual"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "xx-example-report",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The report's own methodology section names the specific standard edition it follows.",
+      "evidence_url": "https://example.gov/national-accounts/methodology",
+      "evidence_quote": "compiled in accordance with the System of National Accounts 2008"
+    }
+  ]
+}
+```
+
+Notice `jurisdiction_level` is simply left out of that `proposed_reports`
+entry because it's an international/national-level report, not a
+within-country layer — omit a field entirely when it doesn't apply rather
+than writing `null` or `""`. Empty arrays still appear as `[]`, never
+dropped.
+
+Before you write the file, re-read the JSON and confirm it parses on its
+own: matched braces and brackets, no trailing commas, no `//` or `/* */`
+comments, every string quoted and escaped properly, nothing outside the
+outer `{ }`. If you have nothing to add for a given array, still include
+it as `[]` — don't omit the key. The pure JSON content is what gets copied
+into the corpus; the downloadable file is just how it reaches us. We
+raw-verify every quote before anything is minted, same as always.
+
+## Stay in scope — the file, the download, and one line on what's next
+
+Answer only the research question in the regional prompt paired with this
+file, and put that answer only in the JSON that goes into the batch file —
+never narrate, editorialize, or explain your reasoning inside the JSON, and
+nothing in chat before the download link. The one exception is the brief
+"what's left to check" note described in step 4 above, after the link;
+keep even that to real, specific leads, not general opinions on the
+project, the graph, or the schema. If you find yourself explaining or
+justifying instead of just listing reports, edges, and (optionally) next
+leads, stop and cut it.

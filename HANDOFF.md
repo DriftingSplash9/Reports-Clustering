@@ -5,179 +5,104 @@ level.** When superseded, the new session copies this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and
 writes the replacement here. Never two handoffs at the top level.
 
-Last written: **2026-08-22 (item 6b — §5 item 9, BRICS G.4 FULL DISPATCH:
-Brazil + China, 8 new international-standard nodes, 26 new edges, 26
-`_dropped` entries.** Thomas said "read the handoff, do BRICS/G.4" — this is
-the systematic dispatch item 6a explicitly left open ("the already-quoted
-low-hanging fruit" only). First re-measured the actual current state, since
-the 2026-08-20 Grok archive mint had grown Brazil to 99 nodes and China to 66
-in the meantime (item 6a's "19 unwired"/"7 unwired" counts were stale): 86 of
-Brazil's 99 nodes and 48 of China's 66 had no edge to any international-
-standard node. Dispatched 8 parallel research agents (4 per country, by
-theme — industrial/business, household/social, agriculture/environment/
-tourism, fiscal/monetary for Brazil; fiscal law, labour/R&D/education/
-health, environment/resources, national-accounts/CPI/monetary for China),
-each required to raw-verify every claim against a LIVE primary source (not
-trust any existing node description, including this corpus's own) and to
-report honest drops rather than force edges. Every agent independently
-caught and discarded at least one WebFetch fabrication this round — verified
-instead via direct `curl`+`pdftotext` or, where a portal was Cloudflare/JS-
-walled (ibge.gov.br's main site, confirmed this round to sit behind a
-Cloudflare JS challenge that silently 403s WebFetch), a real browser
-session. **Headline results**: Brazil's whole industrial/business-survey
-family (PIM-PF, PIA-Empresa, PIA-Produto, PAS, PAC, PAIC, PMC, PIMES,
-PINTEC) connects to `isic` via IBGE/Concla's own CNAE-to-ISIC concordance
-documentation (PIMES uniquely on ISIC Rev. 3, having been discontinued in
-2016 before CNAE's Rev.-4 migration; everything else Rev. 4); PINTEC
-additionally connects to a newly-minted Oslo Manual node (3rd ed., 2005,
-`methodology_depends_on`) and cites Frascati Manual 2015. Brazil's Censo
-Demográfico names the UN's population-census principles by exact edition
-(Rev. 3, 2017); its population projections name four distinct UN Population
-Division methods; its Censo Agropecuário names FAO's World Programme for
-the Census of Agriculture; its environmental-economic accounts
-independently re-confirm the UN SEEA dependency the corpus's own (Grok-
-imported, unverified) description had only pointed at. On the fiscal side,
-`br-bcb-nota-fiscal-abaixo-linha` → GFSM 2014 is the single strongest
-citation of the round (BCB devotes a whole manual chapter to it), and a
-genuine structural finding surfaced: Brazil runs two non-interoperable
-fiscal tracks, a domestic LRF/PCASP track (LC 101/2000 → MDF → RREO/RGF,
-and STN's legacy RTN, which its own manual admits still runs on the
-superseded MEFP 1986) with no GFSM citation, versus a separate GFSM-2014-
-aligned track (BCB's "abaixo da linha" manual, this round's mint) that
-cites it explicitly. Two IBGE health surveys connect to narrow WHO
-instruments (PNS → the Rose Angina Questionnaire; PeNSE → the Global
-School-based Student Health Survey). China, true to the G.1-G.3 pattern of
-being the least internationally-connected BRICS country, mints only 4 edges
-against 24 researched candidates, but each is exact and edition-named: 19th-
-ICLS unemployment-statistics resolution, Frascati Manual (7th ed.) for R&D
-expenditure, WHO ICD-10 for the Health Statistical Yearbook (with its own
-ICD-9→ICD-10 2002 switchover date), and — closing a gap earlier rounds left
-open — NBS's CPI methodology naming COICOP 2018 explicitly on a dedicated
-indicator-explanation page distinct from the monthly release itself. Two
-DENIALS were documented and correctly NOT minted as edges: Brazil's own
-COICOP concordance page states POF/SNIPC expenditure classifications are
-"ainda não harmonizadas" (not yet harmonized) with COICOP; China's own
-Mineral Resources Report affirmatively cites domestic GB/T standards, not
-UNFC. **A second duplicate-node pair was found** (same shape as item 6a's
-br-ibge-sistema-contas-nacionais/br-scn): `cn-stats-law` and
-`cn-stats-law-impl-regs` (Grok-imported, isolated) appear to duplicate the
-already-researched, still-isolated `cn-statistics-law` — flagged for
-Thomas, nothing wired pending his call. **Structural result**: main
-component 978 → **1154** nodes; Brazil in main component 58/99 → **73/99**,
-wired-to-international 13/99 → **33/99**; China in main component 54/66 →
-**55/66**, wired-to-international 18/66 → **22/66**, fully-isolated 7 → 6.
-New slice `src/data/research/brics-g4-2026-08-22.json` (8 nodes, 26 edges,
-26 `_dropped`). Sandbox-verified: `npm run validate` 120/120 exit 0
-(**3,110 reports, 2,150 dependencies** — up from 3,102/2,124), `tsc --noEmit`
-clean, `npm run build` clean at 1,488 kB (unchanged). Leads carried
-forward, not closed this round: China's UNFC-mineral-classification
-bridging document (real, UNECE-confirmed, but its PDF 403'd this session);
-a CAEP GEP-accounting guideline that DOES cite SEEA-EEA 2012 (a different
-document from the candidate Eco-Environment Yearbook, needs its own node);
-`br-mtur-anuario-turismo`'s sibling product "Economia do Turismo" which DOES
-cite UNWTO/OMT definitions (a different statistical product than the
-Anuário candidate); `cn-budget-law`'s SDDS relationship (real at the
-country level per an IMF Article IV report, but not stated in the Budget
-Law's own text — the actual source is China's dsbb.imf.org NSDP page,
-confirmed JS-walled again this round); and `mnr.gov.cn` being entirely
-unreachable from this sandbox (DNS/proxy failure, a NEW access note
-distinct from the DSBB JS-wall — worked around via mirrors this round, but
-worth a real-browser check in a future session). File committed to
-`src/data/research/`; §3, §5 item 9 and §7 updated below. **Project memory
-was down this session** (both read and write failed) — the memory entry is
-parked at `notes/memory-pending-2026-08-22-brics-g4.md` per the standing
-process rule; a future session with working memory should write it
-properly and then delete the parked copy.)** Earlier item
-6a — §5 item 9, BRICS G.4 partial: Brazil +
-China grep-first pass, 4 edges minted, one duplicate node flagged, one hit
-the DSBB JS-wall.** Thomas said "let's do 9" (the research-backlog todo:
-722 candidates-only nodes, 170 `_dropped` leads, BRICS G.4 for Brazil/China
-never dispatched, with the specific method note "grep node descriptions for
-international-node names first, it found a fully-evidenced edge last time").
-Scoped this round to the concrete, method-specified slice: applied the G.3
-grep technique to Brazil's 19 and China's 7 unwired candidate nodes (both
-Grok-imported, `_batch`-tagged, un-verified-for-edges). Cross-referencing
-node descriptions against the corpus's known international-standards nodes
-(`sna-2008`, `imf-bpm6`, `imf-gfsm`, `imf-sdds`/`imf-sdds-plus`,
-`imf-e-gdds`, `ipsas`, `isic`, `un-coicop-2018`, `oecd-frascati-manual`,
-`oecd-icio`, `sdmx-standard`, `bis-basel-framework`) surfaced 6 hits; 2 were
-false-positive substring matches (`br-finbra`/`br-scn` both matched "ICIO"
-inside Portuguese words like "início"/"ofício", not the OECD ICIO tables —
-discarded on inspection, not minted). **Important correction to the G.3
-lesson**: unlike `in-mospi-cpi` at G.3, these Grok-imported node
-descriptions are SUMMARIES, not raw-verified quotes with a fetch record —
-so the grep only located WHERE to look, not a citable basis by itself. Each
-of the remaining 4 candidates was then independently fetched from a live
-primary source and raw-verified before minting:
-`br-ibge-contas-regionais → sna-2008` (IBGE's municipal-GDP page, verbatim
-conformity sentence), `br-bcb-balanco-pagamentos → imf-bpm6` (found via
-search since the BCB portal page is JS-rendered — a BCB methodological-note
-PDF states the BPM6 adoption verbatim), `cn-bop → imf-bpm6` (SAFE's own
-quarterly release: "The table is compiled according to BPM6."),
-`cn-gdp-national-accounts → sna-2008` (NBS's own official Q&A on the 2016
-CSNA revision, verbatim Chinese: "2016年核算体系采用了与2008年SNA基本一致的核算方法").
-**Held out, not minted**: `br-ibge-sistema-contas-nacionais` turned out to
-be a near-duplicate of the already-wired `br-scn` (identical title family,
-same publisher, same 2026-08-17 Grok batch) — flagged in `_dropped` for
-Thomas to merge/retire rather than silently doubling the edge;
-`cn-mof-fiscal-statistics → imf-sdds` hit the known DSBB JS-wall trap
-(REPORTS.md §7) — WebFetch returned only the DSBB shell, not China's actual
-GGO00 row — needs a real-browser fetch, left as an open lead. New slice
-`src/data/research/brics-g4-partial-2026-08-22.json` (0 new nodes, 4 new
-edges). Sandbox-verified: `npm run validate` 120/120 exit 0
-(**3,102 reports, 2,124 dependencies** — up from 2,120), `tsc --noEmit`
-clean, `npm run build` clean at 1,488 kB (unchanged). This is explicitly a
-HALF round — Brazil's unwired-candidate count went 19→18 net (`br-scn`
-itself was already wired before this session touched anything), China's
-went 7→5; the 722-candidate and 170-`_dropped` backlogs are otherwise
-untouched, and full BRICS G.4 (systematic dispatch, not just the
-already-quoted low-hanging fruit) is still open. File committed to
-`src/data/research/`; §3 and §5 item 9 updated below.)** Earlier item 5z —
-panels default to ON-and-minimized, not hidden.** Thomas sent a screenshot
-of his own working layout — all eight `PanelKey`s present as collapsed
-pills/tabs (Reports and View as edge tabs; Find, Calendar, Compare, Regions
-& Countries, Legend as bottom/top pills; Unlinked always a pill) — and
-asked why a fresh load doesn't look like that instead of hiding everything
-behind the Panels ▾ menu. It was two separate defaults, both now flipped:
-(1) `MenuBar.tsx` gained `PANELS_DEFAULT` (all eight `true`), which now
-seeds a session with no saved `rig.panels.v1` instead of `PANELS_HIDDEN`
-(all `false`) — `PANELS_HIDDEN` itself is untouched, still used by "Hide
-all" and the corrupted-storage fallback, just no longer the fresh-load
-default; "Show all" now reuses `PANELS_DEFAULT` instead of its own
-hand-written all-true literal. (2) Each panel's OWN inner
-collapsed/minimized state, independent of the outer `panels.x` boolean —
-`GroupsPanel`, `Legend`, `Compare`, `CalendarPanel` were already
-`useState(true)` and needed nothing; `SearchPanel`'s `minimized` flipped
-`false`→`true`, and both `PanelShell` call sites (Reports, View) gained a
-`defaultCollapsed` prop they never had (silently defaulting to `false`,
-i.e. wide open, before this). Without step (2), step (1) alone would have
-popped every panel open across the whole screen on first load — the
-opposite of what was asked. Verified: sandbox `npm run validate` 120/120
-exit 0 (3,102/2,120, data untouched), `tsc --noEmit` clean, `npm run build`
-clean at 1,488 kB (unchanged). Live Playwright screenshot of a brand-new
-session (fresh browser context, no localStorage) matches Thomas's own
-screenshot exactly — "Panels 8" badge, all eight present as pills/tabs,
-nothing expanded, nothing absent.)** Earlier item 5y — §5 item 4 SHIPPED:
-main search bar now finds/isolates regions, blocs/orgs, publishers, and
-countries, not just report nodes.** `lib/search.ts` gained `searchGroups`
-(same normalise + word-boundary scoring shape as report search, over
-`RegionGroup` from `regions.ts` — a group's label, plus a country's own
-2-letter code scored lower); `SearchPanel.tsx` now merges `search()` and
-`searchGroups()` into one ranked, keyboard-navigable list (both scorers
-share a 0-300ish scale, so a whole-label match like "Asia" or "Japan"
-naturally outranks partial report matches) and renders group rows with an
-"isolate" hint instead of a fly-to; choosing one calls the SAME
-`onChooseGroup`/`handleChooseGroup` handler `GroupsPanel` rows already
-used, so isolating from the search bar and from the Regions panel are one
-action reached two ways, not two behaviours that could drift. `App.tsx`
-gained one new module constant (`SEARCHABLE_GROUPS = [...REGION_GROUPS,
-...COUNTRY_GROUPS]`) and passes it plus `onChooseGroup`/`selectedGroupId`
-into `SearchPanel`. Live Playwright-verified: typing "asia"/"japan" ranks
-the group first, Enter isolates it exactly like `GroupsPanel`, toggles
-off correctly, plain report queries unaffected. Earlier items 5a-5x: full
-narrative in `archive/Previous Handoffs/` (most recently
-`HANDOFF-2026-08-22-5z.md`, which itself points back further) and in
-project memory.)**
+Last written: **2026-08-25 (second pass, same day) — Grok research-queue
+wiring tier LANDED.** Earlier today the Canada tier (prompts 01–06) landed —
+full account archived at `archive/Previous Handoffs/HANDOFF-2026-08-25-canada-round.md`,
+condensed below. This second pass worked the queue's **domestic wiring
+tier**: prompts 10, 11, 12, 13, 14, 15, 16, 17, 19, 20 (Indonesia; Taiwan;
+Philippines/Vietnam/Thailand/Myanmar; Mexico; Japan/South Korea; Iran/Iraq/
+Turkey/Syria; Argentina/Chile; the Andean bloc; UAE/Saudi; Afghanistan/Yemen/
+Sudan/Somalia). **Prompt 18** (Uruguay/Paraguay/Guyana/Suriname) is still
+missing its Grok reply — Thomas is fetching it — and the **new-countries
+tier (30–37)** is untouched. See §5 item 2 for both.
+
+**Canada round, condensed:** 144 new reports, 161 new dependencies minted
+across 6 regional slices; sandbox-clean. Four structural lessons from that
+round are now standing rules 10–11 below. Two Thomas-call items remain open
+(§5 items 5–6) plus a deferred Quebec regulation question (§5 item 7). Full
+narrative in the archived handoff.
+
+**Wiring round — inventory and verification.** This tier is dependency-heavy
+and report-light by design (its job is to connect nodes that mostly already
+exist): across all 10 groups, Grok proposed only 2 new report nodes total,
+and both turned out to be duplicates of existing corpus nodes under a new
+id (`seea-cf-2012` → already `un-seea`; `ar-mercosur-comex-manual` → didn't
+hold up on content-check). **Net mint: 0 new reports, 165 new dependencies,
+122 `_dropped` entries.** Ten parallel agents raw-verified 289 raw dependency
+claims (one per group; the Andean group first had to dedupe three
+overlapping Grok runs — see below) against live sources, same standard as
+every round: a Grok claim is a lead, a WebFetch render is not evidence until
+corroborated (HTTP status, curl, a downloaded PDF, or a WebSearch
+cross-check), and an Angular-SPA shell (`dsbb.imf.org` again) is not "no
+content on the page."
+
+**The Andean duplicate-prompt problem, resolved.** Ecuador/Peru/Venezuela/
+Bolivia/Colombia had been run through Grok three separate times
+(`andean-domestic-wiring-*` ×4, `ec-pe-ve-bo-co-domestic-wiring-*` ×2,
+`ve-venezuela-domestic-wiring-batch1` ×1), producing 117 raw dependency
+proposals that collapsed to 92 after exact-duplicate removal, with 7 genuine
+conflicts inside that reduced set:
+- **3 were relationship-type disagreements only** (e.g. Peru's poverty-line
+  test proposed as both `uses_data_from` and `calculated_from` by different
+  Grok runs, each independently verified against a real primary source).
+  Resolved as `calculated_from` — a poverty classification is a mechanical
+  threshold test, the more precise fit — merging both citations into one
+  richer `basis`.
+- **4 were direction reversals, all traced to one file**
+  (`andean-domestic-wiring-batch2.json` consistently had source/target
+  backwards relative to its own stated basis text; the sibling
+  `ec-pe-ve-bo-co-*` files had the correct, self-consistent orientation for
+  the same real relationships). For 1 of the 4 (`ec-cuentas-nacionales` ↔
+  `ec-comercio-exterior`) the correct orientation was genuinely new and got
+  minted. For the other 3 (`co-comercio-exterior`↔`co-bop`,
+  `co-emmet`↔`co-ipi`, `ec-comercio-exterior`↔`ec-bop`) **the "wrong"
+  direction turned out to already be live in the corpus** from an earlier
+  round — so this round's freshly-verified "correct" direction was NOT
+  minted (it would have created a second edge running opposite an
+  established one). Each is `caveat`'d on the existing edge and the reverse
+  claim `deferred`, for a human to read both citations before ruling either
+  way. **Lesson: a fresh, well-verified finding contradicting an established
+  edge is grounds for a caveat + deferral, never a silent override — same
+  principle as the Canada round's `qc-perequation` case, now proven to
+  recur.**
+
+Also from the Andean batch: `bo-bop → imf-bpm6` is contradicted by its own
+cited source (`bcb.gob.bo`'s own methodology PDF says Bolivia's BOP still
+follows BPM5) — dropped `wrong-target`, no `imf-bpm5` node exists to
+redirect to. `bo-reservas → bo-bop` cited an id that doesn't exist anywhere
+in the corpus and was never proposed as new — dropped `no-node-yet`.
+
+**Two new structural lessons, now standing rules 12–13 below** (found via
+the sandbox validator, same iterate-until-clean discipline as every round):
+1. **A dependency edge between a node and its `part_of` container is a
+   validator ERROR**, not a warning — 4 edges this round (3 Andean
+   oil/BOP/remittances containments, 1 Mexico `mx-enoe-informalidad →
+   mx-enoe`) restated a containment relationship Grok had independently
+   rediscovered as a dependency. Not minted; logged as `note` observations
+   instead (the fact is real, it's just already modeled via `part_of`
+   metadata, not an edge).
+2. **The `note`-vs-`caveat` validator check (rule 10, discovered in the
+   Canada round) is not actually about the `note` reason specifically — it
+   rejects ANY `DroppedReason` other than `caveat`/`resolved` whose exact
+   (source, target) matches a live edge.** This round, 19 of this round's
+   own `no-document`/`wrong-direction` drops (all across `jp_kr` and
+   `andean`) turned out to exact-match edges **already live in the corpus
+   from earlier rounds** — the verification agents were correctly assessing
+   THIS round's specific proposed evidence for that pair, found it lacking,
+   and had no way to know the pair was already minted on different,
+   presumably-better evidence from before. Fixed by reclassifying all 19 to
+   `caveat` with reworded `why` text. **A full id/edge cross-check against
+   the whole corpus — not just this round's own proposals — has to run
+   before ANY `_dropped` entry is finalized, not only before minting,**
+   because "this round's evidence didn't hold up" and "this edge doesn't
+   exist" are different claims and only `caveat` can say the first without
+   contradicting a live edge.
+
+**Sandbox-verified:** `npm run validate` clean exit 0 (**3,254 reports,
+2,476 dependencies** — reports unchanged from the Canada-round total since
+this was a pure wiring pass; dependencies up from 2,311), `tsc --noEmit`
+clean, `npm run build` clean at 1,504 kB. Ten new slices in
+`src/data/research/`, one per group, `*-wiring-grok-2026-08.json`.
 
 ---
 
@@ -195,10 +120,12 @@ Then by task: anything visual → §5/§6 here, then
 `notes/flicker-tests-2026-08-19.md`; isolate / "why is country X empty" →
 `notes/cross-border-gaps-2026-08-20.md`; the cross-border research thread
 → `notes/crossborder-verification-2026-08-22.md`; **any Grok prompt →
-`notes/grok-diary.md` FIRST (§8) — including its new §0 on relaying
-attachment lists to Thomas separately**; regions/blocs/publishers →
-`src/lib/regions.ts` file comment; compare/path → `Compare.tsx` file comment;
-schema → `src/lib/types.ts`.
+`notes/grok-diary.md` FIRST (§8)**; the Canada + wiring rounds just landed →
+`notes/grok-research-queue-2026-08-22/00-README.md` for the remaining
+tiers' priority order and attachment manifest (new countries, 30–37, plus
+prompt 18, are what's left); regions/blocs/publishers → `src/lib/regions.ts`
+file comment; compare/path → `Compare.tsx` file comment; schema →
+`src/lib/types.ts`.
 
 **House habit: the code is the design doc.** `palette.ts`, `nodeVisuals.ts`,
 `linkVisuals.ts`, `view.ts`, `modes.ts`, `savedViews.ts`, `hierarchy.ts` and
@@ -219,14 +146,22 @@ Full text in `REPORTS.md`.
    it does not go in the graph.
 3. **A pointer is not a source.** WebFetch can fabricate content for a dead
    URL; raw-verify before trusting any quote. Applies doubly to Grok output —
-   **and applies to Grok-imported node DESCRIPTIONS too, not just its
-   dependency claims** (item 6a, 2026-08-22): a summary description that
-   names a standard is a lead to go verify, not a citable basis on its own.
-4. **`npm run validate` before and after any data change** (120 checks as of
-   item 5o). It cannot run through the device bridge. Recipe: stage
+   and applies to Grok-imported node DESCRIPTIONS too, not just its
+   dependency claims: a summary description that names a standard is a lead
+   to go verify, not a citable basis on its own.
+4. **`npm run validate` before and after any data change** (120+ checks).
+   It cannot run through the device bridge. Recipe: stage
    `src/ scripts/ package.json tsconfig.json index.html vite.config.ts
    START-HERE.md` (the full `src/data/research/` corpus included) into a
    Linux sandbox, `npm install`, `npm run gen`, then tsc/validate/build.
+   **Fastest way to get 270+ research JSONs across the device bridge**: zip
+   `src/data/research/` on-device (`device_bash`), drop the zip in
+   `_to_delete/` (so it lands somewhere `device_stage_files` can reach and is
+   already flagged for later cleanup), stage that one file, `unzip` it in
+   the sandbox. One file over the bridge instead of 270. (A live sandbox
+   copy with `node_modules` already installed can also just be reused
+   across rounds in the same session — add new files, rerun validate — far
+   cheaper than restaging from scratch each time.)
 5. **`public/corpus-data.json` is generated** (`npm run gen` /
    `scripts/gen-slices.ts`). Never hand-edit it; it must exist before
    tsc/validate/the app resolve data. Fresh sandbox → run `npm run gen` first.
@@ -244,118 +179,89 @@ Full text in `REPORTS.md`.
    chat text, not just inside the pasteable block** — he skims or skips the
    prompt itself. See `notes/grok-diary.md` §0 for the case that established
    this (round 3, 2026-08-22).
+10. **A dropped-edge `_dropped` note describing an edge that DOES exist in
+    the live graph must use `reason: "caveat"`, never `"note"`.** Learned
+    2026-08-25 (Canada round): `"note"` means "not a dropped edge at all",
+    and the validator errors if its source/target names a real edge.
+    `"caveat"` is the reason built for exactly this: an annotation ON a
+    minted edge. **Generalized 2026-08-25 (wiring round): this validator
+    check applies to EVERY `DroppedReason` except `caveat`/`resolved`, not
+    just `"note"`** — a `no-document`, `wrong-direction`, etc. entry is
+    equally an error if its (source, target) exact-matches a live edge.
+    Concretely this means: before finalizing ANY `_dropped` entry, check its
+    exact (source, target) against the WHOLE corpus's live edges (not just
+    this round's own proposals) — if it matches, the entry must be `caveat`
+    regardless of what this round's own verification concluded, because
+    "this round's evidence for this pair didn't hold up" and "this edge does
+    not exist" are different claims.
+11. **Build the id-collision check from the WHOLE corpus, not just
+    `src/data/research/*.json`.** 18 ids (`statcan-cpi`, `statcan-lfs`,
+    `boc-mpr`, etc.) live only in the hand-written seed files
+    (`src/data/reports.ts`, `src/data/dependencies.ts`) and won't show up in
+    a naive `grep -r '"id"' src/data/research/` sweep — exactly the gap that
+    let a Grok batch re-propose `statcan-cpi` as a "new" node in the Canada
+    round. The same principle applies to edges: build the existing-edge
+    cross-check (rule 10 above) from `dependencies.ts` **and** every research
+    JSON, not just the research JSONs.
+12. **A dependency edge between a node and its `part_of` container is a
+    validator ERROR** ("containment is not a dependency" — see the long
+    comment on `part_of` in `types.ts`). Grok routinely rediscovers a
+    containment relationship (a sub-survey published inside its parent
+    survey, a commodity sub-account inside a larger account) and proposes it
+    as an ordinary dependency edge. Before minting, cross-check every new
+    edge's (source, target) against the corpus-wide `part_of` map in both
+    directions; drop matches as a `note` (the fact is real, already modeled
+    structurally, not as an edge).
+13. **A fresh, well-verified finding that contradicts an already-live edge
+    is not automatically right just because it's freshly verified.**
+    Established 2026-08-25 (wiring round, the Andean direction conflicts):
+    three "corrected" directions had genuine primary-source support, but the
+    "wrong" direction was what the corpus already had, from an earlier
+    independently-researched round. Caveat the existing edge, defer the new
+    claim, do not silently swap the direction — same principle as rule 2/3
+    applied to edges that already exist rather than edges being proposed for
+    the first time.
 
 **Process rules (Thomas, 2026-08-20).** Update this file every work turn, not
 just at milestones: copy the current file to `archive/Previous Handoffs/`
 first, then append a dated section — additive, not a rewrite (a full rewrite
-is reserved for when the file goes unwieldy; that's what happened 2026-08-22).
-Hand off rather than push on when: you re-derive something already settled,
-contradict an earlier answer, retry a tool past the documented once-only
-policy, or the session has been through a compaction. Say "this is a good
-point to hand off," write this file, stop. Project memory: write entries as
-you go; if it refuses, park in `notes/memory-pending-<date>.md` and say so
-here.
+is reserved for when the file goes unwieldy; that's what happened 2026-08-22,
+and twice more on 2026-08-25 — once to fold in the finished BRICS G.4
+narrative, once again same day to fold in the Canada round once the wiring
+round landed on top of it). Hand off rather than push on when: you re-derive
+something already settled, contradict an earlier answer, retry a tool past
+the documented once-only policy, or the session has been through a
+compaction. Say "this is a good point to hand off," write this file, stop.
+Project memory: write entries as you go; if it refuses, park in
+`notes/memory-pending-<date>.md` and say so here.
 
 ---
 
-## 3. Where the project is (2026-08-22)
+## 3. Where the project is (2026-08-25, wiring round)
 
-**Live corpus: 3,110 reports · 2,150 dependencies** (after the item 6b
-BRICS G.4 full dispatch mint, below — 8 new nodes and 26 new edges over the
-item-6a baseline). `npm run validate` **120/120 logic checks, exits 0**,
-`tsc --noEmit` clean. The 2026-08-20 mint (1,250 → 3,091), the per-country
-fold, the full-review punch list, and the pulse/beam round are all DONE —
-details in memory and the archived handoffs. **Worth re-running
-`npm run validate` on Thomas's machine once** — every mint including this
-one was built and verified from a sandbox copy, never on-device.
+**Live corpus: 3,254 reports · 2,476 dependencies.** `npm run validate`
+clean exit 0, `tsc --noEmit` clean, `npm run build` clean at 1,504 kB.
+Reports unchanged since the Canada round (this pass minted 0 new report
+nodes by design — wiring connects existing nodes); dependencies up 165 from
+the Canada-round total of 2,311.
 
-**BRICS G.4 full dispatch (item 6b) — LANDED 2026-08-22.** New slice
-`src/data/research/brics-g4-2026-08-22.json`, 8 nodes / 26 edges. Full
-narrative is in the "Last written" block above; summary here for quick
-reference. New international-standard nodes: `oecd-oslo-manual` (Oslo
-Manual, 3rd ed. 2005), `who-rose-angina-questionnaire`, `who-gshs` (Global
-School-based Student Health Survey), `un-wpp-methodology` (World Population
-Prospects methodology), `fao-world-programme-census-agriculture`, `un-seea`
-(System of Environmental-Economic Accounting), `imf-mfsmcg-2016` (Monetary
-and Financial Statistics Manual and Compilation Guide), `who-icd-10`.
-Brazil: 22 new edges (9 industrial/business surveys → `isic`, plus PINTEC →
-Oslo Manual and → Frascati Manual; PNS → Rose Angina Questionnaire; PeNSE →
-GSHS; Censo Demográfico → UN census principles; population projections →
-WPP methodology; Censo Agropecuário → FAO WCA; environmental-economic
-accounts → SEEA; three BCB/fiscal edges — monetary statistics → MFSM 2016,
-international reserves → BPM6, below-the-line fiscal result → GFSM 2014;
-IPCA and INPC → CPI Manual, `cites`). China: 4 new edges (surveyed
-unemployment → 19th-ICLS resolution; R&D expenditure → Frascati Manual;
-Health Statistical Yearbook → ICD-10; CPI → COICOP 2018, closing a gap
-earlier rounds left open since the monthly release itself never names
-COICOP — the citation lives on a separate NBS methodology page). Two
-documented denials, correctly not minted: Brazil's POF/SNIPC vs COICOP
-("ainda não harmonizadas"), China's Mineral Resources Report vs UNFC
-(affirms domestic GB/T standards instead). **New duplicate-node flag**:
-`cn-stats-law`/`cn-stats-law-impl-regs` (Grok-imported, isolated) likely
-duplicate the already-researched `cn-statistics-law` (also isolated) — see
-§5 item 3c below, needs Thomas's call, same shape as item 6a's
-br-ibge-sistema-contas-nacionais/br-scn flag. Structural result: main
-component 978 → 1154 nodes; Brazil in main component 58/99 → 73/99; China
-54/66 → 55/66. `npm run validate` 120/120 exit 0, `tsc --noEmit` clean,
-`npm run build` clean at 1,488 kB.
+**BRICS (G.1–G.4)** — full narrative in
+`archive/Previous Handoffs/HANDOFF-2026-08-22-brics-g4-full.md` and project
+memory `grok_archive_state.md`. Two duplicate-node flags still open for
+Thomas's call (§5 items 5–6 below).
 
-**BRICS G.4 partial (item 6a) — LANDED 2026-08-22.** New slice
-`src/data/research/brics-g4-partial-2026-08-22.json`, 0 nodes / 4 edges,
-all `methodology_depends_on`:
-- `br-ibge-contas-regionais → sna-2008` — IBGE's municipal/regional-GDP
-  page states verbatim: "estando em conformidade, portanto, com o manual
-  System of national accounts 2008, SNA 2008..."
-- `br-bcb-balanco-pagamentos → imf-bpm6` — a BCB methodological-note PDF
-  (found via search; the bcb.gov.br portal page itself is JS-rendered and
-  returns nothing to WebFetch) states verbatim: "...em conformidade com a
-  sexta edição do Manual de Balanço de Pagamentos e Posição Internacional
-  de Investimento (BPM6), do Fundo Monetário Internacional (FMI)".
-- `cn-bop → imf-bpm6` — SAFE's own quarterly BOP release states verbatim:
-  "The table is compiled according to BPM6."
-- `cn-gdp-national-accounts → sna-2008` — NBS's own official Q&A on the
-  State Council's 2016 CSNA revision states verbatim: "2016年核算体系采用了
-  与2008年SNA基本一致的核算方法" ("the 2016 accounting system adopted
-  accounting methods essentially consistent with the 2008 SNA").
-- **Held out**: `br-ibge-sistema-contas-nacionais` (near-duplicate of the
-  already-wired `br-scn` — see §5 item 9 below, needs Thomas's call before
-  anything is wired to it) and `cn-mof-fiscal-statistics → imf-sdds` (DSBB
-  JS-wall, needs a real-browser fetch).
-- Method: grepped every Brazil/China unwired node's description for the
-  corpus's own known international-standards node names (the G.3
-  technique), which surfaced 6 candidates (2 discarded as substring false
-  positives on "ICIO"), then independently raw-verified each surviving
-  candidate against a LIVE primary source before minting — the node
-  descriptions themselves, being unverified Grok-batch summaries, were only
-  a pointer to where to look, per the corrected §2 rule 3 above.
+**Grok research-queue, Canada tier — LANDED earlier 2026-08-25.** Condensed
+account above; full narrative archived at
+`archive/Previous Handoffs/HANDOFF-2026-08-25-canada-round.md`.
 
-**Round 3 (5w) — LANDED 2026-08-22.** New slice
-`src/data/research/crossborder-round3-2026-08-22.json`:
-- New node `mu-national-accounts` (Statistics Mauritius quarterly national
-  accounts, ESI Issue 1937). Edge `mu-national-accounts → sna-2008`
-  (SNA 2008 quote raw-verified — the edge round 1/2 had to hold out for
-  lack of both a node and a current quote).
-- Mauritius SDDS Plus: Thomas's merge call — kept the existing
-  institutional `mu-statsmauritius → imf-sdds-plus` edge AND added two new
-  series-level edges (`mu-national-accounts`, `mu-statsmauritius-cpi` →
-  `imf-sdds-plus`), all three citing the same NSDP/PR 26/077 sources.
-- Three new standards facts, none previously wired: `af-bop → imf-e-gdds`
-  (DAB's own site titles its BOP file "Balance of Payments Transactions
-  (BPM6)"), `iq-bop → imf-e-gdds` (DSBB BOP DQAF, BPM6 classification
-  language), `ir-national-accounts → imf-e-gdds` (DSBB NA DQAF, honest
-  SNA-1968/1993 vintage disclosure).
-- **Held out again: Afghanistan CR 06/251.** Grok's redo re-cited the same
-  two GDDS quotes from IMF Country Report 06/251 as round 1/2 (which also
-  couldn't verify them). Two rounds in a row now; tell Grok to drop this
-  specific claim rather than re-attempt it. Recorded as a `caveat`
-  dropped-note on the existing `af-nsia → imf-e-gdds` edge.
-
-**The cross-border mint (5s) — LANDED 2026-08-22.** One new slice,
-`src/data/research/crossborder-standards-2026-08-22.json`: 10 nodes, 44
-edges, every `basis` carrying its raw-verified quote. **Every one of the 19
-zero-cross-border-edge countries now has at least one cross-border edge**.
-Full account: `notes/crossborder-verification-2026-08-22.md` and
-`archive/Previous Handoffs/HANDOFF-2026-08-22-5z.md` §3.
+**Grok research-queue, wiring tier — LANDED, this pass.** See the "Last
+written" block above for the full account. Ten new slices in
+`src/data/research/`: `indonesia-wiring-grok-2026-08.json`,
+`taiwan-wiring-grok-2026-08.json`, `ph-vn-th-mm-wiring-grok-2026-08.json`,
+`mexico-wiring-grok-2026-08.json`, `jp-kr-wiring-grok-2026-08.json`,
+`ir-iq-tr-sy-wiring-grok-2026-08.json`, `ar-cl-wiring-grok-2026-08.json`,
+`andean-wiring-grok-2026-08.json`, `ae-sa-wiring-grok-2026-08.json`,
+`af-ye-sd-so-wiring-grok-2026-08.json`.
 
 **Git:** unknown to agents by design — see rule 1.
 
@@ -383,10 +289,10 @@ Assume all of this exists and works; each has a dated comment at the site.
   rest length + opacity. Never reintroduce additive/white pulse cores.
   **Continuous-database edges** (`Report.continuous`, 35 nodes) draw as an
   animated flow in the edge shader, zero teardrop particles.
-- **Menu bar**: Panels ▾ (fresh sessions default all 8 ON-and-minimized as
-  of item 5z, `rig.panels.v1`), Views ▾ (saved views, ★ open-on-load, deep
-  links via `?rig=`), Help ▾ (renders START-HERE.md raw). Tier bar + status
-  line deliberately NOT in the menu — primary navigation.
+- **Menu bar**: Panels ▾ (fresh sessions default all 8 ON-and-minimized),
+  Views ▾ (saved views, ★ open-on-load, deep links via `?rig=`), Help ▾
+  (renders START-HERE.md raw). Tier bar + status line deliberately NOT in
+  the menu — primary navigation.
 - **Disclosure folds TWICE** (`hierarchy.ts`): tier ladder folds into family
   orbs (`orb:`), then per-country orbs (`corb:`) until a country is
   double-clicked open (`openedCountries`). Orb `country` is the MODAL member
@@ -395,16 +301,16 @@ Assume all of this exists and works; each has a dated comment at the site.
 - **Galaxy clustering** (`galaxyForce.ts`, `view.galaxy` slider): pulls nodes
   toward their OWN family/country centroid. Read its file comment and
   `geoAffinity.ts`'s before touching either — similar-looking, different
-  questions. Provinces are NOT a third level (79% of `region` values are
-  free prose — needs a data pass first).
+  questions. Provinces are NOT a third level (most `region` values are free
+  prose — needs a data pass first).
 - **Isolate** (`view.isolateFocus`) hides everything off the traced chain,
   built on the UNFILTERED index so cross-border edges survive (pinned
   Israel/MERCOSUR test). **Groups panel** ("Regions & Countries",
   bottom-centre) isolates continents/blocs/publishers/single countries the
   same way via multi-seed `computeGroupFocus`. Neighbourhood slider bounds
   the walk by hops. Search runs over the FULL corpus (report AND group
-  results, as of item 5y) and tags results "outside filter"/"outside
-  isolate"; choosing an outside result is an informed exit.
+  results) and tags results "outside filter"/"outside isolate"; choosing an
+  outside result is an informed exit.
 - **Unlinked shelf** = a one-line summary pill → searchable list inside the
   Reports panel (`unlinkedOpen`).
 - **Escape** clears one level, topmost first (edge card → selection → group
@@ -423,96 +329,80 @@ Assume all of this exists and works; each has a dated comment at the site.
 ## 5. THE TODO LIST (live items only)
 
 ### In flight
-1. **Grok round 3 — DONE, minted as 5w.** Nothing further needed here.
-2. **Grok research queue (item 5v) — 24 prompts queued, replies not in yet.**
-   `notes/grok-research-queue-2026-08-22/00-README.md` is the index —
-   priority order, attachment manifest, and the "just collect replies,
-   don't try to mint them yourself" instruction for Thomas. When a Claude
-   session picks this back up: read that README, then work through
-   whichever `*-REPLY.*` files exist next to their prompts, same
-   parse-check → raw-verify → mint pipeline as every round before this.
+1. **Canada tier and wiring tier of the Grok research queue — DONE.**
+   Nothing further needed for prompts 01–06, 10–17, 19–20.
+2. **Grok research queue, still queued: prompt 18 and the new-countries
+   tier (30–37, ~90 reports / ~140 dependencies).**
+   - **Prompt 18** (Uruguay/Paraguay/Guyana/Suriname domestic wiring) has no
+     reply file — Thomas is fetching it. Once it lands, verify it the same
+     way as this round's wiring groups (raw-verify, cross-check ids/edges
+     against the WHOLE corpus per rules 10–13, mint, sandbox validate).
+   - **New countries (30–37)** has its own known duplicate-prompt overlap,
+     unresolved: Jordan/Lebanon/Kuwait/Qatar/Oman/Bahrain was run twice,
+     under `gulf-levant-research-*` and `me-gulf-levant-research-*`. Diff the
+     two for overlapping/conflicting claims (same method used on the Andean
+     wiring overlap this round — see the "Last written" block) before
+     verifying either.
+   - `notes/grok-research-queue-2026-08-22/00-README.md` is the index —
+     attachment manifest for what's left.
 
 ### [Thomas] — only you can
-2. **Render-consistency / camera-fit bug — DEFERRED by your own call** (deal
-   with it after the research round). One cause fixed (`cooldownTime`
-   15s→45s); the open suspect is `runFit`'s tracking pass false-tripping
-   `userOwnsCamera` via `cameraMovedOffFit` under OrbitControls damping —
-   needs live instrumentation BEFORE touching it. Details: 5p section of
+3. **Render-consistency / camera-fit bug — DEFERRED by your own call.** One
+   cause fixed (`cooldownTime` 15s→45s); the open suspect is `runFit`'s
+   tracking pass false-tripping `userOwnsCamera` via `cameraMovedOffFit`
+   under OrbitControls damping — needs live instrumentation BEFORE touching
+   it. Details: 5p section of
    `archive/Previous Handoffs/HANDOFF-2026-08-22-5r-full-pre-slim.md`.
-3. **Glow-slider check, one minute, only if** you ever see brightness-only
+4. **Glow-slider check, one minute, only if** you ever see brightness-only
    flicker at a STABLE camera distance (`notes/flicker-tests-2026-08-19.md`,
    Suspect 3, still untested).
-3b. **`br-ibge-sistema-contas-nacionais` vs `br-scn` — duplicate-node call
-   needed (item 6a, 2026-08-22).** Both are titled "Sistema de Contas
-   Nacionais" / "...Brasil (SCN)", same publisher IBGE, but different ids
-   from different research rounds (`br-scn` from the earlier G.2 hand
-   round, already wired; `br-ibge-sistema-contas-nacionais` from the
-   2026-08-17 Grok domestic batch, unwired). Either merge/retire the Grok
-   one, or confirm they're genuinely distinct (different vintage/scope)
-   before an agent wires anything to it. Full note in the `_dropped` block
-   of `brics-g4-partial-2026-08-22.json`.
-3c. **`cn-stats-law` / `cn-stats-law-impl-regs` vs `cn-statistics-law` —
-   duplicate-node call needed (item 6b, 2026-08-22).** Same shape as 3b
-   above, found this round: `cn-stats-law` and `cn-stats-law-impl-regs`
-   (both from the 2026-08-17 Grok import, `cn-china-grok-2026-08.json`,
-   both fully isolated, 0 edges) look like duplicates of the already
-   hand-researched, richly-quoted `cn-statistics-law` (from
-   `cn-g2-budget-law-equalization.json` — ALSO currently isolated with 0
-   edges, despite the quality of its research). Either the base
-   Statistics Law and its 2017 implementing regulations are genuinely two
-   documents (in which case `cn-stats-law-impl-regs` is NOT a duplicate of
-   the other two and should stay separate) or `cn-stats-law` duplicates
-   `cn-statistics-law` outright — needs Thomas's read of the three
-   descriptions side by side. Full note in the `_dropped` block of
-   `brics-g4-2026-08-22.json`. Nothing wired to any of the three pending
-   his call.
+5. **`br-ibge-sistema-contas-nacionais` vs `br-scn` — duplicate-node call
+   needed.** Both titled "Sistema de Contas Nacionais" / "...Brasil (SCN)",
+   same publisher IBGE, different ids from different research rounds
+   (`br-scn` already wired; `br-ibge-sistema-contas-nacionais` unwired).
+   Full note in `_dropped` block of `brics-g4-partial-2026-08-22.json`.
+6. **`cn-stats-law` / `cn-stats-law-impl-regs` vs `cn-statistics-law` —
+    duplicate-node call needed.** Same shape as item 5. Full note in
+    `_dropped` block of `brics-g4-2026-08-22.json`.
+7. **`qc-perequation -> isq-vitalite-economique` — needs a human read of
+   Quebec regulation F-2.1 r.11 s.5.1 directly** (Canada round, 2026-08-25).
+   Filed `deferred` in `qc-quebec-grok-2026-08.json`.
+8. **Three Andean direction conflicts need a human to read both citations
+   side by side** (wiring round, 2026-08-25) — `co-comercio-exterior` ↔
+   `co-bop`, `co-emmet` ↔ `co-ipi`, `ec-comercio-exterior` ↔ `ec-bop`. The
+   corpus has each live in one direction from an earlier round; this
+   round's Grok research independently verified evidence for the OPPOSITE
+   direction for all three. Neither direction was assumed correct — the
+   existing edge is `caveat`'d, the new claim `deferred`, in
+   `andean-wiring-grok-2026-08.json`.
+9. **`bo-bop -> imf-bpm6` is contradicted by its own cited source** (Bolivia's
+   central bank says BPM5, not BPM6) and no `imf-bpm5` node exists to
+   redirect to — a real gap, not an error. If BPM5 is worth modeling as its
+   own node (other countries on BPM5 may exist too), that's a scope call;
+   filed `wrong-target` in `andean-wiring-grok-2026-08.json` either way.
 
 ### [Agent] — next build rounds
-4. **DONE, item 5y (2026-08-22).** Search bar now finds/isolates a region,
-   bloc, publisher, or country, not just report nodes.
-5. **"Why so few?" affordance** on group isolates — "Middle East → 6 shown"
-   is correct (cross-border gaps) but reads as a bug with no explanation on
-   screen. More useful as the gap list shrinks.
-6. **Re-fold / "N countries opened" affordance** — currently only a full
-   Reset re-folds an opened country; no readout of how many are open.
-7. **Typed edges** — what a trunk's "type" means when one line stands for 57
-   mixed relationships. Not started; needs a design conversation first.
-8. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
-9. **Research backlog — BRICS slice CLOSED for this pass, item 6b
-   (2026-08-22); wider backlog still open.** Original scope: 722
-   candidates-only nodes (no edges) corpus-wide, 170 `_dropped` leads,
-   BRICS G.4 (Brazil/China never systematically dispatched). Item 6a did a
-   grep-first low-hanging-fruit pass (4 edges); item 6b then re-measured
-   from scratch (the 2026-08-20 Grok archive mint had grown Brazil to 99
-   nodes and China to 66, making the old "19 unwired"/"7 unwired"/
-   "722 candidates" counts stale) and ran a genuine 8-agent systematic
-   dispatch covering every Brazil/China node with no edge to any
-   international-standard node (86 of 99 Brazil nodes, 48 of 66 China
-   nodes at the start of this round) — see §3 item 6b above for the full
-   result (8 new nodes, 26 new edges, 26 `_dropped`). Brazil: 33/99 nodes
-   now wired to an international standard (was 13/99), 73/99 in the main
-   component (was 58/99). China: 22/66 wired (was 18/66), 55/66 in the
-   main component (was 54/66). **Still open**: the wider corpus-wide
-   candidates-only/`_dropped` backlog outside BRICS (this and the prior
-   round only ever looked at BR/CN); the specific China leads carried
-   forward this round (`cn-budget-law` → `imf-sdds`, real at the country
-   level per an IMF Article IV report but blocked on the dsbb.imf.org
-   JS-wall for a Budget-Law-specific citation; a CAEP GEP-accounting
-   guideline that cites SEEA-EEA 2012 but needs its own node, separate
-   from the Eco-Environment Yearbook candidate that doesn't cite it; the
-   MNR-UNECE UNFC bridging document, real per UNECE's own site but 403'd
-   this session); Brazil's `br-mtur-anuario-turismo` sibling product
-   "Economia do Turismo" (does cite UNWTO/OMT definitions, unlike the
-   Anuário candidate); and item 3c's new `cn-stats-law` family duplicate
-   flag. **Correction to the standing "grep node descriptions" advice
-   from G.3**, reconfirmed this round: for Grok-batch-imported nodes
-   specifically, the description is a summary the grep locates, not a
-   citable quote by itself — still raw-verify against a live source
-   before minting (see §2 rule 3).
-10. **Housekeeping** (needs shell): actually delete the tombstoned
+10. **"Why so few?" affordance** on group isolates — "Middle East → 6 shown"
+    is correct (cross-border gaps) but reads as a bug with no explanation on
+    screen. More useful as the gap list shrinks.
+11. **Re-fold / "N countries opened" affordance** — currently only a full
+    Reset re-folds an opened country; no readout of how many are open.
+12. **Typed edges** — what a trunk's "type" means when one line stands for
+    many mixed relationships. Not started; needs a design conversation first.
+13. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
+14. **Research backlog** — the Grok research-queue backlog (item 2 above,
+    prompt 18 + new countries) is the concrete next chunk of the
+    "shrink the unlinked/candidates-only count" goal.
+15. **Housekeeping** (needs shell): actually delete the tombstoned
     `src/data/slices.generated.ts` and the orphaned `.rig-sweep` CSS rule in
     `uiTheme.ts` (both → `_to_delete/`). `notes/stale-urls-2026-08-20.md`
-    exists for the 37 real 404s from the mint's URL check.
+    exists for the 37 real 404s from the Canada mint's URL check.
+    `_to_delete/` has accumulated several sandbox tarballs/zips across
+    sessions, all logged safe-to-delete in `_to_delete/README.md` — periodic
+    sweep is Thomas's own job per rule 6. `notes/_all-corpus-ids-2026-08-25b.txt`
+    and `notes/_all-corpus-edges-2026-08-25.txt` are this round's id/edge
+    cross-check lists — regenerate fresh before the next mint rather than
+    reusing (the corpus has moved since).
 
 ### Standing decisions — do not re-raise
 Geo-exploration: dropped entirely. Right-drag panning + low-end zoom:
@@ -548,7 +438,12 @@ personal file — leave it alone.
   `public/corpus-data.json` (generated). Browser loads it via
   `browserCorpus.ts`; Node scripts via `src/data/index.ts` (never import
   from browser code); both share `assembleCorpus.ts`. Validation:
-  `scripts/validate-data.ts` + `scripts/test-logic.ts` (120 checks).
+  `scripts/validate-data.ts` + `scripts/test-logic.ts` (120+ checks). Note
+  from the Canada round: **id-collision checks must include
+  `src/data/reports.ts` and `src/data/dependencies.ts`**, not just the
+  research JSON files (rule 11, §2). Note from the wiring round: **the same
+  applies to edge-collision checks, and edges must ALSO be checked against
+  the `part_of` containment map** (rules 10, 12, §2).
 
 ---
 
@@ -559,7 +454,27 @@ personal file — leave it alone.
   → NaN edge weight → NaN PageRank corpus-wide, silent and total. `Relation`
   is only `audits`/`supersedes`. Grok output routinely invents types — map
   them, never pass them through. Same for `Domain` and every closed union:
-  cast, not parsed — check `types.ts` before inventing a value.
+  cast, not parsed — check `types.ts` before inventing a value. (The wiring
+  round's Grok output stuck to valid values throughout — worth noting since
+  it isn't guaranteed.)
+- **`DroppedReason` — a non-`caveat`/`resolved` reason whose (source,
+  target) matches a live edge is a validator error.** Originally learned as
+  a `"note"`-specific trap (rule 10, Canada round); generalized this round
+  (rule 10 update, §2) after 19 `no-document`/`wrong-direction` entries hit
+  the same check — the rule is about the CHECK, not the specific reason
+  string. Always cross-check `_dropped` entries against the whole corpus's
+  live edges, not just this round's own proposals.
+- **A dependency edge between a node and its `part_of` container is a
+  validator ERROR** (rule 12, §2 — bit the wiring round: 4 edges Grok
+  proposed were really containment relationships already modeled via
+  `part_of`).
+- **A fresh, well-verified finding can still be wrong to mint** if it
+  contradicts an edge the corpus already has from independent earlier
+  research (rule 13, §2 — the wiring round's 3 Andean direction conflicts).
+  Caveat + defer, don't silently override.
+- **A fresh id-collision check must scan `src/data/reports.ts` and
+  `src/data/dependencies.ts` too, not just `src/data/research/*.json`**
+  (rule 11, §2 — bit the Canada round: `statcan-cpi` re-proposed as "new").
 - **`PanelShell` supports one panel per edge; the bottom edge belongs to the
   dock.** A new bottom panel is a one-line dock-cell addition, not a
   coordinate hunt. Reserve dock space with an empty grid TRACK, never an
@@ -585,20 +500,31 @@ personal file — leave it alone.
   software rendering (curtain unmounts on a timer for this reason).
 - **Orb `country` is modal, not membership** — anything deciding membership
   must read `.members`.
-- **Grok's JSON is not reliably JSON** — parse-check first. Its ids and
-  enum values are inventions until grepped against the corpus. Never
-  hand-edit JSON insertions — generate them. Its stated `files_received`
-  confirmations are not reliable either — verify by checking content
-  plausibly reflects attached files. **Its imported node DESCRIPTIONS are
-  also not a citable basis by themselves (item 6a, 2026-08-22)** — a
-  Grok-batch description naming a standard is a lead, not a quote; always
-  raw-verify against a live primary source before minting off it.
+- **Grok's JSON is not reliably JSON** — parse-check first (though both the
+  2026-08-25 Canada and wiring batches came back clean). Its ids and enum
+  values are inventions until grepped against the FULL corpus (research
+  files AND seed files). Never hand-edit JSON insertions — generate them.
+  Its stated `files_received` confirmations are not reliable either. **Its
+  imported node DESCRIPTIONS are also not a citable basis by themselves** —
+  a Grok-batch description naming a standard is a lead, not a quote; always
+  raw-verify against a live primary source before minting off it. **A
+  single region/country's own verification pass can't see cross-region
+  problems** — dependencies whose endpoint failed verification elsewhere,
+  or that duplicate/contradict an already-minted edge from a different
+  slice, only show up on a corpus-wide second pass. **Grok can run the same
+  region under multiple prompt names across sessions, producing overlapping
+  or conflicting proposals** (wiring round: Andean bloc run 3 times; new
+  countries tier still has the Gulf/Levant duplicate unresolved) — dedupe
+  and diff for conflicts BEFORE verifying, not after.
 - **Never reintroduce faceted node geometry** (fresnel rims) or
   additive/white pulse cores.
-- **The IMF DSBB tables are JS-walled** (use a real browser, not WebFetch —
-  reconfirmed item 6a, 2026-08-22 on China's GGO00 row); its PDF observance
-  reports parse fine headless. imf.org press releases and elibrary.imf.org
-  403 headless fetchers but load in a browser.
+- **The IMF DSBB tables are JS-walled** (use a real browser, not WebFetch);
+  its PDF observance reports parse fine headless. imf.org press releases and
+  elibrary.imf.org 403 headless fetchers but load in a browser. **Reachable
+  workaround found this round:** DSBB's Angular SPA calls a plain JSON API
+  at `dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=X&categoryCode=Y`
+  — hitting that directly (curl/WebFetch) returns the real DQAF narrative
+  text without needing a rendered browser session.
 - **imf.org PDF *documents* (not press releases) 403 everything** —
   WebFetch, curl (even with a browser UA), Wayback Machine proxying, all
   403. **Fix: navigate Chrome to
@@ -607,28 +533,49 @@ personal file — leave it alone.
   search), not `get_page_text`, to check whether a phrase exists anywhere
   in a long lazy-loaded document — `get_page_text` truncates at a byte cap.
 - **Some government portal landing pages are JS-rendered and return
-  nothing useful to WebFetch** (bcb.gov.br/estatisticas/setor-externo,
-  item 6a, 2026-08-22; also bcb.gov.br/estatisticas/panoramabc, item 6b) —
-  search for the underlying methodological-note PDF or a specific sub-page
-  instead of fetching the portal shell.
+  nothing useful to WebFetch** (Canada examples: `hamilton.ca`,
+  `brampton.ca`, `montreal.ca`, `ontario.ca/laws`; wiring-round examples:
+  several `.gov.mx`/`.gov.ph`/`inegi.org.mx` index pages served React shells
+  with the real content one PDF/sub-path away) — search for the underlying
+  document/sub-page instead of fetching the portal shell; curl+pdftotext or
+  a real browser session when WebFetch alone comes back empty on a page you
+  can see resolves fine. **`.docx` evidence URLs aren't renderable by
+  WebFetch at all** — download and extract `word/document.xml` directly.
+- **A soft-404 can return HTTP 200 with a JS alert body saying the file
+  doesn't exist** (`mods.go.kr`, this round) — a real "dead link" that a
+  bare status-code check won't catch; read the actual body.
+- **A WAF/Incapsula/Cloudflare block can look identical to real content at
+  a glance** — several `bcentral.cl` and `dane.gov.co` pages returned
+  HTTP 200 with a JS-challenge shell instead of the real page (confirmed via
+  `file` on the downloaded body, not just the status code). Cross-check with
+  an independent source or a second non-leading WebFetch prompt before
+  trusting a quote from a page you haven't confirmed is real.
 - **ibge.gov.br's main site sits behind a Cloudflare JS challenge that
-  silently 403s WebFetch** (item 6b, 2026-08-22, confirmed by direct curl) —
-  WebFetch was caught fabricating plausible content for a 403'd IBGE URL
-  this round. Use a real browser session for ibge.gov.br pages, or fetch
-  documents directly from `ftp.ibge.gov.br` / `biblioteca.ibge.gov.br` /
-  `concla.ibge.gov.br`, none of which sit behind the same challenge.
+  silently 403s WebFetch** — WebFetch was caught fabricating plausible
+  content for a 403'd IBGE URL once. Use a real browser session for
+  ibge.gov.br pages, or fetch documents directly from `ftp.ibge.gov.br` /
+  `biblioteca.ibge.gov.br` / `concla.ibge.gov.br`.
 - **`mnr.gov.cn` (China's Ministry of Natural Resources) was entirely
-  unreachable from this sandbox** (item 6b, 2026-08-22 — DNS/proxy failure
-  on every attempt, both WebFetch and direct curl; a different failure
-  shape from the DSBB JS-wall). Worked around this round via mirrors
-  (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and gov.cn's own
-  announcements; a future session with different egress may reach it
-  directly.
-- **dsbb.imf.org confirmed JS-walled again (item 6b, 2026-08-22)** — every
-  path tried served an identical byte-for-byte shell. China's SDDS/NSDP
-  metadata (needed to source a `cn-budget-law`/`imf-sdds`-style edge
-  properly) sits behind this wall; a real-browser fetch is the only known
-  fix, same as the DQAF/GGO00 case at item 6a.
+  unreachable from this sandbox** (DNS/proxy failure on every attempt, both
+  WebFetch and direct curl — different failure shape from the DSBB JS-wall).
+  Worked around via mirrors (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and
+  gov.cn's own announcements.
+- **A GROKREADME.md claim that a standard id "already exists in the
+  corpus" is not itself verified** — `sna-1993` was cited this way but does
+  not exist anywhere in the live 3,254-id corpus (only `sna-2008` and
+  `sna-2025` do). Two wiring groups (Myanmar, Afghanistan/Yemen) independently
+  hit this; both dropped `no-node-yet` rather than assumed. Worth a scope
+  call: if enough countries cite SNA 1993 specifically, it may be worth
+  minting as its own node.
+- **Grok will reuse one jurisdiction's exact quote/URL as "evidence" for a
+  different jurisdiction's claim** when the underlying document shapes are
+  similar (Ontario municipal batch, Canada round: Hamilton's tax page cited
+  for Brampton's and London's claims). Some reuse is legitimate (a genuinely
+  shared page); the tell for the illegitimate kind is the quote naming a
+  specific *other* place by name.
+- **dsbb.imf.org confirmed JS-walled at the page level** — see the JSON-API
+  workaround above; a plain browser fetch of the rendered page also works
+  when the API route isn't known yet.
 
 ---
 
@@ -640,9 +587,11 @@ dated lesson to the diary after processing every Grok reply. Every handoff
 carries this pointer (Thomas's standing instruction, 2026-08-22).
 
 Prompts live beside the diary as `notes/grok-prompt-*.md`; the diary's
-"Round log" section is the queue state. Nothing currently in flight —
-round 3 landed as 5w; the 24-prompt research queue (item 5v) is waiting on
-Thomas + Grok to fill in replies.
+"Round log" section is the queue state. The 2026-08-22 research-queue folder
+(`notes/grok-research-queue-2026-08-22/`) is a separate, larger batch of 27
+regional prompts — its own `00-README.md` is the index for that one. Canada
+(01–06) and domestic wiring (10–17, 19–20) landed 2026-08-25 (§3/§5 item 1
+above); prompt 18 and new countries (30–37) are still queued (§5 item 2).
 
 ---
 
