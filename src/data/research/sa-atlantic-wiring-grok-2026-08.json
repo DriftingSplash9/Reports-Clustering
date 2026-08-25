@@ -1,0 +1,42 @@
+{
+ "reports": [],
+ "dependencies": [
+  {
+   "source_report_id": "py-cuentas-nacionales",
+   "target_report_id": "sna-2008",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Banco Central del Paraguay's Sistema de Cuentas Nacionales (base year 2014) is compiled adjusted to the System of National Accounts 2008 (SCN 2008). Evidence: “El SCNPY está ajustado a los estándares internacionales vigentes y que están compilados en el Sistema de Cuentas Nacionales del 2008 (SCN 2008), que proporciona los lineamientos estadísticos para la elaboración de un conjunto completo, coherente y flexible de cuentas macroeconómicas”",
+   "evidence_url": "https://www.bcp.gov.py/documents/20117/213049/Sistema+de+Cuentas+Nacionales+de+Paraguay+-+A%C3%B1o+Base+2014%281%29.pdf/ab49f5e6-1f7f-9045-b400-5ade8582ff95?t=1750439877627"
+  },
+  {
+   "source_report_id": "sr-ipc",
+   "target_report_id": "cpi-manual",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Suriname's CPI (ABS) is predominantly compiled following the Consumer Price Index Manual: Theory and Practice 2004, the earlier edition already covered by this corpus's single cpi-manual node (its description spans both the 2004 and 2020 editions as one lineage, unlike SNA/COICOP which are split by edition). Evidence: “The CPI of Suriname is predominantly compiled following the Consumer Price Index Manual: Theory and Practice 2004 (ILO, IMF, Organization for Economic Corporation and Development (OECD), Eurostat, United Nations, and the World Bank).”",
+   "evidence_url": "https://dsbb.imf.org/e-gdds/dqaf-base/country/SUR/category/CPI00"
+  },
+  {
+   "source_report_id": "sr-pib",
+   "target_report_id": "imf-e-gdds",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Suriname's ABS publishes its own National Summary Data Page under the IMF's enhanced General Data Dissemination System (e-GDDS), listing National Accounts (GDP) as the first disseminated data category. Verified directly on ABS's own e-GDDS page rather than the (currently erroring) DSBB page Grok cited. Evidence: page title “Enhanced General Data Dissemination Standard EGDDS” states “Data linked from this page correspond to data described in the International Monetary Fund's DSBB”, with “National Accounts (GDP)” listed as the first macroeconomic data category with links to browse data, download in SDMX format, and access DSBB metadata.",
+   "evidence_url": "https://statistics-suriname.org/enhanced-general-data-dissemination-standard-egdds/"
+  },
+  {
+   "source_report_id": "uy-comercio-exterior",
+   "target_report_id": "hs",
+   "relationship_type": "methodology_depends_on",
+   "basis": "Two-hop chain, each hop independently verified against a primary source (same standard already used for ar-comercio-exterior -> hs in ar-cl-wiring-grok-2026-08.json). (1) BCU's own import/export price-and-volume-index methodology document confirms Uruguay's foreign trade statistics are classified using the Nomenclatura Común del MERCOSUR (NCM): “una descripción de las mercaderías basada en la codificación de la Nomenclatura Común del MERCOSUR (NCM)”, describing the Documento Único Aduanero (DUA) that underlies the release. (2) Uruguay's own Presidencia decree on the NCM (Decreto, mef_515.pdf) states the NCM is itself based on the Harmonized System: “(Basada en el Sistema Armonizado de Designación y Codificación de Mercancías, actualizado con su VII Enmienda)”. Grok's originally-cited bcu.gub.uy/Estadisticas-e-Indicadores/Paginas/Comercio-Exterior.aspx page could not be raw-verified (robots.txt blocks WebFetch on that path); this methodology PDF is the BCU's own document for the same release family and was used instead.",
+   "evidence_url": "https://www.bcu.gub.uy/Estadisticas-e-Indicadores/ComercioExterior_ICB/ip_metodologi%CC%81a.pdf"
+  }
+ ],
+ "_dropped": [
+  {
+   "edge": "sr-ipc -> un-coicop-hbs-1999",
+   "source": "sr-ipc",
+   "target": "un-coicop-hbs-1999",
+   "reason": "wrong-target",
+   "why": "[SUSPECT] Grok's evidence_url (dsbb.imf.org/e-gdds/dqaf-base/country/SUR/category/CPI00, confirmed live via the API workaround) genuinely says “The weights used to compile the CPI are based on the 2007/2008 Household Budget Survey (HBS), within the framework of the COICOP” and “The COICOP classification is used up to the division (major group) level” -- the dependency itself is real. But no edition/year is stated anywhere on the page, and the corpus deliberately carries TWO COICOP nodes split by edition (un-coicop-hbs-1999 and un-coicop-2018, established at eg-cpi-social-insurance.json and za-fiscal-federalism.json respectively) on the explicit precedent that COICOP only governs a release when a document names the edition for that release specifically -- the same standard that kept StatCan/BLS/Vietnam/Thailand's generic 'COICOP' mentions unwired elsewhere in this corpus. Suriname's 2007/2008 HBS base period predates COICOP 2018's existence, which weakly favours un-coicop-hbs-1999, but the base is stated to change every 5 years and nothing on the page confirms which edition (if any) the CURRENT live release uses. Not minted either way; flagging as a duplicate-shaped call for Thomas alongside the existing br-scn/br-ibge and cn-stats-law duplicate-node items in HANDOFF.md §5 -- needs a document naming Suriname's current COICOP edition, or a judgment call to mint against the older (contemporaneous) edition anyway."
+  }
+ ]
+}
