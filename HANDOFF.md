@@ -379,6 +379,41 @@ Assume all of this exists and works; each has a dated comment at the site.
    under OrbitControls damping — needs live instrumentation BEFORE touching
    it. Details: 5p section of
    `archive/Previous Handoffs/HANDOFF-2026-08-22-5r-full-pre-slim.md`.
+   **2026-08-25 (Cowork browser session): cleanly reproduced, not yet
+   instrumented.** Three fresh reloads of localhost:5173 at identical
+   default settings (spread 200/geo 150/galaxy 100, Global tier) gave three
+   different results — one grossly oversized/overlapping cloud, and two that
+   landed with the camera apparently inside the cluster (edges off-frame),
+   one of which self-corrected on opening the View panel and one of which
+   didn't, and switching tiers didn't fix it either. The Zoom slider read
+   "fit" in every case, including the two that visibly weren't. No source
+   was touched. Full writeup + one screenshot:
+   `notes/render-consistency-repro-2026-08-25.md`. Also caught the §7
+   panel-overlap DEV tripwire firing live, unrelated bug, noted there too.
+   Next step either way is a human call: add temporary logging to
+   `runFit`/`measureFit`/`nodeScaleFor` and reload-diff the numbers.
+   **2026-08-25 (same session, instrumented pass — Thomas: "add the
+   console.log and have at it"): two concrete findings, no fix applied.**
+   (1) Hard evidence that `forceGraph.onEngineStop(...)`'s `runFit(...)`
+   call (~L1618-1630) has NO warmup gate — captured a live call firing at
+   `tick: 0` with `nodeRadius: 67` (real settled clouds run to thousands of
+   units), producing a camera `distance: 378` snapped in far too close, and
+   permanently setting `settledOnce.current = true` — which cuts the
+   12-second tracking window's safety extension short before the cloud has
+   actually expanded. The tick loop's OWN mount-fit path is protected by
+   `MIN_TICKS_BEFORE_FIRST_PAINT`; this callback isn't, and it fires on the
+   library's own async digest schedule, independent of our tick counter.
+   (2) A backgrounded/hidden tab stops the entire `useFrame`-driven tracking
+   system outright (confirmed via `document.visibilityState`/`hasFocus()`
+   during one reload where zero tick-loop instrumentation fired in 30+s) —
+   plausibly what Thomas experiences if he tabs away while the page is
+   settling (which took anywhere from ~10 to ~30+s across reloads this
+   session). Two candidate fixes written up, neither applied: gate
+   `onEngineStop`'s fit the same way the mount fit is gated; and/or pause
+   `settleClock`/`sinceRefit` while hidden and force a `requestRefit()` on
+   `visibilitychange`. All temporary instrumentation was reverted — working
+   tree is clean, diffed against a pre-edit backup to confirm. Full account:
+   `notes/render-consistency-repro-2026-08-25.md` (addendum section).
 4. **Glow-slider check, one minute, only if** you ever see brightness-only
    flicker at a STABLE camera distance (`notes/flicker-tests-2026-08-19.md`,
    Suspect 3, still untested).

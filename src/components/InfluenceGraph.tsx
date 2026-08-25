@@ -218,6 +218,16 @@ const EDGE_PICK_TOLERANCE_PX = 9
 const MIN_TICKS_BEFORE_FIRST_PAINT = 30
 
 /**
+ * Cap on how many times `onEngineStop` is allowed to reheat the
+ * simulation instead of trusting it — see the reheat check in the
+ * `onEngineStop` callback below. A defensive backstop, not a tuned
+ * number: a graph that genuinely cannot drive `MIN_TICKS_BEFORE_FIRST_PAINT`
+ * real ticks inside a handful of reheats has a different problem, and
+ * looping forever on it would be worse than accepting an early stop.
+ */
+const MAX_PREMATURE_REHEATS = 5
+
+/**
  * How often, and for how long after a rebuild, the camera re-fits while a
  * layout is still actively settling — on top of the original rough-then-
  * precise pair below.
@@ -249,6 +259,19 @@ const MIN_TICKS_BEFORE_FIRST_PAINT = 30
  */
 const REFIT_INTERVAL_SECONDS = 0.2
 const REFIT_WINDOW_SECONDS = 12
+
+/**
+ * Ceiling on the `delta` fed into `settleClock`/`sinceRefit` each frame.
+ * `useFrame`'s `delta` is real wall-clock time since the last frame, and
+ * `requestAnimationFrame` — so every `useFrame` call — simply does not
+ * fire while the tab is backgrounded or hidden. Coming back after a
+ * minute away would otherwise hand the very next frame a delta of
+ * ~60 seconds, which blows straight through `REFIT_WINDOW_SECONDS` in one
+ * frame and ends tracking at exactly the moment it is needed most — right
+ * after a gap where nothing could have corrected the camera. Clamped only
+ * for the tracking clocks; nothing else here reads a clamped delta.
+ */
+const MAX_FRAME_DELTA_SECONDS = 0.5
 
 /**
  * The orb "click me" breath.
@@ -743,6 +766,12 @@ export default function InfluenceGraph({
    * simulation on every change without wanting a camera snap each time).
    */
   const settledOnce = useRef(false)
+  /**
+   * How many times `onEngineStop` has reheated the simulation instead of
+   * trusting a stop that arrived suspiciously early — see the check in the
+   * `onEngineStop` callback below, and `MAX_PREMATURE_REHEATS`.
+   */
+  const reheatAttempts = useRef(0)
   /** One-shot latch for `onReady` — see where it is fired, in `useFrame`. */
   const readyReported = useRef(false)
   /**
@@ -1597,6 +1626,7 @@ export default function InfluenceGraph({
     fitted.current = false
     tickCount.current = 0
     settledOnce.current = false
+    reheatAttempts.current = 0
     settleClock.current = 0
     sinceRefit.current = 0
 
@@ -1622,6 +1652,38 @@ export default function InfluenceGraph({
     // resettle in view, under whatever camera the user has by then.
     forceGraph.onEngineStop(() => {
       if (settledOnce.current) return
+
+      // `onEngineStop` fires whenever three-forcegraph's own tick loop
+      // decides to stop — and "stop" is not only "alpha decayed, the layout
+      // is at rest". Its cooldown also has a wall-clock ceiling
+      // (`cooldownTime`, set below), checked against real elapsed time
+      // regardless of how many ticks actually ran. On a slow cold load
+      // (parsing the corpus, compiling thousands of meshes) or after the
+      // tab was backgrounded for a while (rAF — and therefore every
+      // `tickFrame()` call — stops dead while hidden, see the visibility
+      // listener below), that ceiling can trip before this build ever drove
+      // a single real external tick, freezing the layout at its near-origin
+      // seed position and reporting "stopped" for a cloud that never got a
+      // chance to unfold. Trusting that blindly is Finding 1 of
+      // notes/render-consistency-repro-2026-08-25.md: a captured
+      // `nodeRadius: 67` (real settled clouds run to the thousands) at
+      // `tick: 0`.
+      //
+      // If we haven't driven at least `MIN_TICKS_BEFORE_FIRST_PAINT` real
+      // ticks ourselves, this is the ceiling talking, not convergence —
+      // reheat instead of snapping the camera to a cloud that hasn't had a
+      // chance to expand. `d3ReheatSimulation()` resets alpha to 1 and
+      // restarts the library's own countdown, so the next real ticks get a
+      // fresh, full run at actually converging.
+      if (
+        tickCount.current < MIN_TICKS_BEFORE_FIRST_PAINT &&
+        reheatAttempts.current < MAX_PREMATURE_REHEATS
+      ) {
+        reheatAttempts.current += 1
+        forceGraph.d3ReheatSimulation()
+        return
+      }
+
       settledOnce.current = true
       // Same yield as the periodic fit: convergence is not a licence to grab a
       // camera the user is already holding.
@@ -1667,6 +1729,32 @@ export default function InfluenceGraph({
       orbit.removeEventListener('change', onChange)
     }
   }, [controls])
+
+  /**
+   * Finding 2 of notes/render-consistency-repro-2026-08-25.md: the entire
+   * tick-loop-driven fit/tracking system runs on `useFrame`, i.e. on `rAF`,
+   * and Chrome suspends `requestAnimationFrame` outright for a backgrounded
+   * tab — confirmed live, zero ticks in 30+ seconds while
+   * `document.visibilityState === "hidden"`. Tabbing away is an entirely
+   * ordinary thing to do while a multi-thousand-node cloud spends up to
+   * 10-30+ seconds settling, so coming back mid-settle with nothing having
+   * tracked in the meantime is not an edge case.
+   *
+   * On return, ask for one fresh measurement — but only if the layout
+   * hasn't already settled AND the user hasn't since taken the camera for
+   * themselves. `requestRefit()` unconditionally hands the camera back to
+   * tracking, and doing that to someone who deliberately framed a view,
+   * then merely alt-tabbed and came back, would be a worse bug than the one
+   * this fixes.
+   */
+  useEffect(() => {
+    function handleVisibility() {
+      if (document.visibilityState !== 'visible') return
+      if (!settledOnce.current && !userOwnsCamera.current) requestRefit()
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => document.removeEventListener('visibilitychange', handleVisibility)
+  }, [])
 
   useEffect(() => {
     // Zero is the initial value, not a request; resetting on mount would fight
@@ -2575,8 +2663,11 @@ export default function InfluenceGraph({
     }
 
     tickCount.current += 1
-    settleClock.current += delta
-    sinceRefit.current += delta
+    // See `MAX_FRAME_DELTA_SECONDS` — a raw `delta` after a backgrounded-tab
+    // gap would otherwise end tracking on the very frame it resumes.
+    const trackingDelta = Math.min(delta, MAX_FRAME_DELTA_SECONDS)
+    settleClock.current += trackingDelta
+    sinceRefit.current += trackingDelta
     if (!fitted.current) {
       // The rough fit — see the note on `runFit`. Only mounts the scene;
       // periodic tracking fits (below) and `onEngineStop`'s precise one
