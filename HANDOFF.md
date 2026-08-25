@@ -414,6 +414,48 @@ Assume all of this exists and works; each has a dated comment at the site.
    `visibilitychange`. All temporary instrumentation was reverted — working
    tree is clean, diffed against a pre-edit backup to confirm. Full account:
    `notes/render-consistency-repro-2026-08-25.md` (addendum section).
+   **2026-08-25 (same session, third pass — Thomas: "fix them all as you
+   find them please"): both candidate fixes SHIPPED, not yet confirmed on
+   your own machine.** `InfluenceGraph.tsx`: (1) `onEngineStop`'s callback
+   now checks `tickCount.current < MIN_TICKS_BEFORE_FIRST_PAINT` before
+   trusting the stop — traced into three-forcegraph's own `tickFrame()`
+   (`node_modules/three-forcegraph/dist/three-forcegraph.js`), whose stop
+   condition is `alpha() < d3AlphaMin` **OR** `Date.now() - startTickTime >
+   cooldownTime` (45s), checked before any tick runs. On a slow cold load or
+   after a long tab-background gap, the wall-clock half can trip before this
+   build ever drove a single real external tick — the library then reports
+   "converged" for a cloud still sitting at its origin-seeded radius. Below
+   the threshold, the callback now calls `forceGraph.d3ReheatSimulation()`
+   (resets alpha and the countdown) instead of snapping the camera and
+   setting `settledOnce`, capped at `MAX_PREMATURE_REHEATS` (5) attempts so
+   a genuinely pathological graph can't loop forever. (2) The per-frame
+   `delta` fed into `settleClock`/`sinceRefit` is now clamped to
+   `MAX_FRAME_DELTA_SECONDS` (0.5s) — unclamped, the first frame after a
+   backgrounded-tab gap hands those clocks the *entire* hidden duration in
+   one jump, ending the 12s tracking window on the exact frame it was
+   needed most. A new `visibilitychange` listener also calls `requestRefit()`
+   when the tab becomes visible again, but only if the layout hasn't
+   settled yet **and** you haven't since taken the camera — it will never
+   override a view you deliberately set. Verified: `tsc --noEmit` clean on
+   the device VM directly (no esbuild/vite involved, so the win32-binary
+   mismatch doesn't apply here); full sandbox `npm run validate` and
+   `npm run build` both clean (3,385 reports / 2,596 dependencies, 953
+   modules, same ~1,493 kB bundle baseline); four consecutive cold reloads
+   of Global tier via Claude in Chrome all landed correctly and identically
+   fit (previously this exact test gave 3 different results, 2 visibly
+   broken); a Nations → Global tier-switch round-trip also came out clean.
+   Could **not** directly force-trigger a live premature-stop or a real
+   backgrounded-tab rAF suspension in this session's browser sandbox to
+   watch the reheat/refit paths fire on demand — `document.visibilityState`
+   read `"hidden"` throughout this session's tab regardless of tab
+   switching, yet the app kept rendering and settling correctly, so this
+   sandbox's rAF doesn't suspend the way a real backgrounded Chrome tab
+   does. The fix is correct by construction against the traced library
+   behaviour and by the reload evidence above, but the two mechanisms it
+   targets are exactly the ones this environment can't reliably force — **a
+   real confirm on your own machine (a genuinely slow cold load, and
+   deliberately tabbing away mid-settle) is the one check this session
+   couldn't do for you.**
 4. **Glow-slider check, one minute, only if** you ever see brightness-only
    flicker at a STABLE camera distance (`notes/flicker-tests-2026-08-19.md`,
    Suspect 3, still untested).

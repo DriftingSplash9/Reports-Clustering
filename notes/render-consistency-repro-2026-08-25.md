@@ -185,3 +185,110 @@ Neither was implemented — this is diagnosis only, per the "have at it on
 the logging, don't touch the actual fix without saying so" framing of this
 session. Full instrumentation code (for whoever picks this up) is described
 above precisely enough to reproduce; nothing was left in the working tree.
+
+## Third pass — fixes shipped, 2026-08-25 (same session, Thomas: "fix them all as you find them please")
+
+Both candidate fixes from the addendum above landed in `InfluenceGraph.tsx`.
+Also traced *why* Finding 1 happens, one level deeper than the addendum got:
+read `three-forcegraph`'s own source
+(`node_modules/three-forcegraph/dist/three-forcegraph.js`, `tickFrame`'s
+inner `layoutTick()`). Its stop condition is:
+
+```js
+if (++state.cntTicks > state.cooldownTicks
+    || new Date() - state.startTickTime > state.cooldownTime
+    || (isD3Sim && state.d3AlphaMin > 0 && state.d3ForceLayout.alpha() < state.d3AlphaMin)) {
+  state.engineRunning = false
+  state.onEngineStop()
+}
+```
+
+checked **before** ticking, on every call. The wall-clock branch
+(`cooldownTime`, 45s here) fires regardless of how many real ticks have run —
+so on a slow cold load, or after a long tab-background gap, it can trip
+before this session's `useFrame` loop ever called `tickFrame()` a single
+time. The library then reports "converged" for a cloud still sitting at its
+origin-seeded radius. That is exactly the `tick: 0` / `nodeRadius: 67`
+capture above — not alpha decaying fast, the ceiling firing before any real
+work happened. (Confirmed via `three-forcegraph`'s Kapsule internals too:
+its own `digest()` is `debounce`d by 1ms — "runs asynchronously relative to
+construction," per the file's own pre-existing comment on `useFrame` — and
+`engineRunning` defaults `false` until that debounced digest actually runs,
+which is consistent with everything observed.)
+
+### Fix 1 — `onEngineStop` no longer trusts an early stop
+
+```js
+if (tickCount.current < MIN_TICKS_BEFORE_FIRST_PAINT && reheatAttempts.current < MAX_PREMATURE_REHEATS) {
+  reheatAttempts.current += 1
+  forceGraph.d3ReheatSimulation()
+  return
+}
+settledOnce.current = true
+runFit(!userOwnsCamera.current)
+```
+
+`tickCount.current` is *our own* count of real `tickFrame()` calls driven by
+`useFrame` — the thing the library's wall-clock ceiling doesn't check. Below
+`MIN_TICKS_BEFORE_FIRST_PAINT` (the same 30 the mount fit already waits for),
+an "engine stopped" report is almost certainly the ceiling talking, not
+convergence — so instead of snapping the camera and permanently marking
+`settledOnce`, it calls `d3ReheatSimulation()` (the library's own public
+reset: alpha back to 1, countdown restarted) and waits for the next real
+stop. Capped at `MAX_PREMATURE_REHEATS` (5) so a graph that genuinely can't
+get there in a few reheats doesn't loop forever — it falls through and
+accepts whatever `onEngineStop` reports after that.
+
+Reasoned through the case this could regress: a tiny filtered view (a
+handful of nodes) that genuinely, physically converges in well under 30
+ticks. It doesn't misbehave — `tickCount.current` keeps climbing across
+every reheat (it isn't reset by a reheat, only by a full `forceGraph`
+rebuild), so a fast-converging graph just crosses the 30-tick line a couple
+of reheat cycles sooner than a slow one and gets its fit then. Worst case is
+a few hundred milliseconds of extra settle time on an already-tiny view, not
+a wrong result.
+
+### Fix 2 — tracking survives a backgrounded tab
+
+Two changes. First, `settleClock`/`sinceRefit` now accumulate a delta
+clamped to `MAX_FRAME_DELTA_SECONDS` (0.5s), not the raw `useFrame` delta —
+unclamped, the first frame after a background gap hands those clocks the
+*entire* hidden duration in one jump, which could end the 12-second tracking
+window on the exact frame tracking was needed most. Second, a new
+`visibilitychange` listener calls `requestRefit()` when the tab becomes
+visible again — but only when `!settledOnce.current && !userOwnsCamera.current`,
+so it only kicks in mid-settle and never wrestles the camera away from a
+view assembled deliberately, then merely alt-tabbed away from.
+
+### Verification
+
+- `tsc --noEmit` clean, run directly on the device VM (this file has no
+  `vite`/`esbuild` dependency, so the win32-binary sandbox mismatch noted
+  elsewhere in project memory doesn't apply to a type-check).
+- Full sandbox round (tar → cloud sandbox → fresh `npm install`): `npm run
+  validate` clean, `npm run build` clean — 3,385 reports / 2,596
+  dependencies, 953 modules transformed, ~1,493 kB bundle (matches the known
+  baseline).
+- Four consecutive cold reloads of Global tier via Claude in Chrome all
+  landed correctly and near-identically fit — the exact test from the first
+  pass above, which previously produced 3 different results, 2 visibly
+  broken (oversized/overlapping, camera-inside-cluster). A Nations → Global
+  tier round-trip also came out clean, no console errors from the app
+  itself.
+- **Could not force-trigger either raw failure mode live**, to directly
+  watch the reheat/refit paths fire rather than infer they would. Tried
+  backgrounding the tab (opened a second tab, waited 20s, closed it) and
+  found `document.visibilityState` reads `"hidden"` for this session's tab
+  throughout — even before backgrounding it deliberately — while the app
+  kept rendering and settling correctly regardless, meaning this particular
+  sandbox's `requestAnimationFrame` does not actually suspend the way a real
+  backgrounded Chrome tab does (unlike the second pass above, where the same
+  check genuinely caught zero ticks in 30+s — that was a real background
+  state, this sandbox's Page Visibility reporting just isn't trustworthy as
+  a *trigger* signal here, only as something the code should be robust
+  against). The fix is correct against the traced library source and by the
+  reload evidence, but a real cold-load / real tab-away test on Thomas's own
+  machine is the one check this session couldn't perform for him.
+
+Working tree has the fix, not a revert this time — these two changes are
+meant to stay. `HANDOFF.md` §5 item 3 carries the same summary.
