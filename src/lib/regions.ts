@@ -119,6 +119,44 @@ const CONTINENT_OF: Partial<Record<string, Continent>> = {
   PW: 'Oceania & Pacific', TK: 'Oceania & Pacific',
 
   INT: 'International',
+
+  // **62-country "new countries" tier, 2026-08-25** — same batch and same
+  // placeholder standing as the COUNTRY_FAMILY additions in palette.ts.
+
+  // Caucasus, Central Asia and Mongolia — Asia, matching Russia's own
+  // Asia placement above despite the Caucasus's partial-Europe geography.
+  KZ: 'Asia', UZ: 'Asia', KG: 'Asia', TJ: 'Asia', TM: 'Asia', MN: 'Asia',
+  GE: 'Asia', AM: 'Asia', AZ: 'Asia',
+
+  // South Asia
+  BD: 'Asia', BT: 'Asia', LK: 'Asia', MV: 'Asia', NP: 'Asia', PK: 'Asia',
+
+  // Gulf and Levant — Middle East, alongside AE/IL/IQ/IR/SA/SY/YE.
+  JO: 'Middle East', LB: 'Middle East', KW: 'Middle East', QA: 'Middle East',
+  OM: 'Middle East', BH: 'Middle East',
+
+  // Maritime/mainland Southeast Asia
+  MY: 'Asia', KH: 'Asia', LA: 'Asia', BN: 'Asia', TL: 'Asia',
+
+  // Central America — North America, the same continent bucket MX and PR
+  // already use (this scheme has no separate Central America continent).
+  CR: 'North America', GT: 'North America', HN: 'North America',
+  NI: 'North America', PA: 'North America', BZ: 'North America',
+
+  // Caribbean — North America, same bucket as Central America/Mexico/
+  // Puerto Rico (no separate Caribbean continent in this scheme).
+  CU: 'North America', DO: 'North America', HT: 'North America',
+  JM: 'North America', TT: 'North America', BS: 'North America',
+  BB: 'North America', AG: 'North America', LC: 'North America',
+
+  // Belarus — Europe, alongside Moldova/Ukraine/Serbia (non-EU Europe).
+  BY: 'Europe',
+
+  // Pacific Island states — Oceania & Pacific, alongside AU/NZ/the Realm
+  // and Compact states.
+  FJ: 'Oceania & Pacific', PG: 'Oceania & Pacific', SB: 'Oceania & Pacific',
+  VU: 'Oceania & Pacific', WS: 'Oceania & Pacific', TO: 'Oceania & Pacific',
+  KI: 'Oceania & Pacific', NR: 'Oceania & Pacific', TV: 'Oceania & Pacific',
 }
 
 export function continentOf(country: Country): Continent {

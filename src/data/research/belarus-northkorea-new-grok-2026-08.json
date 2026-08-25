@@ -1,0 +1,105 @@
+{
+  "reports": [
+    {
+      "id": "by-belstat",
+      "title": "National Statistical Committee of the Republic of Belarus (Belstat)",
+      "publisher": "National Statistical Committee of the Republic of Belarus",
+      "country": "BY",
+      "jurisdiction_level": "institutional",
+      "region": "Belarus",
+      "description": "Belarus's national statistics office, responsible for compiling and disseminating official economic and social statistics including national accounts, consumer prices, and labour statistics, and for maintaining Belarus's IMF SDDS metadata pages.",
+      "domains": [
+        "statistical-system"
+      ],
+      "url": "https://www.belstat.gov.by/"
+    },
+    {
+      "id": "by-belstat-national-accounts",
+      "title": "National Accounts of the Republic of Belarus",
+      "publisher": "National Statistical Committee of the Republic of Belarus (Belstat)",
+      "country": "BY",
+      "jurisdiction_level": "federal",
+      "region": "Belarus",
+      "description": "Annual compilation of Belarus's national accounts (production and income accounts by economic activity, GDP by use, sectoral accounts), compiled under System of National Accounts 2008 methodology.",
+      "releases_per_year": 1,
+      "domains": [
+        "national-accounts"
+      ],
+      "url": "https://www.belstat.gov.by/ofitsialnaya-statistika/publications/katalog/natsionalnye-scheta-respubliki-belarus/"
+    },
+    {
+      "id": "by-cpi",
+      "title": "Consumer Price Index (CPI) — Republic of Belarus",
+      "publisher": "National Statistical Committee of the Republic of Belarus (Belstat)",
+      "country": "BY",
+      "jurisdiction_level": "federal",
+      "region": "Belarus",
+      "description": "Official monthly index of changes in the prices of a basket of consumer goods and services, Belarus's primary domestic inflation measure, published by group in a COICOP-based grouping.",
+      "releases_per_year": 12,
+      "domains": [
+        "inflation"
+      ],
+      "url": "https://www.belstat.gov.by/ofitsialnaya-statistika/realny-sector-ekonomiki/tseny/potrebitelskie-tseny/"
+    },
+    {
+      "id": "by-nbrb-bop",
+      "title": "Balance of Payments of the Republic of Belarus",
+      "publisher": "National Bank of the Republic of Belarus",
+      "country": "BY",
+      "jurisdiction_level": "federal",
+      "region": "Belarus",
+      "description": "Quarterly balance of payments statistics for Belarus (current account, financial account, international investment position), compiled by the National Bank of the Republic of Belarus.",
+      "releases_per_year": 4,
+      "domains": [
+        "external-sector"
+      ],
+      "url": "https://www.nbrb.by/statistics/sstandard/metadata/balance.asp"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "by-belstat-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Belstat's own IMF-SDDS metadata page for the real sector states national accounts have been compiled under SNA 2008 since Q1 2016, with 2009-2015 data back-revised to the same edition. Evidence: \"Начиная с I квартала 2016 г. данные формируются по Системе национальных счетов 2008 года (СНС-2008). Данные за 2009-2015 гг. приведены в соответствии с СНС-2008\"",
+      "evidence_url": "https://www.belstat.gov.by/ofitsialnaya-statistika/ssrd-mvf_2/metadannye/realnyi-sektor/natsionalnye-scheta_2"
+    },
+    {
+      "source_report_id": "by-belstat",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Belstat's own National Summary Data Page states Belarus commits to following the statistical standards described in the IMF's SDDS bulletin. Evidence: \"Более подробное объяснение БСРД и статистических стандартов, которых Республика Беларусь обязуется придерживаться, помещено на базовой странице БСРД\"",
+      "evidence_url": "https://www.belstat.gov.by/ofitsialnaya-statistika/ssrd-mvf_2/natsionalnaya-stranitsa-svodnyh-dannyh/"
+    },
+    {
+      "source_report_id": "by-nbrb-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The National Bank of Belarus's own SDDS metadata page for balance of payments states the release is compiled per BPM6. Evidence: \"Платежный баланс разрабатывается в соответствии с международными стандартами, изложенными в шестом издании Руководства по платежному балансу и международной инвестиционной позиции (далее – РПБ6) (МВФ, 2009)\"",
+      "evidence_url": "https://www.nbrb.by/statistics/sstandard/metadata/balance.asp"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "kp-* (no country-level nodes proposed)",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "[KP] Confirmed Grok's null finding independently: no functioning DPRK statistical office found (Central Bureau of Statistics has no live official web presence with primary releases), and North Korea does not appear as a subscriber on IMF DSBB (searches for e-GDDS/SDDS/DSBB Korea only return results for KOR = South Korea). Only UN Population Division and World Bank estimated figures exist for North Korea, which are third-party estimates, not North Korea's own primary statistics — per the brief, not minted as a 'North Korea compiles X' claim. Zero KP nodes/edges proposed, consistent with the honesty-permission rule."
+    },
+    {
+      "edge": "by-cpi -> un-coicop-2018 (or un-coicop-hbs-1999)",
+      "source": "by-cpi",
+      "target": "un-coicop-2018",
+      "reason": "wrong-target",
+      "why": "[BY] Belstat's CPI landing page and its own CPI methodology PDF both reference COICOP (as \"КИПЦ\") as the classification used for the by-group price index, but neither document states which edition/year of COICOP is followed. Per the edition-matching rule, a generic COICOP mention with no stated edition isn't enough to pick between un-coicop-2018 and un-coicop-hbs-1999 — dropping rather than guessing."
+    },
+    {
+      "edge": "by-belstat -> imf-bpm6 (Grok's original proposal)",
+      "source": "by-belstat",
+      "target": "imf-bpm6",
+      "reason": "wrong-target",
+      "why": "[BY] Grok proposed wiring BPM6 to the general Belstat institutional node, citing a dsbb.imf.org DQAF page that rendered as a JS navigation shell under WebFetch with no verifiable country-specific content (could not confirm Grok's quote live). Balance of payments in Belarus is actually compiled by the National Bank of the Republic of Belarus, not Belstat, and the corpus convention wires imf-bpm6 to BOP-specific report nodes rather than general statistics-office nodes. Superseded in this batch by a dedicated by-nbrb-bop node with a directly verified BPM6 citation from NBRB's own SDDS metadata page, so no drop-only outcome here — noting for the record that Grok's original source/target pairing was not usable as cited."
+    }
+  ]
+}

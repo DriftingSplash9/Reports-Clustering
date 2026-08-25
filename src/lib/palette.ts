@@ -537,6 +537,44 @@ export const COUNTRY_FAMILY: Record<string, ColourFamily> = {
   SA: 'ASIA', // Saudi Arabia's ISO code — do not confuse with the `SA` (South America) family value above.
   ID: 'ASIA', TW: 'ASIA', PH: 'ASIA', KR: 'ASIA', VN: 'ASIA', JP: 'ASIA',
   TH: 'ASIA', MM: 'ASIA',
+
+  // **62-country "new countries" tier, 2026-08-25** — the zero-prior-presence
+  // batch verified this session from the Grok research queue's prompts 30-37.
+  // Same placeholder standing as the 2026-08-20 mint above: these ride the
+  // existing catch-all families rather than wait for dedicated ones.
+
+  // Caucasus, Central Asia and Mongolia — `ASIA`, alongside RU/AE/AF etc.
+  KZ: 'ASIA', UZ: 'ASIA', KG: 'ASIA', TJ: 'ASIA', TM: 'ASIA', MN: 'ASIA',
+  GE: 'ASIA', AM: 'ASIA', AZ: 'ASIA',
+
+  // South Asia — `ASIA`. (India itself stays its own `IN` family, above.)
+  BD: 'ASIA', BT: 'ASIA', LK: 'ASIA', MV: 'ASIA', NP: 'ASIA', PK: 'ASIA',
+
+  // Gulf and Levant — `ASIA`, alongside SA/AE/IQ/SY/YE.
+  JO: 'ASIA', LB: 'ASIA', KW: 'ASIA', QA: 'ASIA', OM: 'ASIA', BH: 'ASIA',
+
+  // Maritime/mainland Southeast Asia — `ASIA`, alongside ID/PH/VN/TH/MM.
+  MY: 'ASIA', KH: 'ASIA', LA: 'ASIA', BN: 'ASIA', TL: 'ASIA',
+
+  // Central America — `SA`, the same "Latin America" least-wrong bucket MX
+  // already rides.
+  CR: 'SA', GT: 'SA', HN: 'SA', NI: 'SA', PA: 'SA', BZ: 'SA',
+
+  // Caribbean — `SA`, same bucket as Central America and Mexico.
+  CU: 'SA', DO: 'SA', HT: 'SA', JM: 'SA', TT: 'SA', BS: 'SA', BB: 'SA',
+  AG: 'SA', LC: 'SA',
+
+  // Belarus — `XEU`, the non-EU-European family already carrying Moldova,
+  // Ukraine, Serbia etc. (Filed here rather than `ASIA` for the same
+  // geography-first reasoning `XEU` was built on.) North Korea returned zero
+  // mintable nodes this round (see `belarus-northkorea-new-grok-2026-08.json`)
+  // so it carries no entry yet — nothing to render.
+  BY: 'XEU',
+
+  // Pacific Island states — `NZ`, the family the small Pacific jurisdictions
+  // already ride (Cook Islands, Niue, Tokelau, the Compact states).
+  FJ: 'NZ', PG: 'NZ', SB: 'NZ', VU: 'NZ', WS: 'NZ', TO: 'NZ', KI: 'NZ',
+  NR: 'NZ', TV: 'NZ',
 }
 
 /**
@@ -1366,6 +1404,27 @@ export const COUNTRY_LABEL: Record<string, string> = {
   DJ: 'Djibouti', ER: 'Eritrea', KM: 'Comoros', LR: 'Liberia',
   SC: 'Seychelles', SD: 'Sudan', SL: 'Sierra Leone', SO: 'Somalia',
   SS: 'South Sudan', ST: 'São Tomé and Príncipe',
+
+  // **62-country "new countries" tier, 2026-08-25**, alongside the
+  // COUNTRY_FAMILY and CONTINENT_OF (regions.ts) entries added the same day.
+  KZ: 'Kazakhstan', UZ: 'Uzbekistan', KG: 'Kyrgyzstan', TJ: 'Tajikistan',
+  TM: 'Turkmenistan', MN: 'Mongolia', GE: 'Georgia', AM: 'Armenia',
+  AZ: 'Azerbaijan',
+  BD: 'Bangladesh', BT: 'Bhutan', LK: 'Sri Lanka', MV: 'Maldives',
+  NP: 'Nepal', PK: 'Pakistan',
+  JO: 'Jordan', LB: 'Lebanon', KW: 'Kuwait', QA: 'Qatar', OM: 'Oman',
+  BH: 'Bahrain',
+  MY: 'Malaysia', KH: 'Cambodia', LA: 'Laos', BN: 'Brunei',
+  TL: 'Timor-Leste',
+  CR: 'Costa Rica', GT: 'Guatemala', HN: 'Honduras', NI: 'Nicaragua',
+  PA: 'Panama', BZ: 'Belize',
+  CU: 'Cuba', DO: 'Dominican Republic', HT: 'Haiti', JM: 'Jamaica',
+  TT: 'Trinidad and Tobago', BS: 'The Bahamas', BB: 'Barbados',
+  AG: 'Antigua and Barbuda', LC: 'Saint Lucia',
+  BY: 'Belarus',
+  FJ: 'Fiji', PG: 'Papua New Guinea', SB: 'Solomon Islands',
+  VU: 'Vanuatu', WS: 'Samoa', TO: 'Tonga', KI: 'Kiribati', NR: 'Nauru',
+  TV: 'Tuvalu',
 }
 
 export function countryLabelFor(country: Country): string {

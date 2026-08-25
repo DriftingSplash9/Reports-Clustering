@@ -5,24 +5,16 @@ level.** When superseded, the new session copies this file into
 `archive/Previous Handoffs/` renamed `HANDOFF-YYYY-MM-DD-<topic>.md` and
 writes the replacement here. Never two handoffs at the top level.
 
-Last written: **2026-08-25 (third pass, same day) — Grok research queue
-FULLY LANDED, prompt 18 + the whole new-countries tier.** Earlier today the
-Canada tier and the domestic wiring tier landed — full account archived at
-`archive/Previous Handoffs/HANDOFF-2026-08-25-wiring-round.md`, condensed
-below. This third pass closed out the queue: **prompt 18** (Uruguay/
-Paraguay/Guyana/Suriname domestic wiring — 4 deps minted, 1 dropped
-edition-ambiguous) and **the new-countries tier (30–37, 62 countries with
-zero prior corpus presence)** — 8 parallel verification agents, one per
-region, each raw-verifying against live primary sources. Combined: 130 new
-reports, 109 new dependencies across 51 countries (11 returned honest
-nulls — North Korea and several low-priority OECS microstates), 74 honest
-drops, zero id/edge collisions either against the live corpus or between
-the 8 groups' own concurrent proposals. Also required 51 new
-`COUNTRY_FAMILY`/`CONTINENT_OF`/`COUNTRY_LABEL` entries (`palette.ts`,
-`regions.ts`) that none of the per-region agents were scoped to add —
-`npm run validate` catches missing ones as hard errors. **The Grok research
-queue from `notes/grok-research-queue-2026-08-22/` is now fully worked.**
-One new Thomas-only judgment call opened: §5 item 5b (gy-caricom scoping).
+Last written: **2026-08-25 (second pass, same day) — Grok research-queue
+wiring tier LANDED.** Earlier today the Canada tier (prompts 01–06) landed —
+full account archived at `archive/Previous Handoffs/HANDOFF-2026-08-25-canada-round.md`,
+condensed below. This second pass worked the queue's **domestic wiring
+tier**: prompts 10, 11, 12, 13, 14, 15, 16, 17, 19, 20 (Indonesia; Taiwan;
+Philippines/Vietnam/Thailand/Myanmar; Mexico; Japan/South Korea; Iran/Iraq/
+Turkey/Syria; Argentina/Chile; the Andean bloc; UAE/Saudi; Afghanistan/Yemen/
+Sudan/Somalia). **Prompt 18** (Uruguay/Paraguay/Guyana/Suriname) is still
+missing its Grok reply — Thomas is fetching it — and the **new-countries
+tier (30–37)** is untouched. See §5 item 2 for both.
 
 **Canada round, condensed:** 144 new reports, 161 new dependencies minted
 across 6 regional slices; sandbox-clean. Four structural lessons from that
@@ -245,53 +237,31 @@ Project memory: write entries as you go; if it refuses, park in
 
 ---
 
-## 3. Where the project is (2026-08-25, prompt 18 + new-countries round)
+## 3. Where the project is (2026-08-25, wiring round)
 
-**Live corpus: 3,384 reports · 2,589 dependencies.** `npm run validate`
-clean exit 0 (120/120 logic checks), `tsc --noEmit` clean, `npm run build`
-clean at 1,493 kB. Reports up 130 and dependencies up 113 from the wiring
-round's 3,254/2,476 — all from this pass's new-countries mint (prompt 18
-itself minted 0 new report nodes, 4 new deps, by design — wiring connects
-existing nodes).
+**Live corpus: 3,254 reports · 2,476 dependencies.** `npm run validate`
+clean exit 0, `tsc --noEmit` clean, `npm run build` clean at 1,504 kB.
+Reports unchanged since the Canada round (this pass minted 0 new report
+nodes by design — wiring connects existing nodes); dependencies up 165 from
+the Canada-round total of 2,311.
 
 **BRICS (G.1–G.4)** — full narrative in
 `archive/Previous Handoffs/HANDOFF-2026-08-22-brics-g4-full.md` and project
 memory `grok_archive_state.md`. Two duplicate-node flags still open for
 Thomas's call (§5 items 5–6 below).
 
-**Grok research-queue, Canada tier — LANDED 2026-08-25.** Condensed
-account in `archive/Previous Handoffs/HANDOFF-2026-08-25-wiring-round.md`.
+**Grok research-queue, Canada tier — LANDED earlier 2026-08-25.** Condensed
+account above; full narrative archived at
+`archive/Previous Handoffs/HANDOFF-2026-08-25-canada-round.md`.
 
-**Grok research-queue, wiring tier — LANDED 2026-08-25.** Ten slices,
-condensed account in `archive/Previous Handoffs/HANDOFF-2026-08-25-wiring-round.md`.
-
-**Grok research-queue, prompt 18 — LANDED, this pass.**
-`sa-atlantic-wiring-grok-2026-08.json`: 4 deps minted (Paraguay national
-accounts → SNA 2008, Suriname CPI → CPI Manual, Suriname GDP → e-GDDS,
-Uruguay foreign trade → Harmonized System), 1 dropped (Suriname CPI →
-COICOP, edition-ambiguous — source names no year and the corpus splits
-COICOP into two edition nodes; dropped rather than guessed).
-
-**Grok research-queue, new-countries tier (30–37) — LANDED, this pass. The
-whole queue is now fully worked — nothing left in `notes/grok-research-queue-2026-08-22/`.**
-8 parallel verification agents (Caucasus/Central Asia/Mongolia, South Asia,
-Gulf/Levant, Southeast Asia, Central America, Caribbean/OECS, Belarus/North
-Korea, Pacific microstates), each raw-verifying Grok's leads against live
-primary sources independently. 130 reports / 109 dependencies minted across
-51 countries; 11 countries (North Korea, several low-priority OECS
-microstates per their own prompt's instruction) returned honest zero-node
-results; 74 honest drops. New slices in `src/data/research/`:
-`caucasus-centralasia-mongolia-new-grok-2026-08.json`,
-`southasia-new-grok-2026-08.json`, `gulf-levant-new-grok-2026-08.json`,
-`seasia-new-grok-2026-08.json`, `centralamerica-new-grok-2026-08.json`,
-`caribbean-oecs-new-grok-2026-08.json`,
-`belarus-northkorea-new-grok-2026-08.json`,
-`pacific-microstates-new-grok-2026-08.json`. Also added 51 country entries
-to `COUNTRY_FAMILY`/`COUNTRY_LABEL` (`src/lib/palette.ts`) and
-`CONTINENT_OF` (`src/lib/regions.ts`) — `npm run validate` errors hard on a
-country with nodes but no palette/continent entry, and none of the 8
-region agents were scoped to touch those files. Full lessons and per-group
-counts in `notes/Grok Logs/grok-diary.md`'s round log.
+**Grok research-queue, wiring tier — LANDED, this pass.** See the "Last
+written" block above for the full account. Ten new slices in
+`src/data/research/`: `indonesia-wiring-grok-2026-08.json`,
+`taiwan-wiring-grok-2026-08.json`, `ph-vn-th-mm-wiring-grok-2026-08.json`,
+`mexico-wiring-grok-2026-08.json`, `jp-kr-wiring-grok-2026-08.json`,
+`ir-iq-tr-sy-wiring-grok-2026-08.json`, `ar-cl-wiring-grok-2026-08.json`,
+`andean-wiring-grok-2026-08.json`, `ae-sa-wiring-grok-2026-08.json`,
+`af-ye-sd-so-wiring-grok-2026-08.json`.
 
 **Git:** unknown to agents by design — see rule 1.
 
@@ -361,13 +331,20 @@ Assume all of this exists and works; each has a dated comment at the site.
 ### In flight
 1. **Canada tier and wiring tier of the Grok research queue — DONE.**
    Nothing further needed for prompts 01–06, 10–17, 19–20.
-2. **Prompt 18 and the new-countries tier (30–37) — DONE, 2026-08-25 third
-   pass.** The entire `notes/grok-research-queue-2026-08-22/` queue is now
-   fully worked. The Gulf/Levant duplicate-prompt overlap
-   (`gulf-levant-research-*` vs `me-gulf-levant-research-*`) was diffed and
-   resolved as part of this pass — see §3 above and the diary's round log
-   for the full account. Nothing further queued here; next research work
-   needs a new Grok round scoped from scratch.
+2. **Grok research queue, still queued: prompt 18 and the new-countries
+   tier (30–37, ~90 reports / ~140 dependencies).**
+   - **Prompt 18** (Uruguay/Paraguay/Guyana/Suriname domestic wiring) has no
+     reply file — Thomas is fetching it. Once it lands, verify it the same
+     way as this round's wiring groups (raw-verify, cross-check ids/edges
+     against the WHOLE corpus per rules 10–13, mint, sandbox validate).
+   - **New countries (30–37)** has its own known duplicate-prompt overlap,
+     unresolved: Jordan/Lebanon/Kuwait/Qatar/Oman/Bahrain was run twice,
+     under `gulf-levant-research-*` and `me-gulf-levant-research-*`. Diff the
+     two for overlapping/conflicting claims (same method used on the Andean
+     wiring overlap this round — see the "Last written" block) before
+     verifying either.
+   - `notes/grok-research-queue-2026-08-22/00-README.md` is the index —
+     attachment manifest for what's left.
 
 ### [Thomas] — only you can
 3. **Render-consistency / camera-fit bug — DEFERRED by your own call.** One
@@ -384,19 +361,6 @@ Assume all of this exists and works; each has a dated comment at the site.
    same publisher IBGE, different ids from different research rounds
    (`br-scn` already wired; `br-ibge-sistema-contas-nacionais` unwired).
    Full note in `_dropped` block of `brics-g4-partial-2026-08-22.json`.
-5b. **`gy-caricom` is scoped to Guyana specifically, not a generic CARICOM
-   node — needs a call on whether to add a dedicated `int-caricom` node
-   (2026-08-25, Caribbean/OECS new-countries round).** Its title is "CARICOM
-   membership", publisher "CARICOM / Government of Guyana", url/description
-   both Guyana-country-profile-specific. Seven other CARICOM members'
-   statistics offices (Jamaica, Trinidad & Tobago, Bahamas, Barbados, Haiti,
-   Antigua & Barbuda, Saint Lucia) have real, well-evidenced CARICOM
-   membership claims (each via that country's own CARICOM profile page) that
-   currently have nowhere correct to wire to — dropped `wrong-target` rather
-   than minted onto Guyana's node. Full basis text preserved in each
-   `_dropped` entry in `caribbean-oecs-new-grok-2026-08.json` (search
-   `gy-caricom`). If a generic node gets added, these seven edges are
-   ready to mint as-is against the new target.
 6. **`cn-stats-law` / `cn-stats-law-impl-regs` vs `cn-statistics-law` —
     duplicate-node call needed.** Same shape as item 5. Full note in
     `_dropped` block of `brics-g4-2026-08-22.json`.

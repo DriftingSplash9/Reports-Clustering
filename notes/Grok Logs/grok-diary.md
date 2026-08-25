@@ -156,6 +156,28 @@ that justifies itself by pointing at another region's coverage.
     that rule explicitly in every prompt, and reject any reply that argues
     completeness by pointing at another jurisdiction's coverage instead of
     at exhausted primary sources.**
+13. **gy-caricom is a Guyana-specific membership record, not a generic
+    CARICOM node (2026-08-25, Caribbean/OECS new-countries round).** Grok
+    proposed `cites -> gy-caricom` for seven other CARICOM members (JM, TT,
+    BS, BB, HT, AG, LC), each evidenced with that country's OWN CARICOM
+    profile page — but wired to a node whose actual title/description is
+    scoped to Guyana ("Guyana's principal formal integration framework").
+    The underlying claim (each of those countries is a real CARICOM member)
+    was fine; the target was wrong. Caught on the verification pass, not by
+    Grok itself. **Fix: when a proposed edge's evidence is generic to a
+    bloc/institution but the only existing node for that bloc is filed
+    under one specific member country's id, don't reuse it — flag for a
+    dedicated node (e.g. `int-caricom`) instead of wiring everyone through
+    one country's membership record.**
+14. **`basis_quote`/`basis_verbatim_note` as separate JSON keys instead of
+    inline in `basis` (2026-08-25, Belarus/NK new-countries round).** One
+    verification agent split the quote into its own field rather than
+    folding it into the single `basis` string the schema asks for, and
+    flagged the deviation itself rather than silently shipping it. **Fix:
+    restate the exact `basis` shape (one string, ending in a verbatim quote)
+    in the schema doc every time — evidently "ending with a verbatim quote"
+    reads ambiguously enough that a careful agent still reaches for a
+    separate field instead.**
 
 ## The prompt shape that works (used rounds 2–3)
 
@@ -200,3 +222,37 @@ everything) — it measurably improves citation discipline.
   appears anywhere in the document. Two rounds straight on the same claim;
   don't ask Grok for it a third time — tell it the claim doesn't check out
   and let it move on.
+- **Prompt 18 (wiring, South America Atlantic coast — UY/PY/GY/SR domestic
+  layer)** (received/processed 2026-08-25): 5 proposed edges, raw-verified
+  4/5. Minted `sa-atlantic-wiring-grok-2026-08.json` (4 deps: PY national
+  accounts -> SNA 2008, SR CPI -> CPI Manual, SR GDP -> e-GDDS, UY foreign
+  trade -> HS). One drop: SR CPI -> COICOP, edition-ambiguous (source names
+  "COICOP" with no year, and the corpus carries both `un-coicop-hbs-1999`
+  and `un-coicop-2018` as separate nodes) — dropped `wrong-target` per the
+  edition-matching rule rather than guessed from the survey's vintage.
+- **Prompts 30-37 ("new countries" tier, 62 countries, zero prior corpus
+  presence)** (received/processed 2026-08-25): 8 parallel verification
+  agents, one per region (Caucasus/Central Asia/Mongolia, South Asia,
+  Gulf/Levant, Southeast Asia, Central America, Caribbean/OECS,
+  Belarus/North Korea, Pacific microstates), each independently raw-
+  verifying against live primary sources with a shared reference package
+  (id/edge cross-check lists, schema doc, example nodes). Combined result:
+  130 reports, 109 dependencies minted across 51 countries (11 countries —
+  including North Korea, and several OECS microstates deferred as
+  low-priority per their prompt's own instruction — returned zero nodes,
+  an honest null rather than a stretch); 74 honest drops. Cross-checked all
+  8 groups against each other and against the live corpus before minting:
+  zero id collisions, zero duplicate edges, zero dangling references.
+  Needed two post-hoc fixes the agents' own corpus-slice reference
+  couldn't catch: a `_dropped`/`note` entry (`bn-national-accounts ->
+  sna-2008`) that actually matched a live edge minted from a stronger
+  source in the same file — reclassified `caveat` (the reason that's
+  explicitly allowed to match a live edge) rather than `note`; and the
+  gy-caricom scoping problem (lesson 13, above) — 7 Caribbean edges moved
+  from `dependencies` to `_dropped`/`wrong-target`. Also required 51 new
+  `COUNTRY_FAMILY` (palette.ts), `CONTINENT_OF` (regions.ts) and
+  `COUNTRY_LABEL` (palette.ts) entries — `npm run validate` catches missing
+  ones as hard errors, not warnings, and none of the per-region agents were
+  scoped to touch those files. Final combined corpus: 3,384 reports / 2,589
+  dependencies, `npm run validate` 120/120, `tsc --noEmit` clean, `npm run
+  build` clean.
