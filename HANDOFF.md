@@ -165,8 +165,9 @@ it never was, per the corresponding entries below); the three reversed-claim
 entries flip `deferred` -> `wrong-direction`.
 
 *Item 5 - "clusters pile toward the centre": force-centre killed, charge
-repulsion nudged up.* Thomas: set force-centre to 0, and turn up the
-inter-cluster push a tad. In `InfluenceGraph.tsx`: `fg.d3Force('center')`
+repulsion boosted 33%.* Thomas: set force-centre to 0, and turn up the
+inter-cluster push - first pass +10%, then a follow-up call to make it
++33% instead. In `InfluenceGraph.tsx`: `fg.d3Force('center')`
 (three-forcegraph's default `d3-force-3d` forceCenter, strength 1,
 previously never touched) now has its strength set to 0 - confirmed via
 source (`d3-force-3d/src/center.js`) that this force does NOT pull
@@ -181,14 +182,18 @@ even further off-target, it's an unstable runaway drift, not inter-cluster
 repulsion. Left as a comment at the call site so the question doesn't need
 re-asking. Separately, `charge` strength (the one force that actually does
 separate different clusters - see 2026-08-26's design-discussion findings
-below) bumped `-300 -> -330` per `spread` unit, a ~10% nudge, cheaper than
-building the mirrored inter-cluster force (option (c) below) which Thomas
-didn't ask for this round. Headless Playwright check against `vite preview`
-at the Everything tier: scene renders, settles, no console/page errors, no
-exploded/collapsed layout - a "tad" tune, not a redesign, so the centre is
-still visibly the densest area (expected: the shared-hub-node mechanism
-option (c) targets is untouched). If this doesn't move the needle enough in
-ordinary use, option (c) is still on the table.
+below) went `-300 -> -330` (+10%), then on Thomas's follow-up `-330 ->
+-399` (+33% over the original -300 baseline, not stacked on top of the
++10%). Both passes verified in a fresh sandbox (`tsc`/`npm run build`
+clean each time, sha256-identical to device) with a headless Playwright
+screenshot at the Everything tier: scene settles cleanly both times, no
+console/page errors, no NaN/exploded layout, and the +33% pass reads
+visibly more separated between sub-clusters than the +10% one did. The
+centre is still visibly the densest area at +33% (expected: the
+shared-hub-node mechanism `galaxyForce`/link-force pulling shared hubs
+like sna-2008/imf-bpm6 toward the middle is untouched by a charge tune).
+If it's still not enough in ordinary use, the bigger mirrored
+inter-cluster force (option (c) below) is still on the table.
 
 **Layout/clustering design discussion opened, nothing built yet
 (2026-08-26).** Thomas: "the clusters cluster too much to the centre... it
@@ -237,7 +242,8 @@ section only needs to say where things stand now, not how they got here.
 2. **Did killing force-centre + the charge nudge actually help the
    "piles up at the centre" complaint?** Shipped 2026-08-26 as a cheap
    first pass (see Current State) — force-centre off, charge repulsion
-   +10%. The scene still visibly clusters at the middle in a headless
+   +33% (after an initial +10% pass, per Thomas's follow-up). The scene
+   still visibly clusters at the middle in a headless
    check (expected: the shared-hub-node mechanism is untouched). If it's
    not enough in ordinary use, the bigger inter-cluster repulsion force
    (mirroring `galaxyForce.ts`, previously "option (c)") is still on the

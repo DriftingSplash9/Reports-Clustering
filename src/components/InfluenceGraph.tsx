@@ -1518,13 +1518,14 @@ export default function InfluenceGraph({
     const charge = fg.d3Force('charge') as unknown as
       | { strength(s: number): void; distanceMax(d: number): void }
       | undefined
-    // Bumped -300 -> -330 2026-08-26 (Thomas, HANDOFF item 5): a small
-    // increase to the one force that actually separates DIFFERENT clusters
-    // from each other (galaxyForce only ever pulls a node toward its OWN
-    // cluster's centroid — see the comment on `fg.d3Force('galaxy', ...)`
-    // below). Cheap, incremental "inter-cluster push" rather than the
-    // larger mirrored-force build Thomas didn't ask for this round.
-    charge?.strength(-330 * m)
+    // Bumped -300 -> -399 2026-08-26 (Thomas, HANDOFF item 5 — first tried
+    // +10%/-330, Thomas asked for +33% instead): a bigger increase to the
+    // one force that actually separates DIFFERENT clusters from each other
+    // (galaxyForce only ever pulls a node toward its OWN cluster's
+    // centroid — see the comment on `fg.d3Force('galaxy', ...)` below).
+    // Still the existing force tuned up, not the larger mirrored-force
+    // build Thomas didn't ask for this round.
+    charge?.strength(-399 * m)
     // Without a cap, repulsion never falls off and linear chains get flung
     // out — but the cap has to grow with the layout or it recreates the pile.
     charge?.distanceMax(420 * m)
