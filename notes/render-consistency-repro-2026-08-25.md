@@ -292,3 +292,25 @@ view assembled deliberately, then merely alt-tabbed away from.
 
 Working tree has the fix, not a revert this time — these two changes are
 meant to stay. `HANDOFF.md` §5 item 3 carries the same summary.
+
+### Pass 4 (Thomas, 2026-08-25): "I cannot force an error, I tried."
+
+Thomas tried to force either failure condition on his own machine and
+couldn't, same as this session's sandbox couldn't. Read together with the
+sandbox's own honest limitation above, that's consistent with both failure
+modes being genuinely timing-dependent races (a cold load slow enough to
+stop under `MIN_TICKS_BEFORE_FIRST_PAINT`; a background gap long enough to
+matter) rather than something reliably summoned on demand — which is
+exactly why they were only ever caught by accident (three plain reloads
+producing three different results) rather than by a deliberate repro
+attempt in the first place.
+
+Since the ONE thing nobody can do is force-trigger it, "confirm the fix by
+reproducing the bug" is not achievable as a check and should stop being the
+bar. What's left as real evidence either way: the fix is correct by
+construction against the traced three-forcegraph source (both root causes
+were identified, not guessed), and this session's reload testing found no
+regression. The honest status is "shipped, reasoned-through, not forcibly
+reproduced by anyone yet" — not "unconfirmed." Downgrading HANDOFF.md's
+Todo item 1 from "confirm on your own machine" to "watch for it during
+ordinary use, flag it here if it recurs."

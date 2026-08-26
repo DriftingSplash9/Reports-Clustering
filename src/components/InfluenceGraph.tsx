@@ -966,6 +966,15 @@ export default function InfluenceGraph({
   const galaxyStrength = useRef(0)
   galaxyStrength.current = view.galaxy
 
+  /**
+   * Same pattern again, for `view.pulseRate` — read live wherever something
+   * animates on its own clock: the `linkDirectionalParticleSpeed` accessor
+   * below (three-forcegraph calls it fresh every frame, so a ref is all this
+   * needs, no re-digest) and the `pulseClock` accumulation in `useFrame`.
+   */
+  const pulseRateRef = useRef(1)
+  pulseRateRef.current = view.pulseRate
+
   const litLink = (l: LinkDatum) => !focusRef.current || focusRef.current.edges.has(l.key)
 
   const shownNode = (id: string) => !visibleRef.current || visibleRef.current.nodes.has(id)
@@ -1422,7 +1431,7 @@ export default function InfluenceGraph({
             : 0,
       )
       .linkDirectionalParticleSpeed((l: object) =>
-        pulseSpeed((l as LinkDatum).upstreamCadence),
+        pulseSpeed((l as LinkDatum).upstreamCadence) * pulseRateRef.current,
       )
       // Teardrops rather than spheres. The library orients any non-spherical
       // particle along its direction of travel, so the shape carries direction
@@ -2764,7 +2773,10 @@ export default function InfluenceGraph({
     // a tick is not a fixed amount of real time, so a tick-driven pulse would
     // breathe at a different rate on every machine and would visibly slow down
     // exactly when the scene gets heavy.
-    pulseClock.current += delta
+    // `pulseRateRef` — see `view.pulseRate` — scales this clock directly, so
+    // it, `tickPulseBlink` and `tickLinkFlow` (all three driven off it) speed
+    // up, slow down, or freeze (0) together with the particle speed above.
+    pulseClock.current += delta * pulseRateRef.current
     // The cross-border pulse blink — one call animates every registered blink
     // material; a no-op when the current graph has no cross-border edges.
     tickPulseBlink(pulseClock.current)

@@ -76,8 +76,6 @@ const STARTUP_VIEW = (() => {
 const DEEP_LINK = readDeepLink()
 import { Flag } from './components/Flag'
 import {
-  BLOOM_THRESHOLD_MAX,
-  BLOOM_THRESHOLD_MIN,
   DEFAULT_VIEW,
   SCENE_BACKGROUND,
   ZOOM_MAX,
@@ -1476,43 +1474,22 @@ export default function App() {
         />
 
         {/*
-          Bloom gives the dark background a sense of space. It has to be kept
-          on a short leash: it adds apparent size, and apparent size is the
-          authority encoding. Too much and every node blows out into an equal
-          white blob, destroying the exact signal the graph exists to show.
-          High threshold so only the brightest cores bleed, low intensity so
-          the halo stays a suggestion.
-        */}
-        {/*
-          The composer stays mounted whether or not glow is on, and the toggle
-          only changes bloom intensity.
+          Glow (bloom) was a slider here through 2026-08-25, when Thomas had
+          it removed outright as pointless: "the glow slider works but I
+          think the glow is pointless and should be taken off." Intensity is
+          now hardcoded to 0 — permanently off, not just defaulted off.
 
-          Mounting and unmounting it instead re-routes the whole render: with a
-          composer the scene goes through an offscreen buffer with its own
-          colour handling, without one it draws straight to the canvas. The
-          difference shifts the background tint of the entire scene, so the
-          Glow switch appeared to be doing the horizon's job as well as its
-          own. Keeping the pipeline fixed makes the toggle mean one thing.
-        */}
-        {/*
-          Threshold slides down as the slider goes up, rather than intensity
-          sliding up. Intensity alone would brighten the same handful of nodes;
-          threshold decides *how many* nodes glow at all, which is the knob that
-          actually corresponds to what someone means by "more glow".
-
-          The range stops at 0.26 deliberately. Below roughly 0.15 most of the
-          graph blooms, halo adds apparent size uniformly, and the size-equals-
-          authority encoding stops working — which is exactly what happened the
-          first time bloom was tuned, and why it was then set so conservatively
-          that it did nothing at all for five sessions.
+          The `<EffectComposer>` stays mounted anyway, for `PngExport.tsx`'s
+          sake: unmounting it re-routes the whole render (with a composer the
+          scene goes through an offscreen buffer with its own colour
+          handling; without one it draws straight to the canvas), which
+          shifts the background tint of the entire scene. Keeping the
+          pipeline fixed, with bloom simply inert, avoids that.
         */}
         <EffectComposer ref={composerRef}>
           <Bloom
-            intensity={view.glow <= 0.005 ? 0 : 0.45 + view.glow * 0.5}
-            luminanceThreshold={
-              BLOOM_THRESHOLD_MAX -
-              view.glow * (BLOOM_THRESHOLD_MAX - BLOOM_THRESHOLD_MIN)
-            }
+            intensity={0}
+            luminanceThreshold={1}
             luminanceSmoothing={0.35}
             radius={0.62}
             mipmapBlur

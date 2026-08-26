@@ -16,35 +16,34 @@ a schema field gets added or someone re-researches each URL and updates the
 report directly.
 
 Reading note: these are mixed into the merged `*-grok-2026-08.json` files
-under `src/data/research/`, under the same ids listed below. 18 of the 37 are
-one problem (Singapore's stats site restructured its URL scheme wholesale, not
-18 independent instances of rot) — worth fixing as a batch, likely by finding
-each publication's new `singstat.gov.sg` path rather than researching each one
-from scratch.
+under `src/data/research/`, under the same ids listed below.
 
-## Singapore — one URL-scheme migration, 18 reports (`sg-singapore.json`)
-All of these 404 on the same old `find-data/search-by-theme/...` and
-`publications/...` path shapes. singstat.gov.sg almost certainly restructured
-its site; the content likely still exists under new paths.
+## RESOLVED 2026-08-25 — Singapore, 18 reports (`sg-singapore-grok-2026-08.json`)
+All 18 were one problem: singstat.gov.sg restructured its URL scheme wholesale
+(old `find-data/search-by-theme/...` and `publications/...` paths all 404;
+most moved to `find-data/explore-data-themes/...`, the two standards pages to
+`standard-classifications/...`). An agent found singstat's sitemap.xml, mapped
+each old path to its replacement, and WebFetched every candidate to confirm
+the specific topic is actually discussed there before writing it back — not
+just a title-match guess. Applied directly to each report's `url` field in
+`sg-singapore-grok-2026-08.json` (no schema change; this is a source-URL
+correction, not a new claim, so rule 2 doesn't apply).
 
-- `sg-balance-of-payments` — https://www.singstat.gov.sg/find-data/search-by-theme/economy/balance-of-payments
-- `sg-merchandise-trade` — https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/merchandise-trade
-- `sg-international-investment-position` — https://www.singstat.gov.sg/find-data/search-by-theme/economy/international-investment-position
-- `sg-external-debt` — https://www.singstat.gov.sg/find-data/search-by-theme/economy/external-debt
-- `sg-direct-investment-abroad` — https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/foreign-direct-investment
-- `sg-fdi-in-singapore` — https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/foreign-direct-investment
-- `sg-household-sector-balance-sheet` — https://www.singstat.gov.sg/find-data/search-by-theme/economy/household-sector-balance
-- `sg-domestic-supply-price-index` — https://www.singstat.gov.sg/publications/economy/producer-price-indices
-- `sg-international-visitor-arrivals` — https://www.singstat.gov.sg/find-data/search-by-theme/industry/tourism
-- `sg-supply-use-input-output-tables` — https://www.singstat.gov.sg/find-data/search-by-theme/economy/supply-use-and-input-output-tables
-- `sg-wholesale-trade-business-receipts` — https://www.singstat.gov.sg/find-data/search-by-theme/industry/services
-- `sg-services-producer-price-indices` — https://www.singstat.gov.sg/publications/economy/services-producer-price-indices
-- `sg-complete-life-tables` — https://www.singstat.gov.sg/publications/population/complete-life-table
-- `sg-ssic-2025` — https://www.singstat.gov.sg/standards/standards-and-classifications/ssic
-- `sg-ssoc-2024` — https://www.singstat.gov.sg/standards/standards-and-classifications/ssoc
-- `sg-business-expectations` — https://www.singstat.gov.sg/find-data/search-by-theme/industry/business-expectations
-- `sg-births-fertility` — https://www.singstat.gov.sg/find-data/search-by-theme/population/births-and-fertility
-- `sg-enterprise-landscape` — https://www.singstat.gov.sg/find-data/search-by-theme/industry/enterprises-and-corporate-sector
+Two genuine consolidations, not sloppy mapping — confirmed by content, not
+assumed: SingStat merged Balance of Payments + International Investment
+Position + External Debt into one "International Accounts" theme page, and
+merged Domestic Supply/Manufactured Products price indices + Services
+Producer Price Indices into one "Producer and International Trade Price
+Indices" theme page. `sg-fdi-in-singapore` (inward) and
+`sg-direct-investment-abroad` (outward) — previously both pointed at the same
+generic landing page — now each have their own distinct, confirmed page.
+
+One weaker link, flagged rather than silently treated as equal-confidence:
+`sg-wholesale-trade-business-receipts` → the `industry/services` theme page
+mentions the wholesale-trade-index and business-receipts-index series are
+still live but the agent couldn't fully confirm that page is the singular
+current landing page for those two specific indices versus just referencing
+them. Worth a second look if it 404s again.
 
 ## Japan — 7 reports, several different ministries (`jp-japan.json`)
 - `jp-prefectural-accounts` — https://www.esri.cao.go.jp/en/sna/data/data_list/kenmin/files/contents/main_en.html

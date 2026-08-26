@@ -21,7 +21,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
 ]
 
 const SLIDERS: {
-  key: 'fog' | 'glow' | 'spread' | 'geoAffinity' | 'galaxy'
+  key: 'fog' | 'spread' | 'geoAffinity' | 'galaxy' | 'pulseRate'
   label: string
   hint: string
   /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 200%–1000%. */
@@ -32,11 +32,6 @@ const SLIDERS: {
     key: 'fog',
     label: 'Distance haze',
     hint: 'Fades the far side of the graph. The long lens deliberately suppresses depth, so at this many nodes this is most of what is left of it',
-  },
-  {
-    key: 'glow',
-    label: 'Glow',
-    hint: 'Only the most depended-upon reports bleed light, so this reads as a second take on size rather than as atmosphere',
   },
   {
     key: 'spread',
@@ -84,6 +79,16 @@ const SLIDERS: {
     label: 'Galaxy pull',
     hint: 'Pulls every report toward its own family and its own country’s centre — countries cluster inside their family’s region of space, like separate star clusters inside one galaxy. Starts at 100%; drag to 0 to ablate it entirely — see lib/galaxyForce.ts for the model',
     max: 3,
+  },
+  {
+    key: 'pulseRate',
+    label: 'Pulse rate',
+    hint: 'How fast everything that pulses moves — the orb breath, the cross-border blink, the beam flow, the travelling teardrops — all together. Starts at 100% (the rate everything was tuned at); drag to 0 to freeze them in place without hiding them (see the Pulses toggle above for that)',
+    // No layout consequence at all — unlike spread/geoAffinity/galaxy this
+    // is pure playback speed, read live off a ref, same as geoAffinity/galaxy
+    // are for their forces. 4x tops out well past where the motion stops
+    // reading as individual pulses and starts reading as a blur.
+    max: 4,
   },
 ]
 

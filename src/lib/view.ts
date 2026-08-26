@@ -34,16 +34,15 @@ export interface ViewSettings {
    * the question became how much, and a boolean could not express it.
    */
   fog: number
-  /**
-   * Glow strength, 0 to 1.
-   *
-   * Also a slider, and also because the boolean was hiding the real problem:
-   * the bloom threshold sat above the brightest node in the graph, so the
-   * switch had never done anything at all. Glow now tracks authority — only the
-   * most depended-upon reports bleed light — which makes it a second reading of
-   * the same encoding rather than a uniform halo competing with it.
-   */
-  glow: number
+  // `glow` (bloom strength, 0 to 1) lived here from Phase 3 to 2026-08-25,
+  // when Thomas called it pointless and had it removed outright: "the glow
+  // slider works but I think the glow is pointless and should be taken off."
+  // Bloom is now permanently intensity 0 (see the `<Bloom>` in App.tsx) —
+  // the `<EffectComposer>` stays mounted for `PngExport.tsx`'s sake (see its
+  // file comment on why unmounting it shifts the whole scene's colour), it
+  // just never bleeds light any more. `glowInk`/emissive in palette.ts and
+  // nodeVisuals.ts are unrelated — that's the authority-linked self-lit fill,
+  // not this halo, and it stays.
   /** Slow automatic orbit. */
   autoRotate: boolean
   /**
@@ -107,7 +106,7 @@ export interface ViewSettings {
    * Layout spread — the multiplier applied to the whole layout scale, **2 to
    * 10**, shown to the viewer as 200%–1000%. Default 2.
    *
-   * A slider for the same reason haze and glow are: the right amount depends
+   * A slider for the same reason haze is: the right amount depends
    * on the corpus. At 124 nodes the tight layout read as one constellation;
    * at 335 it read as a nest. Moving it rebuilds the layout (charge,
    * repulsion cap, link rest lengths all scale together, and links touching
@@ -178,6 +177,24 @@ export interface ViewSettings {
    */
   galaxy: number
   /**
+   * Global speed multiplier on everything that pulses: the orb breath
+   * (`ORB_PULSE_PERIOD_SECONDS`), the cross-border blink, the beam flow
+   * shader on continuous edges, and the travelling teardrop particles
+   * (`linkDirectionalParticleSpeed`, itself already a per-edge cadence —
+   * see `pulseSpeed` in InfluenceGraph.tsx — this multiplies that, it
+   * doesn't replace it). **1 is real-time** (the rate everything above
+   * was tuned at); 0 freezes every one of them in place without hiding
+   * them — a different thing from `showPulses`, which controls whether
+   * they draw at all. Read live off a ref every frame/tick, the same
+   * pattern as `geoAffinity`/`galaxy` — moving this slider never rebuilds
+   * or re-warms anything, because nothing about the LAYOUT changes, only
+   * how fast the motion on top of it plays.
+   *
+   * Added 2026-08-25 (Thomas: "a slider to adjust the 'time' so that
+   * pulse rate is easily toggleable").
+   */
+  pulseRate: number
+  /**
    * The lens — which question the node fills answer. STANDARD is the
    * country palette; GROUP_COMPARISON is five inks (US red, BRICS yellow, EU
    * green, international white, everything else grey); WORLD_OVERVIEW is the
@@ -215,7 +232,6 @@ export const DEFAULT_VIEW: ViewSettings = {
   showEdges: true,
   showHorizon: false,
   fog: 0.35,
-  glow: 0.55,
   autoRotate: false,
   focusBuiltFrom: true,
   focusFeedsInto: true,
@@ -225,6 +241,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   spread: 2,
   geoAffinity: 1.5,
   galaxy: 1,
+  pulseRate: 1,
   lens: 'STANDARD',
 }
 
@@ -267,42 +284,11 @@ export const HORIZON_COLOUR = '#12233a'
 // The PAPER_* constant family (background, node fill, dim link/node/rim
 // treatments, line opacities) was deleted with blueprint mode, 2026-08-19.
 
-/**
- * Bloom threshold at full glow.
- *
- * The old value was 0.5, against a brightest node of 0.36 — so bloom lit
- * nothing, on any graph, ever, and nobody noticed for five sessions. The
- * replacement is chosen so roughly the top ten nodes bleed and the rest stay
- * contained: glow becomes a second reading of authority instead of atmosphere.
- * Below about 0.15 most of the graph blooms, apparent size flattens out, and
- * the encoding the whole project rests on stops working.
- *
- * **Lowered 0.26/0.44 → 0.17/0.32 in v3, 2026-08-19, and it had to be.** The
- * 0.26 was tuned against v2's emissive channel, where emitted light was the
- * fill colour times authority and fills ran up to Y = 0.703. v3 normalises
- * every node's emissive to Y = 0.213 (`glowInk`), which is what makes glow a
- * reading of authority at all — but it also cuts the brightest emission in the
- * scene by roughly a third. Left at 0.26 the old threshold would have sat
- * above the new ceiling and bloom would have gone dark again, which is exactly
- * the five-session bug described above, arrived at from the opposite
- * direction. The pair keeps its old span; only the range moved.
- *
- * **The one node class this does not govern is INT.** Its fill is near-white
- * by design (achromatic = stateless, see `SCOPE_COLOUR`), so it is bright
- * before any emission is added and blooms on lit luminance rather than on
- * authority. That is a known, deliberate exception in the same family as
- * BRICS yellow — not a tuning failure, and not fixable from this constant.
- */
-// **Rescaled 0.17/0.32 → 0.14/0.26 on 2026-08-19, with the lighting fix.**
-// The emissive floor dropped 0.3 → 0.12 (Phase 4 §2.2), which cuts the
-// brightest node's emitted component ~20% — left alone, these thresholds
-// would have drifted back toward the sat-above-everything dead zone this
-// comment's history warns about twice. Scaled analytically by that same
-// ratio, NOT verified by eye: bloom remains the least-trusted number in the
-// codebase (every render this side of Thomas's GPU is software-rasterised).
-// Judge it on hardware alongside the new directional shading.
-export const BLOOM_THRESHOLD_MIN = 0.14
-export const BLOOM_THRESHOLD_MAX = 0.26
+// BLOOM_THRESHOLD_MIN/MAX (the glow slider's threshold range, tuned across
+// three rounds through 2026-08-19) were deleted 2026-08-25 along with the
+// slider itself — bloom is hardcoded off in App.tsx now, so nothing reads a
+// threshold any more. History's in git if bloom ever needs re-tuning from
+// scratch.
 
 /**
  * Every constant governing how focus looks, in one place, because they are only
