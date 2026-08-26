@@ -1518,10 +1518,42 @@ export default function InfluenceGraph({
     const charge = fg.d3Force('charge') as unknown as
       | { strength(s: number): void; distanceMax(d: number): void }
       | undefined
-    charge?.strength(-300 * m)
+    // Bumped -300 -> -330 2026-08-26 (Thomas, HANDOFF item 5): a small
+    // increase to the one force that actually separates DIFFERENT clusters
+    // from each other (galaxyForce only ever pulls a node toward its OWN
+    // cluster's centroid — see the comment on `fg.d3Force('galaxy', ...)`
+    // below). Cheap, incremental "inter-cluster push" rather than the
+    // larger mirrored-force build Thomas didn't ask for this round.
+    charge?.strength(-330 * m)
     // Without a cap, repulsion never falls off and linear chains get flung
     // out — but the cap has to grow with the layout or it recreates the pile.
     charge?.distanceMax(420 * m)
+
+    // Force-centre (three-forcegraph's default, unmodified since the app's
+    // first commit): `d3-force-3d`'s forceCenter does NOT pull individual
+    // nodes toward the middle. Each tick it computes the mean position of
+    // ALL nodes and rigidly translates EVERY node by (mean - target) *
+    // strength — a uniform shift of the whole cloud as one rigid body, not
+    // a per-node attraction. Traced 2026-08-26 (HANDOFF item 5 design
+    // discussion) as a real, probably-minor contributor to "clusters pile
+    // toward the centre" (`galaxyForce` and unbounded `charge` repulsion
+    // are the bigger mechanical causes). Thomas's call: kill it outright.
+    // Strength 0 makes the shift exactly zero every tick, i.e. a true
+    // no-op — not "kill it" in gross approximation.
+    //
+    // A NEGATIVE strength here would NOT push clusters apart from each
+    // other the way `charge` above does. Because the shift is referenced
+    // to the cloud's own mean position, a negative value still moves every
+    // node by the SAME vector each tick (just away from the target instead
+    // of toward it) — the whole graph drifts as one block, and since a
+    // bigger drift makes next tick's mean even further from the target,
+    // it is an unstable runaway translation, not inter-cluster repulsion.
+    // Don't reach for a negative number here for that effect; `charge`'s
+    // `distanceMax`/`strength` above are the actual levers for that.
+    const center = fg.d3Force('center') as unknown as
+      | { strength(s: number): void }
+      | undefined
+    center?.strength(0)
 
     const linkForce = fg.d3Force('link') as unknown as
       | { distance(fn: (l: LinkDatum) => number): void }

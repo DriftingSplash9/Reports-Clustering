@@ -19,7 +19,7 @@ agents by design — see PLAYBOOK.md rule 1, don't state it.
 
 ## 2. Current state
 
-**Live corpus: 3,384 reports · 2,597 dependencies.** `npm run validate`
+**Live corpus: 3,383 reports · 2,595 dependencies** (cn-stats-law retired this round, see below). `npm run validate`
 clean (120/120), `tsc --noEmit` clean, `npm run build` clean (1,498.00 kB) —
 re-verified in a fresh sandbox after the data edits below, then pushed to
 the device and confirmed byte-identical (sha256) across all five touched
@@ -133,6 +133,90 @@ way (a stray `why`/`note` key-name inconsistency introduced by a manual
 sandbox patch, harmless to validate but worth keeping the two copies
 identical anyway).
 
+Four more of Thomas's 2026-08-26 data/design calls executed (Todo items
+2-5 as they stood after the first batch): all four verified end-to-end in a
+fresh sandbox (`npm run gen`/`validate`(120/120)/`tsc --noEmit`/`npm run
+build` all clean, bundle 1,498.04 kB) and sha256-confirmed byte-identical
+against the device copies they were made on directly.
+
+*Item 2 - `cn-stats-law` retired, `cn-stats-law-impl-regs` kept separate.*
+Thomas: keep `cn-stats-law-impl-regs` too, reaffirming his original call now
+that the base-law/regulations distinction is on the table. `cn-stats-law`
+removed from `cn-china-grok-2026-08.json` as a duplicate of the
+already-verified `cn-statistics-law` (no edges to retarget - both nodes
+were fully isolated). `cn-stats-law-impl-regs` untouched. Flag in
+`brics-g4-2026-08-22.json`'s `_dropped` marked RESOLVED.
+
+*Item 3 - `qc-perequation -> isq-vitalite-economique` held, not minted.*
+Thomas: don't mint. `_dropped` entry in `qc-quebec-grok-2026-08.json`
+changed from `deferred` to `note`, RESOLVED text prepended; the underlying
+evidentiary gap (s.5.1 names the index, not ISQ by name) is unchanged, just
+no longer being minted over.
+
+*Item 4 - three Andean direction conflicts tossed.* Thomas: toss - kept
+each existing corpus edge (`co-comercio-exterior -> co-bop`, `co-emmet ->
+co-ipi`, `ec-comercio-exterior -> ec-bop`) as the live direction, rejected
+the reversed challenger from `andean-domestic-wiring-batch2.json` in each
+pair. In `andean-wiring-grok-2026-08.json`: the three existing-edge
+`_dropped` entries flip `caveat` -> `resolved` (also corrects a
+copy-paste error in their own original text, which wrongly claimed the
+opposite direction "is independently verified... and minted instead" -
+it never was, per the corresponding entries below); the three reversed-claim
+entries flip `deferred` -> `wrong-direction`.
+
+*Item 5 - "clusters pile toward the centre": force-centre killed, charge
+repulsion nudged up.* Thomas: set force-centre to 0, and turn up the
+inter-cluster push a tad. In `InfluenceGraph.tsx`: `fg.d3Force('center')`
+(three-forcegraph's default `d3-force-3d` forceCenter, strength 1,
+previously never touched) now has its strength set to 0 - confirmed via
+source (`d3-force-3d/src/center.js`) that this force does NOT pull
+individual nodes toward the middle; each tick it rigidly translates EVERY
+node by the same vector to keep the cloud's own mean position pinned at the
+origin, so strength 0 makes that shift an exact no-op. Also answered
+Thomas's question in code: a NEGATIVE strength here would not separate
+clusters the way `charge` does - because the shift is referenced to the
+cloud's own mean, going negative just runs the same uniform whole-graph
+translation in reverse, and since a bigger shift makes the next tick's mean
+even further off-target, it's an unstable runaway drift, not inter-cluster
+repulsion. Left as a comment at the call site so the question doesn't need
+re-asking. Separately, `charge` strength (the one force that actually does
+separate different clusters - see 2026-08-26's design-discussion findings
+below) bumped `-300 -> -330` per `spread` unit, a ~10% nudge, cheaper than
+building the mirrored inter-cluster force (option (c) below) which Thomas
+didn't ask for this round. Headless Playwright check against `vite preview`
+at the Everything tier: scene renders, settles, no console/page errors, no
+exploded/collapsed layout - a "tad" tune, not a redesign, so the centre is
+still visibly the densest area (expected: the shared-hub-node mechanism
+option (c) targets is untouched). If this doesn't move the needle enough in
+ordinary use, option (c) is still on the table.
+
+**Layout/clustering design discussion opened, nothing built yet
+(2026-08-26).** Thomas: "the clusters cluster too much to the centre... it
+gets everything jumbled," proposed an invisible keep-out sphere at the
+origin (grows with node count, nodes excluded, edges may cross) and asked
+separately whether the graph should just "lower the pull to the centre in
+general." Grounded the discussion by reading `galaxyForce.ts` and the force
+block in `InfluenceGraph.tsx` rather than guessing. Findings: (1)
+`galaxyForce` only ever pulls a node toward its OWN family/country
+centroid — there is no complementary force pushing DIFFERENT
+clusters apart from each other; (2) generic `charge` repulsion is the only
+thing separating clusters at all, and it has a hard `distanceMax` cutoff
+(420 × spread) beyond which two nodes stop repelling entirely; (3) a
+number of high-fan-in hub nodes (sna-2008, imf-bpm6, and the other
+international standards) are linked from dozens of countries at once, so
+ordinary link-force springs pull them toward the geometric middle and drag
+their surrounding clusters in after them — this is the best-supported
+mechanical explanation for "jumbled at the centre," not a single monolithic
+pull. Separately confirmed `three-forcegraph`'s default `forceCenter()` is
+unmodified and still registered — a real "pull toward the centre," but one
+that recentres the whole cloud's average position rather than compressing
+it, so probably a minor contributor at most. Assessed both of Thomas's
+ideas against this and proposed a third: an inter-cluster repulsion force,
+the direct mirror of what `galaxyForce` already does, as the most targeted
+fix — see Todo for the open decision. No code changed this round; purely a
+design conversation per Thomas's own framing ("let's consider... I would
+like to hear them too").
+
 Full narrative for anything above (BRICS G.1–G.4, Canada tier, wiring tier,
 prompt 18, new-countries tier) is in `archive/Previous Handoffs/` — this
 section only needs to say where things stand now, not how they got here.
@@ -150,44 +234,23 @@ section only needs to say where things stand now, not how they got here.
    reasoned through against the traced library source; this is now a
    "does it actually recur" watch, not a pending confirmation. Details:
    `notes/render-consistency-repro-2026-08-25.md`.
-2. **`cn-stats-law`/`cn-stats-law-impl-regs` vs `cn-statistics-law`** — NOT
-   the same shape as the (now-resolved) br-scn/br-ibge case it was compared
-   to. `cn-stats-law` and `cn-statistics-law` are true duplicates of the
-   same base Statistics Law; `cn-stats-law-impl-regs` is a genuinely
-   *different* document — the 2017 implementing regulations issued under
-   that law, not another copy of it. Flagged back to Thomas 2026-08-26
-   (his "keep cn-stats-law-impl-regs" call was made on the original,
-   oversimplified 3-way-duplicate framing); needs a fresh call now that the
-   base-law/regulations distinction is on the table — e.g. keep
-   `cn-statistics-law` as the canonical base-law node, retire `cn-stats-law`
-   as its duplicate, and keep `cn-stats-law-impl-regs` as its own separate
-   node rather than retiring it. Note in `_dropped` block of
-   `brics-g4-2026-08-22.json`.
-3. **`qc-perequation → isq-vitalite-economique`** — Article 5.1's quote
-   verified accurate verbatim against LegisQuébec 2026-08-26. But the
-   provision names the *index*, not ISQ by name — the same evidentiary gap
-   the corpus's own precedent (the sibling `qc-partage-croissance-tvq` edge)
-   already treats as insufficient on its own, minted there only because a
-   *different* provision names ISQ explicitly. Thomas's call: mint anyway
-   (treating "index" as an unambiguous reference to ISQ's one product) or
-   hold pending a citation that names the publisher. Filed `deferred` in
-   `qc-quebec-grok-2026-08.json`.
-4. **Three Andean direction conflicts** — side-by-side citations presented
-   2026-08-26; needs Thomas's direction call for each:
-   `co-comercio-exterior` ↔ `co-bop`, `co-emmet` ↔ `co-ipi`,
-   `ec-comercio-exterior` ↔ `ec-bop`. Corpus has each live in one direction
-   from an earlier round (thin, uncited basis text); this round verified
-   evidence for the opposite direction (raw-quoted, evidence_url'd). Existing
-   edge `caveat`'d, new claim `deferred`, in `andean-wiring-grok-2026-08.json`.
+2. **Did killing force-centre + the charge nudge actually help the
+   "piles up at the centre" complaint?** Shipped 2026-08-26 as a cheap
+   first pass (see Current State) — force-centre off, charge repulsion
+   +10%. The scene still visibly clusters at the middle in a headless
+   check (expected: the shared-hub-node mechanism is untouched). If it's
+   not enough in ordinary use, the bigger inter-cluster repulsion force
+   (mirroring `galaxyForce.ts`, previously "option (c)") is still on the
+   table — flag it here and it can get built.
 
 ### [Agent] — next build rounds
 
-5. **Typed edges** — what a trunk's "type" means when one line stands for
+3. **Typed edges** — what a trunk's "type" means when one line stands for
    many mixed relationships. Needs a design conversation first.
-6. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
-7. **New Grok research round** — the 2026-08-22 queue is fully worked;
+4. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
+5. **New Grok research round** — the 2026-08-22 queue is fully worked;
     next round needs scoping from scratch.
-8. **Stale-URL research remainder** — 19 of the original 37 in
+6. **Stale-URL research remainder** — 19 of the original 37 in
     `notes/stale-urls-2026-08-20.md` are still open: Japan (7 reports,
     several ministries — one duplicate URL worth checking whether
     `jp-vital-statistics`/`jp-vital-statistics-detailed` should even be two

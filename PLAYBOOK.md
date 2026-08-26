@@ -319,6 +319,7 @@ Bugs and gotchas not already covered as a numbered rule above.
   device copy. Not a substitute for staging when you actually need FRESH
   device-side content (e.g. picking up a file Thomas edited locally) — only
   valid when the agent is the one who wrote both copies. 2026-08-26.
+- **A `report_id`/`candidate_target`-shaped `_dropped` entry (the duplicate-node-flag family, e.g. "is X a dupe of Y?") has no `source`/`target` fields at all — only `edge`/`source`/`target`-shaped entries do.** Rule 10 above ("caveat/resolved must name a live edge") only applies to the latter shape. Tagging the former `"resolved"` once the underlying duplicate question is settled makes `validate-data.ts` read `n.source`/`n.target` as `undefined`, which it can't match against any live edge — it fails as "undefined -> undefined", a dangling reference. The report_id-shaped entries stay `reason: "note"` permanently, resolved or not; only prepend "RESOLVED ..." text to the existing `note` field (see any of the many precedents already using this pattern, e.g. eurosystem-ecb.json). Hit 2026-08-26 resolving the br-scn/br-ibge-sistema-contas-nacionais and cn-stats-law flags.
 
 ## 7. Standing decisions — do not re-raise
 
