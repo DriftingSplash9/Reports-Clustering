@@ -113,6 +113,7 @@ import {
 } from './lib/regions'
 import { GroupsPanel } from './components/GroupsPanel'
 import { Legend } from './components/Legend'
+import { OpenedCountriesPanel } from './components/OpenedCountriesPanel'
 /**
  * Every `RegionGroup` there is — continents/blocs/orgs/publishers plus every
  * individual country — combined once at module scope for `SearchPanel`
@@ -132,6 +133,7 @@ import {
   TIER_DESCRIPTION,
   TIER_LABEL,
   buildDisclosedGraph,
+  foldCountry,
   isCountryOrbId,
   isOrbId,
   resolveId,
@@ -980,6 +982,22 @@ export default function App() {
   }, [])
 
   /**
+   * The opened-countries pill's per-row "Fold" and "Fold all" (HANDOFF item
+   * 8, 2026-08-25) — the explicit UI counterpart to `toggleCountryOpen`
+   * above, see `foldCountry`'s comment in hierarchy.ts for why an explicit
+   * button is safe where a graph gesture wasn't. Narrower than
+   * `handleReset` on purpose: only `openedCountries` changes, camera/
+   * selection/filter/drilldown are untouched.
+   */
+  const handleFoldCountry = useCallback((country: Country) => {
+    setOpenedCountries((prev) => foldCountry(prev, country))
+  }, [])
+
+  const handleFoldAllCountries = useCallback(() => {
+    setOpenedCountries((prev) => (prev.size === 0 ? prev : new Set()))
+  }, [])
+
+  /**
    * A tier button was pressed.
    *
    * Puts the zoom slider back to 1 as well as changing the tier. Pressing a
@@ -1630,6 +1648,11 @@ export default function App() {
             />
           )}
           {panels.legend && <Legend />}
+          <OpenedCountriesPanel
+            openedCountries={openedCountries}
+            onFold={handleFoldCountry}
+            onFoldAll={handleFoldAllCountries}
+          />
         </div>
         <div style={bottomDockRight}>
           {panels.unlinked && (

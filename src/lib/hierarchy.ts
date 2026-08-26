@@ -482,8 +482,9 @@ export function toggleDrilldown(current: Drilldown, id: string): Drilldown {
  * Double-click on `id`, for the per-country fold. Returns the next set of
  * opened countries; does not mutate. Companion to `toggleDrilldown`, same
  * contract: a country orb reveals that one country's currently-permitted
- * reports, anything else does nothing, and there is no gesture that folds a
- * country back — only a full Reset does (see App.tsx's `handleReset`).
+ * reports, anything else does nothing, and there is no GESTURE on the graph
+ * itself that folds a country back — only a full Reset did, until
+ * `foldCountry` below (2026-08-25, HANDOFF item 8).
  */
 export function toggleCountryOpen(
   current: ReadonlySet<Country>,
@@ -494,5 +495,31 @@ export function toggleCountryOpen(
   if (current.has(country)) return current
   const next = new Set(current)
   next.add(country)
+  return next
+}
+
+/**
+ * Fold ONE country back — the opened-countries pill's per-row action
+ * (2026-08-25, HANDOFF item 8: "currently only a full Reset re-folds an
+ * opened country"). Returns the next set; does not mutate.
+ *
+ * Deliberately NOT wired to any double-click/raycast gesture — the comment
+ * on `toggleDrilldown` and `toggleCountryOpen` above still holds for the
+ * graph itself: a gesture that can only ever add detail cannot surprise
+ * anyone by removing it, which is exactly the bug ("behaving irregularly")
+ * that killed the old real-node-folds-the-view design. A named row in a
+ * list the user opened on purpose, next to an explicit "Fold" button, is a
+ * different kind of control — nothing on the CANVAS changes meaning, so
+ * this doesn't reintroduce that ambiguity. Reset's unconditional full-clear
+ * behaviour (`App.tsx`'s `handleReset`) is unchanged; this just adds a
+ * narrower option next to it.
+ */
+export function foldCountry(
+  current: ReadonlySet<Country>,
+  country: Country,
+): ReadonlySet<Country> {
+  if (!current.has(country)) return current
+  const next = new Set(current)
+  next.delete(country)
   return next
 }

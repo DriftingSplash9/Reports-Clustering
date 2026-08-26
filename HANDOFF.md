@@ -52,6 +52,22 @@ batch — singstat.gov.sg's site restructuring) are fixed this session,
 raw-verified per page, applied to `sg-singapore-grok-2026-08.json`'s `url`
 fields. Japan (7), Mexico (5), and 6 one-offs are still open.
 
+**Re-fold affordance shipped (old Todo item 8).** An opened country could
+only be folded back by a full Reset — now the dock shows an "Opened — N"
+pill (bottom-centre, next to Legend) whenever `openedCountries` is
+non-empty; it expands into a list with a per-country "Fold" button plus a
+"Fold all" footer action. New `foldCountry` in `hierarchy.ts` (removes one
+country; `toggleCountryOpen`'s own double-click gesture is untouched and
+still only ever adds — see both functions' comments for why an explicit
+named-row button doesn't reintroduce the "same gesture, different meaning"
+bug that killed the old design). New `src/components/OpenedCountriesPanel.tsx`,
+same collapsed-pill/outside-click/Escape pattern as `Legend`/`GroupsPanel`.
+Verified: `tsc`/`npm run validate`(120/120)/`npm run build` clean (bundle
+1,496.9 kB, +3.4 kB for the new component); a headless Playwright pass
+against `vite preview` opened a real country by double-clicking its orb,
+confirmed the pill and its list render, clicked "Fold", and confirmed the
+country actually re-folded (node count back to 473, pill gone).
+
 Full narrative for anything above (BRICS G.1–G.4, Canada tier, wiring tier,
 prompt 18, new-countries tier) is in `archive/Previous Handoffs/` — this
 section only needs to say where things stand now, not how they got here.
@@ -94,14 +110,12 @@ section only needs to say where things stand now, not how they got here.
 7. **"Why so few?" affordance** on group isolates — e.g. "Middle East → 6
    shown" is correct (cross-border gaps) but reads as a bug with no
    explanation on screen.
-8. **Re-fold / "N countries opened" affordance** — currently only a full
-   Reset re-folds an opened country.
-9. **Typed edges** — what a trunk's "type" means when one line stands for
+8. **Typed edges** — what a trunk's "type" means when one line stands for
    many mixed relationships. Needs a design conversation first.
-10. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
-11. **New Grok research round** — the 2026-08-22 queue is fully worked;
+9. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
+10. **New Grok research round** — the 2026-08-22 queue is fully worked;
     next round needs scoping from scratch.
-12. **Stale-URL research remainder** — 19 of the original 37 in
+11. **Stale-URL research remainder** — 19 of the original 37 in
     `notes/stale-urls-2026-08-20.md` are still open: Japan (7 reports,
     several ministries — one duplicate URL worth checking whether
     `jp-vital-statistics`/`jp-vital-statistics-detailed` should even be two
