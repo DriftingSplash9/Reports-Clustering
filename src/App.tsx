@@ -107,6 +107,7 @@ import {
   REGION_GROUPS,
   COUNTRY_GROUPS,
   reportIdsForGroup,
+  matchesRegionGroup,
   continentOf,
   type RegionGroup,
   type Continent,
@@ -133,6 +134,7 @@ import {
   TIER_DESCRIPTION,
   TIER_LABEL,
   buildDisclosedGraph,
+  countryFromOrbId,
   foldCountry,
   isCountryOrbId,
   isOrbId,
@@ -1104,6 +1106,52 @@ export default function App() {
     [graph],
   )
 
+  /**
+   * "Why so few?" — HANDOFF item 7, 2026-08-26: a group isolate on a
+   * sparsely-connected region (e.g. Middle East) can leave only a handful of
+   * real reports on screen, and with nothing on screen explaining it, that
+   * reads as a bug. Two distinct, entirely legitimate reasons it can happen,
+   * both computed here so `GroupsPanel` can name whichever applies:
+   *
+   * `foldedCountries` — this group's own countries that are STILL a
+   * `corb:` (country-fold) orb rather than opened. `groupFocus`'s seed walk
+   * (`reportIdsForGroup` over `disclosedGraph.nodes`) picks up such an orb as
+   * a match (any-member semantics, same as `matchesRegionGroup`'s own
+   * comment) but `tierCounts` excludes every orb from "real reports shown" —
+   * so a folded country counts toward neither number the user sees, only
+   * toward the sphere they can already see sitting there unopened.
+   *
+   * `shelved` — real reports of this group with no edges in either
+   * direction, i.e. members of `isolated` above. These are seeded into
+   * `groupFocus.nodes` same as any other real report (seeds are added
+   * unconditionally — see `computeGroupFocus`), so they DO count toward
+   * "shown" here even though `InfluenceGraph`'s `forceGraph` memo never
+   * draws them (its own separate degree filter, orthogonal to this one) —
+   * the corpus genuinely has little to no documented cross-border data for
+   * them yet, not a rendering bug.
+   *
+   * Both read `disclosedGraph`/`isolated`, not `groupFocus`, because the
+   * question is about the group's OWN membership, independent of whatever
+   * else the walk happens to have reached (an international body the group
+   * connects to, say) — that part already has no "why so few" to answer.
+   */
+  const groupWhySoFew = useMemo(() => {
+    if (!selectedGroup) return null
+    const foldedCountries =
+      selectedGroup.kind === 'publisher'
+        ? 0
+        : disclosedGraph.nodes.filter(
+            (n) =>
+              isCountryOrbId(n.id) &&
+              matchesRegionGroup(
+                { id: n.id, country: countryFromOrbId(n.id), publisher: '' },
+                selectedGroup,
+              ),
+          ).length
+    const shelved = isolated.filter((n) => matchesRegionGroup(n, selectedGroup)).length
+    return { foldedCountries, shelved }
+  }, [selectedGroup, disclosedGraph, isolated])
+
   // `scopeCounts` (ChipBar's per-family/level counts) went with it too.
 
   /**
@@ -1645,6 +1693,9 @@ export default function App() {
             <GroupsPanel
               selectedGroupId={selectedGroupId}
               onChoose={handleChooseGroup}
+              shownCount={groupFocus ? tierCounts.visible : null}
+              foldedCountries={groupWhySoFew?.foldedCountries ?? 0}
+              shelvedCount={groupWhySoFew?.shelved ?? 0}
             />
           )}
           {panels.legend && <Legend />}

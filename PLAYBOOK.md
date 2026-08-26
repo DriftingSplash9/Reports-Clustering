@@ -305,6 +305,20 @@ Bugs and gotchas not already covered as a numbered rule above.
   looks like zip's temp-file-then-atomic-rename step doesn't survive the
   mount. Fix: `zip` to a path under `$HOME` (outside `mnt/`), then `cp` the
   finished zip into the mounted folder. 2026-08-25.
+- **`device_stage_files` can fail with `session_stale_relogin`** ("this
+  device's sign-in is stale or no longer trusted") mid-session, with no
+  warning beforehand — it isn't tied to how long staging has been working
+  fine; it just started failing on a routine re-stage. Fix requires Thomas
+  to re-sign-in in the desktop app; an agent hitting this can't unblock it.
+  Workaround when it strikes right after an edit you need to verify: instead
+  of re-staging, `sha256sum` the device file(s) against the already-staged/
+  already-verified sandbox copies — if the agent wrote the device file
+  itself from known-good sandbox content (not by re-deriving it by hand), a
+  hash match is sufficient proof the two are byte-identical, so the earlier
+  sandbox verification (tsc/validate/build/Playwright) still stands for the
+  device copy. Not a substitute for staging when you actually need FRESH
+  device-side content (e.g. picking up a file Thomas edited locally) — only
+  valid when the agent is the one who wrote both copies. 2026-08-26.
 
 ## 7. Standing decisions — do not re-raise
 

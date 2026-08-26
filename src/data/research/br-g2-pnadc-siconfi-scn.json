@@ -53,22 +53,6 @@
       ]
     },
     {
-      "id": "br-scn",
-      "title": "Sistema de Contas Nacionais: Brasil (SCN)",
-      "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-      "country": "BR",
-      "jurisdiction_level": "federal",
-      "region": "Brazil",
-      "description": "Brazil's annual national accounts, and the synthesis release that consumes most of IBGE's economic survey programme. IBGE's own page states its international basis verbatim: \"As informações da série do Sistema de Contas Nacionais - referência 2010, cabe ressaltar, são apresentadas segundo uma classificação de produtos e atividades integrada com a Classificação Nacional de Atividades Econômicas - CNAE 2.0 e estão em conformidade com o System of national accounts 2008, SNA 2008, manual preparado sob os auspícios da Organização das Nações Unidas - ONU, da Comissão Europeia - Eurostat, do Fundo Monetário Internacional - FMI, da Organização de Cooperação e Desenvolvimento Econômico - OCDE e do Banco Mundial, o que reflete o compromisso do IBGE com a sistemática de revisões periódicas de suas práticas, conforme preconizam as recomendações internacionais.\" It also names its own domestic inputs verbatim: \"O Sistema de Contas Nacionais Anuais - SCN, como sistema síntese, reúne informações de várias pesquisas do IBGE tais como a Pesquisa Industrial Anual - Empresa - PIA-Empresa, a Pesquisa Anual da Indústria da Construção - PAIC, a Pesquisa Anual de Comércio - PAC e a Pesquisa Anual de Serviços - PAS. Reúne ainda informações econômicas de registros fiscais e administrativos como a Escrituração Contábil Fiscal - ECF e dados de agências reguladoras\" — four named IBGE surveys, none of them yet a node in this corpus, recorded as a research lead in _dropped rather than as edges to nothing. A live methodological caveat, also verbatim from the same page and worth carrying on the node because it affects what the current edition actually contains: \"Observação importante: Devido ao trabalho adicional de reformulação do SCN, cujo ano de referência passará de 2010 para 2021, os resultados desta edição do estudo estão apresentados em um formato excepcional, sem comentários analíticos. ... a divulgação da série mais detalhada é suspensa temporariamente.\" Fetched with plain curl at TIER A (HTTP 200, 132,905 bytes) — this www.ibge.gov.br path served genuine bytes where the PNAD Contínua path on the same host returned a 403 WAF body, so the block is path-inconsistent rather than host-wide.",
-      "releases_per_year": 1,
-      "cadence_note": "IBGE's own metadata block states: \"Tipo de operação estatística: Sistema de contas nacionais | Tipo de dados: Dados agregados | Periodicidade de divulgação: Anual\".",
-      "last_updated": null,
-      "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9052-sistema-de-contas-nacionais-brasil.html",
-      "domains": [
-        "national-accounts"
-      ]
-    },
-    {
       "id": "br-cnt",
       "title": "Contas Nacionais Trimestrais (CNT)",
       "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
@@ -239,7 +223,7 @@
       "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
     },
     {
-      "source_report_id": "br-scn",
+      "source_report_id": "br-ibge-sistema-contas-nacionais",
       "target_report_id": "sna-2008",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY, TIER A (www.ibge.gov.br contas-nacionais path, plain curl, HTTP 200, 132,905 bytes — this path served genuine bytes where the PNAD Contínua path on the same host returned a WAF 403). IBGE's own page: \"As informações da série do Sistema de Contas Nacionais - referência 2010, cabe ressaltar, são apresentadas segundo uma classificação de produtos e atividades integrada com a Classificação Nacional de Atividades Econômicas - CNAE 2.0 e estão em conformidade com o System of national accounts 2008, SNA 2008, manual preparado sob os auspícios da Organização das Nações Unidas - ONU, da Comissão Europeia - Eurostat, do Fundo Monetário Internacional - FMI, da Organização de Cooperação e Desenvolvimento Econômico - OCDE e do Banco Mundial, o que reflete o compromisso do IBGE com a sistemática de revisões periódicas de suas práticas, conforme preconizam as recomendações internacionais.\" \"Em conformidade com\" is a methodology claim, not a citation for context, and the sentence names the manual, its edition and its five sponsoring bodies. Brazil's first edge into the international-standards.json layer, and the same shape the corpus already carries for Canadian, German and Antipodean national accounts. Note that sna-2008 is itself superseded by the 2025 SNA per its own node description, with country rollout targeting 2029-2030; IBGE's current rebasing exercise (reference year moving from 2010 to 2021) is the natural moment for that transition, but IBGE's page states only the rebasing, not an SNA edition change, so nothing is asserted about it here.",
@@ -254,7 +238,7 @@
     },
     {
       "source_report_id": "br-cnt",
-      "target_report_id": "br-scn",
+      "target_report_id": "br-ibge-sistema-contas-nacionais",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY, TIER A (www.ibge.gov.br contas-nacionais path). IBGE's own page for the quarterly accounts states the constraint and names the technique: \"Os dados trimestrais são ajustados para os totais anuais (Sistema de Contas Nacionais Anuais - SCN), usando o procedimento estatístico de benchmarking (Denton).\" `uses_data_from` rather than `calculated_from`, and the distinction is worth stating because Denton benchmarking is mechanical: the quarterly series' own content comes from indicator surveys and is not derived from the annual accounts, but it is then constrained to reconcile to the annual totals, so SCN's published figures are a direct input to what CNT finally publishes without being the thing it is computed from. Rating it `calculated_from` would overstate the direction of derivation; rating it `cites` would understate a named, binding statistical procedure.",
       "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9300-contas-nacionais-trimestrais.html"
@@ -330,6 +314,12 @@
       "target": null,
       "reason": "deferred",
       "why": "OUT OF THIS ROUND'S BUDGET, AND NO CLAIMS MADE. Three Brazilian series that plainly belong in this corpus and were not built. The Boletim Focus page (bcb.gov.br/publicacoes/focus) returns HTTP 200 with a 2,871-byte body — small enough to be a JS-rendered shell rather than a WAF block, and the Banco Central is otherwise reachable at TIER A for normativo PDFs, so this is a tractable lead rather than a blocked one. IGP-M/FGV (a privately produced index with heavy statutory and contractual use, and a candidate for source_kind 'commercial' when built) and the STN's Relatório Mensal da Dívida / Resultado do Tesouro Nacional were not attempted at all. Recorded as leads with nothing asserted about any of them."
+    },
+    {
+      "report_id": "br-scn",
+      "candidate_target": "br-ibge-sistema-contas-nacionais",
+      "reason": "note",
+      "note": "RESOLVED 2026-08-26 (Thomas's call, HANDOFF item 2): br-scn was a near-duplicate of br-ibge-sistema-contas-nacionais (see the flag and resolution in brics-g4-partial-2026-08-22.json's _dropped array). Merged into that node and removed from this file; its two edges (-> sna-2008, and br-cnt's inbound edge) were retargeted to br-ibge-sistema-contas-nacionais, which also received br-scn's TIER-A-verified description, url and cadence_note."
     }
   ]
 }

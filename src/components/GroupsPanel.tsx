@@ -21,9 +21,28 @@ import { REGION_GROUPS, COUNTRY_GROUPS, type RegionGroup } from '../lib/regions'
 export function GroupsPanel({
   selectedGroupId,
   onChoose,
+  shownCount = null,
+  foldedCountries = 0,
+  shelvedCount = 0,
 }: {
   selectedGroupId: string | null
   onChoose: (groupId: string) => void
+  /**
+   * Real reports of the selected group actually on screen — `App.tsx`'s
+   * `tierCounts.visible` while a group is active (group isolate always wins
+   * there, so this is never stale against a different focus). `null` when no
+   * group is selected; there is nothing to caption.
+   */
+  shownCount?: number | null
+  /**
+   * "Why so few?" (HANDOFF item 7, 2026-08-26) — how many of the group's own
+   * countries are still a folded `corb:` orb rather than opened, and how many
+   * of its real reports have no cross-border ties at all (sit in the
+   * Isolated shelf). Both zero by default so this panel works unchanged for
+   * callers that don't pass them.
+   */
+  foldedCountries?: number
+  shelvedCount?: number
 }) {
   const [collapsed, setCollapsed] = useState(true)
   const [query, setQuery] = useState('')
@@ -60,16 +79,41 @@ export function GroupsPanel({
     return COUNTRY_GROUPS.filter((g) => g.label.toLowerCase().includes(q))
   }, [query])
 
-  const selectedLabel =
-    REGION_GROUPS.find((g) => g.id === selectedGroupId)?.label ??
-    COUNTRY_GROUPS.find((g) => g.id === selectedGroupId)?.label ??
+  const selectedGroup =
+    REGION_GROUPS.find((g) => g.id === selectedGroupId) ??
+    COUNTRY_GROUPS.find((g) => g.id === selectedGroupId) ??
     null
+  const selectedLabel = selectedGroup?.label ?? null
+
+  // "Why so few?" text — only rendered when there is actually something to
+  // explain (either count nonzero). A single-country group can only ever
+  // fold ITSELF, so that phrasing reads as "this country" rather than "N
+  // countries" — see the prop comment on `foldedCountries` for what it counts.
+  const whySoFew: string | null = (() => {
+    if (!selectedGroup || (foldedCountries === 0 && shelvedCount === 0)) return null
+    const parts: string[] = []
+    if (foldedCountries > 0) {
+      parts.push(
+        selectedGroup.kind === 'country'
+          ? `${selectedGroup.label}'s own reports are still folded — open it to see more.`
+          : `${foldedCountries} ${foldedCountries === 1 ? 'country here is' : 'countries here are'} still folded — open one to see more.`,
+      )
+    }
+    if (shelvedCount > 0) {
+      parts.push(
+        `${shelvedCount} report${shelvedCount === 1 ? '' : 's'} here ${shelvedCount === 1 ? 'has' : 'have'} no documented cross-border ties — see the Isolated shelf.`,
+      )
+    }
+    return parts.join(' ')
+  })()
 
   return (
     <div ref={wrapRef} style={wrap}>
       {collapsed ? (
         <button type="button" onClick={() => setCollapsed(false)} style={pill}>
-          {selectedLabel ? `Isolated: ${selectedLabel}` : 'Regions & Countries'}
+          {selectedLabel
+            ? `Isolated: ${selectedLabel}${shownCount !== null ? ` — ${shownCount} shown` : ''}`
+            : 'Regions & Countries'}
         </button>
       ) : (
         <div style={panel}>
@@ -86,6 +130,12 @@ export function GroupsPanel({
               </button>
             )}
           </div>
+          {whySoFew && (
+            <div style={whyNote}>
+              <span style={whyLabel}>Why so few? </span>
+              {whySoFew}
+            </div>
+          )}
           <div style={list}>
             {REGION_GROUPS.map((g) => (
               <GroupRow key={g.id} group={g} selected={g.id === selectedGroupId} onChoose={onChoose} />
@@ -212,6 +262,27 @@ const clearButton: React.CSSProperties = {
   padding: '3px 9px',
   cursor: 'pointer',
   lineHeight: 1,
+}
+
+// "Why so few?" note (HANDOFF item 7) — sits between the header and the
+// region list, the same place the eye lands right after opening the panel
+// to ask that exact question. `line-height`/`font-size` deliberately match
+// `note` in ViewControls.tsx (the app's one other small-print explanatory
+// line) rather than inventing a third caption style.
+const whyNote: React.CSSProperties = {
+  fontSize: 10.5,
+  lineHeight: 1.5,
+  color: 'var(--ink-dim)',
+  background: 'var(--field-bg, transparent)',
+  border: '1px solid var(--line-faint)',
+  borderRadius: 6,
+  padding: '6px 8px',
+  marginBottom: 8,
+}
+
+const whyLabel: React.CSSProperties = {
+  color: 'var(--ink-strong)',
+  fontWeight: 600,
 }
 
 const list: React.CSSProperties = {
