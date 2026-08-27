@@ -20,10 +20,9 @@ agents by design — see PLAYBOOK.md rule 1, don't state it.
 ## 2. Current state
 
 **Live corpus: 3,383 reports · 2,595 dependencies** (cn-stats-law retired this round, see below). `npm run validate`
-clean (120/120), `tsc --noEmit` clean, `npm run build` clean (1,498.00 kB) —
-re-verified in a fresh sandbox after the data edits below, then pushed to
-the device and confirmed byte-identical (sha256) across all five touched
-files.
+clean (120/120), `tsc --noEmit` clean, `npm run build` clean (1,497.15 kB) —
+re-verified in a fresh sandbox after this round's code changes (fog
+removal, soft-edge nodes — see below; no data changes this round).
 
 **Glow is gone (Thomas, 2026-08-25: "the glow slider works but I think the
 glow is pointless and should be taken off").** Not just defaulted off —
@@ -222,6 +221,52 @@ fix — see Todo for the open decision. No code changed this round; purely a
 design conversation per Thomas's own framing ("let's consider... I would
 like to hear them too").
 
+**Distance haze/fog is gone (Thomas, 2026-08-26: "too hard on the eyes and
+brain"), same treatment as glow — removed outright, not defaulted off.**
+No `ViewSettings.fog`, no "Distance haze" slider in `ViewControls.tsx`, no
+`scene.fog`/`fogRef`, no hand-rolled fog chunk in the link shader
+(`linkVisuals.ts` — dropped `uFogNear`/`uFogFar`/`uFogColour`, the `vDepth`
+varying, and the exported `setLinkFog`). The `cloud` ref in
+`InfluenceGraph.tsx` existed only to feed fog's near/far planes and is gone
+with it. `showHorizon` (the sky gradient) is untouched — Thomas explicitly
+kept it ("the horizon is ok though").
+
+**Continuous-database nodes now get the soft-edge treatment; the beam edge
+turned out to already exist (old Todo item 3, `notes/node-surface-encoding-
+2026-08-19.md`).** Thomas: "give the continuous nodes the beam and soft
+edges, forget the bicolor and border treatments." Checking the beam side
+first found it was already fully wired — `linkVisuals.ts`'s
+`gradientLinkMaterial`/`tickLinkFlow` and `LinkDatum.continuousSource` in
+`InfluenceGraph.tsx` were built and live from an earlier session, nothing
+to do there. Soft edge was the real gap: `nodeVisuals.ts`'s `nodeMaterial()`
+takes a new `soft` option — a second, independent fresnel term (fixed power
+1.1, not radius-scaled like the rim's) that fades alpha toward 0 at the
+silhouette instead of holding a hard edge, so a continuous source reads as
+boundary-less rather than as a report with a border. Wired in
+`InfluenceGraph.tsx` off `n.continuous === true`, same `!orb` guard as
+`hollow` (and mutually exclusive with it by construction, not a runtime
+guard: the validator requires `releases_per_year` on every continuous
+report, so `isStandingInstrument` is never true for one). Bordered and
+banded stay dropped, per Thomas's explicit call, not parked pending data.
+Verified in a fresh sandbox: `tsc`/`npm run validate`(120/120)/`npm run
+build` clean (1,497.15 kB — down from 1,498.00 kB, net of removed fog code
+against the small soft-edge addition). All edits were made directly
+on-device; the sandbox was a disposable build/test copy, not a push-back —
+see `_to_delete/README.md`. Headless Playwright confirmed: zero console/page
+errors across the run, the View controls panel shows Cluster spread/
+Geo-affinity/Galaxy pull/Pulse rate/Horizon with no "Distance haze" entry,
+and the scene renders and interacts cleanly (search, tier switching, node
+selection, zoom) at multiple zoom levels with no fog-related artifacts. Did
+**not** get a pixel-level close-up of one continuous leaf node's soft
+silhouette specifically — opening a folded country via a blind 3D
+double-click proved too unreliable to land in headless automation after
+several tries (a general 3D-picking limitation, not something specific to
+this change); the shader logic itself is a minimal, direct variant of the
+already-proven rim fresnel technique in the same file, gated by a uniform
+that's 0 (no-op) on every node except the ~35-39 continuous ones. Worth
+Thomas eyeballing live since it's a subtle effect by design — flag here if
+it should read stronger or weaker.
+
 Full narrative for anything above (BRICS G.1–G.4, Canada tier, wiring tier,
 prompt 18, new-countries tier) is in `archive/Previous Handoffs/` — this
 section only needs to say where things stand now, not how they got here.
@@ -248,15 +293,17 @@ section only needs to say where things stand now, not how they got here.
    not enough in ordinary use, the bigger inter-cluster repulsion force
    (mirroring `galaxyForce.ts`, previously "option (c)") is still on the
    table — flag it here and it can get built.
+3. **Look at the soft-edge treatment on a continuous node live and say if
+   it reads right.** Shipped 2026-08-26 (see Current State) but not
+   pixel-verified against a specific node — headless automation couldn't
+   reliably open a folded country to get a close-up. The fresnel power is
+   fixed at 1.1; flag here if it should fade harder or softer.
 
 ### [Agent] — next build rounds
 
-3. **Typed edges** — what a trunk's "type" means when one line stands for
-   many mixed relationships. Needs a design conversation first.
-4. **Soft-edge node idea** — `notes/node-surface-encoding-2026-08-19.md`.
-5. **New Grok research round** — the 2026-08-22 queue is fully worked;
+3. **New Grok research round** — the 2026-08-22 queue is fully worked;
     next round needs scoping from scratch.
-6. **Stale-URL research remainder** — 19 of the original 37 in
+4. **Stale-URL research remainder** — 19 of the original 37 in
     `notes/stale-urls-2026-08-20.md` are still open: Japan (7 reports,
     several ministries — one duplicate URL worth checking whether
     `jp-vital-statistics`/`jp-vital-statistics-detailed` should even be two

@@ -3,7 +3,6 @@ import {
   DIM_LINK_COLOUR,
   DIM_LINK_OPACITY,
   LINK_OPACITY,
-  SCENE_BACKGROUND,
 } from '../lib/view'
 
 /**
@@ -28,13 +27,9 @@ import {
  */
 const VERTEX = /* glsl */ `
   varying float vT;
-  varying float vDepth;
   void main() {
     vT = clamp(position.z, 0.0, 1.0);
-    vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
-    // Distance from the camera, for the hand-rolled fog in the fragment shader.
-    vDepth = -viewPosition.z;
-    gl_Position = projectionMatrix * viewPosition;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `
 
@@ -45,12 +40,8 @@ const FRAGMENT = /* glsl */ `
   uniform float uDashed;
   uniform float uFlow;
   uniform float uFlowTime;
-  uniform float uFogNear;
-  uniform float uFogFar;
-  uniform vec3 uFogColour;
   uniform float uHover;
   varying float vT;
-  varying float vDepth;
   void main() {
     // Implied edges are dashed. Discarding on the same 0→1 interpolant the
     // gradient already uses costs nothing and needs no extra geometry. Dash
@@ -90,12 +81,7 @@ const FRAGMENT = /* glsl */ `
     colour = mix(colour, vec3(1.0), uHover * 0.55);
     float opacity = mix(uOpacity, max(uOpacity, 0.75), uHover);
 
-    // Fog, applied by hand. A custom shader gets none of three.js's automatic
-    // fog chunks, which is why the lines used to stay perfectly crisp while
-    // every node behind them faded — the one part of the scene that most needed
-    // a depth cue was the only part not receiving it.
-    float fog = smoothstep(uFogNear, uFogFar, vDepth);
-    gl_FragColor = vec4(mix(colour, uFogColour, fog), opacity * (1.0 - fog));
+    gl_FragColor = vec4(colour, opacity);
   }
 `
 
@@ -165,10 +151,6 @@ export function gradientLinkMaterial(
       // vs `uOpacity` elsewhere in this file.
       uFlow: { value: 0 },
       uFlowTime: { value: 0 },
-      // Pushed far enough out to be inert until the fog is switched on.
-      uFogNear: { value: 1e9 },
-      uFogFar: { value: 1e9 + 1 },
-      uFogColour: { value: new THREE.Color(SCENE_BACKGROUND) },
       uHover: { value: 0 },
     },
     vertexShader: VERTEX,
@@ -281,31 +263,6 @@ export function setLinkFocus(
  */
 export function setLinkHover(material: GradientLinkMaterial, hovered: boolean) {
   material.uniforms.uHover.value = hovered ? 1 : 0
-}
-
-/**
- * Point the shader's fog at where the camera actually is.
- *
- * Called every frame rather than once at load. The previous version baked the
- * fog planes from the camera's initial distance and never touched them again,
- * so the first zoom put every node nearer than the near plane and the effect
- * silently switched itself off. Fog is a function of where you are standing;
- * it cannot be computed once.
- */
-export function setLinkFog(
-  material: GradientLinkMaterial,
-  near: number,
-  far: number,
-  colour?: string,
-) {
-  material.uniforms.uFogNear.value = near
-  material.uniforms.uFogFar.value = far
-  // The colour a receding line resolves *into*. Left alone when not supplied,
-  // because the constructor's `SCENE_BACKGROUND` default is right for every
-  // caller that has no opinion. It stops being right the moment the horizon is
-  // on: fading a line toward near-black in front of a blue sky band makes it
-  // dissolve into a colour that is not behind it. See `HORIZON_COLOUR`.
-  if (colour !== undefined) material.uniforms.uFogColour.value.set(colour)
 }
 
 /**

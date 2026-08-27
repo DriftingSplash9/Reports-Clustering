@@ -24,16 +24,17 @@ export interface ViewSettings {
   // view setting that was a forceGraph MEMO DEP, so no toggle rebuilds the
   // scene's materials any more. The code is in git history if a light theme
   // ever returns; per the house rule, it is not kept commented out.
-  /**
-   * Distance haze, 0 to 1.
-   *
-   * A slider rather than a switch because the right answer was never "on" or
-   * "off". Fog was originally disabled on the grounds that it fights the 24°
-   * lens — correct at 33 nodes, where nothing occluded anything. At 121 the
-   * lens suppresses parallax by design and fog is the only depth cue left, so
-   * the question became how much, and a boolean could not express it.
-   */
-  fog: number
+  // `fog` (distance haze, 0 to 1) lived here from V0.7 to 2026-08-26, when
+  // Thomas called it "too hard on the eyes and brain" and had it removed
+  // outright, the same way `glow` went — not defaulted to 0, deleted. The
+  // custom link shader's hand-rolled fog chunk, `scene.fog`, the "Distance
+  // haze" slider in ViewControls.tsx and the `cloud`/`fogRef` refs that only
+  // existed to feed it are all gone from InfluenceGraph.tsx and
+  // linkVisuals.ts too. `showHorizon` is untouched — that's the sky gradient,
+  // a separate setting Thomas explicitly kept ("the horizon is ok though").
+  // Fog had been the only depth cue left once the long narrow lens
+  // suppresses parallax (see git history for the field's old doc comment);
+  // there is no longer a substitute, by Thomas's explicit call.
   // `glow` (bloom strength, 0 to 1) lived here from Phase 3 to 2026-08-25,
   // when Thomas called it pointless and had it removed outright: "the glow
   // slider works but I think the glow is pointless and should be taken off."
@@ -106,8 +107,8 @@ export interface ViewSettings {
    * Layout spread — the multiplier applied to the whole layout scale, **2 to
    * 10**, shown to the viewer as 200%–1000%. Default 2.
    *
-   * A slider for the same reason haze is: the right amount depends
-   * on the corpus. At 124 nodes the tight layout read as one constellation;
+   * A slider rather than a fixed value, for the same reason a few of these
+   * settings are: the right amount depends on the corpus. At 124 nodes the tight layout read as one constellation;
    * at 335 it read as a nest. Moving it rebuilds the layout (charge,
    * repulsion cap, link rest lengths all scale together, and links touching
    * hubs get extra room), so the change costs a beat before the camera
@@ -218,9 +219,9 @@ export interface ViewSettings {
  * it. The infinite grid does the same job, reports scale better because its
  * cells never change size, and is never in the way.
  *
- * Haze defaults low rather than off. It works against the long lens, which is
- * the whole objection to it — but at 121 nodes the alternative is a scene with
- * no depth cue whatsoever, and a little of the wrong cue beats none.
+ * Haze (distance fog) used to default low rather than off here, on the same
+ * "a little of the wrong cue beats none" reasoning — removed outright
+ * 2026-08-26, see `fog`'s old doc comment in git history.
  */
 // The ground grid and the wireframe bounding box are GONE — deleted outright,
 // not defaulted off (Thomas, 2026-08-12: "don't keep the code" / "delete the
@@ -231,7 +232,6 @@ export const DEFAULT_VIEW: ViewSettings = {
   showPulses: true,
   showEdges: true,
   showHorizon: false,
-  fog: 0.35,
   autoRotate: false,
   focusBuiltFrom: true,
   focusFeedsInto: true,
@@ -245,17 +245,16 @@ export const DEFAULT_VIEW: ViewSettings = {
   lens: 'STANDARD',
 }
 
-/** Scene background. Fog resolves to this, so the two must agree.
+/** Scene background — the renderer's clear colour, and the colour a link
+ * shader used to resolve fog into before fog was removed 2026-08-26.
  *
  * Dropped `#05070d` → `#010204` on 2026-08-19 (Thomas, Phase 3.5: "can you
  * make the background completely black or very close? I think it is too
- * bright"). Not the full `#000000`: one step of blue-black keeps the haze
- * resolving into night air rather than into a dead matte, and the difference
- * from true black is below anything a calibrated monitor shows on its own —
- * but it keeps every mix() in the fog chain from collapsing to pure grey.
- * The palette's luminance floor was picked against HORIZON_COLOUR (the
- * brightest ground a node can sit on), so nothing needs re-tuning here —
- * contrast only improved. */
+ * bright"). Not the full `#000000`: one step of blue-black reads as night air
+ * rather than a dead matte, and the difference from true black is below
+ * anything a calibrated monitor shows on its own. The palette's luminance
+ * floor was picked against HORIZON_COLOUR (the brightest ground a node can
+ * sit on), so nothing needs re-tuning here — contrast only improved. */
 export const SCENE_BACKGROUND = '#010204'
 
 /**
@@ -266,13 +265,12 @@ export const SCENE_BACKGROUND = '#010204'
  * black. Dropped to `#12233a` on 2026-08-19: still unmistakably a horizon,
  * no longer a light source competing with the graph.
  *
- * **It lives here rather than in `Environment.tsx` because two things need
- * it.** The link shader's `uFogColour` used to be hard-wired to
- * `SCENE_BACKGROUND`, so with the horizon on, a distant edge faded toward
- * near-black while the background actually behind it was blue — lines
- * dissolving into a colour that is not there. `updateFog` now resolves both
- * three.js's fog and the link uniform to this value whenever the horizon is
- * showing, and to `SCENE_BACKGROUND` when it is not.
+ * **Lives here rather than in `Environment.tsx`** because `SCENE_BACKGROUND`
+ * does too and the two are picked as a pair — `Environment.tsx`'s `Sky`
+ * reads this directly as its horizon uniform. Until fog was removed
+ * (2026-08-26) the link shader also resolved its fog colour to whichever of
+ * these two was actually behind the graph; that consumer is gone, but the
+ * palette constraint below still holds.
  *
  * One constraint this puts on the palette: a node's luminance floor has to
  * clear the *brightest* background it can sit against, which is this, not

@@ -33,8 +33,6 @@ import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
   LINK_OPACITY,
-  SCENE_BACKGROUND,
-  HORIZON_COLOUR,
   ZOOM_MAX,
   type ViewSettings,
 } from '../lib/view'
@@ -45,7 +43,6 @@ import {
   resetLinkFlow,
   setLinkFlow,
   setLinkFocus,
-  setLinkFog,
   setLinkHover,
   teardropGeometry,
   tickLinkFlow,
@@ -708,9 +705,6 @@ export default function InfluenceGraph({
   onToggleNode: (id: string) => void
 }) {
   const ref = useRef<ThreeForceGraph | null>(null)
-  const fogRef = useRef(new THREE.Fog(SCENE_BACKGROUND, 1e9, 1e9 + 1))
-  /** Centre and radius of the node cloud, measured once the layout settles. */
-  const cloud = useRef<{ centre: THREE.Vector3; radius: number } | null>(null)
   /**
    * Last known position of every id seen so far, real report or orb alike —
    * updated every frame in `useFrame`, read once per `forceGraph` rebuild to
@@ -807,8 +801,8 @@ export default function InfluenceGraph({
    *
    * **It only yields the camera, not the measurement** — see `runFit`'s
    * `moveCamera` parameter. Everything else that pass computes (node scale,
-   * the fog cloud, the scene bounds, and `fitState`, which is where Reset
-   * flies back to) keeps updating on the same 0.2s cadence. Skipping the fit
+   * the scene bounds, and `fitState`, which is where Reset flies back to)
+   * keeps updating on the same 0.2s cadence. Skipping the fit
    * wholesale would have left `fitState` describing the cloud as it was
    * *before* the level opened, so Reset — the one escape hatch from a camera
    * pointed at nothing — would have framed the wrong thing and stranded them.
@@ -849,7 +843,7 @@ export default function InfluenceGraph({
   const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
   const fitDistance = useRef(0)
-  const { camera, controls, scene, size, gl } = useThree()
+  const { camera, controls, size, gl } = useThree()
 
   /**
    * One sprite for the whole scene, built once. Its position, scale, colour
@@ -1336,6 +1330,12 @@ export default function InfluenceGraph({
         // collapsed group would render as a one-off instrument by accident.
         const orb = orbNode
         const hollow = !orb && isStandingInstrument(n)
+        // A continuously-updated database (`Report.continuous`, 35 nodes) has
+        // no discrete edition — see `nodeVisuals.ts`'s "Soft edge" paragraph
+        // for why that becomes a fading silhouette instead of a hard border.
+        // Same orb guard as `hollow`: an orb stands for a group, not one
+        // report's own cadence, and is never itself a continuous source.
+        const soft = !orb && n.continuous === true
         // Shape carries the jurisdiction tier — see `nodeGeometry`. Colour is
         // still the country family; these are two channels for two facts, which
         // is the whole fix for "the shades of red don't help humans
@@ -1373,6 +1373,7 @@ export default function InfluenceGraph({
             rimWeight: rimWeightFor(n.country),
             hollow,
             orb,
+            soft,
           }),
         )
         mesh.scale.setScalar(nodeScale.current)
@@ -1860,7 +1861,7 @@ export default function InfluenceGraph({
    * — see `requestRefit`. It has to be a
    * genuine split rather than an early return inside `runFit`, because
    * `runFit` does not only move the camera: it also sets `nodeScale`, the link
-   * and pulse widths derived from it, the fog cloud and the published bounds.
+   * and pulse widths derived from it, and the published bounds.
    * A naive "if it looks fine, return early" would have frozen node sizes at
    * whatever the last camera-moving fit happened to leave them.
    */
@@ -2072,8 +2073,8 @@ export default function InfluenceGraph({
   /**
    * `moveCamera: false` measures everything and moves nothing — see
    * `userOwnsCamera` for why that split exists. Node scale, link and pulse
-   * width, the fog cloud, `fitState` and `onBounds` are all still brought up
-   * to date; only the `camera.position` / `orbit.target` writes are skipped.
+   * width, `fitState` and `onBounds` are all still brought up to date; only
+   * the `camera.position` / `orbit.target` writes are skipped.
    */
   function runFit(moveCamera = true): boolean {
     const fg = ref.current
@@ -2164,10 +2165,6 @@ export default function InfluenceGraph({
     // means "no, tracking has the camera again"), so this is just publishing
     // that same fact CameraZoom cannot otherwise see.
     fitSync.userOwnsCamera = !moveCamera
-
-    // Where the node cloud is, so the fog can be recomputed against it every
-    // frame rather than baked once from the opening camera position.
-    cloud.current = { centre: centre.clone(), radius: nodeRadius }
 
     // Now that the cloud has been measured, the nodes can be sized against it.
     // This is why the scale is applied here and not in `nodeThreeObject`: the
@@ -2558,51 +2555,6 @@ export default function InfluenceGraph({
   }, [forceGraph, focus, view.showPulses])
 
   /**
-   * Fog, recomputed every frame against where the camera actually is.
-   *
-   * The planes are placed relative to the *node cloud* seen from the current
-   * camera position, not at fixed world distances. Fog is a statement about how
-   * far through the graph you are looking, and that changes every time you zoom
-   * or orbit — the previous version computed it once at load and so switched
-   * itself off the moment anyone moved.
-   *
-   * `amount` slides the near plane forward through the cloud and tightens the
-   * span behind it. At 0.1 only the very back of the graph greys out; at 1 the
-   * near face is clear and the far face is gone. The whole range stays keyed to
-   * the cloud radius, so it means the same thing at 30 nodes and at 300.
-   */
-  function updateFog(amount: number) {
-    const c = cloud.current
-    if (!c) return
-
-    // **Fog has to resolve into whatever is actually behind the graph.** With
-    // the horizon off that is `SCENE_BACKGROUND`; with it on, the part of the
-    // frame the graph sits against is the sky's horizon band, which is far
-    // brighter. Fading toward the wrong one is why distant edges looked like
-    // they were dissolving rather than receding (§8 of the visual review).
-    const resolveTo = view.showHorizon ? HORIZON_COLOUR : SCENE_BACKGROUND
-
-    if (amount <= 0.005) {
-      scene.fog = null
-      for (const m of linkMaterials.current.values()) setLinkFog(m, 1e9, 1e9 + 1, resolveTo)
-      return
-    }
-
-    const distance = camera.position.distanceTo(c.centre)
-    const near = distance + c.radius * (1 - 2 * amount)
-    const far = near + c.radius * (3.5 - 2 * amount)
-
-    fogRef.current.near = near
-    fogRef.current.far = far
-    fogRef.current.color.set(resolveTo)
-    scene.fog = fogRef.current
-
-    // The lines need telling separately: a custom shader receives none of
-    // three.js's automatic fog uniforms.
-    for (const m of linkMaterials.current.values()) setLinkFog(m, near, far, resolveTo)
-  }
-
-  /**
    * The camera flight, started by search.
    *
    * Lighting a node the user cannot see does not solve the navigation problem —
@@ -2799,7 +2751,6 @@ export default function InfluenceGraph({
     }
 
     advanceFlight(delta)
-    updateFog(view.fog)
 
     // The orb breath — see `ORB_PULSE_PERIOD_SECONDS`. Driven off wall-clock
     // `delta`, not the tick count, for the same reason the re-fit window is:

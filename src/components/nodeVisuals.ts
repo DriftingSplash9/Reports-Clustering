@@ -33,6 +33,23 @@ import type { RimWeight } from '../lib/palette'
  * the other empty-interior case, was deleted 2026-08-19.) Not orbs, which
  * have the breath instead.
  *
+ * **Soft edge (`soft`), added 2026-08-26.** A second, unrelated use of the
+ * same facing/fresnel term — not a rim, no colour, alpha only. A continuous
+ * database (`Report.continuous`, 35 nodes — see `types.ts`) has no discrete
+ * edition, and `notes/node-surface-encoding-2026-08-19.md` worked out that a
+ * sphere whose silhouette fades instead of terminating is the honest way to
+ * say that: "this thing has no boundary" rather than "this is a report with
+ * a border." The note's one caution — a soft node must read as clearly
+ * softer than distance haze, or far nodes look continuous by accident — no
+ * longer applies: haze was removed the same day (Thomas: "too hard on the
+ * eyes and brain"), so there is no competing blur left to be confused with.
+ * Mutually exclusive with `hollow` by construction, not by a guard here: a
+ * continuous source always carries `releases_per_year` (the validator in
+ * `graph.ts` enforces it), so `isStandingInstrument` — which reads an ABSENT
+ * rate as "one-off" — is never true for one. Never set on an orb; see the
+ * `!orb` guard at the `soft` call site in `InfluenceGraph.tsx`, same as
+ * `hollow`'s.
+ *
  * Built with `onBeforeCompile` rather than as a custom ShaderMaterial, so the
  * material stays a real MeshStandardMaterial. Everything else in the renderer
  * mutates `opacity` and `emissiveIntensity` on these in place, and a hand-
@@ -114,6 +131,7 @@ export function nodeMaterial({
   drawRim = false,
   hollow = false,
   orb = false,
+  soft = false,
 }: {
   colour: string
   /**
@@ -172,6 +190,14 @@ export function nodeMaterial({
    * which of two boolean options its caller meant to be authoritative.
    */
   orb?: boolean
+  /**
+   * Continuous-database treatment — alpha falls toward 0 at the silhouette
+   * instead of holding a hard edge, so the sphere reads as boundary-less
+   * rather than as an ordinary node with a border. See the file comment's
+   * "Soft edge" paragraph for the full reasoning and the mutual-exclusion
+   * argument with `hollow`.
+   */
+  soft?: boolean
 }): NodeMaterial {
   const material = new THREE.MeshStandardMaterial({
     color: colour,
@@ -235,6 +261,13 @@ export function nodeMaterial({
     shader.uniforms.uRimAlpha = {
       value: hollow ? 0.95 : orb ? 0.75 : weight === 'bold' ? 0.75 : weight === 'thick' ? 0.6 : 0.45,
     }
+    // Fixed, not radius-scaled like `rimPower` — the rim wants a THIN band
+    // regardless of size (so `rimPower` grows with radius to keep it thin in
+    // screen pixels); soft wants the opposite, a WIDE falloff that reads the
+    // same qualitative "no hard edge" at every size. 1.1 keeps most of the
+    // facing hemisphere near full alpha and lets only the outer band fade.
+    shader.uniforms.uSoft = { value: soft ? 1 : 0 }
+    shader.uniforms.uSoftPower = { value: 1.1 }
 
     shader.fragmentShader = shader.fragmentShader
       .replace(
@@ -243,6 +276,8 @@ export function nodeMaterial({
          uniform float uRimPower;
          uniform float uRim;
          uniform float uRimAlpha;
+         uniform float uSoft;
+         uniform float uSoftPower;
          void main() {`,
       )
       // Added after the lighting has resolved, so the rim is a light on top of
@@ -266,7 +301,14 @@ export function nodeMaterial({
          gl_FragColor.rgb = mix(gl_FragColor.rgb, uRimColour, fresnel * uRim);
          // Keep the silhouette from fading out with a dimmed node, or the rim
          // disappears exactly when the fill is hardest to read.
-         gl_FragColor.a = clamp(gl_FragColor.a + fresnel * uRim * uRimAlpha, 0.0, 1.0);`,
+         gl_FragColor.a = clamp(gl_FragColor.a + fresnel * uRim * uRimAlpha, 0.0, 1.0);
+         // Soft edge — a separate fresnel power/term from the rim's, because
+         // it is answering a different question (silhouette width, not rim
+         // colour) and the two happen to share nothing but the geometry term
+         // they both start from. A no-op (mix factor 0) on every ordinary
+         // node — see the file comment's "Soft edge" paragraph.
+         float softFresnel = pow(1.0 - facing, uSoftPower);
+         gl_FragColor.a *= mix(1.0, 1.0 - softFresnel, uSoft);`,
       )
   }
 

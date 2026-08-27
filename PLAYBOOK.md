@@ -123,8 +123,14 @@ Assume all of this exists and works; each has a dated comment at the site.
   every filter change (deliberate — third rewrite).
 - **Edges/pulses have SET SIZES** (`baseLinkWidth()` = 1); weight lives in
   rest length + opacity. Never reintroduce additive/white pulse cores.
-  **Continuous-database edges** (`Report.continuous`, 35 nodes) draw as an
-  animated flow in the edge shader, zero teardrop particles.
+  **Continuous-database nodes/edges** (`Report.continuous`, 35 nodes) draw
+  with a soft, boundary-fading sphere (`nodeVisuals.ts`, alpha only, no
+  colour) and an animated beam flow on the outgoing edge instead of teardrop
+  particles — one fact, two channels, added together 2026-08-26.
+- **No distance fog/haze.** Removed outright 2026-08-26 (Thomas: "too hard on
+  the eyes and brain") — not defaulted off, deleted: no `ViewSettings.fog`,
+  no "Distance haze" slider, no `scene.fog`, no hand-rolled fog in the link
+  shader. `showHorizon` (the sky gradient) is untouched and still optional.
 - **Menu bar**: Panels ▾ (fresh sessions default all 8 ON-and-minimized),
   Views ▾ (saved views, ★ open-on-load, deep links via `?rig=`), Help ▾
   (renders START-HERE.md raw). Tier bar + status line deliberately NOT in

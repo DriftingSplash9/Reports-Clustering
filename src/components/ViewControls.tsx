@@ -21,18 +21,13 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
 ]
 
 const SLIDERS: {
-  key: 'fog' | 'spread' | 'geoAffinity' | 'galaxy' | 'pulseRate'
+  key: 'spread' | 'geoAffinity' | 'galaxy' | 'pulseRate'
   label: string
   hint: string
   /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 200%–1000%. */
   min?: number
   max?: number
 }[] = [
-  {
-    key: 'fog',
-    label: 'Distance haze',
-    hint: 'Fades the far side of the graph. The long lens deliberately suppresses depth, so at this many nodes this is most of what is left of it',
-  },
   {
     key: 'spread',
     label: 'Cluster spread',

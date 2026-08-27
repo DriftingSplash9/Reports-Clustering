@@ -115,7 +115,7 @@ const PANEL_ITEMS: { key: PanelKey; label: string; hint: string }[] = [
   { key: 'calendar', label: 'Calendar', hint: 'What publishes when, banded by cadence' },
   { key: 'groups', label: 'Regions, orgs & countries (isolate)', hint: 'Pick a continent, treaty bloc, publisher or single country to see just it plus everything it actually connects to, including across borders' },
   { key: 'unlinked', label: 'Unlinked reports', hint: 'The shelf of reports with no surviving edge in either direction' },
-  { key: 'view', label: 'View controls', hint: 'Zoom, haze, cluster spread, geo-affinity and the lens' },
+  { key: 'view', label: 'View controls', hint: 'Zoom, cluster spread, geo-affinity and the lens' },
   { key: 'legend', label: 'Legend', hint: 'What colour, size, fill, hollow rings, line colour and pulse rate each mean' },
   { key: 'compare', label: 'Compare two reports', hint: 'Pick any two reports and see everything they both rest on — or both feed into' },
 ]

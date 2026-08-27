@@ -71,3 +71,27 @@ corpus needs them. Every mark on the sphere should answer a question the
 data actually poses — solid/hollow already split "recurring vs one-off",
 and soft/solid would split "continuous vs editioned", which is the one
 distinction the renderer currently gets wrong.
+
+
+## Resolved 2026-08-26
+
+Thomas: "give the continuous nodes the beam and soft edges, forget the
+bicolor and border treatments." Shipped as scoped in the recommendation
+above — soft edge only, nothing else:
+
+- **Soft edge built.** `nodeVisuals.ts`'s `nodeMaterial()` takes a new
+  `soft` option — a second fresnel term (fixed power 1.1, independent of
+  the rim's radius-scaled one) that fades alpha toward 0 at the silhouette
+  instead of holding a hard edge. Wired in `InfluenceGraph.tsx` off
+  `n.continuous === true`, same `!orb` guard as `hollow`. The one caution
+  in the recommendation above — a soft node must read as clearly softer
+  than distance haze, or far nodes look continuous by accident — is now
+  moot: haze was removed the same session (see `HANDOFF.md`), so there is
+  no competing blur left to confuse it with.
+- **Beam edge — already built, nothing to do.** Turned out `linkVisuals.ts`
+  already had the full beam-flow treatment (`gradientLinkMaterial`'s `beam`
+  param, `LinkDatum.continuousSource`, `tickLinkFlow`) wired to real data
+  since an earlier session; this round only added the node-side half.
+- **Bordered and banded — dropped, not just parked.** Thomas's call, not a
+  data-not-ready deferral like the original recommendation framed it.
+  Nothing built for either; no `soft`-shaped future work here.
