@@ -19,10 +19,42 @@ agents by design — see PLAYBOOK.md rule 1, don't state it.
 
 ## 2. Current state
 
-**Live corpus: 3,383 reports · 2,595 dependencies** (cn-stats-law retired this round, see below). `npm run validate`
-clean (120/120), `tsc --noEmit` clean, `npm run build` clean (1,497.15 kB) —
-re-verified in a fresh sandbox after this round's code changes (fog
-removal, soft-edge nodes — see below; no data changes this round).
+**Live corpus: 3,383 reports · 2,595 dependencies** (unchanged this round —
+no data changes). `npm run validate` clean (120/120), `tsc --noEmit` clean,
+`npm run build` clean (1,498.64 kB) — re-verified in a fresh sandbox after
+this round's code change (new `clusterRepulsion.ts` force — see below).
+
+**Cluster vs cluster repulsion shipped, first pass (Thomas, 2026-08-27:
+"let's try the proposed fix — cluster vs cluster repulsion").** Built the
+"option (c)" force from the 2026-08-26 design discussion below: new
+`src/lib/clusterRepulsion.ts`, the direct mirror of `galaxyForce.ts` — that
+force only ever pulls a node toward its OWN family/country centroid; this
+one pushes DIFFERENT clusters' centroids apart, computed once per pair of
+centroids (O(clusters²), cheap enough that it can skip `charge`'s hard
+`distanceMax` cutoff — the diagnosed reason two already-separated clusters
+stop repelling each other at all). New `view.clusterRepulsion` slider (0–3,
+default 1 — on, same reasoning as `galaxy`) in `ViewControls.tsx`, wired
+the same way `galaxy`/`geoAffinity` are (a ref, read live, no rebuild).
+**A real false start, caught before shipping**: the first version used
+1/d² falloff, calibrated against a throwaway measurement script
+(`scripts/measure-cluster-repulsion.ts`, deleted after use) that had a bug
+letting simulation state leak between successive sweep runs — made a
+genuinely negligible effect look real. A clean re-run (fresh random
+initial positions every time) showed 1/d² needs too wide a dynamic range
+(a 24-unit floor to ~2,000-unit real separations) to be both felt and
+safe; switched to 1/d, which worked. At the shipped default (strength 1):
+the ratio of "how far apart different countries' centroids sit" to "how
+tight each country's own members sit around their own centroid" moved
+~4.1–4.2× → ~4.8–5.2×, own-cluster spread essentially unchanged. At the
+ceiling (strength 3): ~4.1–4.2× → ~5.9–6.3×, own-cluster spread up
+~15–17%. Zero NaN positions, no runaway growth across 400 ticks at any
+setting tried. Verified in a fresh sandbox: `tsc`/`npm run
+validate`(120/120)/`npm run build` clean (1,498.64 kB), headless
+Playwright at the Everything tier confirms zero console/page errors and
+the new slider renders at 100% by default; screenshot shows the settled
+scene with visibly distinct clusters, no exploded/NaN layout. **Not yet
+seen by Thomas in the live app** — first pass, same as the
+charge-strength tuning below; expect a follow-up tuning call once he has.
 
 **Glow is gone (Thomas, 2026-08-25: "the glow slider works but I think the
 glow is pointless and should be taken off").** Not just defaulted off —
@@ -284,15 +316,19 @@ section only needs to say where things stand now, not how they got here.
    reasoned through against the traced library source; this is now a
    "does it actually recur" watch, not a pending confirmation. Details:
    `notes/render-consistency-repro-2026-08-25.md`.
-2. **Did killing force-centre + the charge nudge actually help the
-   "piles up at the centre" complaint?** Shipped 2026-08-26 as a cheap
-   first pass (see Current State) — force-centre off, charge repulsion
-   +33% (after an initial +10% pass, per Thomas's follow-up). The scene
-   still visibly clusters at the middle in a headless
-   check (expected: the shared-hub-node mechanism is untouched). If it's
-   not enough in ordinary use, the bigger inter-cluster repulsion force
-   (mirroring `galaxyForce.ts`, previously "option (c)") is still on the
-   table — flag it here and it can get built.
+2. **Did killing force-centre + the charge nudge — and now the new
+   cluster-repulsion force — actually help the "piles up at the centre"
+   complaint?** Shipped 2026-08-26 as a cheap first pass (see Current
+   State) — force-centre off, charge repulsion +33% (after an initial
+   +10% pass, per Thomas's follow-up). The scene still visibly clustered
+   at the middle in a headless check after that pass (expected: the
+   shared-hub-node mechanism is untouched). 2026-08-27: built the bigger
+   inter-cluster repulsion force too (mirroring `galaxyForce.ts`,
+   previously "option (c)") — see Current State for the model and the
+   measured numbers. Open the View panel and try the new "Cluster
+   repulsion" slider live; it defaults to 100% on. Flag here if it's
+   still not enough, or if it should be pushed further than the 0–3 range
+   currently offers.
 3. **Look at the soft-edge treatment on a continuous node live and say if
    it reads right.** Shipped 2026-08-26 (see Current State) but not
    pixel-verified against a specific node — headless automation couldn't

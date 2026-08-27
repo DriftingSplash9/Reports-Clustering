@@ -28,6 +28,7 @@ import { edgeKey, type Focus } from '../lib/selection'
 import type { VisibleSet } from '../lib/filter'
 import { countryAffinityForce } from '../lib/geoAffinity'
 import { galaxyForce } from '../lib/galaxyForce'
+import { clusterRepulsionForce } from '../lib/clusterRepulsion'
 import { lensColourFor } from '../lib/modes'
 import {
   DIM_NODE_EMISSIVE,
@@ -961,6 +962,13 @@ export default function InfluenceGraph({
   galaxyStrength.current = view.galaxy
 
   /**
+   * Same pattern, for `clusterRepulsionForce`. See `lib/clusterRepulsion.ts`
+   * and `view.clusterRepulsion`.
+   */
+  const clusterRepulsionStrength = useRef(0)
+  clusterRepulsionStrength.current = view.clusterRepulsion
+
+  /**
    * Same pattern again, for `view.pulseRate` — read live wherever something
    * animates on its own clock: the `linkDirectionalParticleSpeed` accessor
    * below (three-forcegraph calls it fresh every frame, so a ref is all this
@@ -1642,6 +1650,23 @@ export default function InfluenceGraph({
     // at the top of its range). Off (0%) settles fine too, just slower to
     // converge in a cold headless run — not a sign of anything wrong.
     fg.d3Force('galaxy', galaxyForce(galaxyStrength) as unknown as never)
+
+    // Cluster vs cluster repulsion — the direct mirror of `galaxyForce`
+    // above: that force only ever pulls a node toward its OWN
+    // family/country centroid, nothing pushes DIFFERENT clusters apart.
+    // "Option (c)" from the 2026-08-26 design discussion on "the clusters
+    // cluster too much to the centre" (HANDOFF.md), built 2026-08-27 on
+    // Thomas's call to try it. Defaults to 1 (on), same reasoning as
+    // galaxy: asked for directly rather than discovered. See
+    // `lib/clusterRepulsion.ts` for the model — cluster-pair, not
+    // node-pair, so it is cheap enough to skip `charge`'s hard
+    // `distanceMax` cutoff (the diagnosed reason two clusters that have
+    // already drifted apart stop repelling each other at all) — and for
+    // the measured before/after numbers behind the 0–3 range.
+    fg.d3Force(
+      'clusterRepulsion',
+      clusterRepulsionForce(clusterRepulsionStrength) as unknown as never,
+    )
 
     return fg
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -21,7 +21,7 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
 ]
 
 const SLIDERS: {
-  key: 'spread' | 'geoAffinity' | 'galaxy' | 'pulseRate'
+  key: 'spread' | 'geoAffinity' | 'galaxy' | 'clusterRepulsion' | 'pulseRate'
   label: string
   hint: string
   /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 200%–1000%. */
@@ -73,6 +73,18 @@ const SLIDERS: {
     key: 'galaxy',
     label: 'Galaxy pull',
     hint: 'Pulls every report toward its own family and its own country’s centre — countries cluster inside their family’s region of space, like separate star clusters inside one galaxy. Starts at 100%; drag to 0 to ablate it entirely — see lib/galaxyForce.ts for the model',
+    max: 3,
+  },
+  {
+    key: 'clusterRepulsion',
+    label: 'Cluster repulsion',
+    hint: 'Pushes DIFFERENT clusters’ centres apart from each other — the mirror of Galaxy pull above, which only ever pulls a report toward its own cluster. Starts at 100%; drag to 0 to ablate it entirely — see lib/clusterRepulsion.ts for the model',
+    // First pass, 2026-08-27 — Thomas's call to try "option (c)" from the
+    // 2026-08-26 layout design discussion. Measured against the real corpus
+    // before shipping this range the same way galaxy's 0-3 was (see
+    // clusterRepulsion.ts's constants comment for the numbers), but NOT yet
+    // seen by Thomas live — expect a follow-up tuning call, same as the
+    // charge-strength pass earlier in this HANDOFF item.
     max: 3,
   },
   {

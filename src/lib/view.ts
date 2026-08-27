@@ -178,6 +178,31 @@ export interface ViewSettings {
    */
   galaxy: number
   /**
+   * Cluster vs cluster repulsion, **0 to 3**. Defaults to 1 — on, not off,
+   * same reasoning as `galaxy`: Thomas asked directly for this ("let's try
+   * the proposed fix — cluster vs cluster repulsion", 2026-08-27) rather
+   * than discovering it as an option.
+   *
+   * A soft, ablatable force pushing DIFFERENT clusters' centroids apart —
+   * the direct mirror of `galaxyForce.ts` (which only ever pulls a node
+   * toward its OWN cluster), and "option (c)" from the 2026-08-26 design
+   * discussion on "the clusters cluster too much to the centre". See
+   * `lib/clusterRepulsion.ts` for the model, why it uses 1/d falloff
+   * rather than a hard `distanceMax` cutoff (the diagnosed gap in
+   * `charge`), and the false start (1/d² miscalibrated against a buggy
+   * measurement script) that led there.
+   *
+   * Range picked the same way `galaxy`'s was: measured against the real
+   * corpus with a throwaway script before shipping (see
+   * `clusterRepulsion.ts`'s constants comment for the numbers) — settling
+   * confirmed at the ceiling (3), zero NaN positions, own-cluster cohesion
+   * essentially untouched at the default (1) and only mildly loosened at
+   * the ceiling. Unlike `galaxy`, this has not yet been seen by Thomas in
+   * the live app — first pass, same as the charge-strength tuning earlier
+   * in this same HANDOFF item, expect a follow-up call once he has.
+   */
+  clusterRepulsion: number
+  /**
    * Global speed multiplier on everything that pulses: the orb breath
    * (`ORB_PULSE_PERIOD_SECONDS`), the cross-border blink, the beam flow
    * shader on continuous edges, and the travelling teardrop particles
@@ -241,6 +266,7 @@ export const DEFAULT_VIEW: ViewSettings = {
   spread: 2,
   geoAffinity: 1.5,
   galaxy: 1,
+  clusterRepulsion: 1,
   pulseRate: 1,
   lens: 'STANDARD',
 }
