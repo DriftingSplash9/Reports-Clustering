@@ -1,0 +1,220 @@
+{
+  "_slice": "grok-r1-nordic-nato-fr-oecd",
+  "_researched": "2026-08-05",
+  "_status": "staged — structurally checked, NOT yet imported",
+  "_note": "Grok rounds 1-3 (Nordic/NATO/Norway/France depth, OECD, Frascati Manual, EU R&D manual).",
+  "reports": [
+    {
+      "id": "nordic-statistics-database",
+      "title": "Nordic Statistics database",
+      "publisher": "Nordic Council of Ministers",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Nordic region",
+      "description": "Joint statistical database maintained by the Nordic Council of Ministers, drawing on the five Nordic NSIs, the Nomesco-Nososco health/welfare committees and international sources including Eurostat and the OECD.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.nordicstatistics.org/",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "nato-defence-expenditure",
+      "title": "Defence Expenditure of NATO Countries",
+      "publisher": "NATO",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "NATO member states",
+      "description": "NATO's annual compilation of Allied defence spending against an agreed NATO definition of defence expenditure, distinct from national budget definitions.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.nato.int/cps/en/natohq/topics_49198.htm",
+      "domains": [
+        "fiscal-transfers"
+      ]
+    },
+    {
+      "id": "no-ssb-national-accounts",
+      "title": "National accounts (ESA 2010)",
+      "publisher": "Statistics Norway (SSB)",
+      "country": "NO",
+      "jurisdiction_level": "federal",
+      "region": "Norway",
+      "description": "Norwegian national accounts, compiled under an EEA Agreement obligation to implement ESA 2010 despite Norway not being an EU member.",
+      "releases_per_year": 4,
+      "last_updated": null,
+      "url": "https://www.ssb.no/en/nasjonalregnskap-og-konjunkturer",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "fr-insee-national-accounts",
+      "title": "Annual national accounts (2020 Base)",
+      "publisher": "INSEE",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "French annual national accounts, ESMS-style presentation page describing compliance with ESA 2010 and the transmission programme.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.insee.fr/en/metadonnees/source/serie/s2144/presentation",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "fr-insee-base2020-methodo",
+      "title": "Documentation sur la méthodologie — Comptes nationaux annuels (Base 2020)",
+      "publisher": "INSEE",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's detailed Base 2020 methodological fiche library for French annual national accounts — the source-level companion to the ESMS presentation page.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/metadonnees/source/serie/s2144/documentation-methodologique",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "fr-insee-esane",
+      "title": "Élaboration des statistiques annuelles d'entreprises (Esane)",
+      "publisher": "INSEE",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "Annual structural business statistics system combining tax/social administrative data and sectoral enterprise surveys; named as the primary source for non-financial enterprise accounts in Base 2020.",
+      "releases_per_year": 1,
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/metadonnees/source/fichier/fichemethodo2_B2020_reprise_esane.pdf",
+      "domains": [
+        "national-accounts",
+        "labour"
+      ]
+    },
+    {
+      "id": "eu-manual-rd-esa2010",
+      "title": "Manual on measuring Research and Development in ESA 2010",
+      "publisher": "Eurostat",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's 2014 manual implementing R&D as capital formation under ESA 2010, cited by INSEE as the basis for its own R&D capitalisation methodology.",
+      "releases_per_year": 0,
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/-/ks-gq-14-004",
+      "domains": [
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "oecd-frascati-manual",
+      "title": "Frascati Manual — Guidelines for Collecting and Reporting Data on Research and Experimental Development",
+      "publisher": "OECD",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "OECD's standard for R&D statistics collection, cited by the EU's own R&D manual and, through it, by INSEE as the basis for French R&D expenditure statistics used in national accounts.",
+      "releases_per_year": 0.2,
+      "last_updated": null,
+      "url": "https://www.oecd.org/en/publications/frascati-manual-2015_9789264239012-en.html",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "no-ssb-national-accounts",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"National accounts data concern all data produced and disseminated for an economy according to the definitions and guidelines of the European System of Accounts (ESA 2010).\" \"All statistical concepts and definitions to be used in national accounts are described in Annex A of the ESA 2010 Regulation.\" \"Norway is also legally committed through the EEA Agreement (Council Regulation on the European system of national and regional accounts in the Community) to report national accounts data to Eurostat/EU.\"",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/NOR/category/NAG00"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"National accounts data concern all data produced and disseminated for an economy according to the definitions and guidelines of the European System of Accounts (ESA 2010). Data are compiled, disseminated and transmitted to Eurostat according with breakdowns and deadlines defined in the amended ESA 2010 transmission programme.\" \"The ESA 2010 provides a methodology on common standards, definitions, internationally harmonised classifications and accounting rules that are used for compiling national accounts on comparable bases.\"",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/serie/s2144/presentation"
+    },
+    {
+      "source_report_id": "fr-insee-national-accounts",
+      "target_report_id": "fr-insee-base2020-methodo",
+      "relationship_type": "cites",
+      "basis": "The ESMS-style presentation page cross-references the full methodological fiche library for the same Base 2020 release: \"Les comptes nationaux passent en base 2020\" plus the numbered fiches. Two documents describing the same underlying release at different levels of detail.",
+      "evidence_url": "https://www.insee.fr/en/metadonnees/source/serie/s2144/presentation"
+    },
+    {
+      "source_report_id": "fr-insee-base2020-methodo",
+      "target_report_id": "fr-insee-esane",
+      "relationship_type": "uses_data_from",
+      "basis": "\"Parmi les données sources, les principales sont celles issues du dispositif Esane (Élaboration des statistiques annuelles d'entreprises) qui rassemblent notamment les déclarations fiscales des entreprises et les enquêtes sectorielles auprès des entreprises.\" (\"Among the source data, the main ones are those from the Esane system... which notably bring together enterprise tax declarations and sectoral surveys.\")",
+      "evidence_url": "https://www.insee.fr/fr/metadonnees/source/fichier/fichemethodo2_B2020_reprise_esane.pdf"
+    },
+    {
+      "source_report_id": "fr-insee-base2020-methodo",
+      "target_report_id": "eu-manual-rd-esa2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"Le manuel européen sur la mesure de la R&D (« Manual on measuring Research and developpement in ESA 2010 »), paru en 2014, détaille la méthode d'estimation de la production et de la FBCF en R&D...\" (\"The European manual on measuring R&D, published in 2014, details the method for estimating R&D production and GFCF...\")",
+      "evidence_url": "https://www.insee.fr/fr/metadonnees/source/fichier/fichemethodo14_B2020_recherche_developpement.pdf"
+    },
+    {
+      "source_report_id": "fr-insee-base2020-methodo",
+      "target_report_id": "oecd-frascati-manual",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"Elle est établie selon les lignes directrices pour la collecte de données sur la R&D édictées dans le manuel de Frascati.\" (\"It is established according to the guidelines for collecting R&D data set out in the Frascati Manual.\") Publisher noted as OCDE.",
+      "evidence_url": "https://www.insee.fr/fr/metadonnees/source/fichier/fichemethodo14_B2020_recherche_developpement.pdf"
+    },
+    {
+      "source_report_id": "fr-insee-base2020-methodo",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"Si le passage à la base 2020 ne modifie pas les concepts des comptes nationaux, qui restent conformes au règlement européen SEC 2010, certaines méthodes d'estimation sont revues...\" (\"While the move to base 2020 does not change the concepts of the national accounts, which remain compliant with the European SEC 2010 regulation, some estimation methods are revised...\")",
+      "evidence_url": "https://www.insee.fr/fr/metadonnees/source/fichier/Base2020_note_communication.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "nordic-statistics-database -> its own inputs",
+      "source": "nordic-statistics-database",
+      "target": null,
+      "reason": "no-document",
+      "why": "AGENCY_ONLY. \"The data is gathered from the Nordic Statistical Institutes (NSIs), the Nordic Health and Welfare Statistics database maintained by the Nomesco-Nososco committees, other Nordic statistics producers as well as international sources such as Eurostat, OECD.\" Institutions named, no titled publications."
+    },
+    {
+      "edge": "nato-defence-expenditure -> national defence spending sources",
+      "source": "nato-defence-expenditure",
+      "target": null,
+      "reason": "no-document",
+      "why": "AGENCY_ONLY, and the finding that generalised the branch's central asymmetry outside statistics entirely. \"NATO collects defence expenditure data from Allies and publishes it on a regular basis. Each Ally's Ministry of Defence reports current and estimated future defence expenditure according to an agreed definition.\" NATO's own definition text (fiscal-year armed-forces payments, pensions, stockpiles, R&D, exclusions for war damage and civil defence) is extensive and precise; the reporting party is always an institution, never a titled national publication."
+    },
+    {
+      "edge": "nato-defence-expenditure -> Ally's Ministry of Defence reports",
+      "source": "nato-defence-expenditure",
+      "target": null,
+      "reason": "unpublishable-source",
+      "why": "Terminus, kind unpublishable. \"Each Ally's Ministry of Defence reports current and estimated future defence expenditure according to an agreed definition. The amounts represent payments by a national government that have been or will be made during the course of the fiscal year to meet the needs of its armed forces, those of Allies or of the Alliance.\""
+    },
+    {
+      "edge": "oecd-icio -> Mexico's INEGI input-output tables",
+      "source": null,
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Borderline and explicitly hedged by the original researcher: OECD ICIO names INEGI by institution and table-year (\"provided by Mexico's Instituto Nacional de Estadística y Geografía (INEGI for 2003, 2008 and 2012 tables)\") but the researcher's own non_finding on the same material called it \"limited to a construction detail, not the general obligation language.\" Not minted: out of the EU/Europe scope this branch is tracking, and the researcher's own hedge means it should not be treated as a clean counter-example without independent verification."
+    }
+  ],
+  "_termini_carried_forward": [
+    {
+      "id": "term-nato-mod-reports",
+      "named_input": "Ally's Ministry of Defence reports",
+      "kind": "unpublishable",
+      "url": "https://www.nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
+      "location": "Introductory paragraph",
+      "quote": "\"Each Ally's Ministry of Defence reports current and estimated future defence expenditure according to an agreed definition. The amounts represent payments by a national government that have been or will be made during the course of the fiscal year to meet the needs of its armed forces, those of Allies or of the Alliance.\""
+    }
+  ]
+}

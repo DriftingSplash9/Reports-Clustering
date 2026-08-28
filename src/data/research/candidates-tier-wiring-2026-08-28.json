@@ -1,0 +1,308 @@
+{
+  "_slice": "candidates-tier-wiring-2026-08-28",
+  "_researched": "2026-08-28",
+  "_status": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader).",
+  "_note": "First wiring pass at the old `candidates-only` tier — Vietnam, Iran, Thailand, Iraq, Myanmar, Yemen and Syria, 173 real linked dated nodes between them with ZERO dependency edges of any kind. Same day as the EU national-chains round, same method (parallel subagents, one per country, told a guessed answer is worse than none). SIX load-bearing quotes were independently re-fetched and confirmed verbatim by the orchestrating session before minting: Myanmar's csostat.gov.mm SNA sentence, Iran's amar.org.ir SNA93/ISIC sentences, Thailand's BOT EC_MB_041_S3 standards bundle, and three Vietnam GSO pages. Two agent-reported quotes did NOT survive that check as worded and were corrected here: Myanmar's HIES/CPI sentence (the agent paraphrased; the page actually reads \"to get the necessary weights in computing Consumer Price Index (CPI) for the cities and for the Union\") and Vietnam's GRDP article, which turned out to say considerably MORE than the agent reported — it gives the reconciliation motive (\"a difference of over 1.7 times between the sum of GRDP of 63 provinces and centrally-run cities and the national gross domestic product (GDP)\"), which is what makes the four GRDP edges defensible rather than merely suggestive. YIELD IS DELIBERATELY UNEVEN AND THAT IS THE FINDING: Vietnam 6 edges, Thailand 7, Iran 7, Myanmar 4, Iraq 2, Yemen 0, Syria 0. The dominant edge class that actually survives evidence in this tier is the international-standards bridge (SNA, BPM6, MFSMCG, ISIC, ICLS, e-GDDS, SDDS) — these countries' own statistical sites are thin on compilation methodology but do state which manual they follow. Domestic data chains (national accounts using industrial/agricultural/oil output as inputs, budget deficit from budget execution, NPLs from banking-system reporting) were looked for repeatedly across all seven countries and are almost entirely UNDOCUMENTED on the publishers' own sites — see `_dropped`, which is longer than `dependencies` and is the more informative half of this slice. THREE EDGES WERE DELIBERATELY NOT MINTED despite agents proposing them: Vietnam's VSIC→ISIC link (only third-party evidence, classification.codes, not a primary source), and Iraq's oil-revenue→oil-exports and federal-budget→oil-revenue chain (evidence was a secondary analyst PDF citing Budget Law 13 of 2023 by article number, not the law itself — a good lead, recorded in `_dropped`). A MODELLING QUESTION FOR THOMAS is recorded in `_dropped` too: both Iran and Iraq name \"COICOP\" in their own documents without naming a revision, and the corpus has only revision-specific nodes (`un-coicop-2018`, `un-coicop-hbs-1999`), so neither edge was minted rather than guess an edition.",
+  "reports": [
+    {
+      "id": "mm-hies",
+      "title": "Household Income and Expenditure Survey (HIES), Myanmar",
+      "publisher": "Central Statistical Organization (CSO), Ministry of Planning and Finance",
+      "country": "MM",
+      "jurisdiction_level": "federal",
+      "region": "Myanmar",
+      "description": "Minted so that Myanmar's CPI has a real source node rather than an edge to the CSO institutional core, which would have been a publisher relationship wearing a dependency's clothes. The CSO's own Statistical System page describes the survey's purpose in the CPI's terms: the survey is run \"to get the necessary weights in computing Consumer Price Index (CPI) for the cities and for the Union.\" Quote re-fetched and confirmed verbatim by the orchestrating session — the researching agent had paraphrased it as \"Household Income and Expenditure Survey generates weights in computing Consumer Price Index (CPI)\", which is the same fact in words the page does not use.",
+      "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. The CSO's Statistical System page describes the survey's purpose but states no periodicity, and no CSO methodology document for the HIES could be reached. Myanmar's statistical output has been badly disrupted since 2021 and the CPI series this survey feeds is itself dormant from December 2020 in this corpus. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://www.csostat.gov.mm/AboutCSO/StatisticalSystem",
+      "domains": [
+        "living-standards",
+        "inflation"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "vn-cpi",
+      "target_report_id": "vn-poverty",
+      "relationship_type": "uses_data_from",
+      "basis": "GSO's own price-statistics metadata page states: \"Weight for CPI compilation is the expenditure share for item groups in the total of the household expenditure which is collected from results of Viet Nam Household Living Standard Survey (VHLSS) and used constantly in a 5-year period.\" Re-fetched and confirmed verbatim by the orchestrating session. MAPPING CAVEAT: `vn-poverty` is the corpus's node for Vietnam's poverty and living-standards survey statistics, i.e. the VHLSS outputs; the edge assumes that identification, which the GSO page does not itself spell out in the corpus's terms.",
+      "evidence_url": "https://www.gso.gov.vn/en/metadata/2019/03/explanation-of-terminology-content-and-methodology-of-some-statistical-indicators-price/"
+    },
+    {
+      "source_report_id": "vn-grdp-hanoi",
+      "target_report_id": "vn-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "GSO's article on the 2017 centralisation of GRDP compilation states the problem it was solving — \"there is a difference of over 1.7 times between the sum of GRDP of 63 provinces and centrally-run cities and the national gross domestic product (GDP)\" — and the arrangement that replaced local self-calculation: \"Since 2017, the MPI (GSO) shall compile and announce GRDP; provincial statistical offices of central-affiliated cities and provinces shall be responsible for collecting the input information in their provinces or cities and reporting to the MPI (GSO),\" described as \"a solution to narrow the increasing difference between GDP and GRDP like at the present.\" Provincial GRDP is therefore compiled by the national-accounts compiler and bound to the national GDP figure. All three quotes re-fetched and confirmed verbatim by the orchestrating session; the researching agent had found only the middle one.",
+      "evidence_url": "https://www.gso.gov.vn/en/other-news/2019/11/since-2017-localities-not-to-self-calculate-grdp/"
+    },
+    {
+      "source_report_id": "vn-grdp-hcmc",
+      "target_report_id": "vn-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same GSO article and same quotes as for vn-grdp-hanoi: since 2017 GSO itself compiles and announces GRDP for all 63 provinces and centrally-run cities, provincial offices supplying input information only, expressly \"a solution to narrow the increasing difference between GDP and GRDP.\"",
+      "evidence_url": "https://www.gso.gov.vn/en/other-news/2019/11/since-2017-localities-not-to-self-calculate-grdp/"
+    },
+    {
+      "source_report_id": "vn-grdp-danang",
+      "target_report_id": "vn-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same GSO article and same quotes as for vn-grdp-hanoi; the arrangement is stated for all central-affiliated cities and provinces, which includes Da Nang.",
+      "evidence_url": "https://www.gso.gov.vn/en/other-news/2019/11/since-2017-localities-not-to-self-calculate-grdp/"
+    },
+    {
+      "source_report_id": "vn-grdp-cantho",
+      "target_report_id": "vn-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same GSO article and same quotes as for vn-grdp-hanoi; the arrangement is stated for all central-affiliated cities and provinces, which includes Can Tho.",
+      "evidence_url": "https://www.gso.gov.vn/en/other-news/2019/11/since-2017-localities-not-to-self-calculate-grdp/"
+    },
+    {
+      "source_report_id": "th-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Bank of Thailand's Balance of Payments metadata table states adjustments to trade data are made \"as recommended in the Balance of Payments Manual, sixth edition (BPM6),\" and that exchange-rate conversion uses \"monthly average (mid-rate) for both imports and exports, as suggested in BPM6.\"",
+      "evidence_url": "https://app.bot.or.th/BTWS_STAT/statistics/DownloadFile.aspx?file=EC_XT_048_ENG.PDF"
+    },
+    {
+      "source_report_id": "th-bop",
+      "target_report_id": "th-public-debt",
+      "relationship_type": "uses_data_from",
+      "basis": "The Bank of Thailand's Balance of Payments metadata table states, for the government sector component: \"Government: Data are obtained from the Public Debt Management Office, Ministry of Finance, and TFIIC.\" One of only a handful of genuine domestic data-chain edges that survived evidence across this whole seven-country tier.",
+      "evidence_url": "https://app.bot.or.th/BTWS_STAT/statistics/DownloadFile.aspx?file=EC_XT_047_S2_ENG.PDF"
+    },
+    {
+      "source_report_id": "th-bop",
+      "target_report_id": "th-tourism",
+      "relationship_type": "uses_data_from",
+      "basis": "The Bank of Thailand's Balance of Payments metadata table states that the services/travel account draws on \"travel receipts and payments data from Ministry of Tourism and Sport (MOTS).\"",
+      "evidence_url": "https://app.bot.or.th/BTWS_STAT/statistics/DownloadFile.aspx?file=EC_XT_047_S2_ENG.PDF"
+    },
+    {
+      "source_report_id": "th-banking-system",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Bank of Thailand's monetary and banking statistics metadata table states: \"The definitions and classifications of financial instruments and economic sectors are in line with the system of National Account 2008 (SNA2008), Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) and Balance of Payments 6 (BPM6) manuals.\" Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://app.bot.or.th/BTWS_STAT/statistics/DownloadFile.aspx?file=EC_MB_041_S3_ENG.PDF"
+    },
+    {
+      "source_report_id": "th-banking-system",
+      "target_report_id": "imf-mfsmcg-2016",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same Bank of Thailand metadata table names all three manuals in one sentence: \"The definitions and classifications of financial instruments and economic sectors are in line with the system of National Account 2008 (SNA2008), Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) and Balance of Payments 6 (BPM6) manuals.\"",
+      "evidence_url": "https://app.bot.or.th/BTWS_STAT/statistics/DownloadFile.aspx?file=EC_MB_041_S3_ENG.PDF"
+    },
+    {
+      "source_report_id": "th-banking-system",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same Bank of Thailand metadata table names all three manuals in one sentence: \"The definitions and classifications of financial instruments and economic sectors are in line with the system of National Account 2008 (SNA2008), Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) and Balance of Payments 6 (BPM6) manuals.\"",
+      "evidence_url": "https://app.bot.or.th/BTWS_STAT/statistics/DownloadFile.aspx?file=EC_MB_041_S3_ENG.PDF"
+    },
+    {
+      "source_report_id": "ir-national-accounts",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Statistical Centre of Iran's national-accounts page states: \"Industries and products are classified according to ISIC and CPC respectively.\" Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://www.amar.org.ir/english/Statistics-by-Topic/National-accounts"
+    },
+    {
+      "source_report_id": "iq-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "A Central Bank of Iraq Statistics and Research Department document states, in the document's own English rendering: \"the Iraqi balance of payment and external trade reflects recent developments in terms of the concepts included in the Balance of Payments and International Investment Position Manual sixth edition issued by the International Monetary Fund.\"",
+      "evidence_url": "https://cbi.iq/static/uploads/up/file-162737867572223.pdf"
+    },
+    {
+      "source_report_id": "iq-labour",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Iraq Labour Force Survey 2020/2021 report — the survey's own report, produced with the ILO — states on p.5: \"The Iraq LFS 2020/2021 adopted a methodology aligned with the latest statistical standards established by the International Conference of Labour Statisticians (ICLS) at its 19th Session,\" with p.9 adding that the labour-underutilization measures were designed \"in line with the latest international standards adopted by the 19th International Conference of Labour Statisticians.\"",
+      "evidence_url": "https://www.ilo.org/sites/default/files/wcmsp5/groups/public/@arabstates/@ro-beirut/documents/publication/wcms_850359.pdf"
+    },
+    {
+      "source_report_id": "mm-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ASEAN's statistics-in-international-trade-in-services metadata document for Myanmar states the compilation framework is based on the \"Balance of Payments Manual -6 (BPM-6),\" that MSITS 2010 is used \"in consistent with Balance of Payments Manual -6 (BPM-6),\" and cites the Central Bank of Myanmar's statutory authority under CBM Law paragraph 41(h) \"to collect and produce statistics and information in general and preparing the balance of payments.\" SOURCE CAVEAT: ASEAN-hosted country metadata supplied by Myanmar, not a page on a Myanmar government domain — accepted because Myanmar's own statistical web presence is largely gone and the document is Myanmar-authored country metadata rather than a third-party estimate.",
+      "evidence_url": "https://cdn.aseanstats.org/public/docs/metadata/sits/2021/SITS_Metadata_MM.pdf"
+    },
+    {
+      "source_report_id": "mm-cpi",
+      "target_report_id": "mm-hies",
+      "relationship_type": "uses_data_from",
+      "basis": "Myanmar's Central Statistical Organization states on its Statistical System page that the Household Income and Expenditure Survey is run \"to get the necessary weights in computing Consumer Price Index (CPI) for the cities and for the Union.\" Re-fetched and confirmed verbatim by the orchestrating session, which corrected the researching agent's paraphrase. The survey was minted as `mm-hies` in this slice specifically so this edge points at a publication rather than at the `mm-cso` institutional node, which would have been a publisher relationship disguised as a dependency.",
+      "evidence_url": "https://www.csostat.gov.mm/AboutCSO/StatisticalSystem"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "mm-national-accounts -> sna-1993 / sna-2008",
+      "source": "mm-national-accounts",
+      "target": "sna-1993",
+      "reason": "deferred",
+      "why": "CAUGHT BY THE VALIDATOR AT MINT TIME, AND THE VALIDATOR WAS RIGHT. This round originally minted mm-national-accounts -> sna-1993 AND -> sna-2008 off a single CSO sentence: \"it is also intended to use the GDP calculation when the method of 93 SNA, 2008 SNA is used\" (csostat.gov.mm/AboutCSO/StatisticalSystem, re-verified verbatim by the orchestrating session). `npm run validate` then flagged that a pre-existing _dropped note in ph-vn-th-mm-wiring-grok-2026-08.json describes that exact edge — and reading that note is what settled the question. It records IMF metadata for Myanmar reading: \"Myanmar's NA broadly follows the concepts and definitions of the System of National Accounts 1968. Consequently, changes introduced by the 1993 SNA/2008 SNA affecting GDP are being implemented.\" That does not contradict the CSO sentence, it EXPLAINS it: CSO says \"intended to use\", the metadata says \"being implemented\", and both mean Myanmar's actual current basis is the 1968 SNA with 93/2008 in progress. A methodology_depends_on edge to sna-1993 or sna-2008 would assert an adopted basis that neither source asserts, so both edges were withdrawn before landing. RESOLUTION PATH, and it is now easy: `sna-1968` DOES exist as a live node in the corpus. The earlier note's blocker — \"target id 'sna-1993' is NOT present in the live corpus\" — is also now stale; sna-1993, sna-1968, sna-2008 and sna-2025 all exist. What is still needed is a Myanmar-side or non-DSBB source for the 1968 basis, since this project does not cite the IMF DSBB. Mint mm-national-accounts -> sna-1968 once that is in hand, and mark the older note resolved at the same time. PROCESS NOTE: the orchestrating session's own pre-mint checker did not catch this, because it only compared THIS slice's _dropped entries against live edges — not this slice's new EDGES against other slices' existing _dropped notes. That check has been added to PLAYBOOK.md."
+    },
+    {
+      "edge": "ir-national-accounts -> un-coicop-2018",
+      "source": "ir-national-accounts",
+      "target": "un-coicop-2018",
+      "reason": "deferred",
+      "why": "MODELLING QUESTION FOR THOMAS, not a research failure. SCI's national-accounts page does state \"Classification of individual consumption by purpose (COICOP), for classification of household final consumption expenditures\" — verified verbatim by the orchestrating session. But it names COICOP with no revision, and the corpus has only revision-specific nodes: `un-coicop-2018` and `un-coicop-hbs-1999`. Wiring a source that says 'COICOP' to the 2018 edition asserts an edition the document does not assert, and Iran's accounts are on the SNA 1993 vintage, which makes a pre-2018 COICOP the more likely referent. Not minted. The fix is a decision, not more research: either mint a revision-neutral `un-coicop` parent node that the revisions hang off, or accept that generic-COICOP citations cannot be wired at all."
+    },
+    {
+      "edge": "iq-cpi -> un-coicop-2018",
+      "source": "iq-cpi",
+      "target": "un-coicop-2018",
+      "reason": "deferred",
+      "why": "Same modelling question as the Iran entry above, and the reason Iraq ended this round with two edges instead of three. Iraq's CSO CPI bulletin for May 2018 does state its 486 sampled items are \"distributed on 12 divisions according to Classification Of Individual Consumption by Purpose briefly COICOP\" — a good primary quote — but again names no revision, and a bulletin published in 2018 is more likely to mean the pre-2018 edition than the one released that year. Held for the same decision."
+    },
+    {
+      "edge": "vn-iip -> isic",
+      "source": "vn-iip",
+      "target": "isic",
+      "reason": "no-document",
+      "why": "A real finding with the wrong kind of evidence. The researching agent proposed this on classification.codes, a third-party classification reference, which states \"VSIC 2018 has been in force since 2018. It is identical to the United Nation's ISIC Rev. 4 up to the two-digit (Division) level.\" That is almost certainly true and the agent flagged its own source as non-primary. Rejected at mint time under this project's primary-source rule. The lead is precise: find GSO's or the Prime Minister's decision promulgating VSIC 2018 (Vietnam Standard Industrial Classification), which will state the ISIC derivation in its own text."
+    },
+    {
+      "edge": "iq-oil-revenue -> iq-oil-exports",
+      "source": "iq-oil-revenue",
+      "target": "iq-oil-exports",
+      "reason": "resolved",
+      "why": "RESOLVED SAME DAY — see candidates-tier-retries-2026-08-28.json. This entry originally rejected the edge because the only evidence was a secondary analyst PDF (iraq-businessnews.com) quoting Iraq's Budget Law No. 13 of 2023 by article number. A targeted retry found the law itself, published by Iraq's Ministry of Justice at moj.gov.iq/upload/pdf/4726_72.pdf, whose Article 1 states: \"احتساب الإيرادات المخمنة من تصدير النفط الخام على أساس معدل سعر تصدير قدره (٧٠) دولار للبرميل الواحد ومعدل تصدير قدره (٣,٥٠٠,٠٠٠) برميل يومياً\". The edge is now live on the primary instrument."
+    },
+    {
+      "edge": "iq-federal-budget -> iq-oil-revenue",
+      "source": "iq-federal-budget",
+      "target": "iq-oil-revenue",
+      "reason": "resolved",
+      "why": "RESOLVED SAME DAY — see candidates-tier-retries-2026-08-28.json. Same fix as the oil-revenue entry above: Budget Law No. 13 of 2023 was reached at moj.gov.iq and its Article 1 revenue table states total revenue as the sum of oil and non-oil components (\"اجمالـــي الايـــرادات = ( أ + ب )\"), reaching the stated total of 134,552,919,063 thousand dinars. Both halves of Iraq's oil-fiscal chain are now live on the primary law."
+    },
+    {
+      "edge": "ir-national-accounts -> sna-2008",
+      "source": "ir-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "CONTRADICTION FLAGGED, NOT RESOLVED — this needs Thomas's ruling, and it is the reason Iran contributed one edge to this round instead of seven. The edge ir-national-accounts -> sna-2008 is ALREADY LIVE in the corpus. But SCI's own current English national-accounts page says something else, verbatim and re-verified by the orchestrating session: \"Theoretically, regional accounts, just like national accounts, follow the latest revision of the system of national accounts SNA 93.\" The UN Statistics Division's Iran country record independently lists \"National Accounts Methodology 1993 System of National Accounts\", which favours SNA 93 too. Per PLAYBOOK rule 13, a fresh well-verified finding that contradicts a live edge does not automatically win: the live sna-2008 edge is caveated here rather than deleted, and the new SNA-93 claim is deferred rather than minted. SIX EDGES ARE HELD PENDING THIS RULING — ir-national-accounts -> sna-1993 and the five ir-grdp-* -> sna-1993 edges, all resting on that one SCI sentence, which covers regional accounts explicitly (\"regional accounts, just like national accounts\"). Minting them while the sna-2008 edge stands would have left the corpus asserting both vintages for Iran with nothing flagging it. The one Iran edge that WAS minted, ir-national-accounts -> isic, is independent of this dispute. Counter-evidence for the live edge: a 2015 UN workshop slide filed under Iran's country folder states \"Quarterly National Accounts cover the entire sequence of accounts and balance sheets in the 2008 SNA\" — but it may be describing the framework generically for training, and it is a decade old."
+    },
+    {
+      "edge": "th-national-accounts -> sna-2008",
+      "source": "th-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "The edge th-national-accounts -> sna-2008 is ALREADY LIVE in the corpus, so this entry is a caveat on it, not a claim against it. This round tried and FAILED to corroborate it from NESDC, Thailand's actual national-accounts compiler: every nesdc.go.th URL attempted — /en/info/national-accounts/, /national-income-of-thailand-ni-en/, /gross-regional-and-provincial-product-gpp/, and the site root — failed with ROBOTS_DISALLOWED / robots.txt redirect-loop errors, so the whole domain is currently unfetchable by this toolchain. The live edge is very probably right and is separately supported from the Bank of Thailand side, where this round DID mint th-banking-system -> sna-2008 off BOT's own metadata. Recorded so a later round knows the NESDC-side corroboration is still owed, and that the blocker is a domain, not a missing fact."
+    },
+    {
+      "edge": "th-grdp-bangkok / chiangmai / chonburi / phuket / rayong -> th-national-accounts",
+      "source": "th-grdp-bangkok",
+      "target": "th-national-accounts",
+      "reason": "deferred",
+      "why": "Five edges lost to the same nesdc.go.th unreachability described above. NESDC publishes a Gross Provincial Product methodology that reconciles GPP to national GDP — the exact Thai analogue of the Vietnam GRDP edges minted in this slice — but the page could not be fetched. Highest-value single retry in this tier: one working NESDC document would yield six edges."
+    },
+    {
+      "edge": "vn-national-accounts -> sna-2008",
+      "source": "vn-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "The edge vn-national-accounts -> sna-2008 is ALREADY LIVE in the corpus, so this entry is a caveat on it. This round could not corroborate it from GSO: nso.gov.vn/en/national-accounts/methodology/ was robots-blocked on every attempt, and a GSO page actually titled 'System of National Account 2008' was fetched but turns out to carry only generic UN encouragement language ('We encourage all countries to compile...') with no Vietnam-specific statement of adoption — a good example of a title that looks like evidence and is not. The live edge is probably right; the corroboration is still owed."
+    },
+    {
+      "edge": "vn-bop -> imf-bpm6",
+      "source": "vn-bop",
+      "target": "imf-bpm6",
+      "reason": "no-document",
+      "why": "No usable State Bank of Vietnam document could be reached at all. sbv.gov.vn pages loaded but returned only navigation chrome with no body content, on every attempt. This also blocked any GFSM or MFSMCG bridge for Vietnam's monetary and fiscal series. Highly likely to be true given Vietnam's e-GDDS participation, but unevidenced, and a plausible standard is still a guess."
+    },
+    {
+      "edge": "mm-poverty -> (Myanmar Living Conditions Survey)",
+      "source": "mm-poverty",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "RESEARCH LEAD with a good source already found. The Myanmar Living Conditions Survey 2017 Poverty Report states \"The 2017 MLCS is a comprehensive survey on how people in Myanmar live. It was carried out by the CSO in the MOPF, with technical and financial support from UNDP and the World Bank\" — i.e. the underlying data collection is Myanmar's own, and the World Bank/UNDP produced the analysis on top of it. The agent proposed wiring mm-poverty to the `mm-cso` institutional node; rejected at mint time as a publisher relationship in dependency clothing, the same reason `mm-hies` was minted as a real node in this slice. Mint `mm-mlcs` the same way in a later round and this edge follows."
+    },
+    {
+      "edge": "vn-public-debt -> vn-state-budget; vn-budget-deficit -> vn-state-budget; vn-npl -> vn-banking-system; vn-seaport-throughput -> vn-port-haiphong",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Grouped because they share one finding: the obvious domestic arithmetic chains in Vietnam are not documented anywhere the publishers put on the web. A deficit is revenue minus expenditure and public debt is built from budget execution — both self-evident, neither stated in a fetchable Ministry of Finance or SBV document. This pattern held across all seven countries in this tier and is the main reason the yield here is standards bridges rather than data chains."
+    },
+    {
+      "edge": "th-cpi -> un-coicop-2018 / cpi-manual; th-labour -> icls-work-statistics-resolution; th-public-debt -> imf-gfsm",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "All three checked against pages that DID load and simply do not contain the statement: Thailand's Ministry of Commerce CPI portal (price.moc.go.th) is a navigation page to index tables with no methodology text; NSO's Labour Force Survey page (nso.go.th/nsoweb/nso/survey_detail/9u) carries only report download links; PDMO's English site returned navigation only. Recorded as no-document rather than deferred because the pages were reached and read."
+    },
+    {
+      "edge": "ir-labour -> icls-work-statistics-resolution; ir-population -> un-census-principles; ir-cpi -> (any standard); ir-bop -> imf-bpm6; ir-state-budget -> ir-oil-exports; ir-power -> ir-nuclear-power",
+      "source": null,
+      "target": null,
+      "reason": "deferred",
+      "why": "Grouped: amar.org.ir became unreachable partway through the research session (ROBOTS_DISALLOWED with an underlying robots.txt ConnectTimeout on the labour-force, population, prices and sitemap pages, and eventually the English homepage), and cbi.ir went the same way. The one CBI page that did load — the Balance of Payments category page, cbi.ir/category/3393.aspx — is a category listing with no methodology text and no BPM6 mention. Iran's national-accounts page was reachable and productive; the rest of the site was not. Worth a straight retry on a different day rather than a different approach."
+    },
+    {
+      "edge": "ir-national-accounts <-> ir-cbi (dual-compilation on differing bases)",
+      "source": "ir-national-accounts",
+      "target": "ir-cbi",
+      "reason": "no-document",
+      "why": "Actively looked for and not found. Iran's national accounts have historically been compiled by BOTH the Statistical Centre of Iran and the Central Bank on differing bases, which would be a genuinely interesting structure for this graph. The UN Statistics Division's Iran country record names only the Statistical Centre of Iran as compiling institution, with no CBI mention, and no fetched document described a differing-basis or hand-off relationship. Recorded so a later round does not re-derive the question from scratch."
+    },
+    {
+      "edge": "iq-national-accounts -> sna-2008",
+      "source": "iq-national-accounts",
+      "target": "sna-2008",
+      "reason": "deferred",
+      "why": "Named target, never opened. cosit.gov.iq's national-accounts section links a document titled 'البيانات الوصفية للناتج المحلي الاجمالي والدخل القومي' (Metadata for GDP and National Income), which is exactly where the SNA vintage would be stated. The agent exhausted its fetch budget before opening it. Both the national-accounts landing page and its income sub-page were read and contain no SNA statement themselves. One fetch away."
+    },
+    {
+      "edge": "iq-population -> un-census-principles",
+      "source": "iq-population",
+      "target": "un-census-principles",
+      "reason": "no-document",
+      "why": "Checked properly and genuinely absent. Iraq ran its first full population and housing census in decades in 2024, so its methodology documentation looked like a strong bet. The UN Iraq results announcement, cosit.gov.iq/ar/pop-main, and an independent case study on the 2024 census were all fetched; none states the census followed the UN Principles and Recommendations. The only concrete claim found is that UNFPA provided general technical support (tablets, training, GIS), which is not a standards-compliance statement."
+    },
+    {
+      "edge": "mm-cpi -> un-coicop-2018 / cpi-manual",
+      "source": "mm-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "The CSO Statistical System page — the one Myanmar page that did yield the SNA and HIES sentences — was checked for both and contains neither. Myanmar's CPI series is dormant from December 2020 in this corpus and no live CPI methodology page exists."
+    },
+    {
+      "edge": "ALL YEMEN EDGES",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "ZERO EDGES, and the zero is the finding. Yemen's own primary statistical documentation is effectively unreachable in 2026. cso-yemen.com fails to load (robots.txt error, HTTP 500) — effectively dead. The single most substantive Yemen-specific document reached was the UN Statistics Division's national-accounts country record (unstats.un.org/Unsd/nationalaccount/cInfo.asp?cID=887), and it RULES OUT rather than supports the obvious edges: it states \"National Accounts Methodology 1968 System of National Accounts\", base year 1990, last UN-NAQ submission 2008, with a '2008 SNA Implementation Programme' listed only as an aspirational ISWGNA initiative. So no SNA 1993 or SNA 2008 edge can honestly be minted — Yemen is on the 1968 SNA, and this corpus has an `sna-1968` node, which is the lead for a later round. The Central Bank of Yemen's site (centralbank.gov.ye) does load and appears genuine (exchange-rate newsletter, public debt sections) but exposed no balance-of-payments report or methodology page. The 2004 census, Yemen's last, could not be verified: the IHSN catalog record failed twice and the GHDx record is a bare stub. Everything else search surfaces is third-party aggregators (CEIC, FRED, Moody's), which cannot substantiate a methodology edge."
+    },
+    {
+      "edge": "ALL SYRIA EDGES",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "ZERO EDGES, and again the zero is the finding. cbssyr.sy — the Central Bureau of Statistics domain — failed on every variant tried (http://www.cbssyr.sy/, https://cbssyr.sy/, http://cbssyr.sy), each at the robots.txt fetch stage with a connection timeout, i.e. the host is not responding rather than blocking. INSTITUTIONAL CHANGE WORTH RECORDING: the CBS appears no longer to exist as an independent body — it was merged into the General Authority for Planning and International Cooperation, renamed the Syrian Planning and Statistics Commission under Decree No. 27 of 2025 (per Wikipedia, not yet confirmed against a primary Syrian source). cb.gov.sy (Central Bank of Syria) IS reachable and lists real report titles — Balance of Payments indicators, IIP, exchange-rate bulletins, monetary survey, government account indicators — but every page fetched was a navigation index or department description, never the underlying report, so no methodology sentence could be quoted. Also notable: GHDx's catalog of Syrian statistical history lists a 1976 census and various MICS rounds but does NOT list a 2004 census, which quietly undercuts the widely-cited '2004 census' as the population denominator. Next round should search the Syrian Planning and Statistics Commission by name and by Decree 27 of 2025."
+    },
+    {
+      "edge": "cso-yemen.org and cbssyr.org",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "OPERATIONAL WARNING, recorded here and added to PLAYBOOK.md. Two dead national-statistics-office domains have been repurposed and both rank in search results as if they were the real thing. cso-yemen.org now serves unrelated cultural-tourism marketing copy (\"At CSO Yemen, we are dedicated to sharing the soul of Yemen with the world...\") with zero statistical content. cbssyr.org — note .org, not the historical .sy — presents itself as 'The Central Bureau of Statistics Syria' but carries embedded adult-content spam links and no data. Neither is a usable source; both were surfaced by ordinary searching in this round, and a less careful agent would have cited them."
+    },
+    {
+      "edge": "vn-gso -> imf-e-gdds",
+      "source": "vn-gso",
+      "target": "imf-e-gdds",
+      "reason": "caveat",
+      "why": "INDEPENDENT CORROBORATION of an edge that already exists live in the corpus — recorded rather than silently discarded, because a second sighting from a different starting point is worth something. This round rediscovered it from GSO's own workshop page on Vietnam's e-GDDS implementation, which states \"The e-GDDS was adopted by the IMF on July 01, 2015 to support improved data transparency, encourage statistical development, and help create synergies between data dissemination and surveillance,\" and identifies GSO as Vietnam's coordinating agency. The duplicate was caught by the corpus-wide edge check at mint time, not by the researching agent."
+    },
+    {
+      "edge": "th-bop -> imf-sdds",
+      "source": "th-bop",
+      "target": "imf-sdds",
+      "reason": "caveat",
+      "why": "INDEPENDENT CORROBORATION of an already-live edge, same as the Vietnam entry above. Rediscovered from the Bank of Thailand's own dissemination-standards page: \"Since August 1996, the Bank of Thailand has joined the International Monetary Fund's Special Data Dissemination Standard (SDDS),\" with the external sector named among the disseminated categories — and sourced from BOT rather than the IMF DSBB, which this project does not use. Caught by the corpus-wide edge check at mint time."
+    }
+  ]
+}

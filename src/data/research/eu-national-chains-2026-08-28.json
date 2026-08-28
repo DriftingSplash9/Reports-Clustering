@@ -1,0 +1,1804 @@
+{
+  "_slice": "eu-national-chains-2026-08-28",
+  "_researched": "2026-08-28",
+  "_status": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader).",
+  "_note": "EU/EEA national-chain round, 21 countries that each had exactly three nodes (EDP inventory, ESS peer review report, national accounts) and ZERO country-internal dependency edges — they hung off the Eurostat/ESA hubs and nothing else. This round mints each country's own price index, household budget survey and labour force survey, and wires the three documented domestic dependencies between them: CPI/HICP weights from national accounts household final consumption expenditure, CPI/HICP weights from the HBS, and national-accounts employment from the LFS. It also resolves the granularity question left open in eurostat-hicp.json (_open_questions, 2026-08-05: 'if a future session wants country-level granularity for HICP... this node may need to be split'): eurostat-hicp now has incoming uses_data_from edges from the national HICPs it aggregates, rather than being split. Researched by 21 parallel subagents, one per country, each told a guessed answer is worse than none and required to WebFetch and quote. FOUR load-bearing quotes were independently re-fetched and confirmed verbatim by the orchestrating session before minting: Poland's Eurostat ESMS weights sentence, Ireland's CSO CPI background-notes HFMCE/HBS sentences, Austria's std_v_vpi_hvpi.pdf Gewichtung sentence, and Greece's Eurostat ESMS weights sentence. METHOD FINDING worth reusing: the two Eurostat national reference metadata URL patterns are the highest-yield source for this whole class of question — https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_<cc>.htm (HICP weights + transmission) and https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_<cc>.htm (whether the LFS is the national-accounts employment source, stated as an explicit Y/N field). CAUTION: the HICP filename is versioned per country and NOT uniform — esmshi4 for PL/EL/ES/HU/HR/BG/LT, esmshi3 for SK/SI/EE/LV/MT/CY/IS, and 404 for FI. Try hi4, fall back to hi3. NEGATIVE FINDINGS ARE REAL DATA here, not gaps: the employ_simslfs pages state outright that Cyprus 'doesn't make use of LFS, or makes minimal use of it' for national accounts and that Slovenia is the same, so those two countries correctly have NO national-accounts<-LFS edge — see _dropped. Spain, Hungary, Slovakia, Croatia, Latvia and Lithuania are documented as using the LFS as a main-but-not-sole source, and their edge bases quote that caveat rather than overclaiming. NOT DONE this round: no government-finance / EDP notification node was researched for any of the 21 — every agent deprioritised it in favour of the CPI/HBS/LFS core, so treat it as unresearched rather than absent. Portugal is the thinnest country here: ine.pt refused essentially every fetch (robots.txt ConnectTimeout, reproduced independently by the orchestrating session), so pt-ine-idef's url points at the INE IPC release that evidences it rather than at IDEF's own page, no Portuguese LFS node exists, and Romania lost its IAPC node to the same failure mode on insse.ro.",
+  "reports": [
+    {
+      "id": "pl-gus-hicp",
+      "title": "Wskaźnik cen towarów i usług konsumpcyjnych / Zharmonizowany wskaźnik cen konsumpcyjnych (HICP) — Consumer Price Index / Harmonised Index of Consumer Prices",
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "region": "Poland",
+      "description": "GUS's monthly price release, covering both the national CPI and the harmonised HICP. GUS's own press-release page states prices are recorded once a month (\"Ceny towarów i usług notowane są raz w miesiącu\") and that the national index's weights come from the household survey: \"Wagi pochodzą z Badania Budżetów Gospodarstw Domowych (BBGD) – cyklicznego badania ankietowego mierzącego wydatki i dochody ok. 37 tys. gospodarstw domowych.\" Eurostat's Poland national reference metadata separates the two weighting systems: \"The main source of HICP weights are National Accounts while the system of weight for CPI is based on data from Household Budget Survey.\"",
+      "releases_per_year": 12,
+      "cadence_note": "GUS's press-release page states prices are recorded monthly; Eurostat's Poland HICP metadata confirms the full set is \"published each month according to a pre-announced schedule, usually between 15 and 18 days after the end of the reference month.\"",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/dla-mediow/komunikaty-prasowe/wskaznik-cen-towarow-i-uslug-konsumpcyjnych-pot-inflacja,100,1.html",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "pl-gus-hbs",
+      "title": "Badanie budżetów gospodarstw domowych (BBGD) — Household Budget Survey",
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "region": "Poland",
+      "description": "GUS's own survey page names as one of its purposes \"tworzenia wag do obliczania indeksów cen towarów i usług konsumpcyjnych\" (creating weights for calculating consumer price indices), and describes it as a continuous year-round survey (\"cały rok – badanie ciągłe\").",
+      "releases_per_year": 1,
+      "cadence_note": "Fieldwork is continuous (\"cały rok – badanie ciągłe\", GUS BBGD survey page) but the results report \"Budżety gospodarstw domowych w 2023 roku\" states its own publication frequency explicitly: \"Częstotliwość wydania: Roczna\" (annual).",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/badania-statystyczne/badania-ankietowe/badania-spoleczne/badanie-budzetow-gospodarstw-domowych-bbgd/",
+      "domains": [
+        "living-standards",
+        "poverty"
+      ]
+    },
+    {
+      "id": "pl-gus-lfs",
+      "title": "Badanie Aktywności Ekonomicznej Ludności (BAEL) — Labour Force Survey",
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "region": "Poland",
+      "description": "GUS's BAEL survey page describes it as \"Jest głównym źródłem danych wykorzystywanych do konstrukcji wskaźników z zakresu rynku pracy\" (the main source of data used for constructing labour-market indicators), used by among others the National Bank of Poland, the ECB, the ILO, the OECD and the World Bank.",
+      "releases_per_year": 4,
+      "cadence_note": "Survey is continuous, results quarterly: \"Co kwartał dostarcza wiarygodnych danych dotyczących sytuacji osób pracujących, bezrobotnych oraz biernych zawodowo\" (GUS BAEL page).",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/badania-statystyczne/badania-ankietowe/badania-spoleczne/badanie-aktywnosci-ekonomicznej-ludnosci-bael/",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "ro-ins-ipc",
+      "title": "Indicele Prețurilor de Consum (IPC) — Consumer Price Index",
+      "publisher": "Institutul Național de Statistică (INS)",
+      "country": "RO",
+      "jurisdiction_level": "federal",
+      "region": "Romania",
+      "description": "Romania's national CPI. INS's own methodological notes state the weights come from the Household Budget Survey: \"Ponderile utilizate pentru calculul IPC sunt obţinute din Ancheta Bugetelor de Familie (ABF)\", with the current weight base set out as \"începând din ianuarie 2023, calculul indicilor lunari cu bază fixă se face utilizând preţurile medii din anul 2021 (anul 2021=100) şi ponderile din acelaşi an.\" NOTE: this is the national IPC, NOT the harmonised IAPC — the IAPC quality report and every other insse.ro page refused to load this round, so Romania has no HICP node and no edge into eurostat-hicp.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; INS publishes a per-month press release (source PDFs named ipc01r25.pdf, ipc05r26_0.pdf etc.) and the methodological notes describe \"calculul indicilor lunari cu bază fixă\".",
+      "last_updated": null,
+      "url": "https://insse.ro/cms/files/statistici/comunicate/ipc/a23/precizari_metodologice_01.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ro-ins-hbs",
+      "title": "Ancheta Bugetelor de Familie (ABF) — Household Budget Survey",
+      "publisher": "Institutul Național de Statistică (INS)",
+      "country": "RO",
+      "jurisdiction_level": "federal",
+      "region": "Romania",
+      "description": "Romania's household income-and-expenditure survey, named as the source of the IPC weights by INS's own methodological notes. The European Commission's CROS survey catalogue lists it as \"Ancheta Bugetelor de Familie (ABF)\"; Eurostat's EU-wide HBS metadata states the survey's core purpose across participating countries is that \"The main purpose of this survey at national level is to update the weights of the basket of goods and services used for the calculation of the HICP.\"",
+      "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. INS's own ABF pages (quality report, manual) all failed to load from insse.ro this round. Eurostat's EU-wide HBS metadata describes the harmonised EU round as roughly five-yearly (\"1988, 1994, 1999, 2005, 2010, 2015 and 2020\") with Romania a participant, but that is the EU transmission round, not INS's domestic fieldwork/publication cadence. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://cros.ec.europa.eu/topic/ro-family-budget-survey-fbs",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "ro-ins-lfs",
+      "title": "Ancheta Forței de Muncă în Gospodării (AMIGO) — Labour Force Survey",
+      "publisher": "Institutul Național de Statistică (INS)",
+      "country": "RO",
+      "jurisdiction_level": "federal",
+      "region": "Romania",
+      "description": "Eurostat's Romania LFS national reference metadata gives the \"Compiling agency: National Institute of Statistics\" and states plainly of national accounts that \"In NA: LFS is the main data source\", alongside \"Country uses LFS as the only source for employment in national accounts\". CAVEAT recorded at mint time: the native title AMIGO appears in insse.ro document titles in search results but was not present in any page successfully fetched this round — the Eurostat page calls it generically \"Labour force survey\".",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; Eurostat's Romania LFS metadata states the \"first release - is diseminated 75 days after the end of the reference quarter.\"",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_ro.htm",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "se-scb-kpi",
+      "title": "Konsumentprisindex (KPI) — Consumer Price Index",
+      "publisher": "Statistiska centralbyrån (SCB) / Statistics Sweden",
+      "country": "SE",
+      "jurisdiction_level": "federal",
+      "region": "Sweden",
+      "description": "Sweden's national consumer price index. SCB's KPI service page states \"KPI publiceras månadsvis i regel runt 10–14 dagar in på nästkommande månad efter redovisningsmånaden\" (KPI is published monthly, typically 10–14 days into the month following the reference month). SCB's official 'Statistikens framställning' document for KPI 2024 states the weights come from the national accounts: \"Underlag för vägningstalen är i första hand Nationalräkenskaperna.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, per SCB's KPI service page (\"KPI publiceras månadsvis...\").",
+      "last_updated": null,
+      "url": "https://www.scb.se/vara-tjanster/index/konsumentpriser/konsumentprisindex-kpi/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "se-scb-hikp",
+      "title": "Harmoniserat index för konsumentpriser (HIKP) — Harmonised Index of Consumer Prices (HICP), Sweden",
+      "publisher": "Statistiska centralbyrån (SCB) / Statistics Sweden",
+      "country": "SE",
+      "jurisdiction_level": "federal",
+      "region": "Sweden",
+      "description": "Sweden's EU-harmonised consumer price index. SCB's HIKP page states \"It is the same price material that forms the basis for HIKP in Sweden as for CPI and other price indices SCB calculates\" and that \"The measure is published by SCB monthly in connection with the publication of CPI\"; SCB's KPI production-of-statistics document adds \"KPI är också utgångspunkt för beräkningen av det EU-harmoniserade måttet Harmoniserat Index för Konsumentpriser (HIKP).\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, published with the KPI: \"The measure is published by SCB monthly in connection with the publication of CPI\" (SCB HIKP page).",
+      "last_updated": null,
+      "url": "https://www.scb.se/vara-tjanster/index/konsumentpriser/harmoniserat-index-for-konsumentpriser-hikp/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "se-scb-hbs",
+      "title": "Hushållens utgifter (HUT) — Household Budget Survey",
+      "publisher": "Statistiska centralbyrån (SCB) / Statistics Sweden",
+      "country": "SE",
+      "jurisdiction_level": "federal",
+      "region": "Sweden",
+      "description": "SCB's household expenditure survey, run irregularly rather than annually. SCB's HE0201-EN page states the surveys \"have been carried out since 1958\" and that \"The survey will be conducted in 2026 and then every five years starting in 2030\" — so it is NOT discontinued. Notably, NO fetched SCB page names HUT as a source of KPI or HIKP weights; SCB attributes those to the national accounts instead (see _dropped).",
+      "releases_per_year": 0.2,
+      "cadence_note": "Five-yearly from 2030, per scb.se/HE0201-EN: \"The survey will be conducted in 2026 and then every five years starting in 2030.\" Most recent full results found were for 2021, reported December 2022.",
+      "last_updated": null,
+      "url": "https://www.scb.se/HE0201-EN?menu=open",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "se-scb-lfs",
+      "title": "Arbetskraftsundersökningarna (AKU) — Labour Force Surveys",
+      "publisher": "Statistiska centralbyrån (SCB) / Statistics Sweden",
+      "country": "SE",
+      "jurisdiction_level": "federal",
+      "region": "Sweden",
+      "description": "SCB's Labour Force Survey. SCB's \"more about the Labour Force Survey\" page states \"LFS is also used in the work of Statistics Sweden, partly for national accounts work, partly for labour force analyses and prognoses.\"",
+      "releases_per_year": 12,
+      "cadence_note": "INFERRED, not quoted: the AKU statistics page shows a monthly series through \"2026M07\" and a next publication date of \"2026-09-16\", one month after the latest data point. No verbatim 'published monthly' sentence was found. Treat as lower-confidence than the KPI/HIKP figures — but the field is set rather than omitted because absence means 'one-off instrument' in this schema, which AKU certainly is not.",
+      "last_updated": null,
+      "url": "https://www.scb.se/hitta-statistik/statistik-efter-amne/arbetsmarknad/utbud-av-arbetskraft/arbetskraftsundersokningarna-aku/",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "be-statbel-cpi",
+      "title": "Consumptieprijsindex / Indice des prix à la consommation — Consumer Price Index (and HICP)",
+      "publisher": "Statbel (Statistics Belgium, FPS Economy)",
+      "country": "BE",
+      "jurisdiction_level": "federal",
+      "region": "Belgium",
+      "description": "Monthly Statbel release covering the national consumer price index and Belgium's HICP. Statbel's methodology page describes an index that \"objectively reflect[s] the price evolution over time for a basket of goods and services purchased by households,\" with results \"available on the penultimate working day of the reference period,\" and states that \"Weights are determined based on the household budget survey.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; Statbel's CPI page states results are \"available on the penultimate working day of the reference period.\"",
+      "last_updated": null,
+      "url": "https://statbel.fgov.be/en/themes/consumer-prices/consumer-price-index",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "be-statbel-health-index",
+      "title": "Gezondheidsindex / Indice santé — Health Index",
+      "publisher": "Statbel (Statistics Belgium, FPS Economy)",
+      "country": "BE",
+      "jurisdiction_level": "federal",
+      "region": "Belgium",
+      "description": "The legally operative Belgian index. Statbel states the consumer price index \"forms the basis of another index: the health index,\" which excludes \"alcoholic beverages (bought in a shop or consumed in a bar), tobacco products and motor fuels except for LPG,\" and that the smoothed four-month-moving-average version \"is used as a basis for the indexation of retirement pensions, social security benefits and some salaries and wages,\" and that \"The health index is used for the indexation of housing rents.\"",
+      "releases_per_year": 12,
+      "cadence_note": "INFERRED, not quoted: the health index is derived each month from the CPI (itself monthly), with a rolling four-month smoothed variant computed \"since April 2016\". Field set rather than omitted because absence means 'one-off instrument' in this schema.",
+      "last_updated": null,
+      "url": "https://statbel.fgov.be/en/themes/consumer-prices/health-index",
+      "domains": [
+        "inflation",
+        "benefits"
+      ]
+    },
+    {
+      "id": "be-statbel-hbs",
+      "title": "Huishoudbudgetonderzoek / Enquête sur le budget des ménages — Household Budget Survey",
+      "publisher": "Statbel (Statistics Belgium, FPS Economy)",
+      "country": "BE",
+      "jurisdiction_level": "federal",
+      "region": "Belgium",
+      "description": "Statbel's own HBS page describes it as \"a survey on consumption expenditure of households,\" states \"The survey is also the main source to compile the consumer price index,\" that \"The choice of representative items and their weights in the basket are deeply reviewed every two years based on the most recent HBS,\" and that it serves \"as input for updating the index basket and for estimating household consumption expenditure in the national accounts.\"",
+      "releases_per_year": 0.5,
+      "cadence_note": "Biennial: the survey \"runs biannually (every two years) as of 2012, though it was conducted annually from 1999 to 2010\" (Statbel HBS page).",
+      "last_updated": null,
+      "url": "https://statbel.fgov.be/en/themes/households/household-budget-survey-hbs",
+      "domains": [
+        "living-standards",
+        "inflation"
+      ]
+    },
+    {
+      "id": "be-statbel-lfs",
+      "title": "Enquête naar de arbeidskrachten (EAK) / Enquête sur les forces de travail (EFT) — Labour Force Survey",
+      "publisher": "Statbel (Statistics Belgium, FPS Economy)",
+      "country": "BE",
+      "jurisdiction_level": "federal",
+      "region": "Belgium",
+      "description": "Statbel's survey description page states its \"main purpose is to classify the working-age population (15 years and older) into three groups (employed persons, unemployed, and inactive), and to provide descriptive and explanatory data on each of these categories,\" that \"Each year, approximately 60,000 households are randomly selected,\" and that \"This survey is also conducted in other EU Member States and is coordinated by EUROSTAT.\"",
+      "cadence_note": "RECURRING, publication cadence unconfirmed — not a one-off instrument. The fetched Statbel page confirms continuous annual sampling but states no release frequency; Statbel's annual \"Labour Force Survey: publication with detailed figures\" appeared only in unfetched search results. Statbel's English labour-market pages returned ROBOTS_DISALLOWED. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://statbel.fgov.be/fr/survey/enquete-sur-les-forces-de-travail-eft",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "at-statistik-austria-vpi",
+      "title": "Verbraucherpreisindex (VPI) — Austrian national Consumer Price Index",
+      "publisher": "Statistik Austria",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "Statistik Austria states \"Der Verbraucherpreisindex (VPI) zeigt, wie sich die Preise für Waren und Dienstleistungen in Österreich verändern.\" The joint VPI/HVPI standard documentation states the basket weighting draws on two sources at once: \"Die Gewichtung des Warenkorbes basiert auf den Ergebnissen der jeweils rezent vorliegenden Konsumerhebung sowie auf aktuellen Daten über den privaten Konsum aus den Volkswirtschaftlichen Gesamtrechnungen.\"",
+      "releases_per_year": 12,
+      "cadence_note": "\"Die Veröffentlichung der beiden Indizes erfolgt monatlich, jeweils Mitte des Folgemonats und wird als Erstmitteilung in Form einer Presseaussendung und auf der Homepage am selben Tag mit Eurostat veröffentlicht\" (std_v_vpi_hvpi.pdf) — re-fetched and confirmed verbatim by the orchestrating session.",
+      "last_updated": null,
+      "url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/preise-und-preisindizes/verbraucherpreisindex-vpi/hvpi",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "at-statistik-austria-hvpi",
+      "title": "Harmonisierter Verbraucherpreisindex (HVPI) — Austria's Harmonised Index of Consumer Prices",
+      "publisher": "Statistik Austria",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "Statistik Austria states \"Der Harmonisierte Verbraucherpreisindex (HVPI) ist die europäische Vergleichsgröße\" and, in its VPI FAQ factsheet, that it \"dient u. a. der Bewertung der Geldwertstabilität innerhalb der Euro-Zone.\" The standard documentation records the relationship to the national index: \"Die beiden Indizes VPI und HVPI verwenden dieselben Preisdaten werden aber mit unterschiedlichen Gewichten berechnet.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Published jointly with the VPI, monthly, mid-month following the reference month (std_v_vpi_hvpi.pdf).",
+      "last_updated": null,
+      "url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/preise-und-preisindizes/verbraucherpreisindex-vpi/hvpi",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "at-statistik-austria-konsumerhebung",
+      "title": "Konsumerhebung — Austrian Household Budget Survey",
+      "publisher": "Statistik Austria",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "Statistik Austria's Konsumerhebung page states: \"Die Ausgabensummen und deren Verteilung auf einzelnen Ausgabengruppen bilden zudem eine wichtige Quelle für die Revision des Warenkorbes der Verbraucherpreisindizes\" (the expenditure totals and their distribution across spending categories form an important source for revising the basket of the consumer price indices).",
+      "releases_per_year": 0.2,
+      "cadence_note": "\"Die Konsumerhebung wird alle fünf Jahre durchgeführt\" (conducted every five years) — statistik.at Konsumerhebung page.",
+      "last_updated": null,
+      "url": "https://www.statistik.at/ueber-uns/erhebungen/personen-und-haushaltserhebungen/konsumerhebung",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "at-statistik-austria-mikrozensus-ake",
+      "title": "Mikrozensus-Arbeitskräfteerhebung (AKE) — Austrian Labour Force Survey",
+      "publisher": "Statistik Austria",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "Statistik Austria's Erwerbsstatus page publishes results as \"Arbeitsmarktstatistik – 1. Quartal 2026, Mikrozensus-Arbeitskräfte-Erhebung\" and states the results draw on register data alongside the survey: \"Die Ergebnisse stammen aus der Mikrozensus-Arbeitskräfteerhebung (AKE) (Stichprobenerhebung) sowie der Registerzählung (RZ) und der Abgestimmten Erwerbsstatistik (AEST) (Administrativdatenabgleich).\" NOTE: Austria is one of the countries where the national-accounts<-LFS edge was looked for and NOT found — see _dropped.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; the Erwerbsstatus page lists a separate Arbeitsmarktstatistik publication for each quarter, e.g. \"Arbeitsmarktstatistik – 1. Quartal 2026\".",
+      "last_updated": null,
+      "url": "https://www.statistik.at/statistiken/arbeitsmarkt/erwerbsstatus",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "pt-ine-ipc",
+      "title": "Índice de Preços no Consumidor (IPC) — Consumer Price Index (carries the IHPC/HICP)",
+      "publisher": "Instituto Nacional de Estatística (INE), Portugal",
+      "country": "PT",
+      "jurisdiction_level": "federal",
+      "region": "Portugal",
+      "description": "INE's monthly consumer price release. The January 2024 edition states: \"A estrutura de ponderação do IPC, que tem subjacente o conceito de despesa monetária de consumo final das famílias, tem como principal referência os dados detalhados (finais de 2021 e preliminares de 2022) das Contas Nacionais Portuguesas (SEC 2010),\" and that the same weighting incorporates \"os resultados do Inquérito às Despesas das Famílias (IDEF) realizado em 2015/2016.\" The IPC and IHPC weights are updated together: \"os ponderadores do IPC e IHPC para 2024 foram atualizados com recurso adicional a informação preliminar das Contas Nacionais Trimestrais para 2023.\"",
+      "releases_per_year": 12,
+      "cadence_note": "INFERRED, not quoted: the fetched release does not state 'monthly' in so many words, but individually-dated monthly editions were located (Dec 2016, Dec 2023, Jan 2024, Dec 2024) on the same ine.pt attachment path. Field set rather than omitted because absence means 'one-off instrument' in this schema.",
+      "last_updated": null,
+      "url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=651417467&att_display=n&att_download=y",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "pt-ine-idef",
+      "title": "Inquérito às Despesas das Famílias (IDEF) — Household Budget Survey",
+      "publisher": "Instituto Nacional de Estatística (INE), Portugal",
+      "country": "PT",
+      "jurisdiction_level": "federal",
+      "region": "Portugal",
+      "description": "Portugal's Household Budget Survey, named inside INE's own January 2024 IPC release as a weight source: \"os resultados do Inquérito às Despesas das Famílias (IDEF) realizado em 2015/2016.\" URL CAVEAT: this node's url is that IPC release, not an IDEF page of its own — every ine.pt IDEF page refused to load (ROBOTS_DISALLOWED / robots.txt ConnectTimeout), reproduced independently by the orchestrating session, including a direct fetch of ine.pt/robots.txt itself. The domain root loaded and one deep PDF path loaded, so this reads as an intermittent robots-check fault rather than a real disallow; worth retrying in a later round to give this node its own page.",
+      "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. Editions labelled 2015/2016 and 2022/2023 appeared in unfetched search snippets, suggesting an irregular multi-year wave, but nothing was confirmed from a page that loaded. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=651417467&att_display=n&att_download=y",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "gr-elstat-cpi",
+      "title": "Δείκτης Τιμών Καταναλωτή (ΔΤΚ) — Consumer Price Index, National Index",
+      "publisher": "Hellenic Statistical Authority (ELSTAT)",
+      "country": "GR",
+      "jurisdiction_level": "federal",
+      "region": "Greece",
+      "description": "ELSTAT's national publication page gives the official title \"Consumer Price Index (CPI) - National Index\" and names a \"Methodological Publication of CPI (2009=100.0)\" as its reference methodology document; the current national index is compiled on a 2020=100.0 reference base. Distinct from the harmonised index gr-elstat-hicp, which has its own separately-documented weighting.",
+      "releases_per_year": 12,
+      "cadence_note": "ELSTAT's own CPI publication page (statistics.gr, publication code DKT87) states Release Frequency: Monthly.",
+      "last_updated": null,
+      "url": "https://www.statistics.gr/en/statistics/-/publication/DKT87",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "gr-elstat-hicp",
+      "title": "Εναρμονισμένος Δείκτης Τιμών Καταναλωτή (ΕνΔΤΚ) — Harmonized Index of Consumer Prices",
+      "publisher": "Hellenic Statistical Authority (ELSTAT)",
+      "country": "GR",
+      "jurisdiction_level": "federal",
+      "region": "Greece",
+      "description": "ELSTAT's HICP publication page gives the title \"Harmonized Index of Consumer Prices (HICP)\", produced by the Retail Price Indices Section. Eurostat's Greek national reference metadata sets out the two-tier weighting, re-fetched and confirmed verbatim by the orchestrating session: \"The expenditures are based on National Accounts expenditure data and for and 5-digit COICOP level on HBS expenditure data, both for the year t-2.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, confirmed on ELSTAT's own HICP page (publication code DKT90) and on Eurostat's Greek HICP metadata, which gives dissemination \"between 15 and 18 days after the end of the reference month.\"",
+      "last_updated": null,
+      "url": "https://www.statistics.gr/en/statistics/-/publication/DKT90",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "gr-elstat-hbs",
+      "title": "Έρευνα Οικογενειακών Προϋπολογισμών (ΕΟΠ) — Household Budget Survey",
+      "publisher": "Hellenic Statistical Authority (ELSTAT)",
+      "country": "GR",
+      "jurisdiction_level": "federal",
+      "region": "Greece",
+      "description": "ELSTAT's own Household Budget Survey 2023 report states its purpose directly: \"The main purpose of the HBS is to determine in detail the household expenditure pattern in order to revise the Consumer Price Index conducted by ELSTAT.\" The 2023 round sampled 5,832 private households nationwide.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual and continuous: \"From 2008 onwards, it was decided...that the survey should be annual and continuous\" (ELSTAT HBS 2023); ELSTAT publishes a report per survey year (2017–2024 editions found).",
+      "last_updated": null,
+      "url": "https://www.statistics.gr/documents/20181/e2adf8c8-c37e-dfe8-86ca-3e103391d408",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "gr-elstat-lfs",
+      "title": "Έρευνα Εργατικού Δυναμικού (ΕΕΔ) — Labour Force Survey",
+      "publisher": "Hellenic Statistical Authority (ELSTAT)",
+      "country": "GR",
+      "jurisdiction_level": "federal",
+      "region": "Greece",
+      "description": "ELSTAT's Labour Force Survey release states: \"From 1998 onwards it is a continuous quarterly survey,\" with monthly employment/unemployment estimates produced from a sub-sample and subsequently benchmarked so that \"monthly averages\" align with the finalized quarterly estimates. NOTE: Greece is one of the countries where the national-accounts<-LFS edge was looked for and not evidenced — see _dropped.",
+      "releases_per_year": 12,
+      "cadence_note": "ELSTAT publishes a named monthly release (\"LABOUR FORCE SURVEY: March 2026\", and Jan/Feb/Apr 2026 editions found) alongside a quarterly summary; the underlying design is \"a continuous quarterly survey\".",
+      "last_updated": null,
+      "url": "https://www.statistics.gr/documents/20181/1d5cb092-ef4e-0ae2-847b-287e4be60c45",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "ie-cso-cpi",
+      "title": "Consumer Price Index (carries Ireland's HICP)",
+      "publisher": "Central Statistics Office (CSO)",
+      "country": "IE",
+      "jurisdiction_level": "federal",
+      "region": "Ireland",
+      "description": "Ireland's monthly Consumer Price Index release, which also carries the Harmonised Index of Consumer Prices. The CSO's background notes state \"Approximately 50,000 prices are collected...during the week containing the second Tuesday of each month up to and including the third Tuesday of each month.\" On weighting, the CSO's CPI methodology page states — re-fetched and confirmed verbatim by the orchestrating session — \"Since 2012 the weights of the items in the basket have been updated annually at CPI COICOP class (4-digit) level using information on consumer expenditure from National Accounts Household Final Monetary Consumption Expenditure (HFMCE),\" and \"Additionally at the 2016 rebase, a more granular level update of the weights (5-digit) was possible using information from the latest Household Budget Survey (HBS) which was carried out between February 2015 and February 2016.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; CSO CPI July 2026 background notes describe the monthly price-collection week.",
+      "last_updated": null,
+      "url": "https://www.cso.ie/en/releasesandpublications/ep/p-cpi/consumerpriceindexjuly2026/backgroundnotes/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ie-cso-hbs",
+      "title": "Household Budget Survey",
+      "publisher": "Central Statistics Office (CSO)",
+      "country": "IE",
+      "jurisdiction_level": "federal",
+      "region": "Ireland",
+      "description": "The CSO's technical note states the \"Household Budget Survey (HBS) which is held every 5 years to fulfil a National requirement to update the weighting basis of the Consumer Price Index (CPI)\", and the 2022-2023 edition's background notes state its \"primary purpose... is to ensure that the Consumer Price Index (CPI), the official measure of inflation, continues to be based on up-to-date and accurate household expenditure.\"",
+      "releases_per_year": 0.2,
+      "cadence_note": "Every five years, per the CSO technical note (cso.ie/en/methods/tn/householdbudgetsurvey/): \"held every 5 years\".",
+      "last_updated": null,
+      "url": "https://www.cso.ie/en/releasesandpublications/ep/p-hbs/householdbudgetsurvey2022-2023/backgroundnotes",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "ie-cso-lfs",
+      "title": "Labour Force Survey (LFS)",
+      "publisher": "Central Statistics Office (CSO)",
+      "country": "IE",
+      "jurisdiction_level": "federal",
+      "region": "Ireland",
+      "description": "Ireland's quarterly household survey of labour market activity, successor to the QNHS. The CSO's \"About the Labour Force Survey\" page states it \"is designed to produce quarterly labour force estimates\" and that \"Each quarter the LFS will produce data on\" the key labour market indicators.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly, per the CSO methodology page: \"It is designed to produce quarterly labour force estimates.\"",
+      "last_updated": null,
+      "url": "https://www.cso.ie/en/statistics/labourmarket/labourforcesurveylfs/",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "es-ine-ipc",
+      "title": "Índice de Precios de Consumo (IPC) / Índice de Precios de Consumo Armonizado (IPCA) — Consumer Price Index / Harmonised Index of Consumer Prices",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "ES",
+      "jurisdiction_level": "federal",
+      "region": "Spain",
+      "description": "INE issues the national IPC and the harmonised IPCA in the same monthly release. INE's standardised methodological report states the index aims to \"medir la evolución de los precios de los bienes y servicios de consumo adquiridos por los hogares residentes en España.\" Eurostat's Spain national reference metadata gives the weighting chain: \"the main data source for the compilation of the HICP weights are the HFMCE data (in line with the domestic concept) from Spanish National Accounts (obtained from year t-2) further complemented with data from the Household Budget Survey and other sources.\"",
+      "releases_per_year": 12,
+      "cadence_note": "INE's methodological report states \"El IPC se difunde mensualmente\"; results appear around the 13th of the month following the reference month.",
+      "last_updated": null,
+      "url": "https://www.ine.es/dynt3/metadatos/es/RespuestaDatos.htm?oe=30138",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "es-ine-epf",
+      "title": "Encuesta de Presupuestos Familiares (EPF) — Household Budget Survey",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "ES",
+      "jurisdiction_level": "federal",
+      "region": "Spain",
+      "description": "INE's operation page describes the EPF as an operation that \"suministra información anual sobre la naturaleza y destino de los gastos de consumo, así como sobre diversas características relativas a las condiciones de vida de los hogares,\" on a sample of roughly 24,000 households per year.",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, per INE's own operation page (INEbase cid=1254736176806): \"suministra información anual...\".",
+      "last_updated": null,
+      "url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176806&menu=ultiDatos&idp=1254735976608",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "es-ine-epa",
+      "title": "Encuesta de Población Activa (EPA) — Labour Force Survey",
+      "publisher": "Instituto Nacional de Estadística (INE)",
+      "country": "ES",
+      "jurisdiction_level": "federal",
+      "region": "Spain",
+      "description": "INE's operation page describes the EPA as \"a continuous investigation directed at family households\" aimed at obtaining \"data of the labor force and its various categories (employed, unemployed), as well as the population outside the labor market (inactive)\", sampling roughly 47,500 households per quarter. CAVEAT recorded at mint time: these two quoted fragments came back from the fetch tool already in English despite the Spanish-locale source URL, so they may be an INE-provided English gloss rather than page-verbatim Spanish; the cadence and the edge evidence do not rest on them.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly, per INE's operation page (INEbase cid=1254736176918), which lists the EPA's periodicity as trimestral.",
+      "last_updated": null,
+      "url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918&menu=ultiDatos&idp=1254735976595",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "fi-statfin-cpi",
+      "title": "Kuluttajahintaindeksi / Yhdenmukaistettu kuluttajahintaindeksi — Consumer Price Index / Harmonised Index of Consumer Prices",
+      "publisher": "Tilastokeskus / Statistics Finland",
+      "country": "FI",
+      "jurisdiction_level": "federal",
+      "region": "Finland",
+      "description": "Finland's CPI and HICP are one statistical process: the standalone HICP release ('ykhi') was discontinued 31/12/2007 and the harmonised figures are now produced inside the CPI release. Statistics Finland's CPI documentation states \"the Consumer Price Index utilizes the consumption expenditures which are produced by the National Account,\" and the 2025 weight-structure release states \"The weight structure of the Consumer Price Index 2025 is based on national accounts calculations on private consumption expenditure according to EU guidelines.\"",
+      "releases_per_year": 12,
+      "cadence_note": "\"Consumer Price Index is published monthly. Harmonised Index of Consumer Prices is published two times a month: flash estimate and final\" (stat.fi documentation of statistics, khi).",
+      "last_updated": null,
+      "url": "https://stat.fi/en/statistics/documentation/khi",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "fi-statfin-hbs",
+      "title": "Kotitalouksien kulutus / kulutustutkimus — Households' Consumption / Household Budget Survey",
+      "publisher": "Tilastokeskus / Statistics Finland",
+      "country": "FI",
+      "jurisdiction_level": "federal",
+      "region": "Finland",
+      "description": "Statistics Finland states that \"The statistics on households' consumption, or the Household Budget Survey\" are produced at long intervals, and — unusually explicit for this class of source — names both of its downstream consumers: \"The data of the statistics on households' consumption are submitted to the Consumer Price Index, the international price comparison and national accounts,\" and \"In national accounts, the Household Budget Survey is used for level revision of private consumption expenditure.\"",
+      "releases_per_year": 0.2,
+      "cadence_note": "\"The statistics on households' consumption are produced at intervals of five years, on average\" (stat.fi documentation of statistics, ktutk).",
+      "last_updated": null,
+      "url": "https://stat.fi/en/documentation/documentation-of-statistics/ktutk",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "fi-statfin-lfs",
+      "title": "Työvoimatutkimus — Labour Force Survey",
+      "publisher": "Tilastokeskus / Statistics Finland",
+      "country": "FI",
+      "jurisdiction_level": "federal",
+      "region": "Finland",
+      "description": "Statistics Finland states \"Monthly data are released approximately three weeks from the end of the survey month. Quarterly data are released simultaneously with the last monthly data of each quarter,\" and, directly, \"Statistics Finland uses the quarterly Labour Force Survey data in the compiling of national accounts.\"",
+      "releases_per_year": 12,
+      "cadence_note": "\"Monthly data are released approximately three weeks from the end of the survey month\" (stat.fi documentation of statistics, tyti); quarterly and annual releases come from the same survey.",
+      "last_updated": null,
+      "url": "https://stat.fi/en/statistics/documentation/tyti",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "hu-ksh-cpi",
+      "title": "Fogyasztóiár-index és harmonizált fogyasztóiár-index — Consumer Price Index and Harmonised Index of Consumer Prices",
+      "publisher": "Központi Statisztikai Hivatal (KSH) / Hungarian Central Statistical Office",
+      "country": "HU",
+      "jurisdiction_level": "federal",
+      "region": "Hungary",
+      "description": "KSH's own CPI methodology page states the weight system is built on national accounts data: \"a fogyasztóiár-index súlyrendszere csoportszinten – a nemzetközi előírásoknak megfelelően – a tárgyévet két évvel megelőző év nemzeti számlájának a lakosság vásárolt fogyasztásra vonatkozó előzetes adataira épül\" (the CPI weight system is based, at group level, on preliminary national-accounts data on households' purchased consumption from two years before the reference year), and that price collection is monthly (\"A reprezentánsok árainak gyűjtése havonta történik\"). Eurostat's Hungary metadata adds the sub-4-digit layer: \"Household Budget and Living Conditions Survey (HBLS), Tourism statistics and Car Registry data are also used.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; Eurostat's Hungary HICP metadata states the index is \"published each month according to a pre-announced schedule, usually between 15 and 18 days after the end of the reference month,\" and KSH confirms monthly price collection.",
+      "last_updated": null,
+      "url": "https://www.ksh.hu/docs/hun/modsz/ara_modsz.html",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "hu-ksh-hbs",
+      "title": "Háztartási költségvetési és életkörülmény adatfelvétel (HKÉF) — Household Budget and Living Conditions Survey",
+      "publisher": "Központi Statisztikai Hivatal (KSH) / Hungarian Central Statistical Office",
+      "country": "HU",
+      "jurisdiction_level": "federal",
+      "region": "Hungary",
+      "description": "Eurostat's Hungary HICP national reference metadata names this survey as an input to the detailed weighting, below the 4-digit ECOICOP level supplied by the national accounts: \"Household Budget and Living Conditions Survey (HBLS), Tourism statistics and Car Registry data are also used.\"",
+      "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. No KSH or Eurostat page found this round states an explicit publication frequency for the HKÉF; the KSH methodology page located for household income/consumption did not carry it. releases_per_year omitted rather than guessed. This node's evidence is Eurostat metadata rather than a first-party KSH page — worth upgrading in a later round.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hu.htm",
+      "domains": [
+        "living-standards",
+        "poverty"
+      ]
+    },
+    {
+      "id": "hu-ksh-lfs",
+      "title": "Munkaerő-felmérés — Labour Force Survey",
+      "publisher": "Központi Statisztikai Hivatal (KSH) / Hungarian Central Statistical Office",
+      "country": "HU",
+      "jurisdiction_level": "federal",
+      "region": "Hungary",
+      "description": "KSH's own survey page describes the quarterly household sample: \"Negyedévente körülbelül 36 ezer háztartást kérünk fel\" (approximately 36,000 households are surveyed each quarter), producing internationally comparable employment and unemployment data.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly is the designated first release: Eurostat's Hungary LFS metadata gives \"First release, quarterly (4x), yearly (1x), ad hoc module results (1x)\". Monthly figures also exist (\"Monthly results of the Hungarian LFS are published 3-4 weeks after the end of the reference month\") but 4 was used rather than guessing which counts as the release.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_hu.htm",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "sk-susr-cpi",
+      "title": "Index spotrebiteľských cien — Consumer Price Index and Harmonised Index of Consumer Prices",
+      "publisher": "Štatistický úrad Slovenskej republiky (ŠÚ SR) / Statistical Office of the Slovak Republic",
+      "country": "SK",
+      "jurisdiction_level": "federal",
+      "region": "Slovakia",
+      "description": "ŠÚ SR's national price metadata page gives the official title \"Index spotrebiteľských cien\" and notes the CPI and HICP baskets \"differ partially\" (imputed rent and similar). Eurostat's Slovak national reference metadata sets out the two-tier weighting: \"The weights at the 4-digit COICOP level are based on annual National Accounts (NA) data Household final consumption aggregates for the year t-2 (2023),\" while below that \"The various sources are used for different product groups at the level of the ECOICOP 5-digit level or below - e.g., NA, Household budget survey 2021, scanner data for Food and non-alcoholic beverages, Alcoholic beverages and tobacco, information from suppliers...\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; ŠÚ SR's metadata page (id=5068) states monthly publication and Eurostat's Slovak HICP metadata states \"HICP is a monthly statistics\".",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esmshi3_sk.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "sk-susr-hbs",
+      "title": "Zisťovanie rodinných účtov — Household Budget Survey",
+      "publisher": "Štatistický úrad Slovenskej republiky (ŠÚ SR) / Statistical Office of the Slovak Republic",
+      "country": "SK",
+      "jurisdiction_level": "federal",
+      "region": "Slovakia",
+      "description": "The ŠÚ SR survey page states the survey obtains information on \"the amount, structure and development of monetary expenditures and income\" of households, is \"carried out regularly on a monthly basis,\" with results \"processed and published annually.\"",
+      "releases_per_year": 1,
+      "cadence_note": "Collection monthly, publication annual: \"Results are then processed and published annually\" (zber.statistics.sk).",
+      "last_updated": null,
+      "url": "https://zber.statistics.sk/en/zis%C5%A5ovanie-rodinn%C3%BDch-%C3%BA%C4%8Dtov",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "sk-susr-lfs",
+      "title": "Výberové zisťovanie pracovných síl (VZPS) — Labour Force Survey",
+      "publisher": "Štatistický úrad Slovenskej republiky (ŠÚ SR) / Statistical Office of the Slovak Republic",
+      "country": "SK",
+      "jurisdiction_level": "federal",
+      "region": "Slovakia",
+      "description": "The ŠÚ SR survey page states the LFS aims to \"provide regular detailed information on the situation, structure and development on the labour market in the SR\"; Eurostat's Slovak LFS metadata describes it as designed \"to produce quarterly labour force estimates\" by the \"Statistical Office of the SR (SOSR).\"",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly: Eurostat's Slovak LFS metadata gives \"First release, quarterly (4x), yearly (1x), ad hoc module results (1x)\"; ŠÚ SR states the survey \"is conducted continuously throughout the year\" with \"processing and publication ... carried out quarterly.\"",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_sk.htm",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "si-surs-cpi",
+      "title": "Indeksi cen življenjskih potrebščin (ICŽP / HICŽP) — Consumer Price Indices, national CPI and HICP",
+      "publisher": "Statistični urad Republike Slovenije (SURS) / Statistical Office of the Republic of Slovenia",
+      "country": "SI",
+      "jurisdiction_level": "federal",
+      "region": "Slovenia",
+      "description": "SURS's methodological note is unusually clean about the split: \"Za pripravo uteži za izračun HICŽP uporabljamo kot glavni vir podatke o izdatkih gospodinjstev za končno potrošnjo iz nacionalnih računov\" (for HICP weights, national accounts household final consumption expenditure is the main source), while \"Za pripravo uteži za izračun ICŽP uporabljamo kot glavni vir podatke iz ankete o potrošnji sredstev gospodinjstev (APG)\" (for the national CPI, the Household Budget Survey is the main source). Eurostat's Slovenia metadata corroborates: \"for lower levels mostly data from the household budget surveys (HBS) are used (HBS data relating to 2022 are used for 2025 weights).\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly: SURS's methodological explanation states 'mesečno'; Eurostat's Slovenia metadata gives \"HICP is a monthly statistic\" published \"usually between 15 and 18 days after the end of the reference month.\"",
+      "last_updated": null,
+      "url": "https://www.stat.si/statweb/File/DocSysFile/7800",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "si-surs-hbs",
+      "title": "Anketa o potrošnji sredstev gospodinjstev (APG) — Household Budget Survey",
+      "publisher": "Statistični urad Republike Slovenije (SURS) / Statistical Office of the Republic of Slovenia",
+      "country": "SI",
+      "jurisdiction_level": "federal",
+      "region": "Slovenia",
+      "description": "Named in SURS's own CPI methodological note as the primary source of national CPI weights: \"Za pripravo uteži za izračun ICŽP uporabljamo kot glavni vir podatke iz ankete o potrošnji sredstev gospodinjstev (APG).\"",
+      "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. Two SURS pages for the survey itself (DocSysFile 9768 and 4102) were robots.txt-blocked, so no first-party statement of its own release cadence was read; the evidence here is its named role inside the CPI methodology note. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://www.stat.si/statweb/File/DocSysFile/7800",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "si-surs-lfs",
+      "title": "Aktivno in neaktivno prebivalstvo (ANP) — Labour Force Survey, Active and Inactive Population",
+      "publisher": "Statistični urad Republike Slovenije (SURS) / Statistical Office of the Republic of Slovenia",
+      "country": "SI",
+      "jurisdiction_level": "federal",
+      "region": "Slovenia",
+      "description": "SURS's methodological explanation identifies this as the survey run under the EU labour-force-survey regulation, \"Uredba Sveta (ES) št. 577/98 z dne 9. marca 1998 o organizaciji vzorčne raziskave delovne sile v Skupnosti,\" and states \"Podatki so mednarodno primerljivi in prispevajo k evropski statistiki.\" NOTE: Slovenia is one of the two countries in this round documented as NOT using the LFS for national accounts — see _dropped.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly on the SI-STAT portal: \"Četrtletno: - Podatkovni portal SI-STAT... Objavljajo se absolutni podatki in deleži\"; each household is surveyed for three consecutive quarters.",
+      "last_updated": null,
+      "url": "https://www.stat.si/statweb/File/DocSysFile/7788",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "hr-dzs-cpi",
+      "title": "Indeksi potrošačkih cijena — Consumer Price Index",
+      "publisher": "Državni zavod za statistiku (DZS) / Croatian Bureau of Statistics",
+      "country": "HR",
+      "jurisdiction_level": "federal",
+      "region": "Croatia",
+      "description": "Croatia's national CPI. DZS's own methodology page states the primary weight source: \"Osnovni izvor podataka za izradu pondera... jest Anketa o potrošnji kućanstava (APK)\" (the primary data source for weight construction is the Household Budget Survey), and that most prices are collected monthly: \"Većina cijena koje se prikupljaju na tradicionalan način snima se jedanput na mjesec.\" TRANSCRIPTION NOTE: the fetch of this page returned mojibake for Croatian diacritics; the quotes are reproduced with standard diacritics restored from unambiguous context, with no change of wording.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly first release; DZS's methodology page states most prices are collected \"jedanput na mjesec\".",
+      "last_updated": null,
+      "url": "https://web.dzs.hr/Hrv/DBHomepages/Cijene/metodologija.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "hr-dzs-hicp",
+      "title": "Harmonizirani indeks potrošačkih cijena — Harmonised Index of Consumer Prices",
+      "publisher": "Državni zavod za statistiku (DZS) / Croatian Bureau of Statistics",
+      "country": "HR",
+      "jurisdiction_level": "federal",
+      "region": "Croatia",
+      "description": "Croatia is a clean example of the two indices drawing on different sources, stated on one page. Eurostat's Croatia national reference metadata: \"The main data source for the HICP weights is the National Accounts data, while the main data source for the CPI weights is the Household Budget Survey.\" DZS's own methodology page says the same in Croatian: \"Osnovni izvor podataka za izradu pondera... jesu podaci nacionalnih računa.\" The same Eurostat page notes \"The HICP is published together with the CPI in the form of the first release, which is available on the CBS website.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, published jointly with the national CPI first release; \"Data are transmitted to Eurostat according to the Eurostat transmission timetable.\"",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hr.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "hr-dzs-hbs",
+      "title": "Anketa o potrošnji kućanstava (APK) — Household Budget Survey",
+      "publisher": "Državni zavod za statistiku (DZS) / Croatian Bureau of Statistics",
+      "country": "HR",
+      "jurisdiction_level": "federal",
+      "region": "Croatia",
+      "description": "DZS's survey page states \"Podaci se primjenjuju za praćenje mjera vezanih za gospodarsku i socijalnu politiku\" (data are applied to monitor economic and social policy measures); the 2026 round \"provodi se tijekom cijele 2026.\" (is conducted throughout 2026) on a sample of 12,792 randomly selected households.",
+      "cadence_note": "RECURRING, publication cadence unconfirmed — not a one-off instrument. The fetched page confirms the survey runs continuously through the year but no page confirming the cadence of its results report was fetched (an apparently-annual title, \"Osnovne karakteristike potrošnje kućanstava\", appeared only in unfetched search snippets). releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://dzs.gov.hr/u-fokusu/anketna-istrazivanja-1771/anketa-o-potrosnji-kucanstava-apk/1773",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "hr-dzs-lfs",
+      "title": "Anketa o radnoj snazi (ARS) — Labour Force Survey",
+      "publisher": "Državni zavod za statistiku (DZS) / Croatian Bureau of Statistics",
+      "country": "HR",
+      "jurisdiction_level": "federal",
+      "region": "Croatia",
+      "description": "DZS's survey page states \"podaci se prikupljaju svakog tjedna, a objavljuju svaka tri mjeseca\" (data are collected weekly and published every three months), and \"Rezultati ovog istraživanja vrlo su važni za potrebe odlučivanja o gospodarskim i socijalnim pitanjima.\"",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; DZS states data are collected weekly and published every three months (\"objavljuju svaka tri mjeseca\").",
+      "last_updated": null,
+      "url": "https://dzs.gov.hr/u-fokusu/anketna-istrazivanja-1771/anketa-o-radnoj-snazi-ars/1775",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "bg-nsi-cpi",
+      "title": "Инфлация и индекси на потребителските цени — Inflation and Consumer Price Indices (national CPI, HICP and Small Basket Index)",
+      "publisher": "National Statistical Institute of Bulgaria (NSI)",
+      "country": "BG",
+      "jurisdiction_level": "federal",
+      "region": "Bulgaria",
+      "description": "NSI bundles the national CPI, the HICP and the Small Basket Index into one monthly release. Of the national CPI's weights it states \"Основен източник на информацията за разходите е изследването на бюджетите на домакинствата в страната\" (the main source of information on expenditure is the household budget survey conducted in the country), and of the Small Basket Index \"Източник на информацията за теглата е изследването на бюджетите на домакинствата.\" Eurostat's Bulgaria metadata gives the HICP side: \"weights used in the current year t are based on national accounts data referring to t-2, estimated in line with the domestic concept, that are further adjusted using additional sources in order to make them representative for t-1.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; Eurostat's Bulgaria HICP metadata states \"HICP is a monthly statistics\" and NSI publishes a dated monthly press release.",
+      "last_updated": null,
+      "url": "https://www.nsi.bg/press-release/inflaciya-i-indeksi-na-potrebitelskite-ceni-dekemvri-2025-godina-8919",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "bg-nsi-hbs",
+      "title": "Наблюдение на домакинските бюджети — Household Budget Survey",
+      "publisher": "National Statistical Institute of Bulgaria (NSI)",
+      "country": "BG",
+      "jurisdiction_level": "federal",
+      "region": "Bulgaria",
+      "description": "NSI describes the survey as a \"регулярно извадково статистическо изследване, провеждано от Националния статистически институт\" (a regular sample statistical survey conducted by the National Statistical Institute), collecting household expenditure and living-standards data; for 2026 \"извадката включва 5 580 домакинства\", divided into sub-samples each observed one month per quarter.",
+      "cadence_note": "RECURRING, publication cadence unconfirmed — not a one-off instrument. NSI's page describes a continuous rotating sample but states no publication frequency for results. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://www.nsi.bg/bg/content/21674/basic-page/%D0%BD%D0%B0%D0%B1%D0%BB%D1%8E%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B0%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D1%82%D0%B5-%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%B8",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "bg-nsi-lfs",
+      "title": "Наблюдение на работната сила — Labour Force Survey",
+      "publisher": "National Statistical Institute of Bulgaria (NSI)",
+      "country": "BG",
+      "jurisdiction_level": "federal",
+      "region": "Bulgaria",
+      "description": "NSI states \"Наблюдението на работната сила е регулярно извадково статистическо изследване\" whose \"Основната цел на наблюдението е да се получи актуална информация за икономическата активност на населението\", with \"Всяко тримесечие в изследването участват около 19.6 хил. домакинства\".",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; NSI states roughly 19,600 households participate each quarter and Eurostat's Bulgaria LFS metadata lists frequency as \"Quarterly (4x), yearly (1x), ad hoc module results (1x)\".",
+      "last_updated": null,
+      "url": "https://www.nsi.bg/bg/content/16635/basic-page/%D0%BD%D0%B0%D0%B1%D0%BB%D1%8E%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BD%D0%B0%D1%82%D0%B0-%D1%81%D0%B8%D0%BB%D0%B0",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "ee-stat-hicp",
+      "title": "Tarbijahinnaindeks / harmoneeritud tarbijahinnaindeks — Consumer Price Index / Harmonised Index of Consumer Prices",
+      "publisher": "Statistikaamet / Statistics Estonia",
+      "country": "EE",
+      "jurisdiction_level": "federal",
+      "region": "Estonia",
+      "description": "Estonia's national and harmonised consumer price indices share a weight basis and are modelled here as one node. Eurostat's Estonia national reference metadata identifies the release as \"IA023: HARMONIZED INDEX OF CONSUMER PRICES, 2005 = 100 (MONTHS)\" and states its weights are \"derived mainly from the National Accounts and Household Budget Survey data\".",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; Eurostat's Estonia HICP metadata (prc_hicp_esmshi3_ee) gives the IA023 series' dissemination frequency as \"Monthly\".",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ee.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "ee-stat-hbs",
+      "title": "Leibkonna eelarve uuring — Household Budget Survey",
+      "publisher": "Statistikaamet / Statistics Estonia",
+      "country": "EE",
+      "jurisdiction_level": "federal",
+      "region": "Estonia",
+      "description": "Statistics Estonia's own Household Budget Survey page names three downstream uses at once: \"The data are also used in the calculation of the consumer price index, the GDP and the subsistence minimum.\"",
+      "releases_per_year": 0.2,
+      "cadence_note": "\"The Household Budget Survey has been carried out in the years 1996–2007, 2010–2012, 2015–2016 and 2019–2020. From 2026 onwards, the survey will be conducted every five years\" (stat.ee/en/household-budget-survey). A separate stat.ee metadata page (40203) said 'every three years'; the more specific and more recent statement was used.",
+      "last_updated": null,
+      "url": "https://stat.ee/en/household-budget-survey",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "ee-stat-lfs",
+      "title": "Tööjõu-uuring — Estonian Labour Force Survey",
+      "publisher": "Statistikaamet / Statistics Estonia",
+      "country": "EE",
+      "jurisdiction_level": "federal",
+      "region": "Estonia",
+      "description": "Statistics Estonia states \"Since 2000, data are collected throughout the year and results are presented on a quarterly and annual basis.\" Estonia is the strongest case in this round for the national-accounts dependency: Eurostat's Estonia LFS metadata states flatly \"Country uses LFS as the only source for employment in national accounts.\"",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; Eurostat's Estonia LFS metadata gives \"First release, quarterly (4x), yearly (1x), ad hoc module results (1x)\" and Statistics Estonia confirms results are \"presented on a quarterly and annual basis.\"",
+      "last_updated": null,
+      "url": "https://stat.ee/en/labour-force-survey",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "lt-vda-cpi",
+      "title": "Vartotojų kainų indeksas (VKI) — Consumer Price Index",
+      "publisher": "Valstybės duomenų agentūra / State Data Agency (formerly Statistics Lithuania)",
+      "country": "LT",
+      "jurisdiction_level": "federal",
+      "region": "Lithuania",
+      "description": "Lithuania's national CPI. The State Data Agency's prices page states it \"calculates and publishes the consumer price index monthly\" and that, for the 986-item statistical basket, \"household budget survey data on monetary consumption expenditures serves as the primary information source for weight preparation.\" Split from the harmonised index here because the documented weight sources differ.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; osp.stat.gov.lt/kainos states the State Data Agency \"calculates and publishes the consumer price index monthly\".",
+      "last_updated": null,
+      "url": "https://osp.stat.gov.lt/kainos",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "lt-vda-hicp",
+      "title": "Suderintas vartotojų kainų indeksas (SVKI) — Harmonised Index of Consumer Prices",
+      "publisher": "Valstybės duomenų agentūra / State Data Agency (Eurostat metadata credits Statistics Lithuania, SL)",
+      "country": "LT",
+      "jurisdiction_level": "federal",
+      "region": "Lithuania",
+      "description": "Eurostat's Lithuania national reference metadata states \"HICP is a monthly statistics,\" that \"SL is the only institution in the country engaged in the production of the HICP,\" and that \"At ECOICOP ver.2 5-digit level, weights used in the current year are based on annual HFMCE data of the previous year, estimated in line with the domestic concept\" — i.e. the harmonised index is weighted from national-accounts household final monetary consumption expenditure, where the national VKI is weighted from the household budget survey.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, per Eurostat's Lithuania HICP metadata: \"HICP is a monthly statistics.\"",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lt.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "lt-vda-hbs",
+      "title": "Namų ūkių biudžetų tyrimas — Household Budget Survey",
+      "publisher": "Valstybės duomenų agentūra / State Data Agency",
+      "country": "LT",
+      "jurisdiction_level": "federal",
+      "region": "Lithuania",
+      "description": "Named on the State Data Agency's income, consumption and living-conditions page as the \"Namų ūkių biudžetų tyrimas\", governed by the methodology document \"Namų ūkių biudžetų statistinio tyrimo metodika\" (2025, Nr. DĮ-278), and administered by the Valstybės duomenų agentūra. Its role as the primary weight source for the national VKI is documented on the agency's prices page.",
+      "cadence_note": "RECURRING, publication cadence unconfirmed — not a one-off instrument. No fetched page carried an explicit release-frequency statement; an infographic page for the survey loaded but returned only a title with no body text (JS-rendered). releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://osp.stat.gov.lt/pajamos-vartojimo-islaidos-gyvenimo-salygos",
+      "domains": [
+        "living-standards",
+        "poverty"
+      ]
+    },
+    {
+      "id": "lt-vda-lfs",
+      "title": "Gyventojų užimtumo tyrimas — Labour Force Survey",
+      "publisher": "Valstybės duomenų agentūra / State Data Agency",
+      "country": "LT",
+      "jurisdiction_level": "federal",
+      "region": "Lithuania",
+      "description": "The State Data Agency's Labour Force Survey data page publishes results on several schedules, including \"Quarterly: Labour force, employment, and unemployment indicators broken down by age groups and gender.\"",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly is the core cadence per osp.stat.gov.lt/gyventoju-uzimtumo-tyrimo-duomenys; Eurostat's Lithuania LFS metadata corroborates with \"First release, quarterly (4x), yearly (1x), ad hoc module results (1x).\"",
+      "last_updated": null,
+      "url": "https://osp.stat.gov.lt/gyventoju-uzimtumo-tyrimo-duomenys",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "lv-csp-cpi",
+      "title": "Patēriņa cenu indekss (PCI) un saskaņotais patēriņa cenu indekss (SPCI) — Consumer Price Index and Harmonised Index of Consumer Prices",
+      "publisher": "Centrālā statistikas pārvalde (CSP) / Central Statistical Bureau of Latvia",
+      "country": "LV",
+      "jurisdiction_level": "federal",
+      "region": "Latvia",
+      "description": "Latvia's national and harmonised indices, modelled as one node because no fetched page distinguished separate release schedules for them. Eurostat's Latvia national reference metadata gives the weighting: \"At ECOICOP 5-digit level, weights used in the current year are based on annual HFMCE data of the previous year, estimated in line with the domestic concept,\" that \"HFMCE is obtained from provisional NA data for the first three quarters of the previous year,\" and that \"For elementary product groups the HBS data and additional sources are used.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly; Eurostat's Latvia HICP metadata states \"HICP is a monthly statistics\" released 15-18 days after the reference month. CSP's own Latvian topic page lists periodicity more loosely as \"Periodiskums: Ceturkšņu/mēnešu dati\" (quarterly/monthly data).",
+      "last_updated": null,
+      "url": "https://stat.gov.lv/lv/statistikas-temas/valsts-ekonomika/paterina-cenas/2296-paterina-cenu-indekss",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "lv-csp-hbs",
+      "title": "Mājsaimniecību budžeta pētījums — Household Budget Survey",
+      "publisher": "Centrālā statistikas pārvalde (CSP) / Central Statistical Bureau of Latvia",
+      "country": "LV",
+      "jurisdiction_level": "federal",
+      "region": "Latvia",
+      "description": "CSP's official statistics portal states: \"Dati par mājsaimniecību patēriņa izdevumiem tiek iegūti Mājsaimniecību budžetu apsekojumā\" (data on household consumption expenditure are obtained from the Household Budget Survey).",
+      "releases_per_year": 1,
+      "cadence_note": "Annual, per CSP's page: \"Periodiskums: Gada dati\" (Frequency: Annual data).",
+      "last_updated": null,
+      "url": "https://stat.gov.lv/lv/statistikas-temas/iedzivotaji/majsaimniecibu-izdevumi/5193-majsaimniecibu-paterina-izdevumi",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "lv-csp-lfs",
+      "title": "Darbaspēka apsekojums — Labour Force Survey",
+      "publisher": "Centrālā statistikas pārvalde (CSP) / Central Statistical Bureau of Latvia",
+      "country": "LV",
+      "jurisdiction_level": "federal",
+      "region": "Latvia",
+      "description": "CSP's publication overview states \"Informatīvajā apskatā apkopota informācija par Latvijas nepārtrauktā darbaspēka izlases apsekojuma rezultātiem 2024. gadā\" (this overview compiles information from the results of Latvia's continuous labour force sample survey for 2024), published by the Centrālā statistikas pārvalde.",
+      "cadence_note": "RECURRING, cadence disputed between two documented sources — not a one-off instrument. CSP's annual 'galvenie rādītāji' overview publication states 'Reizi gadā' (once a year), while Eurostat's Latvia LFS metadata states \"First release, quarterly (4x), yearly (1x), ad hoc module results (1x)\". The two disagree on what counts as 'the' release, so releases_per_year was omitted rather than picked.",
+      "last_updated": null,
+      "url": "https://stat.gov.lv/lv/statistikas-temas/darbs/nodarbinatiba/publikacijas-un-infografikas/24793-darbaspeka-apsekojuma",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "mt-nso-cpi",
+      "title": "Retail Price Index (RPI) and Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "National Statistics Office (NSO) Malta",
+      "country": "MT",
+      "jurisdiction_level": "federal",
+      "region": "Malta",
+      "description": "NSO Malta states: \"The basket of consumption items considered for the RPI is reviewed periodically, in line with the Household Budgetary Survey (HBS), during which information of household consumption is collected over a 12-month period in order to obtain an estimate of the average household expenditure.\" Eurostat's Malta national reference metadata gives the harmonised side: \"HFMCE values to derive weights up to the ECOICOP 4-digit level are obtained from quarterly National Accounts (NA) for the first three quarters of year t-1.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, each month's data published the following month (NSO Malta RPI page); Eurostat's Malta metadata states flash HICP estimates are transmitted \"at end of reference month\" with full data \"between 15 and 18 days after the end of the reference month.\"",
+      "last_updated": null,
+      "url": "https://nso.gov.mt/themes_sources___met/retail-price-index/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "mt-nso-hbs",
+      "title": "Household Budgetary Survey",
+      "publisher": "National Statistics Office (NSO) Malta",
+      "country": "MT",
+      "jurisdiction_level": "federal",
+      "region": "Malta",
+      "description": "NSO Malta describes the survey as illustrating \"patterns in household expenditure and how these are distributed among different goods and services.\"",
+      "releases_per_year": 0.2,
+      "cadence_note": "Approximately every five years, per NSO Malta's HBS page; the round used for current weights was 2015/16 per Eurostat's Malta HICP metadata.",
+      "last_updated": null,
+      "url": "https://nso.gov.mt/themes_sources___met/household-budgetary-survey/",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "mt-nso-lfs",
+      "title": "Labour Force Survey (LFS)",
+      "publisher": "National Statistics Office (NSO) Malta",
+      "country": "MT",
+      "jurisdiction_level": "federal",
+      "region": "Malta",
+      "description": "Eurostat's Malta LFS national reference metadata is unusually specific about the division of labour with administrative data: \"Total employment in persons is based on administrative sources in case of full-time employment and on LFS in case of part-time employment\" and \"LFS is the only source used by National Accounts when compiling hours worked. Data on hours worked have been used since 2002.\"",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; Eurostat's Malta LFS metadata gives \"First release, quarterly (4x), yearly (1x), ad hoc module results (1x).\"",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_mt.htm",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "cy-cystat-cpi",
+      "title": "Consumer Price Index (CPI) and Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Statistical Service of Cyprus (CyStat)",
+      "country": "CY",
+      "jurisdiction_level": "federal",
+      "region": "Cyprus",
+      "description": "CyStat's CPI general information document states: \"The compilation of the CPI is based on goods and services included in the shopping basket, which are derived primarily from the Household Budget Survey. This survey is conducted by the Statistical Service of Cyprus every 5 years and it records the daily expenses of households.\" That document does not name national accounts; the national-accounts weight source comes instead from Eurostat's Cyprus HICP metadata: \"The usual sources of the expenditure data used for the calculation of the weights of HICP items are mainly the NA and HBS data.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly: \"The main CPI index and relevant price indices for the 12 main categories of goods and services are disseminated on the first Thursday of each month\" (CyStat CPI general information document).",
+      "last_updated": null,
+      "url": "https://library.cystat.gov.cy/Documents/Publication/CPI-GENERAL_INFO-EN-060611.pdf",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "cy-cystat-hbs",
+      "title": "Household Budget Survey",
+      "publisher": "Statistical Service of Cyprus (CyStat), Republic of Cyprus",
+      "country": "CY",
+      "jurisdiction_level": "federal",
+      "region": "Cyprus",
+      "description": "The 2023 publication — the twelfth in the series since 1966 — states the survey is \"conducted by the Statistical Service on a regular basis, usually every 5 years,\" and lists among its objectives \"Updating private consumption data for national accounts.\"",
+      "releases_per_year": 0.2,
+      "cadence_note": "Every five years: \"conducted by the Statistical Service on a regular basis, usually every 5 years\" (CyStat HBS 2023).",
+      "last_updated": null,
+      "url": "https://library.cystat.gov.cy/NEW/HBS-2023-EN-040825.pdf",
+      "domains": [
+        "living-standards"
+      ]
+    },
+    {
+      "id": "cy-cystat-lfs",
+      "title": "Labour Force Survey (LFS)",
+      "publisher": "Statistical Service of Cyprus (CyStat)",
+      "country": "CY",
+      "jurisdiction_level": "federal",
+      "region": "Cyprus",
+      "description": "Eurostat's Cyprus LFS national reference metadata explains why Cyprus's national accounts do NOT draw on this survey: \"LFS data is collected from private households only...while National Accounts data take into consideration employment from all different sources.\" That is a documented negative, recorded in _dropped rather than a missing edge.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; Eurostat's Cyprus LFS metadata gives \"Quarterly (4x), Yearly (1x), Ad hoc module (1x).\"",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_cy.htm",
+      "domains": [
+        "labour"
+      ]
+    },
+    {
+      "id": "is-hagstofa-cpi",
+      "title": "Vísitala neysluverðs — Consumer Price Index",
+      "publisher": "Hagstofa Íslands / Statistics Iceland",
+      "country": "IS",
+      "jurisdiction_level": "federal",
+      "region": "Iceland",
+      "description": "Statistics Iceland states: \"Hagstofa Íslands reiknar vísitölu neysluverðs, vísitölu framleiðsluverðs og skyldar verðvísitölur mánaðarlega\" (Statistics Iceland calculates the consumer price index, production price index and related price indices monthly), and — the fact that makes this index unusually load-bearing — \"Vísitölu neysluverðs er fyrst og fremst mælikvarði á verðbólgu en hún er einnig notuð til verðtryggingar\" (the CPI is primarily a measure of inflation but is also used for price-indexation), the mechanism behind Iceland's indexed loans.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly, per the fetched Hagstofa Íslands price-statistics page: \"...mánaðarlega\".",
+      "last_updated": null,
+      "url": "https://hagstofa.is/talnaefni/efnahagur/verdlag/",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "is-hagstofa-hicp",
+      "title": "Samræmd vísitala neysluverðs — Harmonised Index of Consumer Prices, Iceland",
+      "publisher": "Hagstofa Íslands / Statistics Iceland",
+      "country": "IS",
+      "jurisdiction_level": "federal",
+      "region": "Iceland",
+      "description": "Iceland is in the European Statistical System via the EEA rather than EU membership, and transmits an HICP like a member state. Eurostat's Iceland national reference metadata states \"HICP is a monthly statistics\" and gives the two-tier weighting: \"The sources of the weights are the National Accounts for household consumption at the 4-digit ECOICOP level. The weights for the 5-level are subdivided by using the household expenditure survey.\"",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly: \"HICP is a monthly statistics\", disseminated \"usually between 15 and 18 days after the end of the reference month\" (Eurostat prc_hicp_esmshi3_is).",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm",
+      "domains": [
+        "inflation"
+      ]
+    },
+    {
+      "id": "is-hagstofa-hbs",
+      "title": "Rannsókn á útgjöldum heimilanna — Household Budget Survey",
+      "publisher": "Hagstofa Íslands / Statistics Iceland",
+      "country": "IS",
+      "jurisdiction_level": "federal",
+      "region": "Iceland",
+      "description": "Statistics Iceland states: \"Megintilgangur rannsóknarinnar er að afla gagna í grunn fyrir vísitölu neysluverðs\" (the main purpose of the survey is to gather data as a basis for the consumer price index), adding \"Einnig er hún notuð til að reikna út kaupmátt, verðtryggðan sparnað og fjárskuldbindingar\" (it is also used to calculate purchasing power, index-linked savings and financial obligations), on a sample of \"1.222 heimili\".",
+      "cadence_note": "RECURRING, publication cadence unconfirmed — not a one-off instrument. Fieldwork is continuous (\"Rannsókn á útgjöldum heimilanna er framkvæmd allt árið um kring\") but the page states no release frequency for results. releases_per_year omitted rather than guessed.",
+      "last_updated": null,
+      "url": "https://hagstofa.is/um-hagstofuna/thatttaka-i-rannsoknum/rannsoknir-hagstofunnar/rannsokn-a-utgjoldum-heimilanna/",
+      "domains": [
+        "living-standards",
+        "inflation"
+      ]
+    },
+    {
+      "id": "is-hagstofa-lfs",
+      "title": "Vinnumarkaðsrannsóknin — Labour Force Survey",
+      "publisher": "Hagstofa Íslands / Statistics Iceland",
+      "country": "IS",
+      "jurisdiction_level": "federal",
+      "region": "Iceland",
+      "description": "Statistics Iceland's labour-market page states \"Rannsóknin gefur áreiðanlegar upplýsingar um stöðu fólks á vinnumarkaði, svo sem atvinnuþátttöku, fjölda starfandi, atvinnuleysi og vinnutíma\" (the survey provides reliable information about people's position in the labour market, such as labour-force participation, number employed, unemployment and working hours). Iceland is the one country in this round with NO Eurostat LFS metadata page at all (employ_simslfs_is.htm 404s), which is why its national-accounts link is deferred rather than settled.",
+      "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. The fetched overview page is navigation/summary content and states no publication frequency; two deeper Hagstofa URLs returned nav/error pages. releases_per_year omitted rather than guessed (quarterly is the commonly known cadence but nothing fetched said so).",
+      "last_updated": null,
+      "url": "https://hagstofa.is/talnaefni/samfelag/vinnumarkadur/",
+      "domains": [
+        "labour"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "pl-gus-hicp",
+      "target_report_id": "pl-gus-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "GUS's own CPI press-release page states the index weights come from the household survey: \"Wagi pochodzą z Badania Budżetów Gospodarstw Domowych (BBGD) – cyklicznego badania ankietowego mierzącego wydatki i dochody ok. 37 tys. gospodarstw domowych.\" Eurostat's Poland national reference metadata confirms the split from the other side: \"the system of weight for CPI is based on data from Household Budget Survey.\"",
+      "evidence_url": "https://stat.gov.pl/dla-mediow/komunikaty-prasowe/wskaznik-cen-towarow-i-uslug-konsumpcyjnych-pot-inflacja,100,1.html"
+    },
+    {
+      "source_report_id": "pl-gus-hicp",
+      "target_report_id": "pl-gus-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Poland HICP national reference metadata states: \"The main source of HICP weights are National Accounts while the system of weight for CPI is based on data from Household Budget Survey,\" adding that \"Where necessary data obtained from NA is disaggregated into lower level based on HBS data.\" Re-fetched and confirmed verbatim by the orchestrating session before minting.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_pl.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "pl-gus-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Poland HICP metadata documents GUS's compilation responsibilities as including \"transmitting data to Eurostat via Programming, Coordination of Statistical Surveys and Registers Department (several datasets within the HICP and REALEST domains: weights, indices and information (HICP-AP and metadata)),\" i.e. the Polish national HICP is an input to the Eurostat aggregate. Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_pl.htm"
+    },
+    {
+      "source_report_id": "ro-ins-ipc",
+      "target_report_id": "ro-ins-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "INS's own IPC methodological notes state: \"Ponderile utilizate pentru calculul IPC sunt obţinute din Ancheta Bugetelor de Familie (ABF)\" (the weights used to calculate the Consumer Price Index are obtained from the Household Budget Survey).",
+      "evidence_url": "https://insse.ro/cms/files/statistici/comunicate/ipc/a23/precizari_metodologice_01.pdf"
+    },
+    {
+      "source_report_id": "ro-ins-national-accounts",
+      "target_report_id": "ro-ins-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Romania LFS national reference metadata states \"Country uses LFS as the only source for employment in national accounts\" and \"In NA: LFS is the main data source\" — Romania's national-accounts employment estimates are built from the AMIGO Labour Force Survey.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_ro.htm"
+    },
+    {
+      "source_report_id": "se-scb-kpi",
+      "target_report_id": "se-scb-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "SCB's official 'Statistikens framställning' document for KPI 2024 states \"Underlag för vägningstalen är i första hand Nationalräkenskaperna\" (the basis for the weights is primarily the National Accounts).",
+      "evidence_url": "https://www.scb.se/contentassets/a1e257bb3a574420b9d3f2ff59851c0a/pr0101_staf_2024_v2_20240925.pdf"
+    },
+    {
+      "source_report_id": "se-scb-hikp",
+      "target_report_id": "se-scb-kpi",
+      "relationship_type": "calculated_from",
+      "basis": "SCB's KPI production-of-statistics document states \"KPI är också utgångspunkt för beräkningen av det EU-harmoniserade måttet Harmoniserat Index för Konsumentpriser (HIKP)\" (KPI is also the starting point for calculating the EU-harmonised measure HIKP); SCB's HIKP page separately states \"It is the same price material that forms the basis for HIKP in Sweden as for CPI and other price indices SCB calculates.\"",
+      "evidence_url": "https://www.scb.se/vara-tjanster/index/konsumentpriser/harmoniserat-index-for-konsumentpriser-hikp/"
+    },
+    {
+      "source_report_id": "se-scb-national-accounts",
+      "target_report_id": "se-scb-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "SCB's 'more about the Labour Force Survey' page states \"LFS is also used in the work of Statistics Sweden, partly for national accounts work, partly for labour force analyses and prognoses.\"",
+      "evidence_url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/labour-force-supply/labour-force-surveys-lfs/produktrelaterat/more-information/more-about-the-labour-force-survey/"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "se-scb-hikp",
+      "relationship_type": "uses_data_from",
+      "basis": "SCB's HIKP page states \"HIKP for all EU countries plus Iceland, Norway, Switzerland and the United Kingdom is also published monthly by Eurostat after the individual countries have submitted their respective indices\" — a first-party statement that Sweden's HIKP is transmitted to and aggregated by Eurostat.",
+      "evidence_url": "https://www.scb.se/vara-tjanster/index/konsumentpriser/harmoniserat-index-for-konsumentpriser-hikp/"
+    },
+    {
+      "source_report_id": "be-statbel-cpi",
+      "target_report_id": "be-statbel-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statbel's CPI methodology page states \"Weights are determined based on the household budget survey,\" and the HBS page states reciprocally \"The survey is also the main source to compile the consumer price index\" and \"The choice of representative items and their weights in the basket are deeply reviewed every two years based on the most recent HBS.\"",
+      "evidence_url": "https://statbel.fgov.be/en/themes/consumer-prices/consumer-price-index"
+    },
+    {
+      "source_report_id": "be-nbb-national-accounts",
+      "target_report_id": "be-statbel-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statbel's Household Budget Survey page states the HBS serves \"as input for updating the index basket and for estimating household consumption expenditure in the national accounts.\"",
+      "evidence_url": "https://statbel.fgov.be/en/themes/households/household-budget-survey-hbs"
+    },
+    {
+      "source_report_id": "be-nbb-national-accounts",
+      "target_report_id": "be-statbel-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "The National Bank of Belgium's labour-market statistics methodology page states \"The Labour Force Survey (LFS) is used only to estimate hours worked by the self-employed,\" listing the \"labour force survey (LFS) (used to estimate hours worked by the self-employed)\" among its data sources — a narrow but explicit dependency; overall employment figures rely mainly on NSSO/NISSE administrative records.",
+      "evidence_url": "https://www.nbb.be/en/statistics/methodology/topics/labour-market"
+    },
+    {
+      "source_report_id": "be-statbel-health-index",
+      "target_report_id": "be-statbel-cpi",
+      "relationship_type": "calculated_from",
+      "basis": "Statbel's health index page states the consumer price index \"forms the basis of another index: the health index,\" calculated by removing \"alcoholic beverages (bought in a shop or consumed in a bar), tobacco products and motor fuels except for LPG\" from the CPI basket.",
+      "evidence_url": "https://statbel.fgov.be/en/themes/consumer-prices/health-index"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "be-statbel-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's HICP metadata states \"National HICPs are produced by National Statistical Institutes (NSIs), while European aggregates (EU, EA and EEA) are produced by Eurostat,\" that \"HICP data, both indices and weights, are provided by the NSIs,\" and that \"The country-group indices for the euro area, EU and EEA... are calculated by Eurostat using the HICP data provided by the countries.\" EVIDENCE CAVEAT: this is the general all-NSI statement, not a Belgium-specific transmission sentence — no Belgium-specific one was found this round, so this edge rests on weaker evidence than the country-specific ones elsewhere in this slice.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm"
+    },
+    {
+      "source_report_id": "at-statistik-austria-vpi",
+      "target_report_id": "at-statistik-austria-konsumerhebung",
+      "relationship_type": "uses_data_from",
+      "basis": "The joint VPI/HVPI standard documentation states: \"Die Gewichtung des Warenkorbes basiert auf den Ergebnissen der jeweils rezent vorliegenden Konsumerhebung sowie auf aktuellen Daten über den privaten Konsum aus den Volkswirtschaftlichen Gesamtrechnungen.\" Re-fetched and confirmed verbatim by the orchestrating session before minting.",
+      "evidence_url": "https://www.statistik.at/fileadmin/shared/QM/Standarddokumentationen/VW/std_v_vpi_hvpi.pdf"
+    },
+    {
+      "source_report_id": "at-statistik-austria-vpi",
+      "target_report_id": "at-statistik-austria-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "The same standard documentation states the weighting draws on \"aktuellen Daten über den privaten Konsum aus den Volkswirtschaftlichen Gesamtrechnungen,\" and specifies \"So werden für die Abteilungen, Gruppen und Klassen die Werte des privaten Konsums der VGR ... verwendet.\" Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://www.statistik.at/fileadmin/shared/QM/Standarddokumentationen/VW/std_v_vpi_hvpi.pdf"
+    },
+    {
+      "source_report_id": "at-statistik-austria-hvpi",
+      "target_report_id": "at-statistik-austria-konsumerhebung",
+      "relationship_type": "uses_data_from",
+      "basis": "The standard documentation covers both indices and states the basket weighting \"basiert auf den Ergebnissen der jeweils rezent vorliegenden Konsumerhebung sowie auf aktuellen Daten über den privaten Konsum aus den Volkswirtschaftlichen Gesamtrechnungen,\" while confirming VPI and HVPI \"verwenden dieselben Preisdaten werden aber mit unterschiedlichen Gewichten berechnet\" — both indices weight from the same Konsumerhebung/VGR sources.",
+      "evidence_url": "https://www.statistik.at/fileadmin/shared/QM/Standarddokumentationen/VW/std_v_vpi_hvpi.pdf"
+    },
+    {
+      "source_report_id": "at-statistik-austria-hvpi",
+      "target_report_id": "at-statistik-austria-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "As above: the standard documentation covering both indices states weighting uses \"aktuellen Daten über den privaten Konsum aus den Volkswirtschaftlichen Gesamtrechnungen\" and that \"für die Abteilungen, Gruppen und Klassen die Werte des privaten Konsums der VGR ... verwendet\" werden.",
+      "evidence_url": "https://www.statistik.at/fileadmin/shared/QM/Standarddokumentationen/VW/std_v_vpi_hvpi.pdf"
+    },
+    {
+      "source_report_id": "at-statistik-austria-hvpi",
+      "target_report_id": "at-statistik-austria-vpi",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The standard documentation states: \"Die beiden Indizes VPI und HVPI verwenden dieselben Preisdaten werden aber mit unterschiedlichen Gewichten berechnet\" (both the VPI and HVPI use the same price data but are calculated with different weights) — the harmonised index is computed from the same underlying price collection as the national one.",
+      "evidence_url": "https://www.statistik.at/fileadmin/shared/QM/Standarddokumentationen/VW/std_v_vpi_hvpi.pdf"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "at-statistik-austria-hvpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's HICP methodology metadata states \"HICP data, both indices and weights, are provided by the NSIs\" and \"The country-group indices for the euro area, EU and EEA, as well as special aggregates are calculated by Eurostat using the HICP data provided by the countries\"; Statistik Austria describes its HVPI as \"die europäische Vergleichsgröße\" used \"u. a. der Bewertung der Geldwertstabilität innerhalb der Euro-Zone,\" and publishes it \"am selben Tag mit Eurostat.\" EVIDENCE CAVEAT: the transmission sentence is the general all-NSI one, not Austria-specific.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm"
+    },
+    {
+      "source_report_id": "pt-ine-ipc",
+      "target_report_id": "pt-ine-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "INE's January 2024 IPC release states: \"A estrutura de ponderação do IPC, que tem subjacente o conceito de despesa monetária de consumo final das famílias, tem como principal referência os dados detalhados (finais de 2021 e preliminares de 2022) das Contas Nacionais Portuguesas (SEC 2010).\"",
+      "evidence_url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=651417467&att_display=n&att_download=y"
+    },
+    {
+      "source_report_id": "pt-ine-ipc",
+      "target_report_id": "pt-ine-idef",
+      "relationship_type": "uses_data_from",
+      "basis": "The same INE January 2024 IPC release states the weighting methodology also incorporates \"os resultados do Inquérito às Despesas das Famílias (IDEF) realizado em 2015/2016\" alongside the National Accounts data.",
+      "evidence_url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=651417467&att_display=n&att_download=y"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "pt-ine-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's HICP ESMS metadata states \"National HICPs are produced by National Statistical Institutes (NSIs), while European aggregates (EU, EA and EEA) are produced by Eurostat,\" and that the country-group indices \"are calculated by Eurostat using the HICP data provided by the countries\" — the euro-area aggregate depends on the national IHPC that INE publishes inside this release. EVIDENCE CAVEAT: general all-NSI statement, not Portugal-specific; ine.pt refused every further fetch this round.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm"
+    },
+    {
+      "source_report_id": "gr-elstat-cpi",
+      "target_report_id": "gr-elstat-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "ELSTAT's own Household Budget Survey 2023 report states: \"The main purpose of the HBS is to determine in detail the household expenditure pattern in order to revise the Consumer Price Index conducted by ELSTAT.\"",
+      "evidence_url": "https://www.statistics.gr/documents/20181/e2adf8c8-c37e-dfe8-86ca-3e103391d408"
+    },
+    {
+      "source_report_id": "gr-elstat-hicp",
+      "target_report_id": "gr-elstat-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Greek national reference metadata states: \"The expenditures are based on National Accounts expenditure data and for and 5-digit COICOP level on HBS expenditure data, both for the year t-2.\" Re-fetched and confirmed verbatim by the orchestrating session before minting.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_el.htm"
+    },
+    {
+      "source_report_id": "gr-elstat-hicp",
+      "target_report_id": "gr-elstat-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "The same Eurostat Greek metadata page states the 5-digit COICOP layer of the weights rests on \"HBS expenditure data, both for the year t-2\" — the Household Budget Survey supplies the detail the national accounts cannot. Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_el.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "gr-elstat-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Greek HICP national reference metadata states \"Data are sent to Eurostat and published in Eurostat online database,\" with the resulting euro-area index \"used by the European Central Bank (ECB) as the main indicator for monetary policy management.\" Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_el.htm"
+    },
+    {
+      "source_report_id": "ie-cso-cpi",
+      "target_report_id": "ie-cso-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "The CSO's CPI survey background-notes page states: \"Since 2012 the weights of the items in the basket have been updated annually at CPI COICOP class (4-digit) level using information on consumer expenditure from National Accounts Household Final Monetary Consumption Expenditure (HFMCE).\" Re-fetched and confirmed verbatim by the orchestrating session before minting.",
+      "evidence_url": "https://www.cso.ie/en/methods/surveybackgroundnotes/consumerpriceindex/"
+    },
+    {
+      "source_report_id": "ie-cso-cpi",
+      "target_report_id": "ie-cso-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "The CSO's CPI background-notes page states \"Additionally at the 2016 rebase, a more granular level update of the weights (5-digit) was possible using information from the latest Household Budget Survey (HBS) which was carried out between February 2015 and February 2016\"; the CSO's HBS technical note states the survey \"is held every 5 years to fulfil a National requirement to update the weighting basis of the Consumer Price Index (CPI).\" Re-fetched and confirmed verbatim by the orchestrating session.",
+      "evidence_url": "https://www.cso.ie/en/methods/surveybackgroundnotes/consumerpriceindex/"
+    },
+    {
+      "source_report_id": "ie-cso-national-accounts",
+      "target_report_id": "ie-cso-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "The CSO's Quarterly National Accounts Q3 2022 background notes state, in the Compensation of Employees methodology section: \"Prior to this, annual estimates based on Revenue Commissioners' P35 annual earnings data, are temporally disaggregated using information on earnings and employment from the CSO's Labour Force Survey (LFS)...\"",
+      "evidence_url": "https://www.cso.ie/en/releasesandpublications/ep/p-na/quarterlynationalaccountsquarter32022/backgroundnotes/"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "ie-cso-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "The CSO's Consumer Price Index July 2026 background notes state: \"Under Regulation (EU) 2016/792, Ireland is obliged to send flash estimates to Eurostat as part of the Harmonised Index of Consumer Prices (HICP),\" and that the euro-area MUICP is \"calculated as a weighted average of HICPs of the 20 countries in the euro area\" — a first-party statement of the transmission and the aggregation.",
+      "evidence_url": "https://www.cso.ie/en/releasesandpublications/ep/p-cpi/consumerpriceindexjuly2026/backgroundnotes/"
+    },
+    {
+      "source_report_id": "es-ine-ipc",
+      "target_report_id": "es-ine-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Spain HICP national reference metadata states: \"the main data source for the compilation of the HICP weights are the HFMCE data (in line with the domestic concept) from Spanish National Accounts (obtained from year t-2) further complemented with data from the Household Budget Survey and other sources.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_es.htm"
+    },
+    {
+      "source_report_id": "es-ine-ipc",
+      "target_report_id": "es-ine-epf",
+      "relationship_type": "uses_data_from",
+      "basis": "The same Eurostat Spain metadata page states the weights, sourced primarily from national-accounts HFMCE data, are \"further complemented with data from the Household Budget Survey and other sources.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_es.htm"
+    },
+    {
+      "source_report_id": "es-ine-national-accounts",
+      "target_report_id": "es-ine-epa",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Spain LFS national metadata states Spain's national accounts \"uses mainly LFS, but replacing it in a few industries (or labour status), on a case-by-case basis.\" The same page answers N to \"Country uses LFS as the only source for employment in national accounts,\" and explains the residual gap: \"NA includes employment in collective residences; CN compute the 'domestic' employment whereas LFS focus in the 'national' employment.\" The edge is minted at the 'main but not sole source' strength the page documents, not stronger.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_es.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "es-ine-ipc",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Spain HICP metadata page states: \"HICP data are transmitted to Eurostat monthly, in order to produce the aggregates for the European Union (EU) and euro area (EA).\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_es.htm"
+    },
+    {
+      "source_report_id": "fi-statfin-cpi",
+      "target_report_id": "fi-statfin-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Finland's CPI weight-structure publication states \"The weight structure of the Consumer Price Index 2025 is based on national accounts calculations on private consumption expenditure according to EU guidelines,\" corroborated by its CPI documentation page: \"the Consumer Price Index utilizes the consumption expenditures which are produced by the National Account.\"",
+      "evidence_url": "https://stat.fi/en/publication/cm190981h81o006ukn7pr0w19"
+    },
+    {
+      "source_report_id": "fi-statfin-cpi",
+      "target_report_id": "fi-statfin-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Finland's Household Budget Survey documentation states: \"The data of the statistics on households' consumption are submitted to the Consumer Price Index, the international price comparison and national accounts.\"",
+      "evidence_url": "https://stat.fi/en/documentation/documentation-of-statistics/ktutk"
+    },
+    {
+      "source_report_id": "fi-statfin-national-accounts",
+      "target_report_id": "fi-statfin-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Finland's Household Budget Survey documentation states: \"In national accounts, the Household Budget Survey is used for level revision of private consumption expenditure.\"",
+      "evidence_url": "https://stat.fi/en/documentation/documentation-of-statistics/ktutk"
+    },
+    {
+      "source_report_id": "fi-statfin-national-accounts",
+      "target_report_id": "fi-statfin-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Finland's Labour Force Survey documentation states: \"Statistics Finland uses the quarterly Labour Force Survey data in the compiling of national accounts.\" Corroborated by Eurostat's Finland LFS metadata: \"In Quarterly National Accounts (QNA) the LFS is used as the main indicator for total employment and hours worked.\"",
+      "evidence_url": "https://stat.fi/en/statistics/documentation/tyti"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "fi-statfin-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's HICP methodology metadata states \"National HICPs are produced by National Statistical Institutes (NSIs), while European aggregates (EU, EA and EEA) are produced by Eurostat,\" computed as \"a weighted average of the HICP sub-indices transmitted by the NSIs\"; Statistics Finland's CPI documentation confirms it compiles the HICP inside this same release (\"Harmonised Index of Consumer Prices is published two times a month: flash estimate and final\"). EVIDENCE CAVEAT: general all-NSI statement — the Finland-specific Eurostat page (prc_hicp_esmshi4_fi.htm) returned 404.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm"
+    },
+    {
+      "source_report_id": "hu-ksh-cpi",
+      "target_report_id": "hu-hcso-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "KSH's own CPI methodology page states: \"a fogyasztóiár-index súlyrendszere csoportszinten – a nemzetközi előírásoknak megfelelően – a tárgyévet két évvel megelőző év nemzeti számlájának a lakosság vásárolt fogyasztásra vonatkozó előzetes adataira épül\"; Eurostat's Hungary HICP metadata corroborates: \"The source of weights at 4-digit ECOICOP level is Annual National Accounts data.\"",
+      "evidence_url": "https://www.ksh.hu/docs/hun/modsz/ara_modsz.html"
+    },
+    {
+      "source_report_id": "hu-ksh-cpi",
+      "target_report_id": "hu-ksh-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Hungary HICP national reference metadata states that below the 4-digit ECOICOP level, the \"Household Budget and Living Conditions Survey (HBLS), Tourism statistics and Car Registry data are also used\" to derive detailed weights.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hu.htm"
+    },
+    {
+      "source_report_id": "hu-hcso-national-accounts",
+      "target_report_id": "hu-ksh-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Hungary LFS national reference metadata lists the inputs to national accounts employment: \"Source of data for National Accounts: Annual labour survey on employment of the enterprises with more than 20 (in case of monthly surveys with more than 5) employees and of all government institutions, labour force survey, census, tax records, social security records, company.\" The same page cautions \"Country combines sources for labour supply and demand not giving precedence to any labour side\" — the LFS is a documented input among several, not the sole source, and the edge is minted at that strength.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_hu.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "hu-ksh-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Hungary HICP national reference metadata lists dissemination on \"Eurostat's website: HICP database\" alongside \"HCSO's website - Data/Publications - Summary tables (STADAT) - Prices,\" and states \"In line with the Community legal framework and the European Statistics Code of Practice Eurostat disseminates European statistics on Eurostat's website.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hu.htm"
+    },
+    {
+      "source_report_id": "sk-susr-cpi",
+      "target_report_id": "sk-susr-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Slovak HICP national reference metadata states: \"The weights at the 4-digit COICOP level are based on annual National Accounts (NA) data Household final consumption aggregates for the year t-2 (2023).\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esmshi3_sk.htm"
+    },
+    {
+      "source_report_id": "sk-susr-cpi",
+      "target_report_id": "sk-susr-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "The same Eurostat Slovak metadata page states, for weights below the national-accounts level: \"The various sources are used for different product groups at the level of the ECOICOP 5-digit level or below - e.g., NA, Household budget survey 2021, scanner data for Food and non-alcoholic beverages, Alcoholic beverages and tobacco, information from suppliers...\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esmshi3_sk.htm"
+    },
+    {
+      "source_report_id": "sk-susr-national-accounts",
+      "target_report_id": "sk-susr-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Slovak LFS national metadata states: \"NA data are constructed as a balance between LFS data adjusted to the domestic concept and the figures from the business surveys and administrative sources.\" The same page notes Slovakia \"combines sources for labour supply and demand giving precedence to labour demand sources\" — the LFS is a balancing input rather than the sole source, and the edge is minted at that strength.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_sk.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "sk-susr-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Slovak HICP national reference metadata states: \"SO SR transmits the HICP data in compliance with the given timetable,\" with Eurostat then publishing aggregated EU/EA data.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esmshi3_sk.htm"
+    },
+    {
+      "source_report_id": "si-surs-cpi",
+      "target_report_id": "si-surs-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "SURS's own methodological explanation states: \"Za pripravo uteži za izračun HICŽP uporabljamo kot glavni vir podatke o izdatkih gospodinjstev za končno potrošnjo iz nacionalnih računov\" (for HICP weight preparation, national accounts household final consumption expenditure data are the main source); Eurostat's Slovenia metadata corroborates: \"Weights used for index calculation in an individual year are based on national accounts data on household final consumption expenditure.\"",
+      "evidence_url": "https://www.stat.si/statweb/File/DocSysFile/7800"
+    },
+    {
+      "source_report_id": "si-surs-cpi",
+      "target_report_id": "si-surs-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "SURS's own methodological explanation states: \"Za pripravo uteži za izračun ICŽP uporabljamo kot glavni vir podatke iz ankete o potrošnji sredstev gospodinjstev (APG)\" (for national CPI weight preparation, Household Budget Survey data are the main source); Eurostat's Slovenia metadata corroborates: \"for lower levels mostly data from the household budget surveys (HBS) are used.\"",
+      "evidence_url": "https://www.stat.si/statweb/File/DocSysFile/7800"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "si-surs-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Slovenia HICP national reference metadata states \"Data are sent to Eurostat via eDAMIS following a predetermined timetable\" and that \"Data on HICP are a part of the First release of Consumer price indices, SiStat and some other publications.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_si.htm"
+    },
+    {
+      "source_report_id": "hr-dzs-cpi",
+      "target_report_id": "hr-dzs-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "DZS's own Consumer Price Index methodology page states for the national CPI: \"Osnovni izvor podataka za izradu pondera... jest Anketa o potrošnji kućanstava (APK)\" (the primary data source for constructing the weights is the Household Budget Survey). Corroborated by Eurostat's Croatia metadata: \"the main data source for the CPI weights is the Household Budget Survey.\"",
+      "evidence_url": "https://web.dzs.hr/Hrv/DBHomepages/Cijene/metodologija.htm"
+    },
+    {
+      "source_report_id": "hr-dzs-hicp",
+      "target_report_id": "hr-dzs-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "The same DZS methodology page states for the harmonised index: \"Osnovni izvor podataka za izradu pondera... jesu podaci nacionalnih računa\" (the primary data source for constructing the weights is national accounts data). Corroborated by Eurostat's Croatia metadata: \"The main data source for the HICP weights is the National Accounts data, while the main data source for the CPI weights is the Household Budget Survey.\"",
+      "evidence_url": "https://web.dzs.hr/Hrv/DBHomepages/Cijene/metodologija.htm"
+    },
+    {
+      "source_report_id": "hr-dzs-national-accounts",
+      "target_report_id": "hr-dzs-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Croatia LFS national reference metadata states, under Coherence with National Accounts: \"Country combines sources for labour supply and demand giving precedence to labour supply sources (i.e. LFS)\" — national-accounts labour input is reconciled with the LFS given precedence.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_hr.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "hr-dzs-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Croatia HICP national reference metadata states: \"Data are transmitted to Eurostat according to the Eurostat transmission timetable.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_hr.htm"
+    },
+    {
+      "source_report_id": "bg-nsi-cpi",
+      "target_report_id": "bg-nsi-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "NSI's own monthly release states of the national CPI's weights: \"Основен източник на информацията за разходите е изследването на бюджетите на домакинствата в страната,\" and of the Small Basket Index in the same release: \"Източник на информацията за теглата е изследването на бюджетите на домакинствата.\"",
+      "evidence_url": "https://www.nsi.bg/press-release/inflaciya-i-indeksi-na-potrebitelskite-ceni-dekemvri-2025-godina-8919"
+    },
+    {
+      "source_report_id": "bg-nsi-cpi",
+      "target_report_id": "bg-nsi-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Bulgaria HICP national reference metadata states \"weights used in the current year t are based on national accounts data referring to t-2, estimated in line with the domestic concept, that are further adjusted using additional sources in order to make them representative for t-1,\" corroborated by NSI's own release describing HICP weights as household final monetary consumption expenditure shares (\"крайните парични потребителски разходи на домакинствата\").",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_bg.htm"
+    },
+    {
+      "source_report_id": "bg-nsi-national-accounts",
+      "target_report_id": "bg-nsi-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Bulgaria LFS national reference metadata states: \"Sources of information for national accounts employment data are the results of statistical surveys on the supply and demand side of the labour force... The Labour force survey is used for the elaboration of the self-employed persons, employees working under civil contracts and employees working without any contracts.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_bg.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "bg-nsi-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Bulgaria HICP national reference metadata states individual data \"is transferred to Eurostat where this is necessary for development and production of European statistical information.\" EVIDENCE CAVEAT: this sentence comes from the page's confidentiality section (7.1) rather than a dedicated dissemination statement — it is a genuine verbatim quote from the country page but more oblique than the transmission sentences used for ES, SK, HR, SI and IE.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_bg.htm"
+    },
+    {
+      "source_report_id": "ee-stat-hicp",
+      "target_report_id": "ee-statistics-estonia-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Estonia HICP national reference metadata states that HICP weights are \"derived mainly from the National Accounts and Household Budget Survey data.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ee.htm"
+    },
+    {
+      "source_report_id": "ee-stat-hicp",
+      "target_report_id": "ee-stat-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Estonia HICP national reference metadata states that HICP weights are \"derived mainly from the National Accounts and Household Budget Survey data\"; Statistics Estonia's own HBS page states \"The data are also used in the calculation of the consumer price index, the GDP and the subsistence minimum.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_ee.htm"
+    },
+    {
+      "source_report_id": "ee-statistics-estonia-national-accounts",
+      "target_report_id": "ee-stat-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Estonia LFS national reference metadata states: \"Country uses LFS as the only source for employment in national accounts.\" This is the strongest form of the national-accounts dependency found anywhere in this round.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_ee.htm"
+    },
+    {
+      "source_report_id": "ee-statistics-estonia-national-accounts",
+      "target_report_id": "ee-stat-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Estonia's own Household Budget Survey page states: \"The data are also used in the calculation of the consumer price index, the GDP and the subsistence minimum\" — naming GDP compilation as a consumer of the survey.",
+      "evidence_url": "https://stat.ee/en/household-budget-survey"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "ee-stat-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's HICP methodology metadata states the euro-area/EU/EEA aggregates \"are calculated by Eurostat using the HICP data provided by the countries,\" computed as \"a weighted average of the HICP sub-indices transmitted by the NSIs and the weights of the countries.\" EVIDENCE CAVEAT: general all-NSI statement, not Estonia-specific.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_hicp_esms.htm"
+    },
+    {
+      "source_report_id": "lt-vda-hicp",
+      "target_report_id": "lt-stat-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Lithuania HICP national reference metadata states \"At ECOICOP ver.2 5-digit level, weights used in the current year are based on annual HFMCE data of the previous year, estimated in line with the domestic concept\" — the harmonised index's weights derive from the national-accounts household final monetary consumption expenditure aggregate.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lt.htm"
+    },
+    {
+      "source_report_id": "lt-vda-cpi",
+      "target_report_id": "lt-vda-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "The State Data Agency's prices page states that \"household budget survey data on monetary consumption expenditures serves as the primary information source for weight preparation\" of the national consumer price index's statistical basket.",
+      "evidence_url": "https://osp.stat.gov.lt/kainos"
+    },
+    {
+      "source_report_id": "lt-stat-national-accounts",
+      "target_report_id": "lt-vda-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Lithuania LFS national reference metadata states, on the use of LFS data for national accounts: \"Country uses mainly LFS, but replacing it in a few industries (or labour status), on a case-by-case basis.\" The edge is minted at that 'main but not sole' strength.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_lt.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "lt-vda-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Lithuania HICP national reference metadata states \"SL provides data to Eurostat for the production of specific Community statistics and data to other European Statistical System (ESS) institutions following the provisions of Article 21 of Regulation (EC) No 223/2009.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_lt.htm"
+    },
+    {
+      "source_report_id": "lv-csp-cpi",
+      "target_report_id": "lv-csp-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Latvia HICP national reference metadata states \"At ECOICOP 5-digit level, weights used in the current year are based on annual HFMCE data of the previous year, estimated in line with the domestic concept\" and that \"HFMCE is obtained from provisional NA data for the first three quarters of the previous year.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_lv.htm"
+    },
+    {
+      "source_report_id": "lv-csp-cpi",
+      "target_report_id": "lv-csp-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "The same Eurostat Latvia metadata page states, in the passage on weights: \"For elementary product groups the HBS data and additional sources are used.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_lv.htm"
+    },
+    {
+      "source_report_id": "lv-csp-national-accounts",
+      "target_report_id": "lv-csp-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Latvia LFS metadata, under \"Which is the use of LFS data for National Account Data?\", answers: \"Country uses mainly LFS, but replacing it in a few industries (or labour status), on a case-by-case basis.\" The edge is minted at that strength.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_lv.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "lv-csp-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Latvia HICP national reference metadata states: \"Indices are calculated and transmitted to Eurostat for all ECOICOP categories of goods and services for which there are significant expenditures according to National Accounts (NA) and Household Budget Survey (HBS) data, or represent at least one part in a thousand of the total expenditure.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_lv.htm"
+    },
+    {
+      "source_report_id": "mt-nso-cpi",
+      "target_report_id": "mt-nso-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "NSO Malta's RPI page states: \"The basket of consumption items considered for the RPI is reviewed periodically, in line with the Household Budgetary Survey (HBS), during which information of household consumption is collected over a 12-month period in order to obtain an estimate of the average household expenditure.\"",
+      "evidence_url": "https://nso.gov.mt/themes_sources___met/retail-price-index/"
+    },
+    {
+      "source_report_id": "mt-nso-cpi",
+      "target_report_id": "mt-nso-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Malta HICP national reference metadata states: \"HFMCE values to derive weights up to the ECOICOP 4-digit level are obtained from quarterly National Accounts (NA) for the first three quarters of year t-1.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_mt.htm"
+    },
+    {
+      "source_report_id": "mt-nso-national-accounts",
+      "target_report_id": "mt-nso-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Malta LFS national reference metadata states: \"Total employment in persons is based on administrative sources in case of full-time employment and on LFS in case of part-time employment,\" and \"LFS is the only source used by National Accounts when compiling hours worked. Data on hours worked have been used since 2002.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/employ_simslfs_mt.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "mt-nso-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Malta HICP national reference metadata states \"The flash estimates indices are normally transmitted to Eurostat at end of reference month,\" and Eurostat's HICP methodology page states EU/euro-area aggregates are \"calculated by Eurostat using the HICP data provided by the countries\" as a \"weighted average of the HICP sub-indices transmitted by the NSIs.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_mt.htm"
+    },
+    {
+      "source_report_id": "cy-cystat-cpi",
+      "target_report_id": "cy-cystat-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "CyStat's CPI general information document states: \"The compilation of the CPI is based on goods and services included in the shopping basket, which are derived primarily from the Household Budget Survey. This survey is conducted by the Statistical Service of Cyprus every 5 years and it records the daily expenses of households.\"",
+      "evidence_url": "https://library.cystat.gov.cy/Documents/Publication/CPI-GENERAL_INFO-EN-060611.pdf"
+    },
+    {
+      "source_report_id": "cy-cystat-cpi",
+      "target_report_id": "cy-cystat-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Cyprus HICP national reference metadata states: \"The usual sources of the expenditure data used for the calculation of the weights of HICP items are mainly the NA and HBS data.\" Note CyStat's own (2011) CPI document names only the HBS, so the national-accounts half of the weighting rests on the Eurostat country page.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cy.htm"
+    },
+    {
+      "source_report_id": "cy-cystat-national-accounts",
+      "target_report_id": "cy-cystat-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "CyStat's Household Budget Survey 2023 publication lists among its objectives \"Updating private consumption data for national accounts.\"",
+      "evidence_url": "https://library.cystat.gov.cy/NEW/HBS-2023-EN-040825.pdf"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "cy-cystat-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Cyprus HICP national reference metadata states the weights \"need to be submitted to Eurostat in February,\" and Eurostat's HICP methodology page states EU/euro-area aggregates are \"calculated by Eurostat using the HICP data provided by the countries.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cy.htm"
+    },
+    {
+      "source_report_id": "is-hagstofa-cpi",
+      "target_report_id": "is-hagstofa-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Iceland's Household Budget Survey page states \"Megintilgangur rannsóknarinnar er að afla gagna í grunn fyrir vísitölu neysluverðs\" (the main purpose of the survey is to gather data as a basis for the consumer price index), naming the CPI directly as the consumer of the survey's data.",
+      "evidence_url": "https://hagstofa.is/um-hagstofuna/thatttaka-i-rannsoknum/rannsoknir-hagstofunnar/rannsokn-a-utgjoldum-heimilanna/"
+    },
+    {
+      "source_report_id": "is-hagstofa-hicp",
+      "target_report_id": "is-hagstofa-hbs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Iceland HICP national reference metadata states \"The weights for the 5-level are subdivided by using the household expenditure survey.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm"
+    },
+    {
+      "source_report_id": "is-hagstofa-hicp",
+      "target_report_id": "is-hagstofa-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Iceland HICP national reference metadata states \"The sources of the weights are the National Accounts for household consumption at the 4-digit ECOICOP level,\" with expenditure shares \"derived from national accounts data for household final consumption expenditure referring to year t-2.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "is-hagstofa-hicp",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's Iceland HICP national reference metadata states \"Eurostat publishes the monthly results of the HICPs in Europe, including HICP results for Iceland, according to Eurostat's release calendar\" — Iceland enters the aggregate through the EEA rather than EU membership.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_is.htm"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cy-cystat-national-accounts -> cy-cystat-lfs",
+      "source": "cy-cystat-national-accounts",
+      "target": "cy-cystat-lfs",
+      "reason": "no-document",
+      "why": "DOCUMENTED NEGATIVE, not a gap. Eurostat's Cyprus LFS national reference metadata states \"Country doesn't make use of LFS, or makes minimal use of it\" for national accounts, and explains why: \"LFS data is collected from private households only...while National Accounts data take into consideration employment from all different sources.\" The pattern edge minted for 17 other countries in this round is correctly absent for Cyprus."
+    },
+    {
+      "edge": "si-surs-national-accounts -> si-surs-lfs",
+      "source": "si-surs-national-accounts",
+      "target": "si-surs-lfs",
+      "reason": "no-document",
+      "why": "DOCUMENTED NEGATIVE, not a gap. Eurostat's Slovenia LFS metadata (sections 15.3.2-15.3.3) marks Slovenia 'N' for \"Country uses LFS as the only source for employment in national accounts\" and 'Y' for \"Country doesn't make use of LFS, or makes minimal use of it,\" pointing to the Statistical Register of Employment (SRDAP) instead."
+    },
+    {
+      "edge": "se-scb-kpi -> se-scb-hbs",
+      "source": "se-scb-kpi",
+      "target": "se-scb-hbs",
+      "reason": "no-document",
+      "why": "Sweden breaks the pattern. SCB's official KPI production-of-statistics PDF names the national accounts as the weight source (\"Underlag för vägningstalen är i första hand Nationalräkenskaperna\") and does not mention Hushållens utgifter (HUT) anywhere as one. Plausible under EU Reg. 2016/792 in general, unevidenced for Sweden specifically."
+    },
+    {
+      "edge": "at-statistik-austria-national-accounts -> at-statistik-austria-mikrozensus-ake",
+      "source": "at-statistik-austria-national-accounts",
+      "target": "at-statistik-austria-mikrozensus-ake",
+      "reason": "no-document",
+      "why": "Statistik Austria's standard documentation for the Abgestimmte Erwerbsstatistik states national-accounts employment ('Arbeitseinsatz') is determined 'im Rahmen der volkswirtschaftlichen Gesamtrechnungen' as its own separate exercise, and frames AKE, the Registerzählung/AEST and VGR employment as parallel statistics rather than an input chain. No page states national-accounts employment is calculated from AKE microdata."
+    },
+    {
+      "edge": "gr-elstat-national-accounts -> gr-elstat-lfs",
+      "source": "gr-elstat-national-accounts",
+      "target": "gr-elstat-lfs",
+      "reason": "no-document",
+      "why": "Looked for and not found within budget: ELSTAT's LFS March 2026 release, its LFS infographic page and its Quarterly National Accounts publication page (code SEL84) none state that national-accounts employment derives from the LFS. An ELSTAT LFS methodology PDF returned HTTP 403 and a guessed Eurostat Greek national-accounts ESMS URL 404'd. Plausible and worth one more pass."
+    },
+    {
+      "edge": "gr-elstat-cpi -> gr-elstat-national-accounts",
+      "source": "gr-elstat-cpi",
+      "target": "gr-elstat-national-accounts",
+      "reason": "no-document",
+      "why": "The national-accounts weighting statement on the Eurostat Greek page is scoped to the HICP, and that edge was minted on gr-elstat-hicp instead. No fetched page ties the separately-based national CPI (2020=100.0 series) to national-accounts expenditure data."
+    },
+    {
+      "edge": "ro-ins-ipc -> ro-ins-national-accounts",
+      "source": "ro-ins-ipc",
+      "target": "ro-ins-national-accounts",
+      "reason": "no-document",
+      "why": "INS's own IPC methodological notes name ONLY the Household Budget Survey as the weight source (\"Ponderile utilizate pentru calculul IPC sunt obţinute din Ancheta Bugetelor de Familie (ABF)\"), with no mention of national accounts. Romania's harmonised IAPC, which would carry the national-accounts weighting, has no node — see the next entry."
+    },
+    {
+      "edge": "eurostat-hicp -> ro-ins-iapc",
+      "source": "eurostat-hicp",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "RESEARCH LEAD. Romania's IAPC (Indicele Armonizat al Preţurilor de Consum) is a distinct series from the national IPC and is what Eurostat aggregates, but no IAPC node could be minted: insse.ro returned ROBOTS_DISALLOWED / robots.txt ConnectTimeout on roughly 8 of 14 attempts, blocking the IAPC quality report, the AMIGO quality report, the ABF quality report and the main IPC/IAPC content page. The failure looks intermittent rather than a real disallow — retry in a later round to give Romania its eurostat-hicp edge."
+    },
+    {
+      "edge": "pt-ine-national-accounts -> pt-ine-lfs",
+      "source": "pt-ine-national-accounts",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "RESEARCH LEAD. Portugal's Inquérito ao Emprego could not be minted at all: every attempt at an INE LFS page (smi.ine.pt metodologia 1362, the xportal destaque page, webinq.ine.pt, and the Estatísticas do Emprego Q4 2024 PDF) failed with robots/fetch errors, as did a direct fetch of ine.pt/robots.txt itself — reproduced independently by the orchestrating session. Portugal is the only country in this round with no LFS node."
+    },
+    {
+      "edge": "pl-gus-national-accounts -> pl-gus-lfs",
+      "source": "pl-gus-national-accounts",
+      "target": "pl-gus-lfs",
+      "reason": "deferred",
+      "why": "Eurostat's Poland national-accounts metadata (na10_esms_pl.htm) references LFS methodological notebooks and lists 'persons employed in the national economy' among its source surveys, and one fetch returned a fragment reading 'the procedure of data compilation for LFS is provided', but a second targeted fetch could not reproduce a clean sentence stating national-accounts employment is derived from BAEL. Deferred rather than minted on a fragment. Poland is one of only three countries in this round without the national-accounts<-LFS edge for evidentiary rather than substantive reasons."
+    },
+    {
+      "edge": "is-hagstofa-national-accounts -> is-hagstofa-lfs",
+      "source": "is-hagstofa-national-accounts",
+      "target": "is-hagstofa-lfs",
+      "reason": "deferred",
+      "why": "Iceland is the one country in this round with no Eurostat LFS national metadata page at all — employ_simslfs_is.htm 404s, and no correctly-numbered variant was found. Two Hagstofa URLs (the national-accounts news archive and the vinnumarkadsrannsoknin page) returned nav/error content with no methodology text. Unresolved for want of a readable document, not because the dependency is doubted."
+    },
+    {
+      "edge": "lt-vda-cpi -> lt-stat-national-accounts",
+      "source": "lt-vda-cpi",
+      "target": "lt-stat-national-accounts",
+      "reason": "no-document",
+      "why": "The HFMCE weighting statement on the Eurostat Lithuania page is scoped explicitly to the harmonised SVKI, and that edge was minted on lt-vda-hicp. The only documented weight source for the national VKI is the household budget survey, so the national-accounts link was not duplicated onto the national index."
+    },
+    {
+      "edge": "is-hagstofa-cpi -> is-hagstofa-national-accounts",
+      "source": "is-hagstofa-cpi",
+      "target": "is-hagstofa-national-accounts",
+      "reason": "no-document",
+      "why": "Same shape as Lithuania and Greece: the national-accounts weighting quote is scoped to Iceland's HICP on the Eurostat page, and no Hagstofa page about the domestic vísitala neysluverðs names national accounts as a weight source. The edge was attributed to is-hagstofa-hicp instead."
+    },
+    {
+      "edge": "be-statbel-cpi -> be-nbb-national-accounts",
+      "source": "be-statbel-cpi",
+      "target": "be-nbb-national-accounts",
+      "reason": "no-document",
+      "why": "Statbel's CPI page attributes the index weights explicitly and only to the Household Budget Survey (\"Weights are determined based on the household budget survey\"). No quote was found linking weight determination to NBB/INR national-accounts household final consumption expenditure, so the edge was not minted even though EU Reg. 2016/792 permits either source."
+    },
+    {
+      "edge": "hr-dzs-hbs -> hr-dzs-national-accounts",
+      "source": "hr-dzs-hbs",
+      "target": "hr-dzs-national-accounts",
+      "reason": "no-document",
+      "why": "No fetched page states that Croatia's APK draws on or feeds the national accounts, beyond the CPI-weights route already captured. Recorded because the equivalent statement WAS found for Belgium, Cyprus, Estonia and Finland, so its absence here is a real difference in what the publishers document, not an oversight."
+    }
+  ]
+}

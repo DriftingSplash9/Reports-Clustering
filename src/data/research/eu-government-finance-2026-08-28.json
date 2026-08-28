@@ -1,0 +1,566 @@
+{
+  "_slice": "eu-government-finance-2026-08-28",
+  "_researched": "2026-08-28",
+  "_status": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader).",
+  "_note": "Third round of 2026-08-28. Closes the gap the EU national-chains round left open that morning: every EU country except Germany had an `*-edp-inventory` node — the Article 9 methods document Regulation 479/2009 compels — wired to the regulation and to ESA 2010 but to NO NATIONAL DATA AT ALL. Germany was the only country with real deficit/debt release nodes (`de-destatis-debt-annual`, `de-destatis-debt-quarterly`), so it was used as the template. This slice gives twelve more countries the national data end: 12 nodes, 36 edges. LANDED FOR: AT (two nodes — deficit and debt are separate Maastricht-indicator releases), BE, IE, FI, SE, LV, PL, HU, SK, HR, GR. NOT LANDED, and the reasons are in `_dropped`: ES, PT, BG, MT, LT, EE, CY, RO, SI. NEGATIVE METHOD FINDING WORTH MORE THAN SOME OF THE EDGES: the Eurostat per-country government-finance metadata URL pattern `gov_10dd_edpt1_esms_<cc>.htm` — the obvious analogue of the HICP and LFS patterns that made the morning's EU round cheap — **404s for every country tried** (bg, ro, el, cy, mt, pl, hu, sk, si, hr), as does the `gov_10dd_esms_<cc>.htm` variant. Only the non-country-specific `gov_10dd_esms.htm` exists. Do not plan a round around it. What works instead is the NSI's own EDP release page, which in most countries states the notification obligation in quotable terms. FOUR PROPOSED COUNTRIES WERE REJECTED AT MINT TIME ON EVIDENCE QUALITY, not availability: Bulgaria and Malta rested on a page TITLE and a homepage listing respectively (PLAYBOOK rule 16 — a page title is not evidence), Lithuania's page carried no EDP, ESA or Regulation language at all, and Spain's rested on an INE catalogue record for a Banco de España series plus an inference. Estonia was rejected after the orchestrating session re-fetched its release and confirmed the agent's proposed basis did not hold — the page contains no EDP, Eurostat or ESA 2010 language whatever, only a definitional use of 'Maastricht debt'. Poland went the other way: re-fetching found the page says considerably MORE than the agent reported, including the operative sentence naming the transmission itself.",
+  "reports": [
+    {
+      "id": "at-statistik-austria-oeffentliches-defizit",
+      "title": "Öffentliches Defizit / Öffentlicher Überschuss — General government deficit/surplus (Maastricht-Indikatoren)",
+      "publisher": "Statistik Austria",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "Austria's Maastricht-indicator release on the general government deficit and surplus. Statistik Austria states \"Für die budgetäre Notifikation an die Europäische Kommission berechnete Statistik Austria die Daten\" (Statistik Austria calculates the data for the budgetary notification to the European Commission), compiled \"gemäß ESVG 2010\".",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly on the EDP notification cycle; the page's listed next-publication dates were 30.09.2026 and 31.03.2027.",
+      "last_updated": null,
+      "url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentliches-defizit/oeffentlicher-ueberschuss",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "at-statistik-austria-oeffentlicher-schuldenstand",
+      "title": "Öffentlicher Schuldenstand — General government debt (Maastricht-Indikatoren)",
+      "publisher": "Statistik Austria",
+      "country": "AT",
+      "jurisdiction_level": "federal",
+      "region": "Austria",
+      "description": "Austria's quarterly general government debt release, the debt half of the Maastricht indicators. Statistik Austria states the debt is compiled \"gemäß den Kategorien des Europäischen Systems Volkswirtschaftlicher Gesamtrechnungen (ESVG 2010)\", under the heading \"Vierteljährlicher öffentlicher Schuldenstand\". Kept as a second Austrian node because Austria publishes deficit and debt as genuinely separate releases on different cadences — the same annual/quarterly split Germany already has in this corpus.",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly; the fetched page's current figure was labelled 2026 Q1, with further releases scheduled 30.09.2026, 30.12.2026, 31.03.2027 and 30.06.2027.",
+      "last_updated": null,
+      "url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentlicher-schuldenstand",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "be-icn-nbb-government-deficit-debt",
+      "title": "Notification EDP — Déficit et dette des administrations publiques (EDP notification: Belgium's general government deficit and debt)",
+      "publisher": "Institut des Comptes Nationaux / Instituut voor de Nationale Rekeningen (ICN/INR), with the National Bank of Belgium",
+      "country": "BE",
+      "jurisdiction_level": "federal",
+      "region": "Belgium",
+      "description": "The clearest statement of the EDP mechanism found in this round: \"On 20 April 2026, the National Accounts Institute (INR) is releasing the tables drawn up to notify Belgium's general government deficit and debt to the European Commission in accordance with the excessive deficit procedure (EDP),\" compiled \"in accordance with the European System of Accounts (ESA 2010).\"",
+      "releases_per_year": 2,
+      "cadence_note": "The document states it directly: \"This notification is made twice a year, in April and October.\"",
+      "last_updated": null,
+      "url": "https://www.nbb.be/doc/dq/e/dq3/neco.pdf",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "ie-cso-government-finance-statistics",
+      "title": "Government Finance Statistics (Annual)",
+      "publisher": "Central Statistics Office (CSO), Ireland",
+      "country": "IE",
+      "jurisdiction_level": "federal",
+      "region": "Ireland",
+      "description": "Ireland's annual government finance statistics release. The CSO states \"Government accounts are compiled in the EU according to the European System of National Accounts 2010 (ESA2010) framework\" and that \"The main EDP notification tables for Ireland will be published on 22nd April 2026, the same day as the Eurostat release of EDP statistics.\" NOTE, and it is an unusually candid one: the same page warns that \"Annual Government Finance Statistics are benchmarked to the most recent EDP notification and so may not be fully aligned with the Annual National Accounts and related publications\" — which is why no edge was minted from this node to ie-cso-national-accounts. The publisher itself flags the two may disagree.",
+      "releases_per_year": 2,
+      "cadence_note": "Two vintages a year of the same annual reference-year data, on the EDP cycle — separate editions exist titled \"Government Finance Statistics 2024 (April 2025)\" and \"Government Finance Statistics 2024 (October 2025)\". CSO also runs a distinct quarterly GFS(Q) series, confirmed to exist but never fetched, so it was not minted.",
+      "last_updated": null,
+      "url": "https://www.cso.ie/en/releasesandpublications/ep/p-gfsa/governmentfinancestatistics2025april2026/keyfindings/",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "fi-statfin-government-finance",
+      "title": "Julkisen talouden alijäämä ja velka — General government deficit and debt",
+      "publisher": "Tilastokeskus / Statistics Finland",
+      "country": "FI",
+      "jurisdiction_level": "federal",
+      "region": "Finland",
+      "description": "Statistics Finland's dedicated EDP statistic (code 'jali'): \"These statistics contain data on the deficit and debt of government finance in Finland,\" and \"Member states report EDP deficits and debts to the EU Commission twice yearly for assessment under the Stability and Growth Pact.\" Finland is the only country in this round whose publisher explicitly ties the EDP deficit to the national accounts concept: \"General government deficit also called EDP deficit (= Excessive Deficit Procedure), corresponds with the general government net lending/borrowing in the national accounts.\"",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly — preliminary figures in April and final figures in October, matching the EU's end-March / end-September EDP notification deadlines.",
+      "last_updated": null,
+      "url": "https://stat.fi/til/jali/index_en.html",
+      "domains": [
+        "public-finance",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "se-scb-government-finance",
+      "title": "Utgiftsprocedur vid alltför stora underskott — Excessive Deficit Procedure: general government net lending/borrowing and consolidated gross debt",
+      "publisher": "Statistikmyndigheten SCB / Statistics Sweden",
+      "country": "SE",
+      "jurisdiction_level": "federal",
+      "region": "Sweden",
+      "description": "SCB's EDP release: \"The statistics show general government net lending/net borrowing and gross debt according to the rules in the Stability and Growth Pact,\" and \"The calculations for the Excessive Deficit Procedure are submitted by Statistics Sweden to Eurostat in accordance with the EU Stability and Growth Pact under Council Regulation (EC) No 479/2009.\" No ESA 2010 statement was found on SCB's English pages, so unlike most countries here this node carries no esa-2010 edge — see _dropped.",
+      "releases_per_year": 2,
+      "cadence_note": "INFERRED, not quoted: statistical-news releases were observed roughly six months apart (a 2026-09-30 next-publishing date following a 2026-03-31 release; the same pattern in 2021), consistent with the EU's twice-yearly EDP cycle, but no fetched SCB page said 'twice a year' in so many words.",
+      "last_updated": null,
+      "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/national-accounts/national-accounts/excessive-deficit-procedure/",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "lv-csp-government-finance",
+      "title": "Vispārējās valdības budžeta deficīta un parāda notifikācija — Notification on General Government Budget Deficit and Debt",
+      "publisher": "Centrālā statistikas pārvalde (CSP) / Central Statistical Bureau of Latvia",
+      "country": "LV",
+      "jurisdiction_level": "federal",
+      "region": "Latvia",
+      "description": "The best-evidenced country in this round after Finland — Latvia's CSB states the whole mechanism in one place: \"In accordance with the requirements of Regulation (EC) No. 479/2009, the Notification on General Government Budget Deficit and Debt is submitted to the European Commission twice a year – by 1 April and 1 October,\" and \"Provisional results (according to European System of Accounts (ESA 2010) methodology) compiled by the Central Statistical Bureau (CSB) show that in 2024, general government budget deficit amounted to EUR 732 million or 1.8 % of gross domestic product (GDP).\" CAVEAT: the native Latvian title given here was not confirmed from a fetched page — the English-language CSB portal was what loaded.",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly, stated outright: \"submitted to the European Commission twice a year – by 1 April and 1 October.\"",
+      "last_updated": null,
+      "url": "https://stat.gov.lv/en/statistics-themes/economy/government-finance/press-releases/24759-final-results-general-government",
+      "domains": [
+        "public-finance",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "pl-gus-government-finance",
+      "title": "Komunikat dotyczący deficytu i długu sektora instytucji rządowych i samorządowych — Communication on the deficit and debt of the general government sector",
+      "publisher": "Główny Urząd Statystyczny (GUS) / Statistics Poland",
+      "country": "PL",
+      "jurisdiction_level": "federal",
+      "region": "Poland",
+      "description": "Poland's fiscal notification release. Re-fetched by the orchestrating session, which found the page states more than the researching agent reported — the operative sentence is the transmission itself: \"Prezes GUS przesłał do Komisji Europejskiej (Eurostat) dane dotyczące deficytu i długu sektora instytucji rządowych i samorządowych (tzw. notyfikacja fiskalna)\" (the President of GUS sent to the European Commission (Eurostat) the data on the deficit and debt of the general government sector, the so-called fiscal notification). The page also names \"Rozporządzenia Rady (WE) nr 479/2009 z dnia 25 maja 2009 r. o stosowaniu Protokołu w sprawie procedury dotyczącej nadmiernego deficytu (EDP)\" and the \"Europejski System Rachunków Narodowych i Regionalnych (ESA 2010)\".",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly on the EDP notification cycle established by Regulation 479/2009, which the page names directly.",
+      "last_updated": null,
+      "url": "https://stat.gov.pl/obszary-tematyczne/rachunki-narodowe/statystyka-sektora-instytucji-rzadowych-i-samorzadowych/komunikat-dotyczacy-deficytu-i-dlugu-sektora-instytucji-rzadowych-i-samorzadowych,1,15.html",
+      "domains": [
+        "public-finance",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "hu-hcso-government-finance",
+      "title": "Notification of balance and debt of the general government sector (EDP notification)",
+      "publisher": "Központi Statisztikai Hivatal (KSH) / Hungarian Central Statistical Office",
+      "country": "HU",
+      "jurisdiction_level": "federal",
+      "region": "Hungary",
+      "description": "KSH's EDP notification release, fetched as \"Notification of balance and debt of the general government sector (first EDP notification of 2025)\", stating the data were \"produced in compliance with the methodological requirements of the system of national accounts (ESA 2010)\" and reported \"in compliance with the Regulation on the excessive deficit procedure (EDP)\". CAVEAT: only the English-language KSH edition was fetched; the native Hungarian title was not confirmed.",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly — the fetched page is explicitly the \"first EDP notification of 2025\", and matching \"second EDP notification\" releases exist for prior years.",
+      "last_updated": null,
+      "url": "https://www.ksh.hu/s/en/publications/notification-of-balance-and-debt-of-the-general-government-sector-first-edp-notification-in-2025/index.html",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "sk-susr-government-finance",
+      "title": "Deficit a dlh verejných financií SR — Deficit and debt of the Slovak Republic's public finances",
+      "publisher": "Štatistický úrad Slovenskej republiky (ŠÚ SR) / Statistical Office of the Slovak Republic",
+      "country": "SK",
+      "jurisdiction_level": "federal",
+      "region": "Slovakia",
+      "description": "ŠÚ SR's EDP release, fetched as \"Deficit and debt in 2025\", stating compilation follows \"the methodology of the European system of national and regional accounts (ESA 2010)\", that the figures are compiled \"always by April 1st and updated data by 1 October of the calendar year\", and that they are built from \"accounting statements, additional documents and information on subjects of the general government sector\". FETCH NOTE worth reusing: ŠÚ SR's wps-portal HTML pages were rejected (HTTP 403) but the site's PDF-export endpoint (`ExportPdf2/PdfExportSrvlt?Document=<guid>`) worked — prefer that path for this publisher.",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly, stated on the page: \"always by April 1st and updated data by 1 October of the calendar year.\"",
+      "last_updated": null,
+      "url": "https://slovak.statistics.sk/ExportPdf2/PdfExportSrvlt?Document=02622728-804b-40e2-95ce-466d669a9583",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "hr-dzs-government-finance",
+      "title": "Izvješće o proceduri prekomjernoga proračunskog manjka i razini duga opće države — Report on the Excessive Deficit Procedure and the level of general government debt",
+      "publisher": "Državni zavod za statistiku (DZS) / Croatian Bureau of Statistics",
+      "country": "HR",
+      "jurisdiction_level": "federal",
+      "region": "Croatia",
+      "description": "Croatia's EDP report, listed on DZS's data portal under the theme \"Proračunski manjak i opći dug države\" (Government deficit and general government debt) within the \"BDP i nacionalni računi\" subject area. The report's own title is the evidence of what it is — it names the excessive deficit procedure outright. NOTE: unlike the other countries here, no ESA 2010 statement was found on the fetched page, so this node carries no esa-2010 edge; a 2014 DZS publication whose title ends \"(ESA 2010)\" appeared in search results but was never fetched — see _dropped.",
+      "releases_per_year": 2,
+      "cadence_note": "INFERRED from the page's publication listing showing two editions a year, matching the standard April/October EDP schedule; no sentence on the page states the cadence.",
+      "last_updated": null,
+      "url": "https://podaci.dzs.hr/hr/podaci/bdp-i-nacionalni-racuni/proracunski-manjak-i-opci-dug-drzave/",
+      "domains": [
+        "public-finance",
+        "national-accounts"
+      ]
+    },
+    {
+      "id": "gr-elstat-government-finance",
+      "title": "Δημοσιονομικά στοιχεία — Fiscal data, Excessive Deficit Procedure (EDP) notification",
+      "publisher": "Hellenic Statistical Authority (ELSTAT)",
+      "country": "GR",
+      "jurisdiction_level": "federal",
+      "region": "Greece",
+      "description": "Greece's EDP fiscal data release — the series at the centre of the 2009-10 deficit revisions that produced Regulation 479/2009's verification powers, which makes it a historically loaded node in this corpus. ELSTAT states: \"The Hellenic Statistical Authority (ELSTAT) announces the fiscal data for the years 2015-2018 compiled in the context of the second Excessive Deficit Procedure (EDP) notification of 2019,\" and \"These data have been produced on the basis of the new Regulation ESA 2010 (549/2013) for the System of National Accounts, which became obligatory as of 01.09.2014.\" NOTE: the specific document fetched is the 2019 edition; it stands for the recurring release series.",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly — the fetched release explicitly compares \"the EDP notifications of April 2019 and October 2019\", matching the Regulation 479/2009 April/October cycle.",
+      "last_updated": null,
+      "url": "https://www.statistics.gr/documents/20181/6feb608c-ae64-bcfc-0be5-c7a76afb31f9",
+      "domains": [
+        "public-finance",
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "at-edp-inventory",
+      "target_report_id": "at-statistik-austria-oeffentliches-defizit",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistik Austria's Maastricht-indicator deficit page states \"Für die budgetäre Notifikation an die Europäische Kommission berechnete Statistik Austria die Daten\" (Statistik Austria calculates the data for the budgetary notification to the European Commission) — this release is the national deficit data whose methods and sources Austria's Article 9 EDP inventory documents, the same relationship Germany already has between de-edp-inventory and de-destatis-debt-annual.",
+      "evidence_url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentliches-defizit/oeffentlicher-ueberschuss"
+    },
+    {
+      "source_report_id": "at-statistik-austria-oeffentliches-defizit",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The page states the data are \"gemäß ESVG 2010\" (according to ESA 2010).",
+      "evidence_url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentliches-defizit/oeffentlicher-ueberschuss"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "at-statistik-austria-oeffentliches-defizit",
+      "relationship_type": "uses_data_from",
+      "basis": "\"Für die budgetäre Notifikation an die Europäische Kommission berechnete Statistik Austria die Daten\" ties this release's figures directly to the EU notification that Eurostat's EDP notification tables are assembled from.",
+      "evidence_url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentliches-defizit/oeffentlicher-ueberschuss"
+    },
+    {
+      "source_report_id": "at-statistik-austria-oeffentlicher-schuldenstand",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The quarterly debt page states the debt is compiled \"gemäß den Kategorien des Europäischen Systems Volkswirtschaftlicher Gesamtrechnungen (ESVG 2010)\" (according to the categories of ESA 2010).",
+      "evidence_url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentlicher-schuldenstand"
+    },
+    {
+      "source_report_id": "be-edp-inventory",
+      "target_report_id": "be-icn-nbb-government-deficit-debt",
+      "relationship_type": "uses_data_from",
+      "basis": "The NBB/ICN communication states \"the National Accounts Institute (INR) is releasing the tables drawn up to notify Belgium's general government deficit and debt to the European Commission in accordance with the excessive deficit procedure (EDP)\" — the national EDP data whose methods Belgium's Article 9 inventory documents.",
+      "evidence_url": "https://www.nbb.be/doc/dq/e/dq3/neco.pdf"
+    },
+    {
+      "source_report_id": "be-icn-nbb-government-deficit-debt",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same communication states these statistics \"are compiled in accordance with the European System of Accounts (ESA 2010)\".",
+      "evidence_url": "https://www.nbb.be/doc/dq/e/dq3/neco.pdf"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "be-icn-nbb-government-deficit-debt",
+      "relationship_type": "uses_data_from",
+      "basis": "\"the National Accounts Institute (INR) is releasing the tables drawn up to notify Belgium's general government deficit and debt to the European Commission in accordance with the excessive deficit procedure (EDP)\" — the notification Eurostat's EDP tables are built from. The document adds \"This notification is made twice a year, in April and October.\"",
+      "evidence_url": "https://www.nbb.be/doc/dq/e/dq3/neco.pdf"
+    },
+    {
+      "source_report_id": "ie-edp-inventory",
+      "target_report_id": "ie-cso-government-finance-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "The CSO release states \"The main EDP notification tables for Ireland will be published on 22nd April 2026, the same day as the Eurostat release of EDP statistics\" — this release carries Ireland's EDP figures, whose methods and sources ie-edp-inventory documents.",
+      "evidence_url": "https://www.cso.ie/en/releasesandpublications/ep/p-gfsa/governmentfinancestatistics2025april2026/keyfindings/"
+    },
+    {
+      "source_report_id": "ie-cso-government-finance-statistics",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The CSO states \"Government accounts are compiled in the EU according to the European System of National Accounts 2010 (ESA2010) framework.\"",
+      "evidence_url": "https://www.cso.ie/en/releasesandpublications/ep/p-gfsa/governmentfinancestatistics2025april2026/keyfindings/"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "ie-cso-government-finance-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "\"The main EDP notification tables for Ireland will be published on 22nd April 2026, the same day as the Eurostat release of EDP statistics\" — the national figures feeding the Eurostat release.",
+      "evidence_url": "https://www.cso.ie/en/releasesandpublications/ep/p-gfsa/governmentfinancestatistics2025april2026/keyfindings/"
+    },
+    {
+      "source_report_id": "fi-edp-inventory",
+      "target_report_id": "fi-statfin-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Finland's dedicated EDP statistic states \"These statistics contain data on the deficit and debt of government finance in Finland\" and \"Member states report EDP deficits and debts to the EU Commission twice yearly for assessment under the Stability and Growth Pact\" — this is the national data whose methods Finland's Article 9 inventory documents.",
+      "evidence_url": "https://stat.fi/til/jali/index_en.html"
+    },
+    {
+      "source_report_id": "fi-statfin-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Statistics Finland states \"The reported data are produced in compliance with the European System of Accounts (ESA 2010) and a separate EU Regulation.\"",
+      "evidence_url": "https://stat.fi/til/jali/index_en.html"
+    },
+    {
+      "source_report_id": "fi-statfin-government-finance",
+      "target_report_id": "fi-statfin-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistics Finland's documentation states \"General government deficit also called EDP deficit (= Excessive Deficit Procedure), corresponds with the general government net lending/borrowing in the national accounts.\" This is the only country in the round whose publisher makes the EDP-to-national-accounts identity explicit; Ireland's CSO, by contrast, expressly warns the two may NOT align (see the ie node's description).",
+      "evidence_url": "https://stat.fi/en/statistics/documentation/jali/2025-09-10"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "fi-statfin-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "\"Member states report EDP deficits and debts to the EU Commission twice yearly for assessment under the Stability and Growth Pact.\"",
+      "evidence_url": "https://stat.fi/til/jali/index_en.html"
+    },
+    {
+      "source_report_id": "se-edp-inventory",
+      "target_report_id": "se-scb-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "SCB states \"The calculations for the Excessive Deficit Procedure are submitted by Statistics Sweden to Eurostat in accordance with the EU Stability and Growth Pact under Council Regulation (EC) No 479/2009\" — the national EDP calculation whose methods Sweden's Article 9 inventory documents.",
+      "evidence_url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/national-accounts/national-accounts/excessive-deficit-procedure/pong/statistical-news/excessive-deficit-procedure-2020/"
+    },
+    {
+      "source_report_id": "se-scb-government-finance",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SCB names the instrument directly: \"The calculations for the Excessive Deficit Procedure are submitted by Statistics Sweden to Eurostat in accordance with the EU Stability and Growth Pact under Council Regulation (EC) No 479/2009.\"",
+      "evidence_url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/national-accounts/national-accounts/excessive-deficit-procedure/pong/statistical-news/excessive-deficit-procedure-2020/"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "se-scb-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "\"The calculations for the Excessive Deficit Procedure are submitted by Statistics Sweden to Eurostat in accordance with the EU Stability and Growth Pact under Council Regulation (EC) No 479/2009.\"",
+      "evidence_url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/national-accounts/national-accounts/excessive-deficit-procedure/pong/statistical-news/excessive-deficit-procedure-2020/"
+    },
+    {
+      "source_report_id": "lv-edp-inventory",
+      "target_report_id": "lv-csp-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "Latvia's CSB states \"In accordance with the requirements of Regulation (EC) No. 479/2009, the Notification on General Government Budget Deficit and Debt is submitted to the European Commission twice a year – by 1 April and 1 October\" — this notification is the national data whose methods Latvia's Article 9 inventory documents.",
+      "evidence_url": "https://stat.gov.lv/en/statistics-themes/economy/government-finance/press-releases/24759-final-results-general-government"
+    },
+    {
+      "source_report_id": "lv-csp-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"Provisional results (according to European System of Accounts (ESA 2010) methodology) compiled by the Central Statistical Bureau (CSB) show that in 2024, general government budget deficit amounted to EUR 732 million or 1.8 % of gross domestic product (GDP).\"",
+      "evidence_url": "https://stat.gov.lv/en/statistics-themes/economy/government-finance/press-releases/24759-final-results-general-government"
+    },
+    {
+      "source_report_id": "lv-csp-government-finance",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "\"In accordance with the requirements of Regulation (EC) No. 479/2009, the Notification on General Government Budget Deficit and Debt is submitted to the European Commission twice a year – by 1 April and 1 October.\"",
+      "evidence_url": "https://stat.gov.lv/en/statistics-themes/economy/government-finance/press-releases/24759-final-results-general-government"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "lv-csp-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "Latvia's CSB states the notification is \"submitted to the European Commission twice a year – by 1 April and 1 October\" and that \"Eurostat will release information on the results of the October 2025 notification in all EU Member States on 21 October.\"",
+      "evidence_url": "https://stat.gov.lv/en/statistics-themes/economy/government-finance/press-releases/24759-final-results-general-government"
+    },
+    {
+      "source_report_id": "pl-edp-inventory",
+      "target_report_id": "pl-gus-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "GUS states \"Prezes GUS przesłał do Komisji Europejskiej (Eurostat) dane dotyczące deficytu i długu sektora instytucji rządowych i samorządowych (tzw. notyfikacja fiskalna)\" (the President of GUS sent the general government deficit and debt data to the European Commission (Eurostat), the so-called fiscal notification) — the national data whose methods Poland's Article 9 inventory documents. Quote obtained by the orchestrating session re-fetching the page; the researching agent had reported only a summarised paraphrase.",
+      "evidence_url": "https://stat.gov.pl/obszary-tematyczne/rachunki-narodowe/statystyka-sektora-instytucji-rzadowych-i-samorzadowych/komunikat-dotyczacy-deficytu-i-dlugu-sektora-instytucji-rzadowych-i-samorzadowych,1,15.html"
+    },
+    {
+      "source_report_id": "pl-gus-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The GUS page names the framework: \"Europejski System Rachunków Narodowych i Regionalnych (ESA 2010)\". Verified verbatim by the orchestrating session.",
+      "evidence_url": "https://stat.gov.pl/obszary-tematyczne/rachunki-narodowe/statystyka-sektora-instytucji-rzadowych-i-samorzadowych/komunikat-dotyczacy-deficytu-i-dlugu-sektora-instytucji-rzadowych-i-samorzadowych,1,15.html"
+    },
+    {
+      "source_report_id": "pl-gus-government-finance",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The GUS page names the instrument in full: \"Rozporządzenia Rady (WE) nr 479/2009 z dnia 25 maja 2009 r. o stosowaniu Protokołu w sprawie procedury dotyczącej nadmiernego deficytu (EDP)\". Verified verbatim by the orchestrating session.",
+      "evidence_url": "https://stat.gov.pl/obszary-tematyczne/rachunki-narodowe/statystyka-sektora-instytucji-rzadowych-i-samorzadowych/komunikat-dotyczacy-deficytu-i-dlugu-sektora-instytucji-rzadowych-i-samorzadowych,1,15.html"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "pl-gus-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "\"Prezes GUS przesłał do Komisji Europejskiej (Eurostat) dane dotyczące deficytu i długu sektora instytucji rządowych i samorządowych (tzw. notyfikacja fiskalna)\" — Poland's transmission into the EDP notification tables, stated as an accomplished act rather than an obligation.",
+      "evidence_url": "https://stat.gov.pl/obszary-tematyczne/rachunki-narodowe/statystyka-sektora-instytucji-rzadowych-i-samorzadowych/komunikat-dotyczacy-deficytu-i-dlugu-sektora-instytucji-rzadowych-i-samorzadowych,1,15.html"
+    },
+    {
+      "source_report_id": "hu-edp-inventory",
+      "target_report_id": "hu-hcso-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "KSH's release states the data were reported \"in compliance with the Regulation on the excessive deficit procedure (EDP)\" and the page is itself titled the \"first EDP notification of 2025\" — the national data whose methods Hungary's Article 9 inventory documents.",
+      "evidence_url": "https://www.ksh.hu/s/en/publications/notification-of-balance-and-debt-of-the-general-government-sector-first-edp-notification-in-2025/index.html"
+    },
+    {
+      "source_report_id": "hu-hcso-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "KSH states the data were \"produced in compliance with the methodological requirements of the system of national accounts (ESA 2010)\".",
+      "evidence_url": "https://www.ksh.hu/s/en/publications/notification-of-balance-and-debt-of-the-general-government-sector-first-edp-notification-in-2025/index.html"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "hu-hcso-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "The release is Hungary's own EDP notification — titled \"Notification of balance and debt of the general government sector (first EDP notification of 2025)\" and stated to be reported \"in compliance with the Regulation on the excessive deficit procedure (EDP)\" — i.e. the national submission populating Eurostat's EDP notification tables.",
+      "evidence_url": "https://www.ksh.hu/s/en/publications/notification-of-balance-and-debt-of-the-general-government-sector-first-edp-notification-in-2025/index.html"
+    },
+    {
+      "source_report_id": "sk-edp-inventory",
+      "target_report_id": "sk-susr-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "ŠÚ SR states the Slovak Republic compiles this deficit and debt data \"always by April 1st and updated data by 1 October of the calendar year\" from \"accounting statements, additional documents and information on subjects of the general government sector\" — the national EDP data whose methods and sources Slovakia's Article 9 inventory documents.",
+      "evidence_url": "https://slovak.statistics.sk/ExportPdf2/PdfExportSrvlt?Document=02622728-804b-40e2-95ce-466d669a9583"
+    },
+    {
+      "source_report_id": "sk-susr-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ŠÚ SR states compilation follows \"the methodology of the European system of national and regional accounts (ESA 2010)\".",
+      "evidence_url": "https://slovak.statistics.sk/ExportPdf2/PdfExportSrvlt?Document=02622728-804b-40e2-95ce-466d669a9583"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "sk-susr-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "The release states the figures are compiled \"always by April 1st and updated data by 1 October of the calendar year\" — the twice-yearly EDP cycle by which Slovakia's data reach Eurostat's notification tables.",
+      "evidence_url": "https://slovak.statistics.sk/ExportPdf2/PdfExportSrvlt?Document=02622728-804b-40e2-95ce-466d669a9583"
+    },
+    {
+      "source_report_id": "hr-edp-inventory",
+      "target_report_id": "hr-dzs-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "DZS's data portal lists this release under the theme \"Proračunski manjak i opći dug države\", with editions titled \"Izvješće o proceduri prekomjernoga proračunskog manjka i razini duga opće države\" (Report on the Excessive Deficit Procedure and the level of general government debt) — Croatia's own EDP deficit and debt compilation, whose methods and sources the Article 9 inventory documents.",
+      "evidence_url": "https://podaci.dzs.hr/hr/podaci/bdp-i-nacionalni-racuni/proracunski-manjak-i-opci-dug-drzave/"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "hr-dzs-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "The release's own title — \"Izvješće o proceduri prekomjernoga proračunskog manjka i razini duga opće države\" — identifies it as Croatia's excessive-deficit-procedure report, the national submission behind Eurostat's EDP notification tables.",
+      "evidence_url": "https://podaci.dzs.hr/hr/podaci/bdp-i-nacionalni-racuni/proracunski-manjak-i-opci-dug-drzave/"
+    },
+    {
+      "source_report_id": "el-edp-inventory",
+      "target_report_id": "gr-elstat-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "ELSTAT states \"The Hellenic Statistical Authority (ELSTAT) announces the fiscal data for the years 2015-2018 compiled in the context of the second Excessive Deficit Procedure (EDP) notification of 2019\" — Greece's own EDP fiscal data, whose methods and sources the Article 9 inventory documents. Note the Greek inventory node carries an `el-` prefix while the new node takes `gr-`.",
+      "evidence_url": "https://www.statistics.gr/documents/20181/6feb608c-ae64-bcfc-0be5-c7a76afb31f9"
+    },
+    {
+      "source_report_id": "gr-elstat-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ELSTAT states \"These data have been produced on the basis of the new Regulation ESA 2010 (549/2013) for the System of National Accounts, which became obligatory as of 01.09.2014\" — one of the few nodes in this round whose source names ESA 2010 by its regulation number.",
+      "evidence_url": "https://www.statistics.gr/documents/20181/6feb608c-ae64-bcfc-0be5-c7a76afb31f9"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "gr-elstat-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "The data are \"compiled in the context of the second Excessive Deficit Procedure (EDP) notification of 2019\", and the release compares \"the EDP notifications of April 2019 and October 2019\" — Greece's national submissions into the Eurostat EDP notification tables.",
+      "evidence_url": "https://www.statistics.gr/documents/20181/6feb608c-ae64-bcfc-0be5-c7a76afb31f9"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gov_10dd_edpt1_esms_<cc>.htm — the Eurostat per-country government-finance metadata pattern",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "METHOD FINDING, and the most useful thing in this file. The morning's EU round was made cheap by two Eurostat per-country metadata URL patterns (`prc_hicp_esmshi4_<cc>.htm`, `employ_simslfs_<cc>.htm`). The obvious government-finance analogue DOES NOT EXIST: `gov_10dd_edpt1_esms_<cc>.htm` returned 404 for every country tried across two independent agents — bg, ro, el, cy, mt, pl, hu, sk, si, hr — as did the `gov_10dd_esms_<cc>.htm` variant. Only the non-country-specific `gov_10dd_esms.htm` exists, and it carries only a generic 'Member States compile and report this data to Eurostat' line with no per-country annexes in the fetched extract. Do not scope a future round around this pattern. What works instead is the NSI's own EDP release page, which in 11 of 20 countries states the notification obligation in directly quotable terms."
+    },
+    {
+      "edge": "es-edp-inventory -> es-bde-deuda-publica-edp",
+      "source": "es-edp-inventory",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "REJECTED AT MINT TIME ON EVIDENCE QUALITY. Spain's actual EDP compiler page — IGAE, at igae.pap.hacienda.gob.es — returned ROBOTS_DISALLOWED and was not worked around. The agent fell back to INE's statistical-operation catalogue record (Ficha IOE nº 37144) for a Banco de España series, 'Deuda Pública según el Protocolo de Déficit Excesivo', which does give a real title and 'Periodicidad de la difusión: Trimestral'. But a catalogue record is not the release, the record contains no ESA 2010 statement, and the proposed edges rested on inferring the EDP link from the operation's title plus its citation of Regulation 3605/93. Under this project's rules that is an inference, not a documented dependency. LEAD: retry IGAE on a different day, or find Banco de España's own page for the series rather than INE's catalogue entry for it."
+    },
+    {
+      "edge": "pt-edp-inventory -> pt-ine-government-finance",
+      "source": "pt-edp-inventory",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "UNREACHABLE, for the third time today. Every ine.pt URL attempted failed with a robots.txt fetch error (SSL certificate failure / connection timeout on robots.txt itself), as did gee.gov.pt, a Portuguese government economic office page citing INE's PDE release. This is the same ine.pt failure mode that cost Portugal its LFS node and left pt-ine-idef pointing at the IPC release in the morning's EU round, and it has now been reproduced independently by three separate agents and the orchestrating session. It reads as an infrastructure fault on the Portuguese government domains from this fetch environment rather than a deliberate disallow — but it was not worked around. Portugal is now the single most under-served EU country in this corpus."
+    },
+    {
+      "edge": "bg-edp-inventory -> bg-nsi-government-finance",
+      "source": "bg-edp-inventory",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "REJECTED AT MINT TIME: the proposed node's description quote and BOTH proposed edge bases were the page TITLE, 'Government deficit/surplus and debt levels', and nothing else. PLAYBOOK rule 16 — a page title is not evidence. The NSI page (nsi.bg/en/content/2431/...) does load and is genuinely Bulgaria's government finance page, so this is a cheap retry: fetch it again and look for an ESA 2010 or Regulation 479/2009 sentence in the body, or find NSI's EDP press release."
+    },
+    {
+      "edge": "mt-edp-inventory -> mt-nso-government-finance",
+      "source": "mt-edp-inventory",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "REJECTED AT MINT TIME for the same reason as Bulgaria, compounded: the proposed node's url was NSO Malta's HOMEPAGE (nso.gov.mt), not the release, and the evidence was the homepage's listing of 'Government Debt and Deficit under the Maastricht Treaty 2025' plus its headline figures. The release plainly exists and is well named — this is the cheapest retry in this file. Fetch the release page itself and the node is mintable with an ESA 2010 edge as well."
+    },
+    {
+      "edge": "lt-edp-inventory -> lt-stat-government-finance",
+      "source": "lt-edp-inventory",
+      "target": null,
+      "reason": "no-document",
+      "why": "REJECTED AT MINT TIME. The one Lithuanian page reached (osp.stat.gov.lt/en/valdzios-sektoriaus-finansai1) is a general 'General government finance' overview presenting deficit and debt figures and the Maastricht 60%-of-GDP criterion, with NO excessive-deficit-procedure, ESA 2010 or Regulation 479/2009 language anywhere on it — the agent said so itself. The proposed edge was pure inference from subject-matter overlap. A dedicated Lithuanian EDP notification page, the analogue of Latvia's, was never found; Latvia's equivalent page is excellent, so one probably exists."
+    },
+    {
+      "edge": "ee-edp-inventory -> ee-statistics-estonia-government-finance",
+      "source": "ee-edp-inventory",
+      "target": null,
+      "reason": "no-document",
+      "why": "REJECTED AT MINT TIME AFTER AN INDEPENDENT RE-FETCH, which is the reason to keep this entry. The agent proposed the edge on the release's use of 'Maastricht debt' terminology, arguing it 'ties it directly' to the EDP. The orchestrating session re-fetched the page (stat.ee/en/news/general-government-debt-continued-grow-2024-...) and confirmed the opposite: it contains NO sentence mentioning the excessive deficit procedure, notification to Eurostat or the European Commission, or ESA 2010. The single Maastricht reference is definitional — 'General government debt, or Maastricht debt, refers to the liabilities of the general government units in the following categories: currency and deposits, debt securities and loans.' That is a glossary line, not a statement of the EDP relationship. Estonia needs a dedicated EDP-notification page; the news release is not it."
+    },
+    {
+      "edge": "cy-edp-inventory -> cy-cystat-government-finance",
+      "source": "cy-edp-inventory",
+      "target": null,
+      "reason": "no-document",
+      "why": "Nothing found. CyStat's homepage (cystat.gov.cy/en/) fetched successfully and showed NO government-finance, deficit, debt or EDP links at all — only farm structure, foreign trade, government employment, ICT and trade-index releases. A guessed subject-page URL 404'd. Cyprus's Ministry of Finance was never tried and is the obvious next place to look, since in several EU countries the finance ministry rather than the NSI fronts the EDP release."
+    },
+    {
+      "edge": "ro-edp-inventory -> ro-ins-government-finance",
+      "source": "ro-edp-inventory",
+      "target": null,
+      "reason": "deferred",
+      "why": "insse.ro returned ROBOTS_DISALLOWED again, exactly as it did in the morning's EU round where it cost Romania its IAPC node. An earlier insse.ro homepage fetch loaded but showed no government-finance section. Romania's Ministry of Finance (mfinante.gov.ro) was never attempted before the budget ran out and is the better target — Romania's EDP notification is co-compiled with the ministry."
+    },
+    {
+      "edge": "si-edp-inventory -> si-surs-government-finance",
+      "source": "si-edp-inventory",
+      "target": null,
+      "reason": "deferred",
+      "why": "SURS's stat.si returned ROBOTS_DISALLOWED on all three URLs tried (main news page, topic index, and the methodological-note PDF at StatWeb/File/DocSysFile/10165) — the same domain that partly blocked Slovenia in the morning's EU round, where its CPI methodological note DID load. So stat.si is selectively rather than wholly unreachable and is worth retrying on specific document paths. Untried alternatives: gov.si, and SURS's PxWeb data portal."
+    },
+    {
+      "edge": "ie-cso-government-finance-statistics -> ie-cso-national-accounts",
+      "source": "ie-cso-government-finance-statistics",
+      "target": "ie-cso-national-accounts",
+      "reason": "no-document",
+      "why": "NOT AN OVERSIGHT — the publisher warns against it. The CSO states \"Annual Government Finance Statistics are benchmarked to the most recent EDP notification and so may not be fully aligned with the Annual National Accounts and related publications.\" That is an explicit caution that the two series can disagree, which is the opposite of a data dependency. Contrast Finland, where Statistics Finland states the EDP deficit \"corresponds with the general government net lending/borrowing in the national accounts\" and the edge WAS minted. Two publishers, two genuinely different relationships — worth preserving as a data point about how much this varies."
+    },
+    {
+      "edge": "be-icn-nbb-government-deficit-debt -> be-nbb-national-accounts; sk-susr-government-finance -> sk-susr-national-accounts; hu-hcso-government-finance -> hu-hcso-national-accounts; hr-dzs-government-finance -> hr-dzs-national-accounts; pl-gus-government-finance -> pl-gus-national-accounts; lv-csp-government-finance -> lv-csp-national-accounts",
+      "source": null,
+      "target": null,
+      "reason": "no-document",
+      "why": "Grouped: six countries where the government-finance release plainly rests on the national accounts in practice, but no fetched page says so by name. The nearest misses are instructive about how thin this evidence usually is — Belgium: \"The detailed general government accounts are drawn up based on more complete information, which can lead to revision of the provisional estimates\" (does not name the national-accounts release); Slovakia: built from \"accounting statements, additional documents and information on subjects of the general government sector\" (names source documents, not the NA release); Croatia: both sit under the portal category 'BDP i nacionalni računi', which is a navigation label, not a stated dependency. Only Finland states the relationship outright, and only Ireland states its negation. Everyone else is silent."
+    },
+    {
+      "edge": "se-scb-government-finance -> esa-2010; hr-dzs-government-finance -> esa-2010; bg/mt -> esa-2010",
+      "source": "se-scb-government-finance",
+      "target": "esa-2010",
+      "reason": "no-document",
+      "why": "Sweden and Croatia both got their EDP edges but not the ESA 2010 one, because neither publisher states it on the pages that loaded. Sweden: no ESA 2010 mention on any SCB English page fetched, though a linked quality declaration was never opened. Croatia: the fetch tool explicitly confirmed the podaci.dzs.hr page has no ESA 2010 mention; a 2014 DZS publication whose title literally ends '(ESA 2010)' appeared in search results but was never fetched — that single fetch would close it."
+    },
+    {
+      "edge": "at-edp-inventory -> at-statistik-austria-oeffentlicher-schuldenstand",
+      "source": "at-edp-inventory",
+      "target": "at-statistik-austria-oeffentlicher-schuldenstand",
+      "reason": "no-document",
+      "why": "Austria's quarterly DEBT page carries the ESA 2010 statement but, unlike its deficit counterpart, contains no sentence tying it to the EU notification. So the debt node is wired to ESA 2010 only, while the deficit node carries the EDP-inventory and Eurostat edges. Asymmetric, but it is what the two pages actually say."
+    },
+    {
+      "edge": "ie-edp-inventory -> ie-cso-government-finance-statistics-quarterly",
+      "source": "ie-edp-inventory",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "The CSO runs a separate quarterly GFS(Q) series alongside the annual one, confirmed to exist (Q1-Q4 releases listed), which would mirror Germany's annual/quarterly split. Its page was reached but yielded no quotable methodology sentence within budget, so no node was minted."
+    }
+  ]
+}

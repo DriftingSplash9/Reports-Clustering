@@ -5,7 +5,7 @@ This file holds *state only* — what's landed, what's live, what's next.
 Standing rules, known traps, and architecture now live in `PLAYBOOK.md`
 (that file rarely changes; this one does, every turn).
 
-Last updated: **2026-08-26**
+Last updated: **2026-08-28**
 
 ---
 
@@ -19,10 +19,161 @@ agents by design — see PLAYBOOK.md rule 1, don't state it.
 
 ## 2. Current state
 
-**Live corpus: 3,383 reports · 2,595 dependencies** (unchanged this round —
-no data changes). `npm run validate` clean (120/120), `tsc --noEmit` clean,
-`npm run build` clean (1,498.64 kB) — re-verified in a fresh sandbox after
-this round's code change (new `clusterRepulsion.ts` force — see below).
+**Live corpus: 3,465 reports · 2,735 dependencies** (+82 / +140 across
+FOUR data rounds today — EU national chains, candidates-tier wiring, EU
+government finance, and targeted retries). `npm run validate` clean
+(120/120), `tsc --noEmit` clean, `npm run build` clean (1,498.64 kB) —
+verified in a fresh sandbox after each round. Zero-domestic-edge countries
+**102 → 77** over the day.
+
+**EU government finance + candidates-tier retries (rounds 3 and 4).**
+`src/data/research/eu-government-finance-2026-08-28.json` — 12 nodes, 36
+edges, 15 `_dropped`. `src/data/research/candidates-tier-retries-2026-08-28
+.json` — 4 edges, 7 `_dropped`. The first closes the gap round 1 left: every
+EU country except Germany had an `*-edp-inventory` node wired to Regulation
+479/2009 and ESA 2010 but to **no national data at all**. Eleven countries
+now have their own deficit/debt release wired in on the German template
+(AT gets two — deficit and debt are separate releases on different
+cadences): **AT BE IE FI SE LV PL HU SK HR GR**.
+
+**Nine EU countries did NOT land, and four of those were rejected by me on
+evidence quality rather than lost to unreachable sites** — worth knowing
+because the retries are cheap. Bulgaria and Malta rested on a page *title*
+and a *homepage listing* (PLAYBOOK rule 16); Lithuania's page carried no
+EDP, ESA or Regulation language at all; Spain's rested on an INE catalogue
+record for a Banco de España series plus an inference. **Estonia is the one
+to note**: the agent proposed the edge on the release's use of "Maastricht
+debt", I re-fetched the page, and it contains no EDP, Eurostat or ESA 2010
+sentence whatever — the single Maastricht reference is a glossary line.
+Malta and Bulgaria are the cheapest retries in the file (one fetch each).
+Unreachable rather than unproven: PT (ine.pt, third failure today), RO
+(insse.ro), SI (stat.si), CY (nothing on CyStat at all — try the finance
+ministry).
+
+**Poland went the other way and is a reminder to re-fetch**: the agent
+reported a summarised paraphrase; the page actually says "Prezes GUS
+przesłał do Komisji Europejskiej (Eurostat) dane... (tzw. notyfikacja
+fiskalna)" and names both Regulation 479/2009 and ESA 2010 in full.
+
+**Retries: Iraq's oil-fiscal chain is now on the primary law.** Budget Law
+No. 13 of 2023 was found at moj.gov.iq, and both edges rejected in round 2
+are minted on its Article 1 with the Arabic quoted verbatim; the two round-2
+`_dropped` entries are marked `resolved`. A third Iraqi edge came off
+COSIT's own GDP report and is a genuine surprise: **Iraq's national accounts
+are classified on ISIC Revision 2** — a 1968 classification, superseded
+three times. Not a transcription error; the report says Revision 2
+explicitly. Iraq's SNA vintage is still unknown because the one document
+that would settle it is a `.docx` the fetch proxy refuses (PLAYBOOK 19).
+
+**Thailand's GPP question is now closed negative — stop retrying it.**
+Eleven off-domain routes were tried for NESDC's Gross Provincial Product
+methodology; it appears to exist only on nesdc.go.th, which is entirely
+unfetchable. The five GPP edges are unavailable without a different access
+route. The consolation: ASEANstats DID supply Thailand's SNA 2008 basis
+off-domain, which closes the corroboration caveat round 2 left on that
+already-live edge (now PLAYBOOK 18 — ASEANstats and ilo.org are the two
+reliable workarounds for blocked national statistical offices).
+
+**Candidates-tier wiring, first pass (2026-08-28, second round of the day).**
+`src/data/research/candidates-tier-wiring-2026-08-28.json` — 1 node, 16
+edges, 24 `_dropped`. Target was the seven countries carrying the most
+completely unwired nodes: Vietnam (48 nodes, 0 edges), Iran (34), Thailand
+(25), Iraq (22), Myanmar (16), Yemen (15), Syria (13). Result by country:
+**Thailand 6, Vietnam 5, Iraq 2, Myanmar 2, Iran 1, Yemen 0, Syria 0.**
+Zero-domestic-edge countries **81 → 78**; countries with no edge of any kind
+are now down to nine (CU ER LR NI NR SC TJ TM TV).
+
+**The yield being this uneven IS the finding, and it should change how the
+rest of this tier gets scoped.** The edge class that survives evidence here
+is the international-standards bridge — SNA, BPM6, MFSMCG, ISIC, ICLS,
+e-GDDS, SDDS — because these countries' sites are thin on compilation
+methodology but do state which manual they follow. The obvious *domestic*
+chains (national accounts using industrial/agricultural/oil output, deficit
+from budget execution, NPLs from banking-system reporting, public debt from
+the budget) were hunted in all seven countries and are essentially
+undocumented on the publishers' own sites. Don't scope the next pass around
+them. The one systematic exception is central-bank metadata: Thailand's BOT
+metadata tables are excellent and produced six of the sixteen edges,
+including two real domestic data chains (BOP ← Public Debt Management
+Office, BOP ← Ministry of Tourism and Sport).
+
+**Eight proposed edges were rejected at mint time and this is where the
+value is.** Vietnam's VSIC→ISIC link had only third-party evidence
+(classification.codes). Iraq's oil-revenue chain — the defining structure of
+that economy — rested on a secondary analyst PDF citing Budget Law 13 of
+2023 by article; fetch the law and it becomes mintable. Two edges duplicated
+ones already live (`vn-gso -> imf-e-gdds`, `th-bop -> imf-sdds`), now
+recorded as independent corroborations. And six Iran edges are **held
+pending a ruling from you** — see below.
+
+**Two things need your decision.** (1) **Iran's SNA vintage.** The corpus has
+`ir-national-accounts -> sna-2008` live. SCI's own current page says
+"Theoretically, regional accounts, just like national accounts, follow the
+latest revision of the system of national accounts SNA 93", and the UN
+Statistics Division's Iran record says 1993 SNA too. Per rule 13 nothing was
+overridden: the live edge is caveated, and six SNA-93 edges (national
+accounts plus all five provincial GRDP nodes) are held. (2) **Generic
+COICOP.** Iran and Iraq both name "COICOP" in their own documents without
+naming a revision, and the corpus has only `un-coicop-2018` and
+`un-coicop-hbs-1999`. Two edges are held rather than guess an edition. The
+fix is a modelling choice — mint a revision-neutral `un-coicop` parent, or
+accept that generic citations can't be wired.
+
+**Yemen and Syria returned zero edges, and that is a real result, not a
+failed search.** Yemen: the only substantive document reachable is the UN
+Statistics Division record, which says Yemen is on the **1968 SNA**, base
+year 1990, last submission 2008 — so it rules out the SNA-93/2008 edges
+rather than supporting them, and `sna-1968` exists as a node if a
+Yemeni-side source can be found. Syria: `cbssyr.sy` does not respond at all,
+and the CBS itself no longer exists — merged and renamed the **Syrian
+Planning and Statistics Commission** under Decree No. 27 of 2025. Both
+countries turned up **repurposed NSO domains that rank as the real thing**
+(`cso-yemen.org`, `cbssyr.org`) — now PLAYBOOK rule 15, do not cite either.
+
+**Three new PLAYBOOK rules came out of this round** (14-17): the mirror image
+of rule 10 (check new edges against other slices' `_dropped` notes — the
+validator caught `mm-national-accounts -> sna-1993` this way, and the older
+note turned out to hold the better evidence), the hijacked domains, "a page
+title is not evidence", and the Eurostat metadata URL patterns.
+
+**EU-27 national chains landed (Thomas, 2026-08-28: "so what are all the
+countries left to research?" → "go ahead where you think best to look").**
+The answer to the question was that coverage is near-total (185 of 193 UN
+members have at least one node; only Andorra, Dominica, El Salvador,
+Grenada, Monaco, San Marino, St Kitts & Nevis and St Vincent are untouched,
+and North Korea was researched in the 2026-08-22 queue and correctly
+returned nothing) — what is missing is WIRING, not countries. 102 countries
+had zero country-internal dependency edges. The largest single shape in that
+102 was 21 EU/EEA states that each had exactly three nodes — EDP inventory,
+ESS peer review report, national accounts — hanging off the Eurostat/ESA
+hubs and nothing else. This round wired all 21: `src/data/research/eu-
+national-chains-2026-08-28.json`, 69 nodes and 84 edges, one price index +
+household budget survey + labour force survey per country plus the three
+documented dependencies between them (CPI/HICP weights from national-
+accounts household final consumption expenditure, CPI/HICP weights from the
+HBS, national-accounts employment from the LFS). Zero-domestic-edge
+countries: **102 → 81**. It also resolves the granularity question left open
+in `eurostat-hicp.json`'s `_open_questions` since 2026-08-05 — `eurostat-
+hicp` now has 21 incoming `uses_data_from` edges from the national HICPs it
+aggregates, rather than being split into per-country nodes.
+
+Method: 21 parallel subagents, one per country, the pattern recorded in
+project memory. Four load-bearing quotes (PL, IE, AT, GR) were independently
+re-fetched and confirmed verbatim by the orchestrating session before
+minting. **The reusable find is two Eurostat URL patterns** —
+`prc_hicp_esmshi4_<cc>.htm` (states exactly where each country's HICP
+weights come from, and that data are transmitted to Eurostat) and
+`employ_simslfs_<cc>.htm` (states as an explicit Y/N field whether the LFS
+is the national-accounts employment source). The HICP filename is versioned
+per country and NOT uniform: `hi4` for PL/EL/ES/HU/HR/BG/LT, `hi3` for
+SK/SI/EE/LV/MT/CY/IS, 404 for FI. Try hi4, fall back to hi3.
+
+Negative findings in this round are data, not gaps: Cyprus and Slovenia are
+documented as NOT using the LFS for national accounts, so they correctly
+have no such edge; Sweden's CPI weights come from national accounts and NOT
+from its HBS, against the EU pattern. Six countries' `part_of`-style
+"expected" edges were dropped with quotes explaining why — see `_dropped` in
+the slice.
 
 **Cluster vs cluster repulsion shipped, first pass (Thomas, 2026-08-27:
 "let's try the proposed fix — cluster vs cluster repulsion").** Built the
@@ -337,8 +488,37 @@ section only needs to say where things stand now, not how they got here.
 
 ### [Agent] — next build rounds
 
-3. **New Grok research round** — the 2026-08-22 queue is fully worked;
-    next round needs scoping from scratch.
+3. **EU follow-ups** (from the 2026-08-28 rounds, in priority order).
+    (a) **Nine countries still have no government-finance node** — see
+    Current State. Malta and Bulgaria are one fetch each; Lithuania and
+    Spain need a better page; PT/RO/SI/CY are blocked or empty. (b) **Portugal and Romania are the two thin countries** —
+    ine.pt and insse.ro both returned ROBOTS_DISALLOWED / robots.txt
+    ConnectTimeout on most fetches (reproduced independently, so it reads
+    as an intermittent fault rather than a real disallow). Portugal has no
+    LFS node at all and `pt-ine-idef`'s url points at the IPC release that
+    evidences it rather than its own page; Romania has no IAPC node and so
+    no edge into `eurostat-hicp`. Both are worth one retry. (c) Three
+    national-accounts←LFS edges are deferred on evidence rather than
+    substance — Poland, Greece and Iceland; Iceland is the only country
+    with no `employ_simslfs_is.htm` page at all.
+4. **Remaining zero-domestic-edge countries: 77.** The candidates tier has
+    had its first pass (see Current State); the highest-value single retries
+    left in it are **NESDC Thailand** (the whole nesdc.go.th domain is
+    unfetchable, which alone costs the SNA basis edge plus all five Gross
+    Provincial Product edges — one working document yields six edges),
+    **Iraq's Budget Law 13 of 2023** (two edges), **Iraq's GDP/National
+    Income metadata document** on cosit.gov.iq (named, never opened, one
+    fetch away), and **Vietnam's VSIC 2018 promulgating decision**. Beyond
+    that the concentration is **31 single-node stubs** (`AG AL BA BZ CH CU FM HT
+    KG KI LC LI MD ME MK NI NR PG PW RS SB TJ TM TO TV UA UZ VU WS XK`),
+    leftovers of the "new countries" seeding rounds. Ukraine, Switzerland,
+    Serbia, Uzbekistan and the whole Western Balkans sitting at one node
+    each is the most conspicuous under-coverage left in the corpus; Cuba,
+    Tajikistan, Turkmenistan, Nicaragua, Nauru and Tuvalu have a node with
+    no edge at all and are invisible in the graph.
+5. **New Grok research round** — the 2026-08-22 queue is fully worked;
+    next round needs scoping from scratch. The 2026-08-28 EU round was done
+    without Grok, by parallel subagents, at Thomas's request.
 4. **Stale-URL research remainder** — 19 of the original 37 in
     `notes/stale-urls-2026-08-20.md` are still open: Japan (7 reports,
     several ministries — one duplicate URL worth checking whether

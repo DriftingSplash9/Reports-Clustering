@@ -1,0 +1,85 @@
+{
+  "_slice": "candidates-tier-retries-2026-08-28",
+  "_researched": "2026-08-28",
+  "_status": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader).",
+  "_note": "Targeted retries of four named leads left open by candidates-tier-wiring-2026-08-28.json earlier the same day. Four edges, all from sources that the earlier round had named but not reached. THE HEADLINE IS IRAQ: the oil-fiscal chain, which is the defining structure of that economy, was rejected in the first pass because the only evidence was a secondary analyst PDF quoting Budget Law No. 13 of 2023 by article number. This round found the law itself, published by Iraq's Ministry of Justice, and both edges are now minted on the primary instrument with the Arabic quoted verbatim. A third Iraqi edge came out of COSIT's own GDP report — and it is a genuine surprise: Iraq's national accounts are classified on **ISIC Revision 2**, a 1968-vintage classification, not Rev. 3 or 4. VIETNAM: the ICLS edge is minted, and the orchestrating session's re-fetch of the ILO page found much stronger wording than the researching agent reported — the agent hedged that ICLS was not named in its quoted sentence, but the page in fact says \"The standards were adopted in 2013 by the 19th International Conference of Labour Statisticians, or ICLS19\" and \"Viet Nam officially adopted the new standards in January this year.\" THREE OF THE FOUR LEADS CLOSED NEGATIVE, which is itself worth having: Thailand's Gross Provincial Product methodology does not appear to exist anywhere off nesdc.go.th; Vietnam's VSIC-to-ISIC derivation is not stated in the promulgating decision itself; and Iraq's SNA vintage is still unknown because the one document that would settle it is a .docx that the fetch proxy refuses.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "iq-oil-revenue",
+      "target_report_id": "iq-oil-exports",
+      "relationship_type": "calculated_from",
+      "basis": "Article 1 (اولا) of Iraq's Federal Budget Law No. 13 of 2023, published by the Ministry of Justice, states: \"احتساب الإيرادات المخمنة من تصدير النفط الخام على أساس معدل سعر تصدير قدره (٧٠) دولار للبرميل الواحد ومعدل تصدير قدره (٣,٥٠٠,٠٠٠) برميل يومياً\" (Estimated crude oil export revenues are calculated on the basis of an assumed export price of $70 per barrel and an export rate of 3,500,000 barrels per day), yielding the law's oil revenue figure of 117,252,500,000 thousand dinars. Oil revenue is a stated arithmetic function of the export volume. THIS REPLACES the secondary analyst PDF that the first pass rejected: the source here is the law itself on moj.gov.iq.",
+      "evidence_url": "https://moj.gov.iq/upload/pdf/4726_72.pdf"
+    },
+    {
+      "source_report_id": "iq-federal-budget",
+      "target_report_id": "iq-oil-revenue",
+      "relationship_type": "calculated_from",
+      "basis": "The revenue table in Article 1 of Law No. 13 of 2023 states total budget revenue as the sum of its oil and non-oil components — \"اجمالـــي الايـــرادات = ( أ + ب )\", where (أ) النفطية [oil revenues] = 117.25 trillion IQD and (ب) [non-oil revenues] = 17.3 trillion IQD — reaching the law's stated total: \"تقدر إيرادات الموازنة العامة الاتحادية للسنة المالية (٢٠٢٣) بمبلغ (١٣٤,٥٥٢,٩١٩,٠٦٣) ألف دينار\" (Federal budget revenues for FY2023 are estimated at 134,552,919,063 thousand dinars).",
+      "evidence_url": "https://moj.gov.iq/upload/pdf/4726_72.pdf"
+    },
+    {
+      "source_report_id": "iq-national-accounts",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "COSIT's own preliminary and quarterly GDP report for 2022 states in its introduction: \"ونود الإشارة إلى إن تم أستخدام التصنيف الدولي للأنشطة الاقتصادية التنقيح الثاني (ISIC 2) في جداول التقرير\" (We note that the International Standard Industrial Classification, Revision 2 (ISIC Rev. 2), was used in the report's tables). WORTH FLAGGING: ISIC Rev. 2 dates from 1968 and was superseded in 1989, 2002 and 2008 — Iraq's national accounts are classified on a vintage six decades old. That is a substantive finding about the corpus, not a transcription error; the report says Revision 2 explicitly.",
+      "evidence_url": "https://cosit.gov.iq/documents/national_accounts/national_income/reports/gdp/%D8%A7%D9%84%D8%A7%D9%88%D9%84%D9%8A%D8%A9%20%D9%88%D8%A7%D9%84%D9%81%D8%B5%D9%84%D9%8A%D8%A9%20%D9%84%D9%84%D9%86%D8%A7%D8%AA%D8%AC%20%202022.pdf"
+    },
+    {
+      "source_report_id": "vn-labour",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The ILO's own article on Vietnam's labour statistics states: \"The standards were adopted in 2013 by the 19th International Conference of Labour Statisticians, or ICLS19\"; \"In 2014, with ILO's technical support, Viet Nam became one of the 10 pilot countries that tested them in their Labour Force Surveys\"; and \"Viet Nam officially adopted the new standards in January this year and applied them in its report of the first quarter.\" All three sentences were obtained by the orchestrating session re-fetching the page — the researching agent had reported only the middle one and had explicitly hedged that ICLS was not named in its quote, which turned out to be an artefact of what its fetch returned rather than of the page.",
+      "evidence_url": "https://www.ilo.org/resource/news/viet-nam-adopts-advanced-statistical-standards-better-present-labour-market"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "th-grdp-bangkok / chiangmai / chonburi / phuket / rayong -> th-national-accounts",
+      "source": "th-grdp-bangkok",
+      "target": "th-national-accounts",
+      "reason": "no-document",
+      "why": "CLOSED NEGATIVE AFTER A SECOND THOROUGH PASS — stop retrying this. Eleven off-domain routes were tried for NESDC's Gross Provincial Product methodology, since nesdc.go.th itself is entirely unfetchable: UNSD cInfo (Thailand returns 'no information available'), ASEANstats (its Thailand SNA metadata page exists and is good, but covers only the national series with no GPP/GRP language, and no GPP-specific ASEANstats file exists), a Bank of Thailand metadata PDF (confirms NESDC as the GDP source, no GPP content), a UNESCAP 'Country Presentation: Thailand' PDF (turned out to be about railways), a World Bank Thailand Economic Monitor (cites NESDC as a data source, no methodology), three Wikipedia articles, the ADB Data Library, a regional-GDP data site, and a Nature/Scientific Data sub-national output paper (general principle only, Thailand never mentioned). The ONLY source stating that NESDC 'employs this method to ensure consistency with national GDP estimation' was Grokipedia, an AI-generated tertiary wiki whose own citation is an unfetchable nesdc.go.th URL — correctly refused by the researching agent. NESDC's GPP methodology appears to exist only on its own domain. Five edges remain unavailable and this should not be scoped again without a different access route."
+    },
+    {
+      "edge": "th-national-accounts -> sna-2008",
+      "source": "th-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "SOLVED OFF-DOMAIN, and the edge turns out to ALREADY BE LIVE in the corpus — so this is corroboration rather than a new edge, caught by the corpus-wide duplicate check at mint time. ASEANstats' Thailand national accounts metadata page states: \"Both of the annual national accounts and the QGDP are in line with the 2008 SNA, with chained volume measures to express the constant terms,\" and separately \"The Revision of the Royal Decree assigned responsibility for the production of national accounts statistics to Office of the National Economic and Social Development Council (NESDC).\" This closes the caveat recorded against this edge in candidates-tier-wiring-2026-08-28.json, which noted the NESDC-side corroboration was still owed: it is now owed no longer, and the route that worked was cdn.aseanstats.org, the same publisher that supplied Myanmar's BPM6 evidence. ASEANstats is the reliable workaround for unreachable ASEAN national statistical offices."
+    },
+    {
+      "edge": "vn-iip -> isic",
+      "source": "vn-iip",
+      "target": "isic",
+      "reason": "no-document",
+      "why": "CLOSED NEGATIVE AT THE PRIMARY SOURCE, which is a more interesting result than the first pass's. The promulgating instrument was found and read — Quyết định 27/2018/QĐ-TTg — via three separate publishers (vanban.chinhphu.vn, the Government's own portal; thuvienphapluat.vn; luatvietnam.vn). Its preamble and Điều 1-2 cite only the 2015 Law on Government Organization, the 2015 Statistics Law and MPI's proposal. NO mention of ISIC, 'phân ngành chuẩn quốc tế' or the United Nations anywhere in the text these three publishers returned. So the VSIC-ISIC derivation, though real, is not stated in the decision's operative text. REMAINING LEAD: vanban.chinhphu.vn exposes three signed PDF attachments that WebFetch cannot open (it converts HTML only) — a formal ISIC correspondence table, if one exists, would be in those. Also untried: whether Quyết định 36/2025/QĐ-TTg, the 2025 successor, states the international basis more explicitly."
+    },
+    {
+      "edge": "iq-national-accounts -> sna-2008 / sna-1993 / sna-1968",
+      "source": "iq-national-accounts",
+      "target": "sna-2008",
+      "reason": "unreadable-source",
+      "why": "BLOCKED BY A FILE FORMAT, not by a domain — a distinct failure mode worth recording. COSIT's own metadata document, `البيانات الوصفية للناتج المحلي الاجمالي والدخل القومي.docx`, is linked from both cosit.gov.iq/ar/national-accounts and its /income sub-page and would settle Iraq's SNA vintage. WebFetch returned PROXY_REJECTED (HTTP 403) on all four attempts: percent-encoded without www, with www, the raw Arabic-filename URL, and via a reader proxy. PDFs and HTML on the identical cosit.gov.iq domain fetched fine in the same session, so it is the .docx binary being refused, not the site. Two fallbacks were checked for an SNA statement and both came up empty: the /ar/national-accounts landing page, and COSIT's 2022 GDP report PDF (searched for 'نظام الحسابات القومية', 'SNA', '1968', '1993', '2008'). Iraq's SNA vintage remains unknown. Given the ISIC Rev. 2 finding in this same file, do not assume it is a recent edition."
+    },
+    {
+      "edge": "iq-wage-bill -> iq-federal-budget",
+      "source": "iq-wage-bill",
+      "target": "iq-federal-budget",
+      "reason": "deferred",
+      "why": "Budget Law No. 13 of 2023 was successfully fetched and Article 1's revenue side fully quoted, but a targeted query for the wages and salaries clause (الاجور والرواتب) surfaced only a general reference to operating expenditures (النفقات التشغيلية). The law is long and only Article 1 and the revenue table were closely read; the wage-bill provision is likely in a later article. One more targeted fetch of the same PDF should settle it — the document is reachable, which is the hard part."
+    },
+    {
+      "edge": "vn-population -> un-census-principles",
+      "source": "vn-population",
+      "target": "un-census-principles",
+      "reason": "no-document",
+      "why": "Three UN-family documents were fetched as substitutes for the robots-blocked GSO census pages — vietnam.un.org's 2009-census fertility/mortality monograph, UNFPA Vietnam's 2019-census results page, and GSO's 2021 population-ageing monograph PDF hosted by UNFPA. All three confirm UNFPA gave \"sự hỗ trợ kỹ thuật\" (technical support), but NONE states the census followed the UN Principles and Recommendations. Technical assistance is not methodological adoption and the edge was not minted on it. LEAD: the 2019 Census 'Completed Results' full report and its in-depth analysis report were located by search but never fetched."
+    },
+    {
+      "edge": "webapps.ilo.org/surveyLib — the ILO microdata catalogue","source":null,"target":null,"reason":"note",
+      "why": "OPERATIONAL NOTE for future rounds: the ILO's survey/microdata catalogue at webapps.ilo.org/surveyLib is retired — it now 302-redirects to an ILO 410 Gone page. That lead is closed permanently. ilo.org's main site remains an excellent source for national labour-force-survey methodology and supplied both this round's Vietnam ICLS edge and the earlier round's Iraq ICLS edge, in each case where the national statistical office's own pages were unreachable."
+    }
+  ]
+}

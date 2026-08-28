@@ -89,6 +89,66 @@ Full text also in `REPORTS.md`.
     not automatically right just because it's freshly verified.** Caveat the
     existing edge, defer the new claim, don't silently override — same
     principle as rules 2/3 applied to edges that already exist.
+14. **Rule 10 has a mirror image, and it is the one that bites.** Rule 10
+    checks THIS round's `_dropped` entries against live edges. Also check
+    THIS round's new EDGES against every OTHER slice's existing `_dropped`
+    notes — minting an edge that some earlier round recorded as
+    `no-document` silently makes that note a lie, and `npm run validate`
+    fails on it ("note(s) describe an edge that IS in the graph"). Caught
+    exactly this way on 2026-08-28 with `mm-national-accounts -> sna-1993`.
+    **Read the older note before assuming your new edge wins**: in that
+    case the old note contained the better evidence (Myanmar is on the
+    1968 SNA with 93/2008 "being implemented"), and the new edge was the
+    one that had to go. A pre-mint checker that only looks one way will
+    pass a slice the validator then rejects.
+15. **Two dead NSO domains have been repurposed and both rank in search
+    results as the real thing. Never cite either.** `cso-yemen.org` now
+    serves unrelated cultural-tourism marketing copy with no statistical
+    content (the live CSO domain, `cso-yemen.com`, is simply dead).
+    `cbssyr.org` — note `.org`, not the historical `.sy` — presents itself
+    as "The Central Bureau of Statistics Syria" but carries embedded
+    adult-content spam links and no data. Both were surfaced by ordinary
+    searching in the 2026-08-28 round. Related institutional fact worth
+    knowing before searching Syria again: the Syrian CBS was merged into
+    the General Authority for Planning and International Cooperation and
+    renamed the **Syrian Planning and Statistics Commission** under Decree
+    No. 27 of 2025 — search that name, not "CBS".
+16. **A page title is not evidence.** GSO Vietnam publishes a page titled
+    "System of National Account 2008" whose body is generic UN
+    encouragement language ("We encourage all countries to compile...")
+    with no Vietnam-specific statement of adoption. Open the body.
+17. **Eurostat's national reference metadata is the highest-yield source
+    for any "which standard / which source" question about an EU or EEA
+    country**, and its filename is versioned per country, not uniform:
+    `prc_hicp_esmshi4_<cc>.htm` for PL/EL/ES/HU/HR/BG/LT,
+    `prc_hicp_esmshi3_<cc>.htm` for SK/SI/EE/LV/MT/CY/IS, 404 for FI. Try
+    hi4, fall back to hi3. Greece is `_el`, not `_gr`.
+    `employ_simslfs_<cc>.htm` answers "is the LFS the national-accounts
+    employment source" as an explicit Y/N field; Iceland has no such page.
+    **There is NO government-finance equivalent.** `gov_10dd_edpt1_esms_
+    <cc>.htm` and `gov_10dd_esms_<cc>.htm` 404 for every country tried
+    (bg ro el cy mt pl hu sk si hr, across two independent agents); only
+    the non-country-specific `gov_10dd_esms.htm` exists. For deficit and
+    debt, go to the NSI's own EDP release page instead — 11 of 20 state
+    the notification obligation in directly quotable terms.
+18. **ASEANstats is the reliable workaround for an unreachable ASEAN
+    national statistical office.** `cdn.aseanstats.org/public/docs/
+    metadata/...` and `cdn.aseanstats.org/public/data/statics/macro/
+    <CC>_SNA_Metadata.html` carry country-supplied metadata that names
+    compilation manuals and agencies. It supplied Myanmar's BPM6 basis
+    when csostat.gov.mm had nothing, and Thailand's SNA 2008 basis when
+    the entire nesdc.go.th domain proved unfetchable. Likewise **ilo.org
+    itself** hosts national labour-force-survey reports and articles that
+    state ICLS compliance when the NSO's own pages are blocked — it
+    supplied both Iraq's and Vietnam's ICLS edges. (The old ILO microdata
+    catalogue at `webapps.ilo.org/surveyLib` is retired — 410 Gone.)
+19. **Some publisher domains are reachable for some file types and not
+    others, and the error does not say so.** cosit.gov.iq serves PDFs and
+    HTML fine but its `.docx` metadata document is refused with
+    PROXY_REJECTED on every URL form. slovak.statistics.sk rejects its
+    wps-portal HTML pages with 403 but serves the same content through
+    `ExportPdf2/PdfExportSrvlt?Document=<guid>`. Before concluding a site
+    is blocked, try a different file type or export path on it.
 
 **Process rule (Thomas, 2026-08-20, revised 2026-08-25 as part of the
 handoff simplification).** `HANDOFF.md` is now short — edit its Current
