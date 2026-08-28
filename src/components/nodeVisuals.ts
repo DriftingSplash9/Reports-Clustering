@@ -264,10 +264,28 @@ export function nodeMaterial({
     // Fixed, not radius-scaled like `rimPower` — the rim wants a THIN band
     // regardless of size (so `rimPower` grows with radius to keep it thin in
     // screen pixels); soft wants the opposite, a WIDE falloff that reads the
-    // same qualitative "no hard edge" at every size. 1.1 keeps most of the
-    // facing hemisphere near full alpha and lets only the outer band fade.
+    // same qualitative "no hard edge" at every size.
+    //
+    // **0.5, not the original 1.1 — the geometry math the old value ignored.**
+    // `facing` is ~`sqrt(1 - (r/R)^2)` for screen-space radius r on a sphere
+    // of screen radius R, which stays close to 1 across most of the visible
+    // disc and only collapses toward 0 in the outermost sliver — at r/R=0.8
+    // facing is still 0.6, at 0.9 it's 0.44. `pow(1-facing, power)` at
+    // power=1.1 is therefore near-linear in the wrong variable: the
+    // resulting alpha drop is real but confined to a geometric band a few
+    // SCREEN PIXELS wide on a node this size in a 3,465-node scene — thin
+    // enough that antialiasing erases it. Never pixel-verified before
+    // 2026-08-28 (HANDOFF item 3); verified then and it read as a plain
+    // opaque sphere, indistinguishable from an ordinary node even isolated
+    // against pure black. 0.5 pulls the halfway-alpha point out to ~70% of
+    // the radius (pow(0.286, 0.5) ≈ 0.53), so the fade covers a third of the
+    // visible disc instead of a sliver of it — a real gradient, not a
+    // geometry artefact. Paired with a breathing emissive pulse on these
+    // nodes (see `CONTINUOUS_PULSE_FLOOR` in InfluenceGraph.tsx) so there is
+    // a motion cue too, not just a static gradient that still has to be
+    // looked at in isolation to register.
     shader.uniforms.uSoft = { value: soft ? 1 : 0 }
-    shader.uniforms.uSoftPower = { value: 1.1 }
+    shader.uniforms.uSoftPower = { value: 0.5 }
 
     shader.fragmentShader = shader.fragmentShader
       .replace(

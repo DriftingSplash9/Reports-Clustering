@@ -266,3 +266,15 @@ everything) — it measurably improves citation discipline.
   `_dropped` entries. `gy-caricom` left untouched (Guyana's own membership
   record, still zero edges — a separate rescope question, not this pass's
   call). Corpus 3,385/2,596, validate 120/120, tsc/build clean.
+- **Prompt queued 2026-08-28, not yet sent** (`notes/grok-prompt-unlinked-2026-08-28.md`) —
+  4 narrowly-scoped leads left over from the same-day ID/TW/PH/MX unlinked-node
+  deep-research round (parallel subagents, not Grok — see
+  `unlinked_nodes_wiring_round1_2026-08-28` memory): 2 Taiwan classification/CPI
+  edges and 1 Philippines financial-system edge, all blocked by TLS/403 issues
+  on the same domain rather than absent evidence (our agents found the claims
+  indexed verbatim by search engines but couldn't read the primary page), plus
+  1 Mexico municipal-profile edge set (a document template already confirmed
+  for 3 sibling alcaldías, presumably the same for the 4th). All 4 name real
+  existing corpus ids — no new nodes expected. Attach GROKREADME.md alongside
+  it, per the usual process. Tell Thomas which 2 files to attach, separately
+  from the prompt block, per §0.

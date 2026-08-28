@@ -1,0 +1,88 @@
+{
+  "_slice": "tw-unlinked-wiring-2026-08-28",
+  "_researched": "2026-08-28",
+  "_status": "verified",
+  "_note": "Deepest wiring pass yet on Taiwan's unlinked-node backlog (89/108 unlinked as of this round's start). Found a genuinely rare domestic data chain (MAC's Cross-Strait Economic Statistics compilation carries explicit per-row data-source footnotes naming the source agency) plus two clean IMF-SDDS/WHO-ICD-10 bridges. Several strong leads (Taiwan's ISIC-derived industrial classification, COICOP-2018-based CPI) were blocked by broken TLS / 403s on ws.dgbas.gov.tw and www.stat.gov.tw and are logged as deferred rather than guessed.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "tw-mac-cross-strait-monthly",
+      "target_report_id": "tw-trade-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "MAC's Cross-Strait Economic Statistics table lists a data-source (資料來源) footnote per row; the cross-strait trade row cites \"財政部統計處\" (Ministry of Finance Statistics Department, i.e. Customs-based trade statistics).",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf"
+    },
+    {
+      "source_report_id": "tw-mac-cross-strait-monthly",
+      "target_report_id": "tw-investment-commission",
+      "relationship_type": "uses_data_from",
+      "basis": "Same MAC table, row for enterprise investment in Mainland China cites \"經濟部投資審議委員會\" (MOEA Investment Commission).",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf"
+    },
+    {
+      "source_report_id": "tw-cross-strait-stats",
+      "target_report_id": "tw-trade-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "tw-cross-strait-stats is MAC's near-identical general compilation node covering the same underlying publication as tw-mac-cross-strait-monthly; its trade rows are sourced from the same \"財政部統計處\" (Ministry of Finance Statistics Department) footnote.",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf"
+    },
+    {
+      "source_report_id": "tw-cross-strait-stats",
+      "target_report_id": "tw-investment-commission",
+      "relationship_type": "uses_data_from",
+      "basis": "Same MAC compilation, investment row sourced from \"經濟部投資審議委員會\" (MOEA Investment Commission).",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf"
+    },
+    {
+      "source_report_id": "tw-people-exchanges",
+      "target_report_id": "tw-tourism-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "Same MAC table, row for outbound cross-strait travel (兩岸人員往來（國人赴中國大陸）) cites \"交通部觀光署\" (Tourism Administration, MOTC).",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf"
+    },
+    {
+      "source_report_id": "tw-cbc",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CBC's own SDDS hub page: \"The SDDS/CBC provides most information on the financial and external sectors of the Republic of China about the Special Data Dissemination Standard (SDDS), which was established by the International Monetary Fund (IMF) in 1996.\"",
+      "evidence_url": "https://www.cbc.gov.tw/en/lp-515-2.html"
+    },
+    {
+      "source_report_id": "tw-national-statistics-portal",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "DGBAS's SDDS index page, hosted on the portal's own listed URL: \"The DSBB/DGBAS provides information on the real, fiscal, financial and external sectors of the Republic of China about the Special Data Dissemination Standard (SDDS), which was established by the International Monetary Fund (IMF) in 1996.\"",
+      "evidence_url": "https://eng.stat.gov.tw/sdds/"
+    },
+    {
+      "source_report_id": "tw-national-health-insurance",
+      "target_report_id": "who-icd-10",
+      "relationship_type": "methodology_depends_on",
+      "basis": "National Health Insurance Administration's own program document, titled for the coding-quality incentive tied to the mandated coding-system transition: \"105年全民健康保險國際疾病分類第十版(ICD-10-CM/PCS)編碼品質提升獎勵方案\" confirming NHI claims/statistics are coded under ICD-10.",
+      "evidence_url": "https://www.nhi.gov.tw/ch/dl-75144-b056f98a09c745b0b8e6b30c112b8733-1.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tw-business-demography -> isic",
+      "source": "tw-business-demography",
+      "target": "isic",
+      "reason": "deferred",
+      "why": "Strong circumstantial evidence exists: DGBAS's own 行業統計分類 revision documents are indexed verbatim by search engines stating the classification is ISIC-derived (\"行業統計分類第12次修正草案依聯合國最新國際標準行業分類...\"), but every hosting URL was unreachable to the fetch tool: ws.dgbas.gov.tw has a broken TLS certificate chain (curl confirms CERTIFICATE_VERIFY_FAILED, not a proxy issue), www.stat.gov.tw returns HTTP 403 to fetch for PDFs specifically, and ebook.dgbas.gov.tw / census(portal).dgbas.gov.tw also 403. No verbatim quote could be confirmed. Worth a revisit with a real browser tool rather than WebFetch."
+    },
+    {
+      "edge": "tw-price-detail -> un-coicop-2018",
+      "source": "tw-price-detail",
+      "target": "un-coicop-2018",
+      "reason": "deferred",
+      "why": "DGBAS hosts a document literally titled \"COICOP 2018\" plus a CPI 編製方法說明 PDF, both located via search, but both live on the same blocked domains as the ISIC lead above (ws.dgbas.gov.tw TLS failure, www.stat.gov.tw 403). Could not confirm the applicable text verbatim."
+    },
+    {
+      "edge": "tw-fx-reserves -> imf-bpm6",
+      "source": "tw-fx-reserves",
+      "target": "imf-bpm6",
+      "reason": "no-document",
+      "why": "CBC's own SDDS page for international reserves explicitly states under Quality: \"Documentation on the methodology is not available.\" No BPM6 or other methodology-manual citation found for this specific series (a separate, unlisted IIP series does cite BPM6, but that is a different report, not this node)."
+    }
+  ]
+}

@@ -328,6 +328,21 @@ const ORB_PULSE_PERIOD_SECONDS = 2.6
 const ORB_PULSE_FLOOR = 0.42
 /** How much the orb physically swells at the top of the breath. */
 const ORB_PULSE_SCALE = 0.07
+/**
+ * Same breath, extended to individual continuous-source leaf nodes
+ * (`Report.continuous`, `soft` in nodeVisuals.ts) — added 2026-08-28 after
+ * Thomas found the static soft-edge fade alone unfindable, even isolated
+ * against pure black ("what is the difference between a soft edge and a
+ * normal edge?" — he genuinely couldn't tell). Motion reads in peripheral
+ * vision the way a static alpha gradient never will, in a scene this busy.
+ *
+ * Milder floor than an orb's (0.55, not 0.42) and — critically — NO scale
+ * term: an orb's `ORB_PULSE_SCALE` swells the whole mesh, but scale is the
+ * authority/size channel for every ordinary node, and 39 of them wobbling
+ * in size would corrupt that channel for the one visual property this app
+ * cares about getting right. Emissive-only, same period, same shape.
+ */
+const CONTINUOUS_PULSE_FLOOR = 0.55
 
 /**
  * Node size, as a fraction of the cloud it sits in.
@@ -1466,6 +1481,11 @@ export default function InfluenceGraph({
         // from the id each frame so the pulse loop stays a flat walk over
         // `meshes` with no string work in it.
         mesh.userData.orb = orb
+        // Marks this mesh for the milder continuous-node breath in
+        // `useFrame` — see `CONTINUOUS_PULSE_FLOOR`. Same reasoning as
+        // `mesh.userData.orb` just above: flat walk over `meshes`, no
+        // string work in the per-frame loop.
+        mesh.userData.soft = soft
         meshes.current.set(n.id, mesh)
         return mesh
       })
@@ -2920,12 +2940,21 @@ export default function InfluenceGraph({
     const breath =
       0.5 - 0.5 * Math.cos((2 * Math.PI * pulseClock.current) / ORB_PULSE_PERIOD_SECONDS)
     for (const [id, mesh] of meshes.current) {
-      if (!mesh.userData.orb) continue
-      const material = mesh.material as NodeMaterial
-      material.emissiveIntensity =
-        focusEmissive(id, mesh, focusRef.current) *
-        (ORB_PULSE_FLOOR + (1 - ORB_PULSE_FLOOR) * breath)
-      mesh.scale.setScalar(nodeScale.current * (1 + ORB_PULSE_SCALE * breath))
+      if (mesh.userData.orb) {
+        const material = mesh.material as NodeMaterial
+        material.emissiveIntensity =
+          focusEmissive(id, mesh, focusRef.current) *
+          (ORB_PULSE_FLOOR + (1 - ORB_PULSE_FLOOR) * breath)
+        mesh.scale.setScalar(nodeScale.current * (1 + ORB_PULSE_SCALE * breath))
+      } else if (mesh.userData.soft) {
+        // See `CONTINUOUS_PULSE_FLOOR` — same breath curve, milder floor,
+        // emissive only. No `mesh.scale` write: authority/size stays exactly
+        // what `nodeScale` already says, every frame.
+        const material = mesh.material as NodeMaterial
+        material.emissiveIntensity =
+          focusEmissive(id, mesh, focusRef.current) *
+          (CONTINUOUS_PULSE_FLOOR + (1 - CONTINUOUS_PULSE_FLOOR) * breath)
+      }
     }
 
     // The hover feedback — grow, lift, glow (see the HOVER_* constants).

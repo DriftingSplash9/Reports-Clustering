@@ -28,18 +28,28 @@ PLAYBOOK rule 1, don't state it.
 
 ## 2. Current state
 
-**Corpus: 3,465 reports · 2,735 dependencies.** `npm run validate` clean
-(120/120), `tsc --noEmit` clean, `npm run build` clean (1,498.64 kB).
+**Corpus: 3,468 reports · 2,804 dependencies.** `npm run validate` clean
+(120/120), `tsc --noEmit` clean, `npm run build` clean (1,499.37 kB).
 
-Four data rounds and three renderer fixes landed 2026-08-28. Zero-domestic-edge
-countries went 102 → 77 over the day. Detail is in project memory:
+Five data rounds and four renderer fixes landed 2026-08-28. Zero-domestic-edge
+countries went 102 → 77 over the day; unlinked-node count (a separate,
+sharper metric) went 1,251 → 1,194 in a fifth round targeting the four
+highest-count countries (ID/TW/PH/MX). Detail is in project memory:
 `eu_national_chains_2026-08-28`, `candidates_tier_wiring_2026-08-28`,
-`eu_government_finance_2026-08-28`, `renderer_forces_2026-08-28` (now covers
-all three renderer fixes, including today's cluster-repulsion range change,
-0-3 → 0-10 — Thomas called the old range "weak and ineffective" live; a
-full-system remeasurement found the force itself was fine, the range was
-just too narrow to reach a felt effect. Unverified live yet — check the new
-range before trusting this note over your own eyes).
+`eu_government_finance_2026-08-28`, `unlinked_nodes_wiring_round1_2026-08-28`
+(69 edges + 3 new nodes, ID/TW/PH/MX), `renderer_forces_2026-08-28` (now covers
+all four renderer fixes. Cluster-repulsion range change, 0-3 → 0-10 — Thomas
+called the old range "weak and ineffective" live; a full-system
+remeasurement found the force itself was fine, the range was just too
+narrow to reach a felt effect. Unverified live yet — check the new range
+before trusting this note over your own eyes. Soft-edge visibility fix —
+Thomas: "these are just invisible... really hard to find"; Fresnel
+`uSoftPower` 1.1→0.5 plus a new emissive-only breathing pulse on continuous
+leaf nodes (`CONTINUOUS_PULSE_FLOOR`, no scale change). Pixel-measured live:
+fade band now spans ~15-18px on screen (was sub-pixel at the old power),
+and node brightness at the pixel level rises measurably over a 3s window,
+confirming the pulse animates. Thomas hasn't laid eyes on it yet — his call
+whether it reads right).
 
 ### Two decisions only Thomas can make
 
@@ -62,9 +72,13 @@ range before trusting this note over your own eyes).
   `hubRoom`; stock d3 uses the collapsed link array. In the folded view that
   makes ordinary links slightly softer than stock. Defensible, but it's a
   deliberate divergence someone should ratify.
-- **1,251 of 3,465 nodes (36%) have no edge at all.** Worst: PH 61/68, ID
-  105/118, TW 89/108, IR 32/34, VN 39/48, KR 32/52, MX 50/101, JP 30/63.
-  This is a sharper target than the zero-domestic-edge count.
+- **1,194 of 3,468 nodes (34%) have no edge at all**, down from 1,251/3,465
+  after today's ID/TW/PH/MX round. Worst now: PH 44/70, ID 90/118, TW 81/108,
+  IR 32/34, VN 39/48, KR 32/52, MX 33/101, JP 30/63. Sharper target than the
+  zero-domestic-edge count. Next-hardest untouched in the same candidates-only
+  tier: JP, KR, Saudi Arabia, Türkiye, Afghanistan — see `unlinked_nodes_cleared.md`
+  before scoping the next batch (also lists Yemen/Syria as confirmed dead ends,
+  do not re-attempt).
 - **Auto-unfold is still dense.** The hub-drag fix improved it materially
   but did not solve it — see `renderer_forces_2026-08-28`.
 
@@ -89,13 +103,22 @@ range before trusting this note over your own eyes).
    numbers rule out "the force doesn't work" — look at camera auto-fit or
    raw node-count density instead. Detail: `renderer_forces_2026-08-28`
    memory, section 3.
-3. **Look at the soft-edge treatment on a continuous node** and say if it
-   reads right. Fresnel power fixed at 1.1; never pixel-verified. Concrete
-   example to check: search "Federal Competitiveness and Statistics Centre"
-   (id `ae-fcsc`, UAE) — it's `Report.continuous: true`, so instead of a
-   hard edge it should fade out toward the silhouette (alpha only, no rim
-   colour) rather than terminating in a crisp line like an ordinary node.
-   35 nodes carry this flag corpus-wide if you want a second example.
+3. **Look at the soft-edge treatment on a continuous node, now changed —
+   say if it reads right.** Your verdict was "these are just invisible at a
+   distance or in a busy graph... really hard to find," plus a genuine
+   "what's the difference between a soft edge and a normal edge?" —
+   diagnosis: at typical on-screen node size the old Fresnel power (1.1)
+   confined the fade to a sub-pixel-scale band, so it was never a busy-scene
+   perception problem, it was geometrically invisible. Shipped: `uSoftPower`
+   1.1→0.5 (fade now measured ~15-18px wide on screen, pixel-checked live),
+   plus a gentle emissive-only breathing pulse on continuous leaf nodes
+   (reuses the orb-breath period/curve, milder floor, deliberately **no**
+   scale term — scale is the authority/size channel, this must not touch
+   it). Pixel-checked live that both changes are actually happening on
+   screen; not yet judged for whether it *reads right* — that's yours.
+   Concrete example: search "Federal Competitiveness and Statistics Centre"
+   (id `ae-fcsc`, UAE) or "TurkStat institutional core" (id `tr-turkstat`,
+   used for the pixel check). 39 nodes carry this flag corpus-wide.
 4. **Re-authenticate the Claude desktop app?** — cloud file-staging started
    refusing with `session_stale_relogin` on 2026-08-28. Unclear if still
    broken: staging worked fine in today's session (9 files, no error). If
@@ -137,6 +160,12 @@ range before trusting this note over your own eyes).
 5. **New research round** — the 2026-08-22 Grok queue is fully worked; a new
    round needs scoping from scratch. The 2026-08-28 rounds were done without
    Grok, by parallel subagents, at Thomas's request.
+6. **Unlinked-node wiring, next batch of 4.** Same method as today's ID/TW/PH/MX
+   round (see `unlinked_nodes_wiring_round1_2026-08-28` memory) — pick the next
+   4 hardest from `unlinked_nodes_cleared.md`'s "not yet attempted" list (JP, KR,
+   Saudi Arabia, Türkiye, Afghanistan are the candidates). A Grok prompt for this
+   round's own dead ends is queued at `notes/grok-prompt-unlinked-2026-08-28.md`
+   — attach the files it names before pasting it to Grok.
 
 ---
 
