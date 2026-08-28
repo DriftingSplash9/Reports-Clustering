@@ -175,6 +175,73 @@ from its HBS, against the EU pattern. Six countries' `part_of`-style
 "expected" edges were dropped with quotes explaining why — see `_dropped` in
 the slice.
 
+**Hub-drag damping — the Auto-unfold pile-up, partly fixed (Thomas,
+2026-08-28: "it doesn't change from 473 until I click Auto unfold and when I
+do that I get a dense messy cluster").** This is cause (3) from
+`clusterRepulsion.ts`'s own design note, the one that force explicitly does
+NOT address. The mechanism: d3's default link strength is `1 / min(deg(source),
+deg(target))`, and the `min` is the trap — a leaf attached to `sna-2008` gets
+`1/1`, a MAXIMALLY stiff spring. `sna-2008` touches 57 different countries and
+`esa-2010` 42, so those two sat at the mass centre with ~90 rigid springs each
+and every country they touch was nailed to the middle through them. `hubRoom`
+had given those links extra rest LENGTH since August; nothing had ever touched
+their stiffness.
+
+Fixed by precomputing `LinkDatum.stiffness` and calling `linkForce.strength()`.
+**Damped by COUNTRY SPAN, not degree** — the first pass damped on degree alone,
+which touched 44% of all links and loosened hubs that should hold a cluster
+together (`ru-rosstat-regions-russia-socio-economic` has 30 edges spanning ONE
+country; likewise `cn-provincial-gdp` 23 and `in-state-gsdp-series` 22 — those
+are a country's internal spine). Gating on "how many different countries does
+the busier end touch" isolates the 15 nodes that actually tether unrelated
+clusters — the international standards layer — and gets the same result while
+touching 19% of links instead of 44%.
+
+Swept from identical fresh random starts on the real corpus
+(`scripts/measure-hub-drag.ts`, throwaway, sandbox only — not committed):
+inter-country centroid separation ÷ intra-country spread **8.05-8.20 → 9.30
+-9.69**, and mean distance of hub-attached nodes from the global centroid
+**0.561-0.565 → 0.690-0.713** of the cloud's 92nd-percentile radius. No NaN, no
+runaway, both seeds agreed. Shipped at `HUB_SPAN_GATE = 10`, `HUB_LINK_KNEE = 4`.
+`tsc --noEmit` clean (run on Thomas's machine — cloud staging was down).
+
+**Verified live, and the honest verdict is "clearly better, not solved."** The
+FOLDED view is a step change: distinct green EU, white, and violet clusters
+where it had been one undifferentiated ball. Unfolded to all 3,465 it is
+visibly regionalised — colour territories are now legible — but still dense in
+the middle. Two things are still in play that this change does not touch:
+3,465 nodes in one frame is inherently crowded, and **1,251 of them (36%) have
+no edges at all**, so nothing but charge/collide/galaxy organises them.
+
+**KNOWN SUBTLETY, not yet resolved.** `stiffness` derives from the `degree` map
+built off `graph.edges` (pre-trunk-collapse), matching what `hubRoom` already
+does. d3's own default derives from the collapsed link array. So in the folded
+view, where 57 member edges collapse into one EU-orb→`esa-2010` trunk, ordinary
+links are slightly SOFTER than d3's default would make them. Defensible (a
+trunk standing for 57 edges should not be 57× stiff) and consistent with
+`hubRoom`, but it is a deliberate difference from stock d3 and someone should
+decide it on purpose rather than inherit it from this note.
+
+**Cluster repulsion's slider was dead, and is now fixed (Thomas,
+2026-08-28: "can you check out the cluster repulsion? I don't see any effect
+from it").** He was right, and the force was never the problem. `view.
+clusterRepulsion` had NO `d3ReheatSimulation` effect and NO refit effect,
+where `view.geoAffinity` and `view.galaxy` each have both. Every d3 force
+here is scaled by alpha, and alpha has decayed to ~0 by the time anyone
+touches a slider post-fit — so the force was computing a correct push every
+tick and multiplying it by nothing. Fixed by copying the existing pair;
+`tsc`, `validate` (120/120) and `build` all clean, and verified live in
+Thomas's browser: at 0% the cloud is a homogeneous blob, at 300% distinct
+lobes separate (the green EU cluster pulls clear at top-left). **This is the
+THIRD time this exact omission has shipped** — geoAffinity, then galaxy
+("the galaxy pull doesn't appear to have an effect", 2026-08-20), now this.
+All three forces were correct and measured; all three sliders were inert.
+Now PLAYBOOK rule 20, with the instruction to verify by dragging the slider
+rather than by measuring the force in a script — script measurement passed
+all three times. **Thomas's Todo #2 is answered**: the force does work, he
+had simply never been able to see it. Whether the separation is now ENOUGH
+is a fresh judgement, and the slider finally makes it askable.
+
 **Cluster vs cluster repulsion shipped, first pass (Thomas, 2026-08-27:
 "let's try the proposed fix — cluster vs cluster repulsion").** Built the
 "option (c)" force from the 2026-08-26 design discussion below: new
@@ -467,9 +534,11 @@ section only needs to say where things stand now, not how they got here.
    reasoned through against the traced library source; this is now a
    "does it actually recur" watch, not a pending confirmation. Details:
    `notes/render-consistency-repro-2026-08-25.md`.
-2. **Did killing force-centre + the charge nudge — and now the new
-   cluster-repulsion force — actually help the "piles up at the centre"
-   complaint?** Shipped 2026-08-26 as a cheap first pass (see Current
+2. **Now that the cluster-repulsion slider actually works (see Current
+   State — it was inert until 2026-08-28), is the separation enough?**
+   Original question: did killing force-centre + the charge nudge + the
+   new cluster-repulsion force help the "piles up at the centre"
+   complaint? Shipped 2026-08-26 as a cheap first pass (see Current
    State) — force-centre off, charge repulsion +33% (after an initial
    +10% pass, per Thomas's follow-up). The scene still visibly clustered
    at the middle in a headless check after that pass (expected: the

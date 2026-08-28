@@ -134,6 +134,32 @@ interface LinkDatum {
    */
   hubRoom: number
   /**
+   * Link spring STIFFNESS, precomputed at build time for the same reason
+   * `hubRoom` is — and the lever that was missing when the unfolded view
+   * collapsed into a hairball (Thomas, 2026-08-28: "when I do that I get a
+   * dense messy cluster").
+   *
+   * d3's default is `1 / min(deg(source), deg(target))`, and the `min` is
+   * the trap. For a leaf attached to `sna-2008` that is `1/1` — a MAXIMALLY
+   * stiff spring. `sna-2008` touches 57 different countries and `esa-2010`
+   * 42, so those two nodes sit at the mass centre of nearly the whole
+   * corpus with ~90 rigid springs each, and every country they touch is
+   * nailed to that centre through them. `hubRoom` already gave those links
+   * extra rest LENGTH; nothing had ever touched their stiffness.
+   *
+   * **Damped by country span, not by degree alone — measured, not assumed.**
+   * A first pass damped every link whose busier end had a high degree, and
+   * that touched 44% of all links and loosened hubs that SHOULD hold a
+   * cluster together: `ru-rosstat-regions-russia-socio-economic` has 30
+   * edges but spans ONE country, as do `cn-provincial-gdp` (23) and
+   * `in-state-gsdp-series` (22). Those are a country's own internal spine.
+   * Gating on "how many different countries does the busier end touch"
+   * isolates the 15 nodes that actually tether unrelated clusters together
+   * — the international standards layer — and gets the same result while
+   * touching 19% of links instead of 44%.
+   */
+  stiffness: number
+  /**
    * Key in the *data model's* direction, not the rendered one.
    *
    * Links are rendered reversed (see below), so this cannot be derived from
@@ -1111,6 +1137,42 @@ export default function InfluenceGraph({
       degree.set(e.target_report_id, (degree.get(e.target_report_id) ?? 0) + 1)
     }
 
+    // How many DIFFERENT countries each node's edges reach — the gate on the
+    // stiffness damping below. See `LinkDatum.stiffness` for why degree alone
+    // was the wrong test. Built from the same pass, one Set per linked node.
+    const countrySpan = new Map<string, Set<string>>()
+    for (const e of graph.edges) {
+      for (const [self, other] of [
+        [e.source_report_id, e.target_report_id],
+        [e.target_report_id, e.source_report_id],
+      ] as const) {
+        const country = graph.byId.get(other)?.country
+        if (!country) continue
+        const seen = countrySpan.get(self)
+        if (seen) seen.add(country)
+        else countrySpan.set(self, new Set([country]))
+      }
+    }
+    /**
+     * A node has to reach this many different countries before its links are
+     * treated as cross-cluster tethers rather than a country's own spine.
+     * 15 nodes clear it on the 2026-08-28 corpus, all of them international
+     * standards (`sna-2008`, `esa-2010`, `imf-e-gdds`, `imf-bpm6`, ...).
+     */
+    const HUB_SPAN_GATE = 10
+    /**
+     * Above this degree a gated hub's links start softening, as `KNEE / deg`.
+     * Swept 2026-08-28 against the real corpus from identical fresh random
+     * starts (`scripts/measure-hub-drag.ts`, throwaway — not committed):
+     * ratio of inter-country centroid separation to intra-country spread
+     * 8.05-8.20 ungated → 9.30-9.69 here, and the mean distance of
+     * hub-attached nodes from the global centroid rose 0.561-0.565 → 0.690
+     * -0.713 of the cloud's 92nd-percentile radius. No NaN, no runaway, both
+     * seeds agreed on direction and rough size. Lower knees kept helping but
+     * with diminishing returns and a hub drifting off its own centre.
+     */
+    const HUB_LINK_KNEE = 4
+
     // Parallel edges between the same pair — overwhelmingly the disclosed
     // view's orb collapses (57 member edges share the EU-orb → esa-2010 pair
     // at tier 1) — merge into ONE datum carrying a count, instead of N
@@ -1174,6 +1236,18 @@ export default function InfluenceGraph({
           3.5 *
           (Math.sqrt(degree.get(e.source_report_id) ?? 1) +
             Math.sqrt(degree.get(e.target_report_id) ?? 1)),
+        stiffness: (() => {
+          const ds = degree.get(e.source_report_id) ?? 1
+          const dt = degree.get(e.target_report_id) ?? 1
+          // d3's own default, reproduced rather than inherited — overriding
+          // `strength` replaces it wholesale, so the ordinary case has to be
+          // restated here or every link in the graph changes.
+          const base = 1 / Math.max(1, Math.min(ds, dt))
+          const busier = ds >= dt ? e.source_report_id : e.target_report_id
+          const span = countrySpan.get(busier)?.size ?? 0
+          if (span < HUB_SPAN_GATE) return base
+          return base * Math.min(1, HUB_LINK_KNEE / Math.max(ds, dt))
+        })(),
         key,
       })
     }
@@ -1566,7 +1640,10 @@ export default function InfluenceGraph({
     center?.strength(0)
 
     const linkForce = fg.d3Force('link') as unknown as
-      | { distance(fn: (l: LinkDatum) => number): void }
+      | {
+          distance(fn: (l: LinkDatum) => number): void
+          strength(fn: (l: LinkDatum) => number): void
+        }
       | undefined
     // ×2 on the REST LENGTH ONLY — the Phase-4 brief's "double the edge
     // lengths", pulled forward into Phase 3.5 (Thomas, 2026-08-19: "these
@@ -1585,6 +1662,10 @@ export default function InfluenceGraph({
     linkForce?.distance(
       (l) => (40 + (1 - l.weight) * 28 + l.hubRoom) * m * LINK_LENGTH_SCALE,
     )
+    // Stiffness, precomputed per link — see `LinkDatum.stiffness` for the
+    // mechanism and the measurement. This is what stops the international
+    // standards layer nailing every country it touches to the middle.
+    linkForce?.strength((l) => l.stiffness)
 
     // Nothing in the default force set stops two spheres occupying the same
     // point, and overlapping nodes read as one node of the wrong size.
@@ -2399,6 +2480,50 @@ export default function InfluenceGraph({
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view.galaxy])
+
+  /**
+   * Reheat when cluster repulsion changes — the SAME bug as the geo-affinity
+   * and galaxy pairs above, shipped a third time (2026-08-28).
+   *
+   * `clusterRepulsionStrength` (the ref `clusterRepulsionForce` reads) is
+   * already current the instant the slider moves, and the force is registered
+   * on the simulation — but every d3 force here is scaled by alpha, and
+   * three-forcegraph's alpha has decayed to ~0 by the time anyone touches a
+   * slider post-fit. So the force was computing a correct push every tick and
+   * multiplying it by nothing.
+   *
+   * Thomas, 2026-08-28: *"can you check out the cluster repulsion? I don't see
+   * any effect from it."* That is verbatim the `view.galaxy` report from
+   * 2026-08-20 ("the galaxy pull doesn't appear to have an effect"), whose fix
+   * is the effect directly above this one — and whose comment already said the
+   * omission was simply never wired when the slider shipped. It was not wired
+   * for `view.clusterRepulsion` either.
+   *
+   * **This is now a three-time pattern, so state the rule rather than the
+   * instance: a new force that reads its strength from a ref needs BOTH of
+   * these effects, or it is inert after the first settle.** The ref keeps the
+   * slider from triggering a rebuild; the reheat is what makes the slider do
+   * anything at all. `PLAYBOOK.md` carries this as a standing rule now.
+   */
+  useEffect(() => {
+    forceGraph.d3ReheatSimulation()
+  }, [view.clusterRepulsion, forceGraph])
+
+  /**
+   * ...and re-frame what the reheat rearranged, same reasoning and same
+   * 300ms debounce as the two refit effects above. This one matters more than
+   * most: cluster repulsion changes the separation between cluster centroids,
+   * which is precisely the quantity `runFit`'s percentile core radius measures
+   * — so without a refit the camera stays framed for the cloud as it was
+   * before the slider moved, and a force that HAS separated the clusters can
+   * still look like it did nothing.
+   */
+  useEffect(() => {
+    if (!fitted.current) return
+    const t = setTimeout(() => requestRefit(), 300)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view.clusterRepulsion])
 
   // The scene-background effect (opaque paper vs transparent-over-CSS) went
   // with blueprint, 2026-08-19 — the dark theme's compositing was always the

@@ -142,6 +142,24 @@ Full text also in `REPORTS.md`.
     state ICLS compliance when the NSO's own pages are blocked — it
     supplied both Iraq's and Vietnam's ICLS edges. (The old ILO microdata
     catalogue at `webapps.ilo.org/surveyLib` is retired — 410 Gone.)
+20. **A new force whose strength comes from a ref needs TWO effects, or it
+    is inert the moment the graph settles.** Every d3 force here is scaled
+    by alpha, and three-forcegraph's alpha has decayed to ~0 by the time
+    anyone touches a slider post-fit. The ref keeps the slider from
+    triggering a rebuild; it does NOT make the slider do anything. Wire
+    both, copying the `view.geoAffinity` pair in `InfluenceGraph.tsx`:
+    - `useEffect(() => forceGraph.d3ReheatSimulation(), [view.<key>, forceGraph])`
+    - a 300ms-debounced `requestRefit()` on `[view.<key>]`, because the
+      reheat moves the cloud and nothing else re-runs the fit.
+    **This has now shipped broken three times** — geoAffinity (fixed
+    2026-08-20), galaxy ("the galaxy pull doesn't appear to have an
+    effect", fixed the same day), clusterRepulsion ("I don't see any
+    effect from it", fixed 2026-08-28). Each time the force itself was
+    correct and fully measured, and each time the slider was dead. If you
+    add a slider-driven force, add these two effects in the same commit as
+    the force, and verify by dragging the slider — not by measuring the
+    force in a script, which is exactly what passed all three times.
+
 19. **Some publisher domains are reachable for some file types and not
     others, and the error does not say so.** cosit.gov.iq serves PDFs and
     HTML fine but its `.docx` metadata document is refused with
@@ -191,6 +209,25 @@ Assume all of this exists and works; each has a dated comment at the site.
   the eyes and brain") — not defaulted off, deleted: no `ViewSettings.fog`,
   no "Distance haze" slider, no `scene.fog`, no hand-rolled fog in the link
   shader. `showHorizon` (the sky gradient) is untouched and still optional.
+- **No glow/bloom either.** Removed 2026-08-25 (Thomas: "the glow slider
+  works but I think the glow is pointless"). Do not reintroduce it to "fix"
+  a dark node — that was the loop that produced the inverted authority
+  encoding in the first place.
+- **No force-centre.** `d3-force-3d`'s `forceCenter` is set to strength 0
+  (2026-08-26). It rigidly translates every node toward a target each tick,
+  which is a runaway, not inter-cluster separation. Use `charge`'s
+  `strength`/`distanceMax`, or `clusterRepulsion`, for that.
+- **Rims are off in the dark scene** (2026-08-19, `drawRim`). A rim is a
+  silhouette tool, valid ONLY where the interior is empty — hollow one-off
+  instruments keep theirs; nothing else does. Blueprint mode, the other
+  empty-interior case, was deleted the same day.
+- **Link springs are damped on cross-cluster hubs** (2026-08-28,
+  `LinkDatum.stiffness`). d3's default `1/min(deg)` makes a leaf-to-hub
+  spring maximally stiff, which nailed every country touching `sna-2008` /
+  `esa-2010` to the middle. Damping is gated on how many DIFFERENT countries
+  the busier end touches, so a country's own internal spine
+  (`ru-rosstat-regions-russia-socio-economic`, 30 edges / 1 country) is left
+  alone. Don't re-gate this on degree.
 - **Menu bar**: Panels ▾ (fresh sessions default all 8 ON-and-minimized),
   Views ▾ (saved views, ★ open-on-load, deep links via `?rig=`), Help ▾
   (renders START-HERE.md raw). Tier bar + status line deliberately NOT in
