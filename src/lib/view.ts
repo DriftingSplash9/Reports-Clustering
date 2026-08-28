@@ -193,13 +193,18 @@ export interface ViewSettings {
    * measurement script) that led there.
    *
    * Range picked the same way `galaxy`'s was: measured against the real
-   * corpus with a throwaway script before shipping (see
-   * `clusterRepulsion.ts`'s constants comment for the numbers) — settling
-   * confirmed at the ceiling (3), zero NaN positions, own-cluster cohesion
-   * essentially untouched at the default (1) and only mildly loosened at
-   * the ceiling. Unlike `galaxy`, this has not yet been seen by Thomas in
-   * the live app — first pass, same as the charge-strength tuning earlier
-   * in this same HANDOFF item, expect a follow-up call once he has.
+   * corpus with a throwaway script before shipping — settling confirmed at
+   * the ceiling (3), zero NaN positions, own-cluster cohesion essentially
+   * untouched. **Seen live 2026-08-28: "weak and ineffective" even at the
+   * ceiling.** Re-measured with the real production force set this time
+   * (charge + link included, not just galaxy/geo/cluster in isolation —
+   * the isolated rig had actually UNDERSTATED the effect, not overstated
+   * it: full-system inter-country separation ratio goes 4.29 (off) -> 7.04
+   * (1) -> 8.62 (3) -> 15.08 (10), own-cluster cohesion flat throughout,
+   * confirmed stable to 30). The mechanism was never broken — the 0-3
+   * range just never gave Thomas enough room to feel it. Ceiling raised to
+   * 10 (`ViewControls.tsx`) on that basis; default left at 1. Expect
+   * another live call once he's dragged past the old max-3 mark.
    */
   clusterRepulsion: number
   /**

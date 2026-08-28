@@ -51,6 +51,13 @@ Full text also in `REPORTS.md`.
    drop the zip in `_to_delete/`, stage that one file, unzip in the sandbox.
    A live sandbox with `node_modules` already installed can be reused across
    rounds in the same session instead of restaging from scratch.
+   **Scope beyond validate, confirmed 2026-08-28**: ANY `tsx`/`vite`-driven
+   script fails via `device_bash` the same way — the device's `node_modules`
+   has `@esbuild/win32-x64`, the bridge's own shell is a Linux VM that needs
+   `@esbuild/linux-x64`. Same recipe fixes it (stage what the script
+   imports, `npm install` fresh in the sandbox). Plain `tsc --noEmit` is
+   NOT affected (no esbuild dependency) and runs fine directly via
+   `device_bash` — useful for a fast typecheck without a full sandbox.
 5. **`public/corpus-data.json` is generated** (`npm run gen` /
    `scripts/gen-slices.ts`). Never hand-edit it. Fresh sandbox → run
    `npm run gen` first.

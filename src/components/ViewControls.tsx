@@ -79,13 +79,23 @@ const SLIDERS: {
     key: 'clusterRepulsion',
     label: 'Cluster repulsion',
     hint: 'Pushes DIFFERENT clusters’ centres apart from each other — the mirror of Galaxy pull above, which only ever pulls a report toward its own cluster. Starts at 100%; drag to 0 to ablate it entirely — see lib/clusterRepulsion.ts for the model',
-    // First pass, 2026-08-27 — Thomas's call to try "option (c)" from the
-    // 2026-08-26 layout design discussion. Measured against the real corpus
-    // before shipping this range the same way galaxy's 0-3 was (see
-    // clusterRepulsion.ts's constants comment for the numbers), but NOT yet
-    // seen by Thomas live — expect a follow-up tuning call, same as the
-    // charge-strength pass earlier in this HANDOFF item.
-    max: 3,
+    // First pass, 2026-08-27, shipped at max 3 — Thomas's call to try
+    // "option (c)" from the 2026-08-26 layout design discussion. Seen live
+    // 2026-08-28: "weak and ineffective" even at the ceiling. The force
+    // itself wasn't the problem — a full-system re-measurement (real charge
+    // + link forces this time, not the isolated galaxy/geo/cluster-only
+    // rig the first pass used) found the old 0-3 range was simply too
+    // narrow to reach a felt effect: inter-country separation ratio
+    // 4.29 (off) -> 7.04 (1) -> 8.62 (3) -> 11.44 (6) -> 15.08 (10),
+    // own-cluster cohesion essentially flat throughout (intraSpread
+    // 340-395 across the whole sweep) — no NaN, no runaway, confirmed
+    // stable to 30. Raised the ceiling to 10 on that basis; default left
+    // at 1 so nothing changes until the slider is touched. Drag well past
+    // the old max-3 mark this time. `scripts/_tmp-cluster-repulsion-*`
+    // sweep scripts, throwaway, run in a cloud sandbox (device_bash can't
+    // run this repo's node_modules — win32 esbuild binary vs the bridge's
+    // Linux VM, same class of issue as `npm run validate`).
+    max: 10,
   },
   {
     key: 'pulseRate',

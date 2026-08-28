@@ -31,10 +31,15 @@ PLAYBOOK rule 1, don't state it.
 **Corpus: 3,465 reports · 2,735 dependencies.** `npm run validate` clean
 (120/120), `tsc --noEmit` clean, `npm run build` clean (1,498.64 kB).
 
-Four data rounds and two renderer fixes landed 2026-08-28. Zero-domestic-edge
+Four data rounds and three renderer fixes landed 2026-08-28. Zero-domestic-edge
 countries went 102 → 77 over the day. Detail is in project memory:
 `eu_national_chains_2026-08-28`, `candidates_tier_wiring_2026-08-28`,
-`eu_government_finance_2026-08-28`, `renderer_forces_2026-08-28`.
+`eu_government_finance_2026-08-28`, `renderer_forces_2026-08-28` (now covers
+all three renderer fixes, including today's cluster-repulsion range change,
+0-3 → 0-10 — Thomas called the old range "weak and ineffective" live; a
+full-system remeasurement found the force itself was fine, the range was
+just too narrow to reach a felt effect. Unverified live yet — check the new
+range before trusting this note over your own eyes).
 
 ### Two decisions only Thomas can make
 
@@ -72,15 +77,32 @@ countries went 102 → 77 over the day. Detail is in project memory:
 1. **Watch for the render-consistency symptom in ordinary use**; flag here
    if it recurs. Neither of us could force-trigger it, so this is a watch,
    not a pending confirmation. `notes/render-consistency-repro-2026-08-25.md`.
-2. **Is the cluster separation enough now?** The slider was inert until
-   2026-08-28 and now works; the hub-drag damping landed the same day. Drag
-   "Cluster repulsion" (0–3, default 1) and say whether it needs a wider
-   range, and whether Auto-unfold is acceptable yet.
+2. **Cluster repulsion range raised 0-3 → 0-10 (default still 1), unverified
+   live.** Your "weak and ineffective" verdict on the old 0-3 range sent
+   this back for remeasurement — full production force set this time
+   (charge + link included, not the isolated rig the first pass used), real
+   corpus. The isolated rig had understated it: full-system, off→3 already
+   more than doubles the inter-cluster separation ratio (4.29→8.62), cohesion
+   flat throughout, stable to 30 in the sweep. So the mechanism wasn't
+   broken — the old ceiling just never let you drag far enough to feel it.
+   Try dragging to 6-10 this time. If it STILL looks weak up there, the
+   numbers rule out "the force doesn't work" — look at camera auto-fit or
+   raw node-count density instead. Detail: `renderer_forces_2026-08-28`
+   memory, section 3.
 3. **Look at the soft-edge treatment on a continuous node** and say if it
-   reads right. Fresnel power fixed at 1.1; never pixel-verified.
-4. **Re-authenticate the Claude desktop app** — cloud file-staging started
-   refusing with `session_stale_relogin` on 2026-08-28. `device_bash` still
-   works, so agents can still read/write and typecheck on-device.
+   reads right. Fresnel power fixed at 1.1; never pixel-verified. Concrete
+   example to check: search "Federal Competitiveness and Statistics Centre"
+   (id `ae-fcsc`, UAE) — it's `Report.continuous: true`, so instead of a
+   hard edge it should fade out toward the silhouette (alpha only, no rim
+   colour) rather than terminating in a crisp line like an ordinary node.
+   35 nodes carry this flag corpus-wide if you want a second example.
+4. **Re-authenticate the Claude desktop app?** — cloud file-staging started
+   refusing with `session_stale_relogin` on 2026-08-28. Unclear if still
+   broken: staging worked fine in today's session (9 files, no error). If
+   you still see the error in ordinary use, it's a sign-in problem on your
+   end that an agent can't fix remotely — try signing out/back into the
+   desktop app. `device_bash` still works either way, so agents can keep
+   reading/writing and typechecking on-device regardless.
 
 ### [Agent] — next build rounds
 
