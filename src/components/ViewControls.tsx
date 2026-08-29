@@ -89,13 +89,19 @@ const SLIDERS: {
     // 4.29 (off) -> 7.04 (1) -> 8.62 (3) -> 11.44 (6) -> 15.08 (10),
     // own-cluster cohesion essentially flat throughout (intraSpread
     // 340-395 across the whole sweep) — no NaN, no runaway, confirmed
-    // stable to 30. Raised the ceiling to 10 on that basis; default left
+    // stable to 30. Raised the ceiling to 10 on 2026-08-28; default left
     // at 1 so nothing changes until the slider is touched. Drag well past
     // the old max-3 mark this time. `scripts/_tmp-cluster-repulsion-*`
     // sweep scripts, throwaway, run in a cloud sandbox (device_bash can't
     // run this repo's node_modules — win32 esbuild binary vs the bridge's
     // Linux VM, same class of issue as `npm run validate`).
-    max: 10,
+    //
+    // Raised again 10 -> 15 on 2026-08-29 (Thomas: "it is better, can it go
+    // up to 15?" after trying the 0-10 range live). No new measurement
+    // needed — the 2026-08-28 sweep already covered this ground: stable to
+    // 30, own-cluster cohesion flat throughout. Still unverified live at
+    // the new ceiling; that's Thomas's call once he drags to it.
+    max: 15,
   },
   {
     key: 'pulseRate',

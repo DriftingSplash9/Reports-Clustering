@@ -203,8 +203,10 @@ export interface ViewSettings {
    * (1) -> 8.62 (3) -> 15.08 (10), own-cluster cohesion flat throughout,
    * confirmed stable to 30). The mechanism was never broken — the 0-3
    * range just never gave Thomas enough room to feel it. Ceiling raised to
-   * 10 (`ViewControls.tsx`) on that basis; default left at 1. Expect
-   * another live call once he's dragged past the old max-3 mark.
+   * 10 (`ViewControls.tsx`) on that basis; default left at 1. Raised
+   * again to 15 on 2026-08-29 (Thomas: "it is better, can it go up to
+   * 15?") — no new measurement needed, the 08-28 sweep already covers
+   * stable-to-30. Still unverified live at 15 itself.
    */
   clusterRepulsion: number
   /**

@@ -1,9 +1,10 @@
 # PLAYBOOK.md — standing rules, traps, architecture
 
-**This file is reference material, not state.** It's how the repo works and
-what bites people — it should stay roughly the same size turn over turn.
-Edit it only when you discover a genuinely NEW rule or trap. Current corpus
-numbers and the live todo list belong in `HANDOFF.md`, not here.
+**Reference material, not state.** How the repo works and what bites
+people. Edit only for a genuinely new SYSTEMIC rule — something that will
+recur across many countries/rounds or corrupt the corpus if missed. A
+one-off single-site quirk goes in that round's own notes file, not here.
+Current corpus numbers and the live todo list belong in `HANDOFF.md`.
 
 ---
 
@@ -23,168 +24,113 @@ numbers and the live todo list belong in `HANDOFF.md`, not here.
 | Schema | `src/lib/types.ts` |
 
 **House habit: the code is the design doc.** `palette.ts`, `nodeVisuals.ts`,
-`linkVisuals.ts`, `view.ts`, `modes.ts`, `savedViews.ts`, `hierarchy.ts` and
-`InfluenceGraph.tsx` carry dated comments explaining every constant. Read the
-comment before changing the number. Several say "do not raise this" and mean it.
+`linkVisuals.ts`, `view.ts`, `modes.ts`, `savedViews.ts`, `hierarchy.ts`,
+`InfluenceGraph.tsx` carry dated comments explaining every constant. Read
+the comment before changing the number — several say "do not raise this"
+and mean it.
 
 ---
 
 ## 2. Standing rules
 
-Full text also in `REPORTS.md`.
-
-1. **Never run git here from an agent session** — not even read-only (stale
-   lock). **Never STATE git status in any doc either.** Ask Thomas or read a
-   GitHub Desktop screenshot; delete any git-status claim you find.
-2. **No document, no edge.** If nothing published says the dependency exists,
-   it does not go in the graph.
-3. **A pointer is not a source.** WebFetch can fabricate content for a dead
-   URL; raw-verify before trusting any quote. Applies to Grok output too —
-   including node DESCRIPTIONS, not just dependency claims: a summary
-   description naming a standard is a lead to go verify, not a citable basis.
-4. **`npm run validate` before and after any data change** (120+ checks). It
-   cannot run through the device bridge. Recipe: stage `src/ scripts/
-   package.json tsconfig.json index.html vite.config.ts START-HERE.md` (the
-   full `src/data/research/` corpus included) into a Linux sandbox,
-   `npm install`, `npm run gen`, then tsc/validate/build. Fastest way to get
-   270+ research JSONs across the bridge: zip `src/data/research/` on-device,
-   drop the zip in `_to_delete/`, stage that one file, unzip in the sandbox.
-   A live sandbox with `node_modules` already installed can be reused across
-   rounds in the same session instead of restaging from scratch.
-   **Scope beyond validate, confirmed 2026-08-28**: ANY `tsx`/`vite`-driven
-   script fails via `device_bash` the same way — the device's `node_modules`
-   has `@esbuild/win32-x64`, the bridge's own shell is a Linux VM that needs
-   `@esbuild/linux-x64`. Same recipe fixes it (stage what the script
-   imports, `npm install` fresh in the sandbox). Plain `tsc --noEmit` is
-   NOT affected (no esbuild dependency) and runs fine directly via
-   `device_bash` — useful for a fast typecheck without a full sandbox.
+1. **Never run git from an agent session — not even read-only.** Never
+   state git status in any doc; ask Thomas or read a screenshot, and
+   delete any git-status claim you find.
+2. **No document, no edge.** If nothing published says the dependency
+   exists, it doesn't go in the graph.
+3. **A pointer is not a source.** WebFetch can fabricate content for a
+   dead URL — raw-verify before trusting any quote. Applies to Grok output
+   too, including node descriptions: a description naming a standard is a
+   lead to verify, not a citable basis.
+4. **`npm run validate` before and after any data change** (120+ checks);
+   it can't run through the device bridge. Recipe: stage `src/ scripts/
+   package.json tsconfig.json index.html vite.config.ts START-HERE.md`
+   (full `src/data/research/` corpus included) into a Linux sandbox,
+   `npm install`, `npm run gen`, then tsc/validate/build. Fastest way to
+   move 270+ research JSONs across the bridge: zip `src/data/research/`
+   on-device into `_to_delete/`, stage that one file, unzip in the
+   sandbox. Reuse a live sandbox with `node_modules` already installed
+   across rounds in the same session. Any `tsx`/`vite`-driven script fails
+   via `device_bash` (Windows `node_modules` vs. the bridge's Linux shell
+   needing `@esbuild/linux-x64`) — same recipe fixes it. Plain
+   `tsc --noEmit` is unaffected and runs fine directly via `device_bash`.
 5. **`public/corpus-data.json` is generated** (`npm run gen` /
-   `scripts/gen-slices.ts`). Never hand-edit it. Fresh sandbox → run
+   `scripts/gen-slices.ts`) — never hand-edit it. Fresh sandbox → run
    `npm run gen` first.
-6. Agents cannot delete device files — `mv` into `_to_delete/`, log it in
-   `_to_delete/README.md`. Emptying `_to_delete/` is Thomas's own job.
-7. **Headless verification is expected**: build + `vite preview` + Playwright
-   on the preinstalled Chromium with `--use-angle=swiftshader
-   --enable-unsafe-swiftshader`. Geometry/colour/pixel counts exact;
-   **bloom/glow untrustworthy** in software rendering; CSS transitions can
+6. **Agents cannot delete device files** — `mv` into `_to_delete/`, log it
+   in `_to_delete/README.md`. Emptying it is Thomas's job.
+7. **Headless verification is expected**: build + `vite preview` +
+   Playwright on the preinstalled Chromium with `--use-angle=swiftshader
+   --enable-unsafe-swiftshader`. Geometry/colour/pixel counts are exact;
+   bloom/glow is untrustworthy in software rendering; CSS transitions can
    wedge under load.
-8. **Measure before believing.** If a statement has a number in it and
-   nobody ran anything, it is a guess.
-9. **Any prompt relayed to a third party (Grok, etc.) needs its
-   attachment/action list told to Thomas separately, in plain chat text, not
-   just inside the pasteable block** — he skims or skips the prompt itself.
-10. **A `_dropped` entry describing an edge that DOES exist live in the
-    corpus must use `reason: "caveat"` (or `"resolved"`), never any other
-    reason.** Applies to every `DroppedReason`, not just `"note"` — a
-    `no-document`, `wrong-direction`, etc. entry is equally an error if its
-    (source, target) exact-matches a live edge. Before finalizing ANY
-    `_dropped` entry, check its exact (source, target) against the WHOLE
-    corpus's live edges (not just this round's own proposals) — "this
-    round's evidence didn't hold up" and "this edge doesn't exist" are
-    different claims.
-11. **Build the id-collision check from the WHOLE corpus, not just
-    `src/data/research/*.json`.** Some ids live only in the hand-written seed
-    files (`src/data/reports.ts`, `src/data/dependencies.ts`) and won't show
-    up in a naive grep of the research JSONs. Same for edges — cross-check
-    against `dependencies.ts` too, not just the research JSONs.
+8. **Measure before believing.** A number nobody ran anything to get is a
+   guess.
+9. **Any prompt relayed to a third party (Grok etc.) needs its
+   attachment/action list told to Thomas separately, in plain chat text**
+   — he skims or skips the prompt block itself.
+10. **A `_dropped` entry describing an edge that DOES exist live must use
+    `reason: "caveat"` (or `"resolved"`), never any other reason** —
+    applies to every `DroppedReason`. Before finalizing any `_dropped`
+    entry, check its exact (source, target) against the WHOLE corpus's
+    live edges, not just this round's proposals.
+11. **Build the id-collision and edge-collision checks from the whole
+    corpus, not just `src/data/research/*.json`** — some ids/edges live
+    only in the hand-written seed files (`src/data/reports.ts`,
+    `src/data/dependencies.ts`).
 12. **A dependency edge between a node and its `part_of` container is a
-    validator ERROR** ("containment is not a dependency" — see the comment on
-    `part_of` in `types.ts`). Before minting, cross-check every new edge's
+    validator ERROR.** Before minting, cross-check every new edge's
     (source, target) against the corpus-wide `part_of` map in both
     directions; drop matches as a `note`.
-13. **A fresh, well-verified finding that contradicts an already-live edge is
-    not automatically right just because it's freshly verified.** Caveat the
-    existing edge, defer the new claim, don't silently override — same
-    principle as rules 2/3 applied to edges that already exist.
-14. **Rule 10 has a mirror image, and it is the one that bites.** Rule 10
-    checks THIS round's `_dropped` entries against live edges. Also check
-    THIS round's new EDGES against every OTHER slice's existing `_dropped`
-    notes — minting an edge that some earlier round recorded as
-    `no-document` silently makes that note a lie, and `npm run validate`
-    fails on it ("note(s) describe an edge that IS in the graph"). Caught
-    exactly this way on 2026-08-28 with `mm-national-accounts -> sna-1993`.
-    **Read the older note before assuming your new edge wins**: in that
-    case the old note contained the better evidence (Myanmar is on the
-    1968 SNA with 93/2008 "being implemented"), and the new edge was the
-    one that had to go. A pre-mint checker that only looks one way will
-    pass a slice the validator then rejects.
-15. **Two dead NSO domains have been repurposed and both rank in search
-    results as the real thing. Never cite either.** `cso-yemen.org` now
-    serves unrelated cultural-tourism marketing copy with no statistical
-    content (the live CSO domain, `cso-yemen.com`, is simply dead).
-    `cbssyr.org` — note `.org`, not the historical `.sy` — presents itself
-    as "The Central Bureau of Statistics Syria" but carries embedded
-    adult-content spam links and no data. Both were surfaced by ordinary
-    searching in the 2026-08-28 round. Related institutional fact worth
-    knowing before searching Syria again: the Syrian CBS was merged into
-    the General Authority for Planning and International Cooperation and
-    renamed the **Syrian Planning and Statistics Commission** under Decree
-    No. 27 of 2025 — search that name, not "CBS".
-16. **A page title is not evidence.** GSO Vietnam publishes a page titled
-    "System of National Account 2008" whose body is generic UN
-    encouragement language ("We encourage all countries to compile...")
-    with no Vietnam-specific statement of adoption. Open the body.
-17. **Eurostat's national reference metadata is the highest-yield source
-    for any "which standard / which source" question about an EU or EEA
-    country**, and its filename is versioned per country, not uniform:
-    `prc_hicp_esmshi4_<cc>.htm` for PL/EL/ES/HU/HR/BG/LT,
-    `prc_hicp_esmshi3_<cc>.htm` for SK/SI/EE/LV/MT/CY/IS, 404 for FI. Try
-    hi4, fall back to hi3. Greece is `_el`, not `_gr`.
-    `employ_simslfs_<cc>.htm` answers "is the LFS the national-accounts
-    employment source" as an explicit Y/N field; Iceland has no such page.
-    **There is NO government-finance equivalent.** `gov_10dd_edpt1_esms_
-    <cc>.htm` and `gov_10dd_esms_<cc>.htm` 404 for every country tried
-    (bg ro el cy mt pl hu sk si hr, across two independent agents); only
-    the non-country-specific `gov_10dd_esms.htm` exists. For deficit and
-    debt, go to the NSI's own EDP release page instead — 11 of 20 state
-    the notification obligation in directly quotable terms.
-18. **ASEANstats is the reliable workaround for an unreachable ASEAN
-    national statistical office.** `cdn.aseanstats.org/public/docs/
-    metadata/...` and `cdn.aseanstats.org/public/data/statics/macro/
-    <CC>_SNA_Metadata.html` carry country-supplied metadata that names
-    compilation manuals and agencies. It supplied Myanmar's BPM6 basis
-    when csostat.gov.mm had nothing, and Thailand's SNA 2008 basis when
-    the entire nesdc.go.th domain proved unfetchable. Likewise **ilo.org
-    itself** hosts national labour-force-survey reports and articles that
-    state ICLS compliance when the NSO's own pages are blocked — it
-    supplied both Iraq's and Vietnam's ICLS edges. (The old ILO microdata
-    catalogue at `webapps.ilo.org/surveyLib` is retired — 410 Gone.)
-20. **A new force whose strength comes from a ref needs TWO effects, or it
-    is inert the moment the graph settles.** Every d3 force here is scaled
-    by alpha, and three-forcegraph's alpha has decayed to ~0 by the time
-    anyone touches a slider post-fit. The ref keeps the slider from
-    triggering a rebuild; it does NOT make the slider do anything. Wire
-    both, copying the `view.geoAffinity` pair in `InfluenceGraph.tsx`:
-    - `useEffect(() => forceGraph.d3ReheatSimulation(), [view.<key>, forceGraph])`
-    - a 300ms-debounced `requestRefit()` on `[view.<key>]`, because the
-      reheat moves the cloud and nothing else re-runs the fit.
-    **This has now shipped broken three times** — geoAffinity (fixed
-    2026-08-20), galaxy ("the galaxy pull doesn't appear to have an
-    effect", fixed the same day), clusterRepulsion ("I don't see any
-    effect from it", fixed 2026-08-28). Each time the force itself was
-    correct and fully measured, and each time the slider was dead. If you
-    add a slider-driven force, add these two effects in the same commit as
-    the force, and verify by dragging the slider — not by measuring the
-    force in a script, which is exactly what passed all three times.
+13. **A fresh, well-verified finding that contradicts an already-live edge
+    isn't automatically right.** Caveat the existing edge, defer the new
+    claim — don't silently override.
+14. **Rule 10's mirror image is the one that bites: also check this
+    round's new EDGES against every OTHER slice's existing `_dropped`
+    notes.** Minting an edge some earlier round recorded as `no-document`
+    makes that note a lie, and validate fails on it. Read the older note
+    before assuming your new edge wins — it may have the better evidence.
+15. **A page title is not evidence.** Read the body, not just the
+    title/heading.
+16. **Eurostat's national reference metadata is the highest-yield source
+    for "which standard / which source" questions on an EU/EEA country.**
+    Filename is versioned per country: `prc_hicp_esmshi4_<cc>.htm` for
+    PL/EL/ES/HU/HR/BG/LT, `prc_hicp_esmshi3_<cc>.htm` for
+    SK/SI/EE/LV/MT/CY/IS, 404 for FI (try hi4, fall back to hi3; Greece is
+    `_el` not `_gr`). `employ_simslfs_<cc>.htm` answers "is LFS the
+    national-accounts employment source" as an explicit Y/N field (no such
+    page for Iceland). No government-finance equivalent exists
+    (`gov_10dd_*_esms_<cc>.htm` 404s everywhere tried) — for deficit/debt
+    go to the NSI's own EDP release page instead.
+17. **ASEANstats (`cdn.aseanstats.org/public/...`) is the reliable
+    workaround for an unreachable ASEAN NSO** — supplied Myanmar's BPM6
+    basis and Thailand's SNA 2008 basis when their own domains were dead.
+    **ilo.org itself** hosts labour-force-survey reports stating ICLS
+    compliance when an NSO's own pages are blocked (supplied Iraq's and
+    Vietnam's ICLS edges). The old ILO microdata catalogue
+    (`webapps.ilo.org/surveyLib`) is retired.
+18. **A new slider-driven force needs TWO effects or it's inert the
+    moment the graph settles** — every d3 force here is alpha-scaled, and
+    alpha has decayed to ~0 by the time anyone touches a slider post-fit.
+    Wire both (copy `view.geoAffinity` in `InfluenceGraph.tsx`): a reheat
+    effect (`d3ReheatSimulation()` on the value changing) and a
+    300ms-debounced `requestRefit()` on the same dependency, because
+    reheat moves the cloud and nothing else re-fits. **Shipped broken
+    three times this way already** (geoAffinity, galaxy,
+    clusterRepulsion) — each time the force itself was correct and
+    measured, and each time the slider did nothing until this pattern was
+    applied. Add both effects in the same commit as the force; verify by
+    dragging the slider, not by measuring the force in a script.
 
-19. **Some publisher domains are reachable for some file types and not
-    others, and the error does not say so.** cosit.gov.iq serves PDFs and
-    HTML fine but its `.docx` metadata document is refused with
-    PROXY_REJECTED on every URL form. slovak.statistics.sk rejects its
-    wps-portal HTML pages with 403 but serves the same content through
-    `ExportPdf2/PdfExportSrvlt?Document=<guid>`. Before concluding a site
-    is blocked, try a different file type or export path on it.
-
-**Process rule (Thomas, 2026-08-20, revised 2026-08-25 as part of the
-handoff simplification).** `HANDOFF.md` is now short — edit its Current
-State and Todo sections directly (overwrite, don't append) each work turn.
-Only copy it to `archive/Previous Handoffs/` when you're about to make a
-structural rewrite, not on routine updates. If you discover a new standing
-rule or trap, add it here, not to `HANDOFF.md`. Hand off rather than push on
-when: you re-derive something already settled, contradict an earlier answer,
-retry a tool past its documented once-only policy, or the session has been
-through a compaction. Project memory: write entries as you go; if it
-refuses, park a note in `notes/` and flag it in `HANDOFF.md`.
+**Process rule.** `HANDOFF.md` stays short — edit its Current State/Todo
+directly (overwrite, don't append) each turn; copy to
+`archive/Previous Handoffs/` only before a structural rewrite. A new
+standing rule or trap goes here, not `HANDOFF.md`. Hand off rather than
+push on when you re-derive something already settled, contradict an
+earlier answer, retry a tool past its documented once-only policy, or the
+session has been through a compaction. Project memory: write entries as
+you go; if it refuses, park a note in `notes/` and flag it in
+`HANDOFF.md`.
 
 ---
 
@@ -194,80 +140,75 @@ Assume all of this exists and works; each has a dated comment at the site.
 
 - **Lenses** (`modes.ts`): STANDARD / GROUP_COMPARISON / WORLD_OVERVIEW —
   recolour via ref + mutation effect, never a `forceGraph` memo dep.
-  GROUPS/WORLD are disabled at tier 1 (mostly no-ops there).
-- **Constellation look**: near-black bg, flat panels. **The whole bottom edge
-  is one dock** (`bottomDock`, App.tsx): tier bar left, Compare + GroupsPanel
-  + Legend centre, Unlinked pill right, empty fourth track reserving the View
-  panel's column. No bottom panel carries fixed coordinates. Top row (search
-  bar left-of-centre, calendar tab right of it) is still hand-anchored.
+  GROUPS/WORLD are disabled at tier 1.
+- **Constellation look**: near-black bg, flat panels. The whole bottom edge
+  is one dock (`bottomDock`, App.tsx): tier bar left, Compare + GroupsPanel
+  + Legend centre, Unlinked pill right, empty fourth track reserving the
+  View panel's column. No bottom panel carries fixed coordinates. Top row
+  (search bar, calendar tab) is still hand-anchored.
 - **Reports/View panels** stop their scroll above the tier bar
   (`REPORTS_PANEL_BOTTOM_CLEARANCE` / `VIEW_PANEL_BOTTOM_CLEARANCE`).
-- **Hover** = identity chip; **click** = Detail card from the right (with
-  host link); **edge click** = evidence card from the left (endpoints, type,
+- **Hover** = identity chip; **click** = Detail card from the right (host
+  link); **edge click** = evidence card from the left (endpoints, type,
   period, verbatim basis, evidence_url). Camera refits unconditionally on
-  every filter change (deliberate — third rewrite).
+  every filter change (deliberate).
 - **Edges/pulses have SET SIZES** (`baseLinkWidth()` = 1); weight lives in
-  rest length + opacity. Never reintroduce additive/white pulse cores.
-  **Continuous-database nodes/edges** (`Report.continuous`, 35 nodes) draw
-  with a soft, boundary-fading sphere (`nodeVisuals.ts`, alpha only, no
-  colour) and an animated beam flow on the outgoing edge instead of teardrop
-  particles — one fact, two channels, added together 2026-08-26.
-- **No distance fog/haze.** Removed outright 2026-08-26 (Thomas: "too hard on
-  the eyes and brain") — not defaulted off, deleted: no `ViewSettings.fog`,
-  no "Distance haze" slider, no `scene.fog`, no hand-rolled fog in the link
-  shader. `showHorizon` (the sky gradient) is untouched and still optional.
-- **No glow/bloom either.** Removed 2026-08-25 (Thomas: "the glow slider
-  works but I think the glow is pointless"). Do not reintroduce it to "fix"
-  a dark node — that was the loop that produced the inverted authority
-  encoding in the first place.
-- **No force-centre.** `d3-force-3d`'s `forceCenter` is set to strength 0
-  (2026-08-26). It rigidly translates every node toward a target each tick,
-  which is a runaway, not inter-cluster separation. Use `charge`'s
-  `strength`/`distanceMax`, or `clusterRepulsion`, for that.
-- **Rims are off in the dark scene** (2026-08-19, `drawRim`). A rim is a
-  silhouette tool, valid ONLY where the interior is empty — hollow one-off
-  instruments keep theirs; nothing else does. Blueprint mode, the other
-  empty-interior case, was deleted the same day.
-- **Link springs are damped on cross-cluster hubs** (2026-08-28,
-  `LinkDatum.stiffness`). d3's default `1/min(deg)` makes a leaf-to-hub
-  spring maximally stiff, which nailed every country touching `sna-2008` /
-  `esa-2010` to the middle. Damping is gated on how many DIFFERENT countries
-  the busier end touches, so a country's own internal spine
-  (`ru-rosstat-regions-russia-socio-economic`, 30 edges / 1 country) is left
-  alone. Don't re-gate this on degree.
+  rest length + opacity. Never reintroduce additive/white pulse cores or
+  faceted node geometry (fresnel rims). **Continuous-database nodes/edges**
+  (`Report.continuous`, 35 nodes) draw with a soft boundary-fading sphere
+  (alpha only, no colour) and an animated beam flow instead of teardrop
+  particles.
+- **No distance fog/haze** — removed outright (too hard on the eyes): no
+  `ViewSettings.fog`, no slider, no `scene.fog`. `showHorizon` (sky
+  gradient) is untouched.
+- **No glow/bloom** — removed (was masking, not fixing, dark-node issues).
+  Don't reintroduce it to "fix" a dark node — that loop produced the
+  inverted authority encoding in the first place.
+- **No force-centre** — `forceCenter` strength is 0; it's a runaway
+  translation, not inter-cluster separation. Use `charge`'s
+  strength/distanceMax, or `clusterRepulsion`, instead.
+- **Rims are off in the dark scene** — a rim is a silhouette tool, valid
+  only where the interior is empty; hollow one-off instruments keep
+  theirs, nothing else does. Blueprint mode (the other empty-interior
+  case) was deleted.
+- **Link springs are damped on cross-cluster hubs** (`LinkDatum.stiffness`)
+  — d3's default `1/min(deg)` makes a leaf-to-hub spring maximally stiff,
+  nailing every country touching `sna-2008`/`esa-2010` to the middle.
+  Damping is gated on how many DIFFERENT countries the busier end touches,
+  so a country's own internal spine is left alone. Don't re-gate this on
+  degree.
 - **Menu bar**: Panels ▾ (fresh sessions default all 8 ON-and-minimized),
   Views ▾ (saved views, ★ open-on-load, deep links via `?rig=`), Help ▾
-  (renders START-HERE.md raw). Tier bar + status line deliberately NOT in
-  the menu — primary navigation.
-- **Disclosure folds TWICE** (`hierarchy.ts`): tier ladder folds into family
-  orbs (`orb:`), then per-country orbs (`corb:`) until a country is
-  double-clicked open (`openedCountries`). Orb `country` is the MODAL member
-  — display-grade, NEVER membership; membership checks read `.members`.
-  No UI to re-fold one country short of Reset (known gap).
-- **Galaxy clustering** (`galaxyForce.ts`, `view.galaxy` slider): pulls nodes
-  toward their OWN family/country centroid. Read its file comment and
-  `geoAffinity.ts`'s before touching either — similar-looking, different
-  questions. Provinces are NOT a third level (most `region` values are free
-  prose — needs a data pass first).
+  (renders START-HERE.md raw). Tier bar + status line are deliberately NOT
+  in the menu.
+- **Disclosure folds TWICE** (`hierarchy.ts`): tier ladder → family orbs
+  (`orb:`) → per-country orbs (`corb:`) until a country is double-clicked
+  open. Orb `country` is the MODAL member (display-grade) — membership
+  checks always read `.members`. No UI to re-fold one country short of
+  Reset (known gap).
+- **Galaxy clustering** (`galaxyForce.ts`, `view.galaxy`) pulls nodes
+  toward their own family/country centroid — read its file comment and
+  `geoAffinity.ts`'s before touching either, similar-looking but different
+  questions. Provinces aren't a third level (most `region` values are free
+  prose).
 - **Isolate** (`view.isolateFocus`) hides everything off the traced chain,
-  built on the UNFILTERED index so cross-border edges survive. **Groups
-  panel** ("Regions & Countries", bottom-centre) isolates continents/blocs/
-  publishers/single countries the same way via multi-seed
-  `computeGroupFocus`. Neighbourhood slider bounds the walk by hops. Search
-  runs over the FULL corpus and tags results "outside filter"/"outside
-  isolate"; choosing an outside result is an informed exit.
-- **Unlinked shelf** = a one-line summary pill → searchable list inside the
-  Reports panel (`unlinkedOpen`).
-- **Escape** clears one level, topmost first (edge card → selection → group
-  isolate); panels consume their own Escape. "/" ignored while any input has
-  focus.
+  built on the unfiltered index so cross-border edges survive. **Groups
+  panel** isolates continents/blocs/publishers/countries the same way via
+  multi-seed `computeGroupFocus`; neighbourhood slider bounds the walk by
+  hops. Search runs over the full corpus and tags results "outside
+  filter"/"outside isolate."
+- **Unlinked shelf** = a one-line summary pill → searchable list inside
+  the Reports panel.
+- **Escape** clears one level, topmost first (edge card → selection →
+  group isolate); panels consume their own Escape. "/" ignored while any
+  input has focus.
 - **PNG export**: 2× DPR, no HUD, re-entry-guarded, 8192px capture clamp.
-  **Zoom baseline freezes** while the user owns the camera (`frozenBase`).
-- **Loading curtain**: opaque until settled+fitted, 25s safety timeout is
-  load-bearing; corpus-fetch failure pins it with an error instead of an
+  Zoom baseline freezes while the user owns the camera (`frozenBase`).
+- **Loading curtain**: opaque until settled+fitted; 25s safety timeout is
+  load-bearing; a corpus-fetch failure pins it with an error instead of an
   empty scene.
-- **Sliders**: cluster spread 200%–10000% (opens 200%), geo-affinity 0–500%
-  (opens 150%), zoom 0.25–2.6 of fit.
+- **Sliders**: cluster spread 200%–10000% (opens 200%), geo-affinity
+  0–500% (opens 150%), zoom 0.25–2.6 of fit.
 
 ---
 
@@ -319,7 +260,8 @@ folder under `notes/` with a `00-README.md` index (e.g.
 
 ## 6. Known traps
 
-Bugs and gotchas not already covered as a numbered rule above.
+Systemic bugs and gotchas — things that will bite again on a DIFFERENT
+country/file/round, not a single site's own one-off quirk.
 
 - **`RelationshipType` is a closed 4-value union** (`calculated_from` /
   `uses_data_from` / `methodology_depends_on` / `cites`). An off-union value
@@ -330,106 +272,88 @@ Bugs and gotchas not already covered as a numbered rule above.
 - **`PanelShell` supports one panel per edge; the bottom edge belongs to the
   dock.** A new bottom panel is a one-line dock-cell addition, not a
   coordinate hunt. Reserve dock space with an empty grid TRACK, never an
-  item margin. A DEV-only tripwire in `App.tsx` warns on intersecting fixed
-  panels.
+  item margin.
 - **Never put a mode, tab, hover, or view setting in the `forceGraph` memo
   deps** — every change there resets the camera and re-warms physics.
-- **A force reading alpha-scaled strength needs its own reheat-then-refit
-  pair** or its slider silently does nothing after settle (search
-  `view.galaxy` in InfluenceGraph.tsx for the template).
 - **A cap that silently binds costs twice** (node size AND edge width) —
   whenever a slider ceiling moves, recompute `nodeScaleFor`'s cap.
-- **Camera can't end up inside the cluster by raising spread** (fit = 5.675 ×
-  p95; measured ratios ≤ ~2). Spread saturates past ~1000%.
+- **Camera can't end up inside the cluster by raising spread** (fit = 5.675
+  × p95; measured ratios ≤ ~2). Spread saturates past ~1000%.
 - **`meshes.current` cannot be trusted for POSITIONS** — read
   `positionedById` or `graphData().nodes`.
 - **Transparency does not stop a raycast** — ghosted elements need
-  `raycast = () => {}`. Rim-colour uniform exists only after first shader
-  compile. `onPointerMissed` can fire twice per click — the edge-pick path
-  always OPENS, never toggles.
-- **Menus close on `pointerdown`, not `click`**; synthetic drags do NOT reach
-  OrbitControls (use `autoRotate` in harnesses); CSS transitions wedge under
-  software rendering (curtain unmounts on a timer for this reason).
-- **Orb `country` is modal, not membership** — anything deciding membership
-  must read `.members`.
-- **Grok's JSON is not reliably JSON** — parse-check first. Its ids and enum
-  values are inventions until grepped against the FULL corpus (research
-  files AND seed files). Never hand-edit JSON insertions — generate them.
-  Its `files_received` confirmations are not reliable either. **Its imported
-  node DESCRIPTIONS are also not a citable basis by themselves** — a
-  description naming a standard is a lead, not a quote; always raw-verify
-  against a live primary source before minting off it. **A single region's
-  own verification pass can't see cross-region problems** — endpoints that
-  failed verification elsewhere, or duplicate/contradictory edges from a
-  different slice, only show up on a corpus-wide second pass. **Grok can run
-  the same region under multiple prompt names across sessions, producing
-  overlapping or conflicting proposals** — dedupe and diff for conflicts
-  BEFORE verifying, not after.
-- **Never reintroduce faceted node geometry** (fresnel rims) or
-  additive/white pulse cores.
+  `raycast = () => {}`. `onPointerMissed` can fire twice per click — the
+  edge-pick path always OPENS, never toggles.
+- **Menus close on `pointerdown`, not `click`**; synthetic drags do NOT
+  reach OrbitControls (use `autoRotate` in harnesses); CSS transitions
+  wedge under software rendering (curtain unmounts on a timer for this
+  reason).
+- **Grok's JSON is not reliably JSON** — parse-check first. Its ids and
+  enum values are inventions until grepped against the FULL corpus
+  (research files AND seed files). Never hand-edit JSON insertions —
+  generate them. Its `files_received` confirmations are not reliable
+  either. Its imported node DESCRIPTIONS are also not a citable basis by
+  themselves — a description naming a standard is a lead, not a quote;
+  always raw-verify against a live primary source before minting off it. A
+  single region's own verification pass can't see cross-region problems —
+  duplicate/contradictory edges from a different slice only show up on a
+  corpus-wide second pass. Grok can run the same region under multiple
+  prompt names across sessions, producing overlapping or conflicting
+  proposals — dedupe and diff for conflicts BEFORE verifying, not after.
 - **The IMF DSBB tables are JS-walled at the page level** (use a real
   browser, not WebFetch; its PDF observance reports parse fine headless).
-  **Workaround**: DSBB's Angular SPA calls a plain JSON API at
+  Workaround: DSBB's Angular SPA calls a plain JSON API at
   `dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=X&categoryCode=Y`
-  — hitting that directly (curl/WebFetch) returns the real DQAF narrative
-  text without a rendered browser session.
+  — hitting that directly returns the real narrative text.
 - **imf.org PDF *documents* (not press releases) 403 everything** —
-  WebFetch, curl (even with a browser UA), Wayback Machine proxying, all
-  403. **Fix**: navigate Chrome to `https://docs.google.com/viewer?url=<url-
-  encoded-pdf-url>&embedded=true` — renders as a normal page. Use `find`
-  (natural-language search), not `get_page_text`, to check whether a phrase
-  exists in a long lazy-loaded document — `get_page_text` truncates at a
-  byte cap.
-- **Some government portal landing pages are JS-rendered and return nothing
-  useful to WebFetch** (seen on `.ca`, `.gov.mx`, `.gov.ph`, `inegi.org.mx`
-  index pages) — search for the underlying document/sub-page instead of the
-  portal shell. **`.docx` evidence URLs aren't renderable by WebFetch at
-  all** — download and extract `word/document.xml` directly.
-- **A soft-404 can return HTTP 200 with a JS alert body saying the file
-  doesn't exist** (`mods.go.kr`) — read the actual body, not just the status.
-- **A WAF/Incapsula/Cloudflare block can look identical to real content at a
-  glance** (`bcentral.cl`, `dane.gov.co` returned HTTP 200 with a
-  JS-challenge shell) — confirm via `file` on the downloaded body, not just
-  the status code, and cross-check with an independent source before
-  trusting a quote.
-- **ibge.gov.br's main site sits behind a Cloudflare JS challenge that
-  silently 403s WebFetch** (caught fabricating plausible content for a
-  403'd URL once) — use a real browser session, or fetch documents directly
-  from `ftp.ibge.gov.br` / `biblioteca.ibge.gov.br` / `concla.ibge.gov.br`.
-- **`mnr.gov.cn` was entirely unreachable from the sandbox** (DNS/proxy
-  failure, both WebFetch and curl) — worked around via mirrors
-  (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and gov.cn's own announcements.
-- **A GROKREADME.md claim that a standard id "already exists in the corpus"
-  is not itself verified** — `sna-1993` was cited this way but doesn't exist
-  (only `sna-2008`/`sna-2025` do). Worth a scope call if enough countries
-  cite SNA 1993 specifically to be worth minting as its own node.
+  WebFetch, curl, Wayback proxying, all 403. Fix: navigate Chrome to
+  `https://docs.google.com/viewer?url=<url-encoded-pdf-url>&embedded=true`.
+  Use `find` (natural-language search), not `get_page_text`, to check
+  whether a phrase exists in a long lazy-loaded document — `get_page_text`
+  truncates at a byte cap.
+- **Some government portal landing pages are JS-rendered and return
+  nothing useful to WebFetch** — search for the underlying document/
+  sub-page instead of the portal shell. **`.docx` evidence URLs aren't
+  renderable by WebFetch at all** — download and extract
+  `word/document.xml` directly.
+- **A WAF/Incapsula/Cloudflare block can look identical to real content at
+  a glance** (HTTP 200 with a JS-challenge shell) — confirm via `file` on
+  the downloaded body, not just the status code, and cross-check with an
+  independent source before trusting a quote.
+- **ibge.gov.br** (Brazil — active BRICS work) sits behind a Cloudflare JS
+  challenge that silently 403s WebFetch — use a real browser session, or
+  fetch documents directly from `ftp.ibge.gov.br` / `biblioteca.ibge.gov.br`
+  / `concla.ibge.gov.br`.
+- **`mnr.gov.cn`** (China — active BRICS work) is entirely unreachable from
+  the sandbox (DNS/proxy failure, both WebFetch and curl) — worked around
+  via mirrors (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and gov.cn's own
+  announcements.
 - **Grok will reuse one jurisdiction's exact quote/URL as "evidence" for a
-  different jurisdiction's claim** when the document shapes are similar. The
-  tell for illegitimate reuse is the quote naming a specific *other* place.
+  different jurisdiction's claim** when the document shapes are similar.
+  The tell for illegitimate reuse is the quote naming a specific *other*
+  place.
+- **`zip` writing directly into a mounted device folder can fail**
+  (temp-file-then-atomic-rename doesn't survive the mount) — `zip` to a
+  path under `$HOME` (outside `mnt/`), then `cp` the finished zip into the
+  mounted folder.
+- **`device_stage_files` can fail with `session_stale_relogin`** mid-
+  session, with no warning beforehand. Fix requires Thomas to re-sign-in
+  in the desktop app. Workaround when it strikes right after an edit you
+  need to verify: `sha256sum` the device file against the already-
+  verified sandbox copy — a hash match is sufficient proof only when the
+  agent wrote BOTH copies itself (not a substitute for staging when you
+  need genuinely fresh device-side content, e.g. a file Thomas edited
+  locally).
+- **A `report_id`/`candidate_target`-shaped `_dropped` entry (the
+  duplicate-node-flag family) has no `source`/`target` fields at all** —
+  rule 10 above only applies to `edge`-shaped entries. Tagging the former
+  `"resolved"` makes `validate-data.ts` read `source`/`target` as
+  `undefined`, which fails as a dangling reference ("undefined ->
+  undefined"). These entries stay `reason: "note"` permanently, resolved
+  or not — prepend "RESOLVED ..." to the existing `note` field instead
+  (see e.g. eurosystem-ecb.json).
 
 ---
-
-- **`zip` writing directly into a mounted device folder can fail** ("zip I/O
-  error: Operation not permitted... was replacing the original zip file"),
-  even though plain writes (`echo >`, `cp`) to the same folder work fine —
-  looks like zip's temp-file-then-atomic-rename step doesn't survive the
-  mount. Fix: `zip` to a path under `$HOME` (outside `mnt/`), then `cp` the
-  finished zip into the mounted folder. 2026-08-25.
-- **`device_stage_files` can fail with `session_stale_relogin`** ("this
-  device's sign-in is stale or no longer trusted") mid-session, with no
-  warning beforehand — it isn't tied to how long staging has been working
-  fine; it just started failing on a routine re-stage. Fix requires Thomas
-  to re-sign-in in the desktop app; an agent hitting this can't unblock it.
-  Workaround when it strikes right after an edit you need to verify: instead
-  of re-staging, `sha256sum` the device file(s) against the already-staged/
-  already-verified sandbox copies — if the agent wrote the device file
-  itself from known-good sandbox content (not by re-deriving it by hand), a
-  hash match is sufficient proof the two are byte-identical, so the earlier
-  sandbox verification (tsc/validate/build/Playwright) still stands for the
-  device copy. Not a substitute for staging when you actually need FRESH
-  device-side content (e.g. picking up a file Thomas edited locally) — only
-  valid when the agent is the one who wrote both copies. 2026-08-26.
-- **A `report_id`/`candidate_target`-shaped `_dropped` entry (the duplicate-node-flag family, e.g. "is X a dupe of Y?") has no `source`/`target` fields at all — only `edge`/`source`/`target`-shaped entries do.** Rule 10 above ("caveat/resolved must name a live edge") only applies to the latter shape. Tagging the former `"resolved"` once the underlying duplicate question is settled makes `validate-data.ts` read `n.source`/`n.target` as `undefined`, which it can't match against any live edge — it fails as "undefined -> undefined", a dangling reference. The report_id-shaped entries stay `reason: "note"` permanently, resolved or not; only prepend "RESOLVED ..." text to the existing `note` field (see any of the many precedents already using this pattern, e.g. eurosystem-ecb.json). Hit 2026-08-26 resolving the br-scn/br-ibge-sistema-contas-nacionais and cn-stats-law flags.
 
 ## 7. Standing decisions — do not re-raise
 
@@ -437,3 +361,23 @@ Geo-exploration: dropped entirely. Right-drag panning + low-end zoom:
 confirmed solid. Arrow-key fly navigation: offered, declined. Parked: 134
 uncountable cadences; 7 single-use `proposed:` tags; `diary.csv` is Thomas's
 personal file — leave it alone.
+
+**Iran's SNA vintage** (`ir-national-accounts` -> `sna-2008`, plus the six
+held SNA-93 edges): disregarded (Thomas, 2026-08-29). Leave the live
+`sna-2008` edge as is, caveat and all; the six held SNA-93 edges stay
+unminted. Don't re-raise the SCI/UNSD SNA-93 contradiction.
+
+**Generic COICOP citations** (Iran, Iraq — name plain "COICOP" with no
+revision): don't wire them (Thomas, 2026-08-29). No revision-neutral
+`un-coicop` parent node gets minted; the two held edges stay unminted.
+
+**Generic MFSM citation** (Vietnam's `vn-monetary-indicators`): don't
+bother (Thomas, 2026-08-29) — same call as COICOP above. No plain
+`imf-mfsm` node gets minted; the held edge stays unminted. **NACE Rev.2**
+(Türkiye's `tr-industrial-production` -> `isic`, same generic-citation
+shape) is NOT covered by this ruling — still open, see `HANDOFF.md` §3
+item 7.
+
+**`LinkDatum.stiffness` using pre-trunk-collapse degree** (§3 above,
+2026-08-28): ratified as a deliberate divergence from stock d3 (Thomas,
+2026-08-29). No change needed.

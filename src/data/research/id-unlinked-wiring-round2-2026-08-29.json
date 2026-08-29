@@ -1,0 +1,155 @@
+{
+  "_note": "Indonesia unlinked-node wiring, round 2 — Grok's first pass at the round-2 prompt (`notes/grok-prompt-wiring-indonesia-round2-2026-08-29.md`), integrated by the orchestrating session. Grok's sandbox did not have `id-indonesia-grok-2026-08.json` attached despite being asked (`_meta.countries_thin_or_null` in its reply flags this itself) — it worked from the id/title list pasted in the prompt text only. Every one of Grok's 16 proposed dependencies was independently re-fetched by the orchestrating session before minting, per PLAYBOOK rule 3 (never trust a self-reported quote). 10 of 16 survived raw-verification with the cited page or document actually containing the claimed statement; those are minted below, 2 with a genuinely new node each (`id-djpk-apbd`, `id-bkpm-lkpm`) — both plain administrative-data sources feeding an already-live BPS/DJPK or BKPM statistical product, independently confirmed. The other 6 are held, not minted: 3 point at BPS 'statistics-table' landing pages that render only a title/abstract to a non-JS fetch (same shape as the known BPS JS-rendering trap already in PLAYBOOK §6), and the other 3 point at BPS 'publication' PDFs behind a signed `web-api.bps.go.id/download.php?f=...` link that 403'd on direct fetch AND via the docs.google.com/viewer workaround (PLAYBOOK §6's imf.org fix does not transfer to this domain). All 6 are recorded in `_dropped` as `deferred` — real leads, not confirmed absences — for a future session with better BPS PDF access. Net this round, measured via `npm run validate` before/after (PLAYBOOK rule 8): 10 edges, 2 new nodes (both immediately non-isolated, since each is a target), 13 previously-isolated Indonesia nodes closed (98 -> 85 of what's now 128 total) — several edges connect two previously-isolated nodes each, e.g. `id-financial-stability-review`/`id-sski`/`id-economic-report-indonesia` all wiring to the previously-also-isolated `id-bank-indonesia`, closing 4 nodes with 3 edges.",
+  "reports": [
+    {
+      "id": "id-djpk-apbd",
+      "title": "DJPK local-government fiscal-balance / APBD administrative data",
+      "publisher": "Direktorat Jenderal Perimbangan Keuangan, Kementerian Keuangan",
+      "country": "ID",
+      "jurisdiction_level": "federal",
+      "region": "Indonesia",
+      "description": "Administrative realisation and budget files for kabupaten/kota APBD, including DAU, DAK, DBH and PAD, compiled by DJPK (Directorate General of Fiscal Balance, Ministry of Finance) and reused by BPS in its Financial Statistics of Regency/Municipality Government publication.",
+      "url": "https://djpk.kemenkeu.go.id",
+      "domains": ["municipal-finance", "fiscal-transfers"],
+      "last_updated": null
+    },
+    {
+      "id": "id-bkpm-lkpm",
+      "title": "Laporan Kegiatan Penanaman Modal (LKPM) / investment-activity reports",
+      "publisher": "Kementerian Investasi dan Hilirisasi / BKPM",
+      "country": "ID",
+      "jurisdiction_level": "federal",
+      "region": "Indonesia",
+      "description": "Quarterly LKPM filings submitted through the OSS system by PMA (foreign) and PMDN (domestic) investors; the administrative source BKPM aggregates into its published FDI and domestic-investment realisation statistics.",
+      "url": "https://www.bkpm.go.id/id/info/realisasi-investasi",
+      "domains": ["investment"],
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "id-gender-stats",
+      "target_report_id": "id-susenas",
+      "relationship_type": "uses_data_from",
+      "basis": "BPS's own \"Women and Men in Indonesia 2019\" publication states its data source directly. Independently re-fetched and confirmed verbatim 2026-08-29.",
+      "evidence_url": "https://www.bps.go.id/en/publication/2020/12/17/ff4b8c5cccd3b72fe889a5ae/perempuan-dan-laki-laki-di-indonesia-2019.html",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-economic-report-indonesia",
+      "target_report_id": "id-bank-indonesia",
+      "relationship_type": "cites",
+      "basis": "Bank Indonesia's own LPI landing page names the BI statute (Law 23/1999 on Bank Indonesia, as amended, most recently by Law 4/2023) as the legal basis for publishing the Economic Report on Indonesia. Independently re-fetched and confirmed verbatim 2026-08-29.",
+      "evidence_url": "https://www.bi.go.id/id/lpi/default.aspx",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-sski",
+      "target_report_id": "id-bank-indonesia",
+      "relationship_type": "cites",
+      "basis": "SSKI is Bank Indonesia's own monthly financial-system statistics publication, described on BI's SSKI page as supporting BI's macroprudential/financial-stability policy. Independently re-fetched and confirmed 2026-08-29.",
+      "evidence_url": "https://www.bi.go.id/id/statistik/ekonomi-keuangan/sski/default.aspx",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-financial-stability-review",
+      "target_report_id": "id-bank-indonesia",
+      "relationship_type": "cites",
+      "basis": "Kajian Stabilitas Keuangan (No. 43, September 2024) is issued by Bank Indonesia's Macroprudential Policy Department as its own financial-stability review. Independently re-fetched and confirmed 2026-08-29.",
+      "evidence_url": "https://www.bi.go.id/id/publikasi/laporan/Pages/KSK_4324.aspx",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-disaster-risk-index",
+      "target_report_id": "id-bnpb",
+      "relationship_type": "cites",
+      "basis": "The IRBI 2024 book's own metadata names BNPB (\"Penerbit: BNPB\") as publisher. Independently re-fetched and confirmed 2026-08-29 (first fetch attempt 403'd; second succeeded).",
+      "evidence_url": "https://bnpb.go.id/buku/buku-irbi-2024",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-disaster-risk-index",
+      "target_report_id": "id-volcano-earthquake",
+      "relationship_type": "uses_data_from",
+      "basis": "IRBI's own methodology names earthquake, tsunami and volcanic eruption among the nine hazard types used to compute the index. Independently re-fetched and confirmed verbatim against the actual PDF 2026-08-29.",
+      "evidence_url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/BUKU%20IRBI%202024_BNPB_lowres.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-democracy-index",
+      "target_report_id": "id-rpjmn",
+      "relationship_type": "cites",
+      "basis": "BPS (Jambi provincial office) states IDI is the political-development measure used by government in the RPJMN 2010-2014, 2015-2019 and 2020-2024 periods. Independently re-fetched and confirmed verbatim 2026-08-29.",
+      "evidence_url": "https://jambi.bps.go.id/id/news/2022/09/07/310/sekilas-info-mengenai-penyusunan-indeks-demokrasi-indonesia-metode-baru.html",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-local-government-finance",
+      "target_report_id": "id-djpk-apbd",
+      "relationship_type": "uses_data_from",
+      "basis": "BPS's own Financial Statistics of Regency/Municipality Government publication states its APBD realisation data was obtained from DJPK (Directorate General of Fiscal Balance), Ministry of Finance administrative data. New node minted for the DJPK source. Independently re-fetched and confirmed verbatim 2026-08-29.",
+      "evidence_url": "https://www.bps.go.id/en/publication/2024/12/31/6a4becee62edbb7320b6a81e/statistik-keuangan-pemerintah-kabupaten-kota-2023-dan-2024.html",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-fdi-realization",
+      "target_report_id": "id-bkpm-lkpm",
+      "relationship_type": "uses_data_from",
+      "basis": "BKPM's own realisation-data page states PMA investment values are based on LKPM filings received from PMA companies. New node minted for the LKPM administrative source. Independently re-fetched and confirmed verbatim 2026-08-29.",
+      "evidence_url": "https://data.bkpm.go.id/visualisasi-detail/data-realisasi-investasi-tahun-2025-berdasarkan-provinsi",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-domestic-investment",
+      "target_report_id": "id-bkpm-lkpm",
+      "relationship_type": "uses_data_from",
+      "basis": "The same BKPM source note covers PMDN realisation via LKPM alongside PMA. Independently re-fetched and confirmed 2026-08-29.",
+      "evidence_url": "https://data.bkpm.go.id/dataset-detail/data-realisasi-investasi-triwulan-i-tahun-2026-i5AeXC3",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "id-gini-inequality -> id-susenas",
+      "source": "id-gini-inequality",
+      "target": "id-susenas",
+      "reason": "deferred",
+      "why": "Grok proposed this (quoting a Susenas-source note) but the cited BPS statistics-table page returned only a title on independent re-fetch, no source-attribution text — the same JS-rendered/dynamic-table shape flagged elsewhere for BPS 'statistics-table' pages (as opposed to 'publication' pages, which at least have an abstract). Almost certainly true — every other BPS welfare product wired this round or in round 1 (welfare indicators, education stats, crime stats, health profile, gender stats) confirmed Susenas as source — but not independently confirmable this round. Real lead for a session with BPS metadata/sirusa access."
+    },
+    {
+      "edge": "id-cpi-provincial -> un-coicop-2018",
+      "source": "id-cpi-provincial",
+      "target": "un-coicop-2018",
+      "reason": "deferred",
+      "why": "Grok quoted the IHK 2022=100 methodology note naming COICOP 2018 for commodity grouping. The publication landing page itself has no body text (abstract only); the actual PDF is behind a signed `web-api.bps.go.id/download.php?f=...` link that returned PROXY_REJECTED (403) on direct fetch and again via the docs.google.com/viewer workaround that unblocks imf.org PDFs (PLAYBOOK §6) — that workaround does not transfer to this domain. Plausible (BPS's other provincial CPI products use COICOP elsewhere in the corpus) but not independently confirmed."
+    },
+    {
+      "edge": "id-cpi-provincial -> cpi-manual",
+      "source": "id-cpi-provincial",
+      "target": "cpi-manual",
+      "reason": "deferred",
+      "why": "Same document as the COICOP-2018 lead above (Grok quoted the same methodology note naming the CPI Manual: Theory and Practice 2004 and the Practical Guide to Producing Consumer Price Indices 2009) and blocked the same way — PDF 403'd both directly and via docs.google.com/viewer. Held alongside the COICOP-2018 lead; if that one gets confirmed, revisit this one from the same document."
+    },
+    {
+      "edge": "id-energy-balances -> id-esdm-energy-statistics",
+      "source": "id-energy-balances",
+      "target": null,
+      "reason": "deferred",
+      "why": "Grok proposed a new node `id-esdm-energy-statistics` (ESDM/Kementerian ESDM energy statistics) and quoted the Energy Balance of Indonesia's source list naming ESDM, PLN, PGN, BPH Migas and KAI as inputs. The publication landing page itself has no body text and the PDF download link 403'd both directly and via docs.google.com/viewer, same as the CPI-provincial leads above. Node not minted since the only edge that would use it is unconfirmed — revisit together if the PDF becomes reachable."
+    },
+    {
+      "edge": "id-ghg-inventory -> ipcc-2006-gl",
+      "source": "id-ghg-inventory",
+      "target": null,
+      "reason": "deferred",
+      "why": "Grok proposed a new node `ipcc-2006-gl` (2006 IPCC Guidelines for National Greenhouse Gas Inventories) and quoted BPS's physical supply-use table for GHG emissions listing it among six data sources. The cited URL is a 'statistics-table' page that rendered no body text on independent re-fetch (title/menu chrome only) — same JS-rendering shape as the id-gini-inequality lead above. Node not minted since unconfirmed. Genuinely plausible — the 2006 IPCC Guidelines are the standard national GHG inventories cite worldwide — but this project's own standard is a document, not a plausibility argument."
+    },
+    {
+      "edge": "id-ghg-inventory -> id-esdm-energy-statistics",
+      "source": "id-ghg-inventory",
+      "target": null,
+      "reason": "deferred",
+      "why": "Same source list as the ipcc-2006-gl lead immediately above (the same BPS GHG supply-use page names ESDM energy statistics and ESDM emission factors among its inputs), same unconfirmable page, same proposed-but-unminted `id-esdm-energy-statistics` node. Revisit together with the other two ESDM/IPCC leads if this page or its underlying document becomes reachable."
+    }
+  ]
+}
