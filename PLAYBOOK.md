@@ -373,10 +373,12 @@ revision): don't wire them (Thomas, 2026-08-29). No revision-neutral
 
 **Generic MFSM citation** (Vietnam's `vn-monetary-indicators`): don't
 bother (Thomas, 2026-08-29) — same call as COICOP above. No plain
-`imf-mfsm` node gets minted; the held edge stays unminted. **NACE Rev.2**
-(Türkiye's `tr-industrial-production` -> `isic`, same generic-citation
-shape) is NOT covered by this ruling — still open, see `HANDOFF.md` §3
-item 7.
+`imf-mfsm` node gets minted; the held edge stays unminted.
+
+**NACE Rev.2** (Türkiye's `tr-industrial-production` -> `isic`, same
+generic-citation shape but a 2-hop chain rather than a revision ambiguity):
+don't mint a generic `nace-rev2` node (Thomas, 2026-08-29). TR's IPI (and
+any other NACE Rev.2-citing country) stays without a direct ISIC edge.
 
 **`LinkDatum.stiffness` using pre-trunk-collapse degree** (§3 above,
 2026-08-28): ratified as a deliberate divergence from stock d3 (Thomas,

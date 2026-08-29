@@ -94,7 +94,7 @@
       "description": "Official government tallies of persons affected, casualties and peso damage to agriculture, infrastructure and houses, used by PAGASA and PSA environment statistics as the impact source.",
       "url": "https://ndrrmc.gov.ph/",
       "domains": [
-        "disaster-risk",
+        "proposed:disaster-risk",
         "governance"
       ],
       "last_updated": null
@@ -652,8 +652,8 @@
       "edge": "ph-renewables->ph-power-stats",
       "source": "ph-renewables",
       "target": "ph-power-stats",
-      "reason": "caveat",
-      "why": "Grok candidate (uses_data_from); the quoted RE capacity figures (7,331/6,077 MW, 30.7%/29.2%) are genuine text in the DOE LOEPP document but are the LUZON-grid-only subtotal, not Philippines-wide national RE figures as implied (national total is 11,020/9,176 MW, 33.8%/32.4%). The underlying relationship is plausible but this specific evidence mischaracterizes a regional slice as national; not minted pending correctly-scoped evidence. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "reason": "no-document",
+      "why": "RECLASSIFIED 2026-08-29 (was miscoded as caveat — caveat requires a real live edge to annotate, and no ph-renewables->ph-power-stats edge exists; this is a no-document finding instead, per the validator's 'caveat/resolved note with no matching live edge' check). Original reasoning follows.\n\nGrok candidate (uses_data_from); the quoted RE capacity figures (7,331/6,077 MW, 30.7%/29.2%) are genuine text in the DOE LOEPP document but are the LUZON-grid-only subtotal, not Philippines-wide national RE figures as implied (national total is 11,020/9,176 MW, 33.8%/32.4%). The underlying relationship is plausible but this specific evidence mischaracterizes a regional slice as national; not minted pending correctly-scoped evidence. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
     },
     {
       "edge": "ph-pagasa->ph-ndrrmc-sitrep",
@@ -680,8 +680,8 @@
       "edge": "ph-fiscal-ops->ph-btr-cash-operations",
       "source": "ph-fiscal-ops",
       "target": "ph-btr-cash-operations",
-      "reason": "resolved",
-      "why": "Grok proposed 'ph-btr-cash-operations' as a new node (Bureau of the Treasury's National Government Cash Operations Report), but that report IS the existing ph-fiscal-ops node itself (see its _url_evidence: 'Bureau of the Treasury National Government Cash Operations page...'). Self-referential duplicate; no new node minted, no edge added. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "reason": "note",
+      "why": "RECLASSIFIED 2026-08-29 (was miscoded as resolved — resolved requires a real live edge matching this exact (source,target), and ph-btr-cash-operations was never minted as a separate node, so no such edge can exist; this is a 'note'-type observation about the corpus instead, per the validator's 'caveat/resolved note with no matching live edge' check). Original reasoning follows.\n\nGrok proposed 'ph-btr-cash-operations' as a new node (Bureau of the Treasury's National Government Cash Operations Report), but that report IS the existing ph-fiscal-ops node itself (see its _url_evidence: 'Bureau of the Treasury National Government Cash Operations page...'). Self-referential duplicate; no new node minted, no edge added. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
     }
   ]
 }

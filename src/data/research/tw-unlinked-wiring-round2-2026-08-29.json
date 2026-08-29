@@ -759,11 +759,11 @@
       "why": "Grok candidate (calculated_from). The fetched page only shows HSP Bureau's administrative subordination to NSTC; it does not show Hsinchu's figures being calculated from the national aggregate. The natural direction is the reverse (tw-science-parks aggregate would be calculated from the sum of individual parks including Hsinchu), which is not what was proposed. Not minted either direction pending clearer evidence. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
     },
     {
-      "edge": "tw-cross-strait-trade-share->tw-mof-trade-statistics",
+      "edge": "tw-cross-strait-trade-share->tw-trade-statistics",
       "source": "tw-cross-strait-trade-share",
-      "target": "tw-mof-trade-statistics",
+      "target": "tw-trade-statistics",
       "reason": "resolved",
-      "why": "Grok proposed this as a new node/edge (calculated_from), but tw-mof-trade-statistics is the same report as the existing corpus node tw-trade-statistics, and tw-cross-strait-trade-share->tw-trade-statistics (uses_data_from) already exists in the live graph, sourced from the same MAC flash report. No separate node/edge needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "why": "CORRECTED 2026-08-29 (target id fixed — 'tw-mof-trade-statistics' was never a real node id, it was Grok's alias for the existing corpus node tw-trade-statistics; the validator flagged this resolved-note as having no matching live edge because it named the alias, not the real id. Retargeted to tw-trade-statistics, which the live edge tw-cross-strait-trade-share->tw-trade-statistics genuinely matches — reason stays resolved since that edge is real.) Original reasoning follows.\n\nGrok proposed this as a new node/edge (calculated_from), but tw-mof-trade-statistics is the same report as the existing corpus node tw-trade-statistics, and tw-cross-strait-trade-share->tw-trade-statistics (uses_data_from) already exists in the live graph, sourced from the same MAC flash report. No separate node/edge needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
     }
   ]
 }

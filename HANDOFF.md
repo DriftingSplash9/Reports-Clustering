@@ -21,9 +21,16 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 **3,496 reports · 3,017 dependencies.** `npm run validate` (0 errors),
 `npm run gen`, `tsx scripts/test-logic.ts` (120/120), `tsc --noEmit` all
-clean in a cloud sandbox — reconfirmed 2026-08-29 after the EU
-government-finance round-2 wiring. (`npm run build`/bundle-size not
-re-run since round 6 — only data files changed, no renderer code touched.)
+clean in a cloud sandbox — reconfirmed 2026-08-29 after fixing the 2
+domain-tag errors (`mx-programa-sectorial-bienestar-2025-2030`,
+`ph-ndrrmc-sitrep` — now `proposed:` prefixed) and the 3 caveat/resolved
+notes with no matching live edge (`ph-renewables -> ph-power-stats`
+reclassified `no-document`; `ph-fiscal-ops -> ph-btr-cash-operations`
+reclassified `note`; `tw-cross-strait-trade-share -> tw-mof-trade-
+statistics` retargeted to the real id `tw-trade-statistics`, which the
+edge genuinely matches) — all pre-existing from round 6, none caused by
+this session. (`npm run build`/bundle-size not re-run since round 6 —
+only data files changed, no renderer code touched.)
 
 **Cluster-repulsion range: 0–15** (raised from 0–10, `ViewControls.tsx` /
 `view.ts`) — Thomas's call, live. Not yet tested at the new ceiling.
@@ -78,17 +85,19 @@ measure before believing.)
    next round needs scoping from scratch. Unlinked-node wiring candidates:
    `sa-pif → sa-national-accounts` (blocked twice), Indonesia's 6
    BPS-access-blocked deferred leads from round 5, Afghanistan's
-   af-education/af-border-mobility (403, un-Grok'd), three small Vietnam
-   leads (each likely `part_of` a sibling, but no document says so in
-   words), or a handful of round-6 leads that failed only on access
-   (mnd.gov.tw cluster for Taiwan, 7 gov.mx/imss/cdmx candidates for
-   Mexico) — all need a real browser tool, not another Grok prompt.
-6. **Modelling decision needed: NACE Rev.2 has no node.** Türkiye's
-   industrial-production index cites NACE Rev.2 (itself ISIC-derived per
-   Eurostat's manual), but with no NACE node to carry the two-hop chain,
-   `tr-industrial-production → isic` was declined. Will recur for other
-   NACE-citing countries. Fix: mint a generic `nace-rev2` node, or accept
-   these countries can't get a direct ISIC edge.
+   af-education/af-border-mobility (403, un-Grok'd), or a handful of
+   round-6 leads that failed only on access (mnd.gov.tw cluster for
+   Taiwan, 7 gov.mx/imss/cdmx candidates for Mexico) — all need a real
+   browser tool, not another Grok prompt. Vietnam's 3-node `part_of`
+   cleanup is done (2026-08-29): `vn-fdi-partners → vn-fdi` resolved with
+   real evidence (the source page is literally listed inside vn-fdi's own
+   listing page). `vn-port-haiphong`/`vn-port-hcmc-caimep` → 
+   `vn-seaport-throughput` stay open — this round fetched VIMAWA's actual
+   monthly cargo-throughput data file (it's `.xlsx`, not the `.docx` the
+   prior round couldn't render) and confirmed it breaks down by cargo type
+   only, no per-port split. Genuinely no document states the containment;
+   don't retry without a different source. See project memory
+   `unlinked_nodes_cleared` for detail.
 
 ---
 
