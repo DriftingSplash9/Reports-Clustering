@@ -1,0 +1,341 @@
+{
+  "_slice": "vn-unlinked-wiring-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "verified",
+  "_note": "Vietnam unlinked-node wiring round, first of the ID/TW/PH/VN/MX re-pick batch flagged in unlinked_nodes_cleared.md (the JP/KR/SA/TR/AF candidates-only tier was already fully closed). 39 unlinked VN nodes researched via 4 parallel subagents split by theme (banking/monetary, fiscal/social-insurance, GSO production/demographic/trade, education/energy/climate/ports), each fetching each node's own listed url (or finding the real publisher's site where none was listed) for the publisher's own citation of its data/methodology source. Every proposed edge and new-node quote was independently re-fetched and re-verified by the orchestrating session (downloading and text-extracting every PDF/DOCX directly rather than trusting subagent self-report, per the round-2 lesson) before minting. 8 of 39 nodes closed with 10 edges, 3 new international-standard nodes proposed (imf-psds-guide, oecd-digital-suts-handbook, ipcc-ghg-guidelines), 31 remain dropped (mostly no-document after real attempts; several sites had intermittent connection resets flagged as unreadable-source rather than treated as confirming absence). One edge (vn-bop -> imf-bpm6) resolves a 2026-08-28 candidates-tier no-document finding that had been blocked purely by SBV's site being unreachable that round — see the 'resolved' rewrite in candidates-tier-wiring-2026-08-28.json. One edge was deliberately held rather than minted: vn-monetary-indicators's own SBV metadata document cites the plain 'MFSM' (paired with '1993 SNA' in the same sentence, implying the legacy 2000 manual) but the corpus's only monetary-statistics-manual node is the versioned imf-mfsmcg-2016 (2016 Compilation Guide) — same generic-citation-vs-versioned-node trap as the Iran/Iraq COICOP and Iran SNA-93 decisions, flagged in HANDOFF.md rather than guessed.",
+  "reports": [
+    {
+      "id": "imf-psds-guide",
+      "title": "Public Sector Debt Statistics: Guide for Compilers and Users",
+      "publisher": "Inter-Agency Task Force on Finance Statistics (IMF, World Bank, BIS, OECD, Eurostat, UNCTAD, Commonwealth Secretariat, Paris Club Secretariat)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "2011 joint international manual on the concepts, classification, compilation and dissemination of public-sector debt statistics, co-published by the IMF, World Bank and six other international bodies under the Inter-Agency Task Force on Finance Statistics. Distinct from the IMF's Government Finance Statistics Manual (GFSM) — it is the standard specifically for debt-stock statistics, cited by name and edition in Vietnam's Ministry of Finance Public Debt Bulletin as the international basis for its debt classification.",
+      "last_updated": null,
+      "url": "https://www.imf.org/external/pubs/ft/psds/2011/eng/index.htm",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "oecd-digital-suts-handbook",
+      "title": "OECD Handbook on Compiling Digital Supply-Use Tables",
+      "publisher": "OECD",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "OECD guidance (issued November 2023) for measuring the digital economy's contribution to GDP via Digital Supply and Use Tables (D.SUTs). Cited by name by Vietnam's General Statistics Office as the methodology it studied and applied when compiling the digital economy's value-added share of GDP/GRDP.",
+      "last_updated": null,
+      "url": "https://www.oecd.org/en/publications/oecd-handbook-on-compiling-digital-supply-and-use-tables_11a0db02-en.html",
+      "domains": [
+        "services"
+      ]
+    },
+    {
+      "id": "ipcc-ghg-guidelines",
+      "title": "IPCC Guidelines for National Greenhouse Gas Inventories",
+      "publisher": "Intergovernmental Panel on Climate Change (IPCC) Task Force on National Greenhouse Gas Inventories",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The IPCC's methodological standard for compiling national greenhouse gas inventories under the UNFCCC, issued across multiple cumulative editions (the Revised 1996 Guidelines, the 2006 Guidelines, and the 2019 Refinement to the 2006 Guidelines). Cited directly, across different editions, by Vietnam's Biennial Update Report and Nationally Determined Contribution as the basis for its GHG inventory and emissions-projection methodology.",
+      "last_updated": null,
+      "url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/",
+      "domains": [
+        "environment"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "vn-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SBV's own e-GDDS/DQAF metadata document for Vietnam's International Investment Position (IIP) series, filed on Vietnam's National Summary Data Page by SBV's International Balance of Payment Division, states directly: \"Vietnam's IIP is conformed to BPM6\" and \"Transactions are categorized based on BPM6 standards.\" IIP is the stock counterpart to the flow data vn-bop represents, compiled by the same SBV division under the single IMF manual covering both (the Balance of Payments and International Investment Position Manual, 6th ed.) — SBV's live Balance-of-Payments data page and its DSBB BOP metadata file were both blocked (WAF rejection) on repeated attempts this round, so the IIP-series metadata document, from the same division and manual family, is used as the basis instead. This resolves a 2026-08-28 candidates-tier finding that recorded this exact edge as no-document after every SBV page returned only navigation chrome that round — the blocker (unreachable SBV documents) has since been resolved via this document; see the 'resolved' rewrite in candidates-tier-wiring-2026-08-28.json.",
+      "evidence_url": "https://nsdp.nso.gov.vn/GSO-chung/Tu%E1%BA%A5n%20Anh/metadata%20tieng%20Anh-moi/SBV.VNM_GDDS_DQAF_EXT_IIP00_International%20investment%20position%20(IIP).docx"
+    },
+    {
+      "source_report_id": "vn-sbv",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "cites",
+      "basis": "Vietnam's official National Summary Data Page (nsdp.nso.gov.vn), the IMF e-GDDS portal for Vietnam, states: \"Data linked from this page correspond to data described in the International Monetary Fund’s DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Vietnam participates, please visit the DSBB home page.\" SBV is itself a designated data-provider agency on this page — its own Central Bank Survey metadata document, filed on the same NSDP and used to compile reserve-money and other monetary statistics, names \"The State Bank of Vietnam\" as the reporting agency (\"Reserve money is compiled on a monthly basis by the State Bank of Vietnam (SBV)\"). This complements the existing vn-gso -> imf-e-gdds edge: GSO and SBV are separate e-GDDS-participating agencies filing their own category's metadata within the same Vietnamese national framework.",
+      "evidence_url": "https://nsdp.nso.gov.vn/index.htm"
+    },
+    {
+      "source_report_id": "vn-state-budget",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Vietnam's own Government Finance Statistics Manual, developed jointly by the Ministry of Finance, the World Bank and the IMF, states on its cover page: \"This manual is developed by the Ministry of Finance of Vietnam, the World Bank and the International Monetary Fund,\" and contains a dedicated section (\"Relationship between the Vietnam classification and GFSM2001/2014\") mapping Vietnam's state-budget classification directly onto the IMF's Government Finance Statistics Manual framework.",
+      "evidence_url": "https://documents1.worldbank.org/curated/en/289761626236296109/pdf/Vietnam-Government-Finance-Statistics-Manual.pdf"
+    },
+    {
+      "source_report_id": "vn-budget-deficit",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same MOF/World Bank/IMF Vietnam GFS Manual states Vietnam's state budget reports already publish deficit figures on both bases (\"State budget reports publish deficits on a Government of Vietnam and GFS basis\"), and that bridge tables — built during the 2012 IMF GFS mission, mapping the State budget classification (Circular No. 342/2016/TT-BTC) to the GFS2014 framework — are what produce the GFS-basis deficit figure, with any residual difference from the domestic figure to be documented in MOF's own State Budget Bulletin (SBB).",
+      "evidence_url": "https://documents1.worldbank.org/curated/en/289761626236296109/pdf/Vietnam-Government-Finance-Statistics-Manual.pdf"
+    },
+    {
+      "source_report_id": "vn-public-debt",
+      "target_report_id": "imf-psds-guide",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MOF's Public Debt Bulletin No. 17 (Bản tin Nợ công số 17, Debt Management and External Finance Department, Jan 2024), in its own methodology section, states its debt classification follows international standards \"như được giới thiệu trong cuốn 'Thống kê nợ công: Hướng dẫn cho người sử dụng'\" (\"as introduced in the book 'Public Sector Debt Statistics: Guide for Compilers and Users'\"), footnoting the exact 2011 joint publication by the BIS, the Commonwealth Secretariat, Eurostat, the IMF, the OECD, the Paris Club Secretariat, UNCTAD and the World Bank — distinct from imf-gfsm, which the same corpus already uses for Vietnam's budget/deficit statistics.",
+      "evidence_url": "https://static1.vietstock.vn/edocs/14237/document_2_.pdf"
+    },
+    {
+      "source_report_id": "vn-digital-economy",
+      "target_report_id": "oecd-digital-suts-handbook",
+      "relationship_type": "methodology_depends_on",
+      "basis": "GSO's own December 2023 press release on compiling the digital economy's value-added share of GDP/GRDP states it studied international measurement frameworks and names OECD's handbook specifically: \"Tháng 11 năm 2023 tổ chức này đã ban hành Sổ tay biên soạn D.SUTs để làm rõ hơn các khái niệm cũng như hướng dẫn chi tiết phương pháp\" (\"In November 2023 this organisation [OECD] issued the D.SUTs Compilation Handbook to further clarify the concepts and give detailed methodological guidance\"). The same release also discusses an alternative ADB input-output framework, but names the OECD D.SUTs handbook as the guidance whose concepts it adopted.",
+      "evidence_url": "https://www.gso.gov.vn/tin-tuc-thong-ke/2023/12/thong-cao-bao-chi-ve-ket-qua-bien-soan-chi-tieu-ty-trong-gia-tri-tang-them-cua-kinh-te-so-trong-gdp-grdp-cua-viet-nam/"
+    },
+    {
+      "source_report_id": "vn-ghg",
+      "target_report_id": "ipcc-ghg-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Vietnam's 3rd Biennial Update Report (BUR3) to the UNFCCC states directly: \"The national GHG inventory is carried out in accordance with the guidelines of the IPCC, including: The 2006 IPCC Guidelines for national GHG inventories ... The 2019 refinement to the 2006 IPCC Guidelines for national GHG inventories.\"",
+      "evidence_url": "https://unfccc.int/sites/default/files/resource/Viet%20Nam_BUR3.pdf"
+    },
+    {
+      "source_report_id": "vn-ghg",
+      "target_report_id": "vn-gso",
+      "relationship_type": "uses_data_from",
+      "basis": "The same BUR3 states: \"The General Statistics Office (GSO) under MPI is responsible for collecting/controlling the quality of data from other focal points ... to provide the DCC, MONRE with activity data and related information to implement GHG inventories,\" directly naming GSO as the activity-data supplier for Vietnam's national GHG inventory.",
+      "evidence_url": "https://unfccc.int/sites/default/files/resource/Viet%20Nam_BUR3.pdf"
+    },
+    {
+      "source_report_id": "vn-ndc",
+      "target_report_id": "vn-ghg",
+      "relationship_type": "uses_data_from",
+      "basis": "Vietnam's 2022 NDC states its 2014 baseline emissions figure is \"the results of the GHG inventory ... published in the Third National Communication of Viet Nam sent to the UNFCCC in 2019.\" The Third National Communication is not itself a separate corpus node; it is an earlier report in the same MONRE/DCC national GHG-inventory series that vn-ghg's listed document (BUR3) continues and updates, so this is recorded as the NDC drawing on Vietnam's ongoing national GHG-inventory programme, not literally the BUR3 PDF — flagged explicitly rather than silently treated as identical documents.",
+      "evidence_url": "https://unfccc.int/sites/default/files/NDC/2022-11/Viet%20Nam_NDC_2022_Eng.pdf"
+    },
+    {
+      "source_report_id": "vn-ndc",
+      "target_report_id": "ipcc-ghg-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same NDC document states: \"The Revised 1996 IPCC Guidelines for National Greenhouse Gas Inventories and the 2000 IPCC Good Practice Guidance have been used to calculate and forecast GHG emissions to 2030 ... the IPCC Good Practice Guidance for the LULUCF sector in 2003 has been used,\" citing an earlier IPCC edition than BUR3's 2006/2019 citation — both fall under the same corpus node (ipcc-ghg-guidelines), scoped to the IPCC Guidelines standard across its cumulative editions rather than one fixed vintage, unlike SNA/COICOP where each edition is a materially different, non-cumulative framework.",
+      "evidence_url": "https://unfccc.int/sites/default/files/NDC/2022-11/Viet%20Nam_NDC_2022_Eng.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "vn-banking-system -> ???",
+      "source": "vn-banking-system",
+      "target": null,
+      "reason": "no-document",
+      "why": "sbv.gov.vn/en/statistics and sbv.gov.vn/en/state-owned-commercial-banks (live) show only an Agribank charter-capital figure with no source/methodology statement. dttktt.sbv.gov.vn, where SBV's actual credit-institution-structure statistics live, was unreachable (connection reset) throughout. SBV's Depository Corporations Survey metadata document does discuss institutional-sector classification, but its clearest, most literal match is the monetary-aggregates methodology already attributed to vn-monetary-indicators; reusing it here would double-count one source across two nodes, so no edge is minted."
+    },
+    {
+      "edge": "vn-credit-growth -> ???",
+      "source": "vn-credit-growth",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "SBV's 'Credit to the Economy' statistics page (dttktt.sbv.gov.vn/webcenter/portal/en/home/sbv/statistic/ctte) was unreachable on every attempt (connection reset / frame error). No separate GDDS/DSBB metadata document for a 'credit to the economy' series exists on Vietnam's NSDP — that category is not one of the listed NSDP data rows."
+    },
+    {
+      "edge": "vn-npl -> bis-basel-framework",
+      "source": "vn-npl",
+      "target": null,
+      "reason": "no-document",
+      "why": "SBV's NPL-ratio page (dttktt.sbv.gov.vn) was unreachable (connection reset). A live SBV Financial Soundness Indicators table (sbv.gov.vn/en/web/sbv_portal/w/sbv606221) cites Circulars 41/2016 and 22/2019 with explicit 'Applying Basel II' language, but that table covers capital-adequacy-ratio indicators specifically, not the NPL/asset-quality classification indicator. No text was found tying Vietnam's 5-group NPL classification (a domestic SBV-circular system) to Basel or an IMF manual by name."
+    },
+    {
+      "edge": "vn-state-owned-banks -> ???",
+      "source": "vn-state-owned-banks",
+      "target": null,
+      "reason": "no-document",
+      "why": "sbv.gov.vn/en/state-owned-commercial-banks loads live and lists Agribank with a charter-capital figure, but states no data source or compilation methodology, and no further linked page provided a citation."
+    },
+    {
+      "edge": "vn-policy-banks -> vn-sbv",
+      "source": "vn-policy-banks",
+      "target": "vn-sbv",
+      "reason": "no-document",
+      "why": "Found VBSP's own site (vbsp.org.vn) and an SBV press release confirming the SBV Governor chairs VBSP's Board, plus VBSP's history page (established under Decision No.131/2002/QD-TTg) and SBV's Depository Corporations Survey metadata listing 'one social policy bank' among institutions consolidated into SBV's monetary survey. This documents governance/organisational containment (VBSP is state-directed and its accounts roll into system-wide SBV totals), not VBSP's own report citing SBV data/methodology as a source — no VBSP annual report, financial statement, or methodology page stating a data dependency was found."
+    },
+    {
+      "edge": "vn-monetary-indicators -> imf-mfsmcg-2016 (held, not minted)",
+      "source": "vn-monetary-indicators",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "SBV's Depository Corporations Survey DQAF metadata document (authored by SBV's Forecasting and Statistics Department) states: 'The classification by institutional sectors is incomplete and not fully in line with the guidance of the IMF's Monetary and Financial Statistics Manual (MFSM) ... the SBV plans to sectorize domestic institutional units in monetary statistics in line with the 1993 SNA and IMF's MFSM ... the SBV intends to gradually adapt the guidelines of the MFSM.' This is a real, documented methodological relationship, but the citation is to the plain, unversioned 'MFSM' — paired in the same sentence with '1993 SNA', which strongly implies the legacy MFSM (2000), not the corpus's only monetary-manual node, imf-mfsmcg-2016 (the 2016 Compilation Guide, a materially updated successor). Wiring to imf-mfsmcg-2016 would repeat the exact trap already ruled on for Iran/Iraq's generic COICOP citations and Iran's SNA-93 vintage: a generic or older-vintage citation should not be silently mapped onto the corpus's newest same-family node. Held pending either (a) minting a plain 'imf-mfsm' (2000) node, or (b) a Thomas ruling that the aspirational MFSMCG-2016 language ('plans to', 'intends to gradually adapt') is close enough to wire as-is — flagged in HANDOFF.md as a third instance of this recurring modelling question, alongside the existing COICOP and Iran-SNA decisions."
+    },
+    {
+      "edge": "vn-health-insurance -> ???",
+      "source": "vn-health-insurance",
+      "target": null,
+      "reason": "no-document",
+      "why": "The listed URL (baohiemxahoi.gov.vn/congkhai/pages/so-lieu-thong-ke-nganh.aspx, shared with vn-social-insurance) renders as an empty JS-dependent navigation shell with no statistical tables, downloadable reports, or citations retrievable via fetch. Checked VSS's general-introduction page and news feed for ILO/WHO/C102 citations tied to coverage-statistics methodology; found only unrelated news commentary (an ILO consultant's opinion piece, a republished ILO global-coverage-gap report) — neither is a citation of methodology/data source for VSS's own statistics. A VSS magazine article specifically about ILO Convention 102 was dead (expired TLS cert) and, by its own title, discussed the prospective impact of Vietnam possibly joining C102 rather than a current basis for VSS statistics, so it would not have cleared the bar even if reachable."
+    },
+    {
+      "edge": "vn-social-insurance -> ???",
+      "source": "vn-social-insurance",
+      "target": null,
+      "reason": "no-document",
+      "why": "Same listed URL and same result as vn-health-insurance (see above) — no retrievable statistical content, methodology page, or citation of ILO C102 as the basis for VSS's own social/unemployment-insurance coverage statistics could be found."
+    },
+    {
+      "edge": "vn-defence-policy -> ???",
+      "source": "vn-defence-policy",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The Ministry of National Defence site (mod.gov.vn, both the 2019 White Paper page and the homepage) returned empty/unloadable content (JS-heavy portal, not renderable via non-JS fetch). As expected for a policy-framing white paper rather than a statistical series, no independent secondary source claims it documents a data/methodology dependency either."
+    },
+    {
+      "edge": "vn-ethnic-poverty -> vn-poverty",
+      "source": "vn-ethnic-poverty",
+      "target": "vn-poverty",
+      "reason": "no-document",
+      "why": "Identified the real underlying product — GSO/CEMA's 'Survey on the Socio-Economic Situation of 53 Ethnic Minority Groups', run every 5 years jointly with the Committee for Ethnic Minority Affairs. Its own official Q&A/methodology documentation for the 2024 round describes independently fielded household/commune-level data collection (July-Aug 2024) with no stated dependency on VHLSS or vn-poverty's data — a genuinely separate, primary-data statistical product, not part_of vn-poverty and not uses_data_from it."
+    },
+    {
+      "edge": "vn-agriculture -> ???",
+      "source": "vn-agriculture",
+      "target": null,
+      "reason": "no-document",
+      "why": "GSO's own agriculture-methodology explainer page cites only a domestic regulation (Circular 27/2011/TT-BNNPTNT, Ministry of Agriculture and Rural Development; Circular 34/2009 for forest classification). No FAO, UN, or other international body/standard is named anywhere in the body text."
+    },
+    {
+      "edge": "vn-aquaculture -> ???",
+      "source": "vn-aquaculture",
+      "target": null,
+      "reason": "no-document",
+      "why": "The node's own URL (nso.gov.vn/en/agriculture-forestry-and-fishery/) and GSO's fishery-methodology page contain only technical definitions with no citation of FAO or any international framework."
+    },
+    {
+      "edge": "vn-rice -> ???",
+      "source": "vn-rice",
+      "target": null,
+      "reason": "no-document",
+      "why": "Shares its listed source page with vn-aquaculture (nso.gov.vn/en/agriculture-forestry-and-fishery/, a listing page, not a separately-sourced rice page). The agriculture methodology explainer cites only the same domestic circular, no FAO/international citation."
+    },
+    {
+      "edge": "vn-population -> un-census-principles",
+      "source": "vn-population",
+      "target": "un-census-principles",
+      "reason": "no-document",
+      "why": "GSO's population-methodology page (loaded fine) contains only demographic formulas, no UN citation. The 2019 census dashboard states only that UNFPA gave 'technical and financial support', not a citation of the UN Principles and Recommendations for Population and Housing Censuses specifically. The 2019 census's own completed-results article and PDF report could not be reached (persistent connection-level errors across ~5 retries on gso.gov.vn/nso.gov.vn, not 404s) — not used as evidence either way."
+    },
+    {
+      "edge": "vn-iip -> isic",
+      "source": "vn-iip",
+      "target": "isic",
+      "reason": "no-document",
+      "why": "GSO's own industrial-statistics methodology page explicitly and repeatedly cites VSIC (Vietnam's own domestic industrial classification, a distinct Vietnamese instrument/node from the corpus's 'isic') for building the IIP ('production indexes of VSIC 4-digit classes, VSIC 2-digit divisions...'), never naming ISIC or any international standard directly."
+    },
+    {
+      "edge": "vn-ecommerce -> ???",
+      "source": "vn-ecommerce",
+      "target": null,
+      "reason": "no-document",
+      "why": "The node's listed publisher (idea.gov.vn) is actually the E-Commerce and Digital Economy Department under the Ministry of Industry and Trade, not GSO as the node record currently states. Its homepage and document-listing page (white papers/index reports 2019-2023) name no data source or measurement methodology."
+    },
+    {
+      "edge": "vn-electronics-trade -> hs",
+      "source": "vn-electronics-trade",
+      "target": "hs",
+      "reason": "no-document",
+      "why": "The node's own listed URL (nso.gov.vn export/import monthly page, fetched successfully) contains general trade tables with no mention of HS codes or classification standards. GSO's deeper trade-statistics methodology page failed with persistent connection-reset errors (5+ attempts, not a clean 404) and could not be read this round."
+    },
+    {
+      "edge": "vn-fdi -> ???",
+      "source": "vn-fdi",
+      "target": null,
+      "reason": "no-document",
+      "why": "fia.mof.gov.vn's FDI listing page presents registered/adjusted/disbursed capital figures with no attribution to GSO, IMF BPM6, UNCTAD, or any stated methodology — figures appear to be FIA's own compilation with no sourcing statement on the page."
+    },
+    {
+      "edge": "vn-fdi-partners -> vn-fdi (containment, not a dependency)",
+      "source": "vn-fdi-partners",
+      "target": "vn-fdi",
+      "reason": "wrong-target",
+      "why": "vn-fdi-partners (fia.mof.gov.vn Detail/.../NewsID/f56eaaa3-...) and vn-fdi (fia.mof.gov.vn List/.../CatID/457641e2-...) share the identical CatID (457641e2-2605-4632-bbd8-39ee65454a06) — the partner-country breakdown article is one report filed inside the same FIA listing/category as the general FDI statistics, i.e. a containment relationship rather than an independently-sourced dataset. Neither page cites GSO, BPM6, UNCTAD, or any methodology — no dependency edge in either direction is supported by a document. Flagged for Thomas as a possible part_of candidate (fia.mof.gov.vn's own site structure suggests it, but no document states 'published inside' in words, so the field was not set by this round)."
+    },
+    {
+      "edge": "vn-education-enrolment -> ???",
+      "source": "vn-education-enrolment",
+      "target": null,
+      "reason": "no-document",
+      "why": "nso.gov.vn/en/education/ (shared with vn-higher-education) is a bare index/list of ~20+ education indicator names with no narrative text, footnotes, or source/methodology statements of any kind."
+    },
+    {
+      "edge": "vn-higher-education -> ???",
+      "source": "vn-higher-education",
+      "target": null,
+      "reason": "no-document",
+      "why": "Same page as vn-education-enrolment (nso.gov.vn/en/education/, confirmed genuinely identical URL) — a bare indicator list with no source citation for higher-education/technical-qualification data."
+    },
+    {
+      "edge": "vn-literacy-education-stock -> ???",
+      "source": "vn-literacy-education-stock",
+      "target": null,
+      "reason": "no-document",
+      "why": "nso.gov.vn/en/population/ is a bare index list of population/vital-statistics/literacy indicators with no narrative text or citation of the census, a specific survey, or a methodology. No per-indicator metadata page with an explicit data-source note could be fetched."
+    },
+    {
+      "edge": "vn-ethnic-minorities -> ???",
+      "source": "vn-ethnic-minorities",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "No listed URL. Identified the real underlying survey ('Điều tra, thu thập thông tin về thực trạng kinh tế - xã hội của 53 dân tộc thiểu số', GSO/Committee for Ethnic Minority Affairs) via search, with a snippet suggesting its 2019 round drew on the 2019 census. Every attempt to fetch a page actually describing this (datacollection.gso.gov.vn, 53dantoc.gso.gov.vn, gso.gov.vn/su-kien/..., nso.gov.vn/.../2026/06/...) failed at the fetch layer (robots-disallowed, server error, or a redirect landing on a generic bureau homepage with no article content) — no page text was actually retrieved, so per the no-fabrication rule, no edge or new node is proposed despite a plausible relationship existing in principle."
+    },
+    {
+      "edge": "vn-tourism -> ???",
+      "source": "vn-tourism",
+      "target": null,
+      "reason": "no-document",
+      "why": "bvhttdl.gov.vn/thong-ke-c215.htm (Ministry of Culture, Sports and Tourism statistics/news page) shows tourism revenue/arrival figures from various provinces in news items, but attributes them to no named statistical source (GSO, immigration authorities, etc.) anywhere on the page."
+    },
+    {
+      "edge": "vn-energy-mix -> ???",
+      "source": "vn-energy-mix",
+      "target": null,
+      "reason": "no-document",
+      "why": "evn.com.vn's annual-report page is only an index of downloadable PDFs (2017-2025) with no data-source/methodology text on the page itself; the individual PDFs were not opened this round."
+    },
+    {
+      "edge": "vn-pdp8 -> vn-energy-mix",
+      "source": "vn-pdp8",
+      "target": "vn-energy-mix",
+      "reason": "no-document",
+      "why": "Decision 768/QD-TTg (vanban.chinhphu.vn, cross-checked against a luatvietnam.vn full-text mirror)'s legal-basis ('Căn cứ') section cites only laws, decrees and National Assembly resolutions (Electricity Law 2024, Planning Law 2017, Resolution 81/2023/QH15) — no citation of EVN reports, generation/consumption statistics, or GSO data as an evidentiary basis was found."
+    },
+    {
+      "edge": "vn-digital-strategy -> vn-digital-economy",
+      "source": "vn-digital-strategy",
+      "target": "vn-digital-economy",
+      "reason": "no-document",
+      "why": "Decision 749/QD-TTg (vanban.chinhphu.vn, cross-checked against thuvienphapluat.vn) sets forward-looking targets ('digital economy accounts for 20% of GDP by 2025') but does not cite a current/baseline digital-economy GDP-share statistic sourced from GSO or any named body — reads as a pure policy target, not a data-dependency citation."
+    },
+    {
+      "edge": "vn-logistics-framing -> vn-seaport-throughput",
+      "source": "vn-logistics-framing",
+      "target": "vn-seaport-throughput",
+      "reason": "unreadable-source",
+      "why": "The Vietnam Logistics Report 2023 landing page (logistics.gov.vn) describes the report only in general terms ('reliable information systems and data updated from official sources') without naming vn-seaport-throughput, VIMAWA, or GSO trade statistics specifically. The parent listing page rendered as a JS-loading shell with no content, and the full report PDF itself could not be located/fetched, so its actual data-sources section was not verified."
+    },
+    {
+      "edge": "vn-seaport-throughput -> hs",
+      "source": "vn-seaport-throughput",
+      "target": "hs",
+      "reason": "unreadable-source",
+      "why": "vimawa.gov.vn/vi/thong-ke lists monthly cargo-throughput reports only as downloadable .docx/.pdf files, not renderable by the fetch tool, with no explanatory text on the page itself about data sources or classification standards. Could not confirm any HS-code citation without opening the individual report files."
+    },
+    {
+      "edge": "vn-port-haiphong -> vn-seaport-throughput (likely containment, undocumented)",
+      "source": "vn-port-haiphong",
+      "target": "vn-seaport-throughput",
+      "reason": "no-document",
+      "why": "No listed URL. Hai Phong Port Authority's own site (cangvuhaiphong.gov.vn) publishes no throughput statistics, only regulatory/administrative content (though it names Vietnam Maritime Administration as its oversight body). VIMAWA's own Hai Phong page is a berth/terminal directory with no throughput figures. A Hai Phong city-government figure reports standalone provincial cargo tonnage with no stated link to VIMAWA's national total. Structurally very likely a component of vn-seaport-throughput's national aggregate, but no document states that containment in words, so no part_of or edge is asserted — flagged for Thomas as a plausible but undocumented part_of candidate."
+    },
+    {
+      "edge": "vn-port-hcmc-caimep -> vn-seaport-throughput (likely containment, undocumented)",
+      "source": "vn-port-hcmc-caimep",
+      "target": "vn-seaport-throughput",
+      "reason": "no-document",
+      "why": "No listed URL. Saigon Newport Corporation's own site self-reports throughput ('a throughput volume of 9.7 million TEUs') without citing Vietnam Maritime Administration, GSO, or any government statistical body as validation/source. No VIMAWA or GSO document found explicitly citing Cai Mep/HCMC port figures as sourced from or feeding into vn-seaport-throughput's national aggregate — same undocumented-containment situation as vn-port-haiphong."
+    }
+  ]
+}
