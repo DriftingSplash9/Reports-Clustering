@@ -173,7 +173,21 @@
       "source": "mx-alcaldia-benito-juarez",
       "target": "mx-censo-poblacion",
       "reason": "deferred",
-      "why": "The exact same IPDP CDMX \"Panorama Geografico y Estadistico\" template used for Tlahuac and Gustavo A. Madero (both minted this round, citing INEGI census/DENUE/censos economicos) almost certainly exists for Benito Juarez too, but its PDF failed to fetch on 3 separate attempts (ROBOTS_DISALLOWED / connection timeout). Strongly likely real, not confirmed — do not guess the same citations onto it without a successful fetch."
+      "why": "STILL NOT MINTED after a Grok follow-up pass — upgraded lead, not closed. The exact same IPDP CDMX \"Panorama Geografico y Estadistico\" template used for Tlahuac and Gustavo A. Madero (both minted this round) almost certainly exists for Benito Juarez too. Grok located the specific per-alcaldia PDF (hash 67047017b6d17708697532, distinct from the other three alcaldias' own hashes — a good authenticity sign, not a reused URL) and reported its section 02.1.1/02.1.2 footnotes read \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI](2020,2010,2000,1990). Censos de Poblacion y Vivienda\" and \"...[INEGI](2020). Marco Geoestadistico. Censo de Poblacion y Vivienda\", extracted from the file's search-index rather than a live fetch. The orchestrating session independently tried to raw-verify this exact URL 4 times via curl (connection reset every time, matching the original ROBOTS_DISALLOWED/timeout pattern), once via Wayback Machine's availability API (a snapshot exists at timestamp 20250630182122 but both a direct fetch and the WebFetch tool were refused — egress policy / PROXY_REJECTED respectively), and once more via WebFetch directly on the archive.org URL (also refused). Every independent attempt hit a wall, so per the evidence standard this stays unminted — but the quote is now on record so a future session with different network access (or a real browser tool) can close it in one fetch rather than starting over."
+    },
+    {
+      "edge": "mx-alcaldia-benito-juarez -> mx-censos-economicos",
+      "source": "mx-alcaldia-benito-juarez",
+      "target": "mx-censos-economicos",
+      "reason": "deferred",
+      "why": "Same access situation as the census edge above (see that entry for the full access-attempt log). Grok reported this same Benito Juarez PDF's section 07 footnote reads \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI] (2003, 2008, 2013, 2018). Sistema Automatizado de Informacion Censal (SAIC). Censos Economicos.\" — index-extracted, not live-fetched, by either party. Not minted; quote on record for the next attempt."
+    },
+    {
+      "edge": "mx-alcaldia-benito-juarez -> mx-denue",
+      "source": "mx-alcaldia-benito-juarez",
+      "target": "mx-denue",
+      "reason": "deferred",
+      "why": "Same access situation as the census edge above. Grok reported this same Benito Juarez PDF's section 07.2.2 footnote reads \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI] (2022). Directorio Estadistico Nacional de Unidades Economicas [DENUE]\" (2022 vintage, matching Gustavo A. Madero's own DENUE-2022 citation already minted this round) — index-extracted, not live-fetched, by either party. Not minted; quote on record for the next attempt."
     },
     {
       "edge": "mx-enigh-salud -> COICOP (edition/applicability unconfirmed)",

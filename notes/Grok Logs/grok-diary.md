@@ -266,15 +266,32 @@ everything) — it measurably improves citation discipline.
   `_dropped` entries. `gy-caricom` left untouched (Guyana's own membership
   record, still zero edges — a separate rescope question, not this pass's
   call). Corpus 3,385/2,596, validate 120/120, tsc/build clean.
-- **Prompt queued 2026-08-28, not yet sent** (`notes/grok-prompt-unlinked-2026-08-28.md`) —
-  4 narrowly-scoped leads left over from the same-day ID/TW/PH/MX unlinked-node
-  deep-research round (parallel subagents, not Grok — see
-  `unlinked_nodes_wiring_round1_2026-08-28` memory): 2 Taiwan classification/CPI
-  edges and 1 Philippines financial-system edge, all blocked by TLS/403 issues
-  on the same domain rather than absent evidence (our agents found the claims
-  indexed verbatim by search engines but couldn't read the primary page), plus
-  1 Mexico municipal-profile edge set (a document template already confirmed
-  for 3 sibling alcaldías, presumably the same for the 4th). All 4 name real
-  existing corpus ids — no new nodes expected. Attach GROKREADME.md alongside
-  it, per the usual process. Tell Thomas which 2 files to attach, separately
-  from the prompt block, per §0.
+- **Prompt sent 2026-08-28, processed same day** (`notes/grok-prompt-unlinked-2026-08-28.md`
+  → reply `unlinkednodefollowup20260828.json`) — 3 of 4 leads closed, all
+  raw-verified before minting per rule 3 (a pointer is not a source). Taiwan
+  ISIC (`tw-business-demography -> isic`): confirmed verbatim via direct curl
+  fetch of two ws.dgbas.gov.tw PDFs (an Executive Yuan directive + DGBAS's own
+  draft explanation), TLS verification disabled to reach the domain — its
+  certificate chain is genuinely broken (independently confirmed, not a proxy
+  artifact); content came over unmodified and matches independently-indexed
+  search snippets. Philippines MFSMCG (`ph-financial-system ->
+  imf-mfsmcg-2016`): confirmed verbatim via two BSP primer PDFs (CBSandDCS.pdf,
+  OFCS.pdf), with an exact byte-size match (64,739 / 66,316 bytes) as extra
+  corroboration; one PDF needed a retry after a transient connection reset.
+  Taiwan COICOP-2018-CPI lead did NOT hold — DGBAS's own CPI metadata
+  confirms the basket is still the traditional 7-division structure — but it
+  surfaced a real adjacent find Grok itself flagged in `notes_not_proposed`:
+  `tw-national-accounts -> un-coicop-2018` (Taiwan's Nov-2024 five-year
+  national-accounts revision adopted COICOP 2018 for the private-consumption
+  component specifically, not the CPI), verified via a DGBAS staff article PDF
+  and minted. Mexico's 3 Benito Juárez edges (census/economic-census/DENUE)
+  did NOT verify: 6 independent attempts (direct curl x4 with retries, Wayback
+  Machine availability API + fetch, WebFetch on the Wayback copy) all failed
+  to reach the IPDP CDMX PDF Grok cited. Not minted — Grok's exact quotes
+  preserved in the slice's `_dropped` entries (reason `deferred`) for a future
+  session with a working browser tool to close in one fetch. Net: +3 edges,
+  corpus 3,468/2,807, validate/tsc/build clean. Lesson: Grok's
+  byte-identical-size claim for a PDF it couldn't quote directly (OFCS.pdf)
+  was still useful corroboration once we fetched the file ourselves and
+  matched the size — a cheap secondary check worth asking for whenever a
+  primary quote match is uncertain.

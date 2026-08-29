@@ -2,7 +2,7 @@
   "_slice": "ph-unlinked-wiring-2026-08-28",
   "_researched": "2026-08-28",
   "_status": "verified",
-  "_note": "Deepest wiring pass yet on the Philippines' unlinked-node backlog (61/68 unlinked as of this round's start). PSA's technical-notes pages were unusually forthcoming about classification standards (PSIC/ISIC, PSCC/HS, PCOICOP/COICOP) and SNA 2008 adoption; BSP's own primer PDFs supplied the BPM6/SDDS/WEO bridges. Two new classification nodes minted (PSIC, PSCC) since PSA's own industrial and commodity classifications sit between the national series and the UN standards they're patterned after. Several BSP metadata pages (financial system accounts, monetary aggregates methodology) are robots-disallowed to the fetch tool and are logged as dropped rather than guessed.",
+  "_note": "Deepest wiring pass yet on the Philippines' unlinked-node backlog (61/68 unlinked as of this round's start). PSA's technical-notes pages were unusually forthcoming about classification standards (PSIC/ISIC, PSCC/HS, PCOICOP/COICOP) and SNA 2008 adoption; BSP's own primer PDFs supplied the BPM6/SDDS/WEO bridges. Two new classification nodes minted (PSIC, PSCC) since PSA's own industrial and commodity classifications sit between the national series and the UN standards they're patterned after. UPDATE 2026-08-28 (Grok follow-up, raw-verified by the orchestrating session via direct fetch of both PDFs, byte sizes matched exactly): ph-financial-system -> imf-mfsmcg-2016 closed — the robots-blocked SitePages/Lists paths turned out not to be needed, two other BSP PDFs name MFSMCG (one names the 2016 edition specifically) and were reachable all along.",
   "reports": [
     {
       "id": "ph-psic",
@@ -173,6 +173,13 @@
       "relationship_type": "calculated_from",
       "basis": "PSA's own press release: \"The 2020 Census-Based National Population Projections are available in three fertility scenarios\" — projections are explicitly built from the 2020 Census of Population counts using the cohort-component method.",
       "evidence_url": "https://psa.gov.ph/content/philippine-population-projected-be-around-13867-million-2055-under-scenario-2"
+    },
+    {
+      "source_report_id": "ph-financial-system",
+      "target_report_id": "imf-mfsmcg-2016",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CLOSED via a Grok follow-up pass, raw-verified by the orchestrating session (both PDFs fetched directly, byte sizes match exactly what was reported: CBSandDCS.pdf 64,739 bytes, OFCS.pdf 66,316 bytes). BSP's own primer: \"The Department of Economic Statistics (DES) of the Bangko Sentral ng Pilipinas (BSP) compiles monetary statistics in accordance with framework as set forth in the Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) of the International Monetary Fund (IMF).\" The specific 2016 edition is named on BSP's own Other Financial Corporations Survey table notes: \"It is based on the framework of the International Monetary Fund (IMF)'s Monetary and Financial Statistics Manual and Compilation Guide (MFSMCG) 2016.\" The robots-blocked SitePages/Lists paths named in the original round were not needed — these two primer/table-notes PDFs were reachable directly all along.",
+      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/CBSandDCS.pdf"
     }
   ],
   "_dropped": [
@@ -182,13 +189,6 @@
       "target": "icls-work-statistics-resolution",
       "reason": "denied",
       "why": "PSA's own Labor Force Survey Technical Notes PDF (fetched directly) cite a domestic NSCB Resolution as the basis for the unemployment/underemployment redefinition, explicitly not ICLS/ILO. A real relationship was checked and found not to hold — recorded so this isn't re-attempted."
-    },
-    {
-      "edge": "ph-financial-system -> imf-mfsmcg-2016",
-      "source": "ph-financial-system",
-      "target": "imf-mfsmcg-2016",
-      "reason": "deferred",
-      "why": "Search snippets strongly suggest BSP's own financial-system metadata pages name the IMF's Monetary and Financial Statistics Manual and Compilation Guide, but the actual pages (bsp.gov.ph SitePages/Statistics/Financial%20System%20Accounts.aspx, Lists/Report%20on%20the%20Philippine%20Financial%20System, Media_and_Research/Primers%20Faqs/CBSandDCS.pdf, OFCS.pdf) are all robots-disallowed to the fetch tool. No verbatim quote could be confirmed, so nothing was minted despite the target node already existing in the corpus (Mexico's Banxico monetary-aggregates edge, this same round)."
     },
     {
       "edge": "ph-rd-statistics -> (Frascati Manual, no corpus node)",

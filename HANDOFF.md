@@ -28,10 +28,11 @@ PLAYBOOK rule 1, don't state it.
 
 ## 2. Current state
 
-**Corpus: 3,468 reports · 2,804 dependencies.** `npm run validate` clean
+**Corpus: 3,468 reports · 2,807 dependencies.** `npm run validate` clean
 (120/120), `tsc --noEmit` clean, `npm run build` clean (1,499.37 kB).
 
-Five data rounds and four renderer fixes landed 2026-08-28. Zero-domestic-edge
+Five data rounds (one with a same-day Grok follow-up closing 3 more edges)
+and four renderer fixes landed 2026-08-28. Zero-domestic-edge
 countries went 102 → 77 over the day; unlinked-node count (a separate,
 sharper metric) went 1,251 → 1,194 in a fifth round targeting the four
 highest-count countries (ID/TW/PH/MX). Detail is in project memory:
@@ -163,9 +164,12 @@ whether it reads right).
 6. **Unlinked-node wiring, next batch of 4.** Same method as today's ID/TW/PH/MX
    round (see `unlinked_nodes_wiring_round1_2026-08-28` memory) — pick the next
    4 hardest from `unlinked_nodes_cleared.md`'s "not yet attempted" list (JP, KR,
-   Saudi Arabia, Türkiye, Afghanistan are the candidates). A Grok prompt for this
-   round's own dead ends is queued at `notes/grok-prompt-unlinked-2026-08-28.md`
-   — attach the files it names before pasting it to Grok.
+   Saudi Arabia, Türkiye, Afghanistan). The Grok follow-up
+   (`notes/grok-prompt-unlinked-2026-08-28.md`) already ran and closed 3 of its
+   4 leads, raw-verified. The 4th (one Mexico alcaldía, 3 census/DENUE edges)
+   is still blocked on every access route tried — stays `deferred` with Grok's
+   quotes on record in `mx-unlinked-wiring-2026-08-28.json` for whoever gets a
+   working fetch next.
 
 ---
 

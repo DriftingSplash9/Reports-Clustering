@@ -2,7 +2,7 @@
   "_slice": "tw-unlinked-wiring-2026-08-28",
   "_researched": "2026-08-28",
   "_status": "verified",
-  "_note": "Deepest wiring pass yet on Taiwan's unlinked-node backlog (89/108 unlinked as of this round's start). Found a genuinely rare domestic data chain (MAC's Cross-Strait Economic Statistics compilation carries explicit per-row data-source footnotes naming the source agency) plus two clean IMF-SDDS/WHO-ICD-10 bridges. Several strong leads (Taiwan's ISIC-derived industrial classification, COICOP-2018-based CPI) were blocked by broken TLS / 403s on ws.dgbas.gov.tw and www.stat.gov.tw and are logged as deferred rather than guessed.",
+  "_note": "Deepest wiring pass yet on Taiwan's unlinked-node backlog (89/108 unlinked as of this round's start). Found a genuinely rare domestic data chain (MAC's Cross-Strait Economic Statistics compilation carries explicit per-row data-source footnotes naming the source agency) plus IMF-SDDS/WHO-ICD-10 bridges. UPDATE 2026-08-28 (Grok follow-up on the round's blocked-domain leads, raw-verified by the orchestrating session via direct curl fetch with TLS verification disabled — ws.dgbas.gov.tw's certificate chain is genuinely broken, confirmed independently, not a proxy artifact — plus one clean fetch of an Executive Yuan directive): the ISIC lead closed (tw-business-demography -> isic, now minted below); the COICOP-2018 CPI lead did NOT hold (tw-price-detail's CPI basket is still the traditional 7-division structure, not COICOP-2018) but surfaced a real adjacent finding — Taiwan's national accounts DID adopt COICOP 2018 for the private-consumption expenditure component in a November 2024 five-year revision, minted as tw-national-accounts -> un-coicop-2018 below.",
   "reports": [],
   "dependencies": [
     {
@@ -60,22 +60,29 @@
       "relationship_type": "methodology_depends_on",
       "basis": "National Health Insurance Administration's own program document, titled for the coding-quality incentive tied to the mandated coding-system transition: \"105年全民健康保險國際疾病分類第十版(ICD-10-CM/PCS)編碼品質提升獎勵方案\" confirming NHI claims/statistics are coded under ICD-10.",
       "evidence_url": "https://www.nhi.gov.tw/ch/dl-75144-b056f98a09c745b0b8e6b30c112b8733-1.pdf"
+    },
+    {
+      "source_report_id": "tw-business-demography",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "An Executive Yuan directive (行政院 函, 發文日期114年12月12日) ordering the 12th revision of Taiwan's Standard Industrial Classification into effect states: \"本（第12）次修正主要參照2024年聯合國國際標準行業分類第5次修正版...進行修正\" (\"this revision mainly references the UN's 2024 International Standard Industrial Classification 5th revision\"). DGBAS's own draft general-explanation document states the same more explicitly: \"行業統計分類第12次修正草案業依聯合國最新國際標準行業分類（ISIC Rev.5）及國內產業現況與統計實務擬具如附，修正後計20大類、88中類、254小類、529細類\". Both documents fetched and read directly by the orchestrating session (TLS verification disabled to reach ws.dgbas.gov.tw — its certificate chain is genuinely broken, an external fact about the domain, not a proxy artifact; content itself came over the connection unmodified and matches the same text independently found indexed by search engines).",
+      "evidence_url": "https://ws.dgbas.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvNDYxL3JlbGZpbGUvMTE0NzMvMjM1MjIwL%2BihjOalree1seioiOWIhumhnuesrDEy5qyh5L%2Bu5q2j6I2J5qGI57i96Kqq5piOLnBkZg%3D%3D&n=6KGM5qWt57Wx6KiI5YiG6aGe56ysMTLmrKHkv67mraPojYnmoYjnuL3oqqrmmI4ucGRm"
+    },
+    {
+      "source_report_id": "tw-national-accounts",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "DGBAS's own official article (主計月刊 第834期, 2025.6, by 邱創賦, 行政院主計總處綜合統計處專員) on the private-consumption component of GDP: \"110 年民間消費循例依據工業及服務業普查、相關最新公務統計與調查結果進行基準年規模校正，並配合COICOP 2018 調整家庭消費歸類\" and, on adoption timing: \"自2018 年聯合國公布新版COICOP 後，主要國家多漸進配合調整家庭消費支出分類，我國亦於113 年11 月國民所得統計五年修正完成民間消費分類調整及70 年至112 年時間數列回溯修正，俾接軌國際\" (Taiwan completed the private-consumption classification adjustment and 1981-2023 time-series backcast in the November 2024 national-income five-year revision). Note: this is the national-accounts private-consumption component, not the CPI (tw-price-detail) — the CPI basket was checked separately and is NOT COICOP-2018-based (see the dropped entry below).",
+      "evidence_url": "http://www.bas-association.org.tw/catalog/arts/011406014.pdf"
     }
   ],
   "_dropped": [
     {
-      "edge": "tw-business-demography -> isic",
-      "source": "tw-business-demography",
-      "target": "isic",
-      "reason": "deferred",
-      "why": "Strong circumstantial evidence exists: DGBAS's own 行業統計分類 revision documents are indexed verbatim by search engines stating the classification is ISIC-derived (\"行業統計分類第12次修正草案依聯合國最新國際標準行業分類...\"), but every hosting URL was unreachable to the fetch tool: ws.dgbas.gov.tw has a broken TLS certificate chain (curl confirms CERTIFICATE_VERIFY_FAILED, not a proxy issue), www.stat.gov.tw returns HTTP 403 to fetch for PDFs specifically, and ebook.dgbas.gov.tw / census(portal).dgbas.gov.tw also 403. No verbatim quote could be confirmed. Worth a revisit with a real browser tool rather than WebFetch."
-    },
-    {
       "edge": "tw-price-detail -> un-coicop-2018",
       "source": "tw-price-detail",
       "target": "un-coicop-2018",
-      "reason": "deferred",
-      "why": "DGBAS hosts a document literally titled \"COICOP 2018\" plus a CPI 編製方法說明 PDF, both located via search, but both live on the same blocked domains as the ISIC lead above (ws.dgbas.gov.tw TLS failure, www.stat.gov.tw 403). Could not confirm the applicable text verbatim."
+      "reason": "no-document",
+      "why": "CONFIRMED NOT via a Grok follow-up pass, raw-verified. DGBAS's own CPI metadata still describes the published CPI basket as the traditional structure — 7 大類 (食物、衣著、居住、交通及通訊、醫藥保健、教養娛樂、雜項), 40 中類, 62 小類, 368 項目群 — not the COICOP 2018 13-division household-consumption structure. ws.dgbas.gov.tw CPI methodology PDFs remain TLS-blocked (confirmed independently: genuinely broken certificate chain, not a proxy artifact) and indexed snippets of those same PDFs do not contain a COICOP-2018 basket statement either. A related but distinct finding was NOT dropped here — see tw-national-accounts -> un-coicop-2018 above, which is a real, different edge (private consumption within GDP, not the CPI)."
     },
     {
       "edge": "tw-fx-reserves -> imf-bpm6",
