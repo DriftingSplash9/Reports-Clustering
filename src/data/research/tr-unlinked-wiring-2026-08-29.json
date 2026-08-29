@@ -1,0 +1,151 @@
+{
+  "_slice": "tr-unlinked-wiring-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "verified",
+  "_note": "Deep-research pass on Türkiye's 20 zero-edge nodes. All edges below were minted only after directly fetching (curl+pdftotext for TUIK/TCMB/Treasury/SBB PDFs and a NATO PDF, WebFetch cross-checked and then independently re-verified via raw text extraction where the source was a plain PDF) and confirming the verbatim quote exists in the live document. Best channel by far was TCMB/TUIK own metaveri (metadata) PDFs, which routinely name the exact IMF/UN/FAO manual their compilation rules are based on. 7 of 20 nodes resolved (35% yield); the rest were either genuinely undocumented in fetchable primary sources or blocked by JS-rendered TUIK subdomains (veriportali.tuik.gov.tr, tuikweb.tuik.gov.tr) that return only a 'JavaScript required' shell to both curl and WebFetch. UPDATE 2026-08-29 (Grok follow-up): closed tr-health -> who-icd-10 via TurkStat's own Eurostat-filed metadata (the TUIK bulletin URL Grok cited remains unverifiable, JS-shell blocked). Declined tr-industrial-production -> isic on evidentiary-structure grounds — verified real but a 2-hop chain via NACE Rev.2, which has no node in this corpus; flagged for Thomas as a modelling question (mint a generic NACE Rev.2 node, or leave TR's IPI without a direct ISIC edge).",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "tr-defence-budget",
+      "target_report_id": "nato-defence-expenditure",
+      "relationship_type": "uses_data_from",
+      "basis": "tr-defence-budget's own citation URL is this NATO document. Direct extraction of the live PDF (pdftotext) confirms Türkiye's defence-expenditure-as-%-of-GDP series appears in NATO's Table 3, with the 2025 estimate row reading 'Türkiye ... 2.13 2.33' (2024e, 2025e), matching the corpus description's 'roughly 2.3% of GDP.' The report's own methodology note states: \"Each Ally's Ministry of Defence reports current and estimated future defence expenditure according to an agreed definition,\" confirming Türkiye's national defence-spending figures are compiled into and drawn from this NATO estimate series rather than being independently derived.",
+      "evidence_url": "https://www.nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf"
+    },
+    {
+      "source_report_id": "tr-labour",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "TurkStat's own methodological document on changes to the Household Labour Force Survey (Hanehalkı İşgücü Araştırması) states directly: \"19. ICLS'te çalışma türleri, istihdam, işsizlik ve atıl işgücüne ilişkin tanım ve standartlar yeniden belirlenmiştir\" (\"At the 19th ICLS, the definitions and standards concerning types of work, employment, unemployment and labour underutilization were redefined\"), and the document goes on for many pages describing how TurkStat's labour force indicators were revised to implement the 19th ICLS resolution (the exact resolution named by icls-work-statistics-resolution).",
+      "evidence_url": "https://www.tuik.gov.tr/indir/metodolojikDokumanlar/hia_metod_tr.pdf"
+    },
+    {
+      "source_report_id": "tr-ndc",
+      "target_report_id": "tr-ghg",
+      "relationship_type": "calculated_from",
+      "basis": "Türkiye's Second NDC states in its 'Quantifiable information on the reference point' section: \"GHG emissions were 458.8 Mt CO2 eq. (including LULUCF) in 2018 according to Türkiye's National Inventory Document (NID) submitted in 2025,\" naming the National Inventory Document (the corpus's tr-ghg node) as the source of the 2018 reference-year baseline from which the NDC's quantified reduction targets and pathway are calculated. Confirmed by two independent WebFetch passes returning the identical verbatim sentence.",
+      "evidence_url": "https://unfccc.int/sites/default/files/2025-11/The%20Second%20NDC%20of%20T%C3%BCrkiye.pdf"
+    },
+    {
+      "source_report_id": "tr-agriculture",
+      "target_report_id": "fao-world-programme-census-agriculture",
+      "relationship_type": "cites",
+      "basis": "TurkStat's official page on the General Agricultural Census (Genel Tarım Sayımı) — the structural survey (land, livestock, machinery, irrigation, labour) underlying Türkiye's agricultural production statistics — states: \"Birleşmiş Milletler Gıda ve Tarım Örgütü (FAO) ve Avrupa İstatistik Ofisi (EUROSTAT) tarafından en az her on yılda bir Tarım Sayımı yapılması tavsiye edilmektedir\" (\"The UN Food and Agriculture Organization (FAO) and Eurostat recommend that an Agricultural Census be carried out at least once every ten years\"), directly citing FAO's census-of-agriculture guidance as the reason a national census is conducted on this cadence. Verified via direct curl (not just WebFetch) of the live page.",
+      "evidence_url": "https://www.tuik.gov.tr/Kurumsal/Genel_Tarim_Sayimi"
+    },
+    {
+      "source_report_id": "tr-banking-system",
+      "target_report_id": "imf-mfsmcg-2016",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CBRT's metadata document for its Weekly Money and Bank Statistics (Haftalık Para ve Banka İstatistikleri, which reports the banking sector's asset/liability structure and credit aggregates) states under 'Quality': \"Haftalık Para ve Banka istatistiklerinin derlenmesinde kullanılan istatistik kavram ve tanımlar Uluslararası Para Fonu'nun (IMF) 'Parasal ve Finansal İstatistikler El Kitabı ve Derleme Rehberi 2016 (MFSMCG 2016)'de yer alan kurallara dayanmaktadır\" (\"The statistical concepts and definitions used in compiling the Weekly Money and Bank Statistics are based on the rules set out in the IMF's 'Monetary and Financial Statistics Manual and Compilation Guide 2016 (MFSMCG 2016)'\"). Verified by direct pdftotext extraction of the live PDF.",
+      "evidence_url": "https://www.tcmb.gov.tr/wps/wcm/connect/af2e86c3-6410-45ce-9eb6-1770e459b528/Metaveri.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-af2e86c3-6410-45ce-9eb6-1770e459b528-nCuKFP8"
+    },
+    {
+      "source_report_id": "tr-state-budget",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Presidency of Strategy and Budget's official Budget Preparation Guide, in the chapter explaining the Analytical Budget Classification that underlies the central government's budget revenue/expenditure reporting (the classification the Treasury's Monthly Budget Realization Report is compiled under), states: \"Uluslararası standartlara (GFS: Government Finance Statistics) uygun olarak hazırlanan Analitik Bütçe Sınıflandırmasının...\" (\"The Analytical Budget Classification, prepared in accordance with international standards (GFS: Government Finance Statistics)...\"). Verified via direct pdftotext extraction of the live PDF, which repeats the GFS reference again later in the same chapter.",
+      "evidence_url": "https://www.sbb.gov.tr/wp-content/uploads/2025/09/2026-2028_ButceHazirlamaRehberi_Bolum9_11.pdf"
+    },
+    {
+      "source_report_id": "tr-bop",
+      "target_report_id": "tr-tourism",
+      "relationship_type": "uses_data_from",
+      "basis": "CBRT's own Balance of Payments metadata document, describing the compilation of the 'Seyahat' (Travel) services item, states: \"TÜİK, Kültür ve Turizm Bakanlığı ve TCMB'nin ortak çalışması kapsamında, TÜİK tarafından yürütülen 'Çıkış Yapan Ziyaretçiler Anketi (ÇYZA)' turizm gelirlerinin temel veri kaynağını oluşturmaktadır\" (\"As part of the joint work of TUIK, the Ministry of Culture and Tourism and TCMB, the 'Exit Survey of Departing Visitors (ÇYZA)' conducted by TUIK constitutes the main data source of tourism revenues\"). This directly documents that CBRT's Balance of Payments travel-credit line is built from TurkStat's tourism/exit-survey statistics (tr-tourism), which was otherwise a zero-edge node with no url of its own. Direction follows the corpus convention (dependent report -> source it draws data from), so the already-linked tr-bop gains this outgoing edge while the previously unlinked tr-tourism becomes the target. Verified via direct pdftotext extraction.",
+      "evidence_url": "https://tcmb.gov.tr/wps/wcm/connect/0ab87526-c290-4bdd-94d4-b8e99e70eba9/BOPMetaveri.pdf?CACHEID=&MOD=AJPERES"
+    },
+    {
+      "source_report_id": "tr-health",
+      "target_report_id": "who-icd-10",
+      "relationship_type": "methodology_depends_on",
+      "basis": "UPDATE 2026-08-29 (Grok follow-up; the data.tuik.gov.tr bulletin URL Grok cited still redirects to the JS-only veriportali.tuik.gov.tr shell and could NOT be independently verified by the orchestrating session via curl or WebFetch — that specific quote is not used here). Verified instead via TurkStat's own official country metadata filed with Eurostat (a legitimate primary source: TurkStat's own submitted methodology declaration, not a Eurostat editorial claim): \"Cause of death statistics have been compiled and coded in accordance with International Classification of Diseases (ICD-10) of the World Health Organization (WHO). ... For accuracy and checks in this regard, ACME (Automatic Classification of Medical Entry) documents in accordance with international methodology are used.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/hlth_cdeath_simscd_tr.htm"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tr-industrial-production -> isic",
+      "source": "tr-industrial-production",
+      "target": "isic",
+      "reason": "no-node-yet",
+      "why": "DECLINED 2026-08-29 after a Grok follow-up and independent verification by the orchestrating session, on evidentiary-structure grounds rather than access grounds. Verified true: (1) tr-industrial-production's own Eurostat-filed metadata states its classification is \"Nace Rev.2\" and that weights derive from \"the level of the section according to NACE Rev. 2 classification\" (https://ec.europa.eu/eurostat/cache/metadata/EN/sts_ind_prod_esms_tr.htm, fetched and quote-matched directly). (2) Eurostat's own NACE Rev. 2.1 manual states \"NACE is a classification derived from ISIC. The categories at all levels of NACE are either identical with or, in a large majority of cases, subsets of single ISIC categories\" (https://ec.europa.eu/eurostat/documents/3859598/21633320/KS-GQ-24-007-EN-N.pdf, fetched and quote-matched directly). Both quotes are real and verbatim. But the corpus has no NACE Rev.2 node — wiring tr-industrial-production directly to isic would splice two separate documents' claims (TR's own document names NACE, not ISIC; the ISIC-derivation claim is about NACE in general, from Eurostat, not from TurkStat) into one edge that neither document actually states. Unlike the live `anzsic -> isic` edge, where ANZSIC's OWN publisher (ABS) directly asserts ANZSIC's alignment with ISIC in ANZSIC's own document, no document here has TurkStat or TUIK directly asserting an ISIC relationship for this index. Correct fix is a modelling one, flagged for Thomas: either mint a generic `nace-rev2` classification node (which would let every EU/candidate-country industrial/business index that cites NACE Rev.2 wire to it honestly, and itself wire to isic the way `anzsic` does), or accept that TR's IPI genuinely has no direct ISIC edge under current corpus structure. A real, documented two-hop chain exists; it just isn't a single documented one-hop edge, and the intermediate node doesn't exist yet."
+    },
+    {
+      "edge": "tr-population -> un-census-principles",
+      "source": "tr-population",
+      "target": "un-census-principles",
+      "reason": "no-document",
+      "why": "Checked TurkStat's Address-Based Population Registration System (ADNKS) overview page (nip.tuik.gov.tr/Home/Adnks) directly; it describes ADNKS's own legal/administrative basis but contains no reference to the UN's Principles and Recommendations for Population and Housing Censuses. Did not find a TurkStat population page citing this UN standard within the time budget."
+    },
+    {
+      "edge": "tr-cbrt -> (any)",
+      "source": "tr-cbrt",
+      "target": null,
+      "reason": "no-document",
+      "why": "tr-cbrt is an institutional-core node (CBRT's overall reporting remit), not a specific data release with its own methodology citations. No single primary document defines 'CBRT institutional core' as depending on another corpus report; the genuine dependencies live one level down, on CBRT's individual statistical series (several of which — tr-bop, tr-banking-system — were separately wired this round)."
+    },
+    {
+      "edge": "tr-public-debt -> imf-gfsm",
+      "source": "tr-public-debt",
+      "target": "imf-gfsm",
+      "reason": "no-document",
+      "why": "Fetched the live Treasury Public Debt Management Report (Kamu Borç Yönetimi Raporu, Ocak 2026) directly and extracted its full text (pdftotext, 47 pages). The report is purely tabular (debt stock, financing program, borrowing calendar) with no methodology/standards section naming IMF GFSM, the IMF/World Bank debt-statistics guide, or any other corpus standard."
+    },
+    {
+      "edge": "tr-monetary-policy -> (any)",
+      "source": "tr-monetary-policy",
+      "target": null,
+      "reason": "no-document",
+      "why": "CBRT policy-rate decision texts (PPK announcements) are decision statements, not methodological documents, and did not surface a citation to any corpus international standard within the time budget."
+    },
+    {
+      "edge": "tr-exchange-rate -> (any)",
+      "source": "tr-exchange-rate",
+      "target": null,
+      "reason": "no-document",
+      "why": "No CBRT exchange-rate-series metadata document was found citing a corpus standard (e.g. BPM6, SDDS) specifically for the exchange-rate series itself within the time budget; this is a plausible SDDS-cites lead for a follow-up pass."
+    },
+    {
+      "edge": "tr-npl -> (any)",
+      "source": "tr-npl",
+      "target": null,
+      "reason": "no-document",
+      "why": "CBRT Financial Stability Report editions were located but not fetched in full; more importantly, the natural target standard (IMF's Financial Soundness Indicators Compilation Guide, which defines NPL ratios) is not present anywhere in the corpus's INTL node set, so even a confirmed citation would have no valid id to wire to."
+    },
+    {
+      "edge": "tr-power -> (any)",
+      "source": "tr-power",
+      "target": null,
+      "reason": "no-document",
+      "why": "Searched for TUIK/Ministry of Energy electricity statistics referencing IEA or Eurostat energy-balance methodology; no corpus node exists for IEA or an Eurostat energy-statistics manual, so no valid target id was available regardless of what a citation search would find."
+    },
+    {
+      "edge": "tr-education -> (any)",
+      "source": "tr-education",
+      "target": null,
+      "reason": "no-document",
+      "why": "TUIK/MEB do publish an ISCED 2011 Turkish-language classification document (biruni.tuik.gov.tr) confirming Türkiye's education statistics are classified per UNESCO's ISCED, but ISCED is not present as a node anywhere in the corpus (dump-INTL2 has no ISCED id), so there is no valid existing target to wire to without minting a new node, which was not judged worth spending one of the two new-node slots on for this pass."
+    },
+    {
+      "edge": "tr-poverty -> un-coicop-2018",
+      "source": "tr-poverty",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "TurkStat's Household Budget Survey (Hanehalkı Bütçe Araştırması) microdata document — the survey underlying poverty/living-conditions statistics — does confirm use of COICOP for consumption-expenditure classification (verified via direct pdftotext: \"Amaca Yönelik Kişisel Tüketim Sınıflaması (COICOP)... 2018 Hanehalkı Bütçe Anketi'nde kullanılan COICOP (v.2011) Sınıflaması, 12 harcama grubu bazında toplanmaktadır\"), but the document labels the classification version as 'v.2011,' which does not clearly correspond to either un-coicop-2018 or un-coicop-hbs-1999 in the corpus. Declined to force an id match given the version ambiguity; a Grok pass with more COICOP-revision-history context could resolve which id is correct."
+    },
+    {
+      "edge": "tr-ecommerce -> (any)",
+      "source": "tr-ecommerce",
+      "target": null,
+      "reason": "no-document",
+      "why": "The Ministry of Trade's e-commerce report is a domestic market-sizing publication; no citation to a corpus international standard (ISIC, OECD digital-economy guidance, etc.) was located within the time budget."
+    },
+    {
+      "edge": "tr-ghg -> (any)",
+      "source": "tr-ghg",
+      "target": null,
+      "reason": "no-document",
+      "why": "Türkiye's National Inventory Document is compiled per the IPCC's national GHG inventory guidelines, but no IPCC guidelines node exists in the corpus, so even a confirmed citation would have no valid target id."
+    }
+  ]
+}

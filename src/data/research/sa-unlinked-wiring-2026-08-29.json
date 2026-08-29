@@ -1,0 +1,81 @@
+{
+  "_slice": "sa-unlinked-wiring-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "verified",
+  "_note": "Deep-research pass on Saudi Arabia's 10 unlinked nodes. Every candidate document was fetched directly (curl or WebFetch) and, where possible, re-verified with pdftotext/raw-HTML grep against the live file before use. Yield: 7 verified edges across 7 of the 10 target nodes (sa-population, sa-oil-production, sa-oil-exports, sa-oil-revenue, sa-banking, sa-education, sa-ghg), all citing GASTAT/MOF/SAMA methodology-and-quality reports or an international body's Saudi-specific filing. 3 nodes (sa-vision-2030, sa-pif, sa-health) were fully checked against their primary sources and dropped: two as genuine no-document dead ends (policy narrative with no named statistical dependency) and one (sa-pif) as deferred because the publisher's WAF blocks direct full-text download, so only partial keyword coverage of a 200+ page report was possible. UPDATE 2026-08-29 (Grok follow-up): sa-pif -> sa-national-accounts remains blocked on every route tried (Cloudflare on pif.gov.sa; Grok's own press-release lead didn't carry the GASTAT attribution either) — still deferred, not a confirmed dead end.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "sa-population",
+      "target_report_id": "un-wpp-methodology",
+      "relationship_type": "methodology_depends_on",
+      "basis": "GASTAT's own Methodology and Quality Report for its Population Projections and Estimates statistics states, in section 9.6 'Documentation on methodology': \"Concepts, definitions, issues, and classifications are based on international standards by the United Nations Department of Economic and Social Affairs, Population Division.\" — immediately followed by the link https://population.un.org/wpp/Methodology/, i.e. the exact World Population Prospects Methodology document. This shows GASTAT's population estimates (sa-population) explicitly adopt the UN Population Division's WPP methodology as their conceptual/classification basis.",
+      "evidence_url": "https://www.stats.gov.sa/documents/d/guest/methodology-and-quality-report-for-population-projections-and-estimates-statistics-en"
+    },
+    {
+      "source_report_id": "sa-education",
+      "target_report_id": "sa-population",
+      "relationship_type": "uses_data_from",
+      "basis": "GASTAT's Education and Training Statistics 2025 publication states in its 'Methodology and quality' note: \"This publication presents the education and training indicators based on the Education and Training Survey for the age group 5-19 years for 2025 and the population estimates from the General Authority for Statistics for 2025.\" This directly confirms the education/training statistics report draws on GASTAT's population estimates (the sa-population node) as an input data source.",
+      "evidence_url": "https://www.stats.gov.sa/documents/20117/2435273/Education_and_Training_Statistics_2025_EN_%281%29.pdf_fixed_10557414/08f376b7-5906-0a24-1fe9-f609ebfcc5ae?t=1767866579084"
+    },
+    {
+      "source_report_id": "sa-oil-production",
+      "target_report_id": "sa-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "GASTAT's Methodology and Quality Report of Oil and Gas Statistics 2025, under 'Coherence - National Accounts', states: \"The Oil and Gas Statistics data are integrated with the requirements of the National Accounts through the use of approved statistical classifications and concepts, supporting the consistency of energy data with related economic indicators. In addition, some publication indicators, such as production data and foreign trade data for refined petroleum products, can be used as supporting and reference data within the framework of compiling related economic indicators.\" This states oil production statistics are compiled to be coherent with, and feed into, National Accounts classifications/concepts.",
+      "evidence_url": "https://www.stats.gov.sa/en/w/methodology-and-quality-report-of-oil-and-gas-statistics-2025"
+    },
+    {
+      "source_report_id": "sa-oil-exports",
+      "target_report_id": "sa-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same GASTAT Methodology and Quality Report of Oil and Gas Statistics 2025 (which covers this publication's export volumes) states under 'Coherence - National Accounts': \"The Oil and Gas Statistics data are integrated with the requirements of the National Accounts through the use of approved statistical classifications and concepts... In addition, some publication indicators, such as production data and foreign trade data for refined petroleum products, can be used as supporting and reference data within the framework of compiling related economic indicators.\" The explicit mention of 'foreign trade data' ties the export-volume series specifically to National Accounts coherence requirements.",
+      "evidence_url": "https://www.stats.gov.sa/en/w/methodology-and-quality-report-of-oil-and-gas-statistics-2025"
+    },
+    {
+      "source_report_id": "sa-oil-revenue",
+      "target_report_id": "imf-gfsm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Saudi Ministry of Finance's Budget Statement FY2026 (the document behind the sa-oil-revenue node's mof.gov.sa/en/budget/2026 URL) states in its Introduction: \"The classification of the fiscal data referenced here adheres to the Government Finance Statistics Manual (GFSM 2014), published by the International Monetary Fund (IMF), which provides a standardized international framework.\" Oil revenue is one of the fiscal-data categories (Revenues chapter) covered by this classification statement.",
+      "evidence_url": "https://www.mof.gov.sa/en/budget/2026/BudgetStatementDocs/Eng_2026.pdf"
+    },
+    {
+      "source_report_id": "sa-banking",
+      "target_report_id": "bis-basel-framework",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SAMA's Rulebook section on Credit Risk Management / Prudential Treatment of Problem Assets, which defines the non-performing-loan (NPL) classification that underlies SAMA's banking asset-quality statistics, states: \"Non-performing loans: As stipulated in BCBS 403 'Guidelines – Prudential treatment of problem assets – definitions of non-performing exposures and forbearance' endorsed by SAMA through circular no. 381000099757 dated 23/09/1438AH.\" BCBS 403 is a Basel Committee on Banking Supervision (BIS) guideline, i.e. part of the Basel Framework, and SAMA states it has formally endorsed/adopted it as the basis for its own NPL definitions.",
+      "evidence_url": "https://rulebook.sama.gov.sa/en/entiresection/4540"
+    },
+    {
+      "source_report_id": "sa-ghg",
+      "target_report_id": "sa-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Saudi Arabia's Fourth National Communication (NC4) to the UNFCCC — the underlying national submission behind the compiled GHG-profile figures represented by the sa-ghg node — states in its National Circumstances chapter: \"The total population of Saudi Arabia in 2019 stands at 34.2 million out of which males were 19.7 million and females are 14.5 million.\" cited to (GASTAT, 2019), with further demographic detail also cited to GASTAT 2018/2019. This shows the national GHG-inventory report draws its population figures (needed for per-capita emissions and national-circumstances framing) directly from GASTAT population statistics.",
+      "evidence_url": "https://unfccc.int/sites/default/files/resource/7123846_Saudi%20Arabia-NC4-1-Fourth%20National%20Communication%20NC4%20Kingdom%20of%20Saudi%20Arabia%20March%202022.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "sa-vision-2030 -> sa-national-accounts",
+      "source": "sa-vision-2030",
+      "target": "sa-national-accounts",
+      "reason": "no-document",
+      "why": "Fetched and full-text-extracted the official Vision 2030 Annual Report 2024 (36MB PDF, ~9,400 lines of text, https://www.vision2030.gov.sa/media/r3ij40wu/en-annual-report-vision2030-2024.pdf). The GDP/non-oil-GDP KPI pages state 'In 2024, the Kingdom adopted a chain-linking method to align with international best practices' and 'Also revised under the chain-linking methodology, non-oil GDP has steadily increased since 2016' but never name GASTAT, National Accounts, or any other corpus node as the data source in the extracted text (no 'GASTAT', 'General Authority for Statistics', or 'Source:' attribution found anywhere in the document). This matches the task's own flag that this node may be pure policy narrative with no citable methodology document behind it — confirmed by direct inspection rather than assumed."
+    },
+    {
+      "edge": "sa-pif -> sa-national-accounts",
+      "source": "sa-pif",
+      "target": "sa-national-accounts",
+      "reason": "deferred",
+      "why": "PIF's own site (pif.gov.sa) returns HTTP 403 to direct curl/WebFetch-triggered downloads of its Annual Report 2024 and Consolidated Financial Statements 2024 PDFs (Cloudflare-style bot block; confirmed 403 with text/html body on repeated attempts with different user agents). A WebFetch pass that did get partial content back found the sentence 'The real gross domestic product (GDP) grew by 1.8% compared to the previous year, with non-oil activities expanding by 4.8%' in the Governor's Statement, and 'PIF represents 10% of Saudi Arabia's non-oil economy,' but no GASTAT/National-Accounts attribution tag was visible in the passages retrieved, and a full keyword search of the ~200-page document (e.g. for 'GASTAT', 'IFRS', footnote citations) was not possible because the file could not be downloaded directly. This is a fetch-tool limitation, not confirmed absence of evidence — a tool that can pull the full PDF (bypassing the WAF) should re-check for an explicit GDP/GASTAT citation and for the accounting-standard (IFRS) disclosure in the financial statements. UPDATE 2026-08-29 (Grok follow-up): still could not verify. pif.gov.sa's Annual Report 2024/CFS 2024 PDFs remain Cloudflare-blocked to Grok's tools too. Grok located PIF's own 13 Aug 2025 press release reciting the 2024 Annual Report figures (AuM $913bn; cumulative real non-oil GDP contribution $243bn / 10% of the non-oil economy) but that release does not itself attribute the GDP figures to GASTAT or the national accounts, and no search-indexed page of the Annual Report names GASTAT either. (A KSA sovereign LSE bond filing does cite GASTAT for Kingdom-wide GDP, but that is not a PIF document.) Still not stretched into an edge — genuinely blocked, not absent."
+    },
+    {
+      "edge": "sa-health -> who-icd-10",
+      "source": "sa-health",
+      "target": "who-icd-10",
+      "reason": "no-document",
+      "why": "Fetched the sa-health node's own source, WHO's country data page for Saudi Arabia (data.who.int/countries/682). It states: 'The lack of complete and reliable mortality data... necessitates the application of modelling to estimate life expectancy' and, on cause-of-death data specifically: 'Death registration data is unavailable or unusable for Saudi Arabia due to quality issues. Estimates of mortality by cause should be interpreted with caution,' with estimates instead 'produced using data from multiple sources, including national vital registration data, latest estimates from WHO technical programmes, United Nations partners and inter-agency groups, as well as the Global Burden of Disease and other scientific studies.' No sentence on this page names ICD-10, or any other single corpus-listed standard, as the basis for Saudi Arabia's figures specifically — the page's own framing undercuts a clean vital-registration-based dependency claim for this country. Also checked the UNFCCC GHG profile PDF (https://di.unfccc.int/ghg_profiles/nonAnnexOne/SAU/SAU_ghg_profile.pdf) as a possible cross-link, which contains only data tables with no methodology text at all."
+    }
+  ]
+}

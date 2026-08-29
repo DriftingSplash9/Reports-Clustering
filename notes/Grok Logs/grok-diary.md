@@ -295,3 +295,39 @@ everything) — it measurably improves citation discipline.
   was still useful corroboration once we fetched the file ourselves and
   matched the size — a cheap secondary check worth asking for whenever a
   primary quote match is uncertain.
+
+- **Prompt sent 2026-08-29, processed same day** (`notes/grok-prompt-unlinked-2026-08-29.md`
+  → reply `unlinkednodefollowup20260829jpkrsatr.json`) — 6 of 7 leads closed,
+  all independently raw-verified by the orchestrating session (curl/pdfplumber,
+  WebFetch as a fallback), never taken on Grok's word alone. Japan's entire
+  4-node nuclear-regulatory cluster (`jp-nra-reactor-status`,
+  `jp-fukushima-daiichi-decommissioning`, `jp-spent-fuel-storage` → `jp-nra`,
+  plus `jp-nra` itself now linked) closed off ONE NRA PDF (Convention on
+  Nuclear Safety 10th National Report) — 5 quotes confirmed verbatim after
+  normalizing PDF line-wrap whitespace; a supplementary TEPCO PDF Grok also
+  cited stayed 403-blocked and was NOT used. `jp-estat -> jp-statistics-act-2007`
+  closed via an MIC PDF that needed explicit Shift-JIS decoding — naive
+  UTF-8 decoding silently mojibake's the text and produces a false
+  quote-not-found (worth remembering for any future Japanese-government
+  PDF). `kr-financial-stability -> bis-basel-framework` closed on a plain
+  curl retry of the exact same signed bok.or.kr URL that failed the prior
+  round — confirms it was transient flakiness, not a structural block.
+  `tr-health -> who-icd-10` closed, but NOT via the quote Grok gave (the
+  data.tuik.gov.tr bulletin URL still redirects to the JS-only veriportali
+  shell, confirmed blocked via both curl AND WebFetch this time) — instead
+  verified via TurkStat's own Eurostat-filed metadata, a different but
+  equally legitimate primary source making essentially the same claim.
+  **One lead declined on principle, not access**: `tr-industrial-production
+  -> isic` — both of Grok's underlying quotes verified true (TR's own
+  metadata names NACE Rev.2; Eurostat's own manual says NACE is
+  ISIC-derived), but the corpus has no NACE Rev.2 node, so wiring straight
+  to ISIC would splice two separate documents into one edge neither states
+  — flagged as a modelling question for Thomas, not minted. `sa-pif ->
+  sa-national-accounts` stayed blocked even for Grok (still Cloudflare'd;
+  its substitute press-release lead doesn't carry the GASTAT attribution).
+  Net: +6 edges, corpus 3,468/2,857, validate/tsc/build clean. Lesson: two
+  of Grok's evidence_urls this round were things our OWN prior subagents
+  had already tried and failed — one turned out to be transient (BOK,
+  worked on a bare retry) and one turned out to still be genuinely blocked
+  (TUIK) — don't assume a Grok-supplied URL will work just because Grok
+  says it fetched it; always re-fetch yourself, and a retry costs nothing.

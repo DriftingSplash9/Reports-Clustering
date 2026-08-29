@@ -1,0 +1,221 @@
+{
+  "_slice": "jp-unlinked-wiring-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "verified",
+  "_note": "Primary-source pass on Japan's 30 zero-edge nodes. The highest-yield pattern was each survey's own 'legal basis' (根拠法令) statement citing the Statistics Act No. 53 of 2007 (jp-statistics-act-2007) verbatim, found on stat.go.jp/mext.go.jp/esri.cao.go.jp/enecho.meti.go.jp methodology pages fetched and grep-verified directly (curl required a Referer header to avoid 403s on several meti.go.jp/enecho pages). A second pattern verified MHLW's Vital Statistics cause-of-death coding is explicitly ICD-10-based (who-icd-10), via a PDF extracted with PyPDF2. 10 of 30 nodes (33%) were wired with 10 verified edges; 0 new nodes were needed. The remaining 20 are dropped, roughly half as confirmed no-document (legal basis is a different, non-corpus Act; or citations point to non-corpus sources) and half as deferred behind JS-rendered pages, image-only chart captions with no text citation, or nodes not reached in the time budget (notably the nuclear-regulatory cluster). UPDATE 2026-08-29 (Grok follow-up on the round's blocked-domain leads, raw-verified by the orchestrating session): closed all 3 nuclear-regulatory-cluster leads (reactor status, Fukushima Daiichi decommissioning, spent fuel storage -> jp-nra, all via NRA's own Convention on Nuclear Safety national report PDF) plus e-Stat's own legal basis under the Statistics Act (via an MIC follow-up report PDF, Shift-JIS decoded). Also confirmed jp-long-term-care-insurance's dead end with a verified quote (administrative tally, not survey-derived).",
+  "reports": [],
+  "dependencies": [
+    {
+      "relationship_type": "cites",
+      "basis": "Statistics Bureau of Japan's English homepage meta-description states: \"The Statistics Bureau and the Director-General for Policy Planning of Japan play the central role in the official statistical system in producing and disseminating basic official statistics, and coordinating statistical work under the Statistics Act and other legislation.\" This establishes the Statistics Act as SBJ's governing legal framework.",
+      "evidence_url": "https://www.stat.go.jp/english/index.html",
+      "source_report_id": "jp-sbj",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "MHLW document on the 2013 partial revision of ICD-10's effect on cause-of-death statistics states (verified via PyPDF2 text extraction): \"世界保健機関が勧告する「疾病及び関連保健問題の国際統計分類」（ICD）第10回改訂（ICD-10）の2013年版に準拠した「疾病、傷害及び死因の統計分類」が平成28年に施行（平成27年総務省告示第35号）されたことを受け、人口動態統計では、平成29年より、改正後の分類を死因統計に適用している。\" (Translation: Following the 2016 enactment of Japan's 'Statistical Classification of Diseases, Injuries and Causes of Death,' which conforms to the 2013 edition of WHO's ICD-10, Vital Statistics has applied the revised classification to cause-of-death statistics since 2017.) This directly ties Vital Statistics' cause-of-death methodology to ICD-10.",
+      "evidence_url": "https://www.mhlw.go.jp/toukei/list/dl/icd_2013_eikyo.pdf",
+      "source_report_id": "jp-vital-statistics",
+      "target_report_id": "who-icd-10"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same MHLW document as above; the detailed cause-of-death and age-specific mortality series within Vital Statistics use the ICD-10-conformant Japanese classification described in: \"世界保健機関が勧告する「疾病及び関連保健問題の国際統計分類」（ICD）第10回改訂（ICD-10）の2013年版に準拠した「疾病、傷害及び死因の統計分類」が...人口動態統計では、平成29年より、改正後の分類を死因統計に適用している。\" The document's entire body is a table-by-table comparison of old-vs-new ICD-10-based cause-of-death classification counts, which is precisely the detailed cause-specific series this node covers.",
+      "evidence_url": "https://www.mhlw.go.jp/toukei/list/dl/icd_2013_eikyo.pdf",
+      "source_report_id": "jp-vital-statistics-detailed",
+      "target_report_id": "who-icd-10"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "METI/Agency for Natural Resources and Energy overview page for the Petroleum Products Supply and Demand Statistics Survey states (verified by direct curl + text extraction): \"石油製品需給動態統計調査は、統計法に基づく基幹統計調査（基幹統計である石油製品需給動態統計を作成するための調査）として、石油製品の製造業者、輸入業者等を対象に、石油製品の需給の実態を明らかにすることを目的とする。\" (Translation: The Petroleum Products Supply-Demand Statistics Survey is conducted as a fundamental statistics survey under the Statistics Act, to compile the fundamental statistics on petroleum product supply and demand.) This is the current successor/component of METI's petroleum statistics suite described by this node.",
+      "evidence_url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl004/summary.html",
+      "source_report_id": "jp-petroleum-statistics",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "ESRI/Cabinet Office's explanation page for the Machinery Orders Survey states (verified by direct curl + text extraction): \"本調査は統計法（平成19年法律第53号）に基づく一般統計調査である。\" (Translation: This survey is a general statistics survey conducted under the Statistics Act, Act No. 53 of 2007.)",
+      "evidence_url": "https://www.esri.cao.go.jp/jp/stat/juchu/juchu_kaisetu.html",
+      "source_report_id": "jp-machinery-orders",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "SBJ's outline page for the 2022 Employment Status Survey states (verified by direct curl, Shift-JIS decoded, + text extraction): \"就業構造基本調査は、統計法に基づく基幹統計『就業構造基本統計』を作成するための統計調査であり...\" and under 調査の根拠法令: \"統計法（平成19年法律第53号）第2条第4項に基づく基幹統計調査（基幹統計『就業構造基本統計』を作成するための統計調査）として...\" (Translation: conducted as a fundamental statistics survey under Article 2(4) of the Statistics Act, Act No. 53 of 2007.)",
+      "evidence_url": "https://www.stat.go.jp/data/shugyou/2022/gaiyou.html",
+      "source_report_id": "jp-employment-status-survey",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "MEXT's official outline page for the School Basic Survey states its founding history under the Statistics Act and lists its legal basis explicitly: \"...昭和23年に調査内容及び調査方法を再検討し、抜本的改善を加え、新たに統計法に基づく指定統計として「学校基本調査」が開始された。\" followed by the field \"調査の根拠法令 統計法\" (Legal basis of the survey: the Statistics Act). Confirmed by direct curl fetch of the page.",
+      "evidence_url": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/gaiyou/chousa/1267968.htm",
+      "source_report_id": "jp-school-basic-survey",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "SBJ's page on the Survey of Household Economy states, under 調査の法的根拠 (verified by direct curl, Shift-JIS decoded, + text extraction): \"この調査は、統計法（e-Gov）（平成19年法律第53号）に基づく一般統計調査として実施している。\" (Translation: This survey is conducted as a general statistics survey under the Statistics Act, Act No. 53 of 2007.)",
+      "evidence_url": "https://www.stat.go.jp/data/joukyou/3.html",
+      "source_report_id": "jp-survey-household-economy",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "METI's overview page for its Current Survey of Production states (verified by direct curl with Referer header + text extraction): \"経済産業省生産動態統計調査は、統計法に基づく基幹統計『経済産業省生産動態統計』を作成するための基幹統計調査です。\" (Translation: METI's Current Survey of Production is a fundamental statistics survey conducted under the Statistics Act to produce the fundamental statistic 'METI Current Production Statistics.')",
+      "evidence_url": "https://www.meti.go.jp/statistics/tyo/seidou/gaiyo.html",
+      "source_report_id": "jp-current-survey-production",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "relationship_type": "methodology_depends_on",
+      "basis": "SBJ's outline page for the 2021 Survey on Time Use and Leisure Activities states (verified by direct curl, Shift-JIS decoded, + text extraction): \"社会生活基本調査は、統計法に基づく基幹統計『社会生活基本統計』を作成するための統計調査であり...\" and under 調査の根拠法令: \"統計法（平成19年法律第53号）に基づく基幹統計調査として実施しました。\" (Translation: conducted as a fundamental statistics survey under the Statistics Act, Act No. 53 of 2007.)",
+      "evidence_url": "https://www.stat.go.jp/data/shakai/2021/gaiyou.html",
+      "source_report_id": "jp-time-use-survey",
+      "target_report_id": "jp-statistics-act-2007"
+    },
+    {
+      "source_report_id": "jp-nra-reactor-status",
+      "target_report_id": "jp-nra",
+      "relationship_type": "methodology_depends_on",
+      "basis": "UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session via direct curl fetch of the official NRA PDF). NRA's own Convention on Nuclear Safety 10th National Report states the reactor-status categories rest on NRA's statutory reporting/oversight regime: \"In the event of an accident or failure at a nuclear facility, a licensee is required to immediately report the incident to the NRA in accordance with the Reactor Regulation Act. The licensee is also obligated to promptly provide the NRA with a report detailing the situation and the measures taken in response to the event.\" And, on operational status: \"In the event that a reactor facility deviates from its limiting conditions for operation, the licensee must immediately declare the deviation and report it to the NRA.\" The reactor-status categories (in operation, suspended, under construction, under decommissioning) that this node publishes are NRA's own regulatory classifications under this reporting regime.",
+      "evidence_url": "https://www.nra.go.jp/data/000481014.pdf"
+    },
+    {
+      "source_report_id": "jp-fukushima-daiichi-decommissioning",
+      "target_report_id": "jp-nra",
+      "relationship_type": "methodology_depends_on",
+      "basis": "UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session via direct curl fetch of the official NRA PDF; a supplementary TEPCO PDF Grok also cited returned HTTP 403 and was NOT used as evidence). NRA's own Convention on Nuclear Safety 10th National Report states: \"TEPCO Fukushima Daiichi NPS was designated as a Specified Nuclear Facility by the NRA on 7 November 2012, in accordance with the Reactor Regulation Act. Subsequently, on 14 August 2013, TEPCO obtained NRA approval for ‘Implementation Plan for the Specified Nuclear Facilities at TEPCO Fukushima Daiichi NPS’ (Implementation Plan), under which special safety measures have been implemented.\" Decommissioning progress reporting operates under this NRA-approved Implementation Plan.",
+      "evidence_url": "https://www.nra.go.jp/data/000481014.pdf"
+    },
+    {
+      "source_report_id": "jp-spent-fuel-storage",
+      "target_report_id": "jp-nra",
+      "relationship_type": "methodology_depends_on",
+      "basis": "UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session via direct curl fetch of the official NRA PDF). NRA's own Convention on Nuclear Safety 10th National Report states: \"When storing the spent fuel, licensees are required to implement necessary cooling measures and ensure that the design of the storage system maintains subcriticality, in accordance with the provisions of the NRA Ordinance on Commercial Reactors. A Pre-service Operator Check is conducted to confirm that construction work has been carried out in accordance with the approved design.\" and, on utilisation progress: \"Regarding progress from FY2022 to FY2024, the NRA confirmed that TEPCO had taken appropriate steps to safely initiate key activities, including the removal of spent fuel from the spent fuel pool of Unit 6...\" Storage design/utilisation criteria are NRA-defined regulatory requirements this node's statistics are measured against.",
+      "evidence_url": "https://www.nra.go.jp/data/000481014.pdf"
+    },
+    {
+      "source_report_id": "jp-estat",
+      "target_report_id": "jp-statistics-act-2007",
+      "relationship_type": "cites",
+      "basis": "UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session via direct curl fetch of the official MIC PDF; Shift-JIS decoding needed to read the source page correctly). MIC's own follow-up report on the Basic Plan for the Development of Official Statistics states: \"法第54条においては、総務大臣は、公的統計を利用しようとする者の便利を図るため、インターネットの利用を通じて迅速に公的統計の所在に関する情報を提供できるよう必要な措置を講ずるものとされている。\" (Article 54 requires the Minister to operate a portal providing rapid access to official statistics info) \"...「政府統計の総合窓口（e-Stat）」を運営している...e-Statは法第８条及び第23条の規定に基づく統計の公表の取組の中核を担っている\" (e-Stat is central to the statistics-publication work required under Articles 8 and 23 of the Act). This is an official MIC document naming e-Stat's specific legal basis under the Statistics Act 2007.",
+      "evidence_url": "https://www.soumu.go.jp/main_content/000958704.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "jp-boj-monetary-base -> imf-mfsmcg-2016 or jp-boj-flow-of-funds",
+      "source": "jp-boj-monetary-base",
+      "target": null,
+      "reason": "no-document",
+      "why": "Fetched both the Monetary Base data index page and BOJ's full 'マネタリーベースの解説' (explanation) page in Japanese (curl, full text extracted). The explanation page only distinguishes Monetary Base from Money Stock Statistics (a different, non-corpus node) as a definitional contrast, with no citation of BPM6, SNA, MFSMCG 2016, or Flow of Funds Accounts. No stated dependency found."
+    },
+    {
+      "edge": "jp-immigration-residence-management-statistics -> jp-foreign-residents-statistics",
+      "source": "jp-immigration-residence-management-statistics",
+      "target": "jp-foreign-residents-statistics",
+      "reason": "no-document",
+      "why": "Fetched the ISA statistics index page and its 'usage notes' (利用上の注意) page directly. The index page only states the agency 'produces both' Immigration Control Statistics and Statistics on Foreign Residents (旧登録外国人統計) -- common authorship, not a stated data dependency. No Statistics Act citation or cross-reference to jp-foreign-residents-statistics as a source/target was found either."
+    },
+    {
+      "edge": "jp-reconstruction-agency-progress -> jp-basic-act-disaster-management / jp-white-paper-disaster-management",
+      "source": "jp-reconstruction-agency-progress",
+      "target": null,
+      "reason": "no-document",
+      "why": "Fetched the Reconstruction Agency's English homepage; it discusses the agency's establishment and budget but cites neither the Basic Act on Disaster Management nor the White Paper on Disaster Management. The agency's actual legal basis (東日本大震災復興基本法 / 復興庁設置法) is not a node in the corpus, so no valid target was found even after locating the current 'Recovery status and efforts' Japanese-language PDF via search."
+    },
+    {
+      "edge": "jp-reconstruction-agency -> jp-basic-act-disaster-management",
+      "source": "jp-reconstruction-agency",
+      "target": "jp-basic-act-disaster-management",
+      "reason": "no-document",
+      "why": "Same finding as jp-reconstruction-agency-progress above -- the Reconstruction Agency's own English overview page does not cite the Basic Act on Disaster Management as its institutional basis (its real legal basis is a 2011-12 reconstruction-specific law that is not a corpus node)."
+    },
+    {
+      "edge": "jp-national-health-nutrition-survey -> [any corpus node]",
+      "source": "jp-national-health-nutrition-survey",
+      "target": null,
+      "reason": "no-document",
+      "why": "Confirmed via web search that the National Health and Nutrition Survey's legal basis is the Health Promotion Act (健康増進法, Act No. 103 of 2002), not the Statistics Act -- so the strong 'legal basis' pattern used for other nodes does not apply here, and that Act is not a corpus node. The MHLW survey index page itself is a bare list of yearly result links with no methodology/citation text."
+    },
+    {
+      "edge": "jp-okinawa-statistical-yearbook -> jp-population-census / jp-statistics-act-2007",
+      "source": "jp-okinawa-statistical-yearbook",
+      "target": null,
+      "reason": "deferred",
+      "why": "The URL given in the corpus (pref.okinawa.jp/toukeika/yearbook/) now 403s / redirects; located the current page at pref.okinawa.lg.jp and fetched it directly, but it is only a heavily templated navigation page linking out to the yearbook portal, the Population Census, and other statistics with no body text stating a compilation relationship. A deeper crawl into the yearbook's own front-matter PDF (例言/凡例) was not completed within the time budget."
+    },
+    {
+      "edge": "jp-mext-statistical-abstract -> jp-school-basic-survey",
+      "source": "jp-mext-statistical-abstract",
+      "target": "jp-school-basic-survey",
+      "reason": "deferred",
+      "why": "Fetched the Statistical Abstract's index page directly; it is only a list of per-chapter Excel-file downloads with no explanatory or source-citation text. The likely citation (that abstract chapters are compiled from the School Basic Survey and other named surveys) would be inside Excel/PDF front matter that was not opened given the time budget."
+    },
+    {
+      "edge": "jp-indices-tertiary -> jp-current-survey-production or jp-national-accounts",
+      "source": "jp-indices-tertiary",
+      "target": null,
+      "reason": "deferred",
+      "why": "METI's Indices of Tertiary Industry Activity index page (fetched directly) only shows the latest monthly release figures, no source-survey citation. WebFetch returned empty content for the linked 2010 'Overview' PDF (b2010_ITA_ovve.pdf); the specific compilation-methodology note listing the ~40 source surveys feeding into this index was not located in the time available."
+    },
+    {
+      "edge": "jp-boj-corporate-goods-services-prices -> jp-cgpi / jp-services-producer-price-index",
+      "source": "jp-boj-corporate-goods-services-prices",
+      "target": null,
+      "reason": "no-document",
+      "why": "Fetched BOJ's CGPI/SPPI index page directly; it lists the two indices as separate sections with links to base-year data only, with no descriptive text characterizing them as a combined 'producer-price cluster' or cross-referencing one from the other's methodology page."
+    },
+    {
+      "edge": "jp-prefectural-contrast-summary -> jp-prefectural-accounts",
+      "source": "jp-prefectural-contrast-summary",
+      "target": "jp-prefectural-accounts",
+      "reason": "deferred",
+      "why": "Fetched the ESRI 県民経済計算 (Prefectural Accounts) hub page, which is this node's own listed URL. It confirms the tables follow '2008SNA、2015年基準' but is essentially the same data product as the already-linked jp-prefectural-accounts node rather than a distinct comparative-framework document; no separate publication stating a Tokyo-vs-Okinawa comparative methodology was found there. This node may not correspond to a standalone document distinct from jp-prefectural-accounts itself."
+    },
+    {
+      "edge": "jp-jaif-nuclear-status -> jp-nra-reactor-status",
+      "source": "jp-jaif-nuclear-status",
+      "target": "jp-nra-reactor-status",
+      "reason": "no-document",
+      "why": "Fetched JAIF's homepage, its Japanese-language reactor operation-status page, and its most recent reactor-list PDF (2026-03-09) directly. None contain an explicit '出典：原子力規制委員会' or similar source-attribution line for the operating-status data, despite JAIF's well-known practice of compiling from NRA and licensee announcements."
+    },
+    {
+      "edge": "jp-electricity-generation-nuclear -> jp-strategic-energy-plan-7th",
+      "source": "jp-electricity-generation-nuclear",
+      "target": "jp-strategic-energy-plan-7th",
+      "reason": "deferred",
+      "why": "The corpus URL for this node (meti.go.jp/english/press/) is a generic press-release index, not a specific document, and returned empty via WebFetch. Located and fetched the 7th Strategic Energy Plan (Feb 2025) PDF via WebFetch but found only an aggregate 'decarbonized power ~30%' figure in the portion reviewed, not an explicit nuclear-share percentage sourced to General Energy Statistics. A full read of the Plan's data-annex tables was not completed within budget."
+    },
+    {
+      "edge": "jp-nra -> [any corpus node]",
+      "source": "jp-nra",
+      "target": null,
+      "reason": "deferred",
+      "why": "Not independently fetched and researched in this pass beyond general searches for its regulatory-framework pages; genuinely out of time budget rather than a confirmed absence of documentation."
+    },
+    {
+      "edge": "jp-ageing-society-white-paper -> jp-population-census / jp-comprehensive-survey-living-conditions",
+      "source": "jp-ageing-society-white-paper",
+      "target": null,
+      "reason": "no-document",
+      "why": "Fetched the Cabinet Office's Reiwa-7 Ageing Society White Paper index and two full chapter sections (現状と将来像; 家族と世帯) directly, plus their underlying CSV data-download files. The only explicit textual citation found was '資料：総務省「人口推計」' (MIC Population Estimates, a different survey not in the corpus) and narrative mentions of IPSS population projections (also not a corpus node). The household-structure charts (single-elderly households, etc.) have no text-based source citation at all -- only an image and a bare CSV with no header citation -- so no verifiable quote ties this node to jp-population-census or jp-comprehensive-survey-living-conditions even though that is the plausible underlying source by convention."
+    },
+    {
+      "edge": "jp-long-term-care-insurance -> jp-comprehensive-survey-living-conditions",
+      "source": "jp-long-term-care-insurance",
+      "target": "jp-comprehensive-survey-living-conditions",
+      "reason": "no-document",
+      "why": "CONFIRMED NOT via a Grok follow-up pass, raw-verified by the orchestrating session (direct curl fetch, Shift-JIS decoded). MHLW's own FY2024 Long-Term Care Insurance Business Status Report annual page states plainly: \"本報告は、介護保険事業の実施状況について、保険者（市町村等）からの報告数値を全国集計したものです。\" (\"This report is a nationwide aggregation of figures reported by insurers (municipalities)\") — an administrative tally, not a survey drawing on the Comprehensive Survey of Living Conditions, which has its own separate 介護の状況 module (household-sample data on care causes/co-residence/family carers). A genuine, confirmed dead end."
+    },
+    {
+      "edge": "jp-elderly-household-structure -> jp-comprehensive-survey-living-conditions",
+      "source": "jp-elderly-household-structure",
+      "target": "jp-comprehensive-survey-living-conditions",
+      "reason": "deferred",
+      "why": "Same underlying document as jp-ageing-society-white-paper above (Chapter 1, Section 3, '家族と世帯'): the elderly-household and single-elderly-person charts are image-only (GIF) with accompanying CSV downloads that carry no source/citation row. Conventionally this data derives from the Comprehensive Survey of Living Conditions, but no text on the fetched pages states this, so it could not be verified."
+    }
+  ]
+}
