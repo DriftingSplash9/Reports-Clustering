@@ -1,0 +1,73 @@
+{
+  "_note": "Philippines — Round 7 — browser/curl unblock of the access-blocked backlog, 2026-08-29. Every edge here closes a lead that an earlier round recorded as unreachable. The blocks were largely artefacts of the fetch tool, not the sites: mnd.gov.tw is fully readable to plain curl (its 'ROBOTS_DISALLOWED' verdict was WebFetch obeying robots.txt); gob.mx serves its /cms/uploads/attachment/file/ PDFs to curl while Akamai-challenging its HTML; BPS Indonesia's signed web-api.bps.go.id download host is not Cloudflare-walled even though every *.bps.go.id page is. Every quote below was verified verbatim against the fetched bytes (pdftotext/substring match), not against a search snippet or a fetch-tool summary. See project memory unlinked_nodes_wiring_round7_2026-08-29 for the full narrative.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "ph-pdp",
+      "target_report_id": "ph-power-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "The Philippine Development Plan 2023-2028 results matrix (Chapter 12, Infrastructure, PDF p.313) names \"DOE Power Statistics\" in its MEANS OF VERIFICATION column for the indicator \"Share of renewable energy in the power generation mix increased (%)\" (baseline 22.40, 2021), with DOE as responsible agency. Adjacent rows in the same block name \"Department of Energy (DOE) Annual Report\", confirming the column lists per-indicator sources and that Power Statistics is a distinct named product. This is the same document and the same results-matrix mechanism as the corpus's existing ph-pdp -> ph-fies edge.",
+      "evidence_url": "https://pdp.depdev.gov.ph/wp-content/uploads/2023/09/Philippine-Development-Plan-2023-2028.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-pdp",
+      "target_report_id": "ph-peza",
+      "relationship_type": "uses_data_from",
+      "basis": "The same PDP results matrix (PDF p.180) names \"Philippine Economic Zone Authority (PEZA) annual report\" in its MEANS OF VERIFICATION column for the indicator \"Number of knowledge, innovation, science, and technology parks established\" (baseline 5, 2022), with PEZA as responsible agency. Node-scope caveat: ph-peza is titled 'PEZA ecozone and investment statistics' while the PDP names PEZA's annual report as the carrier; if the corpus later treats those as distinct products this edge should be re-targeted rather than dropped.",
+      "evidence_url": "https://pdp.depdev.gov.ph/wp-content/uploads/2023/09/Philippine-Development-Plan-2023-2028.pdf",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ph-pdp -> ph-basic-ed",
+      "source": "ph-pdp",
+      "target": "ph-basic-ed",
+      "reason": "deferred",
+      "why": "Evidence found and verified, but held on a node-identity question rather than an access problem. The PDP results matrix (PDF p.313-314, https://pdp.depdev.gov.ph/wp-content/uploads/2023/09/Philippine-Development-Plan-2023-2028.pdf) names \"Enhanced Basic Education Information System (EBEIS), Department of Education (DepEd) data\" in its MEANS OF VERIFICATION column for the classroom-to-pupil ratio indicator (baseline 1:32, 2021), with the short form \"EBEIS, DepEd data\" recurring on six further rows. The objection: that names an information SYSTEM and 'DepEd data', not a named publication, whereas ph-basic-ed is 'Basic education statistics (DepEd)'. The bridge between the two is DepEd Order No. 52 s.2016, titled 'Data Collection of Basic Education Statistics in the Learner Information System and Enhanced Basic Education Information System' — but deped.gov.ph returns a 345-byte WAF 403 to curl on every path, so that title is a fetch-tool paraphrase with no verbatim bytes behind it. If the project's bar allows an information system to stand for the statistics it produces, this edge is ready; if the target must be a named publication, it is a genuine no."
+    },
+    {
+      "edge": "ph-dmw -> ???",
+      "source": "ph-dmw",
+      "target": null,
+      "reason": "no-document",
+      "why": "Reclassified from unreadable-source on real bytes. The node's own listed PDF is retrievable by plain curl (HTTP 200, application/pdf, 358,199 bytes, 5 pages) — the HTML site being a Nuxt SPA no longer matters because the statistical artefact itself reads fine. Its notes block, verbatim: \"Notes: / p Preliminary data. / The 2024 and 2025 data are all preliminary and subject to final evaluation. / Source: Department of Migrant Workers - Management Information and Technology Service. / Processed by: Strategic Planning and Management Service\". The only stated source is DMW's own internal unit, which is not a corpus node. Separately, ph-dmw appears in the PDP only in the RESPONSIBLE AGENCY column for the documented-Overseas-Filipinos indicator, whose MEANS OF VERIFICATION names \"Department of Foreign Affairs report\" — an agency role, not a source."
+    },
+    {
+      "edge": "ph-port-cebu -> ???",
+      "source": "ph-port-cebu",
+      "target": null,
+      "reason": "no-document",
+      "why": "Reclassified from unreadable-source; the source is not unreadable, it simply states no lineage. cpa.gov.ph serves fine to curl (189 KB homepage). Its /the-cebu-port-system/statistics page body is empty apart from a heading but embeds a Google Drive folder, which was enumerated (https://drive.google.com/embeddedfolderview?id=1SlDazoEzRPXS6Y0Vm2XHVqOwQ0M5DDfw): two subfolders, 'Quarterly & Annually Statistical Report' with year folders 2000-2026 of per-quarter .xlsx, and 'Datasets'. Downloaded and text-extracted '2025 CPA Performance at a Glance.pdf' (11,228,972 bytes, all 3 pages): 146,527 shipping traffic, 19.64M passengers, 75.87 MMTs cargo throughput, 993.75 TTEUs containers — with no source line, no methodology note and no reference to PPA, PSA or any other report. /news-and-publications is HR announcements and /transparency-seal is COA financial reports. Also checked: in the PDP, CPA appears only among a dozen RESPONSIBLE AGENCY entries against indicators whose MEANS OF VERIFICATION reads 'Agency reports', which names no CPA product. Containment note in passing: CPA's own page states 'The Cebu Port System is composed of the Cebu Baseport and its subports... There are five subports within the jurisdiction of Cebu Port Authority, namely: Mandaue, Danao, Sta. Fe, Toledo and Argao' (https://www.cpa.gov.ph/the-cebu-port-system) — containment of the subports inside the Cebu system, saying nothing about CPA rolling into PPA's national totals, which reinforces the earlier rejection of ph-port-cebu -> ph-ports."
+    },
+    {
+      "edge": "ph-peza -> ???",
+      "source": "ph-peza",
+      "target": null,
+      "reason": "no-document",
+      "why": "Reclassified from unreadable-source as a SOURCE (it is now a live edge target — see ph-pdp -> ph-peza). Fetch fix worth recording: https://www.peza.gov.ph/ fails TLS (curl exit 60 / connection reset) but plain http://www.peza.gov.ph/ works, HTTP 200, Apache/2.4.51 Win64. The site has no statistics section at all — /downloads is forms and templates, /press-releases renders an empty list. webapps.peza.gov.ph, which hosts /seds/, /cpis/ and /2024annualreport.html, returns 403 on every path over both schemes and to WebFetch as well; that one host is genuinely still blocked."
+    },
+    {
+      "edge": "ph-basic-ed -> ???",
+      "source": "ph-basic-ed",
+      "target": null,
+      "reason": "no-document",
+      "why": "Reclassified from unreadable-source as a SOURCE. deped.gov.ph returns HTTP 403 to curl on every path tried (/, /resources/facts-and-figures/, /wp-content/uploads/, and the DO 52 s.2016 PDF), with a 345-byte body consisting of a bare img tag pointing at depedwesiteblobstorage.blob.core.windows.net/.../403.png — an intentional WAF block, not robots.txt. WebFetch does retrieve the order PDF, which names only DepEd's own Learner Information System and EBEIS as data sources — internal administrative systems, not corpus nodes. The edge that does exist runs the other way and is recorded above."
+    },
+    {
+      "edge": "ph-digital-economy -> sna-2008",
+      "source": "ph-digital-economy",
+      "target": "sna-2008",
+      "reason": "no-document",
+      "why": "SETTLED, and the round-2 premise was wrong in two ways. The '2025 SNA' phrase comes from a PSA-authored deck — 'An Overview of the Philippines' Experience in Measuring the contribution of Digital Economy', Gerald Junne L. Clariño, Chief Statistical Specialist, Satellite Accounts Division, delivered 07 April 2026 at the 'Webinar on Digitalization in the 2025 System of National Accounts' — reachable at https://www.unsiap.or.jp/sites/default/files/doc/2026-04/11_Philippine's%20Experience.pdf (8,402,284 bytes, 27 pages) because psa.gov.ph itself is Cloudflare-walled. On page 26, under the heading 'Ways forward', it reads verbatim: \"1. Adoption of the 2025 System of National Accounts recommendations, particularly in covering activities i.e., content creation and trade on digital platforms (free and fee-based) including the non-traditional work arrangements.\" That is an aspiration, in the same register as the held vn-monetary-indicators -> imf-mfsmcg-2016 case, and it supports no edge in either direction: not to sna-2008 (wrong vintage, and the deck never says PDESA currently follows 2008 SNA), and not to a 2025-SNA node either. The second correction: sna-2025 ALREADY EXISTS in international-standards.json, so the modelling question was never 'does the corpus need a new node'. Two leads from the same deck for whoever revisits ph-digital-economy: pages 17-18 list LFS among PDESA's data sources, and page 8 states the digital-enabling-infrastructure component 'is based on the sectors identified in the ICT sector definition of International Standard Industrial Classification of All Economic Activities (ISIC), Revision 4'. Page 3 also confirms the earlier oecd-digital-suts-handbook rejection was right — it names OECD and BEA as institutional precedents, never the Handbook."
+    },
+    {
+      "edge": "ph-geothermal -> ???",
+      "source": "ph-geothermal",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Still unreadable for verbatim purposes, but the reason has changed and is worth recording. DOE rebuilt its site: https://doe.gov.ph/energy-statistics/philippine-power-statistics now returns HTTP 200 but renders '404 — Page Not Found' inside the Next.js RSC payload, and the new navigation has no statistics section at all. The statistics live on legacy.doe.gov.ph, which fails from the cloud container with curl exit 56 (the egress proxy logs connect_rejected — organization policy) and from the user's device with curl exit 6 (DNS); web.archive.org returns '403 Blocked by egress policy'. WebFetch can reach legacy.doe.gov.ph and returns a page listing six 2024 Power Statistics documents, but it contains no data-sources statement — only a contact line for the EPIMB Power Planning and Development Division. Geothermal appears there as a technology row under Renewable Energy in the installed-and-dependable-capacity table, which is the weakest form of containment evidence and is NOT sufficient to set part_of. Strong prior that the underlying answer is no-document."
+    }
+  ]
+}

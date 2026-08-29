@@ -426,8 +426,8 @@
       "edge": "tw-civil-defense-personnel -> ???",
       "source": "tw-civil-defense-personnel",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "The All-Out Defense Mobilization Preparation Act page on law.moj.gov.tw returned ROBOTS_DISALLOWED."
+      "reason": "no-document",
+      "why": "The mnd.gov.tw half of this was never a real block — plain curl reads the whole domain; the 'ROBOTS_DISALLOWED' verdict was WebFetch obeying robots.txt. On re-reading, the National Defense Report's mobilisation chapter mentions civil defense only as an exercise participant and as 可用民力 inside the All-out Defense Mobilization Integrated Information System — too vague to carry a dependency on the registration/training series this node names. Separately, aodm.mnd.gov.tw (the All-Out Defense Mobilization Agency's own site) is unreachable from both the cloud container and the user's device: the egress proxy denies CONNECT (connect_rejected, gateway 502). That is an egress-policy block, unrelated to www.mnd.gov.tw. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-cybersecurity-c4isr -> ???",
@@ -447,22 +447,22 @@
       "edge": "tw-national-defense-report -> ???",
       "source": "tw-national-defense-report",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "Nearly all mnd.gov.tw report pages return ROBOTS_DISALLOWED."
+      "reason": "note",
+      "why": "RESOLVED. The access verdict here was wrong: mnd.gov.tw is fully readable to plain curl with a browser user-agent, including every File/<id> download — 'ROBOTS_DISALLOWED' was WebFetch obeying robots.txt, not the site refusing. The 2025 (114年) National Defense Report was downloaded in both editions (https://www.mnd.gov.tw/File/54548 English, https://www.mnd.gov.tw/File/54313 Chinese) and this node now carries two minted edges. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-indigenous-naval-shipbuilding -> ???",
       "source": "tw-indigenous-naval-shipbuilding",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "MND shipbuilding program pages blocked by robots.txt."
+      "reason": "no-document",
+      "why": "Access verdict corrected: mnd.gov.tw reads fine to plain curl, so this was never blocked. On reading the 2025 National Defense Report's 國艦國造 section in full, it is narrative programme reporting — mine-laying boats, high-performance vessels, light-frigate keel-layings, the IDS/Hai Kun harbour acceptance test — with no source attribution, no statistical series, and no statement that any document draws on shipbuilding programme data. MND's statistics releases contain no shipbuilding tables. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-defense-industry-stats -> ???",
       "source": "tw-defense-industry-stats",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "Armaments Bureau/MND pages on the blocked mnd.gov.tw domain."
+      "reason": "no-document",
+      "why": "Access verdict corrected, and the answer is a genuine negative rather than a block. MND does publish machine-readable defence-industry statistics — https://www.mnd.gov.tw/informationservices/publication/86508 (114年統計資料發布, 主計局, 18 tables) includes 民營廠商承攬重大軍事工程案件統計 (File/57518), 民營廠商承銷重大軍品採購案件統計 (File/57519) and the Armaments Bureau construction tables (File/57516, File/57517), all text-extractable with full 編製說明. But their compilation notes name only internal Armaments Bureau records as the data source (資料來源：軍備局(工程營產處)), which is not a corpus node. Readable, verified, and no edge. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-asymmetric-force-budget -> ???",
@@ -475,8 +475,8 @@
       "edge": "tw-military-personnel -> ???",
       "source": "tw-military-personnel",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "MND personnel-statistics pages and data.gov.tw dataset pages returned robots/SSL errors."
+      "reason": "note",
+      "why": "RESOLVED as a target, and corrected as a source. Access verdict was wrong (mnd.gov.tw reads fine to curl). As a SOURCE this is still a negative and a sharper one than 'unreadable': both MND statistics releases retrieved (publication/86508 for 114年, publication/86147 for 113年) carry the same 18 tables — dependants' ID cards, welfare stations, barracks, engineering contracts, budget ratios, marriage/childbirth subsidies — and no active-duty strength, reserve, or volunteer/conscript-mix table at all. MND does not publish a manpower-strength series through this channel. As a TARGET the node is now wired: the 2025 National Defense Report states the personnel budget is calculated from budgeted authorised strength. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-justice-crime -> ???",
@@ -720,8 +720,8 @@
       "edge": "tw-defense-budget->tw-national-defense-report",
       "source": "tw-defense-budget",
       "target": "tw-national-defense-report",
-      "reason": "deferred",
-      "why": "Grok candidate; mnd.gov.tw blocks automated fetch (robots.txt) on every path/subdomain tried, no Wayback snapshot exists. Could not independently confirm the quote per 'no document, no edge'. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "reason": "wrong-direction",
+      "why": "Resolved, and the direction was backwards. mnd.gov.tw was never blocked to plain curl. The 2025 National Defense Report's own source note says its published MND budget figure is derived from the budget — \"The MND budget is calculated based on the legal budget in 2024 at an NTD to USD exchange rate of 30.651:1\" (https://www.mnd.gov.tw/File/54548; Chinese edition 「國防部預算」係以113年法定預算為列計基礎). The budget-document side was searched for the converse (InformationServices/BudgetandFinalAccounts/c/56011, publication/81919, publication/71877, and the budget statistics tables File/57520 and File/57521 with their 編製說明) and nothing says budget compilation draws on the National Defense Report. The edge is minted the other way as tw-national-defense-report -> tw-defense-budget. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-asymmetric-force-budget->tw-defense-budget",
@@ -734,15 +734,15 @@
       "edge": "tw-military-personnel->tw-national-defense-report",
       "source": "tw-military-personnel",
       "target": "tw-national-defense-report",
-      "reason": "deferred",
-      "why": "Same mnd.gov.tw access block as above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "reason": "no-document",
+      "why": "Resolved as a negative once the access block turned out not to exist. The 2025 National Defense Report publishes no manpower series and cites no personnel statistics; nothing found says personnel statistics are compiled from, or cite, the National Defense Report. The documented relation in this cluster is a different pair entirely and runs the other way: tw-defense-budget -> tw-military-personnel, now minted. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-strategic-material-reserves->tw-asymmetric-force-budget",
       "source": "tw-strategic-material-reserves",
       "target": "tw-asymmetric-force-budget",
-      "reason": "deferred",
-      "why": "Same mnd.gov.tw access block as above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "reason": "no-document",
+      "why": "Resolved as a negative. The only relation evidenced between these two is FUNDING, not data: MND's budget-policy page states the FY2026-27 resilience special budget of NT$108.1 bn covers six projects meeting 戰略物資增加與改善彈藥囤儲環境等迫切需求 (https://www.mnd.gov.tw/publication/85285, item 四). A special budget paying for larger stockpiles is not calculated_from, uses_data_from, methodology_depends_on or cites — none of the four permitted types fits it. What the same search did yield is an edge pointing INTO this node from tw-whole-of-society-resilience, now minted. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "tw-ecfa-early-harvest->tw-ecfa-legal",

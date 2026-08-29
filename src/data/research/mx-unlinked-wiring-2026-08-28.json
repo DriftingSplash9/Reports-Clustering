@@ -172,22 +172,22 @@
       "edge": "mx-alcaldia-benito-juarez -> mx-censo-poblacion",
       "source": "mx-alcaldia-benito-juarez",
       "target": "mx-censo-poblacion",
-      "reason": "deferred",
-      "why": "STILL NOT MINTED after a Grok follow-up pass — upgraded lead, not closed. The exact same IPDP CDMX \"Panorama Geografico y Estadistico\" template used for Tlahuac and Gustavo A. Madero (both minted this round) almost certainly exists for Benito Juarez too. Grok located the specific per-alcaldia PDF (hash 67047017b6d17708697532, distinct from the other three alcaldias' own hashes — a good authenticity sign, not a reused URL) and reported its section 02.1.1/02.1.2 footnotes read \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI](2020,2010,2000,1990). Censos de Poblacion y Vivienda\" and \"...[INEGI](2020). Marco Geoestadistico. Censo de Poblacion y Vivienda\", extracted from the file's search-index rather than a live fetch. The orchestrating session independently tried to raw-verify this exact URL 4 times via curl (connection reset every time, matching the original ROBOTS_DISALLOWED/timeout pattern), once via Wayback Machine's availability API (a snapshot exists at timestamp 20250630182122 but both a direct fetch and the WebFetch tool were refused — egress policy / PROXY_REJECTED respectively), and once more via WebFetch directly on the archive.org URL (also refused). Every independent attempt hit a wall, so per the evidence standard this stays unminted — but the quote is now on record so a future session with different network access (or a real browser tool) can close it in one fetch rather than starting over."
+      "reason": "resolved",
+      "why": "RESOLVED in round 7. The block was gob.mx-shaped and turned out not to apply here at all: alcaldiabenitojuarez.gob.mx serves fine to plain curl (697 KB homepage). The alcaldía's Programa de Gobierno 2024-2027 (https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf, 2,882,984 bytes) states in body text, in two separate chapters, that its unemployment and foreign-resident figures come from the 2020 census. Edge minted. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "mx-alcaldia-benito-juarez -> mx-censos-economicos",
       "source": "mx-alcaldia-benito-juarez",
       "target": "mx-censos-economicos",
       "reason": "deferred",
-      "why": "Same access situation as the census edge above (see that entry for the full access-attempt log). Grok reported this same Benito Juarez PDF's section 07 footnote reads \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI] (2003, 2008, 2013, 2018). Sistema Automatizado de Informacion Censal (SAIC). Censos Economicos.\" — index-extracted, not live-fetched, by either party. Not minted; quote on record for the next attempt."
+      "why": "Access is no longer the obstacle — the Programa de Gobierno 2024-2027 was read in full this round — but the evidence is a chart caption rather than a sentence: \"Fuente: ... Instituto Nacional de Estadística y Geografía [INEGI] (2003, 2008, 2013, 2018). Sistema Automatizado de Información Censal (SAIC). Censos Económicos.\" under the employment-by-sector figure. Held for a ruling on whether a figure-source line alone clears the bar. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "mx-alcaldia-benito-juarez -> mx-denue",
       "source": "mx-alcaldia-benito-juarez",
       "target": "mx-denue",
       "reason": "deferred",
-      "why": "Same access situation as the census edge above. Grok reported this same Benito Juarez PDF's section 07.2.2 footnote reads \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI] (2022). Directorio Estadistico Nacional de Unidades Economicas [DENUE]\" (2022 vintage, matching Gustavo A. Madero's own DENUE-2022 citation already minted this round) — index-extracted, not live-fetched, by either party. Not minted; quote on record for the next attempt."
+      "why": "Access is no longer the obstacle (see the census entry above — the document reads fine to plain curl), but this specific DENUE footnote was not located in the 2024-2027 Programa de Gobierno this round; the round's search of that document found census and ENSU attributions, not DENUE. Grok's quote referenced a section 07.2.2 footnote which may belong to a different Benito Juárez publication. Cheap retry with the document now in hand. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "mx-enigh-salud -> COICOP (edition/applicability unconfirmed)",

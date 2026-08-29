@@ -499,7 +499,7 @@
       "source": "ph-geothermal",
       "target": null,
       "reason": "unreadable-source",
-      "why": "DOE's doe.gov.ph and legacy.doe.gov.ph pages are JS-rendered SPAs; WebFetch returned only navigation/footer chrome."
+      "why": "Still unreadable, but for a new reason worth recording: DOE rebuilt its site. https://doe.gov.ph/energy-statistics/philippine-power-statistics now returns HTTP 200 but renders '404 — Page Not Found' inside the Next.js RSC payload, and the new navigation has no statistics section at all. The statistics moved to legacy.doe.gov.ph, which fails from the cloud container with curl exit 56 (egress proxy: connect_rejected, organization policy) and from the user's device with curl exit 6 (DNS); web.archive.org returns '403 Blocked by egress policy'. WebFetch reaches it and lists six 2024 Power Statistics documents but finds no data-sources statement. Geothermal appears only as a technology row in the installed-and-dependable-capacity table, which is too weak to set part_of. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-renewables -> ???",
@@ -512,8 +512,8 @@
       "edge": "ph-power-stats -> ???",
       "source": "ph-power-stats",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "2024 Power Statistics Summary PDF contains only term definitions, no sourcing statement; DOE landing pages 403 or nav-chrome-only."
+      "reason": "no-document",
+      "why": "Reclassified as a source (it is now a live edge TARGET — see ph-pdp -> ph-power-stats in ph-browser-unblock-2026-08-29.json). The 2024 Power Statistics tables carry only definitional footnotes and name no upstream report; see the DOE site-rebuild access note at the ph-geothermal entry above. Also checked and ruled out this round: the Philippines' Biennial Transparency Report names a different DOE product in footnote 21 — \"Annual Energy Balance Table of DOE is used as main source of data of fuel consumption\" — and 'Power Statistics' appears nowhere in its 342 KB of extracted text. The corpus has no Energy Balance Table node. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-energy-mix -> ???",
@@ -554,8 +554,8 @@
       "edge": "ph-basic-ed -> ???",
       "source": "ph-basic-ed",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "DepEd's basic-education-statistics page and DO 52 s.2016 both returned 403."
+      "reason": "no-document",
+      "why": "Reclassified as a source (it is a live edge TARGET candidate — see the held ph-pdp -> ph-basic-ed entry in ph-browser-unblock-2026-08-29.json). deped.gov.ph returns HTTP 403 to curl on every path with a 345-byte body consisting of a bare img tag pointing at depedwesiteblobstorage.blob.core.windows.net/.../403.png — an intentional WAF block, not robots.txt. WebFetch does retrieve DO 52 s.2016, which names only DepEd's own Learner Information System and EBEIS as data sources: internal administrative systems, not corpus nodes. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-digital-economy -> oecd-digital-suts-handbook",
@@ -603,8 +603,8 @@
       "edge": "ph-port-cebu -> ???",
       "source": "ph-port-cebu",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "No PPA page or press release specific to Port of Cebu was fetchable (PPA PDFs blocked)."
+      "reason": "no-document",
+      "why": "Reclassified — the source is not unreadable, it simply states no lineage. cpa.gov.ph serves fine to curl. Its statistics page embeds a Google Drive folder which was enumerated, and '2025 CPA Performance at a Glance.pdf' (11,228,972 bytes) was downloaded and text-extracted in full: shipping traffic, passengers, cargo throughput and container figures, with no source line, no methodology note and no reference to PPA, PSA or any other report. See the fuller entry in ph-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-vital-stats -> ph-pop-projections",
@@ -617,8 +617,8 @@
       "edge": "ph-dmw -> ???",
       "source": "ph-dmw",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "POEA/DMW pages robots-blocked or JS SPA; FOI page 404'd."
+      "reason": "no-document",
+      "why": "Reclassified — the node's own listed PDF is retrievable by plain curl (HTTP 200, application/pdf, 358,199 bytes, 5pp), so the SPA front-end no longer matters. Its notes block names only an internal unit: \"Source: Department of Migrant Workers - Management Information and Technology Service. Processed by: Strategic Planning and Management Service\". Separately, ph-dmw appears in the PDP only as a RESPONSIBLE AGENCY; that indicator's MEANS OF VERIFICATION names a DFA report. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-crime -> ???",
@@ -631,8 +631,8 @@
       "edge": "ph-peza -> ???",
       "source": "ph-peza",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "PEZA press releases, annual-report site, and FOI page all 403/404."
+      "reason": "no-document",
+      "why": "Reclassified as a source (it is now a live edge TARGET — see ph-pdp -> ph-peza). Fetch fix worth recording: https://www.peza.gov.ph/ fails TLS (curl exit 60 / connection reset) but plain http://www.peza.gov.ph/ works, HTTP 200, Apache/2.4.51 Win64. The site has no statistics section — /downloads is forms and templates, /press-releases renders empty. webapps.peza.gov.ph, which hosts /seds/, /cpis/ and /2024annualreport.html, 403s on every path over both schemes and to WebFetch too; that one host is genuinely still blocked. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-rd-statistics -> ???",
@@ -666,8 +666,8 @@
       "edge": "ph-digital-economy->sna-2008",
       "source": "ph-digital-economy",
       "target": "sna-2008",
-      "reason": "deferred",
-      "why": "Grok candidate; the cited PSA methodology document explicitly references adoption of the '2025 System of National Accounts recommendations', not the 2008 SNA vintage the sna-2008 node represents. Likely needs a 2025-SNA node that doesn't yet exist in the corpus rather than this edge. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+      "reason": "no-document",
+      "why": "SETTLED as a negative, and the premise recorded here was wrong in two ways. The '2025 SNA' phrase comes from a PSA-authored deck reachable at https://www.unsiap.or.jp/sites/default/files/doc/2026-04/11_Philippine's%20Experience.pdf (psa.gov.ph itself is Cloudflare-walled on every host and path). On page 26, under the heading 'Ways forward', it reads: \"1. Adoption of the 2025 System of National Accounts recommendations, particularly in covering activities i.e., content creation and trade on digital platforms (free and fee-based) including the non-traditional work arrangements.\" That is an aspiration, not a documented dependency, so it supports no edge to sna-2008 OR to a 2025-SNA node. Second correction: sna-2025 ALREADY EXISTS in international-standards.json, so the modelling question was never whether the corpus needs one. See the fuller entry in ph-browser-unblock-2026-08-29.json. Settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "ph-gov-debt->ph-fiscal-ops (cites)",

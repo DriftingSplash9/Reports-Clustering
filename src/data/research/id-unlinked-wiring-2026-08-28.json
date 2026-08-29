@@ -152,8 +152,8 @@
       "edge": "id-gini-inequality -> id-susenas",
       "source": "id-gini-inequality",
       "target": "id-susenas",
-      "reason": "no-document",
-      "why": "The Gini/inequality indicator is almost certainly Susenas-derived (as several other BPS welfare products confirmed to be in this same round), but BPS's own concept/methodology pages for it (sirusa metadata, indicator concept pages, press releases) are JS-rendered and returned no fetchable body text stating the linkage explicitly. Worth a revisit with a real browser tool rather than WebFetch."
+      "reason": "resolved",
+      "why": "RESOLVED, exactly as this note predicted (\"Worth a revisit with a real browser tool rather than WebFetch\"). The access fix both earlier rounds asked for: every *.bps.go.id host is Cloudflare-403 to plain curl, but web-api.bps.go.id — the host BPS's own download buttons point at — is not. So the working technique is to open the BPS page in a real browser, read the signed download href out of the DOM, and fetch that link with curl. BPS's Berita Resmi Statistik for the Gini ratio (https://www.bps.go.id/id/pressrelease/2026/02/05/2535/gini-ratio-september-2025-tercatat-sebesar-0-363-.html, 4,403,735-byte PDF, released 5 February 2026) states under its trend chart and under both data tables: \"Sumber: Diolah dari data Survei Sosial Ekonomi Nasional (Susenas) September 2024–September 2025\". Edge minted. Settled in round 7 (2026-08-29) — see id-browser-unblock-2026-08-29.json and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "id-labour-productivity -> icls-work-statistics-resolution",

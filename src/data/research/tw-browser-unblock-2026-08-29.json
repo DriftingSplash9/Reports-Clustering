@@ -1,0 +1,83 @@
+{
+  "_note": "Taiwan — Round 7 — browser/curl unblock of the access-blocked backlog, 2026-08-29. Every edge here closes a lead that an earlier round recorded as unreachable. The blocks were largely artefacts of the fetch tool, not the sites: mnd.gov.tw is fully readable to plain curl (its 'ROBOTS_DISALLOWED' verdict was WebFetch obeying robots.txt); gob.mx serves its /cms/uploads/attachment/file/ PDFs to curl while Akamai-challenging its HTML; BPS Indonesia's signed web-api.bps.go.id download host is not Cloudflare-walled even though every *.bps.go.id page is. Every quote below was verified verbatim against the fetched bytes (pdftotext/substring match), not against a search snippet or a fetch-tool summary. See project memory unlinked_nodes_wiring_round7_2026-08-29 for the full narrative.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "tw-national-defense-report",
+      "target_report_id": "tw-defense-budget",
+      "relationship_type": "calculated_from",
+      "basis": "The 2025 (114年) National Defense Report's own source note, under its defence-budget-to-GDP comparison, states that the MND budget figure the report publishes is computed from the enacted (法定) FY2024 defence budget at a stated exchange rate. Verbatim (English edition): \"The MND budget is calculated based on the legal budget in 2024 at an NTD to USD exchange rate of 30.651:1.\" The Chinese edition carries the same note: 「國防部預算」係以113年法定預算為列計基礎，按美元計畫匯率 30.651：1 換算。 This resolves the direction of the previously-deferred candidate, which ran the other way: nothing on the budget-document side says budget compilation draws on the National Defense Report.",
+      "evidence_url": "https://www.mnd.gov.tw/File/54548",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-national-defense-report",
+      "target_report_id": "tw-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "The same source note in the 2025 National Defense Report states that the ROC GDP figure used throughout its defence-budget-to-GDP analysis is taken from DGBAS's published data, dated to a specific DGBAS release. Verbatim (English edition): \"The GDP of the ROC is based on the data announced by the Directorate-General of Budget, Accounting and Statistics, Executive Yuan on August 15, 2025.\" Chinese edition: 中華民國「GDP」係參考行政院主計總處114年8月15日公布之數據。",
+      "evidence_url": "https://www.mnd.gov.tw/File/54548",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-defense-budget",
+      "target_report_id": "tw-military-personnel",
+      "relationship_type": "calculated_from",
+      "basis": "The 2025 National Defense Report states that the MND personnel-maintenance budget line (NT$186.9 billion for FY2025) is computed on the basis of budgeted authorised strength (預算員額), taking recruitment, retention results and recent actual payroll headcount as inputs. Verbatim (English edition): \"The personnel budget is NT$186.9 billion, which is mainly calculated based on manpower and takes into account personnel recruitment, retention results, actual payroll numbers in recent years, and is reviewed on a rolling basis.\" Chinese edition: 人員維持 1,869 億元，主要以預算員額為核算基礎，並參考近年人員招募、留營成效、實際發薪人數等因素，滾動檢討。",
+      "evidence_url": "https://www.mnd.gov.tw/File/54548",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-defense-budget",
+      "target_report_id": "tw-price-detail",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2025 National Defense Report states that the FY2025 uplift to the service members' meal-expense budget line was set by reference to the food-class consumer price index published by DGBAS — a named CPI component series used as a direct input to a defence budget figure. Verbatim (English edition): \"Due to inflation, after referencing the consumer price index for food announced by the Directorate-General of Budget, Accounting and Statistics, Executive Yuan, the budget for meal expenses of service members was increased from NT$2,969-NT$4,779 to NT$3,487-NT$5,947 in 2025.\" Chinese edition names the series precisely as 食物類消費者物價指數, which is why the target is the CPI component series rather than the headline CPI publication.",
+      "evidence_url": "https://www.mnd.gov.tw/File/54548",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-whole-of-society-resilience",
+      "target_report_id": "tw-strategic-material-reserves",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2025 National Defense Report states that the All-out Defense Mobilization Integrated Information System — run by MND's All-Out Defense Mobilization Agency, secretariat of the Whole-of-Society Defense Resilience Committee — integrates strategic-supply and materials-facility information supplied across ministries and local governments into a single mobilisation resource platform. Verbatim (English edition): \"The All-out Defense Mobilization Integrated Information System integrates information on civilian defense resources, supplies and facilities, strategic supplies and air defense shelters, shelters, first aid stations, and non-gratuitous rationing stations, linking central and local government mobilization information and resources.\"",
+      "evidence_url": "https://www.mnd.gov.tw/File/54548",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tw-asymmetric-force-budget -> tw-defense-budget",
+      "source": "tw-asymmetric-force-budget",
+      "target": "tw-defense-budget",
+      "reason": "note",
+      "why": "RESOLVED (as part_of, not an edge). The previously-deferred candidate edge is a containment relation and must not be minted (a dependency edge between a node and its container is a validator error). Evidenced twice and independently. (1) The 2025 National Defense Report, https://www.mnd.gov.tw/File/54548: \"The defense budget includes the MND's budget, special budget, and fund budget, and has grown from NT$448.3 billion to NT$644.9 billion in the past 5 years (from 2021 to 2025, including the additional budgets), showing a steady upward trend.\" (2) MND's own budget-policy page https://www.mnd.gov.tw/publication/85285 (published 114.11.03, excerpted from MND's Legislative Yuan business report), which enumerates the asymmetric/resilience instruments inside the FY2026 total: 115年度國防預算按北約標準達9,495億元(含退除役官兵退休給付及海巡支出)，占GDP比率3.32％；其中國防部規劃編列8,060億元…包括年度預算5,614億元…、基金預算654億元、新式戰機與海空戰力提升特別預算692億元，以及「因應國際情勢強化經濟社會及民生國安韌性」與「強化防衛韌性及不對稱戰力」規劃編列之特別預算。 This entry stays reason 'note' rather than 'resolved' because a part_of resolution has no matching live edge by design, and the validator errors on a 'resolved' note that names no live edge. part_of is NOT set on the node in this round — see the open question in HANDOFF."
+    },
+    {
+      "edge": "tw-defense-industry-stats -> tw-defense-budget",
+      "source": "tw-defense-industry-stats",
+      "target": "tw-defense-budget",
+      "reason": "no-document",
+      "why": "Considered and declined. The 2025 National Defense Report does state the headline domestic-defence-industry ratio as arithmetic on budget lines — \"The foreign acquisition (including acquisitions from U.S. Foreign Military Sales) budget is NT$68.4 billion and the domestic acquisition (manufacturing) budget is NT$70.1 billion, in which self-reliant national defense accounts for 50.61%\" (https://www.mnd.gov.tw/File/54548) — but that calculation is performed inside the National Defense Report itself, not published by any standalone MND defence-industry series. MND's actual defence-industry statistics tables (https://www.mnd.gov.tw/informationservices/publication/86508, files 57516-57519) name only internal Armaments Bureau records as their source (資料來源：軍備局(工程營產處)). Attributing the ratio to tw-defense-industry-stats would splice two documents' separate claims into one neither makes."
+    },
+    {
+      "edge": "tw-national-defense-report -> tw-sipri-arms-transfers",
+      "source": "tw-national-defense-report",
+      "target": "tw-sipri-arms-transfers",
+      "reason": "deferred",
+      "why": "Genuine judgment call, deliberately not minted — a node-scope question for Thomas, not an evidence gap. The National Defense Report carries a verbatim source line under its PRC arms-export chart. The English edition renders it \"Source: SIPRI Military Expenditure Database\" (https://www.mnd.gov.tw/File/54548) but the Chinese original reads 資料來源：SIPRI武器轉讓數據庫 (https://www.mnd.gov.tw/File/54313) — the Arms Transfers Database, literally the database this node names. The mismatch is scope, not authenticity: the NDR cites it for PRC arms EXPORTS, whereas tw-sipri-arms-transfers is scoped to SIPRI arms-transfer statistics for Taiwan (IMPORTS). Read as the database, this is a clean 'cites'; read as the Taiwan-imports slice, the quote does not say what the edge would claim."
+    },
+    {
+      "edge": "tw-defense-budget -> ???",
+      "source": "tw-defense-budget",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Fully evidenced edge with no target node in the corpus. MND statistics table 11, 近十年國防部年度預算占中央政府總預算比率統計 (https://www.mnd.gov.tw/File/57520, 主計局), carries an explicit compilation note naming its statistical universe: 一、統計範圍及對象：中央政府總預算及國防部主管單位預算資料為統計對象。 and 1.中央政府總預算金額指中央政府總預算歲出預算數。 That is a textbook uses_data_from running from tw-defense-budget to the Central Government General Budget (中央政府總預算), but the corpus has no node for it (tw-local-government-finance is sub-national; tw-dgbas is the institution, not the budget). Mint a central-government-budget node and this edge lands immediately, verbatim-quotable."
+    },
+    {
+      "edge": "tw-asymmetric-force-budget -> ???",
+      "source": "tw-asymmetric-force-budget",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The special budgets' own compilation basis could not be read, on two distinct and unrelated failures. (1) Every DGBAS special-budget document (總說明, 歲出計畫提要及概況表) for 115年度中央政府保衛國家安全及強化不對稱戰力計畫採購 lives under https://ws.dgbas.gov.tw/001/Upload/461/relfile/ , which fails TLS with 'unable to get local issuer certificate' — tried the proxy CA bundle, the system bundle, --capath /etc/ssl/certs, a concatenated bundle, and the same fetch from the user's device; all identical, and verification was not disabled. (2) MND's own 115年第一季 resilience special-budget progress report (https://www.mnd.gov.tw/File/57257, 1.58 MB) downloads fine but is a scanned image PDF — pdftotext yields zero characters. So it remains untested whether the special budget's 總說明 cites the National Defense Report or the QDR."
+    }
+  ]
+}

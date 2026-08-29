@@ -131,8 +131,8 @@
       "edge": "vn-credit-growth -> ???",
       "source": "vn-credit-growth",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "SBV's 'Credit to the Economy' statistics page (dttktt.sbv.gov.vn/webcenter/portal/en/home/sbv/statistic/ctte) was unreachable on every attempt (connection reset / frame error). No separate GDDS/DSBB metadata document for a 'credit to the economy' series exists on Vietnam's NSDP — that category is not one of the listed NSDP data rows."
+      "reason": "no-document",
+      "why": "Reclassified on real bytes — the host moved rather than died. The dead dttktt.sbv.gov.vn has been folded into the main site: https://sbv.gov.vn/vi/du-no-tin-dung-doi-voi-nen-kt-dttktt fetches fine with plain curl (HTTP 200, 429,656 bytes) and carries the live DƯ NỢ TÍN DỤNG ĐỐI VỚI NỀN KINH TẾ tables. Its note field is literally empty — the page renders 'Ghi chú: null' for the Oct 2025 table and an empty 'Ghi chú:' for Jun 2026. No source, no methodology, no standard cited. Neighbouring SBV pages that do carry notes attribute only to administrative returns (https://sbv.gov.vn/vi/thong-ke-mot-so-chi-tieu-co-ban: 'Nguồn số liệu dựa trên Báo cáo cân đối tài khoản kế toán, báo cáo thống kê ... của Tổ chức tín dụng'), which is not a corpus node; and SBV's statistical-reporting legal-basis index lists 64 domestic circulars with no international manual named. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "vn-npl -> bis-basel-framework",
@@ -278,8 +278,8 @@
       "edge": "vn-ethnic-minorities -> ???",
       "source": "vn-ethnic-minorities",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "No listed URL. Identified the real underlying survey ('Điều tra, thu thập thông tin về thực trạng kinh tế - xã hội của 53 dân tộc thiểu số', GSO/Committee for Ethnic Minority Affairs) via search, with a snippet suggesting its 2019 round drew on the 2019 census. Every attempt to fetch a page actually describing this (datacollection.gso.gov.vn, 53dantoc.gso.gov.vn, gso.gov.vn/su-kien/..., nso.gov.vn/.../2026/06/...) failed at the fetch layer (robots-disallowed, server error, or a redirect landing on a generic bureau homepage with no article content) — no page text was actually retrieved, so per the no-fabrication rule, no edge or new node is proposed despite a plausible relationship existing in principle."
+      "reason": "note",
+      "why": "RESOLVED. GSO's own hosts do die at the TLS handshake (www.gso.gov.vn, gso.gov.vn, www.nso.gov.vn, 53dantoc.gso.gov.vn and datacollection.gso.gov.vn all fail with OpenSSL SSL_ERROR_SYSCALL immediately after ClientHello, identically from the cloud container and the user's device, and surviving --tls-max 1.2, an explicit TLS 1.2 browser cipher list and --http1.1). The route around them is the GSO PROVINCIAL subdomains, which serve 200 to plain curl and republish head-office content — worth trying for every Vietnam node written off on a gso.gov.vn connection failure. Via thongkecaobang.gso.gov.vn the survey plan under GSO Decision 628/QĐ-TCTK was read and cross-checked against the Decision's full text on luatvietnam.vn, and the edge vn-ethnic-minorities -> vn-population is now minted. Reopened and settled in round 7 (2026-08-29) — see the browser-unblock slice for that country and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "vn-tourism -> ???",

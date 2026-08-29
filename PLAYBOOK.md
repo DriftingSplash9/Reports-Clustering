@@ -358,6 +358,42 @@ country/file/round, not a single site's own one-off quirk.
   agent wrote BOTH copies itself (not a substitute for staging when you
   need genuinely fresh device-side content, e.g. a file Thomas edited
   locally).
+- **A "ROBOTS_DISALLOWED" / "robots-blocked" verdict is a statement about
+  the FETCH TOOL, not about the site.** WebFetch obeys robots.txt; plain
+  `curl` with a browser UA does not, and neither does a real browser.
+  Round 6 wrote off Taiwan's entire MND cluster as "robots.txt-blocked on
+  every path/subdomain tried, no Wayback snapshot exists" — `mnd.gov.tw`
+  was in fact wide open to curl the whole time, including every
+  `File/<id>` PDF download. **Before recording `unreadable-source` or a
+  robots block, retry with `curl -sL -A "<browser UA>"`.** The same
+  applies to a bot-UA 403. Treat every historical "robots" note in the
+  corpus as untested.
+- **A Cloudflare/WAF 403 on a DOCUMENT is beatable from inside the page
+  when the site itself loads in a real browser.** `fetch()` the PDF
+  same-origin in the page context (it inherits the browser's cookies and
+  TLS fingerprint), stash the ArrayBuffer on `window`, inject `pdf.js`
+  from cdnjs, and extract the text there. This read PIF's 80-page annual
+  report, which 403s to curl on every route, and gives page-indexed text
+  you can grep in-page. No download to disk, no device round-trip.
+- **A walled site often has an unwalled sibling host for its files.**
+  Every `*.bps.go.id` page (Indonesia) is Cloudflare-403 to curl, but
+  `web-api.bps.go.id` — the host BPS's own download buttons point at — is
+  not: open the page in a browser, read the signed
+  `download.php?f=<token>` href out of the DOM, then curl that. Same
+  shape at `gob.mx` (Mexico), which Akamai-challenges its HTML pages but
+  serves `/cms/uploads/attachment/file/...` PDFs to plain curl — worth
+  re-testing every historical "gob.mx 403". And when a national host is
+  unreachable, try its PROVINCIAL subdomains: `gso.gov.vn`/`nso.gov.vn`
+  (Vietnam) die at the TLS handshake from every route, but
+  `thongkecaobang.gso.gov.vn` serves 200 and republishes head-office
+  content. Always cite the stable page, never the signed/expiring link.
+- **WebFetch cannot produce evidence-grade verbatim** — it caps quotes at
+  ~125 characters and refuses full reproduction. Where it is the ONLY
+  route to a document (e.g. `psa.gov.ph` is Cloudflare-JS-walled on every
+  host and path, from cloud and device alike), it can establish a
+  negative or locate text, but a mintable quote needs a real browser
+  session or a non-PSA host carrying the same document — a PSA deck
+  hosted at `unsiap.or.jp` is how the 2025-SNA question got settled.
 - **A `report_id`/`candidate_target`-shaped `_dropped` entry (the
   duplicate-node-flag family) has no `source`/`target` fields at all** —
   rule 10 above only applies to `edge`-shaped entries. Tagging the former

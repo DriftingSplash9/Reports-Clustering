@@ -113,22 +113,22 @@
       "edge": "id-gini-inequality -> id-susenas",
       "source": "id-gini-inequality",
       "target": "id-susenas",
-      "reason": "deferred",
-      "why": "Grok proposed this (quoting a Susenas-source note) but the cited BPS statistics-table page returned only a title on independent re-fetch, no source-attribution text — the same JS-rendered/dynamic-table shape flagged elsewhere for BPS 'statistics-table' pages (as opposed to 'publication' pages, which at least have an abstract). Almost certainly true — every other BPS welfare product wired this round or in round 1 (welfare indicators, education stats, crime stats, health profile, gender stats) confirmed Susenas as source — but not independently confirmable this round. Real lead for a session with BPS metadata/sirusa access."
+      "reason": "resolved",
+      "why": "RESOLVED. The diagnosis was right — BPS 'statistics-table' pages are JS-rendered and yield no source-attribution text — but the press-release PDF behind the same indicator does. The access fix both earlier rounds asked for: every *.bps.go.id host is Cloudflare-403 to plain curl, but web-api.bps.go.id — the host BPS's own download buttons point at — is not. So the working technique is to open the BPS page in a real browser, read the signed download href out of the DOM, and fetch that link with curl. The BRS states: \"Sumber: Diolah dari data Survei Sosial Ekonomi Nasional (Susenas) September 2024–September 2025\", three times over. Edge minted. Settled in round 7 (2026-08-29) — see id-browser-unblock-2026-08-29.json and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "id-cpi-provincial -> un-coicop-2018",
       "source": "id-cpi-provincial",
       "target": "un-coicop-2018",
-      "reason": "deferred",
-      "why": "Grok quoted the IHK 2022=100 methodology note naming COICOP 2018 for commodity grouping. The publication landing page itself has no body text (abstract only); the actual PDF is behind a signed `web-api.bps.go.id/download.php?f=...` link that returned PROXY_REJECTED (403) on direct fetch and again via the docs.google.com/viewer workaround that unblocks imf.org PDFs (PLAYBOOK §6) — that workaround does not transfer to this domain. Plausible (BPS's other provincial CPI products use COICOP elsewhere in the corpus) but not independently confirmed."
+      "reason": "resolved",
+      "why": "RESOLVED, and Grok's COICOP quote checks out verbatim. The access fix both earlier rounds asked for: every *.bps.go.id host is Cloudflare-403 to plain curl, but web-api.bps.go.id — the host BPS's own download buttons point at — is not. So the working technique is to open the BPS page in a real browser, read the signed download href out of the DOM, and fetch that link with curl. The publication PDF (7,545,913 bytes) states in its bilingual methodology section: \"Barang/jasa tersebut dikelompokkan dalam 11 kelompok pengeluaran dan 43 subkelompok pengeluaran berdasarkan adaptasi dari Classification of Individual Consumption According to Puspose (COICOP) 2018\", with the facing English column reading \"...following the adapted Classification of Individual Consumption According to Purpose (COICOP) 2018.\" The identical passage appears in the sibling 150-kabupaten/kota edition. Note this is not the case PLAYBOOK section 7 declined: that covers Iran and Iraq naming a revision-less 'COICOP', whereas this names COICOP 2018 explicitly, matching the versioned node. Edge minted. Settled in round 7 (2026-08-29) — see id-browser-unblock-2026-08-29.json and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "id-cpi-provincial -> cpi-manual",
       "source": "id-cpi-provincial",
       "target": "cpi-manual",
-      "reason": "deferred",
-      "why": "Same document as the COICOP-2018 lead above (Grok quoted the same methodology note naming the CPI Manual: Theory and Practice 2004 and the Practical Guide to Producing Consumer Price Indices 2009) and blocked the same way — PDF 403'd both directly and via docs.google.com/viewer. Held alongside the COICOP-2018 lead; if that one gets confirmed, revisit this one from the same document."
+      "reason": "no-document",
+      "why": "FALSIFIED, not merely unconfirmed — and this is the half of Grok's quote that does not survive. Both editions were downloaded and read in full: Indeks Harga Konsumen 38 Provinsi di Indonesia 2025 (7,545,913 bytes) and Indeks Harga Konsumen 150 Kabupaten/Kota di Indonesia 2025 (20,757,928 bytes). Neither contains 'Theory and Practice', 'Practical Guide', 'ILO', 'Eurostat', 'OECD', 'IMF' or 'World Bank' anywhere. The DAFTAR PUSTAKA / BIBLIOGRAPHY lists exactly two works, both BPS's own internal handbooks: 'Buku 1: Buku Pedoman Pencacahan Survei Harga Konsumen Tahun Dasar 2022 = 100' and 'Buku 3: Buku Pedoman Pengolahan Indeks Harga Konsumen Tahun Dasar 2022 = 100' (BPS, 2023). The COICOP 2018 half of the same Grok quote is real and is minted; the CPI Manual half is not in these documents. Settled in round 7 (2026-08-29) — see id-browser-unblock-2026-08-29.json and project memory unlinked_nodes_wiring_round7_2026-08-29."
     },
     {
       "edge": "id-energy-balances -> id-esdm-energy-statistics",

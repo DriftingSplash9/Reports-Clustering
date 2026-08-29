@@ -1,0 +1,38 @@
+{
+  "_note": "Indonesia — Round 7 — browser/curl unblock of the access-blocked backlog, 2026-08-29. Every edge here closes a lead that an earlier round recorded as unreachable. The blocks were largely artefacts of the fetch tool, not the sites: mnd.gov.tw is fully readable to plain curl (its 'ROBOTS_DISALLOWED' verdict was WebFetch obeying robots.txt); gob.mx serves its /cms/uploads/attachment/file/ PDFs to curl while Akamai-challenging its HTML; BPS Indonesia's signed web-api.bps.go.id download host is not Cloudflare-walled even though every *.bps.go.id page is. Every quote below was verified verbatim against the fetched bytes (pdftotext/substring match), not against a search snippet or a fetch-tool summary. See project memory unlinked_nodes_wiring_round7_2026-08-29 for the full narrative.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "id-gini-inequality",
+      "target_report_id": "id-susenas",
+      "relationship_type": "calculated_from",
+      "basis": "BPS's own Berita Resmi Statistik for the Gini ratio states, under its trend chart and under both of its data tables, that the figures are processed from National Socio-Economic Survey data. Verbatim: \"Sumber: Diolah dari data Survei Sosial Ekonomi Nasional (Susenas) September 2024–September 2025\". This closes a lead that round 1 recorded as no-document and round 2 as deferred, both explicitly saying it needed a real browser rather than WebFetch — which is exactly how it was read: the signed download href was taken from the page DOM in Chrome, then fetched from web-api.bps.go.id, which unlike every *.bps.go.id page is not Cloudflare-walled.",
+      "evidence_url": "https://www.bps.go.id/id/pressrelease/2026/02/05/2535/gini-ratio-september-2025-tercatat-sebesar-0-363-.html",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "id-cpi-provincial",
+      "target_report_id": "un-coicop-2018",
+      "relationship_type": "methodology_depends_on",
+      "basis": "BPS's provincial CPI publication states in its bilingual methodology section that the goods and services in the index are grouped into 11 expenditure groups and 43 subgroups following an adaptation of COICOP 2018. Verbatim (Indonesian): \"Barang/jasa tersebut dikelompokkan dalam 11 kelompok pengeluaran dan 43 subkelompok pengeluaran berdasarkan adaptasi dari Classification of Individual Consumption According to Puspose (COICOP) 2018.\" Facing English column: \"...are grouped into 11 expenditure groups and 43 expenditure subgroups, following the adapted Classification of Individual Consumption According to Purpose (COICOP) 2018.\" The identical passage appears in the sibling 150-kabupaten/kota edition. Note this is NOT the case PLAYBOOK section 7 declined: that decision covers Iran and Iraq naming a plain revision-less 'COICOP', whereas this names COICOP 2018 explicitly, matching the versioned node.",
+      "evidence_url": "https://www.bps.go.id/id/publication/2026/04/09/2e884b5204a3dbf5ddfca921/indeks-harga-konsumen-38-provinsi-di-indonesia-2025-2022-100-.html",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "id-cpi-provincial -> cpi-manual",
+      "source": "id-cpi-provincial",
+      "target": "cpi-manual",
+      "reason": "no-document",
+      "why": "Falsified, not merely unconfirmed. Round 2 recorded that Grok quoted the IHK methodology note as naming the CPI Manual: Theory and Practice 2004 and the Practical Guide to Producing Consumer Price Indices 2009. Both editions of the publication were downloaded and read in full this round — Indeks Harga Konsumen 38 Provinsi di Indonesia 2025 (7,545,913 bytes) and Indeks Harga Konsumen 150 Kabupaten/Kota di Indonesia 2025 (20,757,928 bytes) — and neither contains 'Theory and Practice', 'Practical Guide', 'ILO', 'Eurostat', 'OECD', 'IMF' or 'World Bank' anywhere. The DAFTAR PUSTAKA / BIBLIOGRAPHY lists exactly two works, both BPS's own internal handbooks: 'Badan Pusat Statistik. 2023. Buku 1: Buku Pedoman Pencacahan Survei Harga Konsumen Tahun Dasar 2022 = 100' and 'Buku 3: Buku Pedoman Pengolahan Indeks Harga Konsumen Tahun Dasar 2022 = 100'. The COICOP 2018 half of Grok's quote is real and is minted above; the CPI Manual half is not in these documents."
+    },
+    {
+      "edge": "id-cpi-provincial -> ???",
+      "source": "id-cpi-provincial",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Fully evidenced edge with no target node in the corpus. The same BPS provincial CPI publication states that the index's quantity weights and base-year consumption values come from the 2022 Cost of Living Survey (Survei Biaya Hidup 2022), which is what the 2022=100 base rests on. Verbatim: \"Nilai konsumsi bulan sebelumnya (P(n-1)i . Qoi), adalah hasil perkalian harga bulan sebelumnya dan kuantitas dari suatu komoditas hasil Survei Biaya Hidup (SBH) 2022. Nilai konsumsi tahun dasar (Poi . Qoi) adalah nilai konsumsi hasil SBH 2022.\" Also, on provincial practice: \"menyesuaikan hasil Survei Biaya Hidup 2022 (SBH 2022) di wilayah masing-masing.\" The corpus has no SBH node — a search for 'Biaya Hidup' / 'Cost of Living' across every research slice returns nothing. Mint an id-sbh-2022 node and this calculated_from edge lands immediately, verbatim-quotable from https://www.bps.go.id/id/publication/2026/04/09/2e884b5204a3dbf5ddfca921/indeks-harga-konsumen-38-provinsi-di-indonesia-2025-2022-100-.html"
+    }
+  ]
+}

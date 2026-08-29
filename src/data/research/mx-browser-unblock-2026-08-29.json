@@ -1,0 +1,139 @@
+{
+  "_note": "Mexico — Round 7 — browser/curl unblock of the access-blocked backlog, 2026-08-29. Every edge here closes a lead that an earlier round recorded as unreachable. The blocks were largely artefacts of the fetch tool, not the sites: mnd.gov.tw is fully readable to plain curl (its 'ROBOTS_DISALLOWED' verdict was WebFetch obeying robots.txt); gob.mx serves its /cms/uploads/attachment/file/ PDFs to curl while Akamai-challenging its HTML; BPS Indonesia's signed web-api.bps.go.id download host is not Cloudflare-walled even though every *.bps.go.id page is. Every quote below was verified verbatim against the fetched bytes (pdftotext/substring match), not against a search snippet or a fetch-tool summary. See project memory unlinked_nodes_wiring_round7_2026-08-29 for the full narrative.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INEGI's monthly IGAE boletín carries a full FICHA METODOLÓGICA in plain text, which states the indicator follows the international national-accounts guidelines of the 2008 SNA. Verbatim: \"Además, se consideran los lineamientos internacionales sobre contabilidad nacional del Sistema de Cuentas Nacionales 2008 y del Manual de Cuentas Nacionales Trimestrales 2017.\" The round-2 diagnosis that inegi.org.mx/temas/igae/ is a JavaScript shell was correct — it is a 4,267-byte React shell — but the boletín PDF is the route around it, and the same sentence appears in an independent second issue (igae2025_07.pdf).",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "naics",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same IGAE ficha metodológica states that volume indices are computed for 664 activity classes of SCIAN 2018 — the Mexican national version of NAICS — which the sector and subsector aggregates of the 'por actividad' breakdown are built from. Verbatim: \"Se calculan índices de volumen físico para 664 clases de actividad económica del Sistema de Clasificación Industrial de América del Norte (SCIAN) 2018.\" The SCIAN-as-national-NAICS identification is the corpus's own, recorded in the naics node's description.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "mx-enoe",
+      "relationship_type": "uses_data_from",
+      "basis": "The IGAE ficha's Fuentes row names ENOE among the monthly INEGI statistics that feed the indicator. Verbatim: \"Estadísticas mensuales que elabora el Instituto, como la Encuesta Mensual de la Industria Manufacturera (EMIM), Encuesta Nacional de Empresas Constructoras (ENEC), Encuesta Mensual sobre Empresas Comerciales (EMEC), Encuesta Mensual de Servicios (EMS), estadística de la Industria Minerometalúrgica (EIMM) y la Encuesta Nacional de Ocupación y Empleo (ENOE), los índices nacionales de precios y los registros administrativos, así como las estadísticas económicas y sociales compiladas por el Instituto.\"",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/igae/igae2026_03.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-tuxtla",
+      "target_report_id": "mx-enigh",
+      "relationship_type": "uses_data_from",
+      "basis": "The Secretaría de Bienestar's Informe Anual sobre la Situación de Pobreza y Rezago Social 2026 for Tuxtla Gutiérrez (07101) lists ENIGH 2024 as source footnote [2], carrying the municipal figures for indigenous self-ascription, indigenous-language speakers, literacy, employment by sector, total employed population and basic-basket access. Verbatim: \"[2] Instituto Nacional de Estadística y Geografía (INEGI), con base en la Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH) 2024.\" Note the document carrying the dependency is published by Bienestar, not by INEGI/CEIEG as the node's publisher field currently says.",
+      "evidence_url": "https://www.gob.mx/cms/uploads/attachment/file/1060940/07101_TuxtlaGutierrez_2026.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-chiapas-tuxtla-detail",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "The same Tuxtla Gutiérrez (07101) municipal profile lists the 2020 Population and Housing Census as source footnotes [3] and [4] — extended and basic questionnaires — carrying the municipal disability, household-income and derived poverty figures. Verbatim: \"[3] Instituto Nacional de Estadística y Geografía (INEGI), Cuestionario ampliado del Censo de Población y Vivienda 2020. [4] Instituto Nacional de Estadística y Geografía (INEGI), Cuestionario básico del Censo de Población y Vivienda 2020.\"",
+      "evidence_url": "https://www.gob.mx/cms/uploads/attachment/file/1060940/07101_TuxtlaGutierrez_2026.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-acapulco-metro",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "Acapulco's own Plan Municipal de Desarrollo Urbano opens its socio-demographic diagnosis by taking the municipality's population count directly from the 2020 census. Verbatim: \"El Censo de Población y Vivienda del Instituto Nacional de Estadística, Geografía e Informática (INEGI) (2020) contabilizó una población de 779,566 habitantes en el municipio de Acapulco de Juárez, que representan el 22.0% de la población estatal\". Independently corroborated by the Bienestar municipal profile for Acapulco de Juárez (https://www.gob.mx/cms/uploads/attachment/file/1061187/12001_AcapulcoDeJuarez_2026.pdf), whose footnotes carry the identical census citations.",
+      "evidence_url": "https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-guerrero-acapulco-detail",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "PMDU section 4.5.3 (Población Económicamente Activa) — the section round 2 could see only in the table of contents — derives Acapulco's PEA, employed and unemployed counts from the 2020 census and INEGI's occupation tabulations. Verbatim: \"Del Censo de Población y Vivienda (2020) y de los Tabulados de INEGI, se señala que para el municipio de Acapulco la PEA3 representa el 66% de la población total de más de 15 años; el 98% de la PEA corresponde a la población ocupada con 377,351 personas y el 2% a población desocupada corresponde a 7,626 acapulqueños\". The section's Table 27 source line reads \"Fuente: Elaboración propia CONURBA, 2021; con base en Tabulados de Ocupación, INEGI; Censo de Población y Vivienda INEGI, 2020\".",
+      "evidence_url": "https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-guerrero-acapulco-detail",
+      "target_report_id": "mx-denue",
+      "relationship_type": "uses_data_from",
+      "basis": "PMDU section 4.5.6 (Unidades económicas) takes Acapulco's establishment count and sector composition from DENUE, which also has a formal bibliography entry in the plan and is the operative input to its economic-centrality method. Verbatim: \"El Directorio Estadístico Nacional de Unidades Económicas (DENUE) (INEGI (b), 2019) señala que para el año 2019 el municipio de Acapulco tenía 37,614 unidades económicas.\"",
+      "evidence_url": "https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-alcaldia-benito-juarez",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "The alcaldía's Programa de Gobierno 2024-2027 takes its unemployment and foreign-resident population figures for Benito Juárez directly from the 2020 census, in body text, in two separate chapters. Verbatim: \"De acuerdo con el Censo de Población y Vivienda 2020, en la Alcaldía Benito Juárez, la población de 12 años y más que se encuentra desocupada asciende a un total de 5,673 personas, de las cuales, 2,618 son mujeres y 3,055, son hombres\"; and separately \"teniendo un total de 17,747 habitantes según el Censo Nacional de Población y Vivienda 2020 del INEGI\". This closes the lead that round 1 left open after a Grok follow-up pass; the earlier verdict that the source was unreadable was wrong — alcaldiabenitojuarez.gob.mx serves fine to plain curl.",
+      "evidence_url": "https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-alcaldia-benito-juarez",
+      "target_report_id": "mx-ensu",
+      "relationship_type": "uses_data_from",
+      "basis": "ENSU is both quoted in the Programa de Gobierno's security diagnosis and named as the Fuente column entry for the programme's own headline monitoring indicator (percentage of residents perceiving insecurity, baseline 20.7% in 2024) in its Metas e Indicadores section — the indicator-table use is what raises this above a bare citation. Verbatim: \"La Alcaldía Benito Juárez es la alcaldía más segura de la Ciudad de México y uno de los municipios más seguros de todo el país, muestra de ello es la Encuesta Nacional de Seguridad Pública Urbana (ENSU), la cual muestra que 8 de cada 10 habitantes se siente seguro de vivir en la Alcaldía.\"",
+      "evidence_url": "https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-pension-bienestar-mujeres",
+      "target_report_id": "mx-programa-sectorial-bienestar-2025-2030",
+      "relationship_type": "cites",
+      "basis": "The programme's 2026 operating rules (DOF, 12 February 2026) state that it aligns to Objetivo 1 of the Programa Sectorial de Bienestar 2025-2030 and specifically to its Estrategia 1.3 — the exact claim round 2 deferred for want of access. Verbatim: \"En el marco del Programa Sectorial de Bienestar 2025-2030, este Programa se vincula con el Objetivo 1. Reducir la vulnerabilidad de las personas adultas mayores, personas con discapacidad y mujeres de 60 a 64 años, garantizando una vida digna, autónoma y con acceso a los derechos sociales, en su Estrategia 1.3 Fortalecer la independencia económica y el bienestar integral de las mujeres, para reducir las brechas de género y fomentar su autonomía.\"",
+      "evidence_url": "https://www.gob.mx/cms/uploads/attachment/file/1056923/ROPS_MB_26.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-pension-bienestar-mujeres",
+      "target_report_id": "mx-enigh",
+      "relationship_type": "cites",
+      "basis": "The same operating rules justify the programme's target population using ENIGH income figures for women aged 60-64. Verbatim: \"el ingreso mensual promedio del grupo, según datos de la Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH) 2024, fue de 8,551.56 pesos mientras que el de los hombres fue de 16,518.36 pesos, es decir las mujeres apenas alcanzan el 51.77% de los ingresos mensuales percibidos por hombres.\" Classed as cites rather than uses_data_from because the figures motivate the programme's existence; they do not enter any benefit calculation.",
+      "evidence_url": "https://www.gob.mx/cms/uploads/attachment/file/1056923/ROPS_MB_26.pdf",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "mx-tuxtla -> mx-chiapas-tuxtla-detail",
+      "source": "mx-tuxtla",
+      "target": "mx-chiapas-tuxtla-detail",
+      "reason": "note",
+      "why": "DUPLICATE-NODE FLAG, for Thomas — round 6 raised this as a suspicion; this round confirms it on a field-by-field diff. mx-tuxtla and mx-chiapas-tuxtla-detail are identical on url, publisher, region, country, jurisdiction_level, releases_per_year, domains, _shape, _referenced_by and last_updated. They differ only in id, a reworded title, paraphrased description/_notes ('thinner independent local statistical production' vs 'thinner local institutional production'), and _batch (batch12-poor-states vs batch12-cdmx-finish-poor-states) — two passes over the same subject in overlapping batches. This round deliberately minted ONE edge per node rather than both edges on both nodes, so nothing is double-counted, but a merge is the right fix and costs nothing in rewiring. Also worth reconciling on merge: both nodes list publisher 'INEGI / CEIEG Chiapas / Ayuntamiento' and a url on inegi.org.mx, but the document that actually carries the dependency statement is published by the Secretaría de Bienestar."
+    },
+    {
+      "edge": "mx-acapulco-metro -> mx-guerrero-acapulco-detail",
+      "source": "mx-acapulco-metro",
+      "target": "mx-guerrero-acapulco-detail",
+      "reason": "note",
+      "why": "DUPLICATE-NODE FLAG, for Thomas — same shape as the Tuxtla pair above, confirmed on the same field-by-field diff and traceable to the same two overlapping batches. Differences are limited to a reworded title, paraphrased description/_notes, a differently-split _referenced_by, and ' / Guerrero state sources' appended to one publisher field. Unlike the Tuxtla pair these two are cleanly sourced — the PMDU genuinely is an Ayuntamiento de Acapulco product, matching the publisher field. This round minted the census edge on one and the PEA/DENUE edges on the other from genuinely different sections of the same plan, so the edges survive a merge intact."
+    },
+    {
+      "edge": "mx-nuevo-leon-imss-municipal -> mx-imss-puestos",
+      "source": "mx-nuevo-leon-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "note",
+      "why": "RESOLVED (as part_of, not an edge), and it should come out of the access-blocked pile. The node already carries part_of: 'mx-imss-puestos' in mx-mexico-grok-2026-08.json, so a dependency edge between the pair is a validator error regardless of what datos.imss.gob.mx would say — the access block was never the binding constraint. This is the identical shape already recorded for mx-jalisco-imss-municipal -> mx-imss-puestos. (For the record, the hosts remain unreachable: datos.imss.gob.mx returns 403 from an Imperva/Incapsula WAF and datos.nl.gob.mx fails with OpenSSL SSL_ERROR_SYSCALL.) Stays 'note' rather than 'resolved' because a part_of resolution has no matching live edge by design."
+    },
+    {
+      "edge": "mx-infonavit-estadisticas -> mx-imss-puestos",
+      "source": "mx-infonavit-estadisticas",
+      "target": "mx-imss-puestos",
+      "reason": "no-document",
+      "why": "A clean negative reached on real bytes, upgrading round 2's unreadable-source guess. The Infonavit domains are all blocked (portal.mx.infonavit.org.mx: proxy CONNECT tunnel failed 502; portal.infonavit.org.mx: timeout; infonavit.org.mx: HTTP/2 INTERNAL_ERROR), but an official Infonavit publication was reached on an accessible mirror — Informe Anual de Actividades 2023, https://gaceta.diputados.gob.mx/PDF/66/2024/oct/Infonavit-20241022.pdf, 5.24 MB — and read in full. Every source line under Infonavit's credit, portfolio and housing-finance tables names an internal unit (Fuente: Coordinación General de Riesgos; Subdirección General de Operaciones; Coordinación General de Inversiones), with no external statistical source anywhere in the statistical annex. INEGI and IMSS appear only as macroeconomic backdrop in the entorno económico chapter: \"Respecto al número de puestos de trabajo registrados en el Instituto Mexicano del Seguro Social (IMSS), en 2023 se generaron 651 mil, cifra superior a lo previsto bajo el escenario central del PEF en 47 mil puestos de trabajo.\" That is context about the economy, not a statement that Infonavit's statistics draw on IMSS. Second caveat if anyone revisits: the document read is the Informe Anual de Actividades, not the Estadísticas de crédito y vivienda the node names."
+    },
+    {
+      "edge": "mx-alcaldia-benito-juarez -> mx-censos-economicos",
+      "source": "mx-alcaldia-benito-juarez",
+      "target": "mx-censos-economicos",
+      "reason": "deferred",
+      "why": "Still not minted, but the access block is gone and the remaining objection is evidentiary. The Programa de Gobierno 2024-2027 (https://alcaldiabenitojuarez.gob.mx/documentos/ProgramaGobierno2427.pdf) does carry \"Fuente: ... Instituto Nacional de Estadística y Geografía [INEGI] (2003, 2008, 2013, 2018). Sistema Automatizado de Información Censal (SAIC). Censos Económicos.\" — but only as a chart caption under the employment-by-sector figure, not as a sentence in body text. Left for a ruling on whether a figure-source line alone clears the bar."
+    }
+  ]
+}

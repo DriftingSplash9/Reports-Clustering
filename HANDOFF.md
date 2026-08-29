@@ -19,63 +19,45 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,501 reports · 3,033 dependencies.** `npm run validate` (0 errors),
-`npm run gen` (318 slices, 0 unwired), `tsx scripts/test-logic.ts`
-(120/120), `tsc --noEmit` all clean in a cloud sandbox — reconfirmed
-2026-08-29 after fixing the 2 domain-tag errors
-(`mx-programa-sectorial-bienestar-2025-2030`, `ph-ndrrmc-sitrep` — now
-`proposed:` prefixed), the 3 caveat/resolved notes with no matching live
-edge (`ph-renewables -> ph-power-stats` reclassified `no-document`;
-`ph-fiscal-ops -> ph-btr-cash-operations` reclassified `note`;
-`tw-cross-strait-trade-share -> tw-mof-trade-statistics` retargeted to
-the real id `tw-trade-statistics`, which the edge genuinely matches —
-all three pre-existing from round 6, none caused by this session), the
-stale-URL remainder (16 of 19 replaced, 3 had already gone live on their
-own — see `notes/stale-urls-2026-08-20.md`, all 37 originally-flagged
-stale URLs now closed), and the EU government finance remainder (5 of 7
-bare `*-edp-inventory` nodes wired — CZ/NL/FR/DK/IT each got a real
-`xx-govfin` node with quote-verified edges; UK declined as a deliberate
-modelling call, its live EDP obligation ended with Brexit; LU declined
-as a genuine research gap, no qualifying document found — see project
-memory `eu_government_finance_round3_2026-08-29`). `npm run build`
-re-run this session (renderer code touched, see below): clean, bundle
-1,499.57 kB (unchanged from round 6's 1,498.64/1,499.49 kB baseline).
+**3,501 reports · 3,055 dependencies.** `npm run validate` (0 errors),
+`npm run gen` (323 slices, 0 unwired), `tsx scripts/test-logic.ts`
+(120/120), `tsc --noEmit`, `npm run build` (1,513.05 kB) all clean in a
+cloud sandbox, reconfirmed 2026-08-29 after round 7 landed 22 edges.
+`public/corpus-data.json` was regenerated and committed back to the
+device — it is current.
 
-**Cluster-repulsion range: 0–15** (raised from 0–10, `ViewControls.tsx` /
-`view.ts`) — Thomas's call, live. Not yet tested at the new ceiling.
+**Round 7 was the browser/curl unblock round**, and its main finding is
+that most of the "access-blocked" backlog was never blocked. A
+`ROBOTS_DISALLOWED` verdict describes WebFetch obeying robots.txt, not
+the site: `mnd.gov.tw` was wide open to plain curl the whole time.
+`gob.mx` serves its attachment PDFs to curl while challenging its HTML.
+BPS Indonesia's signed download host isn't walled even though every
+`*.bps.go.id` page is. A Cloudflare-403 PDF can be fetched same-origin
+inside a real browser and parsed there with pdf.js. All four are now
+PLAYBOOK §6 traps. 22 edges minted, 0 new nodes, 16 nodes de-orphaned.
 
-**Renderer perf items closed 2026-08-29.** Both of the "two named wins"
-from the prior Todo: (a) `nodeGeometry()`'s `SphereGeometry` was already
-cached by rounded radius (`sphereCache` in `nodeVisuals.ts`) going into
-this session — turned out done in an earlier round, HANDOFF just hadn't
-been corrected (rule 8). (b) node materials now start `transparent:
-false` unless hollow, soft, or currently dimmed (`alwaysTransparent` in
-`nodeVisuals.ts`; `applyFocus` in `InfluenceGraph.tsx` toggles it
-alongside opacity) instead of `transparent: true` unconditionally. The
-prior comment warning that toggling `transparent` forces a shader
-recompile was measured and disproved: an isolated harness toggled it 5x
-on a live `MeshStandardMaterial` with the same `onBeforeCompile` shape
-and `onBeforeCompile` fired exactly once (the first compile), each
-toggle under 0.3ms. `tsc`/`npm run validate`/`npm run build` all clean
-in the cloud sandbox; on-device files sha256-verified identical to the
-sandbox-tested copies. Visual parity confirmed via headless Playwright
-screenshots (default view and a focus/trace state) — dimming and rim
-behaviour read the same. **Not independently confirmed:** an actual FPS
-win. The sandbox's swiftshader software rasterizer runs at ~1.5-2 fps
-regardless (500-600ms/frame) for this scene, which swamps whatever the
-CPU-side transparent-sort saves — no reliable signal at that frame
-rate. The win is real by construction (most nodes are hollow/soft only
-a fraction of the time — solid nodes now skip the sorted pass whenever
-nothing is focused) but wants a real-GPU spot-check, not another
-software-rendered measurement. See project memory
+**Unlinked-node counts — measured 2026-08-29 after round 7** (orphans /
+total, from `public/corpus-data.json`): INT 112/311, ID 75/120, TW
+49/109, EU 35/75, IR 32/34, SR 30/39, AR 29/62, VN 29/48, CL 28/53, GY
+27/36, CA 25/270, UY 25/48, EC 24/45, AE 21/35, TH 19/25, BR 18/98, PY
+18/46, IN 16/97, KR 16/52, VE 16/26, IQ 15/22, JP 15/63, BO 14/52, YE
+14/15, CO 13/35, PE 13/35, MM 12/17, SY 12/13, TR 11/34, MX 9/104, PH
+9/77, SA 3/16. **1,022 isolated of 3,483.**
+
+**The previous HANDOFF's per-country counts were wrong** and are
+replaced above — it claimed VN 50/67, KR 36/72, JP 17/65, TR 18/41, PH
+10/77. Rule 8: measure before believing.
+
+**Cluster-repulsion range: 0–15** (`ViewControls.tsx` / `view.ts`) —
+Thomas's call, live. Not yet tested at the new ceiling.
+
+**Renderer perf items** from 2026-08-29 are closed (sphere-geometry
+caching was already done; node materials now toggle `transparent`
+conditionally — measured, no shader recompile). The one thing not
+independently confirmed is an actual FPS win: the sandbox's swiftshader
+rasterizer runs ~1.5-2 fps for this scene regardless, which swamps the
+signal. Wants a real-GPU spot-check. See project memory
 `renderer_transparent_toggle_2026-08-29`.
-
-**Unlinked-node counts** (1,038 of 3,487 nodes isolated overall) —
-freshly measured 2026-08-29 after round 6 via `loadIssues.orphans`
-(canonical, matches `assembleCorpus.ts`): ID 77/120, VN 50/67, KR 36/72,
-IR 33/35, TR 18/41, JP 17/65, MX 15/104, TW 54/109, PH 10/77, AF 5/15,
-SA 3/16. (Prior "TW 91/122" etc. line was stale/uncorrected — rule 8,
-measure before believing.)
 
 **Auto-unfold** still dense — accepted, not being chased further.
 
@@ -91,35 +73,66 @@ measure before believing.)
    If still weak at 15, it's not the force — check camera auto-fit or node
    density instead. Detail: `renderer_forces_2026-08-28` memory §3.
 3. Watch for any node-rendering oddity (flicker, wrong z-order) after
-   2026-08-29's transparent-material change — see Current State. Visual
-   parity was checked in software rendering only; flag here if real
-   hardware shows anything different.
+   2026-08-29's transparent-material change. Visual parity was checked in
+   software rendering only; flag here if real hardware differs.
+4. **Two confirmed duplicate-node pairs need a merge decision**, both from
+   overlapping batch12 passes, both confirmed on a field-by-field diff:
+   `mx-tuxtla` ≈ `mx-chiapas-tuxtla-detail`, and `mx-acapulco-metro` ≈
+   `mx-guerrero-acapulco-detail`. Round 7 deliberately minted one edge per
+   node so nothing is double-counted, and the edges survive a merge
+   intact. Detail in `mx-browser-unblock-2026-08-29.json`.
+5. **Is a treaty a report?** 112 of the 1,022 isolated nodes are `INT`,
+   and most are Grok-imported trade agreements and conventions (KORUS,
+   RCEP, Basel, Ramsar, Montreal, Paris, BIT networks). They are not
+   statistical publications with methodology dependencies, so no wiring
+   round can fix them — it is a modelling call about what belongs in a
+   *report* influence graph. Biggest single bucket in the corpus.
+6. Three node-scope rulings, each with the evidence already verified and
+   quoted in its `_dropped` entry: (a) `ph-pdp -> ph-basic-ed` — the PDP
+   names EBEIS, an information *system*, not a named publication; (b)
+   `tw-national-defense-report -> tw-sipri-arms-transfers` — the NDR
+   genuinely cites SIPRI's Arms Transfers Database, but for PRC *exports*
+   while the node is scoped to Taiwan *imports*; (c)
+   `mx-alcaldia-benito-juarez -> mx-censos-economicos` — sourced in a
+   chart caption rather than body text.
 
 ### [Agent] — next build rounds
 
-1. **Corpus wiring** — 77 countries at zero domestic edges. Cheap retries:
-   Iraq's GDP/National Income metadata doc (cosit.gov.iq), Vietnam's VSIC
-   2018 decision, Iraq's wage-bill clause (Budget Law 13/2023). NESDC
-   Thailand — closed negative, don't retry without a new access route.
-   Then the 31 single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD
-   ME MK NI NR PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
-2. **New research round** — the 2026-08-22 Grok queue is fully worked; the
-   next round needs scoping from scratch. Unlinked-node wiring candidates:
-   `sa-pif → sa-national-accounts` (blocked twice), Indonesia's 6
-   BPS-access-blocked deferred leads from round 5, Afghanistan's
-   af-education/af-border-mobility (403, un-Grok'd), or a handful of
-   round-6 leads that failed only on access (mnd.gov.tw cluster for
-   Taiwan, 7 gov.mx/imss/cdmx candidates for Mexico) — all need a real
-   browser tool, not another Grok prompt. Vietnam's 3-node `part_of`
-   cleanup is done (2026-08-29): `vn-fdi-partners → vn-fdi` resolved with
-   real evidence (the source page is literally listed inside vn-fdi's own
-   listing page). `vn-port-haiphong`/`vn-port-hcmc-caimep` → 
-   `vn-seaport-throughput` stay open — this round fetched VIMAWA's actual
-   monthly cargo-throughput data file (it's `.xlsx`, not the `.docx` the
-   prior round couldn't render) and confirmed it breaks down by cargo type
-   only, no per-port split. Genuinely no document states the containment;
-   don't retry without a different source. See project memory
-   `unlinked_nodes_cleared` for detail.
+1. **South America is the biggest unworked seam and has never been
+   researched**: SR 30, AR 29, CL 28, GY 27, UY 25, EC 24, PY 18, VE 16,
+   BO 14, CO 13, PE 13 — about 237 orphans across eleven countries. This
+   is the obvious next round and is fresh ground, unlike the countries
+   the last six rounds keep revisiting.
+2. **Two fully-evidenced edges are waiting on a node that doesn't exist.**
+   Mint the node and the edge lands verbatim-quotable: (a) Taiwan's
+   Central Government General Budget (中央政府總預算) — MND statistics
+   table 11 (`https://www.mnd.gov.tw/File/57520`) names it as its
+   statistical universe; (b) Indonesia's Survei Biaya Hidup 2022 (SBH
+   2022) — the provincial CPI publication states the index's weights and
+   base-year consumption values come from it. Both quoted in their
+   `_dropped` entries.
+3. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
+   retries: Iraq's GDP/National Income metadata doc (cosit.gov.iq),
+   Vietnam's VSIC 2018 decision, Iraq's wage-bill clause (Budget Law
+   13/2023). NESDC Thailand — closed negative, don't retry. Then the 31
+   single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD ME MK NI NR
+   PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
+4. **Afghanistan's two 403s are now known-reachable in a real browser**
+   (`dtm.iom.int` and `unicef.org` both render fine in Chrome, both are
+   Cloudflare-403 to curl) — `af-education` and `af-border-mobility` are
+   a cheap retry, not a dead end.
+5. **Genuinely still blocked, all confirmed this round, all needing a
+   different network route rather than a different tool**: the entire
+   `*.cdmx.gob.mx` family (four distinct failure modes),
+   `issste.gob.mx`, `datos.imss.gob.mx` (Imperva WAF),
+   `webapps.peza.gov.ph`, `legacy.doe.gov.ph` (egress policy),
+   `aodm.mnd.gov.tw` (egress policy), `ws.dgbas.gov.tw` (TLS chain), and
+   `psa.gov.ph` (Cloudflare JS on every host — WebFetch reaches it but
+   caps quotes at 125 chars, so it cannot yield mintable verbatim).
+   Indonesia's remaining BPS leads (`id-energy-balances`,
+   `id-ghg-inventory` → a proposed `id-esdm-energy-statistics` node, and
+   the IPCC guidelines target) are NOT in this list — the BPS technique
+   above works, they simply weren't reached this round.
 
 ---
 
