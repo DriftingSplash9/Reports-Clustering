@@ -1,0 +1,219 @@
+{
+  "_slice": "eu-government-finance-round3-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "5 of 7 remaining bare EDP-inventory nodes wired (CZ/NL/FR/DK/IT); UK declined on a modelling finding (EDP obligation ended post-Brexit, no live release exists); LU declined for lack of a qualifying document (candidate release found, does not clear the evidentiary bar).",
+  "_note": "Closes HANDOFF.md Todo item 1 (EU government finance, remainder) — the last 7 bare *-edp-inventory nodes from the 2026-08-28/08-29 EDP rounds (eu_government_finance_2026-08-28.md, eu_government_finance_round2_2026-08-29.md). Method: one subagent per country finding and quoting the national EDP-adjacent release, orchestrator independently curl/WebFetch-spot-checked every quote before merging (per PLAYBOOK rule 3).",
+  "reports": [
+    {
+      "id": "cz-govfin",
+      "title": "Notification of Government Deficit and Debt",
+      "publisher": "Czech Statistical Office (ČSÚ)",
+      "country": "CZ",
+      "jurisdiction_level": "federal",
+      "region": "Czechia",
+      "description": "ČSÚ's biannual EDP notification release for general government deficit and debt, submitted to Eurostat each March and September and compiled per ESA 2010. The release does not itself name Council Regulation (EC) No 479/2009 or use the acronym \"EDP\" — checked directly against the raw page text, not inferred.",
+      "url": "https://csu.gov.cz/rychle-informace/notification-of-government-deficit-and-debt-2025-first-notification-data-sent-to-eurostat-",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "nl-govfin",
+      "title": "Government Deficit and Debt According to EMU Definitions",
+      "publisher": "Statistics Netherlands (CBS)",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "CBS's official landing page for the Netherlands' EDP notification under Council Regulation (EC) No 479/2009 — states the notification procedure's legal basis and the excessive-deficit threshold, and hosts the actual notification tables supplied to Eurostat. The ESA 2010 compilation statement lives on CBS's companion definitions page for the same underlying figures, not on this page itself.",
+      "url": "https://www.cbs.nl/en-gb/economy/government-and-politics/government-deficit-and-debt-according-to-emu-definitions",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "fr-govfin",
+      "title": "Government Deficit and Debt (Notification to the European Commission)",
+      "publisher": "INSEE (Institut national de la statistique et des études économiques)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's twice-yearly (end of March / end of September) national-accounts release on general government deficit and debt, explicitly stated as the assessment used to notify France's public debt and deficit to the European Commission. Checked both this release and INSEE's companion Maastricht-debt release for an ESA 2010/SEC 2010 or Regulation 479/2009 citation — neither document names either.",
+      "url": "https://www.insee.fr/fr/statistiques/8956575",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "dk-govfin",
+      "title": "Government Deficit and Debt in the EU Countries (Denmark)",
+      "publisher": "Statistics Denmark (Danmarks Statistik)",
+      "country": "DK",
+      "jurisdiction_level": "federal",
+      "region": "Denmark",
+      "description": "Danmarks Statistik's biannual EDP notification release (ØMU-saldo/ØMU-gæld). Compiled per ESA 2010 and under Council Regulation (EC) No 479/2009 — both cited in the statistic's own official documentation page rather than the press release body — and explicitly produced for the two semi-annual EDP notifications to Eurostat.",
+      "url": "https://www.dst.dk/nyt/51756",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "it-govfin",
+      "title": "Notification of General Government Deficit and Debt According to the Excessive Deficit Procedure",
+      "publisher": "ISTAT (Istituto Nazionale di Statistica)",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "ISTAT's biannual EDP notification release, explicitly self-described as Italy's notification to the European Commission within the Excessive Deficit Procedure and compiled per the ESA 2010 system of national accounts. Does not itself name Council Regulation (EC) No 479/2009 by number — checked directly, not inferred.",
+      "url": "https://www.istat.it/en/press-release/notification-of-general-government-deficit-and-debt-years-2022-2025/",
+      "domains": [
+        "public-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cz-edp-inventory",
+      "target_report_id": "cz-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The EDP methodology inventory documents how Czechia's national deficit/debt figures are compiled; this release is ČSÚ's own twice-yearly notification of those same figures, produced under that methodology.",
+      "evidence_url": "https://csu.gov.cz/rychle-informace/notification-of-government-deficit-and-debt-2025-first-notification-data-sent-to-eurostat-",
+      "evidence_quote": "Notification of government deficit and debt is compiled always for the past four years and submitted to the European Commission by each Member State of the European Union always at the end of March and September each year, including a projection for the current year."
+    },
+    {
+      "source_report_id": "cz-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The release states its fiscal indicators are quantified under the ESA 2010 methodology.",
+      "evidence_url": "https://csu.gov.cz/rychle-informace/notification-of-government-deficit-and-debt-2025-first-notification-data-sent-to-eurostat-",
+      "evidence_quote": "Quantification of fiscal indicators is based on the ESA 2010 methodology and serves the assessment of how the Maastricht convergence criteria are complied with."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "cz-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The release's own title states this data was sent to Eurostat as the first notification, and the body describes the twice-yearly notification to the European Commission that feeds it.",
+      "evidence_url": "https://csu.gov.cz/rychle-informace/notification-of-government-deficit-and-debt-2025-first-notification-data-sent-to-eurostat-",
+      "evidence_quote": "Notification of government deficit and debt - 2025 (First notification, data sent to Eurostat)"
+    },
+    {
+      "source_report_id": "nl-edp-inventory",
+      "target_report_id": "nl-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The EDP methodology inventory documents how the Netherlands' national deficit/debt figures are compiled; this is CBS's own EDP notification landing page, which hosts the submitted notification tables directly.",
+      "evidence_url": "https://www.cbs.nl/en-gb/economy/government-and-politics/government-deficit-and-debt-according-to-emu-definitions",
+      "evidence_quote": "Statistics Netherlands supplies data regarding the Dutch fiscal situation to Eurostat, the statistical office of the European Union, in notification tables. The notification tables can be found at the bottom of this page."
+    },
+    {
+      "source_report_id": "nl-govfin",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The page states the notification procedure is laid down in Council Regulation (EC) No 479/2009.",
+      "evidence_url": "https://www.cbs.nl/en-gb/economy/government-and-politics/government-deficit-and-debt-according-to-emu-definitions",
+      "evidence_quote": "The notification procedure is laid down in Council Regulation (EC) No 479/2009 and can be found at the bottom of this page."
+    },
+    {
+      "source_report_id": "nl-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CBS's companion definitions page for these same government-balance/debt figures states the data is compiled per the European System of Accounts (ESR2010, the Dutch acronym for ESA 2010).",
+      "evidence_url": "https://www.cbs.nl/nl-nl/nieuws/2026/13/inkomsten-uitgaven-en-schuld-van-de-overheid-boven-de-500-miljard-euro/overheidssaldo-en-overheidsschuld",
+      "evidence_quote": "De gegevens in dit nieuwsbericht zijn samengesteld op basis van de Europese richtlijnen voor het samenstellen van de nationale rekeningen (ESR2010) en de aanvullende Europese regels voor het bepalen van overheidstekort en overheidsschuld."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "nl-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The page states CBS supplies notification tables to Eurostat and hosts those same submitted tables at the bottom of the page.",
+      "evidence_url": "https://www.cbs.nl/en-gb/economy/government-and-politics/government-deficit-and-debt-according-to-emu-definitions",
+      "evidence_quote": "Statistics Netherlands supplies data regarding the Dutch fiscal situation to Eurostat, the statistical office of the European Union, in notification tables. The notification tables can be found at the bottom of this page."
+    },
+    {
+      "source_report_id": "fr-edp-inventory",
+      "target_report_id": "fr-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The EDP methodology inventory documents how France's national deficit/debt figures are compiled; this release is INSEE's twice-yearly national-accounts assessment explicitly tied to the Commission notification.",
+      "evidence_url": "https://www.insee.fr/fr/statistiques/8956575",
+      "evidence_quote": "Chaque année, l'Insee publie fin mars une première évaluation des comptes nationaux des administrations publiques sur l'année écoulée, correspondant à celle utilisée pour notifier la dette et le déficit publics à la Commission européenne."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "fr-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The release states its results correspond to those used to notify public debt and deficit to the European Commission.",
+      "evidence_url": "https://www.insee.fr/fr/statistiques/8956575",
+      "evidence_quote": "Chaque année, l'Insee publie fin mars une première évaluation des comptes nationaux des administrations publiques sur l'année écoulée, correspondant à celle utilisée pour notifier la dette et le déficit publics à la Commission européenne."
+    },
+    {
+      "source_report_id": "dk-edp-inventory",
+      "target_report_id": "dk-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The EDP methodology inventory documents how Denmark's national deficit/debt figures are compiled; this release is Danmarks Statistik's own EDP notification release, keyed to the same Eurostat EDP round.",
+      "evidence_url": "https://www.dst.dk/nyt/51756",
+      "evidence_quote": "Eurostats offentliggørelse pr. 21. oktober 2025 af Provision of deficit and debt data for 2024 - second notification."
+    },
+    {
+      "source_report_id": "dk-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The statistic's own official documentation page states data is compiled at sector/subsector level in accordance with ESA 2010.",
+      "evidence_url": "https://www.dst.dk/en/Statistik/dokumentation/documentationofstatistics/government-deficit-and-debt-in-the-eu-countries/statistical-presentation",
+      "evidence_quote": "The data are compiled at sector and subsector level in accordance with the European System of National and Regional Accounts (ESA 2010)."
+    },
+    {
+      "source_report_id": "dk-govfin",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Listed under \"Legal Framework\" in the statistic's own official documentation page, alongside the other EU government-finance regulations governing it — a formal legal-basis citation, not a stray mention.",
+      "evidence_url": "https://www.dst.dk/en/Statistik/dokumentation/documentationofstatistics/government-deficit-and-debt-in-the-eu-countries/statistical-presentation",
+      "evidence_quote": "Council Regulation (EC) No 479/2009"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "dk-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The statistic's documentation states data is compiled specifically for the two semi-annual EDP notifications to Eurostat.",
+      "evidence_url": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/offentligt-underskud-og-gaeld-i-eu-landene",
+      "evidence_quote": "Data opgøres i forbindelse med de to halvårlige EDP-indberetninger til Eurostat og den kvartalsvise indberetning af ØMU-gæld."
+    },
+    {
+      "source_report_id": "it-edp-inventory",
+      "target_report_id": "it-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The EDP methodology inventory documents how Italy's national deficit/debt figures are compiled; this release is ISTAT's own EDP notification of the same figures.",
+      "evidence_url": "https://www.istat.it/en/press-release/notification-of-general-government-deficit-and-debt-years-2022-2025/",
+      "evidence_quote": "In this release, Istat provides government deficit and debt data based on figures reported in the first 2026 notification by Italy to the EC for the years 2022-2025, within the excessive deficit procedure (EDP)."
+    },
+    {
+      "source_report_id": "it-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The release states the notification is based on the ESA 2010 system of national accounts.",
+      "evidence_url": "https://www.istat.it/en/press-release/notification-of-general-government-deficit-and-debt-years-2022-2025/",
+      "evidence_quote": "This notification is based on the ESA 2010 system of national accounts."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "it-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The release states it IS the data reported in Italy's notification to the European Commission within the EDP, and that Eurostat expressed no reservations on the data.",
+      "evidence_url": "https://www.istat.it/en/press-release/notification-of-general-government-deficit-and-debt-years-2022-2025/",
+      "evidence_quote": "In this release, Istat provides government deficit and debt data based on figures reported in the first 2026 notification by Italy to the EC for the years 2022-2025, within the excessive deficit procedure (EDP)."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "uk-edp-inventory -> uk-govfin",
+      "source": "uk-edp-inventory",
+      "target": null,
+      "reason": "no-document",
+      "why": "MODELLING DECISION, not a research gap. uk-edp-inventory is a pre-Brexit (December 2015, per its own filename) ONS Article 9 inventory; its original PDF is now dead (link rot). The European Commission's own EDP page for the UK states outright: \"The United Kingdom was a member of the European Union from 1973 until 31 January 2020. The information contained on this page relates to its time as a member.\" ONS's own Public Sector Finances QMI confirms the reporting channel itself stopped: \"The rules governing the new relationship between the EU and UK took effect on 1 January 2021, after which the UK stopped supplying Eurostat with EDP data\" — and frames the whole topic under a section literally titled \"UK's compliance with the Maastricht Treaty while a member of the EU.\" ONS's EDP-branded release series last published 19 October 2020 with no successor announced since. There is no live UK release produced under a current EDP obligation to wire — the obligation itself ended, this isn't an access or evidence-quality problem. Per rule 2, don't force an edge to a document (Public Sector Finances QMI) that only discusses this in the past tense and redirects successor reporting to the IMF/OECD, not the EU. uk-edp-inventory stays wired only to eu-reg-479-2009 and esa-2010, as before — this is a closed, deliberate non-mint, not an open lead."
+    },
+    {
+      "edge": "lu-edp-inventory -> lu-govfin",
+      "source": "lu-edp-inventory",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Genuine research gap, not blocked access. The one plausible candidate found — STATEC's Note de Conjoncture N°1-2026 (biannual economic-outlook bulletin, Chapter 5 'Finances publiques', published ~24 March 2026, just ahead of the April 1 EDP deadline) — reports Luxembourg's deficit/GDP figure but does not itself state that these ARE the notified EDP figures, does not name ESA 2010/SEC 2010, and does not name Council Regulation 479/2009 or the EDP — checked against the full text of both this edition and the prior (September 2025) edition. STATEC's only other mention of Regulation 479/2009 site-wide is a bare link-list entry on a general, undated methodology page (comptes-administrations-publiques.html), not a sentence — fails the same bar LU's inventory node itself would need to clear. STATEC's SDDS-Plus government-finance dissemination (GGO/GGD categories) is raw Excel/XML with no narrative text at all. Checked STATEC's actualites/publications RSS feeds (~1 year back): no dedicated deficit/debt press release exists as a standalone item. LEAD for a future round: STATEC may publish a formal Article 9-referenced notification only as a non-indexed PDF (the pattern several other countries' EDP releases follow) — worth a targeted site search or a direct request to STATEC's press office rather than another general web search."
+    }
+  ]
+}

@@ -328,6 +328,20 @@ country/file/round, not a single site's own one-off quirk.
   the sandbox (DNS/proxy failure, both WebFetch and curl) — worked around
   via mirrors (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and gov.cn's own
   announcements.
+- **`mhlw.go.jp` and `mofa.go.jp`** (Japan) are comprehensively bot-walled
+  from this environment — even their own homepages return 403/404 to curl
+  with a browser UA (MOFA's is an explicit Akamai "Access Denied" edge
+  page, unambiguous). WebFetch reads real, current content behind both.
+  Prefer `e-stat.go.jp` (Japan's official statistics portal, curl-clean)
+  as an alternative primary source when one exists for the same series —
+  keeps the citation independently re-verifiable without relying on
+  WebFetch every time.
+- **archive.org/Wayback playback can be genuinely flaky, not just slow** —
+  one snapshot 503'd or timed out on ~half of 8 repeat attempts over
+  several minutes, despite being the exact right content when it did load.
+  Don't cite a flaky Wayback URL as a source even when it's the best
+  content match — prefer a reliably-live secondary source, and log the
+  Wayback URL as a note for later if the primary text matters enough.
 - **Grok will reuse one jurisdiction's exact quote/URL as "evidence" for a
   different jurisdiction's claim** when the document shapes are similar.
   The tell for illegitimate reuse is the quote naming a specific *other*

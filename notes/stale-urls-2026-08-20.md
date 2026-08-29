@@ -69,3 +69,81 @@ them. Worth a second look if it 404s again.
 - `ir-gas` (`ir-iran.json`) — https://www.gecf.org/countries/iran
 - `kr-statistics-act` (`kr-south-korea.json`) — https://elaw.klri.re.kr/eng_service/lawView.do?hseq=66269&lang=ENG
 - `ph-ghg` (`ph-philippines.json`) — https://niccdies.climate.gov.ph/ghg-inventory
+
+
+## RESOLVED 2026-08-29 — remainder, 19 reports across Japan, Mexico, and 6 one-offs
+
+Worked the full remainder in one pass. First re-checked all 19 original URLs
+via curl (raw status, not a fetch-tool guess): 3 had already gone live again
+on their own with no action needed — `mx-tmec`, `in-dpiit-wpi`,
+`kr-statistics-act` — left untouched. The other 16 needed real replacements.
+
+**Japan, 8 reports (`jp-japan-grok-2026-08.json`).** All 8 replaced.
+`jp-prefectural-accounts` → ESRI's current (Japanese-only — no English page
+exists any more) top page for 県民経済計算, found via ESRI's own sitemap;
+flagging the English-language loss here rather than silently downgrading.
+`jp-services-producer-price-index` → BOJ's current 2020-base SPPI page (old
+one was the discontinued prior-base series). `jp-master-plan-official-
+statistics` → Soumu's page for the 4th Term Master Plan (April 2023), same
+site, moved path. `jp-vital-statistics` and `jp-vital-statistics-detailed` →
+both now point at e-Stat's own "Vital Statistics" portal page
+(e-stat.go.jp/en/statistics/00450011) rather than MHLW — chosen because
+mhlw.go.jp is comprehensively bot-walled from this environment (even its own
+homepage 403s to curl; confirmed real content only via WebFetch, never raw
+curl), while e-Stat is cleanly curl-verifiable and is a legitimate primary
+portal for the same series. **These two reports still share one URL, exactly
+as before — the possible-duplicate-node question this file originally
+flagged is still open and wasn't resolved here; that's a modelling call, not
+a source-URL fix.** `jp-japan-eu-epa` → MOFA's current EPA hub page; MOFA
+returns an explicit Akamai "Access Denied" edge-block to curl (confirmed:
+this is a bot-wall, not a dead link — WebFetch reads the real, actively-
+updated treaty page behind it). `jp-long-term-care-insurance` and
+`jp-comprehensive-survey-living-conditions` → both moved off MHLW entirely
+to dedicated e-Stat pages (00450351 and 00450061), curl-clean, exact title
+match ("Status report on Long-term Care Insurance", "Comprehensive Survey of
+Living Conditions").
+
+**Mexico, 4 reports (`mx-mexico-grok-2026-08.json`).** `mx-tmec` needed
+nothing (see above). `mx-pobreza-multidimensional` → CONEVAL's methodology-
+explainer page (the old `Medicion.aspx` hub page is gone; the more specific
+"¿Qué es la medición de la pobreza?" page is the direct successor). The three
+pension reports previously all pointed at the same generic `gob.mx/bienestar`
+landing page — now each has its own specific programme page, content-
+confirmed (objective/eligibility/Pago de Marcha sections, not just a title
+match): `mx-pension-bienestar-adultos` (note the URL needs the `-296817`
+numeric suffix — the bare slug 403s), `mx-pension-bienestar-mujeres`,
+`mx-pension-discapacidad`.
+
+**One-offs, 4 reports.** `eg-capmas-establishment-decree` → Wikipedia's
+CAPMAS article, which states the decree number and year verbatim ("CAPMAS
+was established by a Presidential Decree 2915 in 1964"). Note for the
+record: the actual primary-source decree text (a full English translation)
+does exist, archived at the Wayback Machine snapshot of the original dead
+UN Statistics Division page —
+`web.archive.org/web/20230321011958/https://unstats.un.org/unsd/dnss/docViewer.aspx?docID=2175&catID=7`
+— confirmed genuine (opened the PDF, matches word-for-word) but archive.org's
+playback for this snapshot was flaky under repeat testing (~50% 503/timeout
+across 8 tries), so it wasn't used as the citation URL. Worth switching to it
+if archive.org's reliability for this snapshot improves, or if Thomas wants
+the primary text over the secondary summary.
+`brics-cra-inter-central-bank-agreement` → South African Reserve Bank's own
+press release confirming the ICBA by name ("SARB signs Inter-Central Bank
+Agreement with BRICS counterparts") — a better match than the dead PBOC page
+since it names the ICBA specifically rather than the CRA Treaty generally.
+`ir-gas` → GECF's restructured Iran country-profile page (same content, new
+URL pattern under `/About-Us/Membership/GECF-Country-Details/...`).
+`ph-ghg` → NICCDIES' restructured GHG inventory page (site split the old
+`/ghg-inventory` path into `/ghg-inventory/ghg-national`,
+`/ghg-inventory/ghg-local`, `/ghg-inventory/private-sector` — used the
+national one to match the report's scope).
+
+All 16 replacement URLs were curl-verified (raw HTTP status) except the two
+explicitly noted above as bot-walled-not-dead (`jp-japan-eu-epa`,
+`mhlw.go.jp` pages were avoided in favour of e-Stat entirely rather than
+accepted on a bot-wall basis) — content-matched by title/body text, not
+guessed from the URL shape alone. Applied directly to each report's `url`
+field in its `src/data/research/*.json` file (no schema change, same as the
+Singapore round). `npm run validate` re-confirmed clean (exit 0) afterward.
+
+**All 37 originally-flagged stale URLs are now closed** — 18 Singapore
+(2026-08-25) + 19 here (2026-08-29, including the 3 that fixed themselves).
