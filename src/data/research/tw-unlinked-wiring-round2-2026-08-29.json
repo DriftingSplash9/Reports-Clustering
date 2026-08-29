@@ -1,0 +1,769 @@
+{
+  "_note": "Taiwan unlinked-node wiring, round 2 — self-directed (no Grok), via 4 parallel themed subagents (semiconductor/tech, defense/cross-strait, demographics/social, environment/energy/fiscal) 2026-08-29. Every proposed dependency was fetched by the researching subagent directly from the cited primary source and quoted verbatim (not paraphrased from a search snippet); orchestrator spot-verified a sample before minting. See project memory unlinked_nodes_wiring_round6_2026-08-29 for the full narrative, including this round's Grok-cross-check.",
+  "reports": [
+    {
+      "id": "tw-household-registration-stats",
+      "title": "Household Registration Population Statistics (戶籍登記人口統計)",
+      "publisher": "Ministry of the Interior, Department of Household Registration (內政部戶政司)",
+      "country": "TW",
+      "jurisdiction_level": "federal",
+      "region": "Taiwan",
+      "description": "Continuously-updated administrative population register maintained by MOI's Department of Household Registration (births, deaths, migration, household composition, population by area), distinct from the decennial Population and Housing Census; the primary administrative data source underlying most day-to-day Taiwan demographic statistics.",
+      "url": "https://www.ris.gov.tw/app/portal/346",
+      "domains": [
+        "population"
+      ],
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "tw-export-orders",
+      "target_report_id": "tw-trade-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "MOEA's own introduction page for the Export Orders Survey states that the survey's sampling population is constructed directly from the prior year's customs export data files.",
+      "evidence_url": "https://www.moea.gov.tw/Mns/dos/content/Content.aspx?menu_id=6806",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-export-orders",
+      "target_report_id": "tw-business-demography",
+      "relationship_type": "uses_data_from",
+      "basis": "The same MOEA introduction page states the survey population also draws on triangular-trade enterprises identified in the Industrial and Service Census, Taiwan's establishment/business demography survey system.",
+      "evidence_url": "https://www.moea.gov.tw/Mns/dos/content/Content.aspx?menu_id=6806",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-electronics-components-production",
+      "target_report_id": "tw-industrial-production",
+      "relationship_type": "uses_data_from",
+      "basis": "A DGBAS 'Accounting and Statistics Monthly' article by MOEA Dept. of Statistics officials states the electronics industry analysis (including this sub-category) combines MOEA's Industrial Production Statistics data as a core input.",
+      "evidence_url": "http://bas-association.org.tw/catalog/arts/011309014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-electronics-components-production",
+      "target_report_id": "tw-business-demography",
+      "relationship_type": "uses_data_from",
+      "basis": "The same article states the electronics-industry analysis is built on DGBAS's Industrial and Service Census results.",
+      "evidence_url": "http://bas-association.org.tw/catalog/arts/011309014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-computers-optical-production",
+      "target_report_id": "tw-industrial-production",
+      "relationship_type": "uses_data_from",
+      "basis": "Same DGBAS bulletin article: 'Computers, Electronic & Optical Products' is one of its named industry breakdowns, combining MOEA Industrial Production Statistics data.",
+      "evidence_url": "http://bas-association.org.tw/catalog/arts/011309014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-computers-optical-production",
+      "target_report_id": "tw-business-demography",
+      "relationship_type": "uses_data_from",
+      "basis": "Same article: this electronics/computers analysis is built on DGBAS Industrial and Service Census results.",
+      "evidence_url": "http://bas-association.org.tw/catalog/arts/011309014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-semiconductor-industry-stats",
+      "target_report_id": "tw-industrial-production",
+      "relationship_type": "uses_data_from",
+      "basis": "Same article's semiconductor supply-chain breakdown (IC design, foundry, packaging/testing) combines MOEA Industrial Production Statistics data.",
+      "evidence_url": "http://bas-association.org.tw/catalog/arts/011309014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-semiconductor-industry-stats",
+      "target_report_id": "tw-business-demography",
+      "relationship_type": "uses_data_from",
+      "basis": "Same article: the semiconductor industry-structure analysis is built on DGBAS's Industrial and Service Census results.",
+      "evidence_url": "http://bas-association.org.tw/catalog/arts/011309014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-defense-budget",
+      "target_report_id": "tw-dgbas",
+      "relationship_type": "methodology_depends_on",
+      "basis": "MND's own FY114 budget-preparation summary states DGBAS requested MND's mid-range fiscal expenditure needs and the Executive Yuan (via DGBAS's coordination) approved MND's FY114-117 budget ceiling — the defense budget is prepared within DGBAS's central budget-ceiling framework.",
+      "evidence_url": "https://www.mnd.gov.tw/File/52646",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-defense-budget",
+      "target_report_id": "tw-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "DGBAS's own page on the FY115 central government general budget expresses the defense budget as a share of GDP, meaning the standard defense-to-GDP metric uses DGBAS's national accounts (GDP) as denominator.",
+      "evidence_url": "https://www.dgbas.gov.tw/News_Content.aspx?n=3602&s=235226",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-outbound-investment-china",
+      "target_report_id": "tw-investment-commission",
+      "relationship_type": "uses_data_from",
+      "basis": "MAC's Cross-Strait Economic Statistics Monthly table on Taiwan investment to mainland China carries a source note stating the Taiwan-side figures are compiled from the Investment Commission (Department of Investment Review), MOEA. Independently corroborated by Grok's separately-run round-2 prompt citing the same PDF and near-identical quote.",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7819/83070/2397597c-bbae-4684-bfac-5bc389639025.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-inward-investment-china",
+      "target_report_id": "tw-investment-commission",
+      "relationship_type": "uses_data_from",
+      "basis": "The same MAC monthly report's table on mainland Chinese investment approved into Taiwan carries an explicit source note naming the Investment Commission's statistics as origin.",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7819/83070/2397597c-bbae-4684-bfac-5bc389639025.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-investment-geography-china",
+      "target_report_id": "tw-investment-commission",
+      "relationship_type": "uses_data_from",
+      "basis": "The same MAC monthly report's regional breakdown of approved Taiwan investment in mainland China cites the same Investment Commission statistics as source.",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7819/83070/2397597c-bbae-4684-bfac-5bc389639025.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-cross-strait-trade-share",
+      "target_report_id": "tw-trade-statistics",
+      "relationship_type": "uses_data_from",
+      "basis": "MAC's Cross-Strait Key Economic Indicators Statistical Flash Report lists the cross-strait trade row with explicit attribution to the Ministry of Finance's Statistics Department (Taiwan's official customs-based trade statistics).",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7821/83112/6a124d78-51b9-4109-9b9d-de5dbcefe5b4.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-hakka-status",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "The 2021 National Hakka Population and Language Survey report (Hakka Affairs Council) states it used MOI household-registration population counts by township/district as of Dec 2020 as the population base for post-stratification weighting.",
+      "evidence_url": "https://www.hakka.gov.tw/File/Attach/37585/File_96737.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-indigenous-population",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "The Council of Indigenous Peoples' own monthly indigenous population statistics page states the figures are based on data published by MOI's household registration office.",
+      "evidence_url": "https://www.cip.gov.tw/zh-tw/news/data-list/940F9579765AC6A0/index.html?cumid=940F9579765AC6A0",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-indigenous-geography",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "The county/city breakdown of indigenous population figures is published on the same CIP statistics page, which states the underlying figures are drawn from MOI household-registration data.",
+      "evidence_url": "https://www.cip.gov.tw/zh-tw/news/data-list/940F9579765AC6A0/index.html?cumid=940F9579765AC6A0",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-population-projections",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "NDC's official announcement of the 2024-2070 population projection states the projection is updated every two years based on the latest household registration population data.",
+      "evidence_url": "https://www.ndc.gov.tw/nc_27_38548",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-vital-statistics-fertility",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "MOI's internal-statistics bulletin on births/fertility rate states the figures are compiled by occurrence date as recorded in household registration, footnote naming the Household Registration Office as the data source.",
+      "evidence_url": "https://ws.moi.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvNDAwL3JlbGZpbGUvMC8yMTAzOS8wMmZlZjVkOS0zYjA0LTRhMDUtYTRlYi05MmIxY2E5NjBjODMucGRm&n=MS00LnBkZg%3D%3D&icon=.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-foreign-residents-local",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "MOI's index of immigration-related statistics states foreign/mainland-spouse resident figures prior to Nov 2015 were sourced from the Household Registration Office's population database.",
+      "evidence_url": "https://www.moi.gov.tw/cl.aspx?n=3951",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-population-migration",
+      "target_report_id": "tw-household-registration-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "The official DGBAS statistics portal lists internal/international migration series titles that explicitly designate them as household-registration-based figures, jointly attributed to MOI's Department of Household Registration and DGBAS.",
+      "evidence_url": "https://www.stat.gov.tw/Statistics.aspx?n=2962&CaN=364",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-external-debt",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same Central Bank paper explains the International Investment Position, whose liabilities side underlies external-debt statistics, is presented under BPM6.",
+      "evidence_url": "https://www.cbc.gov.tw/tw/public/Attachment/6112214371471.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-cross-strait-trade-share",
+      "target_report_id": "tw-mac-cross-strait-monthly",
+      "relationship_type": "uses_data_from",
+      "basis": "Cross-strait trade share is published within MAC's Cross-Strait Economic Statistics Monthly bulletin.",
+      "evidence_url": "https://ws.mac.gov.tw/001/Upload/295/relfile/7819/83070/2397597c-bbae-4684-bfac-5bc389639025.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-ecfa-early-harvest",
+      "target_report_id": "tw-ecfa",
+      "relationship_type": "cites",
+      "basis": "MAC news release on ECFA early harvest cites the parent ECFA agreement.",
+      "evidence_url": "https://www.mac.gov.tw/en/News_Content.aspx?n=4F4015F83BD0E00B&sms=E828F60C4AFBAF90&s=9C9D3224A8F470BA",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-science-parks-revenue",
+      "target_report_id": "tw-hsinchu-science-park",
+      "relationship_type": "uses_data_from",
+      "basis": "National science-park revenue aggregate uses Hsinchu Science Park bureau reporting.",
+      "evidence_url": "https://web.sipa.gov.tw/jpWeb/viewNews.do?nno=20260312144951",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-science-park-geography",
+      "target_report_id": "tw-science-parks",
+      "relationship_type": "cites",
+      "basis": "Science park geography page cites the national science-parks system it belongs to.",
+      "evidence_url": "https://web.sipa.gov.tw/CSRWeb/eng/about01.jsp",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-semiconductor-industry-stats",
+      "target_report_id": "tw-hsinchu-science-park",
+      "relationship_type": "uses_data_from",
+      "basis": "Semiconductor industry stats draw on Hsinchu park tenant/output data.",
+      "evidence_url": "https://web.sipa.gov.tw/jpWeb/viewNews.do?nno=20260312144951",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-ai-demand-concentration",
+      "target_report_id": "tw-hsinchu-science-park",
+      "relationship_type": "uses_data_from",
+      "basis": "AI demand concentration analysis cites Hsinchu park sales/tenant records driven by AI/HPC demand.",
+      "evidence_url": "https://web.sipa.gov.tw/jpWeb/viewNews.do?nno=20260312144951",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-rd-statistics",
+      "target_report_id": "tw-science-parks",
+      "relationship_type": "uses_data_from",
+      "basis": "National R&D statistics compile science-park R&D expenditure/personnel figures.",
+      "evidence_url": "https://wsts.nstc.gov.tw/stsweb/technology/TechnologyDataIndex.aspx?language=E",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-indigenous-geography",
+      "target_report_id": "tw-indigenous-population",
+      "relationship_type": "calculated_from",
+      "basis": "Indigenous population geography breakdown is calculated from the indigenous population count.",
+      "evidence_url": "https://www.cip.gov.tw/data/news/202501/T-14647588.html",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-industrial-water-semiconductor",
+      "target_report_id": "tw-water-resources",
+      "relationship_type": "uses_data_from",
+      "basis": "Industrial water for semiconductor sector figures draw on national water resources agency data.",
+      "evidence_url": "https://www.wra.gov.tw/News_Content.aspx?n=6430&s=230234",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "tw-industrial-water-semiconductor",
+      "target_report_id": "tw-science-parks",
+      "relationship_type": "cites",
+      "basis": "Industrial water report cites the science parks system whose water demand it discusses.",
+      "evidence_url": "https://www.wra.gov.tw/News_Content.aspx?n=6430&s=230234",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tw-ai-demand-concentration -> ???",
+      "source": "tw-ai-demand-concentration",
+      "target": null,
+      "reason": "no-document",
+      "why": "No official methodology/technical-note page found tying this composite indicator to a named source report; only news commentary surfaced."
+    },
+    {
+      "edge": "tw-fiscal-semiconductor -> ???",
+      "source": "tw-fiscal-semiconductor",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOF/DGBAS pages found are generic 'how to query financial statistics' pages; none state semiconductor-specific fiscal statistics are derived from a named target."
+    },
+    {
+      "edge": "tw-science-park-geography -> ???",
+      "source": "tw-science-park-geography",
+      "target": null,
+      "reason": "no-document",
+      "why": "NSTC park-distribution pages and Hsinchu Science Park Bureau homepage are navigational, no lineage statement."
+    },
+    {
+      "edge": "tw-science-parks -> ???",
+      "source": "tw-science-parks",
+      "target": null,
+      "reason": "no-document",
+      "why": "Same as science-park-geography — no explicit source-lineage statement found."
+    },
+    {
+      "edge": "tw-rd-statistics -> oecd-frascati-manual",
+      "source": "tw-rd-statistics",
+      "target": "oecd-frascati-manual",
+      "reason": "deferred",
+      "why": "NSTC's R&D survey intro page mentions an appendix cross-referencing OECD vs Taiwan industry classification, suggestive of Frascati-Manual alignment, but never explicitly names the Frascati Manual — real lead, not confirmed."
+    },
+    {
+      "edge": "tw-sme-statistics -> ???",
+      "source": "tw-sme-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "sme.gov.tw and MOF business-count pages found; neither states SME statistics are calculated from or cite a specific other report."
+    },
+    {
+      "edge": "tw-digital-ict-stats -> ???",
+      "source": "tw-digital-ict-stats",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "DGBAS's Computer and Information Services Industry Dynamic Survey summary page was blocked by robots.txt."
+    },
+    {
+      "edge": "tw-science-tech-policy -> ???",
+      "source": "tw-science-tech-policy",
+      "target": null,
+      "reason": "no-document",
+      "why": "NSTC's S&T White Paper page describes a general policy-drafting process, cites no specific statistical report."
+    },
+    {
+      "edge": "tw-science-parks-revenue -> ???",
+      "source": "tw-science-parks-revenue",
+      "target": null,
+      "reason": "no-document",
+      "why": "NSTC's 2025 science-park revenue press release reports headline figures with no source/methodology attribution."
+    },
+    {
+      "edge": "tw-hsinchu-science-park -> ???",
+      "source": "tw-hsinchu-science-park",
+      "target": null,
+      "reason": "no-document",
+      "why": "Hsinchu Science Park Bureau homepage displays stats and links to NSTC's database but states no explicit lineage."
+    },
+    {
+      "edge": "tw-southern-science-park -> ???",
+      "source": "tw-southern-science-park",
+      "target": null,
+      "reason": "no-document",
+      "why": "No dedicated statistics/methodology page located within budget."
+    },
+    {
+      "edge": "tw-industrial-innovation-act -> ???",
+      "source": "tw-industrial-innovation-act",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOF Tax Bureau's Article 10-2 explainer describes an administrative review process but cites no statistical report or standard; the statute itself on law.moj.gov.tw was robots-blocked."
+    },
+    {
+      "edge": "tw-semiconductor-trade -> ???",
+      "source": "tw-semiconductor-trade",
+      "target": null,
+      "reason": "no-document",
+      "why": "Customs Administration's statistics-indicators page is a navigation hub with no explicit HS-classification/lineage statement."
+    },
+    {
+      "edge": "tw-semiconductor-employment -> ???",
+      "source": "tw-semiconductor-employment",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "DGBAS wage/productivity statistics pages consistently blocked (robots.txt/SSL/DNS errors)."
+    },
+    {
+      "edge": "tw-ai-demand-impact -> ???",
+      "source": "tw-ai-demand-impact",
+      "target": null,
+      "reason": "no-document",
+      "why": "No primary MOEA/DGBAS document found tying this to a named source report."
+    },
+    {
+      "edge": "tw-export-controls-alignment -> ???",
+      "source": "tw-export-controls-alignment",
+      "target": null,
+      "reason": "no-document",
+      "why": "Only think-tank/law-firm commentary found; no official MOEA/AIT-TECRO primary document with a citation statement."
+    },
+    {
+      "edge": "tw-new-southbound-tech -> ???",
+      "source": "tw-new-southbound-tech",
+      "target": null,
+      "reason": "no-document",
+      "why": "Executive Yuan's New Southbound Policy page makes general claims, cites no specific statistics report."
+    },
+    {
+      "edge": "tw-land-use-industrial -> ???",
+      "source": "tw-land-use-industrial",
+      "target": null,
+      "reason": "no-document",
+      "why": "Industrial Park Bureau's land-use page only links a regulation PDF with no accessible lineage statement."
+    },
+    {
+      "edge": "tw-ecfa-early-harvest -> ???",
+      "source": "tw-ecfa-early-harvest",
+      "target": null,
+      "reason": "no-document",
+      "why": "Customs' ECFA pages are purely administrative; MAC's rebuttal page cites headline figures with no source attribution."
+    },
+    {
+      "edge": "tw-cross-strait-finance -> ???",
+      "source": "tw-cross-strait-finance",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "MAC's remittance table (Table 13) exists but its own 資料來源 line could not be reliably extracted from the PDF; a candidate quote was discarded after it appeared to be misattributed from an adjacent table."
+    },
+    {
+      "edge": "tw-whole-of-society-resilience -> ???",
+      "source": "tw-whole-of-society-resilience",
+      "target": null,
+      "reason": "no-document",
+      "why": "Presidential Office committee pages are membership/meeting-minutes only."
+    },
+    {
+      "edge": "tw-civil-defense-personnel -> ???",
+      "source": "tw-civil-defense-personnel",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "The All-Out Defense Mobilization Preparation Act page on law.moj.gov.tw returned ROBOTS_DISALLOWED."
+    },
+    {
+      "edge": "tw-cybersecurity-c4isr -> ???",
+      "source": "tw-cybersecurity-c4isr",
+      "target": null,
+      "reason": "no-document",
+      "why": "Ministry of Digital Affairs resilience pages describe programmes/budget only, no data-lineage statement."
+    },
+    {
+      "edge": "tw-strategic-material-reserves -> ???",
+      "source": "tw-strategic-material-reserves",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOA food-security page cites Council of Agriculture's own annual report for self-sufficiency rate, tangential and not a listed node; no reserve-level statistics found published."
+    },
+    {
+      "edge": "tw-national-defense-report -> ???",
+      "source": "tw-national-defense-report",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Nearly all mnd.gov.tw report pages return ROBOTS_DISALLOWED."
+    },
+    {
+      "edge": "tw-indigenous-naval-shipbuilding -> ???",
+      "source": "tw-indigenous-naval-shipbuilding",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "MND shipbuilding program pages blocked by robots.txt."
+    },
+    {
+      "edge": "tw-defense-industry-stats -> ???",
+      "source": "tw-defense-industry-stats",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Armaments Bureau/MND pages on the blocked mnd.gov.tw domain."
+    },
+    {
+      "edge": "tw-asymmetric-force-budget -> ???",
+      "source": "tw-asymmetric-force-budget",
+      "target": null,
+      "reason": "no-document",
+      "why": "DGBAS/Executive Yuan special-budget pages justify on urgency/legislative-approval grounds, not GDP/DGBAS-statistics methodology."
+    },
+    {
+      "edge": "tw-military-personnel -> ???",
+      "source": "tw-military-personnel",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "MND personnel-statistics pages and data.gov.tw dataset pages returned robots/SSL errors."
+    },
+    {
+      "edge": "tw-justice-crime -> ???",
+      "source": "tw-justice-crime",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOJ Statistics Information Network homepage is a navigation portal with no methodology text reached."
+    },
+    {
+      "edge": "tw-labor-shortage-projections -> ???",
+      "source": "tw-labor-shortage-projections",
+      "target": null,
+      "reason": "no-document",
+      "why": "NDC industry-manpower projection PDF describes methodology (employer surveys, ministry-supplied figures) but does not cite tw-labour-force or any allowed target."
+    },
+    {
+      "edge": "tw-child-family-policy-response -> ???",
+      "source": "tw-child-family-policy-response",
+      "target": null,
+      "reason": "no-document",
+      "why": "No primary document found tying family/child policy response to fiscal capacity from high-tech growth or an allowed target."
+    },
+    {
+      "edge": "tw-local-income-rankings -> tw-household-income-expenditure",
+      "source": "tw-local-income-rankings",
+      "target": "tw-household-income-expenditure",
+      "reason": "deferred",
+      "why": "DGBAS FIES landing page gives general survey scope but no explicit sentence stating county/city income rankings are calculated from FIES; full report PDF was robots-blocked."
+    },
+    {
+      "edge": "tw-plains-indigenous-status -> ???",
+      "source": "tw-plains-indigenous-status",
+      "target": null,
+      "reason": "no-document",
+      "why": "CIP news release cites Constitutional Court ruling 111年憲判字第17號 as legal basis; no node represents that ruling and a single non-recurring citation doesn't meet the minting bar."
+    },
+    {
+      "edge": "tw-language-use -> ???",
+      "source": "tw-language-use",
+      "target": null,
+      "reason": "no-document",
+      "why": "Not investigated beyond the Hakka-specific survey; search budget exhausted."
+    },
+    {
+      "edge": "tw-national-languages -> ???",
+      "source": "tw-national-languages",
+      "target": null,
+      "reason": "no-document",
+      "why": "Not fetched due to exhausted search budget."
+    },
+    {
+      "edge": "tw-cultural-institutions -> ???",
+      "source": "tw-cultural-institutions",
+      "target": null,
+      "reason": "no-document",
+      "why": "Not investigated in depth; search budget exhausted."
+    },
+    {
+      "edge": "tw-super-aged -> ???",
+      "source": "tw-super-aged",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOI bulletin mentions NDC population-projection results (not an allowed target); CNA news article uses only generic 'according to statistics' language."
+    },
+    {
+      "edge": "tw-long-term-care -> ???",
+      "source": "tw-long-term-care",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOHW Long-Term Care Services Act page is a legislative page with no statistics content."
+    },
+    {
+      "edge": "tw-education-statistics -> ???",
+      "source": "tw-education-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOE Department of Statistics pages are navigation shells with no inline legal-basis or data-source prose."
+    },
+    {
+      "edge": "tw-health-statistics -> tw-national-health-insurance",
+      "source": "tw-health-statistics",
+      "target": "tw-national-health-insurance",
+      "reason": "deferred",
+      "why": "MOHW's statistics-indicator landing page lists NHI statistics as one of four categories, but only as a navigation link, not an explicit dependency sentence."
+    },
+    {
+      "edge": "tw-foreign-workers -> ???",
+      "source": "tw-foreign-workers",
+      "target": null,
+      "reason": "no-document",
+      "why": "Ministry of Labor PDF on foreign professionals cites an internal MOL system (not an allowed target), covers professionals not migrant/blue-collar workers."
+    },
+    {
+      "edge": "tw-labor-insurance-pension -> ???",
+      "source": "tw-labor-insurance-pension",
+      "target": null,
+      "reason": "no-document",
+      "why": "Bureau of Labor Insurance statistics pages (one 404, one shallow listing) cited no legal/data basis in retrievable content."
+    },
+    {
+      "edge": "tw-earnings-structure -> tw-wage-structure",
+      "source": "tw-earnings-structure",
+      "target": "tw-wage-structure",
+      "reason": "deferred",
+      "why": "Strongly suspected relationship (both DGBAS/Ministry of Labor earnings-survey-derived) but no primary document fetched confirming it; search budget exhausted."
+    },
+    {
+      "edge": "tw-lng-energy-security -> ???",
+      "source": "tw-lng-energy-security",
+      "target": null,
+      "reason": "no-document",
+      "why": "Energy Administration LNG pages contain policy text but no cited data source for import figures."
+    },
+    {
+      "edge": "tw-water-resources -> ???",
+      "source": "tw-water-resources",
+      "target": null,
+      "reason": "no-document",
+      "why": "Multiple WRA pages checked; all navigation/index/definition pages with no legal-basis or source-attribution text."
+    },
+    {
+      "edge": "tw-industrial-water-semiconductor -> ???",
+      "source": "tw-industrial-water-semiconductor",
+      "target": null,
+      "reason": "no-document",
+      "why": "WRA pages only define terms; no sourcing statement."
+    },
+    {
+      "edge": "tw-reservoir-drought -> ???",
+      "source": "tw-reservoir-drought",
+      "target": null,
+      "reason": "no-document",
+      "why": "Reservoir pages point to WRA's real-time monitoring but no text states a sourcing relationship."
+    },
+    {
+      "edge": "tw-air-quality -> ???",
+      "source": "tw-air-quality",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Ministry of Environment air-quality pages are download tables; actual annual-report PDFs not fetchable in searches performed."
+    },
+    {
+      "edge": "tw-environmental-quality-local -> ???",
+      "source": "tw-environmental-quality-local",
+      "target": null,
+      "reason": "no-document",
+      "why": "Only national STAT_P_02 dataset page found, cites UN SDGs (not a listed target) and open-data licensing."
+    },
+    {
+      "edge": "tw-local-taxable-income -> ???",
+      "source": "tw-local-taxable-income",
+      "target": null,
+      "reason": "no-document",
+      "why": "FIA tax-statistics page states only that data comes from that year's tax filing records; no legal basis or lineage statement."
+    },
+    {
+      "edge": "tw-local-government-finance -> ???",
+      "source": "tw-local-government-finance",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "MOF's Yearbook of Public Finance Statistics PDF timed out/504'd; landing pages had no GFSM or methodology text."
+    },
+    {
+      "edge": "tw-energy-statistics -> iea-energy-statistics-manual",
+      "source": "tw-energy-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "MOEA Energy Administration's handbook explicitly names the IEA Energy Statistics Manual as reference, but IEA's manual is not in the allowed target list and not a Taiwan institution eligible for minting under this round's rules."
+    },
+    {
+      "edge": "tw-nuclear-status -> ???",
+      "source": "tw-nuclear-status",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Atomic Energy Council pages 403'd or discussed regulatory procedure only."
+    },
+    {
+      "edge": "tw-construction-housing -> ???",
+      "source": "tw-construction-housing",
+      "target": null,
+      "reason": "no-document",
+      "why": "No fetchable DGBAS/MOI page stating construction statistics are calculated from national accounts or another node."
+    },
+    {
+      "edge": "tw-agriculture-statistics -> tw-national-accounts",
+      "source": "tw-agriculture-statistics",
+      "target": "tw-national-accounts",
+      "reason": "wrong-direction",
+      "why": "MOA agriculture statistics page states agriculture data feeds INTO national income compilation, the reverse of the required source-depends-on-target direction."
+    },
+    {
+      "edge": "tw-banking-statistics -> bis-basel-framework",
+      "source": "tw-banking-statistics",
+      "target": "bis-basel-framework",
+      "reason": "no-document",
+      "why": "FSC Banking Bureau confirms Taiwan adopted the Basel Capital Accord and CBC's own reporting manual governs bank data feeding the monthly financial statistics bulletin, but no page explicitly states the published banking-sector statistics REPORT itself is compiled per Basel."
+    },
+    {
+      "edge": "tw-insurance-statistics -> ???",
+      "source": "tw-insurance-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "FSC Insurance Bureau page mentions IFRS17/solvency but no IAIS citation or explicit dependency statement; IFRS17 not a listed target regardless."
+    },
+    {
+      "edge": "tw-securities-statistics -> ???",
+      "source": "tw-securities-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "Securities and Futures Bureau IOSCO documents are about international cooperation, not a compiled-per-IOSCO statement."
+    },
+    {
+      "edge": "tw-environment-broader -> un-fdes-2013",
+      "source": "tw-environment-broader",
+      "target": "un-fdes-2013",
+      "reason": "no-document",
+      "why": "Ministry of Environment statistics pages found reference only generic UN SDG tags, no explicit FDES 2013 or SEEA citation in page text."
+    },
+    {
+      "edge": "tw-protected-areas -> ???",
+      "source": "tw-protected-areas",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Forestry and Nature Conservation Agency's CBD page 404'd; no alternate page with a confirmed statistics-methodology tie found."
+    },
+    {
+      "edge": "tw-price-detail -> ???",
+      "source": "tw-price-detail",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "DGBAS's CPI intro PDF blocked by robots.txt/TLS error, ct.asp page 403, stat.gov.tw CPI page is client-side JS with no static methodology text."
+    },
+    {
+      "edge": "tw-fx-reserves -> imf-bpm6",
+      "source": "tw-fx-reserves",
+      "target": "imf-bpm6",
+      "reason": "no-document",
+      "why": "This round found a real, different primary source (CBC's own 2016 paper on BPM6 adoption, discussing sign/classification conventions for reserve assets generally) than the round-2028-08-28 no-document finding, but it explains Taiwan's general BPM6 adoption rather than stating that the published Foreign Exchange Reserves series itself is documented under BPM6 methodology. Per PLAYBOOK rule 14, checked against the existing note before minting: CBC's own SDDS page for international reserves explicitly states 'Documentation on the methodology is not available' -- a specific, on-point denial that outweighs the more general BPM6-adoption paper. Not overridden; the earlier no-document finding stands. (tw-external-debt -> imf-bpm6 is a separate, distinct edge from the same BPM6 paper and is NOT affected -- that paper explicitly discusses the International Investment Position, whose liabilities side underlies external-debt statistics, under BPM6.)"
+    },
+    {
+      "edge": "tw-defense-budget->tw-national-defense-report",
+      "source": "tw-defense-budget",
+      "target": "tw-national-defense-report",
+      "reason": "deferred",
+      "why": "Grok candidate; mnd.gov.tw blocks automated fetch (robots.txt) on every path/subdomain tried, no Wayback snapshot exists. Could not independently confirm the quote per 'no document, no edge'. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-asymmetric-force-budget->tw-defense-budget",
+      "source": "tw-asymmetric-force-budget",
+      "target": "tw-defense-budget",
+      "reason": "deferred",
+      "why": "Same mnd.gov.tw access block as above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-military-personnel->tw-national-defense-report",
+      "source": "tw-military-personnel",
+      "target": "tw-national-defense-report",
+      "reason": "deferred",
+      "why": "Same mnd.gov.tw access block as above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-strategic-material-reserves->tw-asymmetric-force-budget",
+      "source": "tw-strategic-material-reserves",
+      "target": "tw-asymmetric-force-budget",
+      "reason": "deferred",
+      "why": "Same mnd.gov.tw access block as above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-ecfa-early-harvest->tw-ecfa-legal",
+      "source": "tw-ecfa-early-harvest",
+      "target": "tw-ecfa-legal",
+      "reason": "deferred",
+      "why": "Grok candidate; cited URL is a general MAC anniversary news release, not an ECFA legal-text/annex document, and is the same URL already used to support the separate tw-ecfa-early-harvest->tw-ecfa cites edge. tw-ecfa-legal's identity as a distinct legal-instrument node vs a duplicate of tw-ecfa is unconfirmed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-hsinchu-science-park->tw-science-parks",
+      "source": "tw-hsinchu-science-park",
+      "target": "tw-science-parks",
+      "reason": "wrong-direction",
+      "why": "Grok candidate (calculated_from). The fetched page only shows HSP Bureau's administrative subordination to NSTC; it does not show Hsinchu's figures being calculated from the national aggregate. The natural direction is the reverse (tw-science-parks aggregate would be calculated from the sum of individual parks including Hsinchu), which is not what was proposed. Not minted either direction pending clearer evidence. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-cross-strait-trade-share->tw-mof-trade-statistics",
+      "source": "tw-cross-strait-trade-share",
+      "target": "tw-mof-trade-statistics",
+      "reason": "resolved",
+      "why": "Grok proposed this as a new node/edge (calculated_from), but tw-mof-trade-statistics is the same report as the existing corpus node tw-trade-statistics, and tw-cross-strait-trade-share->tw-trade-statistics (uses_data_from) already exists in the live graph, sourced from the same MAC flash report. No separate node/edge needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    }
+  ]
+}

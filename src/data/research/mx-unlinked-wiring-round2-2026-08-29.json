@@ -1,0 +1,478 @@
+{
+  "_note": "Mexico unlinked-node wiring, round 2 — self-directed (no Grok), via 2 parallel themed subagents (INEGI/Banxico national surveys; subnational/municipal profiles) 2026-08-29. Every proposed dependency was fetched directly from the cited primary source and quoted verbatim. See project memory unlinked_nodes_wiring_round6_2026-08-29.",
+  "reports": [
+    {
+      "id": "mx-renem",
+      "title": "Registro Estadístico de Negocios de México (RENEM)",
+      "publisher": "Instituto Nacional de Estadística y Geografía (INEGI)",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "INEGI's statistical business register (successor sampling-frame directory of economic units), updated annually and used as the population frame for INEGI's business-opinion and economic surveys.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/ee/ee2026_01.pdf",
+      "domains": [],
+      "last_updated": null
+    },
+    {
+      "id": "mx-registro-civil",
+      "title": "Registro Civil de México — Actas del Estado Civil",
+      "publisher": "Secretaría de Gobernación / Oficialías del Registro Civil (RENAPO)",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Mexico's federated civil-registration system that issues birth, death and marriage certificates; INEGI compiles copies of these records to build the country's vital statistics.",
+      "url": "https://www.inegi.org.mx/programas/natalidad/",
+      "domains": [
+        "population"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "mx-programa-sectorial-bienestar-2025-2030",
+      "title": "Programa Sectorial de Bienestar 2025-2030",
+      "publisher": "Secretaría de Bienestar",
+      "country": "MX",
+      "jurisdiction_level": "federal",
+      "region": "Mexico",
+      "description": "Sectoral welfare programme that the operating rules of Pensión Mujeres Bienestar and Pensión para el Bienestar de las Personas con Discapacidad Permanente explicitly align to.",
+      "url": "https://www.gob.mx/bienestar",
+      "domains": [
+        "social-protection"
+      ],
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mx-ensanut",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENSANUT's sampling design paper states INEGI built the survey's primary sampling units from the cartographic and demographic information of the 2010 Population and Housing Census.",
+      "evidence_url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0036-36342019000600917",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-encig",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENCIG's sampling-design PDF states the sample was drawn from INEGI's National Housing Frame, built from cartographic and demographic data of the 2010 Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825196400.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-encig",
+      "target_report_id": "mx-lsnieg",
+      "relationship_type": "cites",
+      "basis": "The same document states INEGI conducts ENCIG under the authority granted to it by the LSNIEG.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825196400.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-envipe",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENVIPE 2025's sampling-design document states the sample was selected using the Master Sample / National Housing Frame, constructed from the most recent Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/envipe/2025/doc/889463926689.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-ensu",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENSU 2024's methodology document states its National Housing Frame was constructed from cartographic and demographic information of the most recent Population and Housing Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/ensu/doc/889463922926.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-ensu",
+      "target_report_id": "mx-lsnieg",
+      "relationship_type": "cites",
+      "basis": "The ENSU document invokes the same LSNIEG-attribution clause as other INEGI household surveys as its legal basis.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/ensu/doc/889463922926.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-ena",
+      "target_report_id": "mx-censo-agropecuario",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's ENA 2017 catalog documentation states the survey's production-unit universe came from the Actualización del Marco Censal Agropecuario (AMCA 2016), derived from the agricultural census frame.",
+      "evidence_url": "https://www.inegi.org.mx/rnm/index.php/catalog/498",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-enadid",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENADID 2018's sampling-design PDF states the survey used the National Housing Frame, constructed from the 2010 Population and Housing Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/enadid/2018/doc/dm_enadid18.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-endutih",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "ENDUTIH 2024's methodological synthesis states the survey used the Master Sample / National Housing Frame, built from the most recent Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/endutih/2024/doc/889463924562.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-enh",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's National Housing Survey (ENVI) sampling-design PDF states its sample was drawn from the National Housing Frame, built from the 2010 Census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/envi/2020/doc/envi_2020_diseno_muestral.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-igae-actividades",
+      "target_report_id": "mx-scnm",
+      "relationship_type": "methodology_depends_on",
+      "basis": "INEGI's IGAE methodology document states IGAE (including its by-activity breakdown) is built using the same conceptual/methodological framework used for the Goods and Services Accounts of the SCNM.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/igae/2013/doc/met_igae.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-emoe",
+      "target_report_id": "mx-renem",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's EMOE bulletin states the survey's population frame is the business directory of RENEM, updated annually.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/ee/ee2026_01.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-edos-nacimientos",
+      "target_report_id": "mx-registro-civil",
+      "relationship_type": "uses_data_from",
+      "basis": "INEGI's natalidad program page states the source document for birth statistics has been a copy of the birth certificate (acta de nacimiento) issued by the civil registry since 1986.",
+      "evidence_url": "https://www.inegi.org.mx/programas/natalidad/",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-guerrero-judicial",
+      "target_report_id": "mx-cnije",
+      "relationship_type": "cites",
+      "basis": "INEGI's CNIJE 2023 results document states its unit of analysis is each state's Poder Judicial, with national coverage by entity — Guerrero is a covered unit.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnije/2023/doc/cnije_2023_resultados.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-guerrero-judicial",
+      "target_report_id": "mx-cnpje",
+      "relationship_type": "cites",
+      "basis": "INEGI's CNPJE 2023 results document states its unit of analysis is each state's Fiscalía/Procuraduría, with tables reporting Guerrero.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnpje/2023/doc/cnpje_2023_resultados.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-oaxaca-judicial",
+      "target_report_id": "mx-cnije",
+      "relationship_type": "cites",
+      "basis": "Same CNIJE 2023 document; Oaxaca's judicial power is a covered unit of this national census.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnije/2023/doc/cnije_2023_resultados.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-oaxaca-judicial",
+      "target_report_id": "mx-cnpje",
+      "relationship_type": "cites",
+      "basis": "Same CNPJE 2023 document; tables reference Oaxaca.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/cnpje/2023/doc/cnpje_2023_resultados.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-oaxaca-de-juarez",
+      "target_report_id": "mx-censo-poblacion",
+      "relationship_type": "uses_data_from",
+      "basis": "Oaxaca de Juárez municipal income-law initiative cites the 2020 census for the capital's official population.",
+      "evidence_url": "https://transparencia.municipiodeoaxaca.gob.mx/t/LGTAIP/70/XXI/LGCG/OB/2025/1-Iniciativa-a-la-Ley-de-Ingresos.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-enoe-informalidad",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ENOE informality measurement follows ICLS/International Conference of Labour Statisticians resolutions.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/enoe/enoe2026_08.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-scnm-sectores-institucionales",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Institutional sector accounts methodology adopts the SNA 2008 framework (1968/1993/2008 sequence).",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/si/2008/doc/702825004893.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-banxico-reservas",
+      "target_report_id": "imf-sdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Net international reserves are disseminated per the IMF Data Template on International Reserves and Foreign Currency Liquidity under SDDS.",
+      "evidence_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CF456&sectorDescripcion=Banco+de+M%C3%A9xico&locale=en",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-pension-discapacidad",
+      "target_report_id": "mx-programa-sectorial-bienestar-2025-2030",
+      "relationship_type": "cites",
+      "basis": "Disability pension operating rules align to the sectoral welfare program's objectives.",
+      "evidence_url": "https://www.guerrero.gob.mx/wp-content/uploads/2026/03/16.-Programa-de-Atencion-a-Personas-con-Discapacidad.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "mx-endutih",
+      "target_report_id": "mx-lsnieg",
+      "relationship_type": "methodology_depends_on",
+      "basis": "ENDUTIH methodology is grounded in national statistical law (LSNIEG) alongside ITU household ICT guidance.",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463930877.pdf",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "mx-issste-anuarios -> ???",
+      "source": "mx-issste-anuarios",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "gob.mx/issste pages returned 403 on direct fetch and via web.archive.org (proxy-rejected)."
+    },
+    {
+      "edge": "mx-pension-bienestar-mujeres -> ???",
+      "source": "mx-pension-bienestar-mujeres",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "gob.mx/bienestar program page returned 403; Wayback mirror proxy-rejected."
+    },
+    {
+      "edge": "mx-pension-discapacidad -> ???",
+      "source": "mx-pension-discapacidad",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Same blocking pattern as mx-pension-bienestar-mujeres."
+    },
+    {
+      "edge": "mx-infonavit-estadisticas -> ???",
+      "source": "mx-infonavit-estadisticas",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "infonavit.org.mx/estadisticas redirected into a WebSphere portal URL the proxy rejected (403)."
+    },
+    {
+      "edge": "mx-banxico-reservas -> ???",
+      "source": "mx-banxico-reservas",
+      "target": null,
+      "reason": "no-document",
+      "why": "Banxico SIE dynamic pages and guessed static URLs all 404'd or returned no content."
+    },
+    {
+      "edge": "mx-banxico-tipo-cambio -> ???",
+      "source": "mx-banxico-tipo-cambio",
+      "target": null,
+      "reason": "no-document",
+      "why": "Banxico's FIX definition (Circular 3/2012) describes wholesale-market-quote averaging but names no data source matching any allowed target."
+    },
+    {
+      "edge": "mx-banxico-tasas-interes -> ???",
+      "source": "mx-banxico-tasas-interes",
+      "target": null,
+      "reason": "no-document",
+      "why": "Banxico's Cetes/Bondes auction table contained only price data, no methodology/lineage statement; guessed TIIE-reform-circular URLs 404'd."
+    },
+    {
+      "edge": "mx-nuevo-leon-imss-municipal -> mx-imss-puestos",
+      "source": "mx-nuevo-leon-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "deferred",
+      "why": "Correct target page identified (datos.nl.gob.mx/n-l-imss-trabajadores-asegurados-por-municipio) but repeated robots.txt-fetch errors (site-side) blocked it; a state-level-only NL employment PDF confirms IMSS as source but has no municipal breakdown so can't substitute."
+    },
+    {
+      "edge": "mx-alcaldia-benito-juarez -> ???",
+      "source": "mx-alcaldia-benito-juarez",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Consistent with the prior round's 6 failed verification attempts. This round additionally confirms web.archive.org is blocked by the outbound proxy in this environment for every Wayback URL format tried — the Wayback fallback is not currently usable from this tool at all."
+    },
+    {
+      "edge": "mx-guerrero-acapulco-detail -> ???",
+      "source": "mx-guerrero-acapulco-detail",
+      "target": null,
+      "reason": "no-document",
+      "why": "Ayuntamiento de Acapulco homepage has no visible statistical/PMD document link; guessed INEGI catalog URLs 404'd or JS-chrome-only."
+    },
+    {
+      "edge": "mx-acapulco-metro -> ???",
+      "source": "mx-acapulco-metro",
+      "target": null,
+      "reason": "no-document",
+      "why": "Same dead end as mx-guerrero-acapulco-detail — these two nodes look like duplicate/overlapping descriptions of the same subject (Acapulco de Juárez profile); flagged for Thomas as a corpus-modelling question, not resolved here."
+    },
+    {
+      "edge": "mx-chiapas-tuxtla-detail -> ???",
+      "source": "mx-chiapas-tuxtla-detail",
+      "target": null,
+      "reason": "deferred",
+      "why": "CEIEG Chiapas confirmed to publish a 'Perfiles Municipales' product (image link found), but the route threw 'too many redirects' (likely SPA); a browser-capable tool should reach the actual PDF."
+    },
+    {
+      "edge": "mx-tuxtla -> ???",
+      "source": "mx-tuxtla",
+      "target": null,
+      "reason": "deferred",
+      "why": "Same lead/block as mx-chiapas-tuxtla-detail; these two nodes also look like duplicate/overlapping descriptions of the same subject (Tuxtla Gutiérrez profile), flagged for Thomas."
+    },
+    {
+      "edge": "mx-oaxaca-de-juarez -> ???",
+      "source": "mx-oaxaca-de-juarez",
+      "target": null,
+      "reason": "no-document",
+      "why": "Municipio de Oaxaca de Juárez PMD path 403'd; homepage had no visible statistical-profile link; COPLADE Oaxaca page was unrelated content."
+    },
+    {
+      "edge": "mx-cdmx-ipdp-indicadores -> mx-censo-poblacion",
+      "source": "mx-cdmx-ipdp-indicadores",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "IPDP's SI CDMX announcement states indicators are built from censuses/surveys/administrative records from official government sources, but does not name INEGI or a specific census by name — generic attribution, not confirmed to this specific target."
+    },
+    {
+      "edge": "mx-enigh-salud -> mx-enigh",
+      "source": "mx-enigh-salud",
+      "target": "mx-enigh",
+      "reason": "note",
+      "why": "Not minted as a dependency edge -- mx-enigh-salud is already modeled as part_of mx-enigh (containment metadata, not a RelationshipType edge; a dependency edge between a node and its container is a validator error, PLAYBOOK rule 12). The underlying fact this round's research confirmed is real (ENIGH 2024's own results report tabulates household health-care spending as a line item of the same survey) -- it is just already represented structurally rather than as an edge."
+    },
+    {
+      "edge": "mx-enigh-transferencias -> mx-enigh",
+      "source": "mx-enigh-transferencias",
+      "target": "mx-enigh",
+      "reason": "note",
+      "why": "Same shape as mx-enigh-salud -> mx-enigh: already part_of mx-enigh. ENIGH 2024's results report tabulates transfer income as a line item of the same survey -- structural containment, not a dependency edge."
+    },
+    {
+      "edge": "mx-scnm-sectores-institucionales -> mx-scnm",
+      "source": "mx-scnm-sectores-institucionales",
+      "target": "mx-scnm",
+      "reason": "note",
+      "why": "Not minted as a dependency edge -- mx-scnm-sectores-institucionales is already modeled as part_of mx-scnm (containment, not a RelationshipType edge, PLAYBOOK rule 12). This round's research confirmed the same underlying fact (INEGI's own methodology document says the institutional-sector accounts share SCNM's conceptual/methodological framework) -- already represented structurally."
+    },
+    {
+      "edge": "mx-jalisco-imss-municipal -> mx-imss-puestos",
+      "source": "mx-jalisco-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "note",
+      "why": "Not minted as a dependency edge -- mx-jalisco-imss-municipal is already modeled as part_of mx-imss-puestos (containment, not a RelationshipType edge, PLAYBOOK rule 12). This round's research confirmed the same underlying fact (two IIEG Jalisco documents state IMSS as the raw data source for the municipal breakdown) -- already represented structurally."
+    },
+    {
+      "edge": "mx-nuevo-leon-imss-municipal->mx-imss-puestos",
+      "source": "mx-nuevo-leon-imss-municipal",
+      "target": "mx-imss-puestos",
+      "reason": "deferred",
+      "why": "Grok candidate; datos.imss.gob.mx blocks automated fetch (robots.txt) on every attempt. Could not independently verify. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-acapulco-metro->mx-censo-poblacion",
+      "source": "mx-acapulco-metro",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "Grok candidate; source PDF (atlas2021.pdf) exceeds fetch size cap (>30MB, 413 error). Could not access content. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-chiapas-tuxtla-detail->mx-censo-poblacion",
+      "source": "mx-chiapas-tuxtla-detail",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "Grok candidate; gob.mx returns 403 on this attachment URL on repeated attempts. Also flagged: mx-chiapas-tuxtla-detail and mx-tuxtla cite the identical source PDF (07101_TuxtlaGutierrez_2026.pdf) and may be near-duplicate nodes for one municipal poverty report — worth deduping upstream. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-tuxtla->mx-enigh",
+      "source": "mx-tuxtla",
+      "target": "mx-enigh",
+      "reason": "deferred",
+      "why": "Grok candidate; same gob.mx 403 access block as mx-chiapas-tuxtla-detail above, same duplicate-node concern. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-pension-bienestar-mujeres->mx-programa-sectorial-bienestar-2025-2030",
+      "source": "mx-pension-bienestar-mujeres",
+      "target": "mx-programa-sectorial-bienestar-2025-2030",
+      "reason": "deferred",
+      "why": "Grok candidate; gob.mx returns 403 on ROPS_MB_26.pdf on repeated attempts, could not independently confirm the Estrategia 1.3 quote. Plausible by analogy to the verified sibling edge mx-pension-discapacidad->mx-programa-sectorial-bienestar-2025-2030 (same programme, different host, that one did verify), but per 'no document, no edge' this one is not minted without direct confirmation. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cdmx-ipdp-indicadores->mx-censo-poblacion",
+      "source": "mx-cdmx-ipdp-indicadores",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "Grok candidate; indicadores.cdmx.gob.mx fails robots.txt/TLS handshake on every attempt. Could not access the page. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cdmx-ipdp-indicadores->mx-enoe",
+      "source": "mx-cdmx-ipdp-indicadores",
+      "target": "mx-enoe",
+      "reason": "deferred",
+      "why": "Same indicadores.cdmx.gob.mx access failure as above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-guerrero-acapulco-detail->mx-censo-poblacion",
+      "source": "mx-guerrero-acapulco-detail",
+      "target": "mx-censo-poblacion",
+      "reason": "deferred",
+      "why": "Grok candidate; PMDUAcapulco.pdf is real and the claimed section (4.5.3/4.5.4) is confirmed in its table of contents, but the fetch tool could not retrieve body text/numbers after 3 attempts on the oversized document. Document and section are genuine and on-topic but the specific figures are unconfirmed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-guerrero-acapulco-detail->mx-denue",
+      "source": "mx-guerrero-acapulco-detail",
+      "target": "mx-denue",
+      "reason": "deferred",
+      "why": "Same document, same fetch limitation as above (section 4.5.6 confirmed to exist in TOC, body text unreachable). See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnpje->mx-guerrero-judicial",
+      "source": "mx-cnpje",
+      "target": "mx-guerrero-judicial",
+      "reason": "wrong-direction",
+      "why": "Grok candidate asserting the national CNPJE census 'uses_data_from' the Guerrero state judicial report — reversed. This round's own research already established and minted the correct direction (mx-guerrero-judicial->mx-cnpje, state feeds the national census), sourced from the same real INEGI CNPJE 2025 results PDF. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnpje->mx-oaxaca-judicial",
+      "source": "mx-cnpje",
+      "target": "mx-oaxaca-judicial",
+      "reason": "wrong-direction",
+      "why": "Same reversed-direction issue as mx-cnpje->mx-guerrero-judicial; correct direction (mx-oaxaca-judicial->mx-cnpje) already minted this round. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnijf->mx-guerrero-judicial",
+      "source": "mx-cnijf",
+      "target": "mx-guerrero-judicial",
+      "reason": "wrong-direction",
+      "why": "Grok candidate; mx-cnijf (Censo Nacional de Impartición de Justicia FEDERAL) is a distinct node from mx-cnije (the STATE census) — it covers SCJN/circuit/district federal courts, not the state judiciary, so a dependency on a state-level Guerrero judicial report is not plausible as either federal-census input or output. The correct state-level relationship (mx-guerrero-judicial->mx-cnije/mx-cnpje) is already minted this round. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-cnijf->mx-oaxaca-judicial",
+      "source": "mx-cnijf",
+      "target": "mx-oaxaca-judicial",
+      "reason": "wrong-direction",
+      "why": "Same mx-cnijf/mx-cnije confusion as mx-cnijf->mx-guerrero-judicial above. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-igae-actividades->sna-2008",
+      "source": "mx-igae-actividades",
+      "target": "sna-2008",
+      "reason": "deferred",
+      "why": "Grok candidate; the INEGI IGAE page is genuine and on-topic but its methodology/International Recommendations section renders via JavaScript, which the fetch tool cannot access (5 attempts, 2 URL variants, metadata only). Could not confirm the SNA 2008 citation text. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-igae-actividades->naics",
+      "source": "mx-igae-actividades",
+      "target": "naics",
+      "reason": "deferred",
+      "why": "Same JS-rendering access limitation as above; could not confirm the NAICS/SCIAN 2018 citation text. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "mx-encig->mx-censo-poblacion",
+      "source": "mx-encig",
+      "target": "mx-censo-poblacion",
+      "reason": "resolved",
+      "why": "Grok candidate proposed this as new (via a duplicate node name mx-censo-poblacion-vivienda), but mx-encig->mx-censo-poblacion already exists live in the graph from earlier research. No action needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    }
+  ]
+}

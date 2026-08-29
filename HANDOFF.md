@@ -19,17 +19,21 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,473 reports · 2,874 dependencies.** `npm run validate` (120/120),
-`tsc --noEmit`, `npm run build` (1,499.49 kB) all clean — reconfirmed
-2026-08-29.
+**3,487 reports · 2,986 dependencies.** `npm run validate` (0 errors),
+`npm run gen`, `tsx scripts/test-logic.ts` (120/120), `tsc --noEmit` all
+clean in a cloud sandbox — reconfirmed 2026-08-29 after round 6. (`npm run
+build`/bundle-size not re-run this round — only data files changed, no
+renderer code touched.)
 
 **Cluster-repulsion range: 0–15** (raised from 0–10, `ViewControls.tsx` /
 `view.ts`) — Thomas's call, live. Not yet tested at the new ceiling.
 
-**Unlinked-node counts** (1,130 of 3,473 nodes isolated overall), freshly
-measured 2026-08-29 for the tracked 11: ID 98/126, TW 91/122, VN 50/67,
-PH 50/77, KR 36/72, MX 33/102, IR 33/35, TR 18/41, JP 17/65, AF 5/15,
-SA 3/16.
+**Unlinked-node counts** (1,038 of 3,487 nodes isolated overall) —
+freshly measured 2026-08-29 after round 6 via `loadIssues.orphans`
+(canonical, matches `assembleCorpus.ts`): ID 77/120, VN 50/67, KR 36/72,
+IR 33/35, TR 18/41, JP 17/65, MX 15/104, TW 54/109, PH 10/77, AF 5/15,
+SA 3/16. (Prior "TW 91/122" etc. line was stale/uncorrected — rule 8,
+measure before believing.)
 
 **Auto-unfold** still dense — accepted, not being chased further.
 
@@ -69,18 +73,18 @@ SA 3/16.
    Regenerate `notes/_all-corpus-ids-*.txt` before any mint.
 5. **New research round** — the 2026-08-22 Grok queue is fully worked; the
    next round needs scoping from scratch.
-6. **Unlinked-node wiring round 6 — Indonesia, with Grok.** Prompt drafted
-   and ready: `notes/grok-prompt-wiring-indonesia-round2-2026-08-29.md` —
-   attach `GROKREADME.md` and `id-indonesia-grok-2026-08.json` per its own
-   header. Covers 98 unlinked nodes. After ID, re-pick from TW/PH/MX.
-   Integration method: parallel per-country/theme subagents, then a
-   central integrity pass (id/relationship_type/duplicate/part_of +
-   independently re-verify every quoted document — never trust Grok's or a
-   subagent's own self-validation). Other open leads: `sa-pif →
-   sa-national-accounts` (blocked twice), Afghanistan's
+6. **Unlinked-node wiring round 6 — DONE.** TW/PH/MX round 2, merged from
+   two parallel sources (9 self-directed subagents + Thomas's independently-
+   run Grok batch), deduped and independently re-verified: 102 edges + 12
+   new nodes. TW 80→54/109, PH 43→10/77, MX 33→15/104. See project memory
+   `unlinked_nodes_wiring_round6_2026-08-29`. Next round needs scoping from
+   scratch — candidates: `sa-pif → sa-national-accounts` (blocked twice),
+   Indonesia's 6 BPS-access-blocked deferred leads from round 5, Afghanistan's
    af-education/af-border-mobility (403, un-Grok'd), three small Vietnam
    leads (each likely `part_of` a sibling, but no document says so in
-   words).
+   words), or a handful of round-6 leads that failed only on access
+   (mnd.gov.tw cluster for Taiwan, 7 gov.mx/imss/cdmx candidates for
+   Mexico) — all need a real browser tool, not another Grok prompt.
 7. **Modelling decision needed: NACE Rev.2 has no node.** Türkiye's
    industrial-production index cites NACE Rev.2 (itself ISIC-derived per
    Eurostat's manual), but with no NACE node to carry the two-hop chain,

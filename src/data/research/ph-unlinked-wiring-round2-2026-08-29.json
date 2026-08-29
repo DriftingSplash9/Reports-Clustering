@@ -1,0 +1,687 @@
+{
+  "_note": "Philippines unlinked-node wiring, round 2 — self-directed (no Grok), via 3 parallel themed subagents (energy/environment/disaster, social/fiscal/economy, agriculture/trade/institutions) 2026-08-29. Every proposed dependency was fetched directly from the cited primary source and quoted verbatim. See project memory unlinked_nodes_wiring_round6_2026-08-29.",
+  "reports": [
+    {
+      "id": "wmo-recommended-practices",
+      "title": "WMO Recommended Practices and Standards for Meteorological Observation",
+      "publisher": "World Meteorological Organization",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "Global",
+      "description": "WMO technical regulations and recommended practices governing quality control, processing, archiving, and instrumentation/observation methods for meteorological and climatological data, followed by national meteorological services worldwide.",
+      "url": "https://pagasa.dost.gov.ph/about-us",
+      "domains": [],
+      "last_updated": null
+    },
+    {
+      "id": "ph-cbms",
+      "title": "Community-Based Monitoring System (CBMS)",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Household-level socioeconomic census mandated by Republic Act 11315 (CBMS Act), administered by PSA in coordination with LGUs, providing granular data used to identify poor and near-poor households for targeting of social programs.",
+      "url": "https://psa.gov.ph/cbms",
+      "domains": [
+        "poverty"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ph-caf",
+      "title": "Census of Agriculture and Fisheries",
+      "publisher": "Philippine Statistics Authority",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "PSA's periodic census of agricultural and fishing operations/households, used as the sampling frame for PSA's commodity-specific production surveys.",
+      "url": "https://psa.gov.ph/statistics/caf",
+      "domains": [
+        "agriculture"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ph-gaa",
+      "title": "General Appropriations Act",
+      "publisher": "Congress of the Philippines / Department of Budget and Management",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "The annual national budget law that authorizes and itemizes appropriations for all Philippine government agencies, including defense.",
+      "url": "https://www.dbm.gov.ph/index.php/2026/general-appropriations-act-gaa-fy-2026",
+      "domains": [
+        "public-finance"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ph-ra-9513-re-act",
+      "title": "Republic Act No. 9513 — Renewable Energy Act of 2008",
+      "publisher": "Congress of the Philippines / Department of Energy",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Statute that defines renewable energy resources (including geothermal, hydro, wind, solar, biomass and ocean) and is the legal framework cited in DOE energy-mix and RE statistics.",
+      "url": "https://www.officialgazette.gov.ph/2008/12/16/republic-act-no-9513/",
+      "domains": [
+        "energy"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ph-palay-production-survey",
+      "title": "Palay Production Survey",
+      "publisher": "Philippine Statistics Authority (PSA)",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "PSA quarterly/annual survey of palay area, production and yield; the direct source named in PSA commodity fact sheets for rice statistics.",
+      "url": "https://psa.gov.ph/statistics/agriculture",
+      "domains": [
+        "agriculture"
+      ],
+      "releases_per_year": 4,
+      "last_updated": null
+    },
+    {
+      "id": "ph-ndrrmc-sitrep",
+      "title": "NDRRMC situational reports on disaster casualties and damage",
+      "publisher": "National Disaster Risk Reduction and Management Council",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "Official government tallies of persons affected, casualties and peso damage to agriculture, infrastructure and houses, used by PAGASA and PSA environment statistics as the impact source.",
+      "url": "https://ndrrmc.gov.ph/",
+      "domains": [
+        "disaster-risk",
+        "governance"
+      ],
+      "last_updated": null
+    },
+    {
+      "id": "ph-bsp-ofw-remittances",
+      "title": "Overseas Filipino Cash Remittances by Country (BSP Table 11)",
+      "publisher": "Bangko Sentral ng Pilipinas",
+      "country": "PH",
+      "jurisdiction_level": "federal",
+      "region": "Philippines",
+      "description": "BSP country-by-source cash remittance series compiled from banks and remittance companies; parent table from which the Canada slice is taken.",
+      "url": "https://www.bsp.gov.ph/statistics/external/ofw2.aspx",
+      "domains": [
+        "external-sector"
+      ],
+      "releases_per_year": 12,
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ph-ghg",
+      "target_report_id": "ipcc-ghg-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Climate Change Commission's official Executive Brief for the 2015/2020 National GHG Inventories states the methodologies, assumptions and default emission factors followed the 2006 IPCC Guidelines and used the IPCC Inventory Software.",
+      "evidence_url": "https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-ndc",
+      "target_report_id": "ipcc-ghg-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The official NDC Implementation Plan states the national GHG inventories underlying the NDC's baseline and targets cover the five IPCC sectors and follow IPCC Guidelines.",
+      "evidence_url": "https://niccdies.climate.gov.ph/files/documents/The%20Philippines-%20NDC%20Implementation%20Plan%20-%20072024.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-disaster-impact",
+      "target_report_id": "un-fdes-2013",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA's Compendium of Philippine Environment Statistics, Component 4 (Extreme Events and Disasters) states its data come from the Office of Civil Defense and the compendium is an adoption of the UN FDES 2013 framework.",
+      "evidence_url": "https://psa.gov.ph/content/compendium-philippine-environment-statistics-2015-2024-component-4-extreme-events-and",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-forest",
+      "target_report_id": "un-fdes-2013",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA's technical notes for the Compendium of Philippine Environment Statistics state the compendium (housing forest-cover/forest-fire tables sourced from the Forest Management Bureau) is an adoption of the FDES 2013 framework.",
+      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684064215",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-pagasa",
+      "target_report_id": "wmo-recommended-practices",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PAGASA's own 'About Us' page states its quality control, processing, archiving of meteorological/climatological data and observation procedures are done per WMO recommended practices and standards.",
+      "evidence_url": "https://pagasa.dost.gov.ph/about-us",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-nta",
+      "target_report_id": "ph-fiscal-ops",
+      "relationship_type": "uses_data_from",
+      "basis": "DBM's official NTA guidance for FY2024 states LGU shares are computed from certified collection totals of the national tax-collecting agencies (BIR, BOC, BTr) — the same national government revenue data tracked under NG fiscal operations statistics.",
+      "evidence_url": "https://www.dbm.gov.ph/index.php/management-2/235-national-tax-allotment-for-lgus-in-2024-pegged-at-over-p871-b-dbm-releases-guidelines-on-preparation-of-annual-budgets-of-lgus",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-pdp",
+      "target_report_id": "ph-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "The PDP 2023-2028's headline-indicators results matrix names PSA's National Accounts of the Philippines as official means of verification for its GDP growth targets.",
+      "evidence_url": "https://pdp.depdev.gov.ph/wp-content/uploads/2023/09/Philippine-Development-Plan-2023-2028.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-pdp",
+      "target_report_id": "ph-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "The same results matrix cites the PSA Labor Force Survey as verification source for employment/unemployment targets.",
+      "evidence_url": "https://pdp.depdev.gov.ph/wp-content/uploads/2023/09/Philippine-Development-Plan-2023-2028.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-pdp",
+      "target_report_id": "ph-fies",
+      "relationship_type": "uses_data_from",
+      "basis": "The plan's poverty-reduction targets are verified against PSA's Family Income and Expenditure Survey per its results matrix.",
+      "evidence_url": "https://pdp.depdev.gov.ph/wp-content/uploads/2023/09/Philippine-Development-Plan-2023-2028.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-digital-economy",
+      "target_report_id": "ph-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "PSA's PDESA technical notes list the National Accounts of the Philippines as a direct input to the digital-economy value-added estimates.",
+      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684060058",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-digital-economy",
+      "target_report_id": "ph-manufacturing-aspbi",
+      "relationship_type": "uses_data_from",
+      "basis": "The same PDESA technical notes list ASPBI as a direct data input to the digital-economy estimation methodology.",
+      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684060058",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-ecommerce",
+      "target_report_id": "ph-digital-economy",
+      "relationship_type": "calculated_from",
+      "basis": "PSA's 2025 digital-economy press release reports e-commerce's GVA/employment shares as a component decomposition mechanically produced within the PDESA breakdown.",
+      "evidence_url": "https://psa.gov.ph/content/digital-economy-contributes-98-percent-philippine-economy-2025",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-itbpm",
+      "target_report_id": "ph-psic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA's 2022 ASPBI IT-BPM industries report states the survey's economic-unit classification is based on the 2009 PSIC as formally adopted by PSA Board resolution.",
+      "evidence_url": "https://psa.gov.ph/content/2022-annual-survey-philippine-business-and-industry-aspbi-information-technology-business",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-4ps",
+      "target_report_id": "ph-cbms",
+      "relationship_type": "uses_data_from",
+      "basis": "DSWD's own Pantawid Pamilya site states 4Ps formally adopted PSA's CBMS as its Standardized Targeting System, registering new beneficiaries directly from the CBMS poor/near-poor database.",
+      "evidence_url": "https://pantawid.dswd.gov.ph/2026/03/4ps-to-register-new-family-beneficiaries-using-cbms-data/",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-philhealth",
+      "target_report_id": "ph-pop-projections",
+      "relationship_type": "uses_data_from",
+      "basis": "PhilHealth's own Stats and Charts 2025 report cites PSA's Scenario 2 population projection as the population figure used in its statistical presentation.",
+      "evidence_url": "https://www.philhealth.gov.ph/about_us/statsncharts/SNC_2025.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-gender",
+      "target_report_id": "ph-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "PSA's gender-statistics page states the Women and Men in the Philippines / Core GAD Indicators factsheet is compiled from named surveys including the Labor Force Survey.",
+      "evidence_url": "https://psa.gov.ph/gender-statistics",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-gender",
+      "target_report_id": "ph-fies",
+      "relationship_type": "uses_data_from",
+      "basis": "The same PSA gender-statistics page names FIES as a feeder survey for the Core GAD Indicators factsheet.",
+      "evidence_url": "https://psa.gov.ph/gender-statistics",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-housing",
+      "target_report_id": "ph-population-census",
+      "relationship_type": "uses_data_from",
+      "basis": "PSA's Technical Notes on Household Characteristics confirm housing/household statistics are drawn directly from the 2020 Census of Population and Housing sample.",
+      "evidence_url": "https://psa.gov.ph/system/files/phcd/Technical%20Notes_Household%20Characteristics.pdf/",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-monetary-aggregates",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "BSP's Depository Corporations Survey primer states monetary statistics compilation is consistent with the 2008 SNA framework.",
+      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/dcs.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-monetary-aggregates",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The same BSP primer states the monetary aggregates framework is aligned with BPM6, alongside the IMF's Monetary and Financial Statistics Manual.",
+      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/dcs.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-bsp",
+      "target_report_id": "ph-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "BSP's own inflation-targeting page states the government's inflation target is defined directly in terms of the PSA-compiled CPI.",
+      "evidence_url": "https://www.bsp.gov.ph/Pages/PriceStability/TheInflationTarget.aspx",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-gov-debt",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Bureau of the Treasury's fiscal risk/debt statement discloses that external-debt-related figures within its debt statistics are compiled on a Balance of Payments Manual concept, shifting from BPM5 to BPM6.",
+      "evidence_url": "https://www.treasury.gov.ph/wp-content/uploads/2018/01/FRS_2014.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-underemployment",
+      "target_report_id": "ph-lfs",
+      "relationship_type": "calculated_from",
+      "basis": "PSA's own LFS Technical Notes define underemployment as an indicator computed directly from LFS respondent data, not a separately collected dataset.",
+      "evidence_url": "https://psa.gov.ph/system/files/iesd/Technical-Notes-for-March-2026-LFS.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-ofw-stock",
+      "target_report_id": "ph-lfs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA's Technical Notes on the 2022 Survey on Overseas Filipinos state SOF is conducted as a rider survey to the October LFS round, using the LFS's Master Sample design.",
+      "evidence_url": "https://psa.gov.ph/system/files/iesd/Technical%20Notes%20on%202022%20Overseas%20Filipino%20Workers.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-barmm",
+      "target_report_id": "ph-national-accounts",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA-BARMM's Provincial Product Accounts page states its estimates are compiled consistent with the National and Regional Accounts of the Philippines.",
+      "evidence_url": "https://rssobarmm.psa.gov.ph/statistics/ppa/node/1684057037",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-nickel",
+      "target_report_id": "ph-pscc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA's technical notes for the Highlights of Philippine Export and Import Statistics state all traded commodities, nickel included, are classified using the 2022 PSCC.",
+      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684061967",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-nickel",
+      "target_report_id": "ph-trade-partners",
+      "relationship_type": "uses_data_from",
+      "basis": "The same PSA technical notes describe the IMTS compilation process (BOC-declaration-based) that produces all Philippine export/import and trade-partner figures, nickel included.",
+      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684061967",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-rice",
+      "target_report_id": "ph-caf",
+      "relationship_type": "methodology_depends_on",
+      "basis": "PSA's Technical Notes on the Palay and Corn Production Survey state the survey's primary sampling units are drawn from the 2012 Census of Agriculture and Fisheries.",
+      "evidence_url": "https://psa.gov.ph/statistics/technical-notes/1684062406",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-defence-budget",
+      "target_report_id": "ph-gaa",
+      "relationship_type": "calculated_from",
+      "basis": "DND's own Transparency page states its published approved budget figures are line items set by the General Appropriations Act (RA 11518, GAA FY2021), with DBM tracking compliance.",
+      "evidence_url": "https://www.dnd.gov.ph/Pages/Transparency",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-energy-mix",
+      "target_report_id": "ph-power-stats",
+      "relationship_type": "calculated_from",
+      "basis": "National energy mix is calculated from DOE monthly grid generation-by-technology reports.",
+      "evidence_url": "https://prod-cms.doe.gov.ph/documents/d/guest/02_2025-monthly-grid-and-off-grid-gross-generation-per-technology-pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-geothermal",
+      "target_report_id": "ph-power-stats",
+      "relationship_type": "uses_data_from",
+      "basis": "Geothermal generation statistics use DOE's gross generation by region/technology series.",
+      "evidence_url": "https://prod-cms.doe.gov.ph/documents/d/epimb/13_2023-gross-generation-by-region-by-technology-pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-renewables",
+      "target_report_id": "ph-ra-9513-re-act",
+      "relationship_type": "methodology_depends_on",
+      "basis": "RE statistics reporting is legally grounded in the Renewable Energy Act of 2008 (RA 9513).",
+      "evidence_url": "https://prod-cms.doe.gov.ph/documents/d/guest/dc2026-02-0005-pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-rice",
+      "target_report_id": "ph-palay-production-survey",
+      "relationship_type": "uses_data_from",
+      "basis": "Rice commodity fact sheet sources area/production/yield figures from PSA's Palay Production Survey.",
+      "evidence_url": "https://psa.gov.ph/system/files/main-publication/Commodity%20Fact%20Sheets%202023_26November2024_e-signed-RCL.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-rice",
+      "target_report_id": "ph-agriculture",
+      "relationship_type": "calculated_from",
+      "basis": "Rice's share in agricultural value of production is calculated from the national agriculture accounts.",
+      "evidence_url": "https://psa.gov.ph/system/files/main-publication/Commodity%20Fact%20Sheets%202023_26November2024_e-signed-RCL.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-fisheries",
+      "target_report_id": "ph-agriculture",
+      "relationship_type": "uses_data_from",
+      "basis": "Fisheries production volumes use PSA's quarterly fisheries surveys, feeding the national agriculture/fisheries accounts.",
+      "evidence_url": "https://psa.gov.ph/system/files/main-publication/Commodity%20Fact%20Sheets%202023_26November2024_e-signed-RCL.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-port-manila",
+      "target_report_id": "ph-ports",
+      "relationship_type": "calculated_from",
+      "basis": "Manila/N. Luzon PMO port statistics are a regional cut calculated from the national PPA port statistics summary.",
+      "evidence_url": "https://www.ppa.com.ph/sites/default/files/qtr_stat/CY_2025_Q4%20_Qtr_Stat_Rep_01302026_0.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-disaster-impact",
+      "target_report_id": "ph-pagasa",
+      "relationship_type": "uses_data_from",
+      "basis": "National disaster impact figures for tropical cyclones use PAGASA's annual tropical cyclone summary.",
+      "evidence_url": "https://pubfiles.pagasa.dost.gov.ph/pagasaweb/files/tamss/weather/tcsummary/PAGASA_ARTC_2022-compressed.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-disaster-impact",
+      "target_report_id": "ph-ndrrmc-sitrep",
+      "relationship_type": "uses_data_from",
+      "basis": "Disaster impact figures (casualties, cost of damage) are sourced from NDRRMC situation reports.",
+      "evidence_url": "https://pubfiles.pagasa.dost.gov.ph/tamss/weather/tc_summary/PAGASA_ARTC_2020.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-remittances-canada",
+      "target_report_id": "ph-bsp-ofw-remittances",
+      "relationship_type": "calculated_from",
+      "basis": "Canada-specific OFW remittance figures are calculated from BSP's country breakdown of cash remittances.",
+      "evidence_url": "https://www.bsp.gov.ph/statistics/external/ofw2.aspx",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-remittances-canada",
+      "target_report_id": "ph-bsp",
+      "relationship_type": "uses_data_from",
+      "basis": "Country-level remittance data uses BSP's balance-of-payments remittance compilation.",
+      "evidence_url": "https://www.bsp.gov.ph/Statistics/External/Table%2011.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-digital-economy",
+      "target_report_id": "ph-psic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Digital economy measurement in the PSNA depends on the PSIC industry classification, expanded to cover digital/household unincorporated activities.",
+      "evidence_url": "https://psa.gov.ph/system/files/eiad/Quarterly-and-Annual-Gross-Domestic-Product-Sources-and-Methods.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-gov-debt",
+      "target_report_id": "ph-fiscal-ops",
+      "relationship_type": "uses_data_from",
+      "basis": "Outstanding national government debt figures are sourced from the Bureau of the Treasury's cash operations / debt reporting.",
+      "evidence_url": "https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2026/D3.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-barmm",
+      "target_report_id": "ph-population-census",
+      "relationship_type": "uses_data_from",
+      "basis": "BARMM regional statistics use the 2024 Census of Population figures.",
+      "evidence_url": "https://psa.gov.ph/content/highlights-bangsamoro-autonomous-region-muslim-mindanao-barmm-population-2024-census",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-ghg",
+      "target_report_id": "ph-forest",
+      "relationship_type": "uses_data_from",
+      "basis": "National GHG inventory LULUCF sector uses DENR-FMB forestry data.",
+      "evidence_url": "https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-ndc",
+      "target_report_id": "ph-ghg",
+      "relationship_type": "uses_data_from",
+      "basis": "Nationally Determined Contribution reporting uses the national GHG Inventory for its mitigation-claim verification.",
+      "evidence_url": "https://apidb.denr.gov.ph/infores/uploads/DAO-2026-02.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-monetary-aggregates",
+      "target_report_id": "ph-bsp",
+      "relationship_type": "uses_data_from",
+      "basis": "Monetary aggregates (M3/domestic liquidity) are compiled by BSP's Department of Economic Statistics.",
+      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/CBSandDCS.pdf",
+      "evidence": "documented"
+    },
+    {
+      "source_report_id": "ph-construction",
+      "target_report_id": "ph-psic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Construction sector classification in the PSNA depends on the PSIC's 16 major industry groupings.",
+      "evidence_url": "https://psa.gov.ph/system/files/eiad/Quarterly-and-Annual-Gross-Domestic-Product-Sources-and-Methods.pdf",
+      "evidence": "documented"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ph-geothermal -> ???",
+      "source": "ph-geothermal",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "DOE's doe.gov.ph and legacy.doe.gov.ph pages are JS-rendered SPAs; WebFetch returned only navigation/footer chrome."
+    },
+    {
+      "edge": "ph-renewables -> ???",
+      "source": "ph-renewables",
+      "target": null,
+      "reason": "no-document",
+      "why": "RA 9513 establishes DOE's mandate but is enabling legislation, not a sourcing statement; DOE's own pages returned only nav chrome."
+    },
+    {
+      "edge": "ph-power-stats -> ???",
+      "source": "ph-power-stats",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "2024 Power Statistics Summary PDF contains only term definitions, no sourcing statement; DOE landing pages 403 or nav-chrome-only."
+    },
+    {
+      "edge": "ph-energy-mix -> ???",
+      "source": "ph-energy-mix",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Philippine Energy Plan page returned only navigation/footer chrome."
+    },
+    {
+      "edge": "ph-irrigation -> ???",
+      "source": "ph-irrigation",
+      "target": null,
+      "reason": "no-document",
+      "why": "NIA's Overview page gives only its enabling charter, no data-source statement; a promising SEEA water-accounts PDF 404'd."
+    },
+    {
+      "edge": "ph-fiscal-ops -> ???",
+      "source": "ph-fiscal-ops",
+      "target": null,
+      "reason": "no-document",
+      "why": "DBM BESF glossary cites COFOG (not a listed target) for expenditure classification, no GFSM or other allowed-target citation."
+    },
+    {
+      "edge": "ph-construction -> ???",
+      "source": "ph-construction",
+      "target": null,
+      "reason": "no-document",
+      "why": "PSA construction reports reference PSGC (no corresponding node) and administrative building-permit records (not a report node)."
+    },
+    {
+      "edge": "ph-higher-ed -> ???",
+      "source": "ph-higher-ed",
+      "target": null,
+      "reason": "no-document",
+      "why": "CHED statistics page 403'd; PSA PSCED pages confirm CHED reviewed the classification draft but not that CHED's own statistics use it."
+    },
+    {
+      "edge": "ph-basic-ed -> ???",
+      "source": "ph-basic-ed",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "DepEd's basic-education-statistics page and DO 52 s.2016 both returned 403."
+    },
+    {
+      "edge": "ph-digital-economy -> oecd-digital-suts-handbook",
+      "source": "ph-digital-economy",
+      "target": "oecd-digital-suts-handbook",
+      "reason": "no-document",
+      "why": "PSA's PDESA technical notes name OECD only as a general institutional precedent, never the specific OECD Handbook by name — declined per pointer-is-not-a-source rule."
+    },
+    {
+      "edge": "ph-mining -> ???",
+      "source": "ph-mining",
+      "target": null,
+      "reason": "no-document",
+      "why": "PSA's Mineral Asset Accounts confirms MGB as a source for a DIFFERENT (non-assigned) node, reverse direction; MGB's own pages 403/404."
+    },
+    {
+      "edge": "ph-fisheries -> ???",
+      "source": "ph-fisheries",
+      "target": null,
+      "reason": "no-document",
+      "why": "PSA fisheries pages found describe content but not sampling-frame/sourcing methodology explicitly."
+    },
+    {
+      "edge": "ph-agriculture -> ???",
+      "source": "ph-agriculture",
+      "target": null,
+      "reason": "no-document",
+      "why": "Guessed technical-notes URL 404'd; search budget exhausted before locating the correct page."
+    },
+    {
+      "edge": "ph-ports -> ???",
+      "source": "ph-ports",
+      "target": null,
+      "reason": "no-document",
+      "why": "PPA press release shows component ports rolling into a national aggregate — a part_of container shape, not a documented dependency; not forced as an edge."
+    },
+    {
+      "edge": "ph-port-manila -> ???",
+      "source": "ph-port-manila",
+      "target": null,
+      "reason": "no-document",
+      "why": "Same part_of-container shape as ph-ports."
+    },
+    {
+      "edge": "ph-port-cebu -> ???",
+      "source": "ph-port-cebu",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "No PPA page or press release specific to Port of Cebu was fetchable (PPA PDFs blocked)."
+    },
+    {
+      "edge": "ph-vital-stats -> ph-pop-projections",
+      "source": "ph-vital-stats",
+      "target": "ph-pop-projections",
+      "reason": "deferred",
+      "why": "PSA Technical Notes confirm rates use mid-year population but never explicitly name which PSA product supplies that denominator."
+    },
+    {
+      "edge": "ph-dmw -> ???",
+      "source": "ph-dmw",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "POEA/DMW pages robots-blocked or JS SPA; FOI page 404'd."
+    },
+    {
+      "edge": "ph-crime -> ???",
+      "source": "ph-crime",
+      "target": null,
+      "reason": "no-document",
+      "why": "PNP FOI page 404'd; CIRAS system manual describes database mechanics only, no cited data source or methodology."
+    },
+    {
+      "edge": "ph-peza -> ???",
+      "source": "ph-peza",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "PEZA press releases, annual-report site, and FOI page all 403/404."
+    },
+    {
+      "edge": "ph-rd-statistics -> ???",
+      "source": "ph-rd-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "DOST's Harmonized National R&D Agenda documents are policy/priority-setting, not statistical-methodology, documents."
+    },
+    {
+      "edge": "ph-port-cebu->ph-ports",
+      "source": "ph-port-cebu",
+      "target": "ph-ports",
+      "reason": "no-document",
+      "why": "Grok candidate; the cited 2024 PPA Annual Report contains zero occurrences of 'Cebu' anywhere in its 100 pages. The quoted figures are the Philippines-wide NATIONAL totals, not a Cebu/Visayas PMO-specific breakdown as claimed. No document supports the specific claim. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "ph-renewables->ph-power-stats",
+      "source": "ph-renewables",
+      "target": "ph-power-stats",
+      "reason": "caveat",
+      "why": "Grok candidate (uses_data_from); the quoted RE capacity figures (7,331/6,077 MW, 30.7%/29.2%) are genuine text in the DOE LOEPP document but are the LUZON-grid-only subtotal, not Philippines-wide national RE figures as implied (national total is 11,020/9,176 MW, 33.8%/32.4%). The underlying relationship is plausible but this specific evidence mischaracterizes a regional slice as national; not minted pending correctly-scoped evidence. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "ph-pagasa->ph-ndrrmc-sitrep",
+      "source": "ph-pagasa",
+      "target": "ph-ndrrmc-sitrep",
+      "reason": "no-document",
+      "why": "Grok candidate; the cited ARTC overview page does not mention NDRRMC at all, only PAGASA's own best-track methodology. The broader claim is otherwise supported by other documents already minted separately as ph-disaster-impact->ph-pagasa and ph-disaster-impact->ph-ndrrmc-sitrep, but this specific source does not establish ph-pagasa itself depending on NDRRMC sitreps. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "ph-digital-economy->sna-2008",
+      "source": "ph-digital-economy",
+      "target": "sna-2008",
+      "reason": "deferred",
+      "why": "Grok candidate; the cited PSA methodology document explicitly references adoption of the '2025 System of National Accounts recommendations', not the 2008 SNA vintage the sna-2008 node represents. Likely needs a 2025-SNA node that doesn't yet exist in the corpus rather than this edge. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "ph-gov-debt->ph-fiscal-ops (cites)",
+      "source": "ph-gov-debt",
+      "target": "ph-fiscal-ops",
+      "reason": "resolved",
+      "why": "Grok also proposed a separate 'cites' edge for this same pair with weaker evidence (a data-download index page with no textual connection to financing flows); superseded by the uses_data_from edge to the same target minted from stronger evidence (BESF debt table sourced to Bureau of the Treasury). See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "ph-fiscal-ops->ph-btr-cash-operations",
+      "source": "ph-fiscal-ops",
+      "target": "ph-btr-cash-operations",
+      "reason": "resolved",
+      "why": "Grok proposed 'ph-btr-cash-operations' as a new node (Bureau of the Treasury's National Government Cash Operations Report), but that report IS the existing ph-fiscal-ops node itself (see its _url_evidence: 'Bureau of the Treasury National Government Cash Operations page...'). Self-referential duplicate; no new node minted, no edge added. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    }
+  ]
+}
