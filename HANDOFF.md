@@ -37,12 +37,38 @@ bare `*-edp-inventory` nodes wired — CZ/NL/FR/DK/IT each got a real
 `xx-govfin` node with quote-verified edges; UK declined as a deliberate
 modelling call, its live EDP obligation ended with Brexit; LU declined
 as a genuine research gap, no qualifying document found — see project
-memory `eu_government_finance_round3_2026-08-29`). (`npm run build`/
-bundle-size not re-run since round 6 — only data files changed, no
-renderer code touched.)
+memory `eu_government_finance_round3_2026-08-29`). `npm run build`
+re-run this session (renderer code touched, see below): clean, bundle
+1,499.57 kB (unchanged from round 6's 1,498.64/1,499.49 kB baseline).
 
 **Cluster-repulsion range: 0–15** (raised from 0–10, `ViewControls.tsx` /
 `view.ts`) — Thomas's call, live. Not yet tested at the new ceiling.
+
+**Renderer perf items closed 2026-08-29.** Both of the "two named wins"
+from the prior Todo: (a) `nodeGeometry()`'s `SphereGeometry` was already
+cached by rounded radius (`sphereCache` in `nodeVisuals.ts`) going into
+this session — turned out done in an earlier round, HANDOFF just hadn't
+been corrected (rule 8). (b) node materials now start `transparent:
+false` unless hollow, soft, or currently dimmed (`alwaysTransparent` in
+`nodeVisuals.ts`; `applyFocus` in `InfluenceGraph.tsx` toggles it
+alongside opacity) instead of `transparent: true` unconditionally. The
+prior comment warning that toggling `transparent` forces a shader
+recompile was measured and disproved: an isolated harness toggled it 5x
+on a live `MeshStandardMaterial` with the same `onBeforeCompile` shape
+and `onBeforeCompile` fired exactly once (the first compile), each
+toggle under 0.3ms. `tsc`/`npm run validate`/`npm run build` all clean
+in the cloud sandbox; on-device files sha256-verified identical to the
+sandbox-tested copies. Visual parity confirmed via headless Playwright
+screenshots (default view and a focus/trace state) — dimming and rim
+behaviour read the same. **Not independently confirmed:** an actual FPS
+win. The sandbox's swiftshader software rasterizer runs at ~1.5-2 fps
+regardless (500-600ms/frame) for this scene, which swamps whatever the
+CPU-side transparent-sort saves — no reliable signal at that frame
+rate. The win is real by construction (most nodes are hollow/soft only
+a fraction of the time — solid nodes now skip the sorted pass whenever
+nothing is focused) but wants a real-GPU spot-check, not another
+software-rendered measurement. See project memory
+`renderer_transparent_toggle_2026-08-29`.
 
 **Unlinked-node counts** (1,038 of 3,487 nodes isolated overall) —
 freshly measured 2026-08-29 after round 6 via `loadIssues.orphans`
@@ -64,6 +90,10 @@ measure before believing.)
 2. Try dragging cluster repulsion past the old 10 mark now that it's 0–15.
    If still weak at 15, it's not the force — check camera auto-fit or node
    density instead. Detail: `renderer_forces_2026-08-28` memory §3.
+3. Watch for any node-rendering oddity (flicker, wrong z-order) after
+   2026-08-29's transparent-material change — see Current State. Visual
+   parity was checked in software rendering only; flag here if real
+   hardware shows anything different.
 
 ### [Agent] — next build rounds
 
@@ -73,14 +103,7 @@ measure before believing.)
    Thailand — closed negative, don't retry without a new access route.
    Then the 31 single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD
    ME MK NI NR PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
-2. **Renderer, two named wins.** (a) `nodeGeometry()` allocates a
-   `SphereGeometry` per node, uncached — 3,465 of them; bucketing by
-   rounded radius (as `teardropGeometry` does) gives ~20. (b) every node
-   material is `transparent: true` unconditionally, forcing the whole
-   graph through the sorted transparent pass — likely cause of node
-   glitches. Caveat: toggling `transparent` on a live material forces a
-   shader recompile.
-3. **New research round** — the 2026-08-22 Grok queue is fully worked; the
+2. **New research round** — the 2026-08-22 Grok queue is fully worked; the
    next round needs scoping from scratch. Unlinked-node wiring candidates:
    `sa-pif → sa-national-accounts` (blocked twice), Indonesia's 6
    BPS-access-blocked deferred leads from round 5, Afghanistan's

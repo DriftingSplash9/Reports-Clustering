@@ -2683,6 +2683,12 @@ export default function InfluenceGraph({
       // `litOpacity` rather than 1 — a hollow node stays hollow when traced.
       const litOpacity = material.userData.litOpacity ?? 1
       material.opacity = lit ? litOpacity : Math.min(dimOpacity, litOpacity)
+      // An ordinary solid node is opaque while lit and only needs the
+      // sorted transparent pass while dimmed — see `alwaysTransparent` in
+      // nodeVisuals.ts for why toggling this here is safe (measured: no
+      // recompile). Hollow/soft materials are born `alwaysTransparent` and
+      // this is a no-op for them.
+      material.transparent = (material.userData.alwaysTransparent ?? true) || !lit
       material.emissiveIntensity = focusEmissive(id, mesh, focus)
       // **Transparency does not stop a raycast.** A ghosted node is still
       // solid geometry as far as the picker is concerned, so a barely-visible

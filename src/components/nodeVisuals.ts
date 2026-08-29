@@ -78,6 +78,14 @@ export interface NodeMaterial extends THREE.MeshStandardMaterial {
      */
     litOpacity: number
     /**
+     * Whether this material must stay `transparent: true` even while lit —
+     * true for hollow (emptied fill) and soft (fading silhouette) nodes,
+     * both of which have alpha < 1 somewhere on the surface at all times.
+     * Everything else is opaque while lit and only needs blending while
+     * dimmed by focus; `applyFocus` reads this to decide the toggle.
+     */
+    alwaysTransparent: boolean
+    /**
      * Live handle on the rim-colour uniform, so the lens recolour pass can
      * retune a hollow node's ring without a rebuild. Absent until the first
      * compile — `onBeforeCompile` is where the uniform comes into existence —
@@ -199,15 +207,26 @@ export function nodeMaterial({
    */
   soft?: boolean
 }): NodeMaterial {
+  // A hollow or soft node's alpha dips below 1 even while lit (the fill is
+  // emptied, or the silhouette fades) — those two always need blending. An
+  // ordinary solid node is alpha 1 everywhere while lit and only needs
+  // blending while dimmed by focus. Measured empirically (2026-08-29,
+  // test-transparent harness) before relying on this: toggling
+  // `material.transparent` on a live MeshStandardMaterial with this same
+  // `onBeforeCompile` shape does NOT trigger a recompile in three.js
+  // 0.185 — `onBeforeCompile` fired exactly once across five toggles, each
+  // under 0.3ms. The prior "enabled up front" comment here overstated the
+  // risk; see `applyFocus` in InfluenceGraph.tsx, which now toggles this
+  // alongside opacity. Kept `true` unconditionally only for the two cases
+  // that actually need it while lit.
+  const alwaysTransparent = hollow || soft
   const material = new THREE.MeshStandardMaterial({
     color: colour,
     emissive: emissiveColour ?? colour,
     emissiveIntensity: lit ? emissive : dimEmissive,
     roughness: 0.4,
     metalness: 0.05,
-    // Enabled up front. Switching `transparent` on a live material forces a
-    // shader recompile, which stutters at the exact moment the user clicks.
-    transparent: true,
+    transparent: alwaysTransparent || !lit,
     opacity: lit ? (hollow ? HOLLOW_FILL_OPACITY : 1) : Math.min(dimOpacity, hollow ? HOLLOW_FILL_OPACITY : 1),
   }) as NodeMaterial
 
@@ -220,7 +239,12 @@ export function nodeMaterial({
   // the node is one of the two kinds that gets a rim at all.
   const rimMax = !drawRim || weight === 'none' ? 0 : 1
   const rim = { value: (lit ? 1 : 0.07) * rimMax }
-  material.userData = { rim, rimMax, litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1 }
+  material.userData = {
+    rim,
+    rimMax,
+    litOpacity: hollow ? HOLLOW_FILL_OPACITY : 1,
+    alwaysTransparent,
+  }
 
   material.onBeforeCompile = (shader) => {
     shader.uniforms.uRimColour = { value: new THREE.Color(rimColour) }
