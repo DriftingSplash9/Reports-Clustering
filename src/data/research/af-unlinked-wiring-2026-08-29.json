@@ -1,0 +1,127 @@
+{
+  "_slice": "af-unlinked-wiring-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "verified",
+  "_note": "Final country in the original 5-country candidates-only tier (after JP/KR/SA/TR). Afghanistan's unlinked nodes are mostly auto-imported international-agency statistics ABOUT Afghanistan (UNFPA, WHO, OCHA, FAO GIEWS, World Bank, UNICEF, IOM) rather than NSIA/DAB's own domestic products, so the useful evidence came from each source publisher's own page (the node's own listed url) naming its actual data/methodology origin, not from a domestic Afghan chain like Taiwan's or Korea's. Direct fetch and quote-verification of every evidence_url by the orchestrating session. 5 nodes closed with 6 edges (one, af-wheat, ties to the same new IPC node as af-humanitarian), 2 new international-standard nodes proposed (both already exist as real, independently-verifiable global bodies with no prior corpus representation), plus one bonus edge for an already-linked node (af-bop -> imf-bpm6) found along the way. 6 of 11 originally-unlinked nodes remain dropped, all genuinely thin/blocked rather than under-researched (agriculture, trade, drought, education, border-mobility deferred or no-document).",
+  "reports": [
+    {
+      "id": "who-global-health-estimates",
+      "title": "WHO Global Health Estimates",
+      "publisher": "World Health Organization",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "WHO's global health estimates programme, producing internationally comparable life-expectancy, healthy-life-expectancy, cause-of-death, and burden-of-disease estimates for all WHO member states. Cited directly on WHO's own country data portal as the source for life-expectancy statistics.",
+      "last_updated": null,
+      "url": "https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates",
+      "domains": ["health"]
+    },
+    {
+      "id": "ipc-classification",
+      "title": "Integrated Food Security Phase Classification (IPC)",
+      "publisher": "IPC Global Partnership (FAO, WFP, FEWS NET and other partners)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "The international standard scale and methodology (Phase 1 Minimal through Phase 5 Catastrophe/Famine) for classifying the severity and magnitude of acute and chronic food insecurity, used by UN agencies, governments and NGOs worldwide to produce comparable food-security analyses across countries.",
+      "last_updated": null,
+      "url": "https://www.ipcinfo.org/",
+      "domains": ["poverty"]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "af-population",
+      "target_report_id": "un-wpp-methodology",
+      "relationship_type": "uses_data_from",
+      "basis": "UNFPA's Afghanistan data page (af-population's own listed url) explicitly attributes its total-population figure to the UN Population Division: \"Total population: World Population Prospects 2024 revision. United Nations Population Division, 2024.\" Same page also attributes life-expectancy and fertility-rate figures to the same source, confirming this is a direct-data (not merely methodological) dependency, matching the pattern already minted for sa-population -> un-wpp-methodology.",
+      "evidence_url": "https://www.unfpa.org/data/world-population/AF"
+    },
+    {
+      "source_report_id": "af-cpi",
+      "target_report_id": "af-nsia",
+      "relationship_type": "uses_data_from",
+      "basis": "Da Afghanistan Bank's own Monthly Inflation Report (July 2021) states: \"The National Statistics and Information Authority (NSIA) have brought some changes in the CPI basket in both base-year (changed to April 2015 from March 2011) and items. As a result, significant changes can be observed in the current weight and index.\" This corroborates, from a second, independently-fetched document, the same NSIA-supplies-the-CPI-basket relationship already minted for af-dab -> af-nsia from DAB's quarterly economic bulletin.",
+      "evidence_url": "https://dab.gov.af/sites/default/files/2022-07/Montlhly%20Inflation%20Report_July%20%202021.pdf"
+    },
+    {
+      "source_report_id": "af-exchange-rate",
+      "target_report_id": "af-dab",
+      "relationship_type": "uses_data_from",
+      "basis": "Fetched directly: af-exchange-rate's own listed url (dab.gov.af) resolves to a page titled \"Exchange Rates | Da Afghanistan Bank\", confirming the exchange-rate series this node represents is DAB's own direct publication (not a third-party compilation) — the same institution already established in the corpus as publishing af-exchange-rate's underlying data (af-dab's description: \"Publishes exchange rates, inflation references and limited monetary series\").",
+      "evidence_url": "https://www.dab.gov.af/exchange-rates"
+    },
+    {
+      "source_report_id": "af-health",
+      "target_report_id": "who-global-health-estimates",
+      "relationship_type": "uses_data_from",
+      "basis": "af-health's own listed url (WHO's Afghanistan country data portal) explicitly cites its life-expectancy source: \"Life expectancy and health life expectancy World Health Organization, Global Health Estimates, https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates/ghe-life-expectancy-and-healthy-life-expectancy\". No corpus node existed for WHO Global Health Estimates prior to this — proposed above.",
+      "evidence_url": "https://data.who.int/countries/004"
+    },
+    {
+      "source_report_id": "af-humanitarian",
+      "target_report_id": "ipc-classification",
+      "relationship_type": "methodology_depends_on",
+      "basis": "af-humanitarian's own listed url (OCHA's Afghanistan page) states its food-insecurity figures directly in IPC's own phase terms: \"...projected to face crisis or worse food insecurity (Integrated Food Security Phase Classification [IPC] Phase 3+), including 4.7 million experiencing emergency (IPC Phase 4) levels.\" No corpus node existed for the IPC classification prior to this — proposed above.",
+      "evidence_url": "https://www.unocha.org/afghanistan"
+    },
+    {
+      "source_report_id": "af-wheat",
+      "target_report_id": "ipc-classification",
+      "relationship_type": "methodology_depends_on",
+      "basis": "af-wheat's own listed url (FAO GIEWS Afghanistan country brief) lists IPC explicitly among the data/tools underlying the brief: \"This brief was prepared using the following data/tools: FAO/GIEWS Country Cereal Balance Sheet (CCBS)... FAO/GIEWS Food Price Monitoring and Analysis (FPMA) Tool... FAO/GIEWS Earth Observation for Crop Monitoring... Integrated Food Security Phase Classification (IPC) https://www.ipcinfo.org/.\" The same page also states the wheat-gap figures directly in IPC phase terms (17.4 million people in IPC Phase 3+, 4.7 million in IPC Phase 4).",
+      "evidence_url": "https://www.fao.org/giews/countrybrief/country.jsp?code=AFG"
+    },
+    {
+      "source_report_id": "af-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "BONUS FIND (af-bop was already linked, not part of the 11-node unlinked set, but the evidence surfaced while researching af-exchange-rate on the same DAB site). DAB's own External Sector Statistics page titles its published balance-of-payments release explicitly with the manual it follows: \"Balance of Payments Transactions (BPM6) Download\" — i.e. DAB's own BOP publication is titled and filed under the IMF's Balance of Payments and International Investment Position Manual, 6th Edition.",
+      "evidence_url": "https://dab.gov.af/External-Sector-Statistics1"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "af-agriculture -> af-nsia / af-national-accounts",
+      "source": "af-agriculture",
+      "target": null,
+      "reason": "no-document",
+      "why": "MAIL's (Ministry of Agriculture, Irrigation and Livestock) own reports page (mail.gov.af/dr/reports), af-agriculture's own listed url, is a bare Dari-language navigation index (project/report category links) with no methodology or source-attribution text. No document found stating a specific data relationship to NSIA or another corpus node."
+    },
+    {
+      "edge": "af-wheat -> af-agriculture",
+      "source": "af-wheat",
+      "target": "af-agriculture",
+      "reason": "no-document",
+      "why": "FAO GIEWS's Afghanistan brief (af-wheat's own url) names its cereal-production data source as FAO/GIEWS's own Country Cereal Balance Sheet (CCBS) system, not MAIL or NSIA directly: \"the cereal supply and demand data included in this brief originates from the FAO/GIEWS Country Cereal Balance System (CCBS). The CCBS is a unique database created and continuously kept up to date by the GIEWS and Basic Foodstuffs Teams...\" CCBS is not a corpus node and is a FAO-internal compiled database (a `redistributed`/`unpublishable-source`-style terminus), not a documented link to af-agriculture."
+    },
+    {
+      "edge": "af-trade -> af-nsia / hs",
+      "source": "af-trade",
+      "target": null,
+      "reason": "no-document",
+      "why": "The World Bank's Afghanistan Development Update (May 2026), af-trade's own listed source document, attributes its trade tables not to NSIA or Da Afghanistan Bank but to \"WB Staff calculations based on Automated System for Customs Data (ASYCUDA)\" — a UNCTAD-run customs system, not a corpus node and not an Afghan government publication. No Harmonized System (HS) classification statement was found in the document either."
+    },
+    {
+      "edge": "af-education -> unesco-uis / isced",
+      "source": "af-education",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "af-education's own listed url (unicef.org/afghanistan/education) returned HTTP 403 to a direct fetch. No corpus node exists yet for UNESCO Institute for Statistics or ISCED regardless, so even a successful fetch would likely need a new-node proposal — not attempted further given the access block and the 2-new-node cap already used elsewhere this round."
+    },
+    {
+      "edge": "af-border-mobility -> [any corpus node]",
+      "source": "af-border-mobility",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "af-border-mobility's own listed url (dtm.iom.int/afghanistan), IOM's Displacement Tracking Matrix, returned HTTP 403 (Akamai edge block) to a direct fetch. Not independently re-tried via a different route in this pass."
+    },
+    {
+      "edge": "af-drought -> af-humanitarian / af-wheat",
+      "source": "af-drought",
+      "target": null,
+      "reason": "no-document",
+      "why": "FEWS NET's Afghanistan page (af-drought's own listed url) is reachable but describes drought's role in food insecurity only narratively (\"the ongoing drought's impact on food production, livelihoods and livestock... are directly driving a worsening nutrition crisis\", from OCHA's page), never as a formal data-source citation with a named dataset or document. No specific quote ties af-drought's own statistics to a numbered input for af-humanitarian or af-wheat's calculations — a real causal relationship in the world, but not a documented dependency in the evidentiary sense this corpus requires."
+    }
+  ]
+}

@@ -331,3 +331,18 @@ everything) — it measurably improves citation discipline.
   worked on a bare retry) and one turned out to still be genuinely blocked
   (TUIK) — don't assume a Grok-supplied URL will work just because Grok
   says it fetched it; always re-fetch yourself, and a retry costs nothing.
+
+## Afghanistan round, 2026-08-29 (no Grok prompt sent — self-researched)
+
+Closed the candidates-only tier's last country (JP/KR/SA/TR done above,
+Afghanistan was the excluded 5th). Small enough scope (11 unlinked nodes)
+to research directly rather than delegate or prompt Grok — no domestic
+NSIA/DAB methodology chain like JP/KR had, so the useful evidence came from
+each international agency's OWN page (UNFPA/WHO/OCHA/FAO) naming its data
+origin. 6 edges + 1 bonus + 2 new international-standard nodes
+(who-global-health-estimates, ipc-classification). Two leads left
+access-blocked (af-education/UNICEF and af-border-mobility/IOM DTM, both
+403) — genuine Grok-follow-up candidates, not sent yet since two leads on
+their own didn't seem worth a dedicated prompt; bundle with a future
+round's blocked leads instead. Full detail:
+`unlinked_nodes_wiring_round3_2026-08-29` project memory.

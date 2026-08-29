@@ -13,7 +13,7 @@ handoffs so long?"); the pre-trim copy is
 `archive/Previous Handoffs/HANDOFF-2026-08-28-pre-trim.md`. If you find
 yourself writing the story of a change here, it belongs in project memory.
 
-Last updated: **2026-08-28**
+Last updated: **2026-08-29**
 
 ---
 
@@ -28,20 +28,22 @@ PLAYBOOK rule 1, don't state it.
 
 ## 2. Current state
 
-**Corpus: 3,468 reports · 2,857 dependencies.** `npm run validate` clean
+**Corpus: 3,470 reports · 2,864 dependencies.** `npm run validate` clean
 (120/120), `tsc --noEmit` clean, `npm run build` clean (1,499.49 kB).
 
-Six data rounds across 2026-08-28/29 (two with same-day Grok follow-ups)
+Seven data rounds across 2026-08-28/29 (two with same-day Grok follow-ups)
 and four renderer fixes. Zero-domestic-edge countries went 102 → 77 on
-08-28; unlinked-node count (sharper metric) went 1,251 → 1,194 → 1,151
-across two rounds (ID/TW/PH/MX on 08-28, JP/KR/SA/TR on 08-29 — 44 edges,
-0 new nodes) plus a same-day Grok follow-up closing 6 more (JP nuclear
-cluster ×3 + e-Stat, KR Basel appendix, TR health/ICD-10; TR industrial-
-production/ISIC declined on evidentiary-structure grounds — a real but
-missing-node NACE Rev.2 hop, flagged below). Detail in project memory: `eu_national_chains_2026-08-28`,
+08-28; unlinked-node count (sharper metric) went 1,251 → 1,194 → 1,151 → 1,144
+→ 1,138 across three rounds (ID/TW/PH/MX on 08-28, JP/KR/SA/TR on 08-29 — 44
+edges, 0 new nodes, plus a same-day Grok follow-up closing 6 more leads; then
+Afghanistan on 08-29 — 7 edges + 2 new international-standard nodes, closing
+the original candidates-only tier). TR industrial-production/ISIC declined on
+evidentiary-structure grounds — a real but missing-node NACE Rev.2 hop,
+flagged below. Detail in project memory: `eu_national_chains_2026-08-28`,
 `candidates_tier_wiring_2026-08-28`, `eu_government_finance_2026-08-28`,
 `unlinked_nodes_wiring_round1_2026-08-28` (69 edges + 3 nodes, ID/TW/PH/MX),
 `unlinked_nodes_wiring_round2_2026-08-29` (44 edges, JP/KR/SA/TR),
+`unlinked_nodes_wiring_round3_2026-08-29` (Afghanistan, 7 edges + 2 nodes),
 `renderer_forces_2026-08-28` (now covers
 all four renderer fixes. Cluster-repulsion range change, 0-3 → 0-10 — Thomas
 called the old range "weak and ineffective" live; a full-system
@@ -77,14 +79,15 @@ whether it reads right).
   `hubRoom`; stock d3 uses the collapsed link array. In the folded view that
   makes ordinary links slightly softer than stock. Defensible, but it's a
   deliberate divergence someone should ratify.
-- **1,144 of 3,468 nodes (33%) have no edge at all**, down from 1,251 on
-  2026-08-27 via two rounds plus a same-day Grok follow-up (ID/TW/PH/MX,
-  then JP/KR/SA/TR). Worst now: ID 90/118, TW 80/108, PH 43/70, VN 39/48,
-  MX 33/101, IR 32/34, KR 16/52, JP 15/63, TR 11/34, SA 3/16. Sharper target
-  than the zero-domestic-edge count. Only Afghanistan is left untouched
-  from the original candidates-only tier — see `unlinked_nodes_cleared.md`
-  before scoping the next batch (also lists Yemen/Syria as confirmed dead
-  ends, do not re-attempt).
+- **1,138 of 3,470 nodes (33%) have no edge at all**, down from 1,251 on
+  2026-08-27 via three rounds plus a same-day Grok follow-up (ID/TW/PH/MX,
+  JP/KR/SA/TR, then Afghanistan). Worst now: ID 90/118, TW 80/108, PH 43/70,
+  VN 39/48, MX 33/101, IR 32/34, KR 16/52, JP 15/63, TR 11/34, AF 5/15,
+  SA 3/16. Sharper target than the zero-domestic-edge count. The original
+  candidates-only tier (JP/KR/SA/TR/AF) is now fully worked — see
+  `unlinked_nodes_cleared.md` for next-batch guidance (re-pick from
+  ID/TW/PH/VN/MX; also lists Yemen/Syria as confirmed dead ends, do not
+  re-attempt).
 - **Auto-unfold is still dense.** The hub-drag fix improved it materially
   but did not solve it — see `renderer_forces_2026-08-28`.
 
@@ -166,16 +169,18 @@ whether it reads right).
 5. **New research round** — the 2026-08-22 Grok queue is fully worked; a new
    round needs scoping from scratch. The 2026-08-28 rounds were done without
    Grok, by parallel subagents, at Thomas's request.
-6. **Unlinked-node wiring, round 3.** Only **Afghanistan** left in the
-   original candidates-only tier — after that, re-pick from the worst list
-   above (ID/TW/PH/MX/VN are the deepest pools left). Method: parallel
-   per-country subagents (see `unlinked_nodes_wiring_round2_2026-08-29`
-   memory), then a central integrity pass (id/relationship_type/duplicate/
-   part_of + spot-fetch quotes yourself — round 2's subagents twice used
-   `source`/`target` instead of `source_report_id`/`target_report_id`,
-   caught only by the integrity script). The 08-29 Grok follow-up closed
-   6/7 leads, raw-verified. Mexico's 08-28 Benito Juárez leads and Saudi
-   PIF (`sa-pif -> sa-national-accounts`, blocked twice now) remain open.
+6. **Unlinked-node wiring, round 4.** The original candidates-only tier
+   (JP/KR/SA/TR/AF) is fully closed — re-pick from the worst list above
+   (ID 90/TW 80/PH 43/VN 39/MX 33 are the deepest pools left, all partially
+   worked in round 1). Method: parallel per-country subagents (see
+   `unlinked_nodes_wiring_round2_2026-08-29` memory), then a central
+   integrity pass (id/relationship_type/duplicate/part_of + spot-fetch
+   quotes yourself — round 2's subagents twice used `source`/`target`
+   instead of `source_report_id`/`target_report_id`, caught only by the
+   integrity script). Mexico's 08-28 Benito Juárez leads, Saudi PIF
+   (`sa-pif -> sa-national-accounts`, blocked twice now), and Afghanistan's
+   af-education/af-border-mobility (both 403-blocked, un-Grok'd) remain
+   open leads worth a future follow-up prompt.
 7. **Modelling decision needed: NACE Rev.2 has no node** (same shape as
    the generic-COICOP question above). Türkiye's industrial-production
    index documents NACE Rev.2; NACE Rev.2 is itself documented (Eurostat's
