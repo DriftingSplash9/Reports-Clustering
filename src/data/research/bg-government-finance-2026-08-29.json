@@ -1,0 +1,58 @@
+{
+  "_slice": "bg-government-finance-2026-08-29",
+  "_researched": "2026-08-29",
+  "_status": "DRAFT — NOT YET IMPORTED (wired automatically by the gen-slices auto-loader).",
+  "_note": "Closes the Bulgaria gap left open by eu-government-finance-2026-08-28.json's `_dropped` entry 'bg-edp-inventory -> bg-nsi-government-finance', which was rejected at mint time because the prior agent's whole evidence was the page TITLE. Retry per that entry's own lead: fetched NSI's EDP release itself (not the general government-finance landing page) and read the BODY text via a raw curl + HTML-strip, not just the WebFetch summary, specifically to rule out a repeat of the title-only failure. The body carries three distinct quotable statements — the EDP notification obligation, the ESA 2010 methodology tie, and the Eurostat transmission language — so all four templated edges are mintable, matching the best-evidenced countries in the prior round (Latvia, Poland) rather than the partial ones (Sweden, Croatia).",
+  "reports": [
+    {
+      "id": "bg-nsi-government-finance",
+      "title": "Notification tables for debt and deficit for 'General Government' sector",
+      "publisher": "National Statistical Institute (NSI) of Bulgaria",
+      "country": "BG",
+      "jurisdiction_level": "federal",
+      "region": "Bulgaria",
+      "description": "Bulgaria's EDP notification press release. NSI states: \"In 2025 the General Government Institutional Sector reported a deficit of -4 113 million EUR, or -3.5% of the Gross domestic product (GDP), according to preliminary data from the National Statistical Institute,\" and that \"The statistical information on the activities of the General Government institutional sector, including debt, deficit and surplus, is elaborated according to the harmonized EU methodology.\" The release names both the transmission obligation and the methodology it follows (see edges). CAVEAT: the prior research pass on this same page (referenced in eu-government-finance-2026-08-28.json's `_dropped`) rested only on the page title; this pass re-fetched the raw HTML and stripped it to confirm these are genuine body sentences, not a repeat of that error.",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly, stated on the page: \"each member state provides to Eurostat (the European Commission) preliminary data on deficit/surplus and debt for the reporting year as of March 31st of the next year and the final data as of September 30th of the next year.\"",
+      "last_updated": null,
+      "url": "https://www.nsi.bg/en/press-release/notification-tables-for-debt-and-deficit-for-general-government-sector-8995",
+      "domains": [
+        "public-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "bg-edp-inventory",
+      "target_report_id": "bg-nsi-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "This NSI press release is Bulgaria's own EDP notification, stating \"In the implementation of Council Regulation (EC) No. 479/2009 on the application of the Protocol on the excessive deficit procedure annexed to the Treaty establishing the European Community, each member state provides to Eurostat (the European Commission) preliminary data on deficit/surplus and debt\" — the national deficit/debt data whose methods and sources Bulgaria's Article 9 EDP inventory documents.",
+      "evidence_url": "https://www.nsi.bg/en/press-release/notification-tables-for-debt-and-deficit-for-general-government-sector-8995",
+      "evidence_quote": "In the implementation of Council Regulation (EC) No. 479/2009 on the application of the Protocol on the excessive deficit procedure annexed to the Treaty establishing the European Community, each member state provides to Eurostat (the European Commission) preliminary data on deficit/surplus and debt for the reporting year as of March 31st of the next year and the final data as of September 30th of the next year."
+    },
+    {
+      "source_report_id": "bg-nsi-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The release's own footnote defines the harmonized methodology it uses as ESA 2010.",
+      "evidence_url": "https://www.nsi.bg/en/press-release/notification-tables-for-debt-and-deficit-for-general-government-sector-8995",
+      "evidence_quote": "The harmonized EC methodology is defined in the Manual of Government Deficit and Debt on the General Government Sector and the European System of National Accounts (ESA 2010) of Eurostat."
+    },
+    {
+      "source_report_id": "bg-nsi-government-finance",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The release names the instrument directly as the legal basis for its own production and transmission.",
+      "evidence_url": "https://www.nsi.bg/en/press-release/notification-tables-for-debt-and-deficit-for-general-government-sector-8995",
+      "evidence_quote": "In the implementation of Council Regulation (EC) No. 479/2009 on the application of the Protocol on the excessive deficit procedure annexed to the Treaty establishing the European Community, each member state provides to Eurostat (the European Commission) preliminary data on deficit/surplus and debt for the reporting year as of March 31st of the next year and the final data as of September 30th of the next year."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "bg-nsi-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "The release states outright that Bulgaria's NSI transmits this same preliminary/final deficit and debt data to Eurostat on the EDP notification schedule — the national submission Eurostat's EDP notification tables are built from. The release's own title, 'Notification tables for debt and deficit for General Government sector', identifies it as that notification.",
+      "evidence_url": "https://www.nsi.bg/en/press-release/notification-tables-for-debt-and-deficit-for-general-government-sector-8995",
+      "evidence_quote": "each member state provides to Eurostat (the European Commission) preliminary data on deficit/surplus and debt for the reporting year as of March 31st of the next year and the final data as of September 30th of the next year."
+    }
+  ]
+}

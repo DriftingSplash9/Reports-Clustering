@@ -1,0 +1,184 @@
+{
+  "_slice": "eu-government-finance-round2-2026-08-29",
+  "_researched": "2026-08-29",
+  "_note": "Follow-up to eu-government-finance-2026-08-28.json for the 5 cheapest-lead EU countries left unwired (Malta, Bulgaria [see separate bg-government-finance-2026-08-29.json], Lithuania, Spain, Estonia). This file covers MT, LT, ES, EE. Method: dedicated per-country subagent following the specific lead logged in project memory eu_government_finance_2026-08-28.md, evidence independently spot-checked by the orchestrator via WebFetch before merge (per PLAYBOOK rule 3, never trust a subagent's self-reported quote outright).",
+  "reports": [
+    {
+      "id": "mt-nso-government-finance",
+      "title": "General Government Balance and Debt under the Maastricht Treaty",
+      "publisher": "National Statistics Office (NSO) Malta",
+      "country": "MT",
+      "jurisdiction_level": "federal",
+      "region": "Malta",
+      "description": "Malta's EDP notification release. NSO Malta states data was submitted 30 March 2026 as part of the Excessive Deficit Procedure (EDP) Notification, compiled per the Manual on Government Deficit and Debt and ESA 2010 (2023 edition).",
+      "releases_per_year": 2,
+      "cadence_note": "Twice yearly on the EDP notification cycle (before 1 April and before 1 October).",
+      "last_updated": null,
+      "url": "https://nso.gov.mt/general-government-balance-and-debt-under-the-maastricht-treaty-first-reporting-for-2026/",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "lt-govfin",
+      "title": "General Government Deficit and Debt (Quality Report / Statistical Release)",
+      "publisher": "State Data Agency (Statistics Lithuania)",
+      "country": "LT",
+      "jurisdiction_level": "federal",
+      "region": "Lithuania",
+      "description": "Statistics Lithuania's official metadata/quality report and statistical release for general government deficit and debt, citing Council Regulation (EC) No 479/2009 (EDP protocol) and ESA 2010 as its legal and methodological basis, with data also published in Eurostat's database.",
+      "url": "https://osp.stat.gov.lt/documents/10180/5118910/Vald%C5%BEios+sektoriaus+deficitas+ir+skola+%5BEN%5D+146240000.html",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "es-govfin",
+      "title": "General government debt according to the Excessive Deficit Procedure (Deuda de las Administraciones Públicas según el PDE)",
+      "publisher": "Banco de España",
+      "country": "ES",
+      "jurisdiction_level": "federal",
+      "region": "Spain",
+      "description": "Banco de España's statistical release on the debt of Spain's general government and subsectors compiled under the Excessive Deficit Procedure (EDP): quarterly data, a monthly advance estimate, and the quarterly debt-deficit reconciliation. IGAE (igae.pap.hacienda.gob.es) remains robots-blocked; this release is a genuine primary bde.es source, not a third-party catalogue record.",
+      "url": "https://www.bde.es/webbe/en/estadisticas/temas/administraciones-publicas.html",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "ee-govfin",
+      "title": "Excessive Deficit Procedure (EDP) Notification — Estonia",
+      "publisher": "Statistics Estonia (Statistikaamet)",
+      "country": "EE",
+      "jurisdiction_level": "federal",
+      "region": "Estonia",
+      "description": "Statistics Estonia's dedicated EDP page publishing Estonia's biannual (April/October) EDP notification tables and explanatory notes — the actual general government deficit and debt data compiled under ESA 2010 and transmitted to Eurostat under Council Regulation (EC) 479/2009. Distinct from the general 'Maastricht debt' press release, which carries no EDP/ESA/Eurostat sentence (confirmed on two independent passes) and was NOT used as a source.",
+      "url": "https://stat.ee/en/avasta-statistikat/valdkonnad/rahandus/government-finance/excessive-deficit-procedure-edp",
+      "domains": [
+        "public-finance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mt-edp-inventory",
+      "target_report_id": "mt-nso-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "This is the national EDP notification data whose methods/sources Malta's Article 9 inventory documents.",
+      "evidence_url": "https://nso.gov.mt/general-government-balance-and-debt-under-the-maastricht-treaty-first-reporting-for-2026/",
+      "evidence_quote": "On 30 March 2026, Malta submitted the government deficit and debt levels for the years 2022-2025, as part of the Excessive Deficit Procedure (EDP) Notification."
+    },
+    {
+      "source_report_id": "mt-nso-government-finance",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Release names the framework directly.",
+      "evidence_url": "https://nso.gov.mt/general-government-balance-and-debt-under-the-maastricht-treaty-first-reporting-for-2026/",
+      "evidence_quote": "This adheres to the guidelines outlined in the Manual on Government Deficit and Debt and the European System of Accounts (ESA) 2010 (2023 edition)."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "mt-nso-government-finance",
+      "relationship_type": "uses_data_from",
+      "basis": "The release states Malta's submission of this data as its EDP notification to the Commission.",
+      "evidence_url": "https://nso.gov.mt/general-government-balance-and-debt-under-the-maastricht-treaty-first-reporting-for-2026/",
+      "evidence_quote": "On 30 March 2026, Malta submitted the government deficit and debt levels for the years 2022-2025, as part of the Excessive Deficit Procedure (EDP) Notification."
+    },
+    {
+      "source_report_id": "lt-edp-inventory",
+      "target_report_id": "lt-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The EDP methodology inventory documents how national deficit/debt figures are compiled; this release is Lithuania's own EDP-legal-basis deficit/debt release, produced under the same Regulation.",
+      "evidence_url": "https://osp.stat.gov.lt/documents/10180/5118910/Vald%C5%BEios+sektoriaus+deficitas+ir+skola+%5BEN%5D+146240000.html",
+      "evidence_quote": "Council Regulation (EC) No 479/2009 of 25 May 2009 on the application of the Protocol on the excessive deficit procedure annexed to the Treaty establishing the European Community with amendments"
+    },
+    {
+      "source_report_id": "lt-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The release states its statistics are compiled following ESA 2010.",
+      "evidence_url": "https://osp.stat.gov.lt/documents/10180/5118910/Vald%C5%BEios+sektoriaus+deficitas+ir+skola+%5BEN%5D+146240000.html",
+      "evidence_quote": "Statistics are produced following ESA 2010."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "lt-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The release states its data is published in Eurostat's database of predefined tables covering government deficit and debt (ESA 2010).",
+      "evidence_url": "https://osp.stat.gov.lt/documents/10180/5118910/Vald%C5%BEios+sektoriaus+deficitas+ir+skola+%5BEN%5D+146240000.html",
+      "evidence_quote": "Statistical information is published in Eurostat's database, Predefined tables (General government deficit and debt (ESA'2010)."
+    },
+    {
+      "source_report_id": "lt-govfin",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The release lists Council Regulation (EC) No 479/2009 as its institutional/legal mandate.",
+      "evidence_url": "https://osp.stat.gov.lt/documents/10180/5118910/Vald%C5%BEios+sektoriaus+deficitas+ir+skola+%5BEN%5D+146240000.html",
+      "evidence_quote": "Council Regulation (EC) No 479/2009 of 25 May 2009 on the application of the Protocol on the excessive deficit procedure annexed to the Treaty establishing the European Community with amendments"
+    },
+    {
+      "source_report_id": "es-edp-inventory",
+      "target_report_id": "es-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "Banco de España's own EDP-debt statistics page states it compiles Spain's debt data under the EDP for EU submission.",
+      "evidence_url": "https://www.bde.es/webbe/en/estadisticas/temas/administraciones-publicas.html",
+      "evidence_quote": "Among the functions assigned to the Banco de España by Spanish law and, specifically, by the Law of Autonomy of the Banco de España and by the successive National Statistics Plans is the compilation of public debt according to the excessive deficit protocol (EDP)."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "es-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "The release page ties its own figures directly to the twice-yearly EDP notification to the European Commission.",
+      "evidence_url": "https://www.bde.es/webbe/en/estadisticas/temas/administraciones-publicas.html",
+      "evidence_quote": "This statistic forms part of the information that is submitted twice a year to the European Commission within the framework of the EDP notifications."
+    },
+    {
+      "source_report_id": "es-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Bank's own methodological note behind this series states debt-instrument valuation follows SEC 2010 (Spanish name for ESA 2010).",
+      "evidence_url": "https://www.bde.es/webbe/es/estadisticas/compartido/docs/notamet_pde.pdf",
+      "evidence_quote": "En cuanto a la valoración de los pasivos incluidos en este concepto, se sigue la metodología que establece el Sistema Europeo de Cuentas Económicas Integradas de 2010 (SEC 2010) descrita en la nota metodológica de las CFEE que se difunde en la página web del Banco de España."
+    },
+    {
+      "source_report_id": "es-govfin",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same methodological note explicitly grounds the debt definition in Regulation (EC) 479/2009 and its amending Regulation (EU) 220/2014.",
+      "evidence_url": "https://www.bde.es/webbe/es/estadisticas/compartido/docs/notamet_pde.pdf",
+      "evidence_quote": "La definición de este endeudamiento está regulada por el Reglamento (CE) nº 479/2009 del Consejo, de 25 de mayo de 2009, relativo a la aplicación del Protocolo sobre el procedimiento aplicable en caso de déficit excesivo, anejo al Tratado constitutivo de la Comunidad Europea, y por el Reglamento (UE) Nº 220/2014 de la Comisión, de 7 de marzo de 2014."
+    },
+    {
+      "source_report_id": "ee-edp-inventory",
+      "target_report_id": "ee-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "Estonia's Article 9 EDP inventory is published alongside, and documents the compilation methodology behind, the same EDP notification tables hosted on this page.",
+      "evidence_url": "https://stat.ee/sites/default/files/2023-12/EE_EDP_Inventory_ESA2010_ver2023_November.pdf",
+      "evidence_quote": "EDP tables (Annex 1) are published by SE after the notification round is closed by Eurostat. No specific date is set for it, but the report is published after the assessment process with Eurostat is closed. The EDP inventory is published alongside EDP tables."
+    },
+    {
+      "source_report_id": "ee-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The EDP page's own text states EDP data must be compiled per ESA2010.",
+      "evidence_url": "https://stat.ee/en/avasta-statistikat/valdkonnad/rahandus/government-finance/excessive-deficit-procedure-edp",
+      "evidence_quote": "According to the Council Regulation (EC) 3605/93, lastly amended by the Council Regulation (EC) 479/2009, the annual data to be used for the excessive deficit procedure have to be compiled according to the European System of Accounts (ESA2010) and provided to the European Commission before 1 April and 1 October each year."
+    },
+    {
+      "source_report_id": "ee-govfin",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Same sentence explicitly names Council Regulation (EC) 479/2009 as the amending regulation governing this data's compilation and transmission.",
+      "evidence_url": "https://stat.ee/en/avasta-statistikat/valdkonnad/rahandus/government-finance/excessive-deficit-procedure-edp",
+      "evidence_quote": "According to the Council Regulation (EC) 3605/93, lastly amended by the Council Regulation (EC) 479/2009, the annual data to be used for the excessive deficit procedure have to be compiled according to the European System of Accounts (ESA2010) and provided to the European Commission before 1 April and 1 October each year."
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "ee-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "Estonia's EDP inventory confirms the same national EDP tables are the ones delivered to Eurostat's EDP notification process via eDAMIS twice yearly.",
+      "evidence_url": "https://stat.ee/sites/default/files/2023-12/EE_EDP_Inventory_ESA2010_ver2023_November.pdf",
+      "evidence_quote": "Data on government deficits and debt levels are reported to Eurostat twice a year (in April and October) in EDP notification tables ... The tables and questionnaire are delivered to Eurostat via eDAMIS."
+    }
+  ]
+}
