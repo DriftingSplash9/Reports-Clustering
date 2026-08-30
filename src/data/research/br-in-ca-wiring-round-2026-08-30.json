@@ -1,0 +1,426 @@
+{
+  "meta": {
+    "date": "2026-08-30",
+    "actor": "Claude -- Brazil/India/Canada isolated-node wiring round, following HANDOFF's queued 'next wiring round: BR/IN/CA' item",
+    "scope": "19 new dependencies (6 BR municipal-GDP chain, 4 IN, 9 CA), 0 new nodes minted (several strong leads found no matching corpus node -- BEN, IEA, MOSPI Statistical Year Book of India, OAS/GIS federal, PEI Real Property Tax Act Regulations, a Winnipeg tax-rate by-law -- logged as no-node-yet leads rather than minted, keeping this round's scope to wiring existing isolated nodes). 8 parallel research subagents dispatched per country/theme; every proposed edge independently re-fetched and quote-verified by the orchestrating session before minting (a pointer is not a source). Two exact-duplicate node pairs found and flagged for Thomas's ruling rather than silently merged or wired: br-pnad-continua / br-ibge-pnad-continua, and in-mospi-nas / in-mospi-national-accounts-statistics. Also caught before shipping: 4 BR education nodes (br-ibge-pnad-educacao, br-inep-sinopse-educacao-basica, br-inep-sinopse-educacao-superior, br-inep-notas-censo-superior) came back from research with solid, independently-verified evidence of exactly the module/summary relationship expected -- but each already carries a part_of pointing at that same target, and a dependency edge onto a report's own part_of container is a validator error (containment is not a dependency). Logged as _dropped notes instead of minted; worth a standing check for future wiring rounds before proposing an edge that mirrors an existing part_of. Closes 19 of BR/IN/CA's measured 59 isolated nodes (BR 18, IN 16, CA 25 before this round) in the pure dependency-graph sense; 4 more BR nodes are correctly modeled via part_of already and were never truly missing an edge.",
+    "status": "ready to merge"
+  },
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "br-mg-fjp-pib",
+      "target_report_id": "br-ibge-pib-municipio-bh",
+      "relationship_type": "uses_data_from",
+      "basis": "FJP's own 'PIB dos Municipios Mineiros 2019' states municipal GDP is calculated by Brazil's Sistema de Contas Regionais, coordinated by IBGE in partnership with state statistical institutes -- naming Fundacao Joao Pinheiro as Minas Gerais's institute -- and the same document discusses Belo Horizonte's specific PIB share in depth.",
+      "evidence_url": "https://fjp.mg.gov.br/wp-content/uploads/2021/11/09.02.22-Serie-Estatistica-e-Informacoes-45_PIB-dos-Municipios-2019.pdf"
+    },
+    {
+      "source_report_id": "br-df-ipedf-pib",
+      "target_report_id": "br-ibge-pib-municipio-brasilia",
+      "relationship_type": "uses_data_from",
+      "basis": "IPEDF/CODEPLAN's own page states GDP results integrate Brazil's Sistema de Contas Regionais (an IBGE project) and that IPEDF Codeplan is IBGE's official institution for calculating the Federal District's GDP within that system. DF is coterminous with the single 'Brasilia' municipality in IBGE's municipal series.",
+      "evidence_url": "https://www.ipe.df.gov.br/produto-interno-bruto-do-df-pib"
+    },
+    {
+      "source_report_id": "br-ce-ipece-pib",
+      "target_report_id": "br-ibge-pib-municipio-fortaleza",
+      "relationship_type": "uses_data_from",
+      "basis": "IPECE's own 'Analise do PIB dos Municipios Cearenses -- 2022/2023' states its Municipal GDP Series 'constitui uma analise dos ultimos resultados disponiveis das Contas Regionais divulgados pelo IBGE' and that municipal GDP calculation is conceptually integrated with Brazil's Regional Accounts System procedures.",
+      "evidence_url": "https://www.ipece.ce.gov.br/wp-content/uploads/sites/45/2025/12/PIB_Municipal_2022_2023.pdf"
+    },
+    {
+      "source_report_id": "br-sc-seplan-pib",
+      "target_report_id": "br-ibge-pib-municipio-florianopolis",
+      "relationship_type": "uses_data_from",
+      "basis": "News coverage of the joint IBGE/SEPLAN-SC municipal-GDP release quotes SEPLAN-SC economist Paulo Zoldan as coordinating 'a apuracao do PIB do Estado e dos municipios em parceria com o IBGE'. Zoldan is independently confirmed as Santa Catarina's named external collaborator in IBGE's own official technical note for this same product (https://biblioteca.ibge.gov.br/visualizacao/livros/liv102250_notas_tecnicas.pdf) -- corroborating a real, direct role rather than a paraphrase.",
+      "evidence_url": "https://sindifisco.org.br/noticias/pib-dos-municipios-de-sc-mostra-forca-economica-de-polos-regionais"
+    },
+    {
+      "source_report_id": "br-pr-ipardes-pib",
+      "target_report_id": "br-ibge-pib-municipio-curitiba",
+      "relationship_type": "uses_data_from",
+      "basis": "IBGE's own official technical note for 'Produto Interno Bruto dos Municipios: Brasil: 2022-2023' names IPARDES (Instituto Paranaense de Desenvolvimento Economico e Social) as Parana's external collaborator institute for this product, with two named individual collaborators. IPARDES's own site had no quotable prose specific to the municipal series, so this edge rests on IBGE's own document rather than IPARDES's.",
+      "evidence_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv102250_notas_tecnicas.pdf"
+    },
+    {
+      "source_report_id": "br-rj-ceperj-anuario",
+      "target_report_id": "br-ibge-pib-municipio-rio",
+      "relationship_type": "uses_data_from",
+      "basis": "IBGE's own official technical note for 'Produto Interno Bruto dos Municipios: Brasil: 2022-2023' names CEPERJ (Fundacao Centro Estadual de Estatisticas, Pesquisas e Formacao de Servidores Publicos do Rio de Janeiro) as Rio de Janeiro's external collaborator institute for this product, with two named individual collaborators. CEPERJ's own domains were unreachable this round (consistent robots.txt/timeout/403 across 6+ attempts), so this edge rests on IBGE's own document rather than CEPERJ's -- same pattern as an official agency's own page standing in when the primary domain is technically unreachable.",
+      "evidence_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv102250_notas_tecnicas.pdf"
+    },
+    {
+      "source_report_id": "in-bihar-statistical-handbook",
+      "target_report_id": "in-census-india",
+      "relationship_type": "uses_data_from",
+      "basis": "Bihar Statistical Handbook 2020 (Directorate of Economics & Statistics, Govt of Bihar) carries recurring per-table source footnotes citing the Census of India across multiple rounds -- 'Source:- Census of India -2011 & Previous Year' and 'Source- Census Of India.' -- with 2011 named repeatedly alongside 2001/1991/1981 rounds.",
+      "evidence_url": "http://dse.bihar.gov.in/New-Publications/Bihar%20Statistics%20%20Hand%20book%202020%20.pdf"
+    },
+    {
+      "source_report_id": "in-haryana-statistical-abstract",
+      "target_report_id": "in-census-india",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistical Abstract of Haryana 2023-24 states explicitly (Section III, Area and Population): 'The data have been taken from the Census of India, 1961, 1971, 1981, 1991, 2001 and 2011.'",
+      "evidence_url": "https://cdnbbsr.s3waas.gov.in/s32b0f658cbffd284984fb11d90254081f/uploads/2025/03/202503171202509032.pdf"
+    },
+    {
+      "source_report_id": "in-mohfw-national-health-profile",
+      "target_report_id": "in-census-india",
+      "relationship_type": "uses_data_from",
+      "basis": "National Health Profile 2023's own 'Information to our readers' section states 'Population census- Main source of demographic data which is conducted at a decadal interval.' Direction corrected from the researching subagent's proposal (which had Census as source): NHP is the document citing Census as an input, not the reverse.",
+      "evidence_url": "https://cbhidghs.mohfw.gov.in/sites/default/files/NHP/NHP-2023-Last-Final.pdf"
+    },
+    {
+      "source_report_id": "in-mohfw-national-health-profile",
+      "target_report_id": "in-mospi-srs",
+      "relationship_type": "uses_data_from",
+      "basis": "National Health Profile 2023's own 'Information to our readers' section states 'Population surveys, population projections and Sample Registration System (SRS) are other sources of demographic data.' Direction corrected from the researching subagent's proposal (which had SRS as source): NHP is the document citing SRS as an input, not the reverse.",
+      "evidence_url": "https://cbhidghs.mohfw.gov.in/sites/default/files/NHP/NHP-2023-Last-Final.pdf"
+    },
+    {
+      "source_report_id": "london-budget",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "London's own 2024-2027 Multi-Year Budget states directly: 'Tax rates are applied to the current value assessment of each property as determined by the Municipal Property Assessment Corporation (MPAC), which is an independent body formed by the Provincial government and funded by municipalities.' In-document citation -- the cleanest of this round's Ontario municipal-budget findings.",
+      "evidence_url": "https://london.ca/sites/default/files/2024-05/2024-2027%20Multi-Year%20Budget.pdf"
+    },
+    {
+      "source_report_id": "ottawa-tax-policy",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "Ottawa's annual 'Tax Policy and Other Revenue Matters' report (2025 edition -- the 2026 edition of the same recurring report series was inaccessible this session) states: 'Property taxes in Ontario are calculated based on assessment values determined by the Municipal Property Assessment Corporation (MPAC) and multiplied by the City and Province's tax rates.' Supersedes a prior no-document verdict against a different, Incapsula-blocked URL for the same underlying fact (see on-ontario-deepen-grok-2026-08.json, resolved this round).",
+      "evidence_url": "https://pub-ottawa.escribemeetings.com/filestream.ashx?DocumentId=232892"
+    },
+    {
+      "source_report_id": "brampton-budget",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "Brampton's official Taxes & Assessment page states: 'The Municipal Property Assessment Corporation (MPAC) is responsible for assessing all properties in the Province of Ontario, including the City of Brampton.' The Adopted Budget PDF itself was too large to fetch and the shorter Budget Highlights PDF had no MPAC mention, so this rests on the City's own webpage rather than the budget document proper -- same evidentiary pattern accepted for Caledon below.",
+      "evidence_url": "https://www.brampton.ca/EN/residents/Taxes-Assessment/pages/assessment.aspx"
+    },
+    {
+      "source_report_id": "caledon-budget",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "Caledon's official Property Assessments page states: 'Every four years, the Municipal Property Assessment Corporation (MPAC) conducts a province-wide assessment and mails a Property Assessment Notice to all property owners in Ontario.' The full 2026 Budget Book exceeded fetch size limits, so this rests on the Town's own webpage rather than the budget document proper.",
+      "evidence_url": "https://www.caledon.ca/en/town-services/property-assessments.aspx"
+    },
+    {
+      "source_report_id": "hrm-budget-business-plan",
+      "target_report_id": "ns-pvsc-assessment-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "Halifax Regional Municipality's own Budget 'Common Questions' page states: 'PVSC is an independent, municipally funded, not-for-profit organization that provides property assessment services and information to Nova Scotia's municipalities and property owners' and 'the tax bill is made up of the assessment (set by PVSC) multiplied by the tax rate (set by the municipality).' The Budget and Business Plan PDF itself returned 403 on every attempt, so this rests on HRM's own budget-section FAQ page. Supersedes a prior no-document verdict against a different, non-matching halifax.ca URL for the same underlying fact (see atlantic-canada-grok-2026-08.json, resolved this round).",
+      "evidence_url": "https://www.halifax.ca/city-hall/budget-finances/budget/common-questions"
+    },
+    {
+      "source_report_id": "nl-maa-annual-report",
+      "target_report_id": "nl-maa-assessment",
+      "relationship_type": "cites",
+      "basis": "The Municipal Assessment Agency's own 2024-2025 Annual Report describes its core line of business: 'On behalf of municipalities, we provide residents and commercial property owners with real property values annually.' A self-citation from the Agency's own annual report onto its own core assessment product.",
+      "evidence_url": "https://www.gov.nl.ca/mca/files/MAA-Annual-Report-2024-2025-FINAL-08192025.pdf"
+    },
+    {
+      "source_report_id": "winnipeg-budget",
+      "target_report_id": "winnipeg-assessment-roll",
+      "relationship_type": "uses_data_from",
+      "basis": "The City of Winnipeg's own tax-bill explainer states: 'To calculate the municipal tax amount, the City multiplies the portioned assessment by the municipal mill rate,' with the portioned assessment 'set at 45 percent of the assessed value of the property' and the mill rate itself 'set by City Council through the budget process.' The governing 'Real and Personal Property Municipal Tax Rate By-law' text itself was not independently fetchable (listing page only), so this rests on the City's own explainer page describing the budget-set mill rate applied to the assessment roll.",
+      "evidence_url": "https://www.winnipeg.ca/people-culture/our-city-our-stories/opening-your-2026-property-tax-bill-heres-what-you-need-know"
+    },
+    {
+      "source_report_id": "on-mcu-tuition-framework",
+      "target_report_id": "on-mcu-operating-grants",
+      "relationship_type": "uses_data_from",
+      "basis": "Ontario's Tuition Fee Framework Guidelines state: 'Unless otherwise indicated in these Guidelines, all policies in relation to tuition fees in the current university Ontario Operating Funds Distribution Manual remain in effect,' and define enrolment for tuition purposes as 'fiscal full-time equivalent enrolments eligible and claimed for Ministry operating grant support as defined in the Operating Funds Distribution Manual.'",
+      "evidence_url": "https://www.tcu.gov.on.ca/pepg/mtcu-university-tuition-framework-guidelines-mar2019-en.pdf"
+    },
+    {
+      "source_report_id": "on-mcu-operating-grants",
+      "target_report_id": "statcan-census-population",
+      "relationship_type": "uses_data_from",
+      "basis": "Ontario's official SMA3 Performance/Outcomes-Based Funding Technical Manual, which governs postsecondary operating-grant metrics, names 'Census Data (Statistics Canada)' as the data source for its Community/Local Impact metric (parallel line for colleges via CSER).",
+      "evidence_url": "https://www.uwindsor.ca/strategic-mandate-agreement/sites/uwindsor.ca.strategic-mandate-agreement/files/performance_outcomes-based_funding_technical_manual_-_v1.0_-_final_september_419_en_0.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "br-ibge-pnad-educacao -> br-ibge-pnad-continua (containment, not a dependency)",
+      "source": "br-ibge-pnad-educacao",
+      "target": "br-ibge-pnad-continua",
+      "reason": "note",
+      "why": "Confirmed via IBGE's own product page: the annual Education module was introduced into PNAD Continua itself in 2016 ('foi introduzido na pesquisa o modulo anual de Educacao'), surveying the same sampled households/persons -- a module of, not separate from, the base survey (https://loja.ibge.gov.br/pnad-continua-educac-o-2024.html; corroborated by https://www.ibge.gov.br/estatisticas/sociais/educacao/17270-pnad-continua.html). No dependency edge minted: this report already carries part_of: br-ibge-pnad-continua, and the validator rejects a dependency edge between a report and its own part_of container as redundant double-modeling. Isolated in the pure dependency-graph sense by design, not by omission."
+    },
+    {
+      "edge": "br-inep-sinopse-educacao-basica -> br-inep-censo-escolar (containment, not a dependency)",
+      "source": "br-inep-sinopse-educacao-basica",
+      "target": "br-inep-censo-escolar",
+      "reason": "note",
+      "why": "Confirmed via an INEP-authored article (mirrored at convivaeducacao.org.br) and IBGE's own inter-agency metadata catalog: the Sinopse Estatistica 'traz um resumo dos principais dados coletados no Censo Escolar', prepared annually by INEP's Directorate of Educational Statistics (https://convivaeducacao.org.br/fique_atento/540; https://ces.ibge.gov.br/base-de-dados/metadados/inep/educacao-basica.html). No dependency edge minted: this report already carries part_of: br-inep-censo-escolar, and the validator rejects a dependency edge between a report and its own part_of container. Isolated in the pure dependency-graph sense by design, not by omission."
+    },
+    {
+      "edge": "br-inep-sinopse-educacao-superior -> br-inep-censo-educacao-superior (containment, not a dependency)",
+      "source": "br-inep-sinopse-educacao-superior",
+      "target": "br-inep-censo-educacao-superior",
+      "reason": "note",
+      "why": "Confirmed (independently re-fetched by the orchestrating session) via ABED: the Sinopse Estatistica da Educacao Superior, released by INEP, 'e um resumo consolidado dos principais dados do Censo da Educacao Superior' (https://www.abed.org.br/site/ead-em-dados/censo-da-educacao-superior/sinopse-estatistica/). No dependency edge minted: this report already carries part_of: br-inep-censo-educacao-superior, and the validator rejects a dependency edge between a report and its own part_of container. Isolated in the pure dependency-graph sense by design, not by omission."
+    },
+    {
+      "edge": "br-inep-notas-censo-superior -> br-inep-censo-educacao-superior (containment, not a dependency)",
+      "source": "br-inep-notas-censo-superior",
+      "target": "br-inep-censo-educacao-superior",
+      "reason": "note",
+      "why": "Confirmed (independently re-fetched by the orchestrating session) via ABMES: the Notas Estatisticas were 'elaboradas pelo... (Inep) apresentando, sinteticamente, os principais resultados extraidos do Censo da Educacao Superior 2022' (https://abmes.org.br/documentos/detalhe/993/notas-estatisticas-censo-educacao-superior-2022). No dependency edge minted: this report already carries part_of: br-inep-censo-educacao-superior, and the validator rejects a dependency edge between a report and its own part_of container. Isolated in the pure dependency-graph sense by design, not by omission."
+    },
+    {
+      "edge": "br-pnad-continua / br-ibge-pnad-continua (duplicate node pair, not an edge)",
+      "source": "br-pnad-continua",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED 2026-08-30 (Thomas ruling): confirmed duplicate, merge into br-ibge-pnad-continua. Node `br-pnad-continua` removed from the corpus. Exact-duplicate flag, not researched/wired this round: br-pnad-continua (isolated, zero edges) and br-ibge-pnad-continua (well-wired, 5 edges) share the identical title 'Pesquisa Nacional por Amostra de Domicilios Continua (PNAD Continua)'. Same pattern as AE round 11 / Indonesia round 10 duplicate flags -- flagged for Thomas's ruling rather than silently merged or wired."
+    },
+    {
+      "edge": "in-mospi-nas / in-mospi-national-accounts-statistics (duplicate node pair, not an edge)",
+      "source": "in-mospi-nas",
+      "target": null,
+      "reason": "note",
+      "why": "RESOLVED 2026-08-30 (Thomas ruling): confirmed duplicate, merge into in-mospi-national-accounts-statistics. Node `in-mospi-nas` removed from the corpus. Exact-duplicate flag, not researched/wired this round: in-mospi-nas (isolated, zero edges) and in-mospi-national-accounts-statistics (well-wired, 12 incoming edges) share the identical title 'National Accounts Statistics'. Flagged for Thomas's ruling rather than silently merged or wired."
+    },
+    {
+      "edge": "br-pe-condepe-fidem -> br-ibge-pib-municipio-recife",
+      "source": "br-pe-condepe-fidem",
+      "target": "br-ibge-pib-municipio-recife",
+      "reason": "wrong-target",
+      "why": "CONDEPE/FIDEM's own domain was unreachable this round (robots.txt/proxy errors across 6+ attempts); the only citation found (a Tribunal de Contas do Estado de Pernambuco footnote, 'Sistema de Contas Regionais, Agencia CONDEPE/FIDEM e IBGE') is too generic to count as quotable methodology evidence. More importantly, IBGE's own current technical note for this product names Pernambuco's real institutional partner as 'Secretaria de Estado de Planejamento, Gestao e Desenvolvimento Regional' -- NOT CONDEPE/FIDEM. CONDEPE/FIDEM may publish its own PIB-adjacent releases citing IBGE, but is not IBGE's named counterpart for the municipal-GDP product specifically. No corpus node exists for the actual named partner secretariat, so no edge minted either direction."
+    },
+    {
+      "edge": "br-decreto-11177-2022 -> (any IBGE flagship statistical product)",
+      "source": "br-decreto-11177-2022",
+      "target": null,
+      "reason": "no-document",
+      "why": "Decreto 11.177/2022 is purely an administrative/organizational instrument -- it approves IBGE's Statute and internal governance structure (Conselho Diretor, Conselho Curador, commissioned positions), with no statistical-methodology provisions. It is not referenced on IBGE's own 'base juridica' page in connection with any flagship product; the real anchoring legislation for IBGE's core statistics is older law (Lei 5.878/1973, Lei 8.184/1991, Lei 6.186/1974). No citation of this decree found on br-ibge-sistema-contas-nacionais, br-ibge-contas-regionais, br-ibge-censo-demografico, or br-ibge-pnad-continua's own pages. Its only honest links would be to an IBGE governance/organizational-structure node, which does not exist in this corpus."
+    },
+    {
+      "edge": "br-poa-anuario-estatistico -> (any source)",
+      "source": "br-poa-anuario-estatistico",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "Confirmed via 6 separate fetch attempts (landing page, 2022/2023 editions, archive/PDF searches, ObservaPOA) that since the 51a edicao (2021) the Anuario Estatistico de Porto Alegre is no longer published as a PDF/text document -- it moved entirely to an interactive Power BI panel with no extractable static text (loading-spinner shell only). No older PDF editions locatable online. The source's own format change (PDF to BI dashboard) is the reason, not lack of effort -- the Issuu-case pattern this DroppedReason exists for."
+    },
+    {
+      "edge": "br-am-anuario-estatistico -> (IBGE/national sources)",
+      "source": "br-am-anuario-estatistico",
+      "target": null,
+      "reason": "deferred",
+      "why": "Fetched 2013-2015 editions (portaldoplanejamento.am.gov.br); no consolidated methodology/sources section exists in the front matter, only generic per-table geographic cites ('Fonte: Anuario Estatistico do Brasil - IBGE'). WebFetch's summarizer only surfaced the front portion of these large (500+ page) PDFs, blocking access to the populacao/educacao/economia chapters where a real per-table source note likely exists -- a tooling limitation, not a confirmed absence. Worth retrying with a page-range-capable fetch tool."
+    },
+    {
+      "edge": "br-ba-sei-anuario -> (IBGE/PNAD/DATASUS/INEP)",
+      "source": "br-ba-sei-anuario",
+      "target": null,
+      "reason": "deferred",
+      "why": "Fetched the 2012/26a edicao (ba.gov.br/sei). The abbreviations list explicitly defines IBGE, PNAD, DATASUS and INEP (implying their use as sources) and one direct cartogram cite reads 'Fonte: IBGE (2000)', but the same large-PDF tooling limitation as Amazonas blocked verbatim per-table Fonte lines for the populacao/educacao/contas-regionais chapters (pages ~130-689). At the 2012 vintage 'PNAD' likely means the classic annual PNAD, not PNAD Continua (which only started in 2012), so a mapping to br-ibge-pnad-continua specifically would be premature. sei.ba.gov.br's own 'Fontes de Dados' page returned redirect-loop errors on every attempt. Worth retrying with a page-range-capable fetch tool or a working sei.ba.gov.br connection."
+    },
+    {
+      "edge": "br-epe-anuario-energia-eletrica -> Balanco Energetico Nacional (BEN)",
+      "source": "br-epe-anuario-energia-eletrica",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "EPE's Anuario Estatistico de Energia Eletrica 2024 cites 'Fonte: BEN (2024)' repeatedly as the primary source for installed-capacity, generation and emissions data -- the single clearest citation found in this round's BR research. BEN (Balanco Energetico Nacional), EPE's other flagship annual publication, is not a corpus node. epe.gov.br itself was unreachable this round (robots.txt/ConnectTimeout on every attempt); the fact sheet PDF was fetched via a Stanford-hosted mirror of the identical official file. Candidate for minting: title 'Balanco Energetico Nacional (BEN)', publisher EPE, url https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/balanco-energetico-nacional-ben (itself unreachable this round -- needs independent verification once reachable, per this project's evidence standard)."
+    },
+    {
+      "edge": "br-epe-anuario-energia-eletrica -> IEA World Energy Statistics",
+      "source": "br-epe-anuario-energia-eletrica",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "EPE's Anuario Estatistico de Energia Eletrica 2024 cites 'Fonte: IEA (2024) para dados internacionais... e BEN (2024) para dados do Brasil' for its international emissions-comparison chart. IEA (International Energy Agency) has no corpus node. Candidate for minting: 'IEA World Energy Statistics/CO2 emissions data', publisher International Energy Agency, url https://www.iea.org -- not independently verified this round, logged as a lead only."
+    },
+    {
+      "edge": "in-gst-compensation-act-2017 -> (any statistical publication)",
+      "source": "in-gst-compensation-act-2017",
+      "target": null,
+      "reason": "no-document",
+      "why": "The Act's own text is legal statute (definitions, compensation formula, cess schedule). Found only a PIB press release citing 'Section 7 of the GST (Compensation to States) Act, 2017' as legal basis, and CAG audit coverage citing the Act -- neither is a corpus statistical-publication node. No document located citing this Act as the basis for a corpus report's own data."
+    },
+    {
+      "edge": "in-mospi-nss-health -> (in-mospi-national-accounts-statistics or in-mohfw-national-health-profile)",
+      "source": "in-mospi-nss-health",
+      "target": null,
+      "reason": "no-document",
+      "why": "NAS 2023's methodology chapters show no health-sector cross-reference to NSS. NHP 2023's Health Finance Indicators chapter explicitly excludes NSS household health consumption surveys from its cited sources (DGHS, state health authorities, SRS instead). No document found citing this survey by name either direction."
+    },
+    {
+      "edge": "in-tourism-statistics -> (any national accounts/census node)",
+      "source": "in-tourism-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "India Tourism Statistics 2022's own disclaimer names its sources as UNWTO, State/UT Tourism Departments, Bureau of Immigration and the Archaeological Survey of India -- no RBI, Census or MOSPI citation found. No downstream consumer document found either (only aggregator sites, not primary sources)."
+    },
+    {
+      "edge": "in-mospi-value-of-output-agriculture -> in-mospi-national-accounts-statistics",
+      "source": "in-mospi-value-of-output-agriculture",
+      "target": "in-mospi-national-accounts-statistics",
+      "reason": "no-document",
+      "why": "The report's own brochure confirms it is produced by the same National Accounts Division as NAS and released after NAS's aggregate figures ('after the major aggregates at all India level have been released in the form of National Accounts Statistics'), but this establishes sequencing and shared authorship, not a stated sourcing relationship. NAS 2023's own methodology document does not cite the Value of Output brochure by name as an input -- its agriculture GVA methodology lists DES production/price data directly instead. Too weak an inference to mint under this project's evidence standard."
+    },
+    {
+      "edge": "in-ncrb-crime-in-india -> MOSPI Statistical Year Book of India",
+      "source": "in-ncrb-crime-in-india",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "MOSPI's Statistical Year Book India, Chapter 37 'Crime Statistics', states: \"'Crime in India', an annual compilation of NCRB, is being published since 1953\" and cites 'Crime in India 2013, National Crime Records Bureau' in its reference list -- a real, quotable citation. 'Statistical Year Book India' is not a corpus node. Logged as a lead for whoever mints that node."
+    },
+    {
+      "edge": "in-maharashtra-handbook-basic-statistics -> (any national source)",
+      "source": "in-maharashtra-handbook-basic-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "The Handbook of Basic Statistics of Maharashtra 2011's preface acknowledges 'co-operation extended by various departments of the State Government, Central Government and autonomous organisations' -- generic, unnamed 'Central Government', not a specific citable series. Only the 2011 edition was accessible; a newer edition might have more specific per-table source notes."
+    },
+    {
+      "edge": "in-assam-statistical-handbook -> in-census-india (or similar)",
+      "source": "in-assam-statistical-handbook",
+      "target": null,
+      "reason": "deferred",
+      "why": "des.assam.gov.in unreachable across 2012/2019/2023/2024/2025 editions (ConnectTimeout/DNS failures, an infrastructure limitation of this session, not a content-based refusal); Scribd mirrors were JS-gated with no text extraction. Unresolved, not negative -- worth retrying from an environment with reliable access to Indian state-government domains."
+    },
+    {
+      "edge": "in-bihar-at-a-glance -> in-census-india (or similar)",
+      "source": "in-bihar-at-a-glance",
+      "target": null,
+      "reason": "deferred",
+      "why": "dse.bihar.gov.in (the same domain that worked for in-bihar-statistical-handbook, a sibling DES Bihar publication) refused repeatedly for this specific file across both 2016 and 2020 editions (robots.txt fetch failures). Unresolved, not negative -- the sibling handbook's confirmed Census citation pattern makes this a plausible retry candidate."
+    },
+    {
+      "edge": "in-chhattisgarh-statistical-abstract -> in-census-india (or similar)",
+      "source": "in-chhattisgarh-statistical-abstract",
+      "target": null,
+      "reason": "deferred",
+      "why": "descg.gov.in unreachable across the 2011-12, 2017-18 and 2018-19 editions (ConnectTimeout every attempt). Unresolved, not negative."
+    },
+    {
+      "edge": "in-karnataka-at-a-glance -> in-census-india (or similar)",
+      "source": "in-karnataka-at-a-glance",
+      "target": null,
+      "reason": "deferred",
+      "why": "des.karnataka.gov.in and data.gov.in/karnataka.data.gov.in either failed to load or described the publication's contents without naming national data sources; kgis.ksrsac.in loaded but had no source citations. No accessible PDF of the actual document text found. Unresolved, not negative."
+    },
+    {
+      "edge": "in-maharashtra-district-series -> in-census-india (or similar)",
+      "source": "in-maharashtra-district-series",
+      "target": null,
+      "reason": "deferred",
+      "why": "Gadchiroli's district statistical page confirmed 'District Social and Economic Review' PDFs exist for 2019-2024, but WebFetch could not extract the underlying JS-rendered download hrefs, and direct URL guesses failed. Satara/Beed/Ahmednagar portals also tried without success. Unresolved, not negative -- a real, confirmed-to-exist document just not reachable this round."
+    },
+    {
+      "edge": "in-odisha-district-at-a-glance -> in-census-india (or similar)",
+      "source": "in-odisha-district-at-a-glance",
+      "target": null,
+      "reason": "deferred",
+      "why": "Odisha district subdomains (Angul, Kalahandi, Balangir) unreachable; search surfaced only the Census of India's own District Census Handbook (a different, Census-published document) as an accessible alternative, not substituted since it is not the actual target document. Unresolved, not negative."
+    },
+    {
+      "edge": "hamilton-budget -> mpac-assessment",
+      "source": "hamilton-budget",
+      "target": null,
+      "reason": "no-document",
+      "why": "Fetched the full 2026 Staff Proposed Tax-Supported Budget Book: the only MPAC reference is a $7,454,000 funding line-item for MPAC as a 'Board & Agency', not a data-source citation. No assessment-growth/MPAC methodology language, no tax-bylaw or financial-statement citation found."
+    },
+    {
+      "edge": "csf-budget -> bc-assessment-authority",
+      "source": "csf-budget",
+      "target": null,
+      "reason": "denied",
+      "why": "School District No. 93 (Conseil scolaire francophone)'s own Annual Budget document shows revenue entirely from Ministry of Education and Child Care grants, federal grants, investment income and rentals/leases -- no property-tax-linked revenue line at all. As a province-wide francophone authority funded purely through a Ministry enrolment/demographics/geography formula rather than local property tax, the document affirmatively rules out this edge rather than merely failing to confirm it."
+    },
+    {
+      "edge": "regina-financial-statements -> sama-assessment-return",
+      "source": "regina-financial-statements",
+      "target": null,
+      "reason": "no-document",
+      "why": "Regina's 2025 Public Accounts PDF (the actual 'consolidated audited financial statements' component) contains zero mention of SAMA or property assessment. The narrative Annual Report (MD&A section) was too large to fetch and remains unchecked -- a future attempt with a different fetch strategy could still find something there."
+    },
+    {
+      "edge": "stjohns-budget -> nl-maa-assessment",
+      "source": "stjohns-budget",
+      "target": null,
+      "reason": "denied",
+      "why": "St. John's own assessment page confirms assessments are 'conducted by professional, skilled and experienced assessors working for the City of St. John's', completed by the City's own Assessment Division under the City's own Assessment Act (RSNL 1990, c S-1) -- separate from the provincial Municipal Assessment Agency Act that governs other NL municipalities. This is a structural finding, not just an unfound citation: St. John's is NOT an MAA client, so no MAA-consuming edge should exist for this city."
+    },
+    {
+      "edge": "brampton-financial-statements -> mpac-assessment",
+      "source": "brampton-financial-statements",
+      "target": null,
+      "reason": "no-document",
+      "why": "Full 2025 Financial Report checked -- no MPAC/assessment mention anywhere. References the budget-approval process generally but no specific tax-rate-bylaw document."
+    },
+    {
+      "edge": "bc-assessment-year-end-roll-report -> bc-assessment-authority",
+      "source": "bc-assessment-year-end-roll-report",
+      "target": null,
+      "reason": "no-document",
+      "why": "Both are BC Assessment products aimed at different audiences (Year-End Roll Report to taxing authorities for planning; Annual Report/Service Plan for governance reporting) -- BC Assessment's own 'Reports and plans' page lists only the latter two as its regular publications, not the Year-End Roll Report. No document found where one cites or reports on the other."
+    },
+    {
+      "edge": "sama-assessment-return -> regina-financial-statements",
+      "source": "sama-assessment-return",
+      "target": "regina-financial-statements",
+      "reason": "denied",
+      "why": "SAMA's own site states explicitly that Saskatoon, Regina, North Battleford, Swift Current and Prince Albert conduct their own revaluations rather than using SAMA's: 'Some larger cities conduct the revaluation themselves, according to the professional standard of principles and practices laid down by SAMA.' Regina's own 2022 Annual Report contains no mention of SAMA. The real consumers of a SAMA assessment return are small municipalities/RMs (confirmed via RM of Francis and Regina Beach's own sites), none of which are corpus nodes -- out of scope for this corpus."
+    },
+    {
+      "edge": "pei-taxation-property-assessment -> (Charlottetown budget document)",
+      "source": "pei-taxation-property-assessment",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "PEI's Real Property Tax Act Regulations state the Minister forwards each municipality an annual assessment list, and that this list satisfies the relevant statutory requirement -- a genuine statutory-level citation, but no Charlottetown-specific budget/bylaw document with an accessible, quotable citation was found (5 attempts). The real target is the PEI Real Property Tax Act Regulations themselves, which are not a corpus node. Candidate for minting: Government of PEI, Legislative Counsel Office, url https://www.princeedwardisland.ca/sites/default/files/legislation/r05g-real_property_tax_act_regulations.pdf."
+    },
+    {
+      "edge": "ab-municipalaffairs-lgff-operating -> ab-municipalaffairs-equalized-assessment",
+      "source": "ab-municipalaffairs-lgff-operating",
+      "target": null,
+      "reason": "deferred",
+      "why": "The LGFF Operating Program Guidelines make no mention of equalized assessment ('funding amounts from 2023 will be continued for 2024', no formula explanation). Equalized assessment IS explicitly used, but only in the separate LGFF Capital Funding Allocation Formula Fact Sheet's needs-based component ('its equalized assessment per capita must be below 80 per cent of the provincial average'). A real dependency exists, just on a CAPITAL-funding node this corpus does not have, not on the operating-funding node researched here."
+    },
+    {
+      "edge": "bc-housing-rental-assistance-program -> (any StatCan/CMHC data source)",
+      "source": "bc-housing-rental-assistance-program",
+      "target": null,
+      "reason": "no-document",
+      "why": "RAP's income/asset thresholds ($1,800/month base income, $60,000 income limit, $100,000 asset ceiling) are stated as figures BC Housing sets and adjusts itself ('may be adjusted by BC Housing from time to time') -- no citation to StatCan, CMHC Housing Income Limits, or any external document found in either the RAP or CBCHB program materials."
+    },
+    {
+      "edge": "pei-finance-budget-paper-economy -> (StatCan national accounts)",
+      "source": "pei-finance-budget-paper-economy",
+      "target": null,
+      "reason": "no-document",
+      "why": "No document specifically titled '2026 Budget Paper on the Economy' was locatable on princeedwardisland.ca -- the most recent confirmed edition is 2025 (April 10, 2025). That edition's full text has no mention of 'Statistics Canada' anywhere; its explicit citations are 'Bank of Canada, Industry Canada' and 'PEI Department of Finance'. Flagging the possible vintage mismatch (corpus node names 2026, only a 2025 edition was found) for the project maintainer to confirm."
+    },
+    {
+      "edge": "qc-mfq-point-situation -> (StatCan / ISQ national accounts)",
+      "source": "qc-mfq-point-situation",
+      "target": null,
+      "reason": "no-document",
+      "why": "'Le point sur la situation economique et financiere du Quebec' (Automne 2025) cites 'Statistique Canada' and 'Institut de la statistique du Quebec' together in multiple table source notes (e.g. Table A.6: 'production, labor market, and price indices data'), but these citations are generic across a broad table rather than naming one specific series matchable to a single existing StatCan or ISQ corpus node -- too imprecise to pin to one target under this project's evidence standard. Independently re-verified by the orchestrating session."
+    },
+    {
+      "edge": "yt-bureau-statistics -> (any Yukon fiscal document)",
+      "source": "yt-bureau-statistics",
+      "target": null,
+      "reason": "no-document",
+      "why": "yt-fiscal-outlook (2026-27) and yt-budget-main-estimates (2026-27) both checked in full -- neither mentions 'Yukon Bureau of Statistics' anywhere; both cite Statistics Canada or the Department of Finance instead. yt-public-accounts (2024-25) exceeded fetch size (>30MB) and remains unconfirmed rather than a hard negative. yt-statistical-review is PUBLISHED BY YBS itself (a publisher relationship, not a citing relationship) so does not produce a 'uses_data_from' edge under this project's convention."
+    },
+    {
+      "edge": "mb-municipal-financial-plan -> mb-property-assessment-services",
+      "source": "mb-municipal-financial-plan",
+      "target": "mb-property-assessment-services",
+      "reason": "no-document",
+      "why": "Manitoba's own Financial Plan FAQ and 'Navigating Your Financial Plan' presentation describe the Assessment Branch as requesting information FROM municipalities annually ('The Assessment Branch requests information from municipalities annually on the number of sites, fee and previous year mill rate') -- the direction runs the opposite way from municipalities consuming assessed values FROM the Branch. Independently re-fetched and re-verified by the orchestrating session; the direction/substance mismatch held up on a second read, not just a first-pass miss."
+    },
+    {
+      "edge": "gains-benefit-rates -> (federal OAS/GIS)",
+      "source": "gains-benefit-rates",
+      "target": null,
+      "reason": "no-node-yet",
+      "why": "Ontario's own GAINS page states payments 'are provided on top of the Old Age Security (OAS) pension and the Guaranteed Income Supplement (GIS) payments you may receive from the federal government', with the payment amount 'determined based on information received from Employment and Social Development Canada'. No corpus node exists for a federal OAS or GIS program/statistics release (checked: no matching id in the corpus). Logged as a lead for whoever mints that node."
+    }
+  ]
+}
