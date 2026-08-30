@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "date": "2026-08-30",
+    "actor": "Claude -- follow-up round on br-in-ca-wiring-round-2026-08-30's no-node-yet leads and tooling-blocked retries, per HANDOFF's queued 'BR/IN/CA remainder' item",
+    "scope": "3 new nodes minted (pei-real-property-tax-act-regulations, esdc-oas-gis-quarterly, in-mospi-statistical-year-book), 8 new dependencies (1 BR edge to an already-existing-but-missed node, 1 CA PEI, 1 CA Ontario/federal, 1 IN federal, 1 CA municipal, 2 BR provincial yearbooks, 1 IN state handbook via an archive.org retry). One direction correction caught on independent re-verification (in-ncrb-crime-in-india's dropped note had the citing/cited direction backwards -- Statistical Year Book India cites Crime in India, not the reverse). One research miss caught: br-epe-balanco-energetico-nacional was flagged 'not a corpus node' by the prior round but had existed since the original 2026-08-17 seed import all along. A third duplicate-node pair found (br-censo-demografico / br-ibge-censo-demografico), flagged not merged. India state-handbook retries: Assam resolved via an archive.org proxy (its live domain is confirmed unreachable even from a real Chrome browser on the user's own machine, not just this session's sandbox); Bihar-at-a-Glance located via the same trick but is a scanned-image PDF with no text layer (a tooling gap, not a network one); Chhattisgarh/Karnataka/Maharashtra/Odisha remain genuinely blocked or inconclusive despite the retry. IEA lead for br-epe-anuario-energia-eletrica left open (unverified, no specific document identified). Every edge below independently fetched and quote-verified this round, not taken from the prior round's dropped notes on their word.",
+    "status": "ready to merge"
+  },
+  "reports": [
+    {
+      "id": "pei-real-property-tax-act-regulations",
+      "title": "Real Property Tax Act Regulations (EC512/72 et seq.)",
+      "publisher": "Government of Prince Edward Island",
+      "country": "CA",
+      "jurisdiction_level": "provincial",
+      "region": "Prince Edward Island",
+      "description": "One-off foundational regulatory instrument made under the Real Property Assessment Act, setting out the annual property-assessment-list and tax-notice process PEI municipalities' own tax bills and financial statements depend on. Section 3 requires the Minister to forward each municipality an annual real-property list by March 31, and deems an annual assessment list under the Real Property Assessment Act sufficient to meet that requirement.",
+      "domains": [
+        "assessment"
+      ],
+      "url": "https://www.princeedwardisland.ca/sites/default/files/legislation/r05g-real_property_tax_act_regulations.pdf",
+      "source_kind": "official",
+      "last_updated": null
+    },
+    {
+      "id": "esdc-oas-gis-quarterly",
+      "title": "Maximum Benefit Amounts and Related Figures — Canada Pension Plan and Old Age Security (Quarterly)",
+      "publisher": "Employment and Social Development Canada",
+      "country": "CA",
+      "jurisdiction_level": "federal",
+      "region": "Canada",
+      "description": "Official quarterly report giving Canada Pension Plan maximum benefit amounts alongside Old Age Security (OAS) pension and Guaranteed Income Supplement (GIS) monthly payment amounts, including GIS top-up tables by marital status and income level. Successor to the OAS payments page's discontinued rate tables, which now point here for combined OAS/GIS figures.",
+      "releases_per_year": 4,
+      "domains": [
+        "benefits"
+      ],
+      "url": "https://www.canada.ca/en/employment-social-development/programs/pensions/pension/statistics/2026-quarterly-january-march.html",
+      "source_kind": "official",
+      "last_updated": null
+    },
+    {
+      "id": "in-mospi-statistical-year-book",
+      "title": "Statistical Year Book India",
+      "publisher": "National Statistics Office, Ministry of Statistics and Programme Implementation, Government of India",
+      "country": "IN",
+      "jurisdiction_level": "federal",
+      "region": "India",
+      "description": "Annual omnibus statistical compendium covering all major sectors of the Indian economy and society (agriculture, industry, crime, health, education, and more) chapter by chapter, each citing the specialized national source series it compiles from.",
+      "releases_per_year": 1,
+      "domains": [
+        "general-statistics"
+      ],
+      "url": "https://www.mospi.gov.in/statistical-year-book-india",
+      "source_kind": "official",
+      "last_updated": null
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "br-epe-anuario-energia-eletrica",
+      "target_report_id": "br-epe-balanco-energetico-nacional",
+      "relationship_type": "cites",
+      "basis": "EPE's own 2026 Anuario Estatistico de Energia Eletrica 'Destaques' (highlights) dashboard, discussing 2025 electricity generation by source, states: 'Mais informacoes sobre a geracao de eletricidade estao disponiveis em (Empresa de Pesquisa Energetica (EPE), 2026a)', where reference epe2026a in the page's own bibliography resolves to 'Balanco Energetico Nacional 2026' at EPE's own BEN url.",
+      "evidence_url": "https://dashboard.epe.gov.br/apps/anuario-livro/livro/pt/destaques.html"
+    },
+    {
+      "source_report_id": "pei-taxation-property-assessment",
+      "target_report_id": "pei-real-property-tax-act-regulations",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Regulations' own s.3 sets out the annual assessment-list-to-municipality process PEI's property assessment notices and tax bills follow: 'On or before March 31 each year, the Minister shall forward to each municipality a list of all real property... within the boundaries of the municipality,' and s.3(4) deems 'an assessment list provided to a municipality annually pursuant to the Real Property Assessment Act' sufficient to meet that requirement.",
+      "evidence_url": "https://www.princeedwardisland.ca/sites/default/files/legislation/r05g-real_property_tax_act_regulations.pdf"
+    },
+    {
+      "source_report_id": "gains-benefit-rates",
+      "target_report_id": "esdc-oas-gis-quarterly",
+      "relationship_type": "calculated_from",
+      "basis": "Ontario's own GAINS benefit-rates page states: 'GAINS payments are provided on top of the Old Age Security (OAS) pension and the Guaranteed Income Supplement (GIS) payments you may receive from the federal government' -- the GAINS top-up is a formula computed against the recipient's federal OAS/GIS amount, which ESDC's quarterly report is the official published source for.",
+      "evidence_url": "https://data.ontario.ca/dataset/ontario-guaranteed-annual-income-system-benefit-rates"
+    },
+    {
+      "source_report_id": "in-mospi-statistical-year-book",
+      "target_report_id": "in-ncrb-crime-in-india",
+      "relationship_type": "uses_data_from",
+      "basis": "Statistical Year Book India's own Chapter 37 ('Crime Statistics'), section 37.2, states: '\"Crime in India\", an annual compilation of NCRB, is being published since 1953. For this publication, the information in 22 standardized formats is being collected from all the 36 States/UTs as well as from 35 mega cities,' and the chapter's own References section cites 'Crime in India 2014, National Crime Records Bureau, Ministry of Home Affairs'.",
+      "evidence_url": "https://mospi.gov.in/sites/default/files/Statistical_year_book_india_chapters/ch37.pdf"
+    },
+    {
+      "source_report_id": "brampton-financial-statements",
+      "target_report_id": "mpac-assessment",
+      "relationship_type": "uses_data_from",
+      "basis": "The City of Brampton's own Taxes and Assessment page states: 'The City of Brampton calculates the tax bills based on assessment information supplied by MPAC' -- the same MPAC-sourced assessment roll underlies both the tax bills and the property-tax-revenue and taxable-assessment schedules reported in the City's audited consolidated financial statements.",
+      "evidence_url": "https://www.brampton.ca/EN/residents/Taxes-Assessment/pages/assessment.aspx"
+    },
+    {
+      "source_report_id": "br-am-anuario-estatistico",
+      "target_report_id": "br-ibge-censo-demografico",
+      "relationship_type": "uses_data_from",
+      "basis": "The Anuario Estatistico do Amazonas (2015 edition, SEDECTI's own official series) cites IBGE census data repeatedly across its demographic tables, e.g. 'Fonte: IBGE / CENSO 2010.' and 'Fonte: IBGE, Censo Demografico 2010.' -- the current (35th, 2025) edition moved to an interactive BI platform with no extractable static text, but the series' sourcing practice is well established across two decades of prior editions.",
+      "evidence_url": "https://portaldoplanejamento.am.gov.br/wp-content/uploads/2024/09/Anuario_Estatistico_do_Amazonas_ano_2015.pdf"
+    },
+    {
+      "source_report_id": "br-ba-sei-anuario",
+      "target_report_id": "br-ibge-censo-demografico",
+      "relationship_type": "uses_data_from",
+      "basis": "The Anuario Estatistico da Bahia (2012 edition, hosted on SEI/ba.gov.br's own current site) cites IBGE census data repeatedly, e.g. 'Fonte: IBGE, 2010.' and 'Fonte: IBGE (2010), Derba (2007).'",
+      "evidence_url": "https://www.ba.gov.br/sei/sites/site-sei/files/2025-06/anuario_estatistico_2012.pdf"
+    },
+    {
+      "source_report_id": "in-assam-statistical-handbook",
+      "target_report_id": "in-census-india",
+      "relationship_type": "uses_data_from",
+      "basis": "The Statistical Handbook Assam 2024 (des.assam.gov.in's own official publication, retrieved via an archive.org snapshot after the live domain proved unreachable) repeatedly cites Census of India as a source, e.g. 'Source: (Col.3 to Col.21) Census of India, 2011.' and 'on the basis of Census of India 2011 figures.'",
+      "evidence_url": "https://web.archive.org/web/20250424155535/https://des.assam.gov.in/sites/default/files/swf_utility_folder/departments/ecostat_medhassu_in_oid_3/this_comm/statistical_handbook_assam_2024_new.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "br-censo-demografico (node) vs br-ibge-censo-demografico (node)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "Third duplicate-node pair found this session (same 'flag, don't merge or silently wire' pattern as br-pnad-continua/br-ibge-pnad-continua and in-mospi-nas/in-mospi-national-accounts-statistics, both flagged earlier today): identical title 'Censo Demografico', same publisher (IBGE), same subject (the 2010/2022 decennial census), different ids. br-ibge-censo-demografico is the better-connected of the two (7 edges vs 2) and was used as the target for this round's new BR edges. Needs Thomas's ruling like the other two."
+    }
+  ]
+}

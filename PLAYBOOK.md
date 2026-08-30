@@ -420,108 +420,70 @@ country/file/round, not a single site's own one-off quirk.
 
 ## 7. Standing decisions — do not re-raise
 
+**Bar for adding to this section: a rule that will change how a FUTURE
+round decides something, not a record of one specific edge's fate — the
+data's own `_dropped`/live entry is that record.** A one-off single-
+node/single-edge call belongs there, not here as its own paragraph.
+
 Geo-exploration: dropped entirely. Right-drag panning + low-end zoom:
 confirmed solid. Arrow-key fly navigation: offered, declined. Parked: 134
 uncountable cadences; 7 single-use `proposed:` tags; `diary.csv` is Thomas's
 personal file — leave it alone.
 
 **Treaty and agreement nodes: retired, do not re-import** (Thomas,
-2026-08-29). 72 nodes were removed from the corpus as a modelling decision:
-bilateral and plurilateral trade/economic-partnership agreements (KORUS,
-RCEP, CPTPP, the EVFTA/VJEPA/VKFTA family, ANZTEC/ASTEP/TIFA, MERCOSUR and
-CAN instruments), investment-treaty and FTA "network overview" framings,
-multilateral environmental conventions (Basel, Ramsar/CITES, Montreal,
-Stockholm/Rotterdam, UNCCD, Paris), and bloc-membership or bilateral-
-relationship framings (ASEAN participation, OECD/WTO membership, NATO
-membership, "comprehensive strategic partnership" nodes, the OFAC sanctions
-regime's children). **The reason is structural, not evidential**: this is a
-graph of reports whose methodology or data feeds other reports, and a treaty
-is not a publication with a methodology dependency — no research round could
-ever wire them, and they were 7% of the corpus and 11% of its isolated
-nodes. All 72 were orphans, so no edge was broken. Full records are archived
-verbatim in `notes/retired-nodes-2026-08-29.json`.
+2026-08-29). 72 nodes removed — bilateral/plurilateral trade agreements,
+investment-treaty and bloc-membership framings, multilateral conventions.
+Full record and examples: `notes/retired-nodes-2026-08-29.json`. **The
+reason is structural, not evidential**: a treaty isn't a publication with
+a methodology dependency, no research round could ever wire one — they
+were 7% of the corpus and 11% of its isolated nodes, all orphans, no edge
+broken. Three nodes look treaty-shaped but deliberately survived:
+`ve-ofac-sanciones` (a `part_of` container — removing it orphans two
+other nodes), `tr-eu-trade` (named like a treaty, actually merchandise
+trade statistics), `sdmx-standard`/`sna-2025` (statistical standards, not
+agreements).
 
-Consequences worth knowing. **A legal instrument is still a legitimate node
-when a statistical release names it as its own legal or methodological
-basis** — Japan's Statistics Act, Brazil's Lei 8.213, the EAEU statistical
-protocol, the UEMOA financial-regime directive, national social-protection
-acts, the EDP inventories: whole rounds are built on that family and it is
-untouched. The cut is "instrument nobody's statistics depend on", not
-"instrument". Three nodes deliberately survived the sweep:
-`ve-ofac-sanciones` (it is the `part_of` container for two other nodes,
-so removing it would leave dangling references), `tr-eu-trade` (named like a
-treaty, actually merchandise trade statistics), and `sdmx-standard` /
-`sna-2025` (statistical standards, not agreements).
+**A legal instrument stays a legitimate node when a statistical release
+names it as its own legal/methodological basis** — Japan's Statistics
+Act, Brazil's Lei 8.213, the EAEU statistical protocol, national social-
+protection acts, the EDP inventories: whole rounds are built on that
+family, untouched by the sweep above. The cut is "instrument nobody's
+statistics depend on," not "instrument."
 
-**Analytical meta-nodes: 5 retired, and the sweep was deliberately stopped
-there** (Thomas, 2026-08-29). Removed: `jp-prefectural-contrast-summary` and
-`kr-regional-contrast-extended` (the corpus's own `_notes` call them a
-"Meta-node" / "Conceptual and data framework" / "Synthesised framework" — a
-comparison device, not a subject), `vn-defence-policy` (a "policy-frame node"
-with no `url` at all), `id-defence-posture` (a "Policy-frame node that
-connects the defence cluster to the strategic-geography layer"), and
-`tw-new-southbound-tech` (a policy framework whose url is an Executive Yuan
-landing page, not a release).
+**Analytical meta-nodes: 5 retired, sweep deliberately stopped there**
+(Thomas, 2026-08-29) — comparison-device/policy-frame nodes with no
+publication behind them. **Do not extend this by keyword search: both
+obvious signals are contaminated.** "framing" is a Grok verbal tic that
+also appears in real statistics-node titles ("Statistics and framing of
+remittance inflows"). The corpus's own "meta-node" `_notes` phrasing
+describes a node's ROLE IN THE GRAPH, not its nature — it lands on the
+Okinawa Statistical Yearbook and Taiwan's Energy Statistics Handbook,
+both genuine. A title-regex sweep caught 36 candidates, only 5 were real.
 
-**Do not extend this sweep by keyword — both obvious signals are
-contaminated.** "framing" is a Grok verbal tic that appears in the titles and
-descriptions of perfectly real statistics nodes ("Statistics and framing of
-remittance inflows", "Border trade statistics and framing", "Rice production
-and export statistics ... food-security framing"). And the corpus's own
-"meta-node" phrasing in `_notes` describes a node's ROLE IN THE GRAPH, not its
-nature — it lands on the Okinawa Statistical Yearbook, Fortaleza and Recife
-municipal GDP, and Taiwan's Energy Statistics Handbook, all genuine
-publications. A title-regex sweep of this family caught 36 nodes of which 5
-were removable.
+**Above all, never sweep the "— high/low-poverty contrast" nodes.** They
+read like analytical framings and aren't — they're real subnational
+jurisdictions (Ecuadorian/Peruvian/Uruguayan/Paraguayan/Bolivian/Chilean)
+that Grok titled as a poverty-contrast set. They're the bulk of the
+unresearched South America seam; deleting them destroys the next round
+before it starts.
 
-**Above all, do not sweep the "— high-poverty contrast" / "— low-poverty
-contrast" nodes.** They read like analytical framings and are not: they are
-subnational jurisdictions (Ecuadorian provinces, Peruvian and Uruguayan and
-Paraguayan departments, Bolivian departments, Chilean regions) that Grok
-generated as a poverty-contrast set and titled accordingly. They are the bulk
-of the unresearched South America seam — deleting them would destroy the next
-research round before it happens.
+**Chart/figure-caption sourcing clears the evidence bar** (Thomas,
+2026-08-30) — a figure-source line under a chart is a citation, same
+standing as body-text prose. General ruling for every future round, not
+just the edge that prompted it.
 
-**Iran's SNA vintage** (`ir-national-accounts` -> `sna-2008`, plus the six
-held SNA-93 edges): disregarded (Thomas, 2026-08-29). Leave the live
-`sna-2008` edge as is, caveat and all; the six held SNA-93 edges stay
-unminted. Don't re-raise the SCI/UNSD SNA-93 contradiction.
-
-**Generic COICOP citations** (Iran, Iraq — name plain "COICOP" with no
-revision): don't wire them (Thomas, 2026-08-29). No revision-neutral
-`un-coicop` parent node gets minted; the two held edges stay unminted.
-
-**Generic MFSM citation** (Vietnam's `vn-monetary-indicators`): revisited
-and reversed (Thomas, 2026-08-30) — wire it. Live edge:
-`vn-monetary-indicators -> imf-mfsmcg-2016` (methodology_depends_on) in
-`vn-unlinked-wiring-2026-08-29.json`. Originally declined 2026-08-29 as the
-same call as COICOP above; Thomas revisited the next day and ruled to wire
-to the versioned node despite the generic/aspirational citation. No plain
-`imf-mfsm` node gets minted.
-
-**PH EBEIS node-scope** (`ph-pdp -> ph-basic-ed`, the PDP cites DepEd's
-EBEIS information system, not a named publication): declined (Thomas,
-2026-08-30) — an information system does not stand in for the statistics
-it produces. The held edge stays unminted; don't re-raise.
-
-**TW SIPRI arms-transfers direction** (`tw-national-defense-report ->
-tw-sipri-arms-transfers`): declined (Thomas, 2026-08-30) — scope mismatch,
-not an authenticity problem. The NDR cites SIPRI's Arms Transfers Database
-for PRC arms EXPORTS; the node is scoped to Taiwan arms IMPORTS. The held
-edge stays unminted; don't re-raise.
-
-**Chart/figure-caption sourcing clears the evidence bar** (`mx-alcaldia-
-benito-juarez -> mx-censos-economicos`, sourced only in a chart caption
-under a figure, not in body-text prose): accepted (Thomas, 2026-08-30) — a
-figure-source line is a citation. Live edge minted (`uses_data_from`) in
-`mx-browser-unblock-2026-08-29.json`. General ruling, not just this edge:
-a figure/chart source line alone now counts as evidence for future rounds.
-
-**NACE Rev.2** (Türkiye's `tr-industrial-production` -> `isic`, same
-generic-citation shape but a 2-hop chain rather than a revision ambiguity):
-don't mint a generic `nace-rev2` node (Thomas, 2026-08-29). TR's IPI (and
-any other NACE Rev.2-citing country) stays without a direct ISIC edge.
-
-**`LinkDatum.stiffness` using pre-trunk-collapse degree** (§3 above,
-2026-08-28): ratified as a deliberate divergence from stock d3 (Thomas,
-2026-08-29). No change needed.
+**One-off scope calls, already decided — don't re-raise. Reasoning for
+each lives in its own `_dropped`/live edge entry, not repeated here:**
+- Iran's SNA vintage (`ir-national-accounts` chain) — disregarded, live
+  as is (2026-08-29).
+- Generic COICOP citations (Iran, Iraq) — no revision-neutral parent
+  node minted (2026-08-29).
+- Generic MFSM citation (Vietnam) — reversed the next day from a
+  COICOP-style decline to wired, since Grok's target was a specific
+  versioned node, not a proposed generic one (2026-08-29 → 2026-08-30).
+- PH EBEIS node-scope — an information system isn't the statistics it
+  produces, declined (2026-08-30).
+- TW SIPRI arms-transfers direction — scope mismatch (exports source
+  cited for an imports-scoped report), declined (2026-08-30).
+- NACE Rev.2 (Türkiye) — same generic-citation shape as COICOP, no
+  `nace-rev2` node minted (2026-08-29).

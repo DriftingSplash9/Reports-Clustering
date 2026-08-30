@@ -110,15 +110,15 @@
       "edge": "af-education -> unesco-uis / isced",
       "source": "af-education",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "af-education's own listed url (unicef.org/afghanistan/education) returned HTTP 403 to a direct fetch. No corpus node exists yet for UNESCO Institute for Statistics or ISCED regardless, so even a successful fetch would likely need a new-node proposal — not attempted further given the access block and the 2-new-node cap already used elsewhere this round."
+      "reason": "no-document",
+      "why": "RE-CHECKED 2026-08-30 via browser (Chrome), since the domain is Cloudflare/edge-blocked to a direct curl/WebFetch but renders normally in a real browser. unicef.org/afghanistan/education is a static programme-description page: enrolment figures (\"An estimated 3.7 million children are out-of-school in Afghanistan – 60% of them are girls\") stated as UNICEF's own framing, no named source dataset, standard, or methodology (no ISCED, no UNESCO Institute for Statistics mention anywhere on the page). Followed through to data.unicef.org/country/afg/, UNICEF's own data hub for Afghanistan: its education indicators are also unattributed to any specific corpus-eligible source on the page itself (MICS is named as UNICEF's general household-survey vehicle site-wide, not stated as this page's specific input). No document found stating the relationship. Access is no longer the blocker — content is."
     },
     {
       "edge": "af-border-mobility -> [any corpus node]",
       "source": "af-border-mobility",
       "target": null,
-      "reason": "unreadable-source",
-      "why": "af-border-mobility's own listed url (dtm.iom.int/afghanistan), IOM's Displacement Tracking Matrix, returned HTTP 403 (Akamai edge block) to a direct fetch. Not independently re-tried via a different route in this pass."
+      "reason": "no-document",
+      "why": "RE-CHECKED 2026-08-30 via browser (Chrome), since the domain is Akamai-edge-blocked to a direct curl/WebFetch but renders normally in a real browser. dtm.iom.int/afghanistan's own \"About\" text describes DTM's mandate and lists the humanitarian/development bodies it feeds (WFP, FAO, UNHCR, IRC, DRC, NRC, WHO, IOM's own RADA programme, the World Bank) — none of them a report node in this corpus, and none named as a citable document. The page is a landing/reports-index, not a methodology statement; no specific dataset or standard is named as af-border-mobility's own basis. No document found stating a dependency to any existing corpus node. Access is no longer the blocker — content is."
     },
     {
       "edge": "af-drought -> af-humanitarian / af-wheat",
