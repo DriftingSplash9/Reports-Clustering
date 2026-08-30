@@ -1,0 +1,41 @@
+{
+  "_slice": "ru-postanovlenie-420-2026-08-30",
+  "_researched": "2026-08-30",
+  "_status": "verified",
+  "_note": "Mints Постановление №420 (the resolution establishing Rosstat's mandate), independently fetched and verified via garant.ru (rosstat.gov.ru itself remains genuinely unreachable this round -- tried with the Russian Trusted Root+Sub CA per the corpus's own documented workaround, still failed at TLS/connection level, a different failure mode than the trust-store gap an earlier round fixed; worth a fresh CA-bundle attempt in a future round). This does NOT resolve ru-subsistence-minimum-law-134fz's own no-node-yet lead (134-FZ never cites Постановление 420 by number -- only an inferential two-document chain connects them, which the corpus's evidence standard does not wire) -- that lead stays open, now with confirmed independent text for one of its two missing pieces. Rosstat's own titled median-income publication (the OTHER missing piece) also remains unfound this round.",
+  "reports": [
+    {
+      "id": "ru-postanovlenie-420-rosstat",
+      "title": "Постановление Правительства РФ от 2 июня 2008 г. № 420 «О Федеральной службе государственной статистики»",
+      "publisher": "Правительство Российской Федерации",
+      "country": "RU",
+      "jurisdiction_level": "federal",
+      "region": "Russia",
+      "description": "The Russian Government resolution establishing Rosstat's statutory mandate as the federal executive body responsible for official statistical information — the instrument that Rosstat's own orders (e.g. Приказ №915) cite as their basis, and that the periphrasis used elsewhere in Russian statistical law ('the federal executive body responsible for forming official statistical information') refers back to.",
+      "last_updated": null,
+      "url": "https://base.garant.ru/12160676/",
+      "domains": [
+        "statistical-system",
+        "governance"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ru-rosstat-cpi-methodology-915",
+      "target_report_id": "ru-postanovlenie-420-rosstat",
+      "relationship_type": "cites",
+      "basis": "В соответствии с подпунктом 5.2 Положения о Федеральной службе государственной статистики, утвержденного постановлением Правительства Российской Федерации от 2 июня 2008 г. № 420, приказываю: ...",
+      "evidence_url": "https://base.garant.ru/12160676/"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ru-subsistence-minimum-law-134fz -> ru-postanovlenie-420-rosstat",
+      "source": "ru-subsistence-minimum-law-134fz",
+      "target": null,
+      "reason": "no-document",
+      "why": "134-FZ's periphrasis for the statistics agency ('федеральным органом исполнительной власти, осуществляющим функции по формированию официальной статистической информации') is a word-for-word match to Постановление 420's own self-description (independently confirmed this round on garant.ru), strengthening the identification -- but 134-FZ never cites Постановление 420 by number anywhere in its own text. The identification remains an inference across two documents, not a citation in either one. No edge minted; matches the prior round's same conclusion, now on independently re-verified text for the target side."
+    }
+  ]
+}
