@@ -1,0 +1,312 @@
+{
+  "_slice": "ae-unlinked-wiring-round1-2026-08-30",
+  "_researched": "2026-08-30",
+  "_status": "verified",
+  "_note": "First full wiring round for the United Arab Emirates (previously fully virgin — 0 prior rounds). 3 parallel research subagents (institutional/monetary/finance; energy/construction/climate; population/labour/social/tourism), every proposed edge and new-node citation then independently re-fetched and verified by the orchestrating session before minting (WebFetch + WebSearch; one PDF URL recovered via a direct filetype:pdf search after the HTML landing page rendered JS-only). Closed 20 -> 8 isolated. 2 new international/institutional nodes minted (us-fed-iorb, int-irena-renewable-capacity-statistics); wired an existing-but-unused imf-e-gdds node once the e-GDDS-not-SDDS-Plus distinction was confirmed on FCSC's own National Summary Data Page. Patched ae-construction's publisher/url from an unsourced placeholder to FCSC's national-accounts production series once ISIC-classification evidence resolved its real primary source. Two likely-duplicate pairs flagged as 'note' _dropped entries for Thomas's ruling rather than wired twice: ae-oil-production vs ae-oil, and ae-labour-force vs ae-labour (both pairs were BOTH orphans going in, unlike Indonesia's id-energy-balance-detail case where one side was already wired) — the better-evidenced canonical node in each pair was wired this round, the weaker stub left isolated. ae-tourism vs ae-tourism-dubai was investigated and confirmed NOT a duplicate (annual national DET report vs monthly Dubai-specific DET report, different URLs, different cadence, different jurisdiction_level). 17 genuine non-findings logged as _dropped entries below, grouped by cause: empty/stub official pages (FCSC Oil and Gas, FCSC labour-force document page), stale DSBB metadata (population census, EMP00), no citable methodology text found (education, health x2, banking-credit), too-ambiguous institutional listings (GCC-Stat x2), third-party-not-in-corpus sourcing (DMCC->Dubai Customs), a JS-viewer PDF worth a browser-tool retry (DLD Annual Report, deferred not dead), and one too-generic IMF attribution (population).",
+  "reports": [
+    {
+      "id": "us-fed-iorb",
+      "title": "Interest Rate on Reserve Balances (IORB)",
+      "publisher": "Federal Reserve Board",
+      "country": "US",
+      "jurisdiction_level": "federal",
+      "region": "United States",
+      "description": "The interest rate the Federal Reserve pays on reserve balances held by depository institutions; the Fed's primary tool for implementing the FOMC's target range for the federal funds rate. Minted because it is the explicit, named anchor for the CBUAE Base Rate applicable to the Overnight Deposit Facility, per CBUAE's own Base Rate decision releases.",
+      "releases_per_year": 8,
+      "cadence_note": "Set alongside FOMC policy decisions (8 scheduled meetings per year); changes when the Committee changes the target range.",
+      "url": "https://www.federalreserve.gov/monetarypolicy/reserve-balances.htm",
+      "domains": [
+        "interest-rates",
+        "monetary-policy"
+      ]
+    },
+    {
+      "id": "int-irena-renewable-capacity-statistics",
+      "title": "Renewable Capacity Statistics",
+      "publisher": "International Renewable Energy Agency (IRENA)",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "IRENA's annual global dataset of installed renewable electricity generation capacity by country and technology. IRENA is headquartered in Abu Dhabi; its capacity statistics are the primary international source underlying UAE renewable-capacity reporting (verified: UAE row shows 6,144 MW total renewable capacity in 2024, matching the growth trajectory reported for ae-renewables).",
+      "releases_per_year": 1,
+      "url": "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Mar/IRENA_DAT_RE_Capacity_Statistics_2025.pdf",
+      "domains": [
+        "energy",
+        "environment"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "ae-base-rate",
+      "target_report_id": "us-fed-iorb",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "CBUAE's own Base Rate decision release explicitly names the US Fed's IORB as the anchor for the Base Rate.",
+      "evidence_url": "https://www.centralbank.ae/media/051jybbj/cbuae-lowers-the-base-rate-by-25-basis-points-en.pdf"
+    },
+    {
+      "source_report_id": "ae-cbuae",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "CBUAE's own Balance of Payments Developments report states BOP is compiled per IMF BPM6.",
+      "evidence_url": "https://www.centralbank.ae/media/vq4apu2f/balance-of-payments-developments_uae_2024-2025.pdf"
+    },
+    {
+      "source_report_id": "ae-fcsc",
+      "target_report_id": "ae-cbuae",
+      "relationship_type": "uses_data_from",
+      "evidence": "documented",
+      "basis": "FCSC's National Summary Data Page links Depository Corporations Survey, Central Bank Survey, Interest Rates, Balance of Payments, Official Reserve Assets and Exchange Rates categories through to centralbank.ae, and states these correspond to the IMF's DSBB.",
+      "evidence_url": "https://fcsc.gov.ae/national-summary-data/"
+    },
+    {
+      "source_report_id": "ae-fcsc",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "FCSC's live SDMX statistical API defines its National Accounts industry classification via a codelist explicitly named 'National Accounts - ISIC' (CL_ISIC).",
+      "evidence_url": "https://releaseeuaestat.fcsc.gov.ae/rest/codelist/FCSA/CL_ISIC/latest"
+    },
+    {
+      "source_report_id": "ae-fcsc",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "FCSC's National Summary Data Page states the UAE participates in the IMF's enhanced General Data Dissemination System.",
+      "evidence_url": "https://fcsc.gov.ae/national-summary-data/"
+    },
+    {
+      "source_report_id": "ae-fdi",
+      "target_report_id": "ae-fcsc",
+      "relationship_type": "uses_data_from",
+      "evidence": "documented",
+      "basis": "UAE FDI Report 2026's 'Real GDP by Sector' chart is captioned 'Source: FCSC'.",
+      "evidence_url": "https://www.invest.gov.ae/storage/post/4ojk7z8IWho73U9R38Sg5P4K1SIhyWsb1aTFIx7h.pdf"
+    },
+    {
+      "source_report_id": "ae-fdi",
+      "target_report_id": "ae-adgm",
+      "relationship_type": "uses_data_from",
+      "evidence": "documented",
+      "basis": "UAE FDI Report 2026's 'ADGM Commercial Licence Fee Reduction' chart is captioned 'Source: ADGM'.",
+      "evidence_url": "https://www.invest.gov.ae/storage/post/4ojk7z8IWho73U9R38Sg5P4K1SIhyWsb1aTFIx7h.pdf"
+    },
+    {
+      "source_report_id": "ae-adgm",
+      "target_report_id": "ae-cbuae",
+      "relationship_type": "cites",
+      "evidence": "documented",
+      "basis": "ADGM's official announcement of its 4 Feb 2016 MoU with the Central Bank of the UAE on banking/financial supervision cooperation.",
+      "evidence_url": "https://www.adgm.com/media/announcements/central-bank-of-the-uae-and-adgm-sign-mou-to-enhance-banking-and-financial-supervision"
+    },
+    {
+      "source_report_id": "ae-difc",
+      "target_report_id": "ae-cbuae",
+      "relationship_type": "cites",
+      "evidence": "documented",
+      "basis": "Joint CBUAE/ADGM(FSRA)/DIFC(DFSA) IFRS9 guidance issued during COVID-19, naming all three regulators as co-issuing 'Authorities'.",
+      "evidence_url": "https://www.adgm.com/media/announcements/cbuae-adgm-and-difc-issue-a-joint-guidance-on-the-application-of-ifrs9"
+    },
+    {
+      "source_report_id": "ae-climate-reporting",
+      "target_report_id": "ipcc-ghg-guidelines",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "UAE's First Biennial Transparency Report (BTR1) narrative document states emissions are estimated per the 2006 IPCC Guidelines for National Greenhouse Gas Inventories.",
+      "evidence_url": "https://unfccc.int/sites/default/files/resource/UAE's%20First%20BTR%20-%20Submission%20Document.pdf"
+    },
+    {
+      "source_report_id": "ae-oil",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "FCSC's SDMX national-accounts dataflow classifies crude oil/mining-and-quarrying GDP data under ISIC section B ('Mining and Quarrying, includes crude oil and natural gas').",
+      "evidence_url": "https://releaseeuaestat.fcsc.gov.ae/rest/codelist/FCSA/CL_ISIC/latest"
+    },
+    {
+      "source_report_id": "ae-construction",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "evidence": "documented",
+      "basis": "FCSC's SDMX national-accounts dataflow classifies construction output under ISIC section F ('Construction'). Also resolves ae-construction's real primary source: FCSC's national accounts production series, corroborated by a Zawya article quoting FCSC directly and CBUAE's Quarterly Economic Review (sectoral table sourced 'FCSC and CBUAE calculations').",
+      "evidence_url": "https://releaseeuaestat.fcsc.gov.ae/rest/codelist/FCSA/CL_ISIC/latest"
+    },
+    {
+      "source_report_id": "ae-renewables",
+      "target_report_id": "int-irena-renewable-capacity-statistics",
+      "relationship_type": "uses_data_from",
+      "evidence": "documented",
+      "basis": "The node's own source article names IRENA as the data origin; IRENA's own 'Renewable Capacity Statistics 2025' publication independently confirms a UAE-specific capacity row.",
+      "evidence_url": "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Mar/IRENA_DAT_RE_Capacity_Statistics_2025.pdf"
+    },
+    {
+      "source_report_id": "ae-imf-article-iv",
+      "target_report_id": "ae-dld-realestate",
+      "relationship_type": "cites",
+      "evidence": "documented",
+      "basis": "IMF's 2025 UAE Article IV Real Estate Annex explicitly quotes Dubai Land Department transaction data for price and non-mortgaged-transaction-share figures.",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1areea2025001-source-pdf.pdf"
+    },
+    {
+      "source_report_id": "gcc-stat",
+      "target_report_id": "ae-labour",
+      "relationship_type": "uses_data_from",
+      "evidence": "documented",
+      "basis": "GCC-Stat's Quarterly Report on Labour Statistics in the GCC Countries lists FCSC (FCSA) among its national Data Sources for UAE labour statistics; this particular quarter's tables exclude UAE ('not available on a quarterly basis') but FCSC is confirmed as the standing named source for GCC-Stat's labour-statistics compilation programme.",
+      "evidence_url": "https://gccstat.org/images/gccstat/docman/publications/Quarterly_Report_on_labour_Statistics_in_the_GCC_Countries_-_First_Quarter_of_2020.pdf"
+    },
+    {
+      "source_report_id": "ae-tourism",
+      "target_report_id": "ae-dxb-traffic",
+      "relationship_type": "cites",
+      "evidence": "documented",
+      "basis": "Dubai DET's Annual Visitor Report 2024 explicitly cites DXB's record 92.3 million passenger figure as a headline 2024 tourism-sector achievement.",
+      "evidence_url": "https://www.dubaidet.gov.ae/en/research-and-insights/-/media/files/faqs/annual-visitor-report-2024/det-annual-visitor-report-2024.pdf"
+    },
+    {
+      "source_report_id": "ae-imf-article-iv",
+      "target_report_id": "ae-base-rate",
+      "relationship_type": "cites",
+      "evidence": "documented",
+      "basis": "IMF's 2025 UAE Selected Issues paper (Section C, 'The US Interest Rate Transmission to the UAE Economy') discusses CBUAE's monetary-policy-department analysis of Base Rate transmission.",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1areea2025002-source-pdf.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ae-banking-credit -> (no target found)",
+      "source": "ae-banking-credit",
+      "target": null,
+      "reason": "no-document",
+      "why": "Searched CBUAE's Monthly Statistical Bulletin, quarterly 'Monetary, Banking & Financial Markets Developments' report, and the IMF's 2025 Article IV Selected Issues interest-rate-transmission section (whose credit/deposit charts are sourced to 'Haver Analytics', a third party not represented in this corpus) — no document explicitly cites another corpus node as a basis for banking-credit statistics. NOTE for maintainers: ae-banking-credit and ae-monetary-statistics appear to be published as sibling tables within the same CBUAE Monthly Statistical Bulletin (e.g. December 2025 edition, centralbank.ae/media/if2ky4yn/statistical-bulletin-december-2025.pdf) — not a part_of relationship, but worth considering if a bulletin-level parent node is ever added."
+    },
+    {
+      "edge": "ae-dmcc-trade -> (no target found)",
+      "source": "ae-dmcc-trade",
+      "target": null,
+      "reason": "no-document",
+      "why": "DMCC's own record-trade press releases (e.g. 2025 diamond-trade record) cite 'data from Dubai Customs' as their source — Dubai Customs is not a node in this corpus. FCSC's Commodities/Merchandise Trade data-portal pages are pure data-explorer UI with no methodology or sourcing text (returned a data-retrieval error on live load). No qualifying edge to an existing corpus node found. A future round could mint a Dubai Customs node if DMCC's sourcing chain is worth capturing."
+    },
+    {
+      "edge": "gcc-stat -> ae-fcsc (institutional listing, not a citation)",
+      "source": "gcc-stat",
+      "target": "ae-fcsc",
+      "reason": "no-document",
+      "why": "GCC-Stat's own UAE country page (gccstat.org/en/statistic/economic/ae) lists FCSC's pre-2020 name ('Federal Competitiveness and Statistics Authority') in an unstructured body list of UAE government/economic bodies, with no 'source', 'data provider', or similar attribution label — too ambiguous to satisfy the explicit-citation bar."
+    },
+    {
+      "edge": "gcc-stat -> ae-cbuae",
+      "source": "gcc-stat",
+      "target": "ae-cbuae",
+      "reason": "no-document",
+      "why": "CBUAE's 2006 press release 'Establishment of the GCC unified Statistical Center' has an empty/unreadable attached PDF (page metadata says 'Last updated 2021' but the file itself is dated 2006 — likely a stale asset mismatch). GCC-Stat's own UAE country page does not mention CBUAE at all. No qualifying edge found."
+    },
+    {
+      "edge": "int-opec-momr -> ae-oil",
+      "source": "int-opec-momr",
+      "target": "ae-oil",
+      "reason": "no-document",
+      "why": "FCSC's 'Oil and Gas' page (the primary source behind ae-oil) renders as an empty stub — a bare year-list heading with no body/methodology/sourcing text, confirmed via both plain fetch and rendered-browser inspection. OPEC's own Annual Statistical Bulletin / MOMR PDFs returned HTTP 402 on every attempt. CBUAE's Quarterly Economic Review does source its own oil-production chart to OPEC, and IMF's Article IV report sources its oil chart to 'OPEC, Country Authorities, ... Haver, IMF Staff Calculations' — but neither is itself the FCSC Oil and Gas series, so no direct edge is supportable. (A pre-existing int-opec-momr -> ae-oil-production no-document entry already covers the sibling duplicate node.)"
+    },
+    {
+      "edge": "ae-oil -> ae-opec-exit",
+      "source": "ae-oil",
+      "target": "ae-opec-exit",
+      "reason": "no-document",
+      "why": "Extensive search (EIA, The National, Wood Mackenzie and others) found no official UAE/FCSC/OPEC document explicitly tying FCSC's oil-and-gas series to the OPEC+ Declaration of Cooperation or the UAE's 2026 OPEC exit — only secondary/trade-press analysis."
+    },
+    {
+      "edge": "ae-ports-jebel-ali -> (no target found)",
+      "source": "ae-ports-jebel-ali",
+      "target": null,
+      "reason": "no-document",
+      "why": "DP World's own press materials (2024 Jebel Ali cargo-volume record) give operational throughput figures with no citation of UAE government statistics; DP World's Annual Report PDF is blocked by robots.txt for automated fetch. No FCSC/Ministry of Economy/Dubai Statistics Center document found citing DP World or Jebel Ali as a source, in either direction."
+    },
+    {
+      "edge": "ae-labour -> icls-work-statistics-resolution",
+      "source": "ae-labour",
+      "target": "icls-work-statistics-resolution",
+      "reason": "no-document",
+      "why": "FCSC's labour-force document page renders only a bare year-list title with no methodology text even in-browser. The DSBB e-GDDS metadata page for UAE's Labour Market Indicators (category EMP00) is entirely empty (last touched 2018). Web search surfaced only Abu Dhabi's SCAD (a different, emirate-level agency) methodology document, not FCSC's. No genuine FCSC citation of the ICLS resolution found."
+    },
+    {
+      "edge": "ae-population -> (no target found)",
+      "source": "ae-population",
+      "target": null,
+      "reason": "no-document",
+      "why": "The only population-specific DSBB metadata page (category POP00) is stale (last updated 2013, describing the 1995 census under the pre-FCSC Ministry of Planning) — not usable as current evidence for the 11.3M (2024) FCSC estimate. No current methodology/census-standard citation found."
+    },
+    {
+      "edge": "ae-education -> (no target found)",
+      "source": "ae-education",
+      "target": null,
+      "reason": "no-document",
+      "why": "uaestat.fcsc.gov.ae portal search for 'Education' returned no results. No standalone education document with a citable dependency found this round."
+    },
+    {
+      "edge": "ae-health -> who-global-health-estimates",
+      "source": "ae-health",
+      "target": "who-global-health-estimates",
+      "reason": "no-document",
+      "why": "FCSC's Health Services portal hierarchy (domain code HLH_HS, with real dataflows DF_HEALTH_WORKFORCE, DF_HEALTH_FACILITIES) is confirmed real but carries no methodology text citing WHO Global Health Estimates."
+    },
+    {
+      "edge": "ae-health -> who-icd-10",
+      "source": "ae-health",
+      "target": "who-icd-10",
+      "reason": "no-document",
+      "why": "Same FCSC Health Services portal check as above — no methodology text citing ICD-10 found."
+    },
+    {
+      "edge": "ae-dld-realestate -> ae-construction",
+      "source": "ae-dld-realestate",
+      "target": "ae-construction",
+      "reason": "deferred",
+      "why": "Dubai Land Department's Annual Report 2024 PDF exists (dubailand.gov.ae, ~7MB, Oct 2025) but sits behind a JS 'View' viewer that could not be fully text-extracted this round — worth a dedicated browser-tool retry (same technique that unblocked BPS PDFs in the Indonesia round), not a dead end."
+    },
+    {
+      "edge": "gcc-stat -> ae-population",
+      "source": "gcc-stat",
+      "target": "ae-population",
+      "reason": "no-document",
+      "why": "No GCC-Stat document found citing FCSC population data specifically (GCC-Stat's regional labour report names FCSC as a labour-statistics source, but no equivalent population-statistics citation was found this round)."
+    },
+    {
+      "edge": "gcc-stat -> ae-education",
+      "source": "gcc-stat",
+      "target": "ae-education",
+      "reason": "no-document",
+      "why": "No GCC-Stat document found citing FCSC education data."
+    },
+    {
+      "edge": "gcc-stat -> ae-health",
+      "source": "gcc-stat",
+      "target": "ae-health",
+      "reason": "no-document",
+      "why": "No GCC-Stat document found citing FCSC health data."
+    },
+    {
+      "edge": "ae-imf-article-iv -> ae-population",
+      "source": "ae-imf-article-iv",
+      "target": "ae-population",
+      "reason": "no-document",
+      "why": "IMF's 2025 UAE Article IV report states Population: 11.3 million (2024), matching FCSC's figure exactly, but the line is attributed only generically to 'Country authorities' / 'IMF staff estimates and projections' — never explicitly to FCSC by name for the population line specifically (FCSC IS named explicitly elsewhere in the same report, e.g. the External Sector figure, which is why this is close but doesn't clear the explicit-citation bar)."
+    },
+    {
+      "edge": "ae-oil-production -> ae-oil",
+      "source": "ae-oil-production",
+      "target": "ae-oil",
+      "reason": "note",
+      "why": "Likely duplicate, needs Thomas's ruling (same pattern as id-energy-balance-detail in the Indonesia round). Exhaustive search (ADNOC corporate/investor site, ADNOC Gas plc IPO prospectus and quarterly filings, general ADNOC statistical-bulletin searches) found no standing ADNOC crude-oil-and-condensate PRODUCTION STATISTICS release distinct from FCSC's 'Oil and Gas' series, which ae-oil already represents. Every verifiable production-data trail (CBUAE's Quarterly Economic Review, IMF's Article IV report, GCC aggregates) traces back to OPEC reporting or a generic 'country authorities' attribution — i.e. the same FCSC/national channel ae-oil already covers. ae-oil-production's current sourcing (publisher 'ADNOC / energy monitoring', url: null) looks like an unverifiable placeholder rather than a real distinct source. Recommend merging ae-oil-production into ae-oil; left deliberately unwired rather than duplicate this round's edges onto both nodes."
+    },
+    {
+      "edge": "ae-labour-force -> ae-labour",
+      "source": "ae-labour-force",
+      "target": "ae-labour",
+      "reason": "note",
+      "why": "Likely duplicate, needs Thomas's ruling (same pattern as id-energy-balance-detail in the Indonesia round). fcsc.gov.ae/uae-stats-document/labor-force/ (ae-labour) links internally to the same FCSC domain code LFS_LF used by uaestat.fcsc.gov.ae's '.Stat Data Explorer' (ae-labour-force): the Data Explorer's 'Labour Force (LFS_LF)' category, with 17 dataflows (Employed/Unemployed/Labour Force by Citizenship, Gender, Age, Economic Activity, Education, Employment Status/Sector/Occupation), matches ae-labour-force's stated description almost verbatim. Same agency, same internal code, one links directly into the other — not two distinct survey products, just a document-listing page vs. the SDMX explorer for the same underlying dataset. Recommend merging ae-labour-force into ae-labour; left deliberately unwired rather than duplicate this round's edges onto both nodes."
+    }
+  ]
+}
