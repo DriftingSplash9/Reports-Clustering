@@ -102,34 +102,38 @@ real-GPU spot-check. See memory `renderer_transparent_toggle_2026-08-29`.
 
 ### [Agent] — next build rounds
 
-1. **South America is the biggest unworked seam and has never been
-   researched**: SR 30, AR 29, CL 28, GY 27, UY 25, EC 24, PY 18, VE 16,
-   BO 14, CO 13, PE 13 — about 233 orphans across eleven countries. This
-   is the obvious next round.
-2. **Two fully-evidenced edges are waiting on nodes that don't exist.**
-   Mint the node and the edge lands verbatim-quotable: (a) Taiwan's
-   Central Government General Budget (中央政府總預算) — MND statistics
-   table 11 (`https://www.mnd.gov.tw/File/57520`) names it as its
-   statistical universe; (b) Indonesia's Survei Biaya Hidup 2022 — the
-   provincial CPI publication states the index's weights and base-year
-   consumption values come from it. Both quoted in their `_dropped`
-   entries.
-3. **A triage pass is now worth more than another wiring round in the
-   worked countries.** 950 isolated is not a to-do list: a large share is
-   structurally unwireable, and round 7 confirmed several of those on real
-   bytes. Separate "not yet researched" from "researched, nothing to
-   find" before anyone scopes another pass at ID/TW/IR/EU.
-4. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
+1. **BLOCKED — validator has not run.** South America round (11
+   countries, 151 edges + 5 new nodes: `un-irip-2010`, `uy-inac`,
+   `co-fnc`, plus the two below) and the two waiting edges (Taiwan's
+   Central Government General Budget, MND table 11; Indonesia's Survei
+   Biaya Hidup 2022, provincial CPI) are all **written to
+   `src/data/research/` but not yet validated**. `device_stage_files`
+   failed with `session_stale_relogin` — needs Thomas to re-sign-in in
+   the desktop app before `npm run gen`/`validate`/`build` can run in a
+   sandbox. Until that run is clean, treat this round's counts and edges
+   as provisional. Sandbox zips are staged and waiting in
+   `_to_delete/r8-sa-round-2026-08-30.zip` and
+   `_to_delete/r8-sa-research-2026-08-30.zip`. Full method, dedup list,
+   and the one superseded `_dropped` entry (`ve-servicios-publicos ->
+   ve-encovi`, now `resolved`) are in project memory
+   `sa_wiring_round_2026-08-30`.
+2. **A triage pass is now worth more than another wiring round in the
+   worked countries.** 945 isolated (pre-round-8) is not a to-do list: a
+   large share is structurally unwireable, and round 7 confirmed several
+   of those on real bytes. Separate "not yet researched" from
+   "researched, nothing to find" before anyone scopes another pass at
+   ID/TW/IR/EU.
+3. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
    retries: Iraq's GDP/National Income metadata doc (cosit.gov.iq),
    Vietnam's VSIC 2018 decision, Iraq's wage-bill clause (Budget Law
    13/2023). NESDC Thailand — closed negative, don't retry. Then the 31
    single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD ME MK NI NR
    PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
-5. **Cheap browser retries, now known-reachable**: Afghanistan's
+4. **Cheap browser retries, now known-reachable**: Afghanistan's
    `af-education` and `af-border-mobility` (both render in Chrome, both
    Cloudflare-403 to curl); Indonesia's remaining energy/GHG leads via the
    BPS signed-link technique.
-6. **Genuinely still blocked, needing a different network route rather
+5. **Genuinely still blocked, needing a different network route rather
    than a different tool**: the whole `*.cdmx.gob.mx` family (four
    distinct failure modes), `issste.gob.mx`, `datos.imss.gob.mx` (Imperva
    WAF), `webapps.peza.gov.ph`, `legacy.doe.gov.ph` and `aodm.mnd.gov.tw`
