@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "date": "2026-08-30",
+    "actor": "Claude -- EU unlinked-node wiring round (post round-11 AE), following HANDOFF's queued 'next wiring round: EU' item",
+    "scope": "2 new nodes (lu-govfin, eurostat-hbs-methodology-2003), 9 new dependencies, 2 dropped notes. Closes 4 of EU-27's 7 measured-isolated nodes (PL LFS, GR LFS, SE HBS, NL WOZ) plus Luxembourg's last bare edp-inventory node. AT/CY/SI stay isolated by design (documented negative findings from round 1, left untouched). Every proposed edge and node independently re-fetched and quote-verified by the orchestrating session before minting.",
+    "status": "ready to merge"
+  },
+  "reports": [
+    {
+      "id": "lu-govfin",
+      "title": "Reporting of Government Deficits and Debt Levels (EDP Notification, Luxembourg)",
+      "publisher": "STATEC (Institut national de la statistique et des études économiques du Grand-Duché de Luxembourg)",
+      "country": "LU",
+      "jurisdiction_level": "federal",
+      "region": "Luxembourg",
+      "description": "Luxembourg's Article 9 Excessive Deficit Procedure (EDP) notification tables, submitted under Council Regulation (EC) No 479/2009 as amended by Commission Regulation (EU) No 220/2014. Read directly this session (April 2026 notification, dated 31/03/2026): the document's own header states \"Reporting of Government Deficits and Debt Levels in accordance with Council Regulation (EC) N° 479/2009, as amended by Commission Regulation (EU) No 220/2014\", identifies \"Member State: Luxembourg\" and \"Notification: April 2026 notification in format April/October 20xx\", and reports general-government net lending/borrowing (B.9) and consolidated gross debt in \"ESA 2010\" terms. Hosted on Eurostat's central EDP notification-tables document repository (the standard hosting pattern for every member state's own submitted notification), not a Eurostat commentary about Luxembourg. Replaces the previously-rejected candidate (STATEC's Note de Conjoncture N°1-2026), which reported the same underlying figures but named no framework -- this document is the actual Article 9 notification itself.",
+      "releases_per_year": 2,
+      "cadence_note": "Semi-annual EDP notification, per the document's own \"Notification: April 2026 notification in format April/October 20xx\" -- transmitted each April and October per Regulation 479/2009's Article 3 timetable.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516",
+      "domains": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "eurostat-hbs-methodology-2003",
+      "title": "Household Budget Surveys in the EU — Methodology and Recommendations for Harmonisation (2003)",
+      "publisher": "Eurostat (European Commission)",
+      "country": "EU",
+      "jurisdiction_level": "supranational",
+      "region": "European Union",
+      "description": "Eurostat's handbook coordinating the voluntary EU-wide Household Budget Survey (HBS) exercise -- no EU regulation compels national HBS, so this handbook is the actual harmonisation instrument member states cite. Confirmed by Statistics Sweden's own SCBDOK 3.2 methodology documentation for HUT (2012 edition, section 0.9 \"EU-reglering\"), which names it explicitly: \"Eurostat publicerat handboken 'HOUSEHOLD BUDGET SURVEYS IN THE EU Methodology and recommendations for harmonization 2003'\" and states Sweden has reported consumption by COICOP purpose \"enligt Eurostats rekommendationer\" (according to Eurostat's recommendations) since 1999. Independently confirmed via Eurostat's own publication catalogue (product code KS-BF-03-003): \"Household budget surveys in the EU - Methodology and recommendations for harmonisation 2003\", published 2004-02-10.",
+      "releases_per_year": 0.05,
+      "cadence_note": "One-off methodology handbook (2003/2004), not a recurring release -- the EU-wide HBS exercise it governs is voluntary and coordinated rather than regulation-driven, and no revised edition was found.",
+      "last_updated": null,
+      "url": "https://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/-/ks-bf-03-003",
+      "domains": [
+        "living-standards"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "lu-edp-inventory",
+      "target_report_id": "lu-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "lu-edp-inventory is the Article 9 methods inventory Regulation 479/2009 requires; lu-govfin is the actual notification tables data it describes the compilation of. Same pattern as every other EU member state's edp-inventory -> govfin edge in this corpus.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516"
+    },
+    {
+      "source_report_id": "lu-govfin",
+      "target_report_id": "esa-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The notification's own tables are headed \"Data are in millions of Euros ESA 2010\", stating the figures are compiled on an ESA 2010 accounting basis.",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516"
+    },
+    {
+      "source_report_id": "lu-govfin",
+      "target_report_id": "eu-reg-479-2009",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The document's own title states it is compiled \"in accordance with Council Regulation (EC) N° 479/2009, as amended by Commission Regulation (EU) No 220/2014.\"",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516"
+    },
+    {
+      "source_report_id": "eurostat-edp-notification-tables",
+      "target_report_id": "lu-govfin",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's EDP notification-tables collection centrally hosts and aggregates each member state's own Article 9 submission, including Luxembourg's -- same pattern already established for cz-govfin/nl-govfin/dk-govfin/it-govfin/etc. in this corpus.",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/excessive-deficit-procedure/edp-notification-tables"
+    },
+    {
+      "source_report_id": "pl-gus-national-accounts",
+      "target_report_id": "pl-gus-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's ESMS metadata page for dataset nama_10_pe (\"Population and employment - national accounts\"), Poland's national submission, section 18.1 Source data: \"The main source for EMP data that is used in Poland is the Labour Force Survey (LFS). However, in order to ensure both completeness and high quality of Polish EMP NA and RA data, the combination of various data sources are used: quarterly survey - the Labour Force Survey (LFS); results from the annual 'Report on persons employed, wages, salaries and working time' ('Z-06' form); and the secondary survey 'Persons employed in the national economy'.\" Corroborated in section 11.1 (Quality assurance): \"The main data source for Polish EMP NA and RA data is the LFS, which assures the harmonization, the comparability and the reliability of all data concerning labour market.\" Supersedes the round-1 deferred finding, which had looked at the wrong Eurostat dataset code (na10/nama_10_gdp instead of the employment-specific nama_10_pe).",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/nama_10_pe_esms_pl.htm"
+    },
+    {
+      "source_report_id": "gr-elstat-national-accounts",
+      "target_report_id": "gr-elstat-lfs",
+      "relationship_type": "uses_data_from",
+      "basis": "Eurostat's ESMS metadata page for dataset nama_10_pe (\"Population and employment - national accounts\"), Greece's national submission, section 18.1 Source data: \"The source that is widely used by almost all the EU countries is the Labour Force Survey (LFS). This survey is addressed to households and aims to measure the labour supply... Regarding quarterly employment (persons) the main data source is the Labor Force Survey (LFS)\", with LFS data (persons employed by NACE Rev.2 2-digit division) named as the basis for quarterly employment figures. Section 18.5 (Data compilation) adds that total-hours-worked figures are also \"calculated mainly by using LFS data\". Supersedes the round-1 no-document finding, which had guessed the wrong URL (na10_esms_el.htm, which 404s) instead of the correct employment-specific dataset page (nama_10_pe_esms_el.htm).",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_pe_esms_el.htm"
+    },
+    {
+      "source_report_id": "se-scb-hbs",
+      "target_report_id": "eurostat-hbs-methodology-2003",
+      "relationship_type": "methodology_depends_on",
+      "basis": "SCB's own methodology documentation for HUT (SCBDOK 3.2, 2012 edition, section 0.9 \"EU-reglering\"): \"Undersökningar om Hushållens utgifter genomförs i alla EU-länderna. För att få jämförbarhet mellan de olika ländernas undersökningar har Eurostat publicerat handboken 'HOUSEHOLD BUDGET SURVEYS IN THE EU Methodology and recommendations for harmonization 2003'\" (Household expenditure surveys are conducted in all EU countries. To achieve comparability between the different countries' surveys, Eurostat has published the handbook...), and \"Från och med 1999 redovisas konsumtionen även efter ändamål enligt Eurostats rekommendationer, den så kallade COICOP-indelningen\" (From 1999, consumption is also reported by purpose according to Eurostat's recommendations, the COICOP classification). Distinct from the already-closed CPI/HICP-weights question (HUT is confirmed NOT the source of Swedish CPI/HICP weights, which come from national accounts instead) -- this is a separate, genuine methodology-alignment dependency: survey design and classification, not price-index weighting.",
+      "evidence_url": "https://www.scb.se/contentassets/90c71dbdb84c4fb5abb66896f3a478e6/he0201_do_2012.pdf"
+    },
+    {
+      "source_report_id": "nl-waarderingskamer-staat-van-de-woz",
+      "target_report_id": "nl-wet-woz",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Waarderingskamer's own site states its entire supervisory mandate is statutory: \"De taken en bevoegdheden van de Waarderingskamer zijn ontleend aan artikel 4 van de Wet WOZ\" (The Waarderingskamer's tasks and powers derive from Article 4 of the Wet WOZ), and describes this report's purpose directly: \"De Waarderingskamer controleert of gemeenten de Wet waardering onroerende zaken (Wet WOZ) goed uitvoeren... Om transparant te zijn over onze bevindingen publiceren we deze rapportages\" (The Waarderingskamer checks whether municipalities properly execute the Wet WOZ... To be transparent about our findings we publish these reports). \"De Staat van de WOZ\" is this annual published finding report.",
+      "evidence_url": "https://www.waarderingskamer.nl/over-ons/wie-zijn-wij"
+    },
+    {
+      "source_report_id": "nl-waarderingskamer-staat-van-de-woz",
+      "target_report_id": "nl-waarderingskamer-waarderingsinstructie",
+      "relationship_type": "methodology_depends_on",
+      "basis": "The Waarderingskamer's own page on the Waarderingsinstructie states: \"De Waarderingsinstructie geeft de (kwaliteits-) eisen waaraan een goede uitvoering van de Wet WOZ moet voldoen... Daarmee is deze Waarderingsinstructie ook de basis voor het toezicht door de Waarderingskamer\" (The Waarderingsinstructie sets the quality requirements a proper execution of the Wet WOZ must meet... this Waarderingsinstructie is therefore also the basis for the Waarderingskamer's supervision). The 2026 \"Staat van de WOZ\" report itself (p.9) ties its own quality-assessment criteria directly to this document: \"Deze eisen worden vastgelegd in de nieuwe versie van de Waarderingsinstructie die wij momenteel ontwikkelen.\"",
+      "evidence_url": "https://www.waarderingskamer.nl/voor-gemeenten/hulpmiddelen/waarderingsinstructie"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "se-scb-hbs -> Swedish CPI/HICP weights (national-accounts already the confirmed source; HUT is not a weight source)",
+      "source": "se-scb-hbs",
+      "target": null,
+      "reason": "note",
+      "why": "Re-confirms the round-1 finding (eu-national-chains-2026-08-28.json): SCB's HUT/HE0201 product page and its SCBDOK 2012 documentation attribute Swedish CPI/HICP weighting entirely to national accounts household final consumption expenditure, never to the HBS. No new edge proposed here; the genuine, separate dependency found this round is the methodology-handbook edge to eurostat-hbs-methodology-2003 (minted above), which is about survey-design harmonisation, not price-index weighting."
+    },
+    {
+      "edge": "nl-waarderingskamer-staat-van-de-woz -> nl-kadaster-brk",
+      "source": "nl-waarderingskamer-staat-van-de-woz",
+      "target": "nl-kadaster-brk",
+      "reason": "no-document",
+      "why": "The 2026 report names the Landelijke Voorziening WOZ (LV WOZ) / Basisregistratie WOZ, operated by Kadaster as infrastructure host, as where municipalities' WOZ valuation data lives -- but the Basisregistratie WOZ is a legally distinct register from the Basisregistratie Kadaster (BRK); the report never equates or connects the two, and \"BRK\" does not appear in the document at all. Declined rather than assumed from Kadaster operating both."
+    }
+  ]
+}

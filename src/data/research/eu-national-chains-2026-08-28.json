@@ -1727,8 +1727,8 @@
       "edge": "gr-elstat-national-accounts -> gr-elstat-lfs",
       "source": "gr-elstat-national-accounts",
       "target": "gr-elstat-lfs",
-      "reason": "no-document",
-      "why": "Looked for and not found within budget: ELSTAT's LFS March 2026 release, its LFS infographic page and its Quarterly National Accounts publication page (code SEL84) none state that national-accounts employment derives from the LFS. An ELSTAT LFS methodology PDF returned HTTP 403 and a guessed Eurostat Greek national-accounts ESMS URL 404'd. Plausible and worth one more pass."
+      "reason": "resolved",
+      "why": "Looked for and not found within budget: ELSTAT's LFS March 2026 release, its LFS infographic page and its Quarterly National Accounts publication page (code SEL84) none state that national-accounts employment derives from the LFS. An ELSTAT LFS methodology PDF returned HTTP 403 and a guessed Eurostat Greek national-accounts ESMS URL 404'd. Plausible and worth one more pass. RESOLVED 2026-08-30: the correct Eurostat dataset page (nama_10_pe_esms_el.htm, not na10_esms_el.htm) carries an explicit LFS-sourcing statement; edge now live -- see eu-unlinked-wiring-round-2026-08-30.json."
     },
     {
       "edge": "gr-elstat-cpi -> gr-elstat-national-accounts",
@@ -1762,8 +1762,8 @@
       "edge": "pl-gus-national-accounts -> pl-gus-lfs",
       "source": "pl-gus-national-accounts",
       "target": "pl-gus-lfs",
-      "reason": "deferred",
-      "why": "Eurostat's Poland national-accounts metadata (na10_esms_pl.htm) references LFS methodological notebooks and lists 'persons employed in the national economy' among its source surveys, and one fetch returned a fragment reading 'the procedure of data compilation for LFS is provided', but a second targeted fetch could not reproduce a clean sentence stating national-accounts employment is derived from BAEL. Deferred rather than minted on a fragment. Poland is one of only three countries in this round without the national-accounts<-LFS edge for evidentiary rather than substantive reasons."
+      "reason": "resolved",
+      "why": "Eurostat's Poland national-accounts metadata (na10_esms_pl.htm) references LFS methodological notebooks and lists 'persons employed in the national economy' among its source surveys, and one fetch returned a fragment reading 'the procedure of data compilation for LFS is provided', but a second targeted fetch could not reproduce a clean sentence stating national-accounts employment is derived from BAEL. Deferred rather than minted on a fragment. Poland is one of only three countries in this round without the national-accounts<-LFS edge for evidentiary rather than substantive reasons. RESOLVED 2026-08-30: the correct Eurostat dataset page (nama_10_pe_esms_pl.htm, the employment-specific ESMS page, not na10_esms_pl.htm/nama_10_gdp_esms_pl.htm) carries a clean declarative sentence; edge now live -- see eu-unlinked-wiring-round-2026-08-30.json."
     },
     {
       "edge": "is-hagstofa-national-accounts -> is-hagstofa-lfs",
