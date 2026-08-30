@@ -1,77 +1,77 @@
 {
- "_slice": "crossborder-round3",
- "_researched": "2026-08-22",
- "_note": "Round 3 redo of the cross-border standards research (notes/grok-prompt-cross-border-round3-2026-08-22.md), minted 2026-08-22 after full raw verification of Grok's redo reply (CROSSBORDERROUND3NOTE.md / crossborderround320260822.json — files_received: true, 10/10 attachments, fixing round 3's first-attempt attachment-relay failure; see notes/grok-diary.md §0). Thomas's merge decision on Mauritius SDDS Plus granularity (2026-08-22): keep the existing institutional edge (mu-statsmauritius -> imf-sdds-plus, from 5s) AND add both new series-level edges Grok proposed — three total edges into imf-sdds-plus for Mauritius, accepted as additive rather than a replacement. HELD OUT, not minted: Grok's Afghanistan CR 06/251 (IMF Country Report No. 06/251) 'basis addendum' for af-nsia -> imf-e-gdds. Both quoted sentences Grok supplied (\"we continue to make progress in drafting the metadata necessary to participate in the General Data Dissemination System\" and \"STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)\") failed raw verification: the actual 89-page PDF (fetched via Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback) was searched exhaustively — full-document accessibility-tree search (not just the visually-rendered range) for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' all returned zero matches. This is the second round in a row this exact quote has failed verification (the existing af-nsia -> imf-e-gdds edge's basis, minted 2026-08-22 in crossborder-standards-2026-08-22.json, already carries the same caveat from round 1/2: 'its quote could not be independently retrieved'). Recommend telling Grok this specific claim keeps not panning out and should be dropped from future rounds rather than retried a third time. The af-bo -> imf-e-gdds edge below is unaffected — it rests on a different, independently-verified source (DAB's own website), not on CR 06/251.",
- "reports": [
-  {
-   "id": "mu-national-accounts",
-   "title": "National Accounts Estimates (Mauritius)",
-   "publisher": "Statistics Mauritius (Ministry of Finance)",
-   "country": "MU",
-   "jurisdiction_level": "federal",
-   "region": "Mauritius",
-   "description": "Statistics Mauritius's quarterly national accounts release (Economic and Social Indicators series). June 2026 issue (ESI Issue No. 1937): 'Concepts and definitions used in the computation of estimates in this issue are given at section 6.3 and are according to the United Nations System of National Accounts (SNA) 2008 manual.' The same issue notes the forthcoming September 2026 CEA-2023 benchmark revision 'will incorporate some of the recommendations of the System of National Accounts 2025 (SNA 2025)', confirming SNA 2008 is the current, not superseded, standard as of this release. Quote raw-verified 2026-08-22 (statsmauritius.govmu.org PDF).",
-   "releases_per_year": 4,
-   "cadence_note": "Quarterly ESI release; base-period benchmark revisions (e.g. CEA-2023, expected September 2026) are periodic methodology updates layered on the same quarterly cadence, not a separate publication.",
-   "last_updated": null,
-   "url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf",
-   "domains": [
-    "national-accounts"
-   ]
-  }
- ],
- "dependencies": [
-  {
-   "source_report_id": "mu-national-accounts",
-   "target_report_id": "sna-2008",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Statistics Mauritius, National Accounts Estimates, June 2026 (ESI Issue No. 1937): 'Concepts and definitions used in the computation of estimates in this issue are given at section 6.3 and are according to the United Nations System of National Accounts (SNA) 2008 manual.' Quote raw-verified 2026-08-22.",
-   "evidence_url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf"
-  },
-  {
-   "source_report_id": "mu-national-accounts",
-   "target_report_id": "imf-sdds-plus",
-   "relationship_type": "methodology_depends_on",
-   "basis": "IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's own National Summary Data Page (NSDP, last updated 18 August 2026) names national accounts among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.",
-   "evidence_url": "https://statsmauritius.govmu.org/"
-  },
-  {
-   "source_report_id": "mu-statsmauritius-cpi",
-   "target_report_id": "imf-sdds-plus",
-   "relationship_type": "methodology_depends_on",
-   "basis": "IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's NSDP (last updated 18 August 2026) names the CPI among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.",
-   "evidence_url": "https://statsmauritius.govmu.org/"
-  },
-  {
-   "source_report_id": "af-bop",
-   "target_report_id": "imf-e-gdds",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Da Afghanistan Bank's own External Sector Statistics page titles its balance-of-payments file 'Balance of Payments Transactions (BPM6)' (latest posted period Q1 2021, portal otherwise dormant). Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node. Raw-verified 2026-08-22.",
-   "evidence_url": "https://dab.gov.af/External-Sector-Statistics1"
-  },
-  {
-   "source_report_id": "iq-bop",
-   "target_report_id": "imf-e-gdds",
-   "relationship_type": "methodology_depends_on",
-   "basis": "IMF DSBB Balance of Payments DQAF (Iraq): 'Transactions are classified largely in accordance with BPM6.' Category-level metadata beyond the existing iq-cso -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render).",
-   "evidence_url": "https://dsbb.imf.org/"
-  },
-  {
-   "source_report_id": "ir-national-accounts",
-   "target_report_id": "imf-e-gdds",
-   "relationship_type": "methodology_depends_on",
-   "basis": "IMF DSBB National Accounts DQAF (Iran, updated 6 August 2012): the Central Bank of Iran compiles accounts 'based on ... SNA 1968 and 1993' — an honest, dated SNA-vintage disclosure (not SNA 2008), distinct from the existing ir-sci -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render). Minor discrepancy noted, non-blocking: Grok's basis cited this DQAF page as also carrying a '15 December 2009' update date matching Iraq's; the live Iraq DQAF page instead showed 'Last Updated: Jan 08, 2018' — does not affect this Iran quote or edge.",
-   "evidence_url": "https://dsbb.imf.org/"
-  }
- ],
- "relations": [],
- "_dropped": [
-  {
-   "edge": "af-nsia -> imf-e-gdds (basis addendum)",
-   "source": "af-nsia",
-   "target": "imf-e-gdds",
-   "reason": "caveat",
-   "why": "Grok's redo cited IMF Country Report No. 06/251 (Islamic Republic of Afghanistan, Seventh Review Under the SMP / PRGF request, July 2006) for two supporting quotes: a MEFP (Attachment II) sentence on 'drafting the metadata necessary to participate in the General Data Dissemination System', and a separate Executive Director statement that 'STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)'. The correct 89-page document was located and read (Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback). Full-document accessibility-tree search for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' returned zero matches. This is the second consecutive round this exact claim has failed verification; the existing af-nsia -> imf-e-gdds edge (minted round 1/2) already carries the same 'quote could not be independently retrieved' caveat and is left unchanged."
-  }
- ]
+  "_slice": "crossborder-round3",
+  "_researched": "2026-08-22",
+  "_note": "Round 3 redo of the cross-border standards research (notes/grok-prompt-cross-border-round3-2026-08-22.md), minted 2026-08-22 after full raw verification of Grok's redo reply (CROSSBORDERROUND3NOTE.md / crossborderround320260822.json — files_received: true, 10/10 attachments, fixing round 3's first-attempt attachment-relay failure; see notes/grok-diary.md §0). Thomas's merge decision on Mauritius SDDS Plus granularity (2026-08-22): keep the existing institutional edge (mu-statsmauritius -> imf-sdds-plus, from 5s) AND add both new series-level edges Grok proposed — three total edges into imf-sdds-plus for Mauritius, accepted as additive rather than a replacement. HELD OUT, not minted: Grok's Afghanistan CR 06/251 (IMF Country Report No. 06/251) 'basis addendum' for af-nsia -> imf-e-gdds. Both quoted sentences Grok supplied (\"we continue to make progress in drafting the metadata necessary to participate in the General Data Dissemination System\" and \"STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)\") failed raw verification: the actual 89-page PDF (fetched via Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback) was searched exhaustively — full-document accessibility-tree search (not just the visually-rendered range) for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' all returned zero matches. This is the second round in a row this exact quote has failed verification (the existing af-nsia -> imf-e-gdds edge's basis, minted 2026-08-22 in crossborder-standards-2026-08-22.json, already carries the same caveat from round 1/2: 'its quote could not be independently retrieved'). Recommend telling Grok this specific claim keeps not panning out and should be dropped from future rounds rather than retried a third time. The af-bo -> imf-e-gdds edge below is unaffected — it rests on a different, independently-verified source (DAB's own website), not on CR 06/251.",
+  "reports": [
+    {
+      "id": "mu-national-accounts",
+      "title": "National Accounts Estimates (Mauritius)",
+      "publisher": "Statistics Mauritius (Ministry of Finance)",
+      "country": "MU",
+      "jurisdiction_level": "federal",
+      "region": "Mauritius",
+      "description": "Statistics Mauritius's quarterly national accounts release (Economic and Social Indicators series). June 2026 issue (ESI Issue No. 1937): 'Concepts and definitions used in the computation of estimates in this issue are given at section 6.3 and are according to the United Nations System of National Accounts (SNA) 2008 manual.' The same issue notes the forthcoming September 2026 CEA-2023 benchmark revision 'will incorporate some of the recommendations of the System of National Accounts 2025 (SNA 2025)', confirming SNA 2008 is the current, not superseded, standard as of this release. Quote raw-verified 2026-08-22 (statsmauritius.govmu.org PDF).",
+      "releases_per_year": 4,
+      "cadence_note": "Quarterly ESI release; base-period benchmark revisions (e.g. CEA-2023, expected September 2026) are periodic methodology updates layered on the same quarterly cadence, not a separate publication.",
+      "last_updated": null,
+      "url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf",
+      "domains": [
+        "national-accounts"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "mu-national-accounts",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Statistics Mauritius, National Accounts Estimates, June 2026 (ESI Issue No. 1937): 'Concepts and definitions used in the computation of estimates in this issue are given at section 6.3 and are according to the United Nations System of National Accounts (SNA) 2008 manual.' Quote raw-verified 2026-08-22.",
+      "evidence_url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf"
+    },
+    {
+      "source_report_id": "mu-national-accounts",
+      "target_report_id": "imf-sdds-plus",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's own National Summary Data Page (NSDP, last updated 18 August 2026) names national accounts among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.",
+      "evidence_url": "https://statsmauritius.govmu.org/"
+    },
+    {
+      "source_report_id": "mu-statsmauritius-cpi",
+      "target_report_id": "imf-sdds-plus",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's NSDP (last updated 18 August 2026) names the CPI among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.",
+      "evidence_url": "https://statsmauritius.govmu.org/"
+    },
+    {
+      "source_report_id": "af-bop",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Da Afghanistan Bank's own External Sector Statistics page titles its balance-of-payments file 'Balance of Payments Transactions (BPM6)' (latest posted period Q1 2021, portal otherwise dormant). Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node. Raw-verified 2026-08-22.",
+      "evidence_url": "https://dab.gov.af/External-Sector-Statistics1"
+    },
+    {
+      "source_report_id": "iq-bop",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB Balance of Payments DQAF (Iraq): 'Transactions are classified largely in accordance with BPM6.' Category-level metadata beyond the existing iq-cso -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render).",
+      "evidence_url": "https://dsbb.imf.org/"
+    },
+    {
+      "source_report_id": "ir-national-accounts",
+      "target_report_id": "imf-e-gdds",
+      "relationship_type": "methodology_depends_on",
+      "basis": "IMF DSBB National Accounts DQAF (Iran, updated 6 August 2012): the Central Bank of Iran compiles accounts 'based on ... SNA 1968 and 1993' — an honest, dated SNA-vintage disclosure (not SNA 2008), distinct from the existing ir-sci -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render). Minor discrepancy noted, non-blocking: Grok's basis cited this DQAF page as also carrying a '15 December 2009' update date matching Iraq's; the live Iraq DQAF page instead showed 'Last Updated: Jan 08, 2018' — does not affect this Iran quote or edge.",
+      "evidence_url": "https://dsbb.imf.org/"
+    }
+  ],
+  "relations": [],
+  "_dropped": [
+    {
+      "edge": "af-nsia -> imf-e-gdds (basis addendum)",
+      "source": "af-nsia",
+      "target": "imf-e-gdds",
+      "reason": "caveat",
+      "why": "Grok's redo cited IMF Country Report No. 06/251 (Islamic Republic of Afghanistan, Seventh Review Under the SMP / PRGF request, July 2006) for two supporting quotes: a MEFP (Attachment II) sentence on 'drafting the metadata necessary to participate in the General Data Dissemination System', and a separate Executive Director statement that 'STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)'. The correct 89-page document was located and read (Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback). Full-document accessibility-tree search for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' returned zero matches. This is the second consecutive round this exact claim has failed verification; the existing af-nsia -> imf-e-gdds edge (minted round 1/2) already carries the same 'quote could not be independently retrieved' caveat and is left unchanged."
+    }
+  ]
 }

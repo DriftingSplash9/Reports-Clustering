@@ -35,7 +35,7 @@
       "evidence": "documented"
     },
     {
-      "source_report_id": "mx-chiapas-tuxtla-detail",
+      "source_report_id": "mx-tuxtla",
       "target_report_id": "mx-censo-poblacion",
       "relationship_type": "uses_data_from",
       "basis": "The same Tuxtla Gutiérrez (07101) municipal profile lists the 2020 Population and Housing Census as source footnotes [3] and [4] — extended and basic questionnaires — carrying the municipal disability, household-income and derived poverty figures. Verbatim: \"[3] Instituto Nacional de Estadística y Geografía (INEGI), Cuestionario ampliado del Censo de Población y Vivienda 2020. [4] Instituto Nacional de Estadística y Geografía (INEGI), Cuestionario básico del Censo de Población y Vivienda 2020.\"",
@@ -46,20 +46,12 @@
       "source_report_id": "mx-acapulco-metro",
       "target_report_id": "mx-censo-poblacion",
       "relationship_type": "uses_data_from",
-      "basis": "Acapulco's own Plan Municipal de Desarrollo Urbano opens its socio-demographic diagnosis by taking the municipality's population count directly from the 2020 census. Verbatim: \"El Censo de Población y Vivienda del Instituto Nacional de Estadística, Geografía e Informática (INEGI) (2020) contabilizó una población de 779,566 habitantes en el municipio de Acapulco de Juárez, que representan el 22.0% de la población estatal\". Independently corroborated by the Bienestar municipal profile for Acapulco de Juárez (https://www.gob.mx/cms/uploads/attachment/file/1061187/12001_AcapulcoDeJuarez_2026.pdf), whose footnotes carry the identical census citations.",
+      "basis": "Acapulco's own Plan Municipal de Desarrollo Urbano opens its socio-demographic diagnosis by taking the municipality's population count directly from the 2020 census. Verbatim: \"El Censo de Población y Vivienda del Instituto Nacional de Estadística, Geografía e Informática (INEGI) (2020) contabilizó una población de 779,566 habitantes en el municipio de Acapulco de Juárez, que representan el 22.0% de la población estatal\". Independently corroborated by the Bienestar municipal profile for Acapulco de Juárez (https://www.gob.mx/cms/uploads/attachment/file/1061187/12001_AcapulcoDeJuarez_2026.pdf), whose footnotes carry the identical census citations. Additionally, pMDU section 4.5.3 (Población Económicamente Activa) — the section round 2 could see only in the table of contents — derives Acapulco's PEA, employed and unemployed counts from the 2020 census and INEGI's occupation tabulations. Verbatim: \"Del Censo de Población y Vivienda (2020) y de los Tabulados de INEGI, se señala que para el municipio de Acapulco la PEA3 representa el 66% de la población total de más de 15 años; el 98% de la PEA corresponde a la población ocupada con 377,351 personas y el 2% a población desocupada corresponde a 7,626 acapulqueños\". The section's Table 27 source line reads \"Fuente: Elaboración propia CONURBA, 2021; con base en Tabulados de Ocupación, INEGI; Censo de Población y Vivienda INEGI, 2020\".",
       "evidence_url": "https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf",
       "evidence": "documented"
     },
     {
-      "source_report_id": "mx-guerrero-acapulco-detail",
-      "target_report_id": "mx-censo-poblacion",
-      "relationship_type": "uses_data_from",
-      "basis": "PMDU section 4.5.3 (Población Económicamente Activa) — the section round 2 could see only in the table of contents — derives Acapulco's PEA, employed and unemployed counts from the 2020 census and INEGI's occupation tabulations. Verbatim: \"Del Censo de Población y Vivienda (2020) y de los Tabulados de INEGI, se señala que para el municipio de Acapulco la PEA3 representa el 66% de la población total de más de 15 años; el 98% de la PEA corresponde a la población ocupada con 377,351 personas y el 2% a población desocupada corresponde a 7,626 acapulqueños\". The section's Table 27 source line reads \"Fuente: Elaboración propia CONURBA, 2021; con base en Tabulados de Ocupación, INEGI; Censo de Población y Vivienda INEGI, 2020\".",
-      "evidence_url": "https://acapulco.gob.mx/transparencia/wp-content/uploads/pmdua/PMDUAcapulco.pdf",
-      "evidence": "documented"
-    },
-    {
-      "source_report_id": "mx-guerrero-acapulco-detail",
+      "source_report_id": "mx-acapulco-metro",
       "target_report_id": "mx-denue",
       "relationship_type": "uses_data_from",
       "basis": "PMDU section 4.5.6 (Unidades económicas) takes Acapulco's establishment count and sector composition from DENUE, which also has a formal bibliography entry in the plan and is the operative input to its economic-centrality method. Verbatim: \"El Directorio Estadístico Nacional de Unidades Económicas (DENUE) (INEGI (b), 2019) señala que para el año 2019 el municipio de Acapulco tenía 37,614 unidades económicas.\"",
@@ -101,18 +93,18 @@
   ],
   "_dropped": [
     {
-      "edge": "mx-tuxtla -> mx-chiapas-tuxtla-detail",
+      "edge": "mx-tuxtla (merge note)",
       "source": "mx-tuxtla",
-      "target": "mx-chiapas-tuxtla-detail",
+      "target": null,
       "reason": "note",
-      "why": "DUPLICATE-NODE FLAG, for Thomas — round 6 raised this as a suspicion; this round confirms it on a field-by-field diff. mx-tuxtla and mx-chiapas-tuxtla-detail are identical on url, publisher, region, country, jurisdiction_level, releases_per_year, domains, _shape, _referenced_by and last_updated. They differ only in id, a reworded title, paraphrased description/_notes ('thinner independent local statistical production' vs 'thinner local institutional production'), and _batch (batch12-poor-states vs batch12-cdmx-finish-poor-states) — two passes over the same subject in overlapping batches. This round deliberately minted ONE edge per node rather than both edges on both nodes, so nothing is double-counted, but a merge is the right fix and costs nothing in rewiring. Also worth reconciling on merge: both nodes list publisher 'INEGI / CEIEG Chiapas / Ayuntamiento' and a url on inegi.org.mx, but the document that actually carries the dependency statement is published by the Secretaría de Bienestar."
+      "why": "MERGED 2026-08-29 (Thomas's call). `mx-chiapas-tuxtla-detail` was a duplicate of `mx-tuxtla` — two passes over the same subject from overlapping batch12 files (batch12-poor-states and batch12-cdmx-finish-poor-states), identical on url, publisher, region, country, jurisdiction_level, releases_per_year, domains, _shape, _referenced_by and last_updated, differing only in id, a reworded title and a paraphrased description. The duplicate is retired; its census edge was repointed onto `mx-tuxtla`, which now carries both the ENIGH and the census dependency, and its _batch/_referenced_by entries were folded in. Full node record preserved in notes/retired-nodes-2026-08-29.json. Still worth reconciling: the surviving node lists publisher 'INEGI / CEIEG Chiapas / Ayuntamiento' and a url on inegi.org.mx, but the document that actually carries the dependency statement is published by the Secretaría de Bienestar."
     },
     {
-      "edge": "mx-acapulco-metro -> mx-guerrero-acapulco-detail",
+      "edge": "mx-acapulco-metro (merge note)",
       "source": "mx-acapulco-metro",
-      "target": "mx-guerrero-acapulco-detail",
+      "target": null,
       "reason": "note",
-      "why": "DUPLICATE-NODE FLAG, for Thomas — same shape as the Tuxtla pair above, confirmed on the same field-by-field diff and traceable to the same two overlapping batches. Differences are limited to a reworded title, paraphrased description/_notes, a differently-split _referenced_by, and ' / Guerrero state sources' appended to one publisher field. Unlike the Tuxtla pair these two are cleanly sourced — the PMDU genuinely is an Ayuntamiento de Acapulco product, matching the publisher field. This round minted the census edge on one and the PEA/DENUE edges on the other from genuinely different sections of the same plan, so the edges survive a merge intact."
+      "why": "MERGED 2026-08-29 (Thomas's call). `mx-guerrero-acapulco-detail` was a duplicate of `mx-acapulco-metro`, same shape and same two overlapping batch12 files as the Tuxtla pair. The duplicate is retired; its DENUE edge was repointed onto `mx-acapulco-metro`, and its census edge collided with the survivor's own — the two cited different sections of the same Plan Municipal de Desarrollo Urbano (the population-count sentence and section 4.5.3's PEA derivation), so the two bases were folded into one edge rather than one being discarded. Full node record preserved in notes/retired-nodes-2026-08-29.json. These two were the cleaner pair: the PMDU genuinely is an Ayuntamiento de Acapulco product, matching the publisher field."
     },
     {
       "edge": "mx-nuevo-leon-imss-municipal -> mx-imss-puestos",

@@ -412,6 +412,41 @@ confirmed solid. Arrow-key fly navigation: offered, declined. Parked: 134
 uncountable cadences; 7 single-use `proposed:` tags; `diary.csv` is Thomas's
 personal file — leave it alone.
 
+**Treaty and agreement nodes: retired, do not re-import** (Thomas,
+2026-08-29). 72 nodes were removed from the corpus as a modelling decision:
+bilateral and plurilateral trade/economic-partnership agreements (KORUS,
+RCEP, CPTPP, the EVFTA/VJEPA/VKFTA family, ANZTEC/ASTEP/TIFA, MERCOSUR and
+CAN instruments), investment-treaty and FTA "network overview" framings,
+multilateral environmental conventions (Basel, Ramsar/CITES, Montreal,
+Stockholm/Rotterdam, UNCCD, Paris), and bloc-membership or bilateral-
+relationship framings (ASEAN participation, OECD/WTO membership, NATO
+membership, "comprehensive strategic partnership" nodes, the OFAC sanctions
+regime's children). **The reason is structural, not evidential**: this is a
+graph of reports whose methodology or data feeds other reports, and a treaty
+is not a publication with a methodology dependency — no research round could
+ever wire them, and they were 7% of the corpus and 11% of its isolated
+nodes. All 72 were orphans, so no edge was broken. Full records are archived
+verbatim in `notes/retired-nodes-2026-08-29.json`.
+
+Consequences worth knowing. **A legal instrument is still a legitimate node
+when a statistical release names it as its own legal or methodological
+basis** — Japan's Statistics Act, Brazil's Lei 8.213, the EAEU statistical
+protocol, the UEMOA financial-regime directive, national social-protection
+acts, the EDP inventories: whole rounds are built on that family and it is
+untouched. The cut is "instrument nobody's statistics depend on", not
+"instrument". Three nodes deliberately survived the sweep:
+`ve-ofac-sanciones` (it is the `part_of` container for two other nodes,
+so removing it would leave dangling references), `tr-eu-trade` (named like a
+treaty, actually merchandise trade statistics), and `sdmx-standard` /
+`sna-2025` (statistical standards, not agreements).
+
+Adjacent and NOT yet decided: a smaller family of analytical "framing" and
+"contrast" nodes (`jp-prefectural-contrast-summary`,
+`kr-regional-contrast-extended`, `pe-loreto`, `pe-moquegua`,
+`id-defence-posture`, `vn-defence-policy`, `tw-new-southbound-tech` and
+similar) has the same not-a-publication smell but is a separate question —
+raise it before sweeping it.
+
 **Iran's SNA vintage** (`ir-national-accounts` -> `sna-2008`, plus the six
 held SNA-93 edges): disregarded (Thomas, 2026-08-29). Leave the live
 `sna-2008` edge as is, caveat and all; the six held SNA-93 edges stay

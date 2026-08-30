@@ -11,7 +11,9 @@
       "description": "Confirms Libya's IMF data-dissemination-standards subscription status directly from the DSBB's own country pages. e-GDDS category page (dsbb.imf.org/egdds/country/LBY/category), header: 'Enhanced General Data Dissemination System (As provided by Libya as a participant in the e-GDDS)' — confirms Libya IS an e-GDDS participant, with data-provider agencies listed under 'Data Integrity and Access by the Public': Central Bank of Libya; Ministry of Planning and Finance; General Authority for Information (GAI). The parallel SDDS category page (dsbb.imf.org/sdds/country/LBY/category) returns instead: 'Malformed request, no data was found. Please retry or report to the STASR@imf.org' — read as confirmation Libya is NOT an SDDS subscriber, only an e-GDDS participant. This resolves a previously 'unconfirmed' open question in the corpus (ly-sdds-egdds-status-unconfirmed, in ly-cpi-social-protection.json) that had been blocked because dsbb.imf.org is an Angular single-page application. CROSS-CHECK NOTE: on-disk scratch copies of a raw/static fetch of this domain (dsbb_libya.html, dsbb_contacts.html) were checked this round and confirmed to contain only the site's generic JS navigation shell (menu chrome, no Libya-specific content, no error text but effectively empty of the country data) — a genuine dead end for non-JS-rendering fetch tools. Only a live, JS-rendering browser navigation (as used in the underlying research session) reached the actual country-specific content quoted above; see _dropped for this method-failure record.",
       "last_updated": null,
       "url": "https://dsbb.imf.org/egdds/country/LBY/category",
-      "domains": ["national-accounts"]
+      "domains": [
+        "national-accounts"
+      ]
     },
     {
       "id": "ly-dsbb-cpi-dqaf",
@@ -23,7 +25,9 @@
       "description": "Names and dates the weight survey behind Libya's pre-2011 CPI, resolving (for that vintage) a previously 'not clearly named' open question in the corpus. Section 2.2.1 'Scope': 'The weights, based on expenditure data collected during the 2003 Household Expenditure Survey (HES), reflect expenditures of urban households in the reference population (Tripoli).' Section 9.2 'Plans for improvement': 'Weights will be updated using data from 2007/2008 Household Expenditure Survey.' Names the responsible agency: 'The General Authority for Information (GAI) is responsible for collecting the data through censuses and surveys ... granted by Law no.16 (1963) termed the Statistical Law.' Page metadata dated 'Last Updated: Nov 11, 2009' — this describes the pre-2011, Tripoli-only CPI regime, not the post-2011 series (see ly-bsc-cpi in ly-cpi-social-protection.json). The successor/current CPI is IMF-described (2025 Article IV, IMF Country Report 25/148, para 6) only as based on 'the new household spending survey' — no formal proper name for that newer survey was found in any primary source this round either, so the newer vintage's survey name remains unresolved. The continuity between the two CPI regimes (old GAI/2003-HES series vs. new BSC series) is the researcher's own synthesis of two separate documents read in different sessions, not a citation from one document to the other, so no dependency edge is drawn between them (see _dropped).",
       "last_updated": null,
       "url": "https://dsbb.imf.org/egdds/dqaf-base/country/LBY/category/CPI00",
-      "domains": ["inflation"]
+      "domains": [
+        "inflation"
+      ]
     },
     {
       "id": "ly-salary-law-1981",
@@ -35,7 +39,10 @@
       "description": "Major upgrade from a previously 'not located' open question in the corpus (ly-civil-service-salary-schedule-not-located, in ly-cpi-social-protection.json) to a named, dated, readable law. VERIFIED via the current Ministry of Justice legislation portal (aladel.gov.ly), full law text. Article 3(a) sets scope, explicitly covering municipal employees: 'تسري أحكام هذا القانون على جميع العاملين الوطنيين في الجهات الآتية: أ) الأمانات واللجان الشعبية للبلديات والأجهزة والتقسيمات التنظيمية التابعة لأي منهما...' — 'The provisions of this law apply to all national employees in: (a) the secretariats and popular committees of the municipalities (baladiyat) and organs/divisions affiliated with them...' Article 4: 'يتحدد الإطار العام لمرتبات كافة العاملين الوطنيين ... وفقاً لما هو محدد بالجدول رقم (1) المرفق' — 'The general framework for salaries of all national employees is determined per attached Table No. (1)...' Effective January 1, 1982 (Jamahiriya-era terminology: People's Congress / General People's Committee). Structure: a base Grade Table No. 1 plus nine substitute tables (police, customs guard, armed forces, judiciary, Jamahiriya Security, Central Inspection apparatus, universities, municipal guard). CAVEAT: the numeric pay tables themselves were not rendered in the page-text extraction read this round (may sit in an attached PDF/image not captured); the law's operative articles were read in full, but whether the numeric tables are separately downloadable from this page was not confirmed. A separate, non-governing 21 November 2015 document on the same domain (a Ministry of Justice announcement of an Audit Bureau workshop on a proposed replacement salary schedule) is deliberately NOT treated as evidence this law was amended or repealed — see _dropped for why.",
       "last_updated": null,
       "url": "https://aladel.gov.ly/home/قانون-رقم-15-لسنة-1981م-بشأن-نظام-المرتبات-للعاملين-ل/",
-      "domains": ["labour", "municipal-finance"]
+      "domains": [
+        "labour",
+        "municipal-finance"
+      ]
     },
     {
       "id": "ly-lgm-law-59-2012",
@@ -47,7 +54,9 @@
       "description": "New municipal-tier node this round. Confirmed via the Ministry of Local Government's own site (lgm.gov.ly), the current GNU-aligned ministry implementing Libya's local-administration framework (Minister named on the homepage: بدر الدين التومي / Badr Eddin Al-Toumi). Homepage welcome statement: 'تفعيل القانون رقم (59) لسنة 2012 ميلادية بشأن نظام الإدارة المحلية وتعديلاته' — 'activating Law No. (59) of 2012 on the local administration system and its amendments' — direct primary confirmation this ministry is the current implementer of the 2012 law establishing baladiyat (municipalities). The ministry's legal-texts page (lgm.gov.ly/legal/laws/) hosts the law texts for direct download, titled 'قانون رقم 59 لسنة 2012 بشان الادارة المحلية' and its amendment 'القانون رقم (9) لسنة 2013م بتعديل القانون رقم (59) لسنة 2012م. في شأن نظام الإدارة المحلية.' Separately, lgm.gov.ly/hr/ ('شؤون الوظيفة المحلية' — Local Employment Affairs) confirms a live municipal-employee payroll/HR system exists: 'يتيح تطبيق بلديتي - الوظيفة المحلية امكانية الوصول لاهم البيانات التي يحتاجها موظفين البلديات ... وايضاً امكانية معرفة القرارات الخاصة به و مرتباته الشهرية' — 'The Baladiyati — Local Employment app gives municipal employees access to key data ... including their decisions and monthly salaries' — but the actual salary figures sit inside an authenticated employee-only app, not retrievable as a document (see _dropped).",
       "last_updated": null,
       "url": "https://www.lgm.gov.ly/legal/laws/",
-      "domains": ["municipal-finance"]
+      "domains": [
+        "municipal-finance"
+      ]
     },
     {
       "id": "ly-lgm-decision-1500-2022",
@@ -59,7 +68,9 @@
       "description": "Confirmed via the Ministry of Local Government's decisions archive (lgm.gov.ly/legal/decsions/): 'قرار رقم 1500 لسنة 2022 بشان اعتماد التنظيم الداخلي للهيكل الموحد للبلديات' — 'Decision No. 1500 of 2022 on approving the internal organization of the Unified Structure of Municipalities.' Hosted alongside Law 59/2012 and its 2013 amendment (see ly-lgm-law-59-2012) in the same ministry legal-documents archive; the decision's own quoted title does not itself cite Law 59/2012 by number, so no dependency edge is drawn between the two despite the evident administrative relationship (both being LGM instruments governing municipal structure) — see _dropped.",
       "last_updated": null,
       "url": "https://www.lgm.gov.ly/legal/decsions/",
-      "domains": ["municipal-finance"]
+      "domains": [
+        "municipal-finance"
+      ]
     }
   ],
   "dependencies": [],

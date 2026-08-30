@@ -1,130 +1,130 @@
 {
- "reports": [],
- "dependencies": [
-  {
-   "source_report_id": "id-pdrb",
-   "target_report_id": "sna-2008",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Provincial GDP (PDRB) is compiled simultaneously with national GDP under the same 2008 SNA framework and 2010 base year to ensure consistency. Evidence: \"Bantuan teknis dan Support ABS terkait Neraca Nasional meliputi kegiatan training dan workshop dalam penyusunan Supply and Use Table (SUT) dan Full Sequence of Accounts (FSA) dalam rangka implementasi SNA 2008 yang ditargetkan akan dirilis perdana pada 2014. ... sebagai benchmark dalam penyusunan PDB/PDRB tahun dasar 2010\""
-  },
-  {
-   "source_report_id": "id-bop",
-   "target_report_id": "imf-bpm6",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Bank Indonesia compiles Balance of Payments and International Investment Position statistics according to the concepts, definitions, and classifications of BPM6. Evidence: \"Generally, BOP statistics are compiled based on the Balance of Payments and International Investment Position Manual, 6th Edition (BPM6), which includes transactions between residents and non-residents. ... Fundamentally, BOP Statistics are compiled based on the concepts and definitions contained in BPM6.\""
-  },
-  {
-   "source_report_id": "id-cpi",
-   "target_report_id": "id-susenas",
-   "relationship_type": "uses_data_from",
-   "basis": "Susenas household expenditure data serve as an alternative or supporting source for updating CPI expenditure weights and consumption patterns (alongside the primary HBS). Evidence: \"In Statistics Indonesia, one of the alternative data sources that portrays household expenditure is National Socio-Economic Survey (SUSENAS). ... The grouping of goods and services captured in the consumption module Susenas is also guided by the 2018 COICOP, the same as was done for the HBS and CPS. Therefore, this data can be used as an alternative approach to annual CPI reweighting.\""
-  },
-  {
-   "source_report_id": "id-national-accounts",
-   "target_report_id": "id-susenas",
-   "relationship_type": "uses_data_from",
-   "basis": "Household final consumption expenditure (PK-RT) estimates in the national accounts are based on per-capita consumption expenditure data from Susenas, grouped by COICOP divisions. Evidence: \"Estimasi PK-RT untuk harga berlaku didasarkan pada data pengeluaran konsumsi per kapita hasil Survei Sosial Ekonomi Nasional (Susenas). Angka yang dihasilkan kemudian dikelompokkan ke dalam 12 divisi COICOP.\""
-  },
-  {
-   "source_report_id": "id-poverty",
-   "target_report_id": "id-susenas",
-   "relationship_type": "uses_data_from",
-   "basis": "Official poverty incidence and related indicators are calculated from household expenditure data collected in the National Socio-Economic Survey (Susenas). Evidence: \"The data sources used in this publication are data from the March 2022 National Socio-Economic Survey (Susenas).\""
-  },
-  {
-   "source_report_id": "id-foreign-trade-exports",
-   "target_report_id": "hs",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Indonesia Foreign Trade Statistics (Exports) classify commodities according to the Harmonized System (HS) for international comparability, using the Indonesian Customs Tariff Book version of HS. Evidence: \"This publication uses the Harmonized Systems (HS) 2024 classification for international comparability consideration. The data presented here is in units of net weight (kilograms) and FOB value (US dollars) broken down by commodity and country of destination.\""
-  },
-  {
-   "source_report_id": "id-foreign-trade-imports",
-   "target_report_id": "hs",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Indonesia Foreign Trade Statistics (Imports) likewise classify commodities using the Harmonized System (HS). Evidence: \"Indonesia compiles external trade statistics according to the Harmonised Commodity and Coding System (HS). The Harmonised System (HS) is a high-level international nomenclature owned by the World Customs Organisation (WCO), comprising of 6 digits and used by the majority of trading nations.\""
-  },
-  {
-   "source_report_id": "id-foreign-trade-exports",
-   "target_report_id": "id-customs-tariff",
-   "relationship_type": "uses_data_from",
-   "basis": "Primary source data for export statistics are the Goods Export Declaration (PEB) documents and related records supplied by the Directorate General of Customs and Excise (customs authorities). Evidence: \"The primary source of export originates from the Directorate General of Customs and Excise in the form of a Goods Export Declaration (PEB) document, PT. Pos Indonesia, border records of other agencies, and exports enumeration in the sea border area.\""
-  },
-  {
-   "source_report_id": "id-foreign-trade-imports",
-   "target_report_id": "id-customs-tariff",
-   "relationship_type": "uses_data_from",
-   "basis": "Primary source data for import statistics are customs declaration documents supplied by Customs Authorities under the institutional arrangement with BPS. Evidence: \"There are three sources for external trade data such as the customs declarations provided by Customs Authorities, post dispatch provided by PT Posindo, and cross sea border trade survey. Customs declaration data provided monthly by Customs Authorities based on MOU letter between BPS, Customs Office, and Central Bank.\""
-  },
-  {
-   "source_report_id": "id-informal-employment",
-   "target_report_id": "id-sakernas",
-   "relationship_type": "uses_data_from",
-   "basis": "Informal employment proportion statistics are derived from Sakernas labour-force survey data (including expanded modules for informal identification). Evidence: \"For the time being, statistics on the informal economy in Indonesia are based on the regular national labour force survey (Sakernas) which only lies on the employment status and occupation ... Phase 1, the Expanded LFS (Sakernas), contains additional questions that can be classified into three categories namely: 1) informal employment module\""
-  }
- ],
- "_dropped": [
-  {
-   "edge": "id-national-accounts -> sna-2008",
-   "source": "id-national-accounts",
-   "target": "sna-2008",
-   "reason": "no-document",
-   "why": "[SUSPECT] evidence_url (dsbb.imf.org NAG00) returns HTTP 200 via curl but is a client-rendered Angular SPA that serves only the generic DSBB homepage shell regardless of country/category path; confirmed via curl source inspection (jquery/angular/require.js app shell, no country-specific text) and independently via WebFetch, which itself reported it could NOT find this content on the page (no fabrication, but no verification either). 2 WebSearch queries for exact DSBB phrasing returned no indexed hit for this specific page. The underlying fact (Indonesia's 2010 SNA-2008 rebase) is independently well documented elsewhere (multiple BPS regional-office mirror pages), but the specific evidence_url/evidence_quote pairing could not be raw-verified."
-  },
-  {
-   "edge": "id-cpi -> un-coicop-2018",
-   "source": "id-cpi",
-   "target": "un-coicop-2018",
-   "reason": "no-document",
-   "why": "[SUSPECT] Same dsbb.imf.org (CPI00) JS-SPA-shell issue as the NAG00 dependency above: curl gets a 200 app shell with no country data, WebFetch confirms it cannot see any COICOP/CPI-specific content on the rendered page, and WebSearch found no indexed copy of this exact DSBB page. Could not raw-verify the quote against this specific URL."
-  },
-  {
-   "edge": "id-cpi -> cpi-manual",
-   "source": "id-cpi",
-   "target": "cpi-manual",
-   "reason": "no-document",
-   "why": "[SUSPECT] Shares the same evidence_url as the dependency above (dsbb.imf.org CPI00), which is an inaccessible client-rendered SPA shell to both curl and WebFetch. Same verification failure applies here."
-  },
-  {
-   "edge": "id-national-accounts -> id-cpi",
-   "source": "id-national-accounts",
-   "target": "id-cpi",
-   "reason": "no-document",
-   "why": "[SUSPECT] evidence_url is the same dsbb.imf.org NAG00 SPA-shell page as the first dependency in this batch; curl and WebFetch both fail to surface any country-specific content (WebFetch explicitly reported no such text present). Could not raw-verify this quote/URL pairing, though the general practice of using CPI as an HFC deflator is standard national-accounts methodology."
-  },
-  {
-   "edge": "id-national-accounts -> isic",
-   "source": "id-national-accounts",
-   "target": "isic",
-   "reason": "no-document",
-   "why": "[SUSPECT] Same dsbb.imf.org NAG00 evidence_url as the earlier national-accounts dependencies in this batch -- confirmed inaccessible client-rendered SPA shell via both curl and WebFetch (WebFetch reported no ISIC/CPC content visible). A WebSearch for the exact ISIC/CPC phrase returned only generic UN classification pages, no hit on the specific DSBB page. Could not raw-verify."
-  },
-  {
-   "edge": "id-sakernas -> icls-work-statistics-resolution",
-   "source": "id-sakernas",
-   "target": "icls-work-statistics-resolution",
-   "reason": "no-document",
-   "why": "[SUSPECT] evidence_url is dsbb.imf.org EMP00, the same JS-rendered SPA-shell problem: curl returns only the generic Angular app shell (confirmed by grepping for 'require.js'/'angular.min' loader and title 'Dissemination Standards Bulletin Board' with no country content), and WebFetch explicitly reported it could not find any BPS/ICLS/Sakernas content on the rendered page. Two targeted WebSearch queries for the exact ICLS phrasing found no indexed copy of this DSBB page. Could not raw-verify this specific URL/quote."
-  },
-  {
-   "edge": "id-sakernas -> isic",
-   "source": "id-sakernas",
-   "target": "isic",
-   "reason": "no-document",
-   "why": "[SUSPECT] Same dsbb.imf.org EMP00 SPA-shell URL as the dependency above; same verification failure (curl app-shell only, WebFetch confirms no visible content, no WebSearch corroboration found)."
-  },
-  {
-   "edge": "id-national-accounts -> id-sakernas",
-   "source": "id-national-accounts",
-   "target": "id-sakernas",
-   "reason": "no-document",
-   "why": "[SUSPECT] evidence_url is dsbb.imf.org NAG00, the same inaccessible client-rendered SPA shell as other NAG00-sourced dependencies in this batch. curl and WebFetch both fail to surface country-specific content; WebFetch explicitly said it saw no LFS/Sakernas text on the page. Could not raw-verify."
-  },
-  {
-   "edge": "id-labour-productivity -> id-sakernas",
-   "source": "id-labour-productivity",
-   "target": "id-sakernas",
-   "reason": "no-document",
-   "why": "[SUSPECT] evidence_url is dsbb.imf.org EMP00, the same JS-SPA-shell page used for the other Sakernas methodology dependencies above; curl confirms only the generic app shell loads, and WebFetch confirms it cannot see any Sakernas/employment content rendered. Could not raw-verify this specific quote against the cited URL, though it is entirely plausible that BPS labour-productivity releases use Sakernas employment data (this is standard practice)."
-  }
- ]
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "id-pdrb",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Provincial GDP (PDRB) is compiled simultaneously with national GDP under the same 2008 SNA framework and 2010 base year to ensure consistency. Evidence: \"Bantuan teknis dan Support ABS terkait Neraca Nasional meliputi kegiatan training dan workshop dalam penyusunan Supply and Use Table (SUT) dan Full Sequence of Accounts (FSA) dalam rangka implementasi SNA 2008 yang ditargetkan akan dirilis perdana pada 2014. ... sebagai benchmark dalam penyusunan PDB/PDRB tahun dasar 2010\""
+    },
+    {
+      "source_report_id": "id-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Bank Indonesia compiles Balance of Payments and International Investment Position statistics according to the concepts, definitions, and classifications of BPM6. Evidence: \"Generally, BOP statistics are compiled based on the Balance of Payments and International Investment Position Manual, 6th Edition (BPM6), which includes transactions between residents and non-residents. ... Fundamentally, BOP Statistics are compiled based on the concepts and definitions contained in BPM6.\""
+    },
+    {
+      "source_report_id": "id-cpi",
+      "target_report_id": "id-susenas",
+      "relationship_type": "uses_data_from",
+      "basis": "Susenas household expenditure data serve as an alternative or supporting source for updating CPI expenditure weights and consumption patterns (alongside the primary HBS). Evidence: \"In Statistics Indonesia, one of the alternative data sources that portrays household expenditure is National Socio-Economic Survey (SUSENAS). ... The grouping of goods and services captured in the consumption module Susenas is also guided by the 2018 COICOP, the same as was done for the HBS and CPS. Therefore, this data can be used as an alternative approach to annual CPI reweighting.\""
+    },
+    {
+      "source_report_id": "id-national-accounts",
+      "target_report_id": "id-susenas",
+      "relationship_type": "uses_data_from",
+      "basis": "Household final consumption expenditure (PK-RT) estimates in the national accounts are based on per-capita consumption expenditure data from Susenas, grouped by COICOP divisions. Evidence: \"Estimasi PK-RT untuk harga berlaku didasarkan pada data pengeluaran konsumsi per kapita hasil Survei Sosial Ekonomi Nasional (Susenas). Angka yang dihasilkan kemudian dikelompokkan ke dalam 12 divisi COICOP.\""
+    },
+    {
+      "source_report_id": "id-poverty",
+      "target_report_id": "id-susenas",
+      "relationship_type": "uses_data_from",
+      "basis": "Official poverty incidence and related indicators are calculated from household expenditure data collected in the National Socio-Economic Survey (Susenas). Evidence: \"The data sources used in this publication are data from the March 2022 National Socio-Economic Survey (Susenas).\""
+    },
+    {
+      "source_report_id": "id-foreign-trade-exports",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Indonesia Foreign Trade Statistics (Exports) classify commodities according to the Harmonized System (HS) for international comparability, using the Indonesian Customs Tariff Book version of HS. Evidence: \"This publication uses the Harmonized Systems (HS) 2024 classification for international comparability consideration. The data presented here is in units of net weight (kilograms) and FOB value (US dollars) broken down by commodity and country of destination.\""
+    },
+    {
+      "source_report_id": "id-foreign-trade-imports",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Indonesia Foreign Trade Statistics (Imports) likewise classify commodities using the Harmonized System (HS). Evidence: \"Indonesia compiles external trade statistics according to the Harmonised Commodity and Coding System (HS). The Harmonised System (HS) is a high-level international nomenclature owned by the World Customs Organisation (WCO), comprising of 6 digits and used by the majority of trading nations.\""
+    },
+    {
+      "source_report_id": "id-foreign-trade-exports",
+      "target_report_id": "id-customs-tariff",
+      "relationship_type": "uses_data_from",
+      "basis": "Primary source data for export statistics are the Goods Export Declaration (PEB) documents and related records supplied by the Directorate General of Customs and Excise (customs authorities). Evidence: \"The primary source of export originates from the Directorate General of Customs and Excise in the form of a Goods Export Declaration (PEB) document, PT. Pos Indonesia, border records of other agencies, and exports enumeration in the sea border area.\""
+    },
+    {
+      "source_report_id": "id-foreign-trade-imports",
+      "target_report_id": "id-customs-tariff",
+      "relationship_type": "uses_data_from",
+      "basis": "Primary source data for import statistics are customs declaration documents supplied by Customs Authorities under the institutional arrangement with BPS. Evidence: \"There are three sources for external trade data such as the customs declarations provided by Customs Authorities, post dispatch provided by PT Posindo, and cross sea border trade survey. Customs declaration data provided monthly by Customs Authorities based on MOU letter between BPS, Customs Office, and Central Bank.\""
+    },
+    {
+      "source_report_id": "id-informal-employment",
+      "target_report_id": "id-sakernas",
+      "relationship_type": "uses_data_from",
+      "basis": "Informal employment proportion statistics are derived from Sakernas labour-force survey data (including expanded modules for informal identification). Evidence: \"For the time being, statistics on the informal economy in Indonesia are based on the regular national labour force survey (Sakernas) which only lies on the employment status and occupation ... Phase 1, the Expanded LFS (Sakernas), contains additional questions that can be classified into three categories namely: 1) informal employment module\""
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "id-national-accounts -> sna-2008",
+      "source": "id-national-accounts",
+      "target": "sna-2008",
+      "reason": "no-document",
+      "why": "[SUSPECT] evidence_url (dsbb.imf.org NAG00) returns HTTP 200 via curl but is a client-rendered Angular SPA that serves only the generic DSBB homepage shell regardless of country/category path; confirmed via curl source inspection (jquery/angular/require.js app shell, no country-specific text) and independently via WebFetch, which itself reported it could NOT find this content on the page (no fabrication, but no verification either). 2 WebSearch queries for exact DSBB phrasing returned no indexed hit for this specific page. The underlying fact (Indonesia's 2010 SNA-2008 rebase) is independently well documented elsewhere (multiple BPS regional-office mirror pages), but the specific evidence_url/evidence_quote pairing could not be raw-verified."
+    },
+    {
+      "edge": "id-cpi -> un-coicop-2018",
+      "source": "id-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "[SUSPECT] Same dsbb.imf.org (CPI00) JS-SPA-shell issue as the NAG00 dependency above: curl gets a 200 app shell with no country data, WebFetch confirms it cannot see any COICOP/CPI-specific content on the rendered page, and WebSearch found no indexed copy of this exact DSBB page. Could not raw-verify the quote against this specific URL."
+    },
+    {
+      "edge": "id-cpi -> cpi-manual",
+      "source": "id-cpi",
+      "target": "cpi-manual",
+      "reason": "no-document",
+      "why": "[SUSPECT] Shares the same evidence_url as the dependency above (dsbb.imf.org CPI00), which is an inaccessible client-rendered SPA shell to both curl and WebFetch. Same verification failure applies here."
+    },
+    {
+      "edge": "id-national-accounts -> id-cpi",
+      "source": "id-national-accounts",
+      "target": "id-cpi",
+      "reason": "no-document",
+      "why": "[SUSPECT] evidence_url is the same dsbb.imf.org NAG00 SPA-shell page as the first dependency in this batch; curl and WebFetch both fail to surface any country-specific content (WebFetch explicitly reported no such text present). Could not raw-verify this quote/URL pairing, though the general practice of using CPI as an HFC deflator is standard national-accounts methodology."
+    },
+    {
+      "edge": "id-national-accounts -> isic",
+      "source": "id-national-accounts",
+      "target": "isic",
+      "reason": "no-document",
+      "why": "[SUSPECT] Same dsbb.imf.org NAG00 evidence_url as the earlier national-accounts dependencies in this batch -- confirmed inaccessible client-rendered SPA shell via both curl and WebFetch (WebFetch reported no ISIC/CPC content visible). A WebSearch for the exact ISIC/CPC phrase returned only generic UN classification pages, no hit on the specific DSBB page. Could not raw-verify."
+    },
+    {
+      "edge": "id-sakernas -> icls-work-statistics-resolution",
+      "source": "id-sakernas",
+      "target": "icls-work-statistics-resolution",
+      "reason": "no-document",
+      "why": "[SUSPECT] evidence_url is dsbb.imf.org EMP00, the same JS-rendered SPA-shell problem: curl returns only the generic Angular app shell (confirmed by grepping for 'require.js'/'angular.min' loader and title 'Dissemination Standards Bulletin Board' with no country content), and WebFetch explicitly reported it could not find any BPS/ICLS/Sakernas content on the rendered page. Two targeted WebSearch queries for the exact ICLS phrasing found no indexed copy of this DSBB page. Could not raw-verify this specific URL/quote."
+    },
+    {
+      "edge": "id-sakernas -> isic",
+      "source": "id-sakernas",
+      "target": "isic",
+      "reason": "no-document",
+      "why": "[SUSPECT] Same dsbb.imf.org EMP00 SPA-shell URL as the dependency above; same verification failure (curl app-shell only, WebFetch confirms no visible content, no WebSearch corroboration found)."
+    },
+    {
+      "edge": "id-national-accounts -> id-sakernas",
+      "source": "id-national-accounts",
+      "target": "id-sakernas",
+      "reason": "no-document",
+      "why": "[SUSPECT] evidence_url is dsbb.imf.org NAG00, the same inaccessible client-rendered SPA shell as other NAG00-sourced dependencies in this batch. curl and WebFetch both fail to surface country-specific content; WebFetch explicitly said it saw no LFS/Sakernas text on the page. Could not raw-verify."
+    },
+    {
+      "edge": "id-labour-productivity -> id-sakernas",
+      "source": "id-labour-productivity",
+      "target": "id-sakernas",
+      "reason": "no-document",
+      "why": "[SUSPECT] evidence_url is dsbb.imf.org EMP00, the same JS-SPA-shell page used for the other Sakernas methodology dependencies above; curl confirms only the generic app shell loads, and WebFetch confirms it cannot see any Sakernas/employment content rendered. Could not raw-verify this specific quote against the cited URL, though it is entirely plausible that BPS labour-productivity releases use Sakernas employment data (this is standard practice)."
+    }
+  ]
 }

@@ -19,45 +19,53 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,501 reports · 3,055 dependencies.** `npm run validate` (0 errors),
-`npm run gen` (323 slices, 0 unwired), `tsx scripts/test-logic.ts`
-(120/120), `tsc --noEmit`, `npm run build` (1,513.05 kB) all clean in a
-cloud sandbox, reconfirmed 2026-08-29 after round 7 landed 22 edges.
-`public/corpus-data.json` was regenerated and committed back to the
-device — it is current.
+**3,427 reports · 3,054 dependencies · 950 isolated.** `npm run validate`
+(0 errors), `npm run gen` (323 slices, 0 unwired), `tsx
+scripts/test-logic.ts` (120/120), `tsc --noEmit`, `npm run build`
+(1,513.05 kB) all clean in a cloud sandbox, reconfirmed 2026-08-29.
+`public/corpus-data.json` was regenerated and committed back — it is
+current.
 
-**Round 7 was the browser/curl unblock round**, and its main finding is
-that most of the "access-blocked" backlog was never blocked. A
-`ROBOTS_DISALLOWED` verdict describes WebFetch obeying robots.txt, not
-the site: `mnd.gov.tw` was wide open to plain curl the whole time.
-`gob.mx` serves its attachment PDFs to curl while challenging its HTML.
-BPS Indonesia's signed download host isn't walled even though every
-`*.bps.go.id` page is. A Cloudflare-403 PDF can be fetched same-origin
-inside a real browser and parsed there with pdf.js. All four are now
-PLAYBOOK §6 traps. 22 edges minted, 0 new nodes, 16 nodes de-orphaned.
+**Round 7 (browser/curl unblock) landed 22 edges, 0 new nodes.** Its main
+finding is that most of the "access-blocked" backlog was never blocked: a
+`ROBOTS_DISALLOWED` verdict describes WebFetch obeying robots.txt, not the
+site, and `mnd.gov.tw` was wide open to plain curl the whole time. Three
+more fetch-layer traps came out of it (gob.mx attachment PDFs; a walled
+site's unwalled sibling download host; parsing a Cloudflare-403 PDF
+same-origin in the browser with pdf.js). All four are now PLAYBOOK §6.
 
-**Unlinked-node counts — measured 2026-08-29 after round 7** (orphans /
-total, from `public/corpus-data.json`): INT 112/311, ID 75/120, TW
-49/109, EU 35/75, IR 32/34, SR 30/39, AR 29/62, VN 29/48, CL 28/53, GY
-27/36, CA 25/270, UY 25/48, EC 24/45, AE 21/35, TH 19/25, BR 18/98, PY
+**Then two structural changes, both Thomas's call, both landed the same
+day.** The two confirmed Mexican duplicate pairs were merged
+(`mx-chiapas-tuxtla-detail` → `mx-tuxtla`, `mx-guerrero-acapulco-detail`
+→ `mx-acapulco-metro`); the survivors carry the repointed edges, and where
+the two census edges collided their bases were folded into one rather than
+one being discarded. And **72 treaty/agreement nodes were retired** —
+trade and economic-partnership agreements, investment-treaty and FTA
+network framings, multilateral environmental conventions, and
+bloc-membership framings. A treaty is not a publication with a methodology
+dependency, so no research round could ever have wired them. All 72 were
+orphans; no edge broke. INT orphans fell 112 → 41. Standing decision and
+its boundaries are in PLAYBOOK §7; full node records are archived verbatim
+in `notes/retired-nodes-2026-08-29.json`, so both changes are reversible.
+
+**Unlinked-node counts — measured 2026-08-29 from
+`public/corpus-data.json`** (orphans/total): ID 75/120, TW 49/109, INT
+41/240, EU 35/75, IR 32/34, SR 30/39, AR 29/62, VN 29/48, CL 28/53, GY
+27/36, CA 25/270, UY 25/48, EC 24/45, AE 20/34, TH 19/25, BR 18/98, PY
 18/46, IN 16/97, KR 16/52, VE 16/26, IQ 15/22, JP 15/63, BO 14/52, YE
 14/15, CO 13/35, PE 13/35, MM 12/17, SY 12/13, TR 11/34, MX 9/104, PH
-9/77, SA 3/16. **1,022 isolated of 3,483.**
-
-**The previous HANDOFF's per-country counts were wrong** and are
-replaced above — it claimed VN 50/67, KR 36/72, JP 17/65, TR 18/41, PH
-10/77. Rule 8: measure before believing.
+9/77, SA 3/16. **Measure, don't inherit** — the counts this file carried
+before round 7 were wrong for VN, KR, JP, TR and PH.
 
 **Cluster-repulsion range: 0–15** (`ViewControls.tsx` / `view.ts`) —
 Thomas's call, live. Not yet tested at the new ceiling.
 
 **Renderer perf items** from 2026-08-29 are closed (sphere-geometry
 caching was already done; node materials now toggle `transparent`
-conditionally — measured, no shader recompile). The one thing not
-independently confirmed is an actual FPS win: the sandbox's swiftshader
-rasterizer runs ~1.5-2 fps for this scene regardless, which swamps the
-signal. Wants a real-GPU spot-check. See project memory
-`renderer_transparent_toggle_2026-08-29`.
+conditionally — measured, no shader recompile). Not independently
+confirmed: an actual FPS win. The sandbox's swiftshader rasterizer runs
+~1.5-2 fps for this scene regardless, which swamps the signal. Wants a
+real-GPU spot-check. See memory `renderer_transparent_toggle_2026-08-29`.
 
 **Auto-unfold** still dense — accepted, not being chased further.
 
@@ -75,64 +83,57 @@ signal. Wants a real-GPU spot-check. See project memory
 3. Watch for any node-rendering oddity (flicker, wrong z-order) after
    2026-08-29's transparent-material change. Visual parity was checked in
    software rendering only; flag here if real hardware differs.
-4. **Two confirmed duplicate-node pairs need a merge decision**, both from
-   overlapping batch12 passes, both confirmed on a field-by-field diff:
-   `mx-tuxtla` ≈ `mx-chiapas-tuxtla-detail`, and `mx-acapulco-metro` ≈
-   `mx-guerrero-acapulco-detail`. Round 7 deliberately minted one edge per
-   node so nothing is double-counted, and the edges survive a merge
-   intact. Detail in `mx-browser-unblock-2026-08-29.json`.
-5. **Is a treaty a report?** 112 of the 1,022 isolated nodes are `INT`,
-   and most are Grok-imported trade agreements and conventions (KORUS,
-   RCEP, Basel, Ramsar, Montreal, Paris, BIT networks). They are not
-   statistical publications with methodology dependencies, so no wiring
-   round can fix them — it is a modelling call about what belongs in a
-   *report* influence graph. Biggest single bucket in the corpus.
-6. Three node-scope rulings, each with the evidence already verified and
-   quoted in its `_dropped` entry: (a) `ph-pdp -> ph-basic-ed` — the PDP
-   names EBEIS, an information *system*, not a named publication; (b)
-   `tw-national-defense-report -> tw-sipri-arms-transfers` — the NDR
-   genuinely cites SIPRI's Arms Transfers Database, but for PRC *exports*
-   while the node is scoped to Taiwan *imports*; (c)
-   `mx-alcaldia-benito-juarez -> mx-censos-economicos` — sourced in a
-   chart caption rather than body text.
+4. **The treaty sweep has an adjacent family it deliberately did not
+   touch**: analytical "framing" and "contrast" nodes —
+   `jp-prefectural-contrast-summary`, `kr-regional-contrast-extended`,
+   `pe-loreto`, `pe-moquegua`, `id-defence-posture`, `vn-defence-policy`,
+   `tw-new-southbound-tech` and similar. Same not-a-publication smell,
+   but a separate question and a smaller one. Say the word and it goes the
+   same way.
+5. Three node-scope rulings, evidence already verified and quoted in each
+   `_dropped` entry: (a) `ph-pdp -> ph-basic-ed` — the PDP names EBEIS, an
+   information *system*, not a named publication; (b)
+   `tw-national-defense-report -> tw-sipri-arms-transfers` — the NDR cites
+   SIPRI's Arms Transfers Database, but for PRC *exports* while the node
+   is scoped to Taiwan *imports*; (c) `mx-alcaldia-benito-juarez ->
+   mx-censos-economicos` — sourced in a chart caption, not body text.
 
 ### [Agent] — next build rounds
 
 1. **South America is the biggest unworked seam and has never been
    researched**: SR 30, AR 29, CL 28, GY 27, UY 25, EC 24, PY 18, VE 16,
-   BO 14, CO 13, PE 13 — about 237 orphans across eleven countries. This
-   is the obvious next round and is fresh ground, unlike the countries
-   the last six rounds keep revisiting.
-2. **Two fully-evidenced edges are waiting on a node that doesn't exist.**
+   BO 14, CO 13, PE 13 — about 233 orphans across eleven countries. This
+   is the obvious next round.
+2. **Two fully-evidenced edges are waiting on nodes that don't exist.**
    Mint the node and the edge lands verbatim-quotable: (a) Taiwan's
    Central Government General Budget (中央政府總預算) — MND statistics
    table 11 (`https://www.mnd.gov.tw/File/57520`) names it as its
-   statistical universe; (b) Indonesia's Survei Biaya Hidup 2022 (SBH
-   2022) — the provincial CPI publication states the index's weights and
-   base-year consumption values come from it. Both quoted in their
-   `_dropped` entries.
-3. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
+   statistical universe; (b) Indonesia's Survei Biaya Hidup 2022 — the
+   provincial CPI publication states the index's weights and base-year
+   consumption values come from it. Both quoted in their `_dropped`
+   entries.
+3. **A triage pass is now worth more than another wiring round in the
+   worked countries.** 950 isolated is not a to-do list: a large share is
+   structurally unwireable, and round 7 confirmed several of those on real
+   bytes. Separate "not yet researched" from "researched, nothing to
+   find" before anyone scopes another pass at ID/TW/IR/EU.
+4. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
    retries: Iraq's GDP/National Income metadata doc (cosit.gov.iq),
    Vietnam's VSIC 2018 decision, Iraq's wage-bill clause (Budget Law
    13/2023). NESDC Thailand — closed negative, don't retry. Then the 31
    single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD ME MK NI NR
    PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
-4. **Afghanistan's two 403s are now known-reachable in a real browser**
-   (`dtm.iom.int` and `unicef.org` both render fine in Chrome, both are
-   Cloudflare-403 to curl) — `af-education` and `af-border-mobility` are
-   a cheap retry, not a dead end.
-5. **Genuinely still blocked, all confirmed this round, all needing a
-   different network route rather than a different tool**: the entire
-   `*.cdmx.gob.mx` family (four distinct failure modes),
-   `issste.gob.mx`, `datos.imss.gob.mx` (Imperva WAF),
-   `webapps.peza.gov.ph`, `legacy.doe.gov.ph` (egress policy),
-   `aodm.mnd.gov.tw` (egress policy), `ws.dgbas.gov.tw` (TLS chain), and
-   `psa.gov.ph` (Cloudflare JS on every host — WebFetch reaches it but
-   caps quotes at 125 chars, so it cannot yield mintable verbatim).
-   Indonesia's remaining BPS leads (`id-energy-balances`,
-   `id-ghg-inventory` → a proposed `id-esdm-energy-statistics` node, and
-   the IPCC guidelines target) are NOT in this list — the BPS technique
-   above works, they simply weren't reached this round.
+5. **Cheap browser retries, now known-reachable**: Afghanistan's
+   `af-education` and `af-border-mobility` (both render in Chrome, both
+   Cloudflare-403 to curl); Indonesia's remaining energy/GHG leads via the
+   BPS signed-link technique.
+6. **Genuinely still blocked, needing a different network route rather
+   than a different tool**: the whole `*.cdmx.gob.mx` family (four
+   distinct failure modes), `issste.gob.mx`, `datos.imss.gob.mx` (Imperva
+   WAF), `webapps.peza.gov.ph`, `legacy.doe.gov.ph` and `aodm.mnd.gov.tw`
+   (both egress policy), `ws.dgbas.gov.tw` (TLS chain), and `psa.gov.ph`
+   (Cloudflare JS on every host — WebFetch reaches it but caps quotes at
+   125 chars, so it cannot yield mintable verbatim).
 
 ---
 

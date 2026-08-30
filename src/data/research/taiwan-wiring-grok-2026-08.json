@@ -1,127 +1,127 @@
 {
- "reports": [],
- "dependencies": [
-  {
-   "source_report_id": "tw-input-output",
-   "target_report_id": "sna-2008",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Taiwan Input-Output tables are compiled on the basis of the System of National Accounts 2008. Evidence: \"2016 Input-Output statistics are based on the System of National Accounts 2008, as well as the strict change of ownership principle according to the 6th edition of Balance of Payments and International Investment Position Manual (BPM6).\""
-  },
-  {
-   "source_report_id": "tw-input-output",
-   "target_report_id": "imf-bpm6",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Input-Output statistics apply the strict change-of-ownership principle of BPM6 for goods for processing and related trade flows. Evidence: \"2016 Input-Output statistics are based on the System of National Accounts 2008, as well as the strict change of ownership principle according to the 6th edition of Balance of Payments and International Investment Position Manual (BPM6).\""
-  },
-  {
-   "source_report_id": "tw-bop",
-   "target_report_id": "imf-bpm6",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Central Bank of the Republic of China (Taiwan) compiles Balance of Payments statistics in accordance with BPM6 (implemented from 2016, with historical series converted). Evidence: \"Beginning 2016, Taiwan’s BOP is compiled in accordance with \"the Sixth Edition of Balance of Payments and International Investment Position Manual (BPM6).\"\""
-  },
-  {
-   "source_report_id": "tw-national-accounts",
-   "target_report_id": "tw-cpi",
-   "relationship_type": "uses_data_from",
-   "basis": "Private final consumption expenditure and other components in the national accounts are deflated using detailed consumer price indices compiled by DGBAS. Evidence: \"Items of Deflators ... Private final consumption expenditure ... Consumer price indices of food, non-alcoholic beverages ... Directorate-General of Budget, Accounting and Statistics\""
-  },
-  {
-   "source_report_id": "tw-trade-statistics",
-   "target_report_id": "hs",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Customs-based merchandise trade statistics classify commodities according to the Harmonized System (HS) via the Customs Import Tariff and Import and Export Commodity Classification of the Republic of China. Evidence: \"Goods are classified according to the Customs Import Tariff and Import and Export Commodity Classification of the Republic of China.\""
-  },
-  {
-   "source_report_id": "tw-ppi-wpi",
-   "target_report_id": "tw-industrial-production",
-   "relationship_type": "uses_data_from",
-   "basis": "Producer Price Index weights for domestic manufacturers draw on Industrial Production Statistics (alongside National Accounts and association data). Evidence: \"For manufacturer, in 2024, Industrial Production Statistics, National Accounts Statistics and data provided by relative associations are referred for weighting.\""
-  },
-  {
-   "source_report_id": "tw-ppi-wpi",
-   "target_report_id": "tw-national-accounts",
-   "relationship_type": "uses_data_from",
-   "basis": "PPI weights incorporate National Accounts Statistics; PPI itself is used as a reference for GDP and Input-Output Tables. Evidence: \"For manufacturer, in 2024, Industrial Production Statistics, National Accounts Statistics and data provided by relative associations are referred for weighting. ... ② As a reference for GDP and I/O Tables.\""
-  },
-  {
-   "source_report_id": "tw-national-accounts",
-   "target_report_id": "tw-industrial-production",
-   "relationship_type": "uses_data_from",
-   "basis": "National accounts production-side estimates and industry breakdowns draw on industrial production statistics as a primary short-term and structural input. Evidence: \"National Accounts statistics is compiled according to SNA, measured by supply(production), demand(expenditure) , and income approach to ensure data accuracy and reliability. ... National accounts statistics is compiled according to 2008SNA and the Statistical Classification of Industries (Rev.11).\""
-  },
-  {
-   "source_report_id": "tw-monetary-aggregates",
-   "target_report_id": "sna-2008",
-   "relationship_type": "methodology_depends_on",
-   "basis": "CBC monetary statistics sectoral classification of financial-institution transactions conforms to the United Nations System of National Accounts. Evidence: \"The current methodology conforms to the United Nations “System of National Accounts,” and classifies the transactions of financial institutions into six sectors according to whether the counter party is a foreign entity, the government, a government enterprise, a private enterprise, an individual (household) or a domestic financial institution.\""
-  },
-  {
-   "source_report_id": "tw-industrial-production",
-   "target_report_id": "isic",
-   "relationship_type": "methodology_depends_on",
-   "basis": "Industrial Production Index classification follows the Statistical Classification of Industries of the R.O.C. (aligned with ISIC). Evidence: \"產品之歸類：根據經濟部統計處編印之工業產品分類共1,595項，將性質相同產品整併為723項產品群。\""
-  },
-  {
-   "source_report_id": "tw-labour-force",
-   "target_report_id": "icls-work-statistics-resolution",
-   "relationship_type": "methodology_depends_on",
-   "basis": "DGBAS Manpower Survey (labour force / employment and unemployment statistics) employs the International Labour Organization’s standard definitions of employment and unemployment and recommended statistical methods. Evidence: \"This survey, like similar surveys in many other countries, employs the International Labor Organization's standard definitions of employment and unemployment and recommended statistical methods.\""
-  },
-  {
-   "source_report_id": "tw-financial-stability",
-   "target_report_id": "tw-national-accounts",
-   "relationship_type": "uses_data_from",
-   "basis": "CBC Financial Stability Report cites and uses DGBAS national accounts (GDP, economic growth) and CPI figures as key macroeconomic context indicators. Evidence: \"Data cited from the DGBAS in this report, including Taiwan’s economic growth rate, GDP, and CPI figures, are based on its press release published on May 28, 2025. ... Sources: CBC and DGBAS.\""
-  },
-  {
-   "source_report_id": "tw-financial-stability",
-   "target_report_id": "tw-cpi",
-   "relationship_type": "uses_data_from",
-   "basis": "CBC Financial Stability Report incorporates DGBAS CPI inflation data alongside GDP for macroeconomic assessment. Evidence: \"Data cited from the DGBAS in this report, including Taiwan’s economic growth rate, GDP, and CPI figures, are based on its press release published on May 28, 2025.\""
-  }
- ],
- "_dropped": [
-  {
-   "edge": "tw-national-accounts -> sna-2008",
-   "source": "tw-national-accounts",
-   "target": "sna-2008",
-   "reason": "caveat",
-   "why": "This edge already exists in the live corpus. Not re-minted (would silently supersede the existing basis/evidence under the 'later edge wins' merge rule). This round's independent citation: DGBAS compiles Taiwan national accounts (GDP by production and expenditure) according to the 2008 System of National Accounts. Evidence: \"The data are based on the 2008 SNA.\""
-  },
-  {
-   "edge": "tw-national-accounts -> sna-2008",
-   "source": "tw-national-accounts",
-   "target": "sna-2008",
-   "reason": "caveat",
-   "why": "This edge already exists in the live corpus. Not re-minted (would silently supersede the existing basis/evidence under the 'later edge wins' merge rule). This round's independent citation: DGBAS compiles Taiwan national accounts (GDP by production and expenditure) according to the 2008 System of National Accounts. Evidence: \"The data are based on the 2008 SNA.\""
-  },
-  {
-   "edge": "tw-cpi -> un-coicop-2018",
-   "source": "tw-cpi",
-   "target": "un-coicop-2018",
-   "reason": "no-document",
-   "why": "[DEAD_URL] batch1[6]. http://www.bas-association.org.tw/catalog/arts/011406014.pdf is unreachable: HTTP returns 503 on repeated attempts over several minutes, and HTTPS resets the connection outright; WebFetch failed the same way (ConnectTimeout on robots.txt). No Wayback Machine snapshot exists for this URL either (archive.org 'available' API returned an empty snapshot set). Cannot confirm the COICOP 2018 quote from a live source. Secondary concern: bas-association.org.tw is a private/professional Budget-Accounting-Statistics association journal site, not a primary DGBAS government page, which would be a source-quality flag even if it were reachable. Genuinely plausible that DGBAS's real CPI basket does track COICOP 2018 domestically, but this specific citation cannot be raw-verified right now."
-  },
-  {
-   "edge": "tw-cpi -> tw-household-income-expenditure",
-   "source": "tw-cpi",
-   "target": "tw-household-income-expenditure",
-   "reason": "no-document",
-   "why": "[CONTENT_MISMATCH] batch1[7]. Evidence URL (dgbas.gov.tw CPI FAQ 'Q2e_110基.pdf', 2 pages) returns HTTP 200 and was fully downloaded/text-extracted. It DOES contain the first half of the quote verbatim: 'The major structure of weights is based on the Household Final Consumption Expenditure of National Income and is updated annually.' However the second half of the evidence_quote — 'The weights are based on the 2016 Household Final Consumption Expenditure of National Income, which derives from the Family Income/Expenditure Survey.' — does NOT appear anywhere in this 2-page document; there is no mention of 'Family Income' or 'Expenditure Survey' at all. The only sourced linkage on this page is CPI weights <- Household Final Consumption Expenditure of National Income, which is a National Accounts component (i.e. this page actually supports CPI uses_data_from tw-national-accounts, already captured by a separate edge, not a direct link to tw-household-income-expenditure). The bridge to the Family Income/Expenditure Survey specifically is not evidenced by this source."
-  },
-  {
-   "edge": "tw-household-income-expenditure -> tw-national-accounts",
-   "source": "tw-household-income-expenditure",
-   "target": "tw-national-accounts",
-   "reason": "no-document",
-   "why": "[CONTENT_MISMATCH] batch2[4]. Same evidence URL and quote as batch1[7] (dgbas.gov.tw CPI FAQ, HTTP 200, downloaded, fully checked). As with batch1[7], the document only supports 'CPI weights are based on Household Final Consumption Expenditure of National Income' — it never mentions the Family Income/Expenditure Survey, so the claimed bridge from tw-household-income-expenditure is unevidenced by this source. Additionally the basis text argues 'the Household Final Consumption Expenditure component of National Accounts is derived in part from the Family Income and Expenditure Survey' — i.e. National Accounts uses data from the household survey — which if true would put the edge in the opposite direction (source=tw-national-accounts, target=tw-household-income-expenditure) from what was actually recorded here (source=tw-household-income-expenditure, target=tw-national-accounts)."
-  },
-  {
-   "edge": "tw-labour-productivity -> tw-labour-force",
-   "source": "tw-labour-productivity",
-   "target": "tw-labour-force",
-   "reason": "no-document",
-   "why": "[NOT_FOUND] batch3[1]. https://eng.stat.gov.tw/News_NoticeCalendar_Content_EN_temp.aspx?MetaI_D=154&year=2026&n=4011 returns HTTP 200 and the quoted sentence about the Manpower Utilization Survey does appear verbatim. But the page's actual subject is the Manpower Utilization Survey / Manpower Survey itself — it never discusses labour productivity or unit labor cost statistics, and does not state that any productivity report draws on this survey's data. The evidence supports that the Manpower Survey exists and covers employment/unemployment, not that tw-labour-productivity uses_data_from it. Plausible relationship in principle, but not evidenced by this source."
-  }
- ]
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "tw-input-output",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Taiwan Input-Output tables are compiled on the basis of the System of National Accounts 2008. Evidence: \"2016 Input-Output statistics are based on the System of National Accounts 2008, as well as the strict change of ownership principle according to the 6th edition of Balance of Payments and International Investment Position Manual (BPM6).\""
+    },
+    {
+      "source_report_id": "tw-input-output",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Input-Output statistics apply the strict change-of-ownership principle of BPM6 for goods for processing and related trade flows. Evidence: \"2016 Input-Output statistics are based on the System of National Accounts 2008, as well as the strict change of ownership principle according to the 6th edition of Balance of Payments and International Investment Position Manual (BPM6).\""
+    },
+    {
+      "source_report_id": "tw-bop",
+      "target_report_id": "imf-bpm6",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Central Bank of the Republic of China (Taiwan) compiles Balance of Payments statistics in accordance with BPM6 (implemented from 2016, with historical series converted). Evidence: \"Beginning 2016, Taiwan’s BOP is compiled in accordance with \"the Sixth Edition of Balance of Payments and International Investment Position Manual (BPM6).\"\""
+    },
+    {
+      "source_report_id": "tw-national-accounts",
+      "target_report_id": "tw-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "Private final consumption expenditure and other components in the national accounts are deflated using detailed consumer price indices compiled by DGBAS. Evidence: \"Items of Deflators ... Private final consumption expenditure ... Consumer price indices of food, non-alcoholic beverages ... Directorate-General of Budget, Accounting and Statistics\""
+    },
+    {
+      "source_report_id": "tw-trade-statistics",
+      "target_report_id": "hs",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Customs-based merchandise trade statistics classify commodities according to the Harmonized System (HS) via the Customs Import Tariff and Import and Export Commodity Classification of the Republic of China. Evidence: \"Goods are classified according to the Customs Import Tariff and Import and Export Commodity Classification of the Republic of China.\""
+    },
+    {
+      "source_report_id": "tw-ppi-wpi",
+      "target_report_id": "tw-industrial-production",
+      "relationship_type": "uses_data_from",
+      "basis": "Producer Price Index weights for domestic manufacturers draw on Industrial Production Statistics (alongside National Accounts and association data). Evidence: \"For manufacturer, in 2024, Industrial Production Statistics, National Accounts Statistics and data provided by relative associations are referred for weighting.\""
+    },
+    {
+      "source_report_id": "tw-ppi-wpi",
+      "target_report_id": "tw-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "PPI weights incorporate National Accounts Statistics; PPI itself is used as a reference for GDP and Input-Output Tables. Evidence: \"For manufacturer, in 2024, Industrial Production Statistics, National Accounts Statistics and data provided by relative associations are referred for weighting. ... ② As a reference for GDP and I/O Tables.\""
+    },
+    {
+      "source_report_id": "tw-national-accounts",
+      "target_report_id": "tw-industrial-production",
+      "relationship_type": "uses_data_from",
+      "basis": "National accounts production-side estimates and industry breakdowns draw on industrial production statistics as a primary short-term and structural input. Evidence: \"National Accounts statistics is compiled according to SNA, measured by supply(production), demand(expenditure) , and income approach to ensure data accuracy and reliability. ... National accounts statistics is compiled according to 2008SNA and the Statistical Classification of Industries (Rev.11).\""
+    },
+    {
+      "source_report_id": "tw-monetary-aggregates",
+      "target_report_id": "sna-2008",
+      "relationship_type": "methodology_depends_on",
+      "basis": "CBC monetary statistics sectoral classification of financial-institution transactions conforms to the United Nations System of National Accounts. Evidence: \"The current methodology conforms to the United Nations “System of National Accounts,” and classifies the transactions of financial institutions into six sectors according to whether the counter party is a foreign entity, the government, a government enterprise, a private enterprise, an individual (household) or a domestic financial institution.\""
+    },
+    {
+      "source_report_id": "tw-industrial-production",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Industrial Production Index classification follows the Statistical Classification of Industries of the R.O.C. (aligned with ISIC). Evidence: \"產品之歸類：根據經濟部統計處編印之工業產品分類共1,595項，將性質相同產品整併為723項產品群。\""
+    },
+    {
+      "source_report_id": "tw-labour-force",
+      "target_report_id": "icls-work-statistics-resolution",
+      "relationship_type": "methodology_depends_on",
+      "basis": "DGBAS Manpower Survey (labour force / employment and unemployment statistics) employs the International Labour Organization’s standard definitions of employment and unemployment and recommended statistical methods. Evidence: \"This survey, like similar surveys in many other countries, employs the International Labor Organization's standard definitions of employment and unemployment and recommended statistical methods.\""
+    },
+    {
+      "source_report_id": "tw-financial-stability",
+      "target_report_id": "tw-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "CBC Financial Stability Report cites and uses DGBAS national accounts (GDP, economic growth) and CPI figures as key macroeconomic context indicators. Evidence: \"Data cited from the DGBAS in this report, including Taiwan’s economic growth rate, GDP, and CPI figures, are based on its press release published on May 28, 2025. ... Sources: CBC and DGBAS.\""
+    },
+    {
+      "source_report_id": "tw-financial-stability",
+      "target_report_id": "tw-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "CBC Financial Stability Report incorporates DGBAS CPI inflation data alongside GDP for macroeconomic assessment. Evidence: \"Data cited from the DGBAS in this report, including Taiwan’s economic growth rate, GDP, and CPI figures, are based on its press release published on May 28, 2025.\""
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "tw-national-accounts -> sna-2008",
+      "source": "tw-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "This edge already exists in the live corpus. Not re-minted (would silently supersede the existing basis/evidence under the 'later edge wins' merge rule). This round's independent citation: DGBAS compiles Taiwan national accounts (GDP by production and expenditure) according to the 2008 System of National Accounts. Evidence: \"The data are based on the 2008 SNA.\""
+    },
+    {
+      "edge": "tw-national-accounts -> sna-2008",
+      "source": "tw-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "This edge already exists in the live corpus. Not re-minted (would silently supersede the existing basis/evidence under the 'later edge wins' merge rule). This round's independent citation: DGBAS compiles Taiwan national accounts (GDP by production and expenditure) according to the 2008 System of National Accounts. Evidence: \"The data are based on the 2008 SNA.\""
+    },
+    {
+      "edge": "tw-cpi -> un-coicop-2018",
+      "source": "tw-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "[DEAD_URL] batch1[6]. http://www.bas-association.org.tw/catalog/arts/011406014.pdf is unreachable: HTTP returns 503 on repeated attempts over several minutes, and HTTPS resets the connection outright; WebFetch failed the same way (ConnectTimeout on robots.txt). No Wayback Machine snapshot exists for this URL either (archive.org 'available' API returned an empty snapshot set). Cannot confirm the COICOP 2018 quote from a live source. Secondary concern: bas-association.org.tw is a private/professional Budget-Accounting-Statistics association journal site, not a primary DGBAS government page, which would be a source-quality flag even if it were reachable. Genuinely plausible that DGBAS's real CPI basket does track COICOP 2018 domestically, but this specific citation cannot be raw-verified right now."
+    },
+    {
+      "edge": "tw-cpi -> tw-household-income-expenditure",
+      "source": "tw-cpi",
+      "target": "tw-household-income-expenditure",
+      "reason": "no-document",
+      "why": "[CONTENT_MISMATCH] batch1[7]. Evidence URL (dgbas.gov.tw CPI FAQ 'Q2e_110基.pdf', 2 pages) returns HTTP 200 and was fully downloaded/text-extracted. It DOES contain the first half of the quote verbatim: 'The major structure of weights is based on the Household Final Consumption Expenditure of National Income and is updated annually.' However the second half of the evidence_quote — 'The weights are based on the 2016 Household Final Consumption Expenditure of National Income, which derives from the Family Income/Expenditure Survey.' — does NOT appear anywhere in this 2-page document; there is no mention of 'Family Income' or 'Expenditure Survey' at all. The only sourced linkage on this page is CPI weights <- Household Final Consumption Expenditure of National Income, which is a National Accounts component (i.e. this page actually supports CPI uses_data_from tw-national-accounts, already captured by a separate edge, not a direct link to tw-household-income-expenditure). The bridge to the Family Income/Expenditure Survey specifically is not evidenced by this source."
+    },
+    {
+      "edge": "tw-household-income-expenditure -> tw-national-accounts",
+      "source": "tw-household-income-expenditure",
+      "target": "tw-national-accounts",
+      "reason": "no-document",
+      "why": "[CONTENT_MISMATCH] batch2[4]. Same evidence URL and quote as batch1[7] (dgbas.gov.tw CPI FAQ, HTTP 200, downloaded, fully checked). As with batch1[7], the document only supports 'CPI weights are based on Household Final Consumption Expenditure of National Income' — it never mentions the Family Income/Expenditure Survey, so the claimed bridge from tw-household-income-expenditure is unevidenced by this source. Additionally the basis text argues 'the Household Final Consumption Expenditure component of National Accounts is derived in part from the Family Income and Expenditure Survey' — i.e. National Accounts uses data from the household survey — which if true would put the edge in the opposite direction (source=tw-national-accounts, target=tw-household-income-expenditure) from what was actually recorded here (source=tw-household-income-expenditure, target=tw-national-accounts)."
+    },
+    {
+      "edge": "tw-labour-productivity -> tw-labour-force",
+      "source": "tw-labour-productivity",
+      "target": "tw-labour-force",
+      "reason": "no-document",
+      "why": "[NOT_FOUND] batch3[1]. https://eng.stat.gov.tw/News_NoticeCalendar_Content_EN_temp.aspx?MetaI_D=154&year=2026&n=4011 returns HTTP 200 and the quoted sentence about the Manpower Utilization Survey does appear verbatim. But the page's actual subject is the Manpower Utilization Survey / Manpower Survey itself — it never discusses labour productivity or unit labor cost statistics, and does not state that any productivity report draws on this survey's data. The evidence supports that the Manpower Survey exists and covers employment/unemployment, not that tw-labour-productivity uses_data_from it. Plausible relationship in principle, but not evidenced by this source."
+    }
+  ]
 }
