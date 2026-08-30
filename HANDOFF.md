@@ -6,7 +6,7 @@ project memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog — see §4 rule 2.
 
-Last updated: 2026-08-29
+Last updated: 2026-08-30
 
 ---
 
@@ -19,7 +19,7 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,427 reports · 3,054 dependencies · 950 isolated.** `npm run validate`
+**3,422 reports · 3,054 dependencies · 945 isolated.** `npm run validate`
 (0 errors), `npm run gen` (323 slices, 0 unwired), `tsx
 scripts/test-logic.ts` (120/120), `tsc --noEmit`, `npm run build`
 (1,513.05 kB) all clean in a cloud sandbox, reconfirmed 2026-08-29.
@@ -44,9 +44,11 @@ trade and economic-partnership agreements, investment-treaty and FTA
 network framings, multilateral environmental conventions, and
 bloc-membership framings. A treaty is not a publication with a methodology
 dependency, so no research round could ever have wired them. All 72 were
-orphans; no edge broke. INT orphans fell 112 → 41. Standing decision and
-its boundaries are in PLAYBOOK §7; full node records are archived verbatim
-in `notes/retired-nodes-2026-08-29.json`, so both changes are reversible.
+orphans; no edge broke. INT orphans fell 112 → 41. A third, much smaller pass then retired 5
+analytical meta-nodes (comparison frameworks and policy postures with no
+publication behind them). Standing decisions and their boundaries are in
+PLAYBOOK §7; all 79 removed node records are archived verbatim in
+`notes/retired-nodes-2026-08-29.json`, so every change is reversible.
 
 **Unlinked-node counts — measured 2026-08-29 from
 `public/corpus-data.json`** (orphans/total): ID 75/120, TW 49/109, INT
@@ -83,13 +85,13 @@ real-GPU spot-check. See memory `renderer_transparent_toggle_2026-08-29`.
 3. Watch for any node-rendering oddity (flicker, wrong z-order) after
    2026-08-29's transparent-material change. Visual parity was checked in
    software rendering only; flag here if real hardware differs.
-4. **The treaty sweep has an adjacent family it deliberately did not
-   touch**: analytical "framing" and "contrast" nodes —
+4. **The meta-node sweep found far less than expected and stopped at 5** —
    `jp-prefectural-contrast-summary`, `kr-regional-contrast-extended`,
-   `pe-loreto`, `pe-moquegua`, `id-defence-posture`, `vn-defence-policy`,
-   `tw-new-southbound-tech` and similar. Same not-a-publication smell,
-   but a separate question and a smaller one. Say the word and it goes the
-   same way.
+   `vn-defence-policy`, `id-defence-posture`, `tw-new-southbound-tech`.
+   Nothing further should be swept by keyword: "framing" is a Grok verbal
+   tic that appears in real statistics nodes, and the "— high/low-poverty
+   contrast" nodes are subnational JURISDICTIONS, not framings — they are
+   most of the South America seam. PLAYBOOK §7 has the detail.
 5. Three node-scope rulings, evidence already verified and quoted in each
    `_dropped` entry: (a) `ph-pdp -> ph-basic-ed` — the PDP names EBEIS, an
    information *system*, not a named publication; (b)

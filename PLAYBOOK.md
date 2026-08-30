@@ -124,7 +124,14 @@ and mean it.
 
 **Process rule.** `HANDOFF.md` stays short — edit its Current State/Todo
 directly (overwrite, don't append) each turn; copy to
-`archive/Previous Handoffs/` only before a structural rewrite. A new
+`archive/Previous Handoffs/` only before a structural rewrite. **A wholesale
+rewrite of the file counts as structural even when the section headings are
+unchanged** — the test is whether the prose you are replacing would be
+unrecoverable afterwards, not whether §1-§4 still exist. There is no git
+safety net here (rule 1), so an un-archived overwrite destroys the previous
+state permanently. Missed on 2026-08-29/30: HANDOFF.md was overwritten three
+times in one session and archived only retrospectively, from a copy that
+happened to still be in the session's context. Archive first, then rewrite. A new
 standing rule or trap goes here, not `HANDOFF.md`. Hand off rather than
 push on when you re-derive something already settled, contradict an
 earlier answer, retry a tool past its documented once-only policy, or the
@@ -440,12 +447,34 @@ so removing it would leave dangling references), `tr-eu-trade` (named like a
 treaty, actually merchandise trade statistics), and `sdmx-standard` /
 `sna-2025` (statistical standards, not agreements).
 
-Adjacent and NOT yet decided: a smaller family of analytical "framing" and
-"contrast" nodes (`jp-prefectural-contrast-summary`,
-`kr-regional-contrast-extended`, `pe-loreto`, `pe-moquegua`,
-`id-defence-posture`, `vn-defence-policy`, `tw-new-southbound-tech` and
-similar) has the same not-a-publication smell but is a separate question —
-raise it before sweeping it.
+**Analytical meta-nodes: 5 retired, and the sweep was deliberately stopped
+there** (Thomas, 2026-08-29). Removed: `jp-prefectural-contrast-summary` and
+`kr-regional-contrast-extended` (the corpus's own `_notes` call them a
+"Meta-node" / "Conceptual and data framework" / "Synthesised framework" — a
+comparison device, not a subject), `vn-defence-policy` (a "policy-frame node"
+with no `url` at all), `id-defence-posture` (a "Policy-frame node that
+connects the defence cluster to the strategic-geography layer"), and
+`tw-new-southbound-tech` (a policy framework whose url is an Executive Yuan
+landing page, not a release).
+
+**Do not extend this sweep by keyword — both obvious signals are
+contaminated.** "framing" is a Grok verbal tic that appears in the titles and
+descriptions of perfectly real statistics nodes ("Statistics and framing of
+remittance inflows", "Border trade statistics and framing", "Rice production
+and export statistics ... food-security framing"). And the corpus's own
+"meta-node" phrasing in `_notes` describes a node's ROLE IN THE GRAPH, not its
+nature — it lands on the Okinawa Statistical Yearbook, Fortaleza and Recife
+municipal GDP, and Taiwan's Energy Statistics Handbook, all genuine
+publications. A title-regex sweep of this family caught 36 nodes of which 5
+were removable.
+
+**Above all, do not sweep the "— high-poverty contrast" / "— low-poverty
+contrast" nodes.** They read like analytical framings and are not: they are
+subnational jurisdictions (Ecuadorian provinces, Peruvian and Uruguayan and
+Paraguayan departments, Bolivian departments, Chilean regions) that Grok
+generated as a poverty-contrast set and titled accordingly. They are the bulk
+of the unresearched South America seam — deleting them would destroy the next
+research round before it happens.
 
 **Iran's SNA vintage** (`ir-national-accounts` -> `sna-2008`, plus the six
 held SNA-93 edges): disregarded (Thomas, 2026-08-29). Leave the live

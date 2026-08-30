@@ -1,5 +1,5 @@
 {
-  "_note": "Nodes retired from the corpus on 2026-08-29 as confirmed duplicates, merged into the surviving id shown. Full original records preserved verbatim so the merge is reversible: paste the record back into its original slice file and repoint the edges. A second batch was retired the same day as a modelling decision: treaty, trade-agreement, investment-treaty-network, multilateral-convention and membership/relationship-framing nodes, none of which is a statistical publication with a methodology dependency. All were orphans — no edge was broken. Full records preserved verbatim so the decision is reversible.",
+  "_note": "Nodes retired from the corpus on 2026-08-29 as confirmed duplicates, merged into the surviving id shown. Full original records preserved verbatim so the merge is reversible: paste the record back into its original slice file and repoint the edges. A second batch was retired the same day as a modelling decision: treaty, trade-agreement, investment-treaty-network, multilateral-convention and membership/relationship-framing nodes, none of which is a statistical publication with a methodology dependency. All were orphans — no edge was broken. Full records preserved verbatim so the decision is reversible. A third, much smaller batch was retired the same day: analytical meta-nodes — comparison frameworks and policy postures with no publication behind them. Deliberately kept SMALL: \"framing\" turned out to be a Grok verbal tic that appears in the titles and descriptions of perfectly real statistics nodes, and the corpus's own \"meta-node\" phrasing describes a node's role in the graph rather than its nature, so neither is a safe signal to sweep on.",
   "retired": [
     {
       "id": "mx-guerrero-acapulco-detail",
@@ -2263,6 +2263,172 @@
           "Security and local-development analysis"
         ],
         "_jurisdiction_level_original": "bilateral",
+        "last_updated": null
+      }
+    }
+  ],
+  "retired_meta_nodes": [
+    {
+      "id": "id-defence-posture",
+      "original_slice": "id-indonesia-grok-2026-08.json",
+      "record": {
+        "id": "id-defence-posture",
+        "title": "Defence and security policy framing (archipelagic posture)",
+        "publisher": "Ministry of Defence / related strategic documents",
+        "country": "ID",
+        "jurisdiction_level": "federal",
+        "region": "Indonesia",
+        "description": "Recurring policy and strategic framing of Indonesia’s defence posture as an archipelagic state, including modernisation programmes and the linkage between territorial integrity, sea lanes and external security.",
+        "url": "https://www.kemhan.go.id/wp-content/uploads/2015/12/04f92fd80ee3d01c8e5c5dc3f56b34e31.pdf",
+        "domains": [
+          "governance",
+          "proposed:archipelagic"
+        ],
+        "_cadence_original": "continuous",
+        "_batch": [
+          "2026-08-14_Indonesia-batch11.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Policy-frame node that connects the defence cluster to the strategic-geography layer.",
+        "_referenced_by": [
+          "Defence budget statistics",
+          "ALKI and chokepoint nodes",
+          "Foreign-policy and maritime-security documents"
+        ],
+        "_jurisdiction_level_original": "national",
+        "last_updated": null,
+        "_url_evidence": "PDF on the Ministry of Defence domain confirmed as Buku Putih Pertahanan Indonesia (Defence White Paper), setting out archipelagic defence doctrine and strategy.",
+        "_cadence_resolution": "recurring",
+        "_cadence_evidence": "The cited document is the Buku Putih Pertahanan Indonesia 2008 (18 Feb 2008), which states it updates the 2003 white paper 'Mempertahankan Tanah Air Memasuki Abad XXI' - two editions five years apart, i.e. roughly one per five years.",
+        "releases_per_year": 0.2
+      }
+    },
+    {
+      "id": "jp-prefectural-contrast-summary",
+      "original_slice": "jp-japan-grok-2026-08.json",
+      "record": {
+        "id": "jp-prefectural-contrast-summary",
+        "title": "Prefectural statistical contrast framework (Tokyo vs Okinawa / peripheral)",
+        "publisher": "Various (Tokyo Metropolitan Government, Okinawa Prefecture, Cabinet Office Prefectural Accounts)",
+        "country": "JP",
+        "jurisdiction_level": "provincial",
+        "region": "Japan (multi-prefecture)",
+        "description": "Conceptual and data framework that systematically compares Tokyo Metropolitan Accounts / Yearbook with peripheral prefectural yearbooks (exemplified by Okinawa) and the full set of Prefectural Accounts. Used to test hierarchy homogeneity and to surface regional heterogeneity in income, industry structure, demography and social indicators.",
+        "url": "https://www.esri.cao.go.jp/jp/sna/sonota/kenmin/kenmin_top.html",
+        "domains": [
+          "proposed:contrast",
+          "proposed:hierarchy"
+        ],
+        "_batch": [
+          "2026-08-14_Japan-batch5.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Meta-node that makes the regional contrast explicit. Japan’s statistical system is highly decentralised at the prefectural level; the Tokyo–Okinawa (and broader core–periphery) comparison is the practical test of whether the same hierarchy of reports exists and how much independent local production occurs. Supports the homogeneity-check principle in the country strategy.",
+        "_referenced_by": [
+          "Tokyo Metropolitan Accounts and Statistical Yearbook",
+          "Okinawa Prefectural Statistical Yearbook",
+          "Cabinet Office Annual Report on Prefectural Accounts",
+          "National accounts regional analysis and fiscal equalisation studies"
+        ],
+        "last_updated": null,
+        "_url_evidence": "Cabinet Office ESRI 県民経済計算 (Prefectural Accounts) series landing page, fetched and confirmed: lists statistical tables by prefecture for FY2008-2023, methodology/terminology notes and links to individual prefectures' own publication pages. Note: the item as titled is a synthesised cross-publisher framework rather than a single publication; this is the Cabinet Office Prefectural Accounts component named in its publisher field, and no single official page exists for the Tokyo/Okinawa contrast framework itself."
+      }
+    },
+    {
+      "id": "kr-regional-contrast-extended",
+      "original_slice": "kr-south-korea-grok-2026-08.json",
+      "record": {
+        "id": "kr-regional-contrast-extended",
+        "title": "Extended regional contrast (Seoul Capital Area vs non-capital provinces / GRDP + demographic differentials)",
+        "publisher": "Statistics Korea / local governments",
+        "country": "KR",
+        "jurisdiction_level": "provincial",
+        "region": "Republic of Korea (multi-region)",
+        "description": "Synthesised framework that systematically compares the Seoul Capital Area with other provinces and metropolitan cities using GRDP, population, ageing, fertility, employment and housing indicators. Tests hierarchy homogeneity and surfaces core–periphery differentials.",
+        "url": "https://kosis.kr/visual/eRegionIndex/index.do",
+        "domains": [
+          "proposed:contrast",
+          "proposed:hierarchy"
+        ],
+        "_batch": [
+          "2026-08-14_SouthKorea-batch4.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Meta-node that operationalises the regional-contrast principle for Korea. Extreme concentration in the Seoul Capital Area is a defining structural feature; explicit comparison with peripheral provinces (e.g., Jeolla, Gyeongsang, Gangwon, Jeju) strengthens the graph’s ability to capture spatial inequality and policy responses.",
+        "_referenced_by": [
+          "GRDP / Regional Accounts releases",
+          "Population Census and Vital Statistics regional tables",
+          "Housing and labour statistics by province",
+          "Regional policy and balanced-development documents"
+        ],
+        "last_updated": null,
+        "_url_evidence": "Retrieved KOSIS 'e-지방지표' (e-Local/Regional Indicators), Statistics Korea's official regional indicator service; the page's indicator tree contains 1인당 GRDP and 1인당 지역총소득, 고령인구비율/노령화지수, 합계출산율, 고용률 and 주택보급률/주택소유율, with 시도별 상황판, 테마별 상황판 and 복합 비교 dashboards for comparing provinces and metropolitan cities."
+      }
+    },
+    {
+      "id": "tw-new-southbound-tech",
+      "original_slice": "tw-taiwan-grok-2026-08.json",
+      "record": {
+        "id": "tw-new-southbound-tech",
+        "title": "New Southbound Policy — technology and semiconductor diplomacy components",
+        "publisher": "Executive Yuan / related ministries",
+        "country": "TW",
+        "jurisdiction_level": "federal",
+        "region": "Taiwan–Southeast Asia / South Asia",
+        "description": "Policy framework that leverages Taiwan’s semiconductor, AI and trusted-industry strengths to deepen economic and technology ties with Southeast Asian and South Asian partners, thereby diversifying international space.",
+        "url": "https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/86f143fa-8441-4914-8349-c474afe0d44e",
+        "domains": [
+          "proposed:diplomacy",
+          "proposed:semiconductors",
+          "proposed:southbound",
+          "proposed:diversification"
+        ],
+        "_cadence_original": "continuous / periodic strategy updates",
+        "_batch": [
+          "2026-08-14_Taiwan-batch8-chips-sovereignty.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Diversification node that complements the US-centric economic-security architecture. Uses the same semiconductor/AI assets to expand Taiwan’s international economic space.",
+        "_referenced_by": [
+          "Outbound investment and trade statistics with Southbound partners",
+          "Semiconductor and digital-industry policy documents",
+          "Regional economic-cooperation agreements"
+        ],
+        "_jurisdiction_level_original": "national / international",
+        "last_updated": null,
+        "_url_evidence": "Retrieved and read. Executive Yuan policy page 'Xin nanxiang zhengce tuidong jihua' (New Southbound Policy Promotion Plan) in the Executive Yuan's key-policies section. Confirmed content includes the 18 target countries across ASEAN, South Asia and Australasia, the shift from a one-way manufacturing-base relationship to reciprocal partnership, and specifically the technology/industry components the node describes: taking the five major innovative industries into partner markets (IoT/ETC, smart healthcare, smart campus), overseas export cooperation platforms for infrastructure and turnkey projects, technology exchange platforms, and strengthening cross-border linkage through science parks and research institutions. NOTE: this is a policy framework document, not a statistical product. MOFA's nspp.mofa.gov.tw still returns nothing readable.",
+        "_url_route": "Executive Yuan main site (ey.gov.tw) instead of the unreadable nspp.mofa.gov.tw",
+        "_cadence_resolution": "one-off",
+        "_cadence_evidence": "The Executive Yuan page is the 新南向政策推動計畫 policy document dated 105-09-26 (26 September 2016) — a single approved policy plan with no stated revision cycle; later items are separate news releases."
+      }
+    },
+    {
+      "id": "vn-defence-policy",
+      "original_slice": "vn-vietnam-grok-2026-08.json",
+      "record": {
+        "id": "vn-defence-policy",
+        "title": "National defence policy framing",
+        "publisher": "Ministry of National Defence / Party-State documents",
+        "country": "VN",
+        "jurisdiction_level": "federal",
+        "region": "Vietnam",
+        "description": "Official national defence policy emphasising peace, self-defence, non-use of force, peaceful settlement of disputes, and gradual modernisation of the Vietnam People’s Army sufficient for self-defence. Continuously cited in security and foreign-policy analysis.",
+        "url": null,
+        "domains": [
+          "governance"
+        ],
+        "_cadence_original": "continuous",
+        "_batch": [
+          "2026-08-14_Vietnam-batch9-defence.json"
+        ],
+        "_shape": "recurring-citation",
+        "_notes": "Core policy-frame node for Vietnamese defence posture.",
+        "_referenced_by": [
+          "Defence budget statistics",
+          "Maritime and external-security analysis",
+          "Multi-vector partnership framing"
+        ],
+        "_jurisdiction_level_original": "national",
         "last_updated": null
       }
     }
