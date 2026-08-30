@@ -111,12 +111,21 @@ real-GPU spot-check. See memory `renderer_transparent_toggle_2026-08-29`.
 
 ### [Agent] — next build rounds
 
-1. **A triage pass is now worth more than another wiring round in the
-   worked countries.** 793 isolated is not a to-do list: a
-   large share is structurally unwireable, and round 7 confirmed several
-   of those on real bytes. Separate "not yet researched" from
-   "researched, nothing to find" before anyone scopes another pass at
-   ID/TW/IR/EU.
+1. **Triage pass done 2026-08-30 — the 793 isolated nodes are now split.**
+   398 never-researched, 330 hard-closed (real negative verdict on file), 27
+   soft-deferred, 15 quick-win `no-node-yet` leads (fully evidenced, just
+   need a node minted — same mechanic as round 8's TW/ID pair; 2 of the 15
+   are mislabeled and are actually closed, so really 13). Full breakdown,
+   per-country table, and the exact node ids: project memory
+   `triage_2026-08-30`. **Recommended order**: (a) the 13 quick-win leads
+   first — Congo alone might be 1 node closing 3 edges; (b) AE (20 orphans,
+   never in ANY prior round's scope) or ID (71 orphans, the largest
+   untouched pool after three partial rounds) as the next full wiring
+   round; (c) EU (32) / BR (17) / IN (14) / CA (13) as solid second-tier
+   candidates. **Do not** re-sweep IR/YE/SY/MM/IQ/TH/VN — their high
+   never-researched counts are misleading; the 2026-08-28 candidates-tier
+   round already found domestic chains don't work there, only specific
+   named retries are worth trying (listed in that memory file).
 2. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
    retries: Iraq's GDP/National Income metadata doc (cosit.gov.iq),
    Vietnam's VSIC 2018 decision, Iraq's wage-bill clause (Budget Law
