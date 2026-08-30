@@ -1,0 +1,222 @@
+{
+  "_slice": "cl-unlinked-wiring-2026-08-30",
+  "_researched": "2026-08-30",
+  "_status": "verified",
+  "_note": "South America unresearched-seam round, Chile tier. 14 edges across 14 of 28 previously-unlinked CL nodes; 14 remain dropped (no-document/unreadable-source/deferred). Two new international-standard nodes minted: un-irip-2010 (UN's Index of Industrial Production manual, named explicitly and by year in INE's own IPMan methodology) and imf-mfsmcg-2016 was found to ALREADY EXIST in the corpus under that id (Monetary and Financial Statistics Manual and Compilation Guide, 2016) — reused rather than duplicated as a new imf-mfsm-2016 node. CASEN's departmental poverty-incidence table (2022 round) is the workhorse source for the low/high-poverty-contrast region nodes, extending the same pattern already wired for cl-araucania-entity.",
+  "reports": [
+    {
+      "id": "un-irip-2010",
+      "title": "International Recommendations for the Index of Industrial Production 2010 (IRIP 2010)",
+      "publisher": "United Nations Statistics Division",
+      "country": "INT",
+      "jurisdiction_level": "international",
+      "region": "International",
+      "description": "UN statistical standard giving international recommendations for compiling an index of industrial production, adopted by national statistics offices worldwide (including INE Chile) as the methodological framework for their manufacturing production indices.",
+      "last_updated": null,
+      "url": "https://unstats.un.org/unsd/industry/ind_prod_recom.asp",
+      "domains": [
+        "industry"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "cl-agregados-monetarios",
+      "target_report_id": "imf-mfsmcg-2016",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Fondo Monetario Internacional (2016). Manual de Estadísticas Monetarias y Financieras — cited in the 'Documentación Relacionada' section of BCentral's own methodology note for Base Monetaria y Agregados Monetarios.",
+      "evidence_url": "https://si3.bcentral.cl/estadisticas/Principal1/Metodologias/EMF/AGREGADOS_MONETARIOS/Base_Monetaria.pdf"
+    },
+    {
+      "source_report_id": "cl-casen-rm",
+      "target_report_id": "cl-casen-regiones",
+      "relationship_type": "uses_data_from",
+      "basis": "Incidencia de la pobreza en la población por región, 2006-2022 — 'Metropolitana 20,0 17,4 15,4 8,8 6,8 5,4 8,8 4,4'.",
+      "evidence_url": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2022/Resultados%20pobreza%20por%20ingresos%20Casen%202022.pdf"
+    },
+    {
+      "source_report_id": "cl-dipres-funcional",
+      "target_report_id": "cl-presupuesto-nacional",
+      "relationship_type": "uses_data_from",
+      "basis": "La Clasificación Funcional de las Erogaciones fue elaborada por el Subdepartamento de Estadísticas del Sector Público de la Dirección de Presupuestos, con antecedentes de la Ejecución Presupuestaria a Diciembre 2023.",
+      "evidence_url": "https://www.dipres.gob.cl/598/articles-333095_doc_pdf.pdf"
+    },
+    {
+      "source_report_id": "cl-ene",
+      "target_report_id": "cl-censo",
+      "relationship_type": "methodology_depends_on",
+      "basis": "actualizando el marco muestral de la encuesta, el diseño metodológico y el método de calibración de los factores de expansión, tomando como referencia el Censo de 2017 (Marco Muestral de Viviendas 2017).",
+      "evidence_url": "https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/metodologia/diseno/metodologia-ene-2020.pdf"
+    },
+    {
+      "source_report_id": "cl-ene-antofagasta",
+      "target_report_id": "cl-censo",
+      "relationship_type": "methodology_depends_on",
+      "basis": "actualizando el marco muestral de la encuesta ... tomando como referencia el Censo de 2017 (national ENE methodology, which defines every regional edition including Antofagasta's).",
+      "evidence_url": "https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/metodologia/diseno/metodologia-ene-2020.pdf"
+    },
+    {
+      "source_report_id": "cl-ene-araucania",
+      "target_report_id": "cl-censo",
+      "relationship_type": "methodology_depends_on",
+      "basis": "actualizando el marco muestral de la encuesta ... tomando como referencia el Censo de 2017 (national ENE methodology, which defines every regional edition including Araucanía's).",
+      "evidence_url": "https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/metodologia/diseno/metodologia-ene-2020.pdf"
+    },
+    {
+      "source_report_id": "cl-ene-rm",
+      "target_report_id": "cl-censo",
+      "relationship_type": "methodology_depends_on",
+      "basis": "actualizando el marco muestral de la encuesta ... tomando como referencia el Censo de 2017 (national ENE methodology, which defines every regional edition including RM's).",
+      "evidence_url": "https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/metodologia/diseno/metodologia-ene-2020.pdf"
+    },
+    {
+      "source_report_id": "cl-ens",
+      "target_report_id": "cl-censo",
+      "relationship_type": "methodology_depends_on",
+      "basis": "El marco muestral fue constituido a partir del Censo de Población y Vivienda 2002.",
+      "evidence_url": "https://diprece.minsal.cl/wrdprss_minsal/wp-content/uploads/2016/02/Encuesta-Nacional-de-Salud.-Ministerio-de-Salud.pdf"
+    },
+    {
+      "source_report_id": "cl-gasto-educacion",
+      "target_report_id": "cl-presupuesto-nacional",
+      "relationship_type": "uses_data_from",
+      "basis": "La Clasificación Funcional de las Erogaciones fue elaborada por el Subdepartamento de Estadísticas del Sector Público de la Dirección de Presupuestos, con antecedentes de la Ejecución Presupuestaria a Diciembre 2023 (gasto-educacion is a line item of the same functional classification).",
+      "evidence_url": "https://www.dipres.gob.cl/598/articles-333095_doc_pdf.pdf"
+    },
+    {
+      "source_report_id": "cl-iac",
+      "target_report_id": "cl-ipc",
+      "relationship_type": "methodology_depends_on",
+      "basis": "En comercio al por menor se utilizaron precios del IPC base 2013 en la elaboración de deflactores, los cuales fueron construidos a nivel de sublíneas de productos.",
+      "evidence_url": "https://www.ine.gob.cl/docs/default-source/actividad-mensual-del-comercio/metodologias/base-promedio-a%C3%B1o-2014-100/manual-metodol%C3%B3gico.pdf"
+    },
+    {
+      "source_report_id": "cl-ipman",
+      "target_report_id": "un-irip-2010",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Respecto a la medición de la evolución de la actividad productiva manufacturera, el manual International Recommendations for the Index of Industrial Production 2010 (en adelante IRIP2010)... el IPMan ... se ajusta a las recomendaciones internacionales que hace la ONU a sus estados miembros.",
+      "evidence_url": "https://regiones.ine.gob.cl/documentos/default-source/region-ix/estadisticas/produccion-de-la-industria-manufacturera/metodolog%C3%ADas/documentos/metodolog%C3%ADa-%C3%ADndice-de-producci%C3%B3n-manufacturera-a%C3%B1o-base-2018=100.pdf"
+    },
+    {
+      "source_report_id": "cl-isapres",
+      "target_report_id": "cl-casen",
+      "relationship_type": "uses_data_from",
+      "basis": "Fuente: Elaboración en base a Encuesta CASEN 1996, 1998, 2000, 2003 y 2006 / Boletines Superintendencia de ISAPRE hasta el año 2004, Superintendencia de Salud desde el 2005 / Proyecciones y Estimaciones de Población, INE 1990-2050.",
+      "evidence_url": "https://www.superdesalud.gob.cl/documentacion/666/articles-7632_recurso_1.pdf"
+    },
+    {
+      "source_report_id": "cl-magallanes-entity",
+      "target_report_id": "cl-casen-regiones",
+      "relationship_type": "uses_data_from",
+      "basis": "Incidencia de la pobreza en la población por región, 2006-2022 — 'Magallanes 12,0 10,1 6,9 5,3 4,1 2,0 5,5 3,4'.",
+      "evidence_url": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2022/Resultados%20pobreza%20por%20ingresos%20Casen%202022.pdf"
+    },
+    {
+      "source_report_id": "cl-maule-entity",
+      "target_report_id": "cl-casen-regiones",
+      "relationship_type": "uses_data_from",
+      "basis": "Incidencia de la pobreza en la población por región, 2006-2022 — 'Maule 42,9 37,3 31,7 21,5 17,9 12,5 12,2 8,7'.",
+      "evidence_url": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2022/Resultados%20pobreza%20por%20ingresos%20Casen%202022.pdf"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "cl-biobio-entity -> cl-censo",
+      "source": "cl-biobio-entity",
+      "target": null,
+      "reason": "no-document",
+      "why": "INE's regional Biobío page (regiones.ine.gob.cl/biobio) links to Census content but never states the regional profile is based on it. No domain hint to target a search, unlike Antofagasta/mining or Araucanía/poverty."
+    },
+    {
+      "edge": "cl-censo -> [UN census standard]",
+      "source": "cl-censo",
+      "target": null,
+      "reason": "deferred",
+      "why": "censo2024.ine.gob.cl states the census discussion started 'tomando como referencia las recomendaciones de Naciones Unidas en materia de Censos de Población y Vivienda' (no revision number given), and CEPAL/CELADE provided technical accompaniment — but neither names a specific, versioned publication, and the standing policy is not to mint generic/unversioned standards nodes."
+    },
+    {
+      "edge": "cl-censo-2024-rm -> ???",
+      "source": "cl-censo-2024-rm",
+      "target": null,
+      "reason": "no-document",
+      "why": "censo2024.ine.gob.cl results/dashboard pages are JS-rendered and did not surface a citable methodology statement distinct from the national census (its own container, correctly excluded)."
+    },
+    {
+      "edge": "cl-codelco -> cl-cochilco",
+      "source": "cl-codelco",
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked Cochilco's dedicated Codelco statistics page and DIPRES's Empresas Públicas / Estadísticas de las Finanzas Públicas 2014-2023 report. DIPRES's fiscal-transfer tables reference 'Traspasos de empresas públicas al Fisco' but don't cite where Codelco's own figures come from."
+    },
+    {
+      "edge": "cl-gran-santiago -> cl-censo",
+      "source": "cl-gran-santiago",
+      "target": null,
+      "reason": "no-document",
+      "why": "The IPC base-2023 methodology manual only mentions 'Gran Santiago' in a historical-baseline table describing pre-2008 IPC coverage, with no census-based boundary definition or dependency statement."
+    },
+    {
+      "edge": "cl-inacer -> cl-cuentas-nacionales",
+      "source": "cl-inacer",
+      "target": null,
+      "reason": "no-document",
+      "why": "INE itself states the opposite: 'aunque se publicaba trimestralmente, el Inacer actuaba como un indicador complementario y no incidía en la estimación oficial de la evolución de la actividad económica en las regiones del país, la cual se obtiene a partir del PIB regional.'"
+    },
+    {
+      "edge": "cl-inacer-regiones -> cl-cuentas-nacionales",
+      "source": "cl-inacer-regiones",
+      "target": null,
+      "reason": "no-document",
+      "why": "Same finding as cl-inacer (its own container, correctly excluded) — no other source found for the regional editions specifically."
+    },
+    {
+      "edge": "cl-ipega -> ???",
+      "source": "cl-ipega",
+      "target": null,
+      "reason": "no-document",
+      "why": "Unable to locate an IPEGA-specific methodology document; INE's IPI page is JS-rendered and did not yield PDF links. cl-ipman's sibling standard citation (un-irip-2010) may plausibly apply, but no document says so specifically for electricity/gas/water."
+    },
+    {
+      "edge": "cl-ipi -> [UN standard]",
+      "source": "cl-ipi",
+      "target": null,
+      "reason": "unreadable-source",
+      "why": "INE's IPI landing page loads its Metodologías/Boletines links dynamically via JavaScript; neither WebFetch nor a plain curl fetch surfaced the underlying PDF URLs. Could not verify whether the umbrella IPI cites IRIP2010 the way its manufacturing sub-index does."
+    },
+    {
+      "edge": "cl-litio -> cl-cochilco",
+      "source": "cl-litio",
+      "target": null,
+      "reason": "no-document",
+      "why": "INE IPI/IPMin bulletins mention lithium carbonate output but carry no footnote or 'fuentes de información' section citing Cochilco, SERNAGEOMIN, or company data specifically for the lithium sub-component."
+    },
+    {
+      "edge": "cl-presupuesto-nacional -> cl-cuentas-nacionales",
+      "source": "cl-presupuesto-nacional",
+      "target": null,
+      "reason": "no-document",
+      "why": "Checked DIPRES's Estadísticas de las Finanzas Públicas 2014-2023 report and institutional page for any statement that budget projections use Banco Central GDP figures or Cochilco copper-price assumptions — no quotable sentence found."
+    },
+    {
+      "edge": "cl-remuneraciones -> cl-censo",
+      "source": "cl-remuneraciones",
+      "target": null,
+      "reason": "no-document",
+      "why": "INE's own methodology manual states the sampling frame is built from SII tax records (Formularios 1887, 22, 29, año tributario 2002), not from the Census or ENE. SII administrative data has no corresponding corpus node."
+    },
+    {
+      "edge": "cl-rm-santiago -> cl-casen",
+      "source": "cl-rm-santiago",
+      "target": null,
+      "reason": "no-document",
+      "why": "This joint INE/Min. Desarrollo Social entity node plausibly connects to CASEN, but no specific primary-source document was found making that statement explicitly, distinct from the already-separate cl-casen-rm and cl-censo-2024-rm nodes."
+    },
+    {
+      "edge": "cl-valparaiso-entity -> ???",
+      "source": "cl-valparaiso-entity",
+      "target": null,
+      "reason": "no-document",
+      "why": "No thematic domain hint on this node to target a search, and no INE regional page found stating an explicit sourcing dependency for its 'core statistical identity.'"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "_slice": "py-unlinked-wiring-2026-08-30",
+  "_researched": "2026-08-30",
+  "_status": "verified",
+  "_note": "South America unresearched-seam round, Paraguay tier. 8 edges across 8 of 18 previously-unlinked PY nodes; 10 remain dropped (no-document/deferred). Extends the existing INE departmental-poverty pattern (py-concepcion/py-itapua/py-caaguazu) to py-caazapa/py-san-pedro, and uses INE's census preliminary-results release for the population-only department/capital nodes that don't carry the poverty domain. MEF's own budget and budget-execution press releases supply the fiscal-education cluster.",
+  "reports": [],
+  "dependencies": [
+    {
+      "source_report_id": "py-caazapa",
+      "target_report_id": "py-pobreza-departamental",
+      "relationship_type": "uses_data_from",
+      "basis": "El Instituto Nacional de Estadística (INE) presentó los principales Indicadores de Pobreza Monetaria basados en los Resultados de la Encuesta Permanente de Hogares Continua (EPHC) ... Caazapá (25,1%).",
+      "evidence_url": "https://www.ine.gov.py/noticias/2806/en-paraguay-la-pobreza-monetaria-total-se-ubico-en-160-en-el-ano-2025"
+    },
+    {
+      "source_report_id": "py-san-pedro",
+      "target_report_id": "py-pobreza-departamental",
+      "relationship_type": "uses_data_from",
+      "basis": "El Instituto Nacional de Estadística (INE) presentó los principales Indicadores de Pobreza Monetaria basados en los Resultados de la Encuesta Permanente de Hogares Continua (EPHC) ... San Pedro (24,8%).",
+      "evidence_url": "https://www.ine.gov.py/noticias/2806/en-paraguay-la-pobreza-monetaria-total-se-ubico-en-160-en-el-ano-2025"
+    },
+    {
+      "source_report_id": "py-alto-parana",
+      "target_report_id": "py-censo",
+      "relationship_type": "uses_data_from",
+      "basis": "Los resultados preliminares del Censo 2022 indican que la población actual del Paraguay es de 6.109.644 ... Alto Paraná: 784.839 habitantes.",
+      "evidence_url": "https://www.ine.gov.py/noticias/1711/ine-presento-los-resultados-preliminares-del-8-censo-nacional-de-poblacion-y-viviendas-y-el-4-censo-indigena"
+    },
+    {
+      "source_report_id": "py-central",
+      "target_report_id": "py-censo",
+      "relationship_type": "uses_data_from",
+      "basis": "Los resultados preliminares del Censo 2022 ... Central: 1.866.562 habitantes.",
+      "evidence_url": "https://www.ine.gov.py/noticias/1711/ine-presento-los-resultados-preliminares-del-8-censo-nacional-de-poblacion-y-viviendas-y-el-4-censo-indigena"
+    },
+    {
+      "source_report_id": "py-asuncion",
+      "target_report_id": "py-censo",
+      "relationship_type": "uses_data_from",
+      "basis": "Los resultados preliminares del Censo 2022 ... Asunción: 477.346 habitantes.",
+      "evidence_url": "https://www.ine.gov.py/noticias/1711/ine-presento-los-resultados-preliminares-del-8-censo-nacional-de-poblacion-y-viviendas-y-el-4-censo-indigena"
+    },
+    {
+      "source_report_id": "py-mec",
+      "target_report_id": "py-presupuesto",
+      "relationship_type": "uses_data_from",
+      "basis": "En ese marco, contempla una asignación total de G. 10,38 billones para el Ministerio de Educación y Ciencias (MEC), reafirmando el sector de educación como una de las principales prioridades del Gobierno.",
+      "evidence_url": "https://www.mef.gov.py/es/institucional/sala-de-prensa/noticias/pgn-2026-destina-mas-g-103-billones-fortalecer-educacion"
+    },
+    {
+      "source_report_id": "py-educacion-salud",
+      "target_report_id": "py-mec",
+      "relationship_type": "uses_data_from",
+      "basis": "El MEC, por su parte, ejecutó G. 6,8 billones, con un 65% orientado a servicios educativos del primer, segundo y tercer ciclo de la Educación Escolar Básica, la Educación Media y programas de educación de jóvenes y adultos. El MSPyBS ejecutó G. 5,4 billones.",
+      "evidence_url": "https://www.mef.gov.py/es/institucional/sala-de-prensa/noticias/ejecucion-presupuestaria-administracion-central-asciende-546"
+    },
+    {
+      "source_report_id": "py-ingresos-fiscales",
+      "target_report_id": "py-presupuesto",
+      "relationship_type": "cites",
+      "basis": "El último informe de la Situación Financiera (SITUFIN) ... revela que el resultado se explica por el desempeño positivo de los ingresos tributarios ... las autoridades reafirmaron que se mantienen las perspectivas hacia el cumplimiento del déficit fiscal autorizado en la Ley de Presupuesto General de la Nación.",
+      "evidence_url": "https://www.mef.gov.py/es/institucional/sala-de-prensa/noticias/resultado-fiscal-setiembre-continua-linea-plan-convergencia"
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "py-censo -> ???",
+      "source": "py-censo",
+      "target": null,
+      "reason": "no-document",
+      "why": "INE's census landing pages and results releases have no statement that the census itself derives from or depends on another report/standard. Foundational primary data-collection instrument, correctly used only as a target elsewhere in this round."
+    },
+    {
+      "edge": "py-carne -> py-comercio-exterior",
+      "source": "py-carne",
+      "target": null,
+      "reason": "no-document",
+      "why": "py-carne's own part_of is py-comercio-exterior (invalid target). BCP's foreign-trade methodology note names DNIT/Aduanas as the primary trade-data source, and Cámara Paraguaya de Carne only for freight-cost estimates, not export-volume figures. No SENACSA/ARP institutional-source statement found."
+    },
+    {
+      "edge": "py-soja -> py-comercio-exterior",
+      "source": "py-soja",
+      "target": null,
+      "reason": "no-document",
+      "why": "py-soja's own part_of is py-comercio-exterior (invalid target). Same BCP methodology note names CAPECO only in the freight-cost-consultation context, not as the source of soybean export/production figures."
+    },
+    {
+      "edge": "py-cnime -> ???",
+      "source": "py-cnime",
+      "target": null,
+      "reason": "no-document",
+      "why": "MIC's maquila24 regime page and a 2025 MIC Maquila presentation deck cite legal instruments and describe an inter-agency review process, but neither states a data/methodology dependency on any existing corpus report."
+    },
+    {
+      "edge": "py-cnzf -> py-ley-60-90",
+      "source": "py-cnzf",
+      "target": null,
+      "reason": "no-document",
+      "why": "MEF's Zona Franca page states zona-franca users can additionally benefit from incentives under Ley 60/90 — a benefits cross-reference between two legal regimes, not a data/methodology dependency."
+    },
+    {
+      "edge": "py-cuentas-salud -> ???",
+      "source": "py-cuentas-salud",
+      "target": null,
+      "reason": "deferred",
+      "why": "mspbs.gov.py and its DIGIES subsite yielded no accessible page naming a source institution or methodology (OPS/SHA framework) with citable text; WebSearch quota was exhausted mid-task, worth a follow-up pass."
+    },
+    {
+      "edge": "py-ied -> py-bop",
+      "source": "py-ied",
+      "target": null,
+      "reason": "no-document",
+      "why": "py-ied's own part_of is py-bop (invalid target). BCP's 2024 FDI presentation cites the IMF Balance of Payments Manual generically (no version), and no BPM/IMF-manual node matching that generic citation exists in the corpus — standing policy is not to mint a node for an unversioned standards citation."
+    },
+    {
+      "edge": "py-ley-invariabilidad -> py-ley-60-90",
+      "source": "py-ley-invariabilidad",
+      "target": null,
+      "reason": "no-document",
+      "why": "A legal-analysis summary of Ley 5542/2015 treats the tax-rate-invariability law as a distinct, separate mechanism from Ley 60/90, with no stated cross-applicability."
+    },
+    {
+      "edge": "py-reservas -> py-bop",
+      "source": "py-reservas",
+      "target": null,
+      "reason": "no-document",
+      "why": "py-reservas's own part_of is py-bop (invalid target). BCP's Gestión de las Reservas Internacionales page cites only an internal Board-approved investment policy, not another report/standard in the corpus."
+    },
+    {
+      "edge": "py-set -> py-ingresos-fiscales",
+      "source": "py-set",
+      "target": null,
+      "reason": "no-document",
+      "why": "py-set's own part_of is py-ingresos-fiscales (invalid target, the only natural one). DNIT's (SET's successor agency) statistics page lists many revenue/taxpayer bulletins but states no data source or cross-reference to Zonas Francas, CNZF, CNIME, or the Budget Law."
+    }
+  ]
+}
