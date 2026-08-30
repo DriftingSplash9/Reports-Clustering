@@ -491,9 +491,31 @@ unminted. Don't re-raise the SCI/UNSD SNA-93 contradiction.
 revision): don't wire them (Thomas, 2026-08-29). No revision-neutral
 `un-coicop` parent node gets minted; the two held edges stay unminted.
 
-**Generic MFSM citation** (Vietnam's `vn-monetary-indicators`): don't
-bother (Thomas, 2026-08-29) — same call as COICOP above. No plain
-`imf-mfsm` node gets minted; the held edge stays unminted.
+**Generic MFSM citation** (Vietnam's `vn-monetary-indicators`): revisited
+and reversed (Thomas, 2026-08-30) — wire it. Live edge:
+`vn-monetary-indicators -> imf-mfsmcg-2016` (methodology_depends_on) in
+`vn-unlinked-wiring-2026-08-29.json`. Originally declined 2026-08-29 as the
+same call as COICOP above; Thomas revisited the next day and ruled to wire
+to the versioned node despite the generic/aspirational citation. No plain
+`imf-mfsm` node gets minted.
+
+**PH EBEIS node-scope** (`ph-pdp -> ph-basic-ed`, the PDP cites DepEd's
+EBEIS information system, not a named publication): declined (Thomas,
+2026-08-30) — an information system does not stand in for the statistics
+it produces. The held edge stays unminted; don't re-raise.
+
+**TW SIPRI arms-transfers direction** (`tw-national-defense-report ->
+tw-sipri-arms-transfers`): declined (Thomas, 2026-08-30) — scope mismatch,
+not an authenticity problem. The NDR cites SIPRI's Arms Transfers Database
+for PRC arms EXPORTS; the node is scoped to Taiwan arms IMPORTS. The held
+edge stays unminted; don't re-raise.
+
+**Chart/figure-caption sourcing clears the evidence bar** (`mx-alcaldia-
+benito-juarez -> mx-censos-economicos`, sourced only in a chart caption
+under a figure, not in body-text prose): accepted (Thomas, 2026-08-30) — a
+figure-source line is a citation. Live edge minted (`uses_data_from`) in
+`mx-browser-unblock-2026-08-29.json`. General ruling, not just this edge:
+a figure/chart source line alone now counts as evidence for future rounds.
 
 **NACE Rev.2** (Türkiye's `tr-industrial-production` -> `isic`, same
 generic-citation shape but a 2-hop chain rather than a revision ambiguity):

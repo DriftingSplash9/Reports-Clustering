@@ -19,12 +19,29 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,432 reports · 3,307 dependencies · 715 isolated.** `npm run validate`
+**3,427 reports · 3,309 dependencies · 708 isolated.** `npm run validate`
 (0 errors), `npm run gen` (346 slices, 0 unwired), `tsx
 scripts/test-logic.ts` (120/120), `tsc --noEmit`, `npm run build`
 (1,499.57 kB) all clean in a cloud sandbox, confirmed 2026-08-30.
 `public/corpus-data.json` was regenerated and committed back — it is
 current.
+
+**Six Thomas rulings landed 2026-08-30, all validated clean:** 5 duplicate
+nodes merged (removed, no edges lost — each was isolated or the
+sibling was already well-wired): `br-pnad-continua` → kept
+`br-ibge-pnad-continua`; `in-mospi-nas` → kept
+`in-mospi-national-accounts-statistics`; `id-energy-balance-detail` → kept
+`id-energy-balances`; `ae-oil-production` → kept `ae-oil`;
+`ae-labour-force` → kept `ae-labour`. Plus 2 edges minted and 2 declined
+on node-scope questions: `vn-monetary-indicators -> imf-mfsmcg-2016`
+(wired despite the generic/aspirational MFSM citation — reverses the
+2026-08-29 "don't bother" call, see `PLAYBOOK.md` §7) and
+`mx-alcaldia-benito-juarez -> mx-censos-economicos` (a chart-caption
+source line now counts as evidence — general ruling, see `PLAYBOOK.md`
+§7); `ph-pdp -> ph-basic-ed` and `tw-national-defense-report ->
+tw-sipri-arms-transfers` declined permanently (also logged in
+`PLAYBOOK.md` §7 — don't re-raise either). Detail: memory
+`duplicate_merges_and_scope_rulings_2026-08-30`.
 
 **BR/IN/CA isolated-node wiring round (2026-08-30) landed 19 edges, 0 new
 nodes**, in `src/data/research/br-in-ca-wiring-round-2026-08-30.json`.
@@ -57,25 +74,17 @@ container (`graph.ts:536`). Logged as `_dropped` notes, not minted;
 mirrors an existing `part_of`**. Full detail: memory
 `br_in_ca_wiring_round_2026-08-30`.
 
-**Two new duplicate-node flags, need Thomas's ruling** (same pattern as
-the AE/Indonesia flags below — not merged or silently wired):
-`br-pnad-continua` (isolated) vs `br-ibge-pnad-continua` (well-wired, 5
-edges) — identical title, "Pesquisa Nacional por Amostra de Domicílios
-Contínua (PNAD Contínua)". `in-mospi-nas` (isolated) vs `in-mospi-
-national-accounts-statistics` (well-wired, 12 incoming edges) — identical
-title, "National Accounts Statistics".
-
 **EU branch effectively closed** (round 2026-08-30): 3 isolated nodes
 left (`at-statistik-austria-mikrozensus-ake`, `si-surs-lfs`,
 `cy-cystat-lfs`), all documented negatives — do not "fix" by minting.
 Detail: memory `eu_unlinked_wiring_round_2026-08-30`.
 
 **Round 11 (AE/UAE) landed 17 edges + 2 new nodes, 20 → 8 isolated.**
-Two duplicate flags open — see Todo §3.1/3.2. Memory
-`ae_wiring_round11_2026-08-30`.
+Its 2 duplicate-node flags are the `ae-oil`/`ae-labour` merges above.
+Memory `ae_wiring_round11_2026-08-30`.
 
 **Round 10 (Indonesia)** landed 53 edges + 9 new nodes, 74 → 39 isolated.
-One duplicate flag open — see Todo §3.3. Memory
+Its duplicate-node flag is the `id-energy-balances` merge above. Memory
 `id_wiring_round10_2026-08-30`.
 
 **Unlinked-node counts are stale here on purpose except BR/IN/CA and EU,
@@ -107,39 +116,14 @@ specifically) and run `npm install` fresh in the sandbox; ~5MB, fast.
 
 ### [Thomas] — only you can
 
-1. **Rule on `br-pnad-continua` vs `br-ibge-pnad-continua`**: identical
-   title, likely duplicate — merge, or point the isolated one at a
-   genuinely separate document if one exists.
-2. **Rule on `in-mospi-nas` vs `in-mospi-national-accounts-statistics`**:
-   identical title, likely duplicate — same call.
-3. **Rule on `id-energy-balance-detail`**: likely duplicate of
-   `id-energy-balances` — merge, or point at a genuinely separate BPS
-   document if one exists.
-4. **Rule on `ae-oil-production` vs `ae-oil`**: likely duplicate — merge,
-   or point at a genuinely separate ADNOC document if one exists. See
-   memory `ae_wiring_round11_2026-08-30`.
-5. **Rule on `ae-labour-force` vs `ae-labour`**: likely duplicate — merge,
-   or is the SDMX Data Explorer breakdown genuinely a separate product?
-   Same memory entry.
-6. Watch for the render-consistency symptom in ordinary use; flag here if
+1. Watch for the render-consistency symptom in ordinary use; flag here if
    it recurs. `notes/render-consistency-repro-2026-08-25.md`.
-7. Try dragging cluster repulsion past the old 10 mark now that it's 0–15.
+2. Try dragging cluster repulsion past the old 10 mark now that it's 0–15.
    If still weak at 15, it's not the force — check camera auto-fit or node
    density instead. Detail: `renderer_forces_2026-08-28` memory §3.
-8. Watch for any node-rendering oddity (flicker, wrong z-order) after
+3. Watch for any node-rendering oddity (flicker, wrong z-order) after
    2026-08-29's transparent-material change. Visual parity was checked in
    software rendering only; flag here if real hardware differs.
-9. Three node-scope rulings, evidence already verified and quoted in each
-   `_dropped` entry: (a) `ph-pdp -> ph-basic-ed` — the PDP names EBEIS, an
-   information *system*, not a named publication; (b)
-   `tw-national-defense-report -> tw-sipri-arms-transfers` — SIPRI's Arms
-   Transfers Database cited, but for PRC *exports* while the node is
-   scoped to Taiwan *imports*; (c) `mx-alcaldia-benito-juarez ->
-   mx-censos-economicos` — sourced in a chart caption, not body text.
-10. **Vietnam's generic-MFSM question** (carried from round 9): does
-    `vn-monetary-indicators`'s plain "MFSM" citation wire to
-    `imf-mfsmcg-2016`, get its own plain `imf-mfsm` (2000) node, or stay
-    unwired? Full quote in memory `quickwin_leads_2026-08-30`.
 
 ### [Agent] — next build rounds
 

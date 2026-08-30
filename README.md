@@ -110,7 +110,7 @@ Research.1.md              standing brief pasted into every research thread
 README.md                  this file
 
 AF/  EU/  NZ/  AU/  CA/    research branches: G.*.md hand-offs, one independent
-                            numbering per branch — the newest file in a branch
+US/  BRICS/                numbering per branch — the newest file in a branch
                             is that branch's current frontier
   EU/slices/               EU staging area cited by slice provenance (do not move)
   EU/sources/               source PDFs (SEC00-10) and .docx source material
@@ -149,16 +149,8 @@ validate output tells you which of the three happened.
 Every dependency needs an `evidence_url` — a document that explicitly names the
 relationship. No document, no edge. See `REPORTS.md`.
 
-Cadence is three numbers. `releases_per_year` on the report is how often it is
-published — fractional below annual, so a standard revised once a generation is
-`0.05`. `changes_per_year` is how often the number actually moves, and is only
-worth setting when it differs. `reference_period` on the *dependency* is when
-the dependent actually reads its source, which is a property of the pair rather
-than of either report: the same CPI release reaches one report monthly and
-another once a year. Fill it in only where a document states the period.
-
-A source that is published but not official — a commercial price feed named by
-the document that uses it — gets `"source_kind": "commercial"` on the node. Those
-are drawn grey and left out of the authority ranking, so adding one cannot change
-any existing report's size. Sources that are never published at all stay out of
-the graph entirely and get recorded as a note on the report that uses them.
+Cadence (`releases_per_year`, `changes_per_year`, `reference_period`) and
+non-official sources (`source_kind: "commercial"`, and unpublished sources
+noted rather than nodes) both carry real rules — see `REPORTS.md`'s Data
+model and Decisions sections rather than duplicating them here, since a
+second copy is exactly what goes stale.

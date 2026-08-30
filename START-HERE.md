@@ -15,9 +15,10 @@ graph where each sphere is a real published report, each line is a documented
 dependency between two of them, and a report's size is how much everything else
 rests on it.
 
-Right now it holds **1,250 reports and 1,079 dependencies** (measured
-2026-08-18 — run `npm run validate` for the live count, it moves most
-sessions). It began with Canadian and American federal statistics, Alberta's
+Its current size lives in `HANDOFF.md`, not `README.md` or here — the corpus
+grows most sessions, and a count pinned in more than one file is never in
+sync and never needs to be. Run `npm run validate` for the live number. It
+began with Canadian and American federal statistics, Alberta's
 provincial finances and three Alberta municipalities in full detail, and has
 since grown galaxies: the European Union and its member states, candidates and
 neighbours; New Zealand and the three jurisdictions of its Realm plus the
