@@ -7,12 +7,11 @@ how much everything else depends on that report.
 project is and why, in plain language and without assuming you'll run it.
 
 See `REPORTS.md` for the design rules and the standing rules for anyone (human
-or AI) working on this repo. There is no single "current state" file any more —
-current state is whatever the newest hand-off says in the branch you're about
-to touch (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, each numbered independently) plus
-whatever your own project memory carries forward. The old `sessions/V0.*.md`
-running log is retired and archived; see `REPORTS.md` if you're wondering why
-it's gone.
+or AI) working on this repo. Current state is `HANDOFF.md`, one file, top
+level, always — read it first. The older regime (a numbered hand-off thread
+per branch — `AF/`, `EU/`, `NZ/`, `AU/`, `CA/` — and the `sessions/V0.*.md`
+log before that) is retired; that history is in `archive/`, not something a
+new session needs to reconstruct.
 
 ## Running it
 
@@ -104,30 +103,23 @@ were); the four files at root are the ones worth opening first, everything
 else is filed by what it *is*:
 
 ```
+HANDOFF.md                 current state and the live todo — read this first
 REPORTS.md                 the design rules + standing rules. The document that matters most
 START-HERE.md              plain-language explanation, for sending to people
-Research.1.md              standing brief pasted into every research thread
 README.md                  this file
 
-AF/  EU/  NZ/  AU/  CA/    research branches: G.*.md hand-offs, one independent
-US/  BRICS/                numbering per branch — the newest file in a branch
-                            is that branch's current frontier
-  EU/slices/               EU staging area cited by slice provenance (do not move)
-  EU/sources/               source PDFs (SEC00-10) and .docx source material
-  EU/extraction/            Part A/B extraction notes, superseded Research drafts
-  EU/prompts/                prompts sent to the external researcher
-  EU/legacy-handoffs/        early EU hand-offs that exist only as .docx
-  AF/AF-municipal-tier-protocol.md   reusable dispatch protocol for the AF branch's
-                                      municipal-tier research rounds
-planning/                  BACKLOG.md — Thomas's own tier-ranked priority list
+Grok - Brics+israel and singapore/
+                            the BRICS branch's active research staging:
+                            G.*.md hand-offs and per-country consolidated
+                            JSON, not yet folded into src/data/research/ —
+                            the only live per-branch working folder left
 notes/                     scratch — sweep-log.md (durable record of what got
                             swept to _to_delete/ and why) plus Thomas's own
                             unrelated personal files, left alone
-archive/                   closed-out material kept for reference, not deleted:
-                            handoffs/, code-review-2026-08-12/, decisions/,
-                            notes/, planning/, sessions/ (the old V0.*/rollup
-                            log thread), research-input/ (old Grok/GPT briefs),
-                            logs/, plus whatever was already there
+archive/                   every closed-out branch (AF/ EU/ NZ/ AU/ CA/) and
+                            planning document, moved here whole once done, not
+                            file by file — kept for reference, not deleted;
+                            subfoldered by region or topic
 _to_delete/                junk moved here on sight, never deleted by an agent —
                             the device bridge can move files but not delete them;
                             Thomas empties this by hand whenever he likes

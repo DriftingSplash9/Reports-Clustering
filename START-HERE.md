@@ -209,34 +209,8 @@ no database. `README.md` covers running it.
 
 ---
 
-## Running it
-
-You need [Node.js](https://nodejs.org) — take the "LTS" version and accept the
-defaults.
-
-Then, in this folder: double-click **`run.bat`** on Windows, or run `npm install`
-followed by `npm run dev` in a terminal. It opens at http://localhost:5173.
-
-Drag to orbit, scroll to zoom, hover for detail, click a sphere to trace its
-chain, Escape to clear, `/` to search.
-
----
-
 ## The other files here
 
-This is the plain-language one. The rest are working documents:
-
-| File | What it is |
-|---|---|
-| `HANDOFF.md` | The working hand-off — what's being worked on right now and what's next. Superseded ones go to `Previous Handoffs/`. |
-| `REPORTS.md` | The design rules and the reasoning behind them. The document that matters most. |
-| `README.md` | How to run it and where the code lives. |
-| `BRICS/` | The only live research branch, with its own independently-numbered `G.*.md` hand-off chain. The newest file is the branch's current state. |
-| `notes/` | Working notes that aren't a research branch — including `visual-revamp-2026-08-18/`, the current design record for the rendering rework. |
-| `archive/` | Everything closed out: the finished research branches (`AF/`, `EU/`, `NZ/`, `AU/`, `CA/`, each still carrying its full hand-off chain), the old `planning/` backlog, decided questions, and the project's original session-log system (retired 2026-08-13; see `REPORTS.md` for why). |
-
-There's no single running log across the whole project any more — that was
-tried early on (`sessions/V0.*.md`, now archived) and stopped scaling once the
-work split into branches. If you're picking this up, `REPORTS.md` plus the
-newest hand-off in whichever branch you're about to work on is the whole
-briefing.
+This is the plain-language one — for how it's actually built and where
+things live, `README.md` has the file map, and `HANDOFF.md` is current
+state. Not repeated here, since a second copy is how these two drift apart.

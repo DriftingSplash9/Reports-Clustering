@@ -23,73 +23,51 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 (0 errors), `npm run gen` (346 slices, 0 unwired), `tsx
 scripts/test-logic.ts` (120/120), `tsc --noEmit`, `npm run build`
 (1,499.57 kB) all clean in a cloud sandbox, confirmed 2026-08-30.
-`public/corpus-data.json` was regenerated and committed back — it is
-current.
+`public/corpus-data.json` is current.
 
-**Six Thomas rulings landed 2026-08-30, all validated clean:** 5 duplicate
-nodes merged (removed, no edges lost — each was isolated or the
-sibling was already well-wired): `br-pnad-continua` → kept
-`br-ibge-pnad-continua`; `in-mospi-nas` → kept
-`in-mospi-national-accounts-statistics`; `id-energy-balance-detail` → kept
-`id-energy-balances`; `ae-oil-production` → kept `ae-oil`;
-`ae-labour-force` → kept `ae-labour`. Plus 2 edges minted and 2 declined
-on node-scope questions: `vn-monetary-indicators -> imf-mfsmcg-2016`
-(wired despite the generic/aspirational MFSM citation — reverses the
-2026-08-29 "don't bother" call, see `PLAYBOOK.md` §7) and
-`mx-alcaldia-benito-juarez -> mx-censos-economicos` (a chart-caption
-source line now counts as evidence — general ruling, see `PLAYBOOK.md`
-§7); `ph-pdp -> ph-basic-ed` and `tw-national-defense-report ->
-tw-sipri-arms-transfers` declined permanently (also logged in
-`PLAYBOOK.md` §7 — don't re-raise either). Detail: memory
-`duplicate_merges_and_scope_rulings_2026-08-30`.
-
-**BR/IN/CA isolated-node wiring round (2026-08-30) landed 19 edges, 0 new
-nodes**, in `src/data/research/br-in-ca-wiring-round-2026-08-30.json`.
-Measured before this round: BR 18 isolated / 98 total, IN 16 / 97, CA 25 /
-270. Method: 8 parallel research subagents (one per country/theme), every
-proposed quote independently re-fetched by the orchestrating session
-before minting. **BR (6 edges)**: the municipal-GDP chain — 6 state
-statistics institutes wired to their own city's IBGE Contas Regionais
-figure (`br-mg-fjp-pib`→bh, `br-df-ipedf-pib`→brasília, `br-ce-ipece-pib`→
-fortaleza, `br-sc-seplan-pib`→florianópolis, `br-rj-ceperj-anuario`→rio,
-`br-pr-ipardes-pib`→curitiba — the last two sourced from IBGE's own
-technical-note collaborator list after CEPERJ's/IPARDES's own sites proved
-unreachable). `br-pe-condepe-fidem`→recife stayed unwired: IBGE's own
-technical note names a *different* Pernambuco agency as its real partner —
-flagged, not wired. **IN (4 edges)**: 2 state handbooks → `in-census-
-india`; `in-mohfw-national-health-profile` → `in-census-india` and →
-`in-mospi-srs` (direction corrected — the health profile cites
-Census/SRS, not the reverse). **CA (9 edges)**: 4 city budgets →
-`mpac-assessment`, `hrm-budget-business-plan` → `ns-pvsc-assessment-roll`,
-`nl-maa-annual-report` → `nl-maa-assessment` (self-citation),
-`winnipeg-budget` → `winnipeg-assessment-roll`, `on-mcu-tuition-framework`
-→ `on-mcu-operating-grants` → `statcan-census-population`. 2 prior stale
-`_dropped` `no-document` entries (Halifax/PVSC, Ottawa/MPAC) superseded by
-fresher sourcing, marked `resolved`. **Caught before shipping**: 4 BR
-education nodes had solid evidence of the expected module/summary
-relationship but already carry a `part_of` pointing at that same target —
-the validator rejects a dependency edge onto a report's own `part_of`
-container (`graph.ts:536`). Logged as `_dropped` notes, not minted;
-**worth a standing check before any future round proposes an edge that
-mirrors an existing `part_of`**. Full detail: memory
-`br_in_ca_wiring_round_2026-08-30`.
-
-**EU branch effectively closed** (round 2026-08-30): 3 isolated nodes
-left (`at-statistik-austria-mikrozensus-ake`, `si-surs-lfs`,
-`cy-cystat-lfs`), all documented negatives — do not "fix" by minting.
-Detail: memory `eu_unlinked_wiring_round_2026-08-30`.
-
-**Round 11 (AE/UAE) landed 17 edges + 2 new nodes, 20 → 8 isolated.**
-Its 2 duplicate-node flags are the `ae-oil`/`ae-labour` merges above.
-Memory `ae_wiring_round11_2026-08-30`.
-
-**Round 10 (Indonesia)** landed 53 edges + 9 new nodes, 74 → 39 isolated.
-Its duplicate-node flag is the `id-energy-balances` merge above. Memory
-`id_wiring_round10_2026-08-30`.
+**2026-08-30 research rounds, all validated clean — full detail in
+project memory, not repeated here:** 5 duplicate-node merges + 2 edges
+minted + 2 declined, all logged in `PLAYBOOK.md` §7 — don't re-raise
+(memory `duplicate_merges_and_scope_rulings_2026-08-30`) · BR/IN/CA
+wiring, 19 edges (memory `br_in_ca_wiring_round_2026-08-30`) · EU branch
+effectively closed, 3 documented-negative isolated nodes left (memory
+`eu_unlinked_wiring_round_2026-08-30`) · AE round 11, 17 edges + 2 nodes
+(memory `ae_wiring_round11_2026-08-30`) · Indonesia round 10, 53 edges +
+9 nodes (memory `id_wiring_round10_2026-08-30`).
 
 **Unlinked-node counts are stale here on purpose except BR/IN/CA and EU,
 just recomputed above.** Recount from `public/corpus-data.json` before
 trusting any other number in this file.
+
+**Repo hygiene pass, 2026-08-30 (docs, not corpus data).** README.md and
+START-HERE.md both described the old per-branch `G.*.md` hand-off regime
+as current practice — it isn't, `HANDOFF.md` alone is, and both are now
+fixed. README's file map was wrong too (listed `AF/EU/NZ/AU/CA/US/BRICS`
+as live top-level folders; none exist — BRICS's real, live one is `Grok -
+Brics+israel and singapore/BRICS/`, the rest are archived). Cut two
+duplicate copies of the file map/run-instructions out of START-HERE.md —
+one source of truth (README) beats two that drift. `Research.1.md` (dead:
+described the old per-branch research-thread protocol, unreferenced by
+anything since roughly `G.76`) moved to
+`archive/Research.1-superseded_2026-08-30.md`. `url-check-results.json`
+moved from root into `notes/`, beside its write-up
+(`stale-urls-2026-08-20.md`). **Flagged, not done — Thomas's call**:
+`PLAYBOOK.md` §7 has been accumulating one-off single-node/single-edge
+rulings written up as reusable "don't re-raise" rules; most won't
+recur in that exact form, and the volume only grows as remaining wiring
+gets more long-tail. On the table: stop writing narrative for one-off
+calls (the `_dropped` reason field is the record), keep §7 for rules that
+actually generalize.
+
+**`grok-research-queue-2026-08-22` checked against the live corpus,
+2026-08-30:** prompt 18 (Uruguay/Paraguay/Guyana/Suriname wiring) is
+fully landed already — 56/54/37/40 nodes, 114 domestic edges between
+them. Treat as closed; the queue's own README calling it outstanding is
+stale. **Tiers 30-37 ("new countries") are genuinely still owed** —
+confirmed against corpus counts, matches Todo item 5's stub list. Their
+raw, never-verified Grok replies are sitting unconsumed in `notes/grok-
+research-queue-2026-08-22/Grok results/` — a verify-and-mint job on
+existing leads, not fresh research. See Todo item 5 for the details.
 
 **Cluster-repulsion range: 0–15** (`ViewControls.tsx` / `view.ts`) —
 Thomas's call, live. Not yet tested at the new ceiling.
@@ -104,11 +82,11 @@ win — swiftshader swamps the signal. Wants a real-GPU spot-check.
 must be written **inside** the mounted folder before `device_stage_files`
 can see them; `zip -qr out.zip <paths>` fails with "Operation not
 permitted" on this mount — stream to stdout instead: `zip -qr - <paths> >
-out.zip`. **New this round**: zipping `archive/`/`node_modules/`/`.git`
-too can time out (408MB, 120s) — zip only `src/ public/ scripts/
-package.json package-lock.json tsconfig.json index.html` + `START-HERE.md`
-(imported via `?raw` by `HelpCard.tsx`, needed for `npm run build`
-specifically) and run `npm install` fresh in the sandbox; ~5MB, fast.
+out.zip`. Zipping `archive/`/`node_modules/`/`.git` too can time out
+(408MB, 120s) — zip only `src/ public/ scripts/ package.json
+package-lock.json tsconfig.json index.html` + `START-HERE.md` (imported
+via `?raw` by `HelpCard.tsx`, needed for `npm run build` specifically)
+and run `npm install` fresh in the sandbox; ~5MB, fast.
 
 ---
 
@@ -124,6 +102,8 @@ specifically) and run `npm install` fresh in the sandbox; ~5MB, fast.
 3. Watch for any node-rendering oddity (flicker, wrong z-order) after
    2026-08-29's transparent-material change. Visual parity was checked in
    software rendering only; flag here if real hardware differs.
+4. Rule on `PLAYBOOK.md` §7's one-off-ruling bloat (see Current state) —
+   trim it down to generalizable rules, or leave it as is.
 
 ### [Agent] — next build rounds
 
@@ -155,12 +135,27 @@ specifically) and run `npm install` fresh in the sandbox; ~5MB, fast.
    `ae-banking-credit`, `ae-ports-jebel-ali`, `ae-dmcc-trade`.
    `ae-dld-realestate -> ae-construction` is `deferred` (JS PDF viewer) —
    worth a browser-tool retry.
-5. **Corpus wiring** — 77 countries at zero domestic edges (uncounted this
-   round). Cheap retries: Iraq's GDP/National Income metadata doc
+5. **Corpus wiring — new-countries tier is ready to verify+mint, not
+   research from scratch.** 8 regions' raw, never-verified Grok replies
+   are sitting in `notes/grok-research-queue-2026-08-22/Grok results/`
+   (file manifest and region breakdown in that folder's own
+   `00-README.md`) — real content (e.g. the Central Asia batch alone has
+   15 proposed reports/11 dependencies), just never raw-checked or
+   minted. Gulf/Levant has a duplicate-prompt overlap (`gulf-levant-*`
+   vs `me-gulf-levant-*`) needing the same dedup-before-verify pass the
+   Andean round got (memory `grok_wiring_round_2026-08-25`). Same
+   discipline as every round before this: every quote/URL raw-verified
+   independently before minting, nothing taken on Grok's word. Covers 20
+   of the single-node stubs below (`AG BZ CU FM HT KG KI LC NI NR PG PW
+   SB TJ TM TO TV UZ VU WS`) — the rest (`AL BA CH LI MD ME MK RS UA XK`,
+   mostly the Balkans) have no raw material and are genuinely from
+   scratch. Prompt 18 from the same queue (Uruguay/Paraguay/Guyana/
+   Suriname) is already fully landed in the corpus — don't re-run it.
+   Separately, cheap retries: Iraq's GDP/National Income metadata doc
    (cosit.gov.iq), Vietnam's VSIC 2018 decision, Iraq's wage-bill clause
    (Budget Law 13/2023). NESDC Thailand — closed negative, don't retry.
-   Then the 31 single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD
-   ME MK NI NR PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
+   77 countries at zero domestic edges overall (uncounted this round,
+   recount before trusting).
 6. **Cheap browser retries, now known-reachable**: Afghanistan's
    `af-education` and `af-border-mobility` (both render in Chrome, both
    Cloudflare-403 to curl).
