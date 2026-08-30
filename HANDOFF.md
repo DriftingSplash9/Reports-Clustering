@@ -19,12 +19,21 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,422 reports · 3,054 dependencies · 945 isolated.** `npm run validate`
-(0 errors), `npm run gen` (323 slices, 0 unwired), `tsx
+**3,427 reports · 3,205 dependencies · 793 isolated.** `npm run validate`
+(0 errors), `npm run gen` (336 slices, 0 unwired), `tsx
 scripts/test-logic.ts` (120/120), `tsc --noEmit`, `npm run build`
-(1,513.05 kB) all clean in a cloud sandbox, reconfirmed 2026-08-29.
+(1,513.05 kB) all clean in a cloud sandbox, confirmed 2026-08-30.
 `public/corpus-data.json` was regenerated and committed back — it is
 current.
+
+**Round 8 (South America wiring + TW/ID two-edge resolution) landed 151
+edges + 5 new nodes** (`un-irip-2010`, `uy-inac`, `co-fnc`,
+`tw-central-government-budget`, `id-sbh-2022`) across 13 research files,
+11 countries. Isolated fell 945 → 793. One validator error surfaced on
+first pass: 4 new nodes used `jurisdiction_level: "national"`, which
+isn't in the closed union — the corpus convention for national-level is
+`"federal"`. Fixed and reconfirmed clean. Full method, dedup catches, and
+traps: project memory `sa_wiring_round_2026-08-30`.
 
 **Round 7 (browser/curl unblock) landed 22 edges, 0 new nodes.** Its main
 finding is that most of the "access-blocked" backlog was never blocked: a
@@ -102,38 +111,23 @@ real-GPU spot-check. See memory `renderer_transparent_toggle_2026-08-29`.
 
 ### [Agent] — next build rounds
 
-1. **BLOCKED — validator has not run.** South America round (11
-   countries, 151 edges + 5 new nodes: `un-irip-2010`, `uy-inac`,
-   `co-fnc`, plus the two below) and the two waiting edges (Taiwan's
-   Central Government General Budget, MND table 11; Indonesia's Survei
-   Biaya Hidup 2022, provincial CPI) are all **written to
-   `src/data/research/` but not yet validated**. `device_stage_files`
-   failed with `session_stale_relogin` — needs Thomas to re-sign-in in
-   the desktop app before `npm run gen`/`validate`/`build` can run in a
-   sandbox. Until that run is clean, treat this round's counts and edges
-   as provisional. Sandbox zips are staged and waiting in
-   `_to_delete/r8-sa-round-2026-08-30.zip` and
-   `_to_delete/r8-sa-research-2026-08-30.zip`. Full method, dedup list,
-   and the one superseded `_dropped` entry (`ve-servicios-publicos ->
-   ve-encovi`, now `resolved`) are in project memory
-   `sa_wiring_round_2026-08-30`.
-2. **A triage pass is now worth more than another wiring round in the
-   worked countries.** 945 isolated (pre-round-8) is not a to-do list: a
+1. **A triage pass is now worth more than another wiring round in the
+   worked countries.** 793 isolated is not a to-do list: a
    large share is structurally unwireable, and round 7 confirmed several
    of those on real bytes. Separate "not yet researched" from
    "researched, nothing to find" before anyone scopes another pass at
    ID/TW/IR/EU.
-3. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
+2. **Corpus wiring** — 77 countries at zero domestic edges. Cheap
    retries: Iraq's GDP/National Income metadata doc (cosit.gov.iq),
    Vietnam's VSIC 2018 decision, Iraq's wage-bill clause (Budget Law
    13/2023). NESDC Thailand — closed negative, don't retry. Then the 31
    single-node stubs: AG AL BA BZ CH CU FM HT KG KI LC LI MD ME MK NI NR
    PG PW RS SB TJ TM TO TV UA UZ VU WS XK.
-4. **Cheap browser retries, now known-reachable**: Afghanistan's
+3. **Cheap browser retries, now known-reachable**: Afghanistan's
    `af-education` and `af-border-mobility` (both render in Chrome, both
    Cloudflare-403 to curl); Indonesia's remaining energy/GHG leads via the
    BPS signed-link technique.
-5. **Genuinely still blocked, needing a different network route rather
+4. **Genuinely still blocked, needing a different network route rather
    than a different tool**: the whole `*.cdmx.gob.mx` family (four
    distinct failure modes), `issste.gob.mx`, `datos.imss.gob.mx` (Imperva
    WAF), `webapps.peza.gov.ph`, `legacy.doe.gov.ph` and `aodm.mnd.gov.tw`

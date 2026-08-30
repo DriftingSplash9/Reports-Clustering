@@ -276,6 +276,12 @@ country/file/round, not a single site's own one-off quirk.
   is only `audits`/`supersedes`. Grok output routinely invents types — map
   them, never pass them through. Same for `Domain` and every closed union:
   cast, not parsed — check `types.ts` before inventing a value.
+- **`jurisdiction_level` has no "national" value.** The closed union is
+  `international, supranational, federal, provincial, municipal,
+  institutional` — a unitary country's own national-level publisher is
+  `"federal"` despite the name. Writing `"national"` by hand for a new
+  node passes JSON parsing and only fails at `npm run validate`. Hit 4/4
+  times on the first pass of the 2026-08-30 South America round.
 - **`PanelShell` supports one panel per edge; the bottom edge belongs to the
   dock.** A new bottom panel is a one-line dock-cell addition, not a
   coordinate hunt. Reserve dock space with an empty grid TRACK, never an
