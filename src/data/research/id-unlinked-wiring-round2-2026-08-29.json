@@ -138,23 +138,23 @@
     {
       "edge": "id-energy-balances -> id-esdm-energy-statistics",
       "source": "id-energy-balances",
-      "target": null,
-      "reason": "deferred",
-      "why": "Grok proposed a new node `id-esdm-energy-statistics` (ESDM/Kementerian ESDM energy statistics) and quoted the Energy Balance of Indonesia's source list naming ESDM, PLN, PGN, BPH Migas and KAI as inputs. The publication landing page itself has no body text and the PDF download link 403'd both directly and via docs.google.com/viewer, same as the CPI-provincial leads above. Node not minted since the only edge that would use it is unconfirmed — revisit together if the PDF becomes reachable."
+      "target": "id-esdm",
+      "reason": "resolved",
+      "why": "RESOLVED 2026-08-30: minted id-esdm (broad ESDM institutional node, matching the id-bank-indonesia/id-bps/id-ojk convention rather than a specific unconfirmed HEESI-style title) and wired id-energy-balances -> id-esdm (uses_data_from) in id-unlinked-wiring-round3-2026-08-30.json. The PDF that was 403-blocked here was reached this round via a real browser (opening the BPS page, reading the signed web-api.bps.go.id download link out of the DOM, then curling it directly) and confirmed verbatim: the Sumber Data / Data Used section names BPS, Kementerian ESDM, PT PLN, PT PGN, BPH Migas and PT KAI as inputs — 4 of those 5 institutions were also minted as new nodes this round. Original entry follows. Grok proposed a new node `id-esdm-energy-statistics` (ESDM/Kementerian ESDM energy statistics) and quoted the Energy Balance of Indonesia's source list naming ESDM, PLN, PGN, BPH Migas and KAI as inputs. The publication landing page itself has no body text and the PDF download link 403'd both directly and via docs.google.com/viewer, same as the CPI-provincial leads above. Node not minted since the only edge that would use it is unconfirmed — revisit together if the PDF becomes reachable."
     },
     {
       "edge": "id-ghg-inventory -> ipcc-2006-gl",
       "source": "id-ghg-inventory",
-      "target": null,
-      "reason": "deferred",
-      "why": "Grok proposed a new node `ipcc-2006-gl` (2006 IPCC Guidelines for National Greenhouse Gas Inventories) and quoted BPS's physical supply-use table for GHG emissions listing it among six data sources. The cited URL is a 'statistics-table' page that rendered no body text on independent re-fetch (title/menu chrome only) — same JS-rendering shape as the id-gini-inequality lead above. Node not minted since unconfirmed. Genuinely plausible — the 2006 IPCC Guidelines are the standard national GHG inventories cite worldwide — but this project's own standard is a document, not a plausibility argument."
+      "target": "ipcc-ghg-guidelines",
+      "reason": "resolved",
+      "why": "RESOLVED 2026-08-30: minted id-ghg-inventory -> ipcc-ghg-guidelines (methodology_depends_on) in id-unlinked-wiring-round3-2026-08-30.json. Reached this round via a real browser + signed web-api.bps.go.id download link (the JS-rendered statistics-table page was the wrong route the whole time). Section 1.4 Data Sources and Methodology reads, verbatim: \"...dan Panduan Panel Antarpemerintah tentang Perubahan Iklim 2006... / ...and 2006 Intergovernmental Panel on Climate Change (IPCC) Guidelines...\", with the bibliography citing \"IPCC. 2006. 2006 IPCC Guidelines for National Greenhouse Gas Inventories.\" verbatim — matching the corpus ipcc-ghg-guidelines node, whose own description already spans \"the Revised 1996 Guidelines, the 2006 Guidelines, and the 2019 Refinement\". Original entry follows. Grok proposed a new node `ipcc-2006-gl` (2006 IPCC Guidelines for National Greenhouse Gas Inventories) and quoted BPS's physical supply-use table for GHG emissions listing it among six data sources. The cited URL is a 'statistics-table' page that rendered no body text on independent re-fetch (title/menu chrome only) — same JS-rendering shape as the id-gini-inequality lead above. Node not minted since unconfirmed. Genuinely plausible — the 2006 IPCC Guidelines are the standard national GHG inventories cite worldwide — but this project's own standard is a document, not a plausibility argument."
     },
     {
       "edge": "id-ghg-inventory -> id-esdm-energy-statistics",
       "source": "id-ghg-inventory",
-      "target": null,
-      "reason": "deferred",
-      "why": "Same source list as the ipcc-2006-gl lead immediately above (the same BPS GHG supply-use page names ESDM energy statistics and ESDM emission factors among its inputs), same unconfirmable page, same proposed-but-unminted `id-esdm-energy-statistics` node. Revisit together with the other two ESDM/IPCC leads if this page or its underlying document becomes reachable."
+      "target": "id-esdm",
+      "reason": "resolved",
+      "why": "RESOLVED 2026-08-30: minted id-ghg-inventory -> id-esdm (uses_data_from) in id-unlinked-wiring-round3-2026-08-30.json. Same browser+signed-link technique as the two entries above. Section 1.4 states, verbatim: \"...Statistik Energi dari Kementerian Energi dan Sumber Daya Mineral (ESDM), faktor emisi dari Kementerian ESDM...\" / \"...Energy Statistics from Ministry of Energy and Mineral Resources (MEMR), emission factors from MEMR...\". Modelled as the broad id-esdm institutional node rather than the specific unconfirmed id-esdm-energy-statistics title Grok proposed, since neither citation names one specific ESDM publication. Original entry follows. Same source list as the ipcc-2006-gl lead immediately above (the same BPS GHG supply-use page names ESDM energy statistics and ESDM emission factors among its inputs), same unconfirmable page, same proposed-but-unminted `id-esdm-energy-statistics` node. Revisit together with the other two ESDM/IPCC leads if this page or its underlying document becomes reachable."
     }
   ]
 }
