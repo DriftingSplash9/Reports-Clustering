@@ -37,6 +37,7 @@
  * Usage:
  *   npx tsx scripts/measure-forces.ts
  *   SPREAD=100 GEO=0 SEEDS=1,2,3 CRS=0,15 npx tsx scripts/measure-forces.ts
+ *   INTSTIFF=1 npx tsx scripts/measure-forces.ts   # the pre-2026-08-31 layout, INT springs live
  *
  * Read `onscreen` (inter / p95), not `ratio`. The camera fits the 95th
  * percentile core radius, so `ratio` measures something the fit renormalises
@@ -123,6 +124,8 @@ for (const e of g.edges) {
 }
 const HUB_SPAN_GATE = 10
 const HUB_LINK_KNEE = 4
+/** Mirrors InfluenceGraph.tsx — 0 since 2026-08-31; `INTSTIFF=1` env to measure the old layout. */
+const INT_LINK_STIFFNESS = Number(process.env.INTSTIFF ?? 0)
 type L = { source: string; target: string; weight: number; hubRoom: number; stiffness: number }
 const linkMap = new Map<string, L>()
 for (const e of g.edges) {
@@ -140,7 +143,11 @@ for (const e of g.edges) {
     target: e.source_report_id,
     weight,
     hubRoom: 3.5 * (Math.sqrt(ds) + Math.sqrt(dt)),
-    stiffness: span < HUB_SPAN_GATE ? base : base * Math.min(1, HUB_LINK_KNEE / Math.max(ds, dt)),
+    stiffness:
+      (span < HUB_SPAN_GATE ? base : base * Math.min(1, HUB_LINK_KNEE / Math.max(ds, dt))) *
+      ((g.byId.get(e.source_report_id)?.country === 'INT') !== (g.byId.get(e.target_report_id)?.country === 'INT')
+        ? INT_LINK_STIFFNESS
+        : 1),
   })
 }
 const baseLinks = [...linkMap.values()]

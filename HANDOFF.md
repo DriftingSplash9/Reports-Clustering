@@ -74,13 +74,20 @@ minted and already in the counts above — don't re-run. Balkans (AL BA CH LI
 MD ME MK RS UA XK) are 1 node/1 edge each. 75 countries at zero domestic
 edges.
 
-**Cluster-repulsion range: 0–15** (`ViewControls.tsx` / `view.ts`) —
-Thomas's call, live. **Measured 2026-08-31: the slider is weak for two
-stacked reasons, neither the force** — the camera fit renormalises most of
-it away (on-screen inter/p95 moves ~17% mean across 0→15, less than
-seed-to-seed variance), and `FAMILY_REPULSION`/`COUNTRY_REPULSION` are the
-only magnitudes not scaled by spread, so at 1000% the whole range moves
-~6%. Don't raise the ceiling again. Decision owed — see Todo.
+**Layout: INT↔country link springs are OFF since 2026-08-31**
+(`INT_LINK_STIFFNESS = 0`, InfluenceGraph.tsx; mirrored in
+`scripts/measure-forces.ts`, `INTSTIFF=1` reproduces the old layout).
+Thomas's call after the measured diagnosis (memory
+`layout_blob_diagnosis_2026-08-31`): 12 international standards spring-
+linked to 10–55 countries each were what averaged every country to the
+centre. Harness: cluster openness 1.5 → 3.2, inter/intra 10 → 28, INT
+becomes its own peripheral galaxy. **Not yet seen on real hardware** —
+headless swiftshader runs ~45 ticks in the 45 s cooldown and never
+settles, so no screenshot here is trustworthy. Thomas to look first.
+**Cluster-repulsion range 0–15**: measured weak for two stacked reasons
+— camera fit renormalises most of it, and `FAMILY_REPULSION`/
+`COUNTRY_REPULSION` aren't scaled by spread (inert at 1000%). Don't raise
+the ceiling; the INT-spring change is the lever that actually moved.
 
 **Renderer perf items** from 2026-08-29 are closed (sphere caching,
 conditional `transparent`). Not independently confirmed: an actual FPS
@@ -99,13 +106,13 @@ per-object overhead (one material per link), not geometry.
 
 1. Watch for the render-consistency symptom in ordinary use; flag here if
    it recurs. `notes/render-consistency-repro-2026-08-25.md`.
-2. **Cluster repulsion — decide what it's for** (audit L2/L3). Three
-   options: normalise the force against the current cloud radius so it
-   changes the ratio, not the scale; exclude something from the camera
-   fit so it stops chasing; or accept it as a world-space control. Plus
-   the one-character fix (scale the two constants by `spreadApplied`,
-   `clusterRepulsion.ts:97-98`) — do it, but the 0–15 range must then be
-   re-derived with `npx tsx scripts/measure-forces.ts`, not carried over.
+2. **Look at the graph with INT springs off** (§2) with your usual
+   countries opened, and say whether the clusters read as open. Next
+   levers if not: per-galaxy camera fit (fit to the cluster you clicked,
+   not the world); INT as a foldable orb at country tiers; scale
+   `FAMILY_REPULSION`/`COUNTRY_REPULSION` by `spreadApplied` then
+   re-derive the 0–15 range with `npx tsx scripts/measure-forces.ts`.
+   "Rulings Owed" artifact has the experiment table.
 3. Watch for flicker / wrong z-order on real hardware. 2026-08-31's
    `depthWrite: false` on hollow/soft nodes is the one mechanism found for
    it; if it survives only in the *dimmed* state, `applyFocus` is next.

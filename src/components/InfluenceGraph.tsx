@@ -1198,6 +1198,36 @@ export default function InfluenceGraph({
      * with diminishing returns and a hub drifting off its own centre.
      */
     const HUB_LINK_KNEE = 4
+    /**
+     * Stiffness multiplier on every link with an international node at
+     * exactly one end — a national/subnational report (or a country orb)
+     * tethered to a standard like `sna-2008`, `imf-bpm6`, `un-coicop-2018`.
+     * **0 since 2026-08-31 (Thomas: "set the int <> country link to 0").**
+     * The edge still draws, still carries pulses, still counts for focus and
+     * authority; it just stops pulling.
+     *
+     * Why: measured on the real corpus (`scripts/measure-forces.ts` with a
+     * position dump, memory `layout_blob_diagnosis_2026-08-31`), twelve
+     * international standards each spring-link 10–55 countries, and those
+     * ~760 springs have one equilibrium — the standard in the exact middle
+     * and every conforming country averaged toward it. INT nodes sat at a
+     * median 0.15 of the cloud radius (sna-2008 at 0.04) and were 174 of
+     * the 637 nodes in the inner quarter; a country's nearest neighbouring
+     * cluster sat 1.5 cluster-widths away — the "blob of nodes" Thomas
+     * complained of. With this at 0: nearest-neighbour gap 3.2 widths,
+     * inter/intra ratio 10 → 28, INT nodes migrate to their own peripheral
+     * galaxy (galaxyForce still holds them together), zero INT nodes left
+     * in the inner quarter. The whole 0–15 cluster-repulsion range, for
+     * comparison, buys 7 → 10.7. At 0.1 you keep about two thirds of the
+     * opening with the standards still gently gravitating.
+     *
+     * Position still encodes only edges — this decides which edges get to
+     * pull, not where anything goes. INT↔INT links keep full stiffness so
+     * the standards cluster with each other; the HUB gate above still
+     * applies to the domestic mega-hubs (`esa-2010` is EU, not INT).
+     * `scripts/measure-forces.ts` mirrors this constant — change both.
+     */
+    const INT_LINK_STIFFNESS = 0
 
     // Parallel edges between the same pair — overwhelmingly the disclosed
     // view's orb collapses (57 member edges share the EU-orb → esa-2010 pair
@@ -1271,8 +1301,11 @@ export default function InfluenceGraph({
           const base = 1 / Math.max(1, Math.min(ds, dt))
           const busier = ds >= dt ? e.source_report_id : e.target_report_id
           const span = countrySpan.get(busier)?.size ?? 0
-          if (span < HUB_SPAN_GATE) return base
-          return base * Math.min(1, HUB_LINK_KNEE / Math.max(ds, dt))
+          const gated = span < HUB_SPAN_GATE ? base : base * Math.min(1, HUB_LINK_KNEE / Math.max(ds, dt))
+          // See INT_LINK_STIFFNESS. Exactly one INT end — an INT↔INT link
+          // is the standards holding each other, and keeps its spring.
+          const intEnds = (upstream?.country === 'INT' ? 1 : 0) + (downstream?.country === 'INT' ? 1 : 0)
+          return intEnds === 1 ? gated * INT_LINK_STIFFNESS : gated
         })(),
         key,
       })
