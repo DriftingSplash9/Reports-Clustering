@@ -1712,7 +1712,7 @@ export default function App() {
         </div>
       </div>
 
-      <Onboarding openRequest={howToRequest} />
+      <Onboarding openRequest={howToRequest} tier={drilldown} />
       {helpOpen && <HelpCard onClose={() => setHelpOpen(false)} />}
 
       {/*

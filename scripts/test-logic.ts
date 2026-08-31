@@ -195,6 +195,16 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   // any dependency that tries to carry it back in.
   const issues = validate(reports, [{ source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't', evidence: 'implied' }])
   ok(issues.some((i) => i.severity === 'error' && i.message.includes('retired')), 'validate: an implied dependency is an error, pointing at the retirement')
+  // The evidence standard, checked in code since 2026-08-31 (audit finding
+  // D2): a documented dependency with no evidence_url, or one whose evidence
+  // is a bare homepage, warns. Warnings until the corpus is clean — these
+  // three assertions are what to flip to 'error' at promotion time.
+  const noUrl = validate(reports, [{ source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't' }])
+  ok(noUrl.some((i) => i.severity === 'warning' && i.message.includes('cites no evidence_url')), 'validate: a documented dependency with no evidence_url warns')
+  const bare = validate(reports, [{ source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't', evidence_url: 'https://www.example.gov/' }])
+  ok(bare.some((i) => i.severity === 'warning' && i.message.includes('bare homepage')), 'validate: a bare-homepage evidence_url warns')
+  const pathed = validate(reports, [{ source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't', evidence_url: 'https://www.example.gov/method/cpi.pdf' }])
+  ok(!pathed.some((i) => i.message.includes('bare homepage') || i.message.includes('cites no evidence_url')), 'validate: a document URL raises neither evidence warning')
 }
 
 // Three new validator rules, 2026-08-21 (review §2, §6 item 7): the reserved

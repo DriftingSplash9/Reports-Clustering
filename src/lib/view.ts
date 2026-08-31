@@ -105,7 +105,10 @@ export interface ViewSettings {
   zoom: number
   /**
    * Layout spread — the multiplier applied to the whole layout scale, **2 to
-   * 10**, shown to the viewer as 200%–1000%. Default 2.
+   * 100**, shown to the viewer as 200%–10000%. Default 2. (The header here
+   * said 2–10 until 2026-08-31; the ceiling went to 100 on 2026-08-20 — see
+   * the `spread` entry in `ViewControls.tsx` for the measurement that
+   * accompanied it and why ten times the spread buys a quarter more air.)
    *
    * A slider rather than a fixed value, for the same reason a few of these
    * settings are: the right amount depends on the corpus. At 124 nodes the tight layout read as one constellation;
@@ -178,7 +181,7 @@ export interface ViewSettings {
    */
   galaxy: number
   /**
-   * Cluster vs cluster repulsion, **0 to 3**. Defaults to 1 — on, not off,
+   * Cluster vs cluster repulsion, **0 to 15**. Defaults to 1 — on, not off,
    * same reasoning as `galaxy`: Thomas asked directly for this ("let's try
    * the proposed fix — cluster vs cluster repulsion", 2026-08-27) rather
    * than discovering it as an option.
@@ -207,6 +210,30 @@ export interface ViewSettings {
    * again to 15 on 2026-08-29 (Thomas: "it is better, can it go up to
    * 15?") — no new measurement needed, the 08-28 sweep already covers
    * stable-to-30. Still unverified live at 15 itself.
+   *
+   * **2026-08-31: the 08-28 sweep above does not reproduce, and the range
+   * decision it justified rests on a wrong baseline.** Re-measured with
+   * `scripts/measure-forces.ts` (now committed — the 08-28 script was a
+   * throwaway) against the real production force set, six seeds, fresh
+   * simulation state per run: the "off" ratio is 6.1–8.9 depending on seed,
+   * never 4.29; at spread 200% the curve is roughly 7.0 → 7.6 → 8.5 → 9.3 →
+   * 10.0 → 10.7 for strengths 0/1/3/6/10/15 (seed 1), i.e. off→10 is a
+   * 1.4× gain, not the 3.5× recorded above; and own-cluster spread is not
+   * flat — it rises ~57% across 0→15. `InfluenceGraph.tsx`'s `HUB_LINK_KNEE`
+   * note, measured the same day as the 08-28 sweep, recorded 8.05–8.20 for
+   * the same quantity, which agrees with the re-measurement and not with
+   * 4.29. Two further findings, both measured: (1) **the camera fit cancels
+   * most of it** — `measureFit` frames the p95 core radius, which grows with
+   * the cloud the force is expanding, so the on-screen ratio inter/p95 moves
+   * only ~17% on average across the whole 0→15 range (−5% to +47% by seed),
+   * less than the seed-to-seed variation at a fixed strength; (2) **the
+   * force is not scaled by spread** — `FAMILY_REPULSION`/`COUNTRY_REPULSION`
+   * are the only magnitudes in the force set not multiplied by
+   * `spreadApplied`, so at spread 1000% the whole 0→15 range moves the
+   * world-space ratio ~6% and at 10000% ~0.4%. The force is real; what the
+   * slider *shows* is small for two stacked reasons. Do not raise the
+   * ceiling again (30 buys ~12% over 15); decide what the control is for —
+   * see HANDOFF.md.
    */
   clusterRepulsion: number
   /**

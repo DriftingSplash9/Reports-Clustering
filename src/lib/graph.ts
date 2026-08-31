@@ -99,6 +99,24 @@ export function isDocumented(edge: { evidence?: EvidenceKind }): boolean {
 }
 
 /**
+ * True when an evidence URL points at a site's front door rather than a
+ * document — path empty or `/`, nothing else. Deliberately narrow: a
+ * programme landing page one level down is the stated convention for node
+ * `url`s and is fine as edge evidence too; only the homepage is a pointer
+ * rather than a source. An unparsable string counts as bare, since it cannot
+ * name a document either. Used by `validate()` and by
+ * `scripts/validate-data.ts`'s EVIDENCE block; exported so both agree.
+ */
+export function isBareHost(url: string): boolean {
+  try {
+    const p = new URL(url).pathname
+    return p === '' || p === '/'
+  } catch {
+    return true
+  }
+}
+
+/**
  * Structural checks on the seed data. Runs before scoring, because a dangling
  * edge silently distorts every authority number downstream.
  */
@@ -641,6 +659,37 @@ export function validate(
       issues.push({
         severity: 'error',
         message: `Edge ${key} is marked implied but carries an evidence_url — promote it to documented`,
+      })
+    }
+    // The evidence standard itself, finally checked (2026-08-31, independent
+    // audit finding D2). Until now the project's headline rule — "if no
+    // document says a dependency exists, it does not go in the graph" — was
+    // enforced for relations (validate-data.ts) and for nothing else: a
+    // *dependency* claiming to be documented and citing nothing sailed
+    // through, read as documented by `isDocumented()`, and took full
+    // RELATIONSHIP_WEIGHT in PageRank. 176 edges were in that state on the
+    // day this was added, and another ~470 cited a bare publisher homepage
+    // ("https://www.indec.gob.ar/") as the sole evidence for a specific
+    // methodological claim — a pointer, not a source (PLAYBOOK rule 3).
+    //
+    // Warnings, not errors, deliberately: the corpus has to be cleaned before
+    // this can fail the build, and a rule that fails the build on day one
+    // gets switched off rather than obeyed. Promote both to 'error' once
+    // validate-data.ts's EVIDENCE block reports zero for them.
+    if (isDocumented(d) && !d.evidence_url) {
+      issues.push({
+        severity: 'warning',
+        message:
+          `Edge ${key} is documented but cites no evidence_url — a documented ` +
+          `edge names its document; move the belief to _dropped ('no-document') ` +
+          `or add the URL the basis was quoted from`,
+      })
+    } else if (d.evidence_url && isBareHost(d.evidence_url)) {
+      issues.push({
+        severity: 'warning',
+        message:
+          `Edge ${key} cites a bare homepage (${d.evidence_url}) — a pointer is ` +
+          `not a source; cite the document that names the relationship`,
       })
     }
     const p = d.reference_period

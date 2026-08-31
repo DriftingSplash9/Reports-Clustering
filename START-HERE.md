@@ -173,16 +173,28 @@ escalator reads twelve months of inflation data once, in September, even though
 inflation publishes monthly. The data now records all three; the animation
 doesn't use them yet.
 
-**Not working well:** everything is drawn too small, and as of 2026-08-18 the
-cause is measured rather than guessed. A handful of stray two-node components
-scattered far from the main cloud are setting the bounding radius the camera
-fits to, which pins the node-scaling function at its safety cap — so the largest
-sphere renders at about 7 pixels instead of the 12 the design intends. Worse,
-edge width and pulse size are in fixed world units and were never scaled
-alongside the nodes, so while nodes grew six times over as the corpus went from
-120 reports to 1,250, the edges grew not at all: an ordinary line is now about a
-*tenth of a pixel* wide. Fixing the fit and tying edge and pulse size to the node
-scale is the first job of the revamp. See `notes/visual-revamp-2026-08-18/`.
+**Not working well:** two things, both measured rather than guessed, by an
+independent audit on 2026-08-30.
+
+First, the rule above slipped during the bulk import rounds of August 2026. The
+branches researched by hand — Canada, the US, the EU, Africa — hold up: every
+sampled quote that could be checked was found in the document it cites, and
+none was refuted. But roughly one edge in five
+from the August imports cites either a publisher's homepage or nothing at all,
+and *states* the relationship instead of quoting a document that does. Nothing
+in the software was checking for that. It is now, and those edges are being
+moved out of the graph into the "looked for, not found" notes until someone
+finds the document. Expect the count of unlinked reports to rise while that
+happens — that is the rule working, same as the Alberta grant programme.
+
+Second, the "cluster repulsion" control barely changes what you see. The force
+really does push country clusters apart, but the camera then refits to the
+larger cloud and cancels most of it on screen — the whole slider range moves the
+picture by around 15%, and by almost nothing at high spread settings. What that
+control should be *for* is an open design question.
+
+The drawing-size problems that used to sit in this paragraph (nodes at 7 pixels,
+edges a tenth of a pixel wide) were fixed on 2026-08-19.
 
 **The obvious next thing:** more data. Alberta alone has around 330
 municipalities, 60 school authorities and 26 post-secondary institutions, and the

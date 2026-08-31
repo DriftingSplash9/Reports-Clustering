@@ -18,7 +18,20 @@ import { TIER_DESCRIPTION, TIER_LABEL } from '../lib/hierarchy'
 
 const STORAGE_KEY = 'rig.onboarding.dismissed.v3'
 
-export default function Onboarding({ openRequest = 0 }: { openRequest?: number }) {
+/**
+ * `tier` is the live drilldown (1-based, see `Drilldown` in hierarchy.ts).
+ * Until 2026-08-31 the opening sentence was hardcoded to tier 1, which was
+ * true on a cold start and false for every deep link and saved view that
+ * opens deeper — an audit found the card saying "tier 1" over a tier bar
+ * showing "4. Everything". The caption now reads the same state the buttons do.
+ */
+export default function Onboarding({
+  openRequest = 0,
+  tier = 1,
+}: {
+  openRequest?: number
+  tier?: number
+}) {
   // Read once, lazily, rather than in an effect: an effect would paint the card
   // for one frame before hiding it again, which is a flash on every load for
   // exactly the people who already said they did not want to see it.
@@ -153,8 +166,18 @@ export default function Onboarding({ openRequest = 0 }: { openRequest?: number }
         </h2>
 
         <p style={{ margin: '0 0 18px', color: '#9fb2ce' }}>
-          You are looking at tier 1 — the international, supranational and commercial reports.
-          Everything below them is packed into the glowing orbs, one per region.
+          {tier <= 1 ? (
+            <>
+              You are looking at tier 1 — the international, supranational and commercial reports.
+              Everything below them is packed into the glowing orbs, one per region.
+            </>
+          ) : (
+            <>
+              You are looking at tier {tier} — {TIER_LABEL[tier - 1] ?? 'Everything'},{' '}
+              {TIER_DESCRIPTION[tier - 1] ?? TIER_DESCRIPTION[TIER_DESCRIPTION.length - 1]}.
+              Countries not yet opened stay packed into their glowing orbs.
+            </>
+          )}
         </p>
 
         <div

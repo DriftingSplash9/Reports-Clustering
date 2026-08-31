@@ -65,7 +65,12 @@ and mean it.
    bloom/glow is untrustworthy in software rendering; CSS transitions can
    wedge under load.
 8. **Measure before believing.** A number nobody ran anything to get is a
-   guess.
+   guess. For the layout forces the instrument is committed:
+   `npx tsx scripts/measure-forces.ts` (sandbox, ~1.5 min per run; `SPREAD=`,
+   `SEEDS=`, `CRS=` env vars). Every earlier force calibration used a
+   throwaway script that was deleted, and one of them (the 2026-08-28
+   cluster-repulsion sweep) turned out not to reproduce — read `onscreen`,
+   run more than one seed, never let simulation state leak between runs.
 9. **Any prompt relayed to a third party (Grok etc.) needs its
    attachment/action list told to Thomas separately, in plain chat text**
    — he skims or skips the prompt block itself.
@@ -360,9 +365,22 @@ country/file/round, not a single site's own one-off quirk.
   The tell for illegitimate reuse is the quote naming a specific *other*
   place.
 - **`zip` writing directly into a mounted device folder can fail**
-  (temp-file-then-atomic-rename doesn't survive the mount) — `zip` to a
-  path under `$HOME` (outside `mnt/`), then `cp` the finished zip into the
-  mounted folder.
+  (temp-file-then-atomic-rename doesn't survive the mount) — either `zip`
+  to a path under `$HOME` (outside `mnt/`) and `cp` the finished zip in,
+  or stream it: `zip -qr - <paths> > tmp_work/<new-name>.zip` works
+  in-place. The mount also can't overwrite a same-named file — give each
+  re-run's zip a fresh name, `mv` the stale one to `_to_delete/`. Zip only
+  `src/ public/ scripts/ package.json package-lock.json tsconfig.json
+  index.html START-HERE.md` (+ the .md docs if editing them) — including
+  `archive/`, `node_modules/` or `.git` times the call out at 408MB; the
+  useful set is ~5MB and `npm install` in the sandbox is fast.
+- **Wayback Machine proxies several network-blocked `.gov` domains**
+  (`.gov.in`, `.gov.br` — blocked from the sandbox, the bridge VM *and*
+  Thomas's own Chrome, so genuinely blocked, not a sandbox artefact):
+  `archive.org/wayback/available?url=...`, and for no exact-URL snapshot,
+  CDX search `web.archive.org/cdx/search/cdx?url=<domain>*&filter=urlkey:.*\.pdf`.
+  Resolved Assam's handbook 2026-08-30. Rate-limited — space out queries.
+  Try it before writing any blocked domain off.
 - **`device_stage_files` can fail with `session_stale_relogin`** mid-
   session, with no warning beforehand. Fix requires Thomas to re-sign-in
   in the desktop app. Workaround when it strikes right after an edit you
@@ -437,7 +455,14 @@ Full record and examples: `notes/retired-nodes-2026-08-29.json`. **The
 reason is structural, not evidential**: a treaty isn't a publication with
 a methodology dependency, no research round could ever wire one — they
 were 7% of the corpus and 11% of its isolated nodes, all orphans, no edge
-broken. Three nodes look treaty-shaped but deliberately survived:
+broken. **Known gap (audit 2026-08-30, D4): the sweep removed orphans
+only, so ~18 FTA-family nodes that had edges survived it** (cl-tlc-*,
+pe-tlc-*, *-mercosur*, *-alianza-pacifico, mx-tmec, gy-psa-exxon…) —
+every one of those edges is a bare-homepage `methodology_depends_on`, and
+the corpus holds the same shape in both directions (16 agreement→stats,
+2 stats→agreement). Ruling owed in HANDOFF; until then the class is
+retired in principle and live in practice, and nothing in the validator
+stops a new one. Three nodes look treaty-shaped but deliberately survived:
 `ve-ofac-sanciones` (a `part_of` container — removing it orphans two
 other nodes), `tr-eu-trade` (named like a treaty, actually merchandise
 trade statistics), `sdmx-standard`/`sna-2025` (statistical standards, not

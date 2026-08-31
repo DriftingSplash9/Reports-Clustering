@@ -81,12 +81,23 @@ export const TIER_LABEL: readonly string[] = [
   'Everything',
 ]
 
-/** The longer form, for the orb caption and the onboarding card. */
+/**
+ * The longer form, for the orb caption, the tier-button tooltip and the
+ * onboarding card.
+ *
+ * Tier 4 used to read "the whole corpus". It is not: a tier is one of two
+ * orthogonal disclosure levels, and with no countries opened tier 4 shows
+ * ~12% of the reports while the counter beside it says so ("419 of 3448
+ * reports shown"). A caption promising everything over a counter saying
+ * one-eighth is the kind of mismatch the evidence standard exists to
+ * avoid, applied to the UI (audit 2026-08-30, L6). "Every level of
+ * government" is what tier 4 actually guarantees.
+ */
 export const TIER_DESCRIPTION: readonly string[] = [
   'International, supranational and commercial',
   'plus every national report',
   'plus states and provinces',
-  'plus municipalities — the whole corpus',
+  'plus municipalities — every level of government',
 ]
 
 export const TIER_COUNT = TIERS.length

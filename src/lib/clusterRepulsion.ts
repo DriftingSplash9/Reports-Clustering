@@ -76,6 +76,23 @@ export interface ClusterRepulsionNode {
 }
 
 /**
+ * **Superseded calibration note, kept for the record — read the 2026-08-31
+ * paragraph in `view.ts`'s `clusterRepulsion` comment first.** The numbers
+ * below were measured on an isolated rig (galaxy/geo/cluster only, no
+ * charge or link), then contradicted by a full-system sweep on 2026-08-28
+ * that raised the ceiling to 10 — and *that* sweep was itself found not to
+ * reproduce on 2026-08-31 (`scripts/measure-forces.ts`, now committed:
+ * baseline ratio ~7, not 4.29; off→10 gain 1.4×, not 3.5×). The "shipped
+ * ceiling" named here is 3; the shipped ceiling today is 15
+ * (`ViewControls.tsx`). Also since 2026-08-31 it is known that these two
+ * constants are the only force magnitudes NOT multiplied by the spread
+ * multiplier `m`, which is why the slider goes inert at high spread —
+ * scaling them by `m` is the one-character fix, but it changes the meaning
+ * of every strength value, so the range must be re-derived with the script
+ * afterward, not carried over.
+ *
+ * Original note follows.
+ *
  * Relative push strength at each level, calibrated 2026-08-27 against the
  * real corpus with `scripts/measure-cluster-repulsion.ts` (throwaway,
  * deleted after use — not part of the shipped app, see the file-level note
@@ -163,8 +180,9 @@ function repulsionOf(
  *
  * `familyWeight`/`countryWeight` default to the calibrated constants
  * above; the two optional params exist only so
- * `scripts/measure-cluster-repulsion.ts` can sweep them without editing
- * this file — production call sites should never pass them.
+ * a measurement script (`scripts/measure-forces.ts` today;
+ * `measure-cluster-repulsion.ts`, since deleted, originally) can sweep them
+ * without editing this file — production call sites should never pass them.
  */
 export function clusterRepulsionForce(
   strengthRef: { current: number },

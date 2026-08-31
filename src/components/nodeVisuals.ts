@@ -228,6 +228,21 @@ export function nodeMaterial({
     metalness: 0.05,
     transparent: alwaysTransparent || !lit,
     opacity: lit ? (hollow ? HOLLOW_FILL_OPACITY : 1) : Math.min(dimOpacity, hollow ? HOLLOW_FILL_OPACITY : 1),
+    // A surface that is transparent by construction must not write depth
+    // (2026-08-31, audit finding P2). Hollow and soft nodes live in the
+    // sorted transparent pass alongside every link mesh, and links already
+    // skip depth writes for exactly this reason (linkVisuals.ts: "whichever
+    // happened to be drawn first punch[es] a hole in the ones behind it").
+    // A see-through sphere that DID write depth clipped any link drawn after
+    // it at its silhouette — edges vanishing at a soft node's edge rather
+    // than fading through it, which is the one concrete mechanism found for
+    // the flicker / wrong-z-order symptom HANDOFF asks Thomas to watch for.
+    // Ordinary solid nodes keep writing depth: they are opaque while lit and
+    // only join the transparent pass when dimmed by focus, and `applyFocus`
+    // does not touch this flag — if the symptom survives on real hardware in
+    // the dimmed state only, toggling `depthWrite` there alongside
+    // `transparent` is the next thing to try.
+    depthWrite: !alwaysTransparent,
   }) as NodeMaterial
 
   // A hollow node's rim IS the node, so a family's 'none' is promoted to

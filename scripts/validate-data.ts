@@ -20,6 +20,7 @@ let invariantFailures = 0
 import {
   buildGraph,
   contains,
+  isBareHost,
   isDocumented,
   isOfficial,
   isRanked,
@@ -372,6 +373,89 @@ if (unevidencedRelations.length) invariantFailures++
 for (const r of unevidencedRelations) {
   console.log(`      ${r.source_report_id} -[${r.relation_type}]-> ${r.target_report_id}`)
 }
+/**
+ * DUPLICATE-SHAPED NODES — same title, same publisher, same country.
+ *
+ * Added 2026-08-31 (audit finding D6). PLAYBOOK §7's ruling is "flag, don't
+ * silently merge", and until now the flagging was done by whichever agent
+ * happened to notice — HANDOFF listed three pairs while two more identical
+ * pairs (br-ibge-ipca / br-ipca, the two Rosstat yearbooks) sat unflagged.
+ * Printed, never failed: a merge is Thomas's ruling, not the validator's.
+ *
+ * Unicode-aware on purpose: a naive `[^a-z0-9]` strip collapses every
+ * Cyrillic title to the empty string and invents duplicates out of nothing.
+ */
+const normTitle = (t: string) =>
+  [...t.normalize('NFKD')].filter((c) => /[\p{L}\p{N}]/u.test(c)).join('').toLowerCase()
+const degreeById = new Map<string, number>()
+for (const d of dependencies) {
+  degreeById.set(d.source_report_id, (degreeById.get(d.source_report_id) ?? 0) + 1)
+  degreeById.set(d.target_report_id, (degreeById.get(d.target_report_id) ?? 0) + 1)
+}
+const shapeGroups = new Map<string, typeof reports>()
+for (const r of reports) {
+  const key = `${normTitle(r.title)}|${normTitle(r.publisher ?? '')}|${r.country}`
+  const g = shapeGroups.get(key)
+  if (g) g.push(r)
+  else shapeGroups.set(key, [r])
+}
+const duplicateShaped = [...shapeGroups.values()].filter((g) => g.length > 1)
+console.log(`DUPLICATE-SHAPED NODES — ${duplicateShaped.length} group(s) share title, publisher and country`)
+for (const g of duplicateShaped) {
+  console.log(
+    `  ? ${g.map((r) => `${r.id} (${degreeById.get(r.id) ?? 0} edges)`).join('  vs  ')} — "${g[0].title}"`,
+  )
+}
+console.log(
+  duplicateShaped.length === 0
+    ? '  ✓ none'
+    : '  (flagged for a ruling — PLAYBOOK §7 "flag, don\'t silently merge"; never auto-merged)',
+)
+console.log()
+
+/**
+ * EVIDENCE — the headline rule, counted.
+ *
+ * Added 2026-08-31 after an independent audit (finding D2) showed the
+ * evidence standard was enforced in code for relations only. `validate()` now
+ * warns per edge (see the D2 comment in graph.ts); this block is the number
+ * to watch. Both counts are the promotion gate: when they read 0, flip the
+ * two warnings in graph.ts to errors and delete this sentence.
+ *
+ * "quote in basis" is a cheap proxy for "the research was done and the
+ * citation was lost in transcription" — those are the cheapest edges in the
+ * corpus to repair, so they are counted separately.
+ */
+const documentedDeps = dependencies.filter(isDocumented)
+const noUrl = documentedDeps.filter((d) => !d.evidence_url)
+const bareUrl = documentedDeps.filter((d) => d.evidence_url && isBareHost(d.evidence_url))
+const hasQuote = (b: string | undefined) => /["“”«»『「]/.test(b ?? '')
+const noUrlWithQuote = noUrl.filter((d) => hasQuote(d.basis))
+const bareUrlNoQuote = bareUrl.filter((d) => !hasQuote(d.basis))
+const bareHosts = new Map<string, number>()
+for (const d of bareUrl) {
+  const h = d.evidence_url ?? ''
+  bareHosts.set(h, (bareHosts.get(h) ?? 0) + 1)
+}
+console.log(`EVIDENCE — ${documentedDeps.length} documented dependencies, checked against the rule that made them`)
+console.log(
+  noUrl.length === 0
+    ? '  ✓ every documented dependency cites an evidence_url'
+    : `  ! ${noUrl.length} cite no evidence_url at all (${noUrlWithQuote.length} of them carry a quote in basis — citation lost, recoverable)`,
+)
+console.log(
+  bareUrl.length === 0
+    ? '  ✓ no dependency cites a bare homepage as its evidence'
+    : `  ! ${bareUrl.length} cite a bare homepage (${bareUrlNoQuote.length} of them with no quote either — assertion only)`,
+)
+for (const [h, n] of [...bareHosts].sort((a, b) => b[1] - a[1]).slice(0, 8)) {
+  console.log(`      ${String(n).padStart(3)}  ${h}`)
+}
+console.log(
+  '  (warnings, not errors, until both read 0 — then promote them in graph.ts validate())',
+)
+console.log()
+
 if (loadIssues.danglingRelations.length) {
   // Not necessarily an error. The corpus has more documented `audits` instances
   // than auditor nodes, and this is where an over-eager conversion shows up.
