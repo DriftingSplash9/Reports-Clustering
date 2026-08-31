@@ -886,6 +886,17 @@ export default function InfluenceGraph({
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
   const fitDistance = useRef(0)
   const { camera, controls, size, gl } = useThree()
+  /**
+   * Dev-only: expose the renderer so a real-GPU measurement can be taken from
+   * the browser console (audit finding P3, 2026-08-30 — no frame-time number
+   * exists for this app on real hardware; swiftshader in the sandbox reads
+   * ~1 fps and says nothing). `window.__rig.gl.info.render.calls` etc. Never
+   * set in a production build.
+   */
+  useEffect(() => {
+    if (!import.meta.env.DEV) return
+    ;(window as unknown as { __rig?: unknown }).__rig = { gl, camera }
+  }, [gl, camera])
 
   /**
    * One sprite for the whole scene, built once. Its position, scale, colour
