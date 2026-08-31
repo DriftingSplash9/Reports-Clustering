@@ -381,31 +381,10 @@
     },
     {
       "source_report_id": "id-dau-dak",
-      "target_report_id": "id-own-source-revenue",
-      "relationship_type": "uses_data_from",
-      "basis": "Data yang digunakan untuk perhitungan kapasitas fiskal terdiri dari: Pendapatan Asli Daerah (PAD), Dana Bagi Hasil (DBH) Sumber Daya Alam, dan DBH Pajak.",
-      "evidence_url": "https://djpk.kemenkeu.go.id/?ufaq=data-apa-saja-yang-diperhitungkan-digunakan-dalam-pengalokasian-dau"
-    },
-    {
-      "source_report_id": "id-dau-dak",
       "target_report_id": "id-bps",
       "relationship_type": "uses_data_from",
       "basis": "DJPK's \"Formulasi DAU 2022\" variable/source table lists: Jumlah Penduduk -> BPS; IPM -> BPS & Kemendagri; PDRB Per Kapita -> BPS & Kemendagri, as inputs to the Fiscal Need (Kebutuhan Fiskal) component of the DAU formula.",
       "evidence_url": "https://djpk.kemenkeu.go.id/wp-content/uploads/2022/03/Formulasi-DAU-2022.pdf"
-    },
-    {
-      "source_report_id": "id-tax-ratio",
-      "target_report_id": "id-national-accounts",
-      "relationship_type": "calculated_from",
-      "basis": "Tax ratio merupakan formula untuk mengukur kinerja perpajakan dengan membandingkan antara penerimaan perpajakan dan Pendapatan Domestik Bruto (PDB) dalam kurun waktu tertentu. (Directorate General of Taxes / Ministry of Finance.)",
-      "evidence_url": "https://pajak.go.id/en/node/29328"
-    },
-    {
-      "source_report_id": "id-tax-ratio",
-      "target_report_id": "id-tax-revenues",
-      "relationship_type": "calculated_from",
-      "basis": "Same formula definition: tax ratio compares penerimaan perpajakan (tax revenue) against PDB over a given period — tax revenue is the explicit numerator.",
-      "evidence_url": "https://pajak.go.id/en/node/29328"
     },
     {
       "source_report_id": "id-anticorruption",
@@ -765,6 +744,27 @@
       "target": null,
       "reason": "unreadable-source",
       "why": "BPS 'Statistik E-Commerce 2023' abstract has topic-coverage language only. Every attempt to reach the full PDF failed (web-api.bps.go.id 403 on two URLs, a dataindonesia.id mirror 403'd, a Scribd copy rendered a JS-disabled error shell, AllStats Search returned zero indexed results)."
+    },
+    {
+      "edge": "id-dau-dak -> id-own-source-revenue",
+      "source": "id-dau-dak",
+      "target": "id-own-source-revenue",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://djpk.kemenkeu.go.id/?ufaq=data-apa-saja-yang-diperhitungkan-digunakan-dalam-pengalokasian-dau. Original basis: \"Data yang digunakan untuk perhitungan kapasitas fiskal terdiri dari: Pendapatan Asli Daerah (PAD), Dana Bagi Hasil (DBH) Sumber Daya Alam, dan DBH Pajak.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "id-tax-ratio -> id-national-accounts",
+      "source": null,
+      "target": "id-national-accounts",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): id-tax-ratio carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: calculated_from. Original evidence_url: https://pajak.go.id/en/node/29328. Original basis: \"Tax ratio merupakan formula untuk mengukur kinerja perpajakan dengan membandingkan antara penerimaan perpajakan dan Pendapatan Domestik Bruto (PDB) dalam kurun waktu tertentu. (Directorate General of Taxes / Ministry of Finance.)\""
+    },
+    {
+      "edge": "id-tax-ratio -> id-tax-revenues",
+      "source": null,
+      "target": "id-tax-revenues",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): id-tax-ratio carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: calculated_from. Original evidence_url: https://pajak.go.id/en/node/29328. Original basis: \"Same formula definition: tax ratio compares penerimaan perpajakan (tax revenue) against PDB over a given period — tax revenue is the explicit numerator.\""
     }
   ]
 }

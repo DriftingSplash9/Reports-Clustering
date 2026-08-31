@@ -156,7 +156,7 @@
     {
       "id": "ae-gcc-trade",
       "title": "UAE–GCC merchandise trade statistics",
-      "publisher": "Ministry of Finance / FCSC related",
+      "publisher": "Ministry of Finance",
       "country": "AE",
       "jurisdiction_level": "federal",
       "region": "United Arab Emirates — GCC",
@@ -200,23 +200,6 @@
       "url": "https://mof.gov.ae/en/public-finance/uae-federal-budget/government-financial-statistics/"
     },
     {
-      "id": "ae-gcc-customs-union",
-      "title": "GCC Unified Economic Agreement / Customs Union",
-      "publisher": "Gulf Cooperation Council",
-      "country": "INT",
-      "jurisdiction_level": "supranational",
-      "region": "GCC",
-      "description": "One-off foundational instrument establishing the GCC Customs Union and Common Market (Unified Economic Agreement, with the Customs Union operational since 2003). Common external tariff and free movement of goods among member states. Converted from Grok's unsourced 'ae-gcc-framing' node — VERIFIED real legal instrument with primary text available.",
-      "domains": [
-        "external-action",
-        "trade"
-      ],
-      "url": "https://www.gcc-sg.org/en/MediaCenter/DigitalLibrary/Documents/1274258747.pdf",
-      "_country_original": "AE",
-      "_country_note": "Refiled AR/AE → INT on 2026-08-18. `validate()` flags an international- or supranational-level publisher carrying a country code, and the publisher here is the Gulf Cooperation Council, which belongs to no single country — the definition `Country` gives for INT. This is a rim-colour and family change only; nothing else reads the field.",
-      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
-    },
-    {
       "id": "ae-mubadala",
       "title": "Mubadala Investment Company assets under management and performance",
       "publisher": "Mubadala Investment Company",
@@ -249,22 +232,6 @@
       "url": "https://www.zawya.com/en/projects/construction/uae-construction-activities-record-62-growth-in-q1-rgwhnkyq"
     },
     {
-      "id": "ae-trade-partners",
-      "title": "Major merchandise trade partners statistics",
-      "publisher": "Derived from trade data compilations and FCSC-related sources",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Statistics on major export and import partners. China, India, Japan, the United States, Saudi Arabia and others feature prominently; crude petroleum, gold and refined petroleum dominate exports while gold, telephones and cars feature among top imports.",
-      "releases_per_year": 1,
-      "domains": [
-        "trade",
-        "external-action"
-      ],
-      "url": null,
-      "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
-    },
-    {
       "id": "ae-adia",
       "title": "Abu Dhabi Investment Authority (ADIA) assets under management",
       "publisher": "Abu Dhabi Investment Authority",
@@ -278,22 +245,6 @@
       ],
       "url": "https://en.aletihad.ae/news/business/4539228/adia-s-assets-under-management-cross--1-trillion-mark",
       "_domains_note": "proposed: prefix dropped 2026-08-18 — the tag was promoted into Domain in the same pass."
-    },
-    {
-      "id": "ae-renewables",
-      "title": "Renewable energy capacity statistics",
-      "publisher": "Derived from IRENA and national energy monitoring",
-      "country": "AE",
-      "jurisdiction_level": "federal",
-      "region": "United Arab Emirates",
-      "description": "Statistics on installed renewable energy capacity. Capacity reached 7.9 GW in 2025 (VERIFIED, matches Zawya reporting exactly), driven primarily by solar PV. CORRECTED: the longer-term target is 22 GW by 2031 (The National, PVknowhow) — Grok's original figure of '23 GW' does not match any source found and has been corrected.",
-      "releases_per_year": 1,
-      "domains": [
-        "energy",
-        "environment"
-      ],
-      "url": "https://www.zawya.com/en/projects/utilities/uae-renewable-capacity-rises-to-79-gw-in-2025-as-solar-drives-additions-sbzbtfh4",
-      "_domains_note": "Domain semantic pass 2026-08-18 — same mapping applied to the staged Grok archive, for consistency."
     },
     {
       "id": "ae-climate-reporting",
@@ -505,13 +456,6 @@
       "evidence_url": "https://www.opec.org/declaration-of-cooperation.html"
     },
     {
-      "source_report_id": "ae-gcc-trade",
-      "target_report_id": "ae-gcc-customs-union",
-      "relationship_type": "methodology_depends_on",
-      "basis": "UAE-GCC trade statistics are explicitly framed by the Ministry of Finance's own reporting as tracking progress toward completing the GCC Customs Union and Common Market.",
-      "evidence_url": "https://mof.gov.ae/en/news/ministry-of-finance-intensifies-efforts-to-complete-the-customs-union-and-implement-gcc-common-market-tracks/"
-    },
-    {
       "source_report_id": "ae-fta",
       "target_report_id": "ae-gfs",
       "relationship_type": "uses_data_from",
@@ -538,20 +482,6 @@
       "relationship_type": "uses_data_from",
       "basis": "Overnight visitor arrivals to Dubai are structurally downstream of air-passenger arrivals at DXB, the emirate's dominant entry point.",
       "evidence_url": "https://media.dubaiairports.ae/dxb-sets-global-benchmark-as-record-traffic-become-the-norm/"
-    },
-    {
-      "source_report_id": "ae-mubadala",
-      "target_report_id": "ae-bop",
-      "relationship_type": "uses_data_from",
-      "basis": "Sovereign-fund capital deployment and proceeds flow through the financial account of the balance of payments.",
-      "evidence_url": "https://www.centralbank.ae/"
-    },
-    {
-      "source_report_id": "ae-adia",
-      "target_report_id": "ae-bop",
-      "relationship_type": "uses_data_from",
-      "basis": "Same BPM6 financial-account logic as ae-mubadala.",
-      "evidence_url": "https://www.centralbank.ae/"
     }
   ],
   "_dropped": [
@@ -596,6 +526,27 @@
       "target": "ae-oil-production",
       "reason": "no-document",
       "why": "Post-exit, the UAE is a non-member; no document located asserting the MOMR still formally depends on a UAE official production series specifically (Grok's original finding, carried forward)."
+    },
+    {
+      "edge": "ae-mubadala -> ae-bop",
+      "source": "ae-mubadala",
+      "target": "ae-bop",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.centralbank.ae/. Original basis: \"Sovereign-fund capital deployment and proceeds flow through the financial account of the balance of payments.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "ae-adia -> ae-bop",
+      "source": "ae-adia",
+      "target": "ae-bop",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.centralbank.ae/. Original basis: \"Same BPM6 financial-account logic as ae-mubadala.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "ae-gcc-trade -> ae-gcc-customs-union",
+      "source": "ae-gcc-trade",
+      "target": null,
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): ae-gcc-customs-union is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://mof.gov.ae/en/news/ministry-of-finance-intensifies-efforts-to-complete-the-customs-union-and-implement-gcc-common-market-tracks/). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original basis: \"UAE-GCC trade statistics are explicitly framed by the Ministry of Finance's own reporting as tracking progress toward completing the GCC Customs Union and Common Market.\""
     }
   ]
 }

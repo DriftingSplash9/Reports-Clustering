@@ -1006,32 +1006,6 @@
       "last_updated": null
     },
     {
-      "id": "mx-tmec",
-      "title": "Tratado entre México, Estados Unidos y Canadá (T-MEC) / United States-Mexico-Canada Agreement (USMCA / CUSMA)",
-      "publisher": "Gobierno de México / Governments of Mexico, United States and Canada",
-      "country": "INT",
-      "jurisdiction_level": "international",
-      "region": "North America / Mexico",
-      "description": "Trilateral trade agreement that replaced NAFTA and entered into force 1 July 2020. Governs preferential trade, rules of origin (especially automotive), labour, environment, digital trade and other disciplines among Mexico, the United States and Canada. Static legal instrument with no independent statistical publication cadence of its own, but continuously cited in trade statistics, Banxico analysis, and compliance monitoring.",
-      "url": "https://www.gob.mx/t-mec",
-      "domains": [
-        "trade",
-        "proposed:rules-of-origin"
-      ],
-      "_batch": [
-        "2026-08-13_Mexico-batch4.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Prime example of the new rule: a static international treaty that is load-bearing for trade and industrial statistics and is cited on a recurring basis.\n\nContextual material from Banxico analysis (utilisation of T-MEC for exports to the United States):\nAnalyses repeatedly report the share of Mexican exports to the US that claim T-MEC preferential treatment (rising sharply in 2025 in response to higher non-USMCA tariffs). Example framing: nearly 100% of certain trucks, ~80% of cars and more than half of auto parts exported by Mexico to the US utilised the T-MEC in recent periods; overall utilisation of the Treaty for Mexican goods entering the US moved from roughly half to well above 75–80% of trade value as tariff differentials increased.\n\nThe agreement itself is the permanent legal framework; the statistical system measures compliance with and utilisation of its rules of origin and other disciplines. No separate ‘T-MEC statistical yearbook’ is required for the instrument to qualify — the recurring citation in trade and monetary-policy analysis is sufficient under the expanded node definition.",
-      "_referenced_by": [
-        "Banxico quarterly reports and special boxes on T-MEC utilisation rates for Mexican exports to the US",
-        "Merchandise trade statistics and analysis of preferential vs non-preferential flows",
-        "Automotive and manufacturing export compliance statistics",
-        "Policy and competitiveness analyses that treat T-MEC rules of origin as the binding institutional framework"
-      ],
-      "last_updated": null
-    },
-    {
       "id": "mx-sep-estadistica-educativa",
       "title": "Estadística Educativa del Sistema Educativo Nacional (Formato 911 / SIGED) / National Education Statistics",
       "publisher": "Secretaría de Educación Pública (SEP) — Dirección General de Planeación, Programación y Estadística Educativa",
@@ -2483,26 +2457,6 @@
     },
     {
       "relationship_type": "uses_data_from",
-      "evidence_url": "https://iieg.gob.mx/",
-      "basis": "IIEG produces the municipal cuadernillo and indicator packages that constitute the main published statistical profile of Zapopan.",
-      "source_report_id": "mx-municipio-zapopan",
-      "target_report_id": "mx-iieg-jalisco",
-      "_batch": [
-        "2026-08-13_Mexico-batch10-guadalajara.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://iieg.gob.mx/",
-      "basis": "Same IIEG municipal product system covers Guadalajara.",
-      "source_report_id": "mx-municipio-guadalajara",
-      "target_report_id": "mx-iieg-jalisco",
-      "_batch": [
-        "2026-08-13_Mexico-batch10-guadalajara.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
       "evidence_url": "https://www.inegi.org.mx/programas/cngmd/",
       "basis": "CNGMD supplies the structural government and public-service data for the municipality.",
       "source_report_id": "mx-municipio-zapopan",
@@ -2614,30 +2568,10 @@
     },
     {
       "relationship_type": "methodology_depends_on",
-      "evidence_url": "https://www.banxico.org.mx/publicaciones-y-prensa/informes-trimestrales/",
-      "basis": "Trade statistics and Banxico analysis routinely measure the share of merchandise trade that utilises T-MEC preferential treatment and rules of origin; the Treaty is the institutional framework that defines preferential eligibility.",
-      "source_report_id": "mx-balanza-comercial",
-      "target_report_id": "mx-tmec",
-      "_batch": [
-        "2026-08-13_Mexico-batch4.json"
-      ]
-    },
-    {
-      "relationship_type": "methodology_depends_on",
       "evidence_url": "https://www.inegi.org.mx/temas/saludsat/",
       "basis": "Satellite account is constructed within the conceptual framework of the Sistema de Cuentas Nacionales de México.",
       "source_report_id": "mx-csssm",
       "target_report_id": "mx-scnm",
-      "_batch": [
-        "2026-08-13_Mexico-batch4.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.siged.sep.gob.mx/",
-      "basis": "The 2013 CEMABE provided the foundational census baseline for the modern Sistema de Información y Gestión Educativa and continuous Formato 911 statistics.",
-      "source_report_id": "mx-sep-estadistica-educativa",
-      "target_report_id": "mx-cemabe",
       "_batch": [
         "2026-08-13_Mexico-batch4.json"
       ]
@@ -2842,6 +2776,36 @@
         "2026-08-13_Mexico-batch8.json"
       ],
       "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "mx-municipio-zapopan -> mx-iieg-jalisco",
+      "source": "mx-municipio-zapopan",
+      "target": "mx-iieg-jalisco",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://iieg.gob.mx/. Original basis: \"IIEG produces the municipal cuadernillo and indicator packages that constitute the main published statistical profile of Zapopan.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "mx-municipio-guadalajara -> mx-iieg-jalisco",
+      "source": "mx-municipio-guadalajara",
+      "target": "mx-iieg-jalisco",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://iieg.gob.mx/. Original basis: \"Same IIEG municipal product system covers Guadalajara.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "mx-sep-estadistica-educativa -> mx-cemabe",
+      "source": "mx-sep-estadistica-educativa",
+      "target": "mx-cemabe",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.siged.sep.gob.mx/. Original basis: \"The 2013 CEMABE provided the foundational census baseline for the modern Sistema de Información y Gestión Educativa and continuous Formato 911 statistics.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "mx-balanza-comercial -> mx-tmec",
+      "source": "mx-balanza-comercial",
+      "target": null,
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): mx-tmec is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.banxico.org.mx/publicaciones-y-prensa/informes-trimestrales/). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original basis: \"Trade statistics and Banxico analysis routinely measure the share of merchandise trade that utilises T-MEC preferential treatment and rules of origin; the Treaty is the institutional framework that defines preferential eligibility.\""
     }
   ]
 }

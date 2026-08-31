@@ -455,14 +455,33 @@ Full record and examples: `notes/retired-nodes-2026-08-29.json`. **The
 reason is structural, not evidential**: a treaty isn't a publication with
 a methodology dependency, no research round could ever wire one — they
 were 7% of the corpus and 11% of its isolated nodes, all orphans, no edge
-broken. **Known gap (audit 2026-08-30, D4): the sweep removed orphans
-only, so ~18 FTA-family nodes that had edges survived it** (cl-tlc-*,
-pe-tlc-*, *-mercosur*, *-alianza-pacifico, mx-tmec, gy-psa-exxon…) —
-every one of those edges is a bare-homepage `methodology_depends_on`, and
-the corpus holds the same shape in both directions (16 agreement→stats,
-2 stats→agreement). Ruling owed in HANDOFF; until then the class is
-retired in principle and live in practice, and nothing in the validator
-stops a new one. Three nodes look treaty-shaped but deliberately survived:
+broken. **Closed 2026-08-31 (Thomas, ruling 2-A after the audit's D4):
+that sweep removed orphans only, so 31 FTA-family nodes that had edges
+survived it — retired the same day with `ar-mercosur`, records in
+`notes/retired-nodes-2026-08-31.json`.** The class is now retired in
+practice as well as principle. Still nothing in the validator stops a
+new one — a title regex is too contaminated to trust (see the meta-node
+paragraph below); the guard is this paragraph and the reviewer.
+
+**A node's `publisher` is a body, not a derivation note** (Thomas,
+2026-08-31, ruling 3-A after the audit's D7). "Derived from UNICEF and
+education monitoring sources", "WHO / national sources", "Derived from
+international compilations" name a topic with a figure attached, not a
+recurring official release, and no document can ever name a topic as an
+input — 62 such nodes retired (`notes/retired-nodes-2026-08-31.json`).
+A lazy "X / related" or "X / Y related" string on a real release is a
+field to fix, not a node to drop — 166 rewritten to the first-named body
+(`notes/publisher-cleanup-2026-08-31.json`). The validator's PUBLISHERS
+block prints any new one. Don't mint a node whose publisher you can't
+name.
+
+**Assertion-only edges are `_dropped`, never live** (Thomas, 2026-08-31,
+ruling 1-A after the audit's D1). An edge whose evidence is a publisher
+homepage or nothing, and whose basis quotes no document, is a belief —
+463 of them went to `_dropped` `no-document` that day with their
+original basis preserved, and the validator's EVIDENCE block counts any
+new one. "Probably true" is the reason they were dangerous, not a
+defence: on screen they were indistinguishable from verified edges. Three nodes look treaty-shaped but deliberately survived:
 `ve-ofac-sanciones` (a `part_of` container — removing it orphans two
 other nodes), `tr-eu-trade` (named like a treaty, actually merchandise
 trade statistics), `sdmx-standard`/`sna-2025` (statistical standards, not

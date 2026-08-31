@@ -122,13 +122,6 @@
       "evidence_url": "https://censusinfo.capmas.gov.eg/Metadata-ar-v4.2/index.php/catalog/1618/overview"
     },
     {
-      "source_report_id": "eg-takaful-karama-programme",
-      "target_report_id": "eg-social-security-law-12-2025",
-      "relationship_type": "methodology_depends_on",
-      "basis": "Article 39 of Law 12/2025 formally establishes the Takaful and Karama Fund, and Article 3 has it succeed the Central Social Security Fund with all its assets, rights and liabilities -- the programme's legal existence as a statutory entitlement (rather than an administrative programme) depends directly on this Act.",
-      "evidence_url": "https://lawhub.info/?p=7225"
-    },
-    {
       "source_report_id": "eg-capmas-cpi",
       "target_report_id": "imf-sdds",
       "relationship_type": "methodology_depends_on",
@@ -136,5 +129,13 @@
       "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/EGY/category/CPI00"
     }
   ],
-  "_dropped": []
+  "_dropped": [
+    {
+      "edge": "eg-takaful-karama-programme -> eg-social-security-law-12-2025",
+      "source": "eg-takaful-karama-programme",
+      "target": "eg-social-security-law-12-2025",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://lawhub.info/?p=7225. Original basis: \"Article 39 of Law 12/2025 formally establishes the Takaful and Karama Fund, and Article 3 has it succeed the Central Social Security Fund with all its assets, rights and liabilities -- the programme's legal existence as a statutory entitlement (rather than an administrative programme) depends directly on this Act.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    }
+  ]
 }

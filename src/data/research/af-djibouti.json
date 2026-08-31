@@ -54,13 +54,6 @@
       "relationship_type": "cites",
       "basis": "Djibouti's own national statistics strategy names AFRISTAT's founding as a formative event for the national statistical system: \"La création de l'Observatoire économique et statistique d'Afrique subsaharienne (AFRISTAT), plus d'une décennie auparavant, en a été le premier signe.\" General institutional acknowledgment rather than a CPI-methodology-specific citation, so 'cites' rather than 'methodology_depends_on', matching the Guinea/Madagascar convention for support-mention-only findings. `afristat-ihpc-guide-2014` already exists in the corpus — reused per the branch's node-id discipline.",
       "evidence_url": "https://www.paris21.org/sites/default/files/Djibouti%20SNDS%202011-15.pdf"
-    },
-    {
-      "source_report_id": "dj-snds-2011-2015",
-      "target_report_id": "comesa-treaty-establishing",
-      "relationship_type": "cites",
-      "basis": "Djibouti's strategy document names COMESA specifically in connection with foreign-trade-statistics harmonisation: \"le Marché commun des pays de l'Afrique de l'Est et de l'Afrique australe (COMESA) avec l'harmonisation des statistiques du commerce extérieur.\" NOTE: this is about trade statistics, not CPI/inflation specifically — recorded as 'cites' with the domain caveat made explicit here rather than assigned an inflation-specific relationship. `comesa-treaty-establishing` was minted this same round (af-sudan.json) and is reused here for the second time.",
-      "evidence_url": "https://www.paris21.org/sites/default/files/Djibouti%20SNDS%202011-15.pdf"
     }
   ],
   "_dropped": [
@@ -77,6 +70,13 @@
       "target": null,
       "reason": "no-document",
       "why": "A French technical-committee document (\"Comité technique Foncier et développement,\" not a Djiboutian government document) quotes Loi n°174/AN/02/4ème L (7 July 2002) Articles 80 and 93 on fiscal transfers to territorial collectivities (\"Des dotations et transferts de l'État\"; \"Une dotation globale de l'État est consentie pour le fonctionnement\") with specific article numbers — a real, quotable citation, but from a secondary/third-party source rather than Djibouti's own Journal Officiel text (not locatable this round). Consistent with this branch's standing practice of not minting secondary-sourced legal paraphrase as a report node (matching the earlier UNICEF Angola and NAYMOTE Liberia precedents) — recorded here as a strong lead for a future session with better access to the Journal Officiel de Djibouti. UPDATE 2026-08-13 (AF/G.23): the primary text of Loi n°174/AN/02 was independently located and verbatim-verified this round via two cross-confirming legal-text mirrors (droit-afrique.com and FAO's FAOLEX database) and is now minted as `dj-loi-174-2002-decentralisation`, with live dependency edges, in the companion file dj-g23-municipal.json (this file's own dependencies array is unchanged, so `reason` here is left as `no-document` rather than `resolved` per this branch's rule that 'resolved' requires the live edge to exist in the same file's dependencies array)."
+    },
+    {
+      "edge": "dj-snds-2011-2015 -> comesa-treaty-establishing",
+      "source": "dj-snds-2011-2015",
+      "target": null,
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): comesa-treaty-establishing is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.paris21.org/sites/default/files/Djibouti%20SNDS%202011-15.pdf). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original basis: \"Djibouti's strategy document names COMESA specifically in connection with foreign-trade-statistics harmonisation: \"le Marché commun des pays de l'Afrique de l'Est et de l'Afrique australe (COMESA) avec l'harmonisation des statistiques du commerce extérieur.\" NOTE: this is about trade statistics, not CPI/inflation specifically — recorded as 'cites' with the domain caveat made explicit here rather than assigned an inflation-specific relationship. `comesa-treaty-establishing` was minted this same round (af-sudan.json) and is reused here for the second time.\""
     }
   ]
 }

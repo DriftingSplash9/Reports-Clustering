@@ -135,6 +135,7 @@ import {
   TIER_LABEL,
   buildDisclosedGraph,
   countryFromOrbId,
+  standingLabels,
   foldCountry,
   isCountryOrbId,
   isOrbId,
@@ -290,6 +291,9 @@ export default function App() {
     logGroupedIssues(console.warn, issues.filter((i) => i.severity === 'warning'))
     return buildGraph(reports, dependencies)
   }, [corpus])
+
+  /** Standing labels for the standards — on the base graph, see `standingLabels`. */
+  const labelled = useMemo(() => standingLabels(graph), [graph])
 
   /**
    * Disclosure, computed once per corpus rather than per hover.
@@ -1491,6 +1495,7 @@ export default function App() {
 
         <InfluenceGraph
           graph={disclosedGraph}
+          labelled={labelled}
           view={view}
           resetSignal={resetSignal}
           focus={focus}

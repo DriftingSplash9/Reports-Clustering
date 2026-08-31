@@ -92,34 +92,6 @@
       "_url_evidence": "Data Centre of the Ministry of Natural Resources' Petroleum Management Programme; lists official oil production, oil price, gas produced/flared and per-field production data series."
     },
     {
-      "id": "gy-psa-exxon",
-      "title": "Production Sharing Agreement — ExxonMobil consortium",
-      "publisher": "Government of Guyana / ExxonMobil / Hess / CNOOC",
-      "country": "INT",
-      "jurisdiction_level": "international",
-      "region": "Guyana / international partners",
-      "description": "Production-sharing agreement governing the Stabroek Block and related developments. Defines royalty (2% on gross production) and profit-oil split that feed the Natural Resource Fund.",
-      "url": "https://petroleum.gov.gy/docs-and-pubs/petroleum-agreement-stabroek-block/",
-      "domains": [
-        "energy",
-        "investment",
-        "trade",
-        "public-finance"
-      ],
-      "_batch": [
-        "2026-08-13_Guyana-batch1.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Foundational commercial and fiscal contract. Continuously cited as the legal and fiscal framework that converts physical production into government revenue.",
-      "_referenced_by": [
-        "NRF revenue analysis",
-        "Fiscal and budget documents",
-        "Oil-production and investment reporting"
-      ],
-      "last_updated": null,
-      "_url_evidence": "Official Petroleum Management Programme document page providing the Stabroek Block Petroleum (production sharing) Agreement dated 7 October 2016."
-    },
-    {
       "id": "gy-pib",
       "title": "National Accounts / GDP",
       "publisher": "Bureau of Statistics / Bank of Guyana",
@@ -837,66 +809,6 @@
   ],
   "dependencies": [
     {
-      "relationship_type": "methodology_depends_on",
-      "evidence_url": null,
-      "basis": "Production volumes and fiscal take are governed by the Production Sharing Agreement.",
-      "source_report_id": "gy-petroleo",
-      "target_report_id": "gy-psa-exxon",
-      "_batch": [
-        "2026-08-13_Guyana-batch1.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": null,
-      "basis": "NRF inflows are the fiscal expression of the royalty and profit-oil terms of the PSA.",
-      "source_report_id": "gy-nrf",
-      "target_report_id": "gy-psa-exxon",
-      "_batch": [
-        "2026-08-13_Guyana-batch1.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://statisticsguyana.gov.gy/",
-      "basis": "Oil value-added dominates recent GDP growth.",
-      "source_report_id": "gy-pib",
-      "target_report_id": "gy-petroleo",
-      "_batch": [
-        "2026-08-13_Guyana-batch1.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": null,
-      "basis": "Approved NRF withdrawals are a major financing source of the national budget.",
-      "source_report_id": "gy-nrf-flujos",
-      "target_report_id": "gy-presupuesto",
-      "_batch": [
-        "2026-08-13_Guyana-batch2.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": null,
-      "basis": "Cash grants and social transfers are increasingly financed by NRF withdrawals.",
-      "source_report_id": "gy-cash-transfers",
-      "target_report_id": "gy-nrf",
-      "_batch": [
-        "2026-08-13_Guyana-batch2.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": null,
-      "basis": "NRF withdrawals are the primary financing source of the expanded public investment programme.",
-      "source_report_id": "gy-inversion-publica",
-      "target_report_id": "gy-nrf",
-      "_batch": [
-        "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
-      ]
-    },
-    {
       "source_report_id": "gy-gpl",
       "target_report_id": "gy-gas-to-energy",
       "relationship_type": "cites",
@@ -906,6 +818,50 @@
         "2026-08-13_Guyana-batch4-infrastructure-energy-housing.json"
       ],
       "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "gy-petroleo -> gy-psa-exxon",
+      "source": "gy-petroleo",
+      "target": "gy-psa-exxon",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: (none). Original basis: \"Production volumes and fiscal take are governed by the Production Sharing Agreement.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "gy-nrf -> gy-psa-exxon",
+      "source": "gy-nrf",
+      "target": "gy-psa-exxon",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: (none). Original basis: \"NRF inflows are the fiscal expression of the royalty and profit-oil terms of the PSA.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "gy-pib -> gy-petroleo",
+      "source": "gy-pib",
+      "target": "gy-petroleo",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://statisticsguyana.gov.gy/. Original basis: \"Oil value-added dominates recent GDP growth.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "gy-nrf-flujos -> gy-presupuesto",
+      "source": "gy-nrf-flujos",
+      "target": "gy-presupuesto",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: (none). Original basis: \"Approved NRF withdrawals are a major financing source of the national budget.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "gy-cash-transfers -> gy-nrf",
+      "source": "gy-cash-transfers",
+      "target": "gy-nrf",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: (none). Original basis: \"Cash grants and social transfers are increasingly financed by NRF withdrawals.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "gy-inversion-publica -> gy-nrf",
+      "source": "gy-inversion-publica",
+      "target": "gy-nrf",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: (none). Original basis: \"NRF withdrawals are the primary financing source of the expanded public investment programme.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

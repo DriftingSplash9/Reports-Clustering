@@ -574,3 +574,97 @@ export function setHaloTheme(sprite: THREE.Sprite, colour: string) {
   material.opacity = 1
   material.needsUpdate = true
 }
+
+/**
+ * A standing label — one camera-facing text sprite for a node that has to be
+ * nameable without hovering (2026-08-31, Thomas: the international standards
+ * are "indistinguishable" — 200 white spheres, and the dozen that half the
+ * corpus rests on look exactly like the other 188).
+ *
+ * Same machinery as the selection halo, for the same reasons: one sprite per
+ * labelled node, `depthTest` off so the name survives being behind the
+ * cloud, rescaled every frame to a constant pixel height (`placeLabel`).
+ * Text is rasterised once into a canvas at 2× for crispness; the sprite's
+ * `userData.aspect` carries width/height so `placeLabel` can size it without
+ * re-measuring. Only a handful of these exist at any time (see
+ * `LABEL_SPAN_GATE` in InfluenceGraph.tsx) — this is not a per-node system.
+ */
+const LABEL_FONT_PX = 26
+const LABEL_PAD_PX = 10
+
+export function labelSprite(text: string, colour = '#e8eef8'): THREE.Sprite {
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')!
+  const font = `500 ${LABEL_FONT_PX}px system-ui, -apple-system, "Segoe UI", sans-serif`
+  ctx.font = font
+  const width = Math.ceil(ctx.measureText(text).width) + LABEL_PAD_PX * 2
+  const height = Math.ceil(LABEL_FONT_PX * 1.5)
+  canvas.width = width
+  canvas.height = height
+  ctx.font = font
+  ctx.textBaseline = 'middle'
+  ctx.textAlign = 'center'
+  // A soft dark plate behind the letters, not a box: enough to hold the
+  // text over a bright sphere or a bundle of lines, invisible over black.
+  ctx.shadowColor = 'rgba(0,0,0,0.9)'
+  ctx.shadowBlur = 8
+  ctx.fillStyle = colour
+  ctx.fillText(text, width / 2, height / 2)
+  ctx.shadowBlur = 0
+  ctx.fillText(text, width / 2, height / 2)
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+  texture.minFilter = THREE.LinearFilter
+  const material = new THREE.SpriteMaterial({
+    map: texture,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+  })
+  const sprite = new THREE.Sprite(material)
+  // Anchor below the sprite's bottom edge so it floats above the node it
+  // names rather than sitting on top of it — see placeLabel.
+  sprite.center.set(0.5, -0.75)
+  sprite.renderOrder = 998
+  sprite.raycast = () => {}
+  sprite.visible = false
+  sprite.userData = { aspect: width / height, text }
+  return sprite
+}
+
+/**
+ * Hold a label at `pixelHeight` screen pixels tall whatever the camera
+ * distance — the `placeSelectionHalo` derivation, with width from the
+ * sprite's own aspect. The anchor offset set in `labelSprite` keeps the
+ * text clear of a sphere up to ~1.5 label-heights in radius, which at the
+ * design's 19 px largest node and a 13 px label is everything.
+ */
+export function placeLabel(
+  sprite: THREE.Sprite,
+  worldPosition: THREE.Vector3,
+  cameraPosition: THREE.Vector3,
+  halfFovRadians: number,
+  canvasHeight: number,
+  pixelHeight: number,
+) {
+  sprite.position.copy(worldPosition)
+  const distance = cameraPosition.distanceTo(worldPosition)
+  const h = (pixelHeight * 2 * distance * Math.tan(halfFovRadians)) / canvasHeight
+  const aspect = (sprite.userData.aspect as number) || 4
+  sprite.scale.set(h * aspect, h, 1)
+}
+
+/**
+ * The short name a standing label shows. A trailing parenthetical acronym
+ * is exactly what these titles carry — "System of National Accounts 2008
+ * (SNA 2008)", "…Sixth Edition (BPM6)", "…(COICOP 2018)" — and is the name
+ * anyone in the field uses. Otherwise the title, cut at a word boundary.
+ */
+export function labelTextFor(title: string): string {
+  const m = /\(([^()]{2,28})\)\s*$/.exec(title)
+  if (m) return m[1]
+  if (title.length <= 30) return title
+  const cut = title.slice(0, 30)
+  const at = cut.lastIndexOf(' ')
+  return (at > 12 ? cut.slice(0, at) : cut) + '…'
+}

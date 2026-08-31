@@ -23,12 +23,16 @@ import {
   setHaloTheme,
   setNodeRim,
   type NodeMaterial,
+  labelSprite,
+  labelTextFor,
+  placeLabel,
 } from './nodeVisuals'
 import { edgeKey, type Focus } from '../lib/selection'
 import type { VisibleSet } from '../lib/filter'
 import { countryAffinityForce } from '../lib/geoAffinity'
 import { galaxyForce } from '../lib/galaxyForce'
 import { clusterRepulsionForce } from '../lib/clusterRepulsion'
+import { intAnchorForce } from '../lib/intAnchor'
 import { lensColourFor } from '../lib/modes'
 import {
   DIM_NODE_EMISSIVE,
@@ -134,6 +138,17 @@ interface LinkDatum {
    */
   hubRoom: number
   /**
+   * Exactly one end is an international node — a national report (or a
+   * country orb) tethered to a standard like `sna-2008`. Since 2026-08-31
+   * these links carry no spring (`INT_LINK_STIFFNESS`) and draw faded
+   * (`INT_TETHER_OPACITY`) unless traced or hovered: with ~700 of them and
+   * the springs off, they became long spokes fanning across the whole scene
+   * — the picture's loudest element, saying only "this country follows
+   * SNA". Still real edges: still in the focus set, still pulse when
+   * traced, still picked by the edge picker.
+   */
+  intTether: boolean
+  /**
    * Link spring STIFFNESS, precomputed at build time for the same reason
    * `hubRoom` is — and the lever that was missing when the unfolded view
    * collapsed into a hairball (Thomas, 2026-08-28: "when I do that I get a
@@ -214,6 +229,21 @@ const HOVER_EASE_SECONDS = 0.15
 const HOVER_EMISSIVE_LIFT = 0.3
 const HOVER_HALO_PIXELS = 48
 const HOVER_HALO_OPACITY = 0.45
+/**
+ * Standing labels (2026-08-31). A node whose edges reach ten or more
+ * different countries gets its name drawn permanently — the same gate
+ * `HUB_SPAN_GATE` uses to recognise a cross-cluster tether, and for the
+ * same reason: reaching ten countries is what makes a node a *standard*
+ * rather than somebody's release. Membership comes from `standingLabels`
+ * (hierarchy.ts) on the base graph — 16 nodes on the 2026-08-31 corpus:
+ * SNA 2008, e-GDDS, ESA 2010, BPM6, COICOP 2018, Reg 479/2009, the ES Code
+ * of Practice, the ESS peer review, SDDS, the EDP tables, HICP, the CPI
+ * manual, ISIC, GFSM, ACSS and HS — exactly the set Thomas could not tell
+ * apart in the white knot. Orbs never get one (their caption is the hover
+ * card's job), and a folded node has no position to label.
+ */
+const LABEL_PIXELS = 13
+const LABEL_DIM_OPACITY = 0.3
 /**
  * Screen-space tolerance, in pixels, for "the pointer is over this edge" —
  * shared by the missed-click picker (registerEdgePicker) and pointer-move
@@ -663,6 +693,7 @@ const FLIGHT_SECONDS = 0.75
 
 export default function InfluenceGraph({
   graph,
+  labelled,
   view,
   focus,
   visible,
@@ -678,6 +709,8 @@ export default function InfluenceGraph({
   onToggleNode,
 }: {
   graph: Graph
+  /** Ids that carry a standing label, with their priority — `standingLabels` in hierarchy.ts. */
+  labelled: ReadonlyMap<string, number>
   view: ViewSettings
   /**
    * Bumped by the Reset control. Restores the opening camera from the values
@@ -907,6 +940,31 @@ export default function InfluenceGraph({
   /** The hover glow — same sprite machinery, smaller and fainter. */
   const hoverHalo = useMemo(() => selectionHalo(), [])
   /**
+   * Standing labels for the standards — see LABEL_SPAN_GATE and
+   * `standingLabels` in hierarchy.ts. Rebuilt with the disclosed graph,
+   * since which labelled nodes are real (not folded) is a fact about the
+   * current view; the membership itself comes from the base graph.
+   */
+  const labelSprites = useMemo(() => {
+    const out = new Map<string, THREE.Sprite>()
+    for (const n of graph.nodes) {
+      if (isOrbId(n.id) || !labelled.has(n.id)) continue
+      const sprite = labelSprite(labelTextFor(n.title))
+      sprite.userData.priority = labelled.get(n.id) ?? 0
+      out.set(n.id, sprite)
+    }
+    return out
+  }, [graph, labelled])
+  useEffect(
+    () => () => {
+      for (const sprite of labelSprites.values()) {
+        ;(sprite.material as THREE.SpriteMaterial).map?.dispose()
+        sprite.material.dispose()
+      }
+    },
+    [labelSprites],
+  )
+  /**
    * Which node the pointer is over, for the 3D hover feedback. A ref, not
    * state: `useFrame` reads it every frame, and the 2D tooltip already gets
    * its own copy through `onHover` — two consumers, two channels, neither
@@ -917,6 +975,8 @@ export default function InfluenceGraph({
   const hoverAnim = useRef<{ id: string | null; t: number }>({ id: null, t: 0 })
   /** Scratch vector for the halo's world position — allocated once, not per frame. */
   const haloWorldPosition = useRef(new THREE.Vector3())
+  /** Scratch for the label overlap pass — one projection per labelled node per frame. */
+  const labelScreen = useRef(new THREE.Vector3())
   /**
    * Which edge the pointer is over, so setLinkHover can be told when that
    * changes — 2026-08-22, Thomas: hovering a line gave no cue it was
@@ -1228,6 +1288,30 @@ export default function InfluenceGraph({
      * `scripts/measure-forces.ts` mirrors this constant — change both.
      */
     const INT_LINK_STIFFNESS = 0
+    /**
+     * Opacity multiplier on an `intTether` link while nothing is traced or
+     * hovered (2026-08-31, Thomas, after seeing the springs-off layout: the
+     * fan of INT spokes was the new blob). Restored to full inside a trace
+     * (`setLinkFocus` reads `focusOpacity`) and lifted by hover as usual.
+     * Pulses on tethers are suppressed outside a trace for the same reason
+     * — the "flickers of the pulses" he complained about were mostly these.
+     */
+    const INT_TETHER_OPACITY = 0.16
+    /**
+     * The tether's direction cue is a beam, not teardrops (2026-08-31,
+     * Thomas: "the int pulses are gone and I miss them… make them beams
+     * along the edge!"). Same sweeping-band shader the continuous
+     * databases use, with `uFlowLift` letting each crest raise the faint
+     * line's alpha to this value as it passes — so the spoke itself stays
+     * at INT_TETHER_OPACITY and only the moving bands glow. Shipped at
+     * 0.45; raised to 0.68 the same evening (Thomas: "raise the crest
+     * brightness by 50%") — which also happens to match the 0.68 opacity
+     * ceiling a traced link gets in setLinkFocus, so a crest never
+     * outshines an actual trace. Obeys the
+     * Pulses toggle like every other direction cue. Teardrops never ride
+     * a tether now, traced or not: the beam IS its pulse.
+     */
+    const INT_TETHER_BEAM_LIFT = 0.68
 
     // Parallel edges between the same pair — overwhelmingly the disclosed
     // view's orb collapses (57 member edges share the EU-orb → esa-2010 pair
@@ -1258,6 +1342,9 @@ export default function InfluenceGraph({
       // defaulted: undefined (ordinary) is a different claim from a future
       // explicit `false`, even though both render identically today.
       const continuousSource = upstream?.continuous === true
+      // See INT_LINK_STIFFNESS / LinkDatum.intTether: exactly one INT end.
+      const intTether =
+        (upstream?.country === 'INT' ? 1 : 0) + (downstream?.country === 'INT' ? 1 : 0) === 1
       const existing = linkMap.get(key)
       if (existing) {
         existing.count += 1
@@ -1287,6 +1374,7 @@ export default function InfluenceGraph({
         endColour: downstream ? linkInk(downstream.country) : fallbackInk,
         cross,
         continuousSource,
+        intTether,
         count: 1,
         hubRoom:
           3.5 *
@@ -1302,10 +1390,12 @@ export default function InfluenceGraph({
           const busier = ds >= dt ? e.source_report_id : e.target_report_id
           const span = countrySpan.get(busier)?.size ?? 0
           const gated = span < HUB_SPAN_GATE ? base : base * Math.min(1, HUB_LINK_KNEE / Math.max(ds, dt))
-          // See INT_LINK_STIFFNESS. Exactly one INT end — an INT↔INT link
-          // is the standards holding each other, and keeps its spring.
-          const intEnds = (upstream?.country === 'INT' ? 1 : 0) + (downstream?.country === 'INT' ? 1 : 0)
-          return intEnds === 1 ? gated * INT_LINK_STIFFNESS : gated
+          // See INT_LINK_STIFFNESS. An INT↔INT link is the standards holding
+          // each other, and keeps its spring. The folded International ORB's
+          // tethers are springless like any other — it is *placed* instead,
+          // by `intAnchorForce` (lib/intAnchor.ts), because springs on a
+          // 700-degree orb move the countries, not the orb.
+          return intTether ? gated * INT_LINK_STIFFNESS : gated
         })(),
         key,
       })
@@ -1340,21 +1430,25 @@ export default function InfluenceGraph({
       // and the width boost below are the "bolder" half of the treatment, the
       // blinking pulse is the other.
       const baseOpacity = LINK_OPACITY * (l.cross ? 1.3 : 1)
-      linkMaterials.current.set(
-        l.key,
-        gradientLinkMaterial(
-          // The LINE draws in a softened shade of the ink; the pulse riding
-          // it draws brighter (see edgeShade/PULSE_BRIGHTEN in linkVisuals) —
-          // the datum keeps the PURE ink so pulses derive from the true hue.
-          edgeShade(l.colour),
-          edgeShade(l.endColour),
-          false,
-          Math.min(0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count))),
-          // The beam flag — see LinkDatum.continuousSource and
-          // gradientLinkMaterial's own doc comment.
-          l.continuousSource,
-        ),
+      const fullOpacity = Math.min(0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count)))
+      const material = gradientLinkMaterial(
+        // The LINE draws in a softened shade of the ink; the pulse riding
+        // it draws brighter (see edgeShade/PULSE_BRIGHTEN in linkVisuals) —
+        // the datum keeps the PURE ink so pulses derive from the true hue.
+        edgeShade(l.colour),
+        edgeShade(l.endColour),
+        false,
+        // A tether rests faded (see INT_TETHER_OPACITY) …
+        l.intTether ? fullOpacity * INT_TETHER_OPACITY : fullOpacity,
+        // The beam flag — see LinkDatum.continuousSource and
+        // gradientLinkMaterial's own doc comment. A tether carries the
+        // beam too (INT_TETHER_BEAM_LIFT), as its only direction cue.
+        l.continuousSource || l.intTether,
+        l.intTether ? INT_TETHER_BEAM_LIFT : 0,
       )
+      // … and comes back to full inside a trace — see setLinkFocus.
+      material.userData.focusOpacity = fullOpacity
+      linkMaterials.current.set(l.key, material)
     }
 
     // Geometry and material for a link's pulses. three-forcegraph reads only
@@ -1812,6 +1906,11 @@ export default function InfluenceGraph({
       'clusterRepulsion',
       clusterRepulsionForce(clusterRepulsionStrength) as unknown as never,
     )
+
+    // The folded International orb is placed at the centroid of everything
+    // else rather than sprung to it — see `lib/intAnchor.ts` for why neither
+    // "springless" nor "springs back on" gave an honest tier-2 picture.
+    fg.d3Force('intAnchor', intAnchorForce() as unknown as never)
 
     return fg
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -2756,7 +2855,12 @@ export default function InfluenceGraph({
     applyFocus()
 
     forceGraph.linkDirectionalParticles((l: object) =>
-      view.showPulses && !(l as LinkDatum).continuousSource && litLink(l as LinkDatum)
+      view.showPulses &&
+      !(l as LinkDatum).continuousSource &&
+      litLink(l as LinkDatum) &&
+      // A tether's direction cue is its beam — never teardrops. See
+      // INT_TETHER_BEAM_LIFT.
+      !(l as LinkDatum).intTether
         ? pulseCount((l as LinkDatum).upstreamCadence)
         : 0,
     )
@@ -2767,7 +2871,7 @@ export default function InfluenceGraph({
     // `gradientLinkMaterial` always constructs with `uFlow` off (see its own
     // comment) so this effect, which fires on mount, is what turns it on.
     for (const l of linkDataRef.current) {
-      if (!l.continuousSource) continue
+      if (!l.continuousSource && !l.intTether) continue
       const material = linkMaterials.current.get(l.key)
       if (material) setLinkFlow(material, view.showPulses)
     }
@@ -3122,6 +3226,56 @@ export default function InfluenceGraph({
       hoverHalo.visible = false
     }
 
+    // Standing labels — placed from `positionedById` for the same (0,0,0)
+    // reason as the halos, held at LABEL_PIXELS tall, dimmed with their node
+    // when a trace excludes it.
+    // Two labels on top of each other read as neither, and the EU
+    // standards sit in one tight knot — so higher-priority names win and
+    // the loser hides until the view separates them. Greedy over a dozen
+    // rectangles; nothing here scales with the corpus.
+    const placed: { x: number; y: number; w: number; h: number }[] = []
+    for (const [id, sprite] of [...labelSprites].sort(
+      (a, b) => (b[1].userData.priority as number) - (a[1].userData.priority as number),
+    )) {
+      const node = positionedById.current.get(id)
+      if (!node || !Number.isFinite(node.x) || !shownNode(id)) {
+        sprite.visible = false
+        continue
+      }
+      haloWorldPosition.current.set(node.x, node.y, node.z)
+      labelScreen.current.copy(haloWorldPosition.current).project(camera)
+      if (labelScreen.current.z > 1) {
+        sprite.visible = false
+        continue
+      }
+      const w = LABEL_PIXELS * ((sprite.userData.aspect as number) || 4)
+      const rect = {
+        x: ((labelScreen.current.x + 1) / 2) * size.width,
+        y: ((1 - labelScreen.current.y) / 2) * size.height - LABEL_PIXELS * 1.25,
+        w,
+        h: LABEL_PIXELS,
+      }
+      const collides = placed.some(
+        (p) => Math.abs(p.x - rect.x) < (p.w + rect.w) / 2 && Math.abs(p.y - rect.y) < (p.h + rect.h),
+      )
+      if (collides) {
+        sprite.visible = false
+        continue
+      }
+      placed.push(rect)
+      const lit = !focusRef.current || focusRef.current.nodes.has(id)
+      ;(sprite.material as THREE.SpriteMaterial).opacity = lit ? 1 : LABEL_DIM_OPACITY
+      placeLabel(
+        sprite,
+        haloWorldPosition.current,
+        camera.position,
+        (FOV * Math.PI) / 360,
+        size.height,
+        LABEL_PIXELS,
+      )
+      sprite.visible = true
+    }
+
     // Node meshes are created lazily by the library, and can be recreated
     // without warning. A size change means the set we last styled is not the
     // set now on screen, so the focus has to be laid on again.
@@ -3303,6 +3457,9 @@ export default function InfluenceGraph({
     <>
       <primitive object={halo} />
       <primitive object={hoverHalo} />
+      {[...labelSprites].map(([id, sprite]) => (
+        <primitive key={id} object={sprite} />
+      ))}
       <primitive
         object={forceGraph}
         onPointerMove={handlePointerMove}

@@ -29,39 +29,11 @@
       "evidence_url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf"
     },
     {
-      "source_report_id": "mu-national-accounts",
-      "target_report_id": "imf-sdds-plus",
-      "relationship_type": "methodology_depends_on",
-      "basis": "IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's own National Summary Data Page (NSDP, last updated 18 August 2026) names national accounts among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.",
-      "evidence_url": "https://statsmauritius.govmu.org/"
-    },
-    {
-      "source_report_id": "mu-statsmauritius-cpi",
-      "target_report_id": "imf-sdds-plus",
-      "relationship_type": "methodology_depends_on",
-      "basis": "IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's NSDP (last updated 18 August 2026) names the CPI among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.",
-      "evidence_url": "https://statsmauritius.govmu.org/"
-    },
-    {
       "source_report_id": "af-bop",
       "target_report_id": "imf-e-gdds",
       "relationship_type": "methodology_depends_on",
       "basis": "Da Afghanistan Bank's own External Sector Statistics page titles its balance-of-payments file 'Balance of Payments Transactions (BPM6)' (latest posted period Q1 2021, portal otherwise dormant). Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node. Raw-verified 2026-08-22.",
       "evidence_url": "https://dab.gov.af/External-Sector-Statistics1"
-    },
-    {
-      "source_report_id": "iq-bop",
-      "target_report_id": "imf-e-gdds",
-      "relationship_type": "methodology_depends_on",
-      "basis": "IMF DSBB Balance of Payments DQAF (Iraq): 'Transactions are classified largely in accordance with BPM6.' Category-level metadata beyond the existing iq-cso -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render).",
-      "evidence_url": "https://dsbb.imf.org/"
-    },
-    {
-      "source_report_id": "ir-national-accounts",
-      "target_report_id": "imf-e-gdds",
-      "relationship_type": "methodology_depends_on",
-      "basis": "IMF DSBB National Accounts DQAF (Iran, updated 6 August 2012): the Central Bank of Iran compiles accounts 'based on ... SNA 1968 and 1993' — an honest, dated SNA-vintage disclosure (not SNA 2008), distinct from the existing ir-sci -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render). Minor discrepancy noted, non-blocking: Grok's basis cited this DQAF page as also carrying a '15 December 2009' update date matching Iraq's; the live Iraq DQAF page instead showed 'Last Updated: Jan 08, 2018' — does not affect this Iran quote or edge.",
-      "evidence_url": "https://dsbb.imf.org/"
     }
   ],
   "relations": [],
@@ -72,6 +44,34 @@
       "target": "imf-e-gdds",
       "reason": "caveat",
       "why": "Grok's redo cited IMF Country Report No. 06/251 (Islamic Republic of Afghanistan, Seventh Review Under the SMP / PRGF request, July 2006) for two supporting quotes: a MEFP (Attachment II) sentence on 'drafting the metadata necessary to participate in the General Data Dissemination System', and a separate Executive Director statement that 'STA has indicated ... Afghanistan will imminently become a participant in the General Data Dissemination Standards (GDDS)'. The correct 89-page document was located and read (Chrome + Google Docs Viewer proxy, since imf.org 403s WebFetch/curl/Wayback). Full-document accessibility-tree search for 'GDDS', 'General Data Dissemination', 'General Data Dissemination System', 'Dissemination Standards', and 'imminently' returned zero matches. This is the second consecutive round this exact claim has failed verification; the existing af-nsia -> imf-e-gdds edge (minted round 1/2) already carries the same 'quote could not be independently retrieved' caveat and is left unchanged."
+    },
+    {
+      "edge": "mu-national-accounts -> imf-sdds-plus",
+      "source": "mu-national-accounts",
+      "target": "imf-sdds-plus",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://statsmauritius.govmu.org/. Original basis: \"IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's own National Summary Data Page (NSDP, last updated 18 August 2026) names national accounts among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "mu-statsmauritius-cpi -> imf-sdds-plus",
+      "source": "mu-statsmauritius-cpi",
+      "target": "imf-sdds-plus",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://statsmauritius.govmu.org/. Original basis: \"IMF PR 26/077 (16 March 2026): Mauritius is 'the first country in Africa and the 32nd country globally' to adhere to SDDS Plus; Statistics Mauritius's NSDP (last updated 18 August 2026) names the CPI among the series disseminated under this adherence. Thomas's merge call 2026-08-22: kept alongside the existing institutional mu-statsmauritius -> imf-sdds-plus edge as an additional series-level edge rather than a replacement. Quotes raw-verified 2026-08-22.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "iq-bop -> imf-e-gdds",
+      "source": "iq-bop",
+      "target": "imf-e-gdds",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://dsbb.imf.org/. Original basis: \"IMF DSBB Balance of Payments DQAF (Iraq): 'Transactions are classified largely in accordance with BPM6.' Category-level metadata beyond the existing iq-cso -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render).\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "ir-national-accounts -> imf-e-gdds",
+      "source": "ir-national-accounts",
+      "target": "imf-e-gdds",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://dsbb.imf.org/. Original basis: \"IMF DSBB National Accounts DQAF (Iran, updated 6 August 2012): the Central Bank of Iran compiles accounts 'based on ... SNA 1968 and 1993' — an honest, dated SNA-vintage disclosure (not SNA 2008), distinct from the existing ir-sci -> imf-e-gdds important-dates row. Quote raw-verified 2026-08-22 (dsbb.imf.org, via Chrome after JS render). Minor discrepancy noted, non-blocking: Grok's basis cited this DQAF page as also carrying a '15 December 2009' update date matching Iraq's; the live Iraq DQAF page instead showed 'Last Updated: Jan 08, 2018' — does not affect this Iran quote or edge.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

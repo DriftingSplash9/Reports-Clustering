@@ -133,14 +133,6 @@
       "evidence": "documented"
     },
     {
-      "source_report_id": "ph-disaster-impact",
-      "target_report_id": "un-fdes-2013",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PSA's Compendium of Philippine Environment Statistics, Component 4 (Extreme Events and Disasters) states its data come from the Office of Civil Defense and the compendium is an adoption of the UN FDES 2013 framework.",
-      "evidence_url": "https://psa.gov.ph/content/compendium-philippine-environment-statistics-2015-2024-component-4-extreme-events-and",
-      "evidence": "documented"
-    },
-    {
       "source_report_id": "ph-forest",
       "target_report_id": "un-fdes-2013",
       "relationship_type": "methodology_depends_on",
@@ -405,22 +397,6 @@
       "evidence": "documented"
     },
     {
-      "source_report_id": "ph-disaster-impact",
-      "target_report_id": "ph-pagasa",
-      "relationship_type": "uses_data_from",
-      "basis": "National disaster impact figures for tropical cyclones use PAGASA's annual tropical cyclone summary.",
-      "evidence_url": "https://pubfiles.pagasa.dost.gov.ph/pagasaweb/files/tamss/weather/tcsummary/PAGASA_ARTC_2022-compressed.pdf",
-      "evidence": "documented"
-    },
-    {
-      "source_report_id": "ph-disaster-impact",
-      "target_report_id": "ph-ndrrmc-sitrep",
-      "relationship_type": "uses_data_from",
-      "basis": "Disaster impact figures (casualties, cost of damage) are sourced from NDRRMC situation reports.",
-      "evidence_url": "https://pubfiles.pagasa.dost.gov.ph/tamss/weather/tc_summary/PAGASA_ARTC_2020.pdf",
-      "evidence": "documented"
-    },
-    {
       "source_report_id": "ph-remittances-canada",
       "target_report_id": "ph-bsp-ofw-remittances",
       "relationship_type": "calculated_from",
@@ -682,6 +658,27 @@
       "target": "ph-btr-cash-operations",
       "reason": "note",
       "why": "RECLASSIFIED 2026-08-29 (was miscoded as resolved — resolved requires a real live edge matching this exact (source,target), and ph-btr-cash-operations was never minted as a separate node, so no such edge can exist; this is a 'note'-type observation about the corpus instead, per the validator's 'caveat/resolved note with no matching live edge' check). Original reasoning follows.\n\nGrok proposed 'ph-btr-cash-operations' as a new node (Bureau of the Treasury's National Government Cash Operations Report), but that report IS the existing ph-fiscal-ops node itself (see its _url_evidence: 'Bureau of the Treasury National Government Cash Operations page...'). Self-referential duplicate; no new node minted, no edge added. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "ph-disaster-impact -> un-fdes-2013",
+      "source": null,
+      "target": "un-fdes-2013",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ph-disaster-impact carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original evidence_url: https://psa.gov.ph/content/compendium-philippine-environment-statistics-2015-2024-component-4-extreme-events-and. Original basis: \"PSA's Compendium of Philippine Environment Statistics, Component 4 (Extreme Events and Disasters) states its data come from the Office of Civil Defense and the compendium is an adoption of the UN FDES 2013 framework.\""
+    },
+    {
+      "edge": "ph-disaster-impact -> ph-pagasa",
+      "source": null,
+      "target": "ph-pagasa",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ph-disaster-impact carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: uses_data_from. Original evidence_url: https://pubfiles.pagasa.dost.gov.ph/pagasaweb/files/tamss/weather/tcsummary/PAGASA_ARTC_2022-compressed.pdf. Original basis: \"National disaster impact figures for tropical cyclones use PAGASA's annual tropical cyclone summary.\""
+    },
+    {
+      "edge": "ph-disaster-impact -> ph-ndrrmc-sitrep",
+      "source": null,
+      "target": "ph-ndrrmc-sitrep",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ph-disaster-impact carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: uses_data_from. Original evidence_url: https://pubfiles.pagasa.dost.gov.ph/tamss/weather/tc_summary/PAGASA_ARTC_2020.pdf. Original basis: \"Disaster impact figures (casualties, cost of damage) are sourced from NDRRMC situation reports.\""
     }
   ]
 }

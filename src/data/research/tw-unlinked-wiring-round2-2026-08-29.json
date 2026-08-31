@@ -202,14 +202,6 @@
       "evidence": "documented"
     },
     {
-      "source_report_id": "tw-ecfa-early-harvest",
-      "target_report_id": "tw-ecfa",
-      "relationship_type": "cites",
-      "basis": "MAC news release on ECFA early harvest cites the parent ECFA agreement.",
-      "evidence_url": "https://www.mac.gov.tw/en/News_Content.aspx?n=4F4015F83BD0E00B&sms=E828F60C4AFBAF90&s=9C9D3224A8F470BA",
-      "evidence": "documented"
-    },
-    {
       "source_report_id": "tw-science-parks-revenue",
       "target_report_id": "tw-hsinchu-science-park",
       "relationship_type": "uses_data_from",
@@ -764,6 +756,13 @@
       "target": "tw-trade-statistics",
       "reason": "resolved",
       "why": "CORRECTED 2026-08-29 (target id fixed — 'tw-mof-trade-statistics' was never a real node id, it was Grok's alias for the existing corpus node tw-trade-statistics; the validator flagged this resolved-note as having no matching live edge because it named the alias, not the real id. Retargeted to tw-trade-statistics, which the live edge tw-cross-strait-trade-share->tw-trade-statistics genuinely matches — reason stays resolved since that edge is real.) Original reasoning follows.\n\nGrok proposed this as a new node/edge (calculated_from), but tw-mof-trade-statistics is the same report as the existing corpus node tw-trade-statistics, and tw-cross-strait-trade-share->tw-trade-statistics (uses_data_from) already exists in the live graph, sourced from the same MAC flash report. No separate node/edge needed. See project memory unlinked_nodes_wiring_round6_2026-08-29.md for full context."
+    },
+    {
+      "edge": "tw-ecfa-early-harvest -> tw-ecfa",
+      "source": "tw-ecfa-early-harvest",
+      "target": null,
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): tw-ecfa is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.mac.gov.tw/en/News_Content.aspx?n=4F4015F83BD0E00B&sms=E828F60C4AFBAF90&s=9C9D3224A8F470BA). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original basis: \"MAC news release on ECFA early harvest cites the parent ECFA agreement.\""
     }
   ]
 }

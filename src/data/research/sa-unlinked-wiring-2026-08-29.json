@@ -46,13 +46,6 @@
       "relationship_type": "methodology_depends_on",
       "basis": "SAMA's Rulebook section on Credit Risk Management / Prudential Treatment of Problem Assets, which defines the non-performing-loan (NPL) classification that underlies SAMA's banking asset-quality statistics, states: \"Non-performing loans: As stipulated in BCBS 403 'Guidelines – Prudential treatment of problem assets – definitions of non-performing exposures and forbearance' endorsed by SAMA through circular no. 381000099757 dated 23/09/1438AH.\" BCBS 403 is a Basel Committee on Banking Supervision (BIS) guideline, i.e. part of the Basel Framework, and SAMA states it has formally endorsed/adopted it as the basis for its own NPL definitions.",
       "evidence_url": "https://rulebook.sama.gov.sa/en/entiresection/4540"
-    },
-    {
-      "source_report_id": "sa-ghg",
-      "target_report_id": "sa-population",
-      "relationship_type": "uses_data_from",
-      "basis": "Saudi Arabia's Fourth National Communication (NC4) to the UNFCCC — the underlying national submission behind the compiled GHG-profile figures represented by the sa-ghg node — states in its National Circumstances chapter: \"The total population of Saudi Arabia in 2019 stands at 34.2 million out of which males were 19.7 million and females are 14.5 million.\" cited to (GASTAT, 2019), with further demographic detail also cited to GASTAT 2018/2019. This shows the national GHG-inventory report draws its population figures (needed for per-capita emissions and national-circumstances framing) directly from GASTAT population statistics.",
-      "evidence_url": "https://unfccc.int/sites/default/files/resource/7123846_Saudi%20Arabia-NC4-1-Fourth%20National%20Communication%20NC4%20Kingdom%20of%20Saudi%20Arabia%20March%202022.pdf"
     }
   ],
   "_dropped": [
@@ -76,6 +69,13 @@
       "target": "who-icd-10",
       "reason": "no-document",
       "why": "Fetched the sa-health node's own source, WHO's country data page for Saudi Arabia (data.who.int/countries/682). It states: 'The lack of complete and reliable mortality data... necessitates the application of modelling to estimate life expectancy' and, on cause-of-death data specifically: 'Death registration data is unavailable or unusable for Saudi Arabia due to quality issues. Estimates of mortality by cause should be interpreted with caution,' with estimates instead 'produced using data from multiple sources, including national vital registration data, latest estimates from WHO technical programmes, United Nations partners and inter-agency groups, as well as the Global Burden of Disease and other scientific studies.' No sentence on this page names ICD-10, or any other single corpus-listed standard, as the basis for Saudi Arabia's figures specifically — the page's own framing undercuts a clean vital-registration-based dependency claim for this country. Also checked the UNFCCC GHG profile PDF (https://di.unfccc.int/ghg_profiles/nonAnnexOne/SAU/SAU_ghg_profile.pdf) as a possible cross-link, which contains only data tables with no methodology text at all."
+    },
+    {
+      "edge": "sa-ghg -> sa-population",
+      "source": null,
+      "target": "sa-population",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): sa-ghg carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: uses_data_from. Original evidence_url: https://unfccc.int/sites/default/files/resource/7123846_Saudi%20Arabia-NC4-1-Fourth%20National%20Communication%20NC4%20Kingdom%20of%20Saudi%20Arabia%20March%202022.pdf. Original basis: \"Saudi Arabia's Fourth National Communication (NC4) to the UNFCCC — the underlying national submission behind the compiled GHG-profile figures represented by the sa-ghg node — states in its National Circumstances chapter: \"The total population of Saudi Arabia in 2019 stands at 34.2 million out of which males were 19.7 million and females are 14.5 million.\" cited to (GASTAT, 2019), with further demographic detail also cited to GASTAT 2018/2019. This shows the national GHG-inventory report draws its population figures (needed for per-capita emissions and national-circumstances framing) directly from GASTAT population statistics.\""
     }
   ]
 }

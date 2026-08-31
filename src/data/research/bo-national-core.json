@@ -554,153 +554,6 @@
   ],
   "dependencies": [
     {
-      "source_report_id": "bo-pobreza",
-      "target_report_id": "bo-eh",
-      "relationship_type": "uses_data_from",
-      "basis": "Monetary poverty is calculated from Encuesta de Hogares (EH) household income data.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-pobreza",
-      "target_report_id": "bo-lineas-pobreza",
-      "relationship_type": "uses_data_from",
-      "basis": "Poverty status is determined by comparing per-capita household income against the official poverty lines.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-lineas-pobreza",
-      "target_report_id": "bo-ipc",
-      "relationship_type": "uses_data_from",
-      "basis": "Poverty lines (the cost of a basic basket) are updated using consumer price data from the IPC.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-gini",
-      "target_report_id": "bo-eh",
-      "relationship_type": "uses_data_from",
-      "basis": "The Gini coefficient is computed from the same household income distribution captured by EH.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-bop",
-      "target_report_id": "bo-comercio-exterior",
-      "relationship_type": "uses_data_from",
-      "basis": "Merchandise trade flows (Estadísticas de Comercio Exterior) are a primary input into the goods account of the balance of payments. [Direction corrected from Grok's original draft, which had this reversed.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-comercio-exterior",
-      "target_report_id": "bo-gas",
-      "relationship_type": "calculated_from",
-      "basis": "Total merchandise export figures are the sum of commodity-level series, including natural gas exports. [Corrected from Grok's original 'part_of' edge — part_of is a containment field on the Report, not a dependency edge; the real relationship here is aggregation.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-comercio-exterior",
-      "target_report_id": "bo-minerales",
-      "relationship_type": "calculated_from",
-      "basis": "Total merchandise export figures are the sum of commodity-level series, including minerals (gold, silver, zinc, tin). [Corrected from Grok's original 'part_of' edge, same reasoning as the gas edge above.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-comercio-exterior",
-      "target_report_id": "bo-soya",
-      "relationship_type": "calculated_from",
-      "basis": "Total merchandise export figures are the sum of commodity-level series, including soy and derivatives. [Corrected from Grok's original 'part_of' edge, same reasoning.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-comercio-exterior",
-      "target_report_id": "bo-manufactura",
-      "relationship_type": "calculated_from",
-      "basis": "Total merchandise export figures are the sum of commodity-level series, including manufactured/processed goods. [Corrected from Grok's original 'part_of' edge, same reasoning.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-idh",
-      "target_report_id": "bo-gas",
-      "relationship_type": "uses_data_from",
-      "basis": "IDH (Impuesto Directo a los Hidrocarburos) revenues are calculated from hydrocarbon production and export volumes.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-renta-dignidad",
-      "target_report_id": "bo-idh",
-      "relationship_type": "uses_data_from",
-      "basis": "Renta Dignidad's financing has historically drawn substantially on hydrocarbon rents, including IDH revenue.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-renta-dignidad",
-      "target_report_id": "bo-poblacion-65",
-      "relationship_type": "uses_data_from",
-      "basis": "Renta Dignidad's beneficiary universe and coverage calculations are based on the 65+ population figures. [Corrected from Grok's original 'related_to' edge — related_to isn't a valid relationship_type; this is a genuine data-lineage relationship once stated precisely.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-presupuesto",
-      "target_report_id": "bo-idh",
-      "relationship_type": "uses_data_from",
-      "basis": "IDH and hydrocarbon royalties are material revenue lines in the national budget.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-presupuesto",
-      "target_report_id": "bo-recaudacion",
-      "relationship_type": "uses_data_from",
-      "basis": "Budgeted and executed revenue depends on tax and customs collection figures. [Corrected from Grok's original 'part_of' edge — direction and type both adjusted.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-presupuesto",
-      "target_report_id": "bo-deuda-publica",
-      "relationship_type": "uses_data_from",
-      "basis": "Public debt service and new financing are reported as part of budget execution. [Corrected from Grok's original 'related_to' edge — related_to isn't a valid relationship_type.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-informalidad",
-      "target_report_id": "bo-eh",
-      "relationship_type": "uses_data_from",
-      "basis": "Labour informality rates are derived from the household-survey employment module.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-empleo-formal",
-      "target_report_id": "bo-eh",
-      "relationship_type": "uses_data_from",
-      "basis": "Formal employment statistics are derived from the same household-survey employment module as informality. [Added — Grok's original 'complements' edge to bo-informalidad wasn't a real data dependency; this is the actual underlying lineage.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-bop",
-      "target_report_id": "bo-remesas",
-      "relationship_type": "uses_data_from",
-      "basis": "Remittances are the dominant component of secondary income in the balance of payments. [Corrected from Grok's original 'part_of' edge and direction — treated as a data input rather than asserting literal containment, which wasn't confirmed.]",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-nbi",
-      "target_report_id": "bo-vivienda",
-      "relationship_type": "uses_data_from",
-      "basis": "Housing and basic-services deprivation indicators are core components of the NBI structural-poverty index.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-inseguridad-alimentaria",
-      "target_report_id": "bo-eh",
-      "relationship_type": "uses_data_from",
-      "basis": "Food-insecurity indicators (ELCSA scale) are collected as part of the household survey.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
-      "source_report_id": "bo-mortalidad-infantil",
-      "target_report_id": "bo-salud",
-      "relationship_type": "uses_data_from",
-      "basis": "Infant and neonatal mortality outcomes are reported as part of the health system's core indicators.",
-      "evidence_url": "https://www.ine.gob.bo/"
-    },
-    {
       "source_report_id": "bo-bop",
       "target_report_id": "imf-bpm6",
       "relationship_type": "methodology_depends_on",
@@ -904,6 +757,153 @@
       "target": "bo-censo",
       "reason": "note",
       "why": "Redundant with the part_of field now set on this node pointing at bo-censo — a dependency edge between a node and its own container is invalid per spec rule 5."
+    },
+    {
+      "edge": "bo-pobreza -> bo-eh",
+      "source": "bo-pobreza",
+      "target": "bo-eh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Monetary poverty is calculated from Encuesta de Hogares (EH) household income data.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-pobreza -> bo-lineas-pobreza",
+      "source": "bo-pobreza",
+      "target": "bo-lineas-pobreza",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Poverty status is determined by comparing per-capita household income against the official poverty lines.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-lineas-pobreza -> bo-ipc",
+      "source": "bo-lineas-pobreza",
+      "target": "bo-ipc",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Poverty lines (the cost of a basic basket) are updated using consumer price data from the IPC.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-gini -> bo-eh",
+      "source": "bo-gini",
+      "target": "bo-eh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"The Gini coefficient is computed from the same household income distribution captured by EH.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-bop -> bo-comercio-exterior",
+      "source": "bo-bop",
+      "target": "bo-comercio-exterior",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Merchandise trade flows (Estadísticas de Comercio Exterior) are a primary input into the goods account of the balance of payments. [Direction corrected from Grok's original draft, which had this reversed.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-comercio-exterior -> bo-gas",
+      "source": "bo-comercio-exterior",
+      "target": "bo-gas",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: calculated_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Total merchandise export figures are the sum of commodity-level series, including natural gas exports. [Corrected from Grok's original 'part_of' edge — part_of is a containment field on the Report, not a dependency edge; the real relationship here is aggregation.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-comercio-exterior -> bo-minerales",
+      "source": "bo-comercio-exterior",
+      "target": "bo-minerales",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: calculated_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Total merchandise export figures are the sum of commodity-level series, including minerals (gold, silver, zinc, tin). [Corrected from Grok's original 'part_of' edge, same reasoning as the gas edge above.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-comercio-exterior -> bo-soya",
+      "source": "bo-comercio-exterior",
+      "target": "bo-soya",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: calculated_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Total merchandise export figures are the sum of commodity-level series, including soy and derivatives. [Corrected from Grok's original 'part_of' edge, same reasoning.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-comercio-exterior -> bo-manufactura",
+      "source": "bo-comercio-exterior",
+      "target": "bo-manufactura",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: calculated_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Total merchandise export figures are the sum of commodity-level series, including manufactured/processed goods. [Corrected from Grok's original 'part_of' edge, same reasoning.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-idh -> bo-gas",
+      "source": "bo-idh",
+      "target": "bo-gas",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"IDH (Impuesto Directo a los Hidrocarburos) revenues are calculated from hydrocarbon production and export volumes.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-renta-dignidad -> bo-idh",
+      "source": "bo-renta-dignidad",
+      "target": "bo-idh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Renta Dignidad's financing has historically drawn substantially on hydrocarbon rents, including IDH revenue.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-renta-dignidad -> bo-poblacion-65",
+      "source": "bo-renta-dignidad",
+      "target": "bo-poblacion-65",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Renta Dignidad's beneficiary universe and coverage calculations are based on the 65+ population figures. [Corrected from Grok's original 'related_to' edge — related_to isn't a valid relationship_type; this is a genuine data-lineage relationship once stated precisely.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-presupuesto -> bo-idh",
+      "source": "bo-presupuesto",
+      "target": "bo-idh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"IDH and hydrocarbon royalties are material revenue lines in the national budget.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-presupuesto -> bo-recaudacion",
+      "source": "bo-presupuesto",
+      "target": "bo-recaudacion",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Budgeted and executed revenue depends on tax and customs collection figures. [Corrected from Grok's original 'part_of' edge — direction and type both adjusted.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-presupuesto -> bo-deuda-publica",
+      "source": "bo-presupuesto",
+      "target": "bo-deuda-publica",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Public debt service and new financing are reported as part of budget execution. [Corrected from Grok's original 'related_to' edge — related_to isn't a valid relationship_type.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-informalidad -> bo-eh",
+      "source": "bo-informalidad",
+      "target": "bo-eh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Labour informality rates are derived from the household-survey employment module.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-empleo-formal -> bo-eh",
+      "source": "bo-empleo-formal",
+      "target": "bo-eh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Formal employment statistics are derived from the same household-survey employment module as informality. [Added — Grok's original 'complements' edge to bo-informalidad wasn't a real data dependency; this is the actual underlying lineage.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-bop -> bo-remesas",
+      "source": "bo-bop",
+      "target": "bo-remesas",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Remittances are the dominant component of secondary income in the balance of payments. [Corrected from Grok's original 'part_of' edge and direction — treated as a data input rather than asserting literal containment, which wasn't confirmed.]\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-nbi -> bo-vivienda",
+      "source": "bo-nbi",
+      "target": "bo-vivienda",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Housing and basic-services deprivation indicators are core components of the NBI structural-poverty index.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-inseguridad-alimentaria -> bo-eh",
+      "source": "bo-inseguridad-alimentaria",
+      "target": "bo-eh",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Food-insecurity indicators (ELCSA scale) are collected as part of the household survey.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-mortalidad-infantil -> bo-salud",
+      "source": "bo-mortalidad-infantil",
+      "target": "bo-salud",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Infant and neonatal mortality outcomes are reported as part of the health system's core indicators.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

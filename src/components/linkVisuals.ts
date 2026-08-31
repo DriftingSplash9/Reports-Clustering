@@ -98,6 +98,13 @@ export interface GradientLinkMaterial extends THREE.ShaderMaterial {
      * a global constant, or every trace would flatten the trunks.
      */
     litOpacity: number
+    /**
+     * The opacity a trace restores instead of `litOpacity`, where the two
+     * differ — set on `intTether` links (InfluenceGraph.tsx), which rest
+     * faded and only read at full strength as part of a traced chain.
+     * Absent on every other link, meaning "same as litOpacity".
+     */
+    focusOpacity?: number
   }
 }
 
@@ -133,6 +140,8 @@ export function gradientLinkMaterial(
   dashed = false,
   litOpacity = LINK_OPACITY,
   beam = false,
+  /** Crest alpha lift for a beam on a faint line — see `uFlowLift` in FRAGMENT. */
+  flowLift = 0,
 ): GradientLinkMaterial {
   const fromColour = new THREE.Color(from)
   const toColour = new THREE.Color(to)
@@ -151,6 +160,7 @@ export function gradientLinkMaterial(
       // vs `uOpacity` elsewhere in this file.
       uFlow: { value: 0 },
       uFlowTime: { value: 0 },
+      uFlowLift: { value: flowLift },
       uHover: { value: 0 },
     },
     vertexShader: VERTEX,
@@ -236,12 +246,12 @@ export function setLinkFocus(
   lit: boolean,
   tracing = false,
 ) {
-  const { from, to, litOpacity } = material.userData
+  const { from, to, litOpacity, focusOpacity } = material.userData
   material.uniforms.uFrom.value.copy(lit ? from : dim.colour)
   material.uniforms.uTo.value.copy(lit ? to : dim.colour)
   material.uniforms.uOpacity.value = lit
     ? tracing
-      ? Math.min(0.68, litOpacity * 2.2)
+      ? Math.min(0.68, (focusOpacity ?? litOpacity) * 2.2)
       : litOpacity
     : dim.opacity
   material.depthTest = !(lit && tracing)

@@ -63,22 +63,7 @@
       ]
     }
   ],
-  "dependencies": [
-    {
-      "source_report_id": "sadc-hcpi-newsletter",
-      "target_report_id": "ao-ine-ipcn",
-      "relationship_type": "uses_data_from",
-      "basis": "Direction and relationship_type match the established sadc-hcpi-newsletter -> country-CPI pattern used for the 8 SADC countries wired in G.15 (the regional index is built FROM each country's own national CPI). Angola's own ao-ine-sen2018-report states verbatim that INE sends data to SADC for compilation into the SADC Harmonised CPI.",
-      "evidence_url": "https://www.ine.gov.ao/"
-    },
-    {
-      "source_report_id": "ao-lei-14-24-nova-divisao",
-      "target_report_id": "ao-lei-administracao-local-15-16",
-      "relationship_type": "cites",
-      "basis": "The 2024 reorganisation law creating the three new provinces operates within the same subordinate-budgeting framework already established by Lei n.º 15/16 — the new provinces' governors are appointed and their budgets remain subject to the same Art. 21 OGE-subordination rule.",
-      "evidence_url": "https://www.governo.gov.ao/"
-    }
-  ],
+  "dependencies": [],
   "_dropped": [
     {
       "edge": "ao-ine-sen2018-report -> ceeac-statistics",
@@ -86,6 +71,20 @@
       "target": null,
       "reason": "no-document",
       "why": "CEEAC/ECCAS (the other major regional bloc Angola belongs to) was searched for a statistical-harmonisation citation comparable to the SADC one — none found this round."
+    },
+    {
+      "edge": "sadc-hcpi-newsletter -> ao-ine-ipcn",
+      "source": "sadc-hcpi-newsletter",
+      "target": "ao-ine-ipcn",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gov.ao/. Original basis: \"Direction and relationship_type match the established sadc-hcpi-newsletter -> country-CPI pattern used for the 8 SADC countries wired in G.15 (the regional index is built FROM each country's own national CPI). Angola's own ao-ine-sen2018-report states verbatim that INE sends data to SADC for compilation into the SADC Harmonised CPI.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "ao-lei-14-24-nova-divisao -> ao-lei-administracao-local-15-16",
+      "source": "ao-lei-14-24-nova-divisao",
+      "target": "ao-lei-administracao-local-15-16",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: cites. Original evidence_url: https://www.governo.gov.ao/. Original basis: \"The 2024 reorganisation law creating the three new provinces operates within the same subordinate-budgeting framework already established by Lei n.º 15/16 — the new provinces' governors are appointed and their budgets remain subject to the same Art. 21 OGE-subordination rule.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

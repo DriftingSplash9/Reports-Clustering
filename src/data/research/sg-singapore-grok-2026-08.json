@@ -727,26 +727,6 @@
       ]
     },
     {
-      "source_report_id": "sg-yearbook-of-statistics",
-      "target_report_id": "sg-gdp",
-      "relationship_type": "uses_data_from",
-      "basis": "The Yearbook of Statistics Singapore draws its national-accounts series (including GDP by industry and expenditure) from the official estimates compiled and published by the Singapore Department of Statistics.",
-      "evidence_url": "https://www.singstat.gov.sg/",
-      "_batch": [
-        "sg-batch-01.json"
-      ]
-    },
-    {
-      "source_report_id": "sg-yearbook-of-statistics",
-      "target_report_id": "sg-population-trends",
-      "relationship_type": "uses_data_from",
-      "basis": "Demographic statistics and population-structure series appearing in the Yearbook are taken from the annual Population Trends report and related vital-registration compilations of DOS.",
-      "evidence_url": "https://www.singstat.gov.sg/",
-      "_batch": [
-        "sg-batch-01.json"
-      ]
-    },
-    {
       "source_report_id": "sg-economic-survey",
       "target_report_id": "sg-balance-of-payments",
       "relationship_type": "uses_data_from",
@@ -767,26 +747,6 @@
       ]
     },
     {
-      "source_report_id": "sg-labour-market-report",
-      "target_report_id": "sg-monthly-unemployment",
-      "relationship_type": "uses_data_from",
-      "basis": "The quarterly Labour Market Report incorporates and expands upon the monthly unemployment rates and numbers previously released in the End Monthly Unemployment Situation series; the monthly figures provide the high-frequency backbone for the quarterly analysis.",
-      "evidence_url": "https://stats.mom.gov.sg/",
-      "_batch": [
-        "sg-batch-02.json"
-      ]
-    },
-    {
-      "source_report_id": "sg-yearbook-of-statistics",
-      "target_report_id": "sg-key-household-income-trends",
-      "relationship_type": "uses_data_from",
-      "basis": "Household-income series and distributional indicators appearing in the Yearbook of Statistics are drawn from the annual Key Household Income Trends paper and related DOS compilations.",
-      "evidence_url": "https://www.singstat.gov.sg/",
-      "_batch": [
-        "sg-batch-02.json"
-      ]
-    },
-    {
       "source_report_id": "sg-international-investment-position",
       "target_report_id": "sg-balance-of-payments",
       "relationship_type": "methodology_depends_on",
@@ -802,26 +762,6 @@
       "relationship_type": "uses_data_from",
       "basis": "The Economic Survey of Singapore regularly incorporates the Index of Industrial Production (and its cluster breakdowns) as the primary monthly indicator of manufacturing-sector performance.",
       "evidence_url": "https://www.singstat.gov.sg/whats-new/advance-release-calendar",
-      "_batch": [
-        "sg-batch-03.json"
-      ]
-    },
-    {
-      "source_report_id": "sg-labour-force-in-singapore",
-      "target_report_id": "sg-labour-market-report",
-      "relationship_type": "uses_data_from",
-      "basis": "The annual Labour Force in Singapore report draws on the same underlying Labour Force Survey infrastructure as the quarterly Labour Market Reports, but expands coverage to structural indicators (LFPR, employment rates by demographic group, income growth, job mobility) not fully treated in the quarterly cycle.",
-      "evidence_url": "https://stats.mom.gov.sg/",
-      "_batch": [
-        "sg-batch-03.json"
-      ]
-    },
-    {
-      "source_report_id": "sg-singapore-in-figures",
-      "target_report_id": "sg-yearbook-of-statistics",
-      "relationship_type": "uses_data_from",
-      "basis": "Singapore in Figures presents condensed top-line indicators drawn from the fuller statistical series published in the Yearbook of Statistics and other DOS releases.",
-      "evidence_url": "https://www.singstat.gov.sg/",
       "_batch": [
         "sg-batch-03.json"
       ]
@@ -877,26 +817,6 @@
       ]
     },
     {
-      "source_report_id": "sg-job-vacancies-report",
-      "target_report_id": "sg-labour-market-report",
-      "relationship_type": "uses_data_from",
-      "basis": "The annual Job Vacancies Report expands on the quarterly job-vacancy stock and rate figures already published in the Labour Market Report, adding detailed occupational, industry and skills analysis from the dedicated Job Vacancy Survey.",
-      "evidence_url": "https://stats.mom.gov.sg/",
-      "_batch": [
-        "sg-batch-05.json"
-      ]
-    },
-    {
-      "source_report_id": "sg-economic-survey",
-      "target_report_id": "sg-retail-sales-index",
-      "relationship_type": "uses_data_from",
-      "basis": "The Economic Survey of Singapore regularly incorporates the Retail Sales Index and Food & Beverage Services Index as key monthly indicators of domestic demand and services-sector performance.",
-      "evidence_url": "https://www.singstat.gov.sg/",
-      "_batch": [
-        "sg-batch-05.json"
-      ]
-    },
-    {
       "source_report_id": "sg-economic-survey",
       "target_report_id": "sg-international-visitor-arrivals",
       "relationship_type": "uses_data_from",
@@ -947,16 +867,6 @@
       ]
     },
     {
-      "source_report_id": "sg-report-on-wage-practices",
-      "target_report_id": "sg-labour-market-report",
-      "relationship_type": "cites",
-      "basis": "The Report on Wage Practices provides the detailed annual wage-change and wage-practice analysis that complements the employment, vacancy and turnover indicators published in the quarterly Labour Market Report.",
-      "evidence_url": "https://stats.mom.gov.sg/",
-      "_batch": [
-        "sg-batch-07.json"
-      ]
-    },
-    {
       "source_report_id": "sg-business-expectations",
       "target_report_id": "sg-economic-survey",
       "relationship_type": "uses_data_from",
@@ -985,6 +895,71 @@
       "_batch": [
         "sg-batch-07.json"
       ]
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "sg-yearbook-of-statistics -> sg-gdp",
+      "source": "sg-yearbook-of-statistics",
+      "target": "sg-gdp",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.singstat.gov.sg/. Original basis: \"The Yearbook of Statistics Singapore draws its national-accounts series (including GDP by industry and expenditure) from the official estimates compiled and published by the Singapore Department of Statistics.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-yearbook-of-statistics -> sg-population-trends",
+      "source": "sg-yearbook-of-statistics",
+      "target": "sg-population-trends",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.singstat.gov.sg/. Original basis: \"Demographic statistics and population-structure series appearing in the Yearbook are taken from the annual Population Trends report and related vital-registration compilations of DOS.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-labour-market-report -> sg-monthly-unemployment",
+      "source": "sg-labour-market-report",
+      "target": "sg-monthly-unemployment",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://stats.mom.gov.sg/. Original basis: \"The quarterly Labour Market Report incorporates and expands upon the monthly unemployment rates and numbers previously released in the End Monthly Unemployment Situation series; the monthly figures provide the high-frequency backbone for the quarterly analysis.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-yearbook-of-statistics -> sg-key-household-income-trends",
+      "source": "sg-yearbook-of-statistics",
+      "target": "sg-key-household-income-trends",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.singstat.gov.sg/. Original basis: \"Household-income series and distributional indicators appearing in the Yearbook of Statistics are drawn from the annual Key Household Income Trends paper and related DOS compilations.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-labour-force-in-singapore -> sg-labour-market-report",
+      "source": "sg-labour-force-in-singapore",
+      "target": "sg-labour-market-report",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://stats.mom.gov.sg/. Original basis: \"The annual Labour Force in Singapore report draws on the same underlying Labour Force Survey infrastructure as the quarterly Labour Market Reports, but expands coverage to structural indicators (LFPR, employment rates by demographic group, income growth, job mobility) not fully treated in the quarterly cycle.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-singapore-in-figures -> sg-yearbook-of-statistics",
+      "source": "sg-singapore-in-figures",
+      "target": "sg-yearbook-of-statistics",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.singstat.gov.sg/. Original basis: \"Singapore in Figures presents condensed top-line indicators drawn from the fuller statistical series published in the Yearbook of Statistics and other DOS releases.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-job-vacancies-report -> sg-labour-market-report",
+      "source": "sg-job-vacancies-report",
+      "target": "sg-labour-market-report",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://stats.mom.gov.sg/. Original basis: \"The annual Job Vacancies Report expands on the quarterly job-vacancy stock and rate figures already published in the Labour Market Report, adding detailed occupational, industry and skills analysis from the dedicated Job Vacancy Survey.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-economic-survey -> sg-retail-sales-index",
+      "source": "sg-economic-survey",
+      "target": "sg-retail-sales-index",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.singstat.gov.sg/. Original basis: \"The Economic Survey of Singapore regularly incorporates the Retail Sales Index and Food & Beverage Services Index as key monthly indicators of domestic demand and services-sector performance.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sg-report-on-wage-practices -> sg-labour-market-report",
+      "source": "sg-report-on-wage-practices",
+      "target": "sg-labour-market-report",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: cites. Original evidence_url: https://stats.mom.gov.sg/. Original basis: \"The Report on Wage Practices provides the detailed annual wage-change and wage-practice analysis that complements the employment, vacancy and turnover indicators published in the quarterly Labour Market Report.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

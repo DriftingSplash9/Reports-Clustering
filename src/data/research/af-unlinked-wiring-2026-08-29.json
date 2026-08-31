@@ -63,13 +63,6 @@
       "evidence_url": "https://data.who.int/countries/004"
     },
     {
-      "source_report_id": "af-humanitarian",
-      "target_report_id": "ipc-classification",
-      "relationship_type": "methodology_depends_on",
-      "basis": "af-humanitarian's own listed url (OCHA's Afghanistan page) states its food-insecurity figures directly in IPC's own phase terms: \"...projected to face crisis or worse food insecurity (Integrated Food Security Phase Classification [IPC] Phase 3+), including 4.7 million experiencing emergency (IPC Phase 4) levels.\" No corpus node existed for the IPC classification prior to this — proposed above.",
-      "evidence_url": "https://www.unocha.org/afghanistan"
-    },
-    {
       "source_report_id": "af-wheat",
       "target_report_id": "ipc-classification",
       "relationship_type": "methodology_depends_on",
@@ -126,6 +119,13 @@
       "target": null,
       "reason": "no-document",
       "why": "FEWS NET's Afghanistan page (af-drought's own listed url) is reachable but describes drought's role in food insecurity only narratively (\"the ongoing drought's impact on food production, livelihoods and livestock... are directly driving a worsening nutrition crisis\", from OCHA's page), never as a formal data-source citation with a named dataset or document. No specific quote ties af-drought's own statistics to a numbered input for af-humanitarian or af-wheat's calculations — a real causal relationship in the world, but not a documented dependency in the evidentiary sense this corpus requires."
+    },
+    {
+      "edge": "af-humanitarian -> ipc-classification",
+      "source": null,
+      "target": "ipc-classification",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): af-humanitarian carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.unocha.org/afghanistan. Original basis: \"af-humanitarian's own listed url (OCHA's Afghanistan page) states its food-insecurity figures directly in IPC's own phase terms: \"...projected to face crisis or worse food insecurity (Integrated Food Security Phase Classification [IPC] Phase 3+), including 4.7 million experiencing emergency (IPC Phase 4) levels.\" No corpus node existed for the IPC classification prior to this — proposed above.\""
     }
   ]
 }

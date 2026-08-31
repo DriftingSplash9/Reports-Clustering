@@ -19,38 +19,44 @@ rounds found. Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**3,448 reports · 3,307 dependencies · 710 isolated.** `npm run validate`
+**3,354 reports · 2,815 dependencies · 963 isolated.** `npm run validate`
 (0 errors), `npm run gen` (347 slices, 0 unwired), `tsx
 scripts/test-logic.ts` (123/123), `tsc --noEmit`, `npm run build` all
-clean in a cloud sandbox, confirmed 2026-08-31. `public/corpus-data.json`
-is current. (The 08-30 line here said 3,430 · 3,317 — 18 nodes and 8 edges
-low even before the 08-31 quarantine; recounted from a clean validate.)
+clean in a cloud sandbox, confirmed 2026-08-31 evening.
+`public/corpus-data.json` is current.
 
-**Independent audit, 2026-08-30 — what was fixed 2026-08-31, what is
-open.** Full report is Thomas's; memory `audit_response_2026-08-31` has the
-agent-side record. Headline: the evidence rule was enforced in code for
-relations only; ~20% of edges (all from the August Grok/wiring rounds)
-cite a bare homepage or nothing; the CA/US/EU/AF spine sampled clean, zero
-refuted quotes anywhere. Done: **D2** — `validate()` now warns on a
-documented dependency with no `evidence_url` and on a bare-homepage
-`evidence_url` (`isBareHost`, graph.ts), with an EVIDENCE count block in
-`validate-data.ts` (176 no-URL, 164 of them with a quote; 457 bare
-homepage) — *promote both to errors when the counts read 0*. **D3** — the 18
-self-flagged `[NOT YET VERIFIED …]` edges in `ar-national-core.json` moved
-to `_dropped` (`no-document`, basis preserved); the audit's 21 was 3 false
-regex hits on real Russian/Ethiopian edges. 4 of the 18 have a verbatim
-INDEC quote waiting in `ar-cl-wiring-grok-2026-08.json` (`caveat` →
-`deferred`) — cheapest re-mints in the corpus. **D6** — validator now
-prints DUPLICATE-SHAPED NODES (6 groups). **L1/L7** —
-`scripts/measure-forces.ts` committed; it reproduces the audit
-(spread 200%, seed 1: ratio 7.05/7.65/8.48/9.30/10.05 at cr 0/1/3/6/10 —
-the repo's recorded 4.29→15.08 does not occur). **L4** — stale range
-comments fixed (`view.ts` spread 2–100, clusterRepulsion 0–15,
-`clusterRepulsion.ts` calibration block marked superseded). **L5** —
-START-HERE "Not working well" rewritten (was describing the 08-19 fix as
-open). **L6** — onboarding card reads the live tier; tier-4 caption no
-longer says "the whole corpus". **P2** — hollow/soft node materials now
-`depthWrite: false`.
+**Audit rulings applied 2026-08-31 (Thomas: 1-A, 2-A, 3-A) — memory
+`audit_rulings_applied_2026-08-31` has the full record; "Rulings Owed"
+artifact has the numbers they were decided on.** The corpus is now
+smaller and honest: **D1** — all 463 assertion-only edges (bare homepage
+or no URL, no quote) moved to `_dropped` `no-document` across 28 slices,
+originals preserved in `why`; 42 caveat/resolved notes on those edges
+became `deferred` leads. Egypt went 52 → 6 connected reports, China
+59 → 32, Bolivia 47 → 21 — that is the rule, not a regression. **D4** —
+32 trade-agreement nodes retired (the 31 wired FTA-family survivors of
+the 08-29 sweep + `ar-mercosur`), records in
+`notes/retired-nodes-2026-08-31.json`. **D7** — 62 derivation-note
+"publisher" nodes retired (same file), 166 lazy "X / related" publisher
+strings rewritten (`notes/publisher-cleanup-2026-08-31.json`); 5
+real releases with hedged publishers kept and renamed (af/sy/ye
+population, ye national accounts, ye BOP). Validator now prints
+PUBLISHERS (0 today) beside EVIDENCE (162 no-URL-with-quote, 5
+bare-homepage-with-quote — the whole remaining debt) and
+DUPLICATE-SHAPED (3 groups). **Promotion gate: when EVIDENCE reads 0/0,
+flip graph.ts's two warnings to errors.**
+
+**Morning fixes, same day (memory `audit_response_2026-08-31`):** D2
+evidence rule in `validate()`; D3 18 self-flagged AR edges quarantined;
+`scripts/measure-forces.ts` committed and the 08-28 cluster-repulsion
+sweep shown not to reproduce; stale comments, START-HERE, onboarding
+tier, tier-4 caption, `depthWrite` on hollow/soft nodes; dev-only
+`window.__rig` renderer hook.
+
+**First real-GPU number (Radeon RX 580, 120 Hz monitor), folded
+Everything tier, 415 nodes:** 8.3 ms median → 120 fps, vsync-capped,
+GPU 35%, same with a node selected. Not the ceiling — the unfolded
+~2,500-node view is still unmeasured; snippet (with the
+`info.autoReset` fix) is in the artifact.
 
 **2026-08-30 research rounds, all validated clean — detail in project
 memory, not here:** 5 duplicate merges + rulings (`PLAYBOOK.md` §7,
@@ -81,20 +87,38 @@ Thomas's call after the measured diagnosis (memory
 `layout_blob_diagnosis_2026-08-31`): 12 international standards spring-
 linked to 10–55 countries each were what averaged every country to the
 centre. Harness: cluster openness 1.5 → 3.2, inter/intra 10 → 28, INT
-becomes its own peripheral galaxy. **Not yet seen on real hardware** —
-headless swiftshader runs ~45 ticks in the 45 s cooldown and never
-settles, so no screenshot here is trustworthy. Thomas to look first.
+becomes its own peripheral galaxy. Thomas saw it 2026-08-31: clusters
+open (Canada a clean separate galaxy), but the ~700 INT spokes became
+the picture. **Same evening, on his "1 and 2":** (1) `intTether` links
+rest at `INT_TETHER_OPACITY` 0.16 (`focusOpacity` in linkVisuals
+restores them inside a trace; hover still lifts) and carry the **beam**
+instead of teardrops — the continuous-database flow shader with a new
+`uFlowLift` uniform (`INT_TETHER_BEAM_LIFT` 0.45) so each passing crest
+raises the faint line's alpha locally: "faint beams along the edge",
+Thomas's ask after missing the pulses; (2) the international layer folds into one `corb:INT` orb from
+tier 2 (`resolveId`), double-click opens it like a country; the orb is
+*placed* at the centroid of everything else by `lib/intAnchor.ts`
+(springless — springs on a 700-degree orb move the countries, not the
+orb; springless it was flung off-screen by charge); and the 16 nodes
+whose edges reach ≥10 countries carry standing labels (`standingLabels`
+in hierarchy.ts, sprites in nodeVisuals, greedy overlap pass so the EU
+knot shows ESA 2010 + one more rather than six on top of each other).
+Headless-checked at tiers 1/2/4 (unsettled layouts, but the treatment
+renders and nothing errors); real-hardware look is Thomas's.
 **Cluster-repulsion range 0–15**: measured weak for two stacked reasons
 — camera fit renormalises most of it, and `FAMILY_REPULSION`/
 `COUNTRY_REPULSION` aren't scaled by spread (inert at 1000%). Don't raise
 the ceiling; the INT-spring change is the lever that actually moved.
 
-**Renderer perf items** from 2026-08-29 are closed (sphere caching,
-conditional `transparent`). Not independently confirmed: an actual FPS
-win — swiftshader swamps the signal. Wants a real-GPU spot-check. Audit
-measured the structure: 2,245 draw calls / 498k triangles / 1,362
-materials for 419 visible nodes at Everything tier — the ceiling is
-per-object overhead (one material per link), not geometry.
+**Renderer perf items** from 2026-08-29 are closed. Audit measured the
+structure: 2,245 draw calls / 498k triangles / 1,362 materials for 419
+visible nodes at Everything tier — the ceiling, if there is one on real
+hardware, is per-object overhead (one material per link), not geometry.
+Folded view measured at 120 fps (above); unfolded still owed.
+**Console noise, real but minor:** the `[layout] two fixed panels
+overlap` self-check (App.tsx ~1311) fires every 4 s below ~900 px
+viewport width — with DevTools docked, the search bar (left 400, 380
+wide), the View button and the Calendar button genuinely collide.
 
 **Auto-unfold** still dense — accepted, not being chased further.
 
@@ -106,13 +130,14 @@ per-object overhead (one material per link), not geometry.
 
 1. Watch for the render-consistency symptom in ordinary use; flag here if
    it recurs. `notes/render-consistency-repro-2026-08-25.md`.
-2. **Look at the graph with INT springs off** (§2) with your usual
-   countries opened, and say whether the clusters read as open. Next
-   levers if not: per-galaxy camera fit (fit to the cluster you clicked,
-   not the world); INT as a foldable orb at country tiers; scale
-   `FAMILY_REPULSION`/`COUNTRY_REPULSION` by `spreadApplied` then
-   re-derive the 0–15 range with `npx tsx scripts/measure-forces.ts`.
-   "Rulings Owed" artifact has the experiment table.
+2. **Look at tier 2 (one International orb, faded spokes) and tier 4
+   with INT + your countries opened (labelled standards, faded
+   spokes).** Tunables if it's not right: `INT_TETHER_OPACITY` (0.16),
+   `INT_TETHER_BEAM_LIFT` (0.45), `LABEL_PIXELS` (13), the ≥10-country label gate (`standingLabels`),
+   `ANCHOR_PULL` (intAnchor.ts). Next lever after that: per-galaxy
+   camera fit (fit to the cluster you clicked, not the world). Then the
+   perf job: batch links into one material (draw calls are the ceiling —
+   3,173 calls = 60 fps with ONE country open).
 3. Watch for flicker / wrong z-order on real hardware. 2026-08-31's
    `depthWrite: false` on hollow/soft nodes is the one mechanism found for
    it; if it survives only in the *dimmed* state, `applyFocus` is next.
@@ -121,36 +146,25 @@ per-object overhead (one material per link), not geometry.
    perf-related can be judged until this exists.
 5. **Rulings owed on the evidence findings** — none of these were acted on,
    all need you:
-   - **D1: 457 bare-homepage / assertion-only edges** (list:
-     `unevidencededges.csv` from the audit; the validator's EVIDENCE block
-     recounts live). Audit recommends quarantining to `_dropped`
-     (`no-document`, basis kept), expecting isolates 710 → ~1,000 and
-     `in-state-gsdp-series` #4 → #51. Whole slices are 100% affected
-     (mexico-, andean-, ae-sa-, ar-cl-, ir-iq-tr-sy-, jp-kr-, taiwan-,
-     indonesia-wiring, ve-venezuela; eg-egypt-grok 93/94).
-   - **D4: 18 FTA-family nodes with edges** (cl-tlc-*, pe-tlc-*,
-     co-tlc-eeuu, *-alianza-pacifico, *-mercosur*, ec-acuerdo-ue,
-     ec-tlc-china, py-ace-chile, py-taiwan, mx-tmec, gy-psa-exxon)
-     survived the 08-29 treaty sweep because that sweep removed orphans
-     only. All their edges are bare-homepage `methodology_depends_on`;
-     16 point agreement→statistics, 2 the reverse. Retire per §7, or
-     rule that a wired treaty stays. `ar-mercosur` is now an isolate
-     after the D3 quarantine.
-   - **D7: 224 nodes whose `publisher` is a derivation note** ("Derived
-     from UNICEF…", "WHO / national sources"); 76 carry edges. Real
-     publisher, terminus, or out — scope call.
-   - **D6: duplicate pairs** — now 6 groups printed by the validator. New
-     since your last look: `br-ibge-ipca`/`br-ipca` (3/3 edges) and the
-     two Rosstat yearbooks (4/2). Brazil census pair is 9/2, not 7/2.
-   - **D2 promotion**: the 164 no-URL edges *with* a quote are the cheap
-     recoveries (research done, citation dropped); after those, flip the
-     two warnings to errors.
+   - **D6: duplicate pairs** — 3 groups left after the treaty retirement,
+     printed by the validator: `br-ibge-ipca`/`br-ipca` (3/3 edges),
+     `br-ibge-censo-demografico`/`br-censo-demografico` (7/2), the two
+     Rosstat yearbooks (3/2). Merge or keep — nothing else is waiting on
+     it.
+   - **D2 promotion**: 162 no-URL edges *with* a quote + 5 bare-homepage
+     edges with a quote are the whole remaining evidence debt (research
+     done, citation dropped). Once re-cited, flip the two warnings in
+     graph.ts to errors.
 
 ### [Agent] — next build rounds
 
 0. **Before any new import: the evidence rule is now checked in code.**
    A new edge with no `evidence_url` or a homepage URL warns in
-   `npm run validate` (EVIDENCE block). Don't add to the count. **D9
+   `npm run validate` (EVIDENCE block). Don't add to the count. **The
+   162+5 re-citation round is the obvious next agent job** — every one
+   has its quote in `basis`; find the document, verify HTTP status, add
+   the URL. Concentrated in ae-sa, andean, ir-iq-tr-sy, mexico and jp-kr
+   wiring slices; many feed `sna-2008`. **D9
    (isolate shelf)** is a UI task nobody owns yet: split the shelf's
    count into "answered" (`_dropped` with a real reason — 386), "leads
    only" (70) and "never looked at" (244); the `DroppedNote` disclosure

@@ -90,13 +90,6 @@
       "evidence_url": "https://www.nra.go.jp/data/000481014.pdf"
     },
     {
-      "source_report_id": "jp-spent-fuel-storage",
-      "target_report_id": "jp-nra",
-      "relationship_type": "methodology_depends_on",
-      "basis": "UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session via direct curl fetch of the official NRA PDF). NRA's own Convention on Nuclear Safety 10th National Report states: \"When storing the spent fuel, licensees are required to implement necessary cooling measures and ensure that the design of the storage system maintains subcriticality, in accordance with the provisions of the NRA Ordinance on Commercial Reactors. A Pre-service Operator Check is conducted to confirm that construction work has been carried out in accordance with the approved design.\" and, on utilisation progress: \"Regarding progress from FY2022 to FY2024, the NRA confirmed that TEPCO had taken appropriate steps to safely initiate key activities, including the removal of spent fuel from the spent fuel pool of Unit 6...\" Storage design/utilisation criteria are NRA-defined regulatory requirements this node's statistics are measured against.",
-      "evidence_url": "https://www.nra.go.jp/data/000481014.pdf"
-    },
-    {
       "source_report_id": "jp-estat",
       "target_report_id": "jp-statistics-act-2007",
       "relationship_type": "cites",
@@ -216,6 +209,13 @@
       "target": "jp-comprehensive-survey-living-conditions",
       "reason": "deferred",
       "why": "Same underlying document as jp-ageing-society-white-paper above (Chapter 1, Section 3, '家族と世帯'): the elderly-household and single-elderly-person charts are image-only (GIF) with accompanying CSV downloads that carry no source/citation row. Conventionally this data derives from the Comprehensive Survey of Living Conditions, but no text on the fetched pages states this, so it could not be verified."
+    },
+    {
+      "edge": "jp-spent-fuel-storage -> jp-nra",
+      "source": null,
+      "target": "jp-nra",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): jp-spent-fuel-storage carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.nra.go.jp/data/000481014.pdf. Original basis: \"UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session via direct curl fetch of the official NRA PDF). NRA's own Convention on Nuclear Safety 10th National Report states: \"When storing the spent fuel, licensees are required to implement necessary cooling measures and ensure that the design of the storage system maintains subcriticality, in accordance with the provisions of the NRA Ordinance on Commercial Reactors. A Pre-service Operator Check is conducted to confirm that construction work has been carried out in accordance with the approved design.\" and, on utilisation progress: \"Regarding progress from FY2022 to FY2024, the NRA confirmed that TEPCO had taken appropriate steps to safely initiate key activities, including the removal of spent fuel from the spent fuel pool of Unit 6...\" Storage design/utilisation criteria are NRA-defined regulatory requirements this node's statistics are measured against.\""
     }
   ]
 }

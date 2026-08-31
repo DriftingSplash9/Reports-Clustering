@@ -118,28 +118,12 @@
       "evidence_url": "https://unfccc.int/sites/default/files/resource/UAE's%20First%20BTR%20-%20Submission%20Document.pdf"
     },
     {
-      "source_report_id": "ae-oil",
-      "target_report_id": "isic",
-      "relationship_type": "methodology_depends_on",
-      "evidence": "documented",
-      "basis": "FCSC's SDMX national-accounts dataflow classifies crude oil/mining-and-quarrying GDP data under ISIC section B ('Mining and Quarrying, includes crude oil and natural gas').",
-      "evidence_url": "https://releaseeuaestat.fcsc.gov.ae/rest/codelist/FCSA/CL_ISIC/latest"
-    },
-    {
       "source_report_id": "ae-construction",
       "target_report_id": "isic",
       "relationship_type": "methodology_depends_on",
       "evidence": "documented",
       "basis": "FCSC's SDMX national-accounts dataflow classifies construction output under ISIC section F ('Construction'). Also resolves ae-construction's real primary source: FCSC's national accounts production series, corroborated by a Zawya article quoting FCSC directly and CBUAE's Quarterly Economic Review (sectoral table sourced 'FCSC and CBUAE calculations').",
       "evidence_url": "https://releaseeuaestat.fcsc.gov.ae/rest/codelist/FCSA/CL_ISIC/latest"
-    },
-    {
-      "source_report_id": "ae-renewables",
-      "target_report_id": "int-irena-renewable-capacity-statistics",
-      "relationship_type": "uses_data_from",
-      "evidence": "documented",
-      "basis": "The node's own source article names IRENA as the data origin; IRENA's own 'Renewable Capacity Statistics 2025' publication independently confirms a UAE-specific capacity row.",
-      "evidence_url": "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Mar/IRENA_DAT_RE_Capacity_Statistics_2025.pdf"
     },
     {
       "source_report_id": "ae-imf-article-iv",
@@ -156,14 +140,6 @@
       "evidence": "documented",
       "basis": "GCC-Stat's Quarterly Report on Labour Statistics in the GCC Countries lists FCSC (FCSA) among its national Data Sources for UAE labour statistics; this particular quarter's tables exclude UAE ('not available on a quarterly basis') but FCSC is confirmed as the standing named source for GCC-Stat's labour-statistics compilation programme.",
       "evidence_url": "https://gccstat.org/images/gccstat/docman/publications/Quarterly_Report_on_labour_Statistics_in_the_GCC_Countries_-_First_Quarter_of_2020.pdf"
-    },
-    {
-      "source_report_id": "ae-tourism",
-      "target_report_id": "ae-dxb-traffic",
-      "relationship_type": "cites",
-      "evidence": "documented",
-      "basis": "Dubai DET's Annual Visitor Report 2024 explicitly cites DXB's record 92.3 million passenger figure as a headline 2024 tourism-sector achievement.",
-      "evidence_url": "https://www.dubaidet.gov.ae/en/research-and-insights/-/media/files/faqs/annual-visitor-report-2024/det-annual-visitor-report-2024.pdf"
     },
     {
       "source_report_id": "ae-imf-article-iv",
@@ -307,6 +283,27 @@
       "target": "ae-labour",
       "reason": "note",
       "why": "RESOLVED 2026-08-30 (Thomas ruling): confirmed duplicate, merge into ae-labour. Node `ae-labour-force` removed from the corpus. Likely duplicate, needs Thomas's ruling (same pattern as id-energy-balance-detail in the Indonesia round). fcsc.gov.ae/uae-stats-document/labor-force/ (ae-labour) links internally to the same FCSC domain code LFS_LF used by uaestat.fcsc.gov.ae's '.Stat Data Explorer' (ae-labour-force): the Data Explorer's 'Labour Force (LFS_LF)' category, with 17 dataflows (Employed/Unemployed/Labour Force by Citizenship, Gender, Age, Economic Activity, Education, Employment Status/Sector/Occupation), matches ae-labour-force's stated description almost verbatim. Same agency, same internal code, one links directly into the other — not two distinct survey products, just a document-listing page vs. the SDMX explorer for the same underlying dataset. Recommend merging ae-labour-force into ae-labour; left deliberately unwired rather than duplicate this round's edges onto both nodes."
+    },
+    {
+      "edge": "ae-oil -> isic",
+      "source": null,
+      "target": "isic",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ae-oil carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original evidence_url: https://releaseeuaestat.fcsc.gov.ae/rest/codelist/FCSA/CL_ISIC/latest. Original basis: \"FCSC's SDMX national-accounts dataflow classifies crude oil/mining-and-quarrying GDP data under ISIC section B ('Mining and Quarrying, includes crude oil and natural gas').\""
+    },
+    {
+      "edge": "ae-renewables -> int-irena-renewable-capacity-statistics",
+      "source": null,
+      "target": "int-irena-renewable-capacity-statistics",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ae-renewables carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: uses_data_from. Original evidence_url: https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Mar/IRENA_DAT_RE_Capacity_Statistics_2025.pdf. Original basis: \"The node's own source article names IRENA as the data origin; IRENA's own 'Renewable Capacity Statistics 2025' publication independently confirms a UAE-specific capacity row.\""
+    },
+    {
+      "edge": "ae-tourism -> ae-dxb-traffic",
+      "source": null,
+      "target": "ae-dxb-traffic",
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ae-tourism carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original evidence_url: https://www.dubaidet.gov.ae/en/research-and-insights/-/media/files/faqs/annual-visitor-report-2024/det-annual-visitor-report-2024.pdf. Original basis: \"Dubai DET's Annual Visitor Report 2024 explicitly cites DXB's record 92.3 million passenger figure as a headline 2024 tourism-sector achievement.\""
     }
   ]
 }

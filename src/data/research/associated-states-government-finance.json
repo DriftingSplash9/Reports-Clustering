@@ -506,13 +506,6 @@
     },
     {
       "source_report_id": "pr-fomb-fiscal-plan",
-      "target_report_id": "pr-planning-board-informe-economico",
-      "relationship_type": "uses_data_from",
-      "basis": "The 2024 Fiscal Plan: 'The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023).' NOTED, NOT RESOLVED: the same passage immediately adds 'The PRPB's projection of growth is higher than this Fiscal Plan forecast,' which reads as a disagreement rather than a direct arithmetic input. Held at uses_data_from rather than the weaker `cites`, on the strength of 'consulted... in the process of preparing' — an active step named in the Fiscal Plan's own production, not a retrospective comparability statement of the kind Research.1.md §5a warns against. The tension between 'consulted in preparing' and 'projection is higher than' is reported rather than resolved, per §3.",
-      "evidence_url": "https://www.jp.pr.gov/"
-    },
-    {
-      "source_report_id": "pr-fomb-fiscal-plan",
       "target_report_id": "uscensus-annual-survey-state-local-govt-finance",
       "relationship_type": "uses_data_from",
       "basis": "Cited by exact title and vintage in the same footnote that carries the American Community Survey edge: 'Census – Annual Survey of State and Local Government Finance, 2021.'",
@@ -545,8 +538,8 @@
       "edge": "pr-fomb-fiscal-plan -> Puerto Rico Planning Board economic forecasts",
       "source": "pr-fomb-fiscal-plan",
       "target": "pr-planning-board-informe-economico",
-      "reason": "resolved",
-      "why": "RESOLVED 2026-08-09 (sweep session, Tier-3 item). Located the PRPB's own titled recurring publication: 'Informe Económico a la Gobernadora y a la Asamblea Legislativa,' an annual report to the Governor and Legislative Assembly (2025 edition confirmed). Minted pr-planning-board-informe-economico and wired pr-fomb-fiscal-plan -> pr-planning-board-informe-economico, uses_data_from, on this entry's own already-verified quote — the 'consulted... in preparing' vs. 'projection is higher than' tension is reported in the edge's own basis rather than resolved. Original entry follows.\n\nVERIFIED DIRECTLY (2024 Fiscal Plan). \"The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023). The PRPB's projection of growth is higher than this Fiscal Plan forecast...\" A named institution and a named forecast, used and explicitly disagreed with — but the PRPB forecast has not been located as a titled recurring release and is not a node. The clean next step for anyone extending Puerto Rico."
+      "reason": "deferred",
+      "why": "RECLASSIFIED 2026-08-31 resolved -> deferred: the live edge this recorded as wired was quarantined to _dropped (audit D1 — assertion-only evidence, ruling 1-A). The lead is open again until a document is cited. Original entry follows. RESOLVED 2026-08-09 (sweep session, Tier-3 item). Located the PRPB's own titled recurring publication: 'Informe Económico a la Gobernadora y a la Asamblea Legislativa,' an annual report to the Governor and Legislative Assembly (2025 edition confirmed). Minted pr-planning-board-informe-economico and wired pr-fomb-fiscal-plan -> pr-planning-board-informe-economico, uses_data_from, on this entry's own already-verified quote — the 'consulted... in preparing' vs. 'projection is higher than' tension is reported in the edge's own basis rather than resolved. Original entry follows.\n\nVERIFIED DIRECTLY (2024 Fiscal Plan). \"The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023). The PRPB's projection of growth is higher than this Fiscal Plan forecast...\" A named institution and a named forecast, used and explicitly disagreed with — but the PRPB forecast has not been located as a titled recurring release and is not a node. The clean next step for anyone extending Puerto Rico."
     },
     {
       "edge": "pr-fomb-fiscal-plan -> Census Annual Survey of State and Local Government Finance",
@@ -575,6 +568,13 @@
       "target": null,
       "reason": "no-document",
       "why": "Scouting established that neither the Marshall Islands nor Palau appears to publish its own national accounts or CPI as a titled recurring release, and that the macroeconomic aggregates in circulation come from external compilations — the ADB, the IMF Article IV process, and a regional economic review. Not built, and flagged as unresolved rather than settled: the scouting was explicitly not verification-grade, and `data.adb.org` returned HTTP 403 to this session, so the external compilations were not read either. What is confirmed is the absence of a located national statistical release, not its non-existence."
+    },
+    {
+      "edge": "pr-fomb-fiscal-plan -> pr-planning-board-informe-economico",
+      "source": "pr-fomb-fiscal-plan",
+      "target": "pr-planning-board-informe-economico",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.jp.pr.gov/. Original basis: \"The 2024 Fiscal Plan: 'The Oversight Board has consulted other economic forecasts in the process of preparing the Fiscal Plan forecasts – notably the forecasts of the Puerto Rico Planning Board's (PRPB), and the growth forecast included in the Government's proposed 2024 Fiscal Plan (submitted in December 2023).' NOTED, NOT RESOLVED: the same passage immediately adds 'The PRPB's projection of growth is higher than this Fiscal Plan forecast,' which reads as a disagreement rather than a direct arithmetic input. Held at uses_data_from rather than the weaker `cites`, on the strength of 'consulted... in the process of preparing' — an active step named in the Fiscal Plan's own production, not a retrospective comparability statement of the kind Research.1.md §5a warns against. The tension between 'consulted in preparing' and 'projection is higher than' is reported rather than resolved, per §3.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

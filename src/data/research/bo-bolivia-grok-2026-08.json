@@ -161,31 +161,6 @@
       "last_updated": null
     },
     {
-      "id": "bo-mercosur-can",
-      "title": "MERCOSUR accession & Andean Community (CAN) membership",
-      "publisher": "Estado Plurinacional / MERCOSUR / CAN",
-      "country": "INT",
-      "jurisdiction_level": "international",
-      "region": "Bolivia / South America",
-      "description": "Bolivia’s dual regional-integration status: full member of the Andean Community and (more recently) member of MERCOSUR. Shapes preferential trade access and external-agenda positioning.",
-      "url": "https://www.cancilleria.gob.bo/",
-      "domains": [
-        "trade",
-        "proposed:regional-integration"
-      ],
-      "_batch": [
-        "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
-      ],
-      "_shape": "recurring-citation",
-      "_notes": "Core trade-architecture node. Bolivia’s MERCOSUR membership is recent; full participation in the MERCOSUR–EU preferential arrangement is still being clarified. CAN remains the older Andean preferential framework.",
-      "_referenced_by": [
-        "Foreign-ministry and trade reporting",
-        "Export-destination analysis (Brazil, Peru, Colombia, Argentina)",
-        "Discussion of Bolivia’s participation in the MERCOSUR–EU agreement"
-      ],
-      "last_updated": null
-    },
-    {
       "id": "bo-cochabamba",
       "title": "Departamento de Cochabamba — central valley hub",
       "publisher": "INE",
@@ -462,96 +437,6 @@
   ],
   "dependencies": [
     {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.ine.gob.bo/",
-      "basis": "Merchandise trade flows are a primary input into the goods account of the balance of payments.",
-      "source_report_id": "bo-comercio-exterior",
-      "target_report_id": "bo-bop",
-      "_batch": [
-        "2026-08-13_Bolivia-batch2.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.ine.gob.bo/",
-      "basis": "Santa Cruz is the principal production and export base for soy and related agro-industry.",
-      "source_report_id": "bo-santa-cruz",
-      "target_report_id": "bo-soya",
-      "_batch": [
-        "2026-08-13_Bolivia-batch2.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.ine.gob.bo/",
-      "basis": "Potosí’s high poverty ranking is derived from the departmental poverty tabulations.",
-      "source_report_id": "bo-potosi",
-      "target_report_id": "bo-pobreza-departamental",
-      "_batch": [
-        "2026-08-13_Bolivia-batch2.json"
-      ]
-    },
-    {
-      "relationship_type": "methodology_depends_on",
-      "evidence_url": "https://www.ylb.gob.bo/",
-      "basis": "YLB’s industrialisation effort is centred on the Salar de Uyuni resource base.",
-      "source_report_id": "bo-ylb",
-      "target_report_id": "bo-salar-uyuni",
-      "_batch": [
-        "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
-      ]
-    },
-    {
-      "relationship_type": "methodology_depends_on",
-      "evidence_url": "https://www.cancilleria.gob.bo/",
-      "basis": "Preferential access under CAN and MERCOSUR structures a large share of regional trade.",
-      "source_report_id": "bo-mercosur-can",
-      "target_report_id": "bo-comercio-exterior",
-      "_batch": [
-        "2026-08-13_Bolivia-batch3-metro-lithium-social.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.ine.gob.bo/",
-      "basis": "Cochabamba’s poverty ranking and absolute poverty mass are derived from the departmental tables.",
-      "source_report_id": "bo-cochabamba",
-      "target_report_id": "bo-pobreza-departamental",
-      "_batch": [
-        "2026-08-13_Bolivia-batch4-fiscal-informality-departments.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.bcb.gob.bo/",
-      "basis": "The large majority of remittance inflows are received in Santa Cruz, Cochabamba and La Paz.",
-      "source_report_id": "bo-remesas",
-      "target_report_id": "bo-eje-central",
-      "_batch": [
-        "2026-08-13_Bolivia-batch5-remittances-social-industrial.json"
-      ]
-    },
-    {
-      "relationship_type": "methodology_depends_on",
-      "evidence_url": "https://www.ypfb.gob.bo/",
-      "basis": "The Brazil gas relationship structures the residual export market for Bolivian natural gas.",
-      "source_report_id": "bo-relacion-brasil-energia",
-      "target_report_id": "bo-gas",
-      "_batch": [
-        "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
-      ]
-    },
-    {
-      "relationship_type": "methodology_depends_on",
-      "evidence_url": "https://www.ine.gob.bo/",
-      "basis": "China is a major export destination and import origin in the merchandise-trade statistics.",
-      "source_report_id": "bo-china-comercio",
-      "target_report_id": "bo-comercio-exterior",
-      "_batch": [
-        "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
-      ]
-    },
-    {
       "source_report_id": "bo-juancito-pinto",
       "target_report_id": "bo-educacion",
       "relationship_type": "uses_data_from",
@@ -583,6 +468,71 @@
         "2026-08-13_Bolivia-batch6-identity-trade-lithium.json"
       ],
       "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency. Direction reversed from the original."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "bo-comercio-exterior -> bo-bop",
+      "source": "bo-comercio-exterior",
+      "target": "bo-bop",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Merchandise trade flows are a primary input into the goods account of the balance of payments.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-santa-cruz -> bo-soya",
+      "source": "bo-santa-cruz",
+      "target": "bo-soya",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Santa Cruz is the principal production and export base for soy and related agro-industry.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-potosi -> bo-pobreza-departamental",
+      "source": "bo-potosi",
+      "target": "bo-pobreza-departamental",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Potosí’s high poverty ranking is derived from the departmental poverty tabulations.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-ylb -> bo-salar-uyuni",
+      "source": "bo-ylb",
+      "target": "bo-salar-uyuni",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ylb.gob.bo/. Original basis: \"YLB’s industrialisation effort is centred on the Salar de Uyuni resource base.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-mercosur-can -> bo-comercio-exterior",
+      "source": "bo-mercosur-can",
+      "target": "bo-comercio-exterior",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.cancilleria.gob.bo/. Original basis: \"Preferential access under CAN and MERCOSUR structures a large share of regional trade.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-cochabamba -> bo-pobreza-departamental",
+      "source": "bo-cochabamba",
+      "target": "bo-pobreza-departamental",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"Cochabamba’s poverty ranking and absolute poverty mass are derived from the departmental tables.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-remesas -> bo-eje-central",
+      "source": "bo-remesas",
+      "target": "bo-eje-central",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.bcb.gob.bo/. Original basis: \"The large majority of remittance inflows are received in Santa Cruz, Cochabamba and La Paz.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-relacion-brasil-energia -> bo-gas",
+      "source": "bo-relacion-brasil-energia",
+      "target": "bo-gas",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ypfb.gob.bo/. Original basis: \"The Brazil gas relationship structures the residual export market for Bolivian natural gas.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "bo-china-comercio -> bo-comercio-exterior",
+      "source": "bo-china-comercio",
+      "target": "bo-comercio-exterior",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.ine.gob.bo/. Original basis: \"China is a major export destination and import origin in the merchandise-trade statistics.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

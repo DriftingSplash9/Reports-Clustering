@@ -220,6 +220,18 @@ export function resolveId(
   if (tier >= COUNTRY_FOLD_FROM_TIER && !openedCountries.has(report.country)) {
     return countryOrbId(report.country)
   }
+  // **The international layer folds too, once nations are open (2026-08-31,
+  // Thomas: "the international nodes choke everything to the centre and
+  // they are indistinguishable").** Tier 1 is the opening view and the 200
+  // INT reports ARE its content, so they stay individual there. From tier 2
+  // on they are one more group among ~140 country groups, and 200 identical
+  // white spheres in a knot — with ~700 spokes to every country — said
+  // nothing a single "International — 200 folded reports" orb does not say
+  // better. Same fold, same orb machinery, same double-click to open, same
+  // Reset to re-fold; `openedCountries` carries 'INT' like any other code.
+  if (report.country === 'INT' && drilldown >= COUNTRY_FOLD_FROM_TIER && !openedCountries.has('INT')) {
+    return countryOrbId('INT')
+  }
   return report.id
 }
 
@@ -533,4 +545,33 @@ export function foldCountry(
   const next = new Set(current)
   next.delete(country)
   return next
+}
+
+/**
+ * Which nodes carry a standing label in the 3D scene, keyed to a priority
+ * (2026-08-31 — see LABEL_SPAN_GATE in InfluenceGraph.tsx for the why). A
+ * node's edges reaching `gate` or more DIFFERENT countries is what makes it
+ * a standard rather than somebody's release. Computed on the BASE graph,
+ * never a disclosed one: folding replaces a hundred countries with a
+ * handful of orbs and would shrink every span to the number of families.
+ * The priority is the span itself, so the renderer's overlap pass can keep
+ * SNA 2008 over a regional bulletin when two names collide on screen.
+ */
+export function standingLabels(graph: Graph, gate = 10): Map<string, number> {
+  const span = new Map<string, Set<Country>>()
+  for (const e of graph.edges) {
+    for (const [self, other] of [
+      [e.source_report_id, e.target_report_id],
+      [e.target_report_id, e.source_report_id],
+    ] as const) {
+      const c = graph.byId.get(other)?.country
+      if (!c) continue
+      const seen = span.get(self)
+      if (seen) seen.add(c)
+      else span.set(self, new Set([c]))
+    }
+  }
+  const out = new Map<string, number>()
+  for (const [id, s] of span) if (s.size >= gate) out.set(id, s.size)
+  return out
 }

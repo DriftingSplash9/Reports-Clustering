@@ -884,26 +884,6 @@
   ],
   "dependencies": [
     {
-      "relationship_type": "uses_data_from",
-      "evidence_url": null,
-      "basis": "EBS distribution depends heavily on generation supplied by SPCS (Afobaka and thermal).",
-      "source_report_id": "sr-ebs",
-      "target_report_id": "sr-spcs-afobaka",
-      "_batch": [
-        "2026-08-14_Suriname-batch5-power-social-districts.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": null,
-      "basis": "Mineral revenues are the inflows that the SSFS is designed to receive.",
-      "source_report_id": "sr-ssfs",
-      "target_report_id": "sr-ingresos-petroleros",
-      "_batch": [
-        "2026-08-14_Suriname-batch6-revenue-management.json"
-      ]
-    },
-    {
       "source_report_id": "sr-educacion",
       "target_report_id": "sr-interior",
       "relationship_type": "uses_data_from",
@@ -924,6 +904,22 @@
         "2026-08-14_Suriname-batch3-oil-fiscal-social.json"
       ],
       "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "sr-ebs -> sr-spcs-afobaka",
+      "source": "sr-ebs",
+      "target": "sr-spcs-afobaka",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: (none). Original basis: \"EBS distribution depends heavily on generation supplied by SPCS (Afobaka and thermal).\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "sr-ssfs -> sr-ingresos-petroleros",
+      "source": "sr-ssfs",
+      "target": "sr-ingresos-petroleros",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was absent and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: (none). Original basis: \"Mineral revenues are the inflows that the SSFS is designed to receive.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

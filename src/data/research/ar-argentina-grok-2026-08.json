@@ -237,16 +237,6 @@
   ],
   "dependencies": [
     {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.indec.gob.ar/",
-      "basis": "Mining and hydrocarbon extraction feed into the monthly activity estimator.",
-      "source_report_id": "ar-ipi-minero",
-      "target_report_id": "ar-emae",
-      "_batch": [
-        "2026-08-13_Argentina-batch6-energy-mining.json"
-      ]
-    },
-    {
       "source_report_id": "ar-bcra-bop",
       "target_report_id": "ar-bcra-mercado-cambios",
       "relationship_type": "uses_data_from",
@@ -256,6 +246,15 @@
         "2026-08-13_Argentina-batch2.json"
       ],
       "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency. Direction reversed from the original."
+    }
+  ],
+  "_dropped": [
+    {
+      "edge": "ar-ipi-minero -> ar-emae",
+      "source": "ar-ipi-minero",
+      "target": "ar-emae",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.indec.gob.ar/. Original basis: \"Mining and hydrocarbon extraction feed into the monthly activity estimator.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }

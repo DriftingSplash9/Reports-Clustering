@@ -230,20 +230,6 @@
       "url": "https://www.cbar.az"
     },
     {
-      "id": "eu-georgia-association-agreement",
-      "title": "Association Agreement between the European Union and Georgia",
-      "publisher": "European Union / Georgia",
-      "country": "INT",
-      "jurisdiction_level": "international",
-      "region": "Georgia / European Union",
-      "description": "EU-Georgia Association Agreement (including the DCFTA). Chapter 4 of Title V, Article 286, commits Georgia to progressive alignment of its statistical system with the European Statistical System; Geostat itself cites this article as the legal basis for its 2020 Law on Official Statistics reform.",
-      "domains": [
-        "statistical-system",
-        "external-action"
-      ],
-      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A22014A0830%2802%29"
-    },
-    {
       "id": "eaeu-stat-protocol",
       "title": "Protocol on the Procedure for the Formation and Dissemination of Official Statistical Information of the Eurasian Economic Union (Annex No. 4 to the EAEU Treaty)",
       "publisher": "Eurasian Economic Union / Eurasian Economic Commission",
@@ -320,13 +306,6 @@
       "relationship_type": "methodology_depends_on",
       "basis": "Kazakhstan's Bureau of National Statistics states directly, in its own current live metadata, that quarterly national accounts are based on SNA 2008 -- this independently found source supersedes an unverifiable Grok claim (see _dropped) that Kazakhstan still used the 1993 SNA, sourced to a JS-rendered IMF page whose content could not be confirmed and which is contradicted by this current statement. Evidence: \"QNA is based on the requirements of the international standard 'System of National Accounts - 2008' and the 'Guide to Quarterly National Accounts' of the International Monetary Fund.\"",
       "evidence_url": "https://stat.gov.kz/en/standard/metadata/real/"
-    },
-    {
-      "source_report_id": "ge-geostat",
-      "target_report_id": "eu-georgia-association-agreement",
-      "relationship_type": "cites",
-      "basis": "Geostat's own news article on its 2020 Law on Official Statistics states the law was adopted specifically to fulfil the country's Association Agreement statistics obligations, naming the exact article -- a stronger, first-party source than the EU-funded twinning-project fiche Grok originally cited. Evidence: \"The new law aims the fulfilling the obligations envisaged under the Association Agreement between Georgia and the European Union, in particular, the approximation of the current legislation in the field of official statistics to the international standards and European legislation.\"",
-      "evidence_url": "https://www.geostat.ge/en/single-news/2873/the-law-of-georgia-on-official-statistics-was-adopted-by-the-parliament-of-georgia"
     },
     {
       "source_report_id": "kz-bns",
@@ -406,6 +385,13 @@
       "target": "imf-e-gdds",
       "reason": "unreadable-source",
       "why": "[Grok batch1] Grok's cited DSBB e-GDDS summary page for Tajikistan is a JS-rendered shell with no country content on live fetch. An IMF press release titled 'Tajikistan Implements the International Monetary Fund's Enhanced General Data Dissemination System' (March 2020, pr20/96) was located by search, corroborating the underlying fact, but its body text is behind IMF's JS-rendered article template and could not be fetched to obtain a verbatim quote; Tajikistan's own NSDP subdomain (nsdp.stat.tj) and the agency's homepage (stat.tj) were also checked directly -- the homepage carries no IMF/e-GDDS mention and the NSDP subdomain could not be reached due to a certificate/robots error. Real, but currently unreadable through available tools; a lead for a future pass, not a mint."
+    },
+    {
+      "edge": "ge-geostat -> eu-georgia-association-agreement",
+      "source": "ge-geostat",
+      "target": null,
+      "reason": "note",
+      "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): eu-georgia-association-agreement is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.geostat.ge/en/single-news/2873/the-law-of-georgia-on-official-statistics-was-adopted-by-the-parliament-of-georgia). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original basis: \"Geostat's own news article on its 2020 Law on Official Statistics states the law was adopted specifically to fulfil the country's Association Agreement statistics obligations, naming the exact article -- a stronger, first-party source than the EU-funded twinning-project fiche Grok originally cited. Evidence: \"The new law aims the fulfilling the obligations envisaged under the Association Agreement between Georgia and the European Union, in particular, the approximation of the current legislation in the field of official statistics to the international standards and European legislation.\"\""
     }
   ]
 }

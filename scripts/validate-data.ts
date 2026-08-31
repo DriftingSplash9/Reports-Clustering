@@ -414,6 +414,26 @@ console.log(
 console.log()
 
 /**
+ * PUBLISHERS — a node is a release, so its publisher is a body, not a
+ * derivation note. Added 2026-08-31 (audit finding D7, ruling 3-A): 62
+ * nodes whose publisher read "Derived from UNICEF and education monitoring
+ * sources" / "WHO / national sources" were retired that day and 166 lazy
+ * "X / related" strings rewritten; this keeps the class from growing back.
+ * Printed, never failed — a hedged publisher on a real release is a field
+ * to fix, not a build to break.
+ */
+const derivationPublisher = /^derived from|compilations|-aligned|\/ national sources|monitoring sources|\/ related|related$|related \//i
+const derivedPublishers = reports.filter((r) => derivationPublisher.test(r.publisher ?? ''))
+console.log(`PUBLISHERS — ${reports.length} nodes`)
+console.log(
+  derivedPublishers.length === 0
+    ? '  ✓ no publisher reads as a derivation note ("Derived from …", "X / related")'
+    : `  ! ${derivedPublishers.length} publisher(s) read as a derivation note, not a body — a topic is not a release (D7 ruling 3-A: retire or rename):`,
+)
+for (const r of derivedPublishers.slice(0, 20)) console.log(`      ${r.id} — "${r.publisher}"`)
+console.log()
+
+/**
  * EVIDENCE — the headline rule, counted.
  *
  * Added 2026-08-31 after an independent audit (finding D2) showed the

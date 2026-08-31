@@ -70,13 +70,6 @@
       "relationship_type": "cites",
       "basis": "Guinea's SNDS names AFRISTAT specifically as a planned source of nomenclature adaptation support (\"Adapter et vulgariser les nomenclatures d'activités et de produits des Etats membres d'AFRISTAT\"), matching the established pattern of reusing the shared afristat-ihpc-guide-2014 node when an institution is named as providing support, rather than minting a new per-country AFRISTAT document. relationship_type is 'cites' (not 'methodology_depends_on') because Guinea's own CPI methodology note (gn-ins-ihpc) attributes its methodology to UEMOA, not AFRISTAT directly — the AFRISTAT link here is at the strategy-document level, one step removed from the CPI itself.",
       "evidence_url": "https://www.ins.gov.gn/"
-    },
-    {
-      "source_report_id": "gn-anafic-decree",
-      "target_report_id": "gn-code-collectivites-locales-2017",
-      "relationship_type": "cites",
-      "basis": "ANAFIC/FNDL is the operational funding channel for the transfer mechanisms established in the Code's Articles 484 and 492.",
-      "evidence_url": "https://www.anafic.gov.gn/"
     }
   ],
   "_dropped": [
@@ -93,6 +86,13 @@
       "target": "gn-code-collectivites-locales-2017",
       "reason": "wrong-target",
       "why": "No document found connects Guinea's CPI to the local-collectivities fiscal-transfer code — these are separate domains (inflation vs. fiscal-transfers) with no documented citation between them. Recorded to avoid a future session re-attempting this same non-existent link."
+    },
+    {
+      "edge": "gn-anafic-decree -> gn-code-collectivites-locales-2017",
+      "source": "gn-anafic-decree",
+      "target": "gn-code-collectivites-locales-2017",
+      "reason": "no-document",
+      "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: cites. Original evidence_url: https://www.anafic.gov.gn/. Original basis: \"ANAFIC/FNDL is the operational funding channel for the transfer mechanisms established in the Code's Articles 484 and 492.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
     }
   ]
 }
