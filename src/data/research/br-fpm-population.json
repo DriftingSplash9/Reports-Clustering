@@ -103,37 +103,6 @@
       ]
     },
     {
-      "id": "br-censo-demografico",
-      "title": "Censo Demográfico",
-      "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-      "country": "BR",
-      "jurisdiction_level": "federal",
-      "region": "Brazil",
-      "description": "Brazil's decennial population census. Named by title and by year — the 2010 and 2022 censuses jointly — as the source of the municipal population totals the annual estimates are anchored to and grown from. The 2022 census ran twelve years after the 2010 one rather than ten, which the cadence figure reflects.",
-      "releases_per_year": 0.1,
-      "cadence_note": "Nominally decennial; the last two were 2010 and 2022.",
-      "release_schedule": {
-        "kind": "stated-rule",
-        "entries": [
-          {
-            "from": "2030-01-01",
-            "to": "2030-12-31",
-            "precision": "year",
-            "covers": "Censo Demográfico 2030 (next planned census)",
-            "evidence": "implied"
-          }
-        ],
-        "rule": "Lei 8.184/1991: \"A periodicidade dos Censos Demográficos, Censo Agropecuário e Censos Econômicos será fixada por ato do Poder Executivo, não podendo exceder a dez anos\" (periodicity of the Demographic Census shall be fixed by act of the Executive Power, not to exceed ten years). In practice IBGE has run the census roughly every 10 years (1970, 1980, 1991, 2000, 2010, 2022 — the 2020 edition was postponed to 2022 due to the pandemic).",
-        "source_url": "https://www.infomoney.com.br/economia/presidente-do-ibge-revela-discussoes-para-realizar-censo-2030-com-alternativas-hibridas/",
-        "note": "No formal Executive decree fixing the exact 2030 date/collection period has been located; IBGE's own president has publicly referred to work on a \"Censo 2030\" (discussing hybrid/technological collection methods), and a Brazilian news outlet (Estado de Minas, Jan 2026) states \"a próxima grande contagem da população brasileira está prevista para 2030\". This restores the original decennial cycle (2000, 2010, 2020→2022 delayed, 2030) rather than counting 10 years forward from the delayed 2022 edition (which would suggest 2032). Exact month/day of collection is not yet published."
-      },
-      "last_updated": null,
-      "url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html",
-      "domains": [
-        "population"
-      ]
-    },
-    {
       "id": "br-lei-8443",
       "title": "Lei nº 8.443, de 16 de julho de 1992 (Lei Orgânica do Tribunal de Contas da União)",
       "publisher": "Congresso Nacional / Presidência da República",
@@ -217,7 +186,7 @@
     },
     {
       "source_report_id": "br-ibge-estimativas-populacao",
-      "target_report_id": "br-censo-demografico",
+      "target_report_id": "br-ibge-censo-demografico",
       "relationship_type": "calculated_from",
       "basis": "VERIFIED DIRECTLY (same methodology note, same sentence): \"...e nos totais populacionais dos Municípios enumerados pelos Censos Demográficos 2010 e 2022.\" The note continues, on how the two censuses are used: \"As populações recenseadas nos Municípios nesses dois últimos Censos Demográficos foram ajustadas e serviram de base para o estabelecimento da tendência de crescimento da população para as Estimativas da População até a data de referência, em 1º de julho de 2025.\" Two named censuses supplying a growth trend, not merely a benchmark.",
       "evidence_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv102198.pdf"
@@ -272,6 +241,13 @@
       "target": null,
       "reason": "deferred",
       "why": "Deliberately out of scope. Scouting located IBGE's Sistema de Contas Nacionais (annual and quarterly) and the IPCA/INPC price indices, and the parallel Decisão Normativa fixing the state-level Fundo de Participação dos Estados coefficients, which reportedly uses the same sourcing language plus a per-capita income term. None built: this slice is one chain deliberately, and a Brazilian statistics pass deserves its own session rather than being half-done here."
+    },
+    {
+      "edge": "br-censo-demografico (duplicate node, merged into br-ibge-censo-demografico)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "MERGED 2026-08-31 (second independent audit F-13; Thomas's ruling: merge duplicates): `br-censo-demografico` was a same-title, same-publisher duplicate of `br-ibge-censo-demografico` (validator DUPLICATE-SHAPED block, D6). Node removed; 2 edge(s) redirected to the survivor: br-ibge-estimativas-populacao->br-ibge-censo-demografico, br-ibge-censo-demografico->un-census-principles. Fields carried onto the survivor where it lacked them: cadence_note, release_schedule, last_updated. Do not re-mint `br-censo-demografico`."
     }
   ]
 }

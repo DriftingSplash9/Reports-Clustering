@@ -144,14 +144,6 @@
       "evidence_quote": "Chaque année, l'Insee publie fin mars une première évaluation des comptes nationaux des administrations publiques sur l'année écoulée, correspondant à celle utilisée pour notifier la dette et le déficit publics à la Commission européenne."
     },
     {
-      "source_report_id": "dk-edp-inventory",
-      "target_report_id": "dk-govfin",
-      "relationship_type": "uses_data_from",
-      "basis": "The EDP methodology inventory documents how Denmark's national deficit/debt figures are compiled; this release is Danmarks Statistik's own EDP notification release, keyed to the same Eurostat EDP round.",
-      "evidence_url": "https://www.dst.dk/nyt/51756",
-      "evidence_quote": "Eurostats offentliggørelse pr. 21. oktober 2025 af Provision of deficit and debt data for 2024 - second notification."
-    },
-    {
       "source_report_id": "dk-govfin",
       "target_report_id": "esa-2010",
       "relationship_type": "methodology_depends_on",
@@ -214,6 +206,13 @@
       "target": "lu-govfin",
       "reason": "resolved",
       "why": "Genuine research gap, not blocked access. The one plausible candidate found — STATEC's Note de Conjoncture N°1-2026 (biannual economic-outlook bulletin, Chapter 5 'Finances publiques', published ~24 March 2026, just ahead of the April 1 EDP deadline) — reports Luxembourg's deficit/GDP figure but does not itself state that these ARE the notified EDP figures, does not name ESA 2010/SEC 2010, and does not name Council Regulation 479/2009 or the EDP — checked against the full text of both this edition and the prior (September 2025) edition. STATEC's only other mention of Regulation 479/2009 site-wide is a bare link-list entry on a general, undated methodology page (comptes-administrations-publiques.html), not a sentence — fails the same bar LU's inventory node itself would need to clear. STATEC's SDDS-Plus government-finance dissemination (GGO/GGD categories) is raw Excel/XML with no narrative text at all. Checked STATEC's actualites/publications RSS feeds (~1 year back): no dedicated deficit/debt press release exists as a standalone item. LEAD for a future round: STATEC may publish a formal Article 9-referenced notification only as a non-indexed PDF (the pattern several other countries' EDP releases follow) — worth a targeted site search or a direct request to STATEC's press office rather than another general web search. RESOLVED 2026-08-30: found via Eurostat's own EDP notification-tables index -- Luxembourg's April 2026 Article 9 notification (LU-2026-04.pdf), hosted on ec.europa.eu's central document repository, explicitly names Regulation 479/2009 and ESA 2010 in its own header. New node lu-govfin minted -- see eu-unlinked-wiring-round-2026-08-30.json."
+    },
+    {
+      "edge": "dk-edp-inventory -> dk-govfin",
+      "source": "dk-edp-inventory",
+      "target": "dk-govfin",
+      "reason": "no-document",
+      "why": "MOVED 2026-08-31 (second independent audit, finding F-05; Thomas's ruling: naming the agency is not naming the artefact): the cited page is the target's own EDP-round release; it never names the EDP methodology inventory or states use — shared EDP context only. Find the document that names the release itself before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://www.dst.dk/nyt/51756. Original basis: \"The EDP methodology inventory documents how Denmark's national deficit/debt figures are compiled; this release is Danmarks Statistik's own EDP notification release, keyed to the same Eurostat EDP round.\""
     }
   ]
 }

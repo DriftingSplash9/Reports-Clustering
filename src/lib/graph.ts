@@ -117,6 +117,48 @@ export function isBareHost(url: string): boolean {
 }
 
 /**
+ * True when an evidence URL is a listing rather than a document — a
+ * publications index, a statistics catalogue, a topic shell, a Rosstat
+ * `folder/<n>` listing, or a language-root homepage (`/en/`). Added
+ * 2026-08-31 (second independent audit, finding F-02): `isBareHost` only
+ * catches `https://host/`, so `https://brics.ibge.gov.br/publicacao.html` —
+ * cited by 23 edges and naming no data source — cleared the EVIDENCE block
+ * silently, as did `…/temas/turismo/` and `…/folder/64494`. Same class of
+ * defect as a bare homepage, same warning.
+ *
+ * Deliberately narrow: only the LAST path segment is judged, only against a
+ * short list of listing words, and only when there is no query string. A
+ * `…/download` endpoint, an `index.html` deep inside a document tree, or a
+ * BLS `data.htm` methodology chapter are documents and must not trip this —
+ * all three were false positives of a broader first draft.
+ */
+export function isIndexPage(url: string): boolean {
+  let u: URL
+  try {
+    u = new URL(url)
+  } catch {
+    return false
+  }
+  const segs = u.pathname.toLowerCase().split('/').filter(Boolean)
+  if (!segs.length) return false
+  if (segs.length === 1 && !u.search && LANGUAGE_ROOTS.has(segs[0])) return true
+  if (segs.length >= 2 && segs[segs.length - 2] === 'folder' && /^\d+$/.test(segs[segs.length - 1])) {
+    return true
+  }
+  const last = segs[segs.length - 1].replace(/\.(html?|php|aspx?)$/, '')
+  return !u.search && LISTING_WORDS.has(last)
+}
+
+const LANGUAGE_ROOTS = new Set(['en', 'fr', 'es', 'pt', 'de', 'ru', 'id', 'zh', 'ar', 'ja', 'ko'])
+const LISTING_WORDS = new Set([
+  'publicacao', 'publicacoes', 'publications', 'publication', 'publikationen', 'publikasi',
+  'temas', 'tema', 'topics', 'topic',
+  'statistics', 'statistik', 'statistiques', 'estadisticas', 'estatisticas',
+  'catalog', 'catalogue', 'category', 'categories',
+  'indicators', 'indicadores', 'reports', 'informes', 'relatorios',
+])
+
+/**
  * Structural checks on the seed data. Runs before scoring, because a dangling
  * edge silently distorts every authority number downstream.
  */
@@ -690,6 +732,16 @@ export function validate(
         message:
           `Edge ${key} cites a bare homepage (${d.evidence_url}) — a pointer is ` +
           `not a source; cite the document that names the relationship`,
+      })
+    } else if (d.evidence_url && isIndexPage(d.evidence_url)) {
+      // Second audit, F-02 (2026-08-31): the path-bearing sibling of the bare
+      // homepage. Same promotion gate as the two warnings above.
+      issues.push({
+        severity: 'warning',
+        message:
+          `Edge ${key} cites an index/listing page (${d.evidence_url}) — a ` +
+          `publications index or topic shell names both artefacts at best and ` +
+          `states no use; cite the document itself`,
       })
     }
     const p = d.reference_period

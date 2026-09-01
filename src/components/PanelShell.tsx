@@ -26,6 +26,9 @@ export function PanelShell({
   width,
   children,
   defaultCollapsed = false,
+  collapsed: controlledCollapsed,
+  onCollapsedChange,
+  hideTab = false,
 }: {
   side: 'left' | 'right'
   /** Shown on the tab when collapsed, and as the tab's title always. */
@@ -34,8 +37,24 @@ export function PanelShell({
   width: number
   children: ReactNode
   defaultCollapsed?: boolean
+  /**
+   * Controlled mode (2026-08-31, compact layout — see `useCompactLayout.ts`):
+   * when given, the parent owns the collapsed state and the Panels ▾ submenu
+   * drives it. Uncontrolled (the desktop default) keeps the tab-click
+   * behaviour below exactly as it was.
+   */
+  collapsed?: boolean
+  onCollapsedChange?: (collapsed: boolean) => void
+  /** Compact layout: the tab is not drawn — the menu is the only handle. */
+  hideTab?: boolean
 }) {
-  const [collapsed, setCollapsed] = useState(defaultCollapsed)
+  const [innerCollapsed, setInnerCollapsed] = useState(defaultCollapsed)
+  const collapsed = controlledCollapsed ?? innerCollapsed
+  const setCollapsed = (next: boolean | ((c: boolean) => boolean)) => {
+    const value = typeof next === 'function' ? next(collapsed) : next
+    if (onCollapsedChange) onCollapsedChange(value)
+    if (controlledCollapsed === undefined) setInnerCollapsed(value)
+  }
 
   // Slide by the panel's full width plus its 20px offset from the edge, so it
   // clears the viewport rather than leaving a sliver behind. The extra 24 is
@@ -68,6 +87,7 @@ export function PanelShell({
         is the one failure mode that makes this feature worse than not having
         it.
       */}
+      {!hideTab && (
       <button
         type="button"
         onClick={() => setCollapsed((c) => !c)}
@@ -110,6 +130,7 @@ export function PanelShell({
       >
         {collapsed ? label : side === 'left' ? '‹' : '›'}
       </button>
+      )}
     </>
   )
 }

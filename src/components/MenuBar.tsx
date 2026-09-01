@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import type { SavedView } from '../lib/savedViews'
 import { MENU_BAR_HEIGHT } from '../lib/uiTheme'
 
@@ -54,6 +54,16 @@ export type PanelKey =
   | 'compare'
 
 export type PanelVisibility = Record<PanelKey, boolean>
+
+/** The top-row panels that fold into submenus in the compact layout. */
+export type CompactPanelKey = 'reports' | 'find' | 'calendar' | 'view'
+export const COMPACT_PANEL_KEYS: readonly CompactPanelKey[] = ['reports', 'find', 'calendar', 'view']
+export const COMPACT_OPEN_NONE: Record<CompactPanelKey, boolean> = {
+  reports: false,
+  find: false,
+  calendar: false,
+  view: false,
+}
 
 /**
  * Every panel OFF. No longer the fresh-session default (see `PANELS_DEFAULT`
@@ -134,6 +144,9 @@ export function MenuBar({
   onDeleteView,
   onSetOpenOnLoad,
   onCopyLink,
+  compact = false,
+  compactOpen,
+  onCompactOpen,
 }: {
   panels: PanelVisibility
   onToggle: (key: PanelKey) => void
@@ -156,8 +169,21 @@ export function MenuBar({
    * MenuBar owns the interaction).
    */
   onCopyLink: () => string
+  /**
+   * Compact layout (2026-08-31, second audit F-12 — see
+   * `lib/useCompactLayout.ts`). Below the breakpoint the four top-row panels
+   * (Reports, Find, Calendar, View) have no tabs or pills of their own; each
+   * becomes a submenu here — Open / Close plus the usual enable tick — and
+   * the parent keeps exactly one of them open at a time. `compactOpen` is
+   * that state; `onCompactOpen` sets it. Absent on desktop, where the
+   * Panels menu is unchanged.
+   */
+  compact?: boolean
+  compactOpen?: Record<CompactPanelKey, boolean>
+  onCompactOpen?: (key: CompactPanelKey, open: boolean) => void
 }) {
   const [open, setOpen] = useState<null | 'panels' | 'help' | 'views'>(null)
+  const [openSubmenu, setOpenSubmenu] = useState<CompactPanelKey | null>(null)
   const [draftName, setDraftName] = useState('')
   const [linkCopied, setLinkCopied] = useState(false)
   const barRef = useRef<HTMLDivElement | null>(null)
@@ -242,15 +268,51 @@ export function MenuBar({
         isOpen={open === 'panels'}
         onClick={() => setOpen((o) => (o === 'panels' ? null : 'panels'))}
       >
-        {PANEL_ITEMS.map((item) => (
-          <MenuItem
-            key={item.key}
-            label={item.label}
-            hint={item.hint}
-            checked={panels[item.key]}
-            onClick={() => onToggle(item.key)}
-          />
-        ))}
+        {PANEL_ITEMS.map((item) => {
+          const ck = item.key as CompactPanelKey
+          const foldable = compact && (COMPACT_PANEL_KEYS as readonly string[]).includes(item.key)
+          if (!foldable) {
+            return (
+              <MenuItem
+                key={item.key}
+                label={item.label}
+                hint={item.hint}
+                checked={panels[item.key]}
+                onClick={() => onToggle(item.key)}
+              />
+            )
+          }
+          const isOpen = !!compactOpen?.[ck]
+          return (
+            <MenuSubmenu
+              key={item.key}
+              label={item.label}
+              hint={item.hint}
+              status={!panels[item.key] ? 'off' : isOpen ? 'open' : 'closed'}
+              expanded={openSubmenu === ck}
+              onExpand={() => setOpenSubmenu((k) => (k === ck ? null : ck))}
+            >
+              <MenuItem
+                label={isOpen ? 'Close' : 'Open'}
+                hint={isOpen ? 'Slide it away (stays enabled)' : 'Slide it in; any other open top-row panel closes'}
+                onClick={() => {
+                  if (!panels[item.key] && !isOpen) onToggle(item.key)
+                  onCompactOpen?.(ck, !isOpen)
+                  setOpen(null)
+                }}
+              />
+              <MenuItem
+                label="Enabled"
+                hint="Untick to remove the panel entirely, same as on a wide window"
+                checked={panels[item.key]}
+                onClick={() => {
+                  if (panels[item.key] && isOpen) onCompactOpen?.(ck, false)
+                  onToggle(item.key)
+                }}
+              />
+            </MenuSubmenu>
+          )
+        })}
         <MenuSeparator />
         <MenuItem label="Show all" onClick={onShowAll} />
         <MenuItem label="Hide all" onClick={onHideAll} />
@@ -559,6 +621,69 @@ function MenuButton({
             zIndex: 36,
           }}
         >
+          {children}
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * An accordion submenu inside the dropdown — the compact layout's handle for
+ * a top-row panel. An accordion rather than a fly-out on purpose: fly-outs
+ * open to the right, and the whole point of this mode is that there is no
+ * room to the right.
+ */
+function MenuSubmenu({
+  label,
+  hint,
+  status,
+  expanded,
+  onExpand,
+  children,
+}: {
+  label: string
+  hint?: string
+  status: 'off' | 'closed' | 'open'
+  expanded: boolean
+  onExpand: () => void
+  children: ReactNode
+}) {
+  const [hover, setHover] = useState(false)
+  return (
+    <div role="group" aria-label={label}>
+      <button
+        type="button"
+        role="menuitem"
+        aria-expanded={expanded}
+        onClick={onExpand}
+        onPointerEnter={() => setHover(true)}
+        onPointerLeave={() => setHover(false)}
+        title={hint}
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: 8,
+          width: '100%',
+          textAlign: 'left',
+          padding: '6px 8px',
+          fontFamily: 'inherit',
+          fontSize: 11,
+          color: status === 'off' ? 'var(--ink-label)' : 'var(--ink-strong)',
+          background: hover ? 'var(--accent-active)' : 'transparent',
+          border: 'none',
+          borderRadius: 5,
+          cursor: 'pointer',
+        }}
+      >
+        <span style={{ width: 10, flex: '0 0 10px', color: 'var(--ink-gold)' }}>
+          {status === 'open' ? '●' : status === 'closed' ? '○' : ''}
+        </span>
+        <span style={{ flex: 1 }}>{label}</span>
+        <span style={{ color: 'var(--ink-dim)', fontSize: 9 }}>{expanded ? '▾' : '▸'}</span>
+      </button>
+      {expanded && (
+        <div style={{ paddingLeft: 14, borderLeft: '1px solid var(--line-faint)', marginLeft: 12 }}>
           {children}
         </div>
       )}

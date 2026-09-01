@@ -335,13 +335,6 @@
     },
     {
       "source_report_id": "qc-decret-population",
-      "target_report_id": "isq-bilan-demographique",
-      "relationship_type": "calculated_from",
-      "basis": "By statute the Décret de population must be established on the basis of the population estimates produced by the Institut de la statistique du Québec; the Bilan démographique and related ISQ demographic products are the public expression of those estimates. The document states: \"Le dénombrement est basé sur des estimations faites par l' Institut de la statistique du Québec en date du 1 er juillet 2025.\"",
-      "evidence_url": "https://www.quebec.ca/gouvernement/gestion-municipale/organisation-municipale/decret-population"
-    },
-    {
-      "source_report_id": "qc-decret-population",
       "target_report_id": "statcan-population-estimates",
       "relationship_type": "uses_data_from",
       "basis": "ISQ population estimates that feed the Décret are produced in collaboration with Statistics Canada and rest on the adjusted census counts and intercensal estimates published by StatCan. The document states: \"Les estimations de la population sont produites par Statistique Canada, avec la collaboration de l’Institut de la statistique du Québec (ISQ) et de plusieurs ministères et organismes. Elles ont comme base les comptes de population des recensements\"",
@@ -614,6 +607,13 @@
       "target": "isq-vitalite-economique",
       "reason": "note",
       "why": "RESOLVED 2026-08-26 (Thomas's call, HANDOFF item 3): held, not minted. The evidentiary gap (s.5.1 names the index, not ISQ by name) is the same one the corpus's own precedent already treats as insufficient alone - not worth minting over. Original finding follows.\n\nNot minted — contradicts an existing, already-adjudicated finding in grok-h1-municipal-ontario-quebec.json, which concluded F-2.1 r.11 (the peréquation regulation) 'nowhere names ISQ' and remapped this exact fact to qc-partage-croissance-tvq -> isq-vitalite-economique instead (already live in the corpus). This round's independent citation names a DIFFERENT provision of the SAME regulation (s.5.1, 'troisieme volet' eligibility test) that the earlier round may not have checked, so this may be a genuinely separate, real dependency rather than the same mistake recurring — needs a human or a future round to read s.5.1 directly against both citations before either minting or discarding for good. This round's citation: The third volet of the municipal equalization regime makes eligibility conditional on the municipality's Indice de vitalité économique falling in the third, fourth or fifth quintile of the latest available ISQ list. The document states: \"Est admissible au troisième volet du régime toute municipalité locale à l’égard de laquelle sont remplies les conditions suivantes pour l’exercice courant: ... 3 ° son indice de vitalité économique se situe dans le troisième, le quatrième ou le cinquième quintil"
+    },
+    {
+      "edge": "qc-decret-population -> isq-bilan-demographique",
+      "source": "qc-decret-population",
+      "target": "isq-bilan-demographique",
+      "reason": "no-document",
+      "why": "MOVED 2026-08-31 (second independent audit, finding F-05; Thomas's ruling: naming the agency is not naming the artefact): the cited page states the decree rests on ISQ population estimates but never names the Bilan démographique du Québec — the agency, not the artefact. Find the document that names the release itself before re-minting. Original relationship_type: calculated_from. Original evidence_url: https://www.quebec.ca/gouvernement/gestion-municipale/organisation-municipale/decret-population. Original basis: \"By statute the Décret de population must be established on the basis of the population estimates produced by the Institut de la statistique du Québec; the Bilan démographique and related ISQ demographic products are the public expression of those estimates. The document states: \"Le dénombrement est basé sur des estimations faites par l' Institut de la statistique du Québec en date du 1 er juillet 2025.\"\""
     }
   ]
 }

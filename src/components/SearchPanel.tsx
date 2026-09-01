@@ -70,6 +70,9 @@ export default function SearchPanel({
   selectedGroupId,
   outsideIsolate,
   outsideFilter,
+  compact = false,
+  minimized: controlledMinimized,
+  onMinimizedChange,
 }: {
   graph: Graph
   onChoose: (report: ScoredReport) => void
@@ -102,6 +105,16 @@ export default function SearchPanel({
    * inventing a new one.
    */
   outsideFilter?: ((report: ScoredReport) => boolean) | null
+  /**
+   * Compact layout (2026-08-31, second audit F-12 — see
+   * `lib/useCompactLayout.ts`): the parent owns `minimized`, the Panels ▾
+   * submenu drives it, the collapsed pill is not drawn, and the open bar
+   * anchors at the window's left edge (the Reports tab it used to dodge is
+   * not drawn either) at whatever width fits. `/` still opens it.
+   */
+  compact?: boolean
+  minimized?: boolean
+  onMinimizedChange?: (minimized: boolean) => void
 }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -111,7 +124,12 @@ export default function SearchPanel({
   // pill/tab rather than sprawled wide; this one was the one holdout still
   // defaulting to `false` (expanded). `/` still un-minimizes it from
   // anywhere, unchanged.
-  const [minimized, setMinimized] = useState(true)
+  const [innerMinimized, setInnerMinimized] = useState(true)
+  const minimized = controlledMinimized ?? innerMinimized
+  const setMinimized = (m: boolean) => {
+    if (onMinimizedChange) onMinimizedChange(m)
+    if (controlledMinimized === undefined) setInnerMinimized(m)
+  }
   const inputRef = useRef<HTMLInputElement>(null)
   // Skips the focus effect below on first mount — see that effect's comment.
   const firstRender = useRef(true)
@@ -157,6 +175,8 @@ export default function SearchPanel({
   // GroupsPanel country box and the Compare pickers were bitten the same
   // way). Also un-minimizes — "/" is the keyboard escape hatch out of the
   // collapsed pill, same as a click on it.
+  const setMinimizedRef = useRef(setMinimized)
+  setMinimizedRef.current = setMinimized
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const el = document.activeElement as HTMLElement | null
@@ -168,7 +188,7 @@ export default function SearchPanel({
           el.isContentEditable)
       if (e.key === '/' && !typing) {
         e.preventDefault()
-        setMinimized(false)
+        setMinimizedRef.current(false)
         inputRef.current?.focus()
       }
     }
@@ -229,7 +249,14 @@ export default function SearchPanel({
     }
   }
 
+  // Compact layout: no pill — the Panels ▾ submenu is the only handle, and
+  // the open bar hugs the left edge at whatever width the window allows.
+  const wrapStyle: React.CSSProperties = compact
+    ? { ...wrap, left: 20, width: `min(${SEARCH_BAR_WIDTH}px, calc(100vw - 40px))` }
+    : wrap
+
   if (minimized) {
+    if (compact) return null
     return (
       <div style={wrap}>
         <button
@@ -244,7 +271,7 @@ export default function SearchPanel({
   }
 
   return (
-    <div style={wrap}>
+    <div style={wrapStyle}>
       <div style={inputRow}>
         <input
           ref={inputRef}

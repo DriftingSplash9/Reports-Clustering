@@ -687,16 +687,6 @@
       ]
     },
     {
-      "source_report_id": "et-nbe-monetary-statistics",
-      "target_report_id": "et-nbe-bop",
-      "relationship_type": "uses_data_from",
-      "basis": "Net foreign assets and reserve movements in the monetary survey are consistent with the external accounts compiled in the Balance of Payments.",
-      "evidence_url": "https://nbe.gov.et/publications-statistics/statistics/",
-      "_batch": [
-        "2026-08-17_Ethiopia-domestic-batch1.json"
-      ]
-    },
-    {
       "source_report_id": "et-gdp-national-accounts",
       "target_report_id": "et-statistics-proclamation",
       "relationship_type": "methodology_depends_on",
@@ -1158,6 +1148,13 @@
       "target": "et-producer-price-index",
       "reason": "no-document",
       "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://ess.gov.et/. Original basis: \"Manufacturing output values and deflation draw on producer price information compiled by the ESS price statistics system.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "et-nbe-monetary-statistics -> et-nbe-bop",
+      "source": "et-nbe-monetary-statistics",
+      "target": "et-nbe-bop",
+      "reason": "deferred",
+      "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://nbe.gov.et/publications-statistics/statistics/. Original basis: \"Net foreign assets and reserve movements in the monetary survey are consistent with the external accounts compiled in the Balance of Payments.\""
     }
   ]
 }

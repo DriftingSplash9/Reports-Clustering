@@ -5,22 +5,6 @@
   "_note": "Direct `curl` access to www.ibge.gov.br (deep paths) and portal.tcu.gov.br was blocked by Cloudflare/WAF from this session's environment (403 'Just a moment...' challenge for IBGE; TLS connection reset for TCU), and www.bcb.gov.br/controleinflacao/historicometas and the BCB normativo-lookup page are JS-rendered and return no content to raw curl. For those pages this session used the r.jina.ai read-only rendering proxy to retrieve the live page -- the documents themselves are IBGE's, TCU's and the Banco Central's own government pages, not third-party-hosted mirrors, only reached through a rendering workaround because of the challenge/JS-rendering on direct fetch, the same shape as other branches' TLS/Cloudflare workarounds (e.g. the AF branch's Eswatini `curl --insecure` note). Authenticity was cross-checked against internally consistent current dates in the fetched content (e.g. 'Julho 2026' IPCA results, TCU homepage news dated 12/08/2026, a DN dated 18/03/2026 -- all coherent with the research date of 2026-08-13) and, far more importantly, against documents fetched with plain, unmodified `curl -sL` returning genuine HTTP 200 and real file bytes with no proxy involved at all: every planalto.gov.br statute/decree used below, and two TCU PDFs (DN 215/2025 and the DN 221/2026 exercicio-2027 PDF) downloaded directly and verified as real PDF binaries via pdftotext -- the strongest tier, and the source of every per-state coefficient and formula quotation in br-fpe-dn-tcu and br-lc-62-1989. Every `basis` below is this session's own read of the underlying research.",
   "reports": [
     {
-      "id": "br-ipca",
-      "title": "Índice Nacional de Preços ao Consumidor Amplo (IPCA)",
-      "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
-      "country": "BR",
-      "jurisdiction_level": "federal",
-      "region": "Brazil",
-      "description": "IBGE's broad consumer price index, produced since December 1979 and Brazil's headline inflation measure. Its own methodology statement, quoted directly: \"O IPCA tem por objetivo medir a inflação de um conjunto de produtos e serviços comercializados no varejo, referentes ao consumo pessoal das famílias, cujo rendimento varia entre 1 e 40 salários mínimos... Esta faixa de renda foi criada com o objetivo de garantir uma cobertura de 90% das famílias pertencentes às áreas urbanas de cobertura do Sistema Nacional de Índices de Preços ao Consumidor - SNIPC.\" IBGE's own page also states its later adoption as the Banco Central's policy reference: \"Mais tarde, a partir de julho de 1999, o IPCA passou a ser utilizado como índice de preços oficial para referência da política monetária do Banco Central, no contexto do regime de metas de inflação.\" The instrument that actually names IPCA for that purpose is Resolução CMN 5.141/2024, not this IBGE claim alone -- see br-resolucao-cmn-5141. History, also from this page: produced by IBGE since December 1979; briefly Brazil's official indexer under Decreto 91.990 from November 1985 until March 1986. Fetched this session via the r.jina.ai rendering proxy after direct curl returned a 403 Cloudflare challenge on www.ibge.gov.br; the underlying document is IBGE's own product page.",
-      "releases_per_year": 12,
-      "cadence_note": "IBGE's own page states: \"Periodicidade de divulgação: Mensal\".",
-      "last_updated": null,
-      "url": "https://www.ibge.gov.br/estatisticas/economicas/precos-e-custos/9256-indice-nacional-de-precos-ao-consumidor-amplo.html",
-      "domains": [
-        "inflation"
-      ]
-    },
-    {
       "id": "br-inpc",
       "title": "Índice Nacional de Preços ao Consumidor (INPC)",
       "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
@@ -137,7 +121,7 @@
     },
     {
       "source_report_id": "br-resolucao-cmn-5141",
-      "target_report_id": "br-ipca",
+      "target_report_id": "br-ibge-ipca",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY. Resolução CMN 5.141/2024 Art. 1º: \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o Índice Nacional de Preços ao Consumidor Amplo – IPCA, calculado pelo Instituto Brasileiro de Geografia e Estatística – IBGE.\" The Banco Central's own historical-targets page (bcb.gov.br/controleinflacao/historicometas) confirms this is operative, not merely declaratory: it reports year-by-year compliance as \"Variação do IPCA\" -- the published index figures are the direct input to measuring whether the target was met.",
       "evidence_url": "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolução CMN&numero=5141"
@@ -165,7 +149,7 @@
     },
     {
       "source_report_id": "br-lc-62-1989",
-      "target_report_id": "br-ipca",
+      "target_report_id": "br-ibge-ipca",
       "relationship_type": "calculated_from",
       "basis": "VERIFIED DIRECTLY. LC 62/1989 Art. 2º ties the FPE's own statutory floor amount to a mechanical IPCA-based correction: \"cada entidade beneficiária receberá valor igual ao que foi distribuído no correspondente decêndio do exercício de 2015, corrigido pela variação acumulada do Índice Nacional de Preços ao Consumidor Amplo (IPCA)... e pelo percentual equivalente a 75% da variação real do Produto Interno Bruto nacional...\" This is a stated formula (2015 base value x accumulated IPCA variation x a GDP-growth factor), not a citation for context -- the corrected value is mechanically derived from IPCA's published cumulative variation, the same shape `calculated_from` describes elsewhere in this corpus for escalator/indexation formulas. Directly connects the FPE topic back to the IPCA/INPC topic in this same file.",
       "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp62.htm"
@@ -213,6 +197,13 @@
       "target": null,
       "reason": "note",
       "why": "A correction recorded because it is the kind of plausible-but-wrong hypothesis this corpus exists to catch. The FPE is Art. 159, I, alínea \"a\" (verified directly against the Constitution's own compiled text at planalto.gov.br, and confirmed a third time verbatim inside TCU's own DN 215/2025 preamble), not Art. 159, II. Art. 159, II is a wholly different fund: \"do produto da arrecadação do imposto sobre produtos industrializados... 10%... aos Estados e ao Distrito Federal, proporcionalmente ao valor das respectivas exportações de produtos industrializados\" -- the IPI-Exportação fund (sometimes called FPEx), apportioned by export value and unrelated to population or income. This correction is folded into br-fpe-dn-tcu's own description; recorded here separately so a future BRICS-branch session does not re-introduce the wrong citation."
+    },
+    {
+      "edge": "br-ipca (duplicate node, merged into br-ibge-ipca)",
+      "source": null,
+      "target": null,
+      "reason": "note",
+      "why": "MERGED 2026-08-31 (second independent audit F-13; Thomas's ruling: merge duplicates): `br-ipca` was a same-title, same-publisher duplicate of `br-ibge-ipca` (validator DUPLICATE-SHAPED block, D6). Node removed; 3 edge(s) redirected to the survivor: br-resolucao-cmn-5141->br-ibge-ipca, br-lc-62-1989->br-ibge-ipca, br-ibge-ipca->cpi-manual. Fields carried onto the survivor where it lacked them: cadence_note, last_updated. Do not re-mint `br-ipca`."
     }
   ]
 }

@@ -487,6 +487,39 @@ other nodes), `tr-eu-trade` (named like a treaty, actually merchandise
 trade statistics), `sdmx-standard`/`sna-2025` (statistical standards, not
 agreements).
 
+**Naming the agency is not naming the artefact** (Thomas, 2026-08-31,
+ruling on the second audit's F-05). A document that says the figure comes
+from "the Department of Commerce", "ISQ", "FCSC" or "the central bank" —
+without naming the release — does not clear the evidence bar for an edge to
+that agency's *specific* publication. It is a lead: the release still has
+to be found by title. Six such edges went to `_dropped` `no-document` that
+day (`hhs-fmap-notice -> bea-state-personal-income`, `qc-decret-population
+-> isq-bilan-demographique`, `gcc-stat -> ae-labour`, `dk-edp-inventory ->
+dk-govfin`, `br-ibge-pim-pf -> br-ibge-sistema-contas-nacionais`,
+`ndb-evaluation-policy -> brics-ndb-agreement-2014`), and REPORTS.md's own
+"disclosure stops one level short of a title" note is the reason this is
+the normal case, not the rare one. Nothing in the validator can catch it —
+the guard is this paragraph and the reviewer.
+
+**"Consistent with" is a claim about numbers, not a citation** (Thomas,
+2026-08-31, ruling on the second audit's F-03). A basis that says two series
+are consistent, aligned or comparable — and quotes no passage — describes
+agreement between figures, not a document naming one as the other's input.
+38 such edges (28 of them in the Russian regional slices) were moved to
+`_dropped` `deferred` as leads, originals preserved in `why`. The shape to
+watch for in Grok output: "X data in national compilations are consistent
+with the Y yearbook" — that is the tell.
+
+**An index page is a bare homepage with a path** (Thomas, 2026-08-31,
+ruling on the second audit's F-01/F-02). `brics.ibge.gov.br/publicacao.html`
+stood behind 23 edges and names no data source; `inegi.org.mx/temas/...`,
+Rosstat `folder/<n>` listings are the same class. All 23 went to `_dropped`
+`no-document`; `isIndexPage()` in graph.ts now warns on the class (45 more
+edges on the day it landed, listed in the validator's EVIDENCE block beside
+the bare-homepage count, plus an informational "URLs behind 10+ edges" list —
+one URL rubber-stamping dozens of edges is the tell). Same promotion gate as
+the other two evidence warnings.
+
 **A legal instrument stays a legitimate node when a statistical release
 names it as its own legal/methodological basis** — Japan's Statistics
 Act, Brazil's Lei 8.213, the EAEU statistical protocol, national social-

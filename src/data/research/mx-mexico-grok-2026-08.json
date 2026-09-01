@@ -2467,30 +2467,10 @@
     },
     {
       "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.inegi.org.mx/programas/cnije/",
-      "basis": "State judiciary statistics feed into and are consistent with the national CNIJE.",
-      "source_report_id": "mx-jalisco-pj",
-      "target_report_id": "mx-cnije",
-      "_batch": [
-        "2026-08-13_Mexico-batch10-guadalajara.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
       "evidence_url": "https://www.inegi.org.mx/programas/ce/",
       "basis": "Municipal production and establishment counts that underpin Monterrey’s economic ranking come from the Economic Census municipal results.",
       "source_report_id": "mx-municipio-monterrey",
       "target_report_id": "mx-censo-economico-municipal",
-      "_batch": [
-        "2026-08-13_Mexico-batch11-monterrey.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.inegi.org.mx/programas/cnije/",
-      "basis": "State judiciary statistics feed into and are consistent with the national CNIJE.",
-      "source_report_id": "mx-nuevo-leon-pj",
-      "target_report_id": "mx-cnije",
       "_batch": [
         "2026-08-13_Mexico-batch11-monterrey.json"
       ]
@@ -2658,16 +2638,6 @@
     },
     {
       "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.inegi.org.mx/temas/exportacionesef",
-      "basis": "State export totals are consistent with / derived in relation to the national merchandise trade balance.",
-      "source_report_id": "mx-etef",
-      "target_report_id": "mx-balanza-comercial",
-      "_batch": [
-        "2026-08-13_Mexico-batch6.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
       "evidence_url": "https://www.inegi.org.mx/temas/turismo/",
       "basis": "Tourism satellite account draws on the Input-Output Matrix and Supply-and-Use Tables.",
       "source_report_id": "mx-cstm",
@@ -2712,16 +2682,6 @@
       "basis": "Culture satellite account follows SNA 2008 and is integrated with the Mexican national-accounts framework.",
       "source_report_id": "mx-cscm",
       "target_report_id": "mx-scnm",
-      "_batch": [
-        "2026-08-13_Mexico-batch7.json"
-      ]
-    },
-    {
-      "relationship_type": "uses_data_from",
-      "evidence_url": "https://www.banxico.org.mx/publicaciones-y-prensa/balanza-de-pagos/",
-      "basis": "Merchandise trade component of the current account draws on / is consistent with INEGI merchandise trade statistics.",
-      "source_report_id": "mx-banxico-bop",
-      "target_report_id": "mx-balanza-comercial",
       "_batch": [
         "2026-08-13_Mexico-batch7.json"
       ]
@@ -2806,6 +2766,34 @@
       "target": null,
       "reason": "note",
       "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): mx-tmec is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://www.banxico.org.mx/publicaciones-y-prensa/informes-trimestrales/). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: methodology_depends_on. Original basis: \"Trade statistics and Banxico analysis routinely measure the share of merchandise trade that utilises T-MEC preferential treatment and rules of origin; the Treaty is the institutional framework that defines preferential eligibility.\""
+    },
+    {
+      "edge": "mx-jalisco-pj -> mx-cnije",
+      "source": "mx-jalisco-pj",
+      "target": "mx-cnije",
+      "reason": "deferred",
+      "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://www.inegi.org.mx/programas/cnije/. Original basis: \"State judiciary statistics feed into and are consistent with the national CNIJE.\""
+    },
+    {
+      "edge": "mx-nuevo-leon-pj -> mx-cnije",
+      "source": "mx-nuevo-leon-pj",
+      "target": "mx-cnije",
+      "reason": "deferred",
+      "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://www.inegi.org.mx/programas/cnije/. Original basis: \"State judiciary statistics feed into and are consistent with the national CNIJE.\""
+    },
+    {
+      "edge": "mx-etef -> mx-balanza-comercial",
+      "source": "mx-etef",
+      "target": "mx-balanza-comercial",
+      "reason": "deferred",
+      "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://www.inegi.org.mx/temas/exportacionesef. Original basis: \"State export totals are consistent with / derived in relation to the national merchandise trade balance.\""
+    },
+    {
+      "edge": "mx-banxico-bop -> mx-balanza-comercial",
+      "source": "mx-banxico-bop",
+      "target": "mx-balanza-comercial",
+      "reason": "deferred",
+      "why": "LEAD, NOT EVIDENCE — moved out of the graph 2026-08-31 (second independent audit, finding F-03; Thomas's ruling: treat 'consistent with' bases as leads). The basis asserts that two series are consistent/aligned, which is a statement about agreement between numbers, not a document naming one as an input to the other, and it quotes no passage. Kept as a lead: find the publication's own methodology or source note before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://www.banxico.org.mx/publicaciones-y-prensa/balanza-de-pagos/. Original basis: \"Merchandise trade component of the current account draws on / is consistent with INEGI merchandise trade statistics.\""
     }
   ]
 }

@@ -133,10 +133,13 @@ New research goes in a **slice**, not in the seed files. Drop a JSON file into
 
 The loader is deliberately forgiving so slices can arrive in any order: an edge
 pointing at a report nobody has researched yet is **dropped and logged**, not
-treated as an error. Same for a report that ends up with no surviving edge, and
-for an edge that is defined in two places — the first definition wins and the
-second is logged. If something you added does not appear in the graph, the
-validate output tells you which of the three happened.
+treated as an error, and a report that ends up with no surviving edge is kept
+and shelved. Two things are *not* forgiven, and fail `npm run validate`: a
+report id defined in two slices (first definition wins, the later copy is
+dropped and the run fails), and an edge defined twice (the later definition
+wins in the loader, but the run fails so the two copies get merged by hand —
+see `assembleCorpus.ts`). If something you added does not appear in the graph,
+the validate output tells you which happened.
 
 Every dependency needs an `evidence_url` — a document that explicitly names the
 relationship. No document, no edge. See `REPORTS.md`.

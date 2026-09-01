@@ -50,14 +50,32 @@ export default function CalendarPanel({
   dependencies,
   within,
   onChoose,
+  compact = false,
+  collapsed: controlledCollapsed,
+  onCollapsedChange,
 }: {
   graph: Graph
   dependencies: Dependency[]
   /** The scope filter, so the calendar never lists a report the graph is hiding. */
   within: NodePredicate
   onChoose: (report: ScoredReport) => void
+  /**
+   * Compact layout (2026-08-31, second audit F-12 — see
+   * `lib/useCompactLayout.ts`): the parent owns `collapsed`, the Panels ▾
+   * submenu drives it, and the tab beside the search bar is not drawn. The
+   * panel itself stays centred but clamps to the window width.
+   */
+  compact?: boolean
+  collapsed?: boolean
+  onCollapsedChange?: (collapsed: boolean) => void
 }) {
-  const [collapsed, setCollapsed] = useState(true)
+  const [innerCollapsed, setInnerCollapsed] = useState(true)
+  const collapsed = controlledCollapsed ?? innerCollapsed
+  const setCollapsed = (next: boolean | ((c: boolean) => boolean)) => {
+    const value = typeof next === 'function' ? next(collapsed) : next
+    if (onCollapsedChange) onCollapsedChange(value)
+    if (controlledCollapsed === undefined) setInnerCollapsed(value)
+  }
   const [horizon, setHorizon] = useState<Horizon>('month')
   const [showReads, setShowReads] = useState(true)
 
@@ -130,9 +148,9 @@ export default function CalendarPanel({
           // below it; same tab, same animation, opposite edge.
           position: 'fixed',
           top: HUD_TOP + 44,
-          left: '50%',
-          width: PANEL_WIDTH,
-          marginLeft: -PANEL_WIDTH / 2,
+          left: compact ? 20 : '50%',
+          width: compact ? `min(${PANEL_WIDTH}px, calc(100vw - 40px))` : PANEL_WIDTH,
+          marginLeft: compact ? 0 : -PANEL_WIDTH / 2,
           transform: `translateY(${collapsed ? -(PANEL_HEIGHT + 90) : 0}px)`,
           transition: 'transform 220ms cubic-bezier(0.4, 0, 0.2, 1)',
           pointerEvents: collapsed ? 'none' : 'auto',
@@ -287,6 +305,7 @@ export default function CalendarPanel({
         </div>
       </div>
 
+      {!compact && (
       <button
         type="button"
         onClick={() => setCollapsed((c) => !c)}
@@ -342,6 +361,7 @@ export default function CalendarPanel({
         </span>
         Calendar
       </button>
+      )}
     </>
   )
 }

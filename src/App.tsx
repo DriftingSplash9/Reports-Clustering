@@ -24,7 +24,8 @@ import CalendarPanel from './components/CalendarPanel'
 import { describeWindow, nextRelease } from './lib/schedule'
 import CameraZoom from './components/CameraZoom'
 import { PanelShell } from './components/PanelShell'
-import { MenuBar, PANELS_HIDDEN, PANELS_DEFAULT, type PanelKey, type PanelVisibility } from './components/MenuBar'
+import { MenuBar, PANELS_HIDDEN, PANELS_DEFAULT, COMPACT_OPEN_NONE, type CompactPanelKey, type PanelKey, type PanelVisibility } from './components/MenuBar'
+import { useCompactLayout } from './lib/useCompactLayout'
 import { HelpCard } from './components/HelpCard'
 import { LoadingCurtain } from './components/LoadingCurtain'
 import {
@@ -1221,6 +1222,22 @@ export default function App() {
    * the same thing, the ordinary fresh-load experience, not a bare canvas
    * with only the menu bar to explain it.
    */
+  /**
+   * Compact layout (2026-08-31, second audit F-12 — `lib/useCompactLayout.ts`
+   * has the why). Below the breakpoint the four top-row panels lose their
+   * tabs/pills and are opened from Panels ▾ submenus, one at a time: opening
+   * one closes the others, because at ≤1024px two of them cannot share the
+   * row without the exact overlap the dev tripwire below exists to catch.
+   * Not persisted — it is a property of the window, not a preference.
+   */
+  const compact = useCompactLayout()
+  const [compactOpen, setCompactOpen] = useState(COMPACT_OPEN_NONE)
+  const setCompactPanel = useCallback((key: CompactPanelKey, open: boolean) => {
+    setCompactOpen((prev) =>
+      open ? { ...COMPACT_OPEN_NONE, [key]: true } : { ...prev, [key]: false },
+    )
+  }, [])
+
   const [panels, setPanels] = useState<PanelVisibility>(() => {
     try {
       // A starred view carries its own panel set and outranks the standalone
@@ -1606,6 +1623,9 @@ export default function App() {
         }}
         onDeleteView={deleteView}
         onSetOpenOnLoad={setOpenOnLoad}
+        compact={compact}
+        compactOpen={compactOpen}
+        onCompactOpen={setCompactPanel}
         onCopyLink={() =>
           buildDeepLink({
             drilldown,
@@ -1624,7 +1644,15 @@ export default function App() {
           only controls whether this exists at all, not whether it opens wide
           or as a tab. */}
       {panels.view && (
-      <PanelShell side="right" label="View" width={190} defaultCollapsed>
+      <PanelShell
+        side="right"
+        label="View"
+        width={190}
+        defaultCollapsed
+        hideTab={compact}
+        collapsed={compact ? !compactOpen.view : undefined}
+        onCollapsedChange={compact ? (c) => setCompactPanel('view', !c) : undefined}
+      >
         <ViewControls
           view={view}
           onChange={setView}
@@ -1645,6 +1673,9 @@ export default function App() {
           selectedGroupId={selectedGroupId}
           outsideIsolate={searchOutsideIsolate}
           outsideFilter={searchOutsideFilter}
+          compact={compact}
+          minimized={compact ? !compactOpen.find : undefined}
+          onMinimizedChange={compact ? (m) => setCompactPanel('find', !m) : undefined}
         />
       )}
 
@@ -1731,12 +1762,23 @@ export default function App() {
           dependencies={dependencies}
           within={predicate}
           onChoose={handleChoose}
+          compact={compact}
+          collapsed={compact ? !compactOpen.calendar : undefined}
+          onCollapsedChange={compact ? (c) => setCompactPanel('calendar', !c) : undefined}
         />
       )}
 
       {/* defaultCollapsed — see the same note on the View PanelShell above. */}
       {panels.reports && (
-      <PanelShell side="left" label="Reports" width={320} defaultCollapsed>
+      <PanelShell
+        side="left"
+        label="Reports"
+        width={320}
+        defaultCollapsed
+        hideTab={compact}
+        collapsed={compact ? !compactOpen.reports : undefined}
+        onCollapsedChange={compact ? (c) => setCompactPanel('reports', !c) : undefined}
+      >
         <Hud
           nodeCount={graph.nodes.length}
           edgeCount={graph.edges.length}

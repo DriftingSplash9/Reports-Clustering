@@ -97,10 +97,20 @@ const SLIDERS: {
     // Linux VM, same class of issue as `npm run validate`).
     //
     // Raised again 10 -> 15 on 2026-08-29 (Thomas: "it is better, can it go
-    // up to 15?" after trying the 0-10 range live). No new measurement
-    // needed — the 2026-08-28 sweep already covered this ground: stable to
-    // 30, own-cluster cohesion flat throughout. Still unverified live at
-    // the new ceiling; that's Thomas's call once he drags to it.
+    // up to 15?" after trying the 0-10 range live).
+    //
+    // **The 2026-08-28 sweep figures above do not reproduce** — see the
+    // header of `scripts/measure-forces.ts` (committed 2026-08-31): its
+    // baseline of 4.29 came from state leaking between sweep steps, and a
+    // fresh-simulation, two-seed run puts the off-baseline at 13.5–15.2, not
+    // 4.29. What the 2026-08-31 re-measurement does support: the force is
+    // real in world units (inter/intra 13.5–15.2 at 0 → 23.0–25.1 at 15) and
+    // stable at the ceiling (no NaN); but after the camera's p95 refit the
+    // whole 0→15 range moves on-screen separation by only +2% to +15%
+    // depending on seed — seed variance is the same size as the slider's
+    // whole range. The ceiling is kept at 15 because it is harmless, not
+    // because the old numbers justified it; the lever that actually opened
+    // the clusters was `INT_LINK_STIFFNESS = 0` (HANDOFF, 2026-08-31).
     max: 15,
   },
   {

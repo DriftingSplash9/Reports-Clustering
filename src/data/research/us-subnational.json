@@ -1108,19 +1108,6 @@
       "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf"
     },
     {
-      "source_report_id": "hhs-fmap-notice",
-      "target_report_id": "bea-state-personal-income",
-      "relationship_type": "calculated_from",
-      "basis": "The notice states that \"The Secretary calculates the percentages, using formulas set out in sections 1905(b) and 1101(a)(8), and calculations from the Department of Commerce of average income per person in each state and for the United States.\" 42 U.S.C. §1396d(b) supplies the formula: the FMAP is \"100 per centum less the State percentage; and the State percentage shall be that percentage which bears the same ratio to 45 per centum as the square of the per capita income of such State bears to the square of the per capita income of the continental United States\", floored at 50 and capped at 83 percent. Caveat: the notice names only \"the Department of Commerce\"; the identification of BEA as the publishing bureau comes from CRS R43847, which records that \"In its FY2025 FMAP calculations, HHS used state per capita personal income data for 2020, 2021, and 2022 that became available from the Department of Commerce's Bureau of Economic Analysis (BEA) in September 2023.\"",
-      "reference_period": {
-        "readings_per_year": 1,
-        "window_months": 36,
-        "ends": "11-30",
-        "stated_as": "42 U.S.C. 1301(a)(8)(B): promulgated \"between October 1 and November 30 of each year, on the basis of the average per capita income of each State and of the United States for the three most recent calendar years for which satisfactory data are available from the Department of Commerce\", and conclusive for the four quarters beginning the following October 1."
-      },
-      "evidence_url": "https://www.federalregister.gov/documents/2025/11/28/2025-21332/federal-financial-participation-in-state-assistance-expenditures-federal-matching-shares-for"
-    },
-    {
       "source_report_id": "ed-title-i-a-allocations",
       "target_report_id": "uscensus-saipe",
       "relationship_type": "calculated_from",
@@ -1444,6 +1431,13 @@
       "target": "cps-current-population-survey",
       "reason": "wrong-target",
       "why": "42 U.S.C. 1397dd(b) does name \"the 3 most recent March supplements to the Current Population Survey\", but that provision governs the pre-2009 allotment formula, not the current section 2104(m) formula. It would be accurate only as a historical edge with an end date, which the model does not carry."
+    },
+    {
+      "edge": "hhs-fmap-notice -> bea-state-personal-income",
+      "source": "hhs-fmap-notice",
+      "target": "bea-state-personal-income",
+      "reason": "no-document",
+      "why": "MOVED 2026-08-31 (second independent audit, finding F-05; Thomas's ruling: naming the agency is not naming the artefact): the cited Federal Register notice names the Department of Commerce and 'average income per person in each state' but never BEA or the State Personal Income series. Find the document that names the release itself before re-minting. Original relationship_type: calculated_from. Original evidence_url: https://www.federalregister.gov/documents/2025/11/28/2025-21332/federal-financial-participation-in-state-assistance-expenditures-federal-matching-shares-for. Original basis: \"The notice states that \"The Secretary calculates the percentages, using formulas set out in sections 1905(b) and 1101(a)(8), and calculations from the Department of Commerce of average income per person in each state and for the United States.\" 42 U.S.C. §1396d(b) supplies the formula: the FMAP is \"100 per centum less the State percentage; and the State percentage shall be that percentage which bears the same ratio to 45 per centum as the square of the per capita income of such State bears to the square of the per capita income of the continental United States\", floored at 50 and capped at 83 percent. Caveat: the notice names only \"the Department of Commerce\"; the identification of BEA as the publishing bureau comes from CRS R43847, which records that \"In its FY2025 FMAP calculations, HHS used state per capita personal income data for 2020, 2021, and 2022 that became available from the Department of Commerce's Bureau of Economic Analysis (BEA) in September 2023.\"\" Original reference_period: {\"readings_per_year\": 1, \"window_months\": 36, \"ends\": \"11-30\", \"stated_as\": \"42 U.S.C. 1301(a)(8)(B): promulgated \\\"between October 1 and November 30 of each year, on the basis of the average per capita income of each State and of the United States for the three most recent calendar years for which satisfactory data are available from the Department of Commerce\\\", and conclusive for the four quarters beginning the following October 1.\"}."
     }
   ],
   "_status": "NEW 2026-08-10. Researched by four parallel passes (Census/BEA subnational frame, federal formula transfers, California state layer, Los Angeles county and city). Every edge carries an evidence_url; 13 candidate edges were declined and are recorded in _dropped, including one denial (federal highway apportionment reads no statistical series at all)."

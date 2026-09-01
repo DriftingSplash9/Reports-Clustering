@@ -338,6 +338,12 @@ Full reasoning, the complete hue table, and every hex value are in
 `src/lib/palette.ts` at `ColourFamily` and `SCOPE_COLOUR`.
 
 **The domain filter is removed. `domains` stays as data.** *(2026-08-05.)*
+*Superseded 2026-08-10: the filter was unparked and rebuilt (Thomas, round-3
+Q12) — `FilterState.domains` is back in `src/lib/filter.ts` with an any-not-all
+match rule, the subject chips drive it, and `npm run validate` reports
+domain-tag coverage against it. The entry below is kept as the record of why
+the first version was deleted, not as current state. (Noted by the 2026-08-31
+second audit, F-09.)*
 The filter half was scaffolding that was never finished: `FilterState.domains`
 was declared, defaulted to `null`, counted in `isFiltering` and compiled into a
 node predicate — and **nothing ever set it.** No UI control populated the field,

@@ -57,8 +57,10 @@ Size is the whole point. A big sphere is a report that lots of other reports are
 built on. A small one is an endpoint — something calculated *from* other things
 that nothing else uses. The biggest sphere in the graph is the European System
 of Accounts 2010 — the EU regulation every member state's statistics must
-follow — and it leads by a distance: the next two, the European Statistics Code
-of Practice and the Consumer Price Index, score about a quarter of it.
+follow — and it leads by a distance: the UN's System of National Accounts 2008
+sits second at a little over half of it, and nothing else reaches a third. (The
+exact figures move as the corpus does; `npm run validate` prints the live
+ranking, and this sentence is kept vague on purpose so it can stay true.)
 
 Little teardrops travel along the lines, moving outward from each report to
 everything downstream of it, at the rate that report actually gets published.
@@ -180,12 +182,15 @@ First, the rule above slipped during the bulk import rounds of August 2026. The
 branches researched by hand — Canada, the US, the EU, Africa — hold up: every
 sampled quote that could be checked was found in the document it cites, and
 none was refuted. But roughly one edge in five
-from the August imports cites either a publisher's homepage or nothing at all,
-and *states* the relationship instead of quoting a document that does. Nothing
-in the software was checking for that. It is now, and those edges are being
-moved out of the graph into the "looked for, not found" notes until someone
-finds the document. Expect the count of unlinked reports to rise while that
-happens — that is the rule working, same as the Alberta grant programme.
+from the August imports cited either a publisher's homepage or nothing at all,
+and *stated* the relationship instead of quoting a document that does. Nothing
+in the software was checking for that. It is now, and on 31 August those edges
+were moved out of the graph into the "looked for, not found" notes until
+someone finds the document; a second audit the same evening caught two more
+shapes of the same problem — a publications index cited as if it were a source,
+and "these two series are consistent" offered as if it were a dependency — and
+another seventy-odd edges went the same way. The count of unlinked reports rose
+accordingly. That is the rule working, same as the Alberta grant programme.
 
 Second, the "cluster repulsion" control barely changes what you see. The force
 really does push country clusters apart, but the camera then refits to the

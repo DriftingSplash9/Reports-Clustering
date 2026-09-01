@@ -21,6 +21,7 @@ import {
   buildGraph,
   contains,
   isBareHost,
+  isIndexPage,
   isDocumented,
   isOfficial,
   isRanked,
@@ -471,8 +472,40 @@ console.log(
 for (const [h, n] of [...bareHosts].sort((a, b) => b[1] - a[1]).slice(0, 8)) {
   console.log(`      ${String(n).padStart(3)}  ${h}`)
 }
+// Second audit, F-02 (2026-08-31): the path-bearing sibling of the bare
+// homepage — publications indexes, topic shells, Rosstat folder listings.
+// Same gate as the two counts above.
+const indexUrl = documentedDeps.filter(
+  (d) => d.evidence_url && !isBareHost(d.evidence_url) && isIndexPage(d.evidence_url),
+)
+const indexUrls = new Map<string, number>()
+for (const d of indexUrl) {
+  const h = d.evidence_url ?? ''
+  indexUrls.set(h, (indexUrls.get(h) ?? 0) + 1)
+}
 console.log(
-  '  (warnings, not errors, until both read 0 — then promote them in graph.ts validate())',
+  indexUrl.length === 0
+    ? '  ✓ no dependency cites an index/listing page as its evidence'
+    : `  ! ${indexUrl.length} cite an index/listing page (a publications index, topic shell or folder listing — names both artefacts at best)`,
+)
+for (const [h, n] of [...indexUrls].sort((a, b) => b[1] - a[1]).slice(0, 8)) {
+  console.log(`      ${String(n).padStart(3)}  ${h}`)
+}
+// Reuse is its own tell (F-02): one URL standing behind dozens of edges is
+// either a regulation that genuinely names them all, or an index page being
+// used as a rubber stamp. Informational — a reviewer decides which.
+const urlReuse = new Map<string, number>()
+for (const d of documentedDeps) {
+  if (!d.evidence_url) continue
+  urlReuse.set(d.evidence_url, (urlReuse.get(d.evidence_url) ?? 0) + 1)
+}
+const reused = [...urlReuse].filter(([, n]) => n >= 10).sort((a, b) => b[1] - a[1])
+if (reused.length) {
+  console.log(`  · ${reused.length} evidence URL(s) stand behind 10+ edges each — check each is a document that names them all, not an index:`)
+  for (const [u, n] of reused.slice(0, 12)) console.log(`      ${String(n).padStart(3)}  ${u}`)
+}
+console.log(
+  '  (warnings, not errors, until all three read 0 — then promote them in graph.ts validate())',
 )
 console.log()
 
@@ -701,18 +734,34 @@ for (let i = 0; i < graph.nodes.length; i++) {
   )
 }
 
-const disagreements = graph.nodes.filter((n) => {
-  const wRank = byAuthority.findIndex((x) => x.id === n.id)
-  const dRank = byInDegree.findIndex((x) => x.id === n.id)
-  return Math.abs(wRank - dRank) >= 4
-})
+// Gated to nodes above an authority floor since 2026-08-31 (second
+// independent audit, F-14): at 3,300+ nodes the ungated list named ~3,300 of
+// them, because thousands of near-zero authorities tie and their rank order
+// is arbitrary — a check that flags everything flags nothing. The floor keeps
+// the list to the nodes whose size a reader can actually see; the number
+// suppressed is printed so the gate itself stays visible.
+const DISAGREEMENT_AUTHORITY_FLOOR = 0.05
+const wRankOf = new Map(byAuthority.map((x, i) => [x.id, i]))
+const dRankOf = new Map(byInDegree.map((x, i) => [x.id, i]))
+const disagreeingAll = graph.nodes.filter(
+  (n) => Math.abs((wRankOf.get(n.id) ?? 0) - (dRankOf.get(n.id) ?? 0)) >= 4,
+)
+const disagreements = disagreeingAll.filter((n) => n.authority >= DISAGREEMENT_AUTHORITY_FLOOR)
 
 console.log()
 if (disagreements.length) {
-  console.log('Rank disagreements of 4+ places (inspect these edges):')
-  for (const d of disagreements) console.log(`  ? ${d.title}`)
+  console.log(
+    `Rank disagreements of 4+ places among nodes with authority ≥ ${DISAGREEMENT_AUTHORITY_FLOOR} (inspect these edges; ${disagreeingAll.length - disagreements.length} below the floor suppressed):`,
+  )
+  for (const d of disagreements) {
+    console.log(
+      `  ? ${d.title.slice(0, 60)}  weighted #${(wRankOf.get(d.id) ?? 0) + 1} vs raw #${(dRankOf.get(d.id) ?? 0) + 1}`,
+    )
+  }
 } else {
-  console.log('No large rank disagreements between weighted and raw.')
+  console.log(
+    `No large rank disagreements between weighted and raw above authority ${DISAGREEMENT_AUTHORITY_FLOOR} (${disagreeingAll.length} below the floor suppressed).`,
+  )
 }
 console.log()
 
