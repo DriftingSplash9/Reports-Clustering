@@ -312,6 +312,9 @@ const MAX_PREMATURE_REHEATS = 5
  * alone, same as before.
  */
 const REFIT_INTERVAL_SECONDS = 0.2
+/** See `lastFitRadius`. */
+const DRIFT_CHECK_SECONDS = 2
+const DRIFT_RATIO = 1.4
 const REFIT_WINDOW_SECONDS = 12
 
 /**
@@ -850,6 +853,21 @@ export default function InfluenceGraph({
    * only on rebuild, the second every time a periodic fit actually runs.
    */
   const settleClock = useRef(0)
+  /**
+   * Drift watchdog (2026-09-01). The cloud radius the camera was last fitted
+   * to, and a clock for re-checking it. `onEngineStop` can fire on
+   * three-forcegraph's 45s wall-clock cooldown while the tab is hidden or
+   * the main thread is busy — before a single real tick — and the guard
+   * above it gives up after `MAX_PREMATURE_REHEATS`. When that happens the
+   * "settled" fit frames the near-origin seed ball and the layout then
+   * expands 30× around a camera nobody re-fits. Seen live 2026-09-01:
+   * cloud p95 2,112 with the camera 700 from its centre. So after settle,
+   * every `DRIFT_CHECK_SECONDS` the cloud is re-measured and, if it has
+   * grown or shrunk past `DRIFT_RATIO` relative to the fitted radius and the
+   * user has not taken the camera, it is re-fitted.
+   */
+  const lastFitRadius = useRef(0)
+  const driftClock = useRef(0)
   const sinceRefit = useRef(0)
   /** Wall-clock seconds, free-running, driving the orb breath. Never reset. */
   const pulseClock = useRef(0)
@@ -918,7 +936,7 @@ export default function InfluenceGraph({
   const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
   const fitDistance = useRef(0)
-  const { camera, controls, size, gl } = useThree()
+  const { camera, controls, size, gl, scene } = useThree()
   /**
    * Dev-only: expose the renderer so a real-GPU measurement can be taken from
    * the browser console (audit finding P3, 2026-08-30 — no frame-time number
@@ -928,8 +946,32 @@ export default function InfluenceGraph({
    */
   useEffect(() => {
     if (!import.meta.env.DEV) return
-    ;(window as unknown as { __rig?: unknown }).__rig = { gl, camera }
-  }, [gl, camera])
+    // `scene` and `graph` added 2026-09-01 so a live session can measure the
+    // cloud (bounding radius, p95, node count) from the console — the fit
+    // bug hunt below needed it, and `renderer.info` alone can't say where
+    // the nodes are.
+    ;(window as unknown as { __rig?: unknown }).__rig = {
+      gl,
+      camera,
+      scene,
+      graph: () => ref.current?.graphData(),
+      // Fit-loop state, read live — for diagnosing "camera inside the cloud".
+      fit: () => ({
+        tickCount: tickCount.current,
+        reheatAttempts: reheatAttempts.current,
+        settledOnce: settledOnce.current,
+        fitted: fitted.current,
+        everFitted: everFitted.current,
+        userOwnsCamera: userOwnsCamera.current,
+        settleClock: settleClock.current,
+        fitDistance: fitDistance.current,
+        fitPose: fitPose.current,
+        nodeScale: nodeScale.current,
+        measured: measureFit(),
+      }),
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gl, camera, scene])
 
   /**
    * One sprite for the whole scene, built once. Its position, scale, colour
@@ -1100,9 +1142,19 @@ export default function InfluenceGraph({
     // every toggle mutates live materials, because a rebuild re-runs layout
     // for a paint job. Blueprint was the one deliberate exception (a
     // different set of materials, not a paint job); it went with the mode.
-    // Meshes from a previous graph are about to be replaced; holding them would
-    // leak and, worse, let focus updates write to spheres no longer in a scene.
-    meshes.current.clear()
+    // **Per-instance mesh registry (2026-09-01).** This used to be
+    // `meshes.current.clear()` followed by `nodeThreeObject` registering
+    // straight into the shared ref. Under React StrictMode (dev) this factory
+    // runs TWICE per rebuild and both `ThreeForceGraph` instances run their
+    // debounced digest — the orphan's last — so the shared map ended up
+    // holding spheres that were never in the scene, and every "mutate the
+    // live material" effect (lens, level recolour, focus dim, `nodeScale`)
+    // painted the orphans while the mounted spheres sat at scale 1 in their
+    // birth colours. Seen live 2026-09-01: every scene sphere at scale 1.00,
+    // lens buttons "doing nothing until cluster spread". Each instance now
+    // owns its map; the effect after this memo points `meshes` at the map of
+    // whichever instance React actually kept.
+    const localMeshes = new Map<string, THREE.Mesh>()
 
     // Seed positions for continuity across a drilldown toggle — see the note
     // on `lastPositions`. Three cases, checked in order:
@@ -1624,7 +1676,7 @@ export default function InfluenceGraph({
         // `mesh.userData.orb` just above: flat walk over `meshes`, no
         // string work in the per-frame loop.
         mesh.userData.soft = soft
-        meshes.current.set(n.id, mesh)
+        localMeshes.set(n.id, mesh)
         return mesh
       })
       // Our shader, their cylinder. Colour and focus now live in uniforms, so
@@ -1912,9 +1964,21 @@ export default function InfluenceGraph({
     // "springless" nor "springs back on" gave an honest tier-2 picture.
     fg.d3Force('intAnchor', intAnchorForce() as unknown as never)
 
+    ;(fg as unknown as { __meshes?: Map<string, THREE.Mesh> }).__meshes = localMeshes
     return fg
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [graph, spreadApplied])
+
+  /**
+   * Point the shared `meshes` ref at the mounted instance's own registry —
+   * see the per-instance note at the top of the memo. Declared immediately
+   * after the memo so it runs before every later effect that iterates
+   * `meshes.current` in the same commit.
+   */
+  useEffect(() => {
+    const own = (forceGraph as unknown as { __meshes?: Map<string, THREE.Mesh> }).__meshes
+    if (own) meshes.current = own
+  }, [forceGraph])
 
   /**
    * `useLayoutEffect`, not `useEffect` — deliberately, and this one bug for
@@ -2062,7 +2126,11 @@ export default function InfluenceGraph({
   useEffect(() => {
     function handleVisibility() {
       if (document.visibilityState !== 'visible') return
-      if (!settledOnce.current && !userOwnsCamera.current) requestRefit()
+      // Was gated on `!settledOnce` — but the premature-settle case (see
+      // `lastFitRadius`) is exactly a settle that happened while hidden, so
+      // the gate hid the one return that most needed a fresh measurement.
+      // A refit on a genuinely settled, unchanged cloud is a no-op pose.
+      if (!userOwnsCamera.current) requestRefit()
     }
     document.addEventListener('visibilitychange', handleVisibility)
     return () => document.removeEventListener('visibilitychange', handleVisibility)
@@ -2406,6 +2474,7 @@ export default function InfluenceGraph({
       applyingFit.current = false
 
       fitPose.current = { target: centre.clone(), distance }
+      lastFitRadius.current = nodeRadius
       // Only a fit that *moved* the camera resets the zoom baseline to 1 — see
       // `stamp` on `fitSync`.
       fitSync.stamp += 1
@@ -3049,6 +3118,20 @@ export default function InfluenceGraph({
       // user's — see `userOwnsCamera`.
       if (!userOwnsCamera.current && cameraMovedOffFit()) userOwnsCamera.current = true
       runFit(!userOwnsCamera.current)
+    } else if (settledOnce.current && !userOwnsCamera.current) {
+      // Drift watchdog — see `lastFitRadius`. Cheap: one percentile pass
+      // every couple of seconds, and only while tracking still owns the
+      // camera.
+      driftClock.current += trackingDelta
+      if (driftClock.current >= DRIFT_CHECK_SECONDS) {
+        driftClock.current = 0
+        const m = measureFit()
+        const fittedTo = lastFitRadius.current
+        if (m && fittedTo > 0) {
+          const ratio = m.nodeRadius / fittedTo
+          if (ratio > DRIFT_RATIO || ratio < 1 / DRIFT_RATIO) runFit(true)
+        }
+      }
     }
     /**
      * Tell App the graph is worth looking at (2026-08-20, Thomas: *"can we

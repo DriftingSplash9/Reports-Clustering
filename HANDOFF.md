@@ -90,8 +90,21 @@ The `[layout] two fixed panels overlap` tripwire no longer fires below
 
 ### [Thomas] — only you can
 
-1. Watch for the render-consistency symptom in ordinary use; flag here if
-   it recurs. `notes/render-consistency-repro-2026-08-25.md`.
+1. **Render-consistency symptom: two causes found and fixed 2026-09-01**
+   (live in your Chrome, `__rig.fit()` dev hook). (a) Dev-only: React
+   `StrictMode` double-invokes the `forceGraph` memo; both `ThreeForceGraph`
+   instances ran their digest and the orphan's meshes overwrote the shared
+   `meshes` map, so lens / recolour / focus-dim / `nodeScale` painted
+   spheres that weren't in the scene (every scene sphere measured at scale
+   1.00) — "lens does nothing until cluster spread". Now a per-instance
+   registry (`__meshes`) swapped in by effect. (b) Everywhere: a hidden or
+   occluded tab stops rAF while three-forcegraph's 45s cooldown keeps
+   running, so the "settled" fit framed the 64-unit seed ball and the cloud
+   then grew 30× around the camera (p95 2,112 with the camera 700 out).
+   Now a drift watchdog re-fits when the live radius leaves ±40% of the
+   fitted one, and returning from hidden always refits unless you own the
+   camera. Watch for recurrence; the diagnostic is `__rig.fit()` in the
+   console (dev only).
 2. **Look at tier 2 (one International orb, faded spokes) and tier 4
    with INT + your countries opened (labelled standards, faded
    spokes).** Tunables if it's not right: `INT_TETHER_OPACITY` (0.16),
