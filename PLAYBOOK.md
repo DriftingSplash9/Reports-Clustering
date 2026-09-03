@@ -581,6 +581,32 @@ country/file/round, not a single site's own one-off quirk.
   regressions in round 4 were CJK `quote-not-in-document` verdicts on quotes
   that are almost certainly in the document. Do not record a CJK quote as
   missing on the matcher's word alone.
+- **The grader matches quotes against the CAPPED text, so a sentence past the
+  250 KB text cap reads as `quote-not-in-document` on a document whose status
+  is 200** (2026-09-03, round A: INEI's 978 K-char *Serie de Cuentas Nacionales*
+  and its 350 K-char *Producción Nacional* bulletin). "Read in full" in the
+  revert rule means the sentence was inside the kept text, not that the fetch
+  returned 200 — check `textChars` / `truncated` in the cache header before
+  reverting a quote on a long document, and prefer a sentence from the
+  document's front matter when the document is big.
+- **DSBB category codes are not uniform across countries, and a wrong code
+  returns `[]`, which is not "no metadata"** (round A). Korea's production
+  index is `IND00` (not `PRI00`), Indonesia's merchandise trade is `MET00`
+  (`MER00` is empty). The API is
+  `dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=<ISO3>&categoryCode=<CAT>`;
+  the SPA's own service list is in `/services/ReportService.js` if another
+  endpoint is needed. The corpus already grades A on these URLs (DOM, ATG, LCA,
+  BHR) — they are the publisher's own metadata (Q7).
+- **`tuik.gov.tr` closes a large transfer early** (curl 18, a truncated PDF the
+  grader reads as `empty:tiny-body` at status 200) and reads whole on the next
+  try — a failed fetch is cached, so `--refetch` those edges rather than
+  believing the tiny body. `ws.dgbas.gov.tw` serves an incomplete TLS chain
+  (curl 60; the grader's `-k` retry handles it, a plain script needs `-k`).
+- **Subagents spend the session's own WebSearch budget** (200 searches). Eight
+  parallel URL-hunting agents exhausted it half way through round A, and the
+  rest of the round ran on WebFetch of guessed URLs and direct site
+  navigation. Budget the searches before fanning out, and have agents search
+  only for what a fetch cannot give them.
 
 ---
 
