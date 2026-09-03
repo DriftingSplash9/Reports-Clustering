@@ -525,6 +525,10 @@ country/file/round, not a single site's own one-off quirk.
   fine. Fetch snapshots with the `id_` suffix
   (`web/<ts>id_/<url>`) or the archive's own toolbar becomes text you are
   matching quotes against.
+- **A document read by a second route caps at B** (Thomas, 2026-09-03 — the
+  standing decision is in §7). Any future fetch strategy inherits this: if the
+  bytes did not come from the cited URL on the live host, the edge cannot be an
+  A no matter how cleanly it clears every other bar.
 - **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
   wall, a transport failure or a JavaScript shell say nothing about whether a
   citation is still valid — only that this machine could not read it. A 404 says
@@ -543,6 +547,41 @@ country/file/round, not a single site's own one-off quirk.
   or not — prepend "RESOLVED ..." to the existing `note` field instead
   (see e.g. eurosystem-ecb.json).
 
+- **`evidence_quote` IS the span — never run it through
+  `extractQuotedSpans`** (2026-09-03, round 4). That helper pulls out
+  DOUBLE-QUOTED text, which is right for free-text `basis` and wrong for a
+  field whose whole content is the quote: `writeGrades` writes a bare span with
+  no quotation marks, so for six weeks the grader could not read back its own
+  output, and the first re-grade of 106 hand-accepted quotes came back 94
+  `no-quoted-span`. `spansForEdge()` now takes the field whole and keeps inner
+  quoted spans too. Any new code that checks an edge against its document goes
+  through `spansForEdge`, not `extractQuotedSpans`.
+- **Single quotes are not a span delimiter, and most of this corpus quotes
+  with them.** `extractQuotedSpans` deliberately ignores `'...'` because
+  apostrophes are ambiguous — so an edge whose `basis` quotes its evidence in
+  single quotes reads as "no quoted span" and can never be better than B.
+  Measured 2026-09-03 with a boundary-aware pattern: **476 live edges** were in
+  that state (the 539 first reported counted 95 apostrophe pairs — "FCSC's …
+  the Fund's" — as quotes; a bare `'…'` regex overcounts). Round 5 reviewed all
+  476 and wrote 341 quotes; what is left with no span at all is mostly the Grok
+  `*-wiring-grok-2026-08` family. Before concluding an edge has no checkable
+  evidence, look at its `basis` yourself.
+- **A `basis` that quotes document X while `evidence_url` points at document Y
+  produces a quote the grader can never confirm.** 29 of round 5's 370 accepted
+  quotes came back `quote-not-in-document` from a document that was read in
+  full — the sentence was real, but lifted from a companion document (an
+  inventory quoted against its landing page, a Constitution article against a
+  central-bank page, a DQA sentence against the regulation it cites). The quote
+  and the citation have to be the same document, or the edge is capped at B for
+  good. Table rows written with `|` and two-column PDFs whose text layer breaks
+  mid-sentence are the other two ways a real quote reads as absent.
+- **`locateQuote` cannot verify a Japanese or Chinese quote except by exact
+  substring match.** Coverage is scored on 4-word shingles split on spaces; CJK
+  has none, so the whole quote collapses to one token. 13 of the 33 grade
+  regressions in round 4 were CJK `quote-not-in-document` verdicts on quotes
+  that are almost certainly in the document. Do not record a CJK quote as
+  missing on the matcher's word alone.
+
 ---
 
 ## 7. Standing decisions — do not re-raise
@@ -551,6 +590,27 @@ country/file/round, not a single site's own one-off quirk.
 round decides something, not a record of one specific edge's fate — the
 data's own `_dropped`/live entry is that record.** A one-off single-
 node/single-edge call belongs there, not here as its own paragraph.
+
+**A backfilled `evidence_quote` needs a reader's acceptance, and the reader
+records a reason for every refusal** (Thomas ruled "an agent reviews by slice",
+2026-09-03; executed the same day). The grader proposes; it never accepts its
+own proposal, because an A that rests on "this script found a sentence it liked,
+twice" is not evidence. The accept test is one question — *does this sentence,
+in this document, say the source depends on the target?* — and a rejection is
+written down with its reason, because the rejections are where the research debt
+is measured. Round 4: 213 read, 106 accepted, 107 refused with reasons
+(`Claude outputs/quote-backfill-review-2026-09-03.json`). Round 5: 476 read,
+370 accepted, 106 refused (`quote-backfill-sq-review-2026-09-03.json`).
+
+**A re-grade never writes a grade DOWN on a bad network day.** Selecting an
+already-graded edge and writing whatever comes back lets one DNS failure or one
+Akamai mood destroy a grade earned from a good read. A re-grade pass writes only
+improvements; regressions go to a dated JSON for a human, with the host and the
+reason (round 4: 33 of them, none written). One refinement from round 5: when
+the regression is `quote-not-in-document` on a document the grader **read in
+full today**, the network is not the excuse — the quote written that round is
+reverted (the field must mean "this span is in the cited document") and the
+grade is left as it was. 29 reverted in round 5, listed with the reason.
 
 Geo-exploration: dropped entirely. Right-drag panning + low-end zoom:
 confirmed solid. Arrow-key fly navigation: offered, declined. Parked: 134
@@ -652,6 +712,20 @@ jurisdictions (Ecuadorian/Peruvian/Uruguayan/Paraguayan/Bolivian/Chilean)
 that Grok titled as a poverty-contrast set. They're the bulk of the
 unresearched South America seam; deleting them destroys the next round
 before it starts.
+
+**A document read from an archived copy caps at B** (Thomas, 2026-09-03,
+ruling on round 3d's fetch strategies). An archived read supports "this quote
+was in this document on `<timestamp>`", which is a weaker claim than "this quote
+is in this document" — and once a grade is written the difference is invisible
+on screen. One `A` must not mean two things. **General rule for every future
+fetch strategy, not just the Wayback one**: bytes that did not come from the
+cited URL on the live host cannot produce an A, however cleanly the edge clears
+every other bar. 15 edges were capped the day it was ruled; the guard sits
+after the A bar in `gradeEdge` with its own reason string
+(`quote-found-artefact-named-via-snapshot`) so the class stays greppable if the
+host ever becomes readable again. Consequence worth knowing: `writeGrades` only
+writes `evidence_quote` on an A, so **a machine-written `evidence_quote` in this
+corpus always means "found in the live document"**.
 
 **Chart/figure-caption sourcing clears the evidence bar** (Thomas,
 2026-08-30) — a figure-source line under a chart is a citation, same

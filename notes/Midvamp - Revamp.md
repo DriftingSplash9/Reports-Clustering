@@ -173,17 +173,37 @@ the audit's 56-edge grades before it touches the corpus.
   wall, a transport failure or a JavaScript shell; it may **never** rescue a
   404, because that is link rot the dead-URL list exists to measure. Every
   substitution is recorded as `via:` in the committed evidence record.
-  **Open for Thomas: 15 of the 22 new A grades were read from an archived copy
-  rather than the live page.** The bar was not loosened to get them, but "the
-  quote was in this document on 2026-03-10" is a slightly different claim from
-  "the quote is in this document", and the two are currently graded the same.
+  **Ruled the same day (Thomas): a document read by a second route caps at B.**
+  "The quote was in this document on 2026-03-10" is a weaker claim than "the
+  quote is in this document", and one A must not mean two things. 15 edges
+  capped; the guard sits after the A bar so the bar itself is untouched. This
+  binds every future fetch strategy, not just the archived-snapshot one —
+  full record in PLAYBOOK §7.
+- **Round 4 (2026-09-03) ran the backfill review and moved the A-share to
+  11.7% (320 A).** 213 candidates read, 106 accepted, 107 refused with reasons.
+  The lever turned out to be a grader bug rather than the review: `evidence_quote`
+  was being run through `extractQuotedSpans`, so the grader could not read its
+  own field — fixing that alone upgraded 104 edges, 19 of them quotes the corpus
+  had carried for weeks. **539 more edges quote their evidence in SINGLE quotes,
+  which the span extractor deliberately ignores; that is the next backfill and it
+  needs no fetching.** Also flagged for a ruling: 17 JP/KR edges whose `basis`
+  says the target is the consumer. Full record:
+  `notes/grader-quote-backfill-2026-09-03.md`.
+- **Round 5 (2026-09-03) ran the single-quote backfill and moved the A-share
+  to 15.8% (431 A).** The 539 was really 476 once apostrophe pairs were
+  excluded; 476 read, 370 accepted, 106 refused with reasons; re-grade B→A 111,
+  C→B 38, 30 regressions not written and their quotes reverted (the quote was
+  real but from a companion document, not the cited one). No script changed.
+  Full record: `notes/grader-single-quote-backfill-2026-09-03.md`.
 - **The `minGrade` → A flip (§9 item 4) cannot be the default until the
   backfill and the browser pass have run.** The dry run's 18% A-share was a
   sampling artefact of the audit's 56: corpus-wide it is **8.3%** (226 A of
   2,728). Flipping the default now shows a graph of 226 edges. The
   destination is unchanged; the ordering is not optional. **Round 3d moved it
   to 9.1% (248 A of 2,728)** — the direction is right and the magnitude says
-  the flip still waits on the backfill.
+  the flip still waits on the backfill. **The snapshot cap takes it back to
+  8.5% (233 A)** — deliberately, and it does not change the ordering: the
+  backfill is the lever either way.
 
 **Grading is not research.** The grader reads what the edge already
 cites. Finding a better document for a B edge is a research round.

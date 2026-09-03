@@ -7,18 +7,21 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-03 (round 3d — per-host fetch strategies in the grader)
+Last updated: 2026-09-03 (round 5 — single-quote backfill)
 
 ---
 
 ## 1. Read next
 
-`PLAYBOOK.md` (§6 has six new traps and two corrected entries) →
-`notes/Midvamp - Revamp.md` (the plan of record) →
-`notes/grader-host-strategies-2026-09-03.md` (this round) →
+`PLAYBOOK.md` (§6 has a new trap on quotes from companion documents, §7 the
+revert refinement) → `notes/Midvamp - Revamp.md` (the plan of record) →
+`notes/grader-single-quote-backfill-2026-09-03.md` (this round) →
+`notes/grader-quote-backfill-2026-09-03.md` →
+`notes/grader-host-strategies-2026-09-03.md` →
 `notes/grader-batch2-2026-09-03.md` → `notes/grader-batch1-2026-09-03.md` →
 `notes/grader-dry-run-2026-09-03.md` (how the grader decides — still current) →
-project memory `grader_host_strategies_2026-09-03`, then
+project memory `grader_single_quote_backfill_2026-09-03`, then
+`grader_quote_backfill_2026-09-03`, `grader_host_strategies_2026-09-03`,
 `grader_batch2_2026-09-03`, `grader_batch1_2026-09-03`,
 `grader_dry_run_2026-09-03`, `renderer_grade_round2_2026-09-03`,
 `schema_validator_round_2026-09-03`.
@@ -28,60 +31,46 @@ Git status: never state it (PLAYBOOK rule 1).
 
 ## 2. Current state
 
-**Rounds 0-2 and the self-citation fix are committed. Rounds 3a, 3b, 3c and 3d
+**Rounds 0-2 and the self-citation fix are committed. Rounds 3a-3d, 4 and 5
 are built and verified, not committed.** Corpus **3,341 reports / 2,736
 dependencies**, unchanged.
 
-**Every live edge carries an `evidence_grade`: 248 A · 1,317 B · 1,163 C**
-across the 2,728 research-slice edges (the 8 seed-file edges are deliberately
-never machine-written). A-share **9.1%**, up from 8.3%. `npm run validate`
-exits 0 with all 248 A grades in — an A turns the three evidence warnings into
-errors, so that is a real check. `tsc --noEmit` clean, 123/123 logic tests,
-grader `--selftest` **26/26**.
+**Grades: 431 A · 1,189 B · 1,116 C.** A-share **15.8%**, up from 11.7%.
+`npm run validate` exits 0 with all 431 A grades in (an A turns the three
+evidence warnings into errors, so that is a real check). `tsc --noEmit` clean,
+123/123 logic tests, grader `--selftest` 31/31. **No script changed in round 5.**
 
-**Round 3d re-graded the 422 unreadable edges after teaching `getDoc` fetch
-strategies. 187 documents read, 114 of them only via an archived snapshot;
-the browser-pass list is 422 → 232 edges across 71 hosts.** Grades on those
-422: 22 A · 116 B · 284 C (was 1 B · 421 C).
+**Round 5 read every single-quoted span the grader cannot see and decided each
+one: 476 candidates, 370 accepted, 106 refused with a reason**
+(`Claude outputs/quote-backfill-sq-review-2026-09-03.json`). The 539 in the
+previous handoff counted 95 apostrophe pairs as quotes. Accepted quotes were
+written into `evidence_quote`, then re-graded on the bridge VM: **B→A 111,
+C→B 38**, 191 unchanged (43 of them dead 404 URLs), **30 B→C not written**.
 
-**None of PLAYBOOK §6's three documented workarounds was scriptable** —
-BPS's `web-api` link is signed from the challenged page's DOM, IBGE's ftp
-mirror carries documents while the corpus cites landing pages, imf.org's
-Google-viewer route needs a browser. §6's imf.org entry was also **backwards**
-(the `/-/media/` PDFs read fine with curl; the press releases are what Akamai
-denies) and its `biblioteca./concla.` half is dead. Both corrected.
+**29 of those 30 were `quote-not-in-document` on a document read in full today** —
+the sentence was real but from a companion document, not `evidence_url`, or a
+`|`-separated table row, or a PDF whose text layer breaks mid-sentence. Their
+quotes were **reverted** and the grade left alone
+(`Claude outputs/grade-sq-regressions-2026-09-03.json`, one line per edge with
+host, coverage and action). New PLAYBOOK §6 trap: the quote and the citation
+must be the same document.
 
-**Two things did work, and both are now standing knowledge (PLAYBOOK §6):**
-- **The cloud sandbox's egress proxy is part of the wall.** The bridge VM read
-  20 edges the sandbox could not, and `web.archive.org` is blocked from the
-  sandbox outright. `curl_cffi` and headless Chromium both fail through that
-  proxy — **there is no browser in the cloud sandbox.**
-- **The whole toolchain runs natively in the bridge VM** (copy the repo to
-  `$HOME` scratch, `npm install`, symlink `src/data/research/` and
-  `evidence-cache/` back into the repo). No staging zip, no §6 zip traps, and a
-  home network instead of the proxy. This is now the preferred way to run
-  `validate`/`tsx`/the grader.
-
-**Grader changes** (`--selftest` and `tsc` clean): `fetchOne` = one direct
-attempt + a strategy table, with an archived-snapshot strategy that may rescue
-`wall`/`network`/`empty` but **never a 404**; `Fetched.via` records the
-substitution in the committed evidence-cache header; `--edges <path[#key]>` (the
-re-grade selector — `--skip-graded` is the forward-pass one and selects nothing
-here); `--refetch`; `--no-snapshot`; the BROWSER PASS block now counts the
-`empty` class it was silently dropping (62 edges).
-
-**Everything else unchanged**: round 2's grade-driven opacity / A-only ranking
-cut / `view.minGrade` (still default `C`) / `rankByLegalBasis` / self-citation
-scoped to `cites`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE` 0.8; drift
-watchdog + `__meshes`. **The direction criterion is still never checked** — an A
-is a proposal a reviewer can spot-check.
+**Everything else unchanged**: round 4's `spansForEdge` fix and the
+improvements-only rule; round 3d's fetch strategies, the snapshot→B cap,
+`--edges`/`--refetch`/`--no-snapshot`; round 2's grade-driven opacity / A-only
+ranking cut / `view.minGrade` (still default `C`) / `rankByLegalBasis` /
+self-citation scoped to `cites`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE`
+0.8; drift watchdog + `__meshes`. **The direction criterion is still never
+checked** — an A is a proposal a reviewer can spot-check.
 
 **Research debt, corpus-wide** (per-edge JSON in `Claude outputs/`): **131 dead
-URLs** (`s-circabc.europa.eu` is 58 of them, one dead host);
-**232 unreadable** — `grade-browser-pass-2026-09-03.json`, re-measured, 145
-wall / 62 JavaScript shell / 25 network; **162 no-URL edges**, every one in a
-`*-wiring-grok-2026-08` slice. **213 candidate backfill quotes** still
-proposals-only in `quote-backfill-batch2-2026-09-03.json`.
+URLs** (`s-circabc.europa.eu` is 58 of them); **232 unreadable**
+(`grade-browser-pass-2026-09-03.json`: 145 wall / 62 JavaScript shell / 25
+network); **162 no-URL edges**, every one in a `*-wiring-grok-2026-08` slice;
+**28 `ess-peer-review-final-report → country report` edges and 12 EDP-inventory
+title fragments** refused this round because the naming sentence was never
+quoted — a reread of SWD(2024)136 and the CIRCABC inventories, not a regex, is
+what they need.
 
 ---
 
@@ -89,52 +78,52 @@ proposals-only in `quote-backfill-batch2-2026-09-03.json`.
 
 ### [Thomas] — only you can
 
-1. **Backfilled quotes — you ruled "an agent reviews by slice" (2026-09-03).**
-   213 decisions, not yet started; it is [Agent] item 1 below now.
-2. **New ruling needed: is an A read from an archived snapshot an A?** 15 of
-   round 3d's 22 new A grades were read from a Wayback copy of the cited URL,
-   not the live page. Nothing was loosened to get them and every one is recorded
-   with `via: wayback <timestamp>` in `evidence-cache/`, but "the quote was in
-   this document on 2026-03-10" is a slightly different claim from "the quote is
-   in this document", and today they grade the same. Options: leave as is;
-   cap a snapshot-read edge at B; or add a schema field so the two stay
-   distinguishable the way `evidence_quote_source` would for backfilled quotes.
-3. Commit rounds 3a-3d. 3d touches: `scripts/grade-evidence.ts`, 101
-   `src/data/research/*.json`, `evidence-cache/` (300 records rewritten),
-   `PLAYBOOK.md`, `notes/Midvamp - Revamp.md`,
-   `notes/grader-host-strategies-2026-09-03.md`, `HANDOFF.md` (+ its archive
-   copy), `Claude outputs/grade-hoststrategy-2026-09-03.{json,txt}` and
-   `grade-browser-pass-2026-09-03.json`.
-4. Ruling **7**: **131 dead-URL edges**, 58 of them one dead host. Fix, drop, or
+1. **Ruling: 17 edges point the wrong way.** `source_report_id` is the consumer,
+   but 13 edges point INTO `jp-national-accounts` from the very surveys the JSNA
+   manual names as JSNA's inputs, 2 more into `jp-cgpi`, and 2 into
+   `kr-national-accounts-bok`. All in `*-grok-2026-08` slices, same family as the
+   5 the schema round already dropped. List with basis text:
+   `Claude outputs/direction-suspect-jp-kr-2026-09-03.json`. Flip, drop, or leave.
+2. Commit rounds 3a-3d, 4 and 5. Round 5 touches: 85 `src/data/research/*.json`,
+   `evidence-cache/`, `PLAYBOOK.md`, `notes/Midvamp - Revamp.md`,
+   `notes/grader-single-quote-backfill-2026-09-03.md`, `HANDOFF.md` (+ its
+   archive copy), and five `Claude outputs/*sq*-2026-09-03.json`
+   (`quote-backfill-sq-review`, `quote-backfill-sq-accepted`, `grade-sq`,
+   `grade-sq-written`, `grade-sq-regressions`). No script changed.
+3. Ruling **7**: **131 dead-URL edges**, 58 of them one dead host. Fix, drop, or
    leave graded C.
-5. **Browser pass, re-scoped: 232 edges, and 59 of them are two hosts.**
-   `bps.go.id` 35 and `psa.gov.ph` 24 are worth more than the other 69 hosts
-   combined — BPS especially, which has no archived copies at all. One
-   Claude-in-Chrome session each.
-6. Still open from the audit: **13** (empty `_to_delete/`, move the two
-   `archive/*.tar.gz`); **Q18** (Grok folder), **Q19** (paste the two
-   08-30/31 audit reports into `archive/audits/`).
-7. Empty `_to_delete/` (now also holds a stale `.evidence-fulltext` store) and
-   `tmp_work/` when convenient.
-8. Real-GPU number for the unfolded Everything tier (still owed).
+4. **Browser pass: 232 edges, 59 of them two hosts.** `bps.go.id` 35 and
+   `psa.gov.ph` 24 are worth more than the other 69 hosts combined — BPS
+   especially, which has no archived copies at all. One Claude-in-Chrome session
+   each.
+5. Still open from the audit: **13** (empty `_to_delete/`, move the two
+   `archive/*.tar.gz`); **Q18** (Grok folder), **Q19** (paste the two 08-30/31
+   audit reports into `archive/audits/`).
+6. Empty `_to_delete/` and `tmp_work/` when convenient.
+7. Real-GPU number for the unfolded Everything tier (still owed).
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
-1. **Quote-backfill review by slice** — Thomas's ruling (a). 213 candidates in
-   `Claude outputs/quote-backfill-batch2-2026-09-03.json`; read the sentence,
-   judge whether it supports the claimed direction, accept or reject per edge.
-   This is the judgement the grader deliberately refuses to fake, and it is the
-   single biggest lever on the A-share.
-2. **Re-research the 162 no-URL edges** — ten Grok wiring slices, quotes already
-   in `basis`, only the citation missing. Bounded.
-3. `_dropped` lead re-evaluation (plan §4 step 5) — still not built.
-4. Flip `view.minGrade` default to A — **after** 1-2, not before (9.1% A).
-5. DSBB/ESMS scripted import.
-6. Link batching (merged geometry → instanced photons).
-7. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+ seeds,
+1. **Re-research the 162 no-URL edges** — ten Grok wiring slices, quotes already
+   in `basis`, only the citation missing. Bounded. Now the biggest lever left:
+   the double- and single-quoted spans are both harvested, so what has no span at
+   all is almost entirely this family.
+2. **CJK matcher** — character n-grams below a space-density threshold in
+   `locateQuote`, so a Japanese or Chinese quote can be verified as anything but
+   an exact substring. 13 edges are stuck on this today.
+3. **Companion-document reread, bounded**: the 28 `ess-peer-review-final-report`
+   edges (SWD(2024)136 names each member state's report — quote the sentence)
+   and the 30 reverted quotes of round 5, whose `basis` cites one document and
+   whose `evidence_url` points at another — either retarget `evidence_url` to the
+   document actually quoted, or quote the cited one.
+4. `_dropped` lead re-evaluation (plan §4 step 5) — still not built.
+5. Flip `view.minGrade` default to A — **after** 1, not before (15.8% A).
+6. DSBB/ESMS scripted import.
+7. Link batching (merged geometry → instanced photons).
+8. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+ seeds,
    `onscreen`): scale `FAMILY_REPULSION`/`COUNTRY_REPULSION` by spread, couple
    galaxy pull. Kept separate per Thomas's Q17 ruling.
-8. Housekeeping when convenient: doc fixes under hygiene (README:130,
+9. Housekeeping when convenient: doc fixes under hygiene (README:130,
    REPORTS:9–32, PLAYBOOK:18–20, START-HERE:31/37); write
    `notes/mint-2026-08-20.md` then Grok folder per Q18; retire `check-urls.ts`
    into the grader — the cache header now records status, final URL, fetch time

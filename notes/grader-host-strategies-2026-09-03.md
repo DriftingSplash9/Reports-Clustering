@@ -8,9 +8,15 @@ which of them are actually scriptable.
 
 **Headline: the browser-pass list is 422 → 232 edges, tested, not promised.
 187 of the 422 documents were read; 114 of them only because of the new fetch
-strategy. Corpus grades move 226 A / 1,202 B / 1,300 C → 248 A / 1,317 B /
+strategy. Corpus grades move 226 A / 1,202 B / 1,300 C → 233 A / 1,332 B /
 1,163 C.** None of the three documented workarounds turned out to be scriptable;
 what worked was something else, and finding that out is most of this note.
+
+**Thomas ruled the same day: a document read from an archived snapshot caps at
+B** (§3.1). That is why the A count moves by 7 rather than 22 — the other 15
+cleared every evidence test an A clears and are held at B on provenance alone.
+The ruling is applied in the corpus and in the code, and every number in this
+note is post-ruling.
 
 ---
 
@@ -76,9 +82,31 @@ grader matches quotes against. Three rules keep it honest:
 The substitution is recorded, not hidden: `Fetched.via` carries
 `wayback <timestamp>`, it is written into the committed `evidence-cache/` header
 beside `final-url`, and `summarise` prints a **READ VIA AN ARCHIVED SNAPSHOT**
-block by host. **15 of the 22 new A grades were read from an archived copy** —
-Thomas should decide whether an A on a snapshot is an A. Nothing about the
-grading bar was loosened to get them.
+block by host. Nothing about the grading bar was loosened at any point.
+
+### 3.1 Thomas's ruling: a snapshot read caps at B (2026-09-03)
+
+The first pass produced 22 A grades, **15 of them read from an archived copy
+rather than the live page**. An archived read says "this quote was in this
+document on `<timestamp>`" — a weaker claim than "this quote is in this
+document" — and once the grade is written the difference is invisible on screen.
+Thomas's call: **cap it at B.** One A must not mean two things.
+
+Applied as a guard placed **after** the A bar, not inside it: the bar is
+untouched, and an edge landing there has cleared every evidence test an A
+clears; the only thing against it is where the bytes came from. It keeps its own
+reason string, `quote-found-artefact-named-via-snapshot`, so the class stays
+greppable if the live host ever becomes readable again. **15 edges capped.**
+
+Two consequences worth stating:
+
+- **`writeGrades` only writes `evidence_quote` on an A**, and a snapshot read is
+  now never an A — so a machine-written `evidence_quote` in this corpus always
+  means "found in the live document", never "found in an archived copy". The 15
+  quotes the pre-ruling pass had written were removed again (generated edit,
+  14 files); the 7 belonging to direct-read A grades stay.
+- **The 7 surviving A grades were all read directly.** Nothing in the corpus is
+  graded A off an archive.
 
 **Three smaller changes.**
 
@@ -110,32 +138,38 @@ Offline (stricter) pass, which is what the corpus carries.
 
 | host | edges | read | via snapshot | A | B | C |
 |---|---:|---:|---:|---:|---:|---:|
-| `bps.go.id` | 41 | 6 | 6 | 1 | 3 | 37 |
-| `imf.org` | 33 | 27 | 15 | 6 | 18 | 9 |
-| `ibge.gov.br` | 32 | 20 | 20 | 1 | 18 | 13 |
-| `psa.gov.ph` | 31 | 7 | 7 | 1 | 6 | 24 |
+| `bps.go.id` | 41 | 6 | 6 | 0 | 4 | 37 |
+| `imf.org` | 33 | 27 | 15 | 1 | 23 | 9 |
+| `ibge.gov.br` | 32 | 20 | 20 | 0 | 19 | 13 |
+| `psa.gov.ph` | 31 | 7 | 7 | 0 | 7 | 24 |
 | `canada.ca` | 14 | 14 | 0 | 1 | 8 | 5 |
 | `inegi.org.mx` | 13 | 0 | 0 | 0 | 0 | 13 |
 | `bsp.gov.ph` | 11 | 2 | 2 | 0 | 1 | 10 |
 | `bls.gov` | 10 | 10 | 0 | 0 | 8 | 2 |
 | `localgovernment.vic.gov.au` | 9 | 0 | 0 | 0 | 0 | 9 |
 | `mospi.gov.in` | 9 | 1 | 1 | 0 | 1 | 8 |
-| `legislation.govt.nz` | 9 | 4 | 4 | 1 | 1 | 7 |
+| `legislation.govt.nz` | 9 | 4 | 4 | 0 | 2 | 7 |
 | `yukon.ca` | 9 | 0 | 0 | 0 | 0 | 9 |
 | `boi.org.il` | 8 | 8 | 8 | 0 | 4 | 4 |
-| `codes.findlaw.com` | 8 | 2 | 2 | 1 | 1 | 6 |
+| `codes.findlaw.com` | 8 | 2 | 2 | 0 | 2 | 6 |
 | `gso.gov.vn` | 6 | 6 | 6 | 0 | 6 | 0 |
 | `anuario.ine.gob.bo` | 6 | 0 | 0 | 0 | 0 | 6 |
-| **all 116 hosts** | **422** | **187** | **114** | **22** | **116** | **284** |
+| **all 116 hosts** | **422** | **187** | **114** | **7** | **131** | **284** |
+
+The `A` column is post-cap: **15 further edges cleared the A bar and are held at
+B because their document was read from an archived copy.** `imf.org` loses 5
+that way, `ibge.gov.br` 1, `bps.go.id` 1, `psa.gov.ph` 1, and the rest are
+singletons.
 
 `canada.ca` and `bls.gov` read direct with no strategy at all — they were an
 HTTP/2 stall and a transient refusal on the day of batch 2, not a wall.
 `portal.tcu.gov.br`, `sco.ca.gov`, `rosstat.gov.ru` and `stats.gov.cn` are the
 same story.
 
-**Where the 22 A grades came from:** 15 via a snapshot, 7 direct.
-**Corpus: 226 A / 1,202 B / 1,300 C → 248 A / 1,317 B / 1,163 C.** A-share
-8.3% → **9.1%**. Still nowhere near a `minGrade` → A flip.
+**All 7 surviving A grades were read directly from the live host.**
+**Corpus: 226 A / 1,202 B / 1,300 C → 233 A / 1,332 B / 1,163 C.** A-share
+8.3% → **8.5%**. Nowhere near a `minGrade` → A flip; the backfill is still the
+lever that matters.
 
 ## 5. What remains genuinely browser-only — 232 edges, 71 hosts
 
@@ -168,7 +202,10 @@ combined.
 
 Fetch pass then `--offline --write`, as every batch does. **One** edge
 disagreed between them (`uy-asignaciones -> uy-ipc`, B online, C offline) — the
-documented offline-is-stricter behaviour, and the corpus carries the C.
+documented offline-is-stricter behaviour, and the corpus carries the C. The
+snapshot cap was applied in a third `--offline --write` pass over the same 422
+once Thomas ruled; `--selftest` 26 → **28** with two checks for the cap itself
+(an otherwise-A snapshot read grades B; a direct read still grades A).
 
 Run on the bridge VM, concurrency 6 (not 10: a large share of these requests go
 to archive.org). 300 URLs, three of the four biggest hosts among them. Corpus

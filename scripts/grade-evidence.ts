@@ -244,6 +244,30 @@ export function extractQuotedSpans(...texts: (string | undefined)[]): string[] {
   return out
 }
 
+/**
+ * Every span this edge can be checked against, best-first-agnostic.
+ *
+ * `evidence_quote` IS a span — types.ts calls it "the quoted span from the
+ * cited document that the grade rests on", and `writeGrades` fills it with a
+ * bare matched span, no quotation marks. Running it through
+ * `extractQuotedSpans` therefore threw it away unless the researcher had ALSO
+ * wrapped it in quotes: 102 quotes accepted in the 2026-09-03 backfill review
+ * graded `no-quoted-span`, and the grader could not read back its own output.
+ * So the field is taken whole here, with any outer quotation marks stripped,
+ * and quoted spans INSIDE it are still harvested for the pre-existing edges
+ * whose quote field quotes inline.
+ *
+ * Adding a span can only raise coverage (the caller keeps the best hit), so
+ * this never downgrades an edge that was already matching on its `basis`.
+ */
+export function spansForEdge(evidenceQuote: string | undefined, basis: string): string[] {
+  const out: string[] = []
+  const whole = (evidenceQuote ?? '').trim().replace(/^["\u201c\u201e\u00ab]|["\u201d\u00bb]$/g, '').trim()
+  if (whole.length >= 24) out.push(whole)
+  for (const span of extractQuotedSpans(evidenceQuote, basis)) if (!out.includes(span)) out.push(span)
+  return out
+}
+
 /** Word n-grams of the normalised text, for coverage scoring. */
 function shingles(normalised: string, n: number): string[] {
   const words = normalised.split(' ').filter(Boolean)
@@ -1064,7 +1088,7 @@ function isMetadataHost(url: string): boolean {
 export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResult {
   const weakFlags: string[] = []
   for (const p of WEAK_BASIS_PATTERNS) if (p.re.test(input.basis)) weakFlags.push(p.label)
-  const spans = extractQuotedSpans(input.evidenceQuote, input.basis)
+  const spans = spansForEdge(input.evidenceQuote, input.basis)
   if (!spans.length) weakFlags.push('no-quoted-span')
 
   const base = {
@@ -1173,6 +1197,18 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     nearQuote = namesTarget(window, input.targetReport as Pick<Report, 'title' | 'publisher' | 'url'>).artefact
   }
   if (quote === 'yes' && naming.artefact && nearQuote && !weakFlags.length) {
+    // **A document read by a fetch strategy caps at B** (Thomas, 2026-09-03,
+    // ruling on round 3d). An archived snapshot says "this quote was in this
+    // document on <timestamp>", which is a weaker claim than "this quote is in
+    // this document" — and the difference is invisible on screen once the grade
+    // is written. Rather than let one A mean two things, the snapshot-read case
+    // takes the grade below the line and keeps its own reason string, so the
+    // class stays greppable if the live host ever becomes readable again.
+    //
+    // Deliberately placed AFTER the A bar rather than inside it: the bar itself
+    // is unchanged, and an edge landing here has cleared every evidence test an
+    // A clears. The only thing against it is where the bytes came from.
+    if (fetched.via) return { ...out, grade: 'B', reason: 'quote-found-artefact-named-via-snapshot' }
     return { ...out, grade: 'A', reason: 'quote-found-artefact-named' }
   }
   const why =
@@ -1381,6 +1417,12 @@ function selftest(): void {
     extractQuotedSpans('The note says "the index is compiled under Regulation 03/21 of CEMAC" and so on')
       .length === 1)
   t('drops a short quoted span', extractQuotedSpans('it cites the "CPI" only').length === 0)
+  t('evidence_quote is taken whole, without quotation marks of its own',
+    spansForEdge('The basket weights were derived from the 2025 HFCE series.', 'no span here')
+      .includes('The basket weights were derived from the 2025 HFCE series.'))
+  t('a short evidence_quote is still dropped', spansForEdge('CPI weights', 'no span here').length === 0)
+  t('quoted spans inside an evidence_quote are kept as well',
+    spansForEdge('the report says "the index is compiled under Regulation 03/21" here', '').length === 2)
   t('does not treat apostrophes as quotes',
     extractQuotedSpans("the Commission's own note names it").length === 0)
   t('exact quote scores 1', quoteCoverage('the index is compiled monthly', 'X. The Index is compiled monthly. Y') === 1)
@@ -1447,6 +1489,14 @@ function selftest(): void {
     parseWaybackAvailable('{"archived_snapshots":{}}') === null &&
       parseWaybackAvailable('{"archived_snapshots":{"closest":{"status":"404","timestamp":"20250531002924"}}}') === null &&
       parseWaybackAvailable('<html>nope') === null)
+  const viaFetched: Fetched = { ...fetched, via: 'wayback 20250908003713' }
+  const viaGraded = gradeEdge(
+    { source: 's', target: 't', file: 'f.json', basis: 'It states "the Consumer Price Index is compiled monthly".', evidenceUrl: 'https://x.test/doc.pdf', targetReport: target },
+    viaFetched,
+  )
+  t('an otherwise-A document read via a snapshot caps at B',
+    viaGraded.grade === 'B' && viaGraded.reason === 'quote-found-artefact-named-via-snapshot')
+  t('the snapshot cap does not touch a directly-read A', graded.grade === 'A')
   t('curl -w status is split off the body, not left in it',
     splitCurlWrite('{"a":1}\n429').code === 429 && splitCurlWrite('{"a":1}\n429').body === '{"a":1}')
   t('a body with no trailing status is never read as a conclusive status',
@@ -1887,6 +1937,9 @@ function writeGrades(results: GradeResult[]): void {
       // requires the quote to be ON the edge for that assertion to be
       // falsifiable (types.ts, `evidence_quote`). Fill it from the span that
       // actually matched, never from the basis wholesale.
+      // Only an A writes the quote back, and since 2026-09-03 a snapshot-read
+      // edge is never an A — so a machine-written `evidence_quote` always means
+      // "found in the live document", never "found in an archived copy".
       if (r.grade === 'A' && !d.evidence_quote && r.bestSpan && !r.bestSpan.startsWith('(no quoted span')) {
         d.evidence_quote = r.bestSpan
         changed = true

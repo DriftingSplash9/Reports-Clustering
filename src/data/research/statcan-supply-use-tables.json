@@ -41,7 +41,8 @@
       "relationship_type": "calculated_from",
       "basis": "Record 1301 states the anchoring three separate ways in its own words. Under Estimation: 'The monthly estimates are benchmarked to annually chained Fisher volume indexes of GDP obtained from the constant-price supply and use tables.' Under Data accuracy: 'GDP by industry depends on the Supply and Use tables to which it is anchored', and 'as the monthly GDP by industry program relies on the annual estimates of real GDP obtained from the Supply and Use tables, the quality of these estimates has a direct influence on the quality of the monthly GDP measures.' Record 1401 says the same from the other side: 'two industry-based programs - one producing the country's current monthly GDP figures (record no. 1301), the other annual provincial-territorial estimates (record no. 1303) have been set up. These two programs, which can be viewed as extensions of the supply and use tables, use a set of indicators to project the GDP by industry benchmarks from the supply and use tables'. `calculated_from` because the monthly figure is literally a projection of a benchmark drawn from these tables, not merely informed by them — and note the release identifies the dependent by record number, which is the strongest cross-reference in the StatCan corpus so far.",
       "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1496491",
-      "evidence_grade": "B"
+      "evidence_grade": "B",
+      "evidence_quote": "The monthly estimates are benchmarked to annually chained Fisher volume indexes of GDP obtained from the constant-price supply and use tables."
     },
     {
       "source_report_id": "statcan-national-accounts",
@@ -50,7 +51,8 @@
       "basis": "Record 1901, under Estimation: 'The National Gross Domestic Product (GDP) by Income and by Expenditure Accounts are estimated by taking the most complete and high quality data sources available to establish annual benchmark estimates. ... The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use. These tables present the most complete and accurate depiction of Canadian economic activity.' The same record's Revisions section adds that statistical revisions incorporate 'the annual benchmarking process of the supply and use tables'. This is the edge that makes the V0.10 deletion of statcan-national-accounts -> statcan-gdp-monthly legible rather than merely correct: the quarterly and monthly programmes do not read each other, they are two projections off this common annual benchmark.",
       "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222",
       "mutual": true,
-      "evidence_grade": "B"
+      "evidence_grade": "B",
+      "evidence_quote": "The National Gross Domestic Product (GDP) by Income and by Expenditure Accounts are estimated by taking the most complete and high quality data sources available to establish annual benchmark estimates. ... The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use. These tables present the most complete and accurate depiction of Canadian economic activity."
     },
     {
       "source_report_id": "statcan-sut",
@@ -58,7 +60,8 @@
       "relationship_type": "methodology_depends_on",
       "basis": "Catalogue 15F0077GIE, 'A Guide to Deflating the Input-Output Accounts: Sources and Methods' (2001), which record 1301 cites as the description of the double-deflation method used to produce constant-price GDP by industry. Chapter 2, in the passage on trade margins: 'Consumer price indexes can be used to deflate the purchaser value of commodities sold for personal expenditure. Similarly, industry product price indexes are used to deflate the basic values of the same commodities. This has made it possible to calculate the trade margin for commodities bought for personal expenditure as a residual using both of these observed prices.' `methodology_depends_on` rather than `uses_data_from` because this document is the accounts' deflation methodology and the index is named as the price measure the method takes, which is the case the type comment describes. ONE HEDGE REMAINS, AND ONE WAS RETIRED IN V0.11. Retired: the 'can be used' softness above is not the document's last word on the CPI. Four sentences later in the same passage, unhedged and read while verifying the IPPI quotations, the guide states the mechanism outright: 'The total trade margin at constant prices is calculated as the difference between the purchaser value, deflated with the appropriate Consumer Price Index (CPI), and the sum of the basic value and the ...'. 'Deflated with' is a statement of what deflates what, which is exactly what the hedged sentence was recorded as lacking, so this edge is stronger than V0.10 believed and was under-rated by a first reading that stopped at the first mention. Still standing: the guide is a 2001 edition marked ARCHIVED — it remains the document record 1301 points at for this method, but it is twenty-five years old and a later methodology note may supersede it.",
       "evidence_url": "https://www150.statcan.gc.ca/n1/pub/15f0077g/15f0077g2001001-eng.pdf",
-      "evidence_grade": "B"
+      "evidence_grade": "B",
+      "evidence_quote": "The total trade margin at constant prices is calculated as the difference between the purchaser value, deflated with the appropriate Consumer Price Index (CPI), and the sum of the basic value and the ..."
     },
     {
       "source_report_id": "statcan-sut",
@@ -67,7 +70,8 @@
       "basis": "The reverse of statcan-national-accounts -> statcan-sut, and taken deliberately under the V0.10 decision that a node may be a mutual definitional partner. Record 1401, Quality evaluation: 'The input-output framework is validated for accuracy, coherence and overall reasonableness. The major components of the framework, such as the income and expenditure-based GDP components are reconciled to the national and provincial-territorial income and expenditure accounts.' Record 1901 states the converse in its own Estimation section: 'The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use.' Neither statement is a mistake and neither supersedes the other — annual benchmarking is an iterative balancing process in which each side constrains the other, which is what the accounts mean by coherence. The pair is asymmetric in strength and the `relationship_type` records that: 1901 discloses the SUT as the source of its benchmark levels (`calculated_from`), while 1401 describes reconciliation as a validation step rather than an input (`methodology_depends_on`), so the cycle is not symmetric in weight and does not assert that the two are interchangeable.",
       "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401",
       "mutual": true,
-      "evidence_grade": "B"
+      "evidence_grade": "B",
+      "evidence_quote": "The input-output framework is validated for accuracy, coherence and overall reasonableness. The major components of the framework, such as the income and expenditure-based GDP components are reconciled to the national and provincial-territorial income and expenditure accounts."
     }
   ],
   "_dropped": [
