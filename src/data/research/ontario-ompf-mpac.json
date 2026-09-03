@@ -187,35 +187,40 @@
         "window_months": 0,
         "ends": null,
         "stated_as": "Annual, but the three MPAC rows read three different vintages in the same allocation year: Weighted Assessment takes the '2025 Returned Roll and 2026 starting tax ratios', Number of Households takes 2025, and Farm Land Area takes 2024 — the guide specifying 'acres of land for properties in the farm property tax class, as of December 31st, 2024'. `ends` is null rather than 12-31 because that date governs only the farm row. One edge carrying three reading dates is a limitation of the model recorded rather than smoothed over."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "on-ompf",
       "target_report_id": "statcan-census-population",
       "relationship_type": "uses_data_from",
       "basis": "NARROW, AND THE NARROWNESS IS THE FINDING. Appendix F attributes six separate indicators to 'Statistics Canada' and names no release for any of them, which is agency-level attribution and the same test that removed `boc-mpr -> statcan-national-accounts` in V0.9 and killed the H.15 restoration in V0.10. Five of the six are therefore declined and recorded in _dropped. Exactly one names a publication, in Appendix G's definition of the Rural and Small Community Measure: 'The measure is based on Statistics Canada data from the 2021 Census.' That is a named recurring release and it carries this edge, alone. The basis is written this way because the edge would otherwise be read as covering all six, and a later pass finding the other five undocumented would think this edge had been demoted rather than that it had always been this narrow. STRUCTURAL NOTE: this single sentence is also the only documented link between Ontario and the rest of the corpus. Without it the two nodes in this slice would form a second connected component, breaking an invariant held since V0.8. The graph stays at one component on the strength of one clause in an appendix definition.",
-      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "on-ompf",
       "target_report_id": "on-municipal-fir",
       "relationship_type": "uses_data_from",
       "basis": "OMPF Technical Guide Appendix F: 'PIL Weighted Assessment | 2023 or 2024 | Municipal FIR (Financial Information Return)'. Named by title and abbreviation together, unlike the six Statistics Canada agency-only rows in the same table. Part of the same Appendix F pass that produced the mpac-assessment and statcan-census-population edges above.",
-      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "on-ompf",
       "target_report_id": "statcan-spatial-data-infrastructure",
       "relationship_type": "uses_data_from",
       "basis": "OMPF Technical Guide Appendix F: 'Municipal Land Area is based on the Spatial Data Infrastructure (SDI) from Statistics Canada and excludes bodies of water.' A named product, now modelled as a terminus (see statcan-spatial-data-infrastructure's own terminal_reason) rather than left as an unmintable lead.",
-      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "on-ompf",
       "target_report_id": "on-opta",
       "relationship_type": "uses_data_from",
       "basis": "OMPF Technical Guide Appendix F: 'Average Annual Change in Assessment (New Construction) | 2020–2025 | Online Property Tax Analysis System (OPTA)'. Named by title; now modelled as a terminus (see on-opta's own terminal_reason) rather than left as an unmintable lead.",
-      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide"
+      "evidence_url": "https://www.ontario.ca/document/2026-ontario-municipal-partnership-fund/technical-guide",
+      "evidence_grade": "B"
     }
   ],
   "_dropped": [

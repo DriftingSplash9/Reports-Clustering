@@ -570,84 +570,99 @@
       "target_report_id": "nl-wet-woz",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY (wetten.overheid.nl / lokaleregelgeving.overheid.nl text extracted and grepped). \"De heffingsmaatstaf is de op de voet van hoofdstuk IV van de Wet waardering onroerende zaken voor de onroerende zaak vastgestelde waarde voor het kalenderjaar bedoeld in artikel 1.\" LOCATION: Artikel 3, lid 1 (\"Maatstaf van heffing\"). English gloss: 'The tax base is the value established for the property under Chapter IV of the Wet WOZ, for the calendar year referred to in Article 1.'",
-      "evidence_url": "https://lokaleregelgeving.overheid.nl/CVDR752073/1"
+      "evidence_url": "https://lokaleregelgeving.overheid.nl/CVDR752073/1",
+      "evidence_grade": "A",
+      "evidence_quote": "De heffingsmaatstaf is de op de voet van hoofdstuk IV van de Wet waardering onroerende zaken voor de onroerende zaak vastgestelde waarde voor het kalenderjaar bedoeld in artikel 1."
     },
     {
       "source_report_id": "nl-gemeentefonds",
       "target_report_id": "nl-wet-woz",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY (wetten.overheid.nl BWBR0012216 text extracted and grepped). Besluit financiële verhouding 2001, Bijlage 2, maatstaf 1 (\"Ozb woningen eigenaren\"): \"De waarde van de onroerende zaken wordt bepaald op grond van hoofdstuk IV van de Wet waardering onroerende zaken.\" (\"Bron\" field for this maatstaf, immediately following: \"CBS\" — AGENCY ONLY for the processing channel, but the value itself is explicitly WOZ-derived by law.) Also Artikel 23, lid 2 (the art.12 'aanmerkelijk en structureel tekort' supplementary-payment test): \"De belastingcapaciteit wordt bepaald door het totaal van de vastgestelde waarden bedoeld in artikel 22 van de Wet waardering onroerende zaken, in de gemeente...\"",
-      "evidence_url": "https://wetten.overheid.nl/BWBR0012216/2024-01-01"
+      "evidence_url": "https://wetten.overheid.nl/BWBR0012216/2024-01-01",
+      "evidence_grade": "A",
+      "evidence_quote": "De waarde van de onroerende zaken wordt bepaald op grond van hoofdstuk IV van de Wet waardering onroerende zaken."
     },
     {
       "source_report_id": "nl-bzk-toelichting-gemeentefonds",
       "target_report_id": "nl-wet-woz",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY (2024 Toelichting PDF downloaded, pypdf full-text extracted). Per-maatstaf card for \"Inkomstenmaatstaf onroerendezaakbelasting; woningen eigenaren\" (and repeated verbatim for the niet-woningen eigenaren/gebruikers variants): \"Bron De benodigde gegevens worden door het CBS onttrokken aan de Landelijke Voorziening WOZ.\" NOTES: names the specific operational register — Landelijke Voorziening WOZ (LV WOZ) — that CBS draws from, itself populated by municipal WOZ determinations under this law. The register itself is not minted as a separate node this session (see _dropped).",
-      "evidence_url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024"
+      "evidence_url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "nl-gemeentefonds",
       "target_report_id": "nl-bzk-toelichting-gemeentefonds",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY (cbs.nl fetched and parsed). PRIMARY: `nl-cbs-maatstaven-fvw`'s own 'Tabeltoelichting' states: \"De hiervoor gebruikte eenheden die het CBS levert voor de definitieve en voorlopige cijfers van de maatstaven worden beschreven in de 'Toelichting op de berekeningen van de uitkeringen uit het gemeentefonds 1997 e.v. jaren', uitgave Ministerie van Binnenlandse Zaken en Koninkrijksrelaties.\" SECONDARY, not independently re-verified this session (subagent WebFetch extraction only, kept as corroboration not sole evidence): meicirculaire gemeentefonds 2026, p.23 §2.5.2, footnote 7 reportedly reads: \"Meer informatie over de berekeningswijze van de verdeelmaatstaven van de algemene uitkering voor dat uitkeringsjaar kunt u vinden in de toelichting op de berekening van de uitkering uit het gemeentefonds 2026.\"",
-      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw"
+      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "nl-gemeentefonds",
       "target_report_id": "nl-cbs-maatstaven-fvw",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY (cbs.nl fetched and parsed). \"Deze tabel bevat gegevens die mede als grondslag dienen bij het bepalen van de hoogte van de Algemene Uitkeringen aan gemeenten en provincies.\" (\"This table contains data that partly serves as the basis for determining the level of General Grants to municipalities and provinces.\") \"Het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties bepaalt deze uitkeringen aan gemeenten en provincies aan de hand van verdeelmodellen.\"",
-      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw"
+      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "nl-provinciefonds",
       "target_report_id": "nl-cbs-maatstaven-fvw",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY (cbs.nl fetched and parsed). Same table description as the Gemeentefonds edge covers provinces too (\"...aan gemeenten en provincies\"), plus a provincie-specific line: \"Het aantal inwoners in stedelijke en landelijke gebieden wordt berekend ten behoeve van het verdeelstelsel gehanteerd door het Provinciefonds. Dit verdeelstelsel is op 1 januari 1998 in werking getreden (Staatsblad, 1997, 526).\"",
-      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw"
+      "evidence_url": "https://www.cbs.nl/nl-nl/cijfers/detail/60039fvw",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "nl-cbs-iv3-gemeenten",
       "target_report_id": "nl-bbv",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY (data.overheid.nl fetched and parsed). \"De in de tabel gebruikte coderingen voor de categorieën enerzijds en de taakvelden en balansposten anderzijds, zijn evenals hun betekenis ontleend aan het 'Besluit begroting en verantwoording provincies en gemeenten' (BBV) van het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties. Het BBV bevat onder meer de regelgeving voor de leveringen van Iv3-data aan het CBS.\"",
-      "evidence_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data"
+      "evidence_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "nl-cbs-iv3-gemeenten",
       "target_report_id": "nl-iv3-rapportage",
       "relationship_type": "calculated_from",
       "basis": "VERIFIED DIRECTLY (data.overheid.nl fetched and parsed). \"Het CBS ontvangt de gegevens van gemeenten in het kader van de rapportages Informatie voor Derden (Iv3). De gegevens in de tabel zijn niet bewerkt door het CBS.\" Also: \"De tabel bevat onbewerkte Iv3-data van alle verslagsoorten van één verslagjaar. De verslagsoorten zijn de begroting, de vier kwartalen en de jaarrekening.\"",
-      "evidence_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data"
+      "evidence_url": "https://data.overheid.nl/dataset/52605-gemeenten-2025-onbewerkte-iv3-data",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "nl-waarderingskamer-waarderingsinstructie",
       "target_report_id": "nl-kadaster-brk",
       "relationship_type": "uses_data_from",
       "basis": "The Waarderingsinstructie names Kadaster explicitly and repeatedly as the source of sales-transaction data used in WOZ valuation: p.34 \"Alle verkoopgegevens worden aangeleverd door het Kadaster.\"; p.94-95 names \"Basisregistratie Kadaster\" among base registries municipalities are legally obliged to use executing the Wet WOZ.",
-      "evidence_url": "https://www.waarderingskamer.nl/documenten/03.-Voor-gemeenten/06.-Hulpmiddelen-gemeenten/Waarderingsinstructie.pdf"
+      "evidence_url": "https://www.waarderingskamer.nl/documenten/03.-Voor-gemeenten/06.-Hulpmiddelen-gemeenten/Waarderingsinstructie.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "nl-bzk-toelichting-gemeentefonds",
       "target_report_id": "nl-cbs-population-statistics",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY (2024 Toelichting PDF, pypdf full-text extracted, per this file's own _note). The 'Maatstaf Inwoners sociaal' card names \"Wet basisregistraties personen\" / \"Besluit basisregistraties personen\", the BRP register, and cites the specific titled StatLine table \"Bevolking op 1 januari en gemiddelde; geslacht, leeftijd en regio\" as its Bron.",
-      "evidence_url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024"
+      "evidence_url": "https://www.rijksoverheid.nl/documenten/rapporten/2024/05/27/toelichting-op-de-berekening-van-de-uitkering-uit-het-gemeentefonds-2024",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "nl-noord-brabant-begroting",
       "target_report_id": "nl-provinciefonds",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY 2026-08-09 (begroting.brabant.nl fetched directly). The 2024 budget's own table lists 'Uitkering provinciefonds' at €372,166 thousand, and the document states 'De raming van de algemene uitkering is gebaseerd op de meicirculaire 2023.'",
-      "evidence_url": "https://begroting.brabant.nl/begroting-2024/programma/algemeen-financieel-beleid"
+      "evidence_url": "https://begroting.brabant.nl/begroting-2024/programma/algemeen-financieel-beleid",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "nl-waalwijk-jaarrekening",
       "target_report_id": "nl-bbv",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY 2026-08-09 (waalwijk.begrotingsapp.nl fetched directly). \"De jaarrekening is opgemaakt met inachtneming van de voorschriften die het Besluit begroting en verantwoording provincies en gemeenten daarvoor geeft.\"",
-      "evidence_url": "https://waalwijk.begrotingsapp.nl/jaarrekening-2021/programma/grondslagen-voor-waardering-en-resultaatbepaling"
+      "evidence_url": "https://waalwijk.begrotingsapp.nl/jaarrekening-2021/programma/grondslagen-voor-waardering-en-resultaatbepaling",
+      "evidence_grade": "A",
+      "evidence_quote": "De jaarrekening is opgemaakt met inachtneming van de voorschriften die het Besluit begroting en verantwoording provincies en gemeenten daarvoor geeft."
     }
   ],
   "_dropped": [

@@ -364,6 +364,28 @@ country/file/round, not a single site's own one-off quirk.
   different jurisdiction's claim** when the document shapes are similar.
   The tell for illegitimate reuse is the quote naming a specific *other*
   place.
+- **Batching a corpus-wide script by SLICE FILE re-selects work an earlier
+  batch already did** — and re-doing it is not neutral. `grade-evidence.ts
+  --slice <f>` takes every edge in the file, including ones a previous batch
+  graded and wrote; a host that is merely down today then rewrites yesterday's
+  `A` as a `C`, and nothing in the output distinguishes a real regression from
+  a flaky fetch. Hence `--skip-graded`. Any future by-file batch runner needs
+  the same guard: **select on the work, not on the container.**
+- **An `--offline` re-run of the grader is stricter than the online pass, not
+  identical to it** — by design, but it means the two disagree. A URL whose
+  fetch FAILED leaves no document in the scratch store, so the offline pass
+  grades it on the recorded failure rather than on the body the online pass
+  happened to get. Five edges moved on the 2026-09-03 batch-2 round, all on
+  the B/C line, all intermittent hosts. **The corpus carries the offline
+  grades** (writing the stricter of two readings is the point); the per-edge
+  JSON in `Claude outputs/` carries the online ones. Don't diff them and call
+  it a bug.
+- **`du -sh` overstates `evidence-cache/` by ~9×** — it reported 6.8 MB for
+  773 KB of actual bytes across 1,670 files, all of it 4 KB block rounding on
+  a directory of very small gzips. Measure it with
+  `find evidence-cache -type f -printf "%s\n" | awk '{s+=$1}END{print s}'`.
+  The same trap applies to any check on whether a many-small-files directory
+  is safe to commit.
 - **`zip` writing directly into a mounted device folder can fail**
   (temp-file-then-atomic-rename doesn't survive the mount) — either `zip`
   to a path under `$HOME` (outside `mnt/`) and `cp` the finished zip in,

@@ -379,63 +379,72 @@
       "target_report_id": "cra-pd7-accounts",
       "relationship_type": "uses_data_from",
       "basis": "Record 2612, Data sources: 'The statistics compiled by SEPH are based on a census of administrative records for all in-scope establishments with employees that can be found on the Business Register. Administrative information for total gross monthly payrolls and the total number of employees for the last pay period in the month are obtained from payroll deduction (PD7 form) accounts maintained by Canada Revenue Agency.' A census of these records rather than a sample of employers, which makes this the strongest available characterisation short of calculated_from. Held at uses_data_from because SEPH applies estimation on top — the same record describes model groups and a Business Payrolls Survey filling gaps — so the payroll figure is not arithmetic on the remittances alone.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-msm",
       "target_report_id": "cra-gst-files",
       "relationship_type": "uses_data_from",
       "basis": "Record 2101, Use of Administrative Data: 'In an attempt to alleviate response burden, especially for small businesses, the MSM derives sales data for low-revenue establishments from Goods and Service Tax (GST) files using a ratio estimator.' The word 'derives' plus a named estimator is a direct-input claim; it applies to a stated subset of establishments rather than the whole, which is why this is uses_data_from and not calculated_from.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-asml",
       "target_report_id": "cra-ibsp-tax-data",
       "relationship_type": "uses_data_from",
       "basis": "Record 2103, Data sources: 'As part of the Integrated Business Statistics Program (IBSP), T1 tax data are used for unincorporated businesses, T2 tax data for incorporated businesses, T3010 tax data for registered charities and T5013 tax data for partnerships. Data replacement may be used to correct outliers or to replace partially or completely missing data. Tax data may also be used to reconcile survey data.' Three distinct uses in one passage — substitution, outlier correction and reconciliation — all of which are the target's figures entering the source.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-gdp-monthly",
       "target_report_id": "statcan-msm",
       "relationship_type": "uses_data_from",
       "basis": "IMDB record 1301, the monthly GDP-by-industry programme, states its indicator sources by name: 'Data from the Monthly Survey of Manufacturing are used as indicators for most manufacturing industries. Data from the Survey of Employment, Payrolls and Hours are used for many service industries.' The same sentence is the basis for the already-existing edge to statcan-seph, so `uses_data_from` follows that precedent. Corroborated independently by the programme's own source table, which names 'Monthly Survey of Manufacturing, Record no. 2101' in the gross-output rows for manufacturing industries — the same table and the same rows that produced the IPPI edge in V0.11.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1301"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1301",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-msm",
       "target_report_id": "statcan-asml",
       "relationship_type": "uses_data_from",
       "basis": "Stated by the annual survey rather than by the monthly one, in the present tense. IMDB record 2103: 'Within Statistics Canada, the data are used by the Canadian System of National Accounts, the Monthly Survey of Manufacturing (record number 2101) and Prices programs.' This is a reverse-direction disclosure — the target naming its consumers — and it is the only present-tense statement available. Record 2101's own account of the relationship is past tense and expired: 'Up to and including 2003, the MSM was benchmarked to the Annual Survey of Manufactures and Logging (ASML)', which is recorded in the `_dropped` block rather than used here, because a benchmarking arrangement that ended in 2003 is not a live dependency.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-msm",
       "target_report_id": "naics",
       "relationship_type": "methodology_depends_on",
       "basis": "Record 2101 states it twice, in the target population and in the estimation method. Target population description: 'The target population for the MSM consists of all statistical establishments on the Business Register that are classified to the manufacturing sector (by NAICS), which are categorized into over 156 industries.' Estimation description: 'The estimation system generates estimates using the NAICS.' `methodology_depends_on` matches the type on every other NAICS edge in the graph.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2101",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-asml",
       "target_report_id": "naics",
       "relationship_type": "methodology_depends_on",
       "basis": "Record 2103, target population: 'The target population of the Annual Survey of Manufacturing and Logging (ASML) comprises all establishments primarily engaged in manufacturing and logging activities. The data are classified by industry based on the North American Industry Classification System (NAICS). Under the NAICS, logging establishments are classified to NAICS code 1133 and manufacturing establishments to NAICS sectors 31, 32 and 33.' Restated in the sampling description: 'Prior to the selection of a random sample, enterprises are classified into homogeneous groups (i.e., groups with the same North American Industry Classification System codes and same geography) based on the characteristics of their establishments.'",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2103",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-lfs",
       "target_report_id": "noc",
       "relationship_type": "methodology_depends_on",
       "basis": "THE WEAKEST EDGE IN THIS SLICE, and flagged rather than buried. The NOC 2021 introduction states: 'It is important to note that the redesign of the NOC can have significant implications for several Surveys, such as the Labour Force Survey (LFS), and ESDC programs such as the Temporary Foreign Worker Program and Employment Insurance program.' This is a statement that a revision reaches the LFS, not a statement that the LFS uses the NOC, and the direction has to be read out of it rather than off it. It is taken on the precedent already set for boc-prime-rate -> boc-policy-rate, which rests on the Bank of Canada's word 'affects' and was accepted as `uses_data_from` on exactly that reasoning. It is also corroborated structurally by NOC being 'the departmental standard for data collection and dissemination for occupations at Statistics Canada' as of 10 August 2021. The clean version of this edge is a passage in the LFS's own record 3701 saying it codes occupation to NOC; that passage has not been retrieved, and the `_dropped` block records it as the lead to close.",
-      "evidence_url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/introductionV1"
+      "evidence_url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/introductionV1",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-seph",
       "target_report_id": "statcan-bps",
       "relationship_type": "uses_data_from",
       "basis": "Record 2612 names the Business Payrolls Survey as a live input in its own words: 'The Business Payrolls Survey (BPS) conducted monthly, is used to collect SEPH variables not available from administrative sources.' Held at uses_data_from rather than calculated_from because the BPS supplies only the variables the PD7/administrative sources cannot, i.e. a supplementary rather than arithmetic input.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2612",
+      "evidence_grade": "B"
     }
   ],
   "_dropped": [

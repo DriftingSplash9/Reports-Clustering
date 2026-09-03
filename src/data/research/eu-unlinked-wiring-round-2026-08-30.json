@@ -47,7 +47,8 @@
       "target_report_id": "lu-govfin",
       "relationship_type": "uses_data_from",
       "basis": "lu-edp-inventory is the Article 9 methods inventory Regulation 479/2009 requires; lu-govfin is the actual notification tables data it describes the compilation of. Same pattern as every other EU member state's edp-inventory -> govfin edge in this corpus.",
-      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516"
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "lu-govfin",
@@ -62,49 +63,57 @@
       "target_report_id": "eu-reg-479-2009",
       "relationship_type": "methodology_depends_on",
       "basis": "The document's own title states it is compiled \"in accordance with Council Regulation (EC) N° 479/2009, as amended by Commission Regulation (EU) No 220/2014.\"",
-      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516"
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/1015035/23085083/LU-2026-04.pdf/3e8c6b00-243b-1ca7-af1e-ad8b6c69264a?t=1776754080516",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "eurostat-edp-notification-tables",
       "target_report_id": "lu-govfin",
       "relationship_type": "uses_data_from",
       "basis": "Eurostat's EDP notification-tables collection centrally hosts and aggregates each member state's own Article 9 submission, including Luxembourg's -- same pattern already established for cz-govfin/nl-govfin/dk-govfin/it-govfin/etc. in this corpus.",
-      "evidence_url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/excessive-deficit-procedure/edp-notification-tables"
+      "evidence_url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/excessive-deficit-procedure/edp-notification-tables",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "pl-gus-national-accounts",
       "target_report_id": "pl-gus-lfs",
       "relationship_type": "uses_data_from",
       "basis": "Eurostat's ESMS metadata page for dataset nama_10_pe (\"Population and employment - national accounts\"), Poland's national submission, section 18.1 Source data: \"The main source for EMP data that is used in Poland is the Labour Force Survey (LFS). However, in order to ensure both completeness and high quality of Polish EMP NA and RA data, the combination of various data sources are used: quarterly survey - the Labour Force Survey (LFS); results from the annual 'Report on persons employed, wages, salaries and working time' ('Z-06' form); and the secondary survey 'Persons employed in the national economy'.\" Corroborated in section 11.1 (Quality assurance): \"The main data source for Polish EMP NA and RA data is the LFS, which assures the harmonization, the comparability and the reliability of all data concerning labour market.\" Supersedes the round-1 deferred finding, which had looked at the wrong Eurostat dataset code (na10/nama_10_gdp instead of the employment-specific nama_10_pe).",
-      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/nama_10_pe_esms_pl.htm"
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/nama_10_pe_esms_pl.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "gr-elstat-national-accounts",
       "target_report_id": "gr-elstat-lfs",
       "relationship_type": "uses_data_from",
       "basis": "Eurostat's ESMS metadata page for dataset nama_10_pe (\"Population and employment - national accounts\"), Greece's national submission, section 18.1 Source data: \"The source that is widely used by almost all the EU countries is the Labour Force Survey (LFS). This survey is addressed to households and aims to measure the labour supply... Regarding quarterly employment (persons) the main data source is the Labor Force Survey (LFS)\", with LFS data (persons employed by NACE Rev.2 2-digit division) named as the basis for quarterly employment figures. Section 18.5 (Data compilation) adds that total-hours-worked figures are also \"calculated mainly by using LFS data\". Supersedes the round-1 no-document finding, which had guessed the wrong URL (na10_esms_el.htm, which 404s) instead of the correct employment-specific dataset page (nama_10_pe_esms_el.htm).",
-      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_pe_esms_el.htm"
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_pe_esms_el.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "se-scb-hbs",
       "target_report_id": "eurostat-hbs-methodology-2003",
       "relationship_type": "methodology_depends_on",
       "basis": "SCB's own methodology documentation for HUT (SCBDOK 3.2, 2012 edition, section 0.9 \"EU-reglering\"): \"Undersökningar om Hushållens utgifter genomförs i alla EU-länderna. För att få jämförbarhet mellan de olika ländernas undersökningar har Eurostat publicerat handboken 'HOUSEHOLD BUDGET SURVEYS IN THE EU Methodology and recommendations for harmonization 2003'\" (Household expenditure surveys are conducted in all EU countries. To achieve comparability between the different countries' surveys, Eurostat has published the handbook...), and \"Från och med 1999 redovisas konsumtionen även efter ändamål enligt Eurostats rekommendationer, den så kallade COICOP-indelningen\" (From 1999, consumption is also reported by purpose according to Eurostat's recommendations, the COICOP classification). Distinct from the already-closed CPI/HICP-weights question (HUT is confirmed NOT the source of Swedish CPI/HICP weights, which come from national accounts instead) -- this is a separate, genuine methodology-alignment dependency: survey design and classification, not price-index weighting.",
-      "evidence_url": "https://www.scb.se/contentassets/90c71dbdb84c4fb5abb66896f3a478e6/he0201_do_2012.pdf"
+      "evidence_url": "https://www.scb.se/contentassets/90c71dbdb84c4fb5abb66896f3a478e6/he0201_do_2012.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Från och med 1999 redovisas konsumtionen även efter ändamål enligt Eurostats rekommendationer, den så kallade COICOP-indelningen"
     },
     {
       "source_report_id": "nl-waarderingskamer-staat-van-de-woz",
       "target_report_id": "nl-wet-woz",
       "relationship_type": "methodology_depends_on",
       "basis": "The Waarderingskamer's own site states its entire supervisory mandate is statutory: \"De taken en bevoegdheden van de Waarderingskamer zijn ontleend aan artikel 4 van de Wet WOZ\" (The Waarderingskamer's tasks and powers derive from Article 4 of the Wet WOZ), and describes this report's purpose directly: \"De Waarderingskamer controleert of gemeenten de Wet waardering onroerende zaken (Wet WOZ) goed uitvoeren... Om transparant te zijn over onze bevindingen publiceren we deze rapportages\" (The Waarderingskamer checks whether municipalities properly execute the Wet WOZ... To be transparent about our findings we publish these reports). \"De Staat van de WOZ\" is this annual published finding report.",
-      "evidence_url": "https://www.waarderingskamer.nl/over-ons/wie-zijn-wij"
+      "evidence_url": "https://www.waarderingskamer.nl/over-ons/wie-zijn-wij",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "nl-waarderingskamer-staat-van-de-woz",
       "target_report_id": "nl-waarderingskamer-waarderingsinstructie",
       "relationship_type": "methodology_depends_on",
       "basis": "The Waarderingskamer's own page on the Waarderingsinstructie states: \"De Waarderingsinstructie geeft de (kwaliteits-) eisen waaraan een goede uitvoering van de Wet WOZ moet voldoen... Daarmee is deze Waarderingsinstructie ook de basis voor het toezicht door de Waarderingskamer\" (The Waarderingsinstructie sets the quality requirements a proper execution of the Wet WOZ must meet... this Waarderingsinstructie is therefore also the basis for the Waarderingskamer's supervision). The 2026 \"Staat van de WOZ\" report itself (p.9) ties its own quality-assessment criteria directly to this document: \"Deze eisen worden vastgelegd in de nieuwe versie van de Waarderingsinstructie die wij momenteel ontwikkelen.\"",
-      "evidence_url": "https://www.waarderingskamer.nl/voor-gemeenten/hulpmiddelen/waarderingsinstructie"
+      "evidence_url": "https://www.waarderingskamer.nl/voor-gemeenten/hulpmiddelen/waarderingsinstructie",
+      "evidence_grade": "B"
     }
   ],
   "_dropped": [

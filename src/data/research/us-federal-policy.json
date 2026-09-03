@@ -440,14 +440,16 @@
         "window_months": 3,
         "ends": "09-30",
         "stated_as": "'the percentage increase (if any) in the CPI-W from the average for the third quarter of the current year to the average for the third quarter of the last year in which a COLA became effective'."
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ssa-contribution-benefit-base",
       "target_report_id": "ssa-national-average-wage-index",
       "relationship_type": "calculated_from",
       "basis": "SSA lists the amounts driven by the wage index and puts the taxable maximum first: 'We use the average wage indexing series to update several amounts that are important to the operation of Social Security's Old-Age, Survivors, and Disability Insurance (OASDI) program. — OASDI contribution and benefit base (also known as the taxable maximum); Retirement earnings test exempt amounts; Formulas for a primary insurance amount and maximum family benefits; Amount of earnings needed to earn a quarter of coverage.' This is the interesting structural fact about the Social Security system: benefits are indexed to prices, the tax base is indexed to wages, and the two indices diverge.",
-      "evidence_url": "https://www.ssa.gov/oact/cola/AWI.html"
+      "evidence_url": "https://www.ssa.gov/oact/cola/AWI.html",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cps-current-population-survey",
@@ -460,21 +462,24 @@
         "window_months": 0,
         "ends": "01-01",
         "stated_as": "'BLS introduces the Census Bureau's annual population control adjustments into CPS estimates for January.'"
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "uscensus-population-estimates",
       "target_report_id": "uscensus-decennial",
       "relationship_type": "calculated_from",
       "basis": "The population controls are 'based on decennial census population counts, supplemented with birth and death data and estimates of net international migration' — the estimates programme is a carry-forward of the decennial base, which is why a census undercount or overcount propagates into every intercensal year until the next census resets it.",
-      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm"
+      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "bls-employment-situation",
       "target_report_id": "cps-current-population-survey",
       "relationship_type": "calculated_from",
       "basis": "The Employment Situation news release is two surveys stapled together. The household half — the unemployment rate, the participation rate, and all demographic detail — is the CPS. BLS: 'When the Census Bureau's processing activities are completed, the microdata file is securely transferred to the U.S. Bureau of Labor Statistics (BLS) for estimation of labor force statistics.' The establishment half (payroll employment) is the CES, already linked to QCEW elsewhere in the graph.",
-      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm"
+      "evidence_url": "https://www.bls.gov/opub/hom/cps/calculation.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "hhs-poverty-guidelines",
@@ -487,28 +492,32 @@
         "window_months": 12,
         "ends": "12-31",
         "stated_as": "'the applicable percentage change in the Consumer Price Index for All Urban Consumers (CPI-U)' between calendar-year averages."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "hhs-poverty-guidelines",
       "target_report_id": "uscensus-poverty-thresholds",
       "relationship_type": "calculated_from",
       "basis": "The guidelines are not an independent measure — they are the Census thresholds inflated and smoothed: 'The poverty guidelines issued here are a simplified version of the poverty thresholds that the Census Bureau uses to prepare its estimates of the number of individuals and families in poverty. ... this update is accomplished by increasing the latest published Census Bureau poverty thresholds by the applicable percentage change in the CPI-U. ... The poverty guidelines continue to be derived from the Census Bureau's current official poverty thresholds; they are not derived from the Census Bureau's Supplemental Poverty Measure (SPM).' The notice even states the guidelines are 'roughly equal to the poverty thresholds for calendar year 2025, which the Census Bureau expects to publish in final form in September 2026' — the administrative number arrives eight months before the statistical number it approximates.",
-      "evidence_url": "https://www.federalregister.gov/documents/2026/01/15/2026-00755/annual-update-of-the-hhs-poverty-guidelines"
+      "evidence_url": "https://www.federalregister.gov/documents/2026/01/15/2026-00755/annual-update-of-the-hhs-poverty-guidelines",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-poverty-thresholds",
       "target_report_id": "cps-current-population-survey",
       "relationship_type": "uses_data_from",
       "basis": "The Census Bureau's own methodology page labels the published threshold table 'Poverty Thresholds by Size of Family and Number of Related Children Under 18 Years — Source: Current Population Survey (CPS)'. The threshold matrix is carried forward by CPI-U, but the income distribution it is applied to, and the official count of people in poverty, come from the CPS Annual Social and Economic Supplement.",
-      "evidence_url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html"
+      "evidence_url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-poverty-thresholds",
       "target_report_id": "bls-cpi",
       "relationship_type": "calculated_from",
       "basis": "'The official poverty thresholds do not vary geographically, but they are updated for inflation using the Consumer Price Index (CPI-U)... Thresholds are updated annually for inflation using the Consumer Price Index for All Urban Consumers (CPI-U).' Worth noting the doubling-up: the thresholds are CPI-indexed, and then HHS indexes the published thresholds forward by CPI again to get the guidelines, so the CPI enters the eligibility rule for Medicaid twice, a year apart.",
-      "evidence_url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html"
+      "evidence_url": "https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "irs-annual-inflation-adjustments",
@@ -521,42 +530,48 @@
         "window_months": 12,
         "ends": "08-31",
         "stated_as": "'The C-CPI-U for any calendar year is the average of the C-CPI-U as of the close of the 12-month period ending on August 31 of such calendar year' — 26 U.S.C. s.1(f)(6)(B)."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "bls-c-cpi-u",
       "target_report_id": "bls-cpi",
       "relationship_type": "calculated_from",
       "basis": "The chained index is not a separate collection — it is the CPI's own price quotes reaggregated. BLS: 'all three of the CPI indexes are built in two stages. In the first stage, prices for each of the 7,776 item-area combinations (243 item categories X 32 geographic areas) are averaged together to form 7,776 basic indexes... The geometric mean estimator is used in the C-CPI-U in the same item categories in which it is used in the CPI-U and CPI-W. In the second stage... It is at this second stage where the C-CPI-U is different from the CPI-U and CPI-W. The use of a superlative formula for upper-level aggregation... is designed to address consumer substitution across item categories.' BLS also confirms the policy use: 'Since 2017, the C-CPI-U has been used to adjust Federal tax brackets for inflation.' The average gap is about 0.2 percentage points a year, which compounds.",
-      "evidence_url": "https://www.bls.gov/cpi/additional-resources/chained-cpi-questions-and-answers.htm"
+      "evidence_url": "https://www.bls.gov/cpi/additional-resources/chained-cpi-questions-and-answers.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "bea-pce",
       "target_report_id": "bls-cpi",
       "relationship_type": "calculated_from",
       "basis": "NIPA Handbook Chapter 5 lists the CPI among the principal inputs — 'The following are among the principal source data used for the PCE estimates: BEA's Benchmark Input-Output (I-O) Accounts... the Census Bureau's Annual Retail Trade Survey, Service Annual Survey, Quarterly Services Survey, and Monthly Retail Trade Survey; and the Bureau of Labor Statistics' Consumer Price Indexes (CPIs)' — and then explains the mechanism: 'The estimates of quantities purchased, or real spending, for most of the detailed PCE categories are prepared by deflation. In this method, the quantities are calculated by dividing the current-dollar value of the component by an appropriate price index... For most PCE categories, the closest matching price index is a consumer price index or indexes.' Tables 5.A and 5.B name the specific CPI series component by component (CPI for new cars, CPI for used cars and trucks, CPI for food at home, and so on). The Fed's preferred inflation gauge is therefore largely a reweighting of BLS price quotes onto national-accounts expenditure weights.",
-      "evidence_url": "https://www.bea.gov/resources/methodologies/nipa-handbook/pdf/chapter-05.pdf"
+      "evidence_url": "https://www.bea.gov/resources/methodologies/nipa-handbook/pdf/chapter-05.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "fed-fomc-statement",
       "target_report_id": "bea-pce",
       "relationship_type": "uses_data_from",
       "basis": "The FOMC's Statement on Longer-Run Goals and Monetary Policy Strategy, reaffirmed effective January 27, 2026, names the series that defines the target: 'The Committee reaffirms its judgment that inflation at the rate of 2 percent, as measured by the annual change in the price index for personal consumption expenditures, is most consistent over the longer run with the Federal Reserve's statutory maximum employment and price stability mandates.' The 2 percent goal is not defined on the CPI — a distinction that matters because the two indexes routinely differ by several tenths.",
-      "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf"
+      "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "fed-sep",
       "target_report_id": "bea-pce",
       "relationship_type": "uses_data_from",
       "basis": "The Summary of Economic Projections reports each participant's projection of inflation as the percent change in the PCE price index and in the core PCE price index, precisely because the FOMC's longer-run goal is stated as '2 percent, as measured by the annual change in the price index for personal consumption expenditures'. The projection variable is defined by the statement of goals, so the SEP inherits BEA's index by construction.",
-      "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf"
+      "evidence_url": "https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "fed-h15",
       "target_report_id": "treasury-daily-yield-curve",
       "relationship_type": "uses_data_from",
       "basis": "H.15's own footnotes 9 and 10 both read 'Source: U.S. Treasury' for the Treasury nominal and inflation-indexed constant maturity series, and the release describes those yields as 'interpolated by the U.S. Treasury from the daily yield curve'. Treasury's own FAQ confirms the mechanism: 'CMT yields are read directly from the Treasury's daily par yield curve, which is derived from indicative closing bid market price quotations on Treasury securities.' This reconnects fed-h15 to the graph after V0.9's deletion of fed-h15 -> fed-fomc-statement left it with no surviving edge.",
-      "evidence_url": "https://www.federalreserve.gov/releases/h15/"
+      "evidence_url": "https://www.federalreserve.gov/releases/h15/",
+      "evidence_grade": "C"
     }
   ],
   "_dropped": [

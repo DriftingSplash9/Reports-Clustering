@@ -97,21 +97,24 @@
       "target_report_id": "un-coicop-2018",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY from the node's OWN release document, and available since BRICS/G.1 without being drawn -- the single cheapest edge in this round. The July 2026 CPI press release, which is `in-mospi-cpi`'s own url, states verbatim: \"The CPI (Base: 2024=100) series is aligned with the United Nations' Classification of Individual Consumption According to Purpose (COICOP) 2018, comprising 12 Divisions, 43 Groups, 92 Classes and 162 Subclasses.\" That sentence names the classification, its issuing body, AND the edition -- satisfying the edition rule outright, with no companion document required and no inference. It has been quoted in the `in-mospi-cpi` node description since G.1; what was missing was the edge, not the evidence. `methodology_depends_on` rather than `cites`: COICOP 2018 supplies the index's own classification structure down to the sub-class level, which is method, not reference. Corroborated independently by MoSPI's expert-group report (see the next edge). WEAKNESS STATED: the release says \"aligned with\", and the expert-group report elaborates that the series is \"mostly aligned\" -- India uses 12 Divisions against COICOP 2018's 15, with documented mapping compromises where household-survey items could not be mapped unambiguously. The dependency is real and named; the conformance is partial, and this corpus has no relationship type expressing partial conformance, so the qualification is recorded here.",
-      "evidence_url": "https://www.mospi.gov.in/uploads/latestreleasesfiles/1786531114988-Press_Release_CPI_July_2026.pdf"
+      "evidence_url": "https://www.mospi.gov.in/uploads/latestreleasesfiles/1786531114988-Press_Release_CPI_July_2026.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "in-mospi-cpi-expert-group-2026",
       "target_report_id": "un-coicop-2018",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY, TIER A, edition named repeatedly. §3.3: \"To enhance credibility and to ensure global comparability of Indian CPI, the latest structure of Classification of Individual Consumption According to Purpose (COICOP) 2018 will be adopted in the CPI 2024 series.\" §2.3: \"CPI 2024 – The latest classification framework is COICOP 2018. The CPI 2024 series is mostly aligned with COICOP 2018 with 12 Divisions, 43 Groups, 92 Classes and 162 Sub-classes.\" §4.1.5: \"EG recommended for mapping HCES items as per COICOP 2018 in CPI 2024.\" This is the methodology document that DECIDES the classification the CPI release then reports using, so the two edges into `un-coicop-2018` are complementary rather than duplicative -- one records what the published index is built on, the other records the instrument that chose it. `methodology_depends_on` on the same reasoning as the release-level edge.",
-      "evidence_url": "https://www.mospi.gov.in/uploads/publications_reports/publications_reports1770882766151_a8816cb4-929f-416b-94f9-c1884cbc64f7_Expert_Group_Report_CPI.pdf"
+      "evidence_url": "https://www.mospi.gov.in/uploads/publications_reports/publications_reports1770882766151_a8816cb4-929f-416b-94f9-c1884cbc64f7_Expert_Group_Report_CPI.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "in-mospi-cpi-expert-group-2026",
       "target_report_id": "cpi-manual",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY, TIER A, with the edition named and the manual applied NORMATIVELY rather than cited for colour -- it supplies the menu of options from which MoSPI picks its treatment. §4.6.5: \"The procedure is fully consistent with the principles of the IMF CPI Manual (2020) and supports a smooth, stable, and operationally feasible implementation of the chain-base CPI.\" §5.3.2 and §5.3.4 go further and take a decision from it: \"This is one of the three methods prescribed in the Consumer Price Index Manual: Concepts and Methods 2020 (page 35) in case, if the price of social security transfers decreases from some positive amount to zero.\" followed by the three methods and MoSPI's choice, \"Method 1: To use a zero price and adjust the weight during next update. (Proposed for new series of CPI)\". §5.4.2 quotes the manual's paragraph 2.60 verbatim. The full title and year are given, with page and paragraph references (p.35, paras 2.60, 2.72). NODE IDENTITY CHECKED before minting: the `cpi-manual` node's own description identifies it as the 2020 edition updating the 2004 ILO-managed predecessor, matching what the Indian document names -- had the node been the 2004 edition, the edition rule would have required refusing this edge. Note the pleasing symmetry with the Russian side of this round: `ru-rosstat-cpi-methodology-915 -> cpi-manual` rests on the same manual, named with the same year, in a document of the same kind.",
-      "evidence_url": "https://www.mospi.gov.in/uploads/publications_reports/publications_reports1770882766151_a8816cb4-929f-416b-94f9-c1884cbc64f7_Expert_Group_Report_CPI.pdf"
+      "evidence_url": "https://www.mospi.gov.in/uploads/publications_reports/publications_reports1770882766151_a8816cb4-929f-416b-94f9-c1884cbc64f7_Expert_Group_Report_CPI.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "in-mospi-gdp-base-revision-2026",
@@ -126,7 +129,8 @@
       "target_report_id": "isic",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY, TIER A. NIC-2025's Introduction: \"The classification aligns with the International Standard Industrial Classification (ISIC Rev. 5) while addressing specific features of the Indian economy such as the informal sector, agriculture, renewable energy, and the growing digital economy.\" And under Salient Features: \"Based on ISIC Rev. 5: NIC-2025 is aligned with the latest international standard, ISIC Revision 5, ensuring structural and conceptual comparability up to the 4-digit class level.\" `methodology_depends_on` rather than `cites`: the national classification's structure IS the international one to four digits, which is as strong as a classification dependency gets. NODE-IDENTITY CHECK, and the reason no edition problem arises: the corpus's `isic` node is deliberately the unversioned FAMILY node -- its own description calls it \"the acknowledged parent of most national industrial classifications, including ANZSIC and its two predecessors\" -- so it is designed to receive citations of any revision, unlike `sna-2008`/`sna-2025` and `un-coicop-2018`/`un-coicop-hbs-1999`, which are edition-split. Recorded because a future round may reasonably propose splitting `isic` by revision, at which point this edge would need re-pointing to a Rev. 5 node, and NIC 2008's separately documented dependency on ISIC Rev. 4 would become mintable as well.",
-      "evidence_url": "https://www.mospi.gov.in/uploads/publications_reports/publications_reports1763457214315_c3e5d4f3-8e25-4775-85e3-ad42d571652f_NIC_2025_Final.pdf"
+      "evidence_url": "https://www.mospi.gov.in/uploads/publications_reports/publications_reports1763457214315_c3e5d4f3-8e25-4775-85e3-ad42d571652f_NIC_2025_Final.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "in-mof-external-debt-status-report",
@@ -142,14 +146,17 @@
       "target_report_id": "imf-bpm6",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY, TIER A, first-person and edition-named. \"The compilation of BoP data is based on the IMF guidelines set out in its Balance of Payments Manual (BPM) ... IMF has recently brought out the Sixth Edition of BPM, i.e., BPM6 which has suggested revised compilation procedure as well as new format of standard presentation of BoP statistics. ... Accordingly, from this quarter (Q4 of 2010-11), BoP data are presented in the revised format as per BPM6.\" The RBI's own statistical tables carry it in their headings -- \"Statement I: Standard Presentation of BoP as per BPM6 (US$ million)\" -- and a table note reads \"Changes in Reserve Assets are included under the Financial Account as recommended by the BPM 6.\" `methodology_depends_on`: BPM6 supplies both the compilation procedure and the presentation format of India's published BoP. TENSE WEAKNESS STATED HONESTLY, since this project's own spec insists on it: the verified article is the Q4 2010-11 transition issue, so its central sentence documents the moment of adoption. That is a PAST-tense event, and on its own would be exactly the kind of past arrangement this corpus refuses to treat as a live dependency. It is minted because two independent present-tense confirmations exist: the RBI's statistical statements are still headed \"as per BPM6\", and the Ministry of Finance's September 2025 external-debt report treats BPM6 as the current framework. A current RBI quarterly BoP press release would remove the caveat entirely and is a clean lead -- blocked only by the `rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/` bot-wall.",
-      "evidence_url": "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=12430"
+      "evidence_url": "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=12430",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "in-fc15-report",
       "target_report_id": "imf-weo",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY, TIER A, and structurally the most important edge in this file: `in-fc15-report` sits inside India's main eleven-node component, so this single citation is what attaches the whole Finance Commission cluster -- Constitution, Commission reports, Explanatory Memoranda, Union Budget, RBI State Finances, CAG -- to the international layer. FC15 Volume I cites the WEO in two footnotes supporting its macroeconomic narrative: \"1 World Economic Outlook, October 2020\" and \"4 World Economic Outlook October 2020, International Monetary Fund\". `uses_data_from` rather than `methodology_depends_on`, deliberately: the WEO supplies comparator data and growth figures the Commission reasons from; it is not a standard the Commission's methodology conforms to. ON THE EDITION QUESTION, which the research flagged and which is worth settling here as a corpus rule: `imf-weo` is NOT edition-split and should not be, because the WEO is a RECURRING PUBLICATION, not a standard with successor editions held as separate nodes. This corpus models a recurring release as one node covering all its issues -- `br-ipca` covers every month, `cn-nbs-statistical-communique` every year -- so citing the October 2020 issue is like citing a particular month of a monthly index, and points at the series node correctly. That is a different situation from SNA 2008 versus SNA 2025, which are successive STANDARDS deliberately held apart. WEAKNESS STATED: this is a footnote citation, the weakest form of dependency in this project's taxonomy. A third mention (the source line of Figure 2.2, \"Sources: IMF, World Economic Outlook, and staff calculations\") is unversioned and would not qualify alone.",
-      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/15th-FC/digitized/15th%20FC%20-%20Vol%20I%20-PDF.pdf"
+      "evidence_url": "https://fincomindia.nic.in/asset/doc/commission-reports/15th-FC/digitized/15th%20FC%20-%20Vol%20I%20-PDF.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "1 World Economic Outlook, October 2020"
     }
   ],
   "_dropped": [

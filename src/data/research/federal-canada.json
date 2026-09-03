@@ -406,7 +406,8 @@
         "window_months": 0,
         "ends": null,
         "stated_as": "'Each year, the Commission is responsible for setting the annual premium rate based on a seven-year break-even rate forecast by the EI Senior Actuary.'"
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ei-maximum-insurable-earnings",
@@ -419,7 +420,8 @@
         "window_months": 12,
         "ends": "04-30",
         "stated_as": "'the average for the 12-month period ending on April 30 in that preceding year of the Average Weekly Earnings' — Employment Insurance Act s.4(3)."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "cra-indexation-adjustment",
@@ -432,7 +434,8 @@
         "window_months": 12,
         "ends": "09-30",
         "stated_as": "'A is the Consumer Price Index for the 12 month period that ended on September 30 next before that year' — Income Tax Act s.117.1(1)(b)(ii)."
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cpp-ympe",
@@ -445,7 +448,8 @@
         "window_months": 12,
         "ends": "06-30",
         "stated_as": "'the average Wage Measure for the twelve months ending 30 June of the preceding year' — Canada Pension Plan s.18(1)(c)."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ei-regional-unemployment-rates",
@@ -458,7 +462,8 @@
         "window_months": 3,
         "ends": null,
         "stated_as": "'the average of the seasonally adjusted monthly rates of unemployment for the last three-month period' — EI Regulations s.17(1)(a), read once per four-week EI period."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "esdc-oas-indexation",
@@ -471,7 +476,8 @@
         "window_months": 3,
         "ends": null,
         "stated_as": "'reviewed each year in January, April, July and October', on 'the difference between the average CPI for two periods of three months each'."
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "canada-child-benefit",
@@ -484,7 +490,8 @@
         "window_months": 12,
         "ends": "09-30",
         "stated_as": "'A is the Consumer Price Index ... for the 12-month period that ended on September 30 of the base taxation year' — Income Tax Act s.122.61(5)."
-      }
+      },
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "canada-child-benefit",
@@ -497,28 +504,32 @@
         "window_months": 0,
         "ends": "07-01",
         "stated_as": "Indexed benefit amounts 'take effect on July 1 to coincide with the beginning of the program year for payments of these benefits'."
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ei-regular-benefit-rate",
       "target_report_id": "ei-maximum-insurable-earnings",
       "relationship_type": "calculated_from",
       "basis": "Service Canada: 'the basic rate for calculating Employment Insurance (EI) benefits is 55% of their average insurable weekly earnings, up to a maximum amount. As of January 1, 2026, the maximum yearly insurable earnings amount is $68,900. This means that you can receive a maximum amount of $729 per week.' The weekly ceiling is arithmetically 55% of the MIE divided by 52.",
-      "evidence_url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html"
+      "evidence_url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ei-regular-benefit-rate",
       "target_report_id": "ei-regional-unemployment-rates",
       "relationship_type": "calculated_from",
       "basis": "Service Canada describes the calculation: 'we determine the divisor (number of best weeks) that corresponds to your regional rate of unemployment', ranging from 22 best weeks where the regional rate is 6% or less down to 14 best weeks where it is 13.1% or more. The same page's entitlement table sets the number of weeks of regular benefits payable (from 14 to 45) as a joint function of insurable hours and the regional rate of unemployment band.",
-      "evidence_url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html"
+      "evidence_url": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cpp-pension-index",
       "target_report_id": "statcan-cpi",
       "relationship_type": "calculated_from",
       "basis": "Service Canada states: 'Canada Pension Plan (CPP) benefit increases are calculated once a year using the Consumer Price Index (CPI) All-Items Index. The new amounts come into effect each January.' The page shows the arithmetic explicitly: the January 2026 adjustment compares the average CPI for November 2024 to October 2025 (163.6) with the average for November 2023 to October 2024 (160.4), giving 2.0%, and it prints the individual monthly CPI values used.",
-      "evidence_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html"
+      "evidence_url": "https://www.canada.ca/en/services/benefits/publicpensions/cpp/receive-benefits/consumer-price-index.html",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cpp-disability-amount",
@@ -531,42 +542,48 @@
         "window_months": 0,
         "ends": "01-01",
         "stated_as": "'CPP benefit increases are calculated once a year using the Consumer Price Index', with the new amounts effective each January."
-      }
+      },
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "statcan-cpi",
       "target_report_id": "statcan-hfce",
       "relationship_type": "calculated_from",
       "basis": "Statistics Canada's basket-update methodology paper states under 'Data sources' that 'The updated basket weights were derived primarily using consumer expenditures from the 2025 national Household Final Consumption Expenditure (HFCE) series, replacing those derived from the 2024 national HFCE series.' The CPI is a Laspeyres-type index whose upper-level aggregation weights are exactly these expenditure shares, so HFCE determines the relative influence of every component on headline CPI.",
-      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-cpi",
       "target_report_id": "statcan-shs",
       "relationship_type": "uses_data_from",
       "basis": "The same 'Data sources' section states that 'Household expenditures reported in the Survey of Household Spending (SHS) are used to supplement the HFCE expenditure data, mainly providing expenditure detail at lower levels of aggregation, including geographic aggregation.' SHS therefore supplies the sub-provincial and detailed-product weight structure that HFCE cannot resolve.",
-      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-cpi-basket-update",
       "target_report_id": "statcan-hfce",
       "relationship_type": "calculated_from",
       "basis": "The paper's own Data sources section names the national HFCE series as the primary input from which the published basket weights were derived.",
-      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-cpi-basket-update",
       "target_report_id": "statcan-shs",
       "relationship_type": "uses_data_from",
       "basis": "The paper states SHS expenditures are used to supplement HFCE data, mainly providing expenditure detail at lower levels of aggregation including geographic aggregation.",
-      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm"
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/62f0014m/62f0014m2026005-eng.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ei-actuarial-report-premium-rate",
       "target_report_id": "statcan-seph",
       "relationship_type": "uses_data_from",
       "basis": "Section 4.1.1 of the 2026 Actuarial Report on the EI Premium Rate: 'The MIE represents the income level up to which EI premiums are paid and up to which EI benefits are calculated and is a key element in determining the earnings base. Section 4 of the EI Act provides details on how to determine the yearly MIE. In accordance with this section, the MIE increases annually based on increases in the average weekly earnings, as reported by Statistics Canada.' The report computes the 2026 MIE of $68,900 in its Appendix C from that series, and the resulting earnings base drives the break-even premium rate.",
-      "evidence_url": "https://www.osfi-bsif.gc.ca/en/oca/actuarial-reports/2026-actuarial-report-employment-insurance-premium-rate"
+      "evidence_url": "https://www.osfi-bsif.gc.ca/en/oca/actuarial-reports/2026-actuarial-report-employment-insurance-premium-rate",
+      "evidence_grade": "B"
     }
   ],
   "_dropped": [

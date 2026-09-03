@@ -41,6 +41,8 @@
  *   flags: --write (write grades back into the slice JSONs; OFF by default),
  *          --offline (grade from the cache only, no network),
  *          --json <out>, --limit <n>, --concurrency <n> (default 6),
+ *          --skip-graded (ignore edges that already carry an `evidence_grade` —
+ *                         use it when batching by slice file after an earlier batch),
  *          --cache-dir <path> (default evidence-cache/), --selftest
  *
  * Two stores, one committed: `evidence-cache/` is the permanent evidence
@@ -1009,6 +1011,7 @@ interface Args {
   cacheDir: string
   selftest: boolean
   findQuotes: boolean
+  skipGraded: boolean
 }
 
 function parseArgs(argv: string[]): Args {
@@ -1023,6 +1026,7 @@ function parseArgs(argv: string[]): Args {
     cacheDir: join(ROOT, 'evidence-cache'),
     selftest: false,
     findQuotes: false,
+    skipGraded: false,
   }
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i + 1]
@@ -1039,6 +1043,7 @@ function parseArgs(argv: string[]): Args {
       case '--cache-dir': a.cacheDir = v; i++; break
       case '--selftest': a.selftest = true; break
       case '--find-quotes': a.findQuotes = true; break
+      case '--skip-graded': a.skipGraded = true; break
       default:
         if (argv[i].startsWith('--')) {
           console.error(`unknown flag ${argv[i]}`)
@@ -1334,6 +1339,13 @@ function selectEdges(
     if (args.slices.length && !args.slices.includes(s.file)) continue
     for (const d of s.json.dependencies ?? []) {
       if (args.feeding.length && !args.feeding.includes(d.target_report_id)) continue
+      // `--skip-graded`: batching by SLICE FILE re-selects every edge in the
+      // file, including ones an earlier batch already graded and wrote. Those
+      // re-grades are not free and not safe: a host that is merely down today
+      // would rewrite yesterday's A as a C with no way to tell a real
+      // regression from a flaky fetch. Selection only — the grade table,
+      // matching and naming helpers are untouched by this flag.
+      if (args.skipGraded && d.evidence_grade) continue
       wanted.push({
         source: d.source_report_id,
         target: d.target_report_id,

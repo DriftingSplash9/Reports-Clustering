@@ -83,7 +83,8 @@
       "target_report_id": "statcan-ippi",
       "relationship_type": "uses_data_from",
       "basis": "The monthly programme's industry-by-industry source table, 'National monthly gross domestic product by industry, summary of Methods and data sources' (2021), names the IPPI by title and by IMDB record number in 64 separate rows. Representative row, NAICS 3111 Animal food manufacturing, under 'Gross output': 'Sales and inventory change in constant prices, Monthly Survey of Manufacturing, Record no (number). 2101. Industrial product price indexes, Record no (number). 2318.' Record 2318 is the IPPI. `uses_data_from` follows the type already taken for statcan-gdp-monthly -> statcan-cpi, which rests on the identical evidence in the identical document. WORTH STATING PLAINLY: this is the best-evidenced deflator edge in the Canadian corpus and it was the last one built. The same table names the CPI in 27 rows and SEPH in 37, and both of those became edges two sessions before this one — the IPPI was invisible only because nobody had grepped for it. Note also that record 1301's own IMDB page never mentions the IPPI at all; the release-level disclosure lives entirely in this attached table, which is the disclosure asymmetry doctrine operating within a single statistical programme.",
-      "evidence_url": "https://www.statcan.gc.ca/en/statistical-programs/document/1301_D1_V4"
+      "evidence_url": "https://www.statcan.gc.ca/en/statistical-programs/document/1301_D1_V4",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-sut",
@@ -91,7 +92,8 @@
       "relationship_type": "methodology_depends_on",
       "basis": "Catalogue 15F0077GIE, 'A Guide to Deflating the Input-Output Accounts: Sources and Methods' (2001), which record 1301 cites as the description of the double-deflation method used to produce constant-price GDP by industry. Under the heading 'Sources of deflators', unhedged: 'The main data source of deflators for manufactured goods is the Industrial Product Price Indexes (IPPI) produced by Statistics Canada's Prices Division. Prior to 1981, deflators were based on Industry Selling Price Indexes (ISPI).' Earlier in the same chapter, on why basic-price deflation is possible where purchaser-price deflation is not: 'the commodity price information collected by the Prices Division to compile industry product price indexes can be used to construct deflators for values at basic prices. These Industrial Product Price Indexes (IPPI), aggregated where necessary to the input-output classification, constitute the main source of deflators for manufactured commodities.' Both passages verified verbatim against the PDF. `methodology_depends_on` matches the type taken for statcan-sut -> statcan-cpi from the same document. ONE HEDGE, STATED, AND IT IS THE ONLY ONE: the guide is a 2001 edition marked ARCHIVED, twenty-five years old, and it remains the document record 1301 points at for this method. The 'can be used' softness that qualifies the CPI edge does not apply here — the 'Sources of deflators' sentence says 'is'.",
       "evidence_url": "https://www150.statcan.gc.ca/n1/pub/15f0077g/15f0077g2001001-eng.pdf",
-      "mutual": true
+      "mutual": true,
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-ippi",
@@ -105,35 +107,40 @@
         "ends": null,
         "stated_as": "'The entire weighting scheme for the IPPI is generally revised every 5 years.' The weights in force are derived from the 2019 Supply and Use Tables and from the 2019 ASML, so the window is a single calendar reference year and the reading recurs roughly once every five. Record 2318 adds an unusual note of intent — 'In the future, we will explore increasing the frequency to every two years' — which is a stated plan and not a rate, so it is not in the numbers."
       },
-      "mutual": true
+      "mutual": true,
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-ippi",
       "target_report_id": "naics",
       "relationship_type": "methodology_depends_on",
       "basis": "Record 2318, under Estimation: 'The second set of indexes covers the total commodity output of individual industries. These reflect the sales of goods manufactured in 2019 in each industry. The industry indexes are classified according to the NAICS 2022v1, aggregated to the level required for the input-output tables and the measurement of Gross Domestic Product.' And under Target population: 'the industry universe corresponds to the North American Industry Classification System (NAICS).' Same type as the five NAICS edges already in the graph, which rest on the same kind of statement — a classification the release is compiled against rather than a figure it reads.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-ippi",
       "target_report_id": "statcan-asml",
       "relationship_type": "uses_data_from",
       "basis": "Record 2318, Sampling: 'The sampling frame for the IPPI is based on the 2022 Annual Survey of Manufacturers and Logging (ASML).' Estimation: 'commodity and industry weights are derived from a combination of the 2019 Supply and Use Tables... and the sales of goods manufactured by companies as reported for the 2019 ASML.' Data accuracy: 'Shipment value data mainly rests on other sample surveys produced by Statistics Canada, such as the ASML.' `statcan-asml` was minted 2026-08-09 (sweep session, Tier-2 item #12, manufacturing-and-classifications.json) as IMDB record 2103, closing the node-availability blocker this entry was filed under.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-ippi",
       "target_report_id": "napcs",
       "relationship_type": "methodology_depends_on",
       "basis": "Record 2318: 'Elemental price indexes are calculated for groups of the North American Product Classification System (NAPCS) 2022v1', and the commodity index set is 'classified according to the NAPCS 2022v1'. `napcs` already exists as a corpus node (manufacturing-and-classifications.json), so this closes the node-availability blocker this entry was filed under.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "statcan-system-macroeconomic-accounts",
       "target_report_id": "statcan-ippi",
       "relationship_type": "uses_data_from",
       "basis": "Record 2318, Description: 'the IPPI series supports the Canadian System of Macro-Economic Accounts (CSMA), where it is used in the calculation of real Gross Domestic Product (GDP).' `statcan-system-macroeconomic-accounts` was minted 2026-08-08 in statcan-macro-accounts.json (per Thomas's Open-Questions-2026-08-08-sweep.docx Q1 ruling), a companion file this entry's own _dropped block never cross-referenced.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318",
+      "evidence_grade": "B"
     }
   ],
   "_dropped": [

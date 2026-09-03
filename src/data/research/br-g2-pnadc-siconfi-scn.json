@@ -128,7 +128,8 @@
       "target_report_id": "br-inpc",
       "relationship_type": "calculated_from",
       "basis": "VERIFIED DIRECTLY, TIER A (planalto.gov.br, plain curl with a browser User-Agent, HTTP 200, 753,510 bytes). This is the edge br-ipca-fpe.json's own _dropped block recorded as NOT FOUND (\"INPC is widely reported elsewhere as the index used to readjust INSS social-security benefits ... but no primary-source law or decree naming INPC for either purpose was located this session\"), now closed from the statute's own text. Lei 8.213/1991 art. 41-A, inserted by Lei 11.430/2006: \"O valor dos benefícios em manutenção será reajustado, anualmente, na mesma data do reajuste do salário mínimo, pro rata, de acordo com suas respectivas datas de início ou do último reajustamento, com base no Índice Nacional de Preços ao Consumidor - INPC, apurado pela Fundação Instituto Brasileiro de Geografia e Estatística - IBGE.\" `calculated_from` rather than `cites`: this is a stated indexation formula whose output — the readjusted value of every RGPS benefit in maintenance — is mechanically derived from INPC's published variation, the same shape br-ipca-fpe.json's own basis gives for br-lc-62-1989 -> br-ipca. The statute names both the index and its producing agency, which is the strongest form this corpus recognises. No reference_period is given: art. 41-A fixes the readjustment date by reference to the minimum wage's date and states no accumulation window, unlike Lei 14.663/2023 § 1º which does.",
-      "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm"
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-lei-14663",
@@ -141,77 +142,94 @@
         "ends": "11-30",
         "stated_as": "\"acumulada nos 12 (doze) meses encerrados em novembro do exercício anterior ao do reajuste\" — Lei 14.663/2023 art. 3º § 1º. INPC publishes monthly; this edge carries a reading once a year, over a twelve-month window closing at the end of November."
       },
-      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm"
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-portaria-reajuste-inss",
       "target_report_id": "br-lei-8213",
       "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (in.gov.br DOU text, HTTP 200, 104,885 bytes). The Portaria's preamble names the article by number: \"OS MINISTROS DE ESTADO DA PREVIDÊNCIA SOCIAL E DA FAZENDA ... tendo em vista o disposto ... no art. 41-A da Lei nº 8.213, de 24 de julho de 1991...\" `methodology_depends_on` rather than `cites` because art. 41-A supplies the actual method the Portaria executes — which index (INPC), whose index (IBGE), on what date (\"na mesma data do reajuste do salário mínimo\"), and on what pro rata basis (\"de acordo com suas respectivas datas de início ou do último reajustamento\") — the same distinction br-fiscal-responsibility-law.json draws for br-rreo -> br-lc-101-2000 (statute supplies method) against br-fpm-population.json's br-ibge-estimativas-populacao -> br-lei-8443 (statute supplies only a mandate and a deadline). THIS EDGE IS ALSO THE ONLY ROUTE FROM THIS PORTARIA TO INPC, AND THAT IS THE POINT: the Portaria's full DOU text contains zero occurrences of \"INPC\" and names no index — it states only the outcome (\"serão reajustados, a partir de 1º de janeiro de 2026, em 3,90%\"). The index naming lives one hop upstream, here. A direct br-portaria-reajuste-inss -> br-inpc edge would assert something the document does not say and is deliberately not minted.",
-      "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603"
+      "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603",
+      "evidence_grade": "A",
+      "evidence_quote": "OS MINISTROS DE ESTADO DA PREVIDÊNCIA SOCIAL E DA FAZENDA ... tendo em vista o disposto ... no art. 41-A da Lei nº 8.213, de 24 de julho de 1991..."
     },
     {
       "source_report_id": "br-portaria-reajuste-inss",
       "target_report_id": "br-lei-14663",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY, TIER A (in.gov.br DOU text). The Portaria's preamble names the minimum-wage valorisation statute alongside its own enabling provisions: \"...tendo em vista o disposto ... no art. 41-A da Lei nº 8.213, de 24 de julho de 1991; na Lei nº 14.663, de 28 de agosto de 2023; no Decreto nº 12.797, de 23 de dezembro de 2025...\" `cites` rather than `methodology_depends_on`: Lei 14.663 defines the minimum wage's own valorisation formula, not the benefit-readjustment method — the benefit method comes from art. 41-A of Lei 8.213 (see the separate edge). What Lei 14.663 supplies to this Portaria is the legal basis for the floor value it applies, and the operative number itself arrives via the decree, not via the statute, which is why this edge is typed weaker than the other two.",
-      "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603"
+      "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603",
+      "evidence_grade": "A",
+      "evidence_quote": "...tendo em vista o disposto ... no art. 41-A da Lei nº 8.213, de 24 de julho de 1991; na Lei nº 14.663, de 28 de agosto de 2023; no Decreto nº 12.797, de 23 de dezembro de 2025..."
     },
     {
       "source_report_id": "br-portaria-reajuste-inss",
       "target_report_id": "br-decreto-salario-minimo",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY FROM BOTH ENDS, TIER A. The Portaria's preamble names the decree: \"...tendo em vista o disposto ... no Decreto nº 12.797, de 23 de dezembro de 2025...\" And, more strongly than a preamble citation, the decree's operative figure appears verbatim inside the Portaria's own text: Decreto 12.797/2025 art. 1º sets \"o valor do salário mínimo será de R$ 1.621,00 (mil seiscentos e vinte e um reais)\", and Portaria art. 2º applies that same number as the benefit floor — \"não poderão ser inferiores a R$ 1.621,00 (mil seiscentos e vinte e um reais)\". `uses_data_from`: the decree's published figure is a literal input carried into the Portaria's own provisions, confirmed by two independently fetched documents agreeing on the value rather than by either document's claim about itself.",
-      "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603"
+      "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603",
+      "evidence_grade": "A",
+      "evidence_quote": "...tendo em vista o disposto ... no Decreto nº 12.797, de 23 de dezembro de 2025..."
     },
     {
       "source_report_id": "br-decreto-salario-minimo",
       "target_report_id": "br-lei-14663",
       "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (planalto.gov.br, plain curl with a browser User-Agent, HTTP 200, 10,327 bytes). Decreto 12.797/2025's preamble: \"O PRESIDENTE DA REPÚBLICA, no uso da atribuição que lhe confere o art. 84, caput, inciso IV, da Constituição, e tendo em vista o disposto na Lei nº 14.663, de 28 de agosto de 2023, e na Lei nº 15.077, de 27 de dezembro de 2024, DECRETA:\" `methodology_depends_on` rather than `cites`, and the contrast with br-ipca-fpe.json's br-resolucao-cmn-5141 -> br-decreto-12079-2024 is exactly the reason: that edge was typed `cites` because the decree \"delegates the choice and fixes no method of its own\". Lei 14.663 is the opposite case — art. 3º states the whole computation the decree's single number is the output of (\"o valor decorrerá da soma do índice de medida da inflação do ano anterior ... com o índice correspondente ao crescimento real do Produto Interno Bruto (PIB) de 2 (dois) anos anteriores\"), including the index, the accumulation window and the fallback rules. The decree publishes the result; the statute supplies the method.",
-      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm"
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-finbra",
       "target_report_id": "br-lc-101-2000",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY, TIER A (STN's own FINBRA/SICONFI Cartilha PDF from siconfi.tesouro.gov.br, plain curl, HTTP 200, 952,735 bytes, genuine text PDF extracted with pdftotext -layout). The Cartilha states the database's statutory origin in its own words: \"O Finbra é o nome do banco de dados formado pelas informações das declarações recebidas pelo Tesouro Nacional por determinação da Lei Complementar 101/2000, a Lei de Responsabilidade Fiscal – LRF.\" Independently corroborated at TIER A from the statute itself (planalto.gov.br, HTTP 200, 254,717 bytes): art. 48 § 2º (incluído pela LC 156/2016) requires that \"A União, os Estados, o Distrito Federal e os Municípios disponibilizarão suas informações e dados contábeis, orçamentários e fiscais conforme periodicidade, formato e sistema estabelecidos pelo órgão central de contabilidade da União, os quais deverão ser divulgados em meio eletrônico de amplo acesso público\" — the provision under which SICONFI is the system — and art. 51 caput obliges the consolidation itself: \"O Poder Executivo da União promoverá, até o dia trinta de junho, a consolidação, nacional e por esfera de governo, das contas dos entes da Federação relativas ao exercício anterior, e a sua divulgação, inclusive por meio eletrônico de acesso público\", with § 1º fixing the entities' own deadline (\"Os Estados e os Municípios encaminharão suas contas ao Poder Executivo da União até 30 de abril\"). `cites` rather than `methodology_depends_on`, on br-fpm-population.json's own stated test: the LRF compels the collection, names the system's owner and fixes the deadlines, but supplies no method for how the data are compiled — the method comes from the MDF and the MCASP. Same reasoning that file gives for br-ibge-estimativas-populacao -> br-lei-8443.",
-      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
+      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "br-finbra",
       "target_report_id": "br-rreo",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY, TIER A (STN's own FINBRA/SICONFI Cartilha PDF). The Cartilha states what FINBRA ingests: \"Com o aumento da quantidade de relatórios recebidos no Siconfi em 2015, o Finbra foi consequentemente aprimorado para trazer, além de todos os dados da Contas Anuais, também os dados do Relatório Resumido de Execução Orçamentária – RREO e do Relatório de Gestão Fiscal – RGF.\" Stated a second time as an operational fact about the public consultation screen: \"A tela mostrará três opções de consultas de acordo com os relatórios recebidos: Contas Anuais, RGF e RREO.\" `uses_data_from`: the RREO's figures, as filed by every federative entity, are literally the rows FINBRA publishes — an aggregation, not a citation. This is the first downstream edge br-rreo has had in this corpus; br-fiscal-responsibility-law.json minted only its upstream to the statute.",
-      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
+      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "br-finbra",
       "target_report_id": "br-rgf",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY, TIER A (STN's own FINBRA/SICONFI Cartilha PDF). Same two sentences as the RREO edge, which name both reports together: \"...o Finbra foi consequentemente aprimorado para trazer, além de todos os dados da Contas Anuais, também os dados do Relatório Resumido de Execução Orçamentária – RREO e do Relatório de Gestão Fiscal – RGF\", and \"A tela mostrará três opções de consultas de acordo com os relatórios recebidos: Contas Anuais, RGF e RREO.\" `uses_data_from` for the same reason: the RGF filings are the source rows, aggregated nationally. Note that FINBRA also ingests a third stream, the \"Contas Anuais\" (DCA), which is not yet a node in this corpus — recorded as a lead in _dropped rather than minted from a single descriptive mention.",
-      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
+      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "...o Finbra foi consequentemente aprimorado para trazer, além de todos os dados da Contas Anuais, também os dados do Relatório Resumido de Execução Orçamentária – RREO e do Relatório de Gestão Fiscal – RGF"
     },
     {
       "source_report_id": "br-mdf",
       "target_report_id": "br-lc-101-2000",
       "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (STN's own FINBRA/SICONFI Cartilha PDF). The MDF's scope sentence ends by subordinating its own methodology to the LRF's parameters: \"O MDF estabelece regras de harmonização a serem observadas, de forma permanente, pela Administração Pública para a elaboração do Anexo de Riscos Fiscais (ARF), do Anexo de Metas Fiscais (AMF), do Relatório Resumido da Execução Orçamentária (RREO) e do Relatório de Gestão Fiscal (RGF), e define orientações metodológicas, consoante os parâmetros definidos pela LRF.\" `methodology_depends_on` rather than `cites`: the MDF is not merely authorised by the LRF, its content is derived from it — the demonstratives it standardises are the ones LC 101/2000 arts. 52–55 require, and the limits and defined terms they test against are the statute's own. CAVEAT, STATED RATHER THAN GLOSSED: this quotation is STN's description of the MDF inside the FINBRA Cartilha, not the MDF's own text. It is a first-party source (same Secretaria, same publisher) but not the dependent document itself, which is the strict form of the project's rule. See the node description on br-mdf and the caveat entry in _dropped.",
-      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
+      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "br-rreo",
       "target_report_id": "br-mdf",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED, TIER A SOURCE BUT NOT FROM THE DEPENDENT DOCUMENT'S OWN TEXT — the weakness is stated here rather than in a footnote. STN's FINBRA/SICONFI Cartilha states the obligation directly and by name: \"O RREO deve ser elaborado seguindo as regras contidas no Manual de Demonstrativos Fiscais – MDF.\" The MDF's own scope sentence names the RREO again from the other side: \"O MDF estabelece regras de harmonização a serem observadas, de forma permanente, pela Administração Pública para a elaboração do ... Relatório Resumido da Execução Orçamentária (RREO) ... e define orientações metodológicas, consoante os parâmetros definidos pela LRF.\" So the relationship is asserted twice in the same first-party document, in both directions. `methodology_depends_on` is the right type — the MDF is exactly a method manual, and \"o RREO deve ser elaborado seguindo as regras contidas no MDF\" is a compliance obligation, not a reference. What it is NOT is a statement from an actual RREO instance about its own inputs, and the project's rule asks for the dependent document's own text. A purist should re-source this edge from a filed RREO or from the MDF itself; it is minted at MEDIUM confidence rather than dropped because the source is the Secretaria that publishes all three documents. This edge sits alongside, and does not replace, br-rreo -> br-lc-101-2000 in br-fiscal-responsibility-law.json: statute supplies the required content, manual supplies the harmonised form.",
-      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
+      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "O RREO deve ser elaborado seguindo as regras contidas no Manual de Demonstrativos Fiscais – MDF."
     },
     {
       "source_report_id": "br-rgf",
       "target_report_id": "br-mdf",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED, TIER A SOURCE BUT NOT FROM THE DEPENDENT DOCUMENT'S OWN TEXT, AND ONE STEP WEAKER THAN THE PARALLEL RREO EDGE — both weaknesses stated rather than glossed. The citation used here is the MDF's own scope sentence, which names the RGF explicitly: \"O MDF estabelece regras de harmonização a serem observadas, de forma permanente, pela Administração Pública para a elaboração do Anexo de Riscos Fiscais (ARF), do Anexo de Metas Fiscais (AMF), do Relatório Resumido da Execução Orçamentária (RREO) e do Relatório de Gestão Fiscal (RGF), e define orientações metodológicas, consoante os parâmetros definidos pela LRF.\" The reason this is the citation used, rather than an RGF-specific \"deve ser elaborado seguindo\" sentence of the kind quoted verbatim for the RREO: only the RREO version of that sentence was reproduced verbatim from the extracted Cartilha text this round. Rather than assert a parallel sentence that was not actually extracted, this edge rests on the sentence that was — which names the RGF among the four documents the MDF governs, and is sufficient on its own. MEDIUM confidence, same as the RREO edge and for the same reason (first-party but not the dependent document's own text), plus this extraction caveat.",
-      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
+      "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "O MDF estabelece regras de harmonização a serem observadas, de forma permanente, pela Administração Pública para a elaboração do Anexo de Riscos Fiscais (ARF), do Anexo de Metas Fiscais (AMF), do Relatório Resumido da Execução Orçamentária (RREO) e do Relatório de Gestão Fiscal (RGF), e define orien"
     },
     {
       "source_report_id": "br-ibge-sistema-contas-nacionais",
@@ -234,7 +252,8 @@
       "target_report_id": "br-ibge-sistema-contas-nacionais",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY, TIER A (www.ibge.gov.br contas-nacionais path). IBGE's own page for the quarterly accounts states the constraint and names the technique: \"Os dados trimestrais são ajustados para os totais anuais (Sistema de Contas Nacionais Anuais - SCN), usando o procedimento estatístico de benchmarking (Denton).\" `uses_data_from` rather than `calculated_from`, and the distinction is worth stating because Denton benchmarking is mechanical: the quarterly series' own content comes from indicator surveys and is not derived from the annual accounts, but it is then constrained to reconcile to the annual totals, so SCN's published figures are a direct input to what CNT finally publishes without being the thing it is computed from. Rating it `calculated_from` would overstate the direction of derivation; rating it `cites` would understate a named, binding statistical procedure.",
-      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9300-contas-nacionais-trimestrais.html"
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9300-contas-nacionais-trimestrais.html",
+      "evidence_grade": "C"
     }
   ],
   "_dropped": [

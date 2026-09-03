@@ -122,42 +122,48 @@
       "target_report_id": "br-decreto-12079-2024",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY. Decreto 12.079/2024 Art. 4º delegates the index choice without naming one: \"O índice de preços a ser adotado para fins do disposto neste Decreto será escolhido pelo Conselho Monetário Nacional...\" Resolução CMN 5.141/2024, issued the same day, is the instrument that delegation produces -- its own Art. 1º opens \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o [IPCA]\", the same 'nova sistemática' the decree establishes. `cites` rather than `methodology_depends_on`: the decree delegates the choice and fixes no method of its own for how an index is to be selected -- the same reasoning br-fpm-population.json's own basis gives for `br-ibge-estimativas-populacao -> br-lei-8443` (\"the Act compels the publication and fixes its deadline, and supplies no method\").",
-      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/decreto/d12079.htm"
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/decreto/d12079.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-resolucao-cmn-5141",
       "target_report_id": "br-ibge-ipca",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY. Resolução CMN 5.141/2024 Art. 1º: \"O índice de preços a ser adotado para fins da nova sistemática de meta para a inflação... é o Índice Nacional de Preços ao Consumidor Amplo – IPCA, calculado pelo Instituto Brasileiro de Geografia e Estatística – IBGE.\" The Banco Central's own historical-targets page (bcb.gov.br/controleinflacao/historicometas) confirms this is operative, not merely declaratory: it reports year-by-year compliance as \"Variação do IPCA\" -- the published index figures are the direct input to measuring whether the target was met.",
-      "evidence_url": "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolução CMN&numero=5141"
+      "evidence_url": "https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Resolução CMN&numero=5141",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-fpe-dn-tcu",
       "target_report_id": "br-lc-62-1989",
       "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY. DN 215/2025's own preamble grounds the decision in this statute: \"O TRIBUNAL DE CONTAS DA UNIÃO, no uso da atribuição que lhe confere o art. 161, parágrafo único, da Constituição Federal e o art. 1º, inciso VI, da Lei 8.443, de 16 de julho de 1992... e na Lei Complementar 62, de 28 de dezembro de 1989, alterada pela Lei Complementar 143, de 17 de julho de 2013...\" This is genuine methodology, not a bare publication mandate: DN 215/2025's own Anexo III works the calculation using exactly the population-plus-inverse-income-factor structure LC 62/1989 Art. 2º III defines, with the same limits (0,07 upper / 0,012 lower on the population factor) reproduced in the worked example -- distinguishing this edge from a `cites`-typed statutory mandate, the same distinction br-fiscal-responsibility-law.json draws for `br-rreo -> br-lc-101-2000`.",
-      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf"
+      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-fpe-dn-tcu",
       "target_report_id": "br-ibge-estimativas-populacao",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY, and a stronger single-document citation than the parallel FPM edge (br-fpm-population.json's own version of this edge is distributed across three documents because no one of them states it alone). DN 215/2025's Anexo III (Nota Explicativa da Metodologia) states the population column's source and reference date in one place: \"Coluna B: população da UF fornecida pela Fundação Instituto Brasileiro de Geografia e Estatística (IBGE) com data de referência em 1º/7/2024 (art. 102, inciso I, da Lei 8.443, de 16/7/1992).\" This is a worked calculation input (Anexo II, Memória de Cálculo), not a background reference -- population is a literal column feeding the coefficient formula.",
-      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf"
+      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-fpe-dn-tcu",
       "target_report_id": "br-lei-8443",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY. DN 215/2025's preamble names this statute as its authority alongside the Constitution: \"no uso da atribuição que lhe confere o art. 161, parágrafo único, da Constituição Federal e o art. 1º, inciso VI, da Lei 8.443, de 16 de julho de 1992 (Lei Orgânica do Tribunal de Contas da União)...\" `cites` rather than `methodology_depends_on`: Lei 8.443/1992 grants TCU the competence to fix the coefficients (art. 1º VI) and, separately, obliges the population list's publication (art. 102) -- it supplies authority and a deadline, not the FPE calculation method itself, which comes from LC 62/1989 (see br-fpe-dn-tcu -> br-lc-62-1989). Mirrors br-fpm-population.json's own typing of Lei 8.443 edges.",
-      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf"
+      "evidence_url": "https://portal.tcu.gov.br/uploads/DN_215_2025_6ac60454b8.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "br-lc-62-1989",
       "target_report_id": "br-ibge-ipca",
       "relationship_type": "calculated_from",
       "basis": "VERIFIED DIRECTLY. LC 62/1989 Art. 2º ties the FPE's own statutory floor amount to a mechanical IPCA-based correction: \"cada entidade beneficiária receberá valor igual ao que foi distribuído no correspondente decêndio do exercício de 2015, corrigido pela variação acumulada do Índice Nacional de Preços ao Consumidor Amplo (IPCA)... e pelo percentual equivalente a 75% da variação real do Produto Interno Bruto nacional...\" This is a stated formula (2015 base value x accumulated IPCA variation x a GDP-growth factor), not a citation for context -- the corrected value is mechanically derived from IPCA's published cumulative variation, the same shape `calculated_from` describes elsewhere in this corpus for escalator/indexation formulas. Directly connects the FPE topic back to the IPCA/INPC topic in this same file.",
-      "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp62.htm"
+      "evidence_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp62.htm",
+      "evidence_grade": "C"
     }
   ],
   "_dropped": [

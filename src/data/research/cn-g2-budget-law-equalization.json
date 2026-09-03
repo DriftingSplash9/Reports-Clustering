@@ -167,35 +167,40 @@
       "target_report_id": "cn-budget-law",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY, TIER A. The measures name the Budget Law in their own constitutive first article: 「为加快建立现代财政制度，建立权责清晰、财力协调、区域均衡的中央和地方财政关系，推进基本公共服务均等化，根据《中华人民共和国预算法》及其实施条例，制定《中央对地方均衡性转移支付办法》。」 (\"…in accordance with the Budget Law of the People's Republic of China and its Implementing Regulations, these Measures … are formulated.\") Corroborated a second time in 第十三条: 「依照《中华人民共和国预算法》及其实施条例、《财政违法行为处罚处分条例》等国家有关规定追究相应责任。」 TENSE: 「根据 … 制定」 is present and constitutive, not a past-tense acknowledgement -- unambiguous. `cites` rather than `methodology_depends_on`: the Budget Law establishes the transfer-payment system and its equalisation objective (第十六条) but supplies no calculation method; every formula in this chain is the measures' own. That is the same distinction `br-ipca-fpe.json` draws when typing `br-fpe-dn-tcu -> br-lei-8443` as `cites` while typing the formula statute as `methodology_depends_on`.",
-      "evidence_url": "https://www.gov.cn/zhengce/zhengceku/2022-05/07/content_5689025.htm"
+      "evidence_url": "https://www.gov.cn/zhengce/zhengceku/2022-05/07/content_5689025.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cn-npc-budget-report",
       "target_report_id": "cn-budget-law",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY, and a correction to BRICS/G.1, which recorded that the Budget Report cites no document by name. It does cite the Budget Law, operatively -- this is the legal authority for spending before the NPC has approved the budget, not decorative compliance language: 「根据预算法规定，预算年度开始后，在全国人民代表大会批准本预算草案前，可安排下列支出：上一年度结转的支出；参照上一年同期的预算支出数额安排必须支付的本年度部门基本支出、项目支出，以及对下级政府的转移性支出；法律规定必须履行支付义务的支出，以及用于自然灾害等突发事件处理的支出。根据上述规定，结合中央部门和地方实际支出需要，中央财政安排了部分本级支出及对地方转移支付。」 (\"In accordance with the provisions of the Budget Law, after the budget year begins and before the NPC approves this draft budget, the following expenditures may be arranged: … In accordance with the above provisions … the central finance authority has arranged part of its own-level expenditure and transfer payments to localities.\") Corroborated in weaker compliance voice: 「认真落实预算法和人大预算审查监督有关要求」 and 「坚持预算法定，硬化预算约束，进一步全面深入实施好预算法」. A literal regex scan of the full extracted report text returned 4 hits for 预算法. TENSE: present and operative. NOTE that G.1's finding was only PARTLY wrong -- the same scan returned 0 hits for 国发, 0 for 办法 and 0 for 国家统计局, so its conclusions about the tax-sharing decision, the equalization measures and NBS all stand (see `_dropped`).",
-      "evidence_url": "https://www.mof.gov.cn/zhengwuxinxi/caizhengxinwen/202603/t20260316_3985331.htm"
+      "evidence_url": "https://www.mof.gov.cn/zhengwuxinxi/caizhengxinwen/202603/t20260316_3985331.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cn-mof-central-final-accounts",
       "target_report_id": "cn-budget-law",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY, TIER A. The final-accounts report names the Budget Law as the authority for its accounting treatment, which is operative rather than decorative: 「按照预算法和国务院有关规定，对2025年中央财政部分收支事项实行权责发生制核算，有关具体情况向全国人大常委会专门报告。」 (\"In accordance with the Budget Law and relevant State Council provisions, certain central fiscal revenue and expenditure items for 2025 are accounted for on an accrual basis, with the specific circumstances reported separately to the NPC Standing Committee.\") Corroborated twice: 「深入贯彻预算法及其实施条例，严格落实全国人大批准的预算。」 and 「严格落实预算法等财经法律法规，加强财政支出管理。」 A citation scan of the full text returned 3 hits for 预算法. `cites` rather than `methodology_depends_on`: the accrual treatment is authorised by the law jointly with unspecified State Council provisions, and the law is not quoted as supplying the accounting method itself.",
-      "evidence_url": "https://www.mof.gov.cn/zhengwuxinxi/caizhengxinwen/202606/t20260629_3992419.htm"
+      "evidence_url": "https://www.mof.gov.cn/zhengwuxinxi/caizhengxinwen/202606/t20260629_3992419.htm",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cn-ningxia-equalization-transfer-measures",
       "target_report_id": "cn-mof-equalization-transfer-measures",
       "relationship_type": "methodology_depends_on",
       "basis": "VERIFIED DIRECTLY, and the strongest single edge found for China this round. Ningxia's own first article names the central measures by exact bracketed title: 「为加快建立现代财政制度…推进基本公共服务均等化，根据《中华人民共和国预算法》及《中央对地方均衡性转移支付办法》，特制定自治区对市县均衡性转移支付办法。」 Restated in the covering notice: 「根据《中央对地方均衡性转移支付办法》等有关规定，经报请自治区人民政府研究同意，自治区财政厅修订了…」 `methodology_depends_on` rather than `cites`, because the provincial instrument does not merely reference the central one -- it REPLICATES its formula: Ningxia's own 「某县标准收支缺口财力补助=（市县标准收入-市县标准支出）×补助系数」 is structurally the central 第四条's standard-expenditure-minus-standard-revenue-times-coefficient form, re-expressed one tier down. That is genuine method inheritance, the same distinction `br-ipca-fpe.json` uses to type `br-fpe-dn-tcu -> br-lc-62-1989` as `methodology_depends_on`. TENSE: 「根据 … 特制定」 is present and constitutive.",
-      "evidence_url": "https://czt.nx.gov.cn/xwzx/tzgg/202311/t20231107_4342463.html"
+      "evidence_url": "https://czt.nx.gov.cn/xwzx/tzgg/202311/t20231107_4342463.html",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cn-ningxia-equalization-transfer-measures",
       "target_report_id": "cn-budget-law",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY, from the same single sentence as the edge above -- Ningxia's 第一条 names both instruments together: 「…根据《中华人民共和国预算法》及《中央对地方均衡性转移支付办法》，特制定自治区对市县均衡性转移支付办法。」 `cites` rather than `methodology_depends_on` for the same reason as the central measures' own edge to the Budget Law: the statute establishes the transfer-payment system and its equalisation objective but supplies no calculation method. Worth recording that this makes the Budget Law's authority visible at two tiers of government from documents' own text, which is the shape this corpus exists to draw.",
-      "evidence_url": "https://czt.nx.gov.cn/xwzx/tzgg/202311/t20231107_4342463.html"
+      "evidence_url": "https://czt.nx.gov.cn/xwzx/tzgg/202311/t20231107_4342463.html",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "cn-nbs-national-accounts-system-2016",

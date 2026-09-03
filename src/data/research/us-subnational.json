@@ -1025,35 +1025,43 @@
       "target_report_id": "uscensus-census-of-governments",
       "relationship_type": "methodology_depends_on",
       "basis": "The annual survey is a sample drawn against, and benchmarked to, the quinquennial census universe rather than an independent collection. NCES's documentation of the Census government finance series states directly that \"The sample of local governments is drawn from the periodic Census of Governments (which is conducted in years ending in '2' and '7').\" The Census Bureau's own programme FAQ confirms the same structure from the other side: \"Every five years (years ending in '2' and '7') we conduct a census, in which we attempt to collect financial data from all local governments,\" and \"For the four years between our censuses, we collect data from a sample of governments.\"",
-      "evidence_url": "https://nces.ed.gov/programs/digest/d21/app_a4_3.asp"
+      "evidence_url": "https://nces.ed.gov/programs/digest/d21/app_a4_3.asp",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-annual-survey-state-local-govt-finance",
       "target_report_id": "uscensus-government-units-survey",
       "relationship_type": "methodology_depends_on",
       "basis": "The Government Units Survey FAQ states that \"The GUS provides critical information on organizational structure that we need to maintain the universe frame of governments. Public sector surveys that the Census Bureau conducts use the frame to draw their samples.\" The GUS about page adds that the Bureau uses the resulting Governments Master Address File \"as a benchmark for all our non-census year samples.\" The annual finance survey is one of those non-census-year public sector surveys, so its sample frame is the file GUS maintains.",
-      "evidence_url": "https://www.census.gov/programs-surveys/gus/about/faq.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/gus/about/faq.html",
+      "evidence_grade": "A",
+      "evidence_quote": "The GUS provides critical information on organizational structure that we need to maintain the universe frame of governments. Public sector surveys that the Census Bureau conducts use the frame to draw their samples."
     },
     {
       "source_report_id": "uscensus-government-units-survey",
       "target_report_id": "uscensus-boundary-annexation-survey",
       "relationship_type": "uses_data_from",
       "basis": "The GUS methodology documentation names BAS as the source of record for changes to the government universe: \"The GMAF universe of county, municipal, and township governments is continuously updated as these units of governments become established, dissolved, or reorganized. Decisions to add or delete county, municipal, or township governments to the GMAF are made on the basis of information obtained through the annual Boundary and Annexation Survey, which the Census Bureau's Geography Division conducts.\"",
-      "evidence_url": "https://census.gov/programs-surveys/gus/technical-documentation/methodology/information-collection.html"
+      "evidence_url": "https://census.gov/programs-surveys/gus/technical-documentation/methodology/information-collection.html",
+      "evidence_grade": "A",
+      "evidence_quote": "The GMAF universe of county, municipal, and township governments is continuously updated as these units of governments become established, dissolved, or reorganized. Decisions to add or delete county, municipal, or township governments to the GMAF are made on the basis of information obtained throug"
     },
     {
       "source_report_id": "uscensus-annual-survey-state-govt-finances",
       "target_report_id": "uscensus-census-of-governments",
       "relationship_type": "methodology_depends_on",
       "basis": "The State Government Finances methodology page directs users to the Census of Governments for the definitional and organisational basis of the survey: \"See Chapter 1 of the Government Finance and Employment Classification Manual and the 2007 Census of Governments\" for information on government definitions and organization. The survey recodes each state's own administrative accounting records into the classification framework established for the census.",
-      "evidence_url": "https://www.census.gov/programs-surveys/state/technical-documentation/methodology.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/state/technical-documentation/methodology.html",
+      "evidence_grade": "A",
+      "evidence_quote": "See Chapter 1 of the Government Finance and Employment Classification Manual and the 2007 Census of Governments"
     },
     {
       "source_report_id": "uscensus-saipe",
       "target_report_id": "uscensus-acs",
       "relationship_type": "calculated_from",
       "basis": "The ACS is the dependent variable in every SAIPE county model. The county-level estimation documentation specifies the modelled quantity as \"the log of the total number of people in poverty in each county as measured by the ACS\", and for children \"the log of the number of related children in poverty ages 5 to 17 in each county as measured by the ACS\". The methodology overview records the switchover: \"The most significant change was between 2004 and 2005, when SAIPE began using data from the American Community Survey, rather than from the Annual Social and Economic Supplement to the Current Population Survey.\"",
-      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-saipe",
@@ -1066,28 +1074,32 @@
         "ends": "07-01",
         "stated_as": "Estimated resident population as of July 1 enters the model as a predictor and as the rate denominator."
       },
-      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-saipe",
       "target_report_id": "uscensus-poverty-thresholds",
       "relationship_type": "methodology_depends_on",
       "basis": "The official thresholds define both the concept SAIPE estimates and one of its regression predictors. The county model uses \"the log of the number of tax return exemptions (all ages) on returns whose adjusted gross income falls below the official poverty threshold\", and correspondingly the child-exemption equivalent. The IRS administrative predictor is thus constructed by applying the official poverty thresholds to tax return income.",
-      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-saipe",
       "target_report_id": "uscensus-decennial",
       "relationship_type": "uses_data_from",
       "basis": "Decennial poverty and income counts enter the county models as regression predictors — the documentation names \"the log of the Census 2000 estimate of the total number of people in poverty\", the related-children equivalent, and \"the log of the Census 2000 estimate of county median household income\" — and the estimation strategy page lists \"decennial census estimates\" among the programme's input sources. Caveat carried forward from research: the published methodology names Census 2000 specifically, so the vintage should be re-checked against the current estimate year.",
-      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "uscensus-saipe",
       "target_report_id": "bea-local-area-personal-income",
       "relationship_type": "uses_data_from",
       "basis": "The SAIPE county median household income model uses two BEA-derived predictors: \"the log of the proportion of the Bureau of Economic Analysis (BEA) estimate of total personal income derived from government transfers\" and \"the log of the growth of BEA total personal income from 1999 through the target year\". These are county-level covariates in a county model, so the relevant BEA product is the local area series.",
-      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html"
+      "evidence_url": "https://www.census.gov/programs-surveys/saipe/technical-documentation/methodology/counties-states/county-level.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "bea-local-area-personal-income",
@@ -1100,21 +1112,25 @@
         "ends": "07-01",
         "stated_as": "Census Bureau annual midyear (July 1) population estimates, used as the per capita denominator."
       },
-      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf"
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "bea-local-area-personal-income",
       "target_report_id": "uscensus-acs",
       "relationship_type": "uses_data_from",
       "basis": "BEA's local area methodology states: \"Estimates of rental income of persons are based on place of residence data from the American Community Survey (ACS).\" Rental income of persons is a component of the property income portion of personal income, so ACS is a named source for a component of the county estimates.",
-      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf"
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Estimates of rental income of persons are based on place of residence data from the American Community Survey (ACS)."
     },
     {
       "source_report_id": "bea-local-area-personal-income",
       "target_report_id": "bea-state-personal-income",
       "relationship_type": "calculated_from",
       "basis": "The county estimates are constrained to the state accounts rather than estimated freely: \"County estimates sum to state totals which, together with the estimate for the District of Columbia, sum to a national total which equals the NIPA estimate.\" The county figures are therefore an allocation of independently estimated state totals.",
-      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf"
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/BEA-Local-Area-Personal-Income-and-Employment-Concepts-and-Methods.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "bea-state-personal-income",
@@ -1127,14 +1143,17 @@
         "ends": "07-01",
         "stated_as": "Census Bureau annual midyear (July 1) population estimates, used as the per capita denominator."
       },
-      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf"
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "bea-state-personal-income",
       "target_report_id": "uscensus-acs",
       "relationship_type": "uses_data_from",
       "basis": "The State Personal Income methodology states that \"Estimates of rental income of persons are based on place of residence data from the American Community Survey (ACS).\" ACS is a named source for the rental income component of state personal income.",
-      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf"
+      "evidence_url": "https://www.bea.gov/sites/default/files/methodologies/SPI-Methodology.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Estimates of rental income of persons are based on place of residence data from the American Community Survey (ACS)."
     },
     {
       "source_report_id": "ed-title-i-a-allocations",
@@ -1147,7 +1166,9 @@
         "ends": "12-31",
         "stated_as": "A single SAIPE income-year vintage read with a two-year lag: the 2024 estimates, released 27 January 2026, feed FY2026 (school year 2026-27) allocations."
       },
-      "evidence_url": "https://www.census.gov/newsroom/press-releases/2022/saipe.html"
+      "evidence_url": "https://www.census.gov/newsroom/press-releases/2022/saipe.html",
+      "evidence_grade": "A",
+      "evidence_quote": "SAIPE statistics are used to allocate funding under Title I of the Elementary and Secondary Education Act... The U.S. Department of Education plans to use the 2021 estimates to calculate fiscal year 2023 allocations for Title I and several other federal education programs."
     },
     {
       "source_report_id": "cms-medicaid-dsh-allotments",
@@ -1160,7 +1181,8 @@
         "ends": "09-30",
         "stated_as": "The percentage change in CPI-U (all items, U.S. city average) over the previous federal fiscal year. Read twice: an estimated change before the fiscal year begins for preliminary allotments, and the actual change for final allotments."
       },
-      "evidence_url": "https://www.federalregister.gov/documents/2023/04/14/2023-07927/medicaid-program-final-fy-2020-final-fy-2021-preliminary-fy-2022-and-preliminary-fy-2023"
+      "evidence_url": "https://www.federalregister.gov/documents/2023/04/14/2023-07927/medicaid-program-final-fy-2020-final-fy-2021-preliminary-fy-2022-and-preliminary-fy-2023",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "cms-chip-state-allotments",
@@ -1173,7 +1195,8 @@
         "ends": "07-01",
         "stated_as": "Year-over-year change in state child population measured July 1 to July 1, from the most recent Census estimates published before the fiscal year begins."
       },
-      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXXI-sec1397dd.htm"
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXXI-sec1397dd.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "cms-chip-state-allotments",
@@ -1186,7 +1209,9 @@
         "ends": "12-31",
         "stated_as": "Calendar-year-to-calendar-year change in projected per capita national health expenditure, read from the most recent publication issued before the fiscal year begins."
       },
-      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXXI-sec1397dd.htm"
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXXI-sec1397dd.htm",
+      "evidence_grade": "A",
+      "evidence_quote": "1 plus the percentage increase in the projected per capita amount of National Health Expenditures from the calendar year in which the previous fiscal year ends to the calendar year in which the fiscal year involved ends, as most recently published by the Secretary before the beginning of the fiscal "
     },
     {
       "source_report_id": "nhtsa-section-402-apportionments",
@@ -1199,7 +1224,8 @@
         "ends": null,
         "stated_as": "\"the most recent decennial census\" — a read that stays fixed between censuses, so the apportionment share moves once a decade however often the funds are apportioned."
       },
-      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title23/html/USCODE-2023-title23-chap4-sec402.htm"
+      "evidence_url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title23/html/USCODE-2023-title23-chap4-sec402.htm",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ca-dof-price-population-factors",
@@ -1212,7 +1238,8 @@
         "ends": "01-01",
         "stated_as": "Civilian population as of January 1, compared with January 1 of the prior year."
       },
-      "evidence_url": "https://codes.findlaw.com/ca/government-code/gov-sect-7901/"
+      "evidence_url": "https://codes.findlaw.com/ca/government-code/gov-sect-7901/",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ca-dof-price-population-factors",
@@ -1225,49 +1252,56 @@
         "ends": "12-31",
         "stated_as": "California personal income for the fourth quarter of the calendar year, as published in the Survey of Current Business."
       },
-      "evidence_url": "https://codes.findlaw.com/ca/government-code/gov-sect-7901/"
+      "evidence_url": "https://codes.findlaw.com/ca/government-code/gov-sect-7901/",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ca-sco-cities-annual-report",
       "target_report_id": "ca-dof-price-population-factors",
       "relationship_type": "uses_data_from",
       "basis": "Government Code §12463(a) requires the Controller to compile and publish the financial transactions reports of counties, cities and special districts, and provides that those reports \"shall encompass appropriations limits and the total annual appropriations subject to limitation\". The appropriations limit each city reports is the Article XIII B limit computed from the DOF price and population factors; DOF states it \"will certify the higher [population] estimate to the State Controller by June 1\".",
-      "evidence_url": "https://law.onecle.com/california/government/12463.html"
+      "evidence_url": "https://law.onecle.com/california/government/12463.html",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ca-sco-cities-annual-report",
       "target_report_id": "gasb-standards",
       "relationship_type": "methodology_depends_on",
       "basis": "The State Controller's City Financial Transactions Report Instructions state: \"The FTR requirements conform to Generally Accepted Accounting Principles (GAAP) as prescribed by the Governmental Accounting Standards Board (GASB).\" The instructions cite Government Code §12463 et seq. as the authority for the report and §53891(a) as the requirement that cities furnish it.",
-      "evidence_url": "https://www.sco.ca.gov/Files-ARD-Local/LocRep/City_FTR_Instructions_24-25_V3.pdf"
+      "evidence_url": "https://www.sco.ca.gov/Files-ARD-Local/LocRep/City_FTR_Instructions_24-25_V3.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ca-sco-acfr",
       "target_report_id": "gasb-standards",
       "relationship_type": "methodology_depends_on",
       "basis": "Government Code §12460 requires the Controller to \"issue a comprehensive annual financial report prepared strictly in accordance with 'Generally Accepted Accounting Principles'\". The report states that it \"meets the requirements of Government Code section 12460 for an annual report prepared in accordance with generally accepted accounting principles\", and the auditor's opinion is rendered on that basis — which for a state government means the standards set by GASB.",
-      "evidence_url": "https://www.sco.ca.gov/Files-ARD/ACFR/acfr23web.pdf"
+      "evidence_url": "https://www.sco.ca.gov/Files-ARD/ACFR/acfr23web.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ca-sco-acfr",
       "target_report_id": "ca-dof-governors-budget",
       "relationship_type": "uses_data_from",
       "basis": "Government Code §12460 requires the Controller to submit an annual report to the Governor containing \"a statement of the funds of the state, its revenues, and the public expenditures\" for the preceding fiscal year. The budgetary-legal basis annual report issued under the same section accounts for prior year adjustments, fund balances, encumbrances, revenues and expenditures on a basis aligned with the Governor's Budget and the Budget Act.",
-      "evidence_url": "https://california.public.law/codes/government_code_section_12460"
+      "evidence_url": "https://california.public.law/codes/government_code_section_12460",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ca-dof-proposition-98-guarantee",
       "target_report_id": "ca-dof-governors-budget",
       "relationship_type": "calculated_from",
       "basis": "Article XVI §8(b)(1) of the California Constitution sets the Test 1 guarantee as \"the amount which, as a percentage of General Fund revenues which may be appropriated pursuant to Article XIII B, equals the percentage of General Fund revenues appropriated for school districts and community college districts, respectively, in fiscal year 1986-87.\" The 2026-27 Governor's Budget applies this to the Department's own General Fund revenue forecast: \"The Guarantee continues to be in a Test 1 for 2024-25, 2025-26, and 2026-27. This means that the funding level of the Guarantee is equal to roughly 40 percent of General Fund revenues, plus local property tax revenues.\"",
-      "evidence_url": "https://ebudget.ca.gov/2026-27/pdf/BudgetSummary/TK-12Education.pdf"
+      "evidence_url": "https://ebudget.ca.gov/2026-27/pdf/BudgetSummary/TK-12Education.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ca-dof-proposition-98-guarantee",
       "target_report_id": "ca-dof-price-population-factors",
       "relationship_type": "calculated_from",
       "basis": "Article XVI §8(b)(2)-(3) makes the guarantee turn on the same per capita personal income figure that drives the Gann limit: Test 3 applies instead of Test 2 when the change in California per capita personal income exceeds the change in per capita General Fund revenues plus one-half of one percent, in which case prior-year allocations are increased by per capita General Fund revenue growth plus 0.5 percent. The \"change in California per capita personal income\" is the figure defined by Government Code §7901(a) and published annually by the Department of Finance as the Article XIII B price factor.",
-      "evidence_url": "https://law.justia.com/constitution/california/article-xvi/section-8/"
+      "evidence_url": "https://law.justia.com/constitution/california/article-xvi/section-8/",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ca-cde-principal-apportionment",
@@ -1280,7 +1314,8 @@
         "ends": "01-01",
         "stated_as": "County tax data are submitted three times a year — P-1 taxes by November 15, P-2 taxes in mid-April, and prior-year annual taxes by August 15 — against a roll valued as of the January 1 lien date."
       },
-      "evidence_url": "https://www.cde.ca.gov/fg/aa/pa/"
+      "evidence_url": "https://www.cde.ca.gov/fg/aa/pa/",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "la-county-assessment-roll",
@@ -1293,7 +1328,8 @@
         "ends": "01-01",
         "stated_as": "Applied to the assessment year commencing January 1. The letter is dated 27 December, five days before the lien date it governs."
       },
-      "evidence_url": "https://www.boe.ca.gov/proptaxes/pdf/lta24053.pdf"
+      "evidence_url": "https://www.boe.ca.gov/proptaxes/pdf/lta24053.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "ca-boe-inflation-factor-lta",
@@ -1306,7 +1342,9 @@
         "ends": "10-31",
         "stated_as": "October of the prior fiscal year to October of the current fiscal year, all items. The 2026-27 letter substituted August-to-August because October data was unavailable during the federal government shutdown — a documented deviation from the stated period."
       },
-      "evidence_url": "https://www.boe.ca.gov/proptaxes/pdf/lta24053.pdf"
+      "evidence_url": "https://www.boe.ca.gov/proptaxes/pdf/lta24053.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Section 51(a)(1)(C) provides that for any assessment year commencing on or after January 1, 1998, the inflation factor shall be the percentage change, rounded to the nearest one-thousandth of 1 percent, from October of the prior fiscal year to October of the current fiscal year in the California Con"
     },
     {
       "source_report_id": "la-county-property-tax-apportionment",
@@ -1319,7 +1357,8 @@
         "ends": "01-01",
         "stated_as": "\"California law prescribes a yearly ad valorem tax based on property as it exists at 12:01 AM on January 1 (tax lien date).\""
       },
-      "evidence_url": "https://www.propertytax.lacounty.gov/Home/Overview/0"
+      "evidence_url": "https://www.propertytax.lacounty.gov/Home/Overview/0",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "la-county-acfr",
@@ -1332,14 +1371,17 @@
         "ends": "01-01",
         "stated_as": "Secured property taxes \"become a lien on real property on January 1 preceding the fiscal year for which taxes are levied.\""
       },
-      "evidence_url": "https://auditor.lacounty.gov/wp-content/uploads/2026/01/Annual-Comprehensive-Financial-Report-FY-2024-2025.pdf"
+      "evidence_url": "https://auditor.lacounty.gov/wp-content/uploads/2026/01/Annual-Comprehensive-Financial-Report-FY-2024-2025.pdf",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "la-county-acfr",
       "target_report_id": "gasb-standards",
       "relationship_type": "methodology_depends_on",
       "basis": "The letter of transmittal states that certain entities \"are considered part of the County for purposes of meeting the reporting entity requirements prescribed by the Governmental Accounting Standards Board\", and the auditor's emphasis of matter records that \"effective July 1, 2024, the County adopted the provisions of Governmental Accounting Standards Board Statement No. 101, Compensated Absences.\" The report is presented annually under Government Code §25253 in accordance with GAAP for governmental entities.",
-      "evidence_url": "https://auditor.lacounty.gov/wp-content/uploads/2026/01/Annual-Comprehensive-Financial-Report-FY-2024-2025.pdf"
+      "evidence_url": "https://auditor.lacounty.gov/wp-content/uploads/2026/01/Annual-Comprehensive-Financial-Report-FY-2024-2025.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "are considered part of the County for purposes of meeting the reporting entity requirements prescribed by the Governmental Accounting Standards Board"
     },
     {
       "source_report_id": "la-city-revenue-outlook",
@@ -1352,21 +1394,24 @@
         "ends": "01-01",
         "stated_as": "\"The levy of property taxes is based on the lien date of January 1.\" The City must finalise its April forecast before the Assessor releases the May roll forecast it would otherwise read."
       },
-      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf"
+      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "la-city-revenue-outlook",
       "target_report_id": "la-county-property-tax-apportionment",
       "relationship_type": "uses_data_from",
       "basis": "The Revenue Outlook states that \"The June 2025 payment is based on the County's Auditor-Controller's April estimate\", and that revised revenue \"is based on actual receipts and the County Auditor-Controller's estimate\" for the remainder of the period. It also notes that the \"County Auditor-Controller determines each local jurisdiction's proportionate share of the administrative costs\" charged against the City's property tax.",
-      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf"
+      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf",
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "la-city-proposed-budget",
       "target_report_id": "la-city-revenue-outlook",
       "relationship_type": "uses_data_from",
       "basis": "The Revenue Outlook identifies itself in its own title block as \"a Supplement to the 2026-27 Proposed Budget\", published by the City Administrative Officer. It is the revenue-estimate volume on which the Proposed Budget's revenue assumptions rest, published alongside it in April.",
-      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf"
+      "evidence_url": "https://cao.lacity.gov/content/budget/26-27/2026-27RevenueOutlook.pdf",
+      "evidence_grade": "B"
     }
   ],
   "_dropped": [

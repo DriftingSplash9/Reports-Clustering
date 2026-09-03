@@ -198,28 +198,33 @@
       "target_report_id": "ru-rosstat-cpi-methodology-915",
       "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A on Rosstat's own host. Приказ № 915 is the instrument that approves the official statistical methodology the CPI is computed under, in its own words: «Утвердить Официальную статистическую методологию наблюдения за потребительскими ценами на товары и услуги и расчета индексов потребительских цен (далее – Методология) (приложение № 1).» It supplies genuine method rather than a bare publication mandate -- it fixes the index formula («Расчет ИПЦ к предыдущему месяцу осуществляется в соответствии с модифицированной формулой Ласпейреса»), the observation cadence («ежемесячно по состоянию на конец месяца … еженедельно по состоянию на пятницу») and the weights basis («веса – мера относительной значимости товаров (услуг) в рамках сводного индекса цен, определяемая на основе потребительских расходов домашних хозяйств»). `methodology_depends_on` rather than `cites` on exactly the distinction `br-fiscal-responsibility-law.json` draws for `br-rreo -> br-lc-101-2000`: an instrument that defines the method the release relies on, not one that merely compels its publication.",
-      "evidence_url": "https://rosstat.gov.ru/storage/mediabank/Prikaz_915_15122021.pdf"
+      "evidence_url": "https://rosstat.gov.ru/storage/mediabank/Prikaz_915_15122021.pdf",
+      "evidence_grade": "A",
+      "evidence_quote": "Утвердить Официальную статистическую методологию наблюдения за потребительскими ценами на товары и услуги и расчета индексов потребительских цен (далее – Методология) (приложение № 1)."
     },
     {
       "source_report_id": "ru-minfin-equalization-input-data",
       "target_report_id": "ru-resolution-670-equalization-methodology",
       "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, and unusually literally: the methodology is not merely cited by this publication, it is PHYSICALLY BUNDLED INSIDE IT. `Dotatsii_na_vyravnivanie.zip` contains 84 per-region `.xls` workbooks plus `Методика распределения дотаций на выравнивание.pdf`, the consolidated operative text of Постановление 670. The methodology's own text defines both the calculation this data feeds and the obligation that produces the data: «В целях реализации статьи 131 Бюджетного кодекса Российской Федерации Правительство Российской Федерации постановляет: 1. Утвердить прилагаемую методику распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации.» and «2. Федеральной службе государственной статистики и Федеральной налоговой службе обеспечивать ежегодно, до 1 августа, представление в Министерство финансов Российской Федерации информации, необходимой для осуществления расчетов в соответствии с методикой, утвержденной настоящим Постановлением.» The core formula the data serves is «БОi = ИНПi / ИБРi», where ИНПi is the index of tax potential and ИБРi the index of budget expenditure. `methodology_depends_on` rather than `cites`: this is the method the input data is assembled to satisfy, not a background reference.",
-      "evidence_url": "https://minfin.gov.ru/common/upload/library/2025/06/main/Dotatsii_na_vyravnivanie.zip"
+      "evidence_url": "https://minfin.gov.ru/common/upload/library/2025/06/main/Dotatsii_na_vyravnivanie.zip",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ru-resolution-2038-2025",
       "target_report_id": "ru-resolution-670-equalization-methodology",
       "relationship_type": "cites",
       "basis": "VERIFIED DIRECTLY (OCR-derived quotation -- the source PDF is an image-only scan, so this text is ~99% accurate, not byte-exact). Постановление 2038 names its amendment target explicitly in its own operative clause: «1. Утвердить прилагаемые изменения, которые вносятся в методику распределения дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации, утвержденную постановлением Правительства Российской Федерации от 22 ноября 2004 г. № 670 \"О распределении дотаций на выравнивание бюджетной обеспеченности субъектов Российской Федерации\"…» `cites` rather than `methodology_depends_on`: 2038 modifies 670 rather than depending on it for a method of its own -- this corpus has no `amends` relationship type, and `cites` is the honest fit for a named-document reference that is not a computational input. The relationship is recorded in this direction because that is the direction 2038's own text states it.",
-      "evidence_url": "http://publication.pravo.gov.ru/document/0001202512160022"
+      "evidence_url": "http://publication.pravo.gov.ru/document/0001202512160022",
+      "evidence_grade": "C"
     },
     {
       "source_report_id": "ru-resolution-2038-2025",
       "target_report_id": "ru-federal-budget-law-2026",
       "relationship_type": "uses_data_from",
       "basis": "VERIFIED DIRECTLY (OCR-derived quotation, ~99% accurate, not byte-exact). Постановление 2038 sets a floor under each region's 2026 equalization grant that is defined by reference to a number published in the budget law: «объем дотации на выравнивание бюджетной обеспеченности субъекта Российской Федерации на 2026 год не может быть менее утвержденного на 2025 год объема такой дотации … увеличенного на прогнозируемый уровень инфляции на конец 2026 года, учтенный при формировании федерального бюджета на 2026 год и плановый период 2027 и 2028 годов». The figure that clause points at is recoverable verbatim from the budget law's own Article 1: «уровня инфляции, не превышающего 4,0 процента (декабрь 2026 года к декабрю 2025 года)». `uses_data_from` rather than `calculated_from`: the inflation forecast is a direct published input to the floor amount, but the resolution states a minimum condition rather than a complete mechanical derivation of the grant. TENSE CHECK: «не может быть менее» is present-tense and prospective for the 2026 cycle -- a live obligation, not a past arrangement.",
-      "evidence_url": "http://publication.pravo.gov.ru/document/0001202512160022"
+      "evidence_url": "http://publication.pravo.gov.ru/document/0001202512160022",
+      "evidence_grade": "C"
     }
   ],
   "_dropped": [

@@ -146,6 +146,22 @@ has 40/100 in-edges with no URL), then Grok-derived slices, then the
 hand-researched branches (they mostly pass). The grader must reproduce
 the audit's 56-edge grades before it touches the corpus.
 
+**Two order changes, measured 2026-09-03 after the corpus-wide run (round 3c).**
+
+- **Step 4's browser pass is partly avoidable and should be re-sequenced.**
+  Three of the four hosts holding the most unreadable edges already have a
+  documented workaround in PLAYBOOK §6 — `bps.go.id` → `web-api.bps.go.id`
+  (41 edges), `ibge.gov.br` → `ftp./biblioteca./concla.` (32),
+  `imf.org` → the Google-viewer route (33). Wiring those into the grader as
+  per-host fetch strategies moves ~106 of the 422 unreadable edges with no
+  browser session at all. Do that build round BEFORE booking browser time;
+  what survives it is the real browser list.
+- **The `minGrade` → A flip (§9 item 4) cannot be the default until the
+  backfill and the browser pass have run.** The dry run's 18% A-share was a
+  sampling artefact of the audit's 56: corpus-wide it is **8.3%** (226 A of
+  2,728). Flipping the default now shows a graph of 226 edges. The
+  destination is unchanged; the ordering is not optional.
+
 **Grading is not research.** The grader reads what the edge already
 cites. Finding a better document for a B edge is a research round.
 
