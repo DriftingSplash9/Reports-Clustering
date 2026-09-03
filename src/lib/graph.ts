@@ -120,13 +120,40 @@ export function isDocumented(edge: { evidence?: EvidenceKind }): boolean {
  * Deliberately narrow: exact case-insensitive match after trimming, not a
  * substring or fuzzy match, which would start guessing at corporate
  * relationships ("IBGE" vs "Instituto Brasileiro de Geografia e
- * Estatistica (IBGE)") the data doesn't actually assert. This catches the
- * standing example this rule exists for -- the NDB's own document set
- * citing `brics-ndb-agreement-2014` -- and undercounts a real "founding
- * body" self-citation where the two publisher strings are written
- * differently, which is why this is exposed as a helper for a later round's
- * pagerank exclusion (Midvamp "self-citation discount", round 2) and only
- * counted, not enforced, here.
+ * Estatistica (IBGE)") the data doesn't actually assert.
+ *
+ * **Correction (round 2, 2026-09-03): this does NOT catch this rule's own
+ * standing example.** `brics-ndb-agreement-2014` has 49 incoming edges and
+ * zero self-citations under this check, measured directly against the live
+ * corpus -- even its closest-worded citers ("Leaders of the Federative
+ * Republic of Brazil...") differ from the target's own publisher string
+ * ("Governments of the Federative Republic of Brazil...") by more than
+ * trimming/case, so exact match misses every one of them. This is the real
+ * shape of the undercount the previous paragraph warned about, not a
+ * hypothetical: any founding body whose members are named slightly
+ * differently across documents (very common -- "Leaders of X" vs
+ * "Governments of X", or a joint body's own name standing in for its
+ * members') won't be caught. Fixing that properly means fuzzy publisher
+ * matching or a stable institution id -- real curation work with its own
+ * false-positive risk -- and hasn't been done; flagged rather than hacked
+ * around.
+ *
+ * **Enforcement (round 2): scoped to `relationship_type === 'cites'` only**,
+ * in `buildGraph`'s `rankedEdges` filter, not applied to every relationship
+ * type as the original round-1 plan intended. Measured reason: of the 566
+ * self-citation edges in the live corpus, 500 (88%) are `uses_data_from` /
+ * `calculated_from` / `methodology_depends_on` -- genuine production or
+ * methodology lineage within one agency (a CPI report using its own
+ * agency's retail price survey is not inflated self-importance, it's just
+ * how a national statistical system is built). Discounting every type
+ * wiped out several legitimately-authoritative nodes that happened to have
+ * few incoming edges, nearly all same-agency lineage: eu-reg-223-2009
+ * #9->#1905, cpa #10->#2399, ru-rosstat-grp-series #16->#1832, and roughly
+ * 2,400 of ~2,700 official nodes moving more than 200 ranks from their
+ * no-discount baseline -- far more collateral than the rule was meant to
+ * cause. Scoping to `cites` (pure reference/mention, not a production
+ * dependency) fully recovers all four watched nodes and drops the blast
+ * radius to ~70 nodes.
  */
 export function isSelfCitation(source: { publisher: string }, target: { publisher: string }): boolean {
   return source.publisher.trim().toLowerCase() === target.publisher.trim().toLowerCase()
@@ -1228,11 +1255,24 @@ export function buildGraph(
     if (minGrade === 'A' && d.evidence_grade !== 'A') return false
     // Legal-basis ranking toggle — see rankByLegalBasis in view.ts.
     if (!rankByLegalBasis && d.relationship_type === 'legal_basis') return false
-    // Self-citation discount — always on, not gated by either option above.
-    // See isSelfCitation's own doc comment for why this is enforced here.
+    // Self-citation discount — always on, not gated by either option above,
+    // but scoped to `cites` only (round 2, 2026-09-03). See isSelfCitation's
+    // own doc comment for the measured reason: discounting every
+    // relationship type wiped out several legitimately-authoritative nodes
+    // whose few incoming edges were same-agency production/legal lineage
+    // (uses_data_from, calculated_from, methodology_depends_on,
+    // legal_basis), not reputational self-reference. Only a `cites` edge
+    // between same-publisher endpoints — a pure mention, not a production
+    // dependency — is excluded here.
     const source = officialById.get(d.source_report_id)
     const target = officialById.get(d.target_report_id)
-    if (source && target && isSelfCitation(source, target)) return false
+    if (
+      d.relationship_type === 'cites' &&
+      source &&
+      target &&
+      isSelfCitation(source, target)
+    )
+      return false
     return true
   })
 

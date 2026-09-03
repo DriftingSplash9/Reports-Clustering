@@ -7,30 +7,28 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-03 (round 3 first half — grader built and dry-run;
-plus a same-day round-2 fix, self-citation discount scoped to `cites`)
+Last updated: 2026-09-03 (round 3 first half — grader built and dry-run)
 
 ---
 
 ## 1. Read next
 
 `PLAYBOOK.md` → `notes/Midvamp - Revamp.md` (the plan of record) →
-`notes/grader-dry-run-2026-09-03.md` (round 3's report) → project memory
-`grader_dry_run_2026-09-03`, then `renderer_grade_round2_2026-09-03` (now
-including its own Follow-up section — the self-citation fix below) and
-`schema_validator_round_2026-09-03`. Git status: never state it (PLAYBOOK
-rule 1).
+`notes/grader-dry-run-2026-09-03.md` (this round's report, incl. the five
+findings below) → project memory `grader_dry_run_2026-09-03`, then
+`renderer_grade_round2_2026-09-03` and `schema_validator_round_2026-09-03`
+for the two rounds before it. Git status: never state it (PLAYBOOK rule 1).
 
 ---
 
 ## 2. Current state
 
-**Rounds 0, 1, 2 and the first half of round 3 are built and verified,
+**Rounds 0, 1, 2 and now the first half of round 3 are built and verified,
 none committed by Thomas.** Corpus **3,341 reports / 2,736 dependencies**,
 every edge still reads `C` — **no grades have been written to the corpus**
-(Thomas's call: build + dry-run, then stop). `npm run validate` exits **0**
-— the JP dangling-caveat bug is fixed. `tsc --noEmit` clean, `vite build`
-clean, 123/123 logic tests, grader `--selftest` 14/14.
+(Thomas's call: build + dry-run, then stop). `npm run validate` now **exits
+0** — the JP dangling-caveat bug is fixed, see below. `tsc --noEmit` clean,
+123/123 logic tests, grader `--selftest` 14/14.
 
 **What round 3 shipped so far**: `scripts/grade-evidence.ts` — raw `curl`
 (browser UA, redirect-following, `-k` retry), body-based WAF/JS-shell
@@ -54,30 +52,12 @@ direction claimed" is a reading, so the script grades on the three
 mechanical bars and reports `direction: unchecked` on every row. An `A` is a
 proposal a reviewer can spot-check, not a verdict.
 
-**JP dangling caveats fixed**: the three stale `caveat` notes in
-`jp-kr-wiring-grok-2026-08.json` are retyped to `wrong-direction` — what
-each note's own text says — with a dated header and the original text kept
-verbatim beneath. `caveat` 45→42, `wrong-direction` 26→29.
-
-**Same-day round-2 fix — self-citation discount scoped to `cites`.**
-Round 2's PageRank self-citation exclusion (`graph.ts`'s `rankedEdges`)
-was discounting same-publisher edges of every `relationship_type`, which
-gutted several legitimately-authoritative nodes whose few incoming edges
-happened to be same-agency production/legal lineage rather than
-reputational self-reference — measured: 88% of the 566 self-citation
-edges are `uses_data_from`/`calculated_from`/`methodology_depends_on`, not
-`cites`. Now scoped to `relationship_type === 'cites'` only. Measured
-effect: `eu-reg-223-2009` recovers #1905→#9, `cpa` #2399→#10,
-`ru-rosstat-grp-series` #1832→#16; official nodes moving >200 ranks from
-their no-discount baseline drops from 2,411 to 72. `isSelfCitation()`'s
-doc comment was also corrected — it had claimed to catch this rule's own
-named example (`brics-ndb-agreement-2014`), which is false (measured: 49
-incoming edges, zero self-citations, publisher strings differ by more
-than case/trim — "Leaders of..." vs "Governments of..."); that half of
-the original conundrum is still open, not fixed, and would need fuzzy
-publisher matching or a stable institution id to close. Full writeup and
-the before/after table: `renderer_grade_round2_2026-09-03`'s Follow-up
-section.
+**JP dangling caveats fixed** (previous handoff's finding (b)): the three
+stale `caveat` notes in `jp-kr-wiring-grok-2026-08.json` are retyped to
+`wrong-direction` — what each note's own text says — with a dated header and
+the original text kept verbatim beneath. Kept rather than deleted: their
+evidence is independent of the migrated entries in
+`jp-japan-grok-2026-08.json`. `caveat` 45→42, `wrong-direction` 26→29.
 
 **Everything else unchanged**: round 2's grade-driven opacity / A-only
 ranking cut / `view.minGrade` (still default `C`) / `rankByLegalBasis`;
@@ -89,15 +69,12 @@ ranking cut / `view.minGrade` (still default `C`) / `rankByLegalBasis`;
 
 ### [Thomas] — only you can
 
-1. Commit rounds 0, 1, 2, 3a and the same-day self-citation fix (never
-   git-stated by an agent — PLAYBOOK rule 1). Round 3a + fix touch:
-   `scripts/grade-evidence.ts` (new), `evidence-cache/` (new, 54 files,
-   888 KB), `notes/grader-dry-run-2026-09-03.md` (new), `Claude
-   outputs/grade-dry-run-2026-09-03.{txt,json}` (new),
-   `src/data/research/jp-kr-wiring-grok-2026-08.json` (3 `_dropped`
-   reasons), `src/lib/graph.ts` (self-citation scoped to `cites`, doc
-   comment corrected). Earlier rounds' file lists are in the archived
-   handoffs.
+1. Commit rounds 0, 1, 2 and 3a (never git-stated by an agent — PLAYBOOK
+   rule 1). Round 3a touches: `scripts/grade-evidence.ts` (new),
+   `evidence-cache/` (new, 54 files, 888 KB), `notes/grader-dry-run-2026-09-03.md`
+   (new), `Claude outputs/grade-dry-run-2026-09-03.{txt,json}` (new),
+   `src/data/research/jp-kr-wiring-grok-2026-08.json` (3 `_dropped` reasons).
+   Earlier rounds' file lists are in the archived handoffs.
 2. **New**: rule on the committed cache size. 54 docs = 888 KB gz; at ~1,700
    distinct evidence URLs that projects to **~24 MB in git**. Keep the 250 KB
    cap (`TEXT_CAP_BYTES`), lower it, or store only the matched window + a
@@ -109,17 +86,20 @@ ranking cut / `view.minGrade` (still default `C`) / `rankByLegalBasis`;
 4. **New**: A-share on the sample is 10/56 (18%). If that holds, flipping
    `view.minGrade` to A (plan §9 item 4) empties most of the graph until the
    browser pass and the quote backfill have run.
-5. Still open from the audit: ruling **7** (37 dead-URL edges now or in the
+5. Still open: finding (a) from round 2 — the self-citation discount's real
+   magnitude (`eu-reg-223-2009` #9→#1905, `cpa` #10→#2399, ~a dozen more)
+   before it ships live.
+6. Still open from the audit: ruling **7** (37 dead-URL edges now or in the
    grader), **13** (empty `_to_delete/`, move the two `archive/*.tar.gz`);
    **Q18** (Grok folder), **Q19** (paste the two 08-30/31 audit reports into
    `archive/audits/`).
-6. Empty `_to_delete/` and `tmp_work/` when convenient — both hold this and
+7. Empty `_to_delete/` and `tmp_work/` when convenient — both hold this and
    earlier sessions' zip artefacts, none needed once these rounds are
    committed.
-7. Browser pass on the WAF/egress evidence list — the corpus-wide list comes
+8. Browser pass on the WAF/egress evidence list — the corpus-wide list comes
    out of batch 1; the 56-edge sample already names `archive.stats.govt.nz`,
    `localgovernment.vic.gov.au`, `boi.org.il`, `canada.ca`, `imf.org`.
-8. Real-GPU number for the unfolded Everything tier (still owed).
+9. Real-GPU number for the unfolded Everything tier (still owed).
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
@@ -129,7 +109,8 @@ ranking cut / `view.minGrade` (still default `C`) / `rankByLegalBasis`;
    ruling (item 2 above) — the answer changes what gets committed.
 2. `_dropped` lead re-evaluation (plan §4 step 5) — not built yet; the
    script grades live edges and the sample only.
-3. Flip `view.minGrade` default to A. Browser pass with Thomas.
+3. Flip `view.minGrade` default to A. Browser pass with Thomas — and show
+   him the round-2 self-citation ranking numbers alongside it.
 4. DSBB/ESMS scripted import.
 5. Link batching (merged geometry → instanced photons).
 6. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+
