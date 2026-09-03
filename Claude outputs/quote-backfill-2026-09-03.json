@@ -1,0 +1,1402 @@
+{
+  "generated": "2026-09-03T15:28:52.943Z",
+  "selected": 304,
+  "noQuotedSpan": 123,
+  "examined": 123,
+  "rows": [
+    {
+      "source": "ae-fcsc",
+      "target": "imf-e-gdds",
+      "file": "ae-unlinked-wiring-round1-2026-08-30.json",
+      "evidence_url": "https://fcsc.gov.ae/national-summary-data/",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "FCSC's National Summary Data Page states the UAE participates in the IMF's enhanced General Data Dissemination System.",
+      "blocked": "wall:cloudflare-block",
+      "candidates": []
+    },
+    {
+      "source": "bg-nsi-government-finance",
+      "target": "esa-2010",
+      "file": "bg-government-finance-2026-08-29.json",
+      "evidence_url": "https://www.nsi.bg/en/press-release/notification-tables-for-debt-and-deficit-for-general-government-sector-8995",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The release's own footnote defines the harmonized methodology it uses as ESA 2010.",
+      "candidates": []
+    },
+    {
+      "source": "br-ibge-sistema-contas-nacionais",
+      "target": "sna-2008",
+      "file": "br-g2-pnadc-siconfi-scn.json",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9052-sistema-de-contas-nacionais-brasil.html",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "VERIFIED DIRECTLY, TIER A (www.ibge.gov.br contas-nacionais path, plain curl, HTTP 200, 132,905 bytes — this path served genuine bytes where the PNAD Contínua path on the same host returned a WAF 403). IBGE's own page: \"As informações da série do Sistema de Contas Nacionais - referência 2010, cabe ressaltar, são apresentadas segundo uma classificação de produtos e atividades integrada com a Classificação Nacional de Atividades Econômicas - CNAE 2.0 e estão em conformidade com o System of national accounts 2008, SNA 2008, manual preparado sob os auspícios da Organização das Nações Unidas - ONU, da Comissão Europeia - Eurostat, do Fundo Monetário Internacional - FMI, da Organização de Cooperação e Desenvolvimento Econômico - OCDE e do Banco Mundial, o que reflete o compromisso do IBGE com a sistemática de revisões periódicas de suas práticas, conforme preconizam as recomendações internacionais.\" \"Em conformidade com\" is a methodology claim, not a citation for context, and the sentence names the manual, its edition and its five sponsoring bodies. Brazil's first edge into the international-standards.json layer, and the same shape the corpus already carries for Canadian, German and Antipodean national accounts. Note that sna-2008 is itself superseded by the 2025 SNA per its own node description, with country rollout targeting 2029-2030; IBGE's current rebasing exercise (reference year moving from 2010 to 2021) is the natural moment for that transition, but IBGE's page states only the rebasing, not an SNA edition change, so nothing is asserted about it here.",
+      "blocked": "wall:cloudflare-challenge",
+      "candidates": []
+    },
+    {
+      "source": "bw-statsbots-cpi-technical-report-2018",
+      "target": "imf-sdds",
+      "file": "bw-g23-municipal.json",
+      "evidence_url": "https://www.statsbots.org.bw/sites/default/files/publications/Consumer%20Price%20Index%20%20Technical%20Report%20%202018.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Statistics Botswana's own Technical Report states (p.32): 'Statistics Botswana CPI is currently Special Data Dissemination Standards (SDDS) compliant in accordance with the International Monetary Fund (IMF) requirements.' Same claim shape as the existing za-statssa-cpi -> imf-sdds edge (za-fiscal-federalism.json), which used methodology_depends_on for the identical 'complies with the IMF SDDS' pattern. CAVEAT: this quote is dated December 2018 (eight years old as of this 2026 research date), so it evidences a point-in-time SDDS claim rather than confirmed current 2026 status.",
+      "candidates": []
+    },
+    {
+      "source": "mu-national-accounts",
+      "target": "sna-2008",
+      "file": "crossborder-round3-2026-08-22.json",
+      "evidence_url": "https://statsmauritius.govmu.org/Documents/Statistics/ESI/2026/EI1937/NAE_Jun26_300626.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Statistics Mauritius, National Accounts Estimates, June 2026 (ESI Issue No. 1937): 'Concepts and definitions used in the computation of estimates in this issue are given at section 6.3 and are according to the United Nations System of National Accounts (SNA) 2008 manual.' Quote raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "af-bop",
+      "target": "imf-e-gdds",
+      "file": "crossborder-round3-2026-08-22.json",
+      "evidence_url": "https://dab.gov.af/External-Sector-Statistics1",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Da Afghanistan Bank's own External Sector Statistics page titles its balance-of-payments file 'Balance of Payments Transactions (BPM6)' (latest posted period Q1 2021, portal otherwise dormant). Landed as a dated e-GDDS-adjacent methodology fact rather than inventing an imf-bpm6 standards node. Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "id-national-accounts",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2023/IDN_SDDS_AR2023.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Compiled and disseminated under SDDS coverage/periodicity/timeliness requirements. IMF 2023 Annual Observance Report: 'Indonesia subscribed to the SDDS on September 24, 1996, and met all the SDDS requirements on June 2, 2000.' Quote raw-verified 2026-08-22.",
+      "candidates": [
+        {
+          "sentence": "Indonesia's national or committed timeliness exceeds (i.e., is shorter than) the one prescribed by the SDDS for:",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "id-bop",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2023/IDN_SDDS_AR2023.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Bank Indonesia's BOP/IIP statistics are SDDS external-sector data categories on Indonesia's NSDP. 2023 Observance Report: 'Indonesia displayed the SDDS-prescribed components on its NSDP... the Data Template on International Reserves and Foreign Currency Liquidity, External Debt, and International Investment Position.' Raw-verified 2026-08-22.",
+      "candidates": [
+        {
+          "sentence": "Indonesia's national or committed timeliness exceeds (i.e., is shorter than) the one prescribed by the SDDS for:",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "id-cpi",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2023/IDN_SDDS_AR2023.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "BPS CPI meets SDDS real-sector requirements (monthly, one-month timeliness). 2023 Observance Report: 'Indonesia met the SDDS requirements for coverage for all data categories... Indonesia's data dissemination was punctual against its ARC for all data categories.' Raw-verified 2026-08-22.",
+      "candidates": [
+        {
+          "sentence": "Indonesia's national or committed timeliness exceeds (i.e., is shorter than) the one prescribed by the SDDS for:",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "tw-dgbas",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://eng.stat.gov.tw/sdds/",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Taiwan is not an IMF member and cannot subscribe, but DGBAS maintains a DSBB organised exactly to the SDDS framework: 'The DSBB/DGBAS provides information on the real, fiscal, financial and external sectors of the Republic of China about the Special Data Dissemination Standard (SDDS), which was established by the International Monetary Fund (IMF) in 1996...' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "tw-national-accounts",
+      "target": "sna-2008",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://eng.dgbas.gov.tw/News_Content.aspx?n=1997&s=211561",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "DGBAS: 'National accounts statistics, representing the nationwide economic status, is compiled according to System of National Accounts (SNA) 2008, published jointly by United Nations, World Bank, International Monetary Fund, Organization of Economic Cooperation and Development, Commission of the European Communities.' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "tw-bop",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.cbc.gov.tw/en/dl-109941-f7a320adf72a4af7a8989c7464bb8164.html",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "The Central Bank of the Republic of China (Taiwan) disseminates BOP statistics under an SDDS-aligned structure: 'The major changes in the compilation methodology of BOP statistics and the data sources shall be released in advance in a bulletin and under the Special Data Dissemination Standard (SDDS) on the official website of the CBC.' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "ph-psa",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/sdds/subscription-date",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "The Philippines subscribed to the SDDS on 5 August 1996 and met all specifications on 17 January 2001 (IMF DSBB subscription table row 'Philippines | 5-Aug-1996 | 19-Sep-1996 | 17-Jan-2001', raw-verified live 2026-08-22). PSA series are disseminated under SDDS requirements via the NSDP.",
+      "candidates": []
+    },
+    {
+      "source": "ph-national-accounts",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.elibrary.imf.org/view/journals/002/2025/333/article-A001-en.xml",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF 2025 Article IV: 'Philippines subscribes to the Special Data Dissemination Standard (SDDS) since August 1996 and publishes the data on its National Summary Data Page.' Raw-verified 2026-08-22 (IMF eLibrary).",
+      "candidates": []
+    },
+    {
+      "source": "ph-bop",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/sdds/summary-methodology-base/country/PHL/category/EXD00",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "BSP external-debt statistics form part of the Philippines' SDDS external-sector categories; the DSBB summary methodology states the data 'are generally compiled in accordance with the concepts and methodology set out in the latest External Debt Statistics: Guide for Compilers and Users published in 2014, and IMF's BPM6'. Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "jp-national-accounts",
+      "target": "sna-2008",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.stat.go.jp/data/nenkan/72nenkan/zenbun/jp72/book/pageindices/index120.html",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Statistical Handbook of Japan: 'The Japanese National Accounts (JSNA) had been compiled based on the 1993 SNA (adopted by the United Nations in 1993) since 2000. The 2008 SNA (the latest international standard adopted by the United Nations in 2009) was introduced in 2016.' Raw-verified 2026-08-22. (Replaces a round-1 draft edge whose ESRI quote never mentioned the SNA.)",
+      "candidates": [
+        {
+          "sentence": "The 2008 SNA was revised in response to developments in the economic and financial environment since 1993, based on the 1993 SNA, and now the conditions of economy are perceived more comprehensively.",
+          "score": 3,
+          "why": "names the designator \"2008 sna\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "The National Accounts based on the 2008 SNA is, as was for the 1993 SNA, broadly divided into a flow chapter and a stock chapter, which is further grouped into various accounts tables (Integrated and by Institutional Sectors), main time-series, supporting tables and supplementary tables for a clear presentation.",
+          "score": 3,
+          "why": "names the designator \"2008 sna\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "第72回 日本統計年鑑 120/796 3 National Accounts System of National Accounts (Fundamental Statistics) The System of National Accounts (SNA) is compiled by the Economic and Social Research Institute of Cabinet Office based on compilation rules and methods in conformity with the international standard (SNA) adopted by the United Nations, with the aim to record systematically the whole economy of our country as well as to be able to make international comparisons.",
+          "score": 3,
+          "why": "names artefact (title-run:4/5) · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "kr-national-accounts-bok",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2022/KOR_SDDS_AR2022.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF 2022 Annual Observance Report: 'Korea subscribed to the SDDS on September 20, 1996 and met all SDDS requirements on November 1, 1999. ... During 2022, Korea met the SDDS requirements for coverage for all data categories.' Raw-verified 2026-08-22.",
+      "candidates": [
+        {
+          "sentence": "Serious deviations from SDDS undertakings will be addressed in accordance with the SDDS nonobservance procedures in Section III.4 of the legal text.",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "kr-cpi",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/sdds/subscription-date",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Statistics Korea's CPI is a real-sector SDDS data category; IMF DSBB subscription table row 'Korea | 20-Sep-1996 | 30-Mar-1998 | 1-Nov-1999' raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "vn-gso",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2019/07/17/pr19269-vietnam-implements-imfs-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release 19/269 (17 July 2019): 'Vietnam has launched a National Summary Data Page (NSDP) in implementing the recommendations of the IMF's Enhanced General Data Dissemination System (e-GDDS). ... The NSDP is hosted by the General Statistics Office on its website, utilizing the Statistical Data and Metadata Exchange (SDMX).' Raw-verified 2026-08-22.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "vn-national-accounts",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/country/VNM/summary-of-dissemination",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Vietnam's national accounts are disseminated under e-GDDS periodicity/timeliness recommendations; DSBB summary of dissemination row 'National Accounts | Q | Q | 1Q | 1Q' raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "sg-statistics-act-1973",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://singstat.gov.sg/standards/data-dissemination-standard",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "DOS: 'Singapore was among the first group of 34 countries to subscribe to the IMF's Special Data Dissemination Standard (SDDS) in August 1996.' The page's 'subscription in January 2001' phrase is the met-specifications date, not a second subscription — the DSBB table reads 'Singapore | 1-Aug-1996 | 19-Sep-1996 | 30-Jan-2001' (both raw-verified 2026-08-22).",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "sg-cpi",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2024/SGP_SDDS_AR2024.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF 2024 Annual Observance Report: 'Singapore subscribed to the SDDS on August 1, 1996, and met all the SDDS requirements on January 30, 2001. ... Singapore's data dissemination was punctual against its ARC for all data categories.' Raw-verified 2026-08-22.",
+      "candidates": [
+        {
+          "sentence": "Singapore's national or committed timeliness exceeds (i.e., is shorter than) the one prescribed by the SDDS for:",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "th-nso",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/content/pdfs/AnnualReports/2024/THA_SDDS_AR2024.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF 2024 Annual Observance Report: 'Thailand subscribed to the SDDS on August 9, 1996, and met all the SDDS requirements on May 16, 2000. ... Thailand met the SDDS requirements for coverage for all data categories.' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "th-national-accounts",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/sdds/country/THA/summary-of-observance",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Thailand's national accounts are an SDDS real-sector category; DSBB summary of observance row 'National accounts | Yes | Q/ 1Q | Q | 1Q | 8W' raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "th-bop",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.bot.or.th/en/statistics/statistics-and-dissemination/standards-and-information-dissemination.html",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Bank of Thailand: 'Since August 1996, the Bank of Thailand has joined the International Monetary Fund's Special Data Dissemination Standard (SDDS). The standard requires member countries to disseminate 5 categories of economic data...' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "sa-gastat",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2024/SAU_SDDS_AR2024.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF 2024 Annual Observance Report: 'Saudi Arabia subscribed to the SDDS on September 18, 2019, and met all the SDDS requirements at the time of subscription.' Raw-verified 2026-08-22.",
+      "candidates": [
+        {
+          "sentence": "Saudi Arabia's national or committed timeliness exceeds (i.e., is shorter than) the one prescribed by the SDDS for:",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "sa-national-accounts",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.mof.gov.sa/en/NSDP/Pages/statistics.aspx",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Saudi national accounts appear on the MoF/GASTAT NSDP: 'Data linked from this page correspond to data described in the International Monetary Fund's DSBB. For a fuller explanation of the DSBB and the Special Data Dissemination Standard to which Saudi Arabia subscribes, please visit the DSBB home page.' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "mm-cso",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2019/04/05/pr19106-myanmar-implements-international-monetary-funds-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release 19/106 (5 April 2019): 'Myanmar has launched a National Summary Data Page (NSDP) in implementing the recommendations of the Enhanced General Data Dissemination System (e-GDDS). ... The NSDP is hosted by the Central Statistical Organization of the Ministry of Planning and Finance on its website, utilizing the Statistical Data and Metadata Exchange (SDMX).' Raw-verified 2026-08-22.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "mm-national-accounts",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.csostat.gov.mm/Home/NSDP",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Myanmar's national accounts appear on the CSO-hosted e-GDDS NSDP: 'Data linked from this page correspond to data described in the International Monetary Fund's DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Myanmar participates, please visit the DSBB home page.' Raw-verified 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "iq-cso",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2015/09/14/01/49/pr09460",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release 09/460 (15 December 2009): 'The Republic of Iraq began participating today in the International Monetary Fund's (IMF's) General Data Dissemination System (GDDS)' with the CBI governor on record. Current status per the 2025 Article IV: 'Iraq participates in the Enhanced General Data Dissemination System (e-GDDS) and first posted its metadata in December 2009 but is yet to disseminate the data recommended under the e-GDDS.' Both raw-verified 2026-08-22. (Replaces a round-1 draft edge citing a third-party ODIN scorecard.)",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "ir-sci",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/important-dates-history",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Recorded obligation, not a living dissemination program: IMF DSBB e-GDDS important-dates table lists 'Iran | August 6, 2012' with the NSDP column blank (metadata posted, no NSDP ever launched; no withdrawal notice found). Row raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "af-nsia",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/important-dates-history",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Recorded obligation: IMF DSBB e-GDDS important-dates table lists 'Afghanistan, Islamic Republic of | June 22, 2006' with the NSDP column blank. Row raw-verified live 2026-08-22. (The contemporaneous 2006 Seventh-Review document IMF CR 06/251 corroborates the then-imminent GDDS participation but its quote could not be independently retrieved — the edge stands on the DSBB row.)",
+      "candidates": []
+    },
+    {
+      "source": "ye-cso",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/important-dates-history",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Recorded obligation: IMF DSBB e-GDDS important-dates table lists 'Yemen, Republic of | April 26, 2001' with the NSDP column blank (no withdrawal notice found). Row raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "sy-cbs",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://dsbb.imf.org/e-gdds/important-dates-history",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Recorded obligation: IMF DSBB e-GDDS important-dates table lists 'Syrian Arab Republic | December 12, 2007' with the NSDP column blank (no withdrawal notice found). Row raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "sd-cbs",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.elibrary.imf.org/view/journals/002/2003/390/article-A001-en.xml",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF 2003 Article IV (Sudan): 'On August 19, 2003, Sudan formally began to participate in the IMF's General Data Dissemination System (GDDS). On this date comprehensive information on its statistical production and dissemination practices were published on the IMF's Dissemination Standards Bulletin Board.' DSBB important-dates row 'Sudan | August 19, 2003 | [blank]' also raw-verified live 2026-08-22.",
+      "candidates": []
+    },
+    {
+      "source": "sl-statssl",
+      "target": "imf-e-gdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.imf.org/en/News/Articles/2017/01/24/PR1716-Sierra-Leone-Implements-the-IMF-s-Enhanced-General-Data-Dissemination-System",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release 17/16 (24 January 2017): 'Sierra Leone has implemented the recommendations of the Enhanced General Data Dissemination System (e-GDDS)... by disseminating a National Summary Data Page (NSDP). ... The NSDP is posted on the websites of Statistics Sierra Leone, the Bank of Sierra Leone, and the Ministry of Finance and Economic Development.' DSBB row 'Sierra Leone | May 29, 2003 | December 8, 2016' also raw-verified live 2026-08-22.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "mu-statsmauritius",
+      "target": "imf-sdds",
+      "file": "crossborder-standards-2026-08-22.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2015/09/14/01/49/pr1262",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF press release 12/62 (28 February 2012): 'Mauritius subscribed today to the International Monetary Fund's (IMF's) Special Data Dissemination Standard (SDDS), bringing the number of subscribing countries to 70. Mauritius is the 11th country to graduate to the SDDS from the IMF's General Data Dissemination System (GDDS), which the country has participated in since September 21, 2000.' The NSDP is 'maintained by the Statistics Mauritius'. Raw-verified 2026-08-22; DSBB important-dates footnote independently corroborates every date.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "de-bundesbank-financial-accounts",
+      "target": "esa-2010",
+      "file": "de-bundesbank-financial-accounts.json",
+      "evidence_url": "https://www.bundesbank.de/en/statistics/macroeconomic-accounting-systems/financial-accounts",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Bundesbank's own page: 'Their methodological basis is the latest version of the European System of Accounts (ESA 2010).' Live-verified 2026-08-05.",
+      "candidates": []
+    },
+    {
+      "source": "de-destatis-national-accounts",
+      "target": "esa-2010",
+      "file": "de-destatis-national-accounts.json",
+      "evidence_url": "https://www.destatis.de/EN/Methods/Quality/QualityReports/National-Accounts-Domestic-Product/national-accounts.pdf?__blob=publicationFile",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Destatis states ESA 2010 as the legal basis of the German national accounts in the structured metadata of its own quality report: 'Scope of the statistics: national accounts of the Federation (EVAS No 81) … Legal bases: Regulation (EC) No 549/2013, European System of National and Regional Accounts (ESA) 2010, and supplementary and amending regulations … Periodicity: quarterly, annual'. The same report sets out the mechanism: 'The ESA 2010 is a European Regulation, which is binding for all EU member states as of 1 September 2014 (Council Regulation (EU) No. 549/2013 of the European Parliament and of the Council of 21 May 2013, published in the Official Journal on 26 June 2013). It was implemented in Germany as part of the 2014 general revision. This regulation was amended by Regulation (EU) 2023/734 …'. Two further documents say the same in their own words: the GNI inventory ('in compliance with the European System of National Accounts (ESA) 2010' and 'based on the European System of Accounts (ESA) 2010') and the QNA inventory ('in compliance with the European System of Accounts 2010 (ESA 2010)'). relationship_type is methodology_depends_on rather than uses_data_from: ESA 2010 supplies no figures, it supplies the 'common standards, definitions, classifications and accounting rules that shall be used for compiling accounts and tables' (Regulation 549/2013, Article 1(2)(a)).",
+      "candidates": [
+        {
+          "sentence": "The national accounting system is based on harmonised European rules that are laid down in a legally binding form in the European System of National and Regional Accounts (ESA 2010).",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "dz-ons-ipc-monthly",
+      "target": "imf-e-gdds",
+      "file": "dz-cpi-social-protection.json",
+      "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1dzaea2025001-source-pdf.pdf",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF Country Report No. 25/270, Annex XI Table 2: 'Algeria participates in the Enhanced General Data Dissemination (e-GDDS) and first posted its metadata in April 2009 but is yet to disseminate the data recommend[ed] under the e-GDDS.' Graded as the weaker 'cites' relationship rather than 'methodology_depends_on' because this is the IMF's own classification of Algeria's general statistical dissemination practice, not a claim made by ONS's own CPI documents, and the IMF itself notes Algeria has not fully implemented what e-GDDS recommends.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "ec-cse",
+      "target": "sna-2008",
+      "file": "ec-unlinked-wiring-2026-08-30.json",
+      "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/Estadisticas_Economicas/Cuentas_Satelite/educacion/2007-2024/7_%20Documento_metodologico_CSE_2024.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Las CSE se elaboran bajo los mismos lineamientos del marco central de CN, adoptando el Sistema de Cuentas Nacionales (SCN) 2008 para coherencia, fiabilidad y comparabilidad internacional.",
+      "candidates": []
+    },
+    {
+      "source": "eu-reg-479-2009",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R0479-20140901",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Council Regulation (EC) No 479/2009, consolidated text of 01/09/2014, Article 1(1): 'For the purposes of the Protocol on the excessive deficit procedure and of this Regulation, the terms in paragraphs 2 to 6 are defined according to Regulation (EU) No 549/2013 of the European Parliament and the Council of 21 May 2013 on the European system of national and regional accounts in the European Union (hereinafter referred to as ESA 2010). The codes in brackets refer to ESA 2010.' The dependence is operative, not decorative: Article 1(2) defines 'Government' as 'the sector of general government (S.13)... as defined in ESA 2010', Article 1(3) defines 'Government deficit (surplus)' as 'the net borrowing (net lending) (B.9) of the sector of general government (S.13), as defined in ESA 2010', and Article 1(5) defines 'Government debt' by ESA 2010 categories 'currency and deposits (AF.2); debt securities (AF.3) and loans (AF.4)'. 'Are defined according to' is derivation language and is not on Research.1.md section 5a's watchlist. Direction: the EDP Regulation is the dependent, ESA 2010 the depended-on. Re-fetched and re-read from EUR-Lex 2026-08-07 after G.50.md Finding 4 recorded the site serving nothing; the outage was transient. Quoted with EUR-Lex's in-line amendment markers stripped — the unstripped Article 1(1) reads with the whole clause inside a M2 insertion marker, because the original 2009 text referred to ESA 95.",
+      "blocked": "empty:tiny-body",
+      "candidates": []
+    },
+    {
+      "source": "de-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/a27220a8-9d17-46cc-b3da-2a39c178d408/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010.' 'According to' is derivation language, the same shape as de-destatis-gni-inventory -> esa-2010 and de-destatis-qna-inventory -> esa-2010 in esa-2010.json. Confirmed on the title page of the current October 2025 edition, re-read at source this session. The December 2015 edition carries the same title (Part A record) but internally quotes Article 8.1 in superseded 'ESA 95' wording -- see this file's already-recorded note on that contradiction, unchanged by this edge.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "be-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/b9fcfb63-9e20-4094-9517-76a389968815/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source (March 2025 edition): 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010.' The 2019 edition's own title carries the same wording without the space ('according to ESA2010'). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "hr-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/0b622a70-6e05-475b-9647-433e3ec913f6/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source (June 2025 edition and the December 2020 edition, both checked): 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010.' Identical title text on both dated editions. 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "bg-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/d46af615-d5a5-4e64-8b2f-88cd01d3125d/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source (February 2026 edition): 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010.' 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "cy-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/e2a338ab-c73a-4910-937b-12281a380feb/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source (December 2025 edition): 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010.' 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "cz-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/9254d8cf-ee4d-48b4-943e-801a136e6cf0/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source (April 2026 edition): 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA2010.' 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "el-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/42daa2dd-3248-4982-ac5d-10923a323395/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source (December 2025 edition): 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010.' 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010. NOTE the file's own CIRCABC Description metadata field still reads 'according to ESA95' -- a stale-metadata discrepancy against the PDF's own title page, quoted and not adjudicated (see this report's description).",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "uk-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/3e40aebf-25ec-4750-acaf-e3d423165fb6/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spelled 'ESA2010', no space). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "sk-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/88adac10-ca5f-40c9-8326-6a73a5f967da/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for SK (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "si-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/e99d1499-776e-48af-810e-2aed50412cea/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for SI (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "pt-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/300c2db4-a557-4955-9bef-c9578925f9c1/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for PT (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "pl-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/f3449024-914f-4303-8902-f7375afef9b7/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for PL (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "nl-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/2c417a71-97d6-4521-9c4c-1217ddd6cb49/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spaced 'ESA 2010'). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "mt-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/f38d9a94-73c9-4e4f-bf3b-f7aba014efb9/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spelled 'ESA2010', no space). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "lv-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/69848122-ea17-4f0e-8e3a-3980b9430985/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for LV (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "lu-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/c78f7241-e5b8-4dd1-a34f-27473d8e7985/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for LU (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "fr-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/e9d6549c-d183-4271-9442-c47e1b412995/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for FR (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "ee-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/0721d2ef-b419-4c5a-8c51-3180371d23ec/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spaced 'ESA 2010'). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "dk-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/39cceff7-cea4-4371-86eb-624fe69f3281/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spelled 'ESA2010', no space). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "at-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/da699ed7-ce8e-405a-bfd4-cd64b8ea257b/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for AT (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "it-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/dd505699-c5b5-42fd-ac8f-6ae6f181620d/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spaced 'ESA 2010'). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "ie-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/509dcd31-4a5a-4728-8a26-f10b055719bd/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for IE (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "lt-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/6c692507-e37a-496a-a872-9edb1b61257a/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for LT (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "hu-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/3915572d-059f-455e-a5a9-1ad5660bc616/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spelled 'ESA2010', no space). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "se-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/62a503cc-0645-4c41-88fe-cf1051920703/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spaced 'ESA 2010'). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "fi-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/bf58edbc-070d-4dc0-b837-01444b43b50a/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for FI (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "ro-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/95793d97-9a8e-4ee2-8bcf-bf2a7191d833/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "This document's title line was not individually recaptured in this session's screenshot for RO (scrolled past it to the country/date line) -- see this node's own description. Inferred from the identical 'Inventory... according to ESA 2010' title confirmed directly this session for nine sibling single-edition countries in the same CIRCABC folder (UK/NL/MT/EE/DK/IT/HU/SE/ES). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "es-edp-inventory",
+      "target": "esa-2010",
+      "file": "edp-inventory-regulation-479-2009.json",
+      "evidence_url": "https://s-circabc.europa.eu/ui/group/ca7c9cc4-b473-4abc-8e95-263dcd57d79d/library/ddea0202-e66c-40b1-87af-f62c1e0f6ea5/details",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory's own title, read directly at source this session: 'Inventory of the methods, procedures and sources used for the compilation of deficit and debt data and the underlying government sector accounts according to ESA 2010' (spaced 'ESA 2010'). 'According to' is derivation language, the same shape as de-edp-inventory -> esa-2010.",
+      "blocked": "dead:http-404",
+      "candidates": []
+    },
+    {
+      "source": "eg-capmas-cpi",
+      "target": "imf-sdds",
+      "file": "eg-cpi-social-insurance.json",
+      "evidence_url": "https://dsbb.imf.org/sdds/dqaf-base/country/EGY/category/CPI00",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "The IMF's own DSBB DQAF page for Egypt's CPI states SDDS-compliant release timing (10th day after the reference month) among other prescribed dissemination-methodology fields -- reusing the `imf-sdds` node first minted for South Africa's equivalent edge (za-fiscal-federalism.json), on the same reasoning: SDDS prescribes coverage, periodicity, timeliness and advance-release-calendar practice, which is a dissemination-methodology obligation rather than mere context.",
+      "candidates": []
+    },
+    {
+      "source": "de-destatis-gni-inventory",
+      "target": "esa-2010",
+      "file": "esa-2010.json",
+      "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methods.html",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The inventory states its own legal basis twice, in obligation and derivation language rather than 5a agreement language: 'The present document contains the detailed description of the methods and sources used for the compilation of the gross domestic product and the gross national income of the Federal Republic of Germany in compliance with the European System of National Accounts (ESA) 2010', and 'describes the methods and statistical sources used to calculate GDP and GNI at market prices for the Federal Republic of Germany based on the European System of Accounts (ESA) 2010'. 'In compliance with' and 'based on' name ESA 2010 as the rulebook the inventory's own compilation follows, the same relationship already established from the release side by de-destatis-national-accounts -> esa-2010.",
+      "candidates": []
+    },
+    {
+      "source": "de-destatis-qna-inventory",
+      "target": "esa-2010",
+      "file": "esa-2010.json",
+      "evidence_url": "https://www.destatis.de/EN/Themes/Economy/National-Accounts-Domestic-Product/Publications/Downloads-National-Accounts-Domestic-Product/esa-2010-methodology-quarterly-national-accounts-inventory.pdf",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "'The present document contains the detailed description of the quarterly methods and sources used for the compilation of the gross domestic product of Germany in compliance with the European System of Accounts 2010 (ESA 2010).' A second sentence in the same document adds a further, distinct dependency not modelled as its own edge here: 'The structure of the description follows a uniform European standard that was developed by the Statistical Office of the European Communities' -- the inventory's own STRUCTURE, not just its content, is set by Eurostat.",
+      "candidates": [
+        {
+          "sentence": "Date 12 September 2024 Quarterly national accounts inventory based on ESA 2010 methodology - Edition 2024",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "Quarterly national accounts inventory based on ESA 2010 methodology - Edition 2024 (nur in englischer Version verfügbar)",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "Publication Quarterly national accounts inventory based on ESA 2010 methodology - Edition 2024 (nur in englischer Version verfügbar)",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "eurostat-src",
+      "target": "esa-2010",
+      "file": "esa2010-methodology-stack.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/23260479/KS-01-26-011-EN-N.pdf/88c6a29b-9346-c9c0-b92a-1883473c265d?version=1.0&t=1773941683844&download=true",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "SRC 2026 edition, §2.1.4 LEGAL BASIS: 'Regulation (EU) No 549/2013 of the European Parliament and of the Council of 21 May 2013 on the European System of national and regional accounts in the European Union (ESA 2010), OJ L 174, 26.6.2013, p. 1.' A catalogue entry naming ESA 2010 as the legal basis for one of its own reference sections, not a computational input the SRC's own content is derived from -- cites, the same treatment eu-manual-mgdd's Regulation 479/2009 reference above received, for the same reason (a reference/index document's own legal-basis citations describe what it catalogs, not what it is built from).",
+      "candidates": [
+        {
+          "sentence": "(1) OJ L 207, 4.8.2015, p.35-36 Commission implementing decision of 26 June 2014 on granting derogations to Member States with respect to the transmission of statistics pursuant to Regulation (EU) No 549/2013 concerning the European system of national and regional accounts in the EU, OJ L 195, 2.7.2014, p.",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "(1) OJ L 207, 4.8.2015, p.35-36 Commission implementing decision of 26 June 2014 on granting derogations to Member States with respect to the transmission of statistics pursuant to Regulation (EU) No 549/2013 concerning the European system of national and regional accounts in the EU, OJ L 195, 2.7.2014, p.",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "27–36 Commission Implementing Decision (EU) 2024/1251 of 25 April 2024 granting derogations to certain Member States with respect to transmission of statistics pursuant to Regulation (EU) No 549/2013 of the European Parlia- ment and of the Council concerning the European system of national and regional accounts in the European Union.",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "eurostat-manual-qna",
+      "target": "esa-2010",
+      "file": "esa2010-methodology-stack.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/5936013/KS-GQ-13-004-EN.PDF/3544793c-0bde-4381-a7ad-a5cfe5d8c8d0",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Handbook on Quarterly National Accounts (KS-GQ-13-004), p. 19: 'Chapter 12 of ESA 2010 describes and defines the major principles and characteristics of QNA.' Chapter 12 also 'identifies issues that are of special significance in QNA... time of recording; flash estimates; balancing and benchmarking; chain-linked volume estimates; seasonal and calendar adjustments.'",
+      "candidates": []
+    },
+    {
+      "source": "eu-manual-qfagg",
+      "target": "esa-2010",
+      "file": "esa2010-methodology-stack.json",
+      "evidence_url": "https://www.cbs.nl/-/media/_pdf/2019/39/manual-on-qfagg---2017-edition.pdf",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Manual on Quarterly Financial Accounts for General Government (2017 edition), Introduction/legal basis: 'The reporting requirements for quarterly financial accounts for general government are defined in the European Parliament and Council Regulation (EU) No 549/2013 of 21 May 2013 (the ESA2010 Regulation), specifically in its Annex B, the ESA Transmission Programme.'",
+      "candidates": [
+        {
+          "sentence": "the updated European System of Accounts (ESA 2010), or new decisions or guidelines issued by Eurostat in the area of the government finance statistics, are adopted when required by Eurostat.",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "eu-manual-mgdd",
+      "target": "esa-2010",
+      "file": "esa2010-methodology-stack.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/3859598/16029761/KS-GQ-23-002-EN-N.pdf/77a75b07-61c3-7d34-5243-70d09bc00e44",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "MGDD (2022 edition), Introduction -- Scope and Definitions: 'The reference values for deficit and debt are based on concepts defined in the European System of Accounts (ESA 2010).' Preface: MGDD is 'an indispensable complement to ESA 2010', 'complementing or interpreting the general rules of ESA 2010.'",
+      "candidates": [
+        {
+          "sentence": "The reference values for deficit and debt are based on concepts defined in the European System of Accounts (ESA 2010).",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "ESA 2010 is derived from, and broadly consistent with the worldwide manual for national accounts (2008 SNA).",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "Units engaged in auxiliary financial activities, as defined in ESA 2010 paragraph 2.63, are to be classified in the financial auxiliaries subsector (S.126).",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "eurostat-national-accounts-quality-report",
+      "target": "esa-2010",
+      "file": "esa2010-quality-reporting.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/documents/7870049/22537893/KS-01-25-052-EN-N.pdf",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Quality report on national and regional accounts, 2025 edition (KS-01-25-052), Executive summary, page 5: 'The quality assessment was carried out in accordance with Article 4 of the ESA 2010 Regulation (Regulation (EU) No 549/2013).' The dependence is on the instrument for the method and on its Annex B for the scope of what is assessed — Implementing Regulation (EU) 2016/2304 Article 1: 'The quality report on national and regional accounts referred to in Article 4(2) of Regulation (EU) No 549/2013 shall cover the data sent by Member States in accordance with the ESA 2010 transmission programme as laid down in Annex B to Regulation (EU) No 549/2013 in the year preceding the report.' 'In accordance with' is derivation language and is not on Research.1.md §5a's watchlist. Direction: the report is the dependent. Read from the source PDF 2026-08-07.",
+      "candidates": [
+        {
+          "sentence": "• Commission Implementing Decision 2014/403/EU of 26 June 2014 on granting derogations to Member States with respect to the transmission of statistics pursuant to Regulation (EU) No 549/2013 of the European Parliament and of the Council concerning the European system of national and regional accounts in the European Union (notified under document C(2014) 4164), OJ L 175, 2.7.2014, p.",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "• Commission Implementing Decision (EU) 2018/1891 of 30 November 2018 amending Implementing Decision 2014/403/EU on granting derogations to Member States with respect to the transmission of statistics pursuant to Regulation (EU) No 549/2013 of the European Parliament and of the Council concerning the European system of national and regional accounts in the European Union, OJ L 309, 5.12.2018, p.",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "The quality assessment was carried out in accordance with Article 4 of the ESA 2010 Regulation (Regulation (EU) No 549/2013).",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "et-ess-cpi",
+      "target": "imf-e-gdds",
+      "file": "et-psnp-cpi-federalism.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2019/08/02/pr19310-ethiopia-the-federal-democratic-republic-of-ethiopia-implements-the-imfs-egdds",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "The IMF's own 2019 press release announcing Ethiopia's e-GDDS implementation confirms Ethiopia's CPI is disseminated under this framework -- reuses the imf-e-gdds node first minted for Kenya, now a second country confirmed on the weaker (non-SDDS) IMF dissemination tier.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "at-statistik-austria-oeffentliches-defizit",
+      "target": "esa-2010",
+      "file": "eu-government-finance-2026-08-28.json",
+      "evidence_url": "https://www.statistik.at/statistiken/volkswirtschaft-und-oeffentliche-finanzen/oeffentliche-finanzen/maastricht-indikatoren/oeffentliches-defizit/oeffentlicher-ueberschuss",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The page states the data are \"gemäß ESVG 2010\" (according to ESA 2010).",
+      "candidates": []
+    },
+    {
+      "source": "mt-nso-government-finance",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round2-2026-08-29.json",
+      "evidence_url": "https://nso.gov.mt/general-government-balance-and-debt-under-the-maastricht-treaty-first-reporting-for-2026/",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Release names the framework directly.",
+      "blocked": "wall:cloudflare-block",
+      "candidates": []
+    },
+    {
+      "source": "lt-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round2-2026-08-29.json",
+      "evidence_url": "https://osp.stat.gov.lt/documents/10180/5118910/Vald%C5%BEios+sektoriaus+deficitas+ir+skola+%5BEN%5D+146240000.html",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The release states its statistics are compiled following ESA 2010.",
+      "blocked": "wall:cloudflare-challenge",
+      "candidates": []
+    },
+    {
+      "source": "es-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round2-2026-08-29.json",
+      "evidence_url": "https://www.bde.es/webbe/es/estadisticas/compartido/docs/notamet_pde.pdf",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The Bank's own methodological note behind this series states debt-instrument valuation follows SEC 2010 (Spanish name for ESA 2010).",
+      "candidates": []
+    },
+    {
+      "source": "ee-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round2-2026-08-29.json",
+      "evidence_url": "https://stat.ee/en/avasta-statistikat/valdkonnad/rahandus/government-finance/excessive-deficit-procedure-edp",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The EDP page's own text states EDP data must be compiled per ESA2010.",
+      "candidates": []
+    },
+    {
+      "source": "cz-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round3-2026-08-29.json",
+      "evidence_url": "https://csu.gov.cz/rychle-informace/notification-of-government-deficit-and-debt-2025-first-notification-data-sent-to-eurostat-",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The release states its fiscal indicators are quantified under the ESA 2010 methodology.",
+      "candidates": [
+        {
+          "sentence": "Quantification of fiscal indicators is based on the ESA 2010 methodology and serves the assessment of how the Maastricht convergence criteria are complied with.",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "nl-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round3-2026-08-29.json",
+      "evidence_url": "https://www.cbs.nl/nl-nl/nieuws/2026/13/inkomsten-uitgaven-en-schuld-van-de-overheid-boven-de-500-miljard-euro/overheidssaldo-en-overheidsschuld",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "CBS's companion definitions page for these same government-balance/debt figures states the data is compiled per the European System of Accounts (ESR2010, the Dutch acronym for ESA 2010).",
+      "blocked": "dead:http-504",
+      "candidates": []
+    },
+    {
+      "source": "dk-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round3-2026-08-29.json",
+      "evidence_url": "https://www.dst.dk/en/Statistik/dokumentation/documentationofstatistics/government-deficit-and-debt-in-the-eu-countries/statistical-presentation",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The statistic's own official documentation page states data is compiled at sector/subsector level in accordance with ESA 2010.",
+      "candidates": [
+        {
+          "sentence": "The data are compiled at sector and subsector level in accordance with the European System of National and Regional Accounts (ESA 2010).",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "it-govfin",
+      "target": "esa-2010",
+      "file": "eu-government-finance-round3-2026-08-29.json",
+      "evidence_url": "https://www.istat.it/en/press-release/notification-of-general-government-deficit-and-debt-years-2022-2025/",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "The release states the notification is based on the ESA 2010 system of national accounts.",
+      "candidates": [
+        {
+          "sentence": "This notification is based on the ESA 2010 system of national accounts.",
+          "score": 3,
+          "why": "names the designator \"esa 2010\" only · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "eurostat-suiot",
+      "target": "esa-2010",
+      "file": "eu-meta-docx-batches.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/en/naio_10_n_esms.htm",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Eurostat's own metadata page: 'SUIOTs follow the statistical concepts and definitions of the European System of Accounts - ESA 2010 as implemented through Regulation (EU) No 549/2013 and amended by Regulation (EU) 2023/734.' Live-verified 2026-08-05.",
+      "candidates": []
+    },
+    {
+      "source": "eurostat-edp-notification-tables",
+      "target": "esa-2010",
+      "file": "eurostat-edp-gfs-ecb-statistics.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/web/government-finance-statistics/information-data",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Eurostat, 'Information on data': 'EDP statistics should be fully consistent with the GFS data supplied through the ESA 2010 transmission programme. GFS are part of national accounts.' Live-verified 2026-08-05.",
+      "candidates": [
+        {
+          "sentence": "The European GFS are produced in accordance with the European system of accounts (ESA 2010) and are supplemented by further interpretation and guidance documentation from Eurostat.",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "eurostat-remuneration-update-report",
+      "target": "esa-2010",
+      "file": "eurostat-remuneration-update-report.json",
+      "evidence_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:01962R0031-20240101",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Annex XI, Article 1(4) (AXI-04, EU/AnnexXI-StaffRegulations_PartA_2026-08-05.md): 'The results per country shall be weighted in proportion to the appropriate national GDP aggregate measured using purchasing power parities as shown in the most recent statistics published in accordance with the national accounts definitions in the European System of Accounts currently in force... One such indicator shall be in the form of data on real per capita emoluments in central government, drawn up in accordance with the national accounts definitions in the European System of Accounts currently in force.' methodology_depends_on rather than uses_data_from, matching the esa-2010 precedent already in the corpus (de-destatis-national-accounts.json): ESA 2010 supplies accounting definitions and classifications, not figures.",
+      "blocked": "empty:tiny-body",
+      "candidates": []
+    },
+    {
+      "source": "gh-gss-cpi",
+      "target": "imf-e-gdds",
+      "file": "gh-leap-cpi-indexation.json",
+      "evidence_url": "https://mofep.gov.gh/press-release/2018-11-08/ghana-to-implement-the-IMF%E2%80%99s-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Ghana's own Ministry of Finance press release (November 2018) announcing IMF Statistics Department support: 'The Mission supported the development of the National Summary Data Page (NSDP), which will be accessible from the Coordinating Agency website', describing implementation of 'the IMF's Enhanced General Data Dissemination System', which 'supersedes the GDDS, which was established in 1997.' Reuses the imf-e-gdds node first minted for Kenya (ke-social-protection.json) and also carried by Ethiopia (et-psnp-cpi-federalism.json) -- Ghana is now a third country confirmed on the weaker (non-SDDS) IMF dissemination tier, independently dated to November 2018 on the national side, matching Grok's round's citation of the same month from a 2026 IMF Article IV report.",
+      "candidates": []
+    },
+    {
+      "source": "oecd-economic-outlook",
+      "target": "sna-2008",
+      "file": "grok-h1-international-reports.json",
+      "evidence_url": "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=dfa0d77f-5427-4f76-9772-1b30d464b5ba",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "OECD Economic Outlook Database Inventory (EO107): 'All OECD countries have implemented the SNA 2008 methodology (or ESA 2010, its European equivalent)', with historical data sourced from 'publications of national statistical agencies and OECD statistical databases such as the OECD Quarterly National Accounts, OECD Annual National Accounts'.",
+      "candidates": []
+    },
+    {
+      "source": "pl-gus-national-accounts",
+      "target": "esa-2010",
+      "file": "grok-r3-netherlands-poland.json",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/nama_10_gdp_esms_pl.htm",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "Eurostat ESMS metadata for Poland: national accounts compiled in accordance with ESA 2010 as defined in Annex B of Council Regulation (EU) No 549/2013, and a 2014 GUS implementation note on adopting ESA 2010 into Polish national accounts, citing the same Regulation.",
+      "candidates": [
+        {
+          "sentence": "To obtain per capita figures, the population as of 30 June was adopted, meeting the residence criterion as defined in the European System of Accounts 2010 (ESA 2010), which assumes a person’s stay in the economic territory of a given country for one year or more.",
+          "score": 4,
+          "why": "names artefact (title-run:5/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "To obtain per capita figures, the population as of 30 June was adopted, meeting the residence criterion as defined in the European System of Accounts 2010 (ESA 2010), which assumes a person’s stay in the economic territory of a given country for one year or more.",
+          "score": 4,
+          "why": "names artefact (title-run:5/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "Annual national accounts are compiled in accordance with the European System of Accounts - ESA 2010 as defined in Annex B of the Council Regulation (EU) No 549/2013 of the European Parliament and of the Council of 21 May 2013 , amended by Council Regulation (EU) 2023/734 of 15 March 2023 .",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "statcan-national-accounts",
+      "target": "sna-2008",
+      "file": "international-standards.json",
+      "evidence_url": "https://www150.statcan.gc.ca/n1/pub/13-607-x/2016001/36-eng.htm",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "The Canadian National Economic Accounts are compiled using SNA 2008 as the organising framework, which supplies the concepts, classifications and methods used to measure production, income, saving and investment.",
+      "candidates": [
+        {
+          "sentence": "The Canadian NEA are compiled using the \"System of National Accounts 2008\" (SNA2008) as the organizing framework.",
+          "score": 4,
+          "why": "names artefact (title-run:5/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "bea-gdp",
+      "target": "sna-2008",
+      "file": "international-standards.json",
+      "evidence_url": "https://www.bea.gov/national/sna-and-nipas",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "The NIPAs and the SNA share a common accounting framework, and BEA prepares estimates on an SNA basis annually for the OECD questionnaire. BEA documents specific definitional departures, so this is a shared framework rather than strict conformity.",
+      "candidates": []
+    },
+    {
+      "source": "ke-knbs-cpi",
+      "target": "imf-e-gdds",
+      "file": "ke-social-protection.json",
+      "evidence_url": "https://dsbb.imf.org/egdds/dqaf-base/country/KEN/category/CPI00",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "Kenya's CPI metadata is disseminated under the IMF's e-GDDS/DQAF framework on the DSBB, following Kenya's ~2018 e-GDDS implementation and National Summary Data Page.",
+      "candidates": []
+    },
+    {
+      "source": "ma-hcp-ipc",
+      "target": "imf-sdds",
+      "file": "ma-cpi-social-protection.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2022/MAR_SDDS_AR2022.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "HCP methodological note: 'conformément au calendrier établi selon les normes spéciales de diffusion des données (NSDD)' -- Morocco's own document states its CPI release calendar follows SDDS. Corroborated by the IMF's own 'Morocco: Annual Observance Report of the Special Data Dissemination Standard for 2022': 'Morocco subscribed to the SDDS on December 15, 2005 and met all SDDS requirements at the time of subscription,' listing 'Price index: Consumer prices' as an SDDS-monitored, monthly category.",
+      "candidates": [
+        {
+          "sentence": "Serious deviations from SDDS undertakings will be addressed in accordance with the SDDS nonobservance procedures in Section III.4 of the legal text.",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "mx-scnm",
+      "target": "sna-2008",
+      "file": "mx-mexico-grok-2026-08.json",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/pibact/2008/doc/SCNM_Metodologia_02.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Methodology documents state adoption and adaptation of the 2008 System of National Accounts",
+      "candidates": []
+    },
+    {
+      "source": "mx-scnm-sectores-institucionales",
+      "target": "sna-2008",
+      "file": "mx-unlinked-wiring-round2-2026-08-29.json",
+      "evidence_url": "https://www.inegi.org.mx/contenidos/programas/si/2008/doc/702825004893.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Institutional sector accounts methodology adopts the SNA 2008 framework (1968/1993/2008 sequence).",
+      "candidates": []
+    },
+    {
+      "source": "mx-banxico-reservas",
+      "target": "imf-sdds",
+      "file": "mx-unlinked-wiring-round2-2026-08-29.json",
+      "evidence_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CF456&sectorDescripcion=Banco+de+M%C3%A9xico&locale=en",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Net international reserves are disseminated per the IMF Data Template on International Reserves and Foreign Currency Liquidity under SDDS.",
+      "candidates": []
+    },
+    {
+      "source": "ng-nbs-cpi-rebasing",
+      "target": "imf-e-gdds",
+      "file": "ng-cpi-pension-safety-net.json",
+      "evidence_url": "https://www.imf.org/en/News/Articles/2015/09/14/01/49/pr1675",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "VERIFIED DIRECTLY this session: the IMF's own press release (No. 16/75, dated 24 February 2016) is titled 'Nigeria to Implement the IMF's Enhanced General Data Dissemination System' -- confirming Nigeria's e-GDDS implementation date (full press-release body text was not extractable, so this rests on the confirmed title, number and date rather than a quoted passage; Grok's round separately gives a National Summary Data Page live date of March 2016, consistent with an implementation announced the preceding month). Nigeria is now a fourth country in this branch confirmed on the weaker e-GDDS tier, after Kenya, Ethiopia and Ghana.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "no-ssb-general-government-finances",
+      "target": "esa-2010",
+      "file": "no-government-finance.json",
+      "evidence_url": "https://www.ssb.no/offentlig-sektor/statistikker/offinnut/aar/2015-02-26?fane=om",
+      "target_title": "European System of Accounts 2010 (ESA 2010)",
+      "basis": "SSB's Om statistikken for Offentlig forvaltnings inntekter og utgifter: 'Statistikken er basert på internasjonale standarder for nasjonalregnskap og statistikk om offentlige finanser. Disse er først og fremst FNs System of National Accounts 2008 (SNA2008) og EUs European System of Accounts 2010 (ESA2010)' [the statistics are based on international standards for national accounts and government finance statistics, first and foremost the UN's SNA 2008 and the EU's ESA 2010]; the same page records reporting to Eurostat, the OECD and the IMF under EEA commitments — an EEA obligation, not EU membership: Norway is not an EU member.",
+      "candidates": []
+    },
+    {
+      "source": "ph-grdp-calabarzon",
+      "target": "sna-2008",
+      "file": "ph-unlinked-wiring-2026-08-28.json",
+      "evidence_url": "https://psa.gov.ph/system/files/technical-notes/GRDP-Technical-Notes_0.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Same GRDP Technical Notes as the NCR edge above; the methodology applies uniformly across all regions, CALABARZON included.",
+      "blocked": "wall:cloudflare-challenge",
+      "candidates": []
+    },
+    {
+      "source": "ph-monetary-aggregates",
+      "target": "sna-2008",
+      "file": "ph-unlinked-wiring-round2-2026-08-29.json",
+      "evidence_url": "https://www.bsp.gov.ph/Media_and_Research/Primers%20Faqs/dcs.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "BSP's Depository Corporations Survey primer states monetary statistics compilation is consistent with the 2008 SNA framework.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "rw-nisr-nsdp",
+      "target": "imf-e-gdds",
+      "file": "rw-cpi-social-protection.json",
+      "evidence_url": "https://statistics.gov.rw/data-portals-e-gddssdds",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "NISR's own page: 'Rwanda National Statistical System (NSS) under the lead of NISR began publishing the required macroeconomic data on the National Summary Data Page (NSDP) as recommended by IMF's enhanced General Data Dissemination System (e-GDDS).' Reuses the imf-e-gdds node.",
+      "blocked": "dead:http-500",
+      "candidates": []
+    },
+    {
+      "source": "pk-national-accounts",
+      "target": "sna-2008",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://www.pbs.gov.pk/docs/national-accounts/",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "PBS's own national-accounts FAQ page directly answers which SNA edition governs Pakistan's GDP compilation (verified live, not just Grok's quote).",
+      "candidates": []
+    },
+    {
+      "source": "pk-national-accounts",
+      "target": "imf-e-gdds",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2019/01/15/pr1903-pakistan-implements-imf-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF's own press release announces Pakistan's implementation of the e-GDDS and its National Summary Data Page, which covers national accounts dissemination; independently corroborated by Pakistan's 2003 GDDS-subscription press release and by the /e-gdds/ (not /sdds/) URL structure DSBB uses for Pakistan.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "bd-national-accounts",
+      "target": "sna-2008",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://bbs.portal.gov.bd/sites/default/files/files/bbs.portal.gov.bd/page/cdaa3ae6_cb65_4066_8c61_d97e22cb836c/2023-02-13-09-10-f14282f129439180f80f5e445c46ae33.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "BBS's own 'Fifty Years of National Accounts Statistics of Bangladesh' publication states the current methodology follows the 2008 SNA.",
+      "candidates": []
+    },
+    {
+      "source": "lk-national-accounts",
+      "target": "sna-2008",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "http://www.statistics.gov.lk/NationalAccounts/StaticalInformation/SNA_Accounts",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "DCS's own national accounts page states current estimates follow SNA 2008.",
+      "candidates": []
+    },
+    {
+      "source": "lk-national-accounts",
+      "target": "imf-sdds",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2024/LKA_SDDS_AR2024.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF DSBB's 2024 SDDS Annual Observance Report for Sri Lanka, which covers the national accounts category, confirms Sri Lanka's SDDS subscription is current.",
+      "candidates": [
+        {
+          "sentence": "Sri Lanka's national or committed timeliness exceeds (i.e., is shorter than) the one prescribed by the SDDS for:",
+          "score": 2,
+          "why": "names the designator \"sdds\" only · dependency phrase"
+        }
+      ]
+    },
+    {
+      "source": "np-national-accounts",
+      "target": "sna-2008",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://giwmscdnone.gov.np/media/pdf_upload/National%20Accounts%20Statistics%20of%20Nepal%202025_26_dtviayi.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "NSO's National Accounts Statistics of Nepal 2025/26 publication states the compilation is guided by SNA 2008.",
+      "candidates": [
+        {
+          "sentence": "The constant price estimates of national accounts are currently based on year 2010/11 base year prices.",
+          "score": 4,
+          "why": "names artefact (title-run:3/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "The most recent rebasing exercise, based on 2010/11, incorporated the methodological framework of the System of National Accounts 2008 (SNA 2008).",
+          "score": 4,
+          "why": "names artefact (title-run:5/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "Following the adoption of the 2000/01 base year, GDP and other macroeconomic aggregates began to be estimated in accordance with the 38 recommendations of the System of National Accounts 1993 (SNA 1993).",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "np-national-accounts",
+      "target": "imf-e-gdds",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://www.imf.org/en/News/Articles/2017/06/13/pr17218-nepal-implements-imf-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release confirms Nepal implemented the e-GDDS, publishing macroeconomic data (including national accounts) via its National Summary Data Page.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "bt-national-accounts",
+      "target": "imf-e-gdds",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2017/06/12/pr17215-bhutan-implements-the-imf-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release confirms Bhutan implemented the e-GDDS, with its National Summary Data Page hosted by the National Statistics Bureau.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "mv-national-accounts",
+      "target": "sna-2008",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=MDV&categoryCode=NAG00",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "IMF DSBB metadata for Maldives national accounts (NAG00 category) explicitly states the SNA 2008 basis; consistent with the confirmed 2014 base year.",
+      "candidates": [
+        {
+          "sentence": "These national accounts are based on the United Nations, System of National Accounts (SNA 2008.",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "mv-national-accounts",
+      "target": "imf-e-gdds",
+      "file": "southasia-new-grok-2026-08.json",
+      "evidence_url": "https://www.imf.org/en/news/articles/2019/06/20/pr19229-maldives-implements-international-monetary-funds-enhanced-general-data-dissemination-system",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF press release confirms Maldives implemented the e-GDDS, publishing critical data through its National Summary Data Page.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "fed-z1",
+      "target": "sna-2008",
+      "file": "structural-bridges.json",
+      "evidence_url": "https://www.federalreserve.gov/releases/z1/z1_technical_qa.htm",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Federal Reserve Z.1 Technical Q&A: 'Line items on Z.1 tables F.111, L.111, F.112, and L.112 group Call Report line items into instrument categories that better align with the System of National Accounts (SNA 2008) accounting framework.' The same page (posted 5/22/2026) states that 'In the June 11, 2026, release of the Financial Accounts, tables were renumbered to align more closely with the System of National Accounts (SNA) coding guidelines for sectors and instruments,' and gives the example 'Table S122.1.t ... \"S122\" corresponds to SNA sector S122 (depository institutions).'",
+      "candidates": []
+    },
+    {
+      "source": "tn-ins-cpi",
+      "target": "imf-sdds",
+      "file": "tn-cpi-social-protection.json",
+      "evidence_url": "https://dsbb.imf.org/Content/pdfs/AnnualReports/2024/TUN_SDDS_AR2024.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "IMF, 'Tunisia: 2024 Annual Observance Report of the Special Data Dissemination Standard': 'Tunisia subscribed to the SDDS on June 20, 2001, and met all the SDDS requirements at the time of subscription,' listing 'Price index: Consumer prices' as a monitored monthly category. The same report documents a 2024 timeliness lapse for this category, attributed to a December 2024 SDMX platform migration -- graded as 'cites' rather than 'methodology_depends_on' because this is the IMF's own external assessment, not a first-person compliance statement in INS's own CPI documents.",
+      "candidates": []
+    },
+    {
+      "source": "tz-nbs-cpi-dqa",
+      "target": "sna-2008",
+      "file": "tz-cpi-social-protection.json",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Data Quality Assessment, S.2.3.1 (p.16): 'adheres to the 2008 SNA for classifying institutional units and transactions,' with further 2008 SNA references at S.2.4-2.4.3 (pp.16-17) for valuation rules and recording procedures.",
+      "candidates": [
+        {
+          "sentence": "• The grossing/netting procedures are in accordance with the 2008 SNA.",
+          "score": 3,
+          "why": "names the designator \"2008 sna\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "• The timing rules used for recording flows are in accordance with the 2008 SNA.",
+          "score": 3,
+          "why": "names the designator \"2008 sna\" only · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "The rules of valuation used to record expenditures for CPI weights are in accordance with 2008 SNA.",
+          "score": 3,
+          "why": "names the designator \"2008 sna\" only · dependency phrase · carries a year"
+        }
+      ]
+    },
+    {
+      "source": "tz-nbs-cpi-dqa",
+      "target": "imf-sdds",
+      "file": "tz-cpi-social-protection.json",
+      "evidence_url": "https://www.nbs.go.tz/uploads/documents/en-1723547132-Data%20Quality%20Assessment%20for%20Consumer%20Price%20Index%202023%20%E2%80%93%20Tanzania%20Mainland.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Data Quality Assessment, S.4.1.1 (p.25): 'The CPI is disseminated on monthly basis that follows the IMF data dissemination standards (Special Data Dissemination Standard (SDDS)).' Reuses the imf-sdds node, placing Tanzania alongside South Africa and Egypt on the stronger SDDS tier rather than the e-GDDS tier confirmed for Kenya, Nigeria, Ethiopia and Ghana.",
+      "candidates": []
+    },
+    {
+      "source": "ug-ubos-cpi",
+      "target": "imf-e-gdds",
+      "file": "ug-cpi-social-protection.json",
+      "evidence_url": "https://www.imf.org/en/-/media/files/publications/cr/2024/english/1ugaea2024002-print-pdf.pdf",
+      "target_title": "IMF Enhanced General Data Dissemination System (e-GDDS)",
+      "basis": "IMF Country Report No. 24/290 (Uganda: Staff Report for the 2024 Article IV Consultation, Informational Annex), Annex V 'Data Issues', Table 2: 'Uganda participates in the Enhanced General Data Dissemination System (e-GDDS) and publishes the data on its National Summary Data Page since November 2016.' Corroborated structurally by the IMF's own DSBB e-GDDS participants list (which includes Uganda) and its SDDS subscriber list (which does not). Reuses the imf-e-gdds node, placing Uganda on the same weaker dissemination tier already confirmed for Kenya, Nigeria, Ethiopia and Ghana, rather than the stronger SDDS tier confirmed for South Africa, Egypt and Tanzania.",
+      "blocked": "wall:akamai-deny",
+      "candidates": []
+    },
+    {
+      "source": "za-statssa-cpi",
+      "target": "imf-sdds",
+      "file": "za-fiscal-federalism.json",
+      "evidence_url": "https://www.statssa.gov.za/publications/Report-01-41-01/Report-01-41-012025.pdf",
+      "target_title": "IMF Special Data Dissemination Standard (SDDS)",
+      "basis": "Stats SA's own methodology report: 'The South African CPI complies with the IMF Special Data Dissemination Standard (SDDS)' -- SDDS prescribes the release's coverage, periodicity, timeliness and advance-release-calendar practice, which is a dissemination-methodology obligation Stats SA states directly rather than one only asserted from the IMF side (the gap that got Canada's equivalent edge dropped).",
+      "candidates": []
+    },
+    {
+      "source": "za-statssa-gdp",
+      "target": "sna-2008",
+      "file": "za-national-accounts-labour.json",
+      "evidence_url": "https://www.statssa.gov.za/publications/Report%2004-04-04/Report%2004-04-042021.pdf",
+      "target_title": "System of National Accounts 2008 (SNA 2008)",
+      "basis": "Stats SA's own National Accounts: Sources and Methods report: 'SNA 2008 is the foundation and primary methodological source for Stats SA in calculating South Africa's GDP.'",
+      "candidates": [
+        {
+          "sentence": "The reclassification during this benchmark cycle was implemented to conform as closely as possible to the establishment basis (classification) recommended in the System of National Accounts (2008), and was made possible through information sourced from National Treasury’s Vulindlela database and Statistics South Africa’s Financial Statistics of Consolidated General Government publication.",
+          "score": 4,
+          "why": "names artefact (title-run:4/5) · dependency phrase · carries a year"
+        },
+        {
+          "sentence": "SNA 2008 requires reporting based on a calendar year, and therefore a calendarisation process was developed to transform the AFS financial-year data for each industry grouping into calendar-year data.",
+          "score": 3,
+          "why": "names the designator \"sna 2008\" only · dependency phrase · carries a year"
+        }
+      ]
+    }
+  ]
+}

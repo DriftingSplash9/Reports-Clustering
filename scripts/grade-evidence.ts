@@ -34,10 +34,20 @@
  *                                     — grade every live edge whose target is one of these
  *   npx tsx scripts/grade-evidence.ts --slice af-cemac.json --slice af-sadc-hub.json
  *   npx tsx scripts/grade-evidence.ts --all              — the whole live corpus (hours)
+ *   npx tsx scripts/grade-evidence.ts --find-quotes --feeding sna-2008
+ *                                     — propose `evidence_quote` sentences for edges whose
+ *                                       basis has no quoted span. Writes a review file, never
+ *                                       the corpus (see runFindQuotes for why).
  *   flags: --write (write grades back into the slice JSONs; OFF by default),
  *          --offline (grade from the cache only, no network),
  *          --json <out>, --limit <n>, --concurrency <n> (default 6),
  *          --cache-dir <path> (default evidence-cache/), --selftest
+ *
+ * Two stores, one committed: `evidence-cache/` is the permanent evidence
+ * record (header + the verbatim passage each edge's quote was found in) and
+ * belongs in git; `.evidence-fulltext/` is local scratch holding whole
+ * documents so re-runs do not re-fetch, and is gitignored. See the comment on
+ * FULLTEXT_DIR for why it is split that way and what it costs.
  *
  * Exit code is 0 unless something is actually broken (bad flags, selftest
  * failure). A corpus full of `C` grades is a finding, not an error.
@@ -76,14 +86,45 @@ const TIMEOUT_S = 45
 const CONNECT_TIMEOUT_S = 15
 
 /**
- * Cached text cap, per Midvamp §4 step 2 (Q11). Beyond this we keep the first
- * 250 KB plus a hash of the whole extracted text, so a later re-check can still
- * tell whether the document changed even though we did not keep all of it.
+ * Extraction cap for the LOCAL full-text scratch store. Beyond this the first
+ * 250 KB is kept plus a hash of the whole extracted text, so a re-check can
+ * still tell whether the document changed.
  */
 const TEXT_CAP_BYTES = 250 * 1024
 
-/** The cache separator. Header above, extracted text below. */
+/** The cache separator. Header above, windows below. */
 const CACHE_SEP = '\n---\n'
+
+/**
+ * **Two stores, and only one of them is committed** (Thomas's ruling,
+ * 2026-09-03, on the first dry run's projected 24 MB of committed cache).
+ *
+ * 1. `evidence-cache/<sha256(url)>.txt.gz` — **the committed evidence
+ *    record.** Header (url, when fetched, status, final URL, content type,
+ *    extractor, block, full-text length and sha256) plus the matched WINDOW
+ *    for each edge that cited this URL: the sentence the quote was found in
+ *    with a sentence either side, verbatim. That is the thing worth keeping
+ *    forever — it is what a reader needs to see that the citation held on the
+ *    day it was graded, and it survives the page changing under it. ~1-3 KB
+ *    per document instead of ~17 KB.
+ * 2. `.evidence-fulltext/<sha256(url)>.txt.gz` — **local scratch, gitignored.**
+ *    The whole extracted text, so re-grading a slice does not re-fetch anyone's
+ *    server. Disposable: delete it and the next run refetches.
+ *
+ * The cost of the ruling, stated plainly: the committed record can no longer
+ * answer a question nobody asked at grading time. Re-grading an edge against a
+ * DIFFERENT quote needs the page again (or the scratch store), and a URL whose
+ * every edge graded C keeps only its header. That is the trade Thomas took to
+ * keep the repo small.
+ */
+const FULLTEXT_DIR = '.evidence-fulltext'
+
+/** Sentences either side of the matched one kept in a window. */
+const WINDOW_RADIUS = 1
+/** Hard cap per window, so one unpunctuated PDF page cannot become the record. */
+const WINDOW_CAP_CHARS = 1200
+/** Windows kept per URL. A URL cited by 40 edges records the first 8. */
+const MAX_WINDOWS_PER_URL = 8
 
 /**
  * Bodies that are a wall, not a document. Detected by BODY, never by status
@@ -430,6 +471,62 @@ function longestRun(words: string[], hay: string): number {
 const PUBLISHER_STOPWORDS = new Set(['the', 'and', 'for', 'of', 'de', 'la', 'le', 'les', 'des', 'du', 'da', 'do', 'und', 'der', 'die'])
 
 
+/**
+ * The document as sentences, each kept BOTH ways: `raw` verbatim for the
+ * evidence record, `norm` folded for matching. Splitting this way is what
+ * lets a window be quoted verbatim without mapping normalised offsets back
+ * through five regex passes.
+ *
+ * Split on sentence punctuation (Latin and CJK) or a blank line, then any run
+ * longer than the window cap is chopped — `pdftotext -layout` output of a
+ * table has no sentence punctuation at all for pages at a time.
+ */
+export interface Sentence {
+  raw: string
+  norm: string
+}
+
+export function splitSentences(text: string): Sentence[] {
+  const out: Sentence[] = []
+  for (const part of text.split(/(?<=[.!?。！？])\s+|\n{2,}/)) {
+    const piece = part.trim()
+    if (!piece) continue
+    for (let i = 0; i < piece.length; i += WINDOW_CAP_CHARS) {
+      const raw = piece.slice(i, i + WINDOW_CAP_CHARS)
+      out.push({ raw, norm: normalizeForMatch(raw) })
+    }
+  }
+  return out
+}
+
+/**
+ * The verbatim passage a matched fragment sits in, plus a sentence either
+ * side. Returns null when the fragment is nowhere — which is itself worth
+ * recording, and the caller writes a header-only record in that case.
+ */
+export function windowAround(sentences: Sentence[], fragment: string): string | null {
+  const needle = normalizeForMatch(fragment)
+  if (!needle) return null
+  let hit = sentences.findIndex((s) => s.norm.includes(needle))
+  if (hit < 0) {
+    // The fragment straddles a sentence break (or the extractor broke a line
+    // mid-phrase): fall back to its first 4-gram.
+    const grams = shingles(needle, 4)
+    for (const g of grams) {
+      hit = sentences.findIndex((s) => s.norm.includes(g))
+      if (hit >= 0) break
+    }
+  }
+  if (hit < 0) return null
+  const from = Math.max(0, hit - WINDOW_RADIUS)
+  const to = Math.min(sentences.length, hit + WINDOW_RADIUS + 1)
+  return sentences
+    .slice(from, to)
+    .map((s) => s.raw)
+    .join(' ')
+    .slice(0, WINDOW_CAP_CHARS * 3)
+}
+
 function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
@@ -457,13 +554,12 @@ export interface Fetched {
   fromCache: boolean
 }
 
-function cachePath(cacheDir: string, url: string): string {
-  return join(cacheDir, `${createHash('sha256').update(url).digest('hex')}.txt.gz`)
+function urlKey(url: string): string {
+  return createHash('sha256').update(url).digest('hex')
 }
 
-function writeCache(cacheDir: string, f: Fetched): void {
-  mkdirSync(cacheDir, { recursive: true })
-  const header = [
+function headerLines(f: Fetched): string {
+  return [
     `url: ${f.url}`,
     `fetched-at: ${f.fetchedAt}`,
     `status: ${f.status}`,
@@ -476,20 +572,31 @@ function writeCache(cacheDir: string, f: Fetched): void {
     `text-sha256: ${f.textSha}`,
     `truncated: ${f.truncated}`,
   ].join('\n')
-  writeFileSync(cachePath(cacheDir, f.url), gzipSync(Buffer.from(header + CACHE_SEP + f.text, 'utf8')))
 }
 
-function readCache(cacheDir: string, url: string): Fetched | null {
-  const p = cachePath(cacheDir, url)
+function parseHeader(raw: string): Map<string, string> {
+  const head = new Map<string, string>()
+  for (const line of raw.split('\n')) {
+    const i = line.indexOf(': ')
+    if (i > 0) head.set(line.slice(0, i), line.slice(i + 2))
+  }
+  return head
+}
+
+/** Local scratch: the whole extracted text, gitignored, disposable. */
+function writeFullText(root: string, f: Fetched): void {
+  const dir = join(root, FULLTEXT_DIR)
+  mkdirSync(dir, { recursive: true })
+  writeFileSync(join(dir, `${urlKey(f.url)}.txt.gz`), gzipSync(Buffer.from(headerLines(f) + CACHE_SEP + f.text, 'utf8')))
+}
+
+function readFullText(root: string, url: string): Fetched | null {
+  const p = join(root, FULLTEXT_DIR, `${urlKey(url)}.txt.gz`)
   if (!existsSync(p)) return null
   const raw = gunzipSync(readFileSync(p)).toString('utf8')
   const at = raw.indexOf(CACHE_SEP)
   if (at < 0) return null
-  const head = new Map<string, string>()
-  for (const line of raw.slice(0, at).split('\n')) {
-    const i = line.indexOf(': ')
-    if (i > 0) head.set(line.slice(0, i), line.slice(i + 2))
-  }
+  const head = parseHeader(raw.slice(0, at))
   const blockRaw = head.get('block') ?? 'none'
   const text = raw.slice(at + CACHE_SEP.length)
   return {
@@ -508,6 +615,27 @@ function readCache(cacheDir: string, url: string): Fetched | null {
     truncated: head.get('truncated') === 'true',
     fromCache: true,
   }
+}
+
+/**
+ * The committed record: header + one window per edge that cited this URL.
+ * Written once per URL at the end of a run, never concurrently, so several
+ * edges sharing a document merge into one file instead of racing.
+ */
+function writeEvidenceRecord(
+  cacheDir: string,
+  f: Fetched,
+  windows: Array<{ edge: string; grade: string; reason: string; text: string }>,
+): void {
+  mkdirSync(cacheDir, { recursive: true })
+  const body = windows
+    .slice(0, MAX_WINDOWS_PER_URL)
+    .map((w) => `--- ${w.edge} [${w.grade} ${w.reason}]\n${w.text}`)
+    .join('\n\n')
+  const header = `${headerLines(f)}\nwindows: ${Math.min(windows.length, MAX_WINDOWS_PER_URL)}${
+    windows.length > MAX_WINDOWS_PER_URL ? ` (of ${windows.length} edges)` : ''
+  }`
+  writeFileSync(join(cacheDir, `${urlKey(f.url)}.txt.gz`), gzipSync(Buffer.from(header + CACHE_SEP + body, 'utf8')))
 }
 
 function stripHtml(html: string): string {
@@ -698,6 +826,12 @@ export interface GradeResult extends GradeInput {
   textChars: number
   extractor: string
   host: string
+  /**
+   * The verbatim passage the quote was found in, a sentence either side. This
+   * is what goes into the committed evidence record; empty when nothing
+   * matched or the document was never read.
+   */
+  window: string
   /** Never checked mechanically — see the file header. Always 'unchecked'. */
   direction: 'unchecked'
 }
@@ -736,6 +870,7 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     coverage: 0,
     bestSpan: '',
     naming: 'n-a',
+    window: '',
   }
   const C = (reason: string): GradeResult => ({ ...base, grade: 'C', reason })
 
@@ -764,12 +899,16 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     : { artefact: false, agency: false, how: 'no-target-node' }
   const metadataWaiver = isMetadataHost(input.evidenceUrl)
 
+  const sentences = splitSentences(fetched.text)
+  const window = bestSpan ? (windowAround(sentences, bestSpan) ?? '') : ''
+
   const out: GradeResult = {
     ...base,
     quote,
     coverage: Math.round(coverage * 100) / 100,
     bestSpan: bestSpan.slice(0, 300),
     naming: naming.how,
+    window,
     grade: 'C',
     reason: '',
   }
@@ -869,6 +1008,7 @@ interface Args {
   concurrency: number
   cacheDir: string
   selftest: boolean
+  findQuotes: boolean
 }
 
 function parseArgs(argv: string[]): Args {
@@ -882,6 +1022,7 @@ function parseArgs(argv: string[]): Args {
     concurrency: 6,
     cacheDir: join(ROOT, 'evidence-cache'),
     selftest: false,
+    findQuotes: false,
   }
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i + 1]
@@ -897,6 +1038,7 @@ function parseArgs(argv: string[]): Args {
       case '--concurrency': a.concurrency = Number(v); i++; break
       case '--cache-dir': a.cacheDir = v; i++; break
       case '--selftest': a.selftest = true; break
+      case '--find-quotes': a.findQuotes = true; break
       default:
         if (argv[i].startsWith('--')) {
           console.error(`unknown flag ${argv[i]}`)
@@ -923,12 +1065,45 @@ async function pool<T, R>(items: T[], n: number, fn: (item: T, i: number) => Pro
 
 async function getDoc(url: string | undefined, args: Args): Promise<Fetched | null> {
   if (!url) return null
-  const cached = readCache(args.cacheDir, url)
+  const cached = readFullText(ROOT, url)
   if (cached) return cached
   if (args.offline) return null
   const f = await fetchOne(url)
-  writeCache(args.cacheDir, f)
+  writeFullText(ROOT, f)
   return f
+}
+
+/**
+ * Write the committed evidence record for every URL a run touched: header
+ * plus the verbatim window each edge's quote was found in. Done after the
+ * pool, one file per URL, so edges sharing a document merge rather than race.
+ * Skipped in `--offline` runs only when the document was never available.
+ */
+function recordEvidence(results: GradeResult[], args: Args): number {
+  const byUrl = new Map<string, GradeResult[]>()
+  for (const r of results) {
+    if (!r.evidenceUrl) continue
+    const list = byUrl.get(r.evidenceUrl) ?? []
+    list.push(r)
+    byUrl.set(r.evidenceUrl, list)
+  }
+  let written = 0
+  for (const [url, rows] of byUrl) {
+    const doc = readFullText(ROOT, url)
+    if (!doc) continue
+    writeEvidenceRecord(
+      args.cacheDir,
+      doc,
+      rows.map((r) => ({
+        edge: `${r.source} -> ${r.target}`,
+        grade: r.grade,
+        reason: r.reason,
+        text: r.window || '(no passage matched)',
+      })),
+    )
+    written++
+  }
+  return written
 }
 
 function selftest(): void {
@@ -983,6 +1158,16 @@ function selftest(): void {
   t('quote not in document = C', c.grade === 'C' && c.reason === 'quote-not-in-document')
   const d = gradeEdge({ source: 's', target: 't', file: 'f.json', basis: 'x', evidenceUrl: 'https://x.test/' }, fetched)
   t('bare homepage = C', d.grade === 'C' && d.reason === 'bare-homepage')
+  const sents = splitSentences('The index is compiled monthly. It uses the Retail Price Survey.\n\nUnrelated table row.')
+  t('splits sentences', sents.length === 3 && sents[1].raw.startsWith('It uses'))
+  const win = windowAround(sents, 'it uses the retail price survey')
+  t('window quotes verbatim, with a neighbour', !!win && win.includes('The index is compiled monthly.') && win.includes('Retail Price Survey'))
+  t('window returns null when the fragment is absent', windowAround(sents, 'fisheries landings rose by four percent') === null)
+  const graded = gradeEdge(
+    { source: 's', target: 't', file: 'f.json', basis: 'It states "the Consumer Price Index is compiled monthly".', evidenceUrl: 'https://x.test/doc.pdf', targetReport: target },
+    fetched,
+  )
+  t('an A carries its verbatim window', graded.grade === 'A' && graded.window.includes('Consumer Price Index'))
   const failed = checks.filter(([, ok]) => !ok)
   for (const [name, ok] of checks) console.log(`  ${ok ? '✓' : '✗'} ${name}`)
   console.log(`\nselftest: ${checks.length - failed.length}/${checks.length} pass`)
@@ -1095,6 +1280,8 @@ async function runSample(args: Args): Promise<void> {
     for (const g of gone) console.log(`  ${g.row.source} -> ${g.row.target}  (audit: ${g.row.grade})`)
   }
 
+  const recorded = recordEvidence(results, args)
+  console.log(`\nEVIDENCE RECORD — ${recorded} document(s) written to ${args.cacheDir.replace(ROOT + '/', '')}/ (header + matched windows).`)
   summarise(results)
   if (args.json) {
     writeFileSync(args.json, JSON.stringify({ sample: args.sample, results, gone: gone.map((g) => g.row) }, null, 2))
@@ -1115,7 +1302,16 @@ function summarise(results: GradeResult[]): void {
   // The browser-pass list (Midvamp §4 step 4): everything a headless raw fetch
   // could not read, grouped by host, so a Claude-in-Chrome session can take one
   // host family at a time.
-  const blocked = results.filter((r) => r.block === 'wall' || r.block === 'network' || (r.block === 'dead' && r.status !== 404))
+  // Only edges whose DOCUMENT could not be read. An edge with no URL at all,
+  // or one ruled out by the index-page rule before any fetch, is a research
+  // problem and would otherwise pad this list with a blank host — 40 of the
+  // 304 edges in the first batch were exactly that.
+  const NOT_A_FETCH_PROBLEM = new Set(['no-url', 'bare-homepage', 'index-page', 'not-fetched'])
+  const blocked = results.filter(
+    (r) =>
+      !NOT_A_FETCH_PROBLEM.has(r.reason) &&
+      (r.block === 'wall' || r.block === 'network' || (r.block === 'dead' && r.status !== 404)),
+  )
   if (blocked.length) {
     const byHost = new Map<string, number>()
     for (const r of blocked) byHost.set(r.host, (byHost.get(r.host) ?? 0) + 1)
@@ -1124,16 +1320,15 @@ function summarise(results: GradeResult[]): void {
   }
   const dead = results.filter((r) => r.block === 'dead' && r.status === 404)
   if (dead.length) console.log(`\n  ${dead.length} edge(s) cite a URL that is genuinely gone (404/410) — a research problem, not a browser one.`)
+  const noUrl = results.filter((r) => r.reason === 'no-url')
+  if (noUrl.length) console.log(`  ${noUrl.length} edge(s) cite no URL at all — the standing evidence debt, also research.`)
 }
 
-/** Grade a selection of live corpus edges. */
-async function runCorpus(args: Args): Promise<void> {
-  const slices = loadSlices()
-  const reportById = new Map<string, Report>()
-  for (const s of slices) for (const r of s.json.reports ?? []) reportById.set(r.id, r)
-  const seed = (await import('../src/data/reports')) as { reports: Report[] }
-  for (const r of seed.reports) if (!reportById.has(r.id)) reportById.set(r.id, r)
-
+function selectEdges(
+  slices: SliceFile[],
+  reportById: Map<string, Report>,
+  args: Args,
+): GradeInput[] {
   const wanted: GradeInput[] = []
   for (const s of slices) {
     if (args.slices.length && !args.slices.includes(s.file)) continue
@@ -1150,6 +1345,185 @@ async function runCorpus(args: Args): Promise<void> {
       })
     }
   }
+  return wanted
+}
+
+/**
+ * Phrases that make a sentence a statement about where a figure came from,
+ * rather than a sentence that merely mentions the target. Multilingual because
+ * the corpus is: French, Spanish, Portuguese, German, Russian, Japanese and
+ * Chinese slices all carry their evidence in their own language. Deliberately
+ * broad — a candidate still has to name the artefact, and a human still has to
+ * accept it.
+ */
+const DEPENDENCY_PHRASES: readonly RegExp[] = [
+  /\b(?:based (?:on|upon)|derived from|compiled (?:from|using)|calculated (?:from|using)|estimated from|drawn from|taken from|obtained from|sourced from|uses? data|using data|draws? on|relies on|in accordance with|pursuant to|as defined in|as prescribed|prescribed by|set out in|published under|required by|source[s]?\s*:)/i,
+  /\b(?:à partir des|sur la base de|conformément à|issues? de|selon la|source\s*:)/i,
+  /\b(?:con base en|a partir de|de acuerdo con|conforme a|según (?:el|la|los)|fuente\s*:)/i,
+  /\b(?:com base (?:em|no|na)|a partir dos|de acordo com|conforme (?:o|a)|fonte\s*:)/i,
+  /\b(?:auf (?:der )?(?:grundlage|basis)|gemäß|nach maßgabe|quelle\s*:)/i,
+  /(?:на основе|в соответствии с|согласно|источник\s*:)/i,
+  /(?:に基づ|により作成|を用いて|資料[：:])/,
+  /(?:依据|根据|来源[：:]|资料来源)/,
+]
+
+/**
+ * All-caps designators from a title's parentheses — "SNA 2008", "ESA 2010",
+ * "SDDS", "e-GDDS". Used ONLY by the quote harvester, never by the grader:
+ * an acronym is too weak to justify a grade on its own (it produced two of
+ * the first dry run's false A grades), but it is exactly how a document
+ * usually names a standard in a sentence, and a harvested candidate is
+ * proposed to a reader rather than believed.
+ */
+function titleAcronyms(title: string): string[] {
+  const out: string[] = []
+  for (const m of title.matchAll(/\(([^)]{2,20})\)/g)) {
+    const raw = m[1].trim()
+    if (!/[A-Za-z]/.test(raw)) continue
+    if (raw.replace(/[^A-Za-z]/g, '').length > 8) continue
+    if (!/^[A-Za-z][A-Za-z0-9 .&-]*$/.test(raw)) continue
+    if (raw.toLowerCase() === raw) continue
+    out.push(normalizeForMatch(raw))
+    // Documents flip the year to the front as often as not: "the 2008 SNA".
+    const swap = /^([a-z.&-]+)\s+((?:19|20)\d{2})$/i.exec(raw)
+    if (swap) out.push(normalizeForMatch(`${swap[2]} ${swap[1]}`))
+  }
+  return out
+}
+
+function hasDependencyPhrase(text: string): boolean {
+  return DEPENDENCY_PHRASES.some((re) => re.test(text))
+}
+
+/**
+ * **The quote backfill** (Thomas's ruling, 2026-09-03: "get the quotes").
+ *
+ * The single biggest class in the first dry run was `no-quoted-span`: the
+ * edge's `basis` contains no quoted sentence, so there is nothing to check the
+ * cited document against and the edge is capped at B however good the citation
+ * is. This mode reads the document the edge ALREADY cites and proposes the
+ * sentences that could serve as its `evidence_quote`.
+ *
+ * **It proposes; it does not decide, and it never writes to the corpus.** The
+ * reason is a circularity that would otherwise be invisible: if the grader
+ * both picks the quote and then grades the edge on finding that quote, an `A`
+ * means only "this script found a sentence it liked twice". The gate has to be
+ * a reader — an agent or Thomas — accepting the sentence as what the edge
+ * actually rests on. Once accepted into `evidence_quote` by hand or by a
+ * reviewed generator pass, the next grading run picks it up like any other
+ * quote and the edge can reach A honestly.
+ *
+ * A candidate must name the target artefact (the same `namesTarget` test the
+ * grader uses) and carry a dependency phrase. It is scored, not ranked by
+ * position, and the top three per edge are emitted.
+ */
+async function runFindQuotes(args: Args): Promise<void> {
+  const slices = loadSlices()
+  const reportById = new Map<string, Report>()
+  for (const s of slices) for (const r of s.json.reports ?? []) reportById.set(r.id, r)
+  const seed = (await import('../src/data/reports')) as { reports: Report[] }
+  for (const r of seed.reports) if (!reportById.has(r.id)) reportById.set(r.id, r)
+
+  const all = selectEdges(slices, reportById, args)
+  const needy = all.filter((e) => e.evidenceUrl && !extractQuotedSpans(e.evidenceQuote, e.basis).length)
+  const todo = needy.slice(0, args.limit === Infinity ? needy.length : args.limit)
+  console.log(
+    `QUOTE BACKFILL — ${all.length} edge(s) selected, ${needy.length} carry no quoted span` +
+      `${todo.length !== needy.length ? `, taking ${todo.length}` : ''}.\n`,
+  )
+
+  let done = 0
+  const rows = await pool(todo, args.concurrency, async (edge) => {
+    const doc = await getDoc(edge.evidenceUrl, args)
+    done++
+    if (done % 25 === 0) console.log(`  … ${done}/${todo.length}`)
+    if (!doc || doc.block !== 'none' || !doc.text.trim()) {
+      return { edge, blocked: `${doc?.block ?? 'not-fetched'}${doc?.blockLabel ? `:${doc.blockLabel}` : ''}`, candidates: [] }
+    }
+    const target = edge.targetReport
+    const candidates: Array<{ sentence: string; score: number; why: string }> = []
+    if (target) {
+      const acronyms = titleAcronyms(target.title)
+      for (const sent of splitSentences(doc.text)) {
+        const raw = sent.raw.trim()
+        if (raw.length < 40 || raw.length > 700) continue
+        const naming = namesTarget(raw, target)
+        const acronym = acronyms.find((a) =>
+          new RegExp(`(^|[^a-z0-9])${escapeRe(a)}([^a-z0-9]|$)`).test(sent.norm),
+        )
+        if (!naming.artefact && !acronym) continue
+        const phrase = hasDependencyPhrase(raw)
+        if (!phrase) continue
+        let score = naming.artefact ? 3 : 2
+        const why: string[] = [
+          naming.artefact ? `names artefact (${naming.how})` : `names the designator "${acronym}" only`,
+          'dependency phrase',
+        ]
+        if (/\b(?:19|20)\d{2}\b/.test(raw)) {
+          score += 1
+          why.push('carries a year')
+        }
+        candidates.push({ sentence: raw.replace(/\s+/g, ' '), score, why: why.join(' · ') })
+      }
+    }
+    candidates.sort((a, b) => b.score - a.score || a.sentence.length - b.sentence.length)
+    return { edge, blocked: '', candidates: candidates.slice(0, 3) }
+  })
+
+  const withCandidates = rows.filter((r) => r.candidates.length)
+  const blocked = rows.filter((r) => r.blocked)
+  console.log(`\n  ${withCandidates.length} edge(s) have at least one candidate sentence`)
+  console.log(`  ${rows.length - withCandidates.length - blocked.length} readable but nothing qualified`)
+  console.log(`  ${blocked.length} unreadable (blocked, dead or not fetched)`)
+  console.log(
+    '\nNOTHING WAS WRITTEN. A candidate becomes evidence only when a reader accepts it into\n' +
+      '`evidence_quote` — see the comment on runFindQuotes for why the grader must not close\n' +
+      'that loop itself.',
+  )
+  for (const r of withCandidates.slice(0, 10)) {
+    console.log(`\n  ${r.edge.source} -> ${r.edge.target}  (${r.edge.file})`)
+    console.log(`    ${r.candidates[0].sentence.slice(0, 220)}`)
+    console.log(`    [${r.candidates[0].why}]`)
+  }
+  if (withCandidates.length > 10) console.log(`\n  … and ${withCandidates.length - 10} more in the JSON.`)
+
+  const out =
+    args.json ?? join(ROOT, 'Claude outputs', `quote-backfill-${new Date().toISOString().slice(0, 10)}.json`)
+  writeFileSync(
+    out,
+    JSON.stringify(
+      {
+        generated: new Date().toISOString(),
+        selected: all.length,
+        noQuotedSpan: needy.length,
+        examined: todo.length,
+        rows: rows.map((r) => ({
+          source: r.edge.source,
+          target: r.edge.target,
+          file: r.edge.file,
+          evidence_url: r.edge.evidenceUrl,
+          target_title: r.edge.targetReport?.title ?? null,
+          basis: r.edge.basis,
+          blocked: r.blocked || undefined,
+          candidates: r.candidates,
+        })),
+      },
+      null,
+      2,
+    ),
+  )
+  console.log(`\nProposals written to ${out.replace(ROOT + '/', '')}`)
+}
+
+/** Grade a selection of live corpus edges. */
+async function runCorpus(args: Args): Promise<void> {
+  const slices = loadSlices()
+  const reportById = new Map<string, Report>()
+  for (const s of slices) for (const r of s.json.reports ?? []) reportById.set(r.id, r)
+  const seed = (await import('../src/data/reports')) as { reports: Report[] }
+  for (const r of seed.reports) if (!reportById.has(r.id)) reportById.set(r.id, r)
+
+  const wanted = selectEdges(slices, reportById, args)
   const todo = wanted.slice(0, args.limit === Infinity ? wanted.length : args.limit)
   console.log(`Grading ${todo.length} edge(s)${args.offline ? ' from cache only' : ''}, ${args.concurrency} at a time.\n`)
   let done = 0
@@ -1160,6 +1534,8 @@ async function runCorpus(args: Args): Promise<void> {
     if (done % 25 === 0) console.log(`  … ${done}/${todo.length}`)
     return r
   })
+  const recorded = recordEvidence(results, args)
+  console.log(`\nEVIDENCE RECORD — ${recorded} document(s) written to ${args.cacheDir.replace(ROOT + '/', '')}/ (header + matched windows).`)
   summarise(results)
 
   if (args.write) {
@@ -1220,6 +1596,8 @@ function writeGrades(results: GradeResult[]): void {
 const args = parseArgs(process.argv.slice(2))
 if (args.selftest) {
   selftest()
+} else if (args.findQuotes) {
+  await runFindQuotes(args)
 } else if (args.sample) {
   await runSample(args)
 } else if (args.all || args.feeding.length || args.slices.length) {

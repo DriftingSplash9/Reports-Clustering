@@ -373,7 +373,11 @@ country/file/round, not a single site's own one-off quirk.
   the other way, `unzip -o` into the repo fails the moment it has to replace
   an existing file** ("cannot delete old ...: Operation not permitted" — rule
   6 again): unzip to a scratch dir under `$HOME`, outside `mnt/`, and `cp` the
-  files over, which truncates in place and is allowed. Zip only
+  files over, which truncates in place and is allowed. **And the staging zip
+  carries no dotfiles** — `.gitignore` is not in the recipe above, so a
+  sandbox `>>` to one writes a NEW file that then overwrites the real one on
+  the way back. Stage a dotfile explicitly before editing it, or edit it on
+  the device. Zip only
   `src/ public/ scripts/ package.json package-lock.json tsconfig.json
   index.html START-HERE.md` (+ the .md docs if editing them) — including
   `archive/`, `node_modules/` or `.git` times the call out at 408MB; the
