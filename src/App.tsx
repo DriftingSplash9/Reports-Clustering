@@ -127,6 +127,16 @@ import { OpenedCountriesPanel } from './components/OpenedCountriesPanel'
  * there is nothing here that could ever change between renders.
  */
 const SEARCHABLE_GROUPS: RegionGroup[] = [...REGION_GROUPS, ...COUNTRY_GROUPS]
+
+/**
+ * Round 0 (2026-09-03, Q15): the Focus panel's "Built from"/"Feeds into"
+ * checkboxes are gone from `ViewControls.tsx` — click-to-trace, the group
+ * isolate, and the neighbourhood walk all now always trace both directions,
+ * unconditionally, the same shape `DEFAULT_VIEW` always defaulted to. A
+ * shared constant rather than three inline object literals so the one
+ * behaviour is visibly one decision, not three that happen to agree today.
+ */
+const TRACE_BOTH_DIRECTIONS = { builtFrom: true, feedsInto: true } as const
 import { Compare } from './components/Compare'
 import { buildDeepLink, clearDeepLinkFromAddressBar, readDeepLink } from './lib/deepLink'
 import {
@@ -524,13 +534,18 @@ export default function App() {
   }, [selectedGroupId])
 
   /**
-   * Isolate by GROUP — same mechanism as the single-node Isolate below
-   * (`computeGroupFocus` over the same unfiltered index), seeded from every
-   * disclosed node `matchesRegionGroup` accepts rather than one selection.
-   * A group selection always isolates regardless of `view.isolateFocus` —
-   * unlike a single node, a region/bloc/publisher has no other useful
-   * "selected but not isolated" state; the whole point of picking one from
-   * `GroupsPanel` is to see it and its ties, nothing else.
+   * Isolate by GROUP (continent/bloc/publisher/country) — `computeGroupFocus`
+   * over the unfiltered index, seeded from every disclosed node
+   * `matchesRegionGroup` accepts rather than one selection. A group
+   * selection always isolates unconditionally — a region/bloc/publisher has
+   * no other useful "selected but not isolated" state; the whole point of
+   * picking one from `GroupsPanel` is to see it and its ties, nothing else.
+   *
+   * **The single-node Isolate toggle that used to live beside this one is
+   * gone (round 0, 2026-09-03, Q15/HANDOFF "Focus panel removed").** This
+   * mechanism — the Groups panel's own isolate — is the SEPARATE one HANDOFF
+   * says stays, unaffected: still HIDE, not dim, still built on the
+   * unfiltered index so cross-border edges survive.
    */
   const groupFocus = useMemo(
     () =>
@@ -538,49 +553,47 @@ export default function App() {
         ? computeGroupFocus(
             unfilteredFocusIndex,
             reportIdsForGroup(disclosedGraph.nodes, selectedGroup),
-            { builtFrom: view.focusBuiltFrom, feedsInto: view.focusFeedsInto },
+            TRACE_BOTH_DIRECTIONS,
           )
         : null,
-    [unfilteredFocusIndex, disclosedGraph, selectedGroup, view.focusBuiltFrom, view.focusFeedsInto],
+    [unfilteredFocusIndex, disclosedGraph, selectedGroup],
   )
 
-  const isolateFocus = useMemo(
-    () =>
-      view.isolateFocus && selectedId
-        ? computeFocus(unfilteredFocusIndex, selectedId, {
-            builtFrom: view.focusBuiltFrom,
-            feedsInto: view.focusFeedsInto,
-          })
-        : null,
-    [unfilteredFocusIndex, selectedId, view.isolateFocus, view.focusBuiltFrom, view.focusFeedsInto],
+  /**
+   * The single country currently isolated via the Groups panel, if any —
+   * feeds `InfluenceGraph`'s per-galaxy camera fit (round 0, Q16 "b" — "in
+   * a country isolate, fit the camera to that country's cluster and let
+   * INT nodes sit off-screen"). Only `kind === 'country'` qualifies: a
+   * continent/bloc/publisher isolate has no single "home" cluster to zoom
+   * to, so those keep fitting the whole visible set exactly as before.
+   */
+  const isolatedCountry = useMemo(
+    () => (groupFocus && selectedGroup?.kind === 'country' ? (selectedGroup?.country ?? null) : null),
+    [groupFocus, selectedGroup],
   )
 
   /**
    * Item 8 — "show this node and everything within N hops," 2026-08-20.
-   * Same unfiltered index and same HIDE-not-dim shape as `isolateFocus`
-   * just above (deliberately: a bounded chain across a family/country a
-   * scope filter would otherwise cut is exactly as real a chain as an
-   * unbounded one), but walked with `neighbourhoodHops` as the depth limit
-   * instead of no limit at all. Wins over `isolateFocus` when both would
-   * apply (see the field comment on `neighbourhoodHops` in `lib/view.ts` for
-   * why the two do not combine) — in practice this rarely matters, since
-   * turning the hop slider off leaves plain Isolate as it always was.
+   * Same unfiltered index (deliberately: a bounded chain across a
+   * family/country a scope filter would otherwise cut is exactly as real a
+   * chain as an unbounded one) and same HIDE-not-dim shape group isolate
+   * uses above, but walked with `neighbourhoodHops` as the depth limit. Its
+   * single-node sibling — unbounded HIDE, no depth limit — was the Focus
+   * panel's "Isolate" checkbox, removed in round 0 (2026-09-03, Q15); this
+   * one is the survivor, a HANDOFF-named exception, and still wins over
+   * `groupFocus` when both apply — see `visible` below.
    */
   const neighbourhoodFocus = useMemo(
     () =>
       view.neighbourhoodHops > 0 && selectedId
-        ? computeNeighbourhoodFocus(unfilteredFocusIndex, selectedId, view.neighbourhoodHops, {
-            builtFrom: view.focusBuiltFrom,
-            feedsInto: view.focusFeedsInto,
-          })
+        ? computeNeighbourhoodFocus(
+            unfilteredFocusIndex,
+            selectedId,
+            view.neighbourhoodHops,
+            TRACE_BOTH_DIRECTIONS,
+          )
         : null,
-    [
-      unfilteredFocusIndex,
-      selectedId,
-      view.neighbourhoodHops,
-      view.focusBuiltFrom,
-      view.focusFeedsInto,
-    ],
+    [unfilteredFocusIndex, selectedId, view.neighbourhoodHops],
   )
 
   const visible = useMemo(() => {
@@ -604,21 +617,12 @@ export default function App() {
         hiddenEdges: disclosedGraph.edges.length - neighbourhoodFocus.edges.size,
       }
     }
-    // Isolate wins outright over the scope/domain filter rather than
-    // combining with it — "just Israel and its connections" means exactly
-    // that chain, not that chain further narrowed by whatever family was
-    // isolated a minute earlier. Turn Isolate off (or clear the selection)
-    // to get the ordinary filter back.
-    if (isolateFocus) {
-      return {
-        nodes: isolateFocus.nodes,
-        edges: isolateFocus.edges,
-        hiddenNodes: disclosedGraph.nodes.length - isolateFocus.nodes.size,
-        hiddenEdges: disclosedGraph.edges.length - isolateFocus.edges.size,
-      }
-    }
+    // The single-node Isolate branch that used to sit here (HIDE outright,
+    // winning over the scope/domain filter) is gone with the rest of the
+    // Focus panel — round 0, 2026-09-03, Q15. Group isolate (above) and
+    // Neighbourhood (above that) still win over the filter the same way.
     return isFiltering(filter) ? applyFilter(disclosedGraph, predicate) : null
-  }, [groupFocus, neighbourhoodFocus, isolateFocus, disclosedGraph, filter, predicate])
+  }, [groupFocus, neighbourhoodFocus, disclosedGraph, filter, predicate])
 
   /**
    * What the tier bar reports: **real reports, orbs excluded, after the
@@ -653,14 +657,8 @@ export default function App() {
   }, [selectedId, visible])
 
   const focus = useMemo(
-    () =>
-      selectedId
-        ? computeFocus(focusIndex, selectedId, {
-            builtFrom: view.focusBuiltFrom,
-            feedsInto: view.focusFeedsInto,
-          })
-        : null,
-    [focusIndex, selectedId, view.focusBuiltFrom, view.focusFeedsInto],
+    () => (selectedId ? computeFocus(focusIndex, selectedId, TRACE_BOTH_DIRECTIONS) : null),
+    [focusIndex, selectedId],
   )
 
   // `disclosedGraph` first, not `graph` alone — `selectedId` may name an
@@ -1451,8 +1449,8 @@ export default function App() {
         // listener), and that same physical click almost always lands on
         // the canvas underneath — so an isolate built one click ago was
         // being destroyed by the very click meant only to dismiss the menu.
-        // A group isolate is a deliberate, named state now (same standing as
-        // `view.isolateFocus`): it exits on the panel's own "Clear" button,
+        // A group isolate is a deliberate, named state: it exits on the
+        // panel's own "Clear" button,
         // re-picking the same group (the existing toggle-off), or Escape's
         // priority stack (still last in line, see that effect's comment) —
         // never as a side effect of clicking around the scene.
@@ -1517,6 +1515,7 @@ export default function App() {
           resetSignal={resetSignal}
           focus={focus}
           visible={visible}
+          isolatedCountry={isolatedCountry}
           flyTo={flyTo}
           levelColours={levelColours}
           onHover={setHovered}

@@ -17,7 +17,7 @@ import { colourForReport } from '../lib/palette'
  * separate features that happen to need the same inputs.
  *
  * Deliberately its own floating panel rather than a mode of the existing
- * single-selection machinery (`selectedId`, `Detail`, `isolateFocus`,
+ * single-selection machinery (`selectedId`, `Detail`, `groupFocus`,
  * `neighbourhoodFocus`...). `Detail` only ever receives one report and has
  * no access to the app's broader selection state, and every one of those
  * existing pieces is built around ONE selection, not two held side by side

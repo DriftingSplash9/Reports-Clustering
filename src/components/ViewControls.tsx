@@ -24,7 +24,7 @@ const SLIDERS: {
   key: 'spread' | 'geoAffinity' | 'galaxy' | 'clusterRepulsion' | 'pulseRate'
   label: string
   hint: string
-  /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 200%–1000%. */
+  /** Slider range; 0–1 when absent. Spread is a multiplier, so it runs 50%–1200%. */
   min?: number
   max?: number
 }[] = [
@@ -55,8 +55,17 @@ const SLIDERS: {
     // the cap was 200 and would have reproduced the "nodes and edges are
     // nearly invisible" bug reported that morning. **Never move this ceiling
     // without re-deriving that cap.**
-    min: 2,
-    max: 100,
+    //
+    // **Range re-cut 100 (10000%) -> 12 (1200%), floor 2 (200%) -> 0.5 (50%),
+    // 2026-09-03, round 0 (Q13).** `clusterRepulsion` (2026-08-27) now does
+    // real cluster-vs-cluster separation on its own, so spread no longer has
+    // to carry that job alone at the low end, and the old ceiling was buying
+    // almost nothing (see the "ten times the spread buys a quarter more air"
+    // measurement above) — nobody was running it that far out in practice.
+    // `nodeScaleFor`'s cap re-derived for the new ceiling in
+    // `InfluenceGraph.tsx` per the same rule.
+    min: 0.5,
+    max: 12,
   },
   {
     key: 'geoAffinity',
@@ -148,27 +157,12 @@ const LENSES: { key: LensMode; label: string; hint: string }[] = [
   },
 ]
 
-/**
- * Kept in their own section because they do nothing until a node is selected,
- * and a toggle that appears inert is worse than one that is explained.
- */
-const FOCUS_TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
-  {
-    key: 'focusBuiltFrom',
-    label: 'Built from',
-    hint: 'Keep everything the selected report rests on, all the way down',
-  },
-  {
-    key: 'focusFeedsInto',
-    label: 'Feeds into',
-    hint: 'Keep everything ultimately built on the selected report',
-  },
-  {
-    key: 'isolateFocus',
-    label: 'Isolate',
-    hint: 'HIDE everything outside the traced chain instead of dimming it — select a report or a country, turn this on, and only it plus what actually connects to it stays on screen. Overrides the Countries/Domains filter while it is on',
-  },
-]
+// The Focus section (Built from / Feeds into / Isolate checkboxes) lived
+// here until round 0, 2026-09-03 (Q15/HANDOFF "Focus panel removed").
+// Click-to-trace now always traces both directions and always dims rather
+// than hides — see `TRACE_BOTH_DIRECTIONS` in `App.tsx`. The Groups panel's
+// own isolate (continent/bloc/publisher/country) is unrelated and unaffected.
+// The Neighbourhood slider just below is a separate feature and stays.
 
 // The Evidence section (Documented / Implied toggles) lived here until
 // 2026-08-12, when the implied-edge layer was retired (Thomas, round-3 Q12).
@@ -332,28 +326,19 @@ export default function ViewControls({
         })}
       </div>
       <div style={{ ...heading, marginTop: 14 }}>Focus</div>
-      {FOCUS_TOGGLES.map(({ key, label, hint }) => (
-        <label key={key} style={row} title={hint}>
-          <input
-            type="checkbox"
-            checked={view[key] as boolean}
-            onChange={(e) => set(key, e.target.checked as never)}
-            style={checkbox}
-          />
-          <span style={{ color: view[key] ? 'var(--ink-body)' : 'var(--ink-dim)' }}>{label}</span>
-        </label>
-      ))}
       {/*
         Item 8, 2026-08-20 — "show this node and everything within N hops."
         A slider rather than a checkbox, like `spread`/`geoAffinity`/`galaxy`
         above, because "how many hops" is the actual question, not "on or
         off" — 0 IS off (the field's own contract, see `lib/view.ts`), so no
-        separate toggle is needed. Kept in the Focus section, not with the
-        percentage SLIDERS above, because it shares nothing with them: an
-        integer hop count, not a 0–1 strength, and it does nothing without a
-        selection either, same as the two checkboxes just above it.
+        separate toggle is needed. This was one of three controls under the
+        "Focus" heading; the other two (Built from / Feeds into) and the
+        checkbox-based Isolate went with the rest of the Focus panel in
+        round 0, 2026-09-03 (Q15) — this one stays, a HANDOFF-named
+        exception, because it answers a different question ("how far", not
+        "hide or dim") that the panel removal didn't touch.
       */}
-      <label style={{ ...sliderRow, marginTop: 8 }} title="Hide everything more than N hops from the selection — a bounded version of Isolate that attacks a dense neighbourhood directly">
+      <label style={{ ...sliderRow, marginTop: 8 }} title="Hide everything more than N hops from the selection — attacks a dense neighbourhood directly, without turning off the ordinary click-to-trace dim">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <span style={{ fontSize: 11, color: view.neighbourhoodHops > 0 ? 'var(--ink-label)' : 'var(--ink-dim)' }}>
             Neighbourhood

@@ -3,7 +3,7 @@ import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import * as THREE from 'three'
 import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
-import type { Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
+import type { Country, Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
 import {
   glowInk,
@@ -312,6 +312,15 @@ const MAX_PREMATURE_REHEATS = 5
  * alone, same as before.
  */
 const REFIT_INTERVAL_SECONDS = 0.2
+/**
+ * Real-time floor between `linkWidth`/pulse-geometry rescales — see the
+ * guard in `runFit`. Caps the expensive re-digest at ~2/s during a settle
+ * (`REFIT_INTERVAL_SECONDS` alone would allow up to 5/s); a residual few
+ * percent of stale width between rescales is imperceptible at these widths
+ * (1.6px ordinary edge — see `LINK_WIDTH_SCALE`'s comment), same reasoning
+ * as the 1% drift threshold it sits beside.
+ */
+const LINK_RESCALE_MIN_INTERVAL_MS = 500
 /** See `lastFitRadius`. */
 const DRIFT_CHECK_SECONDS = 2
 const DRIFT_RATIO = 1.4
@@ -503,7 +512,23 @@ function nodeScaleFor(cloudRadius: number): number {
   // what carried over). Effectively no path-dependence left. If the two paths
   // ever disagree by more than noise again, look at `spreadOnlyChanged` in
   // the `forceGraph` memo first, not this cap.
-  return Math.min(2000, Math.max(1, wanted))
+  //
+  // **Re-derived 2000 -> 50, 2026-09-03, round 0 (Q13's spread re-cut,
+  // 100 -> 12).** Measured cold-start with a temporary headless Playwright
+  // harness (sandbox copy only, same recipe as the notes above): Everything
+  // tier, all 191 countries opened (the true worst case — nothing folded
+  // left to expand further), spread at the new ceiling (12, 1200%), geo off.
+  // Core radius settled at 6,644, asking `nodeScaleFor` for a scale of
+  // **21.6**. 50 is 2.3x that — the same "double the worst measured ask"
+  // margin every prior derivation here used (2.2x for the 2000 cap, 2.7x for
+  // the 200 cap before it). Leaving the old 2000 cap in place would not have
+  // been WRONG — a lower spread ceiling can only ask for a smaller scale, so
+  // 2000 was never at risk of binding — but it would have been exactly the
+  // kind of stale, unmeasured number rule 8 (PLAYBOOK) warns against: a
+  // cap sized for a spread range 8x wider than the one that now exists.
+  // Zero console errors in the same run. **Never move the spread ceiling in
+  // `ViewControls.tsx`/`lib/view.ts` without re-deriving this cap again.**
+  return Math.min(50, Math.max(1, wanted))
 }
 
 /**
@@ -694,12 +719,62 @@ export interface FlyTo {
 /** How long the camera takes to arrive, in seconds. */
 const FLIGHT_SECONDS = 0.75
 
+/**
+ * Frees every GPU resource anywhere in `fg`'s subtree — node spheres, link
+ * lines, pulse teardrops, and three-forcegraph's own internal meshes alike —
+ * by traversing and disposing geometry, material(s), and any texture a
+ * material holds.
+ *
+ * **The GPU leak this exists to fix (audit 2026-09-02, HANDOFF renderer bug
+ * 2).** The `forceGraph` memo below builds a brand new `ThreeForceGraph`
+ * (new meshes, new geometries, new materials) every time `graph` or
+ * `spreadApplied` changes — a drilldown toggle, a tier change, a filter
+ * narrowing the corpus, dragging the spread slider. `<primitive object={...}>`
+ * unmounts the OLD instance's subtree from the scene graph when the prop
+ * identity changes, but unmounting a `<primitive>` only removes objects from
+ * the scene — it never calls `.dispose()` on anything they own, so every
+ * rebuild leaked the previous instance's buffers to the GPU with nothing
+ * ever freeing them. See the cleanup effect right after the `forceGraph`
+ * memo for where this is actually called.
+ */
+function disposeForceGraphResources(fg: ThreeForceGraph): void {
+  ;(fg as unknown as THREE.Object3D).traverse((obj) => {
+    const mesh = obj as unknown as {
+      geometry?: THREE.BufferGeometry
+      material?: THREE.Material | THREE.Material[]
+    }
+    mesh.geometry?.dispose()
+    const materials = Array.isArray(mesh.material)
+      ? mesh.material
+      : mesh.material
+        ? [mesh.material]
+        : []
+    for (const material of materials) {
+      // A material can hold several textures under different property
+      // names (map, alphaMap, emissiveMap...) — this file's own materials
+      // are simple (colour uniforms, no texture maps) but three-forcegraph's
+      // own internal meshes and any future material are not guaranteed to
+      // be, so free whatever is actually a texture rather than naming maps
+      // by hand.
+      const withMaps = material as THREE.Material & Record<string, unknown>
+      for (const key of Object.keys(withMaps)) {
+        const value = withMaps[key]
+        if (value && typeof value === 'object' && (value as { isTexture?: boolean }).isTexture) {
+          ;(value as THREE.Texture).dispose()
+        }
+      }
+      material.dispose()
+    }
+  })
+}
+
 export default function InfluenceGraph({
   graph,
   labelled,
   view,
   focus,
   visible,
+  isolatedCountry,
   flyTo,
   resetSignal,
   levelColours,
@@ -735,6 +810,15 @@ export default function InfluenceGraph({
    * was looking at, which is the one thing a filter must never do.
    */
   visible: VisibleSet | null
+  /**
+   * The single country isolated via the Groups panel right now, or null —
+   * round 0 (2026-09-03, Q16 "b"). Narrows what `measureFit` frames the
+   * camera to; does not touch what is DRAWN (`visible` alone decides that,
+   * unchanged) — a country isolate still renders the INT standards it
+   * connects to, it just stops letting them drag the camera out to include
+   * them. See the per-galaxy fit note inside `measureFit` below.
+   */
+  isolatedCountry: Country | null
   /** Set by search. Null while no flight has been requested. */
   flyTo: FlyTo | null
   /**
@@ -932,6 +1016,12 @@ export default function InfluenceGraph({
   const nodeScale = useRef(1)
   /** The node scale the link widths and pulse geometries were last built at. */
   const appliedLinkScale = useRef(1)
+  /**
+   * Real wall-clock time (`performance.now()`) the link/pulse rescale below
+   * was last actually applied — the second half of the round-0 fix for
+   * renderer bug 3 (linkWidth thrash). See that guard's own comment.
+   */
+  const lastLinkRescaleAt = useRef(0)
   /** Where the fit put the camera, so Reset can go back without re-laying out. */
   const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
@@ -1981,6 +2071,19 @@ export default function InfluenceGraph({
   }, [forceGraph])
 
   /**
+   * Dispose the SUPERSEDED `forceGraph` instance's GPU resources — see
+   * `disposeForceGraphResources`'s own comment for the leak this closes.
+   * An effect cleanup keyed on `[forceGraph]`, not a call inside the memo
+   * itself: the cleanup captures exactly the instance THIS effect's commit
+   * was for, and React runs it right before the next commit's effect (i.e.
+   * exactly when `forceGraph` is about to be replaced) or on final unmount —
+   * never on the instance that is about to become current.
+   */
+  useEffect(() => {
+    return () => disposeForceGraphResources(forceGraph)
+  }, [forceGraph])
+
+  /**
    * `useLayoutEffect`, not `useEffect` — deliberately, and this one bug for
    * bug matches the reasoning already given for `useLayoutEffect` on `place`
    * elsewhere in this file: the difference is a crash here, not a flinch.
@@ -2243,7 +2346,31 @@ export default function InfluenceGraph({
     // annotation beside it, placed close enough to stay in view at fit zoom
     // without being allowed to define the view.
     const framed = positioned.filter((n) => n.in_degree > 0 || n.out_degree > 0)
-    const subject = framed.length ? framed : positioned
+    let subject = framed.length ? framed : positioned
+
+    // **Per-galaxy camera fit** (round 0, 2026-09-03, Q16 "b"). In a
+    // single-country isolate, fit to that country's OWN cluster and let
+    // whatever it connects to across the isolate — mostly the INT standards
+    // it cites, flung outward by `clusterRepulsion` with `INT_LINK_STIFFNESS`
+    // at 0 since 2026-08-31 — sit off-screen or at the frame's edge, rather
+    // than pulling the whole fit box (and therefore the camera distance and
+    // `nodeScale`) out to include them. This is what Thomas's Canada
+    // screenshot was actually complaining about: the fit was framing the
+    // full isolate, standards included, so Canada itself read small on the
+    // right. Falls back to the ordinary whole-`subject` fit if the country
+    // has nothing on screen — should not happen, since a group isolate's own
+    // seed IS that country's reports, but a fit must never go empty.
+    //
+    // Deliberately does not touch the FORCES at all — position still encodes
+    // only the edges, nothing here fakes where a node sits (Q16's own
+    // rejection of option (c)). If standards still read as flying once this
+    // is live, the next lever is `INT_LINK_STIFFNESS` 0 -> 0.15 (option (a),
+    // `intAnchor.ts`), a physics change deliberately deferred pending seeing
+    // this fit first.
+    if (isolatedCountry) {
+      const ownCountry = subject.filter((n) => n.country === isolatedCountry)
+      if (ownCountry.length) subject = ownCountry
+    }
 
     const box = new THREE.Box3()
     for (const n of subject) {
@@ -2523,12 +2650,38 @@ export default function InfluenceGraph({
     for (const m of meshes.current.values()) m.scale.setScalar(nodeScale.current)
 
     // Lines and pulses follow the same scale — but only when it has actually
-    // moved. Re-assigning `linkWidth` makes three-forcegraph re-digest every
-    // line, and this function runs on a timer while the tracking window is
-    // open, so an unguarded re-assign would rebuild 1 079 lines every couple
-    // of seconds to write the number they already had. 1% is well below
-    // anything visible at these widths and well above float noise.
-    if (Math.abs(nodeScale.current - appliedLinkScale.current) > appliedLinkScale.current * 0.01) {
+    // moved AND enough real time has passed. Re-assigning `linkWidth` makes
+    // three-forcegraph re-digest every line, and this function runs on a
+    // timer (`REFIT_INTERVAL_SECONDS`, up to 5×/s) for up to
+    // `REFIT_WINDOW_SECONDS` after every rebuild — an unguarded re-assign
+    // would rebuild 1 079+ lines that often to write a number they already
+    // had. 1% is well below anything visible at these widths and well above
+    // float noise.
+    //
+    // **The 1% drift guard alone does not fix renderer bug 3 (audit
+    // 2026-09-02, HANDOFF).** It was already here and the bug still shipped:
+    // during a real settle — a large family unfolding, `nodeScaleFor`'s own
+    // comment measures a cloud radius climbing 240,508 in one pass — `nodeScale`
+    // can easily drift more than 1% every single 200ms tick, so the percent
+    // guard was true (and the expensive rebuild fired) up to 5×/s exactly in
+    // the highest-load moment: right as thousands of meshes are still being
+    // compiled. A uniform-based fix (scale in the shader, never touch
+    // `linkWidth`) is the real cure, but `GradientLinkMaterial` has no width
+    // uniform — width is baked into the geometry three-forcegraph itself
+    // builds from the `linkWidth` accessor, not something a shader term can
+    // scale — so that fix waits for the link-batching round (merged
+    // geometry, `notes/Midvamp - Revamp.md` §7/§9 item 6) rather than being
+    // improvised here. For round 0: add a real-time floor alongside the
+    // percentage, so a fast-drifting settle rebuilds at most a few times a
+    // second instead of up to five, without changing what a settled,
+    // slow-drifting graph does (the 1% check still gates those).
+    const scaleDrifted =
+      Math.abs(nodeScale.current - appliedLinkScale.current) > appliedLinkScale.current * 0.01
+    const now = performance.now()
+    const dueForRescale =
+      scaleDrifted && now - lastLinkRescaleAt.current >= LINK_RESCALE_MIN_INTERVAL_MS
+    if (dueForRescale) {
+      lastLinkRescaleAt.current = now
       appliedLinkScale.current = nodeScale.current
       LINK_SCALE_APPLIERS.get(fg)?.(nodeScale.current)
     }
@@ -3394,7 +3547,16 @@ export default function InfluenceGraph({
     const px = clientX - rect.left
     const py = clientY - rect.top
     const v = linkProjectScratch.current
-    const project = (id: string): { x: number; y: number } | null => {
+    // `LinkDatum.source`/`.target` are declared `string`, which is what
+    // three-forcegraph is HANDED — but d3-force-3d's own link force resolves
+    // and replaces them with the actual node object, in place, on this same
+    // array, once the simulation has run a tick. By the time this function
+    // is called (pointermove, well after layout has started), `l.source` is
+    // already an object, not a string, and `positionedById.get(l.source)`
+    // was silently missing every time — a Map keyed by string id never
+    // matches an object reference. Key on whichever shape it actually is.
+    const project = (endpoint: string | { id: string }): { x: number; y: number } | null => {
+      const id = typeof endpoint === 'string' ? endpoint : endpoint.id
       const n = positionedById.current.get(id)
       if (!n || !Number.isFinite(n.x)) return null
       v.set(n.x, n.y, n.z).project(camera)

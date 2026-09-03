@@ -1,10 +1,12 @@
 # Midvamp — Revamp
 
-**Decided 2026-09-02 (Thomas, after the independent technical audit —
-`Claude outputs/AUDIT-2026-09-02-independent-technical-audit.md`).**
-This is the plan of record for the evidence-grade revamp. `HANDOFF.md`
-carries current state and the live todo; this file carries the *why* and
-the design, and changes only when the design changes.
+**Plan of record, v2 — 2026-09-02/03.** v1 was written after the
+independent technical audit (`Claude outputs/AUDIT-2026-09-02-independent-
+technical-audit.md`); v2 folds in Thomas's answers to the 22-question
+round (`Midvamp - Revamp - questions 2026-09-02.docx`, answered copy
+returned the same night). `HANDOFF.md` carries current state and the live
+todo; this file carries the *why* and the design, and changes only when
+the design changes.
 
 ---
 
@@ -15,72 +17,97 @@ A random raw-fetch sample of 56 live, validation-passing edges graded only
 the input artefact, direction stated). 25% were weak, 14% unsupported, 11%
 unverifiable. Hand-researched EU/US branches held (11/13); Grok-derived
 slices did not. Root cause: an edge has one bit of quality — live or
-`_dropped` — while the evidence has a gradient. A verbatim sentence in the
-consumer's own methodology naming the input by title, a third-party IMF
-metadata page saying a country "follows SNA 2008", and "the yearbook has a
-national accounts chapter" all draw identically and count identically. The
-schema cannot say "this is a lead", so leads get minted as facts.
+`_dropped` — while the evidence has a gradient. The schema cannot say
+"this is a lead", so leads get minted as facts.
 
 Thomas's ruling: **do not archive or delete anything. Grade everything.**
 Removing 50% is riskier than promoting 50% back after verification, and
-the scraps in `_dropped` are worth keeping. Nothing moves; a field is
+the scraps in `_dropped` are worth keeping. Nothing moves; fields are
 added; the graph renders and ranks on what has been verified.
 
-## 2. Definitions (unchanged) and the one schema change
+## 2. Definitions
 
-**Node** — unchanged: a recurrently published document that another
-document names as an input to itself. Every drift swept so far
-(institutions, geographies, treaties, editions, derivation notes) was a
-violation of this definition, not a flaw in it. Nodes carry no grade.
+### 2.1 Nodes — one new field: `kind` (Q5: ok)
 
-**Edge** — unchanged direction semantics (`source_report_id` = the
-consumer, the report doing the referencing; `target_report_id` = the
-input, where authority accrues). One new optional field:
+A node is still a document that another document names as an input to
+itself. Three kinds, cast not parsed, validator-enforced:
 
-```
-evidence_grade?: 'A' | 'B' | 'C'      // absent means C
-```
+- **`publication`** — a recurring release. Must have `releases_per_year`.
+- **`standard`** — SNA, COICOP, ISIC, BPM6, GFSM… Versioned; cadence is
+  "when revised" (the existing evergreen convention); a versioned standard
+  needs a `supersedes` relation to its predecessor when both exist.
+- **`instrument`** — Act, regulation, treaty, decree. One-off, amended not
+  republished. Must **not** have `releases_per_year`; drawn hollow (as
+  today). Lives in the graph only while something recurring names it as a
+  basis (the existing rule — Q1: "I like your recommendation"). The
+  treaties retired 2026-08-29 are not re-imported by hand; one comes back
+  only when an A-grade edge names it.
+
+**Editions (Q6: ok).** An edition of a publication is never its own node —
+it is the series node, the edition named in the edge's basis. A *version*
+of a standard is its own node with `supersedes`. Fold the five BRICS JSP
+nodes (`brics-jsp`, `-2024`, `-snapshot`, `-snapshot-2025`,
+`in-brics-jsp-india`) and the per-year auditor-general reports (BW, LS,
+MU) accordingly.
+
+### 2.2 Edges — two new fields: `evidence_grade`, `legal_basis` type
+
+Direction semantics unchanged (`source_report_id` = the consumer,
+`target_report_id` = the input; authority accrues at target). Field
+rename deferred; a bidirectional-pair validator error replaces it.
+
+**`evidence_grade?: 'A' | 'B' | 'C'` — absent means C.**
 
 - **A** — raw-fetched (never WebFetch), the quote is found in the body of
   the cited `evidence_url`, the document names the input *artefact* (not
   just the agency), and states the direction claimed. `evidence_quote`
-  populated with the exact sentence(s).
+  required. **Authoritative third-party metadata the publisher itself
+  supplies counts as A** (Q7: ok) — IMF DSBB, Eurostat ESMS, SDMX
+  metadata; the grader recognises these by host.
 - **B** — resolves and supports the relationship loosely: names the
   agency not the release, "consistent with"/"complementary" language, a
-  paraphrase inside quotation marks, or the quote comes from a document
-  other than `evidence_url`. Real, but not yet citation-grade.
+  paraphrase inside quotation marks, the quote from a document other than
+  `evidence_url`, or a genuinely secondary source (World Bank project
+  document, news, summit declaration).
 - **C** — a lead. Unverified, unreachable, index-page, or nothing.
-  **Every existing edge is C until graded.** Every `_dropped` entry with
-  a lead-type reason is also, conceptually, C.
+  **Every existing edge is C until graded.** Every `_dropped` entry with a
+  lead-type reason is, conceptually, C.
 
-`evidence_quote` becomes required for A. The three existing evidence
-warnings (no URL / bare homepage / index page) stay as warnings; the
-promotion gate is replaced by the grade: an A edge with any of those three
-conditions is a validator **error**.
+The three existing evidence warnings (no URL / bare homepage / index page)
+stay warnings for B and C and become **errors for A**.
 
-Direction: the five reversed JP/KR edges and two BR "complementary" edges
-found by the audit are handled by a new validator error — any (A,B) with
-(B,A) also live is an error unless both carry `mutual: true` and a basis
-naming the other. Renaming the fields to `consumer_id`/`input_id` was
-considered and deferred: 347 slice files plus the seed files plus every
-script — the validator check buys most of the safety for none of the
-churn.
+**Fifth relationship type: `legal_basis`** (Q1–Q4). "This figure is
+calculated under Regulation X, made under Act Y" is a chain the project is
+for. Rules:
+- An edge from a publication (or standard) to the instrument it names as
+  its legal/methodological basis is `legal_basis`, not
+  `methodology_depends_on`.
+- Instrument→instrument `legal_basis` edges (regulation → enabling Act)
+  are allowed **only when both instruments are already in the graph for
+  another reason** — never mint an Act because a regulation cites it
+  (Q2: agree).
+- Drawn like a data edge with **no teardrops** (nothing flows along a legal
+  basis at a cadence) and a slightly different hue; instruments are
+  already hollow, so the eye can tell (Q3: yes).
+- **Counts toward node size and ranking** (Q4: yes — Thomas's call,
+  against the recommendation). Consequence accepted: statistics acts will
+  become large hollow spheres in every country. A view toggle "rank by
+  legal basis" (default on) lets the data-only picture be seen.
 
 ## 3. What the graph shows
 
-Three edge intensities from grade: **A near-solid, B faint, C near-
-invisible** (present enough to see the lead exists, not enough to read as
-a fact). Node size and the authority ranking are computed from **A edges
-only**; a view toggle (`view.minGrade`, default A once the first grading
-batch lands, C until then) widens to B or C. Isolate/trace follow the same
-toggle. The Unlinked shelf is unchanged — a node with no A edge at the
-default setting appears in the scene only if it has a B/C edge and the
-toggle shows those; otherwise it is on the shelf like today.
+**Three edge intensities from grade** — A as today; B ~0.35 opacity with
+pulses; C **hidden by default**, drawn at ~0.08 opacity with no pulses
+when `view.minGrade` is set to C (Q8: ok). Node size and the authority
+ranking are computed from **A edges only**; `view.minGrade` (default C
+until the first grading batch lands, then A) widens to B or C. A node
+whose best edge is below the toggle is on the Unlinked shelf (Q10: ok).
+The node card always shows the per-grade edge counts ("A 3 · B 1 · C 7").
 
-Self-citation discount in the ranking (`graph.ts` pagerank): an edge whose
-consumer is published by the input's own publisher or founding body does
-not accrue rank. This is what stops `brics-ndb-agreement-2014` sitting at
-#3 on the strength of the NDB's own documents.
+**Self-citation discount** (Q9: yes): an edge whose consumer is published
+by the input's own publisher or founding body does not accrue rank.
+`graph.ts` pagerank, ~20 lines. Removes `brics-ndb-agreement-2014` from
+the top 10.
 
 ## 4. The grading pass
 
@@ -90,97 +117,143 @@ not accrue rank. This is what stops `brics-ndb-agreement-2014` sitting at
    `evidence_url` with a browser UA, follow redirects, record real status,
    final URL, content-type, size. Detect WAF/JS shells by body, not code.
 2. Extract text (`pdftotext -layout` for PDF, tag-strip for HTML,
-   `word/document.xml` for docx). **Cache the extracted text** under
-   `evidence-cache/<sha256-of-url>.txt` with a header (url, fetched-at,
-   status, final-url). This is the link-rot fix: re-verification becomes a
-   diff, and a WAF-blocked host only has to be read once (in a browser).
-3. Locate the quoted span(s) from `basis`/`evidence_quote` in the body
-   (normalised, longest matching word-run). Grade per §2. Write
-   `evidence_grade`, `evidence_quote`, `_graded: {date, method, status}`
-   back into the slice JSON via a generator — never by hand.
-4. Unreachable from the sandbox (WAF, egress) → leave C, list for the
-   browser pass. Thomas's Chrome (Claude in Chrome) reads those in
-   batches; the page text is saved to the same cache and graded the same
-   way.
+   `word/document.xml` for docx). **Cache the extracted text**, committed
+   to git (Q11: ok): `evidence-cache/<sha256-of-url>.txt.gz` with a header
+   (url, fetched-at, status, final-url), capped at 250 KB per document
+   (hash + first 250 KB beyond that). This is the link-rot fix and the
+   permanent evidence record.
+3. Locate the quoted span(s) from `basis`/`evidence_quote` in the body.
+   Grade per §2.2. Write `evidence_grade`, `evidence_quote`,
+   `_graded: {date, method, status}` back into the slice JSON via a
+   generator — never by hand.
+4. Unreachable from the sandbox (WAF, egress) → leave C, emit the list.
+   **Browser pass** (Q12: yes): Thomas present, Claude in Chrome reads
+   the pages in batches of ~60–100, one host family per session (imf.org,
+   legislation.govt.nz, canada.ca, boi.org.il, `.gov.in`, `.gov.br`,
+   s-circabc — ~500 edges, ~5 sessions); text goes into the same cache and
+   is graded the same way.
 5. `_dropped` re-evaluation: only reasons `no-document`, `deferred`,
    `no-node-yet`, `unreadable-source`, and `note` entries the validator
    already counts as research leads. `denied`, `wrong-direction`,
    `wrong-target`, `unpublishable-source` are settled negatives — not
-   re-read. A lead that grades A is minted as a live edge (its `_dropped`
-   entry becomes `resolved`); B stays a lead with the finding recorded in
-   `why`.
+   re-read. A lead that grades A is minted live (its `_dropped` entry
+   becomes `resolved`); B stays a lead with the finding in `why`.
 
-Throughput measured in the audit: ~56 edges per agent-run of ~10 minutes,
-so the 2,748 live edges are roughly a day of agent time, batched by slice
-so validate runs between batches. Order: the slices behind the top-10
-authority nodes first (`sna-2008` has 40/100 in-edges with no URL), then
-the Grok-derived slices, then the hand-researched branches last (they
-mostly pass).
+Throughput: ~56 edges per ~10-minute agent run → the 2,748 live edges are
+roughly a day of agent time, batched by slice so validate runs between
+batches. Order: slices behind the top-10 authority nodes first (`sna-2008`
+has 40/100 in-edges with no URL), then Grok-derived slices, then the
+hand-researched branches (they mostly pass). The grader must reproduce
+the audit's 56-edge grades before it touches the corpus.
 
-**Grading is not research.** The grader reads what the edge already cites.
-Finding a *better* document for a B edge is a research round, done
-separately and by slice.
+**Grading is not research.** The grader reads what the edge already
+cites. Finding a better document for a B edge is a research round.
 
 ## 5. Data sources going forward
 
 Grok is for leads, not citations. Machine-readable metadata is for
 citations: the IMF DSBB JSON endpoint
-(`dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=&categoryCode=`)
-returns a methodology narrative for every SDDS/e-GDDS country and
-category; Eurostat ESMS pages are structured; SDMX metadata carries
-"source" fields. One scripted pass over those should yield hundreds of
-grade-A standards edges with no hallucination risk. Every new import round
-runs the grader on its own output before merge; a slice merges only when
-its A-share is reported alongside its count.
+(`dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=&categoryCode=`),
+Eurostat ESMS pages, SDMX metadata "source" fields. A scripted pass over
+those should yield hundreds of grade-A standards edges with no
+hallucination risk. Every new import round runs the grader on its own
+output before merge; a slice merges only with its A-share reported.
 
-## 6. Renderer work in the same programme
+## 6. View changes (decided 2026-09-02, "round 0")
 
-Three bugs from the audit, fixed before or alongside the intensity work
-(each its own validate-before/after round):
+- **Focus panel removed** — Built from / Feeds into / Isolate all go.
+  Click-to-trace stays (both directions, dim the rest). The Groups panel's
+  isolate is a separate mechanism and stays. Search's "outside isolate"
+  tag goes. Saved views / deep links carrying the old fields: ignored
+  silently, fields optional in the type for one release, then removed
+  (Q15: ok).
+- **Neighbourhood hops** ceiling 5 → 8, default stays 5 (Q14: ok).
+- **Cluster spread** 50%–1200%, default 100% (Q13: ok). The
+  `nodeScaleFor` cap is re-derived at 1200% before shipping — the rule
+  in `ViewControls.tsx` ("never move this ceiling without re-deriving
+  that cap") binds.
+- **International edges in a busy country isolate** (Q16: "b first"):
+  **per-galaxy camera fit** — in a country isolate, fit the camera to that
+  country's cluster and let INT nodes sit at the edge or off-screen. If
+  standards still fly after that, restore a weak INT spring
+  (`INT_LINK_STIFFNESS` 0 → 0.15). Never fake their position.
+- **Cluster repulsion is a force problem** (Q17: Thomas, against the
+  recommendation) — he wants clusters *actually* further apart, not just
+  framed better. The 2026-08-31 measurement says raw separation doubles
+  across the slider while on-screen moves 2–15%: the fit renormalises,
+  *and* intra-cluster spacing grows with the same charge. The lever is
+  the ratio inter-cluster distance ÷ cluster radius, so the work is: (a)
+  scale `FAMILY_REPULSION`/`COUNTRY_REPULSION` by spread (HANDOFF names
+  this as the unscaled term); (b) couple galaxy pull to repulsion so
+  clusters compact as they separate; (c) measure with
+  `scripts/measure-forces.ts` (2+ seeds, read `onscreen`) before and
+  after — PLAYBOOK rule 8. Ceiling stays 15 until the measurement says
+  otherwise.
 
-1. `nearestLinkAt` (`InfluenceGraph.tsx` ~3388) is dead code — d3 replaces
-   `link.source` with the node object, so `positionedById.get()` always
-   misses. Key on `typeof l.source === 'string' ? l.source : l.source.id`.
-2. Superseded `ThreeForceGraph` instances are never disposed — GPU leak on
-   every tier/filter/spread rebuild. Dispose geometries/materials of the
-   previous instance when the memo rebuilds.
-3. `runFit` re-assigns `fg.linkWidth` on >1% scale drift and three-
-   forcegraph recreates every link mesh — up to 5×/s during settle. Move
-   width to a uniform or widen the guard.
+## 7. Renderer bugs in the same round 0
 
-Then the batching job HANDOFF already names (merged link geometry, then
-instanced photons) before any round that grows the unfolded tier —
-today's Everything tier is ~8,200 draw calls; 2× the corpus is ~16k.
+1. `nearestLinkAt` (`InfluenceGraph.tsx` ~3388) is dead code — d3
+   replaces `link.source` with the node object. Key on
+   `typeof l.source === 'string' ? l.source : l.source.id`.
+2. Superseded `ThreeForceGraph` instances never disposed — GPU leak per
+   rebuild. Dispose the previous instance's geometries/materials when the
+   memo rebuilds.
+3. `runFit` re-assigns `fg.linkWidth` on >1% drift and three-forcegraph
+   recreates every link mesh (up to 5×/s during settle). Move width to a
+   uniform or widen the guard.
 
-## 7. Later, once grades exist
+Then the batching job (merged link geometry, then instanced photons)
+before any round that grows the unfolded tier.
 
-- **Cite the sentence** in the edge card: show the cached sentence in
-  context with the quote highlighted. The feature that makes a stranger
-  believe the graph.
-- **Continuous verification**: a scheduled `grade-evidence --recheck`
-  that re-fetches cached URLs, re-greps the quote, and demotes to C when
-  it is gone; surfaced in-app as "N edges lost their evidence".
-- **Coverage map**: nodes / A-edges / A-share per country as a map or
-  treemap, so the Canada-vs-Germany research-order bias is visible and
-  doubles as the research queue.
-- **Blast radius**: click a node → ranked downstream closure weighted by
-  cadence and grade.
-- **Time**: a slider that re-wires chains as `supersedes` edges take
-  effect (SNA 2025 replacing 2008).
+## 8. Later, once grades exist
 
-## 8. Order of work (each step = one round, validate before and after)
+Cite-the-sentence in the edge card (cached text, quote highlighted);
+continuous verification (`grade-evidence --recheck` on a schedule,
+demoting to C when the quote is gone, surfaced in-app); a coverage map
+(nodes / A-edges / A-share per country); blast-radius mode; a time
+slider over `supersedes`.
 
-1. Schema + validator: `evidence_grade`, `evidence_quote` required for A,
-   the three warnings → errors for A, bidirectional-pair error, `mutual`
-   flag. Fix the 7 direction/complementary edges found by the audit.
-2. Renderer: three intensities, A-only ranking, `view.minGrade` toggle
-   (default C for now), self-citation discount. Verify headless, then
-   Thomas looks.
-3. `scripts/grade-evidence.ts` + `evidence-cache/`, dry-run on the audit's
-   56-edge sample (it must reproduce the audit's grades), then batch 1:
-   the slices feeding `sna-2008`, `esa-2010`, `imf-e-gdds`, `imf-sdds`.
-4. Flip `view.minGrade` default to A. Start the browser pass on the
-   WAF/egress list.
-5. Renderer bugs 1–3 (§6). Can run in parallel with 3–4.
-6. `_dropped` lead re-evaluation, by slice.
-7. DSBB/ESMS scripted import (§5).
+## 9. Order of work (Q21: "Do round 0 first")
+
+0. **Round 0 — view changes + renderer bugs.** §6 and §7 in one round:
+   focus removal, hops 8, spread 50–1200 (+ cap re-derivation),
+   per-galaxy fit, the three bugs. Cluster-repulsion force work (§6 last
+   bullet) is its own measured sub-round, not bundled. Validate before and
+   after; headless verify; Thomas looks.
+1. **Schema + validator.** `kind` on Report; `evidence_grade`,
+   `evidence_quote` (required for A), `legal_basis` type, `mutual` flag;
+   the three warnings → errors for A; bidirectional-pair error; kind
+   cadence rules; self-citation flag. Move the 5 reversed JP/KR edges to
+   `_dropped` `wrong-direction` and the 2 BR "complementary" edges to
+   `deferred`. Merge `et-cpi` → `et-ess-cpi`; fold the JSP family and
+   per-year AG reports. Widen `isIndexPage()` with the per-host list from
+   the audit. Retype existing methodology→instrument edges as
+   `legal_basis` where the target's `kind` is `instrument` (generator,
+   not by hand). Validate: count drops by 7; every edge reads C.
+2. **Renderer grade pass.** Intensities, hidden-C, A-only ranking,
+   `view.minGrade` (default C), self-citation discount, legal-basis
+   styling + "rank by legal basis" toggle, per-grade counts on the card.
+3. **Grader.** `scripts/grade-evidence.ts` + `evidence-cache/`; dry-run
+   on the audit's 56; batch 1 = slices feeding `sna-2008`, `esa-2010`,
+   `imf-e-gdds`, `imf-sdds`; emit the browser-pass list.
+4. Flip `view.minGrade` default to A. Browser pass, one host family per
+   session.
+5. `_dropped` lead re-evaluation by slice; DSBB/ESMS scripted import.
+6. Link batching (merged geometry, instanced photons).
+
+## 10. Open from the question round
+
+- **Q18 (Grok folder) — blank.** Standing recommendation: delete locally +
+  commit if git tracks it (GitHub Desktop will show ~295 deletions);
+  otherwise move to `archive/`. Windows ownership fix is in the chat of
+  2026-09-02. Either way write `notes/mint-2026-08-20.md` first (37
+  slices point at it).
+- **Q19 — "I'm using Cowork."** Then the 08-30/31 memory entries HANDOFF
+  cites were written to a *different* project memory — Cowork keys memory
+  by the folder that was connected, so those sessions were most likely
+  opened on a different folder path (the parent `My Files`, or a copy).
+  Until found, the two earlier audit reports exist only in chat; pasting
+  them into `archive/audits/` closes this.
+- **Q20 — handoff committed 2026-09-02.** `InfluenceGraph.tsx` status
+  still unconfirmed; round 0 touches it, so it gets committed then.
+- **Q22 — blank.**

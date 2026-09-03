@@ -47,13 +47,23 @@ export interface ViewSettings {
   /** Slow automatic orbit. */
   autoRotate: boolean
   /**
-   * With a node selected, keep everything it rests on lit.
-   * Both focus toggles off leaves the selected node alone in the light, which
-   * is a legitimate way to find one report in a crowd.
+   * **Vestigial since round 0 (2026-09-03, Q15/HANDOFF "Focus panel
+   * removed").** The Focus panel's three checkboxes (Built from, Feeds
+   * into, Isolate) are gone from `ViewControls.tsx`; click-to-trace now
+   * always traces both directions and always dims rather than hides — see
+   * the `TRACE_BOTH_DIRECTIONS` constant in `App.tsx`, which is what every
+   * `computeFocus`/`computeGroupFocus`/`computeNeighbourhoodFocus` call site
+   * uses now instead of reading these fields. Left **optional** (not
+   * removed outright) so an old saved view or `?rig=` link carrying
+   * `focusBuiltFrom: false` degrades silently — the field parses, nothing
+   * reads it, the trace just runs both directions anyway (Q15: "ignore
+   * silently... fields stay optional in the type for one release, then
+   * go"). Delete this field, `focusFeedsInto` and `isolateFocus` below in
+   * the release after this one.
    */
-  focusBuiltFrom: boolean
-  /** With a node selected, keep everything built on it lit. */
-  focusFeedsInto: boolean
+  focusBuiltFrom?: boolean
+  /** See `focusBuiltFrom` immediately above — same vestigial status. */
+  focusFeedsInto?: boolean
   /**
    * With a node selected, HIDE everything outside the traced chain instead
    * of merely dimming it. Off by default — dimming is the ordinary way to
@@ -66,31 +76,39 @@ export interface ViewSettings {
    * isolated via `FilterState.scopes` would drop any edge to a DIFFERENT
    * country by the filter's own "both endpoints visible" rule (see
    * `filter.ts`), which is exactly the cross-border connections a country
-   * isolate is for. This reuses the existing focus/trace walk instead
-   * (`computeFocus` in `lib/selection.ts`) and turns its result into the
-   * visible set rather than a dim/lit split — select Israel's node or
-   * orb, flip this on, and the chain IS the whole scene. See the
-   * `isolateFocus` memo in App.tsx for how this composes with (and
-   * deliberately overrides, rather than intersects with) the scope filter.
+   * isolate is for. This reused the focus/trace walk (`computeFocus` in
+   * `lib/selection.ts`) and turned its result into the visible set rather
+   * than a dim/lit split — select Israel's node or orb, flip this on, and
+   * the chain IS the whole scene.
+   *
+   * **Removed as a user-facing control in round 0 (2026-09-03, Q15) along
+   * with the rest of the Focus panel.** The single-node HIDE mechanism this
+   * field drove is gone from `App.tsx`'s `visible` memo entirely — a
+   * selection now only ever dims. The Groups panel's own isolate
+   * (continent/bloc/publisher/country, `selectedGroupId`/`groupFocus`) is a
+   * SEPARATE mechanism, unaffected, and stays exactly as it was, so "just
+   * Israel and its connections" is still reachable — pick Israel from the
+   * Countries directory instead of tracing then isolating a single node.
+   * See `focusBuiltFrom` above for why this field stays in the type,
+   * optional, rather than being deleted outright yet.
    */
-  isolateFocus: boolean
+  isolateFocus?: boolean
   /**
    * Item 8 of the 2026-08-20 todo list: "show this node and everything
-   * within N hops." **0 means off** — the ordinary unbounded
-   * `focusBuiltFrom`/`focusFeedsInto` cones, unchanged. Any other value
-   * (1 through `NEIGHBOURHOOD_HOPS_MAX`) switches the selection to a
-   * bounded, HIDING isolate the same way `isolateFocus` does — see the
-   * `neighbourhoodFocus` memo in `App.tsx` for exactly how the two compose
-   * (this one wins when it is on; a selection cannot be both "everything it
-   * rests on" and "only N hops of it" at once, so they are not additive).
+   * within N hops." **0 means off** — the ordinary unbounded click-to-trace
+   * dim (both directions, see `TRACE_BOTH_DIRECTIONS` in `App.tsx`),
+   * unchanged. Any other value (1 through `NEIGHBOURHOOD_HOPS_MAX`) switches
+   * the selection to a bounded, HIDING isolate — see the `neighbourhoodFocus`
+   * memo in `App.tsx`.
    *
-   * A separate field from `isolateFocus` rather than reusing that boolean
-   * plus this as a modifier, on purpose: `isolateFocus` is "show me the
-   * WHOLE chain and nothing else", which is a real, complete answer someone
-   * may want with the slider left at 0. Folding them into one control would
-   * make "the whole chain" reachable only by cranking the hop slider high
-   * enough to exceed the graph's diameter, which is not the same thing and
-   * would not read as the same thing.
+   * **Originally a separate field from the single-node `isolateFocus`
+   * (removed round 0, 2026-09-03, Q15) rather than reusing that boolean plus
+   * this as a modifier, on purpose:** `isolateFocus` was "show me the WHOLE
+   * chain and nothing else", a real, complete answer someone may want with
+   * the slider left at 0, and they were not additive — `isolateFocus` won
+   * when both were on. That still explains why this stayed its own field
+   * instead of the modifier design, even with the other one gone; it just
+   * no longer has anything left to win over.
    *
    * Thomas's own framing for why this earns its place ahead of fancier
    * navigation ideas: "Filters today are by country and subject only. This
@@ -104,11 +122,25 @@ export interface ViewSettings {
    */
   zoom: number
   /**
-   * Layout spread — the multiplier applied to the whole layout scale, **2 to
-   * 100**, shown to the viewer as 200%–10000%. Default 2. (The header here
-   * said 2–10 until 2026-08-31; the ceiling went to 100 on 2026-08-20 — see
-   * the `spread` entry in `ViewControls.tsx` for the measurement that
-   * accompanied it and why ten times the spread buys a quarter more air.)
+   * Layout spread — the multiplier applied to the whole layout scale, **0.5
+   * to 12**, shown to the viewer as 50%–1200%. Default 1 (100%). (The header
+   * here said 2–10 until 2026-08-31; the ceiling went to 100 on 2026-08-20,
+   * then down to 12 on 2026-09-03 — see the paragraph below and the
+   * `spread` entry in `ViewControls.tsx` for the history.)
+   *
+   * **Range re-cut 2026-09-03, round 0 (Q13).** Floor 2 (200%) -> 0.5 (50%):
+   * the 200% floor was set 2026-08-19 because 100% was too dense for a
+   * 1,250-node corpus with no cluster-vs-cluster force; `clusterRepulsion`
+   * (2026-08-27, `lib/clusterRepulsion.ts`) now does real separation work
+   * independently of spread, so a dense spread no longer means an
+   * undifferentiated ball. Ceiling 100 (10000%) -> 12 (1200%): the old
+   * ceiling was chasing a "ten times the spread buys a quarter more air"
+   * saturation curve nobody was actually using that far out. Default
+   * 2 (200%) -> 1 (100%), Thomas's own recommendation (Q13), on the same
+   * reasoning as the floor — repulsion is doing separation now, so the
+   * starting point can come back down. **Never move this ceiling without
+   * re-deriving `nodeScaleFor`'s cap in `InfluenceGraph.tsx`** — see that
+   * function's own comment for the rule and the 2026-09-03 re-derivation.
    *
    * A slider rather than a fixed value, for the same reason a few of these
    * settings are: the right amount depends on the corpus. At 124 nodes the tight layout read as one constellation;
@@ -292,12 +324,11 @@ export const DEFAULT_VIEW: ViewSettings = {
   showEdges: true,
   showHorizon: false,
   autoRotate: false,
-  focusBuiltFrom: true,
-  focusFeedsInto: true,
-  isolateFocus: false,
+  // focusBuiltFrom / focusFeedsInto / isolateFocus deliberately absent —
+  // see their (now-optional) field comments above. Nothing reads them.
   neighbourhoodHops: 0,
   zoom: 1,
-  spread: 2,
+  spread: 1,
   geoAffinity: 1.5,
   galaxy: 1,
   clusterRepulsion: 1,
@@ -464,4 +495,4 @@ export const ZOOM_MAX = 2.6
  * non-linearly with it, so there is no equivalent cap to keep in sync. Raise
  * it freely if 5 hops turns out to still be everything on a dense hub node.
  */
-export const NEIGHBOURHOOD_HOPS_MAX = 5
+export const NEIGHBOURHOOD_HOPS_MAX = 8
