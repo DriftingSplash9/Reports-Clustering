@@ -7,7 +7,7 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-03 (round 0 build session, Edmonton)
+Last updated: 2026-09-03 (round 0 built + Thomas's confirmations, Edmonton)
 
 ---
 
@@ -48,10 +48,10 @@ Cluster spread range 200–10000 % → 50–1200 %, default 200 % → 100 %;
 country isolate (Groups panel) now fits the camera to that country's own
 node cluster (`isolatedCountry` prop, `InfluenceGraph.tsx`
 `measureFit`), so INT standards can sit off-screen on long spokes instead
-of shrinking the whole view. `INT_LINK_STIFFNESS` was deliberately left
-at 0 (Q16 makes the spring restore conditional on Thomas seeing the fit
-live first — see Todo item 1 below). Cluster-repulsion force tuning
-(Q17) was not touched — it's its own measured sub-round.
+of shrinking the whole view. Thomas has seen the fit live and likes it
+(2026-09-03) — `INT_LINK_STIFFNESS` stays at 0, no spring restore needed.
+Cluster-repulsion force tuning (Q17) was not touched — it's its own
+measured sub-round.
 
 **Renderer bugs fixed (all in `InfluenceGraph.tsx`):** `nearestLinkAt`'s
 dead `Map.get(id)` lookup now handles d3-force-3d's runtime mutation of
@@ -62,13 +62,13 @@ per-rebuild GPU leak. `runFit`'s link-mesh rescale now requires both
 >1 % drift and a 500 ms floor (`LINK_RESCALE_MIN_INTERVAL_MS`), instead
 of rebuilding the whole link mesh up to 5×/s during layout settle.
 
-**Two judgment calls needing Thomas's confirmation (Todo below):** (1)
-kept the Search panel's "outside isolate" tag, which Q15(a) said to
-remove — the code ties it to `groupFocus` (the surviving Groups-panel
-isolate), not the removed single-node `isolateFocus`, so removing it
-would reintroduce a documented regression; flagging the docx/code
-mismatch rather than silently overriding Q15(a). (2) `INT_LINK_STIFFNESS`
-left at 0 per Q16's explicit "b first" ordering.
+**Both round-0 judgment calls are resolved (Thomas, 2026-09-03):** kept
+the Search panel's "outside isolate" tag against Q15(a)'s literal text —
+Thomas confirmed keep it as-is (the code ties it to `groupFocus`, the
+surviving Groups-panel isolate, not the removed single-node
+`isolateFocus`, so removing it would reintroduce a documented
+regression). Per-galaxy camera fit: Thomas likes the new view live —
+`INT_LINK_STIFFNESS` stays 0, no spring restore.
 
 **Everything else from the pre-round-0 audit is unchanged and still
 open** (schema/kind/legal_basis, grader, evidence cache, browser pass,
@@ -83,24 +83,20 @@ drift watchdog + `__meshes` (2026-09-01) are all otherwise unchanged.
 
 ### [Thomas] — only you can
 
-1. Round 0 review: confirm the per-galaxy fit looks right, then say
-   whether `INT_LINK_STIFFNESS` still needs 0 → 0.15 (Q16) — deferred
-   deliberately, not forgotten. Confirm the Search "outside isolate" tag
-   should stay (judgment call above) or actually go per Q15(a).
-2. Commit round 0: `src/lib/view.ts`, `src/App.tsx`,
+1. Commit round 0: `src/lib/view.ts`, `src/App.tsx`,
    `src/components/ViewControls.tsx`, `src/components/InfluenceGraph.tsx`
    (never git-stated by an agent — PLAYBOOK rule 1).
-3. Still open from the audit: ruling **7** (37 dead-URL edges now or in
+2. Still open from the audit: ruling **7** (37 dead-URL edges now or in
    the grader), **13** (empty `_to_delete/`, move the two
    `archive/*.tar.gz`); **Q18** (Grok folder: delete+commit if tracked,
    else archive) and **Q19** (paste the two 08-30/31 audit reports into
    `archive/audits/` — different Cowork project memory than this one).
-4. Delete `_to_delete/audit-staging-2026-09-02.tar.gz` and this
+3. Delete `_to_delete/audit-staging-2026-09-02.tar.gz` and this
    session's four zip artifacts logged in `_to_delete/README.md`.
-5. Browser pass on the WAF/egress evidence list (imf.org,
+4. Browser pass on the WAF/egress evidence list (imf.org,
    legislation.govt.nz, canada.ca, boi.org.il, `.gov.in`, `.gov.br`,
    s-circabc) — wait for round 3's grader to produce the list.
-6. Real-GPU number for the unfolded Everything tier (still owed).
+5. Real-GPU number for the unfolded Everything tier (still owed).
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
@@ -115,7 +111,7 @@ drift watchdog + `__meshes` (2026-09-01) are all otherwise unchanged.
    Validate: count −7, all edges C.
 2. **Renderer grade pass.** Intensities (A as today, B ~0.35 + pulses,
    C hidden / ~0.08 no pulses when shown), A-only ranking + self-citation
-   discount, `view.minGrade` (default C) with reheat + refit (PLAYBOOK,
+   discount, `view.minGrade` (default C) with reheat + refit (PLAYBOOK
    rule 18), legal-basis hue + "rank by legal basis" toggle, per-grade
    counts on the node card.
 3. **Grader.** `scripts/grade-evidence.ts` + committed `evidence-cache/`
@@ -145,7 +141,7 @@ drift watchdog + `__meshes` (2026-09-01) are all otherwise unchanged.
 2. Copy it, unchanged, to `archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-
    HHMM-<topic>.md` (UTC date and time in the title, topic = what the
    superseded state was about). Verify the copy (`sha256sum` both).
-   **Archive first, then rewrite** — there is no git safety net (PLAYBOOK,
+   **Archive first, then rewrite** — there is no git safety net (PLAYBOOK
    rule 1); an un-archived overwrite destroys the previous state.
 3. Write the new `HANDOFF.md` at the top level, same name, overwriting.
    Edit **Current state** and **Todo** directly — overwrite, don't
