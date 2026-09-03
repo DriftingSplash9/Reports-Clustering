@@ -7,83 +7,82 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-03 (round 1, schema + validator, built + verified)
+Last updated: 2026-09-03 (round 2, renderer grade pass, built + verified)
 
 ---
 
 ## 1. Read next
 
 `PLAYBOOK.md` → `notes/Midvamp - Revamp.md` (the plan of record) →
-`REPORTS.md` (design doc) → project memory
-`schema_validator_round_2026-09-03` (this round's story, incl. the
-legal_basis validator catching two kind mis-backfills) → project memory
-`midvamp-round-0-view-renderer` (previous round). Git status: never
+project memory `renderer_grade_round2_2026-09-03` (this round's story,
+incl. the two findings flagged below) → project memory
+`schema_validator_round_2026-09-03` (previous round). Git status: never
 state it (PLAYBOOK rule 1).
 
 ---
 
 ## 2. Current state
 
-**Round 1 (schema + validator) is built and verified, not yet committed
-by Thomas.** Corpus: **3,341 reports / 2,736 dependencies** (was
-3,351/2,748). `tsc --noEmit` clean, `npm run validate` 0 errors,
-`npm run build` clean, `tsx scripts/test-logic.ts` 123/123. Verified
-twice: once in a sandbox copy, then again from a fresh zip of the actual
-device files (not just the sandbox) after every fix was mirrored back —
-sha256 confirmed identical on every touched file. Full story in project
-memory `schema_validator_round_2026-09-03`.
+**Round 1 (schema + validator) AND round 2 (renderer grade pass) are
+both built and verified, not yet committed by Thomas.** Corpus unchanged
+by round 2: **3,341 reports / 2,736 dependencies**. `tsc --noEmit` clean,
+`vite build` clean, `tsx scripts/test-logic.ts` 123/123. `npm run
+validate` exits 1 — **not** a round-2 regression, see finding (b) below.
+Verified in a sandbox built from a fresh zip of the live device files,
+plus a headless Playwright pass (0 console errors across page load,
+onboarding dismiss, the View panel, all 3 Evidence buttons, the
+`rankByLegalBasis` checkbox). Full story in project memory
+`renderer_grade_round2_2026-09-03`.
 
-**Schema additions** (`src/lib/types.ts`): `Report.kind: 'publication' |
-'standard' | 'instrument'` (required, with cadence rules in `validate()`
-— publication needs `releases_per_year`, instrument forbids it, standard
-is unconstrained). `Dependency.evidence_grade?: 'A'|'B'|'C'` (absent =
-C) + `evidence_quote?` (required for A) + `mutual?: boolean`. New
-`RelationshipType` `'legal_basis'` (weight 0.5) with two validator
-rules: instrument→instrument requires the target to carry a second edge
-(never mint an Act because a regulation cites it), and a live
-bidirectional (A→B)+(B→A) pair is an error unless both sides are
-`mutual: true`. The three evidence warnings (no URL / bare homepage /
-index page) are now errors for grade-A edges — currently inert, all
-2,736 live edges are grade C (0 A, 0 B); the grader is round 3.
-`isIndexPage()` widened (per-host list). `isSelfCitation()` added to
-`graph.ts` (computed, informational only this round — 566/2,736 edges
-share a publisher; round 2 uses it for the PageRank discount).
+**What round 2 shipped**: grade-driven link opacity (A as today/0.13, B
+**louder** at 0.35 — deliberate, Thomas signed off this exact number, a
+weak lead is meant to flag itself; C dimmed to 0.08, no pulses); A-only
+ranking cut (fires only at `minGrade === 'A'` exactly, not at B) +
+unconditional `isSelfCitation()` PageRank discount; `view.minGrade`
+(default `'C'`, most permissive — every edge is still ungraded, round 3's
+job) and `view.rankByLegalBasis` (default on, Thomas's Q4 call) — both
+rebuild `graph` rather than live-ref, and get reheat+refit for free from
+the existing `onEngineStop` pipeline, so PLAYBOOK rule 18's ref+dual-
+effect pattern does not apply here (documented in code, not an
+oversight); legal-basis hue tint (`--ink-gold`) on link ink; per-grade
+edge counts (A/B/C) on the node detail card. **Ungraded edges are
+unaffected by all of this by design** — absence of `evidence_grade` is
+NOT treated as an implicit C for rendering or ranking (only the node-card
+count display uses that convention) — so the graph is not yet visually
+different from today, exactly as the plan's round-2 acceptance bar says
+it should be.
 
-**Corpus migration** (`notes/schema-validator-round-2026-09-03-
-migration.py`, run once against all 347 research files): `kind`
-backfilled everywhere, 5 reversed JP/KR edges → `_dropped`
-(`wrong-direction`), 2 BR edges → `_dropped` (`deferred`), `mutual`
-flags on genuine bidirectional pairs, `et-cpi` merged into
-`et-ess-cpi`, BRICS JSP family + BW/LS/MU auditor-general report
-editions folded onto series nodes (13 retired — full record in
-`notes/schema-validator-round-2026-09-03-fold-editions.json`),
-`methodology_depends_on` retyped to `legal_basis` wherever the target's
-`kind` is `instrument`.
+**Two findings for Thomas, not fixed this round (out of scope, nothing
+committed without review):**
 
-**What the new validator rule then caught, post-migration:** the first
-full validate surfaced 16 errors, all the new instrument-mint rule. Two
-were genuine `kind` mis-backfills the rule exposed as a side effect —
-`vn-population` (a real census/estimates publication, wrongly defaulted
-to `instrument` for lacking a confirmed `releases_per_year` — fixed to
-`publication` with a nominal `releases_per_year: 1`, read off its own
-title) and `imf-psds-guide` (a methodological manual, not a legal
-instrument — fixed to `kind: 'standard'`). The other 14 were genuine,
-correctly-classified leaf-instrument citations (laws/decrees a single
-document cites and nothing else in the corpus touches) — retyped
-`legal_basis` → `cites` per the rule's own stated intent, since minting
-a second edge to satisfy the check would be research, out of scope here.
-Full list of all 16 and the reasoning in project memory. **Backfill
-lesson for later rounds**: "no releases_per_year ⇒ instrument" is a
-decent default but false-positives on real publications with an
-unconfirmed cadence — `_cadence_resolution: "unknown"` is the tell.
+**(a) Self-citation discount is much bigger than the plan's own example.**
+The plan's named example (`brics-ndb-agreement-2014` dropping from the
+top 10) does NOT happen — its citing documents are published by "New
+Development Bank," not an exact string match to the node's own multi-
+government publisher line, so round 1's strict self-citation matcher
+(documented limitation, not changed this round) doesn't catch it. The
+REAL effect is much larger elsewhere: `eu-reg-223-2009` #9→#1905, `cpa`
+#10→#2399, `ru-rosstat-industrial-production-russia` #57→#2949,
+`ru-rosstat-grp-series` #16→#1832, plus ~a dozen more former top-60 nodes
+collapsing toward zero authority. Correct per spec, but a much bigger
+default-on ranking change than the plan implies, and currently no toggle
+to disable it. Needs Thomas's eyes before this reaches production
+ranking.
 
-**Everything else from the pre-round-0 audit is unchanged and still
-open** (grader, evidence cache, browser pass, coverage bias, dead/WAF
-URLs, repo hygiene, Grok folder) — see project memory
-`audit-2026-09-02-independent-technical` and Todo below.
-`INT_LINK_STIFFNESS = 0`, INT anchor folding, `CORE_PERCENTILE` 0.8,
-drift watchdog + `__meshes`, round 0's view/renderer changes are all
-otherwise unchanged.
+**(b) Pre-existing JP data regression from round 1's own migration**
+(this is why `npm run validate` exits 1 — 0 formal errors, 123/123 logic
+tests, purely `validate-data.ts`'s separate `danglingCaveats` check).
+`src/data/research/jp-kr-wiring-grok-2026-08.json` has three `reason:
+"caveat"` dropped-notes (`jp-population-census`→`jp-labour-force-survey`
+×2, `jp-retail-price-survey`→`jp-cpi` ×1) asserting those edges already
+exist live — but round 1's migration reversed those exact pairs into
+`_dropped`/`wrong-direction` in a different file
+(`jp-japan-grok-2026-08.json`), leaving the caveats stale. Needs a data
+round, not a renderer fix.
+
+**Everything else unchanged**: `INT_LINK_STIFFNESS = 0`, INT anchor
+folding, `CORE_PERCENTILE` 0.8, drift watchdog + `__meshes`, round 0's
+view/renderer changes.
 
 ---
 
@@ -91,49 +90,50 @@ otherwise unchanged.
 
 ### [Thomas] — only you can
 
-1. Commit round 0 AND round 1 (never git-stated by an agent — PLAYBOOK
-   rule 1). Round 1 touches: `src/lib/types.ts`, `src/lib/graph.ts`,
-   `src/lib/hierarchy.ts`, `scripts/validate-data.ts`,
-   `scripts/test-logic.ts`, `src/data/reports.ts`, all 347 files under
-   `src/data/research/` (migration touched all of them; 15 of those
-   touched again for the post-validation legal_basis/kind fixes above),
-   `public/corpus-data.json`, `notes/schema-validator-round-2026-09-03-*`
-   (new).
-2. Still open from the audit: ruling **7** (37 dead-URL edges now or in
+1. Commit rounds 0, 1, AND 2 (never git-stated by an agent — PLAYBOOK
+   rule 1). Round 2 touches: `src/lib/view.ts`, `src/lib/graph.ts`,
+   `src/App.tsx`, `src/components/linkVisuals.ts`,
+   `src/components/InfluenceGraph.tsx`, `src/components/ViewControls.tsx`.
+   Round 1's file list is unchanged from the previous handoff (see
+   archive).
+2. **New**: rule on finding (a) above — self-citation discount's real
+   magnitude — before it ships live (no toggle currently exists to turn
+   it off short of `rankByLegalBasis`, which is a different switch).
+3. **New**: the JP dangling-caveat data bug, finding (b) above — either a
+   quick data fix (drop or re-point the 3 stale caveat notes) or leave
+   for a dedicated data-hygiene round; your call on priority.
+4. Still open from the audit: ruling **7** (37 dead-URL edges now or in
    the grader), **13** (empty `_to_delete/`, move the two
    `archive/*.tar.gz`); **Q18** (Grok folder: delete+commit if tracked,
    else archive) and **Q19** (paste the two 08-30/31 audit reports into
    `archive/audits/` — different Cowork project memory than this one).
-3. Empty `_to_delete/` when convenient — it's accumulated several
-   sessions' zip artifacts (listed in `_to_delete/README.md`), none of
-   them needed once this round is confirmed committed.
-4. Browser pass on the WAF/egress evidence list (imf.org,
+5. Empty `_to_delete/` when convenient — accumulated several sessions'
+   zip artifacts (listed in `_to_delete/README.md`), none needed once
+   these rounds are confirmed committed.
+6. Browser pass on the WAF/egress evidence list (imf.org,
    legislation.govt.nz, canada.ca, boi.org.il, `.gov.in`, `.gov.br`,
    s-circabc) — wait for round 3's grader to produce the list.
-5. Real-GPU number for the unfolded Everything tier (still owed).
+7. Real-GPU number for the unfolded Everything tier (still owed).
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
-1. **Renderer grade pass (NEXT).** Intensities (A as today, B ~0.35 +
-   pulses, C hidden / ~0.08 no pulses when shown), A-only ranking +
-   `isSelfCitation()` discount, `view.minGrade` (default C) with reheat
-   + refit (PLAYBOOK rule 18), legal-basis hue + "rank by legal basis"
-   toggle (`view.rankByLegalBasis`, default on — Thomas's Q4 call), the
-   per-grade counts on the node card. Every edge is currently grade C,
-   so this round is UI/renderer plumbing, not yet visually different
-   from today until round 3 assigns real grades.
-2. **Grader.** `scripts/grade-evidence.ts` + committed `evidence-cache/`
-   (gz, 250 KB cap). Dry-run on `Claude outputs/audit-2026-09-02-
-   evidence-sample-56.json` — must reproduce the audit's grades. Batch 1:
-   slices feeding `sna-2008`, `esa-2010`, `imf-e-gdds`, `imf-sdds`. Emit
-   the browser-pass list.
-3. Flip `view.minGrade` default to A. Browser pass with Thomas.
-4. `_dropped` lead re-evaluation by slice; DSBB/ESMS scripted import.
-5. Link batching (merged geometry → instanced photons).
-6. Cluster-repulsion force sub-round (measured, `measure-forces.ts`,
+1. **Grader (NEXT).** `scripts/grade-evidence.ts` + committed
+   `evidence-cache/` (gz, 250 KB cap). Dry-run on `Claude outputs/audit-
+   2026-09-02-evidence-sample-56.json` — must reproduce the audit's
+   grades. Batch 1: slices feeding `sna-2008`, `esa-2010`, `imf-e-gdds`,
+   `imf-sdds`. Emit the browser-pass list. Consider the JP dangling-
+   caveat bug (finding (b) above) in scope if Thomas hasn't already
+   fixed it separately.
+2. Flip `view.minGrade` default to A. Browser pass with Thomas — and
+   show Thomas the self-citation ranking-magnitude numbers (finding (a))
+   before or alongside this, since that's when the A-only ranking cut
+   actually engages.
+3. `_dropped` lead re-evaluation by slice; DSBB/ESMS scripted import.
+4. Link batching (merged geometry → instanced photons).
+5. Cluster-repulsion force sub-round (measured, `measure-forces.ts`,
    2+ seeds, `onscreen`): scale `FAMILY_REPULSION`/`COUNTRY_REPULSION`
    by spread, couple galaxy pull. Kept separate per Thomas's Q17 ruling.
-7. Housekeeping when convenient: doc fixes under hygiene (README:130,
+6. Housekeeping when convenient: doc fixes under hygiene (README:130,
    REPORTS:9–32, PLAYBOOK:18–20, START-HERE:31/37); write
    `notes/mint-2026-08-20.md` then Grok folder per Q18; `check-urls.ts`
    → `evidence_url` with a timestamp.
