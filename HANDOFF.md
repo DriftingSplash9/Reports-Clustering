@@ -122,20 +122,12 @@ The `[layout] two fixed panels overlap` tripwire no longer fires below
 5. **D2 promotion**: 162 no-URL edges *with* a quote + 5 bare-homepage
    + 45 index-page edges are the whole remaining evidence debt. Once
    re-cited, flip the three warnings in graph.ts to errors.
-6. **F-11 decision (camera fit percentile)** — measured 2026-08-31 with the
-   force harness (2 seeds, ratios only, harness radii are not the app's):
-   p90 ≈ 0.9× the p95 radius, nearly no change; **p80 ≈ 0.6–0.8× → core
-   1.3–1.7× bigger on screen, 99% of connected nodes still inside the
-   wide (16:9) frame, but ~35 of 154 country centroids leave the vertical
-   frame; p70 ≈ 0.57× → core ~1.7×, 90–95% in frame horizontally, ~50–60
-   country centroids out; p50 ≈ 0.4× → core ~2.5×, only half the nodes and
-   a third to half of the countries in frame.** Node pixel size does not
-   change with the percentile (nodeScale is derived from the fit radius) —
-   only how much of the periphery is traded for core magnification.
-   `CORE_PERCENTILE` is one constant in `measureFit`; p80 is the honest
-   middle if you want it tighter, but per-galaxy fit (item 2) is the better
-   lever because it magnifies the cluster you asked for instead of
-   cropping everyone's periphery.
+6. ~~F-11 decision~~ **Decided 2026-09-01: `CORE_PERCENTILE` is 0.8**
+   (Thomas, after seeing p95 and p80 live at Everything tier: "that is
+   better imo"). Galaxies take ~a quarter more frame; cost is an
+   occasional straggler cluster nicked at the top/bottom edge at fit
+   zoom. Revert is the one constant in `measureFit` if it ever grates;
+   per-galaxy fit (item 2) remains the next lever.
 7. **Look at the compact layout** on a window under 1024px wide: Panels ▾ →
    Reports / Find / Calendar / View controls are submenus (Open/Close +
    Enabled). Known rough edge: the bottom dock's centre pills wrap over the

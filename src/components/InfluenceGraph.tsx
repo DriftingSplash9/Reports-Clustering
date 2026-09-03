@@ -2308,7 +2308,18 @@ export default function InfluenceGraph({
     const percentile = (sorted: number[], f: number) =>
       sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(f * (sorted.length - 1))))]
 
-    const CORE_PERCENTILE = 0.95
+    // 0.95 → 0.8, decided 2026-09-01 (audit F-11; Thomas, after seeing both
+    // live at Everything tier fully unfolded: "that is better imo"). What
+    // the change buys and costs, measured: the fit radius drops to the live
+    // p80 (3,068 vs a p95 of 4,051 on the run it was judged on), the
+    // galaxies take roughly a quarter more of the frame, and the price is
+    // an occasional straggler cluster nicked by the top/bottom frame edge
+    // at fit zoom — ~35 of 154 country centroids sit outside the VERTICAL
+    // frame in the harness probe, though the ~1.78× wider horizontal field
+    // keeps ~99% of connected nodes on a 16:9 window. The p95 rationale
+    // below (two-estimator agreement) described the old value; it is kept
+    // because the measurement method is the part worth rereading.
+    const CORE_PERCENTILE = 0.8
 
     // One refinement pass: the box centre is itself pulled off the bulk by the
     // same stragglers, so re-centre on the mean of whatever fell inside the
