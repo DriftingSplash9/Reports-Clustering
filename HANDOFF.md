@@ -1,88 +1,112 @@
 # HANDOFF — working document
 
 **One handoff file, top level, ever.** State only — what's live, blocked,
-next. Rules/traps/architecture: `PLAYBOOK.md`. Finished-round narrative:
-project memory (`project_memory_read`) and `archive/Previous Handoffs/`.
+next. Rules/traps/architecture: `PLAYBOOK.md`. Design of the current
+programme: `notes/Midvamp - Revamp.md`. Finished-round narrative: project
+memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
-**Keep under ~10k characters.** State only, no changelog — see §4 rule 2.
+**Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-08-31
+Last updated: 2026-09-03 02:20 UTC (2026-09-02 evening, Edmonton)
 
 ---
 
 ## 1. Read next
 
-`PLAYBOOK.md` → `REPORTS.md` (design doc) → project memory for what prior
-rounds found. Git status: never state it (PLAYBOOK rule 1).
+`PLAYBOOK.md` → `notes/Midvamp - Revamp.md` (the plan of record) →
+`REPORTS.md` (design doc) → project memory
+`audit-2026-09-02-independent-technical` → the audit itself,
+`Claude outputs/AUDIT-2026-09-02-independent-technical-audit.md` (+ 4
+ledgers beside it). Git status: never state it (PLAYBOOK rule 1).
 
 ---
 
 ## 2. Current state
 
 **3,351 reports · 2,748 dependencies · 979 isolated.** `npm run validate`
-(0 errors), `npm run gen` (347 slices, 0 unwired), `tsx
-scripts/test-logic.ts` (123/123), `tsc --noEmit`, `npm run build` all
-clean in a cloud sandbox, confirmed 2026-08-31 late evening.
-`public/corpus-data.json` is current.
+(0 errors), `npm run gen` (347 slices), `tsx scripts/test-logic.ts`
+(123/123), `tsc --noEmit`, `npm run build` all clean in a cloud sandbox,
+confirmed 2026-09-02 evening. `public/corpus-data.json` is current.
 
-**Second independent audit, 2026-08-31 evening — all rulings applied the
-same night (memory `audit_2026-08-31_second_independent` has the full
-record; report + 68-edge ledger were delivered in chat, not the repo).**
-Verdict HOLD WITH CAVEATS. Data: 23 edges citing the BRICS JSP publications
-index → `_dropped` `no-document` (`brics-jsp` fell from #3 out of the top
-10); 38 "consistent with" bases (28 Russian) → `deferred` leads (both
-Rosstat regional series out of the top 10); 6 agency-named-not-artefact
-edges → `no-document`; the 3 duplicate pairs merged (D6 closed; losers
-retired into `br-ibge-ipca`, `br-ibge-censo-demografico`,
-`ru-rosstat-russian-statistical-yearbook`, merge notes in the losers'
-files). Code: `isIndexPage()` warning + "URLs behind 10+ edges" list in the
-validator; rank-disagreement list gated to authority ≥ 0.05; compact layout
-below 1024px (`lib/useCompactLayout.ts` — top-row tabs fold into Panels ▾
-submenus). Docs: README, REPORTS.md, START-HERE, ViewControls comment,
-PLAYBOOK §7 (three new rulings). CIRCABC `…/details` URLs open in a real
-browser (fetch-hostile, not rotted). Commercial nodes stay. Weighted and
-raw rankings now agree on the top 4 exactly.
+**Programme: the Midvamp evidence-grade revamp — decided 2026-09-02,
+nothing built yet.** Thomas's rulings, all binding:
+- Nothing is archived or deleted. Every edge gets `evidence_grade`
+  (A/B/C, absent = C). **All existing edges are C until graded** — live,
+  and the lead-type `_dropped` entries too.
+- Three edge intensities from grade (A near-solid, B faint, C
+  near-invisible). Node size / ranking from A only, `view.minGrade`
+  toggle (default C until the first grading batch lands, then A).
+- `_dropped` lead-type reasons (`no-document`, `deferred`, `no-node-yet`,
+  `unreadable-source`, lead `note`s) are re-read by the grader; settled
+  negatives (`denied`, `wrong-direction`, `wrong-target`,
+  `unpublishable-source`) are not.
+- Node definition unchanged; edge field names unchanged (rename deferred);
+  a bidirectional-pair validator error replaces the rename.
+Full design and order of work: `notes/Midvamp - Revamp.md` §8.
 
-**First audit's rulings applied 2026-08-31 (Thomas: 1-A, 2-A, 3-A) — memory
-`audit_rulings_applied_2026-08-31` has the full record** (463 assertion-only
-edges → `_dropped`; 32 treaty + 62 derivation-note nodes retired,
-`notes/retired-nodes-2026-08-31.json`; 166 publishers rewritten). Validator
-prints PUBLISHERS (0) beside EVIDENCE (162 no-URL-with-quote, 5
-bare-homepage, 45 index-page — the whole remaining debt) and
-DUPLICATE-SHAPED (0). **Promotion gate: when EVIDENCE reads 0/0/0, flip
-graph.ts's three warnings to errors.**
+**Audit findings that the programme's first rounds must absorb** (details
+and file:line in the report):
+- Evidence sample (56 edges, raw-fetched): PASS 50 % / WEAK 25 % /
+  FAIL-CONTENT 14 % / FAIL-URL 11 %. Grok-derived slices are the failures.
+- 5 direction-reversed live edges (`jp-japan-grok`: FIES→CPI, RPS→CPI,
+  Census→LFS; `kr-south-korea-grok`: HIES→CPI, Census→EAPS) + 2 BR
+  "complementary" `cites` edges (`br-bcb-nota-fiscal-abaixo-linha` ⇄
+  `br-stn-resultado-tesouro-nacional`). Fix in round 1.
+- Duplicate pair the validator can't see: `et-cpi` vs `et-ess-cpi`.
+  BRICS JSP family is 5 nodes for one publication line.
+- `sna-2008` (#2) has 40/100 in-edges with no URL. `brics-ndb-agreement-
+  2014` is #3 with 45/49 dependents NDB/summit documents (self-citation).
+- `isIndexPage()` misses ~50 more index edges (`stats.gov.cn/sj/ndsj/` 14,
+  `/english/PressRelease/` 4, `/StatisticalCommuniqu…` 8, `ndb.int/
+  governance/transparency-reporting/` 6, `gub.uy/instituto-nacional-
+  estadistica/` 6, `ess.gov.et/<topic>/` 8, `eac.int/overview-of-eac` 3,
+  `oversightboard.pr.gov/fiscal-plans/` 3, `inegi.org.mx/programas/<x>/` 3).
+- URL check of all 1,677 evidence URLs: 37 edges plainly dead (singstat
+  15, gccstat 4 …; ledger `audit-2026-09-02-url-check-1677.json`), 56 on
+  s-circabc (404 to fetchers, browser-only per earlier ruling, unverified),
+  ~500 edges (19 %) behind WAF/egress — browser pass needed.
+- `check-urls.ts` checks node `url` only, never `evidence_url`; ran once
+  (2026-08-20, Grok staging dir).
+- Coverage bias quantified: CA 272 nodes vs DE 13 / FR 6 / IT 7 / GB 13 /
+  CH 1; no DE/FR/GB/IT node in the top-40 ranking.
 
-**First real-GPU number (Radeon RX 580, 120 Hz monitor), folded
-Everything tier, 415 nodes:** 8.3 ms median → 120 fps, vsync-capped,
-GPU 35%, same with a node selected. Not the ceiling — the unfolded
-~2,500-node view is still unmeasured; snippet (with the
-`info.autoReset` fix) is in the artifact.
+**Renderer (audit, verified line-by-line):** (1) `nearestLinkAt`
+(`InfluenceGraph.tsx` ~3388) is dead — d3 replaces `link.source` with the
+node object, `positionedById.get()` always misses; missed-click/hover edge
+pick has never fired. (2) Superseded `ThreeForceGraph` instances never
+disposed — GPU leak per rebuild. (3) `runFit` re-assigns `linkWidth` on
+>1 % drift → three-forcegraph recreates every link mesh, up to 5×/s during
+settle. Also: `linkMaterials`/`flowMaterials`/`linkDataRef`/
+`prevGraphForLayout` share the `__meshes` hazard pattern (works only
+because both StrictMode runs refill identically). Draw calls ≈ N + 2.1 L
+(~8,200 at Everything); merged link geometry is required before 2×.
+Real-GPU numbers: still only the one RX 580 reading (folded, 120 fps).
 
-**Unlinked-node counts are stale here on purpose.** Recount from
-`public/corpus-data.json` before trusting any per-country number. Balkans
-(AL BA CH LI MD ME MK RS UA XK) are 1 node/1 edge each; 75 countries sit at
-zero domestic edges (memory `new_countries_tier_audit_2026-08-30`).
+**Layout:** INT springs OFF (`INT_LINK_STIFFNESS = 0`), INT folds to one
+`corb:INT` orb from tier 2 (`lib/intAnchor.ts`), `CORE_PERCENTILE` 0.8
+(2026-09-01). Cluster-repulsion 0–15 is weak by design — don't raise the
+ceiling. Drift watchdog + `__meshes` live since 2026-09-01 (`__rig.fit()`).
 
-**Layout: INT↔country link springs are OFF since 2026-08-31**
-(`INT_LINK_STIFFNESS = 0`; memory `layout_blob_diagnosis_2026-08-31`,
-`int_layer_treatment_2026-08-31`): INT tethers rest at
-`INT_TETHER_OPACITY` 0.16 and carry the beam (`INT_TETHER_BEAM_LIFT` 0.45);
-the international layer folds into one `corb:INT` orb from tier 2, placed
-at the cloud centroid by `lib/intAnchor.ts` (springless, on purpose); 16
-≥10-country standards carry standing labels (`standingLabels`). Headless-
-checked only; real-hardware look is Thomas's. **Cluster-repulsion 0–15**
-is weak for two stacked reasons — camera fit renormalises most of it, and
-`FAMILY_REPULSION`/`COUNTRY_REPULSION` aren't scaled by spread — re-measured
-2026-08-31 (2 seeds: raw separation doubles, on-screen +2–15%). Don't raise
-the ceiling; the INT-spring change is the lever that moved.
+**Repo hygiene (audit):** `Grok - Brics+israel and singapore/` is fully
+superseded (0 unexplained reports/edges) — archive it after writing
+`notes/mint-2026-08-20.md` (37 slices point at it; it doesn't exist).
+`notes/grok-diary.md` (PLAYBOOK §1/§5) doesn't exist either. Doc errors to
+fix in one pass: README:130 (no `slices` array — gen auto-discovers),
+REPORTS:9–32 (`Previous Handoffs/`, `BRICS/`, `planning/`, `sessions/`
+don't exist at root), PLAYBOOK:18–20 paths, START-HERE:31 (`BRICS/`) and
+:37 ("mid-revamp" — phases 0–2 shipped 08-19..21, phase 3 never built).
+`_to_delete/` (23 MB + 1 MB nested) and two 31 MB tarballs in `archive/`
+await Thomas's delete. Uncommitted set inferred from mtimes (never git):
+at most `HANDOFF.md` + `InfluenceGraph.tsx` — Thomas to confirm by
+GitHub Desktop screenshot.
 
-**Renderer perf items** from 2026-08-29 are closed; the ceiling on real
-hardware is per-object overhead (one material per link — 3,173 draw calls
-= 60 fps with one country open), not geometry. Unfolded FPS still owed.
-The `[layout] two fixed panels overlap` tripwire no longer fires below
-1024px (compact layout, F-12); it still guards the desktop row.
-
-**Auto-unfold** still dense — accepted, not being chased further.
+**Memory split:** entries HANDOFF used to cite (`audit_2026-08-31_second_
+independent`, `audit_rulings_applied_2026-08-31`, `layout_blob_diagnosis_
+2026-08-31`, `new_countries_tier_audit_2026-08-30`, `br_in_ca_wiring_
+round2_2026-08-30`, `af_ae_browser_recheck_2026-08-30`) are NOT in the
+project memory Cowork sessions read (newest there before 09-02 was
+08-27). The two earlier audit reports exist only in chat. Thomas to say
+where they live or paste them into `archive/audits/`.
 
 ---
 
@@ -90,122 +114,70 @@ The `[layout] two fixed panels overlap` tripwire no longer fires below
 
 ### [Thomas] — only you can
 
-1. **Render-consistency symptom: two causes found and fixed 2026-09-01**
-   (live in your Chrome, `__rig.fit()` dev hook). (a) Dev-only: React
-   `StrictMode` double-invokes the `forceGraph` memo; both `ThreeForceGraph`
-   instances ran their digest and the orphan's meshes overwrote the shared
-   `meshes` map, so lens / recolour / focus-dim / `nodeScale` painted
-   spheres that weren't in the scene (every scene sphere measured at scale
-   1.00) — "lens does nothing until cluster spread". Now a per-instance
-   registry (`__meshes`) swapped in by effect. (b) Everywhere: a hidden or
-   occluded tab stops rAF while three-forcegraph's 45s cooldown keeps
-   running, so the "settled" fit framed the 64-unit seed ball and the cloud
-   then grew 30× around the camera (p95 2,112 with the camera 700 out).
-   Now a drift watchdog re-fits when the live radius leaves ±40% of the
-   fitted one, and returning from hidden always refits unless you own the
-   camera. Watch for recurrence; the diagnostic is `__rig.fit()` in the
-   console (dev only).
-2. **Look at tier 2 (one International orb, faded spokes) and tier 4
-   with INT + your countries opened (labelled standards, faded
-   spokes).** Tunables if it's not right: `INT_TETHER_OPACITY` (0.16),
-   `INT_TETHER_BEAM_LIFT` (0.45), `LABEL_PIXELS` (13), the ≥10-country label gate (`standingLabels`),
-   `ANCHOR_PULL` (intAnchor.ts). Next lever after that: per-galaxy
-   camera fit (fit to the cluster you clicked, not the world). Then the
-   perf job: batch links into one material (draw calls are the ceiling —
-   3,173 calls = 60 fps with ONE country open).
-3. Watch for flicker / wrong z-order on real hardware. 2026-08-31's
-   `depthWrite: false` on hollow/soft nodes is the one mechanism found for
-   it; if it survives only in the *dimmed* state, `applyFocus` is next.
-4. **Real-GPU number** (audit P3): `npm run dev` in a Windows terminal,
-   Everything tier, read `renderer.info` + a frame-time sample. Nothing
-   perf-related can be judged until this exists.
-5. **D2 promotion**: 162 no-URL edges *with* a quote + 5 bare-homepage
-   + 45 index-page edges are the whole remaining evidence debt. Once
-   re-cited, flip the three warnings in graph.ts to errors.
-6. ~~F-11 decision~~ **Decided 2026-09-01: `CORE_PERCENTILE` is 0.8**
-   (Thomas, after seeing p95 and p80 live at Everything tier: "that is
-   better imo"). Galaxies take ~a quarter more frame; cost is an
-   occasional straggler cluster nicked at the top/bottom edge at fit
-   zoom. Revert is the one constant in `measureFit` if it ever grates;
-   per-galaxy fit (item 2) remains the next lever.
-7. **Look at the compact layout** on a window under 1024px wide: Panels ▾ →
-   Reports / Find / Calendar / View controls are submenus (Open/Close +
-   Enabled). Known rough edge: the bottom dock's centre pills wrap over the
-   tier bar at ~850px — the dock is a grid, so it can't overlap in the
-   tripwire's sense, but it looks cramped; not touched.
+1. Open rulings from the audit not yet decided: **5** (NDB #3: accept /
+   self-citation discount / re-mint — the plan assumes the discount), **7**
+   (fix the 37 dead-URL edges now or in the grading pass), **9** (GitHub
+   Desktop screenshot; commit `InfluenceGraph.tsx` if dirty), **12** (where
+   the 08-30/31 audit records live), **13** (empty `_to_delete/`, move the
+   two `archive/*.tar.gz`).
+2. Delete `_to_delete/audit-staging-2026-09-02.tar.gz` with the rest.
+3. Browser pass on the WAF/egress evidence list — only your Chrome can
+   read imf.org, legislation.govt.nz, canada.ca, boi.org.il, `.gov.in`,
+   `.gov.br`, s-circabc. Wait for round 3's grader to produce the list.
+4. Real-GPU number for the unfolded Everything tier (still owed).
 
-### [Agent] — next build rounds
+### [Agent] — next build rounds, in this order (plan §8)
 
-0. **Before any new import: the evidence rule is now checked in code.**
-   A new edge with no `evidence_url`, a homepage URL, or an index/listing
-   URL warns in `npm run validate` (EVIDENCE block, plus a "URLs behind
-   10+ edges" list — one URL rubber-stamping dozens of edges is the tell).
-   Don't add to the count. **The 162+5+45 re-citation round is the obvious
-   next agent job** — the 162 have their quote in `basis`; the 45
-   index-page edges (mostly `rosstat.gov.ru/folder/<n>` listings) need the
-   actual document; find it, verify HTTP status, add the URL.
-   Concentrated in ae-sa, andean, ir-iq-tr-sy, mexico, jp-kr and
-   ru-russia slices; many feed `sna-2008`. Three PLAYBOOK §7 rulings from
-   the second audit bind every future round: naming the agency ≠ naming
-   the artefact; "consistent with" is a lead, not a citation; an index
-   page is a homepage with a path. The 23 JSP-contribution and 38
-   consistency leads sit in `_dropped` with their original bases —
-   re-mint only against the JSP PDF's own source statements / the
-   yearbooks' own source notes. **D9
-   (isolate shelf)** is a UI task nobody owns yet: split the shelf's
-   count into "answered" (`_dropped` with a real reason — 386), "leads
-   only" (70) and "never looked at" (244); the `DroppedNote` disclosure
-   ratio is the number. **D8**: 1,156 nodes share a homepage `url`
-   (Indonesia 61 on bps.go.id, Egypt 39) — give them landing pages or say
-   they have none.
-
-1. **BR/IN/CA is mostly settled negatives, not a retry target** (memory
-   `br_in_ca_wiring_round2_2026-08-30` has the per-lead status). Still
-   open: 4 India state handbooks (Chhattisgarh, Karnataka, Maharashtra,
-   Odisha) network-blocked even via Wayback — try CDX-by-filename for
-   Odisha; Bihar-at-a-Glance found but scanned-image PDF, needs OCR;
-   IEA lead for `br-epe-anuario-energia-eletrica` unresolved.
-   `br-poa-anuario-estatistico` is a confirmed dead end.
-2. **EU branch is effectively closed.** Only genuinely new leads would
-   reopen it — don't re-sweep the 3 remaining isolated nodes.
-3. **Indonesia browser-retry list** (round 10 left these
-   `unreadable-source`, not dead ends): `id-water-resources`,
-   `id-marine-coastal`, `id-fishing-ports`, `id-provinces-structure`,
-   `id-producer-prices`, `id-health-facilities`, `id-ecommerce`,
-   `id-jakarta`, `id-java-west`, `id-java-central`, `id-java-east` (all
-   PDF-truncation, not access-blocked).
-4. **AE remaining gaps** (round 11 left these `no-document`, worth a
-   different data source): `ae-population`, `ae-education`, `ae-health`,
-   `ae-banking-credit`, `ae-ports-jebel-ali`, `ae-dmcc-trade`.
-   `ae-dld-realestate -> ae-construction` is `deferred` (JS PDF viewer) —
-   tried via browser 2026-08-30, didn't relocate the actual Annual Report
-   2024 PDF (dubailand.gov.ae's open-data section is a live transaction
-   query tool, not it) — still open, memory `af_ae_browser_recheck_2026-08-30`.
-5. **Cheap, still-untouched retries**: Iraq's GDP/National Income
-   metadata doc (cosit.gov.iq), Vietnam's VSIC 2018 decision, Iraq's
-   wage-bill clause (Budget Law 13/2023). NESDC Thailand — closed
-   negative, don't retry.
-6. **Genuinely still blocked, needing a different network route**: the
-   whole `*.cdmx.gob.mx` family, `issste.gob.mx`, `datos.imss.gob.mx`
-   (Imperva WAF), `webapps.peza.gov.ph`, `legacy.doe.gov.ph` and
-   `aodm.mnd.gov.tw` (egress policy), `ws.dgbas.gov.tw` (TLS chain), and
-   `psa.gov.ph` (Cloudflare JS everywhere — WebFetch reaches it but caps
-   quotes at 125 chars, not mintable). Try the Wayback Machine trick
-   (PLAYBOOK §6) on these before writing them off further.
+1. **Schema + validator round.** `evidence_grade` on `Dependency`
+   (absent = C), `evidence_quote` required for A, the three evidence
+   warnings → errors when grade is A, bidirectional-pair error with
+   `mutual: true` escape, self-citation flag on edges. Move the 5 reversed
+   JP/KR edges to `_dropped` `wrong-direction` and the 2 BR edges to
+   `deferred`. Merge `et-cpi` → `et-ess-cpi`. Widen `isIndexPage()` with
+   the per-host list above. Validate before/after; expect the count to
+   drop by 7 and every existing edge to read C.
+2. **Renderer round.** Three intensities from grade in `linkVisuals.ts`
+   (an opacity/width multiplier per grade — SET SIZES rule still holds,
+   weight lives in opacity), A-only authority in `graph.ts` + self-
+   citation discount, `view.minGrade` (default C for now) with the reheat
+   + refit pair (PLAYBOOK rule 18). Headless verify, then Thomas looks.
+3. **Grader round.** `scripts/grade-evidence.ts` + `evidence-cache/`
+   (gitignored or not — Thomas's call; ~1,700 text files). Dry-run on
+   `Claude outputs/audit-2026-09-02-evidence-sample-56.json` — must
+   reproduce the audit's grades. Then batch 1: slices feeding `sna-2008`,
+   `esa-2010`, `imf-e-gdds`, `imf-sdds`. Emit the WAF/egress list for
+   Thomas's browser pass.
+4. Flip `view.minGrade` default to A once batch 1 is in.
+5. Renderer bugs 1–3 (state above) — separate small round, can run
+   alongside 3–4.
+6. `_dropped` lead re-evaluation by slice; DSBB/ESMS scripted import
+   (plan §5).
+7. Housekeeping when convenient: doc fixes listed under hygiene; archive
+   the Grok folder; extend `check-urls.ts` to `evidence_url` with a
+   timestamped output.
 
 ---
 
 ## 4. How to hand off
 
-1. Edit **Current state** and **Todo** above directly — overwrite, don't
-   append. This file describes the present, not history.
-2. Delete finished items; don't leave "DONE" entries. A finished round's
-   story goes to **project memory**, not here.
-3. New standing rule or trap? `PLAYBOOK.md`, not here.
-4. Copy to `archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-<topic>.md` only
-   before a structural rewrite, not on routine turns.
-5. Write the project-memory entry as you go; if memory is down, park a
-   note in `notes/` and say so here.
-6. If this file is over ~10k characters, trim it before adding to it.
+**Thomas asks for a handoff; the agent does all of this, in this order:**
+
+1. Read this file first — it carries these instructions, and the state
+   it describes is what you are superseding.
+2. Copy it, unchanged, to `archive/Previous Handoffs/HANDOFF-YYYY-MM-DD-
+   HHMM-<topic>.md` (UTC date and time in the title, topic = what the
+   superseded state was about). Verify the copy (`sha256sum` both).
+   **Archive first, then rewrite** — there is no git safety net (PLAYBOOK
+   rule 1); an un-archived overwrite destroys the previous state.
+3. Write the new `HANDOFF.md` at the top level, same name, overwriting.
+   Edit **Current state** and **Todo** directly — overwrite, don't
+   append. State only, present tense, no changelog, no "DONE" entries.
+   Keep this §4 verbatim so the next agent knows the procedure.
+4. A finished round's story goes to **project memory** (write it as you
+   go; if memory is down, park a note in `notes/` and say so here). A new
+   standing rule or trap goes to `PLAYBOOK.md`. A design change goes to
+   `notes/Midvamp - Revamp.md` (or `REPORTS.md` if it changes direction).
+5. If this file is over ~10k characters, trim it before adding to it.
+6. Never state git status here. Never delete anything — `_to_delete/`.
 
 Only one `HANDOFF.md` at the top level, ever.
