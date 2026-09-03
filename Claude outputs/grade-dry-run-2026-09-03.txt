@@ -1,0 +1,75 @@
+DRY RUN — audit sample of 56; 56 still live, 0 no longer a live edge.
+
+  … 10/56
+  … 20/56
+  … 30/56
+  … 40/56
+  … 50/56
+
+CONFUSION — audit grade (rows) vs this script (columns)
+
+           script A   script B   script C   |  n
+  PASS  → A       10         17          1   | 28
+  WEAK  → B        0         12          2   | 14
+  FAIL  → C        0          1         13   | 14
+
+  agree 35/56  ·  stricter than the audit 20  ·  LOOSER than the audit 1  ← each of these is a bug
+
+LOOSER THAN THE AUDIT — the script graded these higher than a human did:
+  B vs FAIL-CONTENT  el-edp-inventory -> gr-elstat-government-finance  [agency-not-artefact]
+      audit: ELSTAT press release quote verbatim, but doc only announces EDP fiscal data; never mentions the EDP inventory (source) or any use relationship. Basis link to inventory is inference only.
+      span : The Hellenic Statistical Authority (ELSTAT) announces the fiscal data for the years 2015-2018 compiled in the context of the second Excessiv
+
+STRICTER — script below the audit, with the mechanical reason:
+  A→B  ke-equalisation-fund-appropriation-bill-2025 -> ke-constitution-article204-equalisation  [no-quoted-span; quote no 0; naming legal:constitution 204; flags no-quoted-span]
+  A→B  mz-pemba-ipra-page -> mz-lei-1-2008-regime-financeiro-autarquico  [no-quoted-span; quote no 0; naming legal:lei 1/2008; flags no-quoted-span]
+  A→B  sadc-hcpi-newsletter -> bw-statsbots-cpi  [no-quoted-span; quote no 0; naming title-run:3/3; flags no-quoted-span]
+  A→B  nl-provinciefonds -> nl-cbs-maatstaven-fvw  [artefact-named-elsewhere-in-document; quote yes 1; naming title-run:2/3; flags none]
+  A→B  eurostat-edp-notification-tables -> lv-csp-government-finance  [agency-not-artefact; quote yes 1; naming agency-only; flags none]
+  A→B  bea-pce -> bls-cpi  [no-quoted-span; quote no 0; naming title-run:3/3; flags no-quoted-span]
+  A→B  houston-adopted-budget -> houston-revenue-cap  [quote-found-target-not-named; quote yes 1; naming neither; flags none]
+  A→B  la-county-property-tax-apportionment -> la-county-secured-property-tax-bill  [quote-found-target-not-named; quote yes 1; naming neither; flags none]
+  A→B  on-budget -> statcan-cpi  [artefact-named-elsewhere-in-document; quote yes 0.97; naming title-run:3/3; flags none]
+  B→C  ab-tbf-fiscal-update -> ab-tbf-fiscal-plan  [no-quoted-span-target-not-named; quote no 0; naming neither; flags no-quoted-span]
+  B→C  bc-budget-fiscal-plan -> canada-health-transfer  [quote-not-in-document; quote no 0.31; naming title-run:3/3; flags none]
+  A→B  nz-auckland-annual-report -> nz-pbe-ipsas-1  [artefact-named-elsewhere-in-document; quote yes 1; naming title-run:7/7; flags none]
+  A→C  br-lc-62-1989 -> br-ibge-ipca  [quote-not-in-document; quote no 0.26; naming agency-only; flags none]
+  A→B  in-mohfw-national-health-profile -> in-mospi-srs  [no-quoted-span; quote no 0; naming title-run:3/5; flags no-quoted-span]
+  A→B  ar-eph-gba -> ar-censo-poblacion  [no-quoted-span; quote no 0; naming title-lead; flags no-quoted-span]
+  A→B  tz-nbs-cpi-dqa -> un-coicop-2018  [no-quoted-span-agency-only; quote no 0; naming agency-only; flags no-quoted-span]
+  A→B  gy-region-4 -> gy-census  [no-quoted-span; quote no 0; naming title-run:4/4; flags no-quoted-span]
+  A→B  cl-gasto-educacion -> cl-presupuesto-nacional  [no-quoted-span; quote no 0; naming title-lead; flags no-quoted-span]
+  A→B  statcan-ippi -> statcan-sut  [no-quoted-span-agency-only; quote no 0; naming agency-only; flags no-quoted-span]
+  A→B  eu-manual-qfagg -> esa-2010  [no-quoted-span; quote no 0; naming title-run:4/5; flags no-quoted-span]
+
+GRADES
+  A    10
+  B    30
+  C    16
+
+REASONS
+    13  no-quoted-span
+    10  quote-found-artefact-named
+     5  index-page
+     4  agency-not-artefact
+     4  artefact-named-elsewhere-in-document
+     4  quote-not-in-document
+     4  quote-found-target-not-named
+     3  no-quoted-span-agency-only
+     2  partial-quote
+     1  no-quoted-span-target-not-named
+     1  network:curl-6 Could not resolve host: archive.stats.govt.nz
+     1  empty:tiny-body
+     1  wall:cloudflare-challenge
+     1  wall:incapsula
+     1  network:curl-92 HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 
+     1  wall:akamai-deny
+
+BROWSER PASS — 5 edge(s) unreadable from here, by host:
+     1  archive.stats.govt.nz
+     1  localgovernment.vic.gov.au
+     1  boi.org.il
+     1  canada.ca
+     1  imf.org
+
+Full results written to /tmp/grade-dry-run-2026-09-03.json

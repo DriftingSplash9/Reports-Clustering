@@ -369,7 +369,11 @@ country/file/round, not a single site's own one-off quirk.
   to a path under `$HOME` (outside `mnt/`) and `cp` the finished zip in,
   or stream it: `zip -qr - <paths> > tmp_work/<new-name>.zip` works
   in-place. The mount also can't overwrite a same-named file — give each
-  re-run's zip a fresh name, `mv` the stale one to `_to_delete/`. Zip only
+  re-run's zip a fresh name, `mv` the stale one to `_to_delete/`. **Coming back
+  the other way, `unzip -o` into the repo fails the moment it has to replace
+  an existing file** ("cannot delete old ...: Operation not permitted" — rule
+  6 again): unzip to a scratch dir under `$HOME`, outside `mnt/`, and `cp` the
+  files over, which truncates in place and is allowed. Zip only
   `src/ public/ scripts/ package.json package-lock.json tsconfig.json
   index.html START-HERE.md` (+ the .md docs if editing them) — including
   `archive/`, `node_modules/` or `.git` times the call out at 408MB; the
