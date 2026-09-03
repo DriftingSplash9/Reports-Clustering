@@ -18,6 +18,11 @@ const TOGGLES: { key: keyof ViewSettings; label: string; hint: string }[] = [
   },
   { key: 'showHorizon', label: 'Horizon', hint: 'Sky gradient meeting the dark' },
   { key: 'autoRotate', label: 'Auto-orbit', hint: 'Slow automatic rotation' },
+  {
+    key: 'rankByLegalBasis',
+    label: 'Rank by legal basis',
+    hint: 'On (default): a statute cited as the legal basis of a country\'s statistics counts toward its size and ranking, same weight as a methodology dependency. Off: see the data-only ranking, legal_basis edges excluded — Midvamp round 2, Q4',
+  },
 ]
 
 const SLIDERS: {
@@ -154,6 +159,24 @@ const LENSES: { key: LensMode; label: string; hint: string }[] = [
     key: 'WORLD_OVERVIEW',
     label: 'World',
     hint: 'Seven continental inks: US, Canada, Europe, Africa, South America, Asia-Pacific, International. The full palette comes back when you filter',
+  },
+]
+
+const GRADES: { key: ViewSettings['minGrade']; label: string; hint: string }[] = [
+  {
+    key: 'A',
+    label: 'A only',
+    hint: 'Show and rank only raw-fetched, verified edges. Every edge is C until round 3\'s grader runs, so this hides everything today',
+  },
+  {
+    key: 'B',
+    label: 'A + B',
+    hint: 'Widen to loosely-supported edges too (drawn brighter, as a flag to review) — still hides ungraded C leads',
+  },
+  {
+    key: 'C',
+    label: 'Everything',
+    hint: 'Show every edge, including ungraded leads and confirmed-weak (C) ones, drawn faint — the default until grading exists',
   },
 ]
 
@@ -324,6 +347,31 @@ export default function ViewControls({
             </button>
           )
         })}
+      </div>
+      <div style={{ ...heading, marginTop: 14 }}>Evidence</div>
+      {/*
+        Midvamp round 2 (2026-09-03) — the floor of evidence quality a line
+        draws under, see `minGrade` in lib/view.ts for the full model.
+        Same button-row shape as Lens above, three states rather than a
+        checkbox because "how permissive" is the actual question, the same
+        reasoning the Neighbourhood-hops slider below uses for why it isn't
+        a toggle either.
+      */}
+      <div style={lensRow}>
+        {GRADES.map(({ key, label, hint }) => (
+          <button
+            key={key}
+            type="button"
+            title={hint}
+            onClick={() => set('minGrade', key)}
+            style={{
+              ...lensButton,
+              ...(view.minGrade === key ? lensButtonActive : null),
+            }}
+          >
+            {label}
+          </button>
+        ))}
       </div>
       <div style={{ ...heading, marginTop: 14 }}>Focus</div>
       {/*

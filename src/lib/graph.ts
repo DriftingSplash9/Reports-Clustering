@@ -1,6 +1,7 @@
 import type {
   Dependency,
   DroppedNote,
+  EvidenceGrade,
   EvidenceKind,
   Graph,
   RelationshipType,
@@ -1160,11 +1161,45 @@ export function pagerank(
  * do not count, because in_degree sits directly beside `authority` in the hover
  * card and two adjacent numbers computed over different edge sets would be a
  * trap. A node whose only edges are implied honestly reads 0.
+ *
+ * **Two more exclusions from the ranked subgraph, added 2026-09-03 (Midvamp
+ * round 2, the renderer grade pass):**
+ *
+ * - **Self-citations never rank**, unconditionally — `isSelfCitation` above,
+ *   enforced here rather than merely computed. An edge whose two endpoints
+ *   share a publisher is the NDB citing its own founding agreement, not
+ *   independent standing; the concrete effect this was written for is
+ *   `brics-ndb-agreement-2014` dropping out of the top 10 (Q9, plan §3).
+ * - **`legal_basis` edges rank only when `options.rankByLegalBasis` is not
+ *   explicitly false** (default true — Thomas's call, Q4, against the
+ *   recommendation to leave them out permanently). This is a toggle, not a
+ *   fixed exclusion, because he wants to be able to SEE the data-only
+ *   ranking on demand, not have it forced.
+ *
+ * **`options.minGrade === 'A'` additionally restricts ranking to edges
+ * carrying an EXPLICIT `evidence_grade: 'A'`.** At every other minGrade
+ * value the ranked set is unaffected by grade — see `evidence_grade`'s own
+ * doc comment in types.ts for why the switch is gated on 'A' specifically
+ * rather than following minGrade's B/C widening the way the renderer's line
+ * styling does. Absent (ungraded) `evidence_grade` is never treated as an
+ * implicit 'C' here, on purpose: the schema's "absent means C" convention
+ * is for validation and for the per-grade edge count on the node card, not
+ * for silently demoting the entire (still 100% ungraded, as of this round)
+ * corpus out of the ranking the moment `minGrade` is set to 'A' — that
+ * demotion is meant to happen when round 3's grader actually grades
+ * something, not as a side effect of this option existing.
  */
 export function buildGraph(
   reports: Report[],
   dependencies: Dependency[],
+  options: {
+    /** See the doc comment above and `minGrade` in view.ts. Default: no restriction. */
+    minGrade?: EvidenceGrade
+    /** See the doc comment above and `rankByLegalBasis` in view.ts. Default: true. */
+    rankByLegalBasis?: boolean
+  } = {},
 ): Graph {
+  const { minGrade, rankByLegalBasis = true } = options
   const inDegree = new Map<string, number>()
   const outDegree = new Map<string, number>()
   for (const r of reports) {
@@ -1184,12 +1219,22 @@ export function buildGraph(
   // sources outside the ranking, for the same sink-leak reason.
   const official = reports.filter(isRanked)
   const officialIds = new Set(official.map((r) => r.id))
-  const rankedEdges = dependencies.filter(
-    (d) =>
-      isDocumented(d) &&
-      officialIds.has(d.source_report_id) &&
-      officialIds.has(d.target_report_id),
-  )
+  const officialById = new Map(official.map((r) => [r.id, r]))
+  const rankedEdges = dependencies.filter((d) => {
+    if (!isDocumented(d)) return false
+    if (!officialIds.has(d.source_report_id) || !officialIds.has(d.target_report_id)) return false
+    // Grade gate — 'A' only, and only once the viewer has switched to it.
+    // See this function's own doc comment and evidence_grade's in types.ts.
+    if (minGrade === 'A' && d.evidence_grade !== 'A') return false
+    // Legal-basis ranking toggle — see rankByLegalBasis in view.ts.
+    if (!rankByLegalBasis && d.relationship_type === 'legal_basis') return false
+    // Self-citation discount — always on, not gated by either option above.
+    // See isSelfCitation's own doc comment for why this is enforced here.
+    const source = officialById.get(d.source_report_id)
+    const target = officialById.get(d.target_report_id)
+    if (source && target && isSelfCitation(source, target)) return false
+    return true
+  })
 
   const raw = pagerank(official, rankedEdges)
   const max = Math.max(...raw.values(), Number.EPSILON)

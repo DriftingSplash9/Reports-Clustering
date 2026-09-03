@@ -1,4 +1,5 @@
 import type { LensMode } from './modes'
+import type { EvidenceGrade } from './types'
 
 /**
  * Everything the viewer can turn on and off.
@@ -295,6 +296,58 @@ export interface ViewSettings {
    * `forceGraph` memo deps (see `lib/modes.ts` for the model and the rule).
    */
   lens: LensMode
+  /**
+   * The floor of evidence quality a line draws (and, at its strictest
+   * setting, ranks) under — Midvamp round 2 (2026-09-03), see EvidenceGrade
+   * in types.ts and §2.2/§3 of `notes/Midvamp - Revamp.md`.
+   *
+   * Grades rank A (best) > B > C (a lead), and this field is the loosest
+   * grade still drawn at normal/reduced style rather than hidden: 'A' shows
+   * only A edges, 'B' widens to A+B, 'C' widens to everything — see
+   * `EVIDENCE_GRADE_LINK_OPACITY` below for the per-grade line treatment.
+   *
+   * **Distinct from — and stricter than — the ranking switch.** Node size
+   * and the authority ranking read A edges only once this is 'A' (see
+   * `evidence_grade`'s own doc comment in types.ts and `buildGraph` in
+   * graph.ts); at 'B' or 'C' the ranking is unaffected regardless of what
+   * draws. Only edges carrying an EXPLICIT `evidence_grade` are subject to
+   * either rule — an edge nobody has graded yet (the ordinary case until
+   * round 3's grader runs) renders exactly as it always has and counts
+   * exactly as it always has, full stop; it is not silently treated as a
+   * 'C' lead just because the schema's absent-means-C convention would say
+   * so for validation purposes. Demoting the whole (currently 100% ungraded)
+   * corpus to lead-status by default the moment this field shipped would be
+   * a large, unreviewed visual regression this round explicitly is not
+   * supposed to be (HANDOFF.md, schema+validator round: "every edge reads
+   * C" but this round stays "not yet visually different from today").
+   *
+   * **Default 'C' — the most permissive setting — until round 3's grader
+   * assigns real grades**, per the plan's own ordering (§9: flipping the
+   * default to 'A' is round 4, after grading exists to flip to). Changing
+   * this rebuilds the graph (see the `graph` memo in App.tsx, which now
+   * takes it as a `buildGraph` option) rather than being read live off a
+   * ref the way `geoAffinity`/`galaxy`/`pulseRate` are — unlike those, a
+   * change here can move `size_score` itself, and nothing in this renderer
+   * resizes a mesh outside of a rebuild. The rebuild's own `onEngineStop`
+   * pipeline already reheats and refits on every `graph` change, which is
+   * why this setting does not need the ref+dual-effect pattern PLAYBOOK
+   * rule 18 requires for a live-tick force — it gets reheat+refit for free
+   * from the same mechanism a corpus reload or a `spread` change already
+   * use.
+   */
+  minGrade: EvidenceGrade
+  /**
+   * Whether `legal_basis` edges count toward node size and the authority
+   * ranking. Default **on** — Thomas's call (plan Q4), against the
+   * recommendation to leave them out: a statistics act cited as legal basis
+   * by every one of a country's releases will grow into a large hollow
+   * sphere under this setting, which is the accepted consequence, not a
+   * bug. Flip off to see the "data-only" ranking with `legal_basis` edges
+   * excluded (weight 0) instead of their ordinary 0.5 — same rebuild-not-
+   * live-ref reasoning as `minGrade` above, for the same reason (it moves
+   * `size_score`).
+   */
+  rankByLegalBasis: boolean
 }
 
 /**
@@ -334,6 +387,10 @@ export const DEFAULT_VIEW: ViewSettings = {
   clusterRepulsion: 1,
   pulseRate: 1,
   lens: 'STANDARD',
+  // Most permissive setting — see minGrade's own doc comment for why this
+  // stays 'C' (not 'A') until round 3 has actually graded something.
+  minGrade: 'C',
+  rankByLegalBasis: true,
 }
 
 /** Scene background — the renderer's clear colour, and the colour a link
@@ -483,6 +540,37 @@ export const DIM_LINK_COLOUR = '#1b2437'
 // constellation now, not a co-subject.
 export const LINK_OPACITY = 0.13
 export const DIM_LINK_OPACITY = 0.02
+
+/**
+ * Per-grade line opacity — Midvamp round 2 (plan §3, Q8): "A as today; B
+ * ~0.35 opacity with pulses; C hidden by default, drawn at ~0.08 opacity
+ * with no pulses when `view.minGrade` is set to C." Thomas signed off these
+ * exact figures, so B (0.35) is deliberately LOUDER than A's own baseline
+ * (0.13, `LINK_OPACITY`) — a graded-but-weak lead is meant to visually flag
+ * itself for review, where a confirmed A edge is meant to recede into the
+ * ordinary low-key wallpaper this file's other comments spend so many words
+ * defending. C, by contrast, is dimmer than the baseline (0.08): a lead
+ * nobody has verified is not supposed to compete for attention even when
+ * the viewer has deliberately widened `minGrade` to see it.
+ *
+ * Read where a link's material is built (`InfluenceGraph.tsx`'s `linkMap`
+ * loop) as the base LINK_OPACITY substitute — the existing cross-border and
+ * trunk-count multipliers still apply on top, same formula shape as always.
+ * `undefined`/ungraded edges use `LINK_OPACITY` directly, not this table —
+ * see `minGrade`'s own doc comment above for why.
+ */
+export const EVIDENCE_GRADE_LINK_OPACITY: Record<EvidenceGrade, number> = {
+  A: LINK_OPACITY,
+  B: 0.35,
+  C: 0.08,
+}
+
+/**
+ * Quality order, best first — index doubles as a rank for the `minGrade`
+ * comparison (`EVIDENCE_GRADE_RANK[grade] <= EVIDENCE_GRADE_RANK[minGrade]`
+ * means "at least as good as the floor, draw it").
+ */
+export const EVIDENCE_GRADE_RANK: Record<EvidenceGrade, number> = { A: 0, B: 1, C: 2 }
 
 export const ZOOM_MIN = 0.25
 export const ZOOM_MAX = 2.6

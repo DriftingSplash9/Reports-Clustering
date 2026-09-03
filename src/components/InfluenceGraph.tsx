@@ -3,7 +3,7 @@ import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import * as THREE from 'three'
 import ThreeForceGraph from 'three-forcegraph'
 import { forceCollide } from 'd3-force-3d'
-import type { Country, Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
+import type { Country, EvidenceGrade, Graph, JurisdictionLevel, ScoredReport } from '../lib/types'
 import { RELATIONSHIP_WEIGHT, radiusFor } from '../lib/graph'
 import {
   glowInk,
@@ -37,6 +37,8 @@ import { lensColourFor } from '../lib/modes'
 import {
   DIM_NODE_EMISSIVE,
   DIM_NODE_OPACITY,
+  EVIDENCE_GRADE_LINK_OPACITY,
+  EVIDENCE_GRADE_RANK,
   LINK_OPACITY,
   ZOOM_MAX,
   type ViewSettings,
@@ -44,6 +46,7 @@ import {
 import {
   edgeShade,
   gradientLinkMaterial,
+  legalBasisTint,
   pulseMaterial,
   resetLinkFlow,
   setLinkFlow,
@@ -130,6 +133,45 @@ interface LinkDatum {
    * folding, so this is rarely a real merge of two different answers.
    */
   continuousSource: boolean
+  /**
+   * The evidence grade this line renders at — Midvamp round 2, see
+   * EvidenceGrade in types.ts and EVIDENCE_GRADE_LINK_OPACITY in
+   * lib/view.ts. Copied straight off the underlying edge's own
+   * `evidence_grade` for an ordinary (non-trunk) link; for a trunk that
+   * collapses several parallel member edges (see `count`), merged by
+   * `betterGrade` below — **`undefined` if EITHER the edge itself is
+   * ungraded OR any trunk member is**, never defaulted to 'C'.
+   *
+   * `undefined` renders exactly as an 'A' edge always has: full opacity,
+   * normal pulses, always visible regardless of `view.minGrade`. This is
+   * deliberate, not a placeholder — see `minGrade`'s own doc comment in
+   * view.ts for why an edge nobody has graded yet is not silently treated
+   * as a lead. Only a line carrying an EXPLICIT grade is subject to the
+   * B/C intensity, hiding, and no-pulse rules.
+   */
+  grade?: EvidenceGrade
+  /**
+   * Every member this line stands for is a `legal_basis` edge (AND-merged
+   * across a trunk, the same direction `cross`/`continuousSource` merge
+   * with OR — a MIXED trunk falls back to the ordinary data-edge treatment
+   * rather than claiming a uniform legal-basis look it doesn't have).
+   * Drawn with the amber `legalBasisTint` (linkVisuals.ts) and zero
+   * teardrop pulses — "nothing flows along a legal basis at a cadence"
+   * (plan §2.2, Q3).
+   */
+  legalBasis: boolean
+  /**
+   * Whether `view.minGrade` (as of this build — see minGrade's own doc
+   * comment for why this is baked in at build time rather than read live)
+   * allows this line to draw at all. Computed once, right after `links` is
+   * assembled below, from `grade` and `EVIDENCE_GRADE_RANK` — kept as a
+   * plain field rather than a helper call at every read site because
+   * `shownLink` runs on every digest and a hidden 'C' lead should cost the
+   * same one property read as everything else it already checks.
+   * `undefined`-grade links are always `true` here — see `grade`'s own
+   * comment.
+   */
+  gradeVisible: boolean
   /**
    * Extra rest length for links touching high-degree nodes, precomputed at
    * build time (the d3 distance accessor sees mutated link objects, so
@@ -592,6 +634,24 @@ const PULSE_WIDTH_FACTOR = 2.4
  */
 function baseLinkWidth(_l: LinkDatum): number {
   return 1
+}
+
+/**
+ * Merge two edges' grades onto one trunk line — see LinkDatum.grade's doc
+ * comment for why `undefined` (ungraded) dominates rather than being
+ * treated as the worst grade: a trunk with even one unchecked member has
+ * not earned a demotion on the strength of its OTHER members. When both
+ * sides carry an explicit grade, the better one wins — the trunk shows
+ * whichever member has the strongest evidence, the same "an ANY question,
+ * not an average" logic `cross`/`continuousSource` already use on this
+ * datum.
+ */
+function betterGrade(
+  a: EvidenceGrade | undefined,
+  b: EvidenceGrade | undefined,
+): EvidenceGrade | undefined {
+  if (a === undefined || b === undefined) return undefined
+  return EVIDENCE_GRADE_RANK[a] <= EVIDENCE_GRADE_RANK[b] ? a : b
 }
 
 /**
@@ -1225,7 +1285,7 @@ export default function InfluenceGraph({
 
   const shownNode = (id: string) => !visibleRef.current || visibleRef.current.nodes.has(id)
   const shownLink = (l: LinkDatum) =>
-    !visibleRef.current || visibleRef.current.edges.has(l.key)
+    (!visibleRef.current || visibleRef.current.edges.has(l.key)) && l.gradeVisible
 
   const forceGraph = useMemo(() => {
     // Since blueprint's deletion (2026-08-19) NO view setting is a memo dep —
@@ -1502,6 +1562,8 @@ export default function InfluenceGraph({
         )
         existing.cross = existing.cross || cross
         existing.continuousSource = existing.continuousSource || continuousSource
+        existing.grade = betterGrade(existing.grade, e.evidence_grade)
+        existing.legalBasis = existing.legalBasis && e.relationship_type === 'legal_basis'
         continue
       }
       // Family ink, not fill — see the note on LinkDatum.colour.
@@ -1516,6 +1578,10 @@ export default function InfluenceGraph({
         endColour: downstream ? linkInk(downstream.country) : fallbackInk,
         cross,
         continuousSource,
+        grade: e.evidence_grade,
+        legalBasis: e.relationship_type === 'legal_basis',
+        // Filled in below, once `links` is final — see LinkDatum.gradeVisible.
+        gradeVisible: true,
         intTether,
         count: 1,
         hubRoom:
@@ -1543,6 +1609,15 @@ export default function InfluenceGraph({
       })
     }
     const links: LinkDatum[] = [...linkMap.values()]
+    // Bake in grade-visibility now that every trunk's final (merged) grade
+    // is known — see LinkDatum.gradeVisible's own comment for why this is a
+    // build-time field rather than a live read. `view.minGrade` is safe to
+    // read directly here (rather than off a ref) because a minGrade change
+    // is itself what makes this memo re-run — see minGrade's doc comment in
+    // view.ts and the `graph` memo in App.tsx.
+    for (const l of links) {
+      l.gradeVisible = l.grade === undefined || EVIDENCE_GRADE_RANK[l.grade] <= EVIDENCE_GRADE_RANK[view.minGrade]
+    }
     // For the screen-space edge picker — see registerEdgePicker on the props.
     linkDataRef.current = links
 
@@ -1571,14 +1646,23 @@ export default function InfluenceGraph({
       // A cross-border edge starts 1.3× brighter still (round 10): brightness
       // and the width boost below are the "bolder" half of the treatment, the
       // blinking pulse is the other.
-      const baseOpacity = LINK_OPACITY * (l.cross ? 1.3 : 1)
+      // Grade sets the base the cross-border/trunk multipliers scale from —
+      // see EVIDENCE_GRADE_LINK_OPACITY's own comment for why B is LOUDER
+      // than LINK_OPACITY, not dimmer. Ungraded (the ordinary case until
+      // round 3's grader runs) uses LINK_OPACITY directly, same as always.
+      const gradeOpacity = l.grade !== undefined ? EVIDENCE_GRADE_LINK_OPACITY[l.grade] : LINK_OPACITY
+      const baseOpacity = gradeOpacity * (l.cross ? 1.3 : 1)
       const fullOpacity = Math.min(0.55, baseOpacity * (1 + 0.35 * Math.log2(l.count)))
+      // legal_basis gets the amber tint before it goes through edgeShade —
+      // see legalBasisTint's own comment for why the order matters.
+      const fromInk = l.legalBasis ? legalBasisTint(l.colour) : l.colour
+      const toInk = l.legalBasis ? legalBasisTint(l.endColour) : l.endColour
       const material = gradientLinkMaterial(
         // The LINE draws in a softened shade of the ink; the pulse riding
         // it draws brighter (see edgeShade/PULSE_BRIGHTEN in linkVisuals) —
         // the datum keeps the PURE ink so pulses derive from the true hue.
-        edgeShade(l.colour),
-        edgeShade(l.endColour),
+        edgeShade(fromInk),
+        edgeShade(toInk),
         false,
         // A tether rests faded (see INT_TETHER_OPACITY) …
         l.intTether ? fullOpacity * INT_TETHER_OPACITY : fullOpacity,
@@ -1806,13 +1890,15 @@ export default function InfluenceGraph({
       // A continuous edge is 0 unconditionally, never `pulseCount` — it has
       // the beam instead (see LinkDatum.continuousSource), not the beam IN
       // ADDITION to pulses.
-      .linkDirectionalParticles((l: object) =>
-        (l as LinkDatum).continuousSource
-          ? 0
-          : litLink(l as LinkDatum)
-            ? pulseCount((l as LinkDatum).upstreamCadence)
-            : 0,
-      )
+      .linkDirectionalParticles((l: object) => {
+        const link = l as LinkDatum
+        // A 'C'-grade lead never pulses, shown or not (plan §3) — the same
+        // "no teardrops" treatment legal_basis edges get, for a different
+        // reason (this is about confidence, that is about what a citation
+        // of law even means). Both suppress independently of litLink/focus.
+        if (link.continuousSource || link.legalBasis || link.grade === 'C') return 0
+        return litLink(link) ? pulseCount(link.upstreamCadence) : 0
+      })
       .linkDirectionalParticleSpeed((l: object) =>
         pulseSpeed((l as LinkDatum).upstreamCadence) * pulseRateRef.current,
       )
@@ -3087,16 +3173,21 @@ export default function InfluenceGraph({
   useEffect(() => {
     applyFocus()
 
-    forceGraph.linkDirectionalParticles((l: object) =>
-      view.showPulses &&
-      !(l as LinkDatum).continuousSource &&
-      litLink(l as LinkDatum) &&
-      // A tether's direction cue is its beam — never teardrops. See
-      // INT_TETHER_BEAM_LIFT.
-      !(l as LinkDatum).intTether
-        ? pulseCount((l as LinkDatum).upstreamCadence)
-        : 0,
-    )
+    forceGraph.linkDirectionalParticles((l: object) => {
+      const link = l as LinkDatum
+      return view.showPulses &&
+        !link.continuousSource &&
+        litLink(link) &&
+        // A tether's direction cue is its beam — never teardrops. See
+        // INT_TETHER_BEAM_LIFT.
+        !link.intTether &&
+        // See the initial registration above (fg construction) for why
+        // legal_basis and grade 'C' also suppress pulses outright.
+        !link.legalBasis &&
+        link.grade !== 'C'
+        ? pulseCount(link.upstreamCadence)
+        : 0
+    })
     // The beam is a continuous edge's ONLY direction cue (see
     // LinkDatum.continuousSource) — it obeys the same Pulses toggle the
     // teardrops do, rather than always drawing regardless of that setting.

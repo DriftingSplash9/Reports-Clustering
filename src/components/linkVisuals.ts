@@ -357,6 +357,35 @@ export function edgeShade(ink: string): string {
 }
 
 /**
+ * The `legal_basis` hue shift — Midvamp round 2 (plan §2.2, Q3: "yes"):
+ * "Drawn like a data edge with no teardrops... and a slightly different
+ * hue; instruments are already hollow, so the eye can tell." The hollow
+ * instrument node is the primary cue; this is the secondary one on the line
+ * itself, so it stays a TINT of the ordinary family-ink gradient rather than
+ * a hue swap — a fully-recoloured line would fight the family-ink system
+ * this whole file exists to carry (see the LinkDatum.colour doc comment in
+ * InfluenceGraph.tsx: "line color should equal the rim color").
+ *
+ * The target ink is `--ink-gold` (uiTheme.ts, `#c2a86e`) rather than a new
+ * colour invented for this — that variable is already this app's "citation
+ * / documentary" accent (the report-URL link, the "changes" cadence note),
+ * so a legal-basis line reads as the same idea rather than a fourth unrelated
+ * hue.
+ */
+const LEGAL_BASIS_INK = '#c2a86e'
+const LEGAL_BASIS_TINT = 0.4
+
+/**
+ * Tint a family ink toward `LEGAL_BASIS_INK` before it goes through
+ * `edgeShade` — call this on the raw ink, same as `edgeShade` itself, not
+ * on an already-softened shade (tinting after softening would double up
+ * the lift toward white and wash the amber out).
+ */
+export function legalBasisTint(ink: string): string {
+  return `#${new THREE.Color(ink).lerp(new THREE.Color(LEGAL_BASIS_INK), LEGAL_BASIS_TINT).getHexString()}`
+}
+
+/**
  * The blinking pulse materials, registered so one `tickPulseBlink` call a
  * frame animates them all. A Set of materials rather than per-link state
  * because the cache below already shares one material across every link of a

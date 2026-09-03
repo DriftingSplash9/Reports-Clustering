@@ -172,7 +172,7 @@ import {
   colourForReport,
 } from './lib/palette'
 import { THEME_CSS, HUD_TOP } from './lib/uiTheme'
-import { DOMAINS, type Domain } from './lib/types'
+import { DOMAINS, EVIDENCE_GRADES, type Domain } from './lib/types'
 import type {
   Country,
   ReferencePeriod,
@@ -263,6 +263,11 @@ export default function App() {
    */
   const [corpus, setCorpus] = useState<AssembledCorpus | null>(null)
   const [corpusError, setCorpusError] = useState<string | null>(null)
+  // Declared here rather than beside `filter`/`selectedId` below (its
+  // original spot until 2026-09-03) because the `graph` memo a few lines
+  // down now reads `view.minGrade`/`view.rankByLegalBasis` — see that
+  // memo's own comment.
+  const [view, setView] = useState<ViewSettings>(DEEP_LINK?.view ?? STARTUP_VIEW?.view ?? DEFAULT_VIEW)
 
   useEffect(() => {
     let cancelled = false
@@ -300,8 +305,21 @@ export default function App() {
     const issues = validate(reports, dependencies)
     logGroupedIssues(console.error, issues.filter((i) => i.severity === 'error'))
     logGroupedIssues(console.warn, issues.filter((i) => i.severity === 'warning'))
-    return buildGraph(reports, dependencies)
-  }, [corpus])
+    // minGrade/rankByLegalBasis are the two Midvamp-round-2 ranking options
+    // (see buildGraph's own doc comment in lib/graph.ts) — they can move
+    // size_score itself, which nothing in this renderer resizes outside of
+    // a rebuild, so they are deliberately memo deps here rather than read
+    // live off a ref the way an ordinary view toggle is. This is the SAME
+    // exception `spreadApplied` already is for `view.spread` (see
+    // InfluenceGraph.tsx), not a new violation of "no view setting is a
+    // forceGraph memo dep" — that rule is about the memo in
+    // InfluenceGraph.tsx not depending on `view` directly, and it still
+    // doesn't; it depends on `graph`, which legitimately depends on these.
+    return buildGraph(reports, dependencies, {
+      minGrade: view.minGrade,
+      rankByLegalBasis: view.rankByLegalBasis,
+    })
+  }, [corpus, view.minGrade, view.rankByLegalBasis])
 
   /** Standing labels for the standards — on the base graph, see `standingLabels`. */
   const labelled = useMemo(() => standingLabels(graph), [graph])
@@ -379,7 +397,6 @@ export default function App() {
     DEEP_LINK?.selectedGroupId ?? null,
   )
   const [bounds, setBounds] = useState<GraphBounds | null>(null)
-  const [view, setView] = useState<ViewSettings>(DEEP_LINK?.view ?? STARTUP_VIEW?.view ?? DEFAULT_VIEW)
   const [filter, setFilter] = useState<FilterState>(
     DEEP_LINK?.filter ?? STARTUP_VIEW?.filter ?? NO_FILTER,
   )
@@ -2206,6 +2223,35 @@ function Detail({
         <Stat label="Depended on by" value={String(report.in_degree)} />
         <Stat label="Built from" value={String(report.out_degree)} />
       </div>
+
+      {/*
+        Per-grade edge counts — Midvamp round 2 (plan §3: "The node card
+        always shows the per-grade edge counts ('A 3 · B 1 · C 7')").
+        Counted over this report's OWN outgoing claims (`builtFromEdges`,
+        already computed above for the "Built from" list below) rather than
+        every edge touching the node either direction — this line answers
+        "how well is what THIS report says it depends on actually checked",
+        which is the question `evidence_grade` was added to answer. Absent
+        `evidence_grade` reads as 'C' here, unlike the renderer's line
+        styling (see EvidenceGrade in types.ts and `grade` in
+        InfluenceGraph.tsx for why those two deliberately disagree) — this
+        count is answering the schema's own question, not deciding what to
+        draw, so it uses the schema's own "absent means C" convention.
+      */}
+      {builtFromEdges.length > 0 && (
+        <div style={{ fontSize: 10.5, color: 'var(--ink-mute)', marginTop: 6 }}>
+          Evidence:{' '}
+          {EVIDENCE_GRADES.map((g, i) => {
+            const count = builtFromEdges.filter((e) => (e.evidence_grade ?? 'C') === g).length
+            return (
+              <span key={g}>
+                {i > 0 && ' · '}
+                {g} {count}
+              </span>
+            )
+          })}
+        </div>
+      )}
 
       <DisclosureBlock disclosure={disclosure.get(report.id)} />
 
