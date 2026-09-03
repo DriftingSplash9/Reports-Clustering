@@ -156,11 +156,34 @@ the audit's 56-edge grades before it touches the corpus.
   per-host fetch strategies moves ~106 of the 422 unreadable edges with no
   browser session at all. Do that build round BEFORE booking browser time;
   what survives it is the real browser list.
+
+  **Done 2026-09-03 (round 3d), and the ~106 estimate was right by accident.**
+  All three documented workarounds turned out NOT to be scriptable — each was
+  written for a human with a browser (BPS's signed link is read out of the
+  challenged page's DOM, IBGE's ftp mirror carries documents while the corpus
+  cites landing pages, the imf.org route drives the Google viewer). What worked
+  instead was a **generic archived-snapshot strategy on the cited URL**, plus
+  running the fetch on the bridge VM rather than through the cloud sandbox's
+  egress proxy. **422 → 232 unreadable; 187 documents read, 114 of them only
+  via a snapshot.** Full record: `notes/grader-host-strategies-2026-09-03.md`.
+
+- **A fetch strategy is a design decision about evidence, not plumbing, and it
+  has one standing rule** (round 3d): a strategy may change where the bytes come
+  from, never which document the edge is graded against. A snapshot may rescue a
+  wall, a transport failure or a JavaScript shell; it may **never** rescue a
+  404, because that is link rot the dead-URL list exists to measure. Every
+  substitution is recorded as `via:` in the committed evidence record.
+  **Open for Thomas: 15 of the 22 new A grades were read from an archived copy
+  rather than the live page.** The bar was not loosened to get them, but "the
+  quote was in this document on 2026-03-10" is a slightly different claim from
+  "the quote is in this document", and the two are currently graded the same.
 - **The `minGrade` → A flip (§9 item 4) cannot be the default until the
   backfill and the browser pass have run.** The dry run's 18% A-share was a
   sampling artefact of the audit's 56: corpus-wide it is **8.3%** (226 A of
   2,728). Flipping the default now shows a graph of 226 edges. The
-  destination is unchanged; the ordering is not optional.
+  destination is unchanged; the ordering is not optional. **Round 3d moved it
+  to 9.1% (248 A of 2,728)** — the direction is right and the magnitude says
+  the flip still waits on the backfill.
 
 **Grading is not research.** The grader reads what the edge already
 cites. Finding a better document for a B edge is a research round.

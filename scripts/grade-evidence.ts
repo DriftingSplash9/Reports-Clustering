@@ -34,6 +34,10 @@
  *                                     — grade every live edge whose target is one of these
  *   npx tsx scripts/grade-evidence.ts --slice af-cemac.json --slice af-sadc-hub.json
  *   npx tsx scripts/grade-evidence.ts --all              — the whole live corpus (hours)
+ *   npx tsx scripts/grade-evidence.ts --edges "Claude outputs/grade-batch2-debt-2026-09-03.json#browser_pass"
+ *                                     — RE-grade exactly these (source, target) pairs. This is the
+ *                                       selector for a re-grade; --skip-graded is the selector for a
+ *                                       forward pass and would select nothing here.
  *   npx tsx scripts/grade-evidence.ts --find-quotes --feeding sna-2008
  *                                     — propose `evidence_quote` sentences for edges whose
  *                                       basis has no quoted span. Writes a review file, never
@@ -43,6 +47,11 @@
  *          --json <out>, --limit <n>, --concurrency <n> (default 6),
  *          --skip-graded (ignore edges that already carry an `evidence_grade` —
  *                         use it when batching by slice file after an earlier batch),
+ *          --refetch (ignore the .evidence-fulltext/ scratch store and fetch again;
+ *                     REQUIRED after any change to how a document is fetched, or the
+ *                     cached failure is what gets re-graded),
+ *          --no-snapshot (disable the archived-snapshot fetch strategy — the
+ *                         measurement flag for "what this machine can read on its own"),
  *          --cache-dir <path> (default evidence-cache/), --selftest
  *
  * Two stores, one committed: `evidence-cache/` is the permanent evidence
@@ -554,6 +563,15 @@ export interface Fetched {
   truncated: boolean
   textSha: string
   fromCache: boolean
+  /**
+   * Empty when the text came from the cited URL itself. Otherwise the name of
+   * the fetch strategy that got it and where from — currently only
+   * `wayback <timestamp>`. It is written into the committed evidence record's
+   * header, because a reader has to be able to tell "this quote was in the
+   * document" from "this quote was in an archived copy of the document taken
+   * on 2026-03-10".
+   */
+  via: string
 }
 
 function urlKey(url: string): string {
@@ -573,6 +591,9 @@ function headerLines(f: Fetched): string {
     `text-chars: ${f.textChars}`,
     `text-sha256: ${f.textSha}`,
     `truncated: ${f.truncated}`,
+    // Omitted entirely on a direct read, so the 1,670 records written before
+    // fetch strategies existed stay byte-identical when they are re-recorded.
+    ...(f.via ? [`via: ${f.via}`] : []),
   ].join('\n')
 }
 
@@ -616,6 +637,7 @@ function readFullText(root: string, url: string): Fetched | null {
     textSha: head.get('text-sha256') ?? '',
     truncated: head.get('truncated') === 'true',
     fromCache: true,
+    via: head.get('via') ?? '',
   }
 }
 
@@ -664,7 +686,7 @@ function stripHtml(html: string): string {
  * body on disk for `pdftotext`, and the ability to say "the transport failed"
  * with a code rather than an exception string.
  */
-async function fetchOne(url: string): Promise<Fetched> {
+async function fetchRaw(url: string): Promise<Fetched> {
   const dir = mkdtempSync(join(tmpdir(), 'grade-'))
   const bodyPath = join(dir, 'body.bin')
   const now = new Date().toISOString()
@@ -776,7 +798,192 @@ async function fetchOne(url: string): Promise<Fetched> {
     truncated,
     textSha: createHash('sha256').update(full).digest('hex'),
     fromCache: false,
+    via: '',
   }
+}
+
+/* ------------------------------------------------------------------ *
+ * Fetch strategies
+ * ------------------------------------------------------------------ */
+
+/**
+ * **What a fetch strategy is, and the one rule it must not break.** A strategy
+ * is a SECOND route to the document the edge already cites — never a different
+ * document. Swapping in another source for a weak edge is research, and this
+ * script does not do research (file header). So a strategy may change where the
+ * bytes come from; it may not change what the edge is graded against, and the
+ * `via` field records the substitution in the committed evidence record.
+ *
+ * **What was measured, 2026-09-03, before writing any of this.** The round's
+ * brief was to wire PLAYBOOK §6's three documented workarounds for the biggest
+ * unreadable hosts into this function. All three were tested with curl from
+ * both the cloud sandbox and the bridge VM, and **none of them is scriptable
+ * as documented**:
+ *
+ * - `bps.go.id` → `web-api.bps.go.id`. The sibling host is real and unwalled
+ *   (`/download.php` answers with a PHP error rather than a challenge), but it
+ *   serves files only against a signed `download.php?f=<token>` whose token is
+ *   read out of the publication page's DOM — and the publication page is the
+ *   Cloudflare-challenged thing. The workaround was written for a human with a
+ *   browser and it still needs one. Indonesia's BPS also has no Wayback
+ *   snapshots at all, so the snapshot strategy below cannot reach it either.
+ * - `ibge.gov.br` → `ftp.`/`biblioteca.`/`concla.`. `ftp.ibge.gov.br` is wide
+ *   open, but it carries DOCUMENTS, and every ibge.gov.br URL the corpus cites
+ *   is a `/estatisticas/...` landing page with no file behind it. `biblioteca.`
+ *   and `concla.` are now Cloudflare-challenged themselves — §6 has gone stale.
+ * - `imf.org` → the Google-viewer route. `docs.google.com/viewer?url=…` returns
+ *   a 4.6 KB JavaScript shell to curl; the viewer is a browser instrument.
+ *   §6's premise is also backwards today: imf.org's `/-/media/…` PDFs read
+ *   fine with plain curl from an ordinary network, and it is the `/en/News/…`
+ *   press releases that Akamai denies.
+ *
+ * So this table holds one strategy, and it is the one that measured well.
+ */
+
+/** Availability API. `archive.org` answers it; `web.archive.org` serves the bytes. */
+const WAYBACK_AVAILABLE = 'https://archive.org/wayback/available?url='
+
+/**
+ * A block a snapshot is allowed to rescue. **`dead` is deliberately absent.**
+ * A 404 means the citation has rotted, and that is exactly what the dead-URL
+ * debt list measures; letting an archived copy quietly grade it A would hide
+ * the rot behind a good grade. A wall, a transport failure or a JavaScript
+ * shell say nothing about whether the citation is still valid — only that this
+ * machine could not read it — so those may be rescued.
+ */
+export function snapshotRescuable(block: Block): boolean {
+  return block === 'wall' || block === 'network' || block === 'empty'
+}
+
+/**
+ * The `id_` suffix is load-bearing: it asks the Wayback Machine for the
+ * ORIGINAL bytes, without its own injected toolbar and rewritten links. Without
+ * it every archived HTML page arrives carrying a few kilobytes of archive.org
+ * chrome, which is text the grader would then be matching quotes against.
+ */
+export function waybackFetchUrl(timestamp: string, url: string): string {
+  return `https://web.archive.org/web/${timestamp}id_/${url}`
+}
+
+/** Pure half of the availability lookup, so `--selftest` can assert on it. */
+export function parseWaybackAvailable(raw: string): string | null {
+  try {
+    const j = JSON.parse(raw) as { archived_snapshots?: { closest?: { timestamp?: string; status?: string; available?: boolean } } }
+    const c = j.archived_snapshots?.closest
+    if (!c || c.available === false) return null
+    if (c.status && c.status !== '200') return null
+    return /^\d{14}$/.test(c.timestamp ?? '') ? (c.timestamp as string) : null
+  } catch {
+    return null
+  }
+}
+
+/**
+ * **archive.org answers 429 long before this script would think to slow down.**
+ * A 300-URL pass at concurrency 6 exhausts the availability API's budget in
+ * under a minute, and a 429 is indistinguishable from "no snapshot exists"
+ * unless you look — which is how a rescue pass silently turns into a no-op.
+ * So every availability lookup goes through one global gate spaced by
+ * WAYBACK_MIN_GAP_MS regardless of pool width, retries a 429 with growing
+ * backoff, and the ANSWER (including "no snapshot") is cached on disk so a
+ * re-run costs archive.org nothing. The snapshot download itself is not gated:
+ * web.archive.org served four concurrent readers all round without complaint.
+ */
+const WAYBACK_MIN_GAP_MS = 1200
+const WAYBACK_RETRIES = 3
+let waybackGate: Promise<unknown> = Promise.resolve()
+
+function throttleWayback<T>(fn: () => Promise<T>): Promise<T> {
+  const next = waybackGate.then(async () => {
+    const r = await fn()
+    await new Promise((res) => setTimeout(res, WAYBACK_MIN_GAP_MS))
+    return r
+  })
+  // The gate must not break on one failed lookup, so the chain swallows.
+  waybackGate = next.catch(() => undefined)
+  return next
+}
+
+/**
+ * Split `body` from the trailing `-w '\n%{http_code}'` status curl appends.
+ *
+ * Trivial, and it gets its own exported helper because getting it wrong is
+ * silent and total. The first version of this searched for the two-character
+ * sequence `\n` instead of a newline; `lastIndexOf` returned -1, the status
+ * parsed as NaN, NaN matched neither the 429 branch nor the failure branch, so
+ * every lookup was treated as a CONCLUSIVE answer, the truncated body failed to
+ * parse, and the whole snapshot strategy cached "no snapshot exists" for every
+ * URL it was asked about — while reporting nothing at all. A rescue pass that
+ * rescues nothing looks exactly like a host that cannot be rescued.
+ */
+export function splitCurlWrite(stdout: string): { code: number; body: string } {
+  const at = stdout.lastIndexOf('\n')
+  if (at < 0) return { code: 0, body: stdout }
+  const code = Number(stdout.slice(at + 1).trim())
+  return { code: Number.isFinite(code) ? code : 0, body: stdout.slice(0, at) }
+}
+
+/** Cached availability answers. `""` is a real answer: no usable snapshot. */
+function snapshotCachePath(url: string): string {
+  return join(ROOT, FULLTEXT_DIR, 'wayback', `${urlKey(url)}.txt`)
+}
+
+async function findSnapshot(url: string): Promise<string | null> {
+  const cached = snapshotCachePath(url)
+  if (existsSync(cached)) {
+    const v = readFileSync(cached, 'utf8').trim()
+    return v || null
+  }
+  let answer: string | null = null
+  let conclusive = false
+  for (let attempt = 0; attempt < WAYBACK_RETRIES; attempt++) {
+    const got = await throttleWayback(async () => {
+      try {
+        const { stdout } = await execFileAsync(
+          'curl',
+          ['-sS', '-A', UA, '--max-time', '30', '--connect-timeout', String(CONNECT_TIMEOUT_S),
+           '-w', '\n%{http_code}', `${WAYBACK_AVAILABLE}${encodeURIComponent(url)}`],
+          { maxBuffer: 1 << 20 },
+        )
+        return splitCurlWrite(stdout)
+      } catch {
+        return { code: 0, body: '' }
+      }
+    })
+    if (got.code === 429 || got.code === 0) {
+      await new Promise((res) => setTimeout(res, WAYBACK_MIN_GAP_MS * (attempt + 2)))
+      continue
+    }
+    answer = parseWaybackAvailable(got.body)
+    conclusive = true
+    break
+  }
+  // Only a conclusive answer is cached. A run that ran out of budget must not
+  // bake "no snapshot" into the store for every URL it never got to ask about.
+  if (conclusive) {
+    mkdirSync(dirname(cached), { recursive: true })
+    writeFileSync(cached, answer ?? '')
+  }
+  return answer
+}
+
+/**
+ * One direct attempt, then the strategies. A strategy only ever runs after the
+ * direct read has failed in a way `snapshotRescuable` allows, and only its own
+ * clean result is returned — a snapshot that is itself walled, empty or gone
+ * leaves the ORIGINAL failure standing, so the browser-pass list keeps naming
+ * the real host and the real reason rather than "web.archive.org 404".
+ */
+async function fetchOne(url: string, args: Args): Promise<Fetched> {
+  const first = await fetchRaw(url)
+  if (args.noSnapshot || !snapshotRescuable(first.block)) return first
+  const ts = await findSnapshot(url)
+  if (!ts) return first
+  const snap = await fetchRaw(waybackFetchUrl(ts, url))
+  if (snap.block !== 'none' || !snap.text.trim()) return first
+  // Keyed and reported under the CITED url — the snapshot is a route to it,
+  // not a replacement for it. `final-url` and `via` carry where it came from.
+  return { ...snap, url, via: `wayback ${ts}` }
 }
 
 function blank(url: string, now: string, over: Partial<Fetched>): Fetched {
@@ -795,6 +1002,7 @@ function blank(url: string, now: string, over: Partial<Fetched>): Fetched {
     truncated: false,
     textSha: '',
     fromCache: false,
+    via: '',
     ...over,
   }
 }
@@ -828,6 +1036,8 @@ export interface GradeResult extends GradeInput {
   textChars: number
   extractor: string
   host: string
+  /** Empty on a direct read; otherwise the strategy that got the document. */
+  via: string
   /**
    * The verbatim passage the quote was found in, a sentence either side. This
    * is what goes into the committed evidence record; empty when nothing
@@ -868,6 +1078,7 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     blockLabel: fetched?.blockLabel ?? '',
     textChars: fetched?.textChars ?? 0,
     extractor: fetched?.extractor ?? 'none',
+    via: fetched?.via ?? '',
     quote: 'no' as QuoteVerdict,
     coverage: 0,
     bestSpan: '',
@@ -1012,6 +1223,46 @@ interface Args {
   selftest: boolean
   findQuotes: boolean
   skipGraded: boolean
+  /** `--edges <path[#key]>` — the exact (source, target) pairs to grade. */
+  edgeKeys?: Set<string>
+  edgesSpec?: string
+  noSnapshot: boolean
+  refetch: boolean
+}
+
+/**
+ * `--edges <path[#key]>` — **select on the work, not on the container.**
+ * PLAYBOOK §6 already records why batching by SLICE FILE is unsafe: the file is
+ * not the unit of work, so a re-run re-selects edges an earlier batch graded
+ * and a host that is merely down today rewrites yesterday's A as a C.
+ * `--skip-graded` answers that for a FORWARD pass, but it is exactly wrong for
+ * a re-grade, where every edge you want is already graded by construction.
+ *
+ * So a re-grade names its edges. The file may be a bare array of
+ * `{source, target}`, or an object with the array under a key —
+ * `--edges "Claude outputs/grade-batch2-debt-2026-09-03.json#browser_pass"` is
+ * the shape this was written for. Pairs the corpus no longer carries are
+ * reported, not silently dropped.
+ */
+function loadEdgeSelection(spec: string): Set<string> {
+  const hash = spec.lastIndexOf('#')
+  const path = hash > 0 ? spec.slice(0, hash) : spec
+  const key = hash > 0 ? spec.slice(hash + 1) : ''
+  const raw: unknown = JSON.parse(readFileSync(path, 'utf8'))
+  let rows: unknown[]
+  if (Array.isArray(raw)) rows = raw
+  else if (key) rows = ((raw as Record<string, unknown>)[key] as unknown[]) ?? []
+  else rows = Object.values(raw as Record<string, unknown>).filter(Array.isArray).flat()
+  const out = new Set<string>()
+  for (const r of rows) {
+    const o = r as { source?: unknown; target?: unknown }
+    if (typeof o.source === 'string' && typeof o.target === 'string') out.add(edgeKey(o.source, o.target))
+  }
+  if (!out.size) {
+    console.error(`--edges ${spec}: no {source, target} pairs found`)
+    process.exit(2)
+  }
+  return out
 }
 
 function parseArgs(argv: string[]): Args {
@@ -1027,6 +1278,8 @@ function parseArgs(argv: string[]): Args {
     selftest: false,
     findQuotes: false,
     skipGraded: false,
+    noSnapshot: false,
+    refetch: false,
   }
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i + 1]
@@ -1044,6 +1297,9 @@ function parseArgs(argv: string[]): Args {
       case '--selftest': a.selftest = true; break
       case '--find-quotes': a.findQuotes = true; break
       case '--skip-graded': a.skipGraded = true; break
+      case '--edges': a.edgesSpec = v; a.edgeKeys = loadEdgeSelection(v); i++; break
+      case '--no-snapshot': a.noSnapshot = true; break
+      case '--refetch': a.refetch = true; break
       default:
         if (argv[i].startsWith('--')) {
           console.error(`unknown flag ${argv[i]}`)
@@ -1070,10 +1326,15 @@ async function pool<T, R>(items: T[], n: number, fn: (item: T, i: number) => Pro
 
 async function getDoc(url: string | undefined, args: Args): Promise<Fetched | null> {
   if (!url) return null
-  const cached = readFullText(ROOT, url)
+  // `--refetch`: a FAILED fetch is cached like any other, so the obvious way to
+  // re-grade an edge after teaching the fetcher a new route — just run it
+  // again — is a cache hit on the old failure and a silent no-op. Anything that
+  // changes how getDoc reads a document has to be paired with this flag or with
+  // an emptied .evidence-fulltext/.
+  const cached = args.refetch ? null : readFullText(ROOT, url)
   if (cached) return cached
   if (args.offline) return null
-  const f = await fetchOne(url)
+  const f = await fetchOne(url, args)
   writeFullText(ROOT, f)
   return f
 }
@@ -1143,7 +1404,7 @@ function selftest(): void {
     url: 'https://x.test/doc.pdf', fetchedAt: '', status: 200, finalUrl: 'https://x.test/doc.pdf',
     contentType: 'application/pdf', bodyBytes: 10, extractor: 'pdftotext', block: 'none', blockLabel: '',
     text: 'The Consumer Price Index is compiled monthly under the Statistics Act.', textChars: 68,
-    truncated: false, textSha: '', fromCache: false,
+    truncated: false, textSha: '', fromCache: false, via: '',
   }
   const target = { title: 'Consumer Price Index (CPI)', publisher: 'Stats Co', url: 'https://x.test/cpi' }
   const a = gradeEdge(
@@ -1173,6 +1434,25 @@ function selftest(): void {
     fetched,
   )
   t('an A carries its verbatim window', graded.grade === 'A' && graded.window.includes('Consumer Price Index'))
+  t('a wall/network/empty block may be rescued by a snapshot',
+    snapshotRescuable('wall') && snapshotRescuable('network') && snapshotRescuable('empty'))
+  t('a dead (404) citation may NOT be rescued by a snapshot',
+    !snapshotRescuable('dead') && !snapshotRescuable('none'))
+  t('wayback fetch url asks for the original bytes',
+    waybackFetchUrl('20260310034653', 'https://x.test/a.pdf') ===
+      'https://web.archive.org/web/20260310034653id_/https://x.test/a.pdf')
+  t('wayback availability parses a live snapshot',
+    parseWaybackAvailable('{"archived_snapshots":{"closest":{"status":"200","available":true,"timestamp":"20250531002924"}}}') === '20250531002924')
+  t('wayback availability rejects an empty answer, a non-200 snapshot and junk',
+    parseWaybackAvailable('{"archived_snapshots":{}}') === null &&
+      parseWaybackAvailable('{"archived_snapshots":{"closest":{"status":"404","timestamp":"20250531002924"}}}') === null &&
+      parseWaybackAvailable('<html>nope') === null)
+  t('curl -w status is split off the body, not left in it',
+    splitCurlWrite('{"a":1}\n429').code === 429 && splitCurlWrite('{"a":1}\n429').body === '{"a":1}')
+  t('a body with no trailing status is never read as a conclusive status',
+    splitCurlWrite('{"a":1}').code === 0 && splitCurlWrite('nonsense\nxx').code === 0)
+  t('an availability answer survives the split intact',
+    parseWaybackAvailable(splitCurlWrite('{"archived_snapshots":{"closest":{"status":"200","available":true,"timestamp":"20250531002924"}}}\n200').body) === '20250531002924')
   const failed = checks.filter(([, ok]) => !ok)
   for (const [name, ok] of checks) console.log(`  ${ok ? '✓' : '✗'} ${name}`)
   console.log(`\nselftest: ${checks.length - failed.length}/${checks.length} pass`)
@@ -1315,12 +1595,24 @@ function summarise(results: GradeResult[]): void {
   const blocked = results.filter(
     (r) =>
       !NOT_A_FETCH_PROBLEM.has(r.reason) &&
-      (r.block === 'wall' || r.block === 'network' || (r.block === 'dead' && r.status !== 404)),
+      // `empty` belongs here and was missing until 2026-09-03: a 200 that
+      // extracts to nothing is a JavaScript shell, which is a fetch problem in
+      // exactly the same sense as a challenge page — and the browser is exactly
+      // what fixes it. Leaving it out made this list 62 edges shorter than the
+      // debt list built from the same run.
+      (r.block === 'wall' || r.block === 'network' || r.block === 'empty' || (r.block === 'dead' && r.status !== 404)),
   )
   if (blocked.length) {
     const byHost = new Map<string, number>()
     for (const r of blocked) byHost.set(r.host, (byHost.get(r.host) ?? 0) + 1)
     console.log(`\nBROWSER PASS — ${blocked.length} edge(s) unreadable from here, by host:`)
+    for (const [h, n] of [...byHost].sort((a, b) => b[1] - a[1])) console.log(`  ${String(n).padStart(4)}  ${h}`)
+  }
+  const viaSnap = results.filter((r) => r.via)
+  if (viaSnap.length) {
+    const byHost = new Map<string, number>()
+    for (const r of viaSnap) byHost.set(r.host, (byHost.get(r.host) ?? 0) + 1)
+    console.log(`\nREAD VIA AN ARCHIVED SNAPSHOT — ${viaSnap.length} edge(s); the live host refused this machine:`)
     for (const [h, n] of [...byHost].sort((a, b) => b[1] - a[1])) console.log(`  ${String(n).padStart(4)}  ${h}`)
   }
   const dead = results.filter((r) => r.block === 'dead' && r.status === 404)
@@ -1346,6 +1638,7 @@ function selectEdges(
       // regression from a flaky fetch. Selection only — the grade table,
       // matching and naming helpers are untouched by this flag.
       if (args.skipGraded && d.evidence_grade) continue
+      if (args.edgeKeys && !args.edgeKeys.has(edgeKey(d.source_report_id, d.target_report_id))) continue
       wanted.push({
         source: d.source_report_id,
         target: d.target_report_id,
@@ -1612,7 +1905,7 @@ if (args.selftest) {
   await runFindQuotes(args)
 } else if (args.sample) {
   await runSample(args)
-} else if (args.all || args.feeding.length || args.slices.length) {
+} else if (args.all || args.feeding.length || args.slices.length || args.edgeKeys) {
   await runCorpus(args)
 } else {
   console.error('nothing selected — pass --sample <file>, --feeding <ids>, --slice <file>, --all or --selftest')

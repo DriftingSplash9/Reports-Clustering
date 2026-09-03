@@ -323,9 +323,13 @@ country/file/round, not a single site's own one-off quirk.
   Workaround: DSBB's Angular SPA calls a plain JSON API at
   `dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=X&categoryCode=Y`
   — hitting that directly returns the real narrative text.
-- **imf.org PDF *documents* (not press releases) 403 everything** —
-  WebFetch, curl, Wayback proxying, all 403. Fix: navigate Chrome to
-  `https://docs.google.com/viewer?url=<url-encoded-pdf-url>&embedded=true`.
+- **imf.org is walled the OTHER way round from what this entry used to say**
+  (re-measured 2026-09-03, round 3d). Its `/-/media/files/...` **PDFs read
+  cleanly with plain curl** from an ordinary network — all 11 the corpus cites
+  did; it is the `/en/News/Articles/...` **press releases** that Akamai denies,
+  from every route tried. The old Google-viewer fix is **not scriptable**:
+  `docs.google.com/viewer?url=...&embedded=true` returns a 4.6 KB JavaScript
+  shell to curl, so it needs a real browser or nothing.
   Use `find` (natural-language search), not `get_page_text`, to check
   whether a phrase exists in a long lazy-loaded document — `get_page_text`
   truncates at a byte cap.
@@ -340,8 +344,12 @@ country/file/round, not a single site's own one-off quirk.
   independent source before trusting a quote.
 - **ibge.gov.br** (Brazil — active BRICS work) sits behind a Cloudflare JS
   challenge that silently 403s WebFetch — use a real browser session, or
-  fetch documents directly from `ftp.ibge.gov.br` / `biblioteca.ibge.gov.br`
-  / `concla.ibge.gov.br`.
+  fetch documents directly from `ftp.ibge.gov.br` (still wide open 2026-09-03,
+  as is the `servicodados.ibge.gov.br` JSON API). **`biblioteca.` and `concla.`
+  are Cloudflare-challenged themselves now** — that half of this entry is dead.
+  And the ftp route only helps for DOCUMENTS: every ibge.gov.br URL the corpus
+  cites is an `/estatisticas/...` landing page with no file behind it, so for
+  those the answer is an archived snapshot or a browser.
 - **`mnr.gov.cn`** (China — active BRICS work) is entirely unreachable from
   the sandbox (DNS/proxy failure, both WebFetch and curl) — worked around
   via mirrors (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and gov.cn's own
@@ -455,6 +463,77 @@ country/file/round, not a single site's own one-off quirk.
   negative or locate text, but a mintable quote needs a real browser
   session or a non-PSA host carrying the same document — a PSA deck
   hosted at `unsiap.or.jp` is how the 2025-SNA question got settled.
+- **"The sandbox can't read it" and "the site is walled" are different
+  claims, and this repo has been conflating them.** The cloud sandbox routes
+  every request through an MITM egress proxy (`127.0.0.1:45017`, its own CA), so
+  what a site fingerprints and rate-limits is the PROXY, not curl. Measured
+  2026-09-03 over the same 300 URLs from both environments: the **bridge VM on
+  Thomas's machine read 18 URLs / 20 edges the sandbox could not**, imf.org's
+  PDFs among them, and **`web.archive.org` is blocked outright from the sandbox**
+  ("Blocked by egress policy" over http, connection reset over https) while
+  plain `archive.org` is allowed. Two workarounds that do NOT survive the proxy,
+  so don't retry them: `curl_cffi` with Chrome TLS impersonation is reset on
+  every host, and **headless Chromium cannot connect through it at all**, with
+  or without `--proxy-server` and `--ignore-certificate-errors`. **There is no
+  browser in the cloud sandbox** — a "browser pass" means Claude-in-Chrome or
+  the bridge VM. Before recording a host as walled, say which network you were
+  on.
+- **The whole toolchain runs natively in the bridge VM, and that is usually the
+  better place to run it than a staged cloud sandbox** (2026-09-03). Rule 4's
+  problem is the repo's WINDOWS `node_modules`, not the bridge shell: copy the
+  repo (minus `node_modules/`, `.git/`, `archive/`) to a scratch dir under
+  `$HOME` **outside `mnt/`**, `npm install` there (the VM has node 22, npm,
+  `pdftotext` and `unzip`), and `npm run validate`, `tsc --noEmit`, `npx tsx`
+  and the grader all work. Then **symlink `src/data/research/` and
+  `evidence-cache/` from the scratch copy back into the real repo** so `--write`
+  lands in the corpus with no copy-back and no sha dance. No zip, none of §6's
+  zip traps, and the VM's network is a home connection rather than the proxy.
+  **Do NOT symlink `scripts/` as well**: the script resolves its own ROOT
+  through `realpath`, so a symlinked script puts `.evidence-fulltext/` inside
+  the mounted repo, where rule 6 then forbids deleting it. Copy `scripts/` and
+  copy it back.
+- **A long run cannot be backgrounded through the bridge.** `nohup setsid … &`
+  survives the call that launched it by about two minutes and is then killed
+  with the call's sandbox; the log simply stops. Anything over ~170 s has to be
+  made RESUMABLE and run as repeated foreground calls — for the grader that is
+  free, because `.evidence-fulltext/` makes an already-fetched URL instant, so
+  the same command re-run just advances until one call finishes inside the
+  window.
+- **A FAILED fetch is cached exactly like a successful one.** So the obvious way
+  to re-grade an edge after teaching the fetcher a new route — run it again — is
+  a cache hit on the old failure and a silent no-op that looks like "the new
+  route didn't help". Any change to how `getDoc` reads a document has to be
+  paired with `--refetch` or an emptied `.evidence-fulltext/`.
+- **`curl -w` output must be split off the body on a real newline, and getting
+  it wrong is silent and total.** Written 2026-09-03 as `'\\n%{http_code}'` in a
+  TypeScript string literal, the separator became the two characters `\` and
+  `n`; `lastIndexOf` returned -1, the status parsed as `NaN`, `NaN` matched
+  neither the retry branch nor the failure branch, so **every lookup was treated
+  as a conclusive answer, every body failed to parse, and an entire fetch
+  strategy cached "nothing found" for every URL it was asked about — while
+  reporting nothing at all.** A rescue pass that rescues nothing is
+  indistinguishable from a host that cannot be rescued. Split it in an exported
+  pure helper with a selftest (`splitCurlWrite`), never inline.
+- **archive.org's availability API 429s within a minute of a corpus-scale pass**
+  and a 429 body is indistinguishable from "no snapshot exists" unless you check
+  the status. Gate every availability lookup through one global throttle
+  (~1.2 s) regardless of pool width, retry a 429 with backoff, **cache the
+  ANSWER on disk including the negative ones**, and never cache an inconclusive
+  result — a run that ran out of budget must not bake "no snapshot" into the
+  store for every URL it never got to ask about. The snapshot DOWNLOAD from
+  `web.archive.org` is a separate service and tolerates 4 concurrent readers
+  fine. Fetch snapshots with the `id_` suffix
+  (`web/<ts>id_/<url>`) or the archive's own toolbar becomes text you are
+  matching quotes against.
+- **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
+  wall, a transport failure or a JavaScript shell say nothing about whether a
+  citation is still valid — only that this machine could not read it. A 404 says
+  the citation has rotted, and that is exactly what the dead-URL debt list
+  measures, so grading it off an archived copy hides link rot behind a good
+  grade. Whatever reads a document by a second route must also record WHICH
+  route in the committed evidence record (`via:` in the cache header) — an A
+  read from a 2026-03-10 snapshot is a different claim from an A read from the
+  live page, and a reader has to be able to tell.
 - **A `report_id`/`candidate_target`-shaped `_dropped` entry (the
   duplicate-node-flag family) has no `source`/`target` fields at all** —
   rule 10 above only applies to `edge`-shaped entries. Tagging the former

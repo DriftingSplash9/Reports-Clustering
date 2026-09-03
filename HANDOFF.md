@@ -7,88 +7,81 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-03 (round 3c — batch 2, the whole corpus graded)
+Last updated: 2026-09-03 (round 3d — per-host fetch strategies in the grader)
 
 ---
 
 ## 1. Read next
 
-`PLAYBOOK.md` → `notes/Midvamp - Revamp.md` (the plan of record) →
-`notes/grader-batch2-2026-09-03.md` (this round) →
-`notes/grader-batch1-2026-09-03.md` →
-`notes/grader-dry-run-2026-09-03.md` (how the grader decides — still
-current) → project memory `grader_batch2_2026-09-03`, then
-`grader_batch1_2026-09-03`, `grader_dry_run_2026-09-03`,
-`renderer_grade_round2_2026-09-03`, `schema_validator_round_2026-09-03`.
+`PLAYBOOK.md` (§6 has six new traps and two corrected entries) →
+`notes/Midvamp - Revamp.md` (the plan of record) →
+`notes/grader-host-strategies-2026-09-03.md` (this round) →
+`notes/grader-batch2-2026-09-03.md` → `notes/grader-batch1-2026-09-03.md` →
+`notes/grader-dry-run-2026-09-03.md` (how the grader decides — still current) →
+project memory `grader_host_strategies_2026-09-03`, then
+`grader_batch2_2026-09-03`, `grader_batch1_2026-09-03`,
+`grader_dry_run_2026-09-03`, `renderer_grade_round2_2026-09-03`,
+`schema_validator_round_2026-09-03`.
 Git status: never state it (PLAYBOOK rule 1).
 
 ---
 
 ## 2. Current state
 
-**Rounds 0-2 and the self-citation fix are committed. Rounds 3a, 3b and 3c
+**Rounds 0-2 and the self-citation fix are committed. Rounds 3a, 3b, 3c and 3d
 are built and verified, not committed.** Corpus **3,341 reports / 2,736
-dependencies**.
+dependencies**, unchanged.
 
-**Every live edge in the corpus now carries an `evidence_grade`:
-226 A · 1,202 B · 1,300 C** across the 2,728 research-slice edges. (The 8
-edges that exist only in the hand-written seed files are deliberately not
-machine-written and stay ungraded.) `npm run validate` exits 0 with all 226
-A grades in place — an A turns the three evidence warnings into errors, so
-that is a real check. `tsc --noEmit` clean, 123/123 logic tests, grader
-`--selftest` 18/18.
+**Every live edge carries an `evidence_grade`: 248 A · 1,317 B · 1,163 C**
+across the 2,728 research-slice edges (the 8 seed-file edges are deliberately
+never machine-written). A-share **9.1%**, up from 8.3%. `npm run validate`
+exits 0 with all 248 A grades in — an A turns the three evidence warnings into
+errors, so that is a real check. `tsc --noEmit` clean, 123/123 logic tests,
+grader `--selftest` **26/26**.
 
-**Batch 2 = six batches in Midvamp §4's order** (Grok slices first,
-hand-researched EU/US/CA/NZ/AU last), each fetched once, reviewed, then
-re-run `--offline --write`, with `npm run validate` between every batch:
-G1 Grok BRICS/Asia 477 (**0 A**) · G2 Grok Americas/Canada 314 (32 A) ·
-G3 Grok remainder 88 (11 A) · N1 hand non-Western 833 (48 A) ·
-N2 hand EU/EEA 294 (42 A) · N3 hand US/CA/NZ/AU 418 (52 A).
+**Round 3d re-graded the 422 unreadable edges after teaching `getDoc` fetch
+strategies. 187 documents read, 114 of them only via an archived snapshot;
+the browser-pass list is 422 → 232 edges across 71 hosts.** Grades on those
+422: 22 A · 116 B · 284 C (was 1 B · 421 C).
 
-**The round's finding: 477 Grok-derived BRICS/Asia edges produced zero A
-grades.** 258 carry no quoted span at all; 143 of those also name the target
-nowhere in the cited document. Hand-researched EU scores 14% on the same
-bar. That is the audit's "Grok slices did not hold" measured, not sampled.
+**None of PLAYBOOK §6's three documented workarounds was scriptable** —
+BPS's `web-api` link is signed from the challenged page's DOM, IBGE's ftp
+mirror carries documents while the corpus cites landing pages, imf.org's
+Google-viewer route needs a browser. §6's imf.org entry was also **backwards**
+(the `/-/media/` PDFs read fine with curl; the press releases are what Akamai
+denies) and its `biblioteca./concla.` half is dead. Both corrected.
 
-**Corpus A-share is 8.3%, not the dry run's 18%** — the audit's 56 were not
-representative. This is what governs the `minGrade` flip.
+**Two things did work, and both are now standing knowledge (PLAYBOOK §6):**
+- **The cloud sandbox's egress proxy is part of the wall.** The bridge VM read
+  20 edges the sandbox could not, and `web.archive.org` is blocked from the
+  sandbox outright. `curl_cffi` and headless Chromium both fail through that
+  proxy — **there is no browser in the cloud sandbox.**
+- **The whole toolchain runs natively in the bridge VM** (copy the repo to
+  `$HOME` scratch, `npm install`, symlink `src/data/research/` and
+  `evidence-cache/` back into the repo). No staging zip, no §6 zip traps, and a
+  home network instead of the proxy. This is now the preferred way to run
+  `validate`/`tsx`/the grader.
 
-**Research debt, corpus-wide, measured (all per-edge in `Claude
-outputs/grade-batch2-debt-2026-09-03.json`):**
-- **131 dead URLs.** `s-circabc.europa.eu` is **58 of them** — the host
-  itself 404s at its own root, and the same paths 404 on `circabc.europa.eu`
-  too. One EU/ESS library moved or died. Then `singstat.gov.sg` 16,
-  `dane.gov.co` 9, `gccstat.org` 4, 31 further hosts at 1-3.
-- **422 edges unreadable from the sandbox, 116 hosts.** Top four are 137 of
-  them: `bps.go.id` 41, `imf.org` 33, `ibge.gov.br` 32, `psa.gov.ph` 31.
-  Then `canada.ca` 14, `inegi.org.mx` 13, `bsp.gov.ph` 11, `bls.gov` 10,
-  and a 102-host tail of 1-6 each.
-- **162 edges cite no URL at all — every one in a `*-wiring-grok-2026-08`
-  slice**, ten files (mexico 30, andean 25, ae-sa 20, ar-cl 20, ir-iq-tr-sy
-  17, jp-kr 16, taiwan 13, indonesia 10, ph-vn-th-mm 8, af-ye-sd-so 3).
-  Their basis text still carries the quote; only the citation was lost.
+**Grader changes** (`--selftest` and `tsc` clean): `fetchOne` = one direct
+attempt + a strategy table, with an archived-snapshot strategy that may rescue
+`wall`/`network`/`empty` but **never a 404**; `Fetched.via` records the
+substitution in the committed evidence-cache header; `--edges <path[#key]>` (the
+re-grade selector — `--skip-graded` is the forward-pass one and selects nothing
+here); `--refetch`; `--no-snapshot`; the BROWSER PASS block now counts the
+`empty` class it was silently dropping (62 edges).
 
-**Quote backfill re-run corpus-wide, still proposals-only.** 1,491 edges
-carry no quoted span; **213 have a candidate sentence**, 852 are readable
-with nothing qualifying, 426 unreadable. In `Claude
-outputs/quote-backfill-batch2-2026-09-03.json`. Nothing written, no policy
-invented — see §3 item 1.
+**Everything else unchanged**: round 2's grade-driven opacity / A-only ranking
+cut / `view.minGrade` (still default `C`) / `rankByLegalBasis` / self-citation
+scoped to `cites`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE` 0.8; drift
+watchdog + `__meshes`. **The direction criterion is still never checked** — an A
+is a proposal a reviewer can spot-check.
 
-**One grader change: `--skip-graded`** (selection only — the grade table,
-matching and naming helpers untouched). Batching by slice file re-selects
-edges an earlier batch already graded, and a host that is merely down today
-would rewrite an A as a C.
-
-**`evidence-cache/` is 1,670 documents / 773 KB actual bytes** — the ruling-1
-projection was right. `du -sh` says 6.8 MB and is wrong (block rounding).
-
-**The direction criterion is still never checked.** An A is a proposal a
-reviewer can spot-check.
-
-**Everything else unchanged**: round 2's grade-driven opacity / A-only
-ranking cut / `view.minGrade` (still default `C`) / `rankByLegalBasis` /
-self-citation scoped to `cites`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE`
-0.8; drift watchdog + `__meshes`.
+**Research debt, corpus-wide** (per-edge JSON in `Claude outputs/`): **131 dead
+URLs** (`s-circabc.europa.eu` is 58 of them, one dead host);
+**232 unreadable** — `grade-browser-pass-2026-09-03.json`, re-measured, 145
+wall / 62 JavaScript shell / 25 network; **162 no-URL edges**, every one in a
+`*-wiring-grok-2026-08` slice. **213 candidate backfill quotes** still
+proposals-only in `quote-backfill-batch2-2026-09-03.json`.
 
 ---
 
@@ -96,50 +89,56 @@ self-citation scoped to `cites`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE`
 
 ### [Thomas] — only you can
 
-1. **Rule on who accepts a backfilled quote** (unchanged from last round,
-   now with 213 candidates instead of 25). Ranked: (a) an agent reviews by
-   slice; (b) you review the four standards only; (c) auto-accept the top
-   candidate behind a new `evidence_quote_source` schema field so a
-   machine-found quote stays distinguishable — I would not do it unmarked.
-2. Commit rounds 3a, 3b and 3c. 3c touches: `scripts/grade-evidence.ts`
-   (`--skip-graded`), all 347 `src/data/research/*.json`, `evidence-cache/`
-   (1,670 files), `notes/grader-batch2-2026-09-03.md`,
-   `notes/Midvamp - Revamp.md` (§4 order changes), `PLAYBOOK.md` (three new
-   §6 traps), `Claude outputs/grade-batch2-*.{json,txt}` +
-   `quote-backfill-batch2-2026-09-03.json`.
-3. Ruling **7** now has the full list: **131 dead-URL edges**, 58 of them one
-   dead host. Fix, drop, or leave graded C.
-4. Browser pass — but read §4 of the plan first: three of the four biggest
-   hosts already have a PLAYBOOK §6 workaround, so ~106 edges may need a
-   build round rather than your time.
-5. Still open from the audit: **13** (empty `_to_delete/`, move the two
+1. **Backfilled quotes — you ruled "an agent reviews by slice" (2026-09-03).**
+   213 decisions, not yet started; it is [Agent] item 1 below now.
+2. **New ruling needed: is an A read from an archived snapshot an A?** 15 of
+   round 3d's 22 new A grades were read from a Wayback copy of the cited URL,
+   not the live page. Nothing was loosened to get them and every one is recorded
+   with `via: wayback <timestamp>` in `evidence-cache/`, but "the quote was in
+   this document on 2026-03-10" is a slightly different claim from "the quote is
+   in this document", and today they grade the same. Options: leave as is;
+   cap a snapshot-read edge at B; or add a schema field so the two stay
+   distinguishable the way `evidence_quote_source` would for backfilled quotes.
+3. Commit rounds 3a-3d. 3d touches: `scripts/grade-evidence.ts`, 101
+   `src/data/research/*.json`, `evidence-cache/` (300 records rewritten),
+   `PLAYBOOK.md`, `notes/Midvamp - Revamp.md`,
+   `notes/grader-host-strategies-2026-09-03.md`, `HANDOFF.md` (+ its archive
+   copy), `Claude outputs/grade-hoststrategy-2026-09-03.{json,txt}` and
+   `grade-browser-pass-2026-09-03.json`.
+4. Ruling **7**: **131 dead-URL edges**, 58 of them one dead host. Fix, drop, or
+   leave graded C.
+5. **Browser pass, re-scoped: 232 edges, and 59 of them are two hosts.**
+   `bps.go.id` 35 and `psa.gov.ph` 24 are worth more than the other 69 hosts
+   combined — BPS especially, which has no archived copies at all. One
+   Claude-in-Chrome session each.
+6. Still open from the audit: **13** (empty `_to_delete/`, move the two
    `archive/*.tar.gz`); **Q18** (Grok folder), **Q19** (paste the two
    08-30/31 audit reports into `archive/audits/`).
-6. Empty `_to_delete/` and `tmp_work/` when convenient (tmp_work now holds
-   six stale staging zips).
-7. Real-GPU number for the unfolded Everything tier (still owed).
+7. Empty `_to_delete/` (now also holds a stale `.evidence-fulltext` store) and
+   `tmp_work/` when convenient.
+8. Real-GPU number for the unfolded Everything tier (still owed).
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
-1. **Per-host fetch strategies in the grader** — wire PLAYBOOK §6's known
-   workarounds for `bps.go.id`, `ibge.gov.br` and `imf.org` into `getDoc`,
-   re-grade those ~106 edges. Cheapest remaining move; shrinks the browser
-   list before anyone books browser time.
-2. Quote-backfill review, once Thomas rules on item 1 above.
-3. **Re-research the 162 no-URL edges** — ten Grok wiring slices, quotes
-   already in `basis`, only the citation missing. Bounded.
-4. `_dropped` lead re-evaluation (plan §4 step 5) — still not built.
-5. Flip `view.minGrade` default to A — **after** 1-3, not before (8.3% A).
-6. DSBB/ESMS scripted import.
-7. Link batching (merged geometry → instanced photons).
-8. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+
-   seeds, `onscreen`): scale `FAMILY_REPULSION`/`COUNTRY_REPULSION` by
-   spread, couple galaxy pull. Kept separate per Thomas's Q17 ruling.
-9. Housekeeping when convenient: doc fixes under hygiene (README:130,
+1. **Quote-backfill review by slice** — Thomas's ruling (a). 213 candidates in
+   `Claude outputs/quote-backfill-batch2-2026-09-03.json`; read the sentence,
+   judge whether it supports the claimed direction, accept or reject per edge.
+   This is the judgement the grader deliberately refuses to fake, and it is the
+   single biggest lever on the A-share.
+2. **Re-research the 162 no-URL edges** — ten Grok wiring slices, quotes already
+   in `basis`, only the citation missing. Bounded.
+3. `_dropped` lead re-evaluation (plan §4 step 5) — still not built.
+4. Flip `view.minGrade` default to A — **after** 1-2, not before (9.1% A).
+5. DSBB/ESMS scripted import.
+6. Link batching (merged geometry → instanced photons).
+7. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+ seeds,
+   `onscreen`): scale `FAMILY_REPULSION`/`COUNTRY_REPULSION` by spread, couple
+   galaxy pull. Kept separate per Thomas's Q17 ruling.
+8. Housekeeping when convenient: doc fixes under hygiene (README:130,
    REPORTS:9–32, PLAYBOOK:18–20, START-HERE:31/37); write
-   `notes/mint-2026-08-20.md` then Grok folder per Q18; retire
-   `check-urls.ts` into the grader — the cache header now records status,
-   final URL and fetch time for every evidence URL.
+   `notes/mint-2026-08-20.md` then Grok folder per Q18; retire `check-urls.ts`
+   into the grader — the cache header now records status, final URL, fetch time
+   and the fetch route for every evidence URL.
 
 ---
 
