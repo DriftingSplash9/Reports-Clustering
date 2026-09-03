@@ -195,6 +195,16 @@ the audit's 56-edge grades before it touches the corpus.
   C→B 38, 30 regressions not written and their quotes reverted (the quote was
   real but from a companion document, not the cited one). No script changed.
   Full record: `notes/grader-single-quote-backfill-2026-09-03.md`.
+- **Round A (2026-09-03) closed the no-URL class and moved the A-share to
+  17.3% (470 A).** The 162 edges with no `evidence_url` were re-researched to
+  their documents from the bridge VM: 150 cited (149 quoted), 12 to `_dropped`
+  `no-document`; re-grade C→A 39, C→B 96. No script changed. Two things the
+  round measured that belong in this plan: the grader matches quotes against the
+  **capped** 250 KB text, so a long document's later sentence reads as absent
+  (a matching-only cap raise, or a `truncated` check in the revert rule, is a
+  small build item), and the DSBB `getBaseSummaryofMethodologies` API now
+  carries ~50 corpus citations — the scripted import in §9 item 6 has a proven
+  readable source. Full record: `notes/roundA-nourl-reresearch-2026-09-03.md`.
 - **The `minGrade` → A flip (§9 item 4) cannot be the default until the
   backfill and the browser pass have run.** The dry run's 18% A-share was a
   sampling artefact of the audit's 56: corpus-wide it is **8.3%** (226 A of
