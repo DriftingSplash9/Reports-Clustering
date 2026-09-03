@@ -16,9 +16,11 @@ import type {
 // reach this module, so that one is checked in scripts/validate-data.ts.
 import {
   DOMAINS,
+  EVIDENCE_GRADES,
   EVIDENCE_KINDS,
   JURISDICTION_LEVELS,
   RELATIONSHIP_TYPES,
+  REPORT_KINDS,
   SCHEDULE_KINDS,
   SCHEDULE_PRECISIONS,
   SOURCE_KINDS,
@@ -45,6 +47,12 @@ export const RELATIONSHIP_WEIGHT: Record<RelationshipType, number> = {
   calculated_from: 1.0,
   uses_data_from: 0.8,
   methodology_depends_on: 0.5,
+  // Same tier as methodology_depends_on, deliberately: legal_basis is a
+  // retype of edges that used to BE methodology_depends_on (2026-09-03
+  // schema+validator round), not a re-weighting -- the statutory grounding
+  // of a release is not a weaker claim than a methodological one, and
+  // Thomas ruled it should still count toward node size and ranking (Q4).
+  legal_basis: 0.5,
   cites: 0.25,
 }
 
@@ -99,6 +107,31 @@ export function isDocumented(edge: { evidence?: EvidenceKind }): boolean {
 }
 
 /**
+ * True when an edge's two endpoints share a publisher -- the source is
+ * published by the target's own publisher, so the target is citing (or
+ * being cited by) its own institution rather than gaining independent
+ * standing. Added 2026-09-03 (schema+validator round, audit ruling 5-B),
+ * as a computed check rather than a stored field -- unlike `mutual`, which
+ * records a judgement about two documents' *prose*, self-citation is fully
+ * derivable from data already on both `Report`s, and a stored flag would
+ * just be a second copy of `publisher` that could drift from the first.
+ *
+ * Deliberately narrow: exact case-insensitive match after trimming, not a
+ * substring or fuzzy match, which would start guessing at corporate
+ * relationships ("IBGE" vs "Instituto Brasileiro de Geografia e
+ * Estatistica (IBGE)") the data doesn't actually assert. This catches the
+ * standing example this rule exists for -- the NDB's own document set
+ * citing `brics-ndb-agreement-2014` -- and undercounts a real "founding
+ * body" self-citation where the two publisher strings are written
+ * differently, which is why this is exposed as a helper for a later round's
+ * pagerank exclusion (Midvamp "self-citation discount", round 2) and only
+ * counted, not enforced, here.
+ */
+export function isSelfCitation(source: { publisher: string }, target: { publisher: string }): boolean {
+  return source.publisher.trim().toLowerCase() === target.publisher.trim().toLowerCase()
+}
+
+/**
  * True when an evidence URL points at a site's front door rather than a
  * document — path empty or `/`, nothing else. Deliberately narrow: a
  * programme landing page one level down is the stated convention for node
@@ -139,7 +172,13 @@ export function isIndexPage(url: string): boolean {
   } catch {
     return false
   }
-  const segs = u.pathname.toLowerCase().split('/').filter(Boolean)
+  const host = u.hostname.toLowerCase().replace(/^www\./, '')
+  const path = u.pathname.toLowerCase()
+  for (const p of HOST_INDEX_PREFIXES) {
+    if (host !== p.host) continue
+    if (p.exact ? path === p.prefix : path.startsWith(p.prefix)) return true
+  }
+  const segs = path.split('/').filter(Boolean)
   if (!segs.length) return false
   if (segs.length === 1 && !u.search && LANGUAGE_ROOTS.has(segs[0])) return true
   if (segs.length >= 2 && segs[segs.length - 2] === 'folder' && /^\d+$/.test(segs[segs.length - 1])) {
@@ -157,6 +196,44 @@ const LISTING_WORDS = new Set([
   'catalog', 'catalogue', 'category', 'categories',
   'indicators', 'indicadores', 'reports', 'informes', 'relatorios',
 ])
+
+/**
+ * Host + path-prefix listing pages `isIndexPage`'s generic segment check
+ * cannot catch, because the tell is the SITE's own layout, not a shared
+ * word. Curated from the 2026-09-02 independent audit's A3 section ("~50
+ * more edges in the same class as the 45") -- each entry is a page the
+ * audit raw-fetched and confirmed names no document, not a guess from the
+ * URL shape alone. Ruling 2-A. Widen this list, don't loosen the generic
+ * check above -- a per-host entry only ever narrows one specific site's
+ * false negatives, so it can't create the false positives a broader word
+ * or shorter path would.
+ */
+const HOST_INDEX_PREFIXES: ReadonlyArray<{ host: string; prefix: string; exact?: boolean }> = [
+  // stats.gov.cn: the Statistical Yearbook year-list, English press-release
+  // and communique listings -- all a list of links, no document body.
+  { host: 'stats.gov.cn', prefix: '/sj/ndsj/' },
+  { host: 'stats.gov.cn', prefix: '/english/pressrelease/', exact: true }, // NOT a prefix -- a dated article under this path (.../202502/t...html) is a real document
+  { host: 'stats.gov.cn', prefix: '/english/statisticalcommunique' },
+  // ndb.int: the whole governance/transparency-reporting section is a
+  // document-list page, not any one document.
+  { host: 'ndb.int', prefix: '/governance/' },
+  // gub.uy: INE Uruguay's OWN homepage under the .gub.uy portal path --
+  // isBareHost only catches a bare host, not a portal-prefixed one.
+  { host: 'gub.uy', prefix: '/instituto-nacional-estadistica' },
+  // ess.gov.et: topic-shell pages one level below the ESS homepage.
+  { host: 'ess.gov.et', prefix: '/agriculture/' },
+  { host: 'ess.gov.et', prefix: '/households/' },
+  // eac.int: the EAC's own "about" overview page, not a binding document.
+  { host: 'eac.int', prefix: '/overview-of-eac' },
+  // oversightboard.pr.gov: the fiscal-plans LISTING, not any one plan.
+  { host: 'oversightboard.pr.gov', prefix: '/fiscal-plans/' },
+  // inegi.org.mx: narrowly the INPC programme page -- NOT the whole
+  // /programas/ tree, which is INEGI's stated legitimate landing-page
+  // convention for every OTHER survey (isBareHost's comment: "a programme
+  // landing page one level down ... is fine as edge evidence"). Only INPC's
+  // own page was raw-fetched and confirmed to name no document (audit A3).
+  { host: 'inegi.org.mx', prefix: '/programas/inpc/' },
+]
 
 /**
  * Structural checks on the seed data. Runs before scoring, because a dangling
@@ -202,6 +279,29 @@ export function validate(
       issues.push({
         severity: 'error',
         message: `${r.id}: releases_per_year must be positive when present`,
+      })
+    }
+    // `kind`, added 2026-09-03 (schema+validator round). Required, cast not
+    // parsed, and the one place it's checkable against the wrong TYPE of
+    // value at all (a hand-typed slice reaches this as an arbitrary string).
+    if (!REPORT_KINDS.includes(r.kind)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `${r.id}: kind "${r.kind}" is not a ReportKind — one of ` +
+          `${REPORT_KINDS.join(', ')}`,
+      })
+    } else if (r.kind === 'publication' && r.releases_per_year === undefined) {
+      // The one cadence rule that's actually mechanical (see the `kind` doc
+      // comment in types.ts for why `standard` carries no such rule).
+      issues.push({
+        severity: 'error',
+        message: `${r.id}: kind is "publication" but releases_per_year is absent — a recurring release states its rate, or it isn't kind "publication"`,
+      })
+    } else if (r.kind === 'instrument' && r.releases_per_year !== undefined) {
+      issues.push({
+        severity: 'error',
+        message: `${r.id}: kind is "instrument" but releases_per_year is set (${r.releases_per_year}) — a one-off instrument does not carry a publication rate; it is kind "publication" or "standard" instead`,
       })
     }
     // `continuous`, added 2026-08-21 (todo item 4, the pulse/beam round).
@@ -579,6 +679,11 @@ export function validate(
     }
   }
 
+  // Added 2026-09-03 alongside `kind` -- the legal_basis instrument rule and
+  // the self-citation count both need to look an endpoint's Report back up
+  // by id, which nothing before this needed to do inside the edges loop.
+  const reportById = new Map(reports.map((r) => [r.id, r]))
+
   const seen = new Set<string>()
   for (const d of dependencies) {
     const key = `${d.source_report_id}->${d.target_report_id}`
@@ -639,6 +744,31 @@ export function validate(
           `An unrecognised value has no RELATIONSHIP_WEIGHT entry and would ` +
           `make every authority score NaN`,
       })
+    }
+    // `legal_basis`'s second rule (types.ts's RelationshipType doc, added
+    // 2026-09-03): an instrument may never be minted SOLELY because another
+    // instrument's legal_basis edge cites it. Checked the mechanical half --
+    // the target must carry at least one OTHER edge besides this one, i.e.
+    // it is already in the graph for a reason other than this citation.
+    if (d.relationship_type === 'legal_basis') {
+      const source = reportById.get(d.source_report_id)
+      const target = reportById.get(d.target_report_id)
+      if (source?.kind === 'instrument' && target?.kind === 'instrument') {
+        const targetHasOtherEdge = dependencies.some(
+          (o) =>
+            o !== d &&
+            (o.source_report_id === d.target_report_id || o.target_report_id === d.target_report_id),
+        )
+        if (!targetHasOtherEdge) {
+          issues.push({
+            severity: 'error',
+            message:
+              `Edge ${key}: legal_basis between two instruments, but ${d.target_report_id} ` +
+              `has no other edge — an instrument may not be minted solely because another ` +
+              `instrument cites it (types.ts's RelationshipType doc, rule 2)`,
+          })
+        }
+      }
     }
     // `strength`, added 2026-08-21 (review §2, §6 item 7) — the one edge-
     // weight input with no validation at all before this. Unused in the live
@@ -703,6 +833,26 @@ export function validate(
         message: `Edge ${key} is marked implied but carries an evidence_url — promote it to documented`,
       })
     }
+    // `evidence_grade`/`evidence_quote`, added 2026-09-03 (schema+validator
+    // round). Same cast-not-parsed treatment as every other closed union;
+    // absent `evidence_grade` means 'C' (EvidenceGrade in types.ts), so only
+    // a present-and-wrong value is an error here.
+    if (d.evidence_grade !== undefined && !EVIDENCE_GRADES.includes(d.evidence_grade)) {
+      issues.push({
+        severity: 'error',
+        message:
+          `Edge ${key}: evidence_grade "${d.evidence_grade}" is not an ` +
+          `EvidenceGrade — one of ${EVIDENCE_GRADES.join(', ')} (or absent, meaning C)`,
+      })
+    }
+    // An A grade asserts the quote was found in the cited document's body --
+    // without the quote on the edge that assertion is unfalsifiable.
+    if (d.evidence_grade === 'A' && !d.evidence_quote?.trim()) {
+      issues.push({
+        severity: 'error',
+        message: `Edge ${key}: evidence_grade is "A" but evidence_quote is absent — an A grade requires the verbatim span it was found from`,
+      })
+    }
     // The evidence standard itself, finally checked (2026-08-31, independent
     // audit finding D2). Until now the project's headline rule — "if no
     // document says a dependency exists, it does not go in the graph" — was
@@ -714,13 +864,18 @@ export function validate(
     // ("https://www.indec.gob.ar/") as the sole evidence for a specific
     // methodological claim — a pointer, not a source (PLAYBOOK rule 3).
     //
-    // Warnings, not errors, deliberately: the corpus has to be cleaned before
-    // this can fail the build, and a rule that fails the build on day one
-    // gets switched off rather than obeyed. Promote both to 'error' once
-    // validate-data.ts's EVIDENCE block reports zero for them.
+    // **Gate changed 2026-09-03** (Midvamp §2.2, audit ruling 1 family): the
+    // old plan was "promote both to error once EVIDENCE reads 0/0/0" — the
+    // wrong shape, because it let every new round add to the pile as long as
+    // the pile wasn't yet empty (audit A3). The three checks now read the
+    // edge's OWN `evidence_grade`: still a warning for grade B or C (every
+    // edge, today, since nothing is graded yet), and an ERROR the moment an
+    // edge claims grade A while failing one of them — an A grade asserts it
+    // clears exactly these three.
+    const evidenceSeverity: ValidationIssue['severity'] = d.evidence_grade === 'A' ? 'error' : 'warning'
     if (isDocumented(d) && !d.evidence_url) {
       issues.push({
-        severity: 'warning',
+        severity: evidenceSeverity,
         message:
           `Edge ${key} is documented but cites no evidence_url — a documented ` +
           `edge names its document; move the belief to _dropped ('no-document') ` +
@@ -728,16 +883,16 @@ export function validate(
       })
     } else if (d.evidence_url && isBareHost(d.evidence_url)) {
       issues.push({
-        severity: 'warning',
+        severity: evidenceSeverity,
         message:
           `Edge ${key} cites a bare homepage (${d.evidence_url}) — a pointer is ` +
           `not a source; cite the document that names the relationship`,
       })
     } else if (d.evidence_url && isIndexPage(d.evidence_url)) {
       // Second audit, F-02 (2026-08-31): the path-bearing sibling of the bare
-      // homepage. Same promotion gate as the two warnings above.
+      // homepage. Same grade-A gate as the two checks above.
       issues.push({
-        severity: 'warning',
+        severity: evidenceSeverity,
         message:
           `Edge ${key} cites an index/listing page (${d.evidence_url}) — a ` +
           `publications index or topic shell names both artefacts at best and ` +
@@ -772,6 +927,36 @@ export function validate(
         })
       }
     }
+  }
+
+
+  // Bidirectional pairs, added 2026-09-03 (audit finding A5). Nine (A->B,
+  // B->A) pairs existed in the corpus with nothing to tell a reversed-
+  // direction mistake (the JP/KR five, each contradicting its own basis
+  // text) from a "consistent with" pair wearing `cites` on both ends (the
+  // two BR edges) from a genuine mutual relationship (the NZ Acts, the two
+  // StatCan pairs). All nine are now resolved one way or the other -- the
+  // five and the two moved to `_dropped`, the three genuine pairs flagged
+  // `mutual: true` on both edges -- so this should read zero on a clean
+  // corpus; it exists to keep it that way.
+  const edgeByKey = new Map(dependencies.map((d) => [`${d.source_report_id}->${d.target_report_id}`, d]))
+  const reportedPairs = new Set<string>()
+  for (const d of dependencies) {
+    const reverse = edgeByKey.get(`${d.target_report_id}->${d.source_report_id}`)
+    if (!reverse) continue
+    const pairKey = [d.source_report_id, d.target_report_id].sort().join('|')
+    if (reportedPairs.has(pairKey)) continue
+    if (d.mutual === true && reverse.mutual === true) continue
+    reportedPairs.add(pairKey)
+    issues.push({
+      severity: 'error',
+      message:
+        `Bidirectional pair ${d.source_report_id} <-> ${d.target_report_id}: both directions ` +
+        `are live edges. Usually a reversed-direction mistake -- move the wrong one to ` +
+        `_dropped with reason "wrong-direction" (or "deferred" if it's a "consistent with" ` +
+        `shape, not a real dependency). If it's a genuine mutual relationship, set mutual: ` +
+        `true on BOTH edges with a basis naming the companion edge.`,
+    })
   }
 
   // Orphans are not fatal, but in a curated set they usually mean the node was

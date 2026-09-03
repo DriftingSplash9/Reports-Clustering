@@ -582,11 +582,37 @@ export const DOMAINS: readonly Domain[] = [
 /**
  * How one report depends on another.
  * Ordered here from strongest to weakest; see RELATIONSHIP_WEIGHT in graph.ts.
+ *
+ * **`legal_basis`, added 2026-09-03 (schema+validator round, Midvamp §2.2,
+ * Q1-Q4).** "This figure is calculated under Regulation X, made under Act Y"
+ * is a chain the project exists to draw, and `methodology_depends_on` was
+ * carrying it indistinguishably from an ordinary methodological dependency.
+ * Rules, enforced in `validate()` where they are mechanical and documented
+ * here where they are not:
+ *   - An edge from a publication or standard to the instrument it names as
+ *     its legal/methodological basis is `legal_basis`, not
+ *     `methodology_depends_on`. Existing edges of that shape are retyped by
+ *     a generator, not by hand (`notes/schema-validator-round-2026-09-03-
+ *     migration.py`), the moment the target's `kind` is `instrument`.
+ *   - An instrument→instrument `legal_basis` edge (a regulation citing the
+ *     enabling Act) is allowed only when BOTH instruments are already in the
+ *     graph for another reason — never mint an Act because a regulation
+ *     cites it. `validate()` checks the mechanical half of this: the target
+ *     must carry at least one other edge.
+ *   - Drawn like a data edge with no teardrops (nothing flows along a legal
+ *     basis at a cadence) and a slightly different hue — instruments are
+ *     already hollow, so the eye can tell the two apart without confusing
+ *     "no data flows" with "no basis".
+ *   - Counts toward node size and ranking (Thomas's call, Q4, against the
+ *     recommendation) — a `view.rankByLegalBasis` toggle (default on) is the
+ *     renderer-round answer to the consequence, not a reason to weight it at
+ *     zero here.
  */
 export type RelationshipType =
   | 'calculated_from'        // output is mechanically derived from the target
   | 'uses_data_from'         // target's figures are a direct input
   | 'methodology_depends_on' // target defines a method/deflator the source relies on
+  | 'legal_basis'            // target is the Act/regulation/treaty the source is published or calculated under
   | 'cites'                  // referenced as context, not as a computational input
 
 /**
@@ -606,8 +632,26 @@ export const RELATIONSHIP_TYPES: readonly RelationshipType[] = [
   'calculated_from',
   'uses_data_from',
   'methodology_depends_on',
+  'legal_basis',
   'cites',
 ]
+
+/**
+ * How a document behaves over time — the third axis that decides what a node
+ * IS, not just how it changes. Added 2026-09-03 (schema+validator round,
+ * following the 2026-09-02 independent audit): `releases_per_year`'s absence
+ * used to carry two different claims at once — "revised occasionally, on no
+ * fixed schedule, but still the same evolving document" (a standard) and
+ * "issued once and never revisited in that form again" (an instrument).
+ * Nothing distinguished them, so nothing could apply a different validator
+ * rule, evidence expectation, or renderer treatment to either.
+ *
+ * Cast, not parsed — see the note under `SOURCE_KINDS`.
+ */
+export type ReportKind = 'publication' | 'standard' | 'instrument'
+
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const REPORT_KINDS: readonly ReportKind[] = ['publication', 'standard', 'instrument']
 
 export interface Report {
   id: string
@@ -628,6 +672,43 @@ export interface Report {
   country: Country
   /** Scope of publishing authority. Drives node colour and style — never position. */
   jurisdiction_level: JurisdictionLevel
+  /**
+   * What kind of document this is — see `ReportKind`. Required (unlike
+   * almost everything else on this interface) because the cadence rules
+   * below only mean something once every node has declared which one it is:
+   * `validate()` checks that a publication has `releases_per_year` and that
+   * an instrument does not, and neither check is checkable against
+   * `undefined`.
+   *
+   * - `publication` — a recurring release. Must have `releases_per_year`.
+   * - `standard` — SNA, COICOP, ISIC, BPM6, GFSM… Versioned; cadence is
+   *   "when revised", which in this corpus has always meant a small nominal
+   *   `releases_per_year` (SNA 2008 is 0.05 — "once a generation" written as
+   *   a rate) rather than its absence, so `standard` carries no presence/
+   *   absence rule of its own. A version with a predecessor already in the
+   *   graph should carry a `supersedes` `Relation` to it (`sna-2025 ->
+   *   sna-2008` is the existing example) — not yet enforced by the
+   *   validator, since detecting "a predecessor exists" isn't mechanical.
+   * - `instrument` — Act, regulation, treaty, decree. One-off, amended not
+   *   republished. Must **not** have `releases_per_year` — this is the one
+   *   direction `isStandingInstrument` (`nodeVisuals.ts`) already read
+   *   before this field existed, by absence alone; `kind` makes the reading
+   *   explicit rather than inferred from a gap. Lives in the graph only
+   *   while something recurring names it as a basis — the 2026-08-29/31
+   *   treaty retirements are what happens when that stops being true.
+   *
+   * Backfilled 2026-09-03 by a script, not by hand, over the ~3,300 nodes
+   * that predate this field: `releases_per_year` present and no
+   * international-standard title keyword → `publication`; a curated keyword
+   * match (SNA/ESA/COICOP/ISIC/BPM/GFSM/SDDS/GDDS/ICLS/MFSM/IPSAS/IFRS/IAS/
+   * NACE/NAICS/ICD/Oslo Manual/COFOG/ISCO/SITC…, excluding titles that are
+   * themselves a named Regulation/Act/Decree/Treaty) → `standard`;
+   * everything else (no `releases_per_year`) → `instrument`. Cast, not
+   * parsed, so a wrong first guess is a data fix, not a schema break — see
+   * `notes/schema-validator-round-2026-09-03-migration.py` for the exact
+   * rule and its per-file effect.
+   */
+  kind: ReportKind
   /**
    * Official release or published commercial source. Absent means official.
    * Commercial sources are outside the authority calculation — see SourceKind.
@@ -822,6 +903,40 @@ export type EvidenceKind = 'documented' | 'implied'
 /** See the cast-not-parsed note under `SOURCE_KINDS`. */
 export const EVIDENCE_KINDS: readonly EvidenceKind[] = ['documented', 'implied']
 
+/**
+ * How well an edge's citation was actually checked — added 2026-09-03
+ * (schema+validator round), following the 2026-09-02 independent audit's
+ * raw-fetch spot-check: a random sample of 56 live edges came back 50% PASS,
+ * 25% WEAK, 14% FAIL-CONTENT, 11% FAIL-URL. `EvidenceKind` already separated
+ * "a document says this" from "nothing does"; it had no way to say HOW WELL
+ * the document says it, so a citation that fabricated a quote and a citation
+ * that raw-verified one both read as equally "documented".
+ *
+ * **Absent means `C`.** Every edge in the corpus is `C` until graded by
+ * `scripts/grade-evidence.ts` (a later round) — this field's addition does
+ * not itself grade anything, it only makes grading expressible.
+ *
+ * - **`A`** — raw-fetched (never WebFetch, which can fabricate content for a
+ *   dead URL — PLAYBOOK rule 3), the quote is found in the body of the cited
+ *   `evidence_url`, the document names the input *artefact* (not just the
+ *   agency), and states the direction claimed. `evidence_quote` is required.
+ *   Authoritative third-party metadata the publisher itself supplies counts
+ *   as `A` (IMF DSBB, Eurostat ESMS, SDMX metadata).
+ * - **`B`** — resolves and supports the relationship loosely: names the
+ *   agency not the release, "consistent with"/"complementary" language, a
+ *   paraphrase inside quotation marks, the quote from a document other than
+ *   `evidence_url`, or a genuinely secondary source.
+ * - **`C`** — a lead. Unverified, unreachable, an index page, or nothing.
+ *
+ * The three existing evidence warnings in `validate()` (no URL / bare
+ * homepage / index page) stay warnings for `B` and `C` and become errors for
+ * `A` — grading something `A` is asserting it clears every one of them.
+ */
+export type EvidenceGrade = 'A' | 'B' | 'C'
+
+/** See the cast-not-parsed note under `SOURCE_KINDS`. */
+export const EVIDENCE_GRADES: readonly EvidenceGrade[] = ['A', 'B', 'C']
+
 export interface Dependency {
   /** The report doing the referencing. */
   source_report_id: string
@@ -856,6 +971,39 @@ export interface Dependency {
    * that standard checkable rather than a promise.
    */
   evidence_url?: string
+  /**
+   * How well the citation was checked. Absent means `C` — see EvidenceGrade.
+   * Node size and the authority ranking read `A` edges only once a renderer
+   * round switches `view.minGrade` to `A`; until then every edge draws and
+   * ranks the way it always has, `evidence_grade` or not.
+   */
+  evidence_grade?: EvidenceGrade
+  /**
+   * The quoted span from the cited document that the grade rests on — close
+   * to verbatim, the same role `basis` plays for the edge as a whole but
+   * scoped to the exact sentence a grader (or a reader) can check against
+   * `evidence_url`. **Required when `evidence_grade` is `A`** — an `A` grade
+   * asserts the quote was found in the body, so the edge without the quote
+   * on it is an unfalsifiable assertion of its own grade. Optional
+   * otherwise; several pre-existing edges already carry one from research
+   * that quoted inline before this field existed.
+   */
+  evidence_quote?: string
+  /**
+   * This edge is one half of a genuine mutual relationship — two documents
+   * that cite each other, each independently, in different words, for
+   * different reasons (the StatCan supply-use/IPPI and supply-use/national-
+   * accounts pairs are the standing examples; see their `basis` text). Added
+   * 2026-09-03 alongside the bidirectional-pair validator check (audit
+   * finding A5): nine (A→B, B→A) pairs existed with nothing to distinguish
+   * three genuine mutual partners from five reversed-direction mistakes and
+   * one "consistent with" pair wearing `cites` instead. Absent or `false`
+   * means ordinary — a `(B, A)` edge existing for a `(A, B)` edge without
+   * this flag on BOTH is now a validator error, not a shrug. Set only when
+   * `basis` itself names the companion edge, which is what makes the flag
+   * checkable rather than a second unaudited assertion.
+   */
+  mutual?: boolean
 }
 
 /**

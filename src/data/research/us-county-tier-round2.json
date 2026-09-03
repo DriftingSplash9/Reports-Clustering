@@ -60,7 +60,8 @@
       "domains": [
         "national-accounts",
         "inflation"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "ny-medicaid-local-share-cap",
@@ -76,7 +77,8 @@
         "health",
         "fiscal-transfers",
         "municipal-finance"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "nysac-county-budget-impact-report",
@@ -128,7 +130,8 @@
         "municipal-finance",
         "fiscal-transfers",
         "health"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "pa-second-class-township-code",
@@ -143,7 +146,8 @@
       "domains": [
         "municipal-finance",
         "taxation"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "pa-consolidated-county-assessment-law",
@@ -158,7 +162,8 @@
       "domains": [
         "assessment",
         "taxation"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "pa-dced-municipal-annual-financial-report",
@@ -189,7 +194,8 @@
       "domains": [
         "municipal-finance",
         "taxation"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "ct-county-abolition-1959",
@@ -203,7 +209,8 @@
       "url": "https://www.cga.ct.gov/2010/rpt/2010-R-0072.htm",
       "domains": [
         "municipal-finance"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "omb-ct-county-equivalents-notice",
@@ -218,7 +225,8 @@
       "domains": [
         "population",
         "municipal-finance"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "ma-gl-ch34b",
@@ -233,7 +241,8 @@
       "domains": [
         "municipal-finance",
         "fiscal-transfers"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "tx-lgc-231",
@@ -248,7 +257,8 @@
       "domains": [
         "municipal-finance",
         "taxation"
-      ]
+      ],
+      "kind": "instrument"
     }
   ],
   "dependencies": [
@@ -275,14 +285,14 @@
     {
       "source_report_id": "pa-dced-municipal-annual-financial-report",
       "target_report_id": "pa-second-class-township-code",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "The code sets both what a township may levy and what it must report. §3205(a) provides that \"The board of supervisors may by resolution levy taxes upon all real property within the township made taxable for township purposes, as ascertained by the last adjusted valuation for county purposes, for the purposes and at the rates specified in this section\", with fire apparatus \"not exceeding 3 mills\" and ambulance and emergency medical services \"not exceeding 0.5 mill\". The code separately requires the township auditors to complete their settlement before April 1 and the secretary to publish concise financial information by April 15, alongside the state filing.",
       "evidence_url": "https://law.justia.com/codes/pennsylvania/act-140/"
     },
     {
       "source_report_id": "pa-second-class-township-code",
       "target_report_id": "pa-consolidated-county-assessment-law",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "cites",
       "basis": "The levy provision reads a roll the township does not produce: taxes are levied on property \"as ascertained by the last adjusted valuation for county purposes\". Assessment in Pennsylvania is a county function under the Consolidated County Assessment Law at 53 Pa.C.S. Chapter 88 — so a township's tax base is set entirely by the county above it, and the township tier has no assessment machinery of its own at all.",
       "reference_period": {
         "readings_per_year": 1,
@@ -302,21 +312,21 @@
     {
       "source_report_id": "uscensus-acs",
       "target_report_id": "omb-ct-county-equivalents-notice",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "The notice directs the change into named products: the Census Bureau will \"adopt the State's nine planning regions as county-equivalent geographic units for purposes of collecting, tabulating, and disseminating statistical data\", implemented \"internally in 2022, with public data and geospatial products reflecting the change beginning in late 2022. By 2024, all Census Bureau operations and publications.\" The American Community Survey is named first among the affected programmes.",
       "evidence_url": "https://www.federalregister.gov/documents/2022/06/06/2022-12063/change-to-county-equivalents-in-the-state-of-connecticut"
     },
     {
       "source_report_id": "uscensus-population-estimates",
       "target_report_id": "omb-ct-county-equivalents-notice",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "The notice names \"the intercensal Population Estimates Program (PEP)\" among the programmes that must re-base onto the planning regions. A county-level estimate for Connecticut published after the transition is an estimate for a different geography than one published before it, which is the kind of discontinuity a graph of dependencies ought to record.",
       "evidence_url": "https://www.federalregister.gov/documents/2022/06/06/2022-12063/change-to-county-equivalents-in-the-state-of-connecticut"
     },
     {
       "source_report_id": "uscensus-saipe",
       "target_report_id": "omb-ct-county-equivalents-notice",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "The notice names the \"Small Area Income and Poverty Estimates (SAIPE) Program\" among the affected products, alongside the Economic Census and County Business Patterns. SAIPE county estimates drive Title I education allocations, so the geography change reaches money.",
       "evidence_url": "https://www.federalregister.gov/documents/2022/06/06/2022-12063/change-to-county-equivalents-in-the-state-of-connecticut"
     },

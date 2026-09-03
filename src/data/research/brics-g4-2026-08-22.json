@@ -13,7 +13,8 @@
       "url": "https://www.oecd.org/en/publications/oslo-manual_9789264013100-en.html",
       "domains": [
         "research-innovation"
-      ]
+      ],
+      "kind": "standard"
     },
     {
       "id": "who-rose-angina-questionnaire",
@@ -27,7 +28,8 @@
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2555832/",
       "domains": [
         "health"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "who-gshs",
@@ -42,7 +44,8 @@
       "domains": [
         "health",
         "education"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "un-wpp-methodology",
@@ -56,7 +59,8 @@
       "url": "https://population.un.org/wpp/",
       "domains": [
         "population"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "fao-world-programme-census-agriculture",
@@ -71,7 +75,8 @@
       "domains": [
         "agriculture",
         "statistical-system"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "un-seea",
@@ -86,7 +91,8 @@
       "domains": [
         "environment",
         "national-accounts"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "imf-mfsmcg-2016",
@@ -101,7 +107,8 @@
       "domains": [
         "monetary-policy",
         "banking"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "who-icd-10",
@@ -115,7 +122,8 @@
       "url": "https://www.who.int/standards/classifications/classification-of-diseases",
       "domains": [
         "health"
-      ]
+      ],
+      "kind": "standard"
     }
   ],
   "dependencies": [
@@ -199,14 +207,14 @@
     {
       "source_report_id": "br-ibge-pns",
       "target_report_id": "who-rose-angina-questionnaire",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (IBGE/Ministério da Saúde's official \"Pesquisa Nacional de Saúde 2013\" full report). Quote: \"...questionário desenvolvido por Rose, e recomendado pela Organização Mundial da Saúde - OMS (World Health Organization - WHO)... a presente pesquisa investigou a prevalência de angina utilizando a versão resumida da escala de Rose.\" Narrow, single-instrument dependency within one PNS health module.",
       "evidence_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv91110.pdf"
     },
     {
       "source_report_id": "br-ibge-pense",
       "target_report_id": "who-gshs",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (IBGE/Ministério da Saúde's official \"Pesquisa Nacional de Saúde do Escolar 2009\" report, first PeNSE edition, Data Collection chapter). Quote: \"O questionário para coleta de dados foi baseado nos instrumentos utilizados no Global School-based Student Health Survey/Organização Mundial da Saúde - GSHS/OMS, no Youth Risk Behavior Surveillance System/Centers for Disease Control and Prevention - Yrbss/CDC...\" Corroborated by the current live PeNSE page's age-range rationale citing WHO's 13-15 reference age.",
       "evidence_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv43063.pdf"
     },
@@ -220,28 +228,28 @@
     {
       "source_report_id": "br-ibge-projecoes-populacao",
       "target_report_id": "un-wpp-methodology",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (IBGE's official \"Projeções da população: Brasil e Unidades da Federação — Revisão 2024,\" 3ª ed., 2025). Four distinct, explicitly-named UN Population Division standards are directly adopted: \"...foi obtido tomando-se aquele usado em World Population Prospects – Revisão 2024 - WPP2024 (United Nations, 2024b, p.33) para o Brasil\"; \"...adotou-se a proposta de United Nations (2015) de expandir o modelo de Wilmoth et al. (2012)...\"; \"...com base no novo conjunto de Tábuas Modelo Oeste das Nações Unidas (UNITED NATIONS, 2011).\"",
       "evidence_url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv102219.pdf"
     },
     {
       "source_report_id": "br-ibge-censo-agropecuario",
       "target_report_id": "fao-world-programme-census-agriculture",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (IBGE's official English-language 2017 Census of Agriculture results page). Quote: \"the Institute used premises from the Programa del Censo Agropecuario Mundial 2020 (World Programme for the Census of Agriculture), implemented by the United Nations Organization and the Food and Agriculture Organization (FAO)... The results of the 2017 Census of Agriculture, as of those of previous editions, are in accordance with the recommendations and the basic concepts adopted by FAO.\"",
       "evidence_url": "https://www.ibge.gov.br/en/statistics/economic/agriculture-forestry-and-fishing/21929-2017-2017-censo-agropecuario-en.html"
     },
     {
       "source_report_id": "br-ibge-contas-economicas-ambientais",
       "target_report_id": "un-seea",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (IBGE's own live methodology page for its environmental-economic accounts — independently re-fetched and confirmed, superseding the prior Grok-imported node description which only pointed at where to look). Quote: \"A metodologia da contabilidade econômica e ambiental vem sendo estabelecida pelas Nações Unidas por meio do Sistema de Contas Econômicas Ambientais - SCEA (System of Environmental-Economic Accounting - SEEA).\" The page separately names specific SEEA components: SEEA-EEA 2012 (experimental ecosystem accounting) and SEEA-Water, plus the newer SEEA-EA (Ecosystem Accounting) framework, and links directly to the UN's own SEEA manual PDFs at seea.un.org.",
       "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/28920-contas-de-ecossistemas.html"
     },
     {
       "source_report_id": "br-bcb-estatisticas-monetarias",
       "target_report_id": "imf-mfsmcg-2016",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (BCB's own \"Relatório de Economia Bancária,\" 2018, Box 3, describing the \"crédito ampliado\" statistic within the same Nota para a Imprensa – Estatísticas Monetárias e de Crédito series this node covers; the bcb.gov.br/estatisticas/panoramabc portal itself is JS-rendered, per the known trap — this BCB-hosted PDF is the underlying primary source). Quote: \"Essa nova estatística está alinhada metodologicamente ao padrão definido no Manual de Estatísticas Monetárias e Financeiras e Guia de Compilação (MEMF), edição 2016, do Fundo Monetário Internacional (FMI), referência metodológica de melhores práticas para a produção de estatísticas monetárias e financeiras.\"",
       "evidence_url": "https://www.bcb.gov.br/content/publicacoes/Documents/reb/boxesreb2018/boxe3.pdf"
     },

@@ -11,6 +11,7 @@ import {
   DROPPED_LEAD_REASONS,
   DROPPED_REASONS,
   RELATION_TYPES,
+  REPORT_KINDS,
 } from '../src/lib/types'
 
 // Invariant (✗) failures below print AND fail the run. Before 2026-08-07 they
@@ -25,6 +26,7 @@ import {
   isDocumented,
   isOfficial,
   isRanked,
+  isSelfCitation,
   isTerminus,
   RELATIONSHIP_WEIGHT,
   RETAINED_FRACTION,
@@ -505,8 +507,52 @@ if (reused.length) {
   for (const [u, n] of reused.slice(0, 12)) console.log(`      ${String(n).padStart(3)}  ${u}`)
 }
 console.log(
-  '  (warnings, not errors, until all three read 0 — then promote them in graph.ts validate())',
+  '  (warnings for grade B/C, errors for grade A — see EvidenceGrade in types.ts. ' +
+    'Gate changed 2026-09-03, see the graph.ts comment at this check.)',
 )
+console.log()
+
+/**
+ * GRADE and KIND — informational, added 2026-09-03 (schema+validator round).
+ * Both fields are brand new this round; nothing has been graded and every
+ * node's `kind` came from a script's best guess, not research — these counts
+ * are what "did the migration do what it says" looks like, not a pass/fail.
+ */
+const gradeCounts = new Map<string, number>()
+for (const d of dependencies) {
+  const g = d.evidence_grade ?? 'C'
+  gradeCounts.set(g, (gradeCounts.get(g) ?? 0) + 1)
+}
+console.log(`GRADE — ${dependencies.length} dependencies by evidence_grade`)
+for (const g of ['A', 'B', 'C']) console.log(`  ${String(gradeCounts.get(g) ?? 0).padStart(4)}  ${g}`)
+console.log()
+
+const kindCounts = new Map<string, number>()
+for (const r of reports) {
+  kindCounts.set(r.kind, (kindCounts.get(r.kind) ?? 0) + 1)
+}
+console.log(`KIND — ${reports.length} reports by kind`)
+for (const k of REPORT_KINDS) console.log(`  ${String(kindCounts.get(k) ?? 0).padStart(4)}  ${k}`)
+const unknownKind = reports.length - REPORT_KINDS.reduce((n, k) => n + (kindCounts.get(k) ?? 0), 0)
+if (unknownKind) console.log(`  ${String(unknownKind).padStart(4)}  (not a REPORT_KINDS value — see the ERRORS block)`)
+console.log()
+
+/**
+ * SELF-CITATION — informational, added 2026-09-03 (audit ruling 5-B). Not
+ * yet excluded from the authority calculation (that's a renderer-round
+ * change, Midvamp §3) — this count is what that change would touch.
+ */
+const selfCiting = dependencies.filter((d) => {
+  const source = reports.find((r) => r.id === d.source_report_id)
+  const target = reports.find((r) => r.id === d.target_report_id)
+  return source && target && isSelfCitation(source, target)
+})
+console.log(`SELF-CITATION — ${selfCiting.length} of ${dependencies.length} edges share a publisher between source and target`)
+const selfCiteTargets = new Map<string, number>()
+for (const d of selfCiting) selfCiteTargets.set(d.target_report_id, (selfCiteTargets.get(d.target_report_id) ?? 0) + 1)
+for (const [id, n] of [...selfCiteTargets].sort((a, b) => b[1] - a[1]).slice(0, 8)) {
+  console.log(`      ${String(n).padStart(3)}  ${id}`)
+}
 console.log()
 
 if (loadIssues.danglingRelations.length) {

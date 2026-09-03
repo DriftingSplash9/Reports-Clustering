@@ -309,6 +309,10 @@ function buildOrbNode(family: ColourFamily, members: ScoredReport[], depth: numb
     id: orbId(family),
     title: `${group?.label ?? family} — ${levelLabel} and below (${members.length})`,
     publisher: `${members.length} folded report${members.length === 1 ? '' : 's'}`,
+    // Not a real document -- a renderer-synthesized fold of many. 'publication'
+    // is an arbitrary placeholder; orbs never reach validate(), which is the
+    // only reader of kind's cadence rules.
+    kind: 'publication',
     country,
     jurisdiction_level: nominalLevel,
     region: group?.label ?? family,
@@ -356,6 +360,8 @@ function buildCountryOrbNode(country: Country, members: ScoredReport[], drilldow
     id: countryOrbId(country),
     title: `${name} — ${members.length} folded report${members.length === 1 ? '' : 's'}`,
     publisher: `${members.length} folded report${members.length === 1 ? '' : 's'}`,
+    // See buildOrbNode's identical comment just above in this file.
+    kind: 'publication',
     country,
     jurisdiction_level: nominalLevel,
     region: name,

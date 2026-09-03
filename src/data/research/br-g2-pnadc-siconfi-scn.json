@@ -18,7 +18,8 @@
       "url": "https://www.gov.br/tesouronacional/pt-br/estados-e-municipios/dados-consolidados/finbra-financas-municipais",
       "domains": [
         "municipal-finance"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "br-mdf",
@@ -34,7 +35,8 @@
       "url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf",
       "domains": [
         "municipal-finance"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "br-cnt",
@@ -50,7 +52,8 @@
       "url": "https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9300-contas-nacionais-trimestrais.html",
       "domains": [
         "national-accounts"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "br-lei-8213",
@@ -65,7 +68,8 @@
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
       "domains": [
         "benefits"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "br-portaria-reajuste-inss",
@@ -81,7 +85,8 @@
       "url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603",
       "domains": [
         "benefits"
-      ]
+      ],
+      "kind": "publication"
     },
     {
       "id": "br-lei-14663",
@@ -96,7 +101,8 @@
       "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm",
       "domains": [
         "labour"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "br-decreto-salario-minimo",
@@ -112,7 +118,8 @@
       "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm",
       "domains": [
         "labour"
-      ]
+      ],
+      "kind": "publication"
     }
   ],
   "dependencies": [
@@ -139,7 +146,7 @@
     {
       "source_report_id": "br-portaria-reajuste-inss",
       "target_report_id": "br-lei-8213",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (in.gov.br DOU text, HTTP 200, 104,885 bytes). The Portaria's preamble names the article by number: \"OS MINISTROS DE ESTADO DA PREVIDÊNCIA SOCIAL E DA FAZENDA ... tendo em vista o disposto ... no art. 41-A da Lei nº 8.213, de 24 de julho de 1991...\" `methodology_depends_on` rather than `cites` because art. 41-A supplies the actual method the Portaria executes — which index (INPC), whose index (IBGE), on what date (\"na mesma data do reajuste do salário mínimo\"), and on what pro rata basis (\"de acordo com suas respectivas datas de início ou do último reajustamento\") — the same distinction br-fiscal-responsibility-law.json draws for br-rreo -> br-lc-101-2000 (statute supplies method) against br-fpm-population.json's br-ibge-estimativas-populacao -> br-lei-8443 (statute supplies only a mandate and a deadline). THIS EDGE IS ALSO THE ONLY ROUTE FROM THIS PORTARIA TO INPC, AND THAT IS THE POINT: the Portaria's full DOU text contains zero occurrences of \"INPC\" and names no index — it states only the outcome (\"serão reajustados, a partir de 1º de janeiro de 2026, em 3,90%\"). The index naming lives one hop upstream, here. A direct br-portaria-reajuste-inss -> br-inpc edge would assert something the document does not say and is deliberately not minted.",
       "evidence_url": "https://www.in.gov.br/web/dou/-/portaria-interministerial-mps/mf-n-13-de-9-de-janeiro-de-2026-680382603"
     },
@@ -160,7 +167,7 @@
     {
       "source_report_id": "br-decreto-salario-minimo",
       "target_report_id": "br-lei-14663",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (planalto.gov.br, plain curl with a browser User-Agent, HTTP 200, 10,327 bytes). Decreto 12.797/2025's preamble: \"O PRESIDENTE DA REPÚBLICA, no uso da atribuição que lhe confere o art. 84, caput, inciso IV, da Constituição, e tendo em vista o disposto na Lei nº 14.663, de 28 de agosto de 2023, e na Lei nº 15.077, de 27 de dezembro de 2024, DECRETA:\" `methodology_depends_on` rather than `cites`, and the contrast with br-ipca-fpe.json's br-resolucao-cmn-5141 -> br-decreto-12079-2024 is exactly the reason: that edge was typed `cites` because the decree \"delegates the choice and fixes no method of its own\". Lei 14.663 is the opposite case — art. 3º states the whole computation the decree's single number is the output of (\"o valor decorrerá da soma do índice de medida da inflação do ano anterior ... com o índice correspondente ao crescimento real do Produto Interno Bruto (PIB) de 2 (dois) anos anteriores\"), including the index, the accumulation window and the fallback rules. The decree publishes the result; the statute supplies the method.",
       "evidence_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/d12797.htm"
     },
@@ -188,7 +195,7 @@
     {
       "source_report_id": "br-mdf",
       "target_report_id": "br-lc-101-2000",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "VERIFIED DIRECTLY, TIER A (STN's own FINBRA/SICONFI Cartilha PDF). The MDF's scope sentence ends by subordinating its own methodology to the LRF's parameters: \"O MDF estabelece regras de harmonização a serem observadas, de forma permanente, pela Administração Pública para a elaboração do Anexo de Riscos Fiscais (ARF), do Anexo de Metas Fiscais (AMF), do Relatório Resumido da Execução Orçamentária (RREO) e do Relatório de Gestão Fiscal (RGF), e define orientações metodológicas, consoante os parâmetros definidos pela LRF.\" `methodology_depends_on` rather than `cites`: the MDF is not merely authorised by the LRF, its content is derived from it — the demonstratives it standardises are the ones LC 101/2000 arts. 52–55 require, and the limits and defined terms they test against are the statute's own. CAVEAT, STATED RATHER THAN GLOSSED: this quotation is STN's description of the MDF inside the FINBRA Cartilha, not the MDF's own text. It is a first-party source (same Secretaria, same publisher) but not the dependent document itself, which is the strict form of the project's rule. See the node description on br-mdf and the caveat entry in _dropped.",
       "evidence_url": "https://siconfi.tesouro.gov.br/siconfi/pages/public/arquivo/conteudo/Cartilha_do_Finbra_2023.pdf"
     },

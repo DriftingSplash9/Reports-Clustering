@@ -30,7 +30,8 @@
       "url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401",
       "domains": [
         "national-accounts"
-      ]
+      ],
+      "kind": "publication"
     }
   ],
   "dependencies": [
@@ -46,7 +47,8 @@
       "target_report_id": "statcan-sut",
       "relationship_type": "calculated_from",
       "basis": "Record 1901, under Estimation: 'The National Gross Domestic Product (GDP) by Income and by Expenditure Accounts are estimated by taking the most complete and high quality data sources available to establish annual benchmark estimates. ... The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use. These tables present the most complete and accurate depiction of Canadian economic activity.' The same record's Revisions section adds that statistical revisions incorporate 'the annual benchmarking process of the supply and use tables'. This is the edge that makes the V0.10 deletion of statcan-national-accounts -> statcan-gdp-monthly legible rather than merely correct: the quarterly and monthly programmes do not read each other, they are two projections off this common annual benchmark.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=1561222",
+      "mutual": true
     },
     {
       "source_report_id": "statcan-sut",
@@ -60,7 +62,8 @@
       "target_report_id": "statcan-national-accounts",
       "relationship_type": "methodology_depends_on",
       "basis": "The reverse of statcan-national-accounts -> statcan-sut, and taken deliberately under the V0.10 decision that a node may be a mutual definitional partner. Record 1401, Quality evaluation: 'The input-output framework is validated for accuracy, coherence and overall reasonableness. The major components of the framework, such as the income and expenditure-based GDP components are reconciled to the national and provincial-territorial income and expenditure accounts.' Record 1901 states the converse in its own Estimation section: 'The annual benchmarks for GDP by the income approach and by the expenditure approach are generated through the construction of annual supply and use tables which balance the supply of each product in the economy against its use.' Neither statement is a mistake and neither supersedes the other — annual benchmarking is an iterative balancing process in which each side constrains the other, which is what the accounts mean by coherence. The pair is asymmetric in strength and the `relationship_type` records that: 1901 discloses the SUT as the source of its benchmark levels (`calculated_from`), while 1401 describes reconciliation as a validation step rather than an input (`methodology_depends_on`), so the cycle is not symmetric in weight and does not assert that the two are interchangeable.",
-      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401"
+      "evidence_url": "https://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=1401",
+      "mutual": true
     }
   ],
   "_dropped": [

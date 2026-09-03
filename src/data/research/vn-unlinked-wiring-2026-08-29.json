@@ -16,7 +16,8 @@
       "url": "https://www.imf.org/external/pubs/ft/psds/2011/eng/index.htm",
       "domains": [
         "public-finance"
-      ]
+      ],
+      "kind": "standard"
     },
     {
       "id": "oecd-digital-suts-handbook",
@@ -30,7 +31,8 @@
       "url": "https://www.oecd.org/en/publications/oecd-handbook-on-compiling-digital-supply-and-use-tables_11a0db02-en.html",
       "domains": [
         "services"
-      ]
+      ],
+      "kind": "instrument"
     },
     {
       "id": "ipcc-ghg-guidelines",
@@ -44,7 +46,8 @@
       "url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/",
       "domains": [
         "environment"
-      ]
+      ],
+      "kind": "instrument"
     }
   ],
   "dependencies": [
@@ -86,14 +89,14 @@
     {
       "source_report_id": "vn-digital-economy",
       "target_report_id": "oecd-digital-suts-handbook",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "GSO's own December 2023 press release on compiling the digital economy's value-added share of GDP/GRDP states it studied international measurement frameworks and names OECD's handbook specifically: \"Tháng 11 năm 2023 tổ chức này đã ban hành Sổ tay biên soạn D.SUTs để làm rõ hơn các khái niệm cũng như hướng dẫn chi tiết phương pháp\" (\"In November 2023 this organisation [OECD] issued the D.SUTs Compilation Handbook to further clarify the concepts and give detailed methodological guidance\"). The same release also discusses an alternative ADB input-output framework, but names the OECD D.SUTs handbook as the guidance whose concepts it adopted.",
       "evidence_url": "https://www.gso.gov.vn/tin-tuc-thong-ke/2023/12/thong-cao-bao-chi-ve-ket-qua-bien-soan-chi-tieu-ty-trong-gia-tri-tang-them-cua-kinh-te-so-trong-gdp-grdp-cua-viet-nam/"
     },
     {
       "source_report_id": "vn-ghg",
       "target_report_id": "ipcc-ghg-guidelines",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "Vietnam's 3rd Biennial Update Report (BUR3) to the UNFCCC states directly: \"The national GHG inventory is carried out in accordance with the guidelines of the IPCC, including: The 2006 IPCC Guidelines for national GHG inventories ... The 2019 refinement to the 2006 IPCC Guidelines for national GHG inventories.\"",
       "evidence_url": "https://unfccc.int/sites/default/files/resource/Viet%20Nam_BUR3.pdf"
     },
@@ -114,14 +117,14 @@
     {
       "source_report_id": "vn-ndc",
       "target_report_id": "ipcc-ghg-guidelines",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "The same NDC document states: \"The Revised 1996 IPCC Guidelines for National Greenhouse Gas Inventories and the 2000 IPCC Good Practice Guidance have been used to calculate and forecast GHG emissions to 2030 ... the IPCC Good Practice Guidance for the LULUCF sector in 2003 has been used,\" citing an earlier IPCC edition than BUR3's 2006/2019 citation — both fall under the same corpus node (ipcc-ghg-guidelines), scoped to the IPCC Guidelines standard across its cumulative editions rather than one fixed vintage, unlike SNA/COICOP where each edition is a materially different, non-cumulative framework.",
       "evidence_url": "https://unfccc.int/sites/default/files/NDC/2022-11/Viet%20Nam_NDC_2022_Eng.pdf"
     },
     {
       "source_report_id": "vn-monetary-indicators",
       "target_report_id": "imf-mfsmcg-2016",
-      "relationship_type": "methodology_depends_on",
+      "relationship_type": "legal_basis",
       "basis": "RULING (Thomas, 2026-08-30): wire despite the generic/aspirational citation, resolving the recurring generic-MFSM modelling question in favor of the versioned node. SBV's Depository Corporations Survey DQAF metadata document (authored by SBV's Forecasting and Statistics Department) states: \"The classification by institutional sectors is incomplete and not fully in line with the guidance of the IMF's Monetary and Financial Statistics Manual (MFSM).\" and \"With the implementation of International Accounting Standards (IAS) as the accounting and reporting framework for financial institutions in Vietnam, the SBV intends to gradually adapt the guidelines of the MFSM on (1) calculation of flows ...; (2) valuation of financial assets and liabilities; and (3) accrual accounting for the compilation of monetary and financial statistics.\" Re-fetched and quote-confirmed verbatim 2026-08-30 (direct docx download, 51,642 bytes, text-extracted). The citation names no edition and is paired elsewhere in the same document with '1993 SNA', which would normally point to the legacy MFSM (2000) rather than this corpus's versioned imf-mfsmcg-2016 node -- the same generic-citation-vs-versioned-node shape as the Iran/Iraq COICOP and Iran SNA-93 decisions. Held pending a ruling in the 2026-08-29 round; Thomas has now ruled to wire it to imf-mfsmcg-2016.",
       "evidence_url": "https://nsdp.nso.gov.vn/GSO-chung/Tu%E1%BA%A5n%20Anh/metadata%20tieng%20Anh-moi/SBV.VNM_GDDS_DQAF_FIN_AAB00_Depository%20corporations%20survey.docx"
     }

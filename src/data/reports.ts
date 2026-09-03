@@ -14,6 +14,7 @@ export const reports: Report[] = [
   // ── Canada ────────────────────────────────────────────────────────────────
   {
     id: 'statcan-cpi',
+    kind: 'publication',
     title: 'Consumer Price Index',
     publisher: 'Statistics Canada',
     country: 'CA',
@@ -45,6 +46,7 @@ export const reports: Report[] = [
   },
   {
     id: 'statcan-lfs',
+    kind: 'publication',
     title: 'Labour Force Survey',
     publisher: 'Statistics Canada',
     country: 'CA',
@@ -73,6 +75,7 @@ export const reports: Report[] = [
   },
   {
     id: 'statcan-seph',
+    kind: 'publication',
     title: 'Survey of Employment, Payrolls and Hours',
     publisher: 'Statistics Canada',
     country: 'CA',
@@ -104,6 +107,7 @@ export const reports: Report[] = [
   },
   {
     id: 'statcan-gdp-monthly',
+    kind: 'publication',
     title: 'Gross Domestic Product by Industry (Monthly)',
     publisher: 'Statistics Canada',
     country: 'CA',
@@ -133,6 +137,7 @@ export const reports: Report[] = [
   },
   {
     id: 'statcan-national-accounts',
+    kind: 'publication',
     title: 'National Economic Accounts (Quarterly)',
     publisher: 'Statistics Canada',
     country: 'CA',
@@ -159,6 +164,7 @@ export const reports: Report[] = [
   },
   {
     id: 'boc-policy-rate',
+    kind: 'publication',
     title: 'Policy Interest Rate Announcement',
     publisher: 'Bank of Canada',
     country: 'CA',
@@ -195,6 +201,7 @@ export const reports: Report[] = [
   },
   {
     id: 'boc-mpr',
+    kind: 'publication',
     title: 'Monetary Policy Report',
     publisher: 'Bank of Canada',
     country: 'CA',
@@ -217,6 +224,7 @@ export const reports: Report[] = [
   },
   {
     id: 'esdc-oas-indexation',
+    kind: 'publication',
     title: 'Old Age Security Payment Indexation',
     publisher: 'Employment and Social Development Canada',
     country: 'CA',
@@ -243,6 +251,7 @@ export const reports: Report[] = [
   },
   {
     id: 'cpp-ympe',
+    kind: 'publication',
     title: "Year's Maximum Pensionable Earnings (YMPE)",
     publisher: 'Canada Revenue Agency',
     country: 'CA',
@@ -269,6 +278,7 @@ export const reports: Report[] = [
   },
   {
     id: 'cpp-disability-amount',
+    kind: 'publication',
     title: 'CPP Disability Benefit Amount',
     publisher: 'Employment and Social Development Canada',
     country: 'CA',
@@ -297,6 +307,7 @@ export const reports: Report[] = [
   // ── United States ─────────────────────────────────────────────────────────
   {
     id: 'bls-cpi',
+    kind: 'publication',
     title: 'Consumer Price Index (CPI-U / CPI-W)',
     publisher: 'Bureau of Labor Statistics',
     country: 'US',
@@ -322,6 +333,7 @@ export const reports: Report[] = [
   },
   {
     id: 'bls-employment-situation',
+    kind: 'publication',
     title: 'The Employment Situation',
     publisher: 'Bureau of Labor Statistics',
     country: 'US',
@@ -347,6 +359,7 @@ export const reports: Report[] = [
   },
   {
     id: 'bea-pce',
+    kind: 'publication',
     title: 'Personal Income and Outlays (incl. PCE Price Index)',
     publisher: 'Bureau of Economic Analysis',
     country: 'US',
@@ -373,6 +386,7 @@ export const reports: Report[] = [
   },
   {
     id: 'bea-gdp',
+    kind: 'publication',
     title: 'Gross Domestic Product (NIPA)',
     publisher: 'Bureau of Economic Analysis',
     country: 'US',
@@ -402,6 +416,7 @@ export const reports: Report[] = [
   },
   {
     id: 'fed-fomc-statement',
+    kind: 'publication',
     title: 'FOMC Statement and Federal Funds Target',
     publisher: 'Federal Reserve',
     country: 'US',
@@ -428,6 +443,7 @@ export const reports: Report[] = [
   },
   {
     id: 'fed-sep',
+    kind: 'publication',
     title: 'Summary of Economic Projections',
     publisher: 'Federal Reserve',
     country: 'US',
@@ -461,6 +477,7 @@ export const reports: Report[] = [
   },
   {
     id: 'fed-h15',
+    kind: 'publication',
     title: 'H.15 Selected Interest Rates',
     publisher: 'Federal Reserve',
     country: 'US',
@@ -491,6 +508,7 @@ export const reports: Report[] = [
   },
   {
     id: 'ssa-cola',
+    kind: 'publication',
     title: 'Social Security Cost-of-Living Adjustment',
     publisher: 'Social Security Administration',
     country: 'US',

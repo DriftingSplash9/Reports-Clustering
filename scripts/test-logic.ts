@@ -42,8 +42,8 @@ ok(isRealDate('2026-02-28') && !isRealDate('2026-02-31') && !isRealDate('2026-13
 // real, well-formed dates. Before 2026-08-12 this produced "2026-11.5-30".
 {
   const reports: Report[] = [
-    { id: 'up', title: 'Up', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', releases_per_year: 12, last_updated: null, url: '', domains: [] },
-    { id: 'down', title: 'Down', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', releases_per_year: 1, last_updated: null, url: '', domains: [] },
+    { id: 'up', title: 'Up', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', releases_per_year: 12, last_updated: null, url: '', domains: [], kind: 'publication' },
+    { id: 'down', title: 'Down', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', releases_per_year: 1, last_updated: null, url: '', domains: [], kind: 'publication' },
   ]
   const deps: Dependency[] = [{
     source_report_id: 'down', target_report_id: 'up', relationship_type: 'uses_data_from', basis: 'test',
@@ -107,7 +107,7 @@ ok(describeWindow('2026-07-01', '2026-09-30', 'quarter') === 'Q3 2026', 'describ
 ok(cadenceBand(undefined) === 'year' && cadenceBand(8) === 'quarter' && cadenceBand(52) === 'week', 'cadenceBand: evergreen→year, BoC 8/yr→quarter, weekly→week')
 ok(horizonWindow('week', '2026-08-12').to === '2026-08-19', 'horizonWindow: a week is seven days')
 {
-  const r: Report = { id: 'x', title: 'x', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', releases_per_year: 12, last_updated: null, url: '', domains: [], release_schedule: { kind: 'published-calendar', entries: [ { from: '2026-08-01', to: '2026-08-01', precision: 'day' }, { from: '2026-09-01', to: '2026-09-01', precision: 'day' } ] } }
+  const r: Report = { id: 'x', title: 'x', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', releases_per_year: 12, last_updated: null, url: '', domains: [], kind: 'publication', release_schedule: { kind: 'published-calendar', entries: [ { from: '2026-08-01', to: '2026-08-01', precision: 'day' }, { from: '2026-09-01', to: '2026-09-01', precision: 'day' } ] } }
   ok(nextRelease(r, '2026-08-12')?.from === '2026-09-01', 'nextRelease: first entry not yet finished wins')
 }
 
@@ -129,9 +129,9 @@ ok(countryFromOrbId(countryOrbId('MX')) === 'MX', 'countryOrbId / countryFromOrb
   // Two families, two tiers; an edge inside a family must vanish (self-loop),
   // one across families must survive remapped to the orbs.
   const reports: Report[] = [
-    { id: 'ca-fed', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'ca-mun', title: 'b', publisher: 'p', country: 'CA', jurisdiction_level: 'municipal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'us-fed', title: 'c', publisher: 'p', country: 'US', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'ca-fed', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'ca-mun', title: 'b', publisher: 'p', country: 'CA', jurisdiction_level: 'municipal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'us-fed', title: 'c', publisher: 'p', country: 'US', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
   ]
   const deps: Dependency[] = [
     { source_report_id: 'ca-mun', target_report_id: 'ca-fed', relationship_type: 'cites', basis: 't' },
@@ -180,8 +180,8 @@ ok(isolateFirstToggle(['b'], ['a', 'b', 'c'], ['a', 'c']) === null, 'isolate-fir
 ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: isolating everything is not a filter')
 {
   const reports: Report[] = [
-    { id: 'n1', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: ['inflation'] },
-    { id: 'n2', title: 'b', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: ['labour'], source_kind: 'commercial' },
+    { id: 'n1', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: ['inflation'], kind: 'instrument' },
+    { id: 'n2', title: 'b', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: ['labour'], source_kind: 'commercial', kind: 'instrument' },
   ]
   const deps: Dependency[] = [
     { source_report_id: 'n1', target_report_id: 'n2', relationship_type: 'cites', basis: 't' },
@@ -210,7 +210,7 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
 // Three new validator rules, 2026-08-21 (review §2, §6 item 7): the reserved
 // orb:/corb:/-> namespaces, COUNTRY_LABEL coverage, and strength range.
 {
-  const base = { title: 'x', publisher: 'p', country: 'CA' as const, jurisdiction_level: 'federal' as const, region: 'r', description: '', last_updated: null, url: '', domains: [] }
+  const base = { title: 'x', publisher: 'p', country: 'CA' as const, jurisdiction_level: 'federal' as const, region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' as const }
   // Reserved id prefixes/separator — the renderer mints orb:/corb: ids and
   // uses -> as the edgeKey separator; a research file must never collide.
   const orbClash = validate([{ ...base, id: 'orb:asia-something' }], [])
@@ -250,19 +250,19 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
 // falls into isStandingInstrument's "one-off, draw hollow" case instead —
 // the two claims are opposites and must never collide.
 {
-  const base = { title: 'x', publisher: 'p', country: 'CA' as const, jurisdiction_level: 'federal' as const, region: 'r', description: '', last_updated: null, url: '', domains: [] }
+  const base = { title: 'x', publisher: 'p', country: 'CA' as const, jurisdiction_level: 'federal' as const, region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' as const }
   const noRate = validate([{ ...base, id: 'r1', continuous: true }], [])
   ok(noRate.some((i) => i.severity === 'error' && i.message.includes('continuous is true but releases_per_year is absent')), 'validate: continuous: true with no releases_per_year is an error')
-  const withRate = validate([{ ...base, id: 'r1', continuous: true, releases_per_year: 250 }], [])
+  const withRate = validate([{ ...base, id: 'r1', continuous: true, releases_per_year: 250, kind: 'publication' as const }], [])
   ok(!withRate.some((i) => i.message.includes('continuous')), 'validate: continuous: true with a nominal releases_per_year passes clean')
-  const ordinary = validate([{ ...base, id: 'r1', releases_per_year: 12 }], [])
+  const ordinary = validate([{ ...base, id: 'r1', releases_per_year: 12, kind: 'publication' as const }], [])
   ok(!ordinary.some((i) => i.message.includes('continuous')), 'validate: an ordinary recurring report (continuous absent) is unaffected')
 }
 
 // --------------------------------------------------------------- selection --
 {
   // a -> b -> c chain plus a cycle c -> a: both cones, cycle-safe.
-  const reports: Report[] = ['a', 'b', 'c'].map((id) => ({ id, title: id, publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] }))
+  const reports: Report[] = ['a', 'b', 'c'].map((id) => ({ id, title: id, publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' as const }))
   const deps: Dependency[] = [
     { source_report_id: 'a', target_report_id: 'b', relationship_type: 'cites', basis: 't' },
     { source_report_id: 'b', target_report_id: 'c', relationship_type: 'cites', basis: 't' },
@@ -286,8 +286,8 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   // difference so nobody "fixes" isolateFocus into reusing the filtered
   // index and quietly reintroduces the bug it exists to avoid.
   const reports: Report[] = [
-    { id: 'il-report', title: 'Israel report', publisher: 'p', country: 'IL', jurisdiction_level: 'federal', region: 'Israel', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'py-mercosur-israel', title: 'MERCOSUR-Israel', publisher: 'p', country: 'PY', jurisdiction_level: 'international', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'il-report', title: 'Israel report', publisher: 'p', country: 'IL', jurisdiction_level: 'federal', region: 'Israel', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'py-mercosur-israel', title: 'MERCOSUR-Israel', publisher: 'p', country: 'PY', jurisdiction_level: 'international', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
   ]
   const deps: Dependency[] = [
     { source_report_id: 'il-report', target_report_id: 'py-mercosur-israel', relationship_type: 'cites', basis: 't' },
@@ -311,9 +311,9 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
   // "group" (a synthetic bloc), citing each other, plus one outside the group
   // that one of them also cites.
   const reports: Report[] = [
-    { id: 'g1', title: 'g1', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'g2', title: 'g2', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'outside', title: 'outside', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'g1', title: 'g1', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'g2', title: 'g2', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'outside', title: 'outside', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
   ]
   const deps: Dependency[] = [
     { source_report_id: 'g1', target_report_id: 'g2', relationship_type: 'cites', basis: 't' },
@@ -347,6 +347,7 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
     last_updated: null,
     url: '',
     domains: [],
+    kind: 'instrument' as const,
   }))
   const deps: Dependency[] = [
     { source_report_id: 'a', target_report_id: 'b', relationship_type: 'cites', basis: 't' },
@@ -396,6 +397,7 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
     last_updated: null,
     url: '',
     domains: [],
+    kind: 'instrument' as const,
   }))
   const deps: Dependency[] = [
     { source_report_id: 'x', target_report_id: 'shared', relationship_type: 'cites', basis: 't' },
@@ -441,6 +443,7 @@ ok(isolateFirstToggle(null, ['a', 'b'], ['a', 'b']) === null, 'isolate-first: is
     last_updated: null,
     url: '',
     domains: [],
+    kind: 'instrument' as const,
   }))
   const deps: Dependency[] = [
     { source_report_id: 'sib1', target_report_id: 'upstream', relationship_type: 'cites', basis: 't' },
@@ -539,9 +542,9 @@ ok(isDocumented({}) && !isDocumented({ evidence: 'implied' }), 'isDocumented: ab
   // The sink-exclusion property, in miniature: a commercial node's presence
   // must not move an official score.
   const reports: Report[] = [
-    { id: 'o1', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'o2', title: 'b', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'com', title: 'c', publisher: 'p', country: 'CA', jurisdiction_level: 'institutional', region: 'r', description: '', last_updated: null, url: '', domains: [], source_kind: 'commercial' },
+    { id: 'o1', title: 'a', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'o2', title: 'b', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'com', title: 'c', publisher: 'p', country: 'CA', jurisdiction_level: 'institutional', region: 'r', description: '', last_updated: null, url: '', domains: [], source_kind: 'commercial', kind: 'instrument' },
   ]
   const deps: Dependency[] = [
     { source_report_id: 'o1', target_report_id: 'o2', relationship_type: 'calculated_from', basis: 't' },
@@ -557,8 +560,8 @@ ok(isDocumented({}) && !isDocumented({ evidence: 'implied' }), 'isDocumented: ab
 // ------------------------------------------------------------------ search --
 {
   const reports: Report[] = [
-    { id: 'statcan-cpi', title: 'Consumer Price Index', publisher: 'Statistics Canada', country: 'CA', jurisdiction_level: 'federal', region: 'Canada', description: 'prices', last_updated: null, url: '', domains: [] },
-    { id: 'corporate-thing', title: 'Corporate Rates Digest', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'Canada', description: 'corporate', last_updated: null, url: '', domains: [] },
+    { id: 'statcan-cpi', title: 'Consumer Price Index', publisher: 'Statistics Canada', country: 'CA', jurisdiction_level: 'federal', region: 'Canada', description: 'prices', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'corporate-thing', title: 'Corporate Rates Digest', publisher: 'p', country: 'CA', jurisdiction_level: 'federal', region: 'Canada', description: 'corporate', last_updated: null, url: '', domains: [], kind: 'instrument' },
   ]
   const g = buildGraph(reports, [])
   ok(search(g, 'cpi', () => true)[0]?.report.id === 'statcan-cpi', 'search: id acronym found at full weight')
@@ -574,9 +577,9 @@ ok(isDocumented({}) && !isDocumented({ evidence: 'implied' }), 'isDocumented: ab
 // own Cyrillic text instead of being blanked out as "punctuation".
 {
   const reports: Report[] = [
-    { id: 'ci-report', title: "Côte d'Ivoire commune finance", publisher: 'p', country: 'CI', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'tr-report', title: 'Türkiye Cumhuriyet Merkez Bankası', publisher: 'p', country: 'TR', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
-    { id: 'ru-report', title: 'Росстат национальные счета', publisher: 'p', country: 'RU', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [] },
+    { id: 'ci-report', title: "Côte d'Ivoire commune finance", publisher: 'p', country: 'CI', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'tr-report', title: 'Türkiye Cumhuriyet Merkez Bankası', publisher: 'p', country: 'TR', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
+    { id: 'ru-report', title: 'Росстат национальные счета', publisher: 'p', country: 'RU', jurisdiction_level: 'federal', region: 'r', description: '', last_updated: null, url: '', domains: [], kind: 'instrument' },
   ]
   const g = buildGraph(reports, [])
   ok(search(g, 'cote', () => true).some((r) => r.report.id === 'ci-report'), 'search: accent-folded "cote" finds "Côte d\'Ivoire"')
