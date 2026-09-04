@@ -750,6 +750,19 @@ country/file/round, not a single site's own one-off quirk.
   downgrade whose reason is a route failure** (`wall:*`, `empty:*`,
   `no-document`) rather than an evidence finding. A route the grader cannot
   take is not evidence that the evidence got worse.
+- **An `undocked, maximised DevTools window` fully occludes the page, and the
+  rAF signature of that is unmistakable: median frame time pinned at exactly
+  33.40 ms** (2026-09-04). Chrome throttles a fully covered window's
+  `requestAnimationFrame` to 30 Hz and stalls it outright in gaps, so three
+  consecutive 15 s runs read fps **8.6 / 28.0 / 3.6 with the SAME 33.40 ms
+  median** — the median is the throttled cadence, the fps spread is the stalls.
+  Any in-page frame measurement needs a **lead-in delay** so the app window can
+  be brought to the front before counting starts, and should log
+  `document.visibilityState` misses so a throttled run is self-evident. The
+  same run read `calls 1 tris 1`: `renderer.info.render` is reset per frame, so
+  it must be sampled INSIDE the rAF loop (take the max), never after it — and if
+  it still reads ~1 with the window in front, suspect `__rig` pointing at the
+  StrictMode orphan renderer rather than a real draw-call count.
 - **Re-test a "blocked by the Chrome extension" host before believing it**
   (2026-09-04). All five hosts recorded on 2026-09-04 as refused by the
   extension's site list — `wam.ae`, `gov.il`, `pc.odisha.gov.in`,
