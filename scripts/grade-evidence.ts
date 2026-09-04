@@ -579,7 +579,7 @@ export interface Fetched {
   finalUrl: string
   contentType: string
   bodyBytes: number
-  extractor: 'pdftotext' | 'html' | 'docx' | 'text' | 'none'
+  extractor: 'pdftotext' | 'html' | 'docx' | 'xlsx' | 'text' | 'none'
   block: Block
   blockLabel: string
   text: string
@@ -686,12 +686,14 @@ function writeEvidenceRecord(
   writeFileSync(join(cacheDir, `${urlKey(f.url)}.txt.gz`), gzipSync(Buffer.from(header + CACHE_SEP + body, 'utf8')))
 }
 
-function stripHtml(html: string): string {
-  return html
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<(script|style|noscript|svg)\b[\s\S]*?<\/\1>/gi, ' ')
-    .replace(/<br\s*\/?>|<\/(p|div|li|tr|h[1-6])>/gi, '\n')
-    .replace(/<[^>]+>/g, ' ')
+/**
+ * The entity table, shared by `stripHtml` and the spreadsheet reader. The
+ * ORDER is load-bearing and is the order `stripHtml` has always used: `&amp;`
+ * before the numeric forms, so `&amp;lt;` decodes to the literal `&lt;` and
+ * not to `<`.
+ */
+function decodeEntities(text: string): string {
+  return text
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/gi, '&')
     .replace(/&lt;/gi, '<')
@@ -699,9 +701,122 @@ function stripHtml(html: string): string {
     .replace(/&quot;/gi, '"')
     .replace(/&#(\d+);/g, (_, d: string) => String.fromCodePoint(Number(d)))
     .replace(/&#x([0-9a-f]+);/gi, (_, h: string) => String.fromCodePoint(parseInt(h, 16)))
+}
+
+function stripHtml(html: string): string {
+  return decodeEntities(
+    html
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<(script|style|noscript|svg)\b[\s\S]*?<\/\1>/gi, ' ')
+      .replace(/<br\s*\/?>|<\/(p|div|li|tr|h[1-6])>/gi, '\n')
+      .replace(/<[^>]+>/g, ' '),
+  )
     .replace(/[ \t ]+/g, ' ')
     .replace(/\n{3,}/g, '\n\n')
     .trim()
+}
+
+/**
+ * Every `<t>` inside one `<si>` (shared string) or `<is>` (inline string),
+ * concatenated with NOTHING between the runs — that is Excel's own rule, and
+ * it is why this cannot go through `stripHtml`, which puts a space where each
+ * tag was and would turn the rich-text cell `Incidencia de pobreza (FGT` + `0`
+ * + `)` into `... (FGT 0 )`, breaking any quote lifted from the real sheet.
+ */
+function ooxmlRuns(fragment: string): string {
+  return decodeEntities(
+    (fragment.match(/<t[^>]*>[\s\S]*?<\/t>/g) ?? [])
+      .map((t) => t.replace(/^<t[^>]*>/, '').replace(/<\/t>$/, ''))
+      .join(''),
+  )
+}
+
+/**
+ * An OOXML spreadsheet as text: every non-empty row on its own line, cells
+ * tab-separated, sheets in file order. Kept pure and separate from the unzip
+ * so the selftest can exercise it on literal XML.
+ *
+ * Deliberately reads `<v>` and not the displayed value: `xl/styles.xml` is
+ * where the number formats live (3.2 MB of it in the Bolivian anuario alone)
+ * and applying them would mean reimplementing Excel's formatter. `<v>` is the
+ * stored double, so a cell shown as `633,364.2` reads here as
+ * `633364.19999999995` — which is exactly what a reader copying a figure out
+ * of the sheet in a browser also gets, so quotes match. The cost is that date
+ * cells read as serial numbers.
+ */
+function xlsxText(sharedStringsXml: string | null, sheetXmls: string[]): string {
+  const shared = sharedStringsXml
+    ? (sharedStringsXml.match(/<si>[\s\S]*?<\/si>|<si\s*\/>/g) ?? []).map(ooxmlRuns)
+    : []
+  const lines: string[] = []
+  for (const xml of sheetXmls) {
+    for (const row of xml.match(/<row[^>]*>[\s\S]*?<\/row>/g) ?? []) {
+      const cells: string[] = []
+      // The self-closing alternative MUST come first. `<c[^>]*>` happily
+      // matches `<c r="B1" s="2"/>` as an opening tag, and the paired branch
+      // would then run `[\s\S]*?` on to the NEXT `</c>` and swallow the
+      // following cell whole.
+      for (const c of row.match(/<c[^>]*\/>|<c[^>]*>[\s\S]*?<\/c>/g) ?? []) {
+        const type = /\st="([^"]+)"/.exec(c)?.[1]
+        if (type === 'inlineStr') {
+          const inline = ooxmlRuns(c)
+          if (inline) cells.push(inline)
+          continue
+        }
+        const v = /<v[^>]*>([\s\S]*?)<\/v>/.exec(c)?.[1]
+        if (v === undefined) continue
+        cells.push(type === 's' ? (shared[Number(v)] ?? '') : decodeEntities(v))
+      }
+      const line = cells.join('\t').trim()
+      if (line) lines.push(line)
+    }
+  }
+  return lines.join('\n')
+}
+
+/** `xlsxText` over a real workbook on disk, via `unzip` like the docx branch. */
+async function extractXlsx(bodyPath: string): Promise<string> {
+  const listed = await execFileAsync('unzip', ['-Z1', bodyPath], { maxBuffer: 8 << 20 })
+  const names = listed.stdout.split('\n').map((n) => n.trim()).filter(Boolean)
+  const read = async (name: string) =>
+    (await execFileAsync('unzip', ['-p', bodyPath, name], { maxBuffer: 64 << 20 })).stdout
+  const sharedXml = names.includes('xl/sharedStrings.xml') ? await read('xl/sharedStrings.xml') : null
+  const sheetNames = names
+    .filter((n) => /^xl\/worksheets\/sheet\d+\.xml$/.test(n))
+    .sort((a, b) => Number(/\d+/.exec(a)?.[0] ?? 0) - Number(/\d+/.exec(b)?.[0] ?? 0))
+  const sheets: string[] = []
+  for (const n of sheetNames) sheets.push(await read(n))
+  return xlsxText(sharedXml, sheets)
+}
+
+/**
+ * Percent-encode a URL for curl.
+ *
+ * curl rejects a URL carrying raw spaces or non-ASCII bytes with exit code 3
+ * ("URL using bad/illegal format"), which the fetcher then records as
+ * `network:curl-3` — indistinguishable in a debt list from a host that is
+ * genuinely gone. Sudan's central bank serves its quarterly review under an
+ * Arabic filename with spaces in it; encoded, the same URL is a 200.
+ *
+ * Escapes ONLY what curl refuses — the space and anything outside printable
+ * ASCII — and passes `%` through untouched, so an already-encoded URL is a
+ * no-op. `encodeURI` cannot be used for this: it escapes `%` too, turning
+ * `a%20b` into `a%2520b`. The cache key is still computed from the CORPUS url,
+ * so nothing already stored is orphaned by this.
+ */
+export function encodeForCurl(url: string): string {
+  let out = ''
+  for (const ch of url) {
+    const code = ch.codePointAt(0) ?? 0
+    if (code > 0x20 && code < 0x7f) {
+      out += ch
+      continue
+    }
+    for (const byte of new TextEncoder().encode(ch)) {
+      out += `%${byte.toString(16).toUpperCase().padStart(2, '0')}`
+    }
+  }
+  return out
 }
 
 /**
@@ -725,7 +840,7 @@ async function fetchRaw(url: string): Promise<Fetched> {
     '-w', '%{http_code}\t%{content_type}\t%{size_download}\t%{url_effective}',
   ]
   const run = async (extra: string[]) => {
-    const { stdout } = await execFileAsync('curl', [...base, ...extra, url], { maxBuffer: 8 << 20 })
+    const { stdout } = await execFileAsync('curl', [...base, ...extra, encodeForCurl(url)], { maxBuffer: 8 << 20 })
     const [code, ctype, size, finalUrl] = stdout.trim().split('\t')
     return { code: Number(code), ctype: ctype ?? '', size: Number(size ?? 0), finalUrl: finalUrl ?? url }
   }
@@ -761,6 +876,14 @@ async function fetchRaw(url: string): Promise<Fetched> {
       })
       text = stdout
       extractor = 'pdftotext'
+    } else if (isZip && (/spreadsheetml/i.test(meta.ctype) || /\.xls[xm](\?|#|$)/i.test(url))) {
+      // Ahead of the docx branch on purpose. An xlsx content-type is
+      // `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`,
+      // which contains `officedocument`, so the broader test below used to
+      // claim every spreadsheet, fail on `word/document.xml`, and record
+      // `empty:no-extractor` — the eight browser-pass edges this branch is for.
+      text = await extractXlsx(bodyPath)
+      extractor = 'xlsx'
     } else if (isZip && /officedocument|docx/i.test(meta.ctype + url)) {
       const { stdout } = await execFileAsync('unzip', ['-p', bodyPath, 'word/document.xml'], {
         maxBuffer: 64 << 20,
@@ -1453,6 +1576,26 @@ function selftest(): void {
   t('a short evidence_quote is still dropped', spansForEdge('CPI weights', 'no span here').length === 0)
   t('quoted spans inside an evidence_quote are kept as well',
     spansForEdge('the report says "the index is compiled under Regulation 03/21" here', '').length === 2)
+  t('xlsx resolves a shared-string cell and keeps a numeric cell verbatim',
+    xlsxText(
+      '<sst><si><t>Poblacion total</t></si></sst>',
+      ['<row><c r="A1" t="s"><v>0</v></c><c r="B1"><v>633364.19999999995</v></c></row>'],
+    ) === 'Poblacion total\t633364.19999999995')
+  t('xlsx joins rich-text runs with nothing between them',
+    xlsxText(
+      '<sst><si><r><t>Incidencia de pobreza (FGT</t></r><r><t>0</t></r><r><t>)</t></r></si></sst>',
+      ['<row><c r="A1" t="s"><v>0</v></c></row>'],
+    ) === 'Incidencia de pobreza (FGT0)')
+  t('xlsx drops empty rows and does not let a self-closing cell swallow the next one',
+    xlsxText(
+      '<sst><si><t>kept</t></si></sst>',
+      ['<row><c r="A1" s="2"/><c r="B1" s="2"/></row><row><c r="A2" s="2"/><c r="B2" t="s"><v>0</v></c></row>'],
+    ) === 'kept')
+  t('xlsx reads an inline string and concatenates sheets in order',
+    xlsxText(null, [
+      '<row><c r="A1" t="inlineStr"><is><t>one</t></is></c></row>',
+      '<row><c r="A1" t="inlineStr"><is><t>two</t></is></c></row>',
+    ]) === 'one\ntwo')
   t('does not treat apostrophes as quotes',
     extractQuotedSpans("the Commission's own note names it").length === 0)
   t('exact quote scores 1', quoteCoverage('the index is compiled monthly', 'X. The Index is compiled monthly. Y') === 1)
@@ -1537,6 +1680,11 @@ function selftest(): void {
   t('a wayback or OCR route caps the grade; a Chrome or direct read does not',
     routeCapsGrade('wayback 20250908003713') && routeCapsGrade('ocr tesseract 2026-09-04') &&
     !routeCapsGrade('chrome 2026-09-04') && !routeCapsGrade(''))
+  t('a url with spaces and non-ascii is percent-encoded for curl',
+    encodeForCurl('https://cbos.gov.sd/files/\u0627\u0644\u0639\u0631\u0636 2024 .pdf') ===
+      'https://cbos.gov.sd/files/%D8%A7%D9%84%D8%B9%D8%B1%D8%B6%202024%20.pdf')
+  t('an already-encoded url is not double-encoded, and delimiters survive',
+    encodeForCurl('https://x.test/a%20b.pdf?q=1&r=2#f') === 'https://x.test/a%20b.pdf?q=1&r=2#f')
   t('curl -w status is split off the body, not left in it',
     splitCurlWrite('{"a":1}\n429').code === 429 && splitCurlWrite('{"a":1}\n429').body === '{"a":1}')
   t('a body with no trailing status is never read as a conclusive status',

@@ -763,6 +763,56 @@ country/file/round, not a single site's own one-off quirk.
   it must be sampled INSIDE the rAF loop (take the max), never after it — and if
   it still reads ~1 with the window in front, suspect `__rig` pointing at the
   StrictMode orphan renderer rather than a real draw-call count.
+- **`renderer.info.render` reads `calls 1, triangles 1` in this app, and the
+  renderer is fine** (2026-09-04). `info.autoReset` clears the counters at the
+  start of every `render()`, and with `@react-three/postprocessing` the last
+  render of each frame is the composer's fullscreen output pass: one draw call,
+  one triangle. So ANY sample taken from outside the render loop — including
+  inside your own rAF — reports 1/1, whichever renderer you hold. To get a real
+  count: `gl.info.autoReset = false`, `gl.info.reset()`, wait ONE rAF, read,
+  then restore. Before blaming the StrictMode orphan (2026-09-01), check
+  `gl.info.render.frame` and `document.contains(gl.domElement)` — a live hook
+  reports a six-figure frame count and `true`.
+- **That recipe said "wait two rAFs" until 2026-09-04, and it is what produced
+  the 13,890-draw-call reading.** The render for the current frame has already
+  happened by the time the first rAF callback runs, so two callbacks accumulate
+  **two** frames. Reproduced in the sandbox to within 0.04%: the same procedure
+  reads 13,838-13,884 calls / 4.00-4.02 M triangles, and the per-frame delta is
+  a flat **6,942 calls / 2,006,861 triangles**, linear out to four frames. Wait
+  one rAF, or divide by the callbacks you actually waited. Better: wrap
+  `gl.render` itself, `info.reset()` inside the wrapper, and attribute each
+  invocation to a rAF tick — that also counts how many times the scene is drawn
+  per frame, which a bare counter cannot. Doing exactly that showed the scene
+  is drawn **once** per frame (plus 17 one-call composer quads), killing the
+  "second render / selective-bloom mask" hypothesis: **draw calls equal
+  drawables 1:1 at 6,942, so batching is the only lever.** Census and the
+  material-sharing breakdown are in project memory (`renderer_perf_measured`).
+- **`empty:no-extractor` on an .xlsx was never a missing feature — it was a
+  content-type collision** (2026-09-04). An xlsx is served as
+  `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, which
+  contains the word `officedocument`, so the DOCX branch's broad
+  `/officedocument|docx/i` test claimed every spreadsheet, handed it to
+  `unzip -p body word/document.xml`, threw, and the catch recorded
+  `extractor: none`. Fixed by inserting a specific `/spreadsheetml/` branch
+  AHEAD of it (`extractXlsx`/`xlsxText`, selftest 33 -> 37). The general shape
+  is worth remembering: **a broad content-type test placed upstream of a
+  specific one silently swallows the specific format, and the symptom is a
+  clean 200 with no text** — not an error anyone would go looking at. Check
+  branch ORDER before concluding a format is unsupported.
+- **The bridge VM and the cloud sandbox are different networks, and neither is
+  a superset of the other** (2026-09-04). Measured the same minute:
+  `minfin.gov.ru` does not even resolve from the bridge VM (`curl: (6)`) but
+  returns 200 in the cloud sandbox — one round-2 `never_attempted` edge closed
+  purely by moving hosts. From the cloud sandbox: `podaci.dzs.hr` 200,
+  `capmas.gov.eg` 200, **`rosstat.gov.ru` and `sis.gov.eg` still dead**. So
+  "unreachable" is only ever a claim about one of the two, and re-testing a
+  blocked host from the other side is a 20-second check worth doing before it
+  is written down as debt.
+- **A quote past the 250 KB text cap is unmatchable, but a huge document is not
+  automatically lost** (2026-09-04). `minfin.gov.ru`'s KOSGU workbook extracts
+  to 3,817,390 characters, is stored `truncated: true`, and still matched its
+  quote at coverage 1.0 — the sentence was in the first 250 KB. Read
+  `truncated` before blaming the cap; it only bites when the quote is late.
 - **Re-test a "blocked by the Chrome extension" host before believing it**
   (2026-09-04). All five hosts recorded on 2026-09-04 as refused by the
   extension's site list — `wam.ae`, `gov.il`, `pc.odisha.gov.in`,

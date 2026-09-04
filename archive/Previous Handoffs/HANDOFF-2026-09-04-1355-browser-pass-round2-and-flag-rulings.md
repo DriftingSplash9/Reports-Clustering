@@ -13,56 +13,102 @@ Last updated: 2026-09-04 (xlsx extractor; renderer draw-call census)
 
 ## 1. Read next
 
-**`PLAYBOOK.md` first** — §6 for the traps (fetch routing, network asymmetry,
-the 250 KB cap, `renderer.info`, browser capture, what the matcher already
-handles), §7 for the standing decisions. Then `notes/Midvamp - Revamp.md`
-(the plan of record) → `notes/next-agent-prompt-2026-09-03.md` (Rounds B and C
-are still the queue) → `notes/grader-dry-run-2026-09-03.md` (how the grader
-decides) → `notes/browser-pass-round2-2026-09-04.md` and the other
-2026-09-03/04 notes → project memory, newest first.
+`PLAYBOOK.md` (§6: whole-page `get_page_text`, the tab-panel rule, in-browser
+DOCX/PDF/OCR, the extension's permission list, and what the matcher already
+handles; §7: a Chrome read is a direct read) →
+`notes/browser-pass-round2-2026-09-04.md` (this round) →
+`notes/Midvamp - Revamp.md` (the plan of record) →
+`notes/next-agent-prompt-2026-09-03.md` (Rounds B and C are still the queue) →
+`notes/grader-dry-run-2026-09-03.md` (how the grader decides — still current) →
+the other 2026-09-03/04 notes in `notes/` → project memory, newest first.
 Git status: never state it (PLAYBOOK rule 1).
 
 ---
 
 ## 2. Current state
 
-**Rounds 0-5 and A are committed (Thomas, 2026-09-04). Four 2026-09-04 rounds
-are built and verified, NOT committed**: the flip/drop round, the bps/psa
-browser round, browser-pass round 2 (+ the br-ibge-cnae mint, the OCR-read cap
-and the six flag rulings), and the xlsx extractor. Narrative for each is in
-project memory, newest first; only state lives here.
+**Rounds 0–5 and A are committed (Thomas, 2026-09-04). The 2026-09-04
+flip/drop round, the bps/psa browser round and this round are built and
+verified, not committed.** Corpus **3,341 reports / 2,633 dependencies**.
 
-Corpus **3,342 reports / 2,634 dependencies**. **Grades 544 A · 1,347 B ·
-743 C** (+10 seed edges never graded), A-share **20.7%**. `npm run validate`
-exits 0, `tsc --noEmit` clean, 123/123 logic tests, grader selftest **37/37**,
-`public/corpus-data.json` regenerated. The validator's "cites no evidence_url"
-warning class is still 0.
+**Grades: 544 A · 1,346 B · 744 C** (+10 seed edges never graded). A-share
+**20.6%**, up from 18.8% at the start of the day. `npm run validate` exits 0, `tsc --noEmit` clean,
+123/123 logic tests, grader selftest **33/33**. `public/corpus-data.json`
+regenerated. The validator's "cites no evidence_url" warning class is still 0.
+**No script changed in round 2** (`grade-evidence.ts` was touched in the br-ibge-cnae/OCR-cap sub-round below).
+**Also uncommitted: the xlsx extractor (agent item 1).** `getDoc` now reads
+OOXML spreadsheets (`extractXlsx`/`xlsxText` in `grade-evidence.ts`, selftest
+33 -> 37, `tsc`/`validate` clean, 123/123 logic). The `empty:no-extractor`
+class is closed: **all 8 edges now read at status 200 with `extractor: xlsx`,
+7 of 8 match their quote at coverage 1.0.** One grade moved —
+`ru-minfin-gfs-kosgu-mapping-table -> imf-gfsm` **C -> B** — so corpus is now
+**544 A · 1,347 B · 743 C**. The other seven did not move, and why is a ruling
+for you (§3). Files: `edit_scripts/xlsx-extractor-2026-09-04.py`,
+`Claude outputs/{xlsx-edges,grade-xlsx,grade-xlsx-written}-2026-09-04.json`,
+three new `evidence-cache/` records,
+`src/data/research/ru-g3-international-standards.json`, `public/corpus-data.json`.
 
-**Scripts:** `grade-evidence.ts` now caps `via: ocr ...` at B (like `wayback`)
-and reads OOXML spreadsheets — `extractXlsx`/`xlsxText`, routed AHEAD of the
-docx branch, which is what the `empty:no-extractor` class actually was
-(PLAYBOOK §6). That class is closed: all 8 edges read at 200 with
-`extractor: xlsx`, 7 of 8 match at coverage 1.0, one grade moved
-(`ru-minfin-gfs-kosgu-mapping-table -> imf-gfsm` C -> B). The other seven are
-two rulings, §3 items 3 and 4. Nothing in `src/` changed for the renderer
-round — the draw-call census was measurement only.
+**Nothing in `src/` changed on 2026-09-04's renderer round either** — the
+draw-call census was measurement only; its output is `PLAYBOOK.md` §6,
+`HANDOFF.md` and project memory.
 
-**Renderer unchanged**: round 2's grade-driven opacity / A-only ranking cut /
-`view.minGrade` (still default `C`) / `rankByLegalBasis`;
-`INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE` 0.8; drift watchdog + `__meshes`.
-Two reports remain ISOLATED (shelved): `sc-oag-annual-reports-2022-2024`,
-`so-fgs-financial-governance-reports`.
+**Browser pass, round 2 — 134 of the remaining 173 edges decided: 85 accepted,
+47 refused with a reason each, 2 blocked by the browser extension. 39 not
+reached.** Grades written **C→A 41, C→B 38, B→A 2, no regressions**. Per-edge:
+`Claude outputs/browser-pass-round2-2026-09-04.json`; flags for you:
+`…-flags-2026-09-04.json`; grade runs: `grade-browserpass-round2/3/4-2026-09-04.json`.
+
+**The refusals are a corpus problem, not a fetch problem** — 39 of 47 are edges
+whose cited document does not say what the basis claims, the chained two-hop
+above all. Detail and the disproved ellipsis/apostrophe claim: this round's
+note and PLAYBOOK §6.
+
+**Everything else unchanged**: round 5's revert refinement; round 4's
+`spansForEdge` fix and improvements-only rule; round 3d's fetch strategies;
+round 2's grade-driven opacity / A-only ranking cut / `view.minGrade` (still
+default `C`) / `rankByLegalBasis`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE`
+0.8; drift watchdog + `__meshes`. Two reports remain ISOLATED (shelved):
+`sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`.
 
 **Research debt, corpus-wide**: 0 confirmed-dead URLs; 0 no-URL edges;
-0 `empty:no-extractor`; **browser pass 173 -> 39 edges** (list in
-`Claude outputs/browser-pass-round2-2026-09-04.json` -> `never_attempted`), of
-which roughly a dozen are recorded as blocked by the extension's permission
-list — a claim PLAYBOOK §6 says to re-test, not believe; **17 BPS edges blocked
-on citation, not access** (§3 item 1); 28 `ess-peer-review-final-report` edges
-and 12 EDP-inventory fragments still owed a reread (Round C); ~15 CJK edges
-nominally on the matcher (Round B — but see §3). Round 2's 47 refusals are a
-corpus problem, not a fetch problem: 39 are edges whose cited document does not
-say what the basis claims.
+**browser pass 173 → 39 edges** (list in this round's JSON → `never_attempted`),
+of which roughly a dozen are blocked only by the extension's permission list;
+**17 BPS edges blocked on citation, not access**; 28 `ess-peer-review-final-report`
+edges and 12 EDP-inventory fragments still owed a reread (Round C); ~15 CJK
+edges nominally on the matcher (Round B — but see §3).
+
+---
+
+**Also this round (uncommitted): `br-ibge-cnae` minted, OCR reads now cap at
+B.** Item 3: new `br-ibge-cnae` node, A-grade edge to `isic` (CNAE<->ISIC
+Rev.4 sentence, verified live in Chrome), six of the nine refused
+`br-ibge-* -> isic` edges re-pointed at it with their own page's
+CNAE-adoption sentence (pim-pf, pia-empresa, pia-produto, pas, pac, pmc; paic
+and the already-B pimes/pintec untouched). Item 4: `routeCapsGrade()` now
+caps `via: ocr ...` at B like `wayback`; the three A-grade OCR edges from
+round 2 (Angola/Benin/Gambia) recapped to B. `gen`/`tsc`/`validate` clean in
+a fresh sandbox. Grades hand-set per the Chrome-read rule, not yet re-run
+through the corpus-wide grader — a `--edges` confirmation pass is worth doing
+before or after commit.
+
+**And the six round-2 flags, ruled and applied (uncommitted).** Two direction
+flips — `br-ibge-censo-demografico -> br-lei-5534-1968` (quote from the flags
+file) and its **unflagged** sibling `br-ibge-pnad-continua -> br-lei-5534-1968`,
+both retyped `methodology_depends_on -> legal_basis`; and
+`id-rpjmn -> id-democracy-index`. `mx-cscm -> mx-scnm` re-evidenced in the
+CSCM's own methodology PDF (C -> A); the flag's "re-point it at `sna-2008`"
+was NOT done — `mexico-wiring-grok-2026-08.json` already carries that edge.
+`ndb-mou-brics-icm-2022` basis corrected in place with the 2016-not-2011
+finding, edge kept, stays C. `yt-budget-main-estimates ->
+territorial-formula-financing` evidence re-pointed at the companion 2026-27
+Fiscal Outlook PDF and then **read in Chrome the same night — C -> A**: Table 4
+carries a `2026-27 Main Estimates` column for the Grant from Canada, and the
+prose names the instrument. `mt-edp-inventory -> mt-nso-government-finance`
+retyped `uses_data_from -> cites` (Thomas's ruling: an inventory documents a
+release; the union has no `documents` member and this is settled, not a flag). Edit script:
+`edit_scripts/flags-round2-rulings-2026-09-04.py`; grade run:
+`Claude outputs/grade-flagrulings-2026-09-04.json`. Two new PLAYBOOK §6 traps
+came out of it (grader `--write` regressions; re-test extension blocks).
 
 ---
 
@@ -75,16 +121,13 @@ say what the basis claims.
    through a signed token with no stable URL. Listed in
    `Claude outputs/browser-pass-bps-psa-2026-09-04.json` → `refused`. Nothing
    moves on them until you rule.
-2. Commit the uncommitted 2026-09-04 rounds. On top of what the earlier rounds
-   touched: `scripts/grade-evidence.ts`,
-   `src/data/research/{br-brazil-grok-2026-08, id-unlinked-wiring-round2-2026-08-29,
-   int-brics-international-layer-grok-2026-08, mx-mexico-grok-2026-08,
-   territories-canada-grok-2026-08, ru-g3-international-standards}.json`,
+2. Commit the four uncommitted 2026-09-04 rounds. On top of what the earlier
+   rounds touched: `src/data/research/{br-brazil-grok-2026-08,
+   id-unlinked-wiring-round2-2026-08-29, int-brics-international-layer-grok-2026-08,
+   mx-mexico-grok-2026-08, territories-canada-grok-2026-08}.json`,
    `public/corpus-data.json`, `PLAYBOOK.md`, `HANDOFF.md`,
-   `edit_scripts/{flags-round2-rulings,xlsx-extractor}-2026-09-04.py`,
-   three `Claude outputs/*flagrulings*.json`, three
-   `Claude outputs/*xlsx*-2026-09-04.json`, and three new `evidence-cache/`
-   records (anuario.ine.gob.bo, minfin.gov.ru, kanostate.gov.ng).
+   `edit_scripts/flags-round2-rulings-2026-09-04.py`, three
+   `Claude outputs/*flagrulings*.json`.
 3. **Ruling owed: the target artefact named in a language other than the node's
    title.** `ru-minfin-gfs-kosgu-mapping-table -> imf-gfsm` matched at coverage
    1.0 and the matched window is the sheet's own title row — which DOES name
