@@ -149,9 +149,10 @@
       "source_report_id": "ir-national-accounts",
       "target_report_id": "sna-2008",
       "relationship_type": "methodology_depends_on",
-      "basis": "The Central Bank of Iran publishes annual national accounts by activity and institutional sector on the basis of the System of National Accounts 2008 (SNA 2008), with base year 1395. Evidence: \"حسابهای ملی سالانه ایران به تفکیک بخش‌های فعالیتی و نهادی اقتصاد بر مبنای نظام حسابهای ملی 2008 به قیمت‌ها‌ی جاری و ثابت سال پایه 1395 ... تهیه و تدوین ارقام بر مبنای آخرین نسخه استاندارد نظام حساب‌های ملی 2008 (SNA)\"",
+      "basis": "The Central Bank of Iran publishes annual national accounts by activity and institutional sector on the basis of the System of National Accounts 2008 (SNA 2008), with base year 1395. Evidence: \"حسابهای ملی سالانه ایران به تفکیک بخش‌های فعالیتی و نهادی اقتصاد بر مبنای نظام حسابهای ملی 2008 به قیمت‌ها‌ی جاری و ثابت سال پایه 1395 ... تهیه و تدوین ارقام بر مبنای آخرین نسخه استاندارد نظام حساب‌های ملی 2008 (SNA)\" Read in Thomas's Chrome 2026-09-04 (cbi.ir is F5-walled to every scripted fetch): the page is the CBI Economic Accounts Department's own note on the SNA 2008-based annual accounts; the sentence in evidence_quote is verbatim from it. Graded B by hand, not A — the grader cannot raw-fetch this host, so the A bar (quote found by the script in the cited document) is not checkable.",
       "evidence_url": "https://cbi.ir/simplelist/4454.aspx",
-      "evidence_grade": "C"
+      "evidence_grade": "B",
+      "evidence_quote": "اداره حساب‌های اقتصادی در راستای ارتقاء و بهنگام سازی آمار حساب‌های ملی مطابق با آخرین نسخه دستورالعمل استاندارد نظام حساب‌های ملی سازمان ملل متحد، پیاده سازی نظام حساب‌های ملی 2008 را از اواخر سال 1396 در دستور کار خود قرار داد."
     }
   ],
   "_dropped": [
@@ -161,6 +162,20 @@
       "target": "cpi-manual",
       "reason": "no-document",
       "why": "[SUSPECT] URL https://dsbb.imf.org/sdds/dqaf-base/country/TUR/category/CPI00 returns HTTP 200, and the exact URL is confirmed as a real, indexed IMF DSBB page for Turkey CPI via WebSearch. However the site is an Angular SPA that loads DQAF text via authenticated/dynamic AJAX calls (api/country/... endpoints requiring POST payloads) -- WebFetch returned only the static shell with no country-specific content, and a Wayback Machine cross-check was blocked by egress policy (archive.org not reachable from this sandbox). Could not directly confirm the quoted sentence 'Moreover Consumer Price Index manual is followed in the CPI.' on this page. The underlying substantive claim (TurkStat CPI methodology based on the IMF CPI framework) IS independently corroborated by a different, fully verified official TurkStat document (see the un-coicop-2018 dependency below, same coicop_download PDF): 'The methodology of the CPI is based on the International Monetary Fund (IMF) Consumer Price Index Handbook.' Given the specific cited page's content could not be directly retrieved, marking SUSPECT rather than VERIFIED despite the strong corroboration of the underlying fact elsewhere."
+    },
+    {
+      "edge": "ir-national-accounts -> sna-2008",
+      "source": "ir-national-accounts",
+      "target": "sna-2008",
+      "reason": "caveat",
+      "why": "2026-09-04 (Thomas's ruling on HANDOFF item 2): evidence_url https://cbi.ir/simplelist/4454.aspx read in a real browser on Thomas's machine — every scripted route (sandbox, bridge VM, Wayback) is F5-walled. Page title: «حسابهای ملي ایران به تفکیک بخش‌های فعالیتی و نهادی اقتصاد برمبنای نظام (2008 SNA) سال‌های پایه 1395 و 1400 طی دوره (1403-1390)». The page states the department put SNA 2008 implementation on its agenda from late 1396 to align with the latest UN SNA standard, and lists 'تهیه و تدوین ارقام بر مبنای آخرین نسخه استاندارد نظام حساب‌های ملی 2008 SNA' as feature 3 of the series. evidence_quote written from that read; grade C→B by hand. If cbi.ir ever becomes readable to the grader, re-run it on this edge for a machine A."
+    },
+    {
+      "edge": "tr-cpi -> un-coicop-2018",
+      "source": "tr-cpi",
+      "target": "un-coicop-2018",
+      "reason": "caveat",
+      "why": "2026-09-04 (Thomas's ruling on HANDOFF item 2: leave the citation): evidence_url is TurkStat's veriportali download link (t=r&p=<token>). Re-fetched from the bridge VM 2026-09-04: HTTP 200, application/pdf, 3,780,750 bytes, sha256 789a0fb9c643d3f59ec9bfeacd2a74f7c274f9162c93f01d0bde545835a6f579 — byte-identical to the copy Thomas downloaded himself the same day (TÜFE Metodoloji Dokümanı 2026, 62 pp.). The evidence_quote sentence is on the document's p.~9 (section 1, base-year change). The token has held across two days and two networks, so it is treated as a document id, not a signed/expiring link; no stable landing page for the document was found on tuik.gov.tr. If the URL ever dies, the file is a TurkStat publication titled 'Tüketici Fiyat Endeksi Metodoloji Dokümanı 2026'."
     }
   ]
 }
