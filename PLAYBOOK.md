@@ -478,6 +478,31 @@ country/file/round, not a single site's own one-off quirk.
   browser in the cloud sandbox** — a "browser pass" means Claude-in-Chrome or
   the bridge VM. Before recording a host as walled, say which network you were
   on.
+- **A Claude-in-Chrome browser pass is a CAPTURE job, not a fetch job, and it
+  works** (2026-09-04, bps.go.id + psa.gov.ph, 34 URLs, 0 hosts lost). Steps:
+  navigate to the CITED url, wait out the challenge (`bps.go.id` clears in
+  6-10 s; `psa.gov.ph` never challenges a real browser at all — its "walled on
+  every host and path" note above is about curl and the cloud proxy), take
+  `document.body.innerText`. For a PDF, run from a SAME-ORIGIN page:
+  `fetch()` the PDF (it inherits cookies and TLS fingerprint), inject pdf.js
+  from cdnjs, extract per page. **Cross-origin is CORS-blocked** — a PDF on a
+  sibling host (`web-api.bps.go.id`) cannot be read from the landing page.
+  Then write the captured extract into `.evidence-fulltext/<sha256(url)>.txt.gz`
+  with a real header (`status: 200`, `truncated: true`, `via: chrome <date>`)
+  and re-grade: `getDoc` reads the cache before the network, so the re-grade is
+  offline and never `--refetch`. Two tool quirks: `javascript_tool` truncates
+  its return at ~1,000 characters (capture windows around a needle, never the
+  page), and a returned string that looks like query-string or cookie data
+  comes back as `[BLOCKED: Cookie/query string data]` — re-slice it.
+- **A BPS publication landing page is an ABSTRACT, and the PDF has no stable
+  URL.** `bps.go.id/{en,id}/publication/...` carries title, catalogue metadata
+  and an abstract; everything a methodology quote needs lives in the PDF, which
+  BPS serves only through a signed `web-api.bps.go.id/download.php?f=<token>`
+  link. So an edge whose basis quotes the PDF body cannot be cited to the
+  landing page — quote and citation must be the same document — and 17 edges
+  are stuck there today. Check the abstract before promising a BPS quote: the
+  abstract DOES carry the source sentence for compilation publications
+  (Susenas/Sakernas/Podes feeders, SNA 2008, ISIC, FDES 2013, DJPK).
 - **The whole toolchain runs natively in the bridge VM, and that is usually the
   better place to run it than a staged cloud sandbox** (2026-09-03). Rule 4's
   problem is the repo's WINDOWS `node_modules`, not the bridge shell: copy the
@@ -627,6 +652,17 @@ written down with its reason, because the rejections are where the research debt
 is measured. Round 4: 213 read, 106 accepted, 107 refused with reasons
 (`Claude outputs/quote-backfill-review-2026-09-03.json`). Round 5: 476 read,
 370 accepted, 106 refused (`quote-backfill-sq-review-2026-09-03.json`).
+
+**A document read in Thomas's own Chrome grades as the direct read it is; only
+an archived snapshot caps at B** (Thomas, 2026-09-04, ruling on the browser
+pass). A snapshot says "this quote was in this document on <timestamp>" — a
+copy, on a past date. A Chrome read is the cited URL, fetched live over
+Thomas's own network, and the only reason the grader could not take it itself
+is a JavaScript challenge curl cannot answer: a fact about the fetcher, not
+about the document. The rule lives in `routeCapsGrade()` in
+`scripts/grade-evidence.ts`, `via` is recorded either way, and the committed
+`evidence-cache/` header carries the route, so a reader can always see where
+the bytes came from.
 
 **A re-grade never writes a grade DOWN on a bad network day.** Selecting an
 already-graded edge and writing whatever comes back lets one DNS failure or one

@@ -880,6 +880,25 @@ export function snapshotRescuable(block: Block): boolean {
 }
 
 /**
+ * **Which routes weaken the claim, and which do not** (Thomas, 2026-09-04,
+ * ruling on the Claude-in-Chrome browser pass).
+ *
+ * An archived snapshot says "this quote was in this document on <timestamp>" —
+ * a copy, on some past date — so it caps at B. A read taken in Thomas's own
+ * Chrome is a different thing: it is the CITED url, fetched live over his home
+ * network, and the only reason the grader could not take it itself is that the
+ * host answers a JavaScript challenge that curl cannot. That is a statement
+ * about the fetcher, not about the document, so a Chrome read grades as the
+ * direct read it is.
+ *
+ * `via` is still recorded either way, and the committed evidence record carries
+ * it, because a reader must always be able to see where the bytes came from.
+ */
+export function routeCapsGrade(via: string): boolean {
+  return via.startsWith('wayback')
+}
+
+/**
  * The `id_` suffix is load-bearing: it asks the Wayback Machine for the
  * ORIGINAL bytes, without its own injected toolbar and rewritten links. Without
  * it every archived HTML page arrives carrying a few kilobytes of archive.org
@@ -1208,7 +1227,9 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     // Deliberately placed AFTER the A bar rather than inside it: the bar itself
     // is unchanged, and an edge landing here has cleared every evidence test an
     // A clears. The only thing against it is where the bytes came from.
-    if (fetched.via) return { ...out, grade: 'B', reason: 'quote-found-artefact-named-via-snapshot' }
+    if (fetched.via && routeCapsGrade(fetched.via)) {
+      return { ...out, grade: 'B', reason: 'quote-found-artefact-named-via-snapshot' }
+    }
     return { ...out, grade: 'A', reason: 'quote-found-artefact-named' }
   }
   const why =
@@ -1497,6 +1518,15 @@ function selftest(): void {
   t('an otherwise-A document read via a snapshot caps at B',
     viaGraded.grade === 'B' && viaGraded.reason === 'quote-found-artefact-named-via-snapshot')
   t('the snapshot cap does not touch a directly-read A', graded.grade === 'A')
+  const chromeFetched: Fetched = { ...fetched, via: 'chrome 2026-09-04' }
+  const chromeGraded = gradeEdge(
+    { source: 's', target: 't', file: 'f.json', basis: 'It states "the Consumer Price Index is compiled monthly".', evidenceUrl: 'https://x.test/doc.pdf', targetReport: target },
+    chromeFetched,
+  )
+  t('a document read in a real browser grades as the direct read it is',
+    chromeGraded.grade === 'A' && chromeGraded.reason === 'quote-found-artefact-named')
+  t('only an archived-snapshot route caps the grade',
+    routeCapsGrade('wayback 20250908003713') && !routeCapsGrade('chrome 2026-09-04') && !routeCapsGrade(''))
   t('curl -w status is split off the body, not left in it',
     splitCurlWrite('{"a":1}\n429').code === 429 && splitCurlWrite('{"a":1}\n429').body === '{"a":1}')
   t('a body with no trailing status is never read as a conclusive status',
@@ -1658,12 +1688,27 @@ function summarise(results: GradeResult[]): void {
     console.log(`\nBROWSER PASS — ${blocked.length} edge(s) unreadable from here, by host:`)
     for (const [h, n] of [...byHost].sort((a, b) => b[1] - a[1])) console.log(`  ${String(n).padStart(4)}  ${h}`)
   }
-  const viaSnap = results.filter((r) => r.via)
-  if (viaSnap.length) {
-    const byHost = new Map<string, number>()
-    for (const r of viaSnap) byHost.set(r.host, (byHost.get(r.host) ?? 0) + 1)
-    console.log(`\nREAD VIA AN ARCHIVED SNAPSHOT — ${viaSnap.length} edge(s); the live host refused this machine:`)
-    for (const [h, n] of [...byHost].sort((a, b) => b[1] - a[1])) console.log(`  ${String(n).padStart(4)}  ${h}`)
+  // Bucketed by ROUTE, not lumped together: since 2026-09-04 a `via` can be a
+  // browser read as well as a snapshot, and only one of the two caps the grade
+  // (routeCapsGrade). One label for both read as a lie in the round's own output.
+  const viaRows = results.filter((r) => r.via)
+  if (viaRows.length) {
+    const byRoute = new Map<string, Map<string, number>>()
+    for (const r of viaRows) {
+      const route = r.via.split(' ')[0]
+      const hosts = byRoute.get(route) ?? new Map<string, number>()
+      hosts.set(r.host, (hosts.get(r.host) ?? 0) + 1)
+      byRoute.set(route, hosts)
+    }
+    for (const [route, hosts] of byRoute) {
+      const n = [...hosts.values()].reduce((a, b) => a + b, 0)
+      const label =
+        route === 'wayback'
+          ? `READ VIA AN ARCHIVED SNAPSHOT — ${n} edge(s), capped at B; the live host refused this machine:`
+          : `READ VIA ${route.toUpperCase()} — ${n} edge(s); graded as a direct read of the cited URL:`
+      console.log(`\n${label}`)
+      for (const [h, c] of [...hosts].sort((a, b) => b[1] - a[1])) console.log(`  ${String(c).padStart(4)}  ${h}`)
+    }
   }
   const dead = results.filter((r) => r.block === 'dead' && r.status === 404)
   if (dead.length) console.log(`\n  ${dead.length} edge(s) cite a URL that is genuinely gone (404/410) — a research problem, not a browser one.`)
