@@ -1,17 +1,36 @@
 # PLAYBOOK.md — standing rules, traps, architecture
 
 **Reference material, not state.** How the repo works and what bites
-people. Edit only for a genuinely new SYSTEMIC rule — something that will
-recur across many countries/rounds or corrupt the corpus if missed. A
-one-off single-site quirk goes in that round's own notes file, not here.
-Current corpus numbers and the live todo list belong in `HANDOFF.md`.
+people. Current corpus numbers and the live todo list belong in `HANDOFF.md`.
+
+**This file is read in full by every agent, so its length is a tax on every
+round.** It was split on 2026-09-04, at 80,301 characters, of which §6 alone
+was 50,193 — 65 of its 84 bullets were fetch plumbing and 24 carried host
+readings the file itself said to re-probe. Three destinations now, and the
+test is which one a new paragraph belongs in:
+
+- **here** — only if an agent who never reads it makes a WRONG DECISION, on a
+  task it was not expecting;
+- **`notes/techniques-<date>.md`** — a recipe for one kind of job, read when
+  doing that job;
+- **`notes/routing-snapshot-<date>.md`** — anything about which host answered
+  which machine, which is stale on arrival.
+
+An unapplied finding awaiting a ruling lives in `HANDOFF.md`, not here, and
+arrives here as a rule only once Thomas has ruled. A trap now guarded in code
+gets one line naming the guard, not the story. **When you add to §6, say what
+you would remove** — the previous three months added and never removed.
 
 ---
 
 ## 1. Read these, routed by task
 
-| Always | `REPORTS.md` from "🛑 Agent: read this" onward, then `HANDOFF.md`, then this file. |
+| Always | `HANDOFF.md`, then this file. Both are short by design — read them whole. |
 |---|---|
+| Corpus scope / direction | `REPORTS.md` from "🛑 Agent: read this" onward |
+| **Fetching, capturing or extracting a document** | `notes/techniques-2026-09-04.md` — the recipes |
+| **"Is host X reachable?"** | `notes/routing-snapshot-2026-09-04.md` — **dated, expected to be wrong, re-probe** |
+| Writing or grading evidence | §6 below, then techniques §5 |
 | Orientation | `START-HERE.md` — rendered verbatim in-app as Help ▸ What this is. Editing it edits the product. |
 | Visual/layout work | §3/§4 below, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` |
 | Camera/fit/layout | `notes/camera-fit-measurement-2026-08-19.md` |
@@ -272,650 +291,141 @@ folder under `notes/` with a `00-README.md` index (e.g.
 
 ## 6. Known traps
 
-Systemic bugs and gotchas — things that will bite again on a DIFFERENT
-country/file/round, not a single site's own one-off quirk.
+**This section is for traps that change a decision on ANY task.** Recipes for
+a particular job live in `notes/techniques-2026-09-04.md`; which hosts answered
+which machine on a given day lives in `notes/routing-snapshot-2026-09-04.md`,
+and is expected to be wrong. The verbatim pre-split §6 — every war story, every
+dated host reading — is at
+`archive/playbook/PLAYBOOK-2026-09-04-1938-pre-split.md`.
+
+**Admission bar, and it is now enforced: a bullet belongs here only if an
+agent who never reads it will make a WRONG DECISION, on a task it was not
+expecting.** A recipe goes to techniques. A host reading goes to the routing
+snapshot. A trap now guarded in code gets one line naming the guard. An
+unapplied finding lives in `HANDOFF.md` until Thomas rules on it, and moves
+here only as a rule, once.
+
+### Schema and closed unions
 
 - **`RelationshipType` is a closed 4-value union** (`calculated_from` /
-  `uses_data_from` / `methodology_depends_on` / `cites`). An off-union value
-  → NaN edge weight → NaN PageRank corpus-wide, silent and total. `Relation`
-  is only `audits`/`supersedes`. Grok output routinely invents types — map
-  them, never pass them through. Same for `Domain` and every closed union:
-  cast, not parsed — check `types.ts` before inventing a value.
-- **`jurisdiction_level` has no "national" value.** The closed union is
+  `uses_data_from` / `methodology_depends_on` / `cites`). An off-union value →
+  NaN edge weight → NaN PageRank corpus-wide, silent and total. `Relation` is
+  only `audits`/`supersedes`. Same for `Domain` and every closed union: check
+  `types.ts` before inventing a value, cast rather than parse.
+- **`jurisdiction_level` has no "national" value.** The union is
   `international, supranational, federal, provincial, municipal,
-  institutional` — a unitary country's own national-level publisher is
-  `"federal"` despite the name. Writing `"national"` by hand for a new
-  node passes JSON parsing and only fails at `npm run validate`. Hit 4/4
-  times on the first pass of the 2026-08-30 South America round.
-- **`PanelShell` supports one panel per edge; the bottom edge belongs to the
-  dock.** A new bottom panel is a one-line dock-cell addition, not a
-  coordinate hunt. Reserve dock space with an empty grid TRACK, never an
-  item margin.
-- **Never put a mode, tab, hover, or view setting in the `forceGraph` memo
+  institutional` — a unitary country's national publisher is `"federal"`.
+  Passes JSON parsing, fails only at `npm run validate`. Hit 4/4 times on the
+  first pass of one round.
+- **`reference_period` is a structured `{readings_per_year, window_months,
+  ends}` object**, not free text. 11 edges failed validation for this in one
+  round.
+- **A `report_id`/`candidate_target`-shaped `_dropped` entry has no
+  `source`/`target` fields at all** — rule 10 applies to `edge`-shaped entries
+  only. Tagging one `"resolved"` makes the validator read `undefined ->
+  undefined` and fail. They stay `reason: "note"` permanently; prepend
+  "RESOLVED …" to the `note` instead.
+
+### Evidence, quotes and grading
+
+- **`public/corpus-data.json` STRIPS `evidence_quote`**, so an edge read out of
+  the generated corpus always looks unquoted. Twelve edges were worked as
+  unquoted in one round and already had a quote. Read the slice JSON in
+  `src/data/research/` before concluding an edge has none — or before writing
+  over one.
+- **Take grade counts from `npm run validate`, never from
+  `public/corpus-data.json`** — the generated file holds the 347 research
+  slices and misses the ~10 edges in the hand-written seed files (rule 11), so
+  mixing the two produces a grade line that does not sum to the corpus.
+- **`evidence_quote` IS the span — never run it through `extractQuotedSpans`.**
+  That helper pulls out DOUBLE-quoted text, which is right for free-text
+  `basis` and wrong for a field whose whole content is the quote; for six weeks
+  the grader could not read back its own output. Anything checking an edge
+  against its document goes through `spansForEdge`.
+- **Single quotes are not a span delimiter and most of this corpus quotes with
+  them** — deliberately, because apostrophes are ambiguous. An edge whose
+  `basis` quotes in single quotes reads as "no quoted span" and caps at B. 476
+  live edges were in that state. Look at the `basis` yourself before concluding
+  an edge has no checkable evidence.
+- **A node's TITLE is a matcher input, not just a label.** `namesTarget` needs a
+  contiguous run of ≥60% of the title's words, and the title-lead fallback needs
+  ≥3 words before the first dash/comma/colon. A long descriptive title fails
+  silently and looks like missing evidence — BIS's six-word page title would
+  score 2/6, which is why the node is titled `Basel III`. This does not license
+  inventing titles (§7 still holds); it means **check the run arithmetic when a
+  publisher offers both a short name and a long one.**
+- **`normalizeForMatch` runs NFKD, so Unicode numeral and ligature forms fold to
+  ASCII** — `Ⅲ` (U+2162) becomes `III`. Useful, and a trap: `바젤Ⅲ` normalizes to
+  the single token `바젤iii`, and since Hangul and Latin are both `\p{L}` there
+  is no split for the ≥2-word run rule to use.
+- **A document read by a second route caps at B** (§7). Any new fetch strategy
+  inherits it: if the bytes did not come from the cited URL on the live host,
+  the edge cannot be an A however cleanly it clears every other bar. Record
+  WHICH route in the committed evidence record (`via:`).
+- **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
+  wall says only that this machine could not read it. A 404 says the citation
+  has rotted, which is exactly what the dead-URL debt list measures — grading it
+  off an archived copy hides link rot behind a good grade.
+- **Never edit a `basis` or a quote to move a grade.** If an evidence record is
+  graded down by a matcher defect, fix or report the matcher. Trimming the
+  record is grade-motivated editing and it hides the defect from everyone after
+  you.
+
+### Claims about the world that are really claims about your tools
+
+- **"The sandbox can't read it" and "the site is walled" are different claims,
+  and this repo has been conflating them for months.** There are three networks
+  and none is a superset of the others (see the routing snapshot). Before
+  recording a host as walled, **say which machine you were on** — and re-test
+  from the other one, which is a 20-second check.
+- **A "ROBOTS_DISALLOWED" verdict is a statement about the FETCH TOOL, not the
+  site.** WebFetch obeys robots.txt; curl with a browser UA does not, and
+  neither does a browser. An entire Taiwanese cluster was written off this way
+  while being wide open to curl the whole time. Treat every historical "robots"
+  note in the corpus as untested.
+- **A blocked verdict decays — re-probe before believing your own notes.**
+  Routing changed three separate times inside 24 hours during the 2026-09-04
+  rounds, in both directions. This is why host readings are in a dated file
+  rather than here.
+- **WebFetch cannot produce evidence-grade verbatim** — it caps quotes at ~125
+  characters and refuses full reproduction. It can establish a negative or
+  locate text; a mintable quote needs a real browser or another host carrying
+  the same document.
+- **A page title is not evidence, and neither is a node description.** Read the
+  body. Grok's imported descriptions naming a standard are leads to verify, not
+  citable bases.
+- **Grok's JSON is not reliably JSON** — parse-check first. Its ids and enum
+  values are inventions until grepped against the FULL corpus (research files
+  AND seed files), its `files_received` confirmations are unreliable, and it
+  will reuse one jurisdiction's exact quote and URL as evidence for another
+  when the document shapes are similar — the tell is a quote naming a specific
+  *other* place. It also reruns the same region under different prompt names
+  across sessions: dedupe and diff for conflicts BEFORE verifying.
+
+### Renderer invariants
+
+- **Never put a mode, tab, hover or view setting in the `forceGraph` memo
   deps** — every change there resets the camera and re-warms physics.
+- **`meshes.current` cannot be trusted for POSITIONS** — read `positionedById`
+  or `graphData().nodes`.
+- **Transparency does not stop a raycast** — ghosted elements need
+  `raycast = () => {}`. `onPointerMissed` can fire twice per click; the
+  edge-pick path always OPENS, never toggles.
 - **A cap that silently binds costs twice** (node size AND edge width) —
   whenever a slider ceiling moves, recompute `nodeScaleFor`'s cap.
-- **Camera can't end up inside the cluster by raising spread** (fit = 5.675
-  × p95; measured ratios ≤ ~2). Spread saturates past ~1000%.
-- **`meshes.current` cannot be trusted for POSITIONS** — read
-  `positionedById` or `graphData().nodes`.
-- **Transparency does not stop a raycast** — ghosted elements need
-  `raycast = () => {}`. `onPointerMissed` can fire twice per click — the
-  edge-pick path always OPENS, never toggles.
-- **Menus close on `pointerdown`, not `click`**; synthetic drags do NOT
-  reach OrbitControls (use `autoRotate` in harnesses); CSS transitions
-  wedge under software rendering (curtain unmounts on a timer for this
-  reason).
-- **Grok's JSON is not reliably JSON** — parse-check first. Its ids and
-  enum values are inventions until grepped against the FULL corpus
-  (research files AND seed files). Never hand-edit JSON insertions —
-  generate them. Its `files_received` confirmations are not reliable
-  either. Its imported node DESCRIPTIONS are also not a citable basis by
-  themselves — a description naming a standard is a lead, not a quote;
-  always raw-verify against a live primary source before minting off it. A
-  single region's own verification pass can't see cross-region problems —
-  duplicate/contradictory edges from a different slice only show up on a
-  corpus-wide second pass. Grok can run the same region under multiple
-  prompt names across sessions, producing overlapping or conflicting
-  proposals — dedupe and diff for conflicts BEFORE verifying, not after.
-- **The IMF DSBB tables are JS-walled at the page level** (use a real
-  browser, not WebFetch; its PDF observance reports parse fine headless).
-  Workaround: DSBB's Angular SPA calls a plain JSON API at
-  `dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=X&categoryCode=Y`
-  — hitting that directly returns the real narrative text.
-- **imf.org is walled the OTHER way round from what this entry used to say**
-  (re-measured 2026-09-03, round 3d). Its `/-/media/files/...` **PDFs read
-  cleanly with plain curl** from an ordinary network — all 11 the corpus cites
-  did; it is the `/en/News/Articles/...` **press releases** that Akamai denies,
-  from every route tried. The old Google-viewer fix is **not scriptable**:
-  `docs.google.com/viewer?url=...&embedded=true` returns a 4.6 KB JavaScript
-  shell to curl, so it needs a real browser or nothing.
-  Use `find` (natural-language search), not `get_page_text`, to check
-  whether a phrase exists in a long lazy-loaded document — `get_page_text`
-  truncates at a byte cap.
-- **Some government portal landing pages are JS-rendered and return
-  nothing useful to WebFetch** — search for the underlying document/
-  sub-page instead of the portal shell. **`.docx` evidence URLs aren't
-  renderable by WebFetch at all** — download and extract
-  `word/document.xml` directly.
-- **A WAF/Incapsula/Cloudflare block can look identical to real content at
-  a glance** (HTTP 200 with a JS-challenge shell) — confirm via `file` on
-  the downloaded body, not just the status code, and cross-check with an
-  independent source before trusting a quote.
-- **ibge.gov.br** (Brazil — active BRICS work) sits behind a Cloudflare JS
-  challenge that silently 403s WebFetch — use a real browser session, or
-  fetch documents directly from `ftp.ibge.gov.br` (still wide open 2026-09-03,
-  as is the `servicodados.ibge.gov.br` JSON API). **`biblioteca.` and `concla.`
-  are Cloudflare-challenged themselves now** — that half of this entry is dead.
-  And the ftp route only helps for DOCUMENTS: every ibge.gov.br URL the corpus
-  cites is an `/estatisticas/...` landing page with no file behind it, so for
-  those the answer is an archived snapshot or a browser.
-- **`mnr.gov.cn`** (China — active BRICS work) is entirely unreachable from
-  the sandbox (DNS/proxy failure, both WebFetch and curl) — worked around
-  via mirrors (creva.org.cn, MOFCOM's fdi.mofcom.gov.cn) and gov.cn's own
-  announcements.
-- **`mhlw.go.jp` and `mofa.go.jp`** (Japan) are comprehensively bot-walled
-  from this environment — even their own homepages return 403/404 to curl
-  with a browser UA (MOFA's is an explicit Akamai "Access Denied" edge
-  page, unambiguous). WebFetch reads real, current content behind both.
-  Prefer `e-stat.go.jp` (Japan's official statistics portal, curl-clean)
-  as an alternative primary source when one exists for the same series —
-  keeps the citation independently re-verifiable without relying on
-  WebFetch every time.
-- **archive.org/Wayback playback can be genuinely flaky, not just slow** —
-  one snapshot 503'd or timed out on ~half of 8 repeat attempts over
-  several minutes, despite being the exact right content when it did load.
-  Don't cite a flaky Wayback URL as a source even when it's the best
-  content match — prefer a reliably-live secondary source, and log the
-  Wayback URL as a note for later if the primary text matters enough.
-- **Grok will reuse one jurisdiction's exact quote/URL as "evidence" for a
-  different jurisdiction's claim** when the document shapes are similar.
-  The tell for illegitimate reuse is the quote naming a specific *other*
-  place.
-- **Batching a corpus-wide script by SLICE FILE re-selects work an earlier
-  batch already did** — and re-doing it is not neutral. `grade-evidence.ts
-  --slice <f>` takes every edge in the file, including ones a previous batch
-  graded and wrote; a host that is merely down today then rewrites yesterday's
-  `A` as a `C`, and nothing in the output distinguishes a real regression from
-  a flaky fetch. Hence `--skip-graded`. Any future by-file batch runner needs
-  the same guard: **select on the work, not on the container.**
-- **An `--offline` re-run of the grader is stricter than the online pass, not
-  identical to it** — by design, but it means the two disagree. A URL whose
-  fetch FAILED leaves no document in the scratch store, so the offline pass
-  grades it on the recorded failure rather than on the body the online pass
-  happened to get. Five edges moved on the 2026-09-03 batch-2 round, all on
-  the B/C line, all intermittent hosts. **The corpus carries the offline
-  grades** (writing the stricter of two readings is the point); the per-edge
-  JSON in `Claude outputs/` carries the online ones. Don't diff them and call
-  it a bug.
-- **`du -sh` overstates `evidence-cache/` by ~9×** — it reported 6.8 MB for
-  773 KB of actual bytes across 1,670 files, all of it 4 KB block rounding on
-  a directory of very small gzips. Measure it with
-  `find evidence-cache -type f -printf "%s\n" | awk '{s+=$1}END{print s}'`.
-  The same trap applies to any check on whether a many-small-files directory
-  is safe to commit.
-- **`zip` writing directly into a mounted device folder can fail**
-  (temp-file-then-atomic-rename doesn't survive the mount) — either `zip`
-  to a path under `$HOME` (outside `mnt/`) and `cp` the finished zip in,
-  or stream it: `zip -qr - <paths> > tmp_work/<new-name>.zip` works
-  in-place. The mount also can't overwrite a same-named file — give each
-  re-run's zip a fresh name, `mv` the stale one to `_to_delete/`. **Coming back
-  the other way, `unzip -o` into the repo fails the moment it has to replace
-  an existing file** ("cannot delete old ...: Operation not permitted" — rule
-  6 again): unzip to a scratch dir under `$HOME`, outside `mnt/`, and `cp` the
-  files over, which truncates in place and is allowed. **And the staging zip
-  carries no dotfiles** — `.gitignore` is not in the recipe above, so a
-  sandbox `>>` to one writes a NEW file that then overwrites the real one on
-  the way back. Stage a dotfile explicitly before editing it, or edit it on
-  the device. Zip only
-  `src/ public/ scripts/ package.json package-lock.json tsconfig.json
-  index.html START-HERE.md` (+ the .md docs if editing them) — including
-  `archive/`, `node_modules/` or `.git` times the call out at 408MB; the
-  useful set is ~5MB and `npm install` in the sandbox is fast.
-- **Wayback Machine proxies several network-blocked `.gov` domains**
-  (`.gov.in`, `.gov.br` — blocked from the sandbox, the bridge VM *and*
-  Thomas's own Chrome, so genuinely blocked, not a sandbox artefact):
-  `archive.org/wayback/available?url=...`, and for no exact-URL snapshot,
-  CDX search `web.archive.org/cdx/search/cdx?url=<domain>*&filter=urlkey:.*\.pdf`.
-  Resolved Assam's handbook 2026-08-30. Rate-limited — space out queries.
-  Try it before writing any blocked domain off.
-- **`device_stage_files` can fail with `session_stale_relogin`** mid-
-  session, with no warning beforehand. Fix requires Thomas to re-sign-in
-  in the desktop app. Workaround when it strikes right after an edit you
-  need to verify: `sha256sum` the device file against the already-
-  verified sandbox copy — a hash match is sufficient proof only when the
-  agent wrote BOTH copies itself (not a substitute for staging when you
-  need genuinely fresh device-side content, e.g. a file Thomas edited
-  locally).
-- **A "ROBOTS_DISALLOWED" / "robots-blocked" verdict is a statement about
-  the FETCH TOOL, not about the site.** WebFetch obeys robots.txt; plain
-  `curl` with a browser UA does not, and neither does a real browser.
-  Round 6 wrote off Taiwan's entire MND cluster as "robots.txt-blocked on
-  every path/subdomain tried, no Wayback snapshot exists" — `mnd.gov.tw`
-  was in fact wide open to curl the whole time, including every
-  `File/<id>` PDF download. **Before recording `unreadable-source` or a
-  robots block, retry with `curl -sL -A "<browser UA>"`.** The same
-  applies to a bot-UA 403. Treat every historical "robots" note in the
-  corpus as untested.
-- **A Cloudflare/WAF 403 on a DOCUMENT is beatable from inside the page
-  when the site itself loads in a real browser.** `fetch()` the PDF
-  same-origin in the page context (it inherits the browser's cookies and
-  TLS fingerprint), stash the ArrayBuffer on `window`, inject `pdf.js`
-  from cdnjs, and extract the text there. This read PIF's 80-page annual
-  report, which 403s to curl on every route, and gives page-indexed text
-  you can grep in-page. No download to disk, no device round-trip.
-- **A walled site often has an unwalled sibling host for its files.**
-  Every `*.bps.go.id` page (Indonesia) is Cloudflare-403 to curl, but
-  `web-api.bps.go.id` — the host BPS's own download buttons point at — is
-  not: open the page in a browser, read the signed
-  `download.php?f=<token>` href out of the DOM, then curl that. Same
-  shape at `gob.mx` (Mexico), which Akamai-challenges its HTML pages but
-  serves `/cms/uploads/attachment/file/...` PDFs to plain curl — worth
-  re-testing every historical "gob.mx 403". And when a national host is
-  unreachable, try its PROVINCIAL subdomains: `gso.gov.vn`/`nso.gov.vn`
-  (Vietnam) die at the TLS handshake from every route, but
-  `thongkecaobang.gso.gov.vn` serves 200 and republishes head-office
-  content. Always cite the stable page, never the signed/expiring link.
-- **WebFetch cannot produce evidence-grade verbatim** — it caps quotes at
-  ~125 characters and refuses full reproduction. Where it is the ONLY
-  route to a document (e.g. `psa.gov.ph` is Cloudflare-JS-walled on every
-  host and path, from cloud and device alike), it can establish a
-  negative or locate text, but a mintable quote needs a real browser
-  session or a non-PSA host carrying the same document — a PSA deck
-  hosted at `unsiap.or.jp` is how the 2025-SNA question got settled.
-- **"The sandbox can't read it" and "the site is walled" are different
-  claims, and this repo has been conflating them.** The cloud sandbox routes
-  every request through an MITM egress proxy (`127.0.0.1:45017`, its own CA), so
-  what a site fingerprints and rate-limits is the PROXY, not curl. Measured
-  2026-09-03 over the same 300 URLs from both environments: the **bridge VM on
-  Thomas's machine read 18 URLs / 20 edges the sandbox could not**, imf.org's
-  PDFs among them, and **`web.archive.org` is blocked outright from the sandbox**
-  ("Blocked by egress policy" over http, connection reset over https) while
-  plain `archive.org` is allowed. Two workarounds that do NOT survive the proxy,
-  so don't retry them: `curl_cffi` with Chrome TLS impersonation is reset on
-  every host, and **headless Chromium cannot connect through it at all**, with
-  or without `--proxy-server` and `--ignore-certificate-errors`. **There is no
-  browser in the cloud sandbox** — a "browser pass" means Claude-in-Chrome or
-  the bridge VM. Before recording a host as walled, say which network you were
-  on.
-- **A Claude-in-Chrome browser pass is a CAPTURE job, not a fetch job, and it
-  works** (2026-09-04, bps.go.id + psa.gov.ph, 34 URLs, 0 hosts lost). Steps:
-  navigate to the CITED url, wait out the challenge (`bps.go.id` clears in
-  6-10 s; `psa.gov.ph` never challenges a real browser at all — its "walled on
-  every host and path" note above is about curl and the cloud proxy), take
-  `document.body.innerText`. For a PDF, run from a SAME-ORIGIN page:
-  `fetch()` the PDF (it inherits cookies and TLS fingerprint), inject pdf.js
-  from cdnjs, extract per page. **Cross-origin is CORS-blocked** — a PDF on a
-  sibling host (`web-api.bps.go.id`) cannot be read from the landing page.
-  Then write the captured extract into `.evidence-fulltext/<sha256(url)>.txt.gz`
-  with a real header (`status: 200`, `truncated: true`, `via: chrome <date>`)
-  and re-grade: `getDoc` reads the cache before the network, so the re-grade is
-  offline and never `--refetch`. Two tool quirks: `javascript_tool` truncates
-  its return at ~1,000 characters (capture windows around a needle, never the
-  page), and a returned string that looks like query-string or cookie data
-  comes back as `[BLOCKED: Cookie/query string data]` — re-slice it.
-- **`public/corpus-data.json` STRIPS `evidence_quote`.** An edge read out of the
-  generated corpus therefore always looks unquoted. Twelve edges in the
-  2026-09-04 browser pass were worked as unquoted and already had a quote.
-  Read the slice JSON in `src/data/research/` before concluding an edge has no
-  quote, and before writing one over it.
-- **The matcher already handles ellipses and curly quotes — do not "fix" a quote
-  for either.** `normalizeForMatch()` folds `’ ‘ ‚ ‛ ′` to `'`, folds the
-  double-quote family, and strips accents (NFKD → drop combining marks → NFKC);
-  `locateQuote()` splits a quote on its ellipsis and scores each fragment
-  separately. Measured 2026-09-04: 105 corpus quotes contain an ellipsis (59 of
-  them grade A) and 84 contain a straight apostrophe (48 grade A), and three
-  edges re-graded with their "broken" original quote scored A at coverage 1.0.
-  Replacing them was churn. **The defect that IS real is the researcher's own
-  citation text appended inside the quote** — a trailing
-  `(Press Release No. 17/218, …)` costs coverage in proportion to its length and
-  drops an otherwise-good quote to `partial-quote` (0.61) or below the bar
-  (0.5). Also real: a quote that paraphrases rather than copies ("Statistics are
-  produced following ESA 2010." for a page that says "The indicators are
-  compiled following ESA 2010") scores 0.
-- **A C grade on an edge whose host is in the browser-pass list tells you nothing
-  about its quote.** The document could not be fetched, so the quote was never
-  scored. Capture the document first, re-grade, and only then judge the quote —
-  otherwise you will rewrite quotes that were fine all along.
-- **`get_page_text` returns the WHOLE page; the ~1,000-character truncation is a
-  `javascript_tool` limit, not a browser limit.** A Claude-in-Chrome capture is
-  therefore one call, not a needle hunt: navigate, then `get_page_text`. Use
-  `javascript_tool` only to compute (probe offsets, fetch a sibling document,
-  decode a PDF) and hand the result to `get_page_text` by writing it into
-  `document.body` as a single `<main>`. Two quirks remain: a returned string
-  that looks like query-string or cookie data comes back as
-  `[BLOCKED: Cookie/query string data]` (re-slice it), and a long
-  `await new Promise(setTimeout)` inside a `browser_batch` item that spans the
-  preceding `navigate` fails with "Inspected target navigated or closed" — put
-  the sleep in its own call after the navigation, not in the same batch item.
-- **An IBGE / INEGI / NSO-Malta landing page serves EVERY tab panel in one HTML
-  response** (2026-09-04). The tab is a client-side view selector — clicking
-  "Conceitos e métodos" only appends `?t=conceitos-e-metodos` — so a quote from
-  any panel is a quote from the cited URL. Verify once per host by fetching the
-  BARE url in-page and searching the raw HTML for the string; IBGE's CNAE page
-  carries its ISIC-synchronisation sentence at offset 43,251 of the bare
-  response. This is the OPPOSITE of the BPS case below, where the PDF is a
-  separate resource with no stable URL. Do not write a landing page off because
-  `document.body.innerText` shows only the default panel, and do not cite the
-  `?t=` variant — cite the bare URL.
-- **A DOCX reads in-browser with no library.** Same-origin `fetch` for the bytes,
-  then walk the zip central directory by hand (EOCD at the tail → entry offsets)
-  and inflate `word/document.xml` with the native
-  `DecompressionStream('deflate-raw')`; strip tags, insert `\n` per `</w:p>`.
-  This read both VLGGC parts (177k chars from Part 2), which 403 to curl.
-- **When a host's CSP blocks cdnjs, pdf.js cannot be injected — write the
-  extractor inline instead.** `script-src 'self' …` (yukon.ca) blocks the
-  `<script src>` AND `connect-src 'self'` blocks fetching the library's source
-  to `eval` it, even from the extension's isolated world. A ~40-line inline
-  extractor covers text-layer PDFs: scan for `stream\r?\n` not preceded by
-  `end`, take the dict back to the previous ` obj`, keep the `/FlateDecode`
-  ones that are not `ObjStm|Image|DCTDecode|FontFile|Metadata|XML`, inflate,
-  and concatenate the `(...)` operands. Four traps, each of which silently
-  yields garbage or nothing:
-  1. **Trim trailing EOL bytes before inflating** — the bytes up to `endstream`
-     include the `\r\n`, which errors the stream; and **read the stream
-     incrementally** (`getReader()` in a try/catch) so a trailing-garbage error
-     still returns the prefix that did inflate.
-  2. **Only flush pending strings on `Tj`/`TJ`/`'`/`"`** and clear them on any
-     other operator. Taking every `(...)` sweeps in marked-content properties —
-     an `/Lang (en-GB) … BDC` document comes out with `en-GB` between every
-     phrase.
-  3. **A backslash before a newline inside a string is a line continuation**,
-     not an escape: handle `\\\r?\n` → '' first, then octal, then the escape
-     map. Miss it and quotes read `Go\ vernment`.
-  4. **Concatenate `TJ` array pieces with no separator** — the kerning splits
-     are mid-word (`(Expenditur)10.1(e incr)`), so anything you insert between
-     them breaks the word.
-  It does NOT handle subset fonts with custom encodings and no ToUnicode CMap:
-  `council.vancouver.ca` inflates 28k chars of noise. That is
-  `unreadable-source`, not a fetch failure.
-- **A scanned PDF is not unreadable — the bridge VM has tesseract.**
-  `pdftotext -layout` returning 9-13 bytes on a multi-megabyte file means no
-  text layer, not a broken file. `pdftoppm -r 180 -f <a> -l <b> -png` then
-  `tesseract` per page reads it; only `eng` is installed, which is adequate for
-  Latin-script French and Portuguese (diacritics come out approximate). Page a
-  range, not the whole file — a 99-page audit at 200 dpi will not finish inside
-  the bridge's ~170 s call. Record the route as `via: ocr tesseract <date>` in
-  the fulltext header so the grade is auditable.
-- **Re-probe the debt list before believing it; "walled" decays.** One `curl`
-  sweep of all remaining URLs from the bridge VM (browser UA, ~20 s timeout,
-  `%{http_code}\t%{content_type}\t%{size_download}`) reclassified a dozen hosts
-  in one call on 2026-09-04: `stats.gov.cn` and `bps.gub.uy` answered 200 having
-  been logged "could not resolve host" (a `www.` prefix and a transient DNS
-  failure), and `anuario.ine.gob.bo` was never walled at all. Do this before
-  opening a browser — the browser pass is the expensive route.
-- **`empty:no-extractor` in a debt list is a GRADER gap, not a host wall.** The
-  grader has no xlsx branch, so a readable spreadsheet reads as an empty
-  document; eight edges carry that reason. Unzip `xl/sharedStrings.xml` +
-  `xl/worksheets/sheet1.xml` (shared-string cells are `t="s"` with the index in
-  `<v>`), or add the branch to `getDoc`.
-- **The Chrome extension has its own per-site permission list, and a refusal
-  there is not a site wall.** "Navigation to this domain is not allowed" and
-  "Permission denied for JavaScript execution on this domain" are the two
-  wordings. They stopped roughly a dozen hosts in the 2026-09-04 round
-  (`wam.ae`, `gov.il`, `slovak.statistics.sk`, several `*.gov.in`). Record them
-  as blocked-by-extension, never as `unreadable-source`, and tell Thomas —
-  widening the list is one setting, and each host is then one call.
-- **`.gov.in` and `.gov.br` are NOT blocked in Thomas's Chrome.** The note two
-  bullets down claiming they are blocked "from the sandbox, the bridge VM *and*
-  Thomas's own Chrome" is wrong as of 2026-09-04: `ibge.gov.br` and
-  `mospi.gov.in` both load. They 403 (or fail DNS) from the bridge VM, which is
-  what was actually measured.
-- **A BPS publication landing page is an ABSTRACT, and the PDF has no stable
-  URL.** `bps.go.id/{en,id}/publication/...` carries title, catalogue metadata
-  and an abstract; everything a methodology quote needs lives in the PDF, which
-  BPS serves only through a signed `web-api.bps.go.id/download.php?f=<token>`
-  link. So an edge whose basis quotes the PDF body cannot be cited to the
-  landing page — quote and citation must be the same document — and 17 edges
-  are stuck there today. Check the abstract before promising a BPS quote: the
-  abstract DOES carry the source sentence for compilation publications
-  (Susenas/Sakernas/Podes feeders, SNA 2008, ISIC, FDES 2013, DJPK).
-- **The whole toolchain runs natively in the bridge VM, and that is usually the
-  better place to run it than a staged cloud sandbox** (2026-09-03). Rule 4's
-  problem is the repo's WINDOWS `node_modules`, not the bridge shell: copy the
-  repo (minus `node_modules/`, `.git/`, `archive/`) to a scratch dir under
-  `$HOME` **outside `mnt/`**, `npm install` there (the VM has node 22, npm,
-  `pdftotext` and `unzip`), and `npm run validate`, `tsc --noEmit`, `npx tsx`
-  and the grader all work. Then **symlink `src/data/research/` and
-  `evidence-cache/` from the scratch copy back into the real repo** so `--write`
-  lands in the corpus with no copy-back and no sha dance. No zip, none of §6's
-  zip traps, and the VM's network is a home connection rather than the proxy.
-  **Do NOT symlink `scripts/` as well**: the script resolves its own ROOT
-  through `realpath`, so a symlinked script puts `.evidence-fulltext/` inside
-  the mounted repo, where rule 6 then forbids deleting it. Copy `scripts/` and
-  copy it back.
-- **A long run cannot be backgrounded through the bridge.** `nohup setsid … &`
-  survives the call that launched it by about two minutes and is then killed
-  with the call's sandbox; the log simply stops. Anything over ~170 s has to be
-  made RESUMABLE and run as repeated foreground calls — for the grader that is
-  free, because `.evidence-fulltext/` makes an already-fetched URL instant, so
-  the same command re-run just advances until one call finishes inside the
-  window.
-- **A FAILED fetch is cached exactly like a successful one.** So the obvious way
-  to re-grade an edge after teaching the fetcher a new route — run it again — is
-  a cache hit on the old failure and a silent no-op that looks like "the new
-  route didn't help". Any change to how `getDoc` reads a document has to be
-  paired with `--refetch` or an emptied `.evidence-fulltext/`.
-- **`curl -w` output must be split off the body on a real newline, and getting
-  it wrong is silent and total.** Written 2026-09-03 as `'\\n%{http_code}'` in a
-  TypeScript string literal, the separator became the two characters `\` and
-  `n`; `lastIndexOf` returned -1, the status parsed as `NaN`, `NaN` matched
-  neither the retry branch nor the failure branch, so **every lookup was treated
-  as a conclusive answer, every body failed to parse, and an entire fetch
-  strategy cached "nothing found" for every URL it was asked about — while
-  reporting nothing at all.** A rescue pass that rescues nothing is
-  indistinguishable from a host that cannot be rescued. Split it in an exported
-  pure helper with a selftest (`splitCurlWrite`), never inline.
-- **archive.org's availability API 429s within a minute of a corpus-scale pass**
-  and a 429 body is indistinguishable from "no snapshot exists" unless you check
-  the status. Gate every availability lookup through one global throttle
-  (~1.2 s) regardless of pool width, retry a 429 with backoff, **cache the
-  ANSWER on disk including the negative ones**, and never cache an inconclusive
-  result — a run that ran out of budget must not bake "no snapshot" into the
-  store for every URL it never got to ask about. The snapshot DOWNLOAD from
-  `web.archive.org` is a separate service and tolerates 4 concurrent readers
-  fine. Fetch snapshots with the `id_` suffix
-  (`web/<ts>id_/<url>`) or the archive's own toolbar becomes text you are
-  matching quotes against.
-- **A document read by a second route caps at B** (Thomas, 2026-09-03 — the
-  standing decision is in §7). Any future fetch strategy inherits this: if the
-  bytes did not come from the cited URL on the live host, the edge cannot be an
-  A no matter how cleanly it clears every other bar.
-- **An archived snapshot may rescue a WALL; it must never rescue a 404.** A
-  wall, a transport failure or a JavaScript shell say nothing about whether a
-  citation is still valid — only that this machine could not read it. A 404 says
-  the citation has rotted, and that is exactly what the dead-URL debt list
-  measures, so grading it off an archived copy hides link rot behind a good
-  grade. Whatever reads a document by a second route must also record WHICH
-  route in the committed evidence record (`via:` in the cache header) — an A
-  read from a 2026-03-10 snapshot is a different claim from an A read from the
-  live page, and a reader has to be able to tell.
-- **A `report_id`/`candidate_target`-shaped `_dropped` entry (the
-  duplicate-node-flag family) has no `source`/`target` fields at all** —
-  rule 10 above only applies to `edge`-shaped entries. Tagging the former
-  `"resolved"` makes `validate-data.ts` read `source`/`target` as
-  `undefined`, which fails as a dangling reference ("undefined ->
-  undefined"). These entries stay `reason: "note"` permanently, resolved
-  or not — prepend "RESOLVED ..." to the existing `note` field instead
-  (see e.g. eurosystem-ecb.json).
+- **Camera cannot end up inside the cluster by raising spread** (fit = 5.675 ×
+  p95; measured ratios ≤ ~2). Spread saturates past ~1000%.
+- **`PanelShell` supports one panel per edge; the bottom edge belongs to the
+  dock.** A new bottom panel is a one-line dock-cell addition. Reserve dock
+  space with an empty grid TRACK, never an item margin.
+- **Menus close on `pointerdown`, not `click`**; synthetic drags do NOT reach
+  OrbitControls (use `autoRotate` in harnesses); CSS transitions wedge under
+  software rendering.
+- **Any frame or draw-call number is wrong until measured the documented way** —
+  see techniques §6. The two that have burned rounds: `renderer.info.render`
+  reads `calls 1, triangles 1` from outside the render loop, and waiting two
+  rAFs counts two frames.
 
-- **`evidence_quote` IS the span — never run it through
-  `extractQuotedSpans`** (2026-09-03, round 4). That helper pulls out
-  DOUBLE-QUOTED text, which is right for free-text `basis` and wrong for a
-  field whose whole content is the quote: `writeGrades` writes a bare span with
-  no quotation marks, so for six weeks the grader could not read back its own
-  output, and the first re-grade of 106 hand-accepted quotes came back 94
-  `no-quoted-span`. `spansForEdge()` now takes the field whole and keeps inner
-  quoted spans too. Any new code that checks an edge against its document goes
-  through `spansForEdge`, not `extractQuotedSpans`.
-- **Single quotes are not a span delimiter, and most of this corpus quotes
-  with them.** `extractQuotedSpans` deliberately ignores `'...'` because
-  apostrophes are ambiguous — so an edge whose `basis` quotes its evidence in
-  single quotes reads as "no quoted span" and can never be better than B.
-  Measured 2026-09-03 with a boundary-aware pattern: **476 live edges** were in
-  that state (the 539 first reported counted 95 apostrophe pairs — "FCSC's …
-  the Fund's" — as quotes; a bare `'…'` regex overcounts). Round 5 reviewed all
-  476 and wrote 341 quotes; what is left with no span at all is mostly the Grok
-  `*-wiring-grok-2026-08` family. Before concluding an edge has no checkable
-  evidence, look at its `basis` yourself.
-- **A `basis` that quotes document X while `evidence_url` points at document Y
-  produces a quote the grader can never confirm.** 29 of round 5's 370 accepted
-  quotes came back `quote-not-in-document` from a document that was read in
-  full — the sentence was real, but lifted from a companion document (an
-  inventory quoted against its landing page, a Constitution article against a
-  central-bank page, a DQA sentence against the regulation it cites). The quote
-  and the citation have to be the same document, or the edge is capped at B for
-  good. Table rows written with `|` and two-column PDFs whose text layer breaks
-  mid-sentence are the other two ways a real quote reads as absent.
-- **`locateQuote` cannot verify a Japanese or Chinese quote except by exact
-  substring match.** Coverage is scored on 4-word shingles split on spaces; CJK
-  has none, so the whole quote collapses to one token. 13 of the 33 grade
-  regressions in round 4 were CJK `quote-not-in-document` verdicts on quotes
-  that are almost certainly in the document. Do not record a CJK quote as
-  missing on the matcher's word alone.
-- **The grader matches quotes against the CAPPED text, so a sentence past the
-  250 KB text cap reads as `quote-not-in-document` on a document whose status
-  is 200** (2026-09-03, round A: INEI's 978 K-char *Serie de Cuentas Nacionales*
-  and its 350 K-char *Producción Nacional* bulletin). "Read in full" in the
-  revert rule means the sentence was inside the kept text, not that the fetch
-  returned 200 — check `textChars` / `truncated` in the cache header before
-  reverting a quote on a long document, and prefer a sentence from the
-  document's front matter when the document is big.
-- **DSBB category codes are not uniform across countries, and a wrong code
-  returns `[]`, which is not "no metadata"** (round A). Korea's production
-  index is `IND00` (not `PRI00`), Indonesia's merchandise trade is `MET00`
-  (`MER00` is empty). The API is
-  `dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=<ISO3>&categoryCode=<CAT>`;
-  the SPA's own service list is in `/services/ReportService.js` if another
-  endpoint is needed. The corpus already grades A on these URLs (DOM, ATG, LCA,
-  BHR) — they are the publisher's own metadata (Q7).
-- **`tuik.gov.tr` closes a large transfer early** (curl 18, a truncated PDF the
-  grader reads as `empty:tiny-body` at status 200) and reads whole on the next
-  try — a failed fetch is cached, so `--refetch` those edges rather than
-  believing the tiny body. `ws.dgbas.gov.tw` serves an incomplete TLS chain
-  (curl 60; the grader's `-k` retry handles it, a plain script needs `-k`).
-- **Subagents spend the session's own WebSearch budget** (200 searches). Eight
-  parallel URL-hunting agents exhausted it half way through round A, and the
-  rest of the round ran on WebFetch of guessed URLs and direct site
-  navigation. Budget the searches before fanning out, and have agents search
-  only for what a fetch cannot give them.
-- **`--write` can REGRESS a grade, and the improvements-only rule does not
-  stop it** (2026-09-04). Round 4's improvements-only rule protects the
-  *quote*, not `evidence_grade`: a re-run of the grader over an edge whose
-  host walls the bridge VM writes the wall's C straight over an existing B.
-  Seen on `id-rpjmn -> id-democracy-index` — B from two confirmed real-browser
-  reads, rewritten to C with `wall:cloudflare-challenge`, and restored by hand
-  with the reason recorded in the basis. **After any `--write`, diff the grades
-  of the selected edges against what they were before and restore every
-  downgrade whose reason is a route failure** (`wall:*`, `empty:*`,
-  `no-document`) rather than an evidence finding. A route the grader cannot
-  take is not evidence that the evidence got worse.
-- **An `undocked, maximised DevTools window` fully occludes the page, and the
-  rAF signature of that is unmistakable: median frame time pinned at exactly
-  33.40 ms** (2026-09-04). Chrome throttles a fully covered window's
-  `requestAnimationFrame` to 30 Hz and stalls it outright in gaps, so three
-  consecutive 15 s runs read fps **8.6 / 28.0 / 3.6 with the SAME 33.40 ms
-  median** — the median is the throttled cadence, the fps spread is the stalls.
-  Any in-page frame measurement needs a **lead-in delay** so the app window can
-  be brought to the front before counting starts, and should log
-  `document.visibilityState` misses so a throttled run is self-evident. The
-  same run read `calls 1 tris 1`: `renderer.info.render` is reset per frame, so
-  it must be sampled INSIDE the rAF loop (take the max), never after it — and if
-  it still reads ~1 with the window in front, suspect `__rig` pointing at the
-  StrictMode orphan renderer rather than a real draw-call count.
-- **`renderer.info.render` reads `calls 1, triangles 1` in this app, and the
-  renderer is fine** (2026-09-04). `info.autoReset` clears the counters at the
-  start of every `render()`, and with `@react-three/postprocessing` the last
-  render of each frame is the composer's fullscreen output pass: one draw call,
-  one triangle. So ANY sample taken from outside the render loop — including
-  inside your own rAF — reports 1/1, whichever renderer you hold. To get a real
-  count: `gl.info.autoReset = false`, `gl.info.reset()`, wait ONE rAF, read,
-  then restore. Before blaming the StrictMode orphan (2026-09-01), check
-  `gl.info.render.frame` and `document.contains(gl.domElement)` — a live hook
-  reports a six-figure frame count and `true`.
-- **That recipe said "wait two rAFs" until 2026-09-04, and it is what produced
-  the 13,890-draw-call reading.** The render for the current frame has already
-  happened by the time the first rAF callback runs, so two callbacks accumulate
-  **two** frames. Reproduced in the sandbox to within 0.04%: the same procedure
-  reads 13,838-13,884 calls / 4.00-4.02 M triangles, and the per-frame delta is
-  a flat **6,942 calls / 2,006,861 triangles**, linear out to four frames. Wait
-  one rAF, or divide by the callbacks you actually waited. Better: wrap
-  `gl.render` itself, `info.reset()` inside the wrapper, and attribute each
-  invocation to a rAF tick — that also counts how many times the scene is drawn
-  per frame, which a bare counter cannot. Doing exactly that showed the scene
-  is drawn **once** per frame (plus 17 one-call composer quads), killing the
-  "second render / selective-bloom mask" hypothesis: **draw calls equal
-  drawables 1:1 at 6,942, so batching is the only lever.** Census and the
-  material-sharing breakdown are in project memory (`renderer_perf_measured`).
-- **`empty:no-extractor` on an .xlsx was never a missing feature — it was a
-  content-type collision** (2026-09-04). An xlsx is served as
-  `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, which
-  contains the word `officedocument`, so the DOCX branch's broad
-  `/officedocument|docx/i` test claimed every spreadsheet, handed it to
-  `unzip -p body word/document.xml`, threw, and the catch recorded
-  `extractor: none`. Fixed by inserting a specific `/spreadsheetml/` branch
-  AHEAD of it (`extractXlsx`/`xlsxText`, selftest 33 -> 37). The general shape
-  is worth remembering: **a broad content-type test placed upstream of a
-  specific one silently swallows the specific format, and the symptom is a
-  clean 200 with no text** — not an error anyone would go looking at. Check
-  branch ORDER before concluding a format is unsupported.
-- **The bridge VM and the cloud sandbox are different networks, and neither is
-  a superset of the other** (2026-09-04). Measured the same minute:
-  `minfin.gov.ru` does not even resolve from the bridge VM (`curl: (6)`) but
-  returns 200 in the cloud sandbox — one round-2 `never_attempted` edge closed
-  purely by moving hosts. From the cloud sandbox: `podaci.dzs.hr` 200,
-  `capmas.gov.eg` 200, **`rosstat.gov.ru` and `sis.gov.eg` still dead**. So
-  "unreachable" is only ever a claim about one of the two, and re-testing a
-  blocked host from the other side is a 20-second check worth doing before it
-  is written down as debt.
-- **A quote past the 250 KB text cap is unmatchable, but a huge document is not
-  automatically lost** (2026-09-04). `minfin.gov.ru`'s KOSGU workbook extracts
-  to 3,817,390 characters, is stored `truncated: true`, and still matched its
-  quote at coverage 1.0 — the sentence was in the first 250 KB. Read
-  `truncated` before blaming the cap; it only bites when the quote is late.
-- **A `network:curl-3 URL using bad/illegal format` in a debt list is a
-  REQUEST bug, not a dead host** (2026-09-04). curl refuses a URL carrying raw
-  spaces or non-ASCII bytes, and the fetcher recorded that refusal as if the
-  host had answered. Sudan's central bank serves its quarterly review under an
-  Arabic filename with spaces; percent-encoded, the same URL is a 200 and
-  1,972,408 bytes of PDF. `encodeForCurl` in the grader now encodes before the
-  call. **`encodeURI` is the WRONG encoder for this and the mistake is silent**:
-  it escapes `%` too, so an already-encoded URL comes back double-encoded
-  (`a%20b` -> `a%2520b`) and every fetch of it 404s. Escape only the space and
-  bytes outside printable ASCII; leave `%` alone. Two corpus URLs are affected
-  today, so the value is the CLASS, not the count.
-- **The 250 KB text cap silently manufactured `quote-not-in-document`, and it
-  was raised to 4 MB on 2026-09-04.** The grader matches against the CAPPED
-  text, so a quote past the cap scores 0 and the edge reads in a report exactly
-  like a citation that does not say what it claims. `sd-cbos-statistical-review
-  -q4-2024 -> sd-cbs-cpi` quotes the LAST line of a 278,363-byte extract — 22 KB
-  past the old cap — and went C -> B the moment the cap moved. The cap governs
-  only `.evidence-fulltext/`, which is disposable gitignored scratch, so raising
-  it does not touch Thomas's 2026-09-03 repo-size ruling; `evidence-cache/`
-  still stores matched windows only. Read `truncated` before blaming or
-  believing any `quote-not-in-document` on a long document.
-- **A PDF whose text layer puts a real SPACE after a decomposed combining
-  accent defeats exact matching, and nothing in the pipeline is at fault**
-  (2026-09-04). ANStat's IHPC bulletin stores "pondérations" as
-  `p o n d e U+0301 SPACE r a t i o n s`. `normalizeForMatch` folds the
-  combining mark away but keeps the space, so the document reads
-  "ponde rations" and a correctly-copied quote reading "pondérations" scores 0.
-  Seen on `ci-anstat-ihpc -> ci-anstat-ehcvm`, whose basis quotes the sentence
-  verbatim and still grades `quote-not-in-document`. It is a property of the
-  PDF, not of pdf.js or pdftotext — both extract it the same way. **The fix is
-  a matcher change (a whitespace-insensitive second pass in `locateQuote`,
-  stripping spaces from BOTH needle and haystack) and it is NOT made yet**: it
-  can only ever add matches, which is exactly when a corpus-wide measurement is
-  owed before adoption. Do not "fix" the quote — the quote is right.
-- **A Claude-in-Chrome capture reaches the cloud sandbox for free if the tool
-  output is over ~50 KB, and retyping it is both expensive and lossy**
-  (2026-09-04). A `get_page_text` result larger than ~50 KB is persisted to a
-  file under the session's `tool-results/` directory that the sandbox's own
-  shell can read, so the document never passes through the agent's context. A
-  SMALLER capture is returned inline instead — call `get_page_text` two or three
-  times in one `browser_batch` to push the combined output over the threshold
-  and get the same free transport. Measured cost of not doing this: a 19,251-
-  character capture retyped by hand came back 19,093 characters, differing in
-  whitespace, which makes the record's `text-sha256` correspond to nothing
-  reproducible. Check `window.__cap.length` first and pick the number of calls.
-- **A PDF served with `Content-Disposition: attachment` does not navigate — the
-  tab stays where it was and `navigate` still reports success** (2026-09-04).
-  `slovak.statistics.sk/ExportPdf2/PdfExportSrvlt` downloads instead, so JS run
-  "on that page" is really running on the previous one, silently. Navigate to
-  the host's own landing page first, then `fetch()` the PDF path from there
-  (same-origin, inherits cookies) and read it with pdf.js. Verify by checking
-  `location.href` inside the page, not the navigate result.
-- **Cloudflare clears for a real browser on hosts that 403 both networks, and
-  the first in-page `fetch` may still be the challenge** (2026-09-04).
-  `anstat.ci`, `slovak.statistics.sk` and `regjeringen.no` all 403 with a
-  genuine `cf-browser-verification` body from the bridge VM and the cloud
-  sandbox alike, and `anstat.ci` returned the challenge shell to the first
-  in-page fetch as well. Wait for `document.title` to stop reading
-  "Just a moment...", then fetch again — the second attempt returned the real
-  324,378-byte PDF. cdnjs was NOT blocked by CSP on either host, so the pdf.js
-  injection route worked unchanged.
-- **Re-test a "blocked by the Chrome extension" host before believing it**
-  (2026-09-04). All five hosts recorded on 2026-09-04 as refused by the
-  extension's site list — `wam.ae`, `gov.il`, `pc.odisha.gov.in`,
-  `descg.gov.in`, `slovak.statistics.sk` — navigated on the first try later
-  the same day, no permission prompt, in a fresh MCP tab group. Whatever the
-  refusal was, it was not a durable per-host setting, so "not-reached: blocked
-  by the extension" is a claim with a ~10-second test and no reason to sit in
-  a handoff as work owed to Thomas.
-
----
-
-- **A node's TITLE is a matcher input, not just a label — keep it short enough
-  to be matched** (2026-09-04, minting `basel-iii`). `namesTarget`'s title-run
-  rule needs a contiguous run of **≥60% of the title's words**, and the
-  title-lead fallback needs **≥3** words before the first dash/comma/colon. BIS
-  titles the page "Basel III: international regulatory framework for banks";
-  had the node carried it, every document that names the standard correctly
-  would score 2/6 = 33% and fail the naming test, and the lead path would miss
-  too because "Basel III" is two words. The node is titled `Basel III`. This
-  does not license inventing titles — §7's "a node carries the publisher's own
-  title" still holds, and the short form here is BIS's own name for the
-  standard in its body text. But when a publisher offers both a short name and
-  a long descriptive one, **check the run arithmetic before choosing**, because
-  a long title fails silently and looks like missing evidence.
-- **`normalizeForMatch` runs NFKD, so Unicode numeral and ligature forms fold
-  into ASCII** — `Ⅲ` (U+2162) becomes `III`, and `바젤Ⅲ` normalizes to the single
-  token `바젤iii`. Useful, and a trap: `tokenise` splits on non-`\p{L}\p{N}`,
-  Hangul and Latin are both `\p{L}`, so there is no split and the ≥2-word run
-  rule can never fire on it. The single-token escape hatch does not help
-  either — it reads only `target.title` (never `title_aliases`) and its class
-  `/[぀-ヿ㐀-鿿]/` **excludes Hangul entirely**. Korean is currently outside the
-  naming test by both doors. Measure before changing it; the fix is proposed in
-  `notes/basel-iii-round-2026-09-04.md`, not applied.
-- **The A bar anchors on `bestSpan` only, so a basis that also quotes the
-  document's own headline can grade itself down.** `frb-regulation-q`: coverage
-  1.00, naming true, still B. Its basis quotes the press release title (lands at
-  index 26 — page chrome) and the substantive sentence (index 8470, with the
-  artefact named 49 characters away); both score 1.00, the tie breaks to the
-  first, and the ±400 window is navigation. Suspect this whenever you see
-  `artefact-named-elsewhere-in-document` on an edge whose quote visibly
-  contains the target's name. **Do not fix it by trimming the basis** — that is
-  grade-motivated editing of an evidence record, and it hides the defect.
 
 ## 7. Standing decisions — do not re-raise
 
