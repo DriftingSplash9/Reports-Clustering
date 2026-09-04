@@ -113,17 +113,19 @@ came out of it (grader `--write` regressions; re-test extension blocks).
    `public/corpus-data.json`, `PLAYBOOK.md`, `HANDOFF.md`,
    `edit_scripts/flags-round2-rulings-2026-09-04.py`, three
    `Claude outputs/*flagrulings*.json`.
-3. Real-GPU number for the unfolded Everything tier — **first reading taken
-   2026-09-04 and it is not usable yet**: 120.0 fps, GPU raster on, 9.0 MB of
-   536.9 MB GPU memory, Everything tier, 3,342 of 3,342 shown. Three things
-   spoil it: Paint flashing / Layout shift regions / Layer borders / Highlight
-   ads were all ticked (each is extra compositing work and the whole canvas
-   renders green), the docked DevTools panel halves the canvas so the GPU is
-   drawing ~1,000 px not 1,920, and the Frame Rate bars read **yellow, i.e.
-   partially dropped frames**, so 120.0 is the headline over a lumpy stream.
-   Retake with only **Frame Rendering Stats** ticked, DevTools undocked into
-   its own window, fully unfolded and auto-rotating; the `requestAnimationFrame`
-   counter (median and p95 frame time) is the number worth recording.
+3. Real-GPU numbers for the Everything tier, 2026-09-04 — **first real
+   readings exist, the unfolded one is still owed.** Clean setup (Frame
+   Rendering Stats only, DevTools undocked, 3,342 of 3,342 shown), Everything
+   tier still FOLDED: **44.4 fps, GPU raster on, 10.2 MB of 536.9 MB GPU
+   memory**, frame bars orange (partially dropped frames). The same scene with
+   DevTools docked — canvas ~1,000 px instead of 1,920 — read **120 fps**.
+   **A ~2x pixel increase costing ~2.7x frame time points at fill/overdraw, not
+   only the draw-call count** the 2026-08-31 audit blamed (3,173 calls, "link
+   batching is the fix"). Cheap discriminator before building anything: resize
+   the window through a few widths and see whether fps tracks pixel count. Still
+   owed: AUTO-UNFOLD, let it settle, auto-rotating, and record median and p95
+   frame time from a `requestAnimationFrame` counter plus
+   `__rig.gl.info.render.calls` — the headline fps hides the lumpiness.
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
