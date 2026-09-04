@@ -494,6 +494,113 @@ country/file/round, not a single site's own one-off quirk.
   its return at ~1,000 characters (capture windows around a needle, never the
   page), and a returned string that looks like query-string or cookie data
   comes back as `[BLOCKED: Cookie/query string data]` — re-slice it.
+- **`public/corpus-data.json` STRIPS `evidence_quote`.** An edge read out of the
+  generated corpus therefore always looks unquoted. Twelve edges in the
+  2026-09-04 browser pass were worked as unquoted and already had a quote.
+  Read the slice JSON in `src/data/research/` before concluding an edge has no
+  quote, and before writing one over it.
+- **The matcher already handles ellipses and curly quotes — do not "fix" a quote
+  for either.** `normalizeForMatch()` folds `’ ‘ ‚ ‛ ′` to `'`, folds the
+  double-quote family, and strips accents (NFKD → drop combining marks → NFKC);
+  `locateQuote()` splits a quote on its ellipsis and scores each fragment
+  separately. Measured 2026-09-04: 105 corpus quotes contain an ellipsis (59 of
+  them grade A) and 84 contain a straight apostrophe (48 grade A), and three
+  edges re-graded with their "broken" original quote scored A at coverage 1.0.
+  Replacing them was churn. **The defect that IS real is the researcher's own
+  citation text appended inside the quote** — a trailing
+  `(Press Release No. 17/218, …)` costs coverage in proportion to its length and
+  drops an otherwise-good quote to `partial-quote` (0.61) or below the bar
+  (0.5). Also real: a quote that paraphrases rather than copies ("Statistics are
+  produced following ESA 2010." for a page that says "The indicators are
+  compiled following ESA 2010") scores 0.
+- **A C grade on an edge whose host is in the browser-pass list tells you nothing
+  about its quote.** The document could not be fetched, so the quote was never
+  scored. Capture the document first, re-grade, and only then judge the quote —
+  otherwise you will rewrite quotes that were fine all along.
+- **`get_page_text` returns the WHOLE page; the ~1,000-character truncation is a
+  `javascript_tool` limit, not a browser limit.** A Claude-in-Chrome capture is
+  therefore one call, not a needle hunt: navigate, then `get_page_text`. Use
+  `javascript_tool` only to compute (probe offsets, fetch a sibling document,
+  decode a PDF) and hand the result to `get_page_text` by writing it into
+  `document.body` as a single `<main>`. Two quirks remain: a returned string
+  that looks like query-string or cookie data comes back as
+  `[BLOCKED: Cookie/query string data]` (re-slice it), and a long
+  `await new Promise(setTimeout)` inside a `browser_batch` item that spans the
+  preceding `navigate` fails with "Inspected target navigated or closed" — put
+  the sleep in its own call after the navigation, not in the same batch item.
+- **An IBGE / INEGI / NSO-Malta landing page serves EVERY tab panel in one HTML
+  response** (2026-09-04). The tab is a client-side view selector — clicking
+  "Conceitos e métodos" only appends `?t=conceitos-e-metodos` — so a quote from
+  any panel is a quote from the cited URL. Verify once per host by fetching the
+  BARE url in-page and searching the raw HTML for the string; IBGE's CNAE page
+  carries its ISIC-synchronisation sentence at offset 43,251 of the bare
+  response. This is the OPPOSITE of the BPS case below, where the PDF is a
+  separate resource with no stable URL. Do not write a landing page off because
+  `document.body.innerText` shows only the default panel, and do not cite the
+  `?t=` variant — cite the bare URL.
+- **A DOCX reads in-browser with no library.** Same-origin `fetch` for the bytes,
+  then walk the zip central directory by hand (EOCD at the tail → entry offsets)
+  and inflate `word/document.xml` with the native
+  `DecompressionStream('deflate-raw')`; strip tags, insert `\n` per `</w:p>`.
+  This read both VLGGC parts (177k chars from Part 2), which 403 to curl.
+- **When a host's CSP blocks cdnjs, pdf.js cannot be injected — write the
+  extractor inline instead.** `script-src 'self' …` (yukon.ca) blocks the
+  `<script src>` AND `connect-src 'self'` blocks fetching the library's source
+  to `eval` it, even from the extension's isolated world. A ~40-line inline
+  extractor covers text-layer PDFs: scan for `stream\r?\n` not preceded by
+  `end`, take the dict back to the previous ` obj`, keep the `/FlateDecode`
+  ones that are not `ObjStm|Image|DCTDecode|FontFile|Metadata|XML`, inflate,
+  and concatenate the `(...)` operands. Four traps, each of which silently
+  yields garbage or nothing:
+  1. **Trim trailing EOL bytes before inflating** — the bytes up to `endstream`
+     include the `\r\n`, which errors the stream; and **read the stream
+     incrementally** (`getReader()` in a try/catch) so a trailing-garbage error
+     still returns the prefix that did inflate.
+  2. **Only flush pending strings on `Tj`/`TJ`/`'`/`"`** and clear them on any
+     other operator. Taking every `(...)` sweeps in marked-content properties —
+     an `/Lang (en-GB) … BDC` document comes out with `en-GB` between every
+     phrase.
+  3. **A backslash before a newline inside a string is a line continuation**,
+     not an escape: handle `\\\r?\n` → '' first, then octal, then the escape
+     map. Miss it and quotes read `Go\ vernment`.
+  4. **Concatenate `TJ` array pieces with no separator** — the kerning splits
+     are mid-word (`(Expenditur)10.1(e incr)`), so anything you insert between
+     them breaks the word.
+  It does NOT handle subset fonts with custom encodings and no ToUnicode CMap:
+  `council.vancouver.ca` inflates 28k chars of noise. That is
+  `unreadable-source`, not a fetch failure.
+- **A scanned PDF is not unreadable — the bridge VM has tesseract.**
+  `pdftotext -layout` returning 9-13 bytes on a multi-megabyte file means no
+  text layer, not a broken file. `pdftoppm -r 180 -f <a> -l <b> -png` then
+  `tesseract` per page reads it; only `eng` is installed, which is adequate for
+  Latin-script French and Portuguese (diacritics come out approximate). Page a
+  range, not the whole file — a 99-page audit at 200 dpi will not finish inside
+  the bridge's ~170 s call. Record the route as `via: ocr tesseract <date>` in
+  the fulltext header so the grade is auditable.
+- **Re-probe the debt list before believing it; "walled" decays.** One `curl`
+  sweep of all remaining URLs from the bridge VM (browser UA, ~20 s timeout,
+  `%{http_code}\t%{content_type}\t%{size_download}`) reclassified a dozen hosts
+  in one call on 2026-09-04: `stats.gov.cn` and `bps.gub.uy` answered 200 having
+  been logged "could not resolve host" (a `www.` prefix and a transient DNS
+  failure), and `anuario.ine.gob.bo` was never walled at all. Do this before
+  opening a browser — the browser pass is the expensive route.
+- **`empty:no-extractor` in a debt list is a GRADER gap, not a host wall.** The
+  grader has no xlsx branch, so a readable spreadsheet reads as an empty
+  document; eight edges carry that reason. Unzip `xl/sharedStrings.xml` +
+  `xl/worksheets/sheet1.xml` (shared-string cells are `t="s"` with the index in
+  `<v>`), or add the branch to `getDoc`.
+- **The Chrome extension has its own per-site permission list, and a refusal
+  there is not a site wall.** "Navigation to this domain is not allowed" and
+  "Permission denied for JavaScript execution on this domain" are the two
+  wordings. They stopped roughly a dozen hosts in the 2026-09-04 round
+  (`wam.ae`, `gov.il`, `slovak.statistics.sk`, several `*.gov.in`). Record them
+  as blocked-by-extension, never as `unreadable-source`, and tell Thomas —
+  widening the list is one setting, and each host is then one call.
+- **`.gov.in` and `.gov.br` are NOT blocked in Thomas's Chrome.** The note two
+  bullets down claiming they are blocked "from the sandbox, the bridge VM *and*
+  Thomas's own Chrome" is wrong as of 2026-09-04: `ibge.gov.br` and
+  `mospi.gov.in` both load. They 403 (or fail DNS) from the bridge VM, which is
+  what was actually measured.
 - **A BPS publication landing page is an ABSTRACT, and the PDF has no stable
   URL.** `bps.go.id/{en,id}/publication/...` carries title, catalogue metadata
   and an abstract; everything a methodology quote needs lives in the PDF, which

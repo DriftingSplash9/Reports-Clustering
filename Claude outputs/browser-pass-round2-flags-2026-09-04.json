@@ -1,0 +1,55 @@
+[
+ {
+  "host": "censo2022.ibge.gov.br",
+  "source": "br-lei-5534-1968",
+  "target": "br-ibge-censo-demografico",
+  "action": "refuse-direction",
+  "url": "https://censo2022.ibge.gov.br/en/about/enforcement-and-confidentiality.html",
+  "reason": "WRONG DIRECTION. The cited page was read in full in Chrome and says the opposite of the edge: the 2022 Census rests on Law 5,534/1968, not the law on the census. Quote is ready if Thomas flips the edge to br-ibge-censo-demografico -> br-lei-5534-1968.",
+  "quote_if_flipped": "By correctly answering the 2022 Census, the great winner is you. Law No. 5,534, of November 14, 1968, which establishes the mandatory provision of statistical information, ensures the confidentiality of the information collected"
+ },
+ {
+  "host": "inegi.org.mx",
+  "source": "mx-cscm",
+  "target": "mx-scnm",
+  "action": "refuse",
+  "url": "https://www.inegi.org.mx/programas/cultura/",
+  "reason": "quote-not-in-document for this target: the CSCM page names the Sistema de Cuentas Nacionales 2008 de las Naciones Unidas (i.e. SNA 2008), UNESCO's FCS and the Convenio Andres Bello guide, but never the Mexican SCNM in prose. FLAG: the same sentence is A-grade evidence for an mx-cscm -> sna-2008 edge if Thomas wants one."
+ },
+ {
+  "host": "yukon.ca",
+  "source": "yt-budget-main-estimates",
+  "target": "territorial-formula-financing",
+  "action": "refuse",
+  "url": "https://yukon.ca/en/2026-27-main-estimates-finance",
+  "reason": "wrong-document: the cited URL is a download landing page (name, size, page count, description) for fin-2026-27-budget-main-estimates-finance.pdf, the 19-page FINANCE DEPARTMENT section of the Main Estimates. Both the landing page and that PDF were read in full; neither contains 'Grant from Canada', 'Transfers from Canada', 'Territorial Formula' or 'Formula Financing'. FLAG: the claim is A-grade evidenced in the Fiscal Outlook PDF (Table 4), which is a different publication - Thomas's call whether to retarget."
+ },
+ {
+  "host": "ndb.int",
+  "source": "ndb-mou-brics-icm-2022",
+  "target": "brics-icm-cooperation-framework-2011",
+  "action": "refuse",
+  "url": "https://www.ndb.int/wp-content/uploads/2022/11/MoU-between-NDB-and-the-Members-of-the-BRICS-ICM.pdf",
+  "reason": "BASIS LOOKS WRONG, not just uncited. The MoU names exactly one predecessor instrument and it is dated 2016, not 2011: 'the first Memorandum of Understanding on General Cooperation signed by NDB and the Members of the BRICS Interbank Cooperation Mechanism on October 15, 2016'. No '2011' or 'Framework Agreement' string anywhere in the OCR'd text."
+ },
+ {
+  "host": "nso.gov.mt",
+  "source": "mt-edp-inventory",
+  "target": "mt-nso-government-finance",
+  "action": "accept",
+  "url": "https://nso.gov.mt/general-government-balance-and-debt-under-the-maastricht-treaty-first-reporting-for-2026/",
+  "quote": "The EDP Consolidated Inventory of Sources and Methods in ESA 2010 is available on the NSO website.",
+  "caveat": "DIRECTION FLAG for Thomas: the sentence links the release to its Article 9 inventory, but the edge runs inventory -> release as uses_data_from. An inventory of sources and methods documents the release; it does not consume its data. Not flipped (standing rule).",
+  "keep_existing": true,
+  "note": "Existing evidence_quote already matches the captured document; left unchanged. The improvement this round is the fulltext capture, which is why the edge was C."
+ },
+ {
+  "host": "jambi.bps.go.id",
+  "source": "id-democracy-index",
+  "target": "id-rpjmn",
+  "action": "accept",
+  "url": "https://jambi.bps.go.id/id/news/2022/09/07/310/sekilas-info-mengenai-penyusunan-indeks-demokrasi-indonesia-metode-baru.html",
+  "quote": "Indeks Demokrasi Indonesia (IDI) merupakan ukuran pembangunan politik yang digunakan pemerintah pada RPJMN 2010 – 2014, 2015 – 2019, serta 2020 – 2024.",
+  "caveat": "DIRECTION FLAG for Thomas: the sentence says the RPJMN USES the IDI as its political-development measure, so the dependency reads RPJMN -> IDI. The edge runs id-democracy-index -> id-rpjmn. Not flipped (standing rule)."
+ }
+]
