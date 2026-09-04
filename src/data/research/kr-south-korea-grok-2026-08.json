@@ -1311,10 +1311,10 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "kr-mining-manufacturing-survey",
-      "target_report_id": "kr-national-accounts-bok",
+      "source_report_id": "kr-national-accounts-bok",
+      "target_report_id": "kr-mining-manufacturing-survey",
       "relationship_type": "uses_data_from",
-      "basis": "A Bank of Korea methodology document names the Monthly Survey on Mining and Manufacturing as a source in GDP estimation.",
+      "basis": "A Bank of Korea methodology document names the Monthly Survey on Mining and Manufacturing as a source in GDP estimation. (Direction flipped 2026-09-04: the basis names kr-national-accounts-bok as the consumer of kr-mining-manufacturing-survey; the edge was minted the other way round — Thomas's ruling on HANDOFF item 1, list in Claude outputs/direction-suspect-jp-kr-2026-09-03.json.)",
       "evidence_url": "https://unstats.un.org/unsd/economic_stat/China/GDPFE/Korea.pdf",
       "evidence_quote": "Monthly Survey on Mining and Manufacturing, Customs clearance-based exports and imports",
       "evidence_grade": "B"
@@ -1329,10 +1329,10 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "kr-balance-of-payments",
-      "target_report_id": "kr-national-accounts-bok",
+      "source_report_id": "kr-national-accounts-bok",
+      "target_report_id": "kr-balance-of-payments",
       "relationship_type": "uses_data_from",
-      "basis": "The BOK document states components of household consumption abroad are compiled by reclassifying Balance of Payments statistics.",
+      "basis": "The BOK document states components of household consumption abroad are compiled by reclassifying Balance of Payments statistics. (Direction flipped 2026-09-04: the basis names kr-national-accounts-bok as the consumer of kr-balance-of-payments; the edge was minted the other way round — Thomas's ruling on HANDOFF item 1, list in Claude outputs/direction-suspect-jp-kr-2026-09-03.json.)",
       "evidence_url": "https://unstats.un.org/unsd/economic_stat/China/GDPFE/Korea.pdf",
       "evidence_quote": "We estimates those data by reclassifying 'Balance of Payments statistics (e.g. travel services and credit card usage).'",
       "evidence_grade": "B"
@@ -1415,6 +1415,20 @@
       "target": "kr-eaps",
       "reason": "wrong-direction",
       "why": "WRONG-DIRECTION (2026-09-03 schema+validator round, independent audit 2026-09-02 finding A5): this edge's own basis states the opposite direction of what source_report_id/target_report_id assert -- \"KOSTAT metadata for the Economically Active Population Survey states its sampling frame is built from Population and Housing Census enumeration districts.\" -- and its correct twin, kr-eaps -> kr-population-census (uses_data_from), is live (src/data/research/jp-kr-wiring-grok-2026-08.json). Original entry preserved verbatim: relationship_type=methodology_depends_on, evidence_url='http://www.narastat.kr/metasvc/svc/SvcMetaDcDtaPopup.do?confmNo=101004', evidence_quote='표본추출틀: 인총 조사구내 아파트(A), 보통(1) 및 섬(2) 조사구를 제외한 367,618개 조사구'."
+    },
+    {
+      "edge": "kr-mining-manufacturing-survey -> kr-national-accounts-bok",
+      "source": "kr-mining-manufacturing-survey",
+      "target": "kr-national-accounts-bok",
+      "reason": "wrong-direction",
+      "why": "WRONG-DIRECTION (2026-09-04, Thomas's ruling on HANDOFF item 1; flagged by round 4 / round A, Claude outputs/direction-suspect-jp-kr-2026-09-03.json): the edge's own basis states that kr-national-accounts-bok uses kr-mining-manufacturing-survey, so kr-national-accounts-bok is the consumer and must be source_report_id. Flipped in place to kr-national-accounts-bok -> kr-mining-manufacturing-survey in this file (grade and citation carried over unchanged — the direction criterion is still not machine-checked). Original entry preserved verbatim: source_report_id=\"kr-mining-manufacturing-survey\", target_report_id=\"kr-national-accounts-bok\", relationship_type=\"uses_data_from\", basis=\"A Bank of Korea methodology document names the Monthly Survey on Mining and Manufacturing as a source in GDP estimation.\", evidence_url=\"https://unstats.un.org/unsd/economic_stat/China/GDPFE/Korea.pdf\", evidence_quote=\"Monthly Survey on Mining and Manufacturing, Customs clearance-based exports and imports\", evidence_grade=\"B\"."
+    },
+    {
+      "edge": "kr-balance-of-payments -> kr-national-accounts-bok",
+      "source": "kr-balance-of-payments",
+      "target": "kr-national-accounts-bok",
+      "reason": "wrong-direction",
+      "why": "WRONG-DIRECTION (2026-09-04, Thomas's ruling on HANDOFF item 1; flagged by round 4 / round A, Claude outputs/direction-suspect-jp-kr-2026-09-03.json): the edge's own basis states that kr-national-accounts-bok uses kr-balance-of-payments, so kr-national-accounts-bok is the consumer and must be source_report_id. Flipped in place to kr-national-accounts-bok -> kr-balance-of-payments in this file (grade and citation carried over unchanged — the direction criterion is still not machine-checked). Original entry preserved verbatim: source_report_id=\"kr-balance-of-payments\", target_report_id=\"kr-national-accounts-bok\", relationship_type=\"uses_data_from\", basis=\"The BOK document states components of household consumption abroad are compiled by reclassifying Balance of Payments statistics.\", evidence_url=\"https://unstats.un.org/unsd/economic_stat/China/GDPFE/Korea.pdf\", evidence_quote=\"We estimates those data by reclassifying 'Balance of Payments statistics (e.g. travel services and credit card usage).'\", evidence_grade=\"B\"."
     }
   ]
 }

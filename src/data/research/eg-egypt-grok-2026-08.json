@@ -1141,19 +1141,7 @@
       "kind": "publication"
     }
   ],
-  "dependencies": [
-    {
-      "source_report_id": "eg-statistics-law-1960",
-      "target_report_id": "eg-capmas-establishment-decree",
-      "relationship_type": "cites",
-      "basis": "Presidential Decree No. 2915 of 1964 explicitly assigns CAPMAS the technical jurisdictions of the technical body established under Law No. 35 of 1960 concerning statistics and censuses, and empowers CAPMAS to conduct the statistics and censuses required by the State under that law.",
-      "evidence_url": "https://unstats.un.org/unsd/dnss/docViewer.aspx?docID=2175&catID=7",
-      "_batch": [
-        "2026-08-17_Egypt-domestic-batch1.json"
-      ],
-      "evidence_grade": "C"
-    }
-  ],
+  "dependencies": [],
   "_dropped": [
     {
       "edge": "eg-capmas-establishment-decree -> eg-statistical-yearbook",
@@ -1805,6 +1793,13 @@
       "target": "eg-statistical-yearbook",
       "reason": "no-document",
       "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: uses_data_from. Original evidence_url: https://www.capmas.gov.eg/. Original basis: \"Industrial production and manufacturing indicators are published in the Statistical Yearbook.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "eg-statistics-law-1960 -> eg-capmas-establishment-decree",
+      "source": "eg-statistics-law-1960",
+      "target": "eg-capmas-establishment-decree",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://unstats.un.org/unsd/dnss/docViewer.aspx?docID=2175&catID=7 returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"eg-statistics-law-1960\", target_report_id=\"eg-capmas-establishment-decree\", relationship_type=\"cites\", basis=\"Presidential Decree No. 2915 of 1964 explicitly assigns CAPMAS the technical jurisdictions of the technical body established under Law No. 35 of 1960 concerning statistics and censuses, and empowers CAPMAS to conduct the statistics and censuses required by the State under that law.\", evidence_url=\"https://unstats.un.org/unsd/dnss/docViewer.aspx?docID=2175&catID=7\", _batch=[\"2026-08-17_Egypt-domestic-batch1.json\"], evidence_grade=\"C\"."
     }
   ]
 }

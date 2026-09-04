@@ -186,15 +186,6 @@
     },
     {
       "source_report_id": "gh-gss-cpi",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "GSS's own CPI Technical Methodology Manual: 'To order products into these different categories, GSS uses the United Nations Classification of Individual Consumption According to Purpose (COICOP) 2018 manual.' Reuses the un-coicop-2018 node first minted for South Africa/Nigeria (za-fiscal-federalism.json) -- a fourth country now confirmed on the current COICOP vintage, alongside South Africa, Nigeria and Kenya, versus Egypt's older COICOP-HBS 1999/2000.",
-      "evidence_url": "https://statsghana.gov.gh/gssmain/fileUpload/Price%20Indices/CPI_Technical_Guide_v5_Published_14102020.pdf",
-      "evidence_grade": "C",
-      "evidence_quote": "To order products into these different categories, GSS uses the United Nations Classification of Individual Consumption According to Purpose (COICOP) 2018 manual."
-    },
-    {
-      "source_report_id": "gh-gss-cpi",
       "target_report_id": "imf-e-gdds",
       "relationship_type": "methodology_depends_on",
       "basis": "Ghana's own Ministry of Finance press release (November 2018) announcing IMF Statistics Department support: 'The Mission supported the development of the National Summary Data Page (NSDP), which will be accessible from the Coordinating Agency website', describing implementation of 'the IMF's Enhanced General Data Dissemination System', which 'supersedes the GDDS, which was established in 1997.' Reuses the imf-e-gdds node first minted for Kenya (ke-social-protection.json) and also carried by Ethiopia (et-psnp-cpi-federalism.json) -- Ghana is now a third country confirmed on the weaker (non-SDDS) IMF dissemination tier, independently dated to November 2018 on the national side, matching Grok's round's citation of the same month from a 2026 IMF Article IV report.",
@@ -216,6 +207,13 @@
       "target": null,
       "reason": "no-document",
       "why": "Grok's round reported a June 2025 ECOWAS Council of Ministers Regulation adopting a Methodological Guide for a regional Harmonised CPI (COICOP 2018, 13 functions) as the West African analogue to Kenya's binding EAC HCPI regulation. Two independent, differently-worded searches this session for the regulation's title, number, or any ECOWAS-hosted document found nothing -- no corroborating source, no URL, not even a passing news mention. Not minted as a node; see _open_questions for the recommended follow-up."
+    },
+    {
+      "edge": "gh-gss-cpi -> un-coicop-2018",
+      "source": "gh-gss-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://statsghana.gov.gh/gssmain/fileUpload/Price%20Indices/CPI_Technical_Guide_v5_Published_14102020.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"gh-gss-cpi\", target_report_id=\"un-coicop-2018\", relationship_type=\"methodology_depends_on\", basis=\"GSS's own CPI Technical Methodology Manual: 'To order products into these different categories, GSS uses the United Nations Classification of Individual Consumption According to Purpose (COICOP) 2018 manual.' Reuses the un-coicop-2018 node first minted for South Africa/Nigeria (za-fiscal-federalism.json) -- a fourth country now confirmed on the current COICOP vintage, alongside South Africa, Nigeria and Kenya, versus Egypt's older COICOP-HBS 1999/2000.\", evidence_url=\"https://statsghana.gov.gh/gssmain/fileUpload/Price%20Indices/CPI_Technical_Guide_v5_Published_14102020.pdf\", evidence_grade=\"C\", evidence_quote=\"To order products into these different categories, GSS uses the United Nations Classification of Individual Consumption According to Purpose (COICOP) 2018 manual.\"."
     }
   ]
 }

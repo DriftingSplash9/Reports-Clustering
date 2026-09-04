@@ -60,17 +60,7 @@
       "kind": "instrument"
     }
   ],
-  "dependencies": [
-    {
-      "source_report_id": "ls-bos-cpi",
-      "target_report_id": "un-coicop-2018",
-      "relationship_type": "methodology_depends_on",
-      "basis": "CPI Report No. 3:2026: 'The index employs the COICOP (Classification of Individual Consumption by Purpose) system, organized into 12 divisions, with further breakdowns into groups and classes.'",
-      "evidence_url": "http://www.bos.gov.ls/New%20Folder/Copy%20of%20Economics/CPI_January_2026.pdf",
-      "evidence_grade": "C",
-      "evidence_quote": "The index employs the COICOP (Classification of Individual Consumption by Purpose) system, organized into 12 divisions, with further breakdowns into groups and classes."
-    }
-  ],
+  "dependencies": [],
   "_dropped": [
     {
       "edge": "ls-old-age-pensions-act-2005 -> ls-bos-cpi",
@@ -78,6 +68,13 @@
       "target": "ls-bos-cpi",
       "reason": "no-document",
       "why": "NATLEX's abstract of the Act specifies eligibility and payment mechanics but names no amount-setting or adjustment formula of any kind -- silence, not an explicit denial. Consistent with the discretionary pattern (M950-to-M1,000 increase this year framed in budget/fiscal-pressure language, not CPI), but the Act itself is simply quiet on the mechanism rather than affirmatively ruling one out."
+    },
+    {
+      "edge": "ls-bos-cpi -> un-coicop-2018",
+      "source": "ls-bos-cpi",
+      "target": "un-coicop-2018",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url http://www.bos.gov.ls/New%20Folder/Copy%20of%20Economics/CPI_January_2026.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"ls-bos-cpi\", target_report_id=\"un-coicop-2018\", relationship_type=\"methodology_depends_on\", basis=\"CPI Report No. 3:2026: 'The index employs the COICOP (Classification of Individual Consumption by Purpose) system, organized into 12 divisions, with further breakdowns into groups and classes.'\", evidence_url=\"http://www.bos.gov.ls/New%20Folder/Copy%20of%20Economics/CPI_January_2026.pdf\", evidence_grade=\"C\", evidence_quote=\"The index employs the COICOP (Classification of Individual Consumption by Purpose) system, organized into 12 divisions, with further breakdowns into groups and classes.\"."
     }
   ]
 }

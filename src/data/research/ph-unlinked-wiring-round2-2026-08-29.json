@@ -125,24 +125,6 @@
   ],
   "dependencies": [
     {
-      "source_report_id": "ph-ghg",
-      "target_report_id": "ipcc-ghg-guidelines",
-      "relationship_type": "legal_basis",
-      "basis": "The Climate Change Commission's official Executive Brief for the 2015/2020 National GHG Inventories states the methodologies, assumptions and default emission factors followed the 2006 IPCC Guidelines and used the IPCC Inventory Software.",
-      "evidence_url": "https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf",
-      "evidence": "documented",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "ph-ndc",
-      "target_report_id": "ipcc-ghg-guidelines",
-      "relationship_type": "legal_basis",
-      "basis": "The official NDC Implementation Plan states the national GHG inventories underlying the NDC's baseline and targets cover the five IPCC sectors and follow IPCC Guidelines.",
-      "evidence_url": "https://niccdies.climate.gov.ph/files/documents/The%20Philippines-%20NDC%20Implementation%20Plan%20-%20072024.pdf",
-      "evidence": "documented",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "ph-forest",
       "target_report_id": "un-fdes-2013",
       "relationship_type": "methodology_depends_on",
@@ -488,15 +470,6 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "ph-ghg",
-      "target_report_id": "ph-forest",
-      "relationship_type": "uses_data_from",
-      "basis": "National GHG inventory LULUCF sector uses DENR-FMB forestry data.",
-      "evidence_url": "https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf",
-      "evidence": "documented",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "ph-ndc",
       "target_report_id": "ph-ghg",
       "relationship_type": "uses_data_from",
@@ -734,6 +707,27 @@
       "target": "ph-ndrrmc-sitrep",
       "reason": "note",
       "why": "RETIRED 2026-08-31 with its node (audit finding D7, Thomas's ruling 3-A): ph-disaster-impact carried a derivation note where a publisher should be (\"Derived from …\", \"… / national sources\") — a topic with a number attached, not a recurring official release, so no document can name it as an input. Full node and edge records in notes/retired-nodes-2026-08-31.json. Original relationship_type: uses_data_from. Original evidence_url: https://pubfiles.pagasa.dost.gov.ph/tamss/weather/tc_summary/PAGASA_ARTC_2020.pdf. Original basis: \"Disaster impact figures (casualties, cost of damage) are sourced from NDRRMC situation reports.\""
+    },
+    {
+      "edge": "ph-ghg -> ipcc-ghg-guidelines",
+      "source": "ph-ghg",
+      "target": "ipcc-ghg-guidelines",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"ph-ghg\", target_report_id=\"ipcc-ghg-guidelines\", relationship_type=\"legal_basis\", basis=\"The Climate Change Commission's official Executive Brief for the 2015/2020 National GHG Inventories states the methodologies, assumptions and default emission factors followed the 2006 IPCC Guidelines and used the IPCC Inventory Software.\", evidence_url=\"https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf\", evidence=\"documented\", evidence_grade=\"C\"."
+    },
+    {
+      "edge": "ph-ndc -> ipcc-ghg-guidelines",
+      "source": "ph-ndc",
+      "target": "ipcc-ghg-guidelines",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://niccdies.climate.gov.ph/files/documents/The%20Philippines-%20NDC%20Implementation%20Plan%20-%20072024.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"ph-ndc\", target_report_id=\"ipcc-ghg-guidelines\", relationship_type=\"legal_basis\", basis=\"The official NDC Implementation Plan states the national GHG inventories underlying the NDC's baseline and targets cover the five IPCC sectors and follow IPCC Guidelines.\", evidence_url=\"https://niccdies.climate.gov.ph/files/documents/The%20Philippines-%20NDC%20Implementation%20Plan%20-%20072024.pdf\", evidence=\"documented\", evidence_grade=\"C\"."
+    },
+    {
+      "edge": "ph-ghg -> ph-forest",
+      "source": "ph-ghg",
+      "target": "ph-forest",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"ph-ghg\", target_report_id=\"ph-forest\", relationship_type=\"uses_data_from\", basis=\"National GHG inventory LULUCF sector uses DENR-FMB forestry data.\", evidence_url=\"https://niccdies.climate.gov.ph/files/documents/2015%20and%202020%20National%20GHGI%20Executive%20Brief.pdf\", evidence=\"documented\", evidence_grade=\"C\"."
     }
   ]
 }

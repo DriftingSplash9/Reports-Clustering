@@ -102,14 +102,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "ec-reservas",
-      "target_report_id": "ec-dolarizacion",
-      "relationship_type": "cites",
-      "basis": "En el contexto de dolarización en el Ecuador, según el Código Orgánico Monetario y Financiero (COMF)...",
-      "evidence_url": "https://www.bce.fin.ec/publicaciones/editoriales/reservas-internacionales-del-ecuador-como-funcionan",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "ec-gasto-educacion",
       "target_report_id": "ec-cuentas-nacionales",
       "relationship_type": "calculated_from",
@@ -205,6 +197,13 @@
       "target": null,
       "reason": "no-document",
       "why": "Domains don't include poverty; no commodity/economic-identity document found."
+    },
+    {
+      "edge": "ec-reservas -> ec-dolarizacion",
+      "source": "ec-reservas",
+      "target": "ec-dolarizacion",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.bce.fin.ec/publicaciones/editoriales/reservas-internacionales-del-ecuador-como-funcionan returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"ec-reservas\", target_report_id=\"ec-dolarizacion\", relationship_type=\"cites\", basis=\"En el contexto de dolarización en el Ecuador, según el Código Orgánico Monetario y Financiero (COMF)...\", evidence_url=\"https://www.bce.fin.ec/publicaciones/editoriales/reservas-internacionales-del-ecuador-como-funcionan\", evidence_grade=\"C\"."
     }
   ]
 }

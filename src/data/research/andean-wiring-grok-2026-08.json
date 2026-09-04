@@ -92,10 +92,10 @@
       "evidence_quote": "CBE follows methodological recommendations of the 2008 System of National Accounts (SNA 2008)"
     },
     {
-      "source_report_id": "ec-enemdu",
-      "target_report_id": "ec-cuentas-nacionales",
+      "source_report_id": "ec-cuentas-nacionales",
+      "target_report_id": "ec-enemdu",
       "relationship_type": "uses_data_from",
-      "basis": "ENEMDU supplies labour-market and income information that feeds the national accounts compiled by the Banco Central del Ecuador. Evidence: \"A su vez, permite alimentar el Sistema de Cuentas Nacionales, administrado por el Banco Central del Ecuador (BCE).\"",
+      "basis": "ENEMDU supplies labour-market and income information that feeds the national accounts compiled by the Banco Central del Ecuador. Evidence: \"A su vez, permite alimentar el Sistema de Cuentas Nacionales, administrado por el Banco Central del Ecuador (BCE).\" (Direction flipped 2026-09-04: the basis names ec-cuentas-nacionales as the consumer of ec-enemdu; the edge was minted the other way round — Thomas's ruling on HANDOFF item 1, list in Claude outputs/direction-suspect-jp-kr-2026-09-03.json.)",
       "evidence_url": "https://www.ecuadorencifras.gob.ec/documentos/web-inec/EMPLEO/2024/Trimestre_III/2024_III_Metodologia_ENEMDU.pdf",
       "evidence_grade": "B",
       "evidence_quote": "A su vez, permite alimentar el Sistema de Cuentas Nacionales, administrado por el Banco Central del Ecuador (BCE)."
@@ -709,6 +709,13 @@
       "target": "bo-gas",
       "reason": "no-document",
       "why": "Round A (no-URL re-research, 2026-09-03): quoted sentence not found in INE Bolivia's hydrocarbons index metadata, the CN base-1990 methodology or DSBB BOL NAG00; the sentence itself describes an index built from producer data, not the national accounts using gas statistics. Cross-checked against every live edge and every other slice's _dropped block before recording: no other slice carries this pair. Original basis follows. Natural-gas production and export volumes are a core physical indicator for the hydrocarbons branch of the national accounts. Evidence: \"Índice de Cantidad de Extracción de Petróleo y Gas Natural, estos indicadores se elaboran con información de todas las empresas productoras de hidrocarburos\""
+    },
+    {
+      "edge": "ec-enemdu -> ec-cuentas-nacionales",
+      "source": "ec-enemdu",
+      "target": "ec-cuentas-nacionales",
+      "reason": "wrong-direction",
+      "why": "WRONG-DIRECTION (2026-09-04, Thomas's ruling on HANDOFF item 1; flagged by round 4 / round A, Claude outputs/direction-suspect-jp-kr-2026-09-03.json): the edge's own basis states that ec-cuentas-nacionales uses ec-enemdu, so ec-cuentas-nacionales is the consumer and must be source_report_id. Flipped in place to ec-cuentas-nacionales -> ec-enemdu in this file (grade and citation carried over unchanged — the direction criterion is still not machine-checked). Original entry preserved verbatim: source_report_id=\"ec-enemdu\", target_report_id=\"ec-cuentas-nacionales\", relationship_type=\"uses_data_from\", basis=\"ENEMDU supplies labour-market and income information that feeds the national accounts compiled by the Banco Central del Ecuador. Evidence: \\\"A su vez, permite alimentar el Sistema de Cuentas Nacionales, administrado por el Banco Central del Ecuador (BCE).\\\"\", evidence_url=\"https://www.ecuadorencifras.gob.ec/documentos/web-inec/EMPLEO/2024/Trimestre_III/2024_III_Metodologia_ENEMDU.pdf\", evidence_grade=\"B\", evidence_quote=\"A su vez, permite alimentar el Sistema de Cuentas Nacionales, administrado por el Banco Central del Ecuador (BCE).\"."
     }
   ]
 }

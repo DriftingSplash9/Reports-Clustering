@@ -1081,20 +1081,7 @@
       "kind": "instrument"
     }
   ],
-  "dependencies": [
-    {
-      "source_report_id": "py-deuda-publica",
-      "target_report_id": "py-presupuesto",
-      "relationship_type": "cites",
-      "basis": "MEF Paraguay, Reporte Mensual de la Deuda Publica (Boletin DGPE, Enero 2026), Emision de Bonos section: «Para el ejercicio fiscal 2025, se conto con una autorizacion legal de USD 714,5 millones aprobado mediante la Ley N. 7408/2024 Que aprueba el presupuesto general de la Nacion para el ejercicio fiscal 2025.»",
-      "evidence_url": "https://www.mef.gov.py/sites/default/files/2026-03/Bolet%C3%ADn%20DGPE%20Enero%202026.pdf",
-      "_batch": [
-        "2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json"
-      ],
-      "_provenance": "Recovered 2026-08-18 from a held-back \"related_to/complements\" edge. Original assertion was thematic; this basis is from a document that states the dependency.",
-      "evidence_grade": "C"
-    }
-  ],
+  "dependencies": [],
   "_dropped": [
     {
       "edge": "py-pobreza -> py-ephc",
@@ -1277,6 +1264,13 @@
       "target": "py-comercio-exterior",
       "reason": "no-document",
       "why": "QUARANTINED 2026-08-31 (independent audit finding D1, Thomas's ruling 1-A: quarantine all): this edge asserted a relationship instead of citing one — its evidence_url was a bare publisher homepage and its basis quotes no document, so nobody could check it. Moved here so the belief survives and stops being re-proposed; it may well be true. Original relationship_type: methodology_depends_on. Original evidence_url: https://www.mic.gov.py/. Original basis: \"The Israel FTA expands preferential extra-regional market access.\" To re-mint: find the document (methodology note, statute, release annex) that names the input, quote it verbatim, and cite that document's URL — not the homepage."
+    },
+    {
+      "edge": "py-deuda-publica -> py-presupuesto",
+      "source": "py-deuda-publica",
+      "target": "py-presupuesto",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.mef.gov.py/sites/default/files/2026-03/Bolet%C3%ADn%20DGPE%20Enero%202026.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"py-deuda-publica\", target_report_id=\"py-presupuesto\", relationship_type=\"cites\", basis=\"MEF Paraguay, Reporte Mensual de la Deuda Publica (Boletin DGPE, Enero 2026), Emision de Bonos section: «Para el ejercicio fiscal 2025, se conto con una autorizacion legal de USD 714,5 millones aprobado mediante la Ley N. 7408/2024 Que aprueba el presupuesto general de la Nacion para el ejercicio fiscal 2025.»\", evidence_url=\"https://www.mef.gov.py/sites/default/files/2026-03/Bolet%C3%ADn%20DGPE%20Enero%202026.pdf\", _batch=[\"2026-08-13_Paraguay-batch4-fiscal-energy-industrial.json\"], _provenance=\"Recovered 2026-08-18 from a held-back \\\"related_to/complements\\\" edge. Original assertion was thematic; this basis is from a document that states the dependency.\", evidence_grade=\"C\"."
     }
   ]
 }

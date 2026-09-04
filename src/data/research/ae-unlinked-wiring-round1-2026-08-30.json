@@ -49,15 +49,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "ae-cbuae",
-      "target_report_id": "imf-bpm6",
-      "relationship_type": "methodology_depends_on",
-      "evidence": "documented",
-      "basis": "CBUAE's own Balance of Payments Developments report states BOP is compiled per IMF BPM6.",
-      "evidence_url": "https://www.centralbank.ae/media/vq4apu2f/balance-of-payments-developments_uae_2024-2025.pdf",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "ae-fcsc",
       "target_report_id": "ae-cbuae",
       "relationship_type": "uses_data_from",
@@ -321,6 +312,13 @@
       "target": "ae-labour",
       "reason": "no-document",
       "why": "MOVED 2026-08-31 (second independent audit, finding F-05; Thomas's ruling: naming the agency is not naming the artefact): the cited GCC-Stat quarterly labour report names the UAE agency (FCSC/FCSA) among its data sources but never the labour-statistics release, and this issue's tables exclude UAE. Find the document that names the release itself before re-minting. Original relationship_type: uses_data_from. Original evidence_url: https://gccstat.org/images/gccstat/docman/publications/Quarterly_Report_on_labour_Statistics_in_the_GCC_Countries_-_First_Quarter_of_2020.pdf. Original basis: \"GCC-Stat's Quarterly Report on Labour Statistics in the GCC Countries lists FCSC (FCSA) among its national Data Sources for UAE labour statistics; this particular quarter's tables exclude UAE ('not available on a quarterly basis') but FCSC is confirmed as the standing named source for GCC-Stat's labour-statistics compilation programme.\""
+    },
+    {
+      "edge": "ae-cbuae -> imf-bpm6",
+      "source": "ae-cbuae",
+      "target": "imf-bpm6",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.centralbank.ae/media/vq4apu2f/balance-of-payments-developments_uae_2024-2025.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"ae-cbuae\", target_report_id=\"imf-bpm6\", relationship_type=\"methodology_depends_on\", evidence=\"documented\", basis=\"CBUAE's own Balance of Payments Developments report states BOP is compiled per IMF BPM6.\", evidence_url=\"https://www.centralbank.ae/media/vq4apu2f/balance-of-payments-developments_uae_2024-2025.pdf\", evidence_grade=\"C\"."
     }
   ]
 }

@@ -339,14 +339,6 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "cr-bccr-national-accounts",
-      "target_report_id": "sna-2008",
-      "relationship_type": "methodology_depends_on",
-      "basis": "BCCR's own national-accounts reference-year-2017 summary states the update was carried out under SNA 2008: “La actualización fue ejecutada en el marco metodológico del Manual del Sistema de Cuentas Nacionales 2008 (SNA2008).”",
-      "evidence_url": "https://www.bccr.fi.cr/indicadores-economicos/DocCuentasNacionales2017/Resumen-Cuentas-Nacionales-2017.pdf",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "pa-inec",
       "target_report_id": "imf-e-gdds",
       "relationship_type": "methodology_depends_on",
@@ -458,6 +450,13 @@
       "target": null,
       "reason": "no-document",
       "why": "[CONFIRMS GROK'S OWN THIN CALL] Independently checked Belize's DSBB CPI metadata live (JSON API for BLZ/CPI00): it references COICOP only at 'the four-digit level' with no edition/year stated, and is built on a 1990 Household Budget Survey -- too old and unspecific to support a un-coicop-2018 (or any edition) edge. Grok correctly declined to propose a Belize CPI methodology edge in either batch; this just confirms that call rather than adding a new one."
+    },
+    {
+      "edge": "cr-bccr-national-accounts -> sna-2008",
+      "source": "cr-bccr-national-accounts",
+      "target": "sna-2008",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.bccr.fi.cr/indicadores-economicos/DocCuentasNacionales2017/Resumen-Cuentas-Nacionales-2017.pdf returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"cr-bccr-national-accounts\", target_report_id=\"sna-2008\", relationship_type=\"methodology_depends_on\", basis=\"BCCR's own national-accounts reference-year-2017 summary states the update was carried out under SNA 2008: “La actualización fue ejecutada en el marco metodológico del Manual del Sistema de Cuentas Nacionales 2008 (SNA2008).”\", evidence_url=\"https://www.bccr.fi.cr/indicadores-economicos/DocCuentasNacionales2017/Resumen-Cuentas-Nacionales-2017.pdf\", evidence_grade=\"C\"."
     }
   ]
 }

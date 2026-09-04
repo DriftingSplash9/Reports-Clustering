@@ -355,14 +355,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "kw-csb",
-      "target_report_id": "gcc-stat",
-      "relationship_type": "cites",
-      "basis": "GCC-Stat's own about page names Kuwait among the Supreme Council member states the Centre serves. Evidence: \"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\"",
-      "evidence_url": "https://www.gccstat.org/en/center/about",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "om-national-accounts",
       "target_report_id": "sna-2008",
       "relationship_type": "methodology_depends_on",
@@ -381,27 +373,11 @@
       "evidence_quote": "Data linked from this page correspond to data described in the International Monetary Fund's DSBB. For a fuller explanation of the DSBB and the enhanced General Data Dissemination System in which Country participates, please visit the DSBB home page."
     },
     {
-      "source_report_id": "om-ncsi",
-      "target_report_id": "gcc-stat",
-      "relationship_type": "cites",
-      "basis": "GCC-Stat's own about page names Oman among the Supreme Council member states the Centre serves. Evidence: \"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\"",
-      "evidence_url": "https://www.gccstat.org/en/center/about",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "bh-iga",
       "target_report_id": "imf-e-gdds",
       "relationship_type": "methodology_depends_on",
       "basis": "The IMF's own press release on Bahrain's NSDP launch. Evidence: \"Bahrain has implemented a key recommendation of the IMF's Enhanced General Data Dissemination System (e-GDDS) to publish essential macroeconomic and financial data\" through the September 2024 NSDP launch.",
       "evidence_url": "https://www.imf.org/en/News/Articles/2024/09/05/pr-24318-bahrain-bahrain-implements-imfs-enhanced-general-data-dissemination-system",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "bh-iga",
-      "target_report_id": "gcc-stat",
-      "relationship_type": "cites",
-      "basis": "GCC-Stat's own about page names Bahrain among the Supreme Council member states the Centre serves. Evidence: \"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\"",
-      "evidence_url": "https://www.gccstat.org/en/center/about",
       "evidence_grade": "C"
     },
     {
@@ -444,14 +420,6 @@
       "basis": "The IMF's 2019 Article IV staff report for Qatar documents the run-up to Qatar's e-GDDS/NSDP implementation (later confirmed by IMF Press Release No. 19/306, \"Qatar Implements the IMF's Enhanced General Data Dissemination System\", July 30 2019). Evidence: \"An STA e-GDDS mission is scheduled to take place shortly. The mission will assist the authorities in publishing essential macroeconomic data through a National Summary Data Page (NSDP) and making further progress towards subscribing to the Special Data Dissemination Standard (SDDS).\" That NSDP is now maintained under the successor National Planning Council/National Statistics Center.",
       "evidence_url": "https://www.imf.org/-/media/files/publications/cr/2019/1qatea2019001.pdf",
       "evidence_grade": "B"
-    },
-    {
-      "source_report_id": "qa-nsc",
-      "target_report_id": "gcc-stat",
-      "relationship_type": "cites",
-      "basis": "GCC-Stat's own about page names Qatar among the Supreme Council member states the Centre serves. Evidence: \"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\"",
-      "evidence_url": "https://www.gccstat.org/en/center/about",
-      "evidence_grade": "C"
     }
   ],
   "_dropped": [
@@ -510,6 +478,34 @@
       "target": null,
       "reason": "note",
       "why": "gulf-levant-research-batch2.json proposed a separate node 'Bahrain CPI Compilation Methodology (as documented in DSBB)' pointing at the same DSBB CPI00 metadata page already used to source bh-cpi's own methodology edges (bh-cpi -> sna-2008, bh-cpi -> cpi-manual, bh-cpi -> un-coicop-hbs-1999, all minted above). This isn't a distinct recurring publication or instrument -- it's the DSBB metadata about bh-cpi itself -- so it's dropped as a node; the underlying facts are already captured as edges on bh-cpi."
+    },
+    {
+      "edge": "kw-csb -> gcc-stat",
+      "source": "kw-csb",
+      "target": "gcc-stat",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.gccstat.org/en/center/about returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"kw-csb\", target_report_id=\"gcc-stat\", relationship_type=\"cites\", basis=\"GCC-Stat's own about page names Kuwait among the Supreme Council member states the Centre serves. Evidence: \\\"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\\\"\", evidence_url=\"https://www.gccstat.org/en/center/about\", evidence_grade=\"C\"."
+    },
+    {
+      "edge": "om-ncsi -> gcc-stat",
+      "source": "om-ncsi",
+      "target": "gcc-stat",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.gccstat.org/en/center/about returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"om-ncsi\", target_report_id=\"gcc-stat\", relationship_type=\"cites\", basis=\"GCC-Stat's own about page names Oman among the Supreme Council member states the Centre serves. Evidence: \\\"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\\\"\", evidence_url=\"https://www.gccstat.org/en/center/about\", evidence_grade=\"C\"."
+    },
+    {
+      "edge": "bh-iga -> gcc-stat",
+      "source": "bh-iga",
+      "target": "gcc-stat",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.gccstat.org/en/center/about returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"bh-iga\", target_report_id=\"gcc-stat\", relationship_type=\"cites\", basis=\"GCC-Stat's own about page names Bahrain among the Supreme Council member states the Centre serves. Evidence: \\\"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\\\"\", evidence_url=\"https://www.gccstat.org/en/center/about\", evidence_grade=\"C\"."
+    },
+    {
+      "edge": "qa-nsc -> gcc-stat",
+      "source": "qa-nsc",
+      "target": "gcc-stat",
+      "reason": "no-document",
+      "why": "DEAD-URL (2026-09-04, Thomas's ruling on HANDOFF item 4, 'drop'): evidence_url https://www.gccstat.org/en/center/about returned HTTP 404 on 2026-09-03 (grader, corpus-wide pass, Claude outputs/grade-batch2-debt-2026-09-03.json) and again on 2026-09-04 from the bridge VM with a browser UA. Link rot, not a wall — no readable document currently states the dependency, so the edge cannot stay live (PLAYBOOK §7, assertion-only edges). Lead: the dependency may well be real; re-cite from a live document and re-mint. Original entry preserved verbatim: source_report_id=\"qa-nsc\", target_report_id=\"gcc-stat\", relationship_type=\"cites\", basis=\"GCC-Stat's own about page names Qatar among the Supreme Council member states the Centre serves. Evidence: \\\"comprised of heads of member states: United Arab Emirates, Kingdom of Bahrain, Kingdom of Saudi Arabia, Sultanate of Oman, State of Qatar and State of Kuwait.\\\"\", evidence_url=\"https://www.gccstat.org/en/center/about\", evidence_grade=\"C\"."
     }
   ]
 }
