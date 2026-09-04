@@ -1039,6 +1039,51 @@ host ever becomes readable again. Consequence worth knowing: `writeGrades` only
 writes `evidence_quote` on an A, so **a machine-written `evidence_quote` in this
 corpus always means "found in the live document"**.
 
+**A document that names the target artefact IN ANOTHER LANGUAGE names it**
+(Thomas, 2026-09-04). `namesTarget()` matches a run of the target's own title
+words and every title in this corpus is English, so a French Règlement that
+prescribes the HICP by its French name, a Bank of Korea appendix on 바젤Ⅲ, an
+NHC yearbook on 国际疾病分类 and Banco Central del Paraguay on the "Sistema de
+Cuentas Nacionales del 2008" were all capped at B for the corpus's own
+monolingualism. The mechanism is `Report.title_aliases` — read that field's
+doc comment before adding one; the three rules there (same artefact not a
+related one, sourced from a document actually read, never an acronym or an
+agency name) are what stop it becoming a synonym bag. The field earns its
+place on the dozen international standards the whole corpus cites in a dozen
+languages, not on national releases only ever cited at home.
+
+**A parenthetical acronym from the target's own title names the artefact when
+it is four characters or more AND glosses the WHOLE title** (Thomas,
+2026-09-04, narrowing the blanket exclusion the dry run wrote). The blanket
+exclusion existed for a real reason — `(EDP)` and `(NSW)` matched documents
+that named neither artefact — and both of those are THREE characters and both
+gloss a component rather than the title, which is what the two conditions are
+for. The rule was measured before adoption and it caught its own false
+positive on the first run: `pspp-cola-methodology` is "Public Service Pension
+Plan (PSPP) Cost-of-Living Adjustment (COLA) Methodology", and an Ontario
+release naming the PSPP names the PLAN, not the COLA methodology — the
+whole-title condition is what puts that edge back at B where it belongs.
+
+**A quote lifted from a PDF that a landing page serves only through a signed,
+expiring token is cited to the LANDING PAGE and recorded as
+`via: token-pdf <date>`, which caps the grade at B** (Thomas, 2026-09-04,
+ruling on the 17 deferred BPS edges). Citing the token cites a URL that is
+dead tomorrow; citing the landing page and quoting the PDF puts citation and
+quote one step apart. Naming the route is what makes the pair honest, and the
+B cap is the same treatment `wayback` gets for the same reason. General rule
+for every agency that publishes this way, not just BPS.
+
+**A node carries the publisher's own title for the artefact, not ours**
+(Thomas, 2026-09-04). Six Bolivian department edges sat at B on
+`agency-not-artefact` while citing INE's own anuario table, because the node
+was titled "Pobreza monetaria por departamento" and INE heads the table
+"BOLIVIA: INCIDENCIA DE POBREZA, SEGÚN DEPARTAMENTO". The document WAS the
+artefact and the grader could not see it. Retitled to
+"Incidencia de pobreza, según departamento (INE)"; all six went to A. When an
+edge grades `agency-not-artefact` against a document that is plainly the
+target itself, check the node's title against the publisher's before
+concluding anything about the evidence.
+
 **Chart/figure-caption sourcing clears the evidence bar** (Thomas,
 2026-08-30) — a figure-source line under a chart is a citation, same
 standing as body-text prose. General ruling for every future round, not

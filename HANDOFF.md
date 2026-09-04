@@ -7,154 +7,157 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-04 (browser-pass round 3; two grader fixes)
+Last updated: 2026-09-04 (browser-pass round 4; five rulings applied)
 
 ---
 
 ## 1. Read next
 
 **`PLAYBOOK.md` first** — §6 for the traps (fetch routing, network asymmetry,
-the text cap, URL encoding, browser capture and its free transport, the
-combining-accent matcher gap, `renderer.info`), §7 for the standing decisions.
-Then `notes/Midvamp - Revamp.md` (the plan of record) →
-`notes/next-agent-prompt-2026-09-03.md` (Rounds B and C are still the queue) →
-`notes/grader-dry-run-2026-09-03.md` (how the grader decides) →
-`notes/browser-pass-round2-2026-09-04.md` and the other 2026-09-03/04 notes →
-project memory, newest first.
+the text cap, URL encoding, browser capture, `renderer.info`), §7 for the
+standing decisions, **including four added 2026-09-04**: foreign-language
+artefact naming, the parenthetical-acronym rule and its two conditions, the
+`via: token-pdf` route, and "a node carries the publisher's own title". Then
+`notes/rulings-round5-2026-09-04.md` → `notes/browser-pass-round4-2026-09-04.md`
+→ `notes/Midvamp - Revamp.md` (the plan of record) →
+`notes/next-agent-prompt-2026-09-03.md` → `notes/grader-dry-run-2026-09-03.md`
+→ project memory, newest first.
 Git status: never state it (PLAYBOOK rule 1).
 
 ---
 
 ## 2. Current state
 
-**Rounds 0-5 and A are committed (Thomas, 2026-09-04). Five 2026-09-04 rounds
-are built and verified, NOT committed**: the flip/drop round, the bps/psa
-browser round, browser-pass round 2 (+ the br-ibge-cnae mint, the OCR-read cap
-and the six flag rulings), the xlsx extractor, and browser-pass round 3 (this
-one). Narrative for each is in project memory, newest first; only state lives
-here.
+Corpus **3,342 reports / 2,634 dependencies**. **Grades 578 A · 1,343 B ·
+703 C**, A-share **22.0%**. `npm run validate` exits 0, `tsc --noEmit` clean,
+123/123 logic tests, grader selftest **47/47**, `public/corpus-data.json`
+regenerated.
 
-Corpus **3,342 reports / 2,634 dependencies**. **Grades 546 A · 1,355 B ·
-723 C** across `src/data/research/` (+10 seed edges never graded), A-share
-**20.8%**. `npm run validate` exits 0, `tsc --noEmit` clean, 123/123 logic
-tests, grader selftest **39/39**, `public/corpus-data.json` regenerated.
+**Two rounds are built and verified, NOT committed** (everything up to and
+including the five 2026-09-04 rounds was committed by Thomas earlier today):
+browser-pass round 4, and the five-rulings round. Between them they touched
+`scripts/grade-evidence.ts`, `src/lib/types.ts`, `PLAYBOOK.md`, `HANDOFF.md`,
+~40 files under `src/data/research/`, `public/corpus-data.json`,
+`archive/audits/audit-2026-08-31-second-independent.md`, two new `notes/*.md`
+and the `Claude outputs/*2026-09-04*.json` files those rounds wrote.
 
-**Scripts — two fixes this round, both in `grade-evidence.ts`:**
-`encodeForCurl` percent-encodes the request URL (spaces and non-ASCII only —
-`encodeURI` cannot be used, it double-encodes `%`), which closed
-`network:curl-3` as a class; and `TEXT_CAP_BYTES` went 250 KB → 4 MB, because
-the grader matches against the CAPPED text and a quote past the cap grades
-`quote-not-in-document`. Both are documented in PLAYBOOK §6 and in
-`edit_scripts/{url-encode-fetch,text-cap}-2026-09-04.py`.
+**Scripts — three changes, all measured before adoption:** `locateQuote()`
+gained a whitespace-insensitive second pass (34 grades up, 0 down over 1,664
+edges; false positives 1 in 3,000 deliberately mismatched pairs).
+`namesTarget()` reads `Report.title_aliases` and accepts a parenthetical
+acronym from the target's own title at **≥4 characters AND glossing the whole
+title**. `routeCapsGrade()` caps a new `via: token-pdf` route at B.
+Selftest 39 → 47.
 
-**Renderer unchanged** — nothing in `src/` was touched this round. Round 2's
-grade-driven opacity / A-only ranking cut / `view.minGrade` (still default `C`)
-/ `rankByLegalBasis`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE` 0.8; drift
+**Schema — one field:** `Report.title_aliases?: string[]`, the artefact's name
+in other languages. Read its doc comment before adding one; four exist
+(`eurostat-hicp`, `sna-2008`, `imf-gfsm`, `brics-ndb-agreement-2014`).
+
+**Renderer unchanged** — nothing in `src/` except `types.ts`. Grade-driven
+opacity / A-only ranking cut / `view.minGrade` (still default `C`) /
+`rankByLegalBasis`; `INT_LINK_STIFFNESS = 0`; `CORE_PERCENTILE` 0.8; drift
 watchdog + `__meshes`. Two reports remain ISOLATED (shelved):
 `sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`.
 
-**Research debt, corpus-wide**: 0 confirmed-dead URLs; 0 no-URL edges;
-0 `empty:no-extractor`; 0 `network:curl-3`. **Browser pass 173 → 39 → 28
-edges**: this round closed 11 (list and per-edge reasons in
-`Claude outputs/grade-round3-written-2026-09-04.json`). Still owed: **17 BPS
-edges blocked on citation, not access** (§3 item 1); 28
-`ess-peer-review-final-report` edges and 12 EDP-inventory fragments awaiting a
-reread (Round C); ~15 CJK edges nominally on the matcher (Round B — but see
-§3).
+**Research debt, corpus-wide**: 0 no-URL edges (the 162 are closed — recount
+confirms 0); 5 bare-homepage edges, which is the last class before the
+promotion gate; 0 confirmed-dead URLs; 0 `empty:no-extractor`; 0
+`network:curl-3`. **Browser pass 173 → 39 → 28 → 15 edges**: round 4 closed 9,
+the rulings round closed the ANSTAT COICOP question in code. Still owed: **17
+BPS edges** (route ruled, captures owed — §3), the 6 India + 1 Tanzania
+**re-cites**, 3 documents blocked on transport (§3 item 1), and the OCR job.
+
+**The 2026-08-31 audit is on disk** at `archive/audits/` and was re-checked
+against this corpus: F-01, F-02 and F-13 closed, F-03 bounded (117 → 88
+rosstat edges, 71 of them C), F-04 closed on its no-URL half. F-06 and F-14
+open. The 2026-08-30 audit is gone and, per Thomas, superseded by the 08-31.
 
 ---
 
 ## 3. Todo (live items only)
 
-### [Thomas] — only you can
+### [Agent] — next build rounds, in this order
 
-1. **Ruling owed: BPS landing page vs its own PDF — DEFERRED by Thomas
-   2026-09-04.** 17 edges whose evidence is inside a PDF BPS serves only
-   through a signed token with no stable URL. Listed in
-   `Claude outputs/browser-pass-bps-psa-2026-09-04.json` → `refused`. Nothing
-   moves on them until you rule.
-2. Commit the uncommitted 2026-09-04 rounds. On top of what the earlier rounds
-   touched, THIS round added: `scripts/grade-evidence.ts`,
-   `src/data/research/{af-nigeria-lga-municipal, af-sudan,
-   ci-cpi-social-protection, eu-government-finance-2026-08-28,
-   eu-national-chains-2026-08-28, int-brics-international-layer-grok-2026-08,
-   ph-unlinked-wiring-round2-2026-08-29}.json`, `public/corpus-data.json`,
-   `PLAYBOOK.md`, `HANDOFF.md`, `_to_delete/README.md`, four
-   `edit_scripts/*-2026-09-04.py` (ng-kano-quote, url-encode-fetch, text-cap,
-   browser-pass-round3-quotes), the `Claude outputs/*2026-09-04*.json` files
-   this round wrote, ~20 `evidence-cache/` records, and two
-   `archive/*.tar.gz` moved into `archive/sandbox-tar/`.
-3. **Ruling still owed: the target artefact named in a language other than the
-   node's title.** `ru-minfin-gfs-kosgu-mapping-table -> imf-gfsm` matches at
-   coverage 1.0 on a row that DOES name GFSM 2014, in Russian; `namesTarget`
-   compares against the English title and caps at B. **This round added a
-   second case in the same class**: `ndb-russia-erc-host-agreement-2019 ->
-   brics-ndb-agreement-2014`, whose new quote is the Russian recital naming the
-   2014 Fortaleza Agreement. A is available on your word for both; I took
-   neither.
-4. **Ruling still owed: the six Bolivian INE edges, stuck at B on
-   `agency-not-artefact`.** Unchanged from the last handoff. `ci-anstat-ihpc ->
-   un-coicop-2018` landed in the same class this round (B, quote verified live
-   in Chrome).
-5. **New, and it needs your call before an agent touches it: the
-   combining-accent matcher gap.** A PDF that stores "pondérations" as
-   `ponde` + U+0301 + SPACE + `rations` defeats exact matching, so a correctly
-   copied French quote scores 0 (`ci-anstat-ihpc -> ci-anstat-ehcvm`, still C,
-   document confirmed readable). The fix is a whitespace-insensitive second
-   pass in `locateQuote`, stripping spaces from BOTH sides. It can only ever
-   ADD matches, which is exactly why it should be measured corpus-wide before
-   adoption rather than shipped on one edge's evidence. PLAYBOOK §6 carries the
-   detail. Do not let anyone "fix" the quote — the quote is right.
-
-### [Agent] — next build rounds, in this order (plan §9)
-
-1. **Browser pass, the last 28.** Worklist, per-host routing measured from
-   BOTH networks the same hour, and the method notes:
-   `notes/browser-pass-round3-2026-09-04.md` and
-   `Claude outputs/browser-pass-round3-worklist-2026-09-04.json`. The recipe is
-   PLAYBOOK §6 and it now works end to end. Read the routing table before
-   touching a host — three are dead from both networks, two are sandbox-only,
-   five answer 200 with a JS shell and are browser jobs rather than dead hosts.
-2. **OCR the one scanned PDF.** `ru-minfin-prikaz-128n-gfs-procedure ->
-   imf-sdds` fetches 200 / 864,760 bytes from the cloud sandbox and extracts 15
-   characters — a scan. Both the bridge VM and the sandbox have `tesseract`.
-   Route caps the grade at B (`via: ocr tesseract <date>`).
-3. **CJK matcher (Round B) — re-measure the premise first.** Four Japanese
-   statutes and two Chinese NBS quotes were written in round 2 and **all six
-   matched**: exact substring carries a CJK quote copied verbatim off the page.
-   Recount before building the n-gram path — and note that §3 item 5 above may
-   be the same defect wearing a different hat.
-4. **Companion-document reread, bounded** (Round C): the surviving
+1. **Build the checksummed transport, before anything else.** This is the
+   binding constraint now, not access: three document sets read fine in Chrome
+   and could not be written to disk — `www.anstat.ci` (2 edges; the document
+   confirms BOTH claims, "NOUVELLE NOMENCLATURE COICOP 2018" and the EHCVM
+   pondérations sentence), `mid.ru` (1), and the five BPS PDFs (17). Round 3's
+   "a `get_page_text` result over ~50 KB is persisted to a file the sandbox can
+   read" **fires unpredictably** — padding past 50 KB did not force it. Do not
+   hunt for a bigger pipe: have the page compute a SHA-256 of the extracted
+   text, move it by any channel including a heredoc, and verify after writing.
+   A copy that checksums is not a lossy copy, and §6's "retyping is lossy"
+   warning stops applying the moment it is verified. 20 edges queue behind it.
+2. **The 17 BPS edges.** Ruled 2026-09-04 (option 1): cite the landing page,
+   quote the PDF, record `via: token-pdf <date>`, grade caps at B. The route is
+   already in `routeCapsGrade()`. Seventeen edges over **five** publications,
+   listed in `Claude outputs/browser-pass-bps-psa-2026-09-04.json` → `refused`.
+   Needs item 1.
+3. **The last 15 browser-pass edges.** Worklist and per-host routing measured
+   from BOTH networks: `notes/browser-pass-round3-2026-09-04.md`,
+   `notes/browser-pass-round4-2026-09-04.md` and
+   `Claude outputs/browser-pass-round3-worklist-2026-09-04.json`. Read the
+   routing table before touching a host — and re-probe it, it decayed inside a
+   day twice running.
+4. **OCR the one scanned PDF.** `ru-minfin-prikaz-128n-gfs-procedure ->
+   imf-sdds`, 200 / 864,760 bytes / 15 characters of text. **Blocked on
+   language data**: tesseract on BOTH the bridge VM and the cloud sandbox has
+   only `eng`+`osd`, so `rus.traineddata` has to be fetched first. Route caps
+   at B (`via: ocr tesseract <date>`).
+5. **Re-cite, don't re-capture: 6 India + 1 Tanzania.** They cite a department
+   LANDING PAGE, not the survey (`pc.odisha.gov.in`, `des.assam.gov.in`,
+   `descg.gov.in`, `himachalservices.nic.in`, `indianrailways.gov.in`,
+   `mod.gov.in`; plus `dcc.go.tz`). `himachalservices.nic.in` reads fine in
+   Chrome and still cannot help — an index page will never name the GSDP
+   series. This is research, not plumbing.
+6. **Round B is CANCELLED — do not build the CJK n-gram matcher.** The
+   whitespace-insensitive pass IS the CJK fix; 19 of its 34 grade moves were
+   CJK. Measurement in `notes/rulings-round5-2026-09-04.md`.
+7. **Companion-document reread, bounded** (Round C): the surviving
    `ess-peer-review-final-report` edges, the 29 reverted quotes of round 5, the
    surviving EDP-inventory fragments — recount first, 58 circabc edges left.
-5. `_dropped` lead re-evaluation (plan §4 step 5) — still not built. A re-cite
+   This is also the audit's F-06.
+8. `_dropped` lead re-evaluation (plan §4 step 5) — still not built. A re-cite
    pass on `s-circabc.europa.eu` (58, one host) would recover most in one go.
-6. Flip `view.minGrade` default to A — no-URL, dead-URL, `no-extractor` and
-   `curl-3` classes are all closed and A-share is 20.8%; your call whether
-   Round B/C go first.
-7. DSBB/ESMS scripted import (`getBaseSummaryofMethodologies` is readable and
-   already carries 50 corpus citations; category codes differ by country).
-8. **Link batching — scoped by measurement.** Order: **photons first** (1,967
-   objects sharing only **15** materials → ~15 `InstancedMesh` draws), then
-   **link cylinders** (2,634 objects, 2,634 materials) and **node spheres**
-   (2,324 / 2,324). Geometry is already shared and cached; the blocker is one
-   material per object, so instancing means moving colour/opacity/grade/
-   hover-trace state out of `GradientLinkMaterial` uniforms into per-instance
-   attributes. Triangles (2.0 M/frame) are irrelevant while draw-call bound.
-   Numbers: project memory `renderer_perf_measured_2026-09-04`.
-9. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+ seeds,
-   `onscreen`). Kept separate per Thomas's Q17 ruling.
-10. Doc fixes under hygiene (README:130, REPORTS:9–32, PLAYBOOK:18–20,
-    START-HERE:31/37); write `notes/mint-2026-08-20.md` then Grok folder per
-    Q18; retire `check-urls.ts` into the grader.
-11. Housekeeping left for Thomas (agents cannot delete — rule 6): `_to_delete/`
-    now holds README.md plus 8 disposable staging artefacts and one stale Word
-    lock file; `tmp_work/` holds 13 staging zips/tarballs, `probe.py`,
-    `probe_device.jsonl` and a `roundA/` directory, all superseded. Audit item
-    13's two `archive/*.tar.gz` have been moved into `archive/sandbox-tar/`.
-    Q19: `archive/audits/` now exists but is EMPTY — the two 08-30/31 audit
-    reports are not anywhere on disk, so they have to come from your chat
-    history.
+9. **Flip `view.minGrade` default to A** — no-URL, dead-URL, `no-extractor` and
+   `curl-3` are all closed and A-share is 22.0%; Thomas's call whether the
+   remaining research rounds go first.
+10. DSBB/ESMS scripted import (`getBaseSummaryofMethodologies` is readable and
+    already carries 50 corpus citations; category codes differ by country).
+11. **Link batching — scoped by measurement.** Order: **photons first** (1,967
+    objects sharing only **15** materials → ~15 `InstancedMesh` draws), then
+    link cylinders (2,634 / 2,634 materials) and node spheres (2,324 / 2,324).
+    The blocker is one material per object; instancing means moving colour /
+    opacity / grade / hover-trace state out of `GradientLinkMaterial` uniforms
+    into per-instance attributes. Triangles are irrelevant while draw-call
+    bound. Numbers: project memory `renderer_perf_measured_2026-09-04`.
+12. Cluster-repulsion force sub-round (measured, `measure-forces.ts`, 2+ seeds,
+    `onscreen`). Kept separate per Thomas's Q17 ruling.
+13. **F-14**: gate the weighted-vs-raw disagreement list to an authority floor
+    (e.g. 0.05) so it reads as a check again. (**F-13 is CLOSED** — the
+    validator now reports 0 duplicate-shaped groups.)
+14. Doc fixes under hygiene (README:130, REPORTS:9–32, PLAYBOOK:18–20,
+    START-HERE:31/37 — its ranking sentence is the audit's F-07 and is now
+    wrong in a NEW way, since `brics-jsp` left the top ten); write
+    `notes/mint-2026-08-20.md` then Grok folder per Q18; retire `check-urls.ts`
+    into the grader.
+
+### [Thomas] — only you can
+
+1. Commit the two uncommitted rounds (§2 lists what they touched).
+2. **Ruling owed: is 바젤Ⅲ (Basel III) an alias of `bis-basel-framework`?**
+   Held back deliberately from the 2026-09-04 alias round: Basel III is a
+   package INSIDE the Basel Framework, so this is an edition/scope question,
+   not the language question you ruled on, and the corpus models editions as
+   separate nodes. `kr-financial-stability -> bis-basel-framework` sits at B
+   (coverage 0.87) until you say.
+3. Housekeeping (agents cannot delete — rule 6): `tmp_work/` now holds ~20
+   superseded staging zips/tarballs plus `probe.py`, `probe_device.jsonl`,
+   `roundA/`, and this session's `capture-round4/`, `ft2.tgz`, `ft3.tgz`,
+   `*.json` scratch. `_to_delete/` holds its README plus 8 disposable staging
+   artefacts, one stale Word lock file, and
+   `evidence-fulltext-stray-2026-09-04/`.
 
 ---
 

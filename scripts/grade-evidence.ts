@@ -321,8 +321,53 @@ export function locateQuote(needle: string, haystack: string): QuoteHit {
   let total = 0
   let hit = 0
   let index = -1
+  // Second pass, computed once and only if the spaced compare misses: the
+  // whole haystack with every space removed. See the block below.
+  let haySquashed: string | null = null
+  // squashed-index -> index in `hay`, built with it. Without this the second
+  // pass has no honest position to report, and `index` is not cosmetic: the A
+  // bar re-runs `namesTarget` on a +/-400 character window around it, so a
+  // wrong index silently demotes an A to `artefact-named-elsewhere-in-document`
+  // (measured: it did exactly that to `fiscal-equalization-program ->
+  // statcan-seph` and `kw-csb -> imf-e-gdds` before this map existed).
+  let squashedAt: Int32Array | null = null
   for (const frag of fragments) {
-    const whole = hay.indexOf(frag)
+    let whole = hay.indexOf(frag)
+    if (whole < 0) {
+      // WHITESPACE-INSENSITIVE SECOND PASS. `normalizeForMatch` folds every
+      // run of whitespace to ONE SPACE, which is right for a Latin-script
+      // document and wrong twice over:
+      //   1. A PDF that stores a combining accent as `ponde` + U+0301 + SPACE
+      //      + `rations` becomes "ponde rations" — a space inside a word.
+      //   2. Chinese and Japanese have no word spaces at all, so EVERY line
+      //      break in a CJK PDF becomes a false space: the NHC yearbook's
+      //      `国际疾病分类统计\n标准` reads as `统计 标准` and a correctly
+      //      copied quote scores 0.75 instead of 1.0.
+      // Comparing with all spaces removed from BOTH sides fixes both. It runs
+      // ONLY after the spaced compare has already failed, so it can never
+      // lower a score — which is why it was measured before it was adopted
+      // (2026-09-04, 943 quote-carrying edges with a readable document): 35
+      // edges gain coverage, 26 change verdict, 16 of those from 0.00 to 1.00
+      // and 14 of THOSE are the Japanese edges that Round B was going to
+      // build an n-gram matcher for. False-positive check on 3,000
+      // deliberately mismatched (quote, document) pairs from different hosts:
+      // one pair moved partial->yes, and it is a Eurostat boilerplate sentence
+      // that genuinely appears in both documents.
+      if (haySquashed === null) {
+        const kept = new Int32Array(hay.length)
+        let out = ''
+        let n = 0
+        for (let i = 0; i < hay.length; i++) {
+          if (hay[i] === ' ') continue
+          kept[n++] = i
+          out += hay[i]
+        }
+        haySquashed = out
+        squashedAt = kept
+      }
+      const sq = haySquashed.indexOf(frag.replace(/ /g, ''))
+      if (sq >= 0) whole = (squashedAt as Int32Array)[sq]
+    }
     if (whole >= 0) {
       const grams = Math.max(1, shingles(frag, 4).length)
       total += grams
@@ -388,36 +433,86 @@ export function verdictFor(coverage: number): QuoteVerdict {
  */
 export function namesTarget(
   body: string,
-  target: Pick<Report, 'title' | 'publisher' | 'url'>,
+  target: Pick<Report, 'title' | 'publisher' | 'url' | 'title_aliases'>,
 ): { artefact: boolean; agency: boolean; how: string } {
   const hay = normalizeForMatch(body)
-  const titleNoParens = target.title.replace(/\([^)]*\)/g, ' ')
-  const titleWords = tokenise(titleNoParens)
   let artefact = false
   let how = ''
 
-  if (titleWords.length) {
-    const run = longestRun(titleWords, hay)
-    if (run >= 2 && run / titleWords.length >= 0.6) {
-      artefact = true
-      how = `title-run:${run}/${titleWords.length}`
+  // Title FIRST, then each alias in order, so `how` names the English title
+  // whenever the English title is what matched and a reader can tell the two
+  // apart in the ledger. See `Report.title_aliases` for why aliases exist and
+  // what may go in one.
+  const names = [target.title, ...(target.title_aliases ?? [])]
+  for (let i = 0; i < names.length && !artefact; i++) {
+    const noParens = names[i].replace(/\([^)]*\)/g, ' ')
+    const words = tokenise(noParens)
+    const tag = i === 0 ? '' : `alias${i}:`
+    if (words.length) {
+      const run = longestRun(words, hay)
+      if (run >= 2 && run / words.length >= 0.6) {
+        artefact = true
+        how = `${tag}title-run:${run}/${words.length}`
+        break
+      }
     }
-  }
-  if (!artefact) {
     // A title's leading phrase, for the very long "Title — subtitle (gloss)"
     // shapes: the first clause before an em dash, comma or slash, matched
     // whole. Never fewer than 3 words, so it cannot become a generic phrase.
-    const lead = tokenise(titleNoParens.split(/[—–\-,;:\/|]/)[0] ?? '')
+    const lead = tokenise(noParens.split(/[—–\-,;:\/|]/)[0] ?? '')
     if (lead.length >= 3 && hay.includes(lead.join(' '))) {
       artefact = true
-      how = 'title-lead'
+      how = `${tag}title-lead`
+      break
     }
   }
+  const titleNoParens = target.title.replace(/\([^)]*\)/g, ' ')
+  const titleWords = tokenise(titleNoParens)
   if (!artefact) {
     for (const tok of titleWords) {
       if (tok.length >= 3 && /[぀-ヿ㐀-鿿]/.test(tok) && hay.includes(tok)) {
         artefact = true
         how = `cjk:${tok}`
+        break
+      }
+    }
+  }
+  if (!artefact) {
+    // **A parenthetical acronym from the target's OWN title, four characters
+    // or more** (Thomas, 2026-09-04). The doc comment above still stands for
+    // the general case and the reason is in it: `(EDP)` and `(NSW)` matched
+    // documents that named neither artefact. Both are THREE characters, and
+    // both are a procedure or a jurisdiction rather than an artefact name —
+    // which is what the length floor is for. It is not elegant, it is
+    // measured: at >= 4 the rule fires on COICOP, HICP, SDDS, BPM6, GFSM,
+    // ESA 2010's `esa` never (three), and the corpus-wide sweep that adopted
+    // it is in `notes/`. Anything shorter stays agency-level at most, as
+    // before.
+    //
+    // The acronym must be word-bounded in the body, or `IHPC` matches inside
+    // `IHPCX` and every three-letter run in a table of codes becomes a hit.
+    const MIN_ACRONYM = 4
+    for (const m of target.title.matchAll(/\(([^)]{2,40})\)/g)) {
+      const acr = m[1].trim()
+      if (acr.length < MIN_ACRONYM) continue
+      // **The acronym must gloss the WHOLE title, not a component of it.**
+      // Caught the first time this rule ran: `pspp-cola-methodology` is
+      // "Public Service Pension Plan (PSPP) Cost-of-Living Adjustment (COLA)
+      // Methodology", and an Ontario news release that names the PSPP names
+      // the PLAN, not the COLA methodology — which is the audit's F-05 shape
+      // exactly, arriving through the door this rule opens. So the acronym
+      // only counts when nothing follows its closing bracket, or what follows
+      // is an alternative rendering of the same title (`/ 企業向けサービス価格指数`
+      // after `Services Producer Price Index (SPPI)`).
+      const after = target.title.slice((m.index ?? 0) + m[0].length).trim()
+      if (after && !/^[\/|—–]/.test(after)) continue
+      if (!/^[\p{Lu}\p{N}][\p{Lu}\p{N}.\- ]*$/u.test(acr)) continue
+      const n = normalizeForMatch(acr)
+      if (!n) continue
+      const re = new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(n)}([^\\p{L}\\p{N}]|$)`, 'u')
+      if (re.test(hay)) {
+        artefact = true
+        how = `acronym:${acr}`
         break
       }
     }
@@ -1044,8 +1139,32 @@ export function snapshotRescuable(block: Block): boolean {
  * it, because a reader must always be able to see where the bytes came from.
  */
 export function routeCapsGrade(via: string): boolean {
-  return via.startsWith('wayback') || via.startsWith('ocr')
+  return via.startsWith('wayback') || via.startsWith('ocr') || via.startsWith('token-pdf')
 }
+
+/**
+ * `via: token-pdf <date>` — **the cited page is the publication's stable
+ * landing page and the quoted sentence is inside the PDF that page serves,
+ * which has no stable URL of its own** (Thomas, 2026-09-04, ruling on the
+ * 17 deferred BPS edges).
+ *
+ * The shape, and it is not unique to BPS: an agency publishes a landing page
+ * with a title and an abstract, and the publication itself only through a
+ * signed `download.php` token generated by that page's own JavaScript and
+ * expiring within hours. Citing the token is citing a URL that is dead by
+ * tomorrow; citing the landing page and quoting the PDF puts the citation and
+ * the quote one step apart, which §6 otherwise forbids. Neither is honest on
+ * its own. Naming the route is what makes the pair honest — the record says
+ * openly that the quote came from the publication behind this page rather
+ * than from the page — and capping at B is the same treatment `wayback`
+ * already gets for the same reason: a reader has to be able to tell
+ * "this quote is in this document" from "this quote is in a document this
+ * page hands you".
+ *
+ * The five BPS publications this was ruled for are listed in
+ * `Claude outputs/browser-pass-bps-psa-2026-09-04.json` under `refused`.
+ */
+export const TOKEN_PDF_ROUTE = 'token-pdf'
 
 /**
  * The `id_` suffix is load-bearing: it asks the Wayback Machine for the
@@ -1210,7 +1329,7 @@ export interface GradeInput {
   basis: string
   evidenceUrl?: string
   evidenceQuote?: string
-  targetReport?: Pick<Report, 'title' | 'publisher' | 'url'>
+  targetReport?: Pick<Report, 'title' | 'publisher' | 'url' | 'title_aliases'>
 }
 
 export interface GradeResult extends GradeInput {
@@ -1362,7 +1481,7 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     const hay = normalizeForMatch(fetched.text)
     const from = Math.max(0, at - QUOTE_WINDOW)
     const window = hay.slice(from, at + normalizeForMatch(bestSpan).length + QUOTE_WINDOW)
-    nearQuote = namesTarget(window, input.targetReport as Pick<Report, 'title' | 'publisher' | 'url'>).artefact
+    nearQuote = namesTarget(window, input.targetReport as Pick<Report, 'title' | 'publisher' | 'url' | 'title_aliases'>).artefact
   }
   if (quote === 'yes' && naming.artefact && nearQuote && !weakFlags.length) {
     // **A document read by a fetch strategy caps at B** (Thomas, 2026-09-03,
@@ -1591,6 +1710,35 @@ function selftest(): void {
     spansForEdge('The basket weights were derived from the 2025 HFCE series.', 'no span here')
       .includes('The basket weights were derived from the 2025 HFCE series.'))
   t('a short evidence_quote is still dropped', spansForEdge('CPI weights', 'no span here').length === 0)
+  // The whitespace-insensitive second pass (2026-09-04). Four assertions,
+  // because the change has four ways to go wrong: it can fail to fire, it can
+  // fire with the wrong position, it can invent a match, or it can lower a
+  // score it should have left alone.
+  t('a line break inside a CJK word no longer defeats an exact quote',
+    locateQuote(
+      '2002\u5E74\u8D77\uFF0C\u91C7\u7528ICD-10\u56FD\u9645\u75BE\u75C5\u5206\u7C7B\u7EDF\u8BA1\u6807\u51C6\u3002',
+      'a table caption\n2002 \u5E74\u8D77\uFF0C\u91C7\u7528 ICD-10 \u56FD\u9645\u75BE\u75C5\u5206\u7C7B\u7EDF\u8BA1\n\u6807\u51C6\u3002\nmore text',
+    ).coverage === 1)
+  t('a combining accent split by a space no longer defeats an exact quote',
+    locateQuote('la qualite des ponderations de l IPCH',
+      'normes minimales pour la qualite des ponde\u0301 rations de l IPCH').coverage === 1)
+  t('the second pass reports the position of the match, not zero',
+    locateQuote('lesponderationsdelIPCH',
+      'x'.repeat(500) + ' les ponderations de l IPCH').index > 400)
+  t('a landing page whose quote came from the PDF behind it caps at B',
+    routeCapsGrade('token-pdf 2026-09-04') && !routeCapsGrade('chrome 2026-09-04'))
+  t('a parenthetical acronym glossing the whole title names the artefact',
+    namesTarget('deaths are coded to ICD-10 throughout',
+      { title: 'International Statistical Classification of Diseases (ICD-10)', publisher: 'WHO', url: '' }).artefact)
+  t('a parenthetical acronym glossing only a COMPONENT of the title does not',
+    !namesTarget('members would join the Public Service Pension Plan (PSPP) on the same terms',
+      { title: 'Public Service Pension Plan (PSPP) Cost-of-Living Adjustment (COLA) Methodology', publisher: 'x', url: '' }).artefact)
+  t('a three-letter parenthetical acronym still does not name the artefact',
+    !namesTarget('the EDP notification tables were transmitted in April',
+      { title: 'Hellenic fiscal reporting (EDP) tables', publisher: 'x', url: '' }).artefact)
+  t('the second pass does not invent a match that is not there',
+    locateQuote('the weights come from the household budget survey',
+      'this document is about something else entirely and says nothing of the kind').coverage < 0.55)
   t('quoted spans inside an evidence_quote are kept as well',
     spansForEdge('the report says "the index is compiled under Regulation 03/21" here', '').length === 2)
   t('xlsx resolves a shared-string cell and keeps a numeric cell verbatim',

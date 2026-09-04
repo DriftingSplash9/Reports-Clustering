@@ -670,6 +670,46 @@ export interface Report {
    * nothing reads is an attribute nobody checks.
    */
   country: Country
+  /**
+   * Other names this SAME artefact is called by, where a document that cites
+   * it does not use `title`.
+   *
+   * Added 2026-09-04 on a ruling, and the ruling is worth writing down because
+   * the field looks like an invitation to fuzz the evidence rule and is not
+   * one. `namesTarget()` in the grader decides whether a cited document names
+   * the target ARTEFACT or merely its publisher, and it decides by matching a
+   * run of the target's own title words. Every title in this corpus is in
+   * English. So Luxembourg's Règlement grand-ducal, which prescribes the HICP
+   * by its French name and matches its quote at coverage 1.0, was capped at B
+   * for naming "indices des prix à la consommation harmonisés" instead of
+   * "Harmonised Index of Consumer Prices" — and so were the Bank of Korea on
+   * 바젤Ⅲ, the NHC yearbook on 国际疾病分类, Banco Central del Paraguay on
+   * "Sistema de Cuentas Nacionales del 2008", and both Russian instruments.
+   * Six edges, one cause: the corpus is multilingual and its titles are not.
+   *
+   * Three rules, which are what keep this from becoming a synonym bag:
+   *
+   * 1. **An alias is the same artefact, not a related one.** "Sistema de
+   *    Cuentas Nacionales 2008" is SNA 2008. "System of National Accounts"
+   *    without a year is NOT — it is the family, and the corpus models
+   *    editions as separate nodes (the edition-matching rule that withheld
+   *    `ge-cpi`'s COICOP edge).
+   * 2. **An alias carries the same evidence burden as an edge.** It is the
+   *    name a REAL document uses, read and quoted, not a translation produced
+   *    from the English title. An alias nobody has seen in print is a guess,
+   *    and a guessed alias is as inadmissible as a guessed edge.
+   * 3. **It may never be an acronym or an agency name.** Acronyms have their
+   *    own rule in `namesTarget` with its own length floor, and "names the
+   *    agency, not the artefact" is the exact weakness this whole test exists
+   *    to catch — an alias that is a publisher's name would turn every
+   *    agency-level citation into an A in one move.
+   *
+   * Absent on almost every node, and that is the expected shape: the field
+   * earns its place on the dozen or so international standards the whole
+   * corpus cites in a dozen languages, not on national releases that are only
+   * ever cited at home.
+   */
+  title_aliases?: string[]
   /** Scope of publishing authority. Drives node colour and style — never position. */
   jurisdiction_level: JurisdictionLevel
   /**
