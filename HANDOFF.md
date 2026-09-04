@@ -7,7 +7,7 @@ memory (`project_memory_read`) and `archive/Previous Handoffs/`.
 
 **Keep under ~10k characters.** State only, no changelog.
 
-Last updated: 2026-09-04 (browser pass, round 2 — the rest of the list)
+Last updated: 2026-09-04 (round-2 flags ruled and applied)
 
 ---
 
@@ -19,13 +19,8 @@ handles; §7: a Chrome read is a direct read) →
 `notes/browser-pass-round2-2026-09-04.md` (this round) →
 `notes/Midvamp - Revamp.md` (the plan of record) →
 `notes/next-agent-prompt-2026-09-03.md` (Rounds B and C are still the queue) →
-`notes/browser-pass-bps-psa-2026-09-04.md` →
-`notes/direction-flip-and-dead-url-drop-2026-09-04.md` →
-`notes/roundA-nourl-reresearch-2026-09-03.md` →
 `notes/grader-dry-run-2026-09-03.md` (how the grader decides — still current) →
-project memory, newest first: `browser_pass_round2_2026-09-04`,
-`browser_pass_bps_psa_2026-09-04`, `direction_flips_dead_url_drops_2026-09-04`,
-then the five `grader_*` 2026-09-03 entries.
+the other 2026-09-03/04 notes in `notes/` → project memory, newest first.
 Git status: never state it (PLAYBOOK rule 1).
 
 ---
@@ -36,8 +31,8 @@ Git status: never state it (PLAYBOOK rule 1).
 flip/drop round, the bps/psa browser round and this round are built and
 verified, not committed.** Corpus **3,341 reports / 2,633 dependencies**.
 
-**Grades: 538 A · 1,342 B · 743 C** (+10 seed edges never graded). A-share
-**20.4%**, up from 18.8%. `npm run validate` exits 0, `tsc --noEmit` clean,
+**Grades: 544 A · 1,346 B · 744 C** (+10 seed edges never graded). A-share
+**20.6%**, up from 18.8% at the start of the day. `npm run validate` exits 0, `tsc --noEmit` clean,
 123/123 logic tests, grader selftest **33/33**. `public/corpus-data.json`
 regenerated. The validator's "cites no evidence_url" warning class is still 0.
 **No script changed in round 2** (`grade-evidence.ts` was touched in the br-ibge-cnae/OCR-cap sub-round below).
@@ -48,19 +43,10 @@ reached.** Grades written **C→A 41, C→B 38, B→A 2, no regressions**. Per-e
 `Claude outputs/browser-pass-round2-2026-09-04.json`; flags for you:
 `…-flags-2026-09-04.json`; grade runs: `grade-browserpass-round2/3/4-2026-09-04.json`.
 
-**The refusals are a corpus problem, not a fetch problem.** 39 of 47 are edges
-whose cited document does not say what the basis claims — overwhelmingly
-Grok-family. The dominant shape is the **chained two-hop**: six IBGE surveys →
-`isic` all cite the CNAE page, which carries the CNAE↔ISIC synchronisation
-sentence but never names the survey.
-
-**A claim I made and then disproved, recorded so nobody repeats it**: `...`
-splices and straight-vs-curly apostrophes are ALREADY handled
-(`normalizeForMatch` folds quote characters and strips accents; `locateQuote`
-splits on the ellipsis and scores each fragment). Three "broken" originals
-re-graded **A at coverage 1.0** and were restored. The real defect is the
-researcher's citation text appended inside the quote — two more exist corpus-wide
-(`pk-`/`bt-national-accounts → imf-e-gdds`, both B).
+**The refusals are a corpus problem, not a fetch problem** — 39 of 47 are edges
+whose cited document does not say what the basis claims, the chained two-hop
+above all. Detail and the disproved ellipsis/apostrophe claim: this round's
+note and PLAYBOOK §6.
 
 **Everything else unchanged**: round 5's revert refinement; round 4's
 `spansForEdge` fix and improvements-only rule; round 3d's fetch strategies;
@@ -90,45 +76,54 @@ a fresh sandbox. Grades hand-set per the Chrome-read rule, not yet re-run
 through the corpus-wide grader — a `--edges` confirmation pass is worth doing
 before or after commit.
 
+**And the six round-2 flags, ruled and applied (uncommitted).** Two direction
+flips — `br-ibge-censo-demografico -> br-lei-5534-1968` (quote from the flags
+file) and its **unflagged** sibling `br-ibge-pnad-continua -> br-lei-5534-1968`,
+both retyped `methodology_depends_on -> legal_basis`; and
+`id-rpjmn -> id-democracy-index`. `mx-cscm -> mx-scnm` re-evidenced in the
+CSCM's own methodology PDF (C -> A); the flag's "re-point it at `sna-2008`"
+was NOT done — `mexico-wiring-grok-2026-08.json` already carries that edge.
+`ndb-mou-brics-icm-2022` basis corrected in place with the 2016-not-2011
+finding, edge kept, stays C. `yt-budget-main-estimates ->
+territorial-formula-financing` evidence re-pointed at the companion 2026-27
+Fiscal Outlook PDF and then **read in Chrome the same night — C -> A**: Table 4
+carries a `2026-27 Main Estimates` column for the Grant from Canada, and the
+prose names the instrument. `mt-edp-inventory -> mt-nso-government-finance`
+retyped `uses_data_from -> cites` (Thomas's ruling: an inventory documents a
+release; the union has no `documents` member and this is settled, not a flag). Edit script:
+`edit_scripts/flags-round2-rulings-2026-09-04.py`; grade run:
+`Claude outputs/grade-flagrulings-2026-09-04.json`. Two new PLAYBOOK §6 traps
+came out of it (grader `--write` regressions; re-test extension blocks).
+
 ---
 
 ## 3. Todo (live items only)
 
 ### [Thomas] — only you can
 
-1. **Widen the Chrome extension's site permissions.** **Five hosts / six edges
-   are CONFIRMED refused by the extension, not by the site** — `wam.ae`,
-   `gov.il`, `pc.odisha.gov.in`, `descg.gov.in`, `slovak.statistics.sk`
-   ("Navigation to this domain is not allowed" / "Permission denied for
-   JavaScript execution on this domain"). The other 33 unreached edges were not
-   individually tested, so an unknown share of them is the same thing rather
-   than a real wall. One setting; each unblocked host is then one call.
-   **Likely the biggest lever left on the browser queue.**
-2. **Ruling owed: BPS landing page vs its own PDF.** Unchanged — 17 edges whose
-   evidence is inside a PDF BPS serves only through a signed token with no
-   stable URL. Listed in `Claude outputs/browser-pass-bps-psa-2026-09-04.json`
-   → `refused`.
-3. **Four smaller calls**, all in `…-flags-2026-09-04.json`: `mx-cscm → mx-scnm`
-   (its page evidences `sna-2008` instead); three directions flagged not flipped
-   (`br-lei-5534-1968 → br-ibge-censo-demografico`, `mt-edp-inventory →
-   mt-nso-government-finance`, `id-democracy-index → id-rpjmn`);
-   `ndb-mou-brics-icm-2022 → brics-icm-cooperation-framework-2011` — the basis
-   names a **2016** predecessor, not 2011; and
-   `yt-budget-main-estimates → territorial-formula-financing`, evidenced in a
-   different publication.
-4. Commit the four uncommitted 2026-09-04 rounds. This round touches
-   ~30 `src/data/research/*.json`, `public/corpus-data.json`,
-   `evidence-cache/`, `PLAYBOOK.md`, `HANDOFF.md` (+ archive copy),
-   `notes/browser-pass-round2-2026-09-04.md`, four `Claude outputs/*.json`,
-   plus (br-ibge-cnae/OCR-cap round) `scripts/grade-evidence.ts` and five more
-   `src/data/research/*.json` (br-brazil-grok-2026-08, brics-g4-2026-08-22,
-   af-angola-autarquias, af-benin-commune-finance, gm-g23-municipal).
-5. Real-GPU number for the unfolded Everything tier (still owed): a REAL
-   browser, not the sandbox's swiftshader-software Playwright (PLAYBOOK rule
-   7 — bloom/pixel numbers from that are untrustworthy). Everything tier,
-   fully unfolded, camera auto-rotating and settled; read FPS off DevTools'
-   own meter (or a one-line `requestAnimationFrame` counter to console). No
-   actual measurement exists yet on real hardware at current corpus size.
+1. **Ruling owed: BPS landing page vs its own PDF — DEFERRED by Thomas
+   2026-09-04.** 17 edges whose evidence is inside a PDF BPS serves only
+   through a signed token with no stable URL. Listed in
+   `Claude outputs/browser-pass-bps-psa-2026-09-04.json` → `refused`. Nothing
+   moves on them until you rule.
+2. Commit the four uncommitted 2026-09-04 rounds. On top of what the earlier
+   rounds touched: `src/data/research/{br-brazil-grok-2026-08,
+   id-unlinked-wiring-round2-2026-08-29, int-brics-international-layer-grok-2026-08,
+   mx-mexico-grok-2026-08, territories-canada-grok-2026-08}.json`,
+   `public/corpus-data.json`, `PLAYBOOK.md`, `HANDOFF.md`,
+   `edit_scripts/flags-round2-rulings-2026-09-04.py`, three
+   `Claude outputs/*flagrulings*.json`.
+3. Real-GPU number for the unfolded Everything tier — **first reading taken
+   2026-09-04 and it is not usable yet**: 120.0 fps, GPU raster on, 9.0 MB of
+   536.9 MB GPU memory, Everything tier, 3,342 of 3,342 shown. Three things
+   spoil it: Paint flashing / Layout shift regions / Layer borders / Highlight
+   ads were all ticked (each is extra compositing work and the whole canvas
+   renders green), the docked DevTools panel halves the canvas so the GPU is
+   drawing ~1,000 px not 1,920, and the Frame Rate bars read **yellow, i.e.
+   partially dropped frames**, so 120.0 is the headline over a lumpy stream.
+   Retake with only **Frame Rendering Stats** ticked, DevTools undocked into
+   its own window, fully unfolded and auto-rotating; the `requestAnimationFrame`
+   counter (median and p95 frame time) is the number worth recording.
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
@@ -137,7 +132,11 @@ before or after commit.
    into the shared strings). Eight browser-pass edges carry
    `empty:no-extractor` for readable spreadsheets — `anuario.ine.gob.bo`
    returns HTTP 200 to plain curl and was unzipped by hand this round.
-2. **Browser pass, the last 39** — after Thomas widens the extension list.
+2. **Browser pass, the last 39 — and the extension block is probably not
+   real.** All five hosts recorded as refused by the extension's site list
+   (`wam.ae`, `gov.il`, `pc.odisha.gov.in`, `descg.gov.in`,
+   `slovak.statistics.sk`) navigated on the first try, no prompt, on
+   2026-09-04 (PLAYBOOK §6). Re-test, don't wait on Thomas.
    Method is PLAYBOOK §6. Also still owed from before: re-grade the 2
    `podaci.dzs.hr` edges (host is back) and re-fetch the 4 rosstat/sis.gov.eg
    edges from a network that reaches them.

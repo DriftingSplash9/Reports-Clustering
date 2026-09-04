@@ -1723,21 +1723,22 @@
   ],
   "dependencies": [
     {
-      "source_report_id": "br-lei-5534-1968",
-      "target_report_id": "br-ibge-censo-demografico",
-      "relationship_type": "methodology_depends_on",
-      "basis": "The Censo Demográfico and all IBGE statistical operations cite Lei 5.534/1968 as the legal foundation for the obligation to respond and for the absolute confidentiality of individual information used exclusively for statistical purposes.",
+      "source_report_id": "br-ibge-censo-demografico",
+      "target_report_id": "br-lei-5534-1968",
+      "relationship_type": "legal_basis",
+      "basis": "The Censo Demografico rests on Lei 5.534/1968: the census's own enforcement-and-confidentiality page names the law as the instrument that makes the response obligatory and guarantees confidentiality. (Direction flipped and relationship_type methodology_depends_on -> legal_basis, 2026-09-04: the cited page, read in full in Chrome this round, says the census rests on the law, not the law on the census; the edge was minted the other way round. Thomas's ruling on the browser-pass-round-2 flags, Claude outputs/browser-pass-round2-flags-2026-09-04.json.)",
       "evidence_url": "https://censo2022.ibge.gov.br/en/about/enforcement-and-confidentiality.html",
       "_batch": [
         "2026-08-17_Brazil-domestic-batch1.json"
       ],
-      "evidence_grade": "C"
+      "evidence_grade": "B",
+      "evidence_quote": "By correctly answering the 2022 Census, the great winner is you. Law No. 5,534, of November 14, 1968, which establishes the mandatory provision of statistical information, ensures the confidentiality of the information collected"
     },
     {
-      "source_report_id": "br-lei-5534-1968",
-      "target_report_id": "br-ibge-pnad-continua",
-      "relationship_type": "methodology_depends_on",
-      "basis": "PNAD Contínua and other household surveys operate under the mandatory-response and statistical-secrecy provisions of Lei 5.534/1968, which is the standing legal basis for information collection by IBGE.",
+      "source_report_id": "br-ibge-pnad-continua",
+      "target_report_id": "br-lei-5534-1968",
+      "relationship_type": "legal_basis",
+      "basis": "PNAD Continua and IBGE's other household surveys operate under the mandatory-response and statistical-secrecy provisions of Lei 5.534/1968, which is the standing legal basis for information collection by IBGE. (Direction flipped and relationship_type methodology_depends_on -> legal_basis, 2026-09-04: its own basis text already described the survey resting on the law. Not itself flagged this round - flipped with its sibling br-ibge-censo-demografico edge because it is the same shape off the same law node, and leaving one of the two pointing the other way would have been incoherent.)",
       "evidence_url": "https://www.ibge.gov.br/acesso-informacao/institucional/base-juridica.html",
       "_batch": [
         "2026-08-17_Brazil-domestic-batch1.json"

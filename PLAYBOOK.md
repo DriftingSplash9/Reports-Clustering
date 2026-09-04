@@ -739,6 +739,25 @@ country/file/round, not a single site's own one-off quirk.
   rest of the round ran on WebFetch of guessed URLs and direct site
   navigation. Budget the searches before fanning out, and have agents search
   only for what a fetch cannot give them.
+- **`--write` can REGRESS a grade, and the improvements-only rule does not
+  stop it** (2026-09-04). Round 4's improvements-only rule protects the
+  *quote*, not `evidence_grade`: a re-run of the grader over an edge whose
+  host walls the bridge VM writes the wall's C straight over an existing B.
+  Seen on `id-rpjmn -> id-democracy-index` — B from two confirmed real-browser
+  reads, rewritten to C with `wall:cloudflare-challenge`, and restored by hand
+  with the reason recorded in the basis. **After any `--write`, diff the grades
+  of the selected edges against what they were before and restore every
+  downgrade whose reason is a route failure** (`wall:*`, `empty:*`,
+  `no-document`) rather than an evidence finding. A route the grader cannot
+  take is not evidence that the evidence got worse.
+- **Re-test a "blocked by the Chrome extension" host before believing it**
+  (2026-09-04). All five hosts recorded on 2026-09-04 as refused by the
+  extension's site list — `wam.ae`, `gov.il`, `pc.odisha.gov.in`,
+  `descg.gov.in`, `slovak.statistics.sk` — navigated on the first try later
+  the same day, no permission prompt, in a fresh MCP tab group. Whatever the
+  refusal was, it was not a durable per-host setting, so "not-reached: blocked
+  by the extension" is a claim with a ~10-second test and no reason to sit in
+  a handoff as work owed to Thomas.
 
 ---
 
