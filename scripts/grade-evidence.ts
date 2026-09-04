@@ -466,14 +466,103 @@ export function namesTarget(
       break
     }
   }
-  const titleNoParens = target.title.replace(/\([^)]*\)/g, ' ')
-  const titleWords = tokenise(titleNoParens)
+  // **WHITESPACE-INSENSITIVE SECOND PASS** (Thomas, 2026-09-04, ruling on the
+  // transport round's finding 1). `locateQuote` has had one since round 5 and
+  // `namesTarget` did not, so a document whose quote matched at coverage 1.00
+  // could still grade `agency-not-artefact` for the same defect in the same
+  // PDF. `ci-anstat-ihpc -> ci-anstat-ehcvm` is the measured case: the ANStat
+  // PDF renders "Enquete Harmonisee sur les Conditions de Vie des Menages" as
+  // `Enque` + combining acute + ` te Harmonise e sur lesConditions`, so
+  // `tokenise` sees `enque`, `te`, `harmonise`, `e`, `lesconditions` and the
+  // run rule can never fire, though the document names the survey in full,
+  // twice.
+  //
+  // It runs ONLY after the spaced pass above has failed outright, so it can
+  // never lower a score or change a `how` that already matched — and it is
+  // computed lazily for the same reason: squashing a 4 MB document is not free
+  // and most documents never need it.
   if (!artefact) {
-    for (const tok of titleWords) {
-      if (tok.length >= 3 && /[぀-ヿ㐀-鿿]/.test(tok) && hay.includes(tok)) {
+    const squashed = hay.replace(/ /g, '')
+    const MIN_SQUASHED = 12
+    for (let i = 0; i < names.length && !artefact; i++) {
+      const noParens = names[i].replace(/\([^)]*\)/g, ' ')
+      const words = tokenise(noParens)
+      const tag = i === 0 ? '' : `alias${i}:`
+      if (words.length) {
+        const run = longestRun(words, squashed, '', MIN_SQUASHED)
+        if (run >= 2 && run / words.length >= 0.6) {
+          artefact = true
+          how = `${tag}title-run-nospace:${run}/${words.length}`
+          break
+        }
+      }
+      const lead = tokenise(noParens.split(/[\u2014\u2013\-,;:\/|]/)[0] ?? '')
+      const leadSquashed = lead.join('')
+      if (lead.length >= 3 && leadSquashed.length >= MIN_SQUASHED && squashed.includes(leadSquashed)) {
         artefact = true
-        how = `cjk:${tok}`
+        how = `${tag}title-lead-nospace`
         break
+      }
+    }
+  }
+
+  // **ONE INTERPOLATED WORD** (Thomas, 2026-09-04, ruling on round 5's
+  // measured gap). `mx-oaxaca-de-juarez -> mx-censo-poblacion` has coverage
+  // 1.0 on a verbatim quote and graded B `target-not-named` because the
+  // municipality writes "Censo **Nacional** de Poblacion y Vivienda" and
+  // INEGI's own name for the artefact — which is what the node carries, per
+  // the publisher's-own-title ruling — has no "Nacional". Both doors failed
+  // on one inserted word: the run rule because `Nacional` breaks `censo` off
+  // the front (4 of the 6 needed), the title-lead because `hay.includes()` is
+  // a whole-phrase test. Not the same defect as the whitespace one above and
+  // not fixable by retitling the node.
+  //
+  // ONE token, never two, and only inside a phrase of three words or more:
+  // the tolerance has to stay narrow enough that it cannot assemble a title
+  // out of scattered words. Runs here need >= 3 title words rather than the
+  // spaced pass's 2, for the same reason.
+  if (!artefact) {
+    for (let i = 0; i < names.length && !artefact; i++) {
+      const noParens = names[i].replace(/\([^)]*\)/g, ' ')
+      const words = tokenise(noParens)
+      const tag = i === 0 ? '' : `alias${i}:`
+      if (words.length >= 3) {
+        const run = longestRunWithOneGap(words, hay)
+        if (run >= 3 && run / words.length >= 0.6) {
+          artefact = true
+          how = `${tag}title-run-gap:${run}/${words.length}`
+          break
+        }
+      }
+      const lead = tokenise(noParens.split(/[—–\-,;:\/|]/)[0] ?? '')
+      if (lead.length >= 3 && phraseWithOneGap(lead, hay)) {
+        artefact = true
+        how = `${tag}title-lead-gap`
+        break
+      }
+    }
+  }
+
+  // **The single-token path reads the aliases too, and Hangul is in the
+  // character class** (Thomas, 2026-09-04, ruling on the Basel round's
+  // finding 3). The path exists because a Japanese or Chinese title fragment
+  // is one token with no spaces, so the run rule cannot see it — and that
+  // reasoning applies to Korean word for word. It had two limits that both
+  // bit `kr-financial-stability -> basel-iii`: it iterated `target.title`
+  // only, so the attested alias `바젤Ⅲ` could never be reached, and its
+  // class held Hiragana, Katakana and CJK Unified Ideographs but not Hangul
+  // (U+AC00-U+D7AF) at all. Korean was outside the naming test entirely, by
+  // both doors. `normalizeForMatch` folds `Ⅲ` to `iii` under NFKD, so the
+  // token this now matches is `바젤iii` — 5 characters and highly specific.
+  if (!artefact) {
+    for (let i = 0; i < names.length && !artefact; i++) {
+      const tag = i === 0 ? '' : `alias${i}:`
+      for (const tok of tokenise(names[i].replace(/\([^)]*\)/g, ' '))) {
+        if (tok.length >= 3 && /[぀-ヿ㐀-鿿가-힯]/.test(tok) && hay.includes(tok)) {
+          artefact = true
+          how = `${tag}cjk:${tok}`
+          break
+        }
       }
     }
   }
@@ -602,11 +691,69 @@ const LEGAL_CORE_WORDS = [
  * Length of the longest run of consecutive `words` appearing verbatim in
  * `hay`. Linear in the title's length, which is always short.
  */
-function longestRun(words: string[], hay: string): number {
+function longestRun(words: string[], hay: string, joiner = ' ', minChars = 0): number {
   let best = 0
   for (let i = 0; i < words.length; i++) {
     for (let j = words.length; j > i + best; j--) {
-      if (hay.includes(words.slice(i, j).join(' '))) {
+      const phrase = words.slice(i, j).join(joiner)
+      // Only the squashed caller passes a floor. A joined-with-nothing run of
+      // short words ("de la" -> "dela") matches inside unrelated words, which
+      // is the one way the second pass could invent a match rather than
+      // recover one; 12 characters is `locateQuote`'s own fragment floor.
+      if (phrase.length < minChars) continue
+      if (hay.includes(phrase)) {
+        best = j - i
+        break
+      }
+    }
+  }
+  return best
+}
+
+/**
+ * Does the word sequence appear in `hay` in order, with at most ONE
+ * interpolated token inside it? Written for the publisher who renders the
+ * artefact's name with one extra word in the middle — "Censo *Nacional* de
+ * Poblacion y Vivienda" for a census INEGI itself calls "Censo de Poblacion
+ * y Vivienda".
+ *
+ * Deliberately NOT a regex over the whole document: a `RegExp` with an
+ * optional token at every position would scan a 4 MB haystack once per
+ * candidate window, and the run search below has O(n^2) of those. This walks
+ * occurrences of the prefix with `indexOf` — native, and it stops at the
+ * first occurrence whose tail matches — then checks a short slice. The
+ * occurrence cap is a guard for the pathological case where the prefix is one
+ * very common short word; a title whose first words are that generic is not
+ * one this rule should be rescuing anyway.
+ */
+function phraseWithOneGap(words: string[], hay: string): boolean {
+  if (words.length < 3) return false
+  const MAX_OCCURRENCES = 2000
+  for (let g = 0; g < words.length - 1; g++) {
+    const prefix = words.slice(0, g + 1).join(' ')
+    const suffix = words.slice(g + 1).join(' ')
+    if (!prefix || !suffix) continue
+    let from = 0
+    for (let seen = 0; seen < MAX_OCCURRENCES; seen++) {
+      const at = hay.indexOf(prefix, from)
+      if (at < 0) break
+      const after = at + prefix.length
+      const rest = hay.slice(after, after + 26 + suffix.length)
+      const gap = /^ [^ ]{1,24} /.exec(rest)
+      if (gap && rest.slice(gap[0].length).startsWith(suffix)) return true
+      from = at + 1
+    }
+  }
+  return false
+}
+
+/** `longestRun`, tolerating one interpolated token. See `phraseWithOneGap`. */
+function longestRunWithOneGap(words: string[], hay: string): number {
+  let best = 0
+  for (let i = 0; i < words.length; i++) {
+    for (let j = words.length; j > i + best; j--) {
+      if (j - i < 3) continue
+      if (phraseWithOneGap(words.slice(i, j), hay)) {
         best = j - i
         break
       }
@@ -1405,16 +1552,16 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
   if (fetched.block !== 'none') return C(`${fetched.block}:${fetched.blockLabel}`)
   if (!fetched.text.trim()) return C('no-text')
 
-  // Quote location.
+  // Quote location. **Every span is located, not only the winner** — the A
+  // bar below asks whether the artefact is named beside a matched span, and
+  // until 2026-09-04 it could only ever ask about the highest-scoring one.
+  const hits = spans.map((span) => ({ span, ...locateQuote(span, fetched.text) }))
   let coverage = 0
-  let at = -1
   let bestSpan = ''
-  for (const span of spans) {
-    const hit = locateQuote(span, fetched.text)
-    if (hit.coverage > coverage) {
-      coverage = hit.coverage
-      at = hit.index
-      bestSpan = span
+  for (const h of hits) {
+    if (h.coverage > coverage) {
+      coverage = h.coverage
+      bestSpan = h.span
     }
   }
   const quote = spans.length ? verdictFor(coverage) : 'no'
@@ -1422,6 +1569,51 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     ? namesTarget(fetched.text, input.targetReport)
     : { artefact: false, agency: false, how: 'no-target-node' }
   const metadataWaiver = isMetadataHost(input.evidenceUrl)
+
+  // **The A bar tests the window around ANY fully-matched span, not only the
+  // highest-scoring one** (Thomas, 2026-09-04, ruling on the Basel round's
+  // finding 1). The artefact still has to be named IN the passage the quote
+  // came from — that requirement is the whole point of the bar and is
+  // unchanged. What changed is which passage gets asked about.
+  //
+  // The defect: a great many bases in this corpus open by naming the source
+  // document ("The official press release for 'X' states: …") and then quote
+  // the substantive sentence. Both spans match at coverage 1.00, the tie broke
+  // to whichever came first, and `bestSpan` became the headline — whose ±400
+  // characters are page navigation chrome where the artefact name of course
+  // never appears. `frb-regulation-q -> basel-iii` graded B
+  // `artefact-named-elsewhere-in-document` on coverage 1.00 with naming true,
+  // on an arbitrary tie-break between two equally perfect quotes.
+  //
+  // Only spans that are themselves `yes` may anchor (>= 0.95 coverage). A
+  // partial span must not be able to hand an A to an edge whose substantive
+  // sentence is only half present, and restricting candidates this way is also
+  // what keeps `quote` — computed above from the best coverage — consistent
+  // with the span finally recorded.
+  //
+  // The anchoring span then BECOMES `bestSpan`, so the window in the evidence
+  // record is the passage the grade actually rests on, and `writeGrades` fills
+  // `evidence_quote` from it rather than from a press release's headline.
+  const QUOTE_WINDOW = 400
+  const hayNorm = normalizeForMatch(fetched.text)
+  const namesArtefactNear = (index: number, span: string): boolean => {
+    if (index < 0 || !input.targetReport) return false
+    const from = Math.max(0, index - QUOTE_WINDOW)
+    const around = hayNorm.slice(from, index + normalizeForMatch(span).length + QUOTE_WINDOW)
+    return namesTarget(around, input.targetReport).artefact
+  }
+  let nearQuote = metadataWaiver
+  if (!nearQuote && naming.artefact) {
+    const anchors = hits.filter(
+      (h) => h.index >= 0 && verdictFor(h.coverage) === 'yes' && namesArtefactNear(h.index, h.span),
+    )
+    if (anchors.length) {
+      nearQuote = true
+      const anchor = anchors.reduce((a, b) => (b.coverage > a.coverage ? b : a))
+      coverage = anchor.coverage
+      bestSpan = anchor.span
+    }
+  }
 
   const sentences = splitSentences(fetched.text)
   const window = bestSpan ? (windowAround(sentences, bestSpan) ?? '') : ''
@@ -1473,16 +1665,9 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
   // first-pass false A grades were a verbatim quote about one artefact in a
   // document that mentions the target's name in an unrelated paragraph (or
   // not at all — "ABS GFS Manual" for the target release "Government Finance
-  // Statistics, Australia"). Window is the matched span plus 400 characters
-  // either side, which is a long paragraph.
-  const QUOTE_WINDOW = 400
-  let nearQuote = metadataWaiver
-  if (!nearQuote && naming.artefact && at >= 0) {
-    const hay = normalizeForMatch(fetched.text)
-    const from = Math.max(0, at - QUOTE_WINDOW)
-    const window = hay.slice(from, at + normalizeForMatch(bestSpan).length + QUOTE_WINDOW)
-    nearQuote = namesTarget(window, input.targetReport as Pick<Report, 'title' | 'publisher' | 'url' | 'title_aliases'>).artefact
-  }
+  // Statistics, Australia"). `nearQuote` is decided above, where the anchoring
+  // span is picked; the window is that span plus 400 characters either side,
+  // which is a long paragraph.
   if (quote === 'yes' && naming.artefact && nearQuote && !weakFlags.length) {
     // **A document read by a fetch strategy caps at B** (Thomas, 2026-09-03,
     // ruling on round 3d). An archived snapshot says "this quote was in this
@@ -1496,7 +1681,17 @@ export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResu
     // is unchanged, and an edge landing here has cleared every evidence test an
     // A clears. The only thing against it is where the bytes came from.
     if (fetched.via && routeCapsGrade(fetched.via)) {
-      return { ...out, grade: 'B', reason: 'quote-found-artefact-named-via-snapshot' }
+      // **The reason names the ROUTE, not "snapshot" for all three** (fixed
+      // 2026-09-04, Thomas's ruling on the transport round's finding 2). Every
+      // capped route reported `…-via-snapshot`, which is false for `token-pdf`
+      // (a live read of the PDF the cited page hands you, capped because the
+      // quote sits one step from the citation) and false for `ocr` (a live read
+      // of a scanned page). PLAYBOOK §6 condemns exactly this shape — one label
+      // for two routes reads as a lie in the round's own output. `wayback`
+      // keeps the original string so §7's greppable class survives untouched.
+      const route = fetched.via.split(' ')[0]
+      const label = route === 'wayback' ? 'snapshot' : route
+      return { ...out, grade: 'B', reason: `quote-found-artefact-named-via-${label}` }
     }
     return { ...out, grade: 'A', reason: 'quote-found-artefact-named' }
   }
@@ -1842,6 +2037,15 @@ function selftest(): void {
   )
   t('a document read in a real browser grades as the direct read it is',
     chromeGraded.grade === 'A' && chromeGraded.reason === 'quote-found-artefact-named')
+  const tokenFetched: Fetched = { ...fetched, via: 'token-pdf 2026-09-04' }
+  const tokenGraded = gradeEdge(
+    { source: 's', target: 't', file: 'f.json', basis: 'It states "the Consumer Price Index is compiled monthly".', evidenceUrl: 'https://x.test/doc.pdf', targetReport: target },
+    tokenFetched,
+  )
+  t('a token-pdf read caps at B and its reason names the route, not a snapshot',
+    tokenGraded.grade === 'B' && tokenGraded.reason === 'quote-found-artefact-named-via-token-pdf')
+  t('wayback keeps the reason string PLAYBOOK §7 names, so the class stays greppable',
+    viaGraded.reason === 'quote-found-artefact-named-via-snapshot')
   t('a wayback or OCR route caps the grade; a Chrome or direct read does not',
     routeCapsGrade('wayback 20250908003713') && routeCapsGrade('ocr tesseract 2026-09-04') &&
     !routeCapsGrade('chrome 2026-09-04') && !routeCapsGrade(''))
@@ -2025,10 +2229,16 @@ function summarise(results: GradeResult[]): void {
     }
     for (const [route, hosts] of byRoute) {
       const n = [...hosts.values()].reduce((a, b) => a + b, 0)
+      // Three cases, not two. Until 2026-09-04 anything that was not
+      // `wayback` was reported as "a direct read of the cited URL", which
+      // described `token-pdf` and `ocr` — both capped at B precisely because
+      // they are NOT that — as if they were unrestricted live reads.
       const label =
         route === 'wayback'
           ? `READ VIA AN ARCHIVED SNAPSHOT — ${n} edge(s), capped at B; the live host refused this machine:`
-          : `READ VIA ${route.toUpperCase()} — ${n} edge(s); graded as a direct read of the cited URL:`
+          : routeCapsGrade(route)
+            ? `READ VIA ${route.toUpperCase()} — ${n} edge(s), capped at B; the bytes did not come from the cited URL itself:`
+            : `READ VIA ${route.toUpperCase()} — ${n} edge(s); graded as a direct read of the cited URL:`
       console.log(`\n${label}`)
       for (const [h, c] of [...hosts].sort((a, b) => b[1] - a[1])) console.log(`  ${String(c).padStart(4)}  ${h}`)
     }

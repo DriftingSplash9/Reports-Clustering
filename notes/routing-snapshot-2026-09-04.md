@@ -58,3 +58,9 @@ resolve from the VM and returns 200 from the sandbox.
 | `s-circabc.europa.eu` | one dead host carrying 58 of the corpus's dead-URL edges |
 | `web.archive.org` | blocked from the cloud sandbox; fine from the VM. Availability API 429s within a minute of a corpus-scale pass |
 | Chrome extension site list | **not a durable blocker.** All five hosts recorded as "refused by the extension" on 2026-09-04 navigated first try later the same day. Re-test before reporting one |
+| `transparencia.municipiodeoaxaca.gob.mx` | Cloudflare "Just a moment" to both machines; clears in Chrome on the first navigation, and the 4.98 MB PDF then `fetch()`es same-origin (2026-09-04, round 5) |
+| `rssobarmm.psa.gov.ph`, `www.dnd.gov.ph` | same — Cloudflare challenge to both machines, first-navigation clear in Chrome (2026-09-04, round 5) |
+| `documentcloud.org` | Cloudflare HARD block from both machines ("Sorry, you have been blocked"), not a challenge. The BRICS declaration it mirrors is on `dirco.gov.za` and curls clean (2026-09-04, round 5) |
+| `ipdp.cdmx.gob.mx` | **dead on all three networks** — TCP reset from VM and sandbox, `ERR_CONNECTION_TIMED_OUT` in Chrome, and no Wayback snapshot (2026-09-04, round 5) |
+| `resource.capetown.gov.za`, `mfma.treasury.gov.za` | dead the same way from all three. `www.capetown.gov.za` and `www.treasury.gov.za` both answer 200 — only these hosts refuse (2026-09-04, round 5) |
+| Chrome extension, pending grant | a domain awaiting approval leaves the tab WHERE IT WAS while `navigate` reports success — indistinguishable from a permanent block until the grant lands. After it, the host behaves normally (`chrome-error://` if dead). **Ask, then re-probe, then record** (2026-09-04, round 5) |

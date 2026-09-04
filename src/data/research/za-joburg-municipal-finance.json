@@ -132,14 +132,6 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "za-nt-mfma-circular-cpi-guidance",
-      "target_report_id": "za-statssa-cpi",
-      "relationship_type": "uses_data_from",
-      "basis": "The circular's macroeconomic table sources CPI Inflation forecasts to 'National Treasury Budget Review 2025,' and the companion circular states 'The Consumer Price Index (CPI) inflation is forecasted to be 4.4 per cent' as the benchmark municipalities must justify against. Flagged as an indirect (Budget Review-mediated) rather than direct-quoted StatsSA link within the circular text itself.",
-      "evidence_url": "https://resource.capetown.gov.za/documentcentre/Documents/Financial%20documents/Budget-2026-27_Ann39.pdf",
-      "evidence_grade": "C"
-    },
-    {
       "source_report_id": "za-mfma-act",
       "target_report_id": "za-statssa-cpi",
       "relationship_type": "cites",
@@ -198,6 +190,13 @@
       "target": "za-statssa-cpi",
       "reason": "no-document",
       "why": "Full-text search of the consolidated Municipal Property Rates Act 6 of 2004 found only one inflation-related clause (s.17(3)), concerning a Gazette-notice monetary exemption threshold -- not a general cap on annual rates percentage increases. That constraint, where it exists, comes from National Treasury MFMA Circular guidance, not the MPRA itself."
+    },
+    {
+      "edge": "za-nt-mfma-circular-cpi-guidance -> za-statssa-cpi",
+      "source": "za-nt-mfma-circular-cpi-guidance",
+      "target": "za-statssa-cpi",
+      "reason": "no-document",
+      "why": "MOVED 2026-09-04 (browser-pass round 5; Thomas's ruling: 'drop'). Two independent defects, either sufficient. (1) QUOTE AND CITATION ARE DIFFERENT DOCUMENTS: the source node is National Treasury's MFMA municipal budget circulars, but evidence_url points at a City of Cape Town budget annexure — the techniques section 5 defect ('a basis that quotes document X while evidence_url points at document Y gives a quote the grader can never confirm'). (2) The basis is self-defeating even on its own terms: it sources the CPI forecast to 'National Treasury Budget Review 2025', not to StatsSA's P0141, and flags itself as 'an indirect (Budget Review-mediated) rather than direct-quoted StatsSA link within the circular text itself' — an inferred chain, not a document naming P0141 as the circular's input. Re-citing was attempted and is blocked: resource.capetown.gov.za is dead from all three networks (TCP reset from the bridge VM and the cloud sandbox, ERR_CONNECTION_TIMED_OUT in Chrome), mfma.treasury.gov.za is dead the same way, and www.treasury.gov.za/legislation/mfma/circulars/ serves the site homepage. Lead: if MFMA Circular 129 or 132 becomes readable and its macroeconomic table cites StatsSA's CPI (P0141) by name rather than the Budget Review, re-mint against the circular's own URL. Original entry preserved verbatim: relationship_type=\"uses_data_from\", evidence_url=\"https://resource.capetown.gov.za/documentcentre/Documents/Financial%20documents/Budget-2026-27_Ann39.pdf\", evidence_grade=\"C\", basis=\"The circular's macroeconomic table sources CPI Inflation forecasts to 'National Treasury Budget Review 2025,' and the companion circular states 'The Consumer Price Index (CPI) inflation is forecasted to be 4.4 per cent' as the benchmark municipalities must justify against. Flagged as an indirect (Budget Review-mediated) rather than direct-quoted StatsSA link within the circular text itself.\"."
     }
   ]
 }

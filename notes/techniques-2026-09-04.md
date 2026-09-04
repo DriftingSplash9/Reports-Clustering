@@ -61,6 +61,10 @@ and copy it back to the mounted repo afterwards (`public/` is not symlinked).
   inconclusive result** — a run that ran out of budget must not bake "no
   snapshot" into the store for every URL it never asked about. The snapshot
   DOWNLOAD is a separate service and tolerates 4 concurrent readers.
+  **Wayback playback is genuinely flaky, not just slow** — one snapshot 503'd
+  or timed out on roughly half of 8 attempts over several minutes while being
+  the exact right content when it did load. Don't cite a flaky Wayback URL as a
+  source even when it is the best content match.
   Wayback also proxies some blocked `.gov` domains: `archive.org/wayback/
   available?url=…`, or CDX search `web.archive.org/cdx/search/cdx?url=<domain>*
   &filter=urlkey:.*\.pdf`.
