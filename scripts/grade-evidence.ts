@@ -98,10 +98,27 @@ const CONNECT_TIMEOUT_S = 15
 
 /**
  * Extraction cap for the LOCAL full-text scratch store. Beyond this the first
- * 250 KB is kept plus a hash of the whole extracted text, so a re-check can
+ * 4 MB is kept plus a hash of the whole extracted text, so a re-check can
  * still tell whether the document changed.
+ *
+ * **Raised from 250 KB on 2026-09-04, because the grader matches quotes against
+ * the CAPPED text and a quote past the cap is unmatchable.** An edge in that
+ * state grades `quote-not-in-document`, which is indistinguishable in a report
+ * from a citation that does not say what it claims — the failure mode this cap
+ * quietly caused for `sd-cbos-statistical-review-q4-2024 -> sd-cbs-cpi`, whose
+ * quoted line ("'Source: Central Bureau of Statistics.") is the LAST line of a
+ * 278,363-byte extract, 22 KB past the old cap.
+ *
+ * Raising it costs almost nothing: this cap governs ONLY `.evidence-fulltext/`,
+ * which is disposable gitignored scratch (see FULLTEXT_DIR). The committed
+ * `evidence-cache/` record stores matched WINDOWS, not full text, so Thomas's
+ * 2026-09-03 repo-size ruling is untouched. Stored text is gzipped; the largest
+ * document met so far (minfin's KOSGU workbook, 3,817,390 characters) fits
+ * inside 4 MB. The cap still exists so a runaway extraction cannot fill the
+ * disk, and `truncated` plus the whole-text sha256 behave exactly as before for
+ * anything past it.
  */
-const TEXT_CAP_BYTES = 250 * 1024
+const TEXT_CAP_BYTES = 4 * 1024 * 1024
 
 /** The cache separator. Header above, windows below. */
 const CACHE_SEP = '\n---\n'

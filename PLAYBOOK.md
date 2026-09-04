@@ -813,6 +813,67 @@ country/file/round, not a single site's own one-off quirk.
   to 3,817,390 characters, is stored `truncated: true`, and still matched its
   quote at coverage 1.0 — the sentence was in the first 250 KB. Read
   `truncated` before blaming the cap; it only bites when the quote is late.
+- **A `network:curl-3 URL using bad/illegal format` in a debt list is a
+  REQUEST bug, not a dead host** (2026-09-04). curl refuses a URL carrying raw
+  spaces or non-ASCII bytes, and the fetcher recorded that refusal as if the
+  host had answered. Sudan's central bank serves its quarterly review under an
+  Arabic filename with spaces; percent-encoded, the same URL is a 200 and
+  1,972,408 bytes of PDF. `encodeForCurl` in the grader now encodes before the
+  call. **`encodeURI` is the WRONG encoder for this and the mistake is silent**:
+  it escapes `%` too, so an already-encoded URL comes back double-encoded
+  (`a%20b` -> `a%2520b`) and every fetch of it 404s. Escape only the space and
+  bytes outside printable ASCII; leave `%` alone. Two corpus URLs are affected
+  today, so the value is the CLASS, not the count.
+- **The 250 KB text cap silently manufactured `quote-not-in-document`, and it
+  was raised to 4 MB on 2026-09-04.** The grader matches against the CAPPED
+  text, so a quote past the cap scores 0 and the edge reads in a report exactly
+  like a citation that does not say what it claims. `sd-cbos-statistical-review
+  -q4-2024 -> sd-cbs-cpi` quotes the LAST line of a 278,363-byte extract — 22 KB
+  past the old cap — and went C -> B the moment the cap moved. The cap governs
+  only `.evidence-fulltext/`, which is disposable gitignored scratch, so raising
+  it does not touch Thomas's 2026-09-03 repo-size ruling; `evidence-cache/`
+  still stores matched windows only. Read `truncated` before blaming or
+  believing any `quote-not-in-document` on a long document.
+- **A PDF whose text layer puts a real SPACE after a decomposed combining
+  accent defeats exact matching, and nothing in the pipeline is at fault**
+  (2026-09-04). ANStat's IHPC bulletin stores "pondérations" as
+  `p o n d e U+0301 SPACE r a t i o n s`. `normalizeForMatch` folds the
+  combining mark away but keeps the space, so the document reads
+  "ponde rations" and a correctly-copied quote reading "pondérations" scores 0.
+  Seen on `ci-anstat-ihpc -> ci-anstat-ehcvm`, whose basis quotes the sentence
+  verbatim and still grades `quote-not-in-document`. It is a property of the
+  PDF, not of pdf.js or pdftotext — both extract it the same way. **The fix is
+  a matcher change (a whitespace-insensitive second pass in `locateQuote`,
+  stripping spaces from BOTH needle and haystack) and it is NOT made yet**: it
+  can only ever add matches, which is exactly when a corpus-wide measurement is
+  owed before adoption. Do not "fix" the quote — the quote is right.
+- **A Claude-in-Chrome capture reaches the cloud sandbox for free if the tool
+  output is over ~50 KB, and retyping it is both expensive and lossy**
+  (2026-09-04). A `get_page_text` result larger than ~50 KB is persisted to a
+  file under the session's `tool-results/` directory that the sandbox's own
+  shell can read, so the document never passes through the agent's context. A
+  SMALLER capture is returned inline instead — call `get_page_text` two or three
+  times in one `browser_batch` to push the combined output over the threshold
+  and get the same free transport. Measured cost of not doing this: a 19,251-
+  character capture retyped by hand came back 19,093 characters, differing in
+  whitespace, which makes the record's `text-sha256` correspond to nothing
+  reproducible. Check `window.__cap.length` first and pick the number of calls.
+- **A PDF served with `Content-Disposition: attachment` does not navigate — the
+  tab stays where it was and `navigate` still reports success** (2026-09-04).
+  `slovak.statistics.sk/ExportPdf2/PdfExportSrvlt` downloads instead, so JS run
+  "on that page" is really running on the previous one, silently. Navigate to
+  the host's own landing page first, then `fetch()` the PDF path from there
+  (same-origin, inherits cookies) and read it with pdf.js. Verify by checking
+  `location.href` inside the page, not the navigate result.
+- **Cloudflare clears for a real browser on hosts that 403 both networks, and
+  the first in-page `fetch` may still be the challenge** (2026-09-04).
+  `anstat.ci`, `slovak.statistics.sk` and `regjeringen.no` all 403 with a
+  genuine `cf-browser-verification` body from the bridge VM and the cloud
+  sandbox alike, and `anstat.ci` returned the challenge shell to the first
+  in-page fetch as well. Wait for `document.title` to stop reading
+  "Just a moment...", then fetch again — the second attempt returned the real
+  324,378-byte PDF. cdnjs was NOT blocked by CSP on either host, so the pdf.js
+  injection route worked unchanged.
 - **Re-test a "blocked by the Chrome extension" host before believing it**
   (2026-09-04). All five hosts recorded on 2026-09-04 as refused by the
   extension's site list — `wam.ae`, `gov.il`, `pc.odisha.gov.in`,

@@ -1,0 +1,915 @@
+{
+  "results": [
+    {
+      "source": "sd-cbos-statistical-review-q4-2024",
+      "target": "sd-cbs-cpi",
+      "file": "af-sudan.json",
+      "basis": "CBOS's own Table 24 explicitly attributes its published CPI/inflation figures to \"Source: Central Bureau of Statistics\" — the central bank republishes CBS's own index rather than compiling an independent one.",
+      "evidenceUrl": "https://cbos.gov.sd/sites/default/files/العرض الاقتصادي والمالي الربع الرابع 2024 .pdf",
+      "targetReport": {
+        "id": "sd-cbs-cpi",
+        "title": "Sudan Consumer Price Indices",
+        "publisher": "Central Bureau of Statistics (CBS), Sudan",
+        "country": "SD",
+        "jurisdiction_level": "federal",
+        "region": "Sudan",
+        "description": "Sudan's national CPI, historically titled \"Sudan Consumer Price Indices\" (per a 2010 UNECE/ILO presentation quoting a COICOP-consistent 12-group structure). Current (2026) coverage confirmed via Sudan Tribune news reporting rather than CBS's own site (cbs.gov.sd is unreachable throughout this research round) — monthly, with 40-46% YoY inflation reported March/April 2026 and a basket described as \"663 commodities... distributed across 12 categories.\" Two of Sudan's 18 states — Central Darfur (since April 2023) and North Darfur (since October 2025) — have had field price collection replaced by ESTIMATES due to the ongoing civil war, per the same reporting.",
+        "releases_per_year": 12,
+        "cadence_note": "Monthly, per Sudan Tribune reporting on CBS releases; the primary CBS site is currently unreachable so this is confirmed only via secondary news coverage, not CBS's own bulletin.",
+        "last_updated": null,
+        "url": "https://sudantribune.com/",
+        "domains": [
+          "inflation"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "cbos.gov.sd",
+      "status": 200,
+      "finalUrl": "https://cbos.gov.sd/sites/default/files/%D8%A7%D9%84%D8%B9%D8%B1%D8%B6%20%D8%A7%D9%84%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF%D9%8A%20%D9%88%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%20%D8%A7%D9%84%D8%B1%D8%A8%D8%B9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%202024%20.pdf",
+      "block": "none",
+      "blockLabel": "",
+      "textChars": 228569,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "neither",
+      "window": "",
+      "grade": "C",
+      "reason": "quote-not-in-document"
+    },
+    {
+      "source": "in-bihar-statistical-handbook",
+      "target": "in-census-india",
+      "file": "br-in-ca-wiring-round-2026-08-30.json",
+      "basis": "Bihar Statistical Handbook 2020 (Directorate of Economics & Statistics, Govt of Bihar) carries recurring per-table source footnotes citing the Census of India across multiple rounds -- 'Source:- Census of India -2011 & Previous Year' and 'Source- Census Of India.' -- with 2011 named repeatedly alongside 2001/1991/1981 rounds.",
+      "evidenceUrl": "http://dse.bihar.gov.in/New-Publications/Bihar%20Statistics%20%20Hand%20book%202020%20.pdf",
+      "evidenceQuote": "Source:- Census of India -2011 & Previous Year",
+      "targetReport": {
+        "id": "in-census-india",
+        "title": "Census of India",
+        "publisher": "Office of the Registrar General & Census Commissioner, India (Ministry of Home Affairs)",
+        "country": "IN",
+        "jurisdiction_level": "federal",
+        "region": "India",
+        "description": "Decennial population and housing census providing the most comprehensive demographic, social and economic profile of the population. Conducted under the Census Act, 1948. Last completed census was 2011. Census 2021 postponed; Census 2027 announced and under preparation (Houselisting Operations scheduled 2026, Population Enumeration to follow). Primary source for population totals, literacy, workforce, housing and many derived indicators used across the statistical system.",
+        "releases_per_year": 0.1,
+        "domains": [
+          "population",
+          "housing"
+        ],
+        "url": "https://censusindia.gov.in/census.website/en",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch1.json"
+        ],
+        "_jurisdiction_level_original": "national",
+        "_source_kind_original": "official-census",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "dse.bihar.gov.in",
+      "status": 0,
+      "finalUrl": "http://dse.bihar.gov.in/New-Publications/Bihar%20Statistics%20%20Hand%20book%202020%20.pdf",
+      "block": "network",
+      "blockLabel": "curl-6 Could not resolve host: dse.bihar.gov.in",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-6 Could not resolve host: dse.bihar.gov.in"
+    },
+    {
+      "source": "cn-health-statistical-yearbook",
+      "target": "who-icd-10",
+      "file": "brics-g4-2026-08-22.json",
+      "basis": "VERIFIED DIRECTLY, TIER A (National Health Commission's official China Health Statistical Yearbook, 2023 edition, full PDF downloaded and full-text searched). Quote: \"2000 年采用 ICD-9 国际疾病分类统计标准。2002 年起，采用 ICD-10 国际疾病分类统计标准。\" Corroborated by NHC's underlying coding standard GB/T14396-2001, whose own preface states: \"《疾病分类与代码(GB/T14396-2001)》等效采用世界卫生组织《疾病和有关健康问题的国际统计分类（ICD-10）》\" (\"...is equivalent to WHO's ICD-10\"). Edition confirmed: ICD-10 (adopted 2002, superseding ICD-9 used 2000-2001).",
+      "evidenceUrl": "https://www.nhc.gov.cn/mohwsbwstjxxzx/tjtjnj/202501/8193a8edda0f49df80eb5a8ef5e2547c/files/1740022743894_10341.pdf",
+      "targetReport": {
+        "id": "who-icd-10",
+        "title": "International Statistical Classification of Diseases and Related Health Problems, 10th Revision (ICD-10)",
+        "publisher": "World Health Organization (WHO)",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "region": "International",
+        "description": "WHO's international standard diagnostic classification for epidemiology, health management and cause-of-death/morbidity statistics, adopted by the World Health Assembly in 1990 and in effect for member states from 1993 (superseded internationally by ICD-11, effective 2022, though ICD-10 remains in wide concurrent use). China's National Health Commission states in its own China Health Statistical Yearbook: \"2000 年采用 ICD-9 国际疾病分类统计标准。2002 年起，采用 ICD-10 国际疾病分类统计标准。\" (\"In 2000, the ICD-9 international disease-classification statistical standard was adopted; from 2002 onward, the ICD-10 international disease-classification statistical standard has been used.\")",
+        "last_updated": null,
+        "url": "https://www.who.int/standards/classifications/classification-of-diseases",
+        "domains": [
+          "health"
+        ],
+        "kind": "standard"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "nhc.gov.cn",
+      "status": 0,
+      "finalUrl": "https://www.nhc.gov.cn/mohwsbwstjxxzx/tjtjnj/202501/8193a8edda0f49df80eb5a8ef5e2547c/files/1740022743894_10341.pdf",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "cn-ningxia-equalization-transfer-measures",
+      "target": "cn-budget-law",
+      "file": "cn-g2-budget-law-equalization.json",
+      "basis": "VERIFIED DIRECTLY, from the same single sentence as the edge above -- Ningxia's 第一条 names both instruments together: 「…根据《中华人民共和国预算法》及《中央对地方均衡性转移支付办法》，特制定自治区对市县均衡性转移支付办法。」 `cites` rather than `methodology_depends_on` for the same reason as the central measures' own edge to the Budget Law: the statute establishes the transfer-payment system and its equalisation objective but supplies no calculation method. Worth recording that this makes the Budget Law's authority visible at two tiers of government from documents' own text, which is the shape this corpus exists to draw.",
+      "evidenceUrl": "https://czt.nx.gov.cn/xwzx/tzgg/202311/t20231107_4342463.html",
+      "targetReport": {
+        "id": "cn-budget-law",
+        "title": "中华人民共和国预算法 (Budget Law of the People's Republic of China)",
+        "publisher": "全国人民代表大会常务委员会 (Standing Committee of the National People's Congress)",
+        "country": "CN",
+        "jurisdiction_level": "federal",
+        "region": "China",
+        "description": "China's foundational budget statute, and the hub of this entire slice -- four separate documents in this corpus cite it by name in operative voice, which is what promotes it from BRICS/G.1's `deferred` note to a node. Enactment and amendment history, verbatim from the NPC's own page header: 「（1994年3月22日第八届全国人民代表大会第二次会议通过　根据2014年8月31日第十二届全国人民代表大会常务委员会第十次会议《关于修改〈中华人民共和国预算法〉的决定》第一次修正　根据2018年12月29日第十三届全国人民代表大会常务委员会第七次会议《关于修改〈中华人民共和国产品质量法〉等五部法律的决定》第二次修正）」. Commencement, 第一百零一条: 「本法自1995年1月1日起施行。1991年10月21日国务院发布的《国家预算管理条例》同时废止。」 The transfer-payment article, 第十六条, quoted in full because it is the statutory basis the whole Chinese fiscal-transfer chain rests on: 「国家实行财政转移支付制度。财政转移支付应当规范、公平、公开，以推进地区间基本公共服务均等化为主要目标。财政转移支付包括中央对地方的转移支付和地方上级政府对下级政府的转移支付，以为均衡地区间基本财力、由下级政府统筹安排使用的一般性转移支付为主体。按照法律、行政法规和国务院的规定可以设立专项转移支付，用于办理特定事项。建立健全专项转移支付定期评估和退出机制。市场竞争机制能够有效调节的事项不得设立专项转移支付。上级政府在安排专项转移支付时，不得要求下级政府承担配套资金。但是，按照国务院的规定应当由上下级政府共同承担的事项除外。」 (\"The State implements a fiscal transfer payment system … with equalisation of basic public services across regions as the principal objective … with general transfer payments — used to equalise basic fiscal capacity across regions and arranged at the discretion of the lower-level government — as the main body…\"). Also load-bearing for the central/local architecture, 第六条: 「中央一般公共预算包括中央各部门（含直属单位，下同）的预算和中央对地方的税收返还、转移支付预算。…中央一般公共预算支出包括中央本级支出、中央对地方的税收返还和转移支付。」 Fetched TIER A over plain HTTP from the NPC's own portal (HTTPS fails on that host with a ClientHello rejection -- see `_note`); completeness verified by confirming the extracted text runs from 第一条 through 第一百零一条, all 101 articles across 11 chapters.",
+        "cadence_note": "A standing statute, amended rather than reissued (enacted 1994, first amended 2014, second amended 2018) -- the same convention this corpus applies to statutes elsewhere, e.g. `br-lc-62-1989` and `ru-subsistence-minimum-law-134fz`.",
+        "last_updated": null,
+        "url": "http://www.npc.gov.cn/c2/c30834/201905/t20190521_296660.html",
+        "domains": [
+          "fiscal-transfers",
+          "municipal-finance"
+        ],
+        "kind": "instrument"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "czt.nx.gov.cn",
+      "status": 0,
+      "finalUrl": "https://czt.nx.gov.cn/xwzx/tzgg/202311/t20231107_4342463.html",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "ro-ins-ipc",
+      "target": "ro-ins-hbs",
+      "file": "eu-national-chains-2026-08-28.json",
+      "basis": "INS's own IPC methodological notes state: \"Ponderile utilizate pentru calculul IPC sunt obţinute din Ancheta Bugetelor de Familie (ABF)\" (the weights used to calculate the Consumer Price Index are obtained from the Household Budget Survey).",
+      "evidenceUrl": "https://insse.ro/cms/files/statistici/comunicate/ipc/a23/precizari_metodologice_01.pdf",
+      "targetReport": {
+        "id": "ro-ins-hbs",
+        "title": "Ancheta Bugetelor de Familie (ABF) — Household Budget Survey",
+        "publisher": "Institutul Național de Statistică (INS)",
+        "country": "RO",
+        "jurisdiction_level": "federal",
+        "region": "Romania",
+        "description": "Romania's household income-and-expenditure survey, named as the source of the IPC weights by INS's own methodological notes. The European Commission's CROS survey catalogue lists it as \"Ancheta Bugetelor de Familie (ABF)\"; Eurostat's EU-wide HBS metadata states the survey's core purpose across participating countries is that \"The main purpose of this survey at national level is to update the weights of the basket of goods and services used for the calculation of the HICP.\"",
+        "cadence_note": "RECURRING, cadence unconfirmed — not a one-off instrument. INS's own ABF pages (quality report, manual) all failed to load from insse.ro this round. Eurostat's EU-wide HBS metadata describes the harmonised EU round as roughly five-yearly (\"1988, 1994, 1999, 2005, 2010, 2015 and 2020\") with Romania a participant, but that is the EU transmission round, not INS's domestic fieldwork/publication cadence. releases_per_year omitted rather than guessed.",
+        "last_updated": null,
+        "url": "https://cros.ec.europa.eu/topic/ro-family-budget-survey-fbs",
+        "domains": [
+          "living-standards"
+        ],
+        "kind": "instrument"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "insse.ro",
+      "status": 0,
+      "finalUrl": "https://insse.ro/cms/files/statistici/comunicate/ipc/a23/precizari_metodologice_01.pdf",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "in-odisha-economic-survey",
+      "target": "in-state-gsdp-series",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "Odisha Economic Survey is structured around the official GSDP and sectoral estimates produced by the state statistical system.",
+      "evidenceUrl": "https://pc.odisha.gov.in/en/publication/economic-survey-report",
+      "targetReport": {
+        "id": "in-state-gsdp-series",
+        "title": "Gross State Domestic Product (GSDP) series (selected major states)",
+        "publisher": "Respective State Directorates of Economics and Statistics (coordinated with MoSPI)",
+        "country": "IN",
+        "jurisdiction_level": "provincial",
+        "region": "India",
+        "description": "Official annual (and advance/revised) estimates of Gross State Domestic Product and Net State Domestic Product at current and constant prices, compiled by State DES following MoSPI guidelines and SNA concepts. Forms the core regional accounts layer that feeds into national GDP compilation and inter-state comparisons. Covered here for Maharashtra, Uttar Pradesh, Tamil Nadu, Karnataka, Gujarat, West Bengal and Bihar.",
+        "releases_per_year": 1,
+        "domains": [
+          "national-accounts"
+        ],
+        "url": "https://www.mospi.gov.in/",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch3-states.json"
+        ],
+        "_jurisdiction_level_original": "state",
+        "_source_kind_original": "official-release",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "pc.odisha.gov.in",
+      "status": 0,
+      "finalUrl": "https://pc.odisha.gov.in/en/publication/economic-survey-report",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "in-assam-economic-survey",
+      "target": "in-state-gsdp-series",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "Assam Economic Survey analyses the official GSDP estimates produced by the state DES.",
+      "evidenceUrl": "https://des.assam.gov.in/documents-detail/economic-survey",
+      "targetReport": {
+        "id": "in-state-gsdp-series",
+        "title": "Gross State Domestic Product (GSDP) series (selected major states)",
+        "publisher": "Respective State Directorates of Economics and Statistics (coordinated with MoSPI)",
+        "country": "IN",
+        "jurisdiction_level": "provincial",
+        "region": "India",
+        "description": "Official annual (and advance/revised) estimates of Gross State Domestic Product and Net State Domestic Product at current and constant prices, compiled by State DES following MoSPI guidelines and SNA concepts. Forms the core regional accounts layer that feeds into national GDP compilation and inter-state comparisons. Covered here for Maharashtra, Uttar Pradesh, Tamil Nadu, Karnataka, Gujarat, West Bengal and Bihar.",
+        "releases_per_year": 1,
+        "domains": [
+          "national-accounts"
+        ],
+        "url": "https://www.mospi.gov.in/",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch3-states.json"
+        ],
+        "_jurisdiction_level_original": "state",
+        "_source_kind_original": "official-release",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "des.assam.gov.in",
+      "status": 0,
+      "finalUrl": "https://des.assam.gov.in/documents-detail/economic-survey",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "in-railways-yearbook",
+      "target": "in-mospi-national-accounts-statistics",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "Railway traffic, earnings and related operational statistics feed into the transport and storage component of National Accounts and related sectoral estimates.",
+      "evidenceUrl": "https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&id=0,1,304,366,554",
+      "targetReport": {
+        "id": "in-mospi-national-accounts-statistics",
+        "title": "National Accounts Statistics",
+        "publisher": "National Statistics Office, Ministry of Statistics and Programme Implementation",
+        "country": "IN",
+        "jurisdiction_level": "federal",
+        "region": "India",
+        "description": "Annual comprehensive publication presenting detailed estimates of Gross Domestic Product (GDP), Gross Value Added (GVA), consumption, savings, capital formation and related macroeconomic aggregates at current and constant prices. Aligned with the United Nations System of National Accounts (SNA). Includes sectoral breakdowns, institutional sector accounts and time series. The 2025 edition covers Final Estimates for FY 2022-23 and First Revised Estimates for FY 2023-24 (2011-12 series at the time of that release). Base-year revision to 2022-23 underway with new series release targeted for early 2026.",
+        "releases_per_year": 1,
+        "domains": [
+          "national-accounts"
+        ],
+        "url": "https://mospi.gov.in/publication/national-accounts-statistics-2025",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch1.json"
+        ],
+        "_jurisdiction_level_original": "national",
+        "_source_kind_original": "official-publication",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "indianrailways.gov.in",
+      "status": 0,
+      "finalUrl": "https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&id=0,1,304,366,554",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "in-mod-annual-report",
+      "target": "in-defence-services-estimates",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "Ministry of Defence Annual Report presents and contextualises the expenditure figures contained in the Defence Services Estimates / Union Budget defence demands.",
+      "evidenceUrl": "https://www.mod.gov.in/en/annual-report-archive",
+      "targetReport": {
+        "id": "in-defence-services-estimates",
+        "title": "Defence Services Estimates / Union Budget – Defence",
+        "publisher": "Ministry of Defence / Ministry of Finance (Budget Division)",
+        "country": "IN",
+        "jurisdiction_level": "federal",
+        "region": "India",
+        "description": "Annual Defence Services Estimates and the defence demand of the Union Budget providing the official quantitative presentation of defence expenditure (revenue and capital), pensions, and MoD (Civil) outlays. Forms the primary public statistical record of India’s defence budget.",
+        "releases_per_year": 1,
+        "domains": [
+          "governance",
+          "public-finance"
+        ],
+        "url": "https://www.mod.gov.in/",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch7-defence-regional-municipal.json"
+        ],
+        "_jurisdiction_level_original": "national",
+        "_source_kind_original": "official-release",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "mod.gov.in",
+      "status": 0,
+      "finalUrl": "https://www.mod.gov.in/en/annual-report-archive",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "in-chhattisgarh-economic-survey",
+      "target": "in-state-gsdp-series",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "Chhattisgarh Economic Survey is structured around the official state domestic product series.",
+      "evidenceUrl": "https://descg.gov.in/en/Economic-Survey.aspx",
+      "targetReport": {
+        "id": "in-state-gsdp-series",
+        "title": "Gross State Domestic Product (GSDP) series (selected major states)",
+        "publisher": "Respective State Directorates of Economics and Statistics (coordinated with MoSPI)",
+        "country": "IN",
+        "jurisdiction_level": "provincial",
+        "region": "India",
+        "description": "Official annual (and advance/revised) estimates of Gross State Domestic Product and Net State Domestic Product at current and constant prices, compiled by State DES following MoSPI guidelines and SNA concepts. Forms the core regional accounts layer that feeds into national GDP compilation and inter-state comparisons. Covered here for Maharashtra, Uttar Pradesh, Tamil Nadu, Karnataka, Gujarat, West Bengal and Bihar.",
+        "releases_per_year": 1,
+        "domains": [
+          "national-accounts"
+        ],
+        "url": "https://www.mospi.gov.in/",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch3-states.json"
+        ],
+        "_jurisdiction_level_original": "state",
+        "_source_kind_original": "official-release",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "descg.gov.in",
+      "status": 0,
+      "finalUrl": "https://descg.gov.in/en/Economic-Survey.aspx",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "in-surat-district-stats",
+      "target": "in-gujarat-socio-economic-review",
+      "file": "in-india-grok-2026-08.json",
+      "basis": "Surat district statistics appear within the Gujarat DES state-level statistical products.",
+      "evidenceUrl": "https://gujecostat.gujarat.gov.in/surat",
+      "targetReport": {
+        "id": "in-gujarat-socio-economic-review",
+        "title": "Socio-Economic Review Gujarat State",
+        "publisher": "Directorate of Economics and Statistics, Government of Gujarat",
+        "country": "IN",
+        "jurisdiction_level": "provincial",
+        "region": "Gujarat",
+        "description": "Annual budget-linked publication (Budget Publication series) reviewing the socio-economic performance of Gujarat. Covers state and Indian economy overview, population, agriculture, industries, infrastructure, social sectors, prices and public finance, with extensive statistical statements.",
+        "releases_per_year": 1,
+        "domains": [
+          "national-accounts"
+        ],
+        "url": "https://gujecostat.gujarat.gov.in/",
+        "source_kind": "official",
+        "_batch": [
+          "2026-08-17_India-domestic-batch3-states.json"
+        ],
+        "_jurisdiction_level_original": "state",
+        "_source_kind_original": "official-publication",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "gujecostat.gujarat.gov.in",
+      "status": 0,
+      "finalUrl": "https://gujecostat.gujarat.gov.in/surat",
+      "block": "network",
+      "blockLabel": "curl-28 SSL connection timeout",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-28 SSL connection timeout"
+    },
+    {
+      "source": "kr-financial-stability",
+      "target": "bis-basel-framework",
+      "file": "kr-unlinked-wiring-2026-08-29.json",
+      "basis": "UPDATE 2026-08-29 (Grok follow-up, raw-verified by the orchestrating session — the same signed bok.or.kr fileDown.do URL that failed for the prior agent succeeded on retry: 281,837 bytes, byte-identical to Grok's reported size). BOK's own Financial Stability Report (June 2024), appendix \"참고 7. 주요국의 바젤Ⅲ 최종안 도입 현황 및 시사점\" (Reference 7: Status and Implications of Major Countries' Basel III Final Package Adoption), states: \"바젤은행감독위원회(BCBS)가 2017년 12월 발표한 바젤Ⅲ 최종안(잔여규제 개혁안)의 이행시기(2023년 1월)가 지난 가운데 미국, 유럽연합 등 주요국의 바젤Ⅲ 도입 작업이 진행 중이다. 우리나라를 포함한 일부 회원국은 이미 바젤Ⅲ 최종안을 도입･시행 중이나...\" (\"...Korea, among other member states, has already adopted and is implementing the Basel III final package...\") and \"2023년 11월 기준 BCBS 회원국(27개) 중 캐나다, 중국, 인도네시아, 일본, 한국, 사우디아라비아 등 6개국이 바젤Ⅲ 최종안 도입을 완료하였다\" (\"as of Nov 2023, 6 of 27 BCBS members — including Korea — have completed Basel III final-package adoption\"). This is BOK's own Financial Stability Report describing Korea's completed Basel III implementation as the basis for the bank-resilience chapter's assessment.",
+      "evidenceUrl": "https://www.bok.or.kr/portal/cmmn/file/fileDown.do?atchFileId=237727637c9f40bfadbac0b2d0a401fb&fileSn=5",
+      "targetReport": {
+        "id": "bis-basel-framework",
+        "title": "Basel Framework",
+        "publisher": "Basel Committee on Banking Supervision, Bank for International Settlements",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "region": "International",
+        "description": "The consolidated international standard for bank capital, liquidity and risk measurement, maintained by the Basel Committee and published by the BIS. Not law anywhere; adopted into binding national rules by member jurisdictions, which is why national capital guidelines carry Basel paragraph numbers in their margins.",
+        "releases_per_year": 1,
+        "cadence_note": "Maintained as a living consolidated framework with dated amendments rather than issued editions. Filed as annual for the same reason SNA 2008 is — the enum has no bucket for a standard.",
+        "release_schedule": {
+          "kind": "irregular",
+          "entries": [],
+          "note": "The Basel Framework is a continuously maintained online consolidated compilation of Basel Committee standards (bis.org/basel_framework/), not a periodic report. It is updated on a rolling basis whenever the Basel Committee finalizes new standards or amendments (e.g., individual chapters carry their own 'Version effective as of' dates, such as the cryptoasset exposures chapter SCO60 effective 1 January 2026). No fixed annual or periodic release calendar or stated rule for the whole document was found; BIS also maintains a 'time traveller' tool showing already-announced future effective dates for specific chapters, but this is not a fixed recurring publication schedule for the framework as a whole.",
+          "source_url": "https://www.bis.org/basel_framework/"
+        },
+        "last_updated": null,
+        "url": "https://www.bis.org/basel_framework/",
+        "domains": [
+          "financial-regulation",
+          "banking"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "bok.or.kr",
+      "status": 0,
+      "finalUrl": "https://www.bok.or.kr/portal/cmmn/file/fileDown.do?atchFileId=237727637c9f40bfadbac0b2d0a401fb&fileSn=5",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "mx-alcaldia-gustavo-a-madero",
+      "target": "mx-censo-poblacion",
+      "file": "mx-unlinked-wiring-2026-08-28.json",
+      "basis": "IPDP CDMX \"Panorama Geografico y Estadistico — Gustavo A. Madero\": \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI] (2020,2010,2000,1990). Censos de Poblacion y Vivienda.\"",
+      "evidenceUrl": "https://ipdp.cdmx.gob.mx/storage/app/uploads/public/670/46b/e47/67046be479c52932499628.pdf",
+      "targetReport": {
+        "title": "Censo de Población y Vivienda / Population and Housing Census",
+        "publisher": "INEGI",
+        "jurisdiction_level": "federal",
+        "releases_per_year": 0.1,
+        "id": "mx-censo-poblacion",
+        "country": "MX",
+        "description": "Decennial population and housing census (years ending in 0). Most complete demographic and social data source. Intermediate counts / intercensal surveys also exist historically.",
+        "_batch": [
+          "2026-08-13_Mexico-batch1.json",
+          "2026-08-13_Mexico-batch2.json"
+        ],
+        "_variants": [
+          {
+            "_batch": "2026-08-13_Mexico-batch2.json",
+            "description": "Decennial population and housing census (years ending in 0). Most complete basic source for demographic and social data. Intermediate counts (1995, 2005) and intercensal surveys have also been conducted. Explicitly declared Information of National Interest under the LSNIEG.",
+            "domains": [
+              "population",
+              "housing",
+              "demography"
+            ],
+            "evidence_for_recurrence": null,
+            "notes": "High-authority, low-frequency node. Legal grounding is standard across census methodology documents.\n\nContextual quote (Censo 2010 Síntesis metodológica):\n\"El Instituto Nacional de Estadística y Geografía (INEGI), con fundamento en lo dispuesto por la Constitución Política de los Estados Unidos Mexicanos en su Artículo 26, apartado B, y en el ejercicio de las atribuciones que la Ley del Sistema Nacional de Información Estadística y Geográfica le confiere, realizó el Censo de Población y Vivienda 2010. ... en la mencionada ley se declara que la información de los censos nacionales es de interés nacional, por lo que en su artículo 59 confiere al INEGI la realización de los mismos.\"",
+            "priority": null,
+            "proposed_edges": null,
+            "region": "Mexico",
+            "url": "https://www.inegi.org.mx/programas/ccpv/",
+            "why_qualifies": null
+          }
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Classic high-authority, low-frequency node. Fractional releases_per_year = 0.1.",
+        "_why_qualifies": "Decennial population and housing census (years ending in 0). Most complete demographic and social data source. Intermediate counts / intercensal surveys also exist historically.",
+        "_evidence_for_recurrence": [],
+        "_priority": "high",
+        "domains": [
+          "population"
+        ],
+        "region": "Mexico",
+        "last_updated": null,
+        "url": "https://www.inegi.org.mx/programas/ccpv/2020/",
+        "_url_evidence": "INEGI program page for 'Censo de Población y Vivienda 2020', offering data on population size/composition/distribution, households and housing units (the latest edition of the decennial census series).",
+        "_domains_note": "Assigned from the publication itself — this node arrived with no domains key at all (legacy proposed_id record).",
+        "_variants_reviewed": "2026-08-18: reviewed, no change. The kept record was the better of the two — differences were a vaguer title, a publisher abbreviation, a less specific URL, or an identical value.",
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "ipdp.cdmx.gob.mx",
+      "status": 0,
+      "finalUrl": "https://ipdp.cdmx.gob.mx/storage/app/uploads/public/670/46b/e47/67046be479c52932499628.pdf",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "mx-alcaldia-gustavo-a-madero",
+      "target": "mx-denue",
+      "file": "mx-unlinked-wiring-2026-08-28.json",
+      "basis": "Same IPDP CDMX Gustavo A. Madero document, economic-units-location figure footnote: \"Fuente: Instituto Nacional de Estadistica y Geografia [INEGI] (2022). Directorio Estadistico Nacional de Unidades Economicas [DENUE]\"",
+      "evidenceUrl": "https://ipdp.cdmx.gob.mx/storage/app/uploads/public/670/46b/e47/67046be479c52932499628.pdf",
+      "targetReport": {
+        "id": "mx-denue",
+        "title": "Directorio Estadístico Nacional de Unidades Económicas (DENUE) / National Statistical Directory of Economic Units",
+        "publisher": "INEGI",
+        "country": "MX",
+        "jurisdiction_level": "federal",
+        "region": "Mexico",
+        "description": "Statistical directory of economic units (establishments) with location, activity (SCIAN), size and other identifying variables. Updated periodically; used as sampling frame and public business-location resource. Methodological documents accompany each major update.",
+        "releases_per_year": 1,
+        "url": "https://www.inegi.org.mx/app/mapa/denue/",
+        "domains": [
+          "proposed:business-register",
+          "proposed:economic-structure"
+        ],
+        "_batch": [
+          "2026-08-13_Mexico-batch6.json"
+        ],
+        "_shape": "own-cadence",
+        "_notes": "Foundational business-frame product. Supports design of establishment surveys (EMIM, EMEC, EMS, ENEC, etc.) and is itself a disseminated statistical product with methodological documentation (e.g. 2026 update).",
+        "last_updated": null,
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "ipdp.cdmx.gob.mx",
+      "status": 0,
+      "finalUrl": "https://ipdp.cdmx.gob.mx/storage/app/uploads/public/670/46b/e47/67046be479c52932499628.pdf",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    },
+    {
+      "source": "nz-statsnz-regional-gdp",
+      "target": "nz-statsnz-aes",
+      "file": "nz-statsnz-national-accounts.json",
+      "basis": "VERIFIED DIRECTLY (Stats NZ's own Regional GDP introduction page, fetched from archive.stats.govt.nz 2026-08-07): \"Regional GDP statistics are derived by industry using data from the annual enterprise survey (AES), Linked Employer-Employee Data (LEED), Crown Financial Information System, and the Local Authority Census.\" Corroborated from the input side by the AES DataInfo+ metadata (fetched this session), which names \"Regional Gross Domestic Product (GDP)\" by title among the outputs the AES is a data source for.",
+      "evidenceUrl": "http://archive.stats.govt.nz/browse_for_stats/economic_indicators/NationalAccounts/intro-regional-gdp.aspx",
+      "targetReport": {
+        "id": "nz-statsnz-aes",
+        "title": "Annual Enterprise Survey",
+        "publisher": "Stats NZ (Tatauranga Aotearoa)",
+        "country": "NZ",
+        "jurisdiction_level": "federal",
+        "region": "New Zealand",
+        "description": "Stats NZ's annual financial-performance and financial-position survey of New Zealand businesses, running since the 1985/86 survey year and covering, on its own account, around 80% of GDP. The New Zealand end of the ANZSIC bridge. Its DataInfo+ metadata is unusually forthcoming about its own downstream use — it names the national accounts, the Tourism Satellite Account, the Non-profit Institutions Satellite Account, Business Price Indexes and Regional GDP as consumers — which makes it a promising source node for a later Stats NZ pass; see `_dropped`.",
+        "releases_per_year": 1,
+        "release_schedule": {
+          "kind": "observed-pattern",
+          "entries": [
+            {
+              "from": "2027-06-01",
+              "to": "2027-06-30",
+              "precision": "month",
+              "covers": "Annual Enterprise Survey: 2026 financial year (provisional)",
+              "evidence": "implied"
+            }
+          ],
+          "note": "Stats NZ does not publish a fixed release-calendar date far in advance for AES, but the provisional AES release has landed consistently in late June for the past three years: 2023 FY (provisional) released 1 Jul 2024, 2024 FY (provisional) released 27 Jun 2025, and 2025 FY (provisional) released 25 Jun 2026. Based on this pattern the 2026 FY (provisional) release is projected for late June 2027; a final (non-provisional) AES release also follows later in the year but no consistent date pattern was found for it.",
+          "source_url": "https://www.stats.govt.nz/information-releases/annual-enterprise-survey-2025-financial-year-provisional/"
+        },
+        "last_updated": null,
+        "url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/36809771-984d-4e6b-89a1-576f2118b05b",
+        "domains": [
+          "national-accounts"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "archive.stats.govt.nz",
+      "status": 0,
+      "finalUrl": "http://archive.stats.govt.nz/browse_for_stats/economic_indicators/NationalAccounts/intro-regional-gdp.aspx",
+      "block": "network",
+      "blockLabel": "curl-6 Could not resolve host: archive.stats.govt.nz",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-6 Could not resolve host: archive.stats.govt.nz"
+    },
+    {
+      "source": "nz-statsnz-regional-gdp",
+      "target": "nz-statsnz-lac",
+      "file": "nz-statsnz-national-accounts.json",
+      "basis": "VERIFIED DIRECTLY (same page and fetch as the AES edge): \"Regional GDP statistics are derived by industry using data from the annual enterprise survey (AES), Linked Employer-Employee Data (LEED), Crown Financial Information System, and the Local Authority Census.\" The Local Authority Census is named as a compilation input in the same sentence as the AES; nz-statsnz-lac is the existing corpus node for that census and the Local Authority Financial Statistics compiled from it.",
+      "evidenceUrl": "http://archive.stats.govt.nz/browse_for_stats/economic_indicators/NationalAccounts/intro-regional-gdp.aspx",
+      "targetReport": {
+        "id": "nz-statsnz-lac",
+        "title": "Local Authority Census / Local Authority Financial Statistics",
+        "publisher": "Stats NZ (Tatauranga Aotearoa)",
+        "country": "NZ",
+        "jurisdiction_level": "federal",
+        "region": "New Zealand",
+        "description": "The annual census of all city, district and regional councils and their non-market council-controlled organisations, and the Local Authority Financial Statistics (LAFS) compiled from it — the more comprehensive, less timely annual counterpart to QLAS. Stats NZ's own metadata states that LAFS is 'no longer published in the information release format used for 2009-13' and directs users to Infoshare instead, so the release exists as a data update rather than as a titled information release; kept as one node for that reason.",
+        "releases_per_year": 1,
+        "cadence_note": "Annual, released around May for the June year ending 11 months earlier. Distributed via Infoshare rather than as a titled information release since the 2009-13 series ended.",
+        "release_schedule": {
+          "kind": "observed-pattern",
+          "entries": [
+            {
+              "from": "2024-05-13",
+              "to": "2024-05-13",
+              "precision": "day",
+              "covers": "Year ended June 2023",
+              "evidence": "implied"
+            },
+            {
+              "from": "2025-05-26",
+              "to": "2025-05-26",
+              "precision": "day",
+              "covers": "Year ended June 2024",
+              "evidence": "implied"
+            },
+            {
+              "from": "2026-05-26",
+              "to": "2026-05-26",
+              "precision": "day",
+              "covers": "Year ended June 2025",
+              "evidence": "implied"
+            },
+            {
+              "from": "2027-05-01",
+              "to": "2027-05-31",
+              "precision": "month",
+              "covers": "Year ended June 2026",
+              "evidence": "implied"
+            }
+          ],
+          "note": "Stats NZ publishes 'Local authority financial statistics' (formerly 'Local Authority Census') annually. No published forward release calendar entry was found for this specific release, but three consecutive years show a consistent pattern: released in mid-to-late May, covering the local government financial year ended the preceding 30 June (roughly an 11-month lag). Projected next release (Year ended June 2026 data) is therefore expected around May 2027; exact day not yet published.",
+          "source_url": "https://www.stats.govt.nz/information-releases/local-authority-financial-statistics-year-ended-june-2025/"
+        },
+        "last_updated": null,
+        "url": "https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/9a6701e3-f1d3-4480-b879-5eea7716979b/101",
+        "domains": [
+          "municipal-finance"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "archive.stats.govt.nz",
+      "status": 0,
+      "finalUrl": "http://archive.stats.govt.nz/browse_for_stats/economic_indicators/NationalAccounts/intro-regional-gdp.aspx",
+      "block": "network",
+      "blockLabel": "curl-6 Could not resolve host: archive.stats.govt.nz",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-6 Could not resolve host: archive.stats.govt.nz"
+    },
+    {
+      "source": "ru-minfin-prikaz-128n-gfs-procedure",
+      "target": "imf-sdds",
+      "file": "ru-g3-international-standards.json",
+      "basis": "VERIFIED DIRECTLY, TIER A, and structurally the strongest dependency in the Russian branch even though it is typed conservatively. The SDDS appears in the ENABLING PREAMBLE of a numbered, Minjust-registered Minfin order -- part of the legal authority under which the government-finance-statistics procedure is issued, not a methodological reference: «…постановления Правительства Российской Федерации от 26 сентября 1997 г. № 1226 \"О присоединении Российской Федерации к Специальному стандарту распространения данных МВФ\" …, в целях совершенствования методологии формирования информации по статистике государственных финансов п р и к а з ы в а ю:». The standard's full Russian name appears verbatim in the order's own text, so the requirement that the dependent document name the standard itself is satisfied, even though the immediate instrument cited is the 1997 Government Resolution effecting accession. `cites` rather than `methodology_depends_on` DELIBERATELY: the SDDS here supplies legal authority and a transmission obligation (the Порядок §22 requires Treasury transmission «в Международный валютный фонд» on a fixed timetable), while the compilation METHOD the order actually prescribes is described only by unversioned reference to «руководствами по распространению (раскрытию) данных» -- so a methodology-typed edge would overstate what this document says. A TENSE/EVENT NOTE worth preserving: Постановление № 1226 is dated 1997 while Rosstat's GDP procedure gives Russia's SDDS accession as 31 January 2005. These are two different events -- the 1997 resolution authorises accession, 2005 is the subscription date -- and they are not contradictory.",
+      "evidenceUrl": "https://minfin.gov.ru/common/upload/library/2021/12/main/Poryadok_128n.pdf",
+      "targetReport": {
+        "id": "imf-sdds",
+        "title": "IMF Special Data Dissemination Standard (SDDS)",
+        "publisher": "International Monetary Fund",
+        "country": "INT",
+        "jurisdiction_level": "international",
+        "region": "International",
+        "description": "The IMF's voluntary standard for the coverage, periodicity, timeliness and advance-release-calendar practices of a country's official statistics. A parallel edge for Canada (`statcan-cpi -> imf-sdds-plus`, the stricter SDDS Plus tier) was scoped and dropped in `international-frameworks.json` for lack of national-side evidence -- every document naming the obligation was IMF-side, none from StatCan itself. South Africa has the national-side evidence Canada's case lacked: Stats SA's own CPI Sources and Methods report states plainly, 'The South African CPI complies with the IMF Special Data Dissemination Standard (SDDS)' -- the plain SDDS tier, not SDDS Plus, and not independently checked against South Africa's actual IMF DSBB country page this session (that page's landing view did not surface country-specific content when fetched directly).",
+        "releases_per_year": 0.06,
+        "cadence_note": "Standard itself revised rarely; not an annual release.",
+        "release_schedule": {
+          "kind": "irregular",
+          "entries": [],
+          "source_url": "https://dsbb.imf.org/sdds/overview",
+          "note": "Framework reviewed 'at intervals determined by the Executive Board' — no fixed periodicity. Last review concluded 2022-03-16 per the IMF's own site. This report's own url field previously pointed to a Statistics South Africa PDF with no connection to the IMF — corrected here to the DSBB SDDS overview page. (Note: the za-statssa-cpi -> imf-sdds edge's evidence_url, the same statssa PDF, is left as-is — that citation is correct evidence for that specific edge's claim.)"
+        },
+        "last_updated": null,
+        "url": "https://dsbb.imf.org/sdds/overview",
+        "domains": [
+          "inflation"
+        ],
+        "kind": "standard"
+      },
+      "weakFlags": [],
+      "direction": "unchecked",
+      "host": "minfin.gov.ru",
+      "status": 200,
+      "finalUrl": "https://minfin.gov.ru/common/upload/library/2021/12/main/Poryadok_128n.pdf",
+      "block": "empty",
+      "blockLabel": "tiny-body",
+      "textChars": 15,
+      "extractor": "pdftotext",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "empty:tiny-body"
+    },
+    {
+      "source": "za-nt-mfma-circular-cpi-guidance",
+      "target": "za-statssa-cpi",
+      "file": "za-joburg-municipal-finance.json",
+      "basis": "The circular's macroeconomic table sources CPI Inflation forecasts to 'National Treasury Budget Review 2025,' and the companion circular states 'The Consumer Price Index (CPI) inflation is forecasted to be 4.4 per cent' as the benchmark municipalities must justify against. Flagged as an indirect (Budget Review-mediated) rather than direct-quoted StatsSA link within the circular text itself.",
+      "evidenceUrl": "https://resource.capetown.gov.za/documentcentre/Documents/Financial%20documents/Budget-2026-27_Ann39.pdf",
+      "targetReport": {
+        "id": "za-statssa-cpi",
+        "title": "Consumer Price Index (P0141)",
+        "publisher": "Statistics South Africa (Stats SA)",
+        "country": "ZA",
+        "jurisdiction_level": "federal",
+        "region": "South Africa",
+        "description": "South Africa's official monthly CPI, published as statistical release P0141. VERIFIED DIRECTLY: the June 2026 edition (embargoed until 22 July 2026, released under the standard P0141 numbering) was fetched and read at source. Its own key findings: 'Annual consumer price inflation was 5,0% in June 2026, up from 4,5% in May 2026. The CPI increased by 0,7% month-on-month in June 2026' -- matching the figures in the Africa research file exactly, confirming the file's citation was accurate for this entry even though it was not independently checked before this session.",
+        "releases_per_year": 12,
+        "release_schedule": {
+          "kind": "published-calendar",
+          "source_url": "https://www.statssa.gov.za/?page_id=2643&PPN=P0141&SCH=74468",
+          "entries": [
+            {
+              "from": "2026-08-19",
+              "to": "2026-08-19",
+              "precision": "day",
+              "covers": "July 2026 CPI",
+              "evidence": "documented"
+            },
+            {
+              "from": "2026-09-23",
+              "to": "2026-09-23",
+              "precision": "day",
+              "covers": "August 2026 CPI",
+              "evidence": "documented"
+            },
+            {
+              "from": "2026-10-21",
+              "to": "2026-10-21",
+              "precision": "day",
+              "covers": "September 2026 CPI",
+              "evidence": "documented"
+            }
+          ],
+          "note": "Stats SA publishes CPI monthly on a Wednesday at 10:00, roughly three weeks after month-end, via its advance schedule page (accessible from the P0141 publication page at https://www.statssa.gov.za/?page_id=1854&PPN=P0141)."
+        },
+        "last_updated": "2026-07-22",
+        "url": "https://www.statssa.gov.za/publications/P0141/P0141June2026.pdf",
+        "domains": [
+          "inflation"
+        ],
+        "kind": "publication"
+      },
+      "weakFlags": [
+        "no-quoted-span"
+      ],
+      "direction": "unchecked",
+      "host": "resource.capetown.gov.za",
+      "status": 0,
+      "finalUrl": "https://resource.capetown.gov.za/documentcentre/Documents/Financial%20documents/Budget-2026-27_Ann39.pdf",
+      "block": "network",
+      "blockLabel": "curl-35 Recv failure: Connection reset by peer",
+      "textChars": 0,
+      "extractor": "none",
+      "via": "",
+      "quote": "no",
+      "coverage": 0,
+      "bestSpan": "",
+      "naming": "n-a",
+      "window": "",
+      "grade": "C",
+      "reason": "network:curl-35 Recv failure: Connection reset by peer"
+    }
+  ]
+}
