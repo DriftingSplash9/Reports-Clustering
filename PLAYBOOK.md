@@ -885,6 +885,38 @@ country/file/round, not a single site's own one-off quirk.
 
 ---
 
+- **A node's TITLE is a matcher input, not just a label — keep it short enough
+  to be matched** (2026-09-04, minting `basel-iii`). `namesTarget`'s title-run
+  rule needs a contiguous run of **≥60% of the title's words**, and the
+  title-lead fallback needs **≥3** words before the first dash/comma/colon. BIS
+  titles the page "Basel III: international regulatory framework for banks";
+  had the node carried it, every document that names the standard correctly
+  would score 2/6 = 33% and fail the naming test, and the lead path would miss
+  too because "Basel III" is two words. The node is titled `Basel III`. This
+  does not license inventing titles — §7's "a node carries the publisher's own
+  title" still holds, and the short form here is BIS's own name for the
+  standard in its body text. But when a publisher offers both a short name and
+  a long descriptive one, **check the run arithmetic before choosing**, because
+  a long title fails silently and looks like missing evidence.
+- **`normalizeForMatch` runs NFKD, so Unicode numeral and ligature forms fold
+  into ASCII** — `Ⅲ` (U+2162) becomes `III`, and `바젤Ⅲ` normalizes to the single
+  token `바젤iii`. Useful, and a trap: `tokenise` splits on non-`\p{L}\p{N}`,
+  Hangul and Latin are both `\p{L}`, so there is no split and the ≥2-word run
+  rule can never fire on it. The single-token escape hatch does not help
+  either — it reads only `target.title` (never `title_aliases`) and its class
+  `/[぀-ヿ㐀-鿿]/` **excludes Hangul entirely**. Korean is currently outside the
+  naming test by both doors. Measure before changing it; the fix is proposed in
+  `notes/basel-iii-round-2026-09-04.md`, not applied.
+- **The A bar anchors on `bestSpan` only, so a basis that also quotes the
+  document's own headline can grade itself down.** `frb-regulation-q`: coverage
+  1.00, naming true, still B. Its basis quotes the press release title (lands at
+  index 26 — page chrome) and the substantive sentence (index 8470, with the
+  artefact named 49 characters away); both score 1.00, the tie breaks to the
+  first, and the ±400 window is navigation. Suspect this whenever you see
+  `artefact-named-elsewhere-in-document` on an edge whose quote visibly
+  contains the target's name. **Do not fix it by trimming the basis** — that is
+  grade-motivated editing of an evidence record, and it hides the defect.
+
 ## 7. Standing decisions — do not re-raise
 
 **Bar for adding to this section: a rule that will change how a FUTURE
