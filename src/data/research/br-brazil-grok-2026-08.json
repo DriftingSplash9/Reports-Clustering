@@ -1701,6 +1701,24 @@
       "_source_kind_original": "official-contribution",
       "last_updated": null,
       "kind": "publication"
+    },
+    {
+      "id": "br-ibge-cnae",
+      "title": "Classificação Nacional de Atividades Econômicas (CNAE) — National Classification of Economic Activities",
+      "publisher": "Instituto Brasileiro de Geografia e Estatística (IBGE) / CONCLA",
+      "country": "BR",
+      "jurisdiction_level": "federal",
+      "region": "Brazil",
+      "description": "Brazil's official industrial/economic-activity classification, managed by IBGE's CONCLA (Comissão Nacional de Classificação) and used as the sampling and tabulation frame by every IBGE structural business survey (PIM-PF, PIA-Empresa, PIA-Produto, PAS, PAC, PMC and others). First published 1994; CNAE 2.0 (2007) is the current statistical-purposes version, with CNAE-Subclasses revised periodically for public-administration use (2.1 2010, 2.2 2015, 2.3 2019) without changing the underlying statistical classification. Minted 2026-09-04 (Thomas's ruling on HANDOFF item 3) to fix a chained-two-hop problem: nine br-ibge-* survey edges cited this page as evidence that their survey depends on ISIC, but the page never names the individual survey -- it only carries the CNAE<->ISIC synchronisation statement. Splitting the claim into survey -> CNAE (each survey's own page, quoted) and CNAE -> ISIC (this page, quoted) closes both hops honestly.",
+      "releases_per_year": 0.05,
+      "cadence_note": "CNAE 2.0 (the statistical-purposes classification) has not changed since 2007; only the public-administration CNAE-Subclasses derivative has had periodic revisions (2.1/2.2/2.3). releases_per_year is nominal, matching the convention used for isic and other slow-revision standards in this corpus.",
+      "last_updated": null,
+      "url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
+      "domains": [
+        "statistical-system",
+        "industry"
+      ],
+      "kind": "standard"
     }
   ],
   "dependencies": [
@@ -2121,6 +2139,15 @@
         "2026-08-17_Brazil-domestic-batch7-residual.json"
       ],
       "evidence_grade": "C"
+    },
+    {
+      "source_report_id": "br-ibge-cnae",
+      "target_report_id": "isic",
+      "relationship_type": "methodology_depends_on",
+      "basis": "Verified live in Chrome, 2026-09-04 (this session; the host 403s to plain curl from both the cloud sandbox and the bridge VM -- a Chrome read of the cited URL, per Thomas's 2026-09-04 ruling that a Chrome read of the cited page grades as a direct read). CNAE's own page, under its edition-history section, states plainly that CNAE 2.0 was synchronised with ISIC Revision 4 and is referred to in IBGE's own publications as CIIU/ISIC 4 from that point on. This is the second hop that the nine br-ibge-* -> isic edges refused this round (browser pass round 2) were missing: those edges' basis already established survey -> CNAE from each survey's own page, but no single document carried both hops. Splitting the claim in two here.",
+      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
+      "evidence_grade": "A",
+      "evidence_quote": "sincronizada com as alterações introduzidas na Revisão 4 da Clasificación Industrial Internacional Uniforme de Todas las Actividades Económicas - CIIU (International Standard Industrial Classification of All Economic Activities - ISIC), doravante referida nesta publicação como CIIU/ISIC 4."
     }
   ],
   "_dropped": [

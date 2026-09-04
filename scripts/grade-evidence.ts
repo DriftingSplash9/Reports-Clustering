@@ -881,7 +881,8 @@ export function snapshotRescuable(block: Block): boolean {
 
 /**
  * **Which routes weaken the claim, and which do not** (Thomas, 2026-09-04,
- * ruling on the Claude-in-Chrome browser pass).
+ * ruling on the Claude-in-Chrome browser pass; OCR cap added 2026-09-04,
+ * same session, HANDOFF item 4).
  *
  * An archived snapshot says "this quote was in this document on <timestamp>" —
  * a copy, on some past date — so it caps at B. A read taken in Thomas's own
@@ -891,11 +892,19 @@ export function snapshotRescuable(block: Block): boolean {
  * about the fetcher, not about the document, so a Chrome read grades as the
  * direct read it is.
  *
+ * An OCR read is the opposite case, and caps for the same reason a wayback
+ * read does rather than the reason it doesn't: tesseract output is not the
+ * document's own text layer, it's a statistical reconstruction of it, and the
+ * three edges graded A this way (Benin, Angola, Gambia; browser pass round 2)
+ * carried visible OCR damage. `via: ocr ...` is written for every OCR-sourced
+ * fulltext (PLAYBOOK: "record the route as `via: ocr tesseract <date>`"), so
+ * capping on the `ocr` prefix catches all of them the same way `wayback` does.
+ *
  * `via` is still recorded either way, and the committed evidence record carries
  * it, because a reader must always be able to see where the bytes came from.
  */
 export function routeCapsGrade(via: string): boolean {
-  return via.startsWith('wayback')
+  return via.startsWith('wayback') || via.startsWith('ocr')
 }
 
 /**
@@ -1525,8 +1534,9 @@ function selftest(): void {
   )
   t('a document read in a real browser grades as the direct read it is',
     chromeGraded.grade === 'A' && chromeGraded.reason === 'quote-found-artefact-named')
-  t('only an archived-snapshot route caps the grade',
-    routeCapsGrade('wayback 20250908003713') && !routeCapsGrade('chrome 2026-09-04') && !routeCapsGrade(''))
+  t('a wayback or OCR route caps the grade; a Chrome or direct read does not',
+    routeCapsGrade('wayback 20250908003713') && routeCapsGrade('ocr tesseract 2026-09-04') &&
+    !routeCapsGrade('chrome 2026-09-04') && !routeCapsGrade(''))
   t('curl -w status is split off the body, not left in it',
     splitCurlWrite('{"a":1}\n429').code === 429 && splitCurlWrite('{"a":1}\n429').body === '{"a":1}')
   t('a body with no trailing status is never read as a conclusive status',

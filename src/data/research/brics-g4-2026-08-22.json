@@ -129,43 +129,48 @@
   "dependencies": [
     {
       "source_report_id": "br-ibge-pim-pf",
-      "target_report_id": "isic",
+      "target_report_id": "br-ibge-cnae",
       "relationship_type": "methodology_depends_on",
-      "basis": "VERIFIED DIRECTLY, TIER A. PIM-PF's own page states its survey population is \"compreendidas nas seções B e C ... da Classificação Nacional de Atividades Econômicas - CNAE 2.0\"; IBGE/Concla's own CNAE documentation states CNAE 2.0 was \"synchronized with the alterations introduced in Revision 4 of the [ISIC]... doravante referred to in this publication as CIIU/ISIC 4.\" Edition: ISIC Rev. 4.",
-      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
-      "evidence_grade": "C"
+      "basis": "PIM-PF's own page states its surveyed population directly in CNAE 2.0 terms. Retargeted 2026-09-04 (Thomas's ruling on HANDOFF item 3): the isic edge was refused in browser pass round 2 as chained-two-hop (this survey's own page states CNAE 2.0 adoption, but the CNAE page cited for the ISIC link never names the survey -- one document cannot carry both hops). Re-pointed at the new br-ibge-cnae node, which carries its own A-grade edge to isic. Quote below is this survey's own page, verified live in Chrome 2026-09-04.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/industria/9294-pesquisa-industrial-mensal-producao-fisica.html",
+      "evidence_grade": "A",
+      "evidence_quote": "compreendidas nas seções B e C (Indústrias extrativas e Indústrias de transformação, respectivamente) da Classificação Nacional de Atividades Econômicas - CNAE 2.0, sediadas no Território Nacional."
     },
     {
       "source_report_id": "br-ibge-pia-empresa",
-      "target_report_id": "isic",
+      "target_report_id": "br-ibge-cnae",
       "relationship_type": "methodology_depends_on",
-      "basis": "VERIFIED DIRECTLY, TIER A. PIA-Empresa's own page: \"a pesquisa investiga empresas classificadas nas seções B e C da CNAE 2.0\"; chained with IBGE/Concla's CNAE 2.0 <-> ISIC Rev. 4 synchronization statement. Edition: ISIC Rev. 4.",
-      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
-      "evidence_grade": "C"
+      "basis": "PIA-Empresa's own page states its surveyed population directly in CNAE 2.0 terms, and separately confirms the survey adopted CNAE 2.0 (replacing CNAE 1.0) from reference year 2008. Retargeted 2026-09-04 (Thomas's ruling on HANDOFF item 3): the isic edge was refused in browser pass round 2 as chained-two-hop (this survey's own page states CNAE 2.0 adoption, but the CNAE page cited for the ISIC link never names the survey -- one document cannot carry both hops). Re-pointed at the new br-ibge-cnae node, which carries its own A-grade edge to isic. Quote below is this survey's own page, verified live in Chrome 2026-09-04.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/industria/9042-pesquisa-industrial-anual.html",
+      "evidence_grade": "A",
+      "evidence_quote": "Atualmente, a pesquisa investiga empresas classificadas nas seções B e C da CNAE 2.0"
     },
     {
       "source_report_id": "br-ibge-pia-produto",
-      "target_report_id": "isic",
+      "target_report_id": "br-ibge-cnae",
       "relationship_type": "methodology_depends_on",
-      "basis": "VERIFIED DIRECTLY, TIER A. PIA-Produto's own page: \"a pesquisa investiga empresas classificadas nas seções B e C da CNAE 2.0\"; PRODLIST-Indústria is built \"articulada com a Classificação Nacional de Atividades Econômicas - CNAE.\" The surveyed firm universe is CNAE 2.0-classified, chained with the CNAE 2.0 <-> ISIC Rev. 4 synchronization statement. Indirect (product nomenclature, not the classification itself), edition ISIC Rev. 4.",
-      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
-      "evidence_grade": "C"
+      "basis": "PIA-Produto shares its methodology page with PIA-Empresa (both are named explicitly in the same paragraph as the two halves of the same 1996/1998 redesign), which states both surveys adopted the CNAE-based sampling frame together. Retargeted 2026-09-04 (Thomas's ruling on HANDOFF item 3): the isic edge was refused in browser pass round 2 as chained-two-hop (this survey's own page states CNAE 2.0 adoption, but the CNAE page cited for the ISIC link never names the survey -- one document cannot carry both hops). Re-pointed at the new br-ibge-cnae node, which carries its own A-grade edge to isic. Quote below is this survey's own page, verified live in Chrome 2026-09-04.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/industria/9042-pesquisa-industrial-anual.html",
+      "evidence_grade": "A",
+      "evidence_quote": "passando a se desdobrar em duas pesquisas: a Pesquisa Industrial Anual - Empresa, PIA-Empresa, e a Pesquisa Industrial Anual - Produto, PIA-Produto. A série da primeira teve início em 1996, e a da segunda, em 1998. Nesse modelo, os censos econômicos quinquenais foram substituídos por pesquisas anuais de base amostral, as quais passaram a adotar a Classificação Nacional de Atividades Econômicas - CNAE, e cujo cadastro básico de seleção é obtido a partir do Cadastro Central de Empresas - CEMPRE, atualizado continuamente."
     },
     {
       "source_report_id": "br-ibge-pas",
-      "target_report_id": "isic",
+      "target_report_id": "br-ibge-cnae",
       "relationship_type": "methodology_depends_on",
-      "basis": "VERIFIED DIRECTLY, TIER A. PAS's own page: \"agrupamentos da Classificação Nacional de Atividades Econômicas - CNAE 2.0\"; chained with the CNAE 2.0 <-> ISIC Rev. 4 synchronization statement. Edition: ISIC Rev. 4.",
-      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
-      "evidence_grade": "C"
+      "basis": "PAS's own page states directly that it adopted CNAE 2.0 (replacing CNAE 1.0) from reference year 2008. Retargeted 2026-09-04 (Thomas's ruling on HANDOFF item 3): the isic edge was refused in browser pass round 2 as chained-two-hop (this survey's own page states CNAE 2.0 adoption, but the CNAE page cited for the ISIC link never names the survey -- one document cannot carry both hops). Re-pointed at the new br-ibge-cnae node, which carries its own A-grade edge to isic. Quote below is this survey's own page, verified live in Chrome 2026-09-04.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/servicos/9028-pesquisa-anual-de-servicos.html",
+      "evidence_grade": "A",
+      "evidence_quote": "o IBGE passou a divulgar uma nova série de dados da PAS, utilizando a CNAE 2.0, que substituiu a CNAE 1.0, usada anteriormente."
     },
     {
       "source_report_id": "br-ibge-pac",
-      "target_report_id": "isic",
+      "target_report_id": "br-ibge-cnae",
       "relationship_type": "methodology_depends_on",
-      "basis": "VERIFIED DIRECTLY, TIER A. PAC's own page: \"o IBGE passou a divulgar uma nova série de dados da PAC, utilizando a CNAE 2.0, que substituiu a CNAE 1.0\"; chained with the CNAE 2.0 <-> ISIC Rev. 4 synchronization statement. Edition: ISIC Rev. 4.",
-      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
-      "evidence_grade": "C"
+      "basis": "PAC's own page states directly that it adopted CNAE 2.0 (replacing CNAE 1.0) from reference year 2008. Retargeted 2026-09-04 (Thomas's ruling on HANDOFF item 3): the isic edge was refused in browser pass round 2 as chained-two-hop (this survey's own page states CNAE 2.0 adoption, but the CNAE page cited for the ISIC link never names the survey -- one document cannot carry both hops). Re-pointed at the new br-ibge-cnae node, which carries its own A-grade edge to isic. Quote below is this survey's own page, verified live in Chrome 2026-09-04.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/comercio/9075-pesquisa-anual-de-comercio.html",
+      "evidence_grade": "A",
+      "evidence_quote": "o IBGE passou a divulgar uma nova série de dados da PAC, utilizando a CNAE 2.0, que substituiu a CNAE 1.0, usada anteriormente."
     },
     {
       "source_report_id": "br-ibge-paic",
@@ -177,11 +182,12 @@
     },
     {
       "source_report_id": "br-ibge-pmc",
-      "target_report_id": "isic",
+      "target_report_id": "br-ibge-cnae",
       "relationship_type": "methodology_depends_on",
-      "basis": "VERIFIED DIRECTLY, TIER A. PMC's own page describes the 2012 revision's \"adoção da CNAE 2.0\"; chained with the CNAE 2.0 <-> ISIC Rev. 4 synchronization statement. Edition: ISIC Rev. 4.",
-      "evidence_url": "https://www.ibge.gov.br/en/statistics/technical-documents/statistical-lists-and-classifications/17245-national-classification-of-economic-activities.html",
-      "evidence_grade": "C"
+      "basis": "PMC's own page lists 'adoção da CNAE 2.0' among the named methodological revisions of its January 2012 series. Retargeted 2026-09-04 (Thomas's ruling on HANDOFF item 3): the isic edge was refused in browser pass round 2 as chained-two-hop (this survey's own page states CNAE 2.0 adoption, but the CNAE page cited for the ISIC link never names the survey -- one document cannot carry both hops). Re-pointed at the new br-ibge-cnae node, which carries its own A-grade edge to isic. Quote below is this survey's own page, verified live in Chrome 2026-09-04.",
+      "evidence_url": "https://www.ibge.gov.br/estatisticas/economicas/comercio/9227-pesquisa-mensal-de-comercio.html",
+      "evidence_grade": "A",
+      "evidence_quote": "A segunda revisão da PMC nacional, com uma nova série de índices, passou a ser divulgada a partir de janeiro de 2012, apresenta as seguintes revisões metodológicas, em relação à série divulgada até dezembro de 2011: atualização da amostra de informantes para 5700 empresas, selecionadas a partir do cadastro das empresas com 20 ou mais pessoas ocupadas da PAC 2008; adoção da CNAE 2.0"
     },
     {
       "source_report_id": "br-ibge-pimes",

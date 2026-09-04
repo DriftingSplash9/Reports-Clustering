@@ -40,7 +40,7 @@ verified, not committed.** Corpus **3,341 reports / 2,633 dependencies**.
 **20.4%**, up from 18.8%. `npm run validate` exits 0, `tsc --noEmit` clean,
 123/123 logic tests, grader selftest **33/33**. `public/corpus-data.json`
 regenerated. The validator's "cites no evidence_url" warning class is still 0.
-**No script changed this round.**
+**No script changed in round 2** (`grade-evidence.ts` was touched in the br-ibge-cnae/OCR-cap sub-round below).
 
 **Browser pass, round 2 — 134 of the remaining 173 edges decided: 85 accepted,
 47 refused with a reason each, 2 blocked by the browser extension. 39 not
@@ -78,6 +78,20 @@ edges nominally on the matcher (Round B — but see §3).
 
 ---
 
+**Also this round (uncommitted): `br-ibge-cnae` minted, OCR reads now cap at
+B.** Item 3: new `br-ibge-cnae` node, A-grade edge to `isic` (CNAE<->ISIC
+Rev.4 sentence, verified live in Chrome), six of the nine refused
+`br-ibge-* -> isic` edges re-pointed at it with their own page's
+CNAE-adoption sentence (pim-pf, pia-empresa, pia-produto, pas, pac, pmc; paic
+and the already-B pimes/pintec untouched). Item 4: `routeCapsGrade()` now
+caps `via: ocr ...` at B like `wayback`; the three A-grade OCR edges from
+round 2 (Angola/Benin/Gambia) recapped to B. `gen`/`tsc`/`validate` clean in
+a fresh sandbox. Grades hand-set per the Chrome-read rule, not yet re-run
+through the corpus-wide grader — a `--edges` confirmation pass is worth doing
+before or after commit.
+
+---
+
 ## 3. Todo (live items only)
 
 ### [Thomas] — only you can
@@ -94,13 +108,7 @@ edges nominally on the matcher (Round B — but see §3).
    evidence is inside a PDF BPS serves only through a signed token with no
    stable URL. Listed in `Claude outputs/browser-pass-bps-psa-2026-09-04.json`
    → `refused`.
-3. **Mint `br-ibge-cnae`?** The corpus already models this properly for
-   Australia (`anzsic → isic`). A CNAE node turns nine refused IBGE edges into
-   one A-grade `br-ibge-cnae → isic` plus six clean survey → CNAE edges.
-4. **Should an OCR read cap at B?** Three edges graded A off tesseract output
-   with visible OCR damage (Benin, Angola, Gambia). `routeCapsGrade()` caps
-   only `wayback`. Same question shape as the 2026-09-04 Chrome ruling.
-5. **Four smaller calls**, all in `…-flags-2026-09-04.json`: `mx-cscm → mx-scnm`
+3. **Four smaller calls**, all in `…-flags-2026-09-04.json`: `mx-cscm → mx-scnm`
    (its page evidences `sna-2008` instead); three directions flagged not flipped
    (`br-lei-5534-1968 → br-ibge-censo-demografico`, `mt-edp-inventory →
    mt-nso-government-finance`, `id-democracy-index → id-rpjmn`);
@@ -108,11 +116,19 @@ edges nominally on the matcher (Round B — but see §3).
    names a **2016** predecessor, not 2011; and
    `yt-budget-main-estimates → territorial-formula-financing`, evidenced in a
    different publication.
-6. Commit the three uncommitted 2026-09-04 rounds. This round touches
+4. Commit the four uncommitted 2026-09-04 rounds. This round touches
    ~30 `src/data/research/*.json`, `public/corpus-data.json`,
    `evidence-cache/`, `PLAYBOOK.md`, `HANDOFF.md` (+ archive copy),
-   `notes/browser-pass-round2-2026-09-04.md`, four `Claude outputs/*.json`.
-7. Real-GPU number for the unfolded Everything tier (still owed).
+   `notes/browser-pass-round2-2026-09-04.md`, four `Claude outputs/*.json`,
+   plus (br-ibge-cnae/OCR-cap round) `scripts/grade-evidence.ts` and five more
+   `src/data/research/*.json` (br-brazil-grok-2026-08, brics-g4-2026-08-22,
+   af-angola-autarquias, af-benin-commune-finance, gm-g23-municipal).
+5. Real-GPU number for the unfolded Everything tier (still owed): a REAL
+   browser, not the sandbox's swiftshader-software Playwright (PLAYBOOK rule
+   7 — bloom/pixel numbers from that are untrustworthy). Everything tier,
+   fully unfolded, camera auto-rotating and settled; read FPS off DevTools'
+   own meter (or a one-line `requestAnimationFrame` counter to console). No
+   actual measurement exists yet on real hardware at current corpus size.
 
 ### [Agent] — next build rounds, in this order (plan §9)
 
