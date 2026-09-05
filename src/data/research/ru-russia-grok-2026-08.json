@@ -4511,10 +4511,10 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "ru-krasnoyarskstat-city-and-municipal",
-      "target_report_id": "ru-rosstat-municipal-indicators-database",
+      "source_report_id": "ru-rosstat-municipal-indicators-database",
+      "target_report_id": "ru-krasnoyarskstat-city-and-municipal",
       "relationship_type": "uses_data_from",
-      "basis": "Krasnoyarskstat's 2026 indicator list is titled as the list of municipal-formation indicators \"для загрузки в Базу данных показателей муниципальных образований\" — the regional municipal indicator set and БД ПМО are the same data, loaded by the territorial organ. Re-cited 2026-09-05 from the folder index to this document. CAVEAT: the document describes the regional indicators being loaded INTO the database, i.e. the database drawing on Krasnoyarskstat, which is the opposite of this edge's direction (kept as minted per the standing rule on direction conflicts; see _dropped caveat + deferred).",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling): was ru-krasnoyarskstat-city-and-municipal -> ru-rosstat-municipal-indicators-database. Krasnoyarskstat's 2026 indicator list is titled as the list of municipal-formation indicators \"для загрузки в Базу данных показателей муниципальных образований\" — the regional municipal indicator set and БД ПМО are the same data, loaded by the territorial organ. Re-cited 2026-09-05 from the folder index to this document. The document describes the regional indicators being loaded INTO the database, i.e. the database drawing on Krasnoyarskstat — which is this edge's direction after the flip.",
       "evidence_url": "https://24.rosstat.gov.ru/storage/mediabank/%D0%9F%D0%B5%D1%80%D0%B5%D1%87%D0%B5%D0%BD%D1%8C%20%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%202026(1).docx",
       "_batch": [
         "2026-08-17_Russia-domestic-batch9-subjects-contrast-cities.json"
@@ -4962,15 +4962,15 @@
       "edge": "ru-krasnoyarskstat-city-and-municipal -> ru-rosstat-municipal-indicators-database",
       "source": "ru-krasnoyarskstat-city-and-municipal",
       "target": "ru-rosstat-municipal-indicators-database",
-      "reason": "caveat",
-      "why": "2026-09-05: the only document found (Krasnoyarskstat \"Перечень показателей ... для загрузки в Базу данных показателей муниципальных образований в 2026 году\", 24.rosstat.gov.ru) says the territorial organ LOADS its municipal indicators into БД ПМО — evidence for the database depending on the regional set, not the regional set on the database as the live edge says. Not flipped in place (project rule: a fresh finding contradicting a live edge is caveated and the reverse deferred for a human to rule on). Thomas to rule: flip, or keep as a two-way exchange."
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now ru-rosstat-municipal-indicators-database -> ru-krasnoyarskstat-city-and-municipal (uses_data_from, same document, same quote, grade B). This entry records the original arrow as wrong-direction. Original caveat follows: 2026-09-05: the only document found (Krasnoyarskstat \"Перечень показателей ... для загрузки в Базу данных показателей муниципальных образований в 2026 году\", 24.rosstat.gov.ru) says the territorial organ LOADS its municipal indicators into БД ПМО — evidence for the database depending on the regional set, not the regional set on the database as the live edge says. Not flipped in place (project rule: a fresh finding contradicting a live edge is caveated and the reverse deferred for a human to rule on). Thomas to rule: flip, or keep as a two-way exchange."
     },
     {
       "edge": "ru-rosstat-municipal-indicators-database -> ru-krasnoyarskstat-city-and-municipal",
       "source": "ru-rosstat-municipal-indicators-database",
       "target": "ru-krasnoyarskstat-city-and-municipal",
-      "reason": "deferred",
-      "why": "2026-09-05: reverse of the live edge, supported by Krasnoyarskstat's 2026 indicator list (\"для загрузки в Базу данных показателей муниципальных образований в 2026 году\", https://24.rosstat.gov.ru/storage/mediabank/%D0%9F%D0%B5%D1%80%D0%B5%D1%87%D0%B5%D0%BD%D1%8C%20%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%202026(1).docx). Awaiting Thomas's direction ruling on the caveat above; mint as uses_data_from if he flips."
+      "reason": "resolved",
+      "why": "RESOLVED 2026-09-05: Thomas ruled flip; minted by reversing the live edge in place (uses_data_from, grade B on the same Krasnoyarskstat 2026 indicator list). Original entry follows: 2026-09-05: reverse of the live edge, supported by Krasnoyarskstat's 2026 indicator list (\"для загрузки в Базу данных показателей муниципальных образований в 2026 году\", https://24.rosstat.gov.ru/storage/mediabank/%D0%9F%D0%B5%D1%80%D0%B5%D1%87%D0%B5%D0%BD%D1%8C%20%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%202026(1).docx). Awaiting Thomas's direction ruling on the caveat above; mint as uses_data_from if he flips."
     }
   ]
 }
