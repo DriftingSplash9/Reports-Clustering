@@ -308,7 +308,16 @@ slider over `supersedes`.
 4. Flip `view.minGrade` default to A. Browser pass, one host family per
    session.
 5. `_dropped` lead re-evaluation by slice; DSBB/ESMS scripted import.
-6. Link batching (merged geometry, instanced photons).
+6. Link batching (merged geometry, instanced photons). **Photons and links
+   done 2026-09-05** as *mirror* instancing — three-forcegraph keeps building
+   and moving its per-photon and per-link meshes, `src/components/
+   photonInstancing.ts` and `linkInstancing.ts` hide them each frame and copy
+   their transforms (and, for links, the per-link material's uniforms) into
+   `InstancedMesh` batches. Per-link `GradientLinkMaterial` stays the state
+   of record for focus/hover/flow/Edges. Headless: 7,371 → 2,401 calls a
+   frame, triangles identical. The 2,366 node spheres are what is left, and
+   they are the hard third (per-node lit material, rim, hollow, breath,
+   AND the raycast picker) — a separate sub-round, after Thomas has looked.
 
 ## 10. Open from the question round
 

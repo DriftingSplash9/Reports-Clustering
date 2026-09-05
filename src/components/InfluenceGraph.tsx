@@ -57,6 +57,8 @@ import {
   tickPulseBlink,
   type GradientLinkMaterial,
 } from './linkVisuals'
+import { PhotonInstancer } from './photonInstancing'
+import { LinkInstancer } from './linkInstancing'
 
 /**
  * The 3D force graph.
@@ -1015,6 +1017,20 @@ export default function InfluenceGraph({
   const sinceRefit = useRef(0)
   /** Wall-clock seconds, free-running, driving the orb breath. Never reset. */
   const pulseClock = useRef(0)
+  /** Photon batches — one `InstancedMesh` per (teardrop bucket, pulse
+   * material) instead of one draw per photon. Fed every frame in `useFrame`
+   * right after `tickFrame()`; rebinds itself when `forceGraph` is rebuilt. */
+  const photonInstancer = useRef(new PhotonInstancer())
+  /** Link batches — same mirror, for the cylinders; see linkInstancing.ts. */
+  const linkInstancer = useRef(new LinkInstancer())
+  useEffect(() => {
+    const photons = photonInstancer.current
+    const lines = linkInstancer.current
+    return () => {
+      photons.dispose()
+      lines.dispose()
+    }
+  }, [])
   /**
    * Whether the user has taken the camera since this `forceGraph` was built.
    *
@@ -1105,6 +1121,8 @@ export default function InfluenceGraph({
       camera,
       scene,
       graph: () => ref.current?.graphData(),
+      photons: () => photonInstancer.current.stats(),
+      links: () => linkInstancer.current.stats(),
       // Fit-loop state, read live — for diagnosing "camera inside the cloud".
       fit: () => ({
         tickCount: tickCount.current,
@@ -3297,6 +3315,13 @@ export default function InfluenceGraph({
     } catch {
       return
     }
+    // The library has just moved every photon; mirror them onto the
+    // instanced batches before the renderer sees this frame — see
+    // photonInstancing.ts for why this is a mirror and not a replacement.
+    if (ref.current) {
+      photonInstancer.current.sync(ref.current)
+      linkInstancer.current.sync(ref.current)
+    }
 
     // Record positions for the next drilldown rebuild — see `lastPositions`.
     const currentNodes = (ref.current?.graphData().nodes ?? []) as PositionedNode[]
@@ -3429,6 +3454,7 @@ export default function InfluenceGraph({
     // The beam flow — same free-running clock, same shape, a no-op when
     // nothing on screen is continuous.
     tickLinkFlow(pulseClock.current)
+    linkInstancer.current.tickFlow(pulseClock.current)
     const breath =
       0.5 - 0.5 * Math.cos((2 * Math.PI * pulseClock.current) / ORB_PULSE_PERIOD_SECONDS)
     for (const [id, mesh] of meshes.current) {

@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 (Thomas confirmed the CO reversals, no vetoes; publisher-cluster round 1; DSBB 750 parked; F-14 closed)
+Last updated: 2026-09-05 ~17:10 UTC (photon + link instancing landed, unseen; CO reversals confirmed, no vetoes; DSBB 750 parked)
 
 ---
 
@@ -59,22 +59,30 @@ countries; matcher misses ≈ 0). Lead file `Claude outputs/dsbb-som-import-2026
 harvest cache on the VM. ESMS: Eurostat `_esmshi4_<cc>.htm` pages are the
 machine-readable route if ever wanted (wires existing EU nodes).
 
-**Publisher-cluster lead research**: LatAm + China done
-(`publisher-cluster-latam-2026-09-05.json` 30 edges, `publisher-cluster-cn-2026-09-05.json` 2).
-Method + traps: memory `publisher_cluster_latam_2026-09-05`. Remaining
-`_dropped` leads are the no-URL / dead-host classes — research, not re-grade.
+**Publisher-cluster lead research**: LatAm + China done (2 slices, 32 edges;
+memory `publisher_cluster_latam_2026-09-05`). Remaining `_dropped` leads are
+the no-URL / dead-host classes — research, not re-grade.
 
 **Uncommitted backlog** (never read from git): everything since the 07:35
 handoff — `scripts/grade-evidence.ts` (guard, `--scan-quotes`), 4
 `edit_scripts/*-2026-09-05*.py`, 2 new slices, ~12 rewritten slices, ~24
 `evidence-cache/` records, `public/corpus-data.json`, `Claude outputs/`
 (review + research files), 12 notes moved to `archive/notes/`, 3 files to
-`_to_delete/`, `notes/Midvamp - Revamp.md` path fixes.
+`_to_delete/`, `notes/Midvamp - Revamp.md` path fixes; **renderer:**
+`InfluenceGraph.tsx`, 2 new `src/components/*Instancing.ts`, `scripts/renderer/`,
+`Claude outputs/link-batching-2026-09-05/`.
 
-**Renderer unchanged** — grade-driven opacity, A-only ranking cut,
-`rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE` 0.8, drift
-watchdog + `__meshes`. **`view.minGrade` stays default `C`**. Everything tier
-measured at 28 fps, draw-call bound (6,942 calls). Shelved ISOLATED:
+**Renderer — photon + link instancing landed 2026-09-05, UNSEEN by Thomas**
+(`src/components/photonInstancing.ts`, `linkInstancing.ts`, wired in
+`InfluenceGraph.tsx`'s `useFrame` after `tickFrame()`; `__rig.photons()` /
+`__rig.links()` report batch counts + sync ms). Headless Everything tier:
+**7,371 → 2,401 draw calls**, triangles identical; the 2,366 node spheres are
+the remainder. Real-hardware frame time NOT yet measured. Otherwise as
+before: grade-driven opacity, A-only ranking cut, `rankByLegalBasis`,
+`INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE` 0.8, drift watchdog + `__meshes`.
+**`view.minGrade` stays default `C`**. Pre-instancing baseline 28 fps /
+33.4 ms median on Thomas's machine. Headless tools: `scripts/renderer/`.
+Shelved ISOLATED:
 `sc-oag-annual-reports-2022-2024`, `so-fgs-financial-governance-reports`,
 `brics-johannesburg-ii-declaration-2023`, `tz-dar-es-salaam-city-council-budget-2026`.
 
@@ -93,12 +101,14 @@ CAPMAS) unverified.
 
 ### [Agent] — in this order
 
-1. **Link batching** (Revamp §9 step 6; Thomas: next renderer round). Photons
-   first (1,967 objects, 15 materials → ~15 `InstancedMesh` draws), then links,
-   then nodes. Blocker: per-object materials — move colour/opacity/grade/hover
-   out of `GradientLinkMaterial` uniforms into per-instance attributes. Judge on
-   median/p95 frame time, not fps (120 Hz vsync quantisation). Headless verify;
-   Thomas looks.
+1. **Node instancing** — the last third of Revamp §9 step 6, only after
+   Thomas has looked at the photon/link result and measured it (median/p95,
+   not fps). Harder than the first two: per-node `NodeMaterial` state (rim,
+   hollow, emissive breath, litOpacity, `transparent` toggle) and the
+   raycast picker (`reportIdAt(e.object)`) both have to survive. Same mirror
+   shape (hide the library's mesh, copy into a batch) is the safe route;
+   picking can keep raycasting the hidden spheres — three's Raycaster ignores
+   `visible`, which is also why link/pulse clicks still work today.
 2. **INT-core / country-shell layout** (Thomas's direction from the Everything
    screenshots): at tier 4 the INT nodes are springless and pushed to the edge,
    so every country cluster sits on one side. Generalise `intAnchor` to pull
@@ -118,14 +128,16 @@ CAPMAS) unverified.
 
 ### [Thomas] — only you can
 
-1. **Commit the backlog** (§2). Housekeeping: `_to_delete/` (README lists
-   it) — all junk.
+1. **Look at the instanced renderer** (§2): Everything tier, a trace, hover
+   an edge, Edges/Pulses toggles, a tier flip. Then the 15 s frame-time run
+   from memory `renderer_perf_measured_2026-09-04` for median/p95 against
+   33.4 ms. If anything is wrong the revert is two lines in `useFrame`
+   (the `sync` calls) — the library's own meshes are still there, hidden.
+2. **Commit the backlog** (§2). Housekeeping: `_to_delete/` (README lists
+   it) — all junk, plus today's staging zip.
 
-**Settled 2026-09-05 (Thomas):** the two Colombian reversals
-(`co-ipi -> co-emmet`, `co-bop -> co-comercio-exterior`) are confirmed and
-supersede the 26 Aug "tossed" ruling — `_dropped` entries in
-`andean-wiring-grok-2026-08.json` say so. No vetoes: the hedge-family caps and
-`ar-eph -> ar-ley-17622` at A stand as minted.
+Settled 2026-09-05: CO reversals confirmed (entries in
+`andean-wiring-grok-2026-08.json`), no vetoes — hedge caps and `ar-eph` A stand.
 
 ---
 
