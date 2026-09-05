@@ -52,7 +52,9 @@
  *                     cached failure is what gets re-graded),
  *          --no-snapshot (disable the archived-snapshot fetch strategy — the
  *                         measurement flag for "what this machine can read on its own"),
- *          --cache-dir <path> (default evidence-cache/), --selftest
+ *          --cache-dir <path> (default evidence-cache/), --selftest,
+ *          --scan-quotes (apply the quote guard to every graded edge, no network;
+ *          --json <out> writes the hits)
  *
  * Two stores, one committed: `evidence-cache/` is the permanent evidence
  * record (header + the verbatim passage each edge's quote was found in) and
@@ -217,6 +219,77 @@ const WEAK_BASIS_PATTERNS: ReadonlyArray<{ re: RegExp; label: string }> = [
   { re: /\b(?:inferred|inference|by implication)\b/i, label: 'inferred' },
   { re: /\bparaphras/i, label: 'paraphrase' },
 ]
+
+/**
+ * Phrases in the edge's QUOTE that cap it at B by themselves (2026-09-05,
+ * Thomas's ruling on the DSBB source-node review). The A bar is "the quote is
+ * in the document and names the artefact" — it has no notion of what the
+ * sentence SAYS about the artefact, and the review found ten DSBB edges graded
+ * A on quotes that deny, defer or qualify the dependency: "Classifications
+ * used by the PD are *not in conformity* with … ISIC", "sectorizations *may
+ * differ* from those suggested by the GFSM 2014", "final steps to *migrate
+ * to* the BPM6", "SNA 1993 is *partly* implemented". Same shape as
+ * `WEAK_BASIS_PATTERNS`, applied to the quote, and the label names the phrase
+ * so the reason string says what the guard saw. Three families:
+ *
+ * - `quote-negated` — the sentence says the standard is NOT followed. A
+ *   reviewer should usually turn these into `denied`, not leave them at B.
+ * - `quote-divergence` — the sentence says the series departs from the
+ *   standard. B, and the reviewer looks for the positive sentence elsewhere.
+ * - `quote-future-or-partial` — adoption is planned, in progress, or partial.
+ *   B; a lead for the day the transition completes.
+ *
+ * A hedge family (`quote-hedged`: "broadly consistent with", "broadly follows",
+ * "broadly based on") is included on the reading that §7's "consistent with"
+ * ruling on bases applies just as well to quotes — the phrase is a claim about
+ * resemblance, not a citation. Report its hits separately; it is the widest
+ * of the four and the easiest to veto.
+ *
+ * Tuned on the first corpus-wide scan (30 hits): "except for", "planned",
+ * "is expected to" and "partially" were dropped after they flagged an
+ * eligibility rule, an audit sentence, an oil-price forecast and a data-
+ * replacement note — none about a standard. "plans to" is kept only with a
+ * transition verb ("plans to publish … using COFOG"), because "plans to use
+ * the 2021 estimates" is a positive dependency.
+ *
+ * Deliberately word-level and unanchored: no attempt to decide whether the
+ * negation binds to the target's name. The cap is B, not C, and the phrase is
+ * printed, so a false hit costs a reviewer one look, while a miss costs an A
+ * that says the opposite of what its evidence says. `--scan-quotes` runs this
+ * guard alone over the whole corpus with no network.
+ */
+export const NEGATED_QUOTE_PATTERNS: ReadonlyArray<{ re: RegExp; label: string }> = [
+  {
+    re: /\b(?:not|neither|nor)\s+(?:yet\s+|fully\s+|entirely\s+|completely\s+|currently\s+|in\s+)?(?:in\s+)?(?:conformity|conform|compliant|compliance|consistent|line\s+with|accordance|accord|aligned|adopted|applied|implemented|follow(?:ed|s)?|used|based)\b/i,
+    label: 'quote-negated',
+  },
+  { re: /\bdo(?:es)?\s+not\s+(?:follow|apply|use|adopt|comply|conform)\b/i, label: 'quote-negated' },
+  { re: /\b(?:may|might|can|could)\s+differ\b|\bdiffers?\s+from\b|\bdeviat(?:e|es|ion|ions)\b|\bdepart(?:s|ure)?\s+from\b|\bexcept(?:ion)?\s+(?:that|in)\b/i, label: 'quote-divergence' },
+  {
+    re: /\b(?:being\s+implemented|in\s+progress|under\s*way|gradually|transition(?:ing|al)?\s+to(?:wards)?|migrat(?:e|ing|ion)\s+to|partly|not\s+yet|in\s+the\s+process\s+of|will\s+be\s+(?:adopted|implemented|introduced|applied)|to\s+be\s+(?:adopted|implemented|introduced)|plans?\s+to\s+(?:publish|adopt|implement|introduce|migrate|move|switch)\b)\b/i,
+    label: 'quote-future-or-partial',
+  },
+  { re: /\b(?:working|efforts?)\s+(?:with\b.{0,80}?\bto|towards?|to)\s+(?:ensure|adopt|implement|comply|achieve)\b/i, label: 'quote-future-or-partial' },
+  { re: /\bbroadly\s+(?:consistent|in\s+line|based|follow(?:s|ed)?|aligned|comparable)\b|\bgenerally\s+(?:consistent|in\s+line|follow(?:s|ed)?)\b|\bmainly\s+follow(?:s|ed)?\b|\bnot\s+(?:very|much|significantly)\s+different\s+from\b/i, label: 'quote-hedged' },
+]
+
+/** The quote-guard labels an edge's quote trips, in pattern order, de-duplicated. */
+export function quoteGuardFlags(quote: string | undefined): string[] {
+  if (!quote) return []
+  const out: string[] = []
+  for (const p of NEGATED_QUOTE_PATTERNS) if (p.re.test(quote) && !out.includes(p.label)) out.push(p.label)
+  return out
+}
+
+/** The first phrase the guard matched, for the report line. */
+export function quoteGuardPhrase(quote: string | undefined): string {
+  if (!quote) return ''
+  for (const p of NEGATED_QUOTE_PATTERNS) {
+    const m = p.re.exec(quote)
+    if (m) return m[0]
+  }
+  return ''
+}
 
 /* ------------------------------------------------------------------ *
  * Pure helpers. Exported so `--selftest` can assert on them, and so a
@@ -1634,6 +1707,10 @@ function isMetadataHost(url: string): boolean {
 export function gradeEdge(input: GradeInput, fetched: Fetched | null): GradeResult {
   const weakFlags: string[] = []
   for (const p of WEAK_BASIS_PATTERNS) if (p.re.test(input.basis)) weakFlags.push(p.label)
+  // The quote guard (2026-09-05): a quote that denies, defers or qualifies the
+  // dependency joins the weak flags and so takes the B branch below, with the
+  // label in the reason string. See NEGATED_QUOTE_PATTERNS.
+  weakFlags.push(...quoteGuardFlags(input.evidenceQuote))
   const spans = spansForEdge(input.evidenceQuote, input.basis)
   if (!spans.length) weakFlags.push('no-quoted-span')
 
@@ -1886,6 +1963,7 @@ interface Args {
   refetch: boolean
   /** `--urls [--dir <path>]` — the node-URL liveness sweep (was `check-urls.ts`). */
   urls: boolean
+  scanQuotes: boolean
   urlsDir?: string
 }
 
@@ -1940,6 +2018,7 @@ function parseArgs(argv: string[]): Args {
     noSnapshot: false,
     refetch: false,
     urls: false,
+    scanQuotes: false,
   }
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i + 1]
@@ -1961,6 +2040,7 @@ function parseArgs(argv: string[]): Args {
       case '--no-snapshot': a.noSnapshot = true; break
       case '--refetch': a.refetch = true; break
       case '--urls': a.urls = true; break
+      case '--scan-quotes': a.scanQuotes = true; break
       case '--dir': a.urlsDir = v; i++; break
       default:
         if (argv[i].startsWith('--')) {
@@ -2043,6 +2123,24 @@ function selftest(): void {
     extractQuotedSpans('The note says "the index is compiled under Regulation 03/21 of CEMAC" and so on')
       .length === 1)
   t('drops a short quoted span', extractQuotedSpans('it cites the "CPI" only').length === 0)
+  // The quote guard (2026-09-05). One assertion per family, one for a clean
+  // quote, one for the flag reaching the grade path via weakFlags.
+  t('quote guard: "not in conformity with" is negated',
+    quoteGuardFlags('Classifications used by the PD are not in conformity with the ISIC.')[0] === 'quote-negated')
+  t('quote guard: "may differ from" is divergence',
+    quoteGuardFlags('and sectorizations may differ from those suggested by the GFSM 2014.')[0] === 'quote-divergence')
+  t('quote guard: "migrate to" is future-or-partial',
+    quoteGuardFlags('final steps to migrate to the BPM6.')[0] === 'quote-future-or-partial')
+  t('quote guard: "partly implemented" is future-or-partial',
+    quoteGuardFlags('SNA 1993 is partly implemented by the DCS.')[0] === 'quote-future-or-partial')
+  t('quote guard: "broadly follows" is hedged',
+    quoteGuardFlags('Myanmar NA broadly follows the concepts of the SNA 1968.')[0] === 'quote-hedged')
+  t('quote guard: a plain naming quote is clean',
+    quoteGuardFlags('The methodology is based on the Consumer Price Index Manual: Concepts and Methods, IMF, 2020.').length === 0)
+  t('quote guard: "in accordance with BPM6" is clean',
+    quoteGuardFlags('Data are compiled in accordance with the sixth edition of the Balance of Payments Manual (BPM6).').length === 0)
+  t('quote guard: phrase is reported',
+    quoteGuardPhrase('The framework is largely based on the 1993 SNA except in failing to incorporate software.') === 'except in')
   t('evidence_quote is taken whole, without quotation marks of its own',
     spansForEdge('The basket weights were derived from the 2025 HFCE series.', 'no span here')
       .includes('The basket weights were derived from the 2025 HFCE series.'))
@@ -2777,6 +2875,59 @@ function writeGrades(results: GradeResult[]): void {
   console.log('Run `npm run validate` now — a grade of A turns the three evidence warnings into errors.')
 }
 
+
+/**
+ * `--scan-quotes`: the quote guard alone, over every edge that carries an
+ * `evidence_quote`, with no network and nothing written. Lists each hit with
+ * its current grade and the phrase that fired, grouped by label, so a reviewer
+ * can decide per edge (denied / retarget / B) before any `--write` run applies
+ * the cap mechanically. The hedge family is reported last and counted
+ * separately — it is the one Thomas may veto.
+ */
+function runScanQuotes(args: Args): void {
+  const slices = loadSlices()
+  type Hit = { edge: string; file: string; grade: string; labels: string[]; phrase: string; quote: string }
+  const hits: Hit[] = []
+  let scanned = 0
+  for (const s of slices) {
+    for (const d of s.json.dependencies ?? []) {
+      if (!d.evidence_quote) continue
+      scanned++
+      const labels = quoteGuardFlags(d.evidence_quote)
+      if (!labels.length) continue
+      hits.push({
+        edge: `${d.source_report_id} -> ${d.target_report_id}`,
+        file: s.file,
+        grade: d.evidence_grade ?? '-',
+        labels,
+        phrase: quoteGuardPhrase(d.evidence_quote),
+        quote: d.evidence_quote,
+      })
+    }
+  }
+  const order = ['quote-negated', 'quote-divergence', 'quote-future-or-partial', 'quote-hedged']
+  console.log(`QUOTE GUARD — ${scanned} edge(s) with an evidence_quote scanned, ${hits.length} hit(s), nothing written.\n`)
+  for (const label of order) {
+    const rows = hits.filter((h) => h.labels[0] === label)
+    if (!rows.length) continue
+    const byGrade = new Map<string, number>()
+    for (const r of rows) byGrade.set(r.grade, (byGrade.get(r.grade) ?? 0) + 1)
+    console.log(`${label} — ${rows.length} (${[...byGrade].map(([g, n]) => `${n} ${g}`).join(', ')})`)
+    for (const r of rows) {
+      console.log(`  ${r.grade}  ${r.edge}  [${r.phrase}]`)
+      console.log(`       ${r.quote.replace(/\s+/g, ' ').slice(0, 220)}`)
+    }
+    console.log()
+  }
+  const aHits = hits.filter((h) => h.grade === 'A')
+  const aNonHedge = aHits.filter((h) => h.labels[0] !== 'quote-hedged')
+  console.log(`A grades that would drop to B under the guard: ${aHits.length} (${aNonHedge.length} without the hedge family).`)
+  if (args.json) {
+    writeFileSync(args.json, JSON.stringify(hits, null, 2) + '\n')
+    console.log(`hits written to ${args.json}`)
+  }
+}
+
 const args = parseArgs(process.argv.slice(2))
 if (args.selftest) {
   selftest()
@@ -2784,11 +2935,13 @@ if (args.selftest) {
   await runFindQuotes(args)
 } else if (args.urls) {
   await runUrls(args)
+} else if (args.scanQuotes) {
+  runScanQuotes(args)
 } else if (args.sample) {
   await runSample(args)
 } else if (args.all || args.feeding.length || args.slices.length || args.edgeKeys) {
   await runCorpus(args)
 } else {
-  console.error('nothing selected — pass --sample <file>, --feeding <ids>, --slice <file>, --all, --urls or --selftest')
+  console.error('nothing selected — pass --sample <file>, --feeding <ids>, --slice <file>, --all, --urls, --scan-quotes or --selftest')
   process.exit(2)
 }
