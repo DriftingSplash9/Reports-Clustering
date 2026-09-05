@@ -1412,6 +1412,19 @@ export function waybackFetchUrl(timestamp: string, url: string): string {
   return `https://web.archive.org/web/${timestamp}id_/${url}`
 }
 
+/**
+ * **Ask the availability API without the scheme.** Measured 2026-09-05 on
+ * `https://www.tn.gov.in/deptst/stateincome.pdf`: the `https://` form answers
+ * `{"archived_snapshots": {}}` while `www.tn.gov.in/deptst/stateincome.pdf`
+ * (and the `http://` form) answer a 200 snapshot of 2024-09-26 — of the https
+ * url. The scheme-less key is the archive's own canonical lookup and matched
+ * every url tried that the https form also matched, so it is a superset. Before
+ * this, a conclusive "no snapshot" was cached for a url that HAD one.
+ */
+export function waybackLookupKey(url: string): string {
+  return url.replace(/^https?:\/\//i, '')
+}
+
 /** Pure half of the availability lookup, so `--selftest` can assert on it. */
 export function parseWaybackAvailable(raw: string): string | null {
   try {
@@ -1489,7 +1502,7 @@ async function findSnapshot(url: string): Promise<string | null> {
         const { stdout } = await execFileAsync(
           'curl',
           ['-sS', '-A', UA, '--max-time', '30', '--connect-timeout', String(CONNECT_TIMEOUT_S),
-           '-w', '\n%{http_code}', `${WAYBACK_AVAILABLE}${encodeURIComponent(url)}`],
+           '-w', '\n%{http_code}', `${WAYBACK_AVAILABLE}${encodeURIComponent(waybackLookupKey(url))}`],
           { maxBuffer: 1 << 20 },
         )
         return splitCurlWrite(stdout)
@@ -2131,6 +2144,9 @@ function selftest(): void {
   t('wayback fetch url asks for the original bytes',
     waybackFetchUrl('20260310034653', 'https://x.test/a.pdf') ===
       'https://web.archive.org/web/20260310034653id_/https://x.test/a.pdf')
+  t('wayback availability is asked without the scheme',
+    waybackLookupKey('https://www.tn.gov.in/deptst/stateincome.pdf') === 'www.tn.gov.in/deptst/stateincome.pdf' &&
+      waybackLookupKey('HTTP://x.test/a') === 'x.test/a' && waybackLookupKey('x.test/a') === 'x.test/a')
   t('wayback availability parses a live snapshot',
     parseWaybackAvailable('{"archived_snapshots":{"closest":{"status":"200","available":true,"timestamp":"20250531002924"}}}') === '20250531002924')
   t('wayback availability rejects an empty answer, a non-200 snapshot and junk',
