@@ -1137,6 +1137,20 @@ export default function InfluenceGraph({
    * renderer bug 3 (linkWidth thrash). See that guard's own comment.
    */
   const lastLinkRescaleAt = useRef(0)
+  /**
+   * A link rescale that the rate limiter in `runFit` refused, parked until
+   * the interval has passed (2026-09-05, Thomas's "occasionally the edges go
+   * real faint" screenshots). `runFit` runs on a timer during the settle and
+   * once more from `onEngineStop`; when that LAST call landed inside
+   * `LINK_RESCALE_MIN_INTERVAL_MS` of the previous rescale it was simply
+   * skipped, and nothing ever came back for it — the spheres had their final
+   * scale (applied unconditionally a few lines up) while every line kept the
+   * width of a cloud a few hundred units smaller, i.e. thin to the point of
+   * vanishing at the Everything tier. A spread change rebuilds everything
+   * and so "fixed" it, which is what Thomas saw. The timer below makes the
+   * refused rescale happen after the interval instead of never.
+   */
+  const pendingLinkRescale = useRef<ReturnType<typeof setTimeout> | null>(null)
   /** Where the fit put the camera, so Reset can go back without re-laying out. */
   const fitState = useRef<{ centre: THREE.Vector3; distance: number } | null>(null)
   /** Camera distance chosen by the auto-fit, kept for the search flight. */
@@ -2258,6 +2272,10 @@ export default function InfluenceGraph({
     reheatAttempts.current = 0
     settleClock.current = 0
     sinceRefit.current = 0
+    if (pendingLinkRescale.current) {
+      clearTimeout(pendingLinkRescale.current)
+      pendingLinkRescale.current = null
+    }
 
     // Index the live layout data. Rebuilt with the graph, because these are
     // the objects the simulation owns and a new graph means a new set of them.
@@ -2838,6 +2856,27 @@ export default function InfluenceGraph({
       lastLinkRescaleAt.current = now
       appliedLinkScale.current = nodeScale.current
       LINK_SCALE_APPLIERS.get(fg)?.(nodeScale.current)
+      if (pendingLinkRescale.current) {
+        clearTimeout(pendingLinkRescale.current)
+        pendingLinkRescale.current = null
+      }
+    } else if (scaleDrifted && !pendingLinkRescale.current) {
+      // Refused by the rate limiter — see `pendingLinkRescale`. Apply what
+      // `nodeScale` says WHEN the timer fires (not the value captured now):
+      // the cloud may still be moving, and the spheres already carry the
+      // latest scale.
+      const wait = Math.max(0, LINK_RESCALE_MIN_INTERVAL_MS - (now - lastLinkRescaleAt.current))
+      pendingLinkRescale.current = setTimeout(() => {
+        pendingLinkRescale.current = null
+        const live = ref.current
+        if (!live) return
+        const drifted =
+          Math.abs(nodeScale.current - appliedLinkScale.current) > appliedLinkScale.current * 0.01
+        if (!drifted) return
+        lastLinkRescaleAt.current = performance.now()
+        appliedLinkScale.current = nodeScale.current
+        LINK_SCALE_APPLIERS.get(live)?.(nodeScale.current)
+      }, wait + 1)
     }
 
     fitState.current = { centre: centre.clone(), distance }

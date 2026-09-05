@@ -30,7 +30,10 @@
       ],
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "kind": "instrument"
+      "kind": "instrument",
+      "title_aliases": [
+        "統計法"
+      ]
     },
     {
       "id": "tw-dgbas",
@@ -82,7 +85,10 @@
       "_cadence_resolution": "recurring",
       "_cadence_evidence": "Executive Yuan announcement of the 109年人口及住宅普查方案 states '政府每10年定期舉辦人口及住宅普查'; the 109年普查初步統計結果 PDF on stat.gov.tw gives census standard date 109/11/8 and the decennial series 89年(2000)/99年(2010)/109年(2020).",
       "releases_per_year": 0.1,
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "人口及住宅普查"
+      ]
     },
     {
       "id": "tw-cpi",
@@ -104,7 +110,10 @@
       "_notes": "Standard core price node. Continuously cited in Central Bank of the Republic of China (Taiwan) policy and economic analysis.",
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "消費者物價指數"
+      ]
     },
     {
       "id": "tw-labour-force",
@@ -1855,7 +1864,10 @@
       "_cadence_resolution": "recurring",
       "_cadence_evidence": "The Family Income and Expenditure Survey report system is indexed one report per year (ws.dgbas.gov.tw/win/fies/a11.asp?year=110), and DGBAS issues one 家庭收支調查 result set per survey year — an annual survey and annual report.",
       "releases_per_year": 1,
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "家庭收支調查"
+      ]
     },
     {
       "id": "tw-labour-productivity",
@@ -3490,13 +3502,13 @@
   ],
   "dependencies": [
     {
-      "source_report_id": "tw-statistics-act",
-      "target_report_id": "tw-population-census",
+      "source_report_id": "tw-population-census",
+      "target_report_id": "tw-statistics-act",
       "relationship_type": "methodology_depends_on",
-      "basis": "The Statistics Act mandates DGBAS conduct the Population and Housing Census at least every ten years.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-statistics-act -> tw-population-census. The Statistics Act mandates the census ('中央主計機關應每十年至少辦理一次人口及住宅普查') — the census rests on the Act as its legal basis. Original basis: The Statistics Act mandates DGBAS conduct the Population and Housing Census at least every ten years.",
       "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=T0040001",
       "evidence_quote": "中央主計機關應每十年至少辦理一次人口及住宅普查",
-      "evidence_grade": "C"
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "tw-statistics-act",
@@ -3553,49 +3565,49 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "tw-cpi",
-      "target_report_id": "tw-minimum-wage",
+      "source_report_id": "tw-minimum-wage",
+      "target_report_id": "tw-cpi",
       "relationship_type": "uses_data_from",
-      "basis": "The Basic Wage Deliberation Measures require the committee to collect and study the Consumer Price Index.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-cpi -> tw-minimum-wage. The Basic Wage Deliberation Measures require the committee to collect the CPI ('三、消費者物價指數。') — the wage deliberation uses the CPI. Original basis: The Basic Wage Deliberation Measures require the committee to collect and study the Consumer Price Index.",
       "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
       "evidence_quote": "基本工資審議委員會為審議基本工資，應蒐集下列資料並研究之：...三、消費者物價指數。",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "tw-minimum-wage",
+      "target_report_id": "tw-ppi-wpi",
+      "relationship_type": "uses_data_from",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-ppi-wpi -> tw-minimum-wage. Same Measures: '二、國產與進口品物價指數。' — the wage deliberation uses the producer/import price indices. Original basis: The same Measures require collection of domestic and imported goods price indices.",
+      "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
+      "evidence_quote": "二、國產與進口品物價指數。",
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "tw-ppi-wpi",
-      "target_report_id": "tw-minimum-wage",
+      "source_report_id": "tw-minimum-wage",
+      "target_report_id": "tw-national-accounts",
       "relationship_type": "uses_data_from",
-      "basis": "The same Measures require collection of domestic and imported goods price indices.",
-      "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
-      "evidence_quote": "二、國產與進口品物價指數。",
-      "evidence_grade": "C"
-    },
-    {
-      "source_report_id": "tw-national-accounts",
-      "target_report_id": "tw-minimum-wage",
-      "relationship_type": "uses_data_from",
-      "basis": "The same Measures require collection of national income and per-capita income data.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-national-accounts -> tw-minimum-wage. Same Measures: '四、國民所得與平均每人所得。' — the wage deliberation uses national income data. Original basis: The same Measures require collection of national income and per-capita income data.",
       "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
       "evidence_quote": "四、國民所得與平均每人所得。",
-      "evidence_grade": "C"
+      "evidence_grade": "B"
     },
     {
-      "source_report_id": "tw-labour-productivity",
-      "target_report_id": "tw-minimum-wage",
+      "source_report_id": "tw-minimum-wage",
+      "target_report_id": "tw-labour-productivity",
       "relationship_type": "uses_data_from",
-      "basis": "The same Measures require collection of industry labour productivity data.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-labour-productivity -> tw-minimum-wage. Same Measures: '五、各業勞動生產力及就業狀況。' — the wage deliberation uses labour-productivity data. Original basis: The same Measures require collection of industry labour productivity data.",
       "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
       "evidence_quote": "五、各業勞動生產力及就業狀況。",
-      "evidence_grade": "C"
+      "evidence_grade": "B"
     },
     {
-      "source_report_id": "tw-labour-force",
-      "target_report_id": "tw-minimum-wage",
+      "source_report_id": "tw-minimum-wage",
+      "target_report_id": "tw-labour-force",
       "relationship_type": "uses_data_from",
-      "basis": "The same Measures require collection of industry employment-status data.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-labour-force -> tw-minimum-wage. Same Measures: '五、各業勞動生產力及就業狀況。' — the wage deliberation uses employment-status data. Original basis: The same Measures require collection of industry employment-status data.",
       "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
       "evidence_quote": "五、各業勞動生產力及就業狀況。",
-      "evidence_grade": "C"
+      "evidence_grade": "B"
     },
     {
       "source_report_id": "tw-wage-structure",
@@ -3607,13 +3619,13 @@
       "evidence_grade": "C"
     },
     {
-      "source_report_id": "tw-household-income-expenditure",
-      "target_report_id": "tw-minimum-wage",
+      "source_report_id": "tw-minimum-wage",
+      "target_report_id": "tw-household-income-expenditure",
       "relationship_type": "uses_data_from",
-      "basis": "The same Measures require collection of Family Income and Expenditure Survey statistics.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was tw-household-income-expenditure -> tw-minimum-wage. Same Measures: '七、家庭收支調查統計。' — the wage deliberation uses the Family Income and Expenditure Survey. Original basis: The same Measures require collection of Family Income and Expenditure Survey statistics.",
       "evidence_url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0030003",
       "evidence_quote": "七、家庭收支調查統計。",
-      "evidence_grade": "C"
+      "evidence_grade": "A"
     },
     {
       "source_report_id": "tw-climate-change-act",
@@ -3639,6 +3651,55 @@
       "target": "tw-art-energy-purchases",
       "reason": "note",
       "why": "RETIRED 2026-08-31 with its node (PLAYBOOK §7 treaty/agreement ruling, re-applied on Thomas's ruling 2-A after the audit found the 08-29 sweep had removed orphans only): tw-us-taiwan-art is a trade/investment agreement, not a statistical publication, and the class is retired. Edge evidence was a bare homepage with no quote (https://ustr.gov/about/policy-offices/press-office/fact-sheets/2026/february/fact-sheet-us-taiwan-agreement-reciprocal-trade). Full node and edge records preserved verbatim in notes/retired-nodes-2026-08-31.json. Original relationship_type: cites. Original basis: \"The energy-purchase commitments are the terms set out in the USTR fact sheet on the Agreement on Reciprocal Trade.\""
+    },
+    {
+      "edge": "tw-statistics-act -> tw-population-census",
+      "source": "tw-statistics-act",
+      "target": "tw-population-census",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-population-census -> tw-statistics-act (methodology_depends_on, same document, same quote). This entry records the original arrow as wrong-direction. The Statistics Act mandates the census ('中央主計機關應每十年至少辦理一次人口及住宅普查') — the census rests on the Act as its legal basis."
+    },
+    {
+      "edge": "tw-cpi -> tw-minimum-wage",
+      "source": "tw-cpi",
+      "target": "tw-minimum-wage",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-cpi (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. The Basic Wage Deliberation Measures require the committee to collect the CPI ('三、消費者物價指數。') — the wage deliberation uses the CPI."
+    },
+    {
+      "edge": "tw-ppi-wpi -> tw-minimum-wage",
+      "source": "tw-ppi-wpi",
+      "target": "tw-minimum-wage",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-ppi-wpi (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. Same Measures: '二、國產與進口品物價指數。' — the wage deliberation uses the producer/import price indices."
+    },
+    {
+      "edge": "tw-national-accounts -> tw-minimum-wage",
+      "source": "tw-national-accounts",
+      "target": "tw-minimum-wage",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-national-accounts (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. Same Measures: '四、國民所得與平均每人所得。' — the wage deliberation uses national income data."
+    },
+    {
+      "edge": "tw-labour-productivity -> tw-minimum-wage",
+      "source": "tw-labour-productivity",
+      "target": "tw-minimum-wage",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-labour-productivity (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. Same Measures: '五、各業勞動生產力及就業狀況。' — the wage deliberation uses labour-productivity data."
+    },
+    {
+      "edge": "tw-labour-force -> tw-minimum-wage",
+      "source": "tw-labour-force",
+      "target": "tw-minimum-wage",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-labour-force (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. Same Measures: '五、各業勞動生產力及就業狀況。' — the wage deliberation uses employment-status data."
+    },
+    {
+      "edge": "tw-household-income-expenditure -> tw-minimum-wage",
+      "source": "tw-household-income-expenditure",
+      "target": "tw-minimum-wage",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now tw-minimum-wage -> tw-household-income-expenditure (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. Same Measures: '七、家庭收支調查統計。' — the wage deliberation uses the Family Income and Expenditure Survey."
     }
   ]
 }

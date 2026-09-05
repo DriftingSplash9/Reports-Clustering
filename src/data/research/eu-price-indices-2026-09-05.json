@@ -1,0 +1,253 @@
+{
+  "_slice": "eu-price-indices-2026-09-05",
+  "_researched": "2026-09-05",
+  "_note": "Thomas, 2026-09-05: 'find France, Italy, Netherlands, Denmark, Czechia and Norway's price indexes, they must have one.' The ESMS pass had found Eurostat publishing HICP national reference metadata for all six while the corpus had no price-index node for any of them. Each node's url is the NSI's own page for the index (read live from the sandbox, 200, description quoted from it); the weight-source edges quote Eurostat's prc_hicp_esms*_<cc>.htm section 18.1.1 verbatim, and the eurostat-hicp edges quote the same pages' transmission sentences where one exists (DK, IT, NL, NO — FR and CZ say only that the HICP is released on Eurostat's calendar, so no edge). The Netherlands also had no national-accounts node at all, so nl-cbs-national-accounts is minted here from CBS's own research description page. No HBS nodes exist for these six countries; the ESMS HBS sentences are recorded as leads in _dropped.",
+  "reports": [
+    {
+      "id": "fr-insee-ipc-ipch",
+      "title": "Indice des prix à la consommation (IPC) / Indice des prix à la consommation harmonisé (IPCH) — Consumer Price Index / Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Institut national de la statistique et des études économiques (INSEE)",
+      "country": "FR",
+      "jurisdiction_level": "federal",
+      "region": "France",
+      "description": "INSEE's monthly consumer price index and its harmonised counterpart, described on INSEE's source page 'Élaboration de l'indice des prix à la consommation (IPC) et de l'indice des prix à la consommation harmonisé (IPCH)': \"L’IPC est l’instrument de mesure de l’inflation. Il permet d’estimer, entre deux périodes données, la variation du niveau général des prix des biens et des services consommés par les ménages sur le territoire français.\" The same page notes the IPC is \"publié au Journal officiel chaque mois\" and that the IPCH \"ne se substituent pas aux IPC nationaux\". Weights come from the national accounts (Eurostat's France HICP metadata, section 18.1.1).",
+      "releases_per_year": 12,
+      "cadence_note": "INSEE's source page: the IPC is published in the Journal officiel every month; Eurostat's France HICP metadata (8.3) says the HICP and national CPI are disseminated each month in the 'Informations rapides' collection.",
+      "last_updated": null,
+      "url": "https://www.insee.fr/fr/metadonnees/source/serie/s1007",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "it-istat-prezzi-al-consumo",
+      "title": "Prezzi al consumo — indice nazionale (NIC) e indice armonizzato (IPCA) — Consumer Prices / Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Istituto Nazionale di Statistica (ISTAT)",
+      "country": "IT",
+      "jurisdiction_level": "federal",
+      "region": "Italy",
+      "description": "ISTAT's monthly consumer-price release covering the national index for the whole population (NIC) and the harmonised index (IPCA). The August 2026 provisional release reads: \"Secondo le stime preliminari, nel mese di agosto 2026 l’indice nazionale dei prezzi al consumo per l’intera collettività (NIC), al lordo dei tabacchi, registra una variazione pari a +0,5% su base mensile\" and \"l’indice armonizzato dei prezzi al consumo (IPCA) registra una variazione pari a +0,1% su base mensile\". Sub-index weights come from the national accounts (Eurostat's Italy HICP metadata, 18.1.1.3).",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly: provisional estimate at month-end, final data mid-following-month (ISTAT 'Prezzi al consumo' press-release series).",
+      "last_updated": null,
+      "url": "https://www.istat.it/comunicato-stampa/prezzi-al-consumo-dati-provvisori-agosto-2026/",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "nl-cbs-cpi",
+      "title": "Consumentenprijsindex (CPI) — Consumer Price Index / Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Centraal Bureau voor de Statistiek (CBS) / Statistics Netherlands",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "CBS's monthly consumer price index (2025=100), whose research description states the purpose as \"Het maandelijks publiceren van de prijsontwikkeling van goederen en diensten die consumenten aanschaffen\" and the weighting source as \"Voor het bepalen van de wegingsfactoren van de verschillende goederen en diensten in de CPI wordt gebruik gemaakt van de consumptieve bestedingen uit de nationale rekeningen.\" CBS also compiles the Dutch HICP from the same price observation and sends preliminary data to Eurostat for the monthly flash estimate (Eurostat's Netherlands HICP metadata, 8.3).",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly ('Het maandelijks publiceren'); a flash estimate precedes the first publication, both provisional until the following month's release.",
+      "last_updated": null,
+      "url": "https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksomschrijvingen/consumentenprijsindex--cpi---2025-100",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "nl-cbs-national-accounts",
+      "title": "Nationale rekeningen — National Accounts (ESA 2010)",
+      "publisher": "Centraal Bureau voor de Statistiek (CBS) / Statistics Netherlands",
+      "country": "NL",
+      "jurisdiction_level": "federal",
+      "region": "Netherlands",
+      "description": "The Dutch national accounts, described on CBS's research page: \"De nationale rekeningen worden opgesteld volgens de richtlijnen van het Europees systeem van Rekeningen.\" Annual and quarterly figures are published (\"Binnen de nationale rekeningen worden zowel data per jaar als data per kwartaal gepubliceerd\"), with four annual-figure publication moments (\"Er zijn vier publicatiemomenten van jaarcijfers van de nationale rekeningen\") and all figures on StatLine each June. Minted 2026-09-05 because the corpus had no Dutch national-accounts node for the CPI weights to point at.",
+      "releases_per_year": 4,
+      "cadence_note": "CBS's page: quarterly accounts plus four annual-figure publication moments a year (mid-February flash, end-March, then 6 and 18 months after the reference year); releases_per_year follows the quarterly cadence as the other national-accounts nodes do.",
+      "last_updated": null,
+      "url": "https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksomschrijvingen/nationale-rekeningen",
+      "domains": [
+        "national-accounts"
+      ],
+      "kind": "publication",
+      "title_aliases": [
+        "National Accounts"
+      ]
+    },
+    {
+      "id": "dk-dst-forbrugerprisindeks",
+      "title": "Forbrugerprisindeks — Consumer Price Index / Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Danmarks Statistik / Statistics Denmark",
+      "country": "DK",
+      "jurisdiction_level": "federal",
+      "region": "Denmark",
+      "description": "Statistics Denmark's monthly consumer price index. Its statistical documentation states: \"Formålet med forbrugerprisindekset er at belyse prisudviklingen for de varer og tjenester, der indgår i husholdningernes forbrug på dansk område. Forbrugerprisindekset er blevet opgjort siden 1914 ... Fra januar 1967 er indekset blevet opgjort månedligt.\" and \"Forbrugerprisindekset opgøres på baggrund af 23.000 priser, der indsamles fra 1.600 butikker, virksomheder og institutioner.\" Weights come from the national accounts at the top level and the household budget survey below (Eurostat's Denmark HICP metadata, 18.1.1).",
+      "releases_per_year": 12,
+      "cadence_note": "Statistics Denmark's documentation: published on the 10th (or first working day after) of the month following the collection month.",
+      "last_updated": null,
+      "url": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/forbrugerprisindeks",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "cz-csu-cpi",
+      "title": "Indexy spotřebitelských cen — inflace — Consumer Price Index / Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Český statistický úřad (ČSÚ) / Czech Statistical Office",
+      "country": "CZ",
+      "jurisdiction_level": "federal",
+      "region": "Czechia",
+      "description": "The Czech Statistical Office's monthly consumer-price release ('Inflace, spotřebitelské ceny'), which defines its headline measures: \"Míra inflace vyjádřená přírůstkem indexu spotřebitelských cen ke stejnému měsíci předchozího roku vyjadřuje procentní změnu cenové hladiny ve vykazovaném měsíci daného roku proti stejnému měsíci předchozího roku.\" The page also carries the monthly preliminary estimate (\"Předběžný odhad indexu spotřebitelských cen\"). Sub-index weights come from the annual national accounts (Eurostat's Czechia HICP metadata, 18.1.1.3); the CPI press release carries the HICP all-items rates as well.",
+      "releases_per_year": 12,
+      "cadence_note": "Monthly (ČSÚ page: 'Datum zveřejnění: 11. 08. 2026' for the July figures; Eurostat's Czechia HICP metadata: HICP annual and monthly rates included in the CPI press release).",
+      "last_updated": null,
+      "url": "https://csu.gov.cz/inflace-spotrebitelske-ceny",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    },
+    {
+      "id": "no-ssb-kpi",
+      "title": "Konsumprisindeksen (KPI) — Consumer Price Index / Harmonised Index of Consumer Prices (HICP)",
+      "publisher": "Statistisk sentralbyrå (SSB) / Statistics Norway",
+      "country": "NO",
+      "jurisdiction_level": "federal",
+      "region": "Norway",
+      "description": "Statistics Norway's monthly consumer price index: \"The CPI describes the development in consumer prices for goods and services purchased by private households in Norway, and is a common measure of inflation.\" SSB's page states \"The survey is conducted monthly and is published on the 10th of each month, approximately 10 days after the reference month\" and that \"The weights are updated in January, and kept constant throughout the rest of the year.\" Weights are derived from national accounts data (Eurostat's Norway HICP metadata, 18.1.1).",
+      "releases_per_year": 12,
+      "cadence_note": "SSB: monthly, published on the 10th of each month.",
+      "last_updated": null,
+      "url": "https://www.ssb.no/en/priser-og-prisindekser/konsumpriser/statistikk/konsumprisindeksen",
+      "domains": [
+        "inflation"
+      ],
+      "kind": "publication"
+    }
+  ],
+  "dependencies": [
+    {
+      "source_report_id": "fr-insee-ipc-ipch",
+      "target_report_id": "fr-insee-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's France HICP national reference metadata (prc_hicp_esmshi4_fr.htm, 18.1.1.3) states the index weights are based on national accounts data. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_fr.htm",
+      "evidence_quote": "To aggregate the detailed indices at the consumption segment level and calculate an overall index, the CPI uses a set of weights; this is based on National Accounting data when possible, i.e. when the National Accounting data provide the required level of detail.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "it-istat-prezzi-al-consumo",
+      "target_report_id": "it-istat-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Italy HICP national reference metadata (prc_hicp_esmshi3_it.htm, 18.1.1.3) states sub-index weights are obtained from national accounts data. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_it.htm",
+      "evidence_quote": "The weights of sub-indices, at three digits level, are obtained using publicly available NA data.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "nl-cbs-cpi",
+      "target_report_id": "nl-cbs-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Netherlands HICP national reference metadata (prc_hicp_esmshi4_nl.htm, 18.1.1) names the national accounts as the main HFMCE source for the weights; CBS's own CPI research description says the same in Dutch (\"wordt gebruik gemaakt van de consumptieve bestedingen uit de nationale rekeningen\"). Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_nl.htm",
+      "evidence_quote": "The main data source to obtain values for the household final monetary consumption expenditure (HFMCE) is the National Accounts.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "dk-dst-forbrugerprisindeks",
+      "target_report_id": "dk-dst-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Denmark HICP national reference metadata (prc_hicp_esmshi3_dk.htm, 18.1.1) names the national accounts as the top-level weight source. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_dk.htm",
+      "evidence_quote": "The sources of the weights are the National Accounts at the highest level (figures for approximately 70 consumption groups are available) and the Household Budgetary Survey at the lowest level.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "cz-csu-cpi",
+      "target_report_id": "cz-csu-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Czechia HICP national reference metadata (prc_hicp_esmshi3_cz.htm, 18.1.1.3) states sub-index weights derive from the annual national accounts. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_cz.htm",
+      "evidence_quote": "The weights at sub-index level (ECOICOP 5) are generally derived from annual National Accounts based on t-2 and usually considered to be an appropriate estimate of t-1 expenditures.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "no-ssb-kpi",
+      "target_report_id": "no-ssb-national-accounts",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Norway HICP national reference metadata (prc_hicp_esmshi3_no.htm, 18.1.1) states expenditure shares derive from national accounts data. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_no.htm",
+      "evidence_quote": "Expenditure shares are derived from National accounts (NA) data for household final consumption expenditure referring to year t-2.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "dk-dst-forbrugerprisindeks",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Denmark HICP national reference metadata (prc_hicp_esmshi3_dk.htm, 3.6 coverage) states the Danish sub-indices are transmitted to Eurostat — the national HICP is an input to the Eurostat aggregate, as for the 21 national HICPs wired on 2026-08-28. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_dk.htm",
+      "evidence_quote": "All sub-indices accounting for at least one part in thousand is transmitted to Eurostat.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "it-istat-prezzi-al-consumo",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Italy HICP national reference metadata (prc_hicp_esmshi3_it.htm, 18.5) states the index figures are transmitted to Eurostat. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_it.htm",
+      "evidence_quote": "Index figures are transmitted to EUROSTAT with 6 decimal places.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "nl-cbs-cpi",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Netherlands HICP national reference metadata (prc_hicp_esmshi4_nl.htm, 8.3) states Statistics Netherlands sends preliminary HICP data to Eurostat every month for the flash estimate. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi4_nl.htm",
+      "evidence_quote": "Statistics Netherlands sends preliminary data to Eurostat for the HICP Flash estimate in each month of the year.",
+      "evidence_grade": "A"
+    },
+    {
+      "source_report_id": "eurostat-hicp",
+      "target_report_id": "no-ssb-kpi",
+      "relationship_type": "uses_data_from",
+      "basis": "RESEARCHED 2026-09-05. Eurostat's Norway HICP national reference metadata (prc_hicp_esmshi3_no.htm, 8.3) states the Norwegian HICP data are transmitted to Eurostat ahead of release. Read live (200), quote verbatim.",
+      "evidence_url": "https://ec.europa.eu/eurostat/cache/metadata/EN/prc_hicp_esmshi3_no.htm",
+      "evidence_quote": "Data are also transmitted to Eurostat well in advance of their release schedule.",
+      "evidence_grade": "A"
+    }
+  ],
+  "_dropped": [
+    {
+      "report_id": "fr-insee-hbs",
+      "reason": "note",
+      "note": "LEAD 2026-09-05: prc_hicp_esmshi4_fr.htm 18.1.1 says the overseas-department price indices 'now use data from the most recent Household Budget Survey (2017/2018)' and item stratification uses 'expenditure shares from the HBS (2017)'. No French HBS (Budget de famille) node exists; mint it and wire fr-insee-ipc-ipch -> it."
+    },
+    {
+      "report_id": "it-istat-hbs",
+      "reason": "note",
+      "note": "LEAD 2026-09-05: prc_hicp_esmshi3_it.htm 18.1.1.1: 'HBS is used as a source for about 140 product aggregate weights (on a total of about 400).' No Italian HBS (Indagine sulle spese delle famiglie) node exists."
+    },
+    {
+      "report_id": "dk-dst-hbs",
+      "reason": "note",
+      "note": "LEAD 2026-09-05: prc_hicp_esmshi3_dk.htm 18.1.1: weights use 'the Household Budgetary Survey at the lowest level'. No Danish HBS (Forbrugsundersøgelsen) node exists."
+    },
+    {
+      "report_id": "cz-csu-hbs",
+      "reason": "note",
+      "note": "LEAD 2026-09-05: prc_hicp_esmshi3_cz.htm 18.1.1.1: 'The main source of EA weights is HBS; also NA, scanner data (namely for food and beverages), market research (GfK).' No Czech HBS (Statistika rodinných účtů / SRÚ) node exists."
+    },
+    {
+      "report_id": "no-ssb-hbs",
+      "reason": "note",
+      "note": "LEAD 2026-09-05: prc_hicp_esmshi3_no.htm 18.1.1.1: 'Last updated HBS goes back to 2012 and is used for approx. 30 per cent of the basket.' No Norwegian HBS (Forbruksundersøkelsen) node exists."
+    },
+    {
+      "report_id": "fr-insee-ipc-ipch",
+      "reason": "note",
+      "note": "NOT MINTED 2026-09-05: eurostat-hicp -> fr-insee-ipc-ipch. prc_hicp_esmshi4_fr.htm says only that 'The HICP is released according to Eurostat's Release calendar' and describes Eurostat dissemination; no sentence says INSEE transmits the index to Eurostat. Same for cz-csu-cpi (prc_hicp_esmshi3_cz.htm). Both are true in fact (Regulation (EU) 2016/792) and unsupported on the page — a regulation node citing Article 12 would carry them."
+    }
+  ]
+}

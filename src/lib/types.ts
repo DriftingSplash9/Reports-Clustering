@@ -704,10 +704,19 @@ export interface Report {
    *    to catch — an alias that is a publisher's name would turn every
    *    agency-level citation into an A in one move.
    *
-   * Absent on almost every node, and that is the expected shape: the field
-   * earns its place on the dozen or so international standards the whole
-   * corpus cites in a dozen languages, not on national releases that are only
-   * ever cited at home.
+   * **National releases carry aliases too** (Thomas, 2026-09-05, ruling on
+   * the ESMS pass). The first version of this comment reserved the field for
+   * international standards; the ESMS pass then found 19 edges capped at B
+   * because Eurostat's own metadata says "the national accounts" or "HBS" and
+   * the target is titled "Contabilidad Nacional de España (SEC-2010)" or
+   * "Huishoudbudgetonderzoek / …". The three rules above are what matter,
+   * not the node's country: an English name that a real document uses for a
+   * national release ("Spanish National Accounts", "Household Budget Survey")
+   * is an alias under rule 2 like any other, and a CJK name inside a title's
+   * parenthetical (which `namesTarget` strips) is the KDI case, 2026-09-05.
+   * What is still out: a generic family name for a specific edition (rule 1),
+   * a translation nobody has seen in print (rule 2), an acronym or a
+   * publisher (rule 3).
    */
   title_aliases?: string[]
   /** Scope of publishing authority. Drives node colour and style — never position. */

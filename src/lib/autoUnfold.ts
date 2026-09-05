@@ -59,6 +59,11 @@ export function nextAutoUnfoldBatch(disclosedGraph: Graph): AutoUnfoldBatch | nu
   for (const n of disclosedGraph.nodes) {
     if (!isCountryOrbId(n.id)) continue
     const country = countryFromOrbId(n.id)
+    // The international orb is left alone (2026-09-05): it is the biggest
+    // single orb and used to be opened first, which is exactly the
+    // ~1,000-spoke fan the Condensed-INT control exists to keep folded.
+    // Opening it is the user's call — the View panel row or a double-click.
+    if (country === 'INT') continue
     const family = familyOf(country)
     const size = (n as OrbNode).members.length
     const entry = byFamily.get(family)

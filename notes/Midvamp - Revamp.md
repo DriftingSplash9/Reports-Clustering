@@ -3,8 +3,9 @@
 **Plan of record, v2 — 2026-09-02/03.** v1 was written after the
 independent technical audit (`Claude outputs/AUDIT-2026-09-02-independent-
 technical-audit.md`); v2 folds in Thomas's answers to the 22-question
-round (`Midvamp - Revamp - questions 2026-09-02.docx`, answered copy
-returned the same night). `HANDOFF.md` carries current state and the live
+round (`archive/revamp-questions/Midvamp - Revamp - questions 2026-09-02.docx`,
+answered copy beside it, returned the same night; moved off the top level
+2026-09-05). `HANDOFF.md` carries current state and the live
 todo; this file carries the *why* and the design, and changes only when
 the design changes.
 

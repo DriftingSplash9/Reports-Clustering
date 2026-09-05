@@ -129,7 +129,10 @@
       "_notes": "Core labour-market indicator. Provides the official unemployment rate and employment figures used in macroeconomic analysis, social policy and international comparisons (ILO concepts). Parallel to Japan’s Labour Force Survey.",
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "경제활동인구조사"
+      ]
     },
     {
       "id": "kr-household-income-expenditure",
@@ -1395,13 +1398,13 @@
       "evidence_grade": "B"
     },
     {
-      "source_report_id": "kr-eaps",
-      "target_report_id": "kr-gender-statistics",
+      "source_report_id": "kr-gender-statistics",
+      "target_report_id": "kr-eaps",
       "relationship_type": "uses_data_from",
-      "basis": "e-나라지표's women's economic-activity indicator cites the Economically Active Population Survey as its source.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was kr-eaps -> kr-gender-statistics. e-나라지표's women's economic-activity indicator lists '자료 출처 : 경제활동인구조사' — the gender statistics draw on the EAPS. Original basis: e-나라지표's women's economic-activity indicator cites the Economically Active Population Survey as its source.",
       "evidence_url": "https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1572",
       "evidence_quote": "자료 출처 : 경제활동인구조사",
-      "evidence_grade": "C"
+      "evidence_grade": "A"
     }
   ],
   "_dropped": [
@@ -1432,6 +1435,13 @@
       "target": "kr-national-accounts-bok",
       "reason": "wrong-direction",
       "why": "WRONG-DIRECTION (2026-09-04, Thomas's ruling on HANDOFF item 1; flagged by round 4 / round A, Claude outputs/direction-suspect-jp-kr-2026-09-03.json): the edge's own basis states that kr-national-accounts-bok uses kr-balance-of-payments, so kr-national-accounts-bok is the consumer and must be source_report_id. Flipped in place to kr-national-accounts-bok -> kr-balance-of-payments in this file (grade and citation carried over unchanged — the direction criterion is still not machine-checked). Original entry preserved verbatim: source_report_id=\"kr-balance-of-payments\", target_report_id=\"kr-national-accounts-bok\", relationship_type=\"uses_data_from\", basis=\"The BOK document states components of household consumption abroad are compiled by reclassifying Balance of Payments statistics.\", evidence_url=\"https://unstats.un.org/unsd/economic_stat/China/GDPFE/Korea.pdf\", evidence_quote=\"We estimates those data by reclassifying 'Balance of Payments statistics (e.g. travel services and credit card usage).'\", evidence_grade=\"B\"."
+    },
+    {
+      "edge": "kr-eaps -> kr-gender-statistics",
+      "source": "kr-eaps",
+      "target": "kr-gender-statistics",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now kr-gender-statistics -> kr-eaps (uses_data_from, same document, same quote). This entry records the original arrow as wrong-direction. e-나라지표's women's economic-activity indicator lists '자료 출처 : 경제활동인구조사' — the gender statistics draw on the EAPS."
     }
   ]
 }

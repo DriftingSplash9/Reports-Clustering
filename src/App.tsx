@@ -146,6 +146,7 @@ import {
   TIER_LABEL,
   buildDisclosedGraph,
   countryFromOrbId,
+  countryOrbId,
   standingLabels,
   foldCountry,
   isCountryOrbId,
@@ -1000,7 +1001,30 @@ export default function App() {
       setOpenedCountries((prev) => toggleCountryOpen(prev, id))
       return
     }
+    // **A double-click on an international node folds the international
+    // layer back into its orb** (Thomas, 2026-09-05: "double clicking an int
+    // node could toggle between the open view of all the nodes and a view
+    // with the single int node"). This is the one deliberate exception to
+    // the "a graph gesture only ever adds detail" rule in hierarchy.ts —
+    // for INT only, because INT is one group with a two-state control of
+    // its own (`ViewControls` → International layer), so the gesture
+    // mirrors a switch the user can see, rather than silently removing a
+    // country the way the old real-node-folds-the-view design did.
+    if (graph.byId.get(id)?.country === 'INT') {
+      setOpenedCountries((prev) => foldCountry(prev, 'INT'))
+      return
+    }
     setDrilldown((d) => toggleDrilldown(d, id))
+  }, [graph])
+
+  /**
+   * The International-layer row in the View panel (2026-09-05). Condensed
+   * = `'INT'` not in `openedCountries`; Open = in it. Same state the
+   * country fold and the double-click gesture read, so all three agree.
+   */
+  const intCondensed = !openedCountries.has('INT')
+  const handleCondenseInt = useCallback((condensed: boolean) => {
+    setOpenedCountries((prev) => (condensed ? foldCountry(prev, 'INT') : toggleCountryOpen(prev, countryOrbId('INT'))))
   }, [])
 
   /**
@@ -1676,6 +1700,8 @@ export default function App() {
           onReset={handleReset}
           onExportPng={() => setExportRequest((n) => n + 1)}
           tier={drilldown}
+          intCondensed={intCondensed}
+          onCondenseInt={handleCondenseInt}
         />
       </PanelShell>
       )}

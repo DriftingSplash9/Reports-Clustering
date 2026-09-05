@@ -208,11 +208,13 @@ edges a tenth of a pixel wide) were fixed on 2026-08-19.
 **The obvious next thing** used to be "more data" — Alberta alone has around
 330 municipalities, 60 school authorities and 26 post-secondary institutions, and
 the method for adding one is proven. That is deliberately on hold. Every edge
-now carries an evidence grade (A: the cited document was read and names the
-input; B: it supports the link loosely; C: a lead), and only 29% of edges are
-grade A. The current work is getting what is already here into shape — reading
-the cited documents, tightening the grades, fixing the picture — before the
-corpus grows again. Adding data to a graph whose links are 70% unverified would
+now carries an evidence grade — A means the cited document was read by a
+machine and names the input in so many words; B means it supports the link
+but stops short of that (names the agency, not the release, or hedges); C is
+a lead nobody has confirmed — and fewer than a third of the edges are grade A.
+The current work is getting what is already here into shape: reading the
+cited documents, tightening the grades, fixing the picture. Adding data to a
+graph where most links have not yet been read back to their document would
 only make the picture bigger, not truer.
 
 ---

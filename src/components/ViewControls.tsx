@@ -199,6 +199,8 @@ export default function ViewControls({
   onReset,
   onExportPng,
   tier,
+  intCondensed,
+  onCondenseInt,
 }: {
   view: ViewSettings
   onChange: (next: ViewSettings) => void
@@ -225,6 +227,19 @@ export default function ViewControls({
    * one prop and a title, not a new orb-recolour code path.
    */
   tier: number
+  /**
+   * Condensed INT (Thomas, 2026-09-05: "if the int nodes were to combine to a
+   * single monster node it would clean up so many edges on this view... I
+   * need a condense int nodes toggle"). True when the ~200 international
+   * standards are drawn as the one `corb:INT` orb; false when they are open
+   * as individual nodes. It is the same state the country fold already keeps
+   * (`'INT'` in `openedCountries`, hierarchy.ts `resolveId`), surfaced as an
+   * explicit two-way control beside the lens — the graph gesture (double-
+   * click) goes both ways for INT and only for INT, see `handleToggleNode`.
+   * At tier 1 the international layer IS the view, so the row is inert there.
+   */
+  intCondensed: boolean
+  onCondenseInt: (condensed: boolean) => void
 }) {
   const set = <K extends keyof ViewSettings>(key: K, value: ViewSettings[K]) =>
     onChange({ ...view, [key]: value })
@@ -340,6 +355,38 @@ export default function ViewControls({
               style={{
                 ...lensButton,
                 ...(view.lens === key ? lensButtonActive : null),
+                ...(inert ? lensButtonInert : null),
+              }}
+            >
+              {label}
+            </button>
+          )
+        })}
+      </div>
+      <div style={{ ...heading, marginTop: 14 }}>International layer</div>
+      {/*
+        Condensed INT, 2026-09-05 — see the `intCondensed` prop. Two-state
+        radio in the lens row's shape: "Condensed" is one orb, "Open" is the
+        ~200 individual standards with their fan-in edges to every country.
+      */}
+      <div style={lensRow}>
+        {(
+          [
+            { key: true, label: 'Condensed', hint: 'One orb for the international standards — every country\'s edges into SNA, ESA, COICOP, ISIC… become one bundle each. Double-click the orb to open it' },
+            { key: false, label: 'Open', hint: 'Every international standard as its own node, with its edges to every country that cites it. Double-click any international node to condense them again' },
+          ] as { key: boolean; label: string; hint: string }[]
+        ).map(({ key, label, hint }) => {
+          const inert = tier === 1
+          return (
+            <button
+              key={String(key)}
+              type="button"
+              disabled={inert}
+              title={inert ? `${hint} — at the Global tier the international layer is the view itself and stays open` : hint}
+              onClick={() => onCondenseInt(key)}
+              style={{
+                ...lensButton,
+                ...(intCondensed === key ? lensButtonActive : null),
                 ...(inert ? lensButtonInert : null),
               }}
             >

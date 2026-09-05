@@ -437,7 +437,10 @@
       "_notes": "Fundamental statistics (re-edited). Produced jointly under MIC coordination. The 2020 tables (and successive benchmark-year tables) are explicitly incorporated into JSNA benchmark revisions. Continuously cited in ESRI methodological notes and in academic/policy impact studies. Prefectural and multi-regional IO tables also exist and build on the national tables.",
       "_jurisdiction_level_original": "national",
       "last_updated": null,
-      "kind": "publication"
+      "kind": "publication",
+      "title_aliases": [
+        "産業連関表"
+      ]
     },
     {
       "id": "jp-prefectural-accounts",
@@ -1763,13 +1766,13 @@
       "evidence_grade": "A"
     },
     {
-      "source_report_id": "jp-input-output-tables",
-      "target_report_id": "jp-services-producer-price-index",
+      "source_report_id": "jp-services-producer-price-index",
+      "target_report_id": "jp-input-output-tables",
       "relationship_type": "calculated_from",
-      "basis": "BOJ's CGPI FAQ states SPPI weights are based on MIC's Input-Output Tables.",
+      "basis": "FLIPPED 2026-09-05 (Thomas's direction ruling, CJK span-floor round): was jp-input-output-tables -> jp-services-producer-price-index. BOJ's CGPI FAQ: CGPI and SPPI weights rest on different statistics — '前者が経済産業省『工業統計表』および財務省『日本貿易月表』、後者が総務省『産業連関表』' — the latter (SPPI) on MIC's Input-Output Tables. SPPI depends on the I-O tables. Original basis: BOJ's CGPI FAQ states SPPI weights are based on MIC's Input-Output Tables.",
       "evidence_url": "https://www.boj.or.jp/statistics/outline/exp/pi/faqcgpi02.htm",
       "evidence_quote": "後者が総務省『産業連関表』",
-      "evidence_grade": "B"
+      "evidence_grade": "A"
     },
     {
       "source_report_id": "jp-statistics-act-2007",
@@ -1952,6 +1955,13 @@
       "target": "jp-cgpi",
       "reason": "wrong-direction",
       "why": "WRONG-DIRECTION (2026-09-04, Thomas's ruling on HANDOFF item 1; flagged by round 4 / round A, Claude outputs/direction-suspect-jp-kr-2026-09-03.json): the edge's own basis states that jp-cgpi uses jp-trade-statistics-detail, so jp-cgpi is the consumer and must be source_report_id. Flipped in place to jp-cgpi -> jp-trade-statistics-detail in this file (grade and citation carried over unchanged — the direction criterion is still not machine-checked). Original entry preserved verbatim: source_report_id=\"jp-trade-statistics-detail\", target_report_id=\"jp-cgpi\", relationship_type=\"calculated_from\", basis=\"BOJ's CGPI FAQ states export/import price index weights derive from MOF's Japan Exports and Imports.\", evidence_url=\"https://www.boj.or.jp/statistics/outline/exp/pi/faqcgpi02.htm\", evidence_quote=\"輸出物価指数：...ウエイトは2000年の『日本貿易月表』の輸出額に依拠しています。\", evidence_grade=\"A\"."
+    },
+    {
+      "edge": "jp-input-output-tables -> jp-services-producer-price-index",
+      "source": "jp-input-output-tables",
+      "target": "jp-services-producer-price-index",
+      "reason": "wrong-direction",
+      "why": "FLIPPED 2026-09-05: Thomas ruled flip; the live edge is now jp-services-producer-price-index -> jp-input-output-tables (calculated_from, same document, same quote). This entry records the original arrow as wrong-direction. BOJ's CGPI FAQ: CGPI and SPPI weights rest on different statistics — '前者が経済産業省『工業統計表』および財務省『日本貿易月表』、後者が総務省『産業連関表』' — the latter (SPPI) on MIC's Input-Output Tables. SPPI depends on the I-O tables."
     }
   ]
 }

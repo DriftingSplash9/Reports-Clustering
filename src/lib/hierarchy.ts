@@ -227,8 +227,12 @@ export function resolveId(
   // on they are one more group among ~140 country groups, and 200 identical
   // white spheres in a knot — with ~700 spokes to every country — said
   // nothing a single "International — 200 folded reports" orb does not say
-  // better. Same fold, same orb machinery, same double-click to open, same
-  // Reset to re-fold; `openedCountries` carries 'INT' like any other code.
+  // better. Same fold, same orb machinery, same double-click to open;
+  // `openedCountries` carries 'INT' like any other code. Since 2026-09-05
+  // the fold is also an explicit two-way control (View panel → International
+  // layer, "Condensed"/"Open"), a double-click on any INT node re-folds it
+  // (the one gesture that removes detail — see `handleToggleNode` in
+  // App.tsx), and auto-unfold leaves this orb shut (autoUnfold.ts).
   if (report.country === 'INT' && drilldown >= COUNTRY_FOLD_FROM_TIER && !openedCountries.has('INT')) {
     return countryOrbId('INT')
   }
