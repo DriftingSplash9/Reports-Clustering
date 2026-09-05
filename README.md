@@ -99,23 +99,21 @@ scripts/validate-data.ts   what `npm run validate` runs
 
 **The documents** — cleaned up 2026-08-13 (old handoffs, closed decisions and
 the retired session-log thread moved into `archive/`, subfoldered by what they
-were); the four files at root are the ones worth opening first, everything
+were); the five files at root are the ones worth opening first, everything
 else is filed by what it *is*:
 
 ```
 HANDOFF.md                 current state and the live todo — read this first
-REPORTS.md                 the design rules + standing rules. The document that matters most
+REPORTS.md                 the design rules and direction; standing rules are PLAYBOOK.md
+PLAYBOOK.md                standing rules, traps, do-not-re-raise ledger, architecture crib
 START-HERE.md              plain-language explanation, for sending to people
 README.md                  this file
 
-Grok - Brics+israel and singapore/
-                            the BRICS branch's active research staging:
-                            G.*.md hand-offs and per-country consolidated
-                            JSON, not yet folded into src/data/research/ —
-                            the only live per-branch working folder left
-notes/                     scratch — sweep-log.md (durable record of what got
-                            swept to _to_delete/ and why) plus Thomas's own
-                            unrelated personal files, left alone
+notes/                     working notes read by task — `HANDOFF.md` §1 says
+                            which; `Midvamp - Revamp.md` is the plan of record,
+                            `techniques-*.md` the recipes, `routing-snapshot-*.md`
+                            dated host readings. Round narratives live in
+                            project memory, not here.
 archive/                   every closed-out branch (AF/ EU/ NZ/ AU/ CA/) and
                             planning document, moved here whole once done, not
                             file by file — kept for reference, not deleted;

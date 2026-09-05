@@ -220,8 +220,8 @@ cites. Finding a better document for a B edge is a research round.
 
 ## 5. Data sources going forward
 
-Grok is for leads, not citations. Machine-readable metadata is for
-citations: the IMF DSBB JSON endpoint
+Grok is retired (Thomas, 2026-09-05) — no new leads from it. Machine-readable
+metadata is for citations: the IMF DSBB JSON endpoint
 (`dsbb.imf.org/api/report/getBaseSummaryofMethodologies?countryCode=&categoryCode=`),
 Eurostat ESMS pages, SDMX metadata "source" fields. A scripted pass over
 those should yield hundreds of grade-A standards edges with no

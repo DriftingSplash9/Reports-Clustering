@@ -2230,7 +2230,7 @@ export default function InfluenceGraph({
       // a single real external tick, freezing the layout at its near-origin
       // seed position and reporting "stopped" for a cloud that never got a
       // chance to unfold. Trusting that blindly is Finding 1 of
-      // notes/render-consistency-repro-2026-08-25.md: a captured
+      // archive/notes/render-consistency-repro-2026-08-25.md: a captured
       // `nodeRadius: 67` (real settled clouds run to the thousands) at
       // `tick: 0`.
       //
@@ -2296,7 +2296,7 @@ export default function InfluenceGraph({
   }, [controls])
 
   /**
-   * Finding 2 of notes/render-consistency-repro-2026-08-25.md: the entire
+   * Finding 2 of archive/notes/render-consistency-repro-2026-08-25.md: the entire
    * tick-loop-driven fit/tracking system runs on `useFrame`, i.e. on `rAF`,
    * and Chrome suspends `requestAnimationFrame` outright for a backgrounded
    * tab — confirmed live, zero ticks in 30+ seconds while

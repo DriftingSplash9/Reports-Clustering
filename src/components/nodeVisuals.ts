@@ -36,7 +36,7 @@ import type { RimWeight } from '../lib/palette'
  * **Soft edge (`soft`), added 2026-08-26.** A second, unrelated use of the
  * same facing/fresnel term — not a rim, no colour, alpha only. A continuous
  * database (`Report.continuous`, 35 nodes — see `types.ts`) has no discrete
- * edition, and `notes/node-surface-encoding-2026-08-19.md` worked out that a
+ * edition, and `archive/notes/node-surface-encoding-2026-08-19.md` worked out that a
  * sphere whose silhouette fades instead of terminating is the honest way to
  * say that: "this thing has no boundary" rather than "this is a report with
  * a border." The note's one caution — a soft node must read as clearly

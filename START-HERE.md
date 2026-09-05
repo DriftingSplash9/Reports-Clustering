@@ -28,11 +28,13 @@ reports consume everyone else's numbers; and, the largest branch by file count,
 all 54 African states, with city/commune-level financial detail for about half
 of them.
 
-The BRICS branch opened in August 2026 and is the current active front: Brazil,
-Russia, China and India all have real chains now, and South Africa arrived
-earlier with the African push. It is deliberately a half-finished round — Brazil
-and China have had less attention than Russia and India — and the branch's own
-hand-off chain in `BRICS/` is the place to pick it up.
+The BRICS branch opened in August 2026 — Brazil, Russia, China and India all
+have real chains now, and South Africa arrived earlier with the African push —
+and a bulk import the same month widened the map to well over a hundred
+countries. Since then the work has been less about new territory and more
+about the evidence behind what is already drawn: every line in the graph now
+carries a grade for how well its cited document actually supports it, and the
+current effort is raising those grades one document at a time.
 
 ---
 
@@ -58,7 +60,9 @@ built on. A small one is an endpoint — something calculated *from* other thing
 that nothing else uses. The biggest sphere in the graph is the European System
 of Accounts 2010 — the EU regulation every member state's statistics must
 follow — and it leads by a distance: the UN's System of National Accounts 2008
-sits second at a little over half of it, and nothing else reaches a third. (The
+sits second at a little over half of it, and the next tier — the New Development
+Bank's founding agreement, the IMF's data-dissemination standards — at around a
+third. (The
 exact figures move as the corpus does; `npm run validate` prints the live
 ranking, and this sentence is kept vague on purpose so it can stay true.)
 

@@ -1876,6 +1876,9 @@ interface Args {
   edgesSpec?: string
   noSnapshot: boolean
   refetch: boolean
+  /** `--urls [--dir <path>]` — the node-URL liveness sweep (was `check-urls.ts`). */
+  urls: boolean
+  urlsDir?: string
 }
 
 /**
@@ -1928,6 +1931,7 @@ function parseArgs(argv: string[]): Args {
     skipGraded: false,
     noSnapshot: false,
     refetch: false,
+    urls: false,
   }
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i + 1]
@@ -1948,6 +1952,8 @@ function parseArgs(argv: string[]): Args {
       case '--edges': a.edgesSpec = v; a.edgeKeys = loadEdgeSelection(v); i++; break
       case '--no-snapshot': a.noSnapshot = true; break
       case '--refetch': a.refetch = true; break
+      case '--urls': a.urls = true; break
+      case '--dir': a.urlsDir = v; i++; break
       default:
         if (argv[i].startsWith('--')) {
           console.error(`unknown flag ${argv[i]}`)
@@ -2229,6 +2235,81 @@ function selftest(): void {
  * schema round has since moved to `_dropped` is reported as such rather than
  * silently skipped.
  */
+/**
+ * `--urls [--dir <path>] [--json <out>]` — the node-URL liveness sweep.
+ * Absorbed from `scripts/check-urls.ts` on 2026-09-05 (HANDOFF item 9): that
+ * script used Node `fetch()` with a HEAD-then-GET dance and no WAF detection,
+ * so a JavaScript challenge page counted as alive. This mode asks the same
+ * question — *does the door open?* — through `fetchRaw`, so a URL is judged by
+ * the grader's own rules: `dead` is a 4xx/5xx or no response, `wall` is a
+ * challenge shell, `empty` is a 200 with nothing behind it. Only `dead` fails
+ * the sweep (exit 1), because a wall or an empty body says something about
+ * THIS machine and not about the citation — the same reasoning as
+ * `snapshotRescuable`. It checks `Report.url`, not `evidence_url`; the
+ * evidence side is what the grader proper does. Never asks Wayback.
+ *
+ * `--dir <path>` sweeps a folder of slice JSONs instead of the corpus (a staged
+ * import you have not minted yet); `--json` writes the full result set.
+ */
+async function runUrls(args: Args): Promise<void> {
+  type Row = { id: string; url: string; source: string }
+  const rows: Row[] = []
+  if (args.urlsDir) {
+    for (const f of readdirSync(args.urlsDir).filter((f) => f.endsWith('.json') && !f.startsWith('_'))) {
+      let parsed: unknown
+      try {
+        parsed = JSON.parse(readFileSync(join(args.urlsDir, f), 'utf8'))
+      } catch {
+        console.log(`  ! ${f} is not valid JSON — skipped`)
+        continue
+      }
+      for (const r of (parsed as { reports?: Report[] }).reports ?? []) if (r.url) rows.push({ id: r.id, url: r.url, source: f })
+    }
+  } else {
+    for (const s of loadSlices()) for (const r of s.json.reports ?? []) if (r.url) rows.push({ id: r.id, url: r.url, source: s.file })
+    const seed = (await import('../src/data/reports')) as { reports: Report[] }
+    for (const r of seed.reports) if (r.url) rows.push({ id: r.id, url: r.url, source: 'src/data/reports.ts' })
+  }
+  const limited = rows.slice(0, args.limit)
+  console.log(`URL SWEEP — ${limited.length} node url(s) from ${args.urlsDir ?? 'the live corpus'}, ${args.concurrency} at a time.\n`)
+  let done = 0
+  const results = await pool(limited, args.concurrency, async (row) => {
+    const f = await fetchRaw(row.url)
+    done++
+    if (done % 50 === 0) console.log(`  … ${done}/${limited.length}`)
+    return { ...row, status: f.status, finalUrl: f.finalUrl, block: f.block, blockLabel: f.blockLabel }
+  })
+  const byKey = new Map<string, number>()
+  for (const r of results) {
+    const key = r.block === 'none' ? String(r.status) : `${r.block}:${r.blockLabel}`
+    byKey.set(key, (byKey.get(key) ?? 0) + 1)
+  }
+  for (const [k, n] of [...byKey].sort((a, b) => b[1] - a[1])) console.log(`  ${String(n).padStart(5)}  ${k}`)
+  const dead = results.filter((r) => r.block === 'dead')
+  const walled = results.filter((r) => r.block === 'wall' || r.block === 'empty' || r.block === 'network')
+  console.log(dead.length ? `\n  ✗ ${dead.length} url(s) are DEAD (4xx/5xx or no answer):` : '\n  ✓ no dead urls')
+  for (const d of dead.sort((a, b) => a.source.localeCompare(b.source))) {
+    console.log(`      ${d.source}  ${d.id}\n        ${d.url}\n        ${d.blockLabel}`)
+  }
+  if (walled.length) {
+    console.log(`\n  ${walled.length} url(s) answered but could not be read from THIS machine (wall / empty / network) — not failures, re-probe elsewhere:`)
+    for (const w of walled.slice(0, 40)) console.log(`      ${w.id}  ${w.block}:${w.blockLabel}  ${w.url}`)
+    if (walled.length > 40) console.log(`      … and ${walled.length - 40} more`)
+  }
+  const redirected = results.filter((r) => r.block === 'none' && r.finalUrl && r.finalUrl !== r.url)
+  if (redirected.length) {
+    console.log(`\n  ${redirected.length} url(s) answered via a redirect — the stored url is not the live one:`)
+    for (const r of redirected.slice(0, 30)) console.log(`      ${r.id}\n        ${r.url}\n        → ${r.finalUrl}`)
+    if (redirected.length > 30) console.log(`      … and ${redirected.length - 30} more`)
+  }
+  if (args.json) {
+    writeFileSync(args.json, JSON.stringify({ checked: results.length, dead: dead.length, results }, null, 2))
+    console.log(`\nFull results written to ${args.json}`)
+  }
+  console.log()
+  process.exit(dead.length ? 1 : 0)
+}
+
 async function runSample(args: Args): Promise<void> {
   const rows = JSON.parse(readFileSync(args.sample as string, 'utf8')) as Array<{
     source: string; target: string; file: string; evidence_url: string; grade: string; notes?: string
@@ -2689,11 +2770,13 @@ if (args.selftest) {
   selftest()
 } else if (args.findQuotes) {
   await runFindQuotes(args)
+} else if (args.urls) {
+  await runUrls(args)
 } else if (args.sample) {
   await runSample(args)
 } else if (args.all || args.feeding.length || args.slices.length || args.edgeKeys) {
   await runCorpus(args)
 } else {
-  console.error('nothing selected — pass --sample <file>, --feeding <ids>, --slice <file>, --all or --selftest')
+  console.error('nothing selected — pass --sample <file>, --feeding <ids>, --slice <file>, --all, --urls or --selftest')
   process.exit(2)
 }

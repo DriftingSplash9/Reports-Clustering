@@ -9,7 +9,7 @@ Finished-round narrative: project memory and `archive/Previous Handoffs/`.
 **Keep the mutable part (§1–§3) under ~7k characters** — §4 is fixed and
 verbatim. State only, no changelog, no round narrative.
 
-Last updated: 2026-09-05 04:25 UTC (doc cleanup + item 9 closed; TN/Haryana; Wayback fix; Grok retired)
+Last updated: 2026-09-05 (doc cleanup done; TN/Haryana re-cites; Wayback lookup fix; Grok retired)
 
 ---
 
@@ -24,18 +24,17 @@ this is the only routing table; PLAYBOOK §1 points here:
 | fetching / capturing / extracting | `notes/techniques-2026-09-04.md` |
 | "can I reach host X?" | `notes/routing-snapshot-2026-09-04.md` — **re-probe, don't believe it** |
 | **anything touching the grader** | `notes/grader-rulings-round-2026-09-05.md` |
-| corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this" |
+| corpus scope or direction | `REPORTS.md` from "🛑 Agent: read this" (now 23 KB; its Decisions are an index) |
 | the current programme | `notes/Midvamp - Revamp.md` (plan of record) |
-| a `*-grok-2026-08.json` slice's `meta.note` | `notes/mint-2026-08-20.md` |
 | visual / layout work | `PLAYBOOK.md` §3–§4, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` |
-| camera / fit · flicker | `notes/camera-fit-measurement-2026-08-19.md` · `notes/flicker-tests-2026-08-19.md` |
+| camera / fit | `notes/camera-fit-measurement-2026-08-19.md`; flicker: `notes/flicker-tests-2026-08-19.md` |
 | "why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
-| regions · compare/path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
+| regions / blocs / publishers · compare / path · schema | `src/lib/regions.ts`, `Compare.tsx`, `src/lib/types.ts` file comments |
 | orientation for a human | `START-HERE.md` — rendered in-app as Help ▸ What this is; editing it edits the product |
 
-Then project memory, newest first (index ~8 KB). Git status: never state it
-(rule 1). Measured 2026-09-05: this table's files plus this one total ~135 KB
-(was ~220 KB before the doc cleanup).
+Then project memory, newest first. Git status: never state it (rule 1).
+**Measured 2026-09-05 after the doc cleanup: every file in this table plus this
+one totals ~130 KB** (was ~220 KB); the memory index is now ~8 KB (was ~30).
 
 ---
 
@@ -43,47 +42,49 @@ Then project memory, newest first (index ~8 KB). Git status: never state it
 
 Corpus **3,344 reports / 2,633 dependencies**. **623 A · 1,337 B · 673 C**,
 A-share 23.7%. `npm run validate` exits 0, 123/123 logic tests, grader selftest
-**52/52**, `tsc --noEmit` clean, `public/corpus-data.json` regenerated.
-**Grade counts come from `validate` only.**
+**52/52**, `public/corpus-data.json` regenerated. **Grade counts come from
+`validate` only.**
 
 **Grok is retired** (Thomas, 2026-09-05). No prompts, no queue, no Grok todo
 items; PLAYBOOK §5 and rule 9 are retired stubs (numbers kept for references).
-All Grok material is out of `notes/`. The `*-grok-2026-08.json` slices stay as
-data and grade like any other; their `meta.note` now resolves
-(`notes/mint-2026-08-20.md`, written 2026-09-05 from the 08-20 handoff).
+Existing `*-grok-2026-08.json` slices stay as data and grade like any other.
 
-**Grader: Wayback is asked WITHOUT the scheme** (`waybackLookupKey`,
+**Grader: Wayback is now asked WITHOUT the scheme** (`waybackLookupKey`,
 2026-09-05). The `https://` form answered "no snapshot" for
 `www.tn.gov.in/deptst/stateincome.pdf` while the scheme-less form found one, so
-earlier "unreadable, no snapshot" verdicts may be wrong — todo 1.
-**`check-urls.ts` is gone**: `npm run check-urls` → `grade-evidence.ts --urls
-[--dir <path>] [--json <out>]`, judged by `fetchRaw` (only `dead` fails; a
-wall is reported, not failed). Tested on 12 urls.
+earlier "unreadable, no snapshot" verdicts may be wrong — see todo 2.
 
-**India:** Haryana `-> in-state-gsdp-series` is A (live S3WaaS PDF); Tamil Nadu
-is B — its 2021-22 handbook lives on `www.tn.gov.in/deptst/`, which refuses
-both machines (snapshot cap; chapter names *Net* SDP, title-run 3/5). The four
-dead Indian hosts (`pc.odisha.gov.in`, `des.assam.gov.in`, `descg.gov.in`,
-`www.mod.gov.in`) are DOWN, not walled — Chrome is not a third route.
-**The railways edge grades off MoSPI's NAS *Sources and Methods* naming the
-Year Book, not off the Year Book.** Cite the LIVE url always — a reset is
-`block: 'network'`, which the snapshot strategy rescues.
+**Thomas's 2026-09-05 rulings are executed.** The five siblings carrying the
+railways defect are **flipped** — `in-mospi-iip`, `in-mospi-hces`,
+`in-rbi-balance-of-payments`, `in-mospi-asuse` and
+`in-des-agricultural-statistics-at-a-glance` now run FROM
+`in-mospi-national-accounts-statistics`, each basis carrying a DIRECTION
+CORRECTED note, all still C — the arrow changed, not the evidence. And
+**`WEAK_BASIS_PATTERNS` stays exactly as it is**: a basis can cap its own edge,
+that is accepted, do not re-open it.
 
-**Doc cleanup (2026-09-05) is done** — all five approved trims plus item 9;
-`notes/doc-bloat-2026-09-05.md` is the record; pre-cleanup `REPORTS.md` /
-`PLAYBOOK.md` are sha-verified in `archive/decisions/` and `archive/playbook/`.
-`notes/` is 32 entries. Two empty directories the bridge cannot remove remain:
-`notes/grok-research-queue-2026-08-22/` (+ `Grok results/`).
+**`in-assam-economic-survey -> in-state-gsdp-series` re-cited C→B**, off the
+dead index onto the survey PDF, read through the grader's snapshot strategy. **Cite the LIVE url** — a connection reset is
+`block: 'network'`, which `snapshotRescuable` allows; citing the Wayback url
+instead throws that machinery away.
+
+**The four dead Indian hosts are DOWN, not walled.** `pc.odisha.gov.in`,
+`des.assam.gov.in`, `descg.gov.in`, `www.mod.gov.in` and the
+`finance.odisha.gov.in` mirror reset the bridge VM, the cloud sandbox AND
+Thomas's own Chrome, with `mospi.gov.in` 200 in the same call — **Chrome is not
+a third route for these**. What Wayback holds for each: project memory
+`india_reprobe_2026-09-05`.
 
 **Uncommitted backlog** (carried forward, never read from git): the Basel III
 round, the transport round, the PLAYBOOK split, browser-pass round 5, the
 grader rulings round, the rulings + Basel II round, the TN/Haryana round
 (`in-india-grok-2026-08.json`, `public/corpus-data.json`, three
-`evidence-cache/` records), the doc cleanup (`REPORTS.md`, `PLAYBOOK.md`,
-`README.md`, `START-HERE.md`, `notes/Midvamp - Revamp.md`, two comment paths in
-`src/components/`, `archive/` ×9 in, `notes/` −19 +1, `_to_delete/`), and
-item 9 (`scripts/grade-evidence.ts`, `package.json`, `scripts/check-urls.ts`
-removed, `notes/mint-2026-08-20.md`).
+`evidence-cache/` records, `scripts/grade-evidence.ts`), and the **doc cleanup**
+(`REPORTS.md`, `PLAYBOOK.md`, `README.md`, `START-HERE.md`, this file, two
+comment paths in `src/components/`, `archive/decisions/` ×3,
+`archive/playbook/` ×1, `archive/audits|planning|notes/` ×5 moved in,
+`notes/` −19 files, `_to_delete/notes-2026-09-05/` ×13 + `README.md`). Scratch: `tmp_work/sandbox-2026-09-04/`,
+`-2026-09-05/`, `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`.
 
 **Renderer unchanged** — grade-driven opacity, A-only ranking cut,
 `rankByLegalBasis`, `INT_LINK_STIFFNESS = 0`, `CORE_PERCENTILE` 0.8, drift
@@ -94,7 +95,10 @@ watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
 
 **Research debt**: 0 no-URL, 0 dead-URL, 0 `empty:no-extractor`, 0
 `network:curl-3`; 4 bare-homepage edges. **The browser pass is CLOSED.**
-**The 2026-08-31 audit** (`archive/audits/`): **F-06 and F-14 open**.
+
+**The 2026-08-31 audit** (`archive/audits/`): **F-06 and F-14 open**, the rest
+closed or bounded. **Doc cleanup (2026-09-05) is done** — all five trims
+executed; `notes/doc-bloat-2026-09-05.md` is now the record of what was cut.
 
 ---
 
@@ -102,24 +106,26 @@ watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
 
 ### [Agent] — in this order
 
-1. **Re-run the snapshot rescue over the C edges blocked `network`/`wall`.**
+1. **India state surveys — what is left.** Tamil Nadu sits at B until
+   `www.tn.gov.in` answers (refuses both machines; snapshot cap). Maharashtra,
+   Delhi and Uttarakhand reset 2026-09-05; Odisha, Chhattisgarh and MoD are
+   closed for now (§2). **The railways edge grades off MoSPI's NAS *Sources and
+   Methods* naming the Year Book, not off the Year Book itself.**
+2. **Re-run the snapshot rescue over the C edges blocked `network`/`wall`.**
    The old lookup missed snapshots (§2); the negatives lived only in a scratch
    `.evidence-fulltext/wayback/`, so only a re-run can count the misses. Select
    with `--edges` on the C list, no `--write` first; snapshot reads cap at B.
-2. **OCR one scanned PDF.** `ru-minfin-prikaz-128n-gfs-procedure -> imf-sdds`,
+3. **OCR one scanned PDF.** `ru-minfin-prikaz-128n-gfs-procedure -> imf-sdds`,
    200 / 864,760 bytes / 15 chars of text. Needs `rus.traineddata`; the VM has
    working network. Caps at B.
-3. **Decide `tz-dar-es-salaam-city-council-budget-2026`**, isolated by the
+4. **Decide `tz-dar-es-salaam-city-council-budget-2026`**, isolated by the
    2026-09-05 drop. DCC's budget-summary attachment sits behind a JS fetch never
    completed; a DCC document naming Cap. 290 mints the edge properly. One
    browser pass, or shelve it explicitly.
-4. **Companion-document reread, bounded** (Round C, = audit F-06): surviving
+5. **Companion-document reread, bounded** (Round C, = audit F-06): surviving
    `ess-peer-review-final-report` edges, round 5's 29 reverted quotes, the
    EDP-inventory fragments. Recount first; 58 circabc edges left, and a re-cite
-   pass on that host clears most of item 10 too.
-5. **India remainder:** Tamil Nadu sits at B until `www.tn.gov.in` answers;
-   Maharashtra, Delhi and Uttarakhand reset 2026-09-05; Odisha, Chhattisgarh
-   and MoD closed for now.
+   pass on that host clears most of item 11 too.
 6. DSBB/ESMS scripted import (readable API, already 50 corpus citations).
 7. **Link batching — scoped by measurement.** Photons first (1,967 objects, 15
    materials → ~15 `InstancedMesh` draws), then links and nodes. Blocker: one
@@ -129,20 +135,25 @@ watchdog + `__meshes`. **`view.minGrade` stays default `C`** (Thomas,
 8. Cluster-repulsion sub-round (measured, `measure-forces.ts`, 2+ seeds), then
    **F-14** (gate the weighted-vs-raw disagreement list to an authority floor
    ~0.05 so it reads as a check again).
-9. Parked design questions from REPORTS' retired tail, for when the renderer
-   is next open: mutual-pair rank leakage (two pairs measured, opposite signs —
+9. Doc hygiene remainder: write `notes/mint-2026-08-20.md` (Midvamp §10 says
+   it exists; it never has); retire `check-urls.ts` into the grader. Design
+   questions parked from REPORTS' retired tail, for whenever the renderer is
+   next open: mutual-pair rank leakage (two pairs measured, opposite signs —
    watched, not managed); layout re-run on data add; cadence in layout; the
-   default view at scale. START-HERE's "obvious next thing: more data" is a
-   direction statement now out of step with the programme — Thomas's call.
-10. `_dropped` lead re-evaluation (plan §4 step 5) — last (Thomas, 2026-09-05).
+   default view at scale.
+10. **Grok material still in `notes/`** — `Grok Logs/`, `Handoffs from
+    Grok.docx`, `grok-research-queue-2026-08-22/` — not in the approved cleanup
+    list; Thomas's call whether they go to `archive/` or `_to_delete/`.
+11. `_dropped` lead re-evaluation (plan §4 step 5) — moved to last (Thomas,
+    2026-09-05).
 
 ### [Thomas] — only you can
 
 1. Housekeeping (agents cannot delete — rule 6): `_to_delete/notes-2026-09-05/`
-   (13 notes, 3 Grok folders/files, `check-urls.ts`; logged in
-   `_to_delete/README.md`); the two empty `notes/grok-research-queue-…` dirs;
-   `tmp_work/sandbox-2026-09-05/` (`repo-src-2026-09-05.tgz`) and
-   `tmp_work/HANDOFF-backup-before-2026-09-05-edit.md`. All safe to remove.
+   (13 files, logged in `_to_delete/README.md`); `tmp_work/sandbox-2026-09-05/`
+   holds one staging tarball, `repo-src-2026-09-05.tgz`; `tmp_work/` also holds
+   `HANDOFF-backup-before-2026-09-05-edit.md`. All safe to remove.
+2. Item 10 above — where the remaining Grok folders go.
 
 ---
 

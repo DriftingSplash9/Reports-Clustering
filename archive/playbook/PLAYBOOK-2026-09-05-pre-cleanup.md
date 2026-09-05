@@ -25,9 +25,22 @@ you would remove** — the previous three months added and never removed.
 
 ## 1. Read these, routed by task
 
-**Routing lives in `HANDOFF.md` §1 — one table, not two.** Read `HANDOFF.md`
-first, then §2, §6 and §7 of this file; go to the rest of this file and to
-`notes/` only where that table sends you.
+| Always | `HANDOFF.md`, then this file. Both are short by design — read them whole. |
+|---|---|
+| Corpus scope / direction | `REPORTS.md` from "🛑 Agent: read this" onward |
+| **Fetching, capturing or extracting a document** | `notes/techniques-2026-09-04.md` — the recipes |
+| **"Is host X reachable?"** | `notes/routing-snapshot-2026-09-04.md` — **dated, expected to be wrong, re-probe** |
+| Writing or grading evidence | §6 below, then techniques §5 |
+| Orientation | `START-HERE.md` — rendered verbatim in-app as Help ▸ What this is. Editing it edits the product. |
+| Visual/layout work | §3/§4 below, then `notes/visual-revamp-2026-08-18/visual-revamp-review.md` |
+| Camera/fit/layout | `notes/camera-fit-measurement-2026-08-19.md` |
+| Flicker | `notes/flicker-tests-2026-08-19.md` |
+| "Why is country X empty" | `notes/cross-border-gaps-2026-08-20.md` |
+| Cross-border research thread | `notes/crossborder-verification-2026-08-22.md` |
+| Any Grok prompt | `notes/grok-diary.md` FIRST (§5 below) |
+| Regions/blocs/publishers | `src/lib/regions.ts` file comment |
+| Compare/path | `Compare.tsx` file comment |
+| Schema | `src/lib/types.ts` |
 
 **House habit: the code is the design doc.** `palette.ts`, `nodeVisuals.ts`,
 `linkVisuals.ts`, `view.ts`, `modes.ts`, `savedViews.ts`, `hierarchy.ts`,
@@ -45,8 +58,8 @@ and mean it.
 2. **No document, no edge.** If nothing published says the dependency
    exists, it doesn't go in the graph.
 3. **A pointer is not a source.** WebFetch can fabricate content for a
-   dead URL — raw-verify before trusting any quote. Applies to the Grok-derived
-   slices too, including node descriptions: a description naming a standard is a
+   dead URL — raw-verify before trusting any quote. Applies to Grok output
+   too, including node descriptions: a description naming a standard is a
    lead to verify, not a citable basis.
 4. **`npm run validate` before and after any data change** (120+ checks);
    it can't run through the device bridge. Recipe: stage `src/ scripts/
@@ -77,8 +90,9 @@ and mean it.
    throwaway script that was deleted, and one of them (the 2026-08-28
    cluster-repulsion sweep) turned out not to reproduce — read `onscreen`,
    run more than one seed, never let simulation state leak between runs.
-9. *(Retired 2026-09-05 — it governed prompts relayed to Grok, and Grok is
-   no longer used in this project. Number kept so cross-references hold.)*
+9. **Any prompt relayed to a third party (Grok etc.) needs its
+   attachment/action list told to Thomas separately, in plain chat text**
+   — he skims or skips the prompt block itself.
 10. **A `_dropped` entry describing an edge that DOES exist live must use
     `reason: "caveat"` (or `"resolved"`), never any other reason** —
     applies to every `DroppedReason`. Before finalizing any `_dropped`
@@ -262,12 +276,16 @@ Assume all of this exists and works; each has a dated comment at the site.
 
 ---
 
-## 5. Grok — retired
+## 5. Grok pipeline — diary and prompt queue
 
-**Grok is no longer used in this project** (Thomas, 2026-09-05: no prompts,
-no queue, no Grok todo items). The `*-grok-2026-08.json` slices stay as data
-and are verified and graded like any other; the old prompt files and diary
-references are gone. Section number kept so `§6`/`§7` references hold.
+**Before writing ANY prompt for Grok, read `notes/grok-diary.md`** — the
+standing playbook of what works and Grok's dated failure modes. Append a
+dated lesson to the diary after processing every Grok reply.
+
+Prompts live beside the diary as `notes/grok-prompt-*.md`; the diary's
+"Round log" section is the queue state. Larger batches get their own dated
+folder under `notes/` with a `00-README.md` index (e.g.
+`notes/grok-research-queue-2026-08-22/`).
 
 ---
 
@@ -376,12 +394,13 @@ here only as a rule, once.
 - **A page title is not evidence, and neither is a node description.** Read the
   body. Grok's imported descriptions naming a standard are leads to verify, not
   citable bases.
-- **The Grok-derived slices carry Grok's habits** (Grok itself is retired,
-  §5): ids and enum values that were inventions, one jurisdiction's exact
-  quote and URL reused as evidence for another — the tell is a quote naming a
-  specific *other* place — and the same region minted under different batch
-  names. Grep against the FULL corpus (research files AND seed files) before
-  trusting any of it.
+- **Grok's JSON is not reliably JSON** — parse-check first. Its ids and enum
+  values are inventions until grepped against the FULL corpus (research files
+  AND seed files), its `files_received` confirmations are unreliable, and it
+  will reuse one jurisdiction's exact quote and URL as evidence for another
+  when the document shapes are similar — the tell is a quote naming a specific
+  *other* place. It also reruns the same region under different prompt names
+  across sessions: dedupe and diff for conflicts BEFORE verifying.
 
 ### Renderer invariants
 
